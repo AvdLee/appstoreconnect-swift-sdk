@@ -1,0 +1,6 @@
+framework module AppStoreConnect_Swift_SDK {
+  umbrella header "AppStoreConnect-Swift-SDK-umbrella.h"
+
+  export *
+  module * { export * }
+}

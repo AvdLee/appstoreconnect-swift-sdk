@@ -1,0 +1,6 @@
+use_frameworks!
+target 'AppStoreConnect-Swift-SDK_Tests' do
+  pod 'AppStoreConnect-Swift-SDK', :path => '../'
+  
+  
+end

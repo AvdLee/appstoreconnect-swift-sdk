@@ -13,15 +13,26 @@ The Swift SDK to work with the App Store Connect API from Apple.
 - [ ] TestFlight API implementation
 - [ ] Users and Roles implementation
 - [ ] Sales and Finances implementation
+- [ ] Replace Alamofire dependency with own simple URLSession implementation
 
 ## Requesting API Access
 To request access, go to the new API Keys section in Users and Access in App Store Connect. Please note that you must be the Team Agent (Legal role) of a development team enrolled as an organization. Access for developers enrolled as an individual is coming soon.
+
+## Installation
+
+AppStoreConnect-Swift-SDK is available through [CocoaPods](https://cocoapods.org). To install
+it, simply add the following line to your Podfile:
+
+```ruby
+pod 'AppStoreConnect-Swift-SDK'
+```
 
 ## Communication
 
 - If you **found a bug**, open an [issue](https://github.com/AvdLee/appstoreconnect-swift-sdk/issues).
 - If you **have a feature request**, open an [issue](https://github.com/AvdLee/appstoreconnect-swift-sdk/issues).
 - If you **want to contribute**, submit a [pull request](https://github.com/AvdLee/appstoreconnect-swift-sdk/pulls).
+
 
 ## License
 

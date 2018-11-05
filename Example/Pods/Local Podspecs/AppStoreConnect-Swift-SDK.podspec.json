@@ -1,0 +1,28 @@
+{
+  "name": "AppStoreConnect-Swift-SDK",
+  "version": "0.1.0",
+  "summary": "The Swift SDK to work with the App Store Connect API from Apple.",
+  "description": "The Swift SDK to work with the App Store Connect API from Apple. See for more information the readme file on https://github.com/AvdLee/appstoreconnect-swift-sdk.",
+  "homepage": "https://github.com/AvdLee/appstoreconnect-swift-sdk",
+  "license": {
+    "type": "MIT",
+    "file": "LICENSE"
+  },
+  "authors": {
+    "Antoine van der Lee": "contact@avanderlee.com"
+  },
+  "source": {
+    "git": "https://github.com/AvdLee/appstoreconnect-swift-sdk.git",
+    "tag": "0.1.0"
+  },
+  "social_media_url": "https://twitter.com/twannl",
+  "platforms": {
+    "ios": "11.0"
+  },
+  "source_files": "Sources/**/*",
+  "dependencies": {
+    "Alamofire": [
+
+    ]
+  }
+}
