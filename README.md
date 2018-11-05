@@ -8,9 +8,10 @@ The Swift SDK to work with the App Store Connect API from Apple.
 - [App Store Connect API adoption with use case examples](https://www.avanderlee.com/general/app-store-connect-api-adoption/)
 
 ## Included in this SDK
-- [ ] Get started section in the readme
-- [ ] SDK Setup with API Key
+- [x] Configuration with API Key
+- [x] APIProver with endpoints structure
 - [ ] TestFlight API implementation
+- [ ] Get started section in the readme
 - [ ] Users and Roles implementation
 - [ ] Sales and Finances implementation
 - [ ] Replace Alamofire dependency with own simple URLSession implementation

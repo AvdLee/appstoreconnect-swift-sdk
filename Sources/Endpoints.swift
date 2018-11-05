@@ -9,7 +9,7 @@ import Foundation
 import Alamofire
 
 /// Defines all data needed to build the URL Request with.
-struct APIEndpoint<T: Decodable> {
+public struct APIEndpoint<T: Decodable> {
 
     /// The path to the endpoint.
     let path: String
