@@ -7,131 +7,151 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		127231FED5864C6EC4E28025326A522C /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DB9F66ED7A250BB1AE2875F8D38C7398 /* Foundation.framework */; };
+		028B8102D8C532AE9543E1C01CFCE5B6 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DB9F66ED7A250BB1AE2875F8D38C7398 /* Foundation.framework */; };
+		0D0260906A7B7740B461CAD90DB1F476 /* Pods-AppStoreConnect-Swift-SDK_Example-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = 733FE1427358ED6F7EF76FE93A392C55 /* Pods-AppStoreConnect-Swift-SDK_Example-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		10B26499E353C5EFEDF2B35A962A7B5F /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DB9F66ED7A250BB1AE2875F8D38C7398 /* Foundation.framework */; };
+		1B34980818A99D7198C4A7DF8D1B074F /* AppStoreConnect-Swift-SDK-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 78AE25268A4D4A7CBD82BF5BC2036546 /* AppStoreConnect-Swift-SDK-dummy.m */; };
 		1FC3FD39157C2FFFF3869A1300730086 /* SessionDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 195D73DD9EF275A3C56569E2B1CA8026 /* SessionDelegate.swift */; };
-		22ED284DBDDF1D3F6F99A41FAC347A24 /* Pods-AppStoreConnect-Swift-SDK_Tests-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = 78E1E693C14466B860DEB80D8FC3DC6B /* Pods-AppStoreConnect-Swift-SDK_Tests-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		2480AB691582D4F81F8B6516033B64D2 /* Models.swift in Sources */ = {isa = PBXBuildFile; fileRef = 784E3BECA044E9FBF16058EE7A01D708 /* Models.swift */; };
 		36FF8853CB34A9297AFAA8F5F7456324 /* TaskDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A01C037B4034EDA3D7955BC5E4E9D9D6 /* TaskDelegate.swift */; };
-		4750F21BEAC0041846829BA62C0F41CB /* APIProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4E713845DAB6847F91A7948BAF977CF /* APIProvider.swift */; };
-		4A69DB45FFCBC58F2481BDFDDE3C5FFE /* Alamofire.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 706C7AFFE37BA158C3553250F4B5FAED /* Alamofire.framework */; };
 		4E1A913EFB404FB11524718FF0298EFE /* Alamofire.swift in Sources */ = {isa = PBXBuildFile; fileRef = DFCB8C44DE758E906C0BCDA455937B85 /* Alamofire.swift */; };
 		500C8EDA60C07B0F127C7FC385E17D38 /* Notifications.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66A46F517F0AF7E85A16D723F6406896 /* Notifications.swift */; };
-		50BA73572190DE7E006C06EE /* Models.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50BA73562190DE7E006C06EE /* Models.swift */; };
 		52237C35642089F77DD4D723CEB25737 /* Response.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04F47F5C9CDB035C5AFADEBA5BF44F1C /* Response.swift */; };
 		58A9719584AFA2D108D9E5C585A79329 /* Validation.swift in Sources */ = {isa = PBXBuildFile; fileRef = B029DBC43E49A740F12B5E4D2E6DD452 /* Validation.swift */; };
 		5EE5FED83B90A606A763CF1114D1D6FB /* ResponseSerialization.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2F9510473F6FFD7AA66524DB16C2263 /* ResponseSerialization.swift */; };
-		6899818B3D8A87971443BC02A1B7F63A /* AppStoreConnect-Swift-SDK-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = 009B59AA490642EB9A778F5AB5812B03 /* AppStoreConnect-Swift-SDK-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		6BEA14EC335E07C7063CD1383C0C443C /* ServerTrustPolicy.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32B030D27CAC730C5EB0F22390645310 /* ServerTrustPolicy.swift */; };
+		6E05417B882FBB87A5EB7D5A1665CA99 /* Alamofire.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 706C7AFFE37BA158C3553250F4B5FAED /* Alamofire.framework */; };
 		7068E8A7DDC1424EE8F24BC77E8746F4 /* SessionManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46CDAC6C1187C5467E576980E1062C8B /* SessionManager.swift */; };
+		70968C330657B4FB735281802105BB1B /* Endpoints.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F372FE9C44DC6F6D7497E0A08D35B36 /* Endpoints.swift */; };
 		796177DE2762F24DAC16A709FD954838 /* ParameterEncoding.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6639346628280A0D0FAD35196BF56108 /* ParameterEncoding.swift */; };
-		898AB5E9A12743B1236997061B108B2D /* Pods-AppStoreConnect-Swift-SDK_Tests-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = B8EAB429F0AEBF3D9D0DF2BB8F4DC570 /* Pods-AppStoreConnect-Swift-SDK_Tests-dummy.m */; };
 		8D1E66FE754A575BFFD9E0A4AD2E5ACC /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DB9F66ED7A250BB1AE2875F8D38C7398 /* Foundation.framework */; };
-		8E051A94AD0EBD2A89280F4456641236 /* Endpoints.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68C1593613FE3E64125D334430BE54B1 /* Endpoints.swift */; };
 		965DACF3DC02857ECBE66C5CBA3DA5D4 /* Request.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E230A0448B394DE26E688DAC8E6201E /* Request.swift */; };
-		9DBA17EF298D7E639262B6F1E8B8BB94 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DB9F66ED7A250BB1AE2875F8D38C7398 /* Foundation.framework */; };
+		9988A8DCF0C5D3566279FC3B7B234328 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DB9F66ED7A250BB1AE2875F8D38C7398 /* Foundation.framework */; };
+		B334672A7D306D99F4B7C26C45ED18D9 /* AppStoreConnect-Swift-SDK-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = 8F32A542255176460CB8A0777C1798BF /* AppStoreConnect-Swift-SDK-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		B424F524BBBE34E685129945993809A8 /* Timeline.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87882A1F5A92C8138D54545E51D51E6F /* Timeline.swift */; };
 		B77705737566AE83ED7E448923D7FA60 /* NetworkReachabilityManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5A8AA5F9EDED0A0BDDE7E830BF4AEE0 /* NetworkReachabilityManager.swift */; };
 		BE4BA1EDE444A770F834605F4B65348E /* AFError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AF006B0AD5765D1BFA8253C2DCBB126 /* AFError.swift */; };
 		D4C3899574E9D5DF5E5DA52310560BCC /* Alamofire-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = D1F50F37DFB6DC0B7B9D8C373E5A3EAE /* Alamofire-dummy.m */; };
+		DA8778F2DCBC56E1492DA5479799A256 /* Pods-AppStoreConnect-Swift-SDK_Example-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 47A23283E41B39FD8607B79B73AABA11 /* Pods-AppStoreConnect-Swift-SDK_Example-dummy.m */; };
+		DB315265615488D96BBD5860A57E1C87 /* Pods-AppStoreConnect-Swift-SDK_Tests-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 8B207E900C4CA09303A0581AC23274E6 /* Pods-AppStoreConnect-Swift-SDK_Tests-dummy.m */; };
 		DBE6E2E4D205545E7988CFA5057C31D6 /* DispatchQueue+Alamofire.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0FCBF1EED873F61C6D46CE37FA5C39D3 /* DispatchQueue+Alamofire.swift */; };
 		EF1461221681BCA12A4147900A704727 /* Alamofire-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = 03DECE84DC850B04690604AB7C521277 /* Alamofire-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		F7A01723B32867CB6E2ADA2CB561F9D5 /* AppStoreConnect-Swift-SDK-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 02730ACA40B239FF509DB5DC780069AE /* AppStoreConnect-Swift-SDK-dummy.m */; };
+		F8370FE2D56BB2FF05E0B4777A1F7293 /* Pods-AppStoreConnect-Swift-SDK_Tests-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = A6B6BD8A5E5CAB13E77D641AA990D4F5 /* Pods-AppStoreConnect-Swift-SDK_Tests-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		F9EA61D484CC15FDDAB0D8C0D26D7949 /* Result.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D60BC9955B4F7FFA62D7440CB385C11 /* Result.swift */; };
+		FB3452D43389B977F6F53A88537C77D4 /* APIProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECA10A8CF620014F621506408E6F9233 /* APIProvider.swift */; };
 		FF9C7BC64DB23D2CED48197DE67F0335 /* MultipartFormData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 155538D91ACEEEDF82069ACF6C1A02E7 /* MultipartFormData.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
-		58E54F222692BE061F85AAD26C484E81 /* PBXContainerItemProxy */ = {
+		3980B34632A1AA2660519BF71C938D94 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = D41D8CD98F00B204E9800998ECF8427E /* Project object */;
 			proxyType = 1;
 			remoteGlobalIDString = E76458C58C9140B6A16D60547E68E80C;
 			remoteInfo = Alamofire;
 		};
-		61B429E9D193875AE52DE9ECE44C42D9 /* PBXContainerItemProxy */ = {
+		3B1C4DC345D994FB00701A63FB74623C /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = D41D8CD98F00B204E9800998ECF8427E /* Project object */;
 			proxyType = 1;
-			remoteGlobalIDString = 307E408D2DE0D23BAE9E0D5AE8113445;
+			remoteGlobalIDString = B6B10C21EAE51C9D106CA21B49DACB7F;
+			remoteInfo = "Pods-AppStoreConnect-Swift-SDK_Example";
+		};
+		DA7EE0693E7A0B4C526E4AD04CEC8684 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = D41D8CD98F00B204E9800998ECF8427E /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = E76458C58C9140B6A16D60547E68E80C;
+			remoteInfo = Alamofire;
+		};
+		F187BCA5BF655276DE8CA1D8AA98BDB1 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = D41D8CD98F00B204E9800998ECF8427E /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 2A6292677ED5A3D17CD54785671BCCFD;
 			remoteInfo = "AppStoreConnect-Swift-SDK";
-		};
-		88DD6DC2C491D4A3509FB9BABF919725 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = D41D8CD98F00B204E9800998ECF8427E /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = E76458C58C9140B6A16D60547E68E80C;
-			remoteInfo = Alamofire;
 		};
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		009B59AA490642EB9A778F5AB5812B03 /* AppStoreConnect-Swift-SDK-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "AppStoreConnect-Swift-SDK-umbrella.h"; sourceTree = "<group>"; };
-		02730ACA40B239FF509DB5DC780069AE /* AppStoreConnect-Swift-SDK-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "AppStoreConnect-Swift-SDK-dummy.m"; sourceTree = "<group>"; };
 		03DECE84DC850B04690604AB7C521277 /* Alamofire-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "Alamofire-umbrella.h"; sourceTree = "<group>"; };
 		04F47F5C9CDB035C5AFADEBA5BF44F1C /* Response.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = Response.swift; path = Source/Response.swift; sourceTree = "<group>"; };
+		05F7F71BDEAF530C658D8B44E9CEA663 /* Alamofire.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = Alamofire.framework; path = Alamofire.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		0D4D56175E92E2859D8854CBDB5E738D /* Pods-AppStoreConnect-Swift-SDK_Example-resources.sh */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.script.sh; path = "Pods-AppStoreConnect-Swift-SDK_Example-resources.sh"; sourceTree = "<group>"; };
 		0FCBF1EED873F61C6D46CE37FA5C39D3 /* DispatchQueue+Alamofire.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = "DispatchQueue+Alamofire.swift"; path = "Source/DispatchQueue+Alamofire.swift"; sourceTree = "<group>"; };
 		117EFB31D9AD9673BAF51B48596F19E2 /* Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		155538D91ACEEEDF82069ACF6C1A02E7 /* MultipartFormData.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = MultipartFormData.swift; path = Source/MultipartFormData.swift; sourceTree = "<group>"; };
-		15E5970695D8EF3D74106C175DAD6E7B /* AppStoreConnect-Swift-SDK.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "AppStoreConnect-Swift-SDK.xcconfig"; sourceTree = "<group>"; };
-		1901FF57B3016EFA5E29DE545A941E48 /* README.md */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
+		17165A904DF9D6ED94B97B00C4E7BE24 /* README.md */ = {isa = PBXFileReference; includeInIndex = 1; path = README.md; sourceTree = "<group>"; };
 		195D73DD9EF275A3C56569E2B1CA8026 /* SessionDelegate.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = SessionDelegate.swift; path = Source/SessionDelegate.swift; sourceTree = "<group>"; };
 		1E230A0448B394DE26E688DAC8E6201E /* Request.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = Request.swift; path = Source/Request.swift; sourceTree = "<group>"; };
 		210971763CB2FC0DC4E378271A37BE32 /* Alamofire.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.module; path = Alamofire.modulemap; sourceTree = "<group>"; };
-		21C074BB687318317E29AA7AFDAD6A82 /* Pods-AppStoreConnect-Swift-SDK_Tests-frameworks.sh */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.script.sh; path = "Pods-AppStoreConnect-Swift-SDK_Tests-frameworks.sh"; sourceTree = "<group>"; };
-		247D8C8AF516716D210E018B8BDD08A2 /* Pods-AppStoreConnect-Swift-SDK_Tests.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.module; path = "Pods-AppStoreConnect-Swift-SDK_Tests.modulemap"; sourceTree = "<group>"; };
 		32B030D27CAC730C5EB0F22390645310 /* ServerTrustPolicy.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = ServerTrustPolicy.swift; path = Source/ServerTrustPolicy.swift; sourceTree = "<group>"; };
 		33A04B5D27E86AF4B84D95E21CF3F452 /* Alamofire.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = Alamofire.xcconfig; sourceTree = "<group>"; };
-		382C26F1E91DD9D3E446BF7F373635A9 /* AppStoreConnect_Swift_SDK.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = AppStoreConnect_Swift_SDK.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		397F546EC143937924AD1D37BB2BA949 /* AppStoreConnect-Swift-SDK-prefix.pch */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "AppStoreConnect-Swift-SDK-prefix.pch"; sourceTree = "<group>"; };
+		344C7421AFF44D042269C37732886BB4 /* Pods-AppStoreConnect-Swift-SDK_Tests-frameworks.sh */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.script.sh; path = "Pods-AppStoreConnect-Swift-SDK_Tests-frameworks.sh"; sourceTree = "<group>"; };
+		39F63B140A7BCEF76F64FE5601D27611 /* Pods-AppStoreConnect-Swift-SDK_Example.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-AppStoreConnect-Swift-SDK_Example.release.xcconfig"; sourceTree = "<group>"; };
+		3C51963FF4DC260A52139E0FA41CDA20 /* Pods_AppStoreConnect_Swift_SDK_Example.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = Pods_AppStoreConnect_Swift_SDK_Example.framework; path = "Pods-AppStoreConnect-Swift-SDK_Example.framework"; sourceTree = BUILT_PRODUCTS_DIR; };
 		3D60BC9955B4F7FFA62D7440CB385C11 /* Result.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = Result.swift; path = Source/Result.swift; sourceTree = "<group>"; };
-		416D8B031AE61E00F4720A5A6AD939FD /* AppStoreConnect-Swift-SDK.podspec */ = {isa = PBXFileReference; explicitFileType = text.script.ruby; includeInIndex = 1; path = "AppStoreConnect-Swift-SDK.podspec"; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
 		46CDAC6C1187C5467E576980E1062C8B /* SessionManager.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = SessionManager.swift; path = Source/SessionManager.swift; sourceTree = "<group>"; };
-		49317B3D17B5918D06436310762B9011 /* Pods-AppStoreConnect-Swift-SDK_Tests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-AppStoreConnect-Swift-SDK_Tests.debug.xcconfig"; sourceTree = "<group>"; };
+		47A23283E41B39FD8607B79B73AABA11 /* Pods-AppStoreConnect-Swift-SDK_Example-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "Pods-AppStoreConnect-Swift-SDK_Example-dummy.m"; sourceTree = "<group>"; };
 		4AF006B0AD5765D1BFA8253C2DCBB126 /* AFError.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = AFError.swift; path = Source/AFError.swift; sourceTree = "<group>"; };
-		50BA73562190DE7E006C06EE /* Models.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = Models.swift; path = Sources/Models.swift; sourceTree = "<group>"; };
-		50C0D8197C70B131979CA5B2C65642DD /* Pods-AppStoreConnect-Swift-SDK_Tests-acknowledgements.markdown */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; path = "Pods-AppStoreConnect-Swift-SDK_Tests-acknowledgements.markdown"; sourceTree = "<group>"; };
-		5CABC074C6627CB570C9FD99BA3A51EB /* Alamofire.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Alamofire.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		4F372FE9C44DC6F6D7497E0A08D35B36 /* Endpoints.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = Endpoints.swift; path = Sources/Endpoints.swift; sourceTree = "<group>"; };
+		509D24D73601858B1A5936485E4118ED /* Pods-AppStoreConnect-Swift-SDK_Tests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-AppStoreConnect-Swift-SDK_Tests.debug.xcconfig"; sourceTree = "<group>"; };
+		61513F21A020FCF445D2BD311D13D899 /* AppStoreConnect-Swift-SDK-prefix.pch */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "AppStoreConnect-Swift-SDK-prefix.pch"; sourceTree = "<group>"; };
 		61D920D6E48023BCBF18CD83450D05F5 /* Alamofire-prefix.pch */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "Alamofire-prefix.pch"; sourceTree = "<group>"; };
 		6639346628280A0D0FAD35196BF56108 /* ParameterEncoding.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = ParameterEncoding.swift; path = Source/ParameterEncoding.swift; sourceTree = "<group>"; };
 		66A46F517F0AF7E85A16D723F6406896 /* Notifications.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = Notifications.swift; path = Source/Notifications.swift; sourceTree = "<group>"; };
-		68C1593613FE3E64125D334430BE54B1 /* Endpoints.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = Endpoints.swift; path = Sources/Endpoints.swift; sourceTree = "<group>"; };
+		676EE526F38B11A7E2C567296EBCE1F3 /* Pods-AppStoreConnect-Swift-SDK_Tests-acknowledgements.markdown */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; path = "Pods-AppStoreConnect-Swift-SDK_Tests-acknowledgements.markdown"; sourceTree = "<group>"; };
 		706C7AFFE37BA158C3553250F4B5FAED /* Alamofire.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Alamofire.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		78E1E693C14466B860DEB80D8FC3DC6B /* Pods-AppStoreConnect-Swift-SDK_Tests-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "Pods-AppStoreConnect-Swift-SDK_Tests-umbrella.h"; sourceTree = "<group>"; };
+		733FE1427358ED6F7EF76FE93A392C55 /* Pods-AppStoreConnect-Swift-SDK_Example-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "Pods-AppStoreConnect-Swift-SDK_Example-umbrella.h"; sourceTree = "<group>"; };
+		784E3BECA044E9FBF16058EE7A01D708 /* Models.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = Models.swift; path = Sources/Models.swift; sourceTree = "<group>"; };
+		78AE25268A4D4A7CBD82BF5BC2036546 /* AppStoreConnect-Swift-SDK-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "AppStoreConnect-Swift-SDK-dummy.m"; sourceTree = "<group>"; };
+		7B46A2585F74267ED4F1D2E26597371F /* LICENSE */ = {isa = PBXFileReference; includeInIndex = 1; path = LICENSE; sourceTree = "<group>"; };
+		7F60FEC3FA8D403A8AFA1B50963195BA /* Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		87882A1F5A92C8138D54545E51D51E6F /* Timeline.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = Timeline.swift; path = Source/Timeline.swift; sourceTree = "<group>"; };
-		93A4A3777CF96A4AAC1D13BA6DCCEA73 /* Podfile */ = {isa = PBXFileReference; explicitFileType = text.script.ruby; includeInIndex = 1; name = Podfile; path = ../Podfile; sourceTree = SOURCE_ROOT; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
+		8B207E900C4CA09303A0581AC23274E6 /* Pods-AppStoreConnect-Swift-SDK_Tests-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "Pods-AppStoreConnect-Swift-SDK_Tests-dummy.m"; sourceTree = "<group>"; };
+		8F32A542255176460CB8A0777C1798BF /* AppStoreConnect-Swift-SDK-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "AppStoreConnect-Swift-SDK-umbrella.h"; sourceTree = "<group>"; };
+		93A4A3777CF96A4AAC1D13BA6DCCEA73 /* Podfile */ = {isa = PBXFileReference; explicitFileType = text.script.ruby; includeInIndex = 1; lastKnownFileType = text; name = Podfile; path = ../Podfile; sourceTree = SOURCE_ROOT; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
+		99AA5FF6BE2FD0F197F7745FB1AA433E /* Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		9F849ACEB7118B040076F75087B6B359 /* AppStoreConnect-Swift-SDK.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.module; path = "AppStoreConnect-Swift-SDK.modulemap"; sourceTree = "<group>"; };
 		A01C037B4034EDA3D7955BC5E4E9D9D6 /* TaskDelegate.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = TaskDelegate.swift; path = Source/TaskDelegate.swift; sourceTree = "<group>"; };
-		A4E713845DAB6847F91A7948BAF977CF /* APIProvider.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = APIProvider.swift; path = Sources/APIProvider.swift; sourceTree = "<group>"; };
-		AC4234D09A67ECAD9C9CD60488766E7F /* Pods_AppStoreConnect_Swift_SDK_Tests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_AppStoreConnect_Swift_SDK_Tests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		AD28E9B7A53DBE943FB91E3C6B394588 /* Pods-AppStoreConnect-Swift-SDK_Tests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-AppStoreConnect-Swift-SDK_Tests.release.xcconfig"; sourceTree = "<group>"; };
-		ADFE142F8616DBA6818B7B8FD3EF2692 /* Pods-AppStoreConnect-Swift-SDK_Tests-resources.sh */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.script.sh; path = "Pods-AppStoreConnect-Swift-SDK_Tests-resources.sh"; sourceTree = "<group>"; };
+		A6B6BD8A5E5CAB13E77D641AA990D4F5 /* Pods-AppStoreConnect-Swift-SDK_Tests-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "Pods-AppStoreConnect-Swift-SDK_Tests-umbrella.h"; sourceTree = "<group>"; };
+		A906F7CB57CAE38E2F45EEC5C9FC637C /* Pods-AppStoreConnect-Swift-SDK_Tests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-AppStoreConnect-Swift-SDK_Tests.release.xcconfig"; sourceTree = "<group>"; };
+		AD9B44EC34851F4189B6F4A50F5E8E2E /* Pods-AppStoreConnect-Swift-SDK_Example-acknowledgements.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-AppStoreConnect-Swift-SDK_Example-acknowledgements.plist"; sourceTree = "<group>"; };
 		B029DBC43E49A740F12B5E4D2E6DD452 /* Validation.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = Validation.swift; path = Source/Validation.swift; sourceTree = "<group>"; };
-		B8EAB429F0AEBF3D9D0DF2BB8F4DC570 /* Pods-AppStoreConnect-Swift-SDK_Tests-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "Pods-AppStoreConnect-Swift-SDK_Tests-dummy.m"; sourceTree = "<group>"; };
+		B6C5B9A2BDA089A45B1199D54213B5CC /* Pods-AppStoreConnect-Swift-SDK_Example.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-AppStoreConnect-Swift-SDK_Example.debug.xcconfig"; sourceTree = "<group>"; };
+		BC0CFE7F7965BED4CB6B602C3662225E /* AppStoreConnect_Swift_SDK.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = AppStoreConnect_Swift_SDK.framework; path = "AppStoreConnect-Swift-SDK.framework"; sourceTree = BUILT_PRODUCTS_DIR; };
+		BF3326E768822A23BEA564871892137F /* Pods-AppStoreConnect-Swift-SDK_Example.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.module; path = "Pods-AppStoreConnect-Swift-SDK_Example.modulemap"; sourceTree = "<group>"; };
+		C1135D2F46B4B634FC59CF93AD9A366F /* Pods-AppStoreConnect-Swift-SDK_Tests.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.module; path = "Pods-AppStoreConnect-Swift-SDK_Tests.modulemap"; sourceTree = "<group>"; };
+		CCAB48BE8A1B656BF27AA7ABE86DD573 /* Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		D1F50F37DFB6DC0B7B9D8C373E5A3EAE /* Alamofire-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "Alamofire-dummy.m"; sourceTree = "<group>"; };
-		D7E4DCF2483BF4B177E7B45C72ABF153 /* Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		DB9F66ED7A250BB1AE2875F8D38C7398 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS12.0.sdk/System/Library/Frameworks/Foundation.framework; sourceTree = DEVELOPER_DIR; };
+		DEC88AB6563ED4CC1C3D12A63A8ACC91 /* Pods-AppStoreConnect-Swift-SDK_Example-frameworks.sh */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.script.sh; path = "Pods-AppStoreConnect-Swift-SDK_Example-frameworks.sh"; sourceTree = "<group>"; };
 		DFCB8C44DE758E906C0BCDA455937B85 /* Alamofire.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = Alamofire.swift; path = Source/Alamofire.swift; sourceTree = "<group>"; };
 		E2F9510473F6FFD7AA66524DB16C2263 /* ResponseSerialization.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = ResponseSerialization.swift; path = Source/ResponseSerialization.swift; sourceTree = "<group>"; };
 		E5A8AA5F9EDED0A0BDDE7E830BF4AEE0 /* NetworkReachabilityManager.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = NetworkReachabilityManager.swift; path = Source/NetworkReachabilityManager.swift; sourceTree = "<group>"; };
-		E92D98F4E7F04925C8CF63A1E33BD581 /* Pods-AppStoreConnect-Swift-SDK_Tests-acknowledgements.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-AppStoreConnect-Swift-SDK_Tests-acknowledgements.plist"; sourceTree = "<group>"; };
-		E9538D38073E8F235CD38ACDF7E49011 /* Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		EDBCC9760727DFF05C47CDAFECF8A688 /* AppStoreConnect-Swift-SDK.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.module; path = "AppStoreConnect-Swift-SDK.modulemap"; sourceTree = "<group>"; };
-		FF4D379D4709EC53E5ABB9E4B92735CB /* LICENSE */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; path = LICENSE; sourceTree = "<group>"; };
+		E8B6399DA02598D1A46E8849B00F6C70 /* Pods-AppStoreConnect-Swift-SDK_Tests-acknowledgements.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-AppStoreConnect-Swift-SDK_Tests-acknowledgements.plist"; sourceTree = "<group>"; };
+		E9932117FC250BEA5CA232ABB2D5A17A /* Pods-AppStoreConnect-Swift-SDK_Tests-resources.sh */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.script.sh; path = "Pods-AppStoreConnect-Swift-SDK_Tests-resources.sh"; sourceTree = "<group>"; };
+		E9EFA8634CF207CE0A22AFED8F734325 /* AppStoreConnect-Swift-SDK.podspec */ = {isa = PBXFileReference; explicitFileType = text.script.ruby; includeInIndex = 1; lastKnownFileType = text; path = "AppStoreConnect-Swift-SDK.podspec"; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
+		EAB62BDB4558FEFB08EFD161A77AEEBE /* AppStoreConnect-Swift-SDK.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "AppStoreConnect-Swift-SDK.xcconfig"; sourceTree = "<group>"; };
+		ECA10A8CF620014F621506408E6F9233 /* APIProvider.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = APIProvider.swift; path = Sources/APIProvider.swift; sourceTree = "<group>"; };
+		F3B7012A7B1F9C5D050EAFD5D0A3D57C /* Pods-AppStoreConnect-Swift-SDK_Example-acknowledgements.markdown */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; path = "Pods-AppStoreConnect-Swift-SDK_Example-acknowledgements.markdown"; sourceTree = "<group>"; };
+		FE4C90666C95BF1BCD84D3602E0C126A /* Pods_AppStoreConnect_Swift_SDK_Tests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = Pods_AppStoreConnect_Swift_SDK_Tests.framework; path = "Pods-AppStoreConnect-Swift-SDK_Tests.framework"; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
-		140698C872581A2D7A9FB7F8CB738086 /* Frameworks */ = {
+		1B666A6D3570D2209DB9B23B2325AE60 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				9DBA17EF298D7E639262B6F1E8B8BB94 /* Foundation.framework in Frameworks */,
+				10B26499E353C5EFEDF2B35A962A7B5F /* Foundation.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		2FA4D1EF8DE8BAD140EF4823773DD40E /* Frameworks */ = {
+		5BACB47CD8E7FB93364689DEE37ED543 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				4A69DB45FFCBC58F2481BDFDDE3C5FFE /* Alamofire.framework in Frameworks */,
-				127231FED5864C6EC4E28025326A522C /* Foundation.framework in Frameworks */,
+				9988A8DCF0C5D3566279FC3B7B234328 /* Foundation.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -143,34 +163,45 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		82BF20D212AB7CCCD7ABB92F4E55EF27 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				6E05417B882FBB87A5EB7D5A1665CA99 /* Alamofire.framework in Frameworks */,
+				028B8102D8C532AE9543E1C01CFCE5B6 /* Foundation.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		1D1E11F94D2C9B2B8C1E637E4AB6569A /* AppStoreConnect-Swift-SDK */ = {
+		007D78A0C76495700C14F8DF2683DB66 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				A4E713845DAB6847F91A7948BAF977CF /* APIProvider.swift */,
-				68C1593613FE3E64125D334430BE54B1 /* Endpoints.swift */,
-				50BA73562190DE7E006C06EE /* Models.swift */,
-				4F4D61F42C031D6993BB5F772BC6C815 /* Pod */,
-				1E1A7DC66AFED9FADACDDE8AD52D6D97 /* Support Files */,
+				05F7F71BDEAF530C658D8B44E9CEA663 /* Alamofire.framework */,
+				BC0CFE7F7965BED4CB6B602C3662225E /* AppStoreConnect_Swift_SDK.framework */,
+				3C51963FF4DC260A52139E0FA41CDA20 /* Pods_AppStoreConnect_Swift_SDK_Example.framework */,
+				FE4C90666C95BF1BCD84D3602E0C126A /* Pods_AppStoreConnect_Swift_SDK_Tests.framework */,
 			);
-			name = "AppStoreConnect-Swift-SDK";
-			path = ../..;
+			name = Products;
 			sourceTree = "<group>";
 		};
-		1E1A7DC66AFED9FADACDDE8AD52D6D97 /* Support Files */ = {
+		13842B1E5B35385AF7B7437648D4AE4A /* Pods-AppStoreConnect-Swift-SDK_Tests */ = {
 			isa = PBXGroup;
 			children = (
-				EDBCC9760727DFF05C47CDAFECF8A688 /* AppStoreConnect-Swift-SDK.modulemap */,
-				15E5970695D8EF3D74106C175DAD6E7B /* AppStoreConnect-Swift-SDK.xcconfig */,
-				02730ACA40B239FF509DB5DC780069AE /* AppStoreConnect-Swift-SDK-dummy.m */,
-				397F546EC143937924AD1D37BB2BA949 /* AppStoreConnect-Swift-SDK-prefix.pch */,
-				009B59AA490642EB9A778F5AB5812B03 /* AppStoreConnect-Swift-SDK-umbrella.h */,
-				E9538D38073E8F235CD38ACDF7E49011 /* Info.plist */,
+				CCAB48BE8A1B656BF27AA7ABE86DD573 /* Info.plist */,
+				C1135D2F46B4B634FC59CF93AD9A366F /* Pods-AppStoreConnect-Swift-SDK_Tests.modulemap */,
+				676EE526F38B11A7E2C567296EBCE1F3 /* Pods-AppStoreConnect-Swift-SDK_Tests-acknowledgements.markdown */,
+				E8B6399DA02598D1A46E8849B00F6C70 /* Pods-AppStoreConnect-Swift-SDK_Tests-acknowledgements.plist */,
+				8B207E900C4CA09303A0581AC23274E6 /* Pods-AppStoreConnect-Swift-SDK_Tests-dummy.m */,
+				344C7421AFF44D042269C37732886BB4 /* Pods-AppStoreConnect-Swift-SDK_Tests-frameworks.sh */,
+				E9932117FC250BEA5CA232ABB2D5A17A /* Pods-AppStoreConnect-Swift-SDK_Tests-resources.sh */,
+				A6B6BD8A5E5CAB13E77D641AA990D4F5 /* Pods-AppStoreConnect-Swift-SDK_Tests-umbrella.h */,
+				509D24D73601858B1A5936485E4118ED /* Pods-AppStoreConnect-Swift-SDK_Tests.debug.xcconfig */,
+				A906F7CB57CAE38E2F45EEC5C9FC637C /* Pods-AppStoreConnect-Swift-SDK_Tests.release.xcconfig */,
 			);
-			name = "Support Files";
-			path = "Example/Pods/Target Support Files/AppStoreConnect-Swift-SDK";
+			name = "Pods-AppStoreConnect-Swift-SDK_Tests";
+			path = "Target Support Files/Pods-AppStoreConnect-Swift-SDK_Tests";
 			sourceTree = "<group>";
 		};
 		200D10EB20F0397D47F022B50CF0433F /* Alamofire */ = {
@@ -195,6 +226,7 @@
 				B029DBC43E49A740F12B5E4D2E6DD452 /* Validation.swift */,
 				2E5925946A4DE3B8F7E4137BACAD9618 /* Support Files */,
 			);
+			name = Alamofire;
 			path = Alamofire;
 			sourceTree = "<group>";
 		};
@@ -220,32 +252,22 @@
 			name = Pods;
 			sourceTree = "<group>";
 		};
-		4D8996175C8A18B3B7941403BEA7287C /* Pods-AppStoreConnect-Swift-SDK_Tests */ = {
+		5182E3A1F146462F604246B15A5BFBC4 /* Pods-AppStoreConnect-Swift-SDK_Example */ = {
 			isa = PBXGroup;
 			children = (
-				D7E4DCF2483BF4B177E7B45C72ABF153 /* Info.plist */,
-				247D8C8AF516716D210E018B8BDD08A2 /* Pods-AppStoreConnect-Swift-SDK_Tests.modulemap */,
-				50C0D8197C70B131979CA5B2C65642DD /* Pods-AppStoreConnect-Swift-SDK_Tests-acknowledgements.markdown */,
-				E92D98F4E7F04925C8CF63A1E33BD581 /* Pods-AppStoreConnect-Swift-SDK_Tests-acknowledgements.plist */,
-				B8EAB429F0AEBF3D9D0DF2BB8F4DC570 /* Pods-AppStoreConnect-Swift-SDK_Tests-dummy.m */,
-				21C074BB687318317E29AA7AFDAD6A82 /* Pods-AppStoreConnect-Swift-SDK_Tests-frameworks.sh */,
-				ADFE142F8616DBA6818B7B8FD3EF2692 /* Pods-AppStoreConnect-Swift-SDK_Tests-resources.sh */,
-				78E1E693C14466B860DEB80D8FC3DC6B /* Pods-AppStoreConnect-Swift-SDK_Tests-umbrella.h */,
-				49317B3D17B5918D06436310762B9011 /* Pods-AppStoreConnect-Swift-SDK_Tests.debug.xcconfig */,
-				AD28E9B7A53DBE943FB91E3C6B394588 /* Pods-AppStoreConnect-Swift-SDK_Tests.release.xcconfig */,
+				7F60FEC3FA8D403A8AFA1B50963195BA /* Info.plist */,
+				BF3326E768822A23BEA564871892137F /* Pods-AppStoreConnect-Swift-SDK_Example.modulemap */,
+				F3B7012A7B1F9C5D050EAFD5D0A3D57C /* Pods-AppStoreConnect-Swift-SDK_Example-acknowledgements.markdown */,
+				AD9B44EC34851F4189B6F4A50F5E8E2E /* Pods-AppStoreConnect-Swift-SDK_Example-acknowledgements.plist */,
+				47A23283E41B39FD8607B79B73AABA11 /* Pods-AppStoreConnect-Swift-SDK_Example-dummy.m */,
+				DEC88AB6563ED4CC1C3D12A63A8ACC91 /* Pods-AppStoreConnect-Swift-SDK_Example-frameworks.sh */,
+				0D4D56175E92E2859D8854CBDB5E738D /* Pods-AppStoreConnect-Swift-SDK_Example-resources.sh */,
+				733FE1427358ED6F7EF76FE93A392C55 /* Pods-AppStoreConnect-Swift-SDK_Example-umbrella.h */,
+				B6C5B9A2BDA089A45B1199D54213B5CC /* Pods-AppStoreConnect-Swift-SDK_Example.debug.xcconfig */,
+				39F63B140A7BCEF76F64FE5601D27611 /* Pods-AppStoreConnect-Swift-SDK_Example.release.xcconfig */,
 			);
-			name = "Pods-AppStoreConnect-Swift-SDK_Tests";
-			path = "Target Support Files/Pods-AppStoreConnect-Swift-SDK_Tests";
-			sourceTree = "<group>";
-		};
-		4F4D61F42C031D6993BB5F772BC6C815 /* Pod */ = {
-			isa = PBXGroup;
-			children = (
-				416D8B031AE61E00F4720A5A6AD939FD /* AppStoreConnect-Swift-SDK.podspec */,
-				FF4D379D4709EC53E5ABB9E4B92735CB /* LICENSE */,
-				1901FF57B3016EFA5E29DE545A941E48 /* README.md */,
-			);
-			name = Pod;
+			name = "Pods-AppStoreConnect-Swift-SDK_Example";
+			path = "Target Support Files/Pods-AppStoreConnect-Swift-SDK_Example";
 			sourceTree = "<group>";
 		};
 		59B91F212518421F271EBA85D5530651 /* Frameworks */ = {
@@ -261,38 +283,58 @@
 			isa = PBXGroup;
 			children = (
 				93A4A3777CF96A4AAC1D13BA6DCCEA73 /* Podfile */,
-				BDD8F427987B9A06D6676D68D3F74869 /* Development Pods */,
+				D63C3AF3B4AA2E016E5DFAAFBB1C556A /* Development Pods */,
 				59B91F212518421F271EBA85D5530651 /* Frameworks */,
 				35F128EB69B6F7FB7DA93BBF6C130FAE /* Pods */,
-				B93EE6ABB1CF222A427766443683C7D8 /* Products */,
-				A86D1B78BE6F6ADFA451F1E63F8C76B5 /* Targets Support Files */,
+				007D78A0C76495700C14F8DF2683DB66 /* Products */,
+				8B2E7BAAE263F72B8560C99F58CB47DD /* Targets Support Files */,
 			);
 			sourceTree = "<group>";
 		};
-		A86D1B78BE6F6ADFA451F1E63F8C76B5 /* Targets Support Files */ = {
+		8B2E7BAAE263F72B8560C99F58CB47DD /* Targets Support Files */ = {
 			isa = PBXGroup;
 			children = (
-				4D8996175C8A18B3B7941403BEA7287C /* Pods-AppStoreConnect-Swift-SDK_Tests */,
+				5182E3A1F146462F604246B15A5BFBC4 /* Pods-AppStoreConnect-Swift-SDK_Example */,
+				13842B1E5B35385AF7B7437648D4AE4A /* Pods-AppStoreConnect-Swift-SDK_Tests */,
 			);
 			name = "Targets Support Files";
 			sourceTree = "<group>";
 		};
-		B93EE6ABB1CF222A427766443683C7D8 /* Products */ = {
+		9448112F166E3124F0B6FC2D426A1FC1 /* AppStoreConnect-Swift-SDK */ = {
 			isa = PBXGroup;
 			children = (
-				5CABC074C6627CB570C9FD99BA3A51EB /* Alamofire.framework */,
-				382C26F1E91DD9D3E446BF7F373635A9 /* AppStoreConnect_Swift_SDK.framework */,
-				AC4234D09A67ECAD9C9CD60488766E7F /* Pods_AppStoreConnect_Swift_SDK_Tests.framework */,
+				ECA10A8CF620014F621506408E6F9233 /* APIProvider.swift */,
+				4F372FE9C44DC6F6D7497E0A08D35B36 /* Endpoints.swift */,
+				784E3BECA044E9FBF16058EE7A01D708 /* Models.swift */,
+				C8CF1FBE6B63E805907526073EA75276 /* Pod */,
+				94A5A630C0FF7A3E26966914A49C3AFE /* Support Files */,
 			);
-			name = Products;
+			name = "AppStoreConnect-Swift-SDK";
+			path = ../..;
 			sourceTree = "<group>";
 		};
-		BDD8F427987B9A06D6676D68D3F74869 /* Development Pods */ = {
+		94A5A630C0FF7A3E26966914A49C3AFE /* Support Files */ = {
 			isa = PBXGroup;
 			children = (
-				1D1E11F94D2C9B2B8C1E637E4AB6569A /* AppStoreConnect-Swift-SDK */,
+				9F849ACEB7118B040076F75087B6B359 /* AppStoreConnect-Swift-SDK.modulemap */,
+				EAB62BDB4558FEFB08EFD161A77AEEBE /* AppStoreConnect-Swift-SDK.xcconfig */,
+				78AE25268A4D4A7CBD82BF5BC2036546 /* AppStoreConnect-Swift-SDK-dummy.m */,
+				61513F21A020FCF445D2BD311D13D899 /* AppStoreConnect-Swift-SDK-prefix.pch */,
+				8F32A542255176460CB8A0777C1798BF /* AppStoreConnect-Swift-SDK-umbrella.h */,
+				99AA5FF6BE2FD0F197F7745FB1AA433E /* Info.plist */,
 			);
-			name = "Development Pods";
+			name = "Support Files";
+			path = "Example/Pods/Target Support Files/AppStoreConnect-Swift-SDK";
+			sourceTree = "<group>";
+		};
+		C8CF1FBE6B63E805907526073EA75276 /* Pod */ = {
+			isa = PBXGroup;
+			children = (
+				E9EFA8634CF207CE0A22AFED8F734325 /* AppStoreConnect-Swift-SDK.podspec */,
+				7B46A2585F74267ED4F1D2E26597371F /* LICENSE */,
+				17165A904DF9D6ED94B97B00C4E7BE24 /* README.md */,
+			);
+			name = Pod;
 			sourceTree = "<group>";
 		};
 		D1ADA17A1622F41549DD68F5D85E04FC /* iOS */ = {
@@ -303,25 +345,17 @@
 			name = iOS;
 			sourceTree = "<group>";
 		};
+		D63C3AF3B4AA2E016E5DFAAFBB1C556A /* Development Pods */ = {
+			isa = PBXGroup;
+			children = (
+				9448112F166E3124F0B6FC2D426A1FC1 /* AppStoreConnect-Swift-SDK */,
+			);
+			name = "Development Pods";
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXHeadersBuildPhase section */
-		5C38FCC69B9FACAB129BC16D8C5C95F8 /* Headers */ = {
-			isa = PBXHeadersBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				22ED284DBDDF1D3F6F99A41FAC347A24 /* Pods-AppStoreConnect-Swift-SDK_Tests-umbrella.h in Headers */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		6B346722B194FC95D8FD7559A42681E8 /* Headers */ = {
-			isa = PBXHeadersBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				6899818B3D8A87971443BC02A1B7F63A /* AppStoreConnect-Swift-SDK-umbrella.h in Headers */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 		A6A607506FEAAC7C41268D3E5CF4E5FE /* Headers */ = {
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
@@ -330,46 +364,89 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		B6B889C1D3F4582CC8B50846CAD4F399 /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				B334672A7D306D99F4B7C26C45ED18D9 /* AppStoreConnect-Swift-SDK-umbrella.h in Headers */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		C7D7B4DDA83A113FD5858DDF682FFAEA /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				0D0260906A7B7740B461CAD90DB1F476 /* Pods-AppStoreConnect-Swift-SDK_Example-umbrella.h in Headers */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		D54A7CCD477840249DAEF4D25B79625B /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				F8370FE2D56BB2FF05E0B4777A1F7293 /* Pods-AppStoreConnect-Swift-SDK_Tests-umbrella.h in Headers */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXHeadersBuildPhase section */
 
 /* Begin PBXNativeTarget section */
-		307E408D2DE0D23BAE9E0D5AE8113445 /* AppStoreConnect-Swift-SDK */ = {
+		0D6A74A9FB1AB0A6B13233891CB4955D /* Pods-AppStoreConnect-Swift-SDK_Tests */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = FA6EAB09CBE655850D126D162A97BD4E /* Build configuration list for PBXNativeTarget "AppStoreConnect-Swift-SDK" */;
+			buildConfigurationList = 32DD6F01E3E18F003D7CC36C426F9F1C /* Build configuration list for PBXNativeTarget "Pods-AppStoreConnect-Swift-SDK_Tests" */;
 			buildPhases = (
-				6B346722B194FC95D8FD7559A42681E8 /* Headers */,
-				2AB7913E5A8511BF2F4EBF99B06872A6 /* Sources */,
-				2FA4D1EF8DE8BAD140EF4823773DD40E /* Frameworks */,
-				F79B4A1778327ABE3043CC111E1238DB /* Resources */,
+				D54A7CCD477840249DAEF4D25B79625B /* Headers */,
+				4A513B6EE0E06809EE39D65F8CFE13AC /* Sources */,
+				1B666A6D3570D2209DB9B23B2325AE60 /* Frameworks */,
+				C531C4BCE2D3019B0BF24CD14CEC57E6 /* Resources */,
 			);
 			buildRules = (
 			);
 			dependencies = (
-				5761DFC8FCAA0902E8619A4CC1A0C1D9 /* PBXTargetDependency */,
-			);
-			name = "AppStoreConnect-Swift-SDK";
-			productName = "AppStoreConnect-Swift-SDK";
-			productReference = 382C26F1E91DD9D3E446BF7F373635A9 /* AppStoreConnect_Swift_SDK.framework */;
-			productType = "com.apple.product-type.framework";
-		};
-		48121A09B732EDFBB0A3B0EF1C66F229 /* Pods-AppStoreConnect-Swift-SDK_Tests */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = 70C6FBCAF2ECC50DC89129317EA492C8 /* Build configuration list for PBXNativeTarget "Pods-AppStoreConnect-Swift-SDK_Tests" */;
-			buildPhases = (
-				5C38FCC69B9FACAB129BC16D8C5C95F8 /* Headers */,
-				4902854F10C2348FB34DBAA2AE7019F2 /* Sources */,
-				140698C872581A2D7A9FB7F8CB738086 /* Frameworks */,
-				5E4FEF32A644FE79305E460212AD8EC1 /* Resources */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-				CA07875338F27D4C15FF376A50B1E5E6 /* PBXTargetDependency */,
-				1BDF93AF4177A9BC892ACC6D0DCCA14F /* PBXTargetDependency */,
+				19605CF823961AB81D840F3B18502B19 /* PBXTargetDependency */,
 			);
 			name = "Pods-AppStoreConnect-Swift-SDK_Tests";
 			productName = "Pods-AppStoreConnect-Swift-SDK_Tests";
-			productReference = AC4234D09A67ECAD9C9CD60488766E7F /* Pods_AppStoreConnect_Swift_SDK_Tests.framework */;
+			productReference = FE4C90666C95BF1BCD84D3602E0C126A /* Pods_AppStoreConnect_Swift_SDK_Tests.framework */;
+			productType = "com.apple.product-type.framework";
+		};
+		2A6292677ED5A3D17CD54785671BCCFD /* AppStoreConnect-Swift-SDK */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 62C7CC0B9AA3872FBA08D4B90861048C /* Build configuration list for PBXNativeTarget "AppStoreConnect-Swift-SDK" */;
+			buildPhases = (
+				B6B889C1D3F4582CC8B50846CAD4F399 /* Headers */,
+				1BF1AE7940A74FB3A308AA36BC6E034D /* Sources */,
+				82BF20D212AB7CCCD7ABB92F4E55EF27 /* Frameworks */,
+				1E43466468C916381EDE47265025264C /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				FDA90B2146D0AB448875DF6462E1FA9D /* PBXTargetDependency */,
+			);
+			name = "AppStoreConnect-Swift-SDK";
+			productName = "AppStoreConnect-Swift-SDK";
+			productReference = BC0CFE7F7965BED4CB6B602C3662225E /* AppStoreConnect_Swift_SDK.framework */;
+			productType = "com.apple.product-type.framework";
+		};
+		B6B10C21EAE51C9D106CA21B49DACB7F /* Pods-AppStoreConnect-Swift-SDK_Example */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = AFE8D02221587CE1436D758A7B9133DD /* Build configuration list for PBXNativeTarget "Pods-AppStoreConnect-Swift-SDK_Example" */;
+			buildPhases = (
+				C7D7B4DDA83A113FD5858DDF682FFAEA /* Headers */,
+				4BD9A028FC0C73EBC2D97838670D3B39 /* Sources */,
+				5BACB47CD8E7FB93364689DEE37ED543 /* Frameworks */,
+				2A548D6230C5F8A62DF3F967101BAA3E /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				D91617C50BB5D9A5FC3C9DB83D946590 /* PBXTargetDependency */,
+				547E4FC6656AB13218BCFBCCDD377C97 /* PBXTargetDependency */,
+			);
+			name = "Pods-AppStoreConnect-Swift-SDK_Example";
+			productName = "Pods-AppStoreConnect-Swift-SDK_Example";
+			productReference = 3C51963FF4DC260A52139E0FA41CDA20 /* Pods_AppStoreConnect_Swift_SDK_Example.framework */;
 			productType = "com.apple.product-type.framework";
 		};
 		E76458C58C9140B6A16D60547E68E80C /* Alamofire */ = {
@@ -387,7 +464,7 @@
 			);
 			name = Alamofire;
 			productName = Alamofire;
-			productReference = 5CABC074C6627CB570C9FD99BA3A51EB /* Alamofire.framework */;
+			productReference = 05F7F71BDEAF530C658D8B44E9CEA663 /* Alamofire.framework */;
 			productType = "com.apple.product-type.framework";
 		};
 /* End PBXNativeTarget section */
@@ -407,18 +484,33 @@
 				en,
 			);
 			mainGroup = 7DB346D0F39D3F0E887471402A8071AB;
-			productRefGroup = B93EE6ABB1CF222A427766443683C7D8 /* Products */;
+			productRefGroup = 007D78A0C76495700C14F8DF2683DB66 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
 				E76458C58C9140B6A16D60547E68E80C /* Alamofire */,
-				307E408D2DE0D23BAE9E0D5AE8113445 /* AppStoreConnect-Swift-SDK */,
-				48121A09B732EDFBB0A3B0EF1C66F229 /* Pods-AppStoreConnect-Swift-SDK_Tests */,
+				2A6292677ED5A3D17CD54785671BCCFD /* AppStoreConnect-Swift-SDK */,
+				B6B10C21EAE51C9D106CA21B49DACB7F /* Pods-AppStoreConnect-Swift-SDK_Example */,
+				0D6A74A9FB1AB0A6B13233891CB4955D /* Pods-AppStoreConnect-Swift-SDK_Tests */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
+		1E43466468C916381EDE47265025264C /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		2A548D6230C5F8A62DF3F967101BAA3E /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		3DDB7E21141D7764AE4658D5B6AFF8C6 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -426,14 +518,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		5E4FEF32A644FE79305E460212AD8EC1 /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		F79B4A1778327ABE3043CC111E1238DB /* Resources */ = {
+		C531C4BCE2D3019B0BF24CD14CEC57E6 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -443,22 +528,30 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
-		2AB7913E5A8511BF2F4EBF99B06872A6 /* Sources */ = {
+		1BF1AE7940A74FB3A308AA36BC6E034D /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				4750F21BEAC0041846829BA62C0F41CB /* APIProvider.swift in Sources */,
-				F7A01723B32867CB6E2ADA2CB561F9D5 /* AppStoreConnect-Swift-SDK-dummy.m in Sources */,
-				8E051A94AD0EBD2A89280F4456641236 /* Endpoints.swift in Sources */,
-				50BA73572190DE7E006C06EE /* Models.swift in Sources */,
+				FB3452D43389B977F6F53A88537C77D4 /* APIProvider.swift in Sources */,
+				1B34980818A99D7198C4A7DF8D1B074F /* AppStoreConnect-Swift-SDK-dummy.m in Sources */,
+				70968C330657B4FB735281802105BB1B /* Endpoints.swift in Sources */,
+				2480AB691582D4F81F8B6516033B64D2 /* Models.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		4902854F10C2348FB34DBAA2AE7019F2 /* Sources */ = {
+		4A513B6EE0E06809EE39D65F8CFE13AC /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				898AB5E9A12743B1236997061B108B2D /* Pods-AppStoreConnect-Swift-SDK_Tests-dummy.m in Sources */,
+				DB315265615488D96BBD5860A57E1C87 /* Pods-AppStoreConnect-Swift-SDK_Tests-dummy.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		4BD9A028FC0C73EBC2D97838670D3B39 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				DA8778F2DCBC56E1492DA5479799A256 /* Pods-AppStoreConnect-Swift-SDK_Example-dummy.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -490,59 +583,33 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
-		1BDF93AF4177A9BC892ACC6D0DCCA14F /* PBXTargetDependency */ = {
+		19605CF823961AB81D840F3B18502B19 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = "Pods-AppStoreConnect-Swift-SDK_Example";
+			target = B6B10C21EAE51C9D106CA21B49DACB7F /* Pods-AppStoreConnect-Swift-SDK_Example */;
+			targetProxy = 3B1C4DC345D994FB00701A63FB74623C /* PBXContainerItemProxy */;
+		};
+		547E4FC6656AB13218BCFBCCDD377C97 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			name = "AppStoreConnect-Swift-SDK";
-			target = 307E408D2DE0D23BAE9E0D5AE8113445 /* AppStoreConnect-Swift-SDK */;
-			targetProxy = 61B429E9D193875AE52DE9ECE44C42D9 /* PBXContainerItemProxy */;
+			target = 2A6292677ED5A3D17CD54785671BCCFD /* AppStoreConnect-Swift-SDK */;
+			targetProxy = F187BCA5BF655276DE8CA1D8AA98BDB1 /* PBXContainerItemProxy */;
 		};
-		5761DFC8FCAA0902E8619A4CC1A0C1D9 /* PBXTargetDependency */ = {
+		D91617C50BB5D9A5FC3C9DB83D946590 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			name = Alamofire;
 			target = E76458C58C9140B6A16D60547E68E80C /* Alamofire */;
-			targetProxy = 88DD6DC2C491D4A3509FB9BABF919725 /* PBXContainerItemProxy */;
+			targetProxy = 3980B34632A1AA2660519BF71C938D94 /* PBXContainerItemProxy */;
 		};
-		CA07875338F27D4C15FF376A50B1E5E6 /* PBXTargetDependency */ = {
+		FDA90B2146D0AB448875DF6462E1FA9D /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			name = Alamofire;
 			target = E76458C58C9140B6A16D60547E68E80C /* Alamofire */;
-			targetProxy = 58E54F222692BE061F85AAD26C484E81 /* PBXContainerItemProxy */;
+			targetProxy = DA7EE0693E7A0B4C526E4AD04CEC8684 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
 /* Begin XCBuildConfiguration section */
-		05490BFCCE8912C99D4FCC56D0058858 /* Debug */ = {
-			isa = XCBuildConfiguration;
-			baseConfigurationReference = 15E5970695D8EF3D74106C175DAD6E7B /* AppStoreConnect-Swift-SDK.xcconfig */;
-			buildSettings = {
-				CLANG_ENABLE_OBJC_WEAK = NO;
-				CODE_SIGN_IDENTITY = "";
-				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
-				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
-				CURRENT_PROJECT_VERSION = 1;
-				DEFINES_MODULE = YES;
-				DYLIB_COMPATIBILITY_VERSION = 1;
-				DYLIB_CURRENT_VERSION = 1;
-				DYLIB_INSTALL_NAME_BASE = "@rpath";
-				GCC_PREFIX_HEADER = "Target Support Files/AppStoreConnect-Swift-SDK/AppStoreConnect-Swift-SDK-prefix.pch";
-				INFOPLIST_FILE = "Target Support Files/AppStoreConnect-Swift-SDK/Info.plist";
-				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				MODULEMAP_FILE = "Target Support Files/AppStoreConnect-Swift-SDK/AppStoreConnect-Swift-SDK.modulemap";
-				PRODUCT_MODULE_NAME = AppStoreConnect_Swift_SDK;
-				PRODUCT_NAME = AppStoreConnect_Swift_SDK;
-				SDKROOT = iphoneos;
-				SKIP_INSTALL = YES;
-				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(inherited) ";
-				SWIFT_VERSION = 4.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
-				VERSIONING_SYSTEM = "apple-generic";
-				VERSION_INFO_PREFIX = "";
-			};
-			name = Debug;
-		};
 		0A5EDEB5E747FB5A3C01A8A74E768F19 /* Release */ = {
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 33A04B5D27E86AF4B84D95E21CF3F452 /* Alamofire.xcconfig */;
@@ -575,9 +642,9 @@
 			};
 			name = Release;
 		};
-		1BCBE77EE4F378E5B6C3E1FEA633C4D5 /* Release */ = {
+		2015424CC0500CC7FED164410B4104B2 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = AD28E9B7A53DBE943FB91E3C6B394588 /* Pods-AppStoreConnect-Swift-SDK_Tests.release.xcconfig */;
+			baseConfigurationReference = B6C5B9A2BDA089A45B1199D54213B5CC /* Pods-AppStoreConnect-Swift-SDK_Example.debug.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = NO;
 				CLANG_ENABLE_OBJC_WEAK = NO;
@@ -590,47 +657,12 @@
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
-				INFOPLIST_FILE = "Target Support Files/Pods-AppStoreConnect-Swift-SDK_Tests/Info.plist";
+				INFOPLIST_FILE = "Target Support Files/Pods-AppStoreConnect-Swift-SDK_Example/Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				MACH_O_TYPE = staticlib;
-				MODULEMAP_FILE = "Target Support Files/Pods-AppStoreConnect-Swift-SDK_Tests/Pods-AppStoreConnect-Swift-SDK_Tests.modulemap";
-				OTHER_LDFLAGS = "";
-				OTHER_LIBTOOLFLAGS = "";
-				PODS_ROOT = "$(SRCROOT)";
-				PRODUCT_BUNDLE_IDENTIFIER = "org.cocoapods.${PRODUCT_NAME:rfc1034identifier}";
-				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
-				SDKROOT = iphoneos;
-				SKIP_INSTALL = YES;
-				TARGETED_DEVICE_FAMILY = "1,2";
-				VALIDATE_PRODUCT = YES;
-				VERSIONING_SYSTEM = "apple-generic";
-				VERSION_INFO_PREFIX = "";
-			};
-			name = Release;
-		};
-		1EF242EA52660EA39BE45557B2ABD709 /* Debug */ = {
-			isa = XCBuildConfiguration;
-			baseConfigurationReference = 49317B3D17B5918D06436310762B9011 /* Pods-AppStoreConnect-Swift-SDK_Tests.debug.xcconfig */;
-			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = NO;
-				CLANG_ENABLE_OBJC_WEAK = NO;
-				CODE_SIGN_IDENTITY = "";
-				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
-				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
-				CURRENT_PROJECT_VERSION = 1;
-				DEFINES_MODULE = YES;
-				DYLIB_COMPATIBILITY_VERSION = 1;
-				DYLIB_CURRENT_VERSION = 1;
-				DYLIB_INSTALL_NAME_BASE = "@rpath";
-				INFOPLIST_FILE = "Target Support Files/Pods-AppStoreConnect-Swift-SDK_Tests/Info.plist";
-				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				MACH_O_TYPE = staticlib;
-				MODULEMAP_FILE = "Target Support Files/Pods-AppStoreConnect-Swift-SDK_Tests/Pods-AppStoreConnect-Swift-SDK_Tests.modulemap";
+				MODULEMAP_FILE = "Target Support Files/Pods-AppStoreConnect-Swift-SDK_Example/Pods-AppStoreConnect-Swift-SDK_Example.modulemap";
 				OTHER_LDFLAGS = "";
 				OTHER_LIBTOOLFLAGS = "";
 				PODS_ROOT = "$(SRCROOT)";
@@ -675,9 +707,9 @@
 			};
 			name = Debug;
 		};
-		4118DF7DBDEB035E5ACA03188549D991 /* Release */ = {
+		436DBBEC3D6255B948AD3C40CFFB6254 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 15E5970695D8EF3D74106C175DAD6E7B /* AppStoreConnect-Swift-SDK.xcconfig */;
+			baseConfigurationReference = EAB62BDB4558FEFB08EFD161A77AEEBE /* AppStoreConnect-Swift-SDK.xcconfig */;
 			buildSettings = {
 				CLANG_ENABLE_OBJC_WEAK = NO;
 				CODE_SIGN_IDENTITY = "";
@@ -701,6 +733,107 @@
 				SKIP_INSTALL = YES;
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(inherited) ";
 				SWIFT_VERSION = 4.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = YES;
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Release;
+		};
+		45E2CBCA81E7B9FCB1B92C25F028A19E /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = EAB62BDB4558FEFB08EFD161A77AEEBE /* AppStoreConnect-Swift-SDK.xcconfig */;
+			buildSettings = {
+				CLANG_ENABLE_OBJC_WEAK = NO;
+				CODE_SIGN_IDENTITY = "";
+				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
+				CURRENT_PROJECT_VERSION = 1;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				GCC_PREFIX_HEADER = "Target Support Files/AppStoreConnect-Swift-SDK/AppStoreConnect-Swift-SDK-prefix.pch";
+				INFOPLIST_FILE = "Target Support Files/AppStoreConnect-Swift-SDK/Info.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				MODULEMAP_FILE = "Target Support Files/AppStoreConnect-Swift-SDK/AppStoreConnect-Swift-SDK.modulemap";
+				PRODUCT_MODULE_NAME = AppStoreConnect_Swift_SDK;
+				PRODUCT_NAME = AppStoreConnect_Swift_SDK;
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(inherited) ";
+				SWIFT_VERSION = 4.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Debug;
+		};
+		5C6E1613528BFFD2D3223A126E19DDDA /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 509D24D73601858B1A5936485E4118ED /* Pods-AppStoreConnect-Swift-SDK_Tests.debug.xcconfig */;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = NO;
+				CLANG_ENABLE_OBJC_WEAK = NO;
+				CODE_SIGN_IDENTITY = "";
+				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
+				CURRENT_PROJECT_VERSION = 1;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				INFOPLIST_FILE = "Target Support Files/Pods-AppStoreConnect-Swift-SDK_Tests/Info.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				MACH_O_TYPE = staticlib;
+				MODULEMAP_FILE = "Target Support Files/Pods-AppStoreConnect-Swift-SDK_Tests/Pods-AppStoreConnect-Swift-SDK_Tests.modulemap";
+				OTHER_LDFLAGS = "";
+				OTHER_LIBTOOLFLAGS = "";
+				PODS_ROOT = "$(SRCROOT)";
+				PRODUCT_BUNDLE_IDENTIFIER = "org.cocoapods.${PRODUCT_NAME:rfc1034identifier}";
+				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Debug;
+		};
+		86B6598075620B8B2AB6767F74776B74 /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 39F63B140A7BCEF76F64FE5601D27611 /* Pods-AppStoreConnect-Swift-SDK_Example.release.xcconfig */;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = NO;
+				CLANG_ENABLE_OBJC_WEAK = NO;
+				CODE_SIGN_IDENTITY = "";
+				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
+				CURRENT_PROJECT_VERSION = 1;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				INFOPLIST_FILE = "Target Support Files/Pods-AppStoreConnect-Swift-SDK_Example/Info.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				MACH_O_TYPE = staticlib;
+				MODULEMAP_FILE = "Target Support Files/Pods-AppStoreConnect-Swift-SDK_Example/Pods-AppStoreConnect-Swift-SDK_Example.modulemap";
+				OTHER_LDFLAGS = "";
+				OTHER_LIBTOOLFLAGS = "";
+				PODS_ROOT = "$(SRCROOT)";
+				PRODUCT_BUNDLE_IDENTIFIER = "org.cocoapods.${PRODUCT_NAME:rfc1034identifier}";
+				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				VALIDATE_PRODUCT = YES;
 				VERSIONING_SYSTEM = "apple-generic";
@@ -763,9 +896,45 @@
 				MTL_FAST_MATH = YES;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				STRIP_INSTALLED_PRODUCT = NO;
-				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
 				SWIFT_VERSION = 4.2;
 				SYMROOT = "${SRCROOT}/../build";
+			};
+			name = Release;
+		};
+		A65DF533AC9C03A7F63803C9C320727C /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = A906F7CB57CAE38E2F45EEC5C9FC637C /* Pods-AppStoreConnect-Swift-SDK_Tests.release.xcconfig */;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = NO;
+				CLANG_ENABLE_OBJC_WEAK = NO;
+				CODE_SIGN_IDENTITY = "";
+				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
+				CURRENT_PROJECT_VERSION = 1;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				INFOPLIST_FILE = "Target Support Files/Pods-AppStoreConnect-Swift-SDK_Tests/Info.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				MACH_O_TYPE = staticlib;
+				MODULEMAP_FILE = "Target Support Files/Pods-AppStoreConnect-Swift-SDK_Tests/Pods-AppStoreConnect-Swift-SDK_Tests.modulemap";
+				OTHER_LDFLAGS = "";
+				OTHER_LIBTOOLFLAGS = "";
+				PODS_ROOT = "$(SRCROOT)";
+				PRODUCT_BUNDLE_IDENTIFIER = "org.cocoapods.${PRODUCT_NAME:rfc1034identifier}";
+				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = YES;
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
 			};
 			name = Release;
 		};
@@ -847,6 +1016,15 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
+		32DD6F01E3E18F003D7CC36C426F9F1C /* Build configuration list for PBXNativeTarget "Pods-AppStoreConnect-Swift-SDK_Tests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				5C6E1613528BFFD2D3223A126E19DDDA /* Debug */,
+				A65DF533AC9C03A7F63803C9C320727C /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
 		427F0F003A1AD80AE00155AFCDEFAC20 /* Build configuration list for PBXNativeTarget "Alamofire" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
@@ -856,20 +1034,20 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		70C6FBCAF2ECC50DC89129317EA492C8 /* Build configuration list for PBXNativeTarget "Pods-AppStoreConnect-Swift-SDK_Tests" */ = {
+		62C7CC0B9AA3872FBA08D4B90861048C /* Build configuration list for PBXNativeTarget "AppStoreConnect-Swift-SDK" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				1EF242EA52660EA39BE45557B2ABD709 /* Debug */,
-				1BCBE77EE4F378E5B6C3E1FEA633C4D5 /* Release */,
+				45E2CBCA81E7B9FCB1B92C25F028A19E /* Debug */,
+				436DBBEC3D6255B948AD3C40CFFB6254 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		FA6EAB09CBE655850D126D162A97BD4E /* Build configuration list for PBXNativeTarget "AppStoreConnect-Swift-SDK" */ = {
+		AFE8D02221587CE1436D758A7B9133DD /* Build configuration list for PBXNativeTarget "Pods-AppStoreConnect-Swift-SDK_Example" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				05490BFCCE8912C99D4FCC56D0058858 /* Debug */,
-				4118DF7DBDEB035E5ACA03188549D991 /* Release */,
+				2015424CC0500CC7FED164410B4104B2 /* Debug */,
+				86B6598075620B8B2AB6767F74776B74 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
