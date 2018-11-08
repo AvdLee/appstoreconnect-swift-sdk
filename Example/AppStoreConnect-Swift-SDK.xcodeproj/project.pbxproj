@@ -533,6 +533,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 9524BFF0D0F07B79917BBFE2 /* Pods-AppStoreConnect-Swift-SDK_Tests.debug.xcconfig */;
 			buildSettings = {
+				DEVELOPMENT_TEAM = "";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(SDKROOT)/Developer/Library/Frameworks",
 					"$(inherited)",
@@ -556,6 +557,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = AB3C299B63F819BF718C3EF5 /* Pods-AppStoreConnect-Swift-SDK_Tests.release.xcconfig */;
 			buildSettings = {
+				DEVELOPMENT_TEAM = "";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(SDKROOT)/Developer/Library/Frameworks",
 					"$(inherited)",
