@@ -34,6 +34,9 @@ public final class APIProvider {
     /// The configuration needed to set up the API Provider including all needed information for performing API requests.
     private let configuration: APIConfiguration
 
+    /// The authenticator to handle all JWT signing related actions.
+    private let requestsAuthenticator = JWTRequestsAuthenticator()
+
     /// Creates a new APIProvider instance which can be used to perform API Requests to the App Store Connect API.
     ///
     /// - Parameters:
@@ -49,6 +52,8 @@ public final class APIProvider {
         } else {
             defaultSessionManager = SessionManager(configuration: URLSessionConfiguration.default)
         }
+
+        defaultSessionManager.adapter = requestsAuthenticator
     }
 
     /// Generates an URL based on the given endpoint in combination with the current API version.
