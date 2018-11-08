@@ -2,7 +2,7 @@
 fastlane_version "1.109.0"
 generated_fastfile_id "0121e253-f9e2-40ac-b489-f17f36e24ec6"
 
-# import "./../Submodules/WeTransfer-iOS-CI/Fastlane/Fastfile"
+import "./../Submodules/WeTransfer-iOS-CI/Fastlane/Fastfile"
 
 desc "Clean the derived data, run tests validate the changes"
 lane :test do |options|
@@ -13,7 +13,7 @@ lane :test do |options|
   
   begin
     scan(
-      scheme: "AppStoreConnect-Swift-SDK_Tests",
+      scheme: "AppStoreConnect-Swift-SDK-Example",
       workspace: "Example/AppStoreConnect-Swift-SDK.xcworkspace",
       device: "iPhone 8",
       clean: true,
@@ -24,5 +24,5 @@ lane :test do |options|
     UI.error("Tests failed: #{ex}")
   end
 
-  # validate_changes(project_name: "AppStoreConnect-Swift-SDK")
+  validate_changes(project_name: "AppStoreConnect-Swift-SDK-Example")
 end
