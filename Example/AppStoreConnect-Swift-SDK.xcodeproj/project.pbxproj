@@ -189,6 +189,7 @@
 				607FACE11AFB9204008FA782 /* Sources */,
 				607FACE21AFB9204008FA782 /* Frameworks */,
 				607FACE31AFB9204008FA782 /* Resources */,
+				504E37762194A1DC00517011 /* SwiftLint */,
 			);
 			buildRules = (
 			);
@@ -261,6 +262,24 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
+		504E37762194A1DC00517011 /* SwiftLint */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+			);
+			name = SwiftLint;
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "if [ -z \"$CI\" ]; then\n    if which swiftlint >/dev/null; then\n        swiftlint --config \"${SRCROOT}/../Submodules/WeTransfer-iOS-CI/SwiftLint/.swiftlint-source.yml\"\n        swiftlint --config \"${SRCROOT}/../Submodules/WeTransfer-iOS-CI/SwiftLint/.swiftlint-tests.yml\"\n    else\n        echo \"warning: SwiftLint not installed, download from https://github.com/realm/SwiftLint\"\n    fi\nfi\n";
+		};
 		9514A4669AEB7687AD07DC32 /* [CP] Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
