@@ -1,0 +1,28 @@
+# Fastlane requirements
+fastlane_version "1.109.0"
+generated_fastfile_id "0121e253-f9e2-40ac-b489-f17f36e24ec6"
+
+# import "./../Submodules/WeTransfer-iOS-CI/Fastlane/Fastfile"
+
+desc "Clean the derived data, run tests validate the changes"
+lane :test do |options|
+  # clear_derived_data
+
+  # Set timeout to prevent xcodebuild -list -project to take to much retries.
+  ENV["FASTLANE_XCODE_LIST_TIMEOUT"] = "120"
+  
+  begin
+    scan(
+      scheme: "AppStoreConnect-Swift-SDK_Tests",
+      workspace: "Example/AppStoreConnect-Swift-SDK.xcworkspace",
+      device: "iPhone 8",
+      clean: true,
+      code_coverage: true,
+      formatter: "xcpretty-json-formatter"
+    )
+  rescue => ex
+    UI.error("Tests failed: #{ex}")
+  end
+
+  # validate_changes(project_name: "AppStoreConnect-Swift-SDK")
+end
