@@ -1,7 +1,7 @@
 import XCTest
 import AppStoreConnect_Swift_SDK
 
-class Tests: XCTestCase {
+final class Tests: XCTestCase {
     
     override func setUp() {
         super.setUp()
