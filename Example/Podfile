@@ -1,4 +1,4 @@
-platform :ios
+platform :ios, '11.0'
 use_frameworks!
 
 target 'AppStoreConnect-Swift-SDK_Example' do
