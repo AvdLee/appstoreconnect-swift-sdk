@@ -1,6 +1,12 @@
+platform :ios
 use_frameworks!
-target 'AppStoreConnect-Swift-SDK_Tests' do
+
+target 'AppStoreConnect-Swift-SDK_Example' do
   pod 'AppStoreConnect-Swift-SDK', :path => '../'
-  
-  
+
+  target 'AppStoreConnect-Swift-SDK_Tests' do
+    inherit! :search_paths
+
+    
+  end
 end

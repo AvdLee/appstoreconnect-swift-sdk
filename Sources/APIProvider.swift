@@ -61,6 +61,7 @@ public final class APIProvider {
     /// - Parameter endpoint: The endpoint to create an URL for.
     /// - Returns: The created `URL`.
     internal func url<T>(for endpoint: APIEndpoint<T>) -> URL {
+        // swiftlint:disable:next force_unwrapping
         return URL(string: "https://api.appstoreconnect.apple.com/v1/")!.appendingPathComponent(endpoint.path)
     }
 
