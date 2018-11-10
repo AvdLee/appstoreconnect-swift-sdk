@@ -17,4 +17,5 @@ The Swift SDK to work with the App Store Connect API from Apple. See for more in
 
   s.source_files = 'Sources/**/*'
   s.dependency 'Alamofire'
+  s.dependency 'JWT'
 end

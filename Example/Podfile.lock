@@ -2,6 +2,10 @@ PODS:
   - Alamofire (4.7.3)
   - AppStoreConnect-Swift-SDK (0.1.0):
     - Alamofire
+    - JWT
+  - Base64 (1.1.2)
+  - JWT (2.2.0):
+    - Base64 (~> 1.1.2)
 
 DEPENDENCIES:
   - AppStoreConnect-Swift-SDK (from `../`)
@@ -9,6 +13,8 @@ DEPENDENCIES:
 SPEC REPOS:
   https://github.com/cocoapods/specs.git:
     - Alamofire
+    - Base64
+    - JWT
 
 EXTERNAL SOURCES:
   AppStoreConnect-Swift-SDK:
@@ -16,7 +22,9 @@ EXTERNAL SOURCES:
 
 SPEC CHECKSUMS:
   Alamofire: c7287b6e5d7da964a70935e5db17046b7fde6568
-  AppStoreConnect-Swift-SDK: c7acd123206bbcd163b5e0e534061bcd53475bc1
+  AppStoreConnect-Swift-SDK: 44a862134abc08593960565dcd9e3b72fc1fcfb3
+  Base64: cecfb41a004124895a7bcee567a89bae5a89d49b
+  JWT: cf73c0ab0dac762df3de8a3f1164352089d97780
 
 PODFILE CHECKSUM: fe5bd9309f00aeb3f27d75341a1c3e1b7bef7177
 

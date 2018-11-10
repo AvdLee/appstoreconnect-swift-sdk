@@ -15,6 +15,11 @@ final class JWTRequestsAuthenticator {
     }
 
     private var cachedBearer: Bearer?
+    private let apiConfiguration: APIConfiguration
+
+    init(apiConfiguration: APIConfiguration) {
+        self.apiConfiguration = apiConfiguration
+    }
 
     func createBearer() throws -> Bearer {
         if let cachedBearer = cachedBearer, !cachedBearer.isExpired {

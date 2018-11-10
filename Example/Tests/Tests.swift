@@ -1,5 +1,5 @@
 import XCTest
-import AppStoreConnect_Swift_SDK
+@testable import AppStoreConnect_Swift_SDK
 
 final class Tests: XCTestCase {
     
@@ -13,9 +13,12 @@ final class Tests: XCTestCase {
         super.tearDown()
     }
     
-    func testExample() {
-        // This is an example of a functional test case.
-        XCTAssert(true, "Pass")
+    func testSigning() {
+        let apiConfiguration = APIConfiguration.testConfiguration
+        let authenticator = JWTRequestsAuthenticator(apiConfiguration: apiConfiguration)
+
+        XCTAssertEqual(try! authenticator.createBearer(), "Bearer ")
+        
     }
     
 }

@@ -11,14 +11,20 @@ import Alamofire
 /// The configuration needed to set up the API Provider including all needed information for performing API requests.
 public struct APIConfiguration {
 
-    /// The URL pointing to the API key file within the bundle.
-    private let key: URL
+    /// Your private key ID from App Store Connect (Ex: 2X9R4HXF34)
+    private let privateKeyID: String
+
+    /// Your issuer ID from the API Keys page in App Store Connect (Ex: 57246542-96fe-1a63-e053-0824d011072a)
+    private let issuerID: String
 
     /// Creates a new API configuration to use for initialising the API Provider.
     ///
-    /// - Parameter key: The API key to use for authenticating the API Requests with JWT.
-    public init(key: URL) {
-        self.key = key
+    /// - Parameters:
+    ///   - privateKeyID: Your private key ID from App Store Connect (Ex: 2X9R4HXF34)
+    ///   - issuerID: Your issuer ID from the API Keys page in App Store Connect (Ex: 57246542-96fe-1a63-e053-0824d011072a)
+    public init(privateKeyID: String, issuerID: String) {
+        self.privateKeyID = privateKeyID
+        self.issuerID = issuerID
     }
 }
 
@@ -35,7 +41,7 @@ public final class APIProvider {
     private let configuration: APIConfiguration
 
     /// The authenticator to handle all JWT signing related actions.
-    private let requestsAuthenticator = JWTRequestsAuthenticator()
+    private lazy var requestsAuthenticator = JWTRequestsAuthenticator(apiConfiguration: self.configuration)
 
     /// Creates a new APIProvider instance which can be used to perform API Requests to the App Store Connect API.
     ///
