@@ -12,10 +12,6 @@ struct BuildBetaDetailUpdateRequest: Decodable {
 
     /// (Required) The resource data.
     let data: BuildBetaDetailUpdateRequest.Data
-
-}
-
-extension BuildBetaDetailUpdateRequest {
     
     struct Data: Decodable {
     
@@ -27,7 +23,6 @@ extension BuildBetaDetailUpdateRequest {
     
         /// (Required) The resource type.Value: buildBetaDetails
         let type: String
-    
     }
 }
 
@@ -37,6 +32,5 @@ extension BuildBetaDetailUpdateRequest.Data {
     
         /// A Boolean value that enables you to send test invitations to users automatically when the build is available to external groups.
         let autoNotifyEnabled: Bool?
-    
     }
 }

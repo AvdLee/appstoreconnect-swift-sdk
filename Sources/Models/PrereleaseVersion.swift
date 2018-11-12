@@ -25,9 +25,6 @@ struct PrereleaseVersion: Decodable {
     /// (Required) The resource type.Value: preReleaseVersions
     let type: String
 
-}
-
-extension PrereleaseVersion {
     /// Attributes that describe a resource.
     struct Attributes: Decodable {
     
@@ -36,11 +33,7 @@ extension PrereleaseVersion {
     
         /// The version number of the prerelease version of your app.
         let version: String?
-    
     }
-}
-
-extension PrereleaseVersion {
     
     struct Relationships: Decodable {
     
@@ -49,7 +42,6 @@ extension PrereleaseVersion {
     
         /// PrereleaseVersion.Relationships.Builds
         let builds: PrereleaseVersion.Relationships.Builds?
-    
     }
 }
 
@@ -62,12 +54,8 @@ extension PrereleaseVersion.Relationships {
     
         /// PrereleaseVersion.Relationships.App.Links
         let links: PrereleaseVersion.Relationships.App.Links?
-    
     }
-}
 
-extension PrereleaseVersion.Relationships {
-    
     struct Builds: Decodable {
     
         /// [PrereleaseVersion.Relationships.Builds.Data]
@@ -78,7 +66,6 @@ extension PrereleaseVersion.Relationships {
     
         /// PagingInformation
         let meta: PagingInformation?
-    
     }
 }
 
@@ -91,11 +78,7 @@ extension PrereleaseVersion.Relationships.App {
     
         /// (Required) The resource type.Value: apps
         let type: String
-    
     }
-}
-
-extension PrereleaseVersion.Relationships.App {
     
     struct Links: Decodable {
     
@@ -104,7 +87,6 @@ extension PrereleaseVersion.Relationships.App {
     
         /// uri-reference
         let `self`: URL?
-    
     }
 }
 
@@ -117,11 +99,7 @@ extension PrereleaseVersion.Relationships.Builds {
     
         /// (Required) The resource type.Value: builds
         let type: String
-    
     }
-}
-
-extension PrereleaseVersion.Relationships.Builds {
     
     struct Links: Decodable {
     
@@ -130,6 +108,5 @@ extension PrereleaseVersion.Relationships.Builds {
     
         /// uri-reference
         let `self`: URL?
-    
     }
 }

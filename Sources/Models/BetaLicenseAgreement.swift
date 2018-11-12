@@ -25,25 +25,17 @@ struct BetaLicenseAgreement: Decodable {
     /// (Required) The resource type.Value: betaLicenseAgreements
     let type: String
 
-}
-
-extension BetaLicenseAgreement {
     /// Attributes that describe a resource.
     struct Attributes: Decodable {
     
         /// The license agreement text for your beta app that displays to users.
         let agreementText: String?
-    
     }
-}
-
-extension BetaLicenseAgreement {
     
     struct Relationships: Decodable {
     
         /// BetaLicenseAgreement.Relationships.App
         let app: BetaLicenseAgreement.Relationships.App?
-    
     }
 }
 
@@ -56,7 +48,6 @@ extension BetaLicenseAgreement.Relationships {
     
         /// BetaLicenseAgreement.Relationships.App.Links
         let links: BetaLicenseAgreement.Relationships.App.Links?
-    
     }
 }
 
@@ -69,11 +60,7 @@ extension BetaLicenseAgreement.Relationships.App {
     
         /// (Required) The resource type.Value: apps
         let type: String
-    
     }
-}
-
-extension BetaLicenseAgreement.Relationships.App {
     
     struct Links: Decodable {
     
@@ -82,6 +69,5 @@ extension BetaLicenseAgreement.Relationships.App {
     
         /// uri-reference
         let `self`: URL?
-    
     }
 }

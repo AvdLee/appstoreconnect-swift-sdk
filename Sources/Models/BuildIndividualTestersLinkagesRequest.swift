@@ -12,10 +12,6 @@ struct BuildIndividualTestersLinkagesRequest: Decodable {
 
     /// (Required) The types and IDs of related resources.
     let data: [BuildIndividualTestersLinkagesRequest.Data]
-
-}
-
-extension BuildIndividualTestersLinkagesRequest {
     
     struct Data: Decodable {
     
@@ -24,6 +20,5 @@ extension BuildIndividualTestersLinkagesRequest {
     
         /// (Required) The resource type.Value: betaTesters
         let type: String
-    
     }
 }

@@ -12,10 +12,6 @@ struct UserVisibleAppsLinkagesRequest: Decodable {
 
     /// (Required) The object types and IDs of the related resources.
     let data: [UserVisibleAppsLinkagesRequest.Data]
-
-}
-
-extension UserVisibleAppsLinkagesRequest {
     
     struct Data: Decodable {
     
@@ -24,6 +20,5 @@ extension UserVisibleAppsLinkagesRequest {
     
         /// (Required) The resource type.Value: apps
         let type: String
-    
     }
 }

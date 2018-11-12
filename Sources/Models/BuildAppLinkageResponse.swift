@@ -15,10 +15,6 @@ struct BuildAppLinkageResponse: Decodable {
 
     /// (Required) Navigational links including the self-link and links to the related data.
     let links: DocumentLinks
-
-}
-
-extension BuildAppLinkageResponse {
     
     struct Data: Decodable {
     
@@ -27,6 +23,5 @@ extension BuildAppLinkageResponse {
     
         /// (Required) The resource type.Value: apps
         let type: String
-    
     }
 }

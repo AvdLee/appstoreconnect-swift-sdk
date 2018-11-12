@@ -19,10 +19,6 @@ struct BetaTesterResponse: Decodable {
 
     /// (Required) Navigational links that include the self-link.
     let links: DocumentLinks
-
-}
-
-extension BetaTesterResponse {
     
     enum Included: Decodable {
         case app(App)
@@ -39,7 +35,6 @@ extension BetaTesterResponse {
                 return
             }
 
-            
             if let wrapped = try? Build(from: decoder) {
                 self = .build(wrapped)
                 return

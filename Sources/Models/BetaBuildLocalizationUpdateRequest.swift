@@ -13,10 +13,6 @@ struct BetaBuildLocalizationUpdateRequest: Decodable {
     /// (Required) The resource data.
     let data: BetaBuildLocalizationUpdateRequest.Data
 
-}
-
-extension BetaBuildLocalizationUpdateRequest {
-    
     struct Data: Decodable {
     
         /// The resource's attributes.
@@ -27,7 +23,6 @@ extension BetaBuildLocalizationUpdateRequest {
     
         /// (Required) The resource type.Value: betaBuildLocalizations
         let type: String
-    
     }
 }
 
@@ -37,6 +32,5 @@ extension BetaBuildLocalizationUpdateRequest.Data {
     
         /// A field that describes changes and additions to a build and indicates features you would like your users to test.
         let whatsNew: String?
-    
     }
 }

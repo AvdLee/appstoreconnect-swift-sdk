@@ -15,5 +15,4 @@ struct BetaTesterInvitationResponse: Decodable {
 
     /// (Required) Navigational links that include the self-link.
     let links: DocumentLinks
-
 }

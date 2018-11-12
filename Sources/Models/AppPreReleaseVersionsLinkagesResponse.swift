@@ -18,10 +18,6 @@ struct AppPreReleaseVersionsLinkagesResponse: Decodable {
 
     /// Paging information.
     let meta: PagingInformation?
-
-}
-
-extension AppPreReleaseVersionsLinkagesResponse {
     
     struct Data: Decodable {
     
@@ -30,6 +26,5 @@ extension AppPreReleaseVersionsLinkagesResponse {
     
         /// (Required) The resource type.Value: preReleaseVersions
         let type: String
-    
     }
 }

@@ -25,9 +25,6 @@ struct User: Decodable {
     /// (Required) Navigational links that include the self-link.
     let links: ResourceLinks
 
-}
-
-extension User {
     /// Attributes that describe a resource.
     struct Attributes: Decodable {
     
@@ -48,17 +45,12 @@ extension User {
     
         /// The user's Apple ID.
         let username: String?
-    
     }
-}
-
-extension User {
     
     struct Relationships: Decodable {
     
         /// User.Relationships.VisibleApps
         let visibleApps: User.Relationships.VisibleApps?
-    
     }
 }
 
@@ -74,7 +66,6 @@ extension User.Relationships {
     
         /// PagingInformation
         let meta: PagingInformation?
-    
     }
 }
 
@@ -87,11 +78,7 @@ extension User.Relationships.VisibleApps {
     
         /// (Required) The resource type.Value: apps
         let type: String
-    
     }
-}
-
-extension User.Relationships.VisibleApps {
     
     struct Links: Decodable {
     
@@ -100,6 +87,5 @@ extension User.Relationships.VisibleApps {
     
         /// uri-reference
         let `self`: URL?
-    
     }
 }

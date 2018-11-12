@@ -25,9 +25,6 @@ struct BetaAppLocalization: Decodable {
     /// (Required) Navigational links that include the self-link.
     let links: ResourceLinks
 
-}
-
-extension BetaAppLocalization {
     /// Attributes that describe a resource.
     struct Attributes: Decodable {
     
@@ -48,17 +45,12 @@ extension BetaAppLocalization {
     
         /// Your company’s privacy policy. Privacy policies are recommended for all apps that collect user or device-related data, or as otherwise required by law.
         let tvOsPrivacyPolicy: String?
-    
     }
-}
-
-extension BetaAppLocalization {
     
     struct Relationships: Decodable {
     
         /// BetaAppLocalization.Relationships.App
         let app: BetaAppLocalization.Relationships.App?
-    
     }
 }
 
@@ -71,7 +63,6 @@ extension BetaAppLocalization.Relationships {
     
         /// BetaAppLocalization.Relationships.App.Links
         let links: BetaAppLocalization.Relationships.App.Links?
-    
     }
 }
 
@@ -84,11 +75,7 @@ extension BetaAppLocalization.Relationships.App {
     
         /// (Required) The resource type.Value: apps
         let type: String
-    
     }
-}
-
-extension BetaAppLocalization.Relationships.App {
     
     struct Links: Decodable {
     
@@ -97,6 +84,5 @@ extension BetaAppLocalization.Relationships.App {
     
         /// uri-reference
         let `self`: URL?
-    
     }
 }

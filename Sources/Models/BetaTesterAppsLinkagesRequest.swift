@@ -12,10 +12,6 @@ struct BetaTesterAppsLinkagesRequest: Decodable {
 
     /// (Required) The types and IDs of related resources.
     let data: [BetaTesterAppsLinkagesRequest.Data]
-
-}
-
-extension BetaTesterAppsLinkagesRequest {
     
     struct Data: Decodable {
     
@@ -24,6 +20,5 @@ extension BetaTesterAppsLinkagesRequest {
     
         /// (Required) The resource type.Value: apps
         let type: String
-    
     }
 }

@@ -15,10 +15,6 @@ struct BetaAppLocalizationAppLinkageResponse: Decodable {
 
     /// (Required) Navigational links including the self-link and links to the related data.
     let links: DocumentLinks
-
-}
-
-extension BetaAppLocalizationAppLinkageResponse {
     
     struct Data: Decodable {
     
@@ -27,6 +23,5 @@ extension BetaAppLocalizationAppLinkageResponse {
     
         /// (Required) The resource type.Value: apps
         let type: String
-    
     }
 }

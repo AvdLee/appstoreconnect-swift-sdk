@@ -12,10 +12,6 @@ struct BetaTesterCreateRequest: Decodable {
 
     /// (Required) The resource data.
     let data: BetaTesterCreateRequest.Data
-
-}
-
-extension BetaTesterCreateRequest {
     
     struct Data: Decodable {
     
@@ -27,7 +23,6 @@ extension BetaTesterCreateRequest {
     
         /// (Required) The resource type.Value: betaTesters
         let type: String
-    
     }
 }
 
@@ -43,11 +38,7 @@ extension BetaTesterCreateRequest.Data {
     
         /// The beta tester's last name.
         let lastName: String?
-    
     }
-}
-
-extension BetaTesterCreateRequest.Data {
     
     struct Relationships: Decodable {
     
@@ -56,7 +47,6 @@ extension BetaTesterCreateRequest.Data {
     
         /// BetaTesterCreateRequest.Data.Relationships.Builds
         let builds: BetaTesterCreateRequest.Data.Relationships.Builds?
-    
     }
 }
 
@@ -66,17 +56,12 @@ extension BetaTesterCreateRequest.Data.Relationships {
     
         /// [BetaTesterCreateRequest.Data.Relationships.BetaGroups.Data]
         let data: [BetaTesterCreateRequest.Data.Relationships.BetaGroups.Data]?
-    
     }
-}
 
-extension BetaTesterCreateRequest.Data.Relationships {
-    
     struct Builds: Decodable {
     
         /// [BetaTesterCreateRequest.Data.Relationships.Builds.Data]
         let data: [BetaTesterCreateRequest.Data.Relationships.Builds.Data]?
-    
     }
 }
 
@@ -89,7 +74,6 @@ extension BetaTesterCreateRequest.Data.Relationships.BetaGroups {
     
         /// (Required) The resource type.Value: betaGroups
         let type: String
-    
     }
 }
 
@@ -102,6 +86,5 @@ extension BetaTesterCreateRequest.Data.Relationships.Builds {
     
         /// (Required) The resource type.Value: builds
         let type: String
-    
     }
 }

@@ -15,10 +15,6 @@ struct BuildPreReleaseVersionLinkageResponse: Decodable {
 
     /// (Required) Navigational links including the self-link and links to the related data.
     let links: DocumentLinks
-
-}
-
-extension BuildPreReleaseVersionLinkageResponse {
     
     struct Data: Decodable {
     
@@ -27,6 +23,5 @@ extension BuildPreReleaseVersionLinkageResponse {
     
         /// (Required) The resource type.Value: preReleaseVersions
         let type: String
-    
     }
 }

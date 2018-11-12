@@ -25,9 +25,6 @@ struct BetaBuildLocalization: Decodable {
     /// (Required) Navigational links that include the self-link.
     let links: ResourceLinks
 
-}
-
-extension BetaBuildLocalization {
     /// Attributes that describe a resource.
     struct Attributes: Decodable {
     
@@ -36,17 +33,12 @@ extension BetaBuildLocalization {
     
         /// A field that describes changes and additions to a build and indicates features you would like your users to test.
         let whatsNew: String?
-    
     }
-}
-
-extension BetaBuildLocalization {
     
     struct Relationships: Decodable {
     
         /// BetaBuildLocalization.Relationships.Build
         let build: BetaBuildLocalization.Relationships.Build?
-    
     }
 }
 
@@ -59,7 +51,6 @@ extension BetaBuildLocalization.Relationships {
     
         /// BetaBuildLocalization.Relationships.Build.Links
         let links: BetaBuildLocalization.Relationships.Build.Links?
-    
     }
 }
 
@@ -72,11 +63,7 @@ extension BetaBuildLocalization.Relationships.Build {
     
         /// (Required) The resource type.Value: builds
         let type: String
-    
     }
-}
-
-extension BetaBuildLocalization.Relationships.Build {
     
     struct Links: Decodable {
     
@@ -85,6 +72,5 @@ extension BetaBuildLocalization.Relationships.Build {
     
         /// uri-reference
         let `self`: URL?
-    
     }
 }

@@ -6,7 +6,7 @@
 //
 
 import Foundation
-    /// 
+
 enum BetaReviewState: String, Decodable {
     case waitingForReview = "WAITING_FOR_REVIEW"
     case inReview = "IN_REVIEW"

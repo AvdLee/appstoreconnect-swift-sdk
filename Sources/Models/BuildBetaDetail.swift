@@ -25,9 +25,6 @@ struct BuildBetaDetail: Decodable {
     /// (Required) Navigational links that include the self-link.
     let links: ResourceLinks
 
-}
-
-extension BuildBetaDetail {
     /// Attributes that describe a resource.
     struct Attributes: Decodable {
     
@@ -39,17 +36,12 @@ extension BuildBetaDetail {
     
         /// A state that indicates if the build is available for internal testing.
         let internalBuildState: InternalBetaState?
-    
     }
-}
-
-extension BuildBetaDetail {
     
     struct Relationships: Decodable {
     
         /// BuildBetaDetail.Relationships.Build
         let build: BuildBetaDetail.Relationships.Build?
-    
     }
 }
 
@@ -62,7 +54,6 @@ extension BuildBetaDetail.Relationships {
     
         /// BuildBetaDetail.Relationships.Build.Links
         let links: BuildBetaDetail.Relationships.Build.Links?
-    
     }
 }
 
@@ -75,11 +66,7 @@ extension BuildBetaDetail.Relationships.Build {
     
         /// (Required) The resource type.Value: builds
         let type: String
-    
     }
-}
-
-extension BuildBetaDetail.Relationships.Build {
     
     struct Links: Decodable {
     
@@ -88,6 +75,5 @@ extension BuildBetaDetail.Relationships.Build {
     
         /// uri-reference
         let `self`: URL?
-    
     }
 }

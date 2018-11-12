@@ -21,5 +21,4 @@ struct BetaLicenseAgreementsResponse: Decodable {
 
     /// Paging information.
     let meta: PagingInformation?
-
 }

@@ -25,9 +25,6 @@ struct Build: Decodable {
     /// (Required) Navigational links that include the self-link.
     let links: ResourceLinks
 
-}
-
-extension Build {
     /// Attributes that describe a resource.
     struct Attributes: Decodable {
     
@@ -54,11 +51,7 @@ extension Build {
     
         /// The date and time the build  will auto-expire and no longer be available for testing.
         let expirationDate: Date?
-    
     }
-}
-
-extension Build {
     
     struct Relationships: Decodable {
     
@@ -85,9 +78,10 @@ extension Build {
     
         /// Build.Relationships.BetaAppReviewSubmission
         let betaAppReviewSubmission: Build.Relationships.BetaAppReviewSubmission?
-    
     }
 }
+
+/// MARK: Build.Relationships
 
 extension Build.Relationships {
     
@@ -98,11 +92,7 @@ extension Build.Relationships {
     
         /// Build.Relationships.App.Links
         let links: Build.Relationships.App.Links?
-    
     }
-}
-
-extension Build.Relationships {
     
     struct AppEncryptionDeclaration: Decodable {
     
@@ -111,11 +101,7 @@ extension Build.Relationships {
     
         /// Build.Relationships.AppEncryptionDeclaration.Links
         let links: Build.Relationships.AppEncryptionDeclaration.Links?
-    
     }
-}
-
-extension Build.Relationships {
     
     struct BetaAppReviewSubmission: Decodable {
     
@@ -124,11 +110,7 @@ extension Build.Relationships {
     
         /// Build.Relationships.BetaAppReviewSubmission.Links
         let links: Build.Relationships.BetaAppReviewSubmission.Links?
-    
     }
-}
-
-extension Build.Relationships {
     
     struct BetaBuildLocalizations: Decodable {
     
@@ -140,11 +122,7 @@ extension Build.Relationships {
     
         /// PagingInformation
         let meta: PagingInformation?
-    
     }
-}
-
-extension Build.Relationships {
     
     struct BetaGroups: Decodable {
     
@@ -156,11 +134,7 @@ extension Build.Relationships {
     
         /// PagingInformation
         let meta: PagingInformation?
-    
     }
-}
-
-extension Build.Relationships {
     
     struct BuildBetaDetail: Decodable {
     
@@ -169,11 +143,7 @@ extension Build.Relationships {
     
         /// Build.Relationships.BuildBetaDetail.Links
         let links: Build.Relationships.BuildBetaDetail.Links?
-    
     }
-}
-
-extension Build.Relationships {
     
     struct IndividualTesters: Decodable {
     
@@ -185,11 +155,7 @@ extension Build.Relationships {
     
         /// PagingInformation
         let meta: PagingInformation?
-    
     }
-}
-
-extension Build.Relationships {
     
     struct PreReleaseVersion: Decodable {
     
@@ -198,7 +164,6 @@ extension Build.Relationships {
     
         /// Build.Relationships.PreReleaseVersion.Links
         let links: Build.Relationships.PreReleaseVersion.Links?
-    
     }
 }
 
@@ -211,7 +176,6 @@ extension Build.Relationships.App {
     
         /// (Required) The resource type.Value: apps
         let type: String
-    
     }
 }
 
@@ -224,7 +188,6 @@ extension Build.Relationships.App {
     
         /// uri-reference
         let `self`: URL?
-    
     }
 }
 
@@ -237,7 +200,6 @@ extension Build.Relationships.AppEncryptionDeclaration {
     
         /// (Required) The resource type.Value: appEncryptionDeclarations
         let type: String
-    
     }
 }
 
@@ -250,7 +212,6 @@ extension Build.Relationships.AppEncryptionDeclaration {
     
         /// uri-reference
         let `self`: URL?
-    
     }
 }
 
@@ -263,7 +224,6 @@ extension Build.Relationships.BetaAppReviewSubmission {
     
         /// (Required) The resource type.Value: betaAppReviewSubmissions
         let type: String
-    
     }
 }
 
@@ -276,7 +236,6 @@ extension Build.Relationships.BetaAppReviewSubmission {
     
         /// uri-reference
         let `self`: URL?
-    
     }
 }
 
@@ -289,7 +248,6 @@ extension Build.Relationships.BetaBuildLocalizations {
     
         /// (Required) The resource type.Value: betaBuildLocalizations
         let type: String
-    
     }
 }
 
@@ -302,7 +260,6 @@ extension Build.Relationships.BetaBuildLocalizations {
     
         /// uri-reference
         let `self`: URL?
-    
     }
 }
 
@@ -315,7 +272,6 @@ extension Build.Relationships.BetaGroups {
     
         /// (Required) The resource type.Value: betaGroups
         let type: String
-    
     }
 }
 
@@ -328,7 +284,6 @@ extension Build.Relationships.BetaGroups {
     
         /// uri-reference
         let `self`: URL?
-    
     }
 }
 
@@ -341,7 +296,6 @@ extension Build.Relationships.BuildBetaDetail {
     
         /// (Required) The resource type.Value: buildBetaDetails
         let type: String
-    
     }
 }
 
@@ -354,7 +308,6 @@ extension Build.Relationships.BuildBetaDetail {
     
         /// uri-reference
         let `self`: URL?
-    
     }
 }
 
@@ -367,7 +320,6 @@ extension Build.Relationships.IndividualTesters {
     
         /// (Required) The resource type.Value: betaTesters
         let type: String
-    
     }
 }
 
@@ -380,7 +332,6 @@ extension Build.Relationships.IndividualTesters {
     
         /// uri-reference
         let `self`: URL?
-    
     }
 }
 
@@ -393,7 +344,6 @@ extension Build.Relationships.PreReleaseVersion {
     
         /// (Required) The resource type.Value: preReleaseVersions
         let type: String
-    
     }
 }
 
@@ -406,6 +356,5 @@ extension Build.Relationships.PreReleaseVersion {
     
         /// uri-reference
         let `self`: URL?
-    
     }
 }

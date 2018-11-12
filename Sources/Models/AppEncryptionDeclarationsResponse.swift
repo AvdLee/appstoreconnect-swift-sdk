@@ -21,5 +21,4 @@ struct AppEncryptionDeclarationsResponse: Decodable {
 
     /// Paging information.
     let meta: PagingInformation?
-
 }

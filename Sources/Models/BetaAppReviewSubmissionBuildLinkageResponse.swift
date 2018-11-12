@@ -15,10 +15,6 @@ struct BetaAppReviewSubmissionBuildLinkageResponse: Decodable {
 
     /// (Required) Navigational links including the self-link and links to the related data.
     let links: DocumentLinks
-
-}
-
-extension BetaAppReviewSubmissionBuildLinkageResponse {
     
     struct Data: Decodable {
     
@@ -27,6 +23,5 @@ extension BetaAppReviewSubmissionBuildLinkageResponse {
     
         /// (Required) The resource type.Value: builds
         let type: String
-    
     }
 }

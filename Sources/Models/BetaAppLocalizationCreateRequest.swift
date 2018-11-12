@@ -12,10 +12,6 @@ struct BetaAppLocalizationCreateRequest: Decodable {
 
     /// (Required) The resource data.
     let data: BetaAppLocalizationCreateRequest.Data
-
-}
-
-extension BetaAppLocalizationCreateRequest {
     
     struct Data: Decodable {
     
@@ -27,7 +23,6 @@ extension BetaAppLocalizationCreateRequest {
     
         /// (Required) The resource type.Value: betaAppLocalizations
         let type: String
-    
     }
 }
 
@@ -52,17 +47,12 @@ extension BetaAppLocalizationCreateRequest.Data {
     
         /// Your company’s privacy policy. Privacy policies are recommended for all apps that collect user or device-related data, or as otherwise required by law.
         let tvOsPrivacyPolicy: String?
-    
     }
-}
-
-extension BetaAppLocalizationCreateRequest.Data {
     
     struct Relationships: Decodable {
     
         /// BetaAppLocalizationCreateRequest.Data.Relationships.App (Required)
         let app: BetaAppLocalizationCreateRequest.Data.Relationships.App
-    
     }
 }
 
@@ -72,7 +62,6 @@ extension BetaAppLocalizationCreateRequest.Data.Relationships {
     
         /// BetaAppLocalizationCreateRequest.Data.Relationships.App.Data (Required)
         let data: BetaAppLocalizationCreateRequest.Data.Relationships.App.Data
-    
     }
 }
 
@@ -85,6 +74,5 @@ extension BetaAppLocalizationCreateRequest.Data.Relationships.App {
     
         /// (Required) The resource type.Value: apps
         let type: String
-    
     }
 }

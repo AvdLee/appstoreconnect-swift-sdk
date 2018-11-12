@@ -19,10 +19,6 @@ struct BetaGroupResponse: Decodable {
 
     /// (Required) Navigational links that include the self-link.
     let links: DocumentLinks
-
-}
-
-extension BetaGroupResponse {
     
     enum Included: Decodable {
         case app(App)

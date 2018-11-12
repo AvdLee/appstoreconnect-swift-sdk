@@ -13,9 +13,6 @@ struct ErrorResponse: Decodable {
     /// An array of one or more errors.
     let errors: [ErrorResponse.Errors]?
 
-}
-
-extension ErrorResponse {
     /// The details about one error that is returned when an API request is not successful.
     struct Errors: Decodable {
     
@@ -37,23 +34,6 @@ extension ErrorResponse {
         /// One of two possible types of values: source.parameter, provided when a query parameter produced the error, or source.JsonPointer, provided when a problem with the entity produced the error.￼
         ///  Possible types: ErrorResponse.Errors.JsonPointer, ErrorResponse.Errors.Parameter
         let source: Source?
-    
-        enum Source: Decodable {
-            case jsonPointer(String?)
-            case parameter(String?)
-            
-            init(from decoder: Decoder) throws {
-                if let json = try? JsonPointer(from: decoder) {
-                    self = .jsonPointer(json.pointer)
-                } else if let parameter = try? Parameter(from: decoder) {
-                    self = .parameter(parameter.parameter)
-                } else {
-                    throw DecodingError.typeMismatch(
-                        String.self,
-                        DecodingError.Context(codingPath: [], debugDescription: ""))
-                }
-            }
-        }
     }
 }
 
@@ -63,16 +43,29 @@ extension ErrorResponse.Errors {
     
         /// A JSON pointer that indicates the location in the request entity where the error originates.
         let pointer: String?
-    
     }
-}
 
-extension ErrorResponse.Errors {
     /// An object containing the query parameter that produced the error.
     struct Parameter: Decodable {
     
         /// The query parameter that produced the error.
         let parameter: String?
-    
+    }
+
+    enum Source: Decodable {
+        case jsonPointer(String?)
+        case parameter(String?)
+        
+        init(from decoder: Decoder) throws {
+            if let json = try? JsonPointer(from: decoder) {
+                self = .jsonPointer(json.pointer)
+            } else if let parameter = try? Parameter(from: decoder) {
+                self = .parameter(parameter.parameter)
+            } else {
+                throw DecodingError.typeMismatch(
+                    String.self,
+                    DecodingError.Context(codingPath: [], debugDescription: ""))
+            }
+        }
     }
 }

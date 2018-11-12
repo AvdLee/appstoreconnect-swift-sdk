@@ -25,9 +25,6 @@ struct App: Decodable {
     /// (Required) Navigational links that include the self-link.
     let links: ResourceLinks
 
-}
-
-extension App {
     /// Attributes that describe a resource.
     struct Attributes: Decodable {
     
@@ -42,11 +39,7 @@ extension App {
     
         /// A unique ID for your app that is not visible on the App Store.
         let sku: String?
-    
     }
-}
-
-extension App {
     
     struct Relationships: Decodable {
     
@@ -70,7 +63,6 @@ extension App {
     
         /// App.Relationships.BetaAppReviewDetail
         let betaAppReviewDetail: App.Relationships.BetaAppReviewDetail?
-    
     }
 }
 
@@ -86,11 +78,7 @@ extension App.Relationships {
     
         /// PagingInformation
         let meta: PagingInformation?
-    
     }
-}
-
-extension App.Relationships {
     
     struct BetaAppReviewDetail: Decodable {
     
@@ -99,11 +87,7 @@ extension App.Relationships {
     
         /// App.Relationships.BetaAppReviewDetail.Links
         let links: App.Relationships.BetaAppReviewDetail.Links?
-    
     }
-}
-
-extension App.Relationships {
     
     struct BetaGroups: Decodable {
     
@@ -115,11 +99,7 @@ extension App.Relationships {
     
         /// PagingInformation
         let meta: PagingInformation?
-    
     }
-}
-
-extension App.Relationships {
     
     struct BetaLicenseAgreement: Decodable {
     
@@ -128,11 +108,7 @@ extension App.Relationships {
     
         /// App.Relationships.BetaLicenseAgreement.Links
         let links: App.Relationships.BetaLicenseAgreement.Links?
-    
     }
-}
-
-extension App.Relationships {
     
     struct BetaTesters: Decodable {
     
@@ -144,11 +120,7 @@ extension App.Relationships {
     
         /// PagingInformation
         let meta: PagingInformation?
-    
     }
-}
-
-extension App.Relationships {
     
     struct Builds: Decodable {
     
@@ -160,11 +132,7 @@ extension App.Relationships {
     
         /// PagingInformation
         let meta: PagingInformation?
-    
     }
-}
-
-extension App.Relationships {
     
     struct PreReleaseVersions: Decodable {
     
@@ -176,7 +144,6 @@ extension App.Relationships {
     
         /// PagingInformation
         let meta: PagingInformation?
-    
     }
 }
 
@@ -189,11 +156,7 @@ extension App.Relationships.BetaAppLocalizations {
     
         /// (Required) The resource type.Value: betaAppLocalizations
         let type: String
-    
     }
-}
-
-extension App.Relationships.BetaAppLocalizations {
     
     struct Links: Decodable {
     
@@ -202,7 +165,6 @@ extension App.Relationships.BetaAppLocalizations {
     
         /// uri-reference
         let `self`: URL?
-    
     }
 }
 
@@ -215,11 +177,7 @@ extension App.Relationships.BetaAppReviewDetail {
     
         /// (Required) The resource type.Value: betaAppReviewDetails
         let type: String
-    
     }
-}
-
-extension App.Relationships.BetaAppReviewDetail {
     
     struct Links: Decodable {
     
@@ -228,7 +186,6 @@ extension App.Relationships.BetaAppReviewDetail {
     
         /// uri-reference
         let `self`: URL?
-    
     }
 }
 
@@ -241,11 +198,7 @@ extension App.Relationships.BetaGroups {
     
         /// (Required) The resource type.Value: betaGroups
         let type: String
-    
     }
-}
-
-extension App.Relationships.BetaGroups {
     
     struct Links: Decodable {
     
@@ -254,7 +207,6 @@ extension App.Relationships.BetaGroups {
     
         /// uri-reference
         let `self`: URL?
-    
     }
 }
 
@@ -267,11 +219,7 @@ extension App.Relationships.BetaLicenseAgreement {
     
         /// (Required) The resource type.Value: betaLicenseAgreements
         let type: String
-    
     }
-}
-
-extension App.Relationships.BetaLicenseAgreement {
     
     struct Links: Decodable {
     
@@ -280,7 +228,6 @@ extension App.Relationships.BetaLicenseAgreement {
     
         /// uri-reference
         let `self`: URL?
-    
     }
 }
 
@@ -293,11 +240,7 @@ extension App.Relationships.BetaTesters {
     
         /// (Required) The resource type.Value: betaTesters
         let type: String
-    
     }
-}
-
-extension App.Relationships.BetaTesters {
     
     struct Links: Decodable {
     
@@ -306,7 +249,6 @@ extension App.Relationships.BetaTesters {
     
         /// uri-reference
         let `self`: URL?
-    
     }
 }
 
@@ -319,11 +261,7 @@ extension App.Relationships.Builds {
     
         /// (Required) The resource type.Value: builds
         let type: String
-    
     }
-}
-
-extension App.Relationships.Builds {
     
     struct Links: Decodable {
     
@@ -332,7 +270,6 @@ extension App.Relationships.Builds {
     
         /// uri-reference
         let `self`: URL?
-    
     }
 }
 
@@ -345,11 +282,7 @@ extension App.Relationships.PreReleaseVersions {
     
         /// (Required) The resource type.Value: preReleaseVersions
         let type: String
-    
     }
-}
-
-extension App.Relationships.PreReleaseVersions {
     
     struct Links: Decodable {
     
@@ -358,6 +291,5 @@ extension App.Relationships.PreReleaseVersions {
     
         /// uri-reference
         let `self`: URL?
-    
     }
 }

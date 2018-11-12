@@ -22,10 +22,6 @@ struct PreReleaseVersionsResponse: Decodable {
 
     /// Paging information.
     let meta: PagingInformation?
-
-}
-
-extension PreReleaseVersionsResponse {
     
     enum Included: Decodable {
         case build(Build)

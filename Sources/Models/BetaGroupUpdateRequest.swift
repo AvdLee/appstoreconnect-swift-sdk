@@ -12,10 +12,6 @@ struct BetaGroupUpdateRequest: Decodable {
 
     /// (Required) The resource data.
     let data: BetaGroupUpdateRequest.Data
-
-}
-
-extension BetaGroupUpdateRequest {
     
     struct Data: Decodable {
     
@@ -27,7 +23,6 @@ extension BetaGroupUpdateRequest {
     
         /// (Required) The resource type.Value: betaGroups
         let type: String
-    
     }
 }
 
@@ -46,6 +41,5 @@ extension BetaGroupUpdateRequest.Data {
     
         /// A Boolean value that limits the number of testers who can join the beta group using the public link.
         let publicLinkLimitEnabled: Bool?
-    
     }
 }

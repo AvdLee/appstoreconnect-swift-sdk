@@ -22,10 +22,6 @@ struct BetaTestersResponse: Decodable {
 
     /// Paging information.
     let meta: PagingInformation?
-
-}
-
-extension BetaTestersResponse {
     
     enum Included: Decodable {
         case app(App)
@@ -41,7 +37,6 @@ extension BetaTestersResponse {
                 self = .betaGroup(wrapped)
                 return
             }
-            
             
             if let wrapped = try? Build(from: decoder) {
                 self = .build(wrapped)

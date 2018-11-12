@@ -15,10 +15,6 @@ struct BetaBuildLocalizationBuildLinkageResponse: Decodable {
 
     /// (Required) Navigational links that include the self-link.
     let links: DocumentLinks
-
-}
-
-extension BetaBuildLocalizationBuildLinkageResponse {
     
     struct Data: Decodable {
     
@@ -27,6 +23,5 @@ extension BetaBuildLocalizationBuildLinkageResponse {
     
         /// (Required) The resource type.Value: builds
         let type: String
-    
     }
 }

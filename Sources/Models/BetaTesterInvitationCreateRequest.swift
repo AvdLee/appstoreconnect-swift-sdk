@@ -12,10 +12,6 @@ struct BetaTesterInvitationCreateRequest: Decodable {
 
     /// (Required) The resource data.
     let data: BetaTesterInvitationCreateRequest.Data
-
-}
-
-extension BetaTesterInvitationCreateRequest {
     
     struct Data: Decodable {
     
@@ -24,7 +20,6 @@ extension BetaTesterInvitationCreateRequest {
     
         /// (Required) The resource type.Value: betaTesterInvitations
         let type: String
-    
     }
 }
 
@@ -37,7 +32,6 @@ extension BetaTesterInvitationCreateRequest.Data {
     
         /// BetaTesterInvitationCreateRequest.Data.Relationships.BetaTester (Required)
         let betaTester: BetaTesterInvitationCreateRequest.Data.Relationships.BetaTester
-    
     }
 }
 
@@ -47,17 +41,12 @@ extension BetaTesterInvitationCreateRequest.Data.Relationships {
     
         /// BetaTesterInvitationCreateRequest.Data.Relationships.App.Data (Required)
         let data: BetaTesterInvitationCreateRequest.Data.Relationships.App.Data
-    
     }
-}
-
-extension BetaTesterInvitationCreateRequest.Data.Relationships {
     
     struct BetaTester: Decodable {
     
         /// BetaTesterInvitationCreateRequest.Data.Relationships.BetaTester.Data (Required)
         let data: BetaTesterInvitationCreateRequest.Data.Relationships.BetaTester.Data
-    
     }
 }
 
@@ -70,7 +59,6 @@ extension BetaTesterInvitationCreateRequest.Data.Relationships.App {
     
         /// (Required) The resource type.Value: apps
         let type: String
-    
     }
 }
 
@@ -83,6 +71,5 @@ extension BetaTesterInvitationCreateRequest.Data.Relationships.BetaTester {
     
         /// (Required) The resource type.Value: betaTesters
         let type: String
-    
     }
 }

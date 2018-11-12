@@ -21,5 +21,4 @@ struct BetaAppLocalizationsResponse: Decodable {
 
     /// Paging information.
     let meta: PagingInformation?
-
 }

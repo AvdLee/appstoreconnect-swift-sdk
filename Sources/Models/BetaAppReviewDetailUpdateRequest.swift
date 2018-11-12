@@ -12,10 +12,6 @@ struct BetaAppReviewDetailUpdateRequest: Decodable {
 
     /// (Required) The resource data.
     let data: BetaAppReviewDetailUpdateRequest.Data
-
-}
-
-extension BetaAppReviewDetailUpdateRequest {
     
     struct Data: Decodable {
     
@@ -27,7 +23,6 @@ extension BetaAppReviewDetailUpdateRequest {
     
         /// (Required) The resource type.Value: betaAppReviewDetails
         let type: String
-    
     }
 }
 
@@ -58,6 +53,5 @@ extension BetaAppReviewDetailUpdateRequest.Data {
     
         /// Additional information about your app that can help during the review process. Do not include demo account details. Review notes have a maximum of 4,000 characters.
         let notes: String?
-    
     }
 }

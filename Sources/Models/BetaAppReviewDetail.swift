@@ -25,9 +25,6 @@ struct BetaAppReviewDetail: Decodable {
     /// (Required) The resource type.Value: betaAppReviewDetails
     let type: String
 
-}
-
-extension BetaAppReviewDetail {
     /// Attributes that describe a resource.
     struct Attributes: Decodable {
     
@@ -54,17 +51,12 @@ extension BetaAppReviewDetail {
     
         /// Additional information about your app that can help during the review process. Do not include demo account details. Review notes have a maximum of 4,000 characters.
         let notes: String?
-    
     }
-}
-
-extension BetaAppReviewDetail {
     
     struct Relationships: Decodable {
     
         /// BetaAppReviewDetail.Relationships.App
         let app: BetaAppReviewDetail.Relationships.App?
-    
     }
 }
 
@@ -77,7 +69,6 @@ extension BetaAppReviewDetail.Relationships {
     
         /// BetaAppReviewDetail.Relationships.App.Links
         let links: BetaAppReviewDetail.Relationships.App.Links?
-    
     }
 }
 
@@ -90,11 +81,7 @@ extension BetaAppReviewDetail.Relationships.App {
     
         /// (Required) The resource type.Value: apps
         let type: String
-    
     }
-}
-
-extension BetaAppReviewDetail.Relationships.App {
     
     struct Links: Decodable {
     
@@ -103,6 +90,5 @@ extension BetaAppReviewDetail.Relationships.App {
     
         /// uri-reference
         let `self`: URL?
-    
     }
 }

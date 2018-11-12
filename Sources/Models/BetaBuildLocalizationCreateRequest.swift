@@ -12,10 +12,6 @@ struct BetaBuildLocalizationCreateRequest: Decodable {
 
     /// (Required) The resource data.
     let data: BetaBuildLocalizationCreateRequest.Data
-
-}
-
-extension BetaBuildLocalizationCreateRequest {
     
     struct Data: Decodable {
     
@@ -27,7 +23,6 @@ extension BetaBuildLocalizationCreateRequest {
     
         /// (Required) The resource type.Value: betaBuildLocalizations
         let type: String
-    
     }
 }
 
@@ -40,17 +35,12 @@ extension BetaBuildLocalizationCreateRequest.Data {
     
         /// A field that describes changes and additions to a build and indicates features you would like your users to test.
         let whatsNew: String?
-    
     }
-}
-
-extension BetaBuildLocalizationCreateRequest.Data {
     
     struct Relationships: Decodable {
     
         /// BetaBuildLocalizationCreateRequest.Data.Relationships.Build (Required)
         let build: BetaBuildLocalizationCreateRequest.Data.Relationships.Build
-    
     }
 }
 
@@ -60,7 +50,6 @@ extension BetaBuildLocalizationCreateRequest.Data.Relationships {
     
         /// BetaBuildLocalizationCreateRequest.Data.Relationships.Build.Data (Required)
         let data: BetaBuildLocalizationCreateRequest.Data.Relationships.Build.Data
-    
     }
 }
 
@@ -73,6 +62,5 @@ extension BetaBuildLocalizationCreateRequest.Data.Relationships.Build {
     
         /// (Required) The resource type.Value: builds
         let type: String
-    
     }
 }

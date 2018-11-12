@@ -15,10 +15,6 @@ struct AppBetaLicenseAgreementLinkageResponse: Decodable {
 
     /// (Required) Navigational links including the self-link and links to the related data.
     let links: DocumentLinks
-
-}
-
-extension AppBetaLicenseAgreementLinkageResponse {
     
     struct Data: Decodable {
     
@@ -27,6 +23,5 @@ extension AppBetaLicenseAgreementLinkageResponse {
     
         /// (Required) The resource type.Value: betaLicenseAgreements
         let type: String
-    
     }
 }

@@ -18,10 +18,6 @@ struct UserInvitationVisibleAppsLinkagesResponse: Decodable {
 
     /// Paging information.
     let meta: PagingInformation?
-
-}
-
-extension UserInvitationVisibleAppsLinkagesResponse {
     
     struct Data: Decodable {
     
@@ -30,6 +26,5 @@ extension UserInvitationVisibleAppsLinkagesResponse {
     
         /// (Required) The resource type.Value: apps
         let type: String
-    
     }
 }

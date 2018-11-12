@@ -12,10 +12,6 @@ struct BuildAppEncryptionDeclarationLinkageRequest: Decodable {
 
     /// (Required) The types and IDs of related resources.
     let data: BuildAppEncryptionDeclarationLinkageRequest.Data
-
-}
-
-extension BuildAppEncryptionDeclarationLinkageRequest {
     
     struct Data: Decodable {
     
@@ -24,6 +20,5 @@ extension BuildAppEncryptionDeclarationLinkageRequest {
     
         /// (Required) The resource type.Value: appEncryptionDeclarations
         let type: String
-    
     }
 }

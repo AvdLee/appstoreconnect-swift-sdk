@@ -12,10 +12,6 @@ struct BuildBetaNotificationCreateRequest: Decodable {
 
     /// (Required) The resource data.
     let data: BuildBetaNotificationCreateRequest.Data
-
-}
-
-extension BuildBetaNotificationCreateRequest {
     
     struct Data: Decodable {
     
@@ -24,7 +20,6 @@ extension BuildBetaNotificationCreateRequest {
     
         /// (Required) The resource type.Value: buildBetaNotifications
         let type: String
-    
     }
 }
 
@@ -34,7 +29,6 @@ extension BuildBetaNotificationCreateRequest.Data {
     
         /// BuildBetaNotificationCreateRequest.Data.Relationships.Build (Required)
         let build: BuildBetaNotificationCreateRequest.Data.Relationships.Build
-    
     }
 }
 
@@ -44,7 +38,6 @@ extension BuildBetaNotificationCreateRequest.Data.Relationships {
     
         /// BuildBetaNotificationCreateRequest.Data.Relationships.Build.Data (Required)
         let data: BuildBetaNotificationCreateRequest.Data.Relationships.Build.Data
-    
     }
 }
 
@@ -57,6 +50,5 @@ extension BuildBetaNotificationCreateRequest.Data.Relationships.Build {
     
         /// (Required) The types and IDs of the related data to update.Value: builds
         let type: String
-    
     }
 }

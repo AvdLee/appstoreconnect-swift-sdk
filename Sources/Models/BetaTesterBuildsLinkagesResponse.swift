@@ -18,10 +18,6 @@ struct BetaTesterBuildsLinkagesResponse: Decodable {
 
     /// Paging information.
     let meta: PagingInformation?
-
-}
-
-extension BetaTesterBuildsLinkagesResponse {
     
     struct Data: Decodable {
     
@@ -30,6 +26,5 @@ extension BetaTesterBuildsLinkagesResponse {
     
         /// (Required) The resource type.Value: builds
         let type: String
-    
     }
 }

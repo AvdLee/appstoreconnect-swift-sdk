@@ -25,9 +25,6 @@ struct AppEncryptionDeclaration: Decodable {
     /// (Required) Navigational links that include the self-link.
     let links: ResourceLinks
 
-}
-
-extension AppEncryptionDeclaration {
     /// Attributes that describe a resource.
     struct Attributes: Decodable {
     
@@ -66,11 +63,7 @@ extension AppEncryptionDeclaration {
     
         /// The date and time you submitted your declaration.
         let uploadedDate: Date?
-    
     }
-}
-
-extension AppEncryptionDeclaration {
     
     struct Relationships: Decodable {
     
@@ -79,7 +72,6 @@ extension AppEncryptionDeclaration {
     
         /// AppEncryptionDeclaration.Relationships.Builds
         let builds: AppEncryptionDeclaration.Relationships.Builds?
-    
     }
 }
 
@@ -92,11 +84,7 @@ extension AppEncryptionDeclaration.Relationships {
     
         /// AppEncryptionDeclaration.Relationships.App.Links
         let links: AppEncryptionDeclaration.Relationships.App.Links?
-    
     }
-}
-
-extension AppEncryptionDeclaration.Relationships {
     
     struct Builds: Decodable {
     
@@ -108,7 +96,6 @@ extension AppEncryptionDeclaration.Relationships {
     
         /// PagingInformation
         let meta: PagingInformation?
-    
     }
 }
 
@@ -121,11 +108,7 @@ extension AppEncryptionDeclaration.Relationships.App {
     
         /// (Required) The resource type.Value: apps
         let type: String
-    
     }
-}
-
-extension AppEncryptionDeclaration.Relationships.App {
     
     struct Links: Decodable {
     
@@ -134,7 +117,6 @@ extension AppEncryptionDeclaration.Relationships.App {
     
         /// uri-reference
         let `self`: URL?
-    
     }
 }
 
@@ -147,11 +129,7 @@ extension AppEncryptionDeclaration.Relationships.Builds {
     
         /// (Required) The resource type.Value: builds
         let type: String
-    
     }
-}
-
-extension AppEncryptionDeclaration.Relationships.Builds {
     
     struct Links: Decodable {
     
@@ -160,6 +138,5 @@ extension AppEncryptionDeclaration.Relationships.Builds {
     
         /// uri-reference
         let `self`: URL?
-    
     }
 }

@@ -18,5 +18,4 @@ struct ImageAsset: Decodable {
 
     /// integer
     let width: Int?
-
 }

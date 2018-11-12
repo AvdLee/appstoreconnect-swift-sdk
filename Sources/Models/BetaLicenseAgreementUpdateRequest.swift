@@ -12,10 +12,6 @@ struct BetaLicenseAgreementUpdateRequest: Decodable {
 
     /// (Required) The resource data.
     let data: BetaLicenseAgreementUpdateRequest.Data
-
-}
-
-extension BetaLicenseAgreementUpdateRequest {
     
     struct Data: Decodable {
     
@@ -27,7 +23,6 @@ extension BetaLicenseAgreementUpdateRequest {
     
         /// (Required) The resource type.Value: betaLicenseAgreements
         let type: String
-    
     }
 }
 
@@ -37,6 +32,5 @@ extension BetaLicenseAgreementUpdateRequest.Data {
     
         /// The license agreement text for your beta app that displays to users.
         let agreementText: String?
-    
     }
 }

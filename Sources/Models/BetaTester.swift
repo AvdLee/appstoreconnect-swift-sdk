@@ -25,9 +25,6 @@ struct BetaTester: Decodable {
     /// (Required) Navigational links that include the self-link.
     let links: ResourceLinks
 
-}
-
-extension BetaTester {
     /// Attributes that describe a resource.
     struct Attributes: Decodable {
     
@@ -42,11 +39,7 @@ extension BetaTester {
     
         /// The beta tester's last name.
         let lastName: String?
-    
     }
-}
-
-extension BetaTester {
     
     struct Relationships: Decodable {
     
@@ -58,7 +51,6 @@ extension BetaTester {
     
         /// BetaTester.Relationships.Builds
         let builds: BetaTester.Relationships.Builds?
-    
     }
 }
 
@@ -74,11 +66,7 @@ extension BetaTester.Relationships {
     
         /// PagingInformation
         let meta: PagingInformation?
-    
     }
-}
-
-extension BetaTester.Relationships {
     
     struct BetaGroups: Decodable {
     
@@ -90,11 +78,7 @@ extension BetaTester.Relationships {
     
         /// PagingInformation
         let meta: PagingInformation?
-    
     }
-}
-
-extension BetaTester.Relationships {
     
     struct Builds: Decodable {
     
@@ -106,7 +90,6 @@ extension BetaTester.Relationships {
     
         /// PagingInformation
         let meta: PagingInformation?
-    
     }
 }
 
@@ -119,11 +102,7 @@ extension BetaTester.Relationships.Apps {
     
         /// string (Required)Value: apps
         let type: String
-    
     }
-}
-
-extension BetaTester.Relationships.Apps {
     
     struct Links: Decodable {
     
@@ -132,7 +111,6 @@ extension BetaTester.Relationships.Apps {
     
         /// uri-reference
         let `self`: URL?
-    
     }
 }
 
@@ -145,11 +123,7 @@ extension BetaTester.Relationships.BetaGroups {
     
         /// string (Required)Value: betaGroups
         let type: String
-    
     }
-}
-
-extension BetaTester.Relationships.BetaGroups {
     
     struct Links: Decodable {
     
@@ -158,7 +132,6 @@ extension BetaTester.Relationships.BetaGroups {
     
         /// uri-reference
         let `self`: URL?
-    
     }
 }
 
@@ -171,11 +144,7 @@ extension BetaTester.Relationships.Builds {
     
         /// string (Required)Value: builds
         let type: String
-    
     }
-}
-
-extension BetaTester.Relationships.Builds {
     
     struct Links: Decodable {
     
@@ -184,6 +153,5 @@ extension BetaTester.Relationships.Builds {
     
         /// uri-reference
         let `self`: URL?
-    
     }
 }

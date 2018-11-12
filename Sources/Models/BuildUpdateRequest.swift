@@ -12,10 +12,6 @@ struct BuildUpdateRequest: Decodable {
 
     /// (Required) The resource data.
     let data: BuildUpdateRequest.Data
-
-}
-
-extension BuildUpdateRequest {
     
     struct Data: Decodable {
     
@@ -30,7 +26,6 @@ extension BuildUpdateRequest {
     
         /// (Required) The resource type.Value: builds
         let type: String
-    
     }
 }
 
@@ -43,17 +38,12 @@ extension BuildUpdateRequest.Data {
     
         /// A Boolean value that indicates whether the build uses non-exempt encryption.
         let usesNonExemptEncryption: Bool?
-    
     }
-}
-
-extension BuildUpdateRequest.Data {
     
     struct Relationships: Decodable {
     
         /// BuildUpdateRequest.Data.Relationships.AppEncryptionDeclaration
         let appEncryptionDeclaration: BuildUpdateRequest.Data.Relationships.AppEncryptionDeclaration?
-    
     }
 }
 
@@ -63,7 +53,6 @@ extension BuildUpdateRequest.Data.Relationships {
     
         /// BuildUpdateRequest.Data.Relationships.AppEncryptionDeclaration.Data
         let data: BuildUpdateRequest.Data.Relationships.AppEncryptionDeclaration.Data?
-    
     }
 }
 
@@ -76,6 +65,5 @@ extension BuildUpdateRequest.Data.Relationships.AppEncryptionDeclaration {
     
         /// (Required) The resource type.Value: appEncryptionDeclarations
         let type: String
-    
     }
 }

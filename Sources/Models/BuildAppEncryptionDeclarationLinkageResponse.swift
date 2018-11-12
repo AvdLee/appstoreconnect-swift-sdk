@@ -15,10 +15,6 @@ struct BuildAppEncryptionDeclarationLinkageResponse: Decodable {
 
     /// (Required) Navigational links including the self-link and links to the related data.
     let links: DocumentLinks
-
-}
-
-extension BuildAppEncryptionDeclarationLinkageResponse {
     
     struct Data: Decodable {
     
@@ -27,6 +23,5 @@ extension BuildAppEncryptionDeclarationLinkageResponse {
     
         /// (Required) The resource type.Value: appEncryptionDeclarations
         let type: String
-    
     }
 }

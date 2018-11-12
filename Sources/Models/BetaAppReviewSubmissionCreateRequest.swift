@@ -12,10 +12,6 @@ struct BetaAppReviewSubmissionCreateRequest: Decodable {
 
     /// (Required) The resource data.
     let data: BetaAppReviewSubmissionCreateRequest.Data
-
-}
-
-extension BetaAppReviewSubmissionCreateRequest {
     
     struct Data: Decodable {
     
@@ -24,7 +20,6 @@ extension BetaAppReviewSubmissionCreateRequest {
     
         /// (Required) The resource type.Value: betaAppReviewSubmissions
         let type: String
-    
     }
 }
 
@@ -34,7 +29,6 @@ extension BetaAppReviewSubmissionCreateRequest.Data {
     
         /// BetaAppReviewSubmissionCreateRequest.Data.Relationships.Build (Required)
         let build: BetaAppReviewSubmissionCreateRequest.Data.Relationships.Build
-    
     }
 }
 
@@ -44,7 +38,6 @@ extension BetaAppReviewSubmissionCreateRequest.Data.Relationships {
     
         /// BetaAppReviewSubmissionCreateRequest.Data.Relationships.Build.Data (Required)
         let data: BetaAppReviewSubmissionCreateRequest.Data.Relationships.Build.Data
-    
     }
 }
 
@@ -57,6 +50,5 @@ extension BetaAppReviewSubmissionCreateRequest.Data.Relationships.Build {
     
         /// (Required) The resource type.Value: builds
         let type: String
-    
     }
 }

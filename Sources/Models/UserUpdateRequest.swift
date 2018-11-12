@@ -12,10 +12,6 @@ struct UserUpdateRequest: Decodable {
 
     /// (Required) The resource data.
     let data: UserUpdateRequest.Data
-
-}
-
-extension UserUpdateRequest {
     
     struct Data: Decodable {
     
@@ -30,7 +26,6 @@ extension UserUpdateRequest {
     
         /// (Required) The resource type.Value: users
         let type: String
-    
     }
 }
 
@@ -46,17 +41,12 @@ extension UserUpdateRequest.Data {
     
         /// Assigned user roles that determine the user's access to sections of App Store Connect and tasks they can perform.
         let roles: [UserRole]?
-    
     }
-}
-
-extension UserUpdateRequest.Data {
     
     struct Relationships: Decodable {
     
         /// UserUpdateRequest.Data.Relationships.VisibleApps
         let visibleApps: UserUpdateRequest.Data.Relationships.VisibleApps?
-    
     }
 }
 
@@ -66,7 +56,6 @@ extension UserUpdateRequest.Data.Relationships {
     
         /// [UserUpdateRequest.Data.Relationships.VisibleApps.Data]
         let data: [UserUpdateRequest.Data.Relationships.VisibleApps.Data]?
-    
     }
 }
 
@@ -79,6 +68,5 @@ extension UserUpdateRequest.Data.Relationships.VisibleApps {
     
         /// (Required) The resource type.Value: apps
         let type: String
-    
     }
 }

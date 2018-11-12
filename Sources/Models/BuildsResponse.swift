@@ -22,10 +22,6 @@ struct BuildsResponse: Decodable {
 
     /// Paging information.
     let meta: PagingInformation?
-
-}
-
-extension BuildsResponse {
     
     enum Included: Decodable {
         case app(App)

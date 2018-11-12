@@ -18,5 +18,4 @@ struct BuildBetaNotification: Decodable {
 
     /// (Required) The resource type.Value: buildBetaNotifications
     let type: String
-
 }

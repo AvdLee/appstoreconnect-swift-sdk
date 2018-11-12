@@ -21,5 +21,4 @@ struct UsersResponse: Decodable {
 
     /// Paging information.
     let meta: PagingInformation?
-
 }

@@ -12,10 +12,6 @@ struct BetaGroupCreateRequest: Decodable {
 
     /// (Required) The resource data.
     let data: BetaGroupCreateRequest.Data
-
-}
-
-extension BetaGroupCreateRequest {
     
     struct Data: Decodable {
     
@@ -27,7 +23,6 @@ extension BetaGroupCreateRequest {
     
         /// (Required) The resource type.Value: betaGroups
         let type: String
-    
     }
 }
 
@@ -46,11 +41,7 @@ extension BetaGroupCreateRequest.Data {
     
         /// A Boolean value that limits the number of testers who can join the beta group using the public link.
         let publicLinkLimitEnabled: Bool?
-    
     }
-}
-
-extension BetaGroupCreateRequest.Data {
     
     struct Relationships: Decodable {
     
@@ -62,7 +53,6 @@ extension BetaGroupCreateRequest.Data {
     
         /// BetaGroupCreateRequest.Data.Relationships.Builds
         let builds: BetaGroupCreateRequest.Data.Relationships.Builds?
-    
     }
 }
 
@@ -72,27 +62,18 @@ extension BetaGroupCreateRequest.Data.Relationships {
     
         /// BetaGroupCreateRequest.Data.Relationships.App.Data (Required)
         let data: BetaGroupCreateRequest.Data.Relationships.App.Data
-    
     }
-}
-
-extension BetaGroupCreateRequest.Data.Relationships {
     
     struct BetaTesters: Decodable {
     
         /// [BetaGroupCreateRequest.Data.Relationships.BetaTesters.Data]
         let data: [BetaGroupCreateRequest.Data.Relationships.BetaTesters.Data]?
-    
     }
-}
-
-extension BetaGroupCreateRequest.Data.Relationships {
     
     struct Builds: Decodable {
     
         /// [BetaGroupCreateRequest.Data.Relationships.Builds.Data]
         let data: [BetaGroupCreateRequest.Data.Relationships.Builds.Data]?
-    
     }
 }
 
@@ -105,7 +86,6 @@ extension BetaGroupCreateRequest.Data.Relationships.App {
     
         /// (Required) The resource type.Value: apps
         let type: String
-    
     }
 }
 
@@ -118,7 +98,6 @@ extension BetaGroupCreateRequest.Data.Relationships.BetaTesters {
     
         /// (Required) The resource type.Value: betaTesters
         let type: String
-    
     }
 }
 
@@ -131,6 +110,5 @@ extension BetaGroupCreateRequest.Data.Relationships.Builds {
     
         /// (Required) The resource type.Value: builds
         let type: String
-    
     }
 }

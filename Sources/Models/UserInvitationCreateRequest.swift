@@ -12,10 +12,6 @@ struct UserInvitationCreateRequest: Decodable {
 
     /// (Required) The resource data.
     let data: UserInvitationCreateRequest.Data
-
-}
-
-extension UserInvitationCreateRequest {
     
     struct Data: Decodable {
     
@@ -27,7 +23,6 @@ extension UserInvitationCreateRequest {
     
         /// (Required) The resource type.Value: userInvitations
         let type: String
-    
     }
 }
 
@@ -52,17 +47,12 @@ extension UserInvitationCreateRequest.Data {
     
         /// (Required) Assigned user roles that determine the user's access to sections of App Store Connect and tasks they can perform.
         let roles: [UserRole]
-    
     }
-}
-
-extension UserInvitationCreateRequest.Data {
     
     struct Relationships: Decodable {
     
         /// UserInvitationCreateRequest.Data.Relationships.VisibleApps
         let visibleApps: UserInvitationCreateRequest.Data.Relationships.VisibleApps?
-    
     }
 }
 
@@ -72,7 +62,6 @@ extension UserInvitationCreateRequest.Data.Relationships {
     
         /// [UserInvitationCreateRequest.Data.Relationships.VisibleApps.Data]
         let data: [UserInvitationCreateRequest.Data.Relationships.VisibleApps.Data]?
-    
     }
 }
 
@@ -85,6 +74,5 @@ extension UserInvitationCreateRequest.Data.Relationships.VisibleApps {
     
         /// (Required) The resource type.Value: apps
         let type: String
-    
     }
 }

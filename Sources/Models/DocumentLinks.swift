@@ -12,5 +12,4 @@ struct DocumentLinks: Decodable {
 
     /// (Required) The link that produced the current document.
     let `self`: URL
-
 }

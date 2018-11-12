@@ -21,5 +21,4 @@ struct UserInvitationsResponse: Decodable {
 
     /// Paging information.
     let meta: PagingInformation?
-
 }

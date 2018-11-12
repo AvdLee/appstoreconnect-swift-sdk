@@ -12,5 +12,4 @@ struct ResourceLinks: Decodable {
 
     /// (Required) The link to the resource.
     let `self`: URL
-
 }

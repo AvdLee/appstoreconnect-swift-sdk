@@ -25,9 +25,6 @@ struct UserInvitation: Decodable {
     /// (Required) Navigational links that include the self-link.
     let links: ResourceLinks
 
-}
-
-extension UserInvitation {
     /// Attributes that describe a resource.
     struct Attributes: Decodable {
     
@@ -51,17 +48,12 @@ extension UserInvitation {
     
         /// A Boolean value that indicates whether a user has access to all apps available to the team.
         let allAppsVisible: Bool?
-    
     }
-}
-
-extension UserInvitation {
     
     struct Relationships: Decodable {
     
         /// UserInvitation.Relationships.VisibleApps
         let visibleApps: UserInvitation.Relationships.VisibleApps?
-    
     }
 }
 
@@ -77,7 +69,6 @@ extension UserInvitation.Relationships {
     
         /// PagingInformation
         let meta: PagingInformation?
-    
     }
 }
 
@@ -90,11 +81,7 @@ extension UserInvitation.Relationships.VisibleApps {
     
         /// (Required) The resource type.Value: apps
         let type: String
-    
     }
-}
-
-extension UserInvitation.Relationships.VisibleApps {
     
     struct Links: Decodable {
     
@@ -103,6 +90,5 @@ extension UserInvitation.Relationships.VisibleApps {
     
         /// uri-reference
         let `self`: URL?
-    
     }
 }
