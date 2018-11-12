@@ -12,6 +12,7 @@ The Swift SDK to work with the App Store Connect API from Apple.
 ## Included in this SDK
 - [x] Configuration with API Key
 - [x] APIProver with endpoints structure
+- [x] Add models for all endpoints
 - [ ] TestFlight API implementation
 - [ ] Get started section in the readme
 - [ ] Users and Roles implementation
