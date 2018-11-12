@@ -12,7 +12,122 @@
 		10B26499E353C5EFEDF2B35A962A7B5F /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DB9F66ED7A250BB1AE2875F8D38C7398 /* Foundation.framework */; };
 		1B34980818A99D7198C4A7DF8D1B074F /* AppStoreConnect-Swift-SDK-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 78AE25268A4D4A7CBD82BF5BC2036546 /* AppStoreConnect-Swift-SDK-dummy.m */; };
 		1FC3FD39157C2FFFF3869A1300730086 /* SessionDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 195D73DD9EF275A3C56569E2B1CA8026 /* SessionDelegate.swift */; };
-		2480AB691582D4F81F8B6516033B64D2 /* Models.swift in Sources */ = {isa = PBXBuildFile; fileRef = 784E3BECA044E9FBF16058EE7A01D708 /* Models.swift */; };
+		31DE05F421999FC4007D55EB /* BuildBuildBetaDetailLinkageResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31DE058021999FC4007D55EB /* BuildBuildBetaDetailLinkageResponse.swift */; };
+		31DE05F521999FC4007D55EB /* BetaGroupBuildsLinkagesRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31DE058121999FC4007D55EB /* BetaGroupBuildsLinkagesRequest.swift */; };
+		31DE05F621999FC4007D55EB /* BetaTesterInvitation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31DE058221999FC4007D55EB /* BetaTesterInvitation.swift */; };
+		31DE05F721999FC4007D55EB /* BetaTesterBuildsLinkagesRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31DE058321999FC4007D55EB /* BetaTesterBuildsLinkagesRequest.swift */; };
+		31DE05F821999FC4007D55EB /* BuildIndividualTestersLinkagesRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31DE058421999FC4007D55EB /* BuildIndividualTestersLinkagesRequest.swift */; };
+		31DE05F921999FC4007D55EB /* InternalBetaState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31DE058521999FC4007D55EB /* InternalBetaState.swift */; };
+		31DE05FA21999FC4007D55EB /* AppResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31DE058621999FC4007D55EB /* AppResponse.swift */; };
+		31DE05FB21999FC4007D55EB /* BetaGroupCreateRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31DE058721999FC4007D55EB /* BetaGroupCreateRequest.swift */; };
+		31DE05FC21999FC4007D55EB /* BuildBetaBuildLocalizationsLinkagesResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31DE058821999FC4007D55EB /* BuildBetaBuildLocalizationsLinkagesResponse.swift */; };
+		31DE05FD21999FC4007D55EB /* BuildBetaGroupsLinkagesRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31DE058921999FC4007D55EB /* BuildBetaGroupsLinkagesRequest.swift */; };
+		31DE05FE21999FC4007D55EB /* PreReleaseVersionsResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31DE058A21999FC4007D55EB /* PreReleaseVersionsResponse.swift */; };
+		31DE05FF21999FC4007D55EB /* BuildResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31DE058B21999FC4007D55EB /* BuildResponse.swift */; };
+		31DE060021999FC4007D55EB /* UserInvitationVisibleAppsLinkagesResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31DE058C21999FC4007D55EB /* UserInvitationVisibleAppsLinkagesResponse.swift */; };
+		31DE060121999FC4007D55EB /* AppsResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31DE058D21999FC4007D55EB /* AppsResponse.swift */; };
+		31DE060221999FC4007D55EB /* BetaGroupBuildsLinkagesResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31DE058E21999FC4007D55EB /* BetaGroupBuildsLinkagesResponse.swift */; };
+		31DE060321999FC4007D55EB /* BetaAppReviewDetailAppLinkageResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31DE058F21999FC4007D55EB /* BetaAppReviewDetailAppLinkageResponse.swift */; };
+		31DE060421999FC4007D55EB /* BuildBetaNotification.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31DE059021999FC4007D55EB /* BuildBetaNotification.swift */; };
+		31DE060521999FC4007D55EB /* UserUpdateRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31DE059121999FC4007D55EB /* UserUpdateRequest.swift */; };
+		31DE060621999FC4007D55EB /* AppEncryptionDeclarationState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31DE059221999FC4007D55EB /* AppEncryptionDeclarationState.swift */; };
+		31DE060721999FC4007D55EB /* AppBuildsLinkagesResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31DE059321999FC4007D55EB /* AppBuildsLinkagesResponse.swift */; };
+		31DE060821999FC4007D55EB /* UserVisibleAppsLinkagesRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31DE059421999FC4007D55EB /* UserVisibleAppsLinkagesRequest.swift */; };
+		31DE060921999FC4007D55EB /* PrereleaseVersionAppLinkageResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31DE059521999FC4007D55EB /* PrereleaseVersionAppLinkageResponse.swift */; };
+		31DE060A21999FC4007D55EB /* PrereleaseVersionResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31DE059621999FC4007D55EB /* PrereleaseVersionResponse.swift */; };
+		31DE060B21999FC4007D55EB /* AppEncryptionDeclarationAppLinkageResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31DE059721999FC4007D55EB /* AppEncryptionDeclarationAppLinkageResponse.swift */; };
+		31DE060C21999FC4007D55EB /* BuildUpdateRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31DE059821999FC4007D55EB /* BuildUpdateRequest.swift */; };
+		31DE060D21999FC4007D55EB /* BetaAppReviewSubmissionBuildLinkageResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31DE059921999FC4007D55EB /* BetaAppReviewSubmissionBuildLinkageResponse.swift */; };
+		31DE060E21999FC4007D55EB /* BuildBetaDetailResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31DE059A21999FC4007D55EB /* BuildBetaDetailResponse.swift */; };
+		31DE060F21999FC4007D55EB /* UserInvitationsResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31DE059B21999FC4007D55EB /* UserInvitationsResponse.swift */; };
+		31DE061021999FC4007D55EB /* BetaGroupBetaTestersLinkagesResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31DE059C21999FC4007D55EB /* BetaGroupBetaTestersLinkagesResponse.swift */; };
+		31DE061121999FC4007D55EB /* BetaGroupUpdateRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31DE059D21999FC4007D55EB /* BetaGroupUpdateRequest.swift */; };
+		31DE061221999FC4007D55EB /* BuildBetaNotificationCreateRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31DE059E21999FC4007D55EB /* BuildBetaNotificationCreateRequest.swift */; };
+		31DE061321999FC4007D55EB /* AppEncryptionDeclaration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31DE059F21999FC4007D55EB /* AppEncryptionDeclaration.swift */; };
+		31DE061421999FC4007D55EB /* AppBetaGroupsLinkagesResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31DE05A021999FC4007D55EB /* AppBetaGroupsLinkagesResponse.swift */; };
+		31DE061521999FC4007D55EB /* BetaTesterCreateRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31DE05A121999FC4007D55EB /* BetaTesterCreateRequest.swift */; };
+		31DE061621999FC4007D55EB /* UserInvitation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31DE05A221999FC4007D55EB /* UserInvitation.swift */; };
+		31DE061721999FC4007D55EB /* AppBetaAppReviewDetailLinkageResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31DE05A321999FC4007D55EB /* AppBetaAppReviewDetailLinkageResponse.swift */; };
+		31DE061821999FC4007D55EB /* BuildAppEncryptionDeclarationLinkageResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31DE05A421999FC4007D55EB /* BuildAppEncryptionDeclarationLinkageResponse.swift */; };
+		31DE061921999FC4007D55EB /* BuildsResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31DE05A521999FC4007D55EB /* BuildsResponse.swift */; };
+		31DE061A21999FC4007D55EB /* BuildBetaAppReviewSubmissionLinkageResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31DE05A621999FC4007D55EB /* BuildBetaAppReviewSubmissionLinkageResponse.swift */; };
+		31DE061B21999FC4007D55EB /* BetaGroupsResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31DE05A721999FC4007D55EB /* BetaGroupsResponse.swift */; };
+		31DE061C21999FC4007D55EB /* BetaTesterBetaGroupsLinkagesRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31DE05A821999FC4007D55EB /* BetaTesterBetaGroupsLinkagesRequest.swift */; };
+		31DE061D21999FC4007D55EB /* BetaTestersResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31DE05A921999FC4007D55EB /* BetaTestersResponse.swift */; };
+		31DE061E21999FC4007D55EB /* AppEncryptionDeclarationsResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31DE05AA21999FC4007D55EB /* AppEncryptionDeclarationsResponse.swift */; };
+		31DE061F21999FC4007D55EB /* BuildBetaNotificationResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31DE05AB21999FC4007D55EB /* BuildBetaNotificationResponse.swift */; };
+		31DE062021999FC4007D55EB /* BetaLicenseAgreementAppLinkageResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31DE05AC21999FC4007D55EB /* BetaLicenseAgreementAppLinkageResponse.swift */; };
+		31DE062121999FC4007D55EB /* BetaLicenseAgreementsResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31DE05AD21999FC4007D55EB /* BetaLicenseAgreementsResponse.swift */; };
+		31DE062221999FC5007D55EB /* BetaBuildLocalizationResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31DE05AE21999FC4007D55EB /* BetaBuildLocalizationResponse.swift */; };
+		31DE062321999FC5007D55EB /* BetaAppLocalizationAppLinkageResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31DE05AF21999FC4007D55EB /* BetaAppLocalizationAppLinkageResponse.swift */; };
+		31DE062421999FC5007D55EB /* BetaBuildLocalizationBuildLinkageResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31DE05B021999FC4007D55EB /* BetaBuildLocalizationBuildLinkageResponse.swift */; };
+		31DE062521999FC5007D55EB /* BetaTesterInvitationCreateRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31DE05B121999FC4007D55EB /* BetaTesterInvitationCreateRequest.swift */; };
+		31DE062621999FC5007D55EB /* BetaBuildLocalizationCreateRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31DE05B221999FC4007D55EB /* BetaBuildLocalizationCreateRequest.swift */; };
+		31DE062721999FC5007D55EB /* UserRole.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31DE05B321999FC4007D55EB /* UserRole.swift */; };
+		31DE062821999FC5007D55EB /* AppEncryptionDeclarationResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31DE05B421999FC4007D55EB /* AppEncryptionDeclarationResponse.swift */; };
+		31DE062921999FC5007D55EB /* BetaAppReviewSubmissionResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31DE05B521999FC4007D55EB /* BetaAppReviewSubmissionResponse.swift */; };
+		31DE062A21999FC5007D55EB /* DocumentLinks.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31DE05B621999FC4007D55EB /* DocumentLinks.swift */; };
+		31DE062B21999FC5007D55EB /* BetaLicenseAgreementResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31DE05B721999FC4007D55EB /* BetaLicenseAgreementResponse.swift */; };
+		31DE062C21999FC5007D55EB /* BetaGroupBetaTestersLinkagesRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31DE05B821999FC4007D55EB /* BetaGroupBetaTestersLinkagesRequest.swift */; };
+		31DE062D21999FC5007D55EB /* BuildBetaDetail.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31DE05B921999FC4007D55EB /* BuildBetaDetail.swift */; };
+		31DE062E21999FC5007D55EB /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31DE05BA21999FC4007D55EB /* User.swift */; };
+		31DE062F21999FC5007D55EB /* BetaTesterInvitationResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31DE05BB21999FC4007D55EB /* BetaTesterInvitationResponse.swift */; };
+		31DE063021999FC5007D55EB /* BetaBuildLocalizationUpdateRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31DE05BC21999FC4007D55EB /* BetaBuildLocalizationUpdateRequest.swift */; };
+		31DE063121999FC5007D55EB /* BetaTesterAppsLinkagesRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31DE05BD21999FC4007D55EB /* BetaTesterAppsLinkagesRequest.swift */; };
+		31DE063221999FC5007D55EB /* PrereleaseVersion.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31DE05BE21999FC4007D55EB /* PrereleaseVersion.swift */; };
+		31DE063321999FC5007D55EB /* ImageAsset.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31DE05BF21999FC4007D55EB /* ImageAsset.swift */; };
+		31DE063421999FC5007D55EB /* BetaGroupResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31DE05C021999FC4007D55EB /* BetaGroupResponse.swift */; };
+		31DE063521999FC5007D55EB /* AppBetaAppLocalizationsLinkagesResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31DE05C121999FC4007D55EB /* AppBetaAppLocalizationsLinkagesResponse.swift */; };
+		31DE063621999FC5007D55EB /* BetaTesterBetaGroupsLinkagesResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31DE05C221999FC4007D55EB /* BetaTesterBetaGroupsLinkagesResponse.swift */; };
+		31DE063721999FC5007D55EB /* BetaAppLocalizationCreateRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31DE05C321999FC4007D55EB /* BetaAppLocalizationCreateRequest.swift */; };
+		31DE063821999FC5007D55EB /* PagingInformation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31DE05C421999FC4007D55EB /* PagingInformation.swift */; };
+		31DE063921999FC5007D55EB /* BetaBuildLocalizationsResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31DE05C521999FC4007D55EB /* BetaBuildLocalizationsResponse.swift */; };
+		31DE063A21999FC5007D55EB /* BuildBetaDetailUpdateRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31DE05C621999FC4007D55EB /* BuildBetaDetailUpdateRequest.swift */; };
+		31DE063B21999FC5007D55EB /* BetaAppReviewDetailResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31DE05C721999FC4007D55EB /* BetaAppReviewDetailResponse.swift */; };
+		31DE063C21999FC5007D55EB /* UserResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31DE05C821999FC4007D55EB /* UserResponse.swift */; };
+		31DE063D21999FC5007D55EB /* PagedDocumentLinks.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31DE05C921999FC4007D55EB /* PagedDocumentLinks.swift */; };
+		31DE063E21999FC5007D55EB /* BetaGroup.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31DE05CA21999FC4007D55EB /* BetaGroup.swift */; };
+		31DE063F21999FC5007D55EB /* BetaTesterResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31DE05CB21999FC4007D55EB /* BetaTesterResponse.swift */; };
+		31DE064021999FC5007D55EB /* BetaReviewState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31DE05CC21999FC4007D55EB /* BetaReviewState.swift */; };
+		31DE064121999FC5007D55EB /* BetaAppReviewSubmissionsResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31DE05CD21999FC4007D55EB /* BetaAppReviewSubmissionsResponse.swift */; };
+		31DE064221999FC5007D55EB /* PrereleaseVersionBuildsLinkagesResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31DE05CE21999FC4007D55EB /* PrereleaseVersionBuildsLinkagesResponse.swift */; };
+		31DE064321999FC5007D55EB /* BetaAppLocalizationUpdateRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31DE05CF21999FC4007D55EB /* BetaAppLocalizationUpdateRequest.swift */; };
+		31DE064421999FC5007D55EB /* Platform.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31DE05D021999FC4007D55EB /* Platform.swift */; };
+		31DE064521999FC5007D55EB /* BuildAppEncryptionDeclarationLinkageRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31DE05D121999FC4007D55EB /* BuildAppEncryptionDeclarationLinkageRequest.swift */; };
+		31DE064621999FC5007D55EB /* UsersResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31DE05D221999FC4007D55EB /* UsersResponse.swift */; };
+		31DE064721999FC5007D55EB /* BuildAppLinkageResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31DE05D321999FC4007D55EB /* BuildAppLinkageResponse.swift */; };
+		31DE064821999FC5007D55EB /* BetaAppLocalizationsResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31DE05D421999FC4007D55EB /* BetaAppLocalizationsResponse.swift */; };
+		31DE064921999FC5007D55EB /* AppEncryptionDeclarationBuildsLinkagesRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31DE05D521999FC4007D55EB /* AppEncryptionDeclarationBuildsLinkagesRequest.swift */; };
+		31DE064A21999FC5007D55EB /* BuildPreReleaseVersionLinkageResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31DE05D621999FC4007D55EB /* BuildPreReleaseVersionLinkageResponse.swift */; };
+		31DE064B21999FC5007D55EB /* BetaLicenseAgreement.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31DE05D721999FC4007D55EB /* BetaLicenseAgreement.swift */; };
+		31DE064C21999FC5007D55EB /* ErrorResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31DE05D821999FC4007D55EB /* ErrorResponse.swift */; };
+		31DE064D21999FC5007D55EB /* BetaLicenseAgreementUpdateRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31DE05D921999FC4007D55EB /* BetaLicenseAgreementUpdateRequest.swift */; };
+		31DE064E21999FC5007D55EB /* UserInvitationResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31DE05DA21999FC4007D55EB /* UserInvitationResponse.swift */; };
+		31DE064F21999FC5007D55EB /* Build.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31DE05DB21999FC4007D55EB /* Build.swift */; };
+		31DE065021999FC5007D55EB /* AppPreReleaseVersionsLinkagesResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31DE05DC21999FC4007D55EB /* AppPreReleaseVersionsLinkagesResponse.swift */; };
+		31DE065121999FC5007D55EB /* AppBetaTestersLinkagesRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31DE05DD21999FC4007D55EB /* AppBetaTestersLinkagesRequest.swift */; };
+		31DE065221999FC5007D55EB /* BetaAppReviewDetail.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31DE05DE21999FC4007D55EB /* BetaAppReviewDetail.swift */; };
+		31DE065321999FC5007D55EB /* BuildIndividualTestersLinkagesResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31DE05DF21999FC4007D55EB /* BuildIndividualTestersLinkagesResponse.swift */; };
+		31DE065421999FC5007D55EB /* UserInvitationCreateRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31DE05E021999FC4007D55EB /* UserInvitationCreateRequest.swift */; };
+		31DE065521999FC5007D55EB /* ExternalBetaState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31DE05E121999FC4007D55EB /* ExternalBetaState.swift */; };
+		31DE065621999FC5007D55EB /* BetaTesterAppsLinkagesResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31DE05E221999FC4007D55EB /* BetaTesterAppsLinkagesResponse.swift */; };
+		31DE065721999FC5007D55EB /* AppBetaLicenseAgreementLinkageResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31DE05E321999FC4007D55EB /* AppBetaLicenseAgreementLinkageResponse.swift */; };
+		31DE065821999FC5007D55EB /* BetaAppReviewSubmissionCreateRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31DE05E421999FC4007D55EB /* BetaAppReviewSubmissionCreateRequest.swift */; };
+		31DE065921999FC5007D55EB /* BetaGroupAppLinkageResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31DE05E521999FC4007D55EB /* BetaGroupAppLinkageResponse.swift */; };
+		31DE065A21999FC5007D55EB /* BetaBuildLocalization.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31DE05E621999FC4007D55EB /* BetaBuildLocalization.swift */; };
+		31DE065B21999FC5007D55EB /* BetaAppReviewDetailUpdateRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31DE05E721999FC4007D55EB /* BetaAppReviewDetailUpdateRequest.swift */; };
+		31DE065C21999FC5007D55EB /* ResourceLinks.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31DE05E821999FC4007D55EB /* ResourceLinks.swift */; };
+		31DE065D21999FC5007D55EB /* BetaAppLocalization.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31DE05E921999FC4007D55EB /* BetaAppLocalization.swift */; };
+		31DE065E21999FC5007D55EB /* BuildBetaDetailsResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31DE05EA21999FC4007D55EB /* BuildBetaDetailsResponse.swift */; };
+		31DE065F21999FC5007D55EB /* BetaInviteType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31DE05EB21999FC4007D55EB /* BetaInviteType.swift */; };
+		31DE066021999FC5007D55EB /* BetaTesterBuildsLinkagesResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31DE05EC21999FC4007D55EB /* BetaTesterBuildsLinkagesResponse.swift */; };
+		31DE066121999FC5007D55EB /* App.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31DE05ED21999FC4007D55EB /* App.swift */; };
+		31DE066221999FC5007D55EB /* BetaAppReviewSubmission.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31DE05EE21999FC4007D55EB /* BetaAppReviewSubmission.swift */; };
+		31DE066321999FC5007D55EB /* UserVisibleAppsLinkagesResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31DE05EF21999FC4007D55EB /* UserVisibleAppsLinkagesResponse.swift */; };
+		31DE066421999FC5007D55EB /* BetaAppLocalizationResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31DE05F021999FC4007D55EB /* BetaAppLocalizationResponse.swift */; };
+		31DE066521999FC5007D55EB /* BetaTester.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31DE05F121999FC4007D55EB /* BetaTester.swift */; };
+		31DE066621999FC5007D55EB /* BetaAppReviewDetailsResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31DE05F221999FC4007D55EB /* BetaAppReviewDetailsResponse.swift */; };
+		31DE066721999FC5007D55EB /* BuildBetaDetailBuildLinkageResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31DE05F321999FC4007D55EB /* BuildBetaDetailBuildLinkageResponse.swift */; };
 		36FF8853CB34A9297AFAA8F5F7456324 /* TaskDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A01C037B4034EDA3D7955BC5E4E9D9D6 /* TaskDelegate.swift */; };
 		4E1A913EFB404FB11524718FF0298EFE /* Alamofire.swift in Sources */ = {isa = PBXBuildFile; fileRef = DFCB8C44DE758E906C0BCDA455937B85 /* Alamofire.swift */; };
 		500C8EDA60C07B0F127C7FC385E17D38 /* Notifications.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66A46F517F0AF7E85A16D723F6406896 /* Notifications.swift */; };
@@ -76,20 +191,136 @@
 /* Begin PBXFileReference section */
 		03DECE84DC850B04690604AB7C521277 /* Alamofire-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "Alamofire-umbrella.h"; sourceTree = "<group>"; };
 		04F47F5C9CDB035C5AFADEBA5BF44F1C /* Response.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = Response.swift; path = Source/Response.swift; sourceTree = "<group>"; };
-		05F7F71BDEAF530C658D8B44E9CEA663 /* Alamofire.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = Alamofire.framework; path = Alamofire.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		05F7F71BDEAF530C658D8B44E9CEA663 /* Alamofire.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Alamofire.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		0D4D56175E92E2859D8854CBDB5E738D /* Pods-AppStoreConnect-Swift-SDK_Example-resources.sh */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.script.sh; path = "Pods-AppStoreConnect-Swift-SDK_Example-resources.sh"; sourceTree = "<group>"; };
 		0FCBF1EED873F61C6D46CE37FA5C39D3 /* DispatchQueue+Alamofire.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = "DispatchQueue+Alamofire.swift"; path = "Source/DispatchQueue+Alamofire.swift"; sourceTree = "<group>"; };
 		117EFB31D9AD9673BAF51B48596F19E2 /* Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		155538D91ACEEEDF82069ACF6C1A02E7 /* MultipartFormData.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = MultipartFormData.swift; path = Source/MultipartFormData.swift; sourceTree = "<group>"; };
-		17165A904DF9D6ED94B97B00C4E7BE24 /* README.md */ = {isa = PBXFileReference; includeInIndex = 1; path = README.md; sourceTree = "<group>"; };
+		17165A904DF9D6ED94B97B00C4E7BE24 /* README.md */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		195D73DD9EF275A3C56569E2B1CA8026 /* SessionDelegate.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = SessionDelegate.swift; path = Source/SessionDelegate.swift; sourceTree = "<group>"; };
 		1E230A0448B394DE26E688DAC8E6201E /* Request.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = Request.swift; path = Source/Request.swift; sourceTree = "<group>"; };
 		210971763CB2FC0DC4E378271A37BE32 /* Alamofire.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.module; path = Alamofire.modulemap; sourceTree = "<group>"; };
+		31DE058021999FC4007D55EB /* BuildBuildBetaDetailLinkageResponse.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BuildBuildBetaDetailLinkageResponse.swift; sourceTree = "<group>"; };
+		31DE058121999FC4007D55EB /* BetaGroupBuildsLinkagesRequest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BetaGroupBuildsLinkagesRequest.swift; sourceTree = "<group>"; };
+		31DE058221999FC4007D55EB /* BetaTesterInvitation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BetaTesterInvitation.swift; sourceTree = "<group>"; };
+		31DE058321999FC4007D55EB /* BetaTesterBuildsLinkagesRequest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BetaTesterBuildsLinkagesRequest.swift; sourceTree = "<group>"; };
+		31DE058421999FC4007D55EB /* BuildIndividualTestersLinkagesRequest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BuildIndividualTestersLinkagesRequest.swift; sourceTree = "<group>"; };
+		31DE058521999FC4007D55EB /* InternalBetaState.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InternalBetaState.swift; sourceTree = "<group>"; };
+		31DE058621999FC4007D55EB /* AppResponse.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppResponse.swift; sourceTree = "<group>"; };
+		31DE058721999FC4007D55EB /* BetaGroupCreateRequest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BetaGroupCreateRequest.swift; sourceTree = "<group>"; };
+		31DE058821999FC4007D55EB /* BuildBetaBuildLocalizationsLinkagesResponse.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BuildBetaBuildLocalizationsLinkagesResponse.swift; sourceTree = "<group>"; };
+		31DE058921999FC4007D55EB /* BuildBetaGroupsLinkagesRequest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BuildBetaGroupsLinkagesRequest.swift; sourceTree = "<group>"; };
+		31DE058A21999FC4007D55EB /* PreReleaseVersionsResponse.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PreReleaseVersionsResponse.swift; sourceTree = "<group>"; };
+		31DE058B21999FC4007D55EB /* BuildResponse.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BuildResponse.swift; sourceTree = "<group>"; };
+		31DE058C21999FC4007D55EB /* UserInvitationVisibleAppsLinkagesResponse.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserInvitationVisibleAppsLinkagesResponse.swift; sourceTree = "<group>"; };
+		31DE058D21999FC4007D55EB /* AppsResponse.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppsResponse.swift; sourceTree = "<group>"; };
+		31DE058E21999FC4007D55EB /* BetaGroupBuildsLinkagesResponse.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BetaGroupBuildsLinkagesResponse.swift; sourceTree = "<group>"; };
+		31DE058F21999FC4007D55EB /* BetaAppReviewDetailAppLinkageResponse.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BetaAppReviewDetailAppLinkageResponse.swift; sourceTree = "<group>"; };
+		31DE059021999FC4007D55EB /* BuildBetaNotification.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BuildBetaNotification.swift; sourceTree = "<group>"; };
+		31DE059121999FC4007D55EB /* UserUpdateRequest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserUpdateRequest.swift; sourceTree = "<group>"; };
+		31DE059221999FC4007D55EB /* AppEncryptionDeclarationState.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppEncryptionDeclarationState.swift; sourceTree = "<group>"; };
+		31DE059321999FC4007D55EB /* AppBuildsLinkagesResponse.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppBuildsLinkagesResponse.swift; sourceTree = "<group>"; };
+		31DE059421999FC4007D55EB /* UserVisibleAppsLinkagesRequest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserVisibleAppsLinkagesRequest.swift; sourceTree = "<group>"; };
+		31DE059521999FC4007D55EB /* PrereleaseVersionAppLinkageResponse.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PrereleaseVersionAppLinkageResponse.swift; sourceTree = "<group>"; };
+		31DE059621999FC4007D55EB /* PrereleaseVersionResponse.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PrereleaseVersionResponse.swift; sourceTree = "<group>"; };
+		31DE059721999FC4007D55EB /* AppEncryptionDeclarationAppLinkageResponse.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppEncryptionDeclarationAppLinkageResponse.swift; sourceTree = "<group>"; };
+		31DE059821999FC4007D55EB /* BuildUpdateRequest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BuildUpdateRequest.swift; sourceTree = "<group>"; };
+		31DE059921999FC4007D55EB /* BetaAppReviewSubmissionBuildLinkageResponse.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BetaAppReviewSubmissionBuildLinkageResponse.swift; sourceTree = "<group>"; };
+		31DE059A21999FC4007D55EB /* BuildBetaDetailResponse.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BuildBetaDetailResponse.swift; sourceTree = "<group>"; };
+		31DE059B21999FC4007D55EB /* UserInvitationsResponse.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserInvitationsResponse.swift; sourceTree = "<group>"; };
+		31DE059C21999FC4007D55EB /* BetaGroupBetaTestersLinkagesResponse.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BetaGroupBetaTestersLinkagesResponse.swift; sourceTree = "<group>"; };
+		31DE059D21999FC4007D55EB /* BetaGroupUpdateRequest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BetaGroupUpdateRequest.swift; sourceTree = "<group>"; };
+		31DE059E21999FC4007D55EB /* BuildBetaNotificationCreateRequest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BuildBetaNotificationCreateRequest.swift; sourceTree = "<group>"; };
+		31DE059F21999FC4007D55EB /* AppEncryptionDeclaration.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppEncryptionDeclaration.swift; sourceTree = "<group>"; };
+		31DE05A021999FC4007D55EB /* AppBetaGroupsLinkagesResponse.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppBetaGroupsLinkagesResponse.swift; sourceTree = "<group>"; };
+		31DE05A121999FC4007D55EB /* BetaTesterCreateRequest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BetaTesterCreateRequest.swift; sourceTree = "<group>"; };
+		31DE05A221999FC4007D55EB /* UserInvitation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserInvitation.swift; sourceTree = "<group>"; };
+		31DE05A321999FC4007D55EB /* AppBetaAppReviewDetailLinkageResponse.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppBetaAppReviewDetailLinkageResponse.swift; sourceTree = "<group>"; };
+		31DE05A421999FC4007D55EB /* BuildAppEncryptionDeclarationLinkageResponse.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BuildAppEncryptionDeclarationLinkageResponse.swift; sourceTree = "<group>"; };
+		31DE05A521999FC4007D55EB /* BuildsResponse.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BuildsResponse.swift; sourceTree = "<group>"; };
+		31DE05A621999FC4007D55EB /* BuildBetaAppReviewSubmissionLinkageResponse.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BuildBetaAppReviewSubmissionLinkageResponse.swift; sourceTree = "<group>"; };
+		31DE05A721999FC4007D55EB /* BetaGroupsResponse.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BetaGroupsResponse.swift; sourceTree = "<group>"; };
+		31DE05A821999FC4007D55EB /* BetaTesterBetaGroupsLinkagesRequest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BetaTesterBetaGroupsLinkagesRequest.swift; sourceTree = "<group>"; };
+		31DE05A921999FC4007D55EB /* BetaTestersResponse.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BetaTestersResponse.swift; sourceTree = "<group>"; };
+		31DE05AA21999FC4007D55EB /* AppEncryptionDeclarationsResponse.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppEncryptionDeclarationsResponse.swift; sourceTree = "<group>"; };
+		31DE05AB21999FC4007D55EB /* BuildBetaNotificationResponse.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BuildBetaNotificationResponse.swift; sourceTree = "<group>"; };
+		31DE05AC21999FC4007D55EB /* BetaLicenseAgreementAppLinkageResponse.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BetaLicenseAgreementAppLinkageResponse.swift; sourceTree = "<group>"; };
+		31DE05AD21999FC4007D55EB /* BetaLicenseAgreementsResponse.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BetaLicenseAgreementsResponse.swift; sourceTree = "<group>"; };
+		31DE05AE21999FC4007D55EB /* BetaBuildLocalizationResponse.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BetaBuildLocalizationResponse.swift; sourceTree = "<group>"; };
+		31DE05AF21999FC4007D55EB /* BetaAppLocalizationAppLinkageResponse.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BetaAppLocalizationAppLinkageResponse.swift; sourceTree = "<group>"; };
+		31DE05B021999FC4007D55EB /* BetaBuildLocalizationBuildLinkageResponse.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BetaBuildLocalizationBuildLinkageResponse.swift; sourceTree = "<group>"; };
+		31DE05B121999FC4007D55EB /* BetaTesterInvitationCreateRequest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BetaTesterInvitationCreateRequest.swift; sourceTree = "<group>"; };
+		31DE05B221999FC4007D55EB /* BetaBuildLocalizationCreateRequest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BetaBuildLocalizationCreateRequest.swift; sourceTree = "<group>"; };
+		31DE05B321999FC4007D55EB /* UserRole.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserRole.swift; sourceTree = "<group>"; };
+		31DE05B421999FC4007D55EB /* AppEncryptionDeclarationResponse.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppEncryptionDeclarationResponse.swift; sourceTree = "<group>"; };
+		31DE05B521999FC4007D55EB /* BetaAppReviewSubmissionResponse.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BetaAppReviewSubmissionResponse.swift; sourceTree = "<group>"; };
+		31DE05B621999FC4007D55EB /* DocumentLinks.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DocumentLinks.swift; sourceTree = "<group>"; };
+		31DE05B721999FC4007D55EB /* BetaLicenseAgreementResponse.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BetaLicenseAgreementResponse.swift; sourceTree = "<group>"; };
+		31DE05B821999FC4007D55EB /* BetaGroupBetaTestersLinkagesRequest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BetaGroupBetaTestersLinkagesRequest.swift; sourceTree = "<group>"; };
+		31DE05B921999FC4007D55EB /* BuildBetaDetail.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BuildBetaDetail.swift; sourceTree = "<group>"; };
+		31DE05BA21999FC4007D55EB /* User.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
+		31DE05BB21999FC4007D55EB /* BetaTesterInvitationResponse.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BetaTesterInvitationResponse.swift; sourceTree = "<group>"; };
+		31DE05BC21999FC4007D55EB /* BetaBuildLocalizationUpdateRequest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BetaBuildLocalizationUpdateRequest.swift; sourceTree = "<group>"; };
+		31DE05BD21999FC4007D55EB /* BetaTesterAppsLinkagesRequest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BetaTesterAppsLinkagesRequest.swift; sourceTree = "<group>"; };
+		31DE05BE21999FC4007D55EB /* PrereleaseVersion.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PrereleaseVersion.swift; sourceTree = "<group>"; };
+		31DE05BF21999FC4007D55EB /* ImageAsset.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImageAsset.swift; sourceTree = "<group>"; };
+		31DE05C021999FC4007D55EB /* BetaGroupResponse.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BetaGroupResponse.swift; sourceTree = "<group>"; };
+		31DE05C121999FC4007D55EB /* AppBetaAppLocalizationsLinkagesResponse.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppBetaAppLocalizationsLinkagesResponse.swift; sourceTree = "<group>"; };
+		31DE05C221999FC4007D55EB /* BetaTesterBetaGroupsLinkagesResponse.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BetaTesterBetaGroupsLinkagesResponse.swift; sourceTree = "<group>"; };
+		31DE05C321999FC4007D55EB /* BetaAppLocalizationCreateRequest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BetaAppLocalizationCreateRequest.swift; sourceTree = "<group>"; };
+		31DE05C421999FC4007D55EB /* PagingInformation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PagingInformation.swift; sourceTree = "<group>"; };
+		31DE05C521999FC4007D55EB /* BetaBuildLocalizationsResponse.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BetaBuildLocalizationsResponse.swift; sourceTree = "<group>"; };
+		31DE05C621999FC4007D55EB /* BuildBetaDetailUpdateRequest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BuildBetaDetailUpdateRequest.swift; sourceTree = "<group>"; };
+		31DE05C721999FC4007D55EB /* BetaAppReviewDetailResponse.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BetaAppReviewDetailResponse.swift; sourceTree = "<group>"; };
+		31DE05C821999FC4007D55EB /* UserResponse.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserResponse.swift; sourceTree = "<group>"; };
+		31DE05C921999FC4007D55EB /* PagedDocumentLinks.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PagedDocumentLinks.swift; sourceTree = "<group>"; };
+		31DE05CA21999FC4007D55EB /* BetaGroup.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BetaGroup.swift; sourceTree = "<group>"; };
+		31DE05CB21999FC4007D55EB /* BetaTesterResponse.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BetaTesterResponse.swift; sourceTree = "<group>"; };
+		31DE05CC21999FC4007D55EB /* BetaReviewState.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BetaReviewState.swift; sourceTree = "<group>"; };
+		31DE05CD21999FC4007D55EB /* BetaAppReviewSubmissionsResponse.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BetaAppReviewSubmissionsResponse.swift; sourceTree = "<group>"; };
+		31DE05CE21999FC4007D55EB /* PrereleaseVersionBuildsLinkagesResponse.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PrereleaseVersionBuildsLinkagesResponse.swift; sourceTree = "<group>"; };
+		31DE05CF21999FC4007D55EB /* BetaAppLocalizationUpdateRequest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BetaAppLocalizationUpdateRequest.swift; sourceTree = "<group>"; };
+		31DE05D021999FC4007D55EB /* Platform.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Platform.swift; sourceTree = "<group>"; };
+		31DE05D121999FC4007D55EB /* BuildAppEncryptionDeclarationLinkageRequest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BuildAppEncryptionDeclarationLinkageRequest.swift; sourceTree = "<group>"; };
+		31DE05D221999FC4007D55EB /* UsersResponse.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UsersResponse.swift; sourceTree = "<group>"; };
+		31DE05D321999FC4007D55EB /* BuildAppLinkageResponse.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BuildAppLinkageResponse.swift; sourceTree = "<group>"; };
+		31DE05D421999FC4007D55EB /* BetaAppLocalizationsResponse.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BetaAppLocalizationsResponse.swift; sourceTree = "<group>"; };
+		31DE05D521999FC4007D55EB /* AppEncryptionDeclarationBuildsLinkagesRequest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppEncryptionDeclarationBuildsLinkagesRequest.swift; sourceTree = "<group>"; };
+		31DE05D621999FC4007D55EB /* BuildPreReleaseVersionLinkageResponse.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BuildPreReleaseVersionLinkageResponse.swift; sourceTree = "<group>"; };
+		31DE05D721999FC4007D55EB /* BetaLicenseAgreement.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BetaLicenseAgreement.swift; sourceTree = "<group>"; };
+		31DE05D821999FC4007D55EB /* ErrorResponse.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ErrorResponse.swift; sourceTree = "<group>"; };
+		31DE05D921999FC4007D55EB /* BetaLicenseAgreementUpdateRequest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BetaLicenseAgreementUpdateRequest.swift; sourceTree = "<group>"; };
+		31DE05DA21999FC4007D55EB /* UserInvitationResponse.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserInvitationResponse.swift; sourceTree = "<group>"; };
+		31DE05DB21999FC4007D55EB /* Build.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Build.swift; sourceTree = "<group>"; };
+		31DE05DC21999FC4007D55EB /* AppPreReleaseVersionsLinkagesResponse.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppPreReleaseVersionsLinkagesResponse.swift; sourceTree = "<group>"; };
+		31DE05DD21999FC4007D55EB /* AppBetaTestersLinkagesRequest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppBetaTestersLinkagesRequest.swift; sourceTree = "<group>"; };
+		31DE05DE21999FC4007D55EB /* BetaAppReviewDetail.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BetaAppReviewDetail.swift; sourceTree = "<group>"; };
+		31DE05DF21999FC4007D55EB /* BuildIndividualTestersLinkagesResponse.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BuildIndividualTestersLinkagesResponse.swift; sourceTree = "<group>"; };
+		31DE05E021999FC4007D55EB /* UserInvitationCreateRequest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserInvitationCreateRequest.swift; sourceTree = "<group>"; };
+		31DE05E121999FC4007D55EB /* ExternalBetaState.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ExternalBetaState.swift; sourceTree = "<group>"; };
+		31DE05E221999FC4007D55EB /* BetaTesterAppsLinkagesResponse.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BetaTesterAppsLinkagesResponse.swift; sourceTree = "<group>"; };
+		31DE05E321999FC4007D55EB /* AppBetaLicenseAgreementLinkageResponse.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppBetaLicenseAgreementLinkageResponse.swift; sourceTree = "<group>"; };
+		31DE05E421999FC4007D55EB /* BetaAppReviewSubmissionCreateRequest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BetaAppReviewSubmissionCreateRequest.swift; sourceTree = "<group>"; };
+		31DE05E521999FC4007D55EB /* BetaGroupAppLinkageResponse.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BetaGroupAppLinkageResponse.swift; sourceTree = "<group>"; };
+		31DE05E621999FC4007D55EB /* BetaBuildLocalization.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BetaBuildLocalization.swift; sourceTree = "<group>"; };
+		31DE05E721999FC4007D55EB /* BetaAppReviewDetailUpdateRequest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BetaAppReviewDetailUpdateRequest.swift; sourceTree = "<group>"; };
+		31DE05E821999FC4007D55EB /* ResourceLinks.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ResourceLinks.swift; sourceTree = "<group>"; };
+		31DE05E921999FC4007D55EB /* BetaAppLocalization.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BetaAppLocalization.swift; sourceTree = "<group>"; };
+		31DE05EA21999FC4007D55EB /* BuildBetaDetailsResponse.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BuildBetaDetailsResponse.swift; sourceTree = "<group>"; };
+		31DE05EB21999FC4007D55EB /* BetaInviteType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BetaInviteType.swift; sourceTree = "<group>"; };
+		31DE05EC21999FC4007D55EB /* BetaTesterBuildsLinkagesResponse.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BetaTesterBuildsLinkagesResponse.swift; sourceTree = "<group>"; };
+		31DE05ED21999FC4007D55EB /* App.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = App.swift; sourceTree = "<group>"; };
+		31DE05EE21999FC4007D55EB /* BetaAppReviewSubmission.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BetaAppReviewSubmission.swift; sourceTree = "<group>"; };
+		31DE05EF21999FC4007D55EB /* UserVisibleAppsLinkagesResponse.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserVisibleAppsLinkagesResponse.swift; sourceTree = "<group>"; };
+		31DE05F021999FC4007D55EB /* BetaAppLocalizationResponse.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BetaAppLocalizationResponse.swift; sourceTree = "<group>"; };
+		31DE05F121999FC4007D55EB /* BetaTester.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BetaTester.swift; sourceTree = "<group>"; };
+		31DE05F221999FC4007D55EB /* BetaAppReviewDetailsResponse.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BetaAppReviewDetailsResponse.swift; sourceTree = "<group>"; };
+		31DE05F321999FC4007D55EB /* BuildBetaDetailBuildLinkageResponse.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BuildBetaDetailBuildLinkageResponse.swift; sourceTree = "<group>"; };
 		32B030D27CAC730C5EB0F22390645310 /* ServerTrustPolicy.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = ServerTrustPolicy.swift; path = Source/ServerTrustPolicy.swift; sourceTree = "<group>"; };
 		33A04B5D27E86AF4B84D95E21CF3F452 /* Alamofire.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = Alamofire.xcconfig; sourceTree = "<group>"; };
 		344C7421AFF44D042269C37732886BB4 /* Pods-AppStoreConnect-Swift-SDK_Tests-frameworks.sh */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.script.sh; path = "Pods-AppStoreConnect-Swift-SDK_Tests-frameworks.sh"; sourceTree = "<group>"; };
 		39F63B140A7BCEF76F64FE5601D27611 /* Pods-AppStoreConnect-Swift-SDK_Example.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-AppStoreConnect-Swift-SDK_Example.release.xcconfig"; sourceTree = "<group>"; };
-		3C51963FF4DC260A52139E0FA41CDA20 /* Pods_AppStoreConnect_Swift_SDK_Example.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = Pods_AppStoreConnect_Swift_SDK_Example.framework; path = "Pods-AppStoreConnect-Swift-SDK_Example.framework"; sourceTree = BUILT_PRODUCTS_DIR; };
+		3C51963FF4DC260A52139E0FA41CDA20 /* Pods_AppStoreConnect_Swift_SDK_Example.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_AppStoreConnect_Swift_SDK_Example.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		3D60BC9955B4F7FFA62D7440CB385C11 /* Result.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = Result.swift; path = Source/Result.swift; sourceTree = "<group>"; };
 		46CDAC6C1187C5467E576980E1062C8B /* SessionManager.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = SessionManager.swift; path = Source/SessionManager.swift; sourceTree = "<group>"; };
 		47A23283E41B39FD8607B79B73AABA11 /* Pods-AppStoreConnect-Swift-SDK_Example-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "Pods-AppStoreConnect-Swift-SDK_Example-dummy.m"; sourceTree = "<group>"; };
@@ -103,14 +334,13 @@
 		676EE526F38B11A7E2C567296EBCE1F3 /* Pods-AppStoreConnect-Swift-SDK_Tests-acknowledgements.markdown */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; path = "Pods-AppStoreConnect-Swift-SDK_Tests-acknowledgements.markdown"; sourceTree = "<group>"; };
 		706C7AFFE37BA158C3553250F4B5FAED /* Alamofire.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Alamofire.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		733FE1427358ED6F7EF76FE93A392C55 /* Pods-AppStoreConnect-Swift-SDK_Example-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "Pods-AppStoreConnect-Swift-SDK_Example-umbrella.h"; sourceTree = "<group>"; };
-		784E3BECA044E9FBF16058EE7A01D708 /* Models.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = Models.swift; path = Sources/Models.swift; sourceTree = "<group>"; };
 		78AE25268A4D4A7CBD82BF5BC2036546 /* AppStoreConnect-Swift-SDK-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "AppStoreConnect-Swift-SDK-dummy.m"; sourceTree = "<group>"; };
-		7B46A2585F74267ED4F1D2E26597371F /* LICENSE */ = {isa = PBXFileReference; includeInIndex = 1; path = LICENSE; sourceTree = "<group>"; };
+		7B46A2585F74267ED4F1D2E26597371F /* LICENSE */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; path = LICENSE; sourceTree = "<group>"; };
 		7F60FEC3FA8D403A8AFA1B50963195BA /* Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		87882A1F5A92C8138D54545E51D51E6F /* Timeline.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = Timeline.swift; path = Source/Timeline.swift; sourceTree = "<group>"; };
 		8B207E900C4CA09303A0581AC23274E6 /* Pods-AppStoreConnect-Swift-SDK_Tests-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "Pods-AppStoreConnect-Swift-SDK_Tests-dummy.m"; sourceTree = "<group>"; };
 		8F32A542255176460CB8A0777C1798BF /* AppStoreConnect-Swift-SDK-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "AppStoreConnect-Swift-SDK-umbrella.h"; sourceTree = "<group>"; };
-		93A4A3777CF96A4AAC1D13BA6DCCEA73 /* Podfile */ = {isa = PBXFileReference; explicitFileType = text.script.ruby; includeInIndex = 1; lastKnownFileType = text; name = Podfile; path = ../Podfile; sourceTree = SOURCE_ROOT; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
+		93A4A3777CF96A4AAC1D13BA6DCCEA73 /* Podfile */ = {isa = PBXFileReference; explicitFileType = text.script.ruby; includeInIndex = 1; name = Podfile; path = ../Podfile; sourceTree = SOURCE_ROOT; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
 		99AA5FF6BE2FD0F197F7745FB1AA433E /* Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		9F849ACEB7118B040076F75087B6B359 /* AppStoreConnect-Swift-SDK.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.module; path = "AppStoreConnect-Swift-SDK.modulemap"; sourceTree = "<group>"; };
 		A01C037B4034EDA3D7955BC5E4E9D9D6 /* TaskDelegate.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = TaskDelegate.swift; path = Source/TaskDelegate.swift; sourceTree = "<group>"; };
@@ -119,7 +349,7 @@
 		AD9B44EC34851F4189B6F4A50F5E8E2E /* Pods-AppStoreConnect-Swift-SDK_Example-acknowledgements.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-AppStoreConnect-Swift-SDK_Example-acknowledgements.plist"; sourceTree = "<group>"; };
 		B029DBC43E49A740F12B5E4D2E6DD452 /* Validation.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = Validation.swift; path = Source/Validation.swift; sourceTree = "<group>"; };
 		B6C5B9A2BDA089A45B1199D54213B5CC /* Pods-AppStoreConnect-Swift-SDK_Example.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-AppStoreConnect-Swift-SDK_Example.debug.xcconfig"; sourceTree = "<group>"; };
-		BC0CFE7F7965BED4CB6B602C3662225E /* AppStoreConnect_Swift_SDK.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = AppStoreConnect_Swift_SDK.framework; path = "AppStoreConnect-Swift-SDK.framework"; sourceTree = BUILT_PRODUCTS_DIR; };
+		BC0CFE7F7965BED4CB6B602C3662225E /* AppStoreConnect_Swift_SDK.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = AppStoreConnect_Swift_SDK.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		BF3326E768822A23BEA564871892137F /* Pods-AppStoreConnect-Swift-SDK_Example.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.module; path = "Pods-AppStoreConnect-Swift-SDK_Example.modulemap"; sourceTree = "<group>"; };
 		C1135D2F46B4B634FC59CF93AD9A366F /* Pods-AppStoreConnect-Swift-SDK_Tests.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.module; path = "Pods-AppStoreConnect-Swift-SDK_Tests.modulemap"; sourceTree = "<group>"; };
 		CCAB48BE8A1B656BF27AA7ABE86DD573 /* Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -131,11 +361,11 @@
 		E5A8AA5F9EDED0A0BDDE7E830BF4AEE0 /* NetworkReachabilityManager.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = NetworkReachabilityManager.swift; path = Source/NetworkReachabilityManager.swift; sourceTree = "<group>"; };
 		E8B6399DA02598D1A46E8849B00F6C70 /* Pods-AppStoreConnect-Swift-SDK_Tests-acknowledgements.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-AppStoreConnect-Swift-SDK_Tests-acknowledgements.plist"; sourceTree = "<group>"; };
 		E9932117FC250BEA5CA232ABB2D5A17A /* Pods-AppStoreConnect-Swift-SDK_Tests-resources.sh */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.script.sh; path = "Pods-AppStoreConnect-Swift-SDK_Tests-resources.sh"; sourceTree = "<group>"; };
-		E9EFA8634CF207CE0A22AFED8F734325 /* AppStoreConnect-Swift-SDK.podspec */ = {isa = PBXFileReference; explicitFileType = text.script.ruby; includeInIndex = 1; lastKnownFileType = text; path = "AppStoreConnect-Swift-SDK.podspec"; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
+		E9EFA8634CF207CE0A22AFED8F734325 /* AppStoreConnect-Swift-SDK.podspec */ = {isa = PBXFileReference; explicitFileType = text.script.ruby; includeInIndex = 1; path = "AppStoreConnect-Swift-SDK.podspec"; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
 		EAB62BDB4558FEFB08EFD161A77AEEBE /* AppStoreConnect-Swift-SDK.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "AppStoreConnect-Swift-SDK.xcconfig"; sourceTree = "<group>"; };
 		ECA10A8CF620014F621506408E6F9233 /* APIProvider.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = APIProvider.swift; path = Sources/APIProvider.swift; sourceTree = "<group>"; };
 		F3B7012A7B1F9C5D050EAFD5D0A3D57C /* Pods-AppStoreConnect-Swift-SDK_Example-acknowledgements.markdown */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; path = "Pods-AppStoreConnect-Swift-SDK_Example-acknowledgements.markdown"; sourceTree = "<group>"; };
-		FE4C90666C95BF1BCD84D3602E0C126A /* Pods_AppStoreConnect_Swift_SDK_Tests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = Pods_AppStoreConnect_Swift_SDK_Tests.framework; path = "Pods-AppStoreConnect-Swift-SDK_Tests.framework"; sourceTree = BUILT_PRODUCTS_DIR; };
+		FE4C90666C95BF1BCD84D3602E0C126A /* Pods_AppStoreConnect_Swift_SDK_Tests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_AppStoreConnect_Swift_SDK_Tests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -226,7 +456,6 @@
 				B029DBC43E49A740F12B5E4D2E6DD452 /* Validation.swift */,
 				2E5925946A4DE3B8F7E4137BACAD9618 /* Support Files */,
 			);
-			name = Alamofire;
 			path = Alamofire;
 			sourceTree = "<group>";
 		};
@@ -242,6 +471,130 @@
 			);
 			name = "Support Files";
 			path = "../Target Support Files/Alamofire";
+			sourceTree = "<group>";
+		};
+		31DE057F21999FC4007D55EB /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				31DE05ED21999FC4007D55EB /* App.swift */,
+				31DE05C121999FC4007D55EB /* AppBetaAppLocalizationsLinkagesResponse.swift */,
+				31DE05A321999FC4007D55EB /* AppBetaAppReviewDetailLinkageResponse.swift */,
+				31DE05A021999FC4007D55EB /* AppBetaGroupsLinkagesResponse.swift */,
+				31DE05E321999FC4007D55EB /* AppBetaLicenseAgreementLinkageResponse.swift */,
+				31DE05DD21999FC4007D55EB /* AppBetaTestersLinkagesRequest.swift */,
+				31DE059321999FC4007D55EB /* AppBuildsLinkagesResponse.swift */,
+				31DE059F21999FC4007D55EB /* AppEncryptionDeclaration.swift */,
+				31DE059721999FC4007D55EB /* AppEncryptionDeclarationAppLinkageResponse.swift */,
+				31DE05D521999FC4007D55EB /* AppEncryptionDeclarationBuildsLinkagesRequest.swift */,
+				31DE05B421999FC4007D55EB /* AppEncryptionDeclarationResponse.swift */,
+				31DE05AA21999FC4007D55EB /* AppEncryptionDeclarationsResponse.swift */,
+				31DE059221999FC4007D55EB /* AppEncryptionDeclarationState.swift */,
+				31DE05DC21999FC4007D55EB /* AppPreReleaseVersionsLinkagesResponse.swift */,
+				31DE058621999FC4007D55EB /* AppResponse.swift */,
+				31DE058D21999FC4007D55EB /* AppsResponse.swift */,
+				31DE05E921999FC4007D55EB /* BetaAppLocalization.swift */,
+				31DE05AF21999FC4007D55EB /* BetaAppLocalizationAppLinkageResponse.swift */,
+				31DE05C321999FC4007D55EB /* BetaAppLocalizationCreateRequest.swift */,
+				31DE05F021999FC4007D55EB /* BetaAppLocalizationResponse.swift */,
+				31DE05D421999FC4007D55EB /* BetaAppLocalizationsResponse.swift */,
+				31DE05CF21999FC4007D55EB /* BetaAppLocalizationUpdateRequest.swift */,
+				31DE05DE21999FC4007D55EB /* BetaAppReviewDetail.swift */,
+				31DE058F21999FC4007D55EB /* BetaAppReviewDetailAppLinkageResponse.swift */,
+				31DE05C721999FC4007D55EB /* BetaAppReviewDetailResponse.swift */,
+				31DE05F221999FC4007D55EB /* BetaAppReviewDetailsResponse.swift */,
+				31DE05E721999FC4007D55EB /* BetaAppReviewDetailUpdateRequest.swift */,
+				31DE05EE21999FC4007D55EB /* BetaAppReviewSubmission.swift */,
+				31DE059921999FC4007D55EB /* BetaAppReviewSubmissionBuildLinkageResponse.swift */,
+				31DE05E421999FC4007D55EB /* BetaAppReviewSubmissionCreateRequest.swift */,
+				31DE05B521999FC4007D55EB /* BetaAppReviewSubmissionResponse.swift */,
+				31DE05CD21999FC4007D55EB /* BetaAppReviewSubmissionsResponse.swift */,
+				31DE05E621999FC4007D55EB /* BetaBuildLocalization.swift */,
+				31DE05B021999FC4007D55EB /* BetaBuildLocalizationBuildLinkageResponse.swift */,
+				31DE05B221999FC4007D55EB /* BetaBuildLocalizationCreateRequest.swift */,
+				31DE05AE21999FC4007D55EB /* BetaBuildLocalizationResponse.swift */,
+				31DE05C521999FC4007D55EB /* BetaBuildLocalizationsResponse.swift */,
+				31DE05BC21999FC4007D55EB /* BetaBuildLocalizationUpdateRequest.swift */,
+				31DE05CA21999FC4007D55EB /* BetaGroup.swift */,
+				31DE05E521999FC4007D55EB /* BetaGroupAppLinkageResponse.swift */,
+				31DE05B821999FC4007D55EB /* BetaGroupBetaTestersLinkagesRequest.swift */,
+				31DE059C21999FC4007D55EB /* BetaGroupBetaTestersLinkagesResponse.swift */,
+				31DE058121999FC4007D55EB /* BetaGroupBuildsLinkagesRequest.swift */,
+				31DE058E21999FC4007D55EB /* BetaGroupBuildsLinkagesResponse.swift */,
+				31DE058721999FC4007D55EB /* BetaGroupCreateRequest.swift */,
+				31DE05C021999FC4007D55EB /* BetaGroupResponse.swift */,
+				31DE05A721999FC4007D55EB /* BetaGroupsResponse.swift */,
+				31DE059D21999FC4007D55EB /* BetaGroupUpdateRequest.swift */,
+				31DE05EB21999FC4007D55EB /* BetaInviteType.swift */,
+				31DE05D721999FC4007D55EB /* BetaLicenseAgreement.swift */,
+				31DE05AC21999FC4007D55EB /* BetaLicenseAgreementAppLinkageResponse.swift */,
+				31DE05B721999FC4007D55EB /* BetaLicenseAgreementResponse.swift */,
+				31DE05AD21999FC4007D55EB /* BetaLicenseAgreementsResponse.swift */,
+				31DE05D921999FC4007D55EB /* BetaLicenseAgreementUpdateRequest.swift */,
+				31DE05CC21999FC4007D55EB /* BetaReviewState.swift */,
+				31DE05F121999FC4007D55EB /* BetaTester.swift */,
+				31DE05BD21999FC4007D55EB /* BetaTesterAppsLinkagesRequest.swift */,
+				31DE05E221999FC4007D55EB /* BetaTesterAppsLinkagesResponse.swift */,
+				31DE05A821999FC4007D55EB /* BetaTesterBetaGroupsLinkagesRequest.swift */,
+				31DE05C221999FC4007D55EB /* BetaTesterBetaGroupsLinkagesResponse.swift */,
+				31DE058321999FC4007D55EB /* BetaTesterBuildsLinkagesRequest.swift */,
+				31DE05EC21999FC4007D55EB /* BetaTesterBuildsLinkagesResponse.swift */,
+				31DE05A121999FC4007D55EB /* BetaTesterCreateRequest.swift */,
+				31DE058221999FC4007D55EB /* BetaTesterInvitation.swift */,
+				31DE05B121999FC4007D55EB /* BetaTesterInvitationCreateRequest.swift */,
+				31DE05BB21999FC4007D55EB /* BetaTesterInvitationResponse.swift */,
+				31DE05CB21999FC4007D55EB /* BetaTesterResponse.swift */,
+				31DE05A921999FC4007D55EB /* BetaTestersResponse.swift */,
+				31DE05DB21999FC4007D55EB /* Build.swift */,
+				31DE05D121999FC4007D55EB /* BuildAppEncryptionDeclarationLinkageRequest.swift */,
+				31DE05A421999FC4007D55EB /* BuildAppEncryptionDeclarationLinkageResponse.swift */,
+				31DE05D321999FC4007D55EB /* BuildAppLinkageResponse.swift */,
+				31DE05A621999FC4007D55EB /* BuildBetaAppReviewSubmissionLinkageResponse.swift */,
+				31DE058821999FC4007D55EB /* BuildBetaBuildLocalizationsLinkagesResponse.swift */,
+				31DE05B921999FC4007D55EB /* BuildBetaDetail.swift */,
+				31DE05F321999FC4007D55EB /* BuildBetaDetailBuildLinkageResponse.swift */,
+				31DE059A21999FC4007D55EB /* BuildBetaDetailResponse.swift */,
+				31DE05EA21999FC4007D55EB /* BuildBetaDetailsResponse.swift */,
+				31DE05C621999FC4007D55EB /* BuildBetaDetailUpdateRequest.swift */,
+				31DE058921999FC4007D55EB /* BuildBetaGroupsLinkagesRequest.swift */,
+				31DE059021999FC4007D55EB /* BuildBetaNotification.swift */,
+				31DE059E21999FC4007D55EB /* BuildBetaNotificationCreateRequest.swift */,
+				31DE05AB21999FC4007D55EB /* BuildBetaNotificationResponse.swift */,
+				31DE058021999FC4007D55EB /* BuildBuildBetaDetailLinkageResponse.swift */,
+				31DE058421999FC4007D55EB /* BuildIndividualTestersLinkagesRequest.swift */,
+				31DE05DF21999FC4007D55EB /* BuildIndividualTestersLinkagesResponse.swift */,
+				31DE05D621999FC4007D55EB /* BuildPreReleaseVersionLinkageResponse.swift */,
+				31DE058B21999FC4007D55EB /* BuildResponse.swift */,
+				31DE05A521999FC4007D55EB /* BuildsResponse.swift */,
+				31DE059821999FC4007D55EB /* BuildUpdateRequest.swift */,
+				31DE05B621999FC4007D55EB /* DocumentLinks.swift */,
+				31DE05D821999FC4007D55EB /* ErrorResponse.swift */,
+				31DE05E121999FC4007D55EB /* ExternalBetaState.swift */,
+				31DE05BF21999FC4007D55EB /* ImageAsset.swift */,
+				31DE058521999FC4007D55EB /* InternalBetaState.swift */,
+				31DE05C921999FC4007D55EB /* PagedDocumentLinks.swift */,
+				31DE05C421999FC4007D55EB /* PagingInformation.swift */,
+				31DE05D021999FC4007D55EB /* Platform.swift */,
+				31DE05BE21999FC4007D55EB /* PrereleaseVersion.swift */,
+				31DE059521999FC4007D55EB /* PrereleaseVersionAppLinkageResponse.swift */,
+				31DE05CE21999FC4007D55EB /* PrereleaseVersionBuildsLinkagesResponse.swift */,
+				31DE059621999FC4007D55EB /* PrereleaseVersionResponse.swift */,
+				31DE058A21999FC4007D55EB /* PreReleaseVersionsResponse.swift */,
+				31DE05E821999FC4007D55EB /* ResourceLinks.swift */,
+				31DE05BA21999FC4007D55EB /* User.swift */,
+				31DE05A221999FC4007D55EB /* UserInvitation.swift */,
+				31DE05E021999FC4007D55EB /* UserInvitationCreateRequest.swift */,
+				31DE05DA21999FC4007D55EB /* UserInvitationResponse.swift */,
+				31DE059B21999FC4007D55EB /* UserInvitationsResponse.swift */,
+				31DE058C21999FC4007D55EB /* UserInvitationVisibleAppsLinkagesResponse.swift */,
+				31DE05C821999FC4007D55EB /* UserResponse.swift */,
+				31DE05B321999FC4007D55EB /* UserRole.swift */,
+				31DE05D221999FC4007D55EB /* UsersResponse.swift */,
+				31DE059121999FC4007D55EB /* UserUpdateRequest.swift */,
+				31DE059421999FC4007D55EB /* UserVisibleAppsLinkagesRequest.swift */,
+				31DE05EF21999FC4007D55EB /* UserVisibleAppsLinkagesResponse.swift */,
+			);
+			name = Models;
+			path = Sources/Models;
 			sourceTree = "<group>";
 		};
 		35F128EB69B6F7FB7DA93BBF6C130FAE /* Pods */ = {
@@ -305,7 +658,7 @@
 			children = (
 				ECA10A8CF620014F621506408E6F9233 /* APIProvider.swift */,
 				4F372FE9C44DC6F6D7497E0A08D35B36 /* Endpoints.swift */,
-				784E3BECA044E9FBF16058EE7A01D708 /* Models.swift */,
+				31DE057F21999FC4007D55EB /* Models */,
 				C8CF1FBE6B63E805907526073EA75276 /* Pod */,
 				94A5A630C0FF7A3E26966914A49C3AFE /* Support Files */,
 			);
@@ -532,10 +885,125 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				31DE063721999FC5007D55EB /* BetaAppLocalizationCreateRequest.swift in Sources */,
+				31DE064D21999FC5007D55EB /* BetaLicenseAgreementUpdateRequest.swift in Sources */,
+				31DE061121999FC4007D55EB /* BetaGroupUpdateRequest.swift in Sources */,
+				31DE061A21999FC4007D55EB /* BuildBetaAppReviewSubmissionLinkageResponse.swift in Sources */,
+				31DE062821999FC5007D55EB /* AppEncryptionDeclarationResponse.swift in Sources */,
+				31DE060121999FC4007D55EB /* AppsResponse.swift in Sources */,
+				31DE062E21999FC5007D55EB /* User.swift in Sources */,
+				31DE063821999FC5007D55EB /* PagingInformation.swift in Sources */,
+				31DE065521999FC5007D55EB /* ExternalBetaState.swift in Sources */,
+				31DE063621999FC5007D55EB /* BetaTesterBetaGroupsLinkagesResponse.swift in Sources */,
+				31DE062521999FC5007D55EB /* BetaTesterInvitationCreateRequest.swift in Sources */,
+				31DE066121999FC5007D55EB /* App.swift in Sources */,
+				31DE065C21999FC5007D55EB /* ResourceLinks.swift in Sources */,
+				31DE065B21999FC5007D55EB /* BetaAppReviewDetailUpdateRequest.swift in Sources */,
+				31DE065D21999FC5007D55EB /* BetaAppLocalization.swift in Sources */,
+				31DE064921999FC5007D55EB /* AppEncryptionDeclarationBuildsLinkagesRequest.swift in Sources */,
+				31DE062F21999FC5007D55EB /* BetaTesterInvitationResponse.swift in Sources */,
+				31DE063A21999FC5007D55EB /* BuildBetaDetailUpdateRequest.swift in Sources */,
+				31DE060A21999FC4007D55EB /* PrereleaseVersionResponse.swift in Sources */,
+				31DE063521999FC5007D55EB /* AppBetaAppLocalizationsLinkagesResponse.swift in Sources */,
+				31DE063321999FC5007D55EB /* ImageAsset.swift in Sources */,
+				31DE060221999FC4007D55EB /* BetaGroupBuildsLinkagesResponse.swift in Sources */,
+				31DE062121999FC4007D55EB /* BetaLicenseAgreementsResponse.swift in Sources */,
+				31DE05FA21999FC4007D55EB /* AppResponse.swift in Sources */,
+				31DE060B21999FC4007D55EB /* AppEncryptionDeclarationAppLinkageResponse.swift in Sources */,
+				31DE05F821999FC4007D55EB /* BuildIndividualTestersLinkagesRequest.swift in Sources */,
 				FB3452D43389B977F6F53A88537C77D4 /* APIProvider.swift in Sources */,
+				31DE060421999FC4007D55EB /* BuildBetaNotification.swift in Sources */,
+				31DE063121999FC5007D55EB /* BetaTesterAppsLinkagesRequest.swift in Sources */,
+				31DE061E21999FC4007D55EB /* AppEncryptionDeclarationsResponse.swift in Sources */,
+				31DE061821999FC4007D55EB /* BuildAppEncryptionDeclarationLinkageResponse.swift in Sources */,
+				31DE066421999FC5007D55EB /* BetaAppLocalizationResponse.swift in Sources */,
+				31DE061B21999FC4007D55EB /* BetaGroupsResponse.swift in Sources */,
+				31DE05F421999FC4007D55EB /* BuildBuildBetaDetailLinkageResponse.swift in Sources */,
+				31DE065821999FC5007D55EB /* BetaAppReviewSubmissionCreateRequest.swift in Sources */,
+				31DE062721999FC5007D55EB /* UserRole.swift in Sources */,
+				31DE061921999FC4007D55EB /* BuildsResponse.swift in Sources */,
+				31DE061C21999FC4007D55EB /* BetaTesterBetaGroupsLinkagesRequest.swift in Sources */,
+				31DE063921999FC5007D55EB /* BetaBuildLocalizationsResponse.swift in Sources */,
+				31DE062321999FC5007D55EB /* BetaAppLocalizationAppLinkageResponse.swift in Sources */,
+				31DE060821999FC4007D55EB /* UserVisibleAppsLinkagesRequest.swift in Sources */,
+				31DE065621999FC5007D55EB /* BetaTesterAppsLinkagesResponse.swift in Sources */,
+				31DE064321999FC5007D55EB /* BetaAppLocalizationUpdateRequest.swift in Sources */,
+				31DE060321999FC4007D55EB /* BetaAppReviewDetailAppLinkageResponse.swift in Sources */,
+				31DE060721999FC4007D55EB /* AppBuildsLinkagesResponse.swift in Sources */,
+				31DE062421999FC5007D55EB /* BetaBuildLocalizationBuildLinkageResponse.swift in Sources */,
+				31DE05F921999FC4007D55EB /* InternalBetaState.swift in Sources */,
+				31DE065121999FC5007D55EB /* AppBetaTestersLinkagesRequest.swift in Sources */,
+				31DE064721999FC5007D55EB /* BuildAppLinkageResponse.swift in Sources */,
+				31DE065F21999FC5007D55EB /* BetaInviteType.swift in Sources */,
+				31DE063F21999FC5007D55EB /* BetaTesterResponse.swift in Sources */,
+				31DE062921999FC5007D55EB /* BetaAppReviewSubmissionResponse.swift in Sources */,
+				31DE066221999FC5007D55EB /* BetaAppReviewSubmission.swift in Sources */,
+				31DE061521999FC4007D55EB /* BetaTesterCreateRequest.swift in Sources */,
+				31DE060F21999FC4007D55EB /* UserInvitationsResponse.swift in Sources */,
+				31DE064B21999FC5007D55EB /* BetaLicenseAgreement.swift in Sources */,
+				31DE064121999FC5007D55EB /* BetaAppReviewSubmissionsResponse.swift in Sources */,
+				31DE064421999FC5007D55EB /* Platform.swift in Sources */,
+				31DE065221999FC5007D55EB /* BetaAppReviewDetail.swift in Sources */,
+				31DE064521999FC5007D55EB /* BuildAppEncryptionDeclarationLinkageRequest.swift in Sources */,
+				31DE05F721999FC4007D55EB /* BetaTesterBuildsLinkagesRequest.swift in Sources */,
+				31DE063421999FC5007D55EB /* BetaGroupResponse.swift in Sources */,
+				31DE065A21999FC5007D55EB /* BetaBuildLocalization.swift in Sources */,
+				31DE062C21999FC5007D55EB /* BetaGroupBetaTestersLinkagesRequest.swift in Sources */,
+				31DE062621999FC5007D55EB /* BetaBuildLocalizationCreateRequest.swift in Sources */,
+				31DE064F21999FC5007D55EB /* Build.swift in Sources */,
+				31DE05FE21999FC4007D55EB /* PreReleaseVersionsResponse.swift in Sources */,
+				31DE062A21999FC5007D55EB /* DocumentLinks.swift in Sources */,
+				31DE063021999FC5007D55EB /* BetaBuildLocalizationUpdateRequest.swift in Sources */,
 				1B34980818A99D7198C4A7DF8D1B074F /* AppStoreConnect-Swift-SDK-dummy.m in Sources */,
+				31DE063D21999FC5007D55EB /* PagedDocumentLinks.swift in Sources */,
+				31DE066021999FC5007D55EB /* BetaTesterBuildsLinkagesResponse.swift in Sources */,
+				31DE064221999FC5007D55EB /* PrereleaseVersionBuildsLinkagesResponse.swift in Sources */,
+				31DE065E21999FC5007D55EB /* BuildBetaDetailsResponse.swift in Sources */,
+				31DE065721999FC5007D55EB /* AppBetaLicenseAgreementLinkageResponse.swift in Sources */,
+				31DE063B21999FC5007D55EB /* BetaAppReviewDetailResponse.swift in Sources */,
+				31DE062D21999FC5007D55EB /* BuildBetaDetail.swift in Sources */,
+				31DE062B21999FC5007D55EB /* BetaLicenseAgreementResponse.swift in Sources */,
+				31DE065321999FC5007D55EB /* BuildIndividualTestersLinkagesResponse.swift in Sources */,
+				31DE062021999FC4007D55EB /* BetaLicenseAgreementAppLinkageResponse.swift in Sources */,
+				31DE063C21999FC5007D55EB /* UserResponse.swift in Sources */,
+				31DE061021999FC4007D55EB /* BetaGroupBetaTestersLinkagesResponse.swift in Sources */,
+				31DE064C21999FC5007D55EB /* ErrorResponse.swift in Sources */,
+				31DE066321999FC5007D55EB /* UserVisibleAppsLinkagesResponse.swift in Sources */,
+				31DE05F521999FC4007D55EB /* BetaGroupBuildsLinkagesRequest.swift in Sources */,
+				31DE061421999FC4007D55EB /* AppBetaGroupsLinkagesResponse.swift in Sources */,
+				31DE065421999FC5007D55EB /* UserInvitationCreateRequest.swift in Sources */,
 				70968C330657B4FB735281802105BB1B /* Endpoints.swift in Sources */,
-				2480AB691582D4F81F8B6516033B64D2 /* Models.swift in Sources */,
+				31DE065021999FC5007D55EB /* AppPreReleaseVersionsLinkagesResponse.swift in Sources */,
+				31DE05FC21999FC4007D55EB /* BuildBetaBuildLocalizationsLinkagesResponse.swift in Sources */,
+				31DE064821999FC5007D55EB /* BetaAppLocalizationsResponse.swift in Sources */,
+				31DE066621999FC5007D55EB /* BetaAppReviewDetailsResponse.swift in Sources */,
+				31DE05FF21999FC4007D55EB /* BuildResponse.swift in Sources */,
+				31DE060E21999FC4007D55EB /* BuildBetaDetailResponse.swift in Sources */,
+				31DE065921999FC5007D55EB /* BetaGroupAppLinkageResponse.swift in Sources */,
+				31DE060921999FC4007D55EB /* PrereleaseVersionAppLinkageResponse.swift in Sources */,
+				31DE05FD21999FC4007D55EB /* BuildBetaGroupsLinkagesRequest.swift in Sources */,
+				31DE064021999FC5007D55EB /* BetaReviewState.swift in Sources */,
+				31DE064A21999FC5007D55EB /* BuildPreReleaseVersionLinkageResponse.swift in Sources */,
+				31DE064621999FC5007D55EB /* UsersResponse.swift in Sources */,
+				31DE060621999FC4007D55EB /* AppEncryptionDeclarationState.swift in Sources */,
+				31DE061F21999FC4007D55EB /* BuildBetaNotificationResponse.swift in Sources */,
+				31DE062221999FC5007D55EB /* BetaBuildLocalizationResponse.swift in Sources */,
+				31DE064E21999FC5007D55EB /* UserInvitationResponse.swift in Sources */,
+				31DE063221999FC5007D55EB /* PrereleaseVersion.swift in Sources */,
+				31DE066721999FC5007D55EB /* BuildBetaDetailBuildLinkageResponse.swift in Sources */,
+				31DE061221999FC4007D55EB /* BuildBetaNotificationCreateRequest.swift in Sources */,
+				31DE060C21999FC4007D55EB /* BuildUpdateRequest.swift in Sources */,
+				31DE061621999FC4007D55EB /* UserInvitation.swift in Sources */,
+				31DE060021999FC4007D55EB /* UserInvitationVisibleAppsLinkagesResponse.swift in Sources */,
+				31DE066521999FC5007D55EB /* BetaTester.swift in Sources */,
+				31DE060521999FC4007D55EB /* UserUpdateRequest.swift in Sources */,
+				31DE05FB21999FC4007D55EB /* BetaGroupCreateRequest.swift in Sources */,
+				31DE05F621999FC4007D55EB /* BetaTesterInvitation.swift in Sources */,
+				31DE060D21999FC4007D55EB /* BetaAppReviewSubmissionBuildLinkageResponse.swift in Sources */,
+				31DE061321999FC4007D55EB /* AppEncryptionDeclaration.swift in Sources */,
+				31DE063E21999FC5007D55EB /* BetaGroup.swift in Sources */,
+				31DE061721999FC4007D55EB /* AppBetaAppReviewDetailLinkageResponse.swift in Sources */,
+				31DE061D21999FC4007D55EB /* BetaTestersResponse.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -896,8 +1364,7 @@
 				MTL_FAST_MATH = YES;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				STRIP_INSTALLED_PRODUCT = NO;
-				SWIFT_COMPILATION_MODE = wholemodule;
-				SWIFT_OPTIMIZATION_LEVEL = "-O";
+				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
 				SWIFT_VERSION = 4.2;
 				SYMROOT = "${SRCROOT}/../build";
 			};
