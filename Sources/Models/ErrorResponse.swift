@@ -37,6 +37,7 @@ struct ErrorResponse: Decodable {
     }
 }
 
+/// MARK: ErrorResponse.Errors
 extension ErrorResponse.Errors {
     /// An object containing the JSON pointer that indicates the location of the error.
     struct JsonPointer: Decodable {

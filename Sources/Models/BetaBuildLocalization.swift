@@ -42,6 +42,7 @@ struct BetaBuildLocalization: Decodable {
     }
 }
 
+/// MARK: BetaBuildLocalization.Relationships
 extension BetaBuildLocalization.Relationships {
     
     struct Build: Decodable {
@@ -54,6 +55,7 @@ extension BetaBuildLocalization.Relationships {
     }
 }
 
+/// MARK: BetaBuildLocalization.Relationships.Build
 extension BetaBuildLocalization.Relationships.Build {
     
     struct Data: Decodable {

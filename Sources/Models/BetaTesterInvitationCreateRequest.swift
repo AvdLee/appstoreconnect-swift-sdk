@@ -23,6 +23,7 @@ struct BetaTesterInvitationCreateRequest: Decodable {
     }
 }
 
+/// MARK: BetaTesterInvitationCreateRequest.Data
 extension BetaTesterInvitationCreateRequest.Data {
     
     struct Relationships: Decodable {
@@ -35,6 +36,7 @@ extension BetaTesterInvitationCreateRequest.Data {
     }
 }
 
+/// MARK: BetaTesterInvitationCreateRequest.Data.Relationships
 extension BetaTesterInvitationCreateRequest.Data.Relationships {
     
     struct App: Decodable {
@@ -50,6 +52,7 @@ extension BetaTesterInvitationCreateRequest.Data.Relationships {
     }
 }
 
+/// MARK: BetaTesterInvitationCreateRequest.Data.Relationships.App
 extension BetaTesterInvitationCreateRequest.Data.Relationships.App {
     
     struct Data: Decodable {
@@ -62,6 +65,7 @@ extension BetaTesterInvitationCreateRequest.Data.Relationships.App {
     }
 }
 
+/// MARK: BetaTesterInvitationCreateRequest.Data.Relationships.BetaTester
 extension BetaTesterInvitationCreateRequest.Data.Relationships.BetaTester {
     
     struct Data: Decodable {

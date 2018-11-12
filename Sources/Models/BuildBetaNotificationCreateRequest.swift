@@ -23,6 +23,7 @@ struct BuildBetaNotificationCreateRequest: Decodable {
     }
 }
 
+/// MARK: BuildBetaNotificationCreateRequest.Data
 extension BuildBetaNotificationCreateRequest.Data {
     
     struct Relationships: Decodable {
@@ -32,6 +33,7 @@ extension BuildBetaNotificationCreateRequest.Data {
     }
 }
 
+/// MARK: BuildBetaNotificationCreateRequest.Data.Relationships
 extension BuildBetaNotificationCreateRequest.Data.Relationships {
     
     struct Build: Decodable {
@@ -41,6 +43,7 @@ extension BuildBetaNotificationCreateRequest.Data.Relationships {
     }
 }
 
+/// MARK: BuildBetaNotificationCreateRequest.Data.Relationships.Build
 extension BuildBetaNotificationCreateRequest.Data.Relationships.Build {
     
     struct Data: Decodable {

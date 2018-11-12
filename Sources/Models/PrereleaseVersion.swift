@@ -45,6 +45,7 @@ struct PrereleaseVersion: Decodable {
     }
 }
 
+/// MARK: PrereleaseVersion.Relationships
 extension PrereleaseVersion.Relationships {
     
     struct App: Decodable {
@@ -69,6 +70,7 @@ extension PrereleaseVersion.Relationships {
     }
 }
 
+/// MARK: PrereleaseVersion.Relationships.App
 extension PrereleaseVersion.Relationships.App {
     
     struct Data: Decodable {
@@ -90,6 +92,7 @@ extension PrereleaseVersion.Relationships.App {
     }
 }
 
+/// MARK: PrereleaseVersion.Relationships.Builds
 extension PrereleaseVersion.Relationships.Builds {
     
     struct Data: Decodable {

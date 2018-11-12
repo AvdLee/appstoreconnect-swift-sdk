@@ -26,6 +26,7 @@ struct BetaAppLocalizationUpdateRequest: Decodable {
     }
 }
 
+/// MARK: BetaAppLocalizationUpdateRequest.Data
 extension BetaAppLocalizationUpdateRequest.Data {
     /// Attributes that describe a resource.
     struct Attributes: Decodable {

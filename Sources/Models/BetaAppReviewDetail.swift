@@ -60,6 +60,7 @@ struct BetaAppReviewDetail: Decodable {
     }
 }
 
+/// MARK: BetaAppReviewDetail.Relationships
 extension BetaAppReviewDetail.Relationships {
     
     struct App: Decodable {
@@ -72,6 +73,7 @@ extension BetaAppReviewDetail.Relationships {
     }
 }
 
+/// MARK: BetaAppReviewDetail.Relationships.App
 extension BetaAppReviewDetail.Relationships.App {
     
     struct Data: Decodable {

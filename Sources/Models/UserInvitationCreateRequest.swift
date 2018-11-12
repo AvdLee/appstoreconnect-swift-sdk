@@ -26,6 +26,7 @@ struct UserInvitationCreateRequest: Decodable {
     }
 }
 
+/// MARK: UserInvitationCreateRequest.Data
 extension UserInvitationCreateRequest.Data {
     /// Attributes that describe a resource.
     struct Attributes: Decodable {
@@ -56,6 +57,7 @@ extension UserInvitationCreateRequest.Data {
     }
 }
 
+/// MARK: UserInvitationCreateRequest.Data.Relationships
 extension UserInvitationCreateRequest.Data.Relationships {
     
     struct VisibleApps: Decodable {
@@ -65,6 +67,7 @@ extension UserInvitationCreateRequest.Data.Relationships {
     }
 }
 
+/// MARK: UserInvitationCreateRequest.Data.Relationships.VisibleApps
 extension UserInvitationCreateRequest.Data.Relationships.VisibleApps {
     
     struct Data: Decodable {

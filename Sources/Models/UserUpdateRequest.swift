@@ -29,6 +29,7 @@ struct UserUpdateRequest: Decodable {
     }
 }
 
+/// MARK: UserUpdateRequest.Data
 extension UserUpdateRequest.Data {
     /// Attributes that describe a resource.
     struct Attributes: Decodable {
@@ -50,6 +51,7 @@ extension UserUpdateRequest.Data {
     }
 }
 
+/// MARK: UserUpdateRequest.Data.Relationships
 extension UserUpdateRequest.Data.Relationships {
     
     struct VisibleApps: Decodable {
@@ -59,6 +61,7 @@ extension UserUpdateRequest.Data.Relationships {
     }
 }
 
+/// MARK: UserUpdateRequest.Data.Relationships.VisibleApps
 extension UserUpdateRequest.Data.Relationships.VisibleApps {
     
     struct Data: Decodable {

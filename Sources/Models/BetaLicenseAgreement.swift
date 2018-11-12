@@ -39,6 +39,7 @@ struct BetaLicenseAgreement: Decodable {
     }
 }
 
+/// MARK: BetaLicenseAgreement.Relationships
 extension BetaLicenseAgreement.Relationships {
     
     struct App: Decodable {
@@ -51,6 +52,7 @@ extension BetaLicenseAgreement.Relationships {
     }
 }
 
+/// MARK: BetaLicenseAgreement.Relationships.App
 extension BetaLicenseAgreement.Relationships.App {
     
     struct Data: Decodable {

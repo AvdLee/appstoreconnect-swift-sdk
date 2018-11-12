@@ -54,6 +54,7 @@ struct BetaAppLocalization: Decodable {
     }
 }
 
+/// MARK: BetaAppLocalization.Relationships
 extension BetaAppLocalization.Relationships {
     
     struct App: Decodable {
@@ -66,6 +67,7 @@ extension BetaAppLocalization.Relationships {
     }
 }
 
+/// MARK: BetaAppLocalization.Relationships.App
 extension BetaAppLocalization.Relationships.App {
     
     struct Data: Decodable {

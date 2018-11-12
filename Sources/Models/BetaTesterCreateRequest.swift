@@ -26,6 +26,7 @@ struct BetaTesterCreateRequest: Decodable {
     }
 }
 
+/// MARK: BetaTesterCreateRequest.Data
 extension BetaTesterCreateRequest.Data {
     /// Attributes that describe a resource.
     struct Attributes: Decodable {
@@ -50,6 +51,7 @@ extension BetaTesterCreateRequest.Data {
     }
 }
 
+/// MARK: BetaTesterCreateRequest.Data.Relationships
 extension BetaTesterCreateRequest.Data.Relationships {
     
     struct BetaGroups: Decodable {
@@ -65,6 +67,7 @@ extension BetaTesterCreateRequest.Data.Relationships {
     }
 }
 
+/// MARK: BetaTesterCreateRequest.Data.Relationships.BetaGroups
 extension BetaTesterCreateRequest.Data.Relationships.BetaGroups {
     
     struct Data: Decodable {
@@ -77,6 +80,7 @@ extension BetaTesterCreateRequest.Data.Relationships.BetaGroups {
     }
 }
 
+/// MARK: BetaTesterCreateRequest.Data.Relationships.Builds
 extension BetaTesterCreateRequest.Data.Relationships.Builds {
     
     struct Data: Decodable {

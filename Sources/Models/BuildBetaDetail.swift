@@ -45,6 +45,7 @@ struct BuildBetaDetail: Decodable {
     }
 }
 
+/// MARK: BuildBetaDetail.Relationships
 extension BuildBetaDetail.Relationships {
     
     struct Build: Decodable {
@@ -57,6 +58,7 @@ extension BuildBetaDetail.Relationships {
     }
 }
 
+/// MARK: BuildBetaDetail.Relationships.Build
 extension BuildBetaDetail.Relationships.Build {
     
     struct Data: Decodable {

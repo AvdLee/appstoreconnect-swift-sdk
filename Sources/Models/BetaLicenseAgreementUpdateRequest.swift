@@ -26,6 +26,7 @@ struct BetaLicenseAgreementUpdateRequest: Decodable {
     }
 }
 
+/// MARK: BetaLicenseAgreementUpdateRequest.Data
 extension BetaLicenseAgreementUpdateRequest.Data {
     /// Attributes that describe a resource.
     struct Attributes: Decodable {

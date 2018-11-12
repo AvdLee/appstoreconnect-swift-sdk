@@ -83,6 +83,7 @@ struct Build: Decodable {
 
 /// MARK: Build.Relationships
 
+/// MARK: Build.Relationships
 extension Build.Relationships {
     
     struct App: Decodable {
@@ -167,6 +168,7 @@ extension Build.Relationships {
     }
 }
 
+/// MARK: Build.Relationships.App
 extension Build.Relationships.App {
     
     struct Data: Decodable {
@@ -179,6 +181,7 @@ extension Build.Relationships.App {
     }
 }
 
+/// MARK: Build.Relationships.App
 extension Build.Relationships.App {
     
     struct Links: Decodable {
@@ -191,6 +194,7 @@ extension Build.Relationships.App {
     }
 }
 
+/// MARK: Build.Relationships.AppEncryptionDeclaration
 extension Build.Relationships.AppEncryptionDeclaration {
     
     struct Data: Decodable {
@@ -203,6 +207,7 @@ extension Build.Relationships.AppEncryptionDeclaration {
     }
 }
 
+/// MARK: Build.Relationships.AppEncryptionDeclaration
 extension Build.Relationships.AppEncryptionDeclaration {
     
     struct Links: Decodable {
@@ -215,6 +220,7 @@ extension Build.Relationships.AppEncryptionDeclaration {
     }
 }
 
+/// MARK: Build.Relationships.BetaAppReviewSubmission
 extension Build.Relationships.BetaAppReviewSubmission {
     
     struct Data: Decodable {
@@ -227,6 +233,7 @@ extension Build.Relationships.BetaAppReviewSubmission {
     }
 }
 
+/// MARK: Build.Relationships.BetaAppReviewSubmission
 extension Build.Relationships.BetaAppReviewSubmission {
     
     struct Links: Decodable {
@@ -239,6 +246,7 @@ extension Build.Relationships.BetaAppReviewSubmission {
     }
 }
 
+/// MARK: Build.Relationships.BetaBuildLocalizations
 extension Build.Relationships.BetaBuildLocalizations {
     
     struct Data: Decodable {
@@ -251,6 +259,7 @@ extension Build.Relationships.BetaBuildLocalizations {
     }
 }
 
+/// MARK: Build.Relationships.BetaBuildLocalizations
 extension Build.Relationships.BetaBuildLocalizations {
     
     struct Links: Decodable {
@@ -263,6 +272,7 @@ extension Build.Relationships.BetaBuildLocalizations {
     }
 }
 
+/// MARK: Build.Relationships.BetaGroups
 extension Build.Relationships.BetaGroups {
     
     struct Data: Decodable {
@@ -275,6 +285,7 @@ extension Build.Relationships.BetaGroups {
     }
 }
 
+/// MARK: Build.Relationships.BetaGroups
 extension Build.Relationships.BetaGroups {
     
     struct Links: Decodable {
@@ -287,6 +298,7 @@ extension Build.Relationships.BetaGroups {
     }
 }
 
+/// MARK: Build.Relationships.BuildBetaDetail
 extension Build.Relationships.BuildBetaDetail {
     
     struct Data: Decodable {
@@ -299,6 +311,7 @@ extension Build.Relationships.BuildBetaDetail {
     }
 }
 
+/// MARK: Build.Relationships.BuildBetaDetail
 extension Build.Relationships.BuildBetaDetail {
     
     struct Links: Decodable {
@@ -311,6 +324,7 @@ extension Build.Relationships.BuildBetaDetail {
     }
 }
 
+/// MARK: Build.Relationships.IndividualTesters
 extension Build.Relationships.IndividualTesters {
     
     struct Data: Decodable {
@@ -323,6 +337,7 @@ extension Build.Relationships.IndividualTesters {
     }
 }
 
+/// MARK: Build.Relationships.IndividualTesters
 extension Build.Relationships.IndividualTesters {
     
     struct Links: Decodable {
@@ -335,6 +350,7 @@ extension Build.Relationships.IndividualTesters {
     }
 }
 
+/// MARK: Build.Relationships.PreReleaseVersion
 extension Build.Relationships.PreReleaseVersion {
     
     struct Data: Decodable {
@@ -347,6 +363,7 @@ extension Build.Relationships.PreReleaseVersion {
     }
 }
 
+/// MARK: Build.Relationships.PreReleaseVersion
 extension Build.Relationships.PreReleaseVersion {
     
     struct Links: Decodable {

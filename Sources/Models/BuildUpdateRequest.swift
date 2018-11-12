@@ -29,6 +29,7 @@ struct BuildUpdateRequest: Decodable {
     }
 }
 
+/// MARK: BuildUpdateRequest.Data
 extension BuildUpdateRequest.Data {
     /// Attributes that describe a resource.
     struct Attributes: Decodable {
@@ -47,6 +48,7 @@ extension BuildUpdateRequest.Data {
     }
 }
 
+/// MARK: BuildUpdateRequest.Data.Relationships
 extension BuildUpdateRequest.Data.Relationships {
     
     struct AppEncryptionDeclaration: Decodable {
@@ -56,6 +58,7 @@ extension BuildUpdateRequest.Data.Relationships {
     }
 }
 
+/// MARK: BuildUpdateRequest.Data.Relationships.AppEncryptionDeclaration
 extension BuildUpdateRequest.Data.Relationships.AppEncryptionDeclaration {
     
     struct Data: Decodable {

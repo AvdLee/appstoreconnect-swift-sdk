@@ -75,6 +75,7 @@ struct AppEncryptionDeclaration: Decodable {
     }
 }
 
+/// MARK: AppEncryptionDeclaration.Relationships
 extension AppEncryptionDeclaration.Relationships {
     
     struct App: Decodable {
@@ -99,6 +100,7 @@ extension AppEncryptionDeclaration.Relationships {
     }
 }
 
+/// MARK: AppEncryptionDeclaration.Relationships.App
 extension AppEncryptionDeclaration.Relationships.App {
     
     struct Data: Decodable {
@@ -120,6 +122,7 @@ extension AppEncryptionDeclaration.Relationships.App {
     }
 }
 
+/// MARK: AppEncryptionDeclaration.Relationships.Builds
 extension AppEncryptionDeclaration.Relationships.Builds {
     
     struct Data: Decodable {

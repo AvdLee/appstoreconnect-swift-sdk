@@ -26,6 +26,7 @@ struct BuildBetaDetailUpdateRequest: Decodable {
     }
 }
 
+/// MARK: BuildBetaDetailUpdateRequest.Data
 extension BuildBetaDetailUpdateRequest.Data {
     /// Attributes that describe a resource.
     struct Attributes: Decodable {

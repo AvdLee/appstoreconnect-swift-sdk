@@ -26,6 +26,7 @@ struct BetaAppLocalizationCreateRequest: Decodable {
     }
 }
 
+/// MARK: BetaAppLocalizationCreateRequest.Data
 extension BetaAppLocalizationCreateRequest.Data {
     /// Attributes that describe a resource.
     struct Attributes: Decodable {
@@ -56,6 +57,7 @@ extension BetaAppLocalizationCreateRequest.Data {
     }
 }
 
+/// MARK: BetaAppLocalizationCreateRequest.Data.Relationships
 extension BetaAppLocalizationCreateRequest.Data.Relationships {
     
     struct App: Decodable {
@@ -65,6 +67,7 @@ extension BetaAppLocalizationCreateRequest.Data.Relationships {
     }
 }
 
+/// MARK: BetaAppLocalizationCreateRequest.Data.Relationships.App
 extension BetaAppLocalizationCreateRequest.Data.Relationships.App {
     
     struct Data: Decodable {

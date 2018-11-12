@@ -57,6 +57,7 @@ struct UserInvitation: Decodable {
     }
 }
 
+/// MARK: UserInvitation.Relationships
 extension UserInvitation.Relationships {
     
     struct VisibleApps: Decodable {
@@ -72,6 +73,7 @@ extension UserInvitation.Relationships {
     }
 }
 
+/// MARK: UserInvitation.Relationships.VisibleApps
 extension UserInvitation.Relationships.VisibleApps {
     
     struct Data: Decodable {

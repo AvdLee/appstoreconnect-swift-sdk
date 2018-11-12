@@ -54,6 +54,7 @@ struct BetaTester: Decodable {
     }
 }
 
+/// MARK: BetaTester.Relationships
 extension BetaTester.Relationships {
     
     struct Apps: Decodable {
@@ -93,6 +94,7 @@ extension BetaTester.Relationships {
     }
 }
 
+/// MARK: BetaTester.Relationships.Apps
 extension BetaTester.Relationships.Apps {
     
     struct Data: Decodable {
@@ -114,6 +116,7 @@ extension BetaTester.Relationships.Apps {
     }
 }
 
+/// MARK: BetaTester.Relationships.BetaGroups
 extension BetaTester.Relationships.BetaGroups {
     
     struct Data: Decodable {
@@ -135,6 +138,7 @@ extension BetaTester.Relationships.BetaGroups {
     }
 }
 
+/// MARK: BetaTester.Relationships.Builds
 extension BetaTester.Relationships.Builds {
     
     struct Data: Decodable {

@@ -26,6 +26,7 @@ struct BetaAppReviewDetailUpdateRequest: Decodable {
     }
 }
 
+/// MARK: BetaAppReviewDetailUpdateRequest.Data
 extension BetaAppReviewDetailUpdateRequest.Data {
     /// Attributes that describe a resource.
     struct Attributes: Decodable {

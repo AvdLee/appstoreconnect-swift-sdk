@@ -26,6 +26,7 @@ struct BetaGroupUpdateRequest: Decodable {
     }
 }
 
+/// MARK: BetaGroupUpdateRequest.Data
 extension BetaGroupUpdateRequest.Data {
     /// Attributes that describe a resource.
     struct Attributes: Decodable {

@@ -39,6 +39,7 @@ struct BetaAppReviewSubmission: Decodable {
     }
 }
 
+/// MARK: BetaAppReviewSubmission.Relationships
 extension BetaAppReviewSubmission.Relationships {
     
     struct Build: Decodable {
@@ -51,6 +52,7 @@ extension BetaAppReviewSubmission.Relationships {
     }
 }
 
+/// MARK: BetaAppReviewSubmission.Relationships.Build
 extension BetaAppReviewSubmission.Relationships.Build {
     
     struct Data: Decodable {
