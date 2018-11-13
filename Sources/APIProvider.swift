@@ -11,14 +11,23 @@ import Alamofire
 /// The configuration needed to set up the API Provider including all needed information for performing API requests.
 public struct APIConfiguration {
 
-    /// The URL pointing to the API key file within the bundle.
-    private let key: URL
+    /// Your private key ID from App Store Connect (Ex: 2X9R4HXF34)
+    let privateKeyID: String
+
+    let privateKey: String
+
+    /// Your issuer ID from the API Keys page in App Store Connect (Ex: 57246542-96fe-1a63-e053-0824d011072a)
+    let issuerID: String
 
     /// Creates a new API configuration to use for initialising the API Provider.
     ///
-    /// - Parameter key: The API key to use for authenticating the API Requests with JWT.
-    public init(key: URL) {
-        self.key = key
+    /// - Parameters:
+    ///   - privateKeyID: Your private key ID from App Store Connect (Ex: 2X9R4HXF34)
+    ///   - issuerID: Your issuer ID from the API Keys page in App Store Connect (Ex: 57246542-96fe-1a63-e053-0824d011072a)
+    public init(issuerID: String, privateKeyID: String, privateKey: String) {
+        self.privateKeyID = privateKeyID
+        self.privateKey = privateKey
+        self.issuerID = issuerID
     }
 }
 
@@ -33,6 +42,9 @@ public final class APIProvider {
 
     /// The configuration needed to set up the API Provider including all needed information for performing API requests.
     private let configuration: APIConfiguration
+
+    /// The authenticator to handle all JWT signing related actions.
+    private lazy var requestsAuthenticator = JWTRequestsAuthenticator(apiConfiguration: self.configuration)
 
     /// Creates a new APIProvider instance which can be used to perform API Requests to the App Store Connect API.
     ///
@@ -49,6 +61,8 @@ public final class APIProvider {
         } else {
             defaultSessionManager = SessionManager(configuration: URLSessionConfiguration.default)
         }
+
+        defaultSessionManager.adapter = requestsAuthenticator
     }
 
     /// Generates an URL based on the given endpoint in combination with the current API version.
