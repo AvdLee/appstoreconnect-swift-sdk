@@ -8,25 +8,25 @@
 import Foundation
     
 /// A response containing a list of resources.
-struct PreReleaseVersionsResponse: Decodable {
+public struct PreReleaseVersionsResponse: Decodable {
 
     /// (Required) The resource data.
-    let data: [PrereleaseVersion]
+    public let data: [PrereleaseVersion]
 
     /// The requested relationship data.￼
     ///  Possible types: Build, App
-    let include: [PreReleaseVersionsResponse.Included]?
+    public let include: [PreReleaseVersionsResponse.Included]?
 
     /// (Required) Navigational links that include the self-link.
-    let links: PagedDocumentLinks
+    public let links: PagedDocumentLinks
 
     /// Paging information.
-    let meta: PagingInformation?
+    public let meta: PagingInformation?
     
-    enum Included: Decodable {
+    public enum Included: Decodable {
         case build(Build)
         case app(App)
-        init(from decoder: Decoder) throws {
+        public init(from decoder: Decoder) throws {
             if let wrapped = try? Build(from: decoder) {
                 self = .build(wrapped)
                 return

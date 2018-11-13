@@ -8,65 +8,65 @@
 import Foundation
     
 /// A request containing a single resource.
-struct BuildUpdateRequest: Decodable {
+public struct BuildUpdateRequest: Decodable {
 
     /// (Required) The resource data.
-    let data: BuildUpdateRequest.Data
+    public let data: BuildUpdateRequest.Data
     
-    struct Data: Decodable {
+    public struct Data: Decodable {
     
         /// The resource's attributes.
-        let attributes: BuildUpdateRequest.Data.Attributes?
+        public let attributes: BuildUpdateRequest.Data.Attributes?
     
         /// (Required) The opaque resource ID that uniquely identifies the resource.
-        let `id`: String
+        public let `id`: String
     
         /// Navigational links to related data and included resource types and IDs.
-        let relationships: BuildUpdateRequest.Data.Relationships?
+        public let relationships: BuildUpdateRequest.Data.Relationships?
     
         /// (Required) The resource type.Value: builds
-        let type: String
+        public let type: String
     }
 }
 
 /// MARK: BuildUpdateRequest.Data
 extension BuildUpdateRequest.Data {
     /// Attributes that describe a resource.
-    struct Attributes: Decodable {
+    public struct Attributes: Decodable {
     
         /// A Boolean value that indicates if the build has expired. An expired build is unavailable for testing.
-        let expired: Bool?
+        public let expired: Bool?
     
         /// A Boolean value that indicates whether the build uses non-exempt encryption.
-        let usesNonExemptEncryption: Bool?
+        public let usesNonExemptEncryption: Bool?
     }
     
-    struct Relationships: Decodable {
+    public struct Relationships: Decodable {
     
         /// BuildUpdateRequest.Data.Relationships.AppEncryptionDeclaration
-        let appEncryptionDeclaration: BuildUpdateRequest.Data.Relationships.AppEncryptionDeclaration?
+        public let appEncryptionDeclaration: BuildUpdateRequest.Data.Relationships.AppEncryptionDeclaration?
     }
 }
 
 /// MARK: BuildUpdateRequest.Data.Relationships
 extension BuildUpdateRequest.Data.Relationships {
     
-    struct AppEncryptionDeclaration: Decodable {
+    public struct AppEncryptionDeclaration: Decodable {
     
         /// BuildUpdateRequest.Data.Relationships.AppEncryptionDeclaration.Data
-        let data: BuildUpdateRequest.Data.Relationships.AppEncryptionDeclaration.Data?
+        public let data: BuildUpdateRequest.Data.Relationships.AppEncryptionDeclaration.Data?
     }
 }
 
 /// MARK: BuildUpdateRequest.Data.Relationships.AppEncryptionDeclaration
 extension BuildUpdateRequest.Data.Relationships.AppEncryptionDeclaration {
     
-    struct Data: Decodable {
+    public struct Data: Decodable {
     
         /// (Required) The opaque resource ID that uniquely identifies the resource.
-        let `id`: String
+        public let `id`: String
     
         /// (Required) The resource type.Value: appEncryptionDeclarations
-        let type: String
+        public let type: String
     }
 }

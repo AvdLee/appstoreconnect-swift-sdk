@@ -7,7 +7,7 @@
 
 import Foundation
     /// String that represents a build's availability for internal testing.
-enum InternalBetaState: String, Decodable {
+public enum InternalBetaState: String, Decodable {
     case processing = "PROCESSING"
     case processingException = "PROCESSING_EXCEPTION"
     case missingExportCompliance = "MISSING_EXPORT_COMPLIANCE"

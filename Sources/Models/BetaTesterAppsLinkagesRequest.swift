@@ -8,17 +8,17 @@
 import Foundation
     
 /// A request containing the IDs of related resources.
-struct BetaTesterAppsLinkagesRequest: Decodable {
+public struct BetaTesterAppsLinkagesRequest: Decodable {
 
     /// (Required) The types and IDs of related resources.
-    let data: [BetaTesterAppsLinkagesRequest.Data]
+    public let data: [BetaTesterAppsLinkagesRequest.Data]
     
-    struct Data: Decodable {
+    public struct Data: Decodable {
     
         /// (Required) The opaque resource ID that uniquely identifies the resource.
-        let `id`: String
+        public let `id`: String
     
         /// (Required) The resource type.Value: apps
-        let type: String
+        public let type: String
     }
 }

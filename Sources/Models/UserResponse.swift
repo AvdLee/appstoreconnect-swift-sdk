@@ -8,14 +8,14 @@
 import Foundation
     
 /// A response containing a single resource.
-struct UserResponse: Decodable {
+public struct UserResponse: Decodable {
 
     /// (Required) The resource data.
-    let data: User
+    public let data: User
 
     /// The requested relationship data.
-    let include: [App]?
+    public let include: [App]?
 
     /// (Required) Navigational links that include the self-link.
-    let links: DocumentLinks
+    public let links: DocumentLinks
 }

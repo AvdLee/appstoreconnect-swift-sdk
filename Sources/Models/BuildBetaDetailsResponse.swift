@@ -8,17 +8,17 @@
 import Foundation
     
 /// A response containing a list of resources.
-struct BuildBetaDetailsResponse: Decodable {
+public struct BuildBetaDetailsResponse: Decodable {
 
     /// (Required) The resource data.
-    let data: [BuildBetaDetail]
+    public let data: [BuildBetaDetail]
 
     /// The requested relationship data.
-    let include: [Build]?
+    public let include: [Build]?
 
     /// (Required) Navigational links that include the self-link.
-    let links: PagedDocumentLinks
+    public let links: PagedDocumentLinks
 
     /// Paging information.
-    let meta: PagingInformation?
+    public let meta: PagingInformation?
 }

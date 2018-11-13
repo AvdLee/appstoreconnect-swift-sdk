@@ -7,7 +7,7 @@
 
 import Foundation
     /// Strings representing user roles in App Store Connect.
-enum UserRole: String, Decodable {
+public enum UserRole: String, Decodable {
     case admin = "ADMIN"
     case finance = "FINANCE"
     case technical = "TECHNICAL"

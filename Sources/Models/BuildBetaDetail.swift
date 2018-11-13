@@ -8,74 +8,74 @@
 import Foundation
     
 /// The data structure that represents the resource.
-struct BuildBetaDetail: Decodable {
+public struct BuildBetaDetail: Decodable {
 
     /// The resource's attributes.
-    let attributes: BuildBetaDetail.Attributes?
+    public let attributes: BuildBetaDetail.Attributes?
 
     /// (Required) The opaque resource ID that uniquely identifies the resource.
-    let `id`: String
+    public let `id`: String
 
     /// Navigational links to related data and included resource types and IDs.
-    let relationships: BuildBetaDetail.Relationships?
+    public let relationships: BuildBetaDetail.Relationships?
 
     /// (Required) The resource type.Value: buildBetaDetails
-    let type: String
+    public let type: String
 
     /// (Required) Navigational links that include the self-link.
-    let links: ResourceLinks
+    public let links: ResourceLinks
 
     /// Attributes that describe a resource.
-    struct Attributes: Decodable {
+    public struct Attributes: Decodable {
     
         /// A Boolean value that enables you to send test invitations to users automatically when the build is available to external groups.
-        let autoNotifyEnabled: Bool?
+        public let autoNotifyEnabled: Bool?
     
         /// A state that indicates if the build is available for external testing.
-        let externalBuildState: ExternalBetaState?
+        public let externalBuildState: ExternalBetaState?
     
         /// A state that indicates if the build is available for internal testing.
-        let internalBuildState: InternalBetaState?
+        public let internalBuildState: InternalBetaState?
     }
     
-    struct Relationships: Decodable {
+    public struct Relationships: Decodable {
     
         /// BuildBetaDetail.Relationships.Build
-        let build: BuildBetaDetail.Relationships.Build?
+        public let build: BuildBetaDetail.Relationships.Build?
     }
 }
 
 /// MARK: BuildBetaDetail.Relationships
 extension BuildBetaDetail.Relationships {
     
-    struct Build: Decodable {
+    public struct Build: Decodable {
     
         /// BuildBetaDetail.Relationships.Build.Data
-        let data: BuildBetaDetail.Relationships.Build.Data?
+        public let data: BuildBetaDetail.Relationships.Build.Data?
     
         /// BuildBetaDetail.Relationships.Build.Links
-        let links: BuildBetaDetail.Relationships.Build.Links?
+        public let links: BuildBetaDetail.Relationships.Build.Links?
     }
 }
 
 /// MARK: BuildBetaDetail.Relationships.Build
 extension BuildBetaDetail.Relationships.Build {
     
-    struct Data: Decodable {
+    public struct Data: Decodable {
     
         /// (Required) The opaque resource ID that uniquely identifies the resource.
-        let `id`: String
+        public let `id`: String
     
         /// (Required) The resource type.Value: builds
-        let type: String
+        public let type: String
     }
     
-    struct Links: Decodable {
+    public struct Links: Decodable {
     
         /// uri-reference
-        let related: URL?
+        public let related: URL?
     
         /// uri-reference
-        let `self`: URL?
+        public let `self`: URL?
     }
 }

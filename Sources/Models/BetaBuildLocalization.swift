@@ -8,71 +8,71 @@
 import Foundation
     
 /// The data structure that represents the resource.
-struct BetaBuildLocalization: Decodable {
+public struct BetaBuildLocalization: Decodable {
 
     /// The resource's attributes.
-    let attributes: BetaBuildLocalization.Attributes?
+    public let attributes: BetaBuildLocalization.Attributes?
 
     /// (Required) The opaque resource ID that uniquely identifies the resource.
-    let `id`: String
+    public let `id`: String
 
     /// Navigational links to related data and included resource types and IDs.
-    let relationships: BetaBuildLocalization.Relationships?
+    public let relationships: BetaBuildLocalization.Relationships?
 
     /// (Required) The resource type.Value: betaBuildLocalizations
-    let type: String
+    public let type: String
 
     /// (Required) Navigational links that include the self-link.
-    let links: ResourceLinks
+    public let links: ResourceLinks
 
     /// Attributes that describe a resource.
-    struct Attributes: Decodable {
+    public struct Attributes: Decodable {
     
         /// The specified locale. Refer to Table 1 for possible values.
-        let locale: String?
+        public let locale: String?
     
         /// A field that describes changes and additions to a build and indicates features you would like your users to test.
-        let whatsNew: String?
+        public let whatsNew: String?
     }
     
-    struct Relationships: Decodable {
+    public struct Relationships: Decodable {
     
         /// BetaBuildLocalization.Relationships.Build
-        let build: BetaBuildLocalization.Relationships.Build?
+        public let build: BetaBuildLocalization.Relationships.Build?
     }
 }
 
 /// MARK: BetaBuildLocalization.Relationships
 extension BetaBuildLocalization.Relationships {
     
-    struct Build: Decodable {
+    public struct Build: Decodable {
     
         /// BetaBuildLocalization.Relationships.Build.Data
-        let data: BetaBuildLocalization.Relationships.Build.Data?
+        public let data: BetaBuildLocalization.Relationships.Build.Data?
     
         /// BetaBuildLocalization.Relationships.Build.Links
-        let links: BetaBuildLocalization.Relationships.Build.Links?
+        public let links: BetaBuildLocalization.Relationships.Build.Links?
     }
 }
 
 /// MARK: BetaBuildLocalization.Relationships.Build
 extension BetaBuildLocalization.Relationships.Build {
     
-    struct Data: Decodable {
+    public struct Data: Decodable {
     
         /// (Required) The opaque resource ID that uniquely identifies the resource.
-        let `id`: String
+        public let `id`: String
     
         /// (Required) The resource type.Value: builds
-        let type: String
+        public let type: String
     }
     
-    struct Links: Decodable {
+    public struct Links: Decodable {
     
         /// uri-reference
-        let related: URL?
+        public let related: URL?
     
         /// uri-reference
-        let `self`: URL?
+        public let `self`: URL?
     }
 }

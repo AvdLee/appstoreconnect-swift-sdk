@@ -8,11 +8,11 @@
 import Foundation
     
 /// A response containing a single resource.
-struct BuildBetaNotificationResponse: Decodable {
+public struct BuildBetaNotificationResponse: Decodable {
 
     /// (Required) The resource data.
-    let data: BuildBetaNotification
+    public let data: BuildBetaNotification
 
     /// (Required) Navigational links that include the self-link.
-    let links: DocumentLinks
+    public let links: DocumentLinks
 }
