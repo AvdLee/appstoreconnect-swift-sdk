@@ -8,20 +8,20 @@
 import Foundation
     
 /// A response containing a single resource.
-struct BetaBuildLocalizationBuildLinkageResponse: Decodable {
+public struct BetaBuildLocalizationBuildLinkageResponse: Decodable {
 
     /// (Required) The resource data.
-    let data: BetaBuildLocalizationBuildLinkageResponse.Data
+    public let data: BetaBuildLocalizationBuildLinkageResponse.Data
 
     /// (Required) Navigational links that include the self-link.
-    let links: DocumentLinks
+    public let links: DocumentLinks
     
-    struct Data: Decodable {
+    public struct Data: Decodable {
     
         /// (Required) The opaque resource ID that uniquely identifies the resource.
-        let `id`: String
+        public let `id`: String
     
         /// (Required) The resource type.Value: builds
-        let type: String
+        public let type: String
     }
 }

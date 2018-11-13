@@ -8,14 +8,14 @@
 import Foundation
     
 /// A response containing a single resource.
-struct BuildBetaDetailResponse: Decodable {
+public struct BuildBetaDetailResponse: Decodable {
 
     /// (Required) The resource data.
-    let data: BuildBetaDetail
+    public let data: BuildBetaDetail
 
     /// The requested relationship data.
-    let include: [Build]?
+    public let include: [Build]?
 
     /// (Required) Navigational links that include the self-link.
-    let links: DocumentLinks
+    public let links: DocumentLinks
 }

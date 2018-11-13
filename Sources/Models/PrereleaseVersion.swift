@@ -8,108 +8,108 @@
 import Foundation
     
 /// The data structure that represents the resource.
-struct PrereleaseVersion: Decodable {
+public struct PrereleaseVersion: Decodable {
 
     /// The resource's attributes.
-    let attributes: PrereleaseVersion.Attributes?
+    public let attributes: PrereleaseVersion.Attributes?
 
     /// (Required) The opaque resource ID that uniquely identifies the resource.
-    let `id`: String
+    public let `id`: String
 
     /// (Required) Navigational links that include the self-link.
-    let links: ResourceLinks
+    public let links: ResourceLinks
 
     /// Navigational links to related data and included resource types and IDs.
-    let relationships: PrereleaseVersion.Relationships?
+    public let relationships: PrereleaseVersion.Relationships?
 
     /// (Required) The resource type.Value: preReleaseVersions
-    let type: String
+    public let type: String
 
     /// Attributes that describe a resource.
-    struct Attributes: Decodable {
+    public struct Attributes: Decodable {
     
         /// The platform of the prerelease version of your app.
-        let platform: Platform?
+        public let platform: Platform?
     
         /// The version number of the prerelease version of your app.
-        let version: String?
+        public let version: String?
     }
     
-    struct Relationships: Decodable {
+    public struct Relationships: Decodable {
     
         /// PrereleaseVersion.Relationships.App
-        let app: PrereleaseVersion.Relationships.App?
+        public let app: PrereleaseVersion.Relationships.App?
     
         /// PrereleaseVersion.Relationships.Builds
-        let builds: PrereleaseVersion.Relationships.Builds?
+        public let builds: PrereleaseVersion.Relationships.Builds?
     }
 }
 
 /// MARK: PrereleaseVersion.Relationships
 extension PrereleaseVersion.Relationships {
     
-    struct App: Decodable {
+    public struct App: Decodable {
     
         /// PrereleaseVersion.Relationships.App.Data
-        let data: PrereleaseVersion.Relationships.App.Data?
+        public let data: PrereleaseVersion.Relationships.App.Data?
     
         /// PrereleaseVersion.Relationships.App.Links
-        let links: PrereleaseVersion.Relationships.App.Links?
+        public let links: PrereleaseVersion.Relationships.App.Links?
     }
 
-    struct Builds: Decodable {
+    public struct Builds: Decodable {
     
         /// [PrereleaseVersion.Relationships.Builds.Data]
-        let data: [PrereleaseVersion.Relationships.Builds.Data]?
+        public let data: [PrereleaseVersion.Relationships.Builds.Data]?
     
         /// PrereleaseVersion.Relationships.Builds.Links
-        let links: PrereleaseVersion.Relationships.Builds.Links?
+        public let links: PrereleaseVersion.Relationships.Builds.Links?
     
         /// PagingInformation
-        let meta: PagingInformation?
+        public let meta: PagingInformation?
     }
 }
 
 /// MARK: PrereleaseVersion.Relationships.App
 extension PrereleaseVersion.Relationships.App {
     
-    struct Data: Decodable {
+    public struct Data: Decodable {
     
         /// (Required) The opaque resource ID that uniquely identifies the resource.
-        let `id`: String
+        public let `id`: String
     
         /// (Required) The resource type.Value: apps
-        let type: String
+        public let type: String
     }
     
-    struct Links: Decodable {
+    public struct Links: Decodable {
     
         /// uri-reference
-        let related: URL?
+        public let related: URL?
     
         /// uri-reference
-        let `self`: URL?
+        public let `self`: URL?
     }
 }
 
 /// MARK: PrereleaseVersion.Relationships.Builds
 extension PrereleaseVersion.Relationships.Builds {
     
-    struct Data: Decodable {
+    public struct Data: Decodable {
     
         /// (Required) The opaque resource ID that uniquely identifies the resource.
-        let `id`: String
+        public let `id`: String
     
         /// (Required) The resource type.Value: builds
-        let type: String
+        public let type: String
     }
     
-    struct Links: Decodable {
+    public struct Links: Decodable {
     
         /// uri-reference
-        let related: URL?
+        public let related: URL?
     
         /// uri-reference
-        let `self`: URL?
+        public let `self`: URL?
     }
 }

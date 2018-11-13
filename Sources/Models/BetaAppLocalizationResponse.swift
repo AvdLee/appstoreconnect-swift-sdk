@@ -8,14 +8,14 @@
 import Foundation
     
 /// A response containing a single resource.
-struct BetaAppLocalizationResponse: Decodable {
+public struct BetaAppLocalizationResponse: Decodable {
 
     /// (Required) The resource data.
-    let data: BetaAppLocalization
+    public let data: BetaAppLocalization
 
     /// The requested relationship data.
-    let include: [App]?
+    public let include: [App]?
 
     /// (Required) Navigational links that include the self-link.
-    let links: DocumentLinks
+    public let links: DocumentLinks
 }

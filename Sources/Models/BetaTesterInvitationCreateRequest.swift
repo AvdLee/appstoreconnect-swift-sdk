@@ -8,72 +8,72 @@
 import Foundation
     
 /// A request containing a single resource.
-struct BetaTesterInvitationCreateRequest: Decodable {
+public struct BetaTesterInvitationCreateRequest: Decodable {
 
     /// (Required) The resource data.
-    let data: BetaTesterInvitationCreateRequest.Data
+    public let data: BetaTesterInvitationCreateRequest.Data
     
-    struct Data: Decodable {
+    public struct Data: Decodable {
     
         /// (Required) The types and IDs of the related data to update.
-        let relationships: BetaTesterInvitationCreateRequest.Data.Relationships
+        public let relationships: BetaTesterInvitationCreateRequest.Data.Relationships
     
         /// (Required) The resource type.Value: betaTesterInvitations
-        let type: String
+        public let type: String
     }
 }
 
 /// MARK: BetaTesterInvitationCreateRequest.Data
 extension BetaTesterInvitationCreateRequest.Data {
     
-    struct Relationships: Decodable {
+    public struct Relationships: Decodable {
     
         /// BetaTesterInvitationCreateRequest.Data.Relationships.App (Required)
-        let app: BetaTesterInvitationCreateRequest.Data.Relationships.App
+        public let app: BetaTesterInvitationCreateRequest.Data.Relationships.App
     
         /// BetaTesterInvitationCreateRequest.Data.Relationships.BetaTester (Required)
-        let betaTester: BetaTesterInvitationCreateRequest.Data.Relationships.BetaTester
+        public let betaTester: BetaTesterInvitationCreateRequest.Data.Relationships.BetaTester
     }
 }
 
 /// MARK: BetaTesterInvitationCreateRequest.Data.Relationships
 extension BetaTesterInvitationCreateRequest.Data.Relationships {
     
-    struct App: Decodable {
+    public struct App: Decodable {
     
         /// BetaTesterInvitationCreateRequest.Data.Relationships.App.Data (Required)
-        let data: BetaTesterInvitationCreateRequest.Data.Relationships.App.Data
+        public let data: BetaTesterInvitationCreateRequest.Data.Relationships.App.Data
     }
     
-    struct BetaTester: Decodable {
+    public struct BetaTester: Decodable {
     
         /// BetaTesterInvitationCreateRequest.Data.Relationships.BetaTester.Data (Required)
-        let data: BetaTesterInvitationCreateRequest.Data.Relationships.BetaTester.Data
+        public let data: BetaTesterInvitationCreateRequest.Data.Relationships.BetaTester.Data
     }
 }
 
 /// MARK: BetaTesterInvitationCreateRequest.Data.Relationships.App
 extension BetaTesterInvitationCreateRequest.Data.Relationships.App {
     
-    struct Data: Decodable {
+    public struct Data: Decodable {
     
         /// (Required) The opaque resource ID that uniquely identifies the resource.
-        let `id`: String
+        public let `id`: String
     
         /// (Required) The resource type.Value: apps
-        let type: String
+        public let type: String
     }
 }
 
 /// MARK: BetaTesterInvitationCreateRequest.Data.Relationships.BetaTester
 extension BetaTesterInvitationCreateRequest.Data.Relationships.BetaTester {
     
-    struct Data: Decodable {
+    public struct Data: Decodable {
     
         /// (Required) The opaque resource ID that uniquely identifies the resource.
-        let `id`: String
+        public let `id`: String
     
         /// (Required) The resource type.Value: betaTesters
-        let type: String
+        public let type: String
     }
 }

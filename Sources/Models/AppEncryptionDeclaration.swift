@@ -8,138 +8,138 @@
 import Foundation
     
 /// The data structure that represents the resource.
-struct AppEncryptionDeclaration: Decodable {
+public struct AppEncryptionDeclaration: Decodable {
 
     /// The resource's attributes.
-    let attributes: AppEncryptionDeclaration.Attributes?
+    public let attributes: AppEncryptionDeclaration.Attributes?
 
     /// (Required) The opaque resource ID that uniquely identifies the resource.
-    let `id`: String
+    public let `id`: String
 
     /// Navigational links to related data and included resource types and IDs.
-    let relationships: AppEncryptionDeclaration.Relationships?
+    public let relationships: AppEncryptionDeclaration.Relationships?
 
     /// (Required) The resource type.Value: appEncryptionDeclarations
-    let type: String
+    public let type: String
 
     /// (Required) Navigational links that include the self-link.
-    let links: ResourceLinks
+    public let links: ResourceLinks
 
     /// Attributes that describe a resource.
-    struct Attributes: Decodable {
+    public struct Attributes: Decodable {
     
         /// A Boolean value that indicates the intent to distribute your app on the French App Store.
-        let availableOnFrenchStore: Bool?
+        public let availableOnFrenchStore: Bool?
     
         /// A unique identifier that can be added to your app to associate it with a given declaration.
-        let codeValue: String?
+        public let codeValue: String?
     
         /// A Boolean value that indicates your app implements any proprietary encryption algorithms.
-        let containsProprietaryCryptography: Bool?
+        public let containsProprietaryCryptography: Bool?
     
         /// A Boolean value that indicates your app implements any standard encryption algorithms instead of, or in addition to, using or accessing the encryption in Apple’s operating systems.
-        let containsThirdPartyCryptography: Bool?
+        public let containsThirdPartyCryptography: Bool?
     
         /// The document name of your submitted export compliance documentation.
-        let documentName: String?
+        public let documentName: String?
     
         /// The file type of your submitted export compliance documentation.
-        let documentType: String?
+        public let documentType: String?
     
         /// The URL to the file of your submitted export compliance documentation.
-        let documentUrl: String?
+        public let documentUrl: String?
     
         /// A Boolean value that indicates your app is exempt based on your use of encryption and the app's availability.
-        let exempt: Bool?
+        public let exempt: Bool?
     
         /// The platform of the declaration.
-        let platform: Platform?
+        public let platform: Platform?
     
         /// A Boolean value that indicates whether your app uses, contains, or incorporates cryptography.
-        let usesEncryption: Bool?
+        public let usesEncryption: Bool?
     
         /// The approval state of your export compliance documentation.
-        let appEncryptionDeclarationState: AppEncryptionDeclarationState?
+        public let appEncryptionDeclarationState: AppEncryptionDeclarationState?
     
         /// The date and time you submitted your declaration.
-        let uploadedDate: Date?
+        public let uploadedDate: Date?
     }
     
-    struct Relationships: Decodable {
+    public struct Relationships: Decodable {
     
         /// AppEncryptionDeclaration.Relationships.App
-        let app: AppEncryptionDeclaration.Relationships.App?
+        public let app: AppEncryptionDeclaration.Relationships.App?
     
         /// AppEncryptionDeclaration.Relationships.Builds
-        let builds: AppEncryptionDeclaration.Relationships.Builds?
+        public let builds: AppEncryptionDeclaration.Relationships.Builds?
     }
 }
 
 /// MARK: AppEncryptionDeclaration.Relationships
 extension AppEncryptionDeclaration.Relationships {
     
-    struct App: Decodable {
+    public struct App: Decodable {
     
         /// AppEncryptionDeclaration.Relationships.App.Data
-        let data: AppEncryptionDeclaration.Relationships.App.Data?
+        public let data: AppEncryptionDeclaration.Relationships.App.Data?
     
         /// AppEncryptionDeclaration.Relationships.App.Links
-        let links: AppEncryptionDeclaration.Relationships.App.Links?
+        public let links: AppEncryptionDeclaration.Relationships.App.Links?
     }
     
-    struct Builds: Decodable {
+    public struct Builds: Decodable {
     
         /// [AppEncryptionDeclaration.Relationships.Builds.Data]
-        let data: [AppEncryptionDeclaration.Relationships.Builds.Data]?
+        public let data: [AppEncryptionDeclaration.Relationships.Builds.Data]?
     
         /// AppEncryptionDeclaration.Relationships.Builds.Links
-        let links: AppEncryptionDeclaration.Relationships.Builds.Links?
+        public let links: AppEncryptionDeclaration.Relationships.Builds.Links?
     
         /// PagingInformation
-        let meta: PagingInformation?
+        public let meta: PagingInformation?
     }
 }
 
 /// MARK: AppEncryptionDeclaration.Relationships.App
 extension AppEncryptionDeclaration.Relationships.App {
     
-    struct Data: Decodable {
+    public struct Data: Decodable {
     
         /// (Required) The opaque resource ID that uniquely identifies the resource.
-        let `id`: String
+        public let `id`: String
     
         /// (Required) The resource type.Value: apps
-        let type: String
+        public let type: String
     }
     
-    struct Links: Decodable {
+    public struct Links: Decodable {
     
         /// uri-reference
-        let related: URL?
+        public let related: URL?
     
         /// uri-reference
-        let `self`: URL?
+        public let `self`: URL?
     }
 }
 
 /// MARK: AppEncryptionDeclaration.Relationships.Builds
 extension AppEncryptionDeclaration.Relationships.Builds {
     
-    struct Data: Decodable {
+    public struct Data: Decodable {
     
         /// (Required) The opaque resource ID that uniquely identifies the resource.
-        let `id`: String
+        public let `id`: String
     
         /// (Required) The resource type.Value: builds
-        let type: String
+        public let type: String
     }
     
-    struct Links: Decodable {
+    public struct Links: Decodable {
     
         /// uri-reference
-        let related: URL?
+        public let related: URL?
     
         /// uri-reference
-        let `self`: URL?
+        public let `self`: URL?
     }
 }

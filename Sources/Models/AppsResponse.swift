@@ -8,22 +8,22 @@
 import Foundation
     
 /// A response containing a list of resources.
-struct AppsResponse: Decodable {
+public struct AppsResponse: Decodable {
 
     /// (Required) The resource data.
-    let data: [App]
+    public let data: [App]
 
     /// The requested relationship data.￼
     ///  Possible types: BetaGroup, PrereleaseVersion, BetaAppLocalization, Build, BetaLicenseAgreement, BetaAppReviewDetail
-    let include: [AppsResponse.Included]?
+    public let include: [AppsResponse.Included]?
 
     /// (Required) Navigational links that include the self-link.
-    let links: PagedDocumentLinks
+    public let links: PagedDocumentLinks
 
     /// Paging information.
-    let meta: PagingInformation?
+    public let meta: PagingInformation?
     
-    enum Included: Decodable {
+    public enum Included: Decodable {
         case betaGroup(BetaGroup)
         case prereleaseVersion(PrereleaseVersion)
         case betaAppLocalization(BetaAppLocalization)
@@ -31,7 +31,7 @@ struct AppsResponse: Decodable {
         case betaLicenseAgreement(BetaLicenseAgreement)
         case betaAppReviewDetail(BetaAppReviewDetail)
 
-        init(from decoder: Decoder) throws {
+        public init(from decoder: Decoder) throws {
             
             if let wrapped = try? BetaGroup(from: decoder) {
                 self = .betaGroup(wrapped)

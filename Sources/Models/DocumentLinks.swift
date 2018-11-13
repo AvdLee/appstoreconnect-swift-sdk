@@ -8,8 +8,8 @@
 import Foundation
     
 /// Self-links to documents that can contain information for one or more resources.
-struct DocumentLinks: Decodable {
+public struct DocumentLinks: Decodable {
 
     /// (Required) The link that produced the current document.
-    let `self`: URL
+    public let `self`: URL
 }

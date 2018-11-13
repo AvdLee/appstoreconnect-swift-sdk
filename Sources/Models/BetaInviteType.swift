@@ -7,7 +7,7 @@
 
 import Foundation
 
-enum BetaInviteType: String, Decodable {
+public enum BetaInviteType: String, Decodable {
     case email = "EMAIL"
     case publicLink = "PUBLIC_LINK"
 }

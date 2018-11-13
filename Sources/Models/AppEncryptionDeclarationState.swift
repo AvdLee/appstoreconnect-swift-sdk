@@ -7,7 +7,7 @@
 
 import Foundation
     /// Strings representing the review or acceptance status of an app encryption declaration submitted to Apple.
-enum AppEncryptionDeclarationState: String, Decodable {
+public enum AppEncryptionDeclarationState: String, Decodable {
     case approved = "APPROVED"
     case invalid = "INVALID"
     case expired = "EXPIRED"

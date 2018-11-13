@@ -8,17 +8,17 @@
 import Foundation
     
 /// A response containing a list of resources.
-struct BetaBuildLocalizationsResponse: Decodable {
+public struct BetaBuildLocalizationsResponse: Decodable {
 
     /// (Required) The resource data.
-    let data: [BetaBuildLocalization]
+    public let data: [BetaBuildLocalization]
 
     /// The requested relationship data.
-    let include: [Build]?
+    public let include: [Build]?
 
     /// (Required) Navigational links that include the self-link.
-    let links: PagedDocumentLinks
+    public let links: PagedDocumentLinks
 
     /// Paging information.
-    let meta: PagingInformation?
+    public let meta: PagingInformation?
 }

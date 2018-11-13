@@ -8,17 +8,17 @@
 import Foundation
     
 /// A response containing a list of resources.
-struct AppEncryptionDeclarationsResponse: Decodable {
+public struct AppEncryptionDeclarationsResponse: Decodable {
 
     /// (Required) The resource data.
-    let data: [AppEncryptionDeclaration]
+    public let data: [AppEncryptionDeclaration]
 
     /// The requested relationship data.
-    let include: [App]?
+    public let include: [App]?
 
     /// (Required) Navigational links that include the self-link.
-    let links: PagedDocumentLinks
+    public let links: PagedDocumentLinks
 
     /// Paging information.
-    let meta: PagingInformation?
+    public let meta: PagingInformation?
 }

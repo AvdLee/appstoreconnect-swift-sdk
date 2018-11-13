@@ -8,23 +8,23 @@
 import Foundation
     
 /// A response containing a list of related resource IDs.
-struct BetaGroupBuildsLinkagesResponse: Decodable {
+public struct BetaGroupBuildsLinkagesResponse: Decodable {
 
     /// (Required) The object types and IDs of the related resources.
-    let data: [BetaGroupBuildsLinkagesResponse.Data]
+    public let data: [BetaGroupBuildsLinkagesResponse.Data]
 
     /// (Required) Navigational links including the self-link and links to the related data.
-    let links: PagedDocumentLinks
+    public let links: PagedDocumentLinks
 
     /// Paging information.
-    let meta: PagingInformation?
+    public let meta: PagingInformation?
     
-    struct Data: Decodable {
+    public struct Data: Decodable {
     
         /// (Required) The opaque resource ID that uniquely identifies the resource.
-        let `id`: String
+        public let `id`: String
     
         /// (Required) The resource type.Value: builds
-        let type: String
+        public let type: String
     }
 }

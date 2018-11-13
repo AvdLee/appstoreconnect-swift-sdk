@@ -8,14 +8,14 @@
 import Foundation
     
 /// The data structure that represents the resource.
-struct BetaTesterInvitation: Decodable {
+public struct BetaTesterInvitation: Decodable {
 
     /// (Required) The opaque resource ID that uniquely identifies the resource.
-    let `id`: String
+    public let `id`: String
 
     /// (Required) The resource type.Value: betaTesterInvitations
-    let type: String
+    public let type: String
 
     /// (Required) Navigational links that include the self-link.
-    let links: ResourceLinks
+    public let links: ResourceLinks
 }

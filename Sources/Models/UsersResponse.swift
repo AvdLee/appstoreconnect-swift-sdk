@@ -8,17 +8,17 @@
 import Foundation
     
 /// A response containing a list of resources.
-struct UsersResponse: Decodable {
+public struct UsersResponse: Decodable {
 
     /// (Required) The resource data.
-    let data: [User]
+    public let data: [User]
 
     /// The requested relationship data.
-    let include: [App]?
+    public let include: [App]?
 
     /// (Required) Navigational links that include the self-link.
-    let links: PagedDocumentLinks
+    public let links: PagedDocumentLinks
 
     /// Paging information.
-    let meta: PagingInformation?
+    public let meta: PagingInformation?
 }

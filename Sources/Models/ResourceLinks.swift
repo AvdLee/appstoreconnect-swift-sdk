@@ -8,8 +8,8 @@
 import Foundation
     
 /// Self-links to requested resources.
-struct ResourceLinks: Decodable {
+public struct ResourceLinks: Decodable {
 
     /// (Required) The link to the resource.
-    let `self`: URL
+    public let `self`: URL
 }

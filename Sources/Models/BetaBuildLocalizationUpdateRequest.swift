@@ -8,30 +8,30 @@
 import Foundation
     
 /// A request containing a single resource.
-struct BetaBuildLocalizationUpdateRequest: Decodable {
+public struct BetaBuildLocalizationUpdateRequest: Decodable {
 
     /// (Required) The resource data.
-    let data: BetaBuildLocalizationUpdateRequest.Data
+    public let data: BetaBuildLocalizationUpdateRequest.Data
 
-    struct Data: Decodable {
+    public struct Data: Decodable {
     
         /// The resource's attributes.
-        let attributes: BetaBuildLocalizationUpdateRequest.Data.Attributes?
+        public let attributes: BetaBuildLocalizationUpdateRequest.Data.Attributes?
     
         /// (Required) The opaque resource ID that uniquely identifies the resource.
-        let `id`: String
+        public let `id`: String
     
         /// (Required) The resource type.Value: betaBuildLocalizations
-        let type: String
+        public let type: String
     }
 }
 
 /// MARK: BetaBuildLocalizationUpdateRequest.Data
 extension BetaBuildLocalizationUpdateRequest.Data {
     /// Attributes that describe a resource.
-    struct Attributes: Decodable {
+    public struct Attributes: Decodable {
     
         /// A field that describes changes and additions to a build and indicates features you would like your users to test.
-        let whatsNew: String?
+        public let whatsNew: String?
     }
 }

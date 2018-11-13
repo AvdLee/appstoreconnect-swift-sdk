@@ -8,22 +8,22 @@
 import Foundation
     
 /// A response containing a single resource.
-struct PrereleaseVersionResponse: Decodable {
+public struct PrereleaseVersionResponse: Decodable {
 
     /// (Required) The resource data.
-    let data: PrereleaseVersion
+    public let data: PrereleaseVersion
 
     /// The requested relationship data.￼
     ///  Possible types: Build, App
-    let include: [PrereleaseVersionResponse.Included]?
+    public let include: [PrereleaseVersionResponse.Included]?
 
     /// (Required) Navigational links that include the self-link.
-    let links: DocumentLinks
+    public let links: DocumentLinks
     
-    enum Included: Decodable {
+    public enum Included: Decodable {
         case build(Build)
         case app(App)
-        init(from decoder: Decoder) throws {
+        public init(from decoder: Decoder) throws {
             if let wrapped = try? Build(from: decoder) {
                 self = .build(wrapped)
                 return

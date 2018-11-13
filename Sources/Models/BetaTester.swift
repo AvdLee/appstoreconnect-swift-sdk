@@ -8,154 +8,154 @@
 import Foundation
     
 /// The data structure that represents the resource.
-struct BetaTester: Decodable {
+public struct BetaTester: Decodable {
 
     /// The resource's attributes.
-    let attributes: BetaTester.Attributes?
+    public let attributes: BetaTester.Attributes?
 
     /// (Required) The opaque resource ID that uniquely identifies the resource.
-    let `id`: String
+    public let `id`: String
 
     /// Navigational links to related data and included resource types and IDs.
-    let relationships: BetaTester.Relationships?
+    public let relationships: BetaTester.Relationships?
 
     /// (Required) The resource type.Value: betaTesters
-    let type: String
+    public let type: String
 
     /// (Required) Navigational links that include the self-link.
-    let links: ResourceLinks
+    public let links: ResourceLinks
 
     /// Attributes that describe a resource.
-    struct Attributes: Decodable {
+    public struct Attributes: Decodable {
     
         /// The beta tester's email address, used for sending beta testing invitations.
-        let email: String?
+        public let email: String?
     
         /// The beta tester's first name.
-        let firstName: String?
+        public let firstName: String?
     
         /// An invite type that indicates if a beta tester was invited by an email invite or used a TestFlight public link to join a beta test.
-        let inviteType: BetaInviteType?
+        public let inviteType: BetaInviteType?
     
         /// The beta tester's last name.
-        let lastName: String?
+        public let lastName: String?
     }
     
-    struct Relationships: Decodable {
+    public struct Relationships: Decodable {
     
         /// BetaTester.Relationships.Apps
-        let apps: BetaTester.Relationships.Apps?
+        public let apps: BetaTester.Relationships.Apps?
     
         /// BetaTester.Relationships.BetaGroups
-        let betaGroups: BetaTester.Relationships.BetaGroups?
+        public let betaGroups: BetaTester.Relationships.BetaGroups?
     
         /// BetaTester.Relationships.Builds
-        let builds: BetaTester.Relationships.Builds?
+        public let builds: BetaTester.Relationships.Builds?
     }
 }
 
 /// MARK: BetaTester.Relationships
 extension BetaTester.Relationships {
     
-    struct Apps: Decodable {
+    public struct Apps: Decodable {
     
         /// [BetaTester.Relationships.Apps.Data]
-        let data: [BetaTester.Relationships.Apps.Data]?
+        public let data: [BetaTester.Relationships.Apps.Data]?
     
         /// BetaTester.Relationships.Apps.Links
-        let links: BetaTester.Relationships.Apps.Links?
+        public let links: BetaTester.Relationships.Apps.Links?
     
         /// PagingInformation
-        let meta: PagingInformation?
+        public let meta: PagingInformation?
     }
     
-    struct BetaGroups: Decodable {
+    public struct BetaGroups: Decodable {
     
         /// [BetaTester.Relationships.BetaGroups.Data]
-        let data: [BetaTester.Relationships.BetaGroups.Data]?
+        public let data: [BetaTester.Relationships.BetaGroups.Data]?
     
         /// BetaTester.Relationships.BetaGroups.Links
-        let links: BetaTester.Relationships.BetaGroups.Links?
+        public let links: BetaTester.Relationships.BetaGroups.Links?
     
         /// PagingInformation
-        let meta: PagingInformation?
+        public let meta: PagingInformation?
     }
     
-    struct Builds: Decodable {
+    public struct Builds: Decodable {
     
         /// [BetaTester.Relationships.Builds.Data]
-        let data: [BetaTester.Relationships.Builds.Data]?
+        public let data: [BetaTester.Relationships.Builds.Data]?
     
         /// BetaTester.Relationships.Builds.Links
-        let links: BetaTester.Relationships.Builds.Links?
+        public let links: BetaTester.Relationships.Builds.Links?
     
         /// PagingInformation
-        let meta: PagingInformation?
+        public let meta: PagingInformation?
     }
 }
 
 /// MARK: BetaTester.Relationships.Apps
 extension BetaTester.Relationships.Apps {
     
-    struct Data: Decodable {
+    public struct Data: Decodable {
     
         /// string (Required)
-        let `id`: String
+        public let `id`: String
     
         /// string (Required)Value: apps
-        let type: String
+        public let type: String
     }
     
-    struct Links: Decodable {
+    public struct Links: Decodable {
     
         /// uri-reference
-        let related: URL?
+        public let related: URL?
     
         /// uri-reference
-        let `self`: URL?
+        public let `self`: URL?
     }
 }
 
 /// MARK: BetaTester.Relationships.BetaGroups
 extension BetaTester.Relationships.BetaGroups {
     
-    struct Data: Decodable {
+    public struct Data: Decodable {
     
         /// string (Required)
-        let `id`: String
+        public let `id`: String
     
         /// string (Required)Value: betaGroups
-        let type: String
+        public let type: String
     }
     
-    struct Links: Decodable {
+    public struct Links: Decodable {
     
         /// uri-reference
-        let related: URL?
+        public let related: URL?
     
         /// uri-reference
-        let `self`: URL?
+        public let `self`: URL?
     }
 }
 
 /// MARK: BetaTester.Relationships.Builds
 extension BetaTester.Relationships.Builds {
     
-    struct Data: Decodable {
+    public struct Data: Decodable {
     
         /// string (Required)
-        let `id`: String
+        public let `id`: String
     
         /// string (Required)Value: builds
-        let type: String
+        public let type: String
     }
     
-    struct Links: Decodable {
+    public struct Links: Decodable {
     
         /// uri-reference
-        let related: URL?
+        public let related: URL?
     
         /// uri-reference
-        let `self`: URL?
+        public let `self`: URL?
     }
 }

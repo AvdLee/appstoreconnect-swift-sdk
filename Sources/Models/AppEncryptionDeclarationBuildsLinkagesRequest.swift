@@ -8,17 +8,17 @@
 import Foundation
     
 /// A response containing a list of related resource IDs.
-struct AppEncryptionDeclarationBuildsLinkagesRequest: Decodable {
+public struct AppEncryptionDeclarationBuildsLinkagesRequest: Decodable {
 
     /// (Required) The object types and IDs of the related resources.
-    let data: [AppEncryptionDeclarationBuildsLinkagesRequest.Data]
+    public let data: [AppEncryptionDeclarationBuildsLinkagesRequest.Data]
     
-    struct Data: Decodable {
+    public struct Data: Decodable {
     
         /// (Required) The opaque resource ID that uniquely identifies the resource.
-        let `id`: String
+        public let `id`: String
     
         /// (Required) The resource type.Value: builds
-        let type: String
+        public let type: String
     }
 }

@@ -8,14 +8,14 @@
 import Foundation
     
 /// A response containing a single resource.
-struct AppEncryptionDeclarationResponse: Decodable {
+public struct AppEncryptionDeclarationResponse: Decodable {
 
     /// (Required) The resource data.
-    let data: AppEncryptionDeclaration
+    public let data: AppEncryptionDeclaration
 
     /// The requested relationship data.
-    let include: [App]?
+    public let include: [App]?
 
     /// (Required) Navigational links that include the self-link.
-    let links: DocumentLinks
+    public let links: DocumentLinks
 }

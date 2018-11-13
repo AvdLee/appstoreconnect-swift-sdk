@@ -8,14 +8,14 @@
 import Foundation
     
 /// A response containing a single resource.
-struct BetaLicenseAgreementResponse: Decodable {
+public struct BetaLicenseAgreementResponse: Decodable {
 
     /// (Required) The resource data.
-    let data: BetaLicenseAgreement
+    public let data: BetaLicenseAgreement
 
     /// The requested relationship data.
-    let include: [App]?
+    public let include: [App]?
 
     /// (Required) Navigational links that include the self-link.
-    let links: DocumentLinks
+    public let links: DocumentLinks
 }

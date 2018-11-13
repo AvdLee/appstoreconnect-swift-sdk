@@ -8,39 +8,39 @@
 import Foundation
     
 /// A request containing a single resource.
-struct BetaGroupUpdateRequest: Decodable {
+public struct BetaGroupUpdateRequest: Decodable {
 
     /// (Required) The resource data.
-    let data: BetaGroupUpdateRequest.Data
+    public let data: BetaGroupUpdateRequest.Data
     
-    struct Data: Decodable {
+    public struct Data: Decodable {
     
         /// The resource's attributes.
-        let attributes: BetaGroupUpdateRequest.Data.Attributes?
+        public let attributes: BetaGroupUpdateRequest.Data.Attributes?
     
         /// (Required) The opaque resource ID that uniquely identifies the resource.
-        let `id`: String
+        public let `id`: String
     
         /// (Required) The resource type.Value: betaGroups
-        let type: String
+        public let type: String
     }
 }
 
 /// MARK: BetaGroupUpdateRequest.Data
 extension BetaGroupUpdateRequest.Data {
     /// Attributes that describe a resource.
-    struct Attributes: Decodable {
+    public struct Attributes: Decodable {
     
         /// The name for the beta group.
-        let name: String?
+        public let name: String?
     
         /// A Boolean value that indicates whether a public link is enabled. Enabling a link allows you to invite anyone outside of your team to beta test your app. When you share this link, testers will be able to install the beta version of your app on their devices in TestFlight and share the link with others.
-        let publicLinkEnabled: Bool?
+        public let publicLinkEnabled: Bool?
     
         /// The maximum number of testers that can join this beta group using the public link. Values must be between 1 and 10,000.
-        let publicLinkLimit: Int?
+        public let publicLinkLimit: Int?
     
         /// A Boolean value that limits the number of testers who can join the beta group using the public link.
-        let publicLinkLimitEnabled: Bool?
+        public let publicLinkLimitEnabled: Bool?
     }
 }
