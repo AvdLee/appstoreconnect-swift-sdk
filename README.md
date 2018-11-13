@@ -14,14 +14,58 @@ The Swift SDK to work with the App Store Connect API from Apple.
 - [x] APIProver with endpoints structure
 - [x] Add models for all endpoints
 - [x] JWT Logic to sign requests
+- [x] Get started section in the readme
 - [ ] TestFlight API implementation
-- [ ] Get started section in the readme
 - [ ] Users and Roles implementation
 - [ ] Sales and Finances implementation
 - [ ] Replace Alamofire dependency with own simple URLSession implementation
 
 ## Requesting API Access
 To request access, go to the new API Keys section in Users and Access in App Store Connect. Please note that you must be the Team Agent (Legal role) of a development team enrolled as an organization. Access for developers enrolled as an individual is coming soon.
+
+## How to use the SDK?
+*Not all endpoints are available yet, we're working hard to implement them all (see [Endpoints.swift](https://github.com/AvdLee/appstoreconnect-swift-sdk/blob/master/Sources/Endpoints.swift)).*
+
+#### 1. Import the framework:
+
+```swift
+import AppStoreConnect_Swift_SDK
+```
+
+#### 2. Create your API Configuration
+Go to [https://appstoreconnect.apple.com/access/api](https://appstoreconnect.apple.com/access/api) and create your own key. This is also the page to find your private key ID and the issuer ID.
+
+After downloading your private key, you can open the .p8 file containing the private key in a text editor which will show like the following content:
+
+```
+-----BEGIN PRIVATE KEY-----
+FDFDGgEAMBMGByqGSM49AgEGCCqGSM49AwEHBHkwdwQgPaXyFvZfNydDEjxgjUCUxyGjXcQxiulEdGxoVbasV3GgCgYIKomokDj0DAQehRANCAAASffd/DU3TUWAoLmqE6hZL9A7i0DWpXtmIDCDiITRznC6K4/WjdIcuMcixy+m6O0IrffxJOablIX2VM8sHRpoiuy
+-----END PRIVATE KEY-----
+```
+
+Copy the contents and remove the whitelines, `-----BEGIN PRIVATE KEY-----` and `-----END PRIVATE KEY-----`.
+
+Use this private key together with the issuer ID and the private key ID to create your configuration file:
+
+```swift
+let configuration = APIConfiguration(issuerID: "<YOUR ISSUER ID>", privateKeyID: "<YOUR PRIVATE KEY ID>", privateKey: "<YOUR PRIVATE KEY>")
+```
+
+#### 3. Create an APIProvider and perform a request
+After creating an `APIProvider` instance with your `APIConfiguration` you can start performing your first request.
+
+```swift
+let provider: APIProvider = APIProvider(configuration: configuration)
+
+provider.request(Endpoints.apps()) { (result) in
+    switch result {
+    case .success(let appsResponse):
+        print("Did fetch \(appsResponse.data.count) apps")
+    case .failure(let error):
+        print("Something went wrong fetching the apps: \(error)")
+    }
+}
+```
 
 ## Installation
 
