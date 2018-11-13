@@ -35,7 +35,7 @@ public enum Endpoints {
 
     /// Find and list apps added in App Store Connect.
     public static func apps() -> APIEndpoint<AppsResponse> {
-        return APIEndpoint<AppsResponse>(path: "/v1/apps")
+        return APIEndpoint<AppsResponse>(path: "apps")
     }
 
 }
