@@ -1,5 +1,5 @@
 //
-//  JWTBearer.swift
+//  JWTDecoder.swift
 //  AppStoreConnect-Swift-SDK
 //
 //  Created by Antoine van der Lee on 08/11/2018.
@@ -7,12 +7,10 @@
 
 import Foundation
 
-typealias Bearer = String
-
-internal extension Bearer {
+internal extension JWT.Token {
     var isExpired: Bool {
         do {
-            let decodedBearer = try BearerDecoder.decode(self)
+            let decodedBearer = try JWTDecoder.decode(self)
             return decodedBearer.expiryDate.compare(Date()) != ComparisonResult.orderedDescending
         } catch {
             return true
@@ -20,13 +18,13 @@ internal extension Bearer {
     }
 }
 
-/// A decoded `Bearer` including the expiry date.
-private struct DecodedBearer {
+/// A decoded `JWT` including the expiry date.
+private struct DecodedJWT {
     let expiryDate: Date
 }
 
-/// A decoder for JWT bearers which is able to extract the expiry date.
-private struct BearerDecoder {
+/// A decoder for JSON Web Tokens which is able to extract the expiry date.
+private struct JWTDecoder {
 
     public enum DecodeError: LocalizedError {
         /// When either the header or body parts cannot be base64 decoded
@@ -41,33 +39,33 @@ private struct BearerDecoder {
         public var localizedDescription: String {
             switch self {
             case .invalidJSON(let value):
-                return NSLocalizedString("Malformed jwt token, failed to parse JSON value from base64Url \(value)", comment: "Invalid JSON value inside base64Url")
+                return NSLocalizedString("Malformed jwt, failed to parse JSON value from base64Url \(value)", comment: "Invalid JSON value inside base64Url")
             case .invalidPartCount(let jwt, let parts):
-                return NSLocalizedString("Malformed jwt token \(jwt) has \(parts) parts when it should have 3 parts", comment: "Invalid amount of jwt parts")
+                return NSLocalizedString("Malformed jwt \(jwt) has \(parts) parts when it should have 3 parts", comment: "Invalid amount of jwt parts")
             case .invalidBase64Url(let value):
-                return NSLocalizedString("Malformed jwt token, failed to decode base64Url value \(value)", comment: "Invalid JWT token base64Url value")
+                return NSLocalizedString("Malformed jwt, failed to decode base64Url value \(value)", comment: "Invalid JWT base64Url value")
             }
         }
     }
 
     /// Decodes the given bearer and returns a decoded bearer token.
     ///
-    /// - Parameter bearer: The `Bearer` to decode.
-    /// - Returns: The `DecodedBearer` containing information about the bearer.
-    /// - Throws: An error if decoding failed or if the `Bearer` input is invalid.
-    static func decode(_ bearer: Bearer) throws -> DecodedBearer {
-        let parts = bearer.components(separatedBy: ".")
+    /// - Parameter token: The JSON Web Token to decode.
+    /// - Returns: The `DecodedJWT` containing information about the token.
+    /// - Throws: An error if decoding failed or if the `JWT` input is invalid.
+    static func decode(_ token: JWT.Token) throws -> DecodedJWT {
+        let parts = token.components(separatedBy: ".")
         guard parts.count == 3 else {
-            throw DecodeError.invalidPartCount(bearer, parts.count)
+            throw DecodeError.invalidPartCount(token, parts.count)
         }
-        let bearerBody = try decodeJWTPart(parts[1])
+        let tokenBody = try decodeJWTPart(parts[1])
 
-        guard let expiryTimestamp = bearerBody["exp"] as? Double else {
+        guard let expiryTimestamp = tokenBody["exp"] as? Double else {
             throw DecodeError.invalidJSON(parts[1])
         }
 
         let expiryDate = Date(timeIntervalSince1970: expiryTimestamp)
-        return DecodedBearer(expiryDate: expiryDate)
+        return DecodedJWT(expiryDate: expiryDate)
     }
 
     /// Base64 URL decode the given string into `Data` which is in this case encoded JSON data.

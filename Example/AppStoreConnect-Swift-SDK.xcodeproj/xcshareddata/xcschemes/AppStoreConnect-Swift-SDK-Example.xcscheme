@@ -52,6 +52,11 @@
                BlueprintName = "AppStoreConnect-Swift-SDK_Tests"
                ReferencedContainer = "container:AppStoreConnect-Swift-SDK.xcodeproj">
             </BuildableReference>
+            <SkippedTests>
+               <Test
+                  Identifier = "JWTTests/testTokenGeneration()">
+               </Test>
+            </SkippedTests>
          </TestableReference>
       </Testables>
       <MacroExpansion>
