@@ -7,7 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		509F42CD2196E228005FDA31 /* Keys.swift in Sources */ = {isa = PBXBuildFile; fileRef = 509F42CB2196E0FA005FDA31 /* Keys.swift */; };
 		509F42D121975F7E005FDA31 /* JWTRequestsAuthenticatorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 509F42D021975F7E005FDA31 /* JWTRequestsAuthenticatorTests.swift */; };
 		509F42D42198730F005FDA31 /* JWTTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 509F42D32198730F005FDA31 /* JWTTests.swift */; };
 		607FACD61AFB9204008FA782 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 607FACD51AFB9204008FA782 /* AppDelegate.swift */; };
@@ -31,7 +30,6 @@
 
 /* Begin PBXFileReference section */
 		0AE4946149359034B7BCF9D5 /* README.md */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = net.daringfireball.markdown; name = README.md; path = ../README.md; sourceTree = "<group>"; };
-		509F42CB2196E0FA005FDA31 /* Keys.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = Keys.swift; path = ../../Secrets/Keys.swift; sourceTree = "<group>"; };
 		509F42D021975F7E005FDA31 /* JWTRequestsAuthenticatorTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JWTRequestsAuthenticatorTests.swift; sourceTree = "<group>"; };
 		509F42D32198730F005FDA31 /* JWTTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JWTTests.swift; sourceTree = "<group>"; };
 		607FACD01AFB9204008FA782 /* AppStoreConnect-Swift-SDK_Example.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "AppStoreConnect-Swift-SDK_Example.app"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -129,7 +127,6 @@
 			isa = PBXGroup;
 			children = (
 				607FACE91AFB9204008FA782 /* Supporting Files */,
-				509F42CB2196E0FA005FDA31 /* Keys.swift */,
 				509F42D021975F7E005FDA31 /* JWTRequestsAuthenticatorTests.swift */,
 				509F42D32198730F005FDA31 /* JWTTests.swift */,
 			);
@@ -391,7 +388,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				509F42D42198730F005FDA31 /* JWTTests.swift in Sources */,
-				509F42CD2196E228005FDA31 /* Keys.swift in Sources */,
 				509F42D121975F7E005FDA31 /* JWTRequestsAuthenticatorTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
