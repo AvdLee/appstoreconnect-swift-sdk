@@ -15,7 +15,7 @@ lane :test do |options|
   begin
     scan(
       scheme: "AppStoreConnect-Swift-SDK-Example",
-      workspace: "Example/AppStoreConnect-Swift-SDK.xcworkspace",
+      workspace: "Example/CocoaPods-AppStoreConnect-Swift-SDK/AppStoreConnect-Swift-SDK.xcworkspace",
       device: "iPhone 8",
       clean: true,
       code_coverage: true,

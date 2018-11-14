@@ -26,7 +26,7 @@ final class JWTTests: XCTestCase {
     }
 
     /// It should correctly create a JWT Token.
-    func testTokenGeneration() {
+    func _testTokenGeneration() {
         let jwt = JWT(keyIdentifier: configuration.privateKeyID, issuerIdentifier: configuration.issuerID, expireDuration: 0, baseDate: Date(timeIntervalSinceNow: 1541949071))
         let signedToken = try! jwt.signedToken(using: configuration.privateKey)
         XCTAssertTrue(try! signedToken.isValid(for: configuration.privateKey))

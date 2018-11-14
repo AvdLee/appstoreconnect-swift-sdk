@@ -7,8 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		509F42D121975F7E005FDA31 /* JWTRequestsAuthenticatorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 509F42D021975F7E005FDA31 /* JWTRequestsAuthenticatorTests.swift */; };
-		509F42D42198730F005FDA31 /* JWTTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 509F42D32198730F005FDA31 /* JWTTests.swift */; };
+		31F929E2219C6AC40061DEA5 /* JWTRequestsAuthenticatorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31F929E0219C6AC40061DEA5 /* JWTRequestsAuthenticatorTests.swift */; };
+		31F929E3219C6AC40061DEA5 /* JWTTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31F929E1219C6AC40061DEA5 /* JWTTests.swift */; };
 		607FACD61AFB9204008FA782 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 607FACD51AFB9204008FA782 /* AppDelegate.swift */; };
 		607FACD81AFB9204008FA782 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 607FACD71AFB9204008FA782 /* ViewController.swift */; };
 		607FACDB1AFB9204008FA782 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 607FACD91AFB9204008FA782 /* Main.storyboard */; };
@@ -30,8 +30,8 @@
 
 /* Begin PBXFileReference section */
 		0AE4946149359034B7BCF9D5 /* README.md */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = net.daringfireball.markdown; name = README.md; path = ../README.md; sourceTree = "<group>"; };
-		509F42D021975F7E005FDA31 /* JWTRequestsAuthenticatorTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JWTRequestsAuthenticatorTests.swift; sourceTree = "<group>"; };
-		509F42D32198730F005FDA31 /* JWTTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JWTTests.swift; sourceTree = "<group>"; };
+		31F929E0219C6AC40061DEA5 /* JWTRequestsAuthenticatorTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JWTRequestsAuthenticatorTests.swift; sourceTree = "<group>"; };
+		31F929E1219C6AC40061DEA5 /* JWTTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JWTTests.swift; sourceTree = "<group>"; };
 		607FACD01AFB9204008FA782 /* AppStoreConnect-Swift-SDK_Example.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "AppStoreConnect-Swift-SDK_Example.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		607FACD41AFB9204008FA782 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		607FACD51AFB9204008FA782 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -47,7 +47,7 @@
 		A5C30461425642D432A833EB /* Pods-AppStoreConnect-Swift-SDK_Example.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-AppStoreConnect-Swift-SDK_Example.release.xcconfig"; path = "Pods/Target Support Files/Pods-AppStoreConnect-Swift-SDK_Example/Pods-AppStoreConnect-Swift-SDK_Example.release.xcconfig"; sourceTree = "<group>"; };
 		AB3C299B63F819BF718C3EF5 /* Pods-AppStoreConnect-Swift-SDK_Tests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-AppStoreConnect-Swift-SDK_Tests.release.xcconfig"; path = "Pods/Target Support Files/Pods-AppStoreConnect-Swift-SDK_Tests/Pods-AppStoreConnect-Swift-SDK_Tests.release.xcconfig"; sourceTree = "<group>"; };
 		C76C6971C22EB75918256285 /* Pods-AppStoreConnect-Swift-SDK_Example.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-AppStoreConnect-Swift-SDK_Example.debug.xcconfig"; path = "Pods/Target Support Files/Pods-AppStoreConnect-Swift-SDK_Example/Pods-AppStoreConnect-Swift-SDK_Example.debug.xcconfig"; sourceTree = "<group>"; };
-		DF1B520C60DCEDD8A035052B /* AppStoreConnect-Swift-SDK.podspec */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; name = "AppStoreConnect-Swift-SDK.podspec"; path = "../AppStoreConnect-Swift-SDK.podspec"; sourceTree = "<group>"; };
+		DF1B520C60DCEDD8A035052B /* AppStoreConnect-Swift-SDK.podspec */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; name = "AppStoreConnect-Swift-SDK.podspec"; path = "../AppStoreConnect-Swift-SDK.podspec"; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
 		ECADB7DD6CF6600E0251BBEC /* Pods_AppStoreConnect_Swift_SDK_Example.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_AppStoreConnect_Swift_SDK_Example.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -126,9 +126,9 @@
 		607FACE81AFB9204008FA782 /* Tests */ = {
 			isa = PBXGroup;
 			children = (
+				31F929E0219C6AC40061DEA5 /* JWTRequestsAuthenticatorTests.swift */,
+				31F929E1219C6AC40061DEA5 /* JWTTests.swift */,
 				607FACE91AFB9204008FA782 /* Supporting Files */,
-				509F42D021975F7E005FDA31 /* JWTRequestsAuthenticatorTests.swift */,
-				509F42D32198730F005FDA31 /* JWTTests.swift */,
 			);
 			path = Tests;
 			sourceTree = "<group>";
@@ -222,7 +222,7 @@
 					};
 					607FACE41AFB9204008FA782 = {
 						CreatedOnToolsVersion = 6.3.1;
-						LastSwiftMigration = 0900;
+						LastSwiftMigration = 1010;
 						TestTargetID = 607FACCF1AFB9204008FA782;
 					};
 				};
@@ -283,7 +283,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "if [ -z \"$CI\" ]; then\n    if which swiftlint >/dev/null; then\n        swiftlint --config \"${SRCROOT}/../Submodules/WeTransfer-iOS-CI/SwiftLint/.swiftlint-source.yml\"\n        swiftlint --config \"${SRCROOT}/../Submodules/WeTransfer-iOS-CI/SwiftLint/.swiftlint-tests.yml\"\n    else\n        echo \"warning: SwiftLint not installed, download from https://github.com/realm/SwiftLint\"\n    fi\nfi\n";
+			shellScript = "if [ -z \"$CI\" ]; then\n    if which swiftlint >/dev/null; then\n        swiftlint --config \"${SRCROOT}/../../Submodules/WeTransfer-iOS-CI/SwiftLint/.swiftlint-source.yml\"\n        swiftlint --config \"${SRCROOT}/../../Submodules/WeTransfer-iOS-CI/SwiftLint/.swiftlint-tests.yml\"\n    else\n        echo \"warning: SwiftLint not installed, download from https://github.com/realm/SwiftLint\"\n    fi\nfi\n";
 		};
 		509F42D221986C9B005FDA31 /* Xcode 10 Build System Caching Fix */ = {
 			isa = PBXShellScriptBuildPhase;
@@ -387,8 +387,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				509F42D42198730F005FDA31 /* JWTTests.swift in Sources */,
-				509F42D121975F7E005FDA31 /* JWTRequestsAuthenticatorTests.swift in Sources */,
+				31F929E2219C6AC40061DEA5 /* JWTRequestsAuthenticatorTests.swift in Sources */,
+				31F929E3219C6AC40061DEA5 /* JWTTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -567,6 +567,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 9524BFF0D0F07B79917BBFE2 /* Pods-AppStoreConnect-Swift-SDK_Tests.debug.xcconfig */;
 			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
 				DEVELOPMENT_TEAM = "";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(SDKROOT)/Developer/Library/Frameworks",
@@ -581,6 +582,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "org.cocoapods.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_SWIFT3_OBJC_INFERENCE = Default;
 				SWIFT_VERSION = 4.2;
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/AppStoreConnect-Swift-SDK_Example.app/AppStoreConnect-Swift-SDK_Example";
@@ -591,6 +593,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = AB3C299B63F819BF718C3EF5 /* Pods-AppStoreConnect-Swift-SDK_Tests.release.xcconfig */;
 			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
 				DEVELOPMENT_TEAM = "";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(SDKROOT)/Developer/Library/Frameworks",

@@ -4,7 +4,7 @@ PODS:
     - Alamofire
 
 DEPENDENCIES:
-  - AppStoreConnect-Swift-SDK (from `../`)
+  - AppStoreConnect-Swift-SDK (from `../../`)
 
 SPEC REPOS:
   https://github.com/cocoapods/specs.git:
@@ -12,12 +12,12 @@ SPEC REPOS:
 
 EXTERNAL SOURCES:
   AppStoreConnect-Swift-SDK:
-    :path: "../"
+    :path: "../../"
 
 SPEC CHECKSUMS:
   Alamofire: c7287b6e5d7da964a70935e5db17046b7fde6568
   AppStoreConnect-Swift-SDK: c7acd123206bbcd163b5e0e534061bcd53475bc1
 
-PODFILE CHECKSUM: fe5bd9309f00aeb3f27d75341a1c3e1b7bef7177
+PODFILE CHECKSUM: 7d5a34f3c6a4f71a1088b22c4b36f594a57df95e
 
 COCOAPODS: 1.5.3
