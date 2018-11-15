@@ -7,12 +7,12 @@ let package = Package(
     products: [
         .library(
             name: "AppStoreConnect-Swift-SDK",
-            targets: ["AppStoreConnect-Swift-SDK"]),
+            targets: ["AppStoreConnect-Swift-SDK"])
     ],
     dependencies: [
         .package(
             url: "https://github.com/Alamofire/Alamofire.git",
-            from: "4.0.0"),
+            from: "4.0.0")
     ],
     targets: [
         .target(
@@ -22,6 +22,6 @@ let package = Package(
         .testTarget(
             name: "AppStoreConnect-Swift-SDKTests",
             dependencies: ["AppStoreConnect-Swift-SDK"],
-            path: "Example/CocoaPods-AppStoreConnect-Swift-SDK/Tests"),
+            path: "Example/CocoaPods-AppStoreConnect-Swift-SDK/Tests")
     ]
 )
