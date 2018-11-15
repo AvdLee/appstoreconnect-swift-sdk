@@ -10,7 +10,7 @@ lane :test do |options|
 
   # Set timeout to prevent xcodebuild -list -project to take to much retries.
   ENV["FASTLANE_XCODE_LIST_TIMEOUT"] = "120"
-  ENV["WORKSPACE_PATH"] = "Example/AppStoreConnect-Swift-SDK.xcworkspace"
+  ENV["WORKSPACE_PATH"] = "Example/CocoaPods-AppStoreConnect-Swift-SDK/AppStoreConnect-Swift-SDK.xcworkspace"
 
   begin
     FastlaneCore::CommandExecutor.execute(
