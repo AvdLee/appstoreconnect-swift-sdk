@@ -8,6 +8,8 @@
 import Foundation
 import Alamofire
 
+public typealias Handler<T> = (Result<T>) -> Void
+
 /// The configuration needed to set up the API Provider including all needed information for performing API requests.
 public struct APIConfiguration {
 
@@ -87,7 +89,8 @@ public final class APIProvider {
     /// - Parameters:
     ///   - endpoint: The API endpoint to request.
     ///   - completion: The completion callback which will be called on completion containing the result.
-    @discardableResult public func request<T>(_ endpoint: APIEndpoint<T>, completion: @escaping (_ result: Result<T>) -> Void) -> DataRequest? {
+    @discardableResult
+    public func request<T>(_ endpoint: APIEndpoint<T>, completion: @escaping Handler<T>) -> DataRequest {
         let dataRequest = request(for: endpoint)
 
         dataRequest.validate(statusCode: 200..<300)
@@ -111,7 +114,8 @@ extension DataRequest {
     /// - Parameters:
     ///   - type: The type to map to.
     ///   - completion: The result of the mapping. An error will be returned if mapping fails.
-    @discardableResult func mapResponseTo<T: Decodable>(_ type: T.Type, decoder: JSONDecoder, completion: @escaping (_ result: Result<T>) -> Void) -> Self {
+    @discardableResult
+    func mapResponseTo<T: Decodable>(_ type: T.Type, decoder: JSONDecoder, completion: @escaping Handler<T>) -> Self {
         return responseData(queue: DispatchQueue.global(qos: .background)) { (response) in
             if let error = response.error {
                 // Try to parse api error
