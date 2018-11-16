@@ -24,6 +24,7 @@ public struct BetaTesterResponse: Decodable {
         case app(App)
         case betaGroup(BetaGroup)
         case build(Build)
+        
         public init(from decoder: Decoder) throws {
             enum TypeCodingKeys: String, CodingKey { case type }
             
@@ -40,6 +41,36 @@ public struct BetaTesterResponse: Decodable {
                     DecodingError.Context(codingPath: [], debugDescription: "Not convertable to \(Included.self)")
                 )
             }
+        }
+    }
+}
+
+extension BetaTesterResponse.Included {
+    
+    public var app: App? {
+        switch self {
+        case .app(let value):
+            return value
+        default:
+            return nil
+        }
+    }
+    
+    public var betaGroup: BetaGroup? {
+        switch self {
+        case .betaGroup(let value):
+            return value
+        default:
+            return nil
+        }
+    }
+    
+    public var build: Build? {
+        switch self {
+        case .build(let value):
+            return value
+        default:
+            return nil
         }
     }
 }

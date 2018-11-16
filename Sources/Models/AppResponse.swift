@@ -53,3 +53,60 @@ public struct AppResponse: Decodable {
         }
     }
 }
+
+extension AppResponse.Included {
+    
+    public var betaGroup: BetaGroup? {
+        switch self {
+        case .betaGroup(let value):
+            return value
+        default:
+            return nil
+        }
+    }
+    
+    public var prereleaseVersion: PrereleaseVersion? {
+        switch self {
+        case .prereleaseVersion(let value):
+            return value
+        default:
+            return nil
+        }
+    }
+    
+    public var betaAppLocalization: BetaAppLocalization? {
+        switch self {
+        case .betaAppLocalization(let value):
+            return value
+        default:
+            return nil
+        }
+    }
+    
+    public var build: Build? {
+        switch self {
+        case .build(let value):
+            return value
+        default:
+            return nil
+        }
+    }
+    
+    public var betaLicenseAgreement: BetaLicenseAgreement? {
+        switch self {
+        case .betaLicenseAgreement(let value):
+            return value
+        default:
+            return nil
+        }
+    }
+    
+    public var betaAppReviewDetail: BetaAppReviewDetail? {
+        switch self {
+        case .betaAppReviewDetail(let value):
+            return value
+        default:
+            return nil
+        }
+    }
+}

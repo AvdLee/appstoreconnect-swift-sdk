@@ -47,3 +47,33 @@ public struct BuildsResponse: Decodable {
         }
     }
 }
+
+extension BuildsResponse.Included {
+    
+    public var app: App? {
+        switch self {
+        case .app(let value):
+            return value
+        default:
+            return nil
+        }
+    }
+    
+    public var build: Build? {
+        switch self {
+        case .build(let value):
+            return value
+        default:
+            return nil
+        }
+    }
+    
+    public var betaTester: BetaTester? {
+        switch self {
+        case .betaTester(let value):
+            return value
+        default:
+            return nil
+        }
+    }
+}

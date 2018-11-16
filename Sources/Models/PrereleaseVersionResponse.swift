@@ -41,3 +41,24 @@ public struct PrereleaseVersionResponse: Decodable {
         }
     }
 }
+
+extension PrereleaseVersionResponse.Included {
+
+    public var build: Build? {
+        switch self {
+        case .build(let value):
+            return value
+        default:
+            return nil
+        }
+    }
+    
+    public var app: App? {
+        switch self {
+        case .app(let value):
+            return value
+        default:
+            return nil
+        }
+    }
+}
