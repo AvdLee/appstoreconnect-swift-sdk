@@ -40,7 +40,11 @@ public final class APIProvider {
     private let defaultSessionManager: SessionManager
 
     /// Contains a JSON Decoder which can be reused.
-    private let jsonDecoder: JSONDecoder = JSONDecoder()
+    private let jsonDecoder: JSONDecoder = {
+        let decoder = JSONDecoder()
+        decoder.dateDecodingStrategy = .iso8601
+        return decoder
+    }()
 
     /// The configuration needed to set up the API Provider including all needed information for performing API requests.
     private let configuration: APIConfiguration
