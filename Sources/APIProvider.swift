@@ -114,7 +114,12 @@ extension DataRequest {
     @discardableResult func mapResponseTo<T: Decodable>(_ type: T.Type, decoder: JSONDecoder, completion: @escaping (_ result: Result<T>) -> Void) -> Self {
         return responseData(queue: DispatchQueue.global(qos: .background)) { (response) in
             if let error = response.error {
-                completion(Result.failure(error))
+                // Try to parse api error
+                guard let data = response.data, let apiError = try? decoder.decode(ErrorResponse.self, from: data) else {
+                    completion(Result.failure(error))
+                    return
+                }
+                completion(Result.failure(apiError))
             } else {
                 // Try to parse the model
                 do {
