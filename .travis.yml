@@ -11,5 +11,5 @@ env:
     - NOKOGIRI_USE_SYSTEM_LIBRARIES=true # Prevents long install time http://awesomism.co.uk/nokogiri-slow-install/
 
 script:
-  - "pod install --project-directory=Example/"
+  - "pod install --project-directory=Example/CocoaPods-AppStoreConnect-Swift-SDK/"
   - "./Submodules/WeTransfer-iOS-CI/Scripts/travis.sh AppStoreConnect-Swift-SDK-Example" # Run WeTransfer iOS CI Travis script
