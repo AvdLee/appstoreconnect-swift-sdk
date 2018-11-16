@@ -29,35 +29,27 @@ public struct AppResponse: Decodable {
         case betaAppReviewDetail(BetaAppReviewDetail)
         
         public init(from decoder: Decoder) throws {
-            if let wrapped = try? BetaGroup(from: decoder) {
-                self = .betaGroup(wrapped)
-                return
-            }
-            if let wrapped = try? PrereleaseVersion(from: decoder) {
-                self = .prereleaseVersion(wrapped)
-                return
-            }
-            if let wrapped = try? BetaAppLocalization(from: decoder) {
-                self = .betaAppLocalization(wrapped)
-                return
-            }
-            if let wrapped = try? Build(from: decoder) {
-                self = .build(wrapped)
-                return
-            }
-            if let wrapped = try? BetaLicenseAgreement(from: decoder) {
-                self = .betaLicenseAgreement(wrapped)
-                return
-            }
-            if let wrapped = try? BetaAppReviewDetail(from: decoder) {
-                self = .betaAppReviewDetail(wrapped)
-                return
-            }
+            enum TypeCodingKeys: String, CodingKey { case type }
             
-            throw DecodingError.typeMismatch(
-                Included.self,
-                DecodingError.Context(codingPath: [], debugDescription: "Not convertable to \(Included.self)")
-            )
+            switch try decoder.container(keyedBy: TypeCodingKeys.self).decode(String.self, forKey: .type) {
+            case "betaGroups":
+                self = try .betaGroup(BetaGroup(from: decoder))
+            case "prereleaseVersions":
+                self = try .prereleaseVersion(PrereleaseVersion(from: decoder))
+            case "betaAppLocalizations":
+                self = try .betaAppLocalization(BetaAppLocalization(from: decoder))
+            case "builds":
+                self = try .build(Build(from: decoder))
+            case "betaLicenseAgreements":
+                self = try .betaLicenseAgreement(BetaLicenseAgreement(from: decoder))
+            case "betaAppReviewDetails":
+                self = try .betaAppReviewDetail(BetaAppReviewDetail(from: decoder))
+            default:
+                throw DecodingError.typeMismatch(
+                    Included.self,
+                    DecodingError.Context(codingPath: [], debugDescription: "Not convertable to \(Included.self)")
+                )
+            }
         }
     }
 }

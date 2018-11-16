@@ -23,21 +23,21 @@ public struct PrereleaseVersionResponse: Decodable {
     public enum Included: Decodable {
         case build(Build)
         case app(App)
+        
         public init(from decoder: Decoder) throws {
-            if let wrapped = try? Build(from: decoder) {
-                self = .build(wrapped)
-                return
-            }
-
-            if let wrapped = try? App(from: decoder) {
-                self = .app(wrapped)
-                return
-            }
+            enum TypeCodingKeys: String, CodingKey { case type }
             
-            throw DecodingError.typeMismatch(
-                Included.self,
-                DecodingError.Context(codingPath: [], debugDescription: "Not convertable to \(Included.self)")
-            )
+            switch try decoder.container(keyedBy: TypeCodingKeys.self).decode(String.self, forKey: .type) {
+            case "builds":
+                self = try .build(Build(from: decoder))
+            case "apps":
+                self = try .app(App(from: decoder))
+            default:
+                throw DecodingError.typeMismatch(
+                    Included.self,
+                    DecodingError.Context(codingPath: [], debugDescription: "Not convertable to \(Included.self)")
+                )
+            }
         }
     }
 }

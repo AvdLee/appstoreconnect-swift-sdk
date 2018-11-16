@@ -27,26 +27,23 @@ public struct BetaGroupsResponse: Decodable {
         case app(App)
         case build(Build)
         case betaTester(BetaTester)
+        
         public init(from decoder: Decoder) throws {
-            if let app = try? App(from: decoder) {
-                self = .app(app)
-                return
-            }
+            enum TypeCodingKeys: String, CodingKey { case type }
             
-            if let build = try? Build(from: decoder) {
-                self = .build(build)
-                return
+            switch try decoder.container(keyedBy: TypeCodingKeys.self).decode(String.self, forKey: .type) {
+            case "apps":
+                self = try .app(App(from: decoder))
+            case "builds":
+                self = try .build(Build(from: decoder))
+            case "betaTesters":
+                self = try .betaTester(BetaTester(from: decoder))
+            default:
+                throw DecodingError.typeMismatch(
+                    Included.self,
+                    DecodingError.Context(codingPath: [], debugDescription: "Not convertable to \(Included.self)")
+                )
             }
-            
-            if let betaTester = try? BetaTester(from: decoder) {
-                self = .betaTester(betaTester)
-                return
-            }
-            
-            throw DecodingError.typeMismatch(
-                Included.self,
-                DecodingError.Context(codingPath: [], debugDescription: "Not convertable to \(Included.self)")
-            )
         }
     }
 }
