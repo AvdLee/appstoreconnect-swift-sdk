@@ -1,6 +1,4 @@
-# Fastlane requirements
 fastlane_version "1.109.0"
-generated_fastfile_id "0121e253-f9e2-40ac-b489-f17f36e24ec6"
 
 import "./../Submodules/WeTransfer-iOS-CI/Fastlane/Fastfile"
 
