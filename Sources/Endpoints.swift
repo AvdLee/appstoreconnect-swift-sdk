@@ -31,7 +31,7 @@ public struct APIEndpoint<T: Decodable> {
 }
 
 /// Contains all API endpoints to the App Store Connect API
-public enum Endpoints {
+extension APIEndpoint {
 
     /// Find and list apps added in App Store Connect.
     public static func apps() -> APIEndpoint<AppsResponse> {

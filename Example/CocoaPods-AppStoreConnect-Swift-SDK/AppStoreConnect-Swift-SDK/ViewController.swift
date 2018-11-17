@@ -19,7 +19,7 @@ final class ViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        provider.request(Endpoints.apps()) { (result) in
+        provider.request(.apps()) { (result) in
             switch result {
             case .success(let appsResponse):
                 print("Did fetch \(appsResponse.data.count) apps")
