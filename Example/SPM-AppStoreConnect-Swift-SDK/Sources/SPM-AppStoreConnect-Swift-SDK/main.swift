@@ -6,15 +6,33 @@ import AppStoreConnect_Swift_SDK
 private let configuration = APIConfiguration(issuerID: "<YOUR ISSUER ID>", privateKeyID: "<YOUR PRIVATE KEY ID>", privateKey: "<YOUR PRIVATE KEY>")
 var provider: APIProvider = APIProvider(configuration: configuration)
 
-provider.request(Endpoints.apps()) { (result) in
-    switch result {
-    case .success(let appsResponse):
-        print("Did fetch \(appsResponse.data.count) apps")
-        exit(EXIT_SUCCESS)
-    case .failure(let error):
-        print("Something went wrong fetching the apps: \(error)")
-        exit(EXIT_FAILURE)
-    }
+ListApps(
+    fields: [.apps([.name]), .builds([.version])],
+    relationships: [.builds],
+    sortBy: [.ascending(.bundleId)],
+    limits: [.apps(1)])
+    .request(using: provider) { (result) in
+        switch result {
+        case .success(let appsResponse):
+            
+            guard let app = appsResponse.data.first,
+                let name = app.attributes?.name,
+                let buildVersions = appsResponse.included?.compactMap({ $0.build?.attributes?.version }) else {
+                    print("Could not find requested relationships!")
+                    exit(EXIT_FAILURE)
+            }
+            
+            print("App name is \(name)")
+            print(" - successfully got \(buildVersions.count) builds included")
+            for build in buildVersions {
+                print("  - \(build)")
+            }
+            
+            exit(EXIT_SUCCESS)
+        case .failure(let error):
+            print("Something went wrong fetching the apps: \(error)")
+            exit(EXIT_FAILURE)
+        }
 }
 
 // Wait for request completion

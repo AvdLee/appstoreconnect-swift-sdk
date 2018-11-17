@@ -6,7 +6,7 @@
 //
 
 import Foundation
-    
+
 /// A response containing a list of resources.
 public struct AppsResponse: Decodable {
 
@@ -15,7 +15,7 @@ public struct AppsResponse: Decodable {
 
     /// The requested relationship data.￼
     ///  Possible types: BetaGroup, PrereleaseVersion, BetaAppLocalization, Build, BetaLicenseAgreement, BetaAppReviewDetail
-    public let include: [AppRelationship]?
+    public let included: [AppRelationship]?
 
     /// (Required) Navigational links that include the self-link.
     public let links: PagedDocumentLinks
