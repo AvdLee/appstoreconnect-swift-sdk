@@ -29,14 +29,17 @@ public struct BetaGroupsResponse: Decodable {
         case betaTester(BetaTester)
         
         public init(from decoder: Decoder) throws {
-            enum TypeCodingKeys: String, CodingKey { case type }
+            enum CodingKeys: String, Decodable, CodingKey {
+                case type
+                case apps, builds, betaTesters
+            }
             
-            switch try decoder.container(keyedBy: TypeCodingKeys.self).decode(String.self, forKey: .type) {
-            case "apps":
+            switch try decoder.container(keyedBy: CodingKeys.self).decode(CodingKeys.self, forKey: .type) {
+            case .apps:
                 self = try .app(App(from: decoder))
-            case "builds":
+            case .builds:
                 self = try .build(Build(from: decoder))
-            case "betaTesters":
+            case .betaTesters:
                 self = try .betaTester(BetaTester(from: decoder))
             default:
                 throw DecodingError.typeMismatch(

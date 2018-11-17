@@ -29,20 +29,23 @@ public struct AppResponse: Decodable {
         case betaAppReviewDetail(BetaAppReviewDetail)
         
         public init(from decoder: Decoder) throws {
-            enum TypeCodingKeys: String, CodingKey { case type }
+            enum CodingKeys: String, Decodable, CodingKey {
+                case type
+                case betaGroups, prereleaseVersions, betaAppLocalizations, builds, betaLicenseAgreements, betaAppReviewDetails
+            }
             
-            switch try decoder.container(keyedBy: TypeCodingKeys.self).decode(String.self, forKey: .type) {
-            case "betaGroups":
+            switch try decoder.container(keyedBy: CodingKeys.self).decode(CodingKeys.self, forKey: .type) {
+            case .betaGroups:
                 self = try .betaGroup(BetaGroup(from: decoder))
-            case "prereleaseVersions":
+            case .prereleaseVersions:
                 self = try .prereleaseVersion(PrereleaseVersion(from: decoder))
-            case "betaAppLocalizations":
+            case .betaAppLocalizations:
                 self = try .betaAppLocalization(BetaAppLocalization(from: decoder))
-            case "builds":
+            case .builds:
                 self = try .build(Build(from: decoder))
-            case "betaLicenseAgreements":
+            case .betaLicenseAgreements:
                 self = try .betaLicenseAgreement(BetaLicenseAgreement(from: decoder))
-            case "betaAppReviewDetails":
+            case .betaAppReviewDetails:
                 self = try .betaAppReviewDetail(BetaAppReviewDetail(from: decoder))
             default:
                 throw DecodingError.typeMismatch(
