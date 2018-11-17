@@ -57,7 +57,7 @@ After creating an `APIProvider` instance with your `APIConfiguration` you can st
 ```swift
 let provider: APIProvider = APIProvider(configuration: configuration)
 
-provider.request(Endpoints.apps()) { (result) in
+provider.request(.apps()) { (result) in
     switch result {
     case .success(let appsResponse):
         print("Did fetch \(appsResponse.data.count) apps")
@@ -70,11 +70,12 @@ provider.request(Endpoints.apps()) { (result) in
 ## Installation
 
 ### CocoaPods
-AppStoreConnect-Swift-SDK is available through [CocoaPods](https://cocoapods.org). To install
-it, simply add the following line to your Podfile:
+AppStoreConnect-Swift-SDK will be available through [CocoaPods](https://cocoapods.org) when it's more complete. To install
+it now, simply add the following line to your Podfile:
 
 ```ruby
-pod 'AppStoreConnect-Swift-SDK'
+pod 'AppStoreConnect-Swift-SDK', :git => 'https://github.com/AvdLee/appstoreconnect-swift-sdk.git'
+
 ```
 
 ### Swift Package Manager
