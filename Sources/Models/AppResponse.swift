@@ -15,49 +15,8 @@ public struct AppResponse: Decodable {
 
     /// The requested relationship data.￼
     /// Possible types: BetaGroup, PrereleaseVersion, BetaAppLocalization, Build, BetaLicenseAgreement, BetaAppReviewDetail
-    public let include: [AppResponse.Included]?
+    public let include: [AppRelationship]?
 
     /// (Required) Navigational links that include the self-link.
     public let links: DocumentLinks
-    
-    public enum Included: Decodable {
-        case betaGroup(BetaGroup)
-        case prereleaseVersion(PrereleaseVersion)
-        case betaAppLocalization(BetaAppLocalization)
-        case build(Build)
-        case betaLicenseAgreement(BetaLicenseAgreement)
-        case betaAppReviewDetail(BetaAppReviewDetail)
-        
-        public init(from decoder: Decoder) throws {
-            if let wrapped = try? BetaGroup(from: decoder) {
-                self = .betaGroup(wrapped)
-                return
-            }
-            if let wrapped = try? PrereleaseVersion(from: decoder) {
-                self = .prereleaseVersion(wrapped)
-                return
-            }
-            if let wrapped = try? BetaAppLocalization(from: decoder) {
-                self = .betaAppLocalization(wrapped)
-                return
-            }
-            if let wrapped = try? Build(from: decoder) {
-                self = .build(wrapped)
-                return
-            }
-            if let wrapped = try? BetaLicenseAgreement(from: decoder) {
-                self = .betaLicenseAgreement(wrapped)
-                return
-            }
-            if let wrapped = try? BetaAppReviewDetail(from: decoder) {
-                self = .betaAppReviewDetail(wrapped)
-                return
-            }
-            
-            throw DecodingError.typeMismatch(
-                Included.self,
-                DecodingError.Context(codingPath: [], debugDescription: "Not convertable to \(Included.self)")
-            )
-        }
-    }
 }

@@ -8,7 +8,7 @@
 import Foundation
     
 /// Detailed error information returned in the response body whenever an API request is not successful.
-public struct ErrorResponse: Decodable {
+public struct ErrorResponse: Error, Decodable {
 
     /// An array of one or more errors.
     public let errors: [ErrorResponse.Errors]?

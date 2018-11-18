@@ -15,32 +15,11 @@ public struct PreReleaseVersionsResponse: Decodable {
 
     /// The requested relationship data.￼
     ///  Possible types: Build, App
-    public let include: [PreReleaseVersionsResponse.Included]?
+    public let include: [PreReleaseVersionRelationship]?
 
     /// (Required) Navigational links that include the self-link.
     public let links: PagedDocumentLinks
 
     /// Paging information.
     public let meta: PagingInformation?
-    
-    public enum Included: Decodable {
-        case build(Build)
-        case app(App)
-        public init(from decoder: Decoder) throws {
-            if let wrapped = try? Build(from: decoder) {
-                self = .build(wrapped)
-                return
-            }
-            
-            if let wrapped = try? App(from: decoder) {
-                self = .app(wrapped)
-                return
-            }
-
-            throw DecodingError.typeMismatch(
-                Included.self,
-                DecodingError.Context(codingPath: [], debugDescription: "Not convertable to \(Included.self)")
-            )
-        }
-    }
 }
