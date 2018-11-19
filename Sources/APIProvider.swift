@@ -70,30 +70,30 @@ public final class APIProvider {
 
         defaultSessionManager.adapter = requestsAuthenticator
     }
-
-    /// Generates an URL based on the given endpoint in combination with the current API version.
-    ///
-    /// - Parameter endpoint: The endpoint to create an URL for.
-    /// - Returns: The created `URL`.
-    internal func url<T>(for endpoint: APIEndpoint<T>) -> URL {
-        // swiftlint:disable:next force_unwrapping
-        return URL(string: "https://api.appstoreconnect.apple.com/v1/")!.appendingPathComponent(endpoint.path)
-    }
-
-    /// Generates a request based on the given endpoint.
-    ///
-    /// - Parameter endpoint: The endpoint to create a request for.
-    /// - Returns: The created request.
-    internal func request<T>(for endpoint: APIEndpoint<T>) -> DataRequest {
-        return defaultSessionManager.request(url(for: endpoint), method: endpoint.method, parameters: endpoint.parameters)
-    }
-
-    /// Performs a data request to the given API endpoint
+    
+    /// Performs a data request.
     ///
     /// - Parameters:
-    ///   - endpoint: The API endpoint to request.
+    ///   - request: The DataRequest to perform.
+    ///   - type: The type in which the JSON data will be decoded.
+    ///   - completion: The completion callback which will be called on completion containing the result.
+    internal func perform<T: Decodable>(_ request: DataRequest, type: T.Type, completion: @escaping RequestCompletionHandler<T>) {
+        request.validate(statusCode: 200..<300)
+            .mapResponseTo(T.self, decoder: jsonDecoder, completion: completion)
+            .resume()
+    }
+
+    /// Performs a data request to the given Endpoint
+    ///
+    /// - Parameters:
+    ///   - endpoint: The Endpoint to request.
+
+    /// Performs a data request to the given API endpoint
     ///   - completion: The completion callback which will be called on completion containing the result.
     @discardableResult
+    ///   - endpoint: The API endpoint to request.
+    public func request<T: Endpoint>(_ endpoint: T, completion: @escaping RequestCompletionHandler<T.Response>) -> DataRequest {
+        let dataRequest = defaultSessionManager.request("https://api.appstoreconnect.apple.com/v1/\(endpoint.path)", method: endpoint.method, parameters: endpoint.parameters)
     public func request<T>(_ endpoint: APIEndpoint<T>, completion: @escaping RequestCompletionHandler<T>) -> DataRequest {
         let dataRequest = request(for: endpoint)
 
@@ -101,6 +101,13 @@ public final class APIProvider {
             .mapResponseTo(T.self, decoder: jsonDecoder, completion: completion)
             .resume()
 
+        perform(dataRequest, type: T.Response.self, completion: completion)
+        return dataRequest
+    }
+    ///
+    /// - Parameters:
+    ///   - completion: The completion callback which will be called on completion containing the result.
+    @discardableResult
         return dataRequest
     }
 }
