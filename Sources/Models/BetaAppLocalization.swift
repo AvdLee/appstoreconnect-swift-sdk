@@ -23,7 +23,7 @@ public struct BetaAppLocalization: Decodable {
     public let type: String
 
     /// (Required) Navigational links that include the self-link.
-    public let links: ResourceLinks
+    public let links: ResourceLinks<BetaAppLocalizationResponse>
 
     /// Attributes that describe a resource.
     public struct Attributes: Decodable {

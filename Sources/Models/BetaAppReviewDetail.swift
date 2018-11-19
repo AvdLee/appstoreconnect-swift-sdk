@@ -17,7 +17,7 @@ public struct BetaAppReviewDetail: Decodable {
     public let `id`: String
 
     /// (Required) Navigational links that include the self-link.
-    public let links: ResourceLinks
+    public let links: ResourceLinks<BetaAppReviewDetailResponse>
 
     /// Navigational links to related data and included resource types and IDs.
     public let relationships: BetaAppReviewDetail.Relationships?
