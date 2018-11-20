@@ -77,7 +77,7 @@ public final class APIProvider {
     ///   - request: The DataRequest to perform.
     ///   - type: The type in which the JSON data will be decoded.
     ///   - completion: The completion callback which will be called on completion containing the result.
-    internal func perform<T: Decodable>(_ request: DataRequest, type: T.Type, completion: @escaping RequestCompletionHandler<T>) {
+    internal func perform<T: Decodable>(_ request: DataRequest, completion: @escaping RequestCompletionHandler<T>) {
         request.validate(statusCode: 200..<300)
             .mapResponseTo(T.self, decoder: jsonDecoder, completion: completion)
             .resume()
@@ -91,7 +91,7 @@ public final class APIProvider {
     @discardableResult
     public func request<T: Endpoint>(_ endpoint: T, completion: @escaping RequestCompletionHandler<T.Response>) -> DataRequest {
         let dataRequest = defaultSessionManager.request("https://api.appstoreconnect.apple.com/v1/\(endpoint.path)", method: endpoint.method, parameters: endpoint.parameters)
-        perform(dataRequest, type: T.Response.self, completion: completion)
+        perform(dataRequest, completion: completion)
         return dataRequest
     }
     
@@ -103,7 +103,7 @@ public final class APIProvider {
     @discardableResult
     public func request<T: Decodable>(resourceLinks: ResourceLinks<T>, completion: @escaping RequestCompletionHandler<T>) -> DataRequest {
         let dataRequest = defaultSessionManager.request(resourceLinks.`self`)
-        perform(dataRequest, type: T.self, completion: completion)
+        perform(dataRequest, completion: completion)
         return dataRequest
     }
 }
