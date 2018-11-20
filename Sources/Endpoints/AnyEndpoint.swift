@@ -1,5 +1,5 @@
 //
-//  GenericEndpoint.swift
+//  AnyEndpoint.swift
 //  AppStoreConnect-Swift-SDK
 //
 //  Created by Pascal Edmond on 19/11/2018.
@@ -8,7 +8,7 @@
 import Alamofire
 
 
-public struct GenericEndpoint<T: Decodable>: Endpoint {
+public struct AnyEndpoint<T: Decodable>: Endpoint {
     public typealias Response = T
     public let path: String
     public let method: Alamofire.HTTPMethod
