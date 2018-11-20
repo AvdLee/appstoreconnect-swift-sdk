@@ -9,6 +9,14 @@ import Alamofire
 
 extension Endpoint where ResponseType == Never {
     
+    /// Find and list apps added in App Store Connect.
+    ///
+    /// - Parameters:
+    ///   - fields: Fields to return for included related types.
+    ///   - filters: Attributes, relationships, and IDs by which to filter.
+    ///   - relationships: Relationship data to include in the response.
+    ///   - sortBy: Attributes by which to sort.
+    ///   - limits: Number of included related resources to return.
     public static func listApps(
         select fields: [ListApps.Field]? = nil,
         filters: [ListApps.Filter]? = nil,
@@ -28,7 +36,7 @@ extension Endpoint where ResponseType == Never {
 
 public struct ListApps {
     
-    // MARK: - Fields
+    /// Fields to return for included related types.
     public enum Field: NestableParameter {
         case apps([Apps])
         case betaLicenseAgreements([BetaLicenseAgreements])
@@ -87,7 +95,7 @@ public struct ListApps {
         }
     }
     
-    // MARK: - Filters
+    /// Attributes, relationships, and IDs by which to filter.
     public enum Filter: NestableParameter {
         case bundleId([String])
         case id([String])
@@ -110,7 +118,7 @@ public struct ListApps {
     }
     
     
-    // MARK: - Relationships
+    /// Relationship data to include in the response.
     public enum Relationship: String, CaseIterable, Parameter {
         case betaAppLocalizations, betaAppReviewDetail, betaGroups, betaLicenseAgreement, builds, preReleaseVersions
         
@@ -119,7 +127,7 @@ public struct ListApps {
     }
     
     
-    // MARK: - Sort
+    /// Attributes by which to sort.
     public enum SortableField: String, RawRepresentable {
         case bundleId
         case name
@@ -127,12 +135,22 @@ public struct ListApps {
     }
     
     
-    // MARK: - Limits
+    /// Number of included related resources to return.
     public enum Limit: NestableParameter {
+        
+        /// Maximum: 200
         case apps(Int)
+        
+        /// Maximum: 50
         case preReleaseVersions(Int)
+        
+        /// Maximum: 50
         case builds(Int)
+        
+        /// Maximum: 50
         case betaGroups(Int)
+        
+        /// Maximum: 50
         case betaAppLocalizations(Int)
         
         static var key: String = "limit"

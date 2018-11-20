@@ -9,6 +9,13 @@ import Alamofire
 
 extension Endpoint where ResponseType == Never {
     
+    /// Get information about a specific app.
+    ///
+    /// - Parameters:
+    ///   - id: An opaque resource ID that uniquely identifies the resource.
+    ///   - fields: Fields to return for included related types.
+    ///   - relationships: Relationship data to include in the response.
+    ///   - limits: Number of included related resources to return.
     public static func getAppInformation(
         for id: String,
         select fields: [GetAppInformation.Field]? = nil,
@@ -25,7 +32,7 @@ extension Endpoint where ResponseType == Never {
 
 public struct GetAppInformation {
     
-    // MARK: - Fields
+    /// Fields to return for included related types.
     public enum Field: NestableParameter {
         case apps([Apps])
         case betaLicenseAgreements([BetaLicenseAgreements])
@@ -85,7 +92,7 @@ public struct GetAppInformation {
     }
     
     
-    // MARK: - Relationships
+    /// Relationship data to include in the response.
     public enum Relationship: String, CaseIterable, Parameter {
         case betaAppLocalizations, betaAppReviewDetail, betaGroups, betaLicenseAgreement, builds, preReleaseVersions
         
@@ -94,7 +101,7 @@ public struct GetAppInformation {
     }
     
     
-    // MARK: - Limits
+    /// Number of included related resources to return.
     public enum Limit: NestableParameter {
         case preReleaseVersions(Int)
         case builds(Int)
