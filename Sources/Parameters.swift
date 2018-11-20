@@ -38,7 +38,7 @@ func encoded<T: NestableParameter>(_ parameters: [T]) -> [String: Any] {
 }
 
 extension Dictionary where Key == String, Value == Any {
-    public mutating func mergeOrReplace(_ other: [String: Any]) {
+    public mutating func combine(with other: [String: Any]) {
         return self.merge(other, uniquingKeysWith: { (old, new) -> Any in return new })
     }
 }

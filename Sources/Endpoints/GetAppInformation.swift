@@ -16,13 +16,12 @@ extension Endpoint where ResponseType == Never {
         limits: [GetAppInformation.Limit]? = nil) -> Endpoint<AppResponse>
     {
         var parameters = [String: Any]()
-        fields.map { parameters.mergeOrReplace(encoded($0)) }
-        relationships.map { parameters.mergeOrReplace(encoded($0)) }
-        limits.map { parameters.mergeOrReplace(encoded($0)) }
+        fields.map { parameters.combine(with: encoded($0)) }
+        relationships.map { parameters.combine(with: encoded($0)) }
+        limits.map { parameters.combine(with: encoded($0)) }
         return Endpoint<AppResponse>(.get, path: "apps/\(id)", parameters: parameters)
     }
 }
-
 
 public struct GetAppInformation {
     
