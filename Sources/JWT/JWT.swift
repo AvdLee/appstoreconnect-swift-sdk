@@ -6,7 +6,6 @@
 //
 
 import Foundation
-import Security
 
 /// The JWT Header contains information specific to the App Store Connect API Keys, such as algorithm and keys.
 private struct Header: Codable {
@@ -155,29 +154,5 @@ private extension JWT.P8PrivateKey {
             throw JWT.Error.invalidP8PrivateKey
         }
         return asn1
-    }
-}
-
-extension JWT.Token {
-    func isValid(for privateKey: String) throws -> Bool {
-        let privateKey = try privateKey.toASN1()
-            .toECKeyData()
-            .toPrivateKey()
-
-        let parts = components(separatedBy: ".")
-        let header = parts[0]
-        let payload = parts[1]
-        let algorithm = SecKeyAlgorithm.ecdsaSignatureDigestX962SHA256
-
-        guard
-            let signature = Data(base64Encoded: parts[2].base64URLDecoded()),
-            let signingInput = (header + "." + payload).data(using: .ascii),
-            let publicKey = SecKeyCopyPublicKey(privateKey),
-            SecKeyIsAlgorithmSupported(publicKey, .verify, algorithm) else {
-                return false
-        }
-
-        return SecKeyVerifySignature(publicKey, .ecdsaSignatureDigestX962SHA256, signingInput as CFData, signature as CFData, nil)
-
     }
 }
