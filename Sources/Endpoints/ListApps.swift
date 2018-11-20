@@ -5,21 +5,17 @@
 //  Created by Pascal Edmond on 16/11/2018.
 //
 
-import Foundation
+import Alamofire
 
-public struct ListApps: Endpoint {
+extension Endpoint where ResponseType == Never {
     
-    public typealias Response = AppsResponse
-    public var path: String = "apps"
-    public var parameters: [String: Any]? = nil
-    
-    public init(
-        select fields: [Field]? = nil,
-        filters: [Filter]? = nil,
-        include relationships: [Relationship]? = nil,
-        sortBy: [Sorting<SortableField>]? = nil,
-        limits: [Limit]? = nil)
-    {
+    public static func listApps(
+        select fields: [ListApps.Field]? = nil,
+        filters: [ListApps.Filter]? = nil,
+        include relationships: [ListApps.Relationship]? = nil,
+        sortBy: [Sorting<ListApps.SortableField>]? = nil,
+        limits: [ListApps.Limit]? = nil) -> Endpoint<AppsResponse> {
+        
         var params = [String: Any]()
         if let fields = fields {
             for (key, value) in fields.map({ $0.pair }) {
@@ -53,12 +49,14 @@ public struct ListApps: Endpoint {
                 params[key] = value
             }
         }
-        parameters = params
+        
+        return Endpoint<AppsResponse>(method: .get, path: "apps", parameters: params)
     }
 }
 
-// MARK: - Fields
-extension ListApps {
+public struct ListApps {
+    
+    // MARK: - Fields
     public enum Field {
         case apps([Apps])
         case betaLicenseAgreements([BetaLicenseAgreements])
@@ -67,7 +65,7 @@ extension ListApps {
         case betaAppLocalizations([BetaAppLocalizations])
         case builds([Builds])
         case betaGroups([BetaGroups])
-
+        
         var pair: (key: String, value: String) {
             switch self {
             case .apps(let value):
@@ -90,7 +88,7 @@ extension ListApps {
         public enum Apps: String, CaseIterable {
             case betaAppLocalizations, betaAppReviewDetail, betaGroups, betaLicenseAgreement, betaTesters, builds, bundleId, name, preReleaseVersions, primaryLocale, sku
         }
-
+        
         public enum BetaLicenseAgreements: String, CaseIterable {
             case agreementText, app
         }
@@ -115,11 +113,8 @@ extension ListApps {
             case app, betaTesters, builds, createdDate, isInternalGroup, name, publicLink, publicLinkEnabled, publicLinkId, publicLinkLimit, publicLinkLimitEnabled
         }
     }
-}
-
-
-// MARK: - Filters
-extension ListApps {
+    
+    // MARK: - Filters
     public enum Filter {
         case bundleId([String])
         case id([String])
@@ -139,36 +134,30 @@ extension ListApps {
             }
         }
     }
-}
-
-
-// MARK: - Relationships
-extension ListApps {
+    
+    
+    // MARK: - Relationships
     public enum Relationship: String, CaseIterable {
         case betaAppLocalizations, betaAppReviewDetail, betaGroups, betaLicenseAgreement, builds, preReleaseVersions
     }
-}
-
-
-// MARK: - Sort
-extension ListApps {
-    public enum SortableField: String, SortableValue {
+    
+    
+    // MARK: - Sort
+    public enum SortableField: String, QueryValueRepresentable {
         case bundleId
         case name
         case sku
     }
-}
-
-
-// MARK: - Limits
-extension ListApps {
+    
+    
+    // MARK: - Limits
     public enum Limit {
         case apps(Int)
         case preReleaseVersions(Int)
         case builds(Int)
         case betaGroups(Int)
         case betaAppLocalizations(Int)
-
+        
         var pair: (key: String, value: Int) {
             switch self {
             case .apps(let value):

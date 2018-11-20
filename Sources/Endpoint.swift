@@ -9,20 +9,14 @@ import Foundation
 import Alamofire
 
 /// Defines all data needed to build the URL Request with.
-public protocol Endpoint {
-
-    associatedtype Response: Decodable
+public struct Endpoint<ResponseType> {
+    public let method: HTTPMethod
+    public let path: String
+    public let parameters: [String: Any]?
     
-    /// The path to the endpoint.
-    var path: String { get }
-
-    /// The HTTP Method to use for the request.
-    var method: Alamofire.HTTPMethod { get }
-
-    /// The parameters to send with the request. Can be `nil`.
-    var parameters: [String: Any]? { get }
-}
-
-extension Endpoint {
-    public var method: Alamofire.HTTPMethod { return .get }
+    public init(method: HTTPMethod = .get, path: String, parameters: [String: Any]? = nil) {
+        self.method = method
+        self.path = path
+        self.parameters = parameters
+    }
 }

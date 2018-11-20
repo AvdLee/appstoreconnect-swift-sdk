@@ -5,43 +5,41 @@
 //  Created by Pascal Edmond on 20/11/2018.
 //
 
-import Foundation
+import Alamofire
 
-public struct GetAppInformation: Endpoint {
+extension Endpoint where ResponseType == Never {
     
-    public typealias Response = AppResponse
-    public let `id`: String
-    public var path: String { return "apps/\(id)" }
-    public var parameters: [String: Any]? = nil
-    
-    public init(_ id: String,
-        select fields: [Field]? = nil,
-        include relationships: [Relationship]? = nil,
-        limits: [Limit]? = nil)
+    public static func getAppInformation(
+        for id: String,
+        select fields: [GetAppInformation.Field]? = nil,
+        include relationships: [GetAppInformation.Relationship]? = nil,
+        limits: [GetAppInformation.Limit]? = nil) -> Endpoint<AppResponse>
     {
-        self.id = id
-        var params = [String: Any]()
+        var parameters = [String: Any]()
         if let fields = fields {
             for (key, value) in fields.map({ $0.pair }) {
-                params[key] = value
+                parameters[key] = value
             }
         }
         if let relationships = relationships {
-            params["include"] = relationships
+            parameters["include"] = relationships
                 .map({ $0.rawValue })
                 .joined(separator: ",")
         }
         if let limits = limits {
             for (key, value) in limits.map({ $0.pair }) {
-                params[key] = value
+                parameters[key] = value
             }
         }
-        parameters = params
+        
+        return Endpoint<AppResponse>(method: .get, path: "apps/\(id)", parameters: parameters)
     }
 }
 
-// MARK: - Fields
-extension GetAppInformation {
+
+public struct GetAppInformation {
+    
+    // MARK: - Fields
     public enum Field {
         case apps([Apps])
         case betaLicenseAgreements([BetaLicenseAgreements])
@@ -98,19 +96,15 @@ extension GetAppInformation {
             case app, betaTesters, builds, createdDate, isInternalGroup, name, publicLink, publicLinkEnabled, publicLinkId, publicLinkLimit, publicLinkLimitEnabled
         }
     }
-}
-
-
-// MARK: - Relationships
-extension GetAppInformation {
+    
+    
+    // MARK: - Relationships
     public enum Relationship: String, CaseIterable {
         case betaAppLocalizations, betaAppReviewDetail, betaGroups, betaLicenseAgreement, builds, preReleaseVersions
     }
-}
-
-
-// MARK: - Limits
-extension GetAppInformation {
+    
+    
+    // MARK: - Limits
     public enum Limit {
         case preReleaseVersions(Int)
         case builds(Int)
