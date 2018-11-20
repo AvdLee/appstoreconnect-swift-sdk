@@ -14,7 +14,7 @@ public struct Endpoint<ResponseType> {
     public let path: String
     public let parameters: [String: Any]?
     
-    public init(method: HTTPMethod = .get, path: String, parameters: [String: Any]? = nil) {
+    public init(_ method: HTTPMethod = .get, path: String, parameters: [String: Any]? = nil) {
         self.method = method
         self.path = path
         self.parameters = parameters

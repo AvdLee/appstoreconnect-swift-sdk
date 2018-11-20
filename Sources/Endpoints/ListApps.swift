@@ -14,50 +14,22 @@ extension Endpoint where ResponseType == Never {
         filters: [ListApps.Filter]? = nil,
         include relationships: [ListApps.Relationship]? = nil,
         sortBy: [Sorting<ListApps.SortableField>]? = nil,
-        limits: [ListApps.Limit]? = nil) -> Endpoint<AppsResponse> {
-        
-        var params = [String: Any]()
-        if let fields = fields {
-            for (key, value) in fields.map({ $0.pair }) {
-                params[key] = value
-            }
-        }
-        if let filters = filters {
-            for (key, value) in filters.map({ $0.pair }) {
-                params[key] = value
-            }
-        }
-        if let relationships = relationships {
-            params["include"] = relationships
-                .map({ $0.rawValue })
-                .joined(separator: ",")
-        }
-        if let sortBy = sortBy {
-            params["sort"] = sortBy.map({
-                switch $0 {
-                case .default(let field):
-                    return field.rawValue
-                case .ascending(let field):
-                    return "+\(field.rawValue)"
-                case .descending(let field):
-                    return "-\(field.rawValue)"
-                }
-            }).joined(separator: ",")
-        }
-        if let limits = limits {
-            for (key, value) in limits.map({ $0.pair }) {
-                params[key] = value
-            }
-        }
-        
-        return Endpoint<AppsResponse>(method: .get, path: "apps", parameters: params)
+        limits: [ListApps.Limit]? = nil) -> Endpoint<AppsResponse>
+    {
+        var parameters = [String: Any]()
+        fields.map { parameters.mergeOrReplace(encoded($0)) }
+        filters.map { parameters.mergeOrReplace(encoded($0)) }
+        relationships.map { parameters.mergeOrReplace(encoded($0)) }
+        sortBy.map { parameters.mergeOrReplace(encoded($0)) }
+        limits.map { parameters.mergeOrReplace(encoded($0)) }
+        return Endpoint<AppsResponse>(.get, path: "apps", parameters: parameters)
     }
 }
 
 public struct ListApps {
     
     // MARK: - Fields
-    public enum Field {
+    public enum Field: NestableParameter {
         case apps([Apps])
         case betaLicenseAgreements([BetaLicenseAgreements])
         case preReleaseVersions([PreReleaseVersions])
@@ -66,22 +38,23 @@ public struct ListApps {
         case builds([Builds])
         case betaGroups([BetaGroups])
         
-        var pair: (key: String, value: String) {
+        static var key: String = "fields"
+        var pair: Pair {
             switch self {
             case .apps(let value):
-                return ("fields[apps]", value.map({ $0.rawValue }).joined(separator: ","))
+                return ("apps", value.map({ $0.rawValue }).joined(separator: ","))
             case .betaLicenseAgreements(let value):
-                return ("fields[betaLicenseAgreements]", value.map({ $0.rawValue }).joined(separator: ","))
+                return ("betaLicenseAgreements", value.map({ $0.rawValue }).joined(separator: ","))
             case .preReleaseVersions(let value):
-                return ("fields[preReleaseVersions]", value.map({ $0.rawValue }).joined(separator: ","))
+                return ("preReleaseVersions", value.map({ $0.rawValue }).joined(separator: ","))
             case .betaAppReviewDetails(let value):
-                return ("fields[betaAppReviewDetails]", value.map({ $0.rawValue }).joined(separator: ","))
+                return ("betaAppReviewDetails", value.map({ $0.rawValue }).joined(separator: ","))
             case .betaAppLocalizations(let value):
-                return ("fields[betaAppLocalizations]", value.map({ $0.rawValue }).joined(separator: ","))
+                return ("betaAppLocalizations", value.map({ $0.rawValue }).joined(separator: ","))
             case .builds(let value):
-                return ("fields[builds]", value.map({ $0.rawValue }).joined(separator: ","))
+                return ("builds", value.map({ $0.rawValue }).joined(separator: ","))
             case .betaGroups(let value):
-                return ("fields[betaGroups]", value.map({ $0.rawValue }).joined(separator: ","))
+                return ("betaGroups", value.map({ $0.rawValue }).joined(separator: ","))
             }
         }
         
@@ -115,35 +88,39 @@ public struct ListApps {
     }
     
     // MARK: - Filters
-    public enum Filter {
+    public enum Filter: NestableParameter {
         case bundleId([String])
         case id([String])
         case name([String])
         case sku([String])
         
-        var pair: (key: String, value: String) {
+        static var key: String = "filter"
+        var pair: Pair {
             switch self {
             case .bundleId(let value):
-                return ("filter[bundleId]", value.joined(separator: ","))
+                return ("bundleId", value.joined(separator: ","))
             case .id(let value):
-                return ("filter[id]", value.joined(separator: ","))
+                return ("id", value.joined(separator: ","))
             case .name(let value):
-                return ("filter[name]", value.joined(separator: ","))
+                return ("name", value.joined(separator: ","))
             case .sku(let value):
-                return ("filter[sku]", value.joined(separator: ","))
+                return ("sku", value.joined(separator: ","))
             }
         }
     }
     
     
     // MARK: - Relationships
-    public enum Relationship: String, CaseIterable {
+    public enum Relationship: String, CaseIterable, Parameter {
         case betaAppLocalizations, betaAppReviewDetail, betaGroups, betaLicenseAgreement, builds, preReleaseVersions
+        
+        static var key: String = "include"
+        var value: Any { return self.rawValue }
     }
     
     
     // MARK: - Sort
-    public enum SortableField: String, QueryValueRepresentable {
+    public enum SortableField: String, RawRepresentable {
         case bundleId
         case name
         case sku
@@ -151,25 +128,26 @@ public struct ListApps {
     
     
     // MARK: - Limits
-    public enum Limit {
+    public enum Limit: NestableParameter {
         case apps(Int)
         case preReleaseVersions(Int)
         case builds(Int)
         case betaGroups(Int)
         case betaAppLocalizations(Int)
         
-        var pair: (key: String, value: Int) {
+        static var key: String = "limit"
+        var pair: Pair {
             switch self {
             case .apps(let value):
-                return ("limit", value)
+                return (nil, value)
             case .preReleaseVersions(let value):
-                return ("limit[preReleaseVersions]", value)
+                return ("preReleaseVersions", value)
             case .builds(let value):
-                return ("limit[builds]", value)
+                return ("builds", value)
             case .betaGroups(let value):
-                return ("limit[betaGroups]", value)
+                return ("betaGroups", value)
             case .betaAppLocalizations(let value):
-                return ("limit[betaAppLocalizations]", value)
+                return ("betaAppLocalizations", value)
             }
         }
     }

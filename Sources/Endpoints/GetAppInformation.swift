@@ -16,23 +16,10 @@ extension Endpoint where ResponseType == Never {
         limits: [GetAppInformation.Limit]? = nil) -> Endpoint<AppResponse>
     {
         var parameters = [String: Any]()
-        if let fields = fields {
-            for (key, value) in fields.map({ $0.pair }) {
-                parameters[key] = value
-            }
-        }
-        if let relationships = relationships {
-            parameters["include"] = relationships
-                .map({ $0.rawValue })
-                .joined(separator: ",")
-        }
-        if let limits = limits {
-            for (key, value) in limits.map({ $0.pair }) {
-                parameters[key] = value
-            }
-        }
-        
-        return Endpoint<AppResponse>(method: .get, path: "apps/\(id)", parameters: parameters)
+        fields.map { parameters.mergeOrReplace(encoded($0)) }
+        relationships.map { parameters.mergeOrReplace(encoded($0)) }
+        limits.map { parameters.mergeOrReplace(encoded($0)) }
+        return Endpoint<AppResponse>(.get, path: "apps/\(id)", parameters: parameters)
     }
 }
 
@@ -40,7 +27,7 @@ extension Endpoint where ResponseType == Never {
 public struct GetAppInformation {
     
     // MARK: - Fields
-    public enum Field {
+    public enum Field: NestableParameter {
         case apps([Apps])
         case betaLicenseAgreements([BetaLicenseAgreements])
         case preReleaseVersions([PreReleaseVersions])
@@ -49,22 +36,23 @@ public struct GetAppInformation {
         case builds([Builds])
         case betaGroups([BetaGroups])
         
-        var pair: (key: String, value: String) {
+        static var key: String = "fields"
+        var pair: Pair {
             switch self {
             case .apps(let value):
-                return ("fields[apps]", value.map({ $0.rawValue }).joined(separator: ","))
+                return ("apps", value.map({ $0.rawValue }).joined(separator: ","))
             case .betaLicenseAgreements(let value):
-                return ("fields[betaLicenseAgreements]", value.map({ $0.rawValue }).joined(separator: ","))
+                return ("betaLicenseAgreements", value.map({ $0.rawValue }).joined(separator: ","))
             case .preReleaseVersions(let value):
-                return ("fields[preReleaseVersions]", value.map({ $0.rawValue }).joined(separator: ","))
+                return ("preReleaseVersions", value.map({ $0.rawValue }).joined(separator: ","))
             case .betaAppReviewDetails(let value):
-                return ("fields[betaAppReviewDetails]", value.map({ $0.rawValue }).joined(separator: ","))
+                return ("betaAppReviewDetails", value.map({ $0.rawValue }).joined(separator: ","))
             case .betaAppLocalizations(let value):
-                return ("fields[betaAppLocalizations]", value.map({ $0.rawValue }).joined(separator: ","))
+                return ("betaAppLocalizations", value.map({ $0.rawValue }).joined(separator: ","))
             case .builds(let value):
-                return ("fields[builds]", value.map({ $0.rawValue }).joined(separator: ","))
+                return ("builds", value.map({ $0.rawValue }).joined(separator: ","))
             case .betaGroups(let value):
-                return ("fields[betaGroups]", value.map({ $0.rawValue }).joined(separator: ","))
+                return ("betaGroups", value.map({ $0.rawValue }).joined(separator: ","))
             }
         }
         
@@ -99,28 +87,32 @@ public struct GetAppInformation {
     
     
     // MARK: - Relationships
-    public enum Relationship: String, CaseIterable {
+    public enum Relationship: String, CaseIterable, Parameter {
         case betaAppLocalizations, betaAppReviewDetail, betaGroups, betaLicenseAgreement, builds, preReleaseVersions
+        
+        static var key: String = "include"
+        var value: Any { return rawValue }
     }
     
     
     // MARK: - Limits
-    public enum Limit {
+    public enum Limit: NestableParameter {
         case preReleaseVersions(Int)
         case builds(Int)
         case betaGroups(Int)
         case betaAppLocalizations(Int)
         
-        var pair: (key: String, value: Int) {
+        static var key: String = "limit"
+        var pair: Pair {
             switch self {
             case .preReleaseVersions(let value):
-                return ("limit[preReleaseVersions]", value)
+                return ("preReleaseVersions", value)
             case .builds(let value):
-                return ("limit[builds]", value)
+                return ("builds", value)
             case .betaGroups(let value):
-                return ("limit[betaGroups]", value)
+                return ("betaGroups", value)
             case .betaAppLocalizations(let value):
-                return ("limit[betaAppLocalizations]", value)
+                return ("betaAppLocalizations", value)
             }
         }
     }
