@@ -7,7 +7,7 @@
 
 import Alamofire
 
-extension Endpoint where ResponseType == Never {
+extension APIEndpoint {
     
     /// Get information about a specific app.
     ///
@@ -20,13 +20,13 @@ extension Endpoint where ResponseType == Never {
         for id: String,
         select fields: [ReadAppInformation.Field]? = nil,
         include relationships: [ReadAppInformation.Relationship]? = nil,
-        limits: [ReadAppInformation.Limit]? = nil) -> Endpoint<AppResponse>
+        limits: [ReadAppInformation.Limit]? = nil) -> APIEndpoint<AppResponse>
     {
         var parameters = [String: Any]()
         if let fields = fields { parameters.merge(with: fields) }
         if let relationships = relationships { parameters.merge(with: relationships) }
         if let limits = limits { parameters.merge(with: limits) }
-        return Endpoint<AppResponse>(.get, path: "apps/\(id)", parameters: parameters)
+        return APIEndpoint<AppResponse>(path: "apps/\(id)", method: .get, parameters: parameters)
     }
 }
 

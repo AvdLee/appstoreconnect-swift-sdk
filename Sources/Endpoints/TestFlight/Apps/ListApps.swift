@@ -7,7 +7,7 @@
 
 import Alamofire
 
-extension Endpoint where ResponseType == Never {
+extension APIEndpoint {
     
     /// Find and list apps added in App Store Connect.
     ///
@@ -22,7 +22,7 @@ extension Endpoint where ResponseType == Never {
         filters: [ListApps.Filter]? = nil,
         include relationships: [ListApps.Relationship]? = nil,
         sortBy: [Sorting<ListApps.SortableField>]? = nil,
-        limits: [ListApps.Limit]? = nil) -> Endpoint<AppsResponse>
+        limits: [ListApps.Limit]? = nil) -> APIEndpoint<AppsResponse>
     {
         var parameters = [String: Any]()
         if let fields = fields { parameters.merge(with: fields) }
@@ -30,7 +30,7 @@ extension Endpoint where ResponseType == Never {
         if let relationships = relationships { parameters.merge(with: relationships) }
         if let sortBy = sortBy { parameters.merge(with: sortBy) }
         if let limits = limits { parameters.merge(with: limits) }
-        return Endpoint<AppsResponse>(.get, path: "apps", parameters: parameters)
+        return APIEndpoint<AppsResponse>(path: "apps", method: .get, parameters: parameters)
     }
 }
 
