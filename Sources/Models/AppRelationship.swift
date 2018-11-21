@@ -18,13 +18,13 @@ public enum AppRelationship: Decodable {
     public init(from decoder: Decoder) throws {
         enum CodingKeys: String, Decodable, CodingKey {
             case type
-            case betaGroups, prereleaseVersions, betaAppLocalizations, builds, betaLicenseAgreements, betaAppReviewDetails
+            case betaGroups, preReleaseVersions, betaAppLocalizations, builds, betaLicenseAgreements, betaAppReviewDetails
         }
         
         switch try decoder.container(keyedBy: CodingKeys.self).decode(CodingKeys.self, forKey: .type) {
         case .betaGroups:
             self = try .betaGroup(BetaGroup(from: decoder))
-        case .prereleaseVersions:
+        case .preReleaseVersions:
             self = try .prereleaseVersion(PrereleaseVersion(from: decoder))
         case .betaAppLocalizations:
             self = try .betaAppLocalization(BetaAppLocalization(from: decoder))
