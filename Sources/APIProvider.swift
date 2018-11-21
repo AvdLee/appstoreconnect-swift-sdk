@@ -110,7 +110,7 @@ public final class APIProvider {
     ///   - resourceLinks: The resourceLinks to request.
     ///   - completion: The completion callback which will be called on completion containing the result.
     @discardableResult
-    public func request<T: Decodable>(resourceLinks: ResourceLinks<T>, completion: @escaping RequestCompletionHandler<T>) -> DataRequest {
+    public func request<T: Decodable>(_ resourceLinks: ResourceLinks<T>, completion: @escaping RequestCompletionHandler<T>) -> DataRequest {
         let dataRequest = defaultSessionManager.request(resourceLinks.`self`)
 
         dataRequest.validate(statusCode: 200..<300)
