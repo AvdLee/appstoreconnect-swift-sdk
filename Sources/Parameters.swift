@@ -6,16 +6,12 @@
 //
 
 import Foundation
+import Alamofire
 
 
 protocol Parameter {
     static var key: String { get }
     var value: Any { get }
-}
-
-func encoded<T: Parameter>(_ parameters: [T]) -> [String: Any] {
-    
-    return [T.key: parameters.map({ "\($0.value)" }).joined(separator: ",")]
 }
 
 protocol NestableParameter {
@@ -24,7 +20,11 @@ protocol NestableParameter {
     var pair: Pair { get }
 }
 
-func encoded<T: NestableParameter>(_ parameters: [T]) -> [String: Any] {
+private func encodedDictionary<T: Parameter>(_ parameters: [T]) -> [String: Any] {
+    return [T.key: parameters.map({ "\($0.value)" }).joined(separator: ",")]
+}
+
+private func encodedDictionary<T: NestableParameter>(_ parameters: [T]) -> [String: Any] {
     var dict = [String: Any]()
     for parameter in parameters {
         switch parameter.pair {
@@ -38,7 +38,11 @@ func encoded<T: NestableParameter>(_ parameters: [T]) -> [String: Any] {
 }
 
 extension Dictionary where Key == String, Value == Any {
-    public mutating func combine(with other: [String: Any]) {
-        return self.merge(other, uniquingKeysWith: { (old, new) -> Any in return new })
+    mutating func merge<T: Parameter>(with parameters: [T]) {
+        return merge(encodedDictionary(parameters), uniquingKeysWith: { $1 })
+    }
+    
+    mutating func merge<T: NestableParameter>(with parameters: [T]) {
+        return merge(encodedDictionary(parameters), uniquingKeysWith: { $1 })
     }
 }

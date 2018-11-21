@@ -23,9 +23,9 @@ extension Endpoint where ResponseType == Never {
         limits: [ReadAppInformation.Limit]? = nil) -> Endpoint<AppResponse>
     {
         var parameters = [String: Any]()
-        fields.map { parameters.combine(with: encoded($0)) }
-        relationships.map { parameters.combine(with: encoded($0)) }
-        limits.map { parameters.combine(with: encoded($0)) }
+        if let fields = fields { parameters.merge(with: fields) }
+        if let relationships = relationships { parameters.merge(with: relationships) }
+        if let limits = limits { parameters.merge(with: limits) }
         return Endpoint<AppResponse>(.get, path: "apps/\(id)", parameters: parameters)
     }
 }

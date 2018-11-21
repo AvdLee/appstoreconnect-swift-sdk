@@ -25,11 +25,11 @@ extension Endpoint where ResponseType == Never {
         limits: [ListApps.Limit]? = nil) -> Endpoint<AppsResponse>
     {
         var parameters = [String: Any]()
-        fields.map { parameters.combine(with: encoded($0)) }
-        filters.map { parameters.combine(with: encoded($0)) }
-        relationships.map { parameters.combine(with: encoded($0)) }
-        sortBy.map { parameters.combine(with: encoded($0)) }
-        limits.map { parameters.combine(with: encoded($0)) }
+        if let fields = fields { parameters.merge(with: fields) }
+        if let filters = filters { parameters.merge(with: filters) }
+        if let relationships = relationships { parameters.merge(with: relationships) }
+        if let sortBy = sortBy { parameters.merge(with: sortBy) }
+        if let limits = limits { parameters.merge(with: limits) }
         return Endpoint<AppsResponse>(.get, path: "apps", parameters: parameters)
     }
 }
