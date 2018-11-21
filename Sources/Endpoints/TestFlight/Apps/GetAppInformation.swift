@@ -1,5 +1,5 @@
 //
-//  GetAppInformation.swift
+//  ReadAppInformation.swift
 //  AppStoreConnect-Swift-SDK
 //
 //  Created by Pascal Edmond on 20/11/2018.
@@ -16,11 +16,11 @@ extension Endpoint where ResponseType == Never {
     ///   - fields: Fields to return for included related types.
     ///   - relationships: Relationship data to include in the response.
     ///   - limits: Number of included related resources to return.
-    public static func getAppInformation(
+    public static func readAppInformation(
         for id: String,
-        select fields: [GetAppInformation.Field]? = nil,
-        include relationships: [GetAppInformation.Relationship]? = nil,
-        limits: [GetAppInformation.Limit]? = nil) -> Endpoint<AppResponse>
+        select fields: [ReadAppInformation.Field]? = nil,
+        include relationships: [ReadAppInformation.Relationship]? = nil,
+        limits: [ReadAppInformation.Limit]? = nil) -> Endpoint<AppResponse>
     {
         var parameters = [String: Any]()
         fields.map { parameters.combine(with: encoded($0)) }
@@ -30,7 +30,7 @@ extension Endpoint where ResponseType == Never {
     }
 }
 
-public struct GetAppInformation {
+public struct ReadAppInformation {
     
     /// Fields to return for included related types.
     public enum Field: NestableParameter {
