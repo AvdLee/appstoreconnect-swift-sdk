@@ -12,12 +12,12 @@ public enum BetaGroupRelationship: Decodable {
     case build(Build)
     case betaTester(BetaTester)
     
+    enum CodingKeys: String, Decodable, CodingKey {
+        case type
+        case apps, builds, betaTesters
+    }
+
     public init(from decoder: Decoder) throws {
-        enum CodingKeys: String, Decodable, CodingKey {
-            case type
-            case apps, builds, betaTesters
-        }
-        
         switch try decoder.container(keyedBy: CodingKeys.self).decode(CodingKeys.self, forKey: .type) {
         case .apps:
             self = try .app(App(from: decoder))

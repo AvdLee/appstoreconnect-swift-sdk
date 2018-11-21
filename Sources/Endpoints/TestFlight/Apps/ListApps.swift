@@ -22,8 +22,7 @@ extension APIEndpoint {
         filters: [ListApps.Filter]? = nil,
         include relationships: [ListApps.Relationship]? = nil,
         sortBy: [Sorting<ListApps.SortableField>]? = nil,
-        limits: [ListApps.Limit]? = nil) -> APIEndpoint<AppsResponse>
-    {
+        limits: [ListApps.Limit]? = nil) -> APIEndpoint<AppsResponse> {
         var parameters = [String: Any]()
         if let fields = fields { parameters.merge(with: fields) }
         if let filters = filters { parameters.merge(with: filters) }
@@ -65,34 +64,6 @@ public struct ListApps {
                 return ("betaGroups", value.map({ $0.rawValue }).joined(separator: ","))
             }
         }
-        
-        public enum Apps: String, CaseIterable {
-            case betaAppLocalizations, betaAppReviewDetail, betaGroups, betaLicenseAgreement, betaTesters, builds, bundleId, name, preReleaseVersions, primaryLocale, sku
-        }
-        
-        public enum BetaLicenseAgreements: String, CaseIterable {
-            case agreementText, app
-        }
-        
-        public enum PreReleaseVersions: String, CaseIterable {
-            case app, builds, platform, version
-        }
-        
-        public enum BetaAppReviewDetails: String, CaseIterable {
-            case app, contactEmail, contactFirstName, contactLastName, contactPhone, demoAccountName, demoAccountPassword, demoAccountRequired, notes
-        }
-        
-        public enum BetaAppLocalizations: String, CaseIterable {
-            case app, description, feedbackEmail, locale, marketingUrl, privacyPolicyUrl, tvOsPrivacyPolicy
-        }
-        
-        public enum Builds: String, CaseIterable {
-            case app, appEncryptionDeclaration, betaAppReviewSubmission, betaBuildLocalizations, betaGroups, buildBetaDetail, expirationDate, expired, iconAssetToken, individualTesters, minOsVersion, preReleaseVersion, processingState, uploadedDate, usesNonExemptEncryption, version
-        }
-        
-        public enum BetaGroups: String, CaseIterable {
-            case app, betaTesters, builds, createdDate, isInternalGroup, name, publicLink, publicLinkEnabled, publicLinkId, publicLinkLimit, publicLinkLimitEnabled
-        }
     }
     
     /// Attributes, relationships, and IDs by which to filter.
@@ -117,7 +88,6 @@ public struct ListApps {
         }
     }
     
-    
     /// Relationship data to include in the response.
     public enum Relationship: String, CaseIterable, Parameter {
         case betaAppLocalizations, betaAppReviewDetail, betaGroups, betaLicenseAgreement, builds, preReleaseVersions
@@ -126,14 +96,12 @@ public struct ListApps {
         var value: Any { return self.rawValue }
     }
     
-    
     /// Attributes by which to sort.
     public enum SortableField: String, RawRepresentable {
         case bundleId
         case name
         case sku
     }
-    
     
     /// Number of included related resources to return.
     public enum Limit: NestableParameter {
@@ -168,5 +136,35 @@ public struct ListApps {
                 return ("betaAppLocalizations", value)
             }
         }
+    }
+}
+
+extension ListApps.Field {
+    public enum Apps: String, CaseIterable {
+        case betaAppLocalizations, betaAppReviewDetail, betaGroups, betaLicenseAgreement, betaTesters, builds, bundleId, name, preReleaseVersions, primaryLocale, sku
+    }
+    
+    public enum BetaLicenseAgreements: String, CaseIterable {
+        case agreementText, app
+    }
+    
+    public enum PreReleaseVersions: String, CaseIterable {
+        case app, builds, platform, version
+    }
+    
+    public enum BetaAppReviewDetails: String, CaseIterable {
+        case app, contactEmail, contactFirstName, contactLastName, contactPhone, demoAccountName, demoAccountPassword, demoAccountRequired, notes
+    }
+    
+    public enum BetaAppLocalizations: String, CaseIterable {
+        case app, description, feedbackEmail, locale, marketingUrl, privacyPolicyUrl, tvOsPrivacyPolicy
+    }
+    
+    public enum Builds: String, CaseIterable {
+        case app, appEncryptionDeclaration, betaAppReviewSubmission, betaBuildLocalizations, betaGroups, buildBetaDetail, expirationDate, expired, iconAssetToken, individualTesters, minOsVersion, preReleaseVersion, processingState, uploadedDate, usesNonExemptEncryption, version
+    }
+    
+    public enum BetaGroups: String, CaseIterable {
+        case app, betaTesters, builds, createdDate, isInternalGroup, name, publicLink, publicLinkEnabled, publicLinkId, publicLinkLimit, publicLinkLimitEnabled
     }
 }

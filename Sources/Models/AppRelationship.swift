@@ -15,12 +15,12 @@ public enum AppRelationship: Decodable {
     case betaLicenseAgreement(BetaLicenseAgreement)
     case betaAppReviewDetail(BetaAppReviewDetail)
     
+    enum CodingKeys: String, Decodable, CodingKey {
+        case type
+        case betaGroups, preReleaseVersions, betaAppLocalizations, builds, betaLicenseAgreements, betaAppReviewDetails
+    }
+
     public init(from decoder: Decoder) throws {
-        enum CodingKeys: String, Decodable, CodingKey {
-            case type
-            case betaGroups, preReleaseVersions, betaAppLocalizations, builds, betaLicenseAgreements, betaAppReviewDetails
-        }
-        
         switch try decoder.container(keyedBy: CodingKeys.self).decode(CodingKeys.self, forKey: .type) {
         case .betaGroups:
             self = try .betaGroup(BetaGroup(from: decoder))

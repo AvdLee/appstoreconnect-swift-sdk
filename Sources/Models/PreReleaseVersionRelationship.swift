@@ -11,12 +11,12 @@ public enum PreReleaseVersionRelationship: Decodable {
     case build(Build)
     case app(App)
     
+    enum CodingKeys: String, Decodable, CodingKey {
+        case type
+        case builds, apps
+    }
+    
     public init(from decoder: Decoder) throws {
-        enum CodingKeys: String, Decodable, CodingKey {
-            case type
-            case builds, apps
-        }
-        
         switch try decoder.container(keyedBy: CodingKeys.self).decode(CodingKeys.self, forKey: .type) {
         case .builds:
             self = try .build(Build(from: decoder))

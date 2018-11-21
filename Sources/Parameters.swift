@@ -8,7 +8,6 @@
 import Foundation
 import Alamofire
 
-
 protocol Parameter {
     static var key: String { get }
     var value: Any { get }

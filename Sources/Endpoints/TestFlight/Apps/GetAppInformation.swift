@@ -20,8 +20,7 @@ extension APIEndpoint {
         with id: String,
         select fields: [ReadAppInformation.Field]? = nil,
         include relationships: [ReadAppInformation.Relationship]? = nil,
-        limits: [ReadAppInformation.Limit]? = nil) -> APIEndpoint<AppResponse>
-    {
+        limits: [ReadAppInformation.Limit]? = nil) -> APIEndpoint<AppResponse> {
         var parameters = [String: Any]()
         if let fields = fields { parameters.merge(with: fields) }
         if let relationships = relationships { parameters.merge(with: relationships) }
@@ -61,36 +60,7 @@ public struct ReadAppInformation {
                 return ("betaGroups", value.map({ $0.rawValue }).joined(separator: ","))
             }
         }
-        
-        public enum Apps: String, CaseIterable {
-            case betaAppLocalizations, betaAppReviewDetail, betaGroups, betaLicenseAgreement, betaTesters, builds, bundleId, name, preReleaseVersions, primaryLocale, sku
-        }
-        
-        public enum BetaLicenseAgreements: String, CaseIterable {
-            case agreementText, app
-        }
-        
-        public enum PreReleaseVersions: String, CaseIterable {
-            case app, builds, platform, version
-        }
-        
-        public enum BetaAppReviewDetails: String, CaseIterable {
-            case app, contactEmail, contactFirstName, contactLastName, contactPhone, demoAccountName, demoAccountPassword, demoAccountRequired, notes
-        }
-        
-        public enum BetaAppLocalizations: String, CaseIterable {
-            case app, description, feedbackEmail, locale, marketingUrl, privacyPolicyUrl, tvOsPrivacyPolicy
-        }
-        
-        public enum Builds: String, CaseIterable {
-            case app, appEncryptionDeclaration, betaAppReviewSubmission, betaBuildLocalizations, betaGroups, buildBetaDetail, expirationDate, expired, iconAssetToken, individualTesters, minOsVersion, preReleaseVersion, processingState, uploadedDate, usesNonExemptEncryption, version
-        }
-        
-        public enum BetaGroups: String, CaseIterable {
-            case app, betaTesters, builds, createdDate, isInternalGroup, name, publicLink, publicLinkEnabled, publicLinkId, publicLinkLimit, publicLinkLimitEnabled
-        }
     }
-    
     
     /// Relationship data to include in the response.
     public enum Relationship: String, CaseIterable, Parameter {
@@ -99,7 +69,6 @@ public struct ReadAppInformation {
         static var key: String = "include"
         var value: Any { return rawValue }
     }
-    
     
     /// Number of included related resources to return.
     public enum Limit: NestableParameter {
@@ -121,5 +90,35 @@ public struct ReadAppInformation {
                 return ("betaAppLocalizations", value)
             }
         }
+    }
+}
+
+extension ReadAppInformation.Field {
+    public enum Apps: String, CaseIterable {
+        case betaAppLocalizations, betaAppReviewDetail, betaGroups, betaLicenseAgreement, betaTesters, builds, bundleId, name, preReleaseVersions, primaryLocale, sku
+    }
+    
+    public enum BetaLicenseAgreements: String, CaseIterable {
+        case agreementText, app
+    }
+    
+    public enum PreReleaseVersions: String, CaseIterable {
+        case app, builds, platform, version
+    }
+    
+    public enum BetaAppReviewDetails: String, CaseIterable {
+        case app, contactEmail, contactFirstName, contactLastName, contactPhone, demoAccountName, demoAccountPassword, demoAccountRequired, notes
+    }
+    
+    public enum BetaAppLocalizations: String, CaseIterable {
+        case app, description, feedbackEmail, locale, marketingUrl, privacyPolicyUrl, tvOsPrivacyPolicy
+    }
+    
+    public enum Builds: String, CaseIterable {
+        case app, appEncryptionDeclaration, betaAppReviewSubmission, betaBuildLocalizations, betaGroups, buildBetaDetail, expirationDate, expired, iconAssetToken, individualTesters, minOsVersion, preReleaseVersion, processingState, uploadedDate, usesNonExemptEncryption, version
+    }
+    
+    public enum BetaGroups: String, CaseIterable {
+        case app, betaTesters, builds, createdDate, isInternalGroup, name, publicLink, publicLinkEnabled, publicLinkId, publicLinkLimit, publicLinkLimitEnabled
     }
 }
