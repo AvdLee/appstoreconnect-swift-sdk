@@ -4,6 +4,7 @@
 //
 //  Created by Pascal Edmond on 12/11/2018.
 //
+//  swiftlint:disable type_name
 
 import Foundation
     

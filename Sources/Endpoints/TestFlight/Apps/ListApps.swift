@@ -17,7 +17,7 @@ extension APIEndpoint {
     ///   - relationships: Relationship data to include in the response.
     ///   - sortBy: Attributes by which to sort.
     ///   - limits: Number of included related resources to return.
-    public static func listApps(
+    public static func apps(
         select fields: [ListApps.Field]? = nil,
         filters: [ListApps.Filter]? = nil,
         include relationships: [ListApps.Relationship]? = nil,

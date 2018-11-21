@@ -6,7 +6,7 @@ import AppStoreConnect_Swift_SDK
 private let configuration = APIConfiguration(issuerID: "<YOUR ISSUER ID>", privateKeyID: "<YOUR PRIVATE KEY ID>", privateKey: "<YOUR PRIVATE KEY>")
 var provider: APIProvider = APIProvider(configuration: configuration)
 
-provider.request(.listApps(
+provider.request(.apps(
     select: [.apps([.name]), .builds([.version, .processingState, .uploadedDate])],
     include: [.builds],
     sortBy: [.ascending(.bundleId)],
@@ -16,7 +16,12 @@ provider.request(.listApps(
             guard
                 let app = appsResponse.data.first,
                 let name = app.attributes?.name,
-                let buildVersions = appsResponse.included?.compactMap({ $0.map(to: Build.self)?.attributes?.version })
+                let buildVersions = appsResponse.included?.compactMap({ included -> String? in
+                    if case let .build(build) = included {
+                        return build.attributes?.version
+                    }
+                    return nil
+                })
                 else {
                     print("Could not find requested relationships!")
                     exit(EXIT_FAILURE)

@@ -16,8 +16,8 @@ extension APIEndpoint {
     ///   - fields: Fields to return for included related types.
     ///   - relationships: Relationship data to include in the response.
     ///   - limits: Number of included related resources to return.
-    public static func readAppInformation(
-        for id: String,
+    public static func app(
+        with id: String,
         select fields: [ReadAppInformation.Field]? = nil,
         include relationships: [ReadAppInformation.Relationship]? = nil,
         limits: [ReadAppInformation.Limit]? = nil) -> APIEndpoint<AppResponse>
