@@ -9,28 +9,31 @@ var provider: APIProvider = APIProvider(configuration: configuration)
 provider.request(.apps(
     select: [.apps([.name]), .builds([.version, .processingState, .uploadedDate])],
     include: [.builds],
-    limits: [.apps(2)])) {
     sortBy: [.bundleIdAscending],
+    limits: [.apps(1)])) {
         switch $0 {
         case .success(let appsResponse):
+            typealias BuildInfo = (uploadedDate: Date, version: String, processingState: String)
             guard
                 let app = appsResponse.data.first,
                 let name = app.attributes?.name,
-                let buildVersions = appsResponse.included?.compactMap({ included -> String? in
-                    if case let .build(build) = included {
-                        return build.attributes?.version
+                let buildInfos = appsResponse.included?.compactMap({ included -> BuildInfo? in
+                    if case let .build(build) = included,
+                        let uploadedDate = build.attributes?.uploadedDate,
+                        let version = build.attributes?.version,
+                        let processingState = build.attributes?.processingState {
+                        return (uploadedDate: uploadedDate, version: version, processingState: processingState)
                     }
                     return nil
-                })
-                else {
+                }) else {
                     print("Could not find requested relationships!")
                     exit(EXIT_FAILURE)
             }
             
             print("App name is \(name)")
-            print(" - successfully got \(buildVersions.count) builds included")
-            for version in buildVersions {
-                print("  - \(version)")
+            print(" - successfully got \(buildInfos.count) builds included")
+            for info in buildInfos.sorted(by: { $0.uploadedDate > $1.uploadedDate }) {
+                print("  - \(info.version): \(info.processingState)")
             }
             
             exit(EXIT_SUCCESS)
