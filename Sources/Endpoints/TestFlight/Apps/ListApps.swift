@@ -21,7 +21,7 @@ extension APIEndpoint {
         select fields: [ListApps.Field]? = nil,
         filters: [ListApps.Filter]? = nil,
         include relationships: [ListApps.Relationship]? = nil,
-        sortBy: [Sorting<ListApps.SortableField>]? = nil,
+        sortBy: [ListApps.Sorting]? = nil,
         limits: [ListApps.Limit]? = nil) -> APIEndpoint<AppsResponse> {
         var parameters = [String: Any]()
         if let fields = fields { parameters.merge(with: fields) }
@@ -97,10 +97,16 @@ public struct ListApps {
     }
     
     /// Attributes by which to sort.
-    public enum SortableField: String, RawRepresentable {
-        case bundleId
-        case name
-        case sku
+    public enum Sorting: String, CaseIterable, Parameter {
+        case bundleIdAscending = "+bundleId"
+        case bundleIdDescending = "-bundleId"
+        case nameAscending = "+name"
+        case nameDescending = "-name"
+        case skuAscending = "+sku"
+        case skuDescending = "-sku"
+        
+        static var key: String = "sort"
+        var value: Any { return self.rawValue }
     }
     
     /// Number of included related resources to return.

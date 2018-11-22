@@ -9,8 +9,8 @@ var provider: APIProvider = APIProvider(configuration: configuration)
 provider.request(.apps(
     select: [.apps([.name]), .builds([.version, .processingState, .uploadedDate])],
     include: [.builds],
-    sortBy: [.ascending(.bundleId)],
     limits: [.apps(2)])) {
+    sortBy: [.bundleIdAscending],
         switch $0 {
         case .success(let appsResponse):
             guard
