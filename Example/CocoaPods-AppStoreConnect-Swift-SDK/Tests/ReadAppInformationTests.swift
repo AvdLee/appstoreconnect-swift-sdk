@@ -1,22 +1,18 @@
 //
-//  ListAppsTests.swift
+//  ReadAppInformationTests.swift
 //  AppStoreConnect-Swift-SDK_Tests
 //
-//  Created by Pascal Edmond on 22/11/2018.
+//  Created by Pascal Edmond on 23/11/2018.
 //  Copyright © 2018 CocoaPods. All rights reserved.
 //
 
 import XCTest
 @testable import AppStoreConnect_Swift_SDK
 
-final class ListAppsTests: XCTestCase {
-    
-    func testListAppsEndpoint() {
-        let bundleIds = ["bundleId"]
-        let ids = ["id"]
-        let names = ["name"]
-        let skus = ["sku"]
-        let appsLimit = 1
+class ReadAppInformationTests: XCTestCase {
+
+    func testReadAppInformationEndpoint() {
+
         let preReleaseVersionsLimit = 2
         let buildsLimit = 3
         let betaGroupsLimit = 4
@@ -25,13 +21,7 @@ final class ListAppsTests: XCTestCase {
         let expectedParams: [String: String] = [
             "fields[apps]": ListApps.Field.Apps.allCases.map({ $0.rawValue }).joinedByCommas(),
             "fields[betaLicenseAgreements]": ListApps.Field.BetaLicenseAgreements.allCases.map({ $0.rawValue }).joinedByCommas(),
-            "filter[bundleId]": bundleIds.joinedByCommas(),
-            "filter[id]": ids.joinedByCommas(),
-            "filter[name]": names.joinedByCommas(),
-            "filter[sku]": skus.joinedByCommas(),
             "include": ListApps.Relationship.allCases.map({ $0.rawValue }).joinedByCommas(),
-            "limit": "\(appsLimit)",
-            "sort": ListApps.Sorting.allCases.map({ $0.rawValue }).joinedByCommas(),
             "fields[preReleaseVersions]": ListApps.Field.PreReleaseVersions.allCases.map({ $0.rawValue }).joinedByCommas(),
             "limit[preReleaseVersions]": "\(preReleaseVersionsLimit)",
             "fields[betaAppReviewDetails]": ListApps.Field.BetaAppReviewDetails.allCases.map({ $0.rawValue }).joinedByCommas(),
@@ -42,34 +32,28 @@ final class ListAppsTests: XCTestCase {
             "limit[betaGroups]": "\(betaGroupsLimit)",
             "limit[betaAppLocalizations]": "\(betaAppLocalizationsLimit)"
         ]
-
-        let listApps = APIEndpoint<AppsResponse>.apps(
+        let appId = "appId"
+        let appInformation = APIEndpoint<AppResponse>.app(
+            with: appId,
             select: [
-                .apps(ListApps.Field.Apps.allCases),
-                .betaLicenseAgreements(ListApps.Field.BetaLicenseAgreements.allCases),
-                .preReleaseVersions(ListApps.Field.PreReleaseVersions.allCases),
-                .betaAppReviewDetails(ListApps.Field.BetaAppReviewDetails.allCases),
-                .betaAppLocalizations(ListApps.Field.BetaAppLocalizations.allCases),
-                .builds(ListApps.Field.Builds.allCases),
-                .betaGroups(ListApps.Field.BetaGroups.allCases)],
-            filters: [
-                .bundleId(bundleIds),
-                .id(ids),
-                .name(names),
-                .sku(skus)],
-            include: ListApps.Relationship.allCases,
-            sortBy: ListApps.Sorting.allCases,
+                .apps(ReadAppInformation.Field.Apps.allCases),
+                .betaLicenseAgreements(ReadAppInformation.Field.BetaLicenseAgreements.allCases),
+                .preReleaseVersions(ReadAppInformation.Field.PreReleaseVersions.allCases),
+                .betaAppReviewDetails(ReadAppInformation.Field.BetaAppReviewDetails.allCases),
+                .betaAppLocalizations(ReadAppInformation.Field.BetaAppLocalizations.allCases),
+                .builds(ReadAppInformation.Field.Builds.allCases),
+                .betaGroups(ReadAppInformation.Field.BetaGroups.allCases)],
+            include: ReadAppInformation.Relationship.allCases,
             limits: [
-                .apps(appsLimit),
                 .preReleaseVersions(preReleaseVersionsLimit),
                 .builds(buildsLimit),
                 .betaGroups(betaGroupsLimit),
                 .betaAppLocalizations(betaAppLocalizationsLimit)])
         
-        XCTAssertEqual(listApps.method, .get)
-        XCTAssertEqual(listApps.path, "apps")
-        XCTAssertNotNil(listApps.parameters)
-        if let listAppsParameters = listApps.parameters as? [String: String] {
+        XCTAssertEqual(appInformation.method, .get)
+        XCTAssertEqual(appInformation.path, "apps/\(appId)")
+        XCTAssertNotNil(appInformation.parameters)
+        if let listAppsParameters = appInformation.parameters as? [String: String] {
             XCTAssertEqual(listAppsParameters.count, expectedParams.count)
             for (key, value) in expectedParams {
                 XCTAssertEqual(listAppsParameters[key], value)
