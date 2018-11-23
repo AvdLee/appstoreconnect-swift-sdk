@@ -9,7 +9,7 @@
 import XCTest
 @testable import AppStoreConnect_Swift_SDK
 
-class ReadAppInformationTests: XCTestCase {
+final class ReadAppInformationTests: XCTestCase {
 
     func testReadAppInformationEndpoint() {
 

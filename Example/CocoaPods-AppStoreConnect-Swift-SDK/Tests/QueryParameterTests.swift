@@ -9,7 +9,7 @@
 import XCTest
 @testable import AppStoreConnect_Swift_SDK
 
-class NestableQueryParameterTests: XCTestCase {
+final class NestableQueryParameterTests: XCTestCase {
     
     func testNestableQueryParameter() {
         
