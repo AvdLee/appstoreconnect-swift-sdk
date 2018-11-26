@@ -33,31 +33,31 @@ public struct ReadAppInformation {
     
     /// Fields to return for included related types.
     public enum Field: NestableQueryParameter {
-        case apps([Apps])
-        case betaLicenseAgreements([BetaLicenseAgreements])
-        case preReleaseVersions([PreReleaseVersions])
-        case betaAppReviewDetails([BetaAppReviewDetails])
-        case betaAppLocalizations([BetaAppLocalizations])
-        case builds([Builds])
-        case betaGroups([BetaGroups])
+        case apps([App])
+        case betaLicenseAgreements([BetaLicenseAgreement])
+        case preReleaseVersions([PreReleaseVersion])
+        case betaAppReviewDetails([BetaAppReviewDetail])
+        case betaAppLocalizations([BetaAppLocalization])
+        case builds([Build])
+        case betaGroups([BetaGroup])
         
         static var key: String = "fields"
         var pair: Pair {
             switch self {
             case .apps(let value):
-                return (Apps.key, value.map({ $0.pair.value }).joinedByCommas())
+                return (App.key, value.map({ $0.pair.value }).joinedByCommas())
             case .betaLicenseAgreements(let value):
-                return (BetaLicenseAgreements.key, value.map({ $0.pair.value }).joinedByCommas())
+                return (BetaLicenseAgreement.key, value.map({ $0.pair.value }).joinedByCommas())
             case .preReleaseVersions(let value):
-                return (PreReleaseVersions.key, value.map({ $0.pair.value }).joinedByCommas())
+                return (PreReleaseVersion.key, value.map({ $0.pair.value }).joinedByCommas())
             case .betaAppReviewDetails(let value):
-                return (BetaAppReviewDetails.key, value.map({ $0.pair.value }).joinedByCommas())
+                return (BetaAppReviewDetail.key, value.map({ $0.pair.value }).joinedByCommas())
             case .betaAppLocalizations(let value):
-                return (BetaAppLocalizations.key, value.map({ $0.pair.value }).joinedByCommas())
+                return (BetaAppLocalization.key, value.map({ $0.pair.value }).joinedByCommas())
             case .builds(let value):
-                return (Builds.key, value.map({ $0.pair.value }).joinedByCommas())
+                return (Build.key, value.map({ $0.pair.value }).joinedByCommas())
             case .betaGroups(let value):
-                return (BetaGroups.key, value.map({ $0.pair.value }).joinedByCommas())
+                return (BetaGroup.key, value.map({ $0.pair.value }).joinedByCommas())
             }
         }
     }
@@ -94,49 +94,49 @@ public struct ReadAppInformation {
 }
 
 extension ReadAppInformation.Field {
-    public enum Apps: String, CaseIterable, NestableQueryParameter {
+    public enum App: String, CaseIterable, NestableQueryParameter {
         case betaAppLocalizations, betaAppReviewDetail, betaGroups, betaLicenseAgreement, betaTesters, builds, bundleId, name, preReleaseVersions, primaryLocale, sku
         
         static var key: String = "apps"
         var pair: NestableQueryParameter.Pair { return (nil, rawValue) }
     }
     
-    public enum BetaLicenseAgreements: String, CaseIterable, NestableQueryParameter {
+    public enum BetaLicenseAgreement: String, CaseIterable, NestableQueryParameter {
         case agreementText, app
         
         static var key: String = "betaLicenseAgreements"
         var pair: NestableQueryParameter.Pair { return (nil, rawValue) }
     }
     
-    public enum PreReleaseVersions: String, CaseIterable, NestableQueryParameter {
+    public enum PreReleaseVersion: String, CaseIterable, NestableQueryParameter {
         case app, builds, platform, version
         
         static var key: String = "preReleaseVersions"
         var pair: NestableQueryParameter.Pair { return (nil, rawValue) }
     }
     
-    public enum BetaAppReviewDetails: String, CaseIterable, NestableQueryParameter {
+    public enum BetaAppReviewDetail: String, CaseIterable, NestableQueryParameter {
         case app, contactEmail, contactFirstName, contactLastName, contactPhone, demoAccountName, demoAccountPassword, demoAccountRequired, notes
         
         static var key: String = "betaAppReviewDetails"
         var pair: NestableQueryParameter.Pair { return (nil, rawValue) }
     }
     
-    public enum BetaAppLocalizations: String, CaseIterable, NestableQueryParameter {
+    public enum BetaAppLocalization: String, CaseIterable, NestableQueryParameter {
         case app, description, feedbackEmail, locale, marketingUrl, privacyPolicyUrl, tvOsPrivacyPolicy
         
         static var key: String = "betaAppLocalizations"
         var pair: NestableQueryParameter.Pair { return (nil, rawValue) }
     }
     
-    public enum Builds: String, CaseIterable, NestableQueryParameter {
+    public enum Build: String, CaseIterable, NestableQueryParameter {
         case app, appEncryptionDeclaration, betaAppReviewSubmission, betaBuildLocalizations, betaGroups, buildBetaDetail, expirationDate, expired, iconAssetToken, individualTesters, minOsVersion, preReleaseVersion, processingState, uploadedDate, usesNonExemptEncryption, version
         
         static var key: String = "builds"
         var pair: NestableQueryParameter.Pair { return (nil, rawValue) }
     }
     
-    public enum BetaGroups: String, CaseIterable, NestableQueryParameter {
+    public enum BetaGroup: String, CaseIterable, NestableQueryParameter {
         case app, betaTesters, builds, createdDate, isInternalGroup, name, publicLink, publicLinkEnabled, publicLinkId, publicLinkLimit, publicLinkLimitEnabled
         
         static var key: String = "betaGroups"
