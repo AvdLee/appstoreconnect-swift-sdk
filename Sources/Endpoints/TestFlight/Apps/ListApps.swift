@@ -29,7 +29,10 @@ extension APIEndpoint {
         if let relationships = relationships { parameters.add(relationships) }
         if let sortBy = sortBy { parameters.add(sortBy) }
         if let limits = limits { parameters.add(limits) }
-        return APIEndpoint<AppsResponse>(path: "apps", method: .get, parameters: parameters)
+        return APIEndpoint<AppsResponse>(
+            path: "apps",
+            method: .get,
+            parameters: parameters)
     }
 }
 
