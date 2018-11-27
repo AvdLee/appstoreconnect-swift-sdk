@@ -1,5 +1,5 @@
 //
-//  ReadAppInformation.swift
+//  GetApp.swift
 //  AppStoreConnect-Swift-SDK
 //
 //  Created by Pascal Edmond on 20/11/2018.
@@ -18,9 +18,9 @@ extension APIEndpoint {
     ///   - limits: Number of included related resources to return.
     public static func app(
         with id: String,
-        select fields: [ReadAppInformation.Field]? = nil,
-        include relationships: [ReadAppInformation.Relationship]? = nil,
-        limits: [ReadAppInformation.Limit]? = nil) -> APIEndpoint<AppResponse> {
+        select fields: [GetApp.Field]? = nil,
+        include relationships: [GetApp.Relationship]? = nil,
+        limits: [GetApp.Limit]? = nil) -> APIEndpoint<AppResponse> {
         var parameters = [String: Any]()
         if let fields = fields { parameters.add(fields) }
         if let relationships = relationships { parameters.add(relationships) }
@@ -29,7 +29,7 @@ extension APIEndpoint {
     }
 }
 
-public struct ReadAppInformation {
+public struct GetApp {
     
     /// Fields to return for included related types.
     public enum Field: NestableQueryParameter {
@@ -93,7 +93,7 @@ public struct ReadAppInformation {
     }
 }
 
-extension ReadAppInformation.Field {
+extension GetApp.Field {
     public enum App: String, CaseIterable, NestableQueryParameter {
         case betaAppLocalizations, betaAppReviewDetail, betaGroups, betaLicenseAgreement, betaTesters, builds, bundleId, name, preReleaseVersions, primaryLocale, sku
         
