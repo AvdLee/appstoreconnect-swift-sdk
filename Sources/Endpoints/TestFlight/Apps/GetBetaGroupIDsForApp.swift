@@ -7,17 +7,17 @@
     
 import Alamofire
 
-extension APIEndpoint {
+extension APIEndpoint where T == AppBetaGroupsLinkagesResponse {
 
     /// Get a list of the beta group resource IDs associated with a specific app.
     ///
     /// - Parameters:
     ///   - id: (Required) An opaque resource ID that uniquely identifies the resource.
     ///   - limit: Number of resources to return.
-    public static func betaGroupIDsForApp(withId id: String, limit: Int? = nil) -> APIEndpoint<AppBetaGroupsLinkagesResponse> {
+    public static func betaGroupIDsForApp(withId id: String, limit: Int? = nil) -> APIEndpoint {
         var parameters = [String: Any]()
         if let limit = limit { parameters["limit"] = limit }
-        return APIEndpoint<AppBetaGroupsLinkagesResponse>(
+        return APIEndpoint(
             path: "apps/\(id)/relationships/betaGroups",
             method: .get,
             parameters: parameters)

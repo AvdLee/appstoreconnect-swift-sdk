@@ -13,7 +13,7 @@ final class ListPrereleaseVersionsForAppTests: XCTestCase {
     let provider = APIProvider(configuration: APIConfiguration(issuerID: "", privateKeyID: "", privateKey: ""))
     
     func testAbsoluteString() {
-        let endpoint = APIEndpoint<PreReleaseVersionsResponse>.prereleaseVersionsForApp(
+        let endpoint = APIEndpoint.prereleaseVersionsForApp(
             withId: "appId",
             fields: [.preReleaseVersions(ListPrereleaseVersionsForApp.Field.PreReleaseVersion.allCases)],
             limit: 1)

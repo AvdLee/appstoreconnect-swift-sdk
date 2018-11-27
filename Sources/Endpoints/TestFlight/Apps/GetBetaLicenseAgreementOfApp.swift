@@ -7,7 +7,7 @@
     
 import Alamofire
 
-extension APIEndpoint {
+extension APIEndpoint where T == BetaLicenseAgreementResponse {
 
     /// Get the beta license agreement for a specific app.
     ///
@@ -16,10 +16,10 @@ extension APIEndpoint {
     ///   - fields: Fields to return for included related types.
     public static func betaLicenseAgreementOfApp(
         withId id: String,
-        fields: [GetBetaLicenseAgreementForApp.Field]? = nil) -> APIEndpoint<BetaLicenseAgreementResponse> {
+        fields: [GetBetaLicenseAgreementForApp.Field]? = nil) -> APIEndpoint {
         var parameters = [String: Any]()
         if let fields = fields { parameters.add(fields) }
-        return APIEndpoint<BetaLicenseAgreementResponse>(
+        return APIEndpoint(
             path: "apps/\(id)/betaLicenseAgreement",
             method: .get,
             parameters: parameters)

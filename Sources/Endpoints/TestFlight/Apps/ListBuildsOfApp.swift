@@ -7,7 +7,7 @@
     
 import Alamofire
 
-extension APIEndpoint {
+extension APIEndpoint where T == BuildsResponse {
 
     /// Get a list of builds associated with a specific app.
     ///
@@ -18,11 +18,11 @@ extension APIEndpoint {
     public static func buildsOfApp(
         withId id: String,
         fields: [ListBuildsOfApp.Field]? = nil,
-        limit: Int? = nil) -> APIEndpoint<BuildsResponse> {
+        limit: Int? = nil) -> APIEndpoint {
         var parameters = [String: Any]()
         if let fields = fields { parameters.add(fields) }
         if let limit = limit { parameters["limit"] = limit }
-        return APIEndpoint<BuildsResponse>(
+        return APIEndpoint(
             path: "apps/\(id)/builds",
             method: .get,
             parameters: parameters)

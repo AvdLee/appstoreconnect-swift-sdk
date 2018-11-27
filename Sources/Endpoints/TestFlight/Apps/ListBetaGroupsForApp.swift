@@ -7,7 +7,7 @@
     
 import Alamofire
 
-extension APIEndpoint {
+extension APIEndpoint where T == BetaGroupsResponse {
 
     /// Get a list of beta groups associated with a specific app.
     ///
@@ -18,11 +18,11 @@ extension APIEndpoint {
     public static func betaGroupsForApp(
         withId id: String,
         fields: [ListBetaGroupsForApp.Field]? = nil,
-        limit: Int? = nil) -> APIEndpoint<BetaGroupsResponse> {
+        limit: Int? = nil) -> APIEndpoint {
         var parameters = [String: Any]()
         if let fields = fields { parameters.add(fields) }
         if let limit = limit { parameters["limit"] = limit }
-        return APIEndpoint<BetaGroupsResponse>(
+        return APIEndpoint(
             path: "apps/\(id)/betaGroups",
             method: .get,
             parameters: parameters)

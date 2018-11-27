@@ -14,7 +14,7 @@ final class GetAppTests: XCTestCase {
     let provider = APIProvider(configuration: APIConfiguration(issuerID: "", privateKeyID: "", privateKey: ""))
     
     func testAbsoluteString() {
-        let endpoint = APIEndpoint<AppResponse>.app(
+        let endpoint = APIEndpoint.app(
             withId: "appId",
             select: [
                 .apps(GetApp.Field.App.allCases),

@@ -7,7 +7,7 @@
     
 import Alamofire
 
-extension APIEndpoint {
+extension APIEndpoint where T == BetaAppLocalizationsResponse {
 
     /// Get a list of localized beta test information for a specific app.
     ///
@@ -18,11 +18,11 @@ extension APIEndpoint {
     public static func betaAppLocalizationsOfApp(
         withId id: String,
         fields: [ListBetaAppLocalizationsForApp.Field]? = nil,
-        limit: Int? = nil) -> APIEndpoint<BetaAppLocalizationsResponse> {
+        limit: Int? = nil) -> APIEndpoint {
         var parameters = [String: Any]()
         if let fields = fields { parameters.add(fields) }
         if let limit = limit { parameters["limit"] = limit }
-        return APIEndpoint<BetaAppLocalizationsResponse>(
+        return APIEndpoint(
             path: "apps/\(id)/betaAppLocalizations",
             method: .get,
             parameters: parameters)

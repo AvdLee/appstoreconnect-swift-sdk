@@ -7,17 +7,17 @@
     
 import Alamofire
 
-extension APIEndpoint {
+extension APIEndpoint where T == AppBetaAppLocalizationsLinkagesResponse {
 
     /// Get a list of beta app localization resource IDs associated with a specific app.
     ///
     /// - Parameters:
     ///   - id: (Required) An opaque resource ID that uniquely identifies the resource.
     ///   - limit: Number of resources to return.
-    public static func betaAppLocalizationIDsOfApp(withId id: String, limit: Int? = nil) -> APIEndpoint<AppBetaAppLocalizationsLinkagesResponse> {
+    public static func betaAppLocalizationIDsOfApp(withId id: String, limit: Int? = nil) -> APIEndpoint {
         var parameters = [String: Any]()
         if let limit = limit { parameters["limit"] = limit }
-        return APIEndpoint<AppBetaAppLocalizationsLinkagesResponse>(
+        return APIEndpoint(
             path: "apps/\(id)/relationships/betaAppLocalizations",
             method: .get,
             parameters: parameters)

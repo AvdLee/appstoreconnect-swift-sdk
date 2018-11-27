@@ -13,7 +13,7 @@ final class GetPrereleaseVersionIDsForAppTests: XCTestCase {
     let provider = APIProvider(configuration: APIConfiguration(issuerID: "", privateKeyID: "", privateKey: ""))
     
     func testAbsoluteString() {
-        let endpoint = APIEndpoint<AppPreReleaseVersionsLinkagesResponse>.prereleaseVersionIDsForApp(
+        let endpoint = APIEndpoint.prereleaseVersionIDsForApp(
             withId: "appId",
             limit: 1)
         let absoluteString = provider.request(for: endpoint).request?.url?.absoluteString

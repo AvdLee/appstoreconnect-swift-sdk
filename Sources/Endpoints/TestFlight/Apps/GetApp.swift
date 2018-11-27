@@ -7,7 +7,7 @@
 
 import Alamofire
 
-extension APIEndpoint {
+extension APIEndpoint where T == AppResponse {
     
     /// Get information about a specific app.
     ///
@@ -20,12 +20,12 @@ extension APIEndpoint {
         withId id: String,
         select fields: [GetApp.Field]? = nil,
         include relationships: [GetApp.Relationship]? = nil,
-        limits: [GetApp.Limit]? = nil) -> APIEndpoint<AppResponse> {
+        limits: [GetApp.Limit]? = nil) -> APIEndpoint {
         var parameters = [String: Any]()
         if let fields = fields { parameters.add(fields) }
         if let relationships = relationships { parameters.add(relationships) }
         if let limits = limits { parameters.add(limits) }
-        return APIEndpoint<AppResponse>(
+        return APIEndpoint(
             path: "apps/\(id)",
             method: .get,
             parameters: parameters)

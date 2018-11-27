@@ -7,7 +7,7 @@
     
 import Alamofire
 
-extension APIEndpoint {
+extension APIEndpoint where T == PreReleaseVersionsResponse {
 
     /// Get a list of prerelease versions associated with a specific app.
     ///
@@ -18,11 +18,11 @@ extension APIEndpoint {
     public static func prereleaseVersionsForApp(
         withId id: String,
         fields: [ListPrereleaseVersionsForApp.Field]? = nil,
-        limit: Int? = nil) -> APIEndpoint<PreReleaseVersionsResponse> {
+        limit: Int? = nil) -> APIEndpoint {
         var parameters = [String: Any]()
         if let fields = fields { parameters.add(fields) }
         if let limit = limit { parameters["limit"] = limit }
-        return APIEndpoint<PreReleaseVersionsResponse>(
+        return APIEndpoint(
             path: "apps/\(id)/preReleaseVersions",
             method: .get,
             parameters: parameters)

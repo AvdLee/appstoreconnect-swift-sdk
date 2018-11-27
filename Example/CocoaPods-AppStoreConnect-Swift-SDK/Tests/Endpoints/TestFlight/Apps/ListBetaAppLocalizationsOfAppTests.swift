@@ -13,7 +13,7 @@ final class ListBetaAppLocalizationsOfAppTests: XCTestCase {
     let provider = APIProvider(configuration: APIConfiguration(issuerID: "", privateKeyID: "", privateKey: ""))
     
     func testAbsoluteString() {
-        let endpoint = APIEndpoint<BetaAppLocalizationsResponse>.betaAppLocalizationsOfApp(
+        let endpoint = APIEndpoint.betaAppLocalizationsOfApp(
             withId: "appId",
             fields: [.betaAppLocalizations(ListBetaAppLocalizationsForApp.Field.BetaAppLocalization.allCases)],
             limit: 1)

@@ -13,7 +13,7 @@ final class GetBetaAppLocalizationIDsOfAppTests: XCTestCase {
     let provider = APIProvider(configuration: APIConfiguration(issuerID: "", privateKeyID: "", privateKey: ""))
     
     func testAbsoluteString() {
-        let endpoint = APIEndpoint<AppBetaAppLocalizationsLinkagesResponse>.betaAppLocalizationIDsOfApp(
+        let endpoint = APIEndpoint.betaAppLocalizationIDsOfApp(
             withId: "appId",
             limit: 3)
         let absoluteString = provider.request(for: endpoint).request?.url?.absoluteString

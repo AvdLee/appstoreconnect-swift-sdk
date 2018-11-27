@@ -13,7 +13,7 @@ final class GetBetaAppReviewDetailsResourceOfAppTests: XCTestCase {
     let provider = APIProvider(configuration: APIConfiguration(issuerID: "", privateKeyID: "", privateKey: ""))
     
     func testAbsoluteString() {
-        let endpoint = APIEndpoint<BetaAppReviewDetailResponse>.betaAppReviewDetailsResourceOfApp(
+        let endpoint = APIEndpoint.betaAppReviewDetailsResourceOfApp(
             withId: "appId",
             fields: [.betaAppReviewDetails(GetBetaAppReviewDetailsResourceForApp.Field.BetaAppReviewDetail.allCases)])
         let absoluteString = provider.request(for: endpoint).request?.url?.absoluteString

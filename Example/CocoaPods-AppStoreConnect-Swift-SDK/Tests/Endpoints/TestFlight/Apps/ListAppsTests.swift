@@ -14,7 +14,7 @@ final class ListAppsTests: XCTestCase {
     let provider = APIProvider(configuration: APIConfiguration(issuerID: "", privateKeyID: "", privateKey: ""))
     
     func testAbsoluteString() {
-        let endpoint = APIEndpoint<AppsResponse>.apps(
+        let endpoint = APIEndpoint.apps(
             select: [
                 .apps(ListApps.Field.App.allCases),
                 .betaLicenseAgreements(ListApps.Field.BetaLicenseAgreement.allCases),

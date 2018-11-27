@@ -7,7 +7,7 @@
     
 import Alamofire
 
-extension APIEndpoint {
+extension APIEndpoint where T == BetaAppReviewDetailResponse {
 
     /// Get the beta app review details for a specific app.
     ///
@@ -16,10 +16,10 @@ extension APIEndpoint {
     ///   - fields: Fields to return for included related types.
     public static func betaAppReviewDetailsResourceOfApp(
         withId id: String,
-        fields: [GetBetaAppReviewDetailsResourceForApp.Field]? = nil) -> APIEndpoint<BetaAppReviewDetailResponse> {
+        fields: [GetBetaAppReviewDetailsResourceForApp.Field]? = nil) -> APIEndpoint {
         var parameters = [String: Any]()
         if let fields = fields { parameters.add(fields) }
-        return APIEndpoint<BetaAppReviewDetailResponse>(
+        return APIEndpoint(
             path: "apps/\(id)/betaAppReviewDetail",
             method: .get,
             parameters: parameters)

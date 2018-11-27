@@ -13,7 +13,7 @@ final class GetBetaLicenseAgreementOfAppTests: XCTestCase {
     let provider = APIProvider(configuration: APIConfiguration(issuerID: "", privateKeyID: "", privateKey: ""))
     
     func testAbsoluteString() {
-        let endpoint = APIEndpoint<BetaLicenseAgreementResponse>.betaLicenseAgreementOfApp(
+        let endpoint = APIEndpoint.betaLicenseAgreementOfApp(
             withId: "appId",
             fields: [.betaLicenseAgreements(GetBetaLicenseAgreementForApp.Field.BetaLicenseAgreement.allCases)])
         let absoluteString = provider.request(for: endpoint).request?.url?.absoluteString

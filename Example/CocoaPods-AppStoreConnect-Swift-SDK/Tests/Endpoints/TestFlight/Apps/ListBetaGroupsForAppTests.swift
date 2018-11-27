@@ -13,7 +13,7 @@ final class ListBetaGroupsForAppTests: XCTestCase {
     let provider = APIProvider(configuration: APIConfiguration(issuerID: "", privateKeyID: "", privateKey: ""))
     
     func testAbsoluteString() {
-        let endpoint = APIEndpoint<BetaGroupsResponse>.betaGroupsForApp(
+        let endpoint = APIEndpoint.betaGroupsForApp(
             withId: "appId",
             fields: [.betaGroups(ListBetaGroupsForApp.Field.BetaGroup.allCases)],
             limit: 1)
