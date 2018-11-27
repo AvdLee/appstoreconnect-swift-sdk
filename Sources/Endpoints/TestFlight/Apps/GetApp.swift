@@ -17,7 +17,7 @@ extension APIEndpoint {
     ///   - relationships: Relationship data to include in the response.
     ///   - limits: Number of included related resources to return.
     public static func app(
-        with id: String,
+        withId id: String,
         select fields: [GetApp.Field]? = nil,
         include relationships: [GetApp.Relationship]? = nil,
         limits: [GetApp.Limit]? = nil) -> APIEndpoint<AppResponse> {

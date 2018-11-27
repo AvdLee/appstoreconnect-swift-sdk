@@ -15,7 +15,7 @@ final class GetAppTests: XCTestCase {
     
     func testGetAppEndpoint() {
         let endpoint = APIEndpoint<AppResponse>.app(
-            with: "appId",
+            withId: "appId",
             select: [
                 .apps(GetApp.Field.App.allCases),
                 .betaLicenseAgreements(GetApp.Field.BetaLicenseAgreement.allCases),
