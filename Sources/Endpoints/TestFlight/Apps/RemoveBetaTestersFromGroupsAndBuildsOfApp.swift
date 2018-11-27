@@ -15,10 +15,10 @@ extension APIEndpoint {
     ///   - id: (Required) An opaque resource ID that uniquely identifies the resource.
     public static func remove(
         betaTesters: AppBetaTestersLinkagesRequest,
-        fromGroupsAndBuildsOfAppWithId id: String) -> APIEndpoint<ErrorResponse> {
-        return APIEndpoint<ErrorResponse>(
+        fromGroupsAndBuildsOfAppWithId id: String) -> APIEndpoint<Void> {
+        return APIEndpoint<Void>(
             path: "apps/\(id)/relationships/betaTesters",
             method: .delete,
-            parameters: nil)
+            parameters: ["AppBetaTestersLinkagesRequest": betaTesters])
     }
 }

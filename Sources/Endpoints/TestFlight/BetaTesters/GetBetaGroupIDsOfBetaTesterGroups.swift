@@ -1,5 +1,5 @@
 //
-//  GetBetaGroupIDsOfBetaTester'sGroups.swift
+//  GetBetaGroupIDsOfBetaTesterGroups.swift
 //  AppStoreConnect-Swift-SDK
 //
 //  Created by Pascal Edmond on 26/11/2018.
