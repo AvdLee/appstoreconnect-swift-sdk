@@ -8,7 +8,7 @@
 import Foundation
     
 /// An image asset, including its height, width, and template URL.
-public struct ImageAsset: Decodable {
+public struct ImageAsset: Codable {
 
     /// string
     public let templateUrl: String?

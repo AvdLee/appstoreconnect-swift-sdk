@@ -8,12 +8,12 @@
 import Foundation
     
 /// A request containing a single resource.
-public struct BetaAppReviewDetailUpdateRequest: Decodable {
+public struct BetaAppReviewDetailUpdateRequest: Codable {
 
     /// (Required) The resource data.
     public let data: BetaAppReviewDetailUpdateRequest.Data
     
-    public struct Data: Decodable {
+    public struct Data: Codable {
     
         /// The resource's attributes.
         public let attributes: BetaAppReviewDetailUpdateRequest.Data.Attributes?
@@ -29,7 +29,7 @@ public struct BetaAppReviewDetailUpdateRequest: Decodable {
 /// MARK: BetaAppReviewDetailUpdateRequest.Data
 extension BetaAppReviewDetailUpdateRequest.Data {
     /// Attributes that describe a resource.
-    public struct Attributes: Decodable {
+    public struct Attributes: Codable {
     
         /// Email address of contact in case communication is needed with the beta app review.
         public let contactEmail: String?

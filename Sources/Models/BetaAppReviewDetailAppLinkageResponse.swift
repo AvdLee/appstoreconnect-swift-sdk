@@ -8,7 +8,7 @@
 import Foundation
     
 /// A response containing the ID of the related resource.
-public struct BetaAppReviewDetailAppLinkageResponse: Decodable {
+public struct BetaAppReviewDetailAppLinkageResponse: Codable {
 
     /// (Required) The object types and IDs of the related resources.
     public let data: BetaAppReviewDetailAppLinkageResponse.Data
@@ -16,7 +16,7 @@ public struct BetaAppReviewDetailAppLinkageResponse: Decodable {
     /// (Required) Navigational links including the self-link and links to the related data.
     public let links: DocumentLinks
     
-    public struct Data: Decodable {
+    public struct Data: Codable {
     
         /// (Required) The opaque resource ID that uniquely identifies the resource.
         public let `id`: String

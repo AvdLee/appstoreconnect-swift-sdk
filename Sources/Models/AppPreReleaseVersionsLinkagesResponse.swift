@@ -8,7 +8,7 @@
 import Foundation
     
 /// A response containing a list of related resource IDs.
-public struct AppPreReleaseVersionsLinkagesResponse: Decodable {
+public struct AppPreReleaseVersionsLinkagesResponse: Codable {
 
     /// (Required) The object types and IDs of the related resources.
     public let data: [AppPreReleaseVersionsLinkagesResponse.Data]
@@ -19,7 +19,7 @@ public struct AppPreReleaseVersionsLinkagesResponse: Decodable {
     /// Paging information.
     public let meta: PagingInformation?
     
-    public struct Data: Decodable {
+    public struct Data: Codable {
     
         /// (Required) The opaque resource ID that uniquely identifies the resource.
         public let `id`: String

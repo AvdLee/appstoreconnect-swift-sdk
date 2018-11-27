@@ -7,7 +7,7 @@
 
 import Foundation
     /// Strings that represent Apple operating systems.
-public enum Platform: String, Decodable {
+public enum Platform: String, Codable {
     case ios = "IOS"
     case macOs = "MAC_OS"
     case tvOs = "TV_OS"

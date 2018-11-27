@@ -8,12 +8,12 @@
 import Foundation
     
 /// A request containing a single resource.
-public struct UserInvitationCreateRequest: Decodable {
+public struct UserInvitationCreateRequest: Codable {
 
     /// (Required) The resource data.
     public let data: UserInvitationCreateRequest.Data
     
-    public struct Data: Decodable {
+    public struct Data: Codable {
     
         /// (Required) The resource's attributes.
         public let attributes: UserInvitationCreateRequest.Data.Attributes
@@ -29,7 +29,7 @@ public struct UserInvitationCreateRequest: Decodable {
 /// MARK: UserInvitationCreateRequest.Data
 extension UserInvitationCreateRequest.Data {
     /// Attributes that describe a resource.
-    public struct Attributes: Decodable {
+    public struct Attributes: Codable {
     
         /// A Boolean value that indicates whether a user has access to all apps available to the team.
         public let allAppsVisible: Bool?
@@ -50,7 +50,7 @@ extension UserInvitationCreateRequest.Data {
         public let roles: [UserRole]
     }
     
-    public struct Relationships: Decodable {
+    public struct Relationships: Codable {
     
         /// UserInvitationCreateRequest.Data.Relationships.VisibleApps
         public let visibleApps: UserInvitationCreateRequest.Data.Relationships.VisibleApps?
@@ -60,7 +60,7 @@ extension UserInvitationCreateRequest.Data {
 /// MARK: UserInvitationCreateRequest.Data.Relationships
 extension UserInvitationCreateRequest.Data.Relationships {
     
-    public struct VisibleApps: Decodable {
+    public struct VisibleApps: Codable {
     
         /// [UserInvitationCreateRequest.Data.Relationships.VisibleApps.Data]
         public let data: [UserInvitationCreateRequest.Data.Relationships.VisibleApps.Data]?
@@ -70,7 +70,7 @@ extension UserInvitationCreateRequest.Data.Relationships {
 /// MARK: UserInvitationCreateRequest.Data.Relationships.VisibleApps
 extension UserInvitationCreateRequest.Data.Relationships.VisibleApps {
     
-    public struct Data: Decodable {
+    public struct Data: Codable {
     
         /// (Required) The opaque resource ID that uniquely identifies the resource.
         public let `id`: String

@@ -7,7 +7,7 @@
 
 import Foundation
 
-public enum BetaTesterRelationship: Decodable {
+public enum BetaTesterRelationship: Codable {
     case app(App)
     case betaGroup(BetaGroup)
     case build(Build)
@@ -30,6 +30,17 @@ public enum BetaTesterRelationship: Decodable {
                 BetaTesterRelationship.self,
                 DecodingError.Context(codingPath: [], debugDescription: "Not convertable to \(BetaTesterRelationship.self)")
             )
+        }
+    }
+    
+    public func encode(to encoder: Encoder) throws {
+        switch self {
+        case .app(let value):
+            try value.encode(to: encoder)
+        case .betaGroup(let value):
+            try value.encode(to: encoder)
+        case .build(let value):
+            try value.encode(to: encoder)
         }
     }
 }

@@ -8,12 +8,12 @@
 import Foundation
     
 /// A request containing a single resource
-public struct BuildBetaDetailUpdateRequest: Decodable {
+public struct BuildBetaDetailUpdateRequest: Codable {
 
     /// (Required) The resource data.
     public let data: BuildBetaDetailUpdateRequest.Data
     
-    public struct Data: Decodable {
+    public struct Data: Codable {
     
         /// The resource's attributes.
         public let attributes: BuildBetaDetailUpdateRequest.Data.Attributes?
@@ -29,7 +29,7 @@ public struct BuildBetaDetailUpdateRequest: Decodable {
 /// MARK: BuildBetaDetailUpdateRequest.Data
 extension BuildBetaDetailUpdateRequest.Data {
     /// Attributes that describe a resource.
-    public struct Attributes: Decodable {
+    public struct Attributes: Codable {
     
         /// A Boolean value that enables you to send test invitations to users automatically when the build is available to external groups.
         public let autoNotifyEnabled: Bool?

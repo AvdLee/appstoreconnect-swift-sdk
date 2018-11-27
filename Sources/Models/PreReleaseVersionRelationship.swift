@@ -7,7 +7,7 @@
 
 import Foundation
 
-public enum PreReleaseVersionRelationship: Decodable {
+public enum PreReleaseVersionRelationship: Codable {
     case build(Build)
     case app(App)
     
@@ -27,6 +27,15 @@ public enum PreReleaseVersionRelationship: Decodable {
                 PreReleaseVersionRelationship.self,
                 DecodingError.Context(codingPath: [], debugDescription: "Not convertable to \(PreReleaseVersionRelationship.self)")
             )
+        }
+    }
+    
+    public func encode(to encoder: Encoder) throws {
+        switch self {
+        case .build(let value):
+            try value.encode(to: encoder)
+        case .app(let value):
+            try value.encode(to: encoder)
         }
     }
 }

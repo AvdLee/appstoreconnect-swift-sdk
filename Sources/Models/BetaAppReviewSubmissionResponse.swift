@@ -8,7 +8,7 @@
 import Foundation
     
 /// A response containing a single resource.
-public struct BetaAppReviewSubmissionResponse: Decodable {
+public struct BetaAppReviewSubmissionResponse: Codable {
 
     /// (Required) The resource data.
     public let data: BetaAppReviewSubmission

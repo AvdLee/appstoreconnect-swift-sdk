@@ -8,12 +8,12 @@
 import Foundation
     
 /// A request containing a single resource.
-public struct BuildUpdateRequest: Decodable {
+public struct BuildUpdateRequest: Codable {
 
     /// (Required) The resource data.
     public let data: BuildUpdateRequest.Data
     
-    public struct Data: Decodable {
+    public struct Data: Codable {
     
         /// The resource's attributes.
         public let attributes: BuildUpdateRequest.Data.Attributes?
@@ -32,7 +32,7 @@ public struct BuildUpdateRequest: Decodable {
 /// MARK: BuildUpdateRequest.Data
 extension BuildUpdateRequest.Data {
     /// Attributes that describe a resource.
-    public struct Attributes: Decodable {
+    public struct Attributes: Codable {
     
         /// A Boolean value that indicates if the build has expired. An expired build is unavailable for testing.
         public let expired: Bool?
@@ -41,7 +41,7 @@ extension BuildUpdateRequest.Data {
         public let usesNonExemptEncryption: Bool?
     }
     
-    public struct Relationships: Decodable {
+    public struct Relationships: Codable {
     
         /// BuildUpdateRequest.Data.Relationships.AppEncryptionDeclaration
         public let appEncryptionDeclaration: BuildUpdateRequest.Data.Relationships.AppEncryptionDeclaration?
@@ -51,7 +51,7 @@ extension BuildUpdateRequest.Data {
 /// MARK: BuildUpdateRequest.Data.Relationships
 extension BuildUpdateRequest.Data.Relationships {
     
-    public struct AppEncryptionDeclaration: Decodable {
+    public struct AppEncryptionDeclaration: Codable {
     
         /// BuildUpdateRequest.Data.Relationships.AppEncryptionDeclaration.Data
         public let data: BuildUpdateRequest.Data.Relationships.AppEncryptionDeclaration.Data?
@@ -61,7 +61,7 @@ extension BuildUpdateRequest.Data.Relationships {
 /// MARK: BuildUpdateRequest.Data.Relationships.AppEncryptionDeclaration
 extension BuildUpdateRequest.Data.Relationships.AppEncryptionDeclaration {
     
-    public struct Data: Decodable {
+    public struct Data: Codable {
     
         /// (Required) The opaque resource ID that uniquely identifies the resource.
         public let `id`: String

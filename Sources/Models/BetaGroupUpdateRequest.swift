@@ -8,12 +8,12 @@
 import Foundation
     
 /// A request containing a single resource.
-public struct BetaGroupUpdateRequest: Decodable {
+public struct BetaGroupUpdateRequest: Codable {
 
     /// (Required) The resource data.
     public let data: BetaGroupUpdateRequest.Data
     
-    public struct Data: Decodable {
+    public struct Data: Codable {
     
         /// The resource's attributes.
         public let attributes: BetaGroupUpdateRequest.Data.Attributes?
@@ -29,7 +29,7 @@ public struct BetaGroupUpdateRequest: Decodable {
 /// MARK: BetaGroupUpdateRequest.Data
 extension BetaGroupUpdateRequest.Data {
     /// Attributes that describe a resource.
-    public struct Attributes: Decodable {
+    public struct Attributes: Codable {
     
         /// The name for the beta group.
         public let name: String?

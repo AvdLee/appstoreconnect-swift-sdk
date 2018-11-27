@@ -8,12 +8,12 @@
 import Foundation
     
 /// A request containing a single resource.
-public struct BetaGroupCreateRequest: Decodable {
+public struct BetaGroupCreateRequest: Codable {
 
     /// (Required) The resource data.
     public let data: BetaGroupCreateRequest.Data
     
-    public struct Data: Decodable {
+    public struct Data: Codable {
     
         /// (Required) The resource's attributes.
         public let attributes: BetaGroupCreateRequest.Data.Attributes
@@ -29,7 +29,7 @@ public struct BetaGroupCreateRequest: Decodable {
 /// MARK: BetaGroupCreateRequest.Data
 extension BetaGroupCreateRequest.Data {
     /// Attributes that describe a resource.
-    public struct Attributes: Decodable {
+    public struct Attributes: Codable {
     
         /// (Required) The name for the beta group.
         public let name: String
@@ -44,7 +44,7 @@ extension BetaGroupCreateRequest.Data {
         public let publicLinkLimitEnabled: Bool?
     }
     
-    public struct Relationships: Decodable {
+    public struct Relationships: Codable {
     
         /// BetaGroupCreateRequest.Data.Relationships.App (Required)
         public let app: BetaGroupCreateRequest.Data.Relationships.App
@@ -60,19 +60,19 @@ extension BetaGroupCreateRequest.Data {
 /// MARK: BetaGroupCreateRequest.Data.Relationships
 extension BetaGroupCreateRequest.Data.Relationships {
     
-    public struct App: Decodable {
+    public struct App: Codable {
     
         /// BetaGroupCreateRequest.Data.Relationships.App.Data (Required)
         public let data: BetaGroupCreateRequest.Data.Relationships.App.Data
     }
     
-    public struct BetaTesters: Decodable {
+    public struct BetaTesters: Codable {
     
         /// [BetaGroupCreateRequest.Data.Relationships.BetaTesters.Data]
         public let data: [BetaGroupCreateRequest.Data.Relationships.BetaTesters.Data]?
     }
     
-    public struct Builds: Decodable {
+    public struct Builds: Codable {
     
         /// [BetaGroupCreateRequest.Data.Relationships.Builds.Data]
         public let data: [BetaGroupCreateRequest.Data.Relationships.Builds.Data]?
@@ -82,7 +82,7 @@ extension BetaGroupCreateRequest.Data.Relationships {
 /// MARK: BetaGroupCreateRequest.Data.Relationships.App
 extension BetaGroupCreateRequest.Data.Relationships.App {
     
-    public struct Data: Decodable {
+    public struct Data: Codable {
     
         /// (Required) The opaque resource ID that uniquely identifies the resource.
         public let `id`: String
@@ -95,7 +95,7 @@ extension BetaGroupCreateRequest.Data.Relationships.App {
 /// MARK: BetaGroupCreateRequest.Data.Relationships.BetaTesters
 extension BetaGroupCreateRequest.Data.Relationships.BetaTesters {
     
-    public struct Data: Decodable {
+    public struct Data: Codable {
     
         /// (Required) The opaque resource ID that uniquely identifies the resource.
         public let `id`: String
@@ -108,7 +108,7 @@ extension BetaGroupCreateRequest.Data.Relationships.BetaTesters {
 /// MARK: BetaGroupCreateRequest.Data.Relationships.Builds
 extension BetaGroupCreateRequest.Data.Relationships.Builds {
     
-    public struct Data: Decodable {
+    public struct Data: Codable {
     
         /// (Required) The opaque resource ID that uniquely identifies the resource.
         public let `id`: String

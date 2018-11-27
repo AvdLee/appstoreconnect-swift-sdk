@@ -9,7 +9,7 @@
 import Foundation
     
 /// A response containing a list of related resource IDs.
-public struct UserInvitationVisibleAppsLinkagesResponse: Decodable {
+public struct UserInvitationVisibleAppsLinkagesResponse: Codable {
 
     /// (Required) The object types and IDs of the related resources.
     public let data: [UserInvitationVisibleAppsLinkagesResponse.Data]
@@ -20,7 +20,7 @@ public struct UserInvitationVisibleAppsLinkagesResponse: Decodable {
     /// Paging information.
     public let meta: PagingInformation?
     
-    public struct Data: Decodable {
+    public struct Data: Codable {
     
         /// (Required) The opaque resource ID that uniquely identifies the resource.
         public let `id`: String

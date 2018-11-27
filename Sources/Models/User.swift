@@ -8,7 +8,7 @@
 import Foundation
     
 /// The data structure that represents the resource.
-public struct User: Decodable {
+public struct User: Codable {
 
     /// The resource's attributes.
     public let attributes: User.Attributes?
@@ -26,7 +26,7 @@ public struct User: Decodable {
     public let links: ResourceLinks<UserResponse>
 
     /// Attributes that describe a resource.
-    public struct Attributes: Decodable {
+    public struct Attributes: Codable {
     
         /// The user's first name.
         public let firstName: String?
@@ -47,7 +47,7 @@ public struct User: Decodable {
         public let username: String?
     }
     
-    public struct Relationships: Decodable {
+    public struct Relationships: Codable {
     
         /// User.Relationships.VisibleApps
         public let visibleApps: User.Relationships.VisibleApps?
@@ -57,7 +57,7 @@ public struct User: Decodable {
 /// MARK: User.Relationships
 extension User.Relationships {
     
-    public struct VisibleApps: Decodable {
+    public struct VisibleApps: Codable {
     
         /// [User.Relationships.VisibleApps.Data]
         public let data: [User.Relationships.VisibleApps.Data]?
@@ -73,7 +73,7 @@ extension User.Relationships {
 /// MARK: User.Relationships.VisibleApps
 extension User.Relationships.VisibleApps {
     
-    public struct Data: Decodable {
+    public struct Data: Codable {
     
         /// (Required) The opaque resource ID that uniquely identifies the resource.
         public let `id`: String
@@ -82,7 +82,7 @@ extension User.Relationships.VisibleApps {
         public let type: String
     }
     
-    public struct Links: Decodable {
+    public struct Links: Codable {
     
         /// uri-reference
         public let related: URL?

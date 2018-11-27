@@ -8,7 +8,7 @@
 import Foundation
     
 /// The data structure that represents the resource.
-public struct BetaLicenseAgreement: Decodable {
+public struct BetaLicenseAgreement: Codable {
 
     /// The resource's attributes.
     public let attributes: BetaLicenseAgreement.Attributes?
@@ -26,13 +26,13 @@ public struct BetaLicenseAgreement: Decodable {
     public let type: String
 
     /// Attributes that describe a resource.
-    public struct Attributes: Decodable {
+    public struct Attributes: Codable {
     
         /// The license agreement text for your beta app that displays to users.
         public let agreementText: String?
     }
     
-    public struct Relationships: Decodable {
+    public struct Relationships: Codable {
     
         /// BetaLicenseAgreement.Relationships.App
         public let app: BetaLicenseAgreement.Relationships.App?
@@ -42,7 +42,7 @@ public struct BetaLicenseAgreement: Decodable {
 /// MARK: BetaLicenseAgreement.Relationships
 extension BetaLicenseAgreement.Relationships {
     
-    public struct App: Decodable {
+    public struct App: Codable {
     
         /// BetaLicenseAgreement.Relationships.App.Data
         public let data: BetaLicenseAgreement.Relationships.App.Data?
@@ -55,7 +55,7 @@ extension BetaLicenseAgreement.Relationships {
 /// MARK: BetaLicenseAgreement.Relationships.App
 extension BetaLicenseAgreement.Relationships.App {
     
-    public struct Data: Decodable {
+    public struct Data: Codable {
     
         /// (Required) The opaque resource ID that uniquely identifies the resource.
         public let `id`: String
@@ -64,7 +64,7 @@ extension BetaLicenseAgreement.Relationships.App {
         public let type: String
     }
     
-    public struct Links: Decodable {
+    public struct Links: Codable {
     
         /// uri-reference
         public let related: URL?

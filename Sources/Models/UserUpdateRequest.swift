@@ -8,12 +8,12 @@
 import Foundation
     
 /// A request containing a single resource.
-public struct UserUpdateRequest: Decodable {
+public struct UserUpdateRequest: Codable {
 
     /// (Required) The resource data.
     public let data: UserUpdateRequest.Data
     
-    public struct Data: Decodable {
+    public struct Data: Codable {
     
         /// The resource's attributes.
         public let attributes: UserUpdateRequest.Data.Attributes?
@@ -32,7 +32,7 @@ public struct UserUpdateRequest: Decodable {
 /// MARK: UserUpdateRequest.Data
 extension UserUpdateRequest.Data {
     /// Attributes that describe a resource.
-    public struct Attributes: Decodable {
+    public struct Attributes: Codable {
     
         /// Assigned user roles that determine the user's access to sections of App Store Connect and tasks they can perform.
         public let allAppsVisible: Bool?
@@ -44,7 +44,7 @@ extension UserUpdateRequest.Data {
         public let roles: [UserRole]?
     }
     
-    public struct Relationships: Decodable {
+    public struct Relationships: Codable {
     
         /// UserUpdateRequest.Data.Relationships.VisibleApps
         public let visibleApps: UserUpdateRequest.Data.Relationships.VisibleApps?
@@ -54,7 +54,7 @@ extension UserUpdateRequest.Data {
 /// MARK: UserUpdateRequest.Data.Relationships
 extension UserUpdateRequest.Data.Relationships {
     
-    public struct VisibleApps: Decodable {
+    public struct VisibleApps: Codable {
     
         /// [UserUpdateRequest.Data.Relationships.VisibleApps.Data]
         public let data: [UserUpdateRequest.Data.Relationships.VisibleApps.Data]?
@@ -64,7 +64,7 @@ extension UserUpdateRequest.Data.Relationships {
 /// MARK: UserUpdateRequest.Data.Relationships.VisibleApps
 extension UserUpdateRequest.Data.Relationships.VisibleApps {
     
-    public struct Data: Decodable {
+    public struct Data: Codable {
     
         /// (Required) The opaque resource ID that uniquely identifies the resource.
         public let `id`: String

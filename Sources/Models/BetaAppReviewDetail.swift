@@ -8,7 +8,7 @@
 import Foundation
     
 /// The data structure that represents the resource.
-public struct BetaAppReviewDetail: Decodable {
+public struct BetaAppReviewDetail: Codable {
 
     /// The resource's attributes.
     public let attributes: BetaAppReviewDetail.Attributes?
@@ -26,7 +26,7 @@ public struct BetaAppReviewDetail: Decodable {
     public let type: String
 
     /// Attributes that describe a resource.
-    public struct Attributes: Decodable {
+    public struct Attributes: Codable {
     
         /// Email address of contact in case communication is needed with the beta app review.
         public let contactEmail: String?
@@ -53,7 +53,7 @@ public struct BetaAppReviewDetail: Decodable {
         public let notes: String?
     }
     
-    public struct Relationships: Decodable {
+    public struct Relationships: Codable {
     
         /// BetaAppReviewDetail.Relationships.App
         public let app: BetaAppReviewDetail.Relationships.App?
@@ -63,7 +63,7 @@ public struct BetaAppReviewDetail: Decodable {
 /// MARK: BetaAppReviewDetail.Relationships
 extension BetaAppReviewDetail.Relationships {
     
-    public struct App: Decodable {
+    public struct App: Codable {
     
         /// BetaAppReviewDetail.Relationships.App.Data
         public let data: BetaAppReviewDetail.Relationships.App.Data?
@@ -76,7 +76,7 @@ extension BetaAppReviewDetail.Relationships {
 /// MARK: BetaAppReviewDetail.Relationships.App
 extension BetaAppReviewDetail.Relationships.App {
     
-    public struct Data: Decodable {
+    public struct Data: Codable {
     
         /// (Required) The opaque resource ID that uniquely identifies the resource.
         public let `id`: String
@@ -85,7 +85,7 @@ extension BetaAppReviewDetail.Relationships.App {
         public let type: String
     }
     
-    public struct Links: Decodable {
+    public struct Links: Codable {
     
         /// uri-reference
         public let related: URL?

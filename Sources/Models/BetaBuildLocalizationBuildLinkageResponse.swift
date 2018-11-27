@@ -9,7 +9,7 @@
 import Foundation
     
 /// A response containing a single resource.
-public struct BetaBuildLocalizationBuildLinkageResponse: Decodable {
+public struct BetaBuildLocalizationBuildLinkageResponse: Codable {
 
     /// (Required) The resource data.
     public let data: BetaBuildLocalizationBuildLinkageResponse.Data
@@ -17,7 +17,7 @@ public struct BetaBuildLocalizationBuildLinkageResponse: Decodable {
     /// (Required) Navigational links that include the self-link.
     public let links: DocumentLinks
     
-    public struct Data: Decodable {
+    public struct Data: Codable {
     
         /// (Required) The opaque resource ID that uniquely identifies the resource.
         public let `id`: String

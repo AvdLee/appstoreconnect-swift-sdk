@@ -8,7 +8,7 @@
 import Foundation
     
 /// The data structure that represents the resource.
-public struct BetaTester: Decodable {
+public struct BetaTester: Codable {
 
     /// The resource's attributes.
     public let attributes: BetaTester.Attributes?
@@ -26,7 +26,7 @@ public struct BetaTester: Decodable {
     public let links: ResourceLinks<BetaTesterResponse>
 
     /// Attributes that describe a resource.
-    public struct Attributes: Decodable {
+    public struct Attributes: Codable {
     
         /// The beta tester's email address, used for sending beta testing invitations.
         public let email: String?
@@ -41,7 +41,7 @@ public struct BetaTester: Decodable {
         public let lastName: String?
     }
     
-    public struct Relationships: Decodable {
+    public struct Relationships: Codable {
     
         /// BetaTester.Relationships.Apps
         public let apps: BetaTester.Relationships.Apps?
@@ -57,7 +57,7 @@ public struct BetaTester: Decodable {
 /// MARK: BetaTester.Relationships
 extension BetaTester.Relationships {
     
-    public struct Apps: Decodable {
+    public struct Apps: Codable {
     
         /// [BetaTester.Relationships.Apps.Data]
         public let data: [BetaTester.Relationships.Apps.Data]?
@@ -69,7 +69,7 @@ extension BetaTester.Relationships {
         public let meta: PagingInformation?
     }
     
-    public struct BetaGroups: Decodable {
+    public struct BetaGroups: Codable {
     
         /// [BetaTester.Relationships.BetaGroups.Data]
         public let data: [BetaTester.Relationships.BetaGroups.Data]?
@@ -81,7 +81,7 @@ extension BetaTester.Relationships {
         public let meta: PagingInformation?
     }
     
-    public struct Builds: Decodable {
+    public struct Builds: Codable {
     
         /// [BetaTester.Relationships.Builds.Data]
         public let data: [BetaTester.Relationships.Builds.Data]?
@@ -97,7 +97,7 @@ extension BetaTester.Relationships {
 /// MARK: BetaTester.Relationships.Apps
 extension BetaTester.Relationships.Apps {
     
-    public struct Data: Decodable {
+    public struct Data: Codable {
     
         /// string (Required)
         public let `id`: String
@@ -106,7 +106,7 @@ extension BetaTester.Relationships.Apps {
         public let type: String
     }
     
-    public struct Links: Decodable {
+    public struct Links: Codable {
     
         /// uri-reference
         public let related: URL?
@@ -119,7 +119,7 @@ extension BetaTester.Relationships.Apps {
 /// MARK: BetaTester.Relationships.BetaGroups
 extension BetaTester.Relationships.BetaGroups {
     
-    public struct Data: Decodable {
+    public struct Data: Codable {
     
         /// string (Required)
         public let `id`: String
@@ -128,7 +128,7 @@ extension BetaTester.Relationships.BetaGroups {
         public let type: String
     }
     
-    public struct Links: Decodable {
+    public struct Links: Codable {
     
         /// uri-reference
         public let related: URL?
@@ -141,7 +141,7 @@ extension BetaTester.Relationships.BetaGroups {
 /// MARK: BetaTester.Relationships.Builds
 extension BetaTester.Relationships.Builds {
     
-    public struct Data: Decodable {
+    public struct Data: Codable {
     
         /// string (Required)
         public let `id`: String
@@ -150,7 +150,7 @@ extension BetaTester.Relationships.Builds {
         public let type: String
     }
     
-    public struct Links: Decodable {
+    public struct Links: Codable {
     
         /// uri-reference
         public let related: URL?

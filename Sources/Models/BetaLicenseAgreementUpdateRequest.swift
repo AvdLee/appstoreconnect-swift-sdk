@@ -8,12 +8,12 @@
 import Foundation
     
 /// A request containing a single resource.
-public struct BetaLicenseAgreementUpdateRequest: Decodable {
+public struct BetaLicenseAgreementUpdateRequest: Codable {
 
     /// (Required) The resource data.
     public let data: BetaLicenseAgreementUpdateRequest.Data
     
-    public struct Data: Decodable {
+    public struct Data: Codable {
     
         /// The resource's attributes.
         public let attributes: BetaLicenseAgreementUpdateRequest.Data.Attributes?
@@ -29,7 +29,7 @@ public struct BetaLicenseAgreementUpdateRequest: Decodable {
 /// MARK: BetaLicenseAgreementUpdateRequest.Data
 extension BetaLicenseAgreementUpdateRequest.Data {
     /// Attributes that describe a resource.
-    public struct Attributes: Decodable {
+    public struct Attributes: Codable {
     
         /// The license agreement text for your beta app that displays to users.
         public let agreementText: String?

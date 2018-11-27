@@ -8,7 +8,7 @@
 import Foundation
     
 /// Links related to the response document, including paging links.
-public struct PagedDocumentLinks: Decodable {
+public struct PagedDocumentLinks: Codable {
 
     /// The link to the first page of documents.
     public let first: URL?

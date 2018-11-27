@@ -8,7 +8,7 @@
 import Foundation
     
 /// The data structure that represents the resource.
-public struct AppEncryptionDeclaration: Decodable {
+public struct AppEncryptionDeclaration: Codable {
 
     /// The resource's attributes.
     public let attributes: AppEncryptionDeclaration.Attributes?
@@ -26,7 +26,7 @@ public struct AppEncryptionDeclaration: Decodable {
     public let links: ResourceLinks<AppEncryptionDeclarationResponse>
 
     /// Attributes that describe a resource.
-    public struct Attributes: Decodable {
+    public struct Attributes: Codable {
     
         /// A Boolean value that indicates the intent to distribute your app on the French App Store.
         public let availableOnFrenchStore: Bool?
@@ -65,7 +65,7 @@ public struct AppEncryptionDeclaration: Decodable {
         public let uploadedDate: Date?
     }
     
-    public struct Relationships: Decodable {
+    public struct Relationships: Codable {
     
         /// AppEncryptionDeclaration.Relationships.App
         public let app: AppEncryptionDeclaration.Relationships.App?
@@ -78,7 +78,7 @@ public struct AppEncryptionDeclaration: Decodable {
 /// MARK: AppEncryptionDeclaration.Relationships
 extension AppEncryptionDeclaration.Relationships {
     
-    public struct App: Decodable {
+    public struct App: Codable {
     
         /// AppEncryptionDeclaration.Relationships.App.Data
         public let data: AppEncryptionDeclaration.Relationships.App.Data?
@@ -87,7 +87,7 @@ extension AppEncryptionDeclaration.Relationships {
         public let links: AppEncryptionDeclaration.Relationships.App.Links?
     }
     
-    public struct Builds: Decodable {
+    public struct Builds: Codable {
     
         /// [AppEncryptionDeclaration.Relationships.Builds.Data]
         public let data: [AppEncryptionDeclaration.Relationships.Builds.Data]?
@@ -103,7 +103,7 @@ extension AppEncryptionDeclaration.Relationships {
 /// MARK: AppEncryptionDeclaration.Relationships.App
 extension AppEncryptionDeclaration.Relationships.App {
     
-    public struct Data: Decodable {
+    public struct Data: Codable {
     
         /// (Required) The opaque resource ID that uniquely identifies the resource.
         public let `id`: String
@@ -112,7 +112,7 @@ extension AppEncryptionDeclaration.Relationships.App {
         public let type: String
     }
     
-    public struct Links: Decodable {
+    public struct Links: Codable {
     
         /// uri-reference
         public let related: URL?
@@ -125,7 +125,7 @@ extension AppEncryptionDeclaration.Relationships.App {
 /// MARK: AppEncryptionDeclaration.Relationships.Builds
 extension AppEncryptionDeclaration.Relationships.Builds {
     
-    public struct Data: Decodable {
+    public struct Data: Codable {
     
         /// (Required) The opaque resource ID that uniquely identifies the resource.
         public let `id`: String
@@ -134,7 +134,7 @@ extension AppEncryptionDeclaration.Relationships.Builds {
         public let type: String
     }
     
-    public struct Links: Decodable {
+    public struct Links: Codable {
     
         /// uri-reference
         public let related: URL?

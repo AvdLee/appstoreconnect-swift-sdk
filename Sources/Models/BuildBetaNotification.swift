@@ -8,7 +8,7 @@
 import Foundation
     
 /// The data structure that represents the resource.
-public struct BuildBetaNotification: Decodable {
+public struct BuildBetaNotification: Codable {
 
     /// (Required) The opaque resource ID that uniquely identifies the resource.
     public let `id`: String

@@ -8,12 +8,12 @@
 import Foundation
     
 /// A request containing a single resource.
-public struct BetaAppLocalizationCreateRequest: Decodable {
+public struct BetaAppLocalizationCreateRequest: Codable {
 
     /// (Required) The resource data.
     public let data: BetaAppLocalizationCreateRequest.Data
     
-    public struct Data: Decodable {
+    public struct Data: Codable {
     
         /// (Required) The resource's attributes.
         public let attributes: BetaAppLocalizationCreateRequest.Data.Attributes
@@ -29,7 +29,7 @@ public struct BetaAppLocalizationCreateRequest: Decodable {
 /// MARK: BetaAppLocalizationCreateRequest.Data
 extension BetaAppLocalizationCreateRequest.Data {
     /// Attributes that describe a resource.
-    public struct Attributes: Decodable {
+    public struct Attributes: Codable {
     
         /// A description of your app that highlights features and functionality.
         public let description: String?
@@ -50,7 +50,7 @@ extension BetaAppLocalizationCreateRequest.Data {
         public let tvOsPrivacyPolicy: String?
     }
     
-    public struct Relationships: Decodable {
+    public struct Relationships: Codable {
     
         /// BetaAppLocalizationCreateRequest.Data.Relationships.App (Required)
         public let app: BetaAppLocalizationCreateRequest.Data.Relationships.App
@@ -60,7 +60,7 @@ extension BetaAppLocalizationCreateRequest.Data {
 /// MARK: BetaAppLocalizationCreateRequest.Data.Relationships
 extension BetaAppLocalizationCreateRequest.Data.Relationships {
     
-    public struct App: Decodable {
+    public struct App: Codable {
     
         /// BetaAppLocalizationCreateRequest.Data.Relationships.App.Data (Required)
         public let data: BetaAppLocalizationCreateRequest.Data.Relationships.App.Data
@@ -70,7 +70,7 @@ extension BetaAppLocalizationCreateRequest.Data.Relationships {
 /// MARK: BetaAppLocalizationCreateRequest.Data.Relationships.App
 extension BetaAppLocalizationCreateRequest.Data.Relationships.App {
     
-    public struct Data: Decodable {
+    public struct Data: Codable {
     
         /// (Required) The opaque resource ID that uniquely identifies the resource.
         public let `id`: String

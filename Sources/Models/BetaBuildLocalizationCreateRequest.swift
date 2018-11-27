@@ -8,12 +8,12 @@
 import Foundation
     
 /// A request containing a single resource.
-public struct BetaBuildLocalizationCreateRequest: Decodable {
+public struct BetaBuildLocalizationCreateRequest: Codable {
 
     /// (Required) The resource data.
     public let data: BetaBuildLocalizationCreateRequest.Data
     
-    public struct Data: Decodable {
+    public struct Data: Codable {
     
         /// (Required) The resource's attributes.
         public let attributes: BetaBuildLocalizationCreateRequest.Data.Attributes
@@ -29,7 +29,7 @@ public struct BetaBuildLocalizationCreateRequest: Decodable {
 /// MARK: BetaBuildLocalizationCreateRequest.Data
 extension BetaBuildLocalizationCreateRequest.Data {
     /// Attributes that describe a resource.
-    public struct Attributes: Decodable {
+    public struct Attributes: Codable {
     
         /// (Required) The specified locale. Refer to Table 1 for possible values.
         public let locale: String
@@ -38,7 +38,7 @@ extension BetaBuildLocalizationCreateRequest.Data {
         public let whatsNew: String?
     }
     
-    public struct Relationships: Decodable {
+    public struct Relationships: Codable {
     
         /// BetaBuildLocalizationCreateRequest.Data.Relationships.Build (Required)
         public let build: BetaBuildLocalizationCreateRequest.Data.Relationships.Build
@@ -48,7 +48,7 @@ extension BetaBuildLocalizationCreateRequest.Data {
 /// MARK: BetaBuildLocalizationCreateRequest.Data.Relationships
 extension BetaBuildLocalizationCreateRequest.Data.Relationships {
     
-    public struct Build: Decodable {
+    public struct Build: Codable {
     
         /// BetaBuildLocalizationCreateRequest.Data.Relationships.Build.Data (Required)
         public let data: BetaBuildLocalizationCreateRequest.Data.Relationships.Build.Data
@@ -58,7 +58,7 @@ extension BetaBuildLocalizationCreateRequest.Data.Relationships {
 /// MARK: BetaBuildLocalizationCreateRequest.Data.Relationships.Build
 extension BetaBuildLocalizationCreateRequest.Data.Relationships.Build {
     
-    public struct Data: Decodable {
+    public struct Data: Codable {
     
         /// (Required) The opaque resource ID that uniquely identifies the resource.
         public let `id`: String

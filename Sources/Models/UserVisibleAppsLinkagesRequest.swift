@@ -8,12 +8,12 @@
 import Foundation
     
 /// A request containing the IDs of related resources.
-public struct UserVisibleAppsLinkagesRequest: Decodable {
+public struct UserVisibleAppsLinkagesRequest: Codable {
 
     /// (Required) The object types and IDs of the related resources.
     public let data: [UserVisibleAppsLinkagesRequest.Data]
     
-    public struct Data: Decodable {
+    public struct Data: Codable {
     
         /// (Required) The opaque resource ID that uniquely identifies the resource.
         public let `id`: String

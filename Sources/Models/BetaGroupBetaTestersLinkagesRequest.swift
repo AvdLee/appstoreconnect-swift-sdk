@@ -8,12 +8,12 @@
 import Foundation
     
 /// A request containing the IDs of related resources.
-public struct BetaGroupBetaTestersLinkagesRequest: Decodable {
+public struct BetaGroupBetaTestersLinkagesRequest: Codable {
 
     /// (Required) The types and IDs of related resources.
     public let data: [BetaGroupBetaTestersLinkagesRequest.Data]
     
-    public struct Data: Decodable {
+    public struct Data: Codable {
     
         /// (Required) The opaque resource ID that uniquely identifies the resource.
         public let `id`: String

@@ -7,7 +7,7 @@
 
 import Foundation
     /// String that represents a build's availability for external testing.
-public enum ExternalBetaState: String, Decodable {
+public enum ExternalBetaState: String, Codable {
     case processing = "PROCESSING"
     case processingException = "PROCESSING_EXCEPTION"
     case missingExportCompliance = "MISSING_EXPORT_COMPLIANCE"
