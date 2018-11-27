@@ -6,15 +6,41 @@ import AppStoreConnect_Swift_SDK
 private let configuration = APIConfiguration(issuerID: "<YOUR ISSUER ID>", privateKeyID: "<YOUR PRIVATE KEY ID>", privateKey: "<YOUR PRIVATE KEY>")
 var provider: APIProvider = APIProvider(configuration: configuration)
 
-provider.request(Endpoints.apps()) { (result) in
-    switch result {
-    case .success(let appsResponse):
-        print("Did fetch \(appsResponse.data.count) apps")
-        exit(EXIT_SUCCESS)
-    case .failure(let error):
-        print("Something went wrong fetching the apps: \(error)")
-        exit(EXIT_FAILURE)
-    }
+provider.request(.apps(
+    select: [.apps([.name]), .builds([.version, .processingState, .uploadedDate])],
+    include: [.builds],
+    sortBy: [.bundleIdAscending],
+    limits: [.apps(1)])) {
+        switch $0 {
+        case .success(let appsResponse):
+            typealias BuildInfo = (uploadedDate: Date, version: String, processingState: String)
+            guard
+                let app = appsResponse.data.first,
+                let name = app.attributes?.name,
+                let buildInfos = appsResponse.included?.compactMap({ included -> BuildInfo? in
+                    if case let .build(build) = included,
+                        let uploadedDate = build.attributes?.uploadedDate,
+                        let version = build.attributes?.version,
+                        let processingState = build.attributes?.processingState {
+                        return (uploadedDate: uploadedDate, version: version, processingState: processingState)
+                    }
+                    return nil
+                }) else {
+                    print("Could not find requested relationships!")
+                    exit(EXIT_FAILURE)
+            }
+            
+            print("App name is \(name)")
+            print(" - successfully got \(buildInfos.count) builds included")
+            for info in buildInfos.sorted(by: { $0.uploadedDate > $1.uploadedDate }) {
+                print("  - \(info.version): \(info.processingState)")
+            }
+            
+            exit(EXIT_SUCCESS)
+        case .failure(let error):
+            print("Something went wrong fetching the apps: \(error)")
+            exit(EXIT_FAILURE)
+        }
 }
 
 // Wait for request completion

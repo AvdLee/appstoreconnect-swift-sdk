@@ -14,7 +14,7 @@ public struct BuildBetaNotification: Decodable {
     public let `id`: String
 
     /// (Required) Navigational links that include the self-link.
-    public let links: ResourceLinks
+    public let links: ResourceLinks<BuildBetaNotificationResponse>
 
     /// (Required) The resource type.Value: buildBetaNotifications
     public let type: String

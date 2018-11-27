@@ -17,7 +17,7 @@ public struct PrereleaseVersion: Decodable {
     public let `id`: String
 
     /// (Required) Navigational links that include the self-link.
-    public let links: ResourceLinks
+    public let links: ResourceLinks<PrereleaseVersionResponse>
 
     /// Navigational links to related data and included resource types and IDs.
     public let relationships: PrereleaseVersion.Relationships?

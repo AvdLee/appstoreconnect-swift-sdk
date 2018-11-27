@@ -23,7 +23,7 @@ public struct UserInvitation: Decodable {
     public let type: String
 
     /// (Required) Navigational links that include the self-link.
-    public let links: ResourceLinks
+    public let links: ResourceLinks<UserInvitationResponse>
 
     /// Attributes that describe a resource.
     public struct Attributes: Decodable {

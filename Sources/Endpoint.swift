@@ -29,13 +29,3 @@ public struct APIEndpoint<T: Decodable> {
         self.parameters = parameters
     }
 }
-
-/// Contains all API endpoints to the App Store Connect API
-extension APIEndpoint {
-
-    /// Find and list apps added in App Store Connect.
-    public static func apps() -> APIEndpoint<AppsResponse> {
-        return APIEndpoint<AppsResponse>(path: "apps")
-    }
-
-}

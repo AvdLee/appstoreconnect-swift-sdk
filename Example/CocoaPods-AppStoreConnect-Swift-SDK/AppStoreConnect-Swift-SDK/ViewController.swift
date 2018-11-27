@@ -19,13 +19,38 @@ final class ViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        provider.request(.apps()) { (result) in
-            switch result {
-            case .success(let appsResponse):
-                print("Did fetch \(appsResponse.data.count) apps")
-            case .failure(let error):
-                print("Something went wrong fetching the apps: \(error)")
-            }
+        provider.request(.apps(
+            select: [.apps([.name]), .builds([.version, .processingState, .uploadedDate])],
+            include: [.builds],
+            sortBy: [.bundleIdAscending],
+            limits: [.apps(1)])) {
+                switch $0 {
+                case .success(let appsResponse):
+                    typealias BuildInfo = (uploadedDate: Date, version: String, processingState: String)
+                    guard
+                        let app = appsResponse.data.first,
+                        let name = app.attributes?.name,
+                        let buildInfos = appsResponse.included?.compactMap({ included -> BuildInfo? in
+                            if case let .build(build) = included,
+                                let uploadedDate = build.attributes?.uploadedDate,
+                                let version = build.attributes?.version,
+                                let processingState = build.attributes?.processingState {
+                                return (uploadedDate: uploadedDate, version: version, processingState: processingState)
+                            }
+                            return nil
+                        }) else {
+                            print("Could not find requested relationships!")
+                            return
+                    }
+                    
+                    print("App name is \(name)")
+                    print(" - successfully got \(buildInfos.count) builds included")
+                    for info in buildInfos.sorted(by: { $0.uploadedDate > $1.uploadedDate }) {
+                        print("  - \(info.version): \(info.processingState)")
+                    }
+                case .failure(let error):
+                    print("Something went wrong fetching the apps: \(error)")
+                }
         }
     }
 }

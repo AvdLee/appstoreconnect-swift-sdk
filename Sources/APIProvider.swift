@@ -12,15 +12,15 @@ public typealias RequestCompletionHandler<T> = (Result<T>) -> Void
 
 /// The configuration needed to set up the API Provider including all needed information for performing API requests.
 public struct APIConfiguration {
-
+    
     /// Your private key ID from App Store Connect (Ex: 2X9R4HXF34)
     let privateKeyID: String
-
+    
     let privateKey: String
-
+    
     /// Your issuer ID from the API Keys page in App Store Connect (Ex: 57246542-96fe-1a63-e053-0824d011072a)
     let issuerID: String
-
+    
     /// Creates a new API configuration to use for initialising the API Provider.
     ///
     /// - Parameters:
@@ -35,23 +35,23 @@ public struct APIConfiguration {
 
 /// Provides access to all API Methods. Can be used to perform API requests.
 public final class APIProvider {
-
+    
     /// The session manager which is used to perform network requests with.
     private let defaultSessionManager: SessionManager
-
+    
     /// Contains a JSON Decoder which can be reused.
     private let jsonDecoder: JSONDecoder = {
         let decoder = JSONDecoder()
         decoder.dateDecodingStrategy = .iso8601
         return decoder
     }()
-
+    
     /// The configuration needed to set up the API Provider including all needed information for performing API requests.
     private let configuration: APIConfiguration
-
+    
     /// The authenticator to handle all JWT signing related actions.
     private lazy var requestsAuthenticator = JWTRequestsAuthenticator(apiConfiguration: self.configuration)
-
+    
     /// Creates a new APIProvider instance which can be used to perform API Requests to the App Store Connect API.
     ///
     /// - Parameters:
@@ -59,7 +59,7 @@ public final class APIProvider {
     ///   - protocolClasses: Optional protocal classes to use for mocking with unit tests.
     public init(configuration: APIConfiguration, protocolClasses: [AnyClass]? = nil) {
         self.configuration = configuration
-
+        
         if let protocolClasses = protocolClasses {
             let configuration = URLSessionConfiguration.default
             configuration.protocolClasses = protocolClasses + (configuration.protocolClasses ?? [])
@@ -67,10 +67,10 @@ public final class APIProvider {
         } else {
             defaultSessionManager = SessionManager(configuration: URLSessionConfiguration.default)
         }
-
+        
         defaultSessionManager.adapter = requestsAuthenticator
     }
-
+    
     /// Generates an URL based on the given endpoint in combination with the current API version.
     ///
     /// - Parameter endpoint: The endpoint to create an URL for.
@@ -79,7 +79,7 @@ public final class APIProvider {
         // swiftlint:disable:next force_unwrapping
         return URL(string: "https://api.appstoreconnect.apple.com/v1/")!.appendingPathComponent(endpoint.path)
     }
-
+    
     /// Generates a request based on the given endpoint.
     ///
     /// - Parameter endpoint: The endpoint to create a request for.
@@ -87,7 +87,7 @@ public final class APIProvider {
     internal func request<T>(for endpoint: APIEndpoint<T>) -> DataRequest {
         return defaultSessionManager.request(url(for: endpoint), method: endpoint.method, parameters: endpoint.parameters)
     }
-
+    
     /// Performs a data request to the given API endpoint
     ///
     /// - Parameters:
@@ -96,6 +96,22 @@ public final class APIProvider {
     @discardableResult
     public func request<T>(_ endpoint: APIEndpoint<T>, completion: @escaping RequestCompletionHandler<T>) -> DataRequest {
         let dataRequest = request(for: endpoint)
+        
+        dataRequest.validate(statusCode: 200..<300)
+            .mapResponseTo(T.self, decoder: jsonDecoder, completion: completion)
+            .resume()
+        
+        return dataRequest
+    }
+    
+    /// Performs a data request to the given ResourceLinks
+    ///
+    /// - Parameters:
+    ///   - resourceLinks: The resourceLinks to request.
+    ///   - completion: The completion callback which will be called on completion containing the result.
+    @discardableResult
+    public func request<T: Decodable>(_ resourceLinks: ResourceLinks<T>, completion: @escaping RequestCompletionHandler<T>) -> DataRequest {
+        let dataRequest = defaultSessionManager.request(resourceLinks.`self`)
 
         dataRequest.validate(statusCode: 200..<300)
             .mapResponseTo(T.self, decoder: jsonDecoder, completion: completion)
@@ -106,13 +122,13 @@ public final class APIProvider {
 }
 
 extension DataRequest {
-
+    
     /// Defines errors which are caused on JSON mapping.
     enum JSONMappingError: Error {
         /// Indicates that the response is not a valid JSON dictionary.
         case invalidResponse
     }
-
+    
     /// Maps the response to the given JSONDecodable data type.
     ///
     /// - Parameters:
@@ -134,7 +150,7 @@ extension DataRequest {
                     guard let data = response.data else {
                         throw JSONMappingError.invalidResponse
                     }
-
+                    
                     let codable = try decoder.decode(T.self, from: data)
                     completion(Result.success(codable))
                 } catch {
