@@ -17,7 +17,7 @@ extension APIEndpoint {
     ///   - limit: Number of resources to return.
     public static func buildsOfApp(
         withId id: String,
-        fields: [ListBuildsForApp.Field]? = nil,
+        fields: [ListBuildsOfApp.Field]? = nil,
         limit: Int? = nil) -> APIEndpoint<BuildsResponse> {
         var parameters = [String: Any]()
         if let fields = fields { parameters.add(fields) }
@@ -29,7 +29,7 @@ extension APIEndpoint {
     }
 }
 
-public struct ListBuildsForApp {
+public struct ListBuildsOfApp {
     
     /// Fields to return for included related types.
     public enum Field: NestableQueryParameter {
@@ -46,7 +46,7 @@ public struct ListBuildsForApp {
     }
 }
 
-extension ListBuildsForApp.Field {
+extension ListBuildsOfApp.Field {
     
     public enum Build: String, CaseIterable, NestableQueryParameter {
         case app, appEncryptionDeclaration, betaAppReviewSubmission, betaBuildLocalizations, betaGroups, buildBetaDetail, expirationDate, expired, iconAssetToken, individualTesters, minOsVersion, preReleaseVersion, processingState, uploadedDate, usesNonExemptEncryption, version
