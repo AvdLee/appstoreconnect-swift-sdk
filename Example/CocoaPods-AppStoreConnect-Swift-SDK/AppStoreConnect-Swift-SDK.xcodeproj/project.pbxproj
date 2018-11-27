@@ -9,7 +9,7 @@
 /* Begin PBXBuildFile section */
 		314DF9E421A6CB17008FFF99 /* ListAppsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 314DF9E321A6CB17008FFF99 /* ListAppsTests.swift */; };
 		3183103821A8497800638289 /* QueryParameterTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3183103721A8497800638289 /* QueryParameterTests.swift */; };
-		3183103A21A8719F00638289 /* ReadAppInformationTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3183103921A8719F00638289 /* ReadAppInformationTests.swift */; };
+		3183103A21A8719F00638289 /* GetAppTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3183103921A8719F00638289 /* GetAppTests.swift */; };
 		31F929E2219C6AC40061DEA5 /* JWTRequestsAuthenticatorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31F929E0219C6AC40061DEA5 /* JWTRequestsAuthenticatorTests.swift */; };
 		31F929E3219C6AC40061DEA5 /* JWTTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31F929E1219C6AC40061DEA5 /* JWTTests.swift */; };
 		607FACD61AFB9204008FA782 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 607FACD51AFB9204008FA782 /* AppDelegate.swift */; };
@@ -35,7 +35,7 @@
 		0AE4946149359034B7BCF9D5 /* README.md */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = net.daringfireball.markdown; name = README.md; path = ../README.md; sourceTree = "<group>"; };
 		314DF9E321A6CB17008FFF99 /* ListAppsTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListAppsTests.swift; sourceTree = "<group>"; };
 		3183103721A8497800638289 /* QueryParameterTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QueryParameterTests.swift; sourceTree = "<group>"; };
-		3183103921A8719F00638289 /* ReadAppInformationTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReadAppInformationTests.swift; sourceTree = "<group>"; };
+		3183103921A8719F00638289 /* GetAppTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetAppTests.swift; sourceTree = "<group>"; };
 		31F929E0219C6AC40061DEA5 /* JWTRequestsAuthenticatorTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JWTRequestsAuthenticatorTests.swift; sourceTree = "<group>"; };
 		31F929E1219C6AC40061DEA5 /* JWTTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JWTTests.swift; sourceTree = "<group>"; };
 		607FACD01AFB9204008FA782 /* AppStoreConnect-Swift-SDK_Example.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "AppStoreConnect-Swift-SDK_Example.app"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -77,6 +77,31 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		318824BE21AD3C8500676DA7 /* Endpoints */ = {
+			isa = PBXGroup;
+			children = (
+				318824BF21AD3D4900676DA7 /* TestFlight */,
+			);
+			path = Endpoints;
+			sourceTree = "<group>";
+		};
+		318824BF21AD3D4900676DA7 /* TestFlight */ = {
+			isa = PBXGroup;
+			children = (
+				318824C021AD3D5600676DA7 /* Apps */,
+			);
+			path = TestFlight;
+			sourceTree = "<group>";
+		};
+		318824C021AD3D5600676DA7 /* Apps */ = {
+			isa = PBXGroup;
+			children = (
+				3183103921A8719F00638289 /* GetAppTests.swift */,
+				314DF9E321A6CB17008FFF99 /* ListAppsTests.swift */,
+			);
+			path = Apps;
+			sourceTree = "<group>";
+		};
 		5EC662E00E6797B0D5F40279 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
@@ -132,11 +157,10 @@
 		607FACE81AFB9204008FA782 /* Tests */ = {
 			isa = PBXGroup;
 			children = (
+				318824BE21AD3C8500676DA7 /* Endpoints */,
 				31F929E0219C6AC40061DEA5 /* JWTRequestsAuthenticatorTests.swift */,
-				31F929E1219C6AC40061DEA5 /* JWTTests.swift */,
-				314DF9E321A6CB17008FFF99 /* ListAppsTests.swift */,
 				3183103721A8497800638289 /* QueryParameterTests.swift */,
-				3183103921A8719F00638289 /* ReadAppInformationTests.swift */,
+				31F929E1219C6AC40061DEA5 /* JWTTests.swift */,
 				607FACE91AFB9204008FA782 /* Supporting Files */,
 			);
 			path = Tests;
@@ -399,7 +423,7 @@
 				31F929E2219C6AC40061DEA5 /* JWTRequestsAuthenticatorTests.swift in Sources */,
 				314DF9E421A6CB17008FFF99 /* ListAppsTests.swift in Sources */,
 				3183103821A8497800638289 /* QueryParameterTests.swift in Sources */,
-				3183103A21A8719F00638289 /* ReadAppInformationTests.swift in Sources */,
+				3183103A21A8719F00638289 /* GetAppTests.swift in Sources */,
 				31F929E3219C6AC40061DEA5 /* JWTTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
