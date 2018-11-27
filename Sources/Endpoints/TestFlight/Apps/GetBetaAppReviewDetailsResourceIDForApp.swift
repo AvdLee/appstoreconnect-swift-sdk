@@ -13,7 +13,7 @@ extension APIEndpoint {
     ///
     /// - Parameters:
     ///   - id: (Required) An opaque resource ID that uniquely identifies the resource.
-    public static func getBetaAppReviewDetailsResourceIDForApp(withId id: String) -> APIEndpoint<AppBetaAppReviewDetailLinkageResponse> {
+    public static func betaAppReviewDetailsResourceIDForApp(withId id: String) -> APIEndpoint<AppBetaAppReviewDetailLinkageResponse> {
         return APIEndpoint<AppBetaAppReviewDetailLinkageResponse>(
             path: "apps/\(id)/relationships/betaAppReviewDetail",
             method: .get,

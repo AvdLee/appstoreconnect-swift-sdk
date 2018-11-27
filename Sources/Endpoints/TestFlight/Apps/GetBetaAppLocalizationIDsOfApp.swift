@@ -14,7 +14,7 @@ extension APIEndpoint {
     /// - Parameters:
     ///   - id: (Required) An opaque resource ID that uniquely identifies the resource.
     ///   - limit: Number of resources to return.
-    public static func getBetaAppLocalizationIDsOfApp(withId id: String, limit: Int? = nil) -> APIEndpoint<AppBetaAppLocalizationsLinkagesResponse> {
+    public static func betaAppLocalizationIDsOfApp(withId id: String, limit: Int? = nil) -> APIEndpoint<AppBetaAppLocalizationsLinkagesResponse> {
         var parameters = [String: Any]()
         if let limit = limit { parameters["limit"] = limit }
         return APIEndpoint<AppBetaAppLocalizationsLinkagesResponse>(

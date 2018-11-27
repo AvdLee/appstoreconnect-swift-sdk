@@ -15,7 +15,7 @@ extension APIEndpoint {
     ///   - id: (Required) An opaque resource ID that uniquely identifies the resource.
     ///   - fields: Fields to return for included related types.
     ///   - limit: Number of resources to return.
-    public static func listBuildsOfApp(
+    public static func buildsOfApp(
         withId id: String,
         fields: [ListBuildsForApp.Field]? = nil,
         limit: Int? = nil) -> APIEndpoint<BuildsResponse> {

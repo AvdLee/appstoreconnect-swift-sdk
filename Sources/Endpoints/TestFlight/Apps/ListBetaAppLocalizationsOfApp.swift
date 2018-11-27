@@ -15,7 +15,7 @@ extension APIEndpoint {
     ///   - id: (Required) An opaque resource ID that uniquely identifies the resource.
     ///   - fields: Fields to return for included related types.
     ///   - limit: Number of resources to return.
-    public static func listBetaAppLocalizationsOfApp(
+    public static func betaAppLocalizationsOfApp(
         withId id: String,
         fields: [ListBetaAppLocalizationsForApp.Field]? = nil,
         limit: Int? = nil) -> APIEndpoint<BetaAppLocalizationsResponse> {

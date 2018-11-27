@@ -13,15 +13,15 @@ extension APIEndpoint {
     ///
     /// - Parameters:
     ///   - id: (Required) An opaque resource ID that uniquely identifies the resource.
-    ///   - limit: Number of resources to return.
     ///   - fields: Fields to return for included related types.
-    public static func listPrereleaseVersionsForApp(
+    ///   - limit: Number of resources to return.
+    public static func prereleaseVersionsForApp(
         withId id: String,
-        limit: Int? = nil,
-        fields: [ListPrereleaseVersionsForApp.Field]? = nil) -> APIEndpoint<PreReleaseVersionsResponse> {
+        fields: [ListPrereleaseVersionsForApp.Field]? = nil,
+        limit: Int? = nil) -> APIEndpoint<PreReleaseVersionsResponse> {
         var parameters = [String: Any]()
-        if let limit = limit { parameters["limit"] = limit }
         if let fields = fields { parameters.add(fields) }
+        if let limit = limit { parameters["limit"] = limit }
         return APIEndpoint<PreReleaseVersionsResponse>(
             path: "apps/\(id)/preReleaseVersions",
             method: .get,

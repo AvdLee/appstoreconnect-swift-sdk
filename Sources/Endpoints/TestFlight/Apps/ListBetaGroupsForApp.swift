@@ -15,7 +15,7 @@ extension APIEndpoint {
     ///   - id: (Required) An opaque resource ID that uniquely identifies the resource.
     ///   - fields: Fields to return for included related types.
     ///   - limit: Number of resources to return.
-    public static func listBetaGroupsForApp(
+    public static func betaGroupsForApp(
         withId id: String,
         fields: [ListBetaGroupsForApp.Field]? = nil,
         limit: Int? = nil) -> APIEndpoint<BetaGroupsResponse> {
