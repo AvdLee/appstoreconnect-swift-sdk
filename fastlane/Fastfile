@@ -28,5 +28,5 @@ lane :test do |options|
     UI.error("Tests failed: #{ex}")
   end
 
-  validate_changes(project_name: "AppStoreConnect-Swift-SDK-Example")
+  validate_changes(project_name: "AppStoreConnect-Swift-SDK-Example", xcov_targets: "AppStoreConnect-Swift-SDK")
 end
