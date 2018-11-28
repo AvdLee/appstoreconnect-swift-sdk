@@ -10,6 +10,13 @@ import Foundation
 /// A request containing a single resource.
 public struct BetaLicenseAgreementUpdateRequest: Codable {
 
+    /// - Parameters:
+    ///   - id: The opaque resource ID that uniquely identifies the resource.
+    ///   - agreementText: The license agreement text for your beta app that displays to users.
+    public init(id: String, agreementText: String? = nil) {
+        data = .init(attributes: .init(agreementText: agreementText), id: id)
+    }
+    
     /// (Required) The resource data.
     public let data: BetaLicenseAgreementUpdateRequest.Data
     

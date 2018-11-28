@@ -10,6 +10,27 @@ import Foundation
 /// A request containing a single resource.
 public struct UserUpdateRequest: Codable {
 
+    /// - Parameters:
+    ///   - id: The opaque resource ID that uniquely identifies the resource.
+    ///   - allAppsVisible: Assigned user roles that determine the user's access to sections of App Store Connect and tasks they can perform.
+    ///   - provisioningAllowed: A Boolean value that indicates the user's specified role allows access to the provisioning functionality on the Apple Developer website.
+    ///   - roles: Assigned user roles that determine the user's access to sections of App Store Connect and tasks they can perform.
+    ///   - appsVisibleIds: Array of opaque resource ID that uniquely identifies the resources.
+    public init(id: String,
+                allAppsVisible: Bool? = nil,
+                provisioningAllowed: Bool? = nil,
+                roles: [UserRole]? = nil,
+                appsVisibleIds: [String]? = nil) {
+        data = .init(
+            attributes: .init(
+                allAppsVisible: allAppsVisible,
+                provisioningAllowed: provisioningAllowed,
+                roles: roles),
+            id: id,
+            relationships: .init(
+                visibleApps: .init(data: appsVisibleIds?.map({ Data.Relationships.VisibleApps.Data(id: $0) }))))
+    }
+    
     /// (Required) The resource data.
     public let data: UserUpdateRequest.Data
     
