@@ -12,7 +12,7 @@ extension APIEndpoint where T == BetaGroupsResponse {
     /// Get a list of beta groups that contain a specific beta tester.
     ///
     /// - Parameters:
-    ///   - id: (Required) An opaque resource ID that uniquely identifies the resource.
+    ///   - id: An opaque resource ID that uniquely identifies the resource.
     ///   - limit: Number of resources to return.
     ///   - fields: Fields to return for included related types.
     public static func betaGroups(

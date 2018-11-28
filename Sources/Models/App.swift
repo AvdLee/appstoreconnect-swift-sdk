@@ -13,16 +13,16 @@ public struct App: Codable {
     /// The resource's attributes.
     public let attributes: App.Attributes?
 
-    /// (Required) The opaque resource ID that uniquely identifies the resource.
+    /// The opaque resource ID that uniquely identifies the resource.
     public let `id`: String
 
     /// Navigational links to related data and included resource types and IDs.
     public let relationships: App.Relationships?
 
-    /// (Required) The resource type.Value: apps
+    /// The resource type.Value: apps
     public let type: String = "apps"
 
-    /// (Required) Navigational links that include the self-link.
+    /// Navigational links that include the self-link.
     public let links: ResourceLinks<AppResponse>
 
     /// Attributes that describe a resource.
@@ -153,10 +153,10 @@ extension App.Relationships.BetaAppLocalizations {
     
     public struct Data: Codable {
     
-        /// (Required) The opaque resource ID that uniquely identifies the resource.
+        /// The opaque resource ID that uniquely identifies the resource.
         public let `id`: String
     
-        /// (Required) The resource type.Value: betaAppLocalizations
+        /// The resource type.Value: betaAppLocalizations
         public let type: String = "betaAppLocalizations"
     }
     
@@ -175,10 +175,10 @@ extension App.Relationships.BetaAppReviewDetail {
     
     public struct Data: Codable {
     
-        /// (Required) The opaque resource ID that uniquely identifies the resource.
+        /// The opaque resource ID that uniquely identifies the resource.
         public let `id`: String
     
-        /// (Required) The resource type.Value: betaAppReviewDetails
+        /// The resource type.Value: betaAppReviewDetails
         public let type: String = "betaAppReviewDetails"
     }
     
@@ -197,10 +197,10 @@ extension App.Relationships.BetaGroups {
     
     public struct Data: Codable {
     
-        /// (Required) The opaque resource ID that uniquely identifies the resource.
+        /// The opaque resource ID that uniquely identifies the resource.
         public let `id`: String
     
-        /// (Required) The resource type.Value: betaGroups
+        /// The resource type.Value: betaGroups
         public let type: String = "betaGroups"
     }
     
@@ -219,10 +219,10 @@ extension App.Relationships.BetaLicenseAgreement {
     
     public struct Data: Codable {
     
-        /// (Required) The opaque resource ID that uniquely identifies the resource.
+        /// The opaque resource ID that uniquely identifies the resource.
         public let `id`: String
     
-        /// (Required) The resource type.Value: betaLicenseAgreements
+        /// The resource type.Value: betaLicenseAgreements
         public let type: String = "betaLicenseAgreements"
     }
     
@@ -241,10 +241,10 @@ extension App.Relationships.BetaTesters {
     
     public struct Data: Codable {
     
-        /// (Required) The opaque resource ID that uniquely identifies the resource.
+        /// The opaque resource ID that uniquely identifies the resource.
         public let `id`: String
     
-        /// (Required) The resource type.Value: betaTesters
+        /// The resource type.Value: betaTesters
         public let type: String = "betaTesters"
     }
     
@@ -263,10 +263,10 @@ extension App.Relationships.Builds {
     
     public struct Data: Codable {
     
-        /// (Required) The opaque resource ID that uniquely identifies the resource.
+        /// The opaque resource ID that uniquely identifies the resource.
         public let `id`: String
     
-        /// (Required) The resource type.Value: builds
+        /// The resource type.Value: builds
         public let type: String = "builds"
     }
     
@@ -285,10 +285,10 @@ extension App.Relationships.PreReleaseVersions {
     
     public struct Data: Codable {
     
-        /// (Required) The opaque resource ID that uniquely identifies the resource.
+        /// The opaque resource ID that uniquely identifies the resource.
         public let `id`: String
     
-        /// (Required) The resource type.Value: preReleaseVersions
+        /// The resource type.Value: preReleaseVersions
         public let type: String = "preReleaseVersions"
     }
     

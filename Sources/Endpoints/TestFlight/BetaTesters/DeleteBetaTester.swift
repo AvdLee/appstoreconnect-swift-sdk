@@ -12,7 +12,7 @@ extension APIEndpoint where T == Void {
     /// Remove a beta tester's ability to test all apps.
     ///
     /// - Parameters:
-    ///   - id: (Required) An opaque resource ID that uniquely identifies the resource.
+    ///   - id: An opaque resource ID that uniquely identifies the resource.
     public static func delete(betaTesterWithId id: String) -> APIEndpoint {
         return APIEndpoint(
             path: "betaTesters/\(id)",

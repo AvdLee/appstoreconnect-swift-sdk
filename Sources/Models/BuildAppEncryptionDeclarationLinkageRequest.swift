@@ -11,15 +11,15 @@ import Foundation
 /// A request containing the ID of the related resource.
 public struct BuildAppEncryptionDeclarationLinkageRequest: Codable {
 
-    /// (Required) The types and IDs of related resources.
+    /// The types and IDs of related resources.
     public let data: BuildAppEncryptionDeclarationLinkageRequest.Data
     
     public struct Data: Codable {
     
-        /// (Required) The opaque resource ID that uniquely identifies the resource.
+        /// The opaque resource ID that uniquely identifies the resource.
         public let `id`: String
     
-        /// (Required) The resource type.Value: appEncryptionDeclarations
+        /// The resource type.Value: appEncryptionDeclarations
         public let type: String = "appEncryptionDeclarations"
     }
 }

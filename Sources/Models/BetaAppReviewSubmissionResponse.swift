@@ -10,12 +10,12 @@ import Foundation
 /// A response containing a single resource.
 public struct BetaAppReviewSubmissionResponse: Codable {
 
-    /// (Required) The resource data.
+    /// The resource data.
     public let data: BetaAppReviewSubmission
 
     /// The requested relationship data.
     public let include: [Build]?
 
-    /// (Required) Navigational links that include the self-link.
+    /// Navigational links that include the self-link.
     public let links: DocumentLinks
 }

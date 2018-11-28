@@ -13,16 +13,16 @@ public struct BetaGroup: Codable {
     /// The resource's attributes.
     public let attributes: BetaGroup.Attributes?
 
-    /// (Required) The opaque resource ID that uniquely identifies the resource.
+    /// The opaque resource ID that uniquely identifies the resource.
     public let `id`: String
 
     /// Navigational links to related data and included resource types and IDs.
     public let relationships: BetaGroup.Relationships?
 
-    /// (Required) The resource type.Value: betaGroups
+    /// The resource type.Value: betaGroups
     public let type: String = "betaGroups"
 
-    /// (Required) Navigational links that include the self-link.
+    /// Navigational links that include the self-link.
     public let links: ResourceLinks<BetaGroupResponse>
 
     /// Attributes that describe a resource.
@@ -108,10 +108,10 @@ extension BetaGroup.Relationships.App {
     
     public struct Data: Codable {
     
-        /// (Required) The opaque resource ID that uniquely identifies the resource.
+        /// The opaque resource ID that uniquely identifies the resource.
         public let `id`: String
     
-        /// (Required) The resource type.Value: apps
+        /// The resource type.Value: apps
         public let type: String = "apps"
     }
     
@@ -130,10 +130,10 @@ extension BetaGroup.Relationships.BetaTesters {
     
     public struct Data: Codable {
     
-        /// (Required) The opaque resource ID that uniquely identifies the resource.
+        /// The opaque resource ID that uniquely identifies the resource.
         public let `id`: String
     
-        /// (Required) The resource type.Value: betaTesters
+        /// The resource type.Value: betaTesters
         public let type: String = "betaTesters"
     }
     
@@ -152,10 +152,10 @@ extension BetaGroup.Relationships.Builds {
     
     public struct Data: Codable {
     
-        /// (Required) The opaque resource ID that uniquely identifies the resource.
+        /// The opaque resource ID that uniquely identifies the resource.
         public let `id`: String
     
-        /// (Required) The resource type.Value: builds
+        /// The resource type.Value: builds
         public let type: String = "builds"
     }
     

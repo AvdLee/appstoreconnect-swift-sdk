@@ -12,7 +12,7 @@ extension APIEndpoint where T == BetaTesterBetaGroupsLinkagesResponse {
     /// Get a list of group resource IDs associated with a beta tester.
     ///
     /// - Parameters:
-    ///   - id: (Required) An opaque resource ID that uniquely identifies the resource.
+    ///   - id: An opaque resource ID that uniquely identifies the resource.
     ///   - limit: Number of resources to return.
     public static func betaGroupIDs(
         ofBetaTesterWithId id: String,

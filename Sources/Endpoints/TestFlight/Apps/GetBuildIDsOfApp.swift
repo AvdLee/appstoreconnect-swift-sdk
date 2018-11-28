@@ -12,7 +12,7 @@ extension APIEndpoint where T == AppBuildsLinkagesResponse {
     /// Get a list of build resource IDs associated with a specific app.
     ///
     /// - Parameters:
-    ///   - id: (Required) An opaque resource ID that uniquely identifies the resource.
+    ///   - id: An opaque resource ID that uniquely identifies the resource.
     ///   - limit: Number of resources to return.
     public static func buildIDs(ofAppWithId id: String, limit: Int? = nil) -> APIEndpoint {
         var parameters = [String: Any]()

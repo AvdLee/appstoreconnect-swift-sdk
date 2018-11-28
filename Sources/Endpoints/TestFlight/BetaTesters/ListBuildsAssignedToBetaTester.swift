@@ -12,7 +12,7 @@ extension APIEndpoint where T == BuildsResponse {
     /// Get a list of builds individually assigned to a specific beta tester.
     ///
     /// - Parameters:
-    ///   - id: (Required) An opaque resource ID that uniquely identifies the resource.
+    ///   - id: An opaque resource ID that uniquely identifies the resource.
     ///   - limit: Number of resources to return.
     ///   - fields: Fields to return for included related types.
     public static func builds(

@@ -10,6 +10,6 @@ import Foundation
 /// Self-links to requested resources.
 public struct ResourceLinks<T: Decodable>: Codable {
 
-    /// (Required) The link to the resource.
+    /// The link to the resource.
     public let `self`: URL
 }

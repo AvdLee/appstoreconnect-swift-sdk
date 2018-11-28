@@ -13,16 +13,16 @@ public struct PrereleaseVersion: Codable {
     /// The resource's attributes.
     public let attributes: PrereleaseVersion.Attributes?
 
-    /// (Required) The opaque resource ID that uniquely identifies the resource.
+    /// The opaque resource ID that uniquely identifies the resource.
     public let `id`: String
 
-    /// (Required) Navigational links that include the self-link.
+    /// Navigational links that include the self-link.
     public let links: ResourceLinks<PrereleaseVersionResponse>
 
     /// Navigational links to related data and included resource types and IDs.
     public let relationships: PrereleaseVersion.Relationships?
 
-    /// (Required) The resource type.Value: preReleaseVersions
+    /// The resource type.Value: preReleaseVersions
     public let type: String = "preReleaseVersions"
 
     /// Attributes that describe a resource.
@@ -75,10 +75,10 @@ extension PrereleaseVersion.Relationships.App {
     
     public struct Data: Codable {
     
-        /// (Required) The opaque resource ID that uniquely identifies the resource.
+        /// The opaque resource ID that uniquely identifies the resource.
         public let `id`: String
     
-        /// (Required) The resource type.Value: apps
+        /// The resource type.Value: apps
         public let type: String = "apps"
     }
     
@@ -97,10 +97,10 @@ extension PrereleaseVersion.Relationships.Builds {
     
     public struct Data: Codable {
     
-        /// (Required) The opaque resource ID that uniquely identifies the resource.
+        /// The opaque resource ID that uniquely identifies the resource.
         public let `id`: String
     
-        /// (Required) The resource type.Value: builds
+        /// The resource type.Value: builds
         public let type: String = "builds"
     }
     

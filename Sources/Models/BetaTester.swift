@@ -13,16 +13,16 @@ public struct BetaTester: Codable {
     /// The resource's attributes.
     public let attributes: BetaTester.Attributes?
 
-    /// (Required) The opaque resource ID that uniquely identifies the resource.
+    /// The opaque resource ID that uniquely identifies the resource.
     public let `id`: String
 
     /// Navigational links to related data and included resource types and IDs.
     public let relationships: BetaTester.Relationships?
 
-    /// (Required) The resource type.Value: betaTesters
+    /// The resource type.Value: betaTesters
     public let type: String = "betaTesters"
 
-    /// (Required) Navigational links that include the self-link.
+    /// Navigational links that include the self-link.
     public let links: ResourceLinks<BetaTesterResponse>
 
     /// Attributes that describe a resource.

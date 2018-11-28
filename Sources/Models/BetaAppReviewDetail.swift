@@ -13,16 +13,16 @@ public struct BetaAppReviewDetail: Codable {
     /// The resource's attributes.
     public let attributes: BetaAppReviewDetail.Attributes?
 
-    /// (Required) The opaque resource ID that uniquely identifies the resource.
+    /// The opaque resource ID that uniquely identifies the resource.
     public let `id`: String
 
-    /// (Required) Navigational links that include the self-link.
+    /// Navigational links that include the self-link.
     public let links: ResourceLinks<BetaAppReviewDetailResponse>
 
     /// Navigational links to related data and included resource types and IDs.
     public let relationships: BetaAppReviewDetail.Relationships?
 
-    /// (Required) The resource type.Value: betaAppReviewDetails
+    /// The resource type.Value: betaAppReviewDetails
     public let type: String = "betaAppReviewDetails"
 
     /// Attributes that describe a resource.
@@ -78,10 +78,10 @@ extension BetaAppReviewDetail.Relationships.App {
     
     public struct Data: Codable {
     
-        /// (Required) The opaque resource ID that uniquely identifies the resource.
+        /// The opaque resource ID that uniquely identifies the resource.
         public let `id`: String
     
-        /// (Required) The resource type.Value: apps
+        /// The resource type.Value: apps
         public let type: String = "apps"
     }
     

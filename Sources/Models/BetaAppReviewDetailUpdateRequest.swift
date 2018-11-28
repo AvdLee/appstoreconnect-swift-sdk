@@ -42,7 +42,7 @@ public struct BetaAppReviewDetailUpdateRequest: Codable {
             id: id)
     }
 
-    /// (Required) The resource data.
+    /// The resource data.
     public let data: BetaAppReviewDetailUpdateRequest.Data
     
     public struct Data: Codable {
@@ -50,10 +50,10 @@ public struct BetaAppReviewDetailUpdateRequest: Codable {
         /// The resource's attributes.
         public let attributes: BetaAppReviewDetailUpdateRequest.Data.Attributes?
     
-        /// (Required) The opaque resource ID that uniquely identifies the resource.
+        /// The opaque resource ID that uniquely identifies the resource.
         public let `id`: String
     
-        /// (Required) The resource type.Value: betaAppReviewDetails
+        /// The resource type.Value: betaAppReviewDetails
         public let type: String = "betaAppReviewDetails"
     }
 }

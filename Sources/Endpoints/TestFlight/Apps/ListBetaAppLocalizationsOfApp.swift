@@ -12,7 +12,7 @@ extension APIEndpoint where T == BetaAppLocalizationsResponse {
     /// Get a list of localized beta test information for a specific app.
     ///
     /// - Parameters:
-    ///   - id: (Required) An opaque resource ID that uniquely identifies the resource.
+    ///   - id: An opaque resource ID that uniquely identifies the resource.
     ///   - fields: Fields to return for included related types.
     ///   - limit: Number of resources to return.
     public static func betaAppLocalizations(

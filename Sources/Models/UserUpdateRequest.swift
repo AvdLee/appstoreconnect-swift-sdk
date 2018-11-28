@@ -31,7 +31,7 @@ public struct UserUpdateRequest: Codable {
                 visibleApps: .init(data: appsVisibleIds?.map({ Data.Relationships.VisibleApps.Data(id: $0) }))))
     }
     
-    /// (Required) The resource data.
+    /// The resource data.
     public let data: UserUpdateRequest.Data
     
     public struct Data: Codable {
@@ -39,13 +39,13 @@ public struct UserUpdateRequest: Codable {
         /// The resource's attributes.
         public let attributes: UserUpdateRequest.Data.Attributes?
     
-        /// (Required) The opaque resource ID that uniquely identifies the resource.
+        /// The opaque resource ID that uniquely identifies the resource.
         public let `id`: String
     
         /// The types and IDs of the related data to update.
         public let relationships: UserUpdateRequest.Data.Relationships?
     
-        /// (Required) The resource type.Value: users
+        /// The resource type.Value: users
         public let type: String = "users"
     }
 }
@@ -87,10 +87,10 @@ extension UserUpdateRequest.Data.Relationships.VisibleApps {
     
     public struct Data: Codable {
     
-        /// (Required) The opaque resource ID that uniquely identifies the resource.
+        /// The opaque resource ID that uniquely identifies the resource.
         public let `id`: String
     
-        /// (Required) The resource type.Value: apps
+        /// The resource type.Value: apps
         public let type: String = "apps"
     }
 }

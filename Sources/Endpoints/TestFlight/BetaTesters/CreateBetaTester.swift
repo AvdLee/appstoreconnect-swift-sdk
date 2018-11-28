@@ -11,6 +11,13 @@ import Alamofire
 extension APIEndpoint where T == BetaTesterResponse {
 
     /// Create a beta tester assigned to a group, a build, or an app.
+    ///
+    /// - Parameters:
+    ///   - email: The beta tester's email address, used for sending beta testing invitations.
+    ///   - firstName: The beta tester's first name.
+    ///   - lastName: The beta tester's last name.
+    ///   - betaGroupIds: Array of opaque resource ID that uniquely identifies the resources.
+    ///   - buildIds: Array of opaque resource ID that uniquely identifies the resources.
     public static func create(
         betaTesterWithEmail email: String,
         firstName: String? = nil,

@@ -13,7 +13,8 @@ extension APIEndpoint where T == Void {
     /// Remove a specific beta tester from one or more beta groups, revoking their access to test builds associated with those groups.
     ///
     /// - Parameters:
-    ///   - id: (Required) An opaque resource ID that uniquely identifies the resource.
+    ///   - id: An opaque resource ID that uniquely identifies the resource.
+    ///   - betaGroupIds: Array of opaque resource ID that uniquely identifies the resources.
     public static func remove(
         betaTesterWithId id: String,
         fromBetaGroupsWithIds betaGroupIds: [String]) -> APIEndpoint {

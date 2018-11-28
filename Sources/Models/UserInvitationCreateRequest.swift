@@ -36,18 +36,18 @@ public struct UserInvitationCreateRequest: Codable {
             relationships: .init(visibleApps: .init(data: appsVisibleIds?.map({ Data.Relationships.VisibleApps.Data(id: $0) }))))
     }
     
-    /// (Required) The resource data.
+    /// The resource data.
     public let data: UserInvitationCreateRequest.Data
     
     public struct Data: Codable {
     
-        /// (Required) The resource's attributes.
+        /// The resource's attributes.
         public let attributes: UserInvitationCreateRequest.Data.Attributes
     
         /// The types and IDs of the related data to update.
         public let relationships: UserInvitationCreateRequest.Data.Relationships?
     
-        /// (Required) The resource type.Value: userInvitations
+        /// The resource type.Value: userInvitations
         public let type: String = "userInvitations"
     }
 }
@@ -60,19 +60,19 @@ extension UserInvitationCreateRequest.Data {
         /// A Boolean value that indicates whether a user has access to all apps available to the team.
         public let allAppsVisible: Bool?
     
-        /// (Required) The email address of a pending user invitation. The email address must be valid to activate the account. It can be any email address, not necessarily one associated with an Apple ID.
+        /// The email address of a pending user invitation. The email address must be valid to activate the account. It can be any email address, not necessarily one associated with an Apple ID.
         public let email: String
     
-        /// (Required) The user invitation recipient's first name.
+        /// The user invitation recipient's first name.
         public let firstName: String
     
-        /// (Required) The user invitation recipient's last name.
+        /// The user invitation recipient's last name.
         public let lastName: String
     
         /// A Boolean value that indicates the user's specified role allows access to the provisioning functionality on the Apple Developer website.
         public let provisioningAllowed: Bool?
     
-        /// (Required) Assigned user roles that determine the user's access to sections of App Store Connect and tasks they can perform.
+        /// Assigned user roles that determine the user's access to sections of App Store Connect and tasks they can perform.
         public let roles: [UserRole]
     }
     
@@ -98,10 +98,10 @@ extension UserInvitationCreateRequest.Data.Relationships.VisibleApps {
     
     public struct Data: Codable {
     
-        /// (Required) The opaque resource ID that uniquely identifies the resource.
+        /// The opaque resource ID that uniquely identifies the resource.
         public let `id`: String
     
-        /// (Required) The resource type.Value: apps
+        /// The resource type.Value: apps
         public let type: String = "apps"
     }
 }

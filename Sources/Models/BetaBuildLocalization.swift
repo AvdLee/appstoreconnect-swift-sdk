@@ -13,16 +13,16 @@ public struct BetaBuildLocalization: Codable {
     /// The resource's attributes.
     public let attributes: BetaBuildLocalization.Attributes?
 
-    /// (Required) The opaque resource ID that uniquely identifies the resource.
+    /// The opaque resource ID that uniquely identifies the resource.
     public let `id`: String
 
     /// Navigational links to related data and included resource types and IDs.
     public let relationships: BetaBuildLocalization.Relationships?
 
-    /// (Required) The resource type.Value: betaBuildLocalizations
+    /// The resource type.Value: betaBuildLocalizations
     public let type: String = "betaBuildLocalizations"
 
-    /// (Required) Navigational links that include the self-link.
+    /// Navigational links that include the self-link.
     public let links: ResourceLinks<BetaBuildLocalizationResponse>
 
     /// Attributes that describe a resource.
@@ -60,10 +60,10 @@ extension BetaBuildLocalization.Relationships.Build {
     
     public struct Data: Codable {
     
-        /// (Required) The opaque resource ID that uniquely identifies the resource.
+        /// The opaque resource ID that uniquely identifies the resource.
         public let `id`: String
     
-        /// (Required) The resource type.Value: builds
+        /// The resource type.Value: builds
         public let type: String = "builds"
     }
     

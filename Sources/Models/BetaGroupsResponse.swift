@@ -10,14 +10,14 @@ import Foundation
 /// A response containing a list of resources.
 public struct BetaGroupsResponse: Codable {
 
-    /// (Required) The resource data.
+    /// The resource data.
     public let data: [BetaGroup]
 
     /// Relationship data to include in the response.￼
     ///  Possible types: App, Build, BetaTester
     public let include: [BetaGroupRelationship]?
 
-    /// (Required) Navigational links that include the self-link.
+    /// Navigational links that include the self-link.
     public let links: PagedDocumentLinks
 
     /// Paging information.

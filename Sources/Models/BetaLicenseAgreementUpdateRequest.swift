@@ -17,7 +17,7 @@ public struct BetaLicenseAgreementUpdateRequest: Codable {
         data = .init(attributes: .init(agreementText: agreementText), id: id)
     }
     
-    /// (Required) The resource data.
+    /// The resource data.
     public let data: BetaLicenseAgreementUpdateRequest.Data
     
     public struct Data: Codable {
@@ -25,10 +25,10 @@ public struct BetaLicenseAgreementUpdateRequest: Codable {
         /// The resource's attributes.
         public let attributes: BetaLicenseAgreementUpdateRequest.Data.Attributes?
     
-        /// (Required) The opaque resource ID that uniquely identifies the resource.
+        /// The opaque resource ID that uniquely identifies the resource.
         public let `id`: String
     
-        /// (Required) The resource type.Value: betaLicenseAgreements
+        /// The resource type.Value: betaLicenseAgreements
         public let type: String = "betaLicenseAgreements"
     }
 }

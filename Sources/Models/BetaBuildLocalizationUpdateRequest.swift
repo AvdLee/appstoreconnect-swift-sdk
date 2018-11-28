@@ -17,7 +17,7 @@ public struct BetaBuildLocalizationUpdateRequest: Codable {
         data = .init(attributes: .init(whatsNew: whatsNew), id: id)
     }
     
-    /// (Required) The resource data.
+    /// The resource data.
     public let data: BetaBuildLocalizationUpdateRequest.Data
 
     public struct Data: Codable {
@@ -25,10 +25,10 @@ public struct BetaBuildLocalizationUpdateRequest: Codable {
         /// The resource's attributes.
         public let attributes: BetaBuildLocalizationUpdateRequest.Data.Attributes?
     
-        /// (Required) The opaque resource ID that uniquely identifies the resource.
+        /// The opaque resource ID that uniquely identifies the resource.
         public let `id`: String
     
-        /// (Required) The resource type.Value: betaBuildLocalizations
+        /// The resource type.Value: betaBuildLocalizations
         public let type: String = "betaBuildLocalizations"
     }
 }

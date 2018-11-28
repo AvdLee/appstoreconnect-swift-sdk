@@ -13,16 +13,16 @@ public struct BetaLicenseAgreement: Codable {
     /// The resource's attributes.
     public let attributes: BetaLicenseAgreement.Attributes?
 
-    /// (Required) The opaque resource ID that uniquely identifies the resource.
+    /// The opaque resource ID that uniquely identifies the resource.
     public let `id`: String
 
-    /// (Required) Navigational links that include the self-link.
+    /// Navigational links that include the self-link.
     public let links: ResourceLinks<BetaLicenseAgreementResponse>
 
     /// Navigational links to related data and included resource types and IDs.
     public let relationships: BetaLicenseAgreement.Relationships?
 
-    /// (Required) The resource type.Value: betaLicenseAgreements
+    /// The resource type.Value: betaLicenseAgreements
     public let type: String = "betaLicenseAgreements"
 
     /// Attributes that describe a resource.
@@ -57,10 +57,10 @@ extension BetaLicenseAgreement.Relationships.App {
     
     public struct Data: Codable {
     
-        /// (Required) The opaque resource ID that uniquely identifies the resource.
+        /// The opaque resource ID that uniquely identifies the resource.
         public let `id`: String
     
-        /// (Required) The resource type.Value: apps
+        /// The resource type.Value: apps
         public let type: String = "apps"
     }
     

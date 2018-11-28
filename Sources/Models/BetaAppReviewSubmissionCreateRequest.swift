@@ -16,15 +16,15 @@ public struct BetaAppReviewSubmissionCreateRequest: Codable {
         data = .init(relationships: .init(build: .init(data: .init(id: buildId))))
     }
 
-    /// (Required) The resource data.
+    /// The resource data.
     public let data: BetaAppReviewSubmissionCreateRequest.Data
     
     public struct Data: Codable {
     
-        /// (Required) The types and IDs of the related data to update.
+        /// The types and IDs of the related data to update.
         public let relationships: BetaAppReviewSubmissionCreateRequest.Data.Relationships
     
-        /// (Required) The resource type.Value: betaAppReviewSubmissions
+        /// The resource type.Value: betaAppReviewSubmissions
         public let type: String = "betaAppReviewSubmissions"
     }
 }
@@ -54,10 +54,10 @@ extension BetaAppReviewSubmissionCreateRequest.Data.Relationships.Build {
     
     public struct Data: Codable {
     
-        /// (Required) The opaque resource ID that uniquely identifies the resource.
+        /// The opaque resource ID that uniquely identifies the resource.
         public let `id`: String
     
-        /// (Required) The resource type.Value: builds
+        /// The resource type.Value: builds
         public let type: String = "builds"
     }
 }

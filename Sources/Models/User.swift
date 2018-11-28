@@ -13,16 +13,16 @@ public struct User: Codable {
     /// The resource's attributes.
     public let attributes: User.Attributes?
 
-    /// (Required) The opaque resource ID that uniquely identifies the resource.
+    /// The opaque resource ID that uniquely identifies the resource.
     public let `id`: String
 
     /// Navigational links to related data and included resource types and IDs.
     public let relationships: User.Relationships?
 
-    /// (Required) The resource type.Value: users
+    /// The resource type.Value: users
     public let type: String = "users"
 
-    /// (Required) Navigational links that include the self-link.
+    /// Navigational links that include the self-link.
     public let links: ResourceLinks<UserResponse>
 
     /// Attributes that describe a resource.
@@ -75,10 +75,10 @@ extension User.Relationships.VisibleApps {
     
     public struct Data: Codable {
     
-        /// (Required) The opaque resource ID that uniquely identifies the resource.
+        /// The opaque resource ID that uniquely identifies the resource.
         public let `id`: String
     
-        /// (Required) The resource type.Value: apps
+        /// The resource type.Value: apps
         public let type: String = "apps"
     }
     

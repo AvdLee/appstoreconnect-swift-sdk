@@ -12,7 +12,7 @@ extension APIEndpoint where T == BetaGroupsResponse {
     /// Get a list of beta groups associated with a specific app.
     ///
     /// - Parameters:
-    ///   - id: (Required) An opaque resource ID that uniquely identifies the resource.
+    ///   - id: An opaque resource ID that uniquely identifies the resource.
     ///   - fields: Fields to return for included related types.
     ///   - limit: Number of resources to return.
     public static func betaGroups(

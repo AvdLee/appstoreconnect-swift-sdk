@@ -27,7 +27,7 @@ public struct BuildUpdateRequest: Codable {
                 appEncryptionDeclaration: .init(data: .init(id: appEncryptionDeclarationId))))
     }
     
-    /// (Required) The resource data.
+    /// The resource data.
     public let data: BuildUpdateRequest.Data
     
     public struct Data: Codable {
@@ -35,13 +35,13 @@ public struct BuildUpdateRequest: Codable {
         /// The resource's attributes.
         public let attributes: BuildUpdateRequest.Data.Attributes?
     
-        /// (Required) The opaque resource ID that uniquely identifies the resource.
+        /// The opaque resource ID that uniquely identifies the resource.
         public let `id`: String
     
         /// Navigational links to related data and included resource types and IDs.
         public let relationships: BuildUpdateRequest.Data.Relationships?
     
-        /// (Required) The resource type.Value: builds
+        /// The resource type.Value: builds
         public let type: String = "builds"
     }
 }
@@ -80,10 +80,10 @@ extension BuildUpdateRequest.Data.Relationships.AppEncryptionDeclaration {
     
     public struct Data: Codable {
     
-        /// (Required) The opaque resource ID that uniquely identifies the resource.
+        /// The opaque resource ID that uniquely identifies the resource.
         public let `id`: String
     
-        /// (Required) The resource type.Value: appEncryptionDeclarations
+        /// The resource type.Value: appEncryptionDeclarations
         public let type: String = "appEncryptionDeclarations"
     }
 }

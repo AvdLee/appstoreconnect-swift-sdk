@@ -10,9 +10,9 @@ import Foundation
 /// A response containing a single resource.
 public struct BuildBetaNotificationResponse: Codable {
 
-    /// (Required) The resource data.
+    /// The resource data.
     public let data: BuildBetaNotification
 
-    /// (Required) Navigational links that include the self-link.
+    /// Navigational links that include the self-link.
     public let links: DocumentLinks
 }

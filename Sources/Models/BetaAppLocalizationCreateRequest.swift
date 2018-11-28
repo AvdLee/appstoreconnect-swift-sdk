@@ -36,18 +36,18 @@ public struct BetaAppLocalizationCreateRequest: Codable {
             relationships: .init(app: .init(data: .init(id: appId))))
     }
 
-    /// (Required) The resource data.
+    /// The resource data.
     public let data: BetaAppLocalizationCreateRequest.Data
     
     public struct Data: Codable {
     
-        /// (Required) The resource's attributes.
+        /// The resource's attributes.
         public let attributes: BetaAppLocalizationCreateRequest.Data.Attributes
     
-        /// (Required) Navigational links to related data and included resource types and IDs.
+        /// Navigational links to related data and included resource types and IDs.
         public let relationships: BetaAppLocalizationCreateRequest.Data.Relationships
     
-        /// (Required) The resource type.Value: betaAppLocalizations
+        /// The resource type.Value: betaAppLocalizations
         public let type: String = "betaAppLocalizations"
     }
 }
@@ -63,7 +63,7 @@ extension BetaAppLocalizationCreateRequest.Data {
         /// An email address to which beta testers can send feedback. Also appears as the reply-to address for TestFlight invitation emails.
         public let feedbackEmail: String?
     
-        /// (Required) The specified locale. Refer to Table 1 for possible values.
+        /// The specified locale. Refer to Table 1 for possible values.
         public let locale: String
     
         /// A URL with information about your app. This URL is visible to testers in the TestFlight app.
@@ -98,10 +98,10 @@ extension BetaAppLocalizationCreateRequest.Data.Relationships.App {
     
     public struct Data: Codable {
     
-        /// (Required) The opaque resource ID that uniquely identifies the resource.
+        /// The opaque resource ID that uniquely identifies the resource.
         public let `id`: String
     
-        /// (Required) The resource type.Value: apps
+        /// The resource type.Value: apps
         public let type: String = "apps"
     }
 }

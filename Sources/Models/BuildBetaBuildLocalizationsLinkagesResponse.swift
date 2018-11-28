@@ -11,10 +11,10 @@ import Foundation
 /// A response containing a list of related resource IDs.
 public struct BuildBetaBuildLocalizationsLinkagesResponse: Codable {
 
-    /// (Required) The object types and IDs of the related resources.
+    /// The object types and IDs of the related resources.
     public let data: [BuildBetaBuildLocalizationsLinkagesResponse.Data]
 
-    /// (Required) Navigational links including the self-link and links to the related data.
+    /// Navigational links including the self-link and links to the related data.
     public let links: PagedDocumentLinks
 
     /// Paging information.
@@ -22,10 +22,10 @@ public struct BuildBetaBuildLocalizationsLinkagesResponse: Codable {
     
     public struct Data: Codable {
     
-        /// (Required) The opaque resource ID that uniquely identifies the resource.
+        /// The opaque resource ID that uniquely identifies the resource.
         public let `id`: String
     
-        /// (Required) The resource type.Value: betaBuildLocalizations
+        /// The resource type.Value: betaBuildLocalizations
         public let type: String = "betaBuildLocalizations"
     }
 }

@@ -10,12 +10,12 @@ import Foundation
 /// The data structure that represents the resource.
 public struct BetaTesterInvitation: Codable {
 
-    /// (Required) The opaque resource ID that uniquely identifies the resource.
+    /// The opaque resource ID that uniquely identifies the resource.
     public let `id`: String
 
-    /// (Required) The resource type.Value: betaTesterInvitations
+    /// The resource type.Value: betaTesterInvitations
     public let type: String = "betaTesterInvitations"
 
-    /// (Required) Navigational links that include the self-link.
+    /// Navigational links that include the self-link.
     public let links: ResourceLinks<BetaTesterInvitationResponse>
 }

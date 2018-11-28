@@ -11,18 +11,18 @@ import Foundation
 /// A response containing a single resource.
 public struct BetaBuildLocalizationBuildLinkageResponse: Codable {
 
-    /// (Required) The resource data.
+    /// The resource data.
     public let data: BetaBuildLocalizationBuildLinkageResponse.Data
 
-    /// (Required) Navigational links that include the self-link.
+    /// Navigational links that include the self-link.
     public let links: DocumentLinks
     
     public struct Data: Codable {
     
-        /// (Required) The opaque resource ID that uniquely identifies the resource.
+        /// The opaque resource ID that uniquely identifies the resource.
         public let `id`: String
     
-        /// (Required) The resource type.Value: builds
+        /// The resource type.Value: builds
         public let type: String = "builds"
     }
 }

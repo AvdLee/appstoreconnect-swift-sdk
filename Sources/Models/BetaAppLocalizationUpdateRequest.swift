@@ -33,7 +33,7 @@ public struct BetaAppLocalizationUpdateRequest: Codable {
             id: id)
     }
     
-    /// (Required) The resource data.
+    /// The resource data.
     public let data: BetaAppLocalizationUpdateRequest.Data
     
     public struct Data: Codable {
@@ -41,10 +41,10 @@ public struct BetaAppLocalizationUpdateRequest: Codable {
         /// The resource's attributes.
         public let attributes: BetaAppLocalizationUpdateRequest.Data.Attributes?
     
-        /// (Required) The opaque resource ID that uniquely identifies the resource.
+        /// The opaque resource ID that uniquely identifies the resource.
         public let `id`: String
     
-        /// (Required) The resource type.Value: betaAppLocalizations
+        /// The resource type.Value: betaAppLocalizations
         public let type: String = "betaAppLocalizations"
     }
 }

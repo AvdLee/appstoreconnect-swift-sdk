@@ -10,13 +10,13 @@ import Foundation
 /// A response containing a list of resources.
 public struct UsersResponse: Codable {
 
-    /// (Required) The resource data.
+    /// The resource data.
     public let data: [User]
 
     /// The requested relationship data.
     public let include: [App]?
 
-    /// (Required) Navigational links that include the self-link.
+    /// Navigational links that include the self-link.
     public let links: PagedDocumentLinks
 
     /// Paging information.

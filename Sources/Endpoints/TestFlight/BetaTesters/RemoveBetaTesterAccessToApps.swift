@@ -13,7 +13,8 @@ extension APIEndpoint where T == Void {
     /// Remove a specific beta tester's access to test any builds of one or more apps.
     ///
     /// - Parameters:
-    ///   - id: (Required) An opaque resource ID that uniquely identifies the resource.
+    ///   - id: An opaque resource ID that uniquely identifies the resource.
+    ///   - appIds: Array of opaque resource ID that uniquely identifies the resources.
     public static func remove(
         accessOfBetaTesterWithId id: String,
         toAppsWithIds appIds: [String]) -> APIEndpoint {

@@ -13,16 +13,16 @@ public struct Build: Codable {
     /// The resource's attributes.
     public let attributes: Build.Attributes?
 
-    /// (Required) The opaque resource ID that uniquely identifies the resource.
+    /// The opaque resource ID that uniquely identifies the resource.
     public let `id`: String
 
     /// Navigational links to related data and included resource types and IDs.
     public let relationships: Build.Relationships?
 
-    /// (Required) The resource type.Value: builds
+    /// The resource type.Value: builds
     public let type: String = "builds"
 
-    /// (Required) Navigational links that include the self-link.
+    /// Navigational links that include the self-link.
     public let links: ResourceLinks<BuildResponse>
 
     /// Attributes that describe a resource.
@@ -173,10 +173,10 @@ extension Build.Relationships.App {
     
     public struct Data: Codable {
     
-        /// (Required) The opaque resource ID that uniquely identifies the resource.
+        /// The opaque resource ID that uniquely identifies the resource.
         public let `id`: String
     
-        /// (Required) The resource type.Value: apps
+        /// The resource type.Value: apps
         public let type: String = "apps"
     }
 }
@@ -199,10 +199,10 @@ extension Build.Relationships.AppEncryptionDeclaration {
     
     public struct Data: Codable {
     
-        /// (Required) The opaque resource ID that uniquely identifies the resource.
+        /// The opaque resource ID that uniquely identifies the resource.
         public let `id`: String
     
-        /// (Required) The resource type.Value: appEncryptionDeclarations
+        /// The resource type.Value: appEncryptionDeclarations
         public let type: String = "appEncryptionDeclarations"
     }
 }
@@ -225,10 +225,10 @@ extension Build.Relationships.BetaAppReviewSubmission {
     
     public struct Data: Codable {
     
-        /// (Required) The opaque resource ID that uniquely identifies the resource.
+        /// The opaque resource ID that uniquely identifies the resource.
         public let `id`: String
     
-        /// (Required) The resource type.Value: betaAppReviewSubmissions
+        /// The resource type.Value: betaAppReviewSubmissions
         public let type: String = "betaAppReviewSubmissions"
     }
 }
@@ -251,10 +251,10 @@ extension Build.Relationships.BetaBuildLocalizations {
     
     public struct Data: Codable {
     
-        /// (Required) The opaque resource ID that uniquely identifies the resource.
+        /// The opaque resource ID that uniquely identifies the resource.
         public let `id`: String
     
-        /// (Required) The resource type.Value: betaBuildLocalizations
+        /// The resource type.Value: betaBuildLocalizations
         public let type: String = "betaBuildLocalizations"
     }
 }
@@ -277,10 +277,10 @@ extension Build.Relationships.BetaGroups {
     
     public struct Data: Codable {
     
-        /// (Required) The opaque resource ID that uniquely identifies the resource.
+        /// The opaque resource ID that uniquely identifies the resource.
         public let `id`: String
     
-        /// (Required) The resource type.Value: betaGroups
+        /// The resource type.Value: betaGroups
         public let type: String = "betaGroups"
     }
 }
@@ -303,10 +303,10 @@ extension Build.Relationships.BuildBetaDetail {
     
     public struct Data: Codable {
     
-        /// (Required) The opaque resource ID that uniquely identifies the resource.
+        /// The opaque resource ID that uniquely identifies the resource.
         public let `id`: String
     
-        /// (Required) The resource type.Value: buildBetaDetails
+        /// The resource type.Value: buildBetaDetails
         public let type: String = "buildBetaDetails"
     }
 }
@@ -329,10 +329,10 @@ extension Build.Relationships.IndividualTesters {
     
     public struct Data: Codable {
     
-        /// (Required) The opaque resource ID that uniquely identifies the resource.
+        /// The opaque resource ID that uniquely identifies the resource.
         public let `id`: String
     
-        /// (Required) The resource type.Value: betaTesters
+        /// The resource type.Value: betaTesters
         public let type: String = "betaTesters"
     }
 }
@@ -355,10 +355,10 @@ extension Build.Relationships.PreReleaseVersion {
     
     public struct Data: Codable {
     
-        /// (Required) The opaque resource ID that uniquely identifies the resource.
+        /// The opaque resource ID that uniquely identifies the resource.
         public let `id`: String
     
-        /// (Required) The resource type.Value: preReleaseVersions
+        /// The resource type.Value: preReleaseVersions
         public let type: String = "preReleaseVersions"
     }
 }

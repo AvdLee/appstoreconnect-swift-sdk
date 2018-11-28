@@ -20,15 +20,15 @@ public struct BetaTesterInvitationCreateRequest: Codable {
                 betaTester: .init(data: .init(id: betaTesterId))))
     }
 
-    /// (Required) The resource data.
+    /// The resource data.
     public let data: BetaTesterInvitationCreateRequest.Data
     
     public struct Data: Codable {
     
-        /// (Required) The types and IDs of the related data to update.
+        /// The types and IDs of the related data to update.
         public let relationships: BetaTesterInvitationCreateRequest.Data.Relationships
     
-        /// (Required) The resource type.Value: betaTesterInvitations
+        /// The resource type.Value: betaTesterInvitations
         public let type: String = "betaTesterInvitations"
     }
 }
@@ -67,10 +67,10 @@ extension BetaTesterInvitationCreateRequest.Data.Relationships.App {
     
     public struct Data: Codable {
     
-        /// (Required) The opaque resource ID that uniquely identifies the resource.
+        /// The opaque resource ID that uniquely identifies the resource.
         public let `id`: String
     
-        /// (Required) The resource type.Value: apps
+        /// The resource type.Value: apps
         public let type: String = "apps"
     }
 }
@@ -80,10 +80,10 @@ extension BetaTesterInvitationCreateRequest.Data.Relationships.BetaTester {
     
     public struct Data: Codable {
     
-        /// (Required) The opaque resource ID that uniquely identifies the resource.
+        /// The opaque resource ID that uniquely identifies the resource.
         public let `id`: String
     
-        /// (Required) The resource type.Value: betaTesters
+        /// The resource type.Value: betaTesters
         public let type: String = "betaTesters"
     }
 }

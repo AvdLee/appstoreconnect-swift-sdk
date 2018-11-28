@@ -12,7 +12,7 @@ extension APIEndpoint where T == AppsResponse {
     /// Get a list of apps that a beta tester can test.
     ///
     /// - Parameters:
-    ///   - id: (Required) An opaque resource ID that uniquely identifies the resource.
+    ///   - id: An opaque resource ID that uniquely identifies the resource.
     ///   - limit: Number of resources to return.
     ///   - fields: Fields to return for included related types.
     public static func apps(

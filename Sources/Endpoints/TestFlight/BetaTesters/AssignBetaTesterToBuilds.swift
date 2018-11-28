@@ -13,8 +13,8 @@ extension APIEndpoint where T == Void {
     /// Individually assign a beta tester to a build.
     ///
     /// - Parameters:
-    ///   - betaTesterBuildsLinkages: A request containing the IDs of related resources.
-    ///   - id: (Required) An opaque resource ID that uniquely identifies the resource.
+    ///   - id: An opaque resource ID that uniquely identifies the resource.
+    ///   - buildIds: Array of opaque resource ID that uniquely identifies the resources.
     public static func assign(
         betaTesterWithId id: String,
         toBuildsWithIds buildIds: [String]) -> APIEndpoint {

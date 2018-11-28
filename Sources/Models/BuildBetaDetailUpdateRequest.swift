@@ -17,7 +17,7 @@ public struct BuildBetaDetailUpdateRequest: Codable {
         data = .init(attributes: .init(autoNotifyEnabled: autoNotifyEnabled), id: id)
     }
     
-    /// (Required) The resource data.
+    /// The resource data.
     public let data: BuildBetaDetailUpdateRequest.Data
     
     public struct Data: Codable {
@@ -25,10 +25,10 @@ public struct BuildBetaDetailUpdateRequest: Codable {
         /// The resource's attributes.
         public let attributes: BuildBetaDetailUpdateRequest.Data.Attributes?
     
-        /// (Required) The opaque resource ID that uniquely identifies the resource.
+        /// The opaque resource ID that uniquely identifies the resource.
         public let `id`: String
     
-        /// (Required) The resource type.Value: buildBetaDetails
+        /// The resource type.Value: buildBetaDetails
         public let type: String = "buildBetaDetails"
     }
 }

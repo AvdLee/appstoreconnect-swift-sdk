@@ -13,7 +13,8 @@ extension APIEndpoint where T == Void {
     /// Remove an individually assigned beta tester's ability to test a build.
     ///
     /// - Parameters:
-    ///   - id: (Required) An opaque resource ID that uniquely identifies the resource.
+    ///   - id: An opaque resource ID that uniquely identifies the resource.
+    ///   - betaGroupIds: Array of opaque resource ID that uniquely identifies the resources.
     public static func unassign(
         betaTesterWithId id: String,
         fromBuildsWithIds buildIds: [String]) -> APIEndpoint {

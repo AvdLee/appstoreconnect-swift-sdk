@@ -16,19 +16,19 @@ public struct ErrorResponse: Error, Decodable {
     /// The details about one error that is returned when an API request is not successful.
     public struct Errors: Decodable {
     
-        /// (Required) A machine-readable code indicating the type of error. The code is a hierarchical value with levels of specificity separated by the '.' character. This value is parseable for programmatic error handling in code.
+        /// A machine-readable code indicating the type of error. The code is a hierarchical value with levels of specificity separated by the '.' character. This value is parseable for programmatic error handling in code.
         public let code: String
     
-        /// (Required) The HTTP status code of the error. This status code usually matches the response's status code; however, if the request produces multiple errors, these two codes may differ.
+        /// The HTTP status code of the error. This status code usually matches the response's status code; however, if the request produces multiple errors, these two codes may differ.
         public let status: String
     
         /// The unique ID of a specific instance of an error, request, and response. Use this ID when providing feedback to or debugging issues with Apple.
         public let `id`: String?
     
-        /// (Required) A summary of the error. Do not use this field for programmatic error handling.
+        /// A summary of the error. Do not use this field for programmatic error handling.
         public let title: String
     
-        /// (Required) A detailed explanation of the error. Do not use this field for programmatic error handling.
+        /// A detailed explanation of the error. Do not use this field for programmatic error handling.
         public let detail: String
     
         /// One of two possible types of values: source.parameter, provided when a query parameter produced the error, or source.JsonPointer, provided when a problem with the entity produced the error.￼

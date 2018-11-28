@@ -13,16 +13,16 @@ public struct AppEncryptionDeclaration: Codable {
     /// The resource's attributes.
     public let attributes: AppEncryptionDeclaration.Attributes?
 
-    /// (Required) The opaque resource ID that uniquely identifies the resource.
+    /// The opaque resource ID that uniquely identifies the resource.
     public let `id`: String
 
     /// Navigational links to related data and included resource types and IDs.
     public let relationships: AppEncryptionDeclaration.Relationships?
 
-    /// (Required) The resource type.Value: appEncryptionDeclarations
+    /// The resource type.Value: appEncryptionDeclarations
     public let type: String = "appEncryptionDeclarations"
 
-    /// (Required) Navigational links that include the self-link.
+    /// Navigational links that include the self-link.
     public let links: ResourceLinks<AppEncryptionDeclarationResponse>
 
     /// Attributes that describe a resource.
@@ -105,10 +105,10 @@ extension AppEncryptionDeclaration.Relationships.App {
     
     public struct Data: Codable {
     
-        /// (Required) The opaque resource ID that uniquely identifies the resource.
+        /// The opaque resource ID that uniquely identifies the resource.
         public let `id`: String
     
-        /// (Required) The resource type.Value: apps
+        /// The resource type.Value: apps
         public let type: String = "apps"
     }
     
@@ -127,10 +127,10 @@ extension AppEncryptionDeclaration.Relationships.Builds {
     
     public struct Data: Codable {
     
-        /// (Required) The opaque resource ID that uniquely identifies the resource.
+        /// The opaque resource ID that uniquely identifies the resource.
         public let `id`: String
     
-        /// (Required) The resource type.Value: builds
+        /// The resource type.Value: builds
         public let type: String = "builds"
     }
     

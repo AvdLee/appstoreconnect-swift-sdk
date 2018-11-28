@@ -22,18 +22,18 @@ public struct BetaBuildLocalizationCreateRequest: Codable {
             relationships: .init(build: .init(data: .init(id: buildId))))
     }
     
-    /// (Required) The resource data.
+    /// The resource data.
     public let data: BetaBuildLocalizationCreateRequest.Data
     
     public struct Data: Codable {
     
-        /// (Required) The resource's attributes.
+        /// The resource's attributes.
         public let attributes: BetaBuildLocalizationCreateRequest.Data.Attributes
     
-        /// (Required) Navigational links to related data and included resource types and IDs.
+        /// Navigational links to related data and included resource types and IDs.
         public let relationships: BetaBuildLocalizationCreateRequest.Data.Relationships
     
-        /// (Required) The resource type.Value: betaBuildLocalizations
+        /// The resource type.Value: betaBuildLocalizations
         public let type: String = "betaBuildLocalizations"
     }
 }
@@ -43,7 +43,7 @@ extension BetaBuildLocalizationCreateRequest.Data {
     /// Attributes that describe a resource.
     public struct Attributes: Codable {
     
-        /// (Required) The specified locale. Refer to Table 1 for possible values.
+        /// The specified locale. Refer to Table 1 for possible values.
         public let locale: String
     
         /// A field that describes changes and additions to a build and indicates features you would like your users to test.
@@ -72,10 +72,10 @@ extension BetaBuildLocalizationCreateRequest.Data.Relationships.Build {
     
     public struct Data: Codable {
     
-        /// (Required) The opaque resource ID that uniquely identifies the resource.
+        /// The opaque resource ID that uniquely identifies the resource.
         public let `id`: String
     
-        /// (Required) The resource type.Value: builds
+        /// The resource type.Value: builds
         public let type: String = "builds"
     }
 }

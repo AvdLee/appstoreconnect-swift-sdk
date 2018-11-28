@@ -12,7 +12,7 @@ extension APIEndpoint where T == BetaAppReviewDetailResponse {
     /// Get the beta app review details for a specific app.
     ///
     /// - Parameters:
-    ///   - id: (Required) An opaque resource ID that uniquely identifies the resource.
+    ///   - id: An opaque resource ID that uniquely identifies the resource.
     ///   - fields: Fields to return for included related types.
     public static func betaAppReviewDetailsResource(
         ofAppWithId id: String,

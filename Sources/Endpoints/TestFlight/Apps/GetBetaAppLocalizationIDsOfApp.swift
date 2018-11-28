@@ -12,7 +12,7 @@ extension APIEndpoint where T == AppBetaAppLocalizationsLinkagesResponse {
     /// Get a list of beta app localization resource IDs associated with a specific app.
     ///
     /// - Parameters:
-    ///   - id: (Required) An opaque resource ID that uniquely identifies the resource.
+    ///   - id: An opaque resource ID that uniquely identifies the resource.
     ///   - limit: Number of resources to return.
     public static func betaAppLocalizationIDs(ofAppWithId id: String, limit: Int? = nil) -> APIEndpoint {
         var parameters = [String: Any]()

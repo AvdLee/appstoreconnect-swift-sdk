@@ -12,7 +12,7 @@ extension APIEndpoint where T == BetaTesterResponse {
     /// Get a specific beta tester.
     ///
     /// - Parameters:
-    ///   - id: (Required) An opaque resource ID that uniquely identifies the resource.
+    ///   - id: An opaque resource ID that uniquely identifies the resource.
     ///   - fields: Fields to return for included related types.
     ///   - include: Relationship data to include in the response.
     ///   - limit: Number of included related resources to return.

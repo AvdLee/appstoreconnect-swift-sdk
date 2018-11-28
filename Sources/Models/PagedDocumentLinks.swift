@@ -16,6 +16,6 @@ public struct PagedDocumentLinks: Codable {
     /// The link to the next page of documents.
     public let next: URL?
 
-    /// (Required) The link that produced the current document.
+    /// The link that produced the current document.
     public let `self`: URL
 }

@@ -10,10 +10,10 @@ import Foundation
 /// A response containing a list of related resource IDs.
 public struct AppPreReleaseVersionsLinkagesResponse: Codable {
 
-    /// (Required) The object types and IDs of the related resources.
+    /// The object types and IDs of the related resources.
     public let data: [AppPreReleaseVersionsLinkagesResponse.Data]
 
-    /// (Required) Navigational links including the self-link and links to the related data.
+    /// Navigational links including the self-link and links to the related data.
     public let links: PagedDocumentLinks
 
     /// Paging information.
@@ -21,10 +21,10 @@ public struct AppPreReleaseVersionsLinkagesResponse: Codable {
     
     public struct Data: Codable {
     
-        /// (Required) The opaque resource ID that uniquely identifies the resource.
+        /// The opaque resource ID that uniquely identifies the resource.
         public let `id`: String
     
-        /// (Required) The resource type.Value: preReleaseVersions
+        /// The resource type.Value: preReleaseVersions
         public let type: String = "preReleaseVersions"
     }
 }

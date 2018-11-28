@@ -16,15 +16,15 @@ public struct BetaGroupBuildsLinkagesRequest: Codable {
         data = buildIds.map({ Data(id: $0) })
     }
 
-    /// (Required) The types and IDs of related resources.
+    /// The types and IDs of related resources.
     public let data: [BetaGroupBuildsLinkagesRequest.Data]
     
     public struct Data: Codable {
     
-        /// (Required) The opaque resource ID that uniquely identifies the resource.
+        /// The opaque resource ID that uniquely identifies the resource.
         public let `id`: String
     
-        /// (Required) The resource type.Value: builds
+        /// The resource type.Value: builds
         public let type: String = "builds"
     }
 }

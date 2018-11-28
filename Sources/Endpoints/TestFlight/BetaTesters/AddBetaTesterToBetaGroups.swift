@@ -13,8 +13,8 @@ extension APIEndpoint where T == Void {
     /// Add one or more beta testers to a specific beta group.
     ///
     /// - Parameters:
-    ///   - betaTesterBetaGroupsLinkages: A request containing the IDs of related resources.
-    ///   - id: (Required) An opaque resource ID that uniquely identifies the resource.
+    ///   - id: An opaque resource ID that uniquely identifies the resource.
+    ///   - betaGroupIds: Array of opaque resource ID that uniquely identifies the resources.
     public static func add(
         betaTesterWithId id: String,
         toBetaGroupWithId betaGroupIds: [String]) -> APIEndpoint {

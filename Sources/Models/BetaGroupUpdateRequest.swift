@@ -30,7 +30,7 @@ public struct BetaGroupUpdateRequest: Codable {
             id: id)
     }
     
-    /// (Required) The resource data.
+    /// The resource data.
     public let data: BetaGroupUpdateRequest.Data
     
     public struct Data: Codable {
@@ -38,10 +38,10 @@ public struct BetaGroupUpdateRequest: Codable {
         /// The resource's attributes.
         public let attributes: BetaGroupUpdateRequest.Data.Attributes?
     
-        /// (Required) The opaque resource ID that uniquely identifies the resource.
+        /// The opaque resource ID that uniquely identifies the resource.
         public let `id`: String
     
-        /// (Required) The resource type.Value: betaGroups
+        /// The resource type.Value: betaGroups
         public let type: String = "betaGroups"
     }
 }

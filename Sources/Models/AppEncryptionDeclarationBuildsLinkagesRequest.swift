@@ -17,15 +17,15 @@ public struct AppEncryptionDeclarationBuildsLinkagesRequest: Codable {
         data = buildIds.map({ Data(id: $0) })
     }
     
-    /// (Required) The object types and IDs of the related resources.
+    /// The object types and IDs of the related resources.
     public let data: [AppEncryptionDeclarationBuildsLinkagesRequest.Data]
     
     public struct Data: Codable {
     
-        /// (Required) The opaque resource ID that uniquely identifies the resource.
+        /// The opaque resource ID that uniquely identifies the resource.
         public let `id`: String
     
-        /// (Required) The resource type.Value: builds
+        /// The resource type.Value: builds
         public let type: String = "builds"
     }
 }

@@ -10,13 +10,13 @@ import Foundation
 /// A response containing a single resource.
 public struct PrereleaseVersionResponse: Codable {
 
-    /// (Required) The resource data.
+    /// The resource data.
     public let data: PrereleaseVersion
 
     /// The requested relationship data.￼
     ///  Possible types: Build, App
     public let include: [PreReleaseVersionRelationship]?
 
-    /// (Required) Navigational links that include the self-link.
+    /// Navigational links that include the self-link.
     public let links: DocumentLinks
 }
