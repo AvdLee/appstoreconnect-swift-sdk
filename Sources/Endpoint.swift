@@ -20,7 +20,7 @@ public struct APIEndpoint<T> {
     /// The parameters to send with the request. Can be `nil`.
     let parameters: [String: Any]?
     
-    /// The parameters to send with the request. Can be `nil`.
+    /// The body to send with the request. Can be `nil`.
     let body: Data?
     
     init(path: String, method: Alamofire.HTTPMethod = .get, parameters: [String: Any]? = nil, body: Data? = nil) {
@@ -41,11 +41,8 @@ extension APIEndpoint: URLRequestConvertible {
     
     /// Generates a request based on the current endpoint.
     public func asURLRequest() throws -> URLRequest {
-        var urlRequest = try URLRequest(url: url, method: method)
+        var urlRequest = try URLEncoding().encode(URLRequest(url: url, method: method), with: parameters)
         if let body = body {
-            if urlRequest.value(forHTTPHeaderField: "Content-Type") == nil {
-                urlRequest.setValue("application/json", forHTTPHeaderField: "Content-Type")
-            }
             urlRequest.httpBody = body
         }
         return urlRequest
