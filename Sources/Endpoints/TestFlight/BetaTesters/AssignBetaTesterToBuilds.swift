@@ -4,10 +4,11 @@
 //
 //  Created by Pascal Edmond on 26/11/2018.
 //
-    
+
+import Foundation
 import Alamofire
 
-extension APIEndpoint {
+extension APIEndpoint where T == Void {
 
     /// Individually assign a beta tester to a build.
     ///
@@ -15,9 +16,10 @@ extension APIEndpoint {
     ///   - id: (Required) An opaque resource ID that uniquely identifies the resource.
     public static func assign(
         betaTester: BetaTesterBuildsLinkagesRequest,
-        toBuildWithId id: String) -> APIEndpoint<ErrorResponse> {
-        return APIEndpoint<ErrorResponse>(path: "betaTesters/\(id)/relationships/builds",
+        toBuildWithId id: String) -> APIEndpoint {
+        return APIEndpoint(path: "betaTesters/\(id)/relationships/builds",
             method: .post,
-            parameters: nil)
+            parameters: nil,
+            body: try? JSONEncoder().encode(betaTester))
     }
 }

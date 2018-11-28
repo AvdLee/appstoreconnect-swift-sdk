@@ -1,5 +1,5 @@
 //
-//  ReadBetaTesterInformation.swift
+//  GetBetaTester.swift
 //  AppStoreConnect-Swift-SDK
 //
 //  Created by Pascal Edmond on 26/11/2018.
@@ -7,7 +7,7 @@
     
 import Alamofire
 
-extension APIEndpoint {
+extension APIEndpoint where T == BetaTesterResponse {
 
     /// Get a specific beta tester.
     ///
@@ -18,21 +18,21 @@ extension APIEndpoint {
     ///   - limit: Number of included related resources to return.
     public static func betaTester(
         withId id: String,
-        fields: [ReadBetaTesterInformation.Field]? = nil,
-        include: [ReadBetaTesterInformation.Include]? = nil,
-        limit: [ReadBetaTesterInformation.Limit]? = nil) -> APIEndpoint<BetaTesterResponse> {
+        fields: [GetBetaTester.Field]? = nil,
+        include: [GetBetaTester.Include]? = nil,
+        limit: [GetBetaTester.Limit]? = nil) -> APIEndpoint {
         var parameters = [String: Any]()
         if let fields = fields { parameters.add(fields) }
         if let include = include { parameters.add(include) }
         if let limit = limit { parameters.add(limit) }
-        return APIEndpoint<BetaTesterResponse>(
+        return APIEndpoint(
             path: "betaTesters/\(id)",
             method: .get,
             parameters: parameters)
     }
 }
 
-public struct ReadBetaTesterInformation {
+public struct GetBetaTester {
 
     /// Fields to return for included related types.
     public enum Field: NestableQueryParameter {
@@ -84,7 +84,7 @@ public struct ReadBetaTesterInformation {
     }
 }
 
-extension ReadBetaTesterInformation.Field {
+extension GetBetaTester.Field {
     
     public enum App: String, CaseIterable, NestableQueryParameter {
         case betaAppLocalizations, betaAppReviewDetail, betaGroups, betaLicenseAgreement, betaTesters, builds, bundleId, name, preReleaseVersions, primaryLocale, sku

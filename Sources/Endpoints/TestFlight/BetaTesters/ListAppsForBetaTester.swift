@@ -7,7 +7,7 @@
     
 import Alamofire
 
-extension APIEndpoint {
+extension APIEndpoint where T == AppsResponse {
 
     /// Get a list of apps that a beta tester can test.
     ///
@@ -15,14 +15,14 @@ extension APIEndpoint {
     ///   - id: (Required) An opaque resource ID that uniquely identifies the resource.
     ///   - limit: Number of resources to return.
     ///   - fields: Fields to return for included related types.
-    public static func listAppsForBetaTester(
+    public static func appsForBetaTester(
         withId id: String,
         limit: Int? = nil,
-        fields: [ListAppsForBetaTester.Field]? = nil) -> APIEndpoint<AppsResponse> {
+        fields: [ListAppsForBetaTester.Field]? = nil) -> APIEndpoint {
         var parameters = [String: Any]()
         if let limit = limit { parameters["limit"] = limit }
         if let fields = fields { parameters.add(fields) }
-        return APIEndpoint<AppsResponse>(
+        return APIEndpoint(
             path: "betaTesters/\(id)/apps",
             method: .get,
             parameters: parameters)

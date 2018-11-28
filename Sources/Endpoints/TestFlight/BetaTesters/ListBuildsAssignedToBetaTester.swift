@@ -7,7 +7,7 @@
     
 import Alamofire
 
-extension APIEndpoint {
+extension APIEndpoint where T == BuildsResponse {
 
     /// Get a list of builds individually assigned to a specific beta tester.
     ///
@@ -15,14 +15,14 @@ extension APIEndpoint {
     ///   - id: (Required) An opaque resource ID that uniquely identifies the resource.
     ///   - limit: Number of resources to return.
     ///   - fields: Fields to return for included related types.
-    public static func listBuildsAssignedToBetaTester(
+    public static func buildsAssignedToBetaTester(
         withId id: String,
         limit: Int? = nil,
-        fields: [ListBuildsAssignedToBetaTester.Field]? = nil) -> APIEndpoint<BuildsResponse> {
+        fields: [ListBuildsAssignedToBetaTester.Field]? = nil) -> APIEndpoint {
         var parameters = [String: Any]()
         if let limit = limit { parameters["limit"] = limit }
         if let fields = fields { parameters.add(fields) }
-        return APIEndpoint<BuildsResponse>(
+        return APIEndpoint(
             path: "betaTesters/\(id)/builds",
             method: .get,
             parameters: parameters)

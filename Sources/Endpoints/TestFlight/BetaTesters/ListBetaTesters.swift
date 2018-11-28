@@ -7,7 +7,7 @@
     
 import Alamofire
 
-extension APIEndpoint {
+extension APIEndpoint where T == BetaTestersResponse {
 
     /// Find and list beta testers for all apps, builds, and beta groups.
     ///
@@ -17,19 +17,19 @@ extension APIEndpoint {
     ///   - include: Relationship data to include in the response.
     ///   - limit: Number of resources to return.
     ///   - sort: Attributes by which to sort.
-    public static func listBetaTesters(
+    public static func betaTesters(
         fields: [ListBetaTesters.Field]? = nil,
         filter: [ListBetaTesters.Filter]? = nil,
         include: [ListBetaTesters.Include]? = nil,
         limit: [ListBetaTesters.Limit]? = nil,
-        sort: [ListBetaTesters.Sort]? = nil) -> APIEndpoint<BetaTestersResponse> {
+        sort: [ListBetaTesters.Sort]? = nil) -> APIEndpoint {
         var parameters = [String: Any]()
         if let fields = fields { parameters.add(fields) }
         if let filter = filter { parameters.add(filter) }
         if let include = include { parameters.add(include) }
         if let limit = limit { parameters.add(limit) }
         if let sort = sort { parameters.add(sort) }
-        return APIEndpoint<BetaTestersResponse>(path: "betaTesters", method: .get, parameters: parameters)
+        return APIEndpoint(path: "betaTesters", method: .get, parameters: parameters)
     }
 }
 
