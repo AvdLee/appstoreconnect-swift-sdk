@@ -20,6 +20,6 @@ public struct BuildAppEncryptionDeclarationLinkageRequest: Codable {
         public let `id`: String
     
         /// (Required) The resource type.Value: appEncryptionDeclarations
-        public let type: String = " appEncryptionDeclarations"
+        public let type: String = "appEncryptionDeclarations"
     }
 }

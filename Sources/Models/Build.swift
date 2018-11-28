@@ -177,7 +177,7 @@ extension Build.Relationships.App {
         public let `id`: String
     
         /// (Required) The resource type.Value: apps
-        public let type: String = " apps"
+        public let type: String = "apps"
     }
 }
 
@@ -203,7 +203,7 @@ extension Build.Relationships.AppEncryptionDeclaration {
         public let `id`: String
     
         /// (Required) The resource type.Value: appEncryptionDeclarations
-        public let type: String = " appEncryptionDeclarations"
+        public let type: String = "appEncryptionDeclarations"
     }
 }
 
@@ -229,7 +229,7 @@ extension Build.Relationships.BetaAppReviewSubmission {
         public let `id`: String
     
         /// (Required) The resource type.Value: betaAppReviewSubmissions
-        public let type: String = " betaAppReviewSubmissions"
+        public let type: String = "betaAppReviewSubmissions"
     }
 }
 
@@ -255,7 +255,7 @@ extension Build.Relationships.BetaBuildLocalizations {
         public let `id`: String
     
         /// (Required) The resource type.Value: betaBuildLocalizations
-        public let type: String = " betaBuildLocalizations"
+        public let type: String = "betaBuildLocalizations"
     }
 }
 
@@ -281,7 +281,7 @@ extension Build.Relationships.BetaGroups {
         public let `id`: String
     
         /// (Required) The resource type.Value: betaGroups
-        public let type: String = " betaGroups"
+        public let type: String = "betaGroups"
     }
 }
 
@@ -307,7 +307,7 @@ extension Build.Relationships.BuildBetaDetail {
         public let `id`: String
     
         /// (Required) The resource type.Value: buildBetaDetails
-        public let type: String = " buildBetaDetails"
+        public let type: String = "buildBetaDetails"
     }
 }
 
@@ -333,7 +333,7 @@ extension Build.Relationships.IndividualTesters {
         public let `id`: String
     
         /// (Required) The resource type.Value: betaTesters
-        public let type: String = " betaTesters"
+        public let type: String = "betaTesters"
     }
 }
 
@@ -359,7 +359,7 @@ extension Build.Relationships.PreReleaseVersion {
         public let `id`: String
     
         /// (Required) The resource type.Value: preReleaseVersions
-        public let type: String = " preReleaseVersions"
+        public let type: String = "preReleaseVersions"
     }
 }
 

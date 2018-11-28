@@ -52,7 +52,7 @@ public struct BetaGroupCreateRequest: Codable {
         public let relationships: BetaGroupCreateRequest.Data.Relationships
     
         /// (Required) The resource type.Value: betaGroups
-        public let type: String = " betaGroups"
+        public let type: String = "betaGroups"
     }
 }
 
@@ -118,7 +118,7 @@ extension BetaGroupCreateRequest.Data.Relationships.App {
         public let `id`: String
     
         /// (Required) The resource type.Value: apps
-        public let type: String = " apps"
+        public let type: String = "apps"
     }
 }
 
@@ -131,7 +131,7 @@ extension BetaGroupCreateRequest.Data.Relationships.BetaTesters {
         public let `id`: String
     
         /// (Required) The resource type.Value: betaTesters
-        public let type: String = " betaTesters"
+        public let type: String = "betaTesters"
     }
 }
 
@@ -144,6 +144,6 @@ extension BetaGroupCreateRequest.Data.Relationships.Builds {
         public let `id`: String
     
         /// (Required) The resource type.Value: builds
-        public let type: String = " builds"
+        public let type: String = "builds"
     }
 }

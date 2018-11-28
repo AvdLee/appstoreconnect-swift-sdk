@@ -25,7 +25,7 @@ public struct BetaAppReviewSubmissionCreateRequest: Codable {
         public let relationships: BetaAppReviewSubmissionCreateRequest.Data.Relationships
     
         /// (Required) The resource type.Value: betaAppReviewSubmissions
-        public let type: String = " betaAppReviewSubmissions"
+        public let type: String = "betaAppReviewSubmissions"
     }
 }
 
@@ -58,6 +58,6 @@ extension BetaAppReviewSubmissionCreateRequest.Data.Relationships.Build {
         public let `id`: String
     
         /// (Required) The resource type.Value: builds
-        public let type: String = " builds"
+        public let type: String = "builds"
     }
 }

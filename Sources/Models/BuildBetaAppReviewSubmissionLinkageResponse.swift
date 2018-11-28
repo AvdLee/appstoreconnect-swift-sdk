@@ -23,6 +23,6 @@ public struct BuildBetaAppReviewSubmissionLinkageResponse: Codable {
         public let `id`: String
     
         /// (Required) The resource type.Value: betaAppReviewSubmissions
-        public let type: String = " betaAppReviewSubmissions"
+        public let type: String = "betaAppReviewSubmissions"
     }
 }

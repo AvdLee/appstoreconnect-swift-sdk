@@ -103,7 +103,7 @@ extension BetaTester.Relationships.Apps {
         public let `id`: String
     
         /// string (Required)Value: apps
-        public let type: String = " apps"
+        public let type: String = "apps"
     }
     
     public struct Links: Codable {
@@ -125,7 +125,7 @@ extension BetaTester.Relationships.BetaGroups {
         public let `id`: String
     
         /// string (Required)Value: betaGroups
-        public let type: String = " betaGroups"
+        public let type: String = "betaGroups"
     }
     
     public struct Links: Codable {
@@ -147,7 +147,7 @@ extension BetaTester.Relationships.Builds {
         public let `id`: String
     
         /// string (Required)Value: builds
-        public let type: String = " builds"
+        public let type: String = "builds"
     }
     
     public struct Links: Codable {

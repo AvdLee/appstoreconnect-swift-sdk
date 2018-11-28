@@ -79,7 +79,7 @@ extension PrereleaseVersion.Relationships.App {
         public let `id`: String
     
         /// (Required) The resource type.Value: apps
-        public let type: String = " apps"
+        public let type: String = "apps"
     }
     
     public struct Links: Codable {
@@ -101,7 +101,7 @@ extension PrereleaseVersion.Relationships.Builds {
         public let `id`: String
     
         /// (Required) The resource type.Value: builds
-        public let type: String = " builds"
+        public let type: String = "builds"
     }
     
     public struct Links: Codable {

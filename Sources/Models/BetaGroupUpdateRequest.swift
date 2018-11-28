@@ -42,7 +42,7 @@ public struct BetaGroupUpdateRequest: Codable {
         public let `id`: String
     
         /// (Required) The resource type.Value: betaGroups
-        public let type: String = " betaGroups"
+        public let type: String = "betaGroups"
     }
 }
 

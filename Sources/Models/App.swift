@@ -157,7 +157,7 @@ extension App.Relationships.BetaAppLocalizations {
         public let `id`: String
     
         /// (Required) The resource type.Value: betaAppLocalizations
-        public let type: String = " betaAppLocalizations"
+        public let type: String = "betaAppLocalizations"
     }
     
     public struct Links: Codable {
@@ -179,7 +179,7 @@ extension App.Relationships.BetaAppReviewDetail {
         public let `id`: String
     
         /// (Required) The resource type.Value: betaAppReviewDetails
-        public let type: String = " betaAppReviewDetails"
+        public let type: String = "betaAppReviewDetails"
     }
     
     public struct Links: Codable {
@@ -201,7 +201,7 @@ extension App.Relationships.BetaGroups {
         public let `id`: String
     
         /// (Required) The resource type.Value: betaGroups
-        public let type: String = " betaGroups"
+        public let type: String = "betaGroups"
     }
     
     public struct Links: Codable {
@@ -223,7 +223,7 @@ extension App.Relationships.BetaLicenseAgreement {
         public let `id`: String
     
         /// (Required) The resource type.Value: betaLicenseAgreements
-        public let type: String = " betaLicenseAgreements"
+        public let type: String = "betaLicenseAgreements"
     }
     
     public struct Links: Codable {
@@ -245,7 +245,7 @@ extension App.Relationships.BetaTesters {
         public let `id`: String
     
         /// (Required) The resource type.Value: betaTesters
-        public let type: String = " betaTesters"
+        public let type: String = "betaTesters"
     }
     
     public struct Links: Codable {
@@ -267,7 +267,7 @@ extension App.Relationships.Builds {
         public let `id`: String
     
         /// (Required) The resource type.Value: builds
-        public let type: String = " builds"
+        public let type: String = "builds"
     }
     
     public struct Links: Codable {
@@ -289,7 +289,7 @@ extension App.Relationships.PreReleaseVersions {
         public let `id`: String
     
         /// (Required) The resource type.Value: preReleaseVersions
-        public let type: String = " preReleaseVersions"
+        public let type: String = "preReleaseVersions"
     }
     
     public struct Links: Codable {

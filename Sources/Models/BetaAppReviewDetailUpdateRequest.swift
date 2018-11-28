@@ -54,7 +54,7 @@ public struct BetaAppReviewDetailUpdateRequest: Codable {
         public let `id`: String
     
         /// (Required) The resource type.Value: betaAppReviewDetails
-        public let type: String = " betaAppReviewDetails"
+        public let type: String = "betaAppReviewDetails"
     }
 }
 

@@ -76,7 +76,7 @@ extension BetaAppLocalization.Relationships.App {
         public let `id`: String
     
         /// (Required) The resource type.Value: apps
-        public let type: String = " apps"
+        public let type: String = "apps"
     }
     
     public struct Links: Codable {
