@@ -22,6 +22,7 @@
 		318824F321AD409500676DA7 /* ListBetaGroupsForAppTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 318824E621AD409500676DA7 /* ListBetaGroupsForAppTests.swift */; };
 		318824F421AD409500676DA7 /* GetBetaLicenseAgreementOfAppTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 318824E721AD409500676DA7 /* GetBetaLicenseAgreementOfAppTests.swift */; };
 		318824F521AD409500676DA7 /* GetPrereleaseVersionIDsForAppTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 318824E821AD409500676DA7 /* GetPrereleaseVersionIDsForAppTests.swift */; };
+		3188254E21ADAC2900676DA7 /* RemoveBetaTestersFromGroupsAndBuildsOfAppTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3188254D21ADAC2900676DA7 /* RemoveBetaTestersFromGroupsAndBuildsOfAppTests.swift */; };
 		31F929E2219C6AC40061DEA5 /* JWTRequestsAuthenticatorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31F929E0219C6AC40061DEA5 /* JWTRequestsAuthenticatorTests.swift */; };
 		31F929E3219C6AC40061DEA5 /* JWTTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31F929E1219C6AC40061DEA5 /* JWTTests.swift */; };
 		607FACD61AFB9204008FA782 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 607FACD51AFB9204008FA782 /* AppDelegate.swift */; };
@@ -60,6 +61,7 @@
 		318824E621AD409500676DA7 /* ListBetaGroupsForAppTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ListBetaGroupsForAppTests.swift; sourceTree = "<group>"; };
 		318824E721AD409500676DA7 /* GetBetaLicenseAgreementOfAppTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GetBetaLicenseAgreementOfAppTests.swift; sourceTree = "<group>"; };
 		318824E821AD409500676DA7 /* GetPrereleaseVersionIDsForAppTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GetPrereleaseVersionIDsForAppTests.swift; sourceTree = "<group>"; };
+		3188254D21ADAC2900676DA7 /* RemoveBetaTestersFromGroupsAndBuildsOfAppTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RemoveBetaTestersFromGroupsAndBuildsOfAppTests.swift; sourceTree = "<group>"; };
 		31F929E0219C6AC40061DEA5 /* JWTRequestsAuthenticatorTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JWTRequestsAuthenticatorTests.swift; sourceTree = "<group>"; };
 		31F929E1219C6AC40061DEA5 /* JWTTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JWTTests.swift; sourceTree = "<group>"; };
 		607FACD01AFB9204008FA782 /* AppStoreConnect-Swift-SDK_Example.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "AppStoreConnect-Swift-SDK_Example.app"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -134,6 +136,7 @@
 				318824E621AD409500676DA7 /* ListBetaGroupsForAppTests.swift */,
 				318824E321AD409400676DA7 /* ListBuildsOfAppTests.swift */,
 				318824E421AD409400676DA7 /* ListPrereleaseVersionsForAppTests.swift */,
+				3188254D21ADAC2900676DA7 /* RemoveBetaTestersFromGroupsAndBuildsOfAppTests.swift */,
 			);
 			path = Apps;
 			sourceTree = "<group>";
@@ -462,6 +465,7 @@
 				318824F121AD409500676DA7 /* ListPrereleaseVersionsForAppTests.swift in Sources */,
 				318824EC21AD409500676DA7 /* GetBetaGroupIDsForAppTests.swift in Sources */,
 				318824F221AD409500676DA7 /* GetBuildIDsOfAppTests.swift in Sources */,
+				3188254E21ADAC2900676DA7 /* RemoveBetaTestersFromGroupsAndBuildsOfAppTests.swift in Sources */,
 				318824EE21AD409500676DA7 /* ListBetaAppLocalizationsOfAppTests.swift in Sources */,
 				318824EB21AD409500676DA7 /* GetBetaAppReviewDetailsResourceIDForAppTests.swift in Sources */,
 				318824F421AD409500676DA7 /* GetBetaLicenseAgreementOfAppTests.swift in Sources */,
