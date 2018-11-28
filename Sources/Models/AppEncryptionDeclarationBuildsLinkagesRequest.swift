@@ -11,6 +11,12 @@ import Foundation
 /// A response containing a list of related resource IDs.
 public struct AppEncryptionDeclarationBuildsLinkagesRequest: Codable {
 
+    /// - Parameters:
+    ///   - buildIds: Array of opaque resource ID that uniquely identifies the resources.
+    public init(_ buildIds: [String]) {
+        data = buildIds.map({ Data(id: $0) })
+    }
+    
     /// (Required) The object types and IDs of the related resources.
     public let data: [AppEncryptionDeclarationBuildsLinkagesRequest.Data]
     

@@ -10,6 +10,12 @@ import Foundation
 /// A request containing the IDs of related resources.
 public struct BetaTesterBuildsLinkagesRequest: Codable {
 
+    /// - Parameters:
+    ///   - buidIds: Array of opaque resource ID that uniquely identifies the resources.
+    public init(_ buildIds: [String]) {
+        data = buildIds.map({ Data(id: $0) })
+    }
+
     /// (Required) The types and IDs of related resources.
     public let data: [BetaTesterBuildsLinkagesRequest.Data]
     
