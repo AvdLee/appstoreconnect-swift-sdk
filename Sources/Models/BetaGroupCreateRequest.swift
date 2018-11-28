@@ -18,7 +18,7 @@ public struct BetaGroupCreateRequest: Codable {
     ///   - publicLinkLimitEnabled: A Boolean value that limits the number of testers who can join the beta group using the public link.
     ///   - betaTesterIds: Array of opaque resource ID that uniquely identifies the resources.
     ///   - buildIds: Array of opaque resource ID that uniquely identifies the resources.
-    public init(appId: String,
+    init(appId: String,
                 name: String,
                 publicLinkEnabled: Bool? = nil,
                 publicLinkLimit: Int? = nil,

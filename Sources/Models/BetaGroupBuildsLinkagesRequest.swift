@@ -12,7 +12,7 @@ public struct BetaGroupBuildsLinkagesRequest: Codable {
 
     /// - Parameters:
     ///   - buildIds: Array of opaque resource ID that uniquely identifies the resources.
-    public init(_ buildIds: [String]) {
+    init(_ buildIds: [String]) {
         data = buildIds.map({ Data(id: $0) })
     }
 

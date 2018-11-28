@@ -16,7 +16,7 @@ public struct UserUpdateRequest: Codable {
     ///   - provisioningAllowed: A Boolean value that indicates the user's specified role allows access to the provisioning functionality on the Apple Developer website.
     ///   - roles: Assigned user roles that determine the user's access to sections of App Store Connect and tasks they can perform.
     ///   - appsVisibleIds: Array of opaque resource ID that uniquely identifies the resources.
-    public init(id: String,
+    init(id: String,
                 allAppsVisible: Bool? = nil,
                 provisioningAllowed: Bool? = nil,
                 roles: [UserRole]? = nil,

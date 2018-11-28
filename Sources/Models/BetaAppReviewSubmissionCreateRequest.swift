@@ -12,7 +12,7 @@ public struct BetaAppReviewSubmissionCreateRequest: Codable {
 
     /// - Parameters:
     ///   - buildId: The opaque resource ID that uniquely identifies the resource.
-    public init(buildId: String) {
+    init(buildId: String) {
         data = .init(relationships: .init(build: .init(data: .init(id: buildId))))
     }
 

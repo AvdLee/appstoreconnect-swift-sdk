@@ -14,7 +14,7 @@ public struct BuildUpdateRequest: Codable {
     ///   - id: The opaque resource ID that uniquely identifies the resource.
     ///   - appEncryptionDeclarationId: The opaque resource ID that uniquely identifies the resource.
     ///   - autoNotifyEnabled: A Boolean value that enables you to send test invitations to users automatically when the build is available to external groups.
-    public init(id: String,
+    init(id: String,
                 expired: Bool? = nil,
                 appEncryptionDeclarationId: String,
                 usesNonExemptEncryption: Bool? = nil) {

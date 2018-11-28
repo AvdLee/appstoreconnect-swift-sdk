@@ -12,7 +12,7 @@ public struct UserVisibleAppsLinkagesRequest: Codable {
 
     /// - Parameters:
     ///   - appIds: Array of opaque resource ID that uniquely identifies the resources.
-    public init(_ appIds: [String]) {
+    init(_ appIds: [String]) {
         data = appIds.map({ Data(id: $0) })
     }
 

@@ -13,7 +13,7 @@ public struct BetaBuildLocalizationUpdateRequest: Codable {
     /// - Parameters:
     ///   - id: The opaque resource ID that uniquely identifies the resource.
     ///   - whatsNew: A field that describes changes and additions to a build and indicates features you would like your users to test.
-    public init(id: String, whatsNew: String? = nil) {
+    init(id: String, whatsNew: String? = nil) {
         data = .init(attributes: .init(whatsNew: whatsNew), id: id)
     }
     

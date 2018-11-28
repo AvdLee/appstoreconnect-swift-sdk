@@ -17,7 +17,7 @@ public struct BetaAppLocalizationUpdateRequest: Codable {
     ///   - marketingUrl: A URL with information about your app. This URL is visible to testers in the TestFlight app
     ///   - privacyPolicyUrl= A URL that links to your company’s privacy policy. Privacy policies are recommended for all apps that collect user or device-related data or as otherwise required by law.
     ///   - tvOsPrivacyPolicy: Your company’s privacy policy. Privacy policies are recommended for all apps that collect user or device-related data, or as otherwise required by law.
-    public init(id: String,
+    init(id: String,
                 description: String? = nil,
                 feedbackEmail: String? = nil,
                 marketingUrl: String? = nil,

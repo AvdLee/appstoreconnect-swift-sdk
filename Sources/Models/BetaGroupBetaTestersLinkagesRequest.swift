@@ -12,7 +12,7 @@ public struct BetaGroupBetaTestersLinkagesRequest: Codable {
 
     /// - Parameters:
     ///   - betaTesterIds: Array of opaque resource ID that uniquely identifies the resources.
-    public init(_ betaTesterIds: [String]) {
+    init(_ betaTesterIds: [String]) {
         data = betaTesterIds.map({ Data(id: $0) })
     }
 

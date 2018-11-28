@@ -13,7 +13,7 @@ public struct BetaTesterInvitationCreateRequest: Codable {
     /// - Parameters:
     ///   - appId: The opaque resource ID that uniquely identifies the resource.
     ///   - betaTesterId: The opaque resource ID that uniquely identifies the resource.
-    public init(appId: String, betaTesterId: String) {
+    init(appId: String, betaTesterId: String) {
         data = .init(
             relationships: .init(
                 app: .init(data: .init(id: appId)),

@@ -18,7 +18,7 @@ public struct UserInvitationCreateRequest: Codable {
     ///   - allAppsVisible: A Boolean value that indicates whether a user has access to all apps available to the team.
     ///   - provisioningAllowed: A Boolean value that indicates the user's specified role allows access to the provisioning functionality on the Apple Developer website.
     ///   - appsVisibleIds: Array of opaque resource ID that uniquely identifies the resources.
-    public init(email: String,
+    init(email: String,
                 firstName: String,
                 lastName: String,
                 roles: [UserRole],

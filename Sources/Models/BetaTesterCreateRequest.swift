@@ -15,7 +15,7 @@ public struct BetaTesterCreateRequest: Codable {
     /// lastName: The beta tester's last name.
     /// betaGroupIds: Array of opaque resource ID that uniquely identifies the resources.
     /// buildIds: Array of opaque resource ID that uniquely identifies the resources.
-    public init(email: String,
+    init(email: String,
                 firstName: String? = nil,
                 lastName: String? = nil,
                 betaGroupIds: [String]? = nil,

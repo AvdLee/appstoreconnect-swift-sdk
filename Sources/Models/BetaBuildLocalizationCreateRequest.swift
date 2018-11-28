@@ -14,7 +14,7 @@ public struct BetaBuildLocalizationCreateRequest: Codable {
     ///   - buildId: The opaque resource ID that uniquely identifies the resource.
     ///   - locale: The specified locale. Refer to Table 1 for possible values.
     ///   - whatsNew: A field that describes changes and additions to a build and indicates features you would like your users to test.
-    public init(buildId: String, locale: String, whatsNew: String? = nil) {
+    init(buildId: String, locale: String, whatsNew: String? = nil) {
         data = .init(
             attributes: .init(
                 locale: locale,
