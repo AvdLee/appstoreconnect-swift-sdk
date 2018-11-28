@@ -11,7 +11,7 @@ import XCTest
 final class GetBuildIDsOfAppTests: XCTestCase {
     
     func testURLRequest() {
-        let endpoint = APIEndpoint.buildIDsOfApp(withId: "appId", limit: 1)
+        let endpoint = APIEndpoint.buildIDs(ofAppWithId: "appId", limit: 1)
         let request = try? endpoint.asURLRequest()
         XCTAssertEqual(request?.httpMethod, "GET")
         

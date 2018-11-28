@@ -11,8 +11,8 @@ import XCTest
 final class ListBuildsOfAppTests: XCTestCase {
     
     func testURLRequest() {
-        let endpoint = APIEndpoint.buildsOfApp(
-            withId: "appId",
+        let endpoint = APIEndpoint.builds(
+            ofAppWithId: "appId",
             fields: [.builds(ListBuildsOfApp.Field.Build.allCases)],
             limit: 1)
         let request = try? endpoint.asURLRequest()

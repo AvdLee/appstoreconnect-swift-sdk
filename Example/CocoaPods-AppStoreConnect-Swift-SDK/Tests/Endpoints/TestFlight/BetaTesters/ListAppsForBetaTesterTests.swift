@@ -11,8 +11,8 @@ import XCTest
 final class ListAppsForBetaTesterTests: XCTestCase {
     
     func testURLRequest() {
-        let endpoint = APIEndpoint.appsForBetaTester(
-            withId: "betaTesterId",
+        let endpoint = APIEndpoint.apps(
+            forBetaTesterWithId: "betaTesterId",
             limit: 2,
             fields: [.apps(ListAppsForBetaTester.Field.App.allCases)])
         

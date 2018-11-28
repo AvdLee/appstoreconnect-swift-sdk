@@ -11,8 +11,8 @@ import XCTest
 final class GetPrereleaseVersionIDsForAppTests: XCTestCase {
     
     func testURLRequest() {
-        let endpoint = APIEndpoint.prereleaseVersionIDsForApp(
-            withId: "appId",
+        let endpoint = APIEndpoint.prereleaseVersionIDs(
+            forAppWithId: "appId",
             limit: 1)
         let request = try? endpoint.asURLRequest()
         XCTAssertEqual(request?.httpMethod, "GET")

@@ -11,19 +11,17 @@ import XCTest
 final class RemoveBetaTesterAccessToAppsTests: XCTestCase {
     
     func testURLRequest() {
-        let linkageRequest = BetaTesterAppsLinkagesRequest(data: [
-            .init(id: "betaTesterId", type: "betatesters")])
-        
+        let appIds = ["appId"]
         let endpoint = APIEndpoint.remove(
-            betaTesterAccess: linkageRequest,
-            toAppWithId: "appId")
+            accessOfBetaTesterWithId: "betaTesterId",
+            toAppsWithIds: appIds)
         
         let request = try? endpoint.asURLRequest()
         XCTAssertEqual(request?.httpMethod, "DELETE")
         
         let absoluteString = request?.url?.absoluteString
-        let expected = "https://api.appstoreconnect.apple.com/v1/betaTesters/appId/relationships/apps"
+        let expected = "https://api.appstoreconnect.apple.com/v1/betaTesters/betaTesterId/relationships/apps"
         XCTAssertEqual(absoluteString, expected)
-        XCTAssertEqual(request?.httpBody, try? JSONEncoder().encode(linkageRequest))
+        XCTAssertEqual(request?.httpBody, try? JSONEncoder().encode(BetaTesterAppsLinkagesRequest(appIds)))
     }
 }

@@ -11,8 +11,8 @@ import XCTest
 final class GetIDsOfBuildsAssignedToBetaTesterTests: XCTestCase {
     
     func testURLRequest() {
-        let endpoint = APIEndpoint.idsOfBuildsAssignedToBetaTester(
-            withId: "betaTesterId",
+        let endpoint = APIEndpoint.buildIds(
+            assignedToBetaTesterWithId: "betaTesterId",
             limit: 2)
         
         let request = try? endpoint.asURLRequest()

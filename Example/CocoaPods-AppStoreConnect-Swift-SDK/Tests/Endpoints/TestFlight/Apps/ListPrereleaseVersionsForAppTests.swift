@@ -11,8 +11,8 @@ import XCTest
 final class ListPrereleaseVersionsForAppTests: XCTestCase {
     
     func testURLRequest() {
-        let endpoint = APIEndpoint.prereleaseVersionsForApp(
-            withId: "appId",
+        let endpoint = APIEndpoint.prereleaseVersions(
+            forAppWithId: "appId",
             fields: [.preReleaseVersions(ListPrereleaseVersionsForApp.Field.PreReleaseVersion.allCases)],
             limit: 1)
         let request = try? endpoint.asURLRequest()

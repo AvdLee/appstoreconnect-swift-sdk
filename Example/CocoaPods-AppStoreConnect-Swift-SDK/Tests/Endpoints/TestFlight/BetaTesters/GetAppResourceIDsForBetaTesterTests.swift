@@ -11,8 +11,8 @@ import XCTest
 final class GetAppResourceIDsForBetaTesterTests: XCTestCase {
     
     func testURLRequest() {
-        let endpoint = APIEndpoint.appResourceIDsForBetaTester(
-            withId: "betaTesterId",
+        let endpoint = APIEndpoint.appResourceIDs(
+            forBetaTesterWithId: "betaTesterId",
             limit: 2)
         
         let request = try? endpoint.asURLRequest()

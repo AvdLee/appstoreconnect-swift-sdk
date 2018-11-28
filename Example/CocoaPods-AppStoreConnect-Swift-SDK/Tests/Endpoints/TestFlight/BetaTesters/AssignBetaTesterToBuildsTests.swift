@@ -11,18 +11,15 @@ import XCTest
 final class AssignBetaTesterToBuildsTests: XCTestCase {
     
     func testURLRequest() {
-        let linkageRequest = BetaTesterBuildsLinkagesRequest(data: [
-            BetaTesterBuildsLinkagesRequest.Data(id: "betaTesterId", type: "betatesters")])
-        
-        let endpoint = APIEndpoint.assign(
-            betaTester: linkageRequest, toBuildWithId: "buildId")
+        let buildIds = ["buildId"]
+        let endpoint = APIEndpoint.assign(betaTesterWithId: "betaTesterId", toBuildsWithIds: buildIds)
         
         let request = try? endpoint.asURLRequest()
         XCTAssertEqual(request?.httpMethod, "POST")
         
         let absoluteString = request?.url?.absoluteString
-        let expected = "https://api.appstoreconnect.apple.com/v1/betaTesters/buildId/relationships/builds"
+        let expected = "https://api.appstoreconnect.apple.com/v1/betaTesters/betaTesterId/relationships/builds"
         XCTAssertEqual(absoluteString, expected)
-        XCTAssertEqual(request?.httpBody, try? JSONEncoder().encode(linkageRequest))
+        XCTAssertEqual(request?.httpBody, try? JSONEncoder().encode(BetaTesterBuildsLinkagesRequest(buildIds)))
     }
 }

@@ -11,9 +11,7 @@ import XCTest
 final class GetBetaAppLocalizationIDsOfAppTests: XCTestCase {
     
     func testURLRequest() {
-        let endpoint = APIEndpoint.betaAppLocalizationIDsOfApp(
-            withId: "appId",
-            limit: 3)
+        let endpoint = APIEndpoint.betaAppLocalizationIDs(ofAppWithId: "appId", limit: 3)
         let request = try? endpoint.asURLRequest()
         XCTAssertEqual(request?.httpMethod, "GET")
         

@@ -11,8 +11,8 @@ import XCTest
 final class GetBetaGroupIDsOfBetaTesterGroupsTests: XCTestCase {
     
     func testURLRequest() {
-        let endpoint = APIEndpoint.betaGroupIDsOfBetaTester(
-            withId: "betaTesterId",
+        let endpoint = APIEndpoint.betaGroupIDs(
+            ofBetaTesterWithId: "betaTesterId",
             limit: 2)
         
         let request = try? endpoint.asURLRequest()

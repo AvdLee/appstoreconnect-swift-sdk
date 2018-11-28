@@ -11,7 +11,7 @@ import XCTest
 final class DeleteBetaTesterTests: XCTestCase {
     
     func testURLRequest() {
-        let endpoint = APIEndpoint.deleteBetaTester(withId: "betaTesterId")
+        let endpoint = APIEndpoint.delete(betaTesterWithId: "betaTesterId")
         
         let request = try? endpoint.asURLRequest()
         XCTAssertEqual(request?.httpMethod, "DELETE")

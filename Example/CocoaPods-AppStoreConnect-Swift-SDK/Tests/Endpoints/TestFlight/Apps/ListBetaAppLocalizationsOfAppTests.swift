@@ -11,8 +11,8 @@ import XCTest
 final class ListBetaAppLocalizationsOfAppTests: XCTestCase {
     
     func testURLRequest() {
-        let endpoint = APIEndpoint.betaAppLocalizationsOfApp(
-            withId: "appId",
+        let endpoint = APIEndpoint.betaAppLocalizations(
+            ofAppWithId: "appId",
             fields: [.betaAppLocalizations(ListBetaAppLocalizationsForApp.Field.BetaAppLocalization.allCases)],
             limit: 1)
         let request = try? endpoint.asURLRequest()

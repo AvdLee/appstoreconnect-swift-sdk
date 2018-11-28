@@ -11,12 +11,17 @@ import XCTest
 final class CreateBetaTesterTests: XCTestCase {
     
     func testURLRequest() {
-        let createRequest = BetaTesterCreateRequest(data: .init(
-            attributes: .init(email: "email", firstName: "firstName", lastName: "lastName"),
-            relationships: nil,
-            type: ""))
-        
-        let endpoint = APIEndpoint.create(betaTester: createRequest)
+        let email = "email"
+        let firstName = "firstName"
+        let lastName = "lastName"
+        let betaGroupIds = ["betaGroupId"]
+        let buildIds = ["buildId"]
+        let endpoint = APIEndpoint.create(
+            betaTesterWithEmail: email,
+            firstName: firstName,
+            lastName: lastName,
+            betaGroupIds: betaGroupIds,
+            buildIds: buildIds)
         
         let request = try? endpoint.asURLRequest()
         XCTAssertEqual(request?.httpMethod, "POST")
@@ -24,6 +29,6 @@ final class CreateBetaTesterTests: XCTestCase {
         let absoluteString = request?.url?.absoluteString
         let expected = "https://api.appstoreconnect.apple.com/v1/betaTesters"
         XCTAssertEqual(absoluteString, expected)
-        XCTAssertEqual(request?.httpBody, try? JSONEncoder().encode(createRequest))
+        XCTAssertEqual(request?.httpBody, try? JSONEncoder().encode(BetaTesterCreateRequest(email: email, firstName: firstName, lastName: lastName, betaGroupIds: betaGroupIds, buildIds: buildIds)))
     }
 }

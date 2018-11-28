@@ -11,8 +11,8 @@ import XCTest
 final class GetBetaLicenseAgreementOfAppTests: XCTestCase {
     
     func testURLRequest() {
-        let endpoint = APIEndpoint.betaLicenseAgreementOfApp(
-            withId: "appId",
+        let endpoint = APIEndpoint.betaLicenseAgreement(
+            ofAppWithId: "appId",
             fields: [.betaLicenseAgreements(GetBetaLicenseAgreementForApp.Field.BetaLicenseAgreement.allCases)])
         let request = try? endpoint.asURLRequest()
         XCTAssertEqual(request?.httpMethod, "GET")

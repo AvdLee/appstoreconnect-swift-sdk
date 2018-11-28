@@ -11,8 +11,7 @@ import XCTest
 final class GetBetaGroupIDsForAppTests: XCTestCase {
     
     func testURLRequest() {
-        let endpoint = APIEndpoint.betaGroupIDsForApp(
-            withId: "appId", limit: 1)
+        let endpoint = APIEndpoint.betaGroupIDs(forAppWithId: "appId", limit: 1)
         let request = try? endpoint.asURLRequest()
         XCTAssertEqual(request?.httpMethod, "GET")
         

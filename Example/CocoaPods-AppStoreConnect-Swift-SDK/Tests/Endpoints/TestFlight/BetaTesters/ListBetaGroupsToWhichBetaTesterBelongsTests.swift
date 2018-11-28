@@ -11,8 +11,8 @@ import XCTest
 final class ListBetaGroupsToWhichBetaTesterBelongsTests: XCTestCase {
     
     func testURLRequest() {
-        let endpoint = APIEndpoint.betaGroupsToWhichBetaTesterBelongs(
-            withId: "betaTesterId",
+        let endpoint = APIEndpoint.betaGroups(
+            toWhichBelongBetaTesterWithId: "betaTesterId",
             limit: 1,
             fields: [.betaGroups(ListBetaGroupsToWhichBetaTesterBelongs.Field.BetaGroup.allCases)])
         

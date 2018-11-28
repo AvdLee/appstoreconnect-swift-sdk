@@ -11,8 +11,8 @@ import XCTest
 final class ListBuildsAssignedToBetaTesterTests: XCTestCase {
     
     func testURLRequest() {
-        let endpoint = APIEndpoint.buildsAssignedToBetaTester(
-            withId: "betaTesterId",
+        let endpoint = APIEndpoint.builds(
+            assignedToBetaTesterWithId: "betaTesterId",
             limit: 1,
             fields: [.builds(ListBuildsAssignedToBetaTester.Field.Build.allCases)])
         
