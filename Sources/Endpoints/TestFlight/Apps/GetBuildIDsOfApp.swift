@@ -14,7 +14,7 @@ extension APIEndpoint where T == AppBuildsLinkagesResponse {
     /// - Parameters:
     ///   - id: (Required) An opaque resource ID that uniquely identifies the resource.
     ///   - limit: Number of resources to return.
-    public static func buildIDsOfApp(withId id: String, limit: Int? = nil) -> APIEndpoint {
+    public static func buildIDs(ofAppWithId id: String, limit: Int? = nil) -> APIEndpoint {
         var parameters = [String: Any]()
         if let limit = limit { parameters["limit"] = limit }
         return APIEndpoint(

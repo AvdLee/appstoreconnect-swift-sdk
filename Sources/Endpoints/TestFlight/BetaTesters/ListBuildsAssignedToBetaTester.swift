@@ -15,8 +15,8 @@ extension APIEndpoint where T == BuildsResponse {
     ///   - id: (Required) An opaque resource ID that uniquely identifies the resource.
     ///   - limit: Number of resources to return.
     ///   - fields: Fields to return for included related types.
-    public static func buildsAssignedToBetaTester(
-        withId id: String,
+    public static func builds(
+        assignedToBetaTesterWithId id: String,
         limit: Int? = nil,
         fields: [ListBuildsAssignedToBetaTester.Field]? = nil) -> APIEndpoint {
         var parameters = [String: Any]()

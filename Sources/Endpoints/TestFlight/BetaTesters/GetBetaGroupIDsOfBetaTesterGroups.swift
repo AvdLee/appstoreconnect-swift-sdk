@@ -14,8 +14,8 @@ extension APIEndpoint where T == BetaTesterBetaGroupsLinkagesResponse {
     /// - Parameters:
     ///   - id: (Required) An opaque resource ID that uniquely identifies the resource.
     ///   - limit: Number of resources to return.
-    public static func betaGroupIDsOfBetaTester(
-        withId id: String,
+    public static func betaGroupIDs(
+        ofBetaTesterWithId id: String,
         limit: Int? = nil) -> APIEndpoint {
         var parameters = [String: Any]()
         if let limit = limit { parameters["limit"] = limit }

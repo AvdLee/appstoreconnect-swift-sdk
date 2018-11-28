@@ -13,7 +13,7 @@ extension APIEndpoint where T == Void {
     ///
     /// - Parameters:
     ///   - id: (Required) An opaque resource ID that uniquely identifies the resource.
-    public static func deleteBetaTester(withId id: String) -> APIEndpoint {
+    public static func delete(betaTesterWithId id: String) -> APIEndpoint {
         return APIEndpoint(
             path: "betaTesters/\(id)",
             method: .delete,

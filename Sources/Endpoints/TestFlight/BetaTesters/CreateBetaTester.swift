@@ -12,7 +12,17 @@ extension APIEndpoint where T == BetaTesterResponse {
 
     /// Create a beta tester assigned to a group, a build, or an app.
     public static func create(
-        betaTester: BetaTesterCreateRequest) -> APIEndpoint {
+        betaTesterWithEmail email: String,
+        firstName: String? = nil,
+        lastName: String? = nil,
+        betaGroupIds: [String]? = nil,
+        buildIds: [String]? = nil) -> APIEndpoint {
+        let betaTester = BetaTesterCreateRequest(
+            email: email,
+            firstName: firstName,
+            lastName: lastName,
+            betaGroupIds: betaGroupIds,
+            buildIds: buildIds)
         return APIEndpoint(
             path: "betaTesters",
             method: .post,

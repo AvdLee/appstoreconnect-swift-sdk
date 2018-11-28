@@ -13,7 +13,7 @@ extension APIEndpoint where T == AppBetaLicenseAgreementLinkageResponse {
     ///
     /// - Parameters:
     ///   - id: (Required) An opaque resource ID that uniquely identifies the resource.
-    public static func betaLicenseAgreementIDForApp(withId id: String) -> APIEndpoint {
+    public static func betaLicenseAgreementID(forAppWithId id: String) -> APIEndpoint {
         return APIEndpoint(
             path: "apps/\(id)/relationships/betaLicenseAgreement",
             method: .get,

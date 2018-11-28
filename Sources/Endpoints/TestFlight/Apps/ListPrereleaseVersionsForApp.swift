@@ -15,8 +15,8 @@ extension APIEndpoint where T == PreReleaseVersionsResponse {
     ///   - id: (Required) An opaque resource ID that uniquely identifies the resource.
     ///   - fields: Fields to return for included related types.
     ///   - limit: Number of resources to return.
-    public static func prereleaseVersionsForApp(
-        withId id: String,
+    public static func prereleaseVersions(
+        forAppWithId id: String,
         fields: [ListPrereleaseVersionsForApp.Field]? = nil,
         limit: Int? = nil) -> APIEndpoint {
         var parameters = [String: Any]()

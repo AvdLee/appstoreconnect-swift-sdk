@@ -15,8 +15,8 @@ extension APIEndpoint where T == BetaGroupsResponse {
     ///   - id: (Required) An opaque resource ID that uniquely identifies the resource.
     ///   - limit: Number of resources to return.
     ///   - fields: Fields to return for included related types.
-    public static func betaGroupsToWhichBetaTesterBelongs(
-        withId id: String,
+    public static func betaGroups(
+        toWhichBelongBetaTesterWithId id: String,
         limit: Int? = nil,
         fields: [ListBetaGroupsToWhichBetaTesterBelongs.Field]? = nil) -> APIEndpoint {
         var parameters = [String: Any]()

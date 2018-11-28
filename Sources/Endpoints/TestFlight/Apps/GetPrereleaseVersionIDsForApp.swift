@@ -14,7 +14,7 @@ extension APIEndpoint where T == AppPreReleaseVersionsLinkagesResponse {
     /// - Parameters:
     ///   - id: (Required) An opaque resource ID that uniquely identifies the resource.
     ///   - limit: Number of resources to return.
-    public static func prereleaseVersionIDsForApp(withId id: String, limit: Int? = nil) -> APIEndpoint {
+    public static func prereleaseVersionIDs(forAppWithId id: String, limit: Int? = nil) -> APIEndpoint {
         var parameters = [String: Any]()
         if let limit = limit { parameters["limit"] = limit }
         return APIEndpoint(

@@ -14,7 +14,7 @@ extension APIEndpoint where T == AppBetaGroupsLinkagesResponse {
     /// - Parameters:
     ///   - id: (Required) An opaque resource ID that uniquely identifies the resource.
     ///   - limit: Number of resources to return.
-    public static func betaGroupIDsForApp(withId id: String, limit: Int? = nil) -> APIEndpoint {
+    public static func betaGroupIDs(forAppWithId id: String, limit: Int? = nil) -> APIEndpoint {
         var parameters = [String: Any]()
         if let limit = limit { parameters["limit"] = limit }
         return APIEndpoint(

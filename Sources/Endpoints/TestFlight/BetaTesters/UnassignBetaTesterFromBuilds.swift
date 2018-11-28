@@ -15,12 +15,13 @@ extension APIEndpoint where T == Void {
     /// - Parameters:
     ///   - id: (Required) An opaque resource ID that uniquely identifies the resource.
     public static func unassign(
-        betaTester: BetaTesterBuildsLinkagesRequest,
-        fromBuildWithId id: String) -> APIEndpoint {
+        betaTesterWithId id: String,
+        fromBuildsWithIds buildIds: [String]) -> APIEndpoint {
+        let linkages = BetaTesterBuildsLinkagesRequest(buildIds)
         return APIEndpoint(
             path: "betaTesters/\(id)/relationships/builds",
             method: .delete,
             parameters: nil,
-            body: try? JSONEncoder().encode(betaTester))
+            body: try? JSONEncoder().encode(linkages))
     }
 }

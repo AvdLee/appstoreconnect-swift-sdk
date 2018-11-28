@@ -13,13 +13,15 @@ extension APIEndpoint where T == Void {
     /// Individually assign a beta tester to a build.
     ///
     /// - Parameters:
+    ///   - betaTesterBuildsLinkages: A request containing the IDs of related resources.
     ///   - id: (Required) An opaque resource ID that uniquely identifies the resource.
     public static func assign(
-        betaTester: BetaTesterBuildsLinkagesRequest,
-        toBuildWithId id: String) -> APIEndpoint {
+        betaTesterWithId id: String,
+        toBuildsWithIds buildIds: [String]) -> APIEndpoint {
+        let linkages = BetaTesterBuildsLinkagesRequest(buildIds)
         return APIEndpoint(path: "betaTesters/\(id)/relationships/builds",
             method: .post,
             parameters: nil,
-            body: try? JSONEncoder().encode(betaTester))
+            body: try? JSONEncoder().encode(linkages))
     }
 }
