@@ -10,14 +10,15 @@ import XCTest
 
 final class ListBetaGroupsForAppTests: XCTestCase {
     
-    let provider = APIProvider(configuration: APIConfiguration(issuerID: "", privateKeyID: "", privateKey: ""))
-    
-    func testAbsoluteString() {
+    func testURLRequest() {
         let endpoint = APIEndpoint.betaGroupsForApp(
             withId: "appId",
             fields: [.betaGroups(ListBetaGroupsForApp.Field.BetaGroup.allCases)],
             limit: 1)
-        let absoluteString = provider.request(for: endpoint).request?.url?.absoluteString
+        let request = try? endpoint.asURLRequest()
+        XCTAssertEqual(request?.httpMethod, "GET")
+        
+        let absoluteString = request?.url?.absoluteString
         let expected = "https://api.appstoreconnect.apple.com/v1/apps/appId/betaGroups?fields%5BbetaGroup%5D=app%2CbetaTesters%2Cbuilds%2CcreatedDate%2CisInternalGroup%2Cname%2CpublicLink%2CpublicLinkEnabled%2CpublicLinkId%2CpublicLinkLimit%2CpublicLinkLimitEnabled&limit=1"
         XCTAssertEqual(absoluteString, expected)
     }

@@ -10,13 +10,14 @@ import XCTest
 
 final class GetBetaLicenseAgreementOfAppTests: XCTestCase {
     
-    let provider = APIProvider(configuration: APIConfiguration(issuerID: "", privateKeyID: "", privateKey: ""))
-    
-    func testAbsoluteString() {
+    func testURLRequest() {
         let endpoint = APIEndpoint.betaLicenseAgreementOfApp(
             withId: "appId",
             fields: [.betaLicenseAgreements(GetBetaLicenseAgreementForApp.Field.BetaLicenseAgreement.allCases)])
-        let absoluteString = provider.request(for: endpoint).request?.url?.absoluteString
+        let request = try? endpoint.asURLRequest()
+        XCTAssertEqual(request?.httpMethod, "GET")
+        
+        let absoluteString = request?.url?.absoluteString
         let expected = "https://api.appstoreconnect.apple.com/v1/apps/appId/betaLicenseAgreement?fields%5BbetaLicenseAgreement%5D=agreementText%2Capp"
         XCTAssertEqual(absoluteString, expected)
     }
