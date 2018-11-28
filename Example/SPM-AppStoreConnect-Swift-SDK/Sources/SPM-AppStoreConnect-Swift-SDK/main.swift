@@ -3,14 +3,17 @@ import AppStoreConnect_Swift_SDK
 
 /// Go to https://appstoreconnect.apple.com/access/api and create your own key. This is also the page to find the private key ID and the issuer ID.
 /// Download the private key and open it in a text editor. Remove the enters and copy the contents over to the private key parameter.
-private let configuration = APIConfiguration(issuerID: "<YOUR ISSUER ID>", privateKeyID: "<YOUR PRIVATE KEY ID>", privateKey: "<YOUR PRIVATE KEY>")
+private let configuration = APIConfiguration(issuerID: "", privateKeyID: "", privateKey: ""
+)
 var provider: APIProvider = APIProvider(configuration: configuration)
 
-provider.request(.apps(
+let endpoint = APIEndpoint.apps(
     select: [.apps([.name]), .builds([.version, .processingState, .uploadedDate])],
     include: [.builds],
     sortBy: [.bundleIdAscending],
-    limits: [.apps(1)])) {
+    limits: [.apps(1)])
+
+provider.request(endpoint) {
         switch $0 {
         case .success(let appsResponse):
             typealias BuildInfo = (uploadedDate: Date, version: String, processingState: String)
