@@ -10,6 +10,36 @@ import Foundation
 /// A request containing a single resource.
 public struct BetaGroupCreateRequest: Codable {
 
+    /// - Parameters:
+    ///   - appId: The opaque resource ID that uniquely identifies the resource.
+    ///   - name: The name for the beta group.
+    ///   - publicLinkEnabled: A Boolean value that indicates whether a public link is enabled. Enabling a link allows you to invite anyone outside of your team to beta test your app. When you share this link, testers will be able to install the beta version of your app on their devices in TestFlight and share the link with others.
+    ///   - publicLinkLimit: The maximum number of testers that can join this beta group using the public link. Values must be between 1 and 10,000.
+    ///   - publicLinkLimitEnabled: A Boolean value that limits the number of testers who can join the beta group using the public link.
+    ///   - betaTesterIds: Array of opaque resource ID that uniquely identifies the resources.
+    ///   - buildIds: Array of opaque resource ID that uniquely identifies the resources.
+    public init(appId: String,
+                name: String,
+                publicLinkEnabled: Bool? = nil,
+                publicLinkLimit: Int? = nil,
+                publicLinkLimitEnabled: Bool? = nil,
+                betaTesterIds: [String]? = nil,
+                buildIds: [String]? = nil) {
+        data = .init(
+            attributes: .init(
+                name: name,
+                publicLinkEnabled:
+                publicLinkEnabled,
+                publicLinkLimit:
+                publicLinkLimit,
+                publicLinkLimitEnabled:
+                publicLinkLimitEnabled),
+            relationships: .init(
+                app: .init(data: .init(id: appId)),
+                betaTesters: .init(data: betaTesterIds?.map({ Data.Relationships.BetaTesters.Data(id: $0) })),
+                builds: .init(data: buildIds?.map({ Data.Relationships.Builds.Data(id: $0) }))))
+    }
+    
     /// (Required) The resource data.
     public let data: BetaGroupCreateRequest.Data
     

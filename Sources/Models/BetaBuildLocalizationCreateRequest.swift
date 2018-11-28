@@ -10,6 +10,18 @@ import Foundation
 /// A request containing a single resource.
 public struct BetaBuildLocalizationCreateRequest: Codable {
 
+    /// - Parameters:
+    ///   - buildId: The opaque resource ID that uniquely identifies the resource.
+    ///   - locale: The specified locale. Refer to Table 1 for possible values.
+    ///   - whatsNew: A field that describes changes and additions to a build and indicates features you would like your users to test.
+    public init(buildId: String, locale: String, whatsNew: String? = nil) {
+        data = .init(
+            attributes: .init(
+                locale: locale,
+                whatsNew: whatsNew),
+            relationships: .init(build: .init(data: .init(id: buildId))))
+    }
+    
     /// (Required) The resource data.
     public let data: BetaBuildLocalizationCreateRequest.Data
     

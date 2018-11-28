@@ -10,6 +10,16 @@ import Foundation
 /// A request containing a single resource.
 public struct BetaTesterInvitationCreateRequest: Codable {
 
+    /// - Parameters:
+    ///   - appId: The opaque resource ID that uniquely identifies the resource.
+    ///   - betaTesterId: The opaque resource ID that uniquely identifies the resource.
+    public init(appId: String, betaTesterId: String) {
+        data = .init(
+            relationships: .init(
+                app: .init(data: .init(id: appId)),
+                betaTester: .init(data: .init(id: betaTesterId))))
+    }
+
     /// (Required) The resource data.
     public let data: BetaTesterInvitationCreateRequest.Data
     

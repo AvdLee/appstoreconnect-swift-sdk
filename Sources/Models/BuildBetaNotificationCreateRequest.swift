@@ -10,6 +10,12 @@ import Foundation
 /// A request containing a single resource.
 public struct BuildBetaNotificationCreateRequest: Codable {
 
+    /// - Parameters:
+    ///   - buildId: The opaque resource ID that uniquely identifies the resource.
+    public init(buildId: String) {
+        data = .init(relationships: .init(build: .init(data: .init(id: buildId))))
+    }
+    
     /// (Required) The resource data.
     public let data: BuildBetaNotificationCreateRequest.Data
     

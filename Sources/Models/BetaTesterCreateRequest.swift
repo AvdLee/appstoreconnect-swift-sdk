@@ -10,6 +10,26 @@ import Foundation
 /// A request containing a single resource.
 public struct BetaTesterCreateRequest: Codable {
 
+    /// email: The beta tester's email address, used for sending beta testing invitations.
+    /// firstName: The beta tester's first name.
+    /// lastName: The beta tester's last name.
+    /// betaGroupIds: Array of opaque resource ID that uniquely identifies the resources.
+    /// buildIds: Array of opaque resource ID that uniquely identifies the resources.
+    public init(email: String,
+                firstName: String? = nil,
+                lastName: String? = nil,
+                betaGroupIds: [String]? = nil,
+                buildIds: [String]? = nil) {
+        data = .init(
+            attributes: .init(
+                email: email,
+                firstName: firstName,
+                lastName: lastName),
+            relationships: .init(
+                betaGroups: .init(data: betaGroupIds?.map({ Data.Relationships.BetaGroups.Data(id: $0) })),
+                builds: .init(data: buildIds?.map({ Data.Relationships.Builds.Data(id: $0) }))))
+    }
+
     /// (Required) The resource data.
     public let data: BetaTesterCreateRequest.Data
     
@@ -23,12 +43,6 @@ public struct BetaTesterCreateRequest: Codable {
     
         /// (Required) The resource type.Value: betaTesters
         public let type: String = " betaTesters"
-    }
-}
-
-extension BetaTesterCreateRequest {
-    public init(attributes: BetaTesterCreateRequest.Data.Attributes, relationships: BetaTesterCreateRequest.Data.Relationships? = nil) {
-        data = BetaTesterCreateRequest.Data(attributes: attributes, relationships: relationships)
     }
 }
 
