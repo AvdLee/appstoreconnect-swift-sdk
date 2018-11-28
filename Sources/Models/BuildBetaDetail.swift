@@ -20,7 +20,7 @@ public struct BuildBetaDetail: Codable {
     public let relationships: BuildBetaDetail.Relationships?
 
     /// (Required) The resource type.Value: buildBetaDetails
-    public let type: String
+    public let type: String = "buildBetaDetails"
 
     /// (Required) Navigational links that include the self-link.
     public let links: ResourceLinks<BuildBetaDetailResponse>
@@ -67,7 +67,7 @@ extension BuildBetaDetail.Relationships.Build {
         public let `id`: String
     
         /// (Required) The resource type.Value: builds
-        public let type: String
+        public let type: String = " builds"
     }
     
     public struct Links: Codable {

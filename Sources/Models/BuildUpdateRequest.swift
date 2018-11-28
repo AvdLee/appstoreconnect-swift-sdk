@@ -25,7 +25,7 @@ public struct BuildUpdateRequest: Codable {
         public let relationships: BuildUpdateRequest.Data.Relationships?
     
         /// (Required) The resource type.Value: builds
-        public let type: String
+        public let type: String = " builds"
     }
 }
 
@@ -67,6 +67,6 @@ extension BuildUpdateRequest.Data.Relationships.AppEncryptionDeclaration {
         public let `id`: String
     
         /// (Required) The resource type.Value: appEncryptionDeclarations
-        public let type: String
+        public let type: String = " appEncryptionDeclarations"
     }
 }

@@ -25,6 +25,6 @@ public struct AppBuildsLinkagesResponse: Codable {
         public let `id`: String
     
         /// (Required) The resource type.Value: builds
-        public let type: String
+        public let type: String = " builds"
     }
 }

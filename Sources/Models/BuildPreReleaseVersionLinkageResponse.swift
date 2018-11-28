@@ -22,6 +22,6 @@ public struct BuildPreReleaseVersionLinkageResponse: Codable {
         public let `id`: String
     
         /// (Required) The resource type.Value: preReleaseVersions
-        public let type: String
+        public let type: String = " preReleaseVersions"
     }
 }

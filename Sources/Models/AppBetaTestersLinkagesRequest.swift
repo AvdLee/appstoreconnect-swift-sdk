@@ -19,6 +19,6 @@ public struct AppBetaTestersLinkagesRequest: Codable {
         public let `id`: String
     
         /// (Required) The resource type.Value: betaTesters
-        public let type: String
+        public let type: String = " betaTesters"
     }
 }

@@ -25,7 +25,7 @@ public struct UserUpdateRequest: Codable {
         public let relationships: UserUpdateRequest.Data.Relationships?
     
         /// (Required) The resource type.Value: users
-        public let type: String
+        public let type: String = " users"
     }
 }
 
@@ -70,6 +70,6 @@ extension UserUpdateRequest.Data.Relationships.VisibleApps {
         public let `id`: String
     
         /// (Required) The resource type.Value: apps
-        public let type: String
+        public let type: String = " apps"
     }
 }

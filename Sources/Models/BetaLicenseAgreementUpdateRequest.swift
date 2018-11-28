@@ -22,7 +22,7 @@ public struct BetaLicenseAgreementUpdateRequest: Codable {
         public let `id`: String
     
         /// (Required) The resource type.Value: betaLicenseAgreements
-        public let type: String
+        public let type: String = " betaLicenseAgreements"
     }
 }
 
