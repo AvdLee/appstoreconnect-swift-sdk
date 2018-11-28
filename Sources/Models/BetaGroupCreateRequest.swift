@@ -19,12 +19,12 @@ public struct BetaGroupCreateRequest: Codable {
     ///   - betaTesterIds: Array of opaque resource ID that uniquely identifies the resources.
     ///   - buildIds: Array of opaque resource ID that uniquely identifies the resources.
     init(appId: String,
-                name: String,
-                publicLinkEnabled: Bool? = nil,
-                publicLinkLimit: Int? = nil,
-                publicLinkLimitEnabled: Bool? = nil,
-                betaTesterIds: [String]? = nil,
-                buildIds: [String]? = nil) {
+         name: String,
+         publicLinkEnabled: Bool? = nil,
+         publicLinkLimit: Int? = nil,
+         publicLinkLimitEnabled: Bool? = nil,
+         betaTesterIds: [String]? = nil,
+         buildIds: [String]? = nil) {
         data = .init(
             attributes: .init(
                 name: name,

@@ -17,10 +17,10 @@ public struct UserUpdateRequest: Codable {
     ///   - roles: Assigned user roles that determine the user's access to sections of App Store Connect and tasks they can perform.
     ///   - appsVisibleIds: Array of opaque resource ID that uniquely identifies the resources.
     init(id: String,
-                allAppsVisible: Bool? = nil,
-                provisioningAllowed: Bool? = nil,
-                roles: [UserRole]? = nil,
-                appsVisibleIds: [String]? = nil) {
+         allAppsVisible: Bool? = nil,
+         provisioningAllowed: Bool? = nil,
+         roles: [UserRole]? = nil,
+         appsVisibleIds: [String]? = nil) {
         data = .init(
             attributes: .init(
                 allAppsVisible: allAppsVisible,

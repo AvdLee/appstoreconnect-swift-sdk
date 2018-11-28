@@ -18,11 +18,11 @@ public struct BetaAppLocalizationUpdateRequest: Codable {
     ///   - privacyPolicyUrl= A URL that links to your company’s privacy policy. Privacy policies are recommended for all apps that collect user or device-related data or as otherwise required by law.
     ///   - tvOsPrivacyPolicy: Your company’s privacy policy. Privacy policies are recommended for all apps that collect user or device-related data, or as otherwise required by law.
     init(id: String,
-                description: String? = nil,
-                feedbackEmail: String? = nil,
-                marketingUrl: String? = nil,
-                privacyPolicyUrl: String? = nil,
-                tvOsPrivacyPolicy: String? = nil) {
+         description: String? = nil,
+         feedbackEmail: String? = nil,
+         marketingUrl: String? = nil,
+         privacyPolicyUrl: String? = nil,
+         tvOsPrivacyPolicy: String? = nil) {
         data = .init(
             attributes: .init(
                 description: description,

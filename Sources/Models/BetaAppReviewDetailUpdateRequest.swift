@@ -21,14 +21,14 @@ public struct BetaAppReviewDetailUpdateRequest: Codable {
     ///   - demoAccountRequired: A Boolean value that indicates if sign-in information is required to review all the features of your app. If users sign in using social media, provide information for an account for review. Credentials must be valid and active for duration of review.
     ///   - notes: Additional information about your app that can help during the review process. Do not include demo account details. Review notes have a maximum of 4,000 characters.
     init(id: String,
-                contactEmail: String? = nil,
-                contactFirstName: String? = nil,
-                contactLastName: String? = nil,
-                contactPhone: String? = nil,
-                demoAccountName: String? = nil,
-                demoAccountPassword: String? = nil,
-                demoAccountRequired: Bool? = nil,
-                notes: String? = nil) {
+         contactEmail: String? = nil,
+         contactFirstName: String? = nil,
+         contactLastName: String? = nil,
+         contactPhone: String? = nil,
+         demoAccountName: String? = nil,
+         demoAccountPassword: String? = nil,
+         demoAccountRequired: Bool? = nil,
+         notes: String? = nil) {
         data = .init(
             attributes: .init(
                 contactEmail: contactEmail,

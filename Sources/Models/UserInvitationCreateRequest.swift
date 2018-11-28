@@ -19,12 +19,12 @@ public struct UserInvitationCreateRequest: Codable {
     ///   - provisioningAllowed: A Boolean value that indicates the user's specified role allows access to the provisioning functionality on the Apple Developer website.
     ///   - appsVisibleIds: Array of opaque resource ID that uniquely identifies the resources.
     init(email: String,
-                firstName: String,
-                lastName: String,
-                roles: [UserRole],
-                allAppsVisible: Bool? = nil,
-                provisioningAllowed: Bool? = nil,
-                appsVisibleIds: [String]?) {
+         firstName: String,
+         lastName: String,
+         roles: [UserRole],
+         allAppsVisible: Bool? = nil,
+         provisioningAllowed: Bool? = nil,
+         appsVisibleIds: [String]?) {
         data = .init(
             attributes: .init(
                 allAppsVisible: allAppsVisible,

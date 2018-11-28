@@ -17,10 +17,10 @@ public struct BetaGroupUpdateRequest: Codable {
     ///   - publicLinkLimit: The maximum number of testers that can join this beta group using the public link. Values must be between 1 and 10,000.
     ///   - publicLinkLimitEnabled: A Boolean value that limits the number of testers who can join the beta group using the public link.
     init(id: String,
-                name: String? = nil,
-                publicLinkEnabled: Bool? = nil,
-                publicLinkLimit: Int? = nil,
-                publicLinkLimitEnabled: Bool? = nil) {
+         name: String? = nil,
+         publicLinkEnabled: Bool? = nil,
+         publicLinkLimit: Int? = nil,
+         publicLinkLimitEnabled: Bool? = nil) {
         data = .init(
             attributes: .init(
                 name: name,
