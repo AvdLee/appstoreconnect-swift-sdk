@@ -43,6 +43,9 @@ extension APIEndpoint: URLRequestConvertible {
     public func asURLRequest() throws -> URLRequest {
         var urlRequest = try URLEncoding().encode(URLRequest(url: url, method: method), with: parameters)
         if let body = body {
+            if urlRequest.value(forHTTPHeaderField: "Content-Type") == nil {
+                urlRequest.setValue("application/json", forHTTPHeaderField: "Content-Type")
+            }
             urlRequest.httpBody = body
         }
         return urlRequest
