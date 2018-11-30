@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		310FADE221B153B8004327B2 /* SendInvitationToBetaTesterTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 310FADE121B153B8004327B2 /* SendInvitationToBetaTesterTests.swift */; };
 		314DF9E421A6CB17008FFF99 /* ListAppsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 314DF9E321A6CB17008FFF99 /* ListAppsTests.swift */; };
 		3183103821A8497800638289 /* QueryParameterTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3183103721A8497800638289 /* QueryParameterTests.swift */; };
 		3183103A21A8719F00638289 /* GetAppTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3183103921A8719F00638289 /* GetAppTests.swift */; };
@@ -61,6 +62,7 @@
 
 /* Begin PBXFileReference section */
 		0AE4946149359034B7BCF9D5 /* README.md */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = net.daringfireball.markdown; name = README.md; path = ../README.md; sourceTree = "<group>"; };
+		310FADE121B153B8004327B2 /* SendInvitationToBetaTesterTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SendInvitationToBetaTesterTests.swift; sourceTree = "<group>"; };
 		314DF9E321A6CB17008FFF99 /* ListAppsTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListAppsTests.swift; sourceTree = "<group>"; };
 		3183103721A8497800638289 /* QueryParameterTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QueryParameterTests.swift; sourceTree = "<group>"; };
 		3183103921A8719F00638289 /* GetAppTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetAppTests.swift; sourceTree = "<group>"; };
@@ -133,6 +135,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		310FADE021B1539E004327B2 /* Beta Tester Invitations */ = {
+			isa = PBXGroup;
+			children = (
+				310FADE121B153B8004327B2 /* SendInvitationToBetaTesterTests.swift */,
+			);
+			path = "Beta Tester Invitations";
+			sourceTree = "<group>";
+		};
 		318824BE21AD3C8500676DA7 /* Endpoints */ = {
 			isa = PBXGroup;
 			children = (
@@ -144,6 +154,7 @@
 		318824BF21AD3D4900676DA7 /* TestFlight */ = {
 			isa = PBXGroup;
 			children = (
+				310FADE021B1539E004327B2 /* Beta Tester Invitations */,
 				318824C021AD3D5600676DA7 /* Apps */,
 				31F3DF4521AEDD63006998D5 /* BetaTesters */,
 			);
@@ -524,6 +535,7 @@
 				318824F121AD409500676DA7 /* ListPrereleaseVersionsForAppTests.swift in Sources */,
 				318824EC21AD409500676DA7 /* GetBetaGroupIDsForAppTests.swift in Sources */,
 				31F3DF5A21AEDD63006998D5 /* CreateBetaTesterTests.swift in Sources */,
+				310FADE221B153B8004327B2 /* SendInvitationToBetaTesterTests.swift in Sources */,
 				318824F221AD409500676DA7 /* GetBuildIDsOfAppTests.swift in Sources */,
 				31F3DF5521AEDD63006998D5 /* DeleteBetaTesterTests.swift in Sources */,
 				3188254E21ADAC2900676DA7 /* RemoveBetaTestersFromGroupsAndBuildsOfAppTests.swift in Sources */,
