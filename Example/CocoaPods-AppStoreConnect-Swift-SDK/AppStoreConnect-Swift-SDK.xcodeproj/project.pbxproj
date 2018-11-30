@@ -154,8 +154,8 @@
 		318824BF21AD3D4900676DA7 /* TestFlight */ = {
 			isa = PBXGroup;
 			children = (
-				310FADE021B1539E004327B2 /* Beta Tester Invitations */,
 				318824C021AD3D5600676DA7 /* Apps */,
+				310FADE021B1539E004327B2 /* Beta Tester Invitations */,
 				31F3DF4521AEDD63006998D5 /* BetaTesters */,
 			);
 			path = TestFlight;

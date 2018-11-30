@@ -10,17 +10,35 @@ import XCTest
 
 final class CreateBetaTesterTests: XCTestCase {
     
-    func testURLRequest() {
-        let email = "email"
-        let firstName = "firstName"
-        let lastName = "lastName"
-        let betaGroupIds = ["betaGroupId"]
-        let buildIds = ["buildId"]
+    let email = "email"
+    let firstName = "firstName"
+    let lastName = "lastName"
+    let betaGroupIds = ["betaGroupId"]
+    let buildIds = ["buildId"]
+    
+    func testURLRequestWithBetaGroupIds() {
+        
         let endpoint = APIEndpoint.create(
             betaTesterWithEmail: email,
             firstName: firstName,
             lastName: lastName,
-            betaGroupIds: betaGroupIds,
+            betaGroupIds: betaGroupIds)
+        
+        let request = try? endpoint.asURLRequest()
+        XCTAssertEqual(request?.httpMethod, "POST")
+        
+        let absoluteString = request?.url?.absoluteString
+        let expected = "https://api.appstoreconnect.apple.com/v1/betaTesters"
+        XCTAssertEqual(absoluteString, expected)
+        XCTAssertEqual(request?.httpBody, try? JSONEncoder().encode(BetaTesterCreateRequest(email: email, firstName: firstName, lastName: lastName, betaGroupIds: betaGroupIds, buildIds: nil)))
+    }
+    
+    func testURLRequestWithBuildIds() {
+        
+        let endpoint = APIEndpoint.create(
+            betaTesterWithEmail: email,
+            firstName: firstName,
+            lastName: lastName,
             buildIds: buildIds)
         
         let request = try? endpoint.asURLRequest()
@@ -29,6 +47,6 @@ final class CreateBetaTesterTests: XCTestCase {
         let absoluteString = request?.url?.absoluteString
         let expected = "https://api.appstoreconnect.apple.com/v1/betaTesters"
         XCTAssertEqual(absoluteString, expected)
-        XCTAssertEqual(request?.httpBody, try? JSONEncoder().encode(BetaTesterCreateRequest(email: email, firstName: firstName, lastName: lastName, betaGroupIds: betaGroupIds, buildIds: buildIds)))
+        XCTAssertEqual(request?.httpBody, try? JSONEncoder().encode(BetaTesterCreateRequest(email: email, firstName: firstName, lastName: lastName, betaGroupIds: nil, buildIds: buildIds)))
     }
 }
