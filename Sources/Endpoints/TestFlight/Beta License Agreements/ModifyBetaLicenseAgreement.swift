@@ -4,7 +4,8 @@
 //
 //  Created by Pascal Edmond on 30/11/2018.
 //
-    
+
+import Foundation
 import Alamofire
 
 extension APIEndpoint where T == BetaLicenseAgreementResponse {

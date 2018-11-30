@@ -11,7 +11,6 @@ import XCTest
 final class ListAppsVisibleToInvitedUserTests: XCTestCase {
     
     func testURLRequest() {
-        let buildId = "buildId"
         let endpoint = APIEndpoint.apps(
             visibleToInvitedUserWithId: "userId",
             fields: [.apps(ListAppsVisibleToInvitedUser.Field.App.allCases)],

@@ -11,7 +11,6 @@ import XCTest
 final class ReadUserInformationTests: XCTestCase {
     
     func testURLRequest() {
-        let buildId = "buildId"
         let endpoint = APIEndpoint.user(
             withId: "appId",
             fields: [

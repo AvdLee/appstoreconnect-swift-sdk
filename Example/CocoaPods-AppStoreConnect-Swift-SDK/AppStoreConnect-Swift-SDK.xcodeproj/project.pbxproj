@@ -58,6 +58,56 @@
 		311FE2A021B1C7E80078C9C0 /* RemoveUserAccountTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 311FE28F21B1C7E80078C9C0 /* RemoveUserAccountTests.swift */; };
 		311FE2A121B1C7E80078C9C0 /* ReplaceListOfVisibleAppsForUserTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 311FE29021B1C7E80078C9C0 /* ReplaceListOfVisibleAppsForUserTests.swift */; };
 		311FE2A221B1C7E80078C9C0 /* ListUsersTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 311FE29121B1C7E80078C9C0 /* ListUsersTests.swift */; };
+		311FE2DB21B1D2950078C9C0 /* SubmitAppForBetaReviewTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 311FE2A421B1D2950078C9C0 /* SubmitAppForBetaReviewTests.swift */; };
+		311FE2DC21B1D2950078C9C0 /* GetBuildIDForBetaAppReviewSubmissionTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 311FE2A521B1D2950078C9C0 /* GetBuildIDForBetaAppReviewSubmissionTests.swift */; };
+		311FE2DD21B1D2950078C9C0 /* ReadBuildInformationOfBetaAppReviewSubmissionTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 311FE2A621B1D2950078C9C0 /* ReadBuildInformationOfBetaAppReviewSubmissionTests.swift */; };
+		311FE2DE21B1D2950078C9C0 /* ListBetaAppReviewSubmissionsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 311FE2A721B1D2950078C9C0 /* ListBetaAppReviewSubmissionsTests.swift */; };
+		311FE2DF21B1D2950078C9C0 /* ReadBetaAppReviewSubmissionInformationTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 311FE2A821B1D2950078C9C0 /* ReadBetaAppReviewSubmissionInformationTests.swift */; };
+		311FE2E021B1D2950078C9C0 /* ModifyBuildBetaDetailTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 311FE2AA21B1D2950078C9C0 /* ModifyBuildBetaDetailTests.swift */; };
+		311FE2E121B1D2950078C9C0 /* ReadBuildBetaDetailInformationTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 311FE2AB21B1D2950078C9C0 /* ReadBuildBetaDetailInformationTests.swift */; };
+		311FE2E221B1D2950078C9C0 /* ListBuildBetaDetailsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 311FE2AC21B1D2950078C9C0 /* ListBuildBetaDetailsTests.swift */; };
+		311FE2E321B1D2950078C9C0 /* ReadBuildInformationOfBuildBetaDetailTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 311FE2AD21B1D2950078C9C0 /* ReadBuildInformationOfBuildBetaDetailTests.swift */; };
+		311FE2E421B1D2950078C9C0 /* GetBuildIDForBuildBetaDetailTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 311FE2AE21B1D2950078C9C0 /* GetBuildIDForBuildBetaDetailTests.swift */; };
+		311FE2E521B1D2950078C9C0 /* ListIndividualTestersForBuildTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 311FE2B021B1D2950078C9C0 /* ListIndividualTestersForBuildTests.swift */; };
+		311FE2E621B1D2950078C9C0 /* GetBetaBuildLocalizationIDsOfBuildTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 311FE2B121B1D2950078C9C0 /* GetBetaBuildLocalizationIDsOfBuildTests.swift */; };
+		311FE2E721B1D2950078C9C0 /* ReadBetaAppReviewSubmissionOfBuildTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 311FE2B221B1D2950078C9C0 /* ReadBetaAppReviewSubmissionOfBuildTests.swift */; };
+		311FE2E821B1D2950078C9C0 /* ListBuildsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 311FE2B321B1D2950078C9C0 /* ListBuildsTests.swift */; };
+		311FE2E921B1D2950078C9C0 /* GetAppResourceIDForBuildTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 311FE2B421B1D2950078C9C0 /* GetAppResourceIDForBuildTests.swift */; };
+		311FE2EA21B1D2950078C9C0 /* AssignIndividualTestersToBuildTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 311FE2B521B1D2950078C9C0 /* AssignIndividualTestersToBuildTests.swift */; };
+		311FE2EB21B1D2950078C9C0 /* GetBetaAppReviewSubmissionIDOfBuildTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 311FE2B621B1D2950078C9C0 /* GetBetaAppReviewSubmissionIDOfBuildTests.swift */; };
+		311FE2EC21B1D2950078C9C0 /* ReadBuildBetaDetailsInformationOfBuildTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 311FE2B721B1D2950078C9C0 /* ReadBuildBetaDetailsInformationOfBuildTests.swift */; };
+		311FE2ED21B1D2950078C9C0 /* RemoveIndividualTestersFromBuildTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 311FE2B821B1D2950078C9C0 /* RemoveIndividualTestersFromBuildTests.swift */; };
+		311FE2EE21B1D2950078C9C0 /* ReadAppInformationOfBuildTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 311FE2B921B1D2950078C9C0 /* ReadAppInformationOfBuildTests.swift */; };
+		311FE2EF21B1D2960078C9C0 /* GetResourceIDsOfIndividualTestersForBuildTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 311FE2BA21B1D2950078C9C0 /* GetResourceIDsOfIndividualTestersForBuildTests.swift */; };
+		311FE2F021B1D2960078C9C0 /* ReadAppEncryptionDeclarationOfBuildTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 311FE2BB21B1D2950078C9C0 /* ReadAppEncryptionDeclarationOfBuildTests.swift */; };
+		311FE2F121B1D2960078C9C0 /* GetResourceIDsOfPrereleaseVersionsForBuildTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 311FE2BC21B1D2950078C9C0 /* GetResourceIDsOfPrereleaseVersionsForBuildTests.swift */; };
+		311FE2F221B1D2960078C9C0 /* ReadBuildInformationTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 311FE2BD21B1D2950078C9C0 /* ReadBuildInformationTests.swift */; };
+		311FE2F321B1D2960078C9C0 /* ModifyBuildTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 311FE2BE21B1D2950078C9C0 /* ModifyBuildTests.swift */; };
+		311FE2F421B1D2960078C9C0 /* AssignAppEncryptionDeclarationForBuildTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 311FE2BF21B1D2950078C9C0 /* AssignAppEncryptionDeclarationForBuildTests.swift */; };
+		311FE2F521B1D2960078C9C0 /* RemoveAccessForBetaGroupsToBuildTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 311FE2C021B1D2950078C9C0 /* RemoveAccessForBetaGroupsToBuildTests.swift */; };
+		311FE2F621B1D2960078C9C0 /* ListBetaBuildLocalizationsOfBuildTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 311FE2C121B1D2950078C9C0 /* ListBetaBuildLocalizationsOfBuildTests.swift */; };
+		311FE2F721B1D2960078C9C0 /* GetAppEncryptionDeclarationIDForBuildTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 311FE2C221B1D2950078C9C0 /* GetAppEncryptionDeclarationIDForBuildTests.swift */; };
+		311FE2F821B1D2960078C9C0 /* ReadPrereleaseVersionOfBuildTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 311FE2C321B1D2950078C9C0 /* ReadPrereleaseVersionOfBuildTests.swift */; };
+		311FE2F921B1D2960078C9C0 /* AddAccessForBetaGroupsToBuildTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 311FE2C421B1D2950078C9C0 /* AddAccessForBetaGroupsToBuildTests.swift */; };
+		311FE2FA21B1D2960078C9C0 /* GetBuildBetaDetailsResourceIDForBuildTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 311FE2C521B1D2950078C9C0 /* GetBuildBetaDetailsResourceIDForBuildTests.swift */; };
+		311FE2FB21B1D2960078C9C0 /* ReadBuildInformationOfBetaBuildLocalizationTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 311FE2C721B1D2950078C9C0 /* ReadBuildInformationOfBetaBuildLocalizationTests.swift */; };
+		311FE2FC21B1D2960078C9C0 /* GetBuildIDForBetaBuildLocalizationTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 311FE2C821B1D2950078C9C0 /* GetBuildIDForBetaBuildLocalizationTests.swift */; };
+		311FE2FD21B1D2960078C9C0 /* ReadBetaBuildLocalizationInformationTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 311FE2C921B1D2950078C9C0 /* ReadBetaBuildLocalizationInformationTests.swift */; };
+		311FE2FE21B1D2960078C9C0 /* ModifyBetaBuildLocalizationTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 311FE2CA21B1D2950078C9C0 /* ModifyBetaBuildLocalizationTests.swift */; };
+		311FE2FF21B1D2960078C9C0 /* CreateBetaBuildLocalizationTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 311FE2CB21B1D2950078C9C0 /* CreateBetaBuildLocalizationTests.swift */; };
+		311FE30021B1D2960078C9C0 /* ListBetaBuildLocalizationsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 311FE2CC21B1D2950078C9C0 /* ListBetaBuildLocalizationsTests.swift */; };
+		311FE30121B1D2960078C9C0 /* DeleteBetaBuildLocalizationTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 311FE2CD21B1D2950078C9C0 /* DeleteBetaBuildLocalizationTests.swift */; };
+		311FE30221B1D2960078C9C0 /* ReadAppInformationOfBetaLicenseAgreementTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 311FE2CF21B1D2950078C9C0 /* ReadAppInformationOfBetaLicenseAgreementTests.swift */; };
+		311FE30321B1D2960078C9C0 /* ListBetaLicenseAgreementsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 311FE2D021B1D2950078C9C0 /* ListBetaLicenseAgreementsTests.swift */; };
+		311FE30421B1D2960078C9C0 /* ReadBetaLicenseAgreementInformationTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 311FE2D121B1D2950078C9C0 /* ReadBetaLicenseAgreementInformationTests.swift */; };
+		311FE30521B1D2960078C9C0 /* ModifyBetaLicenseAgreementTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 311FE2D221B1D2950078C9C0 /* ModifyBetaLicenseAgreementTests.swift */; };
+		311FE30621B1D2960078C9C0 /* GetAppResourceIDForBetaLicenseAgreementTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 311FE2D321B1D2950078C9C0 /* GetAppResourceIDForBetaLicenseAgreementTests.swift */; };
+		311FE30721B1D2960078C9C0 /* ListPrereleaseVersionsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 311FE2D521B1D2950078C9C0 /* ListPrereleaseVersionsTests.swift */; };
+		311FE30821B1D2960078C9C0 /* GetAppResourceIDForPrereleaseVersionTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 311FE2D621B1D2950078C9C0 /* GetAppResourceIDForPrereleaseVersionTests.swift */; };
+		311FE30921B1D2960078C9C0 /* GetBuildIDsOfPrereleaseVersionTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 311FE2D721B1D2950078C9C0 /* GetBuildIDsOfPrereleaseVersionTests.swift */; };
+		311FE30A21B1D2960078C9C0 /* ReadPrereleaseVersionInformationTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 311FE2D821B1D2950078C9C0 /* ReadPrereleaseVersionInformationTests.swift */; };
+		311FE30B21B1D2960078C9C0 /* ReadAppInformationOfPrereleaseVersionTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 311FE2D921B1D2950078C9C0 /* ReadAppInformationOfPrereleaseVersionTests.swift */; };
+		311FE30C21B1D2960078C9C0 /* ListBuildsOfPrereleaseVersionTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 311FE2DA21B1D2950078C9C0 /* ListBuildsOfPrereleaseVersionTests.swift */; };
 		314DF9E421A6CB17008FFF99 /* ListAppsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 314DF9E321A6CB17008FFF99 /* ListAppsTests.swift */; };
 		3183103821A8497800638289 /* QueryParameterTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3183103721A8497800638289 /* QueryParameterTests.swift */; };
 		3183103A21A8719F00638289 /* GetAppTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3183103921A8719F00638289 /* GetAppTests.swift */; };
@@ -163,6 +213,56 @@
 		311FE28F21B1C7E80078C9C0 /* RemoveUserAccountTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RemoveUserAccountTests.swift; sourceTree = "<group>"; };
 		311FE29021B1C7E80078C9C0 /* ReplaceListOfVisibleAppsForUserTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ReplaceListOfVisibleAppsForUserTests.swift; sourceTree = "<group>"; };
 		311FE29121B1C7E80078C9C0 /* ListUsersTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ListUsersTests.swift; sourceTree = "<group>"; };
+		311FE2A421B1D2950078C9C0 /* SubmitAppForBetaReviewTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SubmitAppForBetaReviewTests.swift; sourceTree = "<group>"; };
+		311FE2A521B1D2950078C9C0 /* GetBuildIDForBetaAppReviewSubmissionTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GetBuildIDForBetaAppReviewSubmissionTests.swift; sourceTree = "<group>"; };
+		311FE2A621B1D2950078C9C0 /* ReadBuildInformationOfBetaAppReviewSubmissionTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ReadBuildInformationOfBetaAppReviewSubmissionTests.swift; sourceTree = "<group>"; };
+		311FE2A721B1D2950078C9C0 /* ListBetaAppReviewSubmissionsTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ListBetaAppReviewSubmissionsTests.swift; sourceTree = "<group>"; };
+		311FE2A821B1D2950078C9C0 /* ReadBetaAppReviewSubmissionInformationTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ReadBetaAppReviewSubmissionInformationTests.swift; sourceTree = "<group>"; };
+		311FE2AA21B1D2950078C9C0 /* ModifyBuildBetaDetailTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ModifyBuildBetaDetailTests.swift; sourceTree = "<group>"; };
+		311FE2AB21B1D2950078C9C0 /* ReadBuildBetaDetailInformationTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ReadBuildBetaDetailInformationTests.swift; sourceTree = "<group>"; };
+		311FE2AC21B1D2950078C9C0 /* ListBuildBetaDetailsTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ListBuildBetaDetailsTests.swift; sourceTree = "<group>"; };
+		311FE2AD21B1D2950078C9C0 /* ReadBuildInformationOfBuildBetaDetailTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ReadBuildInformationOfBuildBetaDetailTests.swift; sourceTree = "<group>"; };
+		311FE2AE21B1D2950078C9C0 /* GetBuildIDForBuildBetaDetailTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GetBuildIDForBuildBetaDetailTests.swift; sourceTree = "<group>"; };
+		311FE2B021B1D2950078C9C0 /* ListIndividualTestersForBuildTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ListIndividualTestersForBuildTests.swift; sourceTree = "<group>"; };
+		311FE2B121B1D2950078C9C0 /* GetBetaBuildLocalizationIDsOfBuildTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GetBetaBuildLocalizationIDsOfBuildTests.swift; sourceTree = "<group>"; };
+		311FE2B221B1D2950078C9C0 /* ReadBetaAppReviewSubmissionOfBuildTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ReadBetaAppReviewSubmissionOfBuildTests.swift; sourceTree = "<group>"; };
+		311FE2B321B1D2950078C9C0 /* ListBuildsTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ListBuildsTests.swift; sourceTree = "<group>"; };
+		311FE2B421B1D2950078C9C0 /* GetAppResourceIDForBuildTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GetAppResourceIDForBuildTests.swift; sourceTree = "<group>"; };
+		311FE2B521B1D2950078C9C0 /* AssignIndividualTestersToBuildTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AssignIndividualTestersToBuildTests.swift; sourceTree = "<group>"; };
+		311FE2B621B1D2950078C9C0 /* GetBetaAppReviewSubmissionIDOfBuildTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GetBetaAppReviewSubmissionIDOfBuildTests.swift; sourceTree = "<group>"; };
+		311FE2B721B1D2950078C9C0 /* ReadBuildBetaDetailsInformationOfBuildTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ReadBuildBetaDetailsInformationOfBuildTests.swift; sourceTree = "<group>"; };
+		311FE2B821B1D2950078C9C0 /* RemoveIndividualTestersFromBuildTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RemoveIndividualTestersFromBuildTests.swift; sourceTree = "<group>"; };
+		311FE2B921B1D2950078C9C0 /* ReadAppInformationOfBuildTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ReadAppInformationOfBuildTests.swift; sourceTree = "<group>"; };
+		311FE2BA21B1D2950078C9C0 /* GetResourceIDsOfIndividualTestersForBuildTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GetResourceIDsOfIndividualTestersForBuildTests.swift; sourceTree = "<group>"; };
+		311FE2BB21B1D2950078C9C0 /* ReadAppEncryptionDeclarationOfBuildTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ReadAppEncryptionDeclarationOfBuildTests.swift; sourceTree = "<group>"; };
+		311FE2BC21B1D2950078C9C0 /* GetResourceIDsOfPrereleaseVersionsForBuildTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GetResourceIDsOfPrereleaseVersionsForBuildTests.swift; sourceTree = "<group>"; };
+		311FE2BD21B1D2950078C9C0 /* ReadBuildInformationTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ReadBuildInformationTests.swift; sourceTree = "<group>"; };
+		311FE2BE21B1D2950078C9C0 /* ModifyBuildTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ModifyBuildTests.swift; sourceTree = "<group>"; };
+		311FE2BF21B1D2950078C9C0 /* AssignAppEncryptionDeclarationForBuildTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AssignAppEncryptionDeclarationForBuildTests.swift; sourceTree = "<group>"; };
+		311FE2C021B1D2950078C9C0 /* RemoveAccessForBetaGroupsToBuildTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RemoveAccessForBetaGroupsToBuildTests.swift; sourceTree = "<group>"; };
+		311FE2C121B1D2950078C9C0 /* ListBetaBuildLocalizationsOfBuildTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ListBetaBuildLocalizationsOfBuildTests.swift; sourceTree = "<group>"; };
+		311FE2C221B1D2950078C9C0 /* GetAppEncryptionDeclarationIDForBuildTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GetAppEncryptionDeclarationIDForBuildTests.swift; sourceTree = "<group>"; };
+		311FE2C321B1D2950078C9C0 /* ReadPrereleaseVersionOfBuildTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ReadPrereleaseVersionOfBuildTests.swift; sourceTree = "<group>"; };
+		311FE2C421B1D2950078C9C0 /* AddAccessForBetaGroupsToBuildTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddAccessForBetaGroupsToBuildTests.swift; sourceTree = "<group>"; };
+		311FE2C521B1D2950078C9C0 /* GetBuildBetaDetailsResourceIDForBuildTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GetBuildBetaDetailsResourceIDForBuildTests.swift; sourceTree = "<group>"; };
+		311FE2C721B1D2950078C9C0 /* ReadBuildInformationOfBetaBuildLocalizationTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ReadBuildInformationOfBetaBuildLocalizationTests.swift; sourceTree = "<group>"; };
+		311FE2C821B1D2950078C9C0 /* GetBuildIDForBetaBuildLocalizationTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GetBuildIDForBetaBuildLocalizationTests.swift; sourceTree = "<group>"; };
+		311FE2C921B1D2950078C9C0 /* ReadBetaBuildLocalizationInformationTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ReadBetaBuildLocalizationInformationTests.swift; sourceTree = "<group>"; };
+		311FE2CA21B1D2950078C9C0 /* ModifyBetaBuildLocalizationTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ModifyBetaBuildLocalizationTests.swift; sourceTree = "<group>"; };
+		311FE2CB21B1D2950078C9C0 /* CreateBetaBuildLocalizationTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CreateBetaBuildLocalizationTests.swift; sourceTree = "<group>"; };
+		311FE2CC21B1D2950078C9C0 /* ListBetaBuildLocalizationsTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ListBetaBuildLocalizationsTests.swift; sourceTree = "<group>"; };
+		311FE2CD21B1D2950078C9C0 /* DeleteBetaBuildLocalizationTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DeleteBetaBuildLocalizationTests.swift; sourceTree = "<group>"; };
+		311FE2CF21B1D2950078C9C0 /* ReadAppInformationOfBetaLicenseAgreementTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ReadAppInformationOfBetaLicenseAgreementTests.swift; sourceTree = "<group>"; };
+		311FE2D021B1D2950078C9C0 /* ListBetaLicenseAgreementsTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ListBetaLicenseAgreementsTests.swift; sourceTree = "<group>"; };
+		311FE2D121B1D2950078C9C0 /* ReadBetaLicenseAgreementInformationTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ReadBetaLicenseAgreementInformationTests.swift; sourceTree = "<group>"; };
+		311FE2D221B1D2950078C9C0 /* ModifyBetaLicenseAgreementTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ModifyBetaLicenseAgreementTests.swift; sourceTree = "<group>"; };
+		311FE2D321B1D2950078C9C0 /* GetAppResourceIDForBetaLicenseAgreementTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GetAppResourceIDForBetaLicenseAgreementTests.swift; sourceTree = "<group>"; };
+		311FE2D521B1D2950078C9C0 /* ListPrereleaseVersionsTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ListPrereleaseVersionsTests.swift; sourceTree = "<group>"; };
+		311FE2D621B1D2950078C9C0 /* GetAppResourceIDForPrereleaseVersionTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GetAppResourceIDForPrereleaseVersionTests.swift; sourceTree = "<group>"; };
+		311FE2D721B1D2950078C9C0 /* GetBuildIDsOfPrereleaseVersionTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GetBuildIDsOfPrereleaseVersionTests.swift; sourceTree = "<group>"; };
+		311FE2D821B1D2950078C9C0 /* ReadPrereleaseVersionInformationTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ReadPrereleaseVersionInformationTests.swift; sourceTree = "<group>"; };
+		311FE2D921B1D2950078C9C0 /* ReadAppInformationOfPrereleaseVersionTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ReadAppInformationOfPrereleaseVersionTests.swift; sourceTree = "<group>"; };
+		311FE2DA21B1D2950078C9C0 /* ListBuildsOfPrereleaseVersionTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ListBuildsOfPrereleaseVersionTests.swift; sourceTree = "<group>"; };
 		314DF9E321A6CB17008FFF99 /* ListAppsTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListAppsTests.swift; sourceTree = "<group>"; };
 		3183103721A8497800638289 /* QueryParameterTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QueryParameterTests.swift; sourceTree = "<group>"; };
 		3183103921A8719F00638289 /* GetAppTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetAppTests.swift; sourceTree = "<group>"; };
@@ -349,13 +449,105 @@
 			path = Users;
 			sourceTree = "<group>";
 		};
+		311FE2A321B1D2950078C9C0 /* Beta App Review Submissions */ = {
+			isa = PBXGroup;
+			children = (
+				311FE2A521B1D2950078C9C0 /* GetBuildIDForBetaAppReviewSubmissionTests.swift */,
+				311FE2A721B1D2950078C9C0 /* ListBetaAppReviewSubmissionsTests.swift */,
+				311FE2A821B1D2950078C9C0 /* ReadBetaAppReviewSubmissionInformationTests.swift */,
+				311FE2A621B1D2950078C9C0 /* ReadBuildInformationOfBetaAppReviewSubmissionTests.swift */,
+				311FE2A421B1D2950078C9C0 /* SubmitAppForBetaReviewTests.swift */,
+			);
+			path = "Beta App Review Submissions";
+			sourceTree = "<group>";
+		};
+		311FE2A921B1D2950078C9C0 /* Build Beta Details */ = {
+			isa = PBXGroup;
+			children = (
+				311FE2AE21B1D2950078C9C0 /* GetBuildIDForBuildBetaDetailTests.swift */,
+				311FE2AC21B1D2950078C9C0 /* ListBuildBetaDetailsTests.swift */,
+				311FE2AA21B1D2950078C9C0 /* ModifyBuildBetaDetailTests.swift */,
+				311FE2AB21B1D2950078C9C0 /* ReadBuildBetaDetailInformationTests.swift */,
+				311FE2AD21B1D2950078C9C0 /* ReadBuildInformationOfBuildBetaDetailTests.swift */,
+			);
+			path = "Build Beta Details";
+			sourceTree = "<group>";
+		};
+		311FE2AF21B1D2950078C9C0 /* Builds */ = {
+			isa = PBXGroup;
+			children = (
+				311FE2C421B1D2950078C9C0 /* AddAccessForBetaGroupsToBuildTests.swift */,
+				311FE2BF21B1D2950078C9C0 /* AssignAppEncryptionDeclarationForBuildTests.swift */,
+				311FE2B521B1D2950078C9C0 /* AssignIndividualTestersToBuildTests.swift */,
+				311FE2C221B1D2950078C9C0 /* GetAppEncryptionDeclarationIDForBuildTests.swift */,
+				311FE2B421B1D2950078C9C0 /* GetAppResourceIDForBuildTests.swift */,
+				311FE2B621B1D2950078C9C0 /* GetBetaAppReviewSubmissionIDOfBuildTests.swift */,
+				311FE2B121B1D2950078C9C0 /* GetBetaBuildLocalizationIDsOfBuildTests.swift */,
+				311FE2C521B1D2950078C9C0 /* GetBuildBetaDetailsResourceIDForBuildTests.swift */,
+				311FE2BA21B1D2950078C9C0 /* GetResourceIDsOfIndividualTestersForBuildTests.swift */,
+				311FE2BC21B1D2950078C9C0 /* GetResourceIDsOfPrereleaseVersionsForBuildTests.swift */,
+				311FE2C121B1D2950078C9C0 /* ListBetaBuildLocalizationsOfBuildTests.swift */,
+				311FE2B321B1D2950078C9C0 /* ListBuildsTests.swift */,
+				311FE2B021B1D2950078C9C0 /* ListIndividualTestersForBuildTests.swift */,
+				311FE2BE21B1D2950078C9C0 /* ModifyBuildTests.swift */,
+				311FE2BB21B1D2950078C9C0 /* ReadAppEncryptionDeclarationOfBuildTests.swift */,
+				311FE2B921B1D2950078C9C0 /* ReadAppInformationOfBuildTests.swift */,
+				311FE2B221B1D2950078C9C0 /* ReadBetaAppReviewSubmissionOfBuildTests.swift */,
+				311FE2B721B1D2950078C9C0 /* ReadBuildBetaDetailsInformationOfBuildTests.swift */,
+				311FE2BD21B1D2950078C9C0 /* ReadBuildInformationTests.swift */,
+				311FE2C321B1D2950078C9C0 /* ReadPrereleaseVersionOfBuildTests.swift */,
+				311FE2C021B1D2950078C9C0 /* RemoveAccessForBetaGroupsToBuildTests.swift */,
+				311FE2B821B1D2950078C9C0 /* RemoveIndividualTestersFromBuildTests.swift */,
+			);
+			path = Builds;
+			sourceTree = "<group>";
+		};
+		311FE2C621B1D2950078C9C0 /* Beta Build Localizations */ = {
+			isa = PBXGroup;
+			children = (
+				311FE2CB21B1D2950078C9C0 /* CreateBetaBuildLocalizationTests.swift */,
+				311FE2CD21B1D2950078C9C0 /* DeleteBetaBuildLocalizationTests.swift */,
+				311FE2C821B1D2950078C9C0 /* GetBuildIDForBetaBuildLocalizationTests.swift */,
+				311FE2CC21B1D2950078C9C0 /* ListBetaBuildLocalizationsTests.swift */,
+				311FE2CA21B1D2950078C9C0 /* ModifyBetaBuildLocalizationTests.swift */,
+				311FE2C921B1D2950078C9C0 /* ReadBetaBuildLocalizationInformationTests.swift */,
+				311FE2C721B1D2950078C9C0 /* ReadBuildInformationOfBetaBuildLocalizationTests.swift */,
+			);
+			path = "Beta Build Localizations";
+			sourceTree = "<group>";
+		};
+		311FE2CE21B1D2950078C9C0 /* Beta License Agreements */ = {
+			isa = PBXGroup;
+			children = (
+				311FE2D321B1D2950078C9C0 /* GetAppResourceIDForBetaLicenseAgreementTests.swift */,
+				311FE2D021B1D2950078C9C0 /* ListBetaLicenseAgreementsTests.swift */,
+				311FE2D221B1D2950078C9C0 /* ModifyBetaLicenseAgreementTests.swift */,
+				311FE2CF21B1D2950078C9C0 /* ReadAppInformationOfBetaLicenseAgreementTests.swift */,
+				311FE2D121B1D2950078C9C0 /* ReadBetaLicenseAgreementInformationTests.swift */,
+			);
+			path = "Beta License Agreements";
+			sourceTree = "<group>";
+		};
+		311FE2D421B1D2950078C9C0 /* Prerelease Versions */ = {
+			isa = PBXGroup;
+			children = (
+				311FE2D621B1D2950078C9C0 /* GetAppResourceIDForPrereleaseVersionTests.swift */,
+				311FE2D721B1D2950078C9C0 /* GetBuildIDsOfPrereleaseVersionTests.swift */,
+				311FE2DA21B1D2950078C9C0 /* ListBuildsOfPrereleaseVersionTests.swift */,
+				311FE2D521B1D2950078C9C0 /* ListPrereleaseVersionsTests.swift */,
+				311FE2D921B1D2950078C9C0 /* ReadAppInformationOfPrereleaseVersionTests.swift */,
+				311FE2D821B1D2950078C9C0 /* ReadPrereleaseVersionInformationTests.swift */,
+			);
+			path = "Prerelease Versions";
+			sourceTree = "<group>";
+		};
 		318824BE21AD3C8500676DA7 /* Endpoints */ = {
 			isa = PBXGroup;
 			children = (
 				311FE28521B1C7E80078C9C0 /* Sales and Finance Reports */,
+				318824BF21AD3D4900676DA7 /* TestFlight */,
 				311FE28821B1C7E80078C9C0 /* Users */,
 				311FE27E21B1C7E80078C9C0 /* Users Invitations */,
-				318824BF21AD3D4900676DA7 /* TestFlight */,
 			);
 			path = Endpoints;
 			sourceTree = "<group>";
@@ -363,14 +555,20 @@
 		318824BF21AD3D4900676DA7 /* TestFlight */ = {
 			isa = PBXGroup;
 			children = (
-				311FE1EC21B181F60078C9C0 /* Build Beta Notifications */,
-				311FE1DE21B17DFB0078C9C0 /* Beta App Review Detail */,
 				311FE1AA21B171090078C9C0 /* App Encryption Declarations */,
 				318824C021AD3D5600676DA7 /* Apps */,
 				311FE1C421B1784E0078C9C0 /* Beta App Localizations */,
+				311FE1DE21B17DFB0078C9C0 /* Beta App Review Detail */,
+				311FE2A321B1D2950078C9C0 /* Beta App Review Submissions */,
+				311FE2C621B1D2950078C9C0 /* Beta Build Localizations */,
 				310FAE0521B16157004327B2 /* Beta Groups */,
+				311FE2CE21B1D2950078C9C0 /* Beta License Agreements */,
 				310FADE021B1539E004327B2 /* Beta Tester Invitations */,
 				31F3DF4521AEDD63006998D5 /* BetaTesters */,
+				311FE2A921B1D2950078C9C0 /* Build Beta Details */,
+				311FE1EC21B181F60078C9C0 /* Build Beta Notifications */,
+				311FE2AF21B1D2950078C9C0 /* Builds */,
+				311FE2D421B1D2950078C9C0 /* Prerelease Versions */,
 			);
 			path = TestFlight;
 			sourceTree = "<group>";
@@ -737,13 +935,21 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				311FE30321B1D2960078C9C0 /* ListBetaLicenseAgreementsTests.swift in Sources */,
+				311FE2FC21B1D2960078C9C0 /* GetBuildIDForBetaBuildLocalizationTests.swift in Sources */,
+				311FE2FF21B1D2960078C9C0 /* CreateBetaBuildLocalizationTests.swift in Sources */,
 				31F3DF6321AEDD63006998D5 /* ListBuildsAssignedToBetaTesterTests.swift in Sources */,
+				311FE30121B1D2960078C9C0 /* DeleteBetaBuildLocalizationTests.swift in Sources */,
 				310FAE1621B16157004327B2 /* ListBetaTestersInBetaGroupTests.swift in Sources */,
 				31F929E2219C6AC40061DEA5 /* JWTRequestsAuthenticatorTests.swift in Sources */,
 				31F3DF5B21AEDD63006998D5 /* RemoveBetaTesterFromBetaGroupsTests.swift in Sources */,
 				314DF9E421A6CB17008FFF99 /* ListAppsTests.swift in Sources */,
+				311FE30221B1D2960078C9C0 /* ReadAppInformationOfBetaLicenseAgreementTests.swift in Sources */,
+				311FE30521B1D2960078C9C0 /* ModifyBetaLicenseAgreementTests.swift in Sources */,
 				310FAE2121B16157004327B2 /* ReadAppInformationOfBetaGroupTests.swift in Sources */,
 				311FE1B421B171090078C9C0 /* ReadAppEncryptionDeclarationInformation.swift in Sources */,
+				311FE30721B1D2960078C9C0 /* ListPrereleaseVersionsTests.swift in Sources */,
+				311FE2E221B1D2950078C9C0 /* ListBuildBetaDetailsTests.swift in Sources */,
 				310FAE2021B16157004327B2 /* CreateBetaGroupTests.swift in Sources */,
 				31F3DF5721AEDD63006998D5 /* ListBetaGroupsToWhichBetaTesterBelongsTests.swift in Sources */,
 				31F3DF5821AEDD63006998D5 /* UnassignBetaTesterFromBuildsTests.swift in Sources */,
@@ -754,15 +960,24 @@
 				311FE1D021B1784E0078C9C0 /* DeleteBetaAppLocalizationTests.swift in Sources */,
 				318824F121AD409500676DA7 /* ListPrereleaseVersionsForAppTests.swift in Sources */,
 				318824EC21AD409500676DA7 /* GetBetaGroupIDsForAppTests.swift in Sources */,
+				311FE30A21B1D2960078C9C0 /* ReadPrereleaseVersionInformationTests.swift in Sources */,
+				311FE30C21B1D2960078C9C0 /* ListBuildsOfPrereleaseVersionTests.swift in Sources */,
+				311FE2EC21B1D2950078C9C0 /* ReadBuildBetaDetailsInformationOfBuildTests.swift in Sources */,
 				311FE29721B1C7E80078C9C0 /* CancelUserInvitationTests.swift in Sources */,
+				311FE2F721B1D2960078C9C0 /* GetAppEncryptionDeclarationIDForBuildTests.swift in Sources */,
 				31F3DF5A21AEDD63006998D5 /* CreateBetaTesterTests.swift in Sources */,
+				311FE30621B1D2960078C9C0 /* GetAppResourceIDForBetaLicenseAgreementTests.swift in Sources */,
+				311FE2DE21B1D2950078C9C0 /* ListBetaAppReviewSubmissionsTests.swift in Sources */,
 				310FAE1921B16157004327B2 /* AddBuildsToBetaGroupTests.swift in Sources */,
 				311FE2A221B1C7E80078C9C0 /* ListUsersTests.swift in Sources */,
 				310FAE1D21B16157004327B2 /* ModifyBetaGroupTests.swift in Sources */,
 				311FE29E21B1C7E80078C9C0 /* GetVisibleAppResourceIDsForUserTests.swift in Sources */,
 				310FADE221B153B8004327B2 /* SendInvitationToBetaTesterTests.swift in Sources */,
+				311FE2F621B1D2960078C9C0 /* ListBetaBuildLocalizationsOfBuildTests.swift in Sources */,
 				311FE29D21B1C7E80078C9C0 /* AddVisibleAppsToUserTests.swift in Sources */,
 				310FAE1521B16157004327B2 /* ReadBetaGroupInformationTests.swift in Sources */,
+				311FE2DC21B1D2950078C9C0 /* GetBuildIDForBetaAppReviewSubmissionTests.swift in Sources */,
+				311FE2E621B1D2950078C9C0 /* GetBetaBuildLocalizationIDsOfBuildTests.swift in Sources */,
 				310FAE1821B16157004327B2 /* ListBetaGroupsTests.swift in Sources */,
 				318824F221AD409500676DA7 /* GetBuildIDsOfAppTests.swift in Sources */,
 				31F3DF5521AEDD63006998D5 /* DeleteBetaTesterTests.swift in Sources */,
@@ -771,55 +986,88 @@
 				311FE29A21B1C7E80078C9C0 /* ListAppsVisibleToUserTests.swift in Sources */,
 				311FE1B221B171090078C9C0 /* GetAppResourceIDForAppEncryptionDeclarationTests.swift in Sources */,
 				318824EE21AD409500676DA7 /* ListBetaAppLocalizationsOfAppTests.swift in Sources */,
+				311FE2E821B1D2950078C9C0 /* ListBuildsTests.swift in Sources */,
+				311FE30421B1D2960078C9C0 /* ReadBetaLicenseAgreementInformationTests.swift in Sources */,
 				311FE29821B1C7E80078C9C0 /* DownloadFinanceReportsTests.swift in Sources */,
+				311FE2F521B1D2960078C9C0 /* RemoveAccessForBetaGroupsToBuildTests.swift in Sources */,
 				311FE1E621B17DFB0078C9C0 /* ModifyBetaAppReviewDetailTests.swift in Sources */,
+				311FE2EE21B1D2950078C9C0 /* ReadAppInformationOfBuildTests.swift in Sources */,
 				311FE1E521B17DFB0078C9C0 /* ListBetaAppReviewDetailsTests.swift in Sources */,
 				31F3DF5F21AEDD63006998D5 /* GetAppResourceIDsForBetaTesterTests.swift in Sources */,
+				311FE30921B1D2960078C9C0 /* GetBuildIDsOfPrereleaseVersionTests.swift in Sources */,
+				311FE2F021B1D2960078C9C0 /* ReadAppEncryptionDeclarationOfBuildTests.swift in Sources */,
+				311FE2EF21B1D2960078C9C0 /* GetResourceIDsOfIndividualTestersForBuildTests.swift in Sources */,
 				311FE29921B1C7E80078C9C0 /* DownloadSalesAndTrendsReportsTests.swift in Sources */,
+				311FE2EB21B1D2950078C9C0 /* GetBetaAppReviewSubmissionIDOfBuildTests.swift in Sources */,
+				311FE2F821B1D2960078C9C0 /* ReadPrereleaseVersionOfBuildTests.swift in Sources */,
 				318824EB21AD409500676DA7 /* GetBetaAppReviewDetailsResourceIDForAppTests.swift in Sources */,
 				311FE1D121B1784E0078C9C0 /* GetAppResourceIDForBetaAppLocalizationTests.swift in Sources */,
+				311FE2F421B1D2960078C9C0 /* AssignAppEncryptionDeclarationForBuildTests.swift in Sources */,
+				311FE2F221B1D2960078C9C0 /* ReadBuildInformationTests.swift in Sources */,
 				31F3DF6021AEDD63006998D5 /* ListBetaTestersTests.swift in Sources */,
 				311FE1E721B17DFB0078C9C0 /* ReadAppInformationOfBetaAppReviewDetailTests.swift in Sources */,
+				311FE2E521B1D2950078C9C0 /* ListIndividualTestersForBuildTests.swift in Sources */,
 				318824F421AD409500676DA7 /* GetBetaLicenseAgreementOfAppTests.swift in Sources */,
 				311FE1CD21B1784E0078C9C0 /* ReadAppInformationOfBetaAppLocalizationTests.swift in Sources */,
 				310FAE1B21B16157004327B2 /* GetBuildIDsInBetaGroupTests.swift in Sources */,
 				311FE29C21B1C7E80078C9C0 /* ReadUserInformationTests.swift in Sources */,
 				311FE29521B1C7E80078C9C0 /* ReadUserInvitationInformationTests.swift in Sources */,
+				311FE2F121B1D2960078C9C0 /* GetResourceIDsOfPrereleaseVersionsForBuildTests.swift in Sources */,
 				310FAE1C21B16157004327B2 /* ListBuildsForBetaGroupTests.swift in Sources */,
 				3183103821A8497800638289 /* QueryParameterTests.swift in Sources */,
+				311FE2FD21B1D2960078C9C0 /* ReadBetaBuildLocalizationInformationTests.swift in Sources */,
 				3183103A21A8719F00638289 /* GetAppTests.swift in Sources */,
 				311FE1B121B171090078C9C0 /* ReadAppInformationOfAppEncryptionDeclaration.swift in Sources */,
 				318824EF21AD409500676DA7 /* GetBetaLicenseAgreementIDForAppTests.swift in Sources */,
 				318824F021AD409500676DA7 /* ListBuildsOfAppTests.swift in Sources */,
 				318824ED21AD409500676DA7 /* GetBetaAppLocalizationIDsOfAppTests.swift in Sources */,
+				311FE2FE21B1D2960078C9C0 /* ModifyBetaBuildLocalizationTests.swift in Sources */,
 				311FE1D221B1784E0078C9C0 /* CreateBetaAppLocalizationTests.swift in Sources */,
 				318824F321AD409500676DA7 /* ListBetaGroupsForAppTests.swift in Sources */,
 				311FE2A121B1C7E80078C9C0 /* ReplaceListOfVisibleAppsForUserTests.swift in Sources */,
+				311FE2E121B1D2950078C9C0 /* ReadBuildBetaDetailInformationTests.swift in Sources */,
 				310FAE2221B16157004327B2 /* DeleteBetaGroupTests.swift in Sources */,
+				311FE2F321B1D2960078C9C0 /* ModifyBuildTests.swift in Sources */,
 				311FE29621B1C7E80078C9C0 /* GetAppResourceIDsVisibleToInvitedUserTests.swift in Sources */,
+				311FE30021B1D2960078C9C0 /* ListBetaBuildLocalizationsTests.swift in Sources */,
+				311FE2ED21B1D2950078C9C0 /* RemoveIndividualTestersFromBuildTests.swift in Sources */,
 				311FE29F21B1C7E80078C9C0 /* ModifyUserAccountTests.swift in Sources */,
 				310FAE1F21B16157004327B2 /* AddBetaTestersToBetaGroupTests.swift in Sources */,
 				311FE29321B1C7E80078C9C0 /* ListInvitedUsersTests.swift in Sources */,
+				311FE2FB21B1D2960078C9C0 /* ReadBuildInformationOfBetaBuildLocalizationTests.swift in Sources */,
 				310FAE1A21B16157004327B2 /* GetBetaTesterIDsInBetaGroupTests.swift in Sources */,
 				31F3DF5C21AEDD63006998D5 /* ListAppsForBetaTesterTests.swift in Sources */,
+				311FE2E021B1D2950078C9C0 /* ModifyBuildBetaDetailTests.swift in Sources */,
 				310FAE1E21B16157004327B2 /* RemoveBetaTestersFromBetaGroupTests.swift in Sources */,
 				311FE29221B1C7E80078C9C0 /* InviteUserTests.swift in Sources */,
+				311FE2DF21B1D2950078C9C0 /* ReadBetaAppReviewSubmissionInformationTests.swift in Sources */,
 				311FE1E421B17DFB0078C9C0 /* ReadBetaAppReviewDetailInformationTests.swift in Sources */,
 				311FE1B021B171090078C9C0 /* ListAppEncryptionDeclarations.swift in Sources */,
+				311FE2FA21B1D2960078C9C0 /* GetBuildBetaDetailsResourceIDForBuildTests.swift in Sources */,
 				310FAE1721B16157004327B2 /* RemoveBuildsFromBetaGroupTests.swift in Sources */,
 				311FE2A021B1C7E80078C9C0 /* RemoveUserAccountTests.swift in Sources */,
+				311FE2DD21B1D2950078C9C0 /* ReadBuildInformationOfBetaAppReviewSubmissionTests.swift in Sources */,
 				310FAE2321B16157004327B2 /* GetAppResourceIDForBetaGroupTests.swift in Sources */,
+				311FE2EA21B1D2950078C9C0 /* AssignIndividualTestersToBuildTests.swift in Sources */,
+				311FE2E721B1D2950078C9C0 /* ReadBetaAppReviewSubmissionOfBuildTests.swift in Sources */,
+				311FE2E321B1D2950078C9C0 /* ReadBuildInformationOfBuildBetaDetailTests.swift in Sources */,
 				31F3DF5E21AEDD63006998D5 /* RemoveBetaTesterAccessToAppsTests.swift in Sources */,
 				311FE1B321B171090078C9C0 /* AssignBuildsToAppEncryptionDeclarationTests.swift in Sources */,
 				31F3DF5621AEDD63006998D5 /* GetBetaTesterTests.swift in Sources */,
 				311FE1CF21B1784E0078C9C0 /* ListBetaAppLocalizationsTests.swift in Sources */,
 				318824E921AD409500676DA7 /* GetBetaAppReviewDetailsResourceOfAppTests.swift in Sources */,
+				311FE30821B1D2960078C9C0 /* GetAppResourceIDForPrereleaseVersionTests.swift in Sources */,
 				311FE1EE21B181F60078C9C0 /* SendNotificationOfAvailableBuildTests.swift in Sources */,
+				311FE2F921B1D2960078C9C0 /* AddAccessForBetaGroupsToBuildTests.swift in Sources */,
 				31F3DF5D21AEDD63006998D5 /* GetBetaGroupIDsOfBetaTesterGroupsTests.swift in Sources */,
 				31F929E3219C6AC40061DEA5 /* JWTTests.swift in Sources */,
+				311FE2E421B1D2950078C9C0 /* GetBuildIDForBuildBetaDetailTests.swift in Sources */,
 				311FE29B21B1C7E80078C9C0 /* RemoveVisibleAppsFromUserTests.swift in Sources */,
+				311FE30B21B1D2960078C9C0 /* ReadAppInformationOfPrereleaseVersionTests.swift in Sources */,
 				31F3DF6121AEDD63006998D5 /* GetIDsOfBuildsAssignedToBetaTesterTests.swift in Sources */,
+				311FE2E921B1D2950078C9C0 /* GetAppResourceIDForBuildTests.swift in Sources */,
 				311FE29421B1C7E80078C9C0 /* ListAppsVisibleToInvitedUserTests.swift in Sources */,
+				311FE2DB21B1D2950078C9C0 /* SubmitAppForBetaReviewTests.swift in Sources */,
 				311FE1CC21B1784E0078C9C0 /* ReadBetaAppLocalizationInformationTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

@@ -11,7 +11,6 @@ import XCTest
 final class GetVisibleAppResourceIDsForUserTests: XCTestCase {
     
     func testURLRequest() {
-        let buildId = "buildId"
         let endpoint = APIEndpoint.appIDs(visibleForUserWithId: "userId", limit: 2)
         let request = try? endpoint.asURLRequest()
         XCTAssertEqual(request?.httpMethod, "GET")

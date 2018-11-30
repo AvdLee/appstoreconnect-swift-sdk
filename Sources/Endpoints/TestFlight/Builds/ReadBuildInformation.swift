@@ -16,7 +16,7 @@ extension APIEndpoint where T == BuildResponse {
     ///   - fields: Fields to return for included related types.
     ///   - include: Relationship data to include in the response.
     ///   - limit: Number of included related resources to return.
-    public static func buildInformation(
+    public static func build(
         withId id: String,
         fields: [ReadBuildInformation.Field]? = nil,
         include: [ReadBuildInformation.Include]? = nil,
