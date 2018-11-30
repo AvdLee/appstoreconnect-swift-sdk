@@ -14,6 +14,7 @@ The Swift SDK to work with the App Store Connect API from Apple. See for more in
   s.social_media_url = 'https://twitter.com/twannl'
 
   s.ios.deployment_target = '11.0'
+  s.osx.deployment_target = '10.12'
 
   s.source_files = 'Sources/**/*'
   s.dependency 'Alamofire'
