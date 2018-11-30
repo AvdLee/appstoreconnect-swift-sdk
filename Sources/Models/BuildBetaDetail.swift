@@ -8,25 +8,25 @@
 import Foundation
     
 /// The data structure that represents the resource.
-public struct BuildBetaDetail: Decodable {
+public struct BuildBetaDetail: Codable {
 
     /// The resource's attributes.
     public let attributes: BuildBetaDetail.Attributes?
 
-    /// (Required) The opaque resource ID that uniquely identifies the resource.
+    /// The opaque resource ID that uniquely identifies the resource.
     public let `id`: String
 
     /// Navigational links to related data and included resource types and IDs.
     public let relationships: BuildBetaDetail.Relationships?
 
-    /// (Required) The resource type.Value: buildBetaDetails
-    public let type: String
+    /// The resource type.Value: buildBetaDetails
+    public let type: String = "buildBetaDetails"
 
-    /// (Required) Navigational links that include the self-link.
+    /// Navigational links that include the self-link.
     public let links: ResourceLinks<BuildBetaDetailResponse>
 
     /// Attributes that describe a resource.
-    public struct Attributes: Decodable {
+    public struct Attributes: Codable {
     
         /// A Boolean value that enables you to send test invitations to users automatically when the build is available to external groups.
         public let autoNotifyEnabled: Bool?
@@ -38,7 +38,7 @@ public struct BuildBetaDetail: Decodable {
         public let internalBuildState: InternalBetaState?
     }
     
-    public struct Relationships: Decodable {
+    public struct Relationships: Codable {
     
         /// BuildBetaDetail.Relationships.Build
         public let build: BuildBetaDetail.Relationships.Build?
@@ -48,7 +48,7 @@ public struct BuildBetaDetail: Decodable {
 /// MARK: BuildBetaDetail.Relationships
 extension BuildBetaDetail.Relationships {
     
-    public struct Build: Decodable {
+    public struct Build: Codable {
     
         /// BuildBetaDetail.Relationships.Build.Data
         public let data: BuildBetaDetail.Relationships.Build.Data?
@@ -61,16 +61,16 @@ extension BuildBetaDetail.Relationships {
 /// MARK: BuildBetaDetail.Relationships.Build
 extension BuildBetaDetail.Relationships.Build {
     
-    public struct Data: Decodable {
+    public struct Data: Codable {
     
-        /// (Required) The opaque resource ID that uniquely identifies the resource.
+        /// The opaque resource ID that uniquely identifies the resource.
         public let `id`: String
     
-        /// (Required) The resource type.Value: builds
-        public let type: String
+        /// The resource type.Value: builds
+        public let type: String = "builds"
     }
     
-    public struct Links: Decodable {
+    public struct Links: Codable {
     
         /// uri-reference
         public let related: URL?

@@ -8,17 +8,23 @@
 import Foundation
     
 /// A request containing the IDs of related resources.
-public struct BuildBetaGroupsLinkagesRequest: Decodable {
+public struct BuildBetaGroupsLinkagesRequest: Codable {
 
-    /// (Required) The types and IDs of related resources.
+    /// - Parameters:
+    ///   - betaGroupIds: Array of opaque resource ID that uniquely identifies the resources.
+    init(_ betaGroupIds: [String]) {
+        data = betaGroupIds.map({ Data(id: $0) })
+    }
+
+    /// The types and IDs of related resources.
     public let data: [BuildBetaGroupsLinkagesRequest.Data]
     
-    public struct Data: Decodable {
+    public struct Data: Codable {
     
-        /// (Required) The opaque resource ID that uniquely identifies the resource.
+        /// The opaque resource ID that uniquely identifies the resource.
         public let `id`: String
     
-        /// (Required) The resource type.Value: betaGroups
-        public let type: String
+        /// The resource type.Value: betaGroups
+        public let type: String = "betaGroups"
     }
 }

@@ -8,25 +8,25 @@
 import Foundation
     
 /// The data structure that represents the resource.
-public struct BetaAppLocalization: Decodable {
+public struct BetaAppLocalization: Codable {
 
     /// The resource's attributes.
     public let attributes: BetaAppLocalization.Attributes?
 
-    /// (Required) The opaque resource ID that uniquely identifies the resource.
+    /// The opaque resource ID that uniquely identifies the resource.
     public let `id`: String
 
     /// Navigational links to related data and included resource types and IDs.
     public let relationships: BetaAppLocalization.Relationships?
 
-    /// (Required) The resource type.Value: betaAppLocalizations
-    public let type: String
+    /// The resource type.Value: betaAppLocalizations
+    public let type: String = "betaAppLocalizations"
 
-    /// (Required) Navigational links that include the self-link.
+    /// Navigational links that include the self-link.
     public let links: ResourceLinks<BetaAppLocalizationResponse>
 
     /// Attributes that describe a resource.
-    public struct Attributes: Decodable {
+    public struct Attributes: Codable {
     
         /// A description of your app that highlights features and functionality.
         public let description: String?
@@ -47,7 +47,7 @@ public struct BetaAppLocalization: Decodable {
         public let tvOsPrivacyPolicy: String?
     }
     
-    public struct Relationships: Decodable {
+    public struct Relationships: Codable {
     
         /// BetaAppLocalization.Relationships.App
         public let app: BetaAppLocalization.Relationships.App?
@@ -57,7 +57,7 @@ public struct BetaAppLocalization: Decodable {
 /// MARK: BetaAppLocalization.Relationships
 extension BetaAppLocalization.Relationships {
     
-    public struct App: Decodable {
+    public struct App: Codable {
     
         /// BetaAppLocalization.Relationships.App.Data
         public let data: BetaAppLocalization.Relationships.App.Data?
@@ -70,16 +70,16 @@ extension BetaAppLocalization.Relationships {
 /// MARK: BetaAppLocalization.Relationships.App
 extension BetaAppLocalization.Relationships.App {
     
-    public struct Data: Decodable {
+    public struct Data: Codable {
     
-        /// (Required) The opaque resource ID that uniquely identifies the resource.
+        /// The opaque resource ID that uniquely identifies the resource.
         public let `id`: String
     
-        /// (Required) The resource type.Value: apps
-        public let type: String
+        /// The resource type.Value: apps
+        public let type: String = "apps"
     }
     
-    public struct Links: Decodable {
+    public struct Links: Codable {
     
         /// uri-reference
         public let related: URL?

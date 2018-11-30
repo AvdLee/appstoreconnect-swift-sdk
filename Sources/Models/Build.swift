@@ -8,25 +8,25 @@
 import Foundation
     
 /// The data structure that represents the resource.
-public struct Build: Decodable {
+public struct Build: Codable {
 
     /// The resource's attributes.
     public let attributes: Build.Attributes?
 
-    /// (Required) The opaque resource ID that uniquely identifies the resource.
+    /// The opaque resource ID that uniquely identifies the resource.
     public let `id`: String
 
     /// Navigational links to related data and included resource types and IDs.
     public let relationships: Build.Relationships?
 
-    /// (Required) The resource type.Value: builds
-    public let type: String
+    /// The resource type.Value: builds
+    public let type: String = "builds"
 
-    /// (Required) Navigational links that include the self-link.
+    /// Navigational links that include the self-link.
     public let links: ResourceLinks<BuildResponse>
 
     /// Attributes that describe a resource.
-    public struct Attributes: Decodable {
+    public struct Attributes: Codable {
     
         /// A Boolean value that indicates if the build has expired. An expired build is unavailable for testing.
         public let expired: Bool?
@@ -53,7 +53,7 @@ public struct Build: Decodable {
         public let expirationDate: Date?
     }
     
-    public struct Relationships: Decodable {
+    public struct Relationships: Codable {
     
         /// Build.Relationships.App
         public let app: Build.Relationships.App?
@@ -86,7 +86,7 @@ public struct Build: Decodable {
 /// MARK: Build.Relationships
 extension Build.Relationships {
     
-    public struct App: Decodable {
+    public struct App: Codable {
     
         /// Build.Relationships.App.Data
         public let data: Build.Relationships.App.Data?
@@ -95,7 +95,7 @@ extension Build.Relationships {
         public let links: Build.Relationships.App.Links?
     }
     
-    public struct AppEncryptionDeclaration: Decodable {
+    public struct AppEncryptionDeclaration: Codable {
     
         /// Build.Relationships.AppEncryptionDeclaration.Data
         public let data: Build.Relationships.AppEncryptionDeclaration.Data?
@@ -104,7 +104,7 @@ extension Build.Relationships {
         public let links: Build.Relationships.AppEncryptionDeclaration.Links?
     }
     
-    public struct BetaAppReviewSubmission: Decodable {
+    public struct BetaAppReviewSubmission: Codable {
     
         /// Build.Relationships.BetaAppReviewSubmission.Data
         public let data: Build.Relationships.BetaAppReviewSubmission.Data?
@@ -113,7 +113,7 @@ extension Build.Relationships {
         public let links: Build.Relationships.BetaAppReviewSubmission.Links?
     }
     
-    public struct BetaBuildLocalizations: Decodable {
+    public struct BetaBuildLocalizations: Codable {
     
         /// [Build.Relationships.BetaBuildLocalizations.Data]
         public let data: [Build.Relationships.BetaBuildLocalizations.Data]?
@@ -125,7 +125,7 @@ extension Build.Relationships {
         public let meta: PagingInformation?
     }
     
-    public struct BetaGroups: Decodable {
+    public struct BetaGroups: Codable {
     
         /// [Build.Relationships.BetaGroups.Data]
         public let data: [Build.Relationships.BetaGroups.Data]?
@@ -137,7 +137,7 @@ extension Build.Relationships {
         public let meta: PagingInformation?
     }
     
-    public struct BuildBetaDetail: Decodable {
+    public struct BuildBetaDetail: Codable {
     
         /// Build.Relationships.BuildBetaDetail.Data
         public let data: Build.Relationships.BuildBetaDetail.Data?
@@ -146,7 +146,7 @@ extension Build.Relationships {
         public let links: Build.Relationships.BuildBetaDetail.Links?
     }
     
-    public struct IndividualTesters: Decodable {
+    public struct IndividualTesters: Codable {
     
         /// [Build.Relationships.IndividualTesters.Data]
         public let data: [Build.Relationships.IndividualTesters.Data]?
@@ -158,7 +158,7 @@ extension Build.Relationships {
         public let meta: PagingInformation?
     }
     
-    public struct PreReleaseVersion: Decodable {
+    public struct PreReleaseVersion: Codable {
     
         /// Build.Relationships.PreReleaseVersion.Data
         public let data: Build.Relationships.PreReleaseVersion.Data?
@@ -171,20 +171,20 @@ extension Build.Relationships {
 /// MARK: Build.Relationships.App
 extension Build.Relationships.App {
     
-    public struct Data: Decodable {
+    public struct Data: Codable {
     
-        /// (Required) The opaque resource ID that uniquely identifies the resource.
+        /// The opaque resource ID that uniquely identifies the resource.
         public let `id`: String
     
-        /// (Required) The resource type.Value: apps
-        public let type: String
+        /// The resource type.Value: apps
+        public let type: String = "apps"
     }
 }
 
 /// MARK: Build.Relationships.App
 extension Build.Relationships.App {
     
-    public struct Links: Decodable {
+    public struct Links: Codable {
     
         /// uri-reference
         public let related: URL?
@@ -197,20 +197,20 @@ extension Build.Relationships.App {
 /// MARK: Build.Relationships.AppEncryptionDeclaration
 extension Build.Relationships.AppEncryptionDeclaration {
     
-    public struct Data: Decodable {
+    public struct Data: Codable {
     
-        /// (Required) The opaque resource ID that uniquely identifies the resource.
+        /// The opaque resource ID that uniquely identifies the resource.
         public let `id`: String
     
-        /// (Required) The resource type.Value: appEncryptionDeclarations
-        public let type: String
+        /// The resource type.Value: appEncryptionDeclarations
+        public let type: String = "appEncryptionDeclarations"
     }
 }
 
 /// MARK: Build.Relationships.AppEncryptionDeclaration
 extension Build.Relationships.AppEncryptionDeclaration {
     
-    public struct Links: Decodable {
+    public struct Links: Codable {
     
         /// uri-reference
         public let related: URL?
@@ -223,20 +223,20 @@ extension Build.Relationships.AppEncryptionDeclaration {
 /// MARK: Build.Relationships.BetaAppReviewSubmission
 extension Build.Relationships.BetaAppReviewSubmission {
     
-    public struct Data: Decodable {
+    public struct Data: Codable {
     
-        /// (Required) The opaque resource ID that uniquely identifies the resource.
+        /// The opaque resource ID that uniquely identifies the resource.
         public let `id`: String
     
-        /// (Required) The resource type.Value: betaAppReviewSubmissions
-        public let type: String
+        /// The resource type.Value: betaAppReviewSubmissions
+        public let type: String = "betaAppReviewSubmissions"
     }
 }
 
 /// MARK: Build.Relationships.BetaAppReviewSubmission
 extension Build.Relationships.BetaAppReviewSubmission {
     
-    public struct Links: Decodable {
+    public struct Links: Codable {
     
         /// uri-reference
         public let related: URL?
@@ -249,20 +249,20 @@ extension Build.Relationships.BetaAppReviewSubmission {
 /// MARK: Build.Relationships.BetaBuildLocalizations
 extension Build.Relationships.BetaBuildLocalizations {
     
-    public struct Data: Decodable {
+    public struct Data: Codable {
     
-        /// (Required) The opaque resource ID that uniquely identifies the resource.
+        /// The opaque resource ID that uniquely identifies the resource.
         public let `id`: String
     
-        /// (Required) The resource type.Value: betaBuildLocalizations
-        public let type: String
+        /// The resource type.Value: betaBuildLocalizations
+        public let type: String = "betaBuildLocalizations"
     }
 }
 
 /// MARK: Build.Relationships.BetaBuildLocalizations
 extension Build.Relationships.BetaBuildLocalizations {
     
-    public struct Links: Decodable {
+    public struct Links: Codable {
     
         /// uri-reference
         public let related: URL?
@@ -275,20 +275,20 @@ extension Build.Relationships.BetaBuildLocalizations {
 /// MARK: Build.Relationships.BetaGroups
 extension Build.Relationships.BetaGroups {
     
-    public struct Data: Decodable {
+    public struct Data: Codable {
     
-        /// (Required) The opaque resource ID that uniquely identifies the resource.
+        /// The opaque resource ID that uniquely identifies the resource.
         public let `id`: String
     
-        /// (Required) The resource type.Value: betaGroups
-        public let type: String
+        /// The resource type.Value: betaGroups
+        public let type: String = "betaGroups"
     }
 }
 
 /// MARK: Build.Relationships.BetaGroups
 extension Build.Relationships.BetaGroups {
     
-    public struct Links: Decodable {
+    public struct Links: Codable {
     
         /// uri-reference
         public let related: URL?
@@ -301,20 +301,20 @@ extension Build.Relationships.BetaGroups {
 /// MARK: Build.Relationships.BuildBetaDetail
 extension Build.Relationships.BuildBetaDetail {
     
-    public struct Data: Decodable {
+    public struct Data: Codable {
     
-        /// (Required) The opaque resource ID that uniquely identifies the resource.
+        /// The opaque resource ID that uniquely identifies the resource.
         public let `id`: String
     
-        /// (Required) The resource type.Value: buildBetaDetails
-        public let type: String
+        /// The resource type.Value: buildBetaDetails
+        public let type: String = "buildBetaDetails"
     }
 }
 
 /// MARK: Build.Relationships.BuildBetaDetail
 extension Build.Relationships.BuildBetaDetail {
     
-    public struct Links: Decodable {
+    public struct Links: Codable {
     
         /// uri-reference
         public let related: URL?
@@ -327,20 +327,20 @@ extension Build.Relationships.BuildBetaDetail {
 /// MARK: Build.Relationships.IndividualTesters
 extension Build.Relationships.IndividualTesters {
     
-    public struct Data: Decodable {
+    public struct Data: Codable {
     
-        /// (Required) The opaque resource ID that uniquely identifies the resource.
+        /// The opaque resource ID that uniquely identifies the resource.
         public let `id`: String
     
-        /// (Required) The resource type.Value: betaTesters
-        public let type: String
+        /// The resource type.Value: betaTesters
+        public let type: String = "betaTesters"
     }
 }
 
 /// MARK: Build.Relationships.IndividualTesters
 extension Build.Relationships.IndividualTesters {
     
-    public struct Links: Decodable {
+    public struct Links: Codable {
     
         /// uri-reference
         public let related: URL?
@@ -353,20 +353,20 @@ extension Build.Relationships.IndividualTesters {
 /// MARK: Build.Relationships.PreReleaseVersion
 extension Build.Relationships.PreReleaseVersion {
     
-    public struct Data: Decodable {
+    public struct Data: Codable {
     
-        /// (Required) The opaque resource ID that uniquely identifies the resource.
+        /// The opaque resource ID that uniquely identifies the resource.
         public let `id`: String
     
-        /// (Required) The resource type.Value: preReleaseVersions
-        public let type: String
+        /// The resource type.Value: preReleaseVersions
+        public let type: String = "preReleaseVersions"
     }
 }
 
 /// MARK: Build.Relationships.PreReleaseVersion
 extension Build.Relationships.PreReleaseVersion {
     
-    public struct Links: Decodable {
+    public struct Links: Codable {
     
         /// uri-reference
         public let related: URL?

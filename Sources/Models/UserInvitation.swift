@@ -8,25 +8,25 @@
 import Foundation
     
 /// The data structure that represents the resource.
-public struct UserInvitation: Decodable {
+public struct UserInvitation: Codable {
 
     /// The resource's attributes.
     public let attributes: UserInvitation.Attributes?
 
-    /// (Required) The opaque resource ID that uniquely identifies the resource.
+    /// The opaque resource ID that uniquely identifies the resource.
     public let `id`: String
 
     /// Navigational links to related data and included resource types and IDs.
     public let relationships: UserInvitation.Relationships?
 
-    /// (Required) The resource type.Value: userInvitations
-    public let type: String
+    /// The resource type.Value: userInvitations
+    public let type: String = "userInvitations"
 
-    /// (Required) Navigational links that include the self-link.
+    /// Navigational links that include the self-link.
     public let links: ResourceLinks<UserInvitationResponse>
 
     /// Attributes that describe a resource.
-    public struct Attributes: Decodable {
+    public struct Attributes: Codable {
     
         /// The email address of a pending user invitation. The email address must be valid to activate the account. It can be any email address, not necessarily one associated with an Apple ID.
         public let email: String?
@@ -50,7 +50,7 @@ public struct UserInvitation: Decodable {
         public let allAppsVisible: Bool?
     }
     
-    public struct Relationships: Decodable {
+    public struct Relationships: Codable {
     
         /// UserInvitation.Relationships.VisibleApps
         public let visibleApps: UserInvitation.Relationships.VisibleApps?
@@ -60,7 +60,7 @@ public struct UserInvitation: Decodable {
 /// MARK: UserInvitation.Relationships
 extension UserInvitation.Relationships {
     
-    public struct VisibleApps: Decodable {
+    public struct VisibleApps: Codable {
     
         /// [UserInvitation.Relationships.VisibleApps.Data]
         public let data: [UserInvitation.Relationships.VisibleApps.Data]?
@@ -76,16 +76,16 @@ extension UserInvitation.Relationships {
 /// MARK: UserInvitation.Relationships.VisibleApps
 extension UserInvitation.Relationships.VisibleApps {
     
-    public struct Data: Decodable {
+    public struct Data: Codable {
     
-        /// (Required) The opaque resource ID that uniquely identifies the resource.
+        /// The opaque resource ID that uniquely identifies the resource.
         public let `id`: String
     
-        /// (Required) The resource type.Value: apps
-        public let type: String
+        /// The resource type.Value: apps
+        public let type: String = "apps"
     }
     
-    public struct Links: Decodable {
+    public struct Links: Codable {
     
         /// uri-reference
         public let related: URL?

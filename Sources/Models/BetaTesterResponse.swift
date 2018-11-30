@@ -8,15 +8,15 @@
 import Foundation
     
 /// A response containing a single resource.
-public struct BetaTesterResponse: Decodable {
+public struct BetaTesterResponse: Codable {
 
-    /// (Required) The resource data.
+    /// The resource data.
     public let data: BetaTester
 
     /// The requested relationship data.￼
     ///  Possible types: App, BetaGroup, Build
     public let include: [BetaTesterRelationship]?
 
-    /// (Required) Navigational links that include the self-link.
+    /// Navigational links that include the self-link.
     public let links: DocumentLinks
 }

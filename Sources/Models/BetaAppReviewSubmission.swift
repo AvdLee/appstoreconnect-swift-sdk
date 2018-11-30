@@ -8,31 +8,31 @@
 import Foundation
     
 /// The data structure that represents the resource.
-public struct BetaAppReviewSubmission: Decodable {
+public struct BetaAppReviewSubmission: Codable {
 
     /// The resource's attributes.
     public let attributes: BetaAppReviewSubmission.Attributes?
 
-    /// (Required) The opaque resource ID that uniquely identifies the resource.
+    /// The opaque resource ID that uniquely identifies the resource.
     public let `id`: String
 
-    /// (Required) Navigational links that include the self-link.
+    /// Navigational links that include the self-link.
     public let links: ResourceLinks<BetaAppReviewSubmissionResponse>
 
     /// Navigational links to related data and included resource types and IDs.
     public let relationships: BetaAppReviewSubmission.Relationships?
 
-    /// (Required) The resource type.Value: betaAppReviewSubmissions
-    public let type: String
+    /// The resource type.Value: betaAppReviewSubmissions
+    public let type: String = "betaAppReviewSubmissions"
 
     /// Attributes that describe a resource.
-    public struct Attributes: Decodable {
+    public struct Attributes: Codable {
     
         /// A state that indicates the current status of the beta app review submission.
         public let betaReviewState: BetaReviewState?
     }
 
-    public struct Relationships: Decodable {
+    public struct Relationships: Codable {
     
         /// BetaAppReviewSubmission.Relationships.Build
         public let build: BetaAppReviewSubmission.Relationships.Build?
@@ -42,7 +42,7 @@ public struct BetaAppReviewSubmission: Decodable {
 /// MARK: BetaAppReviewSubmission.Relationships
 extension BetaAppReviewSubmission.Relationships {
     
-    public struct Build: Decodable {
+    public struct Build: Codable {
     
         /// BetaAppReviewSubmission.Relationships.Build.Data
         public let data: BetaAppReviewSubmission.Relationships.Build.Data?
@@ -55,16 +55,16 @@ extension BetaAppReviewSubmission.Relationships {
 /// MARK: BetaAppReviewSubmission.Relationships.Build
 extension BetaAppReviewSubmission.Relationships.Build {
     
-    public struct Data: Decodable {
+    public struct Data: Codable {
     
-        /// (Required) The opaque resource ID that uniquely identifies the resource.
+        /// The opaque resource ID that uniquely identifies the resource.
         public let `id`: String
     
-        /// (Required) The resource type.Value: builds
-        public let type: String
+        /// The resource type.Value: builds
+        public let type: String = "builds"
     }
     
-    public struct Links: Decodable {
+    public struct Links: Codable {
     
         /// uri-reference
         public let related: URL?

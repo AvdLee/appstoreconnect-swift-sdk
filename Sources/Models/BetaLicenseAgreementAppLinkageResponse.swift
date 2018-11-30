@@ -8,20 +8,20 @@
 import Foundation
     
 /// A response containing the ID of the related resource.
-public struct BetaLicenseAgreementAppLinkageResponse: Decodable {
+public struct BetaLicenseAgreementAppLinkageResponse: Codable {
 
-    /// (Required) A response containing the ID of the related resource.
+    /// A response containing the ID of the related resource.
     public let data: BetaLicenseAgreementAppLinkageResponse.Data
 
-    /// (Required) Navigational links including the self-link and links to the related data.
+    /// Navigational links including the self-link and links to the related data.
     public let links: DocumentLinks
     
-    public struct Data: Decodable {
+    public struct Data: Codable {
     
-        /// (Required) The opaque resource ID that uniquely identifies the resource.
+        /// The opaque resource ID that uniquely identifies the resource.
         public let `id`: String
     
-        /// (Required) The resource type.Value: apps
-        public let type: String
+        /// The resource type.Value: apps
+        public let type: String = "apps"
     }
 }

@@ -8,20 +8,20 @@
 import Foundation
     
 /// A response containing the ID of the related resource.
-public struct BuildBuildBetaDetailLinkageResponse: Decodable {
+public struct BuildBuildBetaDetailLinkageResponse: Codable {
 
-    /// (Required) The object types and IDs of the related resources.
+    /// The object types and IDs of the related resources.
     public let data: BuildBuildBetaDetailLinkageResponse.Data
 
-    /// (Required) Navigational links including the self-link and links to the related data.
+    /// Navigational links including the self-link and links to the related data.
     public let links: DocumentLinks
     
-    public struct Data: Decodable {
+    public struct Data: Codable {
     
-        /// (Required) The opaque resource ID that uniquely identifies the resource.
+        /// The opaque resource ID that uniquely identifies the resource.
         public let `id`: String
     
-        /// (Required) The resource type.Value: buildBetaDetails
-        public let type: String
+        /// The resource type.Value: buildBetaDetails
+        public let type: String = "buildBetaDetails"
     }
 }

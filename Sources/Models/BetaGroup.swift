@@ -8,25 +8,25 @@
 import Foundation
     
 /// The data structure that represents the resource.
-public struct BetaGroup: Decodable {
+public struct BetaGroup: Codable {
 
     /// The resource's attributes.
     public let attributes: BetaGroup.Attributes?
 
-    /// (Required) The opaque resource ID that uniquely identifies the resource.
+    /// The opaque resource ID that uniquely identifies the resource.
     public let `id`: String
 
     /// Navigational links to related data and included resource types and IDs.
     public let relationships: BetaGroup.Relationships?
 
-    /// (Required) The resource type.Value: betaGroups
-    public let type: String
+    /// The resource type.Value: betaGroups
+    public let type: String = "betaGroups"
 
-    /// (Required) Navigational links that include the self-link.
+    /// Navigational links that include the self-link.
     public let links: ResourceLinks<BetaGroupResponse>
 
     /// Attributes that describe a resource.
-    public struct Attributes: Decodable {
+    public struct Attributes: Codable {
     
         /// A Boolean value that indicates whether the group is internal. Only existing users of App Store Connect may be added for internal beta testing.
         public let isInternalGroup: Bool?
@@ -53,7 +53,7 @@ public struct BetaGroup: Decodable {
         public let createdDate: Date?
     }
 
-    public struct Relationships: Decodable {
+    public struct Relationships: Codable {
     
         /// BetaGroup.Relationships.App
         public let app: BetaGroup.Relationships.App?
@@ -69,7 +69,7 @@ public struct BetaGroup: Decodable {
 /// MARK: BetaGroup.Relationships
 extension BetaGroup.Relationships {
     
-    public struct App: Decodable {
+    public struct App: Codable {
     
         /// BetaGroup.Relationships.App.Data
         public let data: BetaGroup.Relationships.App.Data?
@@ -78,7 +78,7 @@ extension BetaGroup.Relationships {
         public let links: BetaGroup.Relationships.App.Links?
     }
     
-    public struct BetaTesters: Decodable {
+    public struct BetaTesters: Codable {
     
         /// [BetaGroup.Relationships.BetaTesters.Data]
         public let data: [BetaGroup.Relationships.BetaTesters.Data]?
@@ -90,7 +90,7 @@ extension BetaGroup.Relationships {
         public let meta: PagingInformation?
     }
     
-    public struct Builds: Decodable {
+    public struct Builds: Codable {
     
         /// [BetaGroup.Relationships.Builds.Data]
         public let data: [BetaGroup.Relationships.Builds.Data]?
@@ -106,16 +106,16 @@ extension BetaGroup.Relationships {
 /// MARK: BetaGroup.Relationships.App
 extension BetaGroup.Relationships.App {
     
-    public struct Data: Decodable {
+    public struct Data: Codable {
     
-        /// (Required) The opaque resource ID that uniquely identifies the resource.
+        /// The opaque resource ID that uniquely identifies the resource.
         public let `id`: String
     
-        /// (Required) The resource type.Value: apps
-        public let type: String
+        /// The resource type.Value: apps
+        public let type: String = "apps"
     }
     
-    public struct Links: Decodable {
+    public struct Links: Codable {
     
         /// uri-reference
         public let related: URL?
@@ -128,16 +128,16 @@ extension BetaGroup.Relationships.App {
 /// MARK: BetaGroup.Relationships.BetaTesters
 extension BetaGroup.Relationships.BetaTesters {
     
-    public struct Data: Decodable {
+    public struct Data: Codable {
     
-        /// (Required) The opaque resource ID that uniquely identifies the resource.
+        /// The opaque resource ID that uniquely identifies the resource.
         public let `id`: String
     
-        /// (Required) The resource type.Value: betaTesters
-        public let type: String
+        /// The resource type.Value: betaTesters
+        public let type: String = "betaTesters"
     }
     
-    public struct Links: Decodable {
+    public struct Links: Codable {
     
         /// uri-reference
         public let related: URL?
@@ -150,16 +150,16 @@ extension BetaGroup.Relationships.BetaTesters {
 /// MARK: BetaGroup.Relationships.Builds
 extension BetaGroup.Relationships.Builds {
     
-    public struct Data: Decodable {
+    public struct Data: Codable {
     
-        /// (Required) The opaque resource ID that uniquely identifies the resource.
+        /// The opaque resource ID that uniquely identifies the resource.
         public let `id`: String
     
-        /// (Required) The resource type.Value: builds
-        public let type: String
+        /// The resource type.Value: builds
+        public let type: String = "builds"
     }
     
-    public struct Links: Decodable {
+    public struct Links: Codable {
     
         /// uri-reference
         public let related: URL?

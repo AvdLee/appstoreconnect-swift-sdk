@@ -7,7 +7,7 @@
 
 import Foundation
 
-public enum BuildRelationship: Decodable {
+public enum BuildRelationship: Codable {
     case app(App)
     case build(Build)
     case betaTester(BetaTester)
@@ -30,6 +30,17 @@ public enum BuildRelationship: Decodable {
                 BuildRelationship.self,
                 DecodingError.Context(codingPath: [], debugDescription: "Not convertable to \(BuildRelationship.self)")
             )
+        }
+    }
+    
+    public func encode(to encoder: Encoder) throws {
+        switch self {
+        case .app(let value):
+            try value.encode(to: encoder)
+        case .build(let value):
+            try value.encode(to: encoder)
+        case .betaTester(let value):
+            try value.encode(to: encoder)
         }
     }
 }

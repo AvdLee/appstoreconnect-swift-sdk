@@ -8,25 +8,31 @@
 import Foundation
     
 /// A request containing a single resource.
-public struct BetaAppReviewSubmissionCreateRequest: Decodable {
+public struct BetaAppReviewSubmissionCreateRequest: Codable {
 
-    /// (Required) The resource data.
+    /// - Parameters:
+    ///   - buildId: The opaque resource ID that uniquely identifies the resource.
+    init(buildId: String) {
+        data = .init(relationships: .init(build: .init(data: .init(id: buildId))))
+    }
+
+    /// The resource data.
     public let data: BetaAppReviewSubmissionCreateRequest.Data
     
-    public struct Data: Decodable {
+    public struct Data: Codable {
     
-        /// (Required) The types and IDs of the related data to update.
+        /// The types and IDs of the related data to update.
         public let relationships: BetaAppReviewSubmissionCreateRequest.Data.Relationships
     
-        /// (Required) The resource type.Value: betaAppReviewSubmissions
-        public let type: String
+        /// The resource type.Value: betaAppReviewSubmissions
+        public let type: String = "betaAppReviewSubmissions"
     }
 }
 
 /// MARK: BetaAppReviewSubmissionCreateRequest.Data
 extension BetaAppReviewSubmissionCreateRequest.Data {
     
-    public struct Relationships: Decodable {
+    public struct Relationships: Codable {
     
         /// BetaAppReviewSubmissionCreateRequest.Data.Relationships.Build (Required)
         public let build: BetaAppReviewSubmissionCreateRequest.Data.Relationships.Build
@@ -36,7 +42,7 @@ extension BetaAppReviewSubmissionCreateRequest.Data {
 /// MARK: BetaAppReviewSubmissionCreateRequest.Data.Relationships
 extension BetaAppReviewSubmissionCreateRequest.Data.Relationships {
     
-    public struct Build: Decodable {
+    public struct Build: Codable {
     
         /// BetaAppReviewSubmissionCreateRequest.Data.Relationships.Build.Data (Required)
         public let data: BetaAppReviewSubmissionCreateRequest.Data.Relationships.Build.Data
@@ -46,12 +52,12 @@ extension BetaAppReviewSubmissionCreateRequest.Data.Relationships {
 /// MARK: BetaAppReviewSubmissionCreateRequest.Data.Relationships.Build
 extension BetaAppReviewSubmissionCreateRequest.Data.Relationships.Build {
     
-    public struct Data: Decodable {
+    public struct Data: Codable {
     
-        /// (Required) The opaque resource ID that uniquely identifies the resource.
+        /// The opaque resource ID that uniquely identifies the resource.
         public let `id`: String
     
-        /// (Required) The resource type.Value: builds
-        public let type: String
+        /// The resource type.Value: builds
+        public let type: String = "builds"
     }
 }

@@ -8,11 +8,11 @@
 import Foundation
     
 /// A response containing a single resource.
-public struct BetaTesterInvitationResponse: Decodable {
+public struct BetaTesterInvitationResponse: Codable {
 
-    /// (Required) The resource data.
+    /// The resource data.
     public let data: BetaTesterInvitation
 
-    /// (Required) Navigational links that include the self-link.
+    /// Navigational links that include the self-link.
     public let links: DocumentLinks
 }

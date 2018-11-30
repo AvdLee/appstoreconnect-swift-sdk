@@ -9,17 +9,23 @@
 import Foundation
     
 /// A response containing a list of related resource IDs.
-public struct AppEncryptionDeclarationBuildsLinkagesRequest: Decodable {
+public struct AppEncryptionDeclarationBuildsLinkagesRequest: Codable {
 
-    /// (Required) The object types and IDs of the related resources.
+    /// - Parameters:
+    ///   - buildIds: Array of opaque resource ID that uniquely identifies the resources.
+    init(_ buildIds: [String]) {
+        data = buildIds.map({ Data(id: $0) })
+    }
+    
+    /// The object types and IDs of the related resources.
     public let data: [AppEncryptionDeclarationBuildsLinkagesRequest.Data]
     
-    public struct Data: Decodable {
+    public struct Data: Codable {
     
-        /// (Required) The opaque resource ID that uniquely identifies the resource.
+        /// The opaque resource ID that uniquely identifies the resource.
         public let `id`: String
     
-        /// (Required) The resource type.Value: builds
-        public let type: String
+        /// The resource type.Value: builds
+        public let type: String = "builds"
     }
 }

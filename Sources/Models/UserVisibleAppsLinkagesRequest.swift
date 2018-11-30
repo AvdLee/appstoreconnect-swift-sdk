@@ -8,17 +8,23 @@
 import Foundation
     
 /// A request containing the IDs of related resources.
-public struct UserVisibleAppsLinkagesRequest: Decodable {
+public struct UserVisibleAppsLinkagesRequest: Codable {
 
-    /// (Required) The object types and IDs of the related resources.
+    /// - Parameters:
+    ///   - appIds: Array of opaque resource ID that uniquely identifies the resources.
+    init(_ appIds: [String]) {
+        data = appIds.map({ Data(id: $0) })
+    }
+
+    /// The object types and IDs of the related resources.
     public let data: [UserVisibleAppsLinkagesRequest.Data]
     
-    public struct Data: Decodable {
+    public struct Data: Codable {
     
-        /// (Required) The opaque resource ID that uniquely identifies the resource.
+        /// The opaque resource ID that uniquely identifies the resource.
         public let `id`: String
     
-        /// (Required) The resource type.Value: apps
-        public let type: String
+        /// The resource type.Value: apps
+        public let type: String = "apps"
     }
 }

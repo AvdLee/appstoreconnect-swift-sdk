@@ -8,31 +8,52 @@
 import Foundation
     
 /// A request containing a single resource.
-public struct UserUpdateRequest: Decodable {
+public struct UserUpdateRequest: Codable {
 
-    /// (Required) The resource data.
+    /// - Parameters:
+    ///   - id: The opaque resource ID that uniquely identifies the resource.
+    ///   - allAppsVisible: Assigned user roles that determine the user's access to sections of App Store Connect and tasks they can perform.
+    ///   - provisioningAllowed: A Boolean value that indicates the user's specified role allows access to the provisioning functionality on the Apple Developer website.
+    ///   - roles: Assigned user roles that determine the user's access to sections of App Store Connect and tasks they can perform.
+    ///   - appsVisibleIds: Array of opaque resource ID that uniquely identifies the resources.
+    init(id: String,
+         allAppsVisible: Bool? = nil,
+         provisioningAllowed: Bool? = nil,
+         roles: [UserRole]? = nil,
+         appsVisibleIds: [String]? = nil) {
+        data = .init(
+            attributes: .init(
+                allAppsVisible: allAppsVisible,
+                provisioningAllowed: provisioningAllowed,
+                roles: roles),
+            id: id,
+            relationships: .init(
+                visibleApps: .init(data: appsVisibleIds?.map({ Data.Relationships.VisibleApps.Data(id: $0) }))))
+    }
+    
+    /// The resource data.
     public let data: UserUpdateRequest.Data
     
-    public struct Data: Decodable {
+    public struct Data: Codable {
     
         /// The resource's attributes.
         public let attributes: UserUpdateRequest.Data.Attributes?
     
-        /// (Required) The opaque resource ID that uniquely identifies the resource.
+        /// The opaque resource ID that uniquely identifies the resource.
         public let `id`: String
     
         /// The types and IDs of the related data to update.
         public let relationships: UserUpdateRequest.Data.Relationships?
     
-        /// (Required) The resource type.Value: users
-        public let type: String
+        /// The resource type.Value: users
+        public let type: String = "users"
     }
 }
 
 /// MARK: UserUpdateRequest.Data
 extension UserUpdateRequest.Data {
     /// Attributes that describe a resource.
-    public struct Attributes: Decodable {
+    public struct Attributes: Codable {
     
         /// Assigned user roles that determine the user's access to sections of App Store Connect and tasks they can perform.
         public let allAppsVisible: Bool?
@@ -44,7 +65,7 @@ extension UserUpdateRequest.Data {
         public let roles: [UserRole]?
     }
     
-    public struct Relationships: Decodable {
+    public struct Relationships: Codable {
     
         /// UserUpdateRequest.Data.Relationships.VisibleApps
         public let visibleApps: UserUpdateRequest.Data.Relationships.VisibleApps?
@@ -54,7 +75,7 @@ extension UserUpdateRequest.Data {
 /// MARK: UserUpdateRequest.Data.Relationships
 extension UserUpdateRequest.Data.Relationships {
     
-    public struct VisibleApps: Decodable {
+    public struct VisibleApps: Codable {
     
         /// [UserUpdateRequest.Data.Relationships.VisibleApps.Data]
         public let data: [UserUpdateRequest.Data.Relationships.VisibleApps.Data]?
@@ -64,12 +85,12 @@ extension UserUpdateRequest.Data.Relationships {
 /// MARK: UserUpdateRequest.Data.Relationships.VisibleApps
 extension UserUpdateRequest.Data.Relationships.VisibleApps {
     
-    public struct Data: Decodable {
+    public struct Data: Codable {
     
-        /// (Required) The opaque resource ID that uniquely identifies the resource.
+        /// The opaque resource ID that uniquely identifies the resource.
         public let `id`: String
     
-        /// (Required) The resource type.Value: apps
-        public let type: String
+        /// The resource type.Value: apps
+        public let type: String = "apps"
     }
 }

@@ -70,22 +70,19 @@ public final class APIProvider {
         
         defaultSessionManager.adapter = requestsAuthenticator
     }
-    
-    /// Generates an URL based on the given endpoint in combination with the current API version.
+        
+    /// Performs a data request to the given API endpoint
     ///
-    /// - Parameter endpoint: The endpoint to create an URL for.
-    /// - Returns: The created `URL`.
-    internal func url<T>(for endpoint: APIEndpoint<T>) -> URL {
-        // swiftlint:disable:next force_unwrapping
-        return URL(string: "https://api.appstoreconnect.apple.com/v1/")!.appendingPathComponent(endpoint.path)
-    }
-    
-    /// Generates a request based on the given endpoint.
-    ///
-    /// - Parameter endpoint: The endpoint to create a request for.
-    /// - Returns: The created request.
-    internal func request<T>(for endpoint: APIEndpoint<T>) -> DataRequest {
-        return defaultSessionManager.request(url(for: endpoint), method: endpoint.method, parameters: endpoint.parameters)
+    /// - Parameters:
+    ///   - endpoint: The API endpoint to request.
+    ///   - completion: The completion callback which will be called on completion containing the result.
+    @discardableResult
+    public func request(_ endpoint: APIEndpoint<Void>, completion: @escaping RequestCompletionHandler<Void>) -> DataRequest {
+        let dataRequest = defaultSessionManager.request(endpoint)
+        dataRequest.dataResponse(decoder: jsonDecoder) { response in
+            completion(response.flatMap {_ in return () })
+        }
+        return dataRequest
     }
     
     /// Performs a data request to the given API endpoint
@@ -94,13 +91,9 @@ public final class APIProvider {
     ///   - endpoint: The API endpoint to request.
     ///   - completion: The completion callback which will be called on completion containing the result.
     @discardableResult
-    public func request<T>(_ endpoint: APIEndpoint<T>, completion: @escaping RequestCompletionHandler<T>) -> DataRequest {
-        let dataRequest = request(for: endpoint)
-        
-        dataRequest.validate(statusCode: 200..<300)
-            .mapResponseTo(T.self, decoder: jsonDecoder, completion: completion)
-            .resume()
-        
+    public func request<T: Decodable>(_ endpoint: APIEndpoint<T>, completion: @escaping RequestCompletionHandler<T>) -> DataRequest {
+        let dataRequest = defaultSessionManager.request(endpoint)
+        dataRequest.mapResponseTo(T.self, decoder: jsonDecoder, completion: completion).resume()
         return dataRequest
     }
     
@@ -112,11 +105,7 @@ public final class APIProvider {
     @discardableResult
     public func request<T: Decodable>(_ resourceLinks: ResourceLinks<T>, completion: @escaping RequestCompletionHandler<T>) -> DataRequest {
         let dataRequest = defaultSessionManager.request(resourceLinks.`self`)
-
-        dataRequest.validate(statusCode: 200..<300)
-            .mapResponseTo(T.self, decoder: jsonDecoder, completion: completion)
-            .resume()
-
+        dataRequest.mapResponseTo(T.self, decoder: jsonDecoder, completion: completion).resume()
         return dataRequest
     }
 }
@@ -135,8 +124,8 @@ extension DataRequest {
     ///   - type: The type to map to.
     ///   - completion: The result of the mapping. An error will be returned if mapping fails.
     @discardableResult
-    func mapResponseTo<T: Decodable>(_ type: T.Type, decoder: JSONDecoder, completion: @escaping RequestCompletionHandler<T>) -> Self {
-        return responseData(queue: DispatchQueue.global(qos: .background)) { (response) in
+    func dataResponse(decoder: JSONDecoder, completion: @escaping RequestCompletionHandler<Data?>) -> Self {
+        return validate(statusCode: 200..<300).responseData(queue: DispatchQueue.global(qos: .background)) { response in
             if let error = response.error {
                 // Try to parse api error
                 guard let data = response.data, let apiError = try? decoder.decode(ErrorResponse.self, from: data) else {
@@ -145,18 +134,28 @@ extension DataRequest {
                 }
                 completion(Result.failure(apiError))
             } else {
-                // Try to parse the model
-                do {
-                    guard let data = response.data else {
-                        throw JSONMappingError.invalidResponse
-                    }
-                    
-                    let codable = try decoder.decode(T.self, from: data)
-                    completion(Result.success(codable))
-                } catch {
-                    completion(Result.failure(error))
-                }
+                completion(Result.success(response.data))
             }
+        }
+    }
+    
+    /// Maps the response to the given JSONDecodable data type.
+    ///
+    /// - Parameters:
+    ///   - type: The type to map to.
+    ///   - completion: The result of the mapping. An error will be returned if mapping fails.
+    @discardableResult
+    func mapResponseTo<T: Decodable>(_ type: T.Type, decoder: JSONDecoder, completion: @escaping RequestCompletionHandler<T>) -> Self {
+        return dataResponse(decoder: decoder) { response in
+            let result = response.flatMap({ data -> T in
+                // Try to parse the model
+                guard let data = data else {
+                    throw JSONMappingError.invalidResponse
+                }
+                let codable = try decoder.decode(T.self, from: data)
+                return codable
+            })
+            completion(result)
         }
     }
 }

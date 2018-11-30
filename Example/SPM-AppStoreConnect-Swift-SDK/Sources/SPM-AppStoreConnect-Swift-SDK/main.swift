@@ -6,11 +6,13 @@ import AppStoreConnect_Swift_SDK
 private let configuration = APIConfiguration(issuerID: "<YOUR ISSUER ID>", privateKeyID: "<YOUR PRIVATE KEY ID>", privateKey: "<YOUR PRIVATE KEY>")
 var provider: APIProvider = APIProvider(configuration: configuration)
 
-provider.request(.apps(
+let endpoint = APIEndpoint.apps(
     select: [.apps([.name]), .builds([.version, .processingState, .uploadedDate])],
     include: [.builds],
     sortBy: [.bundleIdAscending],
-    limits: [.apps(1)])) {
+    limits: [.apps(1)])
+
+provider.request(endpoint) {
         switch $0 {
         case .success(let appsResponse):
             typealias BuildInfo = (uploadedDate: Date, version: String, processingState: String)

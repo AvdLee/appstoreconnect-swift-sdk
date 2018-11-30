@@ -8,25 +8,25 @@
 import Foundation
     
 /// The data structure that represents the resource.
-public struct PrereleaseVersion: Decodable {
+public struct PrereleaseVersion: Codable {
 
     /// The resource's attributes.
     public let attributes: PrereleaseVersion.Attributes?
 
-    /// (Required) The opaque resource ID that uniquely identifies the resource.
+    /// The opaque resource ID that uniquely identifies the resource.
     public let `id`: String
 
-    /// (Required) Navigational links that include the self-link.
+    /// Navigational links that include the self-link.
     public let links: ResourceLinks<PrereleaseVersionResponse>
 
     /// Navigational links to related data and included resource types and IDs.
     public let relationships: PrereleaseVersion.Relationships?
 
-    /// (Required) The resource type.Value: preReleaseVersions
-    public let type: String
+    /// The resource type.Value: preReleaseVersions
+    public let type: String = "preReleaseVersions"
 
     /// Attributes that describe a resource.
-    public struct Attributes: Decodable {
+    public struct Attributes: Codable {
     
         /// The platform of the prerelease version of your app.
         public let platform: Platform?
@@ -35,7 +35,7 @@ public struct PrereleaseVersion: Decodable {
         public let version: String?
     }
     
-    public struct Relationships: Decodable {
+    public struct Relationships: Codable {
     
         /// PrereleaseVersion.Relationships.App
         public let app: PrereleaseVersion.Relationships.App?
@@ -48,7 +48,7 @@ public struct PrereleaseVersion: Decodable {
 /// MARK: PrereleaseVersion.Relationships
 extension PrereleaseVersion.Relationships {
     
-    public struct App: Decodable {
+    public struct App: Codable {
     
         /// PrereleaseVersion.Relationships.App.Data
         public let data: PrereleaseVersion.Relationships.App.Data?
@@ -57,7 +57,7 @@ extension PrereleaseVersion.Relationships {
         public let links: PrereleaseVersion.Relationships.App.Links?
     }
 
-    public struct Builds: Decodable {
+    public struct Builds: Codable {
     
         /// [PrereleaseVersion.Relationships.Builds.Data]
         public let data: [PrereleaseVersion.Relationships.Builds.Data]?
@@ -73,16 +73,16 @@ extension PrereleaseVersion.Relationships {
 /// MARK: PrereleaseVersion.Relationships.App
 extension PrereleaseVersion.Relationships.App {
     
-    public struct Data: Decodable {
+    public struct Data: Codable {
     
-        /// (Required) The opaque resource ID that uniquely identifies the resource.
+        /// The opaque resource ID that uniquely identifies the resource.
         public let `id`: String
     
-        /// (Required) The resource type.Value: apps
-        public let type: String
+        /// The resource type.Value: apps
+        public let type: String = "apps"
     }
     
-    public struct Links: Decodable {
+    public struct Links: Codable {
     
         /// uri-reference
         public let related: URL?
@@ -95,16 +95,16 @@ extension PrereleaseVersion.Relationships.App {
 /// MARK: PrereleaseVersion.Relationships.Builds
 extension PrereleaseVersion.Relationships.Builds {
     
-    public struct Data: Decodable {
+    public struct Data: Codable {
     
-        /// (Required) The opaque resource ID that uniquely identifies the resource.
+        /// The opaque resource ID that uniquely identifies the resource.
         public let `id`: String
     
-        /// (Required) The resource type.Value: builds
-        public let type: String
+        /// The resource type.Value: builds
+        public let type: String = "builds"
     }
     
-    public struct Links: Decodable {
+    public struct Links: Codable {
     
         /// uri-reference
         public let related: URL?

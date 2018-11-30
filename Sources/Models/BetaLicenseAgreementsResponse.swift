@@ -8,15 +8,15 @@
 import Foundation
     
 /// A response containing a list of resources.
-public struct BetaLicenseAgreementsResponse: Decodable {
+public struct BetaLicenseAgreementsResponse: Codable {
 
-    /// (Required) The resource data.
+    /// The resource data.
     public let data: [BetaLicenseAgreement]
 
     /// The requested relationship data.
     public let include: [App]?
 
-    /// (Required) Navigational links that include the self-link.
+    /// Navigational links that include the self-link.
     public let links: PagedDocumentLinks
 
     /// Paging information.
