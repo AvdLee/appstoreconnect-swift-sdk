@@ -79,7 +79,9 @@ public final class APIProvider {
     @discardableResult
     public func request(_ endpoint: APIEndpoint<Void>, completion: @escaping RequestCompletionHandler<Void>) -> DataRequest {
         let dataRequest = defaultSessionManager.request(endpoint)
-        dataRequest.dataResponse(decoder: jsonDecoder) { completion($0.flatMap {_ in return () }) }
+        dataRequest.dataResponse(decoder: jsonDecoder) { response in
+            completion(response.flatMap {_ in return () })
+        }
         return dataRequest
     }
     
@@ -123,16 +125,16 @@ extension DataRequest {
     ///   - completion: The result of the mapping. An error will be returned if mapping fails.
     @discardableResult
     func dataResponse(decoder: JSONDecoder, completion: @escaping RequestCompletionHandler<Data?>) -> Self {
-        return validate(statusCode: 200..<300).responseData(queue: DispatchQueue.global(qos: .background)) {
-            if let error = $0.error {
+        return validate(statusCode: 200..<300).responseData(queue: DispatchQueue.global(qos: .background)) { response in
+            if let error = response.error {
                 // Try to parse api error
-                guard let data = $0.data, let apiError = try? decoder.decode(ErrorResponse.self, from: data) else {
+                guard let data = response.data, let apiError = try? decoder.decode(ErrorResponse.self, from: data) else {
                     completion(Result.failure(error))
                     return
                 }
                 completion(Result.failure(apiError))
             } else {
-                completion(Result.success($0.data))
+                completion(Result.success(response.data))
             }
         }
     }
@@ -144,8 +146,8 @@ extension DataRequest {
     ///   - completion: The result of the mapping. An error will be returned if mapping fails.
     @discardableResult
     func mapResponseTo<T: Decodable>(_ type: T.Type, decoder: JSONDecoder, completion: @escaping RequestCompletionHandler<T>) -> Self {
-        return dataResponse(decoder: decoder) {
-            let result = $0.flatMap({ data -> T in
+        return dataResponse(decoder: decoder) { response in
+            let result = response.flatMap({ data -> T in
                 // Try to parse the model
                 guard let data = data else {
                     throw JSONMappingError.invalidResponse
