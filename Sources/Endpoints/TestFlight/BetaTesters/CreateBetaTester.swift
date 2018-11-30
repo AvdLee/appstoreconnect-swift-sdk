@@ -18,6 +18,8 @@ extension APIEndpoint where T == BetaTesterResponse {
     ///   - lastName: The beta tester's last name.
     ///   - betaGroupIds: Array of opaque resource ID that uniquely identifies the resources.
     ///   - buildIds: Array of opaque resource ID that uniquely identifies the resources.
+    ///
+    /// - Attention: Either non empty betaGroupIds or non empty buildIds is required when creating betaTesters.
     public static func create(
         betaTesterWithEmail email: String,
         firstName: String? = nil,

@@ -20,14 +20,32 @@ public struct BetaTesterCreateRequest: Codable {
          lastName: String? = nil,
          betaGroupIds: [String]? = nil,
          buildIds: [String]? = nil) {
+        
+        // As of 30/11/2018, AppStoreConnectAPI does not like receiving empty arrays for relationships
+        // It causes error:
+        //  - code : "UNEXPECTED_ERROR"
+        //  - status : "500"
+        //  - id : nil
+        //  - title : "An unexpected error occurred."
+        //  - detail : "An unexpected error occurred on the server side. If this issue continues, contact us at https://developer.apple.com/contact/."
+        //  - source : nil
+        let betaGroups: Data.Relationships.BetaGroups? = betaGroupIds.flatMap({
+            guard !$0.isEmpty else { return nil }
+            return .init(data: $0.map({ .init(id: $0) }))
+        })
+        let builds: Data.Relationships.Builds? = buildIds.flatMap({
+            guard !$0.isEmpty else { return nil }
+            return .init(data: $0.map({ .init(id: $0) }))
+        })
+
         data = .init(
             attributes: .init(
                 email: email,
                 firstName: firstName,
                 lastName: lastName),
             relationships: .init(
-                betaGroups: .init(data: betaGroupIds?.map({ Data.Relationships.BetaGroups.Data(id: $0) })),
-                builds: .init(data: buildIds?.map({ Data.Relationships.Builds.Data(id: $0) }))))
+                betaGroups: betaGroups,
+                builds: builds))
     }
 
     /// The resource data.
