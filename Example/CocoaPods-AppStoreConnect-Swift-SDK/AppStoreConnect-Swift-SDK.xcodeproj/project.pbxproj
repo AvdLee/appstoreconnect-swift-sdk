@@ -8,6 +8,21 @@
 
 /* Begin PBXBuildFile section */
 		310FADE221B153B8004327B2 /* SendInvitationToBetaTesterTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 310FADE121B153B8004327B2 /* SendInvitationToBetaTesterTests.swift */; };
+		310FAE1521B16157004327B2 /* ReadBetaGroupInformationTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 310FAE0621B16157004327B2 /* ReadBetaGroupInformationTests.swift */; };
+		310FAE1621B16157004327B2 /* ListBetaTestersInBetaGroupTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 310FAE0721B16157004327B2 /* ListBetaTestersInBetaGroupTests.swift */; };
+		310FAE1721B16157004327B2 /* RemoveBuildsFromBetaGroupTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 310FAE0821B16157004327B2 /* RemoveBuildsFromBetaGroupTests.swift */; };
+		310FAE1821B16157004327B2 /* ListBetaGroupsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 310FAE0921B16157004327B2 /* ListBetaGroupsTests.swift */; };
+		310FAE1921B16157004327B2 /* AddBuildsToBetaGroupTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 310FAE0A21B16157004327B2 /* AddBuildsToBetaGroupTests.swift */; };
+		310FAE1A21B16157004327B2 /* GetBetaTesterIDsInBetaGroupTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 310FAE0B21B16157004327B2 /* GetBetaTesterIDsInBetaGroupTests.swift */; };
+		310FAE1B21B16157004327B2 /* GetBuildIDsInBetaGroupTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 310FAE0C21B16157004327B2 /* GetBuildIDsInBetaGroupTests.swift */; };
+		310FAE1C21B16157004327B2 /* ListBuildsForBetaGroupTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 310FAE0D21B16157004327B2 /* ListBuildsForBetaGroupTests.swift */; };
+		310FAE1D21B16157004327B2 /* ModifyBetaGroupTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 310FAE0E21B16157004327B2 /* ModifyBetaGroupTests.swift */; };
+		310FAE1E21B16157004327B2 /* RemoveBetaTestersFromBetaGroupTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 310FAE0F21B16157004327B2 /* RemoveBetaTestersFromBetaGroupTests.swift */; };
+		310FAE1F21B16157004327B2 /* AddBetaTestersToBetaGroupTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 310FAE1021B16157004327B2 /* AddBetaTestersToBetaGroupTests.swift */; };
+		310FAE2021B16157004327B2 /* CreateBetaGroupTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 310FAE1121B16157004327B2 /* CreateBetaGroupTests.swift */; };
+		310FAE2121B16157004327B2 /* ReadAppInformationOfBetaGroupTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 310FAE1221B16157004327B2 /* ReadAppInformationOfBetaGroupTests.swift */; };
+		310FAE2221B16157004327B2 /* DeleteBetaGroupTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 310FAE1321B16157004327B2 /* DeleteBetaGroupTests.swift */; };
+		310FAE2321B16157004327B2 /* GetAppResourceIDForBetaGroupTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 310FAE1421B16157004327B2 /* GetAppResourceIDForBetaGroupTests.swift */; };
 		314DF9E421A6CB17008FFF99 /* ListAppsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 314DF9E321A6CB17008FFF99 /* ListAppsTests.swift */; };
 		3183103821A8497800638289 /* QueryParameterTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3183103721A8497800638289 /* QueryParameterTests.swift */; };
 		3183103A21A8719F00638289 /* GetAppTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3183103921A8719F00638289 /* GetAppTests.swift */; };
@@ -63,6 +78,21 @@
 /* Begin PBXFileReference section */
 		0AE4946149359034B7BCF9D5 /* README.md */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = net.daringfireball.markdown; name = README.md; path = ../README.md; sourceTree = "<group>"; };
 		310FADE121B153B8004327B2 /* SendInvitationToBetaTesterTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SendInvitationToBetaTesterTests.swift; sourceTree = "<group>"; };
+		310FAE0621B16157004327B2 /* ReadBetaGroupInformationTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ReadBetaGroupInformationTests.swift; sourceTree = "<group>"; };
+		310FAE0721B16157004327B2 /* ListBetaTestersInBetaGroupTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ListBetaTestersInBetaGroupTests.swift; sourceTree = "<group>"; };
+		310FAE0821B16157004327B2 /* RemoveBuildsFromBetaGroupTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RemoveBuildsFromBetaGroupTests.swift; sourceTree = "<group>"; };
+		310FAE0921B16157004327B2 /* ListBetaGroupsTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ListBetaGroupsTests.swift; sourceTree = "<group>"; };
+		310FAE0A21B16157004327B2 /* AddBuildsToBetaGroupTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddBuildsToBetaGroupTests.swift; sourceTree = "<group>"; };
+		310FAE0B21B16157004327B2 /* GetBetaTesterIDsInBetaGroupTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GetBetaTesterIDsInBetaGroupTests.swift; sourceTree = "<group>"; };
+		310FAE0C21B16157004327B2 /* GetBuildIDsInBetaGroupTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GetBuildIDsInBetaGroupTests.swift; sourceTree = "<group>"; };
+		310FAE0D21B16157004327B2 /* ListBuildsForBetaGroupTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ListBuildsForBetaGroupTests.swift; sourceTree = "<group>"; };
+		310FAE0E21B16157004327B2 /* ModifyBetaGroupTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ModifyBetaGroupTests.swift; sourceTree = "<group>"; };
+		310FAE0F21B16157004327B2 /* RemoveBetaTestersFromBetaGroupTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RemoveBetaTestersFromBetaGroupTests.swift; sourceTree = "<group>"; };
+		310FAE1021B16157004327B2 /* AddBetaTestersToBetaGroupTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddBetaTestersToBetaGroupTests.swift; sourceTree = "<group>"; };
+		310FAE1121B16157004327B2 /* CreateBetaGroupTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CreateBetaGroupTests.swift; sourceTree = "<group>"; };
+		310FAE1221B16157004327B2 /* ReadAppInformationOfBetaGroupTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ReadAppInformationOfBetaGroupTests.swift; sourceTree = "<group>"; };
+		310FAE1321B16157004327B2 /* DeleteBetaGroupTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DeleteBetaGroupTests.swift; sourceTree = "<group>"; };
+		310FAE1421B16157004327B2 /* GetAppResourceIDForBetaGroupTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GetAppResourceIDForBetaGroupTests.swift; sourceTree = "<group>"; };
 		314DF9E321A6CB17008FFF99 /* ListAppsTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListAppsTests.swift; sourceTree = "<group>"; };
 		3183103721A8497800638289 /* QueryParameterTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QueryParameterTests.swift; sourceTree = "<group>"; };
 		3183103921A8719F00638289 /* GetAppTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetAppTests.swift; sourceTree = "<group>"; };
@@ -143,6 +173,28 @@
 			path = "Beta Tester Invitations";
 			sourceTree = "<group>";
 		};
+		310FAE0521B16157004327B2 /* Beta Groups */ = {
+			isa = PBXGroup;
+			children = (
+				310FAE1021B16157004327B2 /* AddBetaTestersToBetaGroupTests.swift */,
+				310FAE0A21B16157004327B2 /* AddBuildsToBetaGroupTests.swift */,
+				310FAE1121B16157004327B2 /* CreateBetaGroupTests.swift */,
+				310FAE1321B16157004327B2 /* DeleteBetaGroupTests.swift */,
+				310FAE1421B16157004327B2 /* GetAppResourceIDForBetaGroupTests.swift */,
+				310FAE0B21B16157004327B2 /* GetBetaTesterIDsInBetaGroupTests.swift */,
+				310FAE0C21B16157004327B2 /* GetBuildIDsInBetaGroupTests.swift */,
+				310FAE0921B16157004327B2 /* ListBetaGroupsTests.swift */,
+				310FAE0721B16157004327B2 /* ListBetaTestersInBetaGroupTests.swift */,
+				310FAE0D21B16157004327B2 /* ListBuildsForBetaGroupTests.swift */,
+				310FAE0E21B16157004327B2 /* ModifyBetaGroupTests.swift */,
+				310FAE1221B16157004327B2 /* ReadAppInformationOfBetaGroupTests.swift */,
+				310FAE0621B16157004327B2 /* ReadBetaGroupInformationTests.swift */,
+				310FAE0F21B16157004327B2 /* RemoveBetaTestersFromBetaGroupTests.swift */,
+				310FAE0821B16157004327B2 /* RemoveBuildsFromBetaGroupTests.swift */,
+			);
+			path = "Beta Groups";
+			sourceTree = "<group>";
+		};
 		318824BE21AD3C8500676DA7 /* Endpoints */ = {
 			isa = PBXGroup;
 			children = (
@@ -155,6 +207,7 @@
 			isa = PBXGroup;
 			children = (
 				318824C021AD3D5600676DA7 /* Apps */,
+				310FAE0521B16157004327B2 /* Beta Groups */,
 				310FADE021B1539E004327B2 /* Beta Tester Invitations */,
 				31F3DF4521AEDD63006998D5 /* BetaTesters */,
 			);
@@ -524,9 +577,12 @@
 			buildActionMask = 2147483647;
 			files = (
 				31F3DF6321AEDD63006998D5 /* ListBuildsAssignedToBetaTesterTests.swift in Sources */,
+				310FAE1621B16157004327B2 /* ListBetaTestersInBetaGroupTests.swift in Sources */,
 				31F929E2219C6AC40061DEA5 /* JWTRequestsAuthenticatorTests.swift in Sources */,
 				31F3DF5B21AEDD63006998D5 /* RemoveBetaTesterFromBetaGroupsTests.swift in Sources */,
 				314DF9E421A6CB17008FFF99 /* ListAppsTests.swift in Sources */,
+				310FAE2121B16157004327B2 /* ReadAppInformationOfBetaGroupTests.swift in Sources */,
+				310FAE2021B16157004327B2 /* CreateBetaGroupTests.swift in Sources */,
 				31F3DF5721AEDD63006998D5 /* ListBetaGroupsToWhichBetaTesterBelongsTests.swift in Sources */,
 				31F3DF5821AEDD63006998D5 /* UnassignBetaTesterFromBuildsTests.swift in Sources */,
 				31F3DF5921AEDD63006998D5 /* AddBetaTesterToBetaGroupsTests.swift in Sources */,
@@ -535,7 +591,11 @@
 				318824F121AD409500676DA7 /* ListPrereleaseVersionsForAppTests.swift in Sources */,
 				318824EC21AD409500676DA7 /* GetBetaGroupIDsForAppTests.swift in Sources */,
 				31F3DF5A21AEDD63006998D5 /* CreateBetaTesterTests.swift in Sources */,
+				310FAE1921B16157004327B2 /* AddBuildsToBetaGroupTests.swift in Sources */,
+				310FAE1D21B16157004327B2 /* ModifyBetaGroupTests.swift in Sources */,
 				310FADE221B153B8004327B2 /* SendInvitationToBetaTesterTests.swift in Sources */,
+				310FAE1521B16157004327B2 /* ReadBetaGroupInformationTests.swift in Sources */,
+				310FAE1821B16157004327B2 /* ListBetaGroupsTests.swift in Sources */,
 				318824F221AD409500676DA7 /* GetBuildIDsOfAppTests.swift in Sources */,
 				31F3DF5521AEDD63006998D5 /* DeleteBetaTesterTests.swift in Sources */,
 				3188254E21ADAC2900676DA7 /* RemoveBetaTestersFromGroupsAndBuildsOfAppTests.swift in Sources */,
@@ -544,13 +604,21 @@
 				318824EB21AD409500676DA7 /* GetBetaAppReviewDetailsResourceIDForAppTests.swift in Sources */,
 				31F3DF6021AEDD63006998D5 /* ListBetaTestersTests.swift in Sources */,
 				318824F421AD409500676DA7 /* GetBetaLicenseAgreementOfAppTests.swift in Sources */,
+				310FAE1B21B16157004327B2 /* GetBuildIDsInBetaGroupTests.swift in Sources */,
+				310FAE1C21B16157004327B2 /* ListBuildsForBetaGroupTests.swift in Sources */,
 				3183103821A8497800638289 /* QueryParameterTests.swift in Sources */,
 				3183103A21A8719F00638289 /* GetAppTests.swift in Sources */,
 				318824EF21AD409500676DA7 /* GetBetaLicenseAgreementIDForAppTests.swift in Sources */,
 				318824F021AD409500676DA7 /* ListBuildsOfAppTests.swift in Sources */,
 				318824ED21AD409500676DA7 /* GetBetaAppLocalizationIDsOfAppTests.swift in Sources */,
 				318824F321AD409500676DA7 /* ListBetaGroupsForAppTests.swift in Sources */,
+				310FAE2221B16157004327B2 /* DeleteBetaGroupTests.swift in Sources */,
+				310FAE1F21B16157004327B2 /* AddBetaTestersToBetaGroupTests.swift in Sources */,
+				310FAE1A21B16157004327B2 /* GetBetaTesterIDsInBetaGroupTests.swift in Sources */,
 				31F3DF5C21AEDD63006998D5 /* ListAppsForBetaTesterTests.swift in Sources */,
+				310FAE1E21B16157004327B2 /* RemoveBetaTestersFromBetaGroupTests.swift in Sources */,
+				310FAE1721B16157004327B2 /* RemoveBuildsFromBetaGroupTests.swift in Sources */,
+				310FAE2321B16157004327B2 /* GetAppResourceIDForBetaGroupTests.swift in Sources */,
 				31F3DF5E21AEDD63006998D5 /* RemoveBetaTesterAccessToAppsTests.swift in Sources */,
 				31F3DF5621AEDD63006998D5 /* GetBetaTesterTests.swift in Sources */,
 				318824E921AD409500676DA7 /* GetBetaAppReviewDetailsResourceOfAppTests.swift in Sources */,
