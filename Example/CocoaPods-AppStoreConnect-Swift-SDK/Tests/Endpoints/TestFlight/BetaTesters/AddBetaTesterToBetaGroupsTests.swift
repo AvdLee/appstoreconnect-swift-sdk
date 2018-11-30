@@ -12,7 +12,7 @@ final class AddBetaTesterToBetaGroupsTests: XCTestCase {
     
     func testURLRequest() {
         let betaGroupIds = ["betaGroupId"]
-        let endpoint = APIEndpoint.add(betaTesterWithId: "betaTesterId", toBetaGroupWithId: betaGroupIds)
+        let endpoint = APIEndpoint.add(betaTesterWithId: "betaTesterId", toBetaGroupsWithIds: betaGroupIds)
         
         let request = try? endpoint.asURLRequest()
         XCTAssertEqual(request?.httpMethod, "POST")
