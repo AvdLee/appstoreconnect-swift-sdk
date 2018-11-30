@@ -11,7 +11,7 @@ import XCTest
 final class GetAppResourceIDForAppEncryptionDeclarationTests: XCTestCase {
     
     func testURLRequest() {
-        let endpoint = APIEndpoint.appResourceID(forAppEncryptionDeclarationWithId: "id")
+        let endpoint = APIEndpoint.appID(forAppEncryptionDeclarationWithId: "id")
         let request = try? endpoint.asURLRequest()
         XCTAssertEqual(request?.httpMethod, "GET")
         

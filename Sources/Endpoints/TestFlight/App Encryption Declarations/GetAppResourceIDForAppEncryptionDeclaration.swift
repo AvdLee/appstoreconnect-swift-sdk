@@ -13,7 +13,7 @@ extension APIEndpoint where T == AppEncryptionDeclarationAppLinkageResponse {
     ///
     /// - Parameters:
     ///   - id: (Required) An opaque resource ID that uniquely identifies the resource.
-    public static func appResourceID(forAppEncryptionDeclarationWithId id: String) -> APIEndpoint {
+    public static func appID(forAppEncryptionDeclarationWithId id: String) -> APIEndpoint {
         return APIEndpoint(
             path: "appEncryptionDeclarations/\(id)/relationships/app",
             method: .get,

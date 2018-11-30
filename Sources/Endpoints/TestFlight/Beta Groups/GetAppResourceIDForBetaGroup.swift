@@ -13,7 +13,7 @@ extension APIEndpoint where T == BetaGroupAppLinkageResponse {
     ///
     /// - Parameters:
     ///   - id: (Required) An opaque resource ID that uniquely identifies the resource.
-    public static func appResourceID(forBetaGroupWithId id: String) -> APIEndpoint {
+    public static func appID(forBetaGroupWithId id: String) -> APIEndpoint {
         return APIEndpoint(path: "betaGroups/\(id)/relationships/app", method: .get, parameters: nil)
     }
 }
