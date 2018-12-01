@@ -16,9 +16,9 @@ The Swift SDK to work with the App Store Connect API from Apple.
 - [x] JWT Logic to sign requests
 - [x] Get started section in the readme
 - [x] Support for Mac
-- [ ] TestFlight API implementation
-- [ ] Users and Roles implementation
-- [ ] Sales and Finances implementation
+- [x] TestFlight API implementation
+- [x] Users and Roles implementation
+- [x] Sales and Finances implementation
 - [ ] Replace Alamofire dependency with own simple URLSession implementation
 
 ## Requesting API Access
