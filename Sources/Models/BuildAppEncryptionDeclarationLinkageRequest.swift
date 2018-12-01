@@ -11,6 +11,12 @@ import Foundation
 /// A request containing the ID of the related resource.
 public struct BuildAppEncryptionDeclarationLinkageRequest: Codable {
 
+    /// - Parameters:
+    ///   - appEncryptionDeclarationId: The of opaque resource ID that uniquely identifies the resource.
+    init(_ appEncryptionDeclarationId: String) {
+        data = Data(id: appEncryptionDeclarationId)
+    }
+
     /// The types and IDs of related resources.
     public let data: BuildAppEncryptionDeclarationLinkageRequest.Data
     

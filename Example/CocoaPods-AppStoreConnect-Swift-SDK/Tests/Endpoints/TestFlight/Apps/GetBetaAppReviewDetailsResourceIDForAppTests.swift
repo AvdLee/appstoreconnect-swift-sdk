@@ -11,7 +11,7 @@ import XCTest
 final class GetBetaAppReviewDetailsResourceIDForAppTests: XCTestCase {
     
     func testURLRequest() {
-        let endpoint = APIEndpoint.betaAppReviewDetailsResourceID(forAppWithId: "appId")
+        let endpoint = APIEndpoint.betaAppReviewDetailsID(forAppWithId: "appId")
         let request = try? endpoint.asURLRequest()
         XCTAssertEqual(request?.httpMethod, "GET")
         

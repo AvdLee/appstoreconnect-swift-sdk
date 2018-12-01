@@ -14,7 +14,7 @@ extension APIEndpoint where T == BetaTesterAppsLinkagesResponse {
     /// - Parameters:
     ///   - id: An opaque resource ID that uniquely identifies the resource.
     ///   - limit: Number of resources to return.
-    public static func appResourceIDs(
+    public static func appIDs(
         forBetaTesterWithId id: String,
         limit: Int? = nil) -> APIEndpoint {
         var parameters = [String: Any]()

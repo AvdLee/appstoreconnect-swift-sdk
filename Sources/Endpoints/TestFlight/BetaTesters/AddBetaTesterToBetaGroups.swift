@@ -17,7 +17,7 @@ extension APIEndpoint where T == Void {
     ///   - betaGroupIds: Array of opaque resource ID that uniquely identifies the resources.
     public static func add(
         betaTesterWithId id: String,
-        toBetaGroupWithId betaGroupIds: [String]) -> APIEndpoint {
+        toBetaGroupsWithIds betaGroupIds: [String]) -> APIEndpoint {
         let linkages = BetaTesterBetaGroupsLinkagesRequest(betaGroupIds)
         return APIEndpoint(
             path: "betaTesters/\(id)/relationships/betaGroups",
