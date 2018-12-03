@@ -17,18 +17,23 @@ extension APIEndpoint where T == BetaTestersResponse {
     ///   - include: Relationship data to include in the response.
     ///   - limit: Number of resources to return.
     ///   - sort: Attributes by which to sort.
+    ///   - next: The next URL to use as a base. See `PagedDocumentLinks`.
     public static func betaTesters(
         fields: [ListBetaTesters.Field]? = nil,
         filter: [ListBetaTesters.Filter]? = nil,
         include: [ListBetaTesters.Include]? = nil,
         limit: [ListBetaTesters.Limit]? = nil,
-        sort: [ListBetaTesters.Sort]? = nil) -> APIEndpoint {
+        sort: [ListBetaTesters.Sort]? = nil,
+        next: PagedDocumentLinks? = nil) -> APIEndpoint {
         var parameters = [String: Any]()
         if let fields = fields { parameters.add(fields) }
         if let filter = filter { parameters.add(filter) }
         if let include = include { parameters.add(include) }
         if let limit = limit { parameters.add(limit) }
         if let sort = sort { parameters.add(sort) }
+        if let nextCursor = next?.nextCursor {
+            parameters["cursor"] = nextCursor
+        }
         return APIEndpoint(path: "betaTesters", method: .get, parameters: parameters)
     }
 }
