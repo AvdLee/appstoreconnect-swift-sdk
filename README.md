@@ -100,4 +100,4 @@ dependencies: [
 
 ## License
 
-**App Store Connect Swift SDK** is available under the MIT license. See the [LICENSE](https://github.com/AvdLee/appstoreconnect-swift-sdk/blob/master/LICENSE) file for more info.
+**App Store Connect Swift SDK** is available under the MIT license, and uses source code from open source projects. See the [LICENSE](https://github.com/AvdLee/appstoreconnect-swift-sdk/blob/master/LICENSE) file for more info.
