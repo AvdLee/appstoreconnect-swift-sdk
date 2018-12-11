@@ -15,13 +15,16 @@ extension APIEndpoint where T == BetaAppLocalizationsResponse {
     ///   - id: An opaque resource ID that uniquely identifies the resource.
     ///   - fields: Fields to return for included related types.
     ///   - limit: Number of resources to return.
+    ///   - next: The next URL to use as a base. See `PagedDocumentLinks`.
     public static func betaAppLocalizations(
         ofAppWithId id: String,
         fields: [ListBetaAppLocalizationsForApp.Field]? = nil,
-        limit: Int? = nil) -> APIEndpoint {
+        limit: Int? = nil,
+        next: PagedDocumentLinks? = nil) -> APIEndpoint {
         var parameters = [String: Any]()
         if let fields = fields { parameters.add(fields) }
         if let limit = limit { parameters["limit"] = limit }
+        if let nextCursor = next?.nextCursor { parameters["cursor"] = nextCursor }
         return APIEndpoint(
             path: "apps/\(id)/betaAppLocalizations",
             method: .get,

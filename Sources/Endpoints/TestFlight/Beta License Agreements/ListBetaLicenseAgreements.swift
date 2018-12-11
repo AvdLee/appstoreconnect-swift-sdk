@@ -16,16 +16,19 @@ extension APIEndpoint where T == BetaLicenseAgreementsResponse {
     ///   - filter: Attributes, relationships, and IDs by which to filter.
     ///   - include: Relationship data to include in the response.
     ///   - limit: Number of resources to return.
+    ///   - next: The next URL to use as a base. See `PagedDocumentLinks`.
     public static func betaLicenseAgreements(
         fields: [ListBetaLicenseAgreements.Field]? = nil,
         filter: [ListBetaLicenseAgreements.Filter]? = nil,
         include: [ListBetaLicenseAgreements.Include]? = nil,
-        limit: Int? = nil) -> APIEndpoint {
+        limit: Int? = nil,
+        next: PagedDocumentLinks? = nil) -> APIEndpoint {
         var parameters = [String: Any]()
         if let fields = fields { parameters.add(fields) }
         if let filter = filter { parameters.add(filter) }
         if let include = include { parameters.add(include) }
         if let limit = limit { parameters["limit"] = limit }
+        if let nextCursor = next?.nextCursor { parameters["cursor"] = nextCursor }
         return APIEndpoint(path: "betaLicenseAgreements", method: .get, parameters: parameters)
     }
 }

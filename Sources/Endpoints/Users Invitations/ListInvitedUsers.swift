@@ -18,18 +18,21 @@ extension APIEndpoint where T == UserInvitationsResponse {
     ///   - limit: Number of resources to return.
     ///   - sort: Attributes by which to sort.
     ///   - filter: Attributes, relationships, and IDs by which to filter.
+    ///   - next: The next URL to use as a base. See `PagedDocumentLinks`.
     public static func invitedUsers(
         fields: [ListInvitedUsers.Field]? = nil,
         include: [ListInvitedUsers.Include]? = nil,
         limit: [ListInvitedUsers.Limit]? = nil,
         sort: [ListInvitedUsers.Sort]? = nil,
-        filter: [ListInvitedUsers.Filter]? = nil) -> APIEndpoint {
+        filter: [ListInvitedUsers.Filter]? = nil,
+        next: PagedDocumentLinks? = nil) -> APIEndpoint {
         var parameters = [String: Any]()
         if let fields = fields { parameters.add(fields) }
         if let include = include { parameters.add(include) }
         if let limit = limit { parameters.add(limit) }
         if let sort = sort { parameters.add(sort) }
         if let filter = filter { parameters.add(filter) }
+        if let nextCursor = next?.nextCursor { parameters["cursor"] = nextCursor }
         return APIEndpoint(path: "userInvitations", method: .get, parameters: parameters)
     }
 }

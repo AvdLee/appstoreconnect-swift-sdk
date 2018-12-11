@@ -31,9 +31,7 @@ extension APIEndpoint where T == BetaTestersResponse {
         if let include = include { parameters.add(include) }
         if let limit = limit { parameters.add(limit) }
         if let sort = sort { parameters.add(sort) }
-        if let nextCursor = next?.nextCursor {
-            parameters["cursor"] = nextCursor
-        }
+        if let nextCursor = next?.nextCursor { parameters["cursor"] = nextCursor }
         return APIEndpoint(path: "betaTesters", method: .get, parameters: parameters)
     }
 }

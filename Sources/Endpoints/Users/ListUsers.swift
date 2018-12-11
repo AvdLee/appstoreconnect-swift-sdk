@@ -17,18 +17,21 @@ extension APIEndpoint where T == UsersResponse {
     ///   - limit: Number of resources to return.
     ///   - sort: Attributes by which to sort.
     ///   - filter: Attributes, relationships, and IDs by which to filter.
+    ///   - next: The next URL to use as a base. See `PagedDocumentLinks`.
     public static func users(
         fields: [ListUsers.Field]? = nil,
         include: [ListUsers.Include]? = nil,
         limit: [ListUsers.Limit]? = nil,
         sort: [ListUsers.Sort]? = nil,
-        filter: [ListUsers.Filter]? = nil) -> APIEndpoint {
+        filter: [ListUsers.Filter]? = nil,
+        next: PagedDocumentLinks? = nil) -> APIEndpoint {
         var parameters = [String: Any]()
         if let fields = fields { parameters.add(fields) }
         if let include = include { parameters.add(include) }
         if let limit = limit { parameters.add(limit) }
         if let sort = sort { parameters.add(sort) }
         if let filter = filter { parameters.add(filter) }
+        if let nextCursor = next?.nextCursor { parameters["cursor"] = nextCursor }
         return APIEndpoint(path: "users", method: .get, parameters: parameters)
     }
 }

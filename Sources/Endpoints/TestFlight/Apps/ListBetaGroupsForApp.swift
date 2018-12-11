@@ -15,13 +15,16 @@ extension APIEndpoint where T == BetaGroupsResponse {
     ///   - id: An opaque resource ID that uniquely identifies the resource.
     ///   - fields: Fields to return for included related types.
     ///   - limit: Number of resources to return.
+    ///   - next: The next URL to use as a base. See `PagedDocumentLinks`.
     public static func betaGroups(
         forAppWithId id: String,
         fields: [ListBetaGroupsForApp.Field]? = nil,
-        limit: Int? = nil) -> APIEndpoint {
+        limit: Int? = nil,
+        next: PagedDocumentLinks? = nil) -> APIEndpoint {
         var parameters = [String: Any]()
         if let fields = fields { parameters.add(fields) }
         if let limit = limit { parameters["limit"] = limit }
+        if let nextCursor = next?.nextCursor { parameters["cursor"] = nextCursor }
         return APIEndpoint(
             path: "apps/\(id)/betaGroups",
             method: .get,

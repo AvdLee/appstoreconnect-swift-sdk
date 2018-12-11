@@ -15,13 +15,16 @@ extension APIEndpoint where T == PreReleaseVersionsResponse {
     ///   - id: An opaque resource ID that uniquely identifies the resource.
     ///   - fields: Fields to return for included related types.
     ///   - limit: Number of resources to return.
+    ///   - next: The next URL to use as a base. See `PagedDocumentLinks`.
     public static func prereleaseVersions(
         forAppWithId id: String,
         fields: [ListPrereleaseVersionsForApp.Field]? = nil,
-        limit: Int? = nil) -> APIEndpoint {
+        limit: Int? = nil,
+        next: PagedDocumentLinks? = nil) -> APIEndpoint {
         var parameters = [String: Any]()
         if let fields = fields { parameters.add(fields) }
         if let limit = limit { parameters["limit"] = limit }
+        if let nextCursor = next?.nextCursor { parameters["cursor"] = nextCursor }
         return APIEndpoint(
             path: "apps/\(id)/preReleaseVersions",
             method: .get,
