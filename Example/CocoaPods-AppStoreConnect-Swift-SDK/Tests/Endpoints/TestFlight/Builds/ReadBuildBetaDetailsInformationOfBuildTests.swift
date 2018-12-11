@@ -11,7 +11,7 @@ import XCTest
 final class ReadBuildBetaDetailsInformationOfBuildTests: XCTestCase {
     
     func testURLRequest() {
-        let endpoint = APIEndpoint.buildBetaDetails(
+        let endpoint = APIEndpoint.buildBetaDetail(
             ofBuildWithId: "id",
             fields: [.buildBetaDetails(ReadBuildBetaDetailsInformationOfBuild.Field.BuildBetaDetail.allCases)])
         let request = try? endpoint.asURLRequest()

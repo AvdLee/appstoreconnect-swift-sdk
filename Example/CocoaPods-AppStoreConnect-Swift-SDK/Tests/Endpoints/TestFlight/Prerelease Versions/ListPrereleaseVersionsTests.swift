@@ -14,12 +14,13 @@ final class ListPrereleaseVersionsTests: XCTestCase {
         let endpoint = APIEndpoint.prereleaseVersions(
             forAppWithId: "id",
             fields: [.preReleaseVersions(ListPrereleaseVersionsForApp.Field.PreReleaseVersion.allCases)],
-            limit: 2)
+            limit: 2,
+            next: .test)
         let request = try? endpoint.asURLRequest()
         XCTAssertEqual(request?.httpMethod, "GET")
         
         let absoluteString = request?.url?.absoluteString
-        let expected = "https://api.appstoreconnect.apple.com/v1/apps/id/preReleaseVersions?fields%5BpreReleaseVersion%5D=app%2Cbuilds%2Cplatform%2Cversion&limit=2"
+        let expected = "https://api.appstoreconnect.apple.com/v1/apps/id/preReleaseVersions?cursor=NEXT&fields%5BpreReleaseVersion%5D=app%2Cbuilds%2Cplatform%2Cversion&limit=2"
         XCTAssertEqual(absoluteString, expected)
     }
 }
