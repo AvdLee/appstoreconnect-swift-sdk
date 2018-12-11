@@ -108,6 +108,7 @@
 		311FE30A21B1D2960078C9C0 /* ReadPrereleaseVersionInformationTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 311FE2D821B1D2950078C9C0 /* ReadPrereleaseVersionInformationTests.swift */; };
 		311FE30B21B1D2960078C9C0 /* ReadAppInformationOfPrereleaseVersionTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 311FE2D921B1D2950078C9C0 /* ReadAppInformationOfPrereleaseVersionTests.swift */; };
 		311FE30C21B1D2960078C9C0 /* ListBuildsOfPrereleaseVersionTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 311FE2DA21B1D2950078C9C0 /* ListBuildsOfPrereleaseVersionTests.swift */; };
+		3149078B21C0255E00D37AD3 /* PagedDocumentLinks+Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3149078A21C0255E00D37AD3 /* PagedDocumentLinks+Tests.swift */; };
 		314DF9E421A6CB17008FFF99 /* ListAppsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 314DF9E321A6CB17008FFF99 /* ListAppsTests.swift */; };
 		3183103821A8497800638289 /* QueryParameterTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3183103721A8497800638289 /* QueryParameterTests.swift */; };
 		3183103A21A8719F00638289 /* GetAppTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3183103921A8719F00638289 /* GetAppTests.swift */; };
@@ -263,6 +264,7 @@
 		311FE2D821B1D2950078C9C0 /* ReadPrereleaseVersionInformationTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ReadPrereleaseVersionInformationTests.swift; sourceTree = "<group>"; };
 		311FE2D921B1D2950078C9C0 /* ReadAppInformationOfPrereleaseVersionTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ReadAppInformationOfPrereleaseVersionTests.swift; sourceTree = "<group>"; };
 		311FE2DA21B1D2950078C9C0 /* ListBuildsOfPrereleaseVersionTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ListBuildsOfPrereleaseVersionTests.swift; sourceTree = "<group>"; };
+		3149078A21C0255E00D37AD3 /* PagedDocumentLinks+Tests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "PagedDocumentLinks+Tests.swift"; sourceTree = "<group>"; };
 		314DF9E321A6CB17008FFF99 /* ListAppsTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListAppsTests.swift; sourceTree = "<group>"; };
 		3183103721A8497800638289 /* QueryParameterTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QueryParameterTests.swift; sourceTree = "<group>"; };
 		3183103921A8719F00638289 /* GetAppTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetAppTests.swift; sourceTree = "<group>"; };
@@ -672,10 +674,11 @@
 		607FACE81AFB9204008FA782 /* Tests */ = {
 			isa = PBXGroup;
 			children = (
-				318824BE21AD3C8500676DA7 /* Endpoints */,
 				31F929E0219C6AC40061DEA5 /* JWTRequestsAuthenticatorTests.swift */,
-				3183103721A8497800638289 /* QueryParameterTests.swift */,
 				31F929E1219C6AC40061DEA5 /* JWTTests.swift */,
+				3149078A21C0255E00D37AD3 /* PagedDocumentLinks+Tests.swift */,
+				3183103721A8497800638289 /* QueryParameterTests.swift */,
+				318824BE21AD3C8500676DA7 /* Endpoints */,
 				607FACE91AFB9204008FA782 /* Supporting Files */,
 			);
 			path = Tests;
@@ -1008,6 +1011,7 @@
 				311FE1E721B17DFB0078C9C0 /* ReadAppInformationOfBetaAppReviewDetailTests.swift in Sources */,
 				311FE2E521B1D2950078C9C0 /* ListIndividualTestersForBuildTests.swift in Sources */,
 				318824F421AD409500676DA7 /* GetBetaLicenseAgreementOfAppTests.swift in Sources */,
+				3149078B21C0255E00D37AD3 /* PagedDocumentLinks+Tests.swift in Sources */,
 				311FE1CD21B1784E0078C9C0 /* ReadAppInformationOfBetaAppLocalizationTests.swift in Sources */,
 				310FAE1B21B16157004327B2 /* GetBuildIDsInBetaGroupTests.swift in Sources */,
 				311FE29C21B1C7E80078C9C0 /* ReadUserInformationTests.swift in Sources */,
