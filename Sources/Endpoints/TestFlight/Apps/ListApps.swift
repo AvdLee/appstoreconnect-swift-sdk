@@ -148,6 +148,7 @@ public struct ListApps {
     }
 }
 
+// MARK: - Field
 extension ListApps.Field {
     public enum App: String, CaseIterable, NestableQueryParameter {
         case betaAppLocalizations, betaAppReviewDetail, betaGroups, betaLicenseAgreement, betaTesters, builds, bundleId, name, preReleaseVersions, primaryLocale, sku

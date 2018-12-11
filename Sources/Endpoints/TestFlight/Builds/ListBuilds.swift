@@ -152,6 +152,7 @@ public struct ListBuilds {
     }
 }
 
+// MARK: - Field
 extension ListBuilds.Field {
     
     public enum AppEncryptionDeclaration: String, CaseIterable, NestableQueryParameter {
@@ -211,6 +212,7 @@ extension ListBuilds.Field {
     }
 }
 
+// MARK: - Filter
 extension ListBuilds.Filter {
     
     public enum ProcessingState: String, CaseIterable, NestableQueryParameter {
