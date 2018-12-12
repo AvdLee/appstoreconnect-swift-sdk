@@ -11,23 +11,14 @@ import XCTest
 final class GetBuildIDsOfPrereleaseVersionTests: XCTestCase {
     
     func testURLRequest() {
-        let buildId = "id"
-        let locale = "locale"
-        let whatsNew = "whatsNew"
-        
-        let endpoint = APIEndpoint.create(
-            betaBuildLocalizationForBuildWithId: buildId,
-            locale: locale,
-            whatsNew: whatsNew)
+        let endpoint = APIEndpoint.buildIDs(
+            ofPrereleaseVersionWithId: "prereleaseVersionId",
+            limit: 2)
         let request = try? endpoint.asURLRequest()
-        XCTAssertEqual(request?.httpMethod, "POST")
+        XCTAssertEqual(request?.httpMethod, "GET")
         
         let absoluteString = request?.url?.absoluteString
-        let expected = "https://api.appstoreconnect.apple.com/v1/betaBuildLocalizations"
+        let expected = "https://api.appstoreconnect.apple.com/v1/preReleaseVersions/prereleaseVersionId/relationships/builds?limit=2"
         XCTAssertEqual(absoluteString, expected)
-        XCTAssertEqual(request?.httpBody, try? JSONEncoder().encode(BetaBuildLocalizationCreateRequest(
-            buildId: buildId,
-            locale: locale,
-            whatsNew: whatsNew)))
     }
 }

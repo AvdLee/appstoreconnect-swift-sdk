@@ -11,23 +11,20 @@ import XCTest
 final class ModifyBetaLicenseAgreementTests: XCTestCase {
     
     func testURLRequest() {
-        let betaBuildLocalizationForBuildId = "id"
-        let locale = "locale"
-        let whatsNew = "whatsNew"
+        let betaLicenseAgreementId = "id"
+        let agreementText = "text"
         
-        let endpoint = APIEndpoint.create(
-            betaBuildLocalizationForBuildWithId: betaBuildLocalizationForBuildId,
-            locale: locale,
-            whatsNew: whatsNew)
+        let endpoint = APIEndpoint.modify(
+            betaLicenseAgreementWithId: "id",
+            agreementText: "text")
         let request = try? endpoint.asURLRequest()
-        XCTAssertEqual(request?.httpMethod, "POST")
+        XCTAssertEqual(request?.httpMethod, "PATCH")
         
         let absoluteString = request?.url?.absoluteString
-        let expected = "https://api.appstoreconnect.apple.com/v1/betaBuildLocalizations"
+        let expected = "https://api.appstoreconnect.apple.com/v1/betaLicenseAgreements/id"
         XCTAssertEqual(absoluteString, expected)
-        XCTAssertEqual(request?.httpBody, try? JSONEncoder().encode(BetaBuildLocalizationCreateRequest(
-            buildId: betaBuildLocalizationForBuildId,
-            locale: locale,
-            whatsNew: whatsNew)))
+        XCTAssertEqual(request?.httpBody, try? JSONEncoder().encode(BetaLicenseAgreementUpdateRequest(
+            id: betaLicenseAgreementId,
+            agreementText: agreementText)))
     }
 }

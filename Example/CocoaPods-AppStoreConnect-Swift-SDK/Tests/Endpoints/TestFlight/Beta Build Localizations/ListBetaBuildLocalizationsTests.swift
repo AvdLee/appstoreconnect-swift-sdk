@@ -11,7 +11,7 @@ import XCTest
 final class ListBetaBuildLocalizationsTests: XCTestCase {
     
     func testURLRequest() {
-        let endpoint = APIEndpoint.listBetaBuildLocalizations(
+        let endpoint = APIEndpoint.betaBuildLocalizations(
             fields: [
                 .betaBuildLocalizations(ListBetaBuildLocalizations.Field.BetaBuildLocalization.allCases),
                 .builds(ListBetaBuildLocalizations.Field.Build.allCases)],

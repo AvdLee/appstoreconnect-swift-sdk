@@ -11,23 +11,12 @@ import XCTest
 final class GetAppResourceIDForBetaLicenseAgreementTests: XCTestCase {
     
     func testURLRequest() {
-        let betaBuildLocalizationForBuildId = "id"
-        let locale = "locale"
-        let whatsNew = "whatsNew"
-        
-        let endpoint = APIEndpoint.create(
-            betaBuildLocalizationForBuildWithId: betaBuildLocalizationForBuildId,
-            locale: locale,
-            whatsNew: whatsNew)
+        let endpoint = APIEndpoint.appID(forBetaLicenseAgreementWithId: "id")
         let request = try? endpoint.asURLRequest()
-        XCTAssertEqual(request?.httpMethod, "POST")
+        XCTAssertEqual(request?.httpMethod, "GET")
         
         let absoluteString = request?.url?.absoluteString
-        let expected = "https://api.appstoreconnect.apple.com/v1/betaBuildLocalizations"
+        let expected = "https://api.appstoreconnect.apple.com/v1/betaLicenseAgreements/id/relationships/app"
         XCTAssertEqual(absoluteString, expected)
-        XCTAssertEqual(request?.httpBody, try? JSONEncoder().encode(BetaBuildLocalizationCreateRequest(
-            buildId: betaBuildLocalizationForBuildId,
-            locale: locale,
-            whatsNew: whatsNew)))
     }
 }
