@@ -8,7 +8,7 @@
 import XCTest
 @testable import AppStoreConnect_Swift_SDK
 
-class BetaTesterRelationshipTests: XCTestCase {
+final class BetaTesterRelationshipTests: XCTestCase {
 
     func test() {
         let decoder = JSONDecoder()
