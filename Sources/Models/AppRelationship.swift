@@ -15,13 +15,16 @@ public enum AppRelationship: Codable {
     case betaLicenseAgreement(BetaLicenseAgreement)
     case betaAppReviewDetail(BetaAppReviewDetail)
     
-    enum CodingKeys: String, Decodable, CodingKey {
+    enum TypeKeys: String, CodingKey {
         case type
+    }
+    enum CodingKeys: String, Decodable, CodingKey {
         case betaGroups, preReleaseVersions, betaAppLocalizations, builds, betaLicenseAgreements, betaAppReviewDetails
     }
 
     public init(from decoder: Decoder) throws {
-        switch try decoder.container(keyedBy: CodingKeys.self).decode(CodingKeys.self, forKey: .type) {
+        let type = try decoder.container(keyedBy: TypeKeys.self).decode(CodingKeys.self, forKey: .type)
+        switch type {
         case .betaGroups:
             self = try .betaGroup(BetaGroup(from: decoder))
         case .preReleaseVersions:
@@ -34,11 +37,6 @@ public enum AppRelationship: Codable {
             self = try .betaLicenseAgreement(BetaLicenseAgreement(from: decoder))
         case .betaAppReviewDetails:
             self = try .betaAppReviewDetail(BetaAppReviewDetail(from: decoder))
-        default:
-            throw DecodingError.typeMismatch(
-                AppRelationship.self,
-                DecodingError.Context(codingPath: [], debugDescription: "Not convertable to \(AppRelationship.self)")
-            )
         }
     }
     
