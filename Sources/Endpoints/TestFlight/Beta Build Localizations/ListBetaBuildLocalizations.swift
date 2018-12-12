@@ -17,7 +17,7 @@ extension APIEndpoint where T == BetaBuildLocalizationsResponse {
     ///   - include: Relationship data to include in the response.
     ///   - limit: Number of resources to return.
     ///   - next: The next URL to use as a base. See `PagedDocumentLinks`.
-    public static func listBetaBuildLocalizations(
+    public static func betaBuildLocalizations(
         fields: [ListBetaBuildLocalizations.Field]? = nil,
         filter: [ListBetaBuildLocalizations.Filter]? = nil,
         include: [ListBetaBuildLocalizations.Include]? = nil,

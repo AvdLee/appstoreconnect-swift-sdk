@@ -17,7 +17,7 @@ extension APIEndpoint where T == BetaAppReviewSubmissionsResponse {
     ///   - include: Relationship data to include in the response.
     ///   - limit: Number of resources to return.
     ///   - next: The next URL to use as a base. See `PagedDocumentLinks`.
-    public static func listBetaAppReviewSubmissions(
+    public static func betaAppReviewSubmissions(
         fields: [ListBetaAppReviewSubmissions.Field]? = nil,
         filter: [ListBetaAppReviewSubmissions.Filter]? = nil,
         include: [ListBetaAppReviewSubmissions.Include]? = nil,
