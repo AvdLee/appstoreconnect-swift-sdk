@@ -15,13 +15,16 @@ extension APIEndpoint where T == BetaTestersResponse {
     ///   - id: (Required) An opaque resource ID that uniquely identifies the resource.
     ///   - limit: Number of resources to return
     ///   - fields: Fields to return for included related types.
+    ///   - next: The next URL to use as a base. See `PagedDocumentLinks`.
     public static func individualTesters(
         forBuildWithId id: String,
         limit: Int? = nil,
-        fields: [ListIndividualTestersForBuild.Field]? = nil) -> APIEndpoint {
+        fields: [ListIndividualTestersForBuild.Field]? = nil,
+        next: PagedDocumentLinks? = nil) -> APIEndpoint {
         var parameters = [String: Any]()
         if let limit = limit { parameters["limit"] = limit }
         if let fields = fields { parameters.add(fields) }
+        if let nextCursor = next?.nextCursor { parameters["cursor"] = nextCursor }
         return APIEndpoint(path: "builds/\(id)/individualTesters", method: .get, parameters: parameters)
     }
 }

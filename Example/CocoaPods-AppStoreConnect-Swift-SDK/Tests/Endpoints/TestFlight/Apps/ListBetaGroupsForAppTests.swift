@@ -14,12 +14,13 @@ final class ListBetaGroupsForAppTests: XCTestCase {
         let endpoint = APIEndpoint.betaGroups(
             forAppWithId: "appId",
             fields: [.betaGroups(ListBetaGroupsForApp.Field.BetaGroup.allCases)],
-            limit: 1)
+            limit: 1,
+            next: .test)
         let request = try? endpoint.asURLRequest()
         XCTAssertEqual(request?.httpMethod, "GET")
         
         let absoluteString = request?.url?.absoluteString
-        let expected = "https://api.appstoreconnect.apple.com/v1/apps/appId/betaGroups?fields%5BbetaGroup%5D=app%2CbetaTesters%2Cbuilds%2CcreatedDate%2CisInternalGroup%2Cname%2CpublicLink%2CpublicLinkEnabled%2CpublicLinkId%2CpublicLinkLimit%2CpublicLinkLimitEnabled&limit=1"
+        let expected = "https://api.appstoreconnect.apple.com/v1/apps/appId/betaGroups?cursor=NEXT&fields%5BbetaGroup%5D=app%2CbetaTesters%2Cbuilds%2CcreatedDate%2CisInternalGroup%2Cname%2CpublicLink%2CpublicLinkEnabled%2CpublicLinkId%2CpublicLinkLimit%2CpublicLinkLimitEnabled&limit=1"
         XCTAssertEqual(absoluteString, expected)
     }
 }

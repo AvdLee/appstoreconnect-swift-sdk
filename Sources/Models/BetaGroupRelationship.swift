@@ -12,24 +12,21 @@ public enum BetaGroupRelationship: Codable {
     case build(Build)
     case betaTester(BetaTester)
     
-    enum CodingKeys: String, Decodable, CodingKey {
+    enum TypeKeys: String, CodingKey {
         case type
+    }
+    enum CodingKeys: String, Decodable, CodingKey {
         case apps, builds, betaTesters
     }
 
     public init(from decoder: Decoder) throws {
-        switch try decoder.container(keyedBy: CodingKeys.self).decode(CodingKeys.self, forKey: .type) {
+        switch try decoder.container(keyedBy: TypeKeys.self).decode(CodingKeys.self, forKey: .type) {
         case .apps:
             self = try .app(App(from: decoder))
         case .builds:
             self = try .build(Build(from: decoder))
         case .betaTesters:
             self = try .betaTester(BetaTester(from: decoder))
-        default:
-            throw DecodingError.typeMismatch(
-                BetaGroupRelationship.self,
-                DecodingError.Context(codingPath: [], debugDescription: "Not convertable to \(BetaGroupRelationship.self)")
-            )
         }
     }
     

@@ -16,13 +16,16 @@ extension APIEndpoint where T == AppsResponse {
     
     ///   - limit: Number of resources to return.
     ///   - fields: Fields to return for included related types.
+    ///   - next: The next URL to use as a base. See `PagedDocumentLinks`.
     public static func apps(
         visibleToInvitedUserWithId id: String,
         fields: [ListAppsVisibleToInvitedUser.Field]? = nil,
-        limit: Int? = nil) -> APIEndpoint {
+        limit: Int? = nil,
+        next: PagedDocumentLinks? = nil) -> APIEndpoint {
         var parameters = [String: Any]()
         if let limit = limit { parameters["limit"] = limit }
         if let fields = fields { parameters.add(fields) }
+        if let nextCursor = next?.nextCursor { parameters["cursor"] = nextCursor }
         return APIEndpoint(path: "userInvitations/\(id)/visibleApps", method: .get, parameters: parameters)
     }
 }

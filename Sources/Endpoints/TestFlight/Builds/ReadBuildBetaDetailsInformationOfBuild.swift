@@ -14,7 +14,7 @@ extension APIEndpoint where T == BuildBetaDetailResponse {
     /// - Parameters:
     ///   - id: (Required) An opaque resource ID that uniquely identifies the resource.
     ///   - fields: Fields to return for included related types.
-    public static func buildBetaDetails(
+    public static func buildBetaDetail(
         ofBuildWithId id: String,
         fields: [ReadBuildBetaDetailsInformationOfBuild.Field]? = nil) -> APIEndpoint {
         var parameters = [String: Any]()

@@ -11,22 +11,19 @@ public enum PreReleaseVersionRelationship: Codable {
     case build(Build)
     case app(App)
     
-    enum CodingKeys: String, Decodable, CodingKey {
+    enum TypeKeys: String, CodingKey {
         case type
+    }
+    enum CodingKeys: String, Decodable, CodingKey {
         case builds, apps
     }
     
     public init(from decoder: Decoder) throws {
-        switch try decoder.container(keyedBy: CodingKeys.self).decode(CodingKeys.self, forKey: .type) {
+        switch try decoder.container(keyedBy: TypeKeys.self).decode(CodingKeys.self, forKey: .type) {
         case .builds:
             self = try .build(Build(from: decoder))
         case .apps:
             self = try .app(App(from: decoder))
-        default:
-            throw DecodingError.typeMismatch(
-                PreReleaseVersionRelationship.self,
-                DecodingError.Context(codingPath: [], debugDescription: "Not convertable to \(PreReleaseVersionRelationship.self)")
-            )
         }
     }
     

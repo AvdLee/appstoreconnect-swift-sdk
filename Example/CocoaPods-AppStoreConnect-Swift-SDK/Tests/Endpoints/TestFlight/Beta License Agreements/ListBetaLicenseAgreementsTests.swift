@@ -11,23 +11,19 @@ import XCTest
 final class ListBetaLicenseAgreementsTests: XCTestCase {
     
     func testURLRequest() {
-        let betaBuildLocalizationForBuildId = "id"
-        let locale = "locale"
-        let whatsNew = "whatsNew"
-        
-        let endpoint = APIEndpoint.create(
-            betaBuildLocalizationForBuildWithId: betaBuildLocalizationForBuildId,
-            locale: locale,
-            whatsNew: whatsNew)
+        let endpoint = APIEndpoint.betaLicenseAgreements(
+            fields: [
+                .apps(ListBetaLicenseAgreements.Field.App.allCases),
+                .betaLicenseAgreements(ListBetaLicenseAgreements.Field.BetaLicenseAgreement.allCases)],
+            filter: [.app(["appId"])],
+            include: ListBetaLicenseAgreements.Include.allCases,
+            limit: 2,
+            next: .test)
         let request = try? endpoint.asURLRequest()
-        XCTAssertEqual(request?.httpMethod, "POST")
+        XCTAssertEqual(request?.httpMethod, "GET")
         
         let absoluteString = request?.url?.absoluteString
-        let expected = "https://api.appstoreconnect.apple.com/v1/betaBuildLocalizations"
+        let expected = "https://api.appstoreconnect.apple.com/v1/betaLicenseAgreements?cursor=NEXT&fields%5BApp%5D=betaAppLocalizations%2CbetaAppReviewDetail%2CbetaGroups%2CbetaLicenseAgreement%2CbetaTesters%2Cbuilds%2CbundleId%2Cname%2CpreReleaseVersions%2CprimaryLocale%2Csku&fields%5BbetaLicenseAgreement%5D=agreementText%2Capp&filter%5Bapp%5D=appId&include=app&limit=2"
         XCTAssertEqual(absoluteString, expected)
-        XCTAssertEqual(request?.httpBody, try? JSONEncoder().encode(BetaBuildLocalizationCreateRequest(
-            buildId: betaBuildLocalizationForBuildId,
-            locale: locale,
-            whatsNew: whatsNew)))
     }
 }

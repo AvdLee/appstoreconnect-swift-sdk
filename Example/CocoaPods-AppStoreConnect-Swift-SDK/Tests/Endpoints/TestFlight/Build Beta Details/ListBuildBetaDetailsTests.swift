@@ -12,13 +12,20 @@ final class ListBuildBetaDetailsTests: XCTestCase {
     
     func testURLRequest() {
         let endpoint = APIEndpoint.buildBetaDetails(
-            ofBuildWithId: "id",
-            fields: [.buildBetaDetails(ReadBuildBetaDetailsInformationOfBuild.Field.BuildBetaDetail.allCases)])
+            fields: [
+                .buildBetaDetails(ListBuildBetaDetails.Field.BuildBetaDetail.allCases),
+                .builds(ListBuildBetaDetails.Field.Build.allCases)],
+            filter: [
+                .build(["build"]),
+                .id(["id"])],
+            include: ListBuildBetaDetails.Include.allCases,
+            limit: 2,
+            next: .test)
         let request = try? endpoint.asURLRequest()
         XCTAssertEqual(request?.httpMethod, "GET")
         
         let absoluteString = request?.url?.absoluteString
-        let expected = "https://api.appstoreconnect.apple.com/v1/builds/id/buildBetaDetail?fields%5BbuildBetaDetail%5D=autoNotifyEnabled%2Cbuild%2CexternalBuildState%2CinternalBuildState"
+        let expected = "https://api.appstoreconnect.apple.com/v1/buildBetaDetails?cursor=NEXT&fields%5BbuildBetaDetail%5D=autoNotifyEnabled%2Cbuild%2CexternalBuildState%2CinternalBuildState&fields%5Bbuild%5D=app%2CappEncryptionDeclaration%2CbetaAppReviewSubmission%2CbetaBuildLocalizations%2CbetaGroups%2CbuildBetaDetail%2CexpirationDate%2Cexpired%2CiconAssetToken%2CindividualTesters%2CminOsVersion%2CpreReleaseVersion%2CprocessingState%2CuploadedDate%2CusesNonExemptEncryption%2Cversion&filter%5Bbuild%5D=build&filter%5Bid%5D=id&include=build&limit=2"
         XCTAssertEqual(absoluteString, expected)
     }
 }

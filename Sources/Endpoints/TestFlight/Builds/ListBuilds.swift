@@ -17,18 +17,21 @@ extension APIEndpoint where T == BuildsResponse {
     ///   - include: Relationship data to include in the response.
     ///   - limit: Number of resources to return.
     ///   - sort: Attributes by which to sort.
+    ///   - next: The next URL to use as a base. See `PagedDocumentLinks`.
     public static func builds(
         fields: [ListBuilds.Field]? = nil,
         filter: [ListBuilds.Filter]? = nil,
         include: [ListBuilds.Include]? = nil,
         limit: [ListBuilds.Limit]? = nil,
-        sort: [ListBuilds.Sort]? = nil) -> APIEndpoint {
+        sort: [ListBuilds.Sort]? = nil,
+        next: PagedDocumentLinks? = nil) -> APIEndpoint {
         var parameters = [String: Any]()
         if let fields = fields { parameters.add(fields) }
         if let filter = filter { parameters.add(filter) }
         if let include = include { parameters.add(include) }
         if let limit = limit { parameters.add(limit) }
         if let sort = sort { parameters.add(sort) }
+        if let nextCursor = next?.nextCursor { parameters["cursor"] = nextCursor }
         return APIEndpoint(
             path: "builds",
             method: .get,
@@ -149,6 +152,7 @@ public struct ListBuilds {
     }
 }
 
+// MARK: - Field
 extension ListBuilds.Field {
     
     public enum AppEncryptionDeclaration: String, CaseIterable, NestableQueryParameter {
@@ -208,6 +212,7 @@ extension ListBuilds.Field {
     }
 }
 
+// MARK: - Filter
 extension ListBuilds.Filter {
     
     public enum ProcessingState: String, CaseIterable, NestableQueryParameter {

@@ -17,18 +17,21 @@ extension APIEndpoint where T == AppsResponse {
     ///   - relationships: Relationship data to include in the response.
     ///   - sortBy: Attributes by which to sort.
     ///   - limits: Number of included related resources to return.
+    ///   - next: The next URL to use as a base. See `PagedDocumentLinks`.
     public static func apps(
         select fields: [ListApps.Field]? = nil,
         filters: [ListApps.Filter]? = nil,
         include relationships: [ListApps.Relationship]? = nil,
         sortBy: [ListApps.Sorting]? = nil,
-        limits: [ListApps.Limit]? = nil) -> APIEndpoint {
+        limits: [ListApps.Limit]? = nil,
+        next: PagedDocumentLinks? = nil) -> APIEndpoint {
         var parameters = [String: Any]()
         if let fields = fields { parameters.add(fields) }
         if let filters = filters { parameters.add(filters) }
         if let relationships = relationships { parameters.add(relationships) }
         if let sortBy = sortBy { parameters.add(sortBy) }
         if let limits = limits { parameters.add(limits) }
+        if let nextCursor = next?.nextCursor { parameters["cursor"] = nextCursor }
         return APIEndpoint(path: "apps", method: .get, parameters: parameters)
     }
 }
@@ -145,6 +148,7 @@ public struct ListApps {
     }
 }
 
+// MARK: - Field
 extension ListApps.Field {
     public enum App: String, CaseIterable, NestableQueryParameter {
         case betaAppLocalizations, betaAppReviewDetail, betaGroups, betaLicenseAgreement, betaTesters, builds, bundleId, name, preReleaseVersions, primaryLocale, sku

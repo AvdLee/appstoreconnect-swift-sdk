@@ -16,16 +16,19 @@ extension APIEndpoint where T == AppEncryptionDeclarationsResponse {
     ///   - filter: Attributes, relationships, and IDs by which to filter.
     ///   - include: Relationship data to include in the response.
     ///   - limit: Number of resources to return.
+    ///   - next: The next URL to use as a base. See `PagedDocumentLinks`.
     public static func appEncryptionDeclarations(
         fields: [ListAppEncryptionDeclarations.Field]? = nil,
         filter: [ListAppEncryptionDeclarations.Filter]? = nil,
         include: [ListAppEncryptionDeclarations.Include]? = nil,
-        limit: Int? = nil) -> APIEndpoint {
+        limit: Int? = nil,
+        next: PagedDocumentLinks? = nil) -> APIEndpoint {
         var parameters = [String: Any]()
         if let fields = fields { parameters.add(fields) }
         if let filter = filter { parameters.add(filter) }
         if let include = include { parameters.add(include) }
         if let limit = limit { parameters["limit"] = limit }
+        if let nextCursor = next?.nextCursor { parameters["cursor"] = nextCursor }
         return APIEndpoint(
             path: "appEncryptionDeclarations",
             method: .get,

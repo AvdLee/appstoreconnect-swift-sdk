@@ -11,23 +11,17 @@ import XCTest
 final class ReadBetaLicenseAgreementInformationTests: XCTestCase {
     
     func testURLRequest() {
-        let betaBuildLocalizationForBuildId = "id"
-        let locale = "locale"
-        let whatsNew = "whatsNew"
-        
-        let endpoint = APIEndpoint.create(
-            betaBuildLocalizationForBuildWithId: betaBuildLocalizationForBuildId,
-            locale: locale,
-            whatsNew: whatsNew)
+        let endpoint = APIEndpoint.betaLicenseAgreement(
+            withId: "id",
+            fields: [
+                .apps(ReadBetaLicenseAgreementInformation.Field.App.allCases),
+                .betaLicenseAgreements(ReadBetaLicenseAgreementInformation.Field.BetaLicenseAgreement.allCases)],
+            include: ReadBetaLicenseAgreementInformation.Include.allCases)
         let request = try? endpoint.asURLRequest()
-        XCTAssertEqual(request?.httpMethod, "POST")
+        XCTAssertEqual(request?.httpMethod, "GET")
         
         let absoluteString = request?.url?.absoluteString
-        let expected = "https://api.appstoreconnect.apple.com/v1/betaBuildLocalizations"
+        let expected = "https://api.appstoreconnect.apple.com/v1/betaLicenseAgreements/id?fields%5BApp%5D=betaAppLocalizations%2CbetaAppReviewDetail%2CbetaGroups%2CbetaLicenseAgreement%2CbetaTesters%2Cbuilds%2CbundleId%2Cname%2CpreReleaseVersions%2CprimaryLocale%2Csku&fields%5BbetaLicenseAgreement%5D=agreementText%2Capp&include=app"
         XCTAssertEqual(absoluteString, expected)
-        XCTAssertEqual(request?.httpBody, try? JSONEncoder().encode(BetaBuildLocalizationCreateRequest(
-            buildId: betaBuildLocalizationForBuildId,
-            locale: locale,
-            whatsNew: whatsNew)))
     }
 }
