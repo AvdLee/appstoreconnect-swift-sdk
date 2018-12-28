@@ -25,7 +25,7 @@ The Swift SDK to work with the App Store Connect API from Apple.
 To request access, go to the new API Keys section in Users and Access in App Store Connect. Please note that you must be the Team Agent (Legal role) of a development team enrolled as an organization. Access for developers enrolled as an individual is coming soon.
 
 ## How to use the SDK?
-*Not all endpoints are available yet, we're working hard to implement them all (see [Endpoint.swift](Sources/Endpoint.swift)).*
+*Not all endpoints are available yet, we're working hard to implement them all (see [Endpoints](Sources/Endpoints)).*
 
 #### 1. Import the framework:
 
