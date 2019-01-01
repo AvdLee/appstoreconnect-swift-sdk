@@ -37,7 +37,7 @@ public struct APIConfiguration {
 public final class APIProvider {
     
     /// The session manager which is used to perform network requests with.
-    private let defaultSessionManager: SessionManager
+    internal let defaultSessionManager: SessionManager
     
     /// Contains a JSON Decoder which can be reused.
     private let jsonDecoder: JSONDecoder = {
@@ -57,17 +57,28 @@ public final class APIProvider {
     /// - Parameters:
     ///   - configuration: The configuration needed to set up the API Provider including all needed information for performing API requests.
     ///   - protocolClasses: Optional protocal classes to use for mocking with unit tests.
-    public init(configuration: APIConfiguration, protocolClasses: [AnyClass]? = nil) {
+    ///   - httpAdditionalHeaders: Optional additional HTTP headers to pass with each request.
+    public init(configuration: APIConfiguration, protocolClasses: [AnyClass]? = nil, httpAdditionalHeaders: [String: String]? = nil) {
         self.configuration = configuration
         
+        let configuration = URLSessionConfiguration.default
+        
         if let protocolClasses = protocolClasses {
-            let configuration = URLSessionConfiguration.default
             configuration.protocolClasses = protocolClasses + (configuration.protocolClasses ?? [])
-            defaultSessionManager = SessionManager(configuration: configuration)
-        } else {
-            defaultSessionManager = SessionManager(configuration: URLSessionConfiguration.default)
+        }
+
+        if let httpAdditionalHeaders = httpAdditionalHeaders {
+            if let existingHeaders = configuration.httpAdditionalHeaders {
+            configuration.httpAdditionalHeaders = existingHeaders.merging(httpAdditionalHeaders, uniquingKeysWith: { (_, new) -> Any in
+                return new
+            })
+            } else {
+                configuration.httpAdditionalHeaders = httpAdditionalHeaders
+            }
         }
         
+        defaultSessionManager = SessionManager(configuration: configuration)
+
         defaultSessionManager.adapter = requestsAuthenticator
     }
         
