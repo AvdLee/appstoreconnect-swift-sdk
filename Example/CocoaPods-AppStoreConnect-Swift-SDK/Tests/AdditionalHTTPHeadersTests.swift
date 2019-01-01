@@ -9,7 +9,7 @@
 import XCTest
 @testable import AppStoreConnect_Swift_SDK
 
-class AdditionalHTTPHeadersTests: XCTestCase {
+final class AdditionalHTTPHeadersTests: XCTestCase {
 
     private let configuration = APIConfiguration(issuerID: UUID().uuidString,
                                                  privateKeyID: UUID().uuidString,
