@@ -43,4 +43,29 @@ final class CreateBetaGroupTests: XCTestCase {
             betaTesterIds: betaTesterIds,
             buildIds: buildIds)))
     }
+    
+    func testURLRequestWithDefaultValues() {
+        let appId = "appId"
+        let name = "name"
+        
+        let endpoint = APIEndpoint.create(
+            betaGroupForAppWithId: appId,
+            name: name)
+        
+        let request = try? endpoint.asURLRequest()
+        XCTAssertEqual(request?.httpMethod, "POST")
+        
+        let absoluteString = request?.url?.absoluteString
+        let expected = "https://api.appstoreconnect.apple.com/v1/betaGroups"
+        XCTAssertEqual(absoluteString, expected)
+        XCTAssertEqual(request?.httpBody, try? JSONEncoder().encode(BetaGroupCreateRequest(
+            appId: appId,
+            name: name,
+            publicLinkEnabled: nil,
+            publicLinkLimit: nil,
+            publicLinkLimitEnabled: nil,
+            betaTesterIds: [],
+            buildIds: [])))
+    }
+
 }

@@ -26,8 +26,8 @@ extension APIEndpoint where T == BetaGroupResponse {
         publicLinkEnabled: Bool? = nil,
         publicLinkLimit: Int? = nil,
         publicLinkLimitEnabled: Bool? = nil,
-        betaTesterIds: [String]? = nil,
-        buildIds: [String]? = nil) -> APIEndpoint {
+        betaTesterIds: [String]? = [],
+        buildIds: [String]? = []) -> APIEndpoint {
         let request = BetaGroupCreateRequest(
             appId: appId,
             name: name,
