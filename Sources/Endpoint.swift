@@ -6,7 +6,7 @@
 //
 
 import Foundation
-import Alamofire
+
 
 /// Defines all data needed to build the URL Request with.
 public struct APIEndpoint<T> {
@@ -15,7 +15,7 @@ public struct APIEndpoint<T> {
     let path: String
 
     /// The HTTP Method to use for the request.
-    let method: Alamofire.HTTPMethod
+    let method: HTTPMethod
 
     /// The parameters to send with the request. Can be `nil`.
     let parameters: [String: Any]?
@@ -23,7 +23,7 @@ public struct APIEndpoint<T> {
     /// The body to send with the request. Can be `nil`.
     let body: Data?
     
-    init(path: String, method: Alamofire.HTTPMethod = .get, parameters: [String: Any]? = nil, body: Data? = nil) {
+    init(path: String, method: HTTPMethod = .get, parameters: [String: Any]? = nil, body: Data? = nil) {
         self.path = path
         self.method = method
         self.parameters = parameters
