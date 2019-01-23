@@ -34,6 +34,10 @@ public struct APIConfiguration {
 /// Provides access to all API Methods. Can be used to perform API requests.
 /// APIProviderProtocol Implementation based on URLSession
 public final class APIProvider: APIProviderProtocol {
+
+    enum Error: Swift.Error {
+        case requestGeneration
+    }
     
     /// The session manager which is used to perform network requests with.
     private let urlSession: URLSession
@@ -66,7 +70,14 @@ public final class APIProvider: APIProviderProtocol {
     ///   - endpoint: The API endpoint to request.
     ///   - completion: The completion callback which will be called on completion containing the result.
     public func request(_ endpoint: APIEndpoint<Void>, completion: @escaping RequestCompletionHandler<Void>) {
-        fatalError("Not Implemented")
+        guard let request = try? endpoint.asURLRequest() else {
+            completion(.failure(Error.requestGeneration))
+            return
+        }
+
+        self.urlSession.dataTask(with: request) { data, response, error in
+            // TODO
+        }
     }
     
     /// Performs a data request to the given API endpoint
@@ -75,7 +86,14 @@ public final class APIProvider: APIProviderProtocol {
     ///   - endpoint: The API endpoint to request.
     ///   - completion: The completion callback which will be called on completion containing the result.
     public func request<T: Decodable>(_ endpoint: APIEndpoint<T>, completion: @escaping RequestCompletionHandler<T>) {
-        fatalError("Not Implemented")
+        guard let request = try? endpoint.asURLRequest() else {
+            completion(.failure(Error.requestGeneration))
+            return
+        }
+
+        self.urlSession.dataTask(with: request) { data, response, error in
+            // TODO
+        }
     }
     
     /// Performs a data request to the given ResourceLinks
@@ -84,6 +102,9 @@ public final class APIProvider: APIProviderProtocol {
     ///   - resourceLinks: The resourceLinks to request.
     ///   - completion: The completion callback which will be called on completion containing the result.
     public func request<T: Decodable>(_ resourceLinks: ResourceLinks<T>, completion: @escaping RequestCompletionHandler<T>) {
-        fatalError("Not Implemented")
+
+        self.urlSession.dataTask(with: resourceLinks.`self`) { data, response, error in
+            // TODO
+        }
     }
 }
