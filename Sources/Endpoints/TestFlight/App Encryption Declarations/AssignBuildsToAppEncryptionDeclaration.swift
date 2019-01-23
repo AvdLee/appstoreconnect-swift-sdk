@@ -6,7 +6,7 @@
 //
 
 import Foundation
-import Alamofire
+
 
 extension APIEndpoint where T == Void {
 

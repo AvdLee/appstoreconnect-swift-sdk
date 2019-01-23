@@ -6,7 +6,7 @@
 //
 
 import Foundation
-import Alamofire
+
 
 public typealias RequestCompletionHandler<T> = (Result<T>) -> Void
 
@@ -37,7 +37,7 @@ public struct APIConfiguration {
 public final class APIProvider {
     
     /// The session manager which is used to perform network requests with.
-    private let defaultSessionManager: SessionManager
+    private let urlSession: URLSession
     
     /// Contains a JSON Decoder which can be reused.
     private let jsonDecoder: JSONDecoder = {
@@ -56,19 +56,9 @@ public final class APIProvider {
     ///
     /// - Parameters:
     ///   - configuration: The configuration needed to set up the API Provider including all needed information for performing API requests.
-    ///   - protocolClasses: Optional protocal classes to use for mocking with unit tests.
-    public init(configuration: APIConfiguration, protocolClasses: [AnyClass]? = nil) {
+    public init(configuration: APIConfiguration) {
         self.configuration = configuration
-        
-        if let protocolClasses = protocolClasses {
-            let configuration = URLSessionConfiguration.default
-            configuration.protocolClasses = protocolClasses + (configuration.protocolClasses ?? [])
-            defaultSessionManager = SessionManager(configuration: configuration)
-        } else {
-            defaultSessionManager = SessionManager(configuration: URLSessionConfiguration.default)
-        }
-        
-        defaultSessionManager.adapter = requestsAuthenticator
+        self.urlSession = URLSession(configuration: .default)
     }
         
     /// Performs a data request to the given API endpoint
@@ -77,12 +67,8 @@ public final class APIProvider {
     ///   - endpoint: The API endpoint to request.
     ///   - completion: The completion callback which will be called on completion containing the result.
     @discardableResult
-    public func request(_ endpoint: APIEndpoint<Void>, completion: @escaping RequestCompletionHandler<Void>) -> DataRequest {
-        let dataRequest = defaultSessionManager.request(endpoint)
-        dataRequest.dataResponse(decoder: jsonDecoder) { response in
-            completion(response.flatMap {_ in return () })
-        }
-        return dataRequest
+    public func request(_ endpoint: APIEndpoint<Void>, completion: @escaping RequestCompletionHandler<Void>) -> URLRequest {
+        fatalError("Not Implemented")
     }
     
     /// Performs a data request to the given API endpoint
@@ -91,10 +77,8 @@ public final class APIProvider {
     ///   - endpoint: The API endpoint to request.
     ///   - completion: The completion callback which will be called on completion containing the result.
     @discardableResult
-    public func request<T: Decodable>(_ endpoint: APIEndpoint<T>, completion: @escaping RequestCompletionHandler<T>) -> DataRequest {
-        let dataRequest = defaultSessionManager.request(endpoint)
-        dataRequest.mapResponseTo(T.self, decoder: jsonDecoder, completion: completion).resume()
-        return dataRequest
+    public func request<T: Decodable>(_ endpoint: APIEndpoint<T>, completion: @escaping RequestCompletionHandler<T>) -> URLRequest {
+        fatalError("Not Implemented")
     }
     
     /// Performs a data request to the given ResourceLinks
@@ -103,59 +87,7 @@ public final class APIProvider {
     ///   - resourceLinks: The resourceLinks to request.
     ///   - completion: The completion callback which will be called on completion containing the result.
     @discardableResult
-    public func request<T: Decodable>(_ resourceLinks: ResourceLinks<T>, completion: @escaping RequestCompletionHandler<T>) -> DataRequest {
-        let dataRequest = defaultSessionManager.request(resourceLinks.`self`)
-        dataRequest.mapResponseTo(T.self, decoder: jsonDecoder, completion: completion).resume()
-        return dataRequest
-    }
-}
-
-extension DataRequest {
-    
-    /// Defines errors which are caused on JSON mapping.
-    enum JSONMappingError: Error {
-        /// Indicates that the response is not a valid JSON dictionary.
-        case invalidResponse
-    }
-    
-    /// Maps the response to the given JSONDecodable data type.
-    ///
-    /// - Parameters:
-    ///   - type: The type to map to.
-    ///   - completion: The result of the mapping. An error will be returned if mapping fails.
-    @discardableResult
-    func dataResponse(decoder: JSONDecoder, completion: @escaping RequestCompletionHandler<Data?>) -> Self {
-        return validate(statusCode: 200..<300).responseData(queue: DispatchQueue.global(qos: .background)) { response in
-            if let error = response.error {
-                // Try to parse api error
-                guard let data = response.data, let apiError = try? decoder.decode(ErrorResponse.self, from: data) else {
-                    completion(Result.failure(error))
-                    return
-                }
-                completion(Result.failure(apiError))
-            } else {
-                completion(Result.success(response.data))
-            }
-        }
-    }
-    
-    /// Maps the response to the given JSONDecodable data type.
-    ///
-    /// - Parameters:
-    ///   - type: The type to map to.
-    ///   - completion: The result of the mapping. An error will be returned if mapping fails.
-    @discardableResult
-    func mapResponseTo<T: Decodable>(_ type: T.Type, decoder: JSONDecoder, completion: @escaping RequestCompletionHandler<T>) -> Self {
-        return dataResponse(decoder: decoder) { response in
-            let result = response.flatMap({ data -> T in
-                // Try to parse the model
-                guard let data = data else {
-                    throw JSONMappingError.invalidResponse
-                }
-                let codable = try decoder.decode(T.self, from: data)
-                return codable
-            })
-            completion(result)
-        }
+    public func request<T: Decodable>(_ resourceLinks: ResourceLinks<T>, completion: @escaping RequestCompletionHandler<T>) -> URLRequest {
+        fatalError("Not Implemented")
     }
 }

@@ -31,7 +31,9 @@ public struct APIEndpoint<T> {
     }
 }
 
-extension APIEndpoint: URLRequestConvertible {
+// MARK: - URLRequestConvertible
+
+extension APIEndpoint {
     
     /// Generates an URL based on the current endpoint in combination with the current API version.
     internal var url: URL {
@@ -41,8 +43,11 @@ extension APIEndpoint: URLRequestConvertible {
     
     /// Generates a request based on the current endpoint.
     public func asURLRequest() throws -> URLRequest {
-        var urlRequest = try URLEncoding().encode(URLRequest(url: url, method: method), with: parameters)
-        if let body = body {
+        var urlRequest = URLRequest(url: self.url)
+        urlRequest.httpMethod = self.method.rawValue
+        // TODO: encode parameters
+
+        if let body = self.body {
             if urlRequest.value(forHTTPHeaderField: "Content-Type") == nil {
                 urlRequest.setValue("application/json", forHTTPHeaderField: "Content-Type")
             }

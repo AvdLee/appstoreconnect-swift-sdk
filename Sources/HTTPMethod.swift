@@ -9,8 +9,10 @@ import Foundation
 
 
 /// AppStoreConnect relevant HTTP Methods
-enum HTTPMethod {
-    case get
-    case put
-    case post
+enum HTTPMethod: String {
+    case get = "GET"
+    case put = "PUT"
+    case post = "POST"
+    case delete = "DELETE"
+    case patch = "PATCH"
 }
