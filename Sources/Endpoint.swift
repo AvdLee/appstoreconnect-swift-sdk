@@ -45,7 +45,7 @@ extension APIEndpoint {
     public func asURLRequest() throws -> URLRequest {
         var urlRequest = URLRequest(url: self.url)
         urlRequest.httpMethod = self.method.rawValue
-        // TODO: encode parameters
+        urlRequest.encodeParameters(self.parameters)
 
         if let body = self.body {
             if urlRequest.value(forHTTPHeaderField: "Content-Type") == nil {
@@ -54,5 +54,34 @@ extension APIEndpoint {
             urlRequest.httpBody = body
         }
         return urlRequest
+    }
+}
+
+// MARK: - Private
+
+private extension URLRequest {
+
+    mutating func encodeParameters(_ parameters: [String: Any]?) {
+        guard let parameters = parameters, parameters.isEmpty == false else { return }
+        guard let url = self.url else { return }
+
+        func query(_ parameters: [String: Any]) -> String {
+            return parameters.sorted { $0.key < $1.key }.map { "\($0)=\($1)" }.joined(separator: "&")
+        }
+
+        if self.httpMethod == HTTPMethod.get.rawValue {
+            let newQueryToAppend = query(parameters)
+            var urlComponents = URLComponents(url: url, resolvingAgainstBaseURL: false)
+            let existingQuery = urlComponents?.percentEncodedQuery.map { $0 + "&" } ?? ""
+            urlComponents?.percentEncodedQuery = existingQuery + newQueryToAppend
+            self.url = urlComponents?.url
+        } else {
+            if self.value(forHTTPHeaderField: "Content-Type") == nil {
+                self.setValue("application/x-www-form-urlencoded; charset=utf-8", forHTTPHeaderField: "Content-Type")
+            }
+
+            self.httpBody = query(parameters).data(using: .utf8, allowLossyConversion: false)
+        }
+
     }
 }
