@@ -8,8 +8,6 @@
 import Foundation
 
 
-public typealias RequestCompletionHandler<T> = (Result<T>) -> Void
-
 /// The configuration needed to set up the API Provider including all needed information for performing API requests.
 public struct APIConfiguration {
     
@@ -34,7 +32,8 @@ public struct APIConfiguration {
 }
 
 /// Provides access to all API Methods. Can be used to perform API requests.
-public final class APIProvider {
+/// APIProviderProtocol Implementation based on URLSession
+public final class APIProvider: APIProviderProtocol {
     
     /// The session manager which is used to perform network requests with.
     private let urlSession: URLSession
@@ -66,8 +65,7 @@ public final class APIProvider {
     /// - Parameters:
     ///   - endpoint: The API endpoint to request.
     ///   - completion: The completion callback which will be called on completion containing the result.
-    @discardableResult
-    public func request(_ endpoint: APIEndpoint<Void>, completion: @escaping RequestCompletionHandler<Void>) -> URLRequest {
+    public func request(_ endpoint: APIEndpoint<Void>, completion: @escaping RequestCompletionHandler<Void>) {
         fatalError("Not Implemented")
     }
     
@@ -76,8 +74,7 @@ public final class APIProvider {
     /// - Parameters:
     ///   - endpoint: The API endpoint to request.
     ///   - completion: The completion callback which will be called on completion containing the result.
-    @discardableResult
-    public func request<T: Decodable>(_ endpoint: APIEndpoint<T>, completion: @escaping RequestCompletionHandler<T>) -> URLRequest {
+    public func request<T: Decodable>(_ endpoint: APIEndpoint<T>, completion: @escaping RequestCompletionHandler<T>) {
         fatalError("Not Implemented")
     }
     
@@ -86,8 +83,7 @@ public final class APIProvider {
     /// - Parameters:
     ///   - resourceLinks: The resourceLinks to request.
     ///   - completion: The completion callback which will be called on completion containing the result.
-    @discardableResult
-    public func request<T: Decodable>(_ resourceLinks: ResourceLinks<T>, completion: @escaping RequestCompletionHandler<T>) -> URLRequest {
+    public func request<T: Decodable>(_ resourceLinks: ResourceLinks<T>, completion: @escaping RequestCompletionHandler<T>) {
         fatalError("Not Implemented")
     }
 }
