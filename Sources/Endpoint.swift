@@ -65,8 +65,22 @@ private extension URLRequest {
         guard let parameters = parameters, parameters.isEmpty == false else { return }
         guard let url = self.url else { return }
 
+        func encode(_ value: Any) -> String {
+            func percentEncode(_ string: String) -> String {
+                return string.addingPercentEncoding(withAllowedCharacters: .afURLQueryAllowed) ?? string
+            }
+            switch value {
+            case let intValue as Int:
+                return percentEncode("\(intValue)")
+            case let stringValue as String:
+                return percentEncode(stringValue)
+            default:
+                fatalError("Could not encode \(value)")
+            }
+        }
+
         func query(_ parameters: [String: Any]) -> String {
-            return parameters.sorted { $0.key < $1.key }.map { "\($0)=\($1)" }.joined(separator: "&")
+            return parameters.sorted { $0.key < $1.key }.map { "\(encode($0))=\(encode($1))" }.joined(separator: "&")
         }
 
         if self.httpMethod == HTTPMethod.get.rawValue {
@@ -85,3 +99,25 @@ private extension URLRequest {
 
     }
 }
+
+// Extracted from Alamofire
+fileprivate extension CharacterSet {
+    /// Creates a CharacterSet from RFC 3986 allowed characters.
+    ///
+    /// RFC 3986 states that the following characters are "reserved" characters.
+    ///
+    /// - General Delimiters: ":", "#", "[", "]", "@", "?", "/"
+    /// - Sub-Delimiters: "!", "$", "&", "'", "(", ")", "*", "+", ",", ";", "="
+    ///
+    /// In RFC 3986 - Section 3.4, it states that the "?" and "/" characters should not be escaped to allow
+    /// query strings to include a URL. Therefore, all "reserved" characters with the exception of "?" and "/"
+    /// should be percent-escaped in the query string.
+    fileprivate static let afURLQueryAllowed: CharacterSet = {
+        let generalDelimitersToEncode = ":#[]@" // does not include "?" or "/" due to RFC 3986 - Section 3.4
+        let subDelimitersToEncode = "!$&'()*+,;="
+        let encodableDelimiters = CharacterSet(charactersIn: "\(generalDelimitersToEncode)\(subDelimitersToEncode)")
+
+        return CharacterSet.urlQueryAllowed.subtracting(encodableDelimiters)
+    }()
+}
+
