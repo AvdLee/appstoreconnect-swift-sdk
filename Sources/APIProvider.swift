@@ -35,8 +35,13 @@ public struct APIConfiguration {
 /// APIProviderProtocol Implementation based on URLSession
 public final class APIProvider: APIProviderProtocol {
 
+    typealias StatusCode = Int
+
     enum Error: Swift.Error {
         case requestGeneration
+        case unknownResponseType
+        case requestFailure(StatusCode)
+        case decodingError
     }
     
     /// The session manager which is used to perform network requests with.
@@ -76,7 +81,7 @@ public final class APIProvider: APIProviderProtocol {
         }
 
         self.urlSession.dataTask(with: request) { data, response, error in
-            // TODO
+            completion(mapVoidResponse(data: data, response: response, error: error))
         }
     }
     
@@ -92,7 +97,7 @@ public final class APIProvider: APIProviderProtocol {
         }
 
         self.urlSession.dataTask(with: request) { data, response, error in
-            // TODO
+            completion(mapResponse(data: data, response: response, error: error))
         }
     }
     
@@ -104,7 +109,38 @@ public final class APIProvider: APIProviderProtocol {
     public func request<T: Decodable>(_ resourceLinks: ResourceLinks<T>, completion: @escaping RequestCompletionHandler<T>) {
 
         self.urlSession.dataTask(with: resourceLinks.`self`) { data, response, error in
-            // TODO
+            completion(mapResponse(data: data, response: response, error: error))
         }
     }
 }
+
+// MARK: - Private
+
+private func mapResponse<T: Decodable>(data: Data?, response: URLResponse?, error: Error?) -> Result<T> {
+    if let error = error {
+        return .failure(error)
+    }
+
+    guard let urlResponse = response as? HTTPURLResponse else {
+        return .failure(APIProvider.Error.unknownResponseType)
+    }
+
+    guard let data = data else {
+        return .failure(APIProvider.Error.requestFailure(urlResponse.statusCode))
+    }
+
+    guard let decodedValue =  try? JSONDecoder().decode(T.self, from: data) else {
+        return .failure(APIProvider.Error.decodingError)
+    }
+
+    return .success(decodedValue)
+}
+
+private func mapVoidResponse(data: Data?, response: URLResponse?, error: Error?) -> Result<Void> {
+    if let error = error {
+        return .failure(error)
+    }
+
+    return .success(())
+}
+
