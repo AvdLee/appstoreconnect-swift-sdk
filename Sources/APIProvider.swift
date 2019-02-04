@@ -76,7 +76,7 @@ public final class APIProvider: APIProviderProtocol {
     ///   - endpoint: The API endpoint to request.
     ///   - completion: The completion callback which will be called on completion containing the result.
     public func request(_ endpoint: APIEndpoint<Void>, completion: @escaping RequestCompletionHandler<Void>) {
-        guard let request = try? endpoint.asURLRequest() else {
+        guard let request = try? self.requestsAuthenticator.adapt(endpoint.asURLRequest()) else {
             completion(.failure(Error.requestGeneration))
             return
         }
@@ -92,7 +92,7 @@ public final class APIProvider: APIProviderProtocol {
     ///   - endpoint: The API endpoint to request.
     ///   - completion: The completion callback which will be called on completion containing the result.
     public func request<T: Decodable>(_ endpoint: APIEndpoint<T>, completion: @escaping RequestCompletionHandler<T>) {
-        guard let request = try? endpoint.asURLRequest() else {
+        guard let request = try? self.requestsAuthenticator.adapt(endpoint.asURLRequest()) else {
             completion(.failure(Error.requestGeneration))
             return
         }
