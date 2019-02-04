@@ -82,7 +82,7 @@ public final class APIProvider: APIProviderProtocol {
 
         self.urlSession.dataTask(with: request) { data, response, error in
             completion(mapVoidResponse(data: data, response: response, error: error))
-        }
+        }.resume()
     }
     
     /// Performs a data request to the given API endpoint
@@ -98,7 +98,7 @@ public final class APIProvider: APIProviderProtocol {
 
         self.urlSession.dataTask(with: request) { data, response, error in
             completion(mapResponse(data: data, response: response, error: error))
-        }
+        }.resume()
     }
     
     /// Performs a data request to the given ResourceLinks
@@ -110,7 +110,7 @@ public final class APIProvider: APIProviderProtocol {
 
         self.urlSession.dataTask(with: resourceLinks.`self`) { data, response, error in
             completion(mapResponse(data: data, response: response, error: error))
-        }
+        }.resume()
     }
 }
 
