@@ -8,6 +8,9 @@
 import Foundation
 
 
+public typealias RequestCompletionHandler<T> = (Result<T>) -> Void
+
+
 /// The configuration needed to set up the API Provider including all needed information for performing API requests.
 public struct APIConfiguration {
     
@@ -32,8 +35,7 @@ public struct APIConfiguration {
 }
 
 /// Provides access to all API Methods. Can be used to perform API requests.
-/// APIProviderProtocol Implementation based on URLSession
-public final class APIProvider: APIProviderProtocol {
+public final class APIProvider {
 
     typealias StatusCode = Int
 
@@ -42,11 +44,8 @@ public final class APIProvider: APIProviderProtocol {
         case unknownResponseType
         case requestFailure(StatusCode)
         case decodingError
-        case urlSessionError(Swift.Error)
+        case requestExecutorError(Swift.Error)
     }
-    
-    /// The session manager which is used to perform network requests with.
-    private let urlSession: URLSession
     
     /// Contains a JSON Decoder which can be reused.
     private let jsonDecoder: JSONDecoder = {
@@ -60,14 +59,17 @@ public final class APIProvider: APIProviderProtocol {
     
     /// The authenticator to handle all JWT signing related actions.
     private lazy var requestsAuthenticator = JWTRequestsAuthenticator(apiConfiguration: self.configuration)
+
+    /// Handles URLRequest execution
+    private let requestExecutor: RequestExecutor
     
     /// Creates a new APIProvider instance which can be used to perform API Requests to the App Store Connect API.
     ///
     /// - Parameters:
     ///   - configuration: The configuration needed to set up the API Provider including all needed information for performing API requests.
-    public init(configuration: APIConfiguration) {
+    public init(configuration: APIConfiguration, requestExecutor: RequestExecutor = DefaultRequestExecutor()) {
         self.configuration = configuration
-        self.urlSession = URLSession(configuration: .default)
+        self.requestExecutor = requestExecutor
     }
         
     /// Performs a data request to the given API endpoint
@@ -81,9 +83,7 @@ public final class APIProvider: APIProviderProtocol {
             return
         }
 
-        self.urlSession.dataTask(with: request) { data, response, error in
-            completion(self.mapVoidResponse(data: data, response: response, error: error))
-        }.resume()
+        self.requestExecutor.execute(request) { completion(self.mapVoidResponse($0)) }
     }
     
     /// Performs a data request to the given API endpoint
@@ -97,9 +97,7 @@ public final class APIProvider: APIProviderProtocol {
             return
         }
 
-        self.urlSession.dataTask(with: request) { data, response, error in
-            completion(self.mapResponse(data: data, response: response, error: error))
-        }.resume()
+        self.requestExecutor.execute(request) { completion(self.mapResponse($0)) }
     }
     
     /// Performs a data request to the given ResourceLinks
@@ -109,9 +107,7 @@ public final class APIProvider: APIProviderProtocol {
     ///   - completion: The completion callback which will be called on completion containing the result.
     public func request<T: Decodable>(_ resourceLinks: ResourceLinks<T>, completion: @escaping RequestCompletionHandler<T>) {
 
-        self.urlSession.dataTask(with: resourceLinks.`self`) { data, response, error in
-            completion(self.mapResponse(data: data, response: response, error: error))
-        }.resume()
+        self.requestExecutor.retrieve(resourceLinks.`self`) { completion(self.mapResponse($0)) }
     }
 }
 
@@ -119,32 +115,28 @@ public final class APIProvider: APIProviderProtocol {
 
 private extension APIProvider {
 
-    func mapResponse<T: Decodable>(data: Data?, response: URLResponse?, error: Swift.Error?) -> Result<T> {
-        if let error = error {
-            return .failure(Error.urlSessionError(error))
+    func mapResponse<T: Decodable>(_ result: Result<Response>) -> Result<T> {
+        switch result {
+        case .success(let response):
+            guard let data = response.data else {
+                return .failure(Error.requestFailure(response.statusCode))
+            }
+            guard let decodedValue =  try? self.jsonDecoder.decode(T.self, from: data) else {
+                return .failure(Error.decodingError)
+            }
+            return .success(decodedValue)
+        case .failure(let error):
+            return .failure(Error.requestExecutorError(error))
         }
-
-        guard let urlResponse = response as? HTTPURLResponse else {
-            return .failure(Error.unknownResponseType)
-        }
-
-        guard let data = data else {
-            return .failure(Error.requestFailure(urlResponse.statusCode))
-        }
-
-        guard let decodedValue =  try? self.jsonDecoder.decode(T.self, from: data) else {
-            return .failure(Error.decodingError)
-        }
-
-        return .success(decodedValue)
     }
 
-    func mapVoidResponse(data: Data?, response: URLResponse?, error: Swift.Error?) -> Result<Void> {
-        if let error = error {
-            return .failure(error)
+    func mapVoidResponse(_ result: Result<Response>) -> Result<Void> {
+        switch result {
+        case .success:
+            return .success(())
+        case .failure(let error):
+            return .failure(Error.requestExecutorError(error))
         }
-
-        return .success(())
     }
 }
 

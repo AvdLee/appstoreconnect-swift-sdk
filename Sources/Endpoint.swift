@@ -71,7 +71,7 @@ private extension URLRequest {
             }
             switch value {
             case let intValue as Int:
-                return percentEncode("\(intValue)")
+                return percentEncode(String(intValue))
             case let stringValue as String:
                 return percentEncode(stringValue)
             default:
