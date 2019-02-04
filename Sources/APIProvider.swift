@@ -42,6 +42,7 @@ public final class APIProvider: APIProviderProtocol {
         case unknownResponseType
         case requestFailure(StatusCode)
         case decodingError
+        case urlSessionError(Swift.Error)
     }
     
     /// The session manager which is used to perform network requests with.
@@ -81,7 +82,7 @@ public final class APIProvider: APIProviderProtocol {
         }
 
         self.urlSession.dataTask(with: request) { data, response, error in
-            completion(mapVoidResponse(data: data, response: response, error: error))
+            completion(self.mapVoidResponse(data: data, response: response, error: error))
         }.resume()
     }
     
@@ -97,7 +98,7 @@ public final class APIProvider: APIProviderProtocol {
         }
 
         self.urlSession.dataTask(with: request) { data, response, error in
-            completion(mapResponse(data: data, response: response, error: error))
+            completion(self.mapResponse(data: data, response: response, error: error))
         }.resume()
     }
     
@@ -109,38 +110,42 @@ public final class APIProvider: APIProviderProtocol {
     public func request<T: Decodable>(_ resourceLinks: ResourceLinks<T>, completion: @escaping RequestCompletionHandler<T>) {
 
         self.urlSession.dataTask(with: resourceLinks.`self`) { data, response, error in
-            completion(mapResponse(data: data, response: response, error: error))
+            completion(self.mapResponse(data: data, response: response, error: error))
         }.resume()
     }
 }
 
 // MARK: - Private
 
-private func mapResponse<T: Decodable>(data: Data?, response: URLResponse?, error: Error?) -> Result<T> {
-    if let error = error {
-        return .failure(error)
+private extension APIProvider {
+
+    func mapResponse<T: Decodable>(data: Data?, response: URLResponse?, error: Swift.Error?) -> Result<T> {
+        if let error = error {
+            return .failure(Error.urlSessionError(error))
+        }
+
+        guard let urlResponse = response as? HTTPURLResponse else {
+            return .failure(Error.unknownResponseType)
+        }
+
+        guard let data = data else {
+            return .failure(Error.requestFailure(urlResponse.statusCode))
+        }
+
+        guard let decodedValue =  try? self.jsonDecoder.decode(T.self, from: data) else {
+            return .failure(Error.decodingError)
+        }
+
+        return .success(decodedValue)
     }
 
-    guard let urlResponse = response as? HTTPURLResponse else {
-        return .failure(APIProvider.Error.unknownResponseType)
-    }
+    func mapVoidResponse(data: Data?, response: URLResponse?, error: Swift.Error?) -> Result<Void> {
+        if let error = error {
+            return .failure(error)
+        }
 
-    guard let data = data else {
-        return .failure(APIProvider.Error.requestFailure(urlResponse.statusCode))
+        return .success(())
     }
-
-    guard let decodedValue =  try? JSONDecoder().decode(T.self, from: data) else {
-        return .failure(APIProvider.Error.decodingError)
-    }
-
-    return .success(decodedValue)
 }
 
-private func mapVoidResponse(data: Data?, response: URLResponse?, error: Error?) -> Result<Void> {
-    if let error = error {
-        return .failure(error)
-    }
-
-    return .success(())
-}
 
