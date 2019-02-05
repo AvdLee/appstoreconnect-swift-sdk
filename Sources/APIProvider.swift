@@ -43,7 +43,7 @@ public final class APIProvider {
         case requestGeneration
         case unknownResponseType
         case requestFailure(StatusCode)
-        case decodingError
+        case decodingError(Data)
         case requestExecutorError(Swift.Error)
     }
     
@@ -122,7 +122,7 @@ private extension APIProvider {
                 return .failure(Error.requestFailure(response.statusCode))
             }
             guard let decodedValue =  try? self.jsonDecoder.decode(T.self, from: data) else {
-                return .failure(Error.decodingError)
+                return .failure(Error.decodingError(data))
             }
             return .success(decodedValue)
         case .failure(let error):
