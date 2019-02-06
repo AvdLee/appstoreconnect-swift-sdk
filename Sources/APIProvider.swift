@@ -37,12 +37,12 @@ public struct APIConfiguration {
 /// Provides access to all API Methods. Can be used to perform API requests.
 public final class APIProvider {
 
-    typealias StatusCode = Int
+    public typealias StatusCode = Int
 
-    enum Error: Swift.Error {
+    public enum Error: Swift.Error {
         case requestGeneration
         case unknownResponseType
-        case requestFailure(StatusCode)
+        case requestFailure(StatusCode, Data?)
         case decodingError(Data)
         case requestExecutorError(Swift.Error)
     }
@@ -118,12 +118,13 @@ private extension APIProvider {
     func mapResponse<T: Decodable>(_ result: Result<Response>) -> Result<T> {
         switch result {
         case .success(let response):
-            guard let data = response.data else {
-                return .failure(Error.requestFailure(response.statusCode))
+            guard let data = response.data, 200..<300 ~= response.statusCode else {
+                return .failure(Error.requestFailure(response.statusCode, response.data))
             }
             guard let decodedValue =  try? self.jsonDecoder.decode(T.self, from: data) else {
                 return .failure(Error.decodingError(data))
             }
+
             return .success(decodedValue)
         case .failure(let error):
             return .failure(Error.requestExecutorError(error))
