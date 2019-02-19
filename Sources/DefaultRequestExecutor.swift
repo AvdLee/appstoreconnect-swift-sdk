@@ -8,14 +8,14 @@
 import Foundation
 
 
-// A URLSession based RequestExecutor
+/// A URLSession based RequestExecutor implemention
 public final class DefaultRequestExecutor: RequestExecutor {
 
     enum Error: Swift.Error {
         case unknownResponseType
     }
 
-    private let urlSession = URLSession(configuration: .ephemeral)
+    private let urlSession = URLSession(configuration: .default)
 
     public init() { }
 

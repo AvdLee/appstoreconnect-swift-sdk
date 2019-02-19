@@ -7,9 +7,7 @@
 
 import Foundation
 
-
 public typealias RequestCompletionHandler<T> = (Result<T>) -> Void
-
 
 /// The configuration needed to set up the API Provider including all needed information for performing API requests.
 public struct APIConfiguration {
@@ -67,6 +65,7 @@ public final class APIProvider {
     ///
     /// - Parameters:
     ///   - configuration: The configuration needed to set up the API Provider including all needed information for performing API requests.
+    ///   - requestExecutor: A instance conforming to the RequestExecutor protocol for executing URLRequest
     public init(configuration: APIConfiguration, requestExecutor: RequestExecutor = DefaultRequestExecutor()) {
         self.configuration = configuration
         self.requestExecutor = requestExecutor

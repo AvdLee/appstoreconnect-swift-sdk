@@ -100,7 +100,9 @@ private extension URLRequest {
     }
 }
 
-// Extracted from Alamofire
+
+/// URLQueryAllowed CharacterSet extracted from Alamofire
+/// https://github.com/Alamofire/Alamofire
 fileprivate extension CharacterSet {
     /// Creates a CharacterSet from RFC 3986 allowed characters.
     ///

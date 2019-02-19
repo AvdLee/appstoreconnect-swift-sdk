@@ -7,8 +7,7 @@
 
 import Foundation
 
-
-/// Result delivered from successful URLRequest
+/// The result type delivered from a successful URLRequest
 public struct Response {
     public typealias StatusCode = Int
 
@@ -21,7 +20,7 @@ public struct Response {
     }
 }
 
-/// Protocol abstraction for URLRequest execution
+/// Protocol abstraction which contains all necessary methods for URLRequest execution
 public protocol RequestExecutor {
 
     /// Performs a URLRequest and returns a result
