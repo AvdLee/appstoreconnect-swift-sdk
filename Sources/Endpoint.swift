@@ -99,7 +99,6 @@ private extension URLRequest {
     }
 }
 
-
 /// URLQueryAllowed CharacterSet extracted from Alamofire
 /// https://github.com/Alamofire/Alamofire
 fileprivate extension CharacterSet {
