@@ -7,7 +7,6 @@
 
 import Foundation
 
-
 /// Defines all data needed to build the URL Request with.
 public struct APIEndpoint<T> {
 
@@ -122,4 +121,3 @@ fileprivate extension CharacterSet {
         return CharacterSet.urlQueryAllowed.subtracting(encodableDelimiters)
     }()
 }
-

@@ -7,7 +7,6 @@
 
 import Foundation
 
-
 extension APIEndpoint where T == Void {
 
     /// Assign one or more builds to an app encryption declaration.

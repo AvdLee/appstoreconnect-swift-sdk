@@ -5,7 +5,6 @@
 //  Created by Pascal Edmond on 30/11/2018.
 //
 
-
 extension APIEndpoint where T == Void {
 
     /// Download finance reports filtered by your specified criteria.

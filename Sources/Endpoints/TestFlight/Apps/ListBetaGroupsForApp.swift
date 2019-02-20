@@ -4,7 +4,6 @@
 //
 //  Created by Pascal Edmond on 26/11/2018.
 //
-    
 
 extension APIEndpoint where T == BetaGroupsResponse {
 

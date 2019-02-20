@@ -120,7 +120,7 @@ private extension APIProvider {
             guard let data = response.data, 200..<300 ~= response.statusCode else {
                 return .failure(Error.requestFailure(response.statusCode, response.data))
             }
-            guard let decodedValue =  try? self.jsonDecoder.decode(T.self, from: data) else {
+            guard let decodedValue = try? self.jsonDecoder.decode(T.self, from: data) else {
                 return .failure(Error.decodingError(data))
             }
 
@@ -139,5 +139,3 @@ private extension APIProvider {
         }
     }
 }
-
-

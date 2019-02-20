@@ -7,7 +7,6 @@
 
 import Foundation
 
-
 /// A URLSession based RequestExecutor implemention
 public final class DefaultRequestExecutor: RequestExecutor {
 

@@ -7,7 +7,6 @@
 
 import Foundation
 
-
 /// AppStoreConnect relevant HTTP Methods
 enum HTTPMethod: String {
     case get = "GET"

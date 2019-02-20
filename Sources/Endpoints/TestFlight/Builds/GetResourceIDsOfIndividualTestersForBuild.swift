@@ -4,7 +4,6 @@
 //
 //  Created by Pascal Edmond on 30/11/2018.
 //
-    
 
 extension APIEndpoint where T == BuildIndividualTestersLinkagesResponse {
 
