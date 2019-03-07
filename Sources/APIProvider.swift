@@ -65,7 +65,7 @@ public final class APIProvider {
     ///
     /// - Parameters:
     ///   - configuration: The configuration needed to set up the API Provider including all needed information for performing API requests.
-    ///   - requestExecutor: A instance conforming to the RequestExecutor protocol for executing URLRequest
+    ///   - requestExecutor: An instance conforming to the RequestExecutor protocol for executing URLRequest
     public init(configuration: APIConfiguration, requestExecutor: RequestExecutor = DefaultRequestExecutor()) {
         self.configuration = configuration
         self.requestExecutor = requestExecutor
@@ -77,12 +77,12 @@ public final class APIProvider {
     ///   - endpoint: The API endpoint to request.
     ///   - completion: The completion callback which will be called on completion containing the result.
     public func request(_ endpoint: APIEndpoint<Void>, completion: @escaping RequestCompletionHandler<Void>) {
-        guard let request = try? self.requestsAuthenticator.adapt(endpoint.asURLRequest()) else {
+        guard let request = try? requestsAuthenticator.adapt(endpoint.asURLRequest()) else {
             completion(.failure(Error.requestGeneration))
             return
         }
 
-        self.requestExecutor.execute(request) { completion(self.mapVoidResponse($0)) }
+        requestExecutor.execute(request) { completion(self.mapVoidResponse($0)) }
     }
     
     /// Performs a data request to the given API endpoint
@@ -91,12 +91,12 @@ public final class APIProvider {
     ///   - endpoint: The API endpoint to request.
     ///   - completion: The completion callback which will be called on completion containing the result.
     public func request<T: Decodable>(_ endpoint: APIEndpoint<T>, completion: @escaping RequestCompletionHandler<T>) {
-        guard let request = try? self.requestsAuthenticator.adapt(endpoint.asURLRequest()) else {
+        guard let request = try? requestsAuthenticator.adapt(endpoint.asURLRequest()) else {
             completion(.failure(Error.requestGeneration))
             return
         }
 
-        self.requestExecutor.execute(request) { completion(self.mapResponse($0)) }
+        requestExecutor.execute(request) { completion(self.mapResponse($0)) }
     }
     
     /// Performs a data request to the given ResourceLinks
@@ -106,7 +106,7 @@ public final class APIProvider {
     ///   - completion: The completion callback which will be called on completion containing the result.
     public func request<T: Decodable>(_ resourceLinks: ResourceLinks<T>, completion: @escaping RequestCompletionHandler<T>) {
 
-        self.requestExecutor.retrieve(resourceLinks.`self`) { completion(self.mapResponse($0)) }
+        requestExecutor.retrieve(resourceLinks.`self`) { completion(self.mapResponse($0)) }
     }
 }
 
@@ -120,7 +120,7 @@ private extension APIProvider {
             guard let data = response.data, 200..<300 ~= response.statusCode else {
                 return .failure(Error.requestFailure(response.statusCode, response.data))
             }
-            guard let decodedValue = try? self.jsonDecoder.decode(T.self, from: data) else {
+            guard let decodedValue = try? jsonDecoder.decode(T.self, from: data) else {
                 return .failure(Error.decodingError(data))
             }
 

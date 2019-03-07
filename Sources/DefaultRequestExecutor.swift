@@ -7,7 +7,7 @@
 
 import Foundation
 
-/// A URLSession based RequestExecutor implemention
+/// An URLSession based RequestExecutor implemention
 public final class DefaultRequestExecutor: RequestExecutor {
 
     enum Error: Swift.Error {
@@ -21,13 +21,13 @@ public final class DefaultRequestExecutor: RequestExecutor {
     // MARK: - RequestExecutor
 
     public func execute(_ urlRequest: URLRequest, completion: @escaping (Result<Response>) -> Void) {
-        self.urlSession.dataTask(with: urlRequest) { data, response, error in
+        urlSession.dataTask(with: urlRequest) { data, response, error in
             completion(mapResponse(data: data, urlResponse: response, error: error))
         }.resume()
     }
 
     public func retrieve(_ url: URL, completion: @escaping (Result<Response>) -> Void) {
-        self.urlSession.dataTask(with: url) { data, response, error in
+        urlSession.dataTask(with: url) { data, response, error in
             completion(mapResponse(data: data, urlResponse: response, error: error))
         }.resume()
     }

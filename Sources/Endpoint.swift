@@ -42,11 +42,11 @@ extension APIEndpoint {
     
     /// Generates a request based on the current endpoint.
     public func asURLRequest() throws -> URLRequest {
-        var urlRequest = URLRequest(url: self.url)
-        urlRequest.httpMethod = self.method.rawValue
-        urlRequest.encodeParameters(self.parameters)
+        var urlRequest = URLRequest(url: url)
+        urlRequest.httpMethod = method.rawValue
+        urlRequest.encodeParameters(parameters)
 
-        if let body = self.body {
+        if let body = body {
             if urlRequest.value(forHTTPHeaderField: "Content-Type") == nil {
                 urlRequest.setValue("application/json", forHTTPHeaderField: "Content-Type")
             }
@@ -61,8 +61,9 @@ extension APIEndpoint {
 private extension URLRequest {
 
     mutating func encodeParameters(_ parameters: [String: Any]?) {
-        guard let parameters = parameters, parameters.isEmpty == false else { return }
-        guard let url = self.url else { return }
+        guard
+            let parameters = parameters, parameters.isEmpty == false,
+            let url = url else { return }
 
         func encode(_ value: Any) -> String {
             func percentEncode(_ string: String) -> String {
@@ -82,18 +83,18 @@ private extension URLRequest {
             return parameters.sorted { $0.key < $1.key }.map { "\(encode($0))=\(encode($1))" }.joined(separator: "&")
         }
 
-        if self.httpMethod == HTTPMethod.get.rawValue {
+        if httpMethod == HTTPMethod.get.rawValue {
             let newQueryToAppend = query(parameters)
             var urlComponents = URLComponents(url: url, resolvingAgainstBaseURL: false)
             let existingQuery = urlComponents?.percentEncodedQuery.map { $0 + "&" } ?? ""
             urlComponents?.percentEncodedQuery = existingQuery + newQueryToAppend
             self.url = urlComponents?.url
         } else {
-            if self.value(forHTTPHeaderField: "Content-Type") == nil {
-                self.setValue("application/x-www-form-urlencoded; charset=utf-8", forHTTPHeaderField: "Content-Type")
+            if value(forHTTPHeaderField: "Content-Type") == nil {
+                setValue("application/x-www-form-urlencoded; charset=utf-8", forHTTPHeaderField: "Content-Type")
             }
 
-            self.httpBody = query(parameters).data(using: .utf8, allowLossyConversion: false)
+            httpBody = query(parameters).data(using: .utf8, allowLossyConversion: false)
         }
 
     }
