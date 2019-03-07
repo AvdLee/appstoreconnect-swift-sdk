@@ -19,7 +19,7 @@ The Swift SDK to work with the App Store Connect API from Apple.
 - [x] TestFlight API implementation
 - [x] Users and Roles implementation
 - [x] Sales and Finances implementation
-- [ ] Replace Alamofire dependency with own simple URLSession implementation
+- [x] Replace Alamofire dependency with own simple URLSession implementation
 
 ## Requesting API Access
 To request access, go to the new API Keys section in Users and Access in App Store Connect. Please note that you must be the Team Agent (Legal role) of a development team enrolled as an organization. Access for developers enrolled as an individual is coming soon.
