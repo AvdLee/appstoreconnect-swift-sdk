@@ -14,7 +14,7 @@ final class APIProviderTests: XCTestCase {
 
         let expectedResponse: Result<Response>
 
-        init(expectedResponse:  Result<Response>) {
+        init(expectedResponse: Result<Response>) {
             self.expectedResponse = expectedResponse
         }
 
