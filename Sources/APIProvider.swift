@@ -114,7 +114,6 @@ public final class APIProvider {
 
 private extension APIProvider {
 
-
     /// Maps a network response to a decodable type
     ///
     /// - Parameter result: A result type containing either the network response or an error
@@ -141,7 +140,11 @@ private extension APIProvider {
     /// - Returns: A result type containing either void or an error
     func mapVoidResponse(_ result: Result<Response>) -> Result<Void> {
         switch result {
-        case .success:
+        case .success(let response):
+            guard 200..<300 ~= response.statusCode else {
+                return .failure(Error.requestFailure(response.statusCode, nil))
+            }
+
             return .success(())
         case .failure(let error):
             return .failure(Error.requestExecutorError(error))
