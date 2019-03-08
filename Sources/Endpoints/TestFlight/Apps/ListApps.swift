@@ -5,8 +5,6 @@
 //  Created by Pascal Edmond on 16/11/2018.
 //
 
-import Alamofire
-
 extension APIEndpoint where T == AppsResponse {
     
     /// Find and list apps added in App Store Connect.

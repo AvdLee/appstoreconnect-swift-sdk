@@ -4,8 +4,6 @@
 //
 //  Created by Pascal Edmond on 26/11/2018.
 //
-    
-import Alamofire
 
 extension APIEndpoint where T == Void {
 

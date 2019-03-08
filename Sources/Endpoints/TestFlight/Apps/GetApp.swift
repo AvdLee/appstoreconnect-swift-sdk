@@ -5,8 +5,6 @@
 //  Created by Pascal Edmond on 20/11/2018.
 //
 
-import Alamofire
-
 extension APIEndpoint where T == AppResponse {
     
     /// Get information about a specific app.

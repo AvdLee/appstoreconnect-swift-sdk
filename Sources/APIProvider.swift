@@ -6,7 +6,6 @@
 //
 
 import Foundation
-import Alamofire
 
 public typealias RequestCompletionHandler<T> = (Result<T>) -> Void
 
@@ -35,9 +34,16 @@ public struct APIConfiguration {
 
 /// Provides access to all API Methods. Can be used to perform API requests.
 public final class APIProvider {
-    
-    /// The session manager which is used to perform network requests with.
-    private let defaultSessionManager: SessionManager
+
+    public typealias StatusCode = Int
+
+    public enum Error: Swift.Error {
+        case requestGeneration
+        case unknownResponseType
+        case requestFailure(StatusCode, Data?)
+        case decodingError(Data)
+        case requestExecutorError(Swift.Error)
+    }
     
     /// Contains a JSON Decoder which can be reused.
     private let jsonDecoder: JSONDecoder = {
@@ -51,24 +57,18 @@ public final class APIProvider {
     
     /// The authenticator to handle all JWT signing related actions.
     private lazy var requestsAuthenticator = JWTRequestsAuthenticator(apiConfiguration: self.configuration)
+
+    /// Handles URLRequest execution
+    private let requestExecutor: RequestExecutor
     
     /// Creates a new APIProvider instance which can be used to perform API Requests to the App Store Connect API.
     ///
     /// - Parameters:
     ///   - configuration: The configuration needed to set up the API Provider including all needed information for performing API requests.
-    ///   - protocolClasses: Optional protocal classes to use for mocking with unit tests.
-    public init(configuration: APIConfiguration, protocolClasses: [AnyClass]? = nil) {
+    ///   - requestExecutor: An instance conforming to the RequestExecutor protocol for executing URLRequest
+    public init(configuration: APIConfiguration, requestExecutor: RequestExecutor = DefaultRequestExecutor()) {
         self.configuration = configuration
-        
-        if let protocolClasses = protocolClasses {
-            let configuration = URLSessionConfiguration.default
-            configuration.protocolClasses = protocolClasses + (configuration.protocolClasses ?? [])
-            defaultSessionManager = SessionManager(configuration: configuration)
-        } else {
-            defaultSessionManager = SessionManager(configuration: URLSessionConfiguration.default)
-        }
-        
-        defaultSessionManager.adapter = requestsAuthenticator
+        self.requestExecutor = requestExecutor
     }
         
     /// Performs a data request to the given API endpoint
@@ -76,13 +76,13 @@ public final class APIProvider {
     /// - Parameters:
     ///   - endpoint: The API endpoint to request.
     ///   - completion: The completion callback which will be called on completion containing the result.
-    @discardableResult
-    public func request(_ endpoint: APIEndpoint<Void>, completion: @escaping RequestCompletionHandler<Void>) -> DataRequest {
-        let dataRequest = defaultSessionManager.request(endpoint)
-        dataRequest.dataResponse(decoder: jsonDecoder) { response in
-            completion(response.flatMap {_ in return () })
+    public func request(_ endpoint: APIEndpoint<Void>, completion: @escaping RequestCompletionHandler<Void>) {
+        guard let request = try? requestsAuthenticator.adapt(endpoint.asURLRequest()) else {
+            completion(.failure(Error.requestGeneration))
+            return
         }
-        return dataRequest
+
+        requestExecutor.execute(request) { completion(self.mapVoidResponse($0)) }
     }
     
     /// Performs a data request to the given API endpoint
@@ -90,11 +90,13 @@ public final class APIProvider {
     /// - Parameters:
     ///   - endpoint: The API endpoint to request.
     ///   - completion: The completion callback which will be called on completion containing the result.
-    @discardableResult
-    public func request<T: Decodable>(_ endpoint: APIEndpoint<T>, completion: @escaping RequestCompletionHandler<T>) -> DataRequest {
-        let dataRequest = defaultSessionManager.request(endpoint)
-        dataRequest.mapResponseTo(T.self, decoder: jsonDecoder, completion: completion).resume()
-        return dataRequest
+    public func request<T: Decodable>(_ endpoint: APIEndpoint<T>, completion: @escaping RequestCompletionHandler<T>) {
+        guard let request = try? requestsAuthenticator.adapt(endpoint.asURLRequest()) else {
+            completion(.failure(Error.requestGeneration))
+            return
+        }
+
+        requestExecutor.execute(request) { completion(self.mapResponse($0)) }
     }
     
     /// Performs a data request to the given ResourceLinks
@@ -102,60 +104,50 @@ public final class APIProvider {
     /// - Parameters:
     ///   - resourceLinks: The resourceLinks to request.
     ///   - completion: The completion callback which will be called on completion containing the result.
-    @discardableResult
-    public func request<T: Decodable>(_ resourceLinks: ResourceLinks<T>, completion: @escaping RequestCompletionHandler<T>) -> DataRequest {
-        let dataRequest = defaultSessionManager.request(resourceLinks.`self`)
-        dataRequest.mapResponseTo(T.self, decoder: jsonDecoder, completion: completion).resume()
-        return dataRequest
+    public func request<T: Decodable>(_ resourceLinks: ResourceLinks<T>, completion: @escaping RequestCompletionHandler<T>) {
+
+        requestExecutor.retrieve(resourceLinks.`self`) { completion(self.mapResponse($0)) }
     }
 }
 
-extension DataRequest {
-    
-    /// Defines errors which are caused on JSON mapping.
-    enum JSONMappingError: Error {
-        /// Indicates that the response is not a valid JSON dictionary.
-        case invalidResponse
-    }
-    
-    /// Maps the response to the given JSONDecodable data type.
+// MARK: - Private
+
+private extension APIProvider {
+
+    /// Maps a network response to a decodable type
     ///
-    /// - Parameters:
-    ///   - type: The type to map to.
-    ///   - completion: The result of the mapping. An error will be returned if mapping fails.
-    @discardableResult
-    func dataResponse(decoder: JSONDecoder, completion: @escaping RequestCompletionHandler<Data?>) -> Self {
-        return validate(statusCode: 200..<300).responseData(queue: DispatchQueue.global(qos: .background)) { response in
-            if let error = response.error {
-                // Try to parse api error
-                guard let data = response.data, let apiError = try? decoder.decode(ErrorResponse.self, from: data) else {
-                    completion(Result.failure(error))
-                    return
-                }
-                completion(Result.failure(apiError))
-            } else {
-                completion(Result.success(response.data))
+    /// - Parameter result: A result type containing either the network response or an error
+    /// - Returns: A result type containing either the decoded type or an error
+    func mapResponse<T: Decodable>(_ result: Result<Response>) -> Result<T> {
+        switch result {
+        case .success(let response):
+            guard let data = response.data, 200..<300 ~= response.statusCode else {
+                return .failure(Error.requestFailure(response.statusCode, response.data))
             }
+            guard let decodedValue = try? jsonDecoder.decode(T.self, from: data) else {
+                return .failure(Error.decodingError(data))
+            }
+
+            return .success(decodedValue)
+        case .failure(let error):
+            return .failure(Error.requestExecutorError(error))
         }
     }
-    
-    /// Maps the response to the given JSONDecodable data type.
+
+    /// Maps a network response to a (void) result type
     ///
-    /// - Parameters:
-    ///   - type: The type to map to.
-    ///   - completion: The result of the mapping. An error will be returned if mapping fails.
-    @discardableResult
-    func mapResponseTo<T: Decodable>(_ type: T.Type, decoder: JSONDecoder, completion: @escaping RequestCompletionHandler<T>) -> Self {
-        return dataResponse(decoder: decoder) { response in
-            let result = response.flatMap({ data -> T in
-                // Try to parse the model
-                guard let data = data else {
-                    throw JSONMappingError.invalidResponse
-                }
-                let codable = try decoder.decode(T.self, from: data)
-                return codable
-            })
-            completion(result)
+    /// - Parameter result: A result type containing either the network response or an error
+    /// - Returns: A result type containing either void or an error
+    func mapVoidResponse(_ result: Result<Response>) -> Result<Void> {
+        switch result {
+        case .success(let response):
+            guard 200..<300 ~= response.statusCode else {
+                return .failure(Error.requestFailure(response.statusCode, nil))
+            }
+
+            return .success(())
+        case .failure(let error):
+            return .failure(Error.requestExecutorError(error))
         }
     }
 }

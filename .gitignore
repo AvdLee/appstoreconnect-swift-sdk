@@ -43,6 +43,7 @@ Example/SPM-AppStoreConnect-Swift-SDK/Packages/
 Example/SPM-AppStoreConnect-Swift-SDK/Package.pins
 Example/SPM-AppStoreConnect-Swift-SDK/Package.resolved
 Example/SPM-AppStoreConnect-Swift-SDK/.build/
+*.xcodeproj
 
 # CocoaPods
 #
