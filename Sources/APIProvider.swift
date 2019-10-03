@@ -48,7 +48,21 @@ public final class APIProvider {
     /// Contains a JSON Decoder which can be reused.
     private let jsonDecoder: JSONDecoder = {
         let decoder = JSONDecoder()
-        decoder.dateDecodingStrategy = .iso8601
+        let formatter = DateFormatter()
+        decoder.dateDecodingStrategy = .custom({ (decoder) -> Date in
+            let container = try decoder.singleValueContainer()
+            let dateStr = try container.decode(String.self)
+
+            formatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss.SSSXXXXX"
+            if let date = formatter.date(from: dateStr) {
+                return date
+            }
+            formatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ssXXXXX"
+            if let date = formatter.date(from: dateStr) {
+                return date
+            }
+            throw APIProvider.Error.decodingError(Data(dateStr.utf8))
+        })
         return decoder
     }()
     
