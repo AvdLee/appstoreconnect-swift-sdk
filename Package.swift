@@ -1,9 +1,13 @@
-// swift-tools-version:4.2
+// swift-tools-version:5.1
 
 import PackageDescription
 
 let package = Package(
     name: "AppStoreConnect-Swift-SDK",
+    platforms: [
+        .iOS(.v11),
+        .macOS(.v10_12),
+    ],
     products: [
         .library(
             name: "AppStoreConnect-Swift-SDK",
