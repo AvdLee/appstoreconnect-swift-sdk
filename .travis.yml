@@ -1,5 +1,5 @@
 language: objective-c
-osx_image: xcode10.1
+osx_image: xcode11.1
 gemfile: Gemfile
 bundler_args: "--without documentation --path bundle" # Don't download documentation for gems.
 cache:
