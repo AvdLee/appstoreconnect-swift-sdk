@@ -37,12 +37,33 @@ public final class APIProvider {
 
     public typealias StatusCode = Int
 
-    public enum Error: Swift.Error {
+    public enum Error: Swift.Error, CustomDebugStringConvertible {
         case requestGeneration
         case unknownResponseType
         case requestFailure(StatusCode, Data?)
         case decodingError(Data)
         case requestExecutorError(Swift.Error)
+
+        public var debugDescription: String {
+            switch self {
+            case .requestGeneration:
+                return "Failed to generate request."
+            case .unknownResponseType:
+                return "Unknown response type."
+            case .requestFailure(let statusCode, let data):
+                if let data = data, let response = String(data: data, encoding: .utf8) {
+                    return "Request failed with status code \(statusCode) and response \(response))."
+                }
+                return "Request failed with status code \(statusCode)."
+            case .decodingError(let data):
+                if let error = String(data: data, encoding: .utf8) {
+                    return "Failed to decode data: \(error)."
+                }
+                return "Failed to decode data."
+            case .requestExecutorError(let error):
+                return "Failed to execute request \(error)."
+            }
+        }
     }
     
     /// Contains a JSON Decoder which can be reused.
