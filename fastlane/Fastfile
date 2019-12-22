@@ -18,11 +18,6 @@ lane :test do |options|
       print_all: true,
       print_command: true
     )
-    
-    cocoapods(
-      clean: true,
-      podfile: "Example/CocoaPods-AppStoreConnect-Swift-SDK/Podfile"
-    )
 
     scan(
       scheme: "AppStoreConnect-Swift-SDK-Example",
