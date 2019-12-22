@@ -11,21 +11,41 @@ lane :test do |options|
   ENV["WORKSPACE_PATH"] = "Example/CocoaPods-AppStoreConnect-Swift-SDK/AppStoreConnect-Swift-SDK.xcworkspace"
 
   begin
+    ENV["XCPRETTY_JSON_FILE_OUTPUT"] = "build/reports/#{options[:scheme]}_Tests.json"
+
     FastlaneCore::CommandExecutor.execute(
       command: "swift package clean & swift test -Xswiftc -target -Xswiftc x86_64-apple-macosx10.12",
       print_all: true,
       print_command: true
     )
+    
+    cocoapods(
+      clean: true,
+      podfile: "Example/CocoaPods-AppStoreConnect-Swift-SDK/Podfile"
+    )
+
     scan(
       scheme: "AppStoreConnect-Swift-SDK-Example",
       workspace: "Example/CocoaPods-AppStoreConnect-Swift-SDK/AppStoreConnect-Swift-SDK.xcworkspace",
-      device: "iPhone 8",
-      clean: true,
+      device: "iPhone 11",
       code_coverage: true,
-      formatter: "xcpretty-json-formatter"
+      disable_concurrent_testing: true,
+      fail_build: false,
+      skip_slack: true,
+      clean: true,
+      formatter: "xcpretty-json-formatter",
+      xcargs: "-UseNewBuildSystem=YES CODE_SIGN_IDENTITY="" CODE_SIGNING_REQUIRED=NO ONLY_ACTIVE_ARCH=NO",
+      result_bundle: true,
+      output_directory: "build/reports/"
     )
   rescue => ex
-    UI.error("Tests failed: #{ex}")
+    UI.important("Tests failed for #{ex}")
+  end
+
+  begin
+    trainer(path: "build/reports/", output_directory: "build/reports/", extension: ".xml", fail_build: false)
+  rescue => ex
+    UI.important("Trainer report generation failed #{ex}")
   end
 
   validate_changes(project_name: "AppStoreConnect-Swift-SDK-Example", xcov_targets: "AppStoreConnect-Swift-SDK")
