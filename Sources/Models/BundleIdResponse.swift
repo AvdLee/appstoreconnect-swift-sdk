@@ -10,9 +10,6 @@ import Foundation
 /// A response containing a single resource.
 public struct BundleIdResponse: Decodable {
     
-    /// The resource data.
-    public let data: BundleId
-    
     /// The data structure that represents the resource.
     public struct BundleId: Decodable {
         
@@ -31,6 +28,9 @@ public struct BundleIdResponse: Decodable {
         /// Navigational links that include the self-link.
         public let links: ResourceLinks
     }
+    
+    /// The resource data.
+    public let data: BundleId
 }
 
 // MARK: BundleIdResponse.BundleId

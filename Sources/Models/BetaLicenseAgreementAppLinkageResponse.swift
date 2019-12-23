@@ -9,12 +9,6 @@ import Foundation
     
 /// A response containing the ID of the related resource.
 public struct BetaLicenseAgreementAppLinkageResponse: Codable {
-
-    /// A response containing the ID of the related resource.
-    public let data: BetaLicenseAgreementAppLinkageResponse.Data
-
-    /// Navigational links including the self-link and links to the related data.
-    public let links: DocumentLinks
     
     public struct Data: Codable {
     
@@ -24,4 +18,10 @@ public struct BetaLicenseAgreementAppLinkageResponse: Codable {
         /// The resource type.Value: apps
         public let type: String = "apps"
     }
+    
+    /// A response containing the ID of the related resource.
+    public let data: BetaLicenseAgreementAppLinkageResponse.Data
+
+    /// Navigational links including the self-link and links to the related data.
+    public let links: DocumentLinks
 }

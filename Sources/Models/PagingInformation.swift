@@ -9,10 +9,7 @@ import Foundation
     
 /// Paging information for data responses.
 public struct PagingInformation: Codable {
-
-    /// The paging information details.
-    public let paging: PagingInformation.Paging
-
+    
     /// Paging details such as the total number of resources and the per-page limit.
     public struct Paging: Codable {
     
@@ -22,4 +19,8 @@ public struct PagingInformation: Codable {
         /// The maximum number of resources to return per page, from 0 to 200.
         public let limit: Int
     }
+    
+    /// The paging information details.
+    public let paging: PagingInformation.Paging
+
 }

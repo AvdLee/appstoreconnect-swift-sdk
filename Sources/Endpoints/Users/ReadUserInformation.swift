@@ -30,7 +30,7 @@ extension APIEndpoint where T == UserResponse {
     }
 }
 
-public struct ReadUserInformation {
+public enum ReadUserInformation {
     
     /// Fields to return for included related types.
     public enum Field: NestableQueryParameter {

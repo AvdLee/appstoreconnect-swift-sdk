@@ -9,15 +9,6 @@ import Foundation
     
 /// A request containing a single resource.
 public struct BetaAppReviewSubmissionCreateRequest: Codable {
-
-    /// - Parameters:
-    ///   - buildId: The opaque resource ID that uniquely identifies the resource.
-    init(buildId: String) {
-        data = .init(relationships: .init(build: .init(data: .init(id: buildId))))
-    }
-
-    /// The resource data.
-    public let data: BetaAppReviewSubmissionCreateRequest.Data
     
     public struct Data: Codable {
     
@@ -27,9 +18,19 @@ public struct BetaAppReviewSubmissionCreateRequest: Codable {
         /// The resource type.Value: betaAppReviewSubmissions
         public let type: String = "betaAppReviewSubmissions"
     }
+    
+    /// The resource data.
+    public let data: BetaAppReviewSubmissionCreateRequest.Data
+    
+    /// - Parameters:
+    ///   - buildId: The opaque resource ID that uniquely identifies the resource.
+    init(buildId: String) {
+        data = .init(relationships: .init(build: .init(data: .init(id: buildId))))
+    }
+
 }
 
-/// MARK: BetaAppReviewSubmissionCreateRequest.Data
+// MARK: BetaAppReviewSubmissionCreateRequest.Data
 extension BetaAppReviewSubmissionCreateRequest.Data {
     
     public struct Relationships: Codable {
@@ -39,7 +40,7 @@ extension BetaAppReviewSubmissionCreateRequest.Data {
     }
 }
 
-/// MARK: BetaAppReviewSubmissionCreateRequest.Data.Relationships
+// MARK: BetaAppReviewSubmissionCreateRequest.Data.Relationships
 extension BetaAppReviewSubmissionCreateRequest.Data.Relationships {
     
     public struct Build: Codable {
@@ -49,7 +50,7 @@ extension BetaAppReviewSubmissionCreateRequest.Data.Relationships {
     }
 }
 
-/// MARK: BetaAppReviewSubmissionCreateRequest.Data.Relationships.Build
+// MARK: BetaAppReviewSubmissionCreateRequest.Data.Relationships.Build
 extension BetaAppReviewSubmissionCreateRequest.Data.Relationships.Build {
     
     public struct Data: Codable {

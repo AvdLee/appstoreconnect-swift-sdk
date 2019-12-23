@@ -9,7 +9,22 @@ import Foundation
     
 /// A request containing a single resource.
 public struct UserInvitationCreateRequest: Codable {
-
+    
+    public struct Data: Codable {
+    
+        /// The resource's attributes.
+        public let attributes: UserInvitationCreateRequest.Data.Attributes
+    
+        /// The types and IDs of the related data to update.
+        public let relationships: UserInvitationCreateRequest.Data.Relationships?
+    
+        /// The resource type.Value: userInvitations
+        public let type: String = "userInvitations"
+    }
+    
+    /// The resource data.
+    public let data: UserInvitationCreateRequest.Data
+    
     /// - Parameters:
     ///   - email: The email address of a pending user invitation. The email address must be valid to activate the account. It can be any email address, not necessarily one associated with an Apple ID.
     ///   - firstName: The user invitation recipient's first name.
@@ -35,24 +50,9 @@ public struct UserInvitationCreateRequest: Codable {
                 roles: roles),
             relationships: .init(visibleApps: .init(data: appsVisibleIds?.map({ Data.Relationships.VisibleApps.Data(id: $0) }))))
     }
-    
-    /// The resource data.
-    public let data: UserInvitationCreateRequest.Data
-    
-    public struct Data: Codable {
-    
-        /// The resource's attributes.
-        public let attributes: UserInvitationCreateRequest.Data.Attributes
-    
-        /// The types and IDs of the related data to update.
-        public let relationships: UserInvitationCreateRequest.Data.Relationships?
-    
-        /// The resource type.Value: userInvitations
-        public let type: String = "userInvitations"
-    }
 }
 
-/// MARK: UserInvitationCreateRequest.Data
+// MARK: UserInvitationCreateRequest.Data
 extension UserInvitationCreateRequest.Data {
     /// Attributes that describe a resource.
     public struct Attributes: Codable {
@@ -83,7 +83,7 @@ extension UserInvitationCreateRequest.Data {
     }
 }
 
-/// MARK: UserInvitationCreateRequest.Data.Relationships
+// MARK: UserInvitationCreateRequest.Data.Relationships
 extension UserInvitationCreateRequest.Data.Relationships {
     
     public struct VisibleApps: Codable {
@@ -93,7 +93,7 @@ extension UserInvitationCreateRequest.Data.Relationships {
     }
 }
 
-/// MARK: UserInvitationCreateRequest.Data.Relationships.VisibleApps
+// MARK: UserInvitationCreateRequest.Data.Relationships.VisibleApps
 extension UserInvitationCreateRequest.Data.Relationships.VisibleApps {
     
     public struct Data: Codable {

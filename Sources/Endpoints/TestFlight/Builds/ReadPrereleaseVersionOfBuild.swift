@@ -24,7 +24,7 @@ extension APIEndpoint where T == PrereleaseVersionResponse {
     }
 }
 
-public struct ReadPrereleaseVersionOfBuild {
+public enum ReadPrereleaseVersionOfBuild {
     
     /// Fields to return for included related types.
     public enum Field: NestableQueryParameter {

@@ -9,15 +9,6 @@ import Foundation
     
 /// A request containing a single resource.
 public struct BuildBetaNotificationCreateRequest: Codable {
-
-    /// - Parameters:
-    ///   - buildId: The opaque resource ID that uniquely identifies the resource.
-    init(buildId: String) {
-        data = .init(relationships: .init(build: .init(data: .init(id: buildId))))
-    }
-    
-    /// The resource data.
-    public let data: BuildBetaNotificationCreateRequest.Data
     
     public struct Data: Codable {
     
@@ -27,9 +18,19 @@ public struct BuildBetaNotificationCreateRequest: Codable {
         /// The resource type.Value: buildBetaNotifications
         public let type: String = "buildBetaNotifications"
     }
+    
+    /// The resource data.
+    public let data: BuildBetaNotificationCreateRequest.Data
+    
+    /// - Parameters:
+    ///   - buildId: The opaque resource ID that uniquely identifies the resource.
+    init(buildId: String) {
+        data = .init(relationships: .init(build: .init(data: .init(id: buildId))))
+    }
+    
 }
 
-/// MARK: BuildBetaNotificationCreateRequest.Data
+// MARK: BuildBetaNotificationCreateRequest.Data
 extension BuildBetaNotificationCreateRequest.Data {
     
     public struct Relationships: Codable {
@@ -39,7 +40,7 @@ extension BuildBetaNotificationCreateRequest.Data {
     }
 }
 
-/// MARK: BuildBetaNotificationCreateRequest.Data.Relationships
+// MARK: BuildBetaNotificationCreateRequest.Data.Relationships
 extension BuildBetaNotificationCreateRequest.Data.Relationships {
     
     public struct Build: Codable {
@@ -49,7 +50,7 @@ extension BuildBetaNotificationCreateRequest.Data.Relationships {
     }
 }
 
-/// MARK: BuildBetaNotificationCreateRequest.Data.Relationships.Build
+// MARK: BuildBetaNotificationCreateRequest.Data.Relationships.Build
 extension BuildBetaNotificationCreateRequest.Data.Relationships.Build {
     
     public struct Data: Codable {

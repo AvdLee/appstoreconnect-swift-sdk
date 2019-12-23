@@ -9,7 +9,22 @@ import Foundation
     
 /// A request containing a single resource.
 public struct BetaAppReviewDetailUpdateRequest: Codable {
+    
+    public struct Data: Codable {
+    
+        /// The resource's attributes.
+        public let attributes: BetaAppReviewDetailUpdateRequest.Data.Attributes?
+    
+        /// The opaque resource ID that uniquely identifies the resource.
+        public let `id`: String
+    
+        /// The resource type.Value: betaAppReviewDetails
+        public let type: String = "betaAppReviewDetails"
+    }
 
+    /// The resource data.
+    public let data: BetaAppReviewDetailUpdateRequest.Data
+    
     /// - Parameters:
     ///   - id: The opaque resource ID that uniquely identifies the resource.
     ///   - contactEmail: Email address of contact in case communication is needed with the beta app review.
@@ -41,24 +56,9 @@ public struct BetaAppReviewDetailUpdateRequest: Codable {
                 notes: notes),
             id: id)
     }
-
-    /// The resource data.
-    public let data: BetaAppReviewDetailUpdateRequest.Data
-    
-    public struct Data: Codable {
-    
-        /// The resource's attributes.
-        public let attributes: BetaAppReviewDetailUpdateRequest.Data.Attributes?
-    
-        /// The opaque resource ID that uniquely identifies the resource.
-        public let `id`: String
-    
-        /// The resource type.Value: betaAppReviewDetails
-        public let type: String = "betaAppReviewDetails"
-    }
 }
 
-/// MARK: BetaAppReviewDetailUpdateRequest.Data
+// MARK: BetaAppReviewDetailUpdateRequest.Data
 extension BetaAppReviewDetailUpdateRequest.Data {
     /// Attributes that describe a resource.
     public struct Attributes: Codable {

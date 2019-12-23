@@ -30,7 +30,7 @@ extension APIEndpoint where T == AppResponse {
     }
 }
 
-public struct GetApp {
+public enum GetApp {
     
     /// Fields to return for included related types.
     public enum Field: NestableQueryParameter {

@@ -9,22 +9,7 @@ import Foundation
     
 /// The data structure that represents the resource.
 public struct App: Codable {
-
-    /// The resource's attributes.
-    public let attributes: App.Attributes?
-
-    /// The opaque resource ID that uniquely identifies the resource.
-    public let `id`: String
-
-    /// Navigational links to related data and included resource types and IDs.
-    public let relationships: App.Relationships?
-
-    /// The resource type.Value: apps
-    public let type: String = "apps"
-
-    /// Navigational links that include the self-link.
-    public let links: ResourceLinks<AppResponse>
-
+    
     /// Attributes that describe a resource.
     public struct Attributes: Codable {
     
@@ -64,9 +49,24 @@ public struct App: Codable {
         /// App.Relationships.BetaAppReviewDetail
         public let betaAppReviewDetail: App.Relationships.BetaAppReviewDetail?
     }
+    
+    /// The resource's attributes.
+    public let attributes: App.Attributes?
+
+    /// The opaque resource ID that uniquely identifies the resource.
+    public let `id`: String
+
+    /// Navigational links to related data and included resource types and IDs.
+    public let relationships: App.Relationships?
+
+    /// The resource type.Value: apps
+    public let type: String = "apps"
+
+    /// Navigational links that include the self-link.
+    public let links: ResourceLinks<AppResponse>
 }
 
-/// MARK: App.Relationships
+// MARK: App.Relationships
 extension App.Relationships {
     
     public struct BetaAppLocalizations: Codable {
@@ -148,7 +148,7 @@ extension App.Relationships {
     }
 }
 
-/// MARK: App.Relationships.BetaAppLocalizations
+// MARK: App.Relationships.BetaAppLocalizations
 extension App.Relationships.BetaAppLocalizations {
     
     public struct Data: Codable {
@@ -170,7 +170,7 @@ extension App.Relationships.BetaAppLocalizations {
     }
 }
 
-/// MARK: App.Relationships.BetaAppReviewDetail
+// MARK: App.Relationships.BetaAppReviewDetail
 extension App.Relationships.BetaAppReviewDetail {
     
     public struct Data: Codable {
@@ -192,7 +192,7 @@ extension App.Relationships.BetaAppReviewDetail {
     }
 }
 
-/// MARK: App.Relationships.BetaGroups
+// MARK: App.Relationships.BetaGroups
 extension App.Relationships.BetaGroups {
     
     public struct Data: Codable {
@@ -214,7 +214,7 @@ extension App.Relationships.BetaGroups {
     }
 }
 
-/// MARK: App.Relationships.BetaLicenseAgreement
+// MARK: App.Relationships.BetaLicenseAgreement
 extension App.Relationships.BetaLicenseAgreement {
     
     public struct Data: Codable {
@@ -236,7 +236,7 @@ extension App.Relationships.BetaLicenseAgreement {
     }
 }
 
-/// MARK: App.Relationships.BetaTesters
+// MARK: App.Relationships.BetaTesters
 extension App.Relationships.BetaTesters {
     
     public struct Data: Codable {
@@ -258,7 +258,7 @@ extension App.Relationships.BetaTesters {
     }
 }
 
-/// MARK: App.Relationships.Builds
+// MARK: App.Relationships.Builds
 extension App.Relationships.Builds {
     
     public struct Data: Codable {
@@ -280,7 +280,7 @@ extension App.Relationships.Builds {
     }
 }
 
-/// MARK: App.Relationships.PreReleaseVersions
+// MARK: App.Relationships.PreReleaseVersions
 extension App.Relationships.PreReleaseVersions {
     
     public struct Data: Codable {

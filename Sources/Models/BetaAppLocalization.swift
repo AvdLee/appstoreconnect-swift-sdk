@@ -9,22 +9,7 @@ import Foundation
     
 /// The data structure that represents the resource.
 public struct BetaAppLocalization: Codable {
-
-    /// The resource's attributes.
-    public let attributes: BetaAppLocalization.Attributes?
-
-    /// The opaque resource ID that uniquely identifies the resource.
-    public let `id`: String
-
-    /// Navigational links to related data and included resource types and IDs.
-    public let relationships: BetaAppLocalization.Relationships?
-
-    /// The resource type.Value: betaAppLocalizations
-    public let type: String = "betaAppLocalizations"
-
-    /// Navigational links that include the self-link.
-    public let links: ResourceLinks<BetaAppLocalizationResponse>
-
+    
     /// Attributes that describe a resource.
     public struct Attributes: Codable {
     
@@ -52,9 +37,24 @@ public struct BetaAppLocalization: Codable {
         /// BetaAppLocalization.Relationships.App
         public let app: BetaAppLocalization.Relationships.App?
     }
+    
+    /// The resource's attributes.
+    public let attributes: BetaAppLocalization.Attributes?
+
+    /// The opaque resource ID that uniquely identifies the resource.
+    public let `id`: String
+
+    /// Navigational links to related data and included resource types and IDs.
+    public let relationships: BetaAppLocalization.Relationships?
+
+    /// The resource type.Value: betaAppLocalizations
+    public let type: String = "betaAppLocalizations"
+
+    /// Navigational links that include the self-link.
+    public let links: ResourceLinks<BetaAppLocalizationResponse>
 }
 
-/// MARK: BetaAppLocalization.Relationships
+// MARK: BetaAppLocalization.Relationships
 extension BetaAppLocalization.Relationships {
     
     public struct App: Codable {
@@ -67,7 +67,7 @@ extension BetaAppLocalization.Relationships {
     }
 }
 
-/// MARK: BetaAppLocalization.Relationships.App
+// MARK: BetaAppLocalization.Relationships.App
 extension BetaAppLocalization.Relationships.App {
     
     public struct Data: Codable {

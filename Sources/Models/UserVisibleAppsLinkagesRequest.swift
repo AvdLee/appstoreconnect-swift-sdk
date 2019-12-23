@@ -9,15 +9,6 @@ import Foundation
     
 /// A request containing the IDs of related resources.
 public struct UserVisibleAppsLinkagesRequest: Codable {
-
-    /// - Parameters:
-    ///   - appIds: Array of opaque resource ID that uniquely identifies the resources.
-    init(_ appIds: [String]) {
-        data = appIds.map({ Data(id: $0) })
-    }
-
-    /// The object types and IDs of the related resources.
-    public let data: [UserVisibleAppsLinkagesRequest.Data]
     
     public struct Data: Codable {
     
@@ -26,5 +17,14 @@ public struct UserVisibleAppsLinkagesRequest: Codable {
     
         /// The resource type.Value: apps
         public let type: String = "apps"
+    }
+    
+    /// The object types and IDs of the related resources.
+    public let data: [UserVisibleAppsLinkagesRequest.Data]
+    
+    /// - Parameters:
+    ///   - appIds: Array of opaque resource ID that uniquely identifies the resources.
+    init(_ appIds: [String]) {
+        data = appIds.map({ Data(id: $0) })
     }
 }

@@ -34,7 +34,7 @@ extension APIEndpoint where T == AppEncryptionDeclarationsResponse {
     }
 }
 
-public struct ListAppEncryptionDeclarations {
+public enum ListAppEncryptionDeclarations {
 
     /// Fields to return for included related types.
     public enum Field: NestableQueryParameter {

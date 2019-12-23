@@ -9,15 +9,6 @@ import Foundation
     
 /// A response containing a list of related resource IDs.
 public struct AppBetaAppLocalizationsLinkagesResponse: Codable {
-
-    /// The object types and IDs of the related resources.
-    public let data: [AppBetaAppLocalizationsLinkagesResponse.Data]
-
-    /// Navigational links including the self-link and links to the related data.
-    public let links: PagedDocumentLinks
-
-    /// Paging information.
-    public let meta: PagingInformation?
     
     public struct Data: Codable {
     
@@ -27,4 +18,14 @@ public struct AppBetaAppLocalizationsLinkagesResponse: Codable {
         /// The resource type.Value: betaAppLocalizations
         public let type: String = "betaAppLocalizations"
     }
+    
+    /// The object types and IDs of the related resources.
+    public let data: [AppBetaAppLocalizationsLinkagesResponse.Data]
+
+    /// Navigational links including the self-link and links to the related data.
+    public let links: PagedDocumentLinks
+
+    /// Paging information.
+    public let meta: PagingInformation?
+    
 }
