@@ -12,8 +12,8 @@ public struct BundleIdCapabilityUpdateRequest: Codable {
 
     /// - Parameters:
     ///   - bundleId: The opaque resource ID that uniquely identifies the resource.
-    ///   - capabilityType:
-    ///   - settings:
+    ///   - capabilityType: The capability type.
+    ///   - settings: An optional array of settings for this capability.
     init(bundleId: String,
          capabilityType: CapabilityType,
          settings: [CapabilitySetting]? = nil) {

@@ -20,7 +20,7 @@ public struct BundleIdResponse: Decodable {
         public let attributes: Attributes?
         
         /// The opaque resource ID that uniquely identifies the resource.
-        public let id: String
+        public let `id`: String
         
         /// Navigational links to related data and included resource types and IDs.
         public let relationships: Relationships?
@@ -75,7 +75,7 @@ extension BundleIdResponse.BundleId.Relationships {
 extension BundleIdResponse.BundleId.Relationships.Profiles {
     
     public struct Data: Decodable {
-        public let id: String
+        public let `id`: String
         public let type: String = "profiles"
     }
     
@@ -89,7 +89,7 @@ extension BundleIdResponse.BundleId.Relationships.Profiles {
 extension BundleIdResponse.BundleId.Relationships.BundleIdCapabilities {
     
     public struct Data: Decodable {
-        public let id: String
+        public let `id`: String
         public let type: String = "bundleIdCapabilities"
     }
     

@@ -33,7 +33,6 @@ public struct BundleIdCapability: Codable {
 
         /// Specific settings for this capability.
         public let settings: [CapabilitySetting]?
-
     }
 
     public struct Relationships: Codable {
@@ -48,10 +47,10 @@ extension BundleIdCapability.Relationships {
 
     public struct BundleId: Codable {
 
-        /// Certificates.Relationships.Certificates.Data
+        /// BundleIdCapability.Relationships.BundleId.Data
         public let data: BundleIdCapability.Relationships.BundleId.Data?
 
-        /// Certificates.Relationships.Certificates.Links
+        /// BundleIdCapability.Relationships.BundleId.Links
         public let links: BundleIdCapability.Relationships.BundleId.Links?
     }
 }

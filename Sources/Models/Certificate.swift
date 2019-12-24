@@ -14,7 +14,7 @@ public struct Certificate: Codable {
     public let attributes: Certificate.Attributes
 
     /// The opaque resource ID that uniquely identifies the resource.
-    public let id: String
+    public let `id`: String
 
     /// The resource type.
     public let type: String

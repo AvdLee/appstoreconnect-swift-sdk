@@ -44,15 +44,15 @@ extension BundleIdCapabilityResponse.Relationships {
 
     public struct BundleId: Codable {
 
-        /// BundleIdCapabilityResponse.Relationships.App.Data
+        /// BundleIdCapabilityResponse.Relationships.BundleId.Data
         public let data: BundleIdCapabilityResponse.Relationships.BundleId.Data?
 
-        /// BundleIdCapabilityResponse.Relationships.App.Links
+        /// BundleIdCapabilityResponse.Relationships.BundleId.Links
         public let links: BundleIdCapabilityResponse.Relationships.BundleId.Links?
     }
 }
 
-/// MARK: BundleIdCapabilityResponse.Relationships.App
+/// MARK: BundleIdCapabilityResponse.Relationships.BundleId
 extension BundleIdCapabilityResponse.Relationships.BundleId {
 
     public struct Data: Codable {
