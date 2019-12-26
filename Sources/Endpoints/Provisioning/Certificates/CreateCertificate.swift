@@ -14,8 +14,8 @@ extension APIEndpoint where T == CertificateResponse {
     /// - Parameters:
     ///   - certificateType: (Required) The type of certificate to be created.
     ///   - csrContent: (Required) The certificate signing request to be used to create the certificate.
-    public static func createCertificate(
-        withCertificateType certificateType: CertificateType,
+    public static func create(
+        certificateWithCertificateType certificateType: CertificateType,
         csrContent: String) -> APIEndpoint {
 
         let request = CertificateCreateRequest(data: .init(
