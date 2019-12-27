@@ -8,7 +8,6 @@ lane :test do |options|
   # Set timeout to prevent xcodebuild -list -project to take to much retries.
   ENV["FASTLANE_XCODE_LIST_TIMEOUT"] = "120"
   ENV["WORKSPACE_PATH"] = "Example/CocoaPods-AppStoreConnect-Swift-SDK/AppStoreConnect-Swift-SDK.xcworkspace"
-
   begin
     ENV["XCPRETTY_JSON_FILE_OUTPUT"] = "build/reports/#{options[:scheme]}_Tests.json"
 
@@ -42,5 +41,5 @@ lane :test do |options|
     UI.important("Trainer report generation failed #{ex}")
   end
 
-  validate_changes(project_name: "AppStoreConnect-Swift-SDK-Example", xcov_targets: "AppStoreConnect-Swift-SDK")
+  validate_changes(project_name: "AppStoreConnect-Swift-SDK", xcov_targets: "AppStoreConnect-Swift-SDK")
 end
