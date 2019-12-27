@@ -4,7 +4,6 @@ import "./../Submodules/WeTransfer-iOS-CI/Fastlane/Fastfile"
 
 desc "Clean the derived data, run tests validate the changes"
 lane :test do |options|
-  # clear_derived_data
 
   # Set timeout to prevent xcodebuild -list -project to take to much retries.
   ENV["FASTLANE_XCODE_LIST_TIMEOUT"] = "120"
