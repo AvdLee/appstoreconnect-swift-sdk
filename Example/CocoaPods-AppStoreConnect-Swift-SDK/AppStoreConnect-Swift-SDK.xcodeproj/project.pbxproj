@@ -147,13 +147,15 @@
 		31F3DF6321AEDD63006998D5 /* ListBuildsAssignedToBetaTesterTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31F3DF5421AEDD63006998D5 /* ListBuildsAssignedToBetaTesterTests.swift */; };
 		31F929E2219C6AC40061DEA5 /* JWTRequestsAuthenticatorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31F929E0219C6AC40061DEA5 /* JWTRequestsAuthenticatorTests.swift */; };
 		31F929E3219C6AC40061DEA5 /* JWTTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31F929E1219C6AC40061DEA5 /* JWTTests.swift */; };
+		5069A3D423B60CBC00793424 /* Pods_AppStoreConnect_Swift_SDK_Example.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5069A3D323B60CBC00793424 /* Pods_AppStoreConnect_Swift_SDK_Example.framework */; };
+		5069A3D523B60CBC00793424 /* Pods_AppStoreConnect_Swift_SDK_Example.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 5069A3D323B60CBC00793424 /* Pods_AppStoreConnect_Swift_SDK_Example.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		5069A3D823B60CCF00793424 /* Pods_AppStoreConnect_Swift_SDK_Tests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5069A3D723B60CCF00793424 /* Pods_AppStoreConnect_Swift_SDK_Tests.framework */; };
+		5069A3DB23B60E6200793424 /* APIProviderTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5069A3D923B60E6200793424 /* APIProviderTests.swift */; };
 		607FACD61AFB9204008FA782 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 607FACD51AFB9204008FA782 /* AppDelegate.swift */; };
 		607FACD81AFB9204008FA782 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 607FACD71AFB9204008FA782 /* ViewController.swift */; };
 		607FACDB1AFB9204008FA782 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 607FACD91AFB9204008FA782 /* Main.storyboard */; };
 		607FACDD1AFB9204008FA782 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 607FACDC1AFB9204008FA782 /* Images.xcassets */; };
 		607FACE01AFB9204008FA782 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 607FACDE1AFB9204008FA782 /* LaunchScreen.xib */; };
-		806B0D7413287E5233231BEC /* Pods_AppStoreConnect_Swift_SDK_Tests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9639D4E6C89670B57FE7B4C3 /* Pods_AppStoreConnect_Swift_SDK_Tests.framework */; };
-		D44D55D54A86BD85123A8DB8 /* Pods_AppStoreConnect_Swift_SDK_Example.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ECADB7DD6CF6600E0251BBEC /* Pods_AppStoreConnect_Swift_SDK_Example.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -165,6 +167,20 @@
 			remoteInfo = "AppStoreConnect-Swift-SDK";
 		};
 /* End PBXContainerItemProxy section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		5069A3D623B60CBC00793424 /* Embed Frameworks */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				5069A3D523B60CBC00793424 /* Pods_AppStoreConnect_Swift_SDK_Example.framework in Embed Frameworks */,
+			);
+			name = "Embed Frameworks";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
 		0AE4946149359034B7BCF9D5 /* README.md */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = net.daringfireball.markdown; name = README.md; path = ../README.md; sourceTree = "<group>"; };
@@ -308,6 +324,10 @@
 		31F3DF5421AEDD63006998D5 /* ListBuildsAssignedToBetaTesterTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ListBuildsAssignedToBetaTesterTests.swift; sourceTree = "<group>"; };
 		31F929E0219C6AC40061DEA5 /* JWTRequestsAuthenticatorTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JWTRequestsAuthenticatorTests.swift; sourceTree = "<group>"; };
 		31F929E1219C6AC40061DEA5 /* JWTTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JWTTests.swift; sourceTree = "<group>"; };
+		5069A3D123B60CAF00793424 /* Pods_AppStoreConnect_Swift_SDK_Example.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = Pods_AppStoreConnect_Swift_SDK_Example.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		5069A3D323B60CBC00793424 /* Pods_AppStoreConnect_Swift_SDK_Example.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = Pods_AppStoreConnect_Swift_SDK_Example.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		5069A3D723B60CCF00793424 /* Pods_AppStoreConnect_Swift_SDK_Tests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = Pods_AppStoreConnect_Swift_SDK_Tests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		5069A3D923B60E6200793424 /* APIProviderTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = APIProviderTests.swift; sourceTree = "<group>"; };
 		607FACD01AFB9204008FA782 /* AppStoreConnect-Swift-SDK_Example.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "AppStoreConnect-Swift-SDK_Example.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		607FACD41AFB9204008FA782 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		607FACD51AFB9204008FA782 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -332,7 +352,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				D44D55D54A86BD85123A8DB8 /* Pods_AppStoreConnect_Swift_SDK_Example.framework in Frameworks */,
+				5069A3D423B60CBC00793424 /* Pods_AppStoreConnect_Swift_SDK_Example.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -340,7 +360,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				806B0D7413287E5233231BEC /* Pods_AppStoreConnect_Swift_SDK_Tests.framework in Frameworks */,
+				5069A3D823B60CCF00793424 /* Pods_AppStoreConnect_Swift_SDK_Tests.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -644,6 +664,9 @@
 		5EC662E00E6797B0D5F40279 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				5069A3D723B60CCF00793424 /* Pods_AppStoreConnect_Swift_SDK_Tests.framework */,
+				5069A3D323B60CBC00793424 /* Pods_AppStoreConnect_Swift_SDK_Example.framework */,
+				5069A3D123B60CAF00793424 /* Pods_AppStoreConnect_Swift_SDK_Example.framework */,
 				ECADB7DD6CF6600E0251BBEC /* Pods_AppStoreConnect_Swift_SDK_Example.framework */,
 				9639D4E6C89670B57FE7B4C3 /* Pods_AppStoreConnect_Swift_SDK_Tests.framework */,
 			);
@@ -696,6 +719,7 @@
 		607FACE81AFB9204008FA782 /* Tests */ = {
 			isa = PBXGroup;
 			children = (
+				5069A3D923B60E6200793424 /* APIProviderTests.swift */,
 				31F929E0219C6AC40061DEA5 /* JWTRequestsAuthenticatorTests.swift */,
 				31F929E1219C6AC40061DEA5 /* JWTTests.swift */,
 				3119F5E421C181BA0064A926 /* Models+Tests.swift */,
@@ -750,6 +774,7 @@
 				509F42D221986C9B005FDA31 /* Xcode 10 Build System Caching Fix */,
 				502449DF21A0633B0073864A /* SwiftLint */,
 				9514A4669AEB7687AD07DC32 /* [CP] Embed Pods Frameworks */,
+				5069A3D623B60CBC00793424 /* Embed Frameworks */,
 			);
 			buildRules = (
 			);
@@ -975,6 +1000,7 @@
 				31F3DF5721AEDD63006998D5 /* ListBetaGroupsToWhichBetaTesterBelongsTests.swift in Sources */,
 				31F3DF5821AEDD63006998D5 /* UnassignBetaTesterFromBuildsTests.swift in Sources */,
 				31F3DF5921AEDD63006998D5 /* AddBetaTesterToBetaGroupsTests.swift in Sources */,
+				5069A3DB23B60E6200793424 /* APIProviderTests.swift in Sources */,
 				318824F521AD409500676DA7 /* GetPrereleaseVersionIDsForAppTests.swift in Sources */,
 				311FE1E821B17DFB0078C9C0 /* GetAppResourceIDForBetaAppReviewDetailsResourceTests.swift in Sources */,
 				31F3DF6221AEDD63006998D5 /* AssignBetaTesterToBuildsTests.swift in Sources */,
@@ -1247,6 +1273,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				MODULE_NAME = ExampleApp;
+				OTHER_LDFLAGS = "$(inherited)";
 				PRODUCT_BUNDLE_IDENTIFIER = "org.cocoapods.demo.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
@@ -1265,6 +1292,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				MODULE_NAME = ExampleApp;
+				OTHER_LDFLAGS = "$(inherited)";
 				PRODUCT_BUNDLE_IDENTIFIER = "org.cocoapods.demo.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
