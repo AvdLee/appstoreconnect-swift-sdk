@@ -9,10 +9,7 @@ import Foundation
     
 /// Detailed error information returned in the response body whenever an API request is not successful.
 public struct ErrorResponse: Error, Decodable {
-
-    /// An array of one or more errors.
-    public let errors: [ErrorResponse.Errors]?
-
+    
     /// The details about one error that is returned when an API request is not successful.
     public struct Errors: Decodable {
     
@@ -35,9 +32,12 @@ public struct ErrorResponse: Error, Decodable {
         ///  Possible types: ErrorResponse.Errors.JsonPointer, ErrorResponse.Errors.Parameter
         public let source: Source?
     }
+    
+    /// An array of one or more errors.
+    public let errors: [ErrorResponse.Errors]?
 }
 
-/// MARK: ErrorResponse.Errors
+// MARK: ErrorResponse.Errors
 extension ErrorResponse.Errors {
     /// An object containing the JSON pointer that indicates the location of the error.
     public struct JsonPointer: Decodable {

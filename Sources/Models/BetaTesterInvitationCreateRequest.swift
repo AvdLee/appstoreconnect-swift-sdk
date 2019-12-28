@@ -9,19 +9,6 @@ import Foundation
     
 /// A request containing a single resource.
 public struct BetaTesterInvitationCreateRequest: Codable {
-
-    /// - Parameters:
-    ///   - appId: The opaque resource ID that uniquely identifies the resource.
-    ///   - betaTesterId: The opaque resource ID that uniquely identifies the resource.
-    init(appId: String, betaTesterId: String) {
-        data = .init(
-            relationships: .init(
-                app: .init(data: .init(id: appId)),
-                betaTester: .init(data: .init(id: betaTesterId))))
-    }
-
-    /// The resource data.
-    public let data: BetaTesterInvitationCreateRequest.Data
     
     public struct Data: Codable {
     
@@ -31,9 +18,22 @@ public struct BetaTesterInvitationCreateRequest: Codable {
         /// The resource type.Value: betaTesterInvitations
         public let type: String = "betaTesterInvitations"
     }
+    
+    /// The resource data.
+    public let data: BetaTesterInvitationCreateRequest.Data
+    
+    /// - Parameters:
+    ///   - appId: The opaque resource ID that uniquely identifies the resource.
+    ///   - betaTesterId: The opaque resource ID that uniquely identifies the resource.
+    init(appId: String, betaTesterId: String) {
+        data = .init(
+            relationships: .init(
+                app: .init(data: .init(id: appId)),
+                betaTester: .init(data: .init(id: betaTesterId))))
+    }
 }
 
-/// MARK: BetaTesterInvitationCreateRequest.Data
+// MARK: BetaTesterInvitationCreateRequest.Data
 extension BetaTesterInvitationCreateRequest.Data {
     
     public struct Relationships: Codable {
@@ -46,7 +46,7 @@ extension BetaTesterInvitationCreateRequest.Data {
     }
 }
 
-/// MARK: BetaTesterInvitationCreateRequest.Data.Relationships
+// MARK: BetaTesterInvitationCreateRequest.Data.Relationships
 extension BetaTesterInvitationCreateRequest.Data.Relationships {
     
     public struct App: Codable {
@@ -62,7 +62,7 @@ extension BetaTesterInvitationCreateRequest.Data.Relationships {
     }
 }
 
-/// MARK: BetaTesterInvitationCreateRequest.Data.Relationships.App
+// MARK: BetaTesterInvitationCreateRequest.Data.Relationships.App
 extension BetaTesterInvitationCreateRequest.Data.Relationships.App {
     
     public struct Data: Codable {
@@ -75,7 +75,7 @@ extension BetaTesterInvitationCreateRequest.Data.Relationships.App {
     }
 }
 
-/// MARK: BetaTesterInvitationCreateRequest.Data.Relationships.BetaTester
+// MARK: BetaTesterInvitationCreateRequest.Data.Relationships.BetaTester
 extension BetaTesterInvitationCreateRequest.Data.Relationships.BetaTester {
     
     public struct Data: Codable {

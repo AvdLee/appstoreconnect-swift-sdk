@@ -9,22 +9,7 @@ import Foundation
     
 /// The data structure that represents the resource.
 public struct BuildBetaDetail: Codable {
-
-    /// The resource's attributes.
-    public let attributes: BuildBetaDetail.Attributes?
-
-    /// The opaque resource ID that uniquely identifies the resource.
-    public let `id`: String
-
-    /// Navigational links to related data and included resource types and IDs.
-    public let relationships: BuildBetaDetail.Relationships?
-
-    /// The resource type.Value: buildBetaDetails
-    public let type: String = "buildBetaDetails"
-
-    /// Navigational links that include the self-link.
-    public let links: ResourceLinks<BuildBetaDetailResponse>
-
+    
     /// Attributes that describe a resource.
     public struct Attributes: Codable {
     
@@ -43,9 +28,25 @@ public struct BuildBetaDetail: Codable {
         /// BuildBetaDetail.Relationships.Build
         public let build: BuildBetaDetail.Relationships.Build?
     }
+    
+    /// The resource's attributes.
+    public let attributes: BuildBetaDetail.Attributes?
+
+    /// The opaque resource ID that uniquely identifies the resource.
+    public let `id`: String
+
+    /// Navigational links to related data and included resource types and IDs.
+    public let relationships: BuildBetaDetail.Relationships?
+
+    /// The resource type.Value: buildBetaDetails
+    public let type: String = "buildBetaDetails"
+
+    /// Navigational links that include the self-link.
+    public let links: ResourceLinks<BuildBetaDetailResponse>
+
 }
 
-/// MARK: BuildBetaDetail.Relationships
+// MARK: BuildBetaDetail.Relationships
 extension BuildBetaDetail.Relationships {
     
     public struct Build: Codable {
@@ -58,7 +59,7 @@ extension BuildBetaDetail.Relationships {
     }
 }
 
-/// MARK: BuildBetaDetail.Relationships.Build
+// MARK: BuildBetaDetail.Relationships.Build
 extension BuildBetaDetail.Relationships.Build {
     
     public struct Data: Codable {

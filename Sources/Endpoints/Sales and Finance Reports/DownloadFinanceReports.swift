@@ -26,7 +26,7 @@ extension APIEndpoint where T == Void {
     }
 }
 
-public struct DownloadFinanceReports {
+public enum DownloadFinanceReports {
     
     public enum RegionCode: String, CaseIterable {
         case AE // United Arab Emirates

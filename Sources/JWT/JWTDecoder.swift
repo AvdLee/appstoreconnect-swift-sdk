@@ -24,7 +24,7 @@ private struct DecodedJWT {
 }
 
 /// A decoder for JSON Web Tokens which is able to extract the expiry date.
-private struct JWTDecoder {
+private enum JWTDecoder {
 
     public enum DecodeError: LocalizedError {
         /// When either the header or body parts cannot be base64 decoded

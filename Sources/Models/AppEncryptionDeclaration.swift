@@ -9,22 +9,7 @@ import Foundation
     
 /// The data structure that represents the resource.
 public struct AppEncryptionDeclaration: Codable {
-
-    /// The resource's attributes.
-    public let attributes: AppEncryptionDeclaration.Attributes?
-
-    /// The opaque resource ID that uniquely identifies the resource.
-    public let `id`: String
-
-    /// Navigational links to related data and included resource types and IDs.
-    public let relationships: AppEncryptionDeclaration.Relationships?
-
-    /// The resource type.Value: appEncryptionDeclarations
-    public let type: String = "appEncryptionDeclarations"
-
-    /// Navigational links that include the self-link.
-    public let links: ResourceLinks<AppEncryptionDeclarationResponse>
-
+    
     /// Attributes that describe a resource.
     public struct Attributes: Codable {
     
@@ -73,9 +58,24 @@ public struct AppEncryptionDeclaration: Codable {
         /// AppEncryptionDeclaration.Relationships.Builds
         public let builds: AppEncryptionDeclaration.Relationships.Builds?
     }
+    
+    /// The resource's attributes.
+    public let attributes: AppEncryptionDeclaration.Attributes?
+
+    /// The opaque resource ID that uniquely identifies the resource.
+    public let `id`: String
+
+    /// Navigational links to related data and included resource types and IDs.
+    public let relationships: AppEncryptionDeclaration.Relationships?
+
+    /// The resource type.Value: appEncryptionDeclarations
+    public let type: String = "appEncryptionDeclarations"
+
+    /// Navigational links that include the self-link.
+    public let links: ResourceLinks<AppEncryptionDeclarationResponse>
 }
 
-/// MARK: AppEncryptionDeclaration.Relationships
+// MARK: AppEncryptionDeclaration.Relationships
 extension AppEncryptionDeclaration.Relationships {
     
     public struct App: Codable {
@@ -100,7 +100,7 @@ extension AppEncryptionDeclaration.Relationships {
     }
 }
 
-/// MARK: AppEncryptionDeclaration.Relationships.App
+// MARK: AppEncryptionDeclaration.Relationships.App
 extension AppEncryptionDeclaration.Relationships.App {
     
     public struct Data: Codable {
@@ -122,7 +122,7 @@ extension AppEncryptionDeclaration.Relationships.App {
     }
 }
 
-/// MARK: AppEncryptionDeclaration.Relationships.Builds
+// MARK: AppEncryptionDeclaration.Relationships.Builds
 extension AppEncryptionDeclaration.Relationships.Builds {
     
     public struct Data: Codable {

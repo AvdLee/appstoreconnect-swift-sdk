@@ -10,6 +10,21 @@ import Foundation
 /// A request containing a single resource.
 public struct BetaAppLocalizationCreateRequest: Codable {
     
+    public struct Data: Codable {
+    
+        /// The resource's attributes.
+        public let attributes: BetaAppLocalizationCreateRequest.Data.Attributes
+    
+        /// Navigational links to related data and included resource types and IDs.
+        public let relationships: BetaAppLocalizationCreateRequest.Data.Relationships
+    
+        /// The resource type.Value: betaAppLocalizations
+        public let type: String = "betaAppLocalizations"
+    }
+    
+    /// The resource data.
+    public let data: BetaAppLocalizationCreateRequest.Data
+    
     /// - Parameters:
     ///   - appId: The opaque resource ID that uniquely identifies the resource.
     ///   - description: A description of your app that highlights features and functionality.
@@ -35,24 +50,9 @@ public struct BetaAppLocalizationCreateRequest: Codable {
                 tvOsPrivacyPolicy: tvOsPrivacyPolicy),
             relationships: .init(app: .init(data: .init(id: appId))))
     }
-
-    /// The resource data.
-    public let data: BetaAppLocalizationCreateRequest.Data
-    
-    public struct Data: Codable {
-    
-        /// The resource's attributes.
-        public let attributes: BetaAppLocalizationCreateRequest.Data.Attributes
-    
-        /// Navigational links to related data and included resource types and IDs.
-        public let relationships: BetaAppLocalizationCreateRequest.Data.Relationships
-    
-        /// The resource type.Value: betaAppLocalizations
-        public let type: String = "betaAppLocalizations"
-    }
 }
 
-/// MARK: BetaAppLocalizationCreateRequest.Data
+// MARK: BetaAppLocalizationCreateRequest.Data
 extension BetaAppLocalizationCreateRequest.Data {
     /// Attributes that describe a resource.
     public struct Attributes: Codable {
@@ -83,7 +83,7 @@ extension BetaAppLocalizationCreateRequest.Data {
     }
 }
 
-/// MARK: BetaAppLocalizationCreateRequest.Data.Relationships
+// MARK: BetaAppLocalizationCreateRequest.Data.Relationships
 extension BetaAppLocalizationCreateRequest.Data.Relationships {
     
     public struct App: Codable {
@@ -93,7 +93,7 @@ extension BetaAppLocalizationCreateRequest.Data.Relationships {
     }
 }
 
-/// MARK: BetaAppLocalizationCreateRequest.Data.Relationships.App
+// MARK: BetaAppLocalizationCreateRequest.Data.Relationships.App
 extension BetaAppLocalizationCreateRequest.Data.Relationships.App {
     
     public struct Data: Codable {

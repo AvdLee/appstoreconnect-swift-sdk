@@ -18,7 +18,7 @@ extension APIEndpoint where T == Void {
     }
 }
 
-public struct DownloadSalesAndTrendsReports {
+public enum DownloadSalesAndTrendsReports {
 
     /// Frequency of the report to download. For a list of values, see Allowed Values Based on Sales Report Type below.
     public enum Filter: NestableQueryParameter {

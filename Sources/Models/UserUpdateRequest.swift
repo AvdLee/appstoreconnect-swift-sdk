@@ -9,7 +9,25 @@ import Foundation
     
 /// A request containing a single resource.
 public struct UserUpdateRequest: Codable {
-
+    
+    public struct Data: Codable {
+    
+        /// The resource's attributes.
+        public let attributes: UserUpdateRequest.Data.Attributes?
+    
+        /// The opaque resource ID that uniquely identifies the resource.
+        public let `id`: String
+    
+        /// The types and IDs of the related data to update.
+        public let relationships: UserUpdateRequest.Data.Relationships?
+    
+        /// The resource type.Value: users
+        public let type: String = "users"
+    }
+    
+    /// The resource data.
+    public let data: UserUpdateRequest.Data
+    
     /// - Parameters:
     ///   - id: The opaque resource ID that uniquely identifies the resource.
     ///   - allAppsVisible: Assigned user roles that determine the user's access to sections of App Store Connect and tasks they can perform.
@@ -30,27 +48,9 @@ public struct UserUpdateRequest: Codable {
             relationships: .init(
                 visibleApps: .init(data: appsVisibleIds?.map({ Data.Relationships.VisibleApps.Data(id: $0) }))))
     }
-    
-    /// The resource data.
-    public let data: UserUpdateRequest.Data
-    
-    public struct Data: Codable {
-    
-        /// The resource's attributes.
-        public let attributes: UserUpdateRequest.Data.Attributes?
-    
-        /// The opaque resource ID that uniquely identifies the resource.
-        public let `id`: String
-    
-        /// The types and IDs of the related data to update.
-        public let relationships: UserUpdateRequest.Data.Relationships?
-    
-        /// The resource type.Value: users
-        public let type: String = "users"
-    }
 }
 
-/// MARK: UserUpdateRequest.Data
+// MARK: UserUpdateRequest.Data
 extension UserUpdateRequest.Data {
     /// Attributes that describe a resource.
     public struct Attributes: Codable {
@@ -72,7 +72,7 @@ extension UserUpdateRequest.Data {
     }
 }
 
-/// MARK: UserUpdateRequest.Data.Relationships
+// MARK: UserUpdateRequest.Data.Relationships
 extension UserUpdateRequest.Data.Relationships {
     
     public struct VisibleApps: Codable {
@@ -82,7 +82,7 @@ extension UserUpdateRequest.Data.Relationships {
     }
 }
 
-/// MARK: UserUpdateRequest.Data.Relationships.VisibleApps
+// MARK: UserUpdateRequest.Data.Relationships.VisibleApps
 extension UserUpdateRequest.Data.Relationships.VisibleApps {
     
     public struct Data: Codable {

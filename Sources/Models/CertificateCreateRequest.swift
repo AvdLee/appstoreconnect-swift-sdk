@@ -7,14 +7,14 @@
 
 /// A request containing a single resource.
 public struct CertificateCreateRequest: Encodable {
-
-    /// The resource data.
-    public let data: Data
-
+    
     public struct Data: Encodable {
         public let attributes: Attributes
         public let type: String = "certificates"
     }
+    
+    /// The resource data.
+    public let data: Data
 }
 
 // MARK: CertificateCreateRequest.Data

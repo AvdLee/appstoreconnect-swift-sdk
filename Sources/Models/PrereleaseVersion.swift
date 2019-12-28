@@ -9,22 +9,7 @@ import Foundation
     
 /// The data structure that represents the resource.
 public struct PrereleaseVersion: Codable {
-
-    /// The resource's attributes.
-    public let attributes: PrereleaseVersion.Attributes?
-
-    /// The opaque resource ID that uniquely identifies the resource.
-    public let `id`: String
-
-    /// Navigational links that include the self-link.
-    public let links: ResourceLinks<PrereleaseVersionResponse>
-
-    /// Navigational links to related data and included resource types and IDs.
-    public let relationships: PrereleaseVersion.Relationships?
-
-    /// The resource type.Value: preReleaseVersions
-    public let type: String = "preReleaseVersions"
-
+    
     /// Attributes that describe a resource.
     public struct Attributes: Codable {
     
@@ -43,9 +28,24 @@ public struct PrereleaseVersion: Codable {
         /// PrereleaseVersion.Relationships.Builds
         public let builds: PrereleaseVersion.Relationships.Builds?
     }
+    
+    /// The resource's attributes.
+    public let attributes: PrereleaseVersion.Attributes?
+
+    /// The opaque resource ID that uniquely identifies the resource.
+    public let `id`: String
+
+    /// Navigational links that include the self-link.
+    public let links: ResourceLinks<PrereleaseVersionResponse>
+
+    /// Navigational links to related data and included resource types and IDs.
+    public let relationships: PrereleaseVersion.Relationships?
+
+    /// The resource type.Value: preReleaseVersions
+    public let type: String = "preReleaseVersions"
 }
 
-/// MARK: PrereleaseVersion.Relationships
+// MARK: PrereleaseVersion.Relationships
 extension PrereleaseVersion.Relationships {
     
     public struct App: Codable {
@@ -70,7 +70,7 @@ extension PrereleaseVersion.Relationships {
     }
 }
 
-/// MARK: PrereleaseVersion.Relationships.App
+// MARK: PrereleaseVersion.Relationships.App
 extension PrereleaseVersion.Relationships.App {
     
     public struct Data: Codable {
@@ -92,7 +92,7 @@ extension PrereleaseVersion.Relationships.App {
     }
 }
 
-/// MARK: PrereleaseVersion.Relationships.Builds
+// MARK: PrereleaseVersion.Relationships.Builds
 extension PrereleaseVersion.Relationships.Builds {
     
     public struct Data: Codable {

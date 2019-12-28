@@ -9,22 +9,7 @@ import Foundation
     
 /// The data structure that represents the resource.
 public struct UserInvitation: Codable {
-
-    /// The resource's attributes.
-    public let attributes: UserInvitation.Attributes?
-
-    /// The opaque resource ID that uniquely identifies the resource.
-    public let `id`: String
-
-    /// Navigational links to related data and included resource types and IDs.
-    public let relationships: UserInvitation.Relationships?
-
-    /// The resource type.Value: userInvitations
-    public let type: String = "userInvitations"
-
-    /// Navigational links that include the self-link.
-    public let links: ResourceLinks<UserInvitationResponse>
-
+    
     /// Attributes that describe a resource.
     public struct Attributes: Codable {
     
@@ -55,9 +40,24 @@ public struct UserInvitation: Codable {
         /// UserInvitation.Relationships.VisibleApps
         public let visibleApps: UserInvitation.Relationships.VisibleApps?
     }
+    
+    /// The resource's attributes.
+    public let attributes: UserInvitation.Attributes?
+
+    /// The opaque resource ID that uniquely identifies the resource.
+    public let `id`: String
+
+    /// Navigational links to related data and included resource types and IDs.
+    public let relationships: UserInvitation.Relationships?
+
+    /// The resource type.Value: userInvitations
+    public let type: String = "userInvitations"
+
+    /// Navigational links that include the self-link.
+    public let links: ResourceLinks<UserInvitationResponse>
 }
 
-/// MARK: UserInvitation.Relationships
+// MARK: UserInvitation.Relationships
 extension UserInvitation.Relationships {
     
     public struct VisibleApps: Codable {
@@ -73,7 +73,7 @@ extension UserInvitation.Relationships {
     }
 }
 
-/// MARK: UserInvitation.Relationships.VisibleApps
+// MARK: UserInvitation.Relationships.VisibleApps
 extension UserInvitation.Relationships.VisibleApps {
     
     public struct Data: Codable {

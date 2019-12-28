@@ -9,15 +9,6 @@ import Foundation
     
 /// A response containing a list of related resource IDs.
 public struct PrereleaseVersionBuildsLinkagesResponse: Codable {
-
-    /// The object types and IDs of the related resources.
-    public let data: [PrereleaseVersionBuildsLinkagesResponse.Data]
-
-    /// Navigational links including the self-link and links to the related data.
-    public let links: PagedDocumentLinks
-
-    /// Paging information.
-    public let meta: PagingInformation?
     
     public struct Data: Codable {
     
@@ -27,4 +18,14 @@ public struct PrereleaseVersionBuildsLinkagesResponse: Codable {
         /// The resource type.Value: builds
         public let type: String = "builds"
     }
+    
+    /// The object types and IDs of the related resources.
+    public let data: [PrereleaseVersionBuildsLinkagesResponse.Data]
+
+    /// Navigational links including the self-link and links to the related data.
+    public let links: PagedDocumentLinks
+
+    /// Paging information.
+    public let meta: PagingInformation?
+    
 }

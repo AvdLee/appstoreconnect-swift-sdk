@@ -28,7 +28,7 @@ extension APIEndpoint where T == AppsResponse {
     }
 }
 
-public struct ListAppsVisibleToInvitedUser {
+public enum ListAppsVisibleToInvitedUser {
 
     /// Fields to return for included related types.
     public enum Field: NestableQueryParameter {
