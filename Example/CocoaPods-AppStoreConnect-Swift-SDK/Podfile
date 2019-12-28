@@ -1,7 +1,7 @@
 platform :ios, '11.0'
 use_frameworks!
 
-target 'AppStoreConnect-Swift-SDK_Example' do
+target 'AppStoreConnect-Swift-SDK' do
   pod 'AppStoreConnect-Swift-SDK', :path => '../../'
 
   target 'AppStoreConnect-Swift-SDK_Tests' do
