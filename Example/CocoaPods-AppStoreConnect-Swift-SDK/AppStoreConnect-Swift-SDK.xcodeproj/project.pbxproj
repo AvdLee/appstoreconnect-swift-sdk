@@ -328,7 +328,7 @@
 		5069A3D323B60CBC00793424 /* Pods_AppStoreConnect_Swift_SDK_Example.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = Pods_AppStoreConnect_Swift_SDK_Example.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		5069A3D723B60CCF00793424 /* Pods_AppStoreConnect_Swift_SDK_Tests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = Pods_AppStoreConnect_Swift_SDK_Tests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		5069A3D923B60E6200793424 /* APIProviderTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = APIProviderTests.swift; sourceTree = "<group>"; };
-		607FACD01AFB9204008FA782 /* AppStoreConnect-Swift-SDK.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "AppStoreConnect-Swift-SDK.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		607FACD01AFB9204008FA782 /* AppStoreConnect-Swift-SDK-Example.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "AppStoreConnect-Swift-SDK-Example.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		607FACD41AFB9204008FA782 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		607FACD51AFB9204008FA782 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		607FACD71AFB9204008FA782 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -698,7 +698,7 @@
 		607FACD11AFB9204008FA782 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				607FACD01AFB9204008FA782 /* AppStoreConnect-Swift-SDK.app */,
+				607FACD01AFB9204008FA782 /* AppStoreConnect-Swift-SDK-Example.app */,
 				607FACE51AFB9204008FA782 /* AppStoreConnect-Swift-SDK_Tests.xctest */,
 			);
 			name = Products;
@@ -775,9 +775,9 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		607FACCF1AFB9204008FA782 /* AppStoreConnect-Swift-SDK */ = {
+		607FACCF1AFB9204008FA782 /* AppStoreConnect-Swift-SDK_Example */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 607FACEF1AFB9204008FA782 /* Build configuration list for PBXNativeTarget "AppStoreConnect-Swift-SDK" */;
+			buildConfigurationList = 607FACEF1AFB9204008FA782 /* Build configuration list for PBXNativeTarget "AppStoreConnect-Swift-SDK_Example" */;
 			buildPhases = (
 				E53527511577B7EA678D4F70 /* [CP] Check Pods Manifest.lock */,
 				607FACCC1AFB9204008FA782 /* Sources */,
@@ -792,9 +792,9 @@
 			);
 			dependencies = (
 			);
-			name = "AppStoreConnect-Swift-SDK";
+			name = "AppStoreConnect-Swift-SDK_Example";
 			productName = "AppStoreConnect-Swift-SDK";
-			productReference = 607FACD01AFB9204008FA782 /* AppStoreConnect-Swift-SDK.app */;
+			productReference = 607FACD01AFB9204008FA782 /* AppStoreConnect-Swift-SDK-Example.app */;
 			productType = "com.apple.product-type.application";
 		};
 		607FACE41AFB9204008FA782 /* AppStoreConnect-Swift-SDK_Tests */ = {
@@ -852,7 +852,7 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				607FACCF1AFB9204008FA782 /* AppStoreConnect-Swift-SDK */,
+				607FACCF1AFB9204008FA782 /* AppStoreConnect-Swift-SDK_Example */,
 				607FACE41AFB9204008FA782 /* AppStoreConnect-Swift-SDK_Tests */,
 			);
 		};
@@ -1142,7 +1142,7 @@
 /* Begin PBXTargetDependency section */
 		607FACE71AFB9204008FA782 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = 607FACCF1AFB9204008FA782 /* AppStoreConnect-Swift-SDK */;
+			target = 607FACCF1AFB9204008FA782 /* AppStoreConnect-Swift-SDK_Example */;
 			targetProxy = 607FACE61AFB9204008FA782 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
@@ -1287,7 +1287,7 @@
 				MODULE_NAME = ExampleApp;
 				OTHER_LDFLAGS = "$(inherited)";
 				PRODUCT_BUNDLE_IDENTIFIER = "org.cocoapods.demo.$(PRODUCT_NAME:rfc1034identifier)";
-				PRODUCT_NAME = "AppStoreConnect-Swift-SDK";
+				PRODUCT_NAME = "AppStoreConnect-Swift-SDK-Example";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_SWIFT3_OBJC_INFERENCE = Default;
 			};
@@ -1306,7 +1306,7 @@
 				MODULE_NAME = ExampleApp;
 				OTHER_LDFLAGS = "$(inherited)";
 				PRODUCT_BUNDLE_IDENTIFIER = "org.cocoapods.demo.$(PRODUCT_NAME:rfc1034identifier)";
-				PRODUCT_NAME = "AppStoreConnect-Swift-SDK";
+				PRODUCT_NAME = "AppStoreConnect-Swift-SDK-Example";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_SWIFT3_OBJC_INFERENCE = Default;
 			};
@@ -1371,7 +1371,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		607FACEF1AFB9204008FA782 /* Build configuration list for PBXNativeTarget "AppStoreConnect-Swift-SDK" */ = {
+		607FACEF1AFB9204008FA782 /* Build configuration list for PBXNativeTarget "AppStoreConnect-Swift-SDK_Example" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				607FACF01AFB9204008FA782 /* Debug */,
