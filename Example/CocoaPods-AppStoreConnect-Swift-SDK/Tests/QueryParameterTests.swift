@@ -13,6 +13,7 @@ final class NestableQueryParameterTests: XCTestCase {
     
     func testNestableQueryParameter() {
         
+        // swiftlint:disable nesting
         struct MockParameterCluster: NestableQueryParameter {
             static var key: String = "key"
             var pair: NestableQueryParameter.Pair

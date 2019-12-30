@@ -21,7 +21,7 @@ extension APIEndpoint where T == AppResponse {
     }
 }
 
-public struct ReadAppInformationOfBetaAppReviewDetail {
+public enum ReadAppInformationOfBetaAppReviewDetail {
 
     /// Fields to return for included related types.
     public enum Field: NestableQueryParameter {

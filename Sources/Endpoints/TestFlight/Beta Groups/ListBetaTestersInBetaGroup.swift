@@ -30,7 +30,7 @@ extension APIEndpoint where T == BetaTestersResponse {
     }
 }
 
-public struct ListBetaTestersInBetaGroup {
+public enum ListBetaTestersInBetaGroup {
 
     /// Fields to return for included related types.
     public enum Field: NestableQueryParameter {

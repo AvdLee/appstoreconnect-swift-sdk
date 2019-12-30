@@ -9,7 +9,25 @@ import Foundation
     
 /// A request containing a single resource.
 public struct BuildUpdateRequest: Codable {
-
+    
+    public struct Data: Codable {
+    
+        /// The resource's attributes.
+        public let attributes: BuildUpdateRequest.Data.Attributes?
+    
+        /// The opaque resource ID that uniquely identifies the resource.
+        public let `id`: String
+    
+        /// Navigational links to related data and included resource types and IDs.
+        public let relationships: BuildUpdateRequest.Data.Relationships?
+    
+        /// The resource type.Value: builds
+        public let type: String = "builds"
+    }
+    
+    /// The resource data.
+    public let data: BuildUpdateRequest.Data
+    
     /// - Parameters:
     ///   - id: The opaque resource ID that uniquely identifies the resource.
     ///   - appEncryptionDeclarationId: The opaque resource ID that uniquely identifies the resource.
@@ -26,27 +44,9 @@ public struct BuildUpdateRequest: Codable {
             relationships: .init(
                 appEncryptionDeclaration: .init(data: .init(id: appEncryptionDeclarationId))))
     }
-    
-    /// The resource data.
-    public let data: BuildUpdateRequest.Data
-    
-    public struct Data: Codable {
-    
-        /// The resource's attributes.
-        public let attributes: BuildUpdateRequest.Data.Attributes?
-    
-        /// The opaque resource ID that uniquely identifies the resource.
-        public let `id`: String
-    
-        /// Navigational links to related data and included resource types and IDs.
-        public let relationships: BuildUpdateRequest.Data.Relationships?
-    
-        /// The resource type.Value: builds
-        public let type: String = "builds"
-    }
 }
 
-/// MARK: BuildUpdateRequest.Data
+// MARK: BuildUpdateRequest.Data
 extension BuildUpdateRequest.Data {
     /// Attributes that describe a resource.
     public struct Attributes: Codable {
@@ -65,7 +65,7 @@ extension BuildUpdateRequest.Data {
     }
 }
 
-/// MARK: BuildUpdateRequest.Data.Relationships
+// MARK: BuildUpdateRequest.Data.Relationships
 extension BuildUpdateRequest.Data.Relationships {
     
     public struct AppEncryptionDeclaration: Codable {
@@ -75,7 +75,7 @@ extension BuildUpdateRequest.Data.Relationships {
     }
 }
 
-/// MARK: BuildUpdateRequest.Data.Relationships.AppEncryptionDeclaration
+// MARK: BuildUpdateRequest.Data.Relationships.AppEncryptionDeclaration
 extension BuildUpdateRequest.Data.Relationships.AppEncryptionDeclaration {
     
     public struct Data: Codable {

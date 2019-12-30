@@ -35,8 +35,6 @@ public struct APIConfiguration {
 /// Provides access to all API Methods. Can be used to perform API requests.
 public final class APIProvider {
 
-    public typealias StatusCode = Int
-
     public enum Error: Swift.Error, CustomDebugStringConvertible {
         case requestGeneration
         case unknownResponseType
@@ -65,6 +63,8 @@ public final class APIProvider {
             }
         }
     }
+    
+    public typealias StatusCode = Int
     
     /// Contains a JSON Decoder which can be reused.
     private let jsonDecoder: JSONDecoder = {

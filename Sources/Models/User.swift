@@ -9,22 +9,7 @@ import Foundation
     
 /// The data structure that represents the resource.
 public struct User: Codable {
-
-    /// The resource's attributes.
-    public let attributes: User.Attributes?
-
-    /// The opaque resource ID that uniquely identifies the resource.
-    public let `id`: String
-
-    /// Navigational links to related data and included resource types and IDs.
-    public let relationships: User.Relationships?
-
-    /// The resource type.Value: users
-    public let type: String = "users"
-
-    /// Navigational links that include the self-link.
-    public let links: ResourceLinks<UserResponse>
-
+    
     /// Attributes that describe a resource.
     public struct Attributes: Codable {
     
@@ -52,9 +37,24 @@ public struct User: Codable {
         /// User.Relationships.VisibleApps
         public let visibleApps: User.Relationships.VisibleApps?
     }
+    
+    /// The resource's attributes.
+    public let attributes: User.Attributes?
+
+    /// The opaque resource ID that uniquely identifies the resource.
+    public let `id`: String
+
+    /// Navigational links to related data and included resource types and IDs.
+    public let relationships: User.Relationships?
+
+    /// The resource type.Value: users
+    public let type: String = "users"
+
+    /// Navigational links that include the self-link.
+    public let links: ResourceLinks<UserResponse>
 }
 
-/// MARK: User.Relationships
+// MARK: User.Relationships
 extension User.Relationships {
     
     public struct VisibleApps: Codable {
@@ -70,7 +70,7 @@ extension User.Relationships {
     }
 }
 
-/// MARK: User.Relationships.VisibleApps
+// MARK: User.Relationships.VisibleApps
 extension User.Relationships.VisibleApps {
     
     public struct Data: Codable {

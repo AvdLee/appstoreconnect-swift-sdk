@@ -10,6 +10,12 @@ import Foundation
 /// The JWT Header contains information specific to the App Store Connect API Keys, such as algorithm and keys.
 private struct Header: Codable {
 
+    enum CodingKeys: String, CodingKey {
+        case algorithm = "alg"
+        case keyIdentifier = "kid"
+        case tokenType = "typ"
+    }
+    
     /// All JWTs for App Store Connect API must be signed with ES256 encryption
     let algorithm: String = "ES256"
 
@@ -18,16 +24,17 @@ private struct Header: Codable {
 
     /// The required type for signing requests to the App Store Connect API
     let tokenType: String = "JWT"
-
-    enum CodingKeys: String, CodingKey {
-        case algorithm = "alg"
-        case keyIdentifier = "kid"
-        case tokenType = "typ"
-    }
 }
 
 /// The JWT Payload contains information specific to the App Store Connect APIs, such as issuer ID and expiration time.
 private struct Payload: Codable {
+    
+    enum CodingKeys: String, CodingKey {
+        case issuerIdentifier = "iss"
+        case expirationTime = "exp"
+        case audience = "aud"
+    }
+    
     /// Your issuer identifier from the API Keys page in App Store Connect (Ex: 57246542-96fe-1a63-e053-0824d011072a)
     let issuerIdentifier: String
 
@@ -36,12 +43,6 @@ private struct Payload: Codable {
 
     /// The required audience which is set to the App Store Connect version.
     let audience: String = "appstoreconnect-v1"
-
-    enum CodingKeys: String, CodingKey {
-        case issuerIdentifier = "iss"
-        case expirationTime = "exp"
-        case audience = "aud"
-    }
 }
 
 protocol JWTCreatable {
@@ -49,9 +50,6 @@ protocol JWTCreatable {
 }
 
 struct JWT: Codable, JWTCreatable {
-
-    typealias Token = String
-    typealias P8PrivateKey = String
 
     public enum Error: Swift.Error, LocalizedError {
 
@@ -80,6 +78,9 @@ struct JWT: Codable, JWTCreatable {
             }
         }
     }
+    
+    typealias Token = String
+    typealias P8PrivateKey = String
 
     /// The JWT Header contains information specific to the App Store Connect API Keys, such as algorithm and keys.
     private let header: Header

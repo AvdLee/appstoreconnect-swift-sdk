@@ -7,14 +7,14 @@
 
 /// A request containing a single resource.
 public struct BundleIdCreateRequest: Encodable {
-        
-    /// The resource data.
-    public let data: Data
-    
+
     public struct Data: Encodable {
         public let attributes: Attributes
         public let type: String = "bundleIds"
     }
+    
+    /// The resource data.
+    public let data: Data
 }
 
 // MARK: BundleIdCreateRequest.Data

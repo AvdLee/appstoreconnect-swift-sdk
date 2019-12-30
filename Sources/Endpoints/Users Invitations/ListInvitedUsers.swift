@@ -35,7 +35,7 @@ extension APIEndpoint where T == UserInvitationsResponse {
     }
 }
 
-public struct ListInvitedUsers {
+public enum ListInvitedUsers {
 
     /// Fields to return for included related types.
     public enum Field: NestableQueryParameter {

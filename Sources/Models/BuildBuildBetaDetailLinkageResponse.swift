@@ -10,12 +10,6 @@ import Foundation
 /// A response containing the ID of the related resource.
 public struct BuildBuildBetaDetailLinkageResponse: Codable {
 
-    /// The object types and IDs of the related resources.
-    public let data: BuildBuildBetaDetailLinkageResponse.Data
-
-    /// Navigational links including the self-link and links to the related data.
-    public let links: DocumentLinks
-    
     public struct Data: Codable {
     
         /// The opaque resource ID that uniquely identifies the resource.
@@ -24,4 +18,10 @@ public struct BuildBuildBetaDetailLinkageResponse: Codable {
         /// The resource type.Value: buildBetaDetails
         public let type: String = "buildBetaDetails"
     }
+    
+    /// The object types and IDs of the related resources.
+    public let data: BuildBuildBetaDetailLinkageResponse.Data
+
+    /// Navigational links including the self-link and links to the related data.
+    public let links: DocumentLinks
 }

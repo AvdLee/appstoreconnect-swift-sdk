@@ -9,22 +9,7 @@ import Foundation
     
 /// The data structure that represents the resource.
 public struct BetaBuildLocalization: Codable {
-
-    /// The resource's attributes.
-    public let attributes: BetaBuildLocalization.Attributes?
-
-    /// The opaque resource ID that uniquely identifies the resource.
-    public let `id`: String
-
-    /// Navigational links to related data and included resource types and IDs.
-    public let relationships: BetaBuildLocalization.Relationships?
-
-    /// The resource type.Value: betaBuildLocalizations
-    public let type: String = "betaBuildLocalizations"
-
-    /// Navigational links that include the self-link.
-    public let links: ResourceLinks<BetaBuildLocalizationResponse>
-
+    
     /// Attributes that describe a resource.
     public struct Attributes: Codable {
     
@@ -40,9 +25,24 @@ public struct BetaBuildLocalization: Codable {
         /// BetaBuildLocalization.Relationships.Build
         public let build: BetaBuildLocalization.Relationships.Build?
     }
+    
+    /// The resource's attributes.
+    public let attributes: BetaBuildLocalization.Attributes?
+
+    /// The opaque resource ID that uniquely identifies the resource.
+    public let `id`: String
+
+    /// Navigational links to related data and included resource types and IDs.
+    public let relationships: BetaBuildLocalization.Relationships?
+
+    /// The resource type.Value: betaBuildLocalizations
+    public let type: String = "betaBuildLocalizations"
+
+    /// Navigational links that include the self-link.
+    public let links: ResourceLinks<BetaBuildLocalizationResponse>
 }
 
-/// MARK: BetaBuildLocalization.Relationships
+// MARK: BetaBuildLocalization.Relationships
 extension BetaBuildLocalization.Relationships {
     
     public struct Build: Codable {
@@ -55,7 +55,7 @@ extension BetaBuildLocalization.Relationships {
     }
 }
 
-/// MARK: BetaBuildLocalization.Relationships.Build
+// MARK: BetaBuildLocalization.Relationships.Build
 extension BetaBuildLocalization.Relationships.Build {
     
     public struct Data: Codable {
