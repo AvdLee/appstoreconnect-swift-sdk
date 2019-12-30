@@ -7,7 +7,7 @@
 
 import Foundation
 
-public typealias RequestCompletionHandler<T> = (Result<T>) -> Void
+public typealias RequestCompletionHandler<T> = (Result<T, Swift.Error>) -> Void
 
 /// The configuration needed to set up the API Provider including all needed information for performing API requests.
 public struct APIConfiguration {
@@ -153,7 +153,7 @@ private extension APIProvider {
     ///
     /// - Parameter result: A result type containing either the network response or an error
     /// - Returns: A result type containing either the decoded type or an error
-    func mapResponse<T: Decodable>(_ result: Result<Response>) -> Result<T> {
+    func mapResponse<T: Decodable>(_ result: Result<Response, Swift.Error>) -> Result<T, Swift.Error> {
         switch result {
         case .success(let response):
             guard let data = response.data, 200..<300 ~= response.statusCode else {
@@ -173,7 +173,7 @@ private extension APIProvider {
     ///
     /// - Parameter result: A result type containing either the network response or an error
     /// - Returns: A result type containing either void or an error
-    func mapVoidResponse(_ result: Result<Response>) -> Result<Void> {
+    func mapVoidResponse(_ result: Result<Response, Swift.Error>) -> Result<Void, Swift.Error> {
         switch result {
         case .success(let response):
             guard 200..<300 ~= response.statusCode else {
