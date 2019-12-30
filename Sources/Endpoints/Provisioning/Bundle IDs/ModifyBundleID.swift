@@ -11,7 +11,7 @@ extension APIEndpoint where T == BundleIdResponse {
     
     /// Update a specific bundle ID’s name
     public static func modify(
-        bundleWithId id: String,
+        bundleIdWithId id: String,
         name: String) -> APIEndpoint {
         
         let request = BundleIdUpdateRequest(data: .init(
