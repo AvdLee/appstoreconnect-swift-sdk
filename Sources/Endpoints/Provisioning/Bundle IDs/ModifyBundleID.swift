@@ -10,6 +10,8 @@ import Foundation
 extension APIEndpoint where T == BundleIdResponse {
     
     /// Update a specific bundle ID’s name
+    /// - Parameter id: the bundle ID's id
+    /// - Parameter name: the bundle ID's name
     public static func modify(
         bundleIdWithId id: String,
         name: String) -> APIEndpoint {
