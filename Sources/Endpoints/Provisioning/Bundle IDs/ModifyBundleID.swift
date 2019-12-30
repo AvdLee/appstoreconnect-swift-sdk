@@ -19,7 +19,7 @@ extension APIEndpoint where T == BundleIdResponse {
             attributes: .init(name: name)))
         
         return APIEndpoint(
-            path: "bundleIds",
+            path: "bundleIds/\(id)",
             method: .patch,
             parameters: nil,
             body: try? JSONEncoder().encode(request))
