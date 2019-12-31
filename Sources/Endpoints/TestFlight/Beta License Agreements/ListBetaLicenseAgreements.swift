@@ -31,7 +31,7 @@ extension APIEndpoint where T == BetaLicenseAgreementsResponse {
     }
 }
 
-public struct ListBetaLicenseAgreements {
+public enum ListBetaLicenseAgreements {
 
     /// Fields to return for included related types.
     public enum Field: NestableQueryParameter {

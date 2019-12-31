@@ -4,6 +4,7 @@
 //
 //  Created by Pascal Edmond on 30/11/2018.
 //
+//  swiftlint:disable type_name
 
 import XCTest
 @testable import AppStoreConnect_Swift_SDK

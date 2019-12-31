@@ -10,6 +10,21 @@ import Foundation
 /// A request containing a single resource.
 public struct BetaGroupCreateRequest: Codable {
 
+    public struct Data: Codable {
+    
+        /// The resource's attributes.
+        public let attributes: BetaGroupCreateRequest.Data.Attributes
+    
+        /// Navigational links to related data and included resource types and IDs.
+        public let relationships: BetaGroupCreateRequest.Data.Relationships
+    
+        /// The resource type.Value: betaGroups
+        public let type: String = "betaGroups"
+    }
+    
+    /// The resource data.
+    public let data: BetaGroupCreateRequest.Data
+    
     /// - Parameters:
     ///   - appId: The opaque resource ID that uniquely identifies the resource.
     ///   - name: The name for the beta group.
@@ -39,24 +54,9 @@ public struct BetaGroupCreateRequest: Codable {
                 betaTesters: .init(data: betaTesterIds?.map({ Data.Relationships.BetaTesters.Data(id: $0) })),
                 builds: .init(data: buildIds?.map({ Data.Relationships.Builds.Data(id: $0) }))))
     }
-    
-    /// The resource data.
-    public let data: BetaGroupCreateRequest.Data
-    
-    public struct Data: Codable {
-    
-        /// The resource's attributes.
-        public let attributes: BetaGroupCreateRequest.Data.Attributes
-    
-        /// Navigational links to related data and included resource types and IDs.
-        public let relationships: BetaGroupCreateRequest.Data.Relationships
-    
-        /// The resource type.Value: betaGroups
-        public let type: String = "betaGroups"
-    }
 }
 
-/// MARK: BetaGroupCreateRequest.Data
+// MARK: BetaGroupCreateRequest.Data
 extension BetaGroupCreateRequest.Data {
     /// Attributes that describe a resource.
     public struct Attributes: Codable {
@@ -87,7 +87,7 @@ extension BetaGroupCreateRequest.Data {
     }
 }
 
-/// MARK: BetaGroupCreateRequest.Data.Relationships
+// MARK: BetaGroupCreateRequest.Data.Relationships
 extension BetaGroupCreateRequest.Data.Relationships {
     
     public struct App: Codable {
@@ -109,7 +109,7 @@ extension BetaGroupCreateRequest.Data.Relationships {
     }
 }
 
-/// MARK: BetaGroupCreateRequest.Data.Relationships.App
+// MARK: BetaGroupCreateRequest.Data.Relationships.App
 extension BetaGroupCreateRequest.Data.Relationships.App {
     
     public struct Data: Codable {
@@ -122,7 +122,7 @@ extension BetaGroupCreateRequest.Data.Relationships.App {
     }
 }
 
-/// MARK: BetaGroupCreateRequest.Data.Relationships.BetaTesters
+// MARK: BetaGroupCreateRequest.Data.Relationships.BetaTesters
 extension BetaGroupCreateRequest.Data.Relationships.BetaTesters {
     
     public struct Data: Codable {
@@ -135,7 +135,7 @@ extension BetaGroupCreateRequest.Data.Relationships.BetaTesters {
     }
 }
 
-/// MARK: BetaGroupCreateRequest.Data.Relationships.Builds
+// MARK: BetaGroupCreateRequest.Data.Relationships.Builds
 extension BetaGroupCreateRequest.Data.Relationships.Builds {
     
     public struct Data: Codable {

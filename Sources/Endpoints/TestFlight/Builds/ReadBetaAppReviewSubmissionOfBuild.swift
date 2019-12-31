@@ -22,7 +22,7 @@ extension APIEndpoint where T == BetaAppReviewSubmissionResponse {
     }
 }
 
-public struct ReadBetaAppReviewSubmissionOfBuild {
+public enum ReadBetaAppReviewSubmissionOfBuild {
 
     /// Fields to return for included related types.
     public enum Field: NestableQueryParameter {

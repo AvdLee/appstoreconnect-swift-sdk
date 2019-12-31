@@ -9,7 +9,22 @@ import Foundation
     
 /// A request containing a single resource.
 public struct BetaAppLocalizationUpdateRequest: Codable {
-
+    
+    public struct Data: Codable {
+    
+        /// The resource's attributes.
+        public let attributes: BetaAppLocalizationUpdateRequest.Data.Attributes?
+    
+        /// The opaque resource ID that uniquely identifies the resource.
+        public let `id`: String
+    
+        /// The resource type.Value: betaAppLocalizations
+        public let type: String = "betaAppLocalizations"
+    }
+    
+    /// The resource data.
+    public let data: BetaAppLocalizationUpdateRequest.Data
+    
     /// - Parameters:
     ///   - id: The opaque resource ID that uniquely identifies the resource.
     ///   - description: A description of your app that highlights features and functionality.
@@ -32,24 +47,9 @@ public struct BetaAppLocalizationUpdateRequest: Codable {
                 tvOsPrivacyPolicy: tvOsPrivacyPolicy),
             id: id)
     }
-    
-    /// The resource data.
-    public let data: BetaAppLocalizationUpdateRequest.Data
-    
-    public struct Data: Codable {
-    
-        /// The resource's attributes.
-        public let attributes: BetaAppLocalizationUpdateRequest.Data.Attributes?
-    
-        /// The opaque resource ID that uniquely identifies the resource.
-        public let `id`: String
-    
-        /// The resource type.Value: betaAppLocalizations
-        public let type: String = "betaAppLocalizations"
-    }
 }
 
-/// MARK: BetaAppLocalizationUpdateRequest.Data
+// MARK: BetaAppLocalizationUpdateRequest.Data
 extension BetaAppLocalizationUpdateRequest.Data {
     /// Attributes that describe a resource.
     public struct Attributes: Codable {

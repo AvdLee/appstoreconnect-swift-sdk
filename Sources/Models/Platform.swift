@@ -6,7 +6,8 @@
 //
 
 import Foundation
-    /// Strings that represent Apple operating systems.
+
+/// Strings that represent Apple operating systems.
 public enum Platform: String, Codable {
     case ios = "IOS"
     case macOs = "MAC_OS"

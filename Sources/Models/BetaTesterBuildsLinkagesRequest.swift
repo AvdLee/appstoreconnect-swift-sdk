@@ -9,15 +9,6 @@ import Foundation
     
 /// A request containing the IDs of related resources.
 public struct BetaTesterBuildsLinkagesRequest: Codable {
-
-    /// - Parameters:
-    ///   - buidIds: Array of opaque resource ID that uniquely identifies the resources.
-    init(_ buildIds: [String]) {
-        data = buildIds.map({ Data(id: $0) })
-    }
-
-    /// The types and IDs of related resources.
-    public let data: [BetaTesterBuildsLinkagesRequest.Data]
     
     public struct Data: Codable {
     
@@ -27,4 +18,14 @@ public struct BetaTesterBuildsLinkagesRequest: Codable {
         /// The resource type.Value: builds
         public let type: String = "builds"
     }
+    
+    /// The types and IDs of related resources.
+    public let data: [BetaTesterBuildsLinkagesRequest.Data]
+    
+    /// - Parameters:
+    ///   - buidIds: Array of opaque resource ID that uniquely identifies the resources.
+    init(_ buildIds: [String]) {
+        data = buildIds.map({ Data(id: $0) })
+    }
+
 }

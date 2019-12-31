@@ -10,7 +10,7 @@ import Foundation
 extension APIEndpoint where T == CertificatesResponse {
 
     /// Find and list certificates and download their data.
-    /// 
+    ///
     /// - Parameters:
     ///   - fields: Fields to return for included related types.
     ///   - filter: Attributes, relationships, and IDs by which to filter.
@@ -36,7 +36,7 @@ extension APIEndpoint where T == CertificatesResponse {
     }
 }
 
-public struct Certificates {
+public enum Certificates {
 
     public enum Field: String, CaseIterable, NestableQueryParameter {
         case certificateContent, certificateType, csrContent, displayName, expirationDate, name, platform, serialNumber

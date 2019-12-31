@@ -18,7 +18,7 @@ extension ECPrivateKey {
 
         var hash = [UInt8](repeating: 0, count: Int(CC_SHA256_DIGEST_LENGTH))
         CC_SHA256((message as NSData).bytes, CC_LONG(message.count), &hash)
-        let digestData = Data(bytes: hash)
+        let digestData = Data(hash)
 
         let algorithm = SecKeyAlgorithm.ecdsaSignatureDigestX962SHA256
 

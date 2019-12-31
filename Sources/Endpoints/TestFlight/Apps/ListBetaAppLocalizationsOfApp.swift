@@ -30,7 +30,7 @@ extension APIEndpoint where T == BetaAppLocalizationsResponse {
     }
 }
 
-public struct ListBetaAppLocalizationsForApp {
+public enum ListBetaAppLocalizationsForApp {
 
     /// Fields to return for included related types.
     public enum Field: NestableQueryParameter {

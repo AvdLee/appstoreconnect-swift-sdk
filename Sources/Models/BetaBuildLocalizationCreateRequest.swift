@@ -9,21 +9,6 @@ import Foundation
     
 /// A request containing a single resource.
 public struct BetaBuildLocalizationCreateRequest: Codable {
-
-    /// - Parameters:
-    ///   - buildId: The opaque resource ID that uniquely identifies the resource.
-    ///   - locale: The specified locale. Refer to Table 1 for possible values.
-    ///   - whatsNew: A field that describes changes and additions to a build and indicates features you would like your users to test.
-    init(buildId: String, locale: String, whatsNew: String? = nil) {
-        data = .init(
-            attributes: .init(
-                locale: locale,
-                whatsNew: whatsNew),
-            relationships: .init(build: .init(data: .init(id: buildId))))
-    }
-    
-    /// The resource data.
-    public let data: BetaBuildLocalizationCreateRequest.Data
     
     public struct Data: Codable {
     
@@ -36,9 +21,24 @@ public struct BetaBuildLocalizationCreateRequest: Codable {
         /// The resource type.Value: betaBuildLocalizations
         public let type: String = "betaBuildLocalizations"
     }
+    
+    /// The resource data.
+    public let data: BetaBuildLocalizationCreateRequest.Data
+    
+    /// - Parameters:
+    ///   - buildId: The opaque resource ID that uniquely identifies the resource.
+    ///   - locale: The specified locale. Refer to Table 1 for possible values.
+    ///   - whatsNew: A field that describes changes and additions to a build and indicates features you would like your users to test.
+    init(buildId: String, locale: String, whatsNew: String? = nil) {
+        data = .init(
+            attributes: .init(
+                locale: locale,
+                whatsNew: whatsNew),
+            relationships: .init(build: .init(data: .init(id: buildId))))
+    }
 }
 
-/// MARK: BetaBuildLocalizationCreateRequest.Data
+// MARK: BetaBuildLocalizationCreateRequest.Data
 extension BetaBuildLocalizationCreateRequest.Data {
     /// Attributes that describe a resource.
     public struct Attributes: Codable {
@@ -57,7 +57,7 @@ extension BetaBuildLocalizationCreateRequest.Data {
     }
 }
 
-/// MARK: BetaBuildLocalizationCreateRequest.Data.Relationships
+// MARK: BetaBuildLocalizationCreateRequest.Data.Relationships
 extension BetaBuildLocalizationCreateRequest.Data.Relationships {
     
     public struct Build: Codable {
@@ -67,7 +67,7 @@ extension BetaBuildLocalizationCreateRequest.Data.Relationships {
     }
 }
 
-/// MARK: BetaBuildLocalizationCreateRequest.Data.Relationships.Build
+// MARK: BetaBuildLocalizationCreateRequest.Data.Relationships.Build
 extension BetaBuildLocalizationCreateRequest.Data.Relationships.Build {
     
     public struct Data: Codable {

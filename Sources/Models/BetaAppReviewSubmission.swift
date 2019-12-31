@@ -9,7 +9,20 @@ import Foundation
     
 /// The data structure that represents the resource.
 public struct BetaAppReviewSubmission: Codable {
+    
+    /// Attributes that describe a resource.
+    public struct Attributes: Codable {
+    
+        /// A state that indicates the current status of the beta app review submission.
+        public let betaReviewState: BetaReviewState?
+    }
 
+    public struct Relationships: Codable {
+    
+        /// BetaAppReviewSubmission.Relationships.Build
+        public let build: BetaAppReviewSubmission.Relationships.Build?
+    }
+    
     /// The resource's attributes.
     public let attributes: BetaAppReviewSubmission.Attributes?
 
@@ -24,22 +37,9 @@ public struct BetaAppReviewSubmission: Codable {
 
     /// The resource type.Value: betaAppReviewSubmissions
     public let type: String = "betaAppReviewSubmissions"
-
-    /// Attributes that describe a resource.
-    public struct Attributes: Codable {
-    
-        /// A state that indicates the current status of the beta app review submission.
-        public let betaReviewState: BetaReviewState?
-    }
-
-    public struct Relationships: Codable {
-    
-        /// BetaAppReviewSubmission.Relationships.Build
-        public let build: BetaAppReviewSubmission.Relationships.Build?
-    }
 }
 
-/// MARK: BetaAppReviewSubmission.Relationships
+// MARK: BetaAppReviewSubmission.Relationships
 extension BetaAppReviewSubmission.Relationships {
     
     public struct Build: Codable {
@@ -52,7 +52,7 @@ extension BetaAppReviewSubmission.Relationships {
     }
 }
 
-/// MARK: BetaAppReviewSubmission.Relationships.Build
+// MARK: BetaAppReviewSubmission.Relationships.Build
 extension BetaAppReviewSubmission.Relationships.Build {
     
     public struct Data: Codable {

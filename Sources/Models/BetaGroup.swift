@@ -10,21 +10,6 @@ import Foundation
 /// The data structure that represents the resource.
 public struct BetaGroup: Codable {
 
-    /// The resource's attributes.
-    public let attributes: BetaGroup.Attributes?
-
-    /// The opaque resource ID that uniquely identifies the resource.
-    public let `id`: String
-
-    /// Navigational links to related data and included resource types and IDs.
-    public let relationships: BetaGroup.Relationships?
-
-    /// The resource type.Value: betaGroups
-    public let type: String = "betaGroups"
-
-    /// Navigational links that include the self-link.
-    public let links: ResourceLinks<BetaGroupResponse>
-
     /// Attributes that describe a resource.
     public struct Attributes: Codable {
     
@@ -64,9 +49,24 @@ public struct BetaGroup: Codable {
         /// BetaGroup.Relationships.Builds
         public let builds: BetaGroup.Relationships.Builds?
     }
+    
+    /// The resource's attributes.
+    public let attributes: BetaGroup.Attributes?
+
+    /// The opaque resource ID that uniquely identifies the resource.
+    public let `id`: String
+
+    /// Navigational links to related data and included resource types and IDs.
+    public let relationships: BetaGroup.Relationships?
+
+    /// The resource type.Value: betaGroups
+    public let type: String = "betaGroups"
+
+    /// Navigational links that include the self-link.
+    public let links: ResourceLinks<BetaGroupResponse>
 }
 
-/// MARK: BetaGroup.Relationships
+// MARK: BetaGroup.Relationships
 extension BetaGroup.Relationships {
     
     public struct App: Codable {
@@ -103,7 +103,7 @@ extension BetaGroup.Relationships {
     }
 }
 
-/// MARK: BetaGroup.Relationships.App
+// MARK: BetaGroup.Relationships.App
 extension BetaGroup.Relationships.App {
     
     public struct Data: Codable {
@@ -125,7 +125,7 @@ extension BetaGroup.Relationships.App {
     }
 }
 
-/// MARK: BetaGroup.Relationships.BetaTesters
+// MARK: BetaGroup.Relationships.BetaTesters
 extension BetaGroup.Relationships.BetaTesters {
     
     public struct Data: Codable {
@@ -147,7 +147,7 @@ extension BetaGroup.Relationships.BetaTesters {
     }
 }
 
-/// MARK: BetaGroup.Relationships.Builds
+// MARK: BetaGroup.Relationships.Builds
 extension BetaGroup.Relationships.Builds {
     
     public struct Data: Codable {

@@ -27,7 +27,7 @@ extension APIEndpoint where T == BetaBuildLocalizationResponse {
     }
 }
 
-public struct ReadBetaBuildLocalizationInformation {
+public enum ReadBetaBuildLocalizationInformation {
     
     /// Fields to return for included related types.
     public enum Field: NestableQueryParameter {

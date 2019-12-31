@@ -4,18 +4,11 @@
 //
 //  Created by Pascal Edmond on 12/11/2018.
 //
-//  swiftlint:disable type_name
 
 import Foundation
     
 /// A response containing the ID of the related resource.
 public struct BuildBetaAppReviewSubmissionLinkageResponse: Codable {
-
-    /// The object types and IDs of the related resources.
-    public let data: BuildBetaAppReviewSubmissionLinkageResponse.Data
-
-    /// Navigational links including the self-link and links to the related data.
-    public let links: DocumentLinks
     
     public struct Data: Codable {
     
@@ -25,4 +18,11 @@ public struct BuildBetaAppReviewSubmissionLinkageResponse: Codable {
         /// The resource type.Value: betaAppReviewSubmissions
         public let type: String = "betaAppReviewSubmissions"
     }
+    
+    /// The object types and IDs of the related resources.
+    public let data: BuildBetaAppReviewSubmissionLinkageResponse.Data
+
+    /// Navigational links including the self-link and links to the related data.
+    public let links: DocumentLinks
+
 }

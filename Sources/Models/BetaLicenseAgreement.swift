@@ -9,7 +9,20 @@ import Foundation
     
 /// The data structure that represents the resource.
 public struct BetaLicenseAgreement: Codable {
-
+    
+    /// Attributes that describe a resource.
+    public struct Attributes: Codable {
+    
+        /// The license agreement text for your beta app that displays to users.
+        public let agreementText: String?
+    }
+    
+    public struct Relationships: Codable {
+    
+        /// BetaLicenseAgreement.Relationships.App
+        public let app: BetaLicenseAgreement.Relationships.App?
+    }
+    
     /// The resource's attributes.
     public let attributes: BetaLicenseAgreement.Attributes?
 
@@ -25,21 +38,9 @@ public struct BetaLicenseAgreement: Codable {
     /// The resource type.Value: betaLicenseAgreements
     public let type: String = "betaLicenseAgreements"
 
-    /// Attributes that describe a resource.
-    public struct Attributes: Codable {
-    
-        /// The license agreement text for your beta app that displays to users.
-        public let agreementText: String?
-    }
-    
-    public struct Relationships: Codable {
-    
-        /// BetaLicenseAgreement.Relationships.App
-        public let app: BetaLicenseAgreement.Relationships.App?
-    }
 }
 
-/// MARK: BetaLicenseAgreement.Relationships
+// MARK: BetaLicenseAgreement.Relationships
 extension BetaLicenseAgreement.Relationships {
     
     public struct App: Codable {
@@ -52,7 +53,7 @@ extension BetaLicenseAgreement.Relationships {
     }
 }
 
-/// MARK: BetaLicenseAgreement.Relationships.App
+// MARK: BetaLicenseAgreement.Relationships.App
 extension BetaLicenseAgreement.Relationships.App {
     
     public struct Data: Codable {

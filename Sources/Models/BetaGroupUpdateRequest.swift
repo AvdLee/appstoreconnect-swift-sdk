@@ -9,7 +9,22 @@ import Foundation
     
 /// A request containing a single resource.
 public struct BetaGroupUpdateRequest: Codable {
-
+    
+    public struct Data: Codable {
+    
+        /// The resource's attributes.
+        public let attributes: BetaGroupUpdateRequest.Data.Attributes?
+    
+        /// The opaque resource ID that uniquely identifies the resource.
+        public let `id`: String
+    
+        /// The resource type.Value: betaGroups
+        public let type: String = "betaGroups"
+    }
+    
+    /// The resource data.
+    public let data: BetaGroupUpdateRequest.Data
+    
     /// - Parameters:
     ///   - id: The opaque resource ID that uniquely identifies the resource.
     ///   - name: The name for the beta group.
@@ -29,24 +44,9 @@ public struct BetaGroupUpdateRequest: Codable {
                 publicLinkLimitEnabled: publicLinkLimitEnabled),
             id: id)
     }
-    
-    /// The resource data.
-    public let data: BetaGroupUpdateRequest.Data
-    
-    public struct Data: Codable {
-    
-        /// The resource's attributes.
-        public let attributes: BetaGroupUpdateRequest.Data.Attributes?
-    
-        /// The opaque resource ID that uniquely identifies the resource.
-        public let `id`: String
-    
-        /// The resource type.Value: betaGroups
-        public let type: String = "betaGroups"
-    }
 }
 
-/// MARK: BetaGroupUpdateRequest.Data
+// MARK: BetaGroupUpdateRequest.Data
 extension BetaGroupUpdateRequest.Data {
     /// Attributes that describe a resource.
     public struct Attributes: Codable {
