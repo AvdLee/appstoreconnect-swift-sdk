@@ -5,8 +5,6 @@
 //  Created by Patrick Balestra on 12/23/19.
 //
 
-import Foundation
-
 extension APIEndpoint where T == ProfilesResponse {
 
     /// Get a list of all profiles for a specific bundle ID.

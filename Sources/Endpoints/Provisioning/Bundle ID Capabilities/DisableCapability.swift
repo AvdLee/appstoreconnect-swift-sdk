@@ -5,8 +5,6 @@
 //  Created by Patrick Balestra on 12/23/19.
 //
 
-import Foundation
-
 extension APIEndpoint where T == Void {
 
     /// Disable a capability for a bundle ID.

@@ -5,8 +5,6 @@
 //  Created by Patrick Balestra on 12/23/19.
 //
 
-import Foundation
-
 extension APIEndpoint where T == BundleIdBundleIdCapabilitiesLinkagesResponse {
 
     /// Get the resource IDs for all capabilities associated with a specific bundle ID.

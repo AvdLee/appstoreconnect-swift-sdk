@@ -5,8 +5,6 @@
 //  Created by Patrick Balestra on 12/14/2019.
 //
 
-import Foundation
-
 extension APIEndpoint where T == CertificateResponse {
 
     /// Get information about a certificate and download the certificate data.

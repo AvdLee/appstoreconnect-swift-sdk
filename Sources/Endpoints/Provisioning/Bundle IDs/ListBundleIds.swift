@@ -5,8 +5,6 @@
 //  Created by Patrick Balestra on 12/22/19.
 //
 
-import Foundation
-
 extension APIEndpoint where T == BundleIdsResponse {
 
     /// Find and list bundle IDs that are registered to your team.

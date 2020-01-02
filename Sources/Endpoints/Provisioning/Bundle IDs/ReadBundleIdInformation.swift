@@ -5,8 +5,6 @@
 //  Created by Patrick Balestra on 12/23/19.
 //
 
-import Foundation
-
 extension APIEndpoint where T == BundleIdResponse {
 
     /// Get information about a specific bundle ID.

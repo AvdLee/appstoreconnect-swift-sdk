@@ -5,8 +5,6 @@
 //  Created by Patrick Balestra on 12/23/19.
 //
 
-import Foundation
-
 extension APIEndpoint where T == BundleIdProfilesLinkagesResponse {
 
     /// Get the resource IDs for all profiles associated with a specific bundle ID.
