@@ -41,7 +41,7 @@ public struct BundleIdCapabilityUpdateRequest: Codable {
     }
 }
 
-/// MARK: BundleIdCapabilityCreateRequest.Data
+// MARK: BundleIdCapabilityCreateRequest.Data
 extension BundleIdCapabilityUpdateRequest.Data {
 
     /// Attributes that describe a resource.

@@ -39,7 +39,7 @@ public struct BundleIdCapabilityResponse: Codable {
     }
 }
 
-/// MARK: BundleIdCapabilityResponse.Relationships
+// MARK: BundleIdCapabilityResponse.Relationships
 extension BundleIdCapabilityResponse.Relationships {
 
     public struct BundleId: Codable {
@@ -52,7 +52,7 @@ extension BundleIdCapabilityResponse.Relationships {
     }
 }
 
-/// MARK: BundleIdCapabilityResponse.Relationships.BundleId
+// MARK: BundleIdCapabilityResponse.Relationships.BundleId
 extension BundleIdCapabilityResponse.Relationships.BundleId {
 
     public struct Data: Codable {

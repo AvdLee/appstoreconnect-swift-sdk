@@ -42,7 +42,7 @@ public struct BundleIdCapabilityCreateRequest: Codable {
     }
 }
 
-/// MARK: BundleIdCapabilityCreateRequest.Data
+// MARK: BundleIdCapabilityCreateRequest.Data
 extension BundleIdCapabilityCreateRequest.Data {
 
     /// Attributes that describe a resource.
@@ -62,7 +62,7 @@ extension BundleIdCapabilityCreateRequest.Data {
     }
 }
 
-/// MARK: BundleIdCapabilityCreateRequest.Data.Relationships
+// MARK: BundleIdCapabilityCreateRequest.Data.Relationships
 extension BundleIdCapabilityCreateRequest.Data.Relationships {
 
     public struct BundleId: Codable {
@@ -72,7 +72,7 @@ extension BundleIdCapabilityCreateRequest.Data.Relationships {
     }
 }
 
-/// MARK: BundleIdCapabilityCreateRequest.Data.Relationships.BundleId
+// MARK: BundleIdCapabilityCreateRequest.Data.Relationships.BundleId
 extension BundleIdCapabilityCreateRequest.Data.Relationships.BundleId {
 
     public struct Data: Codable {

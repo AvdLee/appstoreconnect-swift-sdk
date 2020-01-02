@@ -50,7 +50,7 @@ public struct Profile: Codable {
     }
 }
 
-/// MARK: Profile.Relationships
+// MARK: Profile.Relationships
 extension Profile.Relationships {
 
     public struct Certificates: Codable {
@@ -87,7 +87,7 @@ extension Profile.Relationships {
     }
 }
 
-/// MARK: Profile.Relationships.Certificates
+// MARK: Profile.Relationships.Certificates
 extension Profile.Relationships.Certificates {
 
     public struct Data: Codable {
@@ -109,7 +109,7 @@ extension Profile.Relationships.Certificates {
     }
 }
 
-/// MARK: Profile.Relationships.Devices
+// MARK: Profile.Relationships.Devices
 extension Profile.Relationships.Devices {
 
     public struct Data: Codable {
@@ -131,7 +131,7 @@ extension Profile.Relationships.Devices {
     }
 }
 
-/// MARK: Profile.Relationships.BundleId
+// MARK: Profile.Relationships.BundleId
 extension Profile.Relationships.BundleId {
 
     public struct Data: Codable {
