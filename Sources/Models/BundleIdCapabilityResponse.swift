@@ -7,7 +7,6 @@
 
 import Foundation
 
-
 /// The data structure that represents the resource.
 public struct BundleIdCapabilityResponse: Codable {
 
