@@ -22,4 +22,3 @@ public struct BundleIdsResponse: Codable {
     /// Paging information.
     public let meta: PagingInformation?
 }
-

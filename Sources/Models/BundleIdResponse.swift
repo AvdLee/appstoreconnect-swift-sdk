@@ -14,7 +14,7 @@ public struct BundleIdResponse: Decodable {
     public struct BundleId: Decodable {
         
         /// The resource's attributes.
-        public let attributes: Attributes?
+        public let attributes: BundleIdResponse.BundleId.Attributes?
         
         /// The opaque resource ID that uniquely identifies the resource.
         public let `id`: String

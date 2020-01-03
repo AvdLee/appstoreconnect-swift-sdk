@@ -33,4 +33,3 @@ public enum CapabilityType: String, Codable {
     case autofillCredentialProvider = "AUTOFILL_CREDENTIAL_PROVIDER"
     case accessWifiInformation = "ACCESS_WIFI_INFORMATION"
 }
-

@@ -9,22 +9,7 @@ import Foundation
 
 /// The data structure that represents the resource.
 public struct Profile: Codable {
-
-    /// The resource's attributes.
-    public let attributes: Profile.Attributes?
-
-    /// The opaque resource ID that uniquely identifies the resource.
-    public let `id`: String
-
-    /// Navigational links to related data and included resource types and IDs.
-    public let relationships: Profile.Relationships?
-
-    /// The resource type.Value: profiles
-    public let type: String = "profiles"
-
-    /// Navigational links that include the self-link.
-    public let links: ResourceLinks<ProfileResponse>
-
+    
     /// Attributes that describe a resource.
     public struct Attributes: Codable {
         public let name: String?
@@ -48,6 +33,21 @@ public struct Profile: Codable {
         /// Profile.Relationships.BundleId
         public let bundleId: Profile.Relationships.BundleId?
     }
+
+    /// The resource's attributes.
+    public let attributes: Profile.Attributes?
+
+    /// The opaque resource ID that uniquely identifies the resource.
+    public let `id`: String
+
+    /// Navigational links to related data and included resource types and IDs.
+    public let relationships: Profile.Relationships?
+
+    /// The resource type.Value: profiles
+    public let type: String = "profiles"
+
+    /// Navigational links that include the self-link.
+    public let links: ResourceLinks<ProfileResponse>
 }
 
 // MARK: Profile.Relationships

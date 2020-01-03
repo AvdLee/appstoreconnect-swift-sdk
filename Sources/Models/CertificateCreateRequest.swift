@@ -9,7 +9,11 @@
 public struct CertificateCreateRequest: Encodable {
     
     public struct Data: Encodable {
-        public let attributes: Attributes
+
+        /// The resource's attributes.
+        public let attributes: CertificateCreateRequest.Data.Attributes?
+
+        /// The resource type.
         public let type: String = "certificates"
     }
     

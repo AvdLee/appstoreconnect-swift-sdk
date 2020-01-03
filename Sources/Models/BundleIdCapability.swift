@@ -10,21 +10,6 @@ import Foundation
 /// The data structure that represents the resource.
 public struct BundleIdCapability: Codable {
 
-    /// The resource's attributes.
-    public let attributes: BundleIdCapability.Attributes?
-
-    /// The opaque resource ID that uniquely identifies the resource.
-    public let `id`: String
-
-    /// Navigational links to related data and included resource types and IDs.
-    public let relationships: BundleIdCapability.Relationships?
-
-    /// The resource type.Value: profiles
-    public let type: String = "bundleIdCapabilities"
-
-    /// Navigational links that include the self-link.
-    public let links: ResourceLinks<BundleIdCapabilityResponse>
-
     /// Attributes that describe a resource.
     public struct Attributes: Codable {
 
@@ -40,6 +25,21 @@ public struct BundleIdCapability: Codable {
         /// BundleIdCapability.Relationships.BundleId
         public let bundleId: BundleIdCapability.Relationships.BundleId?
     }
+
+    /// The resource's attributes.
+    public let attributes: BundleIdCapability.Attributes?
+
+    /// The opaque resource ID that uniquely identifies the resource.
+    public let `id`: String
+
+    /// Navigational links to related data and included resource types and IDs.
+    public let relationships: BundleIdCapability.Relationships?
+
+    /// The resource type.Value: profiles
+    public let type: String = "bundleIdCapabilities"
+
+    /// Navigational links that include the self-link.
+    public let links: ResourceLinks<BundleIdCapabilityResponse>
 }
 
 // MARK: BundleIdCapability.Relationships

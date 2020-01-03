@@ -9,7 +9,11 @@
 public struct BundleIdCreateRequest: Encodable {
 
     public struct Data: Encodable {
-        public let attributes: Attributes
+
+        /// The resource's attributes.        
+        public let attributes: BundleIdCreateRequest.Data.Attributes?
+
+        /// The resource type.
         public let type: String = "bundleIds"
     }
     

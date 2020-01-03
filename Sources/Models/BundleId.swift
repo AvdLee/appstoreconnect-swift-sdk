@@ -10,6 +10,31 @@ import Foundation
 /// The data structure that represents the resource.
 public struct BundleId: Codable {
 
+    /// Attributes that describe a resource.
+    public struct Attributes: Codable {
+
+        /// The unique identifier of the bundle id.
+        public let identifier: String?
+
+        /// The name for the bundle id.
+        public let name: String?
+
+        /// The platform for the bundle id.
+        public let platform: BundleIdPlatform?
+
+        /// A seed id for the bundle id.
+        public let seedId: String?
+    }
+
+    public struct Relationships: Codable {
+
+        /// BundleId.Relationships.Profiles
+        public let profiles: BundleId.Relationships.Profiles?
+
+        /// BundleId.Relationships.BundleIdCapabilities
+        public let bundleIdCapabilities: BundleId.Relationships.BundleIdCapabilities?
+    }
+
     /// The resource's attributes.
     public let attributes: BundleId.Attributes?
 
@@ -24,23 +49,6 @@ public struct BundleId: Codable {
 
     /// Navigational links that include the self-link.
     public let links: ResourceLinks<BundleIdResponse>
-
-    /// Attributes that describe a resource.
-    public struct Attributes: Codable {
-        public let identifier: String?
-        public let name: String?
-        public let platform: BundleIdPlatform?
-        public let seedId: String?
-    }
-
-    public struct Relationships: Codable {
-
-        /// BundleId.Relationships.Profiles
-        public let profiles: BundleId.Relationships.Profiles?
-
-        /// BundleId.Relationships.BundleIdCapabilities
-        public let bundleIdCapabilities: BundleId.Relationships.BundleIdCapabilities?
-    }
 }
 
 // MARK: BundleId.Relationships

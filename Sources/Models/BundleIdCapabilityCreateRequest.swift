@@ -10,6 +10,21 @@ import Foundation
 /// A request containing a single resource.
 public struct BundleIdCapabilityCreateRequest: Codable {
 
+    public struct Data: Codable {
+
+        /// The resource's attributes.
+        public let attributes: BundleIdCapabilityCreateRequest.Data.Attributes
+
+        /// The types and IDs of the related data to update.
+        public let relationships: BundleIdCapabilityCreateRequest.Data.Relationships
+
+        /// The resource type.Value: bundleIdCapabilities
+        public let type: String = "bundleIdCapabilities"
+    }
+
+    /// The resource data.
+    public let data: BundleIdCapabilityCreateRequest.Data
+
     /// - Parameters:
     ///   - bundleId: The opaque resource ID that uniquely identifies the resource.
     ///   - capabilityType: The capability type.
@@ -24,21 +39,6 @@ public struct BundleIdCapabilityCreateRequest: Codable {
             ),
             relationships: .init(
                 bundleId: .init(data: .init(id: bundleId))))
-    }
-
-    /// The resource data.
-    public let data: BundleIdCapabilityCreateRequest.Data
-
-    public struct Data: Codable {
-
-        /// The resource's attributes.
-        public let attributes: BundleIdCapabilityCreateRequest.Data.Attributes
-
-        /// The types and IDs of the related data to update.
-        public let relationships: BundleIdCapabilityCreateRequest.Data.Relationships
-
-        /// The resource type.Value: bundleIdCapabilities
-        public let type: String = "bundleIdCapabilities"
     }
 }
 

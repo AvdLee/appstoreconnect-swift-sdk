@@ -10,6 +10,22 @@ import Foundation
 /// The data structure that represents the resource.
 public struct BundleIdCapabilityResponse: Codable {
 
+    /// Attributes that describe a resource.
+    public struct Attributes: Codable {
+        
+        /// The type of the capabillity.
+        public let capabilityType: CapabilityType?
+        
+        /// Specific settings for this capability.
+        public let settings: [CapabilitySetting]?
+    }
+    
+    public struct Relationships: Codable {
+        
+        /// BundleIdCapabilityResponse.Relationships.BundleId
+        public let bundleId: BundleIdCapabilityResponse.Relationships.BundleId?
+    }
+
     /// The resource's attributes.
     public let attributes: BundleIdCapabilityResponse.Attributes?
 
@@ -21,22 +37,6 @@ public struct BundleIdCapabilityResponse: Codable {
 
     /// Navigational links that include the self-link.
     public let links: ResourceLinks<BundleIdCapabilityResponse>
-
-    /// Attributes that describe a resource.
-    public struct Attributes: Codable {
-
-        /// The type of the capabillity.
-        public let capabilityType: CapabilityType?
-
-        /// Specific settings for this capability.
-        public let settings: [CapabilitySetting]?
-    }
-
-    public struct Relationships: Codable {
-
-        /// BundleIdCapabilityResponse.Relationships.BundleId
-        public let bundleId: BundleIdCapabilityResponse.Relationships.BundleId?
-    }
 }
 
 // MARK: BundleIdCapabilityResponse.Relationships

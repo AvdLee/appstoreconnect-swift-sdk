@@ -36,7 +36,7 @@ extension APIEndpoint where T == BundleIdsResponse {
     }
 }
 
-public struct BundleIds {
+public enum BundleIds {
 
     public enum Field: NestableQueryParameter {
         case bundleIds([BundleIds])
