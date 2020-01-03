@@ -35,13 +35,13 @@ public enum DownloadSalesAndTrendsReports {
             case .frequency(let value):
                 return (Frequency.key, value.map({ $0.pair.value }).joinedByCommas())
             case .reportDate(let value):
-                return ("reportdate", value.joinedByCommas())
+                return ("reportDate", value.joinedByCommas())
             case .reportSubType(let value):
                 return (ReportSubType.key, value.map({ $0.pair.value }).joinedByCommas())
             case .reportType(let value):
                 return (ReportType.key, value.map({ $0.pair.value }).joinedByCommas())
             case .vendorNumber(let value):
-                return ("vendornumber", value.joinedByCommas())
+                return ("vendorNumber", value.joinedByCommas())
             case .version(let value):
                 return ("version", value.joinedByCommas())
             }
