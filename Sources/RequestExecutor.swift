@@ -24,8 +24,8 @@ public struct Response {
 public protocol RequestExecutor {
 
     /// Performs a URLRequest and returns a result
-    func execute(_ urlRequest: URLRequest, completion: @escaping (Result<Response>) -> Void)
+    func execute(_ urlRequest: URLRequest, completion: @escaping (Result<Response, Swift.Error>) -> Void)
 
     /// Retrieves the content of a given URL
-    func retrieve(_ url: URL, completion: @escaping (Result<Response>) -> Void)
+    func retrieve(_ url: URL, completion: @escaping (Result<Response, Swift.Error>) -> Void)
 }

@@ -12,17 +12,17 @@ final class APIProviderTests: XCTestCase {
 
     private struct MockRequestExecutor: RequestExecutor {
 
-        let expectedResponse: Result<Response>
+        let expectedResponse: Result<Response, Swift.Error>
 
-        init(expectedResponse: Result<Response>) {
+        init(expectedResponse: Result<Response, Swift.Error>) {
             self.expectedResponse = expectedResponse
         }
 
-        func execute(_ urlRequest: URLRequest, completion: @escaping (Result<Response>) -> Void) {
+        func execute(_ urlRequest: URLRequest, completion: @escaping (Result<Response, Swift.Error>) -> Void) {
             completion(expectedResponse)
         }
 
-        func retrieve(_ url: URL, completion: @escaping (Result<Response>) -> Void) {
+        func retrieve(_ url: URL, completion: @escaping (Result<Response, Swift.Error>) -> Void) {
             completion(expectedResponse)
         }
     }
