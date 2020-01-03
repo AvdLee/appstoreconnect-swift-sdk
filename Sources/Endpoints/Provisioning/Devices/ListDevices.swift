@@ -14,14 +14,16 @@ extension APIEndpoint where T == DevicesResponse {
         fields: [Devices.Field]? = nil,
         filter: [Devices.Filter]? = nil,
         sort: [Devices.Sort]? = nil,
-        limit: Int? = nil) -> APIEndpoint {
+        limit: Int? = nil,
+        next: PagedDocumentLinks? = nil) -> APIEndpoint {
 
         var parameters = [String: Any]()
         if let fields = fields { parameters.add(fields) }
         if let filter = filter { parameters.add(filter) }
         if let sort = sort { parameters.add(sort) }
         if let limit = limit { parameters["limit"] = limit }
-
+        if let nextCursor = next?.nextCursor { parameters["cursor"] = nextCursor }
+        
         return APIEndpoint(
             path: "devices",
             method: .get,
