@@ -27,7 +27,7 @@ extension APIEndpoint where T == DevicesResponse {
         return APIEndpoint(
             path: "devices",
             method: .get,
-            parameters: nil)
+            parameters: parameters)
     }
 }
 
