@@ -10,17 +10,22 @@ import Foundation
 extension APIEndpoint where T == BundleIdResponse {
     
     /// Register a new bundle ID for app development.
+    ///
+    /// - Parameters:
+    ///   - id: (Required) An opaque resource ID that uniquely identifies the bundle identifier.
+    ///   - name: (Required) The new name for the bundle identifier.
+    ///   - platform: (Required) The platform of the bundle identifier.
     public static func registerNewBundleId(
-        identifier: String,
+        id: String,
         name: String,
         platform: BundleIdPlatform) -> APIEndpoint {
         
         let request = BundleIdCreateRequest(data: .init(
             attributes: .init(
-            identifier: identifier,
-            name: name,
-            platform: platform,
-            seedId: nil)))
+                identifier: id,
+                name: name,
+                platform: platform,
+                seedId: nil)))
         
         return APIEndpoint(
             path: "bundleIds",

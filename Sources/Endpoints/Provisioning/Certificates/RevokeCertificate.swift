@@ -5,8 +5,6 @@
 //  Created by Patrick Balestra on 12/15/19.
 //
 
-import Foundation
-
 extension APIEndpoint where T == Void {
 
     /// Revoke a lost, stolen, compromised, or expiring signing certificate.
