@@ -12,8 +12,8 @@ public struct DeviceUpdateRequest: Codable {
 
     /// - Parameters:
     ///   - id: The opaque resource ID that uniquely identifies the resource.
-    ///   - name:
-    ///   - status:
+    ///   - name: The name of the device.
+    ///   - status: The status of the device.
     init(id: String,
          name: String,
          status: DeviceStatus) {
@@ -47,10 +47,10 @@ extension DeviceUpdateRequest.Data {
     /// Attributes that describe a resource.
     public struct Attributes: Codable {
 
-        ///
+        /// The name of the device.
         public let name: String?
 
-        ///
+        /// The status of the device.
         public let status: DeviceStatus?
     }
 }

@@ -44,13 +44,13 @@ extension DeviceCreateRequest.Data {
     /// Attributes that describe a resource.
     public struct Attributes: Codable {
 
-        ///
+        /// The name of the device.
         public let name: String?
 
-        ///
+        /// The platform of the device.
         public let platform: Platform?
 
-        ///
+        /// The unique id of the device.
         public let udid: String?
     }
 }

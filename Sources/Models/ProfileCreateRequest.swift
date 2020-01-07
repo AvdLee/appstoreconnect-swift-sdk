@@ -55,10 +55,10 @@ extension ProfileCreateRequest.Data {
     /// Attributes that describe a resource.
     public struct Attributes: Codable {
 
-        ///
+        /// The name of the profile.
         public let name: String?
 
-        ///
+        /// The type of the profile.
         public let profileType: ProfileType?
     }
 
