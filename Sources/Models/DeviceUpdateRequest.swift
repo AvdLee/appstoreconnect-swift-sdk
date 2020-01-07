@@ -10,6 +10,21 @@ import Foundation
 /// A request containing a single resource.
 public struct DeviceUpdateRequest: Codable {
 
+    public struct Data: Codable {
+
+        /// The resource's attributes.
+        public let attributes: DeviceUpdateRequest.Data.Attributes
+
+        /// The opaque resource ID that uniquely identifies the resource.
+        public let `id`: String
+
+        /// The resource type.Value: devices
+        public let type: String = "devices"
+    }
+
+    /// The object types and IDs of the related resources.
+    public let data: DeviceUpdateRequest.Data
+
     /// - Parameters:
     ///   - id: The opaque resource ID that uniquely identifies the resource.
     ///   - name: The name of the device.
@@ -23,21 +38,6 @@ public struct DeviceUpdateRequest: Codable {
                 status: status
             ),
             id: id)
-    }
-
-    /// The object types and IDs of the related resources.
-    public let data: DeviceUpdateRequest.Data
-
-    public struct Data: Codable {
-
-        /// The resource's attributes.
-        public let attributes: DeviceUpdateRequest.Data.Attributes
-
-        /// The opaque resource ID that uniquely identifies the resource.
-        public let `id`: String
-
-        /// The resource type.Value: devices
-        public let type: String = "devices"
     }
 }
 

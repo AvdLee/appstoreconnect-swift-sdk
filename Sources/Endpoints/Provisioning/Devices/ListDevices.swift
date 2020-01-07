@@ -31,7 +31,7 @@ extension APIEndpoint where T == DevicesResponse {
     }
 }
 
-public struct Devices {
+public enum Devices {
 
     public enum Field: String, CaseIterable, NestableQueryParameter {
         case devices
@@ -83,7 +83,6 @@ public struct Devices {
     }
 }
 
-
 extension Devices.Field {
 
     public enum Devices: String, CaseIterable, NestableQueryParameter {
@@ -93,4 +92,3 @@ extension Devices.Field {
         var pair: NestableQueryParameter.Pair { return (nil, rawValue) }
     }
 }
-

@@ -10,6 +10,18 @@ import Foundation
 /// A request containing a single resource.
 public struct DeviceCreateRequest: Codable {
 
+    public struct Data: Codable {
+
+        /// The resource's attributes.
+        public let attributes: DeviceCreateRequest.Data.Attributes
+
+        /// The resource type.Value: devices
+        public let type: String = "devices"
+    }
+
+    /// The resource data.
+    public let data: DeviceCreateRequest.Data
+
     /// - Parameters:
     ///   - name: The opaque resource ID that uniquely identifies the resource.
     ///   - platform:
@@ -23,18 +35,6 @@ public struct DeviceCreateRequest: Codable {
                 platform: platform,
                 udid: udid
             ))
-    }
-
-    /// The resource data.
-    public let data: DeviceCreateRequest.Data
-
-    public struct Data: Codable {
-
-        /// The resource's attributes.
-        public let attributes: DeviceCreateRequest.Data.Attributes
-
-        /// The resource type.Value: devices
-        public let type: String = "devices"
     }
 }
 

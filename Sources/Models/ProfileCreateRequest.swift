@@ -10,6 +10,21 @@ import Foundation
 /// A request containing a single resource.
 public struct ProfileCreateRequest: Codable {
 
+    public struct Data: Codable {
+
+        /// The resource's attributes.
+        public let attributes: ProfileCreateRequest.Data.Attributes
+
+        /// The types and IDs of the related data to update.
+        public let relationships: ProfileCreateRequest.Data.Relationships
+
+        /// The resource type.Value: profiles
+        public let type: String = "profiles"
+    }
+
+    /// The resource data.
+    public let data: ProfileCreateRequest.Data
+
     /// - Parameters:
     ///   - id: The opaque resource ID that uniquely identifies the resource.
     ///   - name:
@@ -31,21 +46,6 @@ public struct ProfileCreateRequest: Codable {
                 devices: .init(data: deviceIds.map { .init(id: $0) })
             )
         )
-    }
-
-    /// The resource data.
-    public let data: ProfileCreateRequest.Data
-
-    public struct Data: Codable {
-
-        /// The resource's attributes.
-        public let attributes: ProfileCreateRequest.Data.Attributes
-
-        /// The types and IDs of the related data to update.
-        public let relationships: ProfileCreateRequest.Data.Relationships
-
-        /// The resource type.Value: profiles
-        public let type: String = "profiles"
     }
 }
 

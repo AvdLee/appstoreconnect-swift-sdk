@@ -10,6 +10,17 @@ import Foundation
 /// The data structure that represents the resource.
 public struct Device: Codable {
 
+    /// Attributes that describe a certificate.
+    public struct Attributes: Codable {
+        public let devicesClass: DeviceClass?
+        public let model: String?
+        public let name: String?
+        public let platform: BundleIdPlatform?
+        public let status: DeviceStatus?
+        public let udid: String?
+        public let addedDate: Date?
+    }
+
     /// The resource's attributes.
     public let attributes: Device.Attributes
 
@@ -21,15 +32,4 @@ public struct Device: Codable {
 
     /// Navigational links that include the self-link.
     public let links: ResourceLinks<Device>
-
-    /// Attributes that describe a certificate.
-    public struct Attributes: Codable {
-        public let devicesClass: DeviceClass?
-        public let model: String?
-        public let name: String?
-        public let platform: BundleIdPlatform?
-        public let status: DeviceStatus?
-        public let udid: String?
-        public let addedDate: Date?
-    }
 }

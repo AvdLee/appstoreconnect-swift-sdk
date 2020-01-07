@@ -31,7 +31,7 @@ extension APIEndpoint where T == ProfilesResponse {
     }
 }
 
-public struct Profiles {
+public enum Profiles {
 
     public enum Field: NestableQueryParameter {
         case certificates([Certificates])
