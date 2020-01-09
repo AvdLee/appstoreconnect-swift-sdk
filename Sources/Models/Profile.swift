@@ -55,8 +55,8 @@ extension Profile.Relationships {
 
     public struct Certificates: Codable {
 
-        /// Profile.Relationships.Certificates.Data
-        public let data: Profile.Relationships.Certificates.Data?
+        /// [Profile.Relationships.Certificates.Data]
+        public let data: [Profile.Relationships.Certificates.Data]?
 
         /// Profile.Relationships.Certificates.Links
         public let links: Profile.Relationships.Certificates.Links?
@@ -79,8 +79,8 @@ extension Profile.Relationships {
 
     public struct BundleId: Codable {
 
-        /// [Profile.Relationships.BundleId.Data]
-        public let data: [Profile.Relationships.BundleId.Data]?
+        /// Profile.Relationships.BundleId.Data
+        public let data: Profile.Relationships.BundleId.Data?
 
         /// Profile.Relationships.BundleId.Links
         public let links: Profile.Relationships.BundleId.Links?
