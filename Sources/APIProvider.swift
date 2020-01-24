@@ -177,7 +177,7 @@ private extension APIProvider {
         switch result {
         case .success(let response):
             guard 200..<300 ~= response.statusCode else {
-                return .failure(Error.requestFailure(response.statusCode, nil))
+                return .failure(Error.requestFailure(response.statusCode, response.data))
             }
 
             return .success(())
