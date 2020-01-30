@@ -1,49 +1,12 @@
+# Fastlane requirements
 fastlane_version "1.109.0"
 
 import "./../Submodules/WeTransfer-iOS-CI/Fastlane/Fastfile"
 
-desc "Clean the derived data, run tests validate the changes"
+desc "Run the tests and prepare for Danger"
 lane :test do |options|
-
-  # Set timeout to prevent xcodebuild -list -project to take to much retries.
-  ENV["FASTLANE_XCODE_LIST_TIMEOUT"] = "120"
-  ENV["WORKSPACE_PATH"] = "Example/CocoaPods-AppStoreConnect-Swift-SDK/AppStoreConnect-Swift-SDK.xcworkspace"
-  begin
-    ENV["XCPRETTY_JSON_FILE_OUTPUT"] = "build/reports/#{options[:scheme]}_Tests.json"
-
-    # Clean old reports so they're not reported for no reason.
-    reports_dir = "./../build/reports"
-    FileUtils.rm_rf Dir.glob("#{reports_dir}/*") if File.directory?(reports_dir)
-
-    FastlaneCore::CommandExecutor.execute(
-      command: "swift package clean & swift test -Xswiftc -target -Xswiftc x86_64-apple-macosx10.12",
-      print_all: true,
-      print_command: true
-    )
-
-    scan(
-      scheme: "AppStoreConnect-Swift-SDK-Example",
-      workspace: "Example/CocoaPods-AppStoreConnect-Swift-SDK/AppStoreConnect-Swift-SDK.xcworkspace",
-      device: "iPhone 11",
-      code_coverage: true,
-      disable_concurrent_testing: true,
-      fail_build: false,
-      skip_slack: true,
-      clean: true,
-      formatter: "xcpretty-json-formatter",
-      xcargs: "-UseNewBuildSystem=YES CODE_SIGN_IDENTITY="" CODE_SIGNING_REQUIRED=NO ONLY_ACTIVE_ARCH=NO",
-      result_bundle: true,
-      output_directory: "build/reports/"
-    )
-  rescue => ex
-    UI.important("Tests failed for #{ex}")
-  end
-
-  begin
-    trainer(path: "build/reports/", output_directory: "build/reports/", extension: ".xml", fail_build: false)
-  rescue => ex
-    UI.important("Trainer report generation failed #{ex}")
-  end
-
-  validate_changes(scheme: "AppStoreConnect-Swift-SDK-Example", project_name: "AppStoreConnect-Swift-SDK", xcov_targets: "AppStoreConnect_Swift_SDK.framework")
+  test_project(
+    workspace: "Example/CocoaPods-AppStoreConnect-Swift-SDK/AppStoreConnect-Swift-SDK.xcworkspace", 
+    scheme: "AppStoreConnect-Swift-SDK-Example")
 end
+
