@@ -9,4 +9,5 @@
 - Add support for all [Devices](https://developer.apple.com/documentation/appstoreconnectapi/devices) endpoints. (@BalestraPatrick)
 - Updated CI to make sure PR requests are reviewed using Danger. (@AvdLee)
 - Removed custom Result type. (@ruipfcosta)
-- Fixed typo for downloadSalesAndTrendsReports ([Issue 42](https://github.com/AvdLee/appstoreconnect-swift-sdk/issues/42))
+- Fixed typo for downloadSalesAndTrendsReports ([Issue 42](https://github.com/AvdLee/appstoreconnect-swift-sdk/issues/42)) (@hexagons)
+- Adds response data for requests with a void result type. (@hexagons)
