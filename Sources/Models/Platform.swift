@@ -13,4 +13,5 @@ public enum Platform: String, Codable {
     case macOs = "MAC_OS"
     case tvOs = "TV_OS"
     case watchOs = "WATCH_OS"
+    case universal = "UNIVERSAL"
 }
