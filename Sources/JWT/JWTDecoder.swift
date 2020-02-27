@@ -11,7 +11,7 @@ internal extension JWT.Token {
     var isExpired: Bool {
         do {
             let decodedBearer = try JWTDecoder.decode(self)
-            return decodedBearer.expiryDate.compare(Date()) != ComparisonResult.orderedDescending
+            return decodedBearer.expiryDate.timeIntervalSince(Date()) < 60 * 5
         } catch {
             return true
         }
