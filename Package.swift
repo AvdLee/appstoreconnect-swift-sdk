@@ -19,7 +19,6 @@ let package = Package(
         ],
     targets: [
         // dev .target(name: "DangerDependencies", dependencies: ["Danger", "WeTransferPRLinter"], path: "Submodules/WeTransfer-iOS-CI/Danger-Swift", sources: ["DangerFakeSource.swift"]),
-        .target(name: "AppStoreConnect-Swift-SDK", path: "Sources"),
-        .testTarget(name: "AppStoreConnect-Swift-SDKTests", dependencies: ["AppStoreConnect-Swift-SDK"], path: "Example/CocoaPods-AppStoreConnect-Swift-SDK/Tests")
+        .target(name: "AppStoreConnect-Swift-SDK", path: "Sources")
     ]
 )
