@@ -49,7 +49,7 @@ public struct ProfileCreateRequest: Codable {
     }
 }
 
-/// MARK: ProfileCreateRequest.Data
+// MARK: ProfileCreateRequest.Data
 extension ProfileCreateRequest.Data {
 
     /// Attributes that describe a resource.
@@ -75,7 +75,7 @@ extension ProfileCreateRequest.Data {
     }
 }
 
-/// MARK: ProfileCreateRequest.Data.Relationships
+// MARK: ProfileCreateRequest.Data.Relationships
 extension ProfileCreateRequest.Data.Relationships {
 
     public struct BundleId: Codable {
@@ -97,7 +97,7 @@ extension ProfileCreateRequest.Data.Relationships {
     }
 }
 
-/// MARK: ProfileCreateRequest.Data.Relationships.BundleId
+// MARK: ProfileCreateRequest.Data.Relationships.BundleId
 extension ProfileCreateRequest.Data.Relationships.BundleId {
 
     public struct Data: Codable {
@@ -110,7 +110,7 @@ extension ProfileCreateRequest.Data.Relationships.BundleId {
     }
 }
 
-/// MARK: ProfileCreateRequest.Data.Relationships.Certificates
+// MARK: ProfileCreateRequest.Data.Relationships.Certificates
 extension ProfileCreateRequest.Data.Relationships.Certificates {
 
     public struct Data: Codable {
@@ -123,7 +123,7 @@ extension ProfileCreateRequest.Data.Relationships.Certificates {
     }
 }
 
-/// MARK: ProfileCreateRequest.Data.Relationships.Devices
+// MARK: ProfileCreateRequest.Data.Relationships.Devices
 extension ProfileCreateRequest.Data.Relationships.Devices {
 
     public struct Data: Codable {

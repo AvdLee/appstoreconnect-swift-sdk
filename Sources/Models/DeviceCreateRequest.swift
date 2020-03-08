@@ -38,7 +38,7 @@ public struct DeviceCreateRequest: Codable {
     }
 }
 
-/// MARK: DeviceCreateRequest.Data
+// MARK: DeviceCreateRequest.Data
 extension DeviceCreateRequest.Data {
 
     /// Attributes that describe a resource.

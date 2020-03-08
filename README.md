@@ -87,7 +87,7 @@ Once you have your Swift package set up, adding the SDK as a dependency is as ea
 
 ```swift
 dependencies: [
-    .package(url: "https://github.com/AvdLee/appstoreconnect-swift-sdk.git", .upToNextMajor(from: "0.9.0"))
+    .package(url: "https://github.com/AvdLee/appstoreconnect-swift-sdk.git", .upToNextMajor(from: "1.0.0"))
 ]
 ```
 
@@ -101,3 +101,7 @@ dependencies: [
 ## License
 
 **App Store Connect Swift SDK** is available under the MIT license, and uses source code from open source projects. See the [LICENSE](https://github.com/AvdLee/appstoreconnect-swift-sdk/blob/master/LICENSE) file for more info.
+
+## Author
+
+This project is originally created by [Antoine van der Lee](https://www.twitter.com/twannl) but has a lot of [great contributors](https://github.com/AvdLee/appstoreconnect-swift-sdk/graphs/contributors). We're open for contributions of any kind to make this project even better.
