@@ -6,20 +6,6 @@
 	objectVersion = 46;
 	objects = {
 
-/* Begin PBXAggregateTarget section */
-		"AppStoreConnect-Swift-SDK::AppStoreConnect-Swift-SDKPackageTests::ProductTarget" /* AppStoreConnect-Swift-SDKPackageTests */ = {
-			isa = PBXAggregateTarget;
-			buildConfigurationList = OBJ_897 /* Build configuration list for PBXAggregateTarget "AppStoreConnect-Swift-SDKPackageTests" */;
-			buildPhases = (
-			);
-			dependencies = (
-				OBJ_900 /* PBXTargetDependency */,
-			);
-			name = "AppStoreConnect-Swift-SDKPackageTests";
-			productName = "AppStoreConnect-Swift-SDKPackageTests";
-		};
-/* End PBXAggregateTarget section */
-
 /* Begin PBXBuildFile section */
 		50996AB4241500190044308C /* Models+Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50996A11241500190044308C /* Models+Tests.swift */; };
 		50996AB5241500190044308C /* DeleteBetaTesterTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50996A15241500190044308C /* DeleteBetaTesterTests.swift */; };
@@ -161,7 +147,6 @@
 		50996B3D241500190044308C /* JWTTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50996AAE241500190044308C /* JWTTests.swift */; };
 		50996B3E241500190044308C /* APIProviderTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50996AAF241500190044308C /* APIProviderTests.swift */; };
 		50996B3F241500190044308C /* JWTRequestsAuthenticatorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50996AB0241500190044308C /* JWTRequestsAuthenticatorTests.swift */; };
-		50996B40241500190044308C /* XCTestManifests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50996AB1241500190044308C /* XCTestManifests.swift */; };
 		50996B41241500190044308C /* QueryParameterTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50996AB2241500190044308C /* QueryParameterTests.swift */; };
 		OBJ_1049 /* AppStoreConnect_Swift_SDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = "AppStoreConnect-Swift-SDK::AppStoreConnect-Swift-SDK::Product" /* AppStoreConnect_Swift_SDK.framework */; };
 		OBJ_554 /* APIProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_8 /* APIProvider.swift */; };
@@ -499,7 +484,6 @@
 		OBJ_886 /* NestableQueryParameter.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_367 /* NestableQueryParameter.swift */; };
 		OBJ_887 /* RequestExecutor.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_368 /* RequestExecutor.swift */; };
 		OBJ_888 /* Result.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_369 /* Result.swift */; };
-		OBJ_895 /* Package.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_6 /* Package.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -509,13 +493,6 @@
 			proxyType = 1;
 			remoteGlobalIDString = "AppStoreConnect-Swift-SDK::AppStoreConnect-Swift-SDK";
 			remoteInfo = "AppStoreConnect-Swift-SDK";
-		};
-		50996A102414FF730044308C /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = OBJ_1 /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = "AppStoreConnect-Swift-SDK::AppStoreConnect-Swift-SDKTests";
-			remoteInfo = "AppStoreConnect-Swift-SDKTests";
 		};
 /* End PBXContainerItemProxy section */
 
@@ -660,7 +637,6 @@
 		50996AAE241500190044308C /* JWTTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = JWTTests.swift; path = Tests/JWTTests.swift; sourceTree = SOURCE_ROOT; };
 		50996AAF241500190044308C /* APIProviderTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = APIProviderTests.swift; path = Tests/APIProviderTests.swift; sourceTree = SOURCE_ROOT; };
 		50996AB0241500190044308C /* JWTRequestsAuthenticatorTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = JWTRequestsAuthenticatorTests.swift; path = Tests/JWTRequestsAuthenticatorTests.swift; sourceTree = SOURCE_ROOT; };
-		50996AB1241500190044308C /* XCTestManifests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = XCTestManifests.swift; path = Tests/XCTestManifests.swift; sourceTree = SOURCE_ROOT; };
 		50996AB2241500190044308C /* QueryParameterTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = QueryParameterTests.swift; path = Tests/QueryParameterTests.swift; sourceTree = SOURCE_ROOT; };
 		"AppStoreConnect-Swift-SDK::AppStoreConnect-Swift-SDK::Product" /* AppStoreConnect_Swift_SDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = AppStoreConnect_Swift_SDK.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		"AppStoreConnect-Swift-SDK::AppStoreConnect-Swift-SDKTests::Product" /* AppStoreConnect-Swift-SDKTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; path = "AppStoreConnect-Swift-SDKTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -1756,7 +1732,6 @@
 				50996AA8241500190044308C /* Models */,
 				50996A11241500190044308C /* Models+Tests.swift */,
 				50996AB2241500190044308C /* QueryParameterTests.swift */,
-				50996AB1241500190044308C /* XCTestManifests.swift */,
 			);
 			name = Tests;
 			path = "Example/CocoaPods-AppStoreConnect-Swift-SDK/Tests";
@@ -1955,20 +1930,6 @@
 			productReference = "AppStoreConnect-Swift-SDK::AppStoreConnect-Swift-SDKTests::Product" /* AppStoreConnect-Swift-SDKTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
-		"AppStoreConnect-Swift-SDK::SwiftPMPackageDescription" /* AppStoreConnect-Swift-SDKPackageDescription */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = OBJ_891 /* Build configuration list for PBXNativeTarget "AppStoreConnect-Swift-SDKPackageDescription" */;
-			buildPhases = (
-				OBJ_894 /* Sources */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-			);
-			name = "AppStoreConnect-Swift-SDKPackageDescription";
-			productName = "AppStoreConnect-Swift-SDKPackageDescription";
-			productType = "com.apple.product-type.framework";
-		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -1996,8 +1957,6 @@
 			projectRoot = "";
 			targets = (
 				"AppStoreConnect-Swift-SDK::AppStoreConnect-Swift-SDK" /* AppStoreConnect-Swift-SDK */,
-				"AppStoreConnect-Swift-SDK::SwiftPMPackageDescription" /* AppStoreConnect-Swift-SDKPackageDescription */,
-				"AppStoreConnect-Swift-SDK::AppStoreConnect-Swift-SDKPackageTests::ProductTarget" /* AppStoreConnect-Swift-SDKPackageTests */,
 				"AppStoreConnect-Swift-SDK::AppStoreConnect-Swift-SDKTests" /* AppStoreConnect-Swift-SDKTests */,
 			);
 		};
@@ -2346,14 +2305,6 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		OBJ_894 /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 0;
-			files = (
-				OBJ_895 /* Package.swift in Sources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 		OBJ_905 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 0;
@@ -2375,7 +2326,6 @@
 				50996AF6241500190044308C /* ListBetaAppLocalizationsTests.swift in Sources */,
 				50996ACC241500190044308C /* ReadAppInformationOfAppEncryptionDeclaration.swift in Sources */,
 				50996B25241500190044308C /* DeleteBetaGroupTests.swift in Sources */,
-				50996B40241500190044308C /* XCTestManifests.swift in Sources */,
 				50996AED241500190044308C /* ModifyBetaBuildLocalizationTests.swift in Sources */,
 				50996AFC241500190044308C /* ReadBetaAppLocalizationInformationTests.swift in Sources */,
 				50996AE0241500190044308C /* ReadAppInformationOfBuildTests.swift in Sources */,
@@ -2511,11 +2461,6 @@
 			target = "AppStoreConnect-Swift-SDK::AppStoreConnect-Swift-SDK" /* AppStoreConnect-Swift-SDK */;
 			targetProxy = 50996A0F2414FF470044308C /* PBXContainerItemProxy */;
 		};
-		OBJ_900 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = "AppStoreConnect-Swift-SDK::AppStoreConnect-Swift-SDKTests" /* AppStoreConnect-Swift-SDKTests */;
-			targetProxy = 50996A102414FF730044308C /* PBXContainerItemProxy */;
-		};
 /* End PBXTargetDependency section */
 
 /* Begin XCBuildConfiguration section */
@@ -2626,36 +2571,6 @@
 			};
 			name = Release;
 		};
-		OBJ_892 /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				LD = /usr/bin/true;
-				OTHER_SWIFT_FLAGS = "-swift-version 5 -I $(TOOLCHAIN_DIR)/usr/lib/swift/pm/4_2 -target x86_64-apple-macosx10.10 -sdk /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.15.sdk -package-description-version 5.1";
-				SWIFT_VERSION = 5.0;
-			};
-			name = Debug;
-		};
-		OBJ_893 /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				LD = /usr/bin/true;
-				OTHER_SWIFT_FLAGS = "-swift-version 5 -I $(TOOLCHAIN_DIR)/usr/lib/swift/pm/4_2 -target x86_64-apple-macosx10.10 -sdk /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.15.sdk -package-description-version 5.1";
-				SWIFT_VERSION = 5.0;
-			};
-			name = Release;
-		};
-		OBJ_898 /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-			};
-			name = Debug;
-		};
-		OBJ_899 /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-			};
-			name = Release;
-		};
 		OBJ_903 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -2724,24 +2639,6 @@
 			buildConfigurations = (
 				OBJ_551 /* Debug */,
 				OBJ_552 /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
-		OBJ_891 /* Build configuration list for PBXNativeTarget "AppStoreConnect-Swift-SDKPackageDescription" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				OBJ_892 /* Debug */,
-				OBJ_893 /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
-		OBJ_897 /* Build configuration list for PBXAggregateTarget "AppStoreConnect-Swift-SDKPackageTests" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				OBJ_898 /* Debug */,
-				OBJ_899 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

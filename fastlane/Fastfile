@@ -6,7 +6,6 @@ import "./../Submodules/WeTransfer-iOS-CI/Fastlane/Fastfile"
 desc "Run the tests and prepare for Danger"
 lane :test do |options|
   test_project(
-    workspace: "Example/CocoaPods-AppStoreConnect-Swift-SDK/AppStoreConnect-Swift-SDK.xcworkspace", 
-    scheme: "AppStoreConnect-Swift-SDK-Example")
+    project_name: "AppStoreConnect-Swift-SDK", 
+    scheme: "AppStoreConnect-Swift-SDK")
 end
-

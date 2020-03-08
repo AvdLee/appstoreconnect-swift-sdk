@@ -23,7 +23,7 @@ final class DownloadSalesAndTrendsReportsTests: XCTestCase {
         XCTAssertEqual(request?.httpMethod, "GET")
         
         let absoluteString = request?.url?.absoluteString
-        let expected = "https://api.appstoreconnect.apple.com/v1/salesReports?filter%5Bfrequency%5D=DAILY%2CWEEKLY%2CMONTHLY%2CYEARLY&filter%5BreportSubType%5D=SUMMARY%2CDETAILED%2COPT_IN&filter%5BreportType%5D=SALES%2CPRE_ORDER%2CNEWSSTAND%2CSUBSCRIPTION%2CSUBSCRIPTION_EVENT%2CSUBSCRIBER&filter%5Breportdate%5D=reportDate&filter%5Bvendornumber%5D=vendorNumber&filter%5Bversion%5D=version"
+        let expected = "https://api.appstoreconnect.apple.com/v1/salesReports?filter%5Bfrequency%5D=DAILY%2CWEEKLY%2CMONTHLY%2CYEARLY&filter%5BreportDate%5D=reportDate&filter%5BreportSubType%5D=SUMMARY%2CDETAILED%2COPT_IN&filter%5BreportType%5D=SALES%2CPRE_ORDER%2CNEWSSTAND%2CSUBSCRIPTION%2CSUBSCRIPTION_EVENT%2CSUBSCRIBER&filter%5BvendorNumber%5D=vendorNumber&filter%5Bversion%5D=version"
         XCTAssertEqual(absoluteString, expected)
     }
 }
