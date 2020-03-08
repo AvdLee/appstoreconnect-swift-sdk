@@ -41,7 +41,7 @@ public struct DeviceUpdateRequest: Codable {
     }
 }
 
-/// MARK: BundleIdCapabilityCreateRequest.Data
+// MARK: BundleIdCapabilityCreateRequest.Data
 extension DeviceUpdateRequest.Data {
 
     /// Attributes that describe a resource.
