@@ -1,12 +1,13 @@
-## Changelog
+### 0.9.0
+This is the initial release of the SDK, including the following features:
 
-### Next
-- Updated CI to make sure PR requests are reviewed using Danger. (@AvdLee)
-- Add support for all [Certificates](https://developer.apple.com/documentation/appstoreconnectapi/certificates) endpoints. (@BalestraPatrick)
-- Add support for all [Bundle ID](https://developer.apple.com/documentation/appstoreconnectapi/bundle_ids) endpoints. (@ruipfcosta, @BalestraPatrick)
-- Add support for all [Bundle ID Capabilities](https://developer.apple.com/documentation/appstoreconnectapi/bundle_id_capabilities) endpoints. (@BalestraPatrick)
-- Add support for all [Profiles](https://developer.apple.com/documentation/appstoreconnectapi/profiles) endpoints. (@@BalestraPatrick)
-- Add support for all [Devices](https://developer.apple.com/documentation/appstoreconnectapi/devices) endpoints. (@BalestraPatrick)
-- Updated CI to make sure PR requests are reviewed using Danger. (@AvdLee)
-- Removed custom Result type. (@ruipfcosta)
-- Fixed typo for downloadSalesAndTrendsReports ([Issue 42](https://github.com/AvdLee/appstoreconnect-swift-sdk/issues/42))
+- [x] Configuration with API Key
+- [x] APIProvider with endpoints structure
+- [x] Add models for all endpoints
+- [x] JWT Logic to sign requests
+- [x] Get started section in the readme
+- [x] Support for Mac
+- [x] TestFlight API implementation
+- [x] Users and Roles implementation
+- [x] Sales and Finances implementation
+- [x] Replace Alamofire dependency with own simple URLSession implementation
