@@ -26,7 +26,7 @@ public final class DefaultRequestExecutor: RequestExecutor {
     /// - Parameters:
     ///   - urlRequest: The URLRequest to execute
     ///   - completion: A result type containing eiter the response or an error
-    public func execute(_ urlRequest: URLRequest, completion: @escaping (Result<Response>) -> Void) {
+    public func execute(_ urlRequest: URLRequest, completion: @escaping (Result<Response, Swift.Error>) -> Void) {
         urlSession.dataTask(with: urlRequest) { data, response, error in
             completion(mapResponse(data: data, urlResponse: response, error: error))
         }.resume()
@@ -37,7 +37,7 @@ public final class DefaultRequestExecutor: RequestExecutor {
     /// - Parameters:
     ///   - url: The URL where the resource is located
     ///   - completion: A result type containing eiter the response or an error
-    public func retrieve(_ url: URL, completion: @escaping (Result<Response>) -> Void) {
+    public func retrieve(_ url: URL, completion: @escaping (Result<Response, Swift.Error>) -> Void) {
         urlSession.dataTask(with: url) { data, response, error in
             completion(mapResponse(data: data, urlResponse: response, error: error))
         }.resume()
@@ -53,7 +53,7 @@ public final class DefaultRequestExecutor: RequestExecutor {
 ///   - urlResponse: URLResponse returned from an URLSession data task
 ///   - error: Error returned from an URLSession data task
 ///   - completion: A result type containing eiter the response or an error
-func mapResponse(data: Data?, urlResponse: URLResponse?, error: Error?) -> Result<Response> {
+func mapResponse(data: Data?, urlResponse: URLResponse?, error: Error?) -> Result<Response, Swift.Error> {
     if let error = error {
         return .failure(error)
     } else {

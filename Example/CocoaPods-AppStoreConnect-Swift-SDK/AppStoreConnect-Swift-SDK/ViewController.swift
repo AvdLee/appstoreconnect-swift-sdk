@@ -5,7 +5,6 @@
 //  Created by ajvanderlee@gmail.com on 11/08/2018.
 //  Copyright (c) 2018 ajvanderlee@gmail.com. All rights reserved.
 //
-//  swiftlint:disable nslog_prohibited
 
 import UIKit
 import AppStoreConnect_Swift_SDK
@@ -19,6 +18,8 @@ final class ViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+
+        print("Fetching apps..")
 
         let endpoint = APIEndpoint.apps(
             select: [.apps([.name]), .builds([.version, .processingState, .uploadedDate])],

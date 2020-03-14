@@ -6,7 +6,8 @@
 //
 
 import Foundation
-    /// String that represents a build's availability for external testing.
+
+/// String that represents a build's availability for external testing.
 public enum ExternalBetaState: String, Codable {
     case processing = "PROCESSING"
     case processingException = "PROCESSING_EXCEPTION"

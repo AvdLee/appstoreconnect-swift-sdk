@@ -1,0 +1,19 @@
+name: Mark stale issues and pull requests
+
+on:
+  schedule:
+  - cron: "0 0 * * *"
+
+jobs:
+  stale:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/stale@v1
+      with:
+        repo-token: ${{ secrets.GITHUB_TOKEN }}
+        stale-issue-label: 'Stale'
+        stale-issue-message: 'This issue is stale because it has been open for 30 days with no activity. Remove the Stale label or comment or this will be closed in 10 days.'
+        stale-pr-label: 'Stale'
+        stale-pr-message: 'This PR is stale because it has been open for 30 days with no activity. Remove the Stale label or comment or this will be closed in 10 days.'
+        days-before-stale: 30
+        days-before-close: 10
