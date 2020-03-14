@@ -33,6 +33,6 @@ extension APIEndpoint where T == UserResponse {
             path: "users/\(id)",
             method: .patch,
             parameters: nil,
-            body: try? JSONEncoder().encode(request))
+            body: request.erased)
     }
 }

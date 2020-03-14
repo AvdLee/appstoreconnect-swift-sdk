@@ -22,7 +22,7 @@ extension APIEndpoint where T == Void {
             path: "betaGroups/\(id)/relationships/betaTesters",
             method: .delete,
             parameters: nil,
-            body: try? JSONEncoder().encode(request)
+            body: request.erased
         )
     }
 }

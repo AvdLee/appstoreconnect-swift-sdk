@@ -27,6 +27,6 @@ extension APIEndpoint where T == CertificateResponse {
             path: "certificates",
             method: .post,
             parameters: nil,
-            body: try? JSONEncoder().encode(request))
+            body: request.erased)
     }
 }

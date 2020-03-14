@@ -22,6 +22,6 @@ extension APIEndpoint where T == Void {
             path: "betaTesters/\(id)/relationships/apps",
             method: .delete,
             parameters: nil,
-            body: try? JSONEncoder().encode(linkages))
+            body: linkages.erased)
     }
 }

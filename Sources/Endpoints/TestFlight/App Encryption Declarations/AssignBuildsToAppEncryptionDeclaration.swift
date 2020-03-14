@@ -22,6 +22,6 @@ extension APIEndpoint where T == Void {
             path: "appEncryptionDeclarations/\(id)/relationships/builds",
             method: .post,
             parameters: nil,
-            body: try? JSONEncoder().encode(request))
+            body: request.erased)
     }
 }

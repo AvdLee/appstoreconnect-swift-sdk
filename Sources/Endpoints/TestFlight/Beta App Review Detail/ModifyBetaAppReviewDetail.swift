@@ -45,6 +45,6 @@ extension APIEndpoint where T == BetaAppReviewDetailResponse {
             path: "betaAppReviewDetails/\(id)",
             method: .patch,
             parameters: nil,
-            body: try? JSONEncoder().encode(request))
+            body: request.erased)
     }
 }

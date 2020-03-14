@@ -29,6 +29,6 @@ extension APIEndpoint where T == BuildResponse {
             path: "builds/\(id)",
             method: .patch,
             parameters: nil,
-            body: try? JSONEncoder().encode(request))
+            body: request.erased)
     }
 }

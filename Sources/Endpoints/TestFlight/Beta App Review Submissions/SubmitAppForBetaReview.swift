@@ -19,6 +19,6 @@ extension APIEndpoint where T == BetaAppReviewSubmissionResponse {
             path: "betaAppReviewSubmissions",
             method: .post,
             parameters: nil,
-            body: try? JSONEncoder().encode(request))
+            body: request.erased)
     }
 }

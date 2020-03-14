@@ -25,6 +25,6 @@ extension APIEndpoint where T == DeviceResponse {
             path: "devices/\(id)",
             method: .patch,
             parameters: nil,
-            body: try? JSONEncoder().encode(request))
+            body: request.erased)
     }
 }

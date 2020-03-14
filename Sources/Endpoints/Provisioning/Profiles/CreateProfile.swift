@@ -29,6 +29,6 @@ extension APIEndpoint where T == ProfileResponse {
             path: "profiles",
             method: .post,
             parameters: nil,
-            body: try? JSONEncoder().encode(request))
+            body: request.erased)
     }
 }

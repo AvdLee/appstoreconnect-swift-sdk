@@ -19,6 +19,6 @@ extension APIEndpoint where T == BuildBetaNotificationResponse {
             path: "buildBetaNotifications",
             method: .post,
             parameters: nil,
-            body: try? JSONEncoder().encode(request))
+            body: request.erased)
     }
 }

@@ -22,6 +22,6 @@ extension APIEndpoint where T == BetaTesterInvitationResponse {
             path: "betaTesterInvitations",
             method: .post,
             parameters: nil,
-            body: try? JSONEncoder().encode(request))
+            body: request.erased)
     }
 }

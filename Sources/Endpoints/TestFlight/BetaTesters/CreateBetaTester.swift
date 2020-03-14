@@ -33,7 +33,7 @@ extension APIEndpoint where T == BetaTesterResponse {
             path: "betaTesters",
             method: .post,
             parameters: nil,
-            body: try? JSONEncoder().encode(betaTester))
+            body: betaTester.erased)
     }
     
     /// Create a beta tester assigned to a group, a build, or an app.
@@ -60,6 +60,6 @@ extension APIEndpoint where T == BetaTesterResponse {
             path: "betaTesters",
             method: .post,
             parameters: nil,
-            body: try? JSONEncoder().encode(betaTester))
+            body: betaTester.erased)
     }
 }

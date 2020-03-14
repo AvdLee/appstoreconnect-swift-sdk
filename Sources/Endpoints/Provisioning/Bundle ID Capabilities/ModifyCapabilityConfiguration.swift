@@ -30,6 +30,6 @@ extension APIEndpoint where T == BundleIdCapabilityResponse {
             path: "bundleIdCapabilities/\(id)",
             method: .patch,
             parameters: nil,
-            body: try? JSONEncoder().encode(request))
+            body: request.erased)
     }
 }

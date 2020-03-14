@@ -20,9 +20,9 @@ public struct APIEndpoint<T> {
     let parameters: [String: Any]?
     
     /// The body to send with the request. Can be `nil`.
-    let body: Data?
+    let body: AnyEncodable?
     
-    init(path: String, method: HTTPMethod = .get, parameters: [String: Any]? = nil, body: Data? = nil) {
+    init(path: String, method: HTTPMethod = .get, parameters: [String: Any]? = nil, body: AnyEncodable? = nil) {
         self.path = path
         self.method = method
         self.parameters = parameters
@@ -50,7 +50,7 @@ extension APIEndpoint {
             if urlRequest.value(forHTTPHeaderField: "Content-Type") == nil {
                 urlRequest.setValue("application/json", forHTTPHeaderField: "Content-Type")
             }
-            urlRequest.httpBody = body
+            urlRequest.httpBody = try JSONEncoder().encode(body)
         }
         return urlRequest
     }

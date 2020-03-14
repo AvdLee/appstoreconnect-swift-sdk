@@ -21,6 +21,6 @@ extension APIEndpoint where T == Void {
         return APIEndpoint(path: "betaTesters/\(id)/relationships/builds",
             method: .post,
             parameters: nil,
-            body: try? JSONEncoder().encode(linkages))
+            body: linkages.erased)
     }
 }

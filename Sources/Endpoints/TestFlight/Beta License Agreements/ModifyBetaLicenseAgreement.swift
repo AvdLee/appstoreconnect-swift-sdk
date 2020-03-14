@@ -22,6 +22,6 @@ extension APIEndpoint where T == BetaLicenseAgreementResponse {
             path: "betaLicenseAgreements/\(id)",
             method: .patch,
             parameters: nil,
-            body: try? JSONEncoder().encode(request))
+            body: request.erased)
     }
 }

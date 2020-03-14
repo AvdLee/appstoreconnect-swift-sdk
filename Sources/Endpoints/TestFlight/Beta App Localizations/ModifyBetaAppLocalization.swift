@@ -36,6 +36,6 @@ extension APIEndpoint where T == BetaAppLocalizationResponse {
             path: "betaAppLocalizations/\(id)",
             method: .patch,
             parameters: nil,
-            body: try? JSONEncoder().encode(request))
+            body: request.erased)
     }
 }

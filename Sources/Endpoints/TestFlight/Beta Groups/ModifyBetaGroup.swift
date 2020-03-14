@@ -33,6 +33,6 @@ extension APIEndpoint where T == BetaGroupResponse {
             path: "betaGroups/\(id)",
             method: .patch,
             parameters: nil,
-            body: try? JSONEncoder().encode(request))
+            body: request.erased)
     }
 }

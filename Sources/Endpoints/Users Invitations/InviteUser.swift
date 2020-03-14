@@ -39,6 +39,6 @@ extension APIEndpoint where T == UserInvitationResponse {
             path: "userInvitations",
             method: .post,
             parameters: nil,
-            body: try? JSONEncoder().encode(request))
+            body: request.erased)
     }
 }
