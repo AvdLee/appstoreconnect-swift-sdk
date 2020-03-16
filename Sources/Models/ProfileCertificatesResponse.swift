@@ -2,7 +2,7 @@
 //  ProfileCertificatesResponse.swift
 //  AppStoreConnect-Swift-SDK
 //
-//  Created by Kristof Van Landschoot on 03/13/20.
+//  Created by Kristof Van Landschoot on 03/14/20.
 //
 
 import Foundation
