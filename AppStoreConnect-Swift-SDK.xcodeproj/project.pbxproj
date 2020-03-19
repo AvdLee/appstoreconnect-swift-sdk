@@ -148,6 +148,7 @@
 		50996B3E241500190044308C /* APIProviderTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50996AAF241500190044308C /* APIProviderTests.swift */; };
 		50996B3F241500190044308C /* JWTRequestsAuthenticatorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50996AB0241500190044308C /* JWTRequestsAuthenticatorTests.swift */; };
 		50996B41241500190044308C /* QueryParameterTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50996AB2241500190044308C /* QueryParameterTests.swift */; };
+		6D050F07241BE65700CBDABA /* ProfileCertificatesResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D050F06241BE65700CBDABA /* ProfileCertificatesResponse.swift */; };
 		OBJ_1049 /* AppStoreConnect_Swift_SDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = "AppStoreConnect-Swift-SDK::AppStoreConnect-Swift-SDK::Product" /* AppStoreConnect_Swift_SDK.framework */; };
 		OBJ_554 /* APIProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_8 /* APIProvider.swift */; };
 		OBJ_555 /* DefaultRequestExecutor.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_9 /* DefaultRequestExecutor.swift */; };
@@ -638,6 +639,7 @@
 		50996AAF241500190044308C /* APIProviderTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = APIProviderTests.swift; path = Tests/APIProviderTests.swift; sourceTree = SOURCE_ROOT; };
 		50996AB0241500190044308C /* JWTRequestsAuthenticatorTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = JWTRequestsAuthenticatorTests.swift; path = Tests/JWTRequestsAuthenticatorTests.swift; sourceTree = SOURCE_ROOT; };
 		50996AB2241500190044308C /* QueryParameterTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = QueryParameterTests.swift; path = Tests/QueryParameterTests.swift; sourceTree = SOURCE_ROOT; };
+		6D050F06241BE65700CBDABA /* ProfileCertificatesResponse.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfileCertificatesResponse.swift; sourceTree = "<group>"; };
 		"AppStoreConnect-Swift-SDK::AppStoreConnect-Swift-SDK::Product" /* AppStoreConnect_Swift_SDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = AppStoreConnect_Swift_SDK.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		"AppStoreConnect-Swift-SDK::AppStoreConnect-Swift-SDKTests::Product" /* AppStoreConnect-Swift-SDKTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; path = "AppStoreConnect-Swift-SDKTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		OBJ_10 /* Endpoint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Endpoint.swift; sourceTree = "<group>"; };
@@ -1660,6 +1662,7 @@
 				OBJ_345 /* PrereleaseVersionResponse.swift */,
 				OBJ_346 /* Profile.swift */,
 				OBJ_347 /* ProfileBundleIdLinkageResponse.swift */,
+				6D050F06241BE65700CBDABA /* ProfileCertificatesResponse.swift */,
 				OBJ_348 /* ProfileCreateRequest.swift */,
 				OBJ_349 /* ProfileDevicesLinkagesResponse.swift */,
 				OBJ_350 /* ProfileResponse.swift */,
@@ -1746,7 +1749,7 @@
 			path = "Sales and Finance Reports";
 			sourceTree = "<group>";
 		};
-		OBJ_5 /*  */ = {
+		OBJ_5 = {
 			isa = PBXGroup;
 			children = (
 				OBJ_546 /* README.md */,
@@ -1758,7 +1761,6 @@
 				OBJ_370 /* Tests */,
 				OBJ_534 /* Products */,
 			);
-			name = "";
 			sourceTree = "<group>";
 		};
 		OBJ_51 /* TestFlight */ = {
@@ -1951,7 +1953,7 @@
 			knownRegions = (
 				en,
 			);
-			mainGroup = OBJ_5 /*  */;
+			mainGroup = OBJ_5;
 			productRefGroup = OBJ_534 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -2053,6 +2055,7 @@
 				OBJ_637 /* GetAppResourceIDForBetaGroup.swift in Sources */,
 				OBJ_638 /* GetBetaTesterIDsInBetaGroup.swift in Sources */,
 				OBJ_639 /* GetBuildIDsInBetaGroup.swift in Sources */,
+				6D050F07241BE65700CBDABA /* ProfileCertificatesResponse.swift in Sources */,
 				OBJ_640 /* ListBetaGroups.swift in Sources */,
 				OBJ_641 /* ListBetaTestersInBetaGroup.swift in Sources */,
 				OBJ_642 /* ListBuildsForBetaGroup.swift in Sources */,
