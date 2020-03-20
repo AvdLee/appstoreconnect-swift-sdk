@@ -1,3 +1,8 @@
+### 1.0.1
+- Device.attributes.devicesClass is misnamed ([#76](https://github.com/AvdLee/appstoreconnect-swift-sdk/issues/76)) via @ruipfcosta
+- Wrong response type for getAllCertificates call ([#72](https://github.com/AvdLee/appstoreconnect-swift-sdk/pull/72)) via @ristkof
+- Merge release 1.0.0 into master ([#74](https://github.com/AvdLee/appstoreconnect-swift-sdk/pull/74)) via @SwiftLeeBot
+
 ### 1.0.0
 - Trying to build a command line tool ([#69](https://github.com/AvdLee/appstoreconnect-swift-sdk/issues/69)) via @AvdLee
 - Make it a requirement to have SwiftLint setup locally ([#58](https://github.com/AvdLee/appstoreconnect-swift-sdk/issues/58)) via @AvdLee
