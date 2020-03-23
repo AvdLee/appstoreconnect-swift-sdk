@@ -12,7 +12,7 @@ public struct Device: Codable {
 
     /// Attributes that describe a certificate.
     public struct Attributes: Codable {
-        public let devicesClass: DeviceClass?
+        public let deviceClass: DeviceClass?
         public let model: String?
         public let name: String?
         public let platform: BundleIdPlatform?
