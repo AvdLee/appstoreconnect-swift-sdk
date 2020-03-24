@@ -7,7 +7,7 @@
 
 import Foundation
 
-extension APIEndpoint where T == BetaAppLocalizationResponse {
+extension APIEndpoint where Request == BetaAppLocalizationUpdateRequest, Response == BetaAppLocalizationResponse {
 
     /// Update the localized What’s New text for a specific app and locale.
     ///
@@ -36,6 +36,6 @@ extension APIEndpoint where T == BetaAppLocalizationResponse {
             path: "betaAppLocalizations/\(id)",
             method: .patch,
             parameters: nil,
-            body: request.erased)
+            body: request)
     }
 }

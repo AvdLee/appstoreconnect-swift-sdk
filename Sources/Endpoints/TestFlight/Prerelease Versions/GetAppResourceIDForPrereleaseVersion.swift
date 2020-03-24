@@ -5,7 +5,7 @@
 //  Created by Pascal Edmond on 30/11/2018.
 //
 
-extension APIEndpoint where T == PrereleaseVersionAppLinkageResponse {
+extension APIEndpoint where Request == EmptyBody, Response == PrereleaseVersionAppLinkageResponse {
 
     /// Get the app resource ID associated with a specific prerelease version.
     ///

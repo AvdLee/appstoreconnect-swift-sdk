@@ -5,7 +5,7 @@
 //  Created by Patrick Balestra on 12/14/2019.
 //
 
-extension APIEndpoint where T == CertificatesResponse {
+extension APIEndpoint where Request == EmptyBody, Response == CertificatesResponse {
 
     /// Find and list certificates and download their data.
     ///

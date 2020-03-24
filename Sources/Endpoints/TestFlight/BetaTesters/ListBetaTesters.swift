@@ -5,7 +5,7 @@
 //  Created by Pascal Edmond on 26/11/2018.
 //
 
-extension APIEndpoint where T == BetaTestersResponse {
+extension APIEndpoint where Request == EmptyBody, Response == BetaTestersResponse {
 
     /// Find and list beta testers for all apps, builds, and beta groups.
     ///

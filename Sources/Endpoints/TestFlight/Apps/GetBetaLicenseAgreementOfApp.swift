@@ -5,7 +5,7 @@
 //  Created by Pascal Edmond on 26/11/2018.
 //
 
-extension APIEndpoint where T == BetaLicenseAgreementResponse {
+extension APIEndpoint where Request == EmptyBody, Response == BetaLicenseAgreementResponse {
 
     /// Get the beta license agreement for a specific app.
     ///

@@ -5,7 +5,7 @@
 //  Created by Pascal Edmond on 30/11/2018.
 //
 
-extension APIEndpoint where T == AppsResponse {
+extension APIEndpoint where Request == EmptyBody, Response == AppsResponse {
 
     /// Get a list of apps that a user on your team can view.
     ///

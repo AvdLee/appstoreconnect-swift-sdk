@@ -5,7 +5,7 @@
 //  Created by Patrick Balestra on 12/22/19.
 //
 
-extension APIEndpoint where T == BundleIdsResponse {
+extension APIEndpoint where Request == EmptyBody, Response == BundleIdsResponse {
 
     /// Find and list bundle IDs that are registered to your team.
     ///

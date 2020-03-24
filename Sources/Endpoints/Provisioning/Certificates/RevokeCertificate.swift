@@ -5,7 +5,7 @@
 //  Created by Patrick Balestra on 12/15/19.
 //
 
-extension APIEndpoint where T == Void {
+extension APIEndpoint where Request == EmptyBody, Response == IrrelevantResponse {
 
     /// Revoke a lost, stolen, compromised, or expiring signing certificate.
     ///

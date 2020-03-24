@@ -7,7 +7,7 @@
 
 import Foundation
 
-extension APIEndpoint where T == BundleIdCapabilityResponse {
+extension APIEndpoint where Request == BundleIdCapabilityUpdateRequest, Response == BundleIdCapabilityResponse {
 
     /// Update the configuration of a specific capability.
     ///
@@ -30,6 +30,6 @@ extension APIEndpoint where T == BundleIdCapabilityResponse {
             path: "bundleIdCapabilities/\(id)",
             method: .patch,
             parameters: nil,
-            body: request.erased)
+            body: request)
     }
 }

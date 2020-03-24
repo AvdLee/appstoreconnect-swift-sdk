@@ -7,7 +7,7 @@
 
 import Foundation
 
-extension APIEndpoint where T == BundleIdResponse {
+extension APIEndpoint where Request == BundleIdUpdateRequest, Response == BundleIdResponse {
 
     /// Update a specific bundle ID’s name.
     ///
@@ -24,6 +24,6 @@ extension APIEndpoint where T == BundleIdResponse {
             path: "bundleIds/\(id)",
             method: .patch,
             parameters: nil,
-            body: request.erased)
+            body: request)
     }
 }

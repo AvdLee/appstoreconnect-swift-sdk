@@ -5,7 +5,7 @@
 //  Created by Pascal Edmond on 30/11/2018.
 //
 
-extension APIEndpoint where T == AppResponse {
+extension APIEndpoint where Request == EmptyBody, Response == AppResponse {
 
     /// Get the app information from a specific app encryption declaration.
     ///

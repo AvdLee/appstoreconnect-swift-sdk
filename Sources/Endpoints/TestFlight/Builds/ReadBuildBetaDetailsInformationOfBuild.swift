@@ -5,7 +5,7 @@
 //  Created by Pascal Edmond on 30/11/2018.
 //
 
-extension APIEndpoint where T == BuildBetaDetailResponse {
+extension APIEndpoint where Request == EmptyBody, Response == BuildBetaDetailResponse {
 
     /// Get the beta test details for a specific build.
     ///

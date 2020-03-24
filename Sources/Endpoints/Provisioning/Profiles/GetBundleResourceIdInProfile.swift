@@ -7,7 +7,7 @@
 
 import Foundation
 
-extension APIEndpoint where T == ProfileBundleIdLinkageResponse {
+extension APIEndpoint where Request == EmptyBody, Response == ProfileBundleIdLinkageResponse {
 
     /// Get the bundle ID information for a specific provisioning profile.
     public static func getBundleResourceId(

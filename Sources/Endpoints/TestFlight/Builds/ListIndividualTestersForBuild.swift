@@ -5,7 +5,7 @@
 //  Created by Pascal Edmond on 30/11/2018.
 //
 
-extension APIEndpoint where T == BetaTestersResponse {
+extension APIEndpoint where Request == EmptyBody, Response == BetaTestersResponse {
 
     /// Get a list of beta testers individually assigned to a build.
     ///

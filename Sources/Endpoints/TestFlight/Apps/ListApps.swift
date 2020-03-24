@@ -5,7 +5,7 @@
 //  Created by Pascal Edmond on 16/11/2018.
 //
 
-extension APIEndpoint where T == AppsResponse {
+extension APIEndpoint where Request == EmptyBody, Response == AppsResponse {
     
     /// Find and list apps added in App Store Connect.
     ///

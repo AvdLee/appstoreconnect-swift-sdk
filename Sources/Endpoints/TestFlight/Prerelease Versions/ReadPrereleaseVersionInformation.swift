@@ -5,7 +5,7 @@
 //  Created by Pascal Edmond on 30/11/2018.
 //
 
-extension APIEndpoint where T == PrereleaseVersionResponse {
+extension APIEndpoint where Request == EmptyBody, Response == PrereleaseVersionResponse {
 
     /// Get information about a specific prerelease version.
     ///

@@ -7,7 +7,7 @@
 
 import Foundation
 
-extension APIEndpoint where T == BetaTesterInvitationResponse {
+extension APIEndpoint where Request == BetaTesterInvitationCreateRequest, Response == BetaTesterInvitationResponse {
 
     /// Send or resend an invitation to a beta tester to test a specified app.
     ///
@@ -22,6 +22,6 @@ extension APIEndpoint where T == BetaTesterInvitationResponse {
             path: "betaTesterInvitations",
             method: .post,
             parameters: nil,
-            body: request.erased)
+            body: request)
     }
 }

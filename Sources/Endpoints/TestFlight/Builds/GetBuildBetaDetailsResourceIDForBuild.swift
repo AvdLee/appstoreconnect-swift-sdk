@@ -5,7 +5,7 @@
 //  Created by Pascal Edmond on 30/11/2018.
 //
 
-extension APIEndpoint where T == BuildBuildBetaDetailLinkageResponse {
+extension APIEndpoint where Request == EmptyBody, Response == BuildBuildBetaDetailLinkageResponse {
 
     /// Get the build beta details resource ID associated with a specific build.
     ///

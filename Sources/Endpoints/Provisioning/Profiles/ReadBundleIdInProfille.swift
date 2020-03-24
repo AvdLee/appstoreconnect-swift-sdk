@@ -7,7 +7,7 @@
 
 import Foundation
 
-extension APIEndpoint where T == BundleIdResponse {
+extension APIEndpoint where Request == EmptyBody, Response == BundleIdResponse {
 
     /// Get the bundle ID information for a specific provisioning profile.
     public static func readBundleId(

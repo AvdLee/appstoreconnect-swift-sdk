@@ -7,7 +7,7 @@
 
 import Foundation
 
-extension APIEndpoint where T == CertificateResponse {
+extension APIEndpoint where Request == CertificateCreateRequest, Response == CertificateResponse {
 
     /// Create a new certificate using a certificate signing request.
     ///
@@ -27,6 +27,6 @@ extension APIEndpoint where T == CertificateResponse {
             path: "certificates",
             method: .post,
             parameters: nil,
-            body: request.erased)
+            body: request)
     }
 }

@@ -5,7 +5,7 @@
 //  Created by Pascal Edmond on 20/11/2018.
 //
 
-extension APIEndpoint where T == AppResponse {
+extension APIEndpoint where Request == EmptyBody, Response == AppResponse {
     
     /// Get information about a specific app.
     ///

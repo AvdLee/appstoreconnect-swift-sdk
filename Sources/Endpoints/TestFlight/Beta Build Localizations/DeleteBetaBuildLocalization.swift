@@ -5,7 +5,7 @@
 //  Created by Pascal Edmond on 30/11/2018.
 //
 
-extension APIEndpoint where T == Void {
+extension APIEndpoint where Request == EmptyBody, Response == IrrelevantResponse {
 
     /// Delete a specific beta build localization associated with a build.
     ///

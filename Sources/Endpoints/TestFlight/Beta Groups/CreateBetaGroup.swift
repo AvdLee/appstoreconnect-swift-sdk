@@ -7,7 +7,7 @@
 
 import Foundation
 
-extension APIEndpoint where T == BetaGroupResponse {
+extension APIEndpoint where Request == BetaGroupCreateRequest, Response == BetaGroupResponse {
 
     /// Create a beta group associated with an app, optionally enabling TestFlight public links.
     ///
@@ -39,6 +39,6 @@ extension APIEndpoint where T == BetaGroupResponse {
             path: "betaGroups",
             method: .post,
             parameters: nil,
-            body: request.erased)
+            body: request)
     }
 }

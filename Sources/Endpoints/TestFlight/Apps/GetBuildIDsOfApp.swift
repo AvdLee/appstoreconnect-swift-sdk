@@ -5,7 +5,7 @@
 //  Created by Pascal Edmond on 26/11/2018.
 //
 
-extension APIEndpoint where T == AppBuildsLinkagesResponse {
+extension APIEndpoint where Request == EmptyBody, Response == AppBuildsLinkagesResponse {
 
     /// Get a list of build resource IDs associated with a specific app.
     ///

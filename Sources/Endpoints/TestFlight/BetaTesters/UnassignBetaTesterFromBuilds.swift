@@ -7,7 +7,7 @@
 
 import Foundation
 
-extension APIEndpoint where T == Void {
+extension APIEndpoint where Request == BetaTesterBuildsLinkagesRequest, Response == IrrelevantResponse {
 
     /// Remove an individually assigned beta tester's ability to test a build.
     ///
@@ -22,6 +22,6 @@ extension APIEndpoint where T == Void {
             path: "betaTesters/\(id)/relationships/builds",
             method: .delete,
             parameters: nil,
-            body: linkages.erased)
+            body: linkages)
     }
 }

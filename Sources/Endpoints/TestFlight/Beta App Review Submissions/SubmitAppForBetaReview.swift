@@ -7,7 +7,7 @@
 
 import Foundation
 
-extension APIEndpoint where T == BetaAppReviewSubmissionResponse {
+extension APIEndpoint where Request == BetaAppReviewSubmissionCreateRequest, Response == BetaAppReviewSubmissionResponse {
 
     /// Submit an app for beta app review to allow external testing.
     ///
@@ -19,6 +19,6 @@ extension APIEndpoint where T == BetaAppReviewSubmissionResponse {
             path: "betaAppReviewSubmissions",
             method: .post,
             parameters: nil,
-            body: request.erased)
+            body: request)
     }
 }

@@ -7,7 +7,7 @@
 
 import Foundation
 
-extension APIEndpoint where T == ProfileCertificatesResponse {
+extension APIEndpoint where Request == EmptyBody, Response == ProfileCertificatesResponse {
 
     /// Get the resource IDs of all certificates associated with a specific provisioning profile.
     public static func getAllCertificates(

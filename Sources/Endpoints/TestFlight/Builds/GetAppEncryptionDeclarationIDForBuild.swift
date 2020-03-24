@@ -5,7 +5,7 @@
 //  Created by Pascal Edmond on 30/11/2018.
 //
 
-extension APIEndpoint where T == BuildAppEncryptionDeclarationLinkageResponse {
+extension APIEndpoint where Request == EmptyBody, Response == BuildAppEncryptionDeclarationLinkageResponse {
 
     /// Get the beta app encryption declaration resource ID associated with a build.
     ///

@@ -5,7 +5,7 @@
 //  Created by Pascal Edmond on 30/11/2018.
 //
 
-extension APIEndpoint where T == BetaGroupResponse {
+extension APIEndpoint where Request == EmptyBody, Response == BetaGroupResponse {
 
     /// Get a specific beta group.
     ///

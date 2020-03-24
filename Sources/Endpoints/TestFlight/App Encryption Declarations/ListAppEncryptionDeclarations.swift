@@ -5,7 +5,7 @@
 //  Created by Pascal Edmond on 30/11/2018.
 //
 
-extension APIEndpoint where T == AppEncryptionDeclarationsResponse {
+extension APIEndpoint where Request == EmptyBody, Response == AppEncryptionDeclarationsResponse {
 
     /// Find and list all available app encryption declarations.
     ///

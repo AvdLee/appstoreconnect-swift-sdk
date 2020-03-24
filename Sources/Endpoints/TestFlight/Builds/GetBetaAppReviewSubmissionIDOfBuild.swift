@@ -5,7 +5,7 @@
 //  Created by Pascal Edmond on 30/11/2018.
 //
 
-extension APIEndpoint where T == BuildBetaAppReviewSubmissionLinkageResponse {
+extension APIEndpoint where Request == EmptyBody, Response == BuildBetaAppReviewSubmissionLinkageResponse {
 
     /// Get the beta app review submission resource ID associated with a specific build.
     ///

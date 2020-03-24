@@ -7,7 +7,7 @@
 
 import Foundation
 
-extension APIEndpoint where T == Void {
+extension APIEndpoint where Request == UserVisibleAppsLinkagesRequest, Response == IrrelevantResponse {
 
     /// Replace the list of apps a user on your team can see.
     ///
@@ -22,6 +22,6 @@ extension APIEndpoint where T == Void {
             path: "users/\(id)/relationships/visibleApps",
             method: .patch,
             parameters: nil,
-            body: request.erased)
+            body: request)
     }
 }

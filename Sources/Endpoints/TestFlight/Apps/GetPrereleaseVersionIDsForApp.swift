@@ -5,7 +5,7 @@
 //  Created by Pascal Edmond on 26/11/2018.
 //
 
-extension APIEndpoint where T == AppPreReleaseVersionsLinkagesResponse {
+extension APIEndpoint where Request == EmptyBody, Response == AppPreReleaseVersionsLinkagesResponse {
 
     /// Get a list of prerelease version IDs for a specific app.
     ///

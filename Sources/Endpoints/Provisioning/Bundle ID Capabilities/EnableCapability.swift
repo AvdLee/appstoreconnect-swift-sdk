@@ -7,7 +7,7 @@
 
 import Foundation
 
-extension APIEndpoint where T == BundleIdCapabilityResponse {
+extension APIEndpoint where Request == BundleIdCapabilityCreateRequest, Response == BundleIdCapabilityResponse {
 
     /// Enable a capability for a bundle ID.
     ///
@@ -30,6 +30,6 @@ extension APIEndpoint where T == BundleIdCapabilityResponse {
             path: "bundleIdCapabilities",
             method: .post,
             parameters: nil,
-            body: request.erased)
+            body: request)
     }
 }

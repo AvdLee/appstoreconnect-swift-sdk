@@ -5,7 +5,7 @@
 //  Created by Pascal Edmond on 30/11/2018.
 //
 
-extension APIEndpoint where T == BuildsResponse {
+extension APIEndpoint where Request == EmptyBody, Response == BuildsResponse {
 
     /// Get a list of builds of a specific prerelease version.
     ///

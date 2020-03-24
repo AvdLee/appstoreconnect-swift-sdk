@@ -7,7 +7,7 @@
 
 import Foundation
 
-extension APIEndpoint where T == DevicesResponse {
+extension APIEndpoint where Request == EmptyBody, Response == DevicesResponse {
 
     /// Find and list devices registered to your team.
     public static func listDevices(

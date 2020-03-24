@@ -7,7 +7,7 @@
 
 import Foundation
 
-extension APIEndpoint where T == ProfileResponse {
+extension APIEndpoint where Request == EmptyBody, Response == ProfileResponse {
 
     /// Get information about a specific bundle ID.
     public static func readProfileInformation(

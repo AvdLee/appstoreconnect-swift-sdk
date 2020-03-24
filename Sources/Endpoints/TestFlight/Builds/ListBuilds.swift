@@ -5,7 +5,7 @@
 //  Created by Pascal Edmond on 30/11/2018.
 //
 
-extension APIEndpoint where T == BuildsResponse {
+extension APIEndpoint where Request == EmptyBody, Response == BuildsResponse {
 
     /// Find and list builds for all apps in App Store Connect.
     ///

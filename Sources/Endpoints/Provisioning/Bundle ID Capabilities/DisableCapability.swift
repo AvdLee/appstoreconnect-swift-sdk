@@ -5,7 +5,7 @@
 //  Created by Patrick Balestra on 12/23/19.
 //
 
-extension APIEndpoint where T == Void {
+extension APIEndpoint where Request == EmptyBody, Response == IrrelevantResponse {
 
     /// Disable a capability for a bundle ID.
     ///

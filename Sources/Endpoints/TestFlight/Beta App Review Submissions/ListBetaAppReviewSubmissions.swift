@@ -5,7 +5,7 @@
 //  Created by Pascal Edmond on 30/11/2018.
 //
 
-extension APIEndpoint where T == BetaAppReviewSubmissionsResponse {
+extension APIEndpoint where Request == EmptyBody, Response == BetaAppReviewSubmissionsResponse {
 
     /// Find and list beta app review submissions for all builds.
     ///

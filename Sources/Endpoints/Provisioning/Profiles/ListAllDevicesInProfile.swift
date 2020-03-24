@@ -7,7 +7,7 @@
 
 import Foundation
 
-extension APIEndpoint where T == DevicesResponse {
+extension APIEndpoint where Request == EmptyBody, Response == DevicesResponse {
 
     /// Get a list of all devices for a specific provisioning profile.
     public static func listAllDevices(

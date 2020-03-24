@@ -5,7 +5,7 @@
 //  Created by Patrick Balestra on 12/23/19.
 //
 
-extension APIEndpoint where T == ProfilesResponse {
+extension APIEndpoint where Request == EmptyBody, Response == ProfilesResponse {
 
     /// Get a list of all profiles for a specific bundle ID.
     ///

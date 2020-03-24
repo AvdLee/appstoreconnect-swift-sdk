@@ -5,7 +5,7 @@
 //  Created by Pascal Edmond on 30/11/2018.
 //
 
-extension APIEndpoint where T == BetaAppReviewDetailAppLinkageResponse {
+extension APIEndpoint where Request == EmptyBody, Response == BetaAppReviewDetailAppLinkageResponse {
 
     /// Get the app resource ID associated with an app review detail.
     ///

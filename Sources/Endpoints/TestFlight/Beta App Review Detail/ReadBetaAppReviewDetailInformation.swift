@@ -5,7 +5,7 @@
 //  Created by Pascal Edmond on 30/11/2018.
 //
 
-extension APIEndpoint where T == BetaAppReviewDetailResponse {
+extension APIEndpoint where Request == EmptyBody, Response == BetaAppReviewDetailResponse {
 
     /// Get beta app review details for a specific app.
     ///

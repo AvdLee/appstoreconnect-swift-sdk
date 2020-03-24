@@ -5,7 +5,7 @@
 //  Created by Pascal Edmond on 26/11/2018.
 //
 
-extension APIEndpoint where T == BetaTesterAppsLinkagesResponse {
+extension APIEndpoint where Request == EmptyBody, Response == BetaTesterAppsLinkagesResponse {
 
     /// Get a list of app resource IDs associated with a beta tester.
     ///

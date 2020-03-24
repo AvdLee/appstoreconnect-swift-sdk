@@ -7,7 +7,7 @@
 
 import Foundation
 
-extension APIEndpoint where T == Void {
+extension APIEndpoint where Request == AppEncryptionDeclarationBuildsLinkagesRequest, Response == IrrelevantResponse {
 
     /// Assign one or more builds to an app encryption declaration.
     ///
@@ -22,6 +22,6 @@ extension APIEndpoint where T == Void {
             path: "appEncryptionDeclarations/\(id)/relationships/builds",
             method: .post,
             parameters: nil,
-            body: request.erased)
+            body: request)
     }
 }

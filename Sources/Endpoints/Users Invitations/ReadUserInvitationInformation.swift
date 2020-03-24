@@ -5,7 +5,7 @@
 //  Created by Pascal Edmond on 30/11/2018.
 //
 
-extension APIEndpoint where T == UserInvitationResponse {
+extension APIEndpoint where Request == EmptyBody, Response == UserInvitationResponse {
 
     /// Get information about a pending invitation to join your team.
     ///

@@ -5,7 +5,7 @@
 //  Created by Pascal Edmond on 30/11/2018.
 //
 
-extension APIEndpoint where T == UserVisibleAppsLinkagesResponse {
+extension APIEndpoint where Request == EmptyBody, Response == UserVisibleAppsLinkagesResponse {
 
     /// Get a list of app resource IDs to which a user on your team has access.
     ///

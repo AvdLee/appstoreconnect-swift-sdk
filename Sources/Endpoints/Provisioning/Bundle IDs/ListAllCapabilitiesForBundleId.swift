@@ -5,7 +5,7 @@
 //  Created by Patrick Balestra on 12/23/19.
 //
 
-extension APIEndpoint where T == BundleIdCapabilitiesResponse {
+extension APIEndpoint where Request == EmptyBody, Response == BundleIdCapabilitiesResponse {
 
     /// Get a list of all capabilities for a specific bundle ID.
     ///

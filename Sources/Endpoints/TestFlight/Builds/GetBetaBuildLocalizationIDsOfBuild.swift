@@ -5,7 +5,7 @@
 //  Created by Pascal Edmond on 30/11/2018.
 //
 
-extension APIEndpoint where T == BuildBetaBuildLocalizationsLinkagesResponse {
+extension APIEndpoint where Request == EmptyBody, Response == BuildBetaBuildLocalizationsLinkagesResponse {
 
     /// Get a list of beta build localization resource IDs associated with a build.
     ///

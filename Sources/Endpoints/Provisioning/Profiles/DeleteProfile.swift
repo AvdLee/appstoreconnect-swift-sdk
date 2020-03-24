@@ -7,7 +7,7 @@
 
 import Foundation
 
-extension APIEndpoint where T == Void {
+extension APIEndpoint where Request == EmptyBody, Response == IrrelevantResponse {
 
     /// Delete a provisioning profile that is used for app development or distribution.
     public static func delete(profileWithId id: String) -> APIEndpoint {

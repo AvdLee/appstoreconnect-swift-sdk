@@ -5,7 +5,7 @@
 //  Created by Pascal Edmond on 30/11/2018.
 //
 
-extension APIEndpoint where T == BuildResponse {
+extension APIEndpoint where Request == EmptyBody, Response == BuildResponse {
 
     /// Get information about a specific build.
     ///

@@ -5,7 +5,7 @@
 //  Created by Pascal Edmond on 30/11/2018.
 //
 
-extension APIEndpoint where T == BetaBuildLocalizationsResponse {
+extension APIEndpoint where Request == EmptyBody, Response == BetaBuildLocalizationsResponse {
 
     /// Find and list beta build localizations currently associated with apps.
     ///

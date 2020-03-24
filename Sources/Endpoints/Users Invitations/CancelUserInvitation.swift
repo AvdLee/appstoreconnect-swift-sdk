@@ -5,7 +5,7 @@
 //  Created by Pascal Edmond on 30/11/2018.
 //
 
-extension APIEndpoint where T == Void {
+extension APIEndpoint where Request == EmptyBody, Response == IrrelevantResponse {
 
     /// Cancel a pending invitation for a user to join your team.
     ///

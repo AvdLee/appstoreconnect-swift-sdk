@@ -5,7 +5,7 @@
 //  Created by Patrick Balestra on 12/23/19.
 //
 
-extension APIEndpoint where T == BundleIdProfilesLinkagesResponse {
+extension APIEndpoint where Request == EmptyBody, Response == BundleIdProfilesLinkagesResponse {
 
     /// Get the resource IDs for all profiles associated with a specific bundle ID.
     ///

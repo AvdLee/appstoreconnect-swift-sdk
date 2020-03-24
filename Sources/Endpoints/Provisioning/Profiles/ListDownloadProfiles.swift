@@ -7,7 +7,7 @@
 
 import Foundation
 
-extension APIEndpoint where T == ProfilesResponse {
+extension APIEndpoint where Request == EmptyBody, Response == ProfilesResponse {
 
     /// Find and list provisioning profiles and download their data.
     public static func listProfiles(

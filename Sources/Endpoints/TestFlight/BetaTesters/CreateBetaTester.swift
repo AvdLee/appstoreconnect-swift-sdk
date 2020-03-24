@@ -7,7 +7,7 @@
 
 import Foundation
 
-extension APIEndpoint where T == BetaTesterResponse {
+extension APIEndpoint where Request == BetaTesterCreateRequest, Response == BetaTesterResponse {
 
     /// Create a beta tester assigned to a group, a build, or an app.
     ///
@@ -33,7 +33,7 @@ extension APIEndpoint where T == BetaTesterResponse {
             path: "betaTesters",
             method: .post,
             parameters: nil,
-            body: betaTester.erased)
+            body: betaTester)
     }
     
     /// Create a beta tester assigned to a group, a build, or an app.
@@ -60,6 +60,6 @@ extension APIEndpoint where T == BetaTesterResponse {
             path: "betaTesters",
             method: .post,
             parameters: nil,
-            body: betaTester.erased)
+            body: betaTester)
     }
 }

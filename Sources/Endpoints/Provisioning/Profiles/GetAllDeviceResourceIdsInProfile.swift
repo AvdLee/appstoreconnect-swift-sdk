@@ -7,7 +7,7 @@
 
 import Foundation
 
-extension APIEndpoint where T == ProfileDevicesLinkagesResponse {
+extension APIEndpoint where Request == EmptyBody, Response == ProfileDevicesLinkagesResponse {
 
     /// Get the resource IDs of all devices associated with a specific provisioning profile.
     public static func getAllDeviceIds(

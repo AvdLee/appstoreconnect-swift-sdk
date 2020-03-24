@@ -7,7 +7,7 @@
 
 import Foundation
 
-extension APIEndpoint where T == BetaAppLocalizationResponse {
+extension APIEndpoint where Request == BetaAppLocalizationCreateRequest, Response == BetaAppLocalizationResponse {
 
     /// Create localized descriptive information for an app.
     ///
@@ -39,6 +39,6 @@ extension APIEndpoint where T == BetaAppLocalizationResponse {
             path: "betaAppLocalizations",
             method: .post,
             parameters: nil,
-            body: request.erased)
+            body: request)
     }
 }

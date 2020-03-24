@@ -7,7 +7,7 @@
 
 import Foundation
 
-extension APIEndpoint where T == Void {
+extension APIEndpoint where Request == BuildIndividualTestersLinkagesRequest, Response == IrrelevantResponse {
 
     /// Enable a beta tester who is not a part of a beta group to test a build.
     ///
@@ -22,6 +22,6 @@ extension APIEndpoint where T == Void {
             path: "builds/\(id)/relationships/individualTesters",
             method: .post,
             parameters: nil,
-            body: request.erased)
+            body: request)
     }
 }

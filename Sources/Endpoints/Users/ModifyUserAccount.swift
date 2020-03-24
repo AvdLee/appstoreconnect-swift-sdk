@@ -7,7 +7,7 @@
 
 import Foundation
 
-extension APIEndpoint where T == UserResponse {
+extension APIEndpoint where Request == UserUpdateRequest, Response == UserResponse {
 
     /// Change a user's role, app visibility information, or other account details.
     ///
@@ -33,6 +33,6 @@ extension APIEndpoint where T == UserResponse {
             path: "users/\(id)",
             method: .patch,
             parameters: nil,
-            body: request.erased)
+            body: request)
     }
 }

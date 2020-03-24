@@ -5,7 +5,7 @@
 //  Created by Pascal Edmond on 30/11/2018.
 //
 
-extension APIEndpoint where T == PrereleaseVersionBuildsLinkagesResponse {
+extension APIEndpoint where Request == EmptyBody, Response == PrereleaseVersionBuildsLinkagesResponse {
 
     /// Get a list of build resource IDs associated with a provided prerelease version.
     ///

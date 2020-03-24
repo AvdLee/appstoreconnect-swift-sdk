@@ -5,7 +5,7 @@
 //  Created by Pascal Edmond on 26/11/2018.
 //
 
-extension APIEndpoint where T == BetaTesterBuildsLinkagesResponse {
+extension APIEndpoint where Request == EmptyBody, Response == BetaTesterBuildsLinkagesResponse {
 
     /// Get a list of build resource IDs individually assigned to a specific beta tester.
     ///

@@ -7,7 +7,7 @@
 
 import Foundation
 
-extension APIEndpoint where T == CertificatesResponse {
+extension APIEndpoint where Request == EmptyBody, Response == CertificatesResponse {
 
     /// Get a list of all certificates and their data for a specific provisioning profile.
     public static func listAllCertificates(

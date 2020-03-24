@@ -7,7 +7,7 @@
 
 import Foundation
 
-extension APIEndpoint where T == BuildBetaDetailResponse {
+extension APIEndpoint where Request == BuildBetaDetailUpdateRequest, Response == BuildBetaDetailResponse {
 
     /// Update beta test details for a specific build.
     ///
@@ -22,6 +22,6 @@ extension APIEndpoint where T == BuildBetaDetailResponse {
             path: "buildBetaDetails/\(id)",
             method: .patch,
             parameters: nil,
-            body: request.erased)
+            body: request)
     }
 }

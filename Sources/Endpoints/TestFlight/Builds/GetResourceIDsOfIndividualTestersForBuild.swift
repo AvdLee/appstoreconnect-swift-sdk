@@ -5,7 +5,7 @@
 //  Created by Pascal Edmond on 30/11/2018.
 //
 
-extension APIEndpoint where T == BuildIndividualTestersLinkagesResponse {
+extension APIEndpoint where Request == EmptyBody, Response == BuildIndividualTestersLinkagesResponse {
 
     /// Get a list of resource IDs of individual testers associated with a build.
     ///

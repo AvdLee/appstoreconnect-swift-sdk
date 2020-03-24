@@ -5,7 +5,7 @@
 //  Created by Pascal Edmond on 30/11/2018.
 //
 
-extension APIEndpoint where T == BetaGroupBuildsLinkagesResponse {
+extension APIEndpoint where Request == EmptyBody, Response == BetaGroupBuildsLinkagesResponse {
 
     /// Get a list of build resource IDs in a specific beta group.
     ///

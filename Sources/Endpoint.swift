@@ -7,8 +7,14 @@
 
 import Foundation
 
+/// Dummy type used to tag endpoints with an empty body.
+public struct EmptyBody: Encodable {}
+
+/// Dummy type used to tag endpoints where the response type is irrelevant.
+public struct IrrelevantResponse: Decodable {}
+
 /// Defines all data needed to build the URL Request with.
-public struct APIEndpoint<T> {
+public struct APIEndpoint<Request: Encodable, Response: Decodable> {
 
     /// The path to the endpoint.
     let path: String
@@ -20,9 +26,9 @@ public struct APIEndpoint<T> {
     let parameters: [String: Any]?
     
     /// The body to send with the request. Can be `nil`.
-    let body: AnyEncodable?
+    let body: Request?
     
-    init(path: String, method: HTTPMethod = .get, parameters: [String: Any]? = nil, body: AnyEncodable? = nil) {
+    init(path: String, method: HTTPMethod = .get, parameters: [String: Any]? = nil, body: Request? = nil) {
         self.path = path
         self.method = method
         self.parameters = parameters

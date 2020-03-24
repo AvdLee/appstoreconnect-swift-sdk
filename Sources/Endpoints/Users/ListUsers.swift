@@ -5,7 +5,7 @@
 //  Created by Pascal Edmond on 30/11/2018.
 //
 
-extension APIEndpoint where T == UsersResponse {
+extension APIEndpoint where Request == EmptyBody, Response == UsersResponse {
 
     /// Get a list of the users on your team.
     ///

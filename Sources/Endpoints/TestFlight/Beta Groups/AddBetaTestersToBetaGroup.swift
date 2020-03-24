@@ -7,7 +7,7 @@
 
 import Foundation
 
-extension APIEndpoint where T == Void {
+extension APIEndpoint where Request == BetaGroupBetaTestersLinkagesRequest, Response == IrrelevantResponse {
 
     /// Add a specific beta tester to one or more beta groups for beta testing.
     ///
@@ -22,6 +22,6 @@ extension APIEndpoint where T == Void {
             path: "betaGroups/\(id)/relationships/betaTesters",
             method: .post,
             parameters: nil,
-            body: request.erased)
+            body: request)
     }
 }

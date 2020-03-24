@@ -7,7 +7,7 @@
 
 import Foundation
 
-extension APIEndpoint where T == Void {
+extension APIEndpoint where Request == BuildIndividualTestersLinkagesRequest, Response == IrrelevantResponse {
 
     /// Remove access to test a specific build from one or more individually assigned testers.
     ///
@@ -22,6 +22,6 @@ extension APIEndpoint where T == Void {
             path: "builds/\(id)/relationships/individualTesters",
             method: .delete,
             parameters: nil,
-            body: request.erased)
+            body: request)
     }
 }

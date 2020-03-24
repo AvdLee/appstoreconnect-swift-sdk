@@ -5,7 +5,7 @@
 //  Created by Pascal Edmond on 30/11/2018.
 //
 
-extension APIEndpoint where T == UserResponse {
+extension APIEndpoint where Request == EmptyBody, Response == UserResponse {
 
     /// Get information about a user on your team, such as name, roles, and app visibility.
     ///

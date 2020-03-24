@@ -5,7 +5,7 @@
 //  Created by Patrick Balestra on 12/23/19.
 //
 
-extension APIEndpoint where T == BundleIdResponse {
+extension APIEndpoint where Request == EmptyBody, Response == BundleIdResponse {
 
     /// Get information about a specific bundle ID.
     ///

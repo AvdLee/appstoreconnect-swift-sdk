@@ -5,7 +5,7 @@
 //  Created by Pascal Edmond on 30/11/2018.
 //
 
-extension APIEndpoint where T == BetaGroupsResponse {
+extension APIEndpoint where Request == EmptyBody, Response == BetaGroupsResponse {
 
     /// Find and list beta groups for all apps.
     ///

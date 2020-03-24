@@ -7,7 +7,7 @@
 
 import Foundation
 
-extension APIEndpoint where T == BetaGroupResponse {
+extension APIEndpoint where Request == BetaGroupUpdateRequest, Response == BetaGroupResponse {
 
     /// Modify a beta group's metadata, including changing its Testflight public link status.
     ///
@@ -33,6 +33,6 @@ extension APIEndpoint where T == BetaGroupResponse {
             path: "betaGroups/\(id)",
             method: .patch,
             parameters: nil,
-            body: request.erased)
+            body: request)
     }
 }

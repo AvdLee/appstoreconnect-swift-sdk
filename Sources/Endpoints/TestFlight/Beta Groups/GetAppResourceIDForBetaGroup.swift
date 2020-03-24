@@ -5,7 +5,7 @@
 //  Created by Pascal Edmond on 30/11/2018.
 //
 
-extension APIEndpoint where T == BetaGroupAppLinkageResponse {
+extension APIEndpoint where Request == EmptyBody, Response == BetaGroupAppLinkageResponse {
 
     /// Get the app resource ID for a specific beta group.
     ///

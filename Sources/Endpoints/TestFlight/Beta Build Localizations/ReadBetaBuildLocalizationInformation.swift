@@ -5,7 +5,7 @@
 //  Created by Pascal Edmond on 30/11/2018.
 //
 
-extension APIEndpoint where T == BetaBuildLocalizationResponse {
+extension APIEndpoint where Request == EmptyBody, Response == BetaBuildLocalizationResponse {
 
     /// Get a specific beta build localization resource.
     ///

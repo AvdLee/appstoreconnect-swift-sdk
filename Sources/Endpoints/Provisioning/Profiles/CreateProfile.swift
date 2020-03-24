@@ -7,7 +7,7 @@
 
 import Foundation
 
-extension APIEndpoint where T == ProfileResponse {
+extension APIEndpoint where Request == ProfileCreateRequest, Response == ProfileResponse {
 
     /// Create a new provisioning profile.
     public static func create(
@@ -29,6 +29,6 @@ extension APIEndpoint where T == ProfileResponse {
             path: "profiles",
             method: .post,
             parameters: nil,
-            body: request.erased)
+            body: request)
     }
 }

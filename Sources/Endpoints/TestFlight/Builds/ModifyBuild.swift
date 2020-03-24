@@ -7,7 +7,7 @@
 
 import Foundation
 
-extension APIEndpoint where T == BuildResponse {
+extension APIEndpoint where Request == BuildUpdateRequest, Response == BuildResponse {
 
     /// Expire a build or change its encryption exemption setting.
     ///
@@ -29,6 +29,6 @@ extension APIEndpoint where T == BuildResponse {
             path: "builds/\(id)",
             method: .patch,
             parameters: nil,
-            body: request.erased)
+            body: request)
     }
 }

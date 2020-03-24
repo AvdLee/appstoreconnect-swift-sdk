@@ -5,7 +5,7 @@
 //  Created by Pascal Edmond on 30/11/2018.
 //
 
-extension APIEndpoint where T == AppEncryptionDeclarationAppLinkageResponse {
+extension APIEndpoint where Request == EmptyBody, Response == AppEncryptionDeclarationAppLinkageResponse {
 
     /// Get the app resource ID associated with a specific app encryption declaration.
     ///

@@ -7,7 +7,7 @@
 
 import Foundation
 
-extension APIEndpoint where T == DeviceResponse {
+extension APIEndpoint where Request == EmptyBody, Response == DeviceResponse {
 
     /// Get information about a specific bundle ID.
     public static func readDeviceInformation(

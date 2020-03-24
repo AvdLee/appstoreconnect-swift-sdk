@@ -5,7 +5,7 @@
 //  Created by Pascal Edmond on 30/11/2018.
 //
 
-extension APIEndpoint where T == UserInvitationVisibleAppsLinkagesResponse {
+extension APIEndpoint where Request == EmptyBody, Response == UserInvitationVisibleAppsLinkagesResponse {
 
     /// Get a list of app resource IDs that will be visible to a user with a pending invitation.
     ///

@@ -7,7 +7,7 @@
 
 import Foundation
 
-extension APIEndpoint where T == BundleIdResponse {
+extension APIEndpoint where Request == BundleIdCreateRequest, Response == BundleIdResponse {
     
     /// Register a new bundle ID for app development.
     ///
@@ -31,6 +31,6 @@ extension APIEndpoint where T == BundleIdResponse {
             path: "bundleIds",
             method: .post,
             parameters: nil,
-            body: request.erased)
+            body: request)
     }
 }

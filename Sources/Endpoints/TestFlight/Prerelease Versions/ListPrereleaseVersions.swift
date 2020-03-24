@@ -5,7 +5,7 @@
 //  Created by Pascal Edmond on 30/11/2018.
 //
 
-extension APIEndpoint where T == PreReleaseVersionsResponse {
+extension APIEndpoint where Request == EmptyBody, Response == PreReleaseVersionsResponse {
 
     /// Get a list of prerelease versions for all apps.
     ///

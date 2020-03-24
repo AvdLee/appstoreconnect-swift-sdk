@@ -5,7 +5,7 @@
 //  Created by Pascal Edmond on 26/11/2018.
 //
 
-extension APIEndpoint where T == BetaTesterBetaGroupsLinkagesResponse {
+extension APIEndpoint where Request == EmptyBody, Response == BetaTesterBetaGroupsLinkagesResponse {
 
     /// Get a list of group resource IDs associated with a beta tester.
     ///

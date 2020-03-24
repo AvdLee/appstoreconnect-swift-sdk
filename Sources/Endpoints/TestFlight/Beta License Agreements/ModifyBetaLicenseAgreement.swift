@@ -7,7 +7,7 @@
 
 import Foundation
 
-extension APIEndpoint where T == BetaLicenseAgreementResponse {
+extension APIEndpoint where Request == BetaLicenseAgreementUpdateRequest, Response == BetaLicenseAgreementResponse {
 
     /// Update the text for your beta license agreement.
     ///
@@ -22,6 +22,6 @@ extension APIEndpoint where T == BetaLicenseAgreementResponse {
             path: "betaLicenseAgreements/\(id)",
             method: .patch,
             parameters: nil,
-            body: request.erased)
+            body: request)
     }
 }

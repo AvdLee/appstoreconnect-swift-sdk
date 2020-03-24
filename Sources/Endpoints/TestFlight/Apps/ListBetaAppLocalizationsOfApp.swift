@@ -5,7 +5,7 @@
 //  Created by Pascal Edmond on 26/11/2018.
 //
 
-extension APIEndpoint where T == BetaAppLocalizationsResponse {
+extension APIEndpoint where Request == EmptyBody, Response == BetaAppLocalizationsResponse {
 
     /// Get a list of localized beta test information for a specific app.
     ///

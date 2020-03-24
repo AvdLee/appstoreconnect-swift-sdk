@@ -5,7 +5,7 @@
 //  Created by Pascal Edmond on 26/11/2018.
 //
 
-extension APIEndpoint where T == AppBetaAppLocalizationsLinkagesResponse {
+extension APIEndpoint where Request == EmptyBody, Response == AppBetaAppLocalizationsLinkagesResponse {
 
     /// Get a list of beta app localization resource IDs associated with a specific app.
     ///

@@ -7,7 +7,7 @@
 
 import Foundation
 
-extension APIEndpoint where T == Void {
+extension APIEndpoint where Request == UserVisibleAppsLinkagesRequest, Response == IrrelevantResponse {
 
     /// Give a user on your team access to one or more apps.
     ///
@@ -22,6 +22,6 @@ extension APIEndpoint where T == Void {
             path: "users/\(id)/relationships/visibleApps",
             method: .post,
             parameters: nil,
-            body: request.erased)
+            body: request)
     }
 }

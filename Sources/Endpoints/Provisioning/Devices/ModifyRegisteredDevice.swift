@@ -7,7 +7,7 @@
 
 import Foundation
 
-extension APIEndpoint where T == DeviceResponse {
+extension APIEndpoint where Request == DeviceUpdateRequest, Response == DeviceResponse {
 
     /// Modify a capability for a bundle ID.
     public static func modifyRegisteredDevice(
@@ -25,6 +25,6 @@ extension APIEndpoint where T == DeviceResponse {
             path: "devices/\(id)",
             method: .patch,
             parameters: nil,
-            body: request.erased)
+            body: request)
     }
 }

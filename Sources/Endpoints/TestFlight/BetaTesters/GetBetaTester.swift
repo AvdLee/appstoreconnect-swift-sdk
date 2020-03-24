@@ -5,7 +5,7 @@
 //  Created by Pascal Edmond on 26/11/2018.
 //
 
-extension APIEndpoint where T == BetaTesterResponse {
+extension APIEndpoint where Request == EmptyBody, Response == BetaTesterResponse {
 
     /// Get a specific beta tester.
     ///

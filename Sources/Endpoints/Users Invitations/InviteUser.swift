@@ -7,7 +7,7 @@
 
 import Foundation
 
-extension APIEndpoint where T == UserInvitationResponse {
+extension APIEndpoint where Request == UserInvitationCreateRequest, Response == UserInvitationResponse {
 
     /// Invite a user with assigned user roles to join your team.
     ///
@@ -39,6 +39,6 @@ extension APIEndpoint where T == UserInvitationResponse {
             path: "userInvitations",
             method: .post,
             parameters: nil,
-            body: request.erased)
+            body: request)
     }
 }

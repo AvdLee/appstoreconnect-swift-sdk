@@ -7,7 +7,7 @@
 
 import Foundation
 
-extension APIEndpoint where T == BuildBetaNotificationResponse {
+extension APIEndpoint where Request == BuildBetaNotificationCreateRequest, Response == BuildBetaNotificationResponse {
 
     /// Send a notification to all assigned beta testers that a build is available for testing.
     ///
@@ -19,6 +19,6 @@ extension APIEndpoint where T == BuildBetaNotificationResponse {
             path: "buildBetaNotifications",
             method: .post,
             parameters: nil,
-            body: request.erased)
+            body: request)
     }
 }

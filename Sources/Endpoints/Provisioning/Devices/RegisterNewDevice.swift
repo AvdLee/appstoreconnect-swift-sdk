@@ -7,7 +7,7 @@
 
 import Foundation
 
-extension APIEndpoint where T == DeviceResponse {
+extension APIEndpoint where Request == DeviceCreateRequest, Response == DeviceResponse {
 
     /// Register a new device for app development.
     public static func registerNewDevice(
@@ -25,6 +25,6 @@ extension APIEndpoint where T == DeviceResponse {
             path: "devices",
             method: .post,
             parameters: nil,
-            body: request.erased)
+            body: request)
     }
 }
