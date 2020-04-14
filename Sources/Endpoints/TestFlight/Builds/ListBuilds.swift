@@ -96,19 +96,19 @@ public enum ListBuilds {
             case .id(let value):
                 return ("id", value.joinedByCommas())
             case .preReleaseVersion(let value):
-                return ("prereleaseversion", value.joinedByCommas())
+                return ("preReleaseVersion", value.joinedByCommas())
             case .processingState(let value):
                 return (ProcessingState.key, value.map({ $0.pair.value }).joinedByCommas())
             case .version(let value):
                 return ("version", value.joinedByCommas())
             case .usesNonExemptEncryption(let value):
-                return ("usesnonexemptencryption", value.joinedByCommas())
+                return ("usesNonExemptEncryption", value.joinedByCommas())
             case .preReleaseVersionVersion(let value):
-                return ("prereleaseversion.Version", value.joinedByCommas())
+                return ("preReleaseVersion.version", value.joinedByCommas())
             case .betaGroups(let value):
                 return ("betagroup", value.joinedByCommas())
             case .betaAppReviewSubmissionBetaReviewState(let value):
-                return ("betaappreviewsubmission.betareviewstate", value.joinedByCommas())
+                return ("betaAppReviewSubmission.betaReviewState", value.joinedByCommas())
             }
         }
     }
