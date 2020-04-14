@@ -143,28 +143,28 @@ extension ListBetaTesters.Field {
     public enum App: String, CaseIterable, NestableQueryParameter {
         case betaAppLocalizations, betaAppReviewDetail, betaGroups, betaLicenseAgreement, betaTesters, builds, bundleId, name, preReleaseVersions, primaryLocale, sku
 
-        static var key: String = "app"
+        static var key: String = "apps"
         var pair: NestableQueryParameter.Pair { return (nil, rawValue) }
     }
     
     public enum BetaGroup: String, CaseIterable, NestableQueryParameter {
         case app, betaTesters, builds, createdDate, isInternalGroup, name, publicLink, publicLinkEnabled, publicLinkId, publicLinkLimit, publicLinkLimitEnabled
 
-        static var key: String = "betaGroup"
+        static var key: String = "betaGroups"
         var pair: NestableQueryParameter.Pair { return (nil, rawValue) }
     }
     
     public enum BetaTester: String, CaseIterable, NestableQueryParameter {
         case apps, betaGroups, builds, email, firstName, inviteType, lastName
 
-        static var key: String = "betaTester"
+        static var key: String = "betaTesters"
         var pair: NestableQueryParameter.Pair { return (nil, rawValue) }
     }
     
     public enum Build: String, CaseIterable, NestableQueryParameter {
         case app, appEncryptionDeclaration, betaAppReviewSubmission, betaBuildLocalizations, betaGroups, buildBetaDetail, expirationDate, expired, iconAssetToken, individualTesters, minOsVersion, preReleaseVersion, processingState, uploadedDate, usesNonExemptEncryption, version
 
-        static var key: String = "build"
+        static var key: String = "builds"
         var pair: NestableQueryParameter.Pair { return (nil, rawValue) }
     }
 }
