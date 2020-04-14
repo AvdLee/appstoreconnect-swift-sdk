@@ -1,3 +1,10 @@
+### 1.0.2
+- Add test target for development ([#84](https://github.com/AvdLee/appstoreconnect-swift-sdk/pull/84)) via [@adamjcampbell](https://github.com/adamjcampbell)
+- Fix filter naming mismatch in ListBuilds ([#83](https://github.com/AvdLee/appstoreconnect-swift-sdk/pull/83)) via [@DechengMa](https://github.com/DechengMa)
+- Implement list users limit ([#82](https://github.com/AvdLee/appstoreconnect-swift-sdk/pull/82)) via [@adamjcampbell](https://github.com/adamjcampbell)
+- Fix ListBetaTesters.Fields ([#80](https://github.com/AvdLee/appstoreconnect-swift-sdk/pull/80)) via [@yonaskolb](https://github.com/yonaskolb)
+- Merge release 1.0.1 into master ([#79](https://github.com/AvdLee/appstoreconnect-swift-sdk/pull/79)) via [@SwiftLeeBot](https://github.com/SwiftLeeBot)
+
 ### 1.0.1
 - Device.attributes.devicesClass is misnamed ([#76](https://github.com/AvdLee/appstoreconnect-swift-sdk/issues/76)) via @ruipfcosta
 - Wrong response type for getAllCertificates call ([#72](https://github.com/AvdLee/appstoreconnect-swift-sdk/pull/72)) via @ristkof
