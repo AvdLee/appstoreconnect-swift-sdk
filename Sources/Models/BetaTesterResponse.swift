@@ -15,7 +15,7 @@ public struct BetaTesterResponse: Codable {
 
     /// The requested relationship data.￼
     ///  Possible types: App, BetaGroup, Build
-    public let include: [BetaTesterRelationship]?
+    public let included: [BetaTesterRelationship]?
 
     /// Navigational links that include the self-link.
     public let links: DocumentLinks

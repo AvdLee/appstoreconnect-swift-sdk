@@ -15,7 +15,7 @@ public struct PrereleaseVersionResponse: Codable {
 
     /// The requested relationship data.￼
     ///  Possible types: Build, App
-    public let include: [PreReleaseVersionRelationship]?
+    public let included: [PreReleaseVersionRelationship]?
 
     /// Navigational links that include the self-link.
     public let links: DocumentLinks
