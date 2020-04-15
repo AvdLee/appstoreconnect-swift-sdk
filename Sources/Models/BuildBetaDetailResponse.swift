@@ -14,7 +14,7 @@ public struct BuildBetaDetailResponse: Codable {
     public let data: BuildBetaDetail
 
     /// The requested relationship data.
-    public let include: [Build]?
+    public let included: [Build]?
 
     /// Navigational links that include the self-link.
     public let links: DocumentLinks
