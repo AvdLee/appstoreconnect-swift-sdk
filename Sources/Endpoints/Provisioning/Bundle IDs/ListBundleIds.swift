@@ -18,6 +18,7 @@ extension APIEndpoint where T == BundleIdsResponse {
     public static func listBundleIds(
         fields: [BundleIds.Field]? = nil,
         filter: [BundleIds.Filter]? = nil,
+        include: [BundleIds.Include]? = nil,
         sort: [BundleIds.Sort]? = nil,
         limit: Int? = nil,
         next: PagedDocumentLinks? = nil) -> APIEndpoint {
@@ -25,6 +26,7 @@ extension APIEndpoint where T == BundleIdsResponse {
         var parameters = [String: Any]()
         if let fields = fields { parameters.add(fields) }
         if let filter = filter { parameters.add(filter) }
+        if let include = include { parameters.add(include) }
         if let sort = sort { parameters.add(sort) }
         if let limit = limit { parameters["limit"] = limit }
         if let nextCursor = next?.nextCursor { parameters["cursor"] = nextCursor }
