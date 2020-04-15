@@ -1,3 +1,9 @@
+### 1.0.3
+- Profile.Attributes createDate should be createdDate ([#90](https://github.com/AvdLee/appstoreconnect-swift-sdk/issues/90)) via [@orj](https://github.com/orj)
+- APIEndpoint.listBundleIds doesn't have 'include' parameter. ([#88](https://github.com/AvdLee/appstoreconnect-swift-sdk/issues/88)) via [@orj](https://github.com/orj)
+- Naming mismatch for `include` field in Response ([#86](https://github.com/AvdLee/appstoreconnect-swift-sdk/issues/86)) via [@DechengMa](https://github.com/DechengMa)
+- Merge release 1.0.2 into master ([#85](https://github.com/AvdLee/appstoreconnect-swift-sdk/pull/85)) via [@SwiftLeeBot](https://github.com/SwiftLeeBot)
+
 ### 1.0.2
 - Add test target for development ([#84](https://github.com/AvdLee/appstoreconnect-swift-sdk/pull/84)) via [@adamjcampbell](https://github.com/adamjcampbell)
 - Fix filter naming mismatch in ListBuilds ([#83](https://github.com/AvdLee/appstoreconnect-swift-sdk/pull/83)) via [@DechengMa](https://github.com/DechengMa)
