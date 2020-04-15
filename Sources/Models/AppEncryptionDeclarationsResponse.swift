@@ -14,7 +14,7 @@ public struct AppEncryptionDeclarationsResponse: Codable {
     public let data: [AppEncryptionDeclaration]
 
     /// The requested relationship data.
-    public let include: [App]?
+    public let included: [App]?
 
     /// Navigational links that include the self-link.
     public let links: PagedDocumentLinks

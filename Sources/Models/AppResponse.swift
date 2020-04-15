@@ -15,7 +15,7 @@ public struct AppResponse: Codable {
 
     /// The requested relationship data.￼
     /// Possible types: BetaGroup, PrereleaseVersion, BetaAppLocalization, Build, BetaLicenseAgreement, BetaAppReviewDetail
-    public let include: [AppRelationship]?
+    public let included: [AppRelationship]?
 
     /// Navigational links that include the self-link.
     public let links: DocumentLinks
