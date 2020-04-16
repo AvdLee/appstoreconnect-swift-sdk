@@ -65,7 +65,7 @@ public enum ListInvitedUsers {
     public enum Limit: NestableQueryParameter {
 
         /// Maximum: 200
-        case users(Int)
+        case invitedUsers(Int)
 
         /// Maximum: 50
         case visibleApps(Int)
@@ -73,7 +73,7 @@ public enum ListInvitedUsers {
         static var key: String = "limit"
         var pair: Pair {
             switch self {
-            case .users(let value):
+            case .invitedUsers(let value):
                 return (nil, "\(value)")
             case .visibleApps(let value):
                 return ("visibleApps", "\(value)")

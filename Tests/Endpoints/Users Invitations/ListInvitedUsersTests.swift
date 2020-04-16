@@ -17,7 +17,7 @@ final class ListInvitedUsersTests: XCTestCase {
                 .userInvitations(ListInvitedUsers.Field.UserInvitation.allCases)],
             include: ListInvitedUsers.Include.allCases,
             limit: [
-                .users(1),
+                .invitedUsers(1),
                 .visibleApps(2)
             ],
             sort: ListInvitedUsers.Sort.allCases,
