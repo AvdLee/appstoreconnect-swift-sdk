@@ -70,7 +70,7 @@ public final class APIProvider {
     public typealias StatusCode = Int
     
     /// Contains a JSON Decoder which can be reused.
-    private let jsonDecoder: JSONDecoder = {
+    static let jsonDecoder: JSONDecoder = {
         let decoder = JSONDecoder()
         let formatter = DateFormatter()
         decoder.dateDecodingStrategy = .custom({ (decoder) -> Date in
