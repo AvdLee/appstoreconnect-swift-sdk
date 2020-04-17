@@ -39,7 +39,8 @@ public final class APIProvider {
         case requestGeneration
         case unknownResponseType
         case requestFailure(StatusCode, Data?)
-        case decodingError(Data)
+        case decodingError(Swift.Error, Data)
+        case dateDecodingError(String)
         case requestExecutorError(Swift.Error)
 
         public var debugDescription: String {
@@ -53,11 +54,13 @@ public final class APIProvider {
                     return "Request failed with status code \(statusCode) and response \(response))."
                 }
                 return "Request failed with status code \(statusCode)."
-            case .decodingError(let data):
-                if let error = String(data: data, encoding: .utf8) {
-                    return "Failed to decode data: \(error)."
+            case .decodingError(let error, let data):
+                if let response = String(data: data, encoding: .utf8) {
+                    return "Failed to decode response:\n\(response)\nError: \(error)."
                 }
                 return "Failed to decode data."
+            case .dateDecodingError(let date):
+                return "Failed to decode date: \(date)"
             case .requestExecutorError(let error):
                 return "Failed to execute request \(error)."
             }
@@ -82,7 +85,7 @@ public final class APIProvider {
             if let date = formatter.date(from: dateStr) {
                 return date
             }
-            throw APIProvider.Error.decodingError(Data(dateStr.utf8))
+            throw APIProvider.Error.dateDecodingError(dateStr)
         })
         return decoder
     }()
@@ -159,11 +162,13 @@ private extension APIProvider {
             guard let data = response.data, 200..<300 ~= response.statusCode else {
                 return .failure(Error.requestFailure(response.statusCode, response.data))
             }
-            guard let decodedValue = try? jsonDecoder.decode(T.self, from: data) else {
-                return .failure(Error.decodingError(data))
-            }
 
-            return .success(decodedValue)
+            do {
+                let decodedValue = try Self.jsonDecoder.decode(T.self, from: data)
+                return .success(decodedValue)
+            } catch {
+                return .failure(Error.decodingError(error, data))
+            }
         case .failure(let error):
             return .failure(Error.requestExecutorError(error))
         }
