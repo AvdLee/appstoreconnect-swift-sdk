@@ -16,7 +16,7 @@ public struct Profile: Codable {
         public let platform: BundleIdPlatform?
         public let profileContent: String?
         public let uuid: String?
-        public let createDate: Date?
+        public let createdDate: Date?
         public let profileState: ProfileState?
         public let profileType: ProfileType?
         public let expirationDate: Date?

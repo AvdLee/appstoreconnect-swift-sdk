@@ -60,14 +60,21 @@ public enum ListInvitedUsers {
         static var key: String = "include"
         var pair: NestableQueryParameter.Pair { return (nil, rawValue) }
     }
-    
+
     /// Number of resources to return.
     public enum Limit: NestableQueryParameter {
+
+        /// Maximum: 200
+        case invitedUsers(Int)
+
+        /// Maximum: 50
         case visibleApps(Int)
 
         static var key: String = "limit"
         var pair: Pair {
             switch self {
+            case .invitedUsers(let value):
+                return (nil, "\(value)")
             case .visibleApps(let value):
                 return ("visibleApps", "\(value)")
             }
