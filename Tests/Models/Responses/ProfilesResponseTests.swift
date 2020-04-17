@@ -27,12 +27,7 @@ class ProfilesResponseTests: XCTestCase {
     }
 
     func testDecodeIncludeBundleId() throws {
-        do {
-            try decodeFixture(named: "v1/profiles/include_bundleId")
-        } catch {
-            dump(error)
-            XCTFail()
-        }
+        try decodeFixture(named: "v1/profiles/include_bundleId")
     }
 
     func testDecodeIncludeCertificates() throws {
