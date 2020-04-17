@@ -84,3 +84,51 @@ extension BetaTester {
         relationships: nil,
         links: .test)
 }
+
+extension Device.Attributes {
+    static var test = Device.Attributes(
+        deviceClass: nil,
+        model: nil,
+        name: nil,
+        platform: nil,
+        status: nil,
+        udid: nil,
+        addedDate: nil
+    )
+}
+
+extension Device {
+    static var test = Device(
+        attributes: .test,
+        id: "id",
+        links: .test)
+}
+
+extension Certificate.Attributes {
+    static var test = Certificate.Attributes(
+        certificateContent: nil,
+        displayName: nil,
+        expirationDate: nil,
+        name: nil,
+        platform: nil,
+        serialNumber: nil,
+        certificateType: nil
+    )
+}
+
+extension Certificate {
+    static var test = Certificate(
+        attributes: .test,
+        id: "id",        
+        links: .test
+    )
+}
+
+extension BundleId {
+    static var test = BundleId(
+        attributes: nil,
+        id: "id",
+        relationships: nil,
+        links: .test
+    )
+}

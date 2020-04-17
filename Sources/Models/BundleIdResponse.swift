@@ -8,7 +8,7 @@
 import Foundation
 
 /// A response containing a single resource.
-public struct BundleIdResponse: Decodable {
+public struct BundleIdResponse: Codable {
 
     /// The resource data.
     public let data: BundleId
