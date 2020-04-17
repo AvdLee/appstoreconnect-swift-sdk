@@ -150,7 +150,9 @@
 		50996B41241500190044308C /* QueryParameterTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50996AB2241500190044308C /* QueryParameterTests.swift */; };
 		6D050F07241BE65700CBDABA /* ProfileCertificatesResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D050F06241BE65700CBDABA /* ProfileCertificatesResponse.swift */; };
 		A72A23D32449384C0093A0E9 /* ProfileRelationship.swift in Sources */ = {isa = PBXBuildFile; fileRef = A72A23D22449384C0093A0E9 /* ProfileRelationship.swift */; };
+		A72A23D5244938610093A0E9 /* ProfileRelationshipTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A72A23D4244938610093A0E9 /* ProfileRelationshipTests.swift */; };
 		A72A23DB2449469E0093A0E9 /* Fixture.swift in Sources */ = {isa = PBXBuildFile; fileRef = A72A23D92449469B0093A0E9 /* Fixture.swift */; };
+		A72A23E2244948200093A0E9 /* ProfilesResponseTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A72A23E1244948200093A0E9 /* ProfilesResponseTests.swift */; };
 		A72A23E4244949530093A0E9 /* Fixtures.bundle in Resources */ = {isa = PBXBuildFile; fileRef = A72A23D62449406C0093A0E9 /* Fixtures.bundle */; };
 		A72A23E7244956260093A0E9 /* Bundle+Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A72A23E6244956260093A0E9 /* Bundle+Tests.swift */; };
 		A757C8702446F457000BE880 /* ListBundleIdsTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = A757C86E2446F452000BE880 /* ListBundleIdsTest.swift */; };
@@ -646,7 +648,10 @@
 		50996AB2241500190044308C /* QueryParameterTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = QueryParameterTests.swift; path = Tests/QueryParameterTests.swift; sourceTree = SOURCE_ROOT; };
 		6D050F06241BE65700CBDABA /* ProfileCertificatesResponse.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfileCertificatesResponse.swift; sourceTree = "<group>"; };
 		A72A23D22449384C0093A0E9 /* ProfileRelationship.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileRelationship.swift; sourceTree = "<group>"; };
+		A72A23D4244938610093A0E9 /* ProfileRelationshipTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileRelationshipTests.swift; sourceTree = "<group>"; };
+		A72A23D62449406C0093A0E9 /* Fixtures.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; name = Fixtures.bundle; path = Tests/Models/Fixtures.bundle; sourceTree = SOURCE_ROOT; };
 		A72A23D92449469B0093A0E9 /* Fixture.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = Fixture.swift; path = Tests/Models/Fixture.swift; sourceTree = SOURCE_ROOT; };
+		A72A23E1244948200093A0E9 /* ProfilesResponseTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfilesResponseTests.swift; sourceTree = "<group>"; };
 		A72A23E6244956260093A0E9 /* Bundle+Tests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Bundle+Tests.swift"; sourceTree = "<group>"; };
 		A757C86E2446F452000BE880 /* ListBundleIdsTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListBundleIdsTest.swift; sourceTree = "<group>"; };
 		"AppStoreConnect-Swift-SDK::AppStoreConnect-Swift-SDK::Product" /* AppStoreConnect_Swift_SDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = AppStoreConnect_Swift_SDK.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -1299,15 +1304,25 @@
 		50996AA8241500190044308C /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				A72A23E0244947FF0093A0E9 /* Responses */,
 				50996AA9241500190044308C /* BetaTesterRelationshipTests.swift */,
 				50996AAA241500190044308C /* BetaGroupRelationshipTests.swift */,
 				50996AAB241500190044308C /* PreReleaseVersionRelationshipTests.swift */,
 				50996AAC241500190044308C /* AppRelationshipTests.swift */,
 				50996AAD241500190044308C /* BuildRelationshipTests.swift */,
+				A72A23D4244938610093A0E9 /* ProfileRelationshipTests.swift */,
 			);
 			name = Models;
 			path = Tests/Models;
 			sourceTree = SOURCE_ROOT;
+		};
+		A72A23E0244947FF0093A0E9 /* Responses */ = {
+			isa = PBXGroup;
+			children = (
+				A72A23E1244948200093A0E9 /* ProfilesResponseTests.swift */,
+			);
+			path = Responses;
+			sourceTree = "<group>";
 		};
 		A72A23E5244955F20093A0E9 /* Helpers */ = {
 			isa = PBXGroup;
@@ -2380,6 +2395,7 @@
 				50996AD9241500190044308C /* RemoveIndividualTestersFromBuildTests.swift in Sources */,
 				50996ACD241500190044308C /* ReadAppEncryptionDeclarationInformation.swift in Sources */,
 				50996ABA241500190044308C /* CreateBetaTesterTests.swift in Sources */,
+				A72A23E2244948200093A0E9 /* ProfilesResponseTests.swift in Sources */,
 				50996B1E241500190044308C /* GetBuildIDsInBetaGroupTests.swift in Sources */,
 				A72A23DB2449469E0093A0E9 /* Fixture.swift in Sources */,
 				50996AD7241500190044308C /* ModifyBuildTests.swift in Sources */,
@@ -2492,6 +2508,7 @@
 				50996AD8241500190044308C /* GetResourceIDsOfIndividualTestersForBuildTests.swift in Sources */,
 				50996ABF241500190044308C /* GetAppResourceIDsForBetaTesterTests.swift in Sources */,
 				50996B26241500190044308C /* GetAppResourceIDForBetaGroupTests.swift in Sources */,
+				A72A23D5244938610093A0E9 /* ProfileRelationshipTests.swift in Sources */,
 				50996B24241500190044308C /* ReadAppInformationOfBetaGroupTests.swift in Sources */,
 				A72A23E7244956260093A0E9 /* Bundle+Tests.swift in Sources */,
 				50996AD6241500190044308C /* ReadAppEncryptionDeclarationOfBuildTests.swift in Sources */,
