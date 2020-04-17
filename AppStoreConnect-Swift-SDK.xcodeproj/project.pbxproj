@@ -150,6 +150,8 @@
 		50996B41241500190044308C /* QueryParameterTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50996AB2241500190044308C /* QueryParameterTests.swift */; };
 		6D050F07241BE65700CBDABA /* ProfileCertificatesResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D050F06241BE65700CBDABA /* ProfileCertificatesResponse.swift */; };
 		A72A23D32449384C0093A0E9 /* ProfileRelationship.swift in Sources */ = {isa = PBXBuildFile; fileRef = A72A23D22449384C0093A0E9 /* ProfileRelationship.swift */; };
+		A72A23DB2449469E0093A0E9 /* Fixture.swift in Sources */ = {isa = PBXBuildFile; fileRef = A72A23D92449469B0093A0E9 /* Fixture.swift */; };
+		A72A23E7244956260093A0E9 /* Bundle+Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A72A23E6244956260093A0E9 /* Bundle+Tests.swift */; };
 		A757C8702446F457000BE880 /* ListBundleIdsTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = A757C86E2446F452000BE880 /* ListBundleIdsTest.swift */; };
 		OBJ_1049 /* AppStoreConnect_Swift_SDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = "AppStoreConnect-Swift-SDK::AppStoreConnect-Swift-SDK::Product" /* AppStoreConnect_Swift_SDK.framework */; };
 		OBJ_554 /* APIProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_8 /* APIProvider.swift */; };
@@ -643,6 +645,8 @@
 		50996AB2241500190044308C /* QueryParameterTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = QueryParameterTests.swift; path = Tests/QueryParameterTests.swift; sourceTree = SOURCE_ROOT; };
 		6D050F06241BE65700CBDABA /* ProfileCertificatesResponse.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfileCertificatesResponse.swift; sourceTree = "<group>"; };
 		A72A23D22449384C0093A0E9 /* ProfileRelationship.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileRelationship.swift; sourceTree = "<group>"; };
+		A72A23D92449469B0093A0E9 /* Fixture.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = Fixture.swift; path = Tests/Models/Fixture.swift; sourceTree = SOURCE_ROOT; };
+		A72A23E6244956260093A0E9 /* Bundle+Tests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Bundle+Tests.swift"; sourceTree = "<group>"; };
 		A757C86E2446F452000BE880 /* ListBundleIdsTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListBundleIdsTest.swift; sourceTree = "<group>"; };
 		"AppStoreConnect-Swift-SDK::AppStoreConnect-Swift-SDK::Product" /* AppStoreConnect_Swift_SDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = AppStoreConnect_Swift_SDK.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		"AppStoreConnect-Swift-SDK::AppStoreConnect-Swift-SDKTests::Product" /* AppStoreConnect-Swift-SDKTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; path = "AppStoreConnect-Swift-SDKTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -1304,6 +1308,14 @@
 			path = Tests/Models;
 			sourceTree = SOURCE_ROOT;
 		};
+		A72A23E5244955F20093A0E9 /* Helpers */ = {
+			isa = PBXGroup;
+			children = (
+				A72A23E6244956260093A0E9 /* Bundle+Tests.swift */,
+			);
+			path = Helpers;
+			sourceTree = "<group>";
+		};
 		A757C86D2446F41A000BE880 /* BundleIds */ = {
 			isa = PBXGroup;
 			children = (
@@ -1744,14 +1756,15 @@
 			children = (
 				50996AAF241500190044308C /* APIProviderTests.swift */,
 				50996A12241500190044308C /* Endpoints */,
+				A72A23D92449469B0093A0E9 /* Fixture.swift */,
+				A72A23E5244955F20093A0E9 /* Helpers */,
 				50996AB0241500190044308C /* JWTRequestsAuthenticatorTests.swift */,
 				50996AAE241500190044308C /* JWTTests.swift */,
 				50996AA8241500190044308C /* Models */,
 				50996A11241500190044308C /* Models+Tests.swift */,
 				50996AB2241500190044308C /* QueryParameterTests.swift */,
 			);
-			name = Tests;
-			path = "Example/CocoaPods-AppStoreConnect-Swift-SDK/Tests";
+			path = Tests;
 			sourceTree = SOURCE_ROOT;
 		};
 		OBJ_48 /* Sales and Finance Reports */ = {
@@ -2354,6 +2367,7 @@
 				50996ACD241500190044308C /* ReadAppEncryptionDeclarationInformation.swift in Sources */,
 				50996ABA241500190044308C /* CreateBetaTesterTests.swift in Sources */,
 				50996B1E241500190044308C /* GetBuildIDsInBetaGroupTests.swift in Sources */,
+				A72A23DB2449469E0093A0E9 /* Fixture.swift in Sources */,
 				50996AD7241500190044308C /* ModifyBuildTests.swift in Sources */,
 				50996B30241500190044308C /* InviteUserTests.swift in Sources */,
 				50996ADA241500190044308C /* ReadBuildBetaDetailsInformationOfBuildTests.swift in Sources */,
@@ -2465,6 +2479,7 @@
 				50996ABF241500190044308C /* GetAppResourceIDsForBetaTesterTests.swift in Sources */,
 				50996B26241500190044308C /* GetAppResourceIDForBetaGroupTests.swift in Sources */,
 				50996B24241500190044308C /* ReadAppInformationOfBetaGroupTests.swift in Sources */,
+				A72A23E7244956260093A0E9 /* Bundle+Tests.swift in Sources */,
 				50996AD6241500190044308C /* ReadAppEncryptionDeclarationOfBuildTests.swift in Sources */,
 				50996ACA241500190044308C /* ListAppEncryptionDeclarations.swift in Sources */,
 				50996ABD241500190044308C /* GetBetaGroupIDsOfBetaTesterGroupsTests.swift in Sources */,
