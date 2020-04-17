@@ -151,6 +151,7 @@
 		6D050F07241BE65700CBDABA /* ProfileCertificatesResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D050F06241BE65700CBDABA /* ProfileCertificatesResponse.swift */; };
 		A72A23D32449384C0093A0E9 /* ProfileRelationship.swift in Sources */ = {isa = PBXBuildFile; fileRef = A72A23D22449384C0093A0E9 /* ProfileRelationship.swift */; };
 		A72A23DB2449469E0093A0E9 /* Fixture.swift in Sources */ = {isa = PBXBuildFile; fileRef = A72A23D92449469B0093A0E9 /* Fixture.swift */; };
+		A72A23E4244949530093A0E9 /* Fixtures.bundle in Resources */ = {isa = PBXBuildFile; fileRef = A72A23D62449406C0093A0E9 /* Fixtures.bundle */; };
 		A72A23E7244956260093A0E9 /* Bundle+Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A72A23E6244956260093A0E9 /* Bundle+Tests.swift */; };
 		A757C8702446F457000BE880 /* ListBundleIdsTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = A757C86E2446F452000BE880 /* ListBundleIdsTest.swift */; };
 		OBJ_1049 /* AppStoreConnect_Swift_SDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = "AppStoreConnect-Swift-SDK::AppStoreConnect-Swift-SDK::Product" /* AppStoreConnect_Swift_SDK.framework */; };
@@ -1757,6 +1758,7 @@
 				50996AAF241500190044308C /* APIProviderTests.swift */,
 				50996A12241500190044308C /* Endpoints */,
 				A72A23D92449469B0093A0E9 /* Fixture.swift */,
+				A72A23D62449406C0093A0E9 /* Fixtures.bundle */,
 				A72A23E5244955F20093A0E9 /* Helpers */,
 				50996AB0241500190044308C /* JWTRequestsAuthenticatorTests.swift */,
 				50996AAE241500190044308C /* JWTTests.swift */,
@@ -1948,6 +1950,7 @@
 			buildPhases = (
 				OBJ_905 /* Sources */,
 				OBJ_1048 /* Frameworks */,
+				A72A23E3244949490093A0E9 /* Resources */,
 			);
 			buildRules = (
 			);
@@ -1990,6 +1993,17 @@
 			);
 		};
 /* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		A72A23E3244949490093A0E9 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				A72A23E4244949530093A0E9 /* Fixtures.bundle in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		OBJ_553 /* Sources */ = {

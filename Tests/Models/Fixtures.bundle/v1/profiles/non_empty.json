@@ -1,0 +1,108 @@
+{
+  "data" : [ {
+    "type" : "profiles",
+    "id" : "AABBCCDDEE",
+    "attributes" : {
+      "profileState" : "ACTIVE",
+      "createdDate" : "2019-05-22T12:55:45.000+0000",
+      "profileType" : "MAC_APP_STORE",
+      "name" : "Mac App Store Profile",
+      "profileContent" : "...",
+      "uuid" : "01234567-1234-5678-abcd-0123456789ab",
+      "platform" : "MAC_OS",
+      "expirationDate" : "2020-05-21T12:45:15.000+0000"
+    },
+    "relationships" : {
+      "bundleId" : {
+        "links" : {
+          "self" : "https://api.appstoreconnect.apple.com/v1/profiles/AABBCCDDEE/relationships/bundleId",
+          "related" : "https://api.appstoreconnect.apple.com/v1/profiles/AABBCCDDEE/bundleId"
+        }
+      },
+      "certificates" : {
+        "meta" : {
+          "paging" : {
+            "total" : 0,
+            "limit" : 2147483647
+          }
+        },
+        "links" : {
+          "self" : "https://api.appstoreconnect.apple.com/v1/profiles/AABBCCDDEE/relationships/certificates",
+          "related" : "https://api.appstoreconnect.apple.com/v1/profiles/AABBCCDDEE/certificates"
+        }
+      },
+      "devices" : {
+        "meta" : {
+          "paging" : {
+            "total" : 0,
+            "limit" : 2147483647
+          }
+        },
+        "links" : {
+          "self" : "https://api.appstoreconnect.apple.com/v1/profiles/AABBCCDDEE/relationships/devices",
+          "related" : "https://api.appstoreconnect.apple.com/v1/profiles/AABBCCDDEE/devices"
+        }
+      }
+    },
+    "links" : {
+      "self" : "https://api.appstoreconnect.apple.com/v1/profiles/AABBCCDDEE"
+    }
+  }, {
+    "type" : "profiles",
+    "id" : "BBCCDDEEFF",
+    "attributes" : {
+      "profileState" : "ACTIVE",
+      "createdDate" : "2019-12-24T02:41:12.000+0000",
+      "profileType" : "IOS_APP_ADHOC",
+      "name" : "iOS Ad Hoc Profile",
+      "profileContent" : "...",
+      "uuid" : "abcdef01-abcd-ef01-0123-1234567890ab",
+      "platform" : "IOS",
+      "expirationDate" : "2020-12-22T02:44:22.000+0000"
+    },
+    "relationships" : {
+      "bundleId" : {
+        "links" : {
+          "self" : "https://api.appstoreconnect.apple.com/v1/profiles/BBCCDDEEFF/relationships/bundleId",
+          "related" : "https://api.appstoreconnect.apple.com/v1/profiles/BBCCDDEEFF/bundleId"
+        }
+      },
+      "certificates" : {
+        "meta" : {
+          "paging" : {
+            "total" : 0,
+            "limit" : 2147483647
+          }
+        },
+        "links" : {
+          "self" : "https://api.appstoreconnect.apple.com/v1/profiles/BBCCDDEEFF/relationships/certificates",
+          "related" : "https://api.appstoreconnect.apple.com/v1/profiles/BBCCDDEEFF/certificates"
+        }
+      },
+      "devices" : {
+        "meta" : {
+          "paging" : {
+            "total" : 0,
+            "limit" : 2147483647
+          }
+        },
+        "links" : {
+          "self" : "https://api.appstoreconnect.apple.com/v1/profiles/BBCCDDEEFF/relationships/devices",
+          "related" : "https://api.appstoreconnect.apple.com/v1/profiles/BBCCDDEEFF/devices"
+        }
+      }
+    },
+    "links" : {
+      "self" : "https://api.appstoreconnect.apple.com/v1/profiles/BBCCDDEEFF"
+    }
+  } ],
+  "links" : {
+    "self" : "https://api.appstoreconnect.apple.com/v1/profiles"
+  },
+  "meta" : {
+    "paging" : {
+      "total" : 2,
+      "limit" : 20
+    }
+  }
+}
