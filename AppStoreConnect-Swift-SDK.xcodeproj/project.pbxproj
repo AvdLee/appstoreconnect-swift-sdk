@@ -149,6 +149,7 @@
 		50996B3F241500190044308C /* JWTRequestsAuthenticatorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50996AB0241500190044308C /* JWTRequestsAuthenticatorTests.swift */; };
 		50996B41241500190044308C /* QueryParameterTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50996AB2241500190044308C /* QueryParameterTests.swift */; };
 		6D050F07241BE65700CBDABA /* ProfileCertificatesResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D050F06241BE65700CBDABA /* ProfileCertificatesResponse.swift */; };
+		A72A23D32449384C0093A0E9 /* ProfileRelationship.swift in Sources */ = {isa = PBXBuildFile; fileRef = A72A23D22449384C0093A0E9 /* ProfileRelationship.swift */; };
 		A757C8702446F457000BE880 /* ListBundleIdsTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = A757C86E2446F452000BE880 /* ListBundleIdsTest.swift */; };
 		OBJ_1049 /* AppStoreConnect_Swift_SDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = "AppStoreConnect-Swift-SDK::AppStoreConnect-Swift-SDK::Product" /* AppStoreConnect_Swift_SDK.framework */; };
 		OBJ_554 /* APIProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_8 /* APIProvider.swift */; };
@@ -641,6 +642,7 @@
 		50996AB0241500190044308C /* JWTRequestsAuthenticatorTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = JWTRequestsAuthenticatorTests.swift; path = Tests/JWTRequestsAuthenticatorTests.swift; sourceTree = SOURCE_ROOT; };
 		50996AB2241500190044308C /* QueryParameterTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = QueryParameterTests.swift; path = Tests/QueryParameterTests.swift; sourceTree = SOURCE_ROOT; };
 		6D050F06241BE65700CBDABA /* ProfileCertificatesResponse.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfileCertificatesResponse.swift; sourceTree = "<group>"; };
+		A72A23D22449384C0093A0E9 /* ProfileRelationship.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileRelationship.swift; sourceTree = "<group>"; };
 		A757C86E2446F452000BE880 /* ListBundleIdsTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListBundleIdsTest.swift; sourceTree = "<group>"; };
 		"AppStoreConnect-Swift-SDK::AppStoreConnect-Swift-SDK::Product" /* AppStoreConnect_Swift_SDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = AppStoreConnect_Swift_SDK.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		"AppStoreConnect-Swift-SDK::AppStoreConnect-Swift-SDKTests::Product" /* AppStoreConnect-Swift-SDKTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; path = "AppStoreConnect-Swift-SDKTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -1693,6 +1695,7 @@
 				OBJ_364 /* UserVisibleAppsLinkagesRequest.swift */,
 				OBJ_365 /* UserVisibleAppsLinkagesResponse.swift */,
 				OBJ_366 /* UsersResponse.swift */,
+				A72A23D22449384C0093A0E9 /* ProfileRelationship.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -2067,6 +2070,7 @@
 				OBJ_638 /* GetBetaTesterIDsInBetaGroup.swift in Sources */,
 				OBJ_639 /* GetBuildIDsInBetaGroup.swift in Sources */,
 				6D050F07241BE65700CBDABA /* ProfileCertificatesResponse.swift in Sources */,
+				A72A23D32449384C0093A0E9 /* ProfileRelationship.swift in Sources */,
 				OBJ_640 /* ListBetaGroups.swift in Sources */,
 				OBJ_641 /* ListBetaTestersInBetaGroup.swift in Sources */,
 				OBJ_642 /* ListBuildsForBetaGroup.swift in Sources */,

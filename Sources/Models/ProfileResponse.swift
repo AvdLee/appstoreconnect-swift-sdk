@@ -18,5 +18,5 @@ public struct ProfileResponse: Codable {
 
     /// The requested relationship data.￼
     ///  Possible types: BundleId, Device, Certificate
-    public let included: [AppRelationship]?
+    public let included: [ProfileRelationship]?
 }
