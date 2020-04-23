@@ -23,7 +23,7 @@ final class ProfileRelationshipTests: XCTestCase {
         let allCases = [
             ProfileRelationship.device(.test),
             ProfileRelationship.bundleId(.test),
-            ProfileRelationship.certificate(.test),
+            ProfileRelationship.certificate(.test)
         ]
         for relationship in allCases {
             let encoded = try encoder.encode(relationship)
@@ -34,4 +34,3 @@ final class ProfileRelationshipTests: XCTestCase {
         }
     }
 }
-

@@ -119,7 +119,7 @@ extension Certificate.Attributes {
 extension Certificate {
     static var test = Certificate(
         attributes: .test,
-        id: "id",        
+        id: "id",
         links: .test
     )
 }

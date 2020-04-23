@@ -11,4 +11,4 @@ extension Bundle {
     static let tests = Bundle(for: BundleTag.self)
 }
 
-private class BundleTag {}
+private final class BundleTag {}

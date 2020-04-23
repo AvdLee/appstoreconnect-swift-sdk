@@ -9,7 +9,7 @@
 import XCTest
 import Foundation
 
-class ProfilesResponseTests: XCTestCase {
+final class ProfilesResponseTests: XCTestCase {
 
     let decoder = APIProvider.jsonDecoder
 

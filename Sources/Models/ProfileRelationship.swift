@@ -7,8 +7,6 @@
 
 import Foundation
 
-import Foundation
-
 public enum ProfileRelationship: Codable {
     case bundleId(BundleId)
     case certificate(Certificate)
