@@ -1,3 +1,9 @@
+### 1.1.0
+- Fix the parsing of Profile responses ([#95](https://github.com/AvdLee/appstoreconnect-swift-sdk/pull/95)) via [@orj](https://github.com/orj)
+- Added missing build relationships ([#96](https://github.com/AvdLee/appstoreconnect-swift-sdk/pull/96)) via [@Nafisa2020](https://github.com/Nafisa2020)
+- Limit for listing invited users is not implemented ([#93](https://github.com/AvdLee/appstoreconnect-swift-sdk/issues/93)) via [@adamjcampbell](https://github.com/adamjcampbell)
+- Merge release 1.0.3 into master ([#92](https://github.com/AvdLee/appstoreconnect-swift-sdk/pull/92)) via [@SwiftLeeBot](https://github.com/SwiftLeeBot)
+
 ### 1.0.3
 - Profile.Attributes createDate should be createdDate ([#90](https://github.com/AvdLee/appstoreconnect-swift-sdk/issues/90)) via [@orj](https://github.com/orj)
 - APIEndpoint.listBundleIds doesn't have 'include' parameter. ([#88](https://github.com/AvdLee/appstoreconnect-swift-sdk/issues/88)) via [@orj](https://github.com/orj)
