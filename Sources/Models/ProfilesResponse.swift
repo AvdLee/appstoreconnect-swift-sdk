@@ -14,12 +14,12 @@ public struct ProfilesResponse: Codable {
     public let data: [Profile]
 
     /// Navigational links that include the self-link.
-    public let links: DocumentLinks
+    public let links: PagedDocumentLinks
 
     /// Paging information.
     public let meta: PagingInformation?
 
     /// The requested relationship data.￼
     ///  Possible types: BundleId, Device, Certificate
-    public let included: [AppRelationship]?
+    public let included: [ProfileRelationship]?
 }

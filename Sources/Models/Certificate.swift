@@ -28,7 +28,7 @@ public struct Certificate: Codable {
     public let `id`: String
 
     /// The resource type.
-    public let type: String
+    public let type: String = "certificates"
 
     /// Navigational links that include the self-link.
     public let links: PagedDocumentLinks
