@@ -132,3 +132,19 @@ extension BundleId {
         links: .test
     )
 }
+
+extension BuildBetaDetail {
+    static var test = BuildBetaDetail(
+        attributes: nil,
+        id: "id",
+        relationships: nil,
+        links: .test)
+}
+
+extension BetaAppReviewSubmission {
+    static var test = BetaAppReviewSubmission(
+        attributes: nil,
+        id: "id",
+        links: .test,
+        relationships: nil)
+}
