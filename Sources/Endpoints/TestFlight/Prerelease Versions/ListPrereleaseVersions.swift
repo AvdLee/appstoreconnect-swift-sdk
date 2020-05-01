@@ -68,7 +68,7 @@ public enum ListPrereleaseVersions {
         var pair: Pair {
             switch self {
             case .app(let value):
-                return ("apps", value.joinedByCommas())
+                return ("app", value.joinedByCommas())
             case .buildsExpired(let value):
                 return ("builds.expired", value.joinedByCommas())
             case .buildsProcessingState(let value):
