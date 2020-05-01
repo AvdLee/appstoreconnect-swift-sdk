@@ -1,3 +1,7 @@
+### 1.1.1
+- Fix Prerelease Versions filter ([#98](https://github.com/AvdLee/appstoreconnect-swift-sdk/pull/98)) via [@orj](https://github.com/orj)
+- Merge release 1.1.0 into master ([#97](https://github.com/AvdLee/appstoreconnect-swift-sdk/pull/97)) via [@SwiftLeeBot](https://github.com/SwiftLeeBot)
+
 ### 1.1.0
 - Fix the parsing of Profile responses ([#95](https://github.com/AvdLee/appstoreconnect-swift-sdk/pull/95)) via [@orj](https://github.com/orj)
 - Added missing build relationships ([#96](https://github.com/AvdLee/appstoreconnect-swift-sdk/pull/96)) via [@Nafisa2020](https://github.com/Nafisa2020)
