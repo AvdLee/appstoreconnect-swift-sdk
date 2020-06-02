@@ -163,6 +163,10 @@ private extension APIProvider {
                 return .failure(Error.requestFailure(response.statusCode, response.data))
             }
 
+            if T.self is Data.Type {
+                return .success(data as! T)
+            }
+
             do {
                 let decodedValue = try Self.jsonDecoder.decode(T.self, from: data)
                 return .success(decodedValue)
