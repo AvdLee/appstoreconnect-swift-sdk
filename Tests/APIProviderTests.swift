@@ -159,4 +159,18 @@ final class APIProviderTests: XCTestCase {
             XCTAssertTrue(result.isFailure)
         }
     }
+
+    func testRequestWithDataResultSuccess() {
+        let response = Response(statusCode: 200, data: Data(base64Encoded: ""))
+        let mockRequestExecutor = MockRequestExecutor(expectedResponse: Result.success(response))
+
+        let apiProvider = APIProvider(configuration: configuration, requestExecutor: mockRequestExecutor)
+        let resourceLink = ResourceLinks<Data>(self: URL(string: "https://api.appstoreconnect.com?cursor=FIRST")!)
+        apiProvider.request(resourceLink) { result in
+            // using the mock request executor the block is called sync
+            XCTAssertTrue(result.isSuccess)
+            XCTAssertEqual(result.value!, Data(base64Encoded: ""))
+            XCTAssertNotEqual(result.value!, Data(base64Encoded: "foo"))
+        }
+    }
 }
