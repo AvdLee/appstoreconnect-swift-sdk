@@ -6,6 +6,8 @@
 //
 
 public enum CertificateType: String, Codable {
+    case development = "DEVELOPMENT" // undocumented
+    case distribution = "DISTRIBUTION" // undocumented
     case iOSDevelopment = "IOS_DEVELOPMENT"
     case iOSDistribution = "IOS_DISTRIBUTION"
     case macAppDistribution = "MAC_APP_DISTRIBUTION"
