@@ -15,7 +15,8 @@ extension APIEndpoint where T == ProfilesResponse {
         filter: [Profiles.Filter]? = nil,
         include: [Profiles.Include]? = nil,
         sort: [Profiles.Sort]? = nil,
-        limit: [Profiles.Limit]? = nil) -> APIEndpoint {
+        limit: [Profiles.Limit]? = nil,
+        next: PagedDocumentLinks? = nil) -> APIEndpoint {
 
         var parameters = [String: Any]()
         if let fields = fields { parameters.add(fields) }
@@ -23,6 +24,7 @@ extension APIEndpoint where T == ProfilesResponse {
         if let include = include { parameters.add(include) }
         if let sort = sort { parameters.add(sort) }
         if let limit = limit { parameters.add(limit) }
+        if let nextCursor = next?.nextCursor { parameters["cursor"] = nextCursor }
 
         return APIEndpoint(
             path: "profiles",
