@@ -163,8 +163,8 @@ private extension APIProvider {
                 return .failure(Error.requestFailure(response.statusCode, response.data))
             }
 
-            if T.self is Data.Type {
-                return .success(data as! T)
+            if let data = data as? T {
+                return .success(data)
             }
 
             do {
