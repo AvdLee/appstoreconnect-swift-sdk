@@ -5,7 +5,9 @@
 //  Created by Pascal Edmond on 30/11/2018.
 //
 
-extension APIEndpoint where T == Void {
+import Foundation
+
+extension APIEndpoint where T == Data {
 
     /// Download sales and trends reports filtered by your specified criteria.
     ///
