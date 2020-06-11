@@ -1,3 +1,10 @@
+### 1.1.2
+- Return Response instead of Void for "Sales and Finance Reports" endpoints ([#100](https://github.com/AvdLee/appstoreconnect-swift-sdk/issues/100)) via [@DechengMa](https://github.com/DechengMa)
+- Add public init to CapabilitySetting and CapabilityOption ([#106](https://github.com/AvdLee/appstoreconnect-swift-sdk/pull/106)) via [@DechengMa](https://github.com/DechengMa)
+- Add paging to listProfiles endpoint ([#107](https://github.com/AvdLee/appstoreconnect-swift-sdk/pull/107)) via [@DechengMa](https://github.com/DechengMa)
+- List/Read Certificates fails to parse response. ([#104](https://github.com/AvdLee/appstoreconnect-swift-sdk/issues/104)) via [@orj](https://github.com/orj)
+- Merge release 1.1.1 into master ([#99](https://github.com/AvdLee/appstoreconnect-swift-sdk/pull/99)) via [@SwiftLeeBot](https://github.com/SwiftLeeBot)
+
 ### 1.1.1
 - Fix Prerelease Versions filter ([#98](https://github.com/AvdLee/appstoreconnect-swift-sdk/pull/98)) via [@orj](https://github.com/orj)
 - Merge release 1.1.0 into master ([#97](https://github.com/AvdLee/appstoreconnect-swift-sdk/pull/97)) via [@SwiftLeeBot](https://github.com/SwiftLeeBot)
