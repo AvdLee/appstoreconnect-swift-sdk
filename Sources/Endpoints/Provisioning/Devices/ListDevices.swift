@@ -21,7 +21,11 @@ extension APIEndpoint where T == DevicesResponse {
         if let fields = fields { parameters.add(fields) }
         if let filter = filter { parameters.add(filter) }
         if let sort = sort { parameters.add(sort) }
-        if let limit = limit { parameters["limit"] = limit }
+        if let limit = limit {
+            parameters["limit"] = limit
+        } else if let nextLimit = next?.nextLimit {
+            parameters["limit"] = nextLimit
+        }
         if let nextCursor = next?.nextCursor { parameters["cursor"] = nextCursor }
         
         return APIEndpoint(
