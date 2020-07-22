@@ -20,7 +20,11 @@ extension APIEndpoint where T == BuildsResponse {
         limit: Int? = nil,
         next: PagedDocumentLinks? = nil) -> APIEndpoint {
         var parameters = [String: Any]()
-        if let limit = limit { parameters["limit"] = limit }
+        if let limit = limit {
+            parameters["limit"] = limit
+        } else if let nextLimit = next?.nextLimit {
+            parameters["limit"] = nextLimit
+        }
         if let fields = fields { parameters.add(fields) }
         if let nextCursor = next?.nextCursor { parameters["cursor"] = nextCursor }
         return APIEndpoint(path: "preReleaseVersions/\(id)/builds", method: .get, parameters: parameters)

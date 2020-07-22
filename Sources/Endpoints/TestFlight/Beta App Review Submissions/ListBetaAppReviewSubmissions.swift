@@ -25,7 +25,11 @@ extension APIEndpoint where T == BetaAppReviewSubmissionsResponse {
         if let fields = fields { parameters.add(fields) }
         if let filter = filter { parameters.add(filter) }
         if let include = include { parameters.add(include) }
-        if let limit = limit { parameters["limit"] = limit }
+        if let limit = limit {
+            parameters["limit"] = limit
+        } else if let nextLimit = next?.nextLimit {
+            parameters["limit"] = nextLimit
+        }
         if let nextCursor = next?.nextCursor { parameters["cursor"] = nextCursor }
         return APIEndpoint(path: "betaAppReviewSubmissions", method: .get, parameters: parameters)
     }
