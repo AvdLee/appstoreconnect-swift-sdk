@@ -25,6 +25,11 @@ extension PagedDocumentLinks {
     var nextCursor: String? {
         return next?.value(for: "cursor")
     }
+
+    var nextLimit: String? {
+        return next?.value(for: "limit")
+    }
+
 }
 
 private extension URL {

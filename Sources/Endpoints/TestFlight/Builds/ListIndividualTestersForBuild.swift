@@ -20,7 +20,11 @@ extension APIEndpoint where T == BetaTestersResponse {
         fields: [ListIndividualTestersForBuild.Field]? = nil,
         next: PagedDocumentLinks? = nil) -> APIEndpoint {
         var parameters = [String: Any]()
-        if let limit = limit { parameters["limit"] = limit }
+        if let limit = limit {
+            parameters["limit"] = limit
+        } else if let nextLimit = next?.nextLimit {
+            parameters["limit"] = nextLimit
+        }
         if let fields = fields { parameters.add(fields) }
         if let nextCursor = next?.nextCursor { parameters["cursor"] = nextCursor }
         return APIEndpoint(path: "builds/\(id)/individualTesters", method: .get, parameters: parameters)

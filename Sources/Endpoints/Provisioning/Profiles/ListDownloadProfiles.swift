@@ -23,7 +23,11 @@ extension APIEndpoint where T == ProfilesResponse {
         if let filter = filter { parameters.add(filter) }
         if let include = include { parameters.add(include) }
         if let sort = sort { parameters.add(sort) }
-        if let limit = limit { parameters.add(limit) }
+        if let limit = limit {
+            parameters.add(limit)
+        } else if let nextLimit = next?.nextLimit {
+            parameters["limit"] = nextLimit
+        }
         if let nextCursor = next?.nextCursor { parameters["cursor"] = nextCursor }
 
         return APIEndpoint(
