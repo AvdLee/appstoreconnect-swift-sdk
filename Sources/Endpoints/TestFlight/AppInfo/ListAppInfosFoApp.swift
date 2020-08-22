@@ -58,6 +58,19 @@ extension ListAppInfosForApp.Field {
     }
 }
 
-public struct AppInfosResponse {}
+public struct AppInfosResponse: Codable {
+    /// The resource data.
+    public let data: [AppInfo]
+    
+//    /// The requested relationship data.￼
+//    ///  Possible types: BetaGroup, PrereleaseVersion, BetaAppLocalization, Build, BetaLicenseAgreement, BetaAppReviewDetail
+//    public let included: [AppInfoRelationship]?
+    
+    /// Navigational links that include the self-link.
+    public let links: PagedDocumentLinks
+    
+    /// Paging information.
+    public let meta: PagingInformation?
+}
 
-public struct AppInfo {}
+public struct AppInfo: Codable {}
