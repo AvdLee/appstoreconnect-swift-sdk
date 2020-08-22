@@ -1,5 +1,5 @@
 //
-//  ListAppInfosFoApp.swift
+//  ListAppInfosForApp.swift
 //  AppStoreConnect-Swift-SDK
 //
 //  Created by Morten Bjerg Gregersen on 22/08/2020.
