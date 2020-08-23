@@ -137,7 +137,7 @@ public enum ListApps {
             case .apps(let value):
                 return (nil, "\(value)")
             case .appInfos(let value):
-                return (nil, "\(value)")
+                return ("appInfos", "\(value)")
             case .preReleaseVersions(let value):
                 return ("preReleaseVersions", "\(value)")
             case .builds(let value):
