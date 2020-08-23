@@ -11,10 +11,10 @@ import Foundation
 public struct AppInfo: Codable {
     /// Attributes that describe a resource.
     public struct Attributes: Codable {
-        public let appStoreAgeRating: AppStoreAgeRating
-        public let appStoreState: AppStoreVersionState
-        public let brazilAgeRating: BrazilAgeRating
-        public let kidsAgeBand: KidsAgeBand
+        public let appStoreAgeRating: AppStoreAgeRating?
+        public let appStoreState: AppStoreVersionState?
+        public let brazilAgeRating: BrazilAgeRating?
+        public let kidsAgeBand: KidsAgeBand?
     }
     
     public struct Relationships: Codable {
