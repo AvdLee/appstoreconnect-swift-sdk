@@ -9,6 +9,7 @@ import Foundation
 
 public enum AppRelationship: Codable {
     case appInfos(AppInfo)
+    case appStoreVersions(AppStoreVersion)
     case betaGroup(BetaGroup)
     case prereleaseVersion(PrereleaseVersion)
     case betaAppLocalization(BetaAppLocalization)
@@ -21,7 +22,7 @@ public enum AppRelationship: Codable {
     }
 
     enum CodingKeys: String, Decodable, CodingKey {
-        case appInfos, betaGroups, preReleaseVersions, betaAppLocalizations, builds, betaLicenseAgreements, betaAppReviewDetails
+        case appInfos, appStoreVersions, betaGroups, preReleaseVersions, betaAppLocalizations, builds, betaLicenseAgreements, betaAppReviewDetails
     }
 
     public init(from decoder: Decoder) throws {
@@ -29,6 +30,8 @@ public enum AppRelationship: Codable {
         switch type {
         case .appInfos:
             self = try .appInfos(AppInfo(from: decoder))
+        case .appStoreVersions:
+            self = try .appStoreVersions(AppStoreVersion(from: decoder))
         case .betaGroups:
             self = try .betaGroup(BetaGroup(from: decoder))
         case .preReleaseVersions:
@@ -47,6 +50,8 @@ public enum AppRelationship: Codable {
     public func encode(to encoder: Encoder) throws {
         switch self {
         case .appInfos(let value):
+            try value.encode(to: encoder)
+        case .appStoreVersions(let value):
             try value.encode(to: encoder)
         case .betaGroup(let value):
             try value.encode(to: encoder)

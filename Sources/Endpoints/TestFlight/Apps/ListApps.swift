@@ -38,6 +38,7 @@ public enum ListApps {
     public enum Field: NestableQueryParameter {
         case apps([App])
         case appInfos([AppInfo])
+        case appStoreVersions([AppStoreVersion])
         case betaLicenseAgreements([BetaLicenseAgreement])
         case preReleaseVersions([PreReleaseVersion])
         case betaAppReviewDetails([BetaAppReviewDetail])
@@ -52,6 +53,8 @@ public enum ListApps {
                 return (App.key, value.map { $0.pair.value }.joinedByCommas())
             case .appInfos(let value):
                 return (AppInfo.key, value.map { $0.pair.value }.joinedByCommas())
+            case .appStoreVersions(let value):
+                return (AppStoreVersion.key, value.map { $0.pair.value }.joinedByCommas())
             case .betaLicenseAgreements(let value):
                 return (BetaLicenseAgreement.key, value.map { $0.pair.value }.joinedByCommas())
             case .preReleaseVersions(let value):
@@ -92,7 +95,7 @@ public enum ListApps {
     
     /// Relationship data to include in the response.
     public enum Relationship: String, CaseIterable, NestableQueryParameter {
-        case appInfos, betaAppLocalizations, betaAppReviewDetail, betaGroups, betaLicenseAgreement, builds, preReleaseVersions
+        case appInfos, appStoreVersions, betaAppLocalizations, betaAppReviewDetail, betaGroups, betaLicenseAgreement, builds, preReleaseVersions
         
         static var key: String = "include"
         var pair: NestableQueryParameter.Pair { return (nil, rawValue) }
@@ -120,6 +123,9 @@ public enum ListApps {
         case appInfos(Int)
         
         /// Maximum: 50
+        case appStoreVersions(Int)
+        
+        /// Maximum: 50
         case preReleaseVersions(Int)
         
         /// Maximum: 50
@@ -138,6 +144,8 @@ public enum ListApps {
                 return (nil, "\(value)")
             case .appInfos(let value):
                 return ("appInfos", "\(value)")
+            case .appStoreVersions(let value):
+                return ("appStoreVersions", "\(value)")
             case .preReleaseVersions(let value):
                 return ("preReleaseVersions", "\(value)")
             case .builds(let value):
@@ -165,6 +173,13 @@ extension ListApps.Field {
         case app, appInfoLocalizations, appStoreAgeRating, appStoreState, brazilAgeRating, kidsAgeBand, primaryCategory, primarySubcategoryOne, primarySubcategoryTwo, secondaryCategory, secondarySubcategoryOne, secondarySubcategoryTwo
         
         static var key: String = "appInfos"
+        var pair: NestableQueryParameter.Pair { return (nil, rawValue) }
+    }
+    
+    public enum AppStoreVersion: String, CaseIterable, NestableQueryParameter {
+        case ageRatingDeclaration, app, appStoreReviewDetail, appStoreState, appStoreVersionLocalizations, appStoreVersionPhasedRelease, appStoreVersionSubmission, build, copyright, createdDate, downloadable, earliestReleaseDate, idfaDeclaration, platform, releaseType, routingAppCoverage, usesIdfa, versionString
+        
+        static var key: String = "appStoreVersions"
         var pair: NestableQueryParameter.Pair { return (nil, rawValue) }
     }
     
