@@ -77,6 +77,8 @@ public enum ListApps {
         case id([String])
         case name([String])
         case sku([String])
+        case appStoreVersions([AppStoreVersion])
+        case appStoreVersionsPlatform([Platform])
         case appStoreVersionsAppStoreState([AppStoreVersionState])
         
         static var key: String = "filter"
@@ -90,6 +92,10 @@ public enum ListApps {
                 return ("name", value.joinedByCommas())
             case .sku(let value):
                 return ("sku", value.joinedByCommas())
+            case .appStoreVersions(let value):
+                return ("appStoreVersions", value.map(\.id).joinedByCommas())
+            case .appStoreVersionsPlatform(let value):
+                return ("appStoreVersions.platform", value.map(\.rawValue).joinedByCommas())
             case .appStoreVersionsAppStoreState(let value):
                 return ("appStoreVersions.appStoreState", value.map(\.rawValue).joinedByCommas())
             }
