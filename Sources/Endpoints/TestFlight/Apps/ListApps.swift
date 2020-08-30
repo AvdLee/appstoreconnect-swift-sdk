@@ -6,6 +6,7 @@
 //
 
 extension APIEndpoint where T == AppsResponse {
+    
     /// Find and list apps added in App Store Connect.
     ///
     /// - Parameters:
@@ -34,6 +35,7 @@ extension APIEndpoint where T == AppsResponse {
 }
 
 public enum ListApps {
+    
     /// Fields to return for included related types.
     public enum Field: NestableQueryParameter {
         case apps([App])
@@ -50,23 +52,23 @@ public enum ListApps {
         var pair: Pair {
             switch self {
             case .apps(let value):
-                return (App.key, value.map { $0.pair.value }.joinedByCommas())
+                return (App.key, value.map({ $0.pair.value }).joinedByCommas())
             case .appInfos(let value):
-                return (AppInfo.key, value.map { $0.pair.value }.joinedByCommas())
+                return (AppInfo.key, value.map({ $0.pair.value }).joinedByCommas())
             case .appStoreVersions(let value):
-                return (AppStoreVersion.key, value.map { $0.pair.value }.joinedByCommas())
+                return (AppStoreVersion.key, value.map({ $0.pair.value }).joinedByCommas())
             case .betaLicenseAgreements(let value):
-                return (BetaLicenseAgreement.key, value.map { $0.pair.value }.joinedByCommas())
+                return (BetaLicenseAgreement.key, value.map({ $0.pair.value }).joinedByCommas())
             case .preReleaseVersions(let value):
-                return (PreReleaseVersion.key, value.map { $0.pair.value }.joinedByCommas())
+                return (PreReleaseVersion.key, value.map({ $0.pair.value }).joinedByCommas())
             case .betaAppReviewDetails(let value):
-                return (BetaAppReviewDetail.key, value.map { $0.pair.value }.joinedByCommas())
+                return (BetaAppReviewDetail.key, value.map({ $0.pair.value }).joinedByCommas())
             case .betaAppLocalizations(let value):
-                return (BetaAppLocalization.key, value.map { $0.pair.value }.joinedByCommas())
+                return (BetaAppLocalization.key, value.map({ $0.pair.value }).joinedByCommas())
             case .builds(let value):
-                return (Build.key, value.map { $0.pair.value }.joinedByCommas())
+                return (Build.key, value.map({ $0.pair.value }).joinedByCommas())
             case .betaGroups(let value):
-                return (BetaGroup.key, value.map { $0.pair.value }.joinedByCommas())
+                return (BetaGroup.key, value.map({ $0.pair.value }).joinedByCommas())
             }
         }
     }
@@ -125,6 +127,7 @@ public enum ListApps {
     
     /// Number of included related resources to return.
     public enum Limit: NestableQueryParameter {
+        
         /// Maximum: 200
         case apps(Int)
         
