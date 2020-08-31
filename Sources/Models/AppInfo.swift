@@ -11,9 +11,17 @@ import Foundation
 public struct AppInfo: Codable {
     /// Attributes that describe a resource.
     public struct Attributes: Codable {
+        
+        /// The age rating.
         public let appStoreAgeRating: AppStoreAgeRating?
+        
+        /// The state of the app.
         public let appStoreState: AppStoreVersionState?
+        
+        /// The age rating for Brazil.
         public let brazilAgeRating: BrazilAgeRating?
+        
+        /// The range of ages the app is designed for.
         public let kidsAgeBand: KidsAgeBand?
     }
     
