@@ -18,7 +18,9 @@ public struct AppInfo: Codable {
     }
     
     public struct Relationships: Codable {
-//        public let app: AppInfo.Relationships.App?
+        public let app: AppInfo.Relationships.App?
+        
+        // Not implemented yet
 //        public let appInfoLocalizations: AppInfo.Relationships.AppInfoLocalizations?
 //        public let primaryCategory: AppInfo.Relationships.PrimaryCategory?
 //        public let primarySubcategoryOne: AppInfo.Relationships.PrimarySubcategoryOne?
@@ -41,5 +43,40 @@ public struct AppInfo: Codable {
     public let type: String = "appInfos"
     
 //    /// Navigational links that include the self-link.
-//    public let links: ResourceLinks<AppInfoResponse>
+    public let links: ResourceLinks<AppInfo>
+}
+
+// MARK: AppInfo.Relationships
+extension AppInfo.Relationships {
+    
+    public struct App: Codable {
+        
+        /// AppInfo.Relationships.App.Data
+        public let data: AppInfo.Relationships.App.Data
+        
+         /// AppInfo.Relationships.App.Links
+        public let links: AppInfo.Relationships.App.Links?
+    }
+}
+
+// MARK: AppInfo.Relationships.App
+extension AppInfo.Relationships.App {
+    
+    public struct Data: Codable {
+        
+        /// The opaque resource ID that uniquely identifies the resource.
+        public let `id`: String
+        
+        /// The resource type.Value: appStoreVersions
+        public let type: String = "apps"
+    }
+    
+    public struct Links: Codable {
+        
+        /// uri-reference
+        public let related: URL?
+        
+        /// uri-reference
+        public let `self`: URL?
+    }
 }
