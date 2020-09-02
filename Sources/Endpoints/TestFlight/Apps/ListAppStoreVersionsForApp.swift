@@ -16,10 +16,12 @@ extension APIEndpoint where T == AppStoreVersionsResponse {
     public static func appStoreVersions(
         ofAppWithId id: String,
         fields: [ListAppStoreVersionsOfApp.Field]? = nil,
+        filters: [ListAppStoreVersionsOfApp.Filter]? = nil,
         limit: Int? = nil,
         next: PagedDocumentLinks? = nil) -> APIEndpoint {
         var parameters = [String: Any]()
         if let fields = fields { parameters.add(fields) }
+        if let filters = filters { parameters.add(filters) }
         if let limit = limit {
             parameters["limit"] = limit
         } else if let nextLimit = next?.nextLimit {
@@ -43,6 +45,25 @@ public enum ListAppStoreVersionsOfApp {
             switch self {
             case .appStoreVersions(let value):
                 return (AppStoreVersion.key, value.map { $0.pair.value }.joinedByCommas())
+            }
+        }
+    }
+
+    /// Attributes, relationships, and IDs by which to filter.
+    public enum Filter: NestableQueryParameter {
+        case appStoreState([AppStoreVersionState])
+        case platform([Platform])
+        case versionString([String])
+
+        static var key: String = "filter"
+        var pair: Pair {
+            switch self {
+            case .appStoreState(let value):
+                return ("appStoreState", value.map(\.rawValue).joinedByCommas())
+            case .platform(let value):
+                return ("platform", value.map(\.rawValue).joinedByCommas())
+            case .versionString(let value):
+                return ("versionString", value.joinedByCommas())
             }
         }
     }
