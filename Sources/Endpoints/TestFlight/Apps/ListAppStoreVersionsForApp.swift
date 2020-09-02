@@ -27,7 +27,7 @@ extension APIEndpoint where T == AppStoreVersionsResponse {
         }
         if let nextCursor = next?.nextCursor { parameters["cursor"] = nextCursor }
         return APIEndpoint(
-            path: "apps/\(id)/builds",
+            path: "apps/\(id)/appStoreVersions",
             method: .get,
             parameters: parameters)
     }
