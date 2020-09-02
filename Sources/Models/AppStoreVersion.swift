@@ -50,8 +50,8 @@ public struct AppStoreVersion: Codable {
 // MARK: AppStoreVersion.Relationships
 extension AppStoreVersion.Relationships {
     public struct App: Codable {
-        public let data: Data
-        public let links: Links
+        public let data: AppStoreVersion.Relationships.App.Data?
+        public let links: AppStoreVersion.Relationships.App.Links?
         
         public struct Data: Codable {
             public let `id`: String
@@ -65,8 +65,8 @@ extension AppStoreVersion.Relationships {
     }
     
     public struct AgeRatingDeclaration: Codable {
-        public let data: Data
-        public let links: Links
+        public let data: AppStoreVersion.Relationships.AgeRatingDeclaration.Data?
+        public let links: AppStoreVersion.Relationships.AgeRatingDeclaration.Links
         
         public struct Data: Codable {
             public let `id`: String
@@ -80,8 +80,8 @@ extension AppStoreVersion.Relationships {
     }
     
     public struct AppStoreReviewDetail: Codable {
-        public let data: Data
-        public let links: Links
+        public let data: AppStoreVersion.Relationships.AppStoreReviewDetail.Data?
+        public let links: AppStoreVersion.Relationships.AppStoreReviewDetail.Links?
         
         public struct Data: Codable {
             public let `id`: String
@@ -95,8 +95,8 @@ extension AppStoreVersion.Relationships {
     }
     
     public struct AppStoreVersionLocalizations: Codable {
-        public let data: Data
-        public let links: Links
+        public let data: AppStoreVersion.Relationships.AppStoreVersionLocalizations.Data?
+        public let links: AppStoreVersion.Relationships.AppStoreVersionLocalizations.Links?
         
         public struct Data: Codable {
             public let `id`: String
@@ -110,8 +110,8 @@ extension AppStoreVersion.Relationships {
     }
     
     public struct AppStoreVersionPhasedRelease: Codable {
-        public let data: Data
-        public let links: Links
+        public let data: AppStoreVersion.Relationships.AppStoreVersionPhasedRelease.Data?
+        public let links: AppStoreVersion.Relationships.AppStoreVersionPhasedRelease.Links?
         
         public struct Data: Codable {
             public let `id`: String
@@ -125,8 +125,8 @@ extension AppStoreVersion.Relationships {
     }
     
     public struct AppStoreVersionSubmission: Codable {
-        public let data: Data
-        public let links: Links
+        public let data: AppStoreVersion.Relationships.AppStoreVersionSubmission.Data?
+        public let links: AppStoreVersion.Relationships.AppStoreVersionSubmission.Links?
         
         public struct Data: Codable {
             public let `id`: String
@@ -140,8 +140,8 @@ extension AppStoreVersion.Relationships {
     }
     
     public struct Build: Codable {
-        public let data: Data
-        public let links: Links
+        public let data: AppStoreVersion.Relationships.Build.Data?
+        public let links: AppStoreVersion.Relationships.Build.Links?
         
         public struct Data: Codable {
             public let `id`: String
@@ -155,8 +155,8 @@ extension AppStoreVersion.Relationships {
     }
     
     public struct IdfaDeclaration: Codable {
-        public let data: Data
-        public let links: Links
+        public let data: AppStoreVersion.Relationships.IdfaDeclaration.Data?
+        public let links: AppStoreVersion.Relationships.IdfaDeclaration.Links?
         
         public struct Data: Codable {
             public let `id`: String
@@ -170,8 +170,8 @@ extension AppStoreVersion.Relationships {
     }
     
     public struct RoutingAppCoverage: Codable {
-        public let data: Data
-        public let links: Links
+        public let data: AppStoreVersion.Relationships.RoutingAppCoverage.Data?
+        public let links: AppStoreVersion.Relationships.RoutingAppCoverage.Links?
         
         public struct Data: Codable {
             public let `id`: String
