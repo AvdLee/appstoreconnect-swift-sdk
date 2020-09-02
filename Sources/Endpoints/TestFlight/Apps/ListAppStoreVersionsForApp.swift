@@ -13,7 +13,7 @@ extension APIEndpoint where T == AppStoreVersionsResponse {
     ///   - fields: Fields to return for included related types.
     ///   - limit: Number of resources to return.
     ///   - next: The next URL to use as a base. See `PagedDocumentLinks`.
-    public static func builds(
+    public static func appStoreVersions(
         ofAppWithId id: String,
         fields: [ListAppStoreVersionsOfApp.Field]? = nil,
         limit: Int? = nil,
