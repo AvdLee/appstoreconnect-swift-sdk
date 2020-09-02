@@ -23,7 +23,7 @@ public enum AppStoreVersionRelationship: Codable {
     }
 
     enum CodingKeys: String, Decodable, CodingKey {
-        case app, ageRatingDeclaration, appStoreReviewDetail, ppStoreVersionLocalizations, appStoreVersionPhasedRelease, appStoreVersionSubmission, build, idfaDeclaration, routingAppCoverage
+        case app, ageRatingDeclaration, appStoreReviewDetail, appStoreVersionLocalizations, appStoreVersionPhasedRelease, appStoreVersionSubmission, build, idfaDeclaration, routingAppCoverage
     }
 
     public init(from decoder: Decoder) throws {
