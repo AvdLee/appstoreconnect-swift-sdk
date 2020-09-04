@@ -8,21 +8,21 @@
 import Foundation
 
 public enum BundleIdRelationship: Codable {
-    case profile(Profile)
+    case profiles(Profile)
     case bundleIdCapability(BundleIdCapability)
 
     enum TypeKeys: String, CodingKey {
         case type
     }
     enum CodingKeys: String, Decodable, CodingKey {
-        case profile, bundleIdCapability
+        case profiles, bundleIdCapability
     }
 
     public init(from decoder: Decoder) throws {
         let type = try decoder.container(keyedBy: TypeKeys.self).decode(CodingKeys.self, forKey: .type)
         switch type {
-        case .profile:
-            self = try .profile(Profile(from: decoder))
+        case .profiles:
+            self = try .profiles(Profile(from: decoder))
         case .bundleIdCapability:
             self = try .bundleIdCapability(BundleIdCapability(from: decoder))
         }
@@ -30,7 +30,7 @@ public enum BundleIdRelationship: Codable {
 
     public func encode(to encoder: Encoder) throws {
         switch self {
-        case .profile(let value):
+        case .profiles(let value):
             try value.encode(to: encoder)
         case .bundleIdCapability(let value):
             try value.encode(to: encoder)
