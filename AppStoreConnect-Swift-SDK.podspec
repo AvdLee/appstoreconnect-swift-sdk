@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
   s.name             = 'AppStoreConnect-Swift-SDK'
-  s.version          = '1.1.2'
+  s.version          = '1.1.3'
   s.summary          = 'The Swift SDK to work with the App Store Connect API from Apple.'
 
   s.description      = <<-DESC

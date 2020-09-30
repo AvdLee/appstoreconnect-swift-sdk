@@ -1,3 +1,8 @@
+### 1.1.3
+- Add Catalyst profile types ([#113](https://github.com/AvdLee/appstoreconnect-swift-sdk/pull/113)) via [@MortenGregersen](https://github.com/MortenGregersen)
+- Add limit property to PagedDocumentLinks and use it in requests ([#111](https://github.com/AvdLee/appstoreconnect-swift-sdk/pull/111)) via [@DechengMa](https://github.com/DechengMa)
+- Merge release 1.1.2 into master ([#108](https://github.com/AvdLee/appstoreconnect-swift-sdk/pull/108)) via [@SwiftLeeBot](https://github.com/SwiftLeeBot)
+
 ### 1.1.2
 - Return Response instead of Void for "Sales and Finance Reports" endpoints ([#100](https://github.com/AvdLee/appstoreconnect-swift-sdk/issues/100)) via [@DechengMa](https://github.com/DechengMa)
 - Add public init to CapabilitySetting and CapabilityOption ([#106](https://github.com/AvdLee/appstoreconnect-swift-sdk/pull/106)) via [@DechengMa](https://github.com/DechengMa)

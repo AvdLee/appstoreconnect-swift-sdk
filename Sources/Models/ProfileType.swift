@@ -20,4 +20,7 @@ public enum ProfileType: String, Codable {
     case tvOSAppStore = "TVOS_APP_STORE"
     case tvOSAppAdHoc = "TVOS_APP_ADHOC"
     case tvOSAppInHouse = "TVOS_APP_INHOUSE"
+    case macCatalystAppDevelopment = "MAC_CATALYST_APP_DEVELOPMENT"
+    case macCatalystAppStore = "MAC_CATALYST_APP_STORE"
+    case macCatalystAppDirect = "MAC_CATALYST_APP_DIRECT"
 }
