@@ -11,4 +11,5 @@ import Foundation
 public enum ProfileState: String, Codable {
     case active = "ACTIVE"
     case invalid = "INVALID"
+    case expired = "EXPIRED"
 }
