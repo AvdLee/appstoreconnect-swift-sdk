@@ -14,4 +14,5 @@ public enum CapabilityOptionKey: String, Codable {
     case completeProtection = "COMPLETE_PROTECTION"
     case protectedUnlessOpen = "PROTECTED_UNLESS_OPEN"
     case protectedUntilFirstUserAuth = "PROTECTED_UNTIL_FIRST_USER_AUTH"
+    case primaryAppConsent = "PRIMARY_APP_CONSENT"
 }
