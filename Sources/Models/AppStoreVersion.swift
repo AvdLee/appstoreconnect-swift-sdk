@@ -40,11 +40,15 @@ public struct AppStoreVersion: Codable {
     /// The opaque resource ID that uniquely identifies the resource.
     public let id: String
     
+    // Navigational links that include the self-link.
+    public let links: ResourceLinks<AppStoreVersionResponse>
+
     /// Navigational links to related data and included resource types and IDs.
     public let relationships: AppStoreVersion.Relationships?
     
-    /// The resource type.Value: apps
+    /// The resource type.Value: appStoreVersions
     public let type: String = "appStoreVersions"
+    
 }
 
 // MARK: AppStoreVersion.Relationships

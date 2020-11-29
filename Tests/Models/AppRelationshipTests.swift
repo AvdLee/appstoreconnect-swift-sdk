@@ -21,6 +21,8 @@ final class AppRelationshipTests: XCTestCase {
         XCTAssertThrowsError(try decoder.decode(AppRelationship.self, from: "{\"type\": \"betaGroups\"}".data(using: .utf8)!))
         
         let allCases = [
+            AppRelationship.appInfos(.test),
+            AppRelationship.appStoreVersions(.test),
             AppRelationship.betaGroup(.test),
             AppRelationship.prereleaseVersion(.test),
             AppRelationship.betaAppLocalization(.test),

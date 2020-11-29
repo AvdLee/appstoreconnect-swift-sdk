@@ -185,7 +185,6 @@ extension App.Relationships.AppStoreVersion {
     }
 }
 
-
 // MARK: App.Relationships.BetaAppLocalizations
 extension App.Relationships.BetaAppLocalizations {
     

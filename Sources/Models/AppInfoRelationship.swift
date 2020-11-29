@@ -22,7 +22,14 @@ public enum AppInfoRelationship: Codable {
     }
     
     enum CodingKeys: String, Decodable, CodingKey {
-        case app, appInfoLocalizations, primaryCategory, primarySubcategoryOne, primarySubcategoryTwo, secondaryCategory, secondarySubcategoryOne, secondarySubcategoryTwo
+        case app
+//        case appInfoLocalizations
+//        case primaryCategory
+//        case primarySubcategoryOne
+//        case primarySubcategoryTwo
+//        case secondaryCategory
+//        case secondarySubcategoryOne
+//        case secondarySubcategoryTwo
     }
     
     public init(from decoder: Decoder) throws {
@@ -30,8 +37,6 @@ public enum AppInfoRelationship: Codable {
         switch type {
         case .app:
             self = try .app(App(from: decoder))
-        default:
-            fatalError()
         }
     }
     

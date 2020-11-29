@@ -20,6 +20,26 @@ extension ResourceLinks where T: Codable {
         return ResourceLinks<T>(self: URL(string: "https://api.appstoreconnect.com")!)
     }
 }
+//case appInfos(AppInfo)
+//case appStoreVersions(AppStoreVersion)
+
+extension AppInfo {
+    static var test = AppInfo(
+        attributes: nil,
+        id: "id",
+        relationships: nil,
+        links: .test
+    )
+}
+
+extension AppStoreVersion {
+    static var test = AppStoreVersion(
+        attributes: nil,
+        id: "id",
+        links: .test,
+        relationships: nil
+    )
+}
 
 extension BetaGroup {
     static var test = BetaGroup(

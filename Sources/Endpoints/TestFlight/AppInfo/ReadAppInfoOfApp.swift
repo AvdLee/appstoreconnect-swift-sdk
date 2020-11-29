@@ -12,22 +12,16 @@ extension APIEndpoint where T == AppInfoResponse {
     ///   - id: (Required) An opaque resource ID that uniquely identifies the resource.
     ///   - fields: Fields to return for included related types.
     public static func appInfo(
-        forAppWithId id: String,
+        appInfoId: String,
         fields: [AppInfoForApp.Field]? = nil,
         include relationships: [AppInfoForApp.Relationship]? = nil,
-        limit: Int? = nil,
         next: PagedDocumentLinks? = nil) -> APIEndpoint {
         var parameters = [String: Any]()
         if let fields = fields { parameters.add(fields) }
         if let relationships = relationships { parameters.add(relationships) }
-        if let limit = limit {
-            parameters["limit"] = limit
-        } else if let nextLimit = next?.nextLimit {
-            parameters["limit"] = nextLimit
-        }
         if let nextCursor = next?.nextCursor { parameters["cursor"] = nextCursor }
         return APIEndpoint(
-            path: "appInfos/\(id)",
+            path: "appInfos/\(appInfoId)",
             method: .get,
             parameters: parameters)
     }
@@ -65,7 +59,7 @@ extension AppInfoForApp.Field {
     public enum AppInfo: String, CaseIterable, NestableQueryParameter {
         case app, appInfoLocalizations, appStoreAgeRating, appStoreState, brazilAgeRating, kidsAgeBand, primaryCategory, primarySubcategoryOne, primarySubcategoryTwo, secondaryCategory, secondarySubcategoryOne, secondarySubcategoryTwo
 
-        static var key: String = "appInfo"
+        static var key: String = "appInfos"
         var pair: NestableQueryParameter.Pair { return (nil, rawValue) }
     }
 

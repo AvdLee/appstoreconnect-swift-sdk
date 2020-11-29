@@ -18,7 +18,8 @@ extension APIEndpoint where T == AppStoreVersionsResponse {
         fields: [ListAppStoreVersionsOfApp.Field]? = nil,
         filters: [ListAppStoreVersionsOfApp.Filter]? = nil,
         limit: Int? = nil,
-        next: PagedDocumentLinks? = nil) -> APIEndpoint {
+        next: PagedDocumentLinks? = nil
+    ) -> APIEndpoint {
         var parameters = [String: Any]()
         if let fields = fields { parameters.add(fields) }
         if let filters = filters { parameters.add(filters) }

@@ -71,7 +71,7 @@ extension ListAppInfosForApp.Field {
     public enum AppInfo: String, CaseIterable, NestableQueryParameter {
         case app, appInfoLocalizations, appStoreAgeRating, appStoreState, brazilAgeRating, kidsAgeBand, primaryCategory, primarySubcategoryOne, primarySubcategoryTwo, secondaryCategory, secondarySubcategoryOne, secondarySubcategoryTwo
         
-        static var key: String = "appInfo"
+        static var key: String = "appInfos"
         var pair: NestableQueryParameter.Pair { return (nil, rawValue) }
     }
     
