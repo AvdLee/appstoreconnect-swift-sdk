@@ -1,3 +1,10 @@
+### 1.2.0
+- App Info and App Store Version ([#116](https://github.com/AvdLee/appstoreconnect-swift-sdk/pull/116)) via [@MortenGregersen](https://github.com/MortenGregersen)
+- Add APPLE_ID_AUTH capability and required settings ([#121](https://github.com/AvdLee/appstoreconnect-swift-sdk/pull/121)) via [@ptmt](https://github.com/ptmt)
+- Add missing cases for ProfileState ([#119](https://github.com/AvdLee/appstoreconnect-swift-sdk/pull/119)) via [@DechengMa](https://github.com/DechengMa)
+- Use correct key 'profiles' for BundleId relationship ([#117](https://github.com/AvdLee/appstoreconnect-swift-sdk/pull/117)) via [@MortenGregersen](https://github.com/MortenGregersen)
+- Merge release 1.1.3 into master ([#114](https://github.com/AvdLee/appstoreconnect-swift-sdk/pull/114)) via [@SwiftLeeBot](https://github.com/SwiftLeeBot)
+
 ### 1.1.3
 - Add Catalyst profile types ([#113](https://github.com/AvdLee/appstoreconnect-swift-sdk/pull/113)) via [@MortenGregersen](https://github.com/MortenGregersen)
 - Add limit property to PagedDocumentLinks and use it in requests ([#111](https://github.com/AvdLee/appstoreconnect-swift-sdk/pull/111)) via [@DechengMa](https://github.com/DechengMa)
