@@ -28,6 +28,9 @@ public struct App: Codable {
     
     public struct Relationships: Codable {
     
+        /// App.Relationships.AppStoreVersion
+        public let appStoreVersions: App.Relationships.AppStoreVersion?
+        
         /// App.Relationships.BetaLicenseAgreement
         public let betaLicenseAgreement: App.Relationships.BetaLicenseAgreement?
     
@@ -68,6 +71,18 @@ public struct App: Codable {
 
 // MARK: App.Relationships
 extension App.Relationships {
+    
+    public struct AppStoreVersion: Codable {
+        
+        /// [App.Relationships.AppStoreVersion.Data]
+        public let data: [App.Relationships.AppStoreVersion.Data]?
+        
+        /// App.Relationships.AppStoreVersion.Links
+        public let links: App.Relationships.AppStoreVersion.Links?
+        
+        /// PagingInformation
+        public let meta: PagingInformation?
+    }
     
     public struct BetaAppLocalizations: Codable {
     
@@ -145,6 +160,28 @@ extension App.Relationships {
     
         /// PagingInformation
         public let meta: PagingInformation?
+    }
+}
+
+// MARK: App.Relationships.AppStoreVersions
+extension App.Relationships.AppStoreVersion {
+    
+    public struct Data: Codable {
+        
+        /// The opaque resource ID that uniquely identifies the resource.
+        public let `id`: String
+        
+        /// The resource type.Value: appStoreVersions
+        public let type: String = "appStoreVersions"
+    }
+    
+    public struct Links: Codable {
+        
+        /// uri-reference
+        public let related: URL?
+        
+        /// uri-reference
+        public let `self`: URL?
     }
 }
 
