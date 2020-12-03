@@ -32,4 +32,5 @@ public enum CapabilityType: String, Codable {
     case classkit = "CLASSKIT"
     case autofillCredentialProvider = "AUTOFILL_CREDENTIAL_PROVIDER"
     case accessWifiInformation = "ACCESS_WIFI_INFORMATION"
+    case appleIdAuth = "APPLE_ID_AUTH"
 }
