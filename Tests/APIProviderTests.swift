@@ -173,4 +173,26 @@ final class APIProviderTests: XCTestCase {
             XCTAssertNotEqual(result.value!, Data(base64Encoded: "foo"))
         }
     }
+
+    func testDateDecoding() throws {
+        let decoder = APIProvider.jsonDecoder
+        let outputFormatter = DateFormatter()
+        outputFormatter.dateFormat = "E, d MMM yyyy HH:mm:ss Z"
+
+        let dateFrom: (String) throws -> String = { dateString in
+            let date = try decoder.decode(Date.self, from: "\"\(dateString)\"".data(using: .utf8)!)
+            return outputFormatter.string(from: date)
+        }
+
+        // yyyy-MM-dd'T'HH:mm:ss.SSSXXXXX
+        XCTAssertEqual(try dateFrom("2001-01-01T1:53:20.000Z"), "Mon, 1 Jan 2001 1:53:20 am +0000")
+
+        // yyyy-MM-dd'T'HH:mm:ssXXXXX
+        XCTAssertEqual(try dateFrom("2001-01-01T1:53:20Z"), "Mon, 1 Jan 2001 1:53:20 am +0000")
+
+        // yyyy-MM-dd'T'HH:mm:ssZZZZZ (Bug #124)
+        XCTAssertEqual(try dateFrom("2001-01-01T1:53:20+01:00"), "Mon, 1 Jan 2001 12:53:20 am +0000")
+        XCTAssertEqual(try dateFrom("2001-01-01T1:53:20-01:00"), "Mon, 1 Jan 2001 2:53:20 am +0000")
+    }
+
 }
