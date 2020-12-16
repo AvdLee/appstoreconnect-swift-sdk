@@ -85,6 +85,10 @@ public final class APIProvider {
             if let date = formatter.date(from: dateStr) {
                 return date
             }
+            formatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ssZZZZZ"
+            if let date = formatter.date(from: dateStr) {
+                return date
+            }
             throw APIProvider.Error.dateDecodingError(dateStr)
         })
         return decoder
