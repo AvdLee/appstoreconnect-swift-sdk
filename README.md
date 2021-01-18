@@ -1,7 +1,7 @@
 # App Store Connect Swift SDK
 The Swift SDK to work with the App Store Connect API from Apple.
 
-![Bitrise Status](https://app.bitrise.io/app/af49e5de1f935d23.svg?token=3lWTmdlNhbHtdG9KsuR9gw) ![Swift Version](https://img.shields.io/badge/Swift-5.1-F16D39.svg?style=flat) ![Dependency frameworks](https://img.shields.io/badge/Supports-CocoaPods,_Swift_Package_Manager-F16D39.svg?style=flat) [![Twitter](https://img.shields.io/badge/twitter-@Twannl-blue.svg?style=flat)](https://twitter.com/twannl)
+![Bitrise Status](https://app.bitrise.io/app/af49e5de1f935d23.svg?token=3lWTmdlNhbHtdG9KsuR9gw) [![Swift Version](https://img.shields.io/endpoint?url=https%3A%2F%2Fswiftpackageindex.com%2Fapi%2Fpackages%2FAvdLee%2Fappstoreconnect-swift-sdk%2Fbadge%3Ftype%3Dswift-versions)](https://swiftpackageindex.com/AvdLee/appstoreconnect-swift-sdk) [![Platform Compatibility](https://img.shields.io/endpoint?url=https%3A%2F%2Fswiftpackageindex.com%2Fapi%2Fpackages%2FAvdLee%2Fappstoreconnect-swift-sdk%2Fbadge%3Ftype%3Dplatforms)](https://swiftpackageindex.com/AvdLee/appstoreconnect-swift-sdk) ![Dependency frameworks](https://img.shields.io/badge/Supports-CocoaPods,_Swift_Package_Manager-F16D39.svg?style=flat) [![Twitter](https://img.shields.io/badge/twitter-@Twannl-blue.svg?style=flat)](https://twitter.com/twannl)
 
 ## Kickstart information on the API
 - [Automate your workflow with the App Store Connect API](https://developer.apple.com/app-store-connect/api/)
