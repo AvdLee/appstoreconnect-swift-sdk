@@ -1,3 +1,9 @@
+### 1.3.0
+- Use SPI Badges on README ([#128](https://github.com/AvdLee/appstoreconnect-swift-sdk/pull/128)) via [@Sherlouk](https://github.com/Sherlouk)
+- Support Phased Releases Endpoint ([#127](https://github.com/AvdLee/appstoreconnect-swift-sdk/pull/127)) via [@Sherlouk](https://github.com/Sherlouk)
+- Bug: failed to decode date ([#124](https://github.com/AvdLee/appstoreconnect-swift-sdk/issues/124)) via [@Sherlouk](https://github.com/Sherlouk)
+- Merge release 1.2.0 into master ([#123](https://github.com/AvdLee/appstoreconnect-swift-sdk/pull/123)) via [@SwiftLeeBot](https://github.com/SwiftLeeBot)
+
 ### 1.2.0
 - App Info and App Store Version ([#116](https://github.com/AvdLee/appstoreconnect-swift-sdk/pull/116)) via [@MortenGregersen](https://github.com/MortenGregersen)
 - Add APPLE_ID_AUTH capability and required settings ([#121](https://github.com/AvdLee/appstoreconnect-swift-sdk/pull/121)) via [@ptmt](https://github.com/ptmt)
