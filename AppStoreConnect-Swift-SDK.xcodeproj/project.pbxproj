@@ -189,6 +189,10 @@
 		A72A23E4244949530093A0E9 /* Fixtures.bundle in Resources */ = {isa = PBXBuildFile; fileRef = A72A23D62449406C0093A0E9 /* Fixtures.bundle */; };
 		A72A23E7244956260093A0E9 /* Bundle+Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A72A23E6244956260093A0E9 /* Bundle+Tests.swift */; };
 		A757C8702446F457000BE880 /* ListBundleIdsTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = A757C86E2446F452000BE880 /* ListBundleIdsTest.swift */; };
+		F072FA0B25C419300007F1BE /* AppStoreVersionLocalizationRelationship.swift in Sources */ = {isa = PBXBuildFile; fileRef = F072FA0725C419300007F1BE /* AppStoreVersionLocalizationRelationship.swift */; };
+		F072FA0C25C419300007F1BE /* AppStoreVersionLocalizationsResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = F072FA0825C419300007F1BE /* AppStoreVersionLocalizationsResponse.swift */; };
+		F072FA0D25C419300007F1BE /* AppStoreVersionLocalization.swift in Sources */ = {isa = PBXBuildFile; fileRef = F072FA0925C419300007F1BE /* AppStoreVersionLocalization.swift */; };
+		F072FA0E25C419300007F1BE /* AppStoreVersionLocalizationResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = F072FA0A25C419300007F1BE /* AppStoreVersionLocalizationResponse.swift */; };
 		OBJ_1049 /* AppStoreConnect_Swift_SDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = "AppStoreConnect-Swift-SDK::AppStoreConnect-Swift-SDK::Product" /* AppStoreConnect_Swift_SDK.framework */; };
 		OBJ_554 /* APIProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_8 /* APIProvider.swift */; };
 		OBJ_555 /* DefaultRequestExecutor.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_9 /* DefaultRequestExecutor.swift */; };
@@ -692,6 +696,10 @@
 		A757C86E2446F452000BE880 /* ListBundleIdsTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListBundleIdsTest.swift; sourceTree = "<group>"; };
 		"AppStoreConnect-Swift-SDK::AppStoreConnect-Swift-SDK::Product" /* AppStoreConnect_Swift_SDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = AppStoreConnect_Swift_SDK.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		"AppStoreConnect-Swift-SDK::AppStoreConnect-Swift-SDKTests::Product" /* AppStoreConnect-Swift-SDKTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; path = "AppStoreConnect-Swift-SDKTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
+		F072FA0725C419300007F1BE /* AppStoreVersionLocalizationRelationship.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppStoreVersionLocalizationRelationship.swift; sourceTree = "<group>"; };
+		F072FA0825C419300007F1BE /* AppStoreVersionLocalizationsResponse.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppStoreVersionLocalizationsResponse.swift; sourceTree = "<group>"; };
+		F072FA0925C419300007F1BE /* AppStoreVersionLocalization.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppStoreVersionLocalization.swift; sourceTree = "<group>"; };
+		F072FA0A25C419300007F1BE /* AppStoreVersionLocalizationResponse.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppStoreVersionLocalizationResponse.swift; sourceTree = "<group>"; };
 		OBJ_10 /* Endpoint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Endpoint.swift; sourceTree = "<group>"; };
 		OBJ_100 /* ReadBetaBuildLocalizationInformation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReadBetaBuildLocalizationInformation.swift; sourceTree = "<group>"; };
 		OBJ_101 /* ReadBuildInformationOfBetaBuildLocalization.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReadBuildInformationOfBetaBuildLocalization.swift; sourceTree = "<group>"; };
@@ -1636,6 +1644,10 @@
 				3FFAB1EC2529185600DD78B2 /* AppStoreVersionResponse.swift */,
 				3FFAB1F22529185600DD78B2 /* AppStoreVersionsResponse.swift */,
 				3FFAB1F02529185600DD78B2 /* AppStoreVersionState.swift */,
+				F072FA0725C419300007F1BE /* AppStoreVersionLocalizationRelationship.swift */,
+				F072FA0825C419300007F1BE /* AppStoreVersionLocalizationsResponse.swift */,
+				F072FA0925C419300007F1BE /* AppStoreVersionLocalization.swift */,
+				F072FA0A25C419300007F1BE /* AppStoreVersionLocalizationResponse.swift */,
 				OBJ_223 /* BetaAppLocalization.swift */,
 				OBJ_224 /* BetaAppLocalizationAppLinkageResponse.swift */,
 				OBJ_225 /* BetaAppLocalizationCreateRequest.swift */,
@@ -2207,6 +2219,7 @@
 				OBJ_677 /* AssignIndividualTestersToBuild.swift in Sources */,
 				OBJ_678 /* GetAppEncryptionDeclarationIDForBuild.swift in Sources */,
 				OBJ_679 /* GetAppResourceIDForBuild.swift in Sources */,
+				F072FA0E25C419300007F1BE /* AppStoreVersionLocalizationResponse.swift in Sources */,
 				OBJ_680 /* GetBetaAppReviewSubmissionIDOfBuild.swift in Sources */,
 				OBJ_681 /* GetBetaBuildLocalizationIDsOfBuild.swift in Sources */,
 				OBJ_682 /* GetBuildBetaDetailsResourceIDForBuild.swift in Sources */,
@@ -2271,6 +2284,7 @@
 				OBJ_739 /* AppRelationship.swift in Sources */,
 				OBJ_740 /* AppResponse.swift in Sources */,
 				OBJ_741 /* AppsResponse.swift in Sources */,
+				F072FA0C25C419300007F1BE /* AppStoreVersionLocalizationsResponse.swift in Sources */,
 				OBJ_742 /* BetaAppLocalization.swift in Sources */,
 				OBJ_743 /* BetaAppLocalizationAppLinkageResponse.swift in Sources */,
 				OBJ_744 /* BetaAppLocalizationCreateRequest.swift in Sources */,
@@ -2342,6 +2356,7 @@
 				OBJ_803 /* BuildBetaDetailBuildLinkageResponse.swift in Sources */,
 				OBJ_804 /* BuildBetaDetailResponse.swift in Sources */,
 				OBJ_805 /* BuildBetaDetailUpdateRequest.swift in Sources */,
+				F072FA0D25C419300007F1BE /* AppStoreVersionLocalization.swift in Sources */,
 				OBJ_806 /* BuildBetaDetailsResponse.swift in Sources */,
 				OBJ_807 /* BuildBetaGroupsLinkagesRequest.swift in Sources */,
 				OBJ_808 /* BuildBetaNotification.swift in Sources */,
@@ -2434,6 +2449,7 @@
 				OBJ_881 /* UserRole.swift in Sources */,
 				OBJ_882 /* UserUpdateRequest.swift in Sources */,
 				OBJ_883 /* UserVisibleAppsLinkagesRequest.swift in Sources */,
+				F072FA0B25C419300007F1BE /* AppStoreVersionLocalizationRelationship.swift in Sources */,
 				OBJ_884 /* UserVisibleAppsLinkagesResponse.swift in Sources */,
 				OBJ_885 /* UsersResponse.swift in Sources */,
 				OBJ_886 /* NestableQueryParameter.swift in Sources */,
