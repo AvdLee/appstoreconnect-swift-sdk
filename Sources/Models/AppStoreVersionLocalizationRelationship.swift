@@ -7,25 +7,26 @@
 import Foundation
 
 public enum AppStoreVersionLocalizationRelationship: Codable {
+    case appStoreVersion(AppStoreVersion)
+    
     enum TypeKeys: String, CodingKey {
         case type
     }
-
     enum CodingKeys: String, Decodable, CodingKey {
-        case appScreenshotSet, appPreviewSet
+        case appStoreVersion
     }
 
     public init(from decoder: Decoder) throws {
-        let type = try decoder.container(keyedBy: TypeKeys.self).decode(CodingKeys.self, forKey: .type)
-        switch type {
-        default:
-            fatalError()
+        switch try decoder.container(keyedBy: TypeKeys.self).decode(CodingKeys.self, forKey: .type) {
+        case .appStoreVersion:
+            self = try .appStoreVersion(AppStoreVersion(from: decoder))
         }
     }
-
+    
     public func encode(to encoder: Encoder) throws {
         switch self {
-        default: break
+        case .appStoreVersion(let value):
+            try value.encode(to: encoder)
         }
     }
 }
