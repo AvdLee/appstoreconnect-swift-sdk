@@ -7,9 +7,6 @@
 import Foundation
 
 public enum AppStoreVersionLocalizationRelationship: Codable {
-//    case appScreenshotSet(AppScreenshotSet)
-//    case appPreviewSet(AppPreviewSet)
-
     enum TypeKeys: String, CodingKey {
         case type
     }
