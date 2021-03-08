@@ -91,6 +91,25 @@ dependencies: [
 ]
 ```
 
+## Development
+
+To help with the development of this repository you need to follow the next steps:
+
+- clone this repository
+- download the submodules dependencies 
+```bash
+git submodule update --recursive
+```
+- run the fastlane called: unhide_spm_package_dev_dependencies
+```bash
+bundle exec fastlane unhide_spm_package_dev_dependencies
+```
+- you should be able to run the tests
+```bash
+bundle exec fastlane test
+```
+
+
 ## Communication
 
 - If you **found a bug**, open an [issue](https://github.com/AvdLee/appstoreconnect-swift-sdk/issues).
