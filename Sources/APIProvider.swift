@@ -40,6 +40,7 @@ public final class APIProvider {
         case unknownResponseType
         case requestFailure(StatusCode, Data?)
         case decodingError(Swift.Error, Data)
+        case downloadError
         case dateDecodingError(String)
         case requestExecutorError(Swift.Error)
 
@@ -59,6 +60,8 @@ public final class APIProvider {
                     return "Failed to decode response:\n\(response)\nError: \(error)."
                 }
                 return "Failed to decode data."
+            case .downloadError:
+                return "File url not generated."
             case .dateDecodingError(let date):
                 return "Failed to decode date: \(date)"
             case .requestExecutorError(let error):
@@ -140,6 +143,20 @@ public final class APIProvider {
 
         requestExecutor.execute(request) { completion(self.mapResponse($0)) }
     }
+
+    /// Performs a download request to the given API endpoint
+    ///
+    /// - Parameters:
+    ///   - endpoint: The API endpoint to request.
+    ///   - completion: The completion callback which will be called on completion containing the result.
+    public func download<T: Decodable>(_ endpoint: APIEndpoint<T>, completion: @escaping RequestCompletionHandler<URL>) {
+        guard let request = try? requestsAuthenticator.adapt(endpoint.asURLRequest()) else {
+            completion(.failure(Error.requestGeneration))
+            return
+        }
+
+        requestExecutor.download(request) { completion(self.mapResponse($0)) }
+    }
     
     /// Performs a data request to the given ResourceLinks
     ///
@@ -160,7 +177,7 @@ private extension APIProvider {
     ///
     /// - Parameter result: A result type containing either the network response or an error
     /// - Returns: A result type containing either the decoded type or an error
-    func mapResponse<T: Decodable>(_ result: Result<Response, Swift.Error>) -> Result<T, Swift.Error> {
+    func mapResponse<T: Decodable>(_ result: Result<Response<Data>, Swift.Error>) -> Result<T, Swift.Error> {
         switch result {
         case .success(let response):
             guard let data = response.data, 200..<300 ~= response.statusCode else {
@@ -186,7 +203,7 @@ private extension APIProvider {
     ///
     /// - Parameter result: A result type containing either the network response or an error
     /// - Returns: A result type containing either void or an error
-    func mapVoidResponse(_ result: Result<Response, Swift.Error>) -> Result<Void, Swift.Error> {
+    func mapVoidResponse(_ result: Result<Response<Data>, Swift.Error>) -> Result<Void, Swift.Error> {
         switch result {
         case .success(let response):
             guard 200..<300 ~= response.statusCode else {
@@ -198,4 +215,24 @@ private extension APIProvider {
             return .failure(Error.requestExecutorError(error))
         }
     }
+
+    /// Maps a download response to a URL type
+    ///
+    /// - Parameter result: A result type containing either the network response or an error
+    /// - Returns: A result type containing either the decoded type or an error
+    func mapResponse(_ result: Result<Response<URL>, Swift.Error>) -> Result<URL, Swift.Error> {
+        switch result {
+        case .success(let response):
+            guard 200..<300 ~= response.statusCode else {
+                return .failure(Error.requestFailure(response.statusCode, nil))
+            }
+            if let data = response.data {
+                return .success(data)
+            }
+            return .failure(Error.downloadError)
+        case .failure(let error):
+            return .failure(Error.requestExecutorError(error))
+        }
+    }
+
 }

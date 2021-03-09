@@ -8,13 +8,13 @@
 import Foundation
 
 /// The result type delivered from a successful URLRequest
-public struct Response {
+public struct Response<T> {
     public typealias StatusCode = Int
 
     public let statusCode: Int
-    public let data: Data?
+    public let data: T?
 
-    public init(statusCode: StatusCode, data: Data?) {
+    public init(statusCode: StatusCode, data: T?) {
         self.statusCode = statusCode
         self.data = data
     }
@@ -24,8 +24,12 @@ public struct Response {
 public protocol RequestExecutor {
 
     /// Performs a URLRequest and returns a result
-    func execute(_ urlRequest: URLRequest, completion: @escaping (Result<Response, Swift.Error>) -> Void)
+    func execute(_ urlRequest: URLRequest, completion: @escaping (Result<Response<Data>, Swift.Error>) -> Void)
 
     /// Retrieves the content of a given URL
-    func retrieve(_ url: URL, completion: @escaping (Result<Response, Swift.Error>) -> Void)
+    func retrieve(_ url: URL, completion: @escaping (Result<Response<Data>, Swift.Error>) -> Void)
+
+    /// Download report as file a given URL
+    func download(_ urlRequest: URLRequest, completion: @escaping (Result<Response<URL>, Swift.Error>) -> Void)
+
 }
