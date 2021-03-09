@@ -98,7 +98,7 @@ To help with the development of this repository you need to follow the next step
 - clone this repository
 - download the submodules dependencies 
 ```bash
-git submodule update --recursive
+git submodule update --init --recursive
 ```
 - run the fastlane called: unhide_spm_package_dev_dependencies
 ```bash
