@@ -74,7 +74,6 @@ final class APIProviderTests: XCTestCase {
         }
     }
 
-
     func testRequestWithDecodableResult() {
         let documentLinks = DocumentLinks(self: URL(string: "https://api.appstoreconnect.com?cursor=FIRST")!)
         let betaTesterResponse = BetaTesterResponse(data: .test,
