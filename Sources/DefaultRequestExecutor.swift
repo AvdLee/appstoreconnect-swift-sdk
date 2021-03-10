@@ -26,7 +26,7 @@ public final class DefaultRequestExecutor: RequestExecutor {
     /// - Parameters:
     ///   - urlRequest: The URLRequest to execute
     ///   - completion: A result type containing eiter the response or an error
-    public func execute(_ urlRequest: URLRequest, completion: @escaping (Result<Response, Swift.Error>) -> Void) {
+    public func execute(_ urlRequest: URLRequest, completion: @escaping (Result<Response<Data>, Swift.Error>) -> Void) {
         urlSession.dataTask(with: urlRequest) { data, response, error in
             completion(mapResponse(data: data, urlResponse: response, error: error))
         }.resume()
@@ -37,11 +37,23 @@ public final class DefaultRequestExecutor: RequestExecutor {
     /// - Parameters:
     ///   - url: The URL where the resource is located
     ///   - completion: A result type containing eiter the response or an error
-    public func retrieve(_ url: URL, completion: @escaping (Result<Response, Swift.Error>) -> Void) {
+    public func retrieve(_ url: URL, completion: @escaping (Result<Response<Data>, Swift.Error>) -> Void) {
         urlSession.dataTask(with: url) { data, response, error in
             completion(mapResponse(data: data, urlResponse: response, error: error))
         }.resume()
     }
+
+    /// Download report as file
+    ///
+    /// - Parameters:
+    ///   - urlRequest: The URLRequest to execute
+    ///   - completion: A result type containing eiter the response or an error
+    public func download(_ urlRequest: URLRequest, completion: @escaping (Result<Response<URL>, Swift.Error>) -> Void) {
+        urlSession.downloadTask(with: urlRequest) { fileUrl, response, error in
+            completion(mapResponse(fileUrl: fileUrl, urlResponse: response, error: error))
+        }.resume()
+    }
+
 }
 
 // MARK: - Private
@@ -53,7 +65,7 @@ public final class DefaultRequestExecutor: RequestExecutor {
 ///   - urlResponse: URLResponse returned from an URLSession data task
 ///   - error: Error returned from an URLSession data task
 ///   - completion: A result type containing eiter the response or an error
-func mapResponse(data: Data?, urlResponse: URLResponse?, error: Error?) -> Result<Response, Swift.Error> {
+func mapResponse(data: Data?, urlResponse: URLResponse?, error: Error?) -> Result<Response<Data>, Swift.Error> {
     if let error = error {
         return .failure(error)
     } else {
@@ -62,5 +74,24 @@ func mapResponse(data: Data?, urlResponse: URLResponse?, error: Error?) -> Resul
         }
 
         return .success(.init(statusCode: httpUrlResponse.statusCode, data: data))
+    }
+}
+
+/// Maps the result of an URLSession downloadTask to a response type
+///
+/// - Parameters:
+///   - fileUrl: The file URL of the arquive containing the data returned from an URLSession download  task
+///   - urlResponse: URLResponse returned from an URLSession data task
+///   - error: Error returned from an URLSession data task
+///   - completion: A result type containing eiter the response or an error
+func mapResponse(fileUrl: URL?, urlResponse: URLResponse?, error: Error?) -> Result<Response<URL>, Swift.Error> {
+    if let error = error {
+        return .failure(error)
+    } else {
+        guard let httpUrlResponse = urlResponse as? HTTPURLResponse else {
+            return .failure(DefaultRequestExecutor.Error.unknownResponseType)
+        }
+
+        return .success(.init(statusCode: httpUrlResponse.statusCode, data: fileUrl))
     }
 }
