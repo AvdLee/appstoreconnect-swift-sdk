@@ -1,3 +1,10 @@
+### 1.4.0
+- Adding download on RequestExecutor ([#133](https://github.com/AvdLee/appstoreconnect-swift-sdk/pull/133)) via [@barrault01](https://github.com/barrault01)
+- Fixing submodule update command line ([#135](https://github.com/AvdLee/appstoreconnect-swift-sdk/pull/135)) via [@barrault01](https://github.com/barrault01)
+- Adding development steps to readme ([#134](https://github.com/AvdLee/appstoreconnect-swift-sdk/pull/134)) via [@barrault01](https://github.com/barrault01)
+- Feature/app store version localization ([#130](https://github.com/AvdLee/appstoreconnect-swift-sdk/pull/130)) via [@Ikloo](https://github.com/Ikloo)
+- Merge release 1.3.0 into master ([#129](https://github.com/AvdLee/appstoreconnect-swift-sdk/pull/129)) via [@SwiftLeeBot](https://github.com/SwiftLeeBot)
+
 ### 1.3.0
 - Use SPI Badges on README ([#128](https://github.com/AvdLee/appstoreconnect-swift-sdk/pull/128)) via [@Sherlouk](https://github.com/Sherlouk)
 - Support Phased Releases Endpoint ([#127](https://github.com/AvdLee/appstoreconnect-swift-sdk/pull/127)) via [@Sherlouk](https://github.com/Sherlouk)
