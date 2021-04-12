@@ -75,7 +75,12 @@ public final class APIProvider {
     /// Contains a JSON Decoder which can be reused.
     static let jsonDecoder: JSONDecoder = {
         let decoder = JSONDecoder()
+        
         let formatter = DateFormatter()
+        formatter.locale = Locale(identifier: "en_US_POSIX")
+        formatter.timeZone = TimeZone(secondsFromGMT: 0)
+        formatter.calendar = Calendar(identifier: .iso8601)
+        
         decoder.dateDecodingStrategy = .custom({ (decoder) -> Date in
             let container = try decoder.singleValueContainer()
             let dateStr = try container.decode(String.self)
