@@ -11,6 +11,7 @@ public extension APIEndpoint where T == AppStoreVersionLocalizationResponse {
         whatsNew: String? = nil
     ) -> APIEndpoint {
         let request = AppStoreVersionLocalizationUpdateRequest(
+            id: id,
             description: description,
             keywords: keywords,
             marketingUrl: marketingUrl,

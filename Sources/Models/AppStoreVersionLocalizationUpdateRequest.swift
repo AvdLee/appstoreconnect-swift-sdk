@@ -4,12 +4,15 @@ public struct AppStoreVersionLocalizationUpdateRequest: Codable {
     public struct Data: Codable {
         public let attributes: AppStoreVersionLocalizationUpdateRequest.Data.Attributes
 
+        public let id: String
+
         public let type: String = "appStoreVersionLocalizations"
     }
 
     public let data: AppStoreVersionLocalizationUpdateRequest.Data
 
     init(
+        id: String,
         description: String? = nil,
         keywords: String? = nil,
         marketingUrl: URL? = nil,
@@ -22,7 +25,8 @@ public struct AppStoreVersionLocalizationUpdateRequest: Codable {
                                             marketingUrl: marketingUrl,
                                             promotionalText: promotionalText,
                                             supportUrl: supportUrl,
-                                            whatsNew: whatsNew))
+                                            whatsNew: whatsNew),
+                          id: id)
     }
 }
 
