@@ -9,22 +9,20 @@ public struct AppStoreVersionLocalizationUpdateRequest: Codable {
 
     public let data: AppStoreVersionLocalizationUpdateRequest.Data
 
-    init(description: String? = nil,
-         keywords: String? = nil,
-         marketingUrl: String? = nil,
-         promotionalText: String? = nil,
-         supportUrl: String? = nil,
-         whatsNew: String? = nil)
-    {
-        self.data = .init(attributes:
-            .init(
-                description: description,
-                keywords: keywords,
-                marketingUrl: marketingUrl,
-                promotionalText: promotionalText,
-                supportUrl: supportUrl,
-                whatsNew: whatsNew
-            ))
+    init(
+        description: String? = nil,
+        keywords: String? = nil,
+        marketingUrl: URL? = nil,
+        promotionalText: String? = nil,
+        supportUrl: URL? = nil,
+        whatsNew: String? = nil
+    ) {
+        self.data = .init(attributes: .init(description: description,
+                                            keywords: keywords,
+                                            marketingUrl: marketingUrl,
+                                            promotionalText: promotionalText,
+                                            supportUrl: supportUrl,
+                                            whatsNew: whatsNew))
     }
 }
 
@@ -34,11 +32,11 @@ public extension AppStoreVersionLocalizationUpdateRequest.Data {
 
         public let keywords: String?
 
-        public let marketingUrl: String?
+        public let marketingUrl: URL?
 
         public let promotionalText: String?
 
-        public let supportUrl: String?
+        public let supportUrl: URL?
 
         public let whatsNew: String?
     }

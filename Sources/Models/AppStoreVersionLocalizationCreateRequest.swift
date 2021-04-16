@@ -11,15 +11,16 @@ public struct AppStoreVersionLocalizationCreateRequest: Codable {
 
     public let data: AppStoreVersionLocalizationCreateRequest.Data
 
-    init(appStoreVersionId: String,
-         locale: String,
-         description: String? = nil,
-         keywords: String? = nil,
-         marketingUrl: String? = nil,
-         promotionalText: String? = nil,
-         supportUrl: String? = nil,
-         whatsNew: String? = nil)
-    {
+    init(
+        appStoreVersionId: String,
+        locale: String,
+        description: String? = nil,
+        keywords: String? = nil,
+        marketingUrl: URL? = nil,
+        promotionalText: String? = nil,
+        supportUrl: URL? = nil,
+        whatsNew: String? = nil
+    ) {
         self.data = .init(attributes:
             .init(
                 locale: locale,
@@ -42,11 +43,11 @@ public extension AppStoreVersionLocalizationCreateRequest.Data {
 
         public let keywords: String?
 
-        public let marketingUrl: String?
+        public let marketingUrl: URL?
 
         public let promotionalText: String?
 
-        public let supportUrl: String?
+        public let supportUrl: URL?
 
         public let whatsNew: String?
     }

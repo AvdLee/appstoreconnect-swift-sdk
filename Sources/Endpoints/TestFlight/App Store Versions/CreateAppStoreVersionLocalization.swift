@@ -6,9 +6,9 @@ public extension APIEndpoint where T == AppStoreVersionLocalizationResponse {
         locale: String,
         description: String? = nil,
         keywords: String? = nil,
-        marketingUrl: String? = nil,
+        marketingUrl: URL? = nil,
         promotionalText: String? = nil,
-        supportUrl: String? = nil,
+        supportUrl: URL? = nil,
         whatsNew: String? = nil
     ) -> APIEndpoint {
         let request = AppStoreVersionLocalizationCreateRequest(
