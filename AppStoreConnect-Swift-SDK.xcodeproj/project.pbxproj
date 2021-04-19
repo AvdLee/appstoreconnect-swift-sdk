@@ -7,6 +7,12 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		092552A0262D6D7000D6119F /* ListAppPreviewSets.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0925529F262D6D7000D6119F /* ListAppPreviewSets.swift */; };
+		092552A3262D6EF000D6119F /* AppPreviewSetsResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 092552A2262D6EF000D6119F /* AppPreviewSetsResponse.swift */; };
+		092552A5262D6F1400D6119F /* AppPreviewSet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 092552A4262D6F1400D6119F /* AppPreviewSet.swift */; };
+		092552A7262D70B500D6119F /* AppPreview.swift in Sources */ = {isa = PBXBuildFile; fileRef = 092552A6262D70B500D6119F /* AppPreview.swift */; };
+		092552A9262D71E300D6119F /* AppPreviewResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 092552A8262D71E300D6119F /* AppPreviewResponse.swift */; };
+		092552AB262D721600D6119F /* AppPreviewsResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 092552AA262D721600D6119F /* AppPreviewsResponse.swift */; };
 		097063C826294B2A0083B9DF /* DeleteAppStoreVersionLocalizations.swift in Sources */ = {isa = PBXBuildFile; fileRef = 097063C726294B2A0083B9DF /* DeleteAppStoreVersionLocalizations.swift */; };
 		097063CA26294BC70083B9DF /* ReadAppStoreVersionLocalization.swift in Sources */ = {isa = PBXBuildFile; fileRef = 097063C926294BC70083B9DF /* ReadAppStoreVersionLocalization.swift */; };
 		097063CE26294EE10083B9DF /* CreateAppStoreVersionLocalization.swift in Sources */ = {isa = PBXBuildFile; fileRef = 097063CD26294EE10083B9DF /* CreateAppStoreVersionLocalization.swift */; };
@@ -550,6 +556,12 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		0925529F262D6D7000D6119F /* ListAppPreviewSets.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListAppPreviewSets.swift; sourceTree = "<group>"; };
+		092552A2262D6EF000D6119F /* AppPreviewSetsResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppPreviewSetsResponse.swift; sourceTree = "<group>"; };
+		092552A4262D6F1400D6119F /* AppPreviewSet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppPreviewSet.swift; sourceTree = "<group>"; };
+		092552A6262D70B500D6119F /* AppPreview.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppPreview.swift; sourceTree = "<group>"; };
+		092552A8262D71E300D6119F /* AppPreviewResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppPreviewResponse.swift; sourceTree = "<group>"; };
+		092552AA262D721600D6119F /* AppPreviewsResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppPreviewsResponse.swift; sourceTree = "<group>"; };
 		097063C726294B2A0083B9DF /* DeleteAppStoreVersionLocalizations.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeleteAppStoreVersionLocalizations.swift; sourceTree = "<group>"; };
 		097063C926294BC70083B9DF /* ReadAppStoreVersionLocalization.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReadAppStoreVersionLocalization.swift; sourceTree = "<group>"; };
 		097063CD26294EE10083B9DF /* CreateAppStoreVersionLocalization.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateAppStoreVersionLocalization.swift; sourceTree = "<group>"; };
@@ -1107,6 +1119,18 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		092552A1262D6EDA00D6119F /* App Preview Sets */ = {
+			isa = PBXGroup;
+			children = (
+				092552A6262D70B500D6119F /* AppPreview.swift */,
+				092552A8262D71E300D6119F /* AppPreviewResponse.swift */,
+				092552A4262D6F1400D6119F /* AppPreviewSet.swift */,
+				092552A2262D6EF000D6119F /* AppPreviewSetsResponse.swift */,
+				092552AA262D721600D6119F /* AppPreviewsResponse.swift */,
+			);
+			name = "App Preview Sets";
+			sourceTree = "<group>";
+		};
 		097063D326295CEA0083B9DF /* App Store Version Localizations */ = {
 			isa = PBXGroup;
 			children = (
@@ -1140,12 +1164,13 @@
 			name = Localizations;
 			sourceTree = "<group>";
 		};
-		097063D92629604F0083B9DF /* Screenshot Sets */ = {
+		097063D92629604F0083B9DF /* Previews */ = {
 			isa = PBXGroup;
 			children = (
 				097063DA2629606B0083B9DF /* ListAppScreenshotSets.swift */,
+				0925529F262D6D7000D6119F /* ListAppPreviewSets.swift */,
 			);
-			name = "Screenshot Sets";
+			name = Previews;
 			sourceTree = "<group>";
 		};
 		097063DC2629607A0083B9DF /* App Screenshot Sets */ = {
@@ -1527,7 +1552,7 @@
 		F072FA1625C41BBA0007F1BE /* App Store Versions */ = {
 			isa = PBXGroup;
 			children = (
-				097063D92629604F0083B9DF /* Screenshot Sets */,
+				097063D92629604F0083B9DF /* Previews */,
 				097063D626295E410083B9DF /* Localizations */,
 				097063D426295E230083B9DF /* Phased Releases */,
 			);
@@ -1755,6 +1780,7 @@
 		OBJ_205 /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				092552A1262D6EDA00D6119F /* App Preview Sets */,
 				097063E42629635E0083B9DF /* Upload Operation */,
 				097063E12629621D0083B9DF /* App Media State */,
 				097063DC2629607A0083B9DF /* App Screenshot Sets */,
@@ -2273,6 +2299,7 @@
 				097063D826295E740083B9DF /* ModifyAppStoreVersionLocalization.swift in Sources */,
 				OBJ_581 /* GetBundleResourceIdInProfile.swift in Sources */,
 				OBJ_582 /* ListAllCertificatesInProfile.swift in Sources */,
+				092552AB262D721600D6119F /* AppPreviewsResponse.swift in Sources */,
 				OBJ_583 /* ListAllDevicesInProfile.swift in Sources */,
 				OBJ_584 /* ListDownloadProfiles.swift in Sources */,
 				OBJ_585 /* ReadBundleIdInProfille.swift in Sources */,
@@ -2300,6 +2327,8 @@
 				OBJ_619 /* ReadAppInformationOfBetaAppReviewDetail.swift in Sources */,
 				OBJ_620 /* ReadBetaAppReviewDetailInformation.swift in Sources */,
 				OBJ_621 /* GetBuildIDForBetaAppReviewSubmission.swift in Sources */,
+				092552A3262D6EF000D6119F /* AppPreviewSetsResponse.swift in Sources */,
+				092552A9262D71E300D6119F /* AppPreviewResponse.swift in Sources */,
 				OBJ_622 /* ListBetaAppReviewSubmissions.swift in Sources */,
 				OBJ_623 /* ReadBetaAppReviewSubmissionInformation.swift in Sources */,
 				OBJ_624 /* ReadBuildInformationOfBetaAppReviewSubmission.swift in Sources */,
@@ -2498,11 +2527,13 @@
 				097063C826294B2A0083B9DF /* DeleteAppStoreVersionLocalizations.swift in Sources */,
 				OBJ_793 /* BetaTesterRelationship.swift in Sources */,
 				097063E0262961EE0083B9DF /* AppMediaAssetState.swift in Sources */,
+				092552A7262D70B500D6119F /* AppPreview.swift in Sources */,
 				3FFAB21A2529190B00DD78B2 /* ListBetaAppLocalizationsOfApp.swift in Sources */,
 				OBJ_794 /* BetaTesterResponse.swift in Sources */,
 				OBJ_795 /* BetaTestersResponse.swift in Sources */,
 				OBJ_796 /* Build.swift in Sources */,
 				097063EC262965AD0083B9DF /* AppScreenshotsResponse.swift in Sources */,
+				092552A0262D6D7000D6119F /* ListAppPreviewSets.swift in Sources */,
 				OBJ_797 /* BuildAppEncryptionDeclarationLinkageRequest.swift in Sources */,
 				3FFAB1FD2529185600DD78B2 /* AppStoreVersion.swift in Sources */,
 				OBJ_798 /* BuildAppEncryptionDeclarationLinkageResponse.swift in Sources */,
@@ -2559,6 +2590,7 @@
 				3FFAB21C2529190B00DD78B2 /* ListBuildsOfApp.swift in Sources */,
 				OBJ_840 /* CertificateCreateRequest.swift in Sources */,
 				OBJ_841 /* CertificateResponse.swift in Sources */,
+				092552A5262D6F1400D6119F /* AppPreviewSet.swift in Sources */,
 				OBJ_842 /* CertificateType.swift in Sources */,
 				OBJ_843 /* CertificatesResponse.swift in Sources */,
 				OBJ_844 /* Device.swift in Sources */,
