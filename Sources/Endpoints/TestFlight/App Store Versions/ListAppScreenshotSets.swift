@@ -77,15 +77,31 @@ public extension ListAppScreenshotSetsForAppStoreVersionLocalization.Field {
     }
 
     enum ScreenshotDisplayType: String, CaseIterable, NestableQueryParameter {
-
-        // TODO: Snake case.
-        case APP_IPHONE_65, APP_IPHONE_58, APP_IPHONE_55, APP_IPHONE_47, APP_IPHONE_40, APP_IPHONE_35,
-             APP_IPAD_PRO_3GEN_129, APP_IPAD_PRO_3GEN_11, APP_IPAD_PRO_129, APP_IPAD_105, APP_IPAD_97,
-             APP_DESKTOP, APP_WATCH_SERIES_4, APP_WATCH_SERIES_3, APP_APPLE_TV,
-             IMESSAGE_APP_IPHONE_65, IMESSAGE_APP_IPHONE_58, IMESSAGE_APP_IPHONE_55, IMESSAGE_APP_IPHONE_47,
-             IMESSAGE_APP_IPHONE_40,
-             IMESSAGE_APP_IPAD_PRO_3GEN_129, IMESSAGE_APP_IPAD_PRO_3GEN_11, IMESSAGE_APP_IPAD_PRO_129,
-             IMESSAGE_APP_IPAD_105, IMESSAGE_APP_IPAD_97
+        case iPhone6Point5Inch = "APP_IPHONE_65"
+        case iPhone5Point8Inch = "APP_IPHONE_58"
+        case iPhone5Point5Inch = "APP_IPHONE_55"
+        case iPhone4Point7Inch = "APP_IPHONE_47"
+        case iPhone4Inch = "APP_IPHONE_40"
+        case iPhone3Point5Inch = "APP_IPHONE_35"
+        case iPadPro3rdGen12Point9Inch = "APP_IPAD_PRO_3GEN_129"
+        case iPadPro3rdGen11Inch = "APP_IPAD_PRO_3GEN_11"
+        case iPadPro12Point9Inch = "APP_IPAD_PRO_129"
+        case iPadPro10Point5Inch = "APP_IPAD_105"
+        case iPadPro9Point7Inch = "APP_IPAD_97"
+        case mac = "APP_DESKTOP"
+        case appleWatchSeries4 = "APP_WATCH_SERIES_4"
+        case appleWatchSeries3 = "APP_WATCH_SERIES_3"
+        case appleTV = "APP_APPLE_TV"
+        case iPhone6Point5InchMessaging = "IMESSAGE_APP_IPHONE_65"
+        case iPhone5Point8InchMessaging = "IMESSAGE_APP_IPHONE_58"
+        case iPhone5Point5InchMessaging = "IMESSAGE_APP_IPHONE_55"
+        case iPhone4Point7InchMessaging = "IMESSAGE_APP_IPHONE_47"
+        case iPhone4InchMessaging = "IMESSAGE_APP_IPHONE_40"
+        case iPadPro3rdGen12Point9InchMessaging = "IMESSAGE_APP_IPAD_PRO_3GEN_129"
+        case iPadPro3rdGen11InchMessaging = "IMESSAGE_APP_IPAD_PRO_3GEN_11"
+        case iPadPro12Point9InchMessaging = "IMESSAGE_APP_IPAD_PRO_129"
+        case iPadPro10Point5InchMessaging = "IMESSAGE_APP_IPAD_105"
+        case iPadPro9Point7InchMessaging = "IMESSAGE_APP_IPAD_97"
 
         static var key: String = "screenshotDisplayType"
         var pair: NestableQueryParameter.Pair { return (nil, rawValue) }
