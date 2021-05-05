@@ -214,6 +214,215 @@ final class ListBuildsTests: XCTestCase {
         XCTAssertEqual(absoluteString, expected)
     }
 
+    // MARK: - Filters
+
+    func test_filter_app() {
+        let endpoint = APIEndpoint.builds(
+            fields: nil,
+            filter: [.app(["app"])],
+            include: nil,
+            limit: nil,
+            sort: nil,
+            next: nil)
+
+        let request = try? endpoint.asURLRequest()
+        XCTAssertEqual(request?.httpMethod, "GET")
+
+        let absoluteString = request?.url?.absoluteString
+        let expected = "https://api.appstoreconnect.apple.com/v1/builds?filter%5Bapp%5D=app"
+        XCTAssertEqual(absoluteString, expected)
+    }
+
+    func test_filter_appStoreVersion() {
+        let endpoint = APIEndpoint.builds(
+            fields: nil,
+            filter: [.appStoreVersion(["appStoreVersion"])],
+            include: nil,
+            limit: nil,
+            sort: nil,
+            next: nil)
+
+        let request = try? endpoint.asURLRequest()
+        XCTAssertEqual(request?.httpMethod, "GET")
+
+        let absoluteString = request?.url?.absoluteString
+        let expected = "https://api.appstoreconnect.apple.com/v1/builds?filter%5BappStoreVersion%5D=appStoreVersion"
+        XCTAssertEqual(absoluteString, expected)
+    }
+
+    func test_filter_betaAppReviewSubmissionBetaReviewState() {
+        let endpoint = APIEndpoint.builds(
+            fields: nil,
+            filter: [.betaAppReviewSubmissionBetaReviewState(["betaAppReviewSubmissionBetaReviewState"])],
+            include: nil,
+            limit: nil,
+            sort: nil,
+            next: nil)
+
+        let request = try? endpoint.asURLRequest()
+        XCTAssertEqual(request?.httpMethod, "GET")
+
+        let absoluteString = request?.url?.absoluteString
+        let expected = "https://api.appstoreconnect.apple.com/v1/builds?filter%5BbetaAppReviewSubmission.betaReviewState%5D=betaAppReviewSubmissionBetaReviewState"
+        XCTAssertEqual(absoluteString, expected)
+    }
+
+    func test_filter_betaGroups() {
+        let endpoint = APIEndpoint.builds(
+            fields: nil,
+            filter: [.betaGroups(["betaGroups"])],
+            include: nil,
+            limit: nil,
+            sort: nil,
+            next: nil)
+
+        let request = try? endpoint.asURLRequest()
+        XCTAssertEqual(request?.httpMethod, "GET")
+
+        let absoluteString = request?.url?.absoluteString
+        let expected = "https://api.appstoreconnect.apple.com/v1/builds?filter%5Bbetagroup%5D=betaGroups"
+        XCTAssertEqual(absoluteString, expected)
+    }
+
+    func test_filter_expired() {
+        let endpoint = APIEndpoint.builds(
+            fields: nil,
+            filter: [.expired(["expired"])],
+            include: nil,
+            limit: nil,
+            sort: nil,
+            next: nil)
+
+        let request = try? endpoint.asURLRequest()
+        XCTAssertEqual(request?.httpMethod, "GET")
+
+        let absoluteString = request?.url?.absoluteString
+        let expected = "https://api.appstoreconnect.apple.com/v1/builds?filter%5Bexpired%5D=expired"
+        XCTAssertEqual(absoluteString, expected)
+    }
+
+    func test_filter_id() {
+        let endpoint = APIEndpoint.builds(
+            fields: nil,
+            filter: [.id(["id"])],
+            include: nil,
+            limit: nil,
+            sort: nil,
+            next: nil)
+
+        let request = try? endpoint.asURLRequest()
+        XCTAssertEqual(request?.httpMethod, "GET")
+
+        let absoluteString = request?.url?.absoluteString
+        let expected = "https://api.appstoreconnect.apple.com/v1/builds?filter%5Bid%5D=id"
+        XCTAssertEqual(absoluteString, expected)
+    }
+
+    func test_filter_preReleaseVersion() {
+        let endpoint = APIEndpoint.builds(
+            fields: nil,
+            filter: [.preReleaseVersion(["preReleaseVersion"])],
+            include: nil,
+            limit: nil,
+            sort: nil,
+            next: nil)
+
+        let request = try? endpoint.asURLRequest()
+        XCTAssertEqual(request?.httpMethod, "GET")
+
+        let absoluteString = request?.url?.absoluteString
+        let expected = "https://api.appstoreconnect.apple.com/v1/builds?filter%5BpreReleaseVersion%5D=preReleaseVersion"
+        XCTAssertEqual(absoluteString, expected)
+    }
+
+    func test_filter_preReleaseVersionVersion() {
+        let endpoint = APIEndpoint.builds(
+            fields: nil,
+            filter: [.preReleaseVersionVersion(["preReleaseVersionVersion"])],
+            include: nil,
+            limit: nil,
+            sort: nil,
+            next: nil)
+
+        let request = try? endpoint.asURLRequest()
+        XCTAssertEqual(request?.httpMethod, "GET")
+
+        let absoluteString = request?.url?.absoluteString
+        let expected = "https://api.appstoreconnect.apple.com/v1/builds?filter%5BpreReleaseVersion.version%5D=preReleaseVersionVersion"
+        XCTAssertEqual(absoluteString, expected)
+    }
+
+    func test_filter_preReleaseVersionPlatform() {
+        let endpoint = APIEndpoint.builds(
+            fields: nil,
+            filter: [.preReleaseVersionPlatform(ListBuilds.Filter.PreReleaseVersionPlatform.allCases)],
+            include: nil,
+            limit: nil,
+            sort: nil,
+            next: nil)
+
+        let request = try? endpoint.asURLRequest()
+        XCTAssertEqual(request?.httpMethod, "GET")
+
+        let absoluteString = request?.url?.absoluteString
+        let expected = "https://api.appstoreconnect.apple.com/v1/builds?filter%5BpreReleaseVersion.platform%5D=IOS%2CMAC_OS%2CTV_OS"
+        XCTAssertEqual(absoluteString, expected)
+    }
+
+    func test_filter_processingState() {
+        let endpoint = APIEndpoint.builds(
+            fields: nil,
+            filter: [.processingState(ListBuilds.Filter.ProcessingState.allCases)],
+            include: nil,
+            limit: nil,
+            sort: nil,
+            next: nil)
+
+        let request = try? endpoint.asURLRequest()
+        XCTAssertEqual(request?.httpMethod, "GET")
+
+        let absoluteString = request?.url?.absoluteString
+        let expected = "https://api.appstoreconnect.apple.com/v1/builds?filter%5BprocessingState%5D=PROCESSING%2CFAILED%2CINVALID%2CVALID"
+        XCTAssertEqual(absoluteString, expected)
+    }
+
+    func test_filter_usesNonExemptEncryption() {
+        let endpoint = APIEndpoint.builds(
+            fields: nil,
+            filter: [.usesNonExemptEncryption(["usesNonExemptEncryption"])],
+            include: nil,
+            limit: nil,
+            sort: nil,
+            next: nil)
+
+        let request = try? endpoint.asURLRequest()
+        XCTAssertEqual(request?.httpMethod, "GET")
+
+        let absoluteString = request?.url?.absoluteString
+        let expected = "https://api.appstoreconnect.apple.com/v1/builds?filter%5BusesNonExemptEncryption%5D=usesNonExemptEncryption"
+        XCTAssertEqual(absoluteString, expected)
+    }
+
+    func test_filter_version() {
+        let endpoint = APIEndpoint.builds(
+            fields: nil,
+            filter: [.version(["version"])],
+            include: nil,
+            limit: nil,
+            sort: nil,
+            next: nil)
+
+        let request = try? endpoint.asURLRequest()
+        XCTAssertEqual(request?.httpMethod, "GET")
+
+        let absoluteString = request?.url?.absoluteString
+        let expected = "https://api.appstoreconnect.apple.com/v1/builds?filter%5Bversion%5D=version"
+        XCTAssertEqual(absoluteString, expected)
+    }
+}
+
+// MARK: For Reference - Delete
+extension ListBuildsTests {
     func xtestURLRequest() {
         let endpoint = APIEndpoint.builds(
             fields: [
