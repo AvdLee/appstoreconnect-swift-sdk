@@ -137,7 +137,7 @@ public enum ListBuilds {
     
     /// Relationship data to include in the response.
     public enum Include: String, CaseIterable, NestableQueryParameter {
-        case app, appEncryptionDeclaration, betaAppReviewSubmission, betaBuildLocalizations, buildBetaDetail, individualTesters, preReleaseVersion
+        case app, appEncryptionDeclaration, appStoreVersion, betaAppReviewSubmission, betaBuildLocalizations, buildBetaDetail, icons, individualTesters, preReleaseVersion
 
         static var key: String = "include"
         var pair: NestableQueryParameter.Pair { return (nil, rawValue) }
