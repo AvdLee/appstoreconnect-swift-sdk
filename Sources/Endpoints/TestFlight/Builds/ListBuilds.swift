@@ -99,6 +99,7 @@ public enum ListBuilds {
         case id([String])
         case preReleaseVersion([String])
         case preReleaseVersionVersion([String])
+        case preReleaseVersionPlatform([PreReleaseVersionPlatform])
         case processingState([ProcessingState])
         case usesNonExemptEncryption([String])
         case version([String])
@@ -120,6 +121,8 @@ public enum ListBuilds {
                 return ("id", value.joinedByCommas())
             case .preReleaseVersion(let value):
                 return ("preReleaseVersion", value.joinedByCommas())
+            case .preReleaseVersionPlatform(let value):
+                return (PreReleaseVersionPlatform.key, value.map({ $0.pair.value }).joinedByCommas())
             case .preReleaseVersionVersion(let value):
                 return ("preReleaseVersion.version", value.joinedByCommas())
             case .processingState(let value):
@@ -233,7 +236,7 @@ extension ListBuilds.Field {
         static var key: String = "buildIcons"
         var pair: NestableQueryParameter.Pair { return (nil, rawValue) }
     }
-    
+
     public enum DiagnosticSignature: String, CaseIterable, NestableQueryParameter {
         case diagnosticType, logs, signature, weight
 
@@ -258,7 +261,13 @@ extension ListBuilds.Field {
 
 // MARK: - Filter
 extension ListBuilds.Filter {
-    
+    public enum PreReleaseVersionPlatform: String, CaseIterable, NestableQueryParameter {
+        case IOS, MAC_OS, TV_OS
+
+        static var key: String = "preReleaseVersion.platform"
+        var pair: NestableQueryParameter.Pair { return (nil, rawValue) }
+    }
+
     public enum ProcessingState: String, CaseIterable, NestableQueryParameter {
         case PROCESSING, FAILED, INVALID, VALID
 
