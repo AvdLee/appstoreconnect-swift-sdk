@@ -145,13 +145,17 @@ public enum ListBuilds {
     
     /// Number of resources to return.
     public enum Limit: NestableQueryParameter {
-        case individualTesters(Int), betaBuildLocalizations(Int)
+        case betaBuildLocalizations(Int)
+        case icons(Int)
+        case individualTesters(Int)
 
         static var key: String = "limit"
         var pair: Pair {
             switch self {
             case .betaBuildLocalizations(let value):
                 return ("betaBuildLocalizations", "\(value)")
+            case .icons(let value):
+                return ("icons", "\(value)")
             case .individualTesters(let value):
                 return ("individualTesters", "\(value)")
             }
