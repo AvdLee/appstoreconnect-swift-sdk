@@ -167,7 +167,7 @@ extension ListBuilds.Field {
     public enum App: String, CaseIterable, NestableQueryParameter {
         case betaAppLocalizations, betaAppReviewDetail, betaGroups, betaLicenseAgreement, betaTesters, builds, bundleId, name, preReleaseVersions, primaryLocale, sku
 
-        static var key: String = "App"
+        static var key: String = "apps"
         var pair: NestableQueryParameter.Pair { return (nil, rawValue) }
     }
     
