@@ -80,6 +80,7 @@ public enum ListBuilds {
     /// Attributes, relationships, and IDs by which to filter.
     public enum Filter: NestableQueryParameter {
         case app([String])
+        case appStoreVersion([String])
         case expired([String])
         case id([String])
         case preReleaseVersion([String])
@@ -95,6 +96,8 @@ public enum ListBuilds {
             switch self {
             case .app(let value):
                 return ("app", value.joinedByCommas())
+            case .appStoreVersion(let value):
+                return ("appStoreVersion", value.joinedByCommas())
             case .expired(let value):
                 return ("expired", value.joinedByCommas())
             case .id(let value):
