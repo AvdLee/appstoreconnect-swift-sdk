@@ -163,7 +163,7 @@ extension ListBuilds.Field {
     public enum AppEncryptionDeclaration: String, CaseIterable, NestableQueryParameter {
         case app, appEncryptionDeclarationState, availableOnFrenchStore, builds, codeValue, containsProprietaryCryptography, containsThirdPartyCryptography, documentName, documentType, documentUrl, exempt, platform, uploadedDate, usesEncryption
 
-        static var key: String = "AppEncryptionDeclaration"
+        static var key: String = "appEncryptionDeclarations"
         var pair: NestableQueryParameter.Pair { return (nil, rawValue) }
     }
     
