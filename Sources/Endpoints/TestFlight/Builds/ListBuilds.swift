@@ -53,7 +53,11 @@ public enum ListBuilds {
         case buildBetaDetails([BuildBetaDetail])
         case betaAppReviewSubmissions([BetaAppReviewSubmission])
         case betaBuildLocalizations([BetaBuildLocalization])
-        
+        case diagnosticSignatures([DiagnosticSignature])
+        case appStoreVersions([AppStoreVersion])
+        case perfPowerMetrics([PerfPowerMetric])
+        case buildIcons([BuildIcon])
+
         static var key: String = "fields"
         var pair: Pair {
             switch self {
@@ -73,6 +77,14 @@ public enum ListBuilds {
                 return (BetaAppReviewSubmission.key, value.map({ $0.pair.value }).joinedByCommas())
             case .betaBuildLocalizations(let value):
                 return (BetaBuildLocalization.key, value.map({ $0.pair.value }).joinedByCommas())
+            case .diagnosticSignatures(let value):
+                return (DiagnosticSignature.key, value.map({ $0.pair.value }).joinedByCommas())
+            case .appStoreVersions(let value):
+                return (AppStoreVersion.key, value.map({ $0.pair.value }).joinedByCommas())
+            case .perfPowerMetrics(let value):
+                return (PerfPowerMetric.key, value.map({ $0.pair.value }).joinedByCommas())
+            case .buildIcons(let value):
+                return (BuildIcon.key, value.map({ $0.pair.value }).joinedByCommas())
             }
         }
     }
@@ -168,7 +180,7 @@ extension ListBuilds.Field {
     }
     
     public enum App: String, CaseIterable, NestableQueryParameter {
-        case betaAppLocalizations, betaAppReviewDetail, betaGroups, betaLicenseAgreement, betaTesters, builds, bundleId, name, preReleaseVersions, primaryLocale, sku
+        case appInfos, appStoreVersions, availableInNewTerritories, availableTerritories, betaAppLocalizations, betaAppReviewDetail, betaGroups, betaLicenseAgreement, betaTesters, builds, bundleId, contentRightsDeclaration, endUserLicenseAgreement, gameCenterEnabledVersions, inAppPurchases, isOrEverWasMadeForKids, name, perfPowerMetrics, preOrder, preReleaseVersions, prices, primaryLocale, sku
 
         static var key: String = "apps"
         var pair: NestableQueryParameter.Pair { return (nil, rawValue) }
@@ -177,12 +189,12 @@ extension ListBuilds.Field {
     public enum BetaTester: String, CaseIterable, NestableQueryParameter {
         case apps, betaGroups, builds, email, firstName, inviteType, lastName
 
-        static var key: String = "betaTester"
+        static var key: String = "betaTesters"
         var pair: NestableQueryParameter.Pair { return (nil, rawValue) }
     }
     
     public enum Build: String, CaseIterable, NestableQueryParameter {
-        case app, appEncryptionDeclaration, appStoreVersion, betaAppReviewSubmission, betaBuildLocalizations, betaGroups, buildBetaDetail, expirationDate, expired, iconAssetToken, individualTesters, minOsVersion, preReleaseVersion, processingState, uploadedDate, usesNonExemptEncryption, version
+        case app, appEncryptionDeclaration, appStoreVersion, betaAppReviewSubmission, betaBuildLocalizations, betaGroups, buildBetaDetail, diagnosticSignatures, expirationDate, expired, iconAssetToken, icons, individualTesters, minOsVersion, perfPowerMetrics, preReleaseVersion, processingState, uploadedDate, usesNonExemptEncryption, version
 
         static var key: String = "builds"
         var pair: NestableQueryParameter.Pair { return (nil, rawValue) }
@@ -198,21 +210,49 @@ extension ListBuilds.Field {
     public enum BuildBetaDetail: String, CaseIterable, NestableQueryParameter {
         case autoNotifyEnabled, build, externalBuildState, internalBuildState
 
-        static var key: String = "buildBetaDetail"
+        static var key: String = "buildBetaDetails"
         var pair: NestableQueryParameter.Pair { return (nil, rawValue) }
     }
     
     public enum BetaAppReviewSubmission: String, CaseIterable, NestableQueryParameter {
         case betaReviewState, build
 
-        static var key: String = "betaAppReviewSubmission"
+        static var key: String = "betaAppReviewSubmissions"
         var pair: NestableQueryParameter.Pair { return (nil, rawValue) }
     }
     
     public enum BetaBuildLocalization: String, CaseIterable, NestableQueryParameter {
         case build, locale, whatsNew
 
-        static var key: String = "betaBuildLocalization"
+        static var key: String = "betaBuildLocalizations"
+        var pair: NestableQueryParameter.Pair { return (nil, rawValue) }
+    }
+
+    public enum DiagnosticSignature: String, CaseIterable, NestableQueryParameter {
+        case diagnosticType, logs, signature, weight
+
+        static var key: String = "diagnosticSignatures"
+        var pair: NestableQueryParameter.Pair { return (nil, rawValue) }
+    }
+
+    public enum AppStoreVersion: String, CaseIterable, NestableQueryParameter {
+        case ageRatingDeclaration, app, appStoreReviewDetail, appStoreState, appStoreVersionLocalizations, appStoreVersionPhasedRelease, appStoreVersionSubmission, build, copyright, createdDate, downloadable, earliestReleaseDate, idfaDeclaration, platform, releaseType, routingAppCoverage, usesIdfa, versionString
+
+        static var key: String = "appStoreVersions"
+        var pair: NestableQueryParameter.Pair { return (nil, rawValue) }
+    }
+
+    public enum PerfPowerMetric: String, CaseIterable, NestableQueryParameter {
+        case deviceType, metricType, platform
+
+        static var key: String = "perfPowerMetrics"
+        var pair: NestableQueryParameter.Pair { return (nil, rawValue) }
+    }
+
+    public enum BuildIcon: String, CaseIterable, NestableQueryParameter {
+        case iconAsset, iconType
+
+        static var key: String = "buildIcons"
         var pair: NestableQueryParameter.Pair { return (nil, rawValue) }
     }
 }
