@@ -9,7 +9,24 @@ import XCTest
 @testable import AppStoreConnect_Swift_SDK
 
 final class ReadBetaGroupInformationTests: XCTestCase {
-    
+    func test_fields_apps() {
+        let endpoint = APIEndpoint.betaGroup(
+            withId: "betaGroupId",
+            fields: [.apps(ReadBetaGroupInformation.Field.App.allCases)],
+            include: nil,
+            limit: nil)
+
+        let request = try? endpoint.asURLRequest()
+        XCTAssertEqual(request?.httpMethod, "GET")
+
+        let absoluteString = request?.url?.absoluteString
+        let expected = "https://api.appstoreconnect.apple.com/v1/betaGroups/betaGroupId?fields%5Bapps%5D=appInfos%2CappStoreVersions%2CavailableInNewTerritories%2CavailableTerritories%2CbetaAppLocalizations%2CbetaAppReviewDetail%2CbetaGroups%2CbetaLicenseAgreement%2CbetaTesters%2Cbuilds%2CbundleId%2CcontentRightsDeclaration%2CendUserLicenseAgreement%2CgameCenterEnabledVersions%2CinAppPurchases%2CisOrEverWasMadeForKids%2Cname%2CperfPowerMetrics%2CpreOrder%2CpreReleaseVersions%2Cprices%2CprimaryLocale%2Csku"
+        XCTAssertEqual(absoluteString, expected)
+    }
+}
+
+// MARK: - For reference - delete at the end
+extension ReadBetaGroupInformationTests {
     func testURLRequest() {
         let endpoint = APIEndpoint.betaGroup(
             withId: "betaGroupId",
