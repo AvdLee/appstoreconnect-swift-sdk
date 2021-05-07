@@ -88,6 +88,38 @@ final class ReadBetaGroupInformationTests: XCTestCase {
         let expected = "https://api.appstoreconnect.apple.com/v1/betaGroups/betaGroupId?include=app%2CbetaTesters%2Cbuilds"
         XCTAssertEqual(absoluteString, expected)
     }
+
+    // MARK: - Limits
+
+    func test_limit_builds() {
+        let endpoint = APIEndpoint.betaGroup(
+            withId: "betaGroupId",
+            fields: nil,
+            include: nil,
+            limit: [.builds(5)])
+
+        let request = try? endpoint.asURLRequest()
+        XCTAssertEqual(request?.httpMethod, "GET")
+
+        let absoluteString = request?.url?.absoluteString
+        let expected = "https://api.appstoreconnect.apple.com/v1/betaGroups/betaGroupId?limit%5Bbuilds%5D=5"
+        XCTAssertEqual(absoluteString, expected)
+    }
+
+    func test_limit_betaTesters() {
+        let endpoint = APIEndpoint.betaGroup(
+            withId: "betaGroupId",
+            fields: nil,
+            include: nil,
+            limit: [.betaTesters(5)])
+
+        let request = try? endpoint.asURLRequest()
+        XCTAssertEqual(request?.httpMethod, "GET")
+
+        let absoluteString = request?.url?.absoluteString
+        let expected = "https://api.appstoreconnect.apple.com/v1/betaGroups/betaGroupId?limit%5BbetaTesters%5D=5"
+        XCTAssertEqual(absoluteString, expected)
+    }
 }
 
 // MARK: - For reference - delete at the end
