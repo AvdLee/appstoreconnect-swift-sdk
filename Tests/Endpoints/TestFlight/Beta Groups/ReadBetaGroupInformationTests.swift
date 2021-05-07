@@ -38,6 +38,21 @@ final class ReadBetaGroupInformationTests: XCTestCase {
         let expected = "https://api.appstoreconnect.apple.com/v1/betaGroups/betaGroupId?fields%5BbetaGroups%5D=app%2CbetaTesters%2Cbuilds%2CcreatedDate%2CfeedbackEnabled%2CisInternalGroup%2Cname%2CpublicLink%2CpublicLinkEnabled%2CpublicLinkId%2CpublicLinkLimit%2CpublicLinkLimitEnabled"
         XCTAssertEqual(absoluteString, expected)
     }
+
+    func test_fields_betaTesters() {
+        let endpoint = APIEndpoint.betaGroup(
+            withId: "betaGroupId",
+            fields: [.betaTesters(ReadBetaGroupInformation.Field.BetaTester.allCases)],
+            include: nil,
+            limit: nil)
+
+        let request = try? endpoint.asURLRequest()
+        XCTAssertEqual(request?.httpMethod, "GET")
+
+        let absoluteString = request?.url?.absoluteString
+        let expected = "https://api.appstoreconnect.apple.com/v1/betaGroups/betaGroupId?fields%5BbetaTesters%5D=apps%2CbetaGroups%2Cbuilds%2Cemail%2CfirstName%2CinviteType%2ClastName"
+        XCTAssertEqual(absoluteString, expected)
+    }
 }
 
 // MARK: - For reference - delete at the end

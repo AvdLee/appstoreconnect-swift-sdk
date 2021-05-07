@@ -97,7 +97,7 @@ extension ReadBetaGroupInformation.Field {
     public enum BetaTester: String, CaseIterable, NestableQueryParameter {
         case apps, betaGroups, builds, email, firstName, inviteType, lastName
 
-        static var key: String = "betaTester"
+        static var key: String = "betaTesters"
         var pair: NestableQueryParameter.Pair { return (nil, rawValue) }
     }
     
