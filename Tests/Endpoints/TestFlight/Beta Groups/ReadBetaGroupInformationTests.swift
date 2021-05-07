@@ -9,6 +9,9 @@ import XCTest
 @testable import AppStoreConnect_Swift_SDK
 
 final class ReadBetaGroupInformationTests: XCTestCase {
+
+    // MARK: - Fields
+
     func test_fields_apps() {
         let endpoint = APIEndpoint.betaGroup(
             withId: "betaGroupId",
@@ -66,6 +69,23 @@ final class ReadBetaGroupInformationTests: XCTestCase {
 
         let absoluteString = request?.url?.absoluteString
         let expected = "https://api.appstoreconnect.apple.com/v1/betaGroups/betaGroupId?fields%5Bbuilds%5D=app%2CappEncryptionDeclaration%2CappStoreVersion%2CbetaAppReviewSubmission%2CbetaBuildLocalizations%2CbetaGroups%2CbuildBetaDetail%2CdiagnosticSignatures%2CexpirationDate%2Cexpired%2CiconAssetToken%2Cicons%2CindividualTesters%2CminOsVersion%2CperfPowerMetrics%2CpreReleaseVersion%2CprocessingState%2CuploadedDate%2CusesNonExemptEncryption%2Cversion"
+        XCTAssertEqual(absoluteString, expected)
+    }
+
+    // MARK: - Include
+
+    func test_include_all() {
+        let endpoint = APIEndpoint.betaGroup(
+            withId: "betaGroupId",
+            fields: nil,
+            include: ReadBetaGroupInformation.Include.allCases,
+            limit: nil)
+
+        let request = try? endpoint.asURLRequest()
+        XCTAssertEqual(request?.httpMethod, "GET")
+
+        let absoluteString = request?.url?.absoluteString
+        let expected = "https://api.appstoreconnect.apple.com/v1/betaGroups/betaGroupId?include=app%2CbetaTesters%2Cbuilds"
         XCTAssertEqual(absoluteString, expected)
     }
 }
