@@ -43,6 +43,22 @@ final class ListPrereleaseVersionsTests: XCTestCase {
         let expected = "https://api.appstoreconnect.apple.com/v1/preReleaseVersions?fields%5Bbuilds%5D=app%2CappEncryptionDeclaration%2CappStoreVersion%2CbetaAppReviewSubmission%2CbetaBuildLocalizations%2CbetaGroups%2CbuildBetaDetail%2CdiagnosticSignatures%2CexpirationDate%2Cexpired%2CiconAssetToken%2Cicons%2CindividualTesters%2CminOsVersion%2CperfPowerMetrics%2CpreReleaseVersion%2CprocessingState%2CuploadedDate%2CusesNonExemptEncryption%2Cversion"
         XCTAssertEqual(absoluteString, expected)
     }
+
+    func test_field_preReleaseVersions() {
+        let endpoint = APIEndpoint.prereleaseVersions(
+            fields: [.preReleaseVersions(ListPrereleaseVersions.Field.PreReleaseVersion.allCases)],
+            filter: nil,
+            include: nil,
+            limit: nil,
+            sort: nil,
+            next: nil)
+        let request = try? endpoint.asURLRequest()
+        XCTAssertEqual(request?.httpMethod, "GET")
+
+        let absoluteString = request?.url?.absoluteString
+        let expected = "https://api.appstoreconnect.apple.com/v1/preReleaseVersions?fields%5BpreReleaseVersions%5D=app%2Cbuilds%2Cplatform%2Cversion"
+        XCTAssertEqual(absoluteString, expected)
+    }
 }
 
 // MARK: - For reference - delete later

@@ -138,7 +138,7 @@ extension ListPrereleaseVersions.Field {
     public enum PreReleaseVersion: String, CaseIterable, NestableQueryParameter {
         case app, builds, platform, version
 
-        static var key: String = "preReleaseVersion"
+        static var key: String = "preReleaseVersions"
         var pair: NestableQueryParameter.Pair { return (nil, rawValue) }
     }
 }
