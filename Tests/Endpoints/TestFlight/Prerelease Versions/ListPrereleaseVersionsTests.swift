@@ -227,6 +227,24 @@ final class ListPrereleaseVersionsTests: XCTestCase {
         let expected = "https://api.appstoreconnect.apple.com/v1/preReleaseVersions?sort=-version"
         XCTAssertEqual(absoluteString, expected)
     }
+
+    // MARK: - Combined
+
+    func test_combined() {
+        let endpoint = APIEndpoint.prereleaseVersions(
+            fields: [.apps(ListPrereleaseVersions.Field.App.allCases)],
+            filter: [.builds(["123"])],
+            include: [.app, .builds],
+            limit: [.builds(5)],
+            sort: [.versionAscending],
+            next: nil)
+        let request = try? endpoint.asURLRequest()
+        XCTAssertEqual(request?.httpMethod, "GET")
+
+        let absoluteString = request?.url?.absoluteString
+        let expected = "https://api.appstoreconnect.apple.com/v1/preReleaseVersions?fields%5Bapps%5D=appInfos%2CappStoreVersions%2CavailableInNewTerritories%2CavailableTerritories%2CbetaAppLocalizations%2CbetaAppReviewDetail%2CbetaGroups%2CbetaLicenseAgreement%2CbetaTesters%2Cbuilds%2CbundleId%2CcontentRightsDeclaration%2CendUserLicenseAgreement%2CgameCenterEnabledVersions%2CinAppPurchases%2CisOrEverWasMadeForKids%2Cname%2CperfPowerMetrics%2CpreOrder%2CpreReleaseVersions%2Cprices%2CprimaryLocale%2Csku&filter%5Bbuilds%5D=123&include=app%2Cbuilds&limit%5Bbuilds%5D=5&sort=%2Bversion"
+        XCTAssertEqual(absoluteString, expected)
+    }
 }
 
 // MARK: - For reference - delete later
