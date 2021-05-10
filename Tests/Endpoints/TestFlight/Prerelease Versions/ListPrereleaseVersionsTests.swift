@@ -193,6 +193,40 @@ final class ListPrereleaseVersionsTests: XCTestCase {
         let expected = "https://api.appstoreconnect.apple.com/v1/preReleaseVersions?limit%5Bbuilds%5D=5"
         XCTAssertEqual(absoluteString, expected)
     }
+
+    // MARK: - Sorts
+
+    func test_sort_versionAscending() {
+        let endpoint = APIEndpoint.prereleaseVersions(
+            fields: nil,
+            filter: nil,
+            include: nil,
+            limit: nil,
+            sort: [.versionAscending],
+            next: nil)
+        let request = try? endpoint.asURLRequest()
+        XCTAssertEqual(request?.httpMethod, "GET")
+
+        let absoluteString = request?.url?.absoluteString
+        let expected = "https://api.appstoreconnect.apple.com/v1/preReleaseVersions?sort=%2Bversion"
+        XCTAssertEqual(absoluteString, expected)
+    }
+
+    func test_sort_versionDescending() {
+        let endpoint = APIEndpoint.prereleaseVersions(
+            fields: nil,
+            filter: nil,
+            include: nil,
+            limit: nil,
+            sort: [.versionDescending],
+            next: nil)
+        let request = try? endpoint.asURLRequest()
+        XCTAssertEqual(request?.httpMethod, "GET")
+
+        let absoluteString = request?.url?.absoluteString
+        let expected = "https://api.appstoreconnect.apple.com/v1/preReleaseVersions?sort=-version"
+        XCTAssertEqual(absoluteString, expected)
+    }
 }
 
 // MARK: - For reference - delete later
