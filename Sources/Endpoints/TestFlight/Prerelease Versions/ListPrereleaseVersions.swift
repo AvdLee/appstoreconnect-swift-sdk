@@ -65,7 +65,7 @@ public enum ListPrereleaseVersions {
         case buildsExpired([String])
         case buildsProcessingState([BuildsProcessingState])
         case builds([String])
-        case platform([String])
+        case platform([Platform])
         case version([String])
 
         static var key: String = "filter"
@@ -80,7 +80,7 @@ public enum ListPrereleaseVersions {
             case .builds(let value):
                 return ("builds", value.joinedByCommas())
             case .platform(let value):
-                return ("platform", value.joinedByCommas())
+                return (Platform.key, value.map({ $0.pair.value }).joinedByCommas())
             case .version(let value):
                 return ("version", value.joinedByCommas())
             }
@@ -149,6 +149,13 @@ extension ListPrereleaseVersions.Filter {
         case PROCESSING, FAILED, INVALID, VALID
 
         static var key: String = "builds.processingState"
+        var pair: NestableQueryParameter.Pair { return (nil, rawValue) }
+    }
+
+    public enum Platform: String, CaseIterable, NestableQueryParameter {
+        case IOS, MAC_OS, TV_OS
+
+        static var key: String = "platform"
         var pair: NestableQueryParameter.Pair { return (nil, rawValue) }
     }
 }
