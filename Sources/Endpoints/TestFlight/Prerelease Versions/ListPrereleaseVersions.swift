@@ -129,9 +129,9 @@ extension ListPrereleaseVersions.Field {
     }
     
     public enum Build: String, CaseIterable, NestableQueryParameter {
-        case app, appEncryptionDeclaration, betaAppReviewSubmission, betaBuildLocalizations, betaGroups, buildBetaDetail, expirationDate, expired, iconAssetToken, individualTesters, minOsVersion, preReleaseVersion, processingState, uploadedDate, usesNonExemptEncryption, version
+        case app, appEncryptionDeclaration, appStoreVersion, betaAppReviewSubmission, betaBuildLocalizations, betaGroups, buildBetaDetail, diagnosticSignatures, expirationDate, expired, iconAssetToken, icons, individualTesters, minOsVersion, perfPowerMetrics, preReleaseVersion, processingState, uploadedDate, usesNonExemptEncryption, version
 
-        static var key: String = "build"
+        static var key: String = "builds"
         var pair: NestableQueryParameter.Pair { return (nil, rawValue) }
     }
     
