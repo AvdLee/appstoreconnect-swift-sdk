@@ -1,3 +1,11 @@
+### 1.5.0
+- Fix List Prerelease Versions and update to match Apple's docs ([#143](https://github.com/AvdLee/appstoreconnect-swift-sdk/pull/143)) via [@scottlemke](https://github.com/scottlemke)
+- Fix Read Beta Group Information and update to match Apple's docs ([#142](https://github.com/AvdLee/appstoreconnect-swift-sdk/pull/142)) via [@scottlemke](https://github.com/scottlemke)
+- More App Store Version Localization APIs/models. ([#139](https://github.com/AvdLee/appstoreconnect-swift-sdk/pull/139)) via [@VaslD](https://github.com/VaslD)
+- Update List Builds API to match Apple's API documentation ([#141](https://github.com/AvdLee/appstoreconnect-swift-sdk/pull/141)) via [@scottlemke](https://github.com/scottlemke)
+- Fix date decoding error ([#140](https://github.com/AvdLee/appstoreconnect-swift-sdk/pull/140)) via [@artyomsadyrin](https://github.com/artyomsadyrin)
+- Merge release 1.4.0 into master ([#136](https://github.com/AvdLee/appstoreconnect-swift-sdk/pull/136)) via [@SwiftLeeBot](https://github.com/SwiftLeeBot)
+
 ### 1.4.0
 - Adding download on RequestExecutor ([#133](https://github.com/AvdLee/appstoreconnect-swift-sdk/pull/133)) via [@barrault01](https://github.com/barrault01)
 - Fixing submodule update command line ([#135](https://github.com/AvdLee/appstoreconnect-swift-sdk/pull/135)) via [@barrault01](https://github.com/barrault01)
