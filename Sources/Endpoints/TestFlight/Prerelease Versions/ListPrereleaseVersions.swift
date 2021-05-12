@@ -65,7 +65,7 @@ public enum ListPrereleaseVersions {
         case buildsExpired([String])
         case buildsProcessingState([BuildsProcessingState])
         case builds([String])
-        case platform([String])
+        case platform([Platform])
         case version([String])
 
         static var key: String = "filter"
@@ -80,7 +80,7 @@ public enum ListPrereleaseVersions {
             case .builds(let value):
                 return ("builds", value.joinedByCommas())
             case .platform(let value):
-                return ("platform", value.joinedByCommas())
+                return (Platform.key, value.map({ $0.pair.value }).joinedByCommas())
             case .version(let value):
                 return ("version", value.joinedByCommas())
             }
@@ -122,23 +122,23 @@ public enum ListPrereleaseVersions {
 extension ListPrereleaseVersions.Field {
     
     public enum App: String, CaseIterable, NestableQueryParameter {
-        case betaAppLocalizations, betaAppReviewDetail, betaGroups, betaLicenseAgreement, betaTesters, builds, bundleId, name, preReleaseVersions, primaryLocale, sku
+        case appInfos, appStoreVersions, availableInNewTerritories, availableTerritories, betaAppLocalizations, betaAppReviewDetail, betaGroups, betaLicenseAgreement, betaTesters, builds, bundleId, contentRightsDeclaration, endUserLicenseAgreement, gameCenterEnabledVersions, inAppPurchases, isOrEverWasMadeForKids, name, perfPowerMetrics, preOrder, preReleaseVersions, prices, primaryLocale, sku
 
-        static var key: String = "App"
+        static var key: String = "apps"
         var pair: NestableQueryParameter.Pair { return (nil, rawValue) }
     }
     
     public enum Build: String, CaseIterable, NestableQueryParameter {
-        case app, appEncryptionDeclaration, betaAppReviewSubmission, betaBuildLocalizations, betaGroups, buildBetaDetail, expirationDate, expired, iconAssetToken, individualTesters, minOsVersion, preReleaseVersion, processingState, uploadedDate, usesNonExemptEncryption, version
+        case app, appEncryptionDeclaration, appStoreVersion, betaAppReviewSubmission, betaBuildLocalizations, betaGroups, buildBetaDetail, diagnosticSignatures, expirationDate, expired, iconAssetToken, icons, individualTesters, minOsVersion, perfPowerMetrics, preReleaseVersion, processingState, uploadedDate, usesNonExemptEncryption, version
 
-        static var key: String = "build"
+        static var key: String = "builds"
         var pair: NestableQueryParameter.Pair { return (nil, rawValue) }
     }
     
     public enum PreReleaseVersion: String, CaseIterable, NestableQueryParameter {
         case app, builds, platform, version
 
-        static var key: String = "preReleaseVersion"
+        static var key: String = "preReleaseVersions"
         var pair: NestableQueryParameter.Pair { return (nil, rawValue) }
     }
 }
@@ -149,6 +149,13 @@ extension ListPrereleaseVersions.Filter {
         case PROCESSING, FAILED, INVALID, VALID
 
         static var key: String = "builds.processingState"
+        var pair: NestableQueryParameter.Pair { return (nil, rawValue) }
+    }
+
+    public enum Platform: String, CaseIterable, NestableQueryParameter {
+        case IOS, MAC_OS, TV_OS
+
+        static var key: String = "platform"
         var pair: NestableQueryParameter.Pair { return (nil, rawValue) }
     }
 }
