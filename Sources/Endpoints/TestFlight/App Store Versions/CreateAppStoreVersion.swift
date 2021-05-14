@@ -1,6 +1,11 @@
 import Foundation
 
 public extension APIEndpoint where T == AppStoreVersionResponse {
+
+    /// Add a new App Store version or platform to an app.
+    ///
+    /// # Reference
+    /// [Apple Documentation](https://developer.apple.com/documentation/appstoreconnectapi/create_an_app_store_version)
     static func create(
         appStoreVersionForAppId id: String,
         versionString: String,

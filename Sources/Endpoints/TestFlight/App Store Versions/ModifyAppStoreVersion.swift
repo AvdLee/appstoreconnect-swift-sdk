@@ -1,6 +1,11 @@
 import Foundation
 
 public extension APIEndpoint where T == AppStoreVersionResponse {
+
+    /// Update the app store version for a specific app.
+    ///
+    /// # Reference
+    /// [Apple Documentation](https://developer.apple.com/documentation/appstoreconnectapi/modify_an_app_store_version)
     static func modify(
         appStoreVersionWithId id: String,
         buildId: String? = nil,
