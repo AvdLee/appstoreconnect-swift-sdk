@@ -215,6 +215,9 @@
 		5367F23F264E2FD8002A91AE /* AppStoreVersionSubmissionCreateRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5367F23C264E2FD7002A91AE /* AppStoreVersionSubmissionCreateRequest.swift */; };
 		5367F240264E2FD8002A91AE /* AppStoreVersionSubmissionResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5367F23D264E2FD8002A91AE /* AppStoreVersionSubmissionResponse.swift */; };
 		5367F243264E3001002A91AE /* CreateAppStoreVersionSubmissionTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5367F242264E3001002A91AE /* CreateAppStoreVersionSubmissionTests.swift */; };
+		538D6158264E33E400A61359 /* AppStoreVersionUpdateRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 538D6157264E33E400A61359 /* AppStoreVersionUpdateRequest.swift */; };
+		538D615A264E374C00A61359 /* ModifyAppStoreVersion.swift in Sources */ = {isa = PBXBuildFile; fileRef = 538D6159264E374C00A61359 /* ModifyAppStoreVersion.swift */; };
+		538D615C264E3B8E00A61359 /* ModifyAppStoreVersionTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 538D615B264E3B8E00A61359 /* ModifyAppStoreVersionTests.swift */; };
 		6D050F07241BE65700CBDABA /* ProfileCertificatesResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D050F06241BE65700CBDABA /* ProfileCertificatesResponse.swift */; };
 		A72A23D32449384C0093A0E9 /* ProfileRelationship.swift in Sources */ = {isa = PBXBuildFile; fileRef = A72A23D22449384C0093A0E9 /* ProfileRelationship.swift */; };
 		A72A23D5244938610093A0E9 /* ProfileRelationshipTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A72A23D4244938610093A0E9 /* ProfileRelationshipTests.swift */; };
@@ -760,6 +763,9 @@
 		5367F23C264E2FD7002A91AE /* AppStoreVersionSubmissionCreateRequest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppStoreVersionSubmissionCreateRequest.swift; sourceTree = "<group>"; };
 		5367F23D264E2FD8002A91AE /* AppStoreVersionSubmissionResponse.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppStoreVersionSubmissionResponse.swift; sourceTree = "<group>"; };
 		5367F242264E3001002A91AE /* CreateAppStoreVersionSubmissionTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CreateAppStoreVersionSubmissionTests.swift; sourceTree = "<group>"; };
+		538D6157264E33E400A61359 /* AppStoreVersionUpdateRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppStoreVersionUpdateRequest.swift; sourceTree = "<group>"; };
+		538D6159264E374C00A61359 /* ModifyAppStoreVersion.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModifyAppStoreVersion.swift; sourceTree = "<group>"; };
+		538D615B264E3B8E00A61359 /* ModifyAppStoreVersionTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModifyAppStoreVersionTests.swift; sourceTree = "<group>"; };
 		6D050F06241BE65700CBDABA /* ProfileCertificatesResponse.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfileCertificatesResponse.swift; sourceTree = "<group>"; };
 		A72A23D22449384C0093A0E9 /* ProfileRelationship.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileRelationship.swift; sourceTree = "<group>"; };
 		A72A23D4244938610093A0E9 /* ProfileRelationshipTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileRelationshipTests.swift; sourceTree = "<group>"; };
@@ -1180,8 +1186,8 @@
 				097063CD26294EE10083B9DF /* CreateAppStoreVersionLocalization.swift */,
 				097063C726294B2A0083B9DF /* DeleteAppStoreVersionLocalizations.swift */,
 				F072FA1825C41BBA0007F1BE /* ListAppStoreVersionLocalizations.swift */,
-				097063C926294BC70083B9DF /* ReadAppStoreVersionLocalization.swift */,
 				097063D726295E740083B9DF /* ModifyAppStoreVersionLocalization.swift */,
+				097063C926294BC70083B9DF /* ReadAppStoreVersionLocalization.swift */,
 			);
 			name = Localizations;
 			sourceTree = "<group>";
@@ -1611,9 +1617,10 @@
 		F072FA1125C41BA30007F1BE /* App Store Versions */ = {
 			isa = PBXGroup;
 			children = (
-				09D74D7526314A30003F6E5E /* Previews */,
+				538D615B264E3B8E00A61359 /* ModifyAppStoreVersionTests.swift */,
 				09D74D7426314860003F6E5E /* Localizations */,
 				09D74D7326314855003F6E5E /* Phased Releases */,
+				09D74D7526314A30003F6E5E /* Previews */,
 			);
 			path = "App Store Versions";
 			sourceTree = "<group>";
@@ -1621,9 +1628,10 @@
 		F072FA1625C41BBA0007F1BE /* App Store Versions */ = {
 			isa = PBXGroup;
 			children = (
-				097063D92629604F0083B9DF /* Previews */,
+				538D6159264E374C00A61359 /* ModifyAppStoreVersion.swift */,
 				097063D626295E410083B9DF /* Localizations */,
 				097063D426295E230083B9DF /* Phased Releases */,
+				097063D92629604F0083B9DF /* Previews */,
 			);
 			path = "App Store Versions";
 			sourceTree = "<group>";
@@ -1880,6 +1888,7 @@
 				5367F23B264E2FD7002A91AE /* AppStoreVersionSubmission.swift */,
 				5367F23C264E2FD7002A91AE /* AppStoreVersionSubmissionCreateRequest.swift */,
 				5367F23D264E2FD8002A91AE /* AppStoreVersionSubmissionResponse.swift */,
+				538D6157264E33E400A61359 /* AppStoreVersionUpdateRequest.swift */,
 				OBJ_223 /* BetaAppLocalization.swift */,
 				OBJ_224 /* BetaAppLocalizationAppLinkageResponse.swift */,
 				OBJ_225 /* BetaAppLocalizationCreateRequest.swift */,
@@ -2640,6 +2649,7 @@
 				OBJ_818 /* BuildsResponse.swift in Sources */,
 				OBJ_819 /* BundleId.swift in Sources */,
 				3FFAB2172529190B00DD78B2 /* GetPrereleaseVersionIDsForApp.swift in Sources */,
+				538D615A264E374C00A61359 /* ModifyAppStoreVersion.swift in Sources */,
 				OBJ_820 /* BundleIdBundleIdCapabilitiesLinkagesResponse.swift in Sources */,
 				OBJ_821 /* BundleIdCapabilitiesResponse.swift in Sources */,
 				OBJ_822 /* BundleIdCapability.swift in Sources */,
@@ -2692,6 +2702,7 @@
 				OBJ_861 /* PrereleaseVersion.swift in Sources */,
 				OBJ_862 /* PrereleaseVersionAppLinkageResponse.swift in Sources */,
 				OBJ_863 /* PrereleaseVersionBuildsLinkagesResponse.swift in Sources */,
+				538D6158264E33E400A61359 /* AppStoreVersionUpdateRequest.swift in Sources */,
 				OBJ_864 /* PrereleaseVersionResponse.swift in Sources */,
 				OBJ_865 /* Profile.swift in Sources */,
 				OBJ_866 /* ProfileBundleIdLinkageResponse.swift in Sources */,
@@ -2791,6 +2802,7 @@
 				50996B04241500190044308C /* GetBuildIDsOfPrereleaseVersionTests.swift in Sources */,
 				50996B12241500190044308C /* GetBetaLicenseAgreementIDForAppTests.swift in Sources */,
 				50996AF9241500190044308C /* DeleteBetaAppLocalizationTests.swift in Sources */,
+				538D615C264E3B8E00A61359 /* ModifyAppStoreVersionTests.swift in Sources */,
 				50996B3B241500190044308C /* AppRelationshipTests.swift in Sources */,
 				50996AFD241500190044308C /* ReadBetaAppReviewDetailInformationTests.swift in Sources */,
 				50996AB7241500190044308C /* ListBetaGroupsToWhichBetaTesterBelongsTests.swift in Sources */,
