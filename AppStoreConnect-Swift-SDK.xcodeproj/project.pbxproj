@@ -221,6 +221,8 @@
 		538D615E264E3DE700A61359 /* AppStoreVersionCreateRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 538D615D264E3DE700A61359 /* AppStoreVersionCreateRequest.swift */; };
 		538D6160264E414100A61359 /* CreateAppStoreVersion.swift in Sources */ = {isa = PBXBuildFile; fileRef = 538D615F264E414100A61359 /* CreateAppStoreVersion.swift */; };
 		538D6163264E441C00A61359 /* CreateAppStoreVersionTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 538D6161264E440F00A61359 /* CreateAppStoreVersionTests.swift */; };
+		538D6167264E465400A61359 /* DeleteAppStoreVersion.swift in Sources */ = {isa = PBXBuildFile; fileRef = 538D6166264E465400A61359 /* DeleteAppStoreVersion.swift */; };
+		538D6169264E46CE00A61359 /* DeleteAppStoreVersionTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 538D6168264E46CE00A61359 /* DeleteAppStoreVersionTests.swift */; };
 		6D050F07241BE65700CBDABA /* ProfileCertificatesResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D050F06241BE65700CBDABA /* ProfileCertificatesResponse.swift */; };
 		A72A23D32449384C0093A0E9 /* ProfileRelationship.swift in Sources */ = {isa = PBXBuildFile; fileRef = A72A23D22449384C0093A0E9 /* ProfileRelationship.swift */; };
 		A72A23D5244938610093A0E9 /* ProfileRelationshipTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A72A23D4244938610093A0E9 /* ProfileRelationshipTests.swift */; };
@@ -772,6 +774,8 @@
 		538D615D264E3DE700A61359 /* AppStoreVersionCreateRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppStoreVersionCreateRequest.swift; sourceTree = "<group>"; };
 		538D615F264E414100A61359 /* CreateAppStoreVersion.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateAppStoreVersion.swift; sourceTree = "<group>"; };
 		538D6161264E440F00A61359 /* CreateAppStoreVersionTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateAppStoreVersionTests.swift; sourceTree = "<group>"; };
+		538D6166264E465400A61359 /* DeleteAppStoreVersion.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeleteAppStoreVersion.swift; sourceTree = "<group>"; };
+		538D6168264E46CE00A61359 /* DeleteAppStoreVersionTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeleteAppStoreVersionTests.swift; sourceTree = "<group>"; };
 		6D050F06241BE65700CBDABA /* ProfileCertificatesResponse.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfileCertificatesResponse.swift; sourceTree = "<group>"; };
 		A72A23D22449384C0093A0E9 /* ProfileRelationship.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileRelationship.swift; sourceTree = "<group>"; };
 		A72A23D4244938610093A0E9 /* ProfileRelationshipTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileRelationshipTests.swift; sourceTree = "<group>"; };
@@ -1624,6 +1628,7 @@
 			isa = PBXGroup;
 			children = (
 				538D6161264E440F00A61359 /* CreateAppStoreVersionTests.swift */,
+				538D6168264E46CE00A61359 /* DeleteAppStoreVersionTests.swift */,
 				538D615B264E3B8E00A61359 /* ModifyAppStoreVersionTests.swift */,
 				09D74D7426314860003F6E5E /* Localizations */,
 				09D74D7326314855003F6E5E /* Phased Releases */,
@@ -1636,6 +1641,7 @@
 			isa = PBXGroup;
 			children = (
 				538D615F264E414100A61359 /* CreateAppStoreVersion.swift */,
+				538D6166264E465400A61359 /* DeleteAppStoreVersion.swift */,
 				538D6159264E374C00A61359 /* ModifyAppStoreVersion.swift */,
 				097063D626295E410083B9DF /* Localizations */,
 				097063D426295E230083B9DF /* Phased Releases */,
@@ -2474,6 +2480,7 @@
 				OBJ_663 /* ListBetaGroupsToWhichBetaTesterBelongs.swift in Sources */,
 				OBJ_664 /* ListBetaTesters.swift in Sources */,
 				OBJ_665 /* ListBuildsAssignedToBetaTester.swift in Sources */,
+				538D6167264E465400A61359 /* DeleteAppStoreVersion.swift in Sources */,
 				097063F226296ECD0083B9DF /* AppScreenshotSetsResponse.swift in Sources */,
 				OBJ_666 /* RemoveBetaTesterAccessToApps.swift in Sources */,
 				3FFAB1FA2529185600DD78B2 /* AppStoreVersionResponse.swift in Sources */,
@@ -2891,6 +2898,7 @@
 				50996B16241500190044308C /* GetAppTests.swift in Sources */,
 				50996B17241500190044308C /* ListBetaAppLocalizationsOfAppTests.swift in Sources */,
 				50996B35241500190044308C /* CancelUserInvitationTests.swift in Sources */,
+				538D6169264E46CE00A61359 /* DeleteAppStoreVersionTests.swift in Sources */,
 				50996B29241500190044308C /* ReadUserInformationTests.swift in Sources */,
 				50996B2B241500190044308C /* GetVisibleAppResourceIDsForUserTests.swift in Sources */,
 				50996B03241500190044308C /* ReadAppInformationOfPrereleaseVersionTests.swift in Sources */,
