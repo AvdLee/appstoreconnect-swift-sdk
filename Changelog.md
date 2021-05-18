@@ -1,3 +1,7 @@
+### 1.6.0
+- Add support for submitting an App Version for Review and CRUD for App Store Versions ([#145](https://github.com/AvdLee/appstoreconnect-swift-sdk/pull/145)) via [@scottlemke](https://github.com/scottlemke)
+- Merge release 1.5.0 into master ([#144](https://github.com/AvdLee/appstoreconnect-swift-sdk/pull/144)) via [@SwiftLeeBot](https://github.com/SwiftLeeBot)
+
 ### 1.5.0
 - Fix List Prerelease Versions and update to match Apple's docs ([#143](https://github.com/AvdLee/appstoreconnect-swift-sdk/pull/143)) via [@scottlemke](https://github.com/scottlemke)
 - Fix Read Beta Group Information and update to match Apple's docs ([#142](https://github.com/AvdLee/appstoreconnect-swift-sdk/pull/142)) via [@scottlemke](https://github.com/scottlemke)
