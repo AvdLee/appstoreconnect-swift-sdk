@@ -63,6 +63,9 @@ public struct Build: Codable {
 
         /// Build.Relationships.BetaAppReviewSubmission
         public let betaAppReviewSubmission: Build.Relationships.BetaAppReviewSubmission?
+        
+        /// Build.Relationships.BuildBundles
+        public let buildBundles: Build.Relationships.BuildBundles?
     }
 
     /// The resource's attributes.
@@ -163,6 +166,12 @@ extension Build.Relationships {
 
         /// Build.Relationships.PreReleaseVersion.Links
         public let links: Build.Relationships.PreReleaseVersion.Links?
+    }
+    
+    public struct BuildBundles: Codable {
+    
+        /// Build.Relationships.BuildBundles.Data
+        public let data: [Build.Relationships.BuildBundles.Data]?
     }
 }
 
@@ -371,5 +380,18 @@ extension Build.Relationships.PreReleaseVersion {
 
         /// uri-reference
         public let `self`: URL?
+    }
+}
+
+// MARK: Build.Relationships.PreReleaseVersion
+extension Build.Relationships.BuildBundles {
+    
+    public struct Data: Codable {
+    
+        /// The opaque resource ID that uniquely identifies the resource.
+        public let `id`: String
+    
+        /// The resource type.Value: buildBundles
+        public let type: String = "buildBundles"
     }
 }
