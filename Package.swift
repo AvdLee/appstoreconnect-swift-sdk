@@ -21,7 +21,7 @@ let package = Package(
         // dev .target(name: "DangerDependencies", dependencies: [
         // dev     .product(name: "Danger", package: "danger-swift"),
         // dev     .product(name: "WeTransferPRLinter", package: "WeTransferPRLinter")
-        // dev ], path: "Submodules/WeTransfer-iOS-CI/DangerFakeSources", sources: ["DangerFakeSource.swift"])
+        // dev ], path: "Submodules/WeTransfer-iOS-CI/DangerFakeSources", sources: ["DangerFakeSource.swift"]),
         // dev .testTarget(name: "AppStoreConnect-Swift-SDK-Tests", dependencies: ["AppStoreConnect-Swift-SDK"], path: "Tests", exclude: ["LinuxMain.swift"]),
         .target(name: "AppStoreConnect-Swift-SDK", path: "Sources")
     ]
