@@ -14,7 +14,7 @@ let package = Package(
         .library(name: "AppStoreConnect-Swift-SDK", targets: ["AppStoreConnect-Swift-SDK"])
     ],
     dependencies: [
-        // dev .package(url: "https://github.com/danger/swift", from: "3.12.1"),
+        // dev .package(name: "danger-swift", url: "https://github.com/danger/swift", from: "3.12.1"),
         // dev .package(name: "WeTransferPRLinter", path: "Submodules/WeTransfer-iOS-CI/WeTransferPRLinter")
         ],
     targets: [
