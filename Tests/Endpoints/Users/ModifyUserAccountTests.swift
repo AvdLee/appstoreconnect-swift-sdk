@@ -9,14 +9,14 @@ import XCTest
 @testable import AppStoreConnect_Swift_SDK
 
 final class ModifyUserAccountTests: XCTestCase {
-    
+
     func testURLRequest() {
         let userId = "userId"
         let allAppsVisible = true
         let provisioningAllowed = false
         let roles = UserRole.allCases
         let appIds = ["appId"]
-        
+
         let endpoint = APIEndpoint.modify(
             userWithId: userId,
             allAppsVisible: allAppsVisible,
@@ -25,7 +25,7 @@ final class ModifyUserAccountTests: XCTestCase {
             appsVisibleIds: appIds)
         let request = try? endpoint.asURLRequest()
         XCTAssertEqual(request?.httpMethod, "PATCH")
-        
+
         let absoluteString = request?.url?.absoluteString
         let expected = "https://api.appstoreconnect.apple.com/v1/users/userId"
         XCTAssertEqual(absoluteString, expected)

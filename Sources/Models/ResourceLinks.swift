@@ -6,7 +6,7 @@
 //
 
 import Foundation
-    
+
 /// Self-links to requested resources.
 public struct ResourceLinks<T: Decodable>: Codable {
 

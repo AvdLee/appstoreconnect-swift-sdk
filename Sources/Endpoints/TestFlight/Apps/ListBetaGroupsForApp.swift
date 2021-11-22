@@ -39,7 +39,7 @@ public enum ListBetaGroupsForApp {
     /// Fields to return for included related types.
     public enum Field: NestableQueryParameter {
         case betaGroups([BetaGroup])
-        
+
         static var key: String = "fields"
         var pair: Pair {
             switch self {
@@ -51,7 +51,7 @@ public enum ListBetaGroupsForApp {
 }
 
 extension ListBetaGroupsForApp.Field {
-    
+
     public enum BetaGroup: String, CaseIterable, NestableQueryParameter {
         case app, betaTesters, builds, createdDate, isInternalGroup, name, publicLink, publicLinkEnabled, publicLinkId, publicLinkLimit, publicLinkLimitEnabled
 

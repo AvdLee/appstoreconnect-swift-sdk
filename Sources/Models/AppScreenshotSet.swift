@@ -16,7 +16,7 @@ public struct AppScreenshotSet: Codable {
 
     public let relationships: AppScreenshotSet.Relationships?
 
-    public let type: String = "appScreenshotSets"
+    public private(set) var type: String = "appScreenshotSets"
 
     public let links: ResourceLinks<AppScreenshotSetResponse>
 }
@@ -39,7 +39,7 @@ public extension AppScreenshotSet.Relationships.AppScreenshots {
     struct Data: Codable {
         public let id: String
 
-        public let type: String = "appScreenshotSets"
+        public private(set) var type: String = "appScreenshotSets"
     }
 
     struct Links: Codable {
@@ -53,7 +53,7 @@ public extension AppScreenshotSet.Relationships.AppStoreVersionLocalization {
     struct Data: Codable {
         public let id: String
 
-        public let type: String = "appScreenshotSets"
+        public private(set) var type: String = "appScreenshotSets"
     }
 
     struct Links: Codable {

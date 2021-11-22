@@ -10,17 +10,17 @@ import XCTest
 @testable import AppStoreConnect_Swift_SDK
 
 final class SendInvitationToBetaTesterTests: XCTestCase {
-    
+
     func testURLRequest() {
         let appId = "appId"
         let betaTesterId = "betaTesterId"
         let endpoint = APIEndpoint.send(
             invitationForAppWithId: appId,
             toBetaTesterWithId: betaTesterId)
-        
+
         let request = try? endpoint.asURLRequest()
         XCTAssertEqual(request?.httpMethod, "POST")
-        
+
         let absoluteString = request?.url?.absoluteString
         let expected = "https://api.appstoreconnect.apple.com/v1/betaTesterInvitations"
         XCTAssertEqual(absoluteString, expected)

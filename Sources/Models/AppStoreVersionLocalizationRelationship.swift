@@ -8,7 +8,7 @@ import Foundation
 
 public enum AppStoreVersionLocalizationRelationship: Codable {
     case appStoreVersion(AppStoreVersion)
-    
+
     enum TypeKeys: String, CodingKey {
         case type
     }
@@ -22,7 +22,7 @@ public enum AppStoreVersionLocalizationRelationship: Codable {
             self = try .appStoreVersion(AppStoreVersion(from: decoder))
         }
     }
-    
+
     public func encode(to encoder: Encoder) throws {
         switch self {
         case .appStoreVersion(let value):

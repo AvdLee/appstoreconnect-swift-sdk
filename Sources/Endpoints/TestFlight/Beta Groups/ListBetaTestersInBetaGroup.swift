@@ -51,7 +51,7 @@ public enum ListBetaTestersInBetaGroup {
 }
 
 extension ListBetaTestersInBetaGroup.Field {
-    
+
     public enum BetaTester: String, CaseIterable, NestableQueryParameter {
         case apps, betaGroups, builds, email, firstName, inviteType, lastName
 

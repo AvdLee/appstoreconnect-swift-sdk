@@ -6,7 +6,7 @@
 //
 
 import Foundation
-    
+
 /// A response containing a list of resources.
 public struct BetaGroupsResponse: Codable {
 

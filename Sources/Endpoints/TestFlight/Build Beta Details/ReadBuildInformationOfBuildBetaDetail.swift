@@ -11,7 +11,7 @@ extension APIEndpoint where T == BuildResponse {
     ///
     /// - Parameters:
     ///   - id: (Required) An opaque resource ID that uniquely identifies the resource.
-    
+
     ///   - fields: Fields to return for included related types.
     public static func build(
         ofBuildBetaDetailWithId id: String,
@@ -42,7 +42,7 @@ public enum ReadBuildInformationOfBuildBetaDetail {
 }
 
 extension ReadBuildInformationOfBuildBetaDetail.Field {
-    
+
     public enum Build: String, CaseIterable, NestableQueryParameter {
         case app, appEncryptionDeclaration, betaAppReviewSubmission, betaBuildLocalizations, betaGroups, buildBetaDetail, expirationDate, expired, iconAssetToken, individualTesters, minOsVersion, preReleaseVersion, processingState, uploadedDate, usesNonExemptEncryption, version
 

@@ -52,7 +52,7 @@ public enum ListBuildBetaDetails {
             }
         }
     }
-    
+
     /// Attributes, relationships, and IDs by which to filter.
     public enum Filter: NestableQueryParameter {
         case build([String]), id([String])
@@ -67,7 +67,7 @@ public enum ListBuildBetaDetails {
             }
         }
     }
-    
+
     /// Relationship data to include in the response.
     public enum Include: String, CaseIterable, NestableQueryParameter {
         case build
@@ -78,14 +78,14 @@ public enum ListBuildBetaDetails {
 }
 
 extension ListBuildBetaDetails.Field {
-    
+
     public enum BuildBetaDetail: String, CaseIterable, NestableQueryParameter {
         case autoNotifyEnabled, build, externalBuildState, internalBuildState
 
         static var key: String = "buildBetaDetail"
         var pair: NestableQueryParameter.Pair { return (nil, rawValue) }
     }
-    
+
     public enum Build: String, CaseIterable, NestableQueryParameter {
         case app, appEncryptionDeclaration, betaAppReviewSubmission, betaBuildLocalizations, betaGroups, buildBetaDetail, expirationDate, expired, iconAssetToken, individualTesters, minOsVersion, preReleaseVersion, processingState, uploadedDate, usesNonExemptEncryption, version
 

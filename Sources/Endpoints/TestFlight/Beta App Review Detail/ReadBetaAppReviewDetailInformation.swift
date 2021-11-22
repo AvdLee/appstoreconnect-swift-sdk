@@ -44,7 +44,7 @@ public enum ReadBetaAppReviewDetailInformation {
             }
         }
     }
-    
+
     /// Relationship data to include in the response.
     public enum Include: String, CaseIterable, NestableQueryParameter {
         case app
@@ -55,14 +55,14 @@ public enum ReadBetaAppReviewDetailInformation {
 }
 
 extension ReadBetaAppReviewDetailInformation.Field {
-    
+
     public enum App: String, CaseIterable, NestableQueryParameter {
         case betaAppLocalizations, betaAppReviewDetail, betaGroups, betaLicenseAgreement, betaTesters, builds, bundleId, name, preReleaseVersions, primaryLocale, sku
 
         static var key: String = "app"
         var pair: NestableQueryParameter.Pair { return (nil, rawValue) }
     }
-    
+
     public enum BetaAppReviewDetail: String, CaseIterable, NestableQueryParameter {
         case app, contactEmail, contactFirstName, contactLastName, contactPhone, demoAccountName, demoAccountPassword, demoAccountRequired, notes
 

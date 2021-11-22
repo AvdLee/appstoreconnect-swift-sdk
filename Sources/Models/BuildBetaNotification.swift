@@ -6,7 +6,7 @@
 //
 
 import Foundation
-    
+
 /// The data structure that represents the resource.
 public struct BuildBetaNotification: Codable {
 
@@ -17,5 +17,5 @@ public struct BuildBetaNotification: Codable {
     public let links: ResourceLinks<BuildBetaNotificationResponse>
 
     /// The resource type.Value: buildBetaNotifications
-    public let type: String = "buildBetaNotifications"
+    public private(set) var type: String = "buildBetaNotifications"
 }

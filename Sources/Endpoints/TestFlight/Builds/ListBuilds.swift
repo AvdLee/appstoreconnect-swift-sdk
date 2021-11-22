@@ -88,7 +88,7 @@ public enum ListBuilds {
             }
         }
     }
-    
+
     /// Attributes, relationships, and IDs by which to filter.
     public enum Filter: NestableQueryParameter {
         case app([String])
@@ -134,7 +134,7 @@ public enum ListBuilds {
             }
         }
     }
-    
+
     /// Relationship data to include in the response.
     public enum Include: String, CaseIterable, NestableQueryParameter {
         case app, appEncryptionDeclaration, appStoreVersion, betaAppReviewSubmission, betaBuildLocalizations, buildBetaDetail, icons, individualTesters, preReleaseVersion
@@ -142,7 +142,7 @@ public enum ListBuilds {
         static var key: String = "include"
         var pair: NestableQueryParameter.Pair { return (nil, rawValue) }
     }
-    
+
     /// Number of resources to return.
     public enum Limit: NestableQueryParameter {
         case betaBuildLocalizations(Int)
@@ -161,7 +161,7 @@ public enum ListBuilds {
             }
         }
     }
-    
+
     /// Attributes by which to sort.
     public enum Sort: String, CaseIterable, NestableQueryParameter {
         case preReleaseVersionAscending = "+preReleaseVersion"
@@ -219,7 +219,7 @@ extension ListBuilds.Field {
         static var key: String = "betaTesters"
         var pair: NestableQueryParameter.Pair { return (nil, rawValue) }
     }
-    
+
     public enum Build: String, CaseIterable, NestableQueryParameter {
         case app, appEncryptionDeclaration, appStoreVersion, betaAppReviewSubmission, betaBuildLocalizations, betaGroups, buildBetaDetail, diagnosticSignatures, expirationDate, expired, iconAssetToken, icons, individualTesters, minOsVersion, perfPowerMetrics, preReleaseVersion, processingState, uploadedDate, usesNonExemptEncryption, version
 

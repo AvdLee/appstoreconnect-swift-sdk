@@ -9,14 +9,14 @@ import XCTest
 @testable import AppStoreConnect_Swift_SDK
 
 final class ReadBuildBetaDetailsInformationOfBuildTests: XCTestCase {
-    
+
     func testURLRequest() {
         let endpoint = APIEndpoint.buildBetaDetail(
             ofBuildWithId: "id",
             fields: [.buildBetaDetails(ReadBuildBetaDetailsInformationOfBuild.Field.BuildBetaDetail.allCases)])
         let request = try? endpoint.asURLRequest()
         XCTAssertEqual(request?.httpMethod, "GET")
-        
+
         let absoluteString = request?.url?.absoluteString
         let expected = "https://api.appstoreconnect.apple.com/v1/builds/id/buildBetaDetail?fields%5BbuildBetaDetail%5D=autoNotifyEnabled%2Cbuild%2CexternalBuildState%2CinternalBuildState"
         XCTAssertEqual(absoluteString, expected)

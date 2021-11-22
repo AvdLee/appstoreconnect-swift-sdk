@@ -16,7 +16,7 @@ public struct BundleIdProfilesLinkagesResponse: Codable {
         public let `id`: String
 
         /// The resource type.Value: profiles
-        public let type: String = "profiles"
+        public private(set) var type: String = "profiles"
     }
 
     /// The object types and IDs of the related resources.

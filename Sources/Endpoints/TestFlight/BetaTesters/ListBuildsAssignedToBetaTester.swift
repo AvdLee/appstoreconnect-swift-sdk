@@ -39,7 +39,7 @@ public enum ListBuildsAssignedToBetaTester {
     /// Fields to return for included related types.
     public enum Field: NestableQueryParameter {
         case builds([Build])
-        
+
         static var key: String = "fields"
         var pair: Pair {
             switch self {
@@ -51,7 +51,7 @@ public enum ListBuildsAssignedToBetaTester {
 }
 
 extension ListBuildsAssignedToBetaTester.Field {
-    
+
     public enum Build: String, CaseIterable, NestableQueryParameter {
         case app, appEncryptionDeclaration, betaAppReviewSubmission, betaBuildLocalizations, betaGroups, buildBetaDetail, expirationDate, expired, iconAssetToken, individualTesters, minOsVersion, preReleaseVersion, processingState, uploadedDate, usesNonExemptEncryption, version
 

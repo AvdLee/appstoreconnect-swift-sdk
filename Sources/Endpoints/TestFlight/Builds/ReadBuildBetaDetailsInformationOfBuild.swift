@@ -38,7 +38,7 @@ public enum ReadBuildBetaDetailsInformationOfBuild {
 }
 
 extension ReadBuildBetaDetailsInformationOfBuild.Field {
-    
+
     public enum BuildBetaDetail: String, CaseIterable, NestableQueryParameter {
         case autoNotifyEnabled, build, externalBuildState, internalBuildState
 

@@ -6,7 +6,7 @@
 //
 
 import Foundation
-    
+
 /// Self-links to documents that can contain information for one or more resources.
 public struct DocumentLinks: Codable {
 

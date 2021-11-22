@@ -6,22 +6,22 @@
 //
 
 import Foundation
-    
+
 /// A request containing the IDs of related resources.
 public struct BetaGroupBuildsLinkagesRequest: Codable {
-    
+
     public struct Data: Codable {
-    
+
         /// The opaque resource ID that uniquely identifies the resource.
         public let `id`: String
-    
+
         /// The resource type.Value: builds
-        public let type: String = "builds"
+        public private(set) var type: String = "builds"
     }
-    
+
     /// The types and IDs of related resources.
     public let data: [BetaGroupBuildsLinkagesRequest.Data]
-    
+
     /// - Parameters:
     ///   - buildIds: Array of opaque resource ID that uniquely identifies the resources.
     init(_ buildIds: [String]) {

@@ -9,7 +9,7 @@ import XCTest
 @testable import AppStoreConnect_Swift_SDK
 
 final class ReadBetaLicenseAgreementInformationTests: XCTestCase {
-    
+
     func testURLRequest() {
         let endpoint = APIEndpoint.betaLicenseAgreement(
             withId: "id",
@@ -19,7 +19,7 @@ final class ReadBetaLicenseAgreementInformationTests: XCTestCase {
             include: ReadBetaLicenseAgreementInformation.Include.allCases)
         let request = try? endpoint.asURLRequest()
         XCTAssertEqual(request?.httpMethod, "GET")
-        
+
         let absoluteString = request?.url?.absoluteString
         let expected = "https://api.appstoreconnect.apple.com/v1/betaLicenseAgreements/id?fields%5BApp%5D=betaAppLocalizations%2CbetaAppReviewDetail%2CbetaGroups%2CbetaLicenseAgreement%2CbetaTesters%2Cbuilds%2CbundleId%2Cname%2CpreReleaseVersions%2CprimaryLocale%2Csku&fields%5BbetaLicenseAgreement%5D=agreementText%2Capp&include=app"
         XCTAssertEqual(absoluteString, expected)

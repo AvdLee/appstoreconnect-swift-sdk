@@ -41,7 +41,7 @@ public enum BuildInformationOfBetaBuildLocalization {
 }
 
 extension BuildInformationOfBetaBuildLocalization.Field {
-    
+
     public enum Build: String, CaseIterable, NestableQueryParameter {
         case app, appEncryptionDeclaration, betaAppReviewSubmission, betaBuildLocalizations, betaGroups, buildBetaDetail, expirationDate, expired, iconAssetToken, individualTesters, minOsVersion, preReleaseVersion, processingState, uploadedDate, usesNonExemptEncryption, version
 

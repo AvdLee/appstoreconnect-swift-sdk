@@ -6,7 +6,7 @@
 //
 
 import Foundation
-    
+
 /// Links related to the response document, including paging links.
 public struct PagedDocumentLinks: Codable {
 

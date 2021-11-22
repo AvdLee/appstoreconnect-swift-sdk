@@ -26,7 +26,7 @@ final class ViewController: UIViewController {
             include: [.builds],
             sortBy: [.bundleIdAscending],
             limits: [.apps(1)])
-        
+
         provider.request(endpoint) {
                 switch $0 {
                 case .success(let appsResponse):
@@ -46,7 +46,7 @@ final class ViewController: UIViewController {
                             print("Could not find requested relationships!")
                             return
                     }
-                    
+
                     print("App name is \(name)")
                     print(" - successfully got \(buildInfos.count) builds included")
                     for info in buildInfos.sorted(by: { $0.uploadedDate > $1.uploadedDate }) {

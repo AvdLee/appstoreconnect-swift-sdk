@@ -17,7 +17,7 @@ public struct BundleIdUpdateRequest: Encodable {
         public let `id`: String
 
         /// The resource type.
-        public let type: String = "bundleIds"
+        public private(set) var type: String = "bundleIds"
     }
 
     /// The resource data.

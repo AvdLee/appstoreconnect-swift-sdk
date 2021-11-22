@@ -9,14 +9,14 @@ import XCTest
 @testable import AppStoreConnect_Swift_SDK
 
 final class ListAppStoreVersionLocalizationsTests: XCTestCase {
-    
+
     func testURLRequestMethod() {
         let endpoint = APIEndpoint.appStoreVersionLocalizations(ofAppStoreVersionWithId: "appStoreId")
-        
+
         let request = try? endpoint.asURLRequest()
         XCTAssertEqual(request?.httpMethod, "GET")
     }
-    
+
     func testFilledParamsURLRequest() {
         let endpoint = APIEndpoint.appStoreVersionLocalizations(
             ofAppStoreVersionWithId: "appStoreId",
@@ -41,7 +41,7 @@ final class ListAppStoreVersionLocalizationsTests: XCTestCase {
         let expected = "https://api.appstoreconnect.apple.com/v1/appStoreVersions/appStoreId/appStoreVersionLocalizations?fields%5BappStoreVersionLocalizations%5D=appPreviewSets%2CappScreenshotSets%2CappStoreVersion%2Cdescription%2Ckeywords%2Clocale%2CmarketingUrl%2CpromotionalText%2CsupportUrl%2CwhatsNew&limit=50"
         XCTAssertEqual(absoluteString, expected)
     }
-    
+
     func testEmptyParamsURLRequest() {
         let endpoint = APIEndpoint.appStoreVersionLocalizations(ofAppStoreVersionWithId: "appStoreId")
         let request = try? endpoint.asURLRequest()

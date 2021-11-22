@@ -9,7 +9,7 @@ import XCTest
 @testable import AppStoreConnect_Swift_SDK
 
 final class ListPrereleaseVersionsForAppTests: XCTestCase {
-    
+
     func testURLRequest() {
         let endpoint = APIEndpoint.prereleaseVersions(
             forAppWithId: "appId",
@@ -18,7 +18,7 @@ final class ListPrereleaseVersionsForAppTests: XCTestCase {
             next: .test)
         let request = try? endpoint.asURLRequest()
         XCTAssertEqual(request?.httpMethod, "GET")
-        
+
         let absoluteString = request?.url?.absoluteString
         let expected = "https://api.appstoreconnect.apple.com/v1/apps/appId/preReleaseVersions?cursor=NEXT&fields%5BpreReleaseVersion%5D=app%2Cbuilds%2Cplatform%2Cversion&limit=1"
         XCTAssertEqual(absoluteString, expected)

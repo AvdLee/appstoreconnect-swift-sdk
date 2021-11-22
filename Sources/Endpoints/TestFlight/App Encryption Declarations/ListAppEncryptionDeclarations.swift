@@ -55,7 +55,7 @@ public enum ListAppEncryptionDeclarations {
             }
         }
     }
-    
+
     /// Attributes, relationships, and IDs by which to filter.
     public enum Filter: NestableQueryParameter {
         case app([String]), builds([String]), platform([String])
@@ -72,7 +72,7 @@ public enum ListAppEncryptionDeclarations {
             }
         }
     }
-    
+
     /// Relationship data to include in the response.
     public enum Include: String, CaseIterable, NestableQueryParameter {
         case app
@@ -83,14 +83,14 @@ public enum ListAppEncryptionDeclarations {
 }
 
 extension ListAppEncryptionDeclarations.Field {
-    
+
     public enum AppEncryptionDeclaration: String, CaseIterable, NestableQueryParameter {
         case app, appEncryptionDeclarationState, availableOnFrenchStore, builds, codeValue, containsProprietaryCryptography, containsThirdPartyCryptography, documentName, documentType, documentUrl, exempt, platform, uploadedDate, usesEncryption
 
         static var key: String = "appEncryptionDeclaration"
         var pair: NestableQueryParameter.Pair { return (nil, rawValue) }
     }
-    
+
     public enum App: String, CaseIterable, NestableQueryParameter {
         case betaAppLocalizations, betaAppReviewDetail, betaGroups, betaLicenseAgreement, betaTesters, builds, bundleId, name, preReleaseVersions, primaryLocale, sku
 

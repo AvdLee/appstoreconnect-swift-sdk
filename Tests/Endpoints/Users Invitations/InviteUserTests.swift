@@ -9,7 +9,7 @@ import XCTest
 @testable import AppStoreConnect_Swift_SDK
 
 final class InviteUserTests: XCTestCase {
-    
+
     func testURLRequest() {
         let email = "pakko972@me.com"
         let firstName = "firstName"
@@ -18,7 +18,7 @@ final class InviteUserTests: XCTestCase {
         let allAppsVisible = true
         let provisioningAllowed = false
         let appIds = ["appId"]
-        
+
         let endpoint = APIEndpoint.invite(
             userWithEmail: email,
             firstName: firstName,
@@ -29,7 +29,7 @@ final class InviteUserTests: XCTestCase {
             appsVisibleIds: appIds)
         let request = try? endpoint.asURLRequest()
         XCTAssertEqual(request?.httpMethod, "POST")
-        
+
         let absoluteString = request?.url?.absoluteString
         let expected = "https://api.appstoreconnect.apple.com/v1/userInvitations"
         XCTAssertEqual(absoluteString, expected)

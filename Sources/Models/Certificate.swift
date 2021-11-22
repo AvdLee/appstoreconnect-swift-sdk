@@ -9,7 +9,7 @@ import Foundation
 
 /// The data structure that represents the resource.
 public struct Certificate: Codable {
-    
+
     /// Attributes that describe a certificate.
     public struct Attributes: Codable {
         public let certificateContent: String?
@@ -20,7 +20,7 @@ public struct Certificate: Codable {
         public let serialNumber: String?
         public let certificateType: CertificateType?
     }
-    
+
     /// The resource's attributes.
     public let attributes: Certificate.Attributes
 
@@ -28,7 +28,7 @@ public struct Certificate: Codable {
     public let `id`: String
 
     /// The resource type.
-    public let type: String = "certificates"
+    public private(set) var type: String = "certificates"
 
     /// Navigational links that include the self-link.
     public let links: PagedDocumentLinks

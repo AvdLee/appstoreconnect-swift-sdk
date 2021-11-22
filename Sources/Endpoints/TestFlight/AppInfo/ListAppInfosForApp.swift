@@ -42,7 +42,7 @@ public enum ListAppInfosForApp {
         case apps([App])
         case appInfoLocalizations([AppInfoLocalization])
         case appCategories([AppCategory])
-        
+
         static var key: String = "fields"
         var pair: Pair {
             switch self {
@@ -57,11 +57,11 @@ public enum ListAppInfosForApp {
             }
         }
     }
-    
+
     /// Relationship data to include in the response.
     public enum Relationship: String, CaseIterable, NestableQueryParameter {
         case app, appInfoLocalizations, primaryCategory, primarySubcategoryOne, primarySubcategoryTwo, secondaryCategory, secondarySubcategoryOne, secondarySubcategoryTwo
-        
+
         static var key: String = "include"
         var pair: NestableQueryParameter.Pair { return (nil, rawValue) }
     }
@@ -70,28 +70,28 @@ public enum ListAppInfosForApp {
 extension ListAppInfosForApp.Field {
     public enum AppInfo: String, CaseIterable, NestableQueryParameter {
         case app, appInfoLocalizations, appStoreAgeRating, appStoreState, brazilAgeRating, kidsAgeBand, primaryCategory, primarySubcategoryOne, primarySubcategoryTwo, secondaryCategory, secondarySubcategoryOne, secondarySubcategoryTwo
-        
+
         static var key: String = "appInfos"
         var pair: NestableQueryParameter.Pair { return (nil, rawValue) }
     }
-    
+
     public enum App: String, CaseIterable, NestableQueryParameter {
         case appInfos, appStoreVersions, availableInNewTerritories, availableTerritories, betaAppLocalizations, betaAppReviewDetail, betaGroups, betaLicenseAgreement, betaTesters, builds, bundleId, contentRightsDeclaration, endUserLicenseAgreement, gameCenterEnabledVersions, inAppPurchases, isOrEverWasMadeForKids, name, perfPowerMetrics, preOrder, preReleaseVersions, prices, primaryLocale, sku
-        
+
         static var key: String = "apps"
         var pair: NestableQueryParameter.Pair { return (nil, rawValue) }
     }
-    
+
     public enum AppInfoLocalization: String, CaseIterable, NestableQueryParameter {
         case appInfo, locale, name, privacyPolicyText, privacyPolicyUrl, subtitle
-        
+
         static var key: String = "appInfoLocalizations"
         var pair: NestableQueryParameter.Pair { return (nil, rawValue) }
     }
-    
+
     public enum AppCategory: String, CaseIterable, NestableQueryParameter {
         case parent, platforms, subcategories
-        
+
         static var key: String = "appCategories"
         var pair: NestableQueryParameter.Pair { return (nil, rawValue) }
     }

@@ -31,13 +31,13 @@ provider.request(endpoint) {
                     print("Could not find requested relationships!")
                     exit(EXIT_FAILURE)
             }
-            
+
             print("App name is \(name)")
             print(" - successfully got \(buildInfos.count) builds included")
             for info in buildInfos.sorted(by: { $0.uploadedDate > $1.uploadedDate }) {
                 print("  - \(info.version): \(info.processingState)")
             }
-            
+
             exit(EXIT_SUCCESS)
         case .failure(let error):
             print("Something went wrong fetching the apps: \(error)")

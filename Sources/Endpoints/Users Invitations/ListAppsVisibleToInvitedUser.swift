@@ -11,7 +11,7 @@ extension APIEndpoint where T == AppsResponse {
     ///
     /// - Parameters:
     ///   - id: (Required) An opaque resource ID that uniquely identifies the resource.
-    
+
     ///   - limit: Number of resources to return.
     ///   - fields: Fields to return for included related types.
     ///   - next: The next URL to use as a base. See `PagedDocumentLinks`.
@@ -49,7 +49,7 @@ public enum ListAppsVisibleToInvitedUser {
 }
 
 extension ListAppsVisibleToInvitedUser.Field {
-    
+
     public enum App: String, CaseIterable, NestableQueryParameter {
         case betaAppLocalizations, betaAppReviewDetail, betaGroups, betaLicenseAgreement, betaTesters, builds, bundleId, name, preReleaseVersions, primaryLocale, sku
 

@@ -31,11 +31,11 @@ extension Array where Element == String {
 }
 
 extension Dictionary where Key == String, Value == Any {
-    
+
     mutating func add<T: NestableQueryParameter>(_ parameters: [T]) {
         return merge(encodedDictionary(parameters), uniquingKeysWith: { $1 })
     }
-    
+
     private func encodedDictionary<T: NestableQueryParameter>(_ parameters: [T]) -> [String: Any] {
         var dict = [String: Any]()
         for parameter in parameters {

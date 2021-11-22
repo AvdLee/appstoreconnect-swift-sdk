@@ -25,11 +25,11 @@ extension APIEndpoint where T == PrereleaseVersionResponse {
 }
 
 public enum ReadPrereleaseVersionOfBuild {
-    
+
     /// Fields to return for included related types.
     public enum Field: NestableQueryParameter {
         case preReleaseVersions([PreReleaseVersion])
-        
+
         static var key: String = "fields"
         var pair: Pair {
             switch self {
@@ -41,7 +41,7 @@ public enum ReadPrereleaseVersionOfBuild {
 }
 
 extension ReadPrereleaseVersionOfBuild.Field {
-    
+
     public enum PreReleaseVersion: String, CaseIterable, NestableQueryParameter {
         case app, builds, platform, version
 

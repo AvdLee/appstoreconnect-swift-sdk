@@ -41,7 +41,7 @@ extension AppStoreVersionUpdateRequest {
 
         public let relationships: AppStoreVersionUpdateRequest.Data.Relationships?
 
-        public let type: String = "appStoreVersions"
+        public private(set) var type: String = "appStoreVersions"
     }
 
 }
@@ -96,6 +96,6 @@ extension AppStoreVersionUpdateRequest.Data.Relationships.Build {
 
         public let id: String
 
-        public let type: String = "builds"
+        public private(set) var type: String = "builds"
     }
 }

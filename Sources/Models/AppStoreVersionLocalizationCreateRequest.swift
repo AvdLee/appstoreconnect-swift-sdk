@@ -6,7 +6,7 @@ public struct AppStoreVersionLocalizationCreateRequest: Codable {
 
         public let relationships: AppStoreVersionLocalizationCreateRequest.Data.Relationships
 
-        public let type: String = "appStoreVersionLocalizations"
+        public private(set) var type: String = "appStoreVersionLocalizations"
     }
 
     public let data: AppStoreVersionLocalizationCreateRequest.Data
@@ -71,6 +71,6 @@ public extension AppStoreVersionLocalizationCreateRequest.Data.Relationships.App
     struct Data: Codable {
         public let id: String
 
-        public let type: String = "appStoreVersions"
+        public private(set) var type: String = "appStoreVersions"
     }
 }
