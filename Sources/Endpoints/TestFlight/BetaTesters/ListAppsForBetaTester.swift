@@ -35,7 +35,7 @@ extension APIEndpoint where T == AppsResponse {
 }
 
 public enum ListAppsForBetaTester {
-    
+
     /// Fields to return for included related types.
     public enum Field: NestableQueryParameter {
         case apps([App])
@@ -51,7 +51,7 @@ public enum ListAppsForBetaTester {
 }
 
 extension ListAppsForBetaTester.Field {
-    
+
     public enum App: String, CaseIterable, NestableQueryParameter {
         case betaAppLocalizations, betaAppReviewDetail, betaGroups, betaLicenseAgreement, betaTesters, builds, bundleId, name, preReleaseVersions, primaryLocale, sku
 

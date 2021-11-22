@@ -9,7 +9,7 @@ import XCTest
 @testable import AppStoreConnect_Swift_SDK
 
 final class ModifyBetaAppReviewDetailTests: XCTestCase {
-    
+
     func testURLRequest() {
         let betaAppReviewDetailId = "id"
         let contactEmail = "contactEmail"
@@ -20,7 +20,7 @@ final class ModifyBetaAppReviewDetailTests: XCTestCase {
         let demoAccountPassword = "demoAccountPassword"
         let demoAccountRequired = true
         let notes = "notes"
-        
+
         let endpoint = APIEndpoint.modify(
             betaAppReviewDetailWithId: betaAppReviewDetailId,
             contactEmail: contactEmail,
@@ -33,7 +33,7 @@ final class ModifyBetaAppReviewDetailTests: XCTestCase {
             notes: notes)
         let request = try? endpoint.asURLRequest()
         XCTAssertEqual(request?.httpMethod, "PATCH")
-        
+
         let absoluteString = request?.url?.absoluteString
         let expected = "https://api.appstoreconnect.apple.com/v1/betaAppReviewDetails/id"
         XCTAssertEqual(absoluteString, expected)

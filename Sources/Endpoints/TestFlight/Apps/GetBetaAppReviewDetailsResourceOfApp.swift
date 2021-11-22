@@ -41,7 +41,7 @@ public enum GetBetaAppReviewDetailsResourceForApp {
 }
 
 extension GetBetaAppReviewDetailsResourceForApp.Field {
-    
+
     public enum BetaAppReviewDetail: String, CaseIterable, NestableQueryParameter {
         case app, contactEmail, contactFirstName, contactLastName, contactPhone, demoAccountName, demoAccountPassword, demoAccountRequired, notes
 

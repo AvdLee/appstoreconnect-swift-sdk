@@ -14,16 +14,16 @@ public struct BundleIdCreateRequest: Encodable {
         public let attributes: BundleIdCreateRequest.Data.Attributes?
 
         /// The resource type.
-        public let type: String = "bundleIds"
+        public private(set) var type: String = "bundleIds"
     }
-    
+
     /// The resource data.
     public let data: Data
 }
 
 // MARK: BundleIdCreateRequest.Data
 extension BundleIdCreateRequest.Data {
-    
+
     public struct Attributes: Encodable {
         public let identifier: String
         public let name: String

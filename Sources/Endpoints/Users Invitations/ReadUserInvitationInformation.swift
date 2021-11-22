@@ -36,7 +36,7 @@ public enum ReadUserInvitationInformation {
     public enum Field: NestableQueryParameter {
         case apps([App])
         case userInvitations([UserInvitation])
-        
+
         static var key: String = "fields"
         var pair: Pair {
             switch self {
@@ -47,7 +47,7 @@ public enum ReadUserInvitationInformation {
             }
         }
     }
-    
+
     /// Relationship data to include in the response.
     public enum Include: String, CaseIterable, NestableQueryParameter {
         case visibleApps
@@ -55,7 +55,7 @@ public enum ReadUserInvitationInformation {
         static var key: String = "include"
         var pair: NestableQueryParameter.Pair { return (nil, rawValue) }
     }
-    
+
     /// Number of included related resources to return.
     public enum Limit: NestableQueryParameter {
         case visibleApps(Int)
@@ -71,14 +71,14 @@ public enum ReadUserInvitationInformation {
 }
 
 extension ReadUserInvitationInformation.Field {
-    
+
     public enum App: String, CaseIterable, NestableQueryParameter {
         case betaAppLocalizations, betaAppReviewDetail, betaGroups, betaLicenseAgreement, betaTesters, builds, bundleId, name, preReleaseVersions, primaryLocale, sku
 
         static var key: String = "app"
         var pair: NestableQueryParameter.Pair { return (nil, rawValue) }
     }
-    
+
     public enum UserInvitation: String, CaseIterable, NestableQueryParameter {
         case allAppsVisible, email, expirationDate, firstName, lastName, provisioningAllowed, roles, visibleApps
 

@@ -10,7 +10,7 @@ extension APIEndpoint where T == UserInvitationsResponse {
     /// Get a list of pending invitations to join your team.
     ///
     /// - Parameters:
-    
+
     ///   - fields: Fields to return for included related types.
     ///   - include: Relationship data to include in the response.
     ///   - limit: Number of resources to return.
@@ -45,7 +45,7 @@ public enum ListInvitedUsers {
     public enum Field: NestableQueryParameter {
         case apps([App])
         case userInvitations([UserInvitation])
-        
+
         static var key: String = "fields"
         var pair: Pair {
             switch self {
@@ -56,7 +56,7 @@ public enum ListInvitedUsers {
             }
         }
     }
-    
+
     /// Relationship data to include in the response.
     public enum Include: String, CaseIterable, NestableQueryParameter {
         case visibleApps
@@ -84,7 +84,7 @@ public enum ListInvitedUsers {
             }
         }
     }
-    
+
     /// Attributes by which to sort.
     public enum Sort: String, CaseIterable, NestableQueryParameter {
         case emailAscending = "+email"
@@ -95,7 +95,7 @@ public enum ListInvitedUsers {
         static var key: String = "sort"
         var pair: NestableQueryParameter.Pair { return (nil, rawValue) }
     }
-    
+
     /// Attributes, relationships, and IDs by which to filter.
     public enum Filter: NestableQueryParameter {
         case roles([String]), email([String]), visibleApps([String])
@@ -115,14 +115,14 @@ public enum ListInvitedUsers {
 }
 
 extension ListInvitedUsers.Field {
-    
+
     public enum App: String, CaseIterable, NestableQueryParameter {
         case betaAppLocalizations, betaAppReviewDetail, betaGroups, betaLicenseAgreement, betaTesters, builds, bundleId, name, preReleaseVersions, primaryLocale, sku
 
         static var key: String = "app"
         var pair: NestableQueryParameter.Pair { return (nil, rawValue) }
     }
-    
+
     public enum UserInvitation: String, CaseIterable, NestableQueryParameter {
         case allAppsVisible, email, expirationDate, firstName, lastName, provisioningAllowed, roles, visibleApps
 

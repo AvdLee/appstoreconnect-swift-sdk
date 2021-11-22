@@ -16,7 +16,7 @@ public struct DeviceCreateRequest: Codable {
         public let attributes: DeviceCreateRequest.Data.Attributes
 
         /// The resource type.Value: devices
-        public let type: String = "devices"
+        public private(set) var type: String = "devices"
     }
 
     /// The resource data.

@@ -11,7 +11,7 @@ extension APIEndpoint where T == AppResponse {
     ///
     /// - Parameters:
     ///   - id: (Required) An opaque resource ID that uniquely identifies the resource.
-    
+
     ///   - fields: Fields to return for included related types.
     public static func app(
         ofBetaLicenseAgreementWithId id: String,
@@ -26,7 +26,7 @@ extension APIEndpoint where T == AppResponse {
 }
 
 public enum ReadAppInformationOfBetaLicenseAgreement {
-    
+
     /// Fields to return for included related types.
     public enum Field: NestableQueryParameter {
         case apps([App])
@@ -42,7 +42,7 @@ public enum ReadAppInformationOfBetaLicenseAgreement {
 }
 
 extension ReadAppInformationOfBetaLicenseAgreement.Field {
-    
+
     public enum App: String, CaseIterable, NestableQueryParameter {
         case betaAppLocalizations, betaAppReviewDetail, betaGroups, betaLicenseAgreement, betaTesters, builds, bundleId, name, preReleaseVersions, primaryLocale, sku
 

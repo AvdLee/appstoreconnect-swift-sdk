@@ -28,12 +28,12 @@ extension APIEndpoint where T == BetaBuildLocalizationResponse {
 }
 
 public enum ReadBetaBuildLocalizationInformation {
-    
+
     /// Fields to return for included related types.
     public enum Field: NestableQueryParameter {
         case betaBuildLocalizations([BetaBuildLocalization])
         case builds([Build])
-        
+
         static var key: String = "fields"
         var pair: Pair {
             switch self {
@@ -44,7 +44,7 @@ public enum ReadBetaBuildLocalizationInformation {
             }
         }
     }
-    
+
     /// Relationship data to include in the response.
     public enum Include: String, CaseIterable, NestableQueryParameter {
         case build
@@ -55,14 +55,14 @@ public enum ReadBetaBuildLocalizationInformation {
 }
 
 extension ReadBetaBuildLocalizationInformation.Field {
-    
+
     public enum BetaBuildLocalization: String, CaseIterable, NestableQueryParameter {
         case build, locale, whatsNew
 
         static var key: String = "betaBuildLocalization"
         var pair: NestableQueryParameter.Pair { return (nil, rawValue) }
     }
-    
+
     public enum Build: String, CaseIterable, NestableQueryParameter {
         case app, appEncryptionDeclaration, betaAppReviewSubmission, betaBuildLocalizations, betaGroups, buildBetaDetail, expirationDate, expired, iconAssetToken, individualTesters, minOsVersion, preReleaseVersion, processingState, uploadedDate, usesNonExemptEncryption, version
 

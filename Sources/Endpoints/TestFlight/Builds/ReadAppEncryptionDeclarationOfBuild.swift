@@ -41,7 +41,7 @@ public enum ReadAppEncryptionDeclarationOfBuild {
 }
 
 extension ReadAppEncryptionDeclarationOfBuild.Field {
-    
+
     public enum AppEncryptionDeclaration: String, CaseIterable, NestableQueryParameter {
         case app, appEncryptionDeclarationState, availableOnFrenchStore, builds, codeValue, containsProprietaryCryptography, containsThirdPartyCryptography, documentName, documentType, documentUrl, exempt, platform, uploadedDate, usesEncryption
 

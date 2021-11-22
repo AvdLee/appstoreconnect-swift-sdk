@@ -9,7 +9,7 @@ import XCTest
 @testable import AppStoreConnect_Swift_SDK
 
 final class ListBetaAppLocalizationsOfAppTests: XCTestCase {
-    
+
     func testURLRequest() {
         let endpoint = APIEndpoint.betaAppLocalizations(
             ofAppWithId: "appId",
@@ -18,7 +18,7 @@ final class ListBetaAppLocalizationsOfAppTests: XCTestCase {
             next: .test)
         let request = try? endpoint.asURLRequest()
         XCTAssertEqual(request?.httpMethod, "GET")
-        
+
         let absoluteString = request?.url?.absoluteString
         let expected = "https://api.appstoreconnect.apple.com/v1/apps/appId/betaAppLocalizations?cursor=NEXT&fields%5BbetaAppLocalization%5D=app%2Cdescription%2CfeedbackEmail%2Clocale%2CmarketingUrl%2CprivacyPolicyUrl%2CtvOsPrivacyPolicy&limit=1"
         XCTAssertEqual(absoluteString, expected)

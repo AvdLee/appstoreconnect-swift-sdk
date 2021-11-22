@@ -17,7 +17,7 @@ public struct AppStoreVersionLocalizationsResponse: Codable {
 
     /// Navigational links that include the self-link.
     public let links: PagedDocumentLinks
-    
+
     /// Paging information.
     public let meta: PagingInformation?
 }

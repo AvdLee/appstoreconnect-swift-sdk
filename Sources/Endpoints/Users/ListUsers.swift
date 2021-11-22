@@ -44,7 +44,7 @@ public enum ListUsers {
     public enum Field: NestableQueryParameter {
         case apps([App])
         case users([User])
-        
+
         static var key: String = "fields"
         var pair: Pair {
             switch self {
@@ -55,7 +55,7 @@ public enum ListUsers {
             }
         }
     }
-    
+
     /// Relationship data to include in the response.
     public enum Include: String, CaseIterable, NestableQueryParameter {
         case visibleApps
@@ -63,7 +63,7 @@ public enum ListUsers {
         static var key: String = "include"
         var pair: NestableQueryParameter.Pair { return (nil, rawValue) }
     }
-    
+
     /// Number of resources to return.
     public enum Limit: NestableQueryParameter {
 
@@ -83,7 +83,7 @@ public enum ListUsers {
             }
         }
     }
-    
+
     /// Attributes by which to sort.
     public enum Sort: String, CaseIterable, NestableQueryParameter {
         case lastNameAscending = "+lastName"
@@ -94,7 +94,7 @@ public enum ListUsers {
         static var key: String = "sort"
         var pair: NestableQueryParameter.Pair { return (nil, rawValue) }
     }
-    
+
     /// Attributes, relationships, and IDs by which to filter.
     public enum Filter: NestableQueryParameter {
         case roles([String]), visibleApps([String]), username([String])
@@ -114,14 +114,14 @@ public enum ListUsers {
 }
 
 extension ListUsers.Field {
-    
+
     public enum App: String, CaseIterable, NestableQueryParameter {
         case betaAppLocalizations, betaAppReviewDetail, betaGroups, betaLicenseAgreement, betaTesters, builds, bundleId, name, preReleaseVersions, primaryLocale, sku
 
         static var key: String = "app"
         var pair: NestableQueryParameter.Pair { return (nil, rawValue) }
     }
-    
+
     public enum User: String, CaseIterable, NestableQueryParameter {
         case allAppsVisible, firstName, lastName, provisioningAllowed, roles, username, visibleApps
 

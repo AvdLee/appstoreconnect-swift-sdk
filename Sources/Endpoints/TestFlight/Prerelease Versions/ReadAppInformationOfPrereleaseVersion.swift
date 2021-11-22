@@ -25,7 +25,7 @@ extension APIEndpoint where T == AppResponse {
 }
 
 public enum ReadAppInformationOfPrereleaseVersion {
-    
+
     /// Fields to return for included related types.
     public enum Field: NestableQueryParameter {
         case apps([App])
@@ -41,7 +41,7 @@ public enum ReadAppInformationOfPrereleaseVersion {
 }
 
 extension ReadAppInformationOfPrereleaseVersion.Field {
-    
+
     public enum App: String, CaseIterable, NestableQueryParameter {
         case betaAppLocalizations, betaAppReviewDetail, betaGroups, betaLicenseAgreement, betaTesters, builds, bundleId, name, preReleaseVersions, primaryLocale, sku
 

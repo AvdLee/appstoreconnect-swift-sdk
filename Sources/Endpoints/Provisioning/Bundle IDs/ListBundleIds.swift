@@ -34,7 +34,7 @@ extension APIEndpoint where T == BundleIdsResponse {
             parameters["limit"] = nextLimit
         }
         if let nextCursor = next?.nextCursor { parameters["cursor"] = nextCursor }
-        
+
         return APIEndpoint(
             path: "bundleIds",
             method: .get,

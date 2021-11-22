@@ -6,7 +6,7 @@ public struct AppStoreVersionLocalizationUpdateRequest: Codable {
 
         public let id: String
 
-        public let type: String = "appStoreVersionLocalizations"
+        public private(set) var type: String = "appStoreVersionLocalizations"
     }
 
     public let data: AppStoreVersionLocalizationUpdateRequest.Data

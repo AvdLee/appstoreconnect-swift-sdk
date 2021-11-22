@@ -11,7 +11,7 @@ extension APIEndpoint where T == UserVisibleAppsLinkagesResponse {
     ///
     /// - Parameters:
     ///   - id: (Required) An opaque resource ID that uniquely identifies the resource.
-    
+
     ///   - limit: Number of resources to return.
     public static func appIDs(
         visibleForUserWithId id: String,

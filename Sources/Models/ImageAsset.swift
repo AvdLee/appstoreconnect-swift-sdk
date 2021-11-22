@@ -6,7 +6,7 @@
 //
 
 import Foundation
-    
+
 /// An image asset, including its height, width, and template URL.
 public struct ImageAsset: Codable {
 

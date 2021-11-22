@@ -51,7 +51,7 @@ public enum ListBetaBuildLocalizationsOfBuild {
 }
 
 extension ListBetaBuildLocalizationsOfBuild.Field {
-    
+
     public enum BetaBuildLocalization: String, CaseIterable, NestableQueryParameter {
         case build, locale, whatsNew
 

@@ -9,7 +9,7 @@ import XCTest
 @testable import AppStoreConnect_Swift_SDK
 
 final class RemoveVisibleAppsFromUserTests: XCTestCase {
-    
+
     func testURLRequest() {
         let appIds = ["appId"]
         let endpoint = APIEndpoint.remove(
@@ -17,7 +17,7 @@ final class RemoveVisibleAppsFromUserTests: XCTestCase {
             fromUserWithId: "userId")
         let request = try? endpoint.asURLRequest()
         XCTAssertEqual(request?.httpMethod, "DELETE")
-        
+
         let absoluteString = request?.url?.absoluteString
         let expected = "https://api.appstoreconnect.apple.com/v1/users/userId/relationships/visibleApps"
         XCTAssertEqual(absoluteString, expected)

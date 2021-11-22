@@ -11,7 +11,7 @@ public enum BetaGroupRelationship: Codable {
     case app(App)
     case build(Build)
     case betaTester(BetaTester)
-    
+
     enum TypeKeys: String, CodingKey {
         case type
     }
@@ -29,7 +29,7 @@ public enum BetaGroupRelationship: Codable {
             self = try .betaTester(BetaTester(from: decoder))
         }
     }
-    
+
     public func encode(to encoder: Encoder) throws {
         switch self {
         case .app(let value):

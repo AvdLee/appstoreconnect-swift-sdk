@@ -15,7 +15,7 @@ public enum BuildRelationship: Codable {
     case buildBetaDetail(BuildBetaDetail)
     case preReleaseVersion(PrereleaseVersion)
     case betaAppReviewSubmission(BetaAppReviewSubmission)
-    
+
     enum TypeKeys: String, CodingKey {
         case type
     }
@@ -41,7 +41,7 @@ public enum BuildRelationship: Codable {
             self = try .betaAppReviewSubmission(BetaAppReviewSubmission(from: decoder))
         }
     }
-    
+
     public func encode(to encoder: Encoder) throws {
         switch self {
         case .app(let value):

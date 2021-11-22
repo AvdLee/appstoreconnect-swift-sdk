@@ -29,7 +29,7 @@ public enum GetBetaLicenseAgreementForApp {
     /// Fields to return for included related types.
     public enum Field: NestableQueryParameter {
         case betaLicenseAgreements([BetaLicenseAgreement])
-        
+
         static var key: String = "fields"
         var pair: Pair {
             switch self {
@@ -41,7 +41,7 @@ public enum GetBetaLicenseAgreementForApp {
 }
 
 extension GetBetaLicenseAgreementForApp.Field {
-    
+
     public enum BetaLicenseAgreement: String, CaseIterable, NestableQueryParameter {
         case agreementText, app
 

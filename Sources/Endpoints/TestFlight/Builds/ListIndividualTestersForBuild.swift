@@ -32,7 +32,7 @@ extension APIEndpoint where T == BetaTestersResponse {
 }
 
 public enum ListIndividualTestersForBuild {
-    
+
     /// Fields to return for included related types.
     public enum Field: NestableQueryParameter {
         case betaTesters([BetaTester])
@@ -48,7 +48,7 @@ public enum ListIndividualTestersForBuild {
 }
 
 extension ListIndividualTestersForBuild.Field {
-    
+
     public enum BetaTester: String, CaseIterable, NestableQueryParameter {
         case apps, betaGroups, builds, email, firstName, inviteType, lastName
 

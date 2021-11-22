@@ -11,15 +11,15 @@ public typealias RequestCompletionHandler<T> = (Result<T, Swift.Error>) -> Void
 
 /// The configuration needed to set up the API Provider including all needed information for performing API requests.
 public struct APIConfiguration {
-    
+
     /// Your private key ID from App Store Connect (Ex: 2X9R4HXF34)
     let privateKeyID: String
-    
+
     let privateKey: String
-    
+
     /// Your issuer ID from the API Keys page in App Store Connect (Ex: 57246542-96fe-1a63-e053-0824d011072a)
     let issuerID: String
-    
+
     /// Creates a new API configuration to use for initialising the API Provider.
     ///
     /// - Parameters:
@@ -69,18 +69,18 @@ public final class APIProvider {
             }
         }
     }
-    
+
     public typealias StatusCode = Int
-    
+
     /// Contains a JSON Decoder which can be reused.
     static let jsonDecoder: JSONDecoder = {
         let decoder = JSONDecoder()
-        
+
         let formatter = DateFormatter()
         formatter.locale = Locale(identifier: "en_US_POSIX")
         formatter.timeZone = TimeZone(secondsFromGMT: 0)
         formatter.calendar = Calendar(identifier: .iso8601)
-        
+
         decoder.dateDecodingStrategy = .custom({ (decoder) -> Date in
             let container = try decoder.singleValueContainer()
             let dateStr = try container.decode(String.self)
@@ -101,16 +101,16 @@ public final class APIProvider {
         })
         return decoder
     }()
-    
+
     /// The configuration needed to set up the API Provider including all needed information for performing API requests.
     private let configuration: APIConfiguration
-    
+
     /// The authenticator to handle all JWT signing related actions.
     private lazy var requestsAuthenticator = JWTRequestsAuthenticator(apiConfiguration: self.configuration)
 
     /// Handles URLRequest execution
     private let requestExecutor: RequestExecutor
-    
+
     /// Creates a new APIProvider instance which can be used to perform API Requests to the App Store Connect API.
     ///
     /// - Parameters:
@@ -120,7 +120,7 @@ public final class APIProvider {
         self.configuration = configuration
         self.requestExecutor = requestExecutor
     }
-        
+
     /// Performs a data request to the given API endpoint
     ///
     /// - Parameters:
@@ -134,7 +134,7 @@ public final class APIProvider {
 
         requestExecutor.execute(request) { completion(self.mapVoidResponse($0)) }
     }
-    
+
     /// Performs a data request to the given API endpoint
     ///
     /// - Parameters:
@@ -162,7 +162,7 @@ public final class APIProvider {
 
         requestExecutor.download(request) { completion(self.mapResponse($0)) }
     }
-    
+
     /// Performs a data request to the given ResourceLinks
     ///
     /// - Parameters:

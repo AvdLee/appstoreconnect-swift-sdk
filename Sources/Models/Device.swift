@@ -28,7 +28,7 @@ public struct Device: Codable {
     public let id: String
 
     /// The resource type.
-    public let type: String = "devices"
+    public private(set) var type: String = "devices"
 
     /// Navigational links that include the self-link.
     public let links: ResourceLinks<Device>

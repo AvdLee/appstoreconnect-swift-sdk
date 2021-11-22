@@ -22,7 +22,7 @@ public struct AppScreenshot: Codable {
 
     public let relationships: AppScreenshot.Relationships?
 
-    public let type: String = "appScreenshots"
+    public private(set) var type: String = "appScreenshots"
 
     public let links: ResourceLinks<AppScreenshotResponse>
 }
@@ -39,7 +39,7 @@ public extension AppScreenshot.Relationships.AppScreenshotSet {
     struct Data: Codable {
         public let id: String
 
-        public let type: String = "appScreenshotSets"
+        public private(set) var type: String = "appScreenshotSets"
     }
 
     struct Links: Codable {

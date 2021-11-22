@@ -38,7 +38,7 @@ public enum GetBetaTester {
         case betaGroups([BetaGroup])
         case betaTesters([BetaTester])
         case builds([Build])
-        
+
         static var key: String = "fields"
         var pair: Pair {
             switch self {
@@ -53,7 +53,7 @@ public enum GetBetaTester {
             }
         }
     }
-    
+
     /// Relationship data to include in the response.
     public enum Include: String, CaseIterable, NestableQueryParameter {
         case apps, betaGroups, builds
@@ -61,7 +61,7 @@ public enum GetBetaTester {
         static var key: String = "include"
         var pair: NestableQueryParameter.Pair { return (nil, rawValue) }
     }
-    
+
     /// Number of included related resources to return.
     public enum Limit: NestableQueryParameter {
         case builds(Int)
@@ -83,28 +83,28 @@ public enum GetBetaTester {
 }
 
 extension GetBetaTester.Field {
-    
+
     public enum App: String, CaseIterable, NestableQueryParameter {
         case betaAppLocalizations, betaAppReviewDetail, betaGroups, betaLicenseAgreement, betaTesters, builds, bundleId, name, preReleaseVersions, primaryLocale, sku
 
         static var key: String = "app"
         var pair: NestableQueryParameter.Pair { return (nil, rawValue) }
     }
-    
+
     public enum BetaGroup: String, CaseIterable, NestableQueryParameter {
         case app, betaTesters, builds, createdDate, isInternalGroup, name, publicLink, publicLinkEnabled, publicLinkId, publicLinkLimit, publicLinkLimitEnabled
 
         static var key: String = "betaGroup"
         var pair: NestableQueryParameter.Pair { return (nil, rawValue) }
     }
-    
+
     public enum BetaTester: String, CaseIterable, NestableQueryParameter {
         case apps, betaGroups, builds, email, firstName, inviteType, lastName
 
         static var key: String = "betaTester"
         var pair: NestableQueryParameter.Pair { return (nil, rawValue) }
     }
-    
+
     public enum Build: String, CaseIterable, NestableQueryParameter {
         case app, appEncryptionDeclaration, betaAppReviewSubmission, betaBuildLocalizations, betaGroups, buildBetaDetail, expirationDate, expired, iconAssetToken, individualTesters, minOsVersion, preReleaseVersion, processingState, uploadedDate, usesNonExemptEncryption, version
 

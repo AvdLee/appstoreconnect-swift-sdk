@@ -31,7 +31,7 @@ extension APIEndpoint where T == UserResponse {
 }
 
 public enum ReadUserInformation {
-    
+
     /// Fields to return for included related types.
     public enum Field: NestableQueryParameter {
         case apps([App])
@@ -47,7 +47,7 @@ public enum ReadUserInformation {
             }
         }
     }
-    
+
     /// Relationship data to include in the response.
     public enum Include: String, CaseIterable, NestableQueryParameter {
         case visibleApps
@@ -55,7 +55,7 @@ public enum ReadUserInformation {
         static var key: String = "include"
         var pair: NestableQueryParameter.Pair { return (nil, rawValue) }
     }
-    
+
     /// Number of included related resources to return.
     public enum Limit: NestableQueryParameter {
         case visibleApps(Int)
@@ -71,14 +71,14 @@ public enum ReadUserInformation {
 }
 
 extension ReadUserInformation.Field {
-    
+
     public enum App: String, CaseIterable, NestableQueryParameter {
         case betaAppLocalizations, betaAppReviewDetail, betaGroups, betaLicenseAgreement, betaTesters, builds, bundleId, name, preReleaseVersions, primaryLocale, sku
 
         static var key: String = "app"
         var pair: NestableQueryParameter.Pair { return (nil, rawValue) }
     }
-    
+
     public enum User: String, CaseIterable, NestableQueryParameter {
         case allAppsVisible, firstName, lastName, provisioningAllowed, roles, username, visibleApps
 

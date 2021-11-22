@@ -52,7 +52,7 @@ public enum ListBetaLicenseAgreements {
             }
         }
     }
-    
+
     /// Attributes, relationships, and IDs by which to filter.
     public enum Filter: NestableQueryParameter {
         case app([String])
@@ -65,7 +65,7 @@ public enum ListBetaLicenseAgreements {
             }
         }
     }
-    
+
     /// Relationship data to include in the response.
     public enum Include: String, CaseIterable, NestableQueryParameter {
         case app
@@ -76,14 +76,14 @@ public enum ListBetaLicenseAgreements {
 }
 
 extension ListBetaLicenseAgreements.Field {
-    
+
     public enum App: String, CaseIterable, NestableQueryParameter {
         case betaAppLocalizations, betaAppReviewDetail, betaGroups, betaLicenseAgreement, betaTesters, builds, bundleId, name, preReleaseVersions, primaryLocale, sku
 
         static var key: String = "App"
         var pair: NestableQueryParameter.Pair { return (nil, rawValue) }
     }
-    
+
     public enum BetaLicenseAgreement: String, CaseIterable, NestableQueryParameter {
         case agreementText, app
 

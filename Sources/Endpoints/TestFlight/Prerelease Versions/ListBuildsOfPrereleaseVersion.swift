@@ -32,7 +32,7 @@ extension APIEndpoint where T == BuildsResponse {
 }
 
 public enum ListBuildsOfPrereleaseVersion {
-    
+
     /// Fields to return for included related types.
     public enum Field: NestableQueryParameter {
         case builds([Build])
@@ -48,7 +48,7 @@ public enum ListBuildsOfPrereleaseVersion {
 }
 
 extension ListBuildsOfPrereleaseVersion.Field {
-    
+
     public enum Build: String, CaseIterable, NestableQueryParameter {
         case app, appEncryptionDeclaration, betaAppReviewSubmission, betaBuildLocalizations, betaGroups, buildBetaDetail, expirationDate, expired, iconAssetToken, individualTesters, minOsVersion, preReleaseVersion, processingState, uploadedDate, usesNonExemptEncryption, version
 

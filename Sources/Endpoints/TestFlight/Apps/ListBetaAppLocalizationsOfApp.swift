@@ -39,7 +39,7 @@ public enum ListBetaAppLocalizationsForApp {
     /// Fields to return for included related types.
     public enum Field: NestableQueryParameter {
         case betaAppLocalizations([BetaAppLocalization])
-        
+
         static var key: String = "fields"
         var pair: Pair {
             switch self {

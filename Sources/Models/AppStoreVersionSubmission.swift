@@ -7,7 +7,7 @@ public struct AppStoreVersionSubmission: Codable {
 
     public let relationships: AppStoreVersionSubmission.Relationships?
 
-    public let type: String = "appStoreVersionSubmissions"
+    public private(set) var type: String = "appStoreVersionSubmissions"
 }
 
 // MARK: AppStoreVersionSubmission
@@ -16,7 +16,7 @@ extension AppStoreVersionSubmission {
     public struct Relationships: Codable {
 
         public let appStoreVersion: AppStoreVersionSubmission.Relationships.AppStoreVersion?
-        
+
     }
 }
 
@@ -37,7 +37,7 @@ extension AppStoreVersionSubmission.Relationships.AppStoreVersion {
     public struct Data: Codable {
         public let id: String
 
-        public let type: String = "appStoreVersions"
+        public private(set) var type: String = "appStoreVersions"
     }
 
     public struct Links: Codable {
