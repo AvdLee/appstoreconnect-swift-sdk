@@ -16,11 +16,11 @@ public enum AppInfoRelationship: Codable {
 //    case secondaryCategory(AppCategory)
 //    case secondarySubcategoryOne(AppCategory)
 //    case secondarySubcategoryTwo(AppCategory)
-    
+
     enum TypeKeys: String, CodingKey {
         case type
     }
-    
+
     enum CodingKeys: String, Decodable, CodingKey {
         case app
 //        case appInfoLocalizations
@@ -31,7 +31,7 @@ public enum AppInfoRelationship: Codable {
 //        case secondarySubcategoryOne
 //        case secondarySubcategoryTwo
     }
-    
+
     public init(from decoder: Decoder) throws {
         let type = try decoder.container(keyedBy: TypeKeys.self).decode(CodingKeys.self, forKey: .type)
         switch type {
@@ -39,7 +39,7 @@ public enum AppInfoRelationship: Codable {
             self = try .app(App(from: decoder))
         }
     }
-    
+
     public func encode(to encoder: Encoder) throws {
         switch self {
         case .app(let value):

@@ -33,7 +33,7 @@ public enum ReadBuildBetaDetailInformation {
     public enum Field: NestableQueryParameter {
         case buildBetaDetails([BuildBetaDetail])
         case builds([Build])
-        
+
         static var key: String = "fields"
         var pair: Pair {
             switch self {
@@ -44,7 +44,7 @@ public enum ReadBuildBetaDetailInformation {
             }
         }
     }
-    
+
     /// Relationship data to include in the response.
     public enum Include: String, CaseIterable, NestableQueryParameter {
         case build
@@ -55,14 +55,14 @@ public enum ReadBuildBetaDetailInformation {
 }
 
 extension ReadBuildBetaDetailInformation.Field {
-    
+
     public enum BuildBetaDetail: String, CaseIterable, NestableQueryParameter {
         case autoNotifyEnabled, build, externalBuildState, internalBuildState
 
         static var key: String = "buildBetaDetail"
         var pair: NestableQueryParameter.Pair { return (nil, rawValue) }
     }
-    
+
     public enum Build: String, CaseIterable, NestableQueryParameter {
         case app, appEncryptionDeclaration, betaAppReviewSubmission, betaBuildLocalizations, betaGroups, buildBetaDetail, expirationDate, expired, iconAssetToken, individualTesters, minOsVersion, preReleaseVersion, processingState, uploadedDate, usesNonExemptEncryption, version
 

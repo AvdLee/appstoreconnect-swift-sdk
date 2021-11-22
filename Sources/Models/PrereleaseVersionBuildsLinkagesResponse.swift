@@ -6,19 +6,19 @@
 //
 
 import Foundation
-    
+
 /// A response containing a list of related resource IDs.
 public struct PrereleaseVersionBuildsLinkagesResponse: Codable {
-    
+
     public struct Data: Codable {
-    
+
         /// The opaque resource ID that uniquely identifies the resource.
         public let `id`: String
-    
+
         /// The resource type.Value: builds
         public private(set) var type: String = "builds"
     }
-    
+
     /// The object types and IDs of the related resources.
     public let data: [PrereleaseVersionBuildsLinkagesResponse.Data]
 
@@ -27,5 +27,5 @@ public struct PrereleaseVersionBuildsLinkagesResponse: Codable {
 
     /// Paging information.
     public let meta: PagingInformation?
-    
+
 }

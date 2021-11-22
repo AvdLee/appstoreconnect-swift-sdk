@@ -9,7 +9,7 @@ import Foundation
 
 /// The data structure that represents the resource.
 public struct Profile: Codable {
-    
+
     /// Attributes that describe a resource.
     public struct Attributes: Codable {
         public let name: String?

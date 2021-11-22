@@ -39,7 +39,7 @@ extension APIEndpoint where T == BetaTestersResponse {
 }
 
 public enum ListBetaTesters {
-    
+
     /// Fields to return for included related types.
     public enum Field: NestableQueryParameter {
         case apps([App])
@@ -61,7 +61,7 @@ public enum ListBetaTesters {
             }
         }
     }
-    
+
     /// Attributes, relationships, and IDs by which to filter.
     public enum Filter: NestableQueryParameter {
         case apps([String])
@@ -92,7 +92,7 @@ public enum ListBetaTesters {
             }
         }
     }
-    
+
     /// Relationship data to include in the response.
     public enum Include: String, CaseIterable, NestableQueryParameter {
         case apps, betaGroups, builds
@@ -100,7 +100,7 @@ public enum ListBetaTesters {
         static var key: String = "include"
         var pair: NestableQueryParameter.Pair { return (nil, rawValue) }
     }
-    
+
     /// Number of resources to return.
     public enum Limit: NestableQueryParameter {
         case betaTesters(Int)
@@ -122,18 +122,18 @@ public enum ListBetaTesters {
             }
         }
     }
-    
+
     /// Attributes by which to sort.
     public enum Sort: String, CaseIterable, NestableQueryParameter {
         case emailAscending = "+email"
         case emailDescending = "-email"
-        
+
         case firstNameAscending = "+firstName"
         case firstNameDescending = "-firstName"
-        
+
         case inviteTypeAscending = "+inviteType"
         case inviteTypeDescending = "-inviteType"
-        
+
         case lastNameAscending = "+lastName"
         case lastNameDescending = "-lastName"
 
@@ -143,28 +143,28 @@ public enum ListBetaTesters {
 }
 
 extension ListBetaTesters.Field {
-    
+
     public enum App: String, CaseIterable, NestableQueryParameter {
         case betaAppLocalizations, betaAppReviewDetail, betaGroups, betaLicenseAgreement, betaTesters, builds, bundleId, name, preReleaseVersions, primaryLocale, sku
 
         static var key: String = "apps"
         var pair: NestableQueryParameter.Pair { return (nil, rawValue) }
     }
-    
+
     public enum BetaGroup: String, CaseIterable, NestableQueryParameter {
         case app, betaTesters, builds, createdDate, isInternalGroup, name, publicLink, publicLinkEnabled, publicLinkId, publicLinkLimit, publicLinkLimitEnabled
 
         static var key: String = "betaGroups"
         var pair: NestableQueryParameter.Pair { return (nil, rawValue) }
     }
-    
+
     public enum BetaTester: String, CaseIterable, NestableQueryParameter {
         case apps, betaGroups, builds, email, firstName, inviteType, lastName
 
         static var key: String = "betaTesters"
         var pair: NestableQueryParameter.Pair { return (nil, rawValue) }
     }
-    
+
     public enum Build: String, CaseIterable, NestableQueryParameter {
         case app, appEncryptionDeclaration, betaAppReviewSubmission, betaBuildLocalizations, betaGroups, buildBetaDetail, expirationDate, expired, iconAssetToken, individualTesters, minOsVersion, preReleaseVersion, processingState, uploadedDate, usesNonExemptEncryption, version
 

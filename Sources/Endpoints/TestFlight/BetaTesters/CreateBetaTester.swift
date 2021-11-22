@@ -35,7 +35,7 @@ extension APIEndpoint where T == BetaTesterResponse {
             parameters: nil,
             body: try? JSONEncoder().encode(betaTester))
     }
-    
+
     /// Create a beta tester assigned to a group, a build, or an app.
     ///
     /// - Parameters:

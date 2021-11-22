@@ -38,7 +38,7 @@ public enum ReadAppInformationOfBetaAppReviewDetail {
 }
 
 extension ReadAppInformationOfBetaAppReviewDetail.Field {
-    
+
     public enum App: String, CaseIterable, NestableQueryParameter {
         case betaAppLocalizations, betaAppReviewDetail, betaGroups, betaLicenseAgreement, betaTesters, builds, bundleId, name, preReleaseVersions, primaryLocale, sku
 

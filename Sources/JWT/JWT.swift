@@ -15,7 +15,7 @@ private struct Header: Codable {
         case keyIdentifier = "kid"
         case tokenType = "typ"
     }
-    
+
     /// All JWTs for App Store Connect API must be signed with ES256 encryption
     let algorithm: String = "ES256"
 
@@ -28,13 +28,13 @@ private struct Header: Codable {
 
 /// The JWT Payload contains information specific to the App Store Connect APIs, such as issuer ID and expiration time.
 private struct Payload: Codable {
-    
+
     enum CodingKeys: String, CodingKey {
         case issuerIdentifier = "iss"
         case expirationTime = "exp"
         case audience = "aud"
     }
-    
+
     /// Your issuer identifier from the API Keys page in App Store Connect (Ex: 57246542-96fe-1a63-e053-0824d011072a)
     let issuerIdentifier: String
 
@@ -78,7 +78,7 @@ struct JWT: Codable, JWTCreatable {
             }
         }
     }
-    
+
     typealias Token = String
     typealias P8PrivateKey = String
 

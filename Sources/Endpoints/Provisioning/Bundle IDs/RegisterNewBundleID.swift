@@ -8,7 +8,7 @@
 import Foundation
 
 extension APIEndpoint where T == BundleIdResponse {
-    
+
     /// Register a new bundle ID for app development.
     ///
     /// - Parameters:
@@ -19,14 +19,14 @@ extension APIEndpoint where T == BundleIdResponse {
         id: String,
         name: String,
         platform: BundleIdPlatform) -> APIEndpoint {
-        
+
         let request = BundleIdCreateRequest(data: .init(
             attributes: .init(
                 identifier: id,
                 name: name,
                 platform: platform,
                 seedId: nil)))
-        
+
         return APIEndpoint(
             path: "bundleIds",
             method: .post,

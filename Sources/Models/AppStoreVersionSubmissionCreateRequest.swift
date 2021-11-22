@@ -28,7 +28,7 @@ extension AppStoreVersionSubmissionCreateRequest.Data {
 
 // MARK: - AppStoreVersionSubmissionCreateRequest.Data.Relationships
 extension AppStoreVersionSubmissionCreateRequest.Data.Relationships {
-    
+
     public struct AppStoreVersion: Codable {
 
         public let data: AppStoreVersionSubmissionCreateRequest.Data.Relationships.AppStoreVersion.Data

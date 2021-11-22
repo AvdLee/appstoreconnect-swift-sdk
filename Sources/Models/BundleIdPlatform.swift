@@ -8,5 +8,5 @@
 public enum BundleIdPlatform: String, Codable {
     case iOS = "IOS"
     case macOS = "MAC_OS"
-    case universal = "UNIVERSAL"    
+    case universal = "UNIVERSAL"
 }

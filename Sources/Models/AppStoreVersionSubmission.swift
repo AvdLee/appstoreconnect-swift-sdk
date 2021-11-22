@@ -16,7 +16,7 @@ extension AppStoreVersionSubmission {
     public struct Relationships: Codable {
 
         public let appStoreVersion: AppStoreVersionSubmission.Relationships.AppStoreVersion?
-        
+
     }
 }
 

@@ -9,7 +9,7 @@ import XCTest
 @testable import AppStoreConnect_Swift_SDK
 
 final class CreateBetaGroupTests: XCTestCase {
-    
+
     func testURLRequest() {
         let appId = "appId"
         let name = "name"
@@ -18,7 +18,7 @@ final class CreateBetaGroupTests: XCTestCase {
         let publicLinkLimitEnabled = false
         let betaTesterIds = ["betaTesterId"]
         let buildIds = ["buildId"]
-        
+
         let endpoint = APIEndpoint.create(
             betaGroupForAppWithId: appId,
             name: name,
@@ -27,10 +27,10 @@ final class CreateBetaGroupTests: XCTestCase {
             publicLinkLimitEnabled: publicLinkLimitEnabled,
             betaTesterIds: betaTesterIds,
             buildIds: buildIds)
-        
+
         let request = try? endpoint.asURLRequest()
         XCTAssertEqual(request?.httpMethod, "POST")
-        
+
         let absoluteString = request?.url?.absoluteString
         let expected = "https://api.appstoreconnect.apple.com/v1/betaGroups"
         XCTAssertEqual(absoluteString, expected)
@@ -43,18 +43,18 @@ final class CreateBetaGroupTests: XCTestCase {
             betaTesterIds: betaTesterIds,
             buildIds: buildIds)))
     }
-    
+
     func testURLRequestWithDefaultValues() {
         let appId = "appId"
         let name = "name"
-        
+
         let endpoint = APIEndpoint.create(
             betaGroupForAppWithId: appId,
             name: name)
-        
+
         let request = try? endpoint.asURLRequest()
         XCTAssertEqual(request?.httpMethod, "POST")
-        
+
         let absoluteString = request?.url?.absoluteString
         let expected = "https://api.appstoreconnect.apple.com/v1/betaGroups"
         XCTAssertEqual(absoluteString, expected)

@@ -25,7 +25,7 @@ extension APIEndpoint where T == BetaAppReviewSubmissionResponse {
 }
 
 public enum ReadBetaAppReviewSubmissionInformation {
-    
+
     /// Fields to return for included related types.
     public enum Field: NestableQueryParameter {
         case betaAppReviewSubmissions([BetaAppReviewSubmission])
@@ -41,7 +41,7 @@ public enum ReadBetaAppReviewSubmissionInformation {
             }
         }
     }
-    
+
     /// Relationship data to include in the response.
     public enum Include: String, CaseIterable, NestableQueryParameter {
         case build
@@ -52,14 +52,14 @@ public enum ReadBetaAppReviewSubmissionInformation {
 }
 
 extension ReadBetaAppReviewSubmissionInformation.Field {
-    
+
     public enum BetaAppReviewSubmission: String, CaseIterable, NestableQueryParameter {
         case betaReviewState, build
 
         static var key: String = "betaAppReviewSubmission"
         var pair: NestableQueryParameter.Pair { return (nil, rawValue) }
     }
-    
+
     public enum Build: String, CaseIterable, NestableQueryParameter {
         case app, appEncryptionDeclaration, betaAppReviewSubmission, betaBuildLocalizations, betaGroups, buildBetaDetail, expirationDate, expired, iconAssetToken, individualTesters, minOsVersion, preReleaseVersion, processingState, uploadedDate, usesNonExemptEncryption, version
 

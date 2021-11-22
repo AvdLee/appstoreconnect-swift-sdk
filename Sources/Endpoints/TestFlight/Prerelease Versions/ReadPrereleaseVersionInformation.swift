@@ -28,7 +28,7 @@ extension APIEndpoint where T == PrereleaseVersionResponse {
 }
 
 public enum ReadPrereleaseVersionInformation {
-    
+
     /// Fields to return for included related types.
     public enum Field: NestableQueryParameter {
         case apps([App])
@@ -47,7 +47,7 @@ public enum ReadPrereleaseVersionInformation {
             }
         }
     }
-    
+
     /// Relationship data to include in the response.
     public enum Include: String, CaseIterable, NestableQueryParameter {
         case app, builds
@@ -55,7 +55,7 @@ public enum ReadPrereleaseVersionInformation {
         static var key: String = "include"
         var pair: NestableQueryParameter.Pair { return (nil, rawValue) }
     }
-    
+
     /// Number of included related resources to return.
     public enum Limit: NestableQueryParameter {
         case builds(Int)
@@ -71,21 +71,21 @@ public enum ReadPrereleaseVersionInformation {
 }
 
 extension ReadPrereleaseVersionInformation.Field {
-    
+
     public enum App: String, CaseIterable, NestableQueryParameter {
         case betaAppLocalizations, betaAppReviewDetail, betaGroups, betaLicenseAgreement, betaTesters, builds, bundleId, name, preReleaseVersions, primaryLocale, sku
 
         static var key: String = "App"
         var pair: NestableQueryParameter.Pair { return (nil, rawValue) }
     }
-    
+
     public enum Build: String, CaseIterable, NestableQueryParameter {
         case app, appEncryptionDeclaration, betaAppReviewSubmission, betaBuildLocalizations, betaGroups, buildBetaDetail, expirationDate, expired, iconAssetToken, individualTesters, minOsVersion, preReleaseVersion, processingState, uploadedDate, usesNonExemptEncryption, version
 
         static var key: String = "build"
         var pair: NestableQueryParameter.Pair { return (nil, rawValue) }
     }
-    
+
     public enum PreReleaseVersion: String, CaseIterable, NestableQueryParameter {
         case app, builds, platform, version
 

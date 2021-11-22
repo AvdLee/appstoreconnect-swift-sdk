@@ -13,13 +13,13 @@ final class BetaGroupRelationshipTests: XCTestCase {
     func test() {
         let decoder = JSONDecoder()
         let encoder = JSONEncoder()
-        
+
         // Errors
         XCTAssertThrowsError((try decoder.decode(BetaGroupRelationship.self, from: "{}".data(using: .utf8)!)))
         XCTAssertThrowsError(try decoder.decode(BetaGroupRelationship.self, from: "{\"type\": 2}".data(using: .utf8)!))
         XCTAssertThrowsError(try decoder.decode(BetaGroupRelationship.self, from: "{\"type\": \"error\"}".data(using: .utf8)!))
         XCTAssertThrowsError(try decoder.decode(BetaGroupRelationship.self, from: "{\"type\": \"betaGroups\"}".data(using: .utf8)!))
-        
+
         let allCases = [
             BetaGroupRelationship.app(.test),
             BetaGroupRelationship.betaTester(.test),
@@ -28,7 +28,7 @@ final class BetaGroupRelationshipTests: XCTestCase {
         for relationship in allCases {
             let encoded = try? encoder.encode(relationship)
             XCTAssertNotNil(encoded)
-            
+
             let decoded = try? decoder.decode(BetaGroupRelationship.self, from: encoded ?? Data())
             XCTAssertNotNil(decoded)
         }

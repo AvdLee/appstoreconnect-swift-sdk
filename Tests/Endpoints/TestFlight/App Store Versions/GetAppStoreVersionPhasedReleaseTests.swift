@@ -22,10 +22,10 @@ final class GetAppStoreVersionPhasedReleaseTests: XCTestCase {
                 ])
             ]
         )
-        
+
         let request = try? endpoint.asURLRequest()
         XCTAssertEqual(request?.httpMethod, "GET")
-                
+
         let absoluteString = request?.url?.absoluteString
         let expected = "https://api.appstoreconnect.apple.com/v1/appStoreVersions/appId/appStoreVersionPhasedRelease?fields%5BappStoreVersionPhasedReleases%5D=currentDayNumber%2CphasedReleaseState%2CstartDate%2CtotalPauseDuration"
         XCTAssertEqual(absoluteString, expected)

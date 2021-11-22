@@ -11,7 +11,7 @@ extension APIEndpoint where T == BetaAppReviewSubmissionResponse {
     ///
     /// - Parameters:
     ///   - id: (Required) An opaque resource ID that uniquely identifies the resource.
-    
+
     ///   - fields: Fields to return for included related types.
     public static func betaAppReviewSubmission(
         ofBuildWithId id: String,
@@ -27,7 +27,7 @@ public enum ReadBetaAppReviewSubmissionOfBuild {
     /// Fields to return for included related types.
     public enum Field: NestableQueryParameter {
         case betaAppReviewSubmissions([BetaAppReviewSubmission])
-        
+
         static var key: String = "fields"
         var pair: Pair {
             switch self {
@@ -39,7 +39,7 @@ public enum ReadBetaAppReviewSubmissionOfBuild {
 }
 
 extension ReadBetaAppReviewSubmissionOfBuild.Field {
-    
+
     public enum BetaAppReviewSubmission: String, CaseIterable, NestableQueryParameter {
         case betaReviewState, build
 

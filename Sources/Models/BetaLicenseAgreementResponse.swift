@@ -6,7 +6,7 @@
 //
 
 import Foundation
-    
+
 /// A response containing a single resource.
 public struct BetaLicenseAgreementResponse: Codable {
 

@@ -51,7 +51,7 @@ public enum ListBetaGroupsToWhichBetaTesterBelongs {
 }
 
 extension ListBetaGroupsToWhichBetaTesterBelongs.Field {
-    
+
     public enum BetaGroup: String, CaseIterable, NestableQueryParameter {
         case app, betaTesters, builds, createdDate, isInternalGroup, name, publicLink, publicLinkEnabled, publicLinkId, publicLinkLimit, publicLinkLimitEnabled
 

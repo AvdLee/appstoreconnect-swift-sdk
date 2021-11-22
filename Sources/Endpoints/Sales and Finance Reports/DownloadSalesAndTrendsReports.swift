@@ -52,21 +52,21 @@ public enum DownloadSalesAndTrendsReports {
 }
 
 extension DownloadSalesAndTrendsReports.Filter {
-    
+
     public enum Frequency: String, CaseIterable, NestableQueryParameter {
         case DAILY, WEEKLY, MONTHLY, YEARLY
 
         static var key: String = "frequency"
         var pair: NestableQueryParameter.Pair { return (nil, rawValue) }
     }
-    
+
     public enum ReportSubType: String, CaseIterable, NestableQueryParameter {
         case SUMMARY, DETAILED, OPT_IN
 
         static var key: String = "reportSubType"
         var pair: NestableQueryParameter.Pair { return (nil, rawValue) }
     }
-    
+
     public enum ReportType: String, CaseIterable, NestableQueryParameter {
         case SALES, PRE_ORDER, NEWSSTAND, SUBSCRIPTION, SUBSCRIPTION_EVENT, SUBSCRIBER
 

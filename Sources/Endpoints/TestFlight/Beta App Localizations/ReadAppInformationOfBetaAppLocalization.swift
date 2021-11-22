@@ -26,7 +26,7 @@ public enum ReadAppInformationOfBetaAppLocalization {
     /// Fields to return for included related types.
     public enum Field: NestableQueryParameter {
         case apps([App])
-        
+
         static var key: String = "fields"
         var pair: Pair {
             switch self {
@@ -38,7 +38,7 @@ public enum ReadAppInformationOfBetaAppLocalization {
 }
 
 extension ReadAppInformationOfBetaAppLocalization.Field {
-    
+
     public enum App: String, CaseIterable, NestableQueryParameter {
         case betaAppLocalizations, betaAppReviewDetail, betaGroups, betaLicenseAgreement, betaTesters, builds, bundleId, name, preReleaseVersions, primaryLocale, sku
 

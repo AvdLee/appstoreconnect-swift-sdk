@@ -39,7 +39,7 @@ extension APIEndpoint where T == PreReleaseVersionsResponse {
 }
 
 public enum ListPrereleaseVersions {
-    
+
     /// Fields to return for included related types.
     public enum Field: NestableQueryParameter {
         case apps([App])
@@ -58,7 +58,7 @@ public enum ListPrereleaseVersions {
             }
         }
     }
-    
+
     /// Attributes, relationships, and IDs by which to filter.
     public enum Filter: NestableQueryParameter {
         case app([String])
@@ -86,7 +86,7 @@ public enum ListPrereleaseVersions {
             }
         }
     }
-    
+
     /// Relationship data to include in the response.
     public enum Include: String, CaseIterable, NestableQueryParameter {
         case app, builds
@@ -94,7 +94,7 @@ public enum ListPrereleaseVersions {
         static var key: String = "include"
         var pair: NestableQueryParameter.Pair { return (nil, rawValue) }
     }
-    
+
     /// Number of resources to return.
     public enum Limit: NestableQueryParameter {
         case builds(Int)
@@ -108,7 +108,7 @@ public enum ListPrereleaseVersions {
         }
 
     }
-    
+
     /// Attributes by which to sort.
     public enum Sort: String, CaseIterable, NestableQueryParameter {
         case versionAscending = "+version"
@@ -120,21 +120,21 @@ public enum ListPrereleaseVersions {
 }
 
 extension ListPrereleaseVersions.Field {
-    
+
     public enum App: String, CaseIterable, NestableQueryParameter {
         case appInfos, appStoreVersions, availableInNewTerritories, availableTerritories, betaAppLocalizations, betaAppReviewDetail, betaGroups, betaLicenseAgreement, betaTesters, builds, bundleId, contentRightsDeclaration, endUserLicenseAgreement, gameCenterEnabledVersions, inAppPurchases, isOrEverWasMadeForKids, name, perfPowerMetrics, preOrder, preReleaseVersions, prices, primaryLocale, sku
 
         static var key: String = "apps"
         var pair: NestableQueryParameter.Pair { return (nil, rawValue) }
     }
-    
+
     public enum Build: String, CaseIterable, NestableQueryParameter {
         case app, appEncryptionDeclaration, appStoreVersion, betaAppReviewSubmission, betaBuildLocalizations, betaGroups, buildBetaDetail, diagnosticSignatures, expirationDate, expired, iconAssetToken, icons, individualTesters, minOsVersion, perfPowerMetrics, preReleaseVersion, processingState, uploadedDate, usesNonExemptEncryption, version
 
         static var key: String = "builds"
         var pair: NestableQueryParameter.Pair { return (nil, rawValue) }
     }
-    
+
     public enum PreReleaseVersion: String, CaseIterable, NestableQueryParameter {
         case app, builds, platform, version
 
@@ -144,7 +144,7 @@ extension ListPrereleaseVersions.Field {
 }
 
 extension ListPrereleaseVersions.Filter {
-    
+
     public enum BuildsProcessingState: String, CaseIterable, NestableQueryParameter {
         case PROCESSING, FAILED, INVALID, VALID
 

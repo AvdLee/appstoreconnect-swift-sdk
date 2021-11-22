@@ -9,17 +9,17 @@ import XCTest
 @testable import AppStoreConnect_Swift_SDK
 
 final class AssignAppEncryptionDeclarationForBuildTests: XCTestCase {
-    
+
     func testURLRequest() {
         let appEncryptionDeclarationId = "id"
         let buildId = "buildId"
-        
+
         let endpoint = APIEndpoint.assign(
             appEncryptionDeclarationWithId: appEncryptionDeclarationId,
             toBuildWithId: buildId)
         let request = try? endpoint.asURLRequest()
         XCTAssertEqual(request?.httpMethod, "PATCH")
-        
+
         let absoluteString = request?.url?.absoluteString
         let expected = "https://api.appstoreconnect.apple.com/v1/builds/buildId/relationships/appEncryptionDeclaration"
         XCTAssertEqual(absoluteString, expected)

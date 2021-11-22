@@ -27,7 +27,7 @@ extension APIEndpoint where T == DevicesResponse {
             parameters["limit"] = nextLimit
         }
         if let nextCursor = next?.nextCursor { parameters["cursor"] = nextCursor }
-        
+
         return APIEndpoint(
             path: "devices",
             method: .get,

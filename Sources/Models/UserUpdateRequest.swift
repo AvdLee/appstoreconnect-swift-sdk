@@ -6,28 +6,28 @@
 //
 
 import Foundation
-    
+
 /// A request containing a single resource.
 public struct UserUpdateRequest: Codable {
-    
+
     public struct Data: Codable {
-    
+
         /// The resource's attributes.
         public let attributes: UserUpdateRequest.Data.Attributes?
-    
+
         /// The opaque resource ID that uniquely identifies the resource.
         public let `id`: String
-    
+
         /// The types and IDs of the related data to update.
         public let relationships: UserUpdateRequest.Data.Relationships?
-    
+
         /// The resource type.Value: users
         public private(set) var type: String = "users"
     }
-    
+
     /// The resource data.
     public let data: UserUpdateRequest.Data
-    
+
     /// - Parameters:
     ///   - id: The opaque resource ID that uniquely identifies the resource.
     ///   - allAppsVisible: Assigned user roles that determine the user's access to sections of App Store Connect and tasks they can perform.
@@ -54,19 +54,19 @@ public struct UserUpdateRequest: Codable {
 extension UserUpdateRequest.Data {
     /// Attributes that describe a resource.
     public struct Attributes: Codable {
-    
+
         /// Assigned user roles that determine the user's access to sections of App Store Connect and tasks they can perform.
         public let allAppsVisible: Bool?
-    
+
         /// A Boolean value that indicates the user's specified role allows access to the provisioning functionality on the Apple Developer website.
         public let provisioningAllowed: Bool?
-    
+
         /// Assigned user roles that determine the user's access to sections of App Store Connect and tasks they can perform.
         public let roles: [UserRole]?
     }
-    
+
     public struct Relationships: Codable {
-    
+
         /// UserUpdateRequest.Data.Relationships.VisibleApps
         public let visibleApps: UserUpdateRequest.Data.Relationships.VisibleApps?
     }
@@ -74,9 +74,9 @@ extension UserUpdateRequest.Data {
 
 // MARK: UserUpdateRequest.Data.Relationships
 extension UserUpdateRequest.Data.Relationships {
-    
+
     public struct VisibleApps: Codable {
-    
+
         /// [UserUpdateRequest.Data.Relationships.VisibleApps.Data]
         public let data: [UserUpdateRequest.Data.Relationships.VisibleApps.Data]?
     }
@@ -84,12 +84,12 @@ extension UserUpdateRequest.Data.Relationships {
 
 // MARK: UserUpdateRequest.Data.Relationships.VisibleApps
 extension UserUpdateRequest.Data.Relationships.VisibleApps {
-    
+
     public struct Data: Codable {
-    
+
         /// The opaque resource ID that uniquely identifies the resource.
         public let `id`: String
-    
+
         /// The resource type.Value: apps
         public private(set) var type: String = "apps"
     }

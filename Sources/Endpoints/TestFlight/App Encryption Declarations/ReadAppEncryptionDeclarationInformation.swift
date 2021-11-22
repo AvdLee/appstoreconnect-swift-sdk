@@ -11,7 +11,7 @@ extension APIEndpoint where T == AppEncryptionDeclarationResponse {
     ///
     /// - Parameters:
     ///   - id: (Required) An opaque resource ID that uniquely identifies the resource.
-    
+
     ///   - fields: Fields to return for included related types.
     ///   - include: Relationship data to include in the response.
     public static func appEncryptionDeclaration(
@@ -26,12 +26,12 @@ extension APIEndpoint where T == AppEncryptionDeclarationResponse {
 }
 
 public enum ReadAppEncryptionDeclarationInformation {
-    
+
     /// Fields to return for included related types.
     public enum Field: NestableQueryParameter {
         case appEncryptionDeclarations([AppEncryptionDeclaration])
         case apps([App])
-        
+
         static var key: String = "fields"
         var pair: Pair {
             switch self {
@@ -42,7 +42,7 @@ public enum ReadAppEncryptionDeclarationInformation {
             }
         }
     }
-    
+
     /// Relationship data to include in the response.
     public enum Include: String, CaseIterable, NestableQueryParameter {
         case app
@@ -53,14 +53,14 @@ public enum ReadAppEncryptionDeclarationInformation {
 }
 
 extension ReadAppEncryptionDeclarationInformation.Field {
-    
+
     public enum AppEncryptionDeclaration: String, CaseIterable, NestableQueryParameter {
         case app, appEncryptionDeclarationState, availableOnFrenchStore, builds, codeValue, containsProprietaryCryptography, containsThirdPartyCryptography, documentName, documentType, documentUrl, exempt, platform, uploadedDate, usesEncryption
 
         static var key: String = "appEncryptionDeclaration"
         var pair: NestableQueryParameter.Pair { return (nil, rawValue) }
     }
-    
+
     public enum App: String, CaseIterable, NestableQueryParameter {
         case betaAppLocalizations, betaAppReviewDetail, betaGroups, betaLicenseAgreement, betaTesters, builds, bundleId, name, preReleaseVersions, primaryLocale, sku
 

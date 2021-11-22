@@ -10,7 +10,7 @@ extension APIEndpoint where T == BetaAppLocalizationsResponse {
     /// Find and list beta app localizations for all apps and locales.
     ///
     /// - Parameters:
-    
+
     ///   - fields: Fields to return for included related types.
     ///   - filter: Attributes, relationships, and IDs by which to filter.
     ///   - include: Relationship data to include in the response.
@@ -56,7 +56,7 @@ public enum ListBetaAppLocalizations {
             }
         }
     }
-    
+
     /// Attributes, relationships, and IDs by which to filter.
     public enum Filter: NestableQueryParameter {
         case app([String]), locale([String])
@@ -71,7 +71,7 @@ public enum ListBetaAppLocalizations {
             }
         }
     }
-    
+
     /// Relationship data to include in the response.
     public enum Include: String, CaseIterable, NestableQueryParameter {
         case app
@@ -82,14 +82,14 @@ public enum ListBetaAppLocalizations {
 }
 
 extension ListBetaAppLocalizations.Field {
-    
+
     public enum App: String, CaseIterable, NestableQueryParameter {
         case betaAppLocalizations, betaAppReviewDetail, betaGroups, betaLicenseAgreement, betaTesters, builds, bundleId, name, preReleaseVersions, primaryLocale, sku
 
         static var key: String = "app"
         var pair: NestableQueryParameter.Pair { return (nil, rawValue) }
     }
-    
+
     public enum BetaAppLocalization: String, CaseIterable, NestableQueryParameter {
         case app, description, feedbackEmail, locale, marketingUrl, privacyPolicyUrl, tvOsPrivacyPolicy
 

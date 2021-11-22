@@ -6,25 +6,25 @@
 //
 
 import Foundation
-    
+
 /// A request containing a single resource.
 public struct UserInvitationCreateRequest: Codable {
-    
+
     public struct Data: Codable {
-    
+
         /// The resource's attributes.
         public let attributes: UserInvitationCreateRequest.Data.Attributes
-    
+
         /// The types and IDs of the related data to update.
         public let relationships: UserInvitationCreateRequest.Data.Relationships?
-    
+
         /// The resource type.Value: userInvitations
         public private(set) var type: String = "userInvitations"
     }
-    
+
     /// The resource data.
     public let data: UserInvitationCreateRequest.Data
-    
+
     /// - Parameters:
     ///   - email: The email address of a pending user invitation. The email address must be valid to activate the account. It can be any email address, not necessarily one associated with an Apple ID.
     ///   - firstName: The user invitation recipient's first name.
@@ -56,28 +56,28 @@ public struct UserInvitationCreateRequest: Codable {
 extension UserInvitationCreateRequest.Data {
     /// Attributes that describe a resource.
     public struct Attributes: Codable {
-    
+
         /// A Boolean value that indicates whether a user has access to all apps available to the team.
         public let allAppsVisible: Bool?
-    
+
         /// The email address of a pending user invitation. The email address must be valid to activate the account. It can be any email address, not necessarily one associated with an Apple ID.
         public let email: String
-    
+
         /// The user invitation recipient's first name.
         public let firstName: String
-    
+
         /// The user invitation recipient's last name.
         public let lastName: String
-    
+
         /// A Boolean value that indicates the user's specified role allows access to the provisioning functionality on the Apple Developer website.
         public let provisioningAllowed: Bool?
-    
+
         /// Assigned user roles that determine the user's access to sections of App Store Connect and tasks they can perform.
         public let roles: [UserRole]
     }
-    
+
     public struct Relationships: Codable {
-    
+
         /// UserInvitationCreateRequest.Data.Relationships.VisibleApps
         public let visibleApps: UserInvitationCreateRequest.Data.Relationships.VisibleApps?
     }
@@ -85,9 +85,9 @@ extension UserInvitationCreateRequest.Data {
 
 // MARK: UserInvitationCreateRequest.Data.Relationships
 extension UserInvitationCreateRequest.Data.Relationships {
-    
+
     public struct VisibleApps: Codable {
-    
+
         /// [UserInvitationCreateRequest.Data.Relationships.VisibleApps.Data]
         public let data: [UserInvitationCreateRequest.Data.Relationships.VisibleApps.Data]?
     }
@@ -95,12 +95,12 @@ extension UserInvitationCreateRequest.Data.Relationships {
 
 // MARK: UserInvitationCreateRequest.Data.Relationships.VisibleApps
 extension UserInvitationCreateRequest.Data.Relationships.VisibleApps {
-    
+
     public struct Data: Codable {
-    
+
         /// The opaque resource ID that uniquely identifies the resource.
         public let `id`: String
-    
+
         /// The resource type.Value: apps
         public private(set) var type: String = "apps"
     }

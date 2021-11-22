@@ -55,7 +55,7 @@ public enum ListBetaBuildLocalizations {
             }
         }
     }
-    
+
     /// Attributes, relationships, and IDs by which to filter.
     public enum Filter: NestableQueryParameter {
         case build([String]), locale([String])
@@ -70,7 +70,7 @@ public enum ListBetaBuildLocalizations {
             }
         }
     }
-    
+
     /// Relationship data to include in the response.
     public enum Include: String, CaseIterable, NestableQueryParameter {
         case build
@@ -81,14 +81,14 @@ public enum ListBetaBuildLocalizations {
 }
 
 extension ListBetaBuildLocalizations.Field {
-    
+
     public enum BetaBuildLocalization: String, CaseIterable, NestableQueryParameter {
         case build, locale, whatsNew
 
         static var key: String = "betaBuildLocalization"
         var pair: NestableQueryParameter.Pair { return (nil, rawValue) }
     }
-    
+
     public enum Build: String, CaseIterable, NestableQueryParameter {
         case app, appEncryptionDeclaration, betaAppReviewSubmission, betaBuildLocalizations, betaGroups, buildBetaDetail, expirationDate, expired, iconAssetToken, individualTesters, minOsVersion, preReleaseVersion, processingState, uploadedDate, usesNonExemptEncryption, version
 

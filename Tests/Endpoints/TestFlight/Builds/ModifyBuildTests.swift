@@ -9,13 +9,13 @@ import XCTest
 @testable import AppStoreConnect_Swift_SDK
 
 final class ModifyBuildTests: XCTestCase {
-    
+
     func testURLRequest() {
         let buildId = "buildId"
         let appEncryptionDeclarationId = "appEncryptionDeclarationId"
         let expired = false
         let usesNonExemptEncryption = true
-        
+
         let endpoint = APIEndpoint.modify(
             buildWithId: buildId,
             appEncryptionDeclarationId: appEncryptionDeclarationId,
@@ -23,7 +23,7 @@ final class ModifyBuildTests: XCTestCase {
             usesNonExemptEncryption: usesNonExemptEncryption)
         let request = try? endpoint.asURLRequest()
         XCTAssertEqual(request?.httpMethod, "PATCH")
-        
+
         let absoluteString = request?.url?.absoluteString
         let expected = "https://api.appstoreconnect.apple.com/v1/builds/buildId"
         XCTAssertEqual(absoluteString, expected)
