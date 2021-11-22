@@ -33,7 +33,7 @@ public struct AppStoreVersionPhasedReleaseResponse: Codable {
         public let attributes: Attributes?
         
         /// The resource type.Value: appStoreVersionPhasedReleases
-        public let type: String = "appStoreVersionPhasedReleases"
+        public private(set) var type: String = "appStoreVersionPhasedReleases"
         
     }
     

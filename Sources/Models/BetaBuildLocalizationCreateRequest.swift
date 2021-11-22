@@ -19,7 +19,7 @@ public struct BetaBuildLocalizationCreateRequest: Codable {
         public let relationships: BetaBuildLocalizationCreateRequest.Data.Relationships
     
         /// The resource type.Value: betaBuildLocalizations
-        public let type: String = "betaBuildLocalizations"
+        public private(set) var type: String = "betaBuildLocalizations"
     }
     
     /// The resource data.
@@ -76,6 +76,6 @@ extension BetaBuildLocalizationCreateRequest.Data.Relationships.Build {
         public let `id`: String
     
         /// The resource type.Value: builds
-        public let type: String = "builds"
+        public private(set) var type: String = "builds"
     }
 }

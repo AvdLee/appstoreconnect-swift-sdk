@@ -47,7 +47,7 @@ public struct AppStoreVersion: Codable {
     public let relationships: AppStoreVersion.Relationships?
     
     /// The resource type.Value: appStoreVersions
-    public let type: String = "appStoreVersions"
+    public private(set) var type: String = "appStoreVersions"
     
 }
 
@@ -59,7 +59,7 @@ extension AppStoreVersion.Relationships {
         
         public struct Data: Codable {
             public let `id`: String
-            public let type: String = "apps"
+            public private(set) var type: String = "apps"
         }
         
         public struct Links: Codable {
@@ -74,7 +74,7 @@ extension AppStoreVersion.Relationships {
         
         public struct Data: Codable {
             public let `id`: String
-            public let type: String = "ageRatingDeclarations"
+            public private(set) var type: String = "ageRatingDeclarations"
         }
         
         public struct Links: Codable {
@@ -89,7 +89,7 @@ extension AppStoreVersion.Relationships {
         
         public struct Data: Codable {
             public let `id`: String
-            public let type: String = "appStoreReviewDetails"
+            public private(set) var type: String = "appStoreReviewDetails"
         }
         
         public struct Links: Codable {
@@ -104,7 +104,7 @@ extension AppStoreVersion.Relationships {
         
         public struct Data: Codable {
             public let `id`: String
-            public let type: String = "appStoreVersionLocalizations"
+            public private(set) var type: String = "appStoreVersionLocalizations"
         }
         
         public struct Links: Codable {
@@ -119,7 +119,7 @@ extension AppStoreVersion.Relationships {
         
         public struct Data: Codable {
             public let `id`: String
-            public let type: String = "appStoreVersionPhasedReleases"
+            public private(set) var type: String = "appStoreVersionPhasedReleases"
         }
         
         public struct Links: Codable {
@@ -134,7 +134,7 @@ extension AppStoreVersion.Relationships {
         
         public struct Data: Codable {
             public let `id`: String
-            public let type: String = "appStoreVersionSubmissions"
+            public private(set) var type: String = "appStoreVersionSubmissions"
         }
         
         public struct Links: Codable {
@@ -149,7 +149,7 @@ extension AppStoreVersion.Relationships {
         
         public struct Data: Codable {
             public let `id`: String
-            public let type: String = "builds"
+            public private(set) var type: String = "builds"
         }
         
         public struct Links: Codable {
@@ -164,7 +164,7 @@ extension AppStoreVersion.Relationships {
         
         public struct Data: Codable {
             public let `id`: String
-            public let type: String = "idfaDeclarations"
+            public private(set) var type: String = "idfaDeclarations"
         }
         
         public struct Links: Codable {
@@ -179,7 +179,7 @@ extension AppStoreVersion.Relationships {
         
         public struct Data: Codable {
             public let `id`: String
-            public let type: String = "routingAppCoverages"
+            public private(set) var type: String = "routingAppCoverages"
         }
         
         public struct Links: Codable {

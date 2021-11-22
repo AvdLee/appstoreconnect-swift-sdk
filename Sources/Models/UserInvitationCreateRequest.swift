@@ -19,7 +19,7 @@ public struct UserInvitationCreateRequest: Codable {
         public let relationships: UserInvitationCreateRequest.Data.Relationships?
     
         /// The resource type.Value: userInvitations
-        public let type: String = "userInvitations"
+        public private(set) var type: String = "userInvitations"
     }
     
     /// The resource data.
@@ -102,6 +102,6 @@ extension UserInvitationCreateRequest.Data.Relationships.VisibleApps {
         public let `id`: String
     
         /// The resource type.Value: apps
-        public let type: String = "apps"
+        public private(set) var type: String = "apps"
     }
 }

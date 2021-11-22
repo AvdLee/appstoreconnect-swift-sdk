@@ -16,7 +16,7 @@ public struct AppBetaAppReviewDetailLinkageResponse: Codable {
         public let `id`: String
     
         /// The resource type.Value: betaAppReviewDetails
-        public let type: String = "betaAppReviewDetails"
+        public private(set) var type: String = "betaAppReviewDetails"
     }
     
     /// The object types and IDs of the related resources.

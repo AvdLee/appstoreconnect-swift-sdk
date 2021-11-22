@@ -60,7 +60,7 @@ public struct BetaGroup: Codable {
     public let relationships: BetaGroup.Relationships?
 
     /// The resource type.Value: betaGroups
-    public let type: String = "betaGroups"
+    public private(set) var type: String = "betaGroups"
 
     /// Navigational links that include the self-link.
     public let links: ResourceLinks<BetaGroupResponse>
@@ -112,7 +112,7 @@ extension BetaGroup.Relationships.App {
         public let `id`: String
     
         /// The resource type.Value: apps
-        public let type: String = "apps"
+        public private(set) var type: String = "apps"
     }
     
     public struct Links: Codable {
@@ -134,7 +134,7 @@ extension BetaGroup.Relationships.BetaTesters {
         public let `id`: String
     
         /// The resource type.Value: betaTesters
-        public let type: String = "betaTesters"
+        public private(set) var type: String = "betaTesters"
     }
     
     public struct Links: Codable {
@@ -156,7 +156,7 @@ extension BetaGroup.Relationships.Builds {
         public let `id`: String
     
         /// The resource type.Value: builds
-        public let type: String = "builds"
+        public private(set) var type: String = "builds"
     }
     
     public struct Links: Codable {

@@ -19,7 +19,7 @@ public struct BundleIdCapabilityUpdateRequest: Codable {
         public let `id`: String
 
         /// The resource type.Value: bundleIdCapabilities
-        public let type: String = "bundleIdCapabilities"
+        public private(set) var type: String = "bundleIdCapabilities"
     }
 
     /// The object types and IDs of the related resources.

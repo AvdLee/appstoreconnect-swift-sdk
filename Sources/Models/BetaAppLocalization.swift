@@ -48,7 +48,7 @@ public struct BetaAppLocalization: Codable {
     public let relationships: BetaAppLocalization.Relationships?
 
     /// The resource type.Value: betaAppLocalizations
-    public let type: String = "betaAppLocalizations"
+    public private(set) var type: String = "betaAppLocalizations"
 
     /// Navigational links that include the self-link.
     public let links: ResourceLinks<BetaAppLocalizationResponse>
@@ -76,7 +76,7 @@ extension BetaAppLocalization.Relationships.App {
         public let `id`: String
     
         /// The resource type.Value: apps
-        public let type: String = "apps"
+        public private(set) var type: String = "apps"
     }
     
     public struct Links: Codable {

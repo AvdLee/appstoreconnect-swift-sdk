@@ -36,7 +36,7 @@ public struct BetaLicenseAgreement: Codable {
     public let relationships: BetaLicenseAgreement.Relationships?
 
     /// The resource type.Value: betaLicenseAgreements
-    public let type: String = "betaLicenseAgreements"
+    public private(set) var type: String = "betaLicenseAgreements"
 
 }
 
@@ -62,7 +62,7 @@ extension BetaLicenseAgreement.Relationships.App {
         public let `id`: String
     
         /// The resource type.Value: apps
-        public let type: String = "apps"
+        public private(set) var type: String = "apps"
     }
     
     public struct Links: Codable {

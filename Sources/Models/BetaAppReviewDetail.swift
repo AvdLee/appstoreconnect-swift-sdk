@@ -57,7 +57,7 @@ public struct BetaAppReviewDetail: Codable {
     public let relationships: BetaAppReviewDetail.Relationships?
 
     /// The resource type.Value: betaAppReviewDetails
-    public let type: String = "betaAppReviewDetails"
+    public private(set) var type: String = "betaAppReviewDetails"
 }
 
 // MARK: BetaAppReviewDetail.Relationships
@@ -82,7 +82,7 @@ extension BetaAppReviewDetail.Relationships.App {
         public let `id`: String
     
         /// The resource type.Value: apps
-        public let type: String = "apps"
+        public private(set) var type: String = "apps"
     }
     
     public struct Links: Codable {

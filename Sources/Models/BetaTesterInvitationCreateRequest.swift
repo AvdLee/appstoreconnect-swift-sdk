@@ -16,7 +16,7 @@ public struct BetaTesterInvitationCreateRequest: Codable {
         public let relationships: BetaTesterInvitationCreateRequest.Data.Relationships
     
         /// The resource type.Value: betaTesterInvitations
-        public let type: String = "betaTesterInvitations"
+        public private(set) var type: String = "betaTesterInvitations"
     }
     
     /// The resource data.
@@ -71,7 +71,7 @@ extension BetaTesterInvitationCreateRequest.Data.Relationships.App {
         public let `id`: String
     
         /// The resource type.Value: apps
-        public let type: String = "apps"
+        public private(set) var type: String = "apps"
     }
 }
 
@@ -84,6 +84,6 @@ extension BetaTesterInvitationCreateRequest.Data.Relationships.BetaTester {
         public let `id`: String
     
         /// The resource type.Value: betaTesters
-        public let type: String = "betaTesters"
+        public private(set) var type: String = "betaTesters"
     }
 }

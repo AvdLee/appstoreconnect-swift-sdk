@@ -42,7 +42,7 @@ public struct PrereleaseVersion: Codable {
     public let relationships: PrereleaseVersion.Relationships?
 
     /// The resource type.Value: preReleaseVersions
-    public let type: String = "preReleaseVersions"
+    public private(set) var type: String = "preReleaseVersions"
 }
 
 // MARK: PrereleaseVersion.Relationships
@@ -79,7 +79,7 @@ extension PrereleaseVersion.Relationships.App {
         public let `id`: String
     
         /// The resource type.Value: apps
-        public let type: String = "apps"
+        public private(set) var type: String = "apps"
     }
     
     public struct Links: Codable {
@@ -101,7 +101,7 @@ extension PrereleaseVersion.Relationships.Builds {
         public let `id`: String
     
         /// The resource type.Value: builds
-        public let type: String = "builds"
+        public private(set) var type: String = "builds"
     }
     
     public struct Links: Codable {

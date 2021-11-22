@@ -19,7 +19,7 @@ public struct DeviceUpdateRequest: Codable {
         public let `id`: String
 
         /// The resource type.Value: devices
-        public let type: String = "devices"
+        public private(set) var type: String = "devices"
     }
 
     /// The object types and IDs of the related resources.

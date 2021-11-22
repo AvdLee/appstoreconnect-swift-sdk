@@ -48,7 +48,7 @@ public struct AppInfo: Codable {
     public let relationships: AppInfo.Relationships?
     
     /// The resource type.Value: apps
-    public let type: String = "appInfos"
+    public private(set) var type: String = "appInfos"
     
 //    /// Navigational links that include the self-link.
     public let links: ResourceLinks<AppInfo>
@@ -76,7 +76,7 @@ extension AppInfo.Relationships.App {
         public let `id`: String
         
         /// The resource type.Value: appStoreVersions
-        public let type: String = "apps"
+        public private(set) var type: String = "apps"
     }
     
     public struct Links: Codable {

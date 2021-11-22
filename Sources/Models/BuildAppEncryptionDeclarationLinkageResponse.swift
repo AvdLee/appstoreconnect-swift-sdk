@@ -16,7 +16,7 @@ public struct BuildAppEncryptionDeclarationLinkageResponse: Codable {
         public let `id`: String
     
         /// The resource type.Value: appEncryptionDeclarations
-        public let type: String = "appEncryptionDeclarations"
+        public private(set) var type: String = "appEncryptionDeclarations"
     }
     
     /// The object types and IDs of the related resources.

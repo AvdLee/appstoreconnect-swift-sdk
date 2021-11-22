@@ -19,7 +19,7 @@ public struct BetaLicenseAgreementUpdateRequest: Codable {
         public let `id`: String
     
         /// The resource type.Value: betaLicenseAgreements
-        public let type: String = "betaLicenseAgreements"
+        public private(set) var type: String = "betaLicenseAgreements"
     }
     
     /// The resource data.

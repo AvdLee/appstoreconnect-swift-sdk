@@ -63,7 +63,7 @@ public struct App: Codable {
     public let relationships: App.Relationships?
 
     /// The resource type.Value: apps
-    public let type: String = "apps"
+    public private(set) var type: String = "apps"
 
     /// Navigational links that include the self-link.
     public let links: ResourceLinks<AppResponse>
@@ -172,7 +172,7 @@ extension App.Relationships.AppStoreVersion {
         public let `id`: String
         
         /// The resource type.Value: appStoreVersions
-        public let type: String = "appStoreVersions"
+        public private(set) var type: String = "appStoreVersions"
     }
     
     public struct Links: Codable {
@@ -194,7 +194,7 @@ extension App.Relationships.BetaAppLocalizations {
         public let `id`: String
     
         /// The resource type.Value: betaAppLocalizations
-        public let type: String = "betaAppLocalizations"
+        public private(set) var type: String = "betaAppLocalizations"
     }
     
     public struct Links: Codable {
@@ -216,7 +216,7 @@ extension App.Relationships.BetaAppReviewDetail {
         public let `id`: String
     
         /// The resource type.Value: betaAppReviewDetails
-        public let type: String = "betaAppReviewDetails"
+        public private(set) var type: String = "betaAppReviewDetails"
     }
     
     public struct Links: Codable {
@@ -238,7 +238,7 @@ extension App.Relationships.BetaGroups {
         public let `id`: String
     
         /// The resource type.Value: betaGroups
-        public let type: String = "betaGroups"
+        public private(set) var type: String = "betaGroups"
     }
     
     public struct Links: Codable {
@@ -260,7 +260,7 @@ extension App.Relationships.BetaLicenseAgreement {
         public let `id`: String
     
         /// The resource type.Value: betaLicenseAgreements
-        public let type: String = "betaLicenseAgreements"
+        public private(set) var type: String = "betaLicenseAgreements"
     }
     
     public struct Links: Codable {
@@ -282,7 +282,7 @@ extension App.Relationships.BetaTesters {
         public let `id`: String
     
         /// The resource type.Value: betaTesters
-        public let type: String = "betaTesters"
+        public private(set) var type: String = "betaTesters"
     }
     
     public struct Links: Codable {
@@ -304,7 +304,7 @@ extension App.Relationships.Builds {
         public let `id`: String
     
         /// The resource type.Value: builds
-        public let type: String = "builds"
+        public private(set) var type: String = "builds"
     }
     
     public struct Links: Codable {
@@ -326,7 +326,7 @@ extension App.Relationships.PreReleaseVersions {
         public let `id`: String
     
         /// The resource type.Value: preReleaseVersions
-        public let type: String = "preReleaseVersions"
+        public private(set) var type: String = "preReleaseVersions"
     }
     
     public struct Links: Codable {

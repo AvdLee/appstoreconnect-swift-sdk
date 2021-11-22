@@ -16,7 +16,7 @@ public struct ProfileCertificatesResponse: Codable {
         public let `id`: String
 
         /// The resource type.Value: devices
-        public let type: String = "certificates"
+        public private(set) var type: String = "certificates"
     }
 
     /// The object types and IDs of the related resources.

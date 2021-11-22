@@ -16,7 +16,7 @@ public struct BuildBetaNotificationCreateRequest: Codable {
         public let relationships: BuildBetaNotificationCreateRequest.Data.Relationships
     
         /// The resource type.Value: buildBetaNotifications
-        public let type: String = "buildBetaNotifications"
+        public private(set) var type: String = "buildBetaNotifications"
     }
     
     /// The resource data.
@@ -59,6 +59,6 @@ extension BuildBetaNotificationCreateRequest.Data.Relationships.Build {
         public let `id`: String
     
         /// The types and IDs of the related data to update.Value: builds
-        public let type: String = "builds"
+        public private(set) var type: String = "builds"
     }
 }

@@ -16,7 +16,7 @@ public struct BetaTesterBetaGroupsLinkagesResponse: Codable {
         public let `id`: String
     
         /// The resource type.Value: betaGroups
-        public let type: String = "betaGroups"
+        public private(set) var type: String = "betaGroups"
     }
     
     /// The object types and IDs of the related resources.

@@ -48,7 +48,7 @@ public struct BetaTester: Codable {
     public let relationships: BetaTester.Relationships?
 
     /// The resource type.Value: betaTesters
-    public let type: String = "betaTesters"
+    public private(set) var type: String = "betaTesters"
 
     /// Navigational links that include the self-link.
     public let links: ResourceLinks<BetaTesterResponse>
@@ -103,7 +103,7 @@ extension BetaTester.Relationships.Apps {
         public let `id`: String
     
         /// string (Required)Value: apps
-        public let type: String = "apps"
+        public private(set) var type: String = "apps"
     }
     
     public struct Links: Codable {
@@ -125,7 +125,7 @@ extension BetaTester.Relationships.BetaGroups {
         public let `id`: String
     
         /// string (Required)Value: betaGroups
-        public let type: String = "betaGroups"
+        public private(set) var type: String = "betaGroups"
     }
     
     public struct Links: Codable {
@@ -147,7 +147,7 @@ extension BetaTester.Relationships.Builds {
         public let `id`: String
     
         /// string (Required)Value: builds
-        public let type: String = "builds"
+        public private(set) var type: String = "builds"
     }
     
     public struct Links: Codable {

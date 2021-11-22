@@ -19,7 +19,7 @@ public struct BetaAppLocalizationUpdateRequest: Codable {
         public let `id`: String
     
         /// The resource type.Value: betaAppLocalizations
-        public let type: String = "betaAppLocalizations"
+        public private(set) var type: String = "betaAppLocalizations"
     }
     
     /// The resource data.

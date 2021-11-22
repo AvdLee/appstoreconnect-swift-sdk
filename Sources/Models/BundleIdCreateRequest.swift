@@ -14,7 +14,7 @@ public struct BundleIdCreateRequest: Encodable {
         public let attributes: BundleIdCreateRequest.Data.Attributes?
 
         /// The resource type.
-        public let type: String = "bundleIds"
+        public private(set) var type: String = "bundleIds"
     }
     
     /// The resource data.

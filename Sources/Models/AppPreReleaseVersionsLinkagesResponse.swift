@@ -16,7 +16,7 @@ public struct AppPreReleaseVersionsLinkagesResponse: Codable {
         public let `id`: String
     
         /// The resource type.Value: preReleaseVersions
-        public let type: String = "preReleaseVersions"
+        public private(set) var type: String = "preReleaseVersions"
     }
     
     /// The object types and IDs of the related resources.

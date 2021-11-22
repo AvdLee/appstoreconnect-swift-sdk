@@ -48,7 +48,7 @@ public struct User: Codable {
     public let relationships: User.Relationships?
 
     /// The resource type.Value: users
-    public let type: String = "users"
+    public private(set) var type: String = "users"
 
     /// Navigational links that include the self-link.
     public let links: ResourceLinks<UserResponse>
@@ -79,7 +79,7 @@ extension User.Relationships.VisibleApps {
         public let `id`: String
     
         /// The resource type.Value: apps
-        public let type: String = "apps"
+        public private(set) var type: String = "apps"
     }
     
     public struct Links: Codable {

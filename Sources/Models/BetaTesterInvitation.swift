@@ -14,7 +14,7 @@ public struct BetaTesterInvitation: Codable {
     public let `id`: String
 
     /// The resource type.Value: betaTesterInvitations
-    public let type: String = "betaTesterInvitations"
+    public private(set) var type: String = "betaTesterInvitations"
 
     /// Navigational links that include the self-link.
     public let links: ResourceLinks<BetaTesterInvitationResponse>

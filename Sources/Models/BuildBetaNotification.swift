@@ -17,5 +17,5 @@ public struct BuildBetaNotification: Codable {
     public let links: ResourceLinks<BuildBetaNotificationResponse>
 
     /// The resource type.Value: buildBetaNotifications
-    public let type: String = "buildBetaNotifications"
+    public private(set) var type: String = "buildBetaNotifications"
 }

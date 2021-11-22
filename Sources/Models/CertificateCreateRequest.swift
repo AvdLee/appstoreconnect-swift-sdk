@@ -14,7 +14,7 @@ public struct CertificateCreateRequest: Encodable {
         public let attributes: CertificateCreateRequest.Data.Attributes?
 
         /// The resource type.
-        public let type: String = "certificates"
+        public private(set) var type: String = "certificates"
     }
     
     /// The resource data.
