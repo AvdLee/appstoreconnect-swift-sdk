@@ -7,7 +7,7 @@ let package = Package(
     name: "AppStoreConnect-Swift-SDK",
     platforms: [
         .iOS(.v11),
-        .macOS(.v10_12)
+        .macOS(.v10_15)
     ],
     products: [
         // dev .library(name: "DangerDeps", type: .dynamic, targets: ["DangerDependencies"]),
