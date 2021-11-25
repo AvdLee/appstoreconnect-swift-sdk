@@ -19,4 +19,5 @@ public enum UserRole: String, CaseIterable, Codable {
     case appManager = "APP_MANAGER"
     case accessToReports = "ACCESS_TO_REPORTS"
     case customerSupport = "CUSTOMER_SUPPORT"
+    case cloudManagedAppDistribution = "CLOUD_MANAGED_APP_DISTRIBUTION"
 }
