@@ -12,7 +12,7 @@ extension APIEndpoint where T == BuildBundleFileSizesResponse {
     /// Get all file sizes for a specific build bundle.
     ///
     /// - Parameters:
-    ///   - id: (Required) An opaque resource ID that uniquely identifies the resource.
+    ///   - id: An opaque resource ID that uniquely identifies the resource.
     public static func buildBundleFileSizes(
         ofBundleWithId id: String) -> APIEndpoint {
         return APIEndpoint(path: "buildBundles/\(id)/buildBundleFileSizes", method: .get)
