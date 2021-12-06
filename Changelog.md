@@ -1,3 +1,9 @@
+### 1.7.0
+- Add support for fetching bundle file sizes for build bundles ([#152](https://github.com/AvdLee/appstoreconnect-swift-sdk/pull/152)) via [@birwin93](https://github.com/birwin93)
+- Feat: Added CLOUD_MANAGED_APP_DISTRIBUTION in UserRole ([#153](https://github.com/AvdLee/appstoreconnect-swift-sdk/pull/153)) via [@valeriaalampi](https://github.com/valeriaalampi)
+- Fix CI by updating CI submodule reference ([#154](https://github.com/AvdLee/appstoreconnect-swift-sdk/pull/154)) via [@AvdLee](https://github.com/AvdLee)
+- Merge release 1.6.0 into master ([#146](https://github.com/AvdLee/appstoreconnect-swift-sdk/pull/146)) via [@SwiftLeeBot](https://github.com/SwiftLeeBot)
+
 ### 1.6.0
 - Add support for submitting an App Version for Review and CRUD for App Store Versions ([#145](https://github.com/AvdLee/appstoreconnect-swift-sdk/pull/145)) via [@scottlemke](https://github.com/scottlemke)
 - Merge release 1.5.0 into master ([#144](https://github.com/AvdLee/appstoreconnect-swift-sdk/pull/144)) via [@SwiftLeeBot](https://github.com/SwiftLeeBot)
