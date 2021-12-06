@@ -1,6 +1,5 @@
 // swift-tools-version:5.5
 // We're hiding dev, test, and danger dependencies with // dev to make sure they're not fetched by users of this package.
-
 import PackageDescription
 
 let package = Package(

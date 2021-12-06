@@ -436,7 +436,7 @@ final class ListBuildsTests: XCTestCase {
         XCTAssertEqual(request?.httpMethod, "GET")
 
         let absoluteString = request?.url?.absoluteString
-        let expected = "https://api.appstoreconnect.apple.com/v1/builds?include=app%2CappEncryptionDeclaration%2CappStoreVersion%2CbetaAppReviewSubmission%2CbetaBuildLocalizations%2CbuildBetaDetail%2Cicons%2CindividualTesters%2CpreReleaseVersion"
+        let expected = "https://api.appstoreconnect.apple.com/v1/builds?include=app%2CappEncryptionDeclaration%2CappStoreVersion%2CbetaAppReviewSubmission%2CbetaBuildLocalizations%2CbuildBetaDetail%2CbuildBundles%2Cicons%2CindividualTesters%2CpreReleaseVersion"
         XCTAssertEqual(absoluteString, expected)
     }
 
