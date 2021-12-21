@@ -18,12 +18,12 @@ public struct BuildBundles: Codable {
 
         // The type of the build bundle.
         public let bundleType: String
-		
-		// True if build bundle contains symbols
-		public let includesSymbols: Bool
-		
-		// URL to the dSYM if available
-		public let dSYMUrl: URL?
+
+        // True if build bundle contains symbols
+        public let includesSymbols: Bool
+
+        // URL to the dSYM if available
+        public let dSYMUrl: URL?
     }
 
     // The opaque resource ID that uniquely identifies a Build
