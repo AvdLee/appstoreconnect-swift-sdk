@@ -18,6 +18,9 @@ public struct BuildBundles: Codable {
 
         // The type of the build bundle.
         public let bundleType: String
+		
+		// URL to the dSYM if available
+		public let dSYMUrl: URL?
     }
 
     // The opaque resource ID that uniquely identifies a Build
