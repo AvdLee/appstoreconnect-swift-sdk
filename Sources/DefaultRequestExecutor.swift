@@ -5,6 +5,10 @@
 //  Created by Michael Schwarz on 04.02.19.
 //
 
+#if canImport(FoundationNetworking)
+import FoundationNetworking
+#endif
+
 import Foundation
 
 /// An URLSession based RequestExecutor implemention

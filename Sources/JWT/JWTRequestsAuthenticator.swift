@@ -5,6 +5,10 @@
 //  Created by Antoine van der Lee on 08/11/2018.
 //
 
+#if canImport(FoundationNetworking)
+import FoundationNetworking
+#endif
+
 import Foundation
 
 /// An Authenticator for URL Requests which makes use of the RequestAdapter from Alamofire.

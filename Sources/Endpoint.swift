@@ -5,6 +5,10 @@
 //  Created by Antoine van der Lee on 05/11/2018.
 //
 
+#if canImport(FoundationNetworking)
+import FoundationNetworking
+#endif
+
 import Foundation
 
 /// Defines all data needed to build the URL Request with.
