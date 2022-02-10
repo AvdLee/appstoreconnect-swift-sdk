@@ -15,13 +15,18 @@ let package = Package(
     dependencies: [
         // dev .package(name: "danger-swift", url: "https://github.com/danger/swift", from: "3.12.1"),
         // dev .package(name: "WeTransferPRLinter", path: "Submodules/WeTransfer-iOS-CI/WeTransferPRLinter")
+        .package(url: "https://github.com/apple/swift-crypto.git", "1.0.0" ..< "3.0.0"),
         ],
     targets: [
         // dev .target(name: "DangerDependencies", dependencies: [
         // dev     .product(name: "Danger", package: "danger-swift"),
         // dev     .product(name: "WeTransferPRLinter", package: "WeTransferPRLinter")
         // dev ], path: "Submodules/WeTransfer-iOS-CI/DangerFakeSources", sources: ["DangerFakeSource.swift"]),
-        // dev .testTarget(name: "AppStoreConnect-Swift-SDK-Tests", dependencies: ["AppStoreConnect-Swift-SDK"], path: "Tests", exclude: ["LinuxMain.swift"]),
-        .target(name: "AppStoreConnect-Swift-SDK", path: "Sources")
+        .target(name: "AppStoreConnect-Swift-SDK",
+                dependencies: [
+                    .product(name: "Crypto", package: "swift-crypto")
+                ],
+                path: "Sources")
+
     ]
 )

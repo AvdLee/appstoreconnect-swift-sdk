@@ -6,35 +6,12 @@
 //
 
 import Foundation
+import Crypto
 
 public typealias ECKeyData = Data
 
 extension ECKeyData {
     public func toPrivateKey() throws -> ECPrivateKey {
-        var error: Unmanaged<CFError>?
-
-        guard let privateKey =
-            SecKeyCreateWithData(self as CFData,
-                                 [kSecAttrKeyType: kSecAttrKeyTypeECSECPrimeRandom,
-                                  kSecAttrKeyClass: kSecAttrKeyClassPrivate,
-                                  kSecAttrKeySizeInBits: 256] as CFDictionary,
-                                 &error) else {
-                                    throw JWT.Error.privateKeyConversionFailed
-        }
-        return privateKey
-    }
-
-    public func toPublicKey() throws -> ECPrivateKey {
-        var error: Unmanaged<CFError>?
-
-        guard let publicKey =
-            SecKeyCreateWithData(self as CFData,
-                                 [kSecAttrKeyType: kSecAttrKeyTypeECSECPrimeRandom,
-                                  kSecAttrKeyClass: kSecAttrKeyClassPublic,
-                                  kSecAttrKeySizeInBits: 256] as CFDictionary,
-                                 &error) else {
-                                    throw JWT.Error.privateKeyConversionFailed
-        }
-        return publicKey
+        return try P256.Signing.PrivateKey(x963Representation: self)
     }
 }
