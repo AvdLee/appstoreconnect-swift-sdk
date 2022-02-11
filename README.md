@@ -15,7 +15,7 @@ The Swift SDK to work with the App Store Connect API from Apple.
 - [x] Add models for all endpoints
 - [x] JWT Logic to sign requests
 - [x] Get started section in the readme
-- [x] Support for Mac
+- [x] Support for Mac, Linux
 - [x] TestFlight API implementation
 - [x] Users and Roles implementation
 - [x] Sales and Finances implementation
@@ -67,6 +67,14 @@ provider.request(.apps()) { (result) in
     }
 }
 ```
+
+
+
+## Examples
+
+* A [web app](https://github.com/orjpap/appstoreconnect-register-devices) that registers devices to a provisioning profile built with Vapor
+
+
 
 ## Installation
 
