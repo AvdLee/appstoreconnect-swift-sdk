@@ -5,7 +5,7 @@ import PackageDescription
 let package = Package(
     name: "AppStoreConnect-Swift-SDK",
     platforms: [
-        .iOS(.v11),
+        .iOS(.v13),
         .macOS(.v10_15)
     ],
     products: [
