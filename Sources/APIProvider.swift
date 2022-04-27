@@ -174,8 +174,50 @@ public final class APIProvider {
     }
 }
 
-// MARK: - Private
+// MARK: - async/await
+extension APIProvider {
+    /// Performs a data request to the given API endpoint
+    ///
+    /// - Parameters:
+    ///   - endpoint: The API endpoint to request.
+    public func request(_ endpoint: APIEndpoint<Void>) async throws {
+        try await withCheckedThrowingContinuation { continuation in
+            request(endpoint, completion: continuation.resume(with:))
+        }
+    }
 
+    /// Performs a data request to the given API endpoint
+    ///
+    /// - Parameters:
+    ///   - endpoint: The API endpoint to request.
+    public func request<T>(_ endpoint: APIEndpoint<T>) async throws -> T where T: Decodable {
+        try await withCheckedThrowingContinuation { continuation in
+            request(endpoint, completion: continuation.resume(with:))
+        }
+    }
+
+    /// Performs a download request to the given API endpoint
+    ///
+    /// - Parameters:
+    ///   - endpoint: The API endpoint to request.
+    public func download<T>(_ endpoint: APIEndpoint<T>) async throws -> URL where T: Decodable {
+        try await withCheckedThrowingContinuation { continuation in
+            download(endpoint, completion: continuation.resume(with:))
+        }
+    }
+
+    /// Performs a data request to the given ResourceLinks
+    ///
+    /// - Parameters:
+    ///   - resourceLinks: The resourceLinks to request.
+    public func request<T>(_ resourceLinks: ResourceLinks<T>) async throws -> T where T: Decodable {
+        try await withCheckedThrowingContinuation { continuation in
+            request(resourceLinks, completion: continuation.resume(with:))
+        }
+    }
+}
+
+// MARK: - Private
 private extension APIProvider {
 
     /// Maps a network response to a decodable type
