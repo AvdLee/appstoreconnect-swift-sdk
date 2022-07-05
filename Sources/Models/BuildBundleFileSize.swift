@@ -36,5 +36,5 @@ public struct BuildBundleFileSize: Codable {
     public let type: String = "buildBundleFileSizes"
 
     /// Navigational links that include the self-link.
-    public let links: ResourceLinks<BuildBundleFileSizesResponse>
+    public let links: ResourceLinks<BuildBundleFileSizesResponse>?
 }
