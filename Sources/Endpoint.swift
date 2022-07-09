@@ -7,98 +7,100 @@
 
 import Foundation
 
+//public enum APIEndpoint { }
+
 /// Defines all data needed to build the URL Request with.
-public struct APIEndpoint<T> {
-
-    /// The path to the endpoint.
-    let path: String
-
-    /// The HTTP Method to use for the request.
-    let method: HTTPMethod
-
-    /// The parameters to send with the request. Can be `nil`.
-    let parameters: [String: Any]?
-
-    /// The body to send with the request. Can be `nil`.
-    let body: Data?
-
-    init(path: String, method: HTTPMethod = .get, parameters: [String: Any]? = nil, body: Data? = nil) {
-        self.path = path
-        self.method = method
-        self.parameters = parameters
-        self.body = body
-    }
-}
+//public struct APIEndpoint<T> {
+//
+//    /// The path to the endpoint.
+//    let path: String
+//
+//    /// The HTTP Method to use for the request.
+//    let method: HTTPMethod
+//
+//    /// The parameters to send with the request. Can be `nil`.
+//    let parameters: [String: Any]?
+//
+//    /// The body to send with the request. Can be `nil`.
+//    let body: Data?
+//
+//    init(path: String, method: HTTPMethod = .get, parameters: [String: Any]? = nil, body: Data? = nil) {
+//        self.path = path
+//        self.method = method
+//        self.parameters = parameters
+//        self.body = body
+//    }
+//}
 
 // MARK: - URLRequestConvertible
 
-extension APIEndpoint {
-
-    /// Generates an URL based on the current endpoint in combination with the current API version.
-    internal var url: URL {
-        // swiftlint:disable:next force_unwrapping
-        return URL(string: "https://api.appstoreconnect.apple.com/v1/")!.appendingPathComponent(path)
-    }
-
-    /// Generates a request based on the current endpoint.
-    public func asURLRequest() throws -> URLRequest {
-        var urlRequest = URLRequest(url: url)
-        urlRequest.httpMethod = method.rawValue
-        urlRequest.encodeParameters(parameters)
-
-        if let body = body {
-            if urlRequest.value(forHTTPHeaderField: "Content-Type") == nil {
-                urlRequest.setValue("application/json", forHTTPHeaderField: "Content-Type")
-            }
-            urlRequest.httpBody = body
-        }
-        return urlRequest
-    }
-}
-
-// MARK: - Private
-
-private extension URLRequest {
-
-    mutating func encodeParameters(_ parameters: [String: Any]?) {
-        guard
-            let parameters = parameters, parameters.isEmpty == false,
-            let url = url else { return }
-
-        func encode(_ value: Any) -> String {
-            func percentEncode(_ string: String) -> String {
-                return string.addingPercentEncoding(withAllowedCharacters: .afURLQueryAllowed) ?? string
-            }
-            switch value {
-            case let intValue as Int:
-                return percentEncode(String(intValue))
-            case let stringValue as String:
-                return percentEncode(stringValue)
-            default:
-                fatalError("Could not encode \(value)")
-            }
-        }
-
-        func query(_ parameters: [String: Any]) -> String {
-            return parameters.sorted { $0.key < $1.key }.map { "\(encode($0))=\(encode($1))" }.joined(separator: "&")
-        }
-
-        if httpMethod == HTTPMethod.get.rawValue {
-            let newQueryToAppend = query(parameters)
-            var urlComponents = URLComponents(url: url, resolvingAgainstBaseURL: false)
-            let existingQuery = urlComponents?.percentEncodedQuery.map { $0 + "&" } ?? ""
-            urlComponents?.percentEncodedQuery = existingQuery + newQueryToAppend
-            self.url = urlComponents?.url
-        } else {
-            if value(forHTTPHeaderField: "Content-Type") == nil {
-                setValue("application/x-www-form-urlencoded; charset=utf-8", forHTTPHeaderField: "Content-Type")
-            }
-
-            httpBody = query(parameters).data(using: .utf8, allowLossyConversion: false)
-        }
-
-    }
-}
+//extension APIEndpoint {
+//
+//    /// Generates an URL based on the current endpoint in combination with the current API version.
+//    internal var url: URL {
+//        // swiftlint:disable:next force_unwrapping
+//        return URL(string: "https://api.appstoreconnect.apple.com/v1/")!.appendingPathComponent(path)
+//    }
+//
+//    /// Generates a request based on the current endpoint.
+//    public func asURLRequest() throws -> URLRequest {
+//        var urlRequest = URLRequest(url: url)
+//        urlRequest.httpMethod = method.rawValue
+//        urlRequest.encodeParameters(parameters)
+//
+//        if let body = body {
+//            if urlRequest.value(forHTTPHeaderField: "Content-Type") == nil {
+//                urlRequest.setValue("application/json", forHTTPHeaderField: "Content-Type")
+//            }
+//            urlRequest.httpBody = body
+//        }
+//        return urlRequest
+//    }
+//}
+//
+//// MARK: - Private
+//
+//private extension URLRequest {
+//
+//    mutating func encodeParameters(_ parameters: [String: Any]?) {
+//        guard
+//            let parameters = parameters, parameters.isEmpty == false,
+//            let url = url else { return }
+//
+//        func encode(_ value: Any) -> String {
+//            func percentEncode(_ string: String) -> String {
+//                return string.addingPercentEncoding(withAllowedCharacters: .afURLQueryAllowed) ?? string
+//            }
+//            switch value {
+//            case let intValue as Int:
+//                return percentEncode(String(intValue))
+//            case let stringValue as String:
+//                return percentEncode(stringValue)
+//            default:
+//                fatalError("Could not encode \(value)")
+//            }
+//        }
+//
+//        func query(_ parameters: [String: Any]) -> String {
+//            return parameters.sorted { $0.key < $1.key }.map { "\(encode($0))=\(encode($1))" }.joined(separator: "&")
+//        }
+//
+//        if httpMethod == HTTPMethod.get.rawValue {
+//            let newQueryToAppend = query(parameters)
+//            var urlComponents = URLComponents(url: url, resolvingAgainstBaseURL: false)
+//            let existingQuery = urlComponents?.percentEncodedQuery.map { $0 + "&" } ?? ""
+//            urlComponents?.percentEncodedQuery = existingQuery + newQueryToAppend
+//            self.url = urlComponents?.url
+//        } else {
+//            if value(forHTTPHeaderField: "Content-Type") == nil {
+//                setValue("application/x-www-form-urlencoded; charset=utf-8", forHTTPHeaderField: "Content-Type")
+//            }
+//
+//            httpBody = query(parameters).data(using: .utf8, allowLossyConversion: false)
+//        }
+//
+//    }
+//}
 
 /// URLQueryAllowed CharacterSet extracted from Alamofire
 /// https://github.com/Alamofire/Alamofire
