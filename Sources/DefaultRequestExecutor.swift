@@ -32,17 +32,6 @@ public final class DefaultRequestExecutor: RequestExecutor {
         }.resume()
     }
 
-    /// Retrieves a resource and delivers an async result
-    ///
-    /// - Parameters:
-    ///   - url: The URL where the resource is located
-    ///   - completion: A result type containing eiter the response or an error
-    public func retrieve(_ url: URL, completion: @escaping (Result<Response<Data>, Swift.Error>) -> Void) {
-        urlSession.dataTask(with: url) { data, response, error in
-            completion(mapResponse(data: data, urlResponse: response, error: error))
-        }.resume()
-    }
-
     /// Download report as file
     ///
     /// - Parameters:
@@ -53,7 +42,6 @@ public final class DefaultRequestExecutor: RequestExecutor {
             completion(mapResponse(fileUrl: fileUrl, urlResponse: response, error: error))
         }.resume()
     }
-
 }
 
 // MARK: - Private
@@ -73,7 +61,7 @@ func mapResponse(data: Data?, urlResponse: URLResponse?, error: Error?) -> Resul
             return .failure(DefaultRequestExecutor.Error.unknownResponseType)
         }
 
-        return .success(.init(statusCode: httpUrlResponse.statusCode, data: data))
+        return .success(.init(requestURL: httpUrlResponse.url, statusCode: httpUrlResponse.statusCode, data: data))
     }
 }
 
@@ -92,6 +80,6 @@ func mapResponse(fileUrl: URL?, urlResponse: URLResponse?, error: Error?) -> Res
             return .failure(DefaultRequestExecutor.Error.unknownResponseType)
         }
 
-        return .success(.init(statusCode: httpUrlResponse.statusCode, data: fileUrl))
+        return .success(.init(requestURL: httpUrlResponse.url, statusCode: httpUrlResponse.statusCode, data: fileUrl))
     }
 }

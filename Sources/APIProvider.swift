@@ -113,7 +113,8 @@ public final class APIProvider {
     /// Handles URLRequest execution
     private let requestExecutor: RequestExecutor
 
-    private let client: APIClient
+    /// The JSON encoder used to encode request parameters.
+    private let encoder: JSONEncoder
 
     /// Creates a new APIProvider instance which can be used to perform API Requests to the App Store Connect API.
     ///
@@ -121,19 +122,11 @@ public final class APIProvider {
     ///   - configuration: The configuration needed to set up the API Provider including all needed information for performing API requests.
     ///   - requestExecutor: An instance conforming to the RequestExecutor protocol for executing URLRequest
     public init(configuration: APIConfiguration, requestExecutor: RequestExecutor = DefaultRequestExecutor()) {
-        let requestAuthenticator = JWTRequestsAuthenticator(apiConfiguration: configuration)
-        client = APIClient(baseURL: URL(string: "https://api.appstoreconnect.apple.com")!) {
-            $0.delegate = requestAuthenticator
-        }
-
         self.configuration = configuration
         self.requestExecutor = requestExecutor
-        self.requestsAuthenticator = requestAuthenticator
-    }
-
-    public func request<Response: Decodable>(_ request: Request<Response>) async throws -> Response {
-        let response = try await client.send(request)
-        return response.value
+        self.requestsAuthenticator = JWTRequestsAuthenticator(apiConfiguration: configuration)
+        self.encoder = JSONEncoder()
+        self.encoder.dateEncodingStrategy = .iso8601
     }
 
     /// Performs a data request to the given API endpoint
@@ -141,52 +134,42 @@ public final class APIProvider {
     /// - Parameters:
     ///   - endpoint: The API endpoint to request.
     ///   - completion: The completion callback which will be called on completion containing the result.
-//    public func request(_ endpoint: APIEndpoint<Void>, completion: @escaping RequestCompletionHandler<Void>) {
-//        guard let request = try? requestsAuthenticator.adapt(endpoint.asURLRequest()) else {
-//            completion(.failure(Error.requestGeneration))
-//            return
-//        }
-//
-//        requestExecutor.execute(request) { completion(self.mapVoidResponse($0)) }
-//    }
+    public func request(_ request: Request<Void>, completion: @escaping RequestCompletionHandler<Void>) {
+        guard let request = try? requestsAuthenticator.adapt(request.asURLRequest(encoder: encoder)) else {
+            completion(.failure(Error.requestGeneration))
+            return
+        }
+
+        requestExecutor.execute(request) { completion(self.mapVoidResponse($0)) }
+    }
 
     /// Performs a data request to the given API endpoint
     ///
     /// - Parameters:
     ///   - endpoint: The API endpoint to request.
     ///   - completion: The completion callback which will be called on completion containing the result.
-//    public func request<T: Decodable>(_ endpoint: APIEndpoint<T>, completion: @escaping RequestCompletionHandler<T>) {
-//        guard let request = try? requestsAuthenticator.adapt(endpoint.asURLRequest()) else {
-//            completion(.failure(Error.requestGeneration))
-//            return
-//        }
-//
-//        requestExecutor.execute(request) { completion(self.mapResponse($0)) }
-//    }
+    public func request<T: Decodable>(_ request: Request<T>, completion: @escaping RequestCompletionHandler<T>) {
+        guard let request = try? requestsAuthenticator.adapt(request.asURLRequest(encoder: encoder)) else {
+            completion(.failure(Error.requestGeneration))
+            return
+        }
+
+        requestExecutor.execute(request) { completion(self.mapResponse($0)) }
+    }
 
     /// Performs a download request to the given API endpoint
     ///
     /// - Parameters:
     ///   - endpoint: The API endpoint to request.
     ///   - completion: The completion callback which will be called on completion containing the result.
-//    public func download<T: Decodable>(_ endpoint: APIEndpoint<T>, completion: @escaping RequestCompletionHandler<URL>) {
-//        guard let request = try? requestsAuthenticator.adapt(endpoint.asURLRequest()) else {
-//            completion(.failure(Error.requestGeneration))
-//            return
-//        }
-//
-//        requestExecutor.download(request) { completion(self.mapResponse($0)) }
-//    }
+    public func download<T: Decodable>(_ request: Request<T>, completion: @escaping RequestCompletionHandler<URL>) {
+        guard let request = try? requestsAuthenticator.adapt(request.asURLRequest(encoder: encoder)) else {
+            completion(.failure(Error.requestGeneration))
+            return
+        }
 
-//    /// Performs a data request to the given ResourceLinks
-//    ///
-//    /// - Parameters:
-//    ///   - resourceLinks: The resourceLinks to request.
-//    ///   - completion: The completion callback which will be called on completion containing the result.
-//    public func request<T: Decodable>(_ resourceLinks: ResourceLinks<T>, completion: @escaping RequestCompletionHandler<T>) {
-//
-//        requestExecutor.retrieve(resourceLinks.`self`) { completion(self.mapResponse($0)) }
-//    }
+        requestExecutor.download(request) { completion(self.mapResponse($0)) }
+    }
 }
 
 // MARK: - async/await
@@ -195,41 +178,31 @@ extension APIProvider {
     ///
     /// - Parameters:
     ///   - endpoint: The API endpoint to request.
-//    public func request(_ endpoint: APIEndpoint<Void>) async throws {
-//        try await withCheckedThrowingContinuation { continuation in
-//            request(endpoint, completion: continuation.resume(with:))
-//        }
-//    }
+    public func request(_ endpoint: Request<Void>) async throws {
+        try await withCheckedThrowingContinuation { continuation in
+            request(endpoint, completion: continuation.resume(with:))
+        }
+    }
 
     /// Performs a data request to the given API endpoint
     ///
     /// - Parameters:
     ///   - endpoint: The API endpoint to request.
-//    public func request<T>(_ endpoint: APIEndpoint<T>) async throws -> T where T: Decodable {
-//        try await withCheckedThrowingContinuation { continuation in
-//            request(endpoint, completion: continuation.resume(with:))
-//        }
-//    }
+    public func request<T>(_ endpoint: Request<T>) async throws -> T where T: Decodable {
+        try await withCheckedThrowingContinuation { continuation in
+            request(endpoint, completion: continuation.resume(with:))
+        }
+    }
 
     /// Performs a download request to the given API endpoint
     ///
     /// - Parameters:
     ///   - endpoint: The API endpoint to request.
-//    public func download<T>(_ endpoint: APIEndpoint<T>) async throws -> URL where T: Decodable {
-//        try await withCheckedThrowingContinuation { continuation in
-//            download(endpoint, completion: continuation.resume(with:))
-//        }
-//    }
-
-    /// Performs a data request to the given ResourceLinks
-    ///
-    /// - Parameters:
-    ///   - resourceLinks: The resourceLinks to request.
-//    public func request<T>(_ resourceLinks: ResourceLinks<T>) async throws -> T where T: Decodable {
-//        try await withCheckedThrowingContinuation { continuation in
-//            request(resourceLinks, completion: continuation.resume(with:))
-//        }
-//    }
+    public func download<T>(_ endpoint: Request<T>) async throws -> URL where T: Decodable {
+        try await withCheckedThrowingContinuation { continuation in
+            download(endpoint, completion: continuation.resume(with:))
+        }
+    }
 }
 
 // MARK: - Private
@@ -239,62 +212,62 @@ private extension APIProvider {
     ///
     /// - Parameter result: A result type containing either the network response or an error
     /// - Returns: A result type containing either the decoded type or an error
-//    func mapResponse<T: Decodable>(_ result: Result<Response<Data>, Swift.Error>) -> Result<T, Swift.Error> {
-//        switch result {
-//        case .success(let response):
-//            guard let data = response.data, 200..<300 ~= response.statusCode else {
-//                return .failure(Error.requestFailure(response.statusCode, response.data))
-//            }
-//
-//            if let data = data as? T {
-//                return .success(data)
-//            }
-//
-//            do {
-//                let decodedValue = try Self.jsonDecoder.decode(T.self, from: data)
-//                return .success(decodedValue)
-//            } catch {
-//                return .failure(Error.decodingError(error, data))
-//            }
-//        case .failure(let error):
-//            return .failure(Error.requestExecutorError(error))
-//        }
-//    }
-//
-//    /// Maps a network response to a (void) result type
-//    ///
-//    /// - Parameter result: A result type containing either the network response or an error
-//    /// - Returns: A result type containing either void or an error
-//    func mapVoidResponse(_ result: Result<Response<Data>, Swift.Error>) -> Result<Void, Swift.Error> {
-//        switch result {
-//        case .success(let response):
-//            guard 200..<300 ~= response.statusCode else {
-//                return .failure(Error.requestFailure(response.statusCode, response.data))
-//            }
-//
-//            return .success(())
-//        case .failure(let error):
-//            return .failure(Error.requestExecutorError(error))
-//        }
-//    }
-//
-//    /// Maps a download response to a URL type
-//    ///
-//    /// - Parameter result: A result type containing either the network response or an error
-//    /// - Returns: A result type containing either the decoded type or an error
-//    func mapResponse(_ result: Result<Response<URL>, Swift.Error>) -> Result<URL, Swift.Error> {
-//        switch result {
-//        case .success(let response):
-//            guard 200..<300 ~= response.statusCode else {
-//                return .failure(Error.requestFailure(response.statusCode, nil))
-//            }
-//            if let data = response.data {
-//                return .success(data)
-//            }
-//            return .failure(Error.downloadError)
-//        case .failure(let error):
-//            return .failure(Error.requestExecutorError(error))
-//        }
-//    }
+    func mapResponse<T: Decodable>(_ result: Result<Response<Data>, Swift.Error>) -> Result<T, Swift.Error> {
+        switch result {
+        case .success(let response):
+            guard let data = response.data, 200..<300 ~= response.statusCode else {
+                return .failure(Error.requestFailure(response.statusCode, response.data, response.requestURL))
+            }
+
+            if let data = data as? T {
+                return .success(data)
+            }
+
+            do {
+                let decodedValue = try Self.jsonDecoder.decode(T.self, from: data)
+                return .success(decodedValue)
+            } catch {
+                return .failure(Error.decodingError(error, data))
+            }
+        case .failure(let error):
+            return .failure(Error.requestExecutorError(error))
+        }
+    }
+
+    /// Maps a network response to a (void) result type
+    ///
+    /// - Parameter result: A result type containing either the network response or an error
+    /// - Returns: A result type containing either void or an error
+    func mapVoidResponse(_ result: Result<Response<Data>, Swift.Error>) -> Result<Void, Swift.Error> {
+        switch result {
+        case .success(let response):
+            guard 200..<300 ~= response.statusCode else {
+                return .failure(Error.requestFailure(response.statusCode, response.data, response.requestURL))
+            }
+
+            return .success(())
+        case .failure(let error):
+            return .failure(Error.requestExecutorError(error))
+        }
+    }
+
+    /// Maps a download response to a URL type
+    ///
+    /// - Parameter result: A result type containing either the network response or an error
+    /// - Returns: A result type containing either the decoded type or an error
+    func mapResponse(_ result: Result<Response<URL>, Swift.Error>) -> Result<URL, Swift.Error> {
+        switch result {
+        case .success(let response):
+            guard 200..<300 ~= response.statusCode else {
+                return .failure(Error.requestFailure(response.statusCode, nil, response.requestURL))
+            }
+            if let data = response.data {
+                return .success(data)
+            }
+            return .failure(Error.downloadError)
+        case .failure(let error):
+            return .failure(Error.requestExecutorError(error))
+        }
+    }
 
 }

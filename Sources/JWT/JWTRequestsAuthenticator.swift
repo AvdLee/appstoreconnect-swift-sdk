@@ -6,7 +6,6 @@
 //
 
 import Foundation
-import Get
 
 /// An Authenticator for URL Requests which makes use of the RequestAdapter from Alamofire.
 final class JWTRequestsAuthenticator {
@@ -32,16 +31,11 @@ final class JWTRequestsAuthenticator {
         cachedToken = token
         return token
     }
-}
 
-extension JWTRequestsAuthenticator: APIClientDelegate {
-    func client(_ client: APIClient, willSendRequest request: inout URLRequest) async throws {
+    func adapt(_ urlRequest: URLRequest) throws -> URLRequest {
         let token = try createToken()
-        request.allHTTPHeaderFields = ["Authorization": "Bearer \(token)"]
-    }
-
-    func client(_ client: APIClient, didReceiveInvalidResponse response: HTTPURLResponse, data: Data) -> Error {
-
-        APIProvider.Error.requestFailure(response.statusCode, data, response.url)
+        var urlRequest = urlRequest
+        urlRequest.setValue("Bearer \(token)", forHTTPHeaderField: "Authorization")
+        return urlRequest
     }
 }
