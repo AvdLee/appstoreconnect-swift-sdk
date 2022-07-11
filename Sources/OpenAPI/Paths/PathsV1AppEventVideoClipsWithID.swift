@@ -4,7 +4,6 @@
 // swiftlint:disable all
 
 import Foundation
-import Get
 import URLQueryEncoder
 
 extension APIEndpoint.AppEventVideoClips {
