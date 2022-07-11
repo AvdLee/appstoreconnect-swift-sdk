@@ -6,7 +6,6 @@
 //
 
 import Foundation
-import Get
 
 public typealias RequestCompletionHandler<T> = (Result<T, Swift.Error>) -> Void
 
