@@ -13,8 +13,6 @@
 		848494CD287C8E5D008805C2 /* AppsListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 848494BB287C8E5C008805C2 /* AppsListView.swift */; };
 		848494CE287C8E5D008805C2 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 848494BC287C8E5D008805C2 /* Assets.xcassets */; };
 		848494CF287C8E5D008805C2 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 848494BC287C8E5D008805C2 /* Assets.xcassets */; };
-		848494D9287C8EB5008805C2 /* Keys.swift in Sources */ = {isa = PBXBuildFile; fileRef = 848494D8287C8EB5008805C2 /* Keys.swift */; };
-		848494DA287C8EB5008805C2 /* Keys.swift in Sources */ = {isa = PBXBuildFile; fileRef = 848494D8287C8EB5008805C2 /* Keys.swift */; };
 		848494DE287C8FAB008805C2 /* AppStoreConnect-Swift-SDK in Frameworks */ = {isa = PBXBuildFile; productRef = 848494DD287C8FAB008805C2 /* AppStoreConnect-Swift-SDK */; };
 		848494E0287C8FAE008805C2 /* AppStoreConnect-Swift-SDK in Frameworks */ = {isa = PBXBuildFile; productRef = 848494DF287C8FAE008805C2 /* AppStoreConnect-Swift-SDK */; };
 /* End PBXBuildFile section */
@@ -26,7 +24,6 @@
 		848494C1287C8E5D008805C2 /* AppStoreConnectAPIExample.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = AppStoreConnectAPIExample.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		848494C7287C8E5D008805C2 /* AppStoreConnectAPIExample.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = AppStoreConnectAPIExample.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		848494C9287C8E5D008805C2 /* macOS.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = macOS.entitlements; sourceTree = "<group>"; };
-		848494D8287C8EB5008805C2 /* Keys.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Keys.swift; path = ../../Secrets/Keys.swift; sourceTree = "<group>"; };
 		848494DB287C8EBE008805C2 /* appstoreconnect-swift-sdk */ = {isa = PBXFileReference; lastKnownFileType = wrapper; name = "appstoreconnect-swift-sdk"; path = ../..; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -53,7 +50,6 @@
 		848494B4287C8E5C008805C2 = {
 			isa = PBXGroup;
 			children = (
-				848494D8287C8EB5008805C2 /* Keys.swift */,
 				848494DB287C8EBE008805C2 /* appstoreconnect-swift-sdk */,
 				848494B9287C8E5C008805C2 /* Shared */,
 				848494C8287C8E5D008805C2 /* macOS */,
@@ -201,7 +197,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				848494CC287C8E5D008805C2 /* AppsListView.swift in Sources */,
-				848494D9287C8EB5008805C2 /* Keys.swift in Sources */,
 				848494CA287C8E5D008805C2 /* AppStoreConnectAPIExampleApp.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -211,7 +206,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				848494CD287C8E5D008805C2 /* AppsListView.swift in Sources */,
-				848494DA287C8EB5008805C2 /* Keys.swift in Sources */,
 				848494CB287C8E5D008805C2 /* AppStoreConnectAPIExampleApp.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

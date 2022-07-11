@@ -11,7 +11,7 @@ import SwiftUI
 struct AppStoreConnectAPIExampleApp: App {
     var body: some Scene {
         WindowGroup {
-            ContentView()
+            AppsListView()
         }
     }
 }
