@@ -16,7 +16,7 @@ paths:
   # Add operation id to each request
   isAddingOperationIds: false
   # The types to import, by default uses "Get" (https://github.com/CreateAPI/Get)
-  imports: ["Get"]
+  imports: []
   # Inline simple requests, like the ones with a single parameter 
   isInliningSimpleRequests: true
   # Inline simple parametesr with few arguments.
