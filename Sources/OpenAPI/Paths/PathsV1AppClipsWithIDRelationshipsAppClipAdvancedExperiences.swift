@@ -6,7 +6,7 @@
 import Foundation
 import URLQueryEncoder
 
-extension APIEndpoint.AppClips.WithID.Relationships {
+extension APIEndpoint.V1.AppClips.WithID.Relationships {
 	public var appClipAdvancedExperiences: AppClipAdvancedExperiences {
 		AppClipAdvancedExperiences(path: path + "/appClipAdvancedExperiences")
 	}

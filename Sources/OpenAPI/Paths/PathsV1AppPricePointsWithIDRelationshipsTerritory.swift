@@ -6,7 +6,7 @@
 import Foundation
 import URLQueryEncoder
 
-extension APIEndpoint.AppPricePoints.WithID.Relationships {
+extension APIEndpoint.V1.AppPricePoints.WithID.Relationships {
 	public var territory: Territory {
 		Territory(path: path + "/territory")
 	}

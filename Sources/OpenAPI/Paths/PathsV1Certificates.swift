@@ -6,9 +6,9 @@
 import Foundation
 import URLQueryEncoder
 
-extension APIEndpoint {
-	public static var certificates: Certificates {
-		Certificates(path: "/v1/certificates")
+extension APIEndpoint.V1 {
+	public var certificates: Certificates {
+		Certificates(path: path + "/certificates")
 	}
 
 	public struct Certificates {

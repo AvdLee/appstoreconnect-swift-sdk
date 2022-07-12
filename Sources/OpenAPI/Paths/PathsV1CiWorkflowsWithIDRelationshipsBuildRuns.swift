@@ -6,7 +6,7 @@
 import Foundation
 import URLQueryEncoder
 
-extension APIEndpoint.CiWorkflows.WithID.Relationships {
+extension APIEndpoint.V1.CiWorkflows.WithID.Relationships {
 	public var buildRuns: BuildRuns {
 		BuildRuns(path: path + "/buildRuns")
 	}

@@ -6,9 +6,9 @@
 import Foundation
 import URLQueryEncoder
 
-extension APIEndpoint {
-	public static var ciXcodeVersions: CiXcodeVersions {
-		CiXcodeVersions(path: "/v1/ciXcodeVersions")
+extension APIEndpoint.V1 {
+	public var ciXcodeVersions: CiXcodeVersions {
+		CiXcodeVersions(path: path + "/ciXcodeVersions")
 	}
 
 	public struct CiXcodeVersions {

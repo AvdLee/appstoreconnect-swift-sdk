@@ -6,7 +6,7 @@
 import Foundation
 import URLQueryEncoder
 
-extension APIEndpoint.AppStoreReviewDetails.WithID {
+extension APIEndpoint.V1.AppStoreReviewDetails.WithID {
 	public var appStoreReviewAttachments: AppStoreReviewAttachments {
 		AppStoreReviewAttachments(path: path + "/appStoreReviewAttachments")
 	}

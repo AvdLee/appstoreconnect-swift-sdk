@@ -6,9 +6,9 @@
 import Foundation
 import URLQueryEncoder
 
-extension APIEndpoint {
-	public static var scmGitReferences: ScmGitReferences {
-		ScmGitReferences(path: "/v1/scmGitReferences")
+extension APIEndpoint.V1 {
+	public var scmGitReferences: ScmGitReferences {
+		ScmGitReferences(path: path + "/scmGitReferences")
 	}
 
 	public struct ScmGitReferences {

@@ -6,9 +6,9 @@
 import Foundation
 import URLQueryEncoder
 
-extension APIEndpoint {
-	public static var appEvents: AppEvents {
-		AppEvents(path: "/v1/appEvents")
+extension APIEndpoint.V1 {
+	public var appEvents: AppEvents {
+		AppEvents(path: path + "/appEvents")
 	}
 
 	public struct AppEvents {

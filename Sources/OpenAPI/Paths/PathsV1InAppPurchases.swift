@@ -6,9 +6,9 @@
 import Foundation
 import URLQueryEncoder
 
-extension APIEndpoint {
-	public static var inAppPurchases: InAppPurchases {
-		InAppPurchases(path: "/v1/inAppPurchases")
+extension APIEndpoint.V1 {
+	public var inAppPurchases: InAppPurchases {
+		InAppPurchases(path: path + "/inAppPurchases")
 	}
 
 	public struct InAppPurchases {

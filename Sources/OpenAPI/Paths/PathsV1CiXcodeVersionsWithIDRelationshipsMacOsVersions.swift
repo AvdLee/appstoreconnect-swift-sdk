@@ -6,7 +6,7 @@
 import Foundation
 import URLQueryEncoder
 
-extension APIEndpoint.CiXcodeVersions.WithID.Relationships {
+extension APIEndpoint.V1.CiXcodeVersions.WithID.Relationships {
 	public var macOsVersions: MacOsVersions {
 		MacOsVersions(path: path + "/macOsVersions")
 	}

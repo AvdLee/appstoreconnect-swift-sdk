@@ -6,9 +6,9 @@
 import Foundation
 import URLQueryEncoder
 
-extension APIEndpoint {
-	public static var appPreviewSets: AppPreviewSets {
-		AppPreviewSets(path: "/v1/appPreviewSets")
+extension APIEndpoint.V1 {
+	public var appPreviewSets: AppPreviewSets {
+		AppPreviewSets(path: path + "/appPreviewSets")
 	}
 
 	public struct AppPreviewSets {

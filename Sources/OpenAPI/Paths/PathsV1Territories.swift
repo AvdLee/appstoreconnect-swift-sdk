@@ -6,9 +6,9 @@
 import Foundation
 import URLQueryEncoder
 
-extension APIEndpoint {
-	public static var territories: Territories {
-		Territories(path: "/v1/territories")
+extension APIEndpoint.V1 {
+	public var territories: Territories {
+		Territories(path: path + "/territories")
 	}
 
 	public struct Territories {

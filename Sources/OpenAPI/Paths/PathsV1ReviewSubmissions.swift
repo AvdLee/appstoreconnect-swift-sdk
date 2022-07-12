@@ -6,9 +6,9 @@
 import Foundation
 import URLQueryEncoder
 
-extension APIEndpoint {
-	public static var reviewSubmissions: ReviewSubmissions {
-		ReviewSubmissions(path: "/v1/reviewSubmissions")
+extension APIEndpoint.V1 {
+	public var reviewSubmissions: ReviewSubmissions {
+		ReviewSubmissions(path: path + "/reviewSubmissions")
 	}
 
 	public struct ReviewSubmissions {

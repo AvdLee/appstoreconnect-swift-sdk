@@ -6,7 +6,7 @@
 import Foundation
 import URLQueryEncoder
 
-extension APIEndpoint.AppStoreVersionExperimentTreatmentLocalizations {
+extension APIEndpoint.V1.AppStoreVersionExperimentTreatmentLocalizations {
 	public func id(_ id: String) -> WithID {
 		WithID(path: "\(path)/\(id)")
 	}

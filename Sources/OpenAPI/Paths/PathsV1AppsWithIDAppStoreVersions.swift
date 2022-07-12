@@ -6,7 +6,7 @@
 import Foundation
 import URLQueryEncoder
 
-extension APIEndpoint.Apps.WithID {
+extension APIEndpoint.V1.Apps.WithID {
 	public var appStoreVersions: AppStoreVersions {
 		AppStoreVersions(path: path + "/appStoreVersions")
 	}
@@ -29,7 +29,6 @@ extension APIEndpoint.Apps.WithID {
 			public var fieldsAppStoreVersionSubmissions: [FieldsAppStoreVersionSubmissions]?
 			public var fieldsAppStoreReviewDetails: [FieldsAppStoreReviewDetails]?
 			public var fieldsAppStoreVersions: [FieldsAppStoreVersions]?
-			public var fieldsIdfaDeclarations: [FieldsIdfaDeclarations]?
 			public var fieldsApps: [FieldsApps]?
 			public var fieldsRoutingAppCoverages: [FieldsRoutingAppCoverages]?
 			public var fieldsAppClipDefaultExperiences: [FieldsAppClipDefaultExperiences]?
@@ -131,22 +130,13 @@ extension APIEndpoint.Apps.WithID {
 				case build
 				case copyright
 				case createdDate
+				case customerReviews
 				case downloadable
 				case earliestReleaseDate
-				case idfaDeclaration
 				case platform
 				case releaseType
 				case routingAppCoverage
-				case usesIdfa
 				case versionString
-			}
-
-			public enum FieldsIdfaDeclarations: String, Codable, CaseIterable {
-				case appStoreVersion
-				case attributesActionWithPreviousAd
-				case attributesAppInstallationToPreviousAd
-				case honorsLimitedAdTracking
-				case servesAds
 			}
 
 			public enum FieldsApps: String, Codable, CaseIterable {
@@ -166,9 +156,11 @@ extension APIEndpoint.Apps.WithID {
 				case bundleID = "bundleId"
 				case ciProduct
 				case contentRightsDeclaration
+				case customerReviews
 				case endUserLicenseAgreement
 				case gameCenterEnabledVersions
 				case inAppPurchases
+				case inAppPurchasesV2
 				case isOrEverWasMadeForKids
 				case name
 				case perfPowerMetrics
@@ -177,8 +169,11 @@ extension APIEndpoint.Apps.WithID {
 				case pricePoints
 				case prices
 				case primaryLocale
+				case promotedPurchases
 				case reviewSubmissions
 				case sku
+				case subscriptionGracePeriod
+				case subscriptionGroups
 				case subscriptionStatusURL = "subscriptionStatusUrl"
 				case subscriptionStatusURLForSandbox = "subscriptionStatusUrlForSandbox"
 				case subscriptionStatusURLVersion = "subscriptionStatusUrlVersion"
@@ -262,11 +257,10 @@ extension APIEndpoint.Apps.WithID {
 				case appStoreVersionPhasedRelease
 				case appStoreVersionSubmission
 				case build
-				case idfaDeclaration
 				case routingAppCoverage
 			}
 
-			public init(filterAppStoreState: [FilterAppStoreState]? = nil, filterPlatform: [FilterPlatform]? = nil, filterVersionString: [String]? = nil, filterID: [String]? = nil, fieldsAppStoreVersionExperiments: [FieldsAppStoreVersionExperiments]? = nil, fieldsAgeRatingDeclarations: [FieldsAgeRatingDeclarations]? = nil, fieldsAppStoreVersionSubmissions: [FieldsAppStoreVersionSubmissions]? = nil, fieldsAppStoreReviewDetails: [FieldsAppStoreReviewDetails]? = nil, fieldsAppStoreVersions: [FieldsAppStoreVersions]? = nil, fieldsIdfaDeclarations: [FieldsIdfaDeclarations]? = nil, fieldsApps: [FieldsApps]? = nil, fieldsRoutingAppCoverages: [FieldsRoutingAppCoverages]? = nil, fieldsAppClipDefaultExperiences: [FieldsAppClipDefaultExperiences]? = nil, fieldsAppStoreVersionPhasedReleases: [FieldsAppStoreVersionPhasedReleases]? = nil, fieldsBuilds: [FieldsBuilds]? = nil, fieldsAppStoreVersionLocalizations: [FieldsAppStoreVersionLocalizations]? = nil, limit: Int? = nil, limitAppStoreVersionLocalizations: Int? = nil, limitAppStoreVersionExperiments: Int? = nil, include: [Include]? = nil) {
+			public init(filterAppStoreState: [FilterAppStoreState]? = nil, filterPlatform: [FilterPlatform]? = nil, filterVersionString: [String]? = nil, filterID: [String]? = nil, fieldsAppStoreVersionExperiments: [FieldsAppStoreVersionExperiments]? = nil, fieldsAgeRatingDeclarations: [FieldsAgeRatingDeclarations]? = nil, fieldsAppStoreVersionSubmissions: [FieldsAppStoreVersionSubmissions]? = nil, fieldsAppStoreReviewDetails: [FieldsAppStoreReviewDetails]? = nil, fieldsAppStoreVersions: [FieldsAppStoreVersions]? = nil, fieldsApps: [FieldsApps]? = nil, fieldsRoutingAppCoverages: [FieldsRoutingAppCoverages]? = nil, fieldsAppClipDefaultExperiences: [FieldsAppClipDefaultExperiences]? = nil, fieldsAppStoreVersionPhasedReleases: [FieldsAppStoreVersionPhasedReleases]? = nil, fieldsBuilds: [FieldsBuilds]? = nil, fieldsAppStoreVersionLocalizations: [FieldsAppStoreVersionLocalizations]? = nil, limit: Int? = nil, limitAppStoreVersionLocalizations: Int? = nil, limitAppStoreVersionExperiments: Int? = nil, include: [Include]? = nil) {
 				self.filterAppStoreState = filterAppStoreState
 				self.filterPlatform = filterPlatform
 				self.filterVersionString = filterVersionString
@@ -276,7 +270,6 @@ extension APIEndpoint.Apps.WithID {
 				self.fieldsAppStoreVersionSubmissions = fieldsAppStoreVersionSubmissions
 				self.fieldsAppStoreReviewDetails = fieldsAppStoreReviewDetails
 				self.fieldsAppStoreVersions = fieldsAppStoreVersions
-				self.fieldsIdfaDeclarations = fieldsIdfaDeclarations
 				self.fieldsApps = fieldsApps
 				self.fieldsRoutingAppCoverages = fieldsRoutingAppCoverages
 				self.fieldsAppClipDefaultExperiences = fieldsAppClipDefaultExperiences
@@ -300,7 +293,6 @@ extension APIEndpoint.Apps.WithID {
 				encoder.encode(fieldsAppStoreVersionSubmissions, forKey: "fields[appStoreVersionSubmissions]")
 				encoder.encode(fieldsAppStoreReviewDetails, forKey: "fields[appStoreReviewDetails]")
 				encoder.encode(fieldsAppStoreVersions, forKey: "fields[appStoreVersions]")
-				encoder.encode(fieldsIdfaDeclarations, forKey: "fields[idfaDeclarations]")
 				encoder.encode(fieldsApps, forKey: "fields[apps]")
 				encoder.encode(fieldsRoutingAppCoverages, forKey: "fields[routingAppCoverages]")
 				encoder.encode(fieldsAppClipDefaultExperiences, forKey: "fields[appClipDefaultExperiences]")

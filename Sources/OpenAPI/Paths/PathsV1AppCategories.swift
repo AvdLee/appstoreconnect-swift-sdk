@@ -6,9 +6,9 @@
 import Foundation
 import URLQueryEncoder
 
-extension APIEndpoint {
-	public static var appCategories: AppCategories {
-		AppCategories(path: "/v1/appCategories")
+extension APIEndpoint.V1 {
+	public var appCategories: AppCategories {
+		AppCategories(path: path + "/appCategories")
 	}
 
 	public struct AppCategories {
@@ -21,7 +21,7 @@ extension APIEndpoint {
 
 		public struct GetParameters {
 			public var filterPlatforms: [FilterPlatforms]?
-			public var existsParent: [String]?
+			public var isExistsParent: Bool?
 			public var fieldsAppCategories: [FieldsAppCategories]?
 			public var limit: Int?
 			public var include: [Include]?
@@ -44,9 +44,9 @@ extension APIEndpoint {
 				case subcategories
 			}
 
-			public init(filterPlatforms: [FilterPlatforms]? = nil, existsParent: [String]? = nil, fieldsAppCategories: [FieldsAppCategories]? = nil, limit: Int? = nil, include: [Include]? = nil, limitSubcategories: Int? = nil) {
+			public init(filterPlatforms: [FilterPlatforms]? = nil, isExistsParent: Bool? = nil, fieldsAppCategories: [FieldsAppCategories]? = nil, limit: Int? = nil, include: [Include]? = nil, limitSubcategories: Int? = nil) {
 				self.filterPlatforms = filterPlatforms
-				self.existsParent = existsParent
+				self.isExistsParent = isExistsParent
 				self.fieldsAppCategories = fieldsAppCategories
 				self.limit = limit
 				self.include = include
@@ -56,7 +56,7 @@ extension APIEndpoint {
 			public var asQuery: [(String, String?)] {
 				let encoder = URLQueryEncoder(explode: false)
 				encoder.encode(filterPlatforms, forKey: "filter[platforms]")
-				encoder.encode(existsParent, forKey: "exists[parent]")
+				encoder.encode(isExistsParent, forKey: "exists[parent]")
 				encoder.encode(fieldsAppCategories, forKey: "fields[appCategories]")
 				encoder.encode(limit, forKey: "limit")
 				encoder.encode(include, forKey: "include")

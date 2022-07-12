@@ -6,7 +6,7 @@
 import Foundation
 import URLQueryEncoder
 
-extension APIEndpoint.ReviewSubmissions.WithID.Relationships {
+extension APIEndpoint.V1.ReviewSubmissions.WithID.Relationships {
 	public var items: Items {
 		Items(path: path + "/items")
 	}

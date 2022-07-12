@@ -6,9 +6,9 @@
 import Foundation
 import URLQueryEncoder
 
-extension APIEndpoint {
-	public static var ciArtifacts: CiArtifacts {
-		CiArtifacts(path: "/v1/ciArtifacts")
+extension APIEndpoint.V1 {
+	public var ciArtifacts: CiArtifacts {
+		CiArtifacts(path: path + "/ciArtifacts")
 	}
 
 	public struct CiArtifacts {

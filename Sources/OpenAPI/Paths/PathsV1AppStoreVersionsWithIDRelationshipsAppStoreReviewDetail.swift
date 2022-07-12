@@ -6,7 +6,7 @@
 import Foundation
 import URLQueryEncoder
 
-extension APIEndpoint.AppStoreVersions.WithID.Relationships {
+extension APIEndpoint.V1.AppStoreVersions.WithID.Relationships {
 	public var appStoreReviewDetail: AppStoreReviewDetail {
 		AppStoreReviewDetail(path: path + "/appStoreReviewDetail")
 	}

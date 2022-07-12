@@ -6,7 +6,7 @@
 import Foundation
 import URLQueryEncoder
 
-extension APIEndpoint.AppClipDefaultExperiences.WithID {
+extension APIEndpoint.V1.AppClipDefaultExperiences.WithID {
 	public var appClipDefaultExperienceLocalizations: AppClipDefaultExperienceLocalizations {
 		AppClipDefaultExperienceLocalizations(path: path + "/appClipDefaultExperienceLocalizations")
 	}

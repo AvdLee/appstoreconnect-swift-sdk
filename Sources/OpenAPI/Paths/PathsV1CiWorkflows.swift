@@ -6,9 +6,9 @@
 import Foundation
 import URLQueryEncoder
 
-extension APIEndpoint {
-	public static var ciWorkflows: CiWorkflows {
-		CiWorkflows(path: "/v1/ciWorkflows")
+extension APIEndpoint.V1 {
+	public var ciWorkflows: CiWorkflows {
+		CiWorkflows(path: path + "/ciWorkflows")
 	}
 
 	public struct CiWorkflows {

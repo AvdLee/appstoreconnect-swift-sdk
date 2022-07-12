@@ -6,7 +6,7 @@
 import Foundation
 import URLQueryEncoder
 
-extension APIEndpoint.AppClipAppStoreReviewDetails {
+extension APIEndpoint.V1.AppClipAppStoreReviewDetails {
 	public func id(_ id: String) -> WithID {
 		WithID(path: "\(path)/\(id)")
 	}

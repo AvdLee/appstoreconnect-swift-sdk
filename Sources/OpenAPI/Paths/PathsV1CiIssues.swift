@@ -6,9 +6,9 @@
 import Foundation
 import URLQueryEncoder
 
-extension APIEndpoint {
-	public static var ciIssues: CiIssues {
-		CiIssues(path: "/v1/ciIssues")
+extension APIEndpoint.V1 {
+	public var ciIssues: CiIssues {
+		CiIssues(path: path + "/ciIssues")
 	}
 
 	public struct CiIssues {

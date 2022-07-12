@@ -6,9 +6,9 @@
 import Foundation
 import URLQueryEncoder
 
-extension APIEndpoint {
-	public static var ageRatingDeclarations: AgeRatingDeclarations {
-		AgeRatingDeclarations(path: "/v1/ageRatingDeclarations")
+extension APIEndpoint.V1 {
+	public var ageRatingDeclarations: AgeRatingDeclarations {
+		AgeRatingDeclarations(path: path + "/ageRatingDeclarations")
 	}
 
 	public struct AgeRatingDeclarations {

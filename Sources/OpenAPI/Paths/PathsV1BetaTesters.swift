@@ -6,9 +6,9 @@
 import Foundation
 import URLQueryEncoder
 
-extension APIEndpoint {
-	public static var betaTesters: BetaTesters {
-		BetaTesters(path: "/v1/betaTesters")
+extension APIEndpoint.V1 {
+	public var betaTesters: BetaTesters {
+		BetaTesters(path: path + "/betaTesters")
 	}
 
 	public struct BetaTesters {
@@ -88,9 +88,11 @@ extension APIEndpoint {
 				case bundleID = "bundleId"
 				case ciProduct
 				case contentRightsDeclaration
+				case customerReviews
 				case endUserLicenseAgreement
 				case gameCenterEnabledVersions
 				case inAppPurchases
+				case inAppPurchasesV2
 				case isOrEverWasMadeForKids
 				case name
 				case perfPowerMetrics
@@ -99,8 +101,11 @@ extension APIEndpoint {
 				case pricePoints
 				case prices
 				case primaryLocale
+				case promotedPurchases
 				case reviewSubmissions
 				case sku
+				case subscriptionGracePeriod
+				case subscriptionGroups
 				case subscriptionStatusURL = "subscriptionStatusUrl"
 				case subscriptionStatusURLForSandbox = "subscriptionStatusUrlForSandbox"
 				case subscriptionStatusURLVersion = "subscriptionStatusUrlVersion"

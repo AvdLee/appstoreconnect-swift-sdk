@@ -6,7 +6,7 @@
 import Foundation
 import URLQueryEncoder
 
-extension APIEndpoint.BundleIDs.WithID.Relationships {
+extension APIEndpoint.V1.BundleIDs.WithID.Relationships {
 	public var profiles: Profiles {
 		Profiles(path: path + "/profiles")
 	}

@@ -6,7 +6,7 @@
 import Foundation
 import URLQueryEncoder
 
-extension APIEndpoint.UserInvitations.WithID {
+extension APIEndpoint.V1.UserInvitations.WithID {
 	public var visibleApps: VisibleApps {
 		VisibleApps(path: path + "/visibleApps")
 	}
@@ -43,9 +43,11 @@ extension APIEndpoint.UserInvitations.WithID {
 			case bundleID = "bundleId"
 			case ciProduct
 			case contentRightsDeclaration
+			case customerReviews
 			case endUserLicenseAgreement
 			case gameCenterEnabledVersions
 			case inAppPurchases
+			case inAppPurchasesV2
 			case isOrEverWasMadeForKids
 			case name
 			case perfPowerMetrics
@@ -54,8 +56,11 @@ extension APIEndpoint.UserInvitations.WithID {
 			case pricePoints
 			case prices
 			case primaryLocale
+			case promotedPurchases
 			case reviewSubmissions
 			case sku
+			case subscriptionGracePeriod
+			case subscriptionGroups
 			case subscriptionStatusURL = "subscriptionStatusUrl"
 			case subscriptionStatusURLForSandbox = "subscriptionStatusUrlForSandbox"
 			case subscriptionStatusURLVersion = "subscriptionStatusUrlVersion"

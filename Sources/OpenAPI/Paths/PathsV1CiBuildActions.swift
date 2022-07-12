@@ -6,9 +6,9 @@
 import Foundation
 import URLQueryEncoder
 
-extension APIEndpoint {
-	public static var ciBuildActions: CiBuildActions {
-		CiBuildActions(path: "/v1/ciBuildActions")
+extension APIEndpoint.V1 {
+	public var ciBuildActions: CiBuildActions {
+		CiBuildActions(path: path + "/ciBuildActions")
 	}
 
 	public struct CiBuildActions {

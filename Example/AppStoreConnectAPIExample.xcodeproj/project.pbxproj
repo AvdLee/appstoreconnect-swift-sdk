@@ -18,13 +18,13 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		8412DA70287D5A3D00E211DF /* appstoreconnect-swift-sdk */ = {isa = PBXFileReference; lastKnownFileType = wrapper; name = "appstoreconnect-swift-sdk"; path = ..; sourceTree = "<group>"; };
 		848494BA287C8E5C008805C2 /* AppStoreConnectAPIExampleApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppStoreConnectAPIExampleApp.swift; sourceTree = "<group>"; };
 		848494BB287C8E5C008805C2 /* AppsListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppsListView.swift; sourceTree = "<group>"; };
 		848494BC287C8E5D008805C2 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		848494C1287C8E5D008805C2 /* AppStoreConnectAPIExample.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = AppStoreConnectAPIExample.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		848494C7287C8E5D008805C2 /* AppStoreConnectAPIExample.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = AppStoreConnectAPIExample.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		848494C9287C8E5D008805C2 /* macOS.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = macOS.entitlements; sourceTree = "<group>"; };
-		848494DB287C8EBE008805C2 /* appstoreconnect-swift-sdk */ = {isa = PBXFileReference; lastKnownFileType = wrapper; name = "appstoreconnect-swift-sdk"; path = ../..; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -50,7 +50,7 @@
 		848494B4287C8E5C008805C2 = {
 			isa = PBXGroup;
 			children = (
-				848494DB287C8EBE008805C2 /* appstoreconnect-swift-sdk */,
+				8412DA70287D5A3D00E211DF /* appstoreconnect-swift-sdk */,
 				848494B9287C8E5C008805C2 /* Shared */,
 				848494C8287C8E5D008805C2 /* macOS */,
 				848494C2287C8E5D008805C2 /* Products */,

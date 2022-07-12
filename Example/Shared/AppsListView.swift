@@ -48,6 +48,7 @@ final class AppsListViewModel: ObservableObject {
     func loadApps() {
         Task.detached {
             let request = APIEndpoint
+                .v1
                 .apps
                 .get(parameters: .init(
                     sort: [.bundleID],

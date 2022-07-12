@@ -6,7 +6,7 @@
 import Foundation
 import URLQueryEncoder
 
-extension APIEndpoint.AppInfos.WithID {
+extension APIEndpoint.V1.AppInfos.WithID {
 	public var ageRatingDeclaration: AgeRatingDeclaration {
 		AgeRatingDeclaration(path: path + "/ageRatingDeclaration")
 	}

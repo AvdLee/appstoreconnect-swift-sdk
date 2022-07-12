@@ -6,9 +6,9 @@
 import Foundation
 import URLQueryEncoder
 
-extension APIEndpoint {
-	public static var gameCenterEnabledVersions: GameCenterEnabledVersions {
-		GameCenterEnabledVersions(path: "/v1/gameCenterEnabledVersions")
+extension APIEndpoint.V1 {
+	public var gameCenterEnabledVersions: GameCenterEnabledVersions {
+		GameCenterEnabledVersions(path: path + "/gameCenterEnabledVersions")
 	}
 
 	public struct GameCenterEnabledVersions {

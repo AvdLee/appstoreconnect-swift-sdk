@@ -6,7 +6,7 @@
 import Foundation
 import URLQueryEncoder
 
-extension APIEndpoint.AppClipDefaultExperiences.WithID.Relationships {
+extension APIEndpoint.V1.AppClipDefaultExperiences.WithID.Relationships {
 	public var releaseWithAppStoreVersion: ReleaseWithAppStoreVersion {
 		ReleaseWithAppStoreVersion(path: path + "/releaseWithAppStoreVersion")
 	}

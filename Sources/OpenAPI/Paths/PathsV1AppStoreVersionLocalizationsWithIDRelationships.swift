@@ -6,7 +6,7 @@
 import Foundation
 import URLQueryEncoder
 
-extension APIEndpoint.AppStoreVersionLocalizations.WithID {
+extension APIEndpoint.V1.AppStoreVersionLocalizations.WithID {
 	public var relationships: Relationships {
 		Relationships(path: path + "/relationships")
 	}

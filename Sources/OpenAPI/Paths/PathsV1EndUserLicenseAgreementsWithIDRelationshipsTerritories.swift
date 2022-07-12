@@ -6,7 +6,7 @@
 import Foundation
 import URLQueryEncoder
 
-extension APIEndpoint.EndUserLicenseAgreements.WithID.Relationships {
+extension APIEndpoint.V1.EndUserLicenseAgreements.WithID.Relationships {
 	public var territories: Territories {
 		Territories(path: path + "/territories")
 	}

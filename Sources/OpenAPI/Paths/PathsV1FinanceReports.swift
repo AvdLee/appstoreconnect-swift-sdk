@@ -6,9 +6,9 @@
 import Foundation
 import URLQueryEncoder
 
-extension APIEndpoint {
-	public static var financeReports: FinanceReports {
-		FinanceReports(path: "/v1/financeReports")
+extension APIEndpoint.V1 {
+	public var financeReports: FinanceReports {
+		FinanceReports(path: path + "/financeReports")
 	}
 
 	public struct FinanceReports {

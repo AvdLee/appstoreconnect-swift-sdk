@@ -6,7 +6,7 @@
 import Foundation
 import URLQueryEncoder
 
-extension APIEndpoint.AppEvents.WithID {
+extension APIEndpoint.V1.AppEvents.WithID {
 	public var localizations: Localizations {
 		Localizations(path: path + "/localizations")
 	}

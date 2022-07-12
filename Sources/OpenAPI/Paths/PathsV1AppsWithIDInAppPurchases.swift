@@ -6,7 +6,7 @@
 import Foundation
 import URLQueryEncoder
 
-extension APIEndpoint.Apps.WithID {
+extension APIEndpoint.V1.Apps.WithID {
 	public var inAppPurchases: InAppPurchases {
 		InAppPurchases(path: path + "/inAppPurchases")
 	}
@@ -15,6 +15,7 @@ extension APIEndpoint.Apps.WithID {
 		/// Path: `/v1/apps/{id}/inAppPurchases`
 		public let path: String
 
+		@available(*, deprecated, message: "Deprecated")
 		public func get(parameters: GetParameters? = nil) -> Request<AppStoreConnect_Swift_SDK.InAppPurchasesResponse> {
 			.get(path, query: parameters?.asQuery)
 		}
@@ -71,9 +72,11 @@ extension APIEndpoint.Apps.WithID {
 				case bundleID = "bundleId"
 				case ciProduct
 				case contentRightsDeclaration
+				case customerReviews
 				case endUserLicenseAgreement
 				case gameCenterEnabledVersions
 				case inAppPurchases
+				case inAppPurchasesV2
 				case isOrEverWasMadeForKids
 				case name
 				case perfPowerMetrics
@@ -82,8 +85,11 @@ extension APIEndpoint.Apps.WithID {
 				case pricePoints
 				case prices
 				case primaryLocale
+				case promotedPurchases
 				case reviewSubmissions
 				case sku
+				case subscriptionGracePeriod
+				case subscriptionGroups
 				case subscriptionStatusURL = "subscriptionStatusUrl"
 				case subscriptionStatusURLForSandbox = "subscriptionStatusUrlForSandbox"
 				case subscriptionStatusURLVersion = "subscriptionStatusUrlVersion"

@@ -6,9 +6,9 @@
 import Foundation
 import URLQueryEncoder
 
-extension APIEndpoint {
-	public static var appClipAdvancedExperienceImages: AppClipAdvancedExperienceImages {
-		AppClipAdvancedExperienceImages(path: "/v1/appClipAdvancedExperienceImages")
+extension APIEndpoint.V1 {
+	public var appClipAdvancedExperienceImages: AppClipAdvancedExperienceImages {
+		AppClipAdvancedExperienceImages(path: path + "/appClipAdvancedExperienceImages")
 	}
 
 	public struct AppClipAdvancedExperienceImages {

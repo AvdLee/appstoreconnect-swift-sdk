@@ -6,7 +6,7 @@
 import Foundation
 import URLQueryEncoder
 
-extension APIEndpoint.Apps.WithID {
+extension APIEndpoint.V1.Apps.WithID {
 	public var betaAppReviewDetail: BetaAppReviewDetail {
 		BetaAppReviewDetail(path: path + "/betaAppReviewDetail")
 	}

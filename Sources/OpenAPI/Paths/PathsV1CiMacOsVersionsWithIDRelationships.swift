@@ -6,7 +6,7 @@
 import Foundation
 import URLQueryEncoder
 
-extension APIEndpoint.CiMacOsVersions.WithID {
+extension APIEndpoint.V1.CiMacOsVersions.WithID {
 	public var relationships: Relationships {
 		Relationships(path: path + "/relationships")
 	}

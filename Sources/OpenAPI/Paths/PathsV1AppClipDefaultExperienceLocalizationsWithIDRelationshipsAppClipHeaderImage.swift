@@ -6,7 +6,7 @@
 import Foundation
 import URLQueryEncoder
 
-extension APIEndpoint.AppClipDefaultExperienceLocalizations.WithID.Relationships {
+extension APIEndpoint.V1.AppClipDefaultExperienceLocalizations.WithID.Relationships {
 	public var appClipHeaderImage: AppClipHeaderImage {
 		AppClipHeaderImage(path: path + "/appClipHeaderImage")
 	}

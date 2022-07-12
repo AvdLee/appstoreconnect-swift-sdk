@@ -6,7 +6,7 @@
 import Foundation
 import URLQueryEncoder
 
-extension APIEndpoint.CiWorkflows.WithID.Relationships {
+extension APIEndpoint.V1.CiWorkflows.WithID.Relationships {
 	public var repository: Repository {
 		Repository(path: path + "/repository")
 	}

@@ -6,9 +6,9 @@
 import Foundation
 import URLQueryEncoder
 
-extension APIEndpoint {
-	public static var buildBetaDetails: BuildBetaDetails {
-		BuildBetaDetails(path: "/v1/buildBetaDetails")
+extension APIEndpoint.V1 {
+	public var buildBetaDetails: BuildBetaDetails {
+		BuildBetaDetails(path: path + "/buildBetaDetails")
 	}
 
 	public struct BuildBetaDetails {

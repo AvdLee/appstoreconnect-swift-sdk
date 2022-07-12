@@ -6,7 +6,7 @@
 import Foundation
 import URLQueryEncoder
 
-extension APIEndpoint.Profiles.WithID {
+extension APIEndpoint.V1.Profiles.WithID {
 	public var devices: Devices {
 		Devices(path: path + "/devices")
 	}

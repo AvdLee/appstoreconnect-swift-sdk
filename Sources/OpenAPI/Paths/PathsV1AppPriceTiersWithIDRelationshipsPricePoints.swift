@@ -6,7 +6,7 @@
 import Foundation
 import URLQueryEncoder
 
-extension APIEndpoint.AppPriceTiers.WithID.Relationships {
+extension APIEndpoint.V1.AppPriceTiers.WithID.Relationships {
 	public var pricePoints: PricePoints {
 		PricePoints(path: path + "/pricePoints")
 	}

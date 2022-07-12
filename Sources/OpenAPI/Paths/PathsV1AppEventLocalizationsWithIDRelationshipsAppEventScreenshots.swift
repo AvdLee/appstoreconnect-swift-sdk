@@ -6,7 +6,7 @@
 import Foundation
 import URLQueryEncoder
 
-extension APIEndpoint.AppEventLocalizations.WithID.Relationships {
+extension APIEndpoint.V1.AppEventLocalizations.WithID.Relationships {
 	public var appEventScreenshots: AppEventScreenshots {
 		AppEventScreenshots(path: path + "/appEventScreenshots")
 	}

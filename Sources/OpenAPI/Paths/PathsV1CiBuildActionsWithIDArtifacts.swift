@@ -6,7 +6,7 @@
 import Foundation
 import URLQueryEncoder
 
-extension APIEndpoint.CiBuildActions.WithID {
+extension APIEndpoint.V1.CiBuildActions.WithID {
 	public var artifacts: Artifacts {
 		Artifacts(path: path + "/artifacts")
 	}

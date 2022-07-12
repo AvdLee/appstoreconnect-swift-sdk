@@ -6,9 +6,9 @@
 import Foundation
 import URLQueryEncoder
 
-extension APIEndpoint {
-	public static var scmRepositories: ScmRepositories {
-		ScmRepositories(path: "/v1/scmRepositories")
+extension APIEndpoint.V1 {
+	public var scmRepositories: ScmRepositories {
+		ScmRepositories(path: path + "/scmRepositories")
 	}
 
 	public struct ScmRepositories {

@@ -6,9 +6,9 @@
 import Foundation
 import URLQueryEncoder
 
-extension APIEndpoint {
-	public static var ciMacOsVersions: CiMacOsVersions {
-		CiMacOsVersions(path: "/v1/ciMacOsVersions")
+extension APIEndpoint.V1 {
+	public var ciMacOsVersions: CiMacOsVersions {
+		CiMacOsVersions(path: path + "/ciMacOsVersions")
 	}
 
 	public struct CiMacOsVersions {

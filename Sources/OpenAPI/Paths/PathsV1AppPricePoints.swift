@@ -6,9 +6,9 @@
 import Foundation
 import URLQueryEncoder
 
-extension APIEndpoint {
-	public static var appPricePoints: AppPricePoints {
-		AppPricePoints(path: "/v1/appPricePoints")
+extension APIEndpoint.V1 {
+	public var appPricePoints: AppPricePoints {
+		AppPricePoints(path: path + "/appPricePoints")
 	}
 
 	public struct AppPricePoints {

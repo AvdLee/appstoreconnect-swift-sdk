@@ -6,7 +6,7 @@
 import Foundation
 import URLQueryEncoder
 
-extension APIEndpoint.CiBuildRuns.WithID {
+extension APIEndpoint.V1.CiBuildRuns.WithID {
 	public var actions: Actions {
 		Actions(path: path + "/actions")
 	}

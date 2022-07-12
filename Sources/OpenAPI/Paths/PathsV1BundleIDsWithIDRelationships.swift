@@ -6,7 +6,7 @@
 import Foundation
 import URLQueryEncoder
 
-extension APIEndpoint.BundleIDs.WithID {
+extension APIEndpoint.V1.BundleIDs.WithID {
 	public var relationships: Relationships {
 		Relationships(path: path + "/relationships")
 	}

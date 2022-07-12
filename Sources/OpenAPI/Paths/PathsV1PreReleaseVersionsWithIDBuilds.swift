@@ -6,7 +6,7 @@
 import Foundation
 import URLQueryEncoder
 
-extension APIEndpoint.PreReleaseVersions.WithID {
+extension APIEndpoint.V1.PreReleaseVersions.WithID {
 	public var builds: Builds {
 		Builds(path: path + "/builds")
 	}

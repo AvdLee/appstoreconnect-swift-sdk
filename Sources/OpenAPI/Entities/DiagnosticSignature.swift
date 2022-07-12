@@ -22,6 +22,7 @@ public struct DiagnosticSignature: Codable {
 
 		public enum DiagnosticType: String, Codable, CaseIterable {
 			case diskWrites = "DISK_WRITES"
+			case hangs = "HANGS"
 		}
 
 		public init(diagnosticType: DiagnosticType? = nil, signature: String? = nil, weight: Double? = nil) {

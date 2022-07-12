@@ -27,7 +27,6 @@ paths:
   isRemovingRedundantPaths: true
   namespace: "APIEndpoint"
 
-
 comments:
   # Generate comments
   isEnabled: true
