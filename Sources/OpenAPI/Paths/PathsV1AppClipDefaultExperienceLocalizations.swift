@@ -6,9 +6,9 @@
 import Foundation
 import URLQueryEncoder
 
-extension APIEndpoint {
-	public static var appClipDefaultExperienceLocalizations: AppClipDefaultExperienceLocalizations {
-		AppClipDefaultExperienceLocalizations(path: "/v1/appClipDefaultExperienceLocalizations")
+extension APIEndpoint.V1 {
+	public var appClipDefaultExperienceLocalizations: AppClipDefaultExperienceLocalizations {
+		AppClipDefaultExperienceLocalizations(path: path + "/appClipDefaultExperienceLocalizations")
 	}
 
 	public struct AppClipDefaultExperienceLocalizations {

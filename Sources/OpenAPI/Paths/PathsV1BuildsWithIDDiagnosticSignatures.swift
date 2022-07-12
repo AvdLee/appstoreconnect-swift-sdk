@@ -6,7 +6,7 @@
 import Foundation
 import URLQueryEncoder
 
-extension APIEndpoint.Builds.WithID {
+extension APIEndpoint.V1.Builds.WithID {
 	public var diagnosticSignatures: DiagnosticSignatures {
 		DiagnosticSignatures(path: path + "/diagnosticSignatures")
 	}
@@ -26,6 +26,7 @@ extension APIEndpoint.Builds.WithID {
 
 			public enum FilterDiagnosticType: String, Codable, CaseIterable {
 				case diskWrites = "DISK_WRITES"
+				case hangs = "HANGS"
 			}
 
 			public enum FieldsDiagnosticSignatures: String, Codable, CaseIterable {

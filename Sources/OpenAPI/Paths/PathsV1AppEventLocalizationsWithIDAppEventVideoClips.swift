@@ -6,7 +6,7 @@
 import Foundation
 import URLQueryEncoder
 
-extension APIEndpoint.AppEventLocalizations.WithID {
+extension APIEndpoint.V1.AppEventLocalizations.WithID {
 	public var appEventVideoClips: AppEventVideoClips {
 		AppEventVideoClips(path: path + "/appEventVideoClips")
 	}

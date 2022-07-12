@@ -6,9 +6,9 @@
 import Foundation
 import URLQueryEncoder
 
-extension APIEndpoint {
-	public static var appEventVideoClips: AppEventVideoClips {
-		AppEventVideoClips(path: "/v1/appEventVideoClips")
+extension APIEndpoint.V1 {
+	public var appEventVideoClips: AppEventVideoClips {
+		AppEventVideoClips(path: path + "/appEventVideoClips")
 	}
 
 	public struct AppEventVideoClips {

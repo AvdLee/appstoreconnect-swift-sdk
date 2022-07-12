@@ -6,7 +6,7 @@
 import Foundation
 import URLQueryEncoder
 
-extension APIEndpoint.ScmRepositories {
+extension APIEndpoint.V1.ScmRepositories {
 	public func id(_ id: String) -> WithID {
 		WithID(path: "\(path)/\(id)")
 	}

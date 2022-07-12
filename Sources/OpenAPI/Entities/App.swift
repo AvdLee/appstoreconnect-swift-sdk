@@ -78,11 +78,16 @@ public struct App: Codable {
 		public var preOrder: PreOrder?
 		public var prices: Prices?
 		public var availableTerritories: AvailableTerritories?
+		/// - warning: Deprecated.
 		public var inAppPurchases: InAppPurchases?
+		public var subscriptionGroups: SubscriptionGroups?
 		public var gameCenterEnabledVersions: GameCenterEnabledVersions?
 		public var appCustomProductPages: AppCustomProductPages?
+		public var inAppPurchasesV2: InAppPurchasesV2?
+		public var promotedPurchases: PromotedPurchases?
 		public var appEvents: AppEvents?
 		public var reviewSubmissions: ReviewSubmissions?
+		public var subscriptionGracePeriod: SubscriptionGracePeriod?
 
 		public struct CiProduct: Codable {
 			public var links: Links?
@@ -648,6 +653,7 @@ public struct App: Codable {
 			}
 		}
 
+		@available(*, deprecated, message: "Deprecated")
 		public struct InAppPurchases: Codable {
 			public var links: Links?
 			public var meta: PagingInformation?
@@ -674,6 +680,47 @@ public struct App: Codable {
 
 				public enum `Type`: String, Codable, CaseIterable {
 					case inAppPurchases
+				}
+
+				public init(type: `Type`, id: String) {
+					self.type = type
+					self.id = id
+				}
+			}
+
+			public init(links: Links? = nil, meta: PagingInformation? = nil, data: [Datum]? = nil) {
+				self.links = links
+				self.meta = meta
+				self.data = data
+			}
+		}
+
+		public struct SubscriptionGroups: Codable {
+			public var links: Links?
+			public var meta: PagingInformation?
+			public var data: [Datum]?
+
+			public struct Links: Codable {
+				public var this: String?
+				public var related: String?
+
+				public init(this: String? = nil, related: String? = nil) {
+					self.this = this
+					self.related = related
+				}
+
+				private enum CodingKeys: String, CodingKey {
+					case this = "self"
+					case related
+				}
+			}
+
+			public struct Datum: Codable {
+				public var type: `Type`
+				public var id: String
+
+				public enum `Type`: String, Codable, CaseIterable {
+					case subscriptionGroups
 				}
 
 				public init(type: `Type`, id: String) {
@@ -771,6 +818,88 @@ public struct App: Codable {
 			}
 		}
 
+		public struct InAppPurchasesV2: Codable {
+			public var links: Links?
+			public var meta: PagingInformation?
+			public var data: [Datum]?
+
+			public struct Links: Codable {
+				public var this: String?
+				public var related: String?
+
+				public init(this: String? = nil, related: String? = nil) {
+					self.this = this
+					self.related = related
+				}
+
+				private enum CodingKeys: String, CodingKey {
+					case this = "self"
+					case related
+				}
+			}
+
+			public struct Datum: Codable {
+				public var type: `Type`
+				public var id: String
+
+				public enum `Type`: String, Codable, CaseIterable {
+					case inAppPurchases
+				}
+
+				public init(type: `Type`, id: String) {
+					self.type = type
+					self.id = id
+				}
+			}
+
+			public init(links: Links? = nil, meta: PagingInformation? = nil, data: [Datum]? = nil) {
+				self.links = links
+				self.meta = meta
+				self.data = data
+			}
+		}
+
+		public struct PromotedPurchases: Codable {
+			public var links: Links?
+			public var meta: PagingInformation?
+			public var data: [Datum]?
+
+			public struct Links: Codable {
+				public var this: String?
+				public var related: String?
+
+				public init(this: String? = nil, related: String? = nil) {
+					self.this = this
+					self.related = related
+				}
+
+				private enum CodingKeys: String, CodingKey {
+					case this = "self"
+					case related
+				}
+			}
+
+			public struct Datum: Codable {
+				public var type: `Type`
+				public var id: String
+
+				public enum `Type`: String, Codable, CaseIterable {
+					case promotedPurchases
+				}
+
+				public init(type: `Type`, id: String) {
+					self.type = type
+					self.id = id
+				}
+			}
+
+			public init(links: Links? = nil, meta: PagingInformation? = nil, data: [Datum]? = nil) {
+				self.links = links
+				self.meta = meta
+				self.data = data
+			}
+		}
+
 		public struct AppEvents: Codable {
 			public var links: Links?
 			public var meta: PagingInformation?
@@ -853,7 +982,46 @@ public struct App: Codable {
 			}
 		}
 
-		public init(ciProduct: CiProduct? = nil, betaGroups: BetaGroups? = nil, appStoreVersions: AppStoreVersions? = nil, preReleaseVersions: PreReleaseVersions? = nil, betaAppLocalizations: BetaAppLocalizations? = nil, builds: Builds? = nil, betaLicenseAgreement: BetaLicenseAgreement? = nil, betaAppReviewDetail: BetaAppReviewDetail? = nil, appInfos: AppInfos? = nil, appClips: AppClips? = nil, endUserLicenseAgreement: EndUserLicenseAgreement? = nil, preOrder: PreOrder? = nil, prices: Prices? = nil, availableTerritories: AvailableTerritories? = nil, inAppPurchases: InAppPurchases? = nil, gameCenterEnabledVersions: GameCenterEnabledVersions? = nil, appCustomProductPages: AppCustomProductPages? = nil, appEvents: AppEvents? = nil, reviewSubmissions: ReviewSubmissions? = nil) {
+		public struct SubscriptionGracePeriod: Codable {
+			public var links: Links?
+			public var data: Data?
+
+			public struct Links: Codable {
+				public var this: String?
+				public var related: String?
+
+				public init(this: String? = nil, related: String? = nil) {
+					self.this = this
+					self.related = related
+				}
+
+				private enum CodingKeys: String, CodingKey {
+					case this = "self"
+					case related
+				}
+			}
+
+			public struct Data: Codable {
+				public var type: `Type`
+				public var id: String
+
+				public enum `Type`: String, Codable, CaseIterable {
+					case subscriptionGracePeriods
+				}
+
+				public init(type: `Type`, id: String) {
+					self.type = type
+					self.id = id
+				}
+			}
+
+			public init(links: Links? = nil, data: Data? = nil) {
+				self.links = links
+				self.data = data
+			}
+		}
+
+		public init(ciProduct: CiProduct? = nil, betaGroups: BetaGroups? = nil, appStoreVersions: AppStoreVersions? = nil, preReleaseVersions: PreReleaseVersions? = nil, betaAppLocalizations: BetaAppLocalizations? = nil, builds: Builds? = nil, betaLicenseAgreement: BetaLicenseAgreement? = nil, betaAppReviewDetail: BetaAppReviewDetail? = nil, appInfos: AppInfos? = nil, appClips: AppClips? = nil, endUserLicenseAgreement: EndUserLicenseAgreement? = nil, preOrder: PreOrder? = nil, prices: Prices? = nil, availableTerritories: AvailableTerritories? = nil, inAppPurchases: InAppPurchases? = nil, subscriptionGroups: SubscriptionGroups? = nil, gameCenterEnabledVersions: GameCenterEnabledVersions? = nil, appCustomProductPages: AppCustomProductPages? = nil, inAppPurchasesV2: InAppPurchasesV2? = nil, promotedPurchases: PromotedPurchases? = nil, appEvents: AppEvents? = nil, reviewSubmissions: ReviewSubmissions? = nil, subscriptionGracePeriod: SubscriptionGracePeriod? = nil) {
 			self.ciProduct = ciProduct
 			self.betaGroups = betaGroups
 			self.appStoreVersions = appStoreVersions
@@ -869,10 +1037,14 @@ public struct App: Codable {
 			self.prices = prices
 			self.availableTerritories = availableTerritories
 			self.inAppPurchases = inAppPurchases
+			self.subscriptionGroups = subscriptionGroups
 			self.gameCenterEnabledVersions = gameCenterEnabledVersions
 			self.appCustomProductPages = appCustomProductPages
+			self.inAppPurchasesV2 = inAppPurchasesV2
+			self.promotedPurchases = promotedPurchases
 			self.appEvents = appEvents
 			self.reviewSubmissions = reviewSubmissions
+			self.subscriptionGracePeriod = subscriptionGracePeriod
 		}
 	}
 

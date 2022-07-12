@@ -6,7 +6,7 @@
 import Foundation
 import URLQueryEncoder
 
-extension APIEndpoint.DiagnosticSignatures.WithID {
+extension APIEndpoint.V1.DiagnosticSignatures.WithID {
 	public var logs: Logs {
 		Logs(path: path + "/logs")
 	}

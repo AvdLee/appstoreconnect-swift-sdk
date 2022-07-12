@@ -6,7 +6,7 @@
 import Foundation
 import URLQueryEncoder
 
-extension APIEndpoint.BuildBundles.WithID {
+extension APIEndpoint.V1.BuildBundles.WithID {
 	public var appClipDomainCacheStatus: AppClipDomainCacheStatus {
 		AppClipDomainCacheStatus(path: path + "/appClipDomainCacheStatus")
 	}

@@ -6,7 +6,7 @@
 import Foundation
 import URLQueryEncoder
 
-extension APIEndpoint.EndUserLicenseAgreements {
+extension APIEndpoint.V1.EndUserLicenseAgreements {
 	public func id(_ id: String) -> WithID {
 		WithID(path: "\(path)/\(id)")
 	}

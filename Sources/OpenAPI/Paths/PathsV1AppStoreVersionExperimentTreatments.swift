@@ -6,9 +6,9 @@
 import Foundation
 import URLQueryEncoder
 
-extension APIEndpoint {
-	public static var appStoreVersionExperimentTreatments: AppStoreVersionExperimentTreatments {
-		AppStoreVersionExperimentTreatments(path: "/v1/appStoreVersionExperimentTreatments")
+extension APIEndpoint.V1 {
+	public var appStoreVersionExperimentTreatments: AppStoreVersionExperimentTreatments {
+		AppStoreVersionExperimentTreatments(path: path + "/appStoreVersionExperimentTreatments")
 	}
 
 	public struct AppStoreVersionExperimentTreatments {

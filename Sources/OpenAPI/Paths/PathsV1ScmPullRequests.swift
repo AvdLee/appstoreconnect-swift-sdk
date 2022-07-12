@@ -6,9 +6,9 @@
 import Foundation
 import URLQueryEncoder
 
-extension APIEndpoint {
-	public static var scmPullRequests: ScmPullRequests {
-		ScmPullRequests(path: "/v1/scmPullRequests")
+extension APIEndpoint.V1 {
+	public var scmPullRequests: ScmPullRequests {
+		ScmPullRequests(path: path + "/scmPullRequests")
 	}
 
 	public struct ScmPullRequests {

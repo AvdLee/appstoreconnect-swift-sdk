@@ -6,9 +6,9 @@
 import Foundation
 import URLQueryEncoder
 
-extension APIEndpoint {
-	public static var appStoreVersionPromotions: AppStoreVersionPromotions {
-		AppStoreVersionPromotions(path: "/v1/appStoreVersionPromotions")
+extension APIEndpoint.V1 {
+	public var appStoreVersionPromotions: AppStoreVersionPromotions {
+		AppStoreVersionPromotions(path: path + "/appStoreVersionPromotions")
 	}
 
 	public struct AppStoreVersionPromotions {

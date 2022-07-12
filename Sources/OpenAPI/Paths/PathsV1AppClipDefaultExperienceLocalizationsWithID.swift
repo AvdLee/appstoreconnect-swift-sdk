@@ -6,7 +6,7 @@
 import Foundation
 import URLQueryEncoder
 
-extension APIEndpoint.AppClipDefaultExperienceLocalizations {
+extension APIEndpoint.V1.AppClipDefaultExperienceLocalizations {
 	public func id(_ id: String) -> WithID {
 		WithID(path: "\(path)/\(id)")
 	}

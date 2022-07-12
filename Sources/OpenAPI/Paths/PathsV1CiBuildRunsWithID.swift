@@ -6,7 +6,7 @@
 import Foundation
 import URLQueryEncoder
 
-extension APIEndpoint.CiBuildRuns {
+extension APIEndpoint.V1.CiBuildRuns {
 	public func id(_ id: String) -> WithID {
 		WithID(path: "\(path)/\(id)")
 	}

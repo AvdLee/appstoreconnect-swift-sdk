@@ -6,7 +6,7 @@
 import Foundation
 import URLQueryEncoder
 
-extension APIEndpoint.BetaBuildLocalizations.WithID.Relationships {
+extension APIEndpoint.V1.BetaBuildLocalizations.WithID.Relationships {
 	public var build: Build {
 		Build(path: path + "/build")
 	}

@@ -6,7 +6,7 @@
 import Foundation
 import URLQueryEncoder
 
-extension APIEndpoint.AppClipDefaultExperienceLocalizations.WithID {
+extension APIEndpoint.V1.AppClipDefaultExperienceLocalizations.WithID {
 	public var relationships: Relationships {
 		Relationships(path: path + "/relationships")
 	}

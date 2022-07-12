@@ -6,9 +6,9 @@
 import Foundation
 import URLQueryEncoder
 
-extension APIEndpoint {
-	public static var appStoreVersionSubmissions: AppStoreVersionSubmissions {
-		AppStoreVersionSubmissions(path: "/v1/appStoreVersionSubmissions")
+extension APIEndpoint.V1 {
+	public var appStoreVersionSubmissions: AppStoreVersionSubmissions {
+		AppStoreVersionSubmissions(path: path + "/appStoreVersionSubmissions")
 	}
 
 	public struct AppStoreVersionSubmissions {

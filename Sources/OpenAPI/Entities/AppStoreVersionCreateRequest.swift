@@ -23,8 +23,6 @@ public struct AppStoreVersionCreateRequest: Codable {
 			public var copyright: String?
 			public var releaseType: ReleaseType?
 			public var earliestReleaseDate: Date?
-			/// - warning: Deprecated.
-			public var usesIdfa: Bool?
 
 			public enum ReleaseType: String, Codable, CaseIterable {
 				case manual = "MANUAL"
@@ -32,13 +30,12 @@ public struct AppStoreVersionCreateRequest: Codable {
 				case scheduled = "SCHEDULED"
 			}
 
-			public init(platform: Platform, versionString: String, copyright: String? = nil, releaseType: ReleaseType? = nil, earliestReleaseDate: Date? = nil, usesIdfa: Bool? = nil) {
+			public init(platform: Platform, versionString: String, copyright: String? = nil, releaseType: ReleaseType? = nil, earliestReleaseDate: Date? = nil) {
 				self.platform = platform
 				self.versionString = versionString
 				self.copyright = copyright
 				self.releaseType = releaseType
 				self.earliestReleaseDate = earliestReleaseDate
-				self.usesIdfa = usesIdfa
 			}
 		}
 

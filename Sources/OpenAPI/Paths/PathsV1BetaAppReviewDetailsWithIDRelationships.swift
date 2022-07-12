@@ -6,7 +6,7 @@
 import Foundation
 import URLQueryEncoder
 
-extension APIEndpoint.BetaAppReviewDetails.WithID {
+extension APIEndpoint.V1.BetaAppReviewDetails.WithID {
 	public var relationships: Relationships {
 		Relationships(path: path + "/relationships")
 	}

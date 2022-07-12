@@ -6,9 +6,9 @@
 import Foundation
 import URLQueryEncoder
 
-extension APIEndpoint {
-	public static var endUserLicenseAgreements: EndUserLicenseAgreements {
-		EndUserLicenseAgreements(path: "/v1/endUserLicenseAgreements")
+extension APIEndpoint.V1 {
+	public var endUserLicenseAgreements: EndUserLicenseAgreements {
+		EndUserLicenseAgreements(path: path + "/endUserLicenseAgreements")
 	}
 
 	public struct EndUserLicenseAgreements {

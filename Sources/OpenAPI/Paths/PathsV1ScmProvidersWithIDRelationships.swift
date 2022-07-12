@@ -6,7 +6,7 @@
 import Foundation
 import URLQueryEncoder
 
-extension APIEndpoint.ScmProviders.WithID {
+extension APIEndpoint.V1.ScmProviders.WithID {
 	public var relationships: Relationships {
 		Relationships(path: path + "/relationships")
 	}

@@ -6,9 +6,9 @@
 import Foundation
 import URLQueryEncoder
 
-extension APIEndpoint {
-	public static var profiles: Profiles {
-		Profiles(path: "/v1/profiles")
+extension APIEndpoint.V1 {
+	public var profiles: Profiles {
+		Profiles(path: path + "/profiles")
 	}
 
 	public struct Profiles {

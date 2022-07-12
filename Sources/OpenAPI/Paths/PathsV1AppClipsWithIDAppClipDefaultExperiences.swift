@@ -6,7 +6,7 @@
 import Foundation
 import URLQueryEncoder
 
-extension APIEndpoint.AppClips.WithID {
+extension APIEndpoint.V1.AppClips.WithID {
 	public var appClipDefaultExperiences: AppClipDefaultExperiences {
 		AppClipDefaultExperiences(path: path + "/appClipDefaultExperiences")
 	}
@@ -20,7 +20,7 @@ extension APIEndpoint.AppClips.WithID {
 		}
 
 		public struct GetParameters {
-			public var existsReleaseWithAppStoreVersion: [String]?
+			public var isExistsReleaseWithAppStoreVersion: Bool?
 			public var fieldsAppClips: [FieldsAppClips]?
 			public var fieldsAppClipAppStoreReviewDetails: [FieldsAppClipAppStoreReviewDetails]?
 			public var fieldsAppStoreVersions: [FieldsAppStoreVersions]?
@@ -55,13 +55,12 @@ extension APIEndpoint.AppClips.WithID {
 				case build
 				case copyright
 				case createdDate
+				case customerReviews
 				case downloadable
 				case earliestReleaseDate
-				case idfaDeclaration
 				case platform
 				case releaseType
 				case routingAppCoverage
-				case usesIdfa
 				case versionString
 			}
 
@@ -88,8 +87,8 @@ extension APIEndpoint.AppClips.WithID {
 				case releaseWithAppStoreVersion
 			}
 
-			public init(existsReleaseWithAppStoreVersion: [String]? = nil, fieldsAppClips: [FieldsAppClips]? = nil, fieldsAppClipAppStoreReviewDetails: [FieldsAppClipAppStoreReviewDetails]? = nil, fieldsAppStoreVersions: [FieldsAppStoreVersions]? = nil, fieldsAppClipDefaultExperiences: [FieldsAppClipDefaultExperiences]? = nil, fieldsAppClipDefaultExperienceLocalizations: [FieldsAppClipDefaultExperienceLocalizations]? = nil, limit: Int? = nil, limitAppClipDefaultExperienceLocalizations: Int? = nil, include: [Include]? = nil) {
-				self.existsReleaseWithAppStoreVersion = existsReleaseWithAppStoreVersion
+			public init(isExistsReleaseWithAppStoreVersion: Bool? = nil, fieldsAppClips: [FieldsAppClips]? = nil, fieldsAppClipAppStoreReviewDetails: [FieldsAppClipAppStoreReviewDetails]? = nil, fieldsAppStoreVersions: [FieldsAppStoreVersions]? = nil, fieldsAppClipDefaultExperiences: [FieldsAppClipDefaultExperiences]? = nil, fieldsAppClipDefaultExperienceLocalizations: [FieldsAppClipDefaultExperienceLocalizations]? = nil, limit: Int? = nil, limitAppClipDefaultExperienceLocalizations: Int? = nil, include: [Include]? = nil) {
+				self.isExistsReleaseWithAppStoreVersion = isExistsReleaseWithAppStoreVersion
 				self.fieldsAppClips = fieldsAppClips
 				self.fieldsAppClipAppStoreReviewDetails = fieldsAppClipAppStoreReviewDetails
 				self.fieldsAppStoreVersions = fieldsAppStoreVersions
@@ -102,7 +101,7 @@ extension APIEndpoint.AppClips.WithID {
 
 			public var asQuery: [(String, String?)] {
 				let encoder = URLQueryEncoder(explode: false)
-				encoder.encode(existsReleaseWithAppStoreVersion, forKey: "exists[releaseWithAppStoreVersion]")
+				encoder.encode(isExistsReleaseWithAppStoreVersion, forKey: "exists[releaseWithAppStoreVersion]")
 				encoder.encode(fieldsAppClips, forKey: "fields[appClips]")
 				encoder.encode(fieldsAppClipAppStoreReviewDetails, forKey: "fields[appClipAppStoreReviewDetails]")
 				encoder.encode(fieldsAppStoreVersions, forKey: "fields[appStoreVersions]")

@@ -6,7 +6,7 @@
 import Foundation
 import URLQueryEncoder
 
-extension APIEndpoint.AppInfos.WithID {
+extension APIEndpoint.V1.AppInfos.WithID {
 	public var primaryCategory: PrimaryCategory {
 		PrimaryCategory(path: path + "/primaryCategory")
 	}

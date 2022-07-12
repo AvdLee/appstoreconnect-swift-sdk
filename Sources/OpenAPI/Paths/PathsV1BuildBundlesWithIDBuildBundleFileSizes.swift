@@ -6,7 +6,7 @@
 import Foundation
 import URLQueryEncoder
 
-extension APIEndpoint.BuildBundles.WithID {
+extension APIEndpoint.V1.BuildBundles.WithID {
 	public var buildBundleFileSizes: BuildBundleFileSizes {
 		BuildBundleFileSizes(path: path + "/buildBundleFileSizes")
 	}

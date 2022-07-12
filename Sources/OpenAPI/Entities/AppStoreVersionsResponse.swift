@@ -20,7 +20,6 @@ public struct AppStoreVersionsResponse: Codable {
 		case routingAppCoverage(RoutingAppCoverage)
 		case appStoreReviewDetail(AppStoreReviewDetail)
 		case appStoreVersionSubmission(AppStoreVersionSubmission)
-		case idfaDeclaration(IdfaDeclaration)
 		case appClipDefaultExperience(AppClipDefaultExperience)
 		case appStoreVersionExperiment(AppStoreVersionExperiment)
 
@@ -42,8 +41,6 @@ public struct AppStoreVersionsResponse: Codable {
 				self = .appStoreReviewDetail(value)
 			} else if let value = try? container.decode(AppStoreVersionSubmission.self) {
 				self = .appStoreVersionSubmission(value)
-			} else if let value = try? container.decode(IdfaDeclaration.self) {
-				self = .idfaDeclaration(value)
 			} else if let value = try? container.decode(AppClipDefaultExperience.self) {
 				self = .appClipDefaultExperience(value)
 			} else if let value = try? container.decode(AppStoreVersionExperiment.self) {
@@ -64,7 +61,6 @@ public struct AppStoreVersionsResponse: Codable {
 			case .routingAppCoverage(let value): try container.encode(value)
 			case .appStoreReviewDetail(let value): try container.encode(value)
 			case .appStoreVersionSubmission(let value): try container.encode(value)
-			case .idfaDeclaration(let value): try container.encode(value)
 			case .appClipDefaultExperience(let value): try container.encode(value)
 			case .appStoreVersionExperiment(let value): try container.encode(value)
 			}

@@ -6,9 +6,9 @@
 import Foundation
 import URLQueryEncoder
 
-extension APIEndpoint {
-	public static var betaTesterInvitations: BetaTesterInvitations {
-		BetaTesterInvitations(path: "/v1/betaTesterInvitations")
+extension APIEndpoint.V1 {
+	public var betaTesterInvitations: BetaTesterInvitations {
+		BetaTesterInvitations(path: path + "/betaTesterInvitations")
 	}
 
 	public struct BetaTesterInvitations {

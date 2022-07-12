@@ -6,7 +6,7 @@
 import Foundation
 import URLQueryEncoder
 
-extension APIEndpoint.CiXcodeVersions.WithID {
+extension APIEndpoint.V1.CiXcodeVersions.WithID {
 	public var relationships: Relationships {
 		Relationships(path: path + "/relationships")
 	}

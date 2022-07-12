@@ -6,9 +6,9 @@
 import Foundation
 import URLQueryEncoder
 
-extension APIEndpoint {
-	public static var appStoreReviewDetails: AppStoreReviewDetails {
-		AppStoreReviewDetails(path: "/v1/appStoreReviewDetails")
+extension APIEndpoint.V1 {
+	public var appStoreReviewDetails: AppStoreReviewDetails {
+		AppStoreReviewDetails(path: path + "/appStoreReviewDetails")
 	}
 
 	public struct AppStoreReviewDetails {

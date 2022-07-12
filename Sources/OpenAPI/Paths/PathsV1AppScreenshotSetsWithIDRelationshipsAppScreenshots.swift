@@ -6,7 +6,7 @@
 import Foundation
 import URLQueryEncoder
 
-extension APIEndpoint.AppScreenshotSets.WithID.Relationships {
+extension APIEndpoint.V1.AppScreenshotSets.WithID.Relationships {
 	public var appScreenshots: AppScreenshots {
 		AppScreenshots(path: path + "/appScreenshots")
 	}

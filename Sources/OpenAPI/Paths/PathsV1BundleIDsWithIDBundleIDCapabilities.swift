@@ -6,7 +6,7 @@
 import Foundation
 import URLQueryEncoder
 
-extension APIEndpoint.BundleIDs.WithID {
+extension APIEndpoint.V1.BundleIDs.WithID {
 	public var bundleIDCapabilities: BundleIDCapabilities {
 		BundleIDCapabilities(path: path + "/bundleIdCapabilities")
 	}

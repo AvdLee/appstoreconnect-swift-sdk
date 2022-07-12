@@ -6,9 +6,9 @@
 import Foundation
 import URLQueryEncoder
 
-extension APIEndpoint {
-	public static var betaAppClipInvocations: BetaAppClipInvocations {
-		BetaAppClipInvocations(path: "/v1/betaAppClipInvocations")
+extension APIEndpoint.V1 {
+	public var betaAppClipInvocations: BetaAppClipInvocations {
+		BetaAppClipInvocations(path: path + "/betaAppClipInvocations")
 	}
 
 	public struct BetaAppClipInvocations {

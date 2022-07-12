@@ -6,7 +6,7 @@
 import Foundation
 import URLQueryEncoder
 
-extension APIEndpoint.AppCustomProductPages.WithID.Relationships {
+extension APIEndpoint.V1.AppCustomProductPages.WithID.Relationships {
 	public var appCustomProductPageVersions: AppCustomProductPageVersions {
 		AppCustomProductPageVersions(path: path + "/appCustomProductPageVersions")
 	}

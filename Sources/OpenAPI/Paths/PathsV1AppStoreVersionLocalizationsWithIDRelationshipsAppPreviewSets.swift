@@ -6,7 +6,7 @@
 import Foundation
 import URLQueryEncoder
 
-extension APIEndpoint.AppStoreVersionLocalizations.WithID.Relationships {
+extension APIEndpoint.V1.AppStoreVersionLocalizations.WithID.Relationships {
 	public var appPreviewSets: AppPreviewSets {
 		AppPreviewSets(path: path + "/appPreviewSets")
 	}

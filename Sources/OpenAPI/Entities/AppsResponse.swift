@@ -27,10 +27,14 @@ public struct AppsResponse: Codable {
 		case appPrice(AppPrice)
 		case territory(Territory)
 		case inAppPurchase(InAppPurchase)
+		case subscriptionGroup(SubscriptionGroup)
 		case gameCenterEnabledVersion(GameCenterEnabledVersion)
 		case appCustomProductPage(AppCustomProductPage)
+		case inAppPurchaseV2(InAppPurchaseV2)
+		case promotedPurchase(PromotedPurchase)
 		case appEvent(AppEvent)
 		case reviewSubmission(ReviewSubmission)
+		case subscriptionGracePeriod(SubscriptionGracePeriod)
 
 		public init(from decoder: Decoder) throws {
 			let container = try decoder.singleValueContainer()
@@ -64,14 +68,22 @@ public struct AppsResponse: Codable {
 				self = .territory(value)
 			} else if let value = try? container.decode(InAppPurchase.self) {
 				self = .inAppPurchase(value)
+			} else if let value = try? container.decode(SubscriptionGroup.self) {
+				self = .subscriptionGroup(value)
 			} else if let value = try? container.decode(GameCenterEnabledVersion.self) {
 				self = .gameCenterEnabledVersion(value)
 			} else if let value = try? container.decode(AppCustomProductPage.self) {
 				self = .appCustomProductPage(value)
+			} else if let value = try? container.decode(InAppPurchaseV2.self) {
+				self = .inAppPurchaseV2(value)
+			} else if let value = try? container.decode(PromotedPurchase.self) {
+				self = .promotedPurchase(value)
 			} else if let value = try? container.decode(AppEvent.self) {
 				self = .appEvent(value)
 			} else if let value = try? container.decode(ReviewSubmission.self) {
 				self = .reviewSubmission(value)
+			} else if let value = try? container.decode(SubscriptionGracePeriod.self) {
+				self = .subscriptionGracePeriod(value)
 			} else {
 				throw DecodingError.dataCorruptedError(in: container, debugDescription: "Failed to intialize `oneOf`")
 			}
@@ -95,10 +107,14 @@ public struct AppsResponse: Codable {
 			case .appPrice(let value): try container.encode(value)
 			case .territory(let value): try container.encode(value)
 			case .inAppPurchase(let value): try container.encode(value)
+			case .subscriptionGroup(let value): try container.encode(value)
 			case .gameCenterEnabledVersion(let value): try container.encode(value)
 			case .appCustomProductPage(let value): try container.encode(value)
+			case .inAppPurchaseV2(let value): try container.encode(value)
+			case .promotedPurchase(let value): try container.encode(value)
 			case .appEvent(let value): try container.encode(value)
 			case .reviewSubmission(let value): try container.encode(value)
+			case .subscriptionGracePeriod(let value): try container.encode(value)
 			}
 		}
 	}

@@ -6,9 +6,9 @@
 import Foundation
 import URLQueryEncoder
 
-extension APIEndpoint {
-	public static var routingAppCoverages: RoutingAppCoverages {
-		RoutingAppCoverages(path: "/v1/routingAppCoverages")
+extension APIEndpoint.V1 {
+	public var routingAppCoverages: RoutingAppCoverages {
+		RoutingAppCoverages(path: path + "/routingAppCoverages")
 	}
 
 	public struct RoutingAppCoverages {

@@ -23,8 +23,6 @@ public struct AppStoreVersion: Codable {
 		public var copyright: String?
 		public var releaseType: ReleaseType?
 		public var earliestReleaseDate: Date?
-		/// - warning: Deprecated.
-		public var usesIdfa: Bool?
 		public var isDownloadable: Bool?
 		public var createdDate: Date?
 
@@ -34,14 +32,13 @@ public struct AppStoreVersion: Codable {
 			case scheduled = "SCHEDULED"
 		}
 
-		public init(platform: Platform? = nil, versionString: String? = nil, appStoreState: AppStoreVersionState? = nil, copyright: String? = nil, releaseType: ReleaseType? = nil, earliestReleaseDate: Date? = nil, usesIdfa: Bool? = nil, isDownloadable: Bool? = nil, createdDate: Date? = nil) {
+		public init(platform: Platform? = nil, versionString: String? = nil, appStoreState: AppStoreVersionState? = nil, copyright: String? = nil, releaseType: ReleaseType? = nil, earliestReleaseDate: Date? = nil, isDownloadable: Bool? = nil, createdDate: Date? = nil) {
 			self.platform = platform
 			self.versionString = versionString
 			self.appStoreState = appStoreState
 			self.copyright = copyright
 			self.releaseType = releaseType
 			self.earliestReleaseDate = earliestReleaseDate
-			self.usesIdfa = usesIdfa
 			self.isDownloadable = isDownloadable
 			self.createdDate = createdDate
 		}
@@ -53,7 +50,6 @@ public struct AppStoreVersion: Codable {
 			case copyright
 			case releaseType
 			case earliestReleaseDate
-			case usesIdfa
 			case isDownloadable = "downloadable"
 			case createdDate
 		}
@@ -69,7 +65,6 @@ public struct AppStoreVersion: Codable {
 		public var routingAppCoverage: RoutingAppCoverage?
 		public var appStoreReviewDetail: AppStoreReviewDetail?
 		public var appStoreVersionSubmission: AppStoreVersionSubmission?
-		public var idfaDeclaration: IdfaDeclaration?
 		public var appClipDefaultExperience: AppClipDefaultExperience?
 		public var appStoreVersionExperiments: AppStoreVersionExperiments?
 
@@ -388,45 +383,6 @@ public struct AppStoreVersion: Codable {
 			}
 		}
 
-		public struct IdfaDeclaration: Codable {
-			public var links: Links?
-			public var data: Data?
-
-			public struct Links: Codable {
-				public var this: String?
-				public var related: String?
-
-				public init(this: String? = nil, related: String? = nil) {
-					self.this = this
-					self.related = related
-				}
-
-				private enum CodingKeys: String, CodingKey {
-					case this = "self"
-					case related
-				}
-			}
-
-			public struct Data: Codable {
-				public var type: `Type`
-				public var id: String
-
-				public enum `Type`: String, Codable, CaseIterable {
-					case idfaDeclarations
-				}
-
-				public init(type: `Type`, id: String) {
-					self.type = type
-					self.id = id
-				}
-			}
-
-			public init(links: Links? = nil, data: Data? = nil) {
-				self.links = links
-				self.data = data
-			}
-		}
-
 		public struct AppClipDefaultExperience: Codable {
 			public var links: Links?
 			public var data: Data?
@@ -507,7 +463,7 @@ public struct AppStoreVersion: Codable {
 			}
 		}
 
-		public init(app: App? = nil, ageRatingDeclaration: AgeRatingDeclaration? = nil, appStoreVersionLocalizations: AppStoreVersionLocalizations? = nil, build: Build? = nil, appStoreVersionPhasedRelease: AppStoreVersionPhasedRelease? = nil, routingAppCoverage: RoutingAppCoverage? = nil, appStoreReviewDetail: AppStoreReviewDetail? = nil, appStoreVersionSubmission: AppStoreVersionSubmission? = nil, idfaDeclaration: IdfaDeclaration? = nil, appClipDefaultExperience: AppClipDefaultExperience? = nil, appStoreVersionExperiments: AppStoreVersionExperiments? = nil) {
+		public init(app: App? = nil, ageRatingDeclaration: AgeRatingDeclaration? = nil, appStoreVersionLocalizations: AppStoreVersionLocalizations? = nil, build: Build? = nil, appStoreVersionPhasedRelease: AppStoreVersionPhasedRelease? = nil, routingAppCoverage: RoutingAppCoverage? = nil, appStoreReviewDetail: AppStoreReviewDetail? = nil, appStoreVersionSubmission: AppStoreVersionSubmission? = nil, appClipDefaultExperience: AppClipDefaultExperience? = nil, appStoreVersionExperiments: AppStoreVersionExperiments? = nil) {
 			self.app = app
 			self.ageRatingDeclaration = ageRatingDeclaration
 			self.appStoreVersionLocalizations = appStoreVersionLocalizations
@@ -516,7 +472,6 @@ public struct AppStoreVersion: Codable {
 			self.routingAppCoverage = routingAppCoverage
 			self.appStoreReviewDetail = appStoreReviewDetail
 			self.appStoreVersionSubmission = appStoreVersionSubmission
-			self.idfaDeclaration = idfaDeclaration
 			self.appClipDefaultExperience = appClipDefaultExperience
 			self.appStoreVersionExperiments = appStoreVersionExperiments
 		}

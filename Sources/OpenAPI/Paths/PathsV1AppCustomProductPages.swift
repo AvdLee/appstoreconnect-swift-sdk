@@ -6,9 +6,9 @@
 import Foundation
 import URLQueryEncoder
 
-extension APIEndpoint {
-	public static var appCustomProductPages: AppCustomProductPages {
-		AppCustomProductPages(path: "/v1/appCustomProductPages")
+extension APIEndpoint.V1 {
+	public var appCustomProductPages: AppCustomProductPages {
+		AppCustomProductPages(path: path + "/appCustomProductPages")
 	}
 
 	public struct AppCustomProductPages {

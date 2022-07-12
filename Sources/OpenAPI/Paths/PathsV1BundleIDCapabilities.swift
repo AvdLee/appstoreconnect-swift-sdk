@@ -6,9 +6,9 @@
 import Foundation
 import URLQueryEncoder
 
-extension APIEndpoint {
-	public static var bundleIDCapabilities: BundleIDCapabilities {
-		BundleIDCapabilities(path: "/v1/bundleIdCapabilities")
+extension APIEndpoint.V1 {
+	public var bundleIDCapabilities: BundleIDCapabilities {
+		BundleIDCapabilities(path: path + "/bundleIdCapabilities")
 	}
 
 	public struct BundleIDCapabilities {

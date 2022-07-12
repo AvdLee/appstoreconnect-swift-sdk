@@ -6,7 +6,7 @@
 import Foundation
 import URLQueryEncoder
 
-extension APIEndpoint.AppStoreVersions {
+extension APIEndpoint.V1.AppStoreVersions {
 	public func id(_ id: String) -> WithID {
 		WithID(path: "\(path)/\(id)")
 	}
@@ -25,8 +25,8 @@ extension APIEndpoint.AppStoreVersions {
 			public var fieldsAppStoreVersionExperiments: [FieldsAppStoreVersionExperiments]?
 			public var fieldsAppStoreVersionSubmissions: [FieldsAppStoreVersionSubmissions]?
 			public var fieldsAgeRatingDeclarations: [FieldsAgeRatingDeclarations]?
+			public var fieldsCustomerReviews: [FieldsCustomerReviews]?
 			public var fieldsAppStoreReviewDetails: [FieldsAppStoreReviewDetails]?
-			public var fieldsIdfaDeclarations: [FieldsIdfaDeclarations]?
 			public var fieldsAppClipDefaultExperiences: [FieldsAppClipDefaultExperiences]?
 			public var fieldsRoutingAppCoverages: [FieldsRoutingAppCoverages]?
 			public var fieldsAppStoreVersionPhasedReleases: [FieldsAppStoreVersionPhasedReleases]?
@@ -48,13 +48,12 @@ extension APIEndpoint.AppStoreVersions {
 				case build
 				case copyright
 				case createdDate
+				case customerReviews
 				case downloadable
 				case earliestReleaseDate
-				case idfaDeclaration
 				case platform
 				case releaseType
 				case routingAppCoverage
-				case usesIdfa
 				case versionString
 			}
 
@@ -68,7 +67,6 @@ extension APIEndpoint.AppStoreVersions {
 				case appStoreVersionPhasedRelease
 				case appStoreVersionSubmission
 				case build
-				case idfaDeclaration
 				case routingAppCoverage
 			}
 
@@ -108,6 +106,16 @@ extension APIEndpoint.AppStoreVersions {
 				case violenceRealisticProlongedGraphicOrSadistic
 			}
 
+			public enum FieldsCustomerReviews: String, Codable, CaseIterable {
+				case body
+				case createdDate
+				case rating
+				case response
+				case reviewerNickname
+				case territory
+				case title
+			}
+
 			public enum FieldsAppStoreReviewDetails: String, Codable, CaseIterable {
 				case appStoreReviewAttachments
 				case appStoreVersion
@@ -119,14 +127,6 @@ extension APIEndpoint.AppStoreVersions {
 				case demoAccountPassword
 				case demoAccountRequired
 				case notes
-			}
-
-			public enum FieldsIdfaDeclarations: String, Codable, CaseIterable {
-				case appStoreVersion
-				case attributesActionWithPreviousAd
-				case attributesAppInstallationToPreviousAd
-				case honorsLimitedAdTracking
-				case servesAds
 			}
 
 			public enum FieldsAppClipDefaultExperiences: String, Codable, CaseIterable {
@@ -196,14 +196,14 @@ extension APIEndpoint.AppStoreVersions {
 				case whatsNew
 			}
 
-			public init(fieldsAppStoreVersions: [FieldsAppStoreVersions]? = nil, include: [Include]? = nil, fieldsAppStoreVersionExperiments: [FieldsAppStoreVersionExperiments]? = nil, fieldsAppStoreVersionSubmissions: [FieldsAppStoreVersionSubmissions]? = nil, fieldsAgeRatingDeclarations: [FieldsAgeRatingDeclarations]? = nil, fieldsAppStoreReviewDetails: [FieldsAppStoreReviewDetails]? = nil, fieldsIdfaDeclarations: [FieldsIdfaDeclarations]? = nil, fieldsAppClipDefaultExperiences: [FieldsAppClipDefaultExperiences]? = nil, fieldsRoutingAppCoverages: [FieldsRoutingAppCoverages]? = nil, fieldsAppStoreVersionPhasedReleases: [FieldsAppStoreVersionPhasedReleases]? = nil, fieldsBuilds: [FieldsBuilds]? = nil, fieldsAppStoreVersionLocalizations: [FieldsAppStoreVersionLocalizations]? = nil, limitAppStoreVersionExperiments: Int? = nil, limitAppStoreVersionLocalizations: Int? = nil) {
+			public init(fieldsAppStoreVersions: [FieldsAppStoreVersions]? = nil, include: [Include]? = nil, fieldsAppStoreVersionExperiments: [FieldsAppStoreVersionExperiments]? = nil, fieldsAppStoreVersionSubmissions: [FieldsAppStoreVersionSubmissions]? = nil, fieldsAgeRatingDeclarations: [FieldsAgeRatingDeclarations]? = nil, fieldsCustomerReviews: [FieldsCustomerReviews]? = nil, fieldsAppStoreReviewDetails: [FieldsAppStoreReviewDetails]? = nil, fieldsAppClipDefaultExperiences: [FieldsAppClipDefaultExperiences]? = nil, fieldsRoutingAppCoverages: [FieldsRoutingAppCoverages]? = nil, fieldsAppStoreVersionPhasedReleases: [FieldsAppStoreVersionPhasedReleases]? = nil, fieldsBuilds: [FieldsBuilds]? = nil, fieldsAppStoreVersionLocalizations: [FieldsAppStoreVersionLocalizations]? = nil, limitAppStoreVersionExperiments: Int? = nil, limitAppStoreVersionLocalizations: Int? = nil) {
 				self.fieldsAppStoreVersions = fieldsAppStoreVersions
 				self.include = include
 				self.fieldsAppStoreVersionExperiments = fieldsAppStoreVersionExperiments
 				self.fieldsAppStoreVersionSubmissions = fieldsAppStoreVersionSubmissions
 				self.fieldsAgeRatingDeclarations = fieldsAgeRatingDeclarations
+				self.fieldsCustomerReviews = fieldsCustomerReviews
 				self.fieldsAppStoreReviewDetails = fieldsAppStoreReviewDetails
-				self.fieldsIdfaDeclarations = fieldsIdfaDeclarations
 				self.fieldsAppClipDefaultExperiences = fieldsAppClipDefaultExperiences
 				self.fieldsRoutingAppCoverages = fieldsRoutingAppCoverages
 				self.fieldsAppStoreVersionPhasedReleases = fieldsAppStoreVersionPhasedReleases
@@ -220,8 +220,8 @@ extension APIEndpoint.AppStoreVersions {
 				encoder.encode(fieldsAppStoreVersionExperiments, forKey: "fields[appStoreVersionExperiments]")
 				encoder.encode(fieldsAppStoreVersionSubmissions, forKey: "fields[appStoreVersionSubmissions]")
 				encoder.encode(fieldsAgeRatingDeclarations, forKey: "fields[ageRatingDeclarations]")
+				encoder.encode(fieldsCustomerReviews, forKey: "fields[customerReviews]")
 				encoder.encode(fieldsAppStoreReviewDetails, forKey: "fields[appStoreReviewDetails]")
-				encoder.encode(fieldsIdfaDeclarations, forKey: "fields[idfaDeclarations]")
 				encoder.encode(fieldsAppClipDefaultExperiences, forKey: "fields[appClipDefaultExperiences]")
 				encoder.encode(fieldsRoutingAppCoverages, forKey: "fields[routingAppCoverages]")
 				encoder.encode(fieldsAppStoreVersionPhasedReleases, forKey: "fields[appStoreVersionPhasedReleases]")

@@ -6,7 +6,7 @@
 import Foundation
 import URLQueryEncoder
 
-extension APIEndpoint.Builds {
+extension APIEndpoint.V1.Builds {
 	public func id(_ id: String) -> WithID {
 		WithID(path: "\(path)/\(id)")
 	}
@@ -129,13 +129,12 @@ extension APIEndpoint.Builds {
 				case build
 				case copyright
 				case createdDate
+				case customerReviews
 				case downloadable
 				case earliestReleaseDate
-				case idfaDeclaration
 				case platform
 				case releaseType
 				case routingAppCoverage
-				case usesIdfa
 				case versionString
 			}
 
@@ -186,9 +185,11 @@ extension APIEndpoint.Builds {
 				case bundleID = "bundleId"
 				case ciProduct
 				case contentRightsDeclaration
+				case customerReviews
 				case endUserLicenseAgreement
 				case gameCenterEnabledVersions
 				case inAppPurchases
+				case inAppPurchasesV2
 				case isOrEverWasMadeForKids
 				case name
 				case perfPowerMetrics
@@ -197,8 +198,11 @@ extension APIEndpoint.Builds {
 				case pricePoints
 				case prices
 				case primaryLocale
+				case promotedPurchases
 				case reviewSubmissions
 				case sku
+				case subscriptionGracePeriod
+				case subscriptionGroups
 				case subscriptionStatusURL = "subscriptionStatusUrl"
 				case subscriptionStatusURLForSandbox = "subscriptionStatusUrlForSandbox"
 				case subscriptionStatusURLVersion = "subscriptionStatusUrlVersion"

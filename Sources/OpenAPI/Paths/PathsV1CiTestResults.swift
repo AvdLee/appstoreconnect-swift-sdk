@@ -6,9 +6,9 @@
 import Foundation
 import URLQueryEncoder
 
-extension APIEndpoint {
-	public static var ciTestResults: CiTestResults {
-		CiTestResults(path: "/v1/ciTestResults")
+extension APIEndpoint.V1 {
+	public var ciTestResults: CiTestResults {
+		CiTestResults(path: path + "/ciTestResults")
 	}
 
 	public struct CiTestResults {

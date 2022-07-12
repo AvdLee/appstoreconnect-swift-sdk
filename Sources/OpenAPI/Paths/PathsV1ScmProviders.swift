@@ -6,9 +6,9 @@
 import Foundation
 import URLQueryEncoder
 
-extension APIEndpoint {
-	public static var scmProviders: ScmProviders {
-		ScmProviders(path: "/v1/scmProviders")
+extension APIEndpoint.V1 {
+	public var scmProviders: ScmProviders {
+		ScmProviders(path: path + "/scmProviders")
 	}
 
 	public struct ScmProviders {

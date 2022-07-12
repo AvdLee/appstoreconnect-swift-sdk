@@ -6,7 +6,7 @@
 import Foundation
 import URLQueryEncoder
 
-extension APIEndpoint.AppEncryptionDeclarations.WithID {
+extension APIEndpoint.V1.AppEncryptionDeclarations.WithID {
 	public var relationships: Relationships {
 		Relationships(path: path + "/relationships")
 	}

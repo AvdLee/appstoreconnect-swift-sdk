@@ -6,9 +6,9 @@
 import Foundation
 import URLQueryEncoder
 
-extension APIEndpoint {
-	public static var buildBundles: BuildBundles {
-		BuildBundles(path: "/v1/buildBundles")
+extension APIEndpoint.V1 {
+	public var buildBundles: BuildBundles {
+		BuildBundles(path: path + "/buildBundles")
 	}
 
 	public struct BuildBundles {

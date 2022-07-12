@@ -6,7 +6,7 @@
 import Foundation
 import URLQueryEncoder
 
-extension APIEndpoint.ScmRepositories.WithID.Relationships {
+extension APIEndpoint.V1.ScmRepositories.WithID.Relationships {
 	public var gitReferences: GitReferences {
 		GitReferences(path: path + "/gitReferences")
 	}

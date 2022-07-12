@@ -6,9 +6,9 @@
 import Foundation
 import URLQueryEncoder
 
-extension APIEndpoint {
-	public static var appClipHeaderImages: AppClipHeaderImages {
-		AppClipHeaderImages(path: "/v1/appClipHeaderImages")
+extension APIEndpoint.V1 {
+	public var appClipHeaderImages: AppClipHeaderImages {
+		AppClipHeaderImages(path: path + "/appClipHeaderImages")
 	}
 
 	public struct AppClipHeaderImages {

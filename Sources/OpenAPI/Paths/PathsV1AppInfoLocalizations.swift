@@ -6,9 +6,9 @@
 import Foundation
 import URLQueryEncoder
 
-extension APIEndpoint {
-	public static var appInfoLocalizations: AppInfoLocalizations {
-		AppInfoLocalizations(path: "/v1/appInfoLocalizations")
+extension APIEndpoint.V1 {
+	public var appInfoLocalizations: AppInfoLocalizations {
+		AppInfoLocalizations(path: path + "/appInfoLocalizations")
 	}
 
 	public struct AppInfoLocalizations {

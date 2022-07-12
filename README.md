@@ -53,16 +53,15 @@ let configuration = APIConfiguration(issuerID: "<YOUR ISSUER ID>", privateKeyID:
 After creating an `APIProvider` instance with your `APIConfiguration` you can start performing your first request.
 
 ```swift
-let provider: APIProvider = APIProvider(configuration: configuration)
-
-provider.request(.apps()) { (result) in
-    switch result {
-    case .success(let appsResponse):
-        print("Did fetch \(appsResponse.data.count) apps")
-    case .failure(let error):
-        print("Something went wrong fetching the apps: \(error)")
-    }
-}
+let request = APIEndpoint
+    .apps
+    .get(parameters: .init(
+        sort: [.bundleID],
+        fieldsApps: [.appInfos, .name, .bundleID],
+        limit: 5
+    ))
+let apps = try await self.provider.request(request).data
+print("Did fetch \(apps.count) apps")
 ```
 
 ## Installation
@@ -75,7 +74,7 @@ Once you have your Swift package set up, adding the SDK as a dependency is as ea
 
 ```swift
 dependencies: [
-    .package(url: "https://github.com/AvdLee/appstoreconnect-swift-sdk.git", .upToNextMajor(from: "1.0.0"))
+    .package(url: "https://github.com/AvdLee/appstoreconnect-swift-sdk.git", .upToNextMajor(from: "2.0.0"))
 ]
 ```
 
@@ -88,10 +87,6 @@ To help with the development of this repository you need to follow the next step
 ```bash
 git submodule update --init --recursive
 ```
-- run the fastlane called: unhide_spm_package_dev_dependencies
-```bash
-bundle exec fastlane unhide_spm_package_dev_dependencies
-```
 - you should be able to run the tests
 ```bash
 bundle exec fastlane test
@@ -102,7 +97,7 @@ Using [CreateAPI](https://github.com/CreateAPI/CreateAPI).
 
 1. `cd` into the `Source/OpenAPI` folder
 2. Open terminal
-3. Execute: `create-api generate app_store_connect_api_1.8_openapi.json --module "AppStoreConnect_Swift_SDK" --output . --config .create-api.yml -s`
+3. Execute: `create-api generate app_store_connect_api_2.0_openapi.json --module "AppStoreConnect_Swift_SDK" --output . --config .create-api.yml -s`
 
 ## Communication
 

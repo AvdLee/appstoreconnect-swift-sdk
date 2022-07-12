@@ -6,7 +6,7 @@
 import Foundation
 import URLQueryEncoder
 
-extension APIEndpoint.PreReleaseVersions.WithID.Relationships {
+extension APIEndpoint.V1.PreReleaseVersions.WithID.Relationships {
 	public var app: App {
 		App(path: path + "/app")
 	}

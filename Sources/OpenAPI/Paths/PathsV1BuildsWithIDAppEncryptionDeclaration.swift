@@ -6,7 +6,7 @@
 import Foundation
 import URLQueryEncoder
 
-extension APIEndpoint.Builds.WithID {
+extension APIEndpoint.V1.Builds.WithID {
 	public var appEncryptionDeclaration: AppEncryptionDeclaration {
 		AppEncryptionDeclaration(path: path + "/appEncryptionDeclaration")
 	}

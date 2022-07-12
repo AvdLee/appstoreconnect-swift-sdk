@@ -6,7 +6,7 @@
 import Foundation
 import URLQueryEncoder
 
-extension APIEndpoint.GameCenterEnabledVersions.WithID {
+extension APIEndpoint.V1.GameCenterEnabledVersions.WithID {
 	public var relationships: Relationships {
 		Relationships(path: path + "/relationships")
 	}

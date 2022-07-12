@@ -6,9 +6,9 @@
 import Foundation
 import URLQueryEncoder
 
-extension APIEndpoint {
-	public static var diagnosticSignatures: DiagnosticSignatures {
-		DiagnosticSignatures(path: "/v1/diagnosticSignatures")
+extension APIEndpoint.V1 {
+	public var diagnosticSignatures: DiagnosticSignatures {
+		DiagnosticSignatures(path: path + "/diagnosticSignatures")
 	}
 
 	public struct DiagnosticSignatures {

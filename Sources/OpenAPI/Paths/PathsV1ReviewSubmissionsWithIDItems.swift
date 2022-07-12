@@ -6,7 +6,7 @@
 import Foundation
 import URLQueryEncoder
 
-extension APIEndpoint.ReviewSubmissions.WithID {
+extension APIEndpoint.V1.ReviewSubmissions.WithID {
 	public var items: Items {
 		Items(path: path + "/items")
 	}
@@ -64,13 +64,12 @@ extension APIEndpoint.ReviewSubmissions.WithID {
 				case build
 				case copyright
 				case createdDate
+				case customerReviews
 				case downloadable
 				case earliestReleaseDate
-				case idfaDeclaration
 				case platform
 				case releaseType
 				case routingAppCoverage
-				case usesIdfa
 				case versionString
 			}
 

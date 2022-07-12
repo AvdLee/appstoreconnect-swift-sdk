@@ -6,7 +6,7 @@
 import Foundation
 import URLQueryEncoder
 
-extension APIEndpoint.GameCenterEnabledVersions.WithID.Relationships {
+extension APIEndpoint.V1.GameCenterEnabledVersions.WithID.Relationships {
 	public var compatibleVersions: CompatibleVersions {
 		CompatibleVersions(path: path + "/compatibleVersions")
 	}

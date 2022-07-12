@@ -6,7 +6,7 @@
 import Foundation
 import URLQueryEncoder
 
-extension APIEndpoint.ScmRepositories.WithID {
+extension APIEndpoint.V1.ScmRepositories.WithID {
 	public var pullRequests: PullRequests {
 		PullRequests(path: path + "/pullRequests")
 	}

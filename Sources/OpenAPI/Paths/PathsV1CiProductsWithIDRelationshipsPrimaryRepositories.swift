@@ -6,7 +6,7 @@
 import Foundation
 import URLQueryEncoder
 
-extension APIEndpoint.CiProducts.WithID.Relationships {
+extension APIEndpoint.V1.CiProducts.WithID.Relationships {
 	public var primaryRepositories: PrimaryRepositories {
 		PrimaryRepositories(path: path + "/primaryRepositories")
 	}

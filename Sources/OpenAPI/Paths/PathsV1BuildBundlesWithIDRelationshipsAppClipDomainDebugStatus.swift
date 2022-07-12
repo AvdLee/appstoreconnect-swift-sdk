@@ -6,7 +6,7 @@
 import Foundation
 import URLQueryEncoder
 
-extension APIEndpoint.BuildBundles.WithID.Relationships {
+extension APIEndpoint.V1.BuildBundles.WithID.Relationships {
 	public var appClipDomainDebugStatus: AppClipDomainDebugStatus {
 		AppClipDomainDebugStatus(path: path + "/appClipDomainDebugStatus")
 	}

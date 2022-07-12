@@ -6,7 +6,7 @@
 import Foundation
 import URLQueryEncoder
 
-extension APIEndpoint.UserInvitations.WithID.Relationships {
+extension APIEndpoint.V1.UserInvitations.WithID.Relationships {
 	public var visibleApps: VisibleApps {
 		VisibleApps(path: path + "/visibleApps")
 	}

@@ -6,7 +6,7 @@
 import Foundation
 import URLQueryEncoder
 
-extension APIEndpoint.BuildBundles.WithID {
+extension APIEndpoint.V1.BuildBundles.WithID {
 	public var betaAppClipInvocations: BetaAppClipInvocations {
 		BetaAppClipInvocations(path: path + "/betaAppClipInvocations")
 	}

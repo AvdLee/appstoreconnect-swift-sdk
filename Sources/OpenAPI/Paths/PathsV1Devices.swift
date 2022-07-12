@@ -6,9 +6,9 @@
 import Foundation
 import URLQueryEncoder
 
-extension APIEndpoint {
-	public static var devices: Devices {
-		Devices(path: "/v1/devices")
+extension APIEndpoint.V1 {
+	public var devices: Devices {
+		Devices(path: path + "/devices")
 	}
 
 	public struct Devices {

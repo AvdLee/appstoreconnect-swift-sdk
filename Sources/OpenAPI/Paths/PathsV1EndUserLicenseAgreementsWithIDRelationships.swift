@@ -6,7 +6,7 @@
 import Foundation
 import URLQueryEncoder
 
-extension APIEndpoint.EndUserLicenseAgreements.WithID {
+extension APIEndpoint.V1.EndUserLicenseAgreements.WithID {
 	public var relationships: Relationships {
 		Relationships(path: path + "/relationships")
 	}
