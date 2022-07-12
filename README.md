@@ -54,6 +54,7 @@ After creating an `APIProvider` instance with your `APIConfiguration` you can st
 
 ```swift
 let request = APIEndpoint
+    .v1
     .apps
     .get(parameters: .init(
         sort: [.bundleID],

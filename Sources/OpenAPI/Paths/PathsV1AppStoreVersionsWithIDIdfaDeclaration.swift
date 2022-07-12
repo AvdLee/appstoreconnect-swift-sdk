@@ -6,7 +6,7 @@
 import Foundation
 import URLQueryEncoder
 
-extension APIEndpoint.AppStoreVersions.WithID {
+extension APIEndpoint.V1.AppStoreVersions.WithID {
 	public var idfaDeclaration: IdfaDeclaration {
 		IdfaDeclaration(path: path + "/idfaDeclaration")
 	}

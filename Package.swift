@@ -19,6 +19,6 @@ let package = Package(
             name: "AppStoreConnect-Swift-SDK",
             dependencies: ["URLQueryEncoder"],
             path: "Sources",
-            exclude: ["OpenAPI/app_store_connect_api_1.8_openapi.json"])
+            exclude: ["OpenAPI/app_store_connect_api_2.0_openapi.json"])
     ]
 )
