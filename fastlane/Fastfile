@@ -2,10 +2,16 @@
 fastlane_version "1.109.0"
 
 import "./../Submodules/WeTransfer-iOS-CI/Fastlane/Fastfile"
+import "./../Submodules/WeTransfer-iOS-CI/Fastlane/shared_lanes.rb"
 
 desc "Run the tests and prepare for Danger"
 lane :test do |options|
-  test_project(
-    project_name: "AppStoreConnect-Swift-SDK", 
-    scheme: "AppStoreConnect-Swift-SDK")
+  # Remove any leftover reports before running so CI won't fail due to an existing file.
+  # This also helps for local running this workflow frequently.
+  sh("rm -rf #{ENV['PWD']}/build/reports")
+  
+  test_package(
+        package_name: 'AppStoreConnect-Swift-SDK',
+        package_path: ENV['PWD'],
+        disable_automatic_package_resolution: false)
 end

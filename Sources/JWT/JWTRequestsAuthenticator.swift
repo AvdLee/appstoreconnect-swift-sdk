@@ -31,9 +31,7 @@ final class JWTRequestsAuthenticator {
         cachedToken = token
         return token
     }
-}
 
-extension JWTRequestsAuthenticator {
     func adapt(_ urlRequest: URLRequest) throws -> URLRequest {
         let token = try createToken()
         var urlRequest = urlRequest

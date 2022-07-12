@@ -38,7 +38,7 @@ public final class APIProvider {
     public enum Error: Swift.Error, CustomDebugStringConvertible {
         case requestGeneration
         case unknownResponseType
-        case requestFailure(StatusCode, Data?)
+        case requestFailure(StatusCode, Data?, URL?)
         case decodingError(Swift.Error, Data)
         case downloadError
         case dateDecodingError(String)
@@ -50,11 +50,12 @@ public final class APIProvider {
                 return "Failed to generate request."
             case .unknownResponseType:
                 return "Unknown response type."
-            case .requestFailure(let statusCode, let data):
+            case .requestFailure(let statusCode, let data, let url):
+                let url = url?.absoluteString ?? ""
                 if let data = data, let response = String(data: data, encoding: .utf8) {
-                    return "Request failed with status code \(statusCode) and response \(response))."
+                    return "Request \(url) failed with status code \(statusCode) and response \(response))."
                 }
-                return "Request failed with status code \(statusCode)."
+                return "Request \(url) failed with status code \(statusCode)."
             case .decodingError(let error, let data):
                 if let response = String(data: data, encoding: .utf8) {
                     return "Failed to decode response:\n\(response)\nError: \(error)."
@@ -106,10 +107,13 @@ public final class APIProvider {
     private let configuration: APIConfiguration
 
     /// The authenticator to handle all JWT signing related actions.
-    private lazy var requestsAuthenticator = JWTRequestsAuthenticator(apiConfiguration: self.configuration)
+    private let requestsAuthenticator: JWTRequestsAuthenticator
 
     /// Handles URLRequest execution
     private let requestExecutor: RequestExecutor
+
+    /// The JSON encoder used to encode request parameters.
+    private let encoder: JSONEncoder
 
     /// Creates a new APIProvider instance which can be used to perform API Requests to the App Store Connect API.
     ///
@@ -119,6 +123,9 @@ public final class APIProvider {
     public init(configuration: APIConfiguration, requestExecutor: RequestExecutor = DefaultRequestExecutor()) {
         self.configuration = configuration
         self.requestExecutor = requestExecutor
+        self.requestsAuthenticator = JWTRequestsAuthenticator(apiConfiguration: configuration)
+        self.encoder = JSONEncoder()
+        self.encoder.dateEncodingStrategy = .iso8601
     }
 
     /// Performs a data request to the given API endpoint
@@ -126,8 +133,8 @@ public final class APIProvider {
     /// - Parameters:
     ///   - endpoint: The API endpoint to request.
     ///   - completion: The completion callback which will be called on completion containing the result.
-    public func request(_ endpoint: APIEndpoint<Void>, completion: @escaping RequestCompletionHandler<Void>) {
-        guard let request = try? requestsAuthenticator.adapt(endpoint.asURLRequest()) else {
+    public func request(_ request: Request<Void>, completion: @escaping RequestCompletionHandler<Void>) {
+        guard let request = try? requestsAuthenticator.adapt(request.asURLRequest(encoder: encoder)) else {
             completion(.failure(Error.requestGeneration))
             return
         }
@@ -140,8 +147,8 @@ public final class APIProvider {
     /// - Parameters:
     ///   - endpoint: The API endpoint to request.
     ///   - completion: The completion callback which will be called on completion containing the result.
-    public func request<T: Decodable>(_ endpoint: APIEndpoint<T>, completion: @escaping RequestCompletionHandler<T>) {
-        guard let request = try? requestsAuthenticator.adapt(endpoint.asURLRequest()) else {
+    public func request<T: Decodable>(_ request: Request<T>, completion: @escaping RequestCompletionHandler<T>) {
+        guard let request = try? requestsAuthenticator.adapt(request.asURLRequest(encoder: encoder)) else {
             completion(.failure(Error.requestGeneration))
             return
         }
@@ -154,23 +161,13 @@ public final class APIProvider {
     /// - Parameters:
     ///   - endpoint: The API endpoint to request.
     ///   - completion: The completion callback which will be called on completion containing the result.
-    public func download<T: Decodable>(_ endpoint: APIEndpoint<T>, completion: @escaping RequestCompletionHandler<URL>) {
-        guard let request = try? requestsAuthenticator.adapt(endpoint.asURLRequest()) else {
+    public func download<T: Decodable>(_ request: Request<T>, completion: @escaping RequestCompletionHandler<URL>) {
+        guard let request = try? requestsAuthenticator.adapt(request.asURLRequest(encoder: encoder)) else {
             completion(.failure(Error.requestGeneration))
             return
         }
 
         requestExecutor.download(request) { completion(self.mapResponse($0)) }
-    }
-
-    /// Performs a data request to the given ResourceLinks
-    ///
-    /// - Parameters:
-    ///   - resourceLinks: The resourceLinks to request.
-    ///   - completion: The completion callback which will be called on completion containing the result.
-    public func request<T: Decodable>(_ resourceLinks: ResourceLinks<T>, completion: @escaping RequestCompletionHandler<T>) {
-
-        requestExecutor.retrieve(resourceLinks.`self`) { completion(self.mapResponse($0)) }
     }
 }
 
@@ -180,7 +177,7 @@ extension APIProvider {
     ///
     /// - Parameters:
     ///   - endpoint: The API endpoint to request.
-    public func request(_ endpoint: APIEndpoint<Void>) async throws {
+    public func request(_ endpoint: Request<Void>) async throws {
         try await withCheckedThrowingContinuation { continuation in
             request(endpoint, completion: continuation.resume(with:))
         }
@@ -190,7 +187,7 @@ extension APIProvider {
     ///
     /// - Parameters:
     ///   - endpoint: The API endpoint to request.
-    public func request<T>(_ endpoint: APIEndpoint<T>) async throws -> T where T: Decodable {
+    public func request<T>(_ endpoint: Request<T>) async throws -> T where T: Decodable {
         try await withCheckedThrowingContinuation { continuation in
             request(endpoint, completion: continuation.resume(with:))
         }
@@ -200,19 +197,9 @@ extension APIProvider {
     ///
     /// - Parameters:
     ///   - endpoint: The API endpoint to request.
-    public func download<T>(_ endpoint: APIEndpoint<T>) async throws -> URL where T: Decodable {
+    public func download<T>(_ endpoint: Request<T>) async throws -> URL where T: Decodable {
         try await withCheckedThrowingContinuation { continuation in
             download(endpoint, completion: continuation.resume(with:))
-        }
-    }
-
-    /// Performs a data request to the given ResourceLinks
-    ///
-    /// - Parameters:
-    ///   - resourceLinks: The resourceLinks to request.
-    public func request<T>(_ resourceLinks: ResourceLinks<T>) async throws -> T where T: Decodable {
-        try await withCheckedThrowingContinuation { continuation in
-            request(resourceLinks, completion: continuation.resume(with:))
         }
     }
 }
@@ -228,7 +215,7 @@ private extension APIProvider {
         switch result {
         case .success(let response):
             guard let data = response.data, 200..<300 ~= response.statusCode else {
-                return .failure(Error.requestFailure(response.statusCode, response.data))
+                return .failure(Error.requestFailure(response.statusCode, response.data, response.requestURL))
             }
 
             if let data = data as? T {
@@ -254,7 +241,7 @@ private extension APIProvider {
         switch result {
         case .success(let response):
             guard 200..<300 ~= response.statusCode else {
-                return .failure(Error.requestFailure(response.statusCode, response.data))
+                return .failure(Error.requestFailure(response.statusCode, response.data, response.requestURL))
             }
 
             return .success(())
@@ -271,7 +258,7 @@ private extension APIProvider {
         switch result {
         case .success(let response):
             guard 200..<300 ~= response.statusCode else {
-                return .failure(Error.requestFailure(response.statusCode, nil))
+                return .failure(Error.requestFailure(response.statusCode, nil, response.requestURL))
             }
             if let data = response.data {
                 return .success(data)

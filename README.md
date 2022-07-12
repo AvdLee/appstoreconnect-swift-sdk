@@ -1,7 +1,7 @@
 # App Store Connect Swift SDK
 The Swift SDK to work with the App Store Connect API from Apple.
 
-![Bitrise Status](https://app.bitrise.io/app/af49e5de1f935d23.svg?token=3lWTmdlNhbHtdG9KsuR9gw) [![Swift Version](https://img.shields.io/endpoint?url=https%3A%2F%2Fswiftpackageindex.com%2Fapi%2Fpackages%2FAvdLee%2Fappstoreconnect-swift-sdk%2Fbadge%3Ftype%3Dswift-versions)](https://swiftpackageindex.com/AvdLee/appstoreconnect-swift-sdk) [![Platform Compatibility](https://img.shields.io/endpoint?url=https%3A%2F%2Fswiftpackageindex.com%2Fapi%2Fpackages%2FAvdLee%2Fappstoreconnect-swift-sdk%2Fbadge%3Ftype%3Dplatforms)](https://swiftpackageindex.com/AvdLee/appstoreconnect-swift-sdk) ![Dependency frameworks](https://img.shields.io/badge/Supports-CocoaPods,_Swift_Package_Manager-F16D39.svg?style=flat) [![Twitter](https://img.shields.io/badge/twitter-@Twannl-blue.svg?style=flat)](https://twitter.com/twannl)
+![Bitrise Status](https://app.bitrise.io/app/af49e5de1f935d23.svg?token=3lWTmdlNhbHtdG9KsuR9gw) [![Swift Version](https://img.shields.io/endpoint?url=https%3A%2F%2Fswiftpackageindex.com%2Fapi%2Fpackages%2FAvdLee%2Fappstoreconnect-swift-sdk%2Fbadge%3Ftype%3Dswift-versions)](https://swiftpackageindex.com/AvdLee/appstoreconnect-swift-sdk) [![Platform Compatibility](https://img.shields.io/endpoint?url=https%3A%2F%2Fswiftpackageindex.com%2Fapi%2Fpackages%2FAvdLee%2Fappstoreconnect-swift-sdk%2Fbadge%3Ftype%3Dplatforms)](https://swiftpackageindex.com/AvdLee/appstoreconnect-swift-sdk) ![Dependency frameworks](https://img.shields.io/badge/Supports-_Swift_Package_Manager-F16D39.svg?style=flat) [![Twitter](https://img.shields.io/badge/twitter-@Twannl-blue.svg?style=flat)](https://twitter.com/twannl)
 
 ## Kickstart information on the API
 - [Automate your workflow with the App Store Connect API](https://developer.apple.com/app-store-connect/api/)
@@ -16,10 +16,7 @@ The Swift SDK to work with the App Store Connect API from Apple.
 - [x] JWT Logic to sign requests
 - [x] Get started section in the readme
 - [x] Support for Mac
-- [x] TestFlight API implementation
-- [x] Users and Roles implementation
-- [x] Sales and Finances implementation
-- [x] Replace Alamofire dependency with own simple URLSession implementation
+- [x] Supports _all_ requests due to OpenAPI generated requests and entities
 
 ## Requesting API Access
 To request access, go to the new API Keys section in Users and Access in App Store Connect. Please note that you must be the Team Agent (Legal role) of a development team enrolled as an organization. Access for developers enrolled as an individual is coming soon.
@@ -70,15 +67,6 @@ provider.request(.apps()) { (result) in
 
 ## Installation
 
-### CocoaPods
-AppStoreConnect-Swift-SDK will be available through [CocoaPods](https://cocoapods.org) when it's more complete. To install
-it now, simply add the following line to your Podfile:
-
-```ruby
-pod 'AppStoreConnect-Swift-SDK', :git => 'https://github.com/AvdLee/appstoreconnect-swift-sdk.git'
-
-```
-
 ### Swift Package Manager
 
 The [Swift Package Manager](https://swift.org/package-manager/) is a tool for automating the distribution of Swift code and is integrated into the `swift` compiler. It is in early development, but this SDK does support its use on supported platforms. 
@@ -109,6 +97,12 @@ bundle exec fastlane unhide_spm_package_dev_dependencies
 bundle exec fastlane test
 ```
 
+### Update OpenAPI generated code
+Using [CreateAPI](https://github.com/CreateAPI/CreateAPI).
+
+1. `cd` into the `Source/OpenAPI` folder
+2. Open terminal
+3. Execute: `create-api generate app_store_connect_api_1.8_openapi.json --module "AppStoreConnect_Swift_SDK" --output . --config .create-api.yml -s`
 
 ## Communication
 
