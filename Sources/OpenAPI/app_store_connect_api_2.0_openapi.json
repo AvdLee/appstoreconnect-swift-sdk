@@ -24182,7 +24182,7 @@
             "type" : "array",
             "items" : {
               "type" : "string",
-              "enum" : [ ]
+              "enum" : [ "empty" ]
             }
           },
           "style" : "form",
