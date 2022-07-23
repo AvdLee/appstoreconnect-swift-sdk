@@ -82,11 +82,19 @@ struct JWT: Codable, JWTCreatable {
     typealias Token = String
     typealias P8PrivateKey = String
 
+    typealias DateProvider = () -> Date
+    static let defaultDateProvider: DateProvider = {
+        Date()
+    }
+
     /// The JWT Header contains information specific to the App Store Connect API Keys, such as algorithm and keys.
     private let header: Header
 
-    /// The JWT Payload contains information specific to the App Store Connect APIs, such as issuer ID and expiration time.
-    private let payload: Payload
+    /// Your issuer identifier from the API Keys page in App Store Connect (Ex: 57246542-96fe-1a63-e053-0824d011072a)
+    private let issuerIdentifier: String
+
+    /// The token's expiration duration. Tokens that expire more than 20 minutes in the future are not valid, so set it to a max of 20 minutes.
+    private let expireDuration: TimeInterval
 
     /// Creates a new JWT Factory to create signed requests for the App Store Connect API.
     ///
@@ -94,13 +102,15 @@ struct JWT: Codable, JWTCreatable {
     ///   - keyIdentifier: Your private key ID from App Store Connect (Ex: 2X9R4HXF34)
     ///   - issuerIdentifier: Your issuer identifier from the API Keys page in App Store Connect (Ex: 57246542-96fe-1a63-e053-0824d011072a)
     ///   - expireDuration: The token's expiration duration. Tokens that expire more than 20 minutes in the future are not valid, so set it to a max of 20 minutes.
-    public init(keyIdentifier: String, issuerIdentifier: String, expireDuration: TimeInterval, baseDate: Date = Date()) {
+    public init(keyIdentifier: String, issuerIdentifier: String, expireDuration: TimeInterval) {
         header = Header(keyIdentifier: keyIdentifier)
-        payload = Payload(issuerIdentifier: issuerIdentifier, expirationTime: baseDate.addingTimeInterval(expireDuration).timeIntervalSince1970)
+        self.issuerIdentifier = issuerIdentifier
+        self.expireDuration = expireDuration
     }
 
     /// Combine the header and the payload as a digest for signing.
-    private func digest() throws -> String {
+    private func digest(dateProvider: DateProvider) throws -> String {
+        let payload = Payload(issuerIdentifier: issuerIdentifier, expirationTime: dateProvider().addingTimeInterval(expireDuration).timeIntervalSince1970)
         let headerString = try JSONEncoder().encode(header.self).base64URLEncoded()
         let payloadString = try JSONEncoder().encode(payload.self).base64URLEncoded()
         return "\(headerString).\(payloadString)"
@@ -112,7 +122,11 @@ struct JWT: Codable, JWTCreatable {
     /// - Returns: A signed JWT.Token value which can be used as a value for the Bearer Authentication header.
     /// - Throws: An error if something went wrong, like a JWT.Error.
     public func signedToken(using privateKey: P8PrivateKey) throws -> JWT.Token {
-        let digest = try self.digest()
+        try signedToken(using: privateKey, dateProvider: Self.defaultDateProvider)
+    }
+
+    func signedToken(using privateKey: P8PrivateKey, dateProvider: DateProvider) throws -> JWT.Token {
+        let digest = try self.digest(dateProvider: dateProvider)
 
         let signature = try privateKey.toASN1()
             .toECKeyData()

@@ -25,6 +25,11 @@ struct AppsListView: View {
                 ProgressView()
                     .opacity(viewModel.apps.isEmpty ? 1.0 : 0.0)
             }.navigationTitle("List of Apps")
+                .toolbar {
+                    Button("Refresh") {
+                        viewModel.loadApps()
+                    }
+                }
         }.onAppear {
             viewModel.loadApps()
         }
