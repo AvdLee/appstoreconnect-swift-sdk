@@ -35,7 +35,7 @@ public struct APIConfiguration {
 /// Provides access to all API Methods. Can be used to perform API requests.
 public final class APIProvider {
 
-    public enum Error: Swift.Error, CustomDebugStringConvertible {
+    public enum Error: Swift.Error, CustomDebugStringConvertible, LocalizedError {
         case requestGeneration
         case unknownResponseType
         case requestFailure(StatusCode, Data?, URL?)
@@ -44,6 +44,10 @@ public final class APIProvider {
         case dateDecodingError(String)
         case requestExecutorError(Swift.Error)
 
+        public var errorDescription: String? {
+            debugDescription
+        }
+        
         public var debugDescription: String {
             switch self {
             case .requestGeneration:
