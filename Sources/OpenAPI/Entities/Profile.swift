@@ -58,6 +58,30 @@ public struct Profile: Codable {
 			self.createdDate = createdDate
 			self.expirationDate = expirationDate
 		}
+
+		public init(from decoder: Decoder) throws {
+			let values = try decoder.container(keyedBy: StringCodingKey.self)
+			self.name = try values.decodeIfPresent(String.self, forKey: "name")
+			self.platform = try values.decodeIfPresent(BundleIDPlatform.self, forKey: "platform")
+			self.profileType = try values.decodeIfPresent(ProfileType.self, forKey: "profileType")
+			self.profileState = try values.decodeIfPresent(ProfileState.self, forKey: "profileState")
+			self.profileContent = try values.decodeIfPresent(String.self, forKey: "profileContent")
+			self.uuid = try values.decodeIfPresent(String.self, forKey: "uuid")
+			self.createdDate = try values.decodeIfPresent(Date.self, forKey: "createdDate")
+			self.expirationDate = try values.decodeIfPresent(Date.self, forKey: "expirationDate")
+		}
+
+		public func encode(to encoder: Encoder) throws {
+			var values = encoder.container(keyedBy: StringCodingKey.self)
+			try values.encodeIfPresent(name, forKey: "name")
+			try values.encodeIfPresent(platform, forKey: "platform")
+			try values.encodeIfPresent(profileType, forKey: "profileType")
+			try values.encodeIfPresent(profileState, forKey: "profileState")
+			try values.encodeIfPresent(profileContent, forKey: "profileContent")
+			try values.encodeIfPresent(uuid, forKey: "uuid")
+			try values.encodeIfPresent(createdDate, forKey: "createdDate")
+			try values.encodeIfPresent(expirationDate, forKey: "expirationDate")
+		}
 	}
 
 	public struct Relationships: Codable {
@@ -78,9 +102,16 @@ public struct Profile: Codable {
 					self.related = related
 				}
 
-				private enum CodingKeys: String, CodingKey {
-					case this = "self"
-					case related
+				public init(from decoder: Decoder) throws {
+					let values = try decoder.container(keyedBy: StringCodingKey.self)
+					self.this = try values.decodeIfPresent(String.self, forKey: "self")
+					self.related = try values.decodeIfPresent(String.self, forKey: "related")
+				}
+
+				public func encode(to encoder: Encoder) throws {
+					var values = encoder.container(keyedBy: StringCodingKey.self)
+					try values.encodeIfPresent(this, forKey: "self")
+					try values.encodeIfPresent(related, forKey: "related")
 				}
 			}
 
@@ -96,11 +127,35 @@ public struct Profile: Codable {
 					self.type = type
 					self.id = id
 				}
+
+				public init(from decoder: Decoder) throws {
+					let values = try decoder.container(keyedBy: StringCodingKey.self)
+					self.type = try values.decode(`Type`.self, forKey: "type")
+					self.id = try values.decode(String.self, forKey: "id")
+				}
+
+				public func encode(to encoder: Encoder) throws {
+					var values = encoder.container(keyedBy: StringCodingKey.self)
+					try values.encode(type, forKey: "type")
+					try values.encode(id, forKey: "id")
+				}
 			}
 
 			public init(links: Links? = nil, data: Data? = nil) {
 				self.links = links
 				self.data = data
+			}
+
+			public init(from decoder: Decoder) throws {
+				let values = try decoder.container(keyedBy: StringCodingKey.self)
+				self.links = try values.decodeIfPresent(Links.self, forKey: "links")
+				self.data = try values.decodeIfPresent(Data.self, forKey: "data")
+			}
+
+			public func encode(to encoder: Encoder) throws {
+				var values = encoder.container(keyedBy: StringCodingKey.self)
+				try values.encodeIfPresent(links, forKey: "links")
+				try values.encodeIfPresent(data, forKey: "data")
 			}
 		}
 
@@ -118,9 +173,16 @@ public struct Profile: Codable {
 					self.related = related
 				}
 
-				private enum CodingKeys: String, CodingKey {
-					case this = "self"
-					case related
+				public init(from decoder: Decoder) throws {
+					let values = try decoder.container(keyedBy: StringCodingKey.self)
+					self.this = try values.decodeIfPresent(String.self, forKey: "self")
+					self.related = try values.decodeIfPresent(String.self, forKey: "related")
+				}
+
+				public func encode(to encoder: Encoder) throws {
+					var values = encoder.container(keyedBy: StringCodingKey.self)
+					try values.encodeIfPresent(this, forKey: "self")
+					try values.encodeIfPresent(related, forKey: "related")
 				}
 			}
 
@@ -136,12 +198,38 @@ public struct Profile: Codable {
 					self.type = type
 					self.id = id
 				}
+
+				public init(from decoder: Decoder) throws {
+					let values = try decoder.container(keyedBy: StringCodingKey.self)
+					self.type = try values.decode(`Type`.self, forKey: "type")
+					self.id = try values.decode(String.self, forKey: "id")
+				}
+
+				public func encode(to encoder: Encoder) throws {
+					var values = encoder.container(keyedBy: StringCodingKey.self)
+					try values.encode(type, forKey: "type")
+					try values.encode(id, forKey: "id")
+				}
 			}
 
 			public init(links: Links? = nil, meta: PagingInformation? = nil, data: [Datum]? = nil) {
 				self.links = links
 				self.meta = meta
 				self.data = data
+			}
+
+			public init(from decoder: Decoder) throws {
+				let values = try decoder.container(keyedBy: StringCodingKey.self)
+				self.links = try values.decodeIfPresent(Links.self, forKey: "links")
+				self.meta = try values.decodeIfPresent(PagingInformation.self, forKey: "meta")
+				self.data = try values.decodeIfPresent([Datum].self, forKey: "data")
+			}
+
+			public func encode(to encoder: Encoder) throws {
+				var values = encoder.container(keyedBy: StringCodingKey.self)
+				try values.encodeIfPresent(links, forKey: "links")
+				try values.encodeIfPresent(meta, forKey: "meta")
+				try values.encodeIfPresent(data, forKey: "data")
 			}
 		}
 
@@ -159,9 +247,16 @@ public struct Profile: Codable {
 					self.related = related
 				}
 
-				private enum CodingKeys: String, CodingKey {
-					case this = "self"
-					case related
+				public init(from decoder: Decoder) throws {
+					let values = try decoder.container(keyedBy: StringCodingKey.self)
+					self.this = try values.decodeIfPresent(String.self, forKey: "self")
+					self.related = try values.decodeIfPresent(String.self, forKey: "related")
+				}
+
+				public func encode(to encoder: Encoder) throws {
+					var values = encoder.container(keyedBy: StringCodingKey.self)
+					try values.encodeIfPresent(this, forKey: "self")
+					try values.encodeIfPresent(related, forKey: "related")
 				}
 			}
 
@@ -177,12 +272,38 @@ public struct Profile: Codable {
 					self.type = type
 					self.id = id
 				}
+
+				public init(from decoder: Decoder) throws {
+					let values = try decoder.container(keyedBy: StringCodingKey.self)
+					self.type = try values.decode(`Type`.self, forKey: "type")
+					self.id = try values.decode(String.self, forKey: "id")
+				}
+
+				public func encode(to encoder: Encoder) throws {
+					var values = encoder.container(keyedBy: StringCodingKey.self)
+					try values.encode(type, forKey: "type")
+					try values.encode(id, forKey: "id")
+				}
 			}
 
 			public init(links: Links? = nil, meta: PagingInformation? = nil, data: [Datum]? = nil) {
 				self.links = links
 				self.meta = meta
 				self.data = data
+			}
+
+			public init(from decoder: Decoder) throws {
+				let values = try decoder.container(keyedBy: StringCodingKey.self)
+				self.links = try values.decodeIfPresent(Links.self, forKey: "links")
+				self.meta = try values.decodeIfPresent(PagingInformation.self, forKey: "meta")
+				self.data = try values.decodeIfPresent([Datum].self, forKey: "data")
+			}
+
+			public func encode(to encoder: Encoder) throws {
+				var values = encoder.container(keyedBy: StringCodingKey.self)
+				try values.encodeIfPresent(links, forKey: "links")
+				try values.encodeIfPresent(meta, forKey: "meta")
+				try values.encodeIfPresent(data, forKey: "data")
 			}
 		}
 
@@ -192,10 +313,18 @@ public struct Profile: Codable {
 			self.certificates = certificates
 		}
 
-		private enum CodingKeys: String, CodingKey {
-			case bundleID = "bundleId"
-			case devices
-			case certificates
+		public init(from decoder: Decoder) throws {
+			let values = try decoder.container(keyedBy: StringCodingKey.self)
+			self.bundleID = try values.decodeIfPresent(BundleID.self, forKey: "bundleId")
+			self.devices = try values.decodeIfPresent(Devices.self, forKey: "devices")
+			self.certificates = try values.decodeIfPresent(Certificates.self, forKey: "certificates")
+		}
+
+		public func encode(to encoder: Encoder) throws {
+			var values = encoder.container(keyedBy: StringCodingKey.self)
+			try values.encodeIfPresent(bundleID, forKey: "bundleId")
+			try values.encodeIfPresent(devices, forKey: "devices")
+			try values.encodeIfPresent(certificates, forKey: "certificates")
 		}
 	}
 
@@ -205,5 +334,23 @@ public struct Profile: Codable {
 		self.attributes = attributes
 		self.relationships = relationships
 		self.links = links
+	}
+
+	public init(from decoder: Decoder) throws {
+		let values = try decoder.container(keyedBy: StringCodingKey.self)
+		self.type = try values.decode(`Type`.self, forKey: "type")
+		self.id = try values.decode(String.self, forKey: "id")
+		self.attributes = try values.decodeIfPresent(Attributes.self, forKey: "attributes")
+		self.relationships = try values.decodeIfPresent(Relationships.self, forKey: "relationships")
+		self.links = try values.decode(ResourceLinks.self, forKey: "links")
+	}
+
+	public func encode(to encoder: Encoder) throws {
+		var values = encoder.container(keyedBy: StringCodingKey.self)
+		try values.encode(type, forKey: "type")
+		try values.encode(id, forKey: "id")
+		try values.encodeIfPresent(attributes, forKey: "attributes")
+		try values.encodeIfPresent(relationships, forKey: "relationships")
+		try values.encode(links, forKey: "links")
 	}
 }

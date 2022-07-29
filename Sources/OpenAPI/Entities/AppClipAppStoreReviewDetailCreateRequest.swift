@@ -24,8 +24,14 @@ public struct AppClipAppStoreReviewDetailCreateRequest: Codable {
 				self.invocationURLs = invocationURLs
 			}
 
-			private enum CodingKeys: String, CodingKey {
-				case invocationURLs = "invocationUrls"
+			public init(from decoder: Decoder) throws {
+				let values = try decoder.container(keyedBy: StringCodingKey.self)
+				self.invocationURLs = try values.decodeIfPresent([URL].self, forKey: "invocationUrls")
+			}
+
+			public func encode(to encoder: Encoder) throws {
+				var values = encoder.container(keyedBy: StringCodingKey.self)
+				try values.encodeIfPresent(invocationURLs, forKey: "invocationUrls")
 			}
 		}
 
@@ -47,15 +53,47 @@ public struct AppClipAppStoreReviewDetailCreateRequest: Codable {
 						self.type = type
 						self.id = id
 					}
+
+					public init(from decoder: Decoder) throws {
+						let values = try decoder.container(keyedBy: StringCodingKey.self)
+						self.type = try values.decode(`Type`.self, forKey: "type")
+						self.id = try values.decode(String.self, forKey: "id")
+					}
+
+					public func encode(to encoder: Encoder) throws {
+						var values = encoder.container(keyedBy: StringCodingKey.self)
+						try values.encode(type, forKey: "type")
+						try values.encode(id, forKey: "id")
+					}
 				}
 
 				public init(data: Data) {
 					self.data = data
 				}
+
+				public init(from decoder: Decoder) throws {
+					let values = try decoder.container(keyedBy: StringCodingKey.self)
+					self.data = try values.decode(Data.self, forKey: "data")
+				}
+
+				public func encode(to encoder: Encoder) throws {
+					var values = encoder.container(keyedBy: StringCodingKey.self)
+					try values.encode(data, forKey: "data")
+				}
 			}
 
 			public init(appClipDefaultExperience: AppClipDefaultExperience) {
 				self.appClipDefaultExperience = appClipDefaultExperience
+			}
+
+			public init(from decoder: Decoder) throws {
+				let values = try decoder.container(keyedBy: StringCodingKey.self)
+				self.appClipDefaultExperience = try values.decode(AppClipDefaultExperience.self, forKey: "appClipDefaultExperience")
+			}
+
+			public func encode(to encoder: Encoder) throws {
+				var values = encoder.container(keyedBy: StringCodingKey.self)
+				try values.encode(appClipDefaultExperience, forKey: "appClipDefaultExperience")
 			}
 		}
 
@@ -64,9 +102,33 @@ public struct AppClipAppStoreReviewDetailCreateRequest: Codable {
 			self.attributes = attributes
 			self.relationships = relationships
 		}
+
+		public init(from decoder: Decoder) throws {
+			let values = try decoder.container(keyedBy: StringCodingKey.self)
+			self.type = try values.decode(`Type`.self, forKey: "type")
+			self.attributes = try values.decodeIfPresent(Attributes.self, forKey: "attributes")
+			self.relationships = try values.decode(Relationships.self, forKey: "relationships")
+		}
+
+		public func encode(to encoder: Encoder) throws {
+			var values = encoder.container(keyedBy: StringCodingKey.self)
+			try values.encode(type, forKey: "type")
+			try values.encodeIfPresent(attributes, forKey: "attributes")
+			try values.encode(relationships, forKey: "relationships")
+		}
 	}
 
 	public init(data: Data) {
 		self.data = data
+	}
+
+	public init(from decoder: Decoder) throws {
+		let values = try decoder.container(keyedBy: StringCodingKey.self)
+		self.data = try values.decode(Data.self, forKey: "data")
+	}
+
+	public func encode(to encoder: Encoder) throws {
+		var values = encoder.container(keyedBy: StringCodingKey.self)
+		try values.encode(data, forKey: "data")
 	}
 }

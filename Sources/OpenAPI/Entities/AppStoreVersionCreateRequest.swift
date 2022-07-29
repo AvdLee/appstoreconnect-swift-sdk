@@ -37,6 +37,24 @@ public struct AppStoreVersionCreateRequest: Codable {
 				self.releaseType = releaseType
 				self.earliestReleaseDate = earliestReleaseDate
 			}
+
+			public init(from decoder: Decoder) throws {
+				let values = try decoder.container(keyedBy: StringCodingKey.self)
+				self.platform = try values.decode(Platform.self, forKey: "platform")
+				self.versionString = try values.decode(String.self, forKey: "versionString")
+				self.copyright = try values.decodeIfPresent(String.self, forKey: "copyright")
+				self.releaseType = try values.decodeIfPresent(ReleaseType.self, forKey: "releaseType")
+				self.earliestReleaseDate = try values.decodeIfPresent(Date.self, forKey: "earliestReleaseDate")
+			}
+
+			public func encode(to encoder: Encoder) throws {
+				var values = encoder.container(keyedBy: StringCodingKey.self)
+				try values.encode(platform, forKey: "platform")
+				try values.encode(versionString, forKey: "versionString")
+				try values.encodeIfPresent(copyright, forKey: "copyright")
+				try values.encodeIfPresent(releaseType, forKey: "releaseType")
+				try values.encodeIfPresent(earliestReleaseDate, forKey: "earliestReleaseDate")
+			}
 		}
 
 		public struct Relationships: Codable {
@@ -59,10 +77,32 @@ public struct AppStoreVersionCreateRequest: Codable {
 						self.type = type
 						self.id = id
 					}
+
+					public init(from decoder: Decoder) throws {
+						let values = try decoder.container(keyedBy: StringCodingKey.self)
+						self.type = try values.decode(`Type`.self, forKey: "type")
+						self.id = try values.decode(String.self, forKey: "id")
+					}
+
+					public func encode(to encoder: Encoder) throws {
+						var values = encoder.container(keyedBy: StringCodingKey.self)
+						try values.encode(type, forKey: "type")
+						try values.encode(id, forKey: "id")
+					}
 				}
 
 				public init(data: Data) {
 					self.data = data
+				}
+
+				public init(from decoder: Decoder) throws {
+					let values = try decoder.container(keyedBy: StringCodingKey.self)
+					self.data = try values.decode(Data.self, forKey: "data")
+				}
+
+				public func encode(to encoder: Encoder) throws {
+					var values = encoder.container(keyedBy: StringCodingKey.self)
+					try values.encode(data, forKey: "data")
 				}
 			}
 
@@ -81,10 +121,32 @@ public struct AppStoreVersionCreateRequest: Codable {
 						self.type = type
 						self.id = id
 					}
+
+					public init(from decoder: Decoder) throws {
+						let values = try decoder.container(keyedBy: StringCodingKey.self)
+						self.type = try values.decode(`Type`.self, forKey: "type")
+						self.id = try values.decode(String.self, forKey: "id")
+					}
+
+					public func encode(to encoder: Encoder) throws {
+						var values = encoder.container(keyedBy: StringCodingKey.self)
+						try values.encode(type, forKey: "type")
+						try values.encode(id, forKey: "id")
+					}
 				}
 
 				public init(data: [Datum]? = nil) {
 					self.data = data
+				}
+
+				public init(from decoder: Decoder) throws {
+					let values = try decoder.container(keyedBy: StringCodingKey.self)
+					self.data = try values.decodeIfPresent([Datum].self, forKey: "data")
+				}
+
+				public func encode(to encoder: Encoder) throws {
+					var values = encoder.container(keyedBy: StringCodingKey.self)
+					try values.encodeIfPresent(data, forKey: "data")
 				}
 			}
 
@@ -103,10 +165,32 @@ public struct AppStoreVersionCreateRequest: Codable {
 						self.type = type
 						self.id = id
 					}
+
+					public init(from decoder: Decoder) throws {
+						let values = try decoder.container(keyedBy: StringCodingKey.self)
+						self.type = try values.decode(`Type`.self, forKey: "type")
+						self.id = try values.decode(String.self, forKey: "id")
+					}
+
+					public func encode(to encoder: Encoder) throws {
+						var values = encoder.container(keyedBy: StringCodingKey.self)
+						try values.encode(type, forKey: "type")
+						try values.encode(id, forKey: "id")
+					}
 				}
 
 				public init(data: Data? = nil) {
 					self.data = data
+				}
+
+				public init(from decoder: Decoder) throws {
+					let values = try decoder.container(keyedBy: StringCodingKey.self)
+					self.data = try values.decodeIfPresent(Data.self, forKey: "data")
+				}
+
+				public func encode(to encoder: Encoder) throws {
+					var values = encoder.container(keyedBy: StringCodingKey.self)
+					try values.encodeIfPresent(data, forKey: "data")
 				}
 			}
 
@@ -115,6 +199,20 @@ public struct AppStoreVersionCreateRequest: Codable {
 				self.appStoreVersionLocalizations = appStoreVersionLocalizations
 				self.build = build
 			}
+
+			public init(from decoder: Decoder) throws {
+				let values = try decoder.container(keyedBy: StringCodingKey.self)
+				self.app = try values.decode(App.self, forKey: "app")
+				self.appStoreVersionLocalizations = try values.decodeIfPresent(AppStoreVersionLocalizations.self, forKey: "appStoreVersionLocalizations")
+				self.build = try values.decodeIfPresent(Build.self, forKey: "build")
+			}
+
+			public func encode(to encoder: Encoder) throws {
+				var values = encoder.container(keyedBy: StringCodingKey.self)
+				try values.encode(app, forKey: "app")
+				try values.encodeIfPresent(appStoreVersionLocalizations, forKey: "appStoreVersionLocalizations")
+				try values.encodeIfPresent(build, forKey: "build")
+			}
 		}
 
 		public init(type: `Type`, attributes: Attributes, relationships: Relationships) {
@@ -122,9 +220,33 @@ public struct AppStoreVersionCreateRequest: Codable {
 			self.attributes = attributes
 			self.relationships = relationships
 		}
+
+		public init(from decoder: Decoder) throws {
+			let values = try decoder.container(keyedBy: StringCodingKey.self)
+			self.type = try values.decode(`Type`.self, forKey: "type")
+			self.attributes = try values.decode(Attributes.self, forKey: "attributes")
+			self.relationships = try values.decode(Relationships.self, forKey: "relationships")
+		}
+
+		public func encode(to encoder: Encoder) throws {
+			var values = encoder.container(keyedBy: StringCodingKey.self)
+			try values.encode(type, forKey: "type")
+			try values.encode(attributes, forKey: "attributes")
+			try values.encode(relationships, forKey: "relationships")
+		}
 	}
 
 	public init(data: Data) {
 		self.data = data
+	}
+
+	public init(from decoder: Decoder) throws {
+		let values = try decoder.container(keyedBy: StringCodingKey.self)
+		self.data = try values.decode(Data.self, forKey: "data")
+	}
+
+	public func encode(to encoder: Encoder) throws {
+		var values = encoder.container(keyedBy: StringCodingKey.self)
+		try values.encode(data, forKey: "data")
 	}
 }

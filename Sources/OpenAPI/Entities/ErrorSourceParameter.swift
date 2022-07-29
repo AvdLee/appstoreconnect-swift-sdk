@@ -12,4 +12,14 @@ public struct ErrorSourceParameter: Codable {
 	public init(parameter: String? = nil) {
 		self.parameter = parameter
 	}
+
+	public init(from decoder: Decoder) throws {
+		let values = try decoder.container(keyedBy: StringCodingKey.self)
+		self.parameter = try values.decodeIfPresent(String.self, forKey: "parameter")
+	}
+
+	public func encode(to encoder: Encoder) throws {
+		var values = encoder.container(keyedBy: StringCodingKey.self)
+		try values.encodeIfPresent(parameter, forKey: "parameter")
+	}
 }

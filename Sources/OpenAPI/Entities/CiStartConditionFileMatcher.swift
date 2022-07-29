@@ -15,4 +15,18 @@ public struct CiStartConditionFileMatcher: Codable {
 		self.fileExtension = fileExtension
 		self.fileName = fileName
 	}
+
+	public init(from decoder: Decoder) throws {
+		let values = try decoder.container(keyedBy: StringCodingKey.self)
+		self.directory = try values.decodeIfPresent(String.self, forKey: "directory")
+		self.fileExtension = try values.decodeIfPresent(String.self, forKey: "fileExtension")
+		self.fileName = try values.decodeIfPresent(String.self, forKey: "fileName")
+	}
+
+	public func encode(to encoder: Encoder) throws {
+		var values = encoder.container(keyedBy: StringCodingKey.self)
+		try values.encodeIfPresent(directory, forKey: "directory")
+		try values.encodeIfPresent(fileExtension, forKey: "fileExtension")
+		try values.encodeIfPresent(fileName, forKey: "fileName")
+	}
 }

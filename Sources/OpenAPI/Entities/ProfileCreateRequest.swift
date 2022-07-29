@@ -42,6 +42,18 @@ public struct ProfileCreateRequest: Codable {
 				self.name = name
 				self.profileType = profileType
 			}
+
+			public init(from decoder: Decoder) throws {
+				let values = try decoder.container(keyedBy: StringCodingKey.self)
+				self.name = try values.decode(String.self, forKey: "name")
+				self.profileType = try values.decode(ProfileType.self, forKey: "profileType")
+			}
+
+			public func encode(to encoder: Encoder) throws {
+				var values = encoder.container(keyedBy: StringCodingKey.self)
+				try values.encode(name, forKey: "name")
+				try values.encode(profileType, forKey: "profileType")
+			}
 		}
 
 		public struct Relationships: Codable {
@@ -64,10 +76,32 @@ public struct ProfileCreateRequest: Codable {
 						self.type = type
 						self.id = id
 					}
+
+					public init(from decoder: Decoder) throws {
+						let values = try decoder.container(keyedBy: StringCodingKey.self)
+						self.type = try values.decode(`Type`.self, forKey: "type")
+						self.id = try values.decode(String.self, forKey: "id")
+					}
+
+					public func encode(to encoder: Encoder) throws {
+						var values = encoder.container(keyedBy: StringCodingKey.self)
+						try values.encode(type, forKey: "type")
+						try values.encode(id, forKey: "id")
+					}
 				}
 
 				public init(data: Data) {
 					self.data = data
+				}
+
+				public init(from decoder: Decoder) throws {
+					let values = try decoder.container(keyedBy: StringCodingKey.self)
+					self.data = try values.decode(Data.self, forKey: "data")
+				}
+
+				public func encode(to encoder: Encoder) throws {
+					var values = encoder.container(keyedBy: StringCodingKey.self)
+					try values.encode(data, forKey: "data")
 				}
 			}
 
@@ -86,10 +120,32 @@ public struct ProfileCreateRequest: Codable {
 						self.type = type
 						self.id = id
 					}
+
+					public init(from decoder: Decoder) throws {
+						let values = try decoder.container(keyedBy: StringCodingKey.self)
+						self.type = try values.decode(`Type`.self, forKey: "type")
+						self.id = try values.decode(String.self, forKey: "id")
+					}
+
+					public func encode(to encoder: Encoder) throws {
+						var values = encoder.container(keyedBy: StringCodingKey.self)
+						try values.encode(type, forKey: "type")
+						try values.encode(id, forKey: "id")
+					}
 				}
 
 				public init(data: [Datum]? = nil) {
 					self.data = data
+				}
+
+				public init(from decoder: Decoder) throws {
+					let values = try decoder.container(keyedBy: StringCodingKey.self)
+					self.data = try values.decodeIfPresent([Datum].self, forKey: "data")
+				}
+
+				public func encode(to encoder: Encoder) throws {
+					var values = encoder.container(keyedBy: StringCodingKey.self)
+					try values.encodeIfPresent(data, forKey: "data")
 				}
 			}
 
@@ -108,10 +164,32 @@ public struct ProfileCreateRequest: Codable {
 						self.type = type
 						self.id = id
 					}
+
+					public init(from decoder: Decoder) throws {
+						let values = try decoder.container(keyedBy: StringCodingKey.self)
+						self.type = try values.decode(`Type`.self, forKey: "type")
+						self.id = try values.decode(String.self, forKey: "id")
+					}
+
+					public func encode(to encoder: Encoder) throws {
+						var values = encoder.container(keyedBy: StringCodingKey.self)
+						try values.encode(type, forKey: "type")
+						try values.encode(id, forKey: "id")
+					}
 				}
 
 				public init(data: [Datum]) {
 					self.data = data
+				}
+
+				public init(from decoder: Decoder) throws {
+					let values = try decoder.container(keyedBy: StringCodingKey.self)
+					self.data = try values.decode([Datum].self, forKey: "data")
+				}
+
+				public func encode(to encoder: Encoder) throws {
+					var values = encoder.container(keyedBy: StringCodingKey.self)
+					try values.encode(data, forKey: "data")
 				}
 			}
 
@@ -121,10 +199,18 @@ public struct ProfileCreateRequest: Codable {
 				self.certificates = certificates
 			}
 
-			private enum CodingKeys: String, CodingKey {
-				case bundleID = "bundleId"
-				case devices
-				case certificates
+			public init(from decoder: Decoder) throws {
+				let values = try decoder.container(keyedBy: StringCodingKey.self)
+				self.bundleID = try values.decode(BundleID.self, forKey: "bundleId")
+				self.devices = try values.decodeIfPresent(Devices.self, forKey: "devices")
+				self.certificates = try values.decode(Certificates.self, forKey: "certificates")
+			}
+
+			public func encode(to encoder: Encoder) throws {
+				var values = encoder.container(keyedBy: StringCodingKey.self)
+				try values.encode(bundleID, forKey: "bundleId")
+				try values.encodeIfPresent(devices, forKey: "devices")
+				try values.encode(certificates, forKey: "certificates")
 			}
 		}
 
@@ -133,9 +219,33 @@ public struct ProfileCreateRequest: Codable {
 			self.attributes = attributes
 			self.relationships = relationships
 		}
+
+		public init(from decoder: Decoder) throws {
+			let values = try decoder.container(keyedBy: StringCodingKey.self)
+			self.type = try values.decode(`Type`.self, forKey: "type")
+			self.attributes = try values.decode(Attributes.self, forKey: "attributes")
+			self.relationships = try values.decode(Relationships.self, forKey: "relationships")
+		}
+
+		public func encode(to encoder: Encoder) throws {
+			var values = encoder.container(keyedBy: StringCodingKey.self)
+			try values.encode(type, forKey: "type")
+			try values.encode(attributes, forKey: "attributes")
+			try values.encode(relationships, forKey: "relationships")
+		}
 	}
 
 	public init(data: Data) {
 		self.data = data
+	}
+
+	public init(from decoder: Decoder) throws {
+		let values = try decoder.container(keyedBy: StringCodingKey.self)
+		self.data = try values.decode(Data.self, forKey: "data")
+	}
+
+	public func encode(to encoder: Encoder) throws {
+		var values = encoder.container(keyedBy: StringCodingKey.self)
+		try values.encode(data, forKey: "data")
 	}
 }

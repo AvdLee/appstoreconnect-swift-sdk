@@ -17,4 +17,20 @@ public struct CiIssueCounts: Codable {
 		self.testFailures = testFailures
 		self.warnings = warnings
 	}
+
+	public init(from decoder: Decoder) throws {
+		let values = try decoder.container(keyedBy: StringCodingKey.self)
+		self.analyzerWarnings = try values.decodeIfPresent(Int.self, forKey: "analyzerWarnings")
+		self.errors = try values.decodeIfPresent(Int.self, forKey: "errors")
+		self.testFailures = try values.decodeIfPresent(Int.self, forKey: "testFailures")
+		self.warnings = try values.decodeIfPresent(Int.self, forKey: "warnings")
+	}
+
+	public func encode(to encoder: Encoder) throws {
+		var values = encoder.container(keyedBy: StringCodingKey.self)
+		try values.encodeIfPresent(analyzerWarnings, forKey: "analyzerWarnings")
+		try values.encodeIfPresent(errors, forKey: "errors")
+		try values.encodeIfPresent(testFailures, forKey: "testFailures")
+		try values.encodeIfPresent(warnings, forKey: "warnings")
+	}
 }

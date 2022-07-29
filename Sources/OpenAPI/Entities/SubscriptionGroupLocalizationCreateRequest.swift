@@ -27,6 +27,20 @@ public struct SubscriptionGroupLocalizationCreateRequest: Codable {
 				self.customAppName = customAppName
 				self.locale = locale
 			}
+
+			public init(from decoder: Decoder) throws {
+				let values = try decoder.container(keyedBy: StringCodingKey.self)
+				self.name = try values.decode(String.self, forKey: "name")
+				self.customAppName = try values.decodeIfPresent(String.self, forKey: "customAppName")
+				self.locale = try values.decode(String.self, forKey: "locale")
+			}
+
+			public func encode(to encoder: Encoder) throws {
+				var values = encoder.container(keyedBy: StringCodingKey.self)
+				try values.encode(name, forKey: "name")
+				try values.encodeIfPresent(customAppName, forKey: "customAppName")
+				try values.encode(locale, forKey: "locale")
+			}
 		}
 
 		public struct Relationships: Codable {
@@ -47,15 +61,47 @@ public struct SubscriptionGroupLocalizationCreateRequest: Codable {
 						self.type = type
 						self.id = id
 					}
+
+					public init(from decoder: Decoder) throws {
+						let values = try decoder.container(keyedBy: StringCodingKey.self)
+						self.type = try values.decode(`Type`.self, forKey: "type")
+						self.id = try values.decode(String.self, forKey: "id")
+					}
+
+					public func encode(to encoder: Encoder) throws {
+						var values = encoder.container(keyedBy: StringCodingKey.self)
+						try values.encode(type, forKey: "type")
+						try values.encode(id, forKey: "id")
+					}
 				}
 
 				public init(data: Data) {
 					self.data = data
 				}
+
+				public init(from decoder: Decoder) throws {
+					let values = try decoder.container(keyedBy: StringCodingKey.self)
+					self.data = try values.decode(Data.self, forKey: "data")
+				}
+
+				public func encode(to encoder: Encoder) throws {
+					var values = encoder.container(keyedBy: StringCodingKey.self)
+					try values.encode(data, forKey: "data")
+				}
 			}
 
 			public init(subscriptionGroup: SubscriptionGroup) {
 				self.subscriptionGroup = subscriptionGroup
+			}
+
+			public init(from decoder: Decoder) throws {
+				let values = try decoder.container(keyedBy: StringCodingKey.self)
+				self.subscriptionGroup = try values.decode(SubscriptionGroup.self, forKey: "subscriptionGroup")
+			}
+
+			public func encode(to encoder: Encoder) throws {
+				var values = encoder.container(keyedBy: StringCodingKey.self)
+				try values.encode(subscriptionGroup, forKey: "subscriptionGroup")
 			}
 		}
 
@@ -64,9 +110,33 @@ public struct SubscriptionGroupLocalizationCreateRequest: Codable {
 			self.attributes = attributes
 			self.relationships = relationships
 		}
+
+		public init(from decoder: Decoder) throws {
+			let values = try decoder.container(keyedBy: StringCodingKey.self)
+			self.type = try values.decode(`Type`.self, forKey: "type")
+			self.attributes = try values.decode(Attributes.self, forKey: "attributes")
+			self.relationships = try values.decode(Relationships.self, forKey: "relationships")
+		}
+
+		public func encode(to encoder: Encoder) throws {
+			var values = encoder.container(keyedBy: StringCodingKey.self)
+			try values.encode(type, forKey: "type")
+			try values.encode(attributes, forKey: "attributes")
+			try values.encode(relationships, forKey: "relationships")
+		}
 	}
 
 	public init(data: Data) {
 		self.data = data
+	}
+
+	public init(from decoder: Decoder) throws {
+		let values = try decoder.container(keyedBy: StringCodingKey.self)
+		self.data = try values.decode(Data.self, forKey: "data")
+	}
+
+	public func encode(to encoder: Encoder) throws {
+		var values = encoder.container(keyedBy: StringCodingKey.self)
+		try values.encode(data, forKey: "data")
 	}
 }

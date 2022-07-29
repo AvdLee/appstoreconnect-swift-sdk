@@ -22,4 +22,18 @@ public struct AppMediaAssetState: Codable {
 		self.warnings = warnings
 		self.state = state
 	}
+
+	public init(from decoder: Decoder) throws {
+		let values = try decoder.container(keyedBy: StringCodingKey.self)
+		self.errors = try values.decodeIfPresent([AppMediaStateError].self, forKey: "errors")
+		self.warnings = try values.decodeIfPresent([AppMediaStateError].self, forKey: "warnings")
+		self.state = try values.decodeIfPresent(State.self, forKey: "state")
+	}
+
+	public func encode(to encoder: Encoder) throws {
+		var values = encoder.container(keyedBy: StringCodingKey.self)
+		try values.encodeIfPresent(errors, forKey: "errors")
+		try values.encodeIfPresent(warnings, forKey: "warnings")
+		try values.encodeIfPresent(state, forKey: "state")
+	}
 }

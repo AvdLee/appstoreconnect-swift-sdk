@@ -24,15 +24,49 @@ public struct CertificateCreateRequest: Codable {
 				self.csrContent = csrContent
 				self.certificateType = certificateType
 			}
+
+			public init(from decoder: Decoder) throws {
+				let values = try decoder.container(keyedBy: StringCodingKey.self)
+				self.csrContent = try values.decode(String.self, forKey: "csrContent")
+				self.certificateType = try values.decode(CertificateType.self, forKey: "certificateType")
+			}
+
+			public func encode(to encoder: Encoder) throws {
+				var values = encoder.container(keyedBy: StringCodingKey.self)
+				try values.encode(csrContent, forKey: "csrContent")
+				try values.encode(certificateType, forKey: "certificateType")
+			}
 		}
 
 		public init(type: `Type`, attributes: Attributes) {
 			self.type = type
 			self.attributes = attributes
 		}
+
+		public init(from decoder: Decoder) throws {
+			let values = try decoder.container(keyedBy: StringCodingKey.self)
+			self.type = try values.decode(`Type`.self, forKey: "type")
+			self.attributes = try values.decode(Attributes.self, forKey: "attributes")
+		}
+
+		public func encode(to encoder: Encoder) throws {
+			var values = encoder.container(keyedBy: StringCodingKey.self)
+			try values.encode(type, forKey: "type")
+			try values.encode(attributes, forKey: "attributes")
+		}
 	}
 
 	public init(data: Data) {
 		self.data = data
+	}
+
+	public init(from decoder: Decoder) throws {
+		let values = try decoder.container(keyedBy: StringCodingKey.self)
+		self.data = try values.decode(Data.self, forKey: "data")
+	}
+
+	public func encode(to encoder: Encoder) throws {
+		var values = encoder.container(keyedBy: StringCodingKey.self)
+		try values.encode(data, forKey: "data")
 	}
 }

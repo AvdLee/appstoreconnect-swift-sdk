@@ -24,6 +24,20 @@ public struct DiagnosticLogs: Codable {
 				self.insightsCategory = insightsCategory
 				self.insightsString = insightsString
 			}
+
+			public init(from decoder: Decoder) throws {
+				let values = try decoder.container(keyedBy: StringCodingKey.self)
+				self.insightsURL = try values.decodeIfPresent(String.self, forKey: "insightsURL")
+				self.insightsCategory = try values.decodeIfPresent(String.self, forKey: "insightsCategory")
+				self.insightsString = try values.decodeIfPresent(String.self, forKey: "insightsString")
+			}
+
+			public func encode(to encoder: Encoder) throws {
+				var values = encoder.container(keyedBy: StringCodingKey.self)
+				try values.encodeIfPresent(insightsURL, forKey: "insightsURL")
+				try values.encodeIfPresent(insightsCategory, forKey: "insightsCategory")
+				try values.encodeIfPresent(insightsString, forKey: "insightsString")
+			}
 		}
 
 		public struct DiagnosticLog: Codable {
@@ -40,6 +54,16 @@ public struct DiagnosticLogs: Codable {
 					public init(callStackRootFrames: [DiagnosticLogCallStackNode]? = nil) {
 						self.callStackRootFrames = callStackRootFrames
 					}
+
+					public init(from decoder: Decoder) throws {
+						let values = try decoder.container(keyedBy: StringCodingKey.self)
+						self.callStackRootFrames = try values.decodeIfPresent([DiagnosticLogCallStackNode].self, forKey: "callStackRootFrames")
+					}
+
+					public func encode(to encoder: Encoder) throws {
+						var values = encoder.container(keyedBy: StringCodingKey.self)
+						try values.encodeIfPresent(callStackRootFrames, forKey: "callStackRootFrames")
+					}
 				}
 
 				public init(isCallStackPerThread: Bool? = nil, callStacks: [CallStack]? = nil) {
@@ -47,9 +71,16 @@ public struct DiagnosticLogs: Codable {
 					self.callStacks = callStacks
 				}
 
-				private enum CodingKeys: String, CodingKey {
-					case isCallStackPerThread = "callStackPerThread"
-					case callStacks
+				public init(from decoder: Decoder) throws {
+					let values = try decoder.container(keyedBy: StringCodingKey.self)
+					self.isCallStackPerThread = try values.decodeIfPresent(Bool.self, forKey: "callStackPerThread")
+					self.callStacks = try values.decodeIfPresent([CallStack].self, forKey: "callStacks")
+				}
+
+				public func encode(to encoder: Encoder) throws {
+					var values = encoder.container(keyedBy: StringCodingKey.self)
+					try values.encodeIfPresent(isCallStackPerThread, forKey: "callStackPerThread")
+					try values.encodeIfPresent(callStacks, forKey: "callStacks")
 				}
 			}
 
@@ -76,22 +107,48 @@ public struct DiagnosticLogs: Codable {
 					self.buildVersion = buildVersion
 				}
 
-				private enum CodingKeys: String, CodingKey {
-					case bundleID = "bundleId"
-					case event
-					case osVersion
-					case appVersion
-					case writesCaused
-					case deviceType
-					case platformArchitecture
-					case eventDetail
-					case buildVersion
+				public init(from decoder: Decoder) throws {
+					let values = try decoder.container(keyedBy: StringCodingKey.self)
+					self.bundleID = try values.decodeIfPresent(String.self, forKey: "bundleId")
+					self.event = try values.decodeIfPresent(String.self, forKey: "event")
+					self.osVersion = try values.decodeIfPresent(String.self, forKey: "osVersion")
+					self.appVersion = try values.decodeIfPresent(String.self, forKey: "appVersion")
+					self.writesCaused = try values.decodeIfPresent(String.self, forKey: "writesCaused")
+					self.deviceType = try values.decodeIfPresent(String.self, forKey: "deviceType")
+					self.platformArchitecture = try values.decodeIfPresent(String.self, forKey: "platformArchitecture")
+					self.eventDetail = try values.decodeIfPresent(String.self, forKey: "eventDetail")
+					self.buildVersion = try values.decodeIfPresent(String.self, forKey: "buildVersion")
+				}
+
+				public func encode(to encoder: Encoder) throws {
+					var values = encoder.container(keyedBy: StringCodingKey.self)
+					try values.encodeIfPresent(bundleID, forKey: "bundleId")
+					try values.encodeIfPresent(event, forKey: "event")
+					try values.encodeIfPresent(osVersion, forKey: "osVersion")
+					try values.encodeIfPresent(appVersion, forKey: "appVersion")
+					try values.encodeIfPresent(writesCaused, forKey: "writesCaused")
+					try values.encodeIfPresent(deviceType, forKey: "deviceType")
+					try values.encodeIfPresent(platformArchitecture, forKey: "platformArchitecture")
+					try values.encodeIfPresent(eventDetail, forKey: "eventDetail")
+					try values.encodeIfPresent(buildVersion, forKey: "buildVersion")
 				}
 			}
 
 			public init(callStackTree: [CallStackTreeItem]? = nil, diagnosticMetaData: DiagnosticMetaData? = nil) {
 				self.callStackTree = callStackTree
 				self.diagnosticMetaData = diagnosticMetaData
+			}
+
+			public init(from decoder: Decoder) throws {
+				let values = try decoder.container(keyedBy: StringCodingKey.self)
+				self.callStackTree = try values.decodeIfPresent([CallStackTreeItem].self, forKey: "callStackTree")
+				self.diagnosticMetaData = try values.decodeIfPresent(DiagnosticMetaData.self, forKey: "diagnosticMetaData")
+			}
+
+			public func encode(to encoder: Encoder) throws {
+				var values = encoder.container(keyedBy: StringCodingKey.self)
+				try values.encodeIfPresent(callStackTree, forKey: "callStackTree")
+				try values.encodeIfPresent(diagnosticMetaData, forKey: "diagnosticMetaData")
 			}
 		}
 
@@ -101,15 +158,35 @@ public struct DiagnosticLogs: Codable {
 			self.diagnosticLogs = diagnosticLogs
 		}
 
-		private enum CodingKeys: String, CodingKey {
-			case signatureID = "signatureId"
-			case diagnosticInsights
-			case diagnosticLogs
+		public init(from decoder: Decoder) throws {
+			let values = try decoder.container(keyedBy: StringCodingKey.self)
+			self.signatureID = try values.decodeIfPresent(String.self, forKey: "signatureId")
+			self.diagnosticInsights = try values.decodeIfPresent([DiagnosticInsight].self, forKey: "diagnosticInsights")
+			self.diagnosticLogs = try values.decodeIfPresent([DiagnosticLog].self, forKey: "diagnosticLogs")
+		}
+
+		public func encode(to encoder: Encoder) throws {
+			var values = encoder.container(keyedBy: StringCodingKey.self)
+			try values.encodeIfPresent(signatureID, forKey: "signatureId")
+			try values.encodeIfPresent(diagnosticInsights, forKey: "diagnosticInsights")
+			try values.encodeIfPresent(diagnosticLogs, forKey: "diagnosticLogs")
 		}
 	}
 
 	public init(productData: [ProductDatum]? = nil, version: String? = nil) {
 		self.productData = productData
 		self.version = version
+	}
+
+	public init(from decoder: Decoder) throws {
+		let values = try decoder.container(keyedBy: StringCodingKey.self)
+		self.productData = try values.decodeIfPresent([ProductDatum].self, forKey: "productData")
+		self.version = try values.decodeIfPresent(String.self, forKey: "version")
+	}
+
+	public func encode(to encoder: Encoder) throws {
+		var values = encoder.container(keyedBy: StringCodingKey.self)
+		try values.encodeIfPresent(productData, forKey: "productData")
+		try values.encodeIfPresent(version, forKey: "version")
 	}
 }

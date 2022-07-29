@@ -37,11 +37,20 @@ public struct CiArtifact: Codable {
 			self.downloadURL = downloadURL
 		}
 
-		private enum CodingKeys: String, CodingKey {
-			case fileType
-			case fileName
-			case fileSize
-			case downloadURL = "downloadUrl"
+		public init(from decoder: Decoder) throws {
+			let values = try decoder.container(keyedBy: StringCodingKey.self)
+			self.fileType = try values.decodeIfPresent(FileType.self, forKey: "fileType")
+			self.fileName = try values.decodeIfPresent(String.self, forKey: "fileName")
+			self.fileSize = try values.decodeIfPresent(Int.self, forKey: "fileSize")
+			self.downloadURL = try values.decodeIfPresent(URL.self, forKey: "downloadUrl")
+		}
+
+		public func encode(to encoder: Encoder) throws {
+			var values = encoder.container(keyedBy: StringCodingKey.self)
+			try values.encodeIfPresent(fileType, forKey: "fileType")
+			try values.encodeIfPresent(fileName, forKey: "fileName")
+			try values.encodeIfPresent(fileSize, forKey: "fileSize")
+			try values.encodeIfPresent(downloadURL, forKey: "downloadUrl")
 		}
 	}
 
@@ -50,5 +59,21 @@ public struct CiArtifact: Codable {
 		self.id = id
 		self.attributes = attributes
 		self.links = links
+	}
+
+	public init(from decoder: Decoder) throws {
+		let values = try decoder.container(keyedBy: StringCodingKey.self)
+		self.type = try values.decode(`Type`.self, forKey: "type")
+		self.id = try values.decode(String.self, forKey: "id")
+		self.attributes = try values.decodeIfPresent(Attributes.self, forKey: "attributes")
+		self.links = try values.decode(ResourceLinks.self, forKey: "links")
+	}
+
+	public func encode(to encoder: Encoder) throws {
+		var values = encoder.container(keyedBy: StringCodingKey.self)
+		try values.encode(type, forKey: "type")
+		try values.encode(id, forKey: "id")
+		try values.encodeIfPresent(attributes, forKey: "attributes")
+		try values.encode(links, forKey: "links")
 	}
 }

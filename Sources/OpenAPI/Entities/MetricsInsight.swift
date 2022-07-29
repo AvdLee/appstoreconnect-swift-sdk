@@ -32,6 +32,26 @@ public struct MetricsInsight: Codable {
 			self.latestVersionValue = latestVersionValue
 			self.device = device
 		}
+
+		public init(from decoder: Decoder) throws {
+			let values = try decoder.container(keyedBy: StringCodingKey.self)
+			self.deltaPercentage = try values.decodeIfPresent(Double.self, forKey: "deltaPercentage")
+			self.percentile = try values.decodeIfPresent(String.self, forKey: "percentile")
+			self.summaryString = try values.decodeIfPresent(String.self, forKey: "summaryString")
+			self.referenceAverageValue = try values.decodeIfPresent(Double.self, forKey: "referenceAverageValue")
+			self.latestVersionValue = try values.decodeIfPresent(Double.self, forKey: "latestVersionValue")
+			self.device = try values.decodeIfPresent(String.self, forKey: "device")
+		}
+
+		public func encode(to encoder: Encoder) throws {
+			var values = encoder.container(keyedBy: StringCodingKey.self)
+			try values.encodeIfPresent(deltaPercentage, forKey: "deltaPercentage")
+			try values.encodeIfPresent(percentile, forKey: "percentile")
+			try values.encodeIfPresent(summaryString, forKey: "summaryString")
+			try values.encodeIfPresent(referenceAverageValue, forKey: "referenceAverageValue")
+			try values.encodeIfPresent(latestVersionValue, forKey: "latestVersionValue")
+			try values.encodeIfPresent(device, forKey: "device")
+		}
 	}
 
 	public init(metricCategory: MetricCategory? = nil, latestVersion: String? = nil, metric: String? = nil, summaryString: String? = nil, referenceVersions: String? = nil, maxLatestVersionValue: Double? = nil, subSystemLabel: String? = nil, isHighImpact: Bool? = nil, populations: [Population]? = nil) {
@@ -46,15 +66,29 @@ public struct MetricsInsight: Codable {
 		self.populations = populations
 	}
 
-	private enum CodingKeys: String, CodingKey {
-		case metricCategory
-		case latestVersion
-		case metric
-		case summaryString
-		case referenceVersions
-		case maxLatestVersionValue
-		case subSystemLabel
-		case isHighImpact = "highImpact"
-		case populations
+	public init(from decoder: Decoder) throws {
+		let values = try decoder.container(keyedBy: StringCodingKey.self)
+		self.metricCategory = try values.decodeIfPresent(MetricCategory.self, forKey: "metricCategory")
+		self.latestVersion = try values.decodeIfPresent(String.self, forKey: "latestVersion")
+		self.metric = try values.decodeIfPresent(String.self, forKey: "metric")
+		self.summaryString = try values.decodeIfPresent(String.self, forKey: "summaryString")
+		self.referenceVersions = try values.decodeIfPresent(String.self, forKey: "referenceVersions")
+		self.maxLatestVersionValue = try values.decodeIfPresent(Double.self, forKey: "maxLatestVersionValue")
+		self.subSystemLabel = try values.decodeIfPresent(String.self, forKey: "subSystemLabel")
+		self.isHighImpact = try values.decodeIfPresent(Bool.self, forKey: "highImpact")
+		self.populations = try values.decodeIfPresent([Population].self, forKey: "populations")
+	}
+
+	public func encode(to encoder: Encoder) throws {
+		var values = encoder.container(keyedBy: StringCodingKey.self)
+		try values.encodeIfPresent(metricCategory, forKey: "metricCategory")
+		try values.encodeIfPresent(latestVersion, forKey: "latestVersion")
+		try values.encodeIfPresent(metric, forKey: "metric")
+		try values.encodeIfPresent(summaryString, forKey: "summaryString")
+		try values.encodeIfPresent(referenceVersions, forKey: "referenceVersions")
+		try values.encodeIfPresent(maxLatestVersionValue, forKey: "maxLatestVersionValue")
+		try values.encodeIfPresent(subSystemLabel, forKey: "subSystemLabel")
+		try values.encodeIfPresent(isHighImpact, forKey: "highImpact")
+		try values.encodeIfPresent(populations, forKey: "populations")
 	}
 }

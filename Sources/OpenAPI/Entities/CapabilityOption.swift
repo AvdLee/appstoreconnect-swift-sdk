@@ -31,12 +31,23 @@ public struct CapabilityOption: Codable {
 		self.isSupportsWildcard = isSupportsWildcard
 	}
 
-	private enum CodingKeys: String, CodingKey {
-		case key
-		case name
-		case description
-		case isEnabledByDefault = "enabledByDefault"
-		case isEnabled = "enabled"
-		case isSupportsWildcard = "supportsWildcard"
+	public init(from decoder: Decoder) throws {
+		let values = try decoder.container(keyedBy: StringCodingKey.self)
+		self.key = try values.decodeIfPresent(Key.self, forKey: "key")
+		self.name = try values.decodeIfPresent(String.self, forKey: "name")
+		self.description = try values.decodeIfPresent(String.self, forKey: "description")
+		self.isEnabledByDefault = try values.decodeIfPresent(Bool.self, forKey: "enabledByDefault")
+		self.isEnabled = try values.decodeIfPresent(Bool.self, forKey: "enabled")
+		self.isSupportsWildcard = try values.decodeIfPresent(Bool.self, forKey: "supportsWildcard")
+	}
+
+	public func encode(to encoder: Encoder) throws {
+		var values = encoder.container(keyedBy: StringCodingKey.self)
+		try values.encodeIfPresent(key, forKey: "key")
+		try values.encodeIfPresent(name, forKey: "name")
+		try values.encodeIfPresent(description, forKey: "description")
+		try values.encodeIfPresent(isEnabledByDefault, forKey: "enabledByDefault")
+		try values.encodeIfPresent(isEnabled, forKey: "enabled")
+		try values.encodeIfPresent(isSupportsWildcard, forKey: "supportsWildcard")
 	}
 }

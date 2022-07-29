@@ -13,4 +13,16 @@ public struct AppMediaStateError: Codable {
 		self.code = code
 		self.description = description
 	}
+
+	public init(from decoder: Decoder) throws {
+		let values = try decoder.container(keyedBy: StringCodingKey.self)
+		self.code = try values.decodeIfPresent(String.self, forKey: "code")
+		self.description = try values.decodeIfPresent(String.self, forKey: "description")
+	}
+
+	public func encode(to encoder: Encoder) throws {
+		var values = encoder.container(keyedBy: StringCodingKey.self)
+		try values.encodeIfPresent(code, forKey: "code")
+		try values.encodeIfPresent(description, forKey: "description")
+	}
 }

@@ -37,6 +37,24 @@ public struct CiTestResult: Codable {
 				self.status = status
 				self.duration = duration
 			}
+
+			public init(from decoder: Decoder) throws {
+				let values = try decoder.container(keyedBy: StringCodingKey.self)
+				self.uuid = try values.decodeIfPresent(String.self, forKey: "uuid")
+				self.deviceName = try values.decodeIfPresent(String.self, forKey: "deviceName")
+				self.osVersion = try values.decodeIfPresent(String.self, forKey: "osVersion")
+				self.status = try values.decodeIfPresent(CiTestStatus.self, forKey: "status")
+				self.duration = try values.decodeIfPresent(Double.self, forKey: "duration")
+			}
+
+			public func encode(to encoder: Encoder) throws {
+				var values = encoder.container(keyedBy: StringCodingKey.self)
+				try values.encodeIfPresent(uuid, forKey: "uuid")
+				try values.encodeIfPresent(deviceName, forKey: "deviceName")
+				try values.encodeIfPresent(osVersion, forKey: "osVersion")
+				try values.encodeIfPresent(status, forKey: "status")
+				try values.encodeIfPresent(duration, forKey: "duration")
+			}
 		}
 
 		public init(className: String? = nil, name: String? = nil, status: CiTestStatus? = nil, fileSource: FileLocation? = nil, message: String? = nil, destinationTestResults: [DestinationTestResult]? = nil) {
@@ -47,6 +65,26 @@ public struct CiTestResult: Codable {
 			self.message = message
 			self.destinationTestResults = destinationTestResults
 		}
+
+		public init(from decoder: Decoder) throws {
+			let values = try decoder.container(keyedBy: StringCodingKey.self)
+			self.className = try values.decodeIfPresent(String.self, forKey: "className")
+			self.name = try values.decodeIfPresent(String.self, forKey: "name")
+			self.status = try values.decodeIfPresent(CiTestStatus.self, forKey: "status")
+			self.fileSource = try values.decodeIfPresent(FileLocation.self, forKey: "fileSource")
+			self.message = try values.decodeIfPresent(String.self, forKey: "message")
+			self.destinationTestResults = try values.decodeIfPresent([DestinationTestResult].self, forKey: "destinationTestResults")
+		}
+
+		public func encode(to encoder: Encoder) throws {
+			var values = encoder.container(keyedBy: StringCodingKey.self)
+			try values.encodeIfPresent(className, forKey: "className")
+			try values.encodeIfPresent(name, forKey: "name")
+			try values.encodeIfPresent(status, forKey: "status")
+			try values.encodeIfPresent(fileSource, forKey: "fileSource")
+			try values.encodeIfPresent(message, forKey: "message")
+			try values.encodeIfPresent(destinationTestResults, forKey: "destinationTestResults")
+		}
 	}
 
 	public init(type: `Type`, id: String, attributes: Attributes? = nil, links: ResourceLinks) {
@@ -54,5 +92,21 @@ public struct CiTestResult: Codable {
 		self.id = id
 		self.attributes = attributes
 		self.links = links
+	}
+
+	public init(from decoder: Decoder) throws {
+		let values = try decoder.container(keyedBy: StringCodingKey.self)
+		self.type = try values.decode(`Type`.self, forKey: "type")
+		self.id = try values.decode(String.self, forKey: "id")
+		self.attributes = try values.decodeIfPresent(Attributes.self, forKey: "attributes")
+		self.links = try values.decode(ResourceLinks.self, forKey: "links")
+	}
+
+	public func encode(to encoder: Encoder) throws {
+		var values = encoder.container(keyedBy: StringCodingKey.self)
+		try values.encode(type, forKey: "type")
+		try values.encode(id, forKey: "id")
+		try values.encodeIfPresent(attributes, forKey: "attributes")
+		try values.encode(links, forKey: "links")
 	}
 }

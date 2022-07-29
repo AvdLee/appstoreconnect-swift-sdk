@@ -19,4 +19,22 @@ public struct UploadOperation: Codable {
 		self.offset = offset
 		self.requestHeaders = requestHeaders
 	}
+
+	public init(from decoder: Decoder) throws {
+		let values = try decoder.container(keyedBy: StringCodingKey.self)
+		self.method = try values.decodeIfPresent(String.self, forKey: "method")
+		self.url = try values.decodeIfPresent(String.self, forKey: "url")
+		self.length = try values.decodeIfPresent(Int.self, forKey: "length")
+		self.offset = try values.decodeIfPresent(Int.self, forKey: "offset")
+		self.requestHeaders = try values.decodeIfPresent([HTTPHeader].self, forKey: "requestHeaders")
+	}
+
+	public func encode(to encoder: Encoder) throws {
+		var values = encoder.container(keyedBy: StringCodingKey.self)
+		try values.encodeIfPresent(method, forKey: "method")
+		try values.encodeIfPresent(url, forKey: "url")
+		try values.encodeIfPresent(length, forKey: "length")
+		try values.encodeIfPresent(offset, forKey: "offset")
+		try values.encodeIfPresent(requestHeaders, forKey: "requestHeaders")
+	}
 }

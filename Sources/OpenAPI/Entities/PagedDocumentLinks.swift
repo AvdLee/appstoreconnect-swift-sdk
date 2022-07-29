@@ -16,9 +16,17 @@ public struct PagedDocumentLinks: Codable {
 		self.next = next
 	}
 
-	private enum CodingKeys: String, CodingKey {
-		case this = "self"
-		case first
-		case next
+	public init(from decoder: Decoder) throws {
+		let values = try decoder.container(keyedBy: StringCodingKey.self)
+		self.this = try values.decode(String.self, forKey: "self")
+		self.first = try values.decodeIfPresent(String.self, forKey: "first")
+		self.next = try values.decodeIfPresent(String.self, forKey: "next")
+	}
+
+	public func encode(to encoder: Encoder) throws {
+		var values = encoder.container(keyedBy: StringCodingKey.self)
+		try values.encode(this, forKey: "self")
+		try values.encodeIfPresent(first, forKey: "first")
+		try values.encodeIfPresent(next, forKey: "next")
 	}
 }

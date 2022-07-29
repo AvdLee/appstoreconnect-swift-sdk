@@ -30,6 +30,20 @@ public struct DiagnosticSignature: Codable {
 			self.signature = signature
 			self.weight = weight
 		}
+
+		public init(from decoder: Decoder) throws {
+			let values = try decoder.container(keyedBy: StringCodingKey.self)
+			self.diagnosticType = try values.decodeIfPresent(DiagnosticType.self, forKey: "diagnosticType")
+			self.signature = try values.decodeIfPresent(String.self, forKey: "signature")
+			self.weight = try values.decodeIfPresent(Double.self, forKey: "weight")
+		}
+
+		public func encode(to encoder: Encoder) throws {
+			var values = encoder.container(keyedBy: StringCodingKey.self)
+			try values.encodeIfPresent(diagnosticType, forKey: "diagnosticType")
+			try values.encodeIfPresent(signature, forKey: "signature")
+			try values.encodeIfPresent(weight, forKey: "weight")
+		}
 	}
 
 	public init(type: `Type`, id: String, attributes: Attributes? = nil, links: ResourceLinks) {
@@ -37,5 +51,21 @@ public struct DiagnosticSignature: Codable {
 		self.id = id
 		self.attributes = attributes
 		self.links = links
+	}
+
+	public init(from decoder: Decoder) throws {
+		let values = try decoder.container(keyedBy: StringCodingKey.self)
+		self.type = try values.decode(`Type`.self, forKey: "type")
+		self.id = try values.decode(String.self, forKey: "id")
+		self.attributes = try values.decodeIfPresent(Attributes.self, forKey: "attributes")
+		self.links = try values.decode(ResourceLinks.self, forKey: "links")
+	}
+
+	public func encode(to encoder: Encoder) throws {
+		var values = encoder.container(keyedBy: StringCodingKey.self)
+		try values.encode(type, forKey: "type")
+		try values.encode(id, forKey: "id")
+		try values.encodeIfPresent(attributes, forKey: "attributes")
+		try values.encode(links, forKey: "links")
 	}
 }

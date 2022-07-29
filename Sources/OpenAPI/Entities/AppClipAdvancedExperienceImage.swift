@@ -31,6 +31,26 @@ public struct AppClipAdvancedExperienceImage: Codable {
 			self.uploadOperations = uploadOperations
 			self.assetDeliveryState = assetDeliveryState
 		}
+
+		public init(from decoder: Decoder) throws {
+			let values = try decoder.container(keyedBy: StringCodingKey.self)
+			self.fileSize = try values.decodeIfPresent(Int.self, forKey: "fileSize")
+			self.fileName = try values.decodeIfPresent(String.self, forKey: "fileName")
+			self.sourceFileChecksum = try values.decodeIfPresent(String.self, forKey: "sourceFileChecksum")
+			self.imageAsset = try values.decodeIfPresent(ImageAsset.self, forKey: "imageAsset")
+			self.uploadOperations = try values.decodeIfPresent([UploadOperation].self, forKey: "uploadOperations")
+			self.assetDeliveryState = try values.decodeIfPresent(AppMediaAssetState.self, forKey: "assetDeliveryState")
+		}
+
+		public func encode(to encoder: Encoder) throws {
+			var values = encoder.container(keyedBy: StringCodingKey.self)
+			try values.encodeIfPresent(fileSize, forKey: "fileSize")
+			try values.encodeIfPresent(fileName, forKey: "fileName")
+			try values.encodeIfPresent(sourceFileChecksum, forKey: "sourceFileChecksum")
+			try values.encodeIfPresent(imageAsset, forKey: "imageAsset")
+			try values.encodeIfPresent(uploadOperations, forKey: "uploadOperations")
+			try values.encodeIfPresent(assetDeliveryState, forKey: "assetDeliveryState")
+		}
 	}
 
 	public init(type: `Type`, id: String, attributes: Attributes? = nil, links: ResourceLinks) {
@@ -38,5 +58,21 @@ public struct AppClipAdvancedExperienceImage: Codable {
 		self.id = id
 		self.attributes = attributes
 		self.links = links
+	}
+
+	public init(from decoder: Decoder) throws {
+		let values = try decoder.container(keyedBy: StringCodingKey.self)
+		self.type = try values.decode(`Type`.self, forKey: "type")
+		self.id = try values.decode(String.self, forKey: "id")
+		self.attributes = try values.decodeIfPresent(Attributes.self, forKey: "attributes")
+		self.links = try values.decode(ResourceLinks.self, forKey: "links")
+	}
+
+	public func encode(to encoder: Encoder) throws {
+		var values = encoder.container(keyedBy: StringCodingKey.self)
+		try values.encode(type, forKey: "type")
+		try values.encode(id, forKey: "id")
+		try values.encodeIfPresent(attributes, forKey: "attributes")
+		try values.encode(links, forKey: "links")
 	}
 }

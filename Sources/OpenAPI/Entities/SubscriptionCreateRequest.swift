@@ -45,14 +45,26 @@ public struct SubscriptionCreateRequest: Codable {
 				self.isAvailableInAllTerritories = isAvailableInAllTerritories
 			}
 
-			private enum CodingKeys: String, CodingKey {
-				case name
-				case productID = "productId"
-				case isFamilySharable = "familySharable"
-				case subscriptionPeriod
-				case reviewNote
-				case groupLevel
-				case isAvailableInAllTerritories = "availableInAllTerritories"
+			public init(from decoder: Decoder) throws {
+				let values = try decoder.container(keyedBy: StringCodingKey.self)
+				self.name = try values.decode(String.self, forKey: "name")
+				self.productID = try values.decode(String.self, forKey: "productId")
+				self.isFamilySharable = try values.decodeIfPresent(Bool.self, forKey: "familySharable")
+				self.subscriptionPeriod = try values.decodeIfPresent(SubscriptionPeriod.self, forKey: "subscriptionPeriod")
+				self.reviewNote = try values.decodeIfPresent(String.self, forKey: "reviewNote")
+				self.groupLevel = try values.decodeIfPresent(Int.self, forKey: "groupLevel")
+				self.isAvailableInAllTerritories = try values.decodeIfPresent(Bool.self, forKey: "availableInAllTerritories")
+			}
+
+			public func encode(to encoder: Encoder) throws {
+				var values = encoder.container(keyedBy: StringCodingKey.self)
+				try values.encode(name, forKey: "name")
+				try values.encode(productID, forKey: "productId")
+				try values.encodeIfPresent(isFamilySharable, forKey: "familySharable")
+				try values.encodeIfPresent(subscriptionPeriod, forKey: "subscriptionPeriod")
+				try values.encodeIfPresent(reviewNote, forKey: "reviewNote")
+				try values.encodeIfPresent(groupLevel, forKey: "groupLevel")
+				try values.encodeIfPresent(isAvailableInAllTerritories, forKey: "availableInAllTerritories")
 			}
 		}
 
@@ -74,15 +86,47 @@ public struct SubscriptionCreateRequest: Codable {
 						self.type = type
 						self.id = id
 					}
+
+					public init(from decoder: Decoder) throws {
+						let values = try decoder.container(keyedBy: StringCodingKey.self)
+						self.type = try values.decode(`Type`.self, forKey: "type")
+						self.id = try values.decode(String.self, forKey: "id")
+					}
+
+					public func encode(to encoder: Encoder) throws {
+						var values = encoder.container(keyedBy: StringCodingKey.self)
+						try values.encode(type, forKey: "type")
+						try values.encode(id, forKey: "id")
+					}
 				}
 
 				public init(data: Data) {
 					self.data = data
 				}
+
+				public init(from decoder: Decoder) throws {
+					let values = try decoder.container(keyedBy: StringCodingKey.self)
+					self.data = try values.decode(Data.self, forKey: "data")
+				}
+
+				public func encode(to encoder: Encoder) throws {
+					var values = encoder.container(keyedBy: StringCodingKey.self)
+					try values.encode(data, forKey: "data")
+				}
 			}
 
 			public init(group: Group) {
 				self.group = group
+			}
+
+			public init(from decoder: Decoder) throws {
+				let values = try decoder.container(keyedBy: StringCodingKey.self)
+				self.group = try values.decode(Group.self, forKey: "group")
+			}
+
+			public func encode(to encoder: Encoder) throws {
+				var values = encoder.container(keyedBy: StringCodingKey.self)
+				try values.encode(group, forKey: "group")
 			}
 		}
 
@@ -91,9 +135,33 @@ public struct SubscriptionCreateRequest: Codable {
 			self.attributes = attributes
 			self.relationships = relationships
 		}
+
+		public init(from decoder: Decoder) throws {
+			let values = try decoder.container(keyedBy: StringCodingKey.self)
+			self.type = try values.decode(`Type`.self, forKey: "type")
+			self.attributes = try values.decode(Attributes.self, forKey: "attributes")
+			self.relationships = try values.decode(Relationships.self, forKey: "relationships")
+		}
+
+		public func encode(to encoder: Encoder) throws {
+			var values = encoder.container(keyedBy: StringCodingKey.self)
+			try values.encode(type, forKey: "type")
+			try values.encode(attributes, forKey: "attributes")
+			try values.encode(relationships, forKey: "relationships")
+		}
 	}
 
 	public init(data: Data) {
 		self.data = data
+	}
+
+	public init(from decoder: Decoder) throws {
+		let values = try decoder.container(keyedBy: StringCodingKey.self)
+		self.data = try values.decode(Data.self, forKey: "data")
+	}
+
+	public func encode(to encoder: Encoder) throws {
+		var values = encoder.container(keyedBy: StringCodingKey.self)
+		try values.encode(data, forKey: "data")
 	}
 }

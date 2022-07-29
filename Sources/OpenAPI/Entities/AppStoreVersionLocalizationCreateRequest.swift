@@ -36,14 +36,26 @@ public struct AppStoreVersionLocalizationCreateRequest: Codable {
 				self.whatsNew = whatsNew
 			}
 
-			private enum CodingKeys: String, CodingKey {
-				case description
-				case locale
-				case keywords
-				case marketingURL = "marketingUrl"
-				case promotionalText
-				case supportURL = "supportUrl"
-				case whatsNew
+			public init(from decoder: Decoder) throws {
+				let values = try decoder.container(keyedBy: StringCodingKey.self)
+				self.description = try values.decodeIfPresent(String.self, forKey: "description")
+				self.locale = try values.decode(String.self, forKey: "locale")
+				self.keywords = try values.decodeIfPresent(String.self, forKey: "keywords")
+				self.marketingURL = try values.decodeIfPresent(URL.self, forKey: "marketingUrl")
+				self.promotionalText = try values.decodeIfPresent(String.self, forKey: "promotionalText")
+				self.supportURL = try values.decodeIfPresent(URL.self, forKey: "supportUrl")
+				self.whatsNew = try values.decodeIfPresent(String.self, forKey: "whatsNew")
+			}
+
+			public func encode(to encoder: Encoder) throws {
+				var values = encoder.container(keyedBy: StringCodingKey.self)
+				try values.encodeIfPresent(description, forKey: "description")
+				try values.encode(locale, forKey: "locale")
+				try values.encodeIfPresent(keywords, forKey: "keywords")
+				try values.encodeIfPresent(marketingURL, forKey: "marketingUrl")
+				try values.encodeIfPresent(promotionalText, forKey: "promotionalText")
+				try values.encodeIfPresent(supportURL, forKey: "supportUrl")
+				try values.encodeIfPresent(whatsNew, forKey: "whatsNew")
 			}
 		}
 
@@ -65,15 +77,47 @@ public struct AppStoreVersionLocalizationCreateRequest: Codable {
 						self.type = type
 						self.id = id
 					}
+
+					public init(from decoder: Decoder) throws {
+						let values = try decoder.container(keyedBy: StringCodingKey.self)
+						self.type = try values.decode(`Type`.self, forKey: "type")
+						self.id = try values.decode(String.self, forKey: "id")
+					}
+
+					public func encode(to encoder: Encoder) throws {
+						var values = encoder.container(keyedBy: StringCodingKey.self)
+						try values.encode(type, forKey: "type")
+						try values.encode(id, forKey: "id")
+					}
 				}
 
 				public init(data: Data) {
 					self.data = data
 				}
+
+				public init(from decoder: Decoder) throws {
+					let values = try decoder.container(keyedBy: StringCodingKey.self)
+					self.data = try values.decode(Data.self, forKey: "data")
+				}
+
+				public func encode(to encoder: Encoder) throws {
+					var values = encoder.container(keyedBy: StringCodingKey.self)
+					try values.encode(data, forKey: "data")
+				}
 			}
 
 			public init(appStoreVersion: AppStoreVersion) {
 				self.appStoreVersion = appStoreVersion
+			}
+
+			public init(from decoder: Decoder) throws {
+				let values = try decoder.container(keyedBy: StringCodingKey.self)
+				self.appStoreVersion = try values.decode(AppStoreVersion.self, forKey: "appStoreVersion")
+			}
+
+			public func encode(to encoder: Encoder) throws {
+				var values = encoder.container(keyedBy: StringCodingKey.self)
+				try values.encode(appStoreVersion, forKey: "appStoreVersion")
 			}
 		}
 
@@ -82,9 +126,33 @@ public struct AppStoreVersionLocalizationCreateRequest: Codable {
 			self.attributes = attributes
 			self.relationships = relationships
 		}
+
+		public init(from decoder: Decoder) throws {
+			let values = try decoder.container(keyedBy: StringCodingKey.self)
+			self.type = try values.decode(`Type`.self, forKey: "type")
+			self.attributes = try values.decode(Attributes.self, forKey: "attributes")
+			self.relationships = try values.decode(Relationships.self, forKey: "relationships")
+		}
+
+		public func encode(to encoder: Encoder) throws {
+			var values = encoder.container(keyedBy: StringCodingKey.self)
+			try values.encode(type, forKey: "type")
+			try values.encode(attributes, forKey: "attributes")
+			try values.encode(relationships, forKey: "relationships")
+		}
 	}
 
 	public init(data: Data) {
 		self.data = data
+	}
+
+	public init(from decoder: Decoder) throws {
+		let values = try decoder.container(keyedBy: StringCodingKey.self)
+		self.data = try values.decode(Data.self, forKey: "data")
+	}
+
+	public func encode(to encoder: Encoder) throws {
+		var values = encoder.container(keyedBy: StringCodingKey.self)
+		try values.encode(data, forKey: "data")
 	}
 }

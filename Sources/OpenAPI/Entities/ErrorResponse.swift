@@ -48,9 +48,39 @@ public struct ErrorResponse: Codable {
 			self.detail = detail
 			self.source = source
 		}
+
+		public init(from decoder: Decoder) throws {
+			let values = try decoder.container(keyedBy: StringCodingKey.self)
+			self.id = try values.decodeIfPresent(String.self, forKey: "id")
+			self.status = try values.decode(String.self, forKey: "status")
+			self.code = try values.decode(String.self, forKey: "code")
+			self.title = try values.decode(String.self, forKey: "title")
+			self.detail = try values.decode(String.self, forKey: "detail")
+			self.source = try values.decodeIfPresent(Source.self, forKey: "source")
+		}
+
+		public func encode(to encoder: Encoder) throws {
+			var values = encoder.container(keyedBy: StringCodingKey.self)
+			try values.encodeIfPresent(id, forKey: "id")
+			try values.encode(status, forKey: "status")
+			try values.encode(code, forKey: "code")
+			try values.encode(title, forKey: "title")
+			try values.encode(detail, forKey: "detail")
+			try values.encodeIfPresent(source, forKey: "source")
+		}
 	}
 
 	public init(errors: [Error]? = nil) {
 		self.errors = errors
+	}
+
+	public init(from decoder: Decoder) throws {
+		let values = try decoder.container(keyedBy: StringCodingKey.self)
+		self.errors = try values.decodeIfPresent([Error].self, forKey: "errors")
+	}
+
+	public func encode(to encoder: Encoder) throws {
+		var values = encoder.container(keyedBy: StringCodingKey.self)
+		try values.encodeIfPresent(errors, forKey: "errors")
 	}
 }

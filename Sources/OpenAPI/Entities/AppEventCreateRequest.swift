@@ -69,6 +69,22 @@ public struct AppEventCreateRequest: Codable {
 					self.eventStart = eventStart
 					self.eventEnd = eventEnd
 				}
+
+				public init(from decoder: Decoder) throws {
+					let values = try decoder.container(keyedBy: StringCodingKey.self)
+					self.territories = try values.decodeIfPresent([String].self, forKey: "territories")
+					self.publishStart = try values.decodeIfPresent(Date.self, forKey: "publishStart")
+					self.eventStart = try values.decodeIfPresent(Date.self, forKey: "eventStart")
+					self.eventEnd = try values.decodeIfPresent(Date.self, forKey: "eventEnd")
+				}
+
+				public func encode(to encoder: Encoder) throws {
+					var values = encoder.container(keyedBy: StringCodingKey.self)
+					try values.encodeIfPresent(territories, forKey: "territories")
+					try values.encodeIfPresent(publishStart, forKey: "publishStart")
+					try values.encodeIfPresent(eventStart, forKey: "eventStart")
+					try values.encodeIfPresent(eventEnd, forKey: "eventEnd")
+				}
 			}
 
 			public init(referenceName: String, badge: Badge? = nil, deepLink: URL? = nil, purchaseRequirement: PurchaseRequirement? = nil, primaryLocale: String? = nil, priority: Priority? = nil, purpose: Purpose? = nil, territorySchedules: [TerritorySchedule]? = nil) {
@@ -80,6 +96,30 @@ public struct AppEventCreateRequest: Codable {
 				self.priority = priority
 				self.purpose = purpose
 				self.territorySchedules = territorySchedules
+			}
+
+			public init(from decoder: Decoder) throws {
+				let values = try decoder.container(keyedBy: StringCodingKey.self)
+				self.referenceName = try values.decode(String.self, forKey: "referenceName")
+				self.badge = try values.decodeIfPresent(Badge.self, forKey: "badge")
+				self.deepLink = try values.decodeIfPresent(URL.self, forKey: "deepLink")
+				self.purchaseRequirement = try values.decodeIfPresent(PurchaseRequirement.self, forKey: "purchaseRequirement")
+				self.primaryLocale = try values.decodeIfPresent(String.self, forKey: "primaryLocale")
+				self.priority = try values.decodeIfPresent(Priority.self, forKey: "priority")
+				self.purpose = try values.decodeIfPresent(Purpose.self, forKey: "purpose")
+				self.territorySchedules = try values.decodeIfPresent([TerritorySchedule].self, forKey: "territorySchedules")
+			}
+
+			public func encode(to encoder: Encoder) throws {
+				var values = encoder.container(keyedBy: StringCodingKey.self)
+				try values.encode(referenceName, forKey: "referenceName")
+				try values.encodeIfPresent(badge, forKey: "badge")
+				try values.encodeIfPresent(deepLink, forKey: "deepLink")
+				try values.encodeIfPresent(purchaseRequirement, forKey: "purchaseRequirement")
+				try values.encodeIfPresent(primaryLocale, forKey: "primaryLocale")
+				try values.encodeIfPresent(priority, forKey: "priority")
+				try values.encodeIfPresent(purpose, forKey: "purpose")
+				try values.encodeIfPresent(territorySchedules, forKey: "territorySchedules")
 			}
 		}
 
@@ -101,15 +141,47 @@ public struct AppEventCreateRequest: Codable {
 						self.type = type
 						self.id = id
 					}
+
+					public init(from decoder: Decoder) throws {
+						let values = try decoder.container(keyedBy: StringCodingKey.self)
+						self.type = try values.decode(`Type`.self, forKey: "type")
+						self.id = try values.decode(String.self, forKey: "id")
+					}
+
+					public func encode(to encoder: Encoder) throws {
+						var values = encoder.container(keyedBy: StringCodingKey.self)
+						try values.encode(type, forKey: "type")
+						try values.encode(id, forKey: "id")
+					}
 				}
 
 				public init(data: Data) {
 					self.data = data
 				}
+
+				public init(from decoder: Decoder) throws {
+					let values = try decoder.container(keyedBy: StringCodingKey.self)
+					self.data = try values.decode(Data.self, forKey: "data")
+				}
+
+				public func encode(to encoder: Encoder) throws {
+					var values = encoder.container(keyedBy: StringCodingKey.self)
+					try values.encode(data, forKey: "data")
+				}
 			}
 
 			public init(app: App) {
 				self.app = app
+			}
+
+			public init(from decoder: Decoder) throws {
+				let values = try decoder.container(keyedBy: StringCodingKey.self)
+				self.app = try values.decode(App.self, forKey: "app")
+			}
+
+			public func encode(to encoder: Encoder) throws {
+				var values = encoder.container(keyedBy: StringCodingKey.self)
+				try values.encode(app, forKey: "app")
 			}
 		}
 
@@ -118,9 +190,33 @@ public struct AppEventCreateRequest: Codable {
 			self.attributes = attributes
 			self.relationships = relationships
 		}
+
+		public init(from decoder: Decoder) throws {
+			let values = try decoder.container(keyedBy: StringCodingKey.self)
+			self.type = try values.decode(`Type`.self, forKey: "type")
+			self.attributes = try values.decode(Attributes.self, forKey: "attributes")
+			self.relationships = try values.decode(Relationships.self, forKey: "relationships")
+		}
+
+		public func encode(to encoder: Encoder) throws {
+			var values = encoder.container(keyedBy: StringCodingKey.self)
+			try values.encode(type, forKey: "type")
+			try values.encode(attributes, forKey: "attributes")
+			try values.encode(relationships, forKey: "relationships")
+		}
 	}
 
 	public init(data: Data) {
 		self.data = data
+	}
+
+	public init(from decoder: Decoder) throws {
+		let values = try decoder.container(keyedBy: StringCodingKey.self)
+		self.data = try values.decode(Data.self, forKey: "data")
+	}
+
+	public func encode(to encoder: Encoder) throws {
+		var values = encoder.container(keyedBy: StringCodingKey.self)
+		try values.encode(data, forKey: "data")
 	}
 }

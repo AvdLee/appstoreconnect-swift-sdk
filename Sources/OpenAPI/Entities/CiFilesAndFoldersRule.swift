@@ -18,4 +18,16 @@ public struct CiFilesAndFoldersRule: Codable {
 		self.mode = mode
 		self.matchers = matchers
 	}
+
+	public init(from decoder: Decoder) throws {
+		let values = try decoder.container(keyedBy: StringCodingKey.self)
+		self.mode = try values.decodeIfPresent(Mode.self, forKey: "mode")
+		self.matchers = try values.decodeIfPresent([CiStartConditionFileMatcher].self, forKey: "matchers")
+	}
+
+	public func encode(to encoder: Encoder) throws {
+		var values = encoder.container(keyedBy: StringCodingKey.self)
+		try values.encodeIfPresent(mode, forKey: "mode")
+		try values.encodeIfPresent(matchers, forKey: "matchers")
+	}
 }
