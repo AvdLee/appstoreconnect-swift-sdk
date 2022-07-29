@@ -16,9 +16,17 @@ public struct ImageAsset: Codable {
 		self.height = height
 	}
 
-	private enum CodingKeys: String, CodingKey {
-		case templateURL = "templateUrl"
-		case width
-		case height
+	public init(from decoder: Decoder) throws {
+		let values = try decoder.container(keyedBy: StringCodingKey.self)
+		self.templateURL = try values.decodeIfPresent(String.self, forKey: "templateUrl")
+		self.width = try values.decodeIfPresent(Int.self, forKey: "width")
+		self.height = try values.decodeIfPresent(Int.self, forKey: "height")
+	}
+
+	public func encode(to encoder: Encoder) throws {
+		var values = encoder.container(keyedBy: StringCodingKey.self)
+		try values.encodeIfPresent(templateURL, forKey: "templateUrl")
+		try values.encodeIfPresent(width, forKey: "width")
+		try values.encodeIfPresent(height, forKey: "height")
 	}
 }

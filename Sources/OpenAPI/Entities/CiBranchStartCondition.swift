@@ -16,9 +16,17 @@ public struct CiBranchStartCondition: Codable {
 		self.isAutoCancel = isAutoCancel
 	}
 
-	private enum CodingKeys: String, CodingKey {
-		case source
-		case filesAndFoldersRule
-		case isAutoCancel = "autoCancel"
+	public init(from decoder: Decoder) throws {
+		let values = try decoder.container(keyedBy: StringCodingKey.self)
+		self.source = try values.decodeIfPresent(CiBranchPatterns.self, forKey: "source")
+		self.filesAndFoldersRule = try values.decodeIfPresent(CiFilesAndFoldersRule.self, forKey: "filesAndFoldersRule")
+		self.isAutoCancel = try values.decodeIfPresent(Bool.self, forKey: "autoCancel")
+	}
+
+	public func encode(to encoder: Encoder) throws {
+		var values = encoder.container(keyedBy: StringCodingKey.self)
+		try values.encodeIfPresent(source, forKey: "source")
+		try values.encodeIfPresent(filesAndFoldersRule, forKey: "filesAndFoldersRule")
+		try values.encodeIfPresent(isAutoCancel, forKey: "autoCancel")
 	}
 }

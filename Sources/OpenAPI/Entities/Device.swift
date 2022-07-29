@@ -47,6 +47,28 @@ public struct Device: Codable {
 			self.model = model
 			self.addedDate = addedDate
 		}
+
+		public init(from decoder: Decoder) throws {
+			let values = try decoder.container(keyedBy: StringCodingKey.self)
+			self.name = try values.decodeIfPresent(String.self, forKey: "name")
+			self.platform = try values.decodeIfPresent(BundleIDPlatform.self, forKey: "platform")
+			self.udid = try values.decodeIfPresent(String.self, forKey: "udid")
+			self.deviceClass = try values.decodeIfPresent(DeviceClass.self, forKey: "deviceClass")
+			self.status = try values.decodeIfPresent(Status.self, forKey: "status")
+			self.model = try values.decodeIfPresent(String.self, forKey: "model")
+			self.addedDate = try values.decodeIfPresent(Date.self, forKey: "addedDate")
+		}
+
+		public func encode(to encoder: Encoder) throws {
+			var values = encoder.container(keyedBy: StringCodingKey.self)
+			try values.encodeIfPresent(name, forKey: "name")
+			try values.encodeIfPresent(platform, forKey: "platform")
+			try values.encodeIfPresent(udid, forKey: "udid")
+			try values.encodeIfPresent(deviceClass, forKey: "deviceClass")
+			try values.encodeIfPresent(status, forKey: "status")
+			try values.encodeIfPresent(model, forKey: "model")
+			try values.encodeIfPresent(addedDate, forKey: "addedDate")
+		}
 	}
 
 	public init(type: `Type`, id: String, attributes: Attributes? = nil, links: ResourceLinks) {
@@ -54,5 +76,21 @@ public struct Device: Codable {
 		self.id = id
 		self.attributes = attributes
 		self.links = links
+	}
+
+	public init(from decoder: Decoder) throws {
+		let values = try decoder.container(keyedBy: StringCodingKey.self)
+		self.type = try values.decode(`Type`.self, forKey: "type")
+		self.id = try values.decode(String.self, forKey: "id")
+		self.attributes = try values.decodeIfPresent(Attributes.self, forKey: "attributes")
+		self.links = try values.decode(ResourceLinks.self, forKey: "links")
+	}
+
+	public func encode(to encoder: Encoder) throws {
+		var values = encoder.container(keyedBy: StringCodingKey.self)
+		try values.encode(type, forKey: "type")
+		try values.encode(id, forKey: "id")
+		try values.encodeIfPresent(attributes, forKey: "attributes")
+		try values.encode(links, forKey: "links")
 	}
 }

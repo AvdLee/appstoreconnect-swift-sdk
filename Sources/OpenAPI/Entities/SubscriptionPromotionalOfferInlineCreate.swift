@@ -29,6 +29,24 @@ public struct SubscriptionPromotionalOfferInlineCreate: Codable {
 			self.offerMode = offerMode
 			self.numberOfPeriods = numberOfPeriods
 		}
+
+		public init(from decoder: Decoder) throws {
+			let values = try decoder.container(keyedBy: StringCodingKey.self)
+			self.name = try values.decode(String.self, forKey: "name")
+			self.offerCode = try values.decode(String.self, forKey: "offerCode")
+			self.duration = try values.decode(SubscriptionOfferDuration.self, forKey: "duration")
+			self.offerMode = try values.decode(SubscriptionOfferMode.self, forKey: "offerMode")
+			self.numberOfPeriods = try values.decode(Int.self, forKey: "numberOfPeriods")
+		}
+
+		public func encode(to encoder: Encoder) throws {
+			var values = encoder.container(keyedBy: StringCodingKey.self)
+			try values.encode(name, forKey: "name")
+			try values.encode(offerCode, forKey: "offerCode")
+			try values.encode(duration, forKey: "duration")
+			try values.encode(offerMode, forKey: "offerMode")
+			try values.encode(numberOfPeriods, forKey: "numberOfPeriods")
+		}
 	}
 
 	public struct Relationships: Codable {
@@ -50,10 +68,32 @@ public struct SubscriptionPromotionalOfferInlineCreate: Codable {
 					self.type = type
 					self.id = id
 				}
+
+				public init(from decoder: Decoder) throws {
+					let values = try decoder.container(keyedBy: StringCodingKey.self)
+					self.type = try values.decode(`Type`.self, forKey: "type")
+					self.id = try values.decode(String.self, forKey: "id")
+				}
+
+				public func encode(to encoder: Encoder) throws {
+					var values = encoder.container(keyedBy: StringCodingKey.self)
+					try values.encode(type, forKey: "type")
+					try values.encode(id, forKey: "id")
+				}
 			}
 
 			public init(data: Data? = nil) {
 				self.data = data
+			}
+
+			public init(from decoder: Decoder) throws {
+				let values = try decoder.container(keyedBy: StringCodingKey.self)
+				self.data = try values.decodeIfPresent(Data.self, forKey: "data")
+			}
+
+			public func encode(to encoder: Encoder) throws {
+				var values = encoder.container(keyedBy: StringCodingKey.self)
+				try values.encodeIfPresent(data, forKey: "data")
 			}
 		}
 
@@ -72,16 +112,50 @@ public struct SubscriptionPromotionalOfferInlineCreate: Codable {
 					self.type = type
 					self.id = id
 				}
+
+				public init(from decoder: Decoder) throws {
+					let values = try decoder.container(keyedBy: StringCodingKey.self)
+					self.type = try values.decode(`Type`.self, forKey: "type")
+					self.id = try values.decode(String.self, forKey: "id")
+				}
+
+				public func encode(to encoder: Encoder) throws {
+					var values = encoder.container(keyedBy: StringCodingKey.self)
+					try values.encode(type, forKey: "type")
+					try values.encode(id, forKey: "id")
+				}
 			}
 
 			public init(data: [Datum]? = nil) {
 				self.data = data
+			}
+
+			public init(from decoder: Decoder) throws {
+				let values = try decoder.container(keyedBy: StringCodingKey.self)
+				self.data = try values.decodeIfPresent([Datum].self, forKey: "data")
+			}
+
+			public func encode(to encoder: Encoder) throws {
+				var values = encoder.container(keyedBy: StringCodingKey.self)
+				try values.encodeIfPresent(data, forKey: "data")
 			}
 		}
 
 		public init(subscription: Subscription? = nil, prices: Prices? = nil) {
 			self.subscription = subscription
 			self.prices = prices
+		}
+
+		public init(from decoder: Decoder) throws {
+			let values = try decoder.container(keyedBy: StringCodingKey.self)
+			self.subscription = try values.decodeIfPresent(Subscription.self, forKey: "subscription")
+			self.prices = try values.decodeIfPresent(Prices.self, forKey: "prices")
+		}
+
+		public func encode(to encoder: Encoder) throws {
+			var values = encoder.container(keyedBy: StringCodingKey.self)
+			try values.encodeIfPresent(subscription, forKey: "subscription")
+			try values.encodeIfPresent(prices, forKey: "prices")
 		}
 	}
 
@@ -90,5 +164,21 @@ public struct SubscriptionPromotionalOfferInlineCreate: Codable {
 		self.id = id
 		self.attributes = attributes
 		self.relationships = relationships
+	}
+
+	public init(from decoder: Decoder) throws {
+		let values = try decoder.container(keyedBy: StringCodingKey.self)
+		self.type = try values.decode(`Type`.self, forKey: "type")
+		self.id = try values.decodeIfPresent(String.self, forKey: "id")
+		self.attributes = try values.decode(Attributes.self, forKey: "attributes")
+		self.relationships = try values.decodeIfPresent(Relationships.self, forKey: "relationships")
+	}
+
+	public func encode(to encoder: Encoder) throws {
+		var values = encoder.container(keyedBy: StringCodingKey.self)
+		try values.encode(type, forKey: "type")
+		try values.encodeIfPresent(id, forKey: "id")
+		try values.encode(attributes, forKey: "attributes")
+		try values.encodeIfPresent(relationships, forKey: "relationships")
 	}
 }

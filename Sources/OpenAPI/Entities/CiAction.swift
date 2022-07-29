@@ -41,6 +41,20 @@ public struct CiAction: Codable {
 			self.testPlanName = testPlanName
 			self.testDestinations = testDestinations
 		}
+
+		public init(from decoder: Decoder) throws {
+			let values = try decoder.container(keyedBy: StringCodingKey.self)
+			self.kind = try values.decodeIfPresent(Kind.self, forKey: "kind")
+			self.testPlanName = try values.decodeIfPresent(String.self, forKey: "testPlanName")
+			self.testDestinations = try values.decodeIfPresent([CiTestDestination].self, forKey: "testDestinations")
+		}
+
+		public func encode(to encoder: Encoder) throws {
+			var values = encoder.container(keyedBy: StringCodingKey.self)
+			try values.encodeIfPresent(kind, forKey: "kind")
+			try values.encodeIfPresent(testPlanName, forKey: "testPlanName")
+			try values.encodeIfPresent(testDestinations, forKey: "testDestinations")
+		}
 	}
 
 	public enum Platform: String, Codable, CaseIterable {
@@ -59,5 +73,29 @@ public struct CiAction: Codable {
 		self.scheme = scheme
 		self.platform = platform
 		self.isRequiredToPass = isRequiredToPass
+	}
+
+	public init(from decoder: Decoder) throws {
+		let values = try decoder.container(keyedBy: StringCodingKey.self)
+		self.name = try values.decodeIfPresent(String.self, forKey: "name")
+		self.actionType = try values.decodeIfPresent(CiActionType.self, forKey: "actionType")
+		self.destination = try values.decodeIfPresent(Destination.self, forKey: "destination")
+		self.buildDistributionAudience = try values.decodeIfPresent(BuildAudienceType.self, forKey: "buildDistributionAudience")
+		self.testConfiguration = try values.decodeIfPresent(TestConfiguration.self, forKey: "testConfiguration")
+		self.scheme = try values.decodeIfPresent(String.self, forKey: "scheme")
+		self.platform = try values.decodeIfPresent(Platform.self, forKey: "platform")
+		self.isRequiredToPass = try values.decodeIfPresent(Bool.self, forKey: "isRequiredToPass")
+	}
+
+	public func encode(to encoder: Encoder) throws {
+		var values = encoder.container(keyedBy: StringCodingKey.self)
+		try values.encodeIfPresent(name, forKey: "name")
+		try values.encodeIfPresent(actionType, forKey: "actionType")
+		try values.encodeIfPresent(destination, forKey: "destination")
+		try values.encodeIfPresent(buildDistributionAudience, forKey: "buildDistributionAudience")
+		try values.encodeIfPresent(testConfiguration, forKey: "testConfiguration")
+		try values.encodeIfPresent(scheme, forKey: "scheme")
+		try values.encodeIfPresent(platform, forKey: "platform")
+		try values.encodeIfPresent(isRequiredToPass, forKey: "isRequiredToPass")
 	}
 }

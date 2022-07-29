@@ -45,19 +45,36 @@ public struct AppEncryptionDeclaration: Codable {
 			self.codeValue = codeValue
 		}
 
-		private enum CodingKeys: String, CodingKey {
-			case usesEncryption
-			case isExempt = "exempt"
-			case containsProprietaryCryptography
-			case containsThirdPartyCryptography
-			case isAvailableOnFrenchStore = "availableOnFrenchStore"
-			case platform
-			case uploadedDate
-			case documentURL = "documentUrl"
-			case documentName
-			case documentType
-			case appEncryptionDeclarationState
-			case codeValue
+		public init(from decoder: Decoder) throws {
+			let values = try decoder.container(keyedBy: StringCodingKey.self)
+			self.usesEncryption = try values.decodeIfPresent(Bool.self, forKey: "usesEncryption")
+			self.isExempt = try values.decodeIfPresent(Bool.self, forKey: "exempt")
+			self.containsProprietaryCryptography = try values.decodeIfPresent(Bool.self, forKey: "containsProprietaryCryptography")
+			self.containsThirdPartyCryptography = try values.decodeIfPresent(Bool.self, forKey: "containsThirdPartyCryptography")
+			self.isAvailableOnFrenchStore = try values.decodeIfPresent(Bool.self, forKey: "availableOnFrenchStore")
+			self.platform = try values.decodeIfPresent(Platform.self, forKey: "platform")
+			self.uploadedDate = try values.decodeIfPresent(Date.self, forKey: "uploadedDate")
+			self.documentURL = try values.decodeIfPresent(String.self, forKey: "documentUrl")
+			self.documentName = try values.decodeIfPresent(String.self, forKey: "documentName")
+			self.documentType = try values.decodeIfPresent(String.self, forKey: "documentType")
+			self.appEncryptionDeclarationState = try values.decodeIfPresent(AppEncryptionDeclarationState.self, forKey: "appEncryptionDeclarationState")
+			self.codeValue = try values.decodeIfPresent(String.self, forKey: "codeValue")
+		}
+
+		public func encode(to encoder: Encoder) throws {
+			var values = encoder.container(keyedBy: StringCodingKey.self)
+			try values.encodeIfPresent(usesEncryption, forKey: "usesEncryption")
+			try values.encodeIfPresent(isExempt, forKey: "exempt")
+			try values.encodeIfPresent(containsProprietaryCryptography, forKey: "containsProprietaryCryptography")
+			try values.encodeIfPresent(containsThirdPartyCryptography, forKey: "containsThirdPartyCryptography")
+			try values.encodeIfPresent(isAvailableOnFrenchStore, forKey: "availableOnFrenchStore")
+			try values.encodeIfPresent(platform, forKey: "platform")
+			try values.encodeIfPresent(uploadedDate, forKey: "uploadedDate")
+			try values.encodeIfPresent(documentURL, forKey: "documentUrl")
+			try values.encodeIfPresent(documentName, forKey: "documentName")
+			try values.encodeIfPresent(documentType, forKey: "documentType")
+			try values.encodeIfPresent(appEncryptionDeclarationState, forKey: "appEncryptionDeclarationState")
+			try values.encodeIfPresent(codeValue, forKey: "codeValue")
 		}
 	}
 
@@ -77,9 +94,16 @@ public struct AppEncryptionDeclaration: Codable {
 					self.related = related
 				}
 
-				private enum CodingKeys: String, CodingKey {
-					case this = "self"
-					case related
+				public init(from decoder: Decoder) throws {
+					let values = try decoder.container(keyedBy: StringCodingKey.self)
+					self.this = try values.decodeIfPresent(String.self, forKey: "self")
+					self.related = try values.decodeIfPresent(String.self, forKey: "related")
+				}
+
+				public func encode(to encoder: Encoder) throws {
+					var values = encoder.container(keyedBy: StringCodingKey.self)
+					try values.encodeIfPresent(this, forKey: "self")
+					try values.encodeIfPresent(related, forKey: "related")
 				}
 			}
 
@@ -95,16 +119,50 @@ public struct AppEncryptionDeclaration: Codable {
 					self.type = type
 					self.id = id
 				}
+
+				public init(from decoder: Decoder) throws {
+					let values = try decoder.container(keyedBy: StringCodingKey.self)
+					self.type = try values.decode(`Type`.self, forKey: "type")
+					self.id = try values.decode(String.self, forKey: "id")
+				}
+
+				public func encode(to encoder: Encoder) throws {
+					var values = encoder.container(keyedBy: StringCodingKey.self)
+					try values.encode(type, forKey: "type")
+					try values.encode(id, forKey: "id")
+				}
 			}
 
 			public init(links: Links? = nil, data: Data? = nil) {
 				self.links = links
 				self.data = data
 			}
+
+			public init(from decoder: Decoder) throws {
+				let values = try decoder.container(keyedBy: StringCodingKey.self)
+				self.links = try values.decodeIfPresent(Links.self, forKey: "links")
+				self.data = try values.decodeIfPresent(Data.self, forKey: "data")
+			}
+
+			public func encode(to encoder: Encoder) throws {
+				var values = encoder.container(keyedBy: StringCodingKey.self)
+				try values.encodeIfPresent(links, forKey: "links")
+				try values.encodeIfPresent(data, forKey: "data")
+			}
 		}
 
 		public init(app: App? = nil) {
 			self.app = app
+		}
+
+		public init(from decoder: Decoder) throws {
+			let values = try decoder.container(keyedBy: StringCodingKey.self)
+			self.app = try values.decodeIfPresent(App.self, forKey: "app")
+		}
+
+		public func encode(to encoder: Encoder) throws {
+			var values = encoder.container(keyedBy: StringCodingKey.self)
+			try values.encodeIfPresent(app, forKey: "app")
 		}
 	}
 
@@ -114,5 +172,23 @@ public struct AppEncryptionDeclaration: Codable {
 		self.attributes = attributes
 		self.relationships = relationships
 		self.links = links
+	}
+
+	public init(from decoder: Decoder) throws {
+		let values = try decoder.container(keyedBy: StringCodingKey.self)
+		self.type = try values.decode(`Type`.self, forKey: "type")
+		self.id = try values.decode(String.self, forKey: "id")
+		self.attributes = try values.decodeIfPresent(Attributes.self, forKey: "attributes")
+		self.relationships = try values.decodeIfPresent(Relationships.self, forKey: "relationships")
+		self.links = try values.decode(ResourceLinks.self, forKey: "links")
+	}
+
+	public func encode(to encoder: Encoder) throws {
+		var values = encoder.container(keyedBy: StringCodingKey.self)
+		try values.encode(type, forKey: "type")
+		try values.encode(id, forKey: "id")
+		try values.encodeIfPresent(attributes, forKey: "attributes")
+		try values.encodeIfPresent(relationships, forKey: "relationships")
+		try values.encode(links, forKey: "links")
 	}
 }

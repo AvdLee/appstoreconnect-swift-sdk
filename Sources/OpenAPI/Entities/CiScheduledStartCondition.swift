@@ -39,10 +39,40 @@ public struct CiScheduledStartCondition: Codable {
 			self.minute = minute
 			self.timezone = timezone
 		}
+
+		public init(from decoder: Decoder) throws {
+			let values = try decoder.container(keyedBy: StringCodingKey.self)
+			self.frequency = try values.decodeIfPresent(Frequency.self, forKey: "frequency")
+			self.days = try values.decodeIfPresent([Day].self, forKey: "days")
+			self.hour = try values.decodeIfPresent(Int.self, forKey: "hour")
+			self.minute = try values.decodeIfPresent(Int.self, forKey: "minute")
+			self.timezone = try values.decodeIfPresent(String.self, forKey: "timezone")
+		}
+
+		public func encode(to encoder: Encoder) throws {
+			var values = encoder.container(keyedBy: StringCodingKey.self)
+			try values.encodeIfPresent(frequency, forKey: "frequency")
+			try values.encodeIfPresent(days, forKey: "days")
+			try values.encodeIfPresent(hour, forKey: "hour")
+			try values.encodeIfPresent(minute, forKey: "minute")
+			try values.encodeIfPresent(timezone, forKey: "timezone")
+		}
 	}
 
 	public init(source: CiBranchPatterns? = nil, schedule: Schedule? = nil) {
 		self.source = source
 		self.schedule = schedule
+	}
+
+	public init(from decoder: Decoder) throws {
+		let values = try decoder.container(keyedBy: StringCodingKey.self)
+		self.source = try values.decodeIfPresent(CiBranchPatterns.self, forKey: "source")
+		self.schedule = try values.decodeIfPresent(Schedule.self, forKey: "schedule")
+	}
+
+	public func encode(to encoder: Encoder) throws {
+		var values = encoder.container(keyedBy: StringCodingKey.self)
+		try values.encodeIfPresent(source, forKey: "source")
+		try values.encodeIfPresent(schedule, forKey: "schedule")
 	}
 }

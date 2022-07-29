@@ -60,24 +60,46 @@ public struct BuildBundle: Codable {
 			self.entitlements = entitlements
 		}
 
-		private enum CodingKeys: String, CodingKey {
-			case bundleID = "bundleId"
-			case bundleType
-			case sdkBuild
-			case platformBuild
-			case fileName
-			case hasSirikit
-			case hasOnDemandResources
-			case hasPrerenderedIcon
-			case usesLocationServices
-			case isIosBuildMacAppStoreCompatible
-			case isIncludesSymbols = "includesSymbols"
-			case dSYMURL = "dSYMUrl"
-			case supportedArchitectures
-			case requiredCapabilities
-			case deviceProtocols
-			case locales
-			case entitlements
+		public init(from decoder: Decoder) throws {
+			let values = try decoder.container(keyedBy: StringCodingKey.self)
+			self.bundleID = try values.decodeIfPresent(String.self, forKey: "bundleId")
+			self.bundleType = try values.decodeIfPresent(BundleType.self, forKey: "bundleType")
+			self.sdkBuild = try values.decodeIfPresent(String.self, forKey: "sdkBuild")
+			self.platformBuild = try values.decodeIfPresent(String.self, forKey: "platformBuild")
+			self.fileName = try values.decodeIfPresent(String.self, forKey: "fileName")
+			self.hasSirikit = try values.decodeIfPresent(Bool.self, forKey: "hasSirikit")
+			self.hasOnDemandResources = try values.decodeIfPresent(Bool.self, forKey: "hasOnDemandResources")
+			self.hasPrerenderedIcon = try values.decodeIfPresent(Bool.self, forKey: "hasPrerenderedIcon")
+			self.usesLocationServices = try values.decodeIfPresent(Bool.self, forKey: "usesLocationServices")
+			self.isIosBuildMacAppStoreCompatible = try values.decodeIfPresent(Bool.self, forKey: "isIosBuildMacAppStoreCompatible")
+			self.isIncludesSymbols = try values.decodeIfPresent(Bool.self, forKey: "includesSymbols")
+			self.dSYMURL = try values.decodeIfPresent(URL.self, forKey: "dSYMUrl")
+			self.supportedArchitectures = try values.decodeIfPresent([String].self, forKey: "supportedArchitectures")
+			self.requiredCapabilities = try values.decodeIfPresent([String].self, forKey: "requiredCapabilities")
+			self.deviceProtocols = try values.decodeIfPresent([String].self, forKey: "deviceProtocols")
+			self.locales = try values.decodeIfPresent([String].self, forKey: "locales")
+			self.entitlements = try values.decodeIfPresent([String: [String: String]].self, forKey: "entitlements")
+		}
+
+		public func encode(to encoder: Encoder) throws {
+			var values = encoder.container(keyedBy: StringCodingKey.self)
+			try values.encodeIfPresent(bundleID, forKey: "bundleId")
+			try values.encodeIfPresent(bundleType, forKey: "bundleType")
+			try values.encodeIfPresent(sdkBuild, forKey: "sdkBuild")
+			try values.encodeIfPresent(platformBuild, forKey: "platformBuild")
+			try values.encodeIfPresent(fileName, forKey: "fileName")
+			try values.encodeIfPresent(hasSirikit, forKey: "hasSirikit")
+			try values.encodeIfPresent(hasOnDemandResources, forKey: "hasOnDemandResources")
+			try values.encodeIfPresent(hasPrerenderedIcon, forKey: "hasPrerenderedIcon")
+			try values.encodeIfPresent(usesLocationServices, forKey: "usesLocationServices")
+			try values.encodeIfPresent(isIosBuildMacAppStoreCompatible, forKey: "isIosBuildMacAppStoreCompatible")
+			try values.encodeIfPresent(isIncludesSymbols, forKey: "includesSymbols")
+			try values.encodeIfPresent(dSYMURL, forKey: "dSYMUrl")
+			try values.encodeIfPresent(supportedArchitectures, forKey: "supportedArchitectures")
+			try values.encodeIfPresent(requiredCapabilities, forKey: "requiredCapabilities")
+			try values.encodeIfPresent(deviceProtocols, forKey: "deviceProtocols")
+			try values.encodeIfPresent(locales, forKey: "locales")
+			try values.encodeIfPresent(entitlements, forKey: "entitlements")
 		}
 	}
 
@@ -100,9 +122,16 @@ public struct BuildBundle: Codable {
 					self.related = related
 				}
 
-				private enum CodingKeys: String, CodingKey {
-					case this = "self"
-					case related
+				public init(from decoder: Decoder) throws {
+					let values = try decoder.container(keyedBy: StringCodingKey.self)
+					self.this = try values.decodeIfPresent(String.self, forKey: "self")
+					self.related = try values.decodeIfPresent(String.self, forKey: "related")
+				}
+
+				public func encode(to encoder: Encoder) throws {
+					var values = encoder.container(keyedBy: StringCodingKey.self)
+					try values.encodeIfPresent(this, forKey: "self")
+					try values.encodeIfPresent(related, forKey: "related")
 				}
 			}
 
@@ -118,11 +147,35 @@ public struct BuildBundle: Codable {
 					self.type = type
 					self.id = id
 				}
+
+				public init(from decoder: Decoder) throws {
+					let values = try decoder.container(keyedBy: StringCodingKey.self)
+					self.type = try values.decode(`Type`.self, forKey: "type")
+					self.id = try values.decode(String.self, forKey: "id")
+				}
+
+				public func encode(to encoder: Encoder) throws {
+					var values = encoder.container(keyedBy: StringCodingKey.self)
+					try values.encode(type, forKey: "type")
+					try values.encode(id, forKey: "id")
+				}
 			}
 
 			public init(links: Links? = nil, data: Data? = nil) {
 				self.links = links
 				self.data = data
+			}
+
+			public init(from decoder: Decoder) throws {
+				let values = try decoder.container(keyedBy: StringCodingKey.self)
+				self.links = try values.decodeIfPresent(Links.self, forKey: "links")
+				self.data = try values.decodeIfPresent(Data.self, forKey: "data")
+			}
+
+			public func encode(to encoder: Encoder) throws {
+				var values = encoder.container(keyedBy: StringCodingKey.self)
+				try values.encodeIfPresent(links, forKey: "links")
+				try values.encodeIfPresent(data, forKey: "data")
 			}
 		}
 
@@ -139,9 +192,16 @@ public struct BuildBundle: Codable {
 					self.related = related
 				}
 
-				private enum CodingKeys: String, CodingKey {
-					case this = "self"
-					case related
+				public init(from decoder: Decoder) throws {
+					let values = try decoder.container(keyedBy: StringCodingKey.self)
+					self.this = try values.decodeIfPresent(String.self, forKey: "self")
+					self.related = try values.decodeIfPresent(String.self, forKey: "related")
+				}
+
+				public func encode(to encoder: Encoder) throws {
+					var values = encoder.container(keyedBy: StringCodingKey.self)
+					try values.encodeIfPresent(this, forKey: "self")
+					try values.encodeIfPresent(related, forKey: "related")
 				}
 			}
 
@@ -157,11 +217,35 @@ public struct BuildBundle: Codable {
 					self.type = type
 					self.id = id
 				}
+
+				public init(from decoder: Decoder) throws {
+					let values = try decoder.container(keyedBy: StringCodingKey.self)
+					self.type = try values.decode(`Type`.self, forKey: "type")
+					self.id = try values.decode(String.self, forKey: "id")
+				}
+
+				public func encode(to encoder: Encoder) throws {
+					var values = encoder.container(keyedBy: StringCodingKey.self)
+					try values.encode(type, forKey: "type")
+					try values.encode(id, forKey: "id")
+				}
 			}
 
 			public init(links: Links? = nil, data: Data? = nil) {
 				self.links = links
 				self.data = data
+			}
+
+			public init(from decoder: Decoder) throws {
+				let values = try decoder.container(keyedBy: StringCodingKey.self)
+				self.links = try values.decodeIfPresent(Links.self, forKey: "links")
+				self.data = try values.decodeIfPresent(Data.self, forKey: "data")
+			}
+
+			public func encode(to encoder: Encoder) throws {
+				var values = encoder.container(keyedBy: StringCodingKey.self)
+				try values.encodeIfPresent(links, forKey: "links")
+				try values.encodeIfPresent(data, forKey: "data")
 			}
 		}
 
@@ -179,9 +263,16 @@ public struct BuildBundle: Codable {
 					self.related = related
 				}
 
-				private enum CodingKeys: String, CodingKey {
-					case this = "self"
-					case related
+				public init(from decoder: Decoder) throws {
+					let values = try decoder.container(keyedBy: StringCodingKey.self)
+					self.this = try values.decodeIfPresent(String.self, forKey: "self")
+					self.related = try values.decodeIfPresent(String.self, forKey: "related")
+				}
+
+				public func encode(to encoder: Encoder) throws {
+					var values = encoder.container(keyedBy: StringCodingKey.self)
+					try values.encodeIfPresent(this, forKey: "self")
+					try values.encodeIfPresent(related, forKey: "related")
 				}
 			}
 
@@ -197,12 +288,38 @@ public struct BuildBundle: Codable {
 					self.type = type
 					self.id = id
 				}
+
+				public init(from decoder: Decoder) throws {
+					let values = try decoder.container(keyedBy: StringCodingKey.self)
+					self.type = try values.decode(`Type`.self, forKey: "type")
+					self.id = try values.decode(String.self, forKey: "id")
+				}
+
+				public func encode(to encoder: Encoder) throws {
+					var values = encoder.container(keyedBy: StringCodingKey.self)
+					try values.encode(type, forKey: "type")
+					try values.encode(id, forKey: "id")
+				}
 			}
 
 			public init(links: Links? = nil, meta: PagingInformation? = nil, data: [Datum]? = nil) {
 				self.links = links
 				self.meta = meta
 				self.data = data
+			}
+
+			public init(from decoder: Decoder) throws {
+				let values = try decoder.container(keyedBy: StringCodingKey.self)
+				self.links = try values.decodeIfPresent(Links.self, forKey: "links")
+				self.meta = try values.decodeIfPresent(PagingInformation.self, forKey: "meta")
+				self.data = try values.decodeIfPresent([Datum].self, forKey: "data")
+			}
+
+			public func encode(to encoder: Encoder) throws {
+				var values = encoder.container(keyedBy: StringCodingKey.self)
+				try values.encodeIfPresent(links, forKey: "links")
+				try values.encodeIfPresent(meta, forKey: "meta")
+				try values.encodeIfPresent(data, forKey: "data")
 			}
 		}
 
@@ -220,9 +337,16 @@ public struct BuildBundle: Codable {
 					self.related = related
 				}
 
-				private enum CodingKeys: String, CodingKey {
-					case this = "self"
-					case related
+				public init(from decoder: Decoder) throws {
+					let values = try decoder.container(keyedBy: StringCodingKey.self)
+					self.this = try values.decodeIfPresent(String.self, forKey: "self")
+					self.related = try values.decodeIfPresent(String.self, forKey: "related")
+				}
+
+				public func encode(to encoder: Encoder) throws {
+					var values = encoder.container(keyedBy: StringCodingKey.self)
+					try values.encodeIfPresent(this, forKey: "self")
+					try values.encodeIfPresent(related, forKey: "related")
 				}
 			}
 
@@ -238,12 +362,38 @@ public struct BuildBundle: Codable {
 					self.type = type
 					self.id = id
 				}
+
+				public init(from decoder: Decoder) throws {
+					let values = try decoder.container(keyedBy: StringCodingKey.self)
+					self.type = try values.decode(`Type`.self, forKey: "type")
+					self.id = try values.decode(String.self, forKey: "id")
+				}
+
+				public func encode(to encoder: Encoder) throws {
+					var values = encoder.container(keyedBy: StringCodingKey.self)
+					try values.encode(type, forKey: "type")
+					try values.encode(id, forKey: "id")
+				}
 			}
 
 			public init(links: Links? = nil, meta: PagingInformation? = nil, data: [Datum]? = nil) {
 				self.links = links
 				self.meta = meta
 				self.data = data
+			}
+
+			public init(from decoder: Decoder) throws {
+				let values = try decoder.container(keyedBy: StringCodingKey.self)
+				self.links = try values.decodeIfPresent(Links.self, forKey: "links")
+				self.meta = try values.decodeIfPresent(PagingInformation.self, forKey: "meta")
+				self.data = try values.decodeIfPresent([Datum].self, forKey: "data")
+			}
+
+			public func encode(to encoder: Encoder) throws {
+				var values = encoder.container(keyedBy: StringCodingKey.self)
+				try values.encodeIfPresent(links, forKey: "links")
+				try values.encodeIfPresent(meta, forKey: "meta")
+				try values.encodeIfPresent(data, forKey: "data")
 			}
 		}
 
@@ -253,6 +403,22 @@ public struct BuildBundle: Codable {
 			self.betaAppClipInvocations = betaAppClipInvocations
 			self.buildBundleFileSizes = buildBundleFileSizes
 		}
+
+		public init(from decoder: Decoder) throws {
+			let values = try decoder.container(keyedBy: StringCodingKey.self)
+			self.appClipDomainCacheStatus = try values.decodeIfPresent(AppClipDomainCacheStatus.self, forKey: "appClipDomainCacheStatus")
+			self.appClipDomainDebugStatus = try values.decodeIfPresent(AppClipDomainDebugStatus.self, forKey: "appClipDomainDebugStatus")
+			self.betaAppClipInvocations = try values.decodeIfPresent(BetaAppClipInvocations.self, forKey: "betaAppClipInvocations")
+			self.buildBundleFileSizes = try values.decodeIfPresent(BuildBundleFileSizes.self, forKey: "buildBundleFileSizes")
+		}
+
+		public func encode(to encoder: Encoder) throws {
+			var values = encoder.container(keyedBy: StringCodingKey.self)
+			try values.encodeIfPresent(appClipDomainCacheStatus, forKey: "appClipDomainCacheStatus")
+			try values.encodeIfPresent(appClipDomainDebugStatus, forKey: "appClipDomainDebugStatus")
+			try values.encodeIfPresent(betaAppClipInvocations, forKey: "betaAppClipInvocations")
+			try values.encodeIfPresent(buildBundleFileSizes, forKey: "buildBundleFileSizes")
+		}
 	}
 
 	public init(type: `Type`, id: String, attributes: Attributes? = nil, relationships: Relationships? = nil, links: ResourceLinks) {
@@ -261,5 +427,23 @@ public struct BuildBundle: Codable {
 		self.attributes = attributes
 		self.relationships = relationships
 		self.links = links
+	}
+
+	public init(from decoder: Decoder) throws {
+		let values = try decoder.container(keyedBy: StringCodingKey.self)
+		self.type = try values.decode(`Type`.self, forKey: "type")
+		self.id = try values.decode(String.self, forKey: "id")
+		self.attributes = try values.decodeIfPresent(Attributes.self, forKey: "attributes")
+		self.relationships = try values.decodeIfPresent(Relationships.self, forKey: "relationships")
+		self.links = try values.decode(ResourceLinks.self, forKey: "links")
+	}
+
+	public func encode(to encoder: Encoder) throws {
+		var values = encoder.container(keyedBy: StringCodingKey.self)
+		try values.encode(type, forKey: "type")
+		try values.encode(id, forKey: "id")
+		try values.encodeIfPresent(attributes, forKey: "attributes")
+		try values.encodeIfPresent(relationships, forKey: "relationships")
+		try values.encode(links, forKey: "links")
 	}
 }

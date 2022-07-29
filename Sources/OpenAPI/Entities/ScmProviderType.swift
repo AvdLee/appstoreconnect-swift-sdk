@@ -24,4 +24,18 @@ public struct ScmProviderType: Codable {
 		self.displayName = displayName
 		self.isOnPremise = isOnPremise
 	}
+
+	public init(from decoder: Decoder) throws {
+		let values = try decoder.container(keyedBy: StringCodingKey.self)
+		self.kind = try values.decodeIfPresent(Kind.self, forKey: "kind")
+		self.displayName = try values.decodeIfPresent(String.self, forKey: "displayName")
+		self.isOnPremise = try values.decodeIfPresent(Bool.self, forKey: "isOnPremise")
+	}
+
+	public func encode(to encoder: Encoder) throws {
+		var values = encoder.container(keyedBy: StringCodingKey.self)
+		try values.encodeIfPresent(kind, forKey: "kind")
+		try values.encodeIfPresent(displayName, forKey: "displayName")
+		try values.encodeIfPresent(isOnPremise, forKey: "isOnPremise")
+	}
 }
