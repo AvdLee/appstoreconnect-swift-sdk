@@ -14,11 +14,18 @@ public struct Response<T> {
     public let requestURL: URL?
     public let statusCode: Int
     public let data: T?
+    public let errorResponse: ErrorResponse?
 
     public init(requestURL: URL?, statusCode: StatusCode, data: T?) {
         self.requestURL = requestURL
         self.statusCode = statusCode
         self.data = data
+
+        if let data = data as? Data {
+            self.errorResponse = try? APIProvider.jsonDecoder.decode(ErrorResponse.self, from: data)
+        } else {
+            self.errorResponse = nil
+        }
     }
 }
 
