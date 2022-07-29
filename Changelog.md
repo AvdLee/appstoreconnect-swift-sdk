@@ -1,3 +1,10 @@
+### 2.1.0
+- Parse JSON error response ([#186](https://github.com/AvdLee/appstoreconnect-swift-sdk/pull/186)) via [@AvdLee](https://github.com/AvdLee)
+- Add LocalizedError inheritance for thrown errors ([#181](https://github.com/AvdLee/appstoreconnect-swift-sdk/issues/181)) via [@AvdLee](https://github.com/AvdLee)
+- Fix authentication refresh ([#180](https://github.com/AvdLee/appstoreconnect-swift-sdk/pull/180)) via [@AvdLee](https://github.com/AvdLee)
+- Add App Store Connect API 2.0 Endpoints and Entities ([#174](https://github.com/AvdLee/appstoreconnect-swift-sdk/pull/174)) via [@AvdLee](https://github.com/AvdLee)
+- 2.0.0 Release - Using OpenAPI ([#173](https://github.com/AvdLee/appstoreconnect-swift-sdk/pull/173)) via [@AvdLee](https://github.com/AvdLee)
+
 ### 1.7.0
 - Add support for fetching bundle file sizes for build bundles ([#152](https://github.com/AvdLee/appstoreconnect-swift-sdk/pull/152)) via [@birwin93](https://github.com/birwin93)
 - Feat: Added CLOUD_MANAGED_APP_DISTRIBUTION in UserRole ([#153](https://github.com/AvdLee/appstoreconnect-swift-sdk/pull/153)) via [@valeriaalampi](https://github.com/valeriaalampi)
