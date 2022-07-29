@@ -1,3 +1,7 @@
+### 2.2.0
+- Reduce binary size by using a different codable technique ([#189](https://github.com/AvdLee/appstoreconnect-swift-sdk/pull/189)) via [@AvdLee](https://github.com/AvdLee)
+- Merge release 2.1.0 into master ([#188](https://github.com/AvdLee/appstoreconnect-swift-sdk/pull/188)) via [@SwiftLeeBot](https://github.com/SwiftLeeBot)
+
 ### 2.1.0
 - Parse JSON error response ([#186](https://github.com/AvdLee/appstoreconnect-swift-sdk/pull/186)) via [@AvdLee](https://github.com/AvdLee)
 - Add LocalizedError inheritance for thrown errors ([#181](https://github.com/AvdLee/appstoreconnect-swift-sdk/issues/181)) via [@AvdLee](https://github.com/AvdLee)
