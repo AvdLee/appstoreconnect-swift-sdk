@@ -65,6 +65,27 @@ let apps = try await self.provider.request(request).data
 print("Did fetch \(apps.count) apps")
 ```
 
+### Handling errors
+Whenever an error is returned from a request, you can get the details by catching the error as follows:
+
+```swift
+do {
+    print(try await self.provider.request(requestWithError).data)
+} catch APIProvider.Error.requestFailure(let statusCode, let errorResponse, _) {
+    print("Request failed with statuscode: \(statusCode) and the following errors:")
+    errorResponse?.errors?.forEach({ error in
+        print("Error code: \(error.code)")
+        print("Error title: \(error.title)")
+        print("Error detail: \(error.detail)")
+    })
+} catch {
+    print("Something went wrong fetching the apps: \(error.localizedDescription)")
+}
+```
+
+The error title and detail should help you solve the failure.
+For more info regarding errors, see: [Parsing the Error Response Code](https://developer.apple.com/documentation/appstoreconnectapi/interpreting_and_handling_errors/parsing_the_error_response_code) as documented by Apple.
+
 ## Installation
 
 ### Swift Package Manager

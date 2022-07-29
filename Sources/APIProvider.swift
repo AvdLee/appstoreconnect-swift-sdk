@@ -38,7 +38,7 @@ public final class APIProvider {
     public enum Error: Swift.Error, CustomDebugStringConvertible, LocalizedError {
         case requestGeneration
         case unknownResponseType
-        case requestFailure(StatusCode, Data?, URL?)
+        case requestFailure(StatusCode, ErrorResponse?, URL?)
         case decodingError(Swift.Error, Data)
         case downloadError
         case dateDecodingError(String)
@@ -47,17 +47,17 @@ public final class APIProvider {
         public var errorDescription: String? {
             debugDescription
         }
-        
+
         public var debugDescription: String {
             switch self {
             case .requestGeneration:
                 return "Failed to generate request."
             case .unknownResponseType:
                 return "Unknown response type."
-            case .requestFailure(let statusCode, let data, let url):
+            case .requestFailure(let statusCode, let errorResponse, let url):
                 let url = url?.absoluteString ?? ""
-                if let data = data, let response = String(data: data, encoding: .utf8) {
-                    return "Request \(url) failed with status code \(statusCode) and response \(response))."
+                if let errorResponse = errorResponse {
+                    return "Request \(url) failed with status code \(statusCode). \(errorResponse))."
                 }
                 return "Request \(url) failed with status code \(statusCode)."
             case .decodingError(let error, let data):
@@ -219,7 +219,7 @@ private extension APIProvider {
         switch result {
         case .success(let response):
             guard let data = response.data, 200..<300 ~= response.statusCode else {
-                return .failure(Error.requestFailure(response.statusCode, response.data, response.requestURL))
+                return .failure(Error.requestFailure(response.statusCode, response.errorResponse, response.requestURL))
             }
 
             if let data = data as? T {
@@ -245,7 +245,7 @@ private extension APIProvider {
         switch result {
         case .success(let response):
             guard 200..<300 ~= response.statusCode else {
-                return .failure(Error.requestFailure(response.statusCode, response.data, response.requestURL))
+                return .failure(Error.requestFailure(response.statusCode, response.errorResponse, response.requestURL))
             }
 
             return .success(())
@@ -262,7 +262,7 @@ private extension APIProvider {
         switch result {
         case .success(let response):
             guard 200..<300 ~= response.statusCode else {
-                return .failure(Error.requestFailure(response.statusCode, nil, response.requestURL))
+                return .failure(Error.requestFailure(response.statusCode, response.errorResponse, response.requestURL))
             }
             if let data = response.data {
                 return .success(data)

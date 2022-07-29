@@ -26,8 +26,14 @@ struct AppsListView: View {
                     .opacity(viewModel.apps.isEmpty ? 1.0 : 0.0)
             }.navigationTitle("List of Apps")
                 .toolbar {
-                    Button("Refresh") {
-                        viewModel.loadApps()
+                    ToolbarItemGroup(placement: .bottomBar) {
+                        Button("Refresh") {
+                            viewModel.loadApps()
+                        }
+
+                        Button("Fail") {
+                            viewModel.loadFailureExample()
+                        }
                     }
                 }
         }.onAppear {
@@ -65,7 +71,31 @@ final class AppsListViewModel: ObservableObject {
                 let apps = try await self.provider.request(request).data
                 await self.updateApps(to: apps)
             } catch {
-                print("Something went wrong fetching the apps: \(error)")
+                print("Something went wrong fetching the apps: \(error.localizedDescription)")
+            }
+        }
+    }
+
+    /// This demonstrates a failing example and how you can catch error details.
+    func loadFailureExample() {
+        Task.detached {
+            let requestWithError = APIEndpoint
+                .v1
+                .builds
+                .id("app.appId")
+                .get()
+
+            do {
+                print(try await self.provider.request(requestWithError).data)
+            } catch APIProvider.Error.requestFailure(let statusCode, let errorResponse, _) {
+                print("Request failed with statuscode: \(statusCode) and the following errors:")
+                errorResponse?.errors?.forEach({ error in
+                    print("Error code: \(error.code)")
+                    print("Error title: \(error.title)")
+                    print("Error detail: \(error.detail)")
+                })
+            } catch {
+                print("Something went wrong fetching the apps: \(error.localizedDescription)")
             }
         }
     }

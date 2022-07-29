@@ -54,9 +54,19 @@ final class APIProviderTests: XCTestCase {
         }
     }
 
-    func testRequestExecutionErrorResponse() {
+    func testRequestExecutionErrorResponse() throws {
         let expectedURL = URL(string: "https://api.appstoreconnect.apple.com")!
-        let response = Response<Data>(requestURL: expectedURL, statusCode: 500, data: nil)
+        let errorResponse = ErrorResponse(errors: [
+            .init(
+                id: UUID().uuidString,
+                status: "404",
+                code: "NOT_FOUND",
+                title: "The specified resource does not exist",
+                detail: "There is no resource of type 'builds' with id 'app.appId'"
+            )
+        ])
+        let responseData = try JSONEncoder().encode(errorResponse)
+        let response = Response<Data>(requestURL: expectedURL, statusCode: 404, data: responseData)
         let mockRequestExecutor = MockRequestExecutor(expectedResponse: Result.success(response))
         let apiProvider = APIProvider(configuration: configuration, requestExecutor: mockRequestExecutor)
 
@@ -66,13 +76,20 @@ final class APIProviderTests: XCTestCase {
             XCTAssertNotNil(result.error)
             guard
                 let error = result.error as? APIProvider.Error,
-                case let APIProvider.Error.requestFailure(statusCode, data, url) = error else {
+                case let APIProvider.Error.requestFailure(statusCode, errorResponse, url) = error else {
                 XCTFail("We expect a requestFailure error")
                 return
             }
-            XCTAssertNil(data)
-            XCTAssertEqual(statusCode, 500)
+            XCTAssertNotNil(errorResponse)
+            XCTAssertEqual(statusCode, 404)
             XCTAssertEqual(url?.absoluteString, expectedURL.absoluteString)
+            XCTAssertEqual(error.localizedDescription, """
+            Request https://api.appstoreconnect.apple.com failed with status code 404. Related response error(s):
+
+            The request failed with response code 404 NOT_FOUND
+
+            The specified resource does not exist. There is no resource of type 'builds' with id 'app.appId').
+            """)
         }
     }
 
