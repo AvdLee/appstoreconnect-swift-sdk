@@ -115,11 +115,11 @@ bundle exec fastlane test
 ```
 
 ### Update OpenAPI generated code
-Using [CreateAPI](https://github.com/CreateAPI/CreateAPI).
+Using [CreateAPI](https://github.com/CreateAPI/CreateAPI), run the following:
 
-1. `cd` into the `Source/OpenAPI` folder
-2. Open terminal
-3. Execute: `create-api generate app_store_connect_api_2.0_openapi.json --module "AppStoreConnect_Swift_SDK" --output . --config .create-api.yml -s`
+```bash
+$ swift package --allow-writing-to-package-directory generate-open-api
+```
 
 ## Communication
 
