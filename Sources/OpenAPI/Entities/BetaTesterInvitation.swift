@@ -5,7 +5,7 @@
 
 import Foundation
 
-public struct BetaTesterInvitation: Codable {
+public struct BetaTesterInvitation: Codable, Identifiable {
 	public var type: `Type`
 	public var id: String
 	public var links: ResourceLinks

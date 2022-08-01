@@ -45,7 +45,7 @@ public struct AppCustomProductPageCreateRequest: Codable {
 			public struct App: Codable {
 				public var data: Data
 
-				public struct Data: Codable {
+				public struct Data: Codable, Identifiable {
 					public var type: `Type`
 					public var id: String
 
@@ -89,7 +89,7 @@ public struct AppCustomProductPageCreateRequest: Codable {
 			public struct AppCustomProductPageVersions: Codable {
 				public var data: [Datum]?
 
-				public struct Datum: Codable {
+				public struct Datum: Codable, Identifiable {
 					public var type: `Type`
 					public var id: String
 
@@ -133,7 +133,7 @@ public struct AppCustomProductPageCreateRequest: Codable {
 			public struct AppStoreVersionTemplate: Codable {
 				public var data: Data?
 
-				public struct Data: Codable {
+				public struct Data: Codable, Identifiable {
 					public var type: `Type`
 					public var id: String
 
@@ -177,7 +177,7 @@ public struct AppCustomProductPageCreateRequest: Codable {
 			public struct CustomProductPageTemplate: Codable {
 				public var data: Data?
 
-				public struct Data: Codable {
+				public struct Data: Codable, Identifiable {
 					public var type: `Type`
 					public var id: String
 

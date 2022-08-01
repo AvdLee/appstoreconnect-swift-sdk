@@ -8,7 +8,7 @@ import Foundation
 public struct BuildUpdateRequest: Codable {
 	public var data: Data
 
-	public struct Data: Codable {
+	public struct Data: Codable, Identifiable {
 		public var type: `Type`
 		public var id: String
 		public var attributes: Attributes?
@@ -46,7 +46,7 @@ public struct BuildUpdateRequest: Codable {
 			public struct AppEncryptionDeclaration: Codable {
 				public var data: Data?
 
-				public struct Data: Codable {
+				public struct Data: Codable, Identifiable {
 					public var type: `Type`
 					public var id: String
 

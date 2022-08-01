@@ -5,7 +5,7 @@
 
 import Foundation
 
-public struct AppStoreVersionReleaseRequest: Codable {
+public struct AppStoreVersionReleaseRequest: Codable, Identifiable {
 	public var type: `Type`
 	public var id: String
 	public var links: ResourceLinks

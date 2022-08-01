@@ -5,7 +5,7 @@
 
 import Foundation
 
-public struct AgeRatingDeclaration: Codable {
+public struct AgeRatingDeclaration: Codable, Identifiable {
 	public var type: `Type`
 	public var id: String
 	public var attributes: Attributes?

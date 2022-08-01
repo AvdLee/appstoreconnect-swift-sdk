@@ -5,7 +5,7 @@
 
 import Foundation
 
-public struct SubscriptionLocalization: Codable {
+public struct SubscriptionLocalization: Codable, Identifiable {
 	public var type: `Type`
 	public var id: String
 	public var attributes: Attributes?
@@ -82,7 +82,7 @@ public struct SubscriptionLocalization: Codable {
 				}
 			}
 
-			public struct Data: Codable {
+			public struct Data: Codable, Identifiable {
 				public var type: `Type`
 				public var id: String
 

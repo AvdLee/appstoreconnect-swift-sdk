@@ -67,7 +67,7 @@ public struct BetaGroupCreateRequest: Codable {
 			public struct App: Codable {
 				public var data: Data
 
-				public struct Data: Codable {
+				public struct Data: Codable, Identifiable {
 					public var type: `Type`
 					public var id: String
 
@@ -111,7 +111,7 @@ public struct BetaGroupCreateRequest: Codable {
 			public struct Builds: Codable {
 				public var data: [Datum]?
 
-				public struct Datum: Codable {
+				public struct Datum: Codable, Identifiable {
 					public var type: `Type`
 					public var id: String
 
@@ -155,7 +155,7 @@ public struct BetaGroupCreateRequest: Codable {
 			public struct BetaTesters: Codable {
 				public var data: [Datum]?
 
-				public struct Datum: Codable {
+				public struct Datum: Codable, Identifiable {
 					public var type: `Type`
 					public var id: String
 

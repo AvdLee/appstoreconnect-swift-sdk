@@ -5,7 +5,7 @@
 
 import Foundation
 
-public struct SubscriptionGroupSubmission: Codable {
+public struct SubscriptionGroupSubmission: Codable, Identifiable {
 	public var type: `Type`
 	public var id: String
 	public var links: ResourceLinks

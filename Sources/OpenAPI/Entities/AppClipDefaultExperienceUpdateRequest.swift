@@ -8,7 +8,7 @@ import Foundation
 public struct AppClipDefaultExperienceUpdateRequest: Codable {
 	public var data: Data
 
-	public struct Data: Codable {
+	public struct Data: Codable, Identifiable {
 		public var type: `Type`
 		public var id: String
 		public var attributes: Attributes?
@@ -42,7 +42,7 @@ public struct AppClipDefaultExperienceUpdateRequest: Codable {
 			public struct ReleaseWithAppStoreVersion: Codable {
 				public var data: Data?
 
-				public struct Data: Codable {
+				public struct Data: Codable, Identifiable {
 					public var type: `Type`
 					public var id: String
 

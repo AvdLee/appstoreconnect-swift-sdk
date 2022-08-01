@@ -5,7 +5,7 @@
 
 import Foundation
 
-public struct AppStoreVersionPhasedRelease: Codable {
+public struct AppStoreVersionPhasedRelease: Codable, Identifiable {
 	public var type: `Type`
 	public var id: String
 	public var attributes: Attributes?

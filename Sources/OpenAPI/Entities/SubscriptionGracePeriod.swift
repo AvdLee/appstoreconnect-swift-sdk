@@ -5,7 +5,7 @@
 
 import Foundation
 
-public struct SubscriptionGracePeriod: Codable {
+public struct SubscriptionGracePeriod: Codable, Identifiable {
 	public var type: `Type`
 	public var id: String
 	public var attributes: Attributes?

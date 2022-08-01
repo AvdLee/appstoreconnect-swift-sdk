@@ -5,7 +5,7 @@
 
 import Foundation
 
-public struct SubscriptionSubmission: Codable {
+public struct SubscriptionSubmission: Codable, Identifiable {
 	public var type: `Type`
 	public var id: String
 	public var relationships: Relationships?
@@ -44,7 +44,7 @@ public struct SubscriptionSubmission: Codable {
 				}
 			}
 
-			public struct Data: Codable {
+			public struct Data: Codable, Identifiable {
 				public var type: `Type`
 				public var id: String
 

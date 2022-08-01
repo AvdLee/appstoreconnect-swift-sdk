@@ -5,7 +5,7 @@
 
 import Foundation
 
-public struct InAppPurchasePrice: Codable {
+public struct InAppPurchasePrice: Codable, Identifiable {
 	public var type: `Type`
 	public var id: String
 	public var attributes: Attributes?
@@ -64,7 +64,7 @@ public struct InAppPurchasePrice: Codable {
 				}
 			}
 
-			public struct Data: Codable {
+			public struct Data: Codable, Identifiable {
 				public var type: `Type`
 				public var id: String
 
@@ -134,7 +134,7 @@ public struct InAppPurchasePrice: Codable {
 				}
 			}
 
-			public struct Data: Codable {
+			public struct Data: Codable, Identifiable {
 				public var type: `Type`
 				public var id: String
 

@@ -5,7 +5,7 @@
 
 import Foundation
 
-public struct SubscriptionGroup: Codable {
+public struct SubscriptionGroup: Codable, Identifiable {
 	public var type: `Type`
 	public var id: String
 	public var attributes: Attributes?
@@ -65,7 +65,7 @@ public struct SubscriptionGroup: Codable {
 				}
 			}
 
-			public struct Datum: Codable {
+			public struct Datum: Codable, Identifiable {
 				public var type: `Type`
 				public var id: String
 
@@ -139,7 +139,7 @@ public struct SubscriptionGroup: Codable {
 				}
 			}
 
-			public struct Datum: Codable {
+			public struct Datum: Codable, Identifiable {
 				public var type: `Type`
 				public var id: String
 

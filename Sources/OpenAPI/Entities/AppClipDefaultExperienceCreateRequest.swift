@@ -43,7 +43,7 @@ public struct AppClipDefaultExperienceCreateRequest: Codable {
 			public struct AppClip: Codable {
 				public var data: Data
 
-				public struct Data: Codable {
+				public struct Data: Codable, Identifiable {
 					public var type: `Type`
 					public var id: String
 
@@ -87,7 +87,7 @@ public struct AppClipDefaultExperienceCreateRequest: Codable {
 			public struct ReleaseWithAppStoreVersion: Codable {
 				public var data: Data?
 
-				public struct Data: Codable {
+				public struct Data: Codable, Identifiable {
 					public var type: `Type`
 					public var id: String
 
@@ -131,7 +131,7 @@ public struct AppClipDefaultExperienceCreateRequest: Codable {
 			public struct AppClipDefaultExperienceTemplate: Codable {
 				public var data: Data?
 
-				public struct Data: Codable {
+				public struct Data: Codable, Identifiable {
 					public var type: `Type`
 					public var id: String
 

@@ -9,7 +9,7 @@ public struct SubscriptionGracePeriodUpdateRequest: Codable {
 	public var data: Data
 	public var included: [AppInlineCreate]?
 
-	public struct Data: Codable {
+	public struct Data: Codable, Identifiable {
 		public var type: `Type`
 		public var id: String
 		public var attributes: Attributes?
@@ -43,7 +43,7 @@ public struct SubscriptionGracePeriodUpdateRequest: Codable {
 			public struct App: Codable {
 				public var data: Data?
 
-				public struct Data: Codable {
+				public struct Data: Codable, Identifiable {
 					public var type: `Type`
 					public var id: String
 
