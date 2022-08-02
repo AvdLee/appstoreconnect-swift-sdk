@@ -5,12 +5,10 @@ import PackagePlugin
 struct Plugin: CommandPlugin {
     func performCommand(context: PluginContext, arguments: [String]) async throws {
         let createAPI = try context.tool(named: "create-api")
-        let currentDirectoryURL =  URL(fileURLWithPath: context.package.directory.string)
-            .appendingPathComponent("Sources")
-            .appendingPathComponent("OpenAPI")
+        let openAPIDirectory = context.package.directory.appending("Sources", "OpenAPI")
 
         let process = Process()
-        process.currentDirectoryURL = currentDirectoryURL
+        process.currentDirectoryURL = URL(fileURLWithPath: openAPIDirectory.string)
         process.executableURL = URL(fileURLWithPath: createAPI.path.string)
         process.arguments = [
             "generate",
