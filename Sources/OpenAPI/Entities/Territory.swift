@@ -5,7 +5,7 @@
 
 import Foundation
 
-public struct Territory: Codable {
+public struct Territory: Codable, Identifiable {
 	public var type: `Type`
 	public var id: String
 	public var attributes: Attributes?

@@ -5,7 +5,7 @@
 
 import Foundation
 
-public struct BuildIcon: Codable {
+public struct BuildIcon: Codable, Identifiable {
 	public var type: `Type`
 	public var id: String
 	public var attributes: Attributes?

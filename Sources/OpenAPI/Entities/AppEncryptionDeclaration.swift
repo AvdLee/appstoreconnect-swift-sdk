@@ -5,7 +5,7 @@
 
 import Foundation
 
-public struct AppEncryptionDeclaration: Codable {
+public struct AppEncryptionDeclaration: Codable, Identifiable {
 	public var type: `Type`
 	public var id: String
 	public var attributes: Attributes?
@@ -107,7 +107,7 @@ public struct AppEncryptionDeclaration: Codable {
 				}
 			}
 
-			public struct Data: Codable {
+			public struct Data: Codable, Identifiable {
 				public var type: `Type`
 				public var id: String
 

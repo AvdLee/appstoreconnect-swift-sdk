@@ -64,7 +64,7 @@ public struct ProfileCreateRequest: Codable {
 			public struct BundleID: Codable {
 				public var data: Data
 
-				public struct Data: Codable {
+				public struct Data: Codable, Identifiable {
 					public var type: `Type`
 					public var id: String
 
@@ -108,7 +108,7 @@ public struct ProfileCreateRequest: Codable {
 			public struct Devices: Codable {
 				public var data: [Datum]?
 
-				public struct Datum: Codable {
+				public struct Datum: Codable, Identifiable {
 					public var type: `Type`
 					public var id: String
 
@@ -152,7 +152,7 @@ public struct ProfileCreateRequest: Codable {
 			public struct Certificates: Codable {
 				public var data: [Datum]
 
-				public struct Datum: Codable {
+				public struct Datum: Codable, Identifiable {
 					public var type: `Type`
 					public var id: String
 

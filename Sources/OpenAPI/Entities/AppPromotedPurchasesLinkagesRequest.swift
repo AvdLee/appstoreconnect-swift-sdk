@@ -8,7 +8,7 @@ import Foundation
 public struct AppPromotedPurchasesLinkagesRequest: Codable {
 	public var data: [Datum]
 
-	public struct Datum: Codable {
+	public struct Datum: Codable, Identifiable {
 		public var type: `Type`
 		public var id: String
 

@@ -17,7 +17,7 @@ paths:
   isAddingOperationIds: false
   # The types to import, by default uses "Get" (https://github.com/CreateAPI/Get)
   imports: []
-  # Inline simple requests, like the ones with a single parameter 
+  # Inline simple requests, like the ones with a single parameter
   isInliningSimpleRequests: true
   # Inline simple parametesr with few arguments.
   isInliningSimpleQueryParameters: true
@@ -29,13 +29,14 @@ paths:
 
 entities:
   isGeneratingCustomCodingKeys: false
+  isGeneratingIdentifiableConformance: true
 
 comments:
   # Generate comments
   isEnabled: true
   # Generate titles
   isAddingTitles: true
-  # Generate description 
+  # Generate description
   isAddingDescription: true
   # Generate examples
   isAddingExamples: true

@@ -5,7 +5,7 @@
 
 import Foundation
 
-public struct DiagnosticSignature: Codable {
+public struct DiagnosticSignature: Codable, Identifiable {
 	public var type: `Type`
 	public var id: String
 	public var attributes: Attributes?

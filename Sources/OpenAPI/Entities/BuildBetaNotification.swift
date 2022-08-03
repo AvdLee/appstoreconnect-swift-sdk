@@ -5,7 +5,7 @@
 
 import Foundation
 
-public struct BuildBetaNotification: Codable {
+public struct BuildBetaNotification: Codable, Identifiable {
 	public var type: `Type`
 	public var id: String
 	public var links: ResourceLinks

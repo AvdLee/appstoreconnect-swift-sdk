@@ -5,7 +5,7 @@
 
 import Foundation
 
-public struct GameCenterEnabledVersion: Codable {
+public struct GameCenterEnabledVersion: Codable, Identifiable {
 	public var type: `Type`
 	public var id: String
 	public var attributes: Attributes?
@@ -73,7 +73,7 @@ public struct GameCenterEnabledVersion: Codable {
 				}
 			}
 
-			public struct Datum: Codable {
+			public struct Datum: Codable, Identifiable {
 				public var type: `Type`
 				public var id: String
 
@@ -146,7 +146,7 @@ public struct GameCenterEnabledVersion: Codable {
 				}
 			}
 
-			public struct Data: Codable {
+			public struct Data: Codable, Identifiable {
 				public var type: `Type`
 				public var id: String
 

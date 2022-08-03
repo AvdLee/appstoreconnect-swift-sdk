@@ -8,7 +8,7 @@ import Foundation
 public struct ErrorResponse: Codable {
 	public var errors: [Error]?
 
-	public struct Error: Codable {
+	public struct Error: Codable, Identifiable {
 		public var id: String?
 		public var status: String
 		public var code: String

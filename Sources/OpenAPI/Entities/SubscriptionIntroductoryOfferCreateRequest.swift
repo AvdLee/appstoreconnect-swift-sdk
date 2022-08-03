@@ -60,7 +60,7 @@ public struct SubscriptionIntroductoryOfferCreateRequest: Codable {
 			public struct Subscription: Codable {
 				public var data: Data
 
-				public struct Data: Codable {
+				public struct Data: Codable, Identifiable {
 					public var type: `Type`
 					public var id: String
 
@@ -104,7 +104,7 @@ public struct SubscriptionIntroductoryOfferCreateRequest: Codable {
 			public struct Territory: Codable {
 				public var data: Data?
 
-				public struct Data: Codable {
+				public struct Data: Codable, Identifiable {
 					public var type: `Type`
 					public var id: String
 
@@ -148,7 +148,7 @@ public struct SubscriptionIntroductoryOfferCreateRequest: Codable {
 			public struct SubscriptionPricePoint: Codable {
 				public var data: Data?
 
-				public struct Data: Codable {
+				public struct Data: Codable, Identifiable {
 					public var type: `Type`
 					public var id: String
 

@@ -5,7 +5,7 @@
 
 import Foundation
 
-public struct InAppPurchasePriceInlineCreate: Codable {
+public struct InAppPurchasePriceInlineCreate: Codable, Identifiable {
 	public var type: `Type`
 	public var id: String?
 	public var attributes: Attributes?
@@ -40,7 +40,7 @@ public struct InAppPurchasePriceInlineCreate: Codable {
 		public struct InAppPurchaseV2: Codable {
 			public var data: Data?
 
-			public struct Data: Codable {
+			public struct Data: Codable, Identifiable {
 				public var type: `Type`
 				public var id: String
 
@@ -84,7 +84,7 @@ public struct InAppPurchasePriceInlineCreate: Codable {
 		public struct InAppPurchasePricePoint: Codable {
 			public var data: Data?
 
-			public struct Data: Codable {
+			public struct Data: Codable, Identifiable {
 				public var type: `Type`
 				public var id: String
 

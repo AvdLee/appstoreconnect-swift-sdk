@@ -5,7 +5,7 @@
 
 import Foundation
 
-public struct SubscriptionOfferCodeOneTimeUseCodeValue: Codable {
+public struct SubscriptionOfferCodeOneTimeUseCodeValue: Codable, Identifiable {
 	public var type: `Type`
 	public var id: String
 	public var links: ResourceLinks

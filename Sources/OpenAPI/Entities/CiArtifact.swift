@@ -5,7 +5,7 @@
 
 import Foundation
 
-public struct CiArtifact: Codable {
+public struct CiArtifact: Codable, Identifiable {
 	public var type: `Type`
 	public var id: String
 	public var attributes: Attributes?

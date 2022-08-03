@@ -9,7 +9,7 @@ public struct SubscriptionPromotionalOfferUpdateRequest: Codable {
 	public var data: Data
 	public var included: [SubscriptionPromotionalOfferPriceInlineCreate]?
 
-	public struct Data: Codable {
+	public struct Data: Codable, Identifiable {
 		public var type: `Type`
 		public var id: String
 		public var relationships: Relationships?
@@ -24,7 +24,7 @@ public struct SubscriptionPromotionalOfferUpdateRequest: Codable {
 			public struct Prices: Codable {
 				public var data: [Datum]?
 
-				public struct Datum: Codable {
+				public struct Datum: Codable, Identifiable {
 					public var type: `Type`
 					public var id: String
 

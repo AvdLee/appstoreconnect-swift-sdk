@@ -5,7 +5,7 @@
 
 import Foundation
 
-public struct SubscriptionIntroductoryOfferInlineCreate: Codable {
+public struct SubscriptionIntroductoryOfferInlineCreate: Codable, Identifiable {
 	public var type: `Type`
 	public var id: String?
 	public var attributes: Attributes
@@ -57,7 +57,7 @@ public struct SubscriptionIntroductoryOfferInlineCreate: Codable {
 		public struct Subscription: Codable {
 			public var data: Data?
 
-			public struct Data: Codable {
+			public struct Data: Codable, Identifiable {
 				public var type: `Type`
 				public var id: String
 
@@ -101,7 +101,7 @@ public struct SubscriptionIntroductoryOfferInlineCreate: Codable {
 		public struct Territory: Codable {
 			public var data: Data?
 
-			public struct Data: Codable {
+			public struct Data: Codable, Identifiable {
 				public var type: `Type`
 				public var id: String
 
@@ -145,7 +145,7 @@ public struct SubscriptionIntroductoryOfferInlineCreate: Codable {
 		public struct SubscriptionPricePoint: Codable {
 			public var data: Data?
 
-			public struct Data: Codable {
+			public struct Data: Codable, Identifiable {
 				public var type: `Type`
 				public var id: String
 

@@ -10,7 +10,7 @@ public struct BetaTesterBetaGroupsLinkagesResponse: Codable {
 	public var links: PagedDocumentLinks
 	public var meta: PagingInformation?
 
-	public struct Datum: Codable {
+	public struct Datum: Codable, Identifiable {
 		public var type: `Type`
 		public var id: String
 

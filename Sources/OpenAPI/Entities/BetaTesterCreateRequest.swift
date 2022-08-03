@@ -50,7 +50,7 @@ public struct BetaTesterCreateRequest: Codable {
 			public struct BetaGroups: Codable {
 				public var data: [Datum]?
 
-				public struct Datum: Codable {
+				public struct Datum: Codable, Identifiable {
 					public var type: `Type`
 					public var id: String
 
@@ -94,7 +94,7 @@ public struct BetaTesterCreateRequest: Codable {
 			public struct Builds: Codable {
 				public var data: [Datum]?
 
-				public struct Datum: Codable {
+				public struct Datum: Codable, Identifiable {
 					public var type: `Type`
 					public var id: String
 

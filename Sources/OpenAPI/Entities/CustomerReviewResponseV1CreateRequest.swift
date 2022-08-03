@@ -41,7 +41,7 @@ public struct CustomerReviewResponseV1CreateRequest: Codable {
 			public struct Review: Codable {
 				public var data: Data
 
-				public struct Data: Codable {
+				public struct Data: Codable, Identifiable {
 					public var type: `Type`
 					public var id: String
 

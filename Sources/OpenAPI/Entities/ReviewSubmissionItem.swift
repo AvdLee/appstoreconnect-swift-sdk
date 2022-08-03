@@ -5,7 +5,7 @@
 
 import Foundation
 
-public struct ReviewSubmissionItem: Codable {
+public struct ReviewSubmissionItem: Codable, Identifiable {
 	public var type: `Type`
 	public var id: String
 	public var attributes: Attributes?
@@ -74,7 +74,7 @@ public struct ReviewSubmissionItem: Codable {
 				}
 			}
 
-			public struct Data: Codable {
+			public struct Data: Codable, Identifiable {
 				public var type: `Type`
 				public var id: String
 
@@ -144,7 +144,7 @@ public struct ReviewSubmissionItem: Codable {
 				}
 			}
 
-			public struct Data: Codable {
+			public struct Data: Codable, Identifiable {
 				public var type: `Type`
 				public var id: String
 
@@ -214,7 +214,7 @@ public struct ReviewSubmissionItem: Codable {
 				}
 			}
 
-			public struct Data: Codable {
+			public struct Data: Codable, Identifiable {
 				public var type: `Type`
 				public var id: String
 
@@ -284,7 +284,7 @@ public struct ReviewSubmissionItem: Codable {
 				}
 			}
 
-			public struct Data: Codable {
+			public struct Data: Codable, Identifiable {
 				public var type: `Type`
 				public var id: String
 

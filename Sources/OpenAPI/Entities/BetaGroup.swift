@@ -5,7 +5,7 @@
 
 import Foundation
 
-public struct BetaGroup: Codable {
+public struct BetaGroup: Codable, Identifiable {
 	public var type: `Type`
 	public var id: String
 	public var attributes: Attributes?
@@ -105,7 +105,7 @@ public struct BetaGroup: Codable {
 				}
 			}
 
-			public struct Data: Codable {
+			public struct Data: Codable, Identifiable {
 				public var type: `Type`
 				public var id: String
 
@@ -176,7 +176,7 @@ public struct BetaGroup: Codable {
 				}
 			}
 
-			public struct Datum: Codable {
+			public struct Datum: Codable, Identifiable {
 				public var type: `Type`
 				public var id: String
 
@@ -250,7 +250,7 @@ public struct BetaGroup: Codable {
 				}
 			}
 
-			public struct Datum: Codable {
+			public struct Datum: Codable, Identifiable {
 				public var type: `Type`
 				public var id: String
 

@@ -5,7 +5,7 @@
 
 import Foundation
 
-public struct Certificate: Codable {
+public struct Certificate: Codable, Identifiable {
 	public var type: `Type`
 	public var id: String
 	public var attributes: Attributes?
