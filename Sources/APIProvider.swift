@@ -274,3 +274,73 @@ private extension APIProvider {
     }
 
 }
+
+public struct PagedRequest<T>: AsyncSequence, AsyncIteratorProtocol where T: Decodable {
+    public typealias Element = T
+    
+    let request: Request<T>
+    let provider: APIProvider
+    
+    init(request: Request<T>, provider: APIProvider) {
+        self.request = request
+        self.provider = provider
+    }
+    
+    private var currentElement: T!
+    
+    public mutating func next() async throws -> T? {
+        guard !Task.isCancelled else {
+            return nil
+        }
+                    
+        if let current = currentElement {
+            currentElement = try await provider.request(request, pageAfter: current)
+        } else {
+            currentElement = try await provider.request(request)
+        }
+        
+        return currentElement
+    }
+    
+    public func makeAsyncIterator() -> Self {
+        self
+    }
+}
+
+extension APIProvider {
+        
+    public func paged<T>(_ endpoint: Request<T>) -> PagedRequest<T> {
+        PagedRequest(request: endpoint, provider: self)
+    }
+    
+    public func request<T>(_ endpoint: Request<T>, pageAfter: T) async throws -> T? where T: Decodable {
+        try await withCheckedThrowingContinuation { continuation in
+            request(endpoint, pageAfter: pageAfter) { result in
+                continuation.resume(with: result)
+            }
+        }
+    }
+
+    public func hasPagedDocumentLinks<T>(_ object: T) -> Bool {
+        pagedDocumentLinks(object) != nil
+    }
+    
+    private func pagedDocumentLinks<T>(_ object: T) -> PagedDocumentLinks? {
+        let mirror = Mirror(reflecting: object)
+        return mirror.children.first(where: { $0.value is PagedDocumentLinks }).flatMap({ $0.value as? PagedDocumentLinks })
+    }
+
+    public func request<T: Decodable>(_ request: Request<T>, pageAfter currentPage: T, completion: @escaping RequestCompletionHandler<T?>) {
+                        
+        guard
+            let nextPage = pagedDocumentLinks(currentPage)?.next,
+            let url = URL(string: nextPage)
+        else { completion(.success(nil)); return }
+        
+        do {
+            let urlRequest = try requestsAuthenticator.adapt(URLRequest(url: url))
+
+            requestExecutor.execute(urlRequest) { completion(self.mapResponse($0)) }
+        } catch { completion(.failure(error)) }
+    }
+}
