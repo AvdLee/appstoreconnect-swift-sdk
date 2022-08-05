@@ -65,6 +65,39 @@ let apps = try await self.provider.request(request).data
 print("Did fetch \(apps.count) apps")
 ```
 
+### Handling paged responses
+If the responses from the API request can be delivered in multiple pages, you can iterate over all of them using an AsyncSequence or individually request the next page following the current one.
+
+```swift
+let request = APIEndpoint
+    .v1
+    .apps
+    .get(parameters: .init(
+        sort: [.bundleID],
+        fieldsApps: [.appInfos, .name, .bundleID],
+        limit: 2
+    ))
+        
+// Demonstration of AsyncSequence result of APIProvider.paged(_)
+var allApps: [App] = []
+for try await pagedResult in provider.paged(request) {
+    allApps.append(contentsOf: pagedResult.data)
+}
+print("There are \(allApps.count) apps in total")
+
+// Demonstration of APIProvider.request(_:isPagedResponse:) and APIProvider.request(_: pageAfter:)
+let firstPageResult = try await provider.request(request)
+let firstPageApps = firstPageResult.data
+print("The first page of results has \(firstPageApps.count) apps")
+
+if provider.request(request, isPagedResponse: firstPageResult) {        
+    if let nextPage = try await provider.request(request, pageAfter: firstPageResult) {
+        let secondPageApps = nextPage.data
+        print("The second page of results has \(secondPageApps.count) apps")
+    }
+}            
+``` 
+
 ### Handling errors
 Whenever an error is returned from a request, you can get the details by catching the error as follows:
 

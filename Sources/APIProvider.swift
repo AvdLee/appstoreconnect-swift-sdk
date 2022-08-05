@@ -272,75 +272,84 @@ private extension APIProvider {
             return .failure(Error.requestExecutorError(error))
         }
     }
-
 }
 
-public struct PagedRequest<T>: AsyncSequence, AsyncIteratorProtocol where T: Decodable {
-    public typealias Element = T
-    
-    let request: Request<T>
-    let provider: APIProvider
-    
-    init(request: Request<T>, provider: APIProvider) {
-        self.request = request
-        self.provider = provider
-    }
-    
-    private var currentElement: T!
-    
-    public mutating func next() async throws -> T? {
-        guard !Task.isCancelled else {
-            return nil
-        }
-                    
-        if let current = currentElement {
-            currentElement = try await provider.request(request, pageAfter: current)
-        } else {
-            currentElement = try await provider.request(request)
-        }
-        
-        return currentElement
-    }
-    
-    public func makeAsyncIterator() -> Self {
-        self
-    }
-}
+// MARK: - Paged API endpoint responses
 
 extension APIProvider {
-        
+    
+    /// Performs a data request to the given API endpoint and returns an AsyncSequence of the responses
+    ///
+    /// This request will allow the consumption of responses from any endpoint that can deliver responses in multiple pages
+    ///
+    /// - Parameter endpoint: The API endpoint to request.
+    /// - Returns: An AsyncSequence of the responses from the endpoint
     public func paged<T>(_ endpoint: Request<T>) -> PagedRequest<T> {
         PagedRequest(request: endpoint, provider: self)
     }
     
-    public func request<T>(_ endpoint: Request<T>, pageAfter: T) async throws -> T? where T: Decodable {
+    /// Performs a data request to the given API endpoint for the next page of results
+    ///
+    /// If the current response's paging information does not include details of a next page, ```nil``` will be returned.
+    ///
+    /// - Parameters:
+    ///   - endpoint: endpoint: The API endpoint to request.
+    ///   - pageAfter: the current response
+    /// - Returns: the endpoint's next response page or nil when there is no further response
+    public func request<T>(_ endpoint: Request<T>, pageAfter currentPage: T) async throws -> T? where T: Decodable {
         try await withCheckedThrowingContinuation { continuation in
-            request(endpoint, pageAfter: pageAfter) { result in
+            request(endpoint, pageAfter: currentPage) { result in
                 continuation.resume(with: result)
             }
         }
     }
-
-    public func hasPagedDocumentLinks<T>(_ object: T) -> Bool {
+    
+    /// Is the type of response from the given API endpoint one that supports multiple pages of response?
+    ///
+    /// This value will be true even if there is no next page to follow on the current response. A subsequent request from the provider for the next page will respond with ```nil``` immediately without wasting time communicating with the endpoint.
+    ///
+    /// - Parameters:
+    ///   - endpoint: endpoint: The API endpoint to request.
+    ///   - object: the current response
+    public func request<T>(_ endpoint: Request<T>, isPagedResponse object: T) -> Bool {
         pagedDocumentLinks(object) != nil
     }
     
     private func pagedDocumentLinks<T>(_ object: T) -> PagedDocumentLinks? {
         let mirror = Mirror(reflecting: object)
-        return mirror.children.first(where: { $0.value is PagedDocumentLinks }).flatMap({ $0.value as? PagedDocumentLinks })
+        return mirror.children
+                        .first(where: {
+                            $0.value is PagedDocumentLinks
+                        })
+                        .flatMap {
+                            $0.value as? PagedDocumentLinks
+                        }
     }
-
+    
+    /// Performs a data request to the given API endpoint for the next page of results
+    ///
+    /// If the current response's paging information does not include details of a next page, ```nil``` will be returned.
+    ///
+    /// - Parameters:
+    ///   - request: endpoint: The API endpoint to request.
+    ///   - pageAfter: the current response
+    ///   - completion: The completion callback which will be called on completion containing the result.
     public func request<T: Decodable>(_ request: Request<T>, pageAfter currentPage: T, completion: @escaping RequestCompletionHandler<T?>) {
                         
         guard
             let nextPage = pagedDocumentLinks(currentPage)?.next,
             let url = URL(string: nextPage)
-        else { completion(.success(nil)); return }
+        else {
+            completion(.success(nil))
+            return
+        }
         
         do {
             let urlRequest = try requestsAuthenticator.adapt(URLRequest(url: url))
 
             requestExecutor.execute(urlRequest) { completion(self.mapResponse($0)) }
-        } catch { completion(.failure(error)) }
+        } catch {
+            completion(.failure(error))
+        }
     }
 }
