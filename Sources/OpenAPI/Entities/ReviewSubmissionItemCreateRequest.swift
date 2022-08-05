@@ -26,7 +26,7 @@ public struct ReviewSubmissionItemCreateRequest: Codable {
 			public struct ReviewSubmission: Codable {
 				public var data: Data
 
-				public struct Data: Codable {
+				public struct Data: Codable, Identifiable {
 					public var type: `Type`
 					public var id: String
 
@@ -70,7 +70,7 @@ public struct ReviewSubmissionItemCreateRequest: Codable {
 			public struct AppStoreVersion: Codable {
 				public var data: Data?
 
-				public struct Data: Codable {
+				public struct Data: Codable, Identifiable {
 					public var type: `Type`
 					public var id: String
 
@@ -114,7 +114,7 @@ public struct ReviewSubmissionItemCreateRequest: Codable {
 			public struct AppCustomProductPageVersion: Codable {
 				public var data: Data?
 
-				public struct Data: Codable {
+				public struct Data: Codable, Identifiable {
 					public var type: `Type`
 					public var id: String
 
@@ -158,7 +158,7 @@ public struct ReviewSubmissionItemCreateRequest: Codable {
 			public struct AppStoreVersionExperiment: Codable {
 				public var data: Data?
 
-				public struct Data: Codable {
+				public struct Data: Codable, Identifiable {
 					public var type: `Type`
 					public var id: String
 
@@ -202,7 +202,7 @@ public struct ReviewSubmissionItemCreateRequest: Codable {
 			public struct AppEvent: Codable {
 				public var data: Data?
 
-				public struct Data: Codable {
+				public struct Data: Codable, Identifiable {
 					public var type: `Type`
 					public var id: String
 

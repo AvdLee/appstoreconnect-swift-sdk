@@ -5,7 +5,7 @@
 
 import Foundation
 
-public struct SubscriptionOfferCodePrice: Codable {
+public struct SubscriptionOfferCodePrice: Codable, Identifiable {
 	public var type: `Type`
 	public var id: String
 	public var relationships: Relationships?
@@ -45,7 +45,7 @@ public struct SubscriptionOfferCodePrice: Codable {
 				}
 			}
 
-			public struct Data: Codable {
+			public struct Data: Codable, Identifiable {
 				public var type: `Type`
 				public var id: String
 
@@ -115,7 +115,7 @@ public struct SubscriptionOfferCodePrice: Codable {
 				}
 			}
 
-			public struct Data: Codable {
+			public struct Data: Codable, Identifiable {
 				public var type: `Type`
 				public var id: String
 

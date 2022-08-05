@@ -5,7 +5,7 @@
 
 import Foundation
 
-public struct User: Codable {
+public struct User: Codable, Identifiable {
 	public var type: `Type`
 	public var id: String
 	public var attributes: Attributes?
@@ -84,7 +84,7 @@ public struct User: Codable {
 				}
 			}
 
-			public struct Datum: Codable {
+			public struct Datum: Codable, Identifiable {
 				public var type: `Type`
 				public var id: String
 

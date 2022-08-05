@@ -5,7 +5,7 @@
 
 import Foundation
 
-public struct AppStoreReviewAttachment: Codable {
+public struct AppStoreReviewAttachment: Codable, Identifiable {
 	public var type: `Type`
 	public var id: String
 	public var attributes: Attributes?
@@ -79,7 +79,7 @@ public struct AppStoreReviewAttachment: Codable {
 				}
 			}
 
-			public struct Data: Codable {
+			public struct Data: Codable, Identifiable {
 				public var type: `Type`
 				public var id: String
 

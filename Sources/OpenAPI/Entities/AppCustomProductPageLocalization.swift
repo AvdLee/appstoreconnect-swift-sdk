@@ -5,7 +5,7 @@
 
 import Foundation
 
-public struct AppCustomProductPageLocalization: Codable {
+public struct AppCustomProductPageLocalization: Codable, Identifiable {
 	public var type: `Type`
 	public var id: String
 	public var attributes: Attributes?
@@ -69,7 +69,7 @@ public struct AppCustomProductPageLocalization: Codable {
 				}
 			}
 
-			public struct Data: Codable {
+			public struct Data: Codable, Identifiable {
 				public var type: `Type`
 				public var id: String
 
@@ -140,7 +140,7 @@ public struct AppCustomProductPageLocalization: Codable {
 				}
 			}
 
-			public struct Datum: Codable {
+			public struct Datum: Codable, Identifiable {
 				public var type: `Type`
 				public var id: String
 
@@ -214,7 +214,7 @@ public struct AppCustomProductPageLocalization: Codable {
 				}
 			}
 
-			public struct Datum: Codable {
+			public struct Datum: Codable, Identifiable {
 				public var type: `Type`
 				public var id: String
 

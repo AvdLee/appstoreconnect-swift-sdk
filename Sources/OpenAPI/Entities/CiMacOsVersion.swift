@@ -5,7 +5,7 @@
 
 import Foundation
 
-public struct CiMacOsVersion: Codable {
+public struct CiMacOsVersion: Codable, Identifiable {
 	public var type: `Type`
 	public var id: String
 	public var attributes: Attributes?
@@ -68,7 +68,7 @@ public struct CiMacOsVersion: Codable {
 				}
 			}
 
-			public struct Datum: Codable {
+			public struct Datum: Codable, Identifiable {
 				public var type: `Type`
 				public var id: String
 

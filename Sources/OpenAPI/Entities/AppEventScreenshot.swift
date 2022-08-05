@@ -5,7 +5,7 @@
 
 import Foundation
 
-public struct AppEventScreenshot: Codable {
+public struct AppEventScreenshot: Codable, Identifiable {
 	public var type: `Type`
 	public var id: String
 	public var attributes: Attributes?
@@ -87,7 +87,7 @@ public struct AppEventScreenshot: Codable {
 				}
 			}
 
-			public struct Data: Codable {
+			public struct Data: Codable, Identifiable {
 				public var type: `Type`
 				public var id: String
 

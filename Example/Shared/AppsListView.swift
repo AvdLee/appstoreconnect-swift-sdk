@@ -14,7 +14,7 @@ struct AppsListView: View {
     var body: some View {
         NavigationView {
             ZStack {
-                List(viewModel.apps, id: \.id) { app in
+                List(viewModel.apps) { app in
                     VStack(alignment: .leading) {
                         Text(app.attributes?.name ?? "Unknown name")
                             .font(.headline)

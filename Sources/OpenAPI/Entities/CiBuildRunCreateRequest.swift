@@ -44,7 +44,7 @@ public struct CiBuildRunCreateRequest: Codable {
 			public struct BuildRun: Codable {
 				public var data: Data?
 
-				public struct Data: Codable {
+				public struct Data: Codable, Identifiable {
 					public var type: `Type`
 					public var id: String
 
@@ -88,7 +88,7 @@ public struct CiBuildRunCreateRequest: Codable {
 			public struct Workflow: Codable {
 				public var data: Data?
 
-				public struct Data: Codable {
+				public struct Data: Codable, Identifiable {
 					public var type: `Type`
 					public var id: String
 
@@ -132,7 +132,7 @@ public struct CiBuildRunCreateRequest: Codable {
 			public struct SourceBranchOrTag: Codable {
 				public var data: Data?
 
-				public struct Data: Codable {
+				public struct Data: Codable, Identifiable {
 					public var type: `Type`
 					public var id: String
 
@@ -176,7 +176,7 @@ public struct CiBuildRunCreateRequest: Codable {
 			public struct PullRequest: Codable {
 				public var data: Data?
 
-				public struct Data: Codable {
+				public struct Data: Codable, Identifiable {
 					public var type: `Type`
 					public var id: String
 

@@ -5,7 +5,7 @@
 
 import Foundation
 
-public struct Subscription: Codable {
+public struct Subscription: Codable, Identifiable {
 	public var type: `Type`
 	public var id: String
 	public var attributes: Attributes?
@@ -121,7 +121,7 @@ public struct Subscription: Codable {
 				}
 			}
 
-			public struct Datum: Codable {
+			public struct Datum: Codable, Identifiable {
 				public var type: `Type`
 				public var id: String
 
@@ -194,7 +194,7 @@ public struct Subscription: Codable {
 				}
 			}
 
-			public struct Data: Codable {
+			public struct Data: Codable, Identifiable {
 				public var type: `Type`
 				public var id: String
 
@@ -264,7 +264,7 @@ public struct Subscription: Codable {
 				}
 			}
 
-			public struct Data: Codable {
+			public struct Data: Codable, Identifiable {
 				public var type: `Type`
 				public var id: String
 
@@ -335,7 +335,7 @@ public struct Subscription: Codable {
 				}
 			}
 
-			public struct Datum: Codable {
+			public struct Datum: Codable, Identifiable {
 				public var type: `Type`
 				public var id: String
 
@@ -409,7 +409,7 @@ public struct Subscription: Codable {
 				}
 			}
 
-			public struct Datum: Codable {
+			public struct Datum: Codable, Identifiable {
 				public var type: `Type`
 				public var id: String
 
@@ -483,7 +483,7 @@ public struct Subscription: Codable {
 				}
 			}
 
-			public struct Datum: Codable {
+			public struct Datum: Codable, Identifiable {
 				public var type: `Type`
 				public var id: String
 
@@ -557,7 +557,7 @@ public struct Subscription: Codable {
 				}
 			}
 
-			public struct Datum: Codable {
+			public struct Datum: Codable, Identifiable {
 				public var type: `Type`
 				public var id: String
 
@@ -630,7 +630,7 @@ public struct Subscription: Codable {
 				}
 			}
 
-			public struct Data: Codable {
+			public struct Data: Codable, Identifiable {
 				public var type: `Type`
 				public var id: String
 

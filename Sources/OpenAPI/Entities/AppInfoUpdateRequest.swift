@@ -8,7 +8,7 @@ import Foundation
 public struct AppInfoUpdateRequest: Codable {
 	public var data: Data
 
-	public struct Data: Codable {
+	public struct Data: Codable, Identifiable {
 		public var type: `Type`
 		public var id: String
 		public var relationships: Relationships?
@@ -28,7 +28,7 @@ public struct AppInfoUpdateRequest: Codable {
 			public struct PrimaryCategory: Codable {
 				public var data: Data?
 
-				public struct Data: Codable {
+				public struct Data: Codable, Identifiable {
 					public var type: `Type`
 					public var id: String
 
@@ -72,7 +72,7 @@ public struct AppInfoUpdateRequest: Codable {
 			public struct PrimarySubcategoryOne: Codable {
 				public var data: Data?
 
-				public struct Data: Codable {
+				public struct Data: Codable, Identifiable {
 					public var type: `Type`
 					public var id: String
 
@@ -116,7 +116,7 @@ public struct AppInfoUpdateRequest: Codable {
 			public struct PrimarySubcategoryTwo: Codable {
 				public var data: Data?
 
-				public struct Data: Codable {
+				public struct Data: Codable, Identifiable {
 					public var type: `Type`
 					public var id: String
 
@@ -160,7 +160,7 @@ public struct AppInfoUpdateRequest: Codable {
 			public struct SecondaryCategory: Codable {
 				public var data: Data?
 
-				public struct Data: Codable {
+				public struct Data: Codable, Identifiable {
 					public var type: `Type`
 					public var id: String
 
@@ -204,7 +204,7 @@ public struct AppInfoUpdateRequest: Codable {
 			public struct SecondarySubcategoryOne: Codable {
 				public var data: Data?
 
-				public struct Data: Codable {
+				public struct Data: Codable, Identifiable {
 					public var type: `Type`
 					public var id: String
 
@@ -248,7 +248,7 @@ public struct AppInfoUpdateRequest: Codable {
 			public struct SecondarySubcategoryTwo: Codable {
 				public var data: Data?
 
-				public struct Data: Codable {
+				public struct Data: Codable, Identifiable {
 					public var type: `Type`
 					public var id: String
 

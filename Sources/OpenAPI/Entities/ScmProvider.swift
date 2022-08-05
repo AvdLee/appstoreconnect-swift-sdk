@@ -5,7 +5,7 @@
 
 import Foundation
 
-public struct ScmProvider: Codable {
+public struct ScmProvider: Codable, Identifiable {
 	public var type: `Type`
 	public var id: String
 	public var attributes: Attributes?

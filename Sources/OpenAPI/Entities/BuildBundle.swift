@@ -5,7 +5,7 @@
 
 import Foundation
 
-public struct BuildBundle: Codable {
+public struct BuildBundle: Codable, Identifiable {
 	public var type: `Type`
 	public var id: String
 	public var attributes: Attributes?
@@ -135,7 +135,7 @@ public struct BuildBundle: Codable {
 				}
 			}
 
-			public struct Data: Codable {
+			public struct Data: Codable, Identifiable {
 				public var type: `Type`
 				public var id: String
 
@@ -205,7 +205,7 @@ public struct BuildBundle: Codable {
 				}
 			}
 
-			public struct Data: Codable {
+			public struct Data: Codable, Identifiable {
 				public var type: `Type`
 				public var id: String
 
@@ -276,7 +276,7 @@ public struct BuildBundle: Codable {
 				}
 			}
 
-			public struct Datum: Codable {
+			public struct Datum: Codable, Identifiable {
 				public var type: `Type`
 				public var id: String
 
@@ -350,7 +350,7 @@ public struct BuildBundle: Codable {
 				}
 			}
 
-			public struct Datum: Codable {
+			public struct Datum: Codable, Identifiable {
 				public var type: `Type`
 				public var id: String
 

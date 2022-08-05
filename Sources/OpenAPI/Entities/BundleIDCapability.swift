@@ -5,7 +5,7 @@
 
 import Foundation
 
-public struct BundleIDCapability: Codable {
+public struct BundleIDCapability: Codable, Identifiable {
 	public var type: `Type`
 	public var id: String
 	public var attributes: Attributes?

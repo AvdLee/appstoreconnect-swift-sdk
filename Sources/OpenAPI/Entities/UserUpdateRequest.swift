@@ -8,7 +8,7 @@ import Foundation
 public struct UserUpdateRequest: Codable {
 	public var data: Data
 
-	public struct Data: Codable {
+	public struct Data: Codable, Identifiable {
 		public var type: `Type`
 		public var id: String
 		public var attributes: Attributes?
@@ -50,7 +50,7 @@ public struct UserUpdateRequest: Codable {
 			public struct VisibleApps: Codable {
 				public var data: [Datum]?
 
-				public struct Datum: Codable {
+				public struct Datum: Codable, Identifiable {
 					public var type: `Type`
 					public var id: String
 

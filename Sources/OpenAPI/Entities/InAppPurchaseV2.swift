@@ -5,7 +5,7 @@
 
 import Foundation
 
-public struct InAppPurchaseV2: Codable {
+public struct InAppPurchaseV2: Codable, Identifiable {
 	public var type: `Type`
 	public var id: String
 	public var attributes: Attributes?
@@ -97,7 +97,7 @@ public struct InAppPurchaseV2: Codable {
 				}
 			}
 
-			public struct Datum: Codable {
+			public struct Datum: Codable, Identifiable {
 				public var type: `Type`
 				public var id: String
 
@@ -171,7 +171,7 @@ public struct InAppPurchaseV2: Codable {
 				}
 			}
 
-			public struct Datum: Codable {
+			public struct Datum: Codable, Identifiable {
 				public var type: `Type`
 				public var id: String
 
@@ -244,7 +244,7 @@ public struct InAppPurchaseV2: Codable {
 				}
 			}
 
-			public struct Data: Codable {
+			public struct Data: Codable, Identifiable {
 				public var type: `Type`
 				public var id: String
 
@@ -314,7 +314,7 @@ public struct InAppPurchaseV2: Codable {
 				}
 			}
 
-			public struct Data: Codable {
+			public struct Data: Codable, Identifiable {
 				public var type: `Type`
 				public var id: String
 
@@ -384,7 +384,7 @@ public struct InAppPurchaseV2: Codable {
 				}
 			}
 
-			public struct Data: Codable {
+			public struct Data: Codable, Identifiable {
 				public var type: `Type`
 				public var id: String
 
@@ -454,7 +454,7 @@ public struct InAppPurchaseV2: Codable {
 				}
 			}
 
-			public struct Data: Codable {
+			public struct Data: Codable, Identifiable {
 				public var type: `Type`
 				public var id: String
 

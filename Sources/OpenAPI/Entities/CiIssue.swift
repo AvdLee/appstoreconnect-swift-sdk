@@ -5,7 +5,7 @@
 
 import Foundation
 
-public struct CiIssue: Codable {
+public struct CiIssue: Codable, Identifiable {
 	public var type: `Type`
 	public var id: String
 	public var attributes: Attributes?

@@ -41,7 +41,7 @@ public struct AppClipAppStoreReviewDetailCreateRequest: Codable {
 			public struct AppClipDefaultExperience: Codable {
 				public var data: Data
 
-				public struct Data: Codable {
+				public struct Data: Codable, Identifiable {
 					public var type: `Type`
 					public var id: String
 

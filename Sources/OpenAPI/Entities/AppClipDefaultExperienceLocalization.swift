@@ -5,7 +5,7 @@
 
 import Foundation
 
-public struct AppClipDefaultExperienceLocalization: Codable {
+public struct AppClipDefaultExperienceLocalization: Codable, Identifiable {
 	public var type: `Type`
 	public var id: String
 	public var attributes: Attributes?
@@ -68,7 +68,7 @@ public struct AppClipDefaultExperienceLocalization: Codable {
 				}
 			}
 
-			public struct Data: Codable {
+			public struct Data: Codable, Identifiable {
 				public var type: `Type`
 				public var id: String
 
@@ -138,7 +138,7 @@ public struct AppClipDefaultExperienceLocalization: Codable {
 				}
 			}
 
-			public struct Data: Codable {
+			public struct Data: Codable, Identifiable {
 				public var type: `Type`
 				public var id: String
 

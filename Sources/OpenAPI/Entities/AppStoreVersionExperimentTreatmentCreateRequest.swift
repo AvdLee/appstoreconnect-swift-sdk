@@ -45,7 +45,7 @@ public struct AppStoreVersionExperimentTreatmentCreateRequest: Codable {
 			public struct AppStoreVersionExperiment: Codable {
 				public var data: Data
 
-				public struct Data: Codable {
+				public struct Data: Codable, Identifiable {
 					public var type: `Type`
 					public var id: String
 
