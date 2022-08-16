@@ -13,10 +13,8 @@ struct Plugin: CommandPlugin {
         process.arguments = [
             "generate",
             "app_store_connect_api_2.0_openapi.json",
-            "--module", "AppStoreConnect_Swift_SDK",
             "--output", "Generated",
             "--config", ".create-api.yml",
-            "--split",
             "--clean"
         ]
 
