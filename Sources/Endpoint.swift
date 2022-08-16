@@ -21,75 +21,28 @@ struct AnyEncodable: Encodable {
 
 /// Credits to the https://github.com/kean/Get repository for this class.
 /// We've copied this over since it works nicely together with the CreateAPI OpenAPI generator.
-public struct Request<Response> {
+public struct Request<Response>: @unchecked Sendable {
     public var method: String
-    public var path: String
+    public var url: String
     public var query: [(String, String?)]?
-    var body: AnyEncodable?
+    public let body: Encodable?
     public var headers: [String: String]?
     public var id: String?
 
-    public init(method: String, path: String, query: [(String, String?)]? = nil, headers: [String: String]? = nil) {
+    public init(
+        method: String = "GET",
+        url: String,
+        query: [(String, String?)]? = nil,
+        body: Encodable? = nil,
+        headers: [String: String]? = nil,
+        id: String? = nil
+    ) {
         self.method = method
-        self.path = path
+        self.url = url
         self.query = query
         self.headers = headers
-    }
-
-    public init<U: Encodable>(method: String, path: String, query: [(String, String?)]? = nil, body: U?, headers: [String: String]? = nil) {
-        self.method = method
-        self.path = path
-        self.query = query
-        self.body = body.map(AnyEncodable.init)
-        self.headers = headers
-    }
-
-    public static func get(_ path: String, query: [(String, String?)]? = nil, headers: [String: String]? = nil) -> Request {
-        Request(method: "GET", path: path, query: query, headers: headers)
-    }
-
-    public static func post(_ path: String, query: [(String, String?)]? = nil, headers: [String: String]? = nil) -> Request {
-        Request(method: "POST", path: path, query: query, headers: headers)
-    }
-
-    public static func post<U: Encodable>(_ path: String, query: [(String, String?)]? = nil, body: U?, headers: [String: String]? = nil) -> Request {
-        Request(method: "POST", path: path, query: query, body: body, headers: headers)
-    }
-
-    public static func put(_ path: String, query: [(String, String?)]? = nil, headers: [String: String]? = nil) -> Request {
-        Request(method: "PUT", path: path, query: query, headers: headers)
-    }
-
-    public static func put<U: Encodable>(_ path: String, query: [(String, String?)]? = nil, body: U?, headers: [String: String]? = nil) -> Request {
-        Request(method: "PUT", path: path, query: query, body: body, headers: headers)
-    }
-
-    public static func patch(_ path: String, query: [(String, String?)]? = nil, headers: [String: String]? = nil) -> Request {
-        Request(method: "PATCH", path: path, query: query, headers: headers)
-    }
-
-    public static func patch<U: Encodable>(_ path: String, query: [(String, String?)]? = nil, body: U?, headers: [String: String]? = nil) -> Request {
-        Request(method: "PATCH", path: path, query: query, body: body, headers: headers)
-    }
-
-    public static func delete(_ path: String, query: [(String, String?)]? = nil, headers: [String: String]? = nil) -> Request {
-        Request(method: "DELETE", path: path, query: query, headers: headers)
-    }
-
-    public static func delete<U: Encodable>(_ path: String, query: [(String, String?)]? = nil, body: U?, headers: [String: String]? = nil) -> Request {
-        Request(method: "DELETE", path: path, query: query, body: body, headers: headers)
-    }
-
-    public static func options(_ path: String, query: [(String, String?)]? = nil, headers: [String: String]? = nil) -> Request {
-        Request(method: "OPTIONS", path: path, query: query, headers: headers)
-    }
-
-    public static func head(_ path: String, query: [(String, String?)]? = nil, headers: [String: String]? = nil) -> Request {
-        Request(method: "HEAD", path: path, query: query, headers: headers)
-    }
-
-    public static func trace(_ path: String, query: [(String, String?)]? = nil, headers: [String: String]? = nil) -> Request {
-        Request(method: "TRACE", path: path, query: query, headers: headers)
+        self.body = body
+        self.id = id
     }
 }
 
@@ -118,12 +71,12 @@ extension Request {
 
     /// Generates a request based on the current endpoint.
     public func asURLRequest(encoder: JSONEncoder) throws -> URLRequest {
-        let url = try makeURL(path: path, query: query)
+        let url = try makeURL(path: url, query: query)
         var urlRequest = URLRequest(url: url)
         urlRequest.httpMethod = method
 
         if let body = body {
-            urlRequest.httpBody = try encoder.encode(body)
+            urlRequest.httpBody = try encoder.encode(AnyEncodable(body))
             urlRequest.setValue("application/json", forHTTPHeaderField: "Content-Type")
         }
 
