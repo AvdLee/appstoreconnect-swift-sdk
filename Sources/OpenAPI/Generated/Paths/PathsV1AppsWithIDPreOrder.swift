@@ -16,7 +16,7 @@ extension APIEndpoint.V1.Apps.WithID {
 		public let path: String
 
 		public func get(fieldsAppPreOrders: [FieldsAppPreOrders]? = nil) -> Request<AppStoreConnect_Swift_SDK.AppPreOrderResponse> {
-			.get(path, query: makeGetQuery(fieldsAppPreOrders))
+			Request(method: "GET", url: path, query: makeGetQuery(fieldsAppPreOrders), id: "apps-preOrder-get_to_one_related")
 		}
 
 		private func makeGetQuery(_ fieldsAppPreOrders: [FieldsAppPreOrders]?) -> [(String, String?)] {

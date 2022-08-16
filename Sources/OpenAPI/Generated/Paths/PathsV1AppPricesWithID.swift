@@ -16,7 +16,7 @@ extension APIEndpoint.V1.AppPrices {
 		public let path: String
 
 		public func get(fieldsAppPrices: [FieldsAppPrices]? = nil, include: [Include]? = nil) -> Request<AppStoreConnect_Swift_SDK.AppPriceResponse> {
-			.get(path, query: makeGetQuery(fieldsAppPrices, include))
+			Request(method: "GET", url: path, query: makeGetQuery(fieldsAppPrices, include), id: "appPrices-get_instance")
 		}
 
 		private func makeGetQuery(_ fieldsAppPrices: [FieldsAppPrices]?, _ include: [Include]?) -> [(String, String?)] {

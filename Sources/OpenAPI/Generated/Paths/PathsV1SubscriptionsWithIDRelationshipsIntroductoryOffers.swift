@@ -16,7 +16,7 @@ extension APIEndpoint.V1.Subscriptions.WithID.Relationships {
 		public let path: String
 
 		public func get(limit: Int? = nil) -> Request<AppStoreConnect_Swift_SDK.SubscriptionIntroductoryOffersLinkagesResponse> {
-			.get(path, query: makeGetQuery(limit))
+			Request(method: "GET", url: path, query: makeGetQuery(limit), id: "subscriptions-introductoryOffers-get_to_many_relationship")
 		}
 
 		private func makeGetQuery(_ limit: Int?) -> [(String, String?)] {
@@ -26,7 +26,7 @@ extension APIEndpoint.V1.Subscriptions.WithID.Relationships {
 		}
 
 		public func delete(_ body: AppStoreConnect_Swift_SDK.SubscriptionIntroductoryOffersLinkagesRequest) -> Request<Void> {
-			.delete(path, body: body)
+			Request(method: "DELETE", url: path, body: body, id: "subscriptions-introductoryOffers-delete_to_many_relationship")
 		}
 	}
 }

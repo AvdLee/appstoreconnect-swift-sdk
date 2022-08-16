@@ -16,7 +16,7 @@ extension APIEndpoint.V1.AppInfos.WithID {
 		public let path: String
 
 		public func get(parameters: GetParameters? = nil) -> Request<AppStoreConnect_Swift_SDK.AppInfoLocalizationsResponse> {
-			.get(path, query: parameters?.asQuery)
+			Request(method: "GET", url: path, query: parameters?.asQuery, id: "appInfos-appInfoLocalizations-get_to_many_related")
 		}
 
 		public struct GetParameters {

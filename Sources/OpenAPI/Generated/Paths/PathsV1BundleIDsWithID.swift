@@ -16,7 +16,7 @@ extension APIEndpoint.V1.BundleIDs {
 		public let path: String
 
 		public func get(parameters: GetParameters? = nil) -> Request<AppStoreConnect_Swift_SDK.BundleIDResponse> {
-			.get(path, query: parameters?.asQuery)
+			Request(method: "GET", url: path, query: parameters?.asQuery, id: "bundleIds-get_instance")
 		}
 
 		public struct GetParameters {
@@ -129,11 +129,11 @@ extension APIEndpoint.V1.BundleIDs {
 		}
 
 		public func patch(_ body: AppStoreConnect_Swift_SDK.BundleIDUpdateRequest) -> Request<AppStoreConnect_Swift_SDK.BundleIDResponse> {
-			.patch(path, body: body)
+			Request(method: "PATCH", url: path, body: body, id: "bundleIds-update_instance")
 		}
 
 		public var delete: Request<Void> {
-			.delete(path)
+			Request(method: "DELETE", url: path, id: "bundleIds-delete_instance")
 		}
 	}
 }

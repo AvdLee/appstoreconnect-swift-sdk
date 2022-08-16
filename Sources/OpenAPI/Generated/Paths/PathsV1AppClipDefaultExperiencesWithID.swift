@@ -16,7 +16,7 @@ extension APIEndpoint.V1.AppClipDefaultExperiences {
 		public let path: String
 
 		public func get(parameters: GetParameters? = nil) -> Request<AppStoreConnect_Swift_SDK.AppClipDefaultExperienceResponse> {
-			.get(path, query: parameters?.asQuery)
+			Request(method: "GET", url: path, query: parameters?.asQuery, id: "appClipDefaultExperiences-get_instance")
 		}
 
 		public struct GetParameters {
@@ -99,11 +99,11 @@ extension APIEndpoint.V1.AppClipDefaultExperiences {
 		}
 
 		public func patch(_ body: AppStoreConnect_Swift_SDK.AppClipDefaultExperienceUpdateRequest) -> Request<AppStoreConnect_Swift_SDK.AppClipDefaultExperienceResponse> {
-			.patch(path, body: body)
+			Request(method: "PATCH", url: path, body: body, id: "appClipDefaultExperiences-update_instance")
 		}
 
 		public var delete: Request<Void> {
-			.delete(path)
+			Request(method: "DELETE", url: path, id: "appClipDefaultExperiences-delete_instance")
 		}
 	}
 }

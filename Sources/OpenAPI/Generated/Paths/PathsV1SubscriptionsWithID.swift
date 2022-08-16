@@ -16,7 +16,7 @@ extension APIEndpoint.V1.Subscriptions {
 		public let path: String
 
 		public func get(parameters: GetParameters? = nil) -> Request<AppStoreConnect_Swift_SDK.SubscriptionResponse> {
-			.get(path, query: parameters?.asQuery)
+			Request(method: "GET", url: path, query: parameters?.asQuery, id: "subscriptions-get_instance")
 		}
 
 		public struct GetParameters {
@@ -192,11 +192,11 @@ extension APIEndpoint.V1.Subscriptions {
 		}
 
 		public func patch(_ body: AppStoreConnect_Swift_SDK.SubscriptionUpdateRequest) -> Request<AppStoreConnect_Swift_SDK.SubscriptionResponse> {
-			.patch(path, body: body)
+			Request(method: "PATCH", url: path, body: body, id: "subscriptions-update_instance")
 		}
 
 		public var delete: Request<Void> {
-			.delete(path)
+			Request(method: "DELETE", url: path, id: "subscriptions-delete_instance")
 		}
 	}
 }

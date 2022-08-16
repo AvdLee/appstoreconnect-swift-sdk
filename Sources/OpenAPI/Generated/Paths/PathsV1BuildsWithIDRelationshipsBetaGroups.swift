@@ -16,11 +16,11 @@ extension APIEndpoint.V1.Builds.WithID.Relationships {
 		public let path: String
 
 		public func post(_ body: AppStoreConnect_Swift_SDK.BuildBetaGroupsLinkagesRequest) -> Request<Void> {
-			.post(path, body: body)
+			Request(method: "POST", url: path, body: body, id: "builds-betaGroups-create_to_many_relationship")
 		}
 
 		public func delete(_ body: AppStoreConnect_Swift_SDK.BuildBetaGroupsLinkagesRequest) -> Request<Void> {
-			.delete(path, body: body)
+			Request(method: "DELETE", url: path, body: body, id: "builds-betaGroups-delete_to_many_relationship")
 		}
 	}
 }

@@ -16,7 +16,7 @@ extension APIEndpoint.V1.ReviewSubmissions {
 		public let path: String
 
 		public func get(parameters: GetParameters? = nil) -> Request<AppStoreConnect_Swift_SDK.ReviewSubmissionResponse> {
-			.get(path, query: parameters?.asQuery)
+			Request(method: "GET", url: path, query: parameters?.asQuery, id: "reviewSubmissions-get_instance")
 		}
 
 		public struct GetParameters {
@@ -71,7 +71,7 @@ extension APIEndpoint.V1.ReviewSubmissions {
 		}
 
 		public func patch(_ body: AppStoreConnect_Swift_SDK.ReviewSubmissionUpdateRequest) -> Request<AppStoreConnect_Swift_SDK.ReviewSubmissionResponse> {
-			.patch(path, body: body)
+			Request(method: "PATCH", url: path, body: body, id: "reviewSubmissions-update_instance")
 		}
 	}
 }

@@ -16,7 +16,7 @@ extension APIEndpoint.V1.CiProducts.WithID {
 		public let path: String
 
 		public func get(parameters: GetParameters? = nil) -> Request<AppStoreConnect_Swift_SDK.AppResponse> {
-			.get(path, query: parameters?.asQuery)
+			Request(method: "GET", url: path, query: parameters?.asQuery, id: "ciProducts-app-get_to_one_related")
 		}
 
 		public struct GetParameters {

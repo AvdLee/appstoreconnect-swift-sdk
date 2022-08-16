@@ -16,7 +16,7 @@ extension APIEndpoint.V1.Profiles.WithID {
 		public let path: String
 
 		public func get(fieldsCertificates: [FieldsCertificates]? = nil, limit: Int? = nil) -> Request<AppStoreConnect_Swift_SDK.CertificatesResponse> {
-			.get(path, query: makeGetQuery(fieldsCertificates, limit))
+			Request(method: "GET", url: path, query: makeGetQuery(fieldsCertificates, limit), id: "profiles-certificates-get_to_many_related")
 		}
 
 		private func makeGetQuery(_ fieldsCertificates: [FieldsCertificates]?, _ limit: Int?) -> [(String, String?)] {

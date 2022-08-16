@@ -16,7 +16,7 @@ extension APIEndpoint.V1 {
 		public let path: String
 
 		public func post(_ body: AppStoreConnect_Swift_SDK.SubscriptionOfferCodeOneTimeUseCodeCreateRequest) -> Request<AppStoreConnect_Swift_SDK.SubscriptionOfferCodeOneTimeUseCodeResponse> {
-			.post(path, body: body)
+			Request(method: "POST", url: path, body: body, id: "subscriptionOfferCodeOneTimeUseCodes-create_instance")
 		}
 	}
 }

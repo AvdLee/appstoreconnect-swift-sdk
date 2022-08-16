@@ -16,7 +16,7 @@ extension APIEndpoint.V1 {
 		public let path: String
 
 		public func post(_ body: AppStoreConnect_Swift_SDK.AppScreenshotCreateRequest) -> Request<AppStoreConnect_Swift_SDK.AppScreenshotResponse> {
-			.post(path, body: body)
+			Request(method: "POST", url: path, body: body, id: "appScreenshots-create_instance")
 		}
 	}
 }

@@ -16,7 +16,7 @@ extension APIEndpoint.V1.CiWorkflows.WithID {
 		public let path: String
 
 		public func get(parameters: GetParameters? = nil) -> Request<AppStoreConnect_Swift_SDK.CiBuildRunsResponse> {
-			.get(path, query: parameters?.asQuery)
+			Request(method: "GET", url: path, query: parameters?.asQuery, id: "ciWorkflows-buildRuns-get_to_many_related")
 		}
 
 		public struct GetParameters {

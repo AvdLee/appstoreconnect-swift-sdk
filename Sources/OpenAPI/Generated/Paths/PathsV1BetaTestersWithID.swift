@@ -16,7 +16,7 @@ extension APIEndpoint.V1.BetaTesters {
 		public let path: String
 
 		public func get(parameters: GetParameters? = nil) -> Request<AppStoreConnect_Swift_SDK.BetaTesterResponse> {
-			.get(path, query: parameters?.asQuery)
+			Request(method: "GET", url: path, query: parameters?.asQuery, id: "betaTesters-get_instance")
 		}
 
 		public struct GetParameters {
@@ -156,7 +156,7 @@ extension APIEndpoint.V1.BetaTesters {
 		}
 
 		public var delete: Request<Void> {
-			.delete(path)
+			Request(method: "DELETE", url: path, id: "betaTesters-delete_instance")
 		}
 	}
 }

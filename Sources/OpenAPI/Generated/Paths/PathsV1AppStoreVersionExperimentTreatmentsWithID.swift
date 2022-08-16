@@ -16,7 +16,7 @@ extension APIEndpoint.V1.AppStoreVersionExperimentTreatments {
 		public let path: String
 
 		public func get(parameters: GetParameters? = nil) -> Request<AppStoreConnect_Swift_SDK.AppStoreVersionExperimentTreatmentResponse> {
-			.get(path, query: parameters?.asQuery)
+			Request(method: "GET", url: path, query: parameters?.asQuery, id: "appStoreVersionExperimentTreatments-get_instance")
 		}
 
 		public struct GetParameters {
@@ -64,11 +64,11 @@ extension APIEndpoint.V1.AppStoreVersionExperimentTreatments {
 		}
 
 		public func patch(_ body: AppStoreConnect_Swift_SDK.AppStoreVersionExperimentTreatmentUpdateRequest) -> Request<AppStoreConnect_Swift_SDK.AppStoreVersionExperimentTreatmentResponse> {
-			.patch(path, body: body)
+			Request(method: "PATCH", url: path, body: body, id: "appStoreVersionExperimentTreatments-update_instance")
 		}
 
 		public var delete: Request<Void> {
-			.delete(path)
+			Request(method: "DELETE", url: path, id: "appStoreVersionExperimentTreatments-delete_instance")
 		}
 	}
 }

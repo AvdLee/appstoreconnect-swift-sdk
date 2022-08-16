@@ -16,7 +16,7 @@ extension APIEndpoint.V1.BetaGroups {
 		public let path: String
 
 		public func get(parameters: GetParameters? = nil) -> Request<AppStoreConnect_Swift_SDK.BetaGroupResponse> {
-			.get(path, query: parameters?.asQuery)
+			Request(method: "GET", url: path, query: parameters?.asQuery, id: "betaGroups-get_instance")
 		}
 
 		public struct GetParameters {
@@ -153,11 +153,11 @@ extension APIEndpoint.V1.BetaGroups {
 		}
 
 		public func patch(_ body: AppStoreConnect_Swift_SDK.BetaGroupUpdateRequest) -> Request<AppStoreConnect_Swift_SDK.BetaGroupResponse> {
-			.patch(path, body: body)
+			Request(method: "PATCH", url: path, body: body, id: "betaGroups-update_instance")
 		}
 
 		public var delete: Request<Void> {
-			.delete(path)
+			Request(method: "DELETE", url: path, id: "betaGroups-delete_instance")
 		}
 	}
 }

@@ -16,7 +16,7 @@ extension APIEndpoint.V1.AppStoreVersionLocalizations {
 		public let path: String
 
 		public func get(parameters: GetParameters? = nil) -> Request<AppStoreConnect_Swift_SDK.AppStoreVersionLocalizationResponse> {
-			.get(path, query: parameters?.asQuery)
+			Request(method: "GET", url: path, query: parameters?.asQuery, id: "appStoreVersionLocalizations-get_instance")
 		}
 
 		public struct GetParameters {
@@ -84,11 +84,11 @@ extension APIEndpoint.V1.AppStoreVersionLocalizations {
 		}
 
 		public func patch(_ body: AppStoreConnect_Swift_SDK.AppStoreVersionLocalizationUpdateRequest) -> Request<AppStoreConnect_Swift_SDK.AppStoreVersionLocalizationResponse> {
-			.patch(path, body: body)
+			Request(method: "PATCH", url: path, body: body, id: "appStoreVersionLocalizations-update_instance")
 		}
 
 		public var delete: Request<Void> {
-			.delete(path)
+			Request(method: "DELETE", url: path, id: "appStoreVersionLocalizations-delete_instance")
 		}
 	}
 }

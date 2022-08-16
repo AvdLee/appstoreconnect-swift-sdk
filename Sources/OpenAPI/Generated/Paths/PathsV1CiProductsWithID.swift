@@ -16,7 +16,7 @@ extension APIEndpoint.V1.CiProducts {
 		public let path: String
 
 		public func get(parameters: GetParameters? = nil) -> Request<AppStoreConnect_Swift_SDK.CiProductResponse> {
-			.get(path, query: parameters?.asQuery)
+			Request(method: "GET", url: path, query: parameters?.asQuery, id: "ciProducts-get_instance")
 		}
 
 		public struct GetParameters {
@@ -167,7 +167,7 @@ extension APIEndpoint.V1.CiProducts {
 		}
 
 		public var delete: Request<Void> {
-			.delete(path)
+			Request(method: "DELETE", url: path, id: "ciProducts-delete_instance")
 		}
 	}
 }

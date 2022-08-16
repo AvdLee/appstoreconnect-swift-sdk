@@ -16,7 +16,7 @@ extension APIEndpoint.V1.AppCategories {
 		public let path: String
 
 		public func get(parameters: GetParameters? = nil) -> Request<AppStoreConnect_Swift_SDK.AppCategoryResponse> {
-			.get(path, query: parameters?.asQuery)
+			Request(method: "GET", url: path, query: parameters?.asQuery, id: "appCategories-get_instance")
 		}
 
 		public struct GetParameters {

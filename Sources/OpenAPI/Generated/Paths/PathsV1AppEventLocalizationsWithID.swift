@@ -16,7 +16,7 @@ extension APIEndpoint.V1.AppEventLocalizations {
 		public let path: String
 
 		public func get(parameters: GetParameters? = nil) -> Request<AppStoreConnect_Swift_SDK.AppEventLocalizationResponse> {
-			.get(path, query: parameters?.asQuery)
+			Request(method: "GET", url: path, query: parameters?.asQuery, id: "appEventLocalizations-get_instance")
 		}
 
 		public struct GetParameters {
@@ -90,11 +90,11 @@ extension APIEndpoint.V1.AppEventLocalizations {
 		}
 
 		public func patch(_ body: AppStoreConnect_Swift_SDK.AppEventLocalizationUpdateRequest) -> Request<AppStoreConnect_Swift_SDK.AppEventLocalizationResponse> {
-			.patch(path, body: body)
+			Request(method: "PATCH", url: path, body: body, id: "appEventLocalizations-update_instance")
 		}
 
 		public var delete: Request<Void> {
-			.delete(path)
+			Request(method: "DELETE", url: path, id: "appEventLocalizations-delete_instance")
 		}
 	}
 }

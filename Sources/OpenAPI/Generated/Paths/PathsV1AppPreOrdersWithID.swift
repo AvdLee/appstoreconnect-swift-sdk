@@ -16,7 +16,7 @@ extension APIEndpoint.V1.AppPreOrders {
 		public let path: String
 
 		public func get(fieldsAppPreOrders: [FieldsAppPreOrders]? = nil, include: [Include]? = nil) -> Request<AppStoreConnect_Swift_SDK.AppPreOrderResponse> {
-			.get(path, query: makeGetQuery(fieldsAppPreOrders, include))
+			Request(method: "GET", url: path, query: makeGetQuery(fieldsAppPreOrders, include), id: "appPreOrders-get_instance")
 		}
 
 		private func makeGetQuery(_ fieldsAppPreOrders: [FieldsAppPreOrders]?, _ include: [Include]?) -> [(String, String?)] {
@@ -37,11 +37,11 @@ extension APIEndpoint.V1.AppPreOrders {
 		}
 
 		public func patch(_ body: AppStoreConnect_Swift_SDK.AppPreOrderUpdateRequest) -> Request<AppStoreConnect_Swift_SDK.AppPreOrderResponse> {
-			.patch(path, body: body)
+			Request(method: "PATCH", url: path, body: body, id: "appPreOrders-update_instance")
 		}
 
 		public var delete: Request<Void> {
-			.delete(path)
+			Request(method: "DELETE", url: path, id: "appPreOrders-delete_instance")
 		}
 	}
 }

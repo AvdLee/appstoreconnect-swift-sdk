@@ -16,7 +16,7 @@ extension APIEndpoint.V1.CiWorkflows {
 		public let path: String
 
 		public func get(parameters: GetParameters? = nil) -> Request<AppStoreConnect_Swift_SDK.CiWorkflowResponse> {
-			.get(path, query: parameters?.asQuery)
+			Request(method: "GET", url: path, query: parameters?.asQuery, id: "ciWorkflows-get_instance")
 		}
 
 		public struct GetParameters {
@@ -106,11 +106,11 @@ extension APIEndpoint.V1.CiWorkflows {
 		}
 
 		public func patch(_ body: AppStoreConnect_Swift_SDK.CiWorkflowUpdateRequest) -> Request<AppStoreConnect_Swift_SDK.CiWorkflowResponse> {
-			.patch(path, body: body)
+			Request(method: "PATCH", url: path, body: body, id: "ciWorkflows-update_instance")
 		}
 
 		public var delete: Request<Void> {
-			.delete(path)
+			Request(method: "DELETE", url: path, id: "ciWorkflows-delete_instance")
 		}
 	}
 }

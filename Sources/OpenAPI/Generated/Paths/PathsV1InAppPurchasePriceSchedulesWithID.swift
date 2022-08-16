@@ -16,7 +16,7 @@ extension APIEndpoint.V1.InAppPurchasePriceSchedules {
 		public let path: String
 
 		public func get(parameters: GetParameters? = nil) -> Request<AppStoreConnect_Swift_SDK.InAppPurchasePriceScheduleResponse> {
-			.get(path, query: parameters?.asQuery)
+			Request(method: "GET", url: path, query: parameters?.asQuery, id: "inAppPurchasePriceSchedules-get_instance")
 		}
 
 		public struct GetParameters {

@@ -16,11 +16,11 @@ extension APIEndpoint.V1.BetaAppClipInvocationLocalizations {
 		public let path: String
 
 		public func patch(_ body: AppStoreConnect_Swift_SDK.BetaAppClipInvocationLocalizationUpdateRequest) -> Request<AppStoreConnect_Swift_SDK.BetaAppClipInvocationLocalizationResponse> {
-			.patch(path, body: body)
+			Request(method: "PATCH", url: path, body: body, id: "betaAppClipInvocationLocalizations-update_instance")
 		}
 
 		public var delete: Request<Void> {
-			.delete(path)
+			Request(method: "DELETE", url: path, id: "betaAppClipInvocationLocalizations-delete_instance")
 		}
 	}
 }

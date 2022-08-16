@@ -16,7 +16,7 @@ extension APIEndpoint.V1.Certificates {
 		public let path: String
 
 		public func get(fieldsCertificates: [FieldsCertificates]? = nil) -> Request<AppStoreConnect_Swift_SDK.CertificateResponse> {
-			.get(path, query: makeGetQuery(fieldsCertificates))
+			Request(method: "GET", url: path, query: makeGetQuery(fieldsCertificates), id: "certificates-get_instance")
 		}
 
 		private func makeGetQuery(_ fieldsCertificates: [FieldsCertificates]?) -> [(String, String?)] {
@@ -37,7 +37,7 @@ extension APIEndpoint.V1.Certificates {
 		}
 
 		public var delete: Request<Void> {
-			.delete(path)
+			Request(method: "DELETE", url: path, id: "certificates-delete_instance")
 		}
 	}
 }

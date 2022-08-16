@@ -16,7 +16,7 @@ extension APIEndpoint.V1.BetaAppReviewDetails {
 		public let path: String
 
 		public func get(parameters: GetParameters? = nil) -> Request<AppStoreConnect_Swift_SDK.BetaAppReviewDetailResponse> {
-			.get(path, query: parameters?.asQuery)
+			Request(method: "GET", url: path, query: parameters?.asQuery, id: "betaAppReviewDetails-get_instance")
 		}
 
 		public struct GetParameters {
@@ -97,7 +97,7 @@ extension APIEndpoint.V1.BetaAppReviewDetails {
 		}
 
 		public func patch(_ body: AppStoreConnect_Swift_SDK.BetaAppReviewDetailUpdateRequest) -> Request<AppStoreConnect_Swift_SDK.BetaAppReviewDetailResponse> {
-			.patch(path, body: body)
+			Request(method: "PATCH", url: path, body: body, id: "betaAppReviewDetails-update_instance")
 		}
 	}
 }

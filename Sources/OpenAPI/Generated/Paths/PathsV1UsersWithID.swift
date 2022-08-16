@@ -16,7 +16,7 @@ extension APIEndpoint.V1.Users {
 		public let path: String
 
 		public func get(parameters: GetParameters? = nil) -> Request<AppStoreConnect_Swift_SDK.UserResponse> {
-			.get(path, query: parameters?.asQuery)
+			Request(method: "GET", url: path, query: parameters?.asQuery, id: "users-get_instance")
 		}
 
 		public struct GetParameters {
@@ -98,11 +98,11 @@ extension APIEndpoint.V1.Users {
 		}
 
 		public func patch(_ body: AppStoreConnect_Swift_SDK.UserUpdateRequest) -> Request<AppStoreConnect_Swift_SDK.UserResponse> {
-			.patch(path, body: body)
+			Request(method: "PATCH", url: path, body: body, id: "users-update_instance")
 		}
 
 		public var delete: Request<Void> {
-			.delete(path)
+			Request(method: "DELETE", url: path, id: "users-delete_instance")
 		}
 	}
 }

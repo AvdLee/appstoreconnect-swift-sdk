@@ -16,7 +16,7 @@ extension APIEndpoint.V1.AppInfos.WithID {
 		public let path: String
 
 		public func get(fieldsAppCategories: [FieldsAppCategories]? = nil) -> Request<AppStoreConnect_Swift_SDK.AppCategoryResponse> {
-			.get(path, query: makeGetQuery(fieldsAppCategories))
+			Request(method: "GET", url: path, query: makeGetQuery(fieldsAppCategories), id: "appInfos-primarySubcategoryTwo-get_to_one_related")
 		}
 
 		private func makeGetQuery(_ fieldsAppCategories: [FieldsAppCategories]?) -> [(String, String?)] {

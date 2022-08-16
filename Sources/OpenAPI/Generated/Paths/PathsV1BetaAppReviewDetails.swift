@@ -16,7 +16,7 @@ extension APIEndpoint.V1 {
 		public let path: String
 
 		public func get(parameters: GetParameters) -> Request<AppStoreConnect_Swift_SDK.BetaAppReviewDetailsResponse> {
-			.get(path, query: parameters.asQuery)
+			Request(method: "GET", url: path, query: parameters.asQuery, id: "betaAppReviewDetails-get_collection")
 		}
 
 		public struct GetParameters {

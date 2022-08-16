@@ -16,7 +16,7 @@ extension APIEndpoint.V1.Users.WithID {
 		public let path: String
 
 		public func get(fieldsApps: [FieldsApps]? = nil, limit: Int? = nil) -> Request<AppStoreConnect_Swift_SDK.AppsResponse> {
-			.get(path, query: makeGetQuery(fieldsApps, limit))
+			Request(method: "GET", url: path, query: makeGetQuery(fieldsApps, limit), id: "users-visibleApps-get_to_many_related")
 		}
 
 		private func makeGetQuery(_ fieldsApps: [FieldsApps]?, _ limit: Int?) -> [(String, String?)] {

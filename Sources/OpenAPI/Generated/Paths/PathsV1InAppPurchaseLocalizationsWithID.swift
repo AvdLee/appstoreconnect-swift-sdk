@@ -16,7 +16,7 @@ extension APIEndpoint.V1.InAppPurchaseLocalizations {
 		public let path: String
 
 		public func get(fieldsInAppPurchaseLocalizations: [FieldsInAppPurchaseLocalizations]? = nil, include: [Include]? = nil) -> Request<AppStoreConnect_Swift_SDK.InAppPurchaseLocalizationResponse> {
-			.get(path, query: makeGetQuery(fieldsInAppPurchaseLocalizations, include))
+			Request(method: "GET", url: path, query: makeGetQuery(fieldsInAppPurchaseLocalizations, include), id: "inAppPurchaseLocalizations-get_instance")
 		}
 
 		private func makeGetQuery(_ fieldsInAppPurchaseLocalizations: [FieldsInAppPurchaseLocalizations]?, _ include: [Include]?) -> [(String, String?)] {
@@ -39,11 +39,11 @@ extension APIEndpoint.V1.InAppPurchaseLocalizations {
 		}
 
 		public func patch(_ body: AppStoreConnect_Swift_SDK.InAppPurchaseLocalizationUpdateRequest) -> Request<AppStoreConnect_Swift_SDK.InAppPurchaseLocalizationResponse> {
-			.patch(path, body: body)
+			Request(method: "PATCH", url: path, body: body, id: "inAppPurchaseLocalizations-update_instance")
 		}
 
 		public var delete: Request<Void> {
-			.delete(path)
+			Request(method: "DELETE", url: path, id: "inAppPurchaseLocalizations-delete_instance")
 		}
 	}
 }

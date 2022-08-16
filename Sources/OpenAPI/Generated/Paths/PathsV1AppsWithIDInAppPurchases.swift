@@ -17,7 +17,7 @@ extension APIEndpoint.V1.Apps.WithID {
 
 		@available(*, deprecated, message: "Deprecated")
 		public func get(parameters: GetParameters? = nil) -> Request<AppStoreConnect_Swift_SDK.InAppPurchasesResponse> {
-			.get(path, query: parameters?.asQuery)
+			Request(method: "GET", url: path, query: parameters?.asQuery, id: "apps-inAppPurchases-get_to_many_related")
 		}
 
 		public struct GetParameters {

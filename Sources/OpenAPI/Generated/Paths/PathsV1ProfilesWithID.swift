@@ -16,7 +16,7 @@ extension APIEndpoint.V1.Profiles {
 		public let path: String
 
 		public func get(parameters: GetParameters? = nil) -> Request<AppStoreConnect_Swift_SDK.ProfileResponse> {
-			.get(path, query: parameters?.asQuery)
+			Request(method: "GET", url: path, query: parameters?.asQuery, id: "profiles-get_instance")
 		}
 
 		public struct GetParameters {
@@ -103,7 +103,7 @@ extension APIEndpoint.V1.Profiles {
 		}
 
 		public var delete: Request<Void> {
-			.delete(path)
+			Request(method: "DELETE", url: path, id: "profiles-delete_instance")
 		}
 	}
 }

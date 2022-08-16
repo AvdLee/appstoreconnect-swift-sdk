@@ -16,7 +16,7 @@ extension APIEndpoint.V1.CiArtifacts {
 		public let path: String
 
 		public func get(fieldsCiArtifacts: [FieldsCiArtifacts]? = nil) -> Request<AppStoreConnect_Swift_SDK.CiArtifactResponse> {
-			.get(path, query: makeGetQuery(fieldsCiArtifacts))
+			Request(method: "GET", url: path, query: makeGetQuery(fieldsCiArtifacts), id: "ciArtifacts-get_instance")
 		}
 
 		private func makeGetQuery(_ fieldsCiArtifacts: [FieldsCiArtifacts]?) -> [(String, String?)] {

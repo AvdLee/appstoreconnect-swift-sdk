@@ -16,7 +16,7 @@ extension APIEndpoint.V1.AppStoreVersions.WithID {
 		public let path: String
 
 		public func get(fieldsRoutingAppCoverages: [FieldsRoutingAppCoverages]? = nil) -> Request<AppStoreConnect_Swift_SDK.RoutingAppCoverageResponse> {
-			.get(path, query: makeGetQuery(fieldsRoutingAppCoverages))
+			Request(method: "GET", url: path, query: makeGetQuery(fieldsRoutingAppCoverages), id: "appStoreVersions-routingAppCoverage-get_to_one_related")
 		}
 
 		private func makeGetQuery(_ fieldsRoutingAppCoverages: [FieldsRoutingAppCoverages]?) -> [(String, String?)] {

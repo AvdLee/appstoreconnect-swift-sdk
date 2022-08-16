@@ -16,7 +16,7 @@ extension APIEndpoint.V1.AppStoreVersions.WithID {
 		public let path: String
 
 		public func get(fieldsAppStoreVersionPhasedReleases: [FieldsAppStoreVersionPhasedReleases]? = nil) -> Request<AppStoreConnect_Swift_SDK.AppStoreVersionPhasedReleaseResponse> {
-			.get(path, query: makeGetQuery(fieldsAppStoreVersionPhasedReleases))
+			Request(method: "GET", url: path, query: makeGetQuery(fieldsAppStoreVersionPhasedReleases), id: "appStoreVersions-appStoreVersionPhasedRelease-get_to_one_related")
 		}
 
 		private func makeGetQuery(_ fieldsAppStoreVersionPhasedReleases: [FieldsAppStoreVersionPhasedReleases]?) -> [(String, String?)] {

@@ -16,7 +16,7 @@ extension APIEndpoint.V1.EndUserLicenseAgreements {
 		public let path: String
 
 		public func get(parameters: GetParameters? = nil) -> Request<AppStoreConnect_Swift_SDK.EndUserLicenseAgreementResponse> {
-			.get(path, query: parameters?.asQuery)
+			Request(method: "GET", url: path, query: parameters?.asQuery, id: "endUserLicenseAgreements-get_instance")
 		}
 
 		public struct GetParameters {
@@ -58,11 +58,11 @@ extension APIEndpoint.V1.EndUserLicenseAgreements {
 		}
 
 		public func patch(_ body: AppStoreConnect_Swift_SDK.EndUserLicenseAgreementUpdateRequest) -> Request<AppStoreConnect_Swift_SDK.EndUserLicenseAgreementResponse> {
-			.patch(path, body: body)
+			Request(method: "PATCH", url: path, body: body, id: "endUserLicenseAgreements-update_instance")
 		}
 
 		public var delete: Request<Void> {
-			.delete(path)
+			Request(method: "DELETE", url: path, id: "endUserLicenseAgreements-delete_instance")
 		}
 	}
 }

@@ -16,7 +16,7 @@ extension APIEndpoint.V1.AppEvents {
 		public let path: String
 
 		public func get(parameters: GetParameters? = nil) -> Request<AppStoreConnect_Swift_SDK.AppEventResponse> {
-			.get(path, query: parameters?.asQuery)
+			Request(method: "GET", url: path, query: parameters?.asQuery, id: "appEvents-get_instance")
 		}
 
 		public struct GetParameters {
@@ -72,11 +72,11 @@ extension APIEndpoint.V1.AppEvents {
 		}
 
 		public func patch(_ body: AppStoreConnect_Swift_SDK.AppEventUpdateRequest) -> Request<AppStoreConnect_Swift_SDK.AppEventResponse> {
-			.patch(path, body: body)
+			Request(method: "PATCH", url: path, body: body, id: "appEvents-update_instance")
 		}
 
 		public var delete: Request<Void> {
-			.delete(path)
+			Request(method: "DELETE", url: path, id: "appEvents-delete_instance")
 		}
 	}
 }

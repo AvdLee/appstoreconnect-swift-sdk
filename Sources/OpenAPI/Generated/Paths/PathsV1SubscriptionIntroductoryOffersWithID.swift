@@ -16,11 +16,11 @@ extension APIEndpoint.V1.SubscriptionIntroductoryOffers {
 		public let path: String
 
 		public func patch(_ body: AppStoreConnect_Swift_SDK.SubscriptionIntroductoryOfferUpdateRequest) -> Request<AppStoreConnect_Swift_SDK.SubscriptionIntroductoryOfferResponse> {
-			.patch(path, body: body)
+			Request(method: "PATCH", url: path, body: body, id: "subscriptionIntroductoryOffers-update_instance")
 		}
 
 		public var delete: Request<Void> {
-			.delete(path)
+			Request(method: "DELETE", url: path, id: "subscriptionIntroductoryOffers-delete_instance")
 		}
 	}
 }

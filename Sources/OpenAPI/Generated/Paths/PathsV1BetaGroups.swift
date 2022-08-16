@@ -16,7 +16,7 @@ extension APIEndpoint.V1 {
 		public let path: String
 
 		public func get(parameters: GetParameters? = nil) -> Request<AppStoreConnect_Swift_SDK.BetaGroupsResponse> {
-			.get(path, query: parameters?.asQuery)
+			Request(method: "GET", url: path, query: parameters?.asQuery, id: "betaGroups-get_collection")
 		}
 
 		public struct GetParameters {
@@ -194,7 +194,7 @@ extension APIEndpoint.V1 {
 		}
 
 		public func post(_ body: AppStoreConnect_Swift_SDK.BetaGroupCreateRequest) -> Request<AppStoreConnect_Swift_SDK.BetaGroupResponse> {
-			.post(path, body: body)
+			Request(method: "POST", url: path, body: body, id: "betaGroups-create_instance")
 		}
 	}
 }

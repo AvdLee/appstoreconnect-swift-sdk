@@ -16,7 +16,7 @@ extension APIEndpoint.V1.AppCustomProductPageLocalizations.WithID {
 		public let path: String
 
 		public func get(parameters: GetParameters? = nil) -> Request<AppStoreConnect_Swift_SDK.AppScreenshotSetsResponse> {
-			.get(path, query: parameters?.asQuery)
+			Request(method: "GET", url: path, query: parameters?.asQuery, id: "appCustomProductPageLocalizations-appScreenshotSets-get_to_many_related")
 		}
 
 		public struct GetParameters {
@@ -33,6 +33,8 @@ extension APIEndpoint.V1.AppCustomProductPageLocalizations.WithID {
 			public var include: [Include]?
 
 			public enum FilterScreenshotDisplayType: String, Codable, CaseIterable {
+				case appIphone67 = "APP_IPHONE_67"
+				case appIphone61 = "APP_IPHONE_61"
 				case appIphone65 = "APP_IPHONE_65"
 				case appIphone58 = "APP_IPHONE_58"
 				case appIphone55 = "APP_IPHONE_55"
@@ -45,10 +47,13 @@ extension APIEndpoint.V1.AppCustomProductPageLocalizations.WithID {
 				case appIpad105 = "APP_IPAD_105"
 				case appIpad97 = "APP_IPAD_97"
 				case appDesktop = "APP_DESKTOP"
+				case appWatchUltra = "APP_WATCH_ULTRA"
 				case appWatchSeries7 = "APP_WATCH_SERIES_7"
 				case appWatchSeries4 = "APP_WATCH_SERIES_4"
 				case appWatchSeries3 = "APP_WATCH_SERIES_3"
 				case appAppleTv = "APP_APPLE_TV"
+				case imessageAppIphone67 = "IMESSAGE_APP_IPHONE_67"
+				case imessageAppIphone61 = "IMESSAGE_APP_IPHONE_61"
 				case imessageAppIphone65 = "IMESSAGE_APP_IPHONE_65"
 				case imessageAppIphone58 = "IMESSAGE_APP_IPHONE_58"
 				case imessageAppIphone55 = "IMESSAGE_APP_IPHONE_55"

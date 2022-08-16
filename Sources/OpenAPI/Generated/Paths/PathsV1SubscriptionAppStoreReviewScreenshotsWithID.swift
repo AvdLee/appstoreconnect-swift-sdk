@@ -16,7 +16,7 @@ extension APIEndpoint.V1.SubscriptionAppStoreReviewScreenshots {
 		public let path: String
 
 		public func get(fieldsSubscriptionAppStoreReviewScreenshots: [FieldsSubscriptionAppStoreReviewScreenshots]? = nil, include: [Include]? = nil) -> Request<AppStoreConnect_Swift_SDK.SubscriptionAppStoreReviewScreenshotResponse> {
-			.get(path, query: makeGetQuery(fieldsSubscriptionAppStoreReviewScreenshots, include))
+			Request(method: "GET", url: path, query: makeGetQuery(fieldsSubscriptionAppStoreReviewScreenshots, include), id: "subscriptionAppStoreReviewScreenshots-get_instance")
 		}
 
 		private func makeGetQuery(_ fieldsSubscriptionAppStoreReviewScreenshots: [FieldsSubscriptionAppStoreReviewScreenshots]?, _ include: [Include]?) -> [(String, String?)] {
@@ -44,11 +44,11 @@ extension APIEndpoint.V1.SubscriptionAppStoreReviewScreenshots {
 		}
 
 		public func patch(_ body: AppStoreConnect_Swift_SDK.SubscriptionAppStoreReviewScreenshotUpdateRequest) -> Request<AppStoreConnect_Swift_SDK.SubscriptionAppStoreReviewScreenshotResponse> {
-			.patch(path, body: body)
+			Request(method: "PATCH", url: path, body: body, id: "subscriptionAppStoreReviewScreenshots-update_instance")
 		}
 
 		public var delete: Request<Void> {
-			.delete(path)
+			Request(method: "DELETE", url: path, id: "subscriptionAppStoreReviewScreenshots-delete_instance")
 		}
 	}
 }

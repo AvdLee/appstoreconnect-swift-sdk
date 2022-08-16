@@ -16,13 +16,13 @@ extension APIEndpoint.V1.SubscriptionOfferCodeOneTimeUseCodes {
 		public let path: String
 
 		public func get(parameters: GetParameters? = nil) -> Request<AppStoreConnect_Swift_SDK.SubscriptionOfferCodeOneTimeUseCodeResponse> {
-			.get(path, query: parameters?.asQuery)
+			Request(method: "GET", url: path, query: parameters?.asQuery, id: "subscriptionOfferCodeOneTimeUseCodes-get_instance")
 		}
 
 		public struct GetParameters {
 			public var fieldsSubscriptionOfferCodeOneTimeUseCodes: [FieldsSubscriptionOfferCodeOneTimeUseCodes]?
 			public var include: [Include]?
-			public var fieldsSubscriptionOfferCodeOneTimeUseCodeValues: [FieldsSubscriptionOfferCodeOneTimeUseCodeValues]?
+			public var fieldsSubscriptionOfferCodeOneTimeUseCodeValues: [String]?
 
 			public enum FieldsSubscriptionOfferCodeOneTimeUseCodes: String, Codable, CaseIterable {
 				case active
@@ -37,11 +37,7 @@ extension APIEndpoint.V1.SubscriptionOfferCodeOneTimeUseCodes {
 				case offerCode
 			}
 
-			public enum FieldsSubscriptionOfferCodeOneTimeUseCodeValues: String, Codable, CaseIterable {
-				case empty
-			}
-
-			public init(fieldsSubscriptionOfferCodeOneTimeUseCodes: [FieldsSubscriptionOfferCodeOneTimeUseCodes]? = nil, include: [Include]? = nil, fieldsSubscriptionOfferCodeOneTimeUseCodeValues: [FieldsSubscriptionOfferCodeOneTimeUseCodeValues]? = nil) {
+			public init(fieldsSubscriptionOfferCodeOneTimeUseCodes: [FieldsSubscriptionOfferCodeOneTimeUseCodes]? = nil, include: [Include]? = nil, fieldsSubscriptionOfferCodeOneTimeUseCodeValues: [String]? = nil) {
 				self.fieldsSubscriptionOfferCodeOneTimeUseCodes = fieldsSubscriptionOfferCodeOneTimeUseCodes
 				self.include = include
 				self.fieldsSubscriptionOfferCodeOneTimeUseCodeValues = fieldsSubscriptionOfferCodeOneTimeUseCodeValues
@@ -57,7 +53,7 @@ extension APIEndpoint.V1.SubscriptionOfferCodeOneTimeUseCodes {
 		}
 
 		public func patch(_ body: AppStoreConnect_Swift_SDK.SubscriptionOfferCodeOneTimeUseCodeUpdateRequest) -> Request<AppStoreConnect_Swift_SDK.SubscriptionOfferCodeOneTimeUseCodeResponse> {
-			.patch(path, body: body)
+			Request(method: "PATCH", url: path, body: body, id: "subscriptionOfferCodeOneTimeUseCodes-update_instance")
 		}
 	}
 }

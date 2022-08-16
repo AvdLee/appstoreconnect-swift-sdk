@@ -16,7 +16,7 @@ extension APIEndpoint.V1 {
 		public let path: String
 
 		public func get(parameters: GetParameters) -> Request<Data> {
-			.get(path, query: parameters.asQuery)
+			Request(method: "GET", url: path, query: parameters.asQuery, id: "salesReports-get_collection")
 		}
 
 		public struct GetParameters {

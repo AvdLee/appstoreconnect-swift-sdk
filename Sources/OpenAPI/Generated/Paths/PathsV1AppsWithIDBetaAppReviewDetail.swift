@@ -16,7 +16,7 @@ extension APIEndpoint.V1.Apps.WithID {
 		public let path: String
 
 		public func get(fieldsBetaAppReviewDetails: [FieldsBetaAppReviewDetails]? = nil) -> Request<AppStoreConnect_Swift_SDK.BetaAppReviewDetailResponse> {
-			.get(path, query: makeGetQuery(fieldsBetaAppReviewDetails))
+			Request(method: "GET", url: path, query: makeGetQuery(fieldsBetaAppReviewDetails), id: "apps-betaAppReviewDetail-get_to_one_related")
 		}
 
 		private func makeGetQuery(_ fieldsBetaAppReviewDetails: [FieldsBetaAppReviewDetails]?) -> [(String, String?)] {

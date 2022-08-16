@@ -16,7 +16,7 @@ extension APIEndpoint.V1.AppScreenshots {
 		public let path: String
 
 		public func get(fieldsAppScreenshots: [FieldsAppScreenshots]? = nil, include: [Include]? = nil) -> Request<AppStoreConnect_Swift_SDK.AppScreenshotResponse> {
-			.get(path, query: makeGetQuery(fieldsAppScreenshots, include))
+			Request(method: "GET", url: path, query: makeGetQuery(fieldsAppScreenshots, include), id: "appScreenshots-get_instance")
 		}
 
 		private func makeGetQuery(_ fieldsAppScreenshots: [FieldsAppScreenshots]?, _ include: [Include]?) -> [(String, String?)] {
@@ -44,11 +44,11 @@ extension APIEndpoint.V1.AppScreenshots {
 		}
 
 		public func patch(_ body: AppStoreConnect_Swift_SDK.AppScreenshotUpdateRequest) -> Request<AppStoreConnect_Swift_SDK.AppScreenshotResponse> {
-			.patch(path, body: body)
+			Request(method: "PATCH", url: path, body: body, id: "appScreenshots-update_instance")
 		}
 
 		public var delete: Request<Void> {
-			.delete(path)
+			Request(method: "DELETE", url: path, id: "appScreenshots-delete_instance")
 		}
 	}
 }

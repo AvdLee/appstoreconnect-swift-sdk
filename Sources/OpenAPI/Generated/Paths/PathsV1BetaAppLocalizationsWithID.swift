@@ -16,7 +16,7 @@ extension APIEndpoint.V1.BetaAppLocalizations {
 		public let path: String
 
 		public func get(parameters: GetParameters? = nil) -> Request<AppStoreConnect_Swift_SDK.BetaAppLocalizationResponse> {
-			.get(path, query: parameters?.asQuery)
+			Request(method: "GET", url: path, query: parameters?.asQuery, id: "betaAppLocalizations-get_instance")
 		}
 
 		public struct GetParameters {
@@ -95,11 +95,11 @@ extension APIEndpoint.V1.BetaAppLocalizations {
 		}
 
 		public func patch(_ body: AppStoreConnect_Swift_SDK.BetaAppLocalizationUpdateRequest) -> Request<AppStoreConnect_Swift_SDK.BetaAppLocalizationResponse> {
-			.patch(path, body: body)
+			Request(method: "PATCH", url: path, body: body, id: "betaAppLocalizations-update_instance")
 		}
 
 		public var delete: Request<Void> {
-			.delete(path)
+			Request(method: "DELETE", url: path, id: "betaAppLocalizations-delete_instance")
 		}
 	}
 }

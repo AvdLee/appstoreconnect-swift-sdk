@@ -16,7 +16,7 @@ extension APIEndpoint.V1.AppEventVideoClips {
 		public let path: String
 
 		public func get(fieldsAppEventVideoClips: [FieldsAppEventVideoClips]? = nil, include: [Include]? = nil) -> Request<AppStoreConnect_Swift_SDK.AppEventVideoClipResponse> {
-			.get(path, query: makeGetQuery(fieldsAppEventVideoClips, include))
+			Request(method: "GET", url: path, query: makeGetQuery(fieldsAppEventVideoClips, include), id: "appEventVideoClips-get_instance")
 		}
 
 		private func makeGetQuery(_ fieldsAppEventVideoClips: [FieldsAppEventVideoClips]?, _ include: [Include]?) -> [(String, String?)] {
@@ -44,11 +44,11 @@ extension APIEndpoint.V1.AppEventVideoClips {
 		}
 
 		public func patch(_ body: AppStoreConnect_Swift_SDK.AppEventVideoClipUpdateRequest) -> Request<AppStoreConnect_Swift_SDK.AppEventVideoClipResponse> {
-			.patch(path, body: body)
+			Request(method: "PATCH", url: path, body: body, id: "appEventVideoClips-update_instance")
 		}
 
 		public var delete: Request<Void> {
-			.delete(path)
+			Request(method: "DELETE", url: path, id: "appEventVideoClips-delete_instance")
 		}
 	}
 }

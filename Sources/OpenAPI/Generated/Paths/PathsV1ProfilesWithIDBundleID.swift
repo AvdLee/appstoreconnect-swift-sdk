@@ -16,7 +16,7 @@ extension APIEndpoint.V1.Profiles.WithID {
 		public let path: String
 
 		public func get(fieldsBundleIDs: [FieldsBundleIDs]? = nil) -> Request<AppStoreConnect_Swift_SDK.BundleIDResponse> {
-			.get(path, query: makeGetQuery(fieldsBundleIDs))
+			Request(method: "GET", url: path, query: makeGetQuery(fieldsBundleIDs), id: "profiles-bundleId-get_to_one_related")
 		}
 
 		private func makeGetQuery(_ fieldsBundleIDs: [FieldsBundleIDs]?) -> [(String, String?)] {

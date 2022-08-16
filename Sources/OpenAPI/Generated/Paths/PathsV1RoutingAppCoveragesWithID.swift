@@ -16,7 +16,7 @@ extension APIEndpoint.V1.RoutingAppCoverages {
 		public let path: String
 
 		public func get(fieldsRoutingAppCoverages: [FieldsRoutingAppCoverages]? = nil, include: [Include]? = nil) -> Request<AppStoreConnect_Swift_SDK.RoutingAppCoverageResponse> {
-			.get(path, query: makeGetQuery(fieldsRoutingAppCoverages, include))
+			Request(method: "GET", url: path, query: makeGetQuery(fieldsRoutingAppCoverages, include), id: "routingAppCoverages-get_instance")
 		}
 
 		private func makeGetQuery(_ fieldsRoutingAppCoverages: [FieldsRoutingAppCoverages]?, _ include: [Include]?) -> [(String, String?)] {
@@ -41,11 +41,11 @@ extension APIEndpoint.V1.RoutingAppCoverages {
 		}
 
 		public func patch(_ body: AppStoreConnect_Swift_SDK.RoutingAppCoverageUpdateRequest) -> Request<AppStoreConnect_Swift_SDK.RoutingAppCoverageResponse> {
-			.patch(path, body: body)
+			Request(method: "PATCH", url: path, body: body, id: "routingAppCoverages-update_instance")
 		}
 
 		public var delete: Request<Void> {
-			.delete(path)
+			Request(method: "DELETE", url: path, id: "routingAppCoverages-delete_instance")
 		}
 	}
 }

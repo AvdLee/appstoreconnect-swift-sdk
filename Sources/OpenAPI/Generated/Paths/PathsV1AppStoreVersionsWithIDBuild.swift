@@ -16,7 +16,7 @@ extension APIEndpoint.V1.AppStoreVersions.WithID {
 		public let path: String
 
 		public func get(fieldsBuilds: [FieldsBuilds]? = nil) -> Request<AppStoreConnect_Swift_SDK.BuildResponse> {
-			.get(path, query: makeGetQuery(fieldsBuilds))
+			Request(method: "GET", url: path, query: makeGetQuery(fieldsBuilds), id: "appStoreVersions-build-get_to_one_related")
 		}
 
 		private func makeGetQuery(_ fieldsBuilds: [FieldsBuilds]?) -> [(String, String?)] {

@@ -16,7 +16,7 @@ extension APIEndpoint.V1.InAppPurchaseContents {
 		public let path: String
 
 		public func get(fieldsInAppPurchaseContents: [FieldsInAppPurchaseContents]? = nil, include: [Include]? = nil) -> Request<AppStoreConnect_Swift_SDK.InAppPurchaseContentResponse> {
-			.get(path, query: makeGetQuery(fieldsInAppPurchaseContents, include))
+			Request(method: "GET", url: path, query: makeGetQuery(fieldsInAppPurchaseContents, include), id: "inAppPurchaseContents-get_instance")
 		}
 
 		private func makeGetQuery(_ fieldsInAppPurchaseContents: [FieldsInAppPurchaseContents]?, _ include: [Include]?) -> [(String, String?)] {

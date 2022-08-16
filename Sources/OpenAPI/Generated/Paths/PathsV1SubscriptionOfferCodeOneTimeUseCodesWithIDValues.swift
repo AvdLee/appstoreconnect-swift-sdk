@@ -16,7 +16,7 @@ extension APIEndpoint.V1.SubscriptionOfferCodeOneTimeUseCodes.WithID {
 		public let path: String
 
 		public var get: Request<String> {
-			.get(path)
+			Request(method: "GET", url: path, id: "subscriptionOfferCodeOneTimeUseCodes-values-get_to_one_related")
 		}
 	}
 }

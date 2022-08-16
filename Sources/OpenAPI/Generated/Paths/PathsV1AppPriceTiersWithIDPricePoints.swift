@@ -17,7 +17,7 @@ extension APIEndpoint.V1.AppPriceTiers.WithID {
 
 		@available(*, deprecated, message: "Deprecated")
 		public func get(parameters: GetParameters? = nil) -> Request<AppStoreConnect_Swift_SDK.AppPricePointsResponse> {
-			.get(path, query: parameters?.asQuery)
+			Request(method: "GET", url: path, query: parameters?.asQuery, id: "appPriceTiers-pricePoints-get_to_many_related")
 		}
 
 		public struct GetParameters {

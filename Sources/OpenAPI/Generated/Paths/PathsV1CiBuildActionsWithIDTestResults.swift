@@ -16,7 +16,7 @@ extension APIEndpoint.V1.CiBuildActions.WithID {
 		public let path: String
 
 		public func get(fieldsCiTestResults: [FieldsCiTestResults]? = nil, limit: Int? = nil) -> Request<AppStoreConnect_Swift_SDK.CiTestResultsResponse> {
-			.get(path, query: makeGetQuery(fieldsCiTestResults, limit))
+			Request(method: "GET", url: path, query: makeGetQuery(fieldsCiTestResults, limit), id: "ciBuildActions-testResults-get_to_many_related")
 		}
 
 		private func makeGetQuery(_ fieldsCiTestResults: [FieldsCiTestResults]?, _ limit: Int?) -> [(String, String?)] {

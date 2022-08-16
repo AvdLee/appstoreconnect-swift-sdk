@@ -16,7 +16,7 @@ extension APIEndpoint.V1.Builds.WithID {
 		public let path: String
 
 		public func get(parameters: GetParameters? = nil) -> Request<Data> {
-			.get(path, query: parameters?.asQuery)
+			Request(method: "GET", url: path, query: parameters?.asQuery, id: "builds-perfPowerMetrics-get_to_many_related")
 		}
 
 		public struct GetParameters {

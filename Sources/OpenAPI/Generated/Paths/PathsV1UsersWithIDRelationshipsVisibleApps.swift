@@ -16,7 +16,7 @@ extension APIEndpoint.V1.Users.WithID.Relationships {
 		public let path: String
 
 		public func get(limit: Int? = nil) -> Request<AppStoreConnect_Swift_SDK.UserVisibleAppsLinkagesResponse> {
-			.get(path, query: makeGetQuery(limit))
+			Request(method: "GET", url: path, query: makeGetQuery(limit), id: "users-visibleApps-get_to_many_relationship")
 		}
 
 		private func makeGetQuery(_ limit: Int?) -> [(String, String?)] {
@@ -26,15 +26,15 @@ extension APIEndpoint.V1.Users.WithID.Relationships {
 		}
 
 		public func post(_ body: AppStoreConnect_Swift_SDK.UserVisibleAppsLinkagesRequest) -> Request<Void> {
-			.post(path, body: body)
+			Request(method: "POST", url: path, body: body, id: "users-visibleApps-create_to_many_relationship")
 		}
 
 		public func patch(_ body: AppStoreConnect_Swift_SDK.UserVisibleAppsLinkagesRequest) -> Request<Void> {
-			.patch(path, body: body)
+			Request(method: "PATCH", url: path, body: body, id: "users-visibleApps-replace_to_many_relationship")
 		}
 
 		public func delete(_ body: AppStoreConnect_Swift_SDK.UserVisibleAppsLinkagesRequest) -> Request<Void> {
-			.delete(path, body: body)
+			Request(method: "DELETE", url: path, body: body, id: "users-visibleApps-delete_to_many_relationship")
 		}
 	}
 }

@@ -16,7 +16,7 @@ extension APIEndpoint.V1.AppClipAppStoreReviewDetails {
 		public let path: String
 
 		public func get(fieldsAppClipAppStoreReviewDetails: [FieldsAppClipAppStoreReviewDetails]? = nil, include: [Include]? = nil) -> Request<AppStoreConnect_Swift_SDK.AppClipAppStoreReviewDetailResponse> {
-			.get(path, query: makeGetQuery(fieldsAppClipAppStoreReviewDetails, include))
+			Request(method: "GET", url: path, query: makeGetQuery(fieldsAppClipAppStoreReviewDetails, include), id: "appClipAppStoreReviewDetails-get_instance")
 		}
 
 		private func makeGetQuery(_ fieldsAppClipAppStoreReviewDetails: [FieldsAppClipAppStoreReviewDetails]?, _ include: [Include]?) -> [(String, String?)] {
@@ -36,7 +36,7 @@ extension APIEndpoint.V1.AppClipAppStoreReviewDetails {
 		}
 
 		public func patch(_ body: AppStoreConnect_Swift_SDK.AppClipAppStoreReviewDetailUpdateRequest) -> Request<AppStoreConnect_Swift_SDK.AppClipAppStoreReviewDetailResponse> {
-			.patch(path, body: body)
+			Request(method: "PATCH", url: path, body: body, id: "appClipAppStoreReviewDetails-update_instance")
 		}
 	}
 }

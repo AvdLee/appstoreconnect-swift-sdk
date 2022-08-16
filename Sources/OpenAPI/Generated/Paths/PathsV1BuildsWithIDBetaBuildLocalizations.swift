@@ -16,7 +16,7 @@ extension APIEndpoint.V1.Builds.WithID {
 		public let path: String
 
 		public func get(fieldsBetaBuildLocalizations: [FieldsBetaBuildLocalizations]? = nil, limit: Int? = nil) -> Request<AppStoreConnect_Swift_SDK.BetaBuildLocalizationsResponse> {
-			.get(path, query: makeGetQuery(fieldsBetaBuildLocalizations, limit))
+			Request(method: "GET", url: path, query: makeGetQuery(fieldsBetaBuildLocalizations, limit), id: "builds-betaBuildLocalizations-get_to_many_related")
 		}
 
 		private func makeGetQuery(_ fieldsBetaBuildLocalizations: [FieldsBetaBuildLocalizations]?, _ limit: Int?) -> [(String, String?)] {

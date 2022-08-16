@@ -16,7 +16,7 @@ extension APIEndpoint.V1.PromotedPurchaseImages {
 		public let path: String
 
 		public func get(fieldsPromotedPurchaseImages: [FieldsPromotedPurchaseImages]? = nil, include: [Include]? = nil) -> Request<AppStoreConnect_Swift_SDK.PromotedPurchaseImageResponse> {
-			.get(path, query: makeGetQuery(fieldsPromotedPurchaseImages, include))
+			Request(method: "GET", url: path, query: makeGetQuery(fieldsPromotedPurchaseImages, include), id: "promotedPurchaseImages-get_instance")
 		}
 
 		private func makeGetQuery(_ fieldsPromotedPurchaseImages: [FieldsPromotedPurchaseImages]?, _ include: [Include]?) -> [(String, String?)] {
@@ -44,11 +44,11 @@ extension APIEndpoint.V1.PromotedPurchaseImages {
 		}
 
 		public func patch(_ body: AppStoreConnect_Swift_SDK.PromotedPurchaseImageUpdateRequest) -> Request<AppStoreConnect_Swift_SDK.PromotedPurchaseImageResponse> {
-			.patch(path, body: body)
+			Request(method: "PATCH", url: path, body: body, id: "promotedPurchaseImages-update_instance")
 		}
 
 		public var delete: Request<Void> {
-			.delete(path)
+			Request(method: "DELETE", url: path, id: "promotedPurchaseImages-delete_instance")
 		}
 	}
 }

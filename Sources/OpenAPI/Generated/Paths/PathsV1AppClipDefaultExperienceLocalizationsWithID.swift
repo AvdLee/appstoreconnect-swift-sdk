@@ -16,7 +16,7 @@ extension APIEndpoint.V1.AppClipDefaultExperienceLocalizations {
 		public let path: String
 
 		public func get(parameters: GetParameters? = nil) -> Request<AppStoreConnect_Swift_SDK.AppClipDefaultExperienceLocalizationResponse> {
-			.get(path, query: parameters?.asQuery)
+			Request(method: "GET", url: path, query: parameters?.asQuery, id: "appClipDefaultExperienceLocalizations-get_instance")
 		}
 
 		public struct GetParameters {
@@ -63,11 +63,11 @@ extension APIEndpoint.V1.AppClipDefaultExperienceLocalizations {
 		}
 
 		public func patch(_ body: AppStoreConnect_Swift_SDK.AppClipDefaultExperienceLocalizationUpdateRequest) -> Request<AppStoreConnect_Swift_SDK.AppClipDefaultExperienceLocalizationResponse> {
-			.patch(path, body: body)
+			Request(method: "PATCH", url: path, body: body, id: "appClipDefaultExperienceLocalizations-update_instance")
 		}
 
 		public var delete: Request<Void> {
-			.delete(path)
+			Request(method: "DELETE", url: path, id: "appClipDefaultExperienceLocalizations-delete_instance")
 		}
 	}
 }

@@ -16,7 +16,7 @@ extension APIEndpoint.V1.AppPreviews {
 		public let path: String
 
 		public func get(fieldsAppPreviews: [FieldsAppPreviews]? = nil, include: [Include]? = nil) -> Request<AppStoreConnect_Swift_SDK.AppPreviewResponse> {
-			.get(path, query: makeGetQuery(fieldsAppPreviews, include))
+			Request(method: "GET", url: path, query: makeGetQuery(fieldsAppPreviews, include), id: "appPreviews-get_instance")
 		}
 
 		private func makeGetQuery(_ fieldsAppPreviews: [FieldsAppPreviews]?, _ include: [Include]?) -> [(String, String?)] {
@@ -45,11 +45,11 @@ extension APIEndpoint.V1.AppPreviews {
 		}
 
 		public func patch(_ body: AppStoreConnect_Swift_SDK.AppPreviewUpdateRequest) -> Request<AppStoreConnect_Swift_SDK.AppPreviewResponse> {
-			.patch(path, body: body)
+			Request(method: "PATCH", url: path, body: body, id: "appPreviews-update_instance")
 		}
 
 		public var delete: Request<Void> {
-			.delete(path)
+			Request(method: "DELETE", url: path, id: "appPreviews-delete_instance")
 		}
 	}
 }

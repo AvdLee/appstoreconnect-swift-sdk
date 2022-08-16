@@ -16,7 +16,7 @@ extension APIEndpoint.V1.Devices {
 		public let path: String
 
 		public func get(fieldsDevices: [FieldsDevices]? = nil) -> Request<AppStoreConnect_Swift_SDK.DeviceResponse> {
-			.get(path, query: makeGetQuery(fieldsDevices))
+			Request(method: "GET", url: path, query: makeGetQuery(fieldsDevices), id: "devices-get_instance")
 		}
 
 		private func makeGetQuery(_ fieldsDevices: [FieldsDevices]?) -> [(String, String?)] {
@@ -36,7 +36,7 @@ extension APIEndpoint.V1.Devices {
 		}
 
 		public func patch(_ body: AppStoreConnect_Swift_SDK.DeviceUpdateRequest) -> Request<AppStoreConnect_Swift_SDK.DeviceResponse> {
-			.patch(path, body: body)
+			Request(method: "PATCH", url: path, body: body, id: "devices-update_instance")
 		}
 	}
 }

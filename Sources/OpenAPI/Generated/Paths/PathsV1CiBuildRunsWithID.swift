@@ -16,7 +16,7 @@ extension APIEndpoint.V1.CiBuildRuns {
 		public let path: String
 
 		public func get(parameters: GetParameters? = nil) -> Request<AppStoreConnect_Swift_SDK.CiBuildRunResponse> {
-			.get(path, query: parameters?.asQuery)
+			Request(method: "GET", url: path, query: parameters?.asQuery, id: "ciBuildRuns-get_instance")
 		}
 
 		public struct GetParameters {

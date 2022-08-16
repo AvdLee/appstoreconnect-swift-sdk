@@ -17,7 +17,7 @@ extension APIEndpoint.V1.AppPricePoints {
 
 		@available(*, deprecated, message: "Deprecated")
 		public func get(parameters: GetParameters? = nil) -> Request<AppStoreConnect_Swift_SDK.AppPricePointResponse> {
-			.get(path, query: parameters?.asQuery)
+			Request(method: "GET", url: path, query: parameters?.asQuery, id: "appPricePoints-get_instance")
 		}
 
 		public struct GetParameters {

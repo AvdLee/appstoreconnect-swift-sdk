@@ -16,7 +16,7 @@ extension APIEndpoint.V1.AppEncryptionDeclarations.WithID {
 		public let path: String
 
 		public func get(fieldsApps: [FieldsApps]? = nil) -> Request<AppStoreConnect_Swift_SDK.AppResponse> {
-			.get(path, query: makeGetQuery(fieldsApps))
+			Request(method: "GET", url: path, query: makeGetQuery(fieldsApps), id: "appEncryptionDeclarations-app-get_to_one_related")
 		}
 
 		private func makeGetQuery(_ fieldsApps: [FieldsApps]?) -> [(String, String?)] {

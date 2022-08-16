@@ -16,7 +16,7 @@ extension APIEndpoint.V1.InAppPurchaseAppStoreReviewScreenshots {
 		public let path: String
 
 		public func get(fieldsInAppPurchaseAppStoreReviewScreenshots: [FieldsInAppPurchaseAppStoreReviewScreenshots]? = nil, include: [Include]? = nil) -> Request<AppStoreConnect_Swift_SDK.InAppPurchaseAppStoreReviewScreenshotResponse> {
-			.get(path, query: makeGetQuery(fieldsInAppPurchaseAppStoreReviewScreenshots, include))
+			Request(method: "GET", url: path, query: makeGetQuery(fieldsInAppPurchaseAppStoreReviewScreenshots, include), id: "inAppPurchaseAppStoreReviewScreenshots-get_instance")
 		}
 
 		private func makeGetQuery(_ fieldsInAppPurchaseAppStoreReviewScreenshots: [FieldsInAppPurchaseAppStoreReviewScreenshots]?, _ include: [Include]?) -> [(String, String?)] {
@@ -44,11 +44,11 @@ extension APIEndpoint.V1.InAppPurchaseAppStoreReviewScreenshots {
 		}
 
 		public func patch(_ body: AppStoreConnect_Swift_SDK.InAppPurchaseAppStoreReviewScreenshotUpdateRequest) -> Request<AppStoreConnect_Swift_SDK.InAppPurchaseAppStoreReviewScreenshotResponse> {
-			.patch(path, body: body)
+			Request(method: "PATCH", url: path, body: body, id: "inAppPurchaseAppStoreReviewScreenshots-update_instance")
 		}
 
 		public var delete: Request<Void> {
-			.delete(path)
+			Request(method: "DELETE", url: path, id: "inAppPurchaseAppStoreReviewScreenshots-delete_instance")
 		}
 	}
 }

@@ -16,7 +16,7 @@ extension APIEndpoint.V1.PromotedPurchases {
 		public let path: String
 
 		public func get(parameters: GetParameters? = nil) -> Request<AppStoreConnect_Swift_SDK.PromotedPurchaseResponse> {
-			.get(path, query: parameters?.asQuery)
+			Request(method: "GET", url: path, query: parameters?.asQuery, id: "promotedPurchases-get_instance")
 		}
 
 		public struct GetParameters {
@@ -72,11 +72,11 @@ extension APIEndpoint.V1.PromotedPurchases {
 		}
 
 		public func patch(_ body: AppStoreConnect_Swift_SDK.PromotedPurchaseUpdateRequest) -> Request<AppStoreConnect_Swift_SDK.PromotedPurchaseResponse> {
-			.patch(path, body: body)
+			Request(method: "PATCH", url: path, body: body, id: "promotedPurchases-update_instance")
 		}
 
 		public var delete: Request<Void> {
-			.delete(path)
+			Request(method: "DELETE", url: path, id: "promotedPurchases-delete_instance")
 		}
 	}
 }

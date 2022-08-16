@@ -16,7 +16,7 @@ extension APIEndpoint.V1.AppPreviewSets {
 		public let path: String
 
 		public func get(parameters: GetParameters? = nil) -> Request<AppStoreConnect_Swift_SDK.AppPreviewSetResponse> {
-			.get(path, query: parameters?.asQuery)
+			Request(method: "GET", url: path, query: parameters?.asQuery, id: "appPreviewSets-get_instance")
 		}
 
 		public struct GetParameters {
@@ -72,7 +72,7 @@ extension APIEndpoint.V1.AppPreviewSets {
 		}
 
 		public var delete: Request<Void> {
-			.delete(path)
+			Request(method: "DELETE", url: path, id: "appPreviewSets-delete_instance")
 		}
 	}
 }

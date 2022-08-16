@@ -16,7 +16,7 @@ extension APIEndpoint.V1.ScmProviders.WithID {
 		public let path: String
 
 		public func get(parameters: GetParameters? = nil) -> Request<AppStoreConnect_Swift_SDK.ScmRepositoriesResponse> {
-			.get(path, query: parameters?.asQuery)
+			Request(method: "GET", url: path, query: parameters?.asQuery, id: "scmProviders-repositories-get_to_many_related")
 		}
 
 		public struct GetParameters {

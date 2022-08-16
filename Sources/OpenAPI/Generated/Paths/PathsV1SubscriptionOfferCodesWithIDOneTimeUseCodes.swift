@@ -16,7 +16,7 @@ extension APIEndpoint.V1.SubscriptionOfferCodes.WithID {
 		public let path: String
 
 		public func get(parameters: GetParameters? = nil) -> Request<AppStoreConnect_Swift_SDK.SubscriptionOfferCodeOneTimeUseCodesResponse> {
-			.get(path, query: parameters?.asQuery)
+			Request(method: "GET", url: path, query: parameters?.asQuery, id: "subscriptionOfferCodes-oneTimeUseCodes-get_to_many_related")
 		}
 
 		public struct GetParameters {

@@ -16,7 +16,7 @@ extension APIEndpoint.V1.EndUserLicenseAgreements.WithID {
 		public let path: String
 
 		public func get(fieldsTerritories: [FieldsTerritories]? = nil, limit: Int? = nil) -> Request<AppStoreConnect_Swift_SDK.TerritoriesResponse> {
-			.get(path, query: makeGetQuery(fieldsTerritories, limit))
+			Request(method: "GET", url: path, query: makeGetQuery(fieldsTerritories, limit), id: "endUserLicenseAgreements-territories-get_to_many_related")
 		}
 
 		private func makeGetQuery(_ fieldsTerritories: [FieldsTerritories]?, _ limit: Int?) -> [(String, String?)] {

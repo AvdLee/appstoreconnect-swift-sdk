@@ -16,7 +16,7 @@ extension APIEndpoint.V1.AppClipHeaderImages {
 		public let path: String
 
 		public func get(fieldsAppClipHeaderImages: [FieldsAppClipHeaderImages]? = nil, include: [Include]? = nil) -> Request<AppStoreConnect_Swift_SDK.AppClipHeaderImageResponse> {
-			.get(path, query: makeGetQuery(fieldsAppClipHeaderImages, include))
+			Request(method: "GET", url: path, query: makeGetQuery(fieldsAppClipHeaderImages, include), id: "appClipHeaderImages-get_instance")
 		}
 
 		private func makeGetQuery(_ fieldsAppClipHeaderImages: [FieldsAppClipHeaderImages]?, _ include: [Include]?) -> [(String, String?)] {
@@ -42,11 +42,11 @@ extension APIEndpoint.V1.AppClipHeaderImages {
 		}
 
 		public func patch(_ body: AppStoreConnect_Swift_SDK.AppClipHeaderImageUpdateRequest) -> Request<AppStoreConnect_Swift_SDK.AppClipHeaderImageResponse> {
-			.patch(path, body: body)
+			Request(method: "PATCH", url: path, body: body, id: "appClipHeaderImages-update_instance")
 		}
 
 		public var delete: Request<Void> {
-			.delete(path)
+			Request(method: "DELETE", url: path, id: "appClipHeaderImages-delete_instance")
 		}
 	}
 }

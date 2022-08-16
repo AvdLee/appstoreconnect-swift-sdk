@@ -16,7 +16,7 @@ extension APIEndpoint.V1.CiIssues {
 		public let path: String
 
 		public func get(fieldsCiIssues: [FieldsCiIssues]? = nil) -> Request<AppStoreConnect_Swift_SDK.CiIssueResponse> {
-			.get(path, query: makeGetQuery(fieldsCiIssues))
+			Request(method: "GET", url: path, query: makeGetQuery(fieldsCiIssues), id: "ciIssues-get_instance")
 		}
 
 		private func makeGetQuery(_ fieldsCiIssues: [FieldsCiIssues]?) -> [(String, String?)] {

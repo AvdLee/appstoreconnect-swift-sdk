@@ -16,7 +16,7 @@ extension APIEndpoint.V1.UserInvitations {
 		public let path: String
 
 		public func get(parameters: GetParameters? = nil) -> Request<AppStoreConnect_Swift_SDK.UserInvitationResponse> {
-			.get(path, query: parameters?.asQuery)
+			Request(method: "GET", url: path, query: parameters?.asQuery, id: "userInvitations-get_instance")
 		}
 
 		public struct GetParameters {
@@ -99,7 +99,7 @@ extension APIEndpoint.V1.UserInvitations {
 		}
 
 		public var delete: Request<Void> {
-			.delete(path)
+			Request(method: "DELETE", url: path, id: "userInvitations-delete_instance")
 		}
 	}
 }

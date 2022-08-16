@@ -16,7 +16,7 @@ extension APIEndpoint.V1.AppStoreVersions.WithID {
 		public let path: String
 
 		public func get(fieldsAppStoreVersionLocalizations: [FieldsAppStoreVersionLocalizations]? = nil, limit: Int? = nil) -> Request<AppStoreConnect_Swift_SDK.AppStoreVersionLocalizationsResponse> {
-			.get(path, query: makeGetQuery(fieldsAppStoreVersionLocalizations, limit))
+			Request(method: "GET", url: path, query: makeGetQuery(fieldsAppStoreVersionLocalizations, limit), id: "appStoreVersions-appStoreVersionLocalizations-get_to_many_related")
 		}
 
 		private func makeGetQuery(_ fieldsAppStoreVersionLocalizations: [FieldsAppStoreVersionLocalizations]?, _ limit: Int?) -> [(String, String?)] {

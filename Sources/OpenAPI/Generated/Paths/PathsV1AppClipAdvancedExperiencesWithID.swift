@@ -16,7 +16,7 @@ extension APIEndpoint.V1.AppClipAdvancedExperiences {
 		public let path: String
 
 		public func get(parameters: GetParameters? = nil) -> Request<AppStoreConnect_Swift_SDK.AppClipAdvancedExperienceResponse> {
-			.get(path, query: parameters?.asQuery)
+			Request(method: "GET", url: path, query: parameters?.asQuery, id: "appClipAdvancedExperiences-get_instance")
 		}
 
 		public struct GetParameters {
@@ -62,7 +62,7 @@ extension APIEndpoint.V1.AppClipAdvancedExperiences {
 		}
 
 		public func patch(_ body: AppStoreConnect_Swift_SDK.AppClipAdvancedExperienceUpdateRequest) -> Request<AppStoreConnect_Swift_SDK.AppClipAdvancedExperienceResponse> {
-			.patch(path, body: body)
+			Request(method: "PATCH", url: path, body: body, id: "appClipAdvancedExperiences-update_instance")
 		}
 	}
 }

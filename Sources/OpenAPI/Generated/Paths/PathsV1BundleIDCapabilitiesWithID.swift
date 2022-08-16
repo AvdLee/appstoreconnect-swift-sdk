@@ -16,11 +16,11 @@ extension APIEndpoint.V1.BundleIDCapabilities {
 		public let path: String
 
 		public func patch(_ body: AppStoreConnect_Swift_SDK.BundleIDCapabilityUpdateRequest) -> Request<AppStoreConnect_Swift_SDK.BundleIDCapabilityResponse> {
-			.patch(path, body: body)
+			Request(method: "PATCH", url: path, body: body, id: "bundleIdCapabilities-update_instance")
 		}
 
 		public var delete: Request<Void> {
-			.delete(path)
+			Request(method: "DELETE", url: path, id: "bundleIdCapabilities-delete_instance")
 		}
 	}
 }

@@ -16,7 +16,7 @@ extension APIEndpoint.V1.AppStoreVersionExperimentTreatmentLocalizations {
 		public let path: String
 
 		public func get(parameters: GetParameters? = nil) -> Request<AppStoreConnect_Swift_SDK.AppStoreVersionExperimentTreatmentLocalizationResponse> {
-			.get(path, query: parameters?.asQuery)
+			Request(method: "GET", url: path, query: parameters?.asQuery, id: "appStoreVersionExperimentTreatmentLocalizations-get_instance")
 		}
 
 		public struct GetParameters {
@@ -78,7 +78,7 @@ extension APIEndpoint.V1.AppStoreVersionExperimentTreatmentLocalizations {
 		}
 
 		public var delete: Request<Void> {
-			.delete(path)
+			Request(method: "DELETE", url: path, id: "appStoreVersionExperimentTreatmentLocalizations-delete_instance")
 		}
 	}
 }

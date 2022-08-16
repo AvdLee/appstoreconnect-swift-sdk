@@ -16,7 +16,7 @@ extension APIEndpoint.V1.AppInfos {
 		public let path: String
 
 		public func get(parameters: GetParameters? = nil) -> Request<AppStoreConnect_Swift_SDK.AppInfoResponse> {
-			.get(path, query: parameters?.asQuery)
+			Request(method: "GET", url: path, query: parameters?.asQuery, id: "appInfos-get_instance")
 		}
 
 		public struct GetParameters {
@@ -113,7 +113,7 @@ extension APIEndpoint.V1.AppInfos {
 		}
 
 		public func patch(_ body: AppStoreConnect_Swift_SDK.AppInfoUpdateRequest) -> Request<AppStoreConnect_Swift_SDK.AppInfoResponse> {
-			.patch(path, body: body)
+			Request(method: "PATCH", url: path, body: body, id: "appInfos-update_instance")
 		}
 	}
 }

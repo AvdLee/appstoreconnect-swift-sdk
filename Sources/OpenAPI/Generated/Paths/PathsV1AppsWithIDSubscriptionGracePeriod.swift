@@ -16,7 +16,7 @@ extension APIEndpoint.V1.Apps.WithID {
 		public let path: String
 
 		public func get(fieldsSubscriptionGracePeriods: [FieldsSubscriptionGracePeriods]? = nil) -> Request<AppStoreConnect_Swift_SDK.SubscriptionGracePeriodResponse> {
-			.get(path, query: makeGetQuery(fieldsSubscriptionGracePeriods))
+			Request(method: "GET", url: path, query: makeGetQuery(fieldsSubscriptionGracePeriods), id: "apps-subscriptionGracePeriod-get_to_one_related")
 		}
 
 		private func makeGetQuery(_ fieldsSubscriptionGracePeriods: [FieldsSubscriptionGracePeriods]?) -> [(String, String?)] {
