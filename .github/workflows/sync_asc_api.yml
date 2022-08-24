@@ -13,7 +13,5 @@ jobs:
     runs-on: macos-latest
     steps:
       - uses: actions/checkout@v2
-      # Grab the latest spec and perform some manual coersion to fix errors.
-      # (see https://github.com/AvdLee/appstoreconnect-swift-sdk/pull/197)
       - run: |
         echo "XXX"
