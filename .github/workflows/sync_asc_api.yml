@@ -16,7 +16,9 @@ jobs:
       - run: |
         # Grab the latest spec and perform some manual coersion to fix errors.
         # (see https://github.com/AvdLee/appstoreconnect-swift-sdk/pull/197)
-        curl -fsSL -o - https://developer.apple.com/sample-code/app-store-connect/app-store-connect-openapi-specification.zip | bsdtar -xOf - | jq '.components.schemas.BundleIdPlatform.enum |= [ "IOS", "MAC_OS", "UNIVERSAL" ]' > Sources/OpenAPI/app_store_connect_api_2.0_openapi.json
+        curl -fsSL -o - https://developer.apple.com/sample-code/app-store-connect/app-store-connect-openapi-specification.zip
+       
+        # | bsdtar -xOf - | jq '.components.schemas.BundleIdPlatform.enum |= [ "IOS", "MAC_OS", "UNIVERSAL" ]' > Sources/OpenAPI/app_store_connect_api_2.0_openapi.json
 
         # If there are any differences, this workflow will fail
         # and send a notification. The api will then need to be
