@@ -23,8 +23,8 @@ let package = Package(
         ),
         .binaryTarget(
             name: "create-api", // Find the URL and checksum at https://github.com/createapi/createapi/releases/latest
-            url: "https://github.com/CreateAPI/CreateAPI/releases/download/0.0.5/create-api.artifactbundle.zip",
-            checksum: "89c75ec3b2938d08b961b94e70e6dd6fa0ff52a90037304d41718cd5fb58bd24" // Find at https://github.com/createapi/createapi/releases/latest
+            url: "https://github.com/CreateAPI/CreateAPI/releases/download/0.1.0/create-api.artifactbundle.zip",
+            checksum: "4e9d1fb023c52e423d57de0928da5d943e3e4c81f6cb903523654867e6372db7"
         ),
         .plugin(
             name: "CreateAPI",
