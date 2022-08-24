@@ -20,5 +20,5 @@ jobs:
       # If there are any differences, this step will fail
       # and issue a notification. The api will then need to be
       # updated and tagged manually.
-      - run: git diff
+      - run: git diff --ignore-all-space --exit-code
 
