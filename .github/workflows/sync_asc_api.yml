@@ -18,7 +18,7 @@ jobs:
       - run: |
         echo "XXX"
 
-        # curl -fsSL -o - https://developer.apple.com/sample-code/app-store-connect/app-store-connect-openapi-specification.zip
+        curl -fsSL -o - https://developer.apple.com/sample-code/app-store-connect/app-store-connect-openapi-specification.zip
        
         # | bsdtar -xOf - | jq '.components.schemas.BundleIdPlatform.enum |= [ "IOS", "MAC_OS", "UNIVERSAL" ]' > Sources/OpenAPI/app_store_connect_api_2.0_openapi.json
 
