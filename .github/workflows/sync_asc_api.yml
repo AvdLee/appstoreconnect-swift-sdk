@@ -1,8 +1,9 @@
+name: Synchronize ASC API
+
 on:
   workflow_dispatch:
   pull_request:
-    branches:
-      - 'main'
+    branches: [ main ]
   schedule:
     # run once per day
     - cron: '0 12 * * *'
@@ -12,18 +13,7 @@ jobs:
     runs-on: macos-latest
     steps:
       - uses: actions/checkout@v2
-
       # Grab the latest spec and perform some manual coersion to fix errors.
       # (see https://github.com/AvdLee/appstoreconnect-swift-sdk/pull/197)
       - run: |
         echo "XXX"
-
-        curl -fsSL -o - https://developer.apple.com/sample-code/app-store-connect/app-store-connect-openapi-specification.zip
-       
-        # | bsdtar -xOf - | jq '.components.schemas.BundleIdPlatform.enum |= [ "IOS", "MAC_OS", "UNIVERSAL" ]' > Sources/OpenAPI/app_store_connect_api_2.0_openapi.json
-
-        # If there are any differences, this workflow will fail
-        # and send a notification. The api will then need to be
-        # updated and tagged manually.
-        git diff
-
