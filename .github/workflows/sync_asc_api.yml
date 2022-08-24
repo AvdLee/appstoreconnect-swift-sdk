@@ -3,7 +3,7 @@ name: Synchronize ASC API
 on:
   workflow_dispatch:
   pull_request:
-    branches: [ main ]
+    branches: [ HEAD ]
   schedule:
     # run once per day
     - cron: '0 12 * * *'
@@ -15,5 +15,5 @@ jobs:
       - uses: actions/checkout@v2
       # Grab the latest spec and perform some manual coersion to fix errors.
       # (see https://github.com/AvdLee/appstoreconnect-swift-sdk/pull/197)
-      #
-
+      - run: |
+        echo "XXX"
