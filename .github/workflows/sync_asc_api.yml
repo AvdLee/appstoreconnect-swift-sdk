@@ -13,5 +13,4 @@ jobs:
     runs-on: macos-latest
     steps:
       - uses: actions/checkout@v2
-      - run: |
-        echo "XXX"
+      - run: echo "XXX"
