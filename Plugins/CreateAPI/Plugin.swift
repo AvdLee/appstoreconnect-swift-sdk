@@ -14,9 +14,10 @@ struct Plugin: CommandPlugin {
             "generate",
             "app_store_connect_api_2.0_openapi.json",
             "--module", "AppStoreConnect_Swift_SDK",
-            "--output", ".",
+            "--output", "Generated",
             "--config", ".create-api.yml",
-            "--split"
+            "--split",
+            "--clean"
         ]
 
         try process.run()
