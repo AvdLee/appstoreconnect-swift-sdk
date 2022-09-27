@@ -162,7 +162,7 @@ $ swift package --allow-writing-to-package-directory generate-open-api
 
 ## Applications that use the SDK
 
-- [Starly](https://apps.apple.com/app/id1644699015). Developed by [Viktor Grushevskiy](https://twitter.com/Viktorianec)
+- [Starly: reviews, reply to apps](https://apps.apple.com/app/id1644699015) developed by [Viktor Grushevskiy](https://twitter.com/Viktorianec).
 The Starly app is a project that will allow developers to manage reviews on the App Store with ease. You can reply to them, translate them to the language you want, filter them, and create templates. iOS and macOS versions available.
 
 
