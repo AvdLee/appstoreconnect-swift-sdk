@@ -160,6 +160,11 @@ $ swift package --allow-writing-to-package-directory generate-open-api
 - If you **have a feature request**, open an [issue](https://github.com/AvdLee/appstoreconnect-swift-sdk/issues).
 - If you **want to contribute**, submit a [pull request](https://github.com/AvdLee/appstoreconnect-swift-sdk/pulls).
 
+## Applications that use the SDK
+
+- [Starly](https://apps.apple.com/app/id1644699015). Developed by [Viktor Grushevskiy](https://twitter.com/Viktorianec)
+The Starly app is a project that will allow developers to manage reviews on the App Store with ease. You can reply to them, translate them to the language you want, filter them, and create templates. iOS and macOS versions available.
+
 
 ## License
 
