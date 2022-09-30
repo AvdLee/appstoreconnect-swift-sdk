@@ -1,8 +1,9 @@
 {
   "openapi": "3.0.1",
+  "x-important": "IMPORTANT:  This OpenAPI Specification is only for use in accordance with the terms of the Apple Developer Program License Agreement and terms for the use of the App Store Connect API.  You may not use this OpenAPI Specification unless you have agreed to the Apple Developer Program License Agreement, and You acknowledge and agree that the App Store Connect API (and use of this Specification in connection therewith) is for internal development, testing and reporting purposes within your team and not to provide services to any third parties or for any other use.",
   "info": {
     "title": "App Store Connect API",
-    "version": "2.0",
+    "version": "2.1",
     "x-platform": "app_store_connect_api"
   },
   "servers": [
@@ -34118,6 +34119,8 @@
               "items": {
                 "type": "string",
                 "enum": [
+                  "IPHONE_67",
+                  "IPHONE_61",
                   "IPHONE_65",
                   "IPHONE_58",
                   "IPHONE_55",
@@ -34130,8 +34133,6 @@
                   "IPAD_105",
                   "IPAD_97",
                   "DESKTOP",
-                  "WATCH_SERIES_4",
-                  "WATCH_SERIES_3",
                   "APPLE_TV"
                 ]
               }
@@ -34401,6 +34402,8 @@
               "items": {
                 "type": "string",
                 "enum": [
+                  "APP_IPHONE_67",
+                  "APP_IPHONE_61",
                   "APP_IPHONE_65",
                   "APP_IPHONE_58",
                   "APP_IPHONE_55",
@@ -34413,10 +34416,13 @@
                   "APP_IPAD_105",
                   "APP_IPAD_97",
                   "APP_DESKTOP",
+                  "APP_WATCH_ULTRA",
                   "APP_WATCH_SERIES_7",
                   "APP_WATCH_SERIES_4",
                   "APP_WATCH_SERIES_3",
                   "APP_APPLE_TV",
+                  "IMESSAGE_APP_IPHONE_67",
+                  "IMESSAGE_APP_IPHONE_61",
                   "IMESSAGE_APP_IPHONE_65",
                   "IMESSAGE_APP_IPHONE_58",
                   "IMESSAGE_APP_IPHONE_55",
@@ -37625,6 +37631,8 @@
               "items": {
                 "type": "string",
                 "enum": [
+                  "IPHONE_67",
+                  "IPHONE_61",
                   "IPHONE_65",
                   "IPHONE_58",
                   "IPHONE_55",
@@ -37637,8 +37645,6 @@
                   "IPAD_105",
                   "IPAD_97",
                   "DESKTOP",
-                  "WATCH_SERIES_4",
-                  "WATCH_SERIES_3",
                   "APPLE_TV"
                 ]
               }
@@ -37908,6 +37914,8 @@
               "items": {
                 "type": "string",
                 "enum": [
+                  "APP_IPHONE_67",
+                  "APP_IPHONE_61",
                   "APP_IPHONE_65",
                   "APP_IPHONE_58",
                   "APP_IPHONE_55",
@@ -37920,10 +37928,13 @@
                   "APP_IPAD_105",
                   "APP_IPAD_97",
                   "APP_DESKTOP",
+                  "APP_WATCH_ULTRA",
                   "APP_WATCH_SERIES_7",
                   "APP_WATCH_SERIES_4",
                   "APP_WATCH_SERIES_3",
                   "APP_APPLE_TV",
+                  "IMESSAGE_APP_IPHONE_67",
+                  "IMESSAGE_APP_IPHONE_61",
                   "IMESSAGE_APP_IPHONE_65",
                   "IMESSAGE_APP_IPHONE_58",
                   "IMESSAGE_APP_IPHONE_55",
@@ -38599,6 +38610,8 @@
               "items": {
                 "type": "string",
                 "enum": [
+                  "IPHONE_67",
+                  "IPHONE_61",
                   "IPHONE_65",
                   "IPHONE_58",
                   "IPHONE_55",
@@ -38611,8 +38624,6 @@
                   "IPAD_105",
                   "IPAD_97",
                   "DESKTOP",
-                  "WATCH_SERIES_4",
-                  "WATCH_SERIES_3",
                   "APPLE_TV"
                 ]
               }
@@ -38882,6 +38893,8 @@
               "items": {
                 "type": "string",
                 "enum": [
+                  "APP_IPHONE_67",
+                  "APP_IPHONE_61",
                   "APP_IPHONE_65",
                   "APP_IPHONE_58",
                   "APP_IPHONE_55",
@@ -38894,10 +38907,13 @@
                   "APP_IPAD_105",
                   "APP_IPAD_97",
                   "APP_DESKTOP",
+                  "APP_WATCH_ULTRA",
                   "APP_WATCH_SERIES_7",
                   "APP_WATCH_SERIES_4",
                   "APP_WATCH_SERIES_3",
                   "APP_APPLE_TV",
+                  "IMESSAGE_APP_IPHONE_67",
+                  "IMESSAGE_APP_IPHONE_61",
                   "IMESSAGE_APP_IPHONE_65",
                   "IMESSAGE_APP_IPHONE_58",
                   "IMESSAGE_APP_IPHONE_55",
@@ -96239,6 +96255,8 @@
       "PreviewType": {
         "type": "string",
         "enum": [
+          "IPHONE_67",
+          "IPHONE_61",
           "IPHONE_65",
           "IPHONE_58",
           "IPHONE_55",
@@ -96251,8 +96269,6 @@
           "IPAD_105",
           "IPAD_97",
           "DESKTOP",
-          "WATCH_SERIES_4",
-          "WATCH_SERIES_3",
           "APPLE_TV"
         ]
       },
@@ -96281,6 +96297,8 @@
       "ScreenshotDisplayType": {
         "type": "string",
         "enum": [
+          "APP_IPHONE_67",
+          "APP_IPHONE_61",
           "APP_IPHONE_65",
           "APP_IPHONE_58",
           "APP_IPHONE_55",
@@ -96293,10 +96311,13 @@
           "APP_IPAD_105",
           "APP_IPAD_97",
           "APP_DESKTOP",
+          "APP_WATCH_ULTRA",
           "APP_WATCH_SERIES_7",
           "APP_WATCH_SERIES_4",
           "APP_WATCH_SERIES_3",
           "APP_APPLE_TV",
+          "IMESSAGE_APP_IPHONE_67",
+          "IMESSAGE_APP_IPHONE_61",
           "IMESSAGE_APP_IPHONE_65",
           "IMESSAGE_APP_IPHONE_58",
           "IMESSAGE_APP_IPHONE_55",
