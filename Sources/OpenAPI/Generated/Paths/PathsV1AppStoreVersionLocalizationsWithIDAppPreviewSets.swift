@@ -33,6 +33,8 @@ extension APIEndpoint.V1.AppStoreVersionLocalizations.WithID {
 			public var include: [Include]?
 
 			public enum FilterPreviewType: String, Codable, CaseIterable {
+				case iphone67 = "IPHONE_67"
+				case iphone61 = "IPHONE_61"
 				case iphone65 = "IPHONE_65"
 				case iphone58 = "IPHONE_58"
 				case iphone55 = "IPHONE_55"
@@ -45,8 +47,6 @@ extension APIEndpoint.V1.AppStoreVersionLocalizations.WithID {
 				case ipad105 = "IPAD_105"
 				case ipad97 = "IPAD_97"
 				case desktop = "DESKTOP"
-				case watchSeries4 = "WATCH_SERIES_4"
-				case watchSeries3 = "WATCH_SERIES_3"
 				case appleTv = "APPLE_TV"
 			}
 

@@ -77,7 +77,7 @@ let request = APIEndpoint
         fieldsApps: [.appInfos, .name, .bundleID],
         limit: 2
     ))
-        
+
 // Demonstration of AsyncSequence result of APIProvider.paged(_)
 var allApps: [App] = []
 for try await pagedResult in provider.paged(request) {
@@ -90,13 +90,13 @@ let firstPageResult = try await provider.request(request)
 let firstPageApps = firstPageResult.data
 print("The first page of results has \(firstPageApps.count) apps")
 
-if provider.request(request, isPagedResponse: firstPageResult) {        
+if provider.request(request, isPagedResponse: firstPageResult) {
     if let nextPage = try await provider.request(request, pageAfter: firstPageResult) {
         let secondPageApps = nextPage.data
         print("The second page of results has \(secondPageApps.count) apps")
     }
-}            
-``` 
+}
+```
 
 ### Handling errors
 Whenever an error is returned from a request, you can get the details by catching the error as follows:
@@ -123,7 +123,7 @@ For more info regarding errors, see: [Parsing the Error Response Code](https://d
 
 ### Swift Package Manager
 
-The [Swift Package Manager](https://swift.org/package-manager/) is a tool for automating the distribution of Swift code and is integrated into the `swift` compiler. It is in early development, but this SDK does support its use on supported platforms. 
+The [Swift Package Manager](https://swift.org/package-manager/) is a tool for automating the distribution of Swift code and is integrated into the `swift` compiler. It is in early development, but this SDK does support its use on supported platforms.
 
 Once you have your Swift package set up, adding the SDK as a dependency is as easy as adding it to the `dependencies` value of your `Package.swift`.
 
@@ -138,7 +138,7 @@ dependencies: [
 To help with the development of this repository you need to follow the next steps:
 
 - clone this repository
-- download the submodules dependencies 
+- download the submodules dependencies
 ```bash
 git submodule update --init --recursive
 ```
@@ -148,11 +148,16 @@ bundle exec fastlane test
 ```
 
 ### Update OpenAPI generated code
-Using [CreateAPI](https://github.com/CreateAPI/CreateAPI), run the following:
+
+Run the following:
 
 ```bash
-$ swift package --allow-writing-to-package-directory generate-open-api
+$ make update
 ```
+
+This will attempt to download the App Store Connect [OpenAPI specification](https://developer.apple.com/sample-code/app-store-connect/app-store-connect-openapi-specification.zip) from Apple, and re-run the [CreateAPI](https://github.com/CreateAPI/CreateAPI) generator to produce the updated source code.
+
+Alternatively, you can run `make download` and `make generate` individually.
 
 ## Communication
 

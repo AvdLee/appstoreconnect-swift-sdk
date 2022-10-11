@@ -22,7 +22,7 @@ extension APIEndpoint.V1.SubscriptionOfferCodeOneTimeUseCodes {
 		public struct GetParameters {
 			public var fieldsSubscriptionOfferCodeOneTimeUseCodes: [FieldsSubscriptionOfferCodeOneTimeUseCodes]?
 			public var include: [Include]?
-			public var fieldsSubscriptionOfferCodeOneTimeUseCodeValues: [FieldsSubscriptionOfferCodeOneTimeUseCodeValues]?
+			public var fieldsSubscriptionOfferCodeOneTimeUseCodeValues: [String]?
 
 			public enum FieldsSubscriptionOfferCodeOneTimeUseCodes: String, Codable, CaseIterable {
 				case active
@@ -37,11 +37,7 @@ extension APIEndpoint.V1.SubscriptionOfferCodeOneTimeUseCodes {
 				case offerCode
 			}
 
-			public enum FieldsSubscriptionOfferCodeOneTimeUseCodeValues: String, Codable, CaseIterable {
-				case empty
-			}
-
-			public init(fieldsSubscriptionOfferCodeOneTimeUseCodes: [FieldsSubscriptionOfferCodeOneTimeUseCodes]? = nil, include: [Include]? = nil, fieldsSubscriptionOfferCodeOneTimeUseCodeValues: [FieldsSubscriptionOfferCodeOneTimeUseCodeValues]? = nil) {
+			public init(fieldsSubscriptionOfferCodeOneTimeUseCodes: [FieldsSubscriptionOfferCodeOneTimeUseCodes]? = nil, include: [Include]? = nil, fieldsSubscriptionOfferCodeOneTimeUseCodeValues: [String]? = nil) {
 				self.fieldsSubscriptionOfferCodeOneTimeUseCodes = fieldsSubscriptionOfferCodeOneTimeUseCodes
 				self.include = include
 				self.fieldsSubscriptionOfferCodeOneTimeUseCodeValues = fieldsSubscriptionOfferCodeOneTimeUseCodeValues
