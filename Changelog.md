@@ -1,3 +1,17 @@
+### 2.3.0
+- Regenerated code for App Store Connect API 2.1 changes ([#208](https://github.com/AvdLee/appstoreconnect-swift-sdk/pull/208)) via [@liamnichols](https://github.com/liamnichols)
+- Update Endpoints and Entities for 2.1 ([#207](https://github.com/AvdLee/appstoreconnect-swift-sdk/pull/207)) via [@AvdLee](https://github.com/AvdLee)
+- New section: applications that use the SDK ([#206](https://github.com/AvdLee/appstoreconnect-swift-sdk/pull/206)) via [@Viktorianec](https://github.com/Viktorianec)
+- Filter irrelevant commentary in published spec ([#205](https://github.com/AvdLee/appstoreconnect-swift-sdk/pull/205)) via [@marcprux](https://github.com/marcprux)
+- Manually update specs ([#204](https://github.com/AvdLee/appstoreconnect-swift-sdk/pull/204)) via [@AvdLee](https://github.com/AvdLee)
+- Check daily for changes in published ASC API ([#201](https://github.com/AvdLee/appstoreconnect-swift-sdk/pull/201)) via [@marcprux](https://github.com/marcprux)
+- Write CreateAPI outputs into dedicated Generated directory ([#198](https://github.com/AvdLee/appstoreconnect-swift-sdk/pull/198)) via [@liamnichols](https://github.com/liamnichols)
+- Use Swift Package Plugin for generating OpenAPI code ([#191](https://github.com/AvdLee/appstoreconnect-swift-sdk/pull/191)) via [@liamnichols](https://github.com/liamnichols)
+- Add documentation about pagination ([#187](https://github.com/AvdLee/appstoreconnect-swift-sdk/issues/187)) via [@andyj-at-aspin](https://github.com/andyj-at-aspin)
+- Fix CI for restructured lanes ([#196](https://github.com/AvdLee/appstoreconnect-swift-sdk/pull/196)) via [@AvdLee](https://github.com/AvdLee)
+- Update types to automatically conform to `Identifiable` where possible ([#192](https://github.com/AvdLee/appstoreconnect-swift-sdk/pull/192)) via [@liamnichols](https://github.com/liamnichols)
+- Merge release 2.2.0 into master ([#190](https://github.com/AvdLee/appstoreconnect-swift-sdk/pull/190)) via [@SwiftLeeBot](https://github.com/SwiftLeeBot)
+
 ### 2.2.0
 - Reduce binary size by using a different codable technique ([#189](https://github.com/AvdLee/appstoreconnect-swift-sdk/pull/189)) via [@AvdLee](https://github.com/AvdLee)
 - Merge release 2.1.0 into master ([#188](https://github.com/AvdLee/appstoreconnect-swift-sdk/pull/188)) via [@SwiftLeeBot](https://github.com/SwiftLeeBot)
