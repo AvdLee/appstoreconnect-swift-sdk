@@ -24,6 +24,7 @@ public struct DeviceUpdateRequest: Codable {
 			public enum Status: String, Codable, CaseIterable {
 				case enabled = "ENABLED"
 				case disabled = "DISABLED"
+                case processing = "PROCESSING"
 			}
 
 			public init(name: String? = nil, status: Status? = nil) {

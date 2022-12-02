@@ -36,6 +36,7 @@ public struct Device: Codable, Identifiable {
 		public enum Status: String, Codable, CaseIterable {
 			case enabled = "ENABLED"
 			case disabled = "DISABLED"
+            case processing = "PROCESSING"
 		}
 
 		public init(name: String? = nil, platform: BundleIDPlatform? = nil, udid: String? = nil, deviceClass: DeviceClass? = nil, status: Status? = nil, model: String? = nil, addedDate: Date? = nil) {

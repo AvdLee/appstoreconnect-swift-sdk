@@ -37,6 +37,7 @@ extension APIEndpoint.V1 {
 			public enum FilterStatus: String, Codable, CaseIterable {
 				case enabled = "ENABLED"
 				case disabled = "DISABLED"
+                case processing = "PROCESSING"
 			}
 
 			public enum Sort: String, Codable, CaseIterable {
