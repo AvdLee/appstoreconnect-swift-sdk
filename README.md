@@ -173,6 +173,9 @@ The Starly app is a project that will allow developers to manage reviews on the 
 - [🌟 Superstar: App Store Review manager](https://apps.apple.com/us/app/superstar-respond-to-reviews/id1635833987) developed by [Jordi Bruin](https://twitter.com/jordibruin).
 Superstar uses the App Store Connect API to help you respond to your App Store customer reviews in seconds. Use custom templates to quickly reply with professional responses. Translate reviews and your responses directly with free DeepL integration. Available for free for a limited time.
 
+- [AppsMan: Manage app metada globally](https://apps.apple.com/app/id6443788342) developed by [Karmjit Singh](https://twitter.com/CodeWithKarma).
+The AppsMan app is a project that will allow developers to manage apps localisable data on the App Store with ease. You can easily update the data for one language and copy over to other and save. You can see the previous versions details as well. Only macOS versions available.
+
 
 ## License
 
