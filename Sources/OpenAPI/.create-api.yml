@@ -26,6 +26,12 @@ paths:
   # Tries to remove redundant paths
   isRemovingRedundantPaths: true
   namespace: "APIEndpoint"
+  # Adds known types to Apple specific content-types.
+  # In CreateAPI 0.5.0 there is a typo, update this configuration key when moving to newer version
+  # (https://github.com/CreateAPI/CreateAPI/pull/78).
+  overridenBodyTypes:
+    application/vnd.apple.diagnostic-logs+json: DiagnosticLogs
+    application/vnd.apple.xcode-metrics+json: XcodeMetrics
 
 entities:
   isGeneratingCustomCodingKeys: false

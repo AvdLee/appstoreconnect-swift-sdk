@@ -15,7 +15,7 @@ extension APIEndpoint.V1.Builds.WithID {
 		/// Path: `/v1/builds/{id}/perfPowerMetrics`
 		public let path: String
 
-		public func get(parameters: GetParameters? = nil) -> Request<Data> {
+		public func get(parameters: GetParameters? = nil) -> Request<XcodeMetrics> {
 			.get(path, query: parameters?.asQuery)
 		}
 

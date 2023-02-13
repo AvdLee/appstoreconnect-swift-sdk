@@ -15,7 +15,7 @@ extension APIEndpoint.V1.DiagnosticSignatures.WithID {
 		/// Path: `/v1/diagnosticSignatures/{id}/logs`
 		public let path: String
 
-		public func get(limit: Int? = nil) -> Request<Data> {
+		public func get(limit: Int? = nil) -> Request<DiagnosticLogs> {
 			.get(path, query: makeGetQuery(limit))
 		}
 
