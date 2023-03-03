@@ -20,7 +20,7 @@ let package = Package(
             name: "AppStoreConnect-Swift-SDK",
             dependencies: ["URLQueryEncoder"],
             path: "Sources",
-            exclude: ["OpenAPI/app_store_connect_api_2.0_openapi.json"]
+            exclude: ["OpenAPI/app_store_connect_api_2.2_openapi.json"]
         ),
         .binaryTarget(
             name: "create-api", // Find the URL and checksum at https://github.com/createapi/createapi/releases/latest
