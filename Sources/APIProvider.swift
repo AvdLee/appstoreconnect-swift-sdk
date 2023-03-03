@@ -6,6 +6,9 @@
 //
 
 import Foundation
+#if canImport(FoundationNetworking)
+import FoundationNetworking
+#endif
 
 public typealias RequestCompletionHandler<T> = (Result<T, Swift.Error>) -> Void
 
