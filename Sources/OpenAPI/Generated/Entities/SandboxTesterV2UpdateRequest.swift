@@ -5,7 +5,7 @@
 
 import Foundation
 
-public struct SubscriptionGracePeriodUpdateRequest: Codable {
+public struct SandboxTesterV2UpdateRequest: Codable {
 	public var data: Data
 
 	public struct Data: Codable, Identifiable {
@@ -14,41 +14,40 @@ public struct SubscriptionGracePeriodUpdateRequest: Codable {
 		public var attributes: Attributes?
 
 		public enum `Type`: String, Codable, CaseIterable {
-			case subscriptionGracePeriods
+			case sandboxTesters
 		}
 
 		public struct Attributes: Codable {
-			public var isOptIn: Bool?
-			public var isSandboxOptIn: Bool?
-			public var duration: SubscriptionGracePeriodDuration?
-			public var renewalType: RenewalType?
+			public var territory: TerritoryCode?
+			public var isInterruptPurchases: Bool?
+			public var subscriptionRenewalRate: SubscriptionRenewalRate?
 
-			public enum RenewalType: String, Codable, CaseIterable {
-				case allRenewals = "ALL_RENEWALS"
-				case paidToPaidOnly = "PAID_TO_PAID_ONLY"
+			public enum SubscriptionRenewalRate: String, Codable, CaseIterable {
+				case monthlyRenewalEveryOneHour = "MONTHLY_RENEWAL_EVERY_ONE_HOUR"
+				case monthlyRenewalEveryThirtyMinutes = "MONTHLY_RENEWAL_EVERY_THIRTY_MINUTES"
+				case monthlyRenewalEveryFifteenMinutes = "MONTHLY_RENEWAL_EVERY_FIFTEEN_MINUTES"
+				case monthlyRenewalEveryFiveMinutes = "MONTHLY_RENEWAL_EVERY_FIVE_MINUTES"
+				case monthlyRenewalEveryThreeMinutes = "MONTHLY_RENEWAL_EVERY_THREE_MINUTES"
 			}
 
-			public init(isOptIn: Bool? = nil, isSandboxOptIn: Bool? = nil, duration: SubscriptionGracePeriodDuration? = nil, renewalType: RenewalType? = nil) {
-				self.isOptIn = isOptIn
-				self.isSandboxOptIn = isSandboxOptIn
-				self.duration = duration
-				self.renewalType = renewalType
+			public init(territory: TerritoryCode? = nil, isInterruptPurchases: Bool? = nil, subscriptionRenewalRate: SubscriptionRenewalRate? = nil) {
+				self.territory = territory
+				self.isInterruptPurchases = isInterruptPurchases
+				self.subscriptionRenewalRate = subscriptionRenewalRate
 			}
 
 			public init(from decoder: Decoder) throws {
 				let values = try decoder.container(keyedBy: StringCodingKey.self)
-				self.isOptIn = try values.decodeIfPresent(Bool.self, forKey: "optIn")
-				self.isSandboxOptIn = try values.decodeIfPresent(Bool.self, forKey: "sandboxOptIn")
-				self.duration = try values.decodeIfPresent(SubscriptionGracePeriodDuration.self, forKey: "duration")
-				self.renewalType = try values.decodeIfPresent(RenewalType.self, forKey: "renewalType")
+				self.territory = try values.decodeIfPresent(TerritoryCode.self, forKey: "territory")
+				self.isInterruptPurchases = try values.decodeIfPresent(Bool.self, forKey: "interruptPurchases")
+				self.subscriptionRenewalRate = try values.decodeIfPresent(SubscriptionRenewalRate.self, forKey: "subscriptionRenewalRate")
 			}
 
 			public func encode(to encoder: Encoder) throws {
 				var values = encoder.container(keyedBy: StringCodingKey.self)
-				try values.encodeIfPresent(isOptIn, forKey: "optIn")
-				try values.encodeIfPresent(isSandboxOptIn, forKey: "sandboxOptIn")
-				try values.encodeIfPresent(duration, forKey: "duration")
-				try values.encodeIfPresent(renewalType, forKey: "renewalType")
+				try values.encodeIfPresent(territory, forKey: "territory")
+				try values.encodeIfPresent(isInterruptPurchases, forKey: "interruptPurchases")
+				try values.encodeIfPresent(subscriptionRenewalRate, forKey: "subscriptionRenewalRate")
 			}
 		}
 

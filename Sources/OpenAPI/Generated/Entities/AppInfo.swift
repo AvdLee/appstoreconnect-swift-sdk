@@ -20,12 +20,29 @@ public struct AppInfo: Codable, Identifiable {
 		public var appStoreState: AppStoreVersionState?
 		public var appStoreAgeRating: AppStoreAgeRating?
 		public var brazilAgeRating: BrazilAgeRating?
+		public var brazilAgeRatingV2: BrazilAgeRatingV2?
 		public var kidsAgeBand: KidsAgeBand?
 
-		public init(appStoreState: AppStoreVersionState? = nil, appStoreAgeRating: AppStoreAgeRating? = nil, brazilAgeRating: BrazilAgeRating? = nil, kidsAgeBand: KidsAgeBand? = nil) {
+		public enum BrazilAgeRatingV2: String, Codable, CaseIterable {
+			case selfRatedL = "SELF_RATED_L"
+			case selfRatedTen = "SELF_RATED_TEN"
+			case selfRatedTwelve = "SELF_RATED_TWELVE"
+			case selfRatedFourteen = "SELF_RATED_FOURTEEN"
+			case selfRatedSixteen = "SELF_RATED_SIXTEEN"
+			case selfRatedEighteen = "SELF_RATED_EIGHTEEN"
+			case officialL = "OFFICIAL_L"
+			case officialTen = "OFFICIAL_TEN"
+			case officialTwelve = "OFFICIAL_TWELVE"
+			case officialFourteen = "OFFICIAL_FOURTEEN"
+			case officialSixteen = "OFFICIAL_SIXTEEN"
+			case officialEighteen = "OFFICIAL_EIGHTEEN"
+		}
+
+		public init(appStoreState: AppStoreVersionState? = nil, appStoreAgeRating: AppStoreAgeRating? = nil, brazilAgeRating: BrazilAgeRating? = nil, brazilAgeRatingV2: BrazilAgeRatingV2? = nil, kidsAgeBand: KidsAgeBand? = nil) {
 			self.appStoreState = appStoreState
 			self.appStoreAgeRating = appStoreAgeRating
 			self.brazilAgeRating = brazilAgeRating
+			self.brazilAgeRatingV2 = brazilAgeRatingV2
 			self.kidsAgeBand = kidsAgeBand
 		}
 
@@ -34,6 +51,7 @@ public struct AppInfo: Codable, Identifiable {
 			self.appStoreState = try values.decodeIfPresent(AppStoreVersionState.self, forKey: "appStoreState")
 			self.appStoreAgeRating = try values.decodeIfPresent(AppStoreAgeRating.self, forKey: "appStoreAgeRating")
 			self.brazilAgeRating = try values.decodeIfPresent(BrazilAgeRating.self, forKey: "brazilAgeRating")
+			self.brazilAgeRatingV2 = try values.decodeIfPresent(BrazilAgeRatingV2.self, forKey: "brazilAgeRatingV2")
 			self.kidsAgeBand = try values.decodeIfPresent(KidsAgeBand.self, forKey: "kidsAgeBand")
 		}
 
@@ -42,6 +60,7 @@ public struct AppInfo: Codable, Identifiable {
 			try values.encodeIfPresent(appStoreState, forKey: "appStoreState")
 			try values.encodeIfPresent(appStoreAgeRating, forKey: "appStoreAgeRating")
 			try values.encodeIfPresent(brazilAgeRating, forKey: "brazilAgeRating")
+			try values.encodeIfPresent(brazilAgeRatingV2, forKey: "brazilAgeRatingV2")
 			try values.encodeIfPresent(kidsAgeBand, forKey: "kidsAgeBand")
 		}
 	}

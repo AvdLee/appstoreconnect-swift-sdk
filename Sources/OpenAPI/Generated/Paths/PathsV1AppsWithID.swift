@@ -265,6 +265,7 @@ extension APIEndpoint.V1.Apps {
 				case appStoreAgeRating
 				case appStoreState
 				case brazilAgeRating
+				case brazilAgeRatingV2
 				case kidsAgeBand
 				case primaryCategory
 				case primarySubcategoryOne
@@ -334,8 +335,10 @@ extension APIEndpoint.V1.Apps {
 			}
 
 			public enum FieldsSubscriptionGracePeriods: String, Codable, CaseIterable {
-				case app
+				case duration
 				case optIn
+				case renewalType
+				case sandboxOptIn
 			}
 
 			public enum FieldsEndUserLicenseAgreements: String, Codable, CaseIterable {

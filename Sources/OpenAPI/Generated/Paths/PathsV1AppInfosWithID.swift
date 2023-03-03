@@ -34,6 +34,7 @@ extension APIEndpoint.V1.AppInfos {
 				case appStoreAgeRating
 				case appStoreState
 				case brazilAgeRating
+				case brazilAgeRatingV2
 				case kidsAgeBand
 				case primaryCategory
 				case primarySubcategoryOne

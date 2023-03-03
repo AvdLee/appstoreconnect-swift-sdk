@@ -26,8 +26,10 @@ extension APIEndpoint.V1.SubscriptionGracePeriods {
 		}
 
 		public enum FieldsSubscriptionGracePeriods: String, Codable, CaseIterable {
-			case app
+			case duration
 			case optIn
+			case renewalType
+			case sandboxOptIn
 		}
 
 		public func patch(_ body: AppStoreConnect_Swift_SDK.SubscriptionGracePeriodUpdateRequest) -> Request<AppStoreConnect_Swift_SDK.SubscriptionGracePeriodResponse> {
