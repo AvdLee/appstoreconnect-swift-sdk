@@ -96555,7 +96555,6 @@
               },
               "required": [
                 "code",
-                "detail",
                 "title",
                 "status"
               ]
