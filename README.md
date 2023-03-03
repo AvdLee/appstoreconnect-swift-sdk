@@ -149,6 +149,11 @@ bundle exec fastlane test
 
 ### Update OpenAPI generated code
 
+Install [jq](https://stedolan.github.io/jq/):
+```bash
+brew install jq
+```
+
 Run the following:
 
 ```bash
