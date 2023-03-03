@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import Crypto
 
 /// The JWT Header contains information specific to the App Store Connect API Keys, such as algorithm and keys.
 private struct Header: Codable {
@@ -46,41 +47,31 @@ private struct Payload: Codable {
 }
 
 protocol JWTCreatable {
-    func signedToken(using privateKey: JWT.P8PrivateKey) throws -> JWT.Token
+    func signedToken(using privateKey: JWT.PrivateKey) throws -> JWT.Token
 }
 
 struct JWT: Codable, JWTCreatable {
 
     public enum Error: Swift.Error, LocalizedError {
 
-        /// In case the provided .p8 private key is of an invalid format.
-        case invalidP8PrivateKey
-
-        /// In case the private key could not be converted using the EC Algoritm
-        case privateKeyConversionFailed
-
-        /// In case the ES256 signing failed with the given digest containing the header and payload.
-        case ES256SigningFailed
-
-        /// In case the ASN1 could not be generated.
-        case invalidASN1
+        case invalidDigest
+        case invalidBase64EncodedPrivateKey
+        case invalidPrivateKey
 
         public var localizedDescription: String {
             switch self {
-            case .invalidP8PrivateKey:
-                return "The provided .p8 private key is of an invalid format"
-            case .privateKeyConversionFailed:
-                return "Something went wrong with converting the private key"
-            case .ES256SigningFailed:
-                return "Signing the digest containing the header and payload failed using the ES256 algorithm"
-            case .invalidASN1:
-                return "Failed to generate the ASN1 value out of the private key"
+            case .invalidDigest:
+                return "Failed to generate a digest"
+            case .invalidBase64EncodedPrivateKey:
+                return "The private key is not encoded in Base64 format"
+            case .invalidPrivateKey:
+                return "The private key is not valid"
             }
         }
     }
 
     typealias Token = String
-    typealias P8PrivateKey = String
+    typealias PrivateKey = P256.Signing.PrivateKey
 
     typealias DateProvider = () -> Date
     static let defaultDateProvider: DateProvider = {
@@ -121,19 +112,18 @@ struct JWT: Codable, JWTCreatable {
     /// - Parameter privateKey: The .p8 private key to use for signing. You can get this value from the downloaded .p8 file.
     /// - Returns: A signed JWT.Token value which can be used as a value for the Bearer Authentication header.
     /// - Throws: An error if something went wrong, like a JWT.Error.
-    public func signedToken(using privateKey: P8PrivateKey) throws -> JWT.Token {
+    public func signedToken(using privateKey: JWT.PrivateKey) throws -> JWT.Token {
         try signedToken(using: privateKey, dateProvider: Self.defaultDateProvider)
     }
 
-    func signedToken(using privateKey: P8PrivateKey, dateProvider: DateProvider) throws -> JWT.Token {
-        let digest = try self.digest(dateProvider: dateProvider)
-
-        let signature = try privateKey.toASN1()
-            .toECKeyData()
-            .toPrivateKey()
-            .es256Sign(digest: digest)
-
-        return "\(digest).\(signature)"
+    func signedToken(using privateKey: JWT.PrivateKey, dateProvider: DateProvider) throws -> JWT.Token {
+        let rawDigest = try self.digest(dateProvider: dateProvider)
+        guard let digest = rawDigest.data(using: .utf8) else {
+            throw JWT.Error.invalidDigest
+        }
+        let signature = try privateKey.signature(for: digest)
+        let encoded = signature.rawRepresentation.base64URLEncoded()
+        return "\(rawDigest).\(encoded)"
     }
 }
 
@@ -147,27 +137,5 @@ internal extension Data {
             .replacingOccurrences(of: "=", with: "")
             .replacingOccurrences(of: "+", with: "-")
             .replacingOccurrences(of: "/", with: "_")
-    }
-}
-
-internal extension String {
-    func base64URLDecoded() -> String {
-        var base64 = replacingOccurrences(of: "-", with: "+")
-            .replacingOccurrences(of: "_", with: "/")
-        if base64.count % 4 != 0 {
-            base64.append(String(repeating: "=", count: 4 - base64.count % 4))
-        }
-        return base64
-    }
-}
-
-private extension JWT.P8PrivateKey {
-
-    /// Converts the PEM formatted .p8 private key to a DER-encoded ASN.1 data object.
-    func toASN1() throws -> ASN1 {
-        guard let asn1 = Data(base64Encoded: self) else {
-            throw JWT.Error.invalidP8PrivateKey
-        }
-        return asn1
     }
 }

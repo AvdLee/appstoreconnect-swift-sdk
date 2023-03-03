@@ -5,20 +5,24 @@ let package = Package(
     name: "AppStoreConnect-Swift-SDK",
     platforms: [
         .iOS(.v13),
-        .macOS(.v10_15),
+        .macOS(.v11),
         .tvOS(.v13)
     ],
     products: [
         .library(name: "AppStoreConnect-Swift-SDK", targets: ["AppStoreConnect-Swift-SDK"])
     ],
     dependencies: [
-        .package(url: "https://github.com/CreateAPI/URLQueryEncoder.git", from: "0.2.0")
+        .package(url: "https://github.com/CreateAPI/URLQueryEncoder.git", from: "0.2.0"),
+        .package(url: "https://github.com/apple/swift-crypto.git", from: "2.3.0"),
     ],
     targets: [
         .testTarget(name: "AppStoreConnect-Swift-SDK-Tests", dependencies: ["AppStoreConnect-Swift-SDK"], path: "Tests"),
         .target(
             name: "AppStoreConnect-Swift-SDK",
-            dependencies: ["URLQueryEncoder"],
+            dependencies: [
+                .productItem(name: "URLQueryEncoder", package: "URLQueryEncoder"),
+                .productItem(name: "Crypto", package: "swift-crypto")
+            ],
             path: "Sources",
             exclude: ["OpenAPI/app_store_connect_api_2.0_openapi.json"]
         ),
