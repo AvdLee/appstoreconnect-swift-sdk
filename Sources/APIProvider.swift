@@ -319,7 +319,9 @@ extension APIProvider {
     
     /// Is the type of response from the given API endpoint one that supports multiple pages of response?
     ///
-    /// This value will be true even if there is no next page to follow on the current response. A subsequent request from the provider for the next page will respond with ```nil``` immediately without wasting time communicating with the endpoint.
+    /// This value will be true even if there is no next page to follow on the current response.
+    /// A subsequent request from the provider for the next page will respond with ```nil```
+    /// immediately without wasting time communicating with the endpoint.
     ///
     /// - Parameters:
     ///   - endpoint: endpoint: The API endpoint to request.
