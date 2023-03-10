@@ -6,6 +6,10 @@
 //
 
 import Foundation
+import Crypto
+#if canImport(FoundationNetworking)
+import FoundationNetworking
+#endif
 
 public typealias RequestCompletionHandler<T> = (Result<T, Swift.Error>) -> Void
 
@@ -15,7 +19,8 @@ public struct APIConfiguration {
     /// Your private key ID from App Store Connect (Ex: 2X9R4HXF34)
     let privateKeyID: String
 
-    let privateKey: String
+    /// Your private key from App Store Connect
+    let privateKey: JWT.PrivateKey
 
     /// Your issuer ID from the API Keys page in App Store Connect (Ex: 57246542-96fe-1a63-e053-0824d011072a)
     let issuerID: String
@@ -25,10 +30,18 @@ public struct APIConfiguration {
     /// - Parameters:
     ///   - privateKeyID: Your private key ID from App Store Connect (Ex: 2X9R4HXF34)
     ///   - issuerID: Your issuer ID from the API Keys page in App Store Connect (Ex: 57246542-96fe-1a63-e053-0824d011072a)
-    public init(issuerID: String, privateKeyID: String, privateKey: String) {
+    public init(issuerID: String, privateKeyID: String, privateKey: String) throws {
         self.privateKeyID = privateKeyID
-        self.privateKey = privateKey
         self.issuerID = issuerID
+
+        guard let base64Key = Data(base64Encoded: privateKey) else {
+            throw JWT.Error.invalidBase64EncodedPrivateKey
+        }
+        do {
+            self.privateKey = try JWT.PrivateKey(derRepresentation: base64Key)
+        } catch {
+            throw JWT.Error.invalidPrivateKey
+        }
     }
 }
 
@@ -306,7 +319,9 @@ extension APIProvider {
     
     /// Is the type of response from the given API endpoint one that supports multiple pages of response?
     ///
-    /// This value will be true even if there is no next page to follow on the current response. A subsequent request from the provider for the next page will respond with ```nil``` immediately without wasting time communicating with the endpoint.
+    /// This value will be true even if there is no next page to follow on the current response.
+    /// A subsequent request from the provider for the next page will respond with ```nil```
+    /// immediately without wasting time communicating with the endpoint.
     ///
     /// - Parameters:
     ///   - endpoint: endpoint: The API endpoint to request.

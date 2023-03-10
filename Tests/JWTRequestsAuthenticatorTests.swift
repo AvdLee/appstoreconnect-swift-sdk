@@ -7,12 +7,21 @@
 //
 
 import XCTest
+import Crypto
 @testable import AppStoreConnect_Swift_SDK
 
 final class JWTRequestsAuthenticatorTests: XCTestCase {
 
-    private let configuration = APIConfiguration(issuerID: UUID().uuidString, privateKeyID: UUID().uuidString, privateKey: "MIGTAgEAMBMGByqGSM49AgEGCCqGSM49AwEHBHkwdwIBAQQgPaXyFvZfNydDEjxgjUCUxyGjXcQxiulEdGxoVbasV3GgCgYIKoZIzj0DAQehRANCAASflx/DU3TUWAoLmqE6hZL9A7i0DWpXtmIDCDiITRznC6K4/WjdIcuMcixy+m6O0IrffxJOablIX2VM8sHRscdr")
+    private var configuration: APIConfiguration!
     private lazy var urlRequest = URLRequest(url: URL(string: "www.avanderlee.com")!)
+
+    override func setUp() async throws {
+        // swiftlint:disable:next line_length
+        let privateKey = "MIGTAgEAMBMGByqGSM49AgEGCCqGSM49AwEHBHkwdwIBAQQgPaXyFvZfNydDEjxgjUCUxyGjXcQxiulEdGxoVbasV3GgCgYIKoZIzj0DAQehRANCAASflx/DU3TUWAoLmqE6hZL9A7i0DWpXtmIDCDiITRznC6K4/WjdIcuMcixy+m6O0IrffxJOablIX2VM8sHRscdr"
+        configuration = try APIConfiguration(issuerID: UUID().uuidString,
+                                             privateKeyID: UUID().uuidString,
+                                             privateKey: privateKey)
+    }
 
     /// It should correctly set the authorization header.
     func testAuthorizationHeader() {
@@ -55,7 +64,7 @@ private struct MockJWTCreator: JWTCreatable {
 
     let token: JWT.Token
 
-    func signedToken(using privateKey: JWT.P8PrivateKey) throws -> JWT.Token {
-        return token
+    func signedToken(using privateKey: JWT.PrivateKey) throws -> JWT.Token {
+        token
     }
 }
