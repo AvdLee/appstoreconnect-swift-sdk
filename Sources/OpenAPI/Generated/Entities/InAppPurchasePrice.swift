@@ -18,19 +18,27 @@ public struct InAppPurchasePrice: Codable, Identifiable {
 
 	public struct Attributes: Codable {
 		public var startDate: String?
+		public var endDate: String?
+		public var isManual: Bool?
 
-		public init(startDate: String? = nil) {
+		public init(startDate: String? = nil, endDate: String? = nil, isManual: Bool? = nil) {
 			self.startDate = startDate
+			self.endDate = endDate
+			self.isManual = isManual
 		}
 
 		public init(from decoder: Decoder) throws {
 			let values = try decoder.container(keyedBy: StringCodingKey.self)
 			self.startDate = try values.decodeIfPresent(String.self, forKey: "startDate")
+			self.endDate = try values.decodeIfPresent(String.self, forKey: "endDate")
+			self.isManual = try values.decodeIfPresent(Bool.self, forKey: "manual")
 		}
 
 		public func encode(to encoder: Encoder) throws {
 			var values = encoder.container(keyedBy: StringCodingKey.self)
 			try values.encodeIfPresent(startDate, forKey: "startDate")
+			try values.encodeIfPresent(endDate, forKey: "endDate")
+			try values.encodeIfPresent(isManual, forKey: "manual")
 		}
 	}
 

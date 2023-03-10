@@ -15,6 +15,7 @@ extension APIEndpoint.V1.AppPrices {
 		/// Path: `/v1/appPrices/{id}`
 		public let path: String
 
+		@available(*, deprecated, message: "Deprecated")
 		public func get(fieldsAppPrices: [FieldsAppPrices]? = nil, include: [Include]? = nil) -> Request<AppStoreConnect_Swift_SDK.AppPriceResponse> {
 			.get(path, query: makeGetQuery(fieldsAppPrices, include))
 		}

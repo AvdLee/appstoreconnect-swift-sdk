@@ -5,8 +5,11 @@
 
 import Foundation
 
+@available(*, deprecated, message: "Deprecated")
 public struct AppPriceTierResponse: Codable {
 	/// AppPriceTier
+	///
+	/// - warning: Deprecated.
 	public var data: AppPriceTier
 	public var included: [AppPricePoint]?
 	public var links: DocumentLinks

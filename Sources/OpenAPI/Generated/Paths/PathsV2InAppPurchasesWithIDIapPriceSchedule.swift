@@ -23,12 +23,16 @@ extension APIEndpoint.V2.InAppPurchases.WithID {
 			public var fieldsInAppPurchasePrices: [FieldsInAppPurchasePrices]?
 			public var fieldsInAppPurchases: [FieldsInAppPurchases]?
 			public var fieldsInAppPurchasePriceSchedules: [FieldsInAppPurchasePriceSchedules]?
+			public var fieldsTerritories: [FieldsTerritories]?
 			public var limitManualPrices: Int?
+			public var limitAutomaticPrices: Int?
 			public var include: [Include]?
 
 			public enum FieldsInAppPurchasePrices: String, Codable, CaseIterable {
+				case endDate
 				case inAppPurchasePricePoint
 				case inAppPurchaseV2
+				case manual
 				case startDate
 				case territory
 			}
@@ -52,20 +56,30 @@ extension APIEndpoint.V2.InAppPurchases.WithID {
 			}
 
 			public enum FieldsInAppPurchasePriceSchedules: String, Codable, CaseIterable {
+				case automaticPrices
+				case baseTerritory
 				case inAppPurchase
 				case manualPrices
+			}
+
+			public enum FieldsTerritories: String, Codable, CaseIterable {
+				case currency
 			}
 
 			public enum Include: String, Codable, CaseIterable {
+				case automaticPrices
+				case baseTerritory
 				case inAppPurchase
 				case manualPrices
 			}
 
-			public init(fieldsInAppPurchasePrices: [FieldsInAppPurchasePrices]? = nil, fieldsInAppPurchases: [FieldsInAppPurchases]? = nil, fieldsInAppPurchasePriceSchedules: [FieldsInAppPurchasePriceSchedules]? = nil, limitManualPrices: Int? = nil, include: [Include]? = nil) {
+			public init(fieldsInAppPurchasePrices: [FieldsInAppPurchasePrices]? = nil, fieldsInAppPurchases: [FieldsInAppPurchases]? = nil, fieldsInAppPurchasePriceSchedules: [FieldsInAppPurchasePriceSchedules]? = nil, fieldsTerritories: [FieldsTerritories]? = nil, limitManualPrices: Int? = nil, limitAutomaticPrices: Int? = nil, include: [Include]? = nil) {
 				self.fieldsInAppPurchasePrices = fieldsInAppPurchasePrices
 				self.fieldsInAppPurchases = fieldsInAppPurchases
 				self.fieldsInAppPurchasePriceSchedules = fieldsInAppPurchasePriceSchedules
+				self.fieldsTerritories = fieldsTerritories
 				self.limitManualPrices = limitManualPrices
+				self.limitAutomaticPrices = limitAutomaticPrices
 				self.include = include
 			}
 
@@ -74,7 +88,9 @@ extension APIEndpoint.V2.InAppPurchases.WithID {
 				encoder.encode(fieldsInAppPurchasePrices, forKey: "fields[inAppPurchasePrices]")
 				encoder.encode(fieldsInAppPurchases, forKey: "fields[inAppPurchases]")
 				encoder.encode(fieldsInAppPurchasePriceSchedules, forKey: "fields[inAppPurchasePriceSchedules]")
+				encoder.encode(fieldsTerritories, forKey: "fields[territories]")
 				encoder.encode(limitManualPrices, forKey: "limit[manualPrices]")
+				encoder.encode(limitAutomaticPrices, forKey: "limit[automaticPrices]")
 				encoder.encode(include, forKey: "include")
 				return encoder.items
 			}

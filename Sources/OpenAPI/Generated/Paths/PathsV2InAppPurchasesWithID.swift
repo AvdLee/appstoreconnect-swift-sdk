@@ -98,6 +98,8 @@ extension APIEndpoint.V2.InAppPurchases {
 			}
 
 			public enum FieldsInAppPurchasePriceSchedules: String, Codable, CaseIterable {
+				case automaticPrices
+				case baseTerritory
 				case inAppPurchase
 				case manualPrices
 			}

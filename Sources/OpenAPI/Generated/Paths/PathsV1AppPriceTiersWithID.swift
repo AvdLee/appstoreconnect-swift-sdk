@@ -15,6 +15,7 @@ extension APIEndpoint.V1.AppPriceTiers {
 		/// Path: `/v1/appPriceTiers/{id}`
 		public let path: String
 
+		@available(*, deprecated, message: "Deprecated")
 		public func get(parameters: GetParameters? = nil) -> Request<AppStoreConnect_Swift_SDK.AppPriceTierResponse> {
 			.get(path, query: parameters?.asQuery)
 		}

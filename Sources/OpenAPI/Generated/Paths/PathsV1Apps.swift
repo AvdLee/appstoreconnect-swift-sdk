@@ -33,10 +33,12 @@ extension APIEndpoint.V1 {
 			public var limit: Int?
 			public var include: [Include]?
 			public var fieldsBetaAppReviewDetails: [FieldsBetaAppReviewDetails]?
+			public var fieldsAppPriceSchedules: [FieldsAppPriceSchedules]?
 			public var fieldsCiProducts: [FieldsCiProducts]?
 			public var fieldsReviewSubmissions: [FieldsReviewSubmissions]?
 			public var fieldsBetaGroups: [FieldsBetaGroups]?
 			public var fieldsPromotedPurchases: [FieldsPromotedPurchases]?
+			public var fieldsAppAvailabilities: [FieldsAppAvailabilities]?
 			public var fieldsCustomerReviews: [FieldsCustomerReviews]?
 			public var fieldsAppEvents: [FieldsAppEvents]?
 			public var fieldsBuilds: [FieldsBuilds]?
@@ -113,10 +115,13 @@ extension APIEndpoint.V1 {
 			}
 
 			public enum FieldsApps: String, Codable, CaseIterable {
+				case appAvailability
 				case appClips
 				case appCustomProductPages
 				case appEvents
 				case appInfos
+				case appPricePoints
+				case appPriceSchedule
 				case appStoreVersions
 				case availableInNewTerritories
 				case availableTerritories
@@ -191,6 +196,13 @@ extension APIEndpoint.V1 {
 				case notes
 			}
 
+			public enum FieldsAppPriceSchedules: String, Codable, CaseIterable {
+				case app
+				case automaticPrices
+				case baseTerritory
+				case manualPrices
+			}
+
 			public enum FieldsCiProducts: String, Codable, CaseIterable {
 				case additionalRepositories
 				case app
@@ -239,6 +251,12 @@ extension APIEndpoint.V1 {
 				case state
 				case subscription
 				case visibleForAllUsers
+			}
+
+			public enum FieldsAppAvailabilities: String, Codable, CaseIterable {
+				case app
+				case availableInNewTerritories
+				case availableTerritories
 			}
 
 			public enum FieldsCustomerReviews: String, Codable, CaseIterable {
@@ -436,7 +454,7 @@ extension APIEndpoint.V1 {
 				case platform
 			}
 
-			public init(filterAppStoreVersionsAppStoreState: [FilterAppStoreVersionsAppStoreState]? = nil, filterAppStoreVersionsPlatform: [FilterAppStoreVersionsPlatform]? = nil, filterBundleID: [String]? = nil, filterName: [String]? = nil, filterSku: [String]? = nil, filterAppStoreVersions: [String]? = nil, filterID: [String]? = nil, isExistsGameCenterEnabledVersions: Bool? = nil, sort: [Sort]? = nil, fieldsApps: [FieldsApps]? = nil, limit: Int? = nil, include: [Include]? = nil, fieldsBetaAppReviewDetails: [FieldsBetaAppReviewDetails]? = nil, fieldsCiProducts: [FieldsCiProducts]? = nil, fieldsReviewSubmissions: [FieldsReviewSubmissions]? = nil, fieldsBetaGroups: [FieldsBetaGroups]? = nil, fieldsPromotedPurchases: [FieldsPromotedPurchases]? = nil, fieldsCustomerReviews: [FieldsCustomerReviews]? = nil, fieldsAppEvents: [FieldsAppEvents]? = nil, fieldsBuilds: [FieldsBuilds]? = nil, fieldsBetaLicenseAgreements: [FieldsBetaLicenseAgreements]? = nil, fieldsAppClips: [FieldsAppClips]? = nil, fieldsAppInfos: [FieldsAppInfos]? = nil, fieldsBetaAppLocalizations: [FieldsBetaAppLocalizations]? = nil, fieldsAppPricePoints: [FieldsAppPricePoints]? = nil, fieldsInAppPurchases: [FieldsInAppPurchases]? = nil, fieldsPreReleaseVersions: [FieldsPreReleaseVersions]? = nil, fieldsSubscriptionGroups: [FieldsSubscriptionGroups]? = nil, fieldsAppPrices: [FieldsAppPrices]? = nil, fieldsAppPreOrders: [FieldsAppPreOrders]? = nil, fieldsGameCenterEnabledVersions: [FieldsGameCenterEnabledVersions]? = nil, fieldsSubscriptionGracePeriods: [FieldsSubscriptionGracePeriods]? = nil, fieldsEndUserLicenseAgreements: [FieldsEndUserLicenseAgreements]? = nil, fieldsAppStoreVersions: [FieldsAppStoreVersions]? = nil, fieldsAppCustomProductPages: [FieldsAppCustomProductPages]? = nil, fieldsTerritories: [FieldsTerritories]? = nil, fieldsPerfPowerMetrics: [FieldsPerfPowerMetrics]? = nil, limitAppClips: Int? = nil, limitAppCustomProductPages: Int? = nil, limitAppEvents: Int? = nil, limitAppInfos: Int? = nil, limitAppStoreVersions: Int? = nil, limitAvailableTerritories: Int? = nil, limitBetaAppLocalizations: Int? = nil, limitBetaGroups: Int? = nil, limitBuilds: Int? = nil, limitGameCenterEnabledVersions: Int? = nil, limitInAppPurchases: Int? = nil, limitInAppPurchasesV2: Int? = nil, limitPreReleaseVersions: Int? = nil, limitPrices: Int? = nil, limitPromotedPurchases: Int? = nil, limitReviewSubmissions: Int? = nil, limitSubscriptionGroups: Int? = nil) {
+			public init(filterAppStoreVersionsAppStoreState: [FilterAppStoreVersionsAppStoreState]? = nil, filterAppStoreVersionsPlatform: [FilterAppStoreVersionsPlatform]? = nil, filterBundleID: [String]? = nil, filterName: [String]? = nil, filterSku: [String]? = nil, filterAppStoreVersions: [String]? = nil, filterID: [String]? = nil, isExistsGameCenterEnabledVersions: Bool? = nil, sort: [Sort]? = nil, fieldsApps: [FieldsApps]? = nil, limit: Int? = nil, include: [Include]? = nil, fieldsBetaAppReviewDetails: [FieldsBetaAppReviewDetails]? = nil, fieldsAppPriceSchedules: [FieldsAppPriceSchedules]? = nil, fieldsCiProducts: [FieldsCiProducts]? = nil, fieldsReviewSubmissions: [FieldsReviewSubmissions]? = nil, fieldsBetaGroups: [FieldsBetaGroups]? = nil, fieldsPromotedPurchases: [FieldsPromotedPurchases]? = nil, fieldsAppAvailabilities: [FieldsAppAvailabilities]? = nil, fieldsCustomerReviews: [FieldsCustomerReviews]? = nil, fieldsAppEvents: [FieldsAppEvents]? = nil, fieldsBuilds: [FieldsBuilds]? = nil, fieldsBetaLicenseAgreements: [FieldsBetaLicenseAgreements]? = nil, fieldsAppClips: [FieldsAppClips]? = nil, fieldsAppInfos: [FieldsAppInfos]? = nil, fieldsBetaAppLocalizations: [FieldsBetaAppLocalizations]? = nil, fieldsAppPricePoints: [FieldsAppPricePoints]? = nil, fieldsInAppPurchases: [FieldsInAppPurchases]? = nil, fieldsPreReleaseVersions: [FieldsPreReleaseVersions]? = nil, fieldsSubscriptionGroups: [FieldsSubscriptionGroups]? = nil, fieldsAppPrices: [FieldsAppPrices]? = nil, fieldsAppPreOrders: [FieldsAppPreOrders]? = nil, fieldsGameCenterEnabledVersions: [FieldsGameCenterEnabledVersions]? = nil, fieldsSubscriptionGracePeriods: [FieldsSubscriptionGracePeriods]? = nil, fieldsEndUserLicenseAgreements: [FieldsEndUserLicenseAgreements]? = nil, fieldsAppStoreVersions: [FieldsAppStoreVersions]? = nil, fieldsAppCustomProductPages: [FieldsAppCustomProductPages]? = nil, fieldsTerritories: [FieldsTerritories]? = nil, fieldsPerfPowerMetrics: [FieldsPerfPowerMetrics]? = nil, limitAppClips: Int? = nil, limitAppCustomProductPages: Int? = nil, limitAppEvents: Int? = nil, limitAppInfos: Int? = nil, limitAppStoreVersions: Int? = nil, limitAvailableTerritories: Int? = nil, limitBetaAppLocalizations: Int? = nil, limitBetaGroups: Int? = nil, limitBuilds: Int? = nil, limitGameCenterEnabledVersions: Int? = nil, limitInAppPurchases: Int? = nil, limitInAppPurchasesV2: Int? = nil, limitPreReleaseVersions: Int? = nil, limitPrices: Int? = nil, limitPromotedPurchases: Int? = nil, limitReviewSubmissions: Int? = nil, limitSubscriptionGroups: Int? = nil) {
 				self.filterAppStoreVersionsAppStoreState = filterAppStoreVersionsAppStoreState
 				self.filterAppStoreVersionsPlatform = filterAppStoreVersionsPlatform
 				self.filterBundleID = filterBundleID
@@ -450,10 +468,12 @@ extension APIEndpoint.V1 {
 				self.limit = limit
 				self.include = include
 				self.fieldsBetaAppReviewDetails = fieldsBetaAppReviewDetails
+				self.fieldsAppPriceSchedules = fieldsAppPriceSchedules
 				self.fieldsCiProducts = fieldsCiProducts
 				self.fieldsReviewSubmissions = fieldsReviewSubmissions
 				self.fieldsBetaGroups = fieldsBetaGroups
 				self.fieldsPromotedPurchases = fieldsPromotedPurchases
+				self.fieldsAppAvailabilities = fieldsAppAvailabilities
 				self.fieldsCustomerReviews = fieldsCustomerReviews
 				self.fieldsAppEvents = fieldsAppEvents
 				self.fieldsBuilds = fieldsBuilds
@@ -508,10 +528,12 @@ extension APIEndpoint.V1 {
 				encoder.encode(limit, forKey: "limit")
 				encoder.encode(include, forKey: "include")
 				encoder.encode(fieldsBetaAppReviewDetails, forKey: "fields[betaAppReviewDetails]")
+				encoder.encode(fieldsAppPriceSchedules, forKey: "fields[appPriceSchedules]")
 				encoder.encode(fieldsCiProducts, forKey: "fields[ciProducts]")
 				encoder.encode(fieldsReviewSubmissions, forKey: "fields[reviewSubmissions]")
 				encoder.encode(fieldsBetaGroups, forKey: "fields[betaGroups]")
 				encoder.encode(fieldsPromotedPurchases, forKey: "fields[promotedPurchases]")
+				encoder.encode(fieldsAppAvailabilities, forKey: "fields[appAvailabilities]")
 				encoder.encode(fieldsCustomerReviews, forKey: "fields[customerReviews]")
 				encoder.encode(fieldsAppEvents, forKey: "fields[appEvents]")
 				encoder.encode(fieldsBuilds, forKey: "fields[builds]")

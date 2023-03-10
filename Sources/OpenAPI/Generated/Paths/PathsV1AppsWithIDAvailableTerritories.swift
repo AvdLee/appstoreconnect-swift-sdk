@@ -15,6 +15,7 @@ extension APIEndpoint.V1.Apps.WithID {
 		/// Path: `/v1/apps/{id}/availableTerritories`
 		public let path: String
 
+		@available(*, deprecated, message: "Deprecated")
 		public func get(fieldsTerritories: [FieldsTerritories]? = nil, limit: Int? = nil) -> Request<AppStoreConnect_Swift_SDK.TerritoriesResponse> {
 			.get(path, query: makeGetQuery(fieldsTerritories, limit))
 		}
