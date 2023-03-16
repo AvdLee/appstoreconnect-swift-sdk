@@ -26,8 +26,10 @@ extension APIEndpoint.V1.Apps.WithID {
 		}
 
 		public enum FieldsSubscriptionGracePeriods: String, Codable, CaseIterable {
-			case app
+			case duration
 			case optIn
+			case renewalType
+			case sandboxOptIn
 		}
 	}
 }

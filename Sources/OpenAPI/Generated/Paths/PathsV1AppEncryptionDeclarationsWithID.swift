@@ -22,16 +22,21 @@ extension APIEndpoint.V1.AppEncryptionDeclarations {
 		public struct GetParameters {
 			public var fieldsAppEncryptionDeclarations: [FieldsAppEncryptionDeclarations]?
 			public var include: [Include]?
+			public var fieldsAppEncryptionDeclarationDocuments: [FieldsAppEncryptionDeclarationDocuments]?
 			public var fieldsApps: [FieldsApps]?
+			public var limitBuilds: Int?
 
 			public enum FieldsAppEncryptionDeclarations: String, Codable, CaseIterable {
 				case app
+				case appDescription
+				case appEncryptionDeclarationDocument
 				case appEncryptionDeclarationState
 				case availableOnFrenchStore
 				case builds
 				case codeValue
 				case containsProprietaryCryptography
 				case containsThirdPartyCryptography
+				case createdDate
 				case documentName
 				case documentType
 				case documentURL = "documentUrl"
@@ -43,6 +48,20 @@ extension APIEndpoint.V1.AppEncryptionDeclarations {
 
 			public enum Include: String, Codable, CaseIterable {
 				case app
+				case appEncryptionDeclarationDocument
+				case builds
+			}
+
+			public enum FieldsAppEncryptionDeclarationDocuments: String, Codable, CaseIterable {
+				case appEncryptionDeclaration
+				case assetDeliveryState
+				case assetToken
+				case downloadURL = "downloadUrl"
+				case fileName
+				case fileSize
+				case sourceFileChecksum
+				case uploadOperations
+				case uploaded
 			}
 
 			public enum FieldsApps: String, Codable, CaseIterable {
@@ -86,17 +105,21 @@ extension APIEndpoint.V1.AppEncryptionDeclarations {
 				case subscriptionStatusURLVersionForSandbox = "subscriptionStatusUrlVersionForSandbox"
 			}
 
-			public init(fieldsAppEncryptionDeclarations: [FieldsAppEncryptionDeclarations]? = nil, include: [Include]? = nil, fieldsApps: [FieldsApps]? = nil) {
+			public init(fieldsAppEncryptionDeclarations: [FieldsAppEncryptionDeclarations]? = nil, include: [Include]? = nil, fieldsAppEncryptionDeclarationDocuments: [FieldsAppEncryptionDeclarationDocuments]? = nil, fieldsApps: [FieldsApps]? = nil, limitBuilds: Int? = nil) {
 				self.fieldsAppEncryptionDeclarations = fieldsAppEncryptionDeclarations
 				self.include = include
+				self.fieldsAppEncryptionDeclarationDocuments = fieldsAppEncryptionDeclarationDocuments
 				self.fieldsApps = fieldsApps
+				self.limitBuilds = limitBuilds
 			}
 
 			public var asQuery: [(String, String?)] {
 				let encoder = URLQueryEncoder(explode: false)
 				encoder.encode(fieldsAppEncryptionDeclarations, forKey: "fields[appEncryptionDeclarations]")
 				encoder.encode(include, forKey: "include")
+				encoder.encode(fieldsAppEncryptionDeclarationDocuments, forKey: "fields[appEncryptionDeclarationDocuments]")
 				encoder.encode(fieldsApps, forKey: "fields[apps]")
+				encoder.encode(limitBuilds, forKey: "limit[builds]")
 				return encoder.items
 			}
 		}

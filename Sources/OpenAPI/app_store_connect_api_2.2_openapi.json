@@ -2,7 +2,7 @@
   "openapi": "3.0.1",
   "info": {
     "title": "App Store Connect API",
-    "version": "2.1",
+    "version": "2.2",
     "x-platform": "app_store_connect_api"
   },
   "servers": [
@@ -3024,6 +3024,225 @@
         }
       ]
     },
+    "/v1/appEncryptionDeclarationDocuments": {
+      "post": {
+        "tags": [
+          "AppEncryptionDeclarationDocuments"
+        ],
+        "operationId": "appEncryptionDeclarationDocuments-create_instance",
+        "requestBody": {
+          "description": "AppEncryptionDeclarationDocument representation",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/AppEncryptionDeclarationDocumentCreateRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "400": {
+            "description": "Parameter error(s)",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "201": {
+            "description": "Single AppEncryptionDeclarationDocument",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AppEncryptionDeclarationDocumentResponse"
+                }
+              }
+            }
+          },
+          "409": {
+            "description": "Request entity error(s)",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/v1/appEncryptionDeclarationDocuments/{id}": {
+      "get": {
+        "tags": [
+          "AppEncryptionDeclarationDocuments"
+        ],
+        "operationId": "appEncryptionDeclarationDocuments-get_instance",
+        "parameters": [
+          {
+            "name": "fields[appEncryptionDeclarationDocuments]",
+            "in": "query",
+            "description": "the fields to include for returned resources of type appEncryptionDeclarationDocuments",
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "string",
+                "enum": [
+                  "appEncryptionDeclaration",
+                  "assetDeliveryState",
+                  "assetToken",
+                  "downloadUrl",
+                  "fileName",
+                  "fileSize",
+                  "sourceFileChecksum",
+                  "uploadOperations",
+                  "uploaded"
+                ]
+              }
+            },
+            "style": "form",
+            "explode": false,
+            "required": false
+          }
+        ],
+        "responses": {
+          "400": {
+            "description": "Parameter error(s)",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not found error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "200": {
+            "description": "Single AppEncryptionDeclarationDocument",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AppEncryptionDeclarationDocumentResponse"
+                }
+              }
+            }
+          }
+        }
+      },
+      "patch": {
+        "tags": [
+          "AppEncryptionDeclarationDocuments"
+        ],
+        "operationId": "appEncryptionDeclarationDocuments-update_instance",
+        "requestBody": {
+          "description": "AppEncryptionDeclarationDocument representation",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/AppEncryptionDeclarationDocumentUpdateRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "400": {
+            "description": "Parameter error(s)",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not found error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "200": {
+            "description": "Single AppEncryptionDeclarationDocument",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AppEncryptionDeclarationDocumentResponse"
+                }
+              }
+            }
+          },
+          "409": {
+            "description": "Request entity error(s)",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          }
+        }
+      },
+      "parameters": [
+        {
+          "name": "id",
+          "in": "path",
+          "description": "the id of the requested resource",
+          "schema": {
+            "type": "string"
+          },
+          "style": "simple",
+          "required": true
+        }
+      ]
+    },
     "/v1/appEncryptionDeclarations": {
       "get": {
         "tags": [
@@ -3088,12 +3307,15 @@
                 "type": "string",
                 "enum": [
                   "app",
+                  "appDescription",
+                  "appEncryptionDeclarationDocument",
                   "appEncryptionDeclarationState",
                   "availableOnFrenchStore",
                   "builds",
                   "codeValue",
                   "containsProprietaryCryptography",
                   "containsThirdPartyCryptography",
+                  "createdDate",
                   "documentName",
                   "documentType",
                   "documentUrl",
@@ -3127,7 +3349,34 @@
               "items": {
                 "type": "string",
                 "enum": [
-                  "app"
+                  "app",
+                  "appEncryptionDeclarationDocument",
+                  "builds"
+                ]
+              }
+            },
+            "style": "form",
+            "explode": false,
+            "required": false
+          },
+          {
+            "name": "fields[appEncryptionDeclarationDocuments]",
+            "in": "query",
+            "description": "the fields to include for returned resources of type appEncryptionDeclarationDocuments",
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "string",
+                "enum": [
+                  "appEncryptionDeclaration",
+                  "assetDeliveryState",
+                  "assetToken",
+                  "downloadUrl",
+                  "fileName",
+                  "fileSize",
+                  "sourceFileChecksum",
+                  "uploadOperations",
+                  "uploaded"
                 ]
               }
             },
@@ -3187,6 +3436,17 @@
             },
             "style": "form",
             "explode": false,
+            "required": false
+          },
+          {
+            "name": "limit[builds]",
+            "in": "query",
+            "description": "maximum number of related builds returned (when they are included)",
+            "schema": {
+              "type": "integer",
+              "maximum": 50
+            },
+            "style": "form",
             "required": false
           }
         ],
@@ -3241,12 +3501,15 @@
                 "type": "string",
                 "enum": [
                   "app",
+                  "appDescription",
+                  "appEncryptionDeclarationDocument",
                   "appEncryptionDeclarationState",
                   "availableOnFrenchStore",
                   "builds",
                   "codeValue",
                   "containsProprietaryCryptography",
                   "containsThirdPartyCryptography",
+                  "createdDate",
                   "documentName",
                   "documentType",
                   "documentUrl",
@@ -3270,7 +3533,34 @@
               "items": {
                 "type": "string",
                 "enum": [
-                  "app"
+                  "app",
+                  "appEncryptionDeclarationDocument",
+                  "builds"
+                ]
+              }
+            },
+            "style": "form",
+            "explode": false,
+            "required": false
+          },
+          {
+            "name": "fields[appEncryptionDeclarationDocuments]",
+            "in": "query",
+            "description": "the fields to include for returned resources of type appEncryptionDeclarationDocuments",
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "string",
+                "enum": [
+                  "appEncryptionDeclaration",
+                  "assetDeliveryState",
+                  "assetToken",
+                  "downloadUrl",
+                  "fileName",
+                  "fileSize",
+                  "sourceFileChecksum",
+                  "uploadOperations",
+                  "uploaded"
                 ]
               }
             },
@@ -3330,6 +3620,17 @@
             },
             "style": "form",
             "explode": false,
+            "required": false
+          },
+          {
+            "name": "limit[builds]",
+            "in": "query",
+            "description": "maximum number of related builds returned (when they are included)",
+            "schema": {
+              "type": "integer",
+              "maximum": 50
+            },
+            "style": "form",
             "required": false
           }
         ],
@@ -4955,6 +5256,7 @@
                   "appStoreAgeRating",
                   "appStoreState",
                   "brazilAgeRating",
+                  "brazilAgeRatingV2",
                   "kidsAgeBand",
                   "primaryCategory",
                   "primarySubcategoryOne",
@@ -10589,6 +10891,7 @@
                   "appStoreAgeRating",
                   "appStoreState",
                   "brazilAgeRating",
+                  "brazilAgeRatingV2",
                   "kidsAgeBand",
                   "primaryCategory",
                   "primarySubcategoryOne",
@@ -10807,8 +11110,10 @@
               "items": {
                 "type": "string",
                 "enum": [
-                  "app",
-                  "optIn"
+                  "duration",
+                  "optIn",
+                  "renewalType",
+                  "sandboxOptIn"
                 ]
               }
             },
@@ -11522,6 +11827,7 @@
                   "appStoreAgeRating",
                   "appStoreState",
                   "brazilAgeRating",
+                  "brazilAgeRatingV2",
                   "kidsAgeBand",
                   "primaryCategory",
                   "primarySubcategoryOne",
@@ -11740,8 +12046,10 @@
               "items": {
                 "type": "string",
                 "enum": [
-                  "app",
-                  "optIn"
+                  "duration",
+                  "optIn",
+                  "renewalType",
+                  "sandboxOptIn"
                 ]
               }
             },
@@ -17334,12 +17642,15 @@
                 "type": "string",
                 "enum": [
                   "app",
+                  "appDescription",
+                  "appEncryptionDeclarationDocument",
                   "appEncryptionDeclarationState",
                   "availableOnFrenchStore",
                   "builds",
                   "codeValue",
                   "containsProprietaryCryptography",
                   "containsThirdPartyCryptography",
+                  "createdDate",
                   "documentName",
                   "documentType",
                   "documentUrl",
@@ -17776,12 +18087,15 @@
                 "type": "string",
                 "enum": [
                   "app",
+                  "appDescription",
+                  "appEncryptionDeclarationDocument",
                   "appEncryptionDeclarationState",
                   "availableOnFrenchStore",
                   "builds",
                   "codeValue",
                   "containsProprietaryCryptography",
                   "containsThirdPartyCryptography",
+                  "createdDate",
                   "documentName",
                   "documentType",
                   "documentUrl",
@@ -23977,7 +24291,7 @@
             "description": "maximum number of related pricePoints returned (when they are included)",
             "schema": {
               "type": "integer",
-              "maximum": 40000
+              "maximum": 8000
             },
             "style": "form",
             "required": false
@@ -26983,6 +27297,225 @@
         }
       }
     },
+    "/v2/sandboxTesters": {
+      "get": {
+        "tags": [
+          "SandboxTesters"
+        ],
+        "operationId": "sandboxTesters-get_collection",
+        "parameters": [
+          {
+            "name": "fields[sandboxTesters]",
+            "in": "query",
+            "description": "the fields to include for returned resources of type sandboxTesters",
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "string",
+                "enum": [
+                  "acAccountName",
+                  "applePayCompatible",
+                  "firstName",
+                  "interruptPurchases",
+                  "lastName",
+                  "subscriptionRenewalRate",
+                  "territory"
+                ]
+              }
+            },
+            "style": "form",
+            "explode": false,
+            "required": false
+          },
+          {
+            "name": "limit",
+            "in": "query",
+            "description": "maximum resources per page",
+            "schema": {
+              "type": "integer",
+              "maximum": 200
+            },
+            "style": "form"
+          }
+        ],
+        "responses": {
+          "400": {
+            "description": "Parameter error(s)",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "200": {
+            "description": "List of SandboxTesters",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SandboxTestersV2Response"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/v2/sandboxTesters/{id}": {
+      "patch": {
+        "tags": [
+          "SandboxTesters"
+        ],
+        "operationId": "sandboxTesters-update_instance",
+        "requestBody": {
+          "description": "SandboxTester representation",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/SandboxTesterV2UpdateRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "400": {
+            "description": "Parameter error(s)",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not found error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "200": {
+            "description": "Single SandboxTester",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SandboxTesterV2Response"
+                }
+              }
+            }
+          },
+          "409": {
+            "description": "Request entity error(s)",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          }
+        }
+      },
+      "parameters": [
+        {
+          "name": "id",
+          "in": "path",
+          "description": "the id of the requested resource",
+          "schema": {
+            "type": "string"
+          },
+          "style": "simple",
+          "required": true
+        }
+      ]
+    },
+    "/v2/sandboxTestersClearPurchaseHistoryRequest": {
+      "post": {
+        "tags": [
+          "SandboxTestersClearPurchaseHistoryRequest"
+        ],
+        "operationId": "sandboxTestersClearPurchaseHistoryRequest-create_instance",
+        "requestBody": {
+          "description": "SandboxTestersClearPurchaseHistoryRequest representation",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/SandboxTestersClearPurchaseHistoryRequestV2CreateRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "400": {
+            "description": "Parameter error(s)",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "201": {
+            "description": "Single SandboxTestersClearPurchaseHistoryRequest",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SandboxTestersClearPurchaseHistoryRequestV2Response"
+                }
+              }
+            }
+          },
+          "409": {
+            "description": "Request entity error(s)",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
     "/v1/scmGitReferences/{id}": {
       "get": {
         "tags": [
@@ -28016,8 +28549,10 @@
               "items": {
                 "type": "string",
                 "enum": [
-                  "app",
-                  "optIn"
+                  "duration",
+                  "optIn",
+                  "renewalType",
+                  "sandboxOptIn"
                 ]
               }
             },
@@ -35216,6 +35751,108 @@
         }
       ]
     },
+    "/v1/appEncryptionDeclarations/{id}/relationships/appEncryptionDeclarationDocument": {
+      "parameters": [
+        {
+          "name": "id",
+          "in": "path",
+          "description": "the id of the requested resource",
+          "schema": {
+            "type": "string"
+          },
+          "style": "simple",
+          "required": true
+        }
+      ]
+    },
+    "/v1/appEncryptionDeclarations/{id}/appEncryptionDeclarationDocument": {
+      "get": {
+        "tags": [
+          "AppEncryptionDeclarations"
+        ],
+        "operationId": "appEncryptionDeclarations-appEncryptionDeclarationDocument-get_to_one_related",
+        "parameters": [
+          {
+            "name": "fields[appEncryptionDeclarationDocuments]",
+            "in": "query",
+            "description": "the fields to include for returned resources of type appEncryptionDeclarationDocuments",
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "string",
+                "enum": [
+                  "appEncryptionDeclaration",
+                  "assetDeliveryState",
+                  "assetToken",
+                  "downloadUrl",
+                  "fileName",
+                  "fileSize",
+                  "sourceFileChecksum",
+                  "uploadOperations",
+                  "uploaded"
+                ]
+              }
+            },
+            "style": "form",
+            "explode": false
+          }
+        ],
+        "responses": {
+          "400": {
+            "description": "Parameter error(s)",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not found error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "200": {
+            "description": "Single AppEncryptionDeclarationDocument",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AppEncryptionDeclarationDocumentResponse"
+                }
+              }
+            }
+          }
+        }
+      },
+      "parameters": [
+        {
+          "name": "id",
+          "in": "path",
+          "description": "the id of the requested resource",
+          "schema": {
+            "type": "string"
+          },
+          "style": "simple",
+          "required": true
+        }
+      ]
+    },
     "/v1/appEncryptionDeclarations/{id}/relationships/builds": {
       "post": {
         "tags": [
@@ -35966,6 +36603,7 @@
                   "appStoreAgeRating",
                   "appStoreState",
                   "brazilAgeRating",
+                  "brazilAgeRatingV2",
                   "kidsAgeBand",
                   "primaryCategory",
                   "primarySubcategoryOne",
@@ -36122,6 +36760,33 @@
             },
             "style": "form",
             "explode": false
+          },
+          {
+            "name": "limit[subcategories]",
+            "in": "query",
+            "description": "maximum number of related subcategories returned (when they are included)",
+            "schema": {
+              "type": "integer",
+              "maximum": 50
+            },
+            "style": "form"
+          },
+          {
+            "name": "include",
+            "in": "query",
+            "description": "comma-separated list of relationships to include",
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "string",
+                "enum": [
+                  "parent",
+                  "subcategories"
+                ]
+              }
+            },
+            "style": "form",
+            "explode": false
           }
         ],
         "responses": {
@@ -36212,6 +36877,33 @@
                 "enum": [
                   "parent",
                   "platforms",
+                  "subcategories"
+                ]
+              }
+            },
+            "style": "form",
+            "explode": false
+          },
+          {
+            "name": "limit[subcategories]",
+            "in": "query",
+            "description": "maximum number of related subcategories returned (when they are included)",
+            "schema": {
+              "type": "integer",
+              "maximum": 50
+            },
+            "style": "form"
+          },
+          {
+            "name": "include",
+            "in": "query",
+            "description": "comma-separated list of relationships to include",
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "string",
+                "enum": [
+                  "parent",
                   "subcategories"
                 ]
               }
@@ -36314,6 +37006,33 @@
             },
             "style": "form",
             "explode": false
+          },
+          {
+            "name": "limit[subcategories]",
+            "in": "query",
+            "description": "maximum number of related subcategories returned (when they are included)",
+            "schema": {
+              "type": "integer",
+              "maximum": 50
+            },
+            "style": "form"
+          },
+          {
+            "name": "include",
+            "in": "query",
+            "description": "comma-separated list of relationships to include",
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "string",
+                "enum": [
+                  "parent",
+                  "subcategories"
+                ]
+              }
+            },
+            "style": "form",
+            "explode": false
           }
         ],
         "responses": {
@@ -36404,6 +37123,33 @@
                 "enum": [
                   "parent",
                   "platforms",
+                  "subcategories"
+                ]
+              }
+            },
+            "style": "form",
+            "explode": false
+          },
+          {
+            "name": "limit[subcategories]",
+            "in": "query",
+            "description": "maximum number of related subcategories returned (when they are included)",
+            "schema": {
+              "type": "integer",
+              "maximum": 50
+            },
+            "style": "form"
+          },
+          {
+            "name": "include",
+            "in": "query",
+            "description": "comma-separated list of relationships to include",
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "string",
+                "enum": [
+                  "parent",
                   "subcategories"
                 ]
               }
@@ -36506,6 +37252,33 @@
             },
             "style": "form",
             "explode": false
+          },
+          {
+            "name": "limit[subcategories]",
+            "in": "query",
+            "description": "maximum number of related subcategories returned (when they are included)",
+            "schema": {
+              "type": "integer",
+              "maximum": 50
+            },
+            "style": "form"
+          },
+          {
+            "name": "include",
+            "in": "query",
+            "description": "comma-separated list of relationships to include",
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "string",
+                "enum": [
+                  "parent",
+                  "subcategories"
+                ]
+              }
+            },
+            "style": "form",
+            "explode": false
           }
         ],
         "responses": {
@@ -36596,6 +37369,33 @@
                 "enum": [
                   "parent",
                   "platforms",
+                  "subcategories"
+                ]
+              }
+            },
+            "style": "form",
+            "explode": false
+          },
+          {
+            "name": "limit[subcategories]",
+            "in": "query",
+            "description": "maximum number of related subcategories returned (when they are included)",
+            "schema": {
+              "type": "integer",
+              "maximum": 50
+            },
+            "style": "form"
+          },
+          {
+            "name": "include",
+            "in": "query",
+            "description": "comma-separated list of relationships to include",
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "string",
+                "enum": [
+                  "parent",
                   "subcategories"
                 ]
               }
@@ -41812,6 +42612,7 @@
                   "appStoreAgeRating",
                   "appStoreState",
                   "brazilAgeRating",
+                  "brazilAgeRatingV2",
                   "kidsAgeBand",
                   "primaryCategory",
                   "primarySubcategoryOne",
@@ -44806,7 +45607,7 @@
             "description": "maximum number of related pricePoints returned (when they are included)",
             "schema": {
               "type": "integer",
-              "maximum": 40000
+              "maximum": 8000
             },
             "style": "form"
           },
@@ -46290,8 +47091,10 @@
               "items": {
                 "type": "string",
                 "enum": [
-                  "app",
-                  "optIn"
+                  "duration",
+                  "optIn",
+                  "renewalType",
+                  "sandboxOptIn"
                 ]
               }
             },
@@ -49584,12 +50387,15 @@
                 "type": "string",
                 "enum": [
                   "app",
+                  "appDescription",
+                  "appEncryptionDeclarationDocument",
                   "appEncryptionDeclarationState",
                   "availableOnFrenchStore",
                   "builds",
                   "codeValue",
                   "containsProprietaryCryptography",
                   "containsThirdPartyCryptography",
+                  "createdDate",
                   "documentName",
                   "documentType",
                   "documentUrl",
@@ -52781,12 +53587,15 @@
                 "type": "string",
                 "enum": [
                   "app",
+                  "appDescription",
+                  "appEncryptionDeclarationDocument",
                   "appEncryptionDeclarationState",
                   "availableOnFrenchStore",
                   "builds",
                   "codeValue",
                   "containsProprietaryCryptography",
                   "containsThirdPartyCryptography",
+                  "createdDate",
                   "documentName",
                   "documentType",
                   "documentUrl",
@@ -53513,6 +54322,7 @@
                   "appStoreAgeRating",
                   "appStoreState",
                   "brazilAgeRating",
+                  "brazilAgeRatingV2",
                   "kidsAgeBand",
                   "primaryCategory",
                   "primarySubcategoryOne",
@@ -53754,8 +54564,10 @@
               "items": {
                 "type": "string",
                 "enum": [
-                  "app",
-                  "optIn"
+                  "duration",
+                  "optIn",
+                  "renewalType",
+                  "sandboxOptIn"
                 ]
               }
             },
@@ -60217,7 +61029,7 @@
             "description": "maximum resources per page",
             "schema": {
               "type": "integer",
-              "maximum": 40000
+              "maximum": 200
             },
             "style": "form"
           },
@@ -66976,6 +67788,187 @@
           "data"
         ]
       },
+      "AppEncryptionDeclarationDocument": {
+        "type": "object",
+        "title": "AppEncryptionDeclarationDocument",
+        "properties": {
+          "type": {
+            "type": "string",
+            "enum": [
+              "appEncryptionDeclarationDocuments"
+            ]
+          },
+          "id": {
+            "type": "string"
+          },
+          "attributes": {
+            "type": "object",
+            "properties": {
+              "fileSize": {
+                "type": "integer"
+              },
+              "fileName": {
+                "type": "string"
+              },
+              "assetToken": {
+                "type": "string"
+              },
+              "downloadUrl": {
+                "type": "string",
+                "format": "uri"
+              },
+              "sourceFileChecksum": {
+                "type": "string"
+              },
+              "uploadOperations": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/components/schemas/UploadOperation"
+                }
+              },
+              "assetDeliveryState": {
+                "$ref": "#/components/schemas/AppMediaAssetState"
+              }
+            }
+          },
+          "links": {
+            "$ref": "#/components/schemas/ResourceLinks"
+          }
+        },
+        "required": [
+          "links",
+          "id",
+          "type"
+        ]
+      },
+      "AppEncryptionDeclarationDocumentResponse": {
+        "type": "object",
+        "title": "AppEncryptionDeclarationDocumentResponse",
+        "properties": {
+          "data": {
+            "$ref": "#/components/schemas/AppEncryptionDeclarationDocument"
+          },
+          "links": {
+            "$ref": "#/components/schemas/DocumentLinks"
+          }
+        },
+        "required": [
+          "data",
+          "links"
+        ]
+      },
+      "AppEncryptionDeclarationDocumentCreateRequest": {
+        "type": "object",
+        "title": "AppEncryptionDeclarationDocumentCreateRequest",
+        "properties": {
+          "data": {
+            "type": "object",
+            "properties": {
+              "type": {
+                "type": "string",
+                "enum": [
+                  "appEncryptionDeclarationDocuments"
+                ]
+              },
+              "attributes": {
+                "type": "object",
+                "properties": {
+                  "fileSize": {
+                    "type": "integer"
+                  },
+                  "fileName": {
+                    "type": "string"
+                  }
+                },
+                "required": [
+                  "fileName",
+                  "fileSize"
+                ]
+              },
+              "relationships": {
+                "type": "object",
+                "properties": {
+                  "appEncryptionDeclaration": {
+                    "type": "object",
+                    "properties": {
+                      "data": {
+                        "type": "object",
+                        "properties": {
+                          "type": {
+                            "type": "string",
+                            "enum": [
+                              "appEncryptionDeclarations"
+                            ]
+                          },
+                          "id": {
+                            "type": "string"
+                          }
+                        },
+                        "required": [
+                          "id",
+                          "type"
+                        ]
+                      }
+                    },
+                    "required": [
+                      "data"
+                    ]
+                  }
+                },
+                "required": [
+                  "appEncryptionDeclaration"
+                ]
+              }
+            },
+            "required": [
+              "relationships",
+              "attributes",
+              "type"
+            ]
+          }
+        },
+        "required": [
+          "data"
+        ]
+      },
+      "AppEncryptionDeclarationDocumentUpdateRequest": {
+        "type": "object",
+        "title": "AppEncryptionDeclarationDocumentUpdateRequest",
+        "properties": {
+          "data": {
+            "type": "object",
+            "properties": {
+              "type": {
+                "type": "string",
+                "enum": [
+                  "appEncryptionDeclarationDocuments"
+                ]
+              },
+              "id": {
+                "type": "string"
+              },
+              "attributes": {
+                "type": "object",
+                "properties": {
+                  "sourceFileChecksum": {
+                    "type": "string"
+                  },
+                  "uploaded": {
+                    "type": "boolean"
+                  }
+                }
+              }
+            },
+            "required": [
+              "id",
+              "type"
+            ]
+          }
+        },
+        "required": [
+          "data"
+        ]
+      },
       "AppEncryptionDeclaration": {
         "type": "object",
         "title": "AppEncryptionDeclaration",
@@ -66992,8 +67985,16 @@
           "attributes": {
             "type": "object",
             "properties": {
+              "appDescription": {
+                "type": "string"
+              },
+              "createdDate": {
+                "type": "string",
+                "format": "date-time"
+              },
               "usesEncryption": {
-                "type": "boolean"
+                "type": "boolean",
+                "deprecated": true
               },
               "exempt": {
                 "type": "boolean"
@@ -67008,20 +68009,25 @@
                 "type": "boolean"
               },
               "platform": {
+                "deprecated": true,
                 "$ref": "#/components/schemas/Platform"
               },
               "uploadedDate": {
                 "type": "string",
-                "format": "date-time"
+                "format": "date-time",
+                "deprecated": true
               },
               "documentUrl": {
-                "type": "string"
+                "type": "string",
+                "deprecated": true
               },
               "documentName": {
-                "type": "string"
+                "type": "string",
+                "deprecated": true
               },
               "documentType": {
-                "type": "string"
+                "type": "string",
+                "deprecated": true
               },
               "appEncryptionDeclarationState": {
                 "$ref": "#/components/schemas/AppEncryptionDeclarationState"
@@ -67069,6 +68075,84 @@
                     ]
                   }
                 }
+              },
+              "builds": {
+                "type": "object",
+                "properties": {
+                  "links": {
+                    "type": "object",
+                    "properties": {
+                      "self": {
+                        "type": "string",
+                        "format": "uri-reference"
+                      },
+                      "related": {
+                        "type": "string",
+                        "format": "uri-reference"
+                      }
+                    }
+                  },
+                  "meta": {
+                    "$ref": "#/components/schemas/PagingInformation"
+                  },
+                  "data": {
+                    "type": "array",
+                    "items": {
+                      "type": "object",
+                      "properties": {
+                        "type": {
+                          "type": "string",
+                          "enum": [
+                            "builds"
+                          ]
+                        },
+                        "id": {
+                          "type": "string"
+                        }
+                      },
+                      "required": [
+                        "id",
+                        "type"
+                      ]
+                    }
+                  }
+                }
+              },
+              "appEncryptionDeclarationDocument": {
+                "type": "object",
+                "properties": {
+                  "links": {
+                    "type": "object",
+                    "properties": {
+                      "self": {
+                        "type": "string",
+                        "format": "uri-reference"
+                      },
+                      "related": {
+                        "type": "string",
+                        "format": "uri-reference"
+                      }
+                    }
+                  },
+                  "data": {
+                    "type": "object",
+                    "properties": {
+                      "type": {
+                        "type": "string",
+                        "enum": [
+                          "appEncryptionDeclarationDocuments"
+                        ]
+                      },
+                      "id": {
+                        "type": "string"
+                      }
+                    },
+                    "required": [
+                      "id",
+                      "type"
+                    ]
+                  }
+                }
               }
             }
           },
@@ -67095,7 +68179,17 @@
           "included": {
             "type": "array",
             "items": {
-              "$ref": "#/components/schemas/App"
+              "oneOf": [
+                {
+                  "$ref": "#/components/schemas/App"
+                },
+                {
+                  "$ref": "#/components/schemas/Build"
+                },
+                {
+                  "$ref": "#/components/schemas/AppEncryptionDeclarationDocument"
+                }
+              ]
             }
           },
           "links": {
@@ -67120,7 +68214,17 @@
           "included": {
             "type": "array",
             "items": {
-              "$ref": "#/components/schemas/App"
+              "oneOf": [
+                {
+                  "$ref": "#/components/schemas/App"
+                },
+                {
+                  "$ref": "#/components/schemas/Build"
+                },
+                {
+                  "$ref": "#/components/schemas/AppEncryptionDeclarationDocument"
+                }
+              ]
             }
           },
           "links": {
@@ -68787,7 +69891,25 @@
                 "$ref": "#/components/schemas/AppStoreAgeRating"
               },
               "brazilAgeRating": {
+                "deprecated": true,
                 "$ref": "#/components/schemas/BrazilAgeRating"
+              },
+              "brazilAgeRatingV2": {
+                "type": "string",
+                "enum": [
+                  "SELF_RATED_L",
+                  "SELF_RATED_TEN",
+                  "SELF_RATED_TWELVE",
+                  "SELF_RATED_FOURTEEN",
+                  "SELF_RATED_SIXTEEN",
+                  "SELF_RATED_EIGHTEEN",
+                  "OFFICIAL_L",
+                  "OFFICIAL_TEN",
+                  "OFFICIAL_TWELVE",
+                  "OFFICIAL_FOURTEEN",
+                  "OFFICIAL_SIXTEEN",
+                  "OFFICIAL_EIGHTEEN"
+                ]
               },
               "kidsAgeBand": {
                 "$ref": "#/components/schemas/KidsAgeBand"
@@ -75729,100 +76851,6 @@
         "required": [
           "links",
           "id",
-          "type"
-        ]
-      },
-      "AppInlineCreate": {
-        "type": "object",
-        "properties": {
-          "type": {
-            "type": "string",
-            "enum": [
-              "apps"
-            ]
-          },
-          "id": {
-            "type": "string"
-          },
-          "attributes": {
-            "type": "object",
-            "properties": {
-              "bundleId": {
-                "type": "string"
-              },
-              "sku": {
-                "type": "string"
-              },
-              "primaryLocale": {
-                "type": "string"
-              }
-            },
-            "required": [
-              "bundleId",
-              "sku",
-              "primaryLocale"
-            ]
-          },
-          "relationships": {
-            "type": "object",
-            "properties": {
-              "appStoreVersions": {
-                "type": "object",
-                "properties": {
-                  "data": {
-                    "type": "array",
-                    "items": {
-                      "type": "object",
-                      "properties": {
-                        "type": {
-                          "type": "string",
-                          "enum": [
-                            "appStoreVersions"
-                          ]
-                        },
-                        "id": {
-                          "type": "string"
-                        }
-                      },
-                      "required": [
-                        "id",
-                        "type"
-                      ]
-                    }
-                  }
-                }
-              },
-              "appInfos": {
-                "type": "object",
-                "properties": {
-                  "data": {
-                    "type": "array",
-                    "items": {
-                      "type": "object",
-                      "properties": {
-                        "type": {
-                          "type": "string",
-                          "enum": [
-                            "appInfos"
-                          ]
-                        },
-                        "id": {
-                          "type": "string"
-                        }
-                      },
-                      "required": [
-                        "id",
-                        "type"
-                      ]
-                    }
-                  }
-                }
-              }
-            }
-          }
-        },
-        "required": [
-          "attributes",
           "type"
         ]
       },
@@ -87976,6 +89004,248 @@
           "data"
         ]
       },
+      "SandboxTesterV2": {
+        "type": "object",
+        "title": "SandboxTesterV2",
+        "properties": {
+          "type": {
+            "type": "string",
+            "enum": [
+              "sandboxTesters"
+            ]
+          },
+          "id": {
+            "type": "string"
+          },
+          "attributes": {
+            "type": "object",
+            "properties": {
+              "firstName": {
+                "type": "string"
+              },
+              "lastName": {
+                "type": "string"
+              },
+              "acAccountName": {
+                "type": "string"
+              },
+              "territory": {
+                "$ref": "#/components/schemas/TerritoryCode"
+              },
+              "applePayCompatible": {
+                "type": "boolean"
+              },
+              "interruptPurchases": {
+                "type": "boolean"
+              },
+              "subscriptionRenewalRate": {
+                "type": "string",
+                "enum": [
+                  "MONTHLY_RENEWAL_EVERY_ONE_HOUR",
+                  "MONTHLY_RENEWAL_EVERY_THIRTY_MINUTES",
+                  "MONTHLY_RENEWAL_EVERY_FIFTEEN_MINUTES",
+                  "MONTHLY_RENEWAL_EVERY_FIVE_MINUTES",
+                  "MONTHLY_RENEWAL_EVERY_THREE_MINUTES"
+                ]
+              }
+            }
+          },
+          "links": {
+            "$ref": "#/components/schemas/ResourceLinks"
+          }
+        },
+        "required": [
+          "links",
+          "id",
+          "type"
+        ]
+      },
+      "SandboxTestersV2Response": {
+        "type": "object",
+        "title": "SandboxTestersV2Response",
+        "properties": {
+          "data": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/SandboxTesterV2"
+            }
+          },
+          "links": {
+            "$ref": "#/components/schemas/PagedDocumentLinks"
+          },
+          "meta": {
+            "$ref": "#/components/schemas/PagingInformation"
+          }
+        },
+        "required": [
+          "data",
+          "links"
+        ]
+      },
+      "SandboxTesterV2Response": {
+        "type": "object",
+        "title": "SandboxTesterV2Response",
+        "properties": {
+          "data": {
+            "$ref": "#/components/schemas/SandboxTesterV2"
+          },
+          "links": {
+            "$ref": "#/components/schemas/DocumentLinks"
+          }
+        },
+        "required": [
+          "data",
+          "links"
+        ]
+      },
+      "SandboxTesterV2UpdateRequest": {
+        "type": "object",
+        "title": "SandboxTesterV2UpdateRequest",
+        "properties": {
+          "data": {
+            "type": "object",
+            "properties": {
+              "type": {
+                "type": "string",
+                "enum": [
+                  "sandboxTesters"
+                ]
+              },
+              "id": {
+                "type": "string"
+              },
+              "attributes": {
+                "type": "object",
+                "properties": {
+                  "territory": {
+                    "$ref": "#/components/schemas/TerritoryCode"
+                  },
+                  "interruptPurchases": {
+                    "type": "boolean"
+                  },
+                  "subscriptionRenewalRate": {
+                    "type": "string",
+                    "enum": [
+                      "MONTHLY_RENEWAL_EVERY_ONE_HOUR",
+                      "MONTHLY_RENEWAL_EVERY_THIRTY_MINUTES",
+                      "MONTHLY_RENEWAL_EVERY_FIFTEEN_MINUTES",
+                      "MONTHLY_RENEWAL_EVERY_FIVE_MINUTES",
+                      "MONTHLY_RENEWAL_EVERY_THREE_MINUTES"
+                    ]
+                  }
+                }
+              }
+            },
+            "required": [
+              "id",
+              "type"
+            ]
+          }
+        },
+        "required": [
+          "data"
+        ]
+      },
+      "SandboxTestersClearPurchaseHistoryRequestV2": {
+        "type": "object",
+        "title": "SandboxTestersClearPurchaseHistoryRequestV2",
+        "properties": {
+          "type": {
+            "type": "string",
+            "enum": [
+              "sandboxTestersClearPurchaseHistoryRequest"
+            ]
+          },
+          "id": {
+            "type": "string"
+          },
+          "links": {
+            "$ref": "#/components/schemas/ResourceLinks"
+          }
+        },
+        "required": [
+          "links",
+          "id",
+          "type"
+        ]
+      },
+      "SandboxTestersClearPurchaseHistoryRequestV2Response": {
+        "type": "object",
+        "title": "SandboxTestersClearPurchaseHistoryRequestV2Response",
+        "properties": {
+          "data": {
+            "$ref": "#/components/schemas/SandboxTestersClearPurchaseHistoryRequestV2"
+          },
+          "links": {
+            "$ref": "#/components/schemas/DocumentLinks"
+          }
+        },
+        "required": [
+          "data",
+          "links"
+        ]
+      },
+      "SandboxTestersClearPurchaseHistoryRequestV2CreateRequest": {
+        "type": "object",
+        "title": "SandboxTestersClearPurchaseHistoryRequestV2CreateRequest",
+        "properties": {
+          "data": {
+            "type": "object",
+            "properties": {
+              "type": {
+                "type": "string",
+                "enum": [
+                  "sandboxTestersClearPurchaseHistoryRequest"
+                ]
+              },
+              "relationships": {
+                "type": "object",
+                "properties": {
+                  "sandboxTesters": {
+                    "type": "object",
+                    "properties": {
+                      "data": {
+                        "type": "array",
+                        "items": {
+                          "type": "object",
+                          "properties": {
+                            "type": {
+                              "type": "string",
+                              "enum": [
+                                "sandboxTesters"
+                              ]
+                            },
+                            "id": {
+                              "type": "string"
+                            }
+                          },
+                          "required": [
+                            "id",
+                            "type"
+                          ]
+                        }
+                      }
+                    },
+                    "required": [
+                      "data"
+                    ]
+                  }
+                },
+                "required": [
+                  "sandboxTesters"
+                ]
+              }
+            },
+            "required": [
+              "relationships",
+              "type"
+            ]
+          }
+        },
+        "required": [
+          "data"
+        ]
+      },
       "ScmGitReference": {
         "type": "object",
         "title": "ScmGitReference",
@@ -88768,6 +90038,19 @@
             "properties": {
               "optIn": {
                 "type": "boolean"
+              },
+              "sandboxOptIn": {
+                "type": "boolean"
+              },
+              "duration": {
+                "$ref": "#/components/schemas/SubscriptionGracePeriodDuration"
+              },
+              "renewalType": {
+                "type": "string",
+                "enum": [
+                  "ALL_RENEWALS",
+                  "PAID_TO_PAID_ONLY"
+                ]
               }
             }
           },
@@ -88818,34 +90101,19 @@
                 "properties": {
                   "optIn": {
                     "type": "boolean"
-                  }
-                }
-              },
-              "relationships": {
-                "type": "object",
-                "properties": {
-                  "app": {
-                    "type": "object",
-                    "properties": {
-                      "data": {
-                        "type": "object",
-                        "properties": {
-                          "type": {
-                            "type": "string",
-                            "enum": [
-                              "apps"
-                            ]
-                          },
-                          "id": {
-                            "type": "string"
-                          }
-                        },
-                        "required": [
-                          "id",
-                          "type"
-                        ]
-                      }
-                    }
+                  },
+                  "sandboxOptIn": {
+                    "type": "boolean"
+                  },
+                  "duration": {
+                    "$ref": "#/components/schemas/SubscriptionGracePeriodDuration"
+                  },
+                  "renewalType": {
+                    "type": "string",
+                    "enum": [
+                      "ALL_RENEWALS",
+                      "PAID_TO_PAID_ONLY"
+                    ]
                   }
                 }
               }
@@ -88854,12 +90122,6 @@
               "id",
               "type"
             ]
-          },
-          "included": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/AppInlineCreate"
-            }
           }
         },
         "required": [
@@ -95293,7 +96555,6 @@
               },
               "required": [
                 "code",
-                "detail",
                 "title",
                 "status"
               ]
@@ -95433,6 +96694,7 @@
       "AppEncryptionDeclarationState": {
         "type": "string",
         "enum": [
+          "CREATED",
           "IN_REVIEW",
           "APPROVED",
           "REJECTED",
@@ -96334,6 +97596,14 @@
           "NEW",
           "EXISTING",
           "EXPIRED"
+        ]
+      },
+      "SubscriptionGracePeriodDuration": {
+        "type": "string",
+        "enum": [
+          "THREE_DAYS",
+          "SIXTEEN_DAYS",
+          "TWENTY_EIGHT_DAYS"
         ]
       },
       "SubscriptionOfferDuration": {

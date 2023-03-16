@@ -5,7 +5,7 @@
 
 import Foundation
 
-public struct SubscriptionGracePeriodUpdateRequest: Codable {
+public struct AppEncryptionDeclarationDocumentUpdateRequest: Codable {
 	public var data: Data
 
 	public struct Data: Codable, Identifiable {
@@ -14,41 +14,28 @@ public struct SubscriptionGracePeriodUpdateRequest: Codable {
 		public var attributes: Attributes?
 
 		public enum `Type`: String, Codable, CaseIterable {
-			case subscriptionGracePeriods
+			case appEncryptionDeclarationDocuments
 		}
 
 		public struct Attributes: Codable {
-			public var isOptIn: Bool?
-			public var isSandboxOptIn: Bool?
-			public var duration: SubscriptionGracePeriodDuration?
-			public var renewalType: RenewalType?
+			public var sourceFileChecksum: String?
+			public var isUploaded: Bool?
 
-			public enum RenewalType: String, Codable, CaseIterable {
-				case allRenewals = "ALL_RENEWALS"
-				case paidToPaidOnly = "PAID_TO_PAID_ONLY"
-			}
-
-			public init(isOptIn: Bool? = nil, isSandboxOptIn: Bool? = nil, duration: SubscriptionGracePeriodDuration? = nil, renewalType: RenewalType? = nil) {
-				self.isOptIn = isOptIn
-				self.isSandboxOptIn = isSandboxOptIn
-				self.duration = duration
-				self.renewalType = renewalType
+			public init(sourceFileChecksum: String? = nil, isUploaded: Bool? = nil) {
+				self.sourceFileChecksum = sourceFileChecksum
+				self.isUploaded = isUploaded
 			}
 
 			public init(from decoder: Decoder) throws {
 				let values = try decoder.container(keyedBy: StringCodingKey.self)
-				self.isOptIn = try values.decodeIfPresent(Bool.self, forKey: "optIn")
-				self.isSandboxOptIn = try values.decodeIfPresent(Bool.self, forKey: "sandboxOptIn")
-				self.duration = try values.decodeIfPresent(SubscriptionGracePeriodDuration.self, forKey: "duration")
-				self.renewalType = try values.decodeIfPresent(RenewalType.self, forKey: "renewalType")
+				self.sourceFileChecksum = try values.decodeIfPresent(String.self, forKey: "sourceFileChecksum")
+				self.isUploaded = try values.decodeIfPresent(Bool.self, forKey: "uploaded")
 			}
 
 			public func encode(to encoder: Encoder) throws {
 				var values = encoder.container(keyedBy: StringCodingKey.self)
-				try values.encodeIfPresent(isOptIn, forKey: "optIn")
-				try values.encodeIfPresent(isSandboxOptIn, forKey: "sandboxOptIn")
-				try values.encodeIfPresent(duration, forKey: "duration")
-				try values.encodeIfPresent(renewalType, forKey: "renewalType")
+				try values.encodeIfPresent(sourceFileChecksum, forKey: "sourceFileChecksum")
+				try values.encodeIfPresent(isUploaded, forKey: "uploaded")
 			}
 		}
 
