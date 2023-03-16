@@ -5,6 +5,7 @@
 
 import Foundation
 
+@available(*, deprecated, message: "Deprecated")
 public struct AppPricePointV2: Codable, Identifiable {
 	public var type: `Type`
 	public var id: String

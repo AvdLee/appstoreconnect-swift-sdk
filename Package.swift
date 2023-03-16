@@ -24,7 +24,7 @@ let package = Package(
                 .productItem(name: "Crypto", package: "swift-crypto")
             ],
             path: "Sources",
-            exclude: ["OpenAPI/app_store_connect_api_2.2_openapi.json"]
+            exclude: ["OpenAPI/app_store_connect_api_2.3_openapi.json"]
         ),
         .binaryTarget(
             name: "create-api", // Find the URL and checksum at https://github.com/createapi/createapi/releases/latest

@@ -2,7 +2,7 @@
   "openapi": "3.0.1",
   "info": {
     "title": "App Store Connect API",
-    "version": "2.2",
+    "version": "2.3",
     "x-platform": "app_store_connect_api"
   },
   "servers": [
@@ -75,6 +75,196 @@
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          }
+        }
+      },
+      "parameters": [
+        {
+          "name": "id",
+          "in": "path",
+          "description": "the id of the requested resource",
+          "schema": {
+            "type": "string"
+          },
+          "style": "simple",
+          "required": true
+        }
+      ]
+    },
+    "/v1/appAvailabilities": {
+      "post": {
+        "tags": [
+          "AppAvailabilities"
+        ],
+        "operationId": "appAvailabilities-create_instance",
+        "requestBody": {
+          "description": "AppAvailability representation",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/AppAvailabilityCreateRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "400": {
+            "description": "Parameter error(s)",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "201": {
+            "description": "Single AppAvailability",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AppAvailabilityResponse"
+                }
+              }
+            }
+          },
+          "409": {
+            "description": "Request entity error(s)",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/v1/appAvailabilities/{id}": {
+      "get": {
+        "tags": [
+          "AppAvailabilities"
+        ],
+        "operationId": "appAvailabilities-get_instance",
+        "parameters": [
+          {
+            "name": "fields[appAvailabilities]",
+            "in": "query",
+            "description": "the fields to include for returned resources of type appAvailabilities",
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "string",
+                "enum": [
+                  "app",
+                  "availableInNewTerritories",
+                  "availableTerritories"
+                ]
+              }
+            },
+            "style": "form",
+            "explode": false,
+            "required": false
+          },
+          {
+            "name": "include",
+            "in": "query",
+            "description": "comma-separated list of relationships to include",
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "string",
+                "enum": [
+                  "app",
+                  "availableTerritories"
+                ]
+              }
+            },
+            "style": "form",
+            "explode": false,
+            "required": false
+          },
+          {
+            "name": "fields[territories]",
+            "in": "query",
+            "description": "the fields to include for returned resources of type territories",
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "string",
+                "enum": [
+                  "currency"
+                ]
+              }
+            },
+            "style": "form",
+            "explode": false,
+            "required": false
+          },
+          {
+            "name": "limit[availableTerritories]",
+            "in": "query",
+            "description": "maximum number of related availableTerritories returned (when they are included)",
+            "schema": {
+              "type": "integer",
+              "maximum": 50
+            },
+            "style": "form",
+            "required": false
+          }
+        ],
+        "responses": {
+          "400": {
+            "description": "Parameter error(s)",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not found error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "200": {
+            "description": "Single AppAvailability",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AppAvailabilityResponse"
                 }
               }
             }
@@ -3393,10 +3583,13 @@
               "items": {
                 "type": "string",
                 "enum": [
+                  "appAvailability",
                   "appClips",
                   "appCustomProductPages",
                   "appEvents",
                   "appInfos",
+                  "appPricePoints",
+                  "appPriceSchedule",
                   "appStoreVersions",
                   "availableInNewTerritories",
                   "availableTerritories",
@@ -3577,10 +3770,13 @@
               "items": {
                 "type": "string",
                 "enum": [
+                  "appAvailability",
                   "appClips",
                   "appCustomProductPages",
                   "appEvents",
                   "appInfos",
+                  "appPricePoints",
+                  "appPriceSchedule",
                   "appStoreVersions",
                   "availableInNewTerritories",
                   "availableTerritories",
@@ -6333,6 +6529,109 @@
         }
       ]
     },
+    "/v3/appPricePoints/{id}": {
+      "get": {
+        "tags": [
+          "AppPricePoints"
+        ],
+        "operationId": "appPricePoints-get_instance",
+        "parameters": [
+          {
+            "name": "fields[appPricePoints]",
+            "in": "query",
+            "description": "the fields to include for returned resources of type appPricePoints",
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "string",
+                "enum": [
+                  "app",
+                  "customerPrice",
+                  "equalizations",
+                  "proceeds",
+                  "territory"
+                ]
+              }
+            },
+            "style": "form",
+            "explode": false,
+            "required": false
+          },
+          {
+            "name": "include",
+            "in": "query",
+            "description": "comma-separated list of relationships to include",
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "string",
+                "enum": [
+                  "app",
+                  "territory"
+                ]
+              }
+            },
+            "style": "form",
+            "explode": false,
+            "required": false
+          }
+        ],
+        "responses": {
+          "400": {
+            "description": "Parameter error(s)",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not found error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "200": {
+            "description": "Single AppPricePoint",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AppPricePointV3Response"
+                }
+              }
+            }
+          }
+        }
+      },
+      "parameters": [
+        {
+          "name": "id",
+          "in": "path",
+          "description": "the id of the requested resource",
+          "schema": {
+            "type": "string"
+          },
+          "style": "simple",
+          "required": true
+        }
+      ]
+    },
     "/v1/appPricePoints": {
       "get": {
         "tags": [
@@ -6353,7 +6652,8 @@
             },
             "style": "form",
             "explode": false,
-            "required": false
+            "required": false,
+            "deprecated": true
           },
           {
             "name": "filter[territory]",
@@ -6589,12 +6889,238 @@
         }
       ]
     },
+    "/v1/appPriceSchedules": {
+      "post": {
+        "tags": [
+          "AppPriceSchedules"
+        ],
+        "operationId": "appPriceSchedules-create_instance",
+        "requestBody": {
+          "description": "AppPriceSchedule representation",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/AppPriceScheduleCreateRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "400": {
+            "description": "Parameter error(s)",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "201": {
+            "description": "Single AppPriceSchedule",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AppPriceScheduleResponse"
+                }
+              }
+            }
+          },
+          "409": {
+            "description": "Request entity error(s)",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/v1/appPriceSchedules/{id}": {
+      "get": {
+        "tags": [
+          "AppPriceSchedules"
+        ],
+        "operationId": "appPriceSchedules-get_instance",
+        "parameters": [
+          {
+            "name": "fields[appPriceSchedules]",
+            "in": "query",
+            "description": "the fields to include for returned resources of type appPriceSchedules",
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "string",
+                "enum": [
+                  "app",
+                  "automaticPrices",
+                  "baseTerritory",
+                  "manualPrices"
+                ]
+              }
+            },
+            "style": "form",
+            "explode": false,
+            "required": false
+          },
+          {
+            "name": "include",
+            "in": "query",
+            "description": "comma-separated list of relationships to include",
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "string",
+                "enum": [
+                  "app",
+                  "automaticPrices",
+                  "baseTerritory",
+                  "manualPrices"
+                ]
+              }
+            },
+            "style": "form",
+            "explode": false,
+            "required": false
+          },
+          {
+            "name": "fields[appPrices]",
+            "in": "query",
+            "description": "the fields to include for returned resources of type appPrices",
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "string",
+                "enum": [
+                  "appPricePoint",
+                  "endDate",
+                  "manual",
+                  "startDate",
+                  "territory"
+                ]
+              }
+            },
+            "style": "form",
+            "explode": false,
+            "required": false
+          },
+          {
+            "name": "fields[territories]",
+            "in": "query",
+            "description": "the fields to include for returned resources of type territories",
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "string",
+                "enum": [
+                  "currency"
+                ]
+              }
+            },
+            "style": "form",
+            "explode": false,
+            "required": false
+          },
+          {
+            "name": "limit[automaticPrices]",
+            "in": "query",
+            "description": "maximum number of related automaticPrices returned (when they are included)",
+            "schema": {
+              "type": "integer",
+              "maximum": 50
+            },
+            "style": "form",
+            "required": false
+          },
+          {
+            "name": "limit[manualPrices]",
+            "in": "query",
+            "description": "maximum number of related manualPrices returned (when they are included)",
+            "schema": {
+              "type": "integer",
+              "maximum": 50
+            },
+            "style": "form",
+            "required": false
+          }
+        ],
+        "responses": {
+          "400": {
+            "description": "Parameter error(s)",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not found error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "200": {
+            "description": "Single AppPriceSchedule",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AppPriceScheduleResponse"
+                }
+              }
+            }
+          }
+        }
+      },
+      "parameters": [
+        {
+          "name": "id",
+          "in": "path",
+          "description": "the id of the requested resource",
+          "schema": {
+            "type": "string"
+          },
+          "style": "simple",
+          "required": true
+        }
+      ]
+    },
     "/v1/appPriceTiers": {
       "get": {
         "tags": [
           "AppPriceTiers"
         ],
         "operationId": "appPriceTiers-get_collection",
+        "deprecated": true,
         "parameters": [
           {
             "name": "filter[id]",
@@ -6728,6 +7254,7 @@
           "AppPriceTiers"
         ],
         "operationId": "appPriceTiers-get_instance",
+        "deprecated": true,
         "parameters": [
           {
             "name": "fields[appPriceTiers]",
@@ -6859,6 +7386,7 @@
           "AppPrices"
         ],
         "operationId": "appPrices-get_instance",
+        "deprecated": true,
         "parameters": [
           {
             "name": "fields[appPrices]",
@@ -10526,10 +11054,13 @@
               "items": {
                 "type": "string",
                 "enum": [
+                  "appAvailability",
                   "appClips",
                   "appCustomProductPages",
                   "appEvents",
                   "appInfos",
+                  "appPricePoints",
+                  "appPriceSchedule",
                   "appStoreVersions",
                   "availableInNewTerritories",
                   "availableTerritories",
@@ -10646,6 +11177,26 @@
             "required": false
           },
           {
+            "name": "fields[appPriceSchedules]",
+            "in": "query",
+            "description": "the fields to include for returned resources of type appPriceSchedules",
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "string",
+                "enum": [
+                  "app",
+                  "automaticPrices",
+                  "baseTerritory",
+                  "manualPrices"
+                ]
+              }
+            },
+            "style": "form",
+            "explode": false,
+            "required": false
+          },
+          {
             "name": "fields[ciProducts]",
             "in": "query",
             "description": "the fields to include for returned resources of type ciProducts",
@@ -10740,6 +11291,25 @@
                   "state",
                   "subscription",
                   "visibleForAllUsers"
+                ]
+              }
+            },
+            "style": "form",
+            "explode": false,
+            "required": false
+          },
+          {
+            "name": "fields[appAvailabilities]",
+            "in": "query",
+            "description": "the fields to include for returned resources of type appAvailabilities",
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "string",
+                "enum": [
+                  "app",
+                  "availableInNewTerritories",
+                  "availableTerritories"
                 ]
               }
             },
@@ -10948,6 +11518,28 @@
             },
             "style": "form",
             "explode": false,
+            "required": false,
+            "deprecated": true
+          },
+          {
+            "name": "fields[appPricePoints]",
+            "in": "query",
+            "description": "the fields to include for returned resources of type appPricePoints",
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "string",
+                "enum": [
+                  "app",
+                  "customerPrice",
+                  "equalizations",
+                  "proceeds",
+                  "territory"
+                ]
+              }
+            },
+            "style": "form",
+            "explode": false,
             "required": false
           },
           {
@@ -11059,7 +11651,8 @@
             },
             "style": "form",
             "explode": false,
-            "required": false
+            "required": false,
+            "deprecated": true
           },
           {
             "name": "fields[appPreOrders]",
@@ -11213,7 +11806,8 @@
             },
             "style": "form",
             "explode": false,
-            "required": false
+            "required": false,
+            "deprecated": true
           },
           {
             "name": "fields[perfPowerMetrics]",
@@ -11386,7 +11980,8 @@
               "maximum": 50
             },
             "style": "form",
-            "required": false
+            "required": false,
+            "deprecated": true
           },
           {
             "name": "limit[promotedPurchases]",
@@ -11472,10 +12067,13 @@
               "items": {
                 "type": "string",
                 "enum": [
+                  "appAvailability",
                   "appClips",
                   "appCustomProductPages",
                   "appEvents",
                   "appInfos",
+                  "appPricePoints",
+                  "appPriceSchedule",
                   "appStoreVersions",
                   "availableInNewTerritories",
                   "availableTerritories",
@@ -11582,6 +12180,26 @@
             "required": false
           },
           {
+            "name": "fields[appPriceSchedules]",
+            "in": "query",
+            "description": "the fields to include for returned resources of type appPriceSchedules",
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "string",
+                "enum": [
+                  "app",
+                  "automaticPrices",
+                  "baseTerritory",
+                  "manualPrices"
+                ]
+              }
+            },
+            "style": "form",
+            "explode": false,
+            "required": false
+          },
+          {
             "name": "fields[ciProducts]",
             "in": "query",
             "description": "the fields to include for returned resources of type ciProducts",
@@ -11676,6 +12294,25 @@
                   "state",
                   "subscription",
                   "visibleForAllUsers"
+                ]
+              }
+            },
+            "style": "form",
+            "explode": false,
+            "required": false
+          },
+          {
+            "name": "fields[appAvailabilities]",
+            "in": "query",
+            "description": "the fields to include for returned resources of type appAvailabilities",
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "string",
+                "enum": [
+                  "app",
+                  "availableInNewTerritories",
+                  "availableTerritories"
                 ]
               }
             },
@@ -11884,6 +12521,28 @@
             },
             "style": "form",
             "explode": false,
+            "required": false,
+            "deprecated": true
+          },
+          {
+            "name": "fields[appPricePoints]",
+            "in": "query",
+            "description": "the fields to include for returned resources of type appPricePoints",
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "string",
+                "enum": [
+                  "app",
+                  "customerPrice",
+                  "equalizations",
+                  "proceeds",
+                  "territory"
+                ]
+              }
+            },
+            "style": "form",
+            "explode": false,
             "required": false
           },
           {
@@ -11995,7 +12654,8 @@
             },
             "style": "form",
             "explode": false,
-            "required": false
+            "required": false,
+            "deprecated": true
           },
           {
             "name": "fields[appPreOrders]",
@@ -12149,7 +12809,8 @@
             },
             "style": "form",
             "explode": false,
-            "required": false
+            "required": false,
+            "deprecated": true
           },
           {
             "name": "fields[perfPowerMetrics]",
@@ -12322,7 +12983,8 @@
               "maximum": 50
             },
             "style": "form",
-            "required": false
+            "required": false,
+            "deprecated": true
           },
           {
             "name": "limit[promotedPurchases]",
@@ -13064,10 +13726,13 @@
               "items": {
                 "type": "string",
                 "enum": [
+                  "appAvailability",
                   "appClips",
                   "appCustomProductPages",
                   "appEvents",
                   "appInfos",
+                  "appPricePoints",
+                  "appPriceSchedule",
                   "appStoreVersions",
                   "availableInNewTerritories",
                   "availableTerritories",
@@ -13259,10 +13924,13 @@
               "items": {
                 "type": "string",
                 "enum": [
+                  "appAvailability",
                   "appClips",
                   "appCustomProductPages",
                   "appEvents",
                   "appInfos",
+                  "appPricePoints",
+                  "appPriceSchedule",
                   "appStoreVersions",
                   "availableInNewTerritories",
                   "availableTerritories",
@@ -13563,10 +14231,13 @@
               "items": {
                 "type": "string",
                 "enum": [
+                  "appAvailability",
                   "appClips",
                   "appCustomProductPages",
                   "appEvents",
                   "appInfos",
+                  "appPricePoints",
+                  "appPriceSchedule",
                   "appStoreVersions",
                   "availableInNewTerritories",
                   "availableTerritories",
@@ -13701,10 +14372,13 @@
               "items": {
                 "type": "string",
                 "enum": [
+                  "appAvailability",
                   "appClips",
                   "appCustomProductPages",
                   "appEvents",
                   "appInfos",
+                  "appPricePoints",
+                  "appPriceSchedule",
                   "appStoreVersions",
                   "availableInNewTerritories",
                   "availableTerritories",
@@ -14942,10 +15616,13 @@
               "items": {
                 "type": "string",
                 "enum": [
+                  "appAvailability",
                   "appClips",
                   "appCustomProductPages",
                   "appEvents",
                   "appInfos",
+                  "appPricePoints",
+                  "appPriceSchedule",
                   "appStoreVersions",
                   "availableInNewTerritories",
                   "availableTerritories",
@@ -15231,10 +15908,13 @@
               "items": {
                 "type": "string",
                 "enum": [
+                  "appAvailability",
                   "appClips",
                   "appCustomProductPages",
                   "appEvents",
                   "appInfos",
+                  "appPricePoints",
+                  "appPriceSchedule",
                   "appStoreVersions",
                   "availableInNewTerritories",
                   "availableTerritories",
@@ -15590,10 +16270,13 @@
               "items": {
                 "type": "string",
                 "enum": [
+                  "appAvailability",
                   "appClips",
                   "appCustomProductPages",
                   "appEvents",
                   "appInfos",
+                  "appPricePoints",
+                  "appPriceSchedule",
                   "appStoreVersions",
                   "availableInNewTerritories",
                   "availableTerritories",
@@ -15721,10 +16404,13 @@
               "items": {
                 "type": "string",
                 "enum": [
+                  "appAvailability",
                   "appClips",
                   "appCustomProductPages",
                   "appEvents",
                   "appInfos",
+                  "appPricePoints",
+                  "appPriceSchedule",
                   "appStoreVersions",
                   "availableInNewTerritories",
                   "availableTerritories",
@@ -16161,10 +16847,13 @@
               "items": {
                 "type": "string",
                 "enum": [
+                  "appAvailability",
                   "appClips",
                   "appCustomProductPages",
                   "appEvents",
                   "appInfos",
+                  "appPricePoints",
+                  "appPriceSchedule",
                   "appStoreVersions",
                   "availableInNewTerritories",
                   "availableTerritories",
@@ -16461,10 +17150,13 @@
               "items": {
                 "type": "string",
                 "enum": [
+                  "appAvailability",
                   "appClips",
                   "appCustomProductPages",
                   "appEvents",
                   "appInfos",
+                  "appPricePoints",
+                  "appPriceSchedule",
                   "appStoreVersions",
                   "availableInNewTerritories",
                   "availableTerritories",
@@ -17674,10 +18366,13 @@
               "items": {
                 "type": "string",
                 "enum": [
+                  "appAvailability",
                   "appClips",
                   "appCustomProductPages",
                   "appEvents",
                   "appInfos",
+                  "appPricePoints",
+                  "appPriceSchedule",
                   "appStoreVersions",
                   "availableInNewTerritories",
                   "availableTerritories",
@@ -18119,10 +18814,13 @@
               "items": {
                 "type": "string",
                 "enum": [
+                  "appAvailability",
                   "appClips",
                   "appCustomProductPages",
                   "appEvents",
                   "appInfos",
+                  "appPricePoints",
+                  "appPriceSchedule",
                   "appStoreVersions",
                   "availableInNewTerritories",
                   "availableTerritories",
@@ -18773,10 +19471,13 @@
               "items": {
                 "type": "string",
                 "enum": [
+                  "appAvailability",
                   "appClips",
                   "appCustomProductPages",
                   "appEvents",
                   "appInfos",
+                  "appPricePoints",
+                  "appPriceSchedule",
                   "appStoreVersions",
                   "availableInNewTerritories",
                   "availableTerritories",
@@ -19038,10 +19739,13 @@
               "items": {
                 "type": "string",
                 "enum": [
+                  "appAvailability",
                   "appClips",
                   "appCustomProductPages",
                   "appEvents",
                   "appInfos",
+                  "appPricePoints",
+                  "appPriceSchedule",
                   "appStoreVersions",
                   "availableInNewTerritories",
                   "availableTerritories",
@@ -20710,10 +21414,13 @@
               "items": {
                 "type": "string",
                 "enum": [
+                  "appAvailability",
                   "appClips",
                   "appCustomProductPages",
                   "appEvents",
                   "appInfos",
+                  "appPricePoints",
+                  "appPriceSchedule",
                   "appStoreVersions",
                   "availableInNewTerritories",
                   "availableTerritories",
@@ -20956,10 +21663,13 @@
               "items": {
                 "type": "string",
                 "enum": [
+                  "appAvailability",
                   "appClips",
                   "appCustomProductPages",
                   "appEvents",
                   "appInfos",
+                  "appPricePoints",
+                  "appPriceSchedule",
                   "appStoreVersions",
                   "availableInNewTerritories",
                   "availableTerritories",
@@ -23272,6 +23982,195 @@
         }
       ]
     },
+    "/v1/inAppPurchaseAvailabilities": {
+      "post": {
+        "tags": [
+          "InAppPurchaseAvailabilities"
+        ],
+        "operationId": "inAppPurchaseAvailabilities-create_instance",
+        "requestBody": {
+          "description": "InAppPurchaseAvailability representation",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/InAppPurchaseAvailabilityCreateRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "400": {
+            "description": "Parameter error(s)",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "201": {
+            "description": "Single InAppPurchaseAvailability",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/InAppPurchaseAvailabilityResponse"
+                }
+              }
+            }
+          },
+          "409": {
+            "description": "Request entity error(s)",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/v1/inAppPurchaseAvailabilities/{id}": {
+      "get": {
+        "tags": [
+          "InAppPurchaseAvailabilities"
+        ],
+        "operationId": "inAppPurchaseAvailabilities-get_instance",
+        "parameters": [
+          {
+            "name": "fields[inAppPurchaseAvailabilities]",
+            "in": "query",
+            "description": "the fields to include for returned resources of type inAppPurchaseAvailabilities",
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "string",
+                "enum": [
+                  "availableInNewTerritories",
+                  "availableTerritories",
+                  "inAppPurchase"
+                ]
+              }
+            },
+            "style": "form",
+            "explode": false,
+            "required": false
+          },
+          {
+            "name": "include",
+            "in": "query",
+            "description": "comma-separated list of relationships to include",
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "string",
+                "enum": [
+                  "availableTerritories"
+                ]
+              }
+            },
+            "style": "form",
+            "explode": false,
+            "required": false
+          },
+          {
+            "name": "fields[territories]",
+            "in": "query",
+            "description": "the fields to include for returned resources of type territories",
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "string",
+                "enum": [
+                  "currency"
+                ]
+              }
+            },
+            "style": "form",
+            "explode": false,
+            "required": false
+          },
+          {
+            "name": "limit[availableTerritories]",
+            "in": "query",
+            "description": "maximum number of related availableTerritories returned (when they are included)",
+            "schema": {
+              "type": "integer",
+              "maximum": 50
+            },
+            "style": "form",
+            "required": false
+          }
+        ],
+        "responses": {
+          "400": {
+            "description": "Parameter error(s)",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not found error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "200": {
+            "description": "Single InAppPurchaseAvailability",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/InAppPurchaseAvailabilityResponse"
+                }
+              }
+            }
+          }
+        }
+      },
+      "parameters": [
+        {
+          "name": "id",
+          "in": "path",
+          "description": "the id of the requested resource",
+          "schema": {
+            "type": "string"
+          },
+          "style": "simple",
+          "required": true
+        }
+      ]
+    },
     "/v1/inAppPurchaseContents/{id}": {
       "get": {
         "tags": [
@@ -23734,6 +24633,8 @@
               "items": {
                 "type": "string",
                 "enum": [
+                  "automaticPrices",
+                  "baseTerritory",
                   "inAppPurchase",
                   "manualPrices"
                 ]
@@ -23752,6 +24653,8 @@
               "items": {
                 "type": "string",
                 "enum": [
+                  "automaticPrices",
+                  "baseTerritory",
                   "inAppPurchase",
                   "manualPrices"
                 ]
@@ -23770,8 +24673,10 @@
               "items": {
                 "type": "string",
                 "enum": [
+                  "endDate",
                   "inAppPurchasePricePoint",
                   "inAppPurchaseV2",
+                  "manual",
                   "startDate",
                   "territory"
                 ]
@@ -23779,6 +24684,34 @@
             },
             "style": "form",
             "explode": false,
+            "required": false
+          },
+          {
+            "name": "fields[territories]",
+            "in": "query",
+            "description": "the fields to include for returned resources of type territories",
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "string",
+                "enum": [
+                  "currency"
+                ]
+              }
+            },
+            "style": "form",
+            "explode": false,
+            "required": false
+          },
+          {
+            "name": "limit[automaticPrices]",
+            "in": "query",
+            "description": "maximum number of related automaticPrices returned (when they are included)",
+            "schema": {
+              "type": "integer",
+              "maximum": 50
+            },
+            "style": "form",
             "required": false
           },
           {
@@ -24244,6 +25177,8 @@
               "items": {
                 "type": "string",
                 "enum": [
+                  "automaticPrices",
+                  "baseTerritory",
                   "inAppPurchase",
                   "manualPrices"
                 ]
@@ -24664,10 +25599,13 @@
               "items": {
                 "type": "string",
                 "enum": [
+                  "appAvailability",
                   "appClips",
                   "appCustomProductPages",
                   "appEvents",
                   "appInfos",
+                  "appPricePoints",
+                  "appPriceSchedule",
                   "appStoreVersions",
                   "availableInNewTerritories",
                   "availableTerritories",
@@ -24849,10 +25787,13 @@
               "items": {
                 "type": "string",
                 "enum": [
+                  "appAvailability",
                   "appClips",
                   "appCustomProductPages",
                   "appEvents",
                   "appInfos",
+                  "appPricePoints",
+                  "appPriceSchedule",
                   "appStoreVersions",
                   "availableInNewTerritories",
                   "availableTerritories",
@@ -28533,6 +29474,196 @@
         }
       ]
     },
+    "/v1/subscriptionAvailabilities": {
+      "post": {
+        "tags": [
+          "SubscriptionAvailabilities"
+        ],
+        "operationId": "subscriptionAvailabilities-create_instance",
+        "requestBody": {
+          "description": "SubscriptionAvailability representation",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/SubscriptionAvailabilityCreateRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "400": {
+            "description": "Parameter error(s)",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "201": {
+            "description": "Single SubscriptionAvailability",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SubscriptionAvailabilityResponse"
+                }
+              }
+            }
+          },
+          "409": {
+            "description": "Request entity error(s)",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/v1/subscriptionAvailabilities/{id}": {
+      "get": {
+        "tags": [
+          "SubscriptionAvailabilities"
+        ],
+        "operationId": "subscriptionAvailabilities-get_instance",
+        "parameters": [
+          {
+            "name": "fields[subscriptionAvailabilities]",
+            "in": "query",
+            "description": "the fields to include for returned resources of type subscriptionAvailabilities",
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "string",
+                "enum": [
+                  "availableInNewTerritories",
+                  "availableTerritories",
+                  "subscription"
+                ]
+              }
+            },
+            "style": "form",
+            "explode": false,
+            "required": false
+          },
+          {
+            "name": "include",
+            "in": "query",
+            "description": "comma-separated list of relationships to include",
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "string",
+                "enum": [
+                  "availableTerritories",
+                  "subscription"
+                ]
+              }
+            },
+            "style": "form",
+            "explode": false,
+            "required": false
+          },
+          {
+            "name": "fields[territories]",
+            "in": "query",
+            "description": "the fields to include for returned resources of type territories",
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "string",
+                "enum": [
+                  "currency"
+                ]
+              }
+            },
+            "style": "form",
+            "explode": false,
+            "required": false
+          },
+          {
+            "name": "limit[availableTerritories]",
+            "in": "query",
+            "description": "maximum number of related availableTerritories returned (when they are included)",
+            "schema": {
+              "type": "integer",
+              "maximum": 50
+            },
+            "style": "form",
+            "required": false
+          }
+        ],
+        "responses": {
+          "400": {
+            "description": "Parameter error(s)",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not found error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "200": {
+            "description": "Single SubscriptionAvailability",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SubscriptionAvailabilityResponse"
+                }
+              }
+            }
+          }
+        }
+      },
+      "parameters": [
+        {
+          "name": "id",
+          "in": "path",
+          "description": "the id of the requested resource",
+          "schema": {
+            "type": "string"
+          },
+          "style": "simple",
+          "required": true
+        }
+      ]
+    },
     "/v1/subscriptionGracePeriods/{id}": {
       "get": {
         "tags": [
@@ -32048,10 +33179,13 @@
               "items": {
                 "type": "string",
                 "enum": [
+                  "appAvailability",
                   "appClips",
                   "appCustomProductPages",
                   "appEvents",
                   "appInfos",
+                  "appPricePoints",
+                  "appPriceSchedule",
                   "appStoreVersions",
                   "availableInNewTerritories",
                   "availableTerritories",
@@ -32255,10 +33389,13 @@
               "items": {
                 "type": "string",
                 "enum": [
+                  "appAvailability",
                   "appClips",
                   "appCustomProductPages",
                   "appEvents",
                   "appInfos",
+                  "appPricePoints",
+                  "appPriceSchedule",
                   "appStoreVersions",
                   "availableInNewTerritories",
                   "availableTerritories",
@@ -32562,10 +33699,13 @@
               "items": {
                 "type": "string",
                 "enum": [
+                  "appAvailability",
                   "appClips",
                   "appCustomProductPages",
                   "appEvents",
                   "appInfos",
+                  "appPricePoints",
+                  "appPriceSchedule",
                   "appStoreVersions",
                   "availableInNewTerritories",
                   "availableTerritories",
@@ -32709,10 +33849,13 @@
               "items": {
                 "type": "string",
                 "enum": [
+                  "appAvailability",
                   "appClips",
                   "appCustomProductPages",
                   "appEvents",
                   "appInfos",
+                  "appPricePoints",
+                  "appPriceSchedule",
                   "appStoreVersions",
                   "availableInNewTerritories",
                   "availableTerritories",
@@ -32926,6 +34069,110 @@
           },
           "204": {
             "description": "Success (no content)"
+          }
+        }
+      },
+      "parameters": [
+        {
+          "name": "id",
+          "in": "path",
+          "description": "the id of the requested resource",
+          "schema": {
+            "type": "string"
+          },
+          "style": "simple",
+          "required": true
+        }
+      ]
+    },
+    "/v1/appAvailabilities/{id}/relationships/availableTerritories": {
+      "parameters": [
+        {
+          "name": "id",
+          "in": "path",
+          "description": "the id of the requested resource",
+          "schema": {
+            "type": "string"
+          },
+          "style": "simple",
+          "required": true
+        }
+      ]
+    },
+    "/v1/appAvailabilities/{id}/availableTerritories": {
+      "get": {
+        "tags": [
+          "AppAvailabilities"
+        ],
+        "operationId": "appAvailabilities-availableTerritories-get_to_many_related",
+        "parameters": [
+          {
+            "name": "fields[territories]",
+            "in": "query",
+            "description": "the fields to include for returned resources of type territories",
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "string",
+                "enum": [
+                  "currency"
+                ]
+              }
+            },
+            "style": "form",
+            "explode": false
+          },
+          {
+            "name": "limit",
+            "in": "query",
+            "description": "maximum resources per page",
+            "schema": {
+              "type": "integer",
+              "maximum": 200
+            },
+            "style": "form"
+          }
+        ],
+        "responses": {
+          "400": {
+            "description": "Parameter error(s)",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not found error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "200": {
+            "description": "List of Territories",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/TerritoriesResponse"
+                }
+              }
+            }
           }
         }
       },
@@ -33855,10 +35102,13 @@
               "items": {
                 "type": "string",
                 "enum": [
+                  "appAvailability",
                   "appClips",
                   "appCustomProductPages",
                   "appEvents",
                   "appInfos",
+                  "appPricePoints",
+                  "appPriceSchedule",
                   "appStoreVersions",
                   "availableInNewTerritories",
                   "availableTerritories",
@@ -35650,10 +36900,13 @@
               "items": {
                 "type": "string",
                 "enum": [
+                  "appAvailability",
                   "appClips",
                   "appCustomProductPages",
                   "appEvents",
                   "appInfos",
+                  "appPricePoints",
+                  "appPriceSchedule",
                   "appStoreVersions",
                   "availableInNewTerritories",
                   "availableTerritories",
@@ -37722,6 +38975,221 @@
         }
       ]
     },
+    "/v3/appPricePoints/{id}/relationships/equalizations": {
+      "parameters": [
+        {
+          "name": "id",
+          "in": "path",
+          "description": "the id of the requested resource",
+          "schema": {
+            "type": "string"
+          },
+          "style": "simple",
+          "required": true
+        }
+      ]
+    },
+    "/v3/appPricePoints/{id}/equalizations": {
+      "get": {
+        "tags": [
+          "AppPricePoints"
+        ],
+        "operationId": "appPricePoints-equalizations-get_to_many_related",
+        "parameters": [
+          {
+            "name": "filter[territory]",
+            "in": "query",
+            "description": "filter by id(s) of related 'territory'",
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            },
+            "style": "form",
+            "explode": false
+          },
+          {
+            "name": "fields[appPricePoints]",
+            "in": "query",
+            "description": "the fields to include for returned resources of type appPricePoints",
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "string",
+                "enum": [
+                  "app",
+                  "customerPrice",
+                  "equalizations",
+                  "proceeds",
+                  "territory"
+                ]
+              }
+            },
+            "style": "form",
+            "explode": false
+          },
+          {
+            "name": "fields[apps]",
+            "in": "query",
+            "description": "the fields to include for returned resources of type apps",
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "string",
+                "enum": [
+                  "appAvailability",
+                  "appClips",
+                  "appCustomProductPages",
+                  "appEvents",
+                  "appInfos",
+                  "appPricePoints",
+                  "appPriceSchedule",
+                  "appStoreVersions",
+                  "availableInNewTerritories",
+                  "availableTerritories",
+                  "betaAppLocalizations",
+                  "betaAppReviewDetail",
+                  "betaGroups",
+                  "betaLicenseAgreement",
+                  "betaTesters",
+                  "builds",
+                  "bundleId",
+                  "ciProduct",
+                  "contentRightsDeclaration",
+                  "customerReviews",
+                  "endUserLicenseAgreement",
+                  "gameCenterEnabledVersions",
+                  "inAppPurchases",
+                  "inAppPurchasesV2",
+                  "isOrEverWasMadeForKids",
+                  "name",
+                  "perfPowerMetrics",
+                  "preOrder",
+                  "preReleaseVersions",
+                  "pricePoints",
+                  "prices",
+                  "primaryLocale",
+                  "promotedPurchases",
+                  "reviewSubmissions",
+                  "sku",
+                  "subscriptionGracePeriod",
+                  "subscriptionGroups",
+                  "subscriptionStatusUrl",
+                  "subscriptionStatusUrlForSandbox",
+                  "subscriptionStatusUrlVersion",
+                  "subscriptionStatusUrlVersionForSandbox"
+                ]
+              }
+            },
+            "style": "form",
+            "explode": false
+          },
+          {
+            "name": "fields[territories]",
+            "in": "query",
+            "description": "the fields to include for returned resources of type territories",
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "string",
+                "enum": [
+                  "currency"
+                ]
+              }
+            },
+            "style": "form",
+            "explode": false
+          },
+          {
+            "name": "limit",
+            "in": "query",
+            "description": "maximum resources per page",
+            "schema": {
+              "type": "integer",
+              "maximum": 200
+            },
+            "style": "form"
+          },
+          {
+            "name": "include",
+            "in": "query",
+            "description": "comma-separated list of relationships to include",
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "string",
+                "enum": [
+                  "app",
+                  "territory"
+                ]
+              }
+            },
+            "style": "form",
+            "explode": false
+          }
+        ],
+        "responses": {
+          "400": {
+            "description": "Parameter error(s)",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not found error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "200": {
+            "description": "List of AppPricePoints",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AppPricePointsV3Response"
+                }
+              },
+              "text/csv": {
+                "schema": {
+                  "$ref": "#/components/schemas/csv"
+                }
+              }
+            }
+          }
+        }
+      },
+      "parameters": [
+        {
+          "name": "id",
+          "in": "path",
+          "description": "the id of the requested resource",
+          "schema": {
+            "type": "string"
+          },
+          "style": "simple",
+          "required": true
+        }
+      ]
+    },
     "/v1/appPricePoints/{id}/relationships/territory": {
       "parameters": [
         {
@@ -37798,6 +39266,500 @@
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/TerritoryResponse"
+                }
+              }
+            }
+          }
+        }
+      },
+      "parameters": [
+        {
+          "name": "id",
+          "in": "path",
+          "description": "the id of the requested resource",
+          "schema": {
+            "type": "string"
+          },
+          "style": "simple",
+          "required": true
+        }
+      ]
+    },
+    "/v1/appPriceSchedules/{id}/relationships/automaticPrices": {
+      "parameters": [
+        {
+          "name": "id",
+          "in": "path",
+          "description": "the id of the requested resource",
+          "schema": {
+            "type": "string"
+          },
+          "style": "simple",
+          "required": true
+        }
+      ]
+    },
+    "/v1/appPriceSchedules/{id}/automaticPrices": {
+      "get": {
+        "tags": [
+          "AppPriceSchedules"
+        ],
+        "operationId": "appPriceSchedules-automaticPrices-get_to_many_related",
+        "parameters": [
+          {
+            "name": "filter[endDate]",
+            "in": "query",
+            "description": "filter by attribute 'endDate'",
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            },
+            "style": "form",
+            "explode": false
+          },
+          {
+            "name": "filter[startDate]",
+            "in": "query",
+            "description": "filter by attribute 'startDate'",
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            },
+            "style": "form",
+            "explode": false
+          },
+          {
+            "name": "filter[territory]",
+            "in": "query",
+            "description": "filter by id(s) of related 'territory'",
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            },
+            "style": "form",
+            "explode": false
+          },
+          {
+            "name": "fields[appPrices]",
+            "in": "query",
+            "description": "the fields to include for returned resources of type appPrices",
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "string",
+                "enum": [
+                  "appPricePoint",
+                  "endDate",
+                  "manual",
+                  "startDate",
+                  "territory"
+                ]
+              }
+            },
+            "style": "form",
+            "explode": false
+          },
+          {
+            "name": "fields[appPricePoints]",
+            "in": "query",
+            "description": "the fields to include for returned resources of type appPricePoints",
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "string",
+                "enum": [
+                  "app",
+                  "customerPrice",
+                  "equalizations",
+                  "proceeds",
+                  "territory"
+                ]
+              }
+            },
+            "style": "form",
+            "explode": false
+          },
+          {
+            "name": "fields[territories]",
+            "in": "query",
+            "description": "the fields to include for returned resources of type territories",
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "string",
+                "enum": [
+                  "currency"
+                ]
+              }
+            },
+            "style": "form",
+            "explode": false
+          },
+          {
+            "name": "limit",
+            "in": "query",
+            "description": "maximum resources per page",
+            "schema": {
+              "type": "integer",
+              "maximum": 200
+            },
+            "style": "form"
+          },
+          {
+            "name": "include",
+            "in": "query",
+            "description": "comma-separated list of relationships to include",
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "string",
+                "enum": [
+                  "appPricePoint",
+                  "territory"
+                ]
+              }
+            },
+            "style": "form",
+            "explode": false
+          }
+        ],
+        "responses": {
+          "400": {
+            "description": "Parameter error(s)",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not found error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "200": {
+            "description": "List of AppPrices",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AppPricesV2Response"
+                }
+              }
+            }
+          }
+        }
+      },
+      "parameters": [
+        {
+          "name": "id",
+          "in": "path",
+          "description": "the id of the requested resource",
+          "schema": {
+            "type": "string"
+          },
+          "style": "simple",
+          "required": true
+        }
+      ]
+    },
+    "/v1/appPriceSchedules/{id}/relationships/baseTerritory": {
+      "parameters": [
+        {
+          "name": "id",
+          "in": "path",
+          "description": "the id of the requested resource",
+          "schema": {
+            "type": "string"
+          },
+          "style": "simple",
+          "required": true
+        }
+      ]
+    },
+    "/v1/appPriceSchedules/{id}/baseTerritory": {
+      "get": {
+        "tags": [
+          "AppPriceSchedules"
+        ],
+        "operationId": "appPriceSchedules-baseTerritory-get_to_one_related",
+        "parameters": [
+          {
+            "name": "fields[territories]",
+            "in": "query",
+            "description": "the fields to include for returned resources of type territories",
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "string",
+                "enum": [
+                  "currency"
+                ]
+              }
+            },
+            "style": "form",
+            "explode": false
+          }
+        ],
+        "responses": {
+          "400": {
+            "description": "Parameter error(s)",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not found error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "200": {
+            "description": "Single Territory",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/TerritoryResponse"
+                }
+              }
+            }
+          }
+        }
+      },
+      "parameters": [
+        {
+          "name": "id",
+          "in": "path",
+          "description": "the id of the requested resource",
+          "schema": {
+            "type": "string"
+          },
+          "style": "simple",
+          "required": true
+        }
+      ]
+    },
+    "/v1/appPriceSchedules/{id}/relationships/manualPrices": {
+      "parameters": [
+        {
+          "name": "id",
+          "in": "path",
+          "description": "the id of the requested resource",
+          "schema": {
+            "type": "string"
+          },
+          "style": "simple",
+          "required": true
+        }
+      ]
+    },
+    "/v1/appPriceSchedules/{id}/manualPrices": {
+      "get": {
+        "tags": [
+          "AppPriceSchedules"
+        ],
+        "operationId": "appPriceSchedules-manualPrices-get_to_many_related",
+        "parameters": [
+          {
+            "name": "filter[endDate]",
+            "in": "query",
+            "description": "filter by attribute 'endDate'",
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            },
+            "style": "form",
+            "explode": false
+          },
+          {
+            "name": "filter[startDate]",
+            "in": "query",
+            "description": "filter by attribute 'startDate'",
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            },
+            "style": "form",
+            "explode": false
+          },
+          {
+            "name": "filter[territory]",
+            "in": "query",
+            "description": "filter by id(s) of related 'territory'",
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            },
+            "style": "form",
+            "explode": false
+          },
+          {
+            "name": "fields[appPrices]",
+            "in": "query",
+            "description": "the fields to include for returned resources of type appPrices",
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "string",
+                "enum": [
+                  "appPricePoint",
+                  "endDate",
+                  "manual",
+                  "startDate",
+                  "territory"
+                ]
+              }
+            },
+            "style": "form",
+            "explode": false
+          },
+          {
+            "name": "fields[appPricePoints]",
+            "in": "query",
+            "description": "the fields to include for returned resources of type appPricePoints",
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "string",
+                "enum": [
+                  "app",
+                  "customerPrice",
+                  "equalizations",
+                  "proceeds",
+                  "territory"
+                ]
+              }
+            },
+            "style": "form",
+            "explode": false
+          },
+          {
+            "name": "fields[territories]",
+            "in": "query",
+            "description": "the fields to include for returned resources of type territories",
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "string",
+                "enum": [
+                  "currency"
+                ]
+              }
+            },
+            "style": "form",
+            "explode": false
+          },
+          {
+            "name": "limit",
+            "in": "query",
+            "description": "maximum resources per page",
+            "schema": {
+              "type": "integer",
+              "maximum": 200
+            },
+            "style": "form"
+          },
+          {
+            "name": "include",
+            "in": "query",
+            "description": "comma-separated list of relationships to include",
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "string",
+                "enum": [
+                  "appPricePoint",
+                  "territory"
+                ]
+              }
+            },
+            "style": "form",
+            "explode": false
+          }
+        ],
+        "responses": {
+          "400": {
+            "description": "Parameter error(s)",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not found error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "200": {
+            "description": "List of AppPrices",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AppPricesV2Response"
                 }
               }
             }
@@ -41900,6 +43862,201 @@
         }
       ]
     },
+    "/v1/apps/{id}/relationships/appAvailability": {
+      "parameters": [
+        {
+          "name": "id",
+          "in": "path",
+          "description": "the id of the requested resource",
+          "schema": {
+            "type": "string"
+          },
+          "style": "simple",
+          "required": true
+        }
+      ]
+    },
+    "/v1/apps/{id}/appAvailability": {
+      "get": {
+        "tags": [
+          "Apps"
+        ],
+        "operationId": "apps-appAvailability-get_to_one_related",
+        "parameters": [
+          {
+            "name": "fields[appAvailabilities]",
+            "in": "query",
+            "description": "the fields to include for returned resources of type appAvailabilities",
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "string",
+                "enum": [
+                  "app",
+                  "availableInNewTerritories",
+                  "availableTerritories"
+                ]
+              }
+            },
+            "style": "form",
+            "explode": false
+          },
+          {
+            "name": "fields[apps]",
+            "in": "query",
+            "description": "the fields to include for returned resources of type apps",
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "string",
+                "enum": [
+                  "appAvailability",
+                  "appClips",
+                  "appCustomProductPages",
+                  "appEvents",
+                  "appInfos",
+                  "appPricePoints",
+                  "appPriceSchedule",
+                  "appStoreVersions",
+                  "availableInNewTerritories",
+                  "availableTerritories",
+                  "betaAppLocalizations",
+                  "betaAppReviewDetail",
+                  "betaGroups",
+                  "betaLicenseAgreement",
+                  "betaTesters",
+                  "builds",
+                  "bundleId",
+                  "ciProduct",
+                  "contentRightsDeclaration",
+                  "customerReviews",
+                  "endUserLicenseAgreement",
+                  "gameCenterEnabledVersions",
+                  "inAppPurchases",
+                  "inAppPurchasesV2",
+                  "isOrEverWasMadeForKids",
+                  "name",
+                  "perfPowerMetrics",
+                  "preOrder",
+                  "preReleaseVersions",
+                  "pricePoints",
+                  "prices",
+                  "primaryLocale",
+                  "promotedPurchases",
+                  "reviewSubmissions",
+                  "sku",
+                  "subscriptionGracePeriod",
+                  "subscriptionGroups",
+                  "subscriptionStatusUrl",
+                  "subscriptionStatusUrlForSandbox",
+                  "subscriptionStatusUrlVersion",
+                  "subscriptionStatusUrlVersionForSandbox"
+                ]
+              }
+            },
+            "style": "form",
+            "explode": false
+          },
+          {
+            "name": "fields[territories]",
+            "in": "query",
+            "description": "the fields to include for returned resources of type territories",
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "string",
+                "enum": [
+                  "currency"
+                ]
+              }
+            },
+            "style": "form",
+            "explode": false
+          },
+          {
+            "name": "limit[availableTerritories]",
+            "in": "query",
+            "description": "maximum number of related availableTerritories returned (when they are included)",
+            "schema": {
+              "type": "integer",
+              "maximum": 50
+            },
+            "style": "form"
+          },
+          {
+            "name": "include",
+            "in": "query",
+            "description": "comma-separated list of relationships to include",
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "string",
+                "enum": [
+                  "app",
+                  "availableTerritories"
+                ]
+              }
+            },
+            "style": "form",
+            "explode": false
+          }
+        ],
+        "responses": {
+          "400": {
+            "description": "Parameter error(s)",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not found error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "200": {
+            "description": "Single AppAvailability",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AppAvailabilityResponse"
+                }
+              }
+            }
+          }
+        }
+      },
+      "parameters": [
+        {
+          "name": "id",
+          "in": "path",
+          "description": "the id of the requested resource",
+          "schema": {
+            "type": "string"
+          },
+          "style": "simple",
+          "required": true
+        }
+      ]
+    },
     "/v1/apps/{id}/relationships/appClips": {
       "parameters": [
         {
@@ -41962,10 +44119,13 @@
               "items": {
                 "type": "string",
                 "enum": [
+                  "appAvailability",
                   "appClips",
                   "appCustomProductPages",
                   "appEvents",
                   "appInfos",
+                  "appPricePoints",
+                  "appPriceSchedule",
                   "appStoreVersions",
                   "availableInNewTerritories",
                   "availableTerritories",
@@ -42205,10 +44365,13 @@
               "items": {
                 "type": "string",
                 "enum": [
+                  "appAvailability",
                   "appClips",
                   "appCustomProductPages",
                   "appEvents",
                   "appInfos",
+                  "appPricePoints",
+                  "appPriceSchedule",
                   "appStoreVersions",
                   "availableInNewTerritories",
                   "availableTerritories",
@@ -42675,10 +44838,13 @@
               "items": {
                 "type": "string",
                 "enum": [
+                  "appAvailability",
                   "appClips",
                   "appCustomProductPages",
                   "appEvents",
                   "appInfos",
+                  "appPricePoints",
+                  "appPriceSchedule",
                   "appStoreVersions",
                   "availableInNewTerritories",
                   "availableTerritories",
@@ -42801,6 +44967,449 @@
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/AppInfosResponse"
+                }
+              }
+            }
+          }
+        }
+      },
+      "parameters": [
+        {
+          "name": "id",
+          "in": "path",
+          "description": "the id of the requested resource",
+          "schema": {
+            "type": "string"
+          },
+          "style": "simple",
+          "required": true
+        }
+      ]
+    },
+    "/v1/apps/{id}/relationships/appPricePoints": {
+      "parameters": [
+        {
+          "name": "id",
+          "in": "path",
+          "description": "the id of the requested resource",
+          "schema": {
+            "type": "string"
+          },
+          "style": "simple",
+          "required": true
+        }
+      ]
+    },
+    "/v1/apps/{id}/appPricePoints": {
+      "get": {
+        "tags": [
+          "Apps"
+        ],
+        "operationId": "apps-appPricePoints-get_to_many_related",
+        "parameters": [
+          {
+            "name": "filter[territory]",
+            "in": "query",
+            "description": "filter by id(s) of related 'territory'",
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            },
+            "style": "form",
+            "explode": false
+          },
+          {
+            "name": "fields[appPricePoints]",
+            "in": "query",
+            "description": "the fields to include for returned resources of type appPricePoints",
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "string",
+                "enum": [
+                  "app",
+                  "customerPrice",
+                  "equalizations",
+                  "proceeds",
+                  "territory"
+                ]
+              }
+            },
+            "style": "form",
+            "explode": false
+          },
+          {
+            "name": "fields[apps]",
+            "in": "query",
+            "description": "the fields to include for returned resources of type apps",
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "string",
+                "enum": [
+                  "appAvailability",
+                  "appClips",
+                  "appCustomProductPages",
+                  "appEvents",
+                  "appInfos",
+                  "appPricePoints",
+                  "appPriceSchedule",
+                  "appStoreVersions",
+                  "availableInNewTerritories",
+                  "availableTerritories",
+                  "betaAppLocalizations",
+                  "betaAppReviewDetail",
+                  "betaGroups",
+                  "betaLicenseAgreement",
+                  "betaTesters",
+                  "builds",
+                  "bundleId",
+                  "ciProduct",
+                  "contentRightsDeclaration",
+                  "customerReviews",
+                  "endUserLicenseAgreement",
+                  "gameCenterEnabledVersions",
+                  "inAppPurchases",
+                  "inAppPurchasesV2",
+                  "isOrEverWasMadeForKids",
+                  "name",
+                  "perfPowerMetrics",
+                  "preOrder",
+                  "preReleaseVersions",
+                  "pricePoints",
+                  "prices",
+                  "primaryLocale",
+                  "promotedPurchases",
+                  "reviewSubmissions",
+                  "sku",
+                  "subscriptionGracePeriod",
+                  "subscriptionGroups",
+                  "subscriptionStatusUrl",
+                  "subscriptionStatusUrlForSandbox",
+                  "subscriptionStatusUrlVersion",
+                  "subscriptionStatusUrlVersionForSandbox"
+                ]
+              }
+            },
+            "style": "form",
+            "explode": false
+          },
+          {
+            "name": "fields[territories]",
+            "in": "query",
+            "description": "the fields to include for returned resources of type territories",
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "string",
+                "enum": [
+                  "currency"
+                ]
+              }
+            },
+            "style": "form",
+            "explode": false
+          },
+          {
+            "name": "limit",
+            "in": "query",
+            "description": "maximum resources per page",
+            "schema": {
+              "type": "integer",
+              "maximum": 200
+            },
+            "style": "form"
+          },
+          {
+            "name": "include",
+            "in": "query",
+            "description": "comma-separated list of relationships to include",
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "string",
+                "enum": [
+                  "app",
+                  "territory"
+                ]
+              }
+            },
+            "style": "form",
+            "explode": false
+          }
+        ],
+        "responses": {
+          "400": {
+            "description": "Parameter error(s)",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not found error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "200": {
+            "description": "List of AppPricePoints",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AppPricePointsV3Response"
+                }
+              },
+              "text/csv": {
+                "schema": {
+                  "$ref": "#/components/schemas/csv"
+                }
+              }
+            }
+          }
+        }
+      },
+      "parameters": [
+        {
+          "name": "id",
+          "in": "path",
+          "description": "the id of the requested resource",
+          "schema": {
+            "type": "string"
+          },
+          "style": "simple",
+          "required": true
+        }
+      ]
+    },
+    "/v1/apps/{id}/relationships/appPriceSchedule": {
+      "parameters": [
+        {
+          "name": "id",
+          "in": "path",
+          "description": "the id of the requested resource",
+          "schema": {
+            "type": "string"
+          },
+          "style": "simple",
+          "required": true
+        }
+      ]
+    },
+    "/v1/apps/{id}/appPriceSchedule": {
+      "get": {
+        "tags": [
+          "Apps"
+        ],
+        "operationId": "apps-appPriceSchedule-get_to_one_related",
+        "parameters": [
+          {
+            "name": "fields[appPrices]",
+            "in": "query",
+            "description": "the fields to include for returned resources of type appPrices",
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "string",
+                "enum": [
+                  "appPricePoint",
+                  "endDate",
+                  "manual",
+                  "startDate",
+                  "territory"
+                ]
+              }
+            },
+            "style": "form",
+            "explode": false
+          },
+          {
+            "name": "fields[appPriceSchedules]",
+            "in": "query",
+            "description": "the fields to include for returned resources of type appPriceSchedules",
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "string",
+                "enum": [
+                  "app",
+                  "automaticPrices",
+                  "baseTerritory",
+                  "manualPrices"
+                ]
+              }
+            },
+            "style": "form",
+            "explode": false
+          },
+          {
+            "name": "fields[apps]",
+            "in": "query",
+            "description": "the fields to include for returned resources of type apps",
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "string",
+                "enum": [
+                  "appAvailability",
+                  "appClips",
+                  "appCustomProductPages",
+                  "appEvents",
+                  "appInfos",
+                  "appPricePoints",
+                  "appPriceSchedule",
+                  "appStoreVersions",
+                  "availableInNewTerritories",
+                  "availableTerritories",
+                  "betaAppLocalizations",
+                  "betaAppReviewDetail",
+                  "betaGroups",
+                  "betaLicenseAgreement",
+                  "betaTesters",
+                  "builds",
+                  "bundleId",
+                  "ciProduct",
+                  "contentRightsDeclaration",
+                  "customerReviews",
+                  "endUserLicenseAgreement",
+                  "gameCenterEnabledVersions",
+                  "inAppPurchases",
+                  "inAppPurchasesV2",
+                  "isOrEverWasMadeForKids",
+                  "name",
+                  "perfPowerMetrics",
+                  "preOrder",
+                  "preReleaseVersions",
+                  "pricePoints",
+                  "prices",
+                  "primaryLocale",
+                  "promotedPurchases",
+                  "reviewSubmissions",
+                  "sku",
+                  "subscriptionGracePeriod",
+                  "subscriptionGroups",
+                  "subscriptionStatusUrl",
+                  "subscriptionStatusUrlForSandbox",
+                  "subscriptionStatusUrlVersion",
+                  "subscriptionStatusUrlVersionForSandbox"
+                ]
+              }
+            },
+            "style": "form",
+            "explode": false
+          },
+          {
+            "name": "fields[territories]",
+            "in": "query",
+            "description": "the fields to include for returned resources of type territories",
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "string",
+                "enum": [
+                  "currency"
+                ]
+              }
+            },
+            "style": "form",
+            "explode": false
+          },
+          {
+            "name": "limit[manualPrices]",
+            "in": "query",
+            "description": "maximum number of related manualPrices returned (when they are included)",
+            "schema": {
+              "type": "integer",
+              "maximum": 50
+            },
+            "style": "form"
+          },
+          {
+            "name": "limit[automaticPrices]",
+            "in": "query",
+            "description": "maximum number of related automaticPrices returned (when they are included)",
+            "schema": {
+              "type": "integer",
+              "maximum": 50
+            },
+            "style": "form"
+          },
+          {
+            "name": "include",
+            "in": "query",
+            "description": "comma-separated list of relationships to include",
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "string",
+                "enum": [
+                  "app",
+                  "automaticPrices",
+                  "baseTerritory",
+                  "manualPrices"
+                ]
+              }
+            },
+            "style": "form",
+            "explode": false
+          }
+        ],
+        "responses": {
+          "400": {
+            "description": "Parameter error(s)",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not found error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "200": {
+            "description": "Single AppPriceSchedule",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AppPriceScheduleResponse"
                 }
               }
             }
@@ -43059,10 +45668,13 @@
               "items": {
                 "type": "string",
                 "enum": [
+                  "appAvailability",
                   "appClips",
                   "appCustomProductPages",
                   "appEvents",
                   "appInfos",
+                  "appPricePoints",
+                  "appPriceSchedule",
                   "appStoreVersions",
                   "availableInNewTerritories",
                   "availableTerritories",
@@ -43362,6 +45974,7 @@
           "Apps"
         ],
         "operationId": "apps-availableTerritories-get_to_many_related",
+        "deprecated": true,
         "parameters": [
           {
             "name": "fields[territories]",
@@ -44120,10 +46733,13 @@
               "items": {
                 "type": "string",
                 "enum": [
+                  "appAvailability",
                   "appClips",
                   "appCustomProductPages",
                   "appEvents",
                   "appInfos",
+                  "appPricePoints",
+                  "appPriceSchedule",
                   "appStoreVersions",
                   "availableInNewTerritories",
                   "availableTerritories",
@@ -44936,10 +47552,13 @@
               "items": {
                 "type": "string",
                 "enum": [
+                  "appAvailability",
                   "appClips",
                   "appCustomProductPages",
                   "appEvents",
                   "appInfos",
+                  "appPricePoints",
+                  "appPriceSchedule",
                   "appStoreVersions",
                   "availableInNewTerritories",
                   "availableTerritories",
@@ -45179,10 +47798,13 @@
               "items": {
                 "type": "string",
                 "enum": [
+                  "appAvailability",
                   "appClips",
                   "appCustomProductPages",
                   "appEvents",
                   "appInfos",
+                  "appPricePoints",
+                  "appPriceSchedule",
                   "appStoreVersions",
                   "availableInNewTerritories",
                   "availableTerritories",
@@ -45553,6 +48175,8 @@
               "items": {
                 "type": "string",
                 "enum": [
+                  "automaticPrices",
+                  "baseTerritory",
                   "inAppPurchase",
                   "manualPrices"
                 ]
@@ -46027,6 +48651,7 @@
           "Apps"
         ],
         "operationId": "apps-pricePoints-get_to_many_related",
+        "deprecated": true,
         "parameters": [
           {
             "name": "filter[priceTier]",
@@ -46039,7 +48664,8 @@
               }
             },
             "style": "form",
-            "explode": false
+            "explode": false,
+            "deprecated": true
           },
           {
             "name": "filter[territory]",
@@ -46099,10 +48725,13 @@
               "items": {
                 "type": "string",
                 "enum": [
+                  "appAvailability",
                   "appClips",
                   "appCustomProductPages",
                   "appEvents",
                   "appInfos",
+                  "appPricePoints",
+                  "appPriceSchedule",
                   "appStoreVersions",
                   "availableInNewTerritories",
                   "availableTerritories",
@@ -46264,6 +48893,7 @@
           "Apps"
         ],
         "operationId": "apps-prices-get_to_many_related",
+        "deprecated": true,
         "parameters": [
           {
             "name": "fields[appPriceTiers]",
@@ -46290,10 +48920,13 @@
               "items": {
                 "type": "string",
                 "enum": [
+                  "appAvailability",
                   "appClips",
                   "appCustomProductPages",
                   "appEvents",
                   "appInfos",
+                  "appPricePoints",
+                  "appPriceSchedule",
                   "appStoreVersions",
                   "availableInNewTerritories",
                   "availableTerritories",
@@ -46899,10 +49532,13 @@
               "items": {
                 "type": "string",
                 "enum": [
+                  "appAvailability",
                   "appClips",
                   "appCustomProductPages",
                   "appEvents",
                   "appInfos",
+                  "appPricePoints",
+                  "appPriceSchedule",
                   "appStoreVersions",
                   "availableInNewTerritories",
                   "availableTerritories",
@@ -47439,10 +50075,13 @@
               "items": {
                 "type": "string",
                 "enum": [
+                  "appAvailability",
                   "appClips",
                   "appCustomProductPages",
                   "appEvents",
                   "appInfos",
+                  "appPricePoints",
+                  "appPriceSchedule",
                   "appStoreVersions",
                   "availableInNewTerritories",
                   "availableTerritories",
@@ -47570,10 +50209,13 @@
               "items": {
                 "type": "string",
                 "enum": [
+                  "appAvailability",
                   "appClips",
                   "appCustomProductPages",
                   "appEvents",
                   "appInfos",
+                  "appPricePoints",
+                  "appPriceSchedule",
                   "appStoreVersions",
                   "availableInNewTerritories",
                   "availableTerritories",
@@ -47935,10 +50577,13 @@
               "items": {
                 "type": "string",
                 "enum": [
+                  "appAvailability",
                   "appClips",
                   "appCustomProductPages",
                   "appEvents",
                   "appInfos",
+                  "appPricePoints",
+                  "appPriceSchedule",
                   "appStoreVersions",
                   "availableInNewTerritories",
                   "availableTerritories",
@@ -48631,10 +51276,13 @@
               "items": {
                 "type": "string",
                 "enum": [
+                  "appAvailability",
                   "appClips",
                   "appCustomProductPages",
                   "appEvents",
                   "appInfos",
+                  "appPricePoints",
+                  "appPriceSchedule",
                   "appStoreVersions",
                   "availableInNewTerritories",
                   "availableTerritories",
@@ -48877,10 +51525,13 @@
               "items": {
                 "type": "string",
                 "enum": [
+                  "appAvailability",
                   "appClips",
                   "appCustomProductPages",
                   "appEvents",
                   "appInfos",
+                  "appPricePoints",
+                  "appPriceSchedule",
                   "appStoreVersions",
                   "availableInNewTerritories",
                   "availableTerritories",
@@ -50154,10 +52805,13 @@
               "items": {
                 "type": "string",
                 "enum": [
+                  "appAvailability",
                   "appClips",
                   "appCustomProductPages",
                   "appEvents",
                   "appInfos",
+                  "appPricePoints",
+                  "appPriceSchedule",
                   "appStoreVersions",
                   "availableInNewTerritories",
                   "availableTerritories",
@@ -50627,10 +53281,13 @@
               "items": {
                 "type": "string",
                 "enum": [
+                  "appAvailability",
                   "appClips",
                   "appCustomProductPages",
                   "appEvents",
                   "appInfos",
+                  "appPricePoints",
+                  "appPriceSchedule",
                   "appStoreVersions",
                   "availableInNewTerritories",
                   "availableTerritories",
@@ -52063,10 +54720,13 @@
               "items": {
                 "type": "string",
                 "enum": [
+                  "appAvailability",
                   "appClips",
                   "appCustomProductPages",
                   "appEvents",
                   "appInfos",
+                  "appPricePoints",
+                  "appPriceSchedule",
                   "appStoreVersions",
                   "availableInNewTerritories",
                   "availableTerritories",
@@ -53618,10 +56278,13 @@
               "items": {
                 "type": "string",
                 "enum": [
+                  "appAvailability",
                   "appClips",
                   "appCustomProductPages",
                   "appEvents",
                   "appInfos",
+                  "appPricePoints",
+                  "appPriceSchedule",
                   "appStoreVersions",
                   "availableInNewTerritories",
                   "availableTerritories",
@@ -54679,10 +57342,13 @@
               "items": {
                 "type": "string",
                 "enum": [
+                  "appAvailability",
                   "appClips",
                   "appCustomProductPages",
                   "appEvents",
                   "appInfos",
+                  "appPricePoints",
+                  "appPriceSchedule",
                   "appStoreVersions",
                   "availableInNewTerritories",
                   "availableTerritories",
@@ -54883,7 +57549,8 @@
               "type": "integer",
               "maximum": 50
             },
-            "style": "form"
+            "style": "form",
+            "deprecated": true
           },
           {
             "name": "limit[availableTerritories]",
@@ -57055,10 +59722,13 @@
               "items": {
                 "type": "string",
                 "enum": [
+                  "appAvailability",
                   "appClips",
                   "appCustomProductPages",
                   "appEvents",
                   "appInfos",
+                  "appPricePoints",
+                  "appPriceSchedule",
                   "appStoreVersions",
                   "availableInNewTerritories",
                   "availableTerritories",
@@ -57193,6 +59863,379 @@
         }
       ]
     },
+    "/v1/inAppPurchaseAvailabilities/{id}/relationships/availableTerritories": {
+      "parameters": [
+        {
+          "name": "id",
+          "in": "path",
+          "description": "the id of the requested resource",
+          "schema": {
+            "type": "string"
+          },
+          "style": "simple",
+          "required": true
+        }
+      ]
+    },
+    "/v1/inAppPurchaseAvailabilities/{id}/availableTerritories": {
+      "get": {
+        "tags": [
+          "InAppPurchaseAvailabilities"
+        ],
+        "operationId": "inAppPurchaseAvailabilities-availableTerritories-get_to_many_related",
+        "parameters": [
+          {
+            "name": "fields[territories]",
+            "in": "query",
+            "description": "the fields to include for returned resources of type territories",
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "string",
+                "enum": [
+                  "currency"
+                ]
+              }
+            },
+            "style": "form",
+            "explode": false
+          },
+          {
+            "name": "limit",
+            "in": "query",
+            "description": "maximum resources per page",
+            "schema": {
+              "type": "integer",
+              "maximum": 200
+            },
+            "style": "form"
+          }
+        ],
+        "responses": {
+          "400": {
+            "description": "Parameter error(s)",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not found error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "200": {
+            "description": "List of Territories",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/TerritoriesResponse"
+                }
+              }
+            }
+          }
+        }
+      },
+      "parameters": [
+        {
+          "name": "id",
+          "in": "path",
+          "description": "the id of the requested resource",
+          "schema": {
+            "type": "string"
+          },
+          "style": "simple",
+          "required": true
+        }
+      ]
+    },
+    "/v1/inAppPurchasePriceSchedules/{id}/relationships/automaticPrices": {
+      "parameters": [
+        {
+          "name": "id",
+          "in": "path",
+          "description": "the id of the requested resource",
+          "schema": {
+            "type": "string"
+          },
+          "style": "simple",
+          "required": true
+        }
+      ]
+    },
+    "/v1/inAppPurchasePriceSchedules/{id}/automaticPrices": {
+      "get": {
+        "tags": [
+          "InAppPurchasePriceSchedules"
+        ],
+        "operationId": "inAppPurchasePriceSchedules-automaticPrices-get_to_many_related",
+        "parameters": [
+          {
+            "name": "filter[territory]",
+            "in": "query",
+            "description": "filter by id(s) of related 'territory'",
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            },
+            "style": "form",
+            "explode": false
+          },
+          {
+            "name": "fields[inAppPurchasePricePoints]",
+            "in": "query",
+            "description": "the fields to include for returned resources of type inAppPurchasePricePoints",
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "string",
+                "enum": [
+                  "customerPrice",
+                  "inAppPurchaseV2",
+                  "priceTier",
+                  "proceeds",
+                  "territory"
+                ]
+              }
+            },
+            "style": "form",
+            "explode": false
+          },
+          {
+            "name": "fields[inAppPurchasePrices]",
+            "in": "query",
+            "description": "the fields to include for returned resources of type inAppPurchasePrices",
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "string",
+                "enum": [
+                  "endDate",
+                  "inAppPurchasePricePoint",
+                  "inAppPurchaseV2",
+                  "manual",
+                  "startDate",
+                  "territory"
+                ]
+              }
+            },
+            "style": "form",
+            "explode": false
+          },
+          {
+            "name": "fields[territories]",
+            "in": "query",
+            "description": "the fields to include for returned resources of type territories",
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "string",
+                "enum": [
+                  "currency"
+                ]
+              }
+            },
+            "style": "form",
+            "explode": false
+          },
+          {
+            "name": "limit",
+            "in": "query",
+            "description": "maximum resources per page",
+            "schema": {
+              "type": "integer",
+              "maximum": 200
+            },
+            "style": "form"
+          },
+          {
+            "name": "include",
+            "in": "query",
+            "description": "comma-separated list of relationships to include",
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "string",
+                "enum": [
+                  "inAppPurchasePricePoint",
+                  "territory"
+                ]
+              }
+            },
+            "style": "form",
+            "explode": false
+          }
+        ],
+        "responses": {
+          "400": {
+            "description": "Parameter error(s)",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not found error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "200": {
+            "description": "List of InAppPurchasePrices",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/InAppPurchasePricesResponse"
+                }
+              }
+            }
+          }
+        }
+      },
+      "parameters": [
+        {
+          "name": "id",
+          "in": "path",
+          "description": "the id of the requested resource",
+          "schema": {
+            "type": "string"
+          },
+          "style": "simple",
+          "required": true
+        }
+      ]
+    },
+    "/v1/inAppPurchasePriceSchedules/{id}/relationships/baseTerritory": {
+      "parameters": [
+        {
+          "name": "id",
+          "in": "path",
+          "description": "the id of the requested resource",
+          "schema": {
+            "type": "string"
+          },
+          "style": "simple",
+          "required": true
+        }
+      ]
+    },
+    "/v1/inAppPurchasePriceSchedules/{id}/baseTerritory": {
+      "get": {
+        "tags": [
+          "InAppPurchasePriceSchedules"
+        ],
+        "operationId": "inAppPurchasePriceSchedules-baseTerritory-get_to_one_related",
+        "parameters": [
+          {
+            "name": "fields[territories]",
+            "in": "query",
+            "description": "the fields to include for returned resources of type territories",
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "string",
+                "enum": [
+                  "currency"
+                ]
+              }
+            },
+            "style": "form",
+            "explode": false
+          }
+        ],
+        "responses": {
+          "400": {
+            "description": "Parameter error(s)",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not found error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "200": {
+            "description": "Single Territory",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/TerritoryResponse"
+                }
+              }
+            }
+          }
+        }
+      },
+      "parameters": [
+        {
+          "name": "id",
+          "in": "path",
+          "description": "the id of the requested resource",
+          "schema": {
+            "type": "string"
+          },
+          "style": "simple",
+          "required": true
+        }
+      ]
+    },
     "/v1/inAppPurchasePriceSchedules/{id}/relationships/manualPrices": {
       "parameters": [
         {
@@ -57256,8 +60299,10 @@
               "items": {
                 "type": "string",
                 "enum": [
+                  "endDate",
                   "inAppPurchasePricePoint",
                   "inAppPurchaseV2",
+                  "manual",
                   "startDate",
                   "territory"
                 ]
@@ -57689,8 +60734,10 @@
               "items": {
                 "type": "string",
                 "enum": [
+                  "endDate",
                   "inAppPurchasePricePoint",
                   "inAppPurchaseV2",
+                  "manual",
                   "startDate",
                   "territory"
                 ]
@@ -57738,8 +60785,26 @@
               "items": {
                 "type": "string",
                 "enum": [
+                  "automaticPrices",
+                  "baseTerritory",
                   "inAppPurchase",
                   "manualPrices"
+                ]
+              }
+            },
+            "style": "form",
+            "explode": false
+          },
+          {
+            "name": "fields[territories]",
+            "in": "query",
+            "description": "the fields to include for returned resources of type territories",
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "string",
+                "enum": [
+                  "currency"
                 ]
               }
             },
@@ -57757,6 +60822,16 @@
             "style": "form"
           },
           {
+            "name": "limit[automaticPrices]",
+            "in": "query",
+            "description": "maximum number of related automaticPrices returned (when they are included)",
+            "schema": {
+              "type": "integer",
+              "maximum": 50
+            },
+            "style": "form"
+          },
+          {
             "name": "include",
             "in": "query",
             "description": "comma-separated list of relationships to include",
@@ -57765,6 +60840,8 @@
               "items": {
                 "type": "string",
                 "enum": [
+                  "automaticPrices",
+                  "baseTerritory",
                   "inAppPurchase",
                   "manualPrices"
                 ]
@@ -58400,10 +61477,13 @@
               "items": {
                 "type": "string",
                 "enum": [
+                  "appAvailability",
                   "appClips",
                   "appCustomProductPages",
                   "appEvents",
                   "appInfos",
+                  "appPricePoints",
+                  "appPriceSchedule",
                   "appStoreVersions",
                   "availableInNewTerritories",
                   "availableTerritories",
@@ -59798,6 +62878,110 @@
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/ScmPullRequestsResponse"
+                }
+              }
+            }
+          }
+        }
+      },
+      "parameters": [
+        {
+          "name": "id",
+          "in": "path",
+          "description": "the id of the requested resource",
+          "schema": {
+            "type": "string"
+          },
+          "style": "simple",
+          "required": true
+        }
+      ]
+    },
+    "/v1/subscriptionAvailabilities/{id}/relationships/availableTerritories": {
+      "parameters": [
+        {
+          "name": "id",
+          "in": "path",
+          "description": "the id of the requested resource",
+          "schema": {
+            "type": "string"
+          },
+          "style": "simple",
+          "required": true
+        }
+      ]
+    },
+    "/v1/subscriptionAvailabilities/{id}/availableTerritories": {
+      "get": {
+        "tags": [
+          "SubscriptionAvailabilities"
+        ],
+        "operationId": "subscriptionAvailabilities-availableTerritories-get_to_many_related",
+        "parameters": [
+          {
+            "name": "fields[territories]",
+            "in": "query",
+            "description": "the fields to include for returned resources of type territories",
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "string",
+                "enum": [
+                  "currency"
+                ]
+              }
+            },
+            "style": "form",
+            "explode": false
+          },
+          {
+            "name": "limit",
+            "in": "query",
+            "description": "maximum resources per page",
+            "schema": {
+              "type": "integer",
+              "maximum": 200
+            },
+            "style": "form"
+          }
+        ],
+        "responses": {
+          "400": {
+            "description": "Parameter error(s)",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not found error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "200": {
+            "description": "List of Territories",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/TerritoriesResponse"
                 }
               }
             }
@@ -63085,10 +66269,13 @@
               "items": {
                 "type": "string",
                 "enum": [
+                  "appAvailability",
                   "appClips",
                   "appCustomProductPages",
                   "appEvents",
                   "appInfos",
+                  "appPricePoints",
+                  "appPriceSchedule",
                   "appStoreVersions",
                   "availableInNewTerritories",
                   "availableTerritories",
@@ -63442,10 +66629,13 @@
               "items": {
                 "type": "string",
                 "enum": [
+                  "appAvailability",
                   "appClips",
                   "appCustomProductPages",
                   "appEvents",
                   "appInfos",
+                  "appPricePoints",
+                  "appPriceSchedule",
                   "appStoreVersions",
                   "availableInNewTerritories",
                   "availableTerritories",
@@ -63848,6 +67038,249 @@
             },
             "required": [
               "id",
+              "type"
+            ]
+          }
+        },
+        "required": [
+          "data"
+        ]
+      },
+      "AppAvailability": {
+        "type": "object",
+        "title": "AppAvailability",
+        "properties": {
+          "type": {
+            "type": "string",
+            "enum": [
+              "appAvailabilities"
+            ]
+          },
+          "id": {
+            "type": "string"
+          },
+          "attributes": {
+            "type": "object",
+            "properties": {
+              "availableInNewTerritories": {
+                "type": "boolean"
+              }
+            }
+          },
+          "relationships": {
+            "type": "object",
+            "properties": {
+              "app": {
+                "type": "object",
+                "properties": {
+                  "links": {
+                    "type": "object",
+                    "properties": {
+                      "self": {
+                        "type": "string",
+                        "format": "uri-reference"
+                      },
+                      "related": {
+                        "type": "string",
+                        "format": "uri-reference"
+                      }
+                    }
+                  },
+                  "data": {
+                    "type": "object",
+                    "properties": {
+                      "type": {
+                        "type": "string",
+                        "enum": [
+                          "apps"
+                        ]
+                      },
+                      "id": {
+                        "type": "string"
+                      }
+                    },
+                    "required": [
+                      "id",
+                      "type"
+                    ]
+                  }
+                }
+              },
+              "availableTerritories": {
+                "type": "object",
+                "properties": {
+                  "links": {
+                    "type": "object",
+                    "properties": {
+                      "self": {
+                        "type": "string",
+                        "format": "uri-reference"
+                      },
+                      "related": {
+                        "type": "string",
+                        "format": "uri-reference"
+                      }
+                    }
+                  },
+                  "meta": {
+                    "$ref": "#/components/schemas/PagingInformation"
+                  },
+                  "data": {
+                    "type": "array",
+                    "items": {
+                      "type": "object",
+                      "properties": {
+                        "type": {
+                          "type": "string",
+                          "enum": [
+                            "territories"
+                          ]
+                        },
+                        "id": {
+                          "type": "string"
+                        }
+                      },
+                      "required": [
+                        "id",
+                        "type"
+                      ]
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "links": {
+            "$ref": "#/components/schemas/ResourceLinks"
+          }
+        },
+        "required": [
+          "links",
+          "id",
+          "type"
+        ]
+      },
+      "AppAvailabilityResponse": {
+        "type": "object",
+        "title": "AppAvailabilityResponse",
+        "properties": {
+          "data": {
+            "$ref": "#/components/schemas/AppAvailability"
+          },
+          "included": {
+            "type": "array",
+            "items": {
+              "oneOf": [
+                {
+                  "$ref": "#/components/schemas/App"
+                },
+                {
+                  "$ref": "#/components/schemas/Territory"
+                }
+              ]
+            }
+          },
+          "links": {
+            "$ref": "#/components/schemas/DocumentLinks"
+          }
+        },
+        "required": [
+          "data",
+          "links"
+        ]
+      },
+      "AppAvailabilityCreateRequest": {
+        "type": "object",
+        "title": "AppAvailabilityCreateRequest",
+        "properties": {
+          "data": {
+            "type": "object",
+            "properties": {
+              "type": {
+                "type": "string",
+                "enum": [
+                  "appAvailabilities"
+                ]
+              },
+              "attributes": {
+                "type": "object",
+                "properties": {
+                  "availableInNewTerritories": {
+                    "type": "boolean"
+                  }
+                },
+                "required": [
+                  "availableInNewTerritories"
+                ]
+              },
+              "relationships": {
+                "type": "object",
+                "properties": {
+                  "app": {
+                    "type": "object",
+                    "properties": {
+                      "data": {
+                        "type": "object",
+                        "properties": {
+                          "type": {
+                            "type": "string",
+                            "enum": [
+                              "apps"
+                            ]
+                          },
+                          "id": {
+                            "type": "string"
+                          }
+                        },
+                        "required": [
+                          "id",
+                          "type"
+                        ]
+                      }
+                    },
+                    "required": [
+                      "data"
+                    ]
+                  },
+                  "availableTerritories": {
+                    "type": "object",
+                    "properties": {
+                      "data": {
+                        "type": "array",
+                        "items": {
+                          "type": "object",
+                          "properties": {
+                            "type": {
+                              "type": "string",
+                              "enum": [
+                                "territories"
+                              ]
+                            },
+                            "id": {
+                              "type": "string"
+                            }
+                          },
+                          "required": [
+                            "id",
+                            "type"
+                          ]
+                        }
+                      }
+                    },
+                    "required": [
+                      "data"
+                    ]
+                  }
+                },
+                "required": [
+                  "app",
+                  "availableTerritories"
+                ]
+              }
+            },
+            "required": [
+              "relationships",
+              "attributes",
               "type"
             ]
           }
@@ -71525,7 +74958,8 @@
           "links",
           "id",
           "type"
-        ]
+        ],
+        "deprecated": true
       },
       "AppPricePointsV2Response": {
         "type": "object",
@@ -71558,6 +74992,182 @@
           },
           "meta": {
             "$ref": "#/components/schemas/PagingInformation"
+          }
+        },
+        "required": [
+          "data",
+          "links"
+        ],
+        "deprecated": true
+      },
+      "AppPricePointV3": {
+        "type": "object",
+        "title": "AppPricePointV3",
+        "properties": {
+          "type": {
+            "type": "string",
+            "enum": [
+              "appPricePoints"
+            ]
+          },
+          "id": {
+            "type": "string"
+          },
+          "attributes": {
+            "type": "object",
+            "properties": {
+              "customerPrice": {
+                "type": "string"
+              },
+              "proceeds": {
+                "type": "string"
+              }
+            }
+          },
+          "relationships": {
+            "type": "object",
+            "properties": {
+              "app": {
+                "type": "object",
+                "properties": {
+                  "links": {
+                    "type": "object",
+                    "properties": {
+                      "self": {
+                        "type": "string",
+                        "format": "uri-reference"
+                      },
+                      "related": {
+                        "type": "string",
+                        "format": "uri-reference"
+                      }
+                    }
+                  },
+                  "data": {
+                    "type": "object",
+                    "properties": {
+                      "type": {
+                        "type": "string",
+                        "enum": [
+                          "apps"
+                        ]
+                      },
+                      "id": {
+                        "type": "string"
+                      }
+                    },
+                    "required": [
+                      "id",
+                      "type"
+                    ]
+                  }
+                }
+              },
+              "territory": {
+                "type": "object",
+                "properties": {
+                  "links": {
+                    "type": "object",
+                    "properties": {
+                      "self": {
+                        "type": "string",
+                        "format": "uri-reference"
+                      },
+                      "related": {
+                        "type": "string",
+                        "format": "uri-reference"
+                      }
+                    }
+                  },
+                  "data": {
+                    "type": "object",
+                    "properties": {
+                      "type": {
+                        "type": "string",
+                        "enum": [
+                          "territories"
+                        ]
+                      },
+                      "id": {
+                        "type": "string"
+                      }
+                    },
+                    "required": [
+                      "id",
+                      "type"
+                    ]
+                  }
+                }
+              }
+            }
+          },
+          "links": {
+            "$ref": "#/components/schemas/ResourceLinks"
+          }
+        },
+        "required": [
+          "links",
+          "id",
+          "type"
+        ]
+      },
+      "AppPricePointsV3Response": {
+        "type": "object",
+        "title": "AppPricePointsV3Response",
+        "properties": {
+          "data": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/AppPricePointV3"
+            }
+          },
+          "included": {
+            "type": "array",
+            "items": {
+              "oneOf": [
+                {
+                  "$ref": "#/components/schemas/App"
+                },
+                {
+                  "$ref": "#/components/schemas/Territory"
+                }
+              ]
+            }
+          },
+          "links": {
+            "$ref": "#/components/schemas/PagedDocumentLinks"
+          },
+          "meta": {
+            "$ref": "#/components/schemas/PagingInformation"
+          }
+        },
+        "required": [
+          "data",
+          "links"
+        ]
+      },
+      "AppPricePointV3Response": {
+        "type": "object",
+        "title": "AppPricePointV3Response",
+        "properties": {
+          "data": {
+            "$ref": "#/components/schemas/AppPricePointV3"
+          },
+          "included": {
+            "type": "array",
+            "items": {
+              "oneOf": [
+                {
+                  "$ref": "#/components/schemas/App"
+                },
+                {
+                  "$ref": "#/components/schemas/Territory"
+                }
+              ]
+            }
+          },
+          "links": {
+            "$ref": "#/components/schemas/DocumentLinks"
           }
         },
         "required": [
@@ -71743,6 +75353,353 @@
         ],
         "deprecated": true
       },
+      "AppPriceSchedule": {
+        "type": "object",
+        "title": "AppPriceSchedule",
+        "properties": {
+          "type": {
+            "type": "string",
+            "enum": [
+              "appPriceSchedules"
+            ]
+          },
+          "id": {
+            "type": "string"
+          },
+          "relationships": {
+            "type": "object",
+            "properties": {
+              "app": {
+                "type": "object",
+                "properties": {
+                  "links": {
+                    "type": "object",
+                    "properties": {
+                      "self": {
+                        "type": "string",
+                        "format": "uri-reference"
+                      },
+                      "related": {
+                        "type": "string",
+                        "format": "uri-reference"
+                      }
+                    }
+                  },
+                  "data": {
+                    "type": "object",
+                    "properties": {
+                      "type": {
+                        "type": "string",
+                        "enum": [
+                          "apps"
+                        ]
+                      },
+                      "id": {
+                        "type": "string"
+                      }
+                    },
+                    "required": [
+                      "id",
+                      "type"
+                    ]
+                  }
+                }
+              },
+              "baseTerritory": {
+                "type": "object",
+                "properties": {
+                  "links": {
+                    "type": "object",
+                    "properties": {
+                      "self": {
+                        "type": "string",
+                        "format": "uri-reference"
+                      },
+                      "related": {
+                        "type": "string",
+                        "format": "uri-reference"
+                      }
+                    }
+                  },
+                  "data": {
+                    "type": "object",
+                    "properties": {
+                      "type": {
+                        "type": "string",
+                        "enum": [
+                          "territories"
+                        ]
+                      },
+                      "id": {
+                        "type": "string"
+                      }
+                    },
+                    "required": [
+                      "id",
+                      "type"
+                    ]
+                  }
+                }
+              },
+              "manualPrices": {
+                "type": "object",
+                "properties": {
+                  "links": {
+                    "type": "object",
+                    "properties": {
+                      "self": {
+                        "type": "string",
+                        "format": "uri-reference"
+                      },
+                      "related": {
+                        "type": "string",
+                        "format": "uri-reference"
+                      }
+                    }
+                  },
+                  "meta": {
+                    "$ref": "#/components/schemas/PagingInformation"
+                  },
+                  "data": {
+                    "type": "array",
+                    "items": {
+                      "type": "object",
+                      "properties": {
+                        "type": {
+                          "type": "string",
+                          "enum": [
+                            "appPrices"
+                          ]
+                        },
+                        "id": {
+                          "type": "string"
+                        }
+                      },
+                      "required": [
+                        "id",
+                        "type"
+                      ]
+                    }
+                  }
+                }
+              },
+              "automaticPrices": {
+                "type": "object",
+                "properties": {
+                  "links": {
+                    "type": "object",
+                    "properties": {
+                      "self": {
+                        "type": "string",
+                        "format": "uri-reference"
+                      },
+                      "related": {
+                        "type": "string",
+                        "format": "uri-reference"
+                      }
+                    }
+                  },
+                  "meta": {
+                    "$ref": "#/components/schemas/PagingInformation"
+                  },
+                  "data": {
+                    "type": "array",
+                    "items": {
+                      "type": "object",
+                      "properties": {
+                        "type": {
+                          "type": "string",
+                          "enum": [
+                            "appPrices"
+                          ]
+                        },
+                        "id": {
+                          "type": "string"
+                        }
+                      },
+                      "required": [
+                        "id",
+                        "type"
+                      ]
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "links": {
+            "$ref": "#/components/schemas/ResourceLinks"
+          }
+        },
+        "required": [
+          "links",
+          "id",
+          "type"
+        ]
+      },
+      "AppPriceScheduleResponse": {
+        "type": "object",
+        "title": "AppPriceScheduleResponse",
+        "properties": {
+          "data": {
+            "$ref": "#/components/schemas/AppPriceSchedule"
+          },
+          "included": {
+            "type": "array",
+            "items": {
+              "oneOf": [
+                {
+                  "$ref": "#/components/schemas/App"
+                },
+                {
+                  "$ref": "#/components/schemas/Territory"
+                },
+                {
+                  "$ref": "#/components/schemas/AppPriceV2"
+                },
+                {
+                  "$ref": "#/components/schemas/AppPriceV2"
+                }
+              ]
+            }
+          },
+          "links": {
+            "$ref": "#/components/schemas/DocumentLinks"
+          }
+        },
+        "required": [
+          "data",
+          "links"
+        ]
+      },
+      "AppPriceScheduleCreateRequest": {
+        "type": "object",
+        "title": "AppPriceScheduleCreateRequest",
+        "properties": {
+          "data": {
+            "type": "object",
+            "properties": {
+              "type": {
+                "type": "string",
+                "enum": [
+                  "appPriceSchedules"
+                ]
+              },
+              "relationships": {
+                "type": "object",
+                "properties": {
+                  "app": {
+                    "type": "object",
+                    "properties": {
+                      "data": {
+                        "type": "object",
+                        "properties": {
+                          "type": {
+                            "type": "string",
+                            "enum": [
+                              "apps"
+                            ]
+                          },
+                          "id": {
+                            "type": "string"
+                          }
+                        },
+                        "required": [
+                          "id",
+                          "type"
+                        ]
+                      }
+                    },
+                    "required": [
+                      "data"
+                    ]
+                  },
+                  "baseTerritory": {
+                    "type": "object",
+                    "properties": {
+                      "data": {
+                        "type": "object",
+                        "properties": {
+                          "type": {
+                            "type": "string",
+                            "enum": [
+                              "territories"
+                            ]
+                          },
+                          "id": {
+                            "type": "string"
+                          }
+                        },
+                        "required": [
+                          "id",
+                          "type"
+                        ]
+                      }
+                    },
+                    "required": [
+                      "data"
+                    ]
+                  },
+                  "manualPrices": {
+                    "type": "object",
+                    "properties": {
+                      "data": {
+                        "type": "array",
+                        "items": {
+                          "type": "object",
+                          "properties": {
+                            "type": {
+                              "type": "string",
+                              "enum": [
+                                "appPrices"
+                              ]
+                            },
+                            "id": {
+                              "type": "string"
+                            }
+                          },
+                          "required": [
+                            "id",
+                            "type"
+                          ]
+                        }
+                      }
+                    },
+                    "required": [
+                      "data"
+                    ]
+                  }
+                },
+                "required": [
+                  "app",
+                  "manualPrices",
+                  "baseTerritory"
+                ]
+              }
+            },
+            "required": [
+              "relationships",
+              "type"
+            ]
+          },
+          "included": {
+            "type": "array",
+            "items": {
+              "oneOf": [
+                {
+                  "$ref": "#/components/schemas/AppPriceV2InlineCreate"
+                },
+                {
+                  "$ref": "#/components/schemas/TerritoryInlineCreate"
+                }
+              ]
+            }
+          }
+        },
+        "required": [
+          "data"
+        ]
+      },
       "AppPriceTier": {
         "type": "object",
         "title": "AppPriceTier",
@@ -71812,7 +75769,8 @@
           "links",
           "id",
           "type"
-        ]
+        ],
+        "deprecated": true
       },
       "AppPriceTiersResponse": {
         "type": "object",
@@ -71840,7 +75798,8 @@
         "required": [
           "data",
           "links"
-        ]
+        ],
+        "deprecated": true
       },
       "AppPriceTierResponse": {
         "type": "object",
@@ -71857,6 +75816,175 @@
           },
           "links": {
             "$ref": "#/components/schemas/DocumentLinks"
+          }
+        },
+        "required": [
+          "data",
+          "links"
+        ],
+        "deprecated": true
+      },
+      "AppPriceV2": {
+        "type": "object",
+        "title": "AppPriceV2",
+        "properties": {
+          "type": {
+            "type": "string",
+            "enum": [
+              "appPrices"
+            ]
+          },
+          "id": {
+            "type": "string"
+          },
+          "attributes": {
+            "type": "object",
+            "properties": {
+              "manual": {
+                "type": "boolean"
+              },
+              "startDate": {
+                "type": "string",
+                "format": "date"
+              },
+              "endDate": {
+                "type": "string",
+                "format": "date"
+              }
+            }
+          },
+          "relationships": {
+            "type": "object",
+            "properties": {
+              "appPricePoint": {
+                "type": "object",
+                "properties": {
+                  "links": {
+                    "type": "object",
+                    "properties": {
+                      "self": {
+                        "type": "string",
+                        "format": "uri-reference"
+                      },
+                      "related": {
+                        "type": "string",
+                        "format": "uri-reference"
+                      }
+                    }
+                  },
+                  "data": {
+                    "type": "object",
+                    "properties": {
+                      "type": {
+                        "type": "string",
+                        "enum": [
+                          "appPricePoints"
+                        ]
+                      },
+                      "id": {
+                        "type": "string"
+                      }
+                    },
+                    "required": [
+                      "id",
+                      "type"
+                    ]
+                  }
+                }
+              },
+              "territory": {
+                "type": "object",
+                "properties": {
+                  "links": {
+                    "type": "object",
+                    "properties": {
+                      "self": {
+                        "type": "string",
+                        "format": "uri-reference"
+                      },
+                      "related": {
+                        "type": "string",
+                        "format": "uri-reference"
+                      }
+                    }
+                  },
+                  "data": {
+                    "type": "object",
+                    "properties": {
+                      "type": {
+                        "type": "string",
+                        "enum": [
+                          "territories"
+                        ]
+                      },
+                      "id": {
+                        "type": "string"
+                      }
+                    },
+                    "required": [
+                      "id",
+                      "type"
+                    ]
+                  }
+                }
+              }
+            }
+          },
+          "links": {
+            "$ref": "#/components/schemas/ResourceLinks"
+          }
+        },
+        "required": [
+          "links",
+          "id",
+          "type"
+        ]
+      },
+      "AppPriceV2InlineCreate": {
+        "type": "object",
+        "properties": {
+          "type": {
+            "type": "string",
+            "enum": [
+              "appPrices"
+            ]
+          },
+          "id": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "type"
+        ]
+      },
+      "AppPricesV2Response": {
+        "type": "object",
+        "title": "AppPricesV2Response",
+        "properties": {
+          "data": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/AppPriceV2"
+            }
+          },
+          "included": {
+            "type": "array",
+            "items": {
+              "oneOf": [
+                {
+                  "$ref": "#/components/schemas/AppPricePointV3"
+                },
+                {
+                  "$ref": "#/components/schemas/Territory"
+                }
+              ]
+            }
+          },
+          "links": {
+            "$ref": "#/components/schemas/PagedDocumentLinks"
+          },
+          "meta": {
+            "$ref": "#/components/schemas/PagingInformation"
           }
         },
         "required": [
@@ -71962,7 +76090,8 @@
           "links",
           "id",
           "type"
-        ]
+        ],
+        "deprecated": true
       },
       "AppPriceInlineCreate": {
         "type": "object",
@@ -72014,7 +76143,8 @@
         "required": [
           "data",
           "links"
-        ]
+        ],
+        "deprecated": true
       },
       "AppPriceResponse": {
         "type": "object",
@@ -72043,7 +76173,8 @@
         "required": [
           "data",
           "links"
-        ]
+        ],
+        "deprecated": true
       },
       "AppScreenshotSet": {
         "type": "object",
@@ -75897,7 +80028,8 @@
                 "$ref": "#/components/schemas/SubscriptionStatusUrlVersion"
               },
               "availableInNewTerritories": {
-                "type": "boolean"
+                "type": "boolean",
+                "deprecated": true
               },
               "contentRightsDeclaration": {
                 "type": "string",
@@ -76425,7 +80557,8 @@
                       ]
                     }
                   }
-                }
+                },
+                "deprecated": true
               },
               "availableTerritories": {
                 "type": "object",
@@ -76467,7 +80600,8 @@
                       ]
                     }
                   }
-                }
+                },
+                "deprecated": true
               },
               "inAppPurchases": {
                 "type": "object",
@@ -77084,7 +81218,8 @@
                     "$ref": "#/components/schemas/SubscriptionStatusUrlVersion"
                   },
                   "availableInNewTerritories": {
-                    "type": "boolean"
+                    "type": "boolean",
+                    "deprecated": true
                   },
                   "contentRightsDeclaration": {
                     "type": "string",
@@ -77122,7 +81257,8 @@
                           ]
                         }
                       }
-                    }
+                    },
+                    "deprecated": true
                   },
                   "availableTerritories": {
                     "type": "object",
@@ -77148,7 +81284,8 @@
                           ]
                         }
                       }
-                    }
+                    },
+                    "deprecated": true
                   }
                 }
               }
@@ -84961,6 +89098,206 @@
           "data"
         ]
       },
+      "InAppPurchaseAvailability": {
+        "type": "object",
+        "title": "InAppPurchaseAvailability",
+        "properties": {
+          "type": {
+            "type": "string",
+            "enum": [
+              "inAppPurchaseAvailabilities"
+            ]
+          },
+          "id": {
+            "type": "string"
+          },
+          "attributes": {
+            "type": "object",
+            "properties": {
+              "availableInNewTerritories": {
+                "type": "boolean"
+              }
+            }
+          },
+          "relationships": {
+            "type": "object",
+            "properties": {
+              "availableTerritories": {
+                "type": "object",
+                "properties": {
+                  "links": {
+                    "type": "object",
+                    "properties": {
+                      "self": {
+                        "type": "string",
+                        "format": "uri-reference"
+                      },
+                      "related": {
+                        "type": "string",
+                        "format": "uri-reference"
+                      }
+                    }
+                  },
+                  "meta": {
+                    "$ref": "#/components/schemas/PagingInformation"
+                  },
+                  "data": {
+                    "type": "array",
+                    "items": {
+                      "type": "object",
+                      "properties": {
+                        "type": {
+                          "type": "string",
+                          "enum": [
+                            "territories"
+                          ]
+                        },
+                        "id": {
+                          "type": "string"
+                        }
+                      },
+                      "required": [
+                        "id",
+                        "type"
+                      ]
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "links": {
+            "$ref": "#/components/schemas/ResourceLinks"
+          }
+        },
+        "required": [
+          "links",
+          "id",
+          "type"
+        ]
+      },
+      "InAppPurchaseAvailabilityResponse": {
+        "type": "object",
+        "title": "InAppPurchaseAvailabilityResponse",
+        "properties": {
+          "data": {
+            "$ref": "#/components/schemas/InAppPurchaseAvailability"
+          },
+          "included": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Territory"
+            }
+          },
+          "links": {
+            "$ref": "#/components/schemas/DocumentLinks"
+          }
+        },
+        "required": [
+          "data",
+          "links"
+        ]
+      },
+      "InAppPurchaseAvailabilityCreateRequest": {
+        "type": "object",
+        "title": "InAppPurchaseAvailabilityCreateRequest",
+        "properties": {
+          "data": {
+            "type": "object",
+            "properties": {
+              "type": {
+                "type": "string",
+                "enum": [
+                  "inAppPurchaseAvailabilities"
+                ]
+              },
+              "attributes": {
+                "type": "object",
+                "properties": {
+                  "availableInNewTerritories": {
+                    "type": "boolean"
+                  }
+                },
+                "required": [
+                  "availableInNewTerritories"
+                ]
+              },
+              "relationships": {
+                "type": "object",
+                "properties": {
+                  "inAppPurchase": {
+                    "type": "object",
+                    "properties": {
+                      "data": {
+                        "type": "object",
+                        "properties": {
+                          "type": {
+                            "type": "string",
+                            "enum": [
+                              "inAppPurchases"
+                            ]
+                          },
+                          "id": {
+                            "type": "string"
+                          }
+                        },
+                        "required": [
+                          "id",
+                          "type"
+                        ]
+                      }
+                    },
+                    "required": [
+                      "data"
+                    ]
+                  },
+                  "availableTerritories": {
+                    "type": "object",
+                    "properties": {
+                      "data": {
+                        "type": "array",
+                        "items": {
+                          "type": "object",
+                          "properties": {
+                            "type": {
+                              "type": "string",
+                              "enum": [
+                                "territories"
+                              ]
+                            },
+                            "id": {
+                              "type": "string"
+                            }
+                          },
+                          "required": [
+                            "id",
+                            "type"
+                          ]
+                        }
+                      }
+                    },
+                    "required": [
+                      "data"
+                    ]
+                  }
+                },
+                "required": [
+                  "inAppPurchase",
+                  "availableTerritories"
+                ]
+              }
+            },
+            "required": [
+              "relationships",
+              "attributes",
+              "type"
+            ]
+          }
+        },
+        "required": [
+          "data"
+        ]
+      },
       "InAppPurchaseContent": {
         "type": "object",
         "title": "InAppPurchaseContent",
@@ -85476,7 +89813,85 @@
                   }
                 }
               },
+              "baseTerritory": {
+                "type": "object",
+                "properties": {
+                  "links": {
+                    "type": "object",
+                    "properties": {
+                      "self": {
+                        "type": "string",
+                        "format": "uri-reference"
+                      },
+                      "related": {
+                        "type": "string",
+                        "format": "uri-reference"
+                      }
+                    }
+                  },
+                  "data": {
+                    "type": "object",
+                    "properties": {
+                      "type": {
+                        "type": "string",
+                        "enum": [
+                          "territories"
+                        ]
+                      },
+                      "id": {
+                        "type": "string"
+                      }
+                    },
+                    "required": [
+                      "id",
+                      "type"
+                    ]
+                  }
+                }
+              },
               "manualPrices": {
+                "type": "object",
+                "properties": {
+                  "links": {
+                    "type": "object",
+                    "properties": {
+                      "self": {
+                        "type": "string",
+                        "format": "uri-reference"
+                      },
+                      "related": {
+                        "type": "string",
+                        "format": "uri-reference"
+                      }
+                    }
+                  },
+                  "meta": {
+                    "$ref": "#/components/schemas/PagingInformation"
+                  },
+                  "data": {
+                    "type": "array",
+                    "items": {
+                      "type": "object",
+                      "properties": {
+                        "type": {
+                          "type": "string",
+                          "enum": [
+                            "inAppPurchasePrices"
+                          ]
+                        },
+                        "id": {
+                          "type": "string"
+                        }
+                      },
+                      "required": [
+                        "id",
+                        "type"
+                      ]
+                    }
+                  }
+                }
+              },
+              "automaticPrices": {
                 "type": "object",
                 "properties": {
                   "links": {
@@ -85545,6 +89960,12 @@
                   "$ref": "#/components/schemas/InAppPurchaseV2"
                 },
                 {
+                  "$ref": "#/components/schemas/Territory"
+                },
+                {
+                  "$ref": "#/components/schemas/InAppPurchasePrice"
+                },
+                {
                   "$ref": "#/components/schemas/InAppPurchasePrice"
                 }
               ]
@@ -85601,6 +90022,29 @@
                       "data"
                     ]
                   },
+                  "baseTerritory": {
+                    "type": "object",
+                    "properties": {
+                      "data": {
+                        "type": "object",
+                        "properties": {
+                          "type": {
+                            "type": "string",
+                            "enum": [
+                              "territories"
+                            ]
+                          },
+                          "id": {
+                            "type": "string"
+                          }
+                        },
+                        "required": [
+                          "id",
+                          "type"
+                        ]
+                      }
+                    }
+                  },
                   "manualPrices": {
                     "type": "object",
                     "properties": {
@@ -85645,7 +90089,14 @@
           "included": {
             "type": "array",
             "items": {
-              "$ref": "#/components/schemas/InAppPurchasePriceInlineCreate"
+              "oneOf": [
+                {
+                  "$ref": "#/components/schemas/InAppPurchasePriceInlineCreate"
+                },
+                {
+                  "$ref": "#/components/schemas/TerritoryInlineCreate"
+                }
+              ]
             }
           }
         },
@@ -85672,6 +90123,13 @@
               "startDate": {
                 "type": "string",
                 "format": "date"
+              },
+              "endDate": {
+                "type": "string",
+                "format": "date"
+              },
+              "manual": {
+                "type": "boolean"
               }
             }
           },
@@ -85778,6 +90236,10 @@
             "type": "object",
             "properties": {
               "startDate": {
+                "type": "string",
+                "format": "date"
+              },
+              "endDate": {
                 "type": "string",
                 "format": "date"
               }
@@ -90012,6 +94474,249 @@
             },
             "required": [
               "id",
+              "type"
+            ]
+          }
+        },
+        "required": [
+          "data"
+        ]
+      },
+      "SubscriptionAvailability": {
+        "type": "object",
+        "title": "SubscriptionAvailability",
+        "properties": {
+          "type": {
+            "type": "string",
+            "enum": [
+              "subscriptionAvailabilities"
+            ]
+          },
+          "id": {
+            "type": "string"
+          },
+          "attributes": {
+            "type": "object",
+            "properties": {
+              "availableInNewTerritories": {
+                "type": "boolean"
+              }
+            }
+          },
+          "relationships": {
+            "type": "object",
+            "properties": {
+              "subscription": {
+                "type": "object",
+                "properties": {
+                  "links": {
+                    "type": "object",
+                    "properties": {
+                      "self": {
+                        "type": "string",
+                        "format": "uri-reference"
+                      },
+                      "related": {
+                        "type": "string",
+                        "format": "uri-reference"
+                      }
+                    }
+                  },
+                  "data": {
+                    "type": "object",
+                    "properties": {
+                      "type": {
+                        "type": "string",
+                        "enum": [
+                          "subscriptions"
+                        ]
+                      },
+                      "id": {
+                        "type": "string"
+                      }
+                    },
+                    "required": [
+                      "id",
+                      "type"
+                    ]
+                  }
+                }
+              },
+              "availableTerritories": {
+                "type": "object",
+                "properties": {
+                  "links": {
+                    "type": "object",
+                    "properties": {
+                      "self": {
+                        "type": "string",
+                        "format": "uri-reference"
+                      },
+                      "related": {
+                        "type": "string",
+                        "format": "uri-reference"
+                      }
+                    }
+                  },
+                  "meta": {
+                    "$ref": "#/components/schemas/PagingInformation"
+                  },
+                  "data": {
+                    "type": "array",
+                    "items": {
+                      "type": "object",
+                      "properties": {
+                        "type": {
+                          "type": "string",
+                          "enum": [
+                            "territories"
+                          ]
+                        },
+                        "id": {
+                          "type": "string"
+                        }
+                      },
+                      "required": [
+                        "id",
+                        "type"
+                      ]
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "links": {
+            "$ref": "#/components/schemas/ResourceLinks"
+          }
+        },
+        "required": [
+          "links",
+          "id",
+          "type"
+        ]
+      },
+      "SubscriptionAvailabilityResponse": {
+        "type": "object",
+        "title": "SubscriptionAvailabilityResponse",
+        "properties": {
+          "data": {
+            "$ref": "#/components/schemas/SubscriptionAvailability"
+          },
+          "included": {
+            "type": "array",
+            "items": {
+              "oneOf": [
+                {
+                  "$ref": "#/components/schemas/Subscription"
+                },
+                {
+                  "$ref": "#/components/schemas/Territory"
+                }
+              ]
+            }
+          },
+          "links": {
+            "$ref": "#/components/schemas/DocumentLinks"
+          }
+        },
+        "required": [
+          "data",
+          "links"
+        ]
+      },
+      "SubscriptionAvailabilityCreateRequest": {
+        "type": "object",
+        "title": "SubscriptionAvailabilityCreateRequest",
+        "properties": {
+          "data": {
+            "type": "object",
+            "properties": {
+              "type": {
+                "type": "string",
+                "enum": [
+                  "subscriptionAvailabilities"
+                ]
+              },
+              "attributes": {
+                "type": "object",
+                "properties": {
+                  "availableInNewTerritories": {
+                    "type": "boolean"
+                  }
+                },
+                "required": [
+                  "availableInNewTerritories"
+                ]
+              },
+              "relationships": {
+                "type": "object",
+                "properties": {
+                  "subscription": {
+                    "type": "object",
+                    "properties": {
+                      "data": {
+                        "type": "object",
+                        "properties": {
+                          "type": {
+                            "type": "string",
+                            "enum": [
+                              "subscriptions"
+                            ]
+                          },
+                          "id": {
+                            "type": "string"
+                          }
+                        },
+                        "required": [
+                          "id",
+                          "type"
+                        ]
+                      }
+                    },
+                    "required": [
+                      "data"
+                    ]
+                  },
+                  "availableTerritories": {
+                    "type": "object",
+                    "properties": {
+                      "data": {
+                        "type": "array",
+                        "items": {
+                          "type": "object",
+                          "properties": {
+                            "type": {
+                              "type": "string",
+                              "enum": [
+                                "territories"
+                              ]
+                            },
+                            "id": {
+                              "type": "string"
+                            }
+                          },
+                          "required": [
+                            "id",
+                            "type"
+                          ]
+                        }
+                      }
+                    },
+                    "required": [
+                      "data"
+                    ]
+                  }
+                },
+                "required": [
+                  "subscription",
+                  "availableTerritories"
+                ]
+              }
+            },
+            "required": [
+              "relationships",
+              "attributes",
               "type"
             ]
           }
@@ -94862,6 +99567,23 @@
         "required": [
           "links",
           "id",
+          "type"
+        ]
+      },
+      "TerritoryInlineCreate": {
+        "type": "object",
+        "properties": {
+          "type": {
+            "type": "string",
+            "enum": [
+              "territories"
+            ]
+          },
+          "id": {
+            "type": "string"
+          }
+        },
+        "required": [
           "type"
         ]
       },

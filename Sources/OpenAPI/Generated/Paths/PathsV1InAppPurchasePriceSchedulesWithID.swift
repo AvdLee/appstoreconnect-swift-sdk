@@ -23,29 +23,43 @@ extension APIEndpoint.V1.InAppPurchasePriceSchedules {
 			public var fieldsInAppPurchasePriceSchedules: [FieldsInAppPurchasePriceSchedules]?
 			public var include: [Include]?
 			public var fieldsInAppPurchasePrices: [FieldsInAppPurchasePrices]?
+			public var fieldsTerritories: [FieldsTerritories]?
+			public var limitAutomaticPrices: Int?
 			public var limitManualPrices: Int?
 
 			public enum FieldsInAppPurchasePriceSchedules: String, Codable, CaseIterable {
+				case automaticPrices
+				case baseTerritory
 				case inAppPurchase
 				case manualPrices
 			}
 
 			public enum Include: String, Codable, CaseIterable {
+				case automaticPrices
+				case baseTerritory
 				case inAppPurchase
 				case manualPrices
 			}
 
 			public enum FieldsInAppPurchasePrices: String, Codable, CaseIterable {
+				case endDate
 				case inAppPurchasePricePoint
 				case inAppPurchaseV2
+				case manual
 				case startDate
 				case territory
 			}
 
-			public init(fieldsInAppPurchasePriceSchedules: [FieldsInAppPurchasePriceSchedules]? = nil, include: [Include]? = nil, fieldsInAppPurchasePrices: [FieldsInAppPurchasePrices]? = nil, limitManualPrices: Int? = nil) {
+			public enum FieldsTerritories: String, Codable, CaseIterable {
+				case currency
+			}
+
+			public init(fieldsInAppPurchasePriceSchedules: [FieldsInAppPurchasePriceSchedules]? = nil, include: [Include]? = nil, fieldsInAppPurchasePrices: [FieldsInAppPurchasePrices]? = nil, fieldsTerritories: [FieldsTerritories]? = nil, limitAutomaticPrices: Int? = nil, limitManualPrices: Int? = nil) {
 				self.fieldsInAppPurchasePriceSchedules = fieldsInAppPurchasePriceSchedules
 				self.include = include
 				self.fieldsInAppPurchasePrices = fieldsInAppPurchasePrices
+				self.fieldsTerritories = fieldsTerritories
+				self.limitAutomaticPrices = limitAutomaticPrices
 				self.limitManualPrices = limitManualPrices
 			}
 
@@ -54,6 +68,8 @@ extension APIEndpoint.V1.InAppPurchasePriceSchedules {
 				encoder.encode(fieldsInAppPurchasePriceSchedules, forKey: "fields[inAppPurchasePriceSchedules]")
 				encoder.encode(include, forKey: "include")
 				encoder.encode(fieldsInAppPurchasePrices, forKey: "fields[inAppPurchasePrices]")
+				encoder.encode(fieldsTerritories, forKey: "fields[territories]")
+				encoder.encode(limitAutomaticPrices, forKey: "limit[automaticPrices]")
 				encoder.encode(limitManualPrices, forKey: "limit[manualPrices]")
 				return encoder.items
 			}

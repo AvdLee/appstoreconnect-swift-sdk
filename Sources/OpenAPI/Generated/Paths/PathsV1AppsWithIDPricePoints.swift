@@ -15,6 +15,7 @@ extension APIEndpoint.V1.Apps.WithID {
 		/// Path: `/v1/apps/{id}/pricePoints`
 		public let path: String
 
+		@available(*, deprecated, message: "Deprecated")
 		public func get(parameters: GetParameters? = nil) -> Request<AppStoreConnect_Swift_SDK.AppPricePointsV2Response> {
 			.get(path, query: parameters?.asQuery)
 		}
@@ -42,10 +43,13 @@ extension APIEndpoint.V1.Apps.WithID {
 			}
 
 			public enum FieldsApps: String, Codable, CaseIterable {
+				case appAvailability
 				case appClips
 				case appCustomProductPages
 				case appEvents
 				case appInfos
+				case appPricePoints
+				case appPriceSchedule
 				case appStoreVersions
 				case availableInNewTerritories
 				case availableTerritories

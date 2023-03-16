@@ -13,12 +13,15 @@ public struct InAppPurchasePriceScheduleResponse: Codable {
 
 	public enum IncludedItem: Codable {
 		case inAppPurchaseV2(InAppPurchaseV2)
+		case territory(Territory)
 		case inAppPurchasePrice(InAppPurchasePrice)
 
 		public init(from decoder: Decoder) throws {
 			let container = try decoder.singleValueContainer()
 			if let value = try? container.decode(InAppPurchaseV2.self) {
 				self = .inAppPurchaseV2(value)
+			} else if let value = try? container.decode(Territory.self) {
+				self = .territory(value)
 			} else if let value = try? container.decode(InAppPurchasePrice.self) {
 				self = .inAppPurchasePrice(value)
 			} else {
@@ -30,6 +33,7 @@ public struct InAppPurchasePriceScheduleResponse: Codable {
 			var container = encoder.singleValueContainer()
 			switch self {
 			case .inAppPurchaseV2(let value): try container.encode(value)
+			case .territory(let value): try container.encode(value)
 			case .inAppPurchasePrice(let value): try container.encode(value)
 			}
 		}
