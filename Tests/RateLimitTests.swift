@@ -11,7 +11,7 @@ import XCTest
 final class RateLimitTests: XCTestCase {
 
     func testValidValue() {
-        let rateLimit = RateLimit(value: "user-hour-lim:3600;user-hour-rem:3545;")
+        let rateLimit = RateLimit(value: "user-hour-lim:3600;user-hour-rem:3545;", requestURL: nil)
         XCTAssertNotNil(rateLimit)
         if let rateLimit {
             XCTAssertEqual(rateLimit.hourlyLimit, 3600)
@@ -20,12 +20,12 @@ final class RateLimitTests: XCTestCase {
     }
     
     func testInvalidValue() {
-        let rateLimit = RateLimit(value: "user-hour-rem:3545")
+        let rateLimit = RateLimit(value: "user-hour-rem:3545", requestURL: nil)
         XCTAssertNil(rateLimit)
     }
     
     func testModifiedValue() {
-        let rateLimit = RateLimit(value: "user-hour-rem:0;user-hour-lim:50;user-hour-new-value:10;")
+        let rateLimit = RateLimit(value: "user-hour-rem:0;user-hour-lim:50;user-hour-new-value:10;", requestURL: nil)
         XCTAssertNotNil(rateLimit)
         if let rateLimit {
             XCTAssertEqual(rateLimit.hourlyLimit, 50)

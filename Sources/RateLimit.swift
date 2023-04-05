@@ -14,7 +14,10 @@ public struct RateLimit {
     /// Number of requests remaining. The time frame is a "rolling hour."
     public let remainingInCurrentHour: Int
     
-    init?(value: String) {
+    /// The url of the request the rate limit were returned for.
+    public let requestURL: URL?
+    
+    init?(value: String, requestURL: URL?) {
         let components = value.split(separator: ";", omittingEmptySubsequences: true)
         
         guard
@@ -33,6 +36,7 @@ public struct RateLimit {
         
         hourlyLimit = limit
         remainingInCurrentHour = remaining
+        self.requestURL = requestURL
     }
 }
 

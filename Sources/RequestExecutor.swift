@@ -32,7 +32,7 @@ public struct Response<T> {
         }
         
         if let rateLimitValue = allHeaderFields["X-Rate-Limit"] as? String {
-            self.rateLimit = RateLimit(value: rateLimitValue)
+            self.rateLimit = RateLimit(value: rateLimitValue, requestURL: requestURL)
         } else {
             self.rateLimit = nil
         }
