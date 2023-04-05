@@ -18,8 +18,9 @@ public struct Response<T> {
     public let statusCode: Int
     public let data: T?
     public let errorResponse: ErrorResponse?
+    public let rateLimit: RateLimit?
 
-    public init(requestURL: URL?, statusCode: StatusCode, data: T?) {
+    public init(requestURL: URL?, statusCode: StatusCode, allHeaderFields: [AnyHashable: Any], data: T?) {
         self.requestURL = requestURL
         self.statusCode = statusCode
         self.data = data
@@ -28,6 +29,12 @@ public struct Response<T> {
             self.errorResponse = try? APIProvider.jsonDecoder.decode(ErrorResponse.self, from: data)
         } else {
             self.errorResponse = nil
+        }
+        
+        if let rateLimitValue = allHeaderFields["X-Rate-Limit"] as? String {
+            self.rateLimit = RateLimit(value: rateLimitValue)
+        } else {
+            self.rateLimit = nil
         }
     }
 }
