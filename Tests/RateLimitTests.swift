@@ -12,24 +12,28 @@ final class RateLimitTests: XCTestCase {
 
     func testValidValue() {
         let rateLimit = RateLimit(value: "user-hour-lim:3600;user-hour-rem:3545;", requestURL: nil)
-        XCTAssertNotNil(rateLimit)
-        if let rateLimit {
-            XCTAssertEqual(rateLimit.hourlyLimit, 3600)
-            XCTAssertEqual(rateLimit.remainingInCurrentHour, 3545)
-        }
+        XCTAssertEqual(rateLimit.entries.count, 2)
+        XCTAssertEqual(rateLimit.entries["user-hour-lim"], 3600)
+        XCTAssertEqual(rateLimit.entries["user-hour-rem"], 3545)
     }
     
     func testInvalidValue() {
-        let rateLimit = RateLimit(value: "user-hour-rem:3545", requestURL: nil)
-        XCTAssertNil(rateLimit)
+        let rateLimit = RateLimit(value: "user-hour-rem3545", requestURL: nil)
+        XCTAssertEqual(rateLimit.entries.count, 0)
     }
     
-    func testModifiedValue() {
-        let rateLimit = RateLimit(value: "user-hour-rem:0;user-hour-lim:50;user-hour-new-value:10;", requestURL: nil)
-        XCTAssertNotNil(rateLimit)
-        if let rateLimit {
-            XCTAssertEqual(rateLimit.hourlyLimit, 50)
-            XCTAssertEqual(rateLimit.remainingInCurrentHour, 0)
-        }
+    func testPartialInvalidValue() {
+        let rateLimit = RateLimit(value: "user-hour-rem3545;user-hour-rem:3545;", requestURL: nil)
+        XCTAssertEqual(rateLimit.entries.count, 1)
+        XCTAssertEqual(rateLimit.entries["user-hour-rem"], 3545)
+    }
+    
+    func testMoreItems() {
+        let rateLimit = RateLimit(value: "user-hour-lim:3600;user-hour-rem:3598;user-minute-lim:150;user-minute-rem:149;", requestURL: nil)
+        XCTAssertEqual(rateLimit.entries.count, 4)
+        XCTAssertEqual(rateLimit.entries["user-hour-lim"], 3600)
+        XCTAssertEqual(rateLimit.entries["user-hour-rem"], 3598)
+        XCTAssertEqual(rateLimit.entries["user-minute-lim"], 150)
+        XCTAssertEqual(rateLimit.entries["user-minute-rem"], 149)
     }
 }
