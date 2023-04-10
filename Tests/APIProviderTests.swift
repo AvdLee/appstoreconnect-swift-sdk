@@ -51,7 +51,7 @@ final class APIProviderTests: XCTestCase {
     // MARK: - Tests
 
     func testRequestExecutionWithVoidResponse() {
-        let response = Response<Data>(requestURL: nil, statusCode: 200, allHeaderFields: [:], data: nil)
+        let response = Response<Data>(requestURL: nil, statusCode: 200, rateLimit: nil, data: nil)
         let mockRequestExecutor = MockRequestExecutor(expectedResponse: Result.success(response))
         let apiProvider = APIProvider(configuration: configuration, requestExecutor: mockRequestExecutor)
 
@@ -74,7 +74,7 @@ final class APIProviderTests: XCTestCase {
             )
         ])
         let responseData = try JSONEncoder().encode(errorResponse)
-        let response = Response<Data>(requestURL: expectedURL, statusCode: 404, allHeaderFields: [:], data: responseData)
+        let response = Response<Data>(requestURL: expectedURL, statusCode: 404, rateLimit: nil, data: responseData)
         let mockRequestExecutor = MockRequestExecutor(expectedResponse: Result.success(response))
         let apiProvider = APIProvider(configuration: configuration, requestExecutor: mockRequestExecutor)
 
@@ -102,7 +102,7 @@ final class APIProviderTests: XCTestCase {
     }
 
     func testDownloadRequestWithResultSuccess() {
-        let response = Response(requestURL: nil, statusCode: 200, allHeaderFields: [:], data: URL(fileURLWithPath: "randompath"))
+        let response = Response(requestURL: nil, statusCode: 200, rateLimit: nil, data: URL(fileURLWithPath: "randompath"))
         let mockRequestExecutor = MockRequestExecutor(expectedResponse: Result.success(response))
 
         let apiProvider = APIProvider(configuration: configuration, requestExecutor: mockRequestExecutor)
@@ -119,7 +119,7 @@ final class APIProviderTests: XCTestCase {
     }
 
     func testDownloadRequestWithProblemOnFileCreation() {
-        let response = Response<URL>(requestURL: nil, statusCode: 200, allHeaderFields: [:], data: nil)
+        let response = Response<URL>(requestURL: nil, statusCode: 200, rateLimit: nil, data: nil)
         let mockRequestExecutor = MockRequestExecutor(expectedResponse: Result.success(response))
 
         let apiProvider = APIProvider(configuration: configuration, requestExecutor: mockRequestExecutor)
@@ -141,7 +141,7 @@ final class APIProviderTests: XCTestCase {
     }
 
     func testDownloadRequestWithFailure() {
-        let response = Response<URL>(requestURL: nil, statusCode: 500, allHeaderFields: [:], data: nil)
+        let response = Response<URL>(requestURL: nil, statusCode: 500, rateLimit: nil, data: nil)
         let mockRequestExecutor = MockRequestExecutor(expectedResponse: Result.success(response))
 
         let apiProvider = APIProvider(configuration: configuration, requestExecutor: mockRequestExecutor)
