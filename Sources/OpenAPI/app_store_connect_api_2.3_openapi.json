@@ -88166,7 +88166,8 @@
                   "IPHONE",
                   "IPOD",
                   "APPLE_TV",
-                  "MAC"
+                  "MAC",
+                  "APPLE_SILICON_MAC"
                 ]
               },
               "status": {
