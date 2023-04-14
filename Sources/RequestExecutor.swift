@@ -11,7 +11,7 @@ import FoundationNetworking
 #endif
 
 /// The result type delivered from a successful URLRequest
-public struct Response<T> {
+public struct Response<T:Codable>: Codable{
     public typealias StatusCode = Int
 
     public let requestURL: URL?
