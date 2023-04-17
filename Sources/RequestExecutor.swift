@@ -18,10 +18,12 @@ public struct Response<T> {
     public let statusCode: Int
     public let data: T?
     public let errorResponse: ErrorResponse?
+    public let rateLimit: RateLimit?
 
-    public init(requestURL: URL?, statusCode: StatusCode, data: T?) {
+    public init(requestURL: URL?, statusCode: StatusCode, rateLimit: RateLimit?, data: T?) {
         self.requestURL = requestURL
         self.statusCode = statusCode
+        self.rateLimit = rateLimit
         self.data = data
 
         if let data = data as? Data {
