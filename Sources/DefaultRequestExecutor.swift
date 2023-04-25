@@ -64,7 +64,7 @@ func mapResponse(data: Data?, urlResponse: URLResponse?, error: Error?) -> Resul
             return .failure(DefaultRequestExecutor.Error.unknownResponseType)
         }
 
-        return .success(.init(requestURL: httpUrlResponse.url, statusCode: httpUrlResponse.statusCode, data: data))
+        return .success(.init(requestURL: httpUrlResponse.url, statusCode: httpUrlResponse.statusCode, rateLimit: httpUrlResponse.rateLimit, data: data))
     }
 }
 
@@ -83,6 +83,6 @@ func mapResponse(fileUrl: URL?, urlResponse: URLResponse?, error: Error?) -> Res
             return .failure(DefaultRequestExecutor.Error.unknownResponseType)
         }
 
-        return .success(.init(requestURL: httpUrlResponse.url, statusCode: httpUrlResponse.statusCode, data: fileUrl))
+        return .success(.init(requestURL: httpUrlResponse.url, statusCode: httpUrlResponse.statusCode, rateLimit: httpUrlResponse.rateLimit, data: fileUrl))
     }
 }
