@@ -7,7 +7,7 @@
 
 import Foundation
 
-public struct RateLimit {
+public struct RateLimit: Codable {
     /// Rate limit entries
     public let entries: [String: Int]
     
