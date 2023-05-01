@@ -10,7 +10,7 @@ import XCTest
 
 final class APIProviderTests: XCTestCase {
 
-    private struct MockRequestExecutor<T>: RequestExecutor {
+    private struct MockRequestExecutor<T:Codable>: RequestExecutor {
 
         let expectedResponse: Result<Response<T>, Swift.Error>
 
