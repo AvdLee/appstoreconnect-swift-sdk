@@ -6,8 +6,11 @@
 //
 
 import Foundation
+#if os(Linux)
+import OpenCombine
+#else
 import Combine
-import Crypto
+#endif
 #if canImport(FoundationNetworking)
 import FoundationNetworking
 #endif
