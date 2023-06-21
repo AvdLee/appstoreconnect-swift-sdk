@@ -29,6 +29,7 @@ extension APIEndpoint.V1.SubscriptionGroups.WithID {
 			public var fieldsSubscriptionOfferCodes: [FieldsSubscriptionOfferCodes]?
 			public var fieldsSubscriptionAppStoreReviewScreenshots: [FieldsSubscriptionAppStoreReviewScreenshots]?
 			public var fieldsSubscriptions: [FieldsSubscriptions]?
+			public var fieldsSubscriptionAvailabilities: [FieldsSubscriptionAvailabilities]?
 			public var fieldsSubscriptionGroups: [FieldsSubscriptionGroups]?
 			public var fieldsSubscriptionIntroductoryOffers: [FieldsSubscriptionIntroductoryOffers]?
 			public var fieldsSubscriptionPrices: [FieldsSubscriptionPrices]?
@@ -123,8 +124,15 @@ extension APIEndpoint.V1.SubscriptionGroups.WithID {
 				case promotionalOffers
 				case reviewNote
 				case state
+				case subscriptionAvailability
 				case subscriptionLocalizations
 				case subscriptionPeriod
+			}
+
+			public enum FieldsSubscriptionAvailabilities: String, Codable, CaseIterable {
+				case availableInNewTerritories
+				case availableTerritories
+				case subscription
 			}
 
 			public enum FieldsSubscriptionGroups: String, Codable, CaseIterable {
@@ -170,10 +178,11 @@ extension APIEndpoint.V1.SubscriptionGroups.WithID {
 				case prices
 				case promotedPurchase
 				case promotionalOffers
+				case subscriptionAvailability
 				case subscriptionLocalizations
 			}
 
-			public init(filterName: [String]? = nil, filterProductID: [String]? = nil, filterState: [FilterState]? = nil, sort: [Sort]? = nil, fieldsPromotedPurchases: [FieldsPromotedPurchases]? = nil, fieldsSubscriptionPromotionalOffers: [FieldsSubscriptionPromotionalOffers]? = nil, fieldsSubscriptionOfferCodes: [FieldsSubscriptionOfferCodes]? = nil, fieldsSubscriptionAppStoreReviewScreenshots: [FieldsSubscriptionAppStoreReviewScreenshots]? = nil, fieldsSubscriptions: [FieldsSubscriptions]? = nil, fieldsSubscriptionGroups: [FieldsSubscriptionGroups]? = nil, fieldsSubscriptionIntroductoryOffers: [FieldsSubscriptionIntroductoryOffers]? = nil, fieldsSubscriptionPrices: [FieldsSubscriptionPrices]? = nil, fieldsSubscriptionLocalizations: [FieldsSubscriptionLocalizations]? = nil, limit: Int? = nil, limitSubscriptionLocalizations: Int? = nil, limitIntroductoryOffers: Int? = nil, limitPromotionalOffers: Int? = nil, limitOfferCodes: Int? = nil, limitPrices: Int? = nil, include: [Include]? = nil) {
+			public init(filterName: [String]? = nil, filterProductID: [String]? = nil, filterState: [FilterState]? = nil, sort: [Sort]? = nil, fieldsPromotedPurchases: [FieldsPromotedPurchases]? = nil, fieldsSubscriptionPromotionalOffers: [FieldsSubscriptionPromotionalOffers]? = nil, fieldsSubscriptionOfferCodes: [FieldsSubscriptionOfferCodes]? = nil, fieldsSubscriptionAppStoreReviewScreenshots: [FieldsSubscriptionAppStoreReviewScreenshots]? = nil, fieldsSubscriptions: [FieldsSubscriptions]? = nil, fieldsSubscriptionAvailabilities: [FieldsSubscriptionAvailabilities]? = nil, fieldsSubscriptionGroups: [FieldsSubscriptionGroups]? = nil, fieldsSubscriptionIntroductoryOffers: [FieldsSubscriptionIntroductoryOffers]? = nil, fieldsSubscriptionPrices: [FieldsSubscriptionPrices]? = nil, fieldsSubscriptionLocalizations: [FieldsSubscriptionLocalizations]? = nil, limit: Int? = nil, limitSubscriptionLocalizations: Int? = nil, limitIntroductoryOffers: Int? = nil, limitPromotionalOffers: Int? = nil, limitOfferCodes: Int? = nil, limitPrices: Int? = nil, include: [Include]? = nil) {
 				self.filterName = filterName
 				self.filterProductID = filterProductID
 				self.filterState = filterState
@@ -183,6 +192,7 @@ extension APIEndpoint.V1.SubscriptionGroups.WithID {
 				self.fieldsSubscriptionOfferCodes = fieldsSubscriptionOfferCodes
 				self.fieldsSubscriptionAppStoreReviewScreenshots = fieldsSubscriptionAppStoreReviewScreenshots
 				self.fieldsSubscriptions = fieldsSubscriptions
+				self.fieldsSubscriptionAvailabilities = fieldsSubscriptionAvailabilities
 				self.fieldsSubscriptionGroups = fieldsSubscriptionGroups
 				self.fieldsSubscriptionIntroductoryOffers = fieldsSubscriptionIntroductoryOffers
 				self.fieldsSubscriptionPrices = fieldsSubscriptionPrices
@@ -207,6 +217,7 @@ extension APIEndpoint.V1.SubscriptionGroups.WithID {
 				encoder.encode(fieldsSubscriptionOfferCodes, forKey: "fields[subscriptionOfferCodes]")
 				encoder.encode(fieldsSubscriptionAppStoreReviewScreenshots, forKey: "fields[subscriptionAppStoreReviewScreenshots]")
 				encoder.encode(fieldsSubscriptions, forKey: "fields[subscriptions]")
+				encoder.encode(fieldsSubscriptionAvailabilities, forKey: "fields[subscriptionAvailabilities]")
 				encoder.encode(fieldsSubscriptionGroups, forKey: "fields[subscriptionGroups]")
 				encoder.encode(fieldsSubscriptionIntroductoryOffers, forKey: "fields[subscriptionIntroductoryOffers]")
 				encoder.encode(fieldsSubscriptionPrices, forKey: "fields[subscriptionPrices]")

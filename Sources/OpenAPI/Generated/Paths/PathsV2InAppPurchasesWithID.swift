@@ -22,6 +22,7 @@ extension APIEndpoint.V2.InAppPurchases {
 		public struct GetParameters {
 			public var fieldsInAppPurchases: [FieldsInAppPurchases]?
 			public var include: [Include]?
+			public var fieldsInAppPurchaseAvailabilities: [FieldsInAppPurchaseAvailabilities]?
 			public var fieldsInAppPurchaseAppStoreReviewScreenshots: [FieldsInAppPurchaseAppStoreReviewScreenshots]?
 			public var fieldsPromotedPurchases: [FieldsPromotedPurchases]?
 			public var fieldsInAppPurchasePricePoints: [FieldsInAppPurchasePricePoints]?
@@ -39,6 +40,7 @@ extension APIEndpoint.V2.InAppPurchases {
 				case contentHosting
 				case familySharable
 				case iapPriceSchedule
+				case inAppPurchaseAvailability
 				case inAppPurchaseLocalizations
 				case inAppPurchaseType
 				case name
@@ -53,9 +55,16 @@ extension APIEndpoint.V2.InAppPurchases {
 				case appStoreReviewScreenshot
 				case content
 				case iapPriceSchedule
+				case inAppPurchaseAvailability
 				case inAppPurchaseLocalizations
 				case pricePoints
 				case promotedPurchase
+			}
+
+			public enum FieldsInAppPurchaseAvailabilities: String, Codable, CaseIterable {
+				case availableInNewTerritories
+				case availableTerritories
+				case inAppPurchase
 			}
 
 			public enum FieldsInAppPurchaseAppStoreReviewScreenshots: String, Codable, CaseIterable {
@@ -112,9 +121,10 @@ extension APIEndpoint.V2.InAppPurchases {
 				case url
 			}
 
-			public init(fieldsInAppPurchases: [FieldsInAppPurchases]? = nil, include: [Include]? = nil, fieldsInAppPurchaseAppStoreReviewScreenshots: [FieldsInAppPurchaseAppStoreReviewScreenshots]? = nil, fieldsPromotedPurchases: [FieldsPromotedPurchases]? = nil, fieldsInAppPurchasePricePoints: [FieldsInAppPurchasePricePoints]? = nil, fieldsInAppPurchaseLocalizations: [FieldsInAppPurchaseLocalizations]? = nil, fieldsInAppPurchasePriceSchedules: [FieldsInAppPurchasePriceSchedules]? = nil, fieldsInAppPurchaseContents: [FieldsInAppPurchaseContents]? = nil, limitInAppPurchaseLocalizations: Int? = nil, limitPricePoints: Int? = nil) {
+			public init(fieldsInAppPurchases: [FieldsInAppPurchases]? = nil, include: [Include]? = nil, fieldsInAppPurchaseAvailabilities: [FieldsInAppPurchaseAvailabilities]? = nil, fieldsInAppPurchaseAppStoreReviewScreenshots: [FieldsInAppPurchaseAppStoreReviewScreenshots]? = nil, fieldsPromotedPurchases: [FieldsPromotedPurchases]? = nil, fieldsInAppPurchasePricePoints: [FieldsInAppPurchasePricePoints]? = nil, fieldsInAppPurchaseLocalizations: [FieldsInAppPurchaseLocalizations]? = nil, fieldsInAppPurchasePriceSchedules: [FieldsInAppPurchasePriceSchedules]? = nil, fieldsInAppPurchaseContents: [FieldsInAppPurchaseContents]? = nil, limitInAppPurchaseLocalizations: Int? = nil, limitPricePoints: Int? = nil) {
 				self.fieldsInAppPurchases = fieldsInAppPurchases
 				self.include = include
+				self.fieldsInAppPurchaseAvailabilities = fieldsInAppPurchaseAvailabilities
 				self.fieldsInAppPurchaseAppStoreReviewScreenshots = fieldsInAppPurchaseAppStoreReviewScreenshots
 				self.fieldsPromotedPurchases = fieldsPromotedPurchases
 				self.fieldsInAppPurchasePricePoints = fieldsInAppPurchasePricePoints
@@ -129,6 +139,7 @@ extension APIEndpoint.V2.InAppPurchases {
 				let encoder = URLQueryEncoder(explode: false)
 				encoder.encode(fieldsInAppPurchases, forKey: "fields[inAppPurchases]")
 				encoder.encode(include, forKey: "include")
+				encoder.encode(fieldsInAppPurchaseAvailabilities, forKey: "fields[inAppPurchaseAvailabilities]")
 				encoder.encode(fieldsInAppPurchaseAppStoreReviewScreenshots, forKey: "fields[inAppPurchaseAppStoreReviewScreenshots]")
 				encoder.encode(fieldsPromotedPurchases, forKey: "fields[promotedPurchases]")
 				encoder.encode(fieldsInAppPurchasePricePoints, forKey: "fields[inAppPurchasePricePoints]")

@@ -5,6 +5,7 @@
 
 import Foundation
 
+@available(*, deprecated, message: "Deprecated")
 public struct AppStoreVersionExperimentCreateRequest: Codable {
 	public var data: Data
 

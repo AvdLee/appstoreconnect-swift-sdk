@@ -29,10 +29,13 @@ extension APIEndpoint.V1.ReviewSubmissions.WithID {
 			public var include: [Include]?
 
 			public enum FieldsAppStoreVersionExperiments: String, Codable, CaseIterable {
-				case appStoreVersion
+				case app
 				case appStoreVersionExperimentTreatments
+				case controlVersions
 				case endDate
+				case latestControlVersion
 				case name
+				case platform
 				case reviewRequired
 				case startDate
 				case started
@@ -45,6 +48,7 @@ extension APIEndpoint.V1.ReviewSubmissions.WithID {
 				case appEvent
 				case appStoreVersion
 				case appStoreVersionExperiment
+				case appStoreVersionExperimentV2
 				case removed
 				case resolved
 				case reviewSubmission
@@ -58,6 +62,7 @@ extension APIEndpoint.V1.ReviewSubmissions.WithID {
 				case appStoreReviewDetail
 				case appStoreState
 				case appStoreVersionExperiments
+				case appStoreVersionExperimentsV2
 				case appStoreVersionLocalizations
 				case appStoreVersionPhasedRelease
 				case appStoreVersionSubmission
@@ -100,6 +105,7 @@ extension APIEndpoint.V1.ReviewSubmissions.WithID {
 				case appEvent
 				case appStoreVersion
 				case appStoreVersionExperiment
+				case appStoreVersionExperimentV2
 			}
 
 			public init(fieldsAppStoreVersionExperiments: [FieldsAppStoreVersionExperiments]? = nil, fieldsReviewSubmissionItems: [FieldsReviewSubmissionItems]? = nil, fieldsAppStoreVersions: [FieldsAppStoreVersions]? = nil, fieldsAppCustomProductPageVersions: [FieldsAppCustomProductPageVersions]? = nil, fieldsAppEvents: [FieldsAppEvents]? = nil, limit: Int? = nil, include: [Include]? = nil) {

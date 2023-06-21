@@ -15,6 +15,7 @@ public struct ReviewSubmissionItemsResponse: Codable {
 		case appStoreVersion(AppStoreVersion)
 		case appCustomProductPageVersion(AppCustomProductPageVersion)
 		case appStoreVersionExperiment(AppStoreVersionExperiment)
+		case appStoreVersionExperimentV2(AppStoreVersionExperimentV2)
 		case appEvent(AppEvent)
 
 		public init(from decoder: Decoder) throws {
@@ -25,6 +26,8 @@ public struct ReviewSubmissionItemsResponse: Codable {
 				self = .appCustomProductPageVersion(value)
 			} else if let value = try? container.decode(AppStoreVersionExperiment.self) {
 				self = .appStoreVersionExperiment(value)
+			} else if let value = try? container.decode(AppStoreVersionExperimentV2.self) {
+				self = .appStoreVersionExperimentV2(value)
 			} else if let value = try? container.decode(AppEvent.self) {
 				self = .appEvent(value)
 			} else {
@@ -38,6 +41,7 @@ public struct ReviewSubmissionItemsResponse: Codable {
 			case .appStoreVersion(let value): try container.encode(value)
 			case .appCustomProductPageVersion(let value): try container.encode(value)
 			case .appStoreVersionExperiment(let value): try container.encode(value)
+			case .appStoreVersionExperimentV2(let value): try container.encode(value)
 			case .appEvent(let value): try container.encode(value)
 			}
 		}

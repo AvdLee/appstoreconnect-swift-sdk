@@ -13,7 +13,7 @@ public struct ErrorResponse: Codable {
 		public var status: String
 		public var code: String
 		public var title: String
-		public var detail: String?
+		public var detail: String
 		public var source: Source?
 
 		public enum Source: Codable {
@@ -40,7 +40,7 @@ public struct ErrorResponse: Codable {
 			}
 		}
 
-		public init(id: String? = nil, status: String, code: String, title: String, detail: String? = nil, source: Source? = nil) {
+		public init(id: String? = nil, status: String, code: String, title: String, detail: String, source: Source? = nil) {
 			self.id = id
 			self.status = status
 			self.code = code
@@ -55,7 +55,7 @@ public struct ErrorResponse: Codable {
 			self.status = try values.decode(String.self, forKey: "status")
 			self.code = try values.decode(String.self, forKey: "code")
 			self.title = try values.decode(String.self, forKey: "title")
-			self.detail = try values.decodeIfPresent(String.self, forKey: "detail")
+			self.detail = try values.decode(String.self, forKey: "detail")
 			self.source = try values.decodeIfPresent(Source.self, forKey: "source")
 		}
 
@@ -65,7 +65,7 @@ public struct ErrorResponse: Codable {
 			try values.encode(status, forKey: "status")
 			try values.encode(code, forKey: "code")
 			try values.encode(title, forKey: "title")
-			try values.encodeIfPresent(detail, forKey: "detail")
+			try values.encode(detail, forKey: "detail")
 			try values.encodeIfPresent(source, forKey: "source")
 		}
 	}

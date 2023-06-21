@@ -15,6 +15,7 @@ extension APIEndpoint.V1.AppStoreVersions.WithID {
 		/// Path: `/v1/appStoreVersions/{id}/appStoreVersionExperiments`
 		public let path: String
 
+		@available(*, deprecated, message: "Deprecated")
 		public func get(parameters: GetParameters? = nil) -> Request<AppStoreConnect_Swift_SDK.AppStoreVersionExperimentsResponse> {
 			.get(path, query: parameters?.asQuery)
 		}
@@ -57,6 +58,7 @@ extension APIEndpoint.V1.AppStoreVersions.WithID {
 				case appIconName
 				case appStoreVersionExperiment
 				case appStoreVersionExperimentTreatmentLocalizations
+				case appStoreVersionExperimentV2
 				case name
 				case promotedDate
 			}
@@ -68,6 +70,7 @@ extension APIEndpoint.V1.AppStoreVersions.WithID {
 				case appStoreReviewDetail
 				case appStoreState
 				case appStoreVersionExperiments
+				case appStoreVersionExperimentsV2
 				case appStoreVersionLocalizations
 				case appStoreVersionPhasedRelease
 				case appStoreVersionSubmission

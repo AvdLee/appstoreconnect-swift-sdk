@@ -72,6 +72,7 @@ extension APIEndpoint.V1.BundleIDs {
 				case appInfos
 				case appPricePoints
 				case appPriceSchedule
+				case appStoreVersionExperimentsV2
 				case appStoreVersions
 				case availableInNewTerritories
 				case availableTerritories

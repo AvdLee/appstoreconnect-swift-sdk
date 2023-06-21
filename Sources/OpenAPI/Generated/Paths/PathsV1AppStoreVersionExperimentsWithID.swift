@@ -15,6 +15,7 @@ extension APIEndpoint.V1.AppStoreVersionExperiments {
 		/// Path: `/v1/appStoreVersionExperiments/{id}`
 		public let path: String
 
+		@available(*, deprecated, message: "Deprecated")
 		public func get(parameters: GetParameters? = nil) -> Request<AppStoreConnect_Swift_SDK.AppStoreVersionExperimentResponse> {
 			.get(path, query: parameters?.asQuery)
 		}
@@ -47,6 +48,7 @@ extension APIEndpoint.V1.AppStoreVersionExperiments {
 				case appIconName
 				case appStoreVersionExperiment
 				case appStoreVersionExperimentTreatmentLocalizations
+				case appStoreVersionExperimentV2
 				case name
 				case promotedDate
 			}
@@ -68,10 +70,12 @@ extension APIEndpoint.V1.AppStoreVersionExperiments {
 			}
 		}
 
+		@available(*, deprecated, message: "Deprecated")
 		public func patch(_ body: AppStoreConnect_Swift_SDK.AppStoreVersionExperimentUpdateRequest) -> Request<AppStoreConnect_Swift_SDK.AppStoreVersionExperimentResponse> {
 			.patch(path, body: body)
 		}
 
+		@available(*, deprecated, message: "Deprecated")
 		public var delete: Request<Void> {
 			.delete(path)
 		}

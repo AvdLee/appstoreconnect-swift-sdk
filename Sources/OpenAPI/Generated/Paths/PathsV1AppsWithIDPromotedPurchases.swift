@@ -54,6 +54,7 @@ extension APIEndpoint.V1.Apps.WithID {
 				case promotionalOffers
 				case reviewNote
 				case state
+				case subscriptionAvailability
 				case subscriptionLocalizations
 				case subscriptionPeriod
 			}
@@ -66,6 +67,7 @@ extension APIEndpoint.V1.Apps.WithID {
 				case contentHosting
 				case familySharable
 				case iapPriceSchedule
+				case inAppPurchaseAvailability
 				case inAppPurchaseLocalizations
 				case inAppPurchaseType
 				case name
