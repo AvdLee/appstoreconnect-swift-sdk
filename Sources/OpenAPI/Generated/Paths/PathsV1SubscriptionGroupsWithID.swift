@@ -55,6 +55,7 @@ extension APIEndpoint.V1.SubscriptionGroups {
 				case promotionalOffers
 				case reviewNote
 				case state
+				case subscriptionAvailability
 				case subscriptionLocalizations
 				case subscriptionPeriod
 			}

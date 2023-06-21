@@ -15,6 +15,7 @@ extension APIEndpoint.V1.AppStoreVersionExperiments.WithID {
 		/// Path: `/v1/appStoreVersionExperiments/{id}/appStoreVersionExperimentTreatments`
 		public let path: String
 
+		@available(*, deprecated, message: "Deprecated")
 		public func get(parameters: GetParameters? = nil) -> Request<AppStoreConnect_Swift_SDK.AppStoreVersionExperimentTreatmentsResponse> {
 			.get(path, query: parameters?.asQuery)
 		}
@@ -28,10 +29,13 @@ extension APIEndpoint.V1.AppStoreVersionExperiments.WithID {
 			public var include: [Include]?
 
 			public enum FieldsAppStoreVersionExperiments: String, Codable, CaseIterable {
-				case appStoreVersion
+				case app
 				case appStoreVersionExperimentTreatments
+				case controlVersions
 				case endDate
+				case latestControlVersion
 				case name
+				case platform
 				case reviewRequired
 				case startDate
 				case started
@@ -44,6 +48,7 @@ extension APIEndpoint.V1.AppStoreVersionExperiments.WithID {
 				case appIconName
 				case appStoreVersionExperiment
 				case appStoreVersionExperimentTreatmentLocalizations
+				case appStoreVersionExperimentV2
 				case name
 				case promotedDate
 			}
@@ -58,6 +63,7 @@ extension APIEndpoint.V1.AppStoreVersionExperiments.WithID {
 			public enum Include: String, Codable, CaseIterable {
 				case appStoreVersionExperiment
 				case appStoreVersionExperimentTreatmentLocalizations
+				case appStoreVersionExperimentV2
 			}
 
 			public init(fieldsAppStoreVersionExperiments: [FieldsAppStoreVersionExperiments]? = nil, fieldsAppStoreVersionExperimentTreatments: [FieldsAppStoreVersionExperimentTreatments]? = nil, fieldsAppStoreVersionExperimentTreatmentLocalizations: [FieldsAppStoreVersionExperimentTreatmentLocalizations]? = nil, limit: Int? = nil, limitAppStoreVersionExperimentTreatmentLocalizations: Int? = nil, include: [Include]? = nil) {

@@ -1,0 +1,13 @@
+GEM
+  remote: https://rubygems.org/
+  specs:
+    dotenv (2.8.1)
+
+PLATFORMS
+  universal-darwin-22
+
+DEPENDENCIES
+  dotenv
+
+BUNDLED WITH
+   2.2.8

@@ -5,9 +5,9 @@
 
 import Foundation
 
-public struct PrereleaseVersionResponse: Codable {
-	/// PrereleaseVersion
-	public var data: PrereleaseVersion
+public struct PreReleaseVersionResponse: Codable {
+	/// PreReleaseVersion
+	public var data: PreReleaseVersion
 	public var included: [IncludedItem]?
 	public var links: DocumentLinks
 
@@ -35,7 +35,7 @@ public struct PrereleaseVersionResponse: Codable {
 		}
 	}
 
-	public init(data: PrereleaseVersion, included: [IncludedItem]? = nil, links: DocumentLinks) {
+	public init(data: PreReleaseVersion, included: [IncludedItem]? = nil, links: DocumentLinks) {
 		self.data = data
 		self.included = included
 		self.links = links
@@ -43,7 +43,7 @@ public struct PrereleaseVersionResponse: Codable {
 
 	public init(from decoder: Decoder) throws {
 		let values = try decoder.container(keyedBy: StringCodingKey.self)
-		self.data = try values.decode(PrereleaseVersion.self, forKey: "data")
+		self.data = try values.decode(PreReleaseVersion.self, forKey: "data")
 		self.included = try values.decodeIfPresent([IncludedItem].self, forKey: "included")
 		self.links = try values.decode(DocumentLinks.self, forKey: "links")
 	}

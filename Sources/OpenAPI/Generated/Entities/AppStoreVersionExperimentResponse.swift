@@ -5,8 +5,11 @@
 
 import Foundation
 
+@available(*, deprecated, message: "Deprecated")
 public struct AppStoreVersionExperimentResponse: Codable {
 	/// AppStoreVersionExperiment
+	///
+	/// - warning: Deprecated.
 	public var data: AppStoreVersionExperiment
 	public var included: [IncludedItem]?
 	public var links: DocumentLinks

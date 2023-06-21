@@ -22,6 +22,7 @@ public struct AppStoreVersionResponse: Codable {
 		case appStoreVersionSubmission(AppStoreVersionSubmission)
 		case appClipDefaultExperience(AppClipDefaultExperience)
 		case appStoreVersionExperiment(AppStoreVersionExperiment)
+		case appStoreVersionExperimentV2(AppStoreVersionExperimentV2)
 
 		public init(from decoder: Decoder) throws {
 			let container = try decoder.singleValueContainer()
@@ -45,6 +46,8 @@ public struct AppStoreVersionResponse: Codable {
 				self = .appClipDefaultExperience(value)
 			} else if let value = try? container.decode(AppStoreVersionExperiment.self) {
 				self = .appStoreVersionExperiment(value)
+			} else if let value = try? container.decode(AppStoreVersionExperimentV2.self) {
+				self = .appStoreVersionExperimentV2(value)
 			} else {
 				throw DecodingError.dataCorruptedError(in: container, debugDescription: "Failed to intialize `oneOf`")
 			}
@@ -63,6 +66,7 @@ public struct AppStoreVersionResponse: Codable {
 			case .appStoreVersionSubmission(let value): try container.encode(value)
 			case .appClipDefaultExperience(let value): try container.encode(value)
 			case .appStoreVersionExperiment(let value): try container.encode(value)
+			case .appStoreVersionExperimentV2(let value): try container.encode(value)
 			}
 		}
 	}

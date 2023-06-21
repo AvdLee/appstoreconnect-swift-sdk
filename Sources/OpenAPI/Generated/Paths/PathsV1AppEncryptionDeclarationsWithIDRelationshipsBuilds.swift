@@ -15,6 +15,7 @@ extension APIEndpoint.V1.AppEncryptionDeclarations.WithID.Relationships {
 		/// Path: `/v1/appEncryptionDeclarations/{id}/relationships/builds`
 		public let path: String
 
+		@available(*, deprecated, message: "Deprecated")
 		public func post(_ body: AppStoreConnect_Swift_SDK.AppEncryptionDeclarationBuildsLinkagesRequest) -> Request<Void> {
 			.post(path, body: body)
 		}

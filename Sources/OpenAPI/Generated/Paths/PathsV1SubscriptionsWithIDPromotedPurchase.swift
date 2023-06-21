@@ -53,6 +53,7 @@ extension APIEndpoint.V1.Subscriptions.WithID {
 				case promotionalOffers
 				case reviewNote
 				case state
+				case subscriptionAvailability
 				case subscriptionLocalizations
 				case subscriptionPeriod
 			}
@@ -65,6 +66,7 @@ extension APIEndpoint.V1.Subscriptions.WithID {
 				case contentHosting
 				case familySharable
 				case iapPriceSchedule
+				case inAppPurchaseAvailability
 				case inAppPurchaseLocalizations
 				case inAppPurchaseType
 				case name
