@@ -16,8 +16,12 @@ public struct RateLimit: Codable {
     
     init(value: String, requestURL: URL?) {
         self.requestURL = requestURL
-        
-        let items = value.split(separator: ";", omittingEmptySubsequences: true)
+
+        let items = value.split(separator: ",", omittingEmptySubsequences: true).flatMap {
+            $0.trimmingCharacters(in: CharacterSet.whitespaces)
+                .split(separator: ";", omittingEmptySubsequences: true)
+                .map({ $0.trimmingCharacters(in: CharacterSet.whitespaces) })
+        }
         entries = items.reduce(into: [:]) { partialResult, item in
             guard let colonIdx = item.firstIndex(of: ":") else {
                 return

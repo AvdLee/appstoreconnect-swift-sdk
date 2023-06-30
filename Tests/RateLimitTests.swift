@@ -36,7 +36,16 @@ final class RateLimitTests: XCTestCase {
         XCTAssertEqual(rateLimit.entries["user-minute-lim"], 150)
         XCTAssertEqual(rateLimit.entries["user-minute-rem"], 149)
     }
-    
+
+    func testMultipleItems() {
+        let rateLimit = RateLimit(value: "user-hour-lim:3600;user-hour-rem:3598;, user-minute-lim:150;user-minute-rem:149;", requestURL: nil)
+        XCTAssertEqual(rateLimit.entries.count, 4)
+        XCTAssertEqual(rateLimit.entries["user-hour-lim"], 3600)
+        XCTAssertEqual(rateLimit.entries["user-hour-rem"], 3598)
+        XCTAssertEqual(rateLimit.entries["user-minute-lim"], 150)
+        XCTAssertEqual(rateLimit.entries["user-minute-rem"], 149)
+    }
+
     func testExtractingHeaderField() {
         let httpUrlResponse = HTTPURLResponse(url: URL(string: "https://api.appstoreconnect.apple.com/")!, statusCode: 200, httpVersion: nil, headerFields: ["X-ratE-limiT": "user-hour-lim:3600;user-hour-rem:3545;"])
         let rateLimit = httpUrlResponse?.rateLimit
