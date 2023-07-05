@@ -43,6 +43,7 @@ extension APIEndpoint.V1.AppStoreVersionExperimentTreatments.WithID {
 				case appIconName
 				case appStoreVersionExperiment
 				case appStoreVersionExperimentTreatmentLocalizations
+				case appStoreVersionExperimentV2
 				case name
 				case promotedDate
 			}

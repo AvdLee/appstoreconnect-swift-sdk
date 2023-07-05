@@ -13,12 +13,15 @@ public struct AppStoreVersionExperimentTreatmentsResponse: Codable {
 
 	public enum IncludedItem: Codable {
 		case appStoreVersionExperiment(AppStoreVersionExperiment)
+		case appStoreVersionExperimentV2(AppStoreVersionExperimentV2)
 		case appStoreVersionExperimentTreatmentLocalization(AppStoreVersionExperimentTreatmentLocalization)
 
 		public init(from decoder: Decoder) throws {
 			let container = try decoder.singleValueContainer()
 			if let value = try? container.decode(AppStoreVersionExperiment.self) {
 				self = .appStoreVersionExperiment(value)
+			} else if let value = try? container.decode(AppStoreVersionExperimentV2.self) {
+				self = .appStoreVersionExperimentV2(value)
 			} else if let value = try? container.decode(AppStoreVersionExperimentTreatmentLocalization.self) {
 				self = .appStoreVersionExperimentTreatmentLocalization(value)
 			} else {
@@ -30,6 +33,7 @@ public struct AppStoreVersionExperimentTreatmentsResponse: Codable {
 			var container = encoder.singleValueContainer()
 			switch self {
 			case .appStoreVersionExperiment(let value): try container.encode(value)
+			case .appStoreVersionExperimentV2(let value): try container.encode(value)
 			case .appStoreVersionExperimentTreatmentLocalization(let value): try container.encode(value)
 			}
 		}

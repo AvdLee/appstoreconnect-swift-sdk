@@ -15,6 +15,7 @@ extension APIEndpoint.V1 {
 		/// Path: `/v1/appStoreVersionExperiments`
 		public let path: String
 
+		@available(*, deprecated, message: "Deprecated")
 		public func post(_ body: AppStoreConnect_Swift_SDK.AppStoreVersionExperimentCreateRequest) -> Request<AppStoreConnect_Swift_SDK.AppStoreVersionExperimentResponse> {
 			.post(path, body: body)
 		}

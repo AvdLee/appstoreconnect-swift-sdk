@@ -33,6 +33,7 @@ extension APIEndpoint.V1.AppStoreVersions {
 			public var fieldsBuilds: [FieldsBuilds]?
 			public var fieldsAppStoreVersionLocalizations: [FieldsAppStoreVersionLocalizations]?
 			public var limitAppStoreVersionExperiments: Int?
+			public var limitAppStoreVersionExperimentsV2: Int?
 			public var limitAppStoreVersionLocalizations: Int?
 
 			public enum FieldsAppStoreVersions: String, Codable, CaseIterable {
@@ -42,6 +43,7 @@ extension APIEndpoint.V1.AppStoreVersions {
 				case appStoreReviewDetail
 				case appStoreState
 				case appStoreVersionExperiments
+				case appStoreVersionExperimentsV2
 				case appStoreVersionLocalizations
 				case appStoreVersionPhasedRelease
 				case appStoreVersionSubmission
@@ -63,6 +65,7 @@ extension APIEndpoint.V1.AppStoreVersions {
 				case appClipDefaultExperience
 				case appStoreReviewDetail
 				case appStoreVersionExperiments
+				case appStoreVersionExperimentsV2
 				case appStoreVersionLocalizations
 				case appStoreVersionPhasedRelease
 				case appStoreVersionSubmission
@@ -71,10 +74,13 @@ extension APIEndpoint.V1.AppStoreVersions {
 			}
 
 			public enum FieldsAppStoreVersionExperiments: String, Codable, CaseIterable {
-				case appStoreVersion
+				case app
 				case appStoreVersionExperimentTreatments
+				case controlVersions
 				case endDate
+				case latestControlVersion
 				case name
+				case platform
 				case reviewRequired
 				case startDate
 				case started
@@ -196,7 +202,7 @@ extension APIEndpoint.V1.AppStoreVersions {
 				case whatsNew
 			}
 
-			public init(fieldsAppStoreVersions: [FieldsAppStoreVersions]? = nil, include: [Include]? = nil, fieldsAppStoreVersionExperiments: [FieldsAppStoreVersionExperiments]? = nil, fieldsAppStoreVersionSubmissions: [FieldsAppStoreVersionSubmissions]? = nil, fieldsAgeRatingDeclarations: [FieldsAgeRatingDeclarations]? = nil, fieldsCustomerReviews: [FieldsCustomerReviews]? = nil, fieldsAppStoreReviewDetails: [FieldsAppStoreReviewDetails]? = nil, fieldsAppClipDefaultExperiences: [FieldsAppClipDefaultExperiences]? = nil, fieldsRoutingAppCoverages: [FieldsRoutingAppCoverages]? = nil, fieldsAppStoreVersionPhasedReleases: [FieldsAppStoreVersionPhasedReleases]? = nil, fieldsBuilds: [FieldsBuilds]? = nil, fieldsAppStoreVersionLocalizations: [FieldsAppStoreVersionLocalizations]? = nil, limitAppStoreVersionExperiments: Int? = nil, limitAppStoreVersionLocalizations: Int? = nil) {
+			public init(fieldsAppStoreVersions: [FieldsAppStoreVersions]? = nil, include: [Include]? = nil, fieldsAppStoreVersionExperiments: [FieldsAppStoreVersionExperiments]? = nil, fieldsAppStoreVersionSubmissions: [FieldsAppStoreVersionSubmissions]? = nil, fieldsAgeRatingDeclarations: [FieldsAgeRatingDeclarations]? = nil, fieldsCustomerReviews: [FieldsCustomerReviews]? = nil, fieldsAppStoreReviewDetails: [FieldsAppStoreReviewDetails]? = nil, fieldsAppClipDefaultExperiences: [FieldsAppClipDefaultExperiences]? = nil, fieldsRoutingAppCoverages: [FieldsRoutingAppCoverages]? = nil, fieldsAppStoreVersionPhasedReleases: [FieldsAppStoreVersionPhasedReleases]? = nil, fieldsBuilds: [FieldsBuilds]? = nil, fieldsAppStoreVersionLocalizations: [FieldsAppStoreVersionLocalizations]? = nil, limitAppStoreVersionExperiments: Int? = nil, limitAppStoreVersionExperimentsV2: Int? = nil, limitAppStoreVersionLocalizations: Int? = nil) {
 				self.fieldsAppStoreVersions = fieldsAppStoreVersions
 				self.include = include
 				self.fieldsAppStoreVersionExperiments = fieldsAppStoreVersionExperiments
@@ -210,6 +216,7 @@ extension APIEndpoint.V1.AppStoreVersions {
 				self.fieldsBuilds = fieldsBuilds
 				self.fieldsAppStoreVersionLocalizations = fieldsAppStoreVersionLocalizations
 				self.limitAppStoreVersionExperiments = limitAppStoreVersionExperiments
+				self.limitAppStoreVersionExperimentsV2 = limitAppStoreVersionExperimentsV2
 				self.limitAppStoreVersionLocalizations = limitAppStoreVersionLocalizations
 			}
 
@@ -228,6 +235,7 @@ extension APIEndpoint.V1.AppStoreVersions {
 				encoder.encode(fieldsBuilds, forKey: "fields[builds]")
 				encoder.encode(fieldsAppStoreVersionLocalizations, forKey: "fields[appStoreVersionLocalizations]")
 				encoder.encode(limitAppStoreVersionExperiments, forKey: "limit[appStoreVersionExperiments]")
+				encoder.encode(limitAppStoreVersionExperimentsV2, forKey: "limit[appStoreVersionExperimentsV2]")
 				encoder.encode(limitAppStoreVersionLocalizations, forKey: "limit[appStoreVersionLocalizations]")
 				return encoder.items
 			}

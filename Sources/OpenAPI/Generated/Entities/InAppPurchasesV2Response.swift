@@ -18,6 +18,7 @@ public struct InAppPurchasesV2Response: Codable {
 		case inAppPurchaseAppStoreReviewScreenshot(InAppPurchaseAppStoreReviewScreenshot)
 		case promotedPurchase(PromotedPurchase)
 		case inAppPurchasePriceSchedule(InAppPurchasePriceSchedule)
+		case inAppPurchaseAvailability(InAppPurchaseAvailability)
 
 		public init(from decoder: Decoder) throws {
 			let container = try decoder.singleValueContainer()
@@ -33,6 +34,8 @@ public struct InAppPurchasesV2Response: Codable {
 				self = .promotedPurchase(value)
 			} else if let value = try? container.decode(InAppPurchasePriceSchedule.self) {
 				self = .inAppPurchasePriceSchedule(value)
+			} else if let value = try? container.decode(InAppPurchaseAvailability.self) {
+				self = .inAppPurchaseAvailability(value)
 			} else {
 				throw DecodingError.dataCorruptedError(in: container, debugDescription: "Failed to intialize `oneOf`")
 			}
@@ -47,6 +50,7 @@ public struct InAppPurchasesV2Response: Codable {
 			case .inAppPurchaseAppStoreReviewScreenshot(let value): try container.encode(value)
 			case .promotedPurchase(let value): try container.encode(value)
 			case .inAppPurchasePriceSchedule(let value): try container.encode(value)
+			case .inAppPurchaseAvailability(let value): try container.encode(value)
 			}
 		}
 	}

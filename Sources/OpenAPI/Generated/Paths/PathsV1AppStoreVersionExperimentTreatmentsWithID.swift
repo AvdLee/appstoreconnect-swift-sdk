@@ -30,6 +30,7 @@ extension APIEndpoint.V1.AppStoreVersionExperimentTreatments {
 				case appIconName
 				case appStoreVersionExperiment
 				case appStoreVersionExperimentTreatmentLocalizations
+				case appStoreVersionExperimentV2
 				case name
 				case promotedDate
 			}
@@ -37,6 +38,7 @@ extension APIEndpoint.V1.AppStoreVersionExperimentTreatments {
 			public enum Include: String, Codable, CaseIterable {
 				case appStoreVersionExperiment
 				case appStoreVersionExperimentTreatmentLocalizations
+				case appStoreVersionExperimentV2
 			}
 
 			public enum FieldsAppStoreVersionExperimentTreatmentLocalizations: String, Codable, CaseIterable {

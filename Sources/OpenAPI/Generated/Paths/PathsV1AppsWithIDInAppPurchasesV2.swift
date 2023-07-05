@@ -26,7 +26,7 @@ extension APIEndpoint.V1.Apps.WithID {
 			public var filterState: [FilterState]?
 			public var sort: [Sort]?
 			public var fieldsInAppPurchaseAppStoreReviewScreenshots: [FieldsInAppPurchaseAppStoreReviewScreenshots]?
-			public var fieldsInAppPurchasePricePoints: [FieldsInAppPurchasePricePoints]?
+			public var fieldsInAppPurchaseAvailabilities: [FieldsInAppPurchaseAvailabilities]?
 			public var fieldsPromotedPurchases: [FieldsPromotedPurchases]?
 			public var fieldsInAppPurchaseLocalizations: [FieldsInAppPurchaseLocalizations]?
 			public var fieldsInAppPurchases: [FieldsInAppPurchases]?
@@ -34,7 +34,6 @@ extension APIEndpoint.V1.Apps.WithID {
 			public var fieldsInAppPurchaseContents: [FieldsInAppPurchaseContents]?
 			public var limit: Int?
 			public var limitInAppPurchaseLocalizations: Int?
-			public var limitPricePoints: Int?
 			public var include: [Include]?
 
 			public enum FilterInAppPurchaseType: String, Codable, CaseIterable {
@@ -78,12 +77,10 @@ extension APIEndpoint.V1.Apps.WithID {
 				case uploaded
 			}
 
-			public enum FieldsInAppPurchasePricePoints: String, Codable, CaseIterable {
-				case customerPrice
-				case inAppPurchaseV2
-				case priceTier
-				case proceeds
-				case territory
+			public enum FieldsInAppPurchaseAvailabilities: String, Codable, CaseIterable {
+				case availableInNewTerritories
+				case availableTerritories
+				case inAppPurchase
 			}
 
 			public enum FieldsPromotedPurchases: String, Codable, CaseIterable {
@@ -112,10 +109,10 @@ extension APIEndpoint.V1.Apps.WithID {
 				case contentHosting
 				case familySharable
 				case iapPriceSchedule
+				case inAppPurchaseAvailability
 				case inAppPurchaseLocalizations
 				case inAppPurchaseType
 				case name
-				case pricePoints
 				case productID = "productId"
 				case promotedPurchase
 				case reviewNote
@@ -141,19 +138,19 @@ extension APIEndpoint.V1.Apps.WithID {
 				case appStoreReviewScreenshot
 				case content
 				case iapPriceSchedule
+				case inAppPurchaseAvailability
 				case inAppPurchaseLocalizations
-				case pricePoints
 				case promotedPurchase
 			}
 
-			public init(filterInAppPurchaseType: [FilterInAppPurchaseType]? = nil, filterName: [String]? = nil, filterProductID: [String]? = nil, filterState: [FilterState]? = nil, sort: [Sort]? = nil, fieldsInAppPurchaseAppStoreReviewScreenshots: [FieldsInAppPurchaseAppStoreReviewScreenshots]? = nil, fieldsInAppPurchasePricePoints: [FieldsInAppPurchasePricePoints]? = nil, fieldsPromotedPurchases: [FieldsPromotedPurchases]? = nil, fieldsInAppPurchaseLocalizations: [FieldsInAppPurchaseLocalizations]? = nil, fieldsInAppPurchases: [FieldsInAppPurchases]? = nil, fieldsInAppPurchasePriceSchedules: [FieldsInAppPurchasePriceSchedules]? = nil, fieldsInAppPurchaseContents: [FieldsInAppPurchaseContents]? = nil, limit: Int? = nil, limitInAppPurchaseLocalizations: Int? = nil, limitPricePoints: Int? = nil, include: [Include]? = nil) {
+			public init(filterInAppPurchaseType: [FilterInAppPurchaseType]? = nil, filterName: [String]? = nil, filterProductID: [String]? = nil, filterState: [FilterState]? = nil, sort: [Sort]? = nil, fieldsInAppPurchaseAppStoreReviewScreenshots: [FieldsInAppPurchaseAppStoreReviewScreenshots]? = nil, fieldsInAppPurchaseAvailabilities: [FieldsInAppPurchaseAvailabilities]? = nil, fieldsPromotedPurchases: [FieldsPromotedPurchases]? = nil, fieldsInAppPurchaseLocalizations: [FieldsInAppPurchaseLocalizations]? = nil, fieldsInAppPurchases: [FieldsInAppPurchases]? = nil, fieldsInAppPurchasePriceSchedules: [FieldsInAppPurchasePriceSchedules]? = nil, fieldsInAppPurchaseContents: [FieldsInAppPurchaseContents]? = nil, limit: Int? = nil, limitInAppPurchaseLocalizations: Int? = nil, include: [Include]? = nil) {
 				self.filterInAppPurchaseType = filterInAppPurchaseType
 				self.filterName = filterName
 				self.filterProductID = filterProductID
 				self.filterState = filterState
 				self.sort = sort
 				self.fieldsInAppPurchaseAppStoreReviewScreenshots = fieldsInAppPurchaseAppStoreReviewScreenshots
-				self.fieldsInAppPurchasePricePoints = fieldsInAppPurchasePricePoints
+				self.fieldsInAppPurchaseAvailabilities = fieldsInAppPurchaseAvailabilities
 				self.fieldsPromotedPurchases = fieldsPromotedPurchases
 				self.fieldsInAppPurchaseLocalizations = fieldsInAppPurchaseLocalizations
 				self.fieldsInAppPurchases = fieldsInAppPurchases
@@ -161,7 +158,6 @@ extension APIEndpoint.V1.Apps.WithID {
 				self.fieldsInAppPurchaseContents = fieldsInAppPurchaseContents
 				self.limit = limit
 				self.limitInAppPurchaseLocalizations = limitInAppPurchaseLocalizations
-				self.limitPricePoints = limitPricePoints
 				self.include = include
 			}
 
@@ -173,7 +169,7 @@ extension APIEndpoint.V1.Apps.WithID {
 				encoder.encode(filterState, forKey: "filter[state]")
 				encoder.encode(sort, forKey: "sort")
 				encoder.encode(fieldsInAppPurchaseAppStoreReviewScreenshots, forKey: "fields[inAppPurchaseAppStoreReviewScreenshots]")
-				encoder.encode(fieldsInAppPurchasePricePoints, forKey: "fields[inAppPurchasePricePoints]")
+				encoder.encode(fieldsInAppPurchaseAvailabilities, forKey: "fields[inAppPurchaseAvailabilities]")
 				encoder.encode(fieldsPromotedPurchases, forKey: "fields[promotedPurchases]")
 				encoder.encode(fieldsInAppPurchaseLocalizations, forKey: "fields[inAppPurchaseLocalizations]")
 				encoder.encode(fieldsInAppPurchases, forKey: "fields[inAppPurchases]")
@@ -181,7 +177,6 @@ extension APIEndpoint.V1.Apps.WithID {
 				encoder.encode(fieldsInAppPurchaseContents, forKey: "fields[inAppPurchaseContents]")
 				encoder.encode(limit, forKey: "limit")
 				encoder.encode(limitInAppPurchaseLocalizations, forKey: "limit[inAppPurchaseLocalizations]")
-				encoder.encode(limitPricePoints, forKey: "limit[pricePoints]")
 				encoder.encode(include, forKey: "include")
 				return encoder.items
 			}
