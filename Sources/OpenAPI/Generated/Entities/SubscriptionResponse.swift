@@ -20,6 +20,7 @@ public struct SubscriptionResponse: Codable {
 		case subscriptionOfferCode(SubscriptionOfferCode)
 		case subscriptionPrice(SubscriptionPrice)
 		case promotedPurchase(PromotedPurchase)
+		case subscriptionAvailability(SubscriptionAvailability)
 
 		public init(from decoder: Decoder) throws {
 			let container = try decoder.singleValueContainer()
@@ -39,6 +40,8 @@ public struct SubscriptionResponse: Codable {
 				self = .subscriptionPrice(value)
 			} else if let value = try? container.decode(PromotedPurchase.self) {
 				self = .promotedPurchase(value)
+			} else if let value = try? container.decode(SubscriptionAvailability.self) {
+				self = .subscriptionAvailability(value)
 			} else {
 				throw DecodingError.dataCorruptedError(in: container, debugDescription: "Failed to intialize `oneOf`")
 			}
@@ -55,6 +58,7 @@ public struct SubscriptionResponse: Codable {
 			case .subscriptionOfferCode(let value): try container.encode(value)
 			case .subscriptionPrice(let value): try container.encode(value)
 			case .promotedPurchase(let value): try container.encode(value)
+			case .subscriptionAvailability(let value): try container.encode(value)
 			}
 		}
 	}

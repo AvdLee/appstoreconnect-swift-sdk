@@ -15,6 +15,7 @@ public struct ReviewSubmissionResponse: Codable {
 		case app(App)
 		case reviewSubmissionItem(ReviewSubmissionItem)
 		case appStoreVersion(AppStoreVersion)
+		case actor(Actor)
 
 		public init(from decoder: Decoder) throws {
 			let container = try decoder.singleValueContainer()
@@ -24,6 +25,8 @@ public struct ReviewSubmissionResponse: Codable {
 				self = .reviewSubmissionItem(value)
 			} else if let value = try? container.decode(AppStoreVersion.self) {
 				self = .appStoreVersion(value)
+			} else if let value = try? container.decode(Actor.self) {
+				self = .actor(value)
 			} else {
 				throw DecodingError.dataCorruptedError(in: container, debugDescription: "Failed to intialize `oneOf`")
 			}
@@ -35,6 +38,7 @@ public struct ReviewSubmissionResponse: Codable {
 			case .app(let value): try container.encode(value)
 			case .reviewSubmissionItem(let value): try container.encode(value)
 			case .appStoreVersion(let value): try container.encode(value)
+			case .actor(let value): try container.encode(value)
 			}
 		}
 	}

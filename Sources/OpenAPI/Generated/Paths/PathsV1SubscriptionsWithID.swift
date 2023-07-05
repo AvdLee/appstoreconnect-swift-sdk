@@ -27,6 +27,7 @@ extension APIEndpoint.V1.Subscriptions {
 			public var fieldsSubscriptionPromotionalOffers: [FieldsSubscriptionPromotionalOffers]?
 			public var fieldsSubscriptionOfferCodes: [FieldsSubscriptionOfferCodes]?
 			public var fieldsSubscriptionAppStoreReviewScreenshots: [FieldsSubscriptionAppStoreReviewScreenshots]?
+			public var fieldsSubscriptionAvailabilities: [FieldsSubscriptionAvailabilities]?
 			public var fieldsSubscriptionPrices: [FieldsSubscriptionPrices]?
 			public var fieldsSubscriptionIntroductoryOffers: [FieldsSubscriptionIntroductoryOffers]?
 			public var fieldsSubscriptionLocalizations: [FieldsSubscriptionLocalizations]?
@@ -52,6 +53,7 @@ extension APIEndpoint.V1.Subscriptions {
 				case promotionalOffers
 				case reviewNote
 				case state
+				case subscriptionAvailability
 				case subscriptionLocalizations
 				case subscriptionPeriod
 			}
@@ -64,6 +66,7 @@ extension APIEndpoint.V1.Subscriptions {
 				case prices
 				case promotedPurchase
 				case promotionalOffers
+				case subscriptionAvailability
 				case subscriptionLocalizations
 			}
 
@@ -124,6 +127,12 @@ extension APIEndpoint.V1.Subscriptions {
 				case uploaded
 			}
 
+			public enum FieldsSubscriptionAvailabilities: String, Codable, CaseIterable {
+				case availableInNewTerritories
+				case availableTerritories
+				case subscription
+			}
+
 			public enum FieldsSubscriptionPrices: String, Codable, CaseIterable {
 				case preserveCurrentPrice
 				case preserved
@@ -152,7 +161,7 @@ extension APIEndpoint.V1.Subscriptions {
 				case subscription
 			}
 
-			public init(fieldsSubscriptions: [FieldsSubscriptions]? = nil, include: [Include]? = nil, fieldsPromotedPurchases: [FieldsPromotedPurchases]? = nil, fieldsSubscriptionPricePoints: [FieldsSubscriptionPricePoints]? = nil, fieldsSubscriptionPromotionalOffers: [FieldsSubscriptionPromotionalOffers]? = nil, fieldsSubscriptionOfferCodes: [FieldsSubscriptionOfferCodes]? = nil, fieldsSubscriptionAppStoreReviewScreenshots: [FieldsSubscriptionAppStoreReviewScreenshots]? = nil, fieldsSubscriptionPrices: [FieldsSubscriptionPrices]? = nil, fieldsSubscriptionIntroductoryOffers: [FieldsSubscriptionIntroductoryOffers]? = nil, fieldsSubscriptionLocalizations: [FieldsSubscriptionLocalizations]? = nil, limitIntroductoryOffers: Int? = nil, limitOfferCodes: Int? = nil, limitPrices: Int? = nil, limitPromotionalOffers: Int? = nil, limitSubscriptionLocalizations: Int? = nil) {
+			public init(fieldsSubscriptions: [FieldsSubscriptions]? = nil, include: [Include]? = nil, fieldsPromotedPurchases: [FieldsPromotedPurchases]? = nil, fieldsSubscriptionPricePoints: [FieldsSubscriptionPricePoints]? = nil, fieldsSubscriptionPromotionalOffers: [FieldsSubscriptionPromotionalOffers]? = nil, fieldsSubscriptionOfferCodes: [FieldsSubscriptionOfferCodes]? = nil, fieldsSubscriptionAppStoreReviewScreenshots: [FieldsSubscriptionAppStoreReviewScreenshots]? = nil, fieldsSubscriptionAvailabilities: [FieldsSubscriptionAvailabilities]? = nil, fieldsSubscriptionPrices: [FieldsSubscriptionPrices]? = nil, fieldsSubscriptionIntroductoryOffers: [FieldsSubscriptionIntroductoryOffers]? = nil, fieldsSubscriptionLocalizations: [FieldsSubscriptionLocalizations]? = nil, limitIntroductoryOffers: Int? = nil, limitOfferCodes: Int? = nil, limitPrices: Int? = nil, limitPromotionalOffers: Int? = nil, limitSubscriptionLocalizations: Int? = nil) {
 				self.fieldsSubscriptions = fieldsSubscriptions
 				self.include = include
 				self.fieldsPromotedPurchases = fieldsPromotedPurchases
@@ -160,6 +169,7 @@ extension APIEndpoint.V1.Subscriptions {
 				self.fieldsSubscriptionPromotionalOffers = fieldsSubscriptionPromotionalOffers
 				self.fieldsSubscriptionOfferCodes = fieldsSubscriptionOfferCodes
 				self.fieldsSubscriptionAppStoreReviewScreenshots = fieldsSubscriptionAppStoreReviewScreenshots
+				self.fieldsSubscriptionAvailabilities = fieldsSubscriptionAvailabilities
 				self.fieldsSubscriptionPrices = fieldsSubscriptionPrices
 				self.fieldsSubscriptionIntroductoryOffers = fieldsSubscriptionIntroductoryOffers
 				self.fieldsSubscriptionLocalizations = fieldsSubscriptionLocalizations
@@ -179,6 +189,7 @@ extension APIEndpoint.V1.Subscriptions {
 				encoder.encode(fieldsSubscriptionPromotionalOffers, forKey: "fields[subscriptionPromotionalOffers]")
 				encoder.encode(fieldsSubscriptionOfferCodes, forKey: "fields[subscriptionOfferCodes]")
 				encoder.encode(fieldsSubscriptionAppStoreReviewScreenshots, forKey: "fields[subscriptionAppStoreReviewScreenshots]")
+				encoder.encode(fieldsSubscriptionAvailabilities, forKey: "fields[subscriptionAvailabilities]")
 				encoder.encode(fieldsSubscriptionPrices, forKey: "fields[subscriptionPrices]")
 				encoder.encode(fieldsSubscriptionIntroductoryOffers, forKey: "fields[subscriptionIntroductoryOffers]")
 				encoder.encode(fieldsSubscriptionLocalizations, forKey: "fields[subscriptionLocalizations]")

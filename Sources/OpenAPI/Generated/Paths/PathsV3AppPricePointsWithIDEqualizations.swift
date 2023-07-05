@@ -43,6 +43,7 @@ extension APIEndpoint.V3.AppPricePoints.WithID {
 				case appInfos
 				case appPricePoints
 				case appPriceSchedule
+				case appStoreVersionExperimentsV2
 				case appStoreVersions
 				case availableInNewTerritories
 				case availableTerritories

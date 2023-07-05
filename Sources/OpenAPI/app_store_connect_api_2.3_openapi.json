@@ -2,7 +2,7 @@
   "openapi": "3.0.1",
   "info": {
     "title": "App Store Connect API",
-    "version": "2.3",
+    "version": "2.4",
     "x-platform": "app_store_connect_api"
   },
   "servers": [
@@ -11,6 +11,178 @@
     }
   ],
   "paths": {
+    "/v1/actors": {
+      "get": {
+        "tags": [
+          "Actors"
+        ],
+        "operationId": "actors-get_collection",
+        "parameters": [
+          {
+            "name": "filter[id]",
+            "in": "query",
+            "description": "filter by id(s)",
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            },
+            "style": "form",
+            "explode": false,
+            "required": true
+          },
+          {
+            "name": "fields[actors]",
+            "in": "query",
+            "description": "the fields to include for returned resources of type actors",
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "string",
+                "enum": [
+                  "actorType",
+                  "apiKeyId",
+                  "userEmail",
+                  "userFirstName",
+                  "userLastName"
+                ]
+              }
+            },
+            "style": "form",
+            "explode": false,
+            "required": false
+          },
+          {
+            "name": "limit",
+            "in": "query",
+            "description": "maximum resources per page",
+            "schema": {
+              "type": "integer",
+              "maximum": 200
+            },
+            "style": "form"
+          }
+        ],
+        "responses": {
+          "400": {
+            "description": "Parameter error(s)",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "200": {
+            "description": "List of Actors",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ActorsResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/v1/actors/{id}": {
+      "get": {
+        "tags": [
+          "Actors"
+        ],
+        "operationId": "actors-get_instance",
+        "parameters": [
+          {
+            "name": "fields[actors]",
+            "in": "query",
+            "description": "the fields to include for returned resources of type actors",
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "string",
+                "enum": [
+                  "actorType",
+                  "apiKeyId",
+                  "userEmail",
+                  "userFirstName",
+                  "userLastName"
+                ]
+              }
+            },
+            "style": "form",
+            "explode": false,
+            "required": false
+          }
+        ],
+        "responses": {
+          "400": {
+            "description": "Parameter error(s)",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not found error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "200": {
+            "description": "Single Actor",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ActorResponse"
+                }
+              }
+            }
+          }
+        }
+      },
+      "parameters": [
+        {
+          "name": "id",
+          "in": "path",
+          "description": "the id of the requested resource",
+          "schema": {
+            "type": "string"
+          },
+          "style": "simple",
+          "required": true
+        }
+      ]
+    },
     "/v1/ageRatingDeclarations/{id}": {
       "patch": {
         "tags": [
@@ -1675,6 +1847,7 @@
                   "appStoreReviewDetail",
                   "appStoreState",
                   "appStoreVersionExperiments",
+                  "appStoreVersionExperimentsV2",
                   "appStoreVersionLocalizations",
                   "appStoreVersionPhasedRelease",
                   "appStoreVersionSubmission",
@@ -3590,6 +3763,7 @@
                   "appInfos",
                   "appPricePoints",
                   "appPriceSchedule",
+                  "appStoreVersionExperimentsV2",
                   "appStoreVersions",
                   "availableInNewTerritories",
                   "availableTerritories",
@@ -3777,6 +3951,7 @@
                   "appInfos",
                   "appPricePoints",
                   "appPriceSchedule",
+                  "appStoreVersionExperimentsV2",
                   "appStoreVersions",
                   "availableInNewTerritories",
                   "availableTerritories",
@@ -8940,6 +9115,7 @@
                   "appIconName",
                   "appStoreVersionExperiment",
                   "appStoreVersionExperimentTreatmentLocalizations",
+                  "appStoreVersionExperimentV2",
                   "name",
                   "promotedDate"
                 ]
@@ -8959,7 +9135,8 @@
                 "type": "string",
                 "enum": [
                   "appStoreVersionExperiment",
-                  "appStoreVersionExperimentTreatmentLocalizations"
+                  "appStoreVersionExperimentTreatmentLocalizations",
+                  "appStoreVersionExperimentV2"
                 ]
               }
             },
@@ -9175,12 +9352,351 @@
         }
       ]
     },
+    "/v2/appStoreVersionExperiments": {
+      "post": {
+        "tags": [
+          "AppStoreVersionExperiments"
+        ],
+        "operationId": "appStoreVersionExperiments-create_instance",
+        "requestBody": {
+          "description": "AppStoreVersionExperiment representation",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/AppStoreVersionExperimentV2CreateRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "400": {
+            "description": "Parameter error(s)",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "201": {
+            "description": "Single AppStoreVersionExperiment",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AppStoreVersionExperimentV2Response"
+                }
+              }
+            }
+          },
+          "409": {
+            "description": "Request entity error(s)",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/v2/appStoreVersionExperiments/{id}": {
+      "get": {
+        "tags": [
+          "AppStoreVersionExperiments"
+        ],
+        "operationId": "appStoreVersionExperiments-get_instance",
+        "parameters": [
+          {
+            "name": "fields[appStoreVersionExperiments]",
+            "in": "query",
+            "description": "the fields to include for returned resources of type appStoreVersionExperiments",
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "string",
+                "enum": [
+                  "app",
+                  "appStoreVersionExperimentTreatments",
+                  "controlVersions",
+                  "endDate",
+                  "latestControlVersion",
+                  "name",
+                  "platform",
+                  "reviewRequired",
+                  "startDate",
+                  "started",
+                  "state",
+                  "trafficProportion"
+                ]
+              }
+            },
+            "style": "form",
+            "explode": false,
+            "required": false
+          },
+          {
+            "name": "include",
+            "in": "query",
+            "description": "comma-separated list of relationships to include",
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "string",
+                "enum": [
+                  "app",
+                  "appStoreVersionExperimentTreatments",
+                  "controlVersions",
+                  "latestControlVersion"
+                ]
+              }
+            },
+            "style": "form",
+            "explode": false,
+            "required": false
+          },
+          {
+            "name": "fields[appStoreVersionExperimentTreatments]",
+            "in": "query",
+            "description": "the fields to include for returned resources of type appStoreVersionExperimentTreatments",
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "string",
+                "enum": [
+                  "appIcon",
+                  "appIconName",
+                  "appStoreVersionExperiment",
+                  "appStoreVersionExperimentTreatmentLocalizations",
+                  "appStoreVersionExperimentV2",
+                  "name",
+                  "promotedDate"
+                ]
+              }
+            },
+            "style": "form",
+            "explode": false,
+            "required": false
+          },
+          {
+            "name": "limit[appStoreVersionExperimentTreatments]",
+            "in": "query",
+            "description": "maximum number of related appStoreVersionExperimentTreatments returned (when they are included)",
+            "schema": {
+              "type": "integer",
+              "maximum": 50
+            },
+            "style": "form",
+            "required": false
+          },
+          {
+            "name": "limit[controlVersions]",
+            "in": "query",
+            "description": "maximum number of related controlVersions returned (when they are included)",
+            "schema": {
+              "type": "integer",
+              "maximum": 50
+            },
+            "style": "form",
+            "required": false
+          }
+        ],
+        "responses": {
+          "400": {
+            "description": "Parameter error(s)",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not found error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "200": {
+            "description": "Single AppStoreVersionExperiment",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AppStoreVersionExperimentV2Response"
+                }
+              }
+            }
+          }
+        }
+      },
+      "patch": {
+        "tags": [
+          "AppStoreVersionExperiments"
+        ],
+        "operationId": "appStoreVersionExperiments-update_instance",
+        "requestBody": {
+          "description": "AppStoreVersionExperiment representation",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/AppStoreVersionExperimentV2UpdateRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "400": {
+            "description": "Parameter error(s)",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not found error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "200": {
+            "description": "Single AppStoreVersionExperiment",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AppStoreVersionExperimentV2Response"
+                }
+              }
+            }
+          },
+          "409": {
+            "description": "Request entity error(s)",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "AppStoreVersionExperiments"
+        ],
+        "operationId": "appStoreVersionExperiments-delete_instance",
+        "responses": {
+          "400": {
+            "description": "Parameter error(s)",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not found error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "409": {
+            "description": "Request entity error(s)",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "204": {
+            "description": "Success (no content)"
+          }
+        }
+      },
+      "parameters": [
+        {
+          "name": "id",
+          "in": "path",
+          "description": "the id of the requested resource",
+          "schema": {
+            "type": "string"
+          },
+          "style": "simple",
+          "required": true
+        }
+      ]
+    },
     "/v1/appStoreVersionExperiments": {
       "post": {
         "tags": [
           "AppStoreVersionExperiments"
         ],
         "operationId": "appStoreVersionExperiments-create_instance",
+        "deprecated": true,
         "requestBody": {
           "description": "AppStoreVersionExperiment representation",
           "content": {
@@ -9242,6 +9758,7 @@
           "AppStoreVersionExperiments"
         ],
         "operationId": "appStoreVersionExperiments-get_instance",
+        "deprecated": true,
         "parameters": [
           {
             "name": "fields[appStoreVersionExperiments]",
@@ -9299,6 +9816,7 @@
                   "appIconName",
                   "appStoreVersionExperiment",
                   "appStoreVersionExperimentTreatmentLocalizations",
+                  "appStoreVersionExperimentV2",
                   "name",
                   "promotedDate"
                 ]
@@ -9368,6 +9886,7 @@
           "AppStoreVersionExperiments"
         ],
         "operationId": "appStoreVersionExperiments-update_instance",
+        "deprecated": true,
         "requestBody": {
           "description": "AppStoreVersionExperiment representation",
           "content": {
@@ -9437,6 +9956,7 @@
           "AppStoreVersionExperiments"
         ],
         "operationId": "appStoreVersionExperiments-delete_instance",
+        "deprecated": true,
         "responses": {
           "400": {
             "description": "Parameter error(s)",
@@ -10378,6 +10898,7 @@
                   "appStoreReviewDetail",
                   "appStoreState",
                   "appStoreVersionExperiments",
+                  "appStoreVersionExperimentsV2",
                   "appStoreVersionLocalizations",
                   "appStoreVersionPhasedRelease",
                   "appStoreVersionSubmission",
@@ -10412,11 +10933,40 @@
                   "appClipDefaultExperience",
                   "appStoreReviewDetail",
                   "appStoreVersionExperiments",
+                  "appStoreVersionExperimentsV2",
                   "appStoreVersionLocalizations",
                   "appStoreVersionPhasedRelease",
                   "appStoreVersionSubmission",
                   "build",
                   "routingAppCoverage"
+                ]
+              }
+            },
+            "style": "form",
+            "explode": false,
+            "required": false
+          },
+          {
+            "name": "fields[appStoreVersionExperiments]",
+            "in": "query",
+            "description": "the fields to include for returned resources of type appStoreVersionExperiments",
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "string",
+                "enum": [
+                  "app",
+                  "appStoreVersionExperimentTreatments",
+                  "controlVersions",
+                  "endDate",
+                  "latestControlVersion",
+                  "name",
+                  "platform",
+                  "reviewRequired",
+                  "startDate",
+                  "started",
+                  "state",
+                  "trafficProportion"
                 ]
               }
             },
@@ -10447,7 +10997,8 @@
             },
             "style": "form",
             "explode": false,
-            "required": false
+            "required": false,
+            "deprecated": true
           },
           {
             "name": "fields[appStoreVersionSubmissions]",
@@ -10686,6 +11237,18 @@
             "name": "limit[appStoreVersionExperiments]",
             "in": "query",
             "description": "maximum number of related appStoreVersionExperiments returned (when they are included)",
+            "schema": {
+              "type": "integer",
+              "maximum": 50
+            },
+            "style": "form",
+            "required": false,
+            "deprecated": true
+          },
+          {
+            "name": "limit[appStoreVersionExperimentsV2]",
+            "in": "query",
+            "description": "maximum number of related appStoreVersionExperimentsV2 returned (when they are included)",
             "schema": {
               "type": "integer",
               "maximum": 50
@@ -11061,6 +11624,7 @@
                   "appInfos",
                   "appPricePoints",
                   "appPriceSchedule",
+                  "appStoreVersionExperimentsV2",
                   "appStoreVersions",
                   "availableInNewTerritories",
                   "availableTerritories",
@@ -11125,6 +11689,7 @@
                   "appCustomProductPages",
                   "appEvents",
                   "appInfos",
+                  "appStoreVersionExperimentsV2",
                   "appStoreVersions",
                   "availableTerritories",
                   "betaAppLocalizations",
@@ -11234,9 +11799,11 @@
                   "appStoreVersionForReview",
                   "canceled",
                   "items",
+                  "lastUpdatedByActor",
                   "platform",
                   "state",
                   "submitted",
+                  "submittedByActor",
                   "submittedDate"
                 ]
               }
@@ -11600,6 +12167,7 @@
                   "contentHosting",
                   "familySharable",
                   "iapPriceSchedule",
+                  "inAppPurchaseAvailability",
                   "inAppPurchaseLocalizations",
                   "inAppPurchaseType",
                   "name",
@@ -11666,6 +12234,34 @@
                   "app",
                   "appReleaseDate",
                   "preOrderAvailableDate"
+                ]
+              }
+            },
+            "style": "form",
+            "explode": false,
+            "required": false
+          },
+          {
+            "name": "fields[appStoreVersionExperiments]",
+            "in": "query",
+            "description": "the fields to include for returned resources of type appStoreVersionExperiments",
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "string",
+                "enum": [
+                  "app",
+                  "appStoreVersionExperimentTreatments",
+                  "controlVersions",
+                  "endDate",
+                  "latestControlVersion",
+                  "name",
+                  "platform",
+                  "reviewRequired",
+                  "startDate",
+                  "started",
+                  "state",
+                  "trafficProportion"
                 ]
               }
             },
@@ -11748,6 +12344,7 @@
                   "appStoreReviewDetail",
                   "appStoreState",
                   "appStoreVersionExperiments",
+                  "appStoreVersionExperimentsV2",
                   "appStoreVersionLocalizations",
                   "appStoreVersionPhasedRelease",
                   "appStoreVersionSubmission",
@@ -11865,6 +12462,17 @@
             "name": "limit[appInfos]",
             "in": "query",
             "description": "maximum number of related appInfos returned (when they are included)",
+            "schema": {
+              "type": "integer",
+              "maximum": 50
+            },
+            "style": "form",
+            "required": false
+          },
+          {
+            "name": "limit[appStoreVersionExperimentsV2]",
+            "in": "query",
+            "description": "maximum number of related appStoreVersionExperimentsV2 returned (when they are included)",
             "schema": {
               "type": "integer",
               "maximum": 50
@@ -12074,6 +12682,7 @@
                   "appInfos",
                   "appPricePoints",
                   "appPriceSchedule",
+                  "appStoreVersionExperimentsV2",
                   "appStoreVersions",
                   "availableInNewTerritories",
                   "availableTerritories",
@@ -12128,6 +12737,7 @@
                   "appCustomProductPages",
                   "appEvents",
                   "appInfos",
+                  "appStoreVersionExperimentsV2",
                   "appStoreVersions",
                   "availableTerritories",
                   "betaAppLocalizations",
@@ -12237,9 +12847,11 @@
                   "appStoreVersionForReview",
                   "canceled",
                   "items",
+                  "lastUpdatedByActor",
                   "platform",
                   "state",
                   "submitted",
+                  "submittedByActor",
                   "submittedDate"
                 ]
               }
@@ -12603,6 +13215,7 @@
                   "contentHosting",
                   "familySharable",
                   "iapPriceSchedule",
+                  "inAppPurchaseAvailability",
                   "inAppPurchaseLocalizations",
                   "inAppPurchaseType",
                   "name",
@@ -12669,6 +13282,34 @@
                   "app",
                   "appReleaseDate",
                   "preOrderAvailableDate"
+                ]
+              }
+            },
+            "style": "form",
+            "explode": false,
+            "required": false
+          },
+          {
+            "name": "fields[appStoreVersionExperiments]",
+            "in": "query",
+            "description": "the fields to include for returned resources of type appStoreVersionExperiments",
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "string",
+                "enum": [
+                  "app",
+                  "appStoreVersionExperimentTreatments",
+                  "controlVersions",
+                  "endDate",
+                  "latestControlVersion",
+                  "name",
+                  "platform",
+                  "reviewRequired",
+                  "startDate",
+                  "started",
+                  "state",
+                  "trafficProportion"
                 ]
               }
             },
@@ -12751,6 +13392,7 @@
                   "appStoreReviewDetail",
                   "appStoreState",
                   "appStoreVersionExperiments",
+                  "appStoreVersionExperimentsV2",
                   "appStoreVersionLocalizations",
                   "appStoreVersionPhasedRelease",
                   "appStoreVersionSubmission",
@@ -12868,6 +13510,17 @@
             "name": "limit[appInfos]",
             "in": "query",
             "description": "maximum number of related appInfos returned (when they are included)",
+            "schema": {
+              "type": "integer",
+              "maximum": 50
+            },
+            "style": "form",
+            "required": false
+          },
+          {
+            "name": "limit[appStoreVersionExperimentsV2]",
+            "in": "query",
+            "description": "maximum number of related appStoreVersionExperimentsV2 returned (when they are included)",
             "schema": {
               "type": "integer",
               "maximum": 50
@@ -13733,6 +14386,7 @@
                   "appInfos",
                   "appPricePoints",
                   "appPriceSchedule",
+                  "appStoreVersionExperimentsV2",
                   "appStoreVersions",
                   "availableInNewTerritories",
                   "availableTerritories",
@@ -13931,6 +14585,7 @@
                   "appInfos",
                   "appPricePoints",
                   "appPriceSchedule",
+                  "appStoreVersionExperimentsV2",
                   "appStoreVersions",
                   "availableInNewTerritories",
                   "availableTerritories",
@@ -14238,6 +14893,7 @@
                   "appInfos",
                   "appPricePoints",
                   "appPriceSchedule",
+                  "appStoreVersionExperimentsV2",
                   "appStoreVersions",
                   "availableInNewTerritories",
                   "availableTerritories",
@@ -14379,6 +15035,7 @@
                   "appInfos",
                   "appPricePoints",
                   "appPriceSchedule",
+                  "appStoreVersionExperimentsV2",
                   "appStoreVersions",
                   "availableInNewTerritories",
                   "availableTerritories",
@@ -15623,6 +16280,7 @@
                   "appInfos",
                   "appPricePoints",
                   "appPriceSchedule",
+                  "appStoreVersionExperimentsV2",
                   "appStoreVersions",
                   "availableInNewTerritories",
                   "availableTerritories",
@@ -15915,6 +16573,7 @@
                   "appInfos",
                   "appPricePoints",
                   "appPriceSchedule",
+                  "appStoreVersionExperimentsV2",
                   "appStoreVersions",
                   "availableInNewTerritories",
                   "availableTerritories",
@@ -16277,6 +16936,7 @@
                   "appInfos",
                   "appPricePoints",
                   "appPriceSchedule",
+                  "appStoreVersionExperimentsV2",
                   "appStoreVersions",
                   "availableInNewTerritories",
                   "availableTerritories",
@@ -16411,6 +17071,7 @@
                   "appInfos",
                   "appPricePoints",
                   "appPriceSchedule",
+                  "appStoreVersionExperimentsV2",
                   "appStoreVersions",
                   "availableInNewTerritories",
                   "availableTerritories",
@@ -16854,6 +17515,7 @@
                   "appInfos",
                   "appPricePoints",
                   "appPriceSchedule",
+                  "appStoreVersionExperimentsV2",
                   "appStoreVersions",
                   "availableInNewTerritories",
                   "availableTerritories",
@@ -17157,6 +17819,7 @@
                   "appInfos",
                   "appPricePoints",
                   "appPriceSchedule",
+                  "appStoreVersionExperimentsV2",
                   "appStoreVersions",
                   "availableInNewTerritories",
                   "availableTerritories",
@@ -18265,6 +18928,7 @@
                   "appStoreReviewDetail",
                   "appStoreState",
                   "appStoreVersionExperiments",
+                  "appStoreVersionExperimentsV2",
                   "appStoreVersionLocalizations",
                   "appStoreVersionPhasedRelease",
                   "appStoreVersionSubmission",
@@ -18373,6 +19037,7 @@
                   "appInfos",
                   "appPricePoints",
                   "appPriceSchedule",
+                  "appStoreVersionExperimentsV2",
                   "appStoreVersions",
                   "availableInNewTerritories",
                   "availableTerritories",
@@ -18713,6 +19378,7 @@
                   "appStoreReviewDetail",
                   "appStoreState",
                   "appStoreVersionExperiments",
+                  "appStoreVersionExperimentsV2",
                   "appStoreVersionLocalizations",
                   "appStoreVersionPhasedRelease",
                   "appStoreVersionSubmission",
@@ -18821,6 +19487,7 @@
                   "appInfos",
                   "appPricePoints",
                   "appPriceSchedule",
+                  "appStoreVersionExperimentsV2",
                   "appStoreVersions",
                   "availableInNewTerritories",
                   "availableTerritories",
@@ -19478,6 +20145,7 @@
                   "appInfos",
                   "appPricePoints",
                   "appPriceSchedule",
+                  "appStoreVersionExperimentsV2",
                   "appStoreVersions",
                   "availableInNewTerritories",
                   "availableTerritories",
@@ -19746,6 +20414,7 @@
                   "appInfos",
                   "appPricePoints",
                   "appPriceSchedule",
+                  "appStoreVersionExperimentsV2",
                   "appStoreVersions",
                   "availableInNewTerritories",
                   "availableTerritories",
@@ -21421,6 +22090,7 @@
                   "appInfos",
                   "appPricePoints",
                   "appPriceSchedule",
+                  "appStoreVersionExperimentsV2",
                   "appStoreVersions",
                   "availableInNewTerritories",
                   "availableTerritories",
@@ -21670,6 +22340,7 @@
                   "appInfos",
                   "appPricePoints",
                   "appPriceSchedule",
+                  "appStoreVersionExperimentsV2",
                   "appStoreVersions",
                   "availableInNewTerritories",
                   "availableTerritories",
@@ -25040,6 +25711,7 @@
                   "contentHosting",
                   "familySharable",
                   "iapPriceSchedule",
+                  "inAppPurchaseAvailability",
                   "inAppPurchaseLocalizations",
                   "inAppPurchaseType",
                   "name",
@@ -25067,9 +25739,29 @@
                   "appStoreReviewScreenshot",
                   "content",
                   "iapPriceSchedule",
+                  "inAppPurchaseAvailability",
                   "inAppPurchaseLocalizations",
                   "pricePoints",
                   "promotedPurchase"
+                ]
+              }
+            },
+            "style": "form",
+            "explode": false,
+            "required": false
+          },
+          {
+            "name": "fields[inAppPurchaseAvailabilities]",
+            "in": "query",
+            "description": "the fields to include for returned resources of type inAppPurchaseAvailabilities",
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "string",
+                "enum": [
+                  "availableInNewTerritories",
+                  "availableTerritories",
+                  "inAppPurchase"
                 ]
               }
             },
@@ -25606,6 +26298,7 @@
                   "appInfos",
                   "appPricePoints",
                   "appPriceSchedule",
+                  "appStoreVersionExperimentsV2",
                   "appStoreVersions",
                   "availableInNewTerritories",
                   "availableTerritories",
@@ -25794,6 +26487,7 @@
                   "appInfos",
                   "appPricePoints",
                   "appPriceSchedule",
+                  "appStoreVersionExperimentsV2",
                   "appStoreVersions",
                   "availableInNewTerritories",
                   "availableTerritories",
@@ -25919,11 +26613,11 @@
             }
           },
           "200": {
-            "description": "Single PrereleaseVersion",
+            "description": "Single PreReleaseVersion",
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/PrereleaseVersionResponse"
+                  "$ref": "#/components/schemas/PreReleaseVersionResponse"
                 }
               }
             }
@@ -27428,9 +28122,11 @@
                   "appStoreVersionForReview",
                   "canceled",
                   "items",
+                  "lastUpdatedByActor",
                   "platform",
                   "state",
                   "submitted",
+                  "submittedByActor",
                   "submittedDate"
                 ]
               }
@@ -27460,7 +28156,9 @@
                 "enum": [
                   "app",
                   "appStoreVersionForReview",
-                  "items"
+                  "items",
+                  "lastUpdatedByActor",
+                  "submittedByActor"
                 ]
               }
             },
@@ -27481,6 +28179,7 @@
                   "appEvent",
                   "appStoreVersion",
                   "appStoreVersionExperiment",
+                  "appStoreVersionExperimentV2",
                   "removed",
                   "resolved",
                   "reviewSubmission",
@@ -27617,9 +28316,11 @@
                   "appStoreVersionForReview",
                   "canceled",
                   "items",
+                  "lastUpdatedByActor",
                   "platform",
                   "state",
                   "submitted",
+                  "submittedByActor",
                   "submittedDate"
                 ]
               }
@@ -27639,7 +28340,9 @@
                 "enum": [
                   "app",
                   "appStoreVersionForReview",
-                  "items"
+                  "items",
+                  "lastUpdatedByActor",
+                  "submittedByActor"
                 ]
               }
             },
@@ -27660,6 +28363,7 @@
                   "appEvent",
                   "appStoreVersion",
                   "appStoreVersionExperiment",
+                  "appStoreVersionExperimentV2",
                   "removed",
                   "resolved",
                   "reviewSubmission",
@@ -30291,6 +30995,7 @@
                   "promotionalOffers",
                   "reviewNote",
                   "state",
+                  "subscriptionAvailability",
                   "subscriptionLocalizations",
                   "subscriptionPeriod"
                 ]
@@ -32512,6 +33217,7 @@
                   "promotionalOffers",
                   "reviewNote",
                   "state",
+                  "subscriptionAvailability",
                   "subscriptionLocalizations",
                   "subscriptionPeriod"
                 ]
@@ -32537,6 +33243,7 @@
                   "prices",
                   "promotedPurchase",
                   "promotionalOffers",
+                  "subscriptionAvailability",
                   "subscriptionLocalizations"
                 ]
               }
@@ -32660,6 +33367,25 @@
                   "subscription",
                   "uploadOperations",
                   "uploaded"
+                ]
+              }
+            },
+            "style": "form",
+            "explode": false,
+            "required": false
+          },
+          {
+            "name": "fields[subscriptionAvailabilities]",
+            "in": "query",
+            "description": "the fields to include for returned resources of type subscriptionAvailabilities",
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "string",
+                "enum": [
+                  "availableInNewTerritories",
+                  "availableTerritories",
+                  "subscription"
                 ]
               }
             },
@@ -33186,6 +33912,7 @@
                   "appInfos",
                   "appPricePoints",
                   "appPriceSchedule",
+                  "appStoreVersionExperimentsV2",
                   "appStoreVersions",
                   "availableInNewTerritories",
                   "availableTerritories",
@@ -33396,6 +34123,7 @@
                   "appInfos",
                   "appPricePoints",
                   "appPriceSchedule",
+                  "appStoreVersionExperimentsV2",
                   "appStoreVersions",
                   "availableInNewTerritories",
                   "availableTerritories",
@@ -33706,6 +34434,7 @@
                   "appInfos",
                   "appPricePoints",
                   "appPriceSchedule",
+                  "appStoreVersionExperimentsV2",
                   "appStoreVersions",
                   "availableInNewTerritories",
                   "availableTerritories",
@@ -33856,6 +34585,7 @@
                   "appInfos",
                   "appPricePoints",
                   "appPriceSchedule",
+                  "appStoreVersionExperimentsV2",
                   "appStoreVersions",
                   "availableInNewTerritories",
                   "availableTerritories",
@@ -34971,6 +35701,33 @@
               "items": {
                 "type": "string",
                 "enum": [
+                  "app",
+                  "appStoreVersionExperimentTreatments",
+                  "controlVersions",
+                  "endDate",
+                  "latestControlVersion",
+                  "name",
+                  "platform",
+                  "reviewRequired",
+                  "startDate",
+                  "started",
+                  "state",
+                  "trafficProportion"
+                ]
+              }
+            },
+            "style": "form",
+            "explode": false
+          },
+          {
+            "name": "fields[appStoreVersionExperiments]",
+            "in": "query",
+            "description": "the fields to include for returned resources of type appStoreVersionExperiments",
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "string",
+                "enum": [
                   "appStoreVersion",
                   "appStoreVersionExperimentTreatments",
                   "endDate",
@@ -35074,6 +35831,7 @@
                   "appStoreReviewDetail",
                   "appStoreState",
                   "appStoreVersionExperiments",
+                  "appStoreVersionExperimentsV2",
                   "appStoreVersionLocalizations",
                   "appStoreVersionPhasedRelease",
                   "appStoreVersionSubmission",
@@ -35109,6 +35867,7 @@
                   "appInfos",
                   "appPricePoints",
                   "appPriceSchedule",
+                  "appStoreVersionExperimentsV2",
                   "appStoreVersions",
                   "availableInNewTerritories",
                   "availableTerritories",
@@ -35294,6 +36053,17 @@
               "type": "integer",
               "maximum": 50
             },
+            "style": "form",
+            "deprecated": true
+          },
+          {
+            "name": "limit[appStoreVersionExperimentsV2]",
+            "in": "query",
+            "description": "maximum number of related appStoreVersionExperimentsV2 returned (when they are included)",
+            "schema": {
+              "type": "integer",
+              "maximum": 50
+            },
             "style": "form"
           },
           {
@@ -35310,6 +36080,7 @@
                   "appClipDefaultExperience",
                   "appStoreReviewDetail",
                   "appStoreVersionExperiments",
+                  "appStoreVersionExperimentsV2",
                   "appStoreVersionLocalizations",
                   "appStoreVersionPhasedRelease",
                   "appStoreVersionSubmission",
@@ -35717,6 +36488,7 @@
                   "appStoreReviewDetail",
                   "appStoreState",
                   "appStoreVersionExperiments",
+                  "appStoreVersionExperimentsV2",
                   "appStoreVersionLocalizations",
                   "appStoreVersionPhasedRelease",
                   "appStoreVersionSubmission",
@@ -36907,6 +37679,7 @@
                   "appInfos",
                   "appPricePoints",
                   "appPriceSchedule",
+                  "appStoreVersionExperimentsV2",
                   "appStoreVersions",
                   "availableInNewTerritories",
                   "availableTerritories",
@@ -37112,6 +37885,7 @@
           "AppEncryptionDeclarations"
         ],
         "operationId": "appEncryptionDeclarations-builds-create_to_many_relationship",
+        "deprecated": true,
         "requestBody": {
           "description": "List of related linkages",
           "content": {
@@ -39045,6 +39819,7 @@
                   "appInfos",
                   "appPricePoints",
                   "appPriceSchedule",
+                  "appStoreVersionExperimentsV2",
                   "appStoreVersions",
                   "availableInNewTerritories",
                   "availableTerritories",
@@ -41009,6 +41784,7 @@
                   "appIconName",
                   "appStoreVersionExperiment",
                   "appStoreVersionExperimentTreatmentLocalizations",
+                  "appStoreVersionExperimentV2",
                   "name",
                   "promotedDate"
                 ]
@@ -41161,7 +41937,7 @@
         }
       ]
     },
-    "/v1/appStoreVersionExperiments/{id}/relationships/appStoreVersionExperimentTreatments": {
+    "/v2/appStoreVersionExperiments/{id}/relationships/appStoreVersionExperimentTreatments": {
       "parameters": [
         {
           "name": "id",
@@ -41175,13 +41951,40 @@
         }
       ]
     },
-    "/v1/appStoreVersionExperiments/{id}/appStoreVersionExperimentTreatments": {
+    "/v2/appStoreVersionExperiments/{id}/appStoreVersionExperimentTreatments": {
       "get": {
         "tags": [
           "AppStoreVersionExperiments"
         ],
         "operationId": "appStoreVersionExperiments-appStoreVersionExperimentTreatments-get_to_many_related",
         "parameters": [
+          {
+            "name": "fields[appStoreVersionExperiments]",
+            "in": "query",
+            "description": "the fields to include for returned resources of type appStoreVersionExperiments",
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "string",
+                "enum": [
+                  "app",
+                  "appStoreVersionExperimentTreatments",
+                  "controlVersions",
+                  "endDate",
+                  "latestControlVersion",
+                  "name",
+                  "platform",
+                  "reviewRequired",
+                  "startDate",
+                  "started",
+                  "state",
+                  "trafficProportion"
+                ]
+              }
+            },
+            "style": "form",
+            "explode": false
+          },
           {
             "name": "fields[appStoreVersionExperiments]",
             "in": "query",
@@ -41219,6 +42022,7 @@
                   "appIconName",
                   "appStoreVersionExperiment",
                   "appStoreVersionExperimentTreatmentLocalizations",
+                  "appStoreVersionExperimentV2",
                   "name",
                   "promotedDate"
                 ]
@@ -41276,7 +42080,217 @@
                 "type": "string",
                 "enum": [
                   "appStoreVersionExperiment",
-                  "appStoreVersionExperimentTreatmentLocalizations"
+                  "appStoreVersionExperimentTreatmentLocalizations",
+                  "appStoreVersionExperimentV2"
+                ]
+              }
+            },
+            "style": "form",
+            "explode": false
+          }
+        ],
+        "responses": {
+          "400": {
+            "description": "Parameter error(s)",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not found error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "200": {
+            "description": "List of AppStoreVersionExperimentTreatments",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AppStoreVersionExperimentTreatmentsResponse"
+                }
+              }
+            }
+          }
+        }
+      },
+      "parameters": [
+        {
+          "name": "id",
+          "in": "path",
+          "description": "the id of the requested resource",
+          "schema": {
+            "type": "string"
+          },
+          "style": "simple",
+          "required": true
+        }
+      ]
+    },
+    "/v1/appStoreVersionExperiments/{id}/relationships/appStoreVersionExperimentTreatments": {
+      "parameters": [
+        {
+          "name": "id",
+          "in": "path",
+          "description": "the id of the requested resource",
+          "schema": {
+            "type": "string"
+          },
+          "style": "simple",
+          "required": true
+        }
+      ]
+    },
+    "/v1/appStoreVersionExperiments/{id}/appStoreVersionExperimentTreatments": {
+      "get": {
+        "tags": [
+          "AppStoreVersionExperiments"
+        ],
+        "operationId": "appStoreVersionExperiments-appStoreVersionExperimentTreatments-get_to_many_related",
+        "deprecated": true,
+        "parameters": [
+          {
+            "name": "fields[appStoreVersionExperiments]",
+            "in": "query",
+            "description": "the fields to include for returned resources of type appStoreVersionExperiments",
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "string",
+                "enum": [
+                  "app",
+                  "appStoreVersionExperimentTreatments",
+                  "controlVersions",
+                  "endDate",
+                  "latestControlVersion",
+                  "name",
+                  "platform",
+                  "reviewRequired",
+                  "startDate",
+                  "started",
+                  "state",
+                  "trafficProportion"
+                ]
+              }
+            },
+            "style": "form",
+            "explode": false
+          },
+          {
+            "name": "fields[appStoreVersionExperiments]",
+            "in": "query",
+            "description": "the fields to include for returned resources of type appStoreVersionExperiments",
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "string",
+                "enum": [
+                  "appStoreVersion",
+                  "appStoreVersionExperimentTreatments",
+                  "endDate",
+                  "name",
+                  "reviewRequired",
+                  "startDate",
+                  "started",
+                  "state",
+                  "trafficProportion"
+                ]
+              }
+            },
+            "style": "form",
+            "explode": false
+          },
+          {
+            "name": "fields[appStoreVersionExperimentTreatments]",
+            "in": "query",
+            "description": "the fields to include for returned resources of type appStoreVersionExperimentTreatments",
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "string",
+                "enum": [
+                  "appIcon",
+                  "appIconName",
+                  "appStoreVersionExperiment",
+                  "appStoreVersionExperimentTreatmentLocalizations",
+                  "appStoreVersionExperimentV2",
+                  "name",
+                  "promotedDate"
+                ]
+              }
+            },
+            "style": "form",
+            "explode": false
+          },
+          {
+            "name": "fields[appStoreVersionExperimentTreatmentLocalizations]",
+            "in": "query",
+            "description": "the fields to include for returned resources of type appStoreVersionExperimentTreatmentLocalizations",
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "string",
+                "enum": [
+                  "appPreviewSets",
+                  "appScreenshotSets",
+                  "appStoreVersionExperimentTreatment",
+                  "locale"
+                ]
+              }
+            },
+            "style": "form",
+            "explode": false
+          },
+          {
+            "name": "limit",
+            "in": "query",
+            "description": "maximum resources per page",
+            "schema": {
+              "type": "integer",
+              "maximum": 200
+            },
+            "style": "form"
+          },
+          {
+            "name": "limit[appStoreVersionExperimentTreatmentLocalizations]",
+            "in": "query",
+            "description": "maximum number of related appStoreVersionExperimentTreatmentLocalizations returned (when they are included)",
+            "schema": {
+              "type": "integer",
+              "maximum": 50
+            },
+            "style": "form"
+          },
+          {
+            "name": "include",
+            "in": "query",
+            "description": "comma-separated list of relationships to include",
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "string",
+                "enum": [
+                  "appStoreVersionExperiment",
+                  "appStoreVersionExperimentTreatmentLocalizations",
+                  "appStoreVersionExperimentV2"
                 ]
               }
             },
@@ -42205,6 +43219,7 @@
                   "appStoreReviewDetail",
                   "appStoreState",
                   "appStoreVersionExperiments",
+                  "appStoreVersionExperimentsV2",
                   "appStoreVersionLocalizations",
                   "appStoreVersionPhasedRelease",
                   "appStoreVersionSubmission",
@@ -42411,6 +43426,7 @@
                   "appStoreReviewDetail",
                   "appStoreState",
                   "appStoreVersionExperiments",
+                  "appStoreVersionExperimentsV2",
                   "appStoreVersionLocalizations",
                   "appStoreVersionPhasedRelease",
                   "appStoreVersionSubmission",
@@ -42556,6 +43572,7 @@
           "AppStoreVersions"
         ],
         "operationId": "appStoreVersions-appStoreVersionExperiments-get_to_many_related",
+        "deprecated": true,
         "parameters": [
           {
             "name": "filter[state]",
@@ -42618,6 +43635,7 @@
                   "appIconName",
                   "appStoreVersionExperiment",
                   "appStoreVersionExperimentTreatmentLocalizations",
+                  "appStoreVersionExperimentV2",
                   "name",
                   "promotedDate"
                 ]
@@ -42641,6 +43659,7 @@
                   "appStoreReviewDetail",
                   "appStoreState",
                   "appStoreVersionExperiments",
+                  "appStoreVersionExperimentsV2",
                   "appStoreVersionLocalizations",
                   "appStoreVersionPhasedRelease",
                   "appStoreVersionSubmission",
@@ -42735,6 +43754,298 @@
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/AppStoreVersionExperimentsResponse"
+                }
+              }
+            }
+          }
+        }
+      },
+      "parameters": [
+        {
+          "name": "id",
+          "in": "path",
+          "description": "the id of the requested resource",
+          "schema": {
+            "type": "string"
+          },
+          "style": "simple",
+          "required": true
+        }
+      ]
+    },
+    "/v1/appStoreVersions/{id}/relationships/appStoreVersionExperimentsV2": {
+      "parameters": [
+        {
+          "name": "id",
+          "in": "path",
+          "description": "the id of the requested resource",
+          "schema": {
+            "type": "string"
+          },
+          "style": "simple",
+          "required": true
+        }
+      ]
+    },
+    "/v1/appStoreVersions/{id}/appStoreVersionExperimentsV2": {
+      "get": {
+        "tags": [
+          "AppStoreVersions"
+        ],
+        "operationId": "appStoreVersions-appStoreVersionExperimentsV2-get_to_many_related",
+        "parameters": [
+          {
+            "name": "filter[state]",
+            "in": "query",
+            "description": "filter by attribute 'state'",
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "string",
+                "enum": [
+                  "PREPARE_FOR_SUBMISSION",
+                  "READY_FOR_REVIEW",
+                  "WAITING_FOR_REVIEW",
+                  "IN_REVIEW",
+                  "ACCEPTED",
+                  "APPROVED",
+                  "REJECTED",
+                  "COMPLETED",
+                  "STOPPED"
+                ]
+              }
+            },
+            "style": "form",
+            "explode": false
+          },
+          {
+            "name": "fields[appStoreVersionExperiments]",
+            "in": "query",
+            "description": "the fields to include for returned resources of type appStoreVersionExperiments",
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "string",
+                "enum": [
+                  "app",
+                  "appStoreVersionExperimentTreatments",
+                  "controlVersions",
+                  "endDate",
+                  "latestControlVersion",
+                  "name",
+                  "platform",
+                  "reviewRequired",
+                  "startDate",
+                  "started",
+                  "state",
+                  "trafficProportion"
+                ]
+              }
+            },
+            "style": "form",
+            "explode": false
+          },
+          {
+            "name": "fields[appStoreVersionExperimentTreatments]",
+            "in": "query",
+            "description": "the fields to include for returned resources of type appStoreVersionExperimentTreatments",
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "string",
+                "enum": [
+                  "appIcon",
+                  "appIconName",
+                  "appStoreVersionExperiment",
+                  "appStoreVersionExperimentTreatmentLocalizations",
+                  "appStoreVersionExperimentV2",
+                  "name",
+                  "promotedDate"
+                ]
+              }
+            },
+            "style": "form",
+            "explode": false
+          },
+          {
+            "name": "fields[appStoreVersions]",
+            "in": "query",
+            "description": "the fields to include for returned resources of type appStoreVersions",
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "string",
+                "enum": [
+                  "ageRatingDeclaration",
+                  "app",
+                  "appClipDefaultExperience",
+                  "appStoreReviewDetail",
+                  "appStoreState",
+                  "appStoreVersionExperiments",
+                  "appStoreVersionExperimentsV2",
+                  "appStoreVersionLocalizations",
+                  "appStoreVersionPhasedRelease",
+                  "appStoreVersionSubmission",
+                  "build",
+                  "copyright",
+                  "createdDate",
+                  "customerReviews",
+                  "downloadable",
+                  "earliestReleaseDate",
+                  "platform",
+                  "releaseType",
+                  "routingAppCoverage",
+                  "versionString"
+                ]
+              }
+            },
+            "style": "form",
+            "explode": false
+          },
+          {
+            "name": "fields[apps]",
+            "in": "query",
+            "description": "the fields to include for returned resources of type apps",
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "string",
+                "enum": [
+                  "appAvailability",
+                  "appClips",
+                  "appCustomProductPages",
+                  "appEvents",
+                  "appInfos",
+                  "appPricePoints",
+                  "appPriceSchedule",
+                  "appStoreVersionExperimentsV2",
+                  "appStoreVersions",
+                  "availableInNewTerritories",
+                  "availableTerritories",
+                  "betaAppLocalizations",
+                  "betaAppReviewDetail",
+                  "betaGroups",
+                  "betaLicenseAgreement",
+                  "betaTesters",
+                  "builds",
+                  "bundleId",
+                  "ciProduct",
+                  "contentRightsDeclaration",
+                  "customerReviews",
+                  "endUserLicenseAgreement",
+                  "gameCenterEnabledVersions",
+                  "inAppPurchases",
+                  "inAppPurchasesV2",
+                  "isOrEverWasMadeForKids",
+                  "name",
+                  "perfPowerMetrics",
+                  "preOrder",
+                  "preReleaseVersions",
+                  "pricePoints",
+                  "prices",
+                  "primaryLocale",
+                  "promotedPurchases",
+                  "reviewSubmissions",
+                  "sku",
+                  "subscriptionGracePeriod",
+                  "subscriptionGroups",
+                  "subscriptionStatusUrl",
+                  "subscriptionStatusUrlForSandbox",
+                  "subscriptionStatusUrlVersion",
+                  "subscriptionStatusUrlVersionForSandbox"
+                ]
+              }
+            },
+            "style": "form",
+            "explode": false
+          },
+          {
+            "name": "limit",
+            "in": "query",
+            "description": "maximum resources per page",
+            "schema": {
+              "type": "integer",
+              "maximum": 200
+            },
+            "style": "form"
+          },
+          {
+            "name": "limit[controlVersions]",
+            "in": "query",
+            "description": "maximum number of related controlVersions returned (when they are included)",
+            "schema": {
+              "type": "integer",
+              "maximum": 50
+            },
+            "style": "form"
+          },
+          {
+            "name": "limit[appStoreVersionExperimentTreatments]",
+            "in": "query",
+            "description": "maximum number of related appStoreVersionExperimentTreatments returned (when they are included)",
+            "schema": {
+              "type": "integer",
+              "maximum": 50
+            },
+            "style": "form"
+          },
+          {
+            "name": "include",
+            "in": "query",
+            "description": "comma-separated list of relationships to include",
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "string",
+                "enum": [
+                  "app",
+                  "appStoreVersionExperimentTreatments",
+                  "controlVersions",
+                  "latestControlVersion"
+                ]
+              }
+            },
+            "style": "form",
+            "explode": false
+          }
+        ],
+        "responses": {
+          "400": {
+            "description": "Parameter error(s)",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not found error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "200": {
+            "description": "List of AppStoreVersionExperiments",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AppStoreVersionExperimentsV2Response"
                 }
               }
             }
@@ -43018,6 +44329,7 @@
                   "appStoreReviewDetail",
                   "appStoreState",
                   "appStoreVersionExperiments",
+                  "appStoreVersionExperimentsV2",
                   "appStoreVersionLocalizations",
                   "appStoreVersionPhasedRelease",
                   "appStoreVersionSubmission",
@@ -43917,6 +45229,7 @@
                   "appInfos",
                   "appPricePoints",
                   "appPriceSchedule",
+                  "appStoreVersionExperimentsV2",
                   "appStoreVersions",
                   "availableInNewTerritories",
                   "availableTerritories",
@@ -44126,6 +45439,7 @@
                   "appInfos",
                   "appPricePoints",
                   "appPriceSchedule",
+                  "appStoreVersionExperimentsV2",
                   "appStoreVersions",
                   "availableInNewTerritories",
                   "availableTerritories",
@@ -44372,6 +45686,7 @@
                   "appInfos",
                   "appPricePoints",
                   "appPriceSchedule",
+                  "appStoreVersionExperimentsV2",
                   "appStoreVersions",
                   "availableInNewTerritories",
                   "availableTerritories",
@@ -44845,6 +46160,7 @@
                   "appInfos",
                   "appPricePoints",
                   "appPriceSchedule",
+                  "appStoreVersionExperimentsV2",
                   "appStoreVersions",
                   "availableInNewTerritories",
                   "availableTerritories",
@@ -45056,6 +46372,7 @@
                   "appInfos",
                   "appPricePoints",
                   "appPriceSchedule",
+                  "appStoreVersionExperimentsV2",
                   "appStoreVersions",
                   "availableInNewTerritories",
                   "availableTerritories",
@@ -45277,6 +46594,7 @@
                   "appInfos",
                   "appPricePoints",
                   "appPriceSchedule",
+                  "appStoreVersionExperimentsV2",
                   "appStoreVersions",
                   "availableInNewTerritories",
                   "availableTerritories",
@@ -45429,6 +46747,298 @@
         }
       ]
     },
+    "/v1/apps/{id}/relationships/appStoreVersionExperimentsV2": {
+      "parameters": [
+        {
+          "name": "id",
+          "in": "path",
+          "description": "the id of the requested resource",
+          "schema": {
+            "type": "string"
+          },
+          "style": "simple",
+          "required": true
+        }
+      ]
+    },
+    "/v1/apps/{id}/appStoreVersionExperimentsV2": {
+      "get": {
+        "tags": [
+          "Apps"
+        ],
+        "operationId": "apps-appStoreVersionExperimentsV2-get_to_many_related",
+        "parameters": [
+          {
+            "name": "filter[state]",
+            "in": "query",
+            "description": "filter by attribute 'state'",
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "string",
+                "enum": [
+                  "PREPARE_FOR_SUBMISSION",
+                  "READY_FOR_REVIEW",
+                  "WAITING_FOR_REVIEW",
+                  "IN_REVIEW",
+                  "ACCEPTED",
+                  "APPROVED",
+                  "REJECTED",
+                  "COMPLETED",
+                  "STOPPED"
+                ]
+              }
+            },
+            "style": "form",
+            "explode": false
+          },
+          {
+            "name": "fields[appStoreVersionExperiments]",
+            "in": "query",
+            "description": "the fields to include for returned resources of type appStoreVersionExperiments",
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "string",
+                "enum": [
+                  "app",
+                  "appStoreVersionExperimentTreatments",
+                  "controlVersions",
+                  "endDate",
+                  "latestControlVersion",
+                  "name",
+                  "platform",
+                  "reviewRequired",
+                  "startDate",
+                  "started",
+                  "state",
+                  "trafficProportion"
+                ]
+              }
+            },
+            "style": "form",
+            "explode": false
+          },
+          {
+            "name": "fields[appStoreVersionExperimentTreatments]",
+            "in": "query",
+            "description": "the fields to include for returned resources of type appStoreVersionExperimentTreatments",
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "string",
+                "enum": [
+                  "appIcon",
+                  "appIconName",
+                  "appStoreVersionExperiment",
+                  "appStoreVersionExperimentTreatmentLocalizations",
+                  "appStoreVersionExperimentV2",
+                  "name",
+                  "promotedDate"
+                ]
+              }
+            },
+            "style": "form",
+            "explode": false
+          },
+          {
+            "name": "fields[appStoreVersions]",
+            "in": "query",
+            "description": "the fields to include for returned resources of type appStoreVersions",
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "string",
+                "enum": [
+                  "ageRatingDeclaration",
+                  "app",
+                  "appClipDefaultExperience",
+                  "appStoreReviewDetail",
+                  "appStoreState",
+                  "appStoreVersionExperiments",
+                  "appStoreVersionExperimentsV2",
+                  "appStoreVersionLocalizations",
+                  "appStoreVersionPhasedRelease",
+                  "appStoreVersionSubmission",
+                  "build",
+                  "copyright",
+                  "createdDate",
+                  "customerReviews",
+                  "downloadable",
+                  "earliestReleaseDate",
+                  "platform",
+                  "releaseType",
+                  "routingAppCoverage",
+                  "versionString"
+                ]
+              }
+            },
+            "style": "form",
+            "explode": false
+          },
+          {
+            "name": "fields[apps]",
+            "in": "query",
+            "description": "the fields to include for returned resources of type apps",
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "string",
+                "enum": [
+                  "appAvailability",
+                  "appClips",
+                  "appCustomProductPages",
+                  "appEvents",
+                  "appInfos",
+                  "appPricePoints",
+                  "appPriceSchedule",
+                  "appStoreVersionExperimentsV2",
+                  "appStoreVersions",
+                  "availableInNewTerritories",
+                  "availableTerritories",
+                  "betaAppLocalizations",
+                  "betaAppReviewDetail",
+                  "betaGroups",
+                  "betaLicenseAgreement",
+                  "betaTesters",
+                  "builds",
+                  "bundleId",
+                  "ciProduct",
+                  "contentRightsDeclaration",
+                  "customerReviews",
+                  "endUserLicenseAgreement",
+                  "gameCenterEnabledVersions",
+                  "inAppPurchases",
+                  "inAppPurchasesV2",
+                  "isOrEverWasMadeForKids",
+                  "name",
+                  "perfPowerMetrics",
+                  "preOrder",
+                  "preReleaseVersions",
+                  "pricePoints",
+                  "prices",
+                  "primaryLocale",
+                  "promotedPurchases",
+                  "reviewSubmissions",
+                  "sku",
+                  "subscriptionGracePeriod",
+                  "subscriptionGroups",
+                  "subscriptionStatusUrl",
+                  "subscriptionStatusUrlForSandbox",
+                  "subscriptionStatusUrlVersion",
+                  "subscriptionStatusUrlVersionForSandbox"
+                ]
+              }
+            },
+            "style": "form",
+            "explode": false
+          },
+          {
+            "name": "limit",
+            "in": "query",
+            "description": "maximum resources per page",
+            "schema": {
+              "type": "integer",
+              "maximum": 200
+            },
+            "style": "form"
+          },
+          {
+            "name": "limit[controlVersions]",
+            "in": "query",
+            "description": "maximum number of related controlVersions returned (when they are included)",
+            "schema": {
+              "type": "integer",
+              "maximum": 50
+            },
+            "style": "form"
+          },
+          {
+            "name": "limit[appStoreVersionExperimentTreatments]",
+            "in": "query",
+            "description": "maximum number of related appStoreVersionExperimentTreatments returned (when they are included)",
+            "schema": {
+              "type": "integer",
+              "maximum": 50
+            },
+            "style": "form"
+          },
+          {
+            "name": "include",
+            "in": "query",
+            "description": "comma-separated list of relationships to include",
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "string",
+                "enum": [
+                  "app",
+                  "appStoreVersionExperimentTreatments",
+                  "controlVersions",
+                  "latestControlVersion"
+                ]
+              }
+            },
+            "style": "form",
+            "explode": false
+          }
+        ],
+        "responses": {
+          "400": {
+            "description": "Parameter error(s)",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not found error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "200": {
+            "description": "List of AppStoreVersionExperiments",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AppStoreVersionExperimentsV2Response"
+                }
+              }
+            }
+          }
+        }
+      },
+      "parameters": [
+        {
+          "name": "id",
+          "in": "path",
+          "description": "the id of the requested resource",
+          "schema": {
+            "type": "string"
+          },
+          "style": "simple",
+          "required": true
+        }
+      ]
+    },
     "/v1/apps/{id}/relationships/appStoreVersions": {
       "parameters": [
         {
@@ -45523,6 +47133,33 @@
               "type": "array",
               "items": {
                 "type": "string"
+              }
+            },
+            "style": "form",
+            "explode": false
+          },
+          {
+            "name": "fields[appStoreVersionExperiments]",
+            "in": "query",
+            "description": "the fields to include for returned resources of type appStoreVersionExperiments",
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "string",
+                "enum": [
+                  "app",
+                  "appStoreVersionExperimentTreatments",
+                  "controlVersions",
+                  "endDate",
+                  "latestControlVersion",
+                  "name",
+                  "platform",
+                  "reviewRequired",
+                  "startDate",
+                  "started",
+                  "state",
+                  "trafficProportion"
+                ]
               }
             },
             "style": "form",
@@ -45640,6 +47277,7 @@
                   "appStoreReviewDetail",
                   "appStoreState",
                   "appStoreVersionExperiments",
+                  "appStoreVersionExperimentsV2",
                   "appStoreVersionLocalizations",
                   "appStoreVersionPhasedRelease",
                   "appStoreVersionSubmission",
@@ -45675,6 +47313,7 @@
                   "appInfos",
                   "appPricePoints",
                   "appPriceSchedule",
+                  "appStoreVersionExperimentsV2",
                   "appStoreVersions",
                   "availableInNewTerritories",
                   "availableTerritories",
@@ -45870,6 +47509,17 @@
               "type": "integer",
               "maximum": 50
             },
+            "style": "form",
+            "deprecated": true
+          },
+          {
+            "name": "limit[appStoreVersionExperimentsV2]",
+            "in": "query",
+            "description": "maximum number of related appStoreVersionExperimentsV2 returned (when they are included)",
+            "schema": {
+              "type": "integer",
+              "maximum": 50
+            },
             "style": "form"
           },
           {
@@ -45886,6 +47536,7 @@
                   "appClipDefaultExperience",
                   "appStoreReviewDetail",
                   "appStoreVersionExperiments",
+                  "appStoreVersionExperimentsV2",
                   "appStoreVersionLocalizations",
                   "appStoreVersionPhasedRelease",
                   "appStoreVersionSubmission",
@@ -46740,6 +48391,7 @@
                   "appInfos",
                   "appPricePoints",
                   "appPriceSchedule",
+                  "appStoreVersionExperimentsV2",
                   "appStoreVersions",
                   "availableInNewTerritories",
                   "availableTerritories",
@@ -47559,6 +49211,7 @@
                   "appInfos",
                   "appPricePoints",
                   "appPriceSchedule",
+                  "appStoreVersionExperimentsV2",
                   "appStoreVersions",
                   "availableInNewTerritories",
                   "availableTerritories",
@@ -47805,6 +49458,7 @@
                   "appInfos",
                   "appPricePoints",
                   "appPriceSchedule",
+                  "appStoreVersionExperimentsV2",
                   "appStoreVersions",
                   "availableInNewTerritories",
                   "availableTerritories",
@@ -48075,19 +49729,17 @@
             "explode": false
           },
           {
-            "name": "fields[inAppPurchasePricePoints]",
+            "name": "fields[inAppPurchaseAvailabilities]",
             "in": "query",
-            "description": "the fields to include for returned resources of type inAppPurchasePricePoints",
+            "description": "the fields to include for returned resources of type inAppPurchaseAvailabilities",
             "schema": {
               "type": "array",
               "items": {
                 "type": "string",
                 "enum": [
-                  "customerPrice",
-                  "inAppPurchaseV2",
-                  "priceTier",
-                  "proceeds",
-                  "territory"
+                  "availableInNewTerritories",
+                  "availableTerritories",
+                  "inAppPurchase"
                 ]
               }
             },
@@ -48152,10 +49804,10 @@
                   "contentHosting",
                   "familySharable",
                   "iapPriceSchedule",
+                  "inAppPurchaseAvailability",
                   "inAppPurchaseLocalizations",
                   "inAppPurchaseType",
                   "name",
-                  "pricePoints",
                   "productId",
                   "promotedPurchase",
                   "reviewNote",
@@ -48226,16 +49878,6 @@
             "style": "form"
           },
           {
-            "name": "limit[pricePoints]",
-            "in": "query",
-            "description": "maximum number of related pricePoints returned (when they are included)",
-            "schema": {
-              "type": "integer",
-              "maximum": 8000
-            },
-            "style": "form"
-          },
-          {
             "name": "include",
             "in": "query",
             "description": "comma-separated list of relationships to include",
@@ -48247,8 +49889,8 @@
                   "appStoreReviewScreenshot",
                   "content",
                   "iapPriceSchedule",
+                  "inAppPurchaseAvailability",
                   "inAppPurchaseLocalizations",
-                  "pricePoints",
                   "promotedPurchase"
                 ]
               }
@@ -48732,6 +50374,7 @@
                   "appInfos",
                   "appPricePoints",
                   "appPriceSchedule",
+                  "appStoreVersionExperimentsV2",
                   "appStoreVersions",
                   "availableInNewTerritories",
                   "availableTerritories",
@@ -48927,6 +50570,7 @@
                   "appInfos",
                   "appPricePoints",
                   "appPriceSchedule",
+                  "appStoreVersionExperimentsV2",
                   "appStoreVersions",
                   "availableInNewTerritories",
                   "availableTerritories",
@@ -49247,6 +50891,7 @@
                   "promotionalOffers",
                   "reviewNote",
                   "state",
+                  "subscriptionAvailability",
                   "subscriptionLocalizations",
                   "subscriptionPeriod"
                 ]
@@ -49271,6 +50916,7 @@
                   "contentHosting",
                   "familySharable",
                   "iapPriceSchedule",
+                  "inAppPurchaseAvailability",
                   "inAppPurchaseLocalizations",
                   "inAppPurchaseType",
                   "name",
@@ -49479,10 +51125,31 @@
                   "appEvent",
                   "appStoreVersion",
                   "appStoreVersionExperiment",
+                  "appStoreVersionExperimentV2",
                   "removed",
                   "resolved",
                   "reviewSubmission",
                   "state"
+                ]
+              }
+            },
+            "style": "form",
+            "explode": false
+          },
+          {
+            "name": "fields[actors]",
+            "in": "query",
+            "description": "the fields to include for returned resources of type actors",
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "string",
+                "enum": [
+                  "actorType",
+                  "apiKeyId",
+                  "userEmail",
+                  "userFirstName",
+                  "userLastName"
                 ]
               }
             },
@@ -49504,6 +51171,7 @@
                   "appStoreReviewDetail",
                   "appStoreState",
                   "appStoreVersionExperiments",
+                  "appStoreVersionExperimentsV2",
                   "appStoreVersionLocalizations",
                   "appStoreVersionPhasedRelease",
                   "appStoreVersionSubmission",
@@ -49539,6 +51207,7 @@
                   "appInfos",
                   "appPricePoints",
                   "appPriceSchedule",
+                  "appStoreVersionExperimentsV2",
                   "appStoreVersions",
                   "availableInNewTerritories",
                   "availableTerritories",
@@ -49592,9 +51261,11 @@
                   "appStoreVersionForReview",
                   "canceled",
                   "items",
+                  "lastUpdatedByActor",
                   "platform",
                   "state",
                   "submitted",
+                  "submittedByActor",
                   "submittedDate"
                 ]
               }
@@ -49633,7 +51304,9 @@
                 "enum": [
                   "app",
                   "appStoreVersionForReview",
-                  "items"
+                  "items",
+                  "lastUpdatedByActor",
+                  "submittedByActor"
                 ]
               }
             },
@@ -49894,6 +51567,7 @@
                   "promotionalOffers",
                   "reviewNote",
                   "state",
+                  "subscriptionAvailability",
                   "subscriptionLocalizations",
                   "subscriptionPeriod"
                 ]
@@ -50082,6 +51756,7 @@
                   "appInfos",
                   "appPricePoints",
                   "appPriceSchedule",
+                  "appStoreVersionExperimentsV2",
                   "appStoreVersions",
                   "availableInNewTerritories",
                   "availableTerritories",
@@ -50216,6 +51891,7 @@
                   "appInfos",
                   "appPricePoints",
                   "appPriceSchedule",
+                  "appStoreVersionExperimentsV2",
                   "appStoreVersions",
                   "availableInNewTerritories",
                   "availableTerritories",
@@ -50584,6 +52260,7 @@
                   "appInfos",
                   "appPricePoints",
                   "appPriceSchedule",
+                  "appStoreVersionExperimentsV2",
                   "appStoreVersions",
                   "availableInNewTerritories",
                   "availableTerritories",
@@ -51283,6 +52960,7 @@
                   "appInfos",
                   "appPricePoints",
                   "appPriceSchedule",
+                  "appStoreVersionExperimentsV2",
                   "appStoreVersions",
                   "availableInNewTerritories",
                   "availableTerritories",
@@ -51532,6 +53210,7 @@
                   "appInfos",
                   "appPricePoints",
                   "appPriceSchedule",
+                  "appStoreVersionExperimentsV2",
                   "appStoreVersions",
                   "availableInNewTerritories",
                   "availableTerritories",
@@ -52812,6 +54491,7 @@
                   "appInfos",
                   "appPricePoints",
                   "appPriceSchedule",
+                  "appStoreVersionExperimentsV2",
                   "appStoreVersions",
                   "availableInNewTerritories",
                   "availableTerritories",
@@ -53150,6 +54830,33 @@
               "items": {
                 "type": "string",
                 "enum": [
+                  "app",
+                  "appStoreVersionExperimentTreatments",
+                  "controlVersions",
+                  "endDate",
+                  "latestControlVersion",
+                  "name",
+                  "platform",
+                  "reviewRequired",
+                  "startDate",
+                  "started",
+                  "state",
+                  "trafficProportion"
+                ]
+              }
+            },
+            "style": "form",
+            "explode": false
+          },
+          {
+            "name": "fields[appStoreVersionExperiments]",
+            "in": "query",
+            "description": "the fields to include for returned resources of type appStoreVersionExperiments",
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "string",
+                "enum": [
                   "appStoreVersion",
                   "appStoreVersionExperimentTreatments",
                   "endDate",
@@ -53253,6 +54960,7 @@
                   "appStoreReviewDetail",
                   "appStoreState",
                   "appStoreVersionExperiments",
+                  "appStoreVersionExperimentsV2",
                   "appStoreVersionLocalizations",
                   "appStoreVersionPhasedRelease",
                   "appStoreVersionSubmission",
@@ -53288,6 +54996,7 @@
                   "appInfos",
                   "appPricePoints",
                   "appPriceSchedule",
+                  "appStoreVersionExperimentsV2",
                   "appStoreVersions",
                   "availableInNewTerritories",
                   "availableTerritories",
@@ -53473,6 +55182,17 @@
               "type": "integer",
               "maximum": 50
             },
+            "style": "form",
+            "deprecated": true
+          },
+          {
+            "name": "limit[appStoreVersionExperimentsV2]",
+            "in": "query",
+            "description": "maximum number of related appStoreVersionExperimentsV2 returned (when they are included)",
+            "schema": {
+              "type": "integer",
+              "maximum": 50
+            },
             "style": "form"
           },
           {
@@ -53489,6 +55209,7 @@
                   "appClipDefaultExperience",
                   "appStoreReviewDetail",
                   "appStoreVersionExperiments",
+                  "appStoreVersionExperimentsV2",
                   "appStoreVersionLocalizations",
                   "appStoreVersionPhasedRelease",
                   "appStoreVersionSubmission",
@@ -54666,11 +56387,11 @@
             }
           },
           "200": {
-            "description": "Single PrereleaseVersion",
+            "description": "Single PreReleaseVersion",
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/PrereleaseVersionResponse"
+                  "$ref": "#/components/schemas/PreReleaseVersionResponse"
                 }
               }
             }
@@ -54727,6 +56448,7 @@
                   "appInfos",
                   "appPricePoints",
                   "appPriceSchedule",
+                  "appStoreVersionExperimentsV2",
                   "appStoreVersions",
                   "availableInNewTerritories",
                   "availableTerritories",
@@ -56218,6 +57940,7 @@
                   "appStoreReviewDetail",
                   "appStoreState",
                   "appStoreVersionExperiments",
+                  "appStoreVersionExperimentsV2",
                   "appStoreVersionLocalizations",
                   "appStoreVersionPhasedRelease",
                   "appStoreVersionSubmission",
@@ -56285,6 +58008,7 @@
                   "appInfos",
                   "appPricePoints",
                   "appPriceSchedule",
+                  "appStoreVersionExperimentsV2",
                   "appStoreVersions",
                   "availableInNewTerritories",
                   "availableTerritories",
@@ -56889,23 +58613,6 @@
         "operationId": "ciProducts-app-get_to_one_related",
         "parameters": [
           {
-            "name": "fields[betaLicenseAgreements]",
-            "in": "query",
-            "description": "the fields to include for returned resources of type betaLicenseAgreements",
-            "schema": {
-              "type": "array",
-              "items": {
-                "type": "string",
-                "enum": [
-                  "agreementText",
-                  "app"
-                ]
-              }
-            },
-            "style": "form",
-            "explode": false
-          },
-          {
             "name": "fields[betaAppReviewDetails]",
             "in": "query",
             "description": "the fields to include for returned resources of type betaAppReviewDetails",
@@ -56923,6 +58630,246 @@
                   "demoAccountPassword",
                   "demoAccountRequired",
                   "notes"
+                ]
+              }
+            },
+            "style": "form",
+            "explode": false
+          },
+          {
+            "name": "fields[ciProducts]",
+            "in": "query",
+            "description": "the fields to include for returned resources of type ciProducts",
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "string",
+                "enum": [
+                  "additionalRepositories",
+                  "app",
+                  "buildRuns",
+                  "bundleId",
+                  "createdDate",
+                  "name",
+                  "primaryRepositories",
+                  "productType",
+                  "workflows"
+                ]
+              }
+            },
+            "style": "form",
+            "explode": false
+          },
+          {
+            "name": "fields[reviewSubmissions]",
+            "in": "query",
+            "description": "the fields to include for returned resources of type reviewSubmissions",
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "string",
+                "enum": [
+                  "app",
+                  "appStoreVersionForReview",
+                  "canceled",
+                  "items",
+                  "lastUpdatedByActor",
+                  "platform",
+                  "state",
+                  "submitted",
+                  "submittedByActor",
+                  "submittedDate"
+                ]
+              }
+            },
+            "style": "form",
+            "explode": false
+          },
+          {
+            "name": "fields[betaGroups]",
+            "in": "query",
+            "description": "the fields to include for returned resources of type betaGroups",
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "string",
+                "enum": [
+                  "app",
+                  "betaTesters",
+                  "builds",
+                  "createdDate",
+                  "feedbackEnabled",
+                  "hasAccessToAllBuilds",
+                  "iosBuildsAvailableForAppleSiliconMac",
+                  "isInternalGroup",
+                  "name",
+                  "publicLink",
+                  "publicLinkEnabled",
+                  "publicLinkId",
+                  "publicLinkLimit",
+                  "publicLinkLimitEnabled"
+                ]
+              }
+            },
+            "style": "form",
+            "explode": false
+          },
+          {
+            "name": "fields[promotedPurchases]",
+            "in": "query",
+            "description": "the fields to include for returned resources of type promotedPurchases",
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "string",
+                "enum": [
+                  "app",
+                  "enabled",
+                  "inAppPurchaseV2",
+                  "promotionImages",
+                  "state",
+                  "subscription",
+                  "visibleForAllUsers"
+                ]
+              }
+            },
+            "style": "form",
+            "explode": false
+          },
+          {
+            "name": "fields[apps]",
+            "in": "query",
+            "description": "the fields to include for returned resources of type apps",
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "string",
+                "enum": [
+                  "appAvailability",
+                  "appClips",
+                  "appCustomProductPages",
+                  "appEvents",
+                  "appInfos",
+                  "appPricePoints",
+                  "appPriceSchedule",
+                  "appStoreVersionExperimentsV2",
+                  "appStoreVersions",
+                  "availableInNewTerritories",
+                  "availableTerritories",
+                  "betaAppLocalizations",
+                  "betaAppReviewDetail",
+                  "betaGroups",
+                  "betaLicenseAgreement",
+                  "betaTesters",
+                  "builds",
+                  "bundleId",
+                  "ciProduct",
+                  "contentRightsDeclaration",
+                  "customerReviews",
+                  "endUserLicenseAgreement",
+                  "gameCenterEnabledVersions",
+                  "inAppPurchases",
+                  "inAppPurchasesV2",
+                  "isOrEverWasMadeForKids",
+                  "name",
+                  "perfPowerMetrics",
+                  "preOrder",
+                  "preReleaseVersions",
+                  "pricePoints",
+                  "prices",
+                  "primaryLocale",
+                  "promotedPurchases",
+                  "reviewSubmissions",
+                  "sku",
+                  "subscriptionGracePeriod",
+                  "subscriptionGroups",
+                  "subscriptionStatusUrl",
+                  "subscriptionStatusUrlForSandbox",
+                  "subscriptionStatusUrlVersion",
+                  "subscriptionStatusUrlVersionForSandbox"
+                ]
+              }
+            },
+            "style": "form",
+            "explode": false
+          },
+          {
+            "name": "fields[appEvents]",
+            "in": "query",
+            "description": "the fields to include for returned resources of type appEvents",
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "string",
+                "enum": [
+                  "app",
+                  "archivedTerritorySchedules",
+                  "badge",
+                  "deepLink",
+                  "eventState",
+                  "localizations",
+                  "primaryLocale",
+                  "priority",
+                  "purchaseRequirement",
+                  "purpose",
+                  "referenceName",
+                  "territorySchedules"
+                ]
+              }
+            },
+            "style": "form",
+            "explode": false
+          },
+          {
+            "name": "fields[builds]",
+            "in": "query",
+            "description": "the fields to include for returned resources of type builds",
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "string",
+                "enum": [
+                  "app",
+                  "appEncryptionDeclaration",
+                  "appStoreVersion",
+                  "betaAppReviewSubmission",
+                  "betaBuildLocalizations",
+                  "betaGroups",
+                  "buildAudienceType",
+                  "buildBetaDetail",
+                  "buildBundles",
+                  "computedMinMacOsVersion",
+                  "diagnosticSignatures",
+                  "expirationDate",
+                  "expired",
+                  "iconAssetToken",
+                  "icons",
+                  "individualTesters",
+                  "lsMinimumSystemVersion",
+                  "minOsVersion",
+                  "perfPowerMetrics",
+                  "preReleaseVersion",
+                  "processingState",
+                  "uploadedDate",
+                  "usesNonExemptEncryption",
+                  "version"
+                ]
+              }
+            },
+            "style": "form",
+            "explode": false
+          },
+          {
+            "name": "fields[betaLicenseAgreements]",
+            "in": "query",
+            "description": "the fields to include for returned resources of type betaLicenseAgreements",
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "string",
+                "enum": [
+                  "agreementText",
+                  "app"
                 ]
               }
             },
@@ -57039,30 +58986,6 @@
             "explode": false
           },
           {
-            "name": "fields[ciProducts]",
-            "in": "query",
-            "description": "the fields to include for returned resources of type ciProducts",
-            "schema": {
-              "type": "array",
-              "items": {
-                "type": "string",
-                "enum": [
-                  "additionalRepositories",
-                  "app",
-                  "buildRuns",
-                  "bundleId",
-                  "createdDate",
-                  "name",
-                  "primaryRepositories",
-                  "productType",
-                  "workflows"
-                ]
-              }
-            },
-            "style": "form",
-            "explode": false
-          },
-          {
             "name": "fields[inAppPurchases]",
             "in": "query",
             "description": "the fields to include for returned resources of type inAppPurchases",
@@ -57078,6 +59001,7 @@
                   "contentHosting",
                   "familySharable",
                   "iapPriceSchedule",
+                  "inAppPurchaseAvailability",
                   "inAppPurchaseLocalizations",
                   "inAppPurchaseType",
                   "name",
@@ -57105,58 +59029,6 @@
                   "referenceName",
                   "subscriptionGroupLocalizations",
                   "subscriptions"
-                ]
-              }
-            },
-            "style": "form",
-            "explode": false
-          },
-          {
-            "name": "fields[reviewSubmissions]",
-            "in": "query",
-            "description": "the fields to include for returned resources of type reviewSubmissions",
-            "schema": {
-              "type": "array",
-              "items": {
-                "type": "string",
-                "enum": [
-                  "app",
-                  "appStoreVersionForReview",
-                  "canceled",
-                  "items",
-                  "platform",
-                  "state",
-                  "submitted",
-                  "submittedDate"
-                ]
-              }
-            },
-            "style": "form",
-            "explode": false
-          },
-          {
-            "name": "fields[betaGroups]",
-            "in": "query",
-            "description": "the fields to include for returned resources of type betaGroups",
-            "schema": {
-              "type": "array",
-              "items": {
-                "type": "string",
-                "enum": [
-                  "app",
-                  "betaTesters",
-                  "builds",
-                  "createdDate",
-                  "feedbackEnabled",
-                  "hasAccessToAllBuilds",
-                  "iosBuildsAvailableForAppleSiliconMac",
-                  "isInternalGroup",
-                  "name",
-                  "publicLink",
-                  "publicLinkEnabled",
-                  "publicLinkId",
-                  "publicLinkLimit",
-                  "publicLinkLimitEnabled"
                 ]
               }
             },
@@ -57219,6 +59091,33 @@
             "explode": false
           },
           {
+            "name": "fields[appStoreVersionExperiments]",
+            "in": "query",
+            "description": "the fields to include for returned resources of type appStoreVersionExperiments",
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "string",
+                "enum": [
+                  "app",
+                  "appStoreVersionExperimentTreatments",
+                  "controlVersions",
+                  "endDate",
+                  "latestControlVersion",
+                  "name",
+                  "platform",
+                  "reviewRequired",
+                  "startDate",
+                  "started",
+                  "state",
+                  "trafficProportion"
+                ]
+              }
+            },
+            "style": "form",
+            "explode": false
+          },
+          {
             "name": "fields[subscriptionGracePeriods]",
             "in": "query",
             "description": "the fields to include for returned resources of type subscriptionGracePeriods",
@@ -57231,28 +59130,6 @@
                   "optIn",
                   "renewalType",
                   "sandboxOptIn"
-                ]
-              }
-            },
-            "style": "form",
-            "explode": false
-          },
-          {
-            "name": "fields[promotedPurchases]",
-            "in": "query",
-            "description": "the fields to include for returned resources of type promotedPurchases",
-            "schema": {
-              "type": "array",
-              "items": {
-                "type": "string",
-                "enum": [
-                  "app",
-                  "enabled",
-                  "inAppPurchaseV2",
-                  "promotionImages",
-                  "state",
-                  "subscription",
-                  "visibleForAllUsers"
                 ]
               }
             },
@@ -57292,6 +59169,7 @@
                   "appStoreReviewDetail",
                   "appStoreState",
                   "appStoreVersionExperiments",
+                  "appStoreVersionExperimentsV2",
                   "appStoreVersionLocalizations",
                   "appStoreVersionPhasedRelease",
                   "appStoreVersionSubmission",
@@ -57334,89 +59212,6 @@
             "explode": false
           },
           {
-            "name": "fields[apps]",
-            "in": "query",
-            "description": "the fields to include for returned resources of type apps",
-            "schema": {
-              "type": "array",
-              "items": {
-                "type": "string",
-                "enum": [
-                  "appAvailability",
-                  "appClips",
-                  "appCustomProductPages",
-                  "appEvents",
-                  "appInfos",
-                  "appPricePoints",
-                  "appPriceSchedule",
-                  "appStoreVersions",
-                  "availableInNewTerritories",
-                  "availableTerritories",
-                  "betaAppLocalizations",
-                  "betaAppReviewDetail",
-                  "betaGroups",
-                  "betaLicenseAgreement",
-                  "betaTesters",
-                  "builds",
-                  "bundleId",
-                  "ciProduct",
-                  "contentRightsDeclaration",
-                  "customerReviews",
-                  "endUserLicenseAgreement",
-                  "gameCenterEnabledVersions",
-                  "inAppPurchases",
-                  "inAppPurchasesV2",
-                  "isOrEverWasMadeForKids",
-                  "name",
-                  "perfPowerMetrics",
-                  "preOrder",
-                  "preReleaseVersions",
-                  "pricePoints",
-                  "prices",
-                  "primaryLocale",
-                  "promotedPurchases",
-                  "reviewSubmissions",
-                  "sku",
-                  "subscriptionGracePeriod",
-                  "subscriptionGroups",
-                  "subscriptionStatusUrl",
-                  "subscriptionStatusUrlForSandbox",
-                  "subscriptionStatusUrlVersion",
-                  "subscriptionStatusUrlVersionForSandbox"
-                ]
-              }
-            },
-            "style": "form",
-            "explode": false
-          },
-          {
-            "name": "fields[appEvents]",
-            "in": "query",
-            "description": "the fields to include for returned resources of type appEvents",
-            "schema": {
-              "type": "array",
-              "items": {
-                "type": "string",
-                "enum": [
-                  "app",
-                  "archivedTerritorySchedules",
-                  "badge",
-                  "deepLink",
-                  "eventState",
-                  "localizations",
-                  "primaryLocale",
-                  "priority",
-                  "purchaseRequirement",
-                  "purpose",
-                  "referenceName",
-                  "territorySchedules"
-                ]
-              }
-            },
-            "style": "form",
-            "explode": false
-          },
-          {
             "name": "fields[territories]",
             "in": "query",
             "description": "the fields to include for returned resources of type territories",
@@ -57426,45 +59221,6 @@
                 "type": "string",
                 "enum": [
                   "currency"
-                ]
-              }
-            },
-            "style": "form",
-            "explode": false
-          },
-          {
-            "name": "fields[builds]",
-            "in": "query",
-            "description": "the fields to include for returned resources of type builds",
-            "schema": {
-              "type": "array",
-              "items": {
-                "type": "string",
-                "enum": [
-                  "app",
-                  "appEncryptionDeclaration",
-                  "appStoreVersion",
-                  "betaAppReviewSubmission",
-                  "betaBuildLocalizations",
-                  "betaGroups",
-                  "buildAudienceType",
-                  "buildBetaDetail",
-                  "buildBundles",
-                  "computedMinMacOsVersion",
-                  "diagnosticSignatures",
-                  "expirationDate",
-                  "expired",
-                  "iconAssetToken",
-                  "icons",
-                  "individualTesters",
-                  "lsMinimumSystemVersion",
-                  "minOsVersion",
-                  "perfPowerMetrics",
-                  "preReleaseVersion",
-                  "processingState",
-                  "uploadedDate",
-                  "usesNonExemptEncryption",
-                  "version"
                 ]
               }
             },
@@ -57643,6 +59399,16 @@
             "style": "form"
           },
           {
+            "name": "limit[appStoreVersionExperimentsV2]",
+            "in": "query",
+            "description": "maximum number of related appStoreVersionExperimentsV2 returned (when they are included)",
+            "schema": {
+              "type": "integer",
+              "maximum": 50
+            },
+            "style": "form"
+          },
+          {
             "name": "include",
             "in": "query",
             "description": "comma-separated list of relationships to include",
@@ -57655,6 +59421,7 @@
                   "appCustomProductPages",
                   "appEvents",
                   "appInfos",
+                  "appStoreVersionExperimentsV2",
                   "appStoreVersions",
                   "availableTerritories",
                   "betaAppLocalizations",
@@ -59729,6 +61496,7 @@
                   "appInfos",
                   "appPricePoints",
                   "appPriceSchedule",
+                  "appStoreVersionExperimentsV2",
                   "appStoreVersions",
                   "availableInNewTerritories",
                   "availableTerritories",
@@ -60473,6 +62241,7 @@
                   "contentHosting",
                   "familySharable",
                   "iapPriceSchedule",
+                  "inAppPurchaseAvailability",
                   "inAppPurchaseLocalizations",
                   "inAppPurchaseType",
                   "name",
@@ -60597,6 +62366,7 @@
                   "contentHosting",
                   "familySharable",
                   "iapPriceSchedule",
+                  "inAppPurchaseAvailability",
                   "inAppPurchaseLocalizations",
                   "inAppPurchaseType",
                   "name",
@@ -60762,6 +62532,7 @@
                   "contentHosting",
                   "familySharable",
                   "iapPriceSchedule",
+                  "inAppPurchaseAvailability",
                   "inAppPurchaseLocalizations",
                   "inAppPurchaseType",
                   "name",
@@ -60907,6 +62678,144 @@
         }
       ]
     },
+    "/v2/inAppPurchases/{id}/relationships/inAppPurchaseAvailability": {
+      "parameters": [
+        {
+          "name": "id",
+          "in": "path",
+          "description": "the id of the requested resource",
+          "schema": {
+            "type": "string"
+          },
+          "style": "simple",
+          "required": true
+        }
+      ]
+    },
+    "/v2/inAppPurchases/{id}/inAppPurchaseAvailability": {
+      "get": {
+        "tags": [
+          "InAppPurchases"
+        ],
+        "operationId": "inAppPurchases-inAppPurchaseAvailability-get_to_one_related",
+        "parameters": [
+          {
+            "name": "fields[inAppPurchaseAvailabilities]",
+            "in": "query",
+            "description": "the fields to include for returned resources of type inAppPurchaseAvailabilities",
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "string",
+                "enum": [
+                  "availableInNewTerritories",
+                  "availableTerritories",
+                  "inAppPurchase"
+                ]
+              }
+            },
+            "style": "form",
+            "explode": false
+          },
+          {
+            "name": "fields[territories]",
+            "in": "query",
+            "description": "the fields to include for returned resources of type territories",
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "string",
+                "enum": [
+                  "currency"
+                ]
+              }
+            },
+            "style": "form",
+            "explode": false
+          },
+          {
+            "name": "limit[availableTerritories]",
+            "in": "query",
+            "description": "maximum number of related availableTerritories returned (when they are included)",
+            "schema": {
+              "type": "integer",
+              "maximum": 50
+            },
+            "style": "form"
+          },
+          {
+            "name": "include",
+            "in": "query",
+            "description": "comma-separated list of relationships to include",
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "string",
+                "enum": [
+                  "availableTerritories"
+                ]
+              }
+            },
+            "style": "form",
+            "explode": false
+          }
+        ],
+        "responses": {
+          "400": {
+            "description": "Parameter error(s)",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not found error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "200": {
+            "description": "Single InAppPurchaseAvailability",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/InAppPurchaseAvailabilityResponse"
+                }
+              }
+            }
+          }
+        }
+      },
+      "parameters": [
+        {
+          "name": "id",
+          "in": "path",
+          "description": "the id of the requested resource",
+          "schema": {
+            "type": "string"
+          },
+          "style": "simple",
+          "required": true
+        }
+      ]
+    },
     "/v2/inAppPurchases/{id}/relationships/inAppPurchaseLocalizations": {
       "parameters": [
         {
@@ -60964,6 +62873,7 @@
                   "contentHosting",
                   "familySharable",
                   "iapPriceSchedule",
+                  "inAppPurchaseAvailability",
                   "inAppPurchaseLocalizations",
                   "inAppPurchaseType",
                   "name",
@@ -61150,7 +63060,7 @@
             "description": "maximum resources per page",
             "schema": {
               "type": "integer",
-              "maximum": 200
+              "maximum": 8000
             },
             "style": "form"
           },
@@ -61299,6 +63209,7 @@
                   "promotionalOffers",
                   "reviewNote",
                   "state",
+                  "subscriptionAvailability",
                   "subscriptionLocalizations",
                   "subscriptionPeriod"
                 ]
@@ -61323,6 +63234,7 @@
                   "contentHosting",
                   "familySharable",
                   "iapPriceSchedule",
+                  "inAppPurchaseAvailability",
                   "inAppPurchaseLocalizations",
                   "inAppPurchaseType",
                   "name",
@@ -61484,6 +63396,7 @@
                   "appInfos",
                   "appPricePoints",
                   "appPriceSchedule",
+                  "appStoreVersionExperimentsV2",
                   "appStoreVersions",
                   "availableInNewTerritories",
                   "availableTerritories",
@@ -62210,6 +64123,33 @@
               "items": {
                 "type": "string",
                 "enum": [
+                  "app",
+                  "appStoreVersionExperimentTreatments",
+                  "controlVersions",
+                  "endDate",
+                  "latestControlVersion",
+                  "name",
+                  "platform",
+                  "reviewRequired",
+                  "startDate",
+                  "started",
+                  "state",
+                  "trafficProportion"
+                ]
+              }
+            },
+            "style": "form",
+            "explode": false
+          },
+          {
+            "name": "fields[appStoreVersionExperiments]",
+            "in": "query",
+            "description": "the fields to include for returned resources of type appStoreVersionExperiments",
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "string",
+                "enum": [
                   "appStoreVersion",
                   "appStoreVersionExperimentTreatments",
                   "endDate",
@@ -62238,6 +64178,7 @@
                   "appEvent",
                   "appStoreVersion",
                   "appStoreVersionExperiment",
+                  "appStoreVersionExperimentV2",
                   "removed",
                   "resolved",
                   "reviewSubmission",
@@ -62263,6 +64204,7 @@
                   "appStoreReviewDetail",
                   "appStoreState",
                   "appStoreVersionExperiments",
+                  "appStoreVersionExperimentsV2",
                   "appStoreVersionLocalizations",
                   "appStoreVersionPhasedRelease",
                   "appStoreVersionSubmission",
@@ -62350,7 +64292,8 @@
                   "appCustomProductPageVersion",
                   "appEvent",
                   "appStoreVersion",
-                  "appStoreVersionExperiment"
+                  "appStoreVersionExperiment",
+                  "appStoreVersionExperimentV2"
                 ]
               }
             },
@@ -63353,8 +65296,27 @@
                   "promotionalOffers",
                   "reviewNote",
                   "state",
+                  "subscriptionAvailability",
                   "subscriptionLocalizations",
                   "subscriptionPeriod"
+                ]
+              }
+            },
+            "style": "form",
+            "explode": false
+          },
+          {
+            "name": "fields[subscriptionAvailabilities]",
+            "in": "query",
+            "description": "the fields to include for returned resources of type subscriptionAvailabilities",
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "string",
+                "enum": [
+                  "availableInNewTerritories",
+                  "availableTerritories",
+                  "subscription"
                 ]
               }
             },
@@ -63520,6 +65482,7 @@
                   "prices",
                   "promotedPurchase",
                   "promotionalOffers",
+                  "subscriptionAvailability",
                   "subscriptionLocalizations"
                 ]
               }
@@ -64213,7 +66176,7 @@
             "description": "maximum resources per page",
             "schema": {
               "type": "integer",
-              "maximum": 200
+              "maximum": 8000
             },
             "style": "form"
           },
@@ -64537,6 +66500,7 @@
                   "promotionalOffers",
                   "reviewNote",
                   "state",
+                  "subscriptionAvailability",
                   "subscriptionLocalizations",
                   "subscriptionPeriod"
                 ]
@@ -64809,6 +66773,7 @@
                   "promotionalOffers",
                   "reviewNote",
                   "state",
+                  "subscriptionAvailability",
                   "subscriptionLocalizations",
                   "subscriptionPeriod"
                 ]
@@ -65068,6 +67033,7 @@
                   "promotionalOffers",
                   "reviewNote",
                   "state",
+                  "subscriptionAvailability",
                   "subscriptionLocalizations",
                   "subscriptionPeriod"
                 ]
@@ -65286,7 +67252,7 @@
             "description": "maximum resources per page",
             "schema": {
               "type": "integer",
-              "maximum": 200
+              "maximum": 8000
             },
             "style": "form"
           },
@@ -65736,6 +67702,7 @@
                   "promotionalOffers",
                   "reviewNote",
                   "state",
+                  "subscriptionAvailability",
                   "subscriptionLocalizations",
                   "subscriptionPeriod"
                 ]
@@ -65760,6 +67727,7 @@
                   "contentHosting",
                   "familySharable",
                   "iapPriceSchedule",
+                  "inAppPurchaseAvailability",
                   "inAppPurchaseLocalizations",
                   "inAppPurchaseType",
                   "name",
@@ -65964,6 +67932,7 @@
                   "promotionalOffers",
                   "reviewNote",
                   "state",
+                  "subscriptionAvailability",
                   "subscriptionLocalizations",
                   "subscriptionPeriod"
                 ]
@@ -66083,6 +68052,178 @@
         }
       ]
     },
+    "/v1/subscriptions/{id}/relationships/subscriptionAvailability": {
+      "parameters": [
+        {
+          "name": "id",
+          "in": "path",
+          "description": "the id of the requested resource",
+          "schema": {
+            "type": "string"
+          },
+          "style": "simple",
+          "required": true
+        }
+      ]
+    },
+    "/v1/subscriptions/{id}/subscriptionAvailability": {
+      "get": {
+        "tags": [
+          "Subscriptions"
+        ],
+        "operationId": "subscriptions-subscriptionAvailability-get_to_one_related",
+        "parameters": [
+          {
+            "name": "fields[subscriptionAvailabilities]",
+            "in": "query",
+            "description": "the fields to include for returned resources of type subscriptionAvailabilities",
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "string",
+                "enum": [
+                  "availableInNewTerritories",
+                  "availableTerritories",
+                  "subscription"
+                ]
+              }
+            },
+            "style": "form",
+            "explode": false
+          },
+          {
+            "name": "fields[subscriptions]",
+            "in": "query",
+            "description": "the fields to include for returned resources of type subscriptions",
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "string",
+                "enum": [
+                  "appStoreReviewScreenshot",
+                  "availableInAllTerritories",
+                  "familySharable",
+                  "group",
+                  "groupLevel",
+                  "introductoryOffers",
+                  "name",
+                  "offerCodes",
+                  "pricePoints",
+                  "prices",
+                  "productId",
+                  "promotedPurchase",
+                  "promotionalOffers",
+                  "reviewNote",
+                  "state",
+                  "subscriptionAvailability",
+                  "subscriptionLocalizations",
+                  "subscriptionPeriod"
+                ]
+              }
+            },
+            "style": "form",
+            "explode": false
+          },
+          {
+            "name": "fields[territories]",
+            "in": "query",
+            "description": "the fields to include for returned resources of type territories",
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "string",
+                "enum": [
+                  "currency"
+                ]
+              }
+            },
+            "style": "form",
+            "explode": false
+          },
+          {
+            "name": "limit[availableTerritories]",
+            "in": "query",
+            "description": "maximum number of related availableTerritories returned (when they are included)",
+            "schema": {
+              "type": "integer",
+              "maximum": 50
+            },
+            "style": "form"
+          },
+          {
+            "name": "include",
+            "in": "query",
+            "description": "comma-separated list of relationships to include",
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "string",
+                "enum": [
+                  "availableTerritories",
+                  "subscription"
+                ]
+              }
+            },
+            "style": "form",
+            "explode": false
+          }
+        ],
+        "responses": {
+          "400": {
+            "description": "Parameter error(s)",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not found error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "200": {
+            "description": "Single SubscriptionAvailability",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SubscriptionAvailabilityResponse"
+                }
+              }
+            }
+          }
+        }
+      },
+      "parameters": [
+        {
+          "name": "id",
+          "in": "path",
+          "description": "the id of the requested resource",
+          "schema": {
+            "type": "string"
+          },
+          "style": "simple",
+          "required": true
+        }
+      ]
+    },
     "/v1/subscriptions/{id}/relationships/subscriptionLocalizations": {
       "parameters": [
         {
@@ -66128,6 +68269,7 @@
                   "promotionalOffers",
                   "reviewNote",
                   "state",
+                  "subscriptionAvailability",
                   "subscriptionLocalizations",
                   "subscriptionPeriod"
                 ]
@@ -66276,6 +68418,7 @@
                   "appInfos",
                   "appPricePoints",
                   "appPriceSchedule",
+                  "appStoreVersionExperimentsV2",
                   "appStoreVersions",
                   "availableInNewTerritories",
                   "availableTerritories",
@@ -66636,6 +68779,7 @@
                   "appInfos",
                   "appPricePoints",
                   "appPriceSchedule",
+                  "appStoreVersionExperimentsV2",
                   "appStoreVersions",
                   "availableInNewTerritories",
                   "availableTerritories",
@@ -66746,6 +68890,93 @@
   },
   "components": {
     "schemas": {
+      "Actor": {
+        "type": "object",
+        "title": "Actor",
+        "properties": {
+          "type": {
+            "type": "string",
+            "enum": [
+              "actors"
+            ]
+          },
+          "id": {
+            "type": "string"
+          },
+          "attributes": {
+            "type": "object",
+            "properties": {
+              "actorType": {
+                "type": "string",
+                "enum": [
+                  "USER",
+                  "API_KEY",
+                  "XCODE_CLOUD",
+                  "APPLE"
+                ]
+              },
+              "userFirstName": {
+                "type": "string"
+              },
+              "userLastName": {
+                "type": "string"
+              },
+              "userEmail": {
+                "type": "string"
+              },
+              "apiKeyId": {
+                "type": "string"
+              }
+            }
+          },
+          "links": {
+            "$ref": "#/components/schemas/ResourceLinks"
+          }
+        },
+        "required": [
+          "links",
+          "id",
+          "type"
+        ]
+      },
+      "ActorsResponse": {
+        "type": "object",
+        "title": "ActorsResponse",
+        "properties": {
+          "data": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Actor"
+            }
+          },
+          "links": {
+            "$ref": "#/components/schemas/PagedDocumentLinks"
+          },
+          "meta": {
+            "$ref": "#/components/schemas/PagingInformation"
+          }
+        },
+        "required": [
+          "data",
+          "links"
+        ]
+      },
+      "ActorResponse": {
+        "type": "object",
+        "title": "ActorResponse",
+        "properties": {
+          "data": {
+            "$ref": "#/components/schemas/Actor"
+          },
+          "links": {
+            "$ref": "#/components/schemas/DocumentLinks"
+          }
+        },
+        "required": [
+          "data",
+          "links"
+        ]
+      },
       "AgeRatingDeclaration": {
         "type": "object",
         "title": "AgeRatingDeclaration",
@@ -71549,7 +73780,8 @@
                       ]
                     }
                   }
-                }
+                },
+                "deprecated": true
               },
               "appEncryptionDeclarationDocument": {
                 "type": "object",
@@ -77727,6 +79959,42 @@
                   }
                 }
               },
+              "appStoreVersionExperimentV2": {
+                "type": "object",
+                "properties": {
+                  "links": {
+                    "type": "object",
+                    "properties": {
+                      "self": {
+                        "type": "string",
+                        "format": "uri-reference"
+                      },
+                      "related": {
+                        "type": "string",
+                        "format": "uri-reference"
+                      }
+                    }
+                  },
+                  "data": {
+                    "type": "object",
+                    "properties": {
+                      "type": {
+                        "type": "string",
+                        "enum": [
+                          "appStoreVersionExperiments"
+                        ]
+                      },
+                      "id": {
+                        "type": "string"
+                      }
+                    },
+                    "required": [
+                      "id",
+                      "type"
+                    ]
+                  }
+                }
+              },
               "appStoreVersionExperimentTreatmentLocalizations": {
                 "type": "object",
                 "properties": {
@@ -77799,6 +80067,9 @@
                   "$ref": "#/components/schemas/AppStoreVersionExperiment"
                 },
                 {
+                  "$ref": "#/components/schemas/AppStoreVersionExperimentV2"
+                },
+                {
                   "$ref": "#/components/schemas/AppStoreVersionExperimentTreatmentLocalization"
                 }
               ]
@@ -77829,6 +80100,9 @@
               "oneOf": [
                 {
                   "$ref": "#/components/schemas/AppStoreVersionExperiment"
+                },
+                {
+                  "$ref": "#/components/schemas/AppStoreVersionExperimentV2"
                 },
                 {
                   "$ref": "#/components/schemas/AppStoreVersionExperimentTreatmentLocalization"
@@ -77900,6 +80174,29 @@
                     "required": [
                       "data"
                     ]
+                  },
+                  "appStoreVersionExperimentV2": {
+                    "type": "object",
+                    "properties": {
+                      "data": {
+                        "type": "object",
+                        "properties": {
+                          "type": {
+                            "type": "string",
+                            "enum": [
+                              "appStoreVersionExperiments"
+                            ]
+                          },
+                          "id": {
+                            "type": "string"
+                          }
+                        },
+                        "required": [
+                          "id",
+                          "type"
+                        ]
+                      }
+                    }
                   }
                 },
                 "required": [
@@ -77942,6 +80239,424 @@
                   },
                   "appIconName": {
                     "type": "string"
+                  }
+                }
+              }
+            },
+            "required": [
+              "id",
+              "type"
+            ]
+          }
+        },
+        "required": [
+          "data"
+        ]
+      },
+      "AppStoreVersionExperimentV2": {
+        "type": "object",
+        "title": "AppStoreVersionExperimentV2",
+        "properties": {
+          "type": {
+            "type": "string",
+            "enum": [
+              "appStoreVersionExperiments"
+            ]
+          },
+          "id": {
+            "type": "string"
+          },
+          "attributes": {
+            "type": "object",
+            "properties": {
+              "name": {
+                "type": "string"
+              },
+              "platform": {
+                "$ref": "#/components/schemas/Platform"
+              },
+              "trafficProportion": {
+                "type": "integer"
+              },
+              "state": {
+                "type": "string",
+                "enum": [
+                  "PREPARE_FOR_SUBMISSION",
+                  "READY_FOR_REVIEW",
+                  "WAITING_FOR_REVIEW",
+                  "IN_REVIEW",
+                  "ACCEPTED",
+                  "APPROVED",
+                  "REJECTED",
+                  "COMPLETED",
+                  "STOPPED"
+                ]
+              },
+              "reviewRequired": {
+                "type": "boolean"
+              },
+              "startDate": {
+                "type": "string",
+                "format": "date-time"
+              },
+              "endDate": {
+                "type": "string",
+                "format": "date-time"
+              }
+            }
+          },
+          "relationships": {
+            "type": "object",
+            "properties": {
+              "app": {
+                "type": "object",
+                "properties": {
+                  "links": {
+                    "type": "object",
+                    "properties": {
+                      "self": {
+                        "type": "string",
+                        "format": "uri-reference"
+                      },
+                      "related": {
+                        "type": "string",
+                        "format": "uri-reference"
+                      }
+                    }
+                  },
+                  "data": {
+                    "type": "object",
+                    "properties": {
+                      "type": {
+                        "type": "string",
+                        "enum": [
+                          "apps"
+                        ]
+                      },
+                      "id": {
+                        "type": "string"
+                      }
+                    },
+                    "required": [
+                      "id",
+                      "type"
+                    ]
+                  }
+                }
+              },
+              "latestControlVersion": {
+                "type": "object",
+                "properties": {
+                  "links": {
+                    "type": "object",
+                    "properties": {
+                      "self": {
+                        "type": "string",
+                        "format": "uri-reference"
+                      },
+                      "related": {
+                        "type": "string",
+                        "format": "uri-reference"
+                      }
+                    }
+                  },
+                  "data": {
+                    "type": "object",
+                    "properties": {
+                      "type": {
+                        "type": "string",
+                        "enum": [
+                          "appStoreVersions"
+                        ]
+                      },
+                      "id": {
+                        "type": "string"
+                      }
+                    },
+                    "required": [
+                      "id",
+                      "type"
+                    ]
+                  }
+                }
+              },
+              "controlVersions": {
+                "type": "object",
+                "properties": {
+                  "links": {
+                    "type": "object",
+                    "properties": {
+                      "self": {
+                        "type": "string",
+                        "format": "uri-reference"
+                      },
+                      "related": {
+                        "type": "string",
+                        "format": "uri-reference"
+                      }
+                    }
+                  },
+                  "meta": {
+                    "$ref": "#/components/schemas/PagingInformation"
+                  },
+                  "data": {
+                    "type": "array",
+                    "items": {
+                      "type": "object",
+                      "properties": {
+                        "type": {
+                          "type": "string",
+                          "enum": [
+                            "appStoreVersions"
+                          ]
+                        },
+                        "id": {
+                          "type": "string"
+                        }
+                      },
+                      "required": [
+                        "id",
+                        "type"
+                      ]
+                    }
+                  }
+                }
+              },
+              "appStoreVersionExperimentTreatments": {
+                "type": "object",
+                "properties": {
+                  "links": {
+                    "type": "object",
+                    "properties": {
+                      "self": {
+                        "type": "string",
+                        "format": "uri-reference"
+                      },
+                      "related": {
+                        "type": "string",
+                        "format": "uri-reference"
+                      }
+                    }
+                  },
+                  "meta": {
+                    "$ref": "#/components/schemas/PagingInformation"
+                  },
+                  "data": {
+                    "type": "array",
+                    "items": {
+                      "type": "object",
+                      "properties": {
+                        "type": {
+                          "type": "string",
+                          "enum": [
+                            "appStoreVersionExperimentTreatments"
+                          ]
+                        },
+                        "id": {
+                          "type": "string"
+                        }
+                      },
+                      "required": [
+                        "id",
+                        "type"
+                      ]
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "links": {
+            "$ref": "#/components/schemas/ResourceLinks"
+          }
+        },
+        "required": [
+          "links",
+          "id",
+          "type"
+        ]
+      },
+      "AppStoreVersionExperimentsV2Response": {
+        "type": "object",
+        "title": "AppStoreVersionExperimentsV2Response",
+        "properties": {
+          "data": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/AppStoreVersionExperimentV2"
+            }
+          },
+          "included": {
+            "type": "array",
+            "items": {
+              "oneOf": [
+                {
+                  "$ref": "#/components/schemas/App"
+                },
+                {
+                  "$ref": "#/components/schemas/AppStoreVersion"
+                },
+                {
+                  "$ref": "#/components/schemas/AppStoreVersion"
+                },
+                {
+                  "$ref": "#/components/schemas/AppStoreVersionExperimentTreatment"
+                }
+              ]
+            }
+          },
+          "links": {
+            "$ref": "#/components/schemas/PagedDocumentLinks"
+          },
+          "meta": {
+            "$ref": "#/components/schemas/PagingInformation"
+          }
+        },
+        "required": [
+          "data",
+          "links"
+        ]
+      },
+      "AppStoreVersionExperimentV2Response": {
+        "type": "object",
+        "title": "AppStoreVersionExperimentV2Response",
+        "properties": {
+          "data": {
+            "$ref": "#/components/schemas/AppStoreVersionExperimentV2"
+          },
+          "included": {
+            "type": "array",
+            "items": {
+              "oneOf": [
+                {
+                  "$ref": "#/components/schemas/App"
+                },
+                {
+                  "$ref": "#/components/schemas/AppStoreVersion"
+                },
+                {
+                  "$ref": "#/components/schemas/AppStoreVersion"
+                },
+                {
+                  "$ref": "#/components/schemas/AppStoreVersionExperimentTreatment"
+                }
+              ]
+            }
+          },
+          "links": {
+            "$ref": "#/components/schemas/DocumentLinks"
+          }
+        },
+        "required": [
+          "data",
+          "links"
+        ]
+      },
+      "AppStoreVersionExperimentV2CreateRequest": {
+        "type": "object",
+        "title": "AppStoreVersionExperimentV2CreateRequest",
+        "properties": {
+          "data": {
+            "type": "object",
+            "properties": {
+              "type": {
+                "type": "string",
+                "enum": [
+                  "appStoreVersionExperiments"
+                ]
+              },
+              "attributes": {
+                "type": "object",
+                "properties": {
+                  "name": {
+                    "type": "string"
+                  },
+                  "platform": {
+                    "$ref": "#/components/schemas/Platform"
+                  },
+                  "trafficProportion": {
+                    "type": "integer"
+                  }
+                },
+                "required": [
+                  "trafficProportion",
+                  "name",
+                  "platform"
+                ]
+              },
+              "relationships": {
+                "type": "object",
+                "properties": {
+                  "app": {
+                    "type": "object",
+                    "properties": {
+                      "data": {
+                        "type": "object",
+                        "properties": {
+                          "type": {
+                            "type": "string",
+                            "enum": [
+                              "apps"
+                            ]
+                          },
+                          "id": {
+                            "type": "string"
+                          }
+                        },
+                        "required": [
+                          "id",
+                          "type"
+                        ]
+                      }
+                    },
+                    "required": [
+                      "data"
+                    ]
+                  }
+                },
+                "required": [
+                  "app"
+                ]
+              }
+            },
+            "required": [
+              "relationships",
+              "attributes",
+              "type"
+            ]
+          }
+        },
+        "required": [
+          "data"
+        ]
+      },
+      "AppStoreVersionExperimentV2UpdateRequest": {
+        "type": "object",
+        "title": "AppStoreVersionExperimentV2UpdateRequest",
+        "properties": {
+          "data": {
+            "type": "object",
+            "properties": {
+              "type": {
+                "type": "string",
+                "enum": [
+                  "appStoreVersionExperiments"
+                ]
+              },
+              "id": {
+                "type": "string"
+              },
+              "attributes": {
+                "type": "object",
+                "properties": {
+                  "name": {
+                    "type": "string"
+                  },
+                  "trafficProportion": {
+                    "type": "integer"
+                  },
+                  "started": {
+                    "type": "boolean"
                   }
                 }
               }
@@ -78096,7 +80811,8 @@
           "links",
           "id",
           "type"
-        ]
+        ],
+        "deprecated": true
       },
       "AppStoreVersionExperimentsResponse": {
         "type": "object",
@@ -78131,7 +80847,8 @@
         "required": [
           "data",
           "links"
-        ]
+        ],
+        "deprecated": true
       },
       "AppStoreVersionExperimentResponse": {
         "type": "object",
@@ -78160,7 +80877,8 @@
         "required": [
           "data",
           "links"
-        ]
+        ],
+        "deprecated": true
       },
       "AppStoreVersionExperimentCreateRequest": {
         "type": "object",
@@ -78234,7 +80952,8 @@
         },
         "required": [
           "data"
-        ]
+        ],
+        "deprecated": true
       },
       "AppStoreVersionExperimentUpdateRequest": {
         "type": "object",
@@ -78275,7 +80994,8 @@
         },
         "required": [
           "data"
-        ]
+        ],
+        "deprecated": true
       },
       "AppStoreVersionLocalization": {
         "type": "object",
@@ -79615,6 +82335,48 @@
                     }
                   }
                 }
+              },
+              "appStoreVersionExperimentsV2": {
+                "type": "object",
+                "properties": {
+                  "links": {
+                    "type": "object",
+                    "properties": {
+                      "self": {
+                        "type": "string",
+                        "format": "uri-reference"
+                      },
+                      "related": {
+                        "type": "string",
+                        "format": "uri-reference"
+                      }
+                    }
+                  },
+                  "meta": {
+                    "$ref": "#/components/schemas/PagingInformation"
+                  },
+                  "data": {
+                    "type": "array",
+                    "items": {
+                      "type": "object",
+                      "properties": {
+                        "type": {
+                          "type": "string",
+                          "enum": [
+                            "appStoreVersionExperiments"
+                          ]
+                        },
+                        "id": {
+                          "type": "string"
+                        }
+                      },
+                      "required": [
+                        "id",
+                        "type"
+                      ]
+                    }
+                  }
+                }
               }
             }
           },
@@ -79671,6 +82433,9 @@
                 },
                 {
                   "$ref": "#/components/schemas/AppStoreVersionExperiment"
+                },
+                {
+                  "$ref": "#/components/schemas/AppStoreVersionExperimentV2"
                 }
               ]
             }
@@ -79727,6 +82492,9 @@
                 },
                 {
                   "$ref": "#/components/schemas/AppStoreVersionExperiment"
+                },
+                {
+                  "$ref": "#/components/schemas/AppStoreVersionExperimentV2"
                 }
               ]
             }
@@ -80975,6 +83743,48 @@
                     ]
                   }
                 }
+              },
+              "appStoreVersionExperimentsV2": {
+                "type": "object",
+                "properties": {
+                  "links": {
+                    "type": "object",
+                    "properties": {
+                      "self": {
+                        "type": "string",
+                        "format": "uri-reference"
+                      },
+                      "related": {
+                        "type": "string",
+                        "format": "uri-reference"
+                      }
+                    }
+                  },
+                  "meta": {
+                    "$ref": "#/components/schemas/PagingInformation"
+                  },
+                  "data": {
+                    "type": "array",
+                    "items": {
+                      "type": "object",
+                      "properties": {
+                        "type": {
+                          "type": "string",
+                          "enum": [
+                            "appStoreVersionExperiments"
+                          ]
+                        },
+                        "id": {
+                          "type": "string"
+                        }
+                      },
+                      "required": [
+                        "id",
+                        "type"
+                      ]
+                    }
+                  }
+                }
               }
             }
           },
@@ -81012,7 +83822,7 @@
                   "$ref": "#/components/schemas/AppStoreVersion"
                 },
                 {
-                  "$ref": "#/components/schemas/PrereleaseVersion"
+                  "$ref": "#/components/schemas/PreReleaseVersion"
                 },
                 {
                   "$ref": "#/components/schemas/BetaAppLocalization"
@@ -81070,6 +83880,9 @@
                 },
                 {
                   "$ref": "#/components/schemas/SubscriptionGracePeriod"
+                },
+                {
+                  "$ref": "#/components/schemas/AppStoreVersionExperimentV2"
                 }
               ]
             }
@@ -81107,7 +83920,7 @@
                   "$ref": "#/components/schemas/AppStoreVersion"
                 },
                 {
-                  "$ref": "#/components/schemas/PrereleaseVersion"
+                  "$ref": "#/components/schemas/PreReleaseVersion"
                 },
                 {
                   "$ref": "#/components/schemas/BetaAppLocalization"
@@ -81165,6 +83978,9 @@
                 },
                 {
                   "$ref": "#/components/schemas/SubscriptionGracePeriod"
+                },
+                {
+                  "$ref": "#/components/schemas/AppStoreVersionExperimentV2"
                 }
               ]
             }
@@ -84911,7 +87727,7 @@
             "items": {
               "oneOf": [
                 {
-                  "$ref": "#/components/schemas/PrereleaseVersion"
+                  "$ref": "#/components/schemas/PreReleaseVersion"
                 },
                 {
                   "$ref": "#/components/schemas/BetaTester"
@@ -84970,7 +87786,7 @@
             "items": {
               "oneOf": [
                 {
-                  "$ref": "#/components/schemas/PrereleaseVersion"
+                  "$ref": "#/components/schemas/PreReleaseVersion"
                 },
                 {
                   "$ref": "#/components/schemas/BetaTester"
@@ -88166,8 +90982,7 @@
                   "IPHONE",
                   "IPOD",
                   "APPLE_TV",
-                  "MAC",
-                  "APPLE_SILICON_MAC"
+                  "MAC"
                 ]
               },
               "status": {
@@ -89679,7 +92494,8 @@
                 "type": "string"
               },
               "priceTier": {
-                "type": "string"
+                "type": "string",
+                "deprecated": true
               }
             }
           },
@@ -90918,6 +93734,42 @@
                     ]
                   }
                 }
+              },
+              "inAppPurchaseAvailability": {
+                "type": "object",
+                "properties": {
+                  "links": {
+                    "type": "object",
+                    "properties": {
+                      "self": {
+                        "type": "string",
+                        "format": "uri-reference"
+                      },
+                      "related": {
+                        "type": "string",
+                        "format": "uri-reference"
+                      }
+                    }
+                  },
+                  "data": {
+                    "type": "object",
+                    "properties": {
+                      "type": {
+                        "type": "string",
+                        "enum": [
+                          "inAppPurchaseAvailabilities"
+                        ]
+                      },
+                      "id": {
+                        "type": "string"
+                      }
+                    },
+                    "required": [
+                      "id",
+                      "type"
+                    ]
+                  }
+                }
               }
             }
           },
@@ -90962,6 +93814,9 @@
                 },
                 {
                   "$ref": "#/components/schemas/InAppPurchasePriceSchedule"
+                },
+                {
+                  "$ref": "#/components/schemas/InAppPurchaseAvailability"
                 }
               ]
             }
@@ -91006,6 +93861,9 @@
                 },
                 {
                   "$ref": "#/components/schemas/InAppPurchasePriceSchedule"
+                },
+                {
+                  "$ref": "#/components/schemas/InAppPurchaseAvailability"
                 }
               ]
             }
@@ -91199,9 +94057,9 @@
           "type"
         ]
       },
-      "PrereleaseVersion": {
+      "PreReleaseVersion": {
         "type": "object",
-        "title": "PrereleaseVersion",
+        "title": "PreReleaseVersion",
         "properties": {
           "type": {
             "type": "string",
@@ -91323,7 +94181,7 @@
           "data": {
             "type": "array",
             "items": {
-              "$ref": "#/components/schemas/PrereleaseVersion"
+              "$ref": "#/components/schemas/PreReleaseVersion"
             }
           },
           "included": {
@@ -91351,12 +94209,12 @@
           "links"
         ]
       },
-      "PrereleaseVersionResponse": {
+      "PreReleaseVersionResponse": {
         "type": "object",
-        "title": "PrereleaseVersionResponse",
+        "title": "PreReleaseVersionResponse",
         "properties": {
           "data": {
-            "$ref": "#/components/schemas/PrereleaseVersion"
+            "$ref": "#/components/schemas/PreReleaseVersion"
           },
           "included": {
             "type": "array",
@@ -92590,6 +95448,42 @@
                   }
                 }
               },
+              "appStoreVersionExperimentV2": {
+                "type": "object",
+                "properties": {
+                  "links": {
+                    "type": "object",
+                    "properties": {
+                      "self": {
+                        "type": "string",
+                        "format": "uri-reference"
+                      },
+                      "related": {
+                        "type": "string",
+                        "format": "uri-reference"
+                      }
+                    }
+                  },
+                  "data": {
+                    "type": "object",
+                    "properties": {
+                      "type": {
+                        "type": "string",
+                        "enum": [
+                          "appStoreVersionExperiments"
+                        ]
+                      },
+                      "id": {
+                        "type": "string"
+                      }
+                    },
+                    "required": [
+                      "id",
+                      "type"
+                    ]
+                  }
+                }
+              },
               "appEvent": {
                 "type": "object",
                 "properties": {
@@ -92662,6 +95556,9 @@
                   "$ref": "#/components/schemas/AppStoreVersionExperiment"
                 },
                 {
+                  "$ref": "#/components/schemas/AppStoreVersionExperimentV2"
+                },
+                {
                   "$ref": "#/components/schemas/AppEvent"
                 }
               ]
@@ -92698,6 +95595,9 @@
                 },
                 {
                   "$ref": "#/components/schemas/AppStoreVersionExperiment"
+                },
+                {
+                  "$ref": "#/components/schemas/AppStoreVersionExperimentV2"
                 },
                 {
                   "$ref": "#/components/schemas/AppEvent"
@@ -92803,6 +95703,29 @@
                     }
                   },
                   "appStoreVersionExperiment": {
+                    "type": "object",
+                    "properties": {
+                      "data": {
+                        "type": "object",
+                        "properties": {
+                          "type": {
+                            "type": "string",
+                            "enum": [
+                              "appStoreVersionExperiments"
+                            ]
+                          },
+                          "id": {
+                            "type": "string"
+                          }
+                        },
+                        "required": [
+                          "id",
+                          "type"
+                        ]
+                      }
+                    }
+                  },
+                  "appStoreVersionExperimentV2": {
                     "type": "object",
                     "properties": {
                       "data": {
@@ -93055,6 +95978,78 @@
                     ]
                   }
                 }
+              },
+              "submittedByActor": {
+                "type": "object",
+                "properties": {
+                  "links": {
+                    "type": "object",
+                    "properties": {
+                      "self": {
+                        "type": "string",
+                        "format": "uri-reference"
+                      },
+                      "related": {
+                        "type": "string",
+                        "format": "uri-reference"
+                      }
+                    }
+                  },
+                  "data": {
+                    "type": "object",
+                    "properties": {
+                      "type": {
+                        "type": "string",
+                        "enum": [
+                          "actors"
+                        ]
+                      },
+                      "id": {
+                        "type": "string"
+                      }
+                    },
+                    "required": [
+                      "id",
+                      "type"
+                    ]
+                  }
+                }
+              },
+              "lastUpdatedByActor": {
+                "type": "object",
+                "properties": {
+                  "links": {
+                    "type": "object",
+                    "properties": {
+                      "self": {
+                        "type": "string",
+                        "format": "uri-reference"
+                      },
+                      "related": {
+                        "type": "string",
+                        "format": "uri-reference"
+                      }
+                    }
+                  },
+                  "data": {
+                    "type": "object",
+                    "properties": {
+                      "type": {
+                        "type": "string",
+                        "enum": [
+                          "actors"
+                        ]
+                      },
+                      "id": {
+                        "type": "string"
+                      }
+                    },
+                    "required": [
+                      "id",
+                      "type"
+                    ]
+                  }
+                }
               }
             }
           },
@@ -93090,6 +96085,12 @@
                 },
                 {
                   "$ref": "#/components/schemas/AppStoreVersion"
+                },
+                {
+                  "$ref": "#/components/schemas/Actor"
+                },
+                {
+                  "$ref": "#/components/schemas/Actor"
                 }
               ]
             }
@@ -93125,6 +96126,12 @@
                 },
                 {
                   "$ref": "#/components/schemas/AppStoreVersion"
+                },
+                {
+                  "$ref": "#/components/schemas/Actor"
+                },
+                {
+                  "$ref": "#/components/schemas/Actor"
                 }
               ]
             }
@@ -99173,6 +102180,42 @@
                     ]
                   }
                 }
+              },
+              "subscriptionAvailability": {
+                "type": "object",
+                "properties": {
+                  "links": {
+                    "type": "object",
+                    "properties": {
+                      "self": {
+                        "type": "string",
+                        "format": "uri-reference"
+                      },
+                      "related": {
+                        "type": "string",
+                        "format": "uri-reference"
+                      }
+                    }
+                  },
+                  "data": {
+                    "type": "object",
+                    "properties": {
+                      "type": {
+                        "type": "string",
+                        "enum": [
+                          "subscriptionAvailabilities"
+                        ]
+                      },
+                      "id": {
+                        "type": "string"
+                      }
+                    },
+                    "required": [
+                      "id",
+                      "type"
+                    ]
+                  }
+                }
               }
             }
           },
@@ -99223,6 +102266,9 @@
                 },
                 {
                   "$ref": "#/components/schemas/PromotedPurchase"
+                },
+                {
+                  "$ref": "#/components/schemas/SubscriptionAvailability"
                 }
               ]
             }
@@ -99273,6 +102319,9 @@
                 },
                 {
                   "$ref": "#/components/schemas/PromotedPurchase"
+                },
+                {
+                  "$ref": "#/components/schemas/SubscriptionAvailability"
                 }
               ]
             }
@@ -100169,7 +103218,8 @@
         },
         "required": [
           "data"
-        ]
+        ],
+        "deprecated": true
       },
       "AppPreviewSetAppPreviewsLinkagesResponse": {
         "type": "object",
@@ -101278,6 +104328,7 @@
               },
               "required": [
                 "code",
+                "detail",
                 "title",
                 "status"
               ]

@@ -65,6 +65,7 @@ extension APIEndpoint.V1.Apps.WithID {
 				case promotionalOffers
 				case reviewNote
 				case state
+				case subscriptionAvailability
 				case subscriptionLocalizations
 				case subscriptionPeriod
 			}
