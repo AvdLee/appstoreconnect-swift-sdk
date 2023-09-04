@@ -50,7 +50,7 @@ public struct APIConfiguration {
 }
 
 /// Provides access to all API Methods. Can be used to perform API requests.
-public final class APIProvider {
+public final actor APIProvider {
 
     public enum Error: Swift.Error, CustomDebugStringConvertible, LocalizedError {
         case requestGeneration

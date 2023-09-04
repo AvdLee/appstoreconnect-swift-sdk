@@ -50,19 +50,19 @@ final class APIProviderTests: XCTestCase {
 
     // MARK: - Tests
 
-    func testRequestExecutionWithVoidResponse() {
+    func testRequestExecutionWithVoidResponse() async {
         let response = Response<Data>(requestURL: nil, statusCode: 200, rateLimit: nil, data: nil)
         let mockRequestExecutor = MockRequestExecutor(expectedResponse: Result.success(response))
         let apiProvider = APIProvider(configuration: configuration, requestExecutor: mockRequestExecutor)
 
         let sampleEndpoint = APIEndpoint.v1.betaGroups.id("mockID").delete
-        apiProvider.request(sampleEndpoint) { result in
+        await apiProvider.request(sampleEndpoint) { result in
             // using the mock request executor the block is called sync
             XCTAssertTrue(result.isSuccess)
         }
     }
 
-    func testRequestExecutionErrorResponse() throws {
+    func testRequestExecutionErrorResponse() async throws {
         let expectedURL = URL(string: "https://api.appstoreconnect.apple.com")!
         let errorResponse = ErrorResponse(errors: [
             .init(
@@ -79,7 +79,7 @@ final class APIProviderTests: XCTestCase {
         let apiProvider = APIProvider(configuration: configuration, requestExecutor: mockRequestExecutor)
 
         let sampleEndpoint = APIEndpoint.v1.betaGroups.id("mockID").delete
-        apiProvider.request(sampleEndpoint) { result in
+        await apiProvider.request(sampleEndpoint) { result in
             // using the mock request executor the block is called sync
             XCTAssertNotNil(result.error)
             guard
@@ -101,7 +101,7 @@ final class APIProviderTests: XCTestCase {
         }
     }
 
-    func testDownloadRequestWithResultSuccess() {
+    func testDownloadRequestWithResultSuccess() async {
         let response = Response(requestURL: nil, statusCode: 200, rateLimit: nil, data: URL(fileURLWithPath: "randompath"))
         let mockRequestExecutor = MockRequestExecutor(expectedResponse: Result.success(response))
 
@@ -111,14 +111,14 @@ final class APIProviderTests: XCTestCase {
                                                                                filterReportSubType: [],
                                                                                filterReportType: [],
                                                                                filterVendorNumber: []))
-        apiProvider.download(reportEndpoint) { result in
+        await apiProvider.download(reportEndpoint) { result in
             // using the mock request executor the block is called sync
             XCTAssertTrue(result.isSuccess)
             XCTAssertEqual(result.value!, URL(fileURLWithPath: "randompath"))
         }
     }
 
-    func testDownloadRequestWithProblemOnFileCreation() {
+    func testDownloadRequestWithProblemOnFileCreation() async {
         let response = Response<URL>(requestURL: nil, statusCode: 200, rateLimit: nil, data: nil)
         let mockRequestExecutor = MockRequestExecutor(expectedResponse: Result.success(response))
 
@@ -127,7 +127,7 @@ final class APIProviderTests: XCTestCase {
                                                                                filterReportSubType: [],
                                                                                filterReportType: [],
                                                                                filterVendorNumber: []))
-        apiProvider.download(reportEndpoint) { result in
+        await apiProvider.download(reportEndpoint) { result in
             // using the mock request executor the block is called sync
             XCTAssertTrue(result.isFailure)
             guard
@@ -140,7 +140,7 @@ final class APIProviderTests: XCTestCase {
         }
     }
 
-    func testDownloadRequestWithFailure() {
+    func testDownloadRequestWithFailure() async {
         let response = Response<URL>(requestURL: nil, statusCode: 500, rateLimit: nil, data: nil)
         let mockRequestExecutor = MockRequestExecutor(expectedResponse: Result.success(response))
 
@@ -149,7 +149,7 @@ final class APIProviderTests: XCTestCase {
                                                                                filterReportSubType: [],
                                                                                filterReportType: [],
                                                                                filterVendorNumber: []))
-        apiProvider.download(reportEndpoint) { result in
+        await apiProvider.download(reportEndpoint) { result in
             // using the mock request executor the block is called sync
             XCTAssertTrue(result.isFailure)
 
