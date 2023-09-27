@@ -15,7 +15,7 @@ extension APIEndpoint.V1.PreReleaseVersions {
 		/// Path: `/v1/preReleaseVersions/{id}`
 		public let path: String
 
-		public func get(parameters: GetParameters? = nil) -> Request<AppStoreConnect_Swift_SDK.PreReleaseVersionResponse> {
+		public func get(parameters: GetParameters? = nil) -> Request<AppStoreConnect_Swift_SDK.PrereleaseVersionResponse> {
 			.get(path, query: parameters?.asQuery)
 		}
 
@@ -42,6 +42,7 @@ extension APIEndpoint.V1.PreReleaseVersions {
 				case appAvailability
 				case appClips
 				case appCustomProductPages
+				case appEncryptionDeclarations
 				case appEvents
 				case appInfos
 				case appPricePoints
@@ -61,6 +62,7 @@ extension APIEndpoint.V1.PreReleaseVersions {
 				case contentRightsDeclaration
 				case customerReviews
 				case endUserLicenseAgreement
+				case gameCenterDetail
 				case gameCenterEnabledVersions
 				case inAppPurchases
 				case inAppPurchasesV2

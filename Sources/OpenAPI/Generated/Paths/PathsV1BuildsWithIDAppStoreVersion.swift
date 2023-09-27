@@ -38,6 +38,7 @@ extension APIEndpoint.V1.Builds.WithID {
 
 			public enum FieldsAppStoreVersionExperiments: String, Codable, CaseIterable {
 				case app
+				case appStoreVersion
 				case appStoreVersionExperimentTreatments
 				case controlVersions
 				case endDate
@@ -115,6 +116,7 @@ extension APIEndpoint.V1.Builds.WithID {
 				case appAvailability
 				case appClips
 				case appCustomProductPages
+				case appEncryptionDeclarations
 				case appEvents
 				case appInfos
 				case appPricePoints
@@ -134,6 +136,7 @@ extension APIEndpoint.V1.Builds.WithID {
 				case contentRightsDeclaration
 				case customerReviews
 				case endUserLicenseAgreement
+				case gameCenterDetail
 				case gameCenterEnabledVersions
 				case inAppPurchases
 				case inAppPurchasesV2

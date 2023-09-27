@@ -15,7 +15,7 @@ extension APIEndpoint.V1.AppStoreVersions.WithID {
 		/// Path: `/v1/appStoreVersions/{id}/appStoreVersionPhasedRelease`
 		public let path: String
 
-		public func get(fieldsAppStoreVersionPhasedReleases: [FieldsAppStoreVersionPhasedReleases]? = nil) -> Request<AppStoreConnect_Swift_SDK.AppStoreVersionPhasedReleaseResponse> {
+		public func get(fieldsAppStoreVersionPhasedReleases: [FieldsAppStoreVersionPhasedReleases]? = nil) -> Request<AppStoreConnect_Swift_SDK.AppStoreVersionPhasedReleaseWithoutIncludesResponse> {
 			.get(path, query: makeGetQuery(fieldsAppStoreVersionPhasedReleases))
 		}
 

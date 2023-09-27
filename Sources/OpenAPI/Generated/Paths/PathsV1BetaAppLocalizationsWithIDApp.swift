@@ -15,7 +15,7 @@ extension APIEndpoint.V1.BetaAppLocalizations.WithID {
 		/// Path: `/v1/betaAppLocalizations/{id}/app`
 		public let path: String
 
-		public func get(fieldsApps: [FieldsApps]? = nil) -> Request<AppStoreConnect_Swift_SDK.AppResponse> {
+		public func get(fieldsApps: [FieldsApps]? = nil) -> Request<AppStoreConnect_Swift_SDK.AppWithoutIncludesResponse> {
 			.get(path, query: makeGetQuery(fieldsApps))
 		}
 
@@ -29,6 +29,7 @@ extension APIEndpoint.V1.BetaAppLocalizations.WithID {
 			case appAvailability
 			case appClips
 			case appCustomProductPages
+			case appEncryptionDeclarations
 			case appEvents
 			case appInfos
 			case appPricePoints
@@ -48,6 +49,7 @@ extension APIEndpoint.V1.BetaAppLocalizations.WithID {
 			case contentRightsDeclaration
 			case customerReviews
 			case endUserLicenseAgreement
+			case gameCenterDetail
 			case gameCenterEnabledVersions
 			case inAppPurchases
 			case inAppPurchasesV2

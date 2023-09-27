@@ -15,41 +15,28 @@ extension APIEndpoint.V1.SubscriptionOfferCodeOneTimeUseCodes {
 		/// Path: `/v1/subscriptionOfferCodeOneTimeUseCodes/{id}`
 		public let path: String
 
-		public func get(parameters: GetParameters? = nil) -> Request<AppStoreConnect_Swift_SDK.SubscriptionOfferCodeOneTimeUseCodeResponse> {
-			.get(path, query: parameters?.asQuery)
+		public func get(fieldsSubscriptionOfferCodeOneTimeUseCodes: [FieldsSubscriptionOfferCodeOneTimeUseCodes]? = nil, include: [Include]? = nil) -> Request<AppStoreConnect_Swift_SDK.SubscriptionOfferCodeOneTimeUseCodeResponse> {
+			.get(path, query: makeGetQuery(fieldsSubscriptionOfferCodeOneTimeUseCodes, include))
 		}
 
-		public struct GetParameters {
-			public var fieldsSubscriptionOfferCodeOneTimeUseCodes: [FieldsSubscriptionOfferCodeOneTimeUseCodes]?
-			public var include: [Include]?
-			public var fieldsSubscriptionOfferCodeOneTimeUseCodeValues: [String]?
+		private func makeGetQuery(_ fieldsSubscriptionOfferCodeOneTimeUseCodes: [FieldsSubscriptionOfferCodeOneTimeUseCodes]?, _ include: [Include]?) -> [(String, String?)] {
+			let encoder = URLQueryEncoder(explode: false)
+			encoder.encode(fieldsSubscriptionOfferCodeOneTimeUseCodes, forKey: "fields[subscriptionOfferCodeOneTimeUseCodes]")
+			encoder.encode(include, forKey: "include")
+			return encoder.items
+		}
 
-			public enum FieldsSubscriptionOfferCodeOneTimeUseCodes: String, Codable, CaseIterable {
-				case active
-				case createdDate
-				case expirationDate
-				case numberOfCodes
-				case offerCode
-				case values
-			}
+		public enum FieldsSubscriptionOfferCodeOneTimeUseCodes: String, Codable, CaseIterable {
+			case active
+			case createdDate
+			case expirationDate
+			case numberOfCodes
+			case offerCode
+			case values
+		}
 
-			public enum Include: String, Codable, CaseIterable {
-				case offerCode
-			}
-
-			public init(fieldsSubscriptionOfferCodeOneTimeUseCodes: [FieldsSubscriptionOfferCodeOneTimeUseCodes]? = nil, include: [Include]? = nil, fieldsSubscriptionOfferCodeOneTimeUseCodeValues: [String]? = nil) {
-				self.fieldsSubscriptionOfferCodeOneTimeUseCodes = fieldsSubscriptionOfferCodeOneTimeUseCodes
-				self.include = include
-				self.fieldsSubscriptionOfferCodeOneTimeUseCodeValues = fieldsSubscriptionOfferCodeOneTimeUseCodeValues
-			}
-
-			public var asQuery: [(String, String?)] {
-				let encoder = URLQueryEncoder(explode: false)
-				encoder.encode(fieldsSubscriptionOfferCodeOneTimeUseCodes, forKey: "fields[subscriptionOfferCodeOneTimeUseCodes]")
-				encoder.encode(include, forKey: "include")
-				encoder.encode(fieldsSubscriptionOfferCodeOneTimeUseCodeValues, forKey: "fields[subscriptionOfferCodeOneTimeUseCodeValues]")
-				return encoder.items
-			}
+		public enum Include: String, Codable, CaseIterable {
+			case offerCode
 		}
 
 		public func patch(_ body: AppStoreConnect_Swift_SDK.SubscriptionOfferCodeOneTimeUseCodeUpdateRequest) -> Request<AppStoreConnect_Swift_SDK.SubscriptionOfferCodeOneTimeUseCodeResponse> {

@@ -15,7 +15,7 @@ extension APIEndpoint.V1.Builds.WithID {
 		/// Path: `/v1/builds/{id}/betaAppReviewSubmission`
 		public let path: String
 
-		public func get(fieldsBetaAppReviewSubmissions: [FieldsBetaAppReviewSubmissions]? = nil) -> Request<AppStoreConnect_Swift_SDK.BetaAppReviewSubmissionResponse> {
+		public func get(fieldsBetaAppReviewSubmissions: [FieldsBetaAppReviewSubmissions]? = nil) -> Request<AppStoreConnect_Swift_SDK.BetaAppReviewSubmissionWithoutIncludesResponse> {
 			.get(path, query: makeGetQuery(fieldsBetaAppReviewSubmissions))
 		}
 

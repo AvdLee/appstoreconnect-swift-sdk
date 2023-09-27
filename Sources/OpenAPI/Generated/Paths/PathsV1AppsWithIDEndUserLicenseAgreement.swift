@@ -15,7 +15,7 @@ extension APIEndpoint.V1.Apps.WithID {
 		/// Path: `/v1/apps/{id}/endUserLicenseAgreement`
 		public let path: String
 
-		public func get(fieldsEndUserLicenseAgreements: [FieldsEndUserLicenseAgreements]? = nil) -> Request<AppStoreConnect_Swift_SDK.EndUserLicenseAgreementResponse> {
+		public func get(fieldsEndUserLicenseAgreements: [FieldsEndUserLicenseAgreements]? = nil) -> Request<AppStoreConnect_Swift_SDK.EndUserLicenseAgreementWithoutIncludesResponse> {
 			.get(path, query: makeGetQuery(fieldsEndUserLicenseAgreements))
 		}
 

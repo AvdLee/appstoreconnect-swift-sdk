@@ -15,7 +15,7 @@ extension APIEndpoint.V1.Apps.WithID {
 		/// Path: `/v1/apps/{id}/preReleaseVersions`
 		public let path: String
 
-		public func get(fieldsPreReleaseVersions: [FieldsPreReleaseVersions]? = nil, limit: Int? = nil) -> Request<AppStoreConnect_Swift_SDK.PreReleaseVersionsResponse> {
+		public func get(fieldsPreReleaseVersions: [FieldsPreReleaseVersions]? = nil, limit: Int? = nil) -> Request<AppStoreConnect_Swift_SDK.PreReleaseVersionsWithoutIncludesResponse> {
 			.get(path, query: makeGetQuery(fieldsPreReleaseVersions, limit))
 		}
 

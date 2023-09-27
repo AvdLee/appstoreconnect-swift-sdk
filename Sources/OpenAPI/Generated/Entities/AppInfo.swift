@@ -10,7 +10,7 @@ public struct AppInfo: Codable, Identifiable {
 	public var id: String
 	public var attributes: Attributes?
 	public var relationships: Relationships?
-	public var links: ResourceLinks
+	public var links: ResourceLinks?
 
 	public enum `Type`: String, Codable, CaseIterable {
 		case appInfos
@@ -749,7 +749,7 @@ public struct AppInfo: Codable, Identifiable {
 		}
 	}
 
-	public init(type: `Type`, id: String, attributes: Attributes? = nil, relationships: Relationships? = nil, links: ResourceLinks) {
+	public init(type: `Type`, id: String, attributes: Attributes? = nil, relationships: Relationships? = nil, links: ResourceLinks? = nil) {
 		self.type = type
 		self.id = id
 		self.attributes = attributes
@@ -763,7 +763,7 @@ public struct AppInfo: Codable, Identifiable {
 		self.id = try values.decode(String.self, forKey: "id")
 		self.attributes = try values.decodeIfPresent(Attributes.self, forKey: "attributes")
 		self.relationships = try values.decodeIfPresent(Relationships.self, forKey: "relationships")
-		self.links = try values.decode(ResourceLinks.self, forKey: "links")
+		self.links = try values.decodeIfPresent(ResourceLinks.self, forKey: "links")
 	}
 
 	public func encode(to encoder: Encoder) throws {
@@ -772,6 +772,6 @@ public struct AppInfo: Codable, Identifiable {
 		try values.encode(id, forKey: "id")
 		try values.encodeIfPresent(attributes, forKey: "attributes")
 		try values.encodeIfPresent(relationships, forKey: "relationships")
-		try values.encode(links, forKey: "links")
+		try values.encodeIfPresent(links, forKey: "links")
 	}
 }

@@ -15,6 +15,7 @@ extension APIEndpoint.V1.GameCenterEnabledVersions.WithID.Relationships {
 		/// Path: `/v1/gameCenterEnabledVersions/{id}/relationships/compatibleVersions`
 		public let path: String
 
+		@available(*, deprecated, message: "Deprecated")
 		public func get(limit: Int? = nil) -> Request<AppStoreConnect_Swift_SDK.GameCenterEnabledVersionCompatibleVersionsLinkagesResponse> {
 			.get(path, query: makeGetQuery(limit))
 		}
@@ -25,14 +26,17 @@ extension APIEndpoint.V1.GameCenterEnabledVersions.WithID.Relationships {
 			return encoder.items
 		}
 
+		@available(*, deprecated, message: "Deprecated")
 		public func post(_ body: AppStoreConnect_Swift_SDK.GameCenterEnabledVersionCompatibleVersionsLinkagesRequest) -> Request<Void> {
 			.post(path, body: body)
 		}
 
+		@available(*, deprecated, message: "Deprecated")
 		public func patch(_ body: AppStoreConnect_Swift_SDK.GameCenterEnabledVersionCompatibleVersionsLinkagesRequest) -> Request<Void> {
 			.patch(path, body: body)
 		}
 
+		@available(*, deprecated, message: "Deprecated")
 		public func delete(_ body: AppStoreConnect_Swift_SDK.GameCenterEnabledVersionCompatibleVersionsLinkagesRequest) -> Request<Void> {
 			.delete(path, body: body)
 		}

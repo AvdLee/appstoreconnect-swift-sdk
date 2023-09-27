@@ -65,6 +65,7 @@ extension APIEndpoint.V1.BetaGroups {
 				case appAvailability
 				case appClips
 				case appCustomProductPages
+				case appEncryptionDeclarations
 				case appEvents
 				case appInfos
 				case appPricePoints
@@ -84,6 +85,7 @@ extension APIEndpoint.V1.BetaGroups {
 				case contentRightsDeclaration
 				case customerReviews
 				case endUserLicenseAgreement
+				case gameCenterDetail
 				case gameCenterEnabledVersions
 				case inAppPurchases
 				case inAppPurchasesV2

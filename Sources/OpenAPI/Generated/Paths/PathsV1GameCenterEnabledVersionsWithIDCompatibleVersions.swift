@@ -15,6 +15,7 @@ extension APIEndpoint.V1.GameCenterEnabledVersions.WithID {
 		/// Path: `/v1/gameCenterEnabledVersions/{id}/compatibleVersions`
 		public let path: String
 
+		@available(*, deprecated, message: "Deprecated")
 		public func get(parameters: GetParameters? = nil) -> Request<AppStoreConnect_Swift_SDK.GameCenterEnabledVersionsResponse> {
 			.get(path, query: parameters?.asQuery)
 		}
@@ -54,6 +55,7 @@ extension APIEndpoint.V1.GameCenterEnabledVersions.WithID {
 				case appAvailability
 				case appClips
 				case appCustomProductPages
+				case appEncryptionDeclarations
 				case appEvents
 				case appInfos
 				case appPricePoints
@@ -73,6 +75,7 @@ extension APIEndpoint.V1.GameCenterEnabledVersions.WithID {
 				case contentRightsDeclaration
 				case customerReviews
 				case endUserLicenseAgreement
+				case gameCenterDetail
 				case gameCenterEnabledVersions
 				case inAppPurchases
 				case inAppPurchasesV2

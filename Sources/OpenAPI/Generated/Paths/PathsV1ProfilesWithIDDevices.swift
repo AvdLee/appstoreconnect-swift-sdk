@@ -15,7 +15,7 @@ extension APIEndpoint.V1.Profiles.WithID {
 		/// Path: `/v1/profiles/{id}/devices`
 		public let path: String
 
-		public func get(fieldsDevices: [FieldsDevices]? = nil, limit: Int? = nil) -> Request<AppStoreConnect_Swift_SDK.DevicesResponse> {
+		public func get(fieldsDevices: [FieldsDevices]? = nil, limit: Int? = nil) -> Request<AppStoreConnect_Swift_SDK.DevicesWithoutIncludesResponse> {
 			.get(path, query: makeGetQuery(fieldsDevices, limit))
 		}
 

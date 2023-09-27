@@ -23,6 +23,7 @@ public struct InAppPurchaseV2CreateRequest: Codable {
 			public var inAppPurchaseType: InAppPurchaseType
 			public var reviewNote: String?
 			public var isFamilySharable: Bool?
+			/// - warning: Deprecated.
 			public var isAvailableInAllTerritories: Bool?
 
 			public init(name: String, productID: String, inAppPurchaseType: InAppPurchaseType, reviewNote: String? = nil, isFamilySharable: Bool? = nil, isAvailableInAllTerritories: Bool? = nil) {

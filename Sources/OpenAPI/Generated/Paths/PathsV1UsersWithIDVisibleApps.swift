@@ -15,7 +15,7 @@ extension APIEndpoint.V1.Users.WithID {
 		/// Path: `/v1/users/{id}/visibleApps`
 		public let path: String
 
-		public func get(fieldsApps: [FieldsApps]? = nil, limit: Int? = nil) -> Request<AppStoreConnect_Swift_SDK.AppsResponse> {
+		public func get(fieldsApps: [FieldsApps]? = nil, limit: Int? = nil) -> Request<AppStoreConnect_Swift_SDK.AppsWithoutIncludesResponse> {
 			.get(path, query: makeGetQuery(fieldsApps, limit))
 		}
 
@@ -30,6 +30,7 @@ extension APIEndpoint.V1.Users.WithID {
 			case appAvailability
 			case appClips
 			case appCustomProductPages
+			case appEncryptionDeclarations
 			case appEvents
 			case appInfos
 			case appPricePoints
@@ -49,6 +50,7 @@ extension APIEndpoint.V1.Users.WithID {
 			case contentRightsDeclaration
 			case customerReviews
 			case endUserLicenseAgreement
+			case gameCenterDetail
 			case gameCenterEnabledVersions
 			case inAppPurchases
 			case inAppPurchasesV2

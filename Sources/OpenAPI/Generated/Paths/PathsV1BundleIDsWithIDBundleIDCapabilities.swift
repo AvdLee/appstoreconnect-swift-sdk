@@ -15,7 +15,7 @@ extension APIEndpoint.V1.BundleIDs.WithID {
 		/// Path: `/v1/bundleIds/{id}/bundleIdCapabilities`
 		public let path: String
 
-		public func get(fieldsBundleIDCapabilities: [FieldsBundleIDCapabilities]? = nil, limit: Int? = nil) -> Request<AppStoreConnect_Swift_SDK.BundleIDCapabilitiesResponse> {
+		public func get(fieldsBundleIDCapabilities: [FieldsBundleIDCapabilities]? = nil, limit: Int? = nil) -> Request<AppStoreConnect_Swift_SDK.BundleIDCapabilitiesWithoutIncludesResponse> {
 			.get(path, query: makeGetQuery(fieldsBundleIDCapabilities, limit))
 		}
 
