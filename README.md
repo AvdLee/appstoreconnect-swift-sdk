@@ -141,6 +141,15 @@ To help with the development of this repository you need to follow the next step
 - download the submodules dependencies
 ```bash
 git submodule update --init --recursive
+bundle install
+```
+- if you get permission errors when running `bundle install`, it's possible that you have to install a newer version of Ruby along the default one shipped with macOS (instead of `3.2.2` used below, use the version number that is output at the end of the `ruby-install ruby` command):
+```bash
+brew install chruby ruby-install
+ruby-install ruby
+chruby 3.2.2
+gem update --system
+gem install bundler
 ```
 - you should be able to run the tests
 ```bash
