@@ -13,6 +13,7 @@ import FoundationNetworking
 /// An Authenticator for URL Requests which makes use of the RequestAdapter from Alamofire.
 final class JWTRequestsAuthenticator {
 
+    private let dispatchQueue = DispatchQueue(label: "JWTRequestsAuthenticator")
     private var cachedToken: JWT.Token?
     private let apiConfiguration: APIConfiguration
 
@@ -26,13 +27,15 @@ final class JWTRequestsAuthenticator {
 
     /// Generates a new JWT Token, but only if the in memory cached one is not expired.
     private func createToken() throws -> JWT.Token {
-        if let cachedToken = cachedToken, !cachedToken.isExpired {
-            return cachedToken
-        }
+        return try dispatchQueue.sync {
+            if let cachedToken = cachedToken, !cachedToken.isExpired {
+                return cachedToken
+            }
 
-        let token = try jwtCreator.signedToken(using: apiConfiguration.privateKey)
-        cachedToken = token
-        return token
+            let token = try jwtCreator.signedToken(using: apiConfiguration.privateKey)
+            cachedToken = token
+            return token
+        }
     }
 
     func adapt(_ urlRequest: URLRequest) throws -> URLRequest {
