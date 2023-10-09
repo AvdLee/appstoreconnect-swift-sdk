@@ -14,7 +14,7 @@ extension ErrorResponse: CustomStringConvertible {
             errorString.append("""
         \n\nThe request failed with response code \(error.status) \(error.code)
 
-        \(error.title). \(error.detail ?? "")
+        \(error.title). \(error.detail)
         """)
         })
         return errorString
