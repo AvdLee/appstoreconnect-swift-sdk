@@ -12,7 +12,7 @@ public struct BuildResponse: Codable {
 	public var links: DocumentLinks
 
 	public enum IncludedItem: Codable {
-		case preReleaseVersion(PreReleaseVersion)
+		case prereleaseVersion(PrereleaseVersion)
 		case betaTester(BetaTester)
 		case betaGroup(BetaGroup)
 		case betaBuildLocalization(BetaBuildLocalization)
@@ -26,8 +26,8 @@ public struct BuildResponse: Codable {
 
 		public init(from decoder: Decoder) throws {
 			let container = try decoder.singleValueContainer()
-			if let value = try? container.decode(PreReleaseVersion.self) {
-				self = .preReleaseVersion(value)
+			if let value = try? container.decode(PrereleaseVersion.self) {
+				self = .prereleaseVersion(value)
 			} else if let value = try? container.decode(BetaTester.self) {
 				self = .betaTester(value)
 			} else if let value = try? container.decode(BetaGroup.self) {
@@ -56,7 +56,7 @@ public struct BuildResponse: Codable {
 		public func encode(to encoder: Encoder) throws {
 			var container = encoder.singleValueContainer()
 			switch self {
-			case .preReleaseVersion(let value): try container.encode(value)
+			case .prereleaseVersion(let value): try container.encode(value)
 			case .betaTester(let value): try container.encode(value)
 			case .betaGroup(let value): try container.encode(value)
 			case .betaBuildLocalization(let value): try container.encode(value)

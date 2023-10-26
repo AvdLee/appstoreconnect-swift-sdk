@@ -15,7 +15,7 @@ extension APIEndpoint.V1.Apps.WithID {
 		/// Path: `/v1/apps/{id}/betaLicenseAgreement`
 		public let path: String
 
-		public func get(fieldsBetaLicenseAgreements: [FieldsBetaLicenseAgreements]? = nil) -> Request<AppStoreConnect_Swift_SDK.BetaLicenseAgreementResponse> {
+		public func get(fieldsBetaLicenseAgreements: [FieldsBetaLicenseAgreements]? = nil) -> Request<AppStoreConnect_Swift_SDK.BetaLicenseAgreementWithoutIncludesResponse> {
 			.get(path, query: makeGetQuery(fieldsBetaLicenseAgreements))
 		}
 

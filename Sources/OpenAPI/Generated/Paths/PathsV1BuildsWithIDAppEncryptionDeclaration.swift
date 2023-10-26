@@ -15,7 +15,7 @@ extension APIEndpoint.V1.Builds.WithID {
 		/// Path: `/v1/builds/{id}/appEncryptionDeclaration`
 		public let path: String
 
-		public func get(fieldsAppEncryptionDeclarations: [FieldsAppEncryptionDeclarations]? = nil) -> Request<AppStoreConnect_Swift_SDK.AppEncryptionDeclarationResponse> {
+		public func get(fieldsAppEncryptionDeclarations: [FieldsAppEncryptionDeclarations]? = nil) -> Request<AppStoreConnect_Swift_SDK.AppEncryptionDeclarationWithoutIncludesResponse> {
 			.get(path, query: makeGetQuery(fieldsAppEncryptionDeclarations))
 		}
 

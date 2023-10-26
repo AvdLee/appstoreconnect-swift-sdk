@@ -6,19 +6,19 @@
 import Foundation
 
 public struct ResourceLinks: Codable {
-	public var this: String
+	public var this: String?
 
-	public init(this: String) {
+	public init(this: String? = nil) {
 		self.this = this
 	}
 
 	public init(from decoder: Decoder) throws {
 		let values = try decoder.container(keyedBy: StringCodingKey.self)
-		self.this = try values.decode(String.self, forKey: "self")
+		self.this = try values.decodeIfPresent(String.self, forKey: "self")
 	}
 
 	public func encode(to encoder: Encoder) throws {
 		var values = encoder.container(keyedBy: StringCodingKey.self)
-		try values.encode(this, forKey: "self")
+		try values.encodeIfPresent(this, forKey: "self")
 	}
 }

@@ -21,6 +21,7 @@ public struct InAppPurchaseV2UpdateRequest: Codable {
 			public var name: String?
 			public var reviewNote: String?
 			public var isFamilySharable: Bool?
+			/// - warning: Deprecated.
 			public var isAvailableInAllTerritories: Bool?
 
 			public init(name: String? = nil, reviewNote: String? = nil, isFamilySharable: Bool? = nil, isAvailableInAllTerritories: Bool? = nil) {

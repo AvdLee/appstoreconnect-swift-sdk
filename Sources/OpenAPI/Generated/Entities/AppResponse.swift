@@ -12,10 +12,11 @@ public struct AppResponse: Codable {
 	public var links: DocumentLinks
 
 	public enum IncludedItem: Codable {
+		case appEncryptionDeclaration(AppEncryptionDeclaration)
 		case ciProduct(CiProduct)
 		case betaGroup(BetaGroup)
 		case appStoreVersion(AppStoreVersion)
-		case preReleaseVersion(PreReleaseVersion)
+		case prereleaseVersion(PrereleaseVersion)
 		case betaAppLocalization(BetaAppLocalization)
 		case build(Build)
 		case betaLicenseAgreement(BetaLicenseAgreement)
@@ -35,18 +36,21 @@ public struct AppResponse: Codable {
 		case appEvent(AppEvent)
 		case reviewSubmission(ReviewSubmission)
 		case subscriptionGracePeriod(SubscriptionGracePeriod)
+		case gameCenterDetail(GameCenterDetail)
 		case appStoreVersionExperimentV2(AppStoreVersionExperimentV2)
 
 		public init(from decoder: Decoder) throws {
 			let container = try decoder.singleValueContainer()
-			if let value = try? container.decode(CiProduct.self) {
+			if let value = try? container.decode(AppEncryptionDeclaration.self) {
+				self = .appEncryptionDeclaration(value)
+			} else if let value = try? container.decode(CiProduct.self) {
 				self = .ciProduct(value)
 			} else if let value = try? container.decode(BetaGroup.self) {
 				self = .betaGroup(value)
 			} else if let value = try? container.decode(AppStoreVersion.self) {
 				self = .appStoreVersion(value)
-			} else if let value = try? container.decode(PreReleaseVersion.self) {
-				self = .preReleaseVersion(value)
+			} else if let value = try? container.decode(PrereleaseVersion.self) {
+				self = .prereleaseVersion(value)
 			} else if let value = try? container.decode(BetaAppLocalization.self) {
 				self = .betaAppLocalization(value)
 			} else if let value = try? container.decode(Build.self) {
@@ -85,6 +89,8 @@ public struct AppResponse: Codable {
 				self = .reviewSubmission(value)
 			} else if let value = try? container.decode(SubscriptionGracePeriod.self) {
 				self = .subscriptionGracePeriod(value)
+			} else if let value = try? container.decode(GameCenterDetail.self) {
+				self = .gameCenterDetail(value)
 			} else if let value = try? container.decode(AppStoreVersionExperimentV2.self) {
 				self = .appStoreVersionExperimentV2(value)
 			} else {
@@ -95,10 +101,11 @@ public struct AppResponse: Codable {
 		public func encode(to encoder: Encoder) throws {
 			var container = encoder.singleValueContainer()
 			switch self {
+			case .appEncryptionDeclaration(let value): try container.encode(value)
 			case .ciProduct(let value): try container.encode(value)
 			case .betaGroup(let value): try container.encode(value)
 			case .appStoreVersion(let value): try container.encode(value)
-			case .preReleaseVersion(let value): try container.encode(value)
+			case .prereleaseVersion(let value): try container.encode(value)
 			case .betaAppLocalization(let value): try container.encode(value)
 			case .build(let value): try container.encode(value)
 			case .betaLicenseAgreement(let value): try container.encode(value)
@@ -118,6 +125,7 @@ public struct AppResponse: Codable {
 			case .appEvent(let value): try container.encode(value)
 			case .reviewSubmission(let value): try container.encode(value)
 			case .subscriptionGracePeriod(let value): try container.encode(value)
+			case .gameCenterDetail(let value): try container.encode(value)
 			case .appStoreVersionExperimentV2(let value): try container.encode(value)
 			}
 		}

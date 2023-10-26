@@ -16,7 +16,7 @@ extension APIEndpoint.V1.AppStoreVersions.WithID {
 		public let path: String
 
 		@available(*, deprecated, message: "Deprecated")
-		public func get(fieldsAgeRatingDeclarations: [FieldsAgeRatingDeclarations]? = nil) -> Request<AppStoreConnect_Swift_SDK.AgeRatingDeclarationResponse> {
+		public func get(fieldsAgeRatingDeclarations: [FieldsAgeRatingDeclarations]? = nil) -> Request<AppStoreConnect_Swift_SDK.AgeRatingDeclarationWithoutIncludesResponse> {
 			.get(path, query: makeGetQuery(fieldsAgeRatingDeclarations))
 		}
 

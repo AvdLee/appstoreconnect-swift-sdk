@@ -15,7 +15,7 @@ extension APIEndpoint.V1.Apps.WithID {
 		/// Path: `/v1/apps/{id}/builds`
 		public let path: String
 
-		public func get(fieldsBuilds: [FieldsBuilds]? = nil, limit: Int? = nil) -> Request<AppStoreConnect_Swift_SDK.BuildsResponse> {
+		public func get(fieldsBuilds: [FieldsBuilds]? = nil, limit: Int? = nil) -> Request<AppStoreConnect_Swift_SDK.BuildsWithoutIncludesResponse> {
 			.get(path, query: makeGetQuery(fieldsBuilds, limit))
 		}
 
