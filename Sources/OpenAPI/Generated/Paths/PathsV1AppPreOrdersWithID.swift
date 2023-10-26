@@ -13,6 +13,7 @@ extension APIEndpoint.V1.AppPreOrders {
 		/// Path: `/v1/appPreOrders/{id}`
 		public let path: String
 
+		@available(*, deprecated, message: "Deprecated")
 		public func get(fieldsAppPreOrders: [FieldsAppPreOrders]? = nil, include: [Include]? = nil) -> Request<AppStoreConnect_Swift_SDK.AppPreOrderResponse> {
 			Request(path: path, method: "GET", query: makeGetQuery(fieldsAppPreOrders, include), id: "appPreOrders-get_instance")
 		}
@@ -34,10 +35,12 @@ extension APIEndpoint.V1.AppPreOrders {
 			case app
 		}
 
+		@available(*, deprecated, message: "Deprecated")
 		public func patch(_ body: AppStoreConnect_Swift_SDK.AppPreOrderUpdateRequest) -> Request<AppStoreConnect_Swift_SDK.AppPreOrderResponse> {
 			Request(path: path, method: "PATCH", body: body, id: "appPreOrders-update_instance")
 		}
 
+		@available(*, deprecated, message: "Deprecated")
 		public var delete: Request<Void> {
 			Request(path: path, method: "DELETE", id: "appPreOrders-delete_instance")
 		}

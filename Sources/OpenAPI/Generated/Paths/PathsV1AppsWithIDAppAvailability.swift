@@ -13,6 +13,7 @@ extension APIEndpoint.V1.Apps.WithID {
 		/// Path: `/v1/apps/{id}/appAvailability`
 		public let path: String
 
+		@available(*, deprecated, message: "Deprecated")
 		public func get(parameters: GetParameters? = nil) -> Request<AppStoreConnect_Swift_SDK.AppAvailabilityResponse> {
 			Request(path: path, method: "GET", query: parameters?.asQuery, id: "apps-appAvailability-get_to_one_related")
 		}

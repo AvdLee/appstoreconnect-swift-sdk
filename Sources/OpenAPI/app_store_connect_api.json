@@ -2,7 +2,7 @@
   "openapi": "3.0.1",
   "info": {
     "title": "App Store Connect API",
-    "version": "3.0",
+    "version": "3.1",
     "x-platform": "app_store_connect_api"
   },
   "servers": [
@@ -466,6 +466,7 @@
           "AppAvailabilities"
         ],
         "operationId": "appAvailabilities-create_instance",
+        "deprecated": true,
         "requestBody": {
           "description": "AppAvailability representation",
           "content": {
@@ -527,6 +528,7 @@
           "AppAvailabilities"
         ],
         "operationId": "appAvailabilities-get_instance",
+        "deprecated": true,
         "parameters": [
           {
             "name": "fields[appAvailabilities]",
@@ -6083,6 +6085,7 @@
           "AppPreOrders"
         ],
         "operationId": "appPreOrders-create_instance",
+        "deprecated": true,
         "requestBody": {
           "description": "AppPreOrder representation",
           "content": {
@@ -6144,6 +6147,7 @@
           "AppPreOrders"
         ],
         "operationId": "appPreOrders-get_instance",
+        "deprecated": true,
         "parameters": [
           {
             "name": "fields[appPreOrders]",
@@ -6230,6 +6234,7 @@
           "AppPreOrders"
         ],
         "operationId": "appPreOrders-update_instance",
+        "deprecated": true,
         "requestBody": {
           "description": "AppPreOrder representation",
           "content": {
@@ -6299,6 +6304,7 @@
           "AppPreOrders"
         ],
         "operationId": "appPreOrders-delete_instance",
+        "deprecated": true,
         "responses": {
           "400": {
             "description": "Parameter error(s)",
@@ -12089,7 +12095,8 @@
             },
             "style": "form",
             "explode": false,
-            "required": false
+            "required": false,
+            "deprecated": true
           },
           {
             "name": "fields[customerReviews]",
@@ -12405,7 +12412,8 @@
             },
             "style": "form",
             "explode": false,
-            "required": false
+            "required": false,
+            "deprecated": true
           },
           {
             "name": "fields[appStoreVersionExperiments]",
@@ -13176,7 +13184,8 @@
             },
             "style": "form",
             "explode": false,
-            "required": false
+            "required": false,
+            "deprecated": true
           },
           {
             "name": "fields[customerReviews]",
@@ -13492,7 +13501,8 @@
             },
             "style": "form",
             "explode": false,
-            "required": false
+            "required": false,
+            "deprecated": true
           },
           {
             "name": "fields[appStoreVersionExperiments]",
@@ -30140,6 +30150,1393 @@
         }
       ]
     },
+    "/v1/gameCenterMatchmakingQueues": {
+      "get": {
+        "tags": [
+          "GameCenterMatchmakingQueues"
+        ],
+        "operationId": "gameCenterMatchmakingQueues-get_collection",
+        "parameters": [
+          {
+            "name": "fields[gameCenterMatchmakingQueues]",
+            "in": "query",
+            "description": "the fields to include for returned resources of type gameCenterMatchmakingQueues",
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "string",
+                "enum": [
+                  "experimentRuleSet",
+                  "referenceName",
+                  "ruleSet"
+                ]
+              }
+            },
+            "style": "form",
+            "explode": false,
+            "required": false
+          },
+          {
+            "name": "limit",
+            "in": "query",
+            "description": "maximum resources per page",
+            "schema": {
+              "type": "integer",
+              "maximum": 200
+            },
+            "style": "form"
+          },
+          {
+            "name": "include",
+            "in": "query",
+            "description": "comma-separated list of relationships to include",
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "string",
+                "enum": [
+                  "experimentRuleSet",
+                  "ruleSet"
+                ]
+              }
+            },
+            "style": "form",
+            "explode": false,
+            "required": false
+          }
+        ],
+        "responses": {
+          "400": {
+            "description": "Parameter error(s)",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "200": {
+            "description": "List of GameCenterMatchmakingQueues",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/GameCenterMatchmakingQueuesResponse"
+                }
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "GameCenterMatchmakingQueues"
+        ],
+        "operationId": "gameCenterMatchmakingQueues-create_instance",
+        "requestBody": {
+          "description": "GameCenterMatchmakingQueue representation",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/GameCenterMatchmakingQueueCreateRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "400": {
+            "description": "Parameter error(s)",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "201": {
+            "description": "Single GameCenterMatchmakingQueue",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/GameCenterMatchmakingQueueResponse"
+                }
+              }
+            }
+          },
+          "409": {
+            "description": "Request entity error(s)",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/v1/gameCenterMatchmakingQueues/{id}": {
+      "get": {
+        "tags": [
+          "GameCenterMatchmakingQueues"
+        ],
+        "operationId": "gameCenterMatchmakingQueues-get_instance",
+        "parameters": [
+          {
+            "name": "fields[gameCenterMatchmakingQueues]",
+            "in": "query",
+            "description": "the fields to include for returned resources of type gameCenterMatchmakingQueues",
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "string",
+                "enum": [
+                  "experimentRuleSet",
+                  "referenceName",
+                  "ruleSet"
+                ]
+              }
+            },
+            "style": "form",
+            "explode": false,
+            "required": false
+          },
+          {
+            "name": "include",
+            "in": "query",
+            "description": "comma-separated list of relationships to include",
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "string",
+                "enum": [
+                  "experimentRuleSet",
+                  "ruleSet"
+                ]
+              }
+            },
+            "style": "form",
+            "explode": false,
+            "required": false
+          }
+        ],
+        "responses": {
+          "400": {
+            "description": "Parameter error(s)",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not found error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "200": {
+            "description": "Single GameCenterMatchmakingQueue",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/GameCenterMatchmakingQueueResponse"
+                }
+              }
+            }
+          }
+        }
+      },
+      "patch": {
+        "tags": [
+          "GameCenterMatchmakingQueues"
+        ],
+        "operationId": "gameCenterMatchmakingQueues-update_instance",
+        "requestBody": {
+          "description": "GameCenterMatchmakingQueue representation",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/GameCenterMatchmakingQueueUpdateRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "400": {
+            "description": "Parameter error(s)",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not found error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "200": {
+            "description": "Single GameCenterMatchmakingQueue",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/GameCenterMatchmakingQueueResponse"
+                }
+              }
+            }
+          },
+          "409": {
+            "description": "Request entity error(s)",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "GameCenterMatchmakingQueues"
+        ],
+        "operationId": "gameCenterMatchmakingQueues-delete_instance",
+        "responses": {
+          "400": {
+            "description": "Parameter error(s)",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not found error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "409": {
+            "description": "Request entity error(s)",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "204": {
+            "description": "Success (no content)"
+          }
+        }
+      },
+      "parameters": [
+        {
+          "name": "id",
+          "in": "path",
+          "description": "the id of the requested resource",
+          "schema": {
+            "type": "string"
+          },
+          "style": "simple",
+          "required": true
+        }
+      ]
+    },
+    "/v1/gameCenterMatchmakingRuleSetTests": {
+      "post": {
+        "tags": [
+          "GameCenterMatchmakingRuleSetTests"
+        ],
+        "operationId": "gameCenterMatchmakingRuleSetTests-create_instance",
+        "requestBody": {
+          "description": "GameCenterMatchmakingRuleSetTest representation",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/GameCenterMatchmakingRuleSetTestCreateRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "400": {
+            "description": "Parameter error(s)",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "201": {
+            "description": "Single GameCenterMatchmakingRuleSetTest",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/GameCenterMatchmakingRuleSetTestResponse"
+                }
+              }
+            }
+          },
+          "409": {
+            "description": "Request entity error(s)",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/v1/gameCenterMatchmakingRuleSets": {
+      "get": {
+        "tags": [
+          "GameCenterMatchmakingRuleSets"
+        ],
+        "operationId": "gameCenterMatchmakingRuleSets-get_collection",
+        "parameters": [
+          {
+            "name": "fields[gameCenterMatchmakingRuleSets]",
+            "in": "query",
+            "description": "the fields to include for returned resources of type gameCenterMatchmakingRuleSets",
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "string",
+                "enum": [
+                  "matchmakingQueues",
+                  "maxPlayers",
+                  "minPlayers",
+                  "referenceName",
+                  "ruleLanguageVersion",
+                  "rules",
+                  "teams"
+                ]
+              }
+            },
+            "style": "form",
+            "explode": false,
+            "required": false
+          },
+          {
+            "name": "limit",
+            "in": "query",
+            "description": "maximum resources per page",
+            "schema": {
+              "type": "integer",
+              "maximum": 200
+            },
+            "style": "form"
+          },
+          {
+            "name": "include",
+            "in": "query",
+            "description": "comma-separated list of relationships to include",
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "string",
+                "enum": [
+                  "matchmakingQueues",
+                  "rules",
+                  "teams"
+                ]
+              }
+            },
+            "style": "form",
+            "explode": false,
+            "required": false
+          },
+          {
+            "name": "fields[gameCenterMatchmakingQueues]",
+            "in": "query",
+            "description": "the fields to include for returned resources of type gameCenterMatchmakingQueues",
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "string",
+                "enum": [
+                  "experimentRuleSet",
+                  "referenceName",
+                  "ruleSet"
+                ]
+              }
+            },
+            "style": "form",
+            "explode": false,
+            "required": false
+          },
+          {
+            "name": "fields[gameCenterMatchmakingTeams]",
+            "in": "query",
+            "description": "the fields to include for returned resources of type gameCenterMatchmakingTeams",
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "string",
+                "enum": [
+                  "maxPlayers",
+                  "minPlayers",
+                  "referenceName",
+                  "ruleSet"
+                ]
+              }
+            },
+            "style": "form",
+            "explode": false,
+            "required": false
+          },
+          {
+            "name": "fields[gameCenterMatchmakingRules]",
+            "in": "query",
+            "description": "the fields to include for returned resources of type gameCenterMatchmakingRules",
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "string",
+                "enum": [
+                  "description",
+                  "expression",
+                  "referenceName",
+                  "ruleSet",
+                  "type",
+                  "weight"
+                ]
+              }
+            },
+            "style": "form",
+            "explode": false,
+            "required": false
+          },
+          {
+            "name": "limit[matchmakingQueues]",
+            "in": "query",
+            "description": "maximum number of related matchmakingQueues returned (when they are included)",
+            "schema": {
+              "type": "integer",
+              "maximum": 50
+            },
+            "style": "form",
+            "required": false
+          },
+          {
+            "name": "limit[rules]",
+            "in": "query",
+            "description": "maximum number of related rules returned (when they are included)",
+            "schema": {
+              "type": "integer",
+              "maximum": 50
+            },
+            "style": "form",
+            "required": false
+          },
+          {
+            "name": "limit[teams]",
+            "in": "query",
+            "description": "maximum number of related teams returned (when they are included)",
+            "schema": {
+              "type": "integer",
+              "maximum": 50
+            },
+            "style": "form",
+            "required": false
+          }
+        ],
+        "responses": {
+          "400": {
+            "description": "Parameter error(s)",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "200": {
+            "description": "List of GameCenterMatchmakingRuleSets",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/GameCenterMatchmakingRuleSetsResponse"
+                }
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "GameCenterMatchmakingRuleSets"
+        ],
+        "operationId": "gameCenterMatchmakingRuleSets-create_instance",
+        "requestBody": {
+          "description": "GameCenterMatchmakingRuleSet representation",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/GameCenterMatchmakingRuleSetCreateRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "400": {
+            "description": "Parameter error(s)",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "201": {
+            "description": "Single GameCenterMatchmakingRuleSet",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/GameCenterMatchmakingRuleSetResponse"
+                }
+              }
+            }
+          },
+          "409": {
+            "description": "Request entity error(s)",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/v1/gameCenterMatchmakingRuleSets/{id}": {
+      "get": {
+        "tags": [
+          "GameCenterMatchmakingRuleSets"
+        ],
+        "operationId": "gameCenterMatchmakingRuleSets-get_instance",
+        "parameters": [
+          {
+            "name": "fields[gameCenterMatchmakingRuleSets]",
+            "in": "query",
+            "description": "the fields to include for returned resources of type gameCenterMatchmakingRuleSets",
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "string",
+                "enum": [
+                  "matchmakingQueues",
+                  "maxPlayers",
+                  "minPlayers",
+                  "referenceName",
+                  "ruleLanguageVersion",
+                  "rules",
+                  "teams"
+                ]
+              }
+            },
+            "style": "form",
+            "explode": false,
+            "required": false
+          },
+          {
+            "name": "include",
+            "in": "query",
+            "description": "comma-separated list of relationships to include",
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "string",
+                "enum": [
+                  "matchmakingQueues",
+                  "rules",
+                  "teams"
+                ]
+              }
+            },
+            "style": "form",
+            "explode": false,
+            "required": false
+          },
+          {
+            "name": "fields[gameCenterMatchmakingQueues]",
+            "in": "query",
+            "description": "the fields to include for returned resources of type gameCenterMatchmakingQueues",
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "string",
+                "enum": [
+                  "experimentRuleSet",
+                  "referenceName",
+                  "ruleSet"
+                ]
+              }
+            },
+            "style": "form",
+            "explode": false,
+            "required": false
+          },
+          {
+            "name": "fields[gameCenterMatchmakingTeams]",
+            "in": "query",
+            "description": "the fields to include for returned resources of type gameCenterMatchmakingTeams",
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "string",
+                "enum": [
+                  "maxPlayers",
+                  "minPlayers",
+                  "referenceName",
+                  "ruleSet"
+                ]
+              }
+            },
+            "style": "form",
+            "explode": false,
+            "required": false
+          },
+          {
+            "name": "fields[gameCenterMatchmakingRules]",
+            "in": "query",
+            "description": "the fields to include for returned resources of type gameCenterMatchmakingRules",
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "string",
+                "enum": [
+                  "description",
+                  "expression",
+                  "referenceName",
+                  "ruleSet",
+                  "type",
+                  "weight"
+                ]
+              }
+            },
+            "style": "form",
+            "explode": false,
+            "required": false
+          },
+          {
+            "name": "limit[matchmakingQueues]",
+            "in": "query",
+            "description": "maximum number of related matchmakingQueues returned (when they are included)",
+            "schema": {
+              "type": "integer",
+              "maximum": 50
+            },
+            "style": "form",
+            "required": false
+          },
+          {
+            "name": "limit[rules]",
+            "in": "query",
+            "description": "maximum number of related rules returned (when they are included)",
+            "schema": {
+              "type": "integer",
+              "maximum": 50
+            },
+            "style": "form",
+            "required": false
+          },
+          {
+            "name": "limit[teams]",
+            "in": "query",
+            "description": "maximum number of related teams returned (when they are included)",
+            "schema": {
+              "type": "integer",
+              "maximum": 50
+            },
+            "style": "form",
+            "required": false
+          }
+        ],
+        "responses": {
+          "400": {
+            "description": "Parameter error(s)",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not found error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "200": {
+            "description": "Single GameCenterMatchmakingRuleSet",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/GameCenterMatchmakingRuleSetResponse"
+                }
+              }
+            }
+          }
+        }
+      },
+      "patch": {
+        "tags": [
+          "GameCenterMatchmakingRuleSets"
+        ],
+        "operationId": "gameCenterMatchmakingRuleSets-update_instance",
+        "requestBody": {
+          "description": "GameCenterMatchmakingRuleSet representation",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/GameCenterMatchmakingRuleSetUpdateRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "400": {
+            "description": "Parameter error(s)",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not found error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "200": {
+            "description": "Single GameCenterMatchmakingRuleSet",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/GameCenterMatchmakingRuleSetResponse"
+                }
+              }
+            }
+          },
+          "409": {
+            "description": "Request entity error(s)",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "GameCenterMatchmakingRuleSets"
+        ],
+        "operationId": "gameCenterMatchmakingRuleSets-delete_instance",
+        "responses": {
+          "400": {
+            "description": "Parameter error(s)",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not found error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "409": {
+            "description": "Request entity error(s)",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "204": {
+            "description": "Success (no content)"
+          }
+        }
+      },
+      "parameters": [
+        {
+          "name": "id",
+          "in": "path",
+          "description": "the id of the requested resource",
+          "schema": {
+            "type": "string"
+          },
+          "style": "simple",
+          "required": true
+        }
+      ]
+    },
+    "/v1/gameCenterMatchmakingRules": {
+      "post": {
+        "tags": [
+          "GameCenterMatchmakingRules"
+        ],
+        "operationId": "gameCenterMatchmakingRules-create_instance",
+        "requestBody": {
+          "description": "GameCenterMatchmakingRule representation",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/GameCenterMatchmakingRuleCreateRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "400": {
+            "description": "Parameter error(s)",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "201": {
+            "description": "Single GameCenterMatchmakingRule",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/GameCenterMatchmakingRuleResponse"
+                }
+              }
+            }
+          },
+          "409": {
+            "description": "Request entity error(s)",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/v1/gameCenterMatchmakingRules/{id}": {
+      "patch": {
+        "tags": [
+          "GameCenterMatchmakingRules"
+        ],
+        "operationId": "gameCenterMatchmakingRules-update_instance",
+        "requestBody": {
+          "description": "GameCenterMatchmakingRule representation",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/GameCenterMatchmakingRuleUpdateRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "400": {
+            "description": "Parameter error(s)",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not found error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "200": {
+            "description": "Single GameCenterMatchmakingRule",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/GameCenterMatchmakingRuleResponse"
+                }
+              }
+            }
+          },
+          "409": {
+            "description": "Request entity error(s)",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "GameCenterMatchmakingRules"
+        ],
+        "operationId": "gameCenterMatchmakingRules-delete_instance",
+        "responses": {
+          "400": {
+            "description": "Parameter error(s)",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not found error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "409": {
+            "description": "Request entity error(s)",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "204": {
+            "description": "Success (no content)"
+          }
+        }
+      },
+      "parameters": [
+        {
+          "name": "id",
+          "in": "path",
+          "description": "the id of the requested resource",
+          "schema": {
+            "type": "string"
+          },
+          "style": "simple",
+          "required": true
+        }
+      ]
+    },
+    "/v1/gameCenterMatchmakingTeams": {
+      "post": {
+        "tags": [
+          "GameCenterMatchmakingTeams"
+        ],
+        "operationId": "gameCenterMatchmakingTeams-create_instance",
+        "requestBody": {
+          "description": "GameCenterMatchmakingTeam representation",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/GameCenterMatchmakingTeamCreateRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "400": {
+            "description": "Parameter error(s)",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "201": {
+            "description": "Single GameCenterMatchmakingTeam",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/GameCenterMatchmakingTeamResponse"
+                }
+              }
+            }
+          },
+          "409": {
+            "description": "Request entity error(s)",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/v1/gameCenterMatchmakingTeams/{id}": {
+      "patch": {
+        "tags": [
+          "GameCenterMatchmakingTeams"
+        ],
+        "operationId": "gameCenterMatchmakingTeams-update_instance",
+        "requestBody": {
+          "description": "GameCenterMatchmakingTeam representation",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/GameCenterMatchmakingTeamUpdateRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "400": {
+            "description": "Parameter error(s)",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not found error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "200": {
+            "description": "Single GameCenterMatchmakingTeam",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/GameCenterMatchmakingTeamResponse"
+                }
+              }
+            }
+          },
+          "409": {
+            "description": "Request entity error(s)",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "GameCenterMatchmakingTeams"
+        ],
+        "operationId": "gameCenterMatchmakingTeams-delete_instance",
+        "responses": {
+          "400": {
+            "description": "Parameter error(s)",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not found error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "409": {
+            "description": "Request entity error(s)",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "204": {
+            "description": "Success (no content)"
+          }
+        }
+      },
+      "parameters": [
+        {
+          "name": "id",
+          "in": "path",
+          "description": "the id of the requested resource",
+          "schema": {
+            "type": "string"
+          },
+          "style": "simple",
+          "required": true
+        }
+      ]
+    },
     "/v1/inAppPurchaseAppStoreReviewScreenshots": {
       "post": {
         "tags": [
@@ -40833,6 +42230,7 @@
           "AppAvailabilities"
         ],
         "operationId": "appAvailabilities-availableTerritories-get_to_many_related",
+        "deprecated": true,
         "parameters": [
           {
             "name": "fields[territories]",
@@ -51131,6 +52529,7 @@
           "Apps"
         ],
         "operationId": "apps-appAvailability-get_to_one_related",
+        "deprecated": true,
         "parameters": [
           {
             "name": "fields[appAvailabilities]",
@@ -56763,6 +58162,7 @@
           "Apps"
         ],
         "operationId": "apps-preOrder-get_to_one_related",
+        "deprecated": true,
         "parameters": [
           {
             "name": "fields[appPreOrders]",
@@ -77103,6 +78503,367 @@
         }
       ]
     },
+    "/v1/gameCenterMatchmakingRuleSets/{id}/relationships/matchmakingQueues": {
+      "parameters": [
+        {
+          "name": "id",
+          "in": "path",
+          "description": "the id of the requested resource",
+          "schema": {
+            "type": "string"
+          },
+          "style": "simple",
+          "required": true
+        }
+      ]
+    },
+    "/v1/gameCenterMatchmakingRuleSets/{id}/matchmakingQueues": {
+      "get": {
+        "tags": [
+          "GameCenterMatchmakingRuleSets"
+        ],
+        "operationId": "gameCenterMatchmakingRuleSets-matchmakingQueues-get_to_many_related",
+        "parameters": [
+          {
+            "name": "fields[gameCenterMatchmakingQueues]",
+            "in": "query",
+            "description": "the fields to include for returned resources of type gameCenterMatchmakingQueues",
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "string",
+                "enum": [
+                  "experimentRuleSet",
+                  "referenceName",
+                  "ruleSet"
+                ]
+              }
+            },
+            "style": "form",
+            "explode": false
+          },
+          {
+            "name": "fields[gameCenterMatchmakingRuleSets]",
+            "in": "query",
+            "description": "the fields to include for returned resources of type gameCenterMatchmakingRuleSets",
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "string",
+                "enum": [
+                  "matchmakingQueues",
+                  "maxPlayers",
+                  "minPlayers",
+                  "referenceName",
+                  "ruleLanguageVersion",
+                  "rules",
+                  "teams"
+                ]
+              }
+            },
+            "style": "form",
+            "explode": false
+          },
+          {
+            "name": "limit",
+            "in": "query",
+            "description": "maximum resources per page",
+            "schema": {
+              "type": "integer",
+              "maximum": 200
+            },
+            "style": "form"
+          },
+          {
+            "name": "include",
+            "in": "query",
+            "description": "comma-separated list of relationships to include",
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "string",
+                "enum": [
+                  "experimentRuleSet",
+                  "ruleSet"
+                ]
+              }
+            },
+            "style": "form",
+            "explode": false
+          }
+        ],
+        "responses": {
+          "400": {
+            "description": "Parameter error(s)",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not found error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "200": {
+            "description": "List of GameCenterMatchmakingQueues",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/GameCenterMatchmakingQueuesResponse"
+                }
+              }
+            }
+          }
+        }
+      },
+      "parameters": [
+        {
+          "name": "id",
+          "in": "path",
+          "description": "the id of the requested resource",
+          "schema": {
+            "type": "string"
+          },
+          "style": "simple",
+          "required": true
+        }
+      ]
+    },
+    "/v1/gameCenterMatchmakingRuleSets/{id}/relationships/rules": {
+      "parameters": [
+        {
+          "name": "id",
+          "in": "path",
+          "description": "the id of the requested resource",
+          "schema": {
+            "type": "string"
+          },
+          "style": "simple",
+          "required": true
+        }
+      ]
+    },
+    "/v1/gameCenterMatchmakingRuleSets/{id}/rules": {
+      "get": {
+        "tags": [
+          "GameCenterMatchmakingRuleSets"
+        ],
+        "operationId": "gameCenterMatchmakingRuleSets-rules-get_to_many_related",
+        "parameters": [
+          {
+            "name": "fields[gameCenterMatchmakingRules]",
+            "in": "query",
+            "description": "the fields to include for returned resources of type gameCenterMatchmakingRules",
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "string",
+                "enum": [
+                  "description",
+                  "expression",
+                  "referenceName",
+                  "ruleSet",
+                  "type",
+                  "weight"
+                ]
+              }
+            },
+            "style": "form",
+            "explode": false
+          },
+          {
+            "name": "limit",
+            "in": "query",
+            "description": "maximum resources per page",
+            "schema": {
+              "type": "integer",
+              "maximum": 200
+            },
+            "style": "form"
+          }
+        ],
+        "responses": {
+          "400": {
+            "description": "Parameter error(s)",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not found error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "200": {
+            "description": "List of GameCenterMatchmakingRules",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/GameCenterMatchmakingRulesResponse"
+                }
+              }
+            }
+          }
+        }
+      },
+      "parameters": [
+        {
+          "name": "id",
+          "in": "path",
+          "description": "the id of the requested resource",
+          "schema": {
+            "type": "string"
+          },
+          "style": "simple",
+          "required": true
+        }
+      ]
+    },
+    "/v1/gameCenterMatchmakingRuleSets/{id}/relationships/teams": {
+      "parameters": [
+        {
+          "name": "id",
+          "in": "path",
+          "description": "the id of the requested resource",
+          "schema": {
+            "type": "string"
+          },
+          "style": "simple",
+          "required": true
+        }
+      ]
+    },
+    "/v1/gameCenterMatchmakingRuleSets/{id}/teams": {
+      "get": {
+        "tags": [
+          "GameCenterMatchmakingRuleSets"
+        ],
+        "operationId": "gameCenterMatchmakingRuleSets-teams-get_to_many_related",
+        "parameters": [
+          {
+            "name": "fields[gameCenterMatchmakingTeams]",
+            "in": "query",
+            "description": "the fields to include for returned resources of type gameCenterMatchmakingTeams",
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "string",
+                "enum": [
+                  "maxPlayers",
+                  "minPlayers",
+                  "referenceName",
+                  "ruleSet"
+                ]
+              }
+            },
+            "style": "form",
+            "explode": false
+          },
+          {
+            "name": "limit",
+            "in": "query",
+            "description": "maximum resources per page",
+            "schema": {
+              "type": "integer",
+              "maximum": 200
+            },
+            "style": "form"
+          }
+        ],
+        "responses": {
+          "400": {
+            "description": "Parameter error(s)",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not found error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "200": {
+            "description": "List of GameCenterMatchmakingTeams",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/GameCenterMatchmakingTeamsResponse"
+                }
+              }
+            }
+          }
+        }
+      },
+      "parameters": [
+        {
+          "name": "id",
+          "in": "path",
+          "description": "the id of the requested resource",
+          "schema": {
+            "type": "string"
+          },
+          "style": "simple",
+          "required": true
+        }
+      ]
+    },
     "/v1/inAppPurchaseAvailabilities/{id}/relationships/availableTerritories": {
       "parameters": [
         {
@@ -84341,6 +86102,2012 @@
           "required": true
         }
       ]
+    },
+    "/v1/apps/{id}/metrics/betaTesterUsages": {
+      "get": {
+        "tags": [
+          "Apps",
+          "Metrics"
+        ],
+        "operationId": "apps-betaTesterUsages-get_metrics",
+        "parameters": [
+          {
+            "name": "limit",
+            "in": "query",
+            "description": "maximum number of groups to return per page",
+            "schema": {
+              "type": "integer",
+              "maximum": 200
+            },
+            "style": "form"
+          },
+          {
+            "name": "groupBy",
+            "in": "query",
+            "description": "the dimension by which to group the results",
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "string",
+                "enum": [
+                  "betaTesters"
+                ]
+              }
+            },
+            "style": "form",
+            "explode": false
+          },
+          {
+            "name": "filter[betaTesters]",
+            "in": "query",
+            "description": "filter by 'betaTesters' relationship dimension",
+            "schema": {
+              "type": "string"
+            },
+            "style": "form",
+            "explode": false
+          },
+          {
+            "name": "period",
+            "in": "query",
+            "description": "the duration of the reporting period",
+            "schema": {
+              "type": "string"
+            },
+            "style": "form",
+            "explode": false,
+            "examples": {
+              "PTnM": {
+                "value": "PT10M"
+              },
+              "PnDTnHnMn.nS": {
+                "value": "P7DT10H10M10.5S"
+              },
+              "PnD": {
+                "value": "P7D"
+              },
+              "PTn.nS": {
+                "value": "PT10.5S"
+              },
+              "PTnH": {
+                "value": "PT10H"
+              }
+            }
+          }
+        ],
+        "responses": {
+          "400": {
+            "description": "Parameter error(s)",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not found error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "200": {
+            "description": "Metrics data response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AppsBetaTesterUsagesV1MetricResponse"
+                }
+              }
+            }
+          }
+        }
+      },
+      "parameters": [
+        {
+          "name": "id",
+          "in": "path",
+          "description": "the id of the requested resource",
+          "schema": {
+            "type": "string"
+          },
+          "style": "simple",
+          "required": true
+        }
+      ]
+    },
+    "/v1/betaGroups/{id}/metrics/betaTesterUsages": {
+      "get": {
+        "tags": [
+          "BetaGroups",
+          "Metrics"
+        ],
+        "operationId": "betaGroups-betaTesterUsages-get_metrics",
+        "parameters": [
+          {
+            "name": "limit",
+            "in": "query",
+            "description": "maximum number of groups to return per page",
+            "schema": {
+              "type": "integer",
+              "maximum": 200
+            },
+            "style": "form"
+          },
+          {
+            "name": "groupBy",
+            "in": "query",
+            "description": "the dimension by which to group the results",
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "string",
+                "enum": [
+                  "betaTesters"
+                ]
+              }
+            },
+            "style": "form",
+            "explode": false
+          },
+          {
+            "name": "filter[betaTesters]",
+            "in": "query",
+            "description": "filter by 'betaTesters' relationship dimension",
+            "schema": {
+              "type": "string"
+            },
+            "style": "form",
+            "explode": false
+          },
+          {
+            "name": "period",
+            "in": "query",
+            "description": "the duration of the reporting period",
+            "schema": {
+              "type": "string"
+            },
+            "style": "form",
+            "explode": false,
+            "examples": {
+              "PTnM": {
+                "value": "PT10M"
+              },
+              "PnDTnHnMn.nS": {
+                "value": "P7DT10H10M10.5S"
+              },
+              "PnD": {
+                "value": "P7D"
+              },
+              "PTn.nS": {
+                "value": "PT10.5S"
+              },
+              "PTnH": {
+                "value": "PT10H"
+              }
+            }
+          }
+        ],
+        "responses": {
+          "400": {
+            "description": "Parameter error(s)",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not found error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "200": {
+            "description": "Metrics data response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AppsBetaTesterUsagesV1MetricResponse"
+                }
+              }
+            }
+          }
+        }
+      },
+      "parameters": [
+        {
+          "name": "id",
+          "in": "path",
+          "description": "the id of the requested resource",
+          "schema": {
+            "type": "string"
+          },
+          "style": "simple",
+          "required": true
+        }
+      ]
+    },
+    "/v1/betaTesters/{id}/metrics/betaTesterUsages": {
+      "get": {
+        "tags": [
+          "BetaTesters",
+          "Metrics"
+        ],
+        "operationId": "betaTesters-betaTesterUsages-get_metrics",
+        "parameters": [
+          {
+            "name": "limit",
+            "in": "query",
+            "description": "maximum number of groups to return per page",
+            "schema": {
+              "type": "integer",
+              "maximum": 200
+            },
+            "style": "form"
+          },
+          {
+            "name": "filter[apps]",
+            "in": "query",
+            "description": "filter by 'apps' relationship dimension",
+            "schema": {
+              "type": "string"
+            },
+            "style": "form",
+            "explode": false
+          },
+          {
+            "name": "period",
+            "in": "query",
+            "description": "the duration of the reporting period",
+            "schema": {
+              "type": "string"
+            },
+            "style": "form",
+            "explode": false,
+            "examples": {
+              "PTnM": {
+                "value": "PT10M"
+              },
+              "PnDTnHnMn.nS": {
+                "value": "P7DT10H10M10.5S"
+              },
+              "PnD": {
+                "value": "P7D"
+              },
+              "PTn.nS": {
+                "value": "PT10.5S"
+              },
+              "PTnH": {
+                "value": "PT10H"
+              }
+            }
+          }
+        ],
+        "responses": {
+          "400": {
+            "description": "Parameter error(s)",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not found error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "200": {
+            "description": "Metrics data response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/BetaTesterUsagesV1MetricResponse"
+                }
+              }
+            }
+          }
+        }
+      },
+      "parameters": [
+        {
+          "name": "id",
+          "in": "path",
+          "description": "the id of the requested resource",
+          "schema": {
+            "type": "string"
+          },
+          "style": "simple",
+          "required": true
+        }
+      ]
+    },
+    "/v1/builds/{id}/metrics/betaBuildUsages": {
+      "get": {
+        "tags": [
+          "Builds",
+          "Metrics"
+        ],
+        "operationId": "builds-betaBuildUsages-get_metrics",
+        "parameters": [
+          {
+            "name": "limit",
+            "in": "query",
+            "description": "maximum number of groups to return per page",
+            "schema": {
+              "type": "integer",
+              "maximum": 200
+            },
+            "style": "form"
+          }
+        ],
+        "responses": {
+          "400": {
+            "description": "Parameter error(s)",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not found error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "200": {
+            "description": "Metrics data response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/BetaBuildUsagesV1MetricResponse"
+                }
+              }
+            }
+          }
+        }
+      },
+      "parameters": [
+        {
+          "name": "id",
+          "in": "path",
+          "description": "the id of the requested resource",
+          "schema": {
+            "type": "string"
+          },
+          "style": "simple",
+          "required": true
+        }
+      ]
+    },
+    "/v1/gameCenterDetails/{id}/metrics/classicMatchmakingRequests": {
+      "get": {
+        "tags": [
+          "GameCenterDetails",
+          "Metrics"
+        ],
+        "operationId": "gameCenterDetails-classicMatchmakingRequests-get_metrics",
+        "parameters": [
+          {
+            "name": "limit",
+            "in": "query",
+            "description": "maximum number of groups to return per page",
+            "schema": {
+              "type": "integer",
+              "maximum": 200
+            },
+            "style": "form"
+          },
+          {
+            "name": "granularity",
+            "in": "query",
+            "description": "the granularity of the per-group dataset",
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "string",
+                "enum": [
+                  "P1D",
+                  "PT1H",
+                  "PT15M"
+                ]
+              }
+            },
+            "style": "form",
+            "explode": false,
+            "required": true,
+            "examples": {
+              "PTnM": {
+                "value": "PT10M"
+              },
+              "PnDTnHnMn.nS": {
+                "value": "P7DT10H10M10.5S"
+              },
+              "PnD": {
+                "value": "P7D"
+              },
+              "PTn.nS": {
+                "value": "PT10.5S"
+              },
+              "PTnH": {
+                "value": "PT10H"
+              }
+            }
+          },
+          {
+            "name": "groupBy",
+            "in": "query",
+            "description": "the dimension by which to group the results",
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "string",
+                "enum": [
+                  "result"
+                ]
+              }
+            },
+            "style": "form",
+            "explode": false
+          },
+          {
+            "name": "filter[result]",
+            "in": "query",
+            "description": "filter by 'result' attribute dimension",
+            "schema": {
+              "type": "string",
+              "enum": [
+                "MATCHED",
+                "CANCELED",
+                "EXPIRED"
+              ]
+            },
+            "style": "form",
+            "explode": false
+          },
+          {
+            "name": "sort",
+            "in": "query",
+            "description": "comma-separated list of sort expressions; metrics will be sorted as specified",
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "string",
+                "enum": [
+                  "averageSecondsInQueue",
+                  "-averageSecondsInQueue",
+                  "count",
+                  "-count",
+                  "p50SecondsInQueue",
+                  "-p50SecondsInQueue",
+                  "p95SecondsInQueue",
+                  "-p95SecondsInQueue"
+                ]
+              }
+            },
+            "style": "form",
+            "explode": false
+          }
+        ],
+        "responses": {
+          "400": {
+            "description": "Parameter error(s)",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not found error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "200": {
+            "description": "Metrics data response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/GameCenterMatchmakingAppRequestsV1MetricResponse"
+                }
+              }
+            }
+          }
+        }
+      },
+      "parameters": [
+        {
+          "name": "id",
+          "in": "path",
+          "description": "the id of the requested resource",
+          "schema": {
+            "type": "string"
+          },
+          "style": "simple",
+          "required": true
+        }
+      ]
+    },
+    "/v1/gameCenterDetails/{id}/metrics/ruleBasedMatchmakingRequests": {
+      "get": {
+        "tags": [
+          "GameCenterDetails",
+          "Metrics"
+        ],
+        "operationId": "gameCenterDetails-ruleBasedMatchmakingRequests-get_metrics",
+        "parameters": [
+          {
+            "name": "limit",
+            "in": "query",
+            "description": "maximum number of groups to return per page",
+            "schema": {
+              "type": "integer",
+              "maximum": 200
+            },
+            "style": "form"
+          },
+          {
+            "name": "granularity",
+            "in": "query",
+            "description": "the granularity of the per-group dataset",
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "string",
+                "enum": [
+                  "P1D",
+                  "PT1H",
+                  "PT15M"
+                ]
+              }
+            },
+            "style": "form",
+            "explode": false,
+            "required": true,
+            "examples": {
+              "PTnM": {
+                "value": "PT10M"
+              },
+              "PnDTnHnMn.nS": {
+                "value": "P7DT10H10M10.5S"
+              },
+              "PnD": {
+                "value": "P7D"
+              },
+              "PTn.nS": {
+                "value": "PT10.5S"
+              },
+              "PTnH": {
+                "value": "PT10H"
+              }
+            }
+          },
+          {
+            "name": "groupBy",
+            "in": "query",
+            "description": "the dimension by which to group the results",
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "string",
+                "enum": [
+                  "result"
+                ]
+              }
+            },
+            "style": "form",
+            "explode": false
+          },
+          {
+            "name": "filter[result]",
+            "in": "query",
+            "description": "filter by 'result' attribute dimension",
+            "schema": {
+              "type": "string",
+              "enum": [
+                "MATCHED",
+                "CANCELED",
+                "EXPIRED"
+              ]
+            },
+            "style": "form",
+            "explode": false
+          },
+          {
+            "name": "sort",
+            "in": "query",
+            "description": "comma-separated list of sort expressions; metrics will be sorted as specified",
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "string",
+                "enum": [
+                  "averageSecondsInQueue",
+                  "-averageSecondsInQueue",
+                  "count",
+                  "-count",
+                  "p50SecondsInQueue",
+                  "-p50SecondsInQueue",
+                  "p95SecondsInQueue",
+                  "-p95SecondsInQueue"
+                ]
+              }
+            },
+            "style": "form",
+            "explode": false
+          }
+        ],
+        "responses": {
+          "400": {
+            "description": "Parameter error(s)",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not found error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "200": {
+            "description": "Metrics data response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/GameCenterMatchmakingAppRequestsV1MetricResponse"
+                }
+              }
+            }
+          }
+        }
+      },
+      "parameters": [
+        {
+          "name": "id",
+          "in": "path",
+          "description": "the id of the requested resource",
+          "schema": {
+            "type": "string"
+          },
+          "style": "simple",
+          "required": true
+        }
+      ]
+    },
+    "/v1/gameCenterMatchmakingQueues/{id}/metrics/experimentMatchmakingQueueSizes": {
+      "get": {
+        "tags": [
+          "GameCenterMatchmakingQueues",
+          "Metrics"
+        ],
+        "operationId": "gameCenterMatchmakingQueues-experimentMatchmakingQueueSizes-get_metrics",
+        "parameters": [
+          {
+            "name": "limit",
+            "in": "query",
+            "description": "maximum number of groups to return per page",
+            "schema": {
+              "type": "integer",
+              "maximum": 200
+            },
+            "style": "form"
+          },
+          {
+            "name": "granularity",
+            "in": "query",
+            "description": "the granularity of the per-group dataset",
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "string",
+                "enum": [
+                  "P1D",
+                  "PT1H",
+                  "PT15M"
+                ]
+              }
+            },
+            "style": "form",
+            "explode": false,
+            "required": true,
+            "examples": {
+              "PTnM": {
+                "value": "PT10M"
+              },
+              "PnDTnHnMn.nS": {
+                "value": "P7DT10H10M10.5S"
+              },
+              "PnD": {
+                "value": "P7D"
+              },
+              "PTn.nS": {
+                "value": "PT10.5S"
+              },
+              "PTnH": {
+                "value": "PT10H"
+              }
+            }
+          },
+          {
+            "name": "sort",
+            "in": "query",
+            "description": "comma-separated list of sort expressions; metrics will be sorted as specified",
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "string",
+                "enum": [
+                  "averageNumberOfRequests",
+                  "-averageNumberOfRequests",
+                  "count",
+                  "-count",
+                  "p50NumberOfRequests",
+                  "-p50NumberOfRequests",
+                  "p95NumberOfRequests",
+                  "-p95NumberOfRequests"
+                ]
+              }
+            },
+            "style": "form",
+            "explode": false
+          }
+        ],
+        "responses": {
+          "400": {
+            "description": "Parameter error(s)",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not found error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "200": {
+            "description": "Metrics data response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/GameCenterMatchmakingQueueSizesV1MetricResponse"
+                }
+              }
+            }
+          }
+        }
+      },
+      "parameters": [
+        {
+          "name": "id",
+          "in": "path",
+          "description": "the id of the requested resource",
+          "schema": {
+            "type": "string"
+          },
+          "style": "simple",
+          "required": true
+        }
+      ]
+    },
+    "/v1/gameCenterMatchmakingQueues/{id}/metrics/experimentMatchmakingRequests": {
+      "get": {
+        "tags": [
+          "GameCenterMatchmakingQueues",
+          "Metrics"
+        ],
+        "operationId": "gameCenterMatchmakingQueues-experimentMatchmakingRequests-get_metrics",
+        "parameters": [
+          {
+            "name": "limit",
+            "in": "query",
+            "description": "maximum number of groups to return per page",
+            "schema": {
+              "type": "integer",
+              "maximum": 200
+            },
+            "style": "form"
+          },
+          {
+            "name": "granularity",
+            "in": "query",
+            "description": "the granularity of the per-group dataset",
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "string",
+                "enum": [
+                  "P1D",
+                  "PT1H",
+                  "PT15M"
+                ]
+              }
+            },
+            "style": "form",
+            "explode": false,
+            "required": true,
+            "examples": {
+              "PTnM": {
+                "value": "PT10M"
+              },
+              "PnDTnHnMn.nS": {
+                "value": "P7DT10H10M10.5S"
+              },
+              "PnD": {
+                "value": "P7D"
+              },
+              "PTn.nS": {
+                "value": "PT10.5S"
+              },
+              "PTnH": {
+                "value": "PT10H"
+              }
+            }
+          },
+          {
+            "name": "groupBy",
+            "in": "query",
+            "description": "the dimension by which to group the results",
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "string",
+                "enum": [
+                  "gameCenterDetail",
+                  "result"
+                ]
+              }
+            },
+            "style": "form",
+            "explode": false
+          },
+          {
+            "name": "filter[result]",
+            "in": "query",
+            "description": "filter by 'result' attribute dimension",
+            "schema": {
+              "type": "string",
+              "enum": [
+                "MATCHED",
+                "CANCELED",
+                "EXPIRED"
+              ]
+            },
+            "style": "form",
+            "explode": false
+          },
+          {
+            "name": "filter[gameCenterDetail]",
+            "in": "query",
+            "description": "filter by 'gameCenterDetail' relationship dimension",
+            "schema": {
+              "type": "string"
+            },
+            "style": "form",
+            "explode": false
+          },
+          {
+            "name": "sort",
+            "in": "query",
+            "description": "comma-separated list of sort expressions; metrics will be sorted as specified",
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "string",
+                "enum": [
+                  "averageSecondsInQueue",
+                  "-averageSecondsInQueue",
+                  "count",
+                  "-count",
+                  "p50SecondsInQueue",
+                  "-p50SecondsInQueue",
+                  "p95SecondsInQueue",
+                  "-p95SecondsInQueue"
+                ]
+              }
+            },
+            "style": "form",
+            "explode": false
+          }
+        ],
+        "responses": {
+          "400": {
+            "description": "Parameter error(s)",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not found error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "200": {
+            "description": "Metrics data response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/GameCenterMatchmakingQueueRequestsV1MetricResponse"
+                }
+              }
+            }
+          }
+        }
+      },
+      "parameters": [
+        {
+          "name": "id",
+          "in": "path",
+          "description": "the id of the requested resource",
+          "schema": {
+            "type": "string"
+          },
+          "style": "simple",
+          "required": true
+        }
+      ]
+    },
+    "/v1/gameCenterMatchmakingQueues/{id}/metrics/matchmakingQueueSizes": {
+      "get": {
+        "tags": [
+          "GameCenterMatchmakingQueues",
+          "Metrics"
+        ],
+        "operationId": "gameCenterMatchmakingQueues-matchmakingQueueSizes-get_metrics",
+        "parameters": [
+          {
+            "name": "limit",
+            "in": "query",
+            "description": "maximum number of groups to return per page",
+            "schema": {
+              "type": "integer",
+              "maximum": 200
+            },
+            "style": "form"
+          },
+          {
+            "name": "granularity",
+            "in": "query",
+            "description": "the granularity of the per-group dataset",
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "string",
+                "enum": [
+                  "P1D",
+                  "PT1H",
+                  "PT15M"
+                ]
+              }
+            },
+            "style": "form",
+            "explode": false,
+            "required": true,
+            "examples": {
+              "PTnM": {
+                "value": "PT10M"
+              },
+              "PnDTnHnMn.nS": {
+                "value": "P7DT10H10M10.5S"
+              },
+              "PnD": {
+                "value": "P7D"
+              },
+              "PTn.nS": {
+                "value": "PT10.5S"
+              },
+              "PTnH": {
+                "value": "PT10H"
+              }
+            }
+          },
+          {
+            "name": "sort",
+            "in": "query",
+            "description": "comma-separated list of sort expressions; metrics will be sorted as specified",
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "string",
+                "enum": [
+                  "averageNumberOfRequests",
+                  "-averageNumberOfRequests",
+                  "count",
+                  "-count",
+                  "p50NumberOfRequests",
+                  "-p50NumberOfRequests",
+                  "p95NumberOfRequests",
+                  "-p95NumberOfRequests"
+                ]
+              }
+            },
+            "style": "form",
+            "explode": false
+          }
+        ],
+        "responses": {
+          "400": {
+            "description": "Parameter error(s)",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not found error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "200": {
+            "description": "Metrics data response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/GameCenterMatchmakingQueueSizesV1MetricResponse"
+                }
+              }
+            }
+          }
+        }
+      },
+      "parameters": [
+        {
+          "name": "id",
+          "in": "path",
+          "description": "the id of the requested resource",
+          "schema": {
+            "type": "string"
+          },
+          "style": "simple",
+          "required": true
+        }
+      ]
+    },
+    "/v1/gameCenterMatchmakingQueues/{id}/metrics/matchmakingRequests": {
+      "get": {
+        "tags": [
+          "GameCenterMatchmakingQueues",
+          "Metrics"
+        ],
+        "operationId": "gameCenterMatchmakingQueues-matchmakingRequests-get_metrics",
+        "parameters": [
+          {
+            "name": "limit",
+            "in": "query",
+            "description": "maximum number of groups to return per page",
+            "schema": {
+              "type": "integer",
+              "maximum": 200
+            },
+            "style": "form"
+          },
+          {
+            "name": "granularity",
+            "in": "query",
+            "description": "the granularity of the per-group dataset",
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "string",
+                "enum": [
+                  "P1D",
+                  "PT1H",
+                  "PT15M"
+                ]
+              }
+            },
+            "style": "form",
+            "explode": false,
+            "required": true,
+            "examples": {
+              "PTnM": {
+                "value": "PT10M"
+              },
+              "PnDTnHnMn.nS": {
+                "value": "P7DT10H10M10.5S"
+              },
+              "PnD": {
+                "value": "P7D"
+              },
+              "PTn.nS": {
+                "value": "PT10.5S"
+              },
+              "PTnH": {
+                "value": "PT10H"
+              }
+            }
+          },
+          {
+            "name": "groupBy",
+            "in": "query",
+            "description": "the dimension by which to group the results",
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "string",
+                "enum": [
+                  "gameCenterDetail",
+                  "result"
+                ]
+              }
+            },
+            "style": "form",
+            "explode": false
+          },
+          {
+            "name": "filter[result]",
+            "in": "query",
+            "description": "filter by 'result' attribute dimension",
+            "schema": {
+              "type": "string",
+              "enum": [
+                "MATCHED",
+                "CANCELED",
+                "EXPIRED"
+              ]
+            },
+            "style": "form",
+            "explode": false
+          },
+          {
+            "name": "filter[gameCenterDetail]",
+            "in": "query",
+            "description": "filter by 'gameCenterDetail' relationship dimension",
+            "schema": {
+              "type": "string"
+            },
+            "style": "form",
+            "explode": false
+          },
+          {
+            "name": "sort",
+            "in": "query",
+            "description": "comma-separated list of sort expressions; metrics will be sorted as specified",
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "string",
+                "enum": [
+                  "averageSecondsInQueue",
+                  "-averageSecondsInQueue",
+                  "count",
+                  "-count",
+                  "p50SecondsInQueue",
+                  "-p50SecondsInQueue",
+                  "p95SecondsInQueue",
+                  "-p95SecondsInQueue"
+                ]
+              }
+            },
+            "style": "form",
+            "explode": false
+          }
+        ],
+        "responses": {
+          "400": {
+            "description": "Parameter error(s)",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not found error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "200": {
+            "description": "Metrics data response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/GameCenterMatchmakingQueueRequestsV1MetricResponse"
+                }
+              }
+            }
+          }
+        }
+      },
+      "parameters": [
+        {
+          "name": "id",
+          "in": "path",
+          "description": "the id of the requested resource",
+          "schema": {
+            "type": "string"
+          },
+          "style": "simple",
+          "required": true
+        }
+      ]
+    },
+    "/v1/gameCenterMatchmakingQueues/{id}/metrics/matchmakingSessions": {
+      "get": {
+        "tags": [
+          "GameCenterMatchmakingQueues",
+          "Metrics"
+        ],
+        "operationId": "gameCenterMatchmakingQueues-matchmakingSessions-get_metrics",
+        "parameters": [
+          {
+            "name": "limit",
+            "in": "query",
+            "description": "maximum number of groups to return per page",
+            "schema": {
+              "type": "integer",
+              "maximum": 200
+            },
+            "style": "form"
+          },
+          {
+            "name": "granularity",
+            "in": "query",
+            "description": "the granularity of the per-group dataset",
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "string",
+                "enum": [
+                  "P1D",
+                  "PT1H",
+                  "PT15M"
+                ]
+              }
+            },
+            "style": "form",
+            "explode": false,
+            "required": true,
+            "examples": {
+              "PTnM": {
+                "value": "PT10M"
+              },
+              "PnDTnHnMn.nS": {
+                "value": "P7DT10H10M10.5S"
+              },
+              "PnD": {
+                "value": "P7D"
+              },
+              "PTn.nS": {
+                "value": "PT10.5S"
+              },
+              "PTnH": {
+                "value": "PT10H"
+              }
+            }
+          },
+          {
+            "name": "sort",
+            "in": "query",
+            "description": "comma-separated list of sort expressions; metrics will be sorted as specified",
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "string",
+                "enum": [
+                  "averagePlayerCount",
+                  "-averagePlayerCount",
+                  "count",
+                  "-count",
+                  "p50PlayerCount",
+                  "-p50PlayerCount",
+                  "p95PlayerCount",
+                  "-p95PlayerCount"
+                ]
+              }
+            },
+            "style": "form",
+            "explode": false
+          }
+        ],
+        "responses": {
+          "400": {
+            "description": "Parameter error(s)",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not found error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "200": {
+            "description": "Metrics data response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/GameCenterMatchmakingSessionsV1MetricResponse"
+                }
+              }
+            }
+          }
+        }
+      },
+      "parameters": [
+        {
+          "name": "id",
+          "in": "path",
+          "description": "the id of the requested resource",
+          "schema": {
+            "type": "string"
+          },
+          "style": "simple",
+          "required": true
+        }
+      ]
+    },
+    "/v1/gameCenterMatchmakingRules/{id}/metrics/matchmakingBooleanRuleResults": {
+      "get": {
+        "tags": [
+          "GameCenterMatchmakingRules",
+          "Metrics"
+        ],
+        "operationId": "gameCenterMatchmakingRules-matchmakingBooleanRuleResults-get_metrics",
+        "parameters": [
+          {
+            "name": "limit",
+            "in": "query",
+            "description": "maximum number of groups to return per page",
+            "schema": {
+              "type": "integer",
+              "maximum": 200
+            },
+            "style": "form"
+          },
+          {
+            "name": "granularity",
+            "in": "query",
+            "description": "the granularity of the per-group dataset",
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "string",
+                "enum": [
+                  "P1D",
+                  "PT1H",
+                  "PT15M"
+                ]
+              }
+            },
+            "style": "form",
+            "explode": false,
+            "required": true,
+            "examples": {
+              "PTnM": {
+                "value": "PT10M"
+              },
+              "PnDTnHnMn.nS": {
+                "value": "P7DT10H10M10.5S"
+              },
+              "PnD": {
+                "value": "P7D"
+              },
+              "PTn.nS": {
+                "value": "PT10.5S"
+              },
+              "PTnH": {
+                "value": "PT10H"
+              }
+            }
+          },
+          {
+            "name": "groupBy",
+            "in": "query",
+            "description": "the dimension by which to group the results",
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "string",
+                "enum": [
+                  "gameCenterMatchmakingQueue",
+                  "result"
+                ]
+              }
+            },
+            "style": "form",
+            "explode": false
+          },
+          {
+            "name": "filter[result]",
+            "in": "query",
+            "description": "filter by 'result' attribute dimension",
+            "schema": {
+              "type": "string"
+            },
+            "style": "form",
+            "explode": false
+          },
+          {
+            "name": "filter[gameCenterMatchmakingQueue]",
+            "in": "query",
+            "description": "filter by 'gameCenterMatchmakingQueue' relationship dimension",
+            "schema": {
+              "type": "string"
+            },
+            "style": "form",
+            "explode": false
+          },
+          {
+            "name": "sort",
+            "in": "query",
+            "description": "comma-separated list of sort expressions; metrics will be sorted as specified",
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "string",
+                "enum": [
+                  "count",
+                  "-count"
+                ]
+              }
+            },
+            "style": "form",
+            "explode": false
+          }
+        ],
+        "responses": {
+          "400": {
+            "description": "Parameter error(s)",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not found error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "200": {
+            "description": "Metrics data response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/GameCenterMatchmakingBooleanRuleResultsV1MetricResponse"
+                }
+              }
+            }
+          }
+        }
+      },
+      "parameters": [
+        {
+          "name": "id",
+          "in": "path",
+          "description": "the id of the requested resource",
+          "schema": {
+            "type": "string"
+          },
+          "style": "simple",
+          "required": true
+        }
+      ]
+    },
+    "/v1/gameCenterMatchmakingRules/{id}/metrics/matchmakingNumberRuleResults": {
+      "get": {
+        "tags": [
+          "GameCenterMatchmakingRules",
+          "Metrics"
+        ],
+        "operationId": "gameCenterMatchmakingRules-matchmakingNumberRuleResults-get_metrics",
+        "parameters": [
+          {
+            "name": "limit",
+            "in": "query",
+            "description": "maximum number of groups to return per page",
+            "schema": {
+              "type": "integer",
+              "maximum": 200
+            },
+            "style": "form"
+          },
+          {
+            "name": "granularity",
+            "in": "query",
+            "description": "the granularity of the per-group dataset",
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "string",
+                "enum": [
+                  "P1D",
+                  "PT1H",
+                  "PT15M"
+                ]
+              }
+            },
+            "style": "form",
+            "explode": false,
+            "required": true,
+            "examples": {
+              "PTnM": {
+                "value": "PT10M"
+              },
+              "PnDTnHnMn.nS": {
+                "value": "P7DT10H10M10.5S"
+              },
+              "PnD": {
+                "value": "P7D"
+              },
+              "PTn.nS": {
+                "value": "PT10.5S"
+              },
+              "PTnH": {
+                "value": "PT10H"
+              }
+            }
+          },
+          {
+            "name": "groupBy",
+            "in": "query",
+            "description": "the dimension by which to group the results",
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "string",
+                "enum": [
+                  "gameCenterMatchmakingQueue"
+                ]
+              }
+            },
+            "style": "form",
+            "explode": false
+          },
+          {
+            "name": "filter[gameCenterMatchmakingQueue]",
+            "in": "query",
+            "description": "filter by 'gameCenterMatchmakingQueue' relationship dimension",
+            "schema": {
+              "type": "string"
+            },
+            "style": "form",
+            "explode": false
+          },
+          {
+            "name": "sort",
+            "in": "query",
+            "description": "comma-separated list of sort expressions; metrics will be sorted as specified",
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "string",
+                "enum": [
+                  "averageResult",
+                  "-averageResult",
+                  "count",
+                  "-count",
+                  "p50Result",
+                  "-p50Result",
+                  "p95Result",
+                  "-p95Result"
+                ]
+              }
+            },
+            "style": "form",
+            "explode": false
+          }
+        ],
+        "responses": {
+          "400": {
+            "description": "Parameter error(s)",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not found error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "200": {
+            "description": "Metrics data response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/GameCenterMatchmakingNumberRuleResultsV1MetricResponse"
+                }
+              }
+            }
+          }
+        }
+      },
+      "parameters": [
+        {
+          "name": "id",
+          "in": "path",
+          "description": "the id of the requested resource",
+          "schema": {
+            "type": "string"
+          },
+          "style": "simple",
+          "required": true
+        }
+      ]
+    },
+    "/v1/gameCenterMatchmakingRules/{id}/metrics/matchmakingRuleErrors": {
+      "get": {
+        "tags": [
+          "GameCenterMatchmakingRules",
+          "Metrics"
+        ],
+        "operationId": "gameCenterMatchmakingRules-matchmakingRuleErrors-get_metrics",
+        "parameters": [
+          {
+            "name": "limit",
+            "in": "query",
+            "description": "maximum number of groups to return per page",
+            "schema": {
+              "type": "integer",
+              "maximum": 200
+            },
+            "style": "form"
+          },
+          {
+            "name": "granularity",
+            "in": "query",
+            "description": "the granularity of the per-group dataset",
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "string",
+                "enum": [
+                  "P1D",
+                  "PT1H",
+                  "PT15M"
+                ]
+              }
+            },
+            "style": "form",
+            "explode": false,
+            "required": true,
+            "examples": {
+              "PTnM": {
+                "value": "PT10M"
+              },
+              "PnDTnHnMn.nS": {
+                "value": "P7DT10H10M10.5S"
+              },
+              "PnD": {
+                "value": "P7D"
+              },
+              "PTn.nS": {
+                "value": "PT10.5S"
+              },
+              "PTnH": {
+                "value": "PT10H"
+              }
+            }
+          },
+          {
+            "name": "groupBy",
+            "in": "query",
+            "description": "the dimension by which to group the results",
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "string",
+                "enum": [
+                  "gameCenterMatchmakingQueue"
+                ]
+              }
+            },
+            "style": "form",
+            "explode": false
+          },
+          {
+            "name": "filter[gameCenterMatchmakingQueue]",
+            "in": "query",
+            "description": "filter by 'gameCenterMatchmakingQueue' relationship dimension",
+            "schema": {
+              "type": "string"
+            },
+            "style": "form",
+            "explode": false
+          },
+          {
+            "name": "sort",
+            "in": "query",
+            "description": "comma-separated list of sort expressions; metrics will be sorted as specified",
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "string",
+                "enum": [
+                  "count",
+                  "-count"
+                ]
+              }
+            },
+            "style": "form",
+            "explode": false
+          }
+        ],
+        "responses": {
+          "400": {
+            "description": "Parameter error(s)",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not found error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "200": {
+            "description": "Metrics data response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/GameCenterMatchmakingRuleErrorsV1MetricResponse"
+                }
+              }
+            }
+          }
+        }
+      },
+      "parameters": [
+        {
+          "name": "id",
+          "in": "path",
+          "description": "the id of the requested resource",
+          "schema": {
+            "type": "string"
+          },
+          "style": "simple",
+          "required": true
+        }
+      ]
     }
   },
   "components": {
@@ -85046,7 +88813,8 @@
         "required": [
           "id",
           "type"
-        ]
+        ],
+        "deprecated": true
       },
       "AppAvailabilityResponse": {
         "type": "object",
@@ -85075,7 +88843,8 @@
         "required": [
           "data",
           "links"
-        ]
+        ],
+        "deprecated": true
       },
       "AppAvailabilityCreateRequest": {
         "type": "object",
@@ -85175,7 +88944,8 @@
         },
         "required": [
           "data"
-        ]
+        ],
+        "deprecated": true
       },
       "AppCategory": {
         "type": "object",
@@ -85510,6 +89280,9 @@
                 "type": "string"
               }
             }
+          },
+          "links": {
+            "$ref": "#/components/schemas/ResourceLinks"
           }
         },
         "required": [
@@ -87535,6 +91308,9 @@
                 "format": "date-time"
               }
             }
+          },
+          "links": {
+            "$ref": "#/components/schemas/ResourceLinks"
           }
         },
         "required": [
@@ -91862,7 +95638,8 @@
         "required": [
           "id",
           "type"
-        ]
+        ],
+        "deprecated": true
       },
       "AppPreOrderResponse": {
         "type": "object",
@@ -91884,7 +95661,8 @@
         "required": [
           "data",
           "links"
-        ]
+        ],
+        "deprecated": true
       },
       "AppPreOrderCreateRequest": {
         "type": "object",
@@ -91951,7 +95729,8 @@
         },
         "required": [
           "data"
-        ]
+        ],
+        "deprecated": true
       },
       "AppPreOrderUpdateRequest": {
         "type": "object",
@@ -91987,7 +95766,8 @@
         },
         "required": [
           "data"
-        ]
+        ],
+        "deprecated": true
       },
       "AppPreviewSet": {
         "type": "object",
@@ -92764,6 +96544,9 @@
                 }
               }
             }
+          },
+          "links": {
+            "$ref": "#/components/schemas/ResourceLinks"
           }
         },
         "required": [
@@ -93733,6 +97516,9 @@
                 }
               }
             }
+          },
+          "links": {
+            "$ref": "#/components/schemas/ResourceLinks"
           }
         },
         "required": [
@@ -97106,6 +100892,9 @@
           },
           "id": {
             "type": "string"
+          },
+          "links": {
+            "$ref": "#/components/schemas/ResourceLinks"
           }
         },
         "required": [
@@ -97226,6 +101015,9 @@
           },
           "id": {
             "type": "string"
+          },
+          "links": {
+            "$ref": "#/components/schemas/ResourceLinks"
           }
         },
         "required": [
@@ -101737,6 +105529,9 @@
           },
           "id": {
             "type": "string"
+          },
+          "links": {
+            "$ref": "#/components/schemas/ResourceLinks"
           }
         },
         "required": [
@@ -102359,6 +106154,9 @@
           },
           "id": {
             "type": "string"
+          },
+          "links": {
+            "$ref": "#/components/schemas/ResourceLinks"
           }
         },
         "required": [
@@ -102469,6 +106267,9 @@
                 "type": "integer"
               }
             }
+          },
+          "links": {
+            "$ref": "#/components/schemas/ResourceLinks"
           }
         },
         "required": [
@@ -102750,6 +106551,9 @@
                 }
               }
             }
+          },
+          "links": {
+            "$ref": "#/components/schemas/ResourceLinks"
           }
         },
         "required": [
@@ -102783,6 +106587,9 @@
                 "$ref": "#/components/schemas/IconAssetType"
               }
             }
+          },
+          "links": {
+            "$ref": "#/components/schemas/ResourceLinks"
           }
         },
         "required": [
@@ -106724,6 +110531,9 @@
           },
           "id": {
             "type": "string"
+          },
+          "links": {
+            "$ref": "#/components/schemas/ResourceLinks"
           }
         },
         "required": [
@@ -106761,6 +110571,9 @@
                 "type": "number"
               }
             }
+          },
+          "links": {
+            "$ref": "#/components/schemas/ResourceLinks"
           }
         },
         "required": [
@@ -106802,6 +110615,9 @@
           },
           "id": {
             "type": "string"
+          },
+          "links": {
+            "$ref": "#/components/schemas/ResourceLinks"
           }
         },
         "required": [
@@ -109579,6 +113395,9 @@
                 }
               }
             }
+          },
+          "links": {
+            "$ref": "#/components/schemas/ResourceLinks"
           }
         },
         "required": [
@@ -112203,6 +116022,52 @@
               "relationships": {
                 "type": "object",
                 "properties": {
+                  "gameCenterDetail": {
+                    "type": "object",
+                    "properties": {
+                      "data": {
+                        "type": "object",
+                        "properties": {
+                          "type": {
+                            "type": "string",
+                            "enum": [
+                              "gameCenterDetails"
+                            ]
+                          },
+                          "id": {
+                            "type": "string"
+                          }
+                        },
+                        "required": [
+                          "id",
+                          "type"
+                        ]
+                      }
+                    }
+                  },
+                  "gameCenterGroup": {
+                    "type": "object",
+                    "properties": {
+                      "data": {
+                        "type": "object",
+                        "properties": {
+                          "type": {
+                            "type": "string",
+                            "enum": [
+                              "gameCenterGroups"
+                            ]
+                          },
+                          "id": {
+                            "type": "string"
+                          }
+                        },
+                        "required": [
+                          "id",
+                          "type"
+                        ]
+                      }
+                    }
+                  },
                   "gameCenterLeaderboards": {
                     "type": "object",
                     "properties": {
@@ -112227,19 +116092,12 @@
                           ]
                         }
                       }
-                    },
-                    "required": [
-                      "data"
-                    ]
+                    }
                   }
-                },
-                "required": [
-                  "gameCenterLeaderboards"
-                ]
+                }
               }
             },
             "required": [
-              "relationships",
               "attributes",
               "type"
             ]
@@ -112910,6 +116768,1420 @@
         },
         "required": [
           "data"
+        ]
+      },
+      "GameCenterMatchmakingQueue": {
+        "type": "object",
+        "title": "GameCenterMatchmakingQueue",
+        "properties": {
+          "type": {
+            "type": "string",
+            "enum": [
+              "gameCenterMatchmakingQueues"
+            ]
+          },
+          "id": {
+            "type": "string"
+          },
+          "attributes": {
+            "type": "object",
+            "properties": {
+              "referenceName": {
+                "type": "string"
+              }
+            }
+          },
+          "relationships": {
+            "type": "object",
+            "properties": {
+              "ruleSet": {
+                "type": "object",
+                "properties": {
+                  "links": {
+                    "type": "object",
+                    "properties": {
+                      "self": {
+                        "type": "string",
+                        "format": "uri-reference"
+                      },
+                      "related": {
+                        "type": "string",
+                        "format": "uri-reference"
+                      }
+                    }
+                  },
+                  "data": {
+                    "type": "object",
+                    "properties": {
+                      "type": {
+                        "type": "string",
+                        "enum": [
+                          "gameCenterMatchmakingRuleSets"
+                        ]
+                      },
+                      "id": {
+                        "type": "string"
+                      }
+                    },
+                    "required": [
+                      "id",
+                      "type"
+                    ]
+                  }
+                }
+              },
+              "experimentRuleSet": {
+                "type": "object",
+                "properties": {
+                  "links": {
+                    "type": "object",
+                    "properties": {
+                      "self": {
+                        "type": "string",
+                        "format": "uri-reference"
+                      },
+                      "related": {
+                        "type": "string",
+                        "format": "uri-reference"
+                      }
+                    }
+                  },
+                  "data": {
+                    "type": "object",
+                    "properties": {
+                      "type": {
+                        "type": "string",
+                        "enum": [
+                          "gameCenterMatchmakingRuleSets"
+                        ]
+                      },
+                      "id": {
+                        "type": "string"
+                      }
+                    },
+                    "required": [
+                      "id",
+                      "type"
+                    ]
+                  }
+                }
+              }
+            }
+          },
+          "links": {
+            "$ref": "#/components/schemas/ResourceLinks"
+          }
+        },
+        "required": [
+          "id",
+          "type"
+        ]
+      },
+      "GameCenterMatchmakingQueuesResponse": {
+        "type": "object",
+        "title": "GameCenterMatchmakingQueuesResponse",
+        "properties": {
+          "data": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/GameCenterMatchmakingQueue"
+            }
+          },
+          "included": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/GameCenterMatchmakingRuleSet"
+            }
+          },
+          "links": {
+            "$ref": "#/components/schemas/PagedDocumentLinks"
+          },
+          "meta": {
+            "$ref": "#/components/schemas/PagingInformation"
+          }
+        },
+        "required": [
+          "data",
+          "links"
+        ]
+      },
+      "GameCenterMatchmakingQueueResponse": {
+        "type": "object",
+        "title": "GameCenterMatchmakingQueueResponse",
+        "properties": {
+          "data": {
+            "$ref": "#/components/schemas/GameCenterMatchmakingQueue"
+          },
+          "included": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/GameCenterMatchmakingRuleSet"
+            }
+          },
+          "links": {
+            "$ref": "#/components/schemas/DocumentLinks"
+          }
+        },
+        "required": [
+          "data",
+          "links"
+        ]
+      },
+      "GameCenterMatchmakingQueueCreateRequest": {
+        "type": "object",
+        "title": "GameCenterMatchmakingQueueCreateRequest",
+        "properties": {
+          "data": {
+            "type": "object",
+            "properties": {
+              "type": {
+                "type": "string",
+                "enum": [
+                  "gameCenterMatchmakingQueues"
+                ]
+              },
+              "attributes": {
+                "type": "object",
+                "properties": {
+                  "referenceName": {
+                    "type": "string"
+                  }
+                },
+                "required": [
+                  "referenceName"
+                ]
+              },
+              "relationships": {
+                "type": "object",
+                "properties": {
+                  "ruleSet": {
+                    "type": "object",
+                    "properties": {
+                      "data": {
+                        "type": "object",
+                        "properties": {
+                          "type": {
+                            "type": "string",
+                            "enum": [
+                              "gameCenterMatchmakingRuleSets"
+                            ]
+                          },
+                          "id": {
+                            "type": "string"
+                          }
+                        },
+                        "required": [
+                          "id",
+                          "type"
+                        ]
+                      }
+                    },
+                    "required": [
+                      "data"
+                    ]
+                  },
+                  "experimentRuleSet": {
+                    "type": "object",
+                    "properties": {
+                      "data": {
+                        "type": "object",
+                        "properties": {
+                          "type": {
+                            "type": "string",
+                            "enum": [
+                              "gameCenterMatchmakingRuleSets"
+                            ]
+                          },
+                          "id": {
+                            "type": "string"
+                          }
+                        },
+                        "required": [
+                          "id",
+                          "type"
+                        ]
+                      }
+                    }
+                  }
+                },
+                "required": [
+                  "ruleSet"
+                ]
+              }
+            },
+            "required": [
+              "relationships",
+              "attributes",
+              "type"
+            ]
+          }
+        },
+        "required": [
+          "data"
+        ]
+      },
+      "GameCenterMatchmakingQueueUpdateRequest": {
+        "type": "object",
+        "title": "GameCenterMatchmakingQueueUpdateRequest",
+        "properties": {
+          "data": {
+            "type": "object",
+            "properties": {
+              "type": {
+                "type": "string",
+                "enum": [
+                  "gameCenterMatchmakingQueues"
+                ]
+              },
+              "id": {
+                "type": "string"
+              },
+              "relationships": {
+                "type": "object",
+                "properties": {
+                  "ruleSet": {
+                    "type": "object",
+                    "properties": {
+                      "data": {
+                        "type": "object",
+                        "properties": {
+                          "type": {
+                            "type": "string",
+                            "enum": [
+                              "gameCenterMatchmakingRuleSets"
+                            ]
+                          },
+                          "id": {
+                            "type": "string"
+                          }
+                        },
+                        "required": [
+                          "id",
+                          "type"
+                        ]
+                      }
+                    }
+                  },
+                  "experimentRuleSet": {
+                    "type": "object",
+                    "properties": {
+                      "data": {
+                        "type": "object",
+                        "properties": {
+                          "type": {
+                            "type": "string",
+                            "enum": [
+                              "gameCenterMatchmakingRuleSets"
+                            ]
+                          },
+                          "id": {
+                            "type": "string"
+                          }
+                        },
+                        "required": [
+                          "id",
+                          "type"
+                        ]
+                      }
+                    }
+                  }
+                }
+              }
+            },
+            "required": [
+              "id",
+              "type"
+            ]
+          }
+        },
+        "required": [
+          "data"
+        ]
+      },
+      "GameCenterMatchmakingRuleSetTest": {
+        "type": "object",
+        "title": "GameCenterMatchmakingRuleSetTest",
+        "properties": {
+          "type": {
+            "type": "string",
+            "enum": [
+              "gameCenterMatchmakingRuleSetTests"
+            ]
+          },
+          "id": {
+            "type": "string"
+          },
+          "attributes": {
+            "type": "object",
+            "properties": {
+              "matchmakingResults": {
+                "type": "array",
+                "items": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "requestName": {
+                        "type": "string"
+                      },
+                      "teamAssignments": {
+                        "type": "array",
+                        "items": {
+                          "$ref": "#/components/schemas/GameCenterMatchmakingTeamAssignment"
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "links": {
+            "$ref": "#/components/schemas/ResourceLinks"
+          }
+        },
+        "required": [
+          "id",
+          "type"
+        ]
+      },
+      "GameCenterMatchmakingRuleSetTestResponse": {
+        "type": "object",
+        "title": "GameCenterMatchmakingRuleSetTestResponse",
+        "properties": {
+          "data": {
+            "$ref": "#/components/schemas/GameCenterMatchmakingRuleSetTest"
+          },
+          "links": {
+            "$ref": "#/components/schemas/DocumentLinks"
+          }
+        },
+        "required": [
+          "data",
+          "links"
+        ]
+      },
+      "GameCenterMatchmakingRuleSetTestCreateRequest": {
+        "type": "object",
+        "title": "GameCenterMatchmakingRuleSetTestCreateRequest",
+        "properties": {
+          "data": {
+            "type": "object",
+            "properties": {
+              "type": {
+                "type": "string",
+                "enum": [
+                  "gameCenterMatchmakingRuleSetTests"
+                ]
+              },
+              "relationships": {
+                "type": "object",
+                "properties": {
+                  "matchmakingRuleSet": {
+                    "type": "object",
+                    "properties": {
+                      "data": {
+                        "type": "object",
+                        "properties": {
+                          "type": {
+                            "type": "string",
+                            "enum": [
+                              "gameCenterMatchmakingRuleSets"
+                            ]
+                          },
+                          "id": {
+                            "type": "string"
+                          }
+                        },
+                        "required": [
+                          "id",
+                          "type"
+                        ]
+                      }
+                    },
+                    "required": [
+                      "data"
+                    ]
+                  },
+                  "matchmakingRequests": {
+                    "type": "object",
+                    "properties": {
+                      "data": {
+                        "type": "array",
+                        "items": {
+                          "type": "object",
+                          "properties": {
+                            "type": {
+                              "type": "string",
+                              "enum": [
+                                "gameCenterMatchmakingTestRequests"
+                              ]
+                            },
+                            "id": {
+                              "type": "string"
+                            }
+                          },
+                          "required": [
+                            "id",
+                            "type"
+                          ]
+                        }
+                      }
+                    },
+                    "required": [
+                      "data"
+                    ]
+                  }
+                },
+                "required": [
+                  "matchmakingRuleSet",
+                  "matchmakingRequests"
+                ]
+              }
+            },
+            "required": [
+              "relationships",
+              "type"
+            ]
+          },
+          "included": {
+            "type": "array",
+            "items": {
+              "oneOf": [
+                {
+                  "$ref": "#/components/schemas/GameCenterMatchmakingTestPlayerPropertyInlineCreate"
+                },
+                {
+                  "$ref": "#/components/schemas/GameCenterMatchmakingTestRequestInlineCreate"
+                }
+              ]
+            }
+          }
+        },
+        "required": [
+          "data"
+        ]
+      },
+      "GameCenterMatchmakingRuleSet": {
+        "type": "object",
+        "title": "GameCenterMatchmakingRuleSet",
+        "properties": {
+          "type": {
+            "type": "string",
+            "enum": [
+              "gameCenterMatchmakingRuleSets"
+            ]
+          },
+          "id": {
+            "type": "string"
+          },
+          "attributes": {
+            "type": "object",
+            "properties": {
+              "referenceName": {
+                "type": "string"
+              },
+              "ruleLanguageVersion": {
+                "type": "integer"
+              },
+              "minPlayers": {
+                "type": "integer"
+              },
+              "maxPlayers": {
+                "type": "integer"
+              }
+            }
+          },
+          "relationships": {
+            "type": "object",
+            "properties": {
+              "teams": {
+                "type": "object",
+                "properties": {
+                  "links": {
+                    "type": "object",
+                    "properties": {
+                      "self": {
+                        "type": "string",
+                        "format": "uri-reference"
+                      },
+                      "related": {
+                        "type": "string",
+                        "format": "uri-reference"
+                      }
+                    }
+                  },
+                  "meta": {
+                    "$ref": "#/components/schemas/PagingInformation"
+                  },
+                  "data": {
+                    "type": "array",
+                    "items": {
+                      "type": "object",
+                      "properties": {
+                        "type": {
+                          "type": "string",
+                          "enum": [
+                            "gameCenterMatchmakingTeams"
+                          ]
+                        },
+                        "id": {
+                          "type": "string"
+                        }
+                      },
+                      "required": [
+                        "id",
+                        "type"
+                      ]
+                    }
+                  }
+                }
+              },
+              "rules": {
+                "type": "object",
+                "properties": {
+                  "links": {
+                    "type": "object",
+                    "properties": {
+                      "self": {
+                        "type": "string",
+                        "format": "uri-reference"
+                      },
+                      "related": {
+                        "type": "string",
+                        "format": "uri-reference"
+                      }
+                    }
+                  },
+                  "meta": {
+                    "$ref": "#/components/schemas/PagingInformation"
+                  },
+                  "data": {
+                    "type": "array",
+                    "items": {
+                      "type": "object",
+                      "properties": {
+                        "type": {
+                          "type": "string",
+                          "enum": [
+                            "gameCenterMatchmakingRules"
+                          ]
+                        },
+                        "id": {
+                          "type": "string"
+                        }
+                      },
+                      "required": [
+                        "id",
+                        "type"
+                      ]
+                    }
+                  }
+                }
+              },
+              "matchmakingQueues": {
+                "type": "object",
+                "properties": {
+                  "links": {
+                    "type": "object",
+                    "properties": {
+                      "self": {
+                        "type": "string",
+                        "format": "uri-reference"
+                      },
+                      "related": {
+                        "type": "string",
+                        "format": "uri-reference"
+                      }
+                    }
+                  },
+                  "meta": {
+                    "$ref": "#/components/schemas/PagingInformation"
+                  },
+                  "data": {
+                    "type": "array",
+                    "items": {
+                      "type": "object",
+                      "properties": {
+                        "type": {
+                          "type": "string",
+                          "enum": [
+                            "gameCenterMatchmakingQueues"
+                          ]
+                        },
+                        "id": {
+                          "type": "string"
+                        }
+                      },
+                      "required": [
+                        "id",
+                        "type"
+                      ]
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "links": {
+            "$ref": "#/components/schemas/ResourceLinks"
+          }
+        },
+        "required": [
+          "id",
+          "type"
+        ]
+      },
+      "GameCenterMatchmakingRuleSetsResponse": {
+        "type": "object",
+        "title": "GameCenterMatchmakingRuleSetsResponse",
+        "properties": {
+          "data": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/GameCenterMatchmakingRuleSet"
+            }
+          },
+          "included": {
+            "type": "array",
+            "items": {
+              "oneOf": [
+                {
+                  "$ref": "#/components/schemas/GameCenterMatchmakingTeam"
+                },
+                {
+                  "$ref": "#/components/schemas/GameCenterMatchmakingRule"
+                },
+                {
+                  "$ref": "#/components/schemas/GameCenterMatchmakingQueue"
+                }
+              ]
+            }
+          },
+          "links": {
+            "$ref": "#/components/schemas/PagedDocumentLinks"
+          },
+          "meta": {
+            "$ref": "#/components/schemas/PagingInformation"
+          }
+        },
+        "required": [
+          "data",
+          "links"
+        ]
+      },
+      "GameCenterMatchmakingRuleSetResponse": {
+        "type": "object",
+        "title": "GameCenterMatchmakingRuleSetResponse",
+        "properties": {
+          "data": {
+            "$ref": "#/components/schemas/GameCenterMatchmakingRuleSet"
+          },
+          "included": {
+            "type": "array",
+            "items": {
+              "oneOf": [
+                {
+                  "$ref": "#/components/schemas/GameCenterMatchmakingTeam"
+                },
+                {
+                  "$ref": "#/components/schemas/GameCenterMatchmakingRule"
+                },
+                {
+                  "$ref": "#/components/schemas/GameCenterMatchmakingQueue"
+                }
+              ]
+            }
+          },
+          "links": {
+            "$ref": "#/components/schemas/DocumentLinks"
+          }
+        },
+        "required": [
+          "data",
+          "links"
+        ]
+      },
+      "GameCenterMatchmakingRuleSetCreateRequest": {
+        "type": "object",
+        "title": "GameCenterMatchmakingRuleSetCreateRequest",
+        "properties": {
+          "data": {
+            "type": "object",
+            "properties": {
+              "type": {
+                "type": "string",
+                "enum": [
+                  "gameCenterMatchmakingRuleSets"
+                ]
+              },
+              "attributes": {
+                "type": "object",
+                "properties": {
+                  "referenceName": {
+                    "type": "string"
+                  },
+                  "ruleLanguageVersion": {
+                    "type": "integer"
+                  },
+                  "minPlayers": {
+                    "type": "integer"
+                  },
+                  "maxPlayers": {
+                    "type": "integer"
+                  }
+                },
+                "required": [
+                  "maxPlayers",
+                  "minPlayers",
+                  "referenceName",
+                  "ruleLanguageVersion"
+                ]
+              }
+            },
+            "required": [
+              "attributes",
+              "type"
+            ]
+          }
+        },
+        "required": [
+          "data"
+        ]
+      },
+      "GameCenterMatchmakingRuleSetUpdateRequest": {
+        "type": "object",
+        "title": "GameCenterMatchmakingRuleSetUpdateRequest",
+        "properties": {
+          "data": {
+            "type": "object",
+            "properties": {
+              "type": {
+                "type": "string",
+                "enum": [
+                  "gameCenterMatchmakingRuleSets"
+                ]
+              },
+              "id": {
+                "type": "string"
+              },
+              "attributes": {
+                "type": "object",
+                "properties": {
+                  "minPlayers": {
+                    "type": "integer"
+                  },
+                  "maxPlayers": {
+                    "type": "integer"
+                  }
+                }
+              }
+            },
+            "required": [
+              "id",
+              "type"
+            ]
+          }
+        },
+        "required": [
+          "data"
+        ]
+      },
+      "GameCenterMatchmakingRule": {
+        "type": "object",
+        "title": "GameCenterMatchmakingRule",
+        "properties": {
+          "type": {
+            "type": "string",
+            "enum": [
+              "gameCenterMatchmakingRules"
+            ]
+          },
+          "id": {
+            "type": "string"
+          },
+          "attributes": {
+            "type": "object",
+            "properties": {
+              "referenceName": {
+                "type": "string"
+              },
+              "description": {
+                "type": "string"
+              },
+              "type": {
+                "type": "string",
+                "enum": [
+                  "COMPATIBLE",
+                  "DISTANCE",
+                  "MATCH",
+                  "TEAM"
+                ]
+              },
+              "expression": {
+                "type": "string"
+              },
+              "weight": {
+                "type": "number"
+              }
+            }
+          },
+          "links": {
+            "$ref": "#/components/schemas/ResourceLinks"
+          }
+        },
+        "required": [
+          "id",
+          "type"
+        ]
+      },
+      "GameCenterMatchmakingRulesResponse": {
+        "type": "object",
+        "title": "GameCenterMatchmakingRulesResponse",
+        "properties": {
+          "data": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/GameCenterMatchmakingRule"
+            }
+          },
+          "links": {
+            "$ref": "#/components/schemas/PagedDocumentLinks"
+          },
+          "meta": {
+            "$ref": "#/components/schemas/PagingInformation"
+          }
+        },
+        "required": [
+          "data",
+          "links"
+        ]
+      },
+      "GameCenterMatchmakingRuleResponse": {
+        "type": "object",
+        "title": "GameCenterMatchmakingRuleResponse",
+        "properties": {
+          "data": {
+            "$ref": "#/components/schemas/GameCenterMatchmakingRule"
+          },
+          "links": {
+            "$ref": "#/components/schemas/DocumentLinks"
+          }
+        },
+        "required": [
+          "data",
+          "links"
+        ]
+      },
+      "GameCenterMatchmakingRuleCreateRequest": {
+        "type": "object",
+        "title": "GameCenterMatchmakingRuleCreateRequest",
+        "properties": {
+          "data": {
+            "type": "object",
+            "properties": {
+              "type": {
+                "type": "string",
+                "enum": [
+                  "gameCenterMatchmakingRules"
+                ]
+              },
+              "attributes": {
+                "type": "object",
+                "properties": {
+                  "referenceName": {
+                    "type": "string"
+                  },
+                  "description": {
+                    "type": "string"
+                  },
+                  "type": {
+                    "type": "string",
+                    "enum": [
+                      "COMPATIBLE",
+                      "DISTANCE",
+                      "MATCH",
+                      "TEAM"
+                    ]
+                  },
+                  "expression": {
+                    "type": "string"
+                  },
+                  "weight": {
+                    "type": "number"
+                  }
+                },
+                "required": [
+                  "expression",
+                  "description",
+                  "type",
+                  "referenceName"
+                ]
+              },
+              "relationships": {
+                "type": "object",
+                "properties": {
+                  "ruleSet": {
+                    "type": "object",
+                    "properties": {
+                      "data": {
+                        "type": "object",
+                        "properties": {
+                          "type": {
+                            "type": "string",
+                            "enum": [
+                              "gameCenterMatchmakingRuleSets"
+                            ]
+                          },
+                          "id": {
+                            "type": "string"
+                          }
+                        },
+                        "required": [
+                          "id",
+                          "type"
+                        ]
+                      }
+                    },
+                    "required": [
+                      "data"
+                    ]
+                  }
+                },
+                "required": [
+                  "ruleSet"
+                ]
+              }
+            },
+            "required": [
+              "relationships",
+              "attributes",
+              "type"
+            ]
+          }
+        },
+        "required": [
+          "data"
+        ]
+      },
+      "GameCenterMatchmakingRuleUpdateRequest": {
+        "type": "object",
+        "title": "GameCenterMatchmakingRuleUpdateRequest",
+        "properties": {
+          "data": {
+            "type": "object",
+            "properties": {
+              "type": {
+                "type": "string",
+                "enum": [
+                  "gameCenterMatchmakingRules"
+                ]
+              },
+              "id": {
+                "type": "string"
+              },
+              "attributes": {
+                "type": "object",
+                "properties": {
+                  "description": {
+                    "type": "string"
+                  },
+                  "expression": {
+                    "type": "string"
+                  },
+                  "weight": {
+                    "type": "number"
+                  }
+                }
+              }
+            },
+            "required": [
+              "id",
+              "type"
+            ]
+          }
+        },
+        "required": [
+          "data"
+        ]
+      },
+      "GameCenterMatchmakingTeam": {
+        "type": "object",
+        "title": "GameCenterMatchmakingTeam",
+        "properties": {
+          "type": {
+            "type": "string",
+            "enum": [
+              "gameCenterMatchmakingTeams"
+            ]
+          },
+          "id": {
+            "type": "string"
+          },
+          "attributes": {
+            "type": "object",
+            "properties": {
+              "referenceName": {
+                "type": "string"
+              },
+              "minPlayers": {
+                "type": "integer"
+              },
+              "maxPlayers": {
+                "type": "integer"
+              }
+            }
+          },
+          "links": {
+            "$ref": "#/components/schemas/ResourceLinks"
+          }
+        },
+        "required": [
+          "id",
+          "type"
+        ]
+      },
+      "GameCenterMatchmakingTeamsResponse": {
+        "type": "object",
+        "title": "GameCenterMatchmakingTeamsResponse",
+        "properties": {
+          "data": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/GameCenterMatchmakingTeam"
+            }
+          },
+          "links": {
+            "$ref": "#/components/schemas/PagedDocumentLinks"
+          },
+          "meta": {
+            "$ref": "#/components/schemas/PagingInformation"
+          }
+        },
+        "required": [
+          "data",
+          "links"
+        ]
+      },
+      "GameCenterMatchmakingTeamResponse": {
+        "type": "object",
+        "title": "GameCenterMatchmakingTeamResponse",
+        "properties": {
+          "data": {
+            "$ref": "#/components/schemas/GameCenterMatchmakingTeam"
+          },
+          "links": {
+            "$ref": "#/components/schemas/DocumentLinks"
+          }
+        },
+        "required": [
+          "data",
+          "links"
+        ]
+      },
+      "GameCenterMatchmakingTeamCreateRequest": {
+        "type": "object",
+        "title": "GameCenterMatchmakingTeamCreateRequest",
+        "properties": {
+          "data": {
+            "type": "object",
+            "properties": {
+              "type": {
+                "type": "string",
+                "enum": [
+                  "gameCenterMatchmakingTeams"
+                ]
+              },
+              "attributes": {
+                "type": "object",
+                "properties": {
+                  "referenceName": {
+                    "type": "string"
+                  },
+                  "minPlayers": {
+                    "type": "integer"
+                  },
+                  "maxPlayers": {
+                    "type": "integer"
+                  }
+                },
+                "required": [
+                  "maxPlayers",
+                  "minPlayers",
+                  "referenceName"
+                ]
+              },
+              "relationships": {
+                "type": "object",
+                "properties": {
+                  "ruleSet": {
+                    "type": "object",
+                    "properties": {
+                      "data": {
+                        "type": "object",
+                        "properties": {
+                          "type": {
+                            "type": "string",
+                            "enum": [
+                              "gameCenterMatchmakingRuleSets"
+                            ]
+                          },
+                          "id": {
+                            "type": "string"
+                          }
+                        },
+                        "required": [
+                          "id",
+                          "type"
+                        ]
+                      }
+                    },
+                    "required": [
+                      "data"
+                    ]
+                  }
+                },
+                "required": [
+                  "ruleSet"
+                ]
+              }
+            },
+            "required": [
+              "relationships",
+              "attributes",
+              "type"
+            ]
+          }
+        },
+        "required": [
+          "data"
+        ]
+      },
+      "GameCenterMatchmakingTeamUpdateRequest": {
+        "type": "object",
+        "title": "GameCenterMatchmakingTeamUpdateRequest",
+        "properties": {
+          "data": {
+            "type": "object",
+            "properties": {
+              "type": {
+                "type": "string",
+                "enum": [
+                  "gameCenterMatchmakingTeams"
+                ]
+              },
+              "id": {
+                "type": "string"
+              },
+              "attributes": {
+                "type": "object",
+                "properties": {
+                  "minPlayers": {
+                    "type": "integer"
+                  },
+                  "maxPlayers": {
+                    "type": "integer"
+                  }
+                }
+              }
+            },
+            "required": [
+              "id",
+              "type"
+            ]
+          }
+        },
+        "required": [
+          "data"
+        ]
+      },
+      "GameCenterMatchmakingTestPlayerPropertyInlineCreate": {
+        "type": "object",
+        "properties": {
+          "type": {
+            "type": "string",
+            "enum": [
+              "gameCenterMatchmakingTestPlayerProperties"
+            ]
+          },
+          "id": {
+            "type": "string"
+          },
+          "attributes": {
+            "type": "object",
+            "properties": {
+              "playerId": {
+                "type": "string"
+              },
+              "properties": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/components/schemas/Property"
+                }
+              }
+            },
+            "required": [
+              "playerId"
+            ]
+          }
+        },
+        "required": [
+          "attributes",
+          "type"
+        ]
+      },
+      "GameCenterMatchmakingTestRequest": {
+        "type": "object",
+        "title": "GameCenterMatchmakingTestRequest",
+        "properties": {
+          "type": {
+            "type": "string",
+            "enum": [
+              "gameCenterMatchmakingTestRequests"
+            ]
+          },
+          "id": {
+            "type": "string"
+          },
+          "links": {
+            "$ref": "#/components/schemas/ResourceLinks"
+          }
+        },
+        "required": [
+          "id",
+          "type"
+        ]
+      },
+      "GameCenterMatchmakingTestRequestInlineCreate": {
+        "type": "object",
+        "properties": {
+          "type": {
+            "type": "string",
+            "enum": [
+              "gameCenterMatchmakingTestRequests"
+            ]
+          },
+          "id": {
+            "type": "string"
+          },
+          "attributes": {
+            "type": "object",
+            "properties": {
+              "requestName": {
+                "type": "string"
+              },
+              "secondsInQueue": {
+                "type": "integer"
+              },
+              "locale": {
+                "type": "string",
+                "enum": [
+                  "AR-SA",
+                  "CA-ES",
+                  "CS-CZ",
+                  "DA-DK",
+                  "DE-DE",
+                  "EL-GR",
+                  "EN-AU",
+                  "EN-GB",
+                  "EN-US",
+                  "EN-KY",
+                  "ES-ES",
+                  "ES-MX",
+                  "FI-FI",
+                  "FR-CA",
+                  "FR-FR",
+                  "HI-IN",
+                  "HR-HR",
+                  "HU-HU",
+                  "ID-ID",
+                  "IT-IT",
+                  "IW-IL",
+                  "JA-JP",
+                  "KO-KR",
+                  "MS-MY",
+                  "NL-NL",
+                  "NO-NO",
+                  "PL-PL",
+                  "PT-BR",
+                  "PT-PT",
+                  "RO-RO",
+                  "RU-RU",
+                  "SK-SK",
+                  "SV-SE",
+                  "TH-TH",
+                  "TR-TR",
+                  "UK-UA",
+                  "ZH-CN",
+                  "ZH-TW",
+                  "ZH-HK"
+                ]
+              },
+              "location": {
+                "$ref": "#/components/schemas/Location"
+              },
+              "minPlayers": {
+                "type": "integer"
+              },
+              "maxPlayers": {
+                "type": "integer"
+              },
+              "playerCount": {
+                "type": "integer"
+              },
+              "bundleId": {
+                "type": "string"
+              },
+              "platform": {
+                "$ref": "#/components/schemas/Platform"
+              },
+              "appVersion": {
+                "type": "string"
+              }
+            },
+            "required": [
+              "requestName",
+              "appVersion",
+              "secondsInQueue",
+              "bundleId",
+              "platform"
+            ]
+          },
+          "relationships": {
+            "type": "object",
+            "properties": {
+              "matchmakingPlayerProperties": {
+                "type": "object",
+                "properties": {
+                  "data": {
+                    "type": "array",
+                    "items": {
+                      "type": "object",
+                      "properties": {
+                        "type": {
+                          "type": "string",
+                          "enum": [
+                            "gameCenterMatchmakingTestPlayerProperties"
+                          ]
+                        },
+                        "id": {
+                          "type": "string"
+                        }
+                      },
+                      "required": [
+                        "id",
+                        "type"
+                      ]
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "required": [
+          "attributes",
+          "type"
         ]
       },
       "InAppPurchaseAppStoreReviewScreenshot": {
@@ -113763,6 +119035,9 @@
                 }
               }
             }
+          },
+          "links": {
+            "$ref": "#/components/schemas/ResourceLinks"
           }
         },
         "required": [
@@ -114242,6 +119517,9 @@
                 }
               }
             }
+          },
+          "links": {
+            "$ref": "#/components/schemas/ResourceLinks"
           }
         },
         "required": [
@@ -114418,6 +119696,9 @@
                 }
               }
             }
+          },
+          "links": {
+            "$ref": "#/components/schemas/ResourceLinks"
           }
         },
         "required": [
@@ -115258,6 +120539,9 @@
                 "type": "string"
               }
             }
+          },
+          "links": {
+            "$ref": "#/components/schemas/ResourceLinks"
           }
         },
         "required": [
@@ -117822,6 +123106,9 @@
           },
           "id": {
             "type": "string"
+          },
+          "links": {
+            "$ref": "#/components/schemas/ResourceLinks"
           }
         },
         "required": [
@@ -119287,6 +124574,9 @@
           },
           "id": {
             "type": "string"
+          },
+          "links": {
+            "$ref": "#/components/schemas/ResourceLinks"
           }
         },
         "required": [
@@ -120687,6 +125977,9 @@
           },
           "id": {
             "type": "string"
+          },
+          "links": {
+            "$ref": "#/components/schemas/ResourceLinks"
           }
         },
         "required": [
@@ -121025,6 +126318,9 @@
                 }
               }
             }
+          },
+          "links": {
+            "$ref": "#/components/schemas/ResourceLinks"
           }
         },
         "required": [
@@ -122227,6 +127523,9 @@
                 }
               }
             }
+          },
+          "links": {
+            "$ref": "#/components/schemas/ResourceLinks"
           }
         },
         "required": [
@@ -122864,6 +128163,9 @@
                 }
               }
             }
+          },
+          "links": {
+            "$ref": "#/components/schemas/ResourceLinks"
           }
         },
         "required": [
@@ -123764,6 +129066,9 @@
                 "type": "string"
               }
             }
+          },
+          "links": {
+            "$ref": "#/components/schemas/ResourceLinks"
           }
         },
         "required": [
@@ -126933,6 +132238,781 @@
           "data"
         ]
       },
+      "AppsBetaTesterUsagesV1MetricResponse": {
+        "type": "object",
+        "properties": {
+          "data": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "dataPoints": {
+                  "type": "object",
+                  "properties": {
+                    "start": {
+                      "type": "string",
+                      "format": "date-time"
+                    },
+                    "end": {
+                      "type": "string",
+                      "format": "date-time"
+                    },
+                    "values": {
+                      "type": "object",
+                      "properties": {
+                        "crashCount": {
+                          "type": "integer"
+                        },
+                        "sessionCount": {
+                          "type": "integer"
+                        },
+                        "feedbackCount": {
+                          "type": "integer"
+                        }
+                      }
+                    }
+                  }
+                },
+                "dimensions": {
+                  "type": "object",
+                  "properties": {
+                    "betaTesters": {
+                      "type": "object",
+                      "properties": {
+                        "links": {
+                          "type": "object",
+                          "properties": {
+                            "groupBy": {
+                              "type": "string",
+                              "format": "uri-reference"
+                            },
+                            "related": {
+                              "type": "string",
+                              "format": "uri-reference"
+                            }
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "links": {
+            "$ref": "#/components/schemas/PagedDocumentLinks"
+          },
+          "meta": {
+            "$ref": "#/components/schemas/PagingInformation"
+          },
+          "included": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/BetaTester"
+            }
+          }
+        },
+        "required": [
+          "data",
+          "links"
+        ]
+      },
+      "BetaTesterUsagesV1MetricResponse": {
+        "type": "object",
+        "properties": {
+          "data": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "dataPoints": {
+                  "type": "object",
+                  "properties": {
+                    "start": {
+                      "type": "string",
+                      "format": "date-time"
+                    },
+                    "end": {
+                      "type": "string",
+                      "format": "date-time"
+                    },
+                    "values": {
+                      "type": "object",
+                      "properties": {
+                        "crashCount": {
+                          "type": "integer"
+                        },
+                        "sessionCount": {
+                          "type": "integer"
+                        },
+                        "feedbackCount": {
+                          "type": "integer"
+                        }
+                      }
+                    }
+                  }
+                },
+                "dimensions": {
+                  "type": "object",
+                  "properties": {
+                    "apps": {
+                      "type": "object",
+                      "properties": {
+                        "links": {
+                          "type": "object",
+                          "properties": {
+                            "groupBy": {
+                              "type": "string",
+                              "format": "uri-reference"
+                            },
+                            "related": {
+                              "type": "string",
+                              "format": "uri-reference"
+                            }
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "links": {
+            "$ref": "#/components/schemas/PagedDocumentLinks"
+          },
+          "meta": {
+            "$ref": "#/components/schemas/PagingInformation"
+          }
+        },
+        "required": [
+          "data",
+          "links"
+        ]
+      },
+      "BetaBuildUsagesV1MetricResponse": {
+        "type": "object",
+        "properties": {
+          "data": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "dataPoints": {
+                  "type": "object",
+                  "properties": {
+                    "start": {
+                      "type": "string",
+                      "format": "date-time"
+                    },
+                    "end": {
+                      "type": "string",
+                      "format": "date-time"
+                    },
+                    "values": {
+                      "type": "object",
+                      "properties": {
+                        "crashCount": {
+                          "type": "integer"
+                        },
+                        "installCount": {
+                          "type": "integer"
+                        },
+                        "sessionCount": {
+                          "type": "integer"
+                        },
+                        "feedbackCount": {
+                          "type": "integer"
+                        },
+                        "inviteCount": {
+                          "type": "integer"
+                        }
+                      }
+                    }
+                  }
+                },
+                "dimensions": {
+                  "type": "object",
+                  "properties": {
+                    "bundleIds": {
+                      "type": "object",
+                      "properties": {
+                        "links": {
+                          "type": "object",
+                          "properties": {
+                            "groupBy": {
+                              "type": "string",
+                              "format": "uri-reference"
+                            }
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "links": {
+            "$ref": "#/components/schemas/PagedDocumentLinks"
+          },
+          "meta": {
+            "$ref": "#/components/schemas/PagingInformation"
+          }
+        },
+        "required": [
+          "data",
+          "links"
+        ]
+      },
+      "GameCenterMatchmakingAppRequestsV1MetricResponse": {
+        "type": "object",
+        "properties": {
+          "data": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "dataPoints": {
+                  "type": "object",
+                  "properties": {
+                    "start": {
+                      "type": "string",
+                      "format": "date-time"
+                    },
+                    "end": {
+                      "type": "string",
+                      "format": "date-time"
+                    },
+                    "values": {
+                      "type": "object",
+                      "properties": {
+                        "count": {
+                          "type": "integer"
+                        },
+                        "averageSecondsInQueue": {
+                          "type": "number"
+                        },
+                        "p50SecondsInQueue": {
+                          "type": "number"
+                        },
+                        "p95SecondsInQueue": {
+                          "type": "number"
+                        }
+                      }
+                    }
+                  }
+                },
+                "dimensions": {
+                  "type": "object",
+                  "properties": {
+                    "result": {
+                      "type": "object",
+                      "properties": {
+                        "links": {
+                          "type": "object",
+                          "properties": {
+                            "groupBy": {
+                              "type": "string",
+                              "format": "uri-reference"
+                            }
+                          }
+                        }
+                      }
+                    }
+                  }
+                },
+                "granularity": {
+                  "type": "string",
+                  "enum": [
+                    "P1D",
+                    "PT1H",
+                    "PT15M"
+                  ]
+                }
+              }
+            }
+          },
+          "links": {
+            "$ref": "#/components/schemas/PagedDocumentLinks"
+          },
+          "meta": {
+            "$ref": "#/components/schemas/PagingInformation"
+          }
+        },
+        "required": [
+          "data",
+          "links"
+        ]
+      },
+      "GameCenterMatchmakingQueueSizesV1MetricResponse": {
+        "type": "object",
+        "properties": {
+          "data": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "dataPoints": {
+                  "type": "object",
+                  "properties": {
+                    "start": {
+                      "type": "string",
+                      "format": "date-time"
+                    },
+                    "end": {
+                      "type": "string",
+                      "format": "date-time"
+                    },
+                    "values": {
+                      "type": "object",
+                      "properties": {
+                        "count": {
+                          "type": "integer"
+                        },
+                        "averageNumberOfRequests": {
+                          "type": "number"
+                        },
+                        "p50NumberOfRequests": {
+                          "type": "number"
+                        },
+                        "p95NumberOfRequests": {
+                          "type": "number"
+                        }
+                      }
+                    }
+                  }
+                },
+                "granularity": {
+                  "type": "string",
+                  "enum": [
+                    "P1D",
+                    "PT1H",
+                    "PT15M"
+                  ]
+                }
+              }
+            }
+          },
+          "links": {
+            "$ref": "#/components/schemas/PagedDocumentLinks"
+          },
+          "meta": {
+            "$ref": "#/components/schemas/PagingInformation"
+          }
+        },
+        "required": [
+          "data",
+          "links"
+        ]
+      },
+      "GameCenterMatchmakingQueueRequestsV1MetricResponse": {
+        "type": "object",
+        "properties": {
+          "data": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "dataPoints": {
+                  "type": "object",
+                  "properties": {
+                    "start": {
+                      "type": "string",
+                      "format": "date-time"
+                    },
+                    "end": {
+                      "type": "string",
+                      "format": "date-time"
+                    },
+                    "values": {
+                      "type": "object",
+                      "properties": {
+                        "count": {
+                          "type": "integer"
+                        },
+                        "averageSecondsInQueue": {
+                          "type": "number"
+                        },
+                        "p50SecondsInQueue": {
+                          "type": "number"
+                        },
+                        "p95SecondsInQueue": {
+                          "type": "number"
+                        }
+                      }
+                    }
+                  }
+                },
+                "dimensions": {
+                  "type": "object",
+                  "properties": {
+                    "result": {
+                      "type": "object",
+                      "properties": {
+                        "links": {
+                          "type": "object",
+                          "properties": {
+                            "groupBy": {
+                              "type": "string",
+                              "format": "uri-reference"
+                            }
+                          }
+                        }
+                      }
+                    },
+                    "gameCenterDetail": {
+                      "type": "object",
+                      "properties": {
+                        "links": {
+                          "type": "object",
+                          "properties": {
+                            "groupBy": {
+                              "type": "string",
+                              "format": "uri-reference"
+                            },
+                            "related": {
+                              "type": "string",
+                              "format": "uri-reference"
+                            }
+                          }
+                        }
+                      }
+                    }
+                  }
+                },
+                "granularity": {
+                  "type": "string",
+                  "enum": [
+                    "P1D",
+                    "PT1H",
+                    "PT15M"
+                  ]
+                }
+              }
+            }
+          },
+          "links": {
+            "$ref": "#/components/schemas/PagedDocumentLinks"
+          },
+          "meta": {
+            "$ref": "#/components/schemas/PagingInformation"
+          }
+        },
+        "required": [
+          "data",
+          "links"
+        ]
+      },
+      "GameCenterMatchmakingSessionsV1MetricResponse": {
+        "type": "object",
+        "properties": {
+          "data": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "dataPoints": {
+                  "type": "object",
+                  "properties": {
+                    "start": {
+                      "type": "string",
+                      "format": "date-time"
+                    },
+                    "end": {
+                      "type": "string",
+                      "format": "date-time"
+                    },
+                    "values": {
+                      "type": "object",
+                      "properties": {
+                        "count": {
+                          "type": "integer"
+                        },
+                        "averagePlayerCount": {
+                          "type": "number"
+                        },
+                        "p50PlayerCount": {
+                          "type": "number"
+                        },
+                        "p95PlayerCount": {
+                          "type": "number"
+                        }
+                      }
+                    }
+                  }
+                },
+                "granularity": {
+                  "type": "string",
+                  "enum": [
+                    "P1D",
+                    "PT1H",
+                    "PT15M"
+                  ]
+                }
+              }
+            }
+          },
+          "links": {
+            "$ref": "#/components/schemas/PagedDocumentLinks"
+          },
+          "meta": {
+            "$ref": "#/components/schemas/PagingInformation"
+          }
+        },
+        "required": [
+          "data",
+          "links"
+        ]
+      },
+      "GameCenterMatchmakingBooleanRuleResultsV1MetricResponse": {
+        "type": "object",
+        "properties": {
+          "data": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "dataPoints": {
+                  "type": "object",
+                  "properties": {
+                    "start": {
+                      "type": "string",
+                      "format": "date-time"
+                    },
+                    "end": {
+                      "type": "string",
+                      "format": "date-time"
+                    },
+                    "values": {
+                      "type": "object",
+                      "properties": {
+                        "count": {
+                          "type": "integer"
+                        }
+                      }
+                    }
+                  }
+                },
+                "dimensions": {
+                  "type": "object",
+                  "properties": {
+                    "result": {
+                      "type": "object",
+                      "properties": {
+                        "links": {
+                          "type": "object",
+                          "properties": {
+                            "groupBy": {
+                              "type": "string",
+                              "format": "uri-reference"
+                            }
+                          }
+                        }
+                      }
+                    },
+                    "gameCenterMatchmakingQueue": {
+                      "type": "object",
+                      "properties": {
+                        "links": {
+                          "type": "object",
+                          "properties": {
+                            "groupBy": {
+                              "type": "string",
+                              "format": "uri-reference"
+                            },
+                            "related": {
+                              "type": "string",
+                              "format": "uri-reference"
+                            }
+                          }
+                        }
+                      }
+                    }
+                  }
+                },
+                "granularity": {
+                  "type": "string",
+                  "enum": [
+                    "P1D",
+                    "PT1H",
+                    "PT15M"
+                  ]
+                }
+              }
+            }
+          },
+          "links": {
+            "$ref": "#/components/schemas/PagedDocumentLinks"
+          },
+          "meta": {
+            "$ref": "#/components/schemas/PagingInformation"
+          }
+        },
+        "required": [
+          "data",
+          "links"
+        ]
+      },
+      "GameCenterMatchmakingNumberRuleResultsV1MetricResponse": {
+        "type": "object",
+        "properties": {
+          "data": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "dataPoints": {
+                  "type": "object",
+                  "properties": {
+                    "start": {
+                      "type": "string",
+                      "format": "date-time"
+                    },
+                    "end": {
+                      "type": "string",
+                      "format": "date-time"
+                    },
+                    "values": {
+                      "type": "object",
+                      "properties": {
+                        "count": {
+                          "type": "integer"
+                        },
+                        "averageResult": {
+                          "type": "number"
+                        },
+                        "p50Result": {
+                          "type": "number"
+                        },
+                        "p95Result": {
+                          "type": "number"
+                        }
+                      }
+                    }
+                  }
+                },
+                "dimensions": {
+                  "type": "object",
+                  "properties": {
+                    "gameCenterMatchmakingQueue": {
+                      "type": "object",
+                      "properties": {
+                        "links": {
+                          "type": "object",
+                          "properties": {
+                            "groupBy": {
+                              "type": "string",
+                              "format": "uri-reference"
+                            },
+                            "related": {
+                              "type": "string",
+                              "format": "uri-reference"
+                            }
+                          }
+                        }
+                      }
+                    }
+                  }
+                },
+                "granularity": {
+                  "type": "string",
+                  "enum": [
+                    "P1D",
+                    "PT1H",
+                    "PT15M"
+                  ]
+                }
+              }
+            }
+          },
+          "links": {
+            "$ref": "#/components/schemas/PagedDocumentLinks"
+          },
+          "meta": {
+            "$ref": "#/components/schemas/PagingInformation"
+          }
+        },
+        "required": [
+          "data",
+          "links"
+        ]
+      },
+      "GameCenterMatchmakingRuleErrorsV1MetricResponse": {
+        "type": "object",
+        "properties": {
+          "data": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "dataPoints": {
+                  "type": "object",
+                  "properties": {
+                    "start": {
+                      "type": "string",
+                      "format": "date-time"
+                    },
+                    "end": {
+                      "type": "string",
+                      "format": "date-time"
+                    },
+                    "values": {
+                      "type": "object",
+                      "properties": {
+                        "count": {
+                          "type": "integer"
+                        }
+                      }
+                    }
+                  }
+                },
+                "dimensions": {
+                  "type": "object",
+                  "properties": {
+                    "gameCenterMatchmakingQueue": {
+                      "type": "object",
+                      "properties": {
+                        "links": {
+                          "type": "object",
+                          "properties": {
+                            "groupBy": {
+                              "type": "string",
+                              "format": "uri-reference"
+                            },
+                            "related": {
+                              "type": "string",
+                              "format": "uri-reference"
+                            }
+                          }
+                        }
+                      }
+                    }
+                  }
+                },
+                "granularity": {
+                  "type": "string",
+                  "enum": [
+                    "P1D",
+                    "PT1H",
+                    "PT15M"
+                  ]
+                }
+              }
+            }
+          },
+          "links": {
+            "$ref": "#/components/schemas/PagedDocumentLinks"
+          },
+          "meta": {
+            "$ref": "#/components/schemas/PagingInformation"
+          }
+        },
+        "required": [
+          "data",
+          "links"
+        ]
+      },
       "ErrorResponse": {
         "type": "object",
         "properties": {
@@ -127782,6 +133862,17 @@
           "MONEY_YEN"
         ]
       },
+      "GameCenterMatchmakingTeamAssignment": {
+        "type": "object",
+        "properties": {
+          "playerId": {
+            "type": "string"
+          },
+          "team": {
+            "type": "string"
+          }
+        }
+      },
       "HttpHeader": {
         "type": "object",
         "properties": {
@@ -127862,6 +133953,17 @@
           "SIX_TO_EIGHT",
           "NINE_TO_ELEVEN"
         ]
+      },
+      "Location": {
+        "type": "object",
+        "properties": {
+          "latitude": {
+            "type": "number"
+          },
+          "longitude": {
+            "type": "number"
+          }
+        }
       },
       "MetricCategory": {
         "type": "string",
@@ -127966,6 +134068,17 @@
           "DESKTOP",
           "APPLE_TV"
         ]
+      },
+      "Property": {
+        "type": "object",
+        "properties": {
+          "key": {
+            "type": "string"
+          },
+          "value": {
+            "type": "string"
+          }
+        }
       },
       "ScmProviderType": {
         "type": "object",

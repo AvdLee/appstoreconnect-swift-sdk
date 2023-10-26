@@ -3,8 +3,11 @@
 
 import Foundation
 
+@available(*, deprecated, message: "Deprecated")
 public struct AppAvailabilityResponse: Codable {
 	/// AppAvailability
+	///
+	/// - warning: Deprecated.
 	public var data: AppAvailability
 	public var included: [IncludedItem]?
 	public var links: DocumentLinks

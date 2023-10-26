@@ -3,6 +3,7 @@
 
 import Foundation
 
+@available(*, deprecated, message: "Deprecated")
 public struct AppPreOrder: Codable, Identifiable {
 	public var type: `Type`
 	public var id: String

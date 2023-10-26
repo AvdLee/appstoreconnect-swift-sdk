@@ -3,8 +3,11 @@
 
 import Foundation
 
+@available(*, deprecated, message: "Deprecated")
 public struct AppPreOrderResponse: Codable {
 	/// AppPreOrder
+	///
+	/// - warning: Deprecated.
 	public var data: AppPreOrder
 	public var included: [App]?
 	public var links: DocumentLinks

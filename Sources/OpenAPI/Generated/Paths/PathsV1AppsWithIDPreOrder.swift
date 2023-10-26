@@ -13,6 +13,7 @@ extension APIEndpoint.V1.Apps.WithID {
 		/// Path: `/v1/apps/{id}/preOrder`
 		public let path: String
 
+		@available(*, deprecated, message: "Deprecated")
 		public func get(fieldsAppPreOrders: [FieldsAppPreOrders]? = nil) -> Request<AppStoreConnect_Swift_SDK.AppPreOrderWithoutIncludesResponse> {
 			Request(path: path, method: "GET", query: makeGetQuery(fieldsAppPreOrders), id: "apps-preOrder-get_to_one_related")
 		}
