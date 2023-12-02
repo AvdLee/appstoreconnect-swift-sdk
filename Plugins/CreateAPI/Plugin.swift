@@ -12,11 +12,9 @@ struct Plugin: CommandPlugin {
         process.executableURL = URL(fileURLWithPath: createAPI.path.string)
         process.arguments = [
             "generate",
-            "app_store_connect_api_2.3_openapi.json",
-            "--module", "AppStoreConnect_Swift_SDK",
+            "app_store_connect_api.json",
             "--output", "Generated",
-            "--config", ".create-api.yml",
-            "--split",
+            "--config", "create-api.yml",
             "--clean"
         ]
 
