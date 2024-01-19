@@ -14,7 +14,7 @@ public struct RateLimit: Codable {
     /// The url of the request the rate limit were returned for.
     public let requestURL: URL?
 
-    init(value: String, requestURL: URL?) {
+    public init(value: String, requestURL: URL?) {
         self.requestURL = requestURL
 
         let items = value.split(separator: ",", omittingEmptySubsequences: true).flatMap {

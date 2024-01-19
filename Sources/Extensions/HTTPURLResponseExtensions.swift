@@ -11,7 +11,7 @@ import FoundationNetworking
 #endif
 
 extension HTTPURLResponse {
-    var rateLimit: RateLimit? {
+    public var rateLimit: RateLimit? {
         if let value = value(forHTTPHeaderField: "X-Rate-Limit") {
             return RateLimit(value: value, requestURL: url)
         } else {
