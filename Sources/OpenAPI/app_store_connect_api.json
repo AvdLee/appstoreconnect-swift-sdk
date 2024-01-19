@@ -41049,7 +41049,8 @@
                   "IMAGE_MANAGER",
                   "CREATE_APPS",
                   "CLOUD_MANAGED_DEVELOPER_ID",
-                  "CLOUD_MANAGED_APP_DISTRIBUTION"
+                  "CLOUD_MANAGED_APP_DISTRIBUTION",
+                  "GENERATE_INDIVIDUAL_KEYS"
                 ]
               }
             },
@@ -41562,7 +41563,8 @@
                   "IMAGE_MANAGER",
                   "CREATE_APPS",
                   "CLOUD_MANAGED_DEVELOPER_ID",
-                  "CLOUD_MANAGED_APP_DISTRIBUTION"
+                  "CLOUD_MANAGED_APP_DISTRIBUTION",
+                  "GENERATE_INDIVIDUAL_KEYS"
                 ]
               }
             },
@@ -130334,7 +130336,7 @@
           "data": {
             "type": "array",
             "items": {
-              "$ref": "#/components/schemas/BetaTester"
+              "$ref": "#/components/schemas/BetaGroup"
             }
           },
           "links": {
@@ -130542,7 +130544,7 @@
           "data": {
             "type": "array",
             "items": {
-              "$ref": "#/components/schemas/Build"
+              "$ref": "#/components/schemas/BetaTester"
             }
           },
           "links": {
@@ -134467,7 +134469,8 @@
           "IMAGE_MANAGER",
           "CREATE_APPS",
           "CLOUD_MANAGED_DEVELOPER_ID",
-          "CLOUD_MANAGED_APP_DISTRIBUTION"
+          "CLOUD_MANAGED_APP_DISTRIBUTION",
+          "GENERATE_INDIVIDUAL_KEYS"
         ]
       },
       "csv": {
