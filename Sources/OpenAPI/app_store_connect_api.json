@@ -134693,15 +134693,18 @@
                                           "type": "number"
                                         },
                                         "percentageBreakdown": {
-                                          "type": "object",
-                                          "properties": {
-                                            "value": {
-                                              "type": "number"
-                                            },
-                                            "subSystemLabel": {
-                                              "type": "string"
+                                          "type": "array",
+                                          "items": {
+                                            "type": "object",
+                                            "properties": {
+                                              "value": {
+                                                 "type": "number"
+                                              },
+                                              "subSystemLabel": {
+                                                 "type": "string"
+                                              }
                                             }
-                                          }
+                                           }
                                         },
                                         "goal": {
                                           "type": "string"
