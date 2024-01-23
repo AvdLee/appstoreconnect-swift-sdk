@@ -133995,7 +133995,10 @@
             "type": "string"
           },
           "referenceVersions": {
-            "type": "string"
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
           },
           "maxLatestVersionValue": {
             "type": "number"
