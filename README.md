@@ -190,6 +190,9 @@ Superstar uses the App Store Connect API to help you respond to your App Store c
 - [AppsMan: Manage app metada globally](https://apps.apple.com/app/id6443788342) developed by [Karmjit Singh](https://twitter.com/CodeWithKarma).
 The AppsMan app is a project that will allow developers to manage apps localisable data on the App Store with ease. You can easily update the data for one language and copy over to other and save. You can see the previous versions details as well. Only macOS versions available.
 
+- [Localiji: Localizations for App Store](https://apps.apple.com/us/app/localiji/id6467663963) developed by Nicolas Kick.
+Localiji manages a local copy of your app localizations from App Store Connect and allows you to effortlessly sync the changes. Edit individual attributes, like your app’s description, release notes or screenshots. Export an entire language, import the translations again and upload them to App Store Connect with only a few clicks.
+
 
 ## License
 
