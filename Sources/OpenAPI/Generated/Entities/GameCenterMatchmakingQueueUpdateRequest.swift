@@ -9,10 +9,29 @@ public struct GameCenterMatchmakingQueueUpdateRequest: Codable {
 	public struct Data: Codable, Identifiable {
 		public var type: `Type`
 		public var id: String
+		public var attributes: Attributes?
 		public var relationships: Relationships?
 
 		public enum `Type`: String, Codable, CaseIterable {
 			case gameCenterMatchmakingQueues
+		}
+
+		public struct Attributes: Codable {
+			public var classicMatchmakingBundleIDs: [String]?
+
+			public init(classicMatchmakingBundleIDs: [String]? = nil) {
+				self.classicMatchmakingBundleIDs = classicMatchmakingBundleIDs
+			}
+
+			public init(from decoder: Decoder) throws {
+				let values = try decoder.container(keyedBy: StringCodingKey.self)
+				self.classicMatchmakingBundleIDs = try values.decodeIfPresent([String].self, forKey: "classicMatchmakingBundleIds")
+			}
+
+			public func encode(to encoder: Encoder) throws {
+				var values = encoder.container(keyedBy: StringCodingKey.self)
+				try values.encodeIfPresent(classicMatchmakingBundleIDs, forKey: "classicMatchmakingBundleIds")
+			}
 		}
 
 		public struct Relationships: Codable {
@@ -125,9 +144,10 @@ public struct GameCenterMatchmakingQueueUpdateRequest: Codable {
 			}
 		}
 
-		public init(type: `Type`, id: String, relationships: Relationships? = nil) {
+		public init(type: `Type`, id: String, attributes: Attributes? = nil, relationships: Relationships? = nil) {
 			self.type = type
 			self.id = id
+			self.attributes = attributes
 			self.relationships = relationships
 		}
 
@@ -135,6 +155,7 @@ public struct GameCenterMatchmakingQueueUpdateRequest: Codable {
 			let values = try decoder.container(keyedBy: StringCodingKey.self)
 			self.type = try values.decode(`Type`.self, forKey: "type")
 			self.id = try values.decode(String.self, forKey: "id")
+			self.attributes = try values.decodeIfPresent(Attributes.self, forKey: "attributes")
 			self.relationships = try values.decodeIfPresent(Relationships.self, forKey: "relationships")
 		}
 
@@ -142,6 +163,7 @@ public struct GameCenterMatchmakingQueueUpdateRequest: Codable {
 			var values = encoder.container(keyedBy: StringCodingKey.self)
 			try values.encode(type, forKey: "type")
 			try values.encode(id, forKey: "id")
+			try values.encodeIfPresent(attributes, forKey: "attributes")
 			try values.encodeIfPresent(relationships, forKey: "relationships")
 		}
 	}

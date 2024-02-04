@@ -50,6 +50,7 @@ extension APIEndpoint.V1.AppCustomProductPageLocalizations.WithID {
 				case appWatchSeries4 = "APP_WATCH_SERIES_4"
 				case appWatchSeries3 = "APP_WATCH_SERIES_3"
 				case appAppleTv = "APP_APPLE_TV"
+				case appAppleVisionPro = "APP_APPLE_VISION_PRO"
 				case imessageAppIphone67 = "IMESSAGE_APP_IPHONE_67"
 				case imessageAppIphone61 = "IMESSAGE_APP_IPHONE_61"
 				case imessageAppIphone65 = "IMESSAGE_APP_IPHONE_65"

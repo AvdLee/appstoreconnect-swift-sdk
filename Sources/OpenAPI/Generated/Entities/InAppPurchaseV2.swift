@@ -22,10 +22,8 @@ public struct InAppPurchaseV2: Codable, Identifiable {
 		public var reviewNote: String?
 		public var isFamilySharable: Bool?
 		public var isContentHosting: Bool?
-		/// - warning: Deprecated.
-		public var isAvailableInAllTerritories: Bool?
 
-		public init(name: String? = nil, productID: String? = nil, inAppPurchaseType: InAppPurchaseType? = nil, state: InAppPurchaseState? = nil, reviewNote: String? = nil, isFamilySharable: Bool? = nil, isContentHosting: Bool? = nil, isAvailableInAllTerritories: Bool? = nil) {
+		public init(name: String? = nil, productID: String? = nil, inAppPurchaseType: InAppPurchaseType? = nil, state: InAppPurchaseState? = nil, reviewNote: String? = nil, isFamilySharable: Bool? = nil, isContentHosting: Bool? = nil) {
 			self.name = name
 			self.productID = productID
 			self.inAppPurchaseType = inAppPurchaseType
@@ -33,7 +31,6 @@ public struct InAppPurchaseV2: Codable, Identifiable {
 			self.reviewNote = reviewNote
 			self.isFamilySharable = isFamilySharable
 			self.isContentHosting = isContentHosting
-			self.isAvailableInAllTerritories = isAvailableInAllTerritories
 		}
 
 		public init(from decoder: Decoder) throws {
@@ -45,7 +42,6 @@ public struct InAppPurchaseV2: Codable, Identifiable {
 			self.reviewNote = try values.decodeIfPresent(String.self, forKey: "reviewNote")
 			self.isFamilySharable = try values.decodeIfPresent(Bool.self, forKey: "familySharable")
 			self.isContentHosting = try values.decodeIfPresent(Bool.self, forKey: "contentHosting")
-			self.isAvailableInAllTerritories = try values.decodeIfPresent(Bool.self, forKey: "availableInAllTerritories")
 		}
 
 		public func encode(to encoder: Encoder) throws {
@@ -57,7 +53,6 @@ public struct InAppPurchaseV2: Codable, Identifiable {
 			try values.encodeIfPresent(reviewNote, forKey: "reviewNote")
 			try values.encodeIfPresent(isFamilySharable, forKey: "familySharable")
 			try values.encodeIfPresent(isContentHosting, forKey: "contentHosting")
-			try values.encodeIfPresent(isAvailableInAllTerritories, forKey: "availableInAllTerritories")
 		}
 	}
 

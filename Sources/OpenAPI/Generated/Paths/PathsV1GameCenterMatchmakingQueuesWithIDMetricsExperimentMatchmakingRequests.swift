@@ -19,7 +19,7 @@ extension APIEndpoint.V1.GameCenterMatchmakingQueues.WithID.Metrics {
 
 		public struct GetParameters {
 			public var limit: Int?
-			public var granularity: [Granularity]
+			public var granularity: Granularity
 			public var groupBy: [GroupBy]?
 			public var filterResult: FilterResult?
 			public var filterGameCenterDetail: String?
@@ -53,7 +53,7 @@ extension APIEndpoint.V1.GameCenterMatchmakingQueues.WithID.Metrics {
 				case minusp95SecondsInQueue = "-p95SecondsInQueue"
 			}
 
-			public init(limit: Int? = nil, granularity: [Granularity], groupBy: [GroupBy]? = nil, filterResult: FilterResult? = nil, filterGameCenterDetail: String? = nil, sort: [Sort]? = nil) {
+			public init(limit: Int? = nil, granularity: Granularity, groupBy: [GroupBy]? = nil, filterResult: FilterResult? = nil, filterGameCenterDetail: String? = nil, sort: [Sort]? = nil) {
 				self.limit = limit
 				self.granularity = granularity
 				self.groupBy = groupBy

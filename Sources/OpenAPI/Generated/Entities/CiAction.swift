@@ -22,6 +22,8 @@ public struct CiAction: Codable {
 		case anyWatchosSimulator = "ANY_WATCHOS_SIMULATOR"
 		case anyMac = "ANY_MAC"
 		case anyMacCatalyst = "ANY_MAC_CATALYST"
+		case anyVisionosDevice = "ANY_VISIONOS_DEVICE"
+		case anyVisionosSimulator = "ANY_VISIONOS_SIMULATOR"
 	}
 
 	public struct TestConfiguration: Codable {
@@ -60,6 +62,7 @@ public struct CiAction: Codable {
 		case ios = "IOS"
 		case tvos = "TVOS"
 		case watchos = "WATCHOS"
+		case visionos = "VISIONOS"
 	}
 
 	public init(name: String? = nil, actionType: CiActionType? = nil, destination: Destination? = nil, buildDistributionAudience: BuildAudienceType? = nil, testConfiguration: TestConfiguration? = nil, scheme: String? = nil, platform: Platform? = nil, isRequiredToPass: Bool? = nil) {

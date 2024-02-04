@@ -19,7 +19,7 @@ extension APIEndpoint.V1.GameCenterMatchmakingRules.WithID.Metrics {
 
 		public struct GetParameters {
 			public var limit: Int?
-			public var granularity: [Granularity]
+			public var granularity: Granularity
 			public var groupBy: [GroupBy]?
 			public var filterResult: String?
 			public var filterGameCenterMatchmakingQueue: String?
@@ -41,7 +41,7 @@ extension APIEndpoint.V1.GameCenterMatchmakingRules.WithID.Metrics {
 				case minuscount = "-count"
 			}
 
-			public init(limit: Int? = nil, granularity: [Granularity], groupBy: [GroupBy]? = nil, filterResult: String? = nil, filterGameCenterMatchmakingQueue: String? = nil, sort: [Sort]? = nil) {
+			public init(limit: Int? = nil, granularity: Granularity, groupBy: [GroupBy]? = nil, filterResult: String? = nil, filterGameCenterMatchmakingQueue: String? = nil, sort: [Sort]? = nil) {
 				self.limit = limit
 				self.granularity = granularity
 				self.groupBy = groupBy

@@ -284,7 +284,6 @@ extension APIEndpoint.V1.CiProducts.WithID {
 				case app
 				case appStoreReviewScreenshot
 				case apps
-				case availableInAllTerritories
 				case content
 				case contentHosting
 				case familySharable

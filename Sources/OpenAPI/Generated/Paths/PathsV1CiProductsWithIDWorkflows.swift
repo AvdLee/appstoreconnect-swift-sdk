@@ -44,6 +44,9 @@ extension APIEndpoint.V1.CiProducts.WithID {
 				case isLockedForEditing
 				case lastModifiedDate
 				case macOsVersion
+				case manualBranchStartCondition
+				case manualPullRequestStartCondition
+				case manualTagStartCondition
 				case name
 				case product
 				case pullRequestStartCondition

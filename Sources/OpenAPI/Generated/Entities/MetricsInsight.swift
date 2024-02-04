@@ -8,7 +8,7 @@ public struct MetricsInsight: Codable {
 	public var latestVersion: String?
 	public var metric: String?
 	public var summaryString: String?
-	public var referenceVersions: [String]?
+	public var referenceVersions: String?
 	public var maxLatestVersionValue: Double?
 	public var subSystemLabel: String?
 	public var isHighImpact: Bool?
@@ -52,7 +52,7 @@ public struct MetricsInsight: Codable {
 		}
 	}
 
-	public init(metricCategory: MetricCategory? = nil, latestVersion: String? = nil, metric: String? = nil, summaryString: String? = nil, referenceVersions: [String]? = nil, maxLatestVersionValue: Double? = nil, subSystemLabel: String? = nil, isHighImpact: Bool? = nil, populations: [Population]? = nil) {
+	public init(metricCategory: MetricCategory? = nil, latestVersion: String? = nil, metric: String? = nil, summaryString: String? = nil, referenceVersions: String? = nil, maxLatestVersionValue: Double? = nil, subSystemLabel: String? = nil, isHighImpact: Bool? = nil, populations: [Population]? = nil) {
 		self.metricCategory = metricCategory
 		self.latestVersion = latestVersion
 		self.metric = metric
@@ -70,7 +70,7 @@ public struct MetricsInsight: Codable {
 		self.latestVersion = try values.decodeIfPresent(String.self, forKey: "latestVersion")
 		self.metric = try values.decodeIfPresent(String.self, forKey: "metric")
 		self.summaryString = try values.decodeIfPresent(String.self, forKey: "summaryString")
-		self.referenceVersions = try values.decodeIfPresent([String].self, forKey: "referenceVersions")
+		self.referenceVersions = try values.decodeIfPresent(String.self, forKey: "referenceVersions")
 		self.maxLatestVersionValue = try values.decodeIfPresent(Double.self, forKey: "maxLatestVersionValue")
 		self.subSystemLabel = try values.decodeIfPresent(String.self, forKey: "subSystemLabel")
 		self.isHighImpact = try values.decodeIfPresent(Bool.self, forKey: "highImpact")

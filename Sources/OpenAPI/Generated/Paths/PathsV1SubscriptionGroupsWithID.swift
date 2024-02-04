@@ -39,7 +39,6 @@ extension APIEndpoint.V1.SubscriptionGroups {
 
 			public enum FieldsSubscriptions: String, Codable, CaseIterable {
 				case appStoreReviewScreenshot
-				case availableInAllTerritories
 				case familySharable
 				case group
 				case groupLevel

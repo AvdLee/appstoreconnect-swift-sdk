@@ -46,6 +46,7 @@ extension APIEndpoint.V1.AppStoreVersionLocalizations.WithID {
 				case ipad97 = "IPAD_97"
 				case desktop = "DESKTOP"
 				case appleTv = "APPLE_TV"
+				case appleVisionPro = "APPLE_VISION_PRO"
 			}
 
 			public enum FieldsAppCustomProductPageLocalizations: String, Codable, CaseIterable {
