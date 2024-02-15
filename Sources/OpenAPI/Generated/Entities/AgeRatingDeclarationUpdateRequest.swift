@@ -27,7 +27,9 @@ public struct AgeRatingDeclarationUpdateRequest: Codable {
 			public var profanityOrCrudeHumor: ProfanityOrCrudeHumor?
 			public var sexualContentGraphicAndNudity: SexualContentGraphicAndNudity?
 			public var sexualContentOrNudity: SexualContentOrNudity?
+			/// - warning: Deprecated.
 			public var isSeventeenPlus: Bool?
+			public var ageRatingOverride: AgeRatingOverride?
 			public var horrorOrFearThemes: HorrorOrFearThemes?
 			public var matureOrSuggestiveThemes: MatureOrSuggestiveThemes?
 			public var isUnrestrictedWebAccess: Bool?
@@ -77,6 +79,12 @@ public struct AgeRatingDeclarationUpdateRequest: Codable {
 				case frequentOrIntense = "FREQUENT_OR_INTENSE"
 			}
 
+			public enum AgeRatingOverride: String, Codable, CaseIterable {
+				case `none` = "NONE"
+				case seventeenPlus = "SEVENTEEN_PLUS"
+				case unrated = "UNRATED"
+			}
+
 			public enum HorrorOrFearThemes: String, Codable, CaseIterable {
 				case `none` = "NONE"
 				case infrequentOrMild = "INFREQUENT_OR_MILD"
@@ -107,7 +115,7 @@ public struct AgeRatingDeclarationUpdateRequest: Codable {
 				case frequentOrIntense = "FREQUENT_OR_INTENSE"
 			}
 
-			public init(alcoholTobaccoOrDrugUseOrReferences: AlcoholTobaccoOrDrugUseOrReferences? = nil, contests: Contests? = nil, isGamblingAndContests: Bool? = nil, isGambling: Bool? = nil, gamblingSimulated: GamblingSimulated? = nil, kidsAgeBand: KidsAgeBand? = nil, medicalOrTreatmentInformation: MedicalOrTreatmentInformation? = nil, profanityOrCrudeHumor: ProfanityOrCrudeHumor? = nil, sexualContentGraphicAndNudity: SexualContentGraphicAndNudity? = nil, sexualContentOrNudity: SexualContentOrNudity? = nil, isSeventeenPlus: Bool? = nil, horrorOrFearThemes: HorrorOrFearThemes? = nil, matureOrSuggestiveThemes: MatureOrSuggestiveThemes? = nil, isUnrestrictedWebAccess: Bool? = nil, violenceCartoonOrFantasy: ViolenceCartoonOrFantasy? = nil, violenceRealisticProlongedGraphicOrSadistic: ViolenceRealisticProlongedGraphicOrSadistic? = nil, violenceRealistic: ViolenceRealistic? = nil) {
+			public init(alcoholTobaccoOrDrugUseOrReferences: AlcoholTobaccoOrDrugUseOrReferences? = nil, contests: Contests? = nil, isGamblingAndContests: Bool? = nil, isGambling: Bool? = nil, gamblingSimulated: GamblingSimulated? = nil, kidsAgeBand: KidsAgeBand? = nil, medicalOrTreatmentInformation: MedicalOrTreatmentInformation? = nil, profanityOrCrudeHumor: ProfanityOrCrudeHumor? = nil, sexualContentGraphicAndNudity: SexualContentGraphicAndNudity? = nil, sexualContentOrNudity: SexualContentOrNudity? = nil, isSeventeenPlus: Bool? = nil, ageRatingOverride: AgeRatingOverride? = nil, horrorOrFearThemes: HorrorOrFearThemes? = nil, matureOrSuggestiveThemes: MatureOrSuggestiveThemes? = nil, isUnrestrictedWebAccess: Bool? = nil, violenceCartoonOrFantasy: ViolenceCartoonOrFantasy? = nil, violenceRealisticProlongedGraphicOrSadistic: ViolenceRealisticProlongedGraphicOrSadistic? = nil, violenceRealistic: ViolenceRealistic? = nil) {
 				self.alcoholTobaccoOrDrugUseOrReferences = alcoholTobaccoOrDrugUseOrReferences
 				self.contests = contests
 				self.isGamblingAndContests = isGamblingAndContests
@@ -119,6 +127,7 @@ public struct AgeRatingDeclarationUpdateRequest: Codable {
 				self.sexualContentGraphicAndNudity = sexualContentGraphicAndNudity
 				self.sexualContentOrNudity = sexualContentOrNudity
 				self.isSeventeenPlus = isSeventeenPlus
+				self.ageRatingOverride = ageRatingOverride
 				self.horrorOrFearThemes = horrorOrFearThemes
 				self.matureOrSuggestiveThemes = matureOrSuggestiveThemes
 				self.isUnrestrictedWebAccess = isUnrestrictedWebAccess
@@ -140,6 +149,7 @@ public struct AgeRatingDeclarationUpdateRequest: Codable {
 				self.sexualContentGraphicAndNudity = try values.decodeIfPresent(SexualContentGraphicAndNudity.self, forKey: "sexualContentGraphicAndNudity")
 				self.sexualContentOrNudity = try values.decodeIfPresent(SexualContentOrNudity.self, forKey: "sexualContentOrNudity")
 				self.isSeventeenPlus = try values.decodeIfPresent(Bool.self, forKey: "seventeenPlus")
+				self.ageRatingOverride = try values.decodeIfPresent(AgeRatingOverride.self, forKey: "ageRatingOverride")
 				self.horrorOrFearThemes = try values.decodeIfPresent(HorrorOrFearThemes.self, forKey: "horrorOrFearThemes")
 				self.matureOrSuggestiveThemes = try values.decodeIfPresent(MatureOrSuggestiveThemes.self, forKey: "matureOrSuggestiveThemes")
 				self.isUnrestrictedWebAccess = try values.decodeIfPresent(Bool.self, forKey: "unrestrictedWebAccess")
@@ -161,6 +171,7 @@ public struct AgeRatingDeclarationUpdateRequest: Codable {
 				try values.encodeIfPresent(sexualContentGraphicAndNudity, forKey: "sexualContentGraphicAndNudity")
 				try values.encodeIfPresent(sexualContentOrNudity, forKey: "sexualContentOrNudity")
 				try values.encodeIfPresent(isSeventeenPlus, forKey: "seventeenPlus")
+				try values.encodeIfPresent(ageRatingOverride, forKey: "ageRatingOverride")
 				try values.encodeIfPresent(horrorOrFearThemes, forKey: "horrorOrFearThemes")
 				try values.encodeIfPresent(matureOrSuggestiveThemes, forKey: "matureOrSuggestiveThemes")
 				try values.encodeIfPresent(isUnrestrictedWebAccess, forKey: "unrestrictedWebAccess")

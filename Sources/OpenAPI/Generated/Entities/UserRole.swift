@@ -17,5 +17,4 @@ public enum UserRole: String, Codable, CaseIterable {
 	case createApps = "CREATE_APPS"
 	case cloudManagedDeveloperID = "CLOUD_MANAGED_DEVELOPER_ID"
 	case cloudManagedAppDistribution = "CLOUD_MANAGED_APP_DISTRIBUTION"
-	case generateIndividualKeys = "GENERATE_INDIVIDUAL_KEYS"
 }

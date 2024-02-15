@@ -23,8 +23,6 @@ public struct SubscriptionUpdateRequest: Codable {
 			public var subscriptionPeriod: SubscriptionPeriod?
 			public var reviewNote: String?
 			public var groupLevel: Int?
-			/// - warning: Deprecated.
-			public var isAvailableInAllTerritories: Bool?
 
 			public enum SubscriptionPeriod: String, Codable, CaseIterable {
 				case oneWeek = "ONE_WEEK"
@@ -35,13 +33,12 @@ public struct SubscriptionUpdateRequest: Codable {
 				case oneYear = "ONE_YEAR"
 			}
 
-			public init(name: String? = nil, isFamilySharable: Bool? = nil, subscriptionPeriod: SubscriptionPeriod? = nil, reviewNote: String? = nil, groupLevel: Int? = nil, isAvailableInAllTerritories: Bool? = nil) {
+			public init(name: String? = nil, isFamilySharable: Bool? = nil, subscriptionPeriod: SubscriptionPeriod? = nil, reviewNote: String? = nil, groupLevel: Int? = nil) {
 				self.name = name
 				self.isFamilySharable = isFamilySharable
 				self.subscriptionPeriod = subscriptionPeriod
 				self.reviewNote = reviewNote
 				self.groupLevel = groupLevel
-				self.isAvailableInAllTerritories = isAvailableInAllTerritories
 			}
 
 			public init(from decoder: Decoder) throws {
@@ -51,7 +48,6 @@ public struct SubscriptionUpdateRequest: Codable {
 				self.subscriptionPeriod = try values.decodeIfPresent(SubscriptionPeriod.self, forKey: "subscriptionPeriod")
 				self.reviewNote = try values.decodeIfPresent(String.self, forKey: "reviewNote")
 				self.groupLevel = try values.decodeIfPresent(Int.self, forKey: "groupLevel")
-				self.isAvailableInAllTerritories = try values.decodeIfPresent(Bool.self, forKey: "availableInAllTerritories")
 			}
 
 			public func encode(to encoder: Encoder) throws {
@@ -61,7 +57,6 @@ public struct SubscriptionUpdateRequest: Codable {
 				try values.encodeIfPresent(subscriptionPeriod, forKey: "subscriptionPeriod")
 				try values.encodeIfPresent(reviewNote, forKey: "reviewNote")
 				try values.encodeIfPresent(groupLevel, forKey: "groupLevel")
-				try values.encodeIfPresent(isAvailableInAllTerritories, forKey: "availableInAllTerritories")
 			}
 		}
 

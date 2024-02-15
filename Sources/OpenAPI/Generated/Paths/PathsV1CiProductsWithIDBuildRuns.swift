@@ -19,6 +19,7 @@ extension APIEndpoint.V1.CiProducts.WithID {
 
 		public struct GetParameters {
 			public var filterBuilds: [String]?
+			public var sort: [Sort]?
 			public var fieldsScmGitReferences: [FieldsScmGitReferences]?
 			public var fieldsCiBuildRuns: [FieldsCiBuildRuns]?
 			public var fieldsCiWorkflows: [FieldsCiWorkflows]?
@@ -28,6 +29,11 @@ extension APIEndpoint.V1.CiProducts.WithID {
 			public var limit: Int?
 			public var limitBuilds: Int?
 			public var include: [Include]?
+
+			public enum Sort: String, Codable, CaseIterable {
+				case number
+				case minusnumber = "-number"
+			}
 
 			public enum FieldsScmGitReferences: String, Codable, CaseIterable {
 				case canonicalName
@@ -72,6 +78,9 @@ extension APIEndpoint.V1.CiProducts.WithID {
 				case isLockedForEditing
 				case lastModifiedDate
 				case macOsVersion
+				case manualBranchStartCondition
+				case manualPullRequestStartCondition
+				case manualTagStartCondition
 				case name
 				case product
 				case pullRequestStartCondition
@@ -144,8 +153,9 @@ extension APIEndpoint.V1.CiProducts.WithID {
 				case workflow
 			}
 
-			public init(filterBuilds: [String]? = nil, fieldsScmGitReferences: [FieldsScmGitReferences]? = nil, fieldsCiBuildRuns: [FieldsCiBuildRuns]? = nil, fieldsCiWorkflows: [FieldsCiWorkflows]? = nil, fieldsScmPullRequests: [FieldsScmPullRequests]? = nil, fieldsCiProducts: [FieldsCiProducts]? = nil, fieldsBuilds: [FieldsBuilds]? = nil, limit: Int? = nil, limitBuilds: Int? = nil, include: [Include]? = nil) {
+			public init(filterBuilds: [String]? = nil, sort: [Sort]? = nil, fieldsScmGitReferences: [FieldsScmGitReferences]? = nil, fieldsCiBuildRuns: [FieldsCiBuildRuns]? = nil, fieldsCiWorkflows: [FieldsCiWorkflows]? = nil, fieldsScmPullRequests: [FieldsScmPullRequests]? = nil, fieldsCiProducts: [FieldsCiProducts]? = nil, fieldsBuilds: [FieldsBuilds]? = nil, limit: Int? = nil, limitBuilds: Int? = nil, include: [Include]? = nil) {
 				self.filterBuilds = filterBuilds
+				self.sort = sort
 				self.fieldsScmGitReferences = fieldsScmGitReferences
 				self.fieldsCiBuildRuns = fieldsCiBuildRuns
 				self.fieldsCiWorkflows = fieldsCiWorkflows
@@ -160,6 +170,7 @@ extension APIEndpoint.V1.CiProducts.WithID {
 			public var asQuery: [(String, String?)] {
 				let encoder = URLQueryEncoder(explode: false)
 				encoder.encode(filterBuilds, forKey: "filter[builds]")
+				encoder.encode(sort, forKey: "sort")
 				encoder.encode(fieldsScmGitReferences, forKey: "fields[scmGitReferences]")
 				encoder.encode(fieldsCiBuildRuns, forKey: "fields[ciBuildRuns]")
 				encoder.encode(fieldsCiWorkflows, forKey: "fields[ciWorkflows]")

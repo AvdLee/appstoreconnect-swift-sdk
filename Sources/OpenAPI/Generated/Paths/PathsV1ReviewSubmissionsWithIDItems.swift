@@ -56,6 +56,7 @@ extension APIEndpoint.V1.ReviewSubmissions.WithID {
 
 			public enum FieldsAppStoreVersions: String, Codable, CaseIterable {
 				case ageRatingDeclaration
+				case alternativeDistributionPackage
 				case app
 				case appClipDefaultExperience
 				case appStoreReviewDetail
@@ -65,6 +66,7 @@ extension APIEndpoint.V1.ReviewSubmissions.WithID {
 				case appStoreVersionLocalizations
 				case appStoreVersionPhasedRelease
 				case appStoreVersionSubmission
+				case appVersionState
 				case build
 				case copyright
 				case createdDate
@@ -73,6 +75,7 @@ extension APIEndpoint.V1.ReviewSubmissions.WithID {
 				case earliestReleaseDate
 				case platform
 				case releaseType
+				case reviewType
 				case routingAppCoverage
 				case versionString
 			}

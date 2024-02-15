@@ -26,6 +26,7 @@ public struct CiArtifact: Codable, Identifiable {
 			case resultBundle = "RESULT_BUNDLE"
 			case testProducts = "TEST_PRODUCTS"
 			case xcodebuildProducts = "XCODEBUILD_PRODUCTS"
+			case stapledNotarizedArchive = "STAPLED_NOTARIZED_ARCHIVE"
 		}
 
 		public init(fileType: FileType? = nil, fileName: String? = nil, fileSize: Int? = nil, downloadURL: URL? = nil) {

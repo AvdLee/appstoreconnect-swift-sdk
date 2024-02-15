@@ -40,6 +40,7 @@ extension APIEndpoint.V1.AppInfos {
 				case secondaryCategory
 				case secondarySubcategoryOne
 				case secondarySubcategoryTwo
+				case state
 			}
 
 			public enum Include: String, Codable, CaseIterable {
@@ -55,6 +56,7 @@ extension APIEndpoint.V1.AppInfos {
 			}
 
 			public enum FieldsAgeRatingDeclarations: String, Codable, CaseIterable {
+				case ageRatingOverride
 				case alcoholTobaccoOrDrugUseOrReferences
 				case contests
 				case gambling

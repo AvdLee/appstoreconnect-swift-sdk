@@ -25,7 +25,6 @@ extension APIEndpoint.V2.InAppPurchases.WithID {
 			public enum FieldsInAppPurchases: String, Codable, CaseIterable {
 				case app
 				case appStoreReviewScreenshot
-				case availableInAllTerritories
 				case content
 				case contentHosting
 				case familySharable

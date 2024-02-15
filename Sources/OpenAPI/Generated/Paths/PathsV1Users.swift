@@ -42,7 +42,6 @@ extension APIEndpoint.V1 {
 				case createApps = "CREATE_APPS"
 				case cloudManagedDeveloperID = "CLOUD_MANAGED_DEVELOPER_ID"
 				case cloudManagedAppDistribution = "CLOUD_MANAGED_APP_DISTRIBUTION"
-				case generateIndividualKeys = "GENERATE_INDIVIDUAL_KEYS"
 			}
 
 			public enum Sort: String, Codable, CaseIterable {
@@ -67,6 +66,7 @@ extension APIEndpoint.V1 {
 			}
 
 			public enum FieldsApps: String, Codable, CaseIterable {
+				case alternativeDistributionKey
 				case appAvailability
 				case appClips
 				case appCustomProductPages
@@ -95,6 +95,7 @@ extension APIEndpoint.V1 {
 				case inAppPurchases
 				case inAppPurchasesV2
 				case isOrEverWasMadeForKids
+				case marketplaceSearchDetail
 				case name
 				case perfPowerMetrics
 				case preOrder

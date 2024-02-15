@@ -79,6 +79,9 @@ extension APIEndpoint.V1.CiProducts {
 				case isLockedForEditing
 				case lastModifiedDate
 				case macOsVersion
+				case manualBranchStartCondition
+				case manualPullRequestStartCondition
+				case manualTagStartCondition
 				case name
 				case product
 				case pullRequestStartCondition
@@ -89,6 +92,7 @@ extension APIEndpoint.V1.CiProducts {
 			}
 
 			public enum FieldsApps: String, Codable, CaseIterable {
+				case alternativeDistributionKey
 				case appAvailability
 				case appClips
 				case appCustomProductPages
@@ -117,6 +121,7 @@ extension APIEndpoint.V1.CiProducts {
 				case inAppPurchases
 				case inAppPurchasesV2
 				case isOrEverWasMadeForKids
+				case marketplaceSearchDetail
 				case name
 				case perfPowerMetrics
 				case preOrder

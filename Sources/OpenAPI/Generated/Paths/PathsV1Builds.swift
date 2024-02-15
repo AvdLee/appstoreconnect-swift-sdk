@@ -68,6 +68,7 @@ extension APIEndpoint.V1 {
 				case ios = "IOS"
 				case macOs = "MAC_OS"
 				case tvOs = "TV_OS"
+				case visionOs = "VISION_OS"
 			}
 
 			public enum FilterProcessingState: String, Codable, CaseIterable {
@@ -165,6 +166,7 @@ extension APIEndpoint.V1 {
 
 			public enum FieldsAppStoreVersions: String, Codable, CaseIterable {
 				case ageRatingDeclaration
+				case alternativeDistributionPackage
 				case app
 				case appClipDefaultExperience
 				case appStoreReviewDetail
@@ -174,6 +176,7 @@ extension APIEndpoint.V1 {
 				case appStoreVersionLocalizations
 				case appStoreVersionPhasedRelease
 				case appStoreVersionSubmission
+				case appVersionState
 				case build
 				case copyright
 				case createdDate
@@ -182,6 +185,7 @@ extension APIEndpoint.V1 {
 				case earliestReleaseDate
 				case platform
 				case releaseType
+				case reviewType
 				case routingAppCoverage
 				case versionString
 			}
@@ -220,6 +224,7 @@ extension APIEndpoint.V1 {
 			}
 
 			public enum FieldsApps: String, Codable, CaseIterable {
+				case alternativeDistributionKey
 				case appAvailability
 				case appClips
 				case appCustomProductPages
@@ -248,6 +253,7 @@ extension APIEndpoint.V1 {
 				case inAppPurchases
 				case inAppPurchasesV2
 				case isOrEverWasMadeForKids
+				case marketplaceSearchDetail
 				case name
 				case perfPowerMetrics
 				case preOrder

@@ -19,7 +19,7 @@ extension APIEndpoint.V1.GameCenterMatchmakingQueues.WithID.Metrics {
 
 		public struct GetParameters {
 			public var limit: Int?
-			public var granularity: [Granularity]
+			public var granularity: Granularity
 			public var sort: [Sort]?
 
 			public enum Granularity: String, Codable, CaseIterable {
@@ -39,7 +39,7 @@ extension APIEndpoint.V1.GameCenterMatchmakingQueues.WithID.Metrics {
 				case minusp95PlayerCount = "-p95PlayerCount"
 			}
 
-			public init(limit: Int? = nil, granularity: [Granularity], sort: [Sort]? = nil) {
+			public init(limit: Int? = nil, granularity: Granularity, sort: [Sort]? = nil) {
 				self.limit = limit
 				self.granularity = granularity
 				self.sort = sort
