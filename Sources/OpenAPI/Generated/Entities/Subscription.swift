@@ -22,8 +22,6 @@ public struct Subscription: Codable, Identifiable {
 		public var subscriptionPeriod: SubscriptionPeriod?
 		public var reviewNote: String?
 		public var groupLevel: Int?
-		/// - warning: Deprecated.
-		public var isAvailableInAllTerritories: Bool?
 
 		public enum State: String, Codable, CaseIterable {
 			case missingMetadata = "MISSING_METADATA"
@@ -47,7 +45,7 @@ public struct Subscription: Codable, Identifiable {
 			case oneYear = "ONE_YEAR"
 		}
 
-		public init(name: String? = nil, productID: String? = nil, isFamilySharable: Bool? = nil, state: State? = nil, subscriptionPeriod: SubscriptionPeriod? = nil, reviewNote: String? = nil, groupLevel: Int? = nil, isAvailableInAllTerritories: Bool? = nil) {
+		public init(name: String? = nil, productID: String? = nil, isFamilySharable: Bool? = nil, state: State? = nil, subscriptionPeriod: SubscriptionPeriod? = nil, reviewNote: String? = nil, groupLevel: Int? = nil) {
 			self.name = name
 			self.productID = productID
 			self.isFamilySharable = isFamilySharable
@@ -55,7 +53,6 @@ public struct Subscription: Codable, Identifiable {
 			self.subscriptionPeriod = subscriptionPeriod
 			self.reviewNote = reviewNote
 			self.groupLevel = groupLevel
-			self.isAvailableInAllTerritories = isAvailableInAllTerritories
 		}
 
 		public init(from decoder: Decoder) throws {
@@ -67,7 +64,6 @@ public struct Subscription: Codable, Identifiable {
 			self.subscriptionPeriod = try values.decodeIfPresent(SubscriptionPeriod.self, forKey: "subscriptionPeriod")
 			self.reviewNote = try values.decodeIfPresent(String.self, forKey: "reviewNote")
 			self.groupLevel = try values.decodeIfPresent(Int.self, forKey: "groupLevel")
-			self.isAvailableInAllTerritories = try values.decodeIfPresent(Bool.self, forKey: "availableInAllTerritories")
 		}
 
 		public func encode(to encoder: Encoder) throws {
@@ -79,7 +75,6 @@ public struct Subscription: Codable, Identifiable {
 			try values.encodeIfPresent(subscriptionPeriod, forKey: "subscriptionPeriod")
 			try values.encodeIfPresent(reviewNote, forKey: "reviewNote")
 			try values.encodeIfPresent(groupLevel, forKey: "groupLevel")
-			try values.encodeIfPresent(isAvailableInAllTerritories, forKey: "availableInAllTerritories")
 		}
 	}
 

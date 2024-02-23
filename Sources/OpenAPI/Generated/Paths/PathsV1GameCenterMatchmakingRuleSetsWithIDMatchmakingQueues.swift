@@ -24,6 +24,7 @@ extension APIEndpoint.V1.GameCenterMatchmakingRuleSets.WithID {
 			public var include: [Include]?
 
 			public enum FieldsGameCenterMatchmakingQueues: String, Codable, CaseIterable {
+				case classicMatchmakingBundleIDs = "classicMatchmakingBundleIds"
 				case experimentRuleSet
 				case referenceName
 				case ruleSet

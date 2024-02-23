@@ -21,16 +21,13 @@ public struct InAppPurchaseV2CreateRequest: Codable {
 			public var inAppPurchaseType: InAppPurchaseType
 			public var reviewNote: String?
 			public var isFamilySharable: Bool?
-			/// - warning: Deprecated.
-			public var isAvailableInAllTerritories: Bool?
 
-			public init(name: String, productID: String, inAppPurchaseType: InAppPurchaseType, reviewNote: String? = nil, isFamilySharable: Bool? = nil, isAvailableInAllTerritories: Bool? = nil) {
+			public init(name: String, productID: String, inAppPurchaseType: InAppPurchaseType, reviewNote: String? = nil, isFamilySharable: Bool? = nil) {
 				self.name = name
 				self.productID = productID
 				self.inAppPurchaseType = inAppPurchaseType
 				self.reviewNote = reviewNote
 				self.isFamilySharable = isFamilySharable
-				self.isAvailableInAllTerritories = isAvailableInAllTerritories
 			}
 
 			public init(from decoder: Decoder) throws {
@@ -40,7 +37,6 @@ public struct InAppPurchaseV2CreateRequest: Codable {
 				self.inAppPurchaseType = try values.decode(InAppPurchaseType.self, forKey: "inAppPurchaseType")
 				self.reviewNote = try values.decodeIfPresent(String.self, forKey: "reviewNote")
 				self.isFamilySharable = try values.decodeIfPresent(Bool.self, forKey: "familySharable")
-				self.isAvailableInAllTerritories = try values.decodeIfPresent(Bool.self, forKey: "availableInAllTerritories")
 			}
 
 			public func encode(to encoder: Encoder) throws {
@@ -50,7 +46,6 @@ public struct InAppPurchaseV2CreateRequest: Codable {
 				try values.encode(inAppPurchaseType, forKey: "inAppPurchaseType")
 				try values.encodeIfPresent(reviewNote, forKey: "reviewNote")
 				try values.encodeIfPresent(isFamilySharable, forKey: "familySharable")
-				try values.encodeIfPresent(isAvailableInAllTerritories, forKey: "availableInAllTerritories")
 			}
 		}
 

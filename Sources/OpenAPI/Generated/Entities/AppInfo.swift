@@ -16,10 +16,24 @@ public struct AppInfo: Codable, Identifiable {
 
 	public struct Attributes: Codable {
 		public var appStoreState: AppStoreVersionState?
+		public var state: State?
 		public var appStoreAgeRating: AppStoreAgeRating?
 		public var brazilAgeRating: BrazilAgeRating?
 		public var brazilAgeRatingV2: BrazilAgeRatingV2?
 		public var kidsAgeBand: KidsAgeBand?
+
+		public enum State: String, Codable, CaseIterable {
+			case accepted = "ACCEPTED"
+			case developerRejected = "DEVELOPER_REJECTED"
+			case inReview = "IN_REVIEW"
+			case pendingRelease = "PENDING_RELEASE"
+			case prepareForSubmission = "PREPARE_FOR_SUBMISSION"
+			case readyForDistribution = "READY_FOR_DISTRIBUTION"
+			case readyForReview = "READY_FOR_REVIEW"
+			case rejected = "REJECTED"
+			case replacedWithNewInfo = "REPLACED_WITH_NEW_INFO"
+			case waitingForReview = "WAITING_FOR_REVIEW"
+		}
 
 		public enum BrazilAgeRatingV2: String, Codable, CaseIterable {
 			case selfRatedL = "SELF_RATED_L"
@@ -36,8 +50,9 @@ public struct AppInfo: Codable, Identifiable {
 			case officialEighteen = "OFFICIAL_EIGHTEEN"
 		}
 
-		public init(appStoreState: AppStoreVersionState? = nil, appStoreAgeRating: AppStoreAgeRating? = nil, brazilAgeRating: BrazilAgeRating? = nil, brazilAgeRatingV2: BrazilAgeRatingV2? = nil, kidsAgeBand: KidsAgeBand? = nil) {
+		public init(appStoreState: AppStoreVersionState? = nil, state: State? = nil, appStoreAgeRating: AppStoreAgeRating? = nil, brazilAgeRating: BrazilAgeRating? = nil, brazilAgeRatingV2: BrazilAgeRatingV2? = nil, kidsAgeBand: KidsAgeBand? = nil) {
 			self.appStoreState = appStoreState
+			self.state = state
 			self.appStoreAgeRating = appStoreAgeRating
 			self.brazilAgeRating = brazilAgeRating
 			self.brazilAgeRatingV2 = brazilAgeRatingV2
@@ -47,6 +62,7 @@ public struct AppInfo: Codable, Identifiable {
 		public init(from decoder: Decoder) throws {
 			let values = try decoder.container(keyedBy: StringCodingKey.self)
 			self.appStoreState = try values.decodeIfPresent(AppStoreVersionState.self, forKey: "appStoreState")
+			self.state = try values.decodeIfPresent(State.self, forKey: "state")
 			self.appStoreAgeRating = try values.decodeIfPresent(AppStoreAgeRating.self, forKey: "appStoreAgeRating")
 			self.brazilAgeRating = try values.decodeIfPresent(BrazilAgeRating.self, forKey: "brazilAgeRating")
 			self.brazilAgeRatingV2 = try values.decodeIfPresent(BrazilAgeRatingV2.self, forKey: "brazilAgeRatingV2")
@@ -56,6 +72,7 @@ public struct AppInfo: Codable, Identifiable {
 		public func encode(to encoder: Encoder) throws {
 			var values = encoder.container(keyedBy: StringCodingKey.self)
 			try values.encodeIfPresent(appStoreState, forKey: "appStoreState")
+			try values.encodeIfPresent(state, forKey: "state")
 			try values.encodeIfPresent(appStoreAgeRating, forKey: "appStoreAgeRating")
 			try values.encodeIfPresent(brazilAgeRating, forKey: "brazilAgeRating")
 			try values.encodeIfPresent(brazilAgeRatingV2, forKey: "brazilAgeRatingV2")

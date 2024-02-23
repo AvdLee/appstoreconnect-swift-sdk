@@ -16,19 +16,23 @@ public struct GameCenterMatchmakingQueue: Codable, Identifiable {
 
 	public struct Attributes: Codable {
 		public var referenceName: String?
+		public var classicMatchmakingBundleIDs: [String]?
 
-		public init(referenceName: String? = nil) {
+		public init(referenceName: String? = nil, classicMatchmakingBundleIDs: [String]? = nil) {
 			self.referenceName = referenceName
+			self.classicMatchmakingBundleIDs = classicMatchmakingBundleIDs
 		}
 
 		public init(from decoder: Decoder) throws {
 			let values = try decoder.container(keyedBy: StringCodingKey.self)
 			self.referenceName = try values.decodeIfPresent(String.self, forKey: "referenceName")
+			self.classicMatchmakingBundleIDs = try values.decodeIfPresent([String].self, forKey: "classicMatchmakingBundleIds")
 		}
 
 		public func encode(to encoder: Encoder) throws {
 			var values = encoder.container(keyedBy: StringCodingKey.self)
 			try values.encodeIfPresent(referenceName, forKey: "referenceName")
+			try values.encodeIfPresent(classicMatchmakingBundleIDs, forKey: "classicMatchmakingBundleIds")
 		}
 	}
 

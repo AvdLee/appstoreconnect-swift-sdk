@@ -21,13 +21,20 @@ extension APIEndpoint.V1.Apps.WithID.Metrics {
 			public var limit: Int?
 			public var groupBy: [GroupBy]?
 			public var filterBetaTesters: String?
-			public var period: String?
+			public var period: Period?
 
 			public enum GroupBy: String, Codable, CaseIterable {
 				case betaTesters
 			}
 
-			public init(limit: Int? = nil, groupBy: [GroupBy]? = nil, filterBetaTesters: String? = nil, period: String? = nil) {
+			public enum Period: String, Codable, CaseIterable {
+				case p7d = "P7D"
+				case p30d = "P30D"
+				case p90d = "P90D"
+				case p365d = "P365D"
+			}
+
+			public init(limit: Int? = nil, groupBy: [GroupBy]? = nil, filterBetaTesters: String? = nil, period: Period? = nil) {
 				self.limit = limit
 				self.groupBy = groupBy
 				self.filterBetaTesters = filterBetaTesters

@@ -19,14 +19,11 @@ public struct InAppPurchaseV2UpdateRequest: Codable {
 			public var name: String?
 			public var reviewNote: String?
 			public var isFamilySharable: Bool?
-			/// - warning: Deprecated.
-			public var isAvailableInAllTerritories: Bool?
 
-			public init(name: String? = nil, reviewNote: String? = nil, isFamilySharable: Bool? = nil, isAvailableInAllTerritories: Bool? = nil) {
+			public init(name: String? = nil, reviewNote: String? = nil, isFamilySharable: Bool? = nil) {
 				self.name = name
 				self.reviewNote = reviewNote
 				self.isFamilySharable = isFamilySharable
-				self.isAvailableInAllTerritories = isAvailableInAllTerritories
 			}
 
 			public init(from decoder: Decoder) throws {
@@ -34,7 +31,6 @@ public struct InAppPurchaseV2UpdateRequest: Codable {
 				self.name = try values.decodeIfPresent(String.self, forKey: "name")
 				self.reviewNote = try values.decodeIfPresent(String.self, forKey: "reviewNote")
 				self.isFamilySharable = try values.decodeIfPresent(Bool.self, forKey: "familySharable")
-				self.isAvailableInAllTerritories = try values.decodeIfPresent(Bool.self, forKey: "availableInAllTerritories")
 			}
 
 			public func encode(to encoder: Encoder) throws {
@@ -42,7 +38,6 @@ public struct InAppPurchaseV2UpdateRequest: Codable {
 				try values.encodeIfPresent(name, forKey: "name")
 				try values.encodeIfPresent(reviewNote, forKey: "reviewNote")
 				try values.encodeIfPresent(isFamilySharable, forKey: "familySharable")
-				try values.encodeIfPresent(isAvailableInAllTerritories, forKey: "availableInAllTerritories")
 			}
 		}
 

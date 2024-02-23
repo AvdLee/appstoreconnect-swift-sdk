@@ -17,7 +17,7 @@ public struct InAppPurchasePriceScheduleCreateRequest: Codable {
 
 		public struct Relationships: Codable {
 			public var inAppPurchase: InAppPurchase
-			public var baseTerritory: BaseTerritory?
+			public var baseTerritory: BaseTerritory
 			public var manualPrices: ManualPrices
 
 			public struct InAppPurchase: Codable {
@@ -65,7 +65,7 @@ public struct InAppPurchasePriceScheduleCreateRequest: Codable {
 			}
 
 			public struct BaseTerritory: Codable {
-				public var data: Data?
+				public var data: Data
 
 				public struct Data: Codable, Identifiable {
 					public var type: `Type`
@@ -93,18 +93,18 @@ public struct InAppPurchasePriceScheduleCreateRequest: Codable {
 					}
 				}
 
-				public init(data: Data? = nil) {
+				public init(data: Data) {
 					self.data = data
 				}
 
 				public init(from decoder: Decoder) throws {
 					let values = try decoder.container(keyedBy: StringCodingKey.self)
-					self.data = try values.decodeIfPresent(Data.self, forKey: "data")
+					self.data = try values.decode(Data.self, forKey: "data")
 				}
 
 				public func encode(to encoder: Encoder) throws {
 					var values = encoder.container(keyedBy: StringCodingKey.self)
-					try values.encodeIfPresent(data, forKey: "data")
+					try values.encode(data, forKey: "data")
 				}
 			}
 
@@ -152,7 +152,7 @@ public struct InAppPurchasePriceScheduleCreateRequest: Codable {
 				}
 			}
 
-			public init(inAppPurchase: InAppPurchase, baseTerritory: BaseTerritory? = nil, manualPrices: ManualPrices) {
+			public init(inAppPurchase: InAppPurchase, baseTerritory: BaseTerritory, manualPrices: ManualPrices) {
 				self.inAppPurchase = inAppPurchase
 				self.baseTerritory = baseTerritory
 				self.manualPrices = manualPrices
@@ -161,14 +161,14 @@ public struct InAppPurchasePriceScheduleCreateRequest: Codable {
 			public init(from decoder: Decoder) throws {
 				let values = try decoder.container(keyedBy: StringCodingKey.self)
 				self.inAppPurchase = try values.decode(InAppPurchase.self, forKey: "inAppPurchase")
-				self.baseTerritory = try values.decodeIfPresent(BaseTerritory.self, forKey: "baseTerritory")
+				self.baseTerritory = try values.decode(BaseTerritory.self, forKey: "baseTerritory")
 				self.manualPrices = try values.decode(ManualPrices.self, forKey: "manualPrices")
 			}
 
 			public func encode(to encoder: Encoder) throws {
 				var values = encoder.container(keyedBy: StringCodingKey.self)
 				try values.encode(inAppPurchase, forKey: "inAppPurchase")
-				try values.encodeIfPresent(baseTerritory, forKey: "baseTerritory")
+				try values.encode(baseTerritory, forKey: "baseTerritory")
 				try values.encode(manualPrices, forKey: "manualPrices")
 			}
 		}

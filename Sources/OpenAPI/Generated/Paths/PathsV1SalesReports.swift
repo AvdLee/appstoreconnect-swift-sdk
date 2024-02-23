@@ -35,6 +35,9 @@ extension APIEndpoint.V1 {
 			public enum FilterReportSubType: String, Codable, CaseIterable {
 				case summary = "SUMMARY"
 				case detailed = "DETAILED"
+				case summaryInstallType = "SUMMARY_INSTALL_TYPE"
+				case summaryTerritory = "SUMMARY_TERRITORY"
+				case summaryChannel = "SUMMARY_CHANNEL"
 			}
 
 			public enum FilterReportType: String, Codable, CaseIterable {
@@ -45,6 +48,7 @@ extension APIEndpoint.V1 {
 				case subscriptionEvent = "SUBSCRIPTION_EVENT"
 				case subscriber = "SUBSCRIBER"
 				case subscriptionOfferCodeRedemption = "SUBSCRIPTION_OFFER_CODE_REDEMPTION"
+				case installs = "INSTALLS"
 			}
 
 			public init(filterFrequency: [FilterFrequency], filterReportDate: [String]? = nil, filterReportSubType: [FilterReportSubType], filterReportType: [FilterReportType], filterVendorNumber: [String], filterVersion: [String]? = nil) {

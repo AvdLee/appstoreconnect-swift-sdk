@@ -23,4 +23,5 @@ public enum AppStoreVersionState: String, Codable, CaseIterable {
 	case waitingForExportCompliance = "WAITING_FOR_EXPORT_COMPLIANCE"
 	case waitingForReview = "WAITING_FOR_REVIEW"
 	case replacedWithNewVersion = "REPLACED_WITH_NEW_VERSION"
+	case notApplicable = "NOT_APPLICABLE"
 }

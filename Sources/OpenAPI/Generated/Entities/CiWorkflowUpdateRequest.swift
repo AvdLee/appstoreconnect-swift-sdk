@@ -23,19 +23,25 @@ public struct CiWorkflowUpdateRequest: Codable {
 			public var tagStartCondition: CiTagStartCondition?
 			public var pullRequestStartCondition: CiPullRequestStartCondition?
 			public var scheduledStartCondition: CiScheduledStartCondition?
+			public var manualBranchStartCondition: CiManualBranchStartCondition?
+			public var manualTagStartCondition: CiManualTagStartCondition?
+			public var manualPullRequestStartCondition: CiManualPullRequestStartCondition?
 			public var actions: [CiAction]?
 			public var isEnabled: Bool?
 			public var isLockedForEditing: Bool?
 			public var isClean: Bool?
 			public var containerFilePath: String?
 
-			public init(name: String? = nil, description: String? = nil, branchStartCondition: CiBranchStartCondition? = nil, tagStartCondition: CiTagStartCondition? = nil, pullRequestStartCondition: CiPullRequestStartCondition? = nil, scheduledStartCondition: CiScheduledStartCondition? = nil, actions: [CiAction]? = nil, isEnabled: Bool? = nil, isLockedForEditing: Bool? = nil, isClean: Bool? = nil, containerFilePath: String? = nil) {
+			public init(name: String? = nil, description: String? = nil, branchStartCondition: CiBranchStartCondition? = nil, tagStartCondition: CiTagStartCondition? = nil, pullRequestStartCondition: CiPullRequestStartCondition? = nil, scheduledStartCondition: CiScheduledStartCondition? = nil, manualBranchStartCondition: CiManualBranchStartCondition? = nil, manualTagStartCondition: CiManualTagStartCondition? = nil, manualPullRequestStartCondition: CiManualPullRequestStartCondition? = nil, actions: [CiAction]? = nil, isEnabled: Bool? = nil, isLockedForEditing: Bool? = nil, isClean: Bool? = nil, containerFilePath: String? = nil) {
 				self.name = name
 				self.description = description
 				self.branchStartCondition = branchStartCondition
 				self.tagStartCondition = tagStartCondition
 				self.pullRequestStartCondition = pullRequestStartCondition
 				self.scheduledStartCondition = scheduledStartCondition
+				self.manualBranchStartCondition = manualBranchStartCondition
+				self.manualTagStartCondition = manualTagStartCondition
+				self.manualPullRequestStartCondition = manualPullRequestStartCondition
 				self.actions = actions
 				self.isEnabled = isEnabled
 				self.isLockedForEditing = isLockedForEditing
@@ -51,6 +57,9 @@ public struct CiWorkflowUpdateRequest: Codable {
 				self.tagStartCondition = try values.decodeIfPresent(CiTagStartCondition.self, forKey: "tagStartCondition")
 				self.pullRequestStartCondition = try values.decodeIfPresent(CiPullRequestStartCondition.self, forKey: "pullRequestStartCondition")
 				self.scheduledStartCondition = try values.decodeIfPresent(CiScheduledStartCondition.self, forKey: "scheduledStartCondition")
+				self.manualBranchStartCondition = try values.decodeIfPresent(CiManualBranchStartCondition.self, forKey: "manualBranchStartCondition")
+				self.manualTagStartCondition = try values.decodeIfPresent(CiManualTagStartCondition.self, forKey: "manualTagStartCondition")
+				self.manualPullRequestStartCondition = try values.decodeIfPresent(CiManualPullRequestStartCondition.self, forKey: "manualPullRequestStartCondition")
 				self.actions = try values.decodeIfPresent([CiAction].self, forKey: "actions")
 				self.isEnabled = try values.decodeIfPresent(Bool.self, forKey: "isEnabled")
 				self.isLockedForEditing = try values.decodeIfPresent(Bool.self, forKey: "isLockedForEditing")
@@ -66,6 +75,9 @@ public struct CiWorkflowUpdateRequest: Codable {
 				try values.encodeIfPresent(tagStartCondition, forKey: "tagStartCondition")
 				try values.encodeIfPresent(pullRequestStartCondition, forKey: "pullRequestStartCondition")
 				try values.encodeIfPresent(scheduledStartCondition, forKey: "scheduledStartCondition")
+				try values.encodeIfPresent(manualBranchStartCondition, forKey: "manualBranchStartCondition")
+				try values.encodeIfPresent(manualTagStartCondition, forKey: "manualTagStartCondition")
+				try values.encodeIfPresent(manualPullRequestStartCondition, forKey: "manualPullRequestStartCondition")
 				try values.encodeIfPresent(actions, forKey: "actions")
 				try values.encodeIfPresent(isEnabled, forKey: "isEnabled")
 				try values.encodeIfPresent(isLockedForEditing, forKey: "isLockedForEditing")
