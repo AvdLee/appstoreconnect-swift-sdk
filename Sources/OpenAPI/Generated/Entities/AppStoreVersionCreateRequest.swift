@@ -19,8 +19,14 @@ public struct AppStoreVersionCreateRequest: Codable {
 			public var platform: Platform
 			public var versionString: String
 			public var copyright: String?
+			public var reviewType: ReviewType?
 			public var releaseType: ReleaseType?
 			public var earliestReleaseDate: Date?
+
+			public enum ReviewType: String, Codable, CaseIterable {
+				case appStore = "APP_STORE"
+				case notarization = "NOTARIZATION"
+			}
 
 			public enum ReleaseType: String, Codable, CaseIterable {
 				case manual = "MANUAL"
@@ -28,10 +34,11 @@ public struct AppStoreVersionCreateRequest: Codable {
 				case scheduled = "SCHEDULED"
 			}
 
-			public init(platform: Platform, versionString: String, copyright: String? = nil, releaseType: ReleaseType? = nil, earliestReleaseDate: Date? = nil) {
+			public init(platform: Platform, versionString: String, copyright: String? = nil, reviewType: ReviewType? = nil, releaseType: ReleaseType? = nil, earliestReleaseDate: Date? = nil) {
 				self.platform = platform
 				self.versionString = versionString
 				self.copyright = copyright
+				self.reviewType = reviewType
 				self.releaseType = releaseType
 				self.earliestReleaseDate = earliestReleaseDate
 			}
@@ -41,6 +48,7 @@ public struct AppStoreVersionCreateRequest: Codable {
 				self.platform = try values.decode(Platform.self, forKey: "platform")
 				self.versionString = try values.decode(String.self, forKey: "versionString")
 				self.copyright = try values.decodeIfPresent(String.self, forKey: "copyright")
+				self.reviewType = try values.decodeIfPresent(ReviewType.self, forKey: "reviewType")
 				self.releaseType = try values.decodeIfPresent(ReleaseType.self, forKey: "releaseType")
 				self.earliestReleaseDate = try values.decodeIfPresent(Date.self, forKey: "earliestReleaseDate")
 			}
@@ -50,6 +58,7 @@ public struct AppStoreVersionCreateRequest: Codable {
 				try values.encode(platform, forKey: "platform")
 				try values.encode(versionString, forKey: "versionString")
 				try values.encodeIfPresent(copyright, forKey: "copyright")
+				try values.encodeIfPresent(reviewType, forKey: "reviewType")
 				try values.encodeIfPresent(releaseType, forKey: "releaseType")
 				try values.encodeIfPresent(earliestReleaseDate, forKey: "earliestReleaseDate")
 			}

@@ -38,6 +38,7 @@ extension APIEndpoint.V1.Users {
 			}
 
 			public enum FieldsApps: String, Codable, CaseIterable {
+				case alternativeDistributionKey
 				case appAvailability
 				case appClips
 				case appCustomProductPages
@@ -66,6 +67,7 @@ extension APIEndpoint.V1.Users {
 				case inAppPurchases
 				case inAppPurchasesV2
 				case isOrEverWasMadeForKids
+				case marketplaceSearchDetail
 				case name
 				case perfPowerMetrics
 				case preOrder

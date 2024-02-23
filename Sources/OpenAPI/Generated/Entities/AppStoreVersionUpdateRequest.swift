@@ -19,9 +19,15 @@ public struct AppStoreVersionUpdateRequest: Codable {
 		public struct Attributes: Codable {
 			public var versionString: String?
 			public var copyright: String?
+			public var reviewType: ReviewType?
 			public var releaseType: ReleaseType?
 			public var earliestReleaseDate: Date?
 			public var isDownloadable: Bool?
+
+			public enum ReviewType: String, Codable, CaseIterable {
+				case appStore = "APP_STORE"
+				case notarization = "NOTARIZATION"
+			}
 
 			public enum ReleaseType: String, Codable, CaseIterable {
 				case manual = "MANUAL"
@@ -29,9 +35,10 @@ public struct AppStoreVersionUpdateRequest: Codable {
 				case scheduled = "SCHEDULED"
 			}
 
-			public init(versionString: String? = nil, copyright: String? = nil, releaseType: ReleaseType? = nil, earliestReleaseDate: Date? = nil, isDownloadable: Bool? = nil) {
+			public init(versionString: String? = nil, copyright: String? = nil, reviewType: ReviewType? = nil, releaseType: ReleaseType? = nil, earliestReleaseDate: Date? = nil, isDownloadable: Bool? = nil) {
 				self.versionString = versionString
 				self.copyright = copyright
+				self.reviewType = reviewType
 				self.releaseType = releaseType
 				self.earliestReleaseDate = earliestReleaseDate
 				self.isDownloadable = isDownloadable
@@ -41,6 +48,7 @@ public struct AppStoreVersionUpdateRequest: Codable {
 				let values = try decoder.container(keyedBy: StringCodingKey.self)
 				self.versionString = try values.decodeIfPresent(String.self, forKey: "versionString")
 				self.copyright = try values.decodeIfPresent(String.self, forKey: "copyright")
+				self.reviewType = try values.decodeIfPresent(ReviewType.self, forKey: "reviewType")
 				self.releaseType = try values.decodeIfPresent(ReleaseType.self, forKey: "releaseType")
 				self.earliestReleaseDate = try values.decodeIfPresent(Date.self, forKey: "earliestReleaseDate")
 				self.isDownloadable = try values.decodeIfPresent(Bool.self, forKey: "downloadable")
@@ -50,6 +58,7 @@ public struct AppStoreVersionUpdateRequest: Codable {
 				var values = encoder.container(keyedBy: StringCodingKey.self)
 				try values.encodeIfPresent(versionString, forKey: "versionString")
 				try values.encodeIfPresent(copyright, forKey: "copyright")
+				try values.encodeIfPresent(reviewType, forKey: "reviewType")
 				try values.encodeIfPresent(releaseType, forKey: "releaseType")
 				try values.encodeIfPresent(earliestReleaseDate, forKey: "earliestReleaseDate")
 				try values.encodeIfPresent(isDownloadable, forKey: "downloadable")
