@@ -50,7 +50,7 @@ protocol JWTCreatable {
     func signedToken(using privateKey: JWT.PrivateKey) throws -> JWT.Token
 }
 
-struct JWT: Codable, JWTCreatable {
+public struct JWT: Codable, JWTCreatable {
 
     public enum Error: Swift.Error, LocalizedError {
 
@@ -70,8 +70,8 @@ struct JWT: Codable, JWTCreatable {
         }
     }
 
-    typealias Token = String
-    typealias PrivateKey = P256.Signing.PrivateKey
+    public typealias Token = String
+    public typealias PrivateKey = P256.Signing.PrivateKey
 
     typealias DateProvider = () -> Date
     static let defaultDateProvider: DateProvider = {
