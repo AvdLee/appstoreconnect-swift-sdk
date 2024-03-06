@@ -3,12 +3,12 @@
 
 import Foundation
 
-public struct AppStoreVersionLocalizationsWithoutIncludesResponse: Codable {
-	public var data: [AppStoreVersion]
+public struct AnalyticsReportInstancesResponse: Codable {
+	public var data: [AnalyticsReportInstance]
 	public var links: PagedDocumentLinks
 	public var meta: PagingInformation?
 
-	public init(data: [AppStoreVersion], links: PagedDocumentLinks, meta: PagingInformation? = nil) {
+	public init(data: [AnalyticsReportInstance], links: PagedDocumentLinks, meta: PagingInformation? = nil) {
 		self.data = data
 		self.links = links
 		self.meta = meta
@@ -16,7 +16,7 @@ public struct AppStoreVersionLocalizationsWithoutIncludesResponse: Codable {
 
 	public init(from decoder: Decoder) throws {
 		let values = try decoder.container(keyedBy: StringCodingKey.self)
-		self.data = try values.decode([AppStoreVersion].self, forKey: "data")
+		self.data = try values.decode([AnalyticsReportInstance].self, forKey: "data")
 		self.links = try values.decode(PagedDocumentLinks.self, forKey: "links")
 		self.meta = try values.decodeIfPresent(PagingInformation.self, forKey: "meta")
 	}

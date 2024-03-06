@@ -35,6 +35,7 @@ extension APIEndpoint.V1.AlternativeDistributionPackages {
 			public enum FieldsAlternativeDistributionPackageVersions: String, Codable, CaseIterable {
 				case alternativeDistributionPackage
 				case deltas
+				case fileChecksum
 				case state
 				case url
 				case urlExpirationDate

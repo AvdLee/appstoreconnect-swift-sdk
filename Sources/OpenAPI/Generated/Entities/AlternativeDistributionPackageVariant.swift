@@ -17,11 +17,13 @@ public struct AlternativeDistributionPackageVariant: Codable, Identifiable {
 		public var url: URL?
 		public var urlExpirationDate: Date?
 		public var alternativeDistributionKeyBlob: String?
+		public var fileChecksum: String?
 
-		public init(url: URL? = nil, urlExpirationDate: Date? = nil, alternativeDistributionKeyBlob: String? = nil) {
+		public init(url: URL? = nil, urlExpirationDate: Date? = nil, alternativeDistributionKeyBlob: String? = nil, fileChecksum: String? = nil) {
 			self.url = url
 			self.urlExpirationDate = urlExpirationDate
 			self.alternativeDistributionKeyBlob = alternativeDistributionKeyBlob
+			self.fileChecksum = fileChecksum
 		}
 
 		public init(from decoder: Decoder) throws {
@@ -29,6 +31,7 @@ public struct AlternativeDistributionPackageVariant: Codable, Identifiable {
 			self.url = try values.decodeIfPresent(URL.self, forKey: "url")
 			self.urlExpirationDate = try values.decodeIfPresent(Date.self, forKey: "urlExpirationDate")
 			self.alternativeDistributionKeyBlob = try values.decodeIfPresent(String.self, forKey: "alternativeDistributionKeyBlob")
+			self.fileChecksum = try values.decodeIfPresent(String.self, forKey: "fileChecksum")
 		}
 
 		public func encode(to encoder: Encoder) throws {
@@ -36,6 +39,7 @@ public struct AlternativeDistributionPackageVariant: Codable, Identifiable {
 			try values.encodeIfPresent(url, forKey: "url")
 			try values.encodeIfPresent(urlExpirationDate, forKey: "urlExpirationDate")
 			try values.encodeIfPresent(alternativeDistributionKeyBlob, forKey: "alternativeDistributionKeyBlob")
+			try values.encodeIfPresent(fileChecksum, forKey: "fileChecksum")
 		}
 	}
 
