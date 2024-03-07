@@ -18,6 +18,7 @@ public struct AlternativeDistributionPackageVersion: Codable, Identifiable {
 		public var url: URL?
 		public var urlExpirationDate: Date?
 		public var version: String?
+		public var fileChecksum: String?
 		public var state: State?
 
 		public enum State: String, Codable, CaseIterable {
@@ -25,10 +26,11 @@ public struct AlternativeDistributionPackageVersion: Codable, Identifiable {
 			case replaced = "REPLACED"
 		}
 
-		public init(url: URL? = nil, urlExpirationDate: Date? = nil, version: String? = nil, state: State? = nil) {
+		public init(url: URL? = nil, urlExpirationDate: Date? = nil, version: String? = nil, fileChecksum: String? = nil, state: State? = nil) {
 			self.url = url
 			self.urlExpirationDate = urlExpirationDate
 			self.version = version
+			self.fileChecksum = fileChecksum
 			self.state = state
 		}
 
@@ -37,6 +39,7 @@ public struct AlternativeDistributionPackageVersion: Codable, Identifiable {
 			self.url = try values.decodeIfPresent(URL.self, forKey: "url")
 			self.urlExpirationDate = try values.decodeIfPresent(Date.self, forKey: "urlExpirationDate")
 			self.version = try values.decodeIfPresent(String.self, forKey: "version")
+			self.fileChecksum = try values.decodeIfPresent(String.self, forKey: "fileChecksum")
 			self.state = try values.decodeIfPresent(State.self, forKey: "state")
 		}
 
@@ -45,6 +48,7 @@ public struct AlternativeDistributionPackageVersion: Codable, Identifiable {
 			try values.encodeIfPresent(url, forKey: "url")
 			try values.encodeIfPresent(urlExpirationDate, forKey: "urlExpirationDate")
 			try values.encodeIfPresent(version, forKey: "version")
+			try values.encodeIfPresent(fileChecksum, forKey: "fileChecksum")
 			try values.encodeIfPresent(state, forKey: "state")
 		}
 	}

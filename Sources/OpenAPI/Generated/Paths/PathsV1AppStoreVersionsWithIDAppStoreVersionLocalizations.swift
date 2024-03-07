@@ -13,28 +13,107 @@ extension APIEndpoint.V1.AppStoreVersions.WithID {
 		/// Path: `/v1/appStoreVersions/{id}/appStoreVersionLocalizations`
 		public let path: String
 
-		public func get(fieldsAppStoreVersionLocalizations: [FieldsAppStoreVersionLocalizations]? = nil, limit: Int? = nil) -> Request<AppStoreConnect_Swift_SDK.AppStoreVersionLocalizationsWithoutIncludesResponse> {
-			Request(path: path, method: "GET", query: makeGetQuery(fieldsAppStoreVersionLocalizations, limit), id: "appStoreVersions-appStoreVersionLocalizations-get_to_many_related")
+		public func get(parameters: GetParameters? = nil) -> Request<AppStoreConnect_Swift_SDK.AppStoreVersionLocalizationsResponse> {
+			Request(path: path, method: "GET", query: parameters?.asQuery, id: "appStoreVersions-appStoreVersionLocalizations-get_to_many_related")
 		}
 
-		private func makeGetQuery(_ fieldsAppStoreVersionLocalizations: [FieldsAppStoreVersionLocalizations]?, _ limit: Int?) -> [(String, String?)] {
-			let encoder = URLQueryEncoder()
-			encoder.encode(fieldsAppStoreVersionLocalizations, forKey: "fields[appStoreVersionLocalizations]", explode: false)
-			encoder.encode(limit, forKey: "limit")
-			return encoder.items
-		}
+		public struct GetParameters {
+			public var filterLocale: [String]?
+			public var fieldsAppScreenshotSets: [FieldsAppScreenshotSets]?
+			public var fieldsAppStoreVersions: [FieldsAppStoreVersions]?
+			public var fieldsAppPreviewSets: [FieldsAppPreviewSets]?
+			public var fieldsAppStoreVersionLocalizations: [FieldsAppStoreVersionLocalizations]?
+			public var limit: Int?
+			public var limitAppScreenshotSets: Int?
+			public var limitAppPreviewSets: Int?
+			public var include: [Include]?
 
-		public enum FieldsAppStoreVersionLocalizations: String, Codable, CaseIterable {
-			case appPreviewSets
-			case appScreenshotSets
-			case appStoreVersion
-			case description
-			case keywords
-			case locale
-			case marketingURL = "marketingUrl"
-			case promotionalText
-			case supportURL = "supportUrl"
-			case whatsNew
+			public enum FieldsAppScreenshotSets: String, Codable, CaseIterable {
+				case appCustomProductPageLocalization
+				case appScreenshots
+				case appStoreVersionExperimentTreatmentLocalization
+				case appStoreVersionLocalization
+				case screenshotDisplayType
+			}
+
+			public enum FieldsAppStoreVersions: String, Codable, CaseIterable {
+				case ageRatingDeclaration
+				case alternativeDistributionPackage
+				case app
+				case appClipDefaultExperience
+				case appStoreReviewDetail
+				case appStoreState
+				case appStoreVersionExperiments
+				case appStoreVersionExperimentsV2
+				case appStoreVersionLocalizations
+				case appStoreVersionPhasedRelease
+				case appStoreVersionSubmission
+				case appVersionState
+				case build
+				case copyright
+				case createdDate
+				case customerReviews
+				case downloadable
+				case earliestReleaseDate
+				case platform
+				case releaseType
+				case reviewType
+				case routingAppCoverage
+				case versionString
+			}
+
+			public enum FieldsAppPreviewSets: String, Codable, CaseIterable {
+				case appCustomProductPageLocalization
+				case appPreviews
+				case appStoreVersionExperimentTreatmentLocalization
+				case appStoreVersionLocalization
+				case previewType
+			}
+
+			public enum FieldsAppStoreVersionLocalizations: String, Codable, CaseIterable {
+				case appPreviewSets
+				case appScreenshotSets
+				case appStoreVersion
+				case description
+				case keywords
+				case locale
+				case marketingURL = "marketingUrl"
+				case promotionalText
+				case supportURL = "supportUrl"
+				case whatsNew
+			}
+
+			public enum Include: String, Codable, CaseIterable {
+				case appPreviewSets
+				case appScreenshotSets
+				case appStoreVersion
+			}
+
+			public init(filterLocale: [String]? = nil, fieldsAppScreenshotSets: [FieldsAppScreenshotSets]? = nil, fieldsAppStoreVersions: [FieldsAppStoreVersions]? = nil, fieldsAppPreviewSets: [FieldsAppPreviewSets]? = nil, fieldsAppStoreVersionLocalizations: [FieldsAppStoreVersionLocalizations]? = nil, limit: Int? = nil, limitAppScreenshotSets: Int? = nil, limitAppPreviewSets: Int? = nil, include: [Include]? = nil) {
+				self.filterLocale = filterLocale
+				self.fieldsAppScreenshotSets = fieldsAppScreenshotSets
+				self.fieldsAppStoreVersions = fieldsAppStoreVersions
+				self.fieldsAppPreviewSets = fieldsAppPreviewSets
+				self.fieldsAppStoreVersionLocalizations = fieldsAppStoreVersionLocalizations
+				self.limit = limit
+				self.limitAppScreenshotSets = limitAppScreenshotSets
+				self.limitAppPreviewSets = limitAppPreviewSets
+				self.include = include
+			}
+
+			public var asQuery: [(String, String?)] {
+				let encoder = URLQueryEncoder(explode: false)
+				encoder.encode(filterLocale, forKey: "filter[locale]")
+				encoder.encode(fieldsAppScreenshotSets, forKey: "fields[appScreenshotSets]")
+				encoder.encode(fieldsAppStoreVersions, forKey: "fields[appStoreVersions]")
+				encoder.encode(fieldsAppPreviewSets, forKey: "fields[appPreviewSets]")
+				encoder.encode(fieldsAppStoreVersionLocalizations, forKey: "fields[appStoreVersionLocalizations]")
+				encoder.encode(limit, forKey: "limit")
+				encoder.encode(limitAppScreenshotSets, forKey: "limit[appScreenshotSets]")
+				encoder.encode(limitAppPreviewSets, forKey: "limit[appPreviewSets]")
+				encoder.encode(include, forKey: "include")
+				return encoder.items
+			}
 		}
 	}
 }

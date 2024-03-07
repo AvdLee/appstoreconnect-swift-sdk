@@ -128,6 +128,7 @@ extension APIEndpoint.V1.GameCenterGroups.WithID {
 
 			public enum FieldsApps: String, Codable, CaseIterable {
 				case alternativeDistributionKey
+				case analyticsReportRequests
 				case appAvailability
 				case appClips
 				case appCustomProductPages

@@ -13,21 +13,66 @@ extension APIEndpoint.V1.Builds.WithID {
 		/// Path: `/v1/builds/{id}/buildBetaDetail`
 		public let path: String
 
-		public func get(fieldsBuildBetaDetails: [FieldsBuildBetaDetails]? = nil) -> Request<AppStoreConnect_Swift_SDK.BuildBetaDetailWithoutIncludesResponse> {
-			Request(path: path, method: "GET", query: makeGetQuery(fieldsBuildBetaDetails), id: "builds-buildBetaDetail-get_to_one_related")
+		public func get(parameters: GetParameters? = nil) -> Request<AppStoreConnect_Swift_SDK.BuildBetaDetailResponse> {
+			Request(path: path, method: "GET", query: parameters?.asQuery, id: "builds-buildBetaDetail-get_to_one_related")
 		}
 
-		private func makeGetQuery(_ fieldsBuildBetaDetails: [FieldsBuildBetaDetails]?) -> [(String, String?)] {
-			let encoder = URLQueryEncoder()
-			encoder.encode(fieldsBuildBetaDetails, forKey: "fields[buildBetaDetails]", explode: false)
-			return encoder.items
-		}
+		public struct GetParameters {
+			public var fieldsBuildBetaDetails: [FieldsBuildBetaDetails]?
+			public var fieldsBuilds: [FieldsBuilds]?
+			public var include: [Include]?
 
-		public enum FieldsBuildBetaDetails: String, Codable, CaseIterable {
-			case autoNotifyEnabled
-			case build
-			case externalBuildState
-			case internalBuildState
+			public enum FieldsBuildBetaDetails: String, Codable, CaseIterable {
+				case autoNotifyEnabled
+				case build
+				case externalBuildState
+				case internalBuildState
+			}
+
+			public enum FieldsBuilds: String, Codable, CaseIterable {
+				case app
+				case appEncryptionDeclaration
+				case appStoreVersion
+				case betaAppReviewSubmission
+				case betaBuildLocalizations
+				case betaGroups
+				case buildAudienceType
+				case buildBetaDetail
+				case buildBundles
+				case computedMinMacOsVersion
+				case diagnosticSignatures
+				case expirationDate
+				case expired
+				case iconAssetToken
+				case icons
+				case individualTesters
+				case lsMinimumSystemVersion
+				case minOsVersion
+				case perfPowerMetrics
+				case preReleaseVersion
+				case processingState
+				case uploadedDate
+				case usesNonExemptEncryption
+				case version
+			}
+
+			public enum Include: String, Codable, CaseIterable {
+				case build
+			}
+
+			public init(fieldsBuildBetaDetails: [FieldsBuildBetaDetails]? = nil, fieldsBuilds: [FieldsBuilds]? = nil, include: [Include]? = nil) {
+				self.fieldsBuildBetaDetails = fieldsBuildBetaDetails
+				self.fieldsBuilds = fieldsBuilds
+				self.include = include
+			}
+
+			public var asQuery: [(String, String?)] {
+				let encoder = URLQueryEncoder(explode: false)
+				encoder.encode(fieldsBuildBetaDetails, forKey: "fields[buildBetaDetails]")
+				encoder.encode(fieldsBuilds, forKey: "fields[builds]")
+				encoder.encode(include, forKey: "include")
+				return encoder.items
+			}
 		}
 	}
 }
