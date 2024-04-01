@@ -38,6 +38,7 @@ extension APIEndpoint.V1 {
 				case distribution = "DISTRIBUTION"
 				case passTypeID = "PASS_TYPE_ID"
 				case passTypeIDWithNfc = "PASS_TYPE_ID_WITH_NFC"
+				case developerIDApplicationG2 = "DEVELOPER_ID_APPLICATION_G2"
 			}
 
 			public enum Sort: String, Codable, CaseIterable {
