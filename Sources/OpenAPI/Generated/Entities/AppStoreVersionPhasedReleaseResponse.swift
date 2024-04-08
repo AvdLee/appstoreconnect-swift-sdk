@@ -5,7 +5,7 @@ import Foundation
 
 public struct AppStoreVersionPhasedReleaseResponse: Codable {
 	/// AppStoreVersionPhasedRelease
-	public var data: AppStoreVersionPhasedRelease
+	public var data: AppStoreVersionPhasedRelease?
 	public var links: DocumentLinks
 
 	public init(data: AppStoreVersionPhasedRelease, links: DocumentLinks) {
@@ -15,7 +15,7 @@ public struct AppStoreVersionPhasedReleaseResponse: Codable {
 
 	public init(from decoder: Decoder) throws {
 		let values = try decoder.container(keyedBy: StringCodingKey.self)
-		self.data = try values.decode(AppStoreVersionPhasedRelease.self, forKey: "data")
+		self.data = try? values.decode(AppStoreVersionPhasedRelease.self, forKey: "data")
 		self.links = try values.decode(DocumentLinks.self, forKey: "links")
 	}
 
