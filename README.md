@@ -193,6 +193,9 @@ The AppsMan app is a project that will allow developers to manage apps localisab
 - [Localiji: Localizations for App Store](https://apps.apple.com/us/app/localiji/id6467663963) developed by Nicolas Kick.
 Localiji manages a local copy of your app localizations from App Store Connect and allows you to effortlessly sync the changes. Edit individual attributes, like your app’s description, release notes or screenshots. Export an entire language, import the translations again and upload them to App Store Connect with only a few clicks.
 
+- [Five Stars: Reviews & Ratings](https://apps.apple.com/app/id1634650919) developed by [Mathias Emil Mortensen](https://github.com/mathiasemil).
+Five Stars helps app developers read and reply to App Store reviews from their users. Translate reviews, reply with customizable templates and AI-powered quick replies, filter by region, and view global app ratings from any app. Five Stars is available for iPhone and iPad, with a Mac version coming in Spring 2024.
+
 
 ## License
 
