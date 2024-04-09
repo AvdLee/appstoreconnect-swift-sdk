@@ -119,6 +119,12 @@ public final class APIProvider {
             if let date = formatter.date(from: dateStr) {
                 return date
             }
+            // Example: 2024-01-01T23:59:59.000+00:00
+            let isoDateFormatter = ISO8601DateFormatter()
+            isoDateFormatter.formatOptions = [.withInternetDateTime, .withFractionalSeconds]
+            if let date = isoDateFormatter.date(from: dateStr) {
+                return date
+            }
             throw APIProvider.Error.dateDecodingError(dateStr)
         })
         return decoder
