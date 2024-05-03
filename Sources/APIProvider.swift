@@ -47,6 +47,28 @@ public struct APIConfiguration {
             throw JWT.Error.invalidPrivateKey
         }
     }
+    
+    /// Creates a new API configuration to use for initialising the API Provider.
+    ///
+    /// - Parameters:
+    ///   - issuerID: Your issuer ID from the API Keys page in App Store Connect (Ex: 57246542-96fe-1a63-e053-0824d011072a)
+    ///   - privateKeyID: Your private key ID from App Store Connect (Ex: 2X9R4HXF34). Will be inferred from `privateKeyURL` if nil.
+    ///   - privateKeyURL: A file URL that references the path to your private key file.
+    public init(issuerID: String, privateKeyID: String? = nil, privateKeyURL: URL) throws {
+        self.issuerID = issuerID
+        if let privateKeyID = privateKeyID {
+            self.privateKeyID = privateKeyID
+        } else {
+            let filename = privateKeyURL.deletingPathExtension().lastPathComponent
+            self.privateKeyID = String(filename.suffix(10))
+        }
+        do {
+            let pemEncodedPrivateKey = try String(contentsOf: privateKeyURL)
+            self.privateKey = try JWT.PrivateKey(pemRepresentation: pemEncodedPrivateKey)
+        } catch {
+            throw JWT.Error.invalidPrivateKey
+        }
+    }
 }
 
 /// Provides access to all API Methods. Can be used to perform API requests.
