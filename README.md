@@ -49,6 +49,14 @@ Use this private key together with the issuer ID and the private key ID to creat
 let configuration = APIConfiguration(issuerID: "<YOUR ISSUER ID>", privateKeyID: "<YOUR PRIVATE KEY ID>", privateKey: "<YOUR PRIVATE KEY>")
 ```
 
+Alternatively you can pass the path to the .p8 file:
+
+```swift
+let configuration = APIConfiguration(issuerID: "<YOUR ISSUER ID>", privateKeyID: "<YOUR PRIVATE KEY ID>", privateKeyURL: URL(fileURLWithPath: "~/AuthKey_<YOUR PRIVATE KEY ID>.p8"))
+```
+
+You can even omit the `privateKeyID` as it can be inferred from the name of the .p8 file.
+
 #### 3. Create an APIProvider and perform a request
 After creating an `APIProvider` instance with your `APIConfiguration` you can start performing your first request.
 
