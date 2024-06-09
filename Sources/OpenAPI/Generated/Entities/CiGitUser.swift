@@ -5,9 +5,9 @@ import Foundation
 
 public struct CiGitUser: Codable {
 	public var displayName: String?
-	public var avatarURL: String?
+	public var avatarURL: URL?
 
-	public init(displayName: String? = nil, avatarURL: String? = nil) {
+	public init(displayName: String? = nil, avatarURL: URL? = nil) {
 		self.displayName = displayName
 		self.avatarURL = avatarURL
 	}
@@ -15,7 +15,7 @@ public struct CiGitUser: Codable {
 	public init(from decoder: Decoder) throws {
 		let values = try decoder.container(keyedBy: StringCodingKey.self)
 		self.displayName = try values.decodeIfPresent(String.self, forKey: "displayName")
-		self.avatarURL = try values.decodeIfPresent(String.self, forKey: "avatarUrl")
+		self.avatarURL = try values.decodeIfPresent(URL.self, forKey: "avatarUrl")
 	}
 
 	public func encode(to encoder: Encoder) throws {
