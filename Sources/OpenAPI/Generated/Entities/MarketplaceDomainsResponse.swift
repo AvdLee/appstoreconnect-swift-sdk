@@ -3,6 +3,7 @@
 
 import Foundation
 
+@available(*, deprecated, message: "Deprecated")
 public struct MarketplaceDomainsResponse: Codable {
 	public var data: [MarketplaceDomain]
 	public var links: PagedDocumentLinks

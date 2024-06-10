@@ -13,6 +13,7 @@ extension APIEndpoint.V1.MarketplaceDomains {
 		/// Path: `/v1/marketplaceDomains/{id}`
 		public let path: String
 
+		@available(*, deprecated, message: "Deprecated")
 		public func get(fieldsMarketplaceDomains: [FieldsMarketplaceDomains]? = nil) -> Request<AppStoreConnect_Swift_SDK.MarketplaceDomainResponse> {
 			Request(path: path, method: "GET", query: makeGetQuery(fieldsMarketplaceDomains), id: "marketplaceDomains-get_instance")
 		}
@@ -29,6 +30,7 @@ extension APIEndpoint.V1.MarketplaceDomains {
 			case referenceName
 		}
 
+		@available(*, deprecated, message: "Deprecated")
 		public var delete: Request<Void> {
 			Request(path: path, method: "DELETE", id: "marketplaceDomains-delete_instance")
 		}
