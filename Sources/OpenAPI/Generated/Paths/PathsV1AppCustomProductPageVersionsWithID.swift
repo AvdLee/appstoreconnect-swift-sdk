@@ -26,6 +26,7 @@ extension APIEndpoint.V1.AppCustomProductPageVersions {
 			public enum FieldsAppCustomProductPageVersions: String, Codable, CaseIterable {
 				case appCustomProductPage
 				case appCustomProductPageLocalizations
+				case deepLink
 				case state
 				case version
 			}
@@ -58,6 +59,10 @@ extension APIEndpoint.V1.AppCustomProductPageVersions {
 				encoder.encode(limitAppCustomProductPageLocalizations, forKey: "limit[appCustomProductPageLocalizations]")
 				return encoder.items
 			}
+		}
+
+		public func patch(_ body: AppStoreConnect_Swift_SDK.AppCustomProductPageVersionUpdateRequest) -> Request<AppStoreConnect_Swift_SDK.AppCustomProductPageVersionResponse> {
+			Request(path: path, method: "PATCH", body: body, id: "appCustomProductPageVersions-update_instance")
 		}
 	}
 }

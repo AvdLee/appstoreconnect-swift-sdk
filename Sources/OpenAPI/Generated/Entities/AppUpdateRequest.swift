@@ -5,13 +5,11 @@ import Foundation
 
 public struct AppUpdateRequest: Codable {
 	public var data: Data
-	public var included: [AppPriceInlineCreate]?
 
 	public struct Data: Codable, Identifiable {
 		public var type: `Type`
 		public var id: String
 		public var attributes: Attributes?
-		public var relationships: Relationships?
 
 		public enum `Type`: String, Codable, CaseIterable {
 			case apps
@@ -24,8 +22,6 @@ public struct AppUpdateRequest: Codable {
 			public var subscriptionStatusURLVersion: SubscriptionStatusURLVersion?
 			public var subscriptionStatusURLForSandbox: URL?
 			public var subscriptionStatusURLVersionForSandbox: SubscriptionStatusURLVersion?
-			/// - warning: Deprecated.
-			public var isAvailableInNewTerritories: Bool?
 			public var contentRightsDeclaration: ContentRightsDeclaration?
 
 			public enum ContentRightsDeclaration: String, Codable, CaseIterable {
@@ -33,14 +29,13 @@ public struct AppUpdateRequest: Codable {
 				case usesThirdPartyContent = "USES_THIRD_PARTY_CONTENT"
 			}
 
-			public init(bundleID: String? = nil, primaryLocale: String? = nil, subscriptionStatusURL: URL? = nil, subscriptionStatusURLVersion: SubscriptionStatusURLVersion? = nil, subscriptionStatusURLForSandbox: URL? = nil, subscriptionStatusURLVersionForSandbox: SubscriptionStatusURLVersion? = nil, isAvailableInNewTerritories: Bool? = nil, contentRightsDeclaration: ContentRightsDeclaration? = nil) {
+			public init(bundleID: String? = nil, primaryLocale: String? = nil, subscriptionStatusURL: URL? = nil, subscriptionStatusURLVersion: SubscriptionStatusURLVersion? = nil, subscriptionStatusURLForSandbox: URL? = nil, subscriptionStatusURLVersionForSandbox: SubscriptionStatusURLVersion? = nil, contentRightsDeclaration: ContentRightsDeclaration? = nil) {
 				self.bundleID = bundleID
 				self.primaryLocale = primaryLocale
 				self.subscriptionStatusURL = subscriptionStatusURL
 				self.subscriptionStatusURLVersion = subscriptionStatusURLVersion
 				self.subscriptionStatusURLForSandbox = subscriptionStatusURLForSandbox
 				self.subscriptionStatusURLVersionForSandbox = subscriptionStatusURLVersionForSandbox
-				self.isAvailableInNewTerritories = isAvailableInNewTerritories
 				self.contentRightsDeclaration = contentRightsDeclaration
 			}
 
@@ -52,7 +47,6 @@ public struct AppUpdateRequest: Codable {
 				self.subscriptionStatusURLVersion = try values.decodeIfPresent(SubscriptionStatusURLVersion.self, forKey: "subscriptionStatusUrlVersion")
 				self.subscriptionStatusURLForSandbox = try values.decodeIfPresent(URL.self, forKey: "subscriptionStatusUrlForSandbox")
 				self.subscriptionStatusURLVersionForSandbox = try values.decodeIfPresent(SubscriptionStatusURLVersion.self, forKey: "subscriptionStatusUrlVersionForSandbox")
-				self.isAvailableInNewTerritories = try values.decodeIfPresent(Bool.self, forKey: "availableInNewTerritories")
 				self.contentRightsDeclaration = try values.decodeIfPresent(ContentRightsDeclaration.self, forKey: "contentRightsDeclaration")
 			}
 
@@ -64,130 +58,14 @@ public struct AppUpdateRequest: Codable {
 				try values.encodeIfPresent(subscriptionStatusURLVersion, forKey: "subscriptionStatusUrlVersion")
 				try values.encodeIfPresent(subscriptionStatusURLForSandbox, forKey: "subscriptionStatusUrlForSandbox")
 				try values.encodeIfPresent(subscriptionStatusURLVersionForSandbox, forKey: "subscriptionStatusUrlVersionForSandbox")
-				try values.encodeIfPresent(isAvailableInNewTerritories, forKey: "availableInNewTerritories")
 				try values.encodeIfPresent(contentRightsDeclaration, forKey: "contentRightsDeclaration")
 			}
 		}
 
-		public struct Relationships: Codable {
-			/// - warning: Deprecated.
-			public var prices: Prices?
-			/// - warning: Deprecated.
-			public var availableTerritories: AvailableTerritories?
-
-			@available(*, deprecated, message: "Deprecated")
-			public struct Prices: Codable {
-				public var data: [Datum]?
-
-				public struct Datum: Codable, Identifiable {
-					public var type: `Type`
-					public var id: String
-
-					public enum `Type`: String, Codable, CaseIterable {
-						case appPrices
-					}
-
-					public init(type: `Type`, id: String) {
-						self.type = type
-						self.id = id
-					}
-
-					public init(from decoder: Decoder) throws {
-						let values = try decoder.container(keyedBy: StringCodingKey.self)
-						self.type = try values.decode(`Type`.self, forKey: "type")
-						self.id = try values.decode(String.self, forKey: "id")
-					}
-
-					public func encode(to encoder: Encoder) throws {
-						var values = encoder.container(keyedBy: StringCodingKey.self)
-						try values.encode(type, forKey: "type")
-						try values.encode(id, forKey: "id")
-					}
-				}
-
-				public init(data: [Datum]? = nil) {
-					self.data = data
-				}
-
-				public init(from decoder: Decoder) throws {
-					let values = try decoder.container(keyedBy: StringCodingKey.self)
-					self.data = try values.decodeIfPresent([Datum].self, forKey: "data")
-				}
-
-				public func encode(to encoder: Encoder) throws {
-					var values = encoder.container(keyedBy: StringCodingKey.self)
-					try values.encodeIfPresent(data, forKey: "data")
-				}
-			}
-
-			@available(*, deprecated, message: "Deprecated")
-			public struct AvailableTerritories: Codable {
-				public var data: [Datum]?
-
-				public struct Datum: Codable, Identifiable {
-					public var type: `Type`
-					public var id: String
-
-					public enum `Type`: String, Codable, CaseIterable {
-						case territories
-					}
-
-					public init(type: `Type`, id: String) {
-						self.type = type
-						self.id = id
-					}
-
-					public init(from decoder: Decoder) throws {
-						let values = try decoder.container(keyedBy: StringCodingKey.self)
-						self.type = try values.decode(`Type`.self, forKey: "type")
-						self.id = try values.decode(String.self, forKey: "id")
-					}
-
-					public func encode(to encoder: Encoder) throws {
-						var values = encoder.container(keyedBy: StringCodingKey.self)
-						try values.encode(type, forKey: "type")
-						try values.encode(id, forKey: "id")
-					}
-				}
-
-				public init(data: [Datum]? = nil) {
-					self.data = data
-				}
-
-				public init(from decoder: Decoder) throws {
-					let values = try decoder.container(keyedBy: StringCodingKey.self)
-					self.data = try values.decodeIfPresent([Datum].self, forKey: "data")
-				}
-
-				public func encode(to encoder: Encoder) throws {
-					var values = encoder.container(keyedBy: StringCodingKey.self)
-					try values.encodeIfPresent(data, forKey: "data")
-				}
-			}
-
-			public init(prices: Prices? = nil, availableTerritories: AvailableTerritories? = nil) {
-				self.prices = prices
-				self.availableTerritories = availableTerritories
-			}
-
-			public init(from decoder: Decoder) throws {
-				let values = try decoder.container(keyedBy: StringCodingKey.self)
-				self.prices = try values.decodeIfPresent(Prices.self, forKey: "prices")
-				self.availableTerritories = try values.decodeIfPresent(AvailableTerritories.self, forKey: "availableTerritories")
-			}
-
-			public func encode(to encoder: Encoder) throws {
-				var values = encoder.container(keyedBy: StringCodingKey.self)
-				try values.encodeIfPresent(prices, forKey: "prices")
-				try values.encodeIfPresent(availableTerritories, forKey: "availableTerritories")
-			}
-		}
-
-		public init(type: `Type`, id: String, attributes: Attributes? = nil, relationships: Relationships? = nil) {
+		public init(type: `Type`, id: String, attributes: Attributes? = nil) {
 			self.type = type
 			self.id = id
 			self.attributes = attributes
-			self.relationships = relationships
 		}
 
 		public init(from decoder: Decoder) throws {
@@ -195,7 +73,6 @@ public struct AppUpdateRequest: Codable {
 			self.type = try values.decode(`Type`.self, forKey: "type")
 			self.id = try values.decode(String.self, forKey: "id")
 			self.attributes = try values.decodeIfPresent(Attributes.self, forKey: "attributes")
-			self.relationships = try values.decodeIfPresent(Relationships.self, forKey: "relationships")
 		}
 
 		public func encode(to encoder: Encoder) throws {
@@ -203,24 +80,20 @@ public struct AppUpdateRequest: Codable {
 			try values.encode(type, forKey: "type")
 			try values.encode(id, forKey: "id")
 			try values.encodeIfPresent(attributes, forKey: "attributes")
-			try values.encodeIfPresent(relationships, forKey: "relationships")
 		}
 	}
 
-	public init(data: Data, included: [AppPriceInlineCreate]? = nil) {
+	public init(data: Data) {
 		self.data = data
-		self.included = included
 	}
 
 	public init(from decoder: Decoder) throws {
 		let values = try decoder.container(keyedBy: StringCodingKey.self)
 		self.data = try values.decode(Data.self, forKey: "data")
-		self.included = try values.decodeIfPresent([AppPriceInlineCreate].self, forKey: "included")
 	}
 
 	public func encode(to encoder: Encoder) throws {
 		var values = encoder.container(keyedBy: StringCodingKey.self)
 		try values.encode(data, forKey: "data")
-		try values.encodeIfPresent(included, forKey: "included")
 	}
 }

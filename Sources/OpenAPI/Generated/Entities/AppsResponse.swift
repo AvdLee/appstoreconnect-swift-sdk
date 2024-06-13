@@ -23,8 +23,6 @@ public struct AppsResponse: Codable {
 		case appClip(AppClip)
 		case endUserLicenseAgreement(EndUserLicenseAgreement)
 		case appPreOrder(AppPreOrder)
-		case appPrice(AppPrice)
-		case territory(Territory)
 		case inAppPurchase(InAppPurchase)
 		case subscriptionGroup(SubscriptionGroup)
 		case gameCenterEnabledVersion(GameCenterEnabledVersion)
@@ -65,10 +63,6 @@ public struct AppsResponse: Codable {
 				self = .endUserLicenseAgreement(value)
 			} else if let value = try? container.decode(AppPreOrder.self) {
 				self = .appPreOrder(value)
-			} else if let value = try? container.decode(AppPrice.self) {
-				self = .appPrice(value)
-			} else if let value = try? container.decode(Territory.self) {
-				self = .territory(value)
 			} else if let value = try? container.decode(InAppPurchase.self) {
 				self = .inAppPurchase(value)
 			} else if let value = try? container.decode(SubscriptionGroup.self) {
@@ -94,7 +88,7 @@ public struct AppsResponse: Codable {
 			} else {
 				throw DecodingError.dataCorruptedError(
 					in: container,
-					debugDescription: "Data could not be decoded as any of the expected types (AppEncryptionDeclaration, CiProduct, BetaGroup, AppStoreVersion, PrereleaseVersion, BetaAppLocalization, Build, BetaLicenseAgreement, BetaAppReviewDetail, AppInfo, AppClip, EndUserLicenseAgreement, AppPreOrder, AppPrice, Territory, InAppPurchase, SubscriptionGroup, GameCenterEnabledVersion, AppCustomProductPage, InAppPurchaseV2, PromotedPurchase, AppEvent, ReviewSubmission, SubscriptionGracePeriod, GameCenterDetail, AppStoreVersionExperimentV2)."
+					debugDescription: "Data could not be decoded as any of the expected types (AppEncryptionDeclaration, CiProduct, BetaGroup, AppStoreVersion, PrereleaseVersion, BetaAppLocalization, Build, BetaLicenseAgreement, BetaAppReviewDetail, AppInfo, AppClip, EndUserLicenseAgreement, AppPreOrder, InAppPurchase, SubscriptionGroup, GameCenterEnabledVersion, AppCustomProductPage, InAppPurchaseV2, PromotedPurchase, AppEvent, ReviewSubmission, SubscriptionGracePeriod, GameCenterDetail, AppStoreVersionExperimentV2)."
 				)
 			}
 		}
@@ -115,8 +109,6 @@ public struct AppsResponse: Codable {
 			case .appClip(let value): try container.encode(value)
 			case .endUserLicenseAgreement(let value): try container.encode(value)
 			case .appPreOrder(let value): try container.encode(value)
-			case .appPrice(let value): try container.encode(value)
-			case .territory(let value): try container.encode(value)
 			case .inAppPurchase(let value): try container.encode(value)
 			case .subscriptionGroup(let value): try container.encode(value)
 			case .gameCenterEnabledVersion(let value): try container.encode(value)

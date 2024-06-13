@@ -90,7 +90,6 @@ extension APIEndpoint.V2.InAppPurchases {
 			public enum FieldsInAppPurchasePricePoints: String, Codable, CaseIterable {
 				case customerPrice
 				case inAppPurchaseV2
-				case priceTier
 				case proceeds
 				case territory
 			}

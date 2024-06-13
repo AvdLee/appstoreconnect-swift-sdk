@@ -18,7 +18,6 @@ extension APIEndpoint.V2.InAppPurchases.WithID {
 		}
 
 		public struct GetParameters {
-			public var filterPriceTier: [String]?
 			public var filterTerritory: [String]?
 			public var fieldsInAppPurchasePricePoints: [FieldsInAppPurchasePricePoints]?
 			public var fieldsTerritories: [FieldsTerritories]?
@@ -28,7 +27,6 @@ extension APIEndpoint.V2.InAppPurchases.WithID {
 			public enum FieldsInAppPurchasePricePoints: String, Codable, CaseIterable {
 				case customerPrice
 				case inAppPurchaseV2
-				case priceTier
 				case proceeds
 				case territory
 			}
@@ -41,8 +39,7 @@ extension APIEndpoint.V2.InAppPurchases.WithID {
 				case territory
 			}
 
-			public init(filterPriceTier: [String]? = nil, filterTerritory: [String]? = nil, fieldsInAppPurchasePricePoints: [FieldsInAppPurchasePricePoints]? = nil, fieldsTerritories: [FieldsTerritories]? = nil, limit: Int? = nil, include: [Include]? = nil) {
-				self.filterPriceTier = filterPriceTier
+			public init(filterTerritory: [String]? = nil, fieldsInAppPurchasePricePoints: [FieldsInAppPurchasePricePoints]? = nil, fieldsTerritories: [FieldsTerritories]? = nil, limit: Int? = nil, include: [Include]? = nil) {
 				self.filterTerritory = filterTerritory
 				self.fieldsInAppPurchasePricePoints = fieldsInAppPurchasePricePoints
 				self.fieldsTerritories = fieldsTerritories
@@ -52,7 +49,6 @@ extension APIEndpoint.V2.InAppPurchases.WithID {
 
 			public var asQuery: [(String, String?)] {
 				let encoder = URLQueryEncoder(explode: false)
-				encoder.encode(filterPriceTier, forKey: "filter[priceTier]")
 				encoder.encode(filterTerritory, forKey: "filter[territory]")
 				encoder.encode(fieldsInAppPurchasePricePoints, forKey: "fields[inAppPurchasePricePoints]")
 				encoder.encode(fieldsTerritories, forKey: "fields[territories]")

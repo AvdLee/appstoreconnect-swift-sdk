@@ -17,16 +17,19 @@ public struct DiagnosticSignature: Codable, Identifiable {
 		public var diagnosticType: DiagnosticType?
 		public var signature: String?
 		public var weight: Double?
+		public var insight: DiagnosticInsight?
 
 		public enum DiagnosticType: String, Codable, CaseIterable {
 			case diskWrites = "DISK_WRITES"
 			case hangs = "HANGS"
+			case launches = "LAUNCHES"
 		}
 
-		public init(diagnosticType: DiagnosticType? = nil, signature: String? = nil, weight: Double? = nil) {
+		public init(diagnosticType: DiagnosticType? = nil, signature: String? = nil, weight: Double? = nil, insight: DiagnosticInsight? = nil) {
 			self.diagnosticType = diagnosticType
 			self.signature = signature
 			self.weight = weight
+			self.insight = insight
 		}
 
 		public init(from decoder: Decoder) throws {
@@ -34,6 +37,7 @@ public struct DiagnosticSignature: Codable, Identifiable {
 			self.diagnosticType = try values.decodeIfPresent(DiagnosticType.self, forKey: "diagnosticType")
 			self.signature = try values.decodeIfPresent(String.self, forKey: "signature")
 			self.weight = try values.decodeIfPresent(Double.self, forKey: "weight")
+			self.insight = try values.decodeIfPresent(DiagnosticInsight.self, forKey: "insight")
 		}
 
 		public func encode(to encoder: Encoder) throws {
@@ -41,6 +45,7 @@ public struct DiagnosticSignature: Codable, Identifiable {
 			try values.encodeIfPresent(diagnosticType, forKey: "diagnosticType")
 			try values.encodeIfPresent(signature, forKey: "signature")
 			try values.encodeIfPresent(weight, forKey: "weight")
+			try values.encodeIfPresent(insight, forKey: "insight")
 		}
 	}
 

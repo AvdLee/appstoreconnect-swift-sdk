@@ -25,10 +25,12 @@ extension APIEndpoint.V1.Builds.WithID {
 			public enum FilterDiagnosticType: String, Codable, CaseIterable {
 				case diskWrites = "DISK_WRITES"
 				case hangs = "HANGS"
+				case launches = "LAUNCHES"
 			}
 
 			public enum FieldsDiagnosticSignatures: String, Codable, CaseIterable {
 				case diagnosticType
+				case insight
 				case logs
 				case signature
 				case weight

@@ -4,18 +4,18 @@
 import Foundation
 
 public struct PrereleaseVersionWithoutIncludesResponse: Codable {
-	/// Build
-	public var data: Build
+	/// PrereleaseVersion
+	public var data: PrereleaseVersion
 	public var links: DocumentLinks
 
-	public init(data: Build, links: DocumentLinks) {
+	public init(data: PrereleaseVersion, links: DocumentLinks) {
 		self.data = data
 		self.links = links
 	}
 
 	public init(from decoder: Decoder) throws {
 		let values = try decoder.container(keyedBy: StringCodingKey.self)
-		self.data = try values.decode(Build.self, forKey: "data")
+		self.data = try values.decode(PrereleaseVersion.self, forKey: "data")
 		self.links = try values.decode(DocumentLinks.self, forKey: "links")
 	}
 

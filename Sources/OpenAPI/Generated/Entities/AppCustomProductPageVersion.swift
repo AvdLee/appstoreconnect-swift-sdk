@@ -17,6 +17,7 @@ public struct AppCustomProductPageVersion: Codable, Identifiable {
 	public struct Attributes: Codable {
 		public var version: String?
 		public var state: State?
+		public var deepLink: URL?
 
 		public enum State: String, Codable, CaseIterable {
 			case prepareForSubmission = "PREPARE_FOR_SUBMISSION"
@@ -29,21 +30,24 @@ public struct AppCustomProductPageVersion: Codable, Identifiable {
 			case rejected = "REJECTED"
 		}
 
-		public init(version: String? = nil, state: State? = nil) {
+		public init(version: String? = nil, state: State? = nil, deepLink: URL? = nil) {
 			self.version = version
 			self.state = state
+			self.deepLink = deepLink
 		}
 
 		public init(from decoder: Decoder) throws {
 			let values = try decoder.container(keyedBy: StringCodingKey.self)
 			self.version = try values.decodeIfPresent(String.self, forKey: "version")
 			self.state = try values.decodeIfPresent(State.self, forKey: "state")
+			self.deepLink = try values.decodeIfPresent(URL.self, forKey: "deepLink")
 		}
 
 		public func encode(to encoder: Encoder) throws {
 			var values = encoder.container(keyedBy: StringCodingKey.self)
 			try values.encodeIfPresent(version, forKey: "version")
 			try values.encodeIfPresent(state, forKey: "state")
+			try values.encodeIfPresent(deepLink, forKey: "deepLink")
 		}
 	}
 

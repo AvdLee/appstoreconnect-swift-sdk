@@ -32,6 +32,7 @@ extension APIEndpoint.V1.Builds.WithID {
 			case firstName
 			case inviteType
 			case lastName
+			case state
 		}
 	}
 }

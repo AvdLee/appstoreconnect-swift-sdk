@@ -48,6 +48,7 @@ extension APIEndpoint.V1.AppCustomProductPages.WithID {
 			public enum FieldsAppCustomProductPageVersions: String, Codable, CaseIterable {
 				case appCustomProductPage
 				case appCustomProductPageLocalizations
+				case deepLink
 				case state
 				case version
 			}

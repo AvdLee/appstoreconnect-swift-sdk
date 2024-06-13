@@ -4,11 +4,11 @@
 import Foundation
 
 public struct TerritoriesWithoutIncludesResponse: Codable {
-	public var data: [EndUserLicenseAgreement]
+	public var data: [Territory]
 	public var links: PagedDocumentLinks
 	public var meta: PagingInformation?
 
-	public init(data: [EndUserLicenseAgreement], links: PagedDocumentLinks, meta: PagingInformation? = nil) {
+	public init(data: [Territory], links: PagedDocumentLinks, meta: PagingInformation? = nil) {
 		self.data = data
 		self.links = links
 		self.meta = meta
@@ -16,7 +16,7 @@ public struct TerritoriesWithoutIncludesResponse: Codable {
 
 	public init(from decoder: Decoder) throws {
 		let values = try decoder.container(keyedBy: StringCodingKey.self)
-		self.data = try values.decode([EndUserLicenseAgreement].self, forKey: "data")
+		self.data = try values.decode([Territory].self, forKey: "data")
 		self.links = try values.decode(PagedDocumentLinks.self, forKey: "links")
 		self.meta = try values.decodeIfPresent(PagingInformation.self, forKey: "meta")
 	}

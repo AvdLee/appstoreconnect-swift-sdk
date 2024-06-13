@@ -4,11 +4,11 @@
 import Foundation
 
 public struct DevicesWithoutIncludesResponse: Codable {
-	public var data: [Profile]
+	public var data: [Device]
 	public var links: PagedDocumentLinks
 	public var meta: PagingInformation?
 
-	public init(data: [Profile], links: PagedDocumentLinks, meta: PagingInformation? = nil) {
+	public init(data: [Device], links: PagedDocumentLinks, meta: PagingInformation? = nil) {
 		self.data = data
 		self.links = links
 		self.meta = meta
@@ -16,7 +16,7 @@ public struct DevicesWithoutIncludesResponse: Codable {
 
 	public init(from decoder: Decoder) throws {
 		let values = try decoder.container(keyedBy: StringCodingKey.self)
-		self.data = try values.decode([Profile].self, forKey: "data")
+		self.data = try values.decode([Device].self, forKey: "data")
 		self.links = try values.decode(PagedDocumentLinks.self, forKey: "links")
 		self.meta = try values.decodeIfPresent(PagingInformation.self, forKey: "meta")
 	}

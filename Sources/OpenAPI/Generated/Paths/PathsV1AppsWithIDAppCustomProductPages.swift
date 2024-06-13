@@ -39,6 +39,7 @@ extension APIEndpoint.V1.Apps.WithID {
 			public enum FieldsAppCustomProductPageVersions: String, Codable, CaseIterable {
 				case appCustomProductPage
 				case appCustomProductPageLocalizations
+				case deepLink
 				case state
 				case version
 			}
@@ -56,8 +57,6 @@ extension APIEndpoint.V1.Apps.WithID {
 				case appPriceSchedule
 				case appStoreVersionExperimentsV2
 				case appStoreVersions
-				case availableInNewTerritories
-				case availableTerritories
 				case betaAppLocalizations
 				case betaAppReviewDetail
 				case betaGroups
@@ -79,8 +78,6 @@ extension APIEndpoint.V1.Apps.WithID {
 				case perfPowerMetrics
 				case preOrder
 				case preReleaseVersions
-				case pricePoints
-				case prices
 				case primaryLocale
 				case promotedPurchases
 				case reviewSubmissions

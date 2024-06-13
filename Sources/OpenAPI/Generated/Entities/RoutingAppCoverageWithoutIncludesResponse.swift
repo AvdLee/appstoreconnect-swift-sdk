@@ -4,18 +4,18 @@
 import Foundation
 
 public struct RoutingAppCoverageWithoutIncludesResponse: Codable {
-	/// AppStoreVersion
-	public var data: AppStoreVersion
+	/// RoutingAppCoverage
+	public var data: RoutingAppCoverage
 	public var links: DocumentLinks
 
-	public init(data: AppStoreVersion, links: DocumentLinks) {
+	public init(data: RoutingAppCoverage, links: DocumentLinks) {
 		self.data = data
 		self.links = links
 	}
 
 	public init(from decoder: Decoder) throws {
 		let values = try decoder.container(keyedBy: StringCodingKey.self)
-		self.data = try values.decode(AppStoreVersion.self, forKey: "data")
+		self.data = try values.decode(RoutingAppCoverage.self, forKey: "data")
 		self.links = try values.decode(DocumentLinks.self, forKey: "links")
 	}
 
