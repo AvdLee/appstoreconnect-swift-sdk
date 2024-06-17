@@ -4,18 +4,18 @@
 import Foundation
 
 public struct AppWithoutIncludesResponse: Codable {
-	/// PrereleaseVersion
-	public var data: PrereleaseVersion
+	/// App
+	public var data: App
 	public var links: DocumentLinks
 
-	public init(data: PrereleaseVersion, links: DocumentLinks) {
+	public init(data: App, links: DocumentLinks) {
 		self.data = data
 		self.links = links
 	}
 
 	public init(from decoder: Decoder) throws {
 		let values = try decoder.container(keyedBy: StringCodingKey.self)
-		self.data = try values.decode(PrereleaseVersion.self, forKey: "data")
+		self.data = try values.decode(App.self, forKey: "data")
 		self.links = try values.decode(DocumentLinks.self, forKey: "links")
 	}
 

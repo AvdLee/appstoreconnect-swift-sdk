@@ -51,6 +51,8 @@ extension APIEndpoint.V1 {
 				case minusinviteType = "-inviteType"
 				case lastName
 				case minuslastName = "-lastName"
+				case state
+				case minusstate = "-state"
 			}
 
 			public enum FieldsBetaTesters: String, Codable, CaseIterable {
@@ -61,6 +63,7 @@ extension APIEndpoint.V1 {
 				case firstName
 				case inviteType
 				case lastName
+				case state
 			}
 
 			public enum Include: String, Codable, CaseIterable {
@@ -82,8 +85,6 @@ extension APIEndpoint.V1 {
 				case appPriceSchedule
 				case appStoreVersionExperimentsV2
 				case appStoreVersions
-				case availableInNewTerritories
-				case availableTerritories
 				case betaAppLocalizations
 				case betaAppReviewDetail
 				case betaGroups
@@ -105,8 +106,6 @@ extension APIEndpoint.V1 {
 				case perfPowerMetrics
 				case preOrder
 				case preReleaseVersions
-				case pricePoints
-				case prices
 				case primaryLocale
 				case promotedPurchases
 				case reviewSubmissions

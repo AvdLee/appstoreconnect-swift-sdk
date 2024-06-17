@@ -4,18 +4,18 @@
 import Foundation
 
 public struct BundleIDWithoutIncludesResponse: Codable {
-	/// Profile
-	public var data: Profile
+	/// BundleId
+	public var data: BundleID
 	public var links: DocumentLinks
 
-	public init(data: Profile, links: DocumentLinks) {
+	public init(data: BundleID, links: DocumentLinks) {
 		self.data = data
 		self.links = links
 	}
 
 	public init(from decoder: Decoder) throws {
 		let values = try decoder.container(keyedBy: StringCodingKey.self)
-		self.data = try values.decode(Profile.self, forKey: "data")
+		self.data = try values.decode(BundleID.self, forKey: "data")
 		self.links = try values.decode(DocumentLinks.self, forKey: "links")
 	}
 

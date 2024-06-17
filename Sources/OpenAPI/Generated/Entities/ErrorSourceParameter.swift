@@ -5,19 +5,19 @@ import Foundation
 
 /// Parameter
 public struct ErrorSourceParameter: Codable {
-	public var parameter: String?
+	public var parameter: String
 
-	public init(parameter: String? = nil) {
+	public init(parameter: String) {
 		self.parameter = parameter
 	}
 
 	public init(from decoder: Decoder) throws {
 		let values = try decoder.container(keyedBy: StringCodingKey.self)
-		self.parameter = try values.decodeIfPresent(String.self, forKey: "parameter")
+		self.parameter = try values.decode(String.self, forKey: "parameter")
 	}
 
 	public func encode(to encoder: Encoder) throws {
 		var values = encoder.container(keyedBy: StringCodingKey.self)
-		try values.encodeIfPresent(parameter, forKey: "parameter")
+		try values.encode(parameter, forKey: "parameter")
 	}
 }

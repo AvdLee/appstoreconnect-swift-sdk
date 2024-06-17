@@ -28,7 +28,6 @@ extension APIEndpoint.V1.InAppPurchasePriceSchedules.WithID {
 			public enum FieldsInAppPurchasePricePoints: String, Codable, CaseIterable {
 				case customerPrice
 				case inAppPurchaseV2
-				case priceTier
 				case proceeds
 				case territory
 			}

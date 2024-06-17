@@ -13,6 +13,35 @@ extension APIEndpoint.V1 {
 		/// Path: `/v1/alternativeDistributionKeys`
 		public let path: String
 
+		public func get(parameters: GetParameters? = nil) -> Request<AppStoreConnect_Swift_SDK.AlternativeDistributionKeysResponse> {
+			Request(path: path, method: "GET", query: parameters?.asQuery, id: "alternativeDistributionKeys-get_collection")
+		}
+
+		public struct GetParameters {
+			public var isExistsApp: Bool?
+			public var fieldsAlternativeDistributionKeys: [FieldsAlternativeDistributionKeys]?
+			public var limit: Int?
+
+			public enum FieldsAlternativeDistributionKeys: String, Codable, CaseIterable {
+				case app
+				case publicKey
+			}
+
+			public init(isExistsApp: Bool? = nil, fieldsAlternativeDistributionKeys: [FieldsAlternativeDistributionKeys]? = nil, limit: Int? = nil) {
+				self.isExistsApp = isExistsApp
+				self.fieldsAlternativeDistributionKeys = fieldsAlternativeDistributionKeys
+				self.limit = limit
+			}
+
+			public var asQuery: [(String, String?)] {
+				let encoder = URLQueryEncoder(explode: false)
+				encoder.encode(isExistsApp, forKey: "exists[app]")
+				encoder.encode(fieldsAlternativeDistributionKeys, forKey: "fields[alternativeDistributionKeys]")
+				encoder.encode(limit, forKey: "limit")
+				return encoder.items
+			}
+		}
+
 		public func post(_ body: AppStoreConnect_Swift_SDK.AlternativeDistributionKeyCreateRequest) -> Request<AppStoreConnect_Swift_SDK.AlternativeDistributionKeyResponse> {
 			Request(path: path, method: "POST", body: body, id: "alternativeDistributionKeys-create_instance")
 		}

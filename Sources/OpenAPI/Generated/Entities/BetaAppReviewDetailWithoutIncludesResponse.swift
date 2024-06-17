@@ -4,18 +4,18 @@
 import Foundation
 
 public struct BetaAppReviewDetailWithoutIncludesResponse: Codable {
-	/// App
-	public var data: App
+	/// BetaAppReviewDetail
+	public var data: BetaAppReviewDetail
 	public var links: DocumentLinks
 
-	public init(data: App, links: DocumentLinks) {
+	public init(data: BetaAppReviewDetail, links: DocumentLinks) {
 		self.data = data
 		self.links = links
 	}
 
 	public init(from decoder: Decoder) throws {
 		let values = try decoder.container(keyedBy: StringCodingKey.self)
-		self.data = try values.decode(App.self, forKey: "data")
+		self.data = try values.decode(BetaAppReviewDetail.self, forKey: "data")
 		self.links = try values.decode(DocumentLinks.self, forKey: "links")
 	}
 

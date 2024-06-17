@@ -17,27 +17,22 @@ public struct InAppPurchasePricePoint: Codable, Identifiable {
 	public struct Attributes: Codable {
 		public var customerPrice: String?
 		public var proceeds: String?
-		/// - warning: Deprecated.
-		public var priceTier: String?
 
-		public init(customerPrice: String? = nil, proceeds: String? = nil, priceTier: String? = nil) {
+		public init(customerPrice: String? = nil, proceeds: String? = nil) {
 			self.customerPrice = customerPrice
 			self.proceeds = proceeds
-			self.priceTier = priceTier
 		}
 
 		public init(from decoder: Decoder) throws {
 			let values = try decoder.container(keyedBy: StringCodingKey.self)
 			self.customerPrice = try values.decodeIfPresent(String.self, forKey: "customerPrice")
 			self.proceeds = try values.decodeIfPresent(String.self, forKey: "proceeds")
-			self.priceTier = try values.decodeIfPresent(String.self, forKey: "priceTier")
 		}
 
 		public func encode(to encoder: Encoder) throws {
 			var values = encoder.container(keyedBy: StringCodingKey.self)
 			try values.encodeIfPresent(customerPrice, forKey: "customerPrice")
 			try values.encodeIfPresent(proceeds, forKey: "proceeds")
-			try values.encodeIfPresent(priceTier, forKey: "priceTier")
 		}
 	}
 

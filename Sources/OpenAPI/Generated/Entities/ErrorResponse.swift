@@ -13,6 +13,7 @@ public struct ErrorResponse: Codable {
 		public var title: String
 		public var detail: String
 		public var source: Source?
+		public var links: ErrorLinks?
 		public var meta: [String: AnyJSON]?
 
 		public enum Source: Codable {
@@ -42,13 +43,14 @@ public struct ErrorResponse: Codable {
 			}
 		}
 
-		public init(id: String? = nil, status: String, code: String, title: String, detail: String, source: Source? = nil, meta: [String: AnyJSON]? = nil) {
+		public init(id: String? = nil, status: String, code: String, title: String, detail: String, source: Source? = nil, links: ErrorLinks? = nil, meta: [String: AnyJSON]? = nil) {
 			self.id = id
 			self.status = status
 			self.code = code
 			self.title = title
 			self.detail = detail
 			self.source = source
+			self.links = links
 			self.meta = meta
 		}
 
@@ -60,6 +62,7 @@ public struct ErrorResponse: Codable {
 			self.title = try values.decode(String.self, forKey: "title")
 			self.detail = try values.decode(String.self, forKey: "detail")
 			self.source = try values.decodeIfPresent(Source.self, forKey: "source")
+			self.links = try values.decodeIfPresent(ErrorLinks.self, forKey: "links")
 			self.meta = try values.decodeIfPresent([String: AnyJSON].self, forKey: "meta")
 		}
 
@@ -71,6 +74,7 @@ public struct ErrorResponse: Codable {
 			try values.encode(title, forKey: "title")
 			try values.encode(detail, forKey: "detail")
 			try values.encodeIfPresent(source, forKey: "source")
+			try values.encodeIfPresent(links, forKey: "links")
 			try values.encodeIfPresent(meta, forKey: "meta")
 		}
 	}

@@ -24,8 +24,6 @@ public struct App: Codable, Identifiable {
 		public var subscriptionStatusURLVersion: SubscriptionStatusURLVersion?
 		public var subscriptionStatusURLForSandbox: URL?
 		public var subscriptionStatusURLVersionForSandbox: SubscriptionStatusURLVersion?
-		/// - warning: Deprecated.
-		public var isAvailableInNewTerritories: Bool?
 		public var contentRightsDeclaration: ContentRightsDeclaration?
 
 		public enum ContentRightsDeclaration: String, Codable, CaseIterable {
@@ -33,7 +31,7 @@ public struct App: Codable, Identifiable {
 			case usesThirdPartyContent = "USES_THIRD_PARTY_CONTENT"
 		}
 
-		public init(name: String? = nil, bundleID: String? = nil, sku: String? = nil, primaryLocale: String? = nil, isOrEverWasMadeForKids: Bool? = nil, subscriptionStatusURL: URL? = nil, subscriptionStatusURLVersion: SubscriptionStatusURLVersion? = nil, subscriptionStatusURLForSandbox: URL? = nil, subscriptionStatusURLVersionForSandbox: SubscriptionStatusURLVersion? = nil, isAvailableInNewTerritories: Bool? = nil, contentRightsDeclaration: ContentRightsDeclaration? = nil) {
+		public init(name: String? = nil, bundleID: String? = nil, sku: String? = nil, primaryLocale: String? = nil, isOrEverWasMadeForKids: Bool? = nil, subscriptionStatusURL: URL? = nil, subscriptionStatusURLVersion: SubscriptionStatusURLVersion? = nil, subscriptionStatusURLForSandbox: URL? = nil, subscriptionStatusURLVersionForSandbox: SubscriptionStatusURLVersion? = nil, contentRightsDeclaration: ContentRightsDeclaration? = nil) {
 			self.name = name
 			self.bundleID = bundleID
 			self.sku = sku
@@ -43,7 +41,6 @@ public struct App: Codable, Identifiable {
 			self.subscriptionStatusURLVersion = subscriptionStatusURLVersion
 			self.subscriptionStatusURLForSandbox = subscriptionStatusURLForSandbox
 			self.subscriptionStatusURLVersionForSandbox = subscriptionStatusURLVersionForSandbox
-			self.isAvailableInNewTerritories = isAvailableInNewTerritories
 			self.contentRightsDeclaration = contentRightsDeclaration
 		}
 
@@ -58,7 +55,6 @@ public struct App: Codable, Identifiable {
 			self.subscriptionStatusURLVersion = try values.decodeIfPresent(SubscriptionStatusURLVersion.self, forKey: "subscriptionStatusUrlVersion")
 			self.subscriptionStatusURLForSandbox = try values.decodeIfPresent(URL.self, forKey: "subscriptionStatusUrlForSandbox")
 			self.subscriptionStatusURLVersionForSandbox = try values.decodeIfPresent(SubscriptionStatusURLVersion.self, forKey: "subscriptionStatusUrlVersionForSandbox")
-			self.isAvailableInNewTerritories = try values.decodeIfPresent(Bool.self, forKey: "availableInNewTerritories")
 			self.contentRightsDeclaration = try values.decodeIfPresent(ContentRightsDeclaration.self, forKey: "contentRightsDeclaration")
 		}
 
@@ -73,7 +69,6 @@ public struct App: Codable, Identifiable {
 			try values.encodeIfPresent(subscriptionStatusURLVersion, forKey: "subscriptionStatusUrlVersion")
 			try values.encodeIfPresent(subscriptionStatusURLForSandbox, forKey: "subscriptionStatusUrlForSandbox")
 			try values.encodeIfPresent(subscriptionStatusURLVersionForSandbox, forKey: "subscriptionStatusUrlVersionForSandbox")
-			try values.encodeIfPresent(isAvailableInNewTerritories, forKey: "availableInNewTerritories")
 			try values.encodeIfPresent(contentRightsDeclaration, forKey: "contentRightsDeclaration")
 		}
 	}
@@ -92,10 +87,6 @@ public struct App: Codable, Identifiable {
 		public var appClips: AppClips?
 		public var endUserLicenseAgreement: EndUserLicenseAgreement?
 		public var preOrder: PreOrder?
-		/// - warning: Deprecated.
-		public var prices: Prices?
-		/// - warning: Deprecated.
-		public var availableTerritories: AvailableTerritories?
 		/// - warning: Deprecated.
 		public var inAppPurchases: InAppPurchases?
 		public var subscriptionGroups: SubscriptionGroups?
@@ -1052,156 +1043,6 @@ public struct App: Codable, Identifiable {
 		}
 
 		@available(*, deprecated, message: "Deprecated")
-		public struct Prices: Codable {
-			public var links: Links?
-			public var meta: PagingInformation?
-			public var data: [Datum]?
-
-			public struct Links: Codable {
-				public var this: String?
-				public var related: String?
-
-				public init(this: String? = nil, related: String? = nil) {
-					self.this = this
-					self.related = related
-				}
-
-				public init(from decoder: Decoder) throws {
-					let values = try decoder.container(keyedBy: StringCodingKey.self)
-					self.this = try values.decodeIfPresent(String.self, forKey: "self")
-					self.related = try values.decodeIfPresent(String.self, forKey: "related")
-				}
-
-				public func encode(to encoder: Encoder) throws {
-					var values = encoder.container(keyedBy: StringCodingKey.self)
-					try values.encodeIfPresent(this, forKey: "self")
-					try values.encodeIfPresent(related, forKey: "related")
-				}
-			}
-
-			public struct Datum: Codable, Identifiable {
-				public var type: `Type`
-				public var id: String
-
-				public enum `Type`: String, Codable, CaseIterable {
-					case appPrices
-				}
-
-				public init(type: `Type`, id: String) {
-					self.type = type
-					self.id = id
-				}
-
-				public init(from decoder: Decoder) throws {
-					let values = try decoder.container(keyedBy: StringCodingKey.self)
-					self.type = try values.decode(`Type`.self, forKey: "type")
-					self.id = try values.decode(String.self, forKey: "id")
-				}
-
-				public func encode(to encoder: Encoder) throws {
-					var values = encoder.container(keyedBy: StringCodingKey.self)
-					try values.encode(type, forKey: "type")
-					try values.encode(id, forKey: "id")
-				}
-			}
-
-			public init(links: Links? = nil, meta: PagingInformation? = nil, data: [Datum]? = nil) {
-				self.links = links
-				self.meta = meta
-				self.data = data
-			}
-
-			public init(from decoder: Decoder) throws {
-				let values = try decoder.container(keyedBy: StringCodingKey.self)
-				self.links = try values.decodeIfPresent(Links.self, forKey: "links")
-				self.meta = try values.decodeIfPresent(PagingInformation.self, forKey: "meta")
-				self.data = try values.decodeIfPresent([Datum].self, forKey: "data")
-			}
-
-			public func encode(to encoder: Encoder) throws {
-				var values = encoder.container(keyedBy: StringCodingKey.self)
-				try values.encodeIfPresent(links, forKey: "links")
-				try values.encodeIfPresent(meta, forKey: "meta")
-				try values.encodeIfPresent(data, forKey: "data")
-			}
-		}
-
-		@available(*, deprecated, message: "Deprecated")
-		public struct AvailableTerritories: Codable {
-			public var links: Links?
-			public var meta: PagingInformation?
-			public var data: [Datum]?
-
-			public struct Links: Codable {
-				public var this: String?
-				public var related: String?
-
-				public init(this: String? = nil, related: String? = nil) {
-					self.this = this
-					self.related = related
-				}
-
-				public init(from decoder: Decoder) throws {
-					let values = try decoder.container(keyedBy: StringCodingKey.self)
-					self.this = try values.decodeIfPresent(String.self, forKey: "self")
-					self.related = try values.decodeIfPresent(String.self, forKey: "related")
-				}
-
-				public func encode(to encoder: Encoder) throws {
-					var values = encoder.container(keyedBy: StringCodingKey.self)
-					try values.encodeIfPresent(this, forKey: "self")
-					try values.encodeIfPresent(related, forKey: "related")
-				}
-			}
-
-			public struct Datum: Codable, Identifiable {
-				public var type: `Type`
-				public var id: String
-
-				public enum `Type`: String, Codable, CaseIterable {
-					case territories
-				}
-
-				public init(type: `Type`, id: String) {
-					self.type = type
-					self.id = id
-				}
-
-				public init(from decoder: Decoder) throws {
-					let values = try decoder.container(keyedBy: StringCodingKey.self)
-					self.type = try values.decode(`Type`.self, forKey: "type")
-					self.id = try values.decode(String.self, forKey: "id")
-				}
-
-				public func encode(to encoder: Encoder) throws {
-					var values = encoder.container(keyedBy: StringCodingKey.self)
-					try values.encode(type, forKey: "type")
-					try values.encode(id, forKey: "id")
-				}
-			}
-
-			public init(links: Links? = nil, meta: PagingInformation? = nil, data: [Datum]? = nil) {
-				self.links = links
-				self.meta = meta
-				self.data = data
-			}
-
-			public init(from decoder: Decoder) throws {
-				let values = try decoder.container(keyedBy: StringCodingKey.self)
-				self.links = try values.decodeIfPresent(Links.self, forKey: "links")
-				self.meta = try values.decodeIfPresent(PagingInformation.self, forKey: "meta")
-				self.data = try values.decodeIfPresent([Datum].self, forKey: "data")
-			}
-
-			public func encode(to encoder: Encoder) throws {
-				var values = encoder.container(keyedBy: StringCodingKey.self)
-				try values.encodeIfPresent(links, forKey: "links")
-				try values.encodeIfPresent(meta, forKey: "meta")
-				try values.encodeIfPresent(data, forKey: "data")
-			}
-		}
-
-		@available(*, deprecated, message: "Deprecated")
 		public struct InAppPurchases: Codable {
 			public var links: Links?
 			public var meta: PagingInformation?
@@ -2008,7 +1849,7 @@ public struct App: Codable, Identifiable {
 			}
 		}
 
-		public init(appEncryptionDeclarations: AppEncryptionDeclarations? = nil, ciProduct: CiProduct? = nil, betaGroups: BetaGroups? = nil, appStoreVersions: AppStoreVersions? = nil, preReleaseVersions: PreReleaseVersions? = nil, betaAppLocalizations: BetaAppLocalizations? = nil, builds: Builds? = nil, betaLicenseAgreement: BetaLicenseAgreement? = nil, betaAppReviewDetail: BetaAppReviewDetail? = nil, appInfos: AppInfos? = nil, appClips: AppClips? = nil, endUserLicenseAgreement: EndUserLicenseAgreement? = nil, preOrder: PreOrder? = nil, prices: Prices? = nil, availableTerritories: AvailableTerritories? = nil, inAppPurchases: InAppPurchases? = nil, subscriptionGroups: SubscriptionGroups? = nil, gameCenterEnabledVersions: GameCenterEnabledVersions? = nil, appCustomProductPages: AppCustomProductPages? = nil, inAppPurchasesV2: InAppPurchasesV2? = nil, promotedPurchases: PromotedPurchases? = nil, appEvents: AppEvents? = nil, reviewSubmissions: ReviewSubmissions? = nil, subscriptionGracePeriod: SubscriptionGracePeriod? = nil, gameCenterDetail: GameCenterDetail? = nil, appStoreVersionExperimentsV2: AppStoreVersionExperimentsV2? = nil) {
+		public init(appEncryptionDeclarations: AppEncryptionDeclarations? = nil, ciProduct: CiProduct? = nil, betaGroups: BetaGroups? = nil, appStoreVersions: AppStoreVersions? = nil, preReleaseVersions: PreReleaseVersions? = nil, betaAppLocalizations: BetaAppLocalizations? = nil, builds: Builds? = nil, betaLicenseAgreement: BetaLicenseAgreement? = nil, betaAppReviewDetail: BetaAppReviewDetail? = nil, appInfos: AppInfos? = nil, appClips: AppClips? = nil, endUserLicenseAgreement: EndUserLicenseAgreement? = nil, preOrder: PreOrder? = nil, inAppPurchases: InAppPurchases? = nil, subscriptionGroups: SubscriptionGroups? = nil, gameCenterEnabledVersions: GameCenterEnabledVersions? = nil, appCustomProductPages: AppCustomProductPages? = nil, inAppPurchasesV2: InAppPurchasesV2? = nil, promotedPurchases: PromotedPurchases? = nil, appEvents: AppEvents? = nil, reviewSubmissions: ReviewSubmissions? = nil, subscriptionGracePeriod: SubscriptionGracePeriod? = nil, gameCenterDetail: GameCenterDetail? = nil, appStoreVersionExperimentsV2: AppStoreVersionExperimentsV2? = nil) {
 			self.appEncryptionDeclarations = appEncryptionDeclarations
 			self.ciProduct = ciProduct
 			self.betaGroups = betaGroups
@@ -2022,8 +1863,6 @@ public struct App: Codable, Identifiable {
 			self.appClips = appClips
 			self.endUserLicenseAgreement = endUserLicenseAgreement
 			self.preOrder = preOrder
-			self.prices = prices
-			self.availableTerritories = availableTerritories
 			self.inAppPurchases = inAppPurchases
 			self.subscriptionGroups = subscriptionGroups
 			self.gameCenterEnabledVersions = gameCenterEnabledVersions
@@ -2052,8 +1891,6 @@ public struct App: Codable, Identifiable {
 			self.appClips = try values.decodeIfPresent(AppClips.self, forKey: "appClips")
 			self.endUserLicenseAgreement = try values.decodeIfPresent(EndUserLicenseAgreement.self, forKey: "endUserLicenseAgreement")
 			self.preOrder = try values.decodeIfPresent(PreOrder.self, forKey: "preOrder")
-			self.prices = try values.decodeIfPresent(Prices.self, forKey: "prices")
-			self.availableTerritories = try values.decodeIfPresent(AvailableTerritories.self, forKey: "availableTerritories")
 			self.inAppPurchases = try values.decodeIfPresent(InAppPurchases.self, forKey: "inAppPurchases")
 			self.subscriptionGroups = try values.decodeIfPresent(SubscriptionGroups.self, forKey: "subscriptionGroups")
 			self.gameCenterEnabledVersions = try values.decodeIfPresent(GameCenterEnabledVersions.self, forKey: "gameCenterEnabledVersions")
@@ -2082,8 +1919,6 @@ public struct App: Codable, Identifiable {
 			try values.encodeIfPresent(appClips, forKey: "appClips")
 			try values.encodeIfPresent(endUserLicenseAgreement, forKey: "endUserLicenseAgreement")
 			try values.encodeIfPresent(preOrder, forKey: "preOrder")
-			try values.encodeIfPresent(prices, forKey: "prices")
-			try values.encodeIfPresent(availableTerritories, forKey: "availableTerritories")
 			try values.encodeIfPresent(inAppPurchases, forKey: "inAppPurchases")
 			try values.encodeIfPresent(subscriptionGroups, forKey: "subscriptionGroups")
 			try values.encodeIfPresent(gameCenterEnabledVersions, forKey: "gameCenterEnabledVersions")

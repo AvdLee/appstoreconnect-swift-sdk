@@ -19,12 +19,14 @@ public struct BetaTester: Codable, Identifiable {
 		public var lastName: String?
 		public var email: String?
 		public var inviteType: BetaInviteType?
+		public var state: BetaTesterState?
 
-		public init(firstName: String? = nil, lastName: String? = nil, email: String? = nil, inviteType: BetaInviteType? = nil) {
+		public init(firstName: String? = nil, lastName: String? = nil, email: String? = nil, inviteType: BetaInviteType? = nil, state: BetaTesterState? = nil) {
 			self.firstName = firstName
 			self.lastName = lastName
 			self.email = email
 			self.inviteType = inviteType
+			self.state = state
 		}
 
 		public init(from decoder: Decoder) throws {
@@ -33,6 +35,7 @@ public struct BetaTester: Codable, Identifiable {
 			self.lastName = try values.decodeIfPresent(String.self, forKey: "lastName")
 			self.email = try values.decodeIfPresent(String.self, forKey: "email")
 			self.inviteType = try values.decodeIfPresent(BetaInviteType.self, forKey: "inviteType")
+			self.state = try values.decodeIfPresent(BetaTesterState.self, forKey: "state")
 		}
 
 		public func encode(to encoder: Encoder) throws {
@@ -41,6 +44,7 @@ public struct BetaTester: Codable, Identifiable {
 			try values.encodeIfPresent(lastName, forKey: "lastName")
 			try values.encodeIfPresent(email, forKey: "email")
 			try values.encodeIfPresent(inviteType, forKey: "inviteType")
+			try values.encodeIfPresent(state, forKey: "state")
 		}
 	}
 

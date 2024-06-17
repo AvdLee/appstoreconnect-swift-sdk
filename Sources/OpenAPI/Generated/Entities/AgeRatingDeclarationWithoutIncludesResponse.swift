@@ -4,18 +4,18 @@
 import Foundation
 
 public struct AgeRatingDeclarationWithoutIncludesResponse: Codable {
-	/// AppStoreVersion
-	public var data: AppStoreVersion
+	/// AgeRatingDeclaration
+	public var data: AgeRatingDeclaration
 	public var links: DocumentLinks
 
-	public init(data: AppStoreVersion, links: DocumentLinks) {
+	public init(data: AgeRatingDeclaration, links: DocumentLinks) {
 		self.data = data
 		self.links = links
 	}
 
 	public init(from decoder: Decoder) throws {
 		let values = try decoder.container(keyedBy: StringCodingKey.self)
-		self.data = try values.decode(AppStoreVersion.self, forKey: "data")
+		self.data = try values.decode(AgeRatingDeclaration.self, forKey: "data")
 		self.links = try values.decode(DocumentLinks.self, forKey: "links")
 	}
 

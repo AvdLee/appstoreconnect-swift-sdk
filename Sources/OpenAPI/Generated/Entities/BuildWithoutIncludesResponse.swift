@@ -4,18 +4,18 @@
 import Foundation
 
 public struct BuildWithoutIncludesResponse: Codable {
-	/// BuildBetaDetail
-	public var data: BuildBetaDetail
+	/// Build
+	public var data: Build
 	public var links: DocumentLinks
 
-	public init(data: BuildBetaDetail, links: DocumentLinks) {
+	public init(data: Build, links: DocumentLinks) {
 		self.data = data
 		self.links = links
 	}
 
 	public init(from decoder: Decoder) throws {
 		let values = try decoder.container(keyedBy: StringCodingKey.self)
-		self.data = try values.decode(BuildBetaDetail.self, forKey: "data")
+		self.data = try values.decode(Build.self, forKey: "data")
 		self.links = try values.decode(DocumentLinks.self, forKey: "links")
 	}
 

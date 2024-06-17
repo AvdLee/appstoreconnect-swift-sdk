@@ -9,7 +9,7 @@ public struct AlternativeDistributionKeyCreateRequest: Codable {
 	public struct Data: Codable {
 		public var type: `Type`
 		public var attributes: Attributes
-		public var relationships: Relationships
+		public var relationships: Relationships?
 
 		public enum `Type`: String, Codable, CaseIterable {
 			case alternativeDistributionKeys
@@ -34,10 +34,10 @@ public struct AlternativeDistributionKeyCreateRequest: Codable {
 		}
 
 		public struct Relationships: Codable {
-			public var app: App
+			public var app: App?
 
 			public struct App: Codable {
-				public var data: Data
+				public var data: Data?
 
 				public struct Data: Codable, Identifiable {
 					public var type: `Type`
@@ -65,37 +65,37 @@ public struct AlternativeDistributionKeyCreateRequest: Codable {
 					}
 				}
 
-				public init(data: Data) {
+				public init(data: Data? = nil) {
 					self.data = data
 				}
 
 				public init(from decoder: Decoder) throws {
 					let values = try decoder.container(keyedBy: StringCodingKey.self)
-					self.data = try values.decode(Data.self, forKey: "data")
+					self.data = try values.decodeIfPresent(Data.self, forKey: "data")
 				}
 
 				public func encode(to encoder: Encoder) throws {
 					var values = encoder.container(keyedBy: StringCodingKey.self)
-					try values.encode(data, forKey: "data")
+					try values.encodeIfPresent(data, forKey: "data")
 				}
 			}
 
-			public init(app: App) {
+			public init(app: App? = nil) {
 				self.app = app
 			}
 
 			public init(from decoder: Decoder) throws {
 				let values = try decoder.container(keyedBy: StringCodingKey.self)
-				self.app = try values.decode(App.self, forKey: "app")
+				self.app = try values.decodeIfPresent(App.self, forKey: "app")
 			}
 
 			public func encode(to encoder: Encoder) throws {
 				var values = encoder.container(keyedBy: StringCodingKey.self)
-				try values.encode(app, forKey: "app")
+				try values.encodeIfPresent(app, forKey: "app")
 			}
 		}
 
-		public init(type: `Type`, attributes: Attributes, relationships: Relationships) {
+		public init(type: `Type`, attributes: Attributes, relationships: Relationships? = nil) {
 			self.type = type
 			self.attributes = attributes
 			self.relationships = relationships
@@ -105,14 +105,14 @@ public struct AlternativeDistributionKeyCreateRequest: Codable {
 			let values = try decoder.container(keyedBy: StringCodingKey.self)
 			self.type = try values.decode(`Type`.self, forKey: "type")
 			self.attributes = try values.decode(Attributes.self, forKey: "attributes")
-			self.relationships = try values.decode(Relationships.self, forKey: "relationships")
+			self.relationships = try values.decodeIfPresent(Relationships.self, forKey: "relationships")
 		}
 
 		public func encode(to encoder: Encoder) throws {
 			var values = encoder.container(keyedBy: StringCodingKey.self)
 			try values.encode(type, forKey: "type")
 			try values.encode(attributes, forKey: "attributes")
-			try values.encode(relationships, forKey: "relationships")
+			try values.encodeIfPresent(relationships, forKey: "relationships")
 		}
 	}
 
