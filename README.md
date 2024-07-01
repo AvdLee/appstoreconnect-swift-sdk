@@ -31,7 +31,7 @@ import AppStoreConnect_Swift_SDK
 ```
 
 #### 2. Create your API Configuration
-Go to [https://appstoreconnect.apple.com/access/api](https://appstoreconnect.apple.com/access/api) and create your own key. This is also the page to find your private key ID and the issuer ID.
+Go to [https://appstoreconnect.apple.com/access/integrations/api](https://appstoreconnect.apple.com/access/integrations/api) and create your own key. This is also the page to find your private key ID and the issuer ID.
 
 After downloading your private key, you can open the .p8 file containing the private key in a text editor which will show like the following content:
 
