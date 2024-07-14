@@ -84,7 +84,7 @@ public struct JWT: Codable, JWTCreatable {
     /// Your issuer identifier from the API Keys page in App Store Connect (Ex: 57246542-96fe-1a63-e053-0824d011072a)
     private let issuerIdentifier: String
 
-    /// The token's expiration duration. Tokens that expire more than 20 minutes in the future are not valid, so set it to a max of 20 minutes.
+    /// The token's expiration duration in seconds. Tokens that expire more than 20 minutes in the future are not valid, so set it to a max of 20 minutes.
     private let expireDuration: TimeInterval
 
     /// Creates a new JWT Factory to create signed requests for the App Store Connect API.
@@ -92,8 +92,7 @@ public struct JWT: Codable, JWTCreatable {
     /// - Parameters:
     ///   - keyIdentifier: Your private key ID from App Store Connect (Ex: 2X9R4HXF34)
     ///   - issuerIdentifier: Your issuer identifier from the API Keys page in App Store Connect (Ex: 57246542-96fe-1a63-e053-0824d011072a)
-    ///   - expireDuration: The token's expiration duration.
-    ///   Tokens that expire more than 20 minutes in the future are not valid, so set it to a max of 20 minutes.
+    ///   - expireDuration: The token's expiration duration in seconds. Tokens that expire more than 20 minutes in the future are not valid, so set it to a max of 20 minutes.
     public init(keyIdentifier: String, issuerIdentifier: String, expireDuration: TimeInterval) {
         header = Header(keyIdentifier: keyIdentifier)
         self.issuerIdentifier = issuerIdentifier

@@ -46,13 +46,13 @@ Copy the contents and remove the whitelines, `-----BEGIN PRIVATE KEY-----` and `
 Use this private key together with the issuer ID and the private key ID to create your configuration file:
 
 ```swift
-let configuration = APIConfiguration(issuerID: "<YOUR ISSUER ID>", privateKeyID: "<YOUR PRIVATE KEY ID>", privateKey: "<YOUR PRIVATE KEY>")
+let configuration = APIConfiguration(issuerID: "<YOUR ISSUER ID>", privateKeyID: "<YOUR PRIVATE KEY ID>", privateKey: "<YOUR PRIVATE KEY>", expirationDuration: "<OPTIONAL EXPIRE DURATION>")
 ```
 
 Alternatively you can pass the path to the .p8 file:
 
 ```swift
-let configuration = APIConfiguration(issuerID: "<YOUR ISSUER ID>", privateKeyID: "<YOUR PRIVATE KEY ID>", privateKeyURL: URL(fileURLWithPath: "~/AuthKey_<YOUR PRIVATE KEY ID>.p8"))
+let configuration = APIConfiguration(issuerID: "<YOUR ISSUER ID>", privateKeyID: "<YOUR PRIVATE KEY ID>", privateKeyURL: URL(fileURLWithPath: "~/AuthKey_<YOUR PRIVATE KEY ID>.p8"), expirationDuration: "<OPTIONAL EXPIRE DURATION>")
 ```
 
 You can even omit the `privateKeyID` as it can be inferred from the name of the .p8 file.
