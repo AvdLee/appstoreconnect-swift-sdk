@@ -46,13 +46,20 @@ Copy the contents and remove the whitelines, `-----BEGIN PRIVATE KEY-----` and `
 Use this private key together with the issuer ID and the private key ID to create your configuration file:
 
 ```swift
-let configuration = APIConfiguration(issuerID: "<YOUR ISSUER ID>", privateKeyID: "<YOUR PRIVATE KEY ID>", privateKey: "<YOUR PRIVATE KEY>", expirationDuration: "<OPTIONAL EXPIRE DURATION>")
+let configuration = APIConfiguration(issuerID: "<YOUR ISSUER ID>", privateKeyID: "<YOUR PRIVATE KEY ID>", privateKey: "<YOUR PRIVATE KEY>")
 ```
 
 Alternatively you can pass the path to the .p8 file:
 
 ```swift
-let configuration = APIConfiguration(issuerID: "<YOUR ISSUER ID>", privateKeyID: "<YOUR PRIVATE KEY ID>", privateKeyURL: URL(fileURLWithPath: "~/AuthKey_<YOUR PRIVATE KEY ID>.p8"), expirationDuration: "<OPTIONAL EXPIRE DURATION>")
+let configuration = APIConfiguration(issuerID: "<YOUR ISSUER ID>", privateKeyID: "<YOUR PRIVATE KEY ID>", privateKeyURL: URL(fileURLWithPath: "~/AuthKey_<YOUR PRIVATE KEY ID>.p8"))
+```
+
+Both methods also accept an optional `expirationDuration` parameter that defaults to 20 minutes which is the max duration allowed by the API. In some cases it might be useful to specify a shorter value in seconds to account for possible clock skews:
+
+```swift
+APIConfiguration(issuerID: "<YOUR ISSUER ID>", privateKeyID: "<YOUR PRIVATE KEY ID>", privateKey: "<YOUR PRIVATE KEY>", expirationDuration: "<OPTIONAL EXPIRATION DURATION>"))
+APIConfiguration(issuerID: "<YOUR ISSUER ID>", privateKeyID: "<YOUR PRIVATE KEY ID>", privateKeyURL: URL(fileURLWithPath: "~/AuthKey_<YOUR PRIVATE KEY ID>.p8"), expirationDuration: "<OPTIONAL EXPIRATION DURATION>")
 ```
 
 You can even omit the `privateKeyID` as it can be inferred from the name of the .p8 file.

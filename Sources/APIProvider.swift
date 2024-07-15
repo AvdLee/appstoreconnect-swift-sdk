@@ -38,7 +38,7 @@ public struct APIConfiguration {
     ///   - issuerID: Your issuer ID from the API Keys page in App Store Connect (Ex: 57246542-96fe-1a63-e053-0824d011072a)
     ///   - privateKeyID: Your private key ID from App Store Connect (Ex: 2X9R4HXF34)
     ///   - privateKey: Your private key stripped out of the -----BEGIN PRIVATE KEY----- and -----END PRIVATE KEY----- lines.
-    ///   - expirationDuration: The token's expiration duration in seconds. Tokens that expire more than 20 minutes in the future are not valid, so set it to a max of 20 minutes.
+    ///   - expirationDuration: The token's expiration duration in seconds. Tokens that expire more than 20 minutes in the future are not valid, so set it to a max of 20 minutes. Defaults to 20 minutes.
     public init(issuerID: String, privateKeyID: String, privateKey: String, expirationDuration: TimeInterval = 60 * 20) throws {
         self.privateKeyID = privateKeyID
         self.issuerID = issuerID
@@ -59,7 +59,7 @@ public struct APIConfiguration {
     ///   - issuerID: Your issuer ID from the API Keys page in App Store Connect (Ex: 57246542-96fe-1a63-e053-0824d011072a)
     ///   - privateKeyID: Your private key ID from App Store Connect (Ex: 2X9R4HXF34). Will be inferred from `privateKeyURL` if nil.
     ///   - privateKeyURL: A file URL that references the path to your private key file.
-    ///   - expirationDuration: The token's expiration duration in seconds. Tokens that expire more than 20 minutes in the future are not valid, so set it to a max of 20 minutes.
+    ///   - expirationDuration: The token's expiration duration in seconds. Tokens that expire more than 20 minutes in the future are not valid, so set it to a max of 20 minutes. Defaults to 20 minutes.
     public init(issuerID: String, privateKeyID: String? = nil, privateKeyURL: URL, expirationDuration: TimeInterval = 60 * 20) throws {
         self.issuerID = issuerID
         if let privateKeyID = privateKeyID {
