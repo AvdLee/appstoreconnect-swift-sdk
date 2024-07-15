@@ -54,16 +54,19 @@ public struct JWT: Codable, JWTCreatable {
 
     public enum Error: Swift.Error, LocalizedError {
 
-        case invalidDigest
         case invalidBase64EncodedPrivateKey
+        case invalidDigest
+        case invalidExpirationDuration
         case invalidPrivateKey
 
         public var localizedDescription: String {
             switch self {
-            case .invalidDigest:
-                return "Failed to generate a digest"
             case .invalidBase64EncodedPrivateKey:
                 return "The private key is not encoded in Base64 format"
+            case .invalidDigest:
+                return "Failed to generate a digest"
+            case .invalidExpirationDuration:
+                return "The expiration duration must be between 0 and 20 minutes (1200 seconds)"
             case .invalidPrivateKey:
                 return "The private key is not valid"
             }

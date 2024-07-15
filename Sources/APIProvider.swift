@@ -32,6 +32,9 @@ public struct APIConfiguration {
     /// The token's expiration duration in seconds. Tokens that expire more than 20 minutes in the future are not valid, so set it to a max of 20 minutes.
     let expirationDuration: TimeInterval
 
+    /// The range of values allowed for the expiration duration of the token.
+    private let allowedExpirationDurationRange: ClosedRange<TimeInterval> = 0...1200
+
     /// Creates a new API configuration to use for initialising the API Provider.
     ///
     /// - Parameters:
@@ -49,6 +52,9 @@ public struct APIConfiguration {
             self.privateKey = try JWT.PrivateKey(derRepresentation: base64Key)
         } catch {
             throw JWT.Error.invalidPrivateKey
+        }
+        guard allowedExpirationDurationRange ~= expirationDuration else {
+            throw JWT.Error.invalidExpirationDuration
         }
         self.expirationDuration = expirationDuration
     }
@@ -73,6 +79,9 @@ public struct APIConfiguration {
             self.privateKey = try JWT.PrivateKey(pemRepresentation: pemEncodedPrivateKey)
         } catch {
             throw JWT.Error.invalidPrivateKey
+        }
+        guard allowedExpirationDurationRange ~= expirationDuration else {
+            throw JWT.Error.invalidExpirationDuration
         }
         self.expirationDuration = expirationDuration
     }

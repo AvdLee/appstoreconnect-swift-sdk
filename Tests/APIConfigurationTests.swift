@@ -26,7 +26,7 @@ final class APIConfigurationTests: XCTestCase {
         let nonBase64Key = "&^&%^$%$%"
         XCTAssertThrowsError(try APIConfiguration(issuerID: issuerID,
                                                   privateKeyID: privateKeyID,
-                                                  privateKey: nonBase64Key)) { (error) in
+                                                  privateKey: nonBase64Key)) { error in
             XCTAssertEqual(error as! JWT.Error, JWT.Error.invalidBase64EncodedPrivateKey)
         }
     }
@@ -35,9 +35,17 @@ final class APIConfigurationTests: XCTestCase {
         let invalidKey = "QSBrZXk=" // "A key"
         XCTAssertThrowsError(try APIConfiguration(issuerID: issuerID,
                                                   privateKeyID: privateKeyID,
-                                                  privateKey: invalidKey)) { (error) in
+                                                  privateKey: invalidKey)) { error in
             XCTAssertEqual(error as! JWT.Error, JWT.Error.invalidPrivateKey)
         }
     }
 
+    func testInvalidExpirationDuration() throws {
+        XCTAssertThrowsError(try APIConfiguration(issuerID: issuerID,
+                                                  privateKeyID: privateKeyID,
+                                                  privateKey: privateKey,
+                                                  expirationDuration: 60 * 30)) { error in
+            XCTAssertEqual(error as! JWT.Error, JWT.Error.invalidExpirationDuration)
+        }
+    }
 }
