@@ -55,6 +55,13 @@ Alternatively you can pass the path to the .p8 file:
 let configuration = APIConfiguration(issuerID: "<YOUR ISSUER ID>", privateKeyID: "<YOUR PRIVATE KEY ID>", privateKeyURL: URL(fileURLWithPath: "~/AuthKey_<YOUR PRIVATE KEY ID>.p8"))
 ```
 
+Both methods also accept an optional `expirationDuration` parameter that defaults to 20 minutes which is the max duration allowed by the API. In some cases it might be useful to specify a shorter value in seconds to account for possible clock skews:
+
+```swift
+APIConfiguration(issuerID: "<YOUR ISSUER ID>", privateKeyID: "<YOUR PRIVATE KEY ID>", privateKey: "<YOUR PRIVATE KEY>", expirationDuration: "<OPTIONAL EXPIRATION DURATION>"))
+APIConfiguration(issuerID: "<YOUR ISSUER ID>", privateKeyID: "<YOUR PRIVATE KEY ID>", privateKeyURL: URL(fileURLWithPath: "~/AuthKey_<YOUR PRIVATE KEY ID>.p8"), expirationDuration: "<OPTIONAL EXPIRATION DURATION>")
+```
+
 You can even omit the `privateKeyID` as it can be inferred from the name of the .p8 file.
 
 #### 3. Create an APIProvider and perform a request
