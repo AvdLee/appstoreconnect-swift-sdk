@@ -14,7 +14,7 @@ extension APIEndpoint.V1.AppEventLocalizations.WithID {
 		public let path: String
 
 		public func get(parameters: GetParameters? = nil) -> Request<AppStoreConnect_Swift_SDK.AppEventScreenshotsResponse> {
-			Request(path: path, method: "GET", query: parameters?.asQuery, id: "appEventLocalizations-appEventScreenshots-get_to_many_related")
+			Request(path: path, method: "GET", query: parameters?.asQuery, id: "appEventLocalizations_appEventScreenshots_getToManyRelated")
 		}
 
 		public struct GetParameters {
@@ -24,25 +24,25 @@ extension APIEndpoint.V1.AppEventLocalizations.WithID {
 			public var include: [Include]?
 
 			public enum FieldsAppEventScreenshots: String, Codable, CaseIterable {
+				case fileSize
+				case fileName
+				case imageAsset
+				case assetToken
+				case uploadOperations
+				case assetDeliveryState
+				case uploaded
 				case appEventAssetType
 				case appEventLocalization
-				case assetDeliveryState
-				case assetToken
-				case fileName
-				case fileSize
-				case imageAsset
-				case uploadOperations
-				case uploaded
 			}
 
 			public enum FieldsAppEventLocalizations: String, Codable, CaseIterable {
+				case locale
+				case name
+				case shortDescription
+				case longDescription
 				case appEvent
 				case appEventScreenshots
 				case appEventVideoClips
-				case locale
-				case longDescription
-				case name
-				case shortDescription
 			}
 
 			public enum Include: String, Codable, CaseIterable {

@@ -14,11 +14,11 @@ extension APIEndpoint.V1.MarketplaceSearchDetails {
 		public let path: String
 
 		public func patch(_ body: AppStoreConnect_Swift_SDK.MarketplaceSearchDetailUpdateRequest) -> Request<AppStoreConnect_Swift_SDK.MarketplaceSearchDetailResponse> {
-			Request(path: path, method: "PATCH", body: body, id: "marketplaceSearchDetails-update_instance")
+			Request(path: path, method: "PATCH", body: body, id: "marketplaceSearchDetails_updateInstance")
 		}
 
 		public var delete: Request<Void> {
-			Request(path: path, method: "DELETE", id: "marketplaceSearchDetails-delete_instance")
+			Request(path: path, method: "DELETE", id: "marketplaceSearchDetails_deleteInstance")
 		}
 	}
 }

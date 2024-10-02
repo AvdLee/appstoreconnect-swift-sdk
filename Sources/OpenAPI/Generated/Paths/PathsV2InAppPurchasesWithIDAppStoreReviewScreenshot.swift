@@ -14,7 +14,7 @@ extension APIEndpoint.V2.InAppPurchases.WithID {
 		public let path: String
 
 		public func get(parameters: GetParameters? = nil) -> Request<AppStoreConnect_Swift_SDK.InAppPurchaseAppStoreReviewScreenshotResponse> {
-			Request(path: path, method: "GET", query: parameters?.asQuery, id: "inAppPurchasesV2-appStoreReviewScreenshot-get_to_one_related")
+			Request(path: path, method: "GET", query: parameters?.asQuery, id: "inAppPurchasesV2_appStoreReviewScreenshot_getToOneRelated")
 		}
 
 		public struct GetParameters {
@@ -23,34 +23,35 @@ extension APIEndpoint.V2.InAppPurchases.WithID {
 			public var include: [Include]?
 
 			public enum FieldsInAppPurchaseAppStoreReviewScreenshots: String, Codable, CaseIterable {
-				case assetDeliveryState
+				case fileSize
+				case fileName
+				case sourceFileChecksum
+				case imageAsset
 				case assetToken
 				case assetType
-				case fileName
-				case fileSize
-				case imageAsset
-				case inAppPurchaseV2
-				case sourceFileChecksum
 				case uploadOperations
+				case assetDeliveryState
 				case uploaded
+				case inAppPurchaseV2
 			}
 
 			public enum FieldsInAppPurchases: String, Codable, CaseIterable {
-				case app
-				case appStoreReviewScreenshot
-				case content
-				case contentHosting
+				case name
+				case productID = "productId"
+				case inAppPurchaseType
+				case state
+				case reviewNote
 				case familySharable
+				case contentHosting
+				case app
+				case inAppPurchaseLocalizations
+				case pricePoints
+				case content
+				case appStoreReviewScreenshot
+				case promotedPurchase
 				case iapPriceSchedule
 				case inAppPurchaseAvailability
-				case inAppPurchaseLocalizations
-				case inAppPurchaseType
-				case name
-				case pricePoints
-				case productID = "productId"
-				case promotedPurchase
-				case reviewNote
-				case state
+				case images
 			}
 
 			public enum Include: String, Codable, CaseIterable {

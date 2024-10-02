@@ -14,7 +14,7 @@ extension APIEndpoint.V1.CustomerReviewResponses {
 		public let path: String
 
 		public func get(fieldsCustomerReviewResponses: [FieldsCustomerReviewResponses]? = nil, include: [Include]? = nil) -> Request<AppStoreConnect_Swift_SDK.CustomerReviewResponseV1Response> {
-			Request(path: path, method: "GET", query: makeGetQuery(fieldsCustomerReviewResponses, include), id: "customerReviewResponses-get_instance")
+			Request(path: path, method: "GET", query: makeGetQuery(fieldsCustomerReviewResponses, include), id: "customerReviewResponses_getInstance")
 		}
 
 		private func makeGetQuery(_ fieldsCustomerReviewResponses: [FieldsCustomerReviewResponses]?, _ include: [Include]?) -> [(String, String?)] {
@@ -25,10 +25,10 @@ extension APIEndpoint.V1.CustomerReviewResponses {
 		}
 
 		public enum FieldsCustomerReviewResponses: String, Codable, CaseIterable {
-			case lastModifiedDate
 			case responseBody
-			case review
+			case lastModifiedDate
 			case state
+			case review
 		}
 
 		public enum Include: String, Codable, CaseIterable {
@@ -36,7 +36,7 @@ extension APIEndpoint.V1.CustomerReviewResponses {
 		}
 
 		public var delete: Request<Void> {
-			Request(path: path, method: "DELETE", id: "customerReviewResponses-delete_instance")
+			Request(path: path, method: "DELETE", id: "customerReviewResponses_deleteInstance")
 		}
 	}
 }

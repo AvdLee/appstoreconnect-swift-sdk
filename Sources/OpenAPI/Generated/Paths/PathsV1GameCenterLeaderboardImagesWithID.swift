@@ -14,7 +14,7 @@ extension APIEndpoint.V1.GameCenterLeaderboardImages {
 		public let path: String
 
 		public func get(fieldsGameCenterLeaderboardImages: [FieldsGameCenterLeaderboardImages]? = nil, include: [Include]? = nil) -> Request<AppStoreConnect_Swift_SDK.GameCenterLeaderboardImageResponse> {
-			Request(path: path, method: "GET", query: makeGetQuery(fieldsGameCenterLeaderboardImages, include), id: "gameCenterLeaderboardImages-get_instance")
+			Request(path: path, method: "GET", query: makeGetQuery(fieldsGameCenterLeaderboardImages, include), id: "gameCenterLeaderboardImages_getInstance")
 		}
 
 		private func makeGetQuery(_ fieldsGameCenterLeaderboardImages: [FieldsGameCenterLeaderboardImages]?, _ include: [Include]?) -> [(String, String?)] {
@@ -25,13 +25,13 @@ extension APIEndpoint.V1.GameCenterLeaderboardImages {
 		}
 
 		public enum FieldsGameCenterLeaderboardImages: String, Codable, CaseIterable {
-			case assetDeliveryState
-			case fileName
 			case fileSize
-			case gameCenterLeaderboardLocalization
+			case fileName
 			case imageAsset
 			case uploadOperations
+			case assetDeliveryState
 			case uploaded
+			case gameCenterLeaderboardLocalization
 		}
 
 		public enum Include: String, Codable, CaseIterable {
@@ -39,11 +39,11 @@ extension APIEndpoint.V1.GameCenterLeaderboardImages {
 		}
 
 		public func patch(_ body: AppStoreConnect_Swift_SDK.GameCenterLeaderboardImageUpdateRequest) -> Request<AppStoreConnect_Swift_SDK.GameCenterLeaderboardImageResponse> {
-			Request(path: path, method: "PATCH", body: body, id: "gameCenterLeaderboardImages-update_instance")
+			Request(path: path, method: "PATCH", body: body, id: "gameCenterLeaderboardImages_updateInstance")
 		}
 
 		public var delete: Request<Void> {
-			Request(path: path, method: "DELETE", id: "gameCenterLeaderboardImages-delete_instance")
+			Request(path: path, method: "DELETE", id: "gameCenterLeaderboardImages_deleteInstance")
 		}
 	}
 }

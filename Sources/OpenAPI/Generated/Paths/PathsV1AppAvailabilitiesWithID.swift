@@ -15,22 +15,17 @@ extension APIEndpoint.V1.AppAvailabilities {
 
 		@available(*, deprecated, message: "Deprecated")
 		public func get(parameters: GetParameters? = nil) -> Request<AppStoreConnect_Swift_SDK.AppAvailabilityResponse> {
-			Request(path: path, method: "GET", query: parameters?.asQuery, id: "appAvailabilities-get_instance")
+			Request(path: path, method: "GET", query: parameters?.asQuery, id: "appAvailabilities_getInstance")
 		}
 
 		public struct GetParameters {
 			public var fieldsAppAvailabilities: [FieldsAppAvailabilities]?
-			public var include: [Include]?
 			public var fieldsTerritories: [FieldsTerritories]?
+			public var include: [Include]?
 			public var limitAvailableTerritories: Int?
 
 			public enum FieldsAppAvailabilities: String, Codable, CaseIterable {
-				case app
 				case availableInNewTerritories
-				case availableTerritories
-			}
-
-			public enum Include: String, Codable, CaseIterable {
 				case app
 				case availableTerritories
 			}
@@ -39,18 +34,23 @@ extension APIEndpoint.V1.AppAvailabilities {
 				case currency
 			}
 
-			public init(fieldsAppAvailabilities: [FieldsAppAvailabilities]? = nil, include: [Include]? = nil, fieldsTerritories: [FieldsTerritories]? = nil, limitAvailableTerritories: Int? = nil) {
+			public enum Include: String, Codable, CaseIterable {
+				case app
+				case availableTerritories
+			}
+
+			public init(fieldsAppAvailabilities: [FieldsAppAvailabilities]? = nil, fieldsTerritories: [FieldsTerritories]? = nil, include: [Include]? = nil, limitAvailableTerritories: Int? = nil) {
 				self.fieldsAppAvailabilities = fieldsAppAvailabilities
-				self.include = include
 				self.fieldsTerritories = fieldsTerritories
+				self.include = include
 				self.limitAvailableTerritories = limitAvailableTerritories
 			}
 
 			public var asQuery: [(String, String?)] {
 				let encoder = URLQueryEncoder(explode: false)
 				encoder.encode(fieldsAppAvailabilities, forKey: "fields[appAvailabilities]")
-				encoder.encode(include, forKey: "include")
 				encoder.encode(fieldsTerritories, forKey: "fields[territories]")
+				encoder.encode(include, forKey: "include")
 				encoder.encode(limitAvailableTerritories, forKey: "limit[availableTerritories]")
 				return encoder.items
 			}

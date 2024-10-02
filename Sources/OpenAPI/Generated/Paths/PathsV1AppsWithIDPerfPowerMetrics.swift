@@ -14,13 +14,17 @@ extension APIEndpoint.V1.Apps.WithID {
 		public let path: String
 
 		public func get(parameters: GetParameters? = nil) -> Request<XcodeMetrics> {
-			Request(path: path, method: "GET", query: parameters?.asQuery, id: "apps-perfPowerMetrics-get_to_many_related")
+			Request(path: path, method: "GET", query: parameters?.asQuery, id: "apps_perfPowerMetrics_getToManyRelated")
 		}
 
 		public struct GetParameters {
-			public var filterDeviceType: [String]?
-			public var filterMetricType: [FilterMetricType]?
 			public var filterPlatform: [FilterPlatform]?
+			public var filterMetricType: [FilterMetricType]?
+			public var filterDeviceType: [String]?
+
+			public enum FilterPlatform: String, Codable, CaseIterable {
+				case ios = "IOS"
+			}
 
 			public enum FilterMetricType: String, Codable, CaseIterable {
 				case disk = "DISK"
@@ -32,21 +36,17 @@ extension APIEndpoint.V1.Apps.WithID {
 				case termination = "TERMINATION"
 			}
 
-			public enum FilterPlatform: String, Codable, CaseIterable {
-				case ios = "IOS"
-			}
-
-			public init(filterDeviceType: [String]? = nil, filterMetricType: [FilterMetricType]? = nil, filterPlatform: [FilterPlatform]? = nil) {
-				self.filterDeviceType = filterDeviceType
-				self.filterMetricType = filterMetricType
+			public init(filterPlatform: [FilterPlatform]? = nil, filterMetricType: [FilterMetricType]? = nil, filterDeviceType: [String]? = nil) {
 				self.filterPlatform = filterPlatform
+				self.filterMetricType = filterMetricType
+				self.filterDeviceType = filterDeviceType
 			}
 
 			public var asQuery: [(String, String?)] {
 				let encoder = URLQueryEncoder(explode: false)
-				encoder.encode(filterDeviceType, forKey: "filter[deviceType]")
-				encoder.encode(filterMetricType, forKey: "filter[metricType]")
 				encoder.encode(filterPlatform, forKey: "filter[platform]")
+				encoder.encode(filterMetricType, forKey: "filter[metricType]")
+				encoder.encode(filterDeviceType, forKey: "filter[deviceType]")
 				return encoder.items
 			}
 		}

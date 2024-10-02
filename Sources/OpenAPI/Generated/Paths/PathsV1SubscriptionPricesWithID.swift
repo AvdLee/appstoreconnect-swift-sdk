@@ -14,7 +14,7 @@ extension APIEndpoint.V1.SubscriptionPrices {
 		public let path: String
 
 		public var delete: Request<Void> {
-			Request(path: path, method: "DELETE", id: "subscriptionPrices-delete_instance")
+			Request(path: path, method: "DELETE", id: "subscriptionPrices_deleteInstance")
 		}
 	}
 }

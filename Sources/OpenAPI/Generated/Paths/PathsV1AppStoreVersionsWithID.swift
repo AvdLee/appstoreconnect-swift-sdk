@@ -14,107 +14,181 @@ extension APIEndpoint.V1.AppStoreVersions {
 		public let path: String
 
 		public func get(parameters: GetParameters? = nil) -> Request<AppStoreConnect_Swift_SDK.AppStoreVersionResponse> {
-			Request(path: path, method: "GET", query: parameters?.asQuery, id: "appStoreVersions-get_instance")
+			Request(path: path, method: "GET", query: parameters?.asQuery, id: "appStoreVersions_getInstance")
 		}
 
 		public struct GetParameters {
 			public var fieldsAppStoreVersions: [FieldsAppStoreVersions]?
-			public var include: [Include]?
-			public var fieldsAppStoreVersionExperiments: [FieldsAppStoreVersionExperiments]?
-			public var fieldsAppStoreVersionSubmissions: [FieldsAppStoreVersionSubmissions]?
 			public var fieldsAgeRatingDeclarations: [FieldsAgeRatingDeclarations]?
-			public var fieldsAlternativeDistributionPackages: [FieldsAlternativeDistributionPackages]?
-			public var fieldsCustomerReviews: [FieldsCustomerReviews]?
-			public var fieldsAppStoreReviewDetails: [FieldsAppStoreReviewDetails]?
-			public var fieldsAppClipDefaultExperiences: [FieldsAppClipDefaultExperiences]?
-			public var fieldsRoutingAppCoverages: [FieldsRoutingAppCoverages]?
-			public var fieldsAppStoreVersionPhasedReleases: [FieldsAppStoreVersionPhasedReleases]?
-			public var fieldsBuilds: [FieldsBuilds]?
 			public var fieldsAppStoreVersionLocalizations: [FieldsAppStoreVersionLocalizations]?
+			public var fieldsBuilds: [FieldsBuilds]?
+			public var fieldsAppStoreVersionPhasedReleases: [FieldsAppStoreVersionPhasedReleases]?
+			public var fieldsGameCenterAppVersions: [FieldsGameCenterAppVersions]?
+			public var fieldsRoutingAppCoverages: [FieldsRoutingAppCoverages]?
+			public var fieldsAppStoreReviewDetails: [FieldsAppStoreReviewDetails]?
+			public var fieldsAppStoreVersionSubmissions: [FieldsAppStoreVersionSubmissions]?
+			public var fieldsAppClipDefaultExperiences: [FieldsAppClipDefaultExperiences]?
+			public var fieldsAppStoreVersionExperiments: [FieldsAppStoreVersionExperiments]?
+			public var fieldsAlternativeDistributionPackages: [FieldsAlternativeDistributionPackages]?
+			public var include: [Include]?
 			public var limitAppStoreVersionExperiments: Int?
 			public var limitAppStoreVersionExperimentsV2: Int?
 			public var limitAppStoreVersionLocalizations: Int?
 
 			public enum FieldsAppStoreVersions: String, Codable, CaseIterable {
-				case ageRatingDeclaration
-				case alternativeDistributionPackage
-				case app
-				case appClipDefaultExperience
-				case appStoreReviewDetail
-				case appStoreState
-				case appStoreVersionExperiments
-				case appStoreVersionExperimentsV2
-				case appStoreVersionLocalizations
-				case appStoreVersionPhasedRelease
-				case appStoreVersionSubmission
-				case appVersionState
-				case build
-				case copyright
-				case createdDate
-				case customerReviews
-				case downloadable
-				case earliestReleaseDate
 				case platform
-				case releaseType
-				case reviewType
-				case routingAppCoverage
 				case versionString
-			}
-
-			public enum Include: String, Codable, CaseIterable {
-				case ageRatingDeclaration
-				case alternativeDistributionPackage
+				case appStoreState
+				case appVersionState
+				case copyright
+				case reviewType
+				case releaseType
+				case earliestReleaseDate
+				case downloadable
+				case createdDate
 				case app
-				case appClipDefaultExperience
+				case ageRatingDeclaration
+				case appStoreVersionLocalizations
+				case build
+				case appStoreVersionPhasedRelease
+				case gameCenterAppVersion
+				case routingAppCoverage
 				case appStoreReviewDetail
+				case appStoreVersionSubmission
+				case appClipDefaultExperience
 				case appStoreVersionExperiments
 				case appStoreVersionExperimentsV2
-				case appStoreVersionLocalizations
-				case appStoreVersionPhasedRelease
-				case appStoreVersionSubmission
-				case build
-				case routingAppCoverage
+				case customerReviews
+				case alternativeDistributionPackage
 			}
 
-			public enum FieldsAppStoreVersionExperiments: String, Codable, CaseIterable {
-				case app
+			public enum FieldsAgeRatingDeclarations: String, Codable, CaseIterable {
+				case alcoholTobaccoOrDrugUseOrReferences
+				case contests
+				case gamblingAndContests
+				case gambling
+				case gamblingSimulated
+				case kidsAgeBand
+				case lootBox
+				case medicalOrTreatmentInformation
+				case profanityOrCrudeHumor
+				case sexualContentGraphicAndNudity
+				case sexualContentOrNudity
+				case horrorOrFearThemes
+				case matureOrSuggestiveThemes
+				case unrestrictedWebAccess
+				case violenceCartoonOrFantasy
+				case violenceRealisticProlongedGraphicOrSadistic
+				case violenceRealistic
+				case ageRatingOverride
+				case koreaAgeRatingOverride
+				case seventeenPlus
+			}
+
+			public enum FieldsAppStoreVersionLocalizations: String, Codable, CaseIterable {
+				case description
+				case locale
+				case keywords
+				case marketingURL = "marketingUrl"
+				case promotionalText
+				case supportURL = "supportUrl"
+				case whatsNew
 				case appStoreVersion
-				case appStoreVersionExperimentTreatments
-				case controlVersions
-				case endDate
-				case latestControlVersion
-				case name
-				case platform
-				case reviewRequired
+				case appScreenshotSets
+				case appPreviewSets
+			}
+
+			public enum FieldsBuilds: String, Codable, CaseIterable {
+				case version
+				case uploadedDate
+				case expirationDate
+				case expired
+				case minOsVersion
+				case lsMinimumSystemVersion
+				case computedMinMacOsVersion
+				case iconAssetToken
+				case processingState
+				case buildAudienceType
+				case usesNonExemptEncryption
+				case preReleaseVersion
+				case individualTesters
+				case betaGroups
+				case betaBuildLocalizations
+				case appEncryptionDeclaration
+				case betaAppReviewSubmission
+				case app
+				case buildBetaDetail
+				case appStoreVersion
+				case icons
+				case buildBundles
+				case perfPowerMetrics
+				case diagnosticSignatures
+			}
+
+			public enum FieldsAppStoreVersionPhasedReleases: String, Codable, CaseIterable {
+				case phasedReleaseState
 				case startDate
-				case started
-				case state
-				case trafficProportion
+				case totalPauseDuration
+				case currentDayNumber
+				case appStoreVersion
+			}
+
+			public enum FieldsGameCenterAppVersions: String, Codable, CaseIterable {
+				case enabled
+				case compatibilityVersions
+				case appStoreVersion
+			}
+
+			public enum FieldsRoutingAppCoverages: String, Codable, CaseIterable {
+				case fileSize
+				case fileName
+				case sourceFileChecksum
+				case uploadOperations
+				case assetDeliveryState
+				case uploaded
+				case appStoreVersion
+			}
+
+			public enum FieldsAppStoreReviewDetails: String, Codable, CaseIterable {
+				case contactFirstName
+				case contactLastName
+				case contactPhone
+				case contactEmail
+				case demoAccountName
+				case demoAccountPassword
+				case demoAccountRequired
+				case notes
+				case appStoreVersion
+				case appStoreReviewAttachments
 			}
 
 			public enum FieldsAppStoreVersionSubmissions: String, Codable, CaseIterable {
 				case appStoreVersion
 			}
 
-			public enum FieldsAgeRatingDeclarations: String, Codable, CaseIterable {
-				case ageRatingOverride
-				case alcoholTobaccoOrDrugUseOrReferences
-				case contests
-				case gambling
-				case gamblingAndContests
-				case gamblingSimulated
-				case horrorOrFearThemes
-				case kidsAgeBand
-				case matureOrSuggestiveThemes
-				case medicalOrTreatmentInformation
-				case profanityOrCrudeHumor
-				case seventeenPlus
-				case sexualContentGraphicAndNudity
-				case sexualContentOrNudity
-				case unrestrictedWebAccess
-				case violenceCartoonOrFantasy
-				case violenceRealistic
-				case violenceRealisticProlongedGraphicOrSadistic
+			public enum FieldsAppClipDefaultExperiences: String, Codable, CaseIterable {
+				case action
+				case appClip
+				case releaseWithAppStoreVersion
+				case appClipDefaultExperienceLocalizations
+				case appClipAppStoreReviewDetail
+				case appClipDefaultExperienceTemplate
+			}
+
+			public enum FieldsAppStoreVersionExperiments: String, Codable, CaseIterable {
+				case name
+				case trafficProportion
+				case state
+				case reviewRequired
+				case startDate
+				case endDate
+				case started
+				case appStoreVersion
+				case appStoreVersionExperimentTreatments
+				case platform
+				case app
+				case latestControlVersion
+				case controlVersions
 			}
 
 			public enum FieldsAlternativeDistributionPackages: String, Codable, CaseIterable {
@@ -122,110 +196,36 @@ extension APIEndpoint.V1.AppStoreVersions {
 				case versions
 			}
 
-			public enum FieldsCustomerReviews: String, Codable, CaseIterable {
-				case body
-				case createdDate
-				case rating
-				case response
-				case reviewerNickname
-				case territory
-				case title
-			}
-
-			public enum FieldsAppStoreReviewDetails: String, Codable, CaseIterable {
-				case appStoreReviewAttachments
-				case appStoreVersion
-				case contactEmail
-				case contactFirstName
-				case contactLastName
-				case contactPhone
-				case demoAccountName
-				case demoAccountPassword
-				case demoAccountRequired
-				case notes
-			}
-
-			public enum FieldsAppClipDefaultExperiences: String, Codable, CaseIterable {
-				case action
-				case appClip
-				case appClipAppStoreReviewDetail
-				case appClipDefaultExperienceLocalizations
-				case appClipDefaultExperienceTemplate
-				case releaseWithAppStoreVersion
-			}
-
-			public enum FieldsRoutingAppCoverages: String, Codable, CaseIterable {
-				case appStoreVersion
-				case assetDeliveryState
-				case fileName
-				case fileSize
-				case sourceFileChecksum
-				case uploadOperations
-				case uploaded
-			}
-
-			public enum FieldsAppStoreVersionPhasedReleases: String, Codable, CaseIterable {
-				case appStoreVersion
-				case currentDayNumber
-				case phasedReleaseState
-				case startDate
-				case totalPauseDuration
-			}
-
-			public enum FieldsBuilds: String, Codable, CaseIterable {
+			public enum Include: String, Codable, CaseIterable {
 				case app
-				case appEncryptionDeclaration
-				case appStoreVersion
-				case betaAppReviewSubmission
-				case betaBuildLocalizations
-				case betaGroups
-				case buildAudienceType
-				case buildBetaDetail
-				case buildBundles
-				case computedMinMacOsVersion
-				case diagnosticSignatures
-				case expirationDate
-				case expired
-				case iconAssetToken
-				case icons
-				case individualTesters
-				case lsMinimumSystemVersion
-				case minOsVersion
-				case perfPowerMetrics
-				case preReleaseVersion
-				case processingState
-				case uploadedDate
-				case usesNonExemptEncryption
-				case version
+				case ageRatingDeclaration
+				case appStoreVersionLocalizations
+				case build
+				case appStoreVersionPhasedRelease
+				case gameCenterAppVersion
+				case routingAppCoverage
+				case appStoreReviewDetail
+				case appStoreVersionSubmission
+				case appClipDefaultExperience
+				case appStoreVersionExperiments
+				case appStoreVersionExperimentsV2
+				case alternativeDistributionPackage
 			}
 
-			public enum FieldsAppStoreVersionLocalizations: String, Codable, CaseIterable {
-				case appPreviewSets
-				case appScreenshotSets
-				case appStoreVersion
-				case description
-				case keywords
-				case locale
-				case marketingURL = "marketingUrl"
-				case promotionalText
-				case supportURL = "supportUrl"
-				case whatsNew
-			}
-
-			public init(fieldsAppStoreVersions: [FieldsAppStoreVersions]? = nil, include: [Include]? = nil, fieldsAppStoreVersionExperiments: [FieldsAppStoreVersionExperiments]? = nil, fieldsAppStoreVersionSubmissions: [FieldsAppStoreVersionSubmissions]? = nil, fieldsAgeRatingDeclarations: [FieldsAgeRatingDeclarations]? = nil, fieldsAlternativeDistributionPackages: [FieldsAlternativeDistributionPackages]? = nil, fieldsCustomerReviews: [FieldsCustomerReviews]? = nil, fieldsAppStoreReviewDetails: [FieldsAppStoreReviewDetails]? = nil, fieldsAppClipDefaultExperiences: [FieldsAppClipDefaultExperiences]? = nil, fieldsRoutingAppCoverages: [FieldsRoutingAppCoverages]? = nil, fieldsAppStoreVersionPhasedReleases: [FieldsAppStoreVersionPhasedReleases]? = nil, fieldsBuilds: [FieldsBuilds]? = nil, fieldsAppStoreVersionLocalizations: [FieldsAppStoreVersionLocalizations]? = nil, limitAppStoreVersionExperiments: Int? = nil, limitAppStoreVersionExperimentsV2: Int? = nil, limitAppStoreVersionLocalizations: Int? = nil) {
+			public init(fieldsAppStoreVersions: [FieldsAppStoreVersions]? = nil, fieldsAgeRatingDeclarations: [FieldsAgeRatingDeclarations]? = nil, fieldsAppStoreVersionLocalizations: [FieldsAppStoreVersionLocalizations]? = nil, fieldsBuilds: [FieldsBuilds]? = nil, fieldsAppStoreVersionPhasedReleases: [FieldsAppStoreVersionPhasedReleases]? = nil, fieldsGameCenterAppVersions: [FieldsGameCenterAppVersions]? = nil, fieldsRoutingAppCoverages: [FieldsRoutingAppCoverages]? = nil, fieldsAppStoreReviewDetails: [FieldsAppStoreReviewDetails]? = nil, fieldsAppStoreVersionSubmissions: [FieldsAppStoreVersionSubmissions]? = nil, fieldsAppClipDefaultExperiences: [FieldsAppClipDefaultExperiences]? = nil, fieldsAppStoreVersionExperiments: [FieldsAppStoreVersionExperiments]? = nil, fieldsAlternativeDistributionPackages: [FieldsAlternativeDistributionPackages]? = nil, include: [Include]? = nil, limitAppStoreVersionExperiments: Int? = nil, limitAppStoreVersionExperimentsV2: Int? = nil, limitAppStoreVersionLocalizations: Int? = nil) {
 				self.fieldsAppStoreVersions = fieldsAppStoreVersions
-				self.include = include
-				self.fieldsAppStoreVersionExperiments = fieldsAppStoreVersionExperiments
-				self.fieldsAppStoreVersionSubmissions = fieldsAppStoreVersionSubmissions
 				self.fieldsAgeRatingDeclarations = fieldsAgeRatingDeclarations
-				self.fieldsAlternativeDistributionPackages = fieldsAlternativeDistributionPackages
-				self.fieldsCustomerReviews = fieldsCustomerReviews
-				self.fieldsAppStoreReviewDetails = fieldsAppStoreReviewDetails
-				self.fieldsAppClipDefaultExperiences = fieldsAppClipDefaultExperiences
-				self.fieldsRoutingAppCoverages = fieldsRoutingAppCoverages
-				self.fieldsAppStoreVersionPhasedReleases = fieldsAppStoreVersionPhasedReleases
-				self.fieldsBuilds = fieldsBuilds
 				self.fieldsAppStoreVersionLocalizations = fieldsAppStoreVersionLocalizations
+				self.fieldsBuilds = fieldsBuilds
+				self.fieldsAppStoreVersionPhasedReleases = fieldsAppStoreVersionPhasedReleases
+				self.fieldsGameCenterAppVersions = fieldsGameCenterAppVersions
+				self.fieldsRoutingAppCoverages = fieldsRoutingAppCoverages
+				self.fieldsAppStoreReviewDetails = fieldsAppStoreReviewDetails
+				self.fieldsAppStoreVersionSubmissions = fieldsAppStoreVersionSubmissions
+				self.fieldsAppClipDefaultExperiences = fieldsAppClipDefaultExperiences
+				self.fieldsAppStoreVersionExperiments = fieldsAppStoreVersionExperiments
+				self.fieldsAlternativeDistributionPackages = fieldsAlternativeDistributionPackages
+				self.include = include
 				self.limitAppStoreVersionExperiments = limitAppStoreVersionExperiments
 				self.limitAppStoreVersionExperimentsV2 = limitAppStoreVersionExperimentsV2
 				self.limitAppStoreVersionLocalizations = limitAppStoreVersionLocalizations
@@ -234,18 +234,18 @@ extension APIEndpoint.V1.AppStoreVersions {
 			public var asQuery: [(String, String?)] {
 				let encoder = URLQueryEncoder(explode: false)
 				encoder.encode(fieldsAppStoreVersions, forKey: "fields[appStoreVersions]")
-				encoder.encode(include, forKey: "include")
-				encoder.encode(fieldsAppStoreVersionExperiments, forKey: "fields[appStoreVersionExperiments]")
-				encoder.encode(fieldsAppStoreVersionSubmissions, forKey: "fields[appStoreVersionSubmissions]")
 				encoder.encode(fieldsAgeRatingDeclarations, forKey: "fields[ageRatingDeclarations]")
-				encoder.encode(fieldsAlternativeDistributionPackages, forKey: "fields[alternativeDistributionPackages]")
-				encoder.encode(fieldsCustomerReviews, forKey: "fields[customerReviews]")
-				encoder.encode(fieldsAppStoreReviewDetails, forKey: "fields[appStoreReviewDetails]")
-				encoder.encode(fieldsAppClipDefaultExperiences, forKey: "fields[appClipDefaultExperiences]")
-				encoder.encode(fieldsRoutingAppCoverages, forKey: "fields[routingAppCoverages]")
-				encoder.encode(fieldsAppStoreVersionPhasedReleases, forKey: "fields[appStoreVersionPhasedReleases]")
-				encoder.encode(fieldsBuilds, forKey: "fields[builds]")
 				encoder.encode(fieldsAppStoreVersionLocalizations, forKey: "fields[appStoreVersionLocalizations]")
+				encoder.encode(fieldsBuilds, forKey: "fields[builds]")
+				encoder.encode(fieldsAppStoreVersionPhasedReleases, forKey: "fields[appStoreVersionPhasedReleases]")
+				encoder.encode(fieldsGameCenterAppVersions, forKey: "fields[gameCenterAppVersions]")
+				encoder.encode(fieldsRoutingAppCoverages, forKey: "fields[routingAppCoverages]")
+				encoder.encode(fieldsAppStoreReviewDetails, forKey: "fields[appStoreReviewDetails]")
+				encoder.encode(fieldsAppStoreVersionSubmissions, forKey: "fields[appStoreVersionSubmissions]")
+				encoder.encode(fieldsAppClipDefaultExperiences, forKey: "fields[appClipDefaultExperiences]")
+				encoder.encode(fieldsAppStoreVersionExperiments, forKey: "fields[appStoreVersionExperiments]")
+				encoder.encode(fieldsAlternativeDistributionPackages, forKey: "fields[alternativeDistributionPackages]")
+				encoder.encode(include, forKey: "include")
 				encoder.encode(limitAppStoreVersionExperiments, forKey: "limit[appStoreVersionExperiments]")
 				encoder.encode(limitAppStoreVersionExperimentsV2, forKey: "limit[appStoreVersionExperimentsV2]")
 				encoder.encode(limitAppStoreVersionLocalizations, forKey: "limit[appStoreVersionLocalizations]")
@@ -254,11 +254,11 @@ extension APIEndpoint.V1.AppStoreVersions {
 		}
 
 		public func patch(_ body: AppStoreConnect_Swift_SDK.AppStoreVersionUpdateRequest) -> Request<AppStoreConnect_Swift_SDK.AppStoreVersionResponse> {
-			Request(path: path, method: "PATCH", body: body, id: "appStoreVersions-update_instance")
+			Request(path: path, method: "PATCH", body: body, id: "appStoreVersions_updateInstance")
 		}
 
 		public var delete: Request<Void> {
-			Request(path: path, method: "DELETE", id: "appStoreVersions-delete_instance")
+			Request(path: path, method: "DELETE", id: "appStoreVersions_deleteInstance")
 		}
 	}
 }

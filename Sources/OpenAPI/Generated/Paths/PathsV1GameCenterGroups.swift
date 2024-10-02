@@ -14,108 +14,108 @@ extension APIEndpoint.V1 {
 		public let path: String
 
 		public func get(parameters: GetParameters? = nil) -> Request<AppStoreConnect_Swift_SDK.GameCenterGroupsResponse> {
-			Request(path: path, method: "GET", query: parameters?.asQuery, id: "gameCenterGroups-get_collection")
+			Request(path: path, method: "GET", query: parameters?.asQuery, id: "gameCenterGroups_getCollection")
 		}
 
 		public struct GetParameters {
 			public var filterGameCenterDetails: [String]?
 			public var fieldsGameCenterGroups: [FieldsGameCenterGroups]?
-			public var limit: Int?
-			public var include: [Include]?
-			public var fieldsGameCenterLeaderboardSets: [FieldsGameCenterLeaderboardSets]?
 			public var fieldsGameCenterDetails: [FieldsGameCenterDetails]?
 			public var fieldsGameCenterLeaderboards: [FieldsGameCenterLeaderboards]?
+			public var fieldsGameCenterLeaderboardSets: [FieldsGameCenterLeaderboardSets]?
 			public var fieldsGameCenterAchievements: [FieldsGameCenterAchievements]?
+			public var limit: Int?
+			public var include: [Include]?
 			public var limitGameCenterAchievements: Int?
 			public var limitGameCenterDetails: Int?
 			public var limitGameCenterLeaderboardSets: Int?
 			public var limitGameCenterLeaderboards: Int?
 
 			public enum FieldsGameCenterGroups: String, Codable, CaseIterable {
-				case gameCenterAchievements
-				case gameCenterDetails
-				case gameCenterLeaderboardSets
-				case gameCenterLeaderboards
 				case referenceName
-			}
-
-			public enum Include: String, Codable, CaseIterable {
-				case gameCenterAchievements
 				case gameCenterDetails
+				case gameCenterLeaderboards
 				case gameCenterLeaderboardSets
-				case gameCenterLeaderboards
-			}
-
-			public enum FieldsGameCenterLeaderboardSets: String, Codable, CaseIterable {
-				case gameCenterDetail
-				case gameCenterGroup
-				case gameCenterLeaderboards
-				case groupLeaderboardSet
-				case localizations
-				case referenceName
-				case releases
-				case vendorIdentifier
+				case gameCenterAchievements
 			}
 
 			public enum FieldsGameCenterDetails: String, Codable, CaseIterable {
-				case achievementReleases
-				case app
 				case arcadeEnabled
 				case challengeEnabled
-				case defaultGroupLeaderboard
-				case defaultLeaderboard
-				case gameCenterAchievements
+				case app
 				case gameCenterAppVersions
 				case gameCenterGroup
-				case gameCenterLeaderboardSets
 				case gameCenterLeaderboards
+				case gameCenterLeaderboardSets
+				case gameCenterAchievements
+				case defaultLeaderboard
+				case defaultGroupLeaderboard
+				case achievementReleases
 				case leaderboardReleases
 				case leaderboardSetReleases
 			}
 
 			public enum FieldsGameCenterLeaderboards: String, Codable, CaseIterable {
-				case archived
 				case defaultFormatter
-				case gameCenterDetail
-				case gameCenterGroup
-				case gameCenterLeaderboardSets
-				case groupLeaderboard
-				case localizations
+				case referenceName
+				case vendorIdentifier
+				case submissionType
+				case scoreSortType
+				case scoreRangeStart
+				case scoreRangeEnd
+				case recurrenceStartDate
 				case recurrenceDuration
 				case recurrenceRule
-				case recurrenceStartDate
-				case referenceName
+				case archived
+				case gameCenterDetail
+				case gameCenterGroup
+				case groupLeaderboard
+				case gameCenterLeaderboardSets
+				case localizations
 				case releases
-				case scoreRangeEnd
-				case scoreRangeStart
-				case scoreSortType
-				case submissionType
+			}
+
+			public enum FieldsGameCenterLeaderboardSets: String, Codable, CaseIterable {
+				case referenceName
 				case vendorIdentifier
+				case gameCenterDetail
+				case gameCenterGroup
+				case groupLeaderboardSet
+				case localizations
+				case gameCenterLeaderboards
+				case releases
 			}
 
 			public enum FieldsGameCenterAchievements: String, Codable, CaseIterable {
+				case referenceName
+				case vendorIdentifier
+				case points
+				case showBeforeEarned
+				case repeatable
 				case archived
 				case gameCenterDetail
 				case gameCenterGroup
 				case groupAchievement
 				case localizations
-				case points
-				case referenceName
 				case releases
-				case repeatable
-				case showBeforeEarned
-				case vendorIdentifier
 			}
 
-			public init(filterGameCenterDetails: [String]? = nil, fieldsGameCenterGroups: [FieldsGameCenterGroups]? = nil, limit: Int? = nil, include: [Include]? = nil, fieldsGameCenterLeaderboardSets: [FieldsGameCenterLeaderboardSets]? = nil, fieldsGameCenterDetails: [FieldsGameCenterDetails]? = nil, fieldsGameCenterLeaderboards: [FieldsGameCenterLeaderboards]? = nil, fieldsGameCenterAchievements: [FieldsGameCenterAchievements]? = nil, limitGameCenterAchievements: Int? = nil, limitGameCenterDetails: Int? = nil, limitGameCenterLeaderboardSets: Int? = nil, limitGameCenterLeaderboards: Int? = nil) {
+			public enum Include: String, Codable, CaseIterable {
+				case gameCenterDetails
+				case gameCenterLeaderboards
+				case gameCenterLeaderboardSets
+				case gameCenterAchievements
+			}
+
+			public init(filterGameCenterDetails: [String]? = nil, fieldsGameCenterGroups: [FieldsGameCenterGroups]? = nil, fieldsGameCenterDetails: [FieldsGameCenterDetails]? = nil, fieldsGameCenterLeaderboards: [FieldsGameCenterLeaderboards]? = nil, fieldsGameCenterLeaderboardSets: [FieldsGameCenterLeaderboardSets]? = nil, fieldsGameCenterAchievements: [FieldsGameCenterAchievements]? = nil, limit: Int? = nil, include: [Include]? = nil, limitGameCenterAchievements: Int? = nil, limitGameCenterDetails: Int? = nil, limitGameCenterLeaderboardSets: Int? = nil, limitGameCenterLeaderboards: Int? = nil) {
 				self.filterGameCenterDetails = filterGameCenterDetails
 				self.fieldsGameCenterGroups = fieldsGameCenterGroups
-				self.limit = limit
-				self.include = include
-				self.fieldsGameCenterLeaderboardSets = fieldsGameCenterLeaderboardSets
 				self.fieldsGameCenterDetails = fieldsGameCenterDetails
 				self.fieldsGameCenterLeaderboards = fieldsGameCenterLeaderboards
+				self.fieldsGameCenterLeaderboardSets = fieldsGameCenterLeaderboardSets
 				self.fieldsGameCenterAchievements = fieldsGameCenterAchievements
+				self.limit = limit
+				self.include = include
 				self.limitGameCenterAchievements = limitGameCenterAchievements
 				self.limitGameCenterDetails = limitGameCenterDetails
 				self.limitGameCenterLeaderboardSets = limitGameCenterLeaderboardSets
@@ -126,12 +126,12 @@ extension APIEndpoint.V1 {
 				let encoder = URLQueryEncoder(explode: false)
 				encoder.encode(filterGameCenterDetails, forKey: "filter[gameCenterDetails]")
 				encoder.encode(fieldsGameCenterGroups, forKey: "fields[gameCenterGroups]")
-				encoder.encode(limit, forKey: "limit")
-				encoder.encode(include, forKey: "include")
-				encoder.encode(fieldsGameCenterLeaderboardSets, forKey: "fields[gameCenterLeaderboardSets]")
 				encoder.encode(fieldsGameCenterDetails, forKey: "fields[gameCenterDetails]")
 				encoder.encode(fieldsGameCenterLeaderboards, forKey: "fields[gameCenterLeaderboards]")
+				encoder.encode(fieldsGameCenterLeaderboardSets, forKey: "fields[gameCenterLeaderboardSets]")
 				encoder.encode(fieldsGameCenterAchievements, forKey: "fields[gameCenterAchievements]")
+				encoder.encode(limit, forKey: "limit")
+				encoder.encode(include, forKey: "include")
 				encoder.encode(limitGameCenterAchievements, forKey: "limit[gameCenterAchievements]")
 				encoder.encode(limitGameCenterDetails, forKey: "limit[gameCenterDetails]")
 				encoder.encode(limitGameCenterLeaderboardSets, forKey: "limit[gameCenterLeaderboardSets]")
@@ -141,7 +141,7 @@ extension APIEndpoint.V1 {
 		}
 
 		public func post(_ body: AppStoreConnect_Swift_SDK.GameCenterGroupCreateRequest) -> Request<AppStoreConnect_Swift_SDK.GameCenterGroupResponse> {
-			Request(path: path, method: "POST", body: body, id: "gameCenterGroups-create_instance")
+			Request(path: path, method: "POST", body: body, id: "gameCenterGroups_createInstance")
 		}
 	}
 }

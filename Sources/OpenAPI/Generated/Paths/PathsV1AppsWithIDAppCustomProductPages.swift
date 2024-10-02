@@ -14,80 +14,82 @@ extension APIEndpoint.V1.Apps.WithID {
 		public let path: String
 
 		public func get(parameters: GetParameters? = nil) -> Request<AppStoreConnect_Swift_SDK.AppCustomProductPagesResponse> {
-			Request(path: path, method: "GET", query: parameters?.asQuery, id: "apps-appCustomProductPages-get_to_many_related")
+			Request(path: path, method: "GET", query: parameters?.asQuery, id: "apps_appCustomProductPages_getToManyRelated")
 		}
 
 		public struct GetParameters {
 			public var filterVisible: [String]?
 			public var fieldsAppCustomProductPages: [FieldsAppCustomProductPages]?
-			public var fieldsAppCustomProductPageVersions: [FieldsAppCustomProductPageVersions]?
 			public var fieldsApps: [FieldsApps]?
+			public var fieldsAppCustomProductPageVersions: [FieldsAppCustomProductPageVersions]?
 			public var limit: Int?
-			public var limitAppCustomProductPageVersions: Int?
 			public var include: [Include]?
+			public var limitAppCustomProductPageVersions: Int?
 
 			public enum FieldsAppCustomProductPages: String, Codable, CaseIterable {
+				case name
+				case url
+				case visible
 				case app
 				case appCustomProductPageVersions
 				case appStoreVersionTemplate
 				case customProductPageTemplate
-				case name
-				case url
-				case visible
-			}
-
-			public enum FieldsAppCustomProductPageVersions: String, Codable, CaseIterable {
-				case appCustomProductPage
-				case appCustomProductPageLocalizations
-				case deepLink
-				case state
-				case version
 			}
 
 			public enum FieldsApps: String, Codable, CaseIterable {
+				case name
+				case bundleID = "bundleId"
+				case sku
+				case primaryLocale
+				case isOrEverWasMadeForKids
+				case subscriptionStatusURL = "subscriptionStatusUrl"
+				case subscriptionStatusURLVersion = "subscriptionStatusUrlVersion"
+				case subscriptionStatusURLForSandbox = "subscriptionStatusUrlForSandbox"
+				case subscriptionStatusURLVersionForSandbox = "subscriptionStatusUrlVersionForSandbox"
+				case contentRightsDeclaration
+				case streamlinedPurchasingEnabled
+				case appEncryptionDeclarations
+				case ciProduct
+				case betaTesters
+				case betaGroups
+				case appStoreVersions
+				case preReleaseVersions
+				case betaAppLocalizations
+				case builds
+				case betaLicenseAgreement
+				case betaAppReviewDetail
+				case appInfos
+				case appClips
+				case appPricePoints
+				case endUserLicenseAgreement
+				case preOrder
+				case appPriceSchedule
+				case appAvailability
+				case appAvailabilityV2
+				case inAppPurchases
+				case subscriptionGroups
+				case gameCenterEnabledVersions
+				case perfPowerMetrics
+				case appCustomProductPages
+				case inAppPurchasesV2
+				case promotedPurchases
+				case appEvents
+				case reviewSubmissions
+				case subscriptionGracePeriod
+				case customerReviews
+				case gameCenterDetail
+				case appStoreVersionExperimentsV2
 				case alternativeDistributionKey
 				case analyticsReportRequests
-				case appAvailability
-				case appClips
-				case appCustomProductPages
-				case appEncryptionDeclarations
-				case appEvents
-				case appInfos
-				case appPricePoints
-				case appPriceSchedule
-				case appStoreVersionExperimentsV2
-				case appStoreVersions
-				case betaAppLocalizations
-				case betaAppReviewDetail
-				case betaGroups
-				case betaLicenseAgreement
-				case betaTesters
-				case builds
-				case bundleID = "bundleId"
-				case ciProduct
-				case contentRightsDeclaration
-				case customerReviews
-				case endUserLicenseAgreement
-				case gameCenterDetail
-				case gameCenterEnabledVersions
-				case inAppPurchases
-				case inAppPurchasesV2
-				case isOrEverWasMadeForKids
 				case marketplaceSearchDetail
-				case name
-				case perfPowerMetrics
-				case preOrder
-				case preReleaseVersions
-				case primaryLocale
-				case promotedPurchases
-				case reviewSubmissions
-				case sku
-				case subscriptionGracePeriod
-				case subscriptionGroups
-				case subscriptionStatusURL = "subscriptionStatusUrl"
-				case subscriptionStatusURLForSandbox = "subscriptionStatusUrlForSandbox"
-				case subscriptionStatusURLVersion = "subscriptionStatusUrlVersion"
-				case subscriptionStatusURLVersionForSandbox = "subscriptionStatusUrlVersionForSandbox"
+			}
+
+			public enum FieldsAppCustomProductPageVersions: String, Codable, CaseIterable {
+				case version
+				case state
+				case deepLink
+				case appCustomProductPage
+				case appCustomProductPageLocalizations
 			}
 
 			public enum Include: String, Codable, CaseIterable {
@@ -95,25 +97,25 @@ extension APIEndpoint.V1.Apps.WithID {
 				case appCustomProductPageVersions
 			}
 
-			public init(filterVisible: [String]? = nil, fieldsAppCustomProductPages: [FieldsAppCustomProductPages]? = nil, fieldsAppCustomProductPageVersions: [FieldsAppCustomProductPageVersions]? = nil, fieldsApps: [FieldsApps]? = nil, limit: Int? = nil, limitAppCustomProductPageVersions: Int? = nil, include: [Include]? = nil) {
+			public init(filterVisible: [String]? = nil, fieldsAppCustomProductPages: [FieldsAppCustomProductPages]? = nil, fieldsApps: [FieldsApps]? = nil, fieldsAppCustomProductPageVersions: [FieldsAppCustomProductPageVersions]? = nil, limit: Int? = nil, include: [Include]? = nil, limitAppCustomProductPageVersions: Int? = nil) {
 				self.filterVisible = filterVisible
 				self.fieldsAppCustomProductPages = fieldsAppCustomProductPages
-				self.fieldsAppCustomProductPageVersions = fieldsAppCustomProductPageVersions
 				self.fieldsApps = fieldsApps
+				self.fieldsAppCustomProductPageVersions = fieldsAppCustomProductPageVersions
 				self.limit = limit
-				self.limitAppCustomProductPageVersions = limitAppCustomProductPageVersions
 				self.include = include
+				self.limitAppCustomProductPageVersions = limitAppCustomProductPageVersions
 			}
 
 			public var asQuery: [(String, String?)] {
 				let encoder = URLQueryEncoder(explode: false)
 				encoder.encode(filterVisible, forKey: "filter[visible]")
 				encoder.encode(fieldsAppCustomProductPages, forKey: "fields[appCustomProductPages]")
-				encoder.encode(fieldsAppCustomProductPageVersions, forKey: "fields[appCustomProductPageVersions]")
 				encoder.encode(fieldsApps, forKey: "fields[apps]")
+				encoder.encode(fieldsAppCustomProductPageVersions, forKey: "fields[appCustomProductPageVersions]")
 				encoder.encode(limit, forKey: "limit")
-				encoder.encode(limitAppCustomProductPageVersions, forKey: "limit[appCustomProductPageVersions]")
 				encoder.encode(include, forKey: "include")
+				encoder.encode(limitAppCustomProductPageVersions, forKey: "limit[appCustomProductPageVersions]")
 				return encoder.items
 			}
 		}

@@ -14,11 +14,11 @@ extension APIEndpoint.V1.GameCenterAchievements.WithID.Relationships {
 		public let path: String
 
 		public var get: Request<AppStoreConnect_Swift_SDK.GameCenterAchievementGroupAchievementLinkageResponse> {
-			Request(path: path, method: "GET", id: "gameCenterAchievements-groupAchievement-get_to_one_relationship")
+			Request(path: path, method: "GET", id: "gameCenterAchievements_groupAchievement_getToOneRelationship")
 		}
 
 		public func patch(_ body: AppStoreConnect_Swift_SDK.GameCenterAchievementGroupAchievementLinkageRequest) -> Request<Void> {
-			Request(path: path, method: "PATCH", body: body, id: "gameCenterAchievements-groupAchievement-update_to_one_relationship")
+			Request(path: path, method: "PATCH", body: body, id: "gameCenterAchievements_groupAchievement_updateToOneRelationship")
 		}
 	}
 }

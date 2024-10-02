@@ -14,7 +14,7 @@ extension APIEndpoint.V1.GameCenterLeaderboardReleases {
 		public let path: String
 
 		public func get(fieldsGameCenterLeaderboardReleases: [FieldsGameCenterLeaderboardReleases]? = nil, include: [Include]? = nil) -> Request<AppStoreConnect_Swift_SDK.GameCenterLeaderboardReleaseResponse> {
-			Request(path: path, method: "GET", query: makeGetQuery(fieldsGameCenterLeaderboardReleases, include), id: "gameCenterLeaderboardReleases-get_instance")
+			Request(path: path, method: "GET", query: makeGetQuery(fieldsGameCenterLeaderboardReleases, include), id: "gameCenterLeaderboardReleases_getInstance")
 		}
 
 		private func makeGetQuery(_ fieldsGameCenterLeaderboardReleases: [FieldsGameCenterLeaderboardReleases]?, _ include: [Include]?) -> [(String, String?)] {
@@ -25,9 +25,9 @@ extension APIEndpoint.V1.GameCenterLeaderboardReleases {
 		}
 
 		public enum FieldsGameCenterLeaderboardReleases: String, Codable, CaseIterable {
+			case live
 			case gameCenterDetail
 			case gameCenterLeaderboard
-			case live
 		}
 
 		public enum Include: String, Codable, CaseIterable {
@@ -36,7 +36,7 @@ extension APIEndpoint.V1.GameCenterLeaderboardReleases {
 		}
 
 		public var delete: Request<Void> {
-			Request(path: path, method: "DELETE", id: "gameCenterLeaderboardReleases-delete_instance")
+			Request(path: path, method: "DELETE", id: "gameCenterLeaderboardReleases_deleteInstance")
 		}
 	}
 }

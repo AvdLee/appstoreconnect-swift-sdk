@@ -14,7 +14,7 @@ extension APIEndpoint.V1.Apps.WithID {
 		public let path: String
 
 		public func get(fieldsPreReleaseVersions: [FieldsPreReleaseVersions]? = nil, limit: Int? = nil) -> Request<AppStoreConnect_Swift_SDK.PreReleaseVersionsWithoutIncludesResponse> {
-			Request(path: path, method: "GET", query: makeGetQuery(fieldsPreReleaseVersions, limit), id: "apps-preReleaseVersions-get_to_many_related")
+			Request(path: path, method: "GET", query: makeGetQuery(fieldsPreReleaseVersions, limit), id: "apps_preReleaseVersions_getToManyRelated")
 		}
 
 		private func makeGetQuery(_ fieldsPreReleaseVersions: [FieldsPreReleaseVersions]?, _ limit: Int?) -> [(String, String?)] {
@@ -25,10 +25,10 @@ extension APIEndpoint.V1.Apps.WithID {
 		}
 
 		public enum FieldsPreReleaseVersions: String, Codable, CaseIterable {
-			case app
-			case builds
-			case platform
 			case version
+			case platform
+			case builds
+			case app
 		}
 	}
 }

@@ -14,7 +14,7 @@ extension APIEndpoint.V1.AlternativeDistributionDomains {
 		public let path: String
 
 		public func get(fieldsAlternativeDistributionDomains: [FieldsAlternativeDistributionDomains]? = nil) -> Request<AppStoreConnect_Swift_SDK.AlternativeDistributionDomainResponse> {
-			Request(path: path, method: "GET", query: makeGetQuery(fieldsAlternativeDistributionDomains), id: "alternativeDistributionDomains-get_instance")
+			Request(path: path, method: "GET", query: makeGetQuery(fieldsAlternativeDistributionDomains), id: "alternativeDistributionDomains_getInstance")
 		}
 
 		private func makeGetQuery(_ fieldsAlternativeDistributionDomains: [FieldsAlternativeDistributionDomains]?) -> [(String, String?)] {
@@ -24,13 +24,13 @@ extension APIEndpoint.V1.AlternativeDistributionDomains {
 		}
 
 		public enum FieldsAlternativeDistributionDomains: String, Codable, CaseIterable {
-			case createdDate
 			case domain
 			case referenceName
+			case createdDate
 		}
 
 		public var delete: Request<Void> {
-			Request(path: path, method: "DELETE", id: "alternativeDistributionDomains-delete_instance")
+			Request(path: path, method: "DELETE", id: "alternativeDistributionDomains_deleteInstance")
 		}
 	}
 }

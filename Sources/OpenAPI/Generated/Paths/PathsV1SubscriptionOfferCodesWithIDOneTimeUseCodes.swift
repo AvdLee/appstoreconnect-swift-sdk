@@ -14,54 +14,54 @@ extension APIEndpoint.V1.SubscriptionOfferCodes.WithID {
 		public let path: String
 
 		public func get(parameters: GetParameters? = nil) -> Request<AppStoreConnect_Swift_SDK.SubscriptionOfferCodeOneTimeUseCodesResponse> {
-			Request(path: path, method: "GET", query: parameters?.asQuery, id: "subscriptionOfferCodes-oneTimeUseCodes-get_to_many_related")
+			Request(path: path, method: "GET", query: parameters?.asQuery, id: "subscriptionOfferCodes_oneTimeUseCodes_getToManyRelated")
 		}
 
 		public struct GetParameters {
-			public var fieldsSubscriptionOfferCodes: [FieldsSubscriptionOfferCodes]?
 			public var fieldsSubscriptionOfferCodeOneTimeUseCodes: [FieldsSubscriptionOfferCodeOneTimeUseCodes]?
+			public var fieldsSubscriptionOfferCodes: [FieldsSubscriptionOfferCodes]?
 			public var limit: Int?
 			public var include: [Include]?
 
-			public enum FieldsSubscriptionOfferCodes: String, Codable, CaseIterable {
-				case active
-				case customCodes
-				case customerEligibilities
-				case duration
-				case name
-				case numberOfPeriods
-				case offerEligibility
-				case offerMode
-				case oneTimeUseCodes
-				case prices
-				case subscription
-				case totalNumberOfCodes
-			}
-
 			public enum FieldsSubscriptionOfferCodeOneTimeUseCodes: String, Codable, CaseIterable {
-				case active
+				case numberOfCodes
 				case createdDate
 				case expirationDate
-				case numberOfCodes
+				case active
 				case offerCode
 				case values
+			}
+
+			public enum FieldsSubscriptionOfferCodes: String, Codable, CaseIterable {
+				case name
+				case customerEligibilities
+				case offerEligibility
+				case duration
+				case offerMode
+				case numberOfPeriods
+				case totalNumberOfCodes
+				case active
+				case subscription
+				case oneTimeUseCodes
+				case customCodes
+				case prices
 			}
 
 			public enum Include: String, Codable, CaseIterable {
 				case offerCode
 			}
 
-			public init(fieldsSubscriptionOfferCodes: [FieldsSubscriptionOfferCodes]? = nil, fieldsSubscriptionOfferCodeOneTimeUseCodes: [FieldsSubscriptionOfferCodeOneTimeUseCodes]? = nil, limit: Int? = nil, include: [Include]? = nil) {
-				self.fieldsSubscriptionOfferCodes = fieldsSubscriptionOfferCodes
+			public init(fieldsSubscriptionOfferCodeOneTimeUseCodes: [FieldsSubscriptionOfferCodeOneTimeUseCodes]? = nil, fieldsSubscriptionOfferCodes: [FieldsSubscriptionOfferCodes]? = nil, limit: Int? = nil, include: [Include]? = nil) {
 				self.fieldsSubscriptionOfferCodeOneTimeUseCodes = fieldsSubscriptionOfferCodeOneTimeUseCodes
+				self.fieldsSubscriptionOfferCodes = fieldsSubscriptionOfferCodes
 				self.limit = limit
 				self.include = include
 			}
 
 			public var asQuery: [(String, String?)] {
 				let encoder = URLQueryEncoder(explode: false)
-				encoder.encode(fieldsSubscriptionOfferCodes, forKey: "fields[subscriptionOfferCodes]")
 				encoder.encode(fieldsSubscriptionOfferCodeOneTimeUseCodes, forKey: "fields[subscriptionOfferCodeOneTimeUseCodes]")
+				encoder.encode(fieldsSubscriptionOfferCodes, forKey: "fields[subscriptionOfferCodes]")
 				encoder.encode(limit, forKey: "limit")
 				encoder.encode(include, forKey: "include")
 				return encoder.items

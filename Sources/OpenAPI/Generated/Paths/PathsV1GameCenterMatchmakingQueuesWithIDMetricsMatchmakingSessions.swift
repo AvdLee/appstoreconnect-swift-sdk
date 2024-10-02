@@ -14,13 +14,13 @@ extension APIEndpoint.V1.GameCenterMatchmakingQueues.WithID.Metrics {
 		public let path: String
 
 		public func get(parameters: GetParameters) -> Request<AppStoreConnect_Swift_SDK.GameCenterMatchmakingSessionsV1MetricResponse> {
-			Request(path: path, method: "GET", query: parameters.asQuery, id: "gameCenterMatchmakingQueues-matchmakingSessions-get_metrics")
+			Request(path: path, method: "GET", query: parameters.asQuery, id: "gameCenterMatchmakingQueues_matchmakingSessions_getMetrics")
 		}
 
 		public struct GetParameters {
-			public var limit: Int?
 			public var granularity: Granularity
 			public var sort: [Sort]?
+			public var limit: Int?
 
 			public enum Granularity: String, Codable, CaseIterable {
 				case p1d = "P1D"
@@ -29,27 +29,27 @@ extension APIEndpoint.V1.GameCenterMatchmakingQueues.WithID.Metrics {
 			}
 
 			public enum Sort: String, Codable, CaseIterable {
-				case averagePlayerCount
-				case minusaveragePlayerCount = "-averagePlayerCount"
 				case count
 				case minuscount = "-count"
+				case averagePlayerCount
+				case minusaveragePlayerCount = "-averagePlayerCount"
 				case p50PlayerCount
 				case minusp50PlayerCount = "-p50PlayerCount"
 				case p95PlayerCount
 				case minusp95PlayerCount = "-p95PlayerCount"
 			}
 
-			public init(limit: Int? = nil, granularity: Granularity, sort: [Sort]? = nil) {
-				self.limit = limit
+			public init(granularity: Granularity, sort: [Sort]? = nil, limit: Int? = nil) {
 				self.granularity = granularity
 				self.sort = sort
+				self.limit = limit
 			}
 
 			public var asQuery: [(String, String?)] {
 				let encoder = URLQueryEncoder(explode: false)
-				encoder.encode(limit, forKey: "limit")
 				encoder.encode(granularity, forKey: "granularity")
 				encoder.encode(sort, forKey: "sort")
+				encoder.encode(limit, forKey: "limit")
 				return encoder.items
 			}
 		}

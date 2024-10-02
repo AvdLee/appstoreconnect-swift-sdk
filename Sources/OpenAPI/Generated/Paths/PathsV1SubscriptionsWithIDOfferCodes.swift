@@ -14,114 +14,116 @@ extension APIEndpoint.V1.Subscriptions.WithID {
 		public let path: String
 
 		public func get(parameters: GetParameters? = nil) -> Request<AppStoreConnect_Swift_SDK.SubscriptionOfferCodesResponse> {
-			Request(path: path, method: "GET", query: parameters?.asQuery, id: "subscriptions-offerCodes-get_to_many_related")
+			Request(path: path, method: "GET", query: parameters?.asQuery, id: "subscriptions_offerCodes_getToManyRelated")
 		}
 
 		public struct GetParameters {
 			public var filterTerritory: [String]?
-			public var fieldsSubscriptionOfferCodeCustomCodes: [FieldsSubscriptionOfferCodeCustomCodes]?
 			public var fieldsSubscriptionOfferCodes: [FieldsSubscriptionOfferCodes]?
-			public var fieldsSubscriptionOfferCodeOneTimeUseCodes: [FieldsSubscriptionOfferCodeOneTimeUseCodes]?
 			public var fieldsSubscriptions: [FieldsSubscriptions]?
+			public var fieldsSubscriptionOfferCodeOneTimeUseCodes: [FieldsSubscriptionOfferCodeOneTimeUseCodes]?
+			public var fieldsSubscriptionOfferCodeCustomCodes: [FieldsSubscriptionOfferCodeCustomCodes]?
 			public var fieldsSubscriptionOfferCodePrices: [FieldsSubscriptionOfferCodePrices]?
 			public var limit: Int?
+			public var include: [Include]?
 			public var limitOneTimeUseCodes: Int?
 			public var limitCustomCodes: Int?
 			public var limitPrices: Int?
-			public var include: [Include]?
-
-			public enum FieldsSubscriptionOfferCodeCustomCodes: String, Codable, CaseIterable {
-				case active
-				case createdDate
-				case customCode
-				case expirationDate
-				case numberOfCodes
-				case offerCode
-			}
 
 			public enum FieldsSubscriptionOfferCodes: String, Codable, CaseIterable {
-				case active
-				case customCodes
-				case customerEligibilities
-				case duration
 				case name
-				case numberOfPeriods
+				case customerEligibilities
 				case offerEligibility
+				case duration
 				case offerMode
-				case oneTimeUseCodes
-				case prices
-				case subscription
+				case numberOfPeriods
 				case totalNumberOfCodes
+				case active
+				case subscription
+				case oneTimeUseCodes
+				case customCodes
+				case prices
+			}
+
+			public enum FieldsSubscriptions: String, Codable, CaseIterable {
+				case name
+				case productID = "productId"
+				case familySharable
+				case state
+				case subscriptionPeriod
+				case reviewNote
+				case groupLevel
+				case subscriptionLocalizations
+				case appStoreReviewScreenshot
+				case group
+				case introductoryOffers
+				case promotionalOffers
+				case offerCodes
+				case prices
+				case pricePoints
+				case promotedPurchase
+				case subscriptionAvailability
+				case winBackOffers
+				case images
 			}
 
 			public enum FieldsSubscriptionOfferCodeOneTimeUseCodes: String, Codable, CaseIterable {
-				case active
+				case numberOfCodes
 				case createdDate
 				case expirationDate
-				case numberOfCodes
+				case active
 				case offerCode
 				case values
 			}
 
-			public enum FieldsSubscriptions: String, Codable, CaseIterable {
-				case appStoreReviewScreenshot
-				case familySharable
-				case group
-				case groupLevel
-				case introductoryOffers
-				case name
-				case offerCodes
-				case pricePoints
-				case prices
-				case productID = "productId"
-				case promotedPurchase
-				case promotionalOffers
-				case reviewNote
-				case state
-				case subscriptionAvailability
-				case subscriptionLocalizations
-				case subscriptionPeriod
+			public enum FieldsSubscriptionOfferCodeCustomCodes: String, Codable, CaseIterable {
+				case customCode
+				case numberOfCodes
+				case createdDate
+				case expirationDate
+				case active
+				case offerCode
 			}
 
 			public enum FieldsSubscriptionOfferCodePrices: String, Codable, CaseIterable {
-				case subscriptionPricePoint
 				case territory
+				case subscriptionPricePoint
 			}
 
 			public enum Include: String, Codable, CaseIterable {
-				case customCodes
-				case oneTimeUseCodes
-				case prices
 				case subscription
+				case oneTimeUseCodes
+				case customCodes
+				case prices
 			}
 
-			public init(filterTerritory: [String]? = nil, fieldsSubscriptionOfferCodeCustomCodes: [FieldsSubscriptionOfferCodeCustomCodes]? = nil, fieldsSubscriptionOfferCodes: [FieldsSubscriptionOfferCodes]? = nil, fieldsSubscriptionOfferCodeOneTimeUseCodes: [FieldsSubscriptionOfferCodeOneTimeUseCodes]? = nil, fieldsSubscriptions: [FieldsSubscriptions]? = nil, fieldsSubscriptionOfferCodePrices: [FieldsSubscriptionOfferCodePrices]? = nil, limit: Int? = nil, limitOneTimeUseCodes: Int? = nil, limitCustomCodes: Int? = nil, limitPrices: Int? = nil, include: [Include]? = nil) {
+			public init(filterTerritory: [String]? = nil, fieldsSubscriptionOfferCodes: [FieldsSubscriptionOfferCodes]? = nil, fieldsSubscriptions: [FieldsSubscriptions]? = nil, fieldsSubscriptionOfferCodeOneTimeUseCodes: [FieldsSubscriptionOfferCodeOneTimeUseCodes]? = nil, fieldsSubscriptionOfferCodeCustomCodes: [FieldsSubscriptionOfferCodeCustomCodes]? = nil, fieldsSubscriptionOfferCodePrices: [FieldsSubscriptionOfferCodePrices]? = nil, limit: Int? = nil, include: [Include]? = nil, limitOneTimeUseCodes: Int? = nil, limitCustomCodes: Int? = nil, limitPrices: Int? = nil) {
 				self.filterTerritory = filterTerritory
-				self.fieldsSubscriptionOfferCodeCustomCodes = fieldsSubscriptionOfferCodeCustomCodes
 				self.fieldsSubscriptionOfferCodes = fieldsSubscriptionOfferCodes
-				self.fieldsSubscriptionOfferCodeOneTimeUseCodes = fieldsSubscriptionOfferCodeOneTimeUseCodes
 				self.fieldsSubscriptions = fieldsSubscriptions
+				self.fieldsSubscriptionOfferCodeOneTimeUseCodes = fieldsSubscriptionOfferCodeOneTimeUseCodes
+				self.fieldsSubscriptionOfferCodeCustomCodes = fieldsSubscriptionOfferCodeCustomCodes
 				self.fieldsSubscriptionOfferCodePrices = fieldsSubscriptionOfferCodePrices
 				self.limit = limit
+				self.include = include
 				self.limitOneTimeUseCodes = limitOneTimeUseCodes
 				self.limitCustomCodes = limitCustomCodes
 				self.limitPrices = limitPrices
-				self.include = include
 			}
 
 			public var asQuery: [(String, String?)] {
 				let encoder = URLQueryEncoder(explode: false)
 				encoder.encode(filterTerritory, forKey: "filter[territory]")
-				encoder.encode(fieldsSubscriptionOfferCodeCustomCodes, forKey: "fields[subscriptionOfferCodeCustomCodes]")
 				encoder.encode(fieldsSubscriptionOfferCodes, forKey: "fields[subscriptionOfferCodes]")
-				encoder.encode(fieldsSubscriptionOfferCodeOneTimeUseCodes, forKey: "fields[subscriptionOfferCodeOneTimeUseCodes]")
 				encoder.encode(fieldsSubscriptions, forKey: "fields[subscriptions]")
+				encoder.encode(fieldsSubscriptionOfferCodeOneTimeUseCodes, forKey: "fields[subscriptionOfferCodeOneTimeUseCodes]")
+				encoder.encode(fieldsSubscriptionOfferCodeCustomCodes, forKey: "fields[subscriptionOfferCodeCustomCodes]")
 				encoder.encode(fieldsSubscriptionOfferCodePrices, forKey: "fields[subscriptionOfferCodePrices]")
 				encoder.encode(limit, forKey: "limit")
+				encoder.encode(include, forKey: "include")
 				encoder.encode(limitOneTimeUseCodes, forKey: "limit[oneTimeUseCodes]")
 				encoder.encode(limitCustomCodes, forKey: "limit[customCodes]")
 				encoder.encode(limitPrices, forKey: "limit[prices]")
-				encoder.encode(include, forKey: "include")
 				return encoder.items
 			}
 		}

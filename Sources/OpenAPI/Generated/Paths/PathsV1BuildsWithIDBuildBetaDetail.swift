@@ -14,7 +14,7 @@ extension APIEndpoint.V1.Builds.WithID {
 		public let path: String
 
 		public func get(parameters: GetParameters? = nil) -> Request<AppStoreConnect_Swift_SDK.BuildBetaDetailResponse> {
-			Request(path: path, method: "GET", query: parameters?.asQuery, id: "builds-buildBetaDetail-get_to_one_related")
+			Request(path: path, method: "GET", query: parameters?.asQuery, id: "builds_buildBetaDetail_getToOneRelated")
 		}
 
 		public struct GetParameters {
@@ -24,36 +24,36 @@ extension APIEndpoint.V1.Builds.WithID {
 
 			public enum FieldsBuildBetaDetails: String, Codable, CaseIterable {
 				case autoNotifyEnabled
-				case build
-				case externalBuildState
 				case internalBuildState
+				case externalBuildState
+				case build
 			}
 
 			public enum FieldsBuilds: String, Codable, CaseIterable {
-				case app
-				case appEncryptionDeclaration
-				case appStoreVersion
-				case betaAppReviewSubmission
-				case betaBuildLocalizations
-				case betaGroups
-				case buildAudienceType
-				case buildBetaDetail
-				case buildBundles
-				case computedMinMacOsVersion
-				case diagnosticSignatures
+				case version
+				case uploadedDate
 				case expirationDate
 				case expired
-				case iconAssetToken
-				case icons
-				case individualTesters
-				case lsMinimumSystemVersion
 				case minOsVersion
-				case perfPowerMetrics
-				case preReleaseVersion
+				case lsMinimumSystemVersion
+				case computedMinMacOsVersion
+				case iconAssetToken
 				case processingState
-				case uploadedDate
+				case buildAudienceType
 				case usesNonExemptEncryption
-				case version
+				case preReleaseVersion
+				case individualTesters
+				case betaGroups
+				case betaBuildLocalizations
+				case appEncryptionDeclaration
+				case betaAppReviewSubmission
+				case app
+				case buildBetaDetail
+				case appStoreVersion
+				case icons
+				case buildBundles
+				case perfPowerMetrics
+				case diagnosticSignatures
 			}
 
 			public enum Include: String, Codable, CaseIterable {

@@ -14,33 +14,33 @@ extension APIEndpoint.V1 {
 		public let path: String
 
 		public func get(parameters: GetParameters) -> Request<Data> {
-			Request(path: path, method: "GET", query: parameters.asQuery, id: "financeReports-get_collection")
+			Request(path: path, method: "GET", query: parameters.asQuery, id: "financeReports_getCollection")
 		}
 
 		public struct GetParameters {
+			public var filterVendorNumber: [String]
+			public var filterReportType: [FilterReportType]
 			public var filterRegionCode: [String]
 			public var filterReportDate: [String]
-			public var filterReportType: [FilterReportType]
-			public var filterVendorNumber: [String]
 
 			public enum FilterReportType: String, Codable, CaseIterable {
 				case financial = "FINANCIAL"
 				case financeDetail = "FINANCE_DETAIL"
 			}
 
-			public init(filterRegionCode: [String], filterReportDate: [String], filterReportType: [FilterReportType], filterVendorNumber: [String]) {
+			public init(filterVendorNumber: [String], filterReportType: [FilterReportType], filterRegionCode: [String], filterReportDate: [String]) {
+				self.filterVendorNumber = filterVendorNumber
+				self.filterReportType = filterReportType
 				self.filterRegionCode = filterRegionCode
 				self.filterReportDate = filterReportDate
-				self.filterReportType = filterReportType
-				self.filterVendorNumber = filterVendorNumber
 			}
 
 			public var asQuery: [(String, String?)] {
 				let encoder = URLQueryEncoder(explode: false)
+				encoder.encode(filterVendorNumber, forKey: "filter[vendorNumber]")
+				encoder.encode(filterReportType, forKey: "filter[reportType]")
 				encoder.encode(filterRegionCode, forKey: "filter[regionCode]")
 				encoder.encode(filterReportDate, forKey: "filter[reportDate]")
-				encoder.encode(filterReportType, forKey: "filter[reportType]")
-				encoder.encode(filterVendorNumber, forKey: "filter[vendorNumber]")
 				return encoder.items
 			}
 		}

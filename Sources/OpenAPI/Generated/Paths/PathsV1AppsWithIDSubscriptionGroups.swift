@@ -14,20 +14,20 @@ extension APIEndpoint.V1.Apps.WithID {
 		public let path: String
 
 		public func get(parameters: GetParameters? = nil) -> Request<AppStoreConnect_Swift_SDK.SubscriptionGroupsResponse> {
-			Request(path: path, method: "GET", query: parameters?.asQuery, id: "apps-subscriptionGroups-get_to_many_related")
+			Request(path: path, method: "GET", query: parameters?.asQuery, id: "apps_subscriptionGroups_getToManyRelated")
 		}
 
 		public struct GetParameters {
 			public var filterReferenceName: [String]?
 			public var filterSubscriptionsState: [FilterSubscriptionsState]?
 			public var sort: [Sort]?
-			public var fieldsSubscriptions: [FieldsSubscriptions]?
 			public var fieldsSubscriptionGroups: [FieldsSubscriptionGroups]?
+			public var fieldsSubscriptions: [FieldsSubscriptions]?
 			public var fieldsSubscriptionGroupLocalizations: [FieldsSubscriptionGroupLocalizations]?
 			public var limit: Int?
+			public var include: [Include]?
 			public var limitSubscriptions: Int?
 			public var limitSubscriptionGroupLocalizations: Int?
-			public var include: [Include]?
 
 			public enum FilterSubscriptionsState: String, Codable, CaseIterable {
 				case missingMetadata = "MISSING_METADATA"
@@ -47,57 +47,59 @@ extension APIEndpoint.V1.Apps.WithID {
 				case minusreferenceName = "-referenceName"
 			}
 
-			public enum FieldsSubscriptions: String, Codable, CaseIterable {
-				case appStoreReviewScreenshot
-				case familySharable
-				case group
-				case groupLevel
-				case introductoryOffers
-				case name
-				case offerCodes
-				case pricePoints
-				case prices
-				case productID = "productId"
-				case promotedPurchase
-				case promotionalOffers
-				case reviewNote
-				case state
-				case subscriptionAvailability
-				case subscriptionLocalizations
-				case subscriptionPeriod
+			public enum FieldsSubscriptionGroups: String, Codable, CaseIterable {
+				case referenceName
+				case app
+				case subscriptions
+				case subscriptionGroupLocalizations
 			}
 
-			public enum FieldsSubscriptionGroups: String, Codable, CaseIterable {
-				case app
-				case referenceName
-				case subscriptionGroupLocalizations
-				case subscriptions
+			public enum FieldsSubscriptions: String, Codable, CaseIterable {
+				case name
+				case productID = "productId"
+				case familySharable
+				case state
+				case subscriptionPeriod
+				case reviewNote
+				case groupLevel
+				case subscriptionLocalizations
+				case appStoreReviewScreenshot
+				case group
+				case introductoryOffers
+				case promotionalOffers
+				case offerCodes
+				case prices
+				case pricePoints
+				case promotedPurchase
+				case subscriptionAvailability
+				case winBackOffers
+				case images
 			}
 
 			public enum FieldsSubscriptionGroupLocalizations: String, Codable, CaseIterable {
+				case name
 				case customAppName
 				case locale
-				case name
 				case state
 				case subscriptionGroup
 			}
 
 			public enum Include: String, Codable, CaseIterable {
-				case subscriptionGroupLocalizations
 				case subscriptions
+				case subscriptionGroupLocalizations
 			}
 
-			public init(filterReferenceName: [String]? = nil, filterSubscriptionsState: [FilterSubscriptionsState]? = nil, sort: [Sort]? = nil, fieldsSubscriptions: [FieldsSubscriptions]? = nil, fieldsSubscriptionGroups: [FieldsSubscriptionGroups]? = nil, fieldsSubscriptionGroupLocalizations: [FieldsSubscriptionGroupLocalizations]? = nil, limit: Int? = nil, limitSubscriptions: Int? = nil, limitSubscriptionGroupLocalizations: Int? = nil, include: [Include]? = nil) {
+			public init(filterReferenceName: [String]? = nil, filterSubscriptionsState: [FilterSubscriptionsState]? = nil, sort: [Sort]? = nil, fieldsSubscriptionGroups: [FieldsSubscriptionGroups]? = nil, fieldsSubscriptions: [FieldsSubscriptions]? = nil, fieldsSubscriptionGroupLocalizations: [FieldsSubscriptionGroupLocalizations]? = nil, limit: Int? = nil, include: [Include]? = nil, limitSubscriptions: Int? = nil, limitSubscriptionGroupLocalizations: Int? = nil) {
 				self.filterReferenceName = filterReferenceName
 				self.filterSubscriptionsState = filterSubscriptionsState
 				self.sort = sort
-				self.fieldsSubscriptions = fieldsSubscriptions
 				self.fieldsSubscriptionGroups = fieldsSubscriptionGroups
+				self.fieldsSubscriptions = fieldsSubscriptions
 				self.fieldsSubscriptionGroupLocalizations = fieldsSubscriptionGroupLocalizations
 				self.limit = limit
+				self.include = include
 				self.limitSubscriptions = limitSubscriptions
 				self.limitSubscriptionGroupLocalizations = limitSubscriptionGroupLocalizations
-				self.include = include
 			}
 
 			public var asQuery: [(String, String?)] {
@@ -105,13 +107,13 @@ extension APIEndpoint.V1.Apps.WithID {
 				encoder.encode(filterReferenceName, forKey: "filter[referenceName]")
 				encoder.encode(filterSubscriptionsState, forKey: "filter[subscriptions.state]")
 				encoder.encode(sort, forKey: "sort")
-				encoder.encode(fieldsSubscriptions, forKey: "fields[subscriptions]")
 				encoder.encode(fieldsSubscriptionGroups, forKey: "fields[subscriptionGroups]")
+				encoder.encode(fieldsSubscriptions, forKey: "fields[subscriptions]")
 				encoder.encode(fieldsSubscriptionGroupLocalizations, forKey: "fields[subscriptionGroupLocalizations]")
 				encoder.encode(limit, forKey: "limit")
+				encoder.encode(include, forKey: "include")
 				encoder.encode(limitSubscriptions, forKey: "limit[subscriptions]")
 				encoder.encode(limitSubscriptionGroupLocalizations, forKey: "limit[subscriptionGroupLocalizations]")
-				encoder.encode(include, forKey: "include")
 				return encoder.items
 			}
 		}

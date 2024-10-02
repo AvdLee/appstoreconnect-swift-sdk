@@ -14,7 +14,7 @@ extension APIEndpoint.V1 {
 		public let path: String
 
 		public func get(fieldsMarketplaceWebhooks: [FieldsMarketplaceWebhooks]? = nil, limit: Int? = nil) -> Request<AppStoreConnect_Swift_SDK.MarketplaceWebhooksResponse> {
-			Request(path: path, method: "GET", query: makeGetQuery(fieldsMarketplaceWebhooks, limit), id: "marketplaceWebhooks-get_collection")
+			Request(path: path, method: "GET", query: makeGetQuery(fieldsMarketplaceWebhooks, limit), id: "marketplaceWebhooks_getCollection")
 		}
 
 		private func makeGetQuery(_ fieldsMarketplaceWebhooks: [FieldsMarketplaceWebhooks]?, _ limit: Int?) -> [(String, String?)] {
@@ -30,7 +30,7 @@ extension APIEndpoint.V1 {
 		}
 
 		public func post(_ body: AppStoreConnect_Swift_SDK.MarketplaceWebhookCreateRequest) -> Request<AppStoreConnect_Swift_SDK.MarketplaceWebhookResponse> {
-			Request(path: path, method: "POST", body: body, id: "marketplaceWebhooks-create_instance")
+			Request(path: path, method: "POST", body: body, id: "marketplaceWebhooks_createInstance")
 		}
 	}
 }

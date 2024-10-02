@@ -14,11 +14,11 @@ extension APIEndpoint.V1.GameCenterLeaderboardSets.WithID.Relationships {
 		public let path: String
 
 		public var get: Request<AppStoreConnect_Swift_SDK.GameCenterLeaderboardSetGroupLeaderboardSetLinkageResponse> {
-			Request(path: path, method: "GET", id: "gameCenterLeaderboardSets-groupLeaderboardSet-get_to_one_relationship")
+			Request(path: path, method: "GET", id: "gameCenterLeaderboardSets_groupLeaderboardSet_getToOneRelationship")
 		}
 
 		public func patch(_ body: AppStoreConnect_Swift_SDK.GameCenterLeaderboardSetGroupLeaderboardSetLinkageRequest) -> Request<Void> {
-			Request(path: path, method: "PATCH", body: body, id: "gameCenterLeaderboardSets-groupLeaderboardSet-update_to_one_relationship")
+			Request(path: path, method: "PATCH", body: body, id: "gameCenterLeaderboardSets_groupLeaderboardSet_updateToOneRelationship")
 		}
 	}
 }

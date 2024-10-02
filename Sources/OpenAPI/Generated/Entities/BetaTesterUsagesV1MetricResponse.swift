@@ -69,6 +69,7 @@ public struct BetaTesterUsagesV1MetricResponse: Codable {
 
 			public struct Apps: Codable {
 				public var links: Links?
+				public var data: String?
 
 				public struct Links: Codable {
 					public var groupBy: String?
@@ -92,18 +93,21 @@ public struct BetaTesterUsagesV1MetricResponse: Codable {
 					}
 				}
 
-				public init(links: Links? = nil) {
+				public init(links: Links? = nil, data: String? = nil) {
 					self.links = links
+					self.data = data
 				}
 
 				public init(from decoder: Decoder) throws {
 					let values = try decoder.container(keyedBy: StringCodingKey.self)
 					self.links = try values.decodeIfPresent(Links.self, forKey: "links")
+					self.data = try values.decodeIfPresent(String.self, forKey: "data")
 				}
 
 				public func encode(to encoder: Encoder) throws {
 					var values = encoder.container(keyedBy: StringCodingKey.self)
 					try values.encodeIfPresent(links, forKey: "links")
+					try values.encodeIfPresent(data, forKey: "data")
 				}
 			}
 

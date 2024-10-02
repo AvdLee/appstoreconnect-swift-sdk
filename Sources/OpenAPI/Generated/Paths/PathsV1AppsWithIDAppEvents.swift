@@ -14,17 +14,17 @@ extension APIEndpoint.V1.Apps.WithID {
 		public let path: String
 
 		public func get(parameters: GetParameters? = nil) -> Request<AppStoreConnect_Swift_SDK.AppEventsResponse> {
-			Request(path: path, method: "GET", query: parameters?.asQuery, id: "apps-appEvents-get_to_many_related")
+			Request(path: path, method: "GET", query: parameters?.asQuery, id: "apps_appEvents_getToManyRelated")
 		}
 
 		public struct GetParameters {
 			public var filterEventState: [FilterEventState]?
 			public var filterID: [String]?
-			public var fieldsAppEventLocalizations: [FieldsAppEventLocalizations]?
 			public var fieldsAppEvents: [FieldsAppEvents]?
+			public var fieldsAppEventLocalizations: [FieldsAppEventLocalizations]?
 			public var limit: Int?
-			public var limitLocalizations: Int?
 			public var include: [Include]?
+			public var limitLocalizations: Int?
 
 			public enum FilterEventState: String, Codable, CaseIterable {
 				case draft = "DRAFT"
@@ -39,54 +39,54 @@ extension APIEndpoint.V1.Apps.WithID {
 				case archived = "ARCHIVED"
 			}
 
+			public enum FieldsAppEvents: String, Codable, CaseIterable {
+				case referenceName
+				case badge
+				case eventState
+				case deepLink
+				case purchaseRequirement
+				case primaryLocale
+				case priority
+				case purpose
+				case territorySchedules
+				case archivedTerritorySchedules
+				case app
+				case localizations
+			}
+
 			public enum FieldsAppEventLocalizations: String, Codable, CaseIterable {
+				case locale
+				case name
+				case shortDescription
+				case longDescription
 				case appEvent
 				case appEventScreenshots
 				case appEventVideoClips
-				case locale
-				case longDescription
-				case name
-				case shortDescription
-			}
-
-			public enum FieldsAppEvents: String, Codable, CaseIterable {
-				case app
-				case archivedTerritorySchedules
-				case badge
-				case deepLink
-				case eventState
-				case localizations
-				case primaryLocale
-				case priority
-				case purchaseRequirement
-				case purpose
-				case referenceName
-				case territorySchedules
 			}
 
 			public enum Include: String, Codable, CaseIterable {
 				case localizations
 			}
 
-			public init(filterEventState: [FilterEventState]? = nil, filterID: [String]? = nil, fieldsAppEventLocalizations: [FieldsAppEventLocalizations]? = nil, fieldsAppEvents: [FieldsAppEvents]? = nil, limit: Int? = nil, limitLocalizations: Int? = nil, include: [Include]? = nil) {
+			public init(filterEventState: [FilterEventState]? = nil, filterID: [String]? = nil, fieldsAppEvents: [FieldsAppEvents]? = nil, fieldsAppEventLocalizations: [FieldsAppEventLocalizations]? = nil, limit: Int? = nil, include: [Include]? = nil, limitLocalizations: Int? = nil) {
 				self.filterEventState = filterEventState
 				self.filterID = filterID
-				self.fieldsAppEventLocalizations = fieldsAppEventLocalizations
 				self.fieldsAppEvents = fieldsAppEvents
+				self.fieldsAppEventLocalizations = fieldsAppEventLocalizations
 				self.limit = limit
-				self.limitLocalizations = limitLocalizations
 				self.include = include
+				self.limitLocalizations = limitLocalizations
 			}
 
 			public var asQuery: [(String, String?)] {
 				let encoder = URLQueryEncoder(explode: false)
 				encoder.encode(filterEventState, forKey: "filter[eventState]")
 				encoder.encode(filterID, forKey: "filter[id]")
-				encoder.encode(fieldsAppEventLocalizations, forKey: "fields[appEventLocalizations]")
 				encoder.encode(fieldsAppEvents, forKey: "fields[appEvents]")
+				encoder.encode(fieldsAppEventLocalizations, forKey: "fields[appEventLocalizations]")
 				encoder.encode(limit, forKey: "limit")
-				encoder.encode(limitLocalizations, forKey: "limit[localizations]")
 				encoder.encode(include, forKey: "include")
+				encoder.encode(limitLocalizations, forKey: "limit[localizations]")
 				return encoder.items
 			}
 		}

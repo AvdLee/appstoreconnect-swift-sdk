@@ -14,7 +14,7 @@ extension APIEndpoint.V1 {
 		public let path: String
 
 		public func get(parameters: GetParameters? = nil) -> Request<AppStoreConnect_Swift_SDK.AlternativeDistributionKeysResponse> {
-			Request(path: path, method: "GET", query: parameters?.asQuery, id: "alternativeDistributionKeys-get_collection")
+			Request(path: path, method: "GET", query: parameters?.asQuery, id: "alternativeDistributionKeys_getCollection")
 		}
 
 		public struct GetParameters {
@@ -23,8 +23,8 @@ extension APIEndpoint.V1 {
 			public var limit: Int?
 
 			public enum FieldsAlternativeDistributionKeys: String, Codable, CaseIterable {
-				case app
 				case publicKey
+				case app
 			}
 
 			public init(isExistsApp: Bool? = nil, fieldsAlternativeDistributionKeys: [FieldsAlternativeDistributionKeys]? = nil, limit: Int? = nil) {
@@ -43,7 +43,7 @@ extension APIEndpoint.V1 {
 		}
 
 		public func post(_ body: AppStoreConnect_Swift_SDK.AlternativeDistributionKeyCreateRequest) -> Request<AppStoreConnect_Swift_SDK.AlternativeDistributionKeyResponse> {
-			Request(path: path, method: "POST", body: body, id: "alternativeDistributionKeys-create_instance")
+			Request(path: path, method: "POST", body: body, id: "alternativeDistributionKeys_createInstance")
 		}
 	}
 }

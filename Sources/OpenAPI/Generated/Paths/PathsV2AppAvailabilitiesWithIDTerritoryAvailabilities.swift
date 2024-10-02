@@ -14,7 +14,7 @@ extension APIEndpoint.V2.AppAvailabilities.WithID {
 		public let path: String
 
 		public func get(parameters: GetParameters? = nil) -> Request<AppStoreConnect_Swift_SDK.TerritoryAvailabilitiesResponse> {
-			Request(path: path, method: "GET", query: parameters?.asQuery, id: "appAvailabilitiesV2-territoryAvailabilities-get_to_many_related")
+			Request(path: path, method: "GET", query: parameters?.asQuery, id: "appAvailabilitiesV2_territoryAvailabilities_getToManyRelated")
 		}
 
 		public struct GetParameters {
@@ -25,10 +25,10 @@ extension APIEndpoint.V2.AppAvailabilities.WithID {
 
 			public enum FieldsTerritoryAvailabilities: String, Codable, CaseIterable {
 				case available
-				case contentStatuses
+				case releaseDate
 				case preOrderEnabled
 				case preOrderPublishDate
-				case releaseDate
+				case contentStatuses
 				case territory
 			}
 

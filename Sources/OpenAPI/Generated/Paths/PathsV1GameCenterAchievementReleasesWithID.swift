@@ -14,7 +14,7 @@ extension APIEndpoint.V1.GameCenterAchievementReleases {
 		public let path: String
 
 		public func get(fieldsGameCenterAchievementReleases: [FieldsGameCenterAchievementReleases]? = nil, include: [Include]? = nil) -> Request<AppStoreConnect_Swift_SDK.GameCenterAchievementReleaseResponse> {
-			Request(path: path, method: "GET", query: makeGetQuery(fieldsGameCenterAchievementReleases, include), id: "gameCenterAchievementReleases-get_instance")
+			Request(path: path, method: "GET", query: makeGetQuery(fieldsGameCenterAchievementReleases, include), id: "gameCenterAchievementReleases_getInstance")
 		}
 
 		private func makeGetQuery(_ fieldsGameCenterAchievementReleases: [FieldsGameCenterAchievementReleases]?, _ include: [Include]?) -> [(String, String?)] {
@@ -25,18 +25,18 @@ extension APIEndpoint.V1.GameCenterAchievementReleases {
 		}
 
 		public enum FieldsGameCenterAchievementReleases: String, Codable, CaseIterable {
-			case gameCenterAchievement
-			case gameCenterDetail
 			case live
+			case gameCenterDetail
+			case gameCenterAchievement
 		}
 
 		public enum Include: String, Codable, CaseIterable {
-			case gameCenterAchievement
 			case gameCenterDetail
+			case gameCenterAchievement
 		}
 
 		public var delete: Request<Void> {
-			Request(path: path, method: "DELETE", id: "gameCenterAchievementReleases-delete_instance")
+			Request(path: path, method: "DELETE", id: "gameCenterAchievementReleases_deleteInstance")
 		}
 	}
 }

@@ -15,7 +15,7 @@ extension APIEndpoint.V1.AppStoreVersions.WithID {
 
 		@available(*, deprecated, message: "Deprecated")
 		public func get(parameters: GetParameters? = nil) -> Request<AppStoreConnect_Swift_SDK.AppStoreVersionSubmissionResponse> {
-			Request(path: path, method: "GET", query: parameters?.asQuery, id: "appStoreVersions-appStoreVersionSubmission-get_to_one_related")
+			Request(path: path, method: "GET", query: parameters?.asQuery, id: "appStoreVersions_appStoreVersionSubmission_getToOneRelated")
 		}
 
 		public struct GetParameters {
@@ -28,29 +28,30 @@ extension APIEndpoint.V1.AppStoreVersions.WithID {
 			}
 
 			public enum FieldsAppStoreVersions: String, Codable, CaseIterable {
-				case ageRatingDeclaration
-				case alternativeDistributionPackage
-				case app
-				case appClipDefaultExperience
-				case appStoreReviewDetail
+				case platform
+				case versionString
 				case appStoreState
+				case appVersionState
+				case copyright
+				case reviewType
+				case releaseType
+				case earliestReleaseDate
+				case downloadable
+				case createdDate
+				case app
+				case ageRatingDeclaration
+				case appStoreVersionLocalizations
+				case build
+				case appStoreVersionPhasedRelease
+				case gameCenterAppVersion
+				case routingAppCoverage
+				case appStoreReviewDetail
+				case appStoreVersionSubmission
+				case appClipDefaultExperience
 				case appStoreVersionExperiments
 				case appStoreVersionExperimentsV2
-				case appStoreVersionLocalizations
-				case appStoreVersionPhasedRelease
-				case appStoreVersionSubmission
-				case appVersionState
-				case build
-				case copyright
-				case createdDate
 				case customerReviews
-				case downloadable
-				case earliestReleaseDate
-				case platform
-				case releaseType
-				case reviewType
-				case routingAppCoverage
-				case versionString
+				case alternativeDistributionPackage
 			}
 
 			public enum Include: String, Codable, CaseIterable {

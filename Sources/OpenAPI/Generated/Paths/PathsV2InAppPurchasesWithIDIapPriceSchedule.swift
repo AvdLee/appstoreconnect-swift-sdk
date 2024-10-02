@@ -14,82 +14,83 @@ extension APIEndpoint.V2.InAppPurchases.WithID {
 		public let path: String
 
 		public func get(parameters: GetParameters? = nil) -> Request<AppStoreConnect_Swift_SDK.InAppPurchasePriceScheduleResponse> {
-			Request(path: path, method: "GET", query: parameters?.asQuery, id: "inAppPurchasesV2-iapPriceSchedule-get_to_one_related")
+			Request(path: path, method: "GET", query: parameters?.asQuery, id: "inAppPurchasesV2_iapPriceSchedule_getToOneRelated")
 		}
 
 		public struct GetParameters {
-			public var fieldsInAppPurchasePrices: [FieldsInAppPurchasePrices]?
-			public var fieldsInAppPurchases: [FieldsInAppPurchases]?
 			public var fieldsInAppPurchasePriceSchedules: [FieldsInAppPurchasePriceSchedules]?
+			public var fieldsInAppPurchases: [FieldsInAppPurchases]?
 			public var fieldsTerritories: [FieldsTerritories]?
+			public var fieldsInAppPurchasePrices: [FieldsInAppPurchasePrices]?
+			public var include: [Include]?
 			public var limitManualPrices: Int?
 			public var limitAutomaticPrices: Int?
-			public var include: [Include]?
 
-			public enum FieldsInAppPurchasePrices: String, Codable, CaseIterable {
-				case endDate
-				case inAppPurchasePricePoint
-				case inAppPurchaseV2
-				case manual
-				case startDate
-				case territory
+			public enum FieldsInAppPurchasePriceSchedules: String, Codable, CaseIterable {
+				case inAppPurchase
+				case baseTerritory
+				case manualPrices
+				case automaticPrices
 			}
 
 			public enum FieldsInAppPurchases: String, Codable, CaseIterable {
-				case app
-				case appStoreReviewScreenshot
-				case content
-				case contentHosting
+				case name
+				case productID = "productId"
+				case inAppPurchaseType
+				case state
+				case reviewNote
 				case familySharable
+				case contentHosting
+				case app
+				case inAppPurchaseLocalizations
+				case pricePoints
+				case content
+				case appStoreReviewScreenshot
+				case promotedPurchase
 				case iapPriceSchedule
 				case inAppPurchaseAvailability
-				case inAppPurchaseLocalizations
-				case inAppPurchaseType
-				case name
-				case pricePoints
-				case productID = "productId"
-				case promotedPurchase
-				case reviewNote
-				case state
-			}
-
-			public enum FieldsInAppPurchasePriceSchedules: String, Codable, CaseIterable {
-				case automaticPrices
-				case baseTerritory
-				case inAppPurchase
-				case manualPrices
+				case images
 			}
 
 			public enum FieldsTerritories: String, Codable, CaseIterable {
 				case currency
 			}
 
-			public enum Include: String, Codable, CaseIterable {
-				case automaticPrices
-				case baseTerritory
-				case inAppPurchase
-				case manualPrices
+			public enum FieldsInAppPurchasePrices: String, Codable, CaseIterable {
+				case startDate
+				case endDate
+				case manual
+				case inAppPurchaseV2
+				case inAppPurchasePricePoint
+				case territory
 			}
 
-			public init(fieldsInAppPurchasePrices: [FieldsInAppPurchasePrices]? = nil, fieldsInAppPurchases: [FieldsInAppPurchases]? = nil, fieldsInAppPurchasePriceSchedules: [FieldsInAppPurchasePriceSchedules]? = nil, fieldsTerritories: [FieldsTerritories]? = nil, limitManualPrices: Int? = nil, limitAutomaticPrices: Int? = nil, include: [Include]? = nil) {
-				self.fieldsInAppPurchasePrices = fieldsInAppPurchasePrices
-				self.fieldsInAppPurchases = fieldsInAppPurchases
+			public enum Include: String, Codable, CaseIterable {
+				case inAppPurchase
+				case baseTerritory
+				case manualPrices
+				case automaticPrices
+			}
+
+			public init(fieldsInAppPurchasePriceSchedules: [FieldsInAppPurchasePriceSchedules]? = nil, fieldsInAppPurchases: [FieldsInAppPurchases]? = nil, fieldsTerritories: [FieldsTerritories]? = nil, fieldsInAppPurchasePrices: [FieldsInAppPurchasePrices]? = nil, include: [Include]? = nil, limitManualPrices: Int? = nil, limitAutomaticPrices: Int? = nil) {
 				self.fieldsInAppPurchasePriceSchedules = fieldsInAppPurchasePriceSchedules
+				self.fieldsInAppPurchases = fieldsInAppPurchases
 				self.fieldsTerritories = fieldsTerritories
+				self.fieldsInAppPurchasePrices = fieldsInAppPurchasePrices
+				self.include = include
 				self.limitManualPrices = limitManualPrices
 				self.limitAutomaticPrices = limitAutomaticPrices
-				self.include = include
 			}
 
 			public var asQuery: [(String, String?)] {
 				let encoder = URLQueryEncoder(explode: false)
-				encoder.encode(fieldsInAppPurchasePrices, forKey: "fields[inAppPurchasePrices]")
-				encoder.encode(fieldsInAppPurchases, forKey: "fields[inAppPurchases]")
 				encoder.encode(fieldsInAppPurchasePriceSchedules, forKey: "fields[inAppPurchasePriceSchedules]")
+				encoder.encode(fieldsInAppPurchases, forKey: "fields[inAppPurchases]")
 				encoder.encode(fieldsTerritories, forKey: "fields[territories]")
+				encoder.encode(fieldsInAppPurchasePrices, forKey: "fields[inAppPurchasePrices]")
+				encoder.encode(include, forKey: "include")
 				encoder.encode(limitManualPrices, forKey: "limit[manualPrices]")
 				encoder.encode(limitAutomaticPrices, forKey: "limit[automaticPrices]")
-				encoder.encode(include, forKey: "include")
 				return encoder.items
 			}
 		}

@@ -14,73 +14,73 @@ extension APIEndpoint.V2.AppStoreVersionExperiments.WithID {
 		public let path: String
 
 		public func get(parameters: GetParameters? = nil) -> Request<AppStoreConnect_Swift_SDK.AppStoreVersionExperimentTreatmentsResponse> {
-			Request(path: path, method: "GET", query: parameters?.asQuery, id: "appStoreVersionExperimentsV2-appStoreVersionExperimentTreatments-get_to_many_related")
+			Request(path: path, method: "GET", query: parameters?.asQuery, id: "appStoreVersionExperimentsV2_appStoreVersionExperimentTreatments_getToManyRelated")
 		}
 
 		public struct GetParameters {
-			public var fieldsAppStoreVersionExperiments: [FieldsAppStoreVersionExperiments]?
 			public var fieldsAppStoreVersionExperimentTreatments: [FieldsAppStoreVersionExperimentTreatments]?
+			public var fieldsAppStoreVersionExperiments: [FieldsAppStoreVersionExperiments]?
 			public var fieldsAppStoreVersionExperimentTreatmentLocalizations: [FieldsAppStoreVersionExperimentTreatmentLocalizations]?
 			public var limit: Int?
-			public var limitAppStoreVersionExperimentTreatmentLocalizations: Int?
 			public var include: [Include]?
-
-			public enum FieldsAppStoreVersionExperiments: String, Codable, CaseIterable {
-				case app
-				case appStoreVersion
-				case appStoreVersionExperimentTreatments
-				case controlVersions
-				case endDate
-				case latestControlVersion
-				case name
-				case platform
-				case reviewRequired
-				case startDate
-				case started
-				case state
-				case trafficProportion
-			}
+			public var limitAppStoreVersionExperimentTreatmentLocalizations: Int?
 
 			public enum FieldsAppStoreVersionExperimentTreatments: String, Codable, CaseIterable {
+				case name
 				case appIcon
 				case appIconName
-				case appStoreVersionExperiment
-				case appStoreVersionExperimentTreatmentLocalizations
-				case appStoreVersionExperimentV2
-				case name
 				case promotedDate
+				case appStoreVersionExperiment
+				case appStoreVersionExperimentV2
+				case appStoreVersionExperimentTreatmentLocalizations
+			}
+
+			public enum FieldsAppStoreVersionExperiments: String, Codable, CaseIterable {
+				case name
+				case trafficProportion
+				case state
+				case reviewRequired
+				case startDate
+				case endDate
+				case started
+				case appStoreVersion
+				case appStoreVersionExperimentTreatments
+				case platform
+				case app
+				case latestControlVersion
+				case controlVersions
 			}
 
 			public enum FieldsAppStoreVersionExperimentTreatmentLocalizations: String, Codable, CaseIterable {
-				case appPreviewSets
-				case appScreenshotSets
-				case appStoreVersionExperimentTreatment
 				case locale
+				case appStoreVersionExperimentTreatment
+				case appScreenshotSets
+				case appPreviewSets
 			}
 
 			public enum Include: String, Codable, CaseIterable {
 				case appStoreVersionExperiment
-				case appStoreVersionExperimentTreatmentLocalizations
 				case appStoreVersionExperimentV2
+				case appStoreVersionExperimentTreatmentLocalizations
 			}
 
-			public init(fieldsAppStoreVersionExperiments: [FieldsAppStoreVersionExperiments]? = nil, fieldsAppStoreVersionExperimentTreatments: [FieldsAppStoreVersionExperimentTreatments]? = nil, fieldsAppStoreVersionExperimentTreatmentLocalizations: [FieldsAppStoreVersionExperimentTreatmentLocalizations]? = nil, limit: Int? = nil, limitAppStoreVersionExperimentTreatmentLocalizations: Int? = nil, include: [Include]? = nil) {
-				self.fieldsAppStoreVersionExperiments = fieldsAppStoreVersionExperiments
+			public init(fieldsAppStoreVersionExperimentTreatments: [FieldsAppStoreVersionExperimentTreatments]? = nil, fieldsAppStoreVersionExperiments: [FieldsAppStoreVersionExperiments]? = nil, fieldsAppStoreVersionExperimentTreatmentLocalizations: [FieldsAppStoreVersionExperimentTreatmentLocalizations]? = nil, limit: Int? = nil, include: [Include]? = nil, limitAppStoreVersionExperimentTreatmentLocalizations: Int? = nil) {
 				self.fieldsAppStoreVersionExperimentTreatments = fieldsAppStoreVersionExperimentTreatments
+				self.fieldsAppStoreVersionExperiments = fieldsAppStoreVersionExperiments
 				self.fieldsAppStoreVersionExperimentTreatmentLocalizations = fieldsAppStoreVersionExperimentTreatmentLocalizations
 				self.limit = limit
-				self.limitAppStoreVersionExperimentTreatmentLocalizations = limitAppStoreVersionExperimentTreatmentLocalizations
 				self.include = include
+				self.limitAppStoreVersionExperimentTreatmentLocalizations = limitAppStoreVersionExperimentTreatmentLocalizations
 			}
 
 			public var asQuery: [(String, String?)] {
 				let encoder = URLQueryEncoder(explode: false)
-				encoder.encode(fieldsAppStoreVersionExperiments, forKey: "fields[appStoreVersionExperiments]")
 				encoder.encode(fieldsAppStoreVersionExperimentTreatments, forKey: "fields[appStoreVersionExperimentTreatments]")
+				encoder.encode(fieldsAppStoreVersionExperiments, forKey: "fields[appStoreVersionExperiments]")
 				encoder.encode(fieldsAppStoreVersionExperimentTreatmentLocalizations, forKey: "fields[appStoreVersionExperimentTreatmentLocalizations]")
 				encoder.encode(limit, forKey: "limit")
-				encoder.encode(limitAppStoreVersionExperimentTreatmentLocalizations, forKey: "limit[appStoreVersionExperimentTreatmentLocalizations]")
 				encoder.encode(include, forKey: "include")
+				encoder.encode(limitAppStoreVersionExperimentTreatmentLocalizations, forKey: "limit[appStoreVersionExperimentTreatmentLocalizations]")
 				return encoder.items
 			}
 		}

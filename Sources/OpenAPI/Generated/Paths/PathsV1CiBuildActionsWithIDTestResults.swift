@@ -14,7 +14,7 @@ extension APIEndpoint.V1.CiBuildActions.WithID {
 		public let path: String
 
 		public func get(fieldsCiTestResults: [FieldsCiTestResults]? = nil, limit: Int? = nil) -> Request<AppStoreConnect_Swift_SDK.CiTestResultsResponse> {
-			Request(path: path, method: "GET", query: makeGetQuery(fieldsCiTestResults, limit), id: "ciBuildActions-testResults-get_to_many_related")
+			Request(path: path, method: "GET", query: makeGetQuery(fieldsCiTestResults, limit), id: "ciBuildActions_testResults_getToManyRelated")
 		}
 
 		private func makeGetQuery(_ fieldsCiTestResults: [FieldsCiTestResults]?, _ limit: Int?) -> [(String, String?)] {
@@ -26,11 +26,11 @@ extension APIEndpoint.V1.CiBuildActions.WithID {
 
 		public enum FieldsCiTestResults: String, Codable, CaseIterable {
 			case className
-			case destinationTestResults
-			case fileSource
-			case message
 			case name
 			case status
+			case fileSource
+			case message
+			case destinationTestResults
 		}
 	}
 }

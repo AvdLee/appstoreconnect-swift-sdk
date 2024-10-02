@@ -14,95 +14,97 @@ extension APIEndpoint.V1.UserInvitations {
 		public let path: String
 
 		public func get(parameters: GetParameters? = nil) -> Request<AppStoreConnect_Swift_SDK.UserInvitationResponse> {
-			Request(path: path, method: "GET", query: parameters?.asQuery, id: "userInvitations-get_instance")
+			Request(path: path, method: "GET", query: parameters?.asQuery, id: "userInvitations_getInstance")
 		}
 
 		public struct GetParameters {
 			public var fieldsUserInvitations: [FieldsUserInvitations]?
-			public var include: [Include]?
 			public var fieldsApps: [FieldsApps]?
+			public var include: [Include]?
 			public var limitVisibleApps: Int?
 
 			public enum FieldsUserInvitations: String, Codable, CaseIterable {
-				case allAppsVisible
 				case email
-				case expirationDate
 				case firstName
 				case lastName
-				case provisioningAllowed
+				case expirationDate
 				case roles
+				case allAppsVisible
+				case provisioningAllowed
 				case visibleApps
+			}
+
+			public enum FieldsApps: String, Codable, CaseIterable {
+				case name
+				case bundleID = "bundleId"
+				case sku
+				case primaryLocale
+				case isOrEverWasMadeForKids
+				case subscriptionStatusURL = "subscriptionStatusUrl"
+				case subscriptionStatusURLVersion = "subscriptionStatusUrlVersion"
+				case subscriptionStatusURLForSandbox = "subscriptionStatusUrlForSandbox"
+				case subscriptionStatusURLVersionForSandbox = "subscriptionStatusUrlVersionForSandbox"
+				case contentRightsDeclaration
+				case streamlinedPurchasingEnabled
+				case appEncryptionDeclarations
+				case ciProduct
+				case betaTesters
+				case betaGroups
+				case appStoreVersions
+				case preReleaseVersions
+				case betaAppLocalizations
+				case builds
+				case betaLicenseAgreement
+				case betaAppReviewDetail
+				case appInfos
+				case appClips
+				case appPricePoints
+				case endUserLicenseAgreement
+				case preOrder
+				case appPriceSchedule
+				case appAvailability
+				case appAvailabilityV2
+				case inAppPurchases
+				case subscriptionGroups
+				case gameCenterEnabledVersions
+				case perfPowerMetrics
+				case appCustomProductPages
+				case inAppPurchasesV2
+				case promotedPurchases
+				case appEvents
+				case reviewSubmissions
+				case subscriptionGracePeriod
+				case customerReviews
+				case gameCenterDetail
+				case appStoreVersionExperimentsV2
+				case alternativeDistributionKey
+				case analyticsReportRequests
+				case marketplaceSearchDetail
 			}
 
 			public enum Include: String, Codable, CaseIterable {
 				case visibleApps
 			}
 
-			public enum FieldsApps: String, Codable, CaseIterable {
-				case alternativeDistributionKey
-				case analyticsReportRequests
-				case appAvailability
-				case appClips
-				case appCustomProductPages
-				case appEncryptionDeclarations
-				case appEvents
-				case appInfos
-				case appPricePoints
-				case appPriceSchedule
-				case appStoreVersionExperimentsV2
-				case appStoreVersions
-				case betaAppLocalizations
-				case betaAppReviewDetail
-				case betaGroups
-				case betaLicenseAgreement
-				case betaTesters
-				case builds
-				case bundleID = "bundleId"
-				case ciProduct
-				case contentRightsDeclaration
-				case customerReviews
-				case endUserLicenseAgreement
-				case gameCenterDetail
-				case gameCenterEnabledVersions
-				case inAppPurchases
-				case inAppPurchasesV2
-				case isOrEverWasMadeForKids
-				case marketplaceSearchDetail
-				case name
-				case perfPowerMetrics
-				case preOrder
-				case preReleaseVersions
-				case primaryLocale
-				case promotedPurchases
-				case reviewSubmissions
-				case sku
-				case subscriptionGracePeriod
-				case subscriptionGroups
-				case subscriptionStatusURL = "subscriptionStatusUrl"
-				case subscriptionStatusURLForSandbox = "subscriptionStatusUrlForSandbox"
-				case subscriptionStatusURLVersion = "subscriptionStatusUrlVersion"
-				case subscriptionStatusURLVersionForSandbox = "subscriptionStatusUrlVersionForSandbox"
-			}
-
-			public init(fieldsUserInvitations: [FieldsUserInvitations]? = nil, include: [Include]? = nil, fieldsApps: [FieldsApps]? = nil, limitVisibleApps: Int? = nil) {
+			public init(fieldsUserInvitations: [FieldsUserInvitations]? = nil, fieldsApps: [FieldsApps]? = nil, include: [Include]? = nil, limitVisibleApps: Int? = nil) {
 				self.fieldsUserInvitations = fieldsUserInvitations
-				self.include = include
 				self.fieldsApps = fieldsApps
+				self.include = include
 				self.limitVisibleApps = limitVisibleApps
 			}
 
 			public var asQuery: [(String, String?)] {
 				let encoder = URLQueryEncoder(explode: false)
 				encoder.encode(fieldsUserInvitations, forKey: "fields[userInvitations]")
-				encoder.encode(include, forKey: "include")
 				encoder.encode(fieldsApps, forKey: "fields[apps]")
+				encoder.encode(include, forKey: "include")
 				encoder.encode(limitVisibleApps, forKey: "limit[visibleApps]")
 				return encoder.items
 			}
 		}
 
 		public var delete: Request<Void> {
-			Request(path: path, method: "DELETE", id: "userInvitations-delete_instance")
+			Request(path: path, method: "DELETE", id: "userInvitations_deleteInstance")
 		}
 	}
 }

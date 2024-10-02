@@ -14,71 +14,72 @@ extension APIEndpoint.V1.GameCenterAppVersions {
 		public let path: String
 
 		public func get(parameters: GetParameters? = nil) -> Request<AppStoreConnect_Swift_SDK.GameCenterAppVersionResponse> {
-			Request(path: path, method: "GET", query: parameters?.asQuery, id: "gameCenterAppVersions-get_instance")
+			Request(path: path, method: "GET", query: parameters?.asQuery, id: "gameCenterAppVersions_getInstance")
 		}
 
 		public struct GetParameters {
 			public var fieldsGameCenterAppVersions: [FieldsGameCenterAppVersions]?
-			public var include: [Include]?
 			public var fieldsAppStoreVersions: [FieldsAppStoreVersions]?
+			public var include: [Include]?
 			public var limitCompatibilityVersions: Int?
 
 			public enum FieldsGameCenterAppVersions: String, Codable, CaseIterable {
-				case appStoreVersion
-				case compatibilityVersions
 				case enabled
-			}
-
-			public enum Include: String, Codable, CaseIterable {
-				case appStoreVersion
 				case compatibilityVersions
+				case appStoreVersion
 			}
 
 			public enum FieldsAppStoreVersions: String, Codable, CaseIterable {
-				case ageRatingDeclaration
-				case alternativeDistributionPackage
-				case app
-				case appClipDefaultExperience
-				case appStoreReviewDetail
+				case platform
+				case versionString
 				case appStoreState
+				case appVersionState
+				case copyright
+				case reviewType
+				case releaseType
+				case earliestReleaseDate
+				case downloadable
+				case createdDate
+				case app
+				case ageRatingDeclaration
+				case appStoreVersionLocalizations
+				case build
+				case appStoreVersionPhasedRelease
+				case gameCenterAppVersion
+				case routingAppCoverage
+				case appStoreReviewDetail
+				case appStoreVersionSubmission
+				case appClipDefaultExperience
 				case appStoreVersionExperiments
 				case appStoreVersionExperimentsV2
-				case appStoreVersionLocalizations
-				case appStoreVersionPhasedRelease
-				case appStoreVersionSubmission
-				case appVersionState
-				case build
-				case copyright
-				case createdDate
 				case customerReviews
-				case downloadable
-				case earliestReleaseDate
-				case platform
-				case releaseType
-				case reviewType
-				case routingAppCoverage
-				case versionString
+				case alternativeDistributionPackage
 			}
 
-			public init(fieldsGameCenterAppVersions: [FieldsGameCenterAppVersions]? = nil, include: [Include]? = nil, fieldsAppStoreVersions: [FieldsAppStoreVersions]? = nil, limitCompatibilityVersions: Int? = nil) {
+			public enum Include: String, Codable, CaseIterable {
+				case compatibilityVersions
+				case appStoreVersion
+			}
+
+			public init(fieldsGameCenterAppVersions: [FieldsGameCenterAppVersions]? = nil, fieldsAppStoreVersions: [FieldsAppStoreVersions]? = nil, include: [Include]? = nil, limitCompatibilityVersions: Int? = nil) {
 				self.fieldsGameCenterAppVersions = fieldsGameCenterAppVersions
-				self.include = include
 				self.fieldsAppStoreVersions = fieldsAppStoreVersions
+				self.include = include
 				self.limitCompatibilityVersions = limitCompatibilityVersions
 			}
 
 			public var asQuery: [(String, String?)] {
 				let encoder = URLQueryEncoder(explode: false)
 				encoder.encode(fieldsGameCenterAppVersions, forKey: "fields[gameCenterAppVersions]")
-				encoder.encode(include, forKey: "include")
 				encoder.encode(fieldsAppStoreVersions, forKey: "fields[appStoreVersions]")
+				encoder.encode(include, forKey: "include")
 				encoder.encode(limitCompatibilityVersions, forKey: "limit[compatibilityVersions]")
 				return encoder.items
 			}
 		}
 
 		public func patch(_ body: AppStoreConnect_Swift_SDK.GameCenterAppVersionUpdateRequest) -> Request<AppStoreConnect_Swift_SDK.GameCenterAppVersionResponse> {
-			Request(path: path, method: "PATCH", body: body, id: "gameCenterAppVersions-update_instance")
+			Request(path: path, method: "PATCH", body: body, id: "gameCenterAppVersions_updateInstance")
 		}
 	}
 }

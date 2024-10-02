@@ -14,21 +14,29 @@ extension APIEndpoint.V1.AppClips {
 		public let path: String
 
 		public func get(parameters: GetParameters? = nil) -> Request<AppStoreConnect_Swift_SDK.AppClipResponse> {
-			Request(path: path, method: "GET", query: parameters?.asQuery, id: "appClips-get_instance")
+			Request(path: path, method: "GET", query: parameters?.asQuery, id: "appClips_getInstance")
 		}
 
 		public struct GetParameters {
 			public var fieldsAppClips: [FieldsAppClips]?
-			public var include: [Include]?
-			public var fieldsAppClipAdvancedExperiences: [FieldsAppClipAdvancedExperiences]?
 			public var fieldsAppClipDefaultExperiences: [FieldsAppClipDefaultExperiences]?
+			public var include: [Include]?
 			public var limitAppClipDefaultExperiences: Int?
 
 			public enum FieldsAppClips: String, Codable, CaseIterable {
-				case app
-				case appClipAdvancedExperiences
-				case appClipDefaultExperiences
 				case bundleID = "bundleId"
+				case app
+				case appClipDefaultExperiences
+				case appClipAdvancedExperiences
+			}
+
+			public enum FieldsAppClipDefaultExperiences: String, Codable, CaseIterable {
+				case action
+				case appClip
+				case releaseWithAppStoreVersion
+				case appClipDefaultExperienceLocalizations
+				case appClipAppStoreReviewDetail
+				case appClipDefaultExperienceTemplate
 			}
 
 			public enum Include: String, Codable, CaseIterable {
@@ -36,45 +44,18 @@ extension APIEndpoint.V1.AppClips {
 				case appClipDefaultExperiences
 			}
 
-			public enum FieldsAppClipAdvancedExperiences: String, Codable, CaseIterable {
-				case action
-				case appClip
-				case businessCategory
-				case defaultLanguage
-				case headerImage
-				case isPoweredBy
-				case link
-				case localizations
-				case place
-				case placeStatus
-				case removed
-				case status
-				case version
-			}
-
-			public enum FieldsAppClipDefaultExperiences: String, Codable, CaseIterable {
-				case action
-				case appClip
-				case appClipAppStoreReviewDetail
-				case appClipDefaultExperienceLocalizations
-				case appClipDefaultExperienceTemplate
-				case releaseWithAppStoreVersion
-			}
-
-			public init(fieldsAppClips: [FieldsAppClips]? = nil, include: [Include]? = nil, fieldsAppClipAdvancedExperiences: [FieldsAppClipAdvancedExperiences]? = nil, fieldsAppClipDefaultExperiences: [FieldsAppClipDefaultExperiences]? = nil, limitAppClipDefaultExperiences: Int? = nil) {
+			public init(fieldsAppClips: [FieldsAppClips]? = nil, fieldsAppClipDefaultExperiences: [FieldsAppClipDefaultExperiences]? = nil, include: [Include]? = nil, limitAppClipDefaultExperiences: Int? = nil) {
 				self.fieldsAppClips = fieldsAppClips
-				self.include = include
-				self.fieldsAppClipAdvancedExperiences = fieldsAppClipAdvancedExperiences
 				self.fieldsAppClipDefaultExperiences = fieldsAppClipDefaultExperiences
+				self.include = include
 				self.limitAppClipDefaultExperiences = limitAppClipDefaultExperiences
 			}
 
 			public var asQuery: [(String, String?)] {
 				let encoder = URLQueryEncoder(explode: false)
 				encoder.encode(fieldsAppClips, forKey: "fields[appClips]")
-				encoder.encode(include, forKey: "include")
-				encoder.encode(fieldsAppClipAdvancedExperiences, forKey: "fields[appClipAdvancedExperiences]")
 				encoder.encode(fieldsAppClipDefaultExperiences, forKey: "fields[appClipDefaultExperiences]")
+				encoder.encode(include, forKey: "include")
 				encoder.encode(limitAppClipDefaultExperiences, forKey: "limit[appClipDefaultExperiences]")
 				return encoder.items
 			}

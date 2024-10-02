@@ -14,7 +14,7 @@ extension APIEndpoint.V1.Subscriptions.WithID {
 		public let path: String
 
 		public func get(parameters: GetParameters? = nil) -> Request<AppStoreConnect_Swift_SDK.SubscriptionPricePointsResponse> {
-			Request(path: path, method: "GET", query: parameters?.asQuery, id: "subscriptions-pricePoints-get_to_many_related")
+			Request(path: path, method: "GET", query: parameters?.asQuery, id: "subscriptions_pricePoints_getToManyRelated")
 		}
 
 		public struct GetParameters {
@@ -26,11 +26,11 @@ extension APIEndpoint.V1.Subscriptions.WithID {
 
 			public enum FieldsSubscriptionPricePoints: String, Codable, CaseIterable {
 				case customerPrice
-				case equalizations
 				case proceeds
 				case proceedsYear2
-				case subscription
 				case territory
+				case subscription
+				case equalizations
 			}
 
 			public enum FieldsTerritories: String, Codable, CaseIterable {

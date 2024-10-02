@@ -14,7 +14,7 @@ extension APIEndpoint.V1.Actors {
 		public let path: String
 
 		public func get(fieldsActors: [FieldsActors]? = nil) -> Request<AppStoreConnect_Swift_SDK.ActorResponse> {
-			Request(path: path, method: "GET", query: makeGetQuery(fieldsActors), id: "actors-get_instance")
+			Request(path: path, method: "GET", query: makeGetQuery(fieldsActors), id: "actors_getInstance")
 		}
 
 		private func makeGetQuery(_ fieldsActors: [FieldsActors]?) -> [(String, String?)] {
@@ -25,10 +25,10 @@ extension APIEndpoint.V1.Actors {
 
 		public enum FieldsActors: String, Codable, CaseIterable {
 			case actorType
-			case apiKeyID = "apiKeyId"
-			case userEmail
 			case userFirstName
 			case userLastName
+			case userEmail
+			case apiKeyID = "apiKeyId"
 		}
 	}
 }

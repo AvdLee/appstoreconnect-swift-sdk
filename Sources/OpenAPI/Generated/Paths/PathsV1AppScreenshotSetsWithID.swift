@@ -14,62 +14,62 @@ extension APIEndpoint.V1.AppScreenshotSets {
 		public let path: String
 
 		public func get(parameters: GetParameters? = nil) -> Request<AppStoreConnect_Swift_SDK.AppScreenshotSetResponse> {
-			Request(path: path, method: "GET", query: parameters?.asQuery, id: "appScreenshotSets-get_instance")
+			Request(path: path, method: "GET", query: parameters?.asQuery, id: "appScreenshotSets_getInstance")
 		}
 
 		public struct GetParameters {
 			public var fieldsAppScreenshotSets: [FieldsAppScreenshotSets]?
-			public var include: [Include]?
 			public var fieldsAppScreenshots: [FieldsAppScreenshots]?
+			public var include: [Include]?
 			public var limitAppScreenshots: Int?
 
 			public enum FieldsAppScreenshotSets: String, Codable, CaseIterable {
-				case appCustomProductPageLocalization
-				case appScreenshots
-				case appStoreVersionExperimentTreatmentLocalization
-				case appStoreVersionLocalization
 				case screenshotDisplayType
-			}
-
-			public enum Include: String, Codable, CaseIterable {
-				case appCustomProductPageLocalization
-				case appScreenshots
-				case appStoreVersionExperimentTreatmentLocalization
 				case appStoreVersionLocalization
+				case appCustomProductPageLocalization
+				case appStoreVersionExperimentTreatmentLocalization
+				case appScreenshots
 			}
 
 			public enum FieldsAppScreenshots: String, Codable, CaseIterable {
-				case appScreenshotSet
-				case assetDeliveryState
+				case fileSize
+				case fileName
+				case sourceFileChecksum
+				case imageAsset
 				case assetToken
 				case assetType
-				case fileName
-				case fileSize
-				case imageAsset
-				case sourceFileChecksum
 				case uploadOperations
+				case assetDeliveryState
 				case uploaded
+				case appScreenshotSet
 			}
 
-			public init(fieldsAppScreenshotSets: [FieldsAppScreenshotSets]? = nil, include: [Include]? = nil, fieldsAppScreenshots: [FieldsAppScreenshots]? = nil, limitAppScreenshots: Int? = nil) {
+			public enum Include: String, Codable, CaseIterable {
+				case appStoreVersionLocalization
+				case appCustomProductPageLocalization
+				case appStoreVersionExperimentTreatmentLocalization
+				case appScreenshots
+			}
+
+			public init(fieldsAppScreenshotSets: [FieldsAppScreenshotSets]? = nil, fieldsAppScreenshots: [FieldsAppScreenshots]? = nil, include: [Include]? = nil, limitAppScreenshots: Int? = nil) {
 				self.fieldsAppScreenshotSets = fieldsAppScreenshotSets
-				self.include = include
 				self.fieldsAppScreenshots = fieldsAppScreenshots
+				self.include = include
 				self.limitAppScreenshots = limitAppScreenshots
 			}
 
 			public var asQuery: [(String, String?)] {
 				let encoder = URLQueryEncoder(explode: false)
 				encoder.encode(fieldsAppScreenshotSets, forKey: "fields[appScreenshotSets]")
-				encoder.encode(include, forKey: "include")
 				encoder.encode(fieldsAppScreenshots, forKey: "fields[appScreenshots]")
+				encoder.encode(include, forKey: "include")
 				encoder.encode(limitAppScreenshots, forKey: "limit[appScreenshots]")
 				return encoder.items
 			}
 		}
 
 		public var delete: Request<Void> {
-			Request(path: path, method: "DELETE", id: "appScreenshotSets-delete_instance")
+			Request(path: path, method: "DELETE", id: "appScreenshotSets_deleteInstance")
 		}
 	}
 }

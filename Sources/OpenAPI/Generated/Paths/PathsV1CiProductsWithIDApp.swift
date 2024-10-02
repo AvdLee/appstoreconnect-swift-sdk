@@ -14,34 +14,35 @@ extension APIEndpoint.V1.CiProducts.WithID {
 		public let path: String
 
 		public func get(parameters: GetParameters? = nil) -> Request<AppStoreConnect_Swift_SDK.AppResponse> {
-			Request(path: path, method: "GET", query: parameters?.asQuery, id: "ciProducts-app-get_to_one_related")
+			Request(path: path, method: "GET", query: parameters?.asQuery, id: "ciProducts_app_getToOneRelated")
 		}
 
 		public struct GetParameters {
-			public var fieldsBetaAppReviewDetails: [FieldsBetaAppReviewDetails]?
-			public var fieldsGameCenterDetails: [FieldsGameCenterDetails]?
-			public var fieldsCiProducts: [FieldsCiProducts]?
-			public var fieldsReviewSubmissions: [FieldsReviewSubmissions]?
-			public var fieldsBetaGroups: [FieldsBetaGroups]?
-			public var fieldsPromotedPurchases: [FieldsPromotedPurchases]?
 			public var fieldsApps: [FieldsApps]?
-			public var fieldsAppEvents: [FieldsAppEvents]?
+			public var fieldsAppEncryptionDeclarations: [FieldsAppEncryptionDeclarations]?
+			public var fieldsCiProducts: [FieldsCiProducts]?
+			public var fieldsBetaGroups: [FieldsBetaGroups]?
+			public var fieldsAppStoreVersions: [FieldsAppStoreVersions]?
+			public var fieldsPreReleaseVersions: [FieldsPreReleaseVersions]?
+			public var fieldsBetaAppLocalizations: [FieldsBetaAppLocalizations]?
 			public var fieldsBuilds: [FieldsBuilds]?
 			public var fieldsBetaLicenseAgreements: [FieldsBetaLicenseAgreements]?
-			public var fieldsAppClips: [FieldsAppClips]?
-			public var fieldsBetaAppLocalizations: [FieldsBetaAppLocalizations]?
+			public var fieldsBetaAppReviewDetails: [FieldsBetaAppReviewDetails]?
 			public var fieldsAppInfos: [FieldsAppInfos]?
-			public var fieldsPreReleaseVersions: [FieldsPreReleaseVersions]?
+			public var fieldsAppClips: [FieldsAppClips]?
+			public var fieldsEndUserLicenseAgreements: [FieldsEndUserLicenseAgreements]?
+			public var fieldsAppPreOrders: [FieldsAppPreOrders]?
 			public var fieldsInAppPurchases: [FieldsInAppPurchases]?
 			public var fieldsSubscriptionGroups: [FieldsSubscriptionGroups]?
-			public var fieldsAppPreOrders: [FieldsAppPreOrders]?
 			public var fieldsGameCenterEnabledVersions: [FieldsGameCenterEnabledVersions]?
-			public var fieldsAppStoreVersionExperiments: [FieldsAppStoreVersionExperiments]?
-			public var fieldsSubscriptionGracePeriods: [FieldsSubscriptionGracePeriods]?
-			public var fieldsEndUserLicenseAgreements: [FieldsEndUserLicenseAgreements]?
-			public var fieldsAppStoreVersions: [FieldsAppStoreVersions]?
-			public var fieldsAppEncryptionDeclarations: [FieldsAppEncryptionDeclarations]?
 			public var fieldsAppCustomProductPages: [FieldsAppCustomProductPages]?
+			public var fieldsPromotedPurchases: [FieldsPromotedPurchases]?
+			public var fieldsAppEvents: [FieldsAppEvents]?
+			public var fieldsReviewSubmissions: [FieldsReviewSubmissions]?
+			public var fieldsSubscriptionGracePeriods: [FieldsSubscriptionGracePeriods]?
+			public var fieldsGameCenterDetails: [FieldsGameCenterDetails]?
+			public var fieldsAppStoreVersionExperiments: [FieldsAppStoreVersionExperiments]?
+			public var include: [Include]?
 			public var limitAppEncryptionDeclarations: Int?
 			public var limitBetaGroups: Int?
 			public var limitAppStoreVersions: Int?
@@ -59,174 +60,173 @@ extension APIEndpoint.V1.CiProducts.WithID {
 			public var limitAppEvents: Int?
 			public var limitReviewSubmissions: Int?
 			public var limitAppStoreVersionExperimentsV2: Int?
-			public var include: [Include]?
 
-			public enum FieldsBetaAppReviewDetails: String, Codable, CaseIterable {
-				case app
-				case contactEmail
-				case contactFirstName
-				case contactLastName
-				case contactPhone
-				case demoAccountName
-				case demoAccountPassword
-				case demoAccountRequired
-				case notes
+			public enum FieldsApps: String, Codable, CaseIterable {
+				case name
+				case bundleID = "bundleId"
+				case sku
+				case primaryLocale
+				case isOrEverWasMadeForKids
+				case subscriptionStatusURL = "subscriptionStatusUrl"
+				case subscriptionStatusURLVersion = "subscriptionStatusUrlVersion"
+				case subscriptionStatusURLForSandbox = "subscriptionStatusUrlForSandbox"
+				case subscriptionStatusURLVersionForSandbox = "subscriptionStatusUrlVersionForSandbox"
+				case contentRightsDeclaration
+				case streamlinedPurchasingEnabled
+				case appEncryptionDeclarations
+				case ciProduct
+				case betaTesters
+				case betaGroups
+				case appStoreVersions
+				case preReleaseVersions
+				case betaAppLocalizations
+				case builds
+				case betaLicenseAgreement
+				case betaAppReviewDetail
+				case appInfos
+				case appClips
+				case appPricePoints
+				case endUserLicenseAgreement
+				case preOrder
+				case appPriceSchedule
+				case appAvailability
+				case appAvailabilityV2
+				case inAppPurchases
+				case subscriptionGroups
+				case gameCenterEnabledVersions
+				case perfPowerMetrics
+				case appCustomProductPages
+				case inAppPurchasesV2
+				case promotedPurchases
+				case appEvents
+				case reviewSubmissions
+				case subscriptionGracePeriod
+				case customerReviews
+				case gameCenterDetail
+				case appStoreVersionExperimentsV2
+				case alternativeDistributionKey
+				case analyticsReportRequests
+				case marketplaceSearchDetail
 			}
 
-			public enum FieldsGameCenterDetails: String, Codable, CaseIterable {
-				case achievementReleases
+			public enum FieldsAppEncryptionDeclarations: String, Codable, CaseIterable {
+				case appDescription
+				case createdDate
+				case usesEncryption
+				case exempt
+				case containsProprietaryCryptography
+				case containsThirdPartyCryptography
+				case availableOnFrenchStore
+				case platform
+				case uploadedDate
+				case documentURL = "documentUrl"
+				case documentName
+				case documentType
+				case appEncryptionDeclarationState
+				case codeValue
 				case app
-				case arcadeEnabled
-				case challengeEnabled
-				case defaultGroupLeaderboard
-				case defaultLeaderboard
-				case gameCenterAchievements
-				case gameCenterAppVersions
-				case gameCenterGroup
-				case gameCenterLeaderboardSets
-				case gameCenterLeaderboards
-				case leaderboardReleases
-				case leaderboardSetReleases
+				case builds
+				case appEncryptionDeclarationDocument
 			}
 
 			public enum FieldsCiProducts: String, Codable, CaseIterable {
-				case additionalRepositories
-				case app
-				case buildRuns
-				case bundleID = "bundleId"
-				case createdDate
 				case name
-				case primaryRepositories
+				case createdDate
 				case productType
-				case workflows
-			}
-
-			public enum FieldsReviewSubmissions: String, Codable, CaseIterable {
 				case app
-				case appStoreVersionForReview
-				case canceled
-				case items
-				case lastUpdatedByActor
-				case platform
-				case state
-				case submitted
-				case submittedByActor
-				case submittedDate
+				case bundleID = "bundleId"
+				case workflows
+				case primaryRepositories
+				case additionalRepositories
+				case buildRuns
 			}
 
 			public enum FieldsBetaGroups: String, Codable, CaseIterable {
-				case app
-				case betaTesters
-				case builds
-				case createdDate
-				case feedbackEnabled
-				case hasAccessToAllBuilds
-				case iosBuildsAvailableForAppleSiliconMac
-				case isInternalGroup
 				case name
-				case publicLink
+				case createdDate
+				case isInternalGroup
+				case hasAccessToAllBuilds
 				case publicLinkEnabled
 				case publicLinkID = "publicLinkId"
-				case publicLinkLimit
 				case publicLinkLimitEnabled
-			}
-
-			public enum FieldsPromotedPurchases: String, Codable, CaseIterable {
+				case publicLinkLimit
+				case publicLink
+				case feedbackEnabled
+				case iosBuildsAvailableForAppleSiliconMac
 				case app
-				case enabled
-				case inAppPurchaseV2
-				case promotionImages
-				case state
-				case subscription
-				case visibleForAllUsers
-			}
-
-			public enum FieldsApps: String, Codable, CaseIterable {
-				case alternativeDistributionKey
-				case analyticsReportRequests
-				case appAvailability
-				case appClips
-				case appCustomProductPages
-				case appEncryptionDeclarations
-				case appEvents
-				case appInfos
-				case appPricePoints
-				case appPriceSchedule
-				case appStoreVersionExperimentsV2
-				case appStoreVersions
-				case betaAppLocalizations
-				case betaAppReviewDetail
-				case betaGroups
-				case betaLicenseAgreement
-				case betaTesters
 				case builds
-				case bundleID = "bundleId"
-				case ciProduct
-				case contentRightsDeclaration
-				case customerReviews
-				case endUserLicenseAgreement
-				case gameCenterDetail
-				case gameCenterEnabledVersions
-				case inAppPurchases
-				case inAppPurchasesV2
-				case isOrEverWasMadeForKids
-				case marketplaceSearchDetail
-				case name
-				case perfPowerMetrics
-				case preOrder
-				case preReleaseVersions
-				case primaryLocale
-				case promotedPurchases
-				case reviewSubmissions
-				case sku
-				case subscriptionGracePeriod
-				case subscriptionGroups
-				case subscriptionStatusURL = "subscriptionStatusUrl"
-				case subscriptionStatusURLForSandbox = "subscriptionStatusUrlForSandbox"
-				case subscriptionStatusURLVersion = "subscriptionStatusUrlVersion"
-				case subscriptionStatusURLVersionForSandbox = "subscriptionStatusUrlVersionForSandbox"
+				case betaTesters
 			}
 
-			public enum FieldsAppEvents: String, Codable, CaseIterable {
+			public enum FieldsAppStoreVersions: String, Codable, CaseIterable {
+				case platform
+				case versionString
+				case appStoreState
+				case appVersionState
+				case copyright
+				case reviewType
+				case releaseType
+				case earliestReleaseDate
+				case downloadable
+				case createdDate
 				case app
-				case archivedTerritorySchedules
-				case badge
-				case deepLink
-				case eventState
-				case localizations
-				case primaryLocale
-				case priority
-				case purchaseRequirement
-				case purpose
-				case referenceName
-				case territorySchedules
+				case ageRatingDeclaration
+				case appStoreVersionLocalizations
+				case build
+				case appStoreVersionPhasedRelease
+				case gameCenterAppVersion
+				case routingAppCoverage
+				case appStoreReviewDetail
+				case appStoreVersionSubmission
+				case appClipDefaultExperience
+				case appStoreVersionExperiments
+				case appStoreVersionExperimentsV2
+				case customerReviews
+				case alternativeDistributionPackage
+			}
+
+			public enum FieldsPreReleaseVersions: String, Codable, CaseIterable {
+				case version
+				case platform
+				case builds
+				case app
+			}
+
+			public enum FieldsBetaAppLocalizations: String, Codable, CaseIterable {
+				case feedbackEmail
+				case marketingURL = "marketingUrl"
+				case privacyPolicyURL = "privacyPolicyUrl"
+				case tvOsPrivacyPolicy
+				case description
+				case locale
+				case app
 			}
 
 			public enum FieldsBuilds: String, Codable, CaseIterable {
-				case app
-				case appEncryptionDeclaration
-				case appStoreVersion
-				case betaAppReviewSubmission
-				case betaBuildLocalizations
-				case betaGroups
-				case buildAudienceType
-				case buildBetaDetail
-				case buildBundles
-				case computedMinMacOsVersion
-				case diagnosticSignatures
+				case version
+				case uploadedDate
 				case expirationDate
 				case expired
-				case iconAssetToken
-				case icons
-				case individualTesters
-				case lsMinimumSystemVersion
 				case minOsVersion
-				case perfPowerMetrics
-				case preReleaseVersion
+				case lsMinimumSystemVersion
+				case computedMinMacOsVersion
+				case iconAssetToken
 				case processingState
-				case uploadedDate
+				case buildAudienceType
 				case usesNonExemptEncryption
-				case version
+				case preReleaseVersion
+				case individualTesters
+				case betaGroups
+				case betaBuildLocalizations
+				case appEncryptionDeclaration
+				case betaAppReviewSubmission
+				case app
+				case buildBetaDetail
+				case appStoreVersion
+				case icons
+				case buildBundles
+				case perfPowerMetrics
+				case diagnosticSignatures
 			}
 
 			public enum FieldsBetaLicenseAgreements: String, Codable, CaseIterable {
@@ -234,109 +234,43 @@ extension APIEndpoint.V1.CiProducts.WithID {
 				case app
 			}
 
-			public enum FieldsAppClips: String, Codable, CaseIterable {
+			public enum FieldsBetaAppReviewDetails: String, Codable, CaseIterable {
+				case contactFirstName
+				case contactLastName
+				case contactPhone
+				case contactEmail
+				case demoAccountName
+				case demoAccountPassword
+				case demoAccountRequired
+				case notes
 				case app
-				case appClipAdvancedExperiences
-				case appClipDefaultExperiences
-				case bundleID = "bundleId"
-			}
-
-			public enum FieldsBetaAppLocalizations: String, Codable, CaseIterable {
-				case app
-				case description
-				case feedbackEmail
-				case locale
-				case marketingURL = "marketingUrl"
-				case privacyPolicyURL = "privacyPolicyUrl"
-				case tvOsPrivacyPolicy
 			}
 
 			public enum FieldsAppInfos: String, Codable, CaseIterable {
-				case ageRatingDeclaration
-				case app
-				case appInfoLocalizations
-				case appStoreAgeRating
 				case appStoreState
+				case state
+				case appStoreAgeRating
+				case australiaAgeRating
 				case brazilAgeRating
 				case brazilAgeRatingV2
+				case koreaAgeRating
 				case kidsAgeBand
+				case app
+				case ageRatingDeclaration
+				case appInfoLocalizations
 				case primaryCategory
 				case primarySubcategoryOne
 				case primarySubcategoryTwo
 				case secondaryCategory
 				case secondarySubcategoryOne
 				case secondarySubcategoryTwo
-				case state
 			}
 
-			public enum FieldsPreReleaseVersions: String, Codable, CaseIterable {
+			public enum FieldsAppClips: String, Codable, CaseIterable {
+				case bundleID = "bundleId"
 				case app
-				case builds
-				case platform
-				case version
-			}
-
-			public enum FieldsInAppPurchases: String, Codable, CaseIterable {
-				case app
-				case appStoreReviewScreenshot
-				case apps
-				case content
-				case contentHosting
-				case familySharable
-				case iapPriceSchedule
-				case inAppPurchaseAvailability
-				case inAppPurchaseLocalizations
-				case inAppPurchaseType
-				case name
-				case pricePoints
-				case productID = "productId"
-				case promotedPurchase
-				case referenceName
-				case reviewNote
-				case state
-			}
-
-			public enum FieldsSubscriptionGroups: String, Codable, CaseIterable {
-				case app
-				case referenceName
-				case subscriptionGroupLocalizations
-				case subscriptions
-			}
-
-			public enum FieldsAppPreOrders: String, Codable, CaseIterable {
-				case app
-				case appReleaseDate
-				case preOrderAvailableDate
-			}
-
-			public enum FieldsGameCenterEnabledVersions: String, Codable, CaseIterable {
-				case app
-				case compatibleVersions
-				case iconAsset
-				case platform
-				case versionString
-			}
-
-			public enum FieldsAppStoreVersionExperiments: String, Codable, CaseIterable {
-				case app
-				case appStoreVersionExperimentTreatments
-				case controlVersions
-				case endDate
-				case latestControlVersion
-				case name
-				case platform
-				case reviewRequired
-				case startDate
-				case started
-				case state
-				case trafficProportion
-			}
-
-			public enum FieldsSubscriptionGracePeriods: String, Codable, CaseIterable {
-				case duration
-				case optIn
-				case renewalType
-				case sandboxOptIn
+				case appClipDefaultExperiences
+				case appClipAdvancedExperiences
 			}
 
 			public enum FieldsEndUserLicenseAgreements: String, Codable, CaseIterable {
@@ -345,114 +279,187 @@ extension APIEndpoint.V1.CiProducts.WithID {
 				case territories
 			}
 
-			public enum FieldsAppStoreVersions: String, Codable, CaseIterable {
-				case ageRatingDeclaration
-				case alternativeDistributionPackage
+			public enum FieldsAppPreOrders: String, Codable, CaseIterable {
+				case preOrderAvailableDate
+				case appReleaseDate
 				case app
-				case appClipDefaultExperience
-				case appStoreReviewDetail
-				case appStoreState
-				case appStoreVersionExperiments
-				case appStoreVersionExperimentsV2
-				case appStoreVersionLocalizations
-				case appStoreVersionPhasedRelease
-				case appStoreVersionSubmission
-				case appVersionState
-				case build
-				case copyright
-				case createdDate
-				case customerReviews
-				case downloadable
-				case earliestReleaseDate
-				case platform
-				case releaseType
-				case reviewType
-				case routingAppCoverage
-				case versionString
 			}
 
-			public enum FieldsAppEncryptionDeclarations: String, Codable, CaseIterable {
+			public enum FieldsInAppPurchases: String, Codable, CaseIterable {
+				case referenceName
+				case productID = "productId"
+				case inAppPurchaseType
+				case state
+				case apps
+				case name
+				case reviewNote
+				case familySharable
+				case contentHosting
 				case app
-				case appDescription
-				case appEncryptionDeclarationDocument
-				case appEncryptionDeclarationState
-				case availableOnFrenchStore
-				case builds
-				case codeValue
-				case containsProprietaryCryptography
-				case containsThirdPartyCryptography
-				case createdDate
-				case documentName
-				case documentType
-				case documentURL = "documentUrl"
-				case exempt
+				case inAppPurchaseLocalizations
+				case pricePoints
+				case content
+				case appStoreReviewScreenshot
+				case promotedPurchase
+				case iapPriceSchedule
+				case inAppPurchaseAvailability
+				case images
+			}
+
+			public enum FieldsSubscriptionGroups: String, Codable, CaseIterable {
+				case referenceName
+				case app
+				case subscriptions
+				case subscriptionGroupLocalizations
+			}
+
+			public enum FieldsGameCenterEnabledVersions: String, Codable, CaseIterable {
 				case platform
-				case uploadedDate
-				case usesEncryption
+				case versionString
+				case iconAsset
+				case compatibleVersions
+				case app
 			}
 
 			public enum FieldsAppCustomProductPages: String, Codable, CaseIterable {
+				case name
+				case url
+				case visible
 				case app
 				case appCustomProductPageVersions
 				case appStoreVersionTemplate
 				case customProductPageTemplate
+			}
+
+			public enum FieldsPromotedPurchases: String, Codable, CaseIterable {
+				case visibleForAllUsers
+				case enabled
+				case state
+				case app
+				case inAppPurchaseV2
+				case subscription
+				case promotionImages
+			}
+
+			public enum FieldsAppEvents: String, Codable, CaseIterable {
+				case referenceName
+				case badge
+				case eventState
+				case deepLink
+				case purchaseRequirement
+				case primaryLocale
+				case priority
+				case purpose
+				case territorySchedules
+				case archivedTerritorySchedules
+				case app
+				case localizations
+			}
+
+			public enum FieldsReviewSubmissions: String, Codable, CaseIterable {
+				case platform
+				case submittedDate
+				case state
+				case submitted
+				case canceled
+				case app
+				case items
+				case appStoreVersionForReview
+				case submittedByActor
+				case lastUpdatedByActor
+			}
+
+			public enum FieldsSubscriptionGracePeriods: String, Codable, CaseIterable {
+				case optIn
+				case sandboxOptIn
+				case duration
+				case renewalType
+			}
+
+			public enum FieldsGameCenterDetails: String, Codable, CaseIterable {
+				case arcadeEnabled
+				case challengeEnabled
+				case app
+				case gameCenterAppVersions
+				case gameCenterGroup
+				case gameCenterLeaderboards
+				case gameCenterLeaderboardSets
+				case gameCenterAchievements
+				case defaultLeaderboard
+				case defaultGroupLeaderboard
+				case achievementReleases
+				case leaderboardReleases
+				case leaderboardSetReleases
+			}
+
+			public enum FieldsAppStoreVersionExperiments: String, Codable, CaseIterable {
 				case name
-				case url
-				case visible
+				case platform
+				case trafficProportion
+				case state
+				case reviewRequired
+				case startDate
+				case endDate
+				case started
+				case app
+				case latestControlVersion
+				case controlVersions
+				case appStoreVersionExperimentTreatments
 			}
 
 			public enum Include: String, Codable, CaseIterable {
-				case appClips
-				case appCustomProductPages
 				case appEncryptionDeclarations
-				case appEvents
-				case appInfos
-				case appStoreVersionExperimentsV2
-				case appStoreVersions
-				case betaAppLocalizations
-				case betaAppReviewDetail
-				case betaGroups
-				case betaLicenseAgreement
-				case builds
 				case ciProduct
-				case endUserLicenseAgreement
-				case gameCenterDetail
-				case gameCenterEnabledVersions
-				case inAppPurchases
-				case inAppPurchasesV2
-				case preOrder
+				case betaGroups
+				case appStoreVersions
 				case preReleaseVersions
+				case betaAppLocalizations
+				case builds
+				case betaLicenseAgreement
+				case betaAppReviewDetail
+				case appInfos
+				case appClips
+				case endUserLicenseAgreement
+				case preOrder
+				case inAppPurchases
+				case subscriptionGroups
+				case gameCenterEnabledVersions
+				case appCustomProductPages
+				case inAppPurchasesV2
 				case promotedPurchases
+				case appEvents
 				case reviewSubmissions
 				case subscriptionGracePeriod
-				case subscriptionGroups
+				case gameCenterDetail
+				case appStoreVersionExperimentsV2
 			}
 
-			public init(fieldsBetaAppReviewDetails: [FieldsBetaAppReviewDetails]? = nil, fieldsGameCenterDetails: [FieldsGameCenterDetails]? = nil, fieldsCiProducts: [FieldsCiProducts]? = nil, fieldsReviewSubmissions: [FieldsReviewSubmissions]? = nil, fieldsBetaGroups: [FieldsBetaGroups]? = nil, fieldsPromotedPurchases: [FieldsPromotedPurchases]? = nil, fieldsApps: [FieldsApps]? = nil, fieldsAppEvents: [FieldsAppEvents]? = nil, fieldsBuilds: [FieldsBuilds]? = nil, fieldsBetaLicenseAgreements: [FieldsBetaLicenseAgreements]? = nil, fieldsAppClips: [FieldsAppClips]? = nil, fieldsBetaAppLocalizations: [FieldsBetaAppLocalizations]? = nil, fieldsAppInfos: [FieldsAppInfos]? = nil, fieldsPreReleaseVersions: [FieldsPreReleaseVersions]? = nil, fieldsInAppPurchases: [FieldsInAppPurchases]? = nil, fieldsSubscriptionGroups: [FieldsSubscriptionGroups]? = nil, fieldsAppPreOrders: [FieldsAppPreOrders]? = nil, fieldsGameCenterEnabledVersions: [FieldsGameCenterEnabledVersions]? = nil, fieldsAppStoreVersionExperiments: [FieldsAppStoreVersionExperiments]? = nil, fieldsSubscriptionGracePeriods: [FieldsSubscriptionGracePeriods]? = nil, fieldsEndUserLicenseAgreements: [FieldsEndUserLicenseAgreements]? = nil, fieldsAppStoreVersions: [FieldsAppStoreVersions]? = nil, fieldsAppEncryptionDeclarations: [FieldsAppEncryptionDeclarations]? = nil, fieldsAppCustomProductPages: [FieldsAppCustomProductPages]? = nil, limitAppEncryptionDeclarations: Int? = nil, limitBetaGroups: Int? = nil, limitAppStoreVersions: Int? = nil, limitPreReleaseVersions: Int? = nil, limitBetaAppLocalizations: Int? = nil, limitBuilds: Int? = nil, limitAppInfos: Int? = nil, limitAppClips: Int? = nil, limitInAppPurchases: Int? = nil, limitSubscriptionGroups: Int? = nil, limitGameCenterEnabledVersions: Int? = nil, limitAppCustomProductPages: Int? = nil, limitInAppPurchasesV2: Int? = nil, limitPromotedPurchases: Int? = nil, limitAppEvents: Int? = nil, limitReviewSubmissions: Int? = nil, limitAppStoreVersionExperimentsV2: Int? = nil, include: [Include]? = nil) {
-				self.fieldsBetaAppReviewDetails = fieldsBetaAppReviewDetails
-				self.fieldsGameCenterDetails = fieldsGameCenterDetails
-				self.fieldsCiProducts = fieldsCiProducts
-				self.fieldsReviewSubmissions = fieldsReviewSubmissions
-				self.fieldsBetaGroups = fieldsBetaGroups
-				self.fieldsPromotedPurchases = fieldsPromotedPurchases
+			public init(fieldsApps: [FieldsApps]? = nil, fieldsAppEncryptionDeclarations: [FieldsAppEncryptionDeclarations]? = nil, fieldsCiProducts: [FieldsCiProducts]? = nil, fieldsBetaGroups: [FieldsBetaGroups]? = nil, fieldsAppStoreVersions: [FieldsAppStoreVersions]? = nil, fieldsPreReleaseVersions: [FieldsPreReleaseVersions]? = nil, fieldsBetaAppLocalizations: [FieldsBetaAppLocalizations]? = nil, fieldsBuilds: [FieldsBuilds]? = nil, fieldsBetaLicenseAgreements: [FieldsBetaLicenseAgreements]? = nil, fieldsBetaAppReviewDetails: [FieldsBetaAppReviewDetails]? = nil, fieldsAppInfos: [FieldsAppInfos]? = nil, fieldsAppClips: [FieldsAppClips]? = nil, fieldsEndUserLicenseAgreements: [FieldsEndUserLicenseAgreements]? = nil, fieldsAppPreOrders: [FieldsAppPreOrders]? = nil, fieldsInAppPurchases: [FieldsInAppPurchases]? = nil, fieldsSubscriptionGroups: [FieldsSubscriptionGroups]? = nil, fieldsGameCenterEnabledVersions: [FieldsGameCenterEnabledVersions]? = nil, fieldsAppCustomProductPages: [FieldsAppCustomProductPages]? = nil, fieldsPromotedPurchases: [FieldsPromotedPurchases]? = nil, fieldsAppEvents: [FieldsAppEvents]? = nil, fieldsReviewSubmissions: [FieldsReviewSubmissions]? = nil, fieldsSubscriptionGracePeriods: [FieldsSubscriptionGracePeriods]? = nil, fieldsGameCenterDetails: [FieldsGameCenterDetails]? = nil, fieldsAppStoreVersionExperiments: [FieldsAppStoreVersionExperiments]? = nil, include: [Include]? = nil, limitAppEncryptionDeclarations: Int? = nil, limitBetaGroups: Int? = nil, limitAppStoreVersions: Int? = nil, limitPreReleaseVersions: Int? = nil, limitBetaAppLocalizations: Int? = nil, limitBuilds: Int? = nil, limitAppInfos: Int? = nil, limitAppClips: Int? = nil, limitInAppPurchases: Int? = nil, limitSubscriptionGroups: Int? = nil, limitGameCenterEnabledVersions: Int? = nil, limitAppCustomProductPages: Int? = nil, limitInAppPurchasesV2: Int? = nil, limitPromotedPurchases: Int? = nil, limitAppEvents: Int? = nil, limitReviewSubmissions: Int? = nil, limitAppStoreVersionExperimentsV2: Int? = nil) {
 				self.fieldsApps = fieldsApps
-				self.fieldsAppEvents = fieldsAppEvents
+				self.fieldsAppEncryptionDeclarations = fieldsAppEncryptionDeclarations
+				self.fieldsCiProducts = fieldsCiProducts
+				self.fieldsBetaGroups = fieldsBetaGroups
+				self.fieldsAppStoreVersions = fieldsAppStoreVersions
+				self.fieldsPreReleaseVersions = fieldsPreReleaseVersions
+				self.fieldsBetaAppLocalizations = fieldsBetaAppLocalizations
 				self.fieldsBuilds = fieldsBuilds
 				self.fieldsBetaLicenseAgreements = fieldsBetaLicenseAgreements
-				self.fieldsAppClips = fieldsAppClips
-				self.fieldsBetaAppLocalizations = fieldsBetaAppLocalizations
+				self.fieldsBetaAppReviewDetails = fieldsBetaAppReviewDetails
 				self.fieldsAppInfos = fieldsAppInfos
-				self.fieldsPreReleaseVersions = fieldsPreReleaseVersions
+				self.fieldsAppClips = fieldsAppClips
+				self.fieldsEndUserLicenseAgreements = fieldsEndUserLicenseAgreements
+				self.fieldsAppPreOrders = fieldsAppPreOrders
 				self.fieldsInAppPurchases = fieldsInAppPurchases
 				self.fieldsSubscriptionGroups = fieldsSubscriptionGroups
-				self.fieldsAppPreOrders = fieldsAppPreOrders
 				self.fieldsGameCenterEnabledVersions = fieldsGameCenterEnabledVersions
-				self.fieldsAppStoreVersionExperiments = fieldsAppStoreVersionExperiments
-				self.fieldsSubscriptionGracePeriods = fieldsSubscriptionGracePeriods
-				self.fieldsEndUserLicenseAgreements = fieldsEndUserLicenseAgreements
-				self.fieldsAppStoreVersions = fieldsAppStoreVersions
-				self.fieldsAppEncryptionDeclarations = fieldsAppEncryptionDeclarations
 				self.fieldsAppCustomProductPages = fieldsAppCustomProductPages
+				self.fieldsPromotedPurchases = fieldsPromotedPurchases
+				self.fieldsAppEvents = fieldsAppEvents
+				self.fieldsReviewSubmissions = fieldsReviewSubmissions
+				self.fieldsSubscriptionGracePeriods = fieldsSubscriptionGracePeriods
+				self.fieldsGameCenterDetails = fieldsGameCenterDetails
+				self.fieldsAppStoreVersionExperiments = fieldsAppStoreVersionExperiments
+				self.include = include
 				self.limitAppEncryptionDeclarations = limitAppEncryptionDeclarations
 				self.limitBetaGroups = limitBetaGroups
 				self.limitAppStoreVersions = limitAppStoreVersions
@@ -470,35 +477,35 @@ extension APIEndpoint.V1.CiProducts.WithID {
 				self.limitAppEvents = limitAppEvents
 				self.limitReviewSubmissions = limitReviewSubmissions
 				self.limitAppStoreVersionExperimentsV2 = limitAppStoreVersionExperimentsV2
-				self.include = include
 			}
 
 			public var asQuery: [(String, String?)] {
 				let encoder = URLQueryEncoder(explode: false)
-				encoder.encode(fieldsBetaAppReviewDetails, forKey: "fields[betaAppReviewDetails]")
-				encoder.encode(fieldsGameCenterDetails, forKey: "fields[gameCenterDetails]")
-				encoder.encode(fieldsCiProducts, forKey: "fields[ciProducts]")
-				encoder.encode(fieldsReviewSubmissions, forKey: "fields[reviewSubmissions]")
-				encoder.encode(fieldsBetaGroups, forKey: "fields[betaGroups]")
-				encoder.encode(fieldsPromotedPurchases, forKey: "fields[promotedPurchases]")
 				encoder.encode(fieldsApps, forKey: "fields[apps]")
-				encoder.encode(fieldsAppEvents, forKey: "fields[appEvents]")
+				encoder.encode(fieldsAppEncryptionDeclarations, forKey: "fields[appEncryptionDeclarations]")
+				encoder.encode(fieldsCiProducts, forKey: "fields[ciProducts]")
+				encoder.encode(fieldsBetaGroups, forKey: "fields[betaGroups]")
+				encoder.encode(fieldsAppStoreVersions, forKey: "fields[appStoreVersions]")
+				encoder.encode(fieldsPreReleaseVersions, forKey: "fields[preReleaseVersions]")
+				encoder.encode(fieldsBetaAppLocalizations, forKey: "fields[betaAppLocalizations]")
 				encoder.encode(fieldsBuilds, forKey: "fields[builds]")
 				encoder.encode(fieldsBetaLicenseAgreements, forKey: "fields[betaLicenseAgreements]")
-				encoder.encode(fieldsAppClips, forKey: "fields[appClips]")
-				encoder.encode(fieldsBetaAppLocalizations, forKey: "fields[betaAppLocalizations]")
+				encoder.encode(fieldsBetaAppReviewDetails, forKey: "fields[betaAppReviewDetails]")
 				encoder.encode(fieldsAppInfos, forKey: "fields[appInfos]")
-				encoder.encode(fieldsPreReleaseVersions, forKey: "fields[preReleaseVersions]")
+				encoder.encode(fieldsAppClips, forKey: "fields[appClips]")
+				encoder.encode(fieldsEndUserLicenseAgreements, forKey: "fields[endUserLicenseAgreements]")
+				encoder.encode(fieldsAppPreOrders, forKey: "fields[appPreOrders]")
 				encoder.encode(fieldsInAppPurchases, forKey: "fields[inAppPurchases]")
 				encoder.encode(fieldsSubscriptionGroups, forKey: "fields[subscriptionGroups]")
-				encoder.encode(fieldsAppPreOrders, forKey: "fields[appPreOrders]")
 				encoder.encode(fieldsGameCenterEnabledVersions, forKey: "fields[gameCenterEnabledVersions]")
-				encoder.encode(fieldsAppStoreVersionExperiments, forKey: "fields[appStoreVersionExperiments]")
-				encoder.encode(fieldsSubscriptionGracePeriods, forKey: "fields[subscriptionGracePeriods]")
-				encoder.encode(fieldsEndUserLicenseAgreements, forKey: "fields[endUserLicenseAgreements]")
-				encoder.encode(fieldsAppStoreVersions, forKey: "fields[appStoreVersions]")
-				encoder.encode(fieldsAppEncryptionDeclarations, forKey: "fields[appEncryptionDeclarations]")
 				encoder.encode(fieldsAppCustomProductPages, forKey: "fields[appCustomProductPages]")
+				encoder.encode(fieldsPromotedPurchases, forKey: "fields[promotedPurchases]")
+				encoder.encode(fieldsAppEvents, forKey: "fields[appEvents]")
+				encoder.encode(fieldsReviewSubmissions, forKey: "fields[reviewSubmissions]")
+				encoder.encode(fieldsSubscriptionGracePeriods, forKey: "fields[subscriptionGracePeriods]")
+				encoder.encode(fieldsGameCenterDetails, forKey: "fields[gameCenterDetails]")
+				encoder.encode(fieldsAppStoreVersionExperiments, forKey: "fields[appStoreVersionExperiments]")
+				encoder.encode(include, forKey: "include")
 				encoder.encode(limitAppEncryptionDeclarations, forKey: "limit[appEncryptionDeclarations]")
 				encoder.encode(limitBetaGroups, forKey: "limit[betaGroups]")
 				encoder.encode(limitAppStoreVersions, forKey: "limit[appStoreVersions]")
@@ -516,7 +523,6 @@ extension APIEndpoint.V1.CiProducts.WithID {
 				encoder.encode(limitAppEvents, forKey: "limit[appEvents]")
 				encoder.encode(limitReviewSubmissions, forKey: "limit[reviewSubmissions]")
 				encoder.encode(limitAppStoreVersionExperimentsV2, forKey: "limit[appStoreVersionExperimentsV2]")
-				encoder.encode(include, forKey: "include")
 				return encoder.items
 			}
 		}

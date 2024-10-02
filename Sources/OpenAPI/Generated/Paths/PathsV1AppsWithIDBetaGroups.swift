@@ -14,7 +14,7 @@ extension APIEndpoint.V1.Apps.WithID {
 		public let path: String
 
 		public func get(fieldsBetaGroups: [FieldsBetaGroups]? = nil, limit: Int? = nil) -> Request<AppStoreConnect_Swift_SDK.BetaGroupsWithoutIncludesResponse> {
-			Request(path: path, method: "GET", query: makeGetQuery(fieldsBetaGroups, limit), id: "apps-betaGroups-get_to_many_related")
+			Request(path: path, method: "GET", query: makeGetQuery(fieldsBetaGroups, limit), id: "apps_betaGroups_getToManyRelated")
 		}
 
 		private func makeGetQuery(_ fieldsBetaGroups: [FieldsBetaGroups]?, _ limit: Int?) -> [(String, String?)] {
@@ -25,20 +25,20 @@ extension APIEndpoint.V1.Apps.WithID {
 		}
 
 		public enum FieldsBetaGroups: String, Codable, CaseIterable {
-			case app
-			case betaTesters
-			case builds
-			case createdDate
-			case feedbackEnabled
-			case hasAccessToAllBuilds
-			case iosBuildsAvailableForAppleSiliconMac
-			case isInternalGroup
 			case name
-			case publicLink
+			case createdDate
+			case isInternalGroup
+			case hasAccessToAllBuilds
 			case publicLinkEnabled
 			case publicLinkID = "publicLinkId"
-			case publicLinkLimit
 			case publicLinkLimitEnabled
+			case publicLinkLimit
+			case publicLink
+			case feedbackEnabled
+			case iosBuildsAvailableForAppleSiliconMac
+			case app
+			case builds
+			case betaTesters
 		}
 	}
 }

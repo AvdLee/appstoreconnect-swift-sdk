@@ -14,7 +14,7 @@ extension APIEndpoint.V1.AppClipAdvancedExperiences {
 		public let path: String
 
 		public func get(parameters: GetParameters? = nil) -> Request<AppStoreConnect_Swift_SDK.AppClipAdvancedExperienceResponse> {
-			Request(path: path, method: "GET", query: parameters?.asQuery, id: "appClipAdvancedExperiences-get_instance")
+			Request(path: path, method: "GET", query: parameters?.asQuery, id: "appClipAdvancedExperiences_getInstance")
 		}
 
 		public struct GetParameters {
@@ -23,19 +23,19 @@ extension APIEndpoint.V1.AppClipAdvancedExperiences {
 			public var limitLocalizations: Int?
 
 			public enum FieldsAppClipAdvancedExperiences: String, Codable, CaseIterable {
-				case action
-				case appClip
-				case businessCategory
-				case defaultLanguage
-				case headerImage
-				case isPoweredBy
 				case link
-				case localizations
+				case version
+				case status
+				case action
+				case isPoweredBy
 				case place
 				case placeStatus
+				case businessCategory
+				case defaultLanguage
 				case removed
-				case status
-				case version
+				case appClip
+				case headerImage
+				case localizations
 			}
 
 			public enum Include: String, Codable, CaseIterable {
@@ -60,7 +60,7 @@ extension APIEndpoint.V1.AppClipAdvancedExperiences {
 		}
 
 		public func patch(_ body: AppStoreConnect_Swift_SDK.AppClipAdvancedExperienceUpdateRequest) -> Request<AppStoreConnect_Swift_SDK.AppClipAdvancedExperienceResponse> {
-			Request(path: path, method: "PATCH", body: body, id: "appClipAdvancedExperiences-update_instance")
+			Request(path: path, method: "PATCH", body: body, id: "appClipAdvancedExperiences_updateInstance")
 		}
 	}
 }

@@ -14,7 +14,7 @@ extension APIEndpoint.V1.GameCenterAchievementImages {
 		public let path: String
 
 		public func get(fieldsGameCenterAchievementImages: [FieldsGameCenterAchievementImages]? = nil, include: [Include]? = nil) -> Request<AppStoreConnect_Swift_SDK.GameCenterAchievementImageResponse> {
-			Request(path: path, method: "GET", query: makeGetQuery(fieldsGameCenterAchievementImages, include), id: "gameCenterAchievementImages-get_instance")
+			Request(path: path, method: "GET", query: makeGetQuery(fieldsGameCenterAchievementImages, include), id: "gameCenterAchievementImages_getInstance")
 		}
 
 		private func makeGetQuery(_ fieldsGameCenterAchievementImages: [FieldsGameCenterAchievementImages]?, _ include: [Include]?) -> [(String, String?)] {
@@ -25,13 +25,13 @@ extension APIEndpoint.V1.GameCenterAchievementImages {
 		}
 
 		public enum FieldsGameCenterAchievementImages: String, Codable, CaseIterable {
-			case assetDeliveryState
-			case fileName
 			case fileSize
-			case gameCenterAchievementLocalization
+			case fileName
 			case imageAsset
 			case uploadOperations
+			case assetDeliveryState
 			case uploaded
+			case gameCenterAchievementLocalization
 		}
 
 		public enum Include: String, Codable, CaseIterable {
@@ -39,11 +39,11 @@ extension APIEndpoint.V1.GameCenterAchievementImages {
 		}
 
 		public func patch(_ body: AppStoreConnect_Swift_SDK.GameCenterAchievementImageUpdateRequest) -> Request<AppStoreConnect_Swift_SDK.GameCenterAchievementImageResponse> {
-			Request(path: path, method: "PATCH", body: body, id: "gameCenterAchievementImages-update_instance")
+			Request(path: path, method: "PATCH", body: body, id: "gameCenterAchievementImages_updateInstance")
 		}
 
 		public var delete: Request<Void> {
-			Request(path: path, method: "DELETE", id: "gameCenterAchievementImages-delete_instance")
+			Request(path: path, method: "DELETE", id: "gameCenterAchievementImages_deleteInstance")
 		}
 	}
 }

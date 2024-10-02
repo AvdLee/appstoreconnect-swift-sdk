@@ -14,7 +14,7 @@ extension APIEndpoint.V1.AppCategories.WithID {
 		public let path: String
 
 		public func get(fieldsAppCategories: [FieldsAppCategories]? = nil) -> Request<AppStoreConnect_Swift_SDK.AppCategoryWithoutIncludesResponse> {
-			Request(path: path, method: "GET", query: makeGetQuery(fieldsAppCategories), id: "appCategories-parent-get_to_one_related")
+			Request(path: path, method: "GET", query: makeGetQuery(fieldsAppCategories), id: "appCategories_parent_getToOneRelated")
 		}
 
 		private func makeGetQuery(_ fieldsAppCategories: [FieldsAppCategories]?) -> [(String, String?)] {
@@ -24,9 +24,9 @@ extension APIEndpoint.V1.AppCategories.WithID {
 		}
 
 		public enum FieldsAppCategories: String, Codable, CaseIterable {
-			case parent
 			case platforms
 			case subcategories
+			case parent
 		}
 	}
 }

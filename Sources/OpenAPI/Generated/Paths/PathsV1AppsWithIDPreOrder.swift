@@ -15,7 +15,7 @@ extension APIEndpoint.V1.Apps.WithID {
 
 		@available(*, deprecated, message: "Deprecated")
 		public func get(fieldsAppPreOrders: [FieldsAppPreOrders]? = nil) -> Request<AppStoreConnect_Swift_SDK.AppPreOrderWithoutIncludesResponse> {
-			Request(path: path, method: "GET", query: makeGetQuery(fieldsAppPreOrders), id: "apps-preOrder-get_to_one_related")
+			Request(path: path, method: "GET", query: makeGetQuery(fieldsAppPreOrders), id: "apps_preOrder_getToOneRelated")
 		}
 
 		private func makeGetQuery(_ fieldsAppPreOrders: [FieldsAppPreOrders]?) -> [(String, String?)] {
@@ -25,9 +25,9 @@ extension APIEndpoint.V1.Apps.WithID {
 		}
 
 		public enum FieldsAppPreOrders: String, Codable, CaseIterable {
-			case app
-			case appReleaseDate
 			case preOrderAvailableDate
+			case appReleaseDate
+			case app
 		}
 	}
 }

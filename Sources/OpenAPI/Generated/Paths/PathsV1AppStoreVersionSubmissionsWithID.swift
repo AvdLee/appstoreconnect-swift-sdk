@@ -15,7 +15,7 @@ extension APIEndpoint.V1.AppStoreVersionSubmissions {
 
 		@available(*, deprecated, message: "Deprecated")
 		public var delete: Request<Void> {
-			Request(path: path, method: "DELETE", id: "appStoreVersionSubmissions-delete_instance")
+			Request(path: path, method: "DELETE", id: "appStoreVersionSubmissions_deleteInstance")
 		}
 	}
 }

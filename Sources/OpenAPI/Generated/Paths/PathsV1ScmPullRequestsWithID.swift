@@ -14,7 +14,7 @@ extension APIEndpoint.V1.ScmPullRequests {
 		public let path: String
 
 		public func get(fieldsScmPullRequests: [FieldsScmPullRequests]? = nil, include: [Include]? = nil) -> Request<AppStoreConnect_Swift_SDK.ScmPullRequestResponse> {
-			Request(path: path, method: "GET", query: makeGetQuery(fieldsScmPullRequests, include), id: "scmPullRequests-get_instance")
+			Request(path: path, method: "GET", query: makeGetQuery(fieldsScmPullRequests, include), id: "scmPullRequests_getInstance")
 		}
 
 		private func makeGetQuery(_ fieldsScmPullRequests: [FieldsScmPullRequests]?, _ include: [Include]?) -> [(String, String?)] {
@@ -25,18 +25,18 @@ extension APIEndpoint.V1.ScmPullRequests {
 		}
 
 		public enum FieldsScmPullRequests: String, Codable, CaseIterable {
-			case destinationBranchName
-			case destinationRepositoryName
+			case title
+			case number
+			case webURL = "webUrl"
+			case sourceRepositoryOwner
+			case sourceRepositoryName
+			case sourceBranchName
 			case destinationRepositoryOwner
+			case destinationRepositoryName
+			case destinationBranchName
 			case isClosed
 			case isCrossRepository
-			case number
 			case repository
-			case sourceBranchName
-			case sourceRepositoryName
-			case sourceRepositoryOwner
-			case title
-			case webURL = "webUrl"
 		}
 
 		public enum Include: String, Codable, CaseIterable {

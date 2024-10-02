@@ -54,30 +54,7 @@ public struct SubscriptionIntroductoryOffer: Codable, Identifiable {
 		public var subscriptionPricePoint: SubscriptionPricePoint?
 
 		public struct Subscription: Codable {
-			public var links: Links?
 			public var data: Data?
-
-			public struct Links: Codable {
-				public var this: String?
-				public var related: String?
-
-				public init(this: String? = nil, related: String? = nil) {
-					self.this = this
-					self.related = related
-				}
-
-				public init(from decoder: Decoder) throws {
-					let values = try decoder.container(keyedBy: StringCodingKey.self)
-					self.this = try values.decodeIfPresent(String.self, forKey: "self")
-					self.related = try values.decodeIfPresent(String.self, forKey: "related")
-				}
-
-				public func encode(to encoder: Encoder) throws {
-					var values = encoder.container(keyedBy: StringCodingKey.self)
-					try values.encodeIfPresent(this, forKey: "self")
-					try values.encodeIfPresent(related, forKey: "related")
-				}
-			}
 
 			public struct Data: Codable, Identifiable {
 				public var type: `Type`
@@ -105,49 +82,23 @@ public struct SubscriptionIntroductoryOffer: Codable, Identifiable {
 				}
 			}
 
-			public init(links: Links? = nil, data: Data? = nil) {
-				self.links = links
+			public init(data: Data? = nil) {
 				self.data = data
 			}
 
 			public init(from decoder: Decoder) throws {
 				let values = try decoder.container(keyedBy: StringCodingKey.self)
-				self.links = try values.decodeIfPresent(Links.self, forKey: "links")
 				self.data = try values.decodeIfPresent(Data.self, forKey: "data")
 			}
 
 			public func encode(to encoder: Encoder) throws {
 				var values = encoder.container(keyedBy: StringCodingKey.self)
-				try values.encodeIfPresent(links, forKey: "links")
 				try values.encodeIfPresent(data, forKey: "data")
 			}
 		}
 
 		public struct Territory: Codable {
-			public var links: Links?
 			public var data: Data?
-
-			public struct Links: Codable {
-				public var this: String?
-				public var related: String?
-
-				public init(this: String? = nil, related: String? = nil) {
-					self.this = this
-					self.related = related
-				}
-
-				public init(from decoder: Decoder) throws {
-					let values = try decoder.container(keyedBy: StringCodingKey.self)
-					self.this = try values.decodeIfPresent(String.self, forKey: "self")
-					self.related = try values.decodeIfPresent(String.self, forKey: "related")
-				}
-
-				public func encode(to encoder: Encoder) throws {
-					var values = encoder.container(keyedBy: StringCodingKey.self)
-					try values.encodeIfPresent(this, forKey: "self")
-					try values.encodeIfPresent(related, forKey: "related")
-				}
-			}
 
 			public struct Data: Codable, Identifiable {
 				public var type: `Type`
@@ -175,49 +126,23 @@ public struct SubscriptionIntroductoryOffer: Codable, Identifiable {
 				}
 			}
 
-			public init(links: Links? = nil, data: Data? = nil) {
-				self.links = links
+			public init(data: Data? = nil) {
 				self.data = data
 			}
 
 			public init(from decoder: Decoder) throws {
 				let values = try decoder.container(keyedBy: StringCodingKey.self)
-				self.links = try values.decodeIfPresent(Links.self, forKey: "links")
 				self.data = try values.decodeIfPresent(Data.self, forKey: "data")
 			}
 
 			public func encode(to encoder: Encoder) throws {
 				var values = encoder.container(keyedBy: StringCodingKey.self)
-				try values.encodeIfPresent(links, forKey: "links")
 				try values.encodeIfPresent(data, forKey: "data")
 			}
 		}
 
 		public struct SubscriptionPricePoint: Codable {
-			public var links: Links?
 			public var data: Data?
-
-			public struct Links: Codable {
-				public var this: String?
-				public var related: String?
-
-				public init(this: String? = nil, related: String? = nil) {
-					self.this = this
-					self.related = related
-				}
-
-				public init(from decoder: Decoder) throws {
-					let values = try decoder.container(keyedBy: StringCodingKey.self)
-					self.this = try values.decodeIfPresent(String.self, forKey: "self")
-					self.related = try values.decodeIfPresent(String.self, forKey: "related")
-				}
-
-				public func encode(to encoder: Encoder) throws {
-					var values = encoder.container(keyedBy: StringCodingKey.self)
-					try values.encodeIfPresent(this, forKey: "self")
-					try values.encodeIfPresent(related, forKey: "related")
-				}
-			}
 
 			public struct Data: Codable, Identifiable {
 				public var type: `Type`
@@ -245,20 +170,17 @@ public struct SubscriptionIntroductoryOffer: Codable, Identifiable {
 				}
 			}
 
-			public init(links: Links? = nil, data: Data? = nil) {
-				self.links = links
+			public init(data: Data? = nil) {
 				self.data = data
 			}
 
 			public init(from decoder: Decoder) throws {
 				let values = try decoder.container(keyedBy: StringCodingKey.self)
-				self.links = try values.decodeIfPresent(Links.self, forKey: "links")
 				self.data = try values.decodeIfPresent(Data.self, forKey: "data")
 			}
 
 			public func encode(to encoder: Encoder) throws {
 				var values = encoder.container(keyedBy: StringCodingKey.self)
-				try values.encodeIfPresent(links, forKey: "links")
 				try values.encodeIfPresent(data, forKey: "data")
 			}
 		}

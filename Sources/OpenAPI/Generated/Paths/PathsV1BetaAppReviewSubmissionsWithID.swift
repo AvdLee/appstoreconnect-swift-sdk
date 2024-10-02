@@ -14,62 +14,62 @@ extension APIEndpoint.V1.BetaAppReviewSubmissions {
 		public let path: String
 
 		public func get(parameters: GetParameters? = nil) -> Request<AppStoreConnect_Swift_SDK.BetaAppReviewSubmissionResponse> {
-			Request(path: path, method: "GET", query: parameters?.asQuery, id: "betaAppReviewSubmissions-get_instance")
+			Request(path: path, method: "GET", query: parameters?.asQuery, id: "betaAppReviewSubmissions_getInstance")
 		}
 
 		public struct GetParameters {
 			public var fieldsBetaAppReviewSubmissions: [FieldsBetaAppReviewSubmissions]?
-			public var include: [Include]?
 			public var fieldsBuilds: [FieldsBuilds]?
+			public var include: [Include]?
 
 			public enum FieldsBetaAppReviewSubmissions: String, Codable, CaseIterable {
 				case betaReviewState
-				case build
 				case submittedDate
+				case build
+			}
+
+			public enum FieldsBuilds: String, Codable, CaseIterable {
+				case version
+				case uploadedDate
+				case expirationDate
+				case expired
+				case minOsVersion
+				case lsMinimumSystemVersion
+				case computedMinMacOsVersion
+				case iconAssetToken
+				case processingState
+				case buildAudienceType
+				case usesNonExemptEncryption
+				case preReleaseVersion
+				case individualTesters
+				case betaGroups
+				case betaBuildLocalizations
+				case appEncryptionDeclaration
+				case betaAppReviewSubmission
+				case app
+				case buildBetaDetail
+				case appStoreVersion
+				case icons
+				case buildBundles
+				case perfPowerMetrics
+				case diagnosticSignatures
 			}
 
 			public enum Include: String, Codable, CaseIterable {
 				case build
 			}
 
-			public enum FieldsBuilds: String, Codable, CaseIterable {
-				case app
-				case appEncryptionDeclaration
-				case appStoreVersion
-				case betaAppReviewSubmission
-				case betaBuildLocalizations
-				case betaGroups
-				case buildAudienceType
-				case buildBetaDetail
-				case buildBundles
-				case computedMinMacOsVersion
-				case diagnosticSignatures
-				case expirationDate
-				case expired
-				case iconAssetToken
-				case icons
-				case individualTesters
-				case lsMinimumSystemVersion
-				case minOsVersion
-				case perfPowerMetrics
-				case preReleaseVersion
-				case processingState
-				case uploadedDate
-				case usesNonExemptEncryption
-				case version
-			}
-
-			public init(fieldsBetaAppReviewSubmissions: [FieldsBetaAppReviewSubmissions]? = nil, include: [Include]? = nil, fieldsBuilds: [FieldsBuilds]? = nil) {
+			public init(fieldsBetaAppReviewSubmissions: [FieldsBetaAppReviewSubmissions]? = nil, fieldsBuilds: [FieldsBuilds]? = nil, include: [Include]? = nil) {
 				self.fieldsBetaAppReviewSubmissions = fieldsBetaAppReviewSubmissions
-				self.include = include
 				self.fieldsBuilds = fieldsBuilds
+				self.include = include
 			}
 
 			public var asQuery: [(String, String?)] {
 				let encoder = URLQueryEncoder(explode: false)
 				encoder.encode(fieldsBetaAppReviewSubmissions, forKey: "fields[betaAppReviewSubmissions]")
-				encoder.encode(include, forKey: "include")
 				encoder.encode(fieldsBuilds, forKey: "fields[builds]")
+				encoder.encode(include, forKey: "include")
 				return encoder.items
 			}
 		}

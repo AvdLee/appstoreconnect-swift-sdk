@@ -14,7 +14,7 @@ extension APIEndpoint.V1.Builds.WithID {
 		public let path: String
 
 		public func get(fieldsBuildIcons: [FieldsBuildIcons]? = nil, limit: Int? = nil) -> Request<AppStoreConnect_Swift_SDK.BuildIconsWithoutIncludesResponse> {
-			Request(path: path, method: "GET", query: makeGetQuery(fieldsBuildIcons, limit), id: "builds-icons-get_to_many_related")
+			Request(path: path, method: "GET", query: makeGetQuery(fieldsBuildIcons, limit), id: "builds_icons_getToManyRelated")
 		}
 
 		private func makeGetQuery(_ fieldsBuildIcons: [FieldsBuildIcons]?, _ limit: Int?) -> [(String, String?)] {
@@ -25,9 +25,9 @@ extension APIEndpoint.V1.Builds.WithID {
 		}
 
 		public enum FieldsBuildIcons: String, Codable, CaseIterable {
+			case name
 			case iconAsset
 			case iconType
-			case name
 		}
 	}
 }

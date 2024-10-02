@@ -14,58 +14,58 @@ extension APIEndpoint.V1.SubscriptionPromotionalOffers {
 		public let path: String
 
 		public func get(parameters: GetParameters? = nil) -> Request<AppStoreConnect_Swift_SDK.SubscriptionPromotionalOfferResponse> {
-			Request(path: path, method: "GET", query: parameters?.asQuery, id: "subscriptionPromotionalOffers-get_instance")
+			Request(path: path, method: "GET", query: parameters?.asQuery, id: "subscriptionPromotionalOffers_getInstance")
 		}
 
 		public struct GetParameters {
 			public var fieldsSubscriptionPromotionalOffers: [FieldsSubscriptionPromotionalOffers]?
-			public var include: [Include]?
 			public var fieldsSubscriptionPromotionalOfferPrices: [FieldsSubscriptionPromotionalOfferPrices]?
+			public var include: [Include]?
 			public var limitPrices: Int?
 
 			public enum FieldsSubscriptionPromotionalOffers: String, Codable, CaseIterable {
-				case duration
 				case name
-				case numberOfPeriods
 				case offerCode
+				case duration
 				case offerMode
-				case prices
+				case numberOfPeriods
 				case subscription
-			}
-
-			public enum Include: String, Codable, CaseIterable {
 				case prices
-				case subscription
 			}
 
 			public enum FieldsSubscriptionPromotionalOfferPrices: String, Codable, CaseIterable {
-				case subscriptionPricePoint
 				case territory
+				case subscriptionPricePoint
 			}
 
-			public init(fieldsSubscriptionPromotionalOffers: [FieldsSubscriptionPromotionalOffers]? = nil, include: [Include]? = nil, fieldsSubscriptionPromotionalOfferPrices: [FieldsSubscriptionPromotionalOfferPrices]? = nil, limitPrices: Int? = nil) {
+			public enum Include: String, Codable, CaseIterable {
+				case subscription
+				case prices
+			}
+
+			public init(fieldsSubscriptionPromotionalOffers: [FieldsSubscriptionPromotionalOffers]? = nil, fieldsSubscriptionPromotionalOfferPrices: [FieldsSubscriptionPromotionalOfferPrices]? = nil, include: [Include]? = nil, limitPrices: Int? = nil) {
 				self.fieldsSubscriptionPromotionalOffers = fieldsSubscriptionPromotionalOffers
-				self.include = include
 				self.fieldsSubscriptionPromotionalOfferPrices = fieldsSubscriptionPromotionalOfferPrices
+				self.include = include
 				self.limitPrices = limitPrices
 			}
 
 			public var asQuery: [(String, String?)] {
 				let encoder = URLQueryEncoder(explode: false)
 				encoder.encode(fieldsSubscriptionPromotionalOffers, forKey: "fields[subscriptionPromotionalOffers]")
-				encoder.encode(include, forKey: "include")
 				encoder.encode(fieldsSubscriptionPromotionalOfferPrices, forKey: "fields[subscriptionPromotionalOfferPrices]")
+				encoder.encode(include, forKey: "include")
 				encoder.encode(limitPrices, forKey: "limit[prices]")
 				return encoder.items
 			}
 		}
 
 		public func patch(_ body: AppStoreConnect_Swift_SDK.SubscriptionPromotionalOfferUpdateRequest) -> Request<AppStoreConnect_Swift_SDK.SubscriptionPromotionalOfferResponse> {
-			Request(path: path, method: "PATCH", body: body, id: "subscriptionPromotionalOffers-update_instance")
+			Request(path: path, method: "PATCH", body: body, id: "subscriptionPromotionalOffers_updateInstance")
 		}
 
 		public var delete: Request<Void> {
-			Request(path: path, method: "DELETE", id: "subscriptionPromotionalOffers-delete_instance")
+			Request(path: path, method: "DELETE", id: "subscriptionPromotionalOffers_deleteInstance")
 		}
 	}
 }

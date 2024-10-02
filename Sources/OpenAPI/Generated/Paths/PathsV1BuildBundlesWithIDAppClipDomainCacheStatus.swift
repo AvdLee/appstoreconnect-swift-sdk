@@ -14,7 +14,7 @@ extension APIEndpoint.V1.BuildBundles.WithID {
 		public let path: String
 
 		public func get(fieldsAppClipDomainStatuses: [FieldsAppClipDomainStatuses]? = nil) -> Request<AppStoreConnect_Swift_SDK.AppClipDomainStatusResponse> {
-			Request(path: path, method: "GET", query: makeGetQuery(fieldsAppClipDomainStatuses), id: "buildBundles-appClipDomainCacheStatus-get_to_one_related")
+			Request(path: path, method: "GET", query: makeGetQuery(fieldsAppClipDomainStatuses), id: "buildBundles_appClipDomainCacheStatus_getToOneRelated")
 		}
 
 		private func makeGetQuery(_ fieldsAppClipDomainStatuses: [FieldsAppClipDomainStatuses]?) -> [(String, String?)] {

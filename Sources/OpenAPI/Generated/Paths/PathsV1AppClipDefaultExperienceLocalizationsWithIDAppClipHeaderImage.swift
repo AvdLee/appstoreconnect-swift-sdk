@@ -14,7 +14,7 @@ extension APIEndpoint.V1.AppClipDefaultExperienceLocalizations.WithID {
 		public let path: String
 
 		public func get(parameters: GetParameters? = nil) -> Request<AppStoreConnect_Swift_SDK.AppClipHeaderImageResponse> {
-			Request(path: path, method: "GET", query: parameters?.asQuery, id: "appClipDefaultExperienceLocalizations-appClipHeaderImage-get_to_one_related")
+			Request(path: path, method: "GET", query: parameters?.asQuery, id: "appClipDefaultExperienceLocalizations_appClipHeaderImage_getToOneRelated")
 		}
 
 		public struct GetParameters {
@@ -23,21 +23,21 @@ extension APIEndpoint.V1.AppClipDefaultExperienceLocalizations.WithID {
 			public var include: [Include]?
 
 			public enum FieldsAppClipHeaderImages: String, Codable, CaseIterable {
-				case appClipDefaultExperienceLocalization
-				case assetDeliveryState
-				case fileName
 				case fileSize
-				case imageAsset
+				case fileName
 				case sourceFileChecksum
+				case imageAsset
 				case uploadOperations
+				case assetDeliveryState
 				case uploaded
+				case appClipDefaultExperienceLocalization
 			}
 
 			public enum FieldsAppClipDefaultExperienceLocalizations: String, Codable, CaseIterable {
-				case appClipDefaultExperience
-				case appClipHeaderImage
 				case locale
 				case subtitle
+				case appClipDefaultExperience
+				case appClipHeaderImage
 			}
 
 			public enum Include: String, Codable, CaseIterable {

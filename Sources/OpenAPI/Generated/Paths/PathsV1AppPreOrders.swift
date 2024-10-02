@@ -15,7 +15,7 @@ extension APIEndpoint.V1 {
 
 		@available(*, deprecated, message: "Deprecated")
 		public func post(_ body: AppStoreConnect_Swift_SDK.AppPreOrderCreateRequest) -> Request<AppStoreConnect_Swift_SDK.AppPreOrderResponse> {
-			Request(path: path, method: "POST", body: body, id: "appPreOrders-create_instance")
+			Request(path: path, method: "POST", body: body, id: "appPreOrders_createInstance")
 		}
 	}
 }

@@ -14,7 +14,7 @@ extension APIEndpoint.V1.SubscriptionLocalizations {
 		public let path: String
 
 		public func get(fieldsSubscriptionLocalizations: [FieldsSubscriptionLocalizations]? = nil, include: [Include]? = nil) -> Request<AppStoreConnect_Swift_SDK.SubscriptionLocalizationResponse> {
-			Request(path: path, method: "GET", query: makeGetQuery(fieldsSubscriptionLocalizations, include), id: "subscriptionLocalizations-get_instance")
+			Request(path: path, method: "GET", query: makeGetQuery(fieldsSubscriptionLocalizations, include), id: "subscriptionLocalizations_getInstance")
 		}
 
 		private func makeGetQuery(_ fieldsSubscriptionLocalizations: [FieldsSubscriptionLocalizations]?, _ include: [Include]?) -> [(String, String?)] {
@@ -25,9 +25,9 @@ extension APIEndpoint.V1.SubscriptionLocalizations {
 		}
 
 		public enum FieldsSubscriptionLocalizations: String, Codable, CaseIterable {
-			case description
-			case locale
 			case name
+			case locale
+			case description
 			case state
 			case subscription
 		}
@@ -37,11 +37,11 @@ extension APIEndpoint.V1.SubscriptionLocalizations {
 		}
 
 		public func patch(_ body: AppStoreConnect_Swift_SDK.SubscriptionLocalizationUpdateRequest) -> Request<AppStoreConnect_Swift_SDK.SubscriptionLocalizationResponse> {
-			Request(path: path, method: "PATCH", body: body, id: "subscriptionLocalizations-update_instance")
+			Request(path: path, method: "PATCH", body: body, id: "subscriptionLocalizations_updateInstance")
 		}
 
 		public var delete: Request<Void> {
-			Request(path: path, method: "DELETE", id: "subscriptionLocalizations-delete_instance")
+			Request(path: path, method: "DELETE", id: "subscriptionLocalizations_deleteInstance")
 		}
 	}
 }

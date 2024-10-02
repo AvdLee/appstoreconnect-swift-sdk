@@ -14,7 +14,7 @@ extension APIEndpoint.V1.BetaGroups.WithID.Relationships {
 		public let path: String
 
 		public func get(limit: Int? = nil) -> Request<AppStoreConnect_Swift_SDK.BetaGroupBetaTestersLinkagesResponse> {
-			Request(path: path, method: "GET", query: makeGetQuery(limit), id: "betaGroups-betaTesters-get_to_many_relationship")
+			Request(path: path, method: "GET", query: makeGetQuery(limit), id: "betaGroups_betaTesters_getToManyRelationship")
 		}
 
 		private func makeGetQuery(_ limit: Int?) -> [(String, String?)] {
@@ -24,11 +24,11 @@ extension APIEndpoint.V1.BetaGroups.WithID.Relationships {
 		}
 
 		public func post(_ body: AppStoreConnect_Swift_SDK.BetaGroupBetaTestersLinkagesRequest) -> Request<Void> {
-			Request(path: path, method: "POST", body: body, id: "betaGroups-betaTesters-create_to_many_relationship")
+			Request(path: path, method: "POST", body: body, id: "betaGroups_betaTesters_createToManyRelationship")
 		}
 
 		public func delete(_ body: AppStoreConnect_Swift_SDK.BetaGroupBetaTestersLinkagesRequest) -> Request<Void> {
-			Request(path: path, method: "DELETE", body: body, id: "betaGroups-betaTesters-delete_to_many_relationship")
+			Request(path: path, method: "DELETE", body: body, id: "betaGroups_betaTesters_deleteToManyRelationship")
 		}
 	}
 }

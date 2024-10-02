@@ -14,42 +14,42 @@ extension APIEndpoint.V1.AppClipDefaultExperiences.WithID {
 		public let path: String
 
 		public func get(parameters: GetParameters? = nil) -> Request<AppStoreConnect_Swift_SDK.AppClipDefaultExperienceLocalizationsResponse> {
-			Request(path: path, method: "GET", query: parameters?.asQuery, id: "appClipDefaultExperiences-appClipDefaultExperienceLocalizations-get_to_many_related")
+			Request(path: path, method: "GET", query: parameters?.asQuery, id: "appClipDefaultExperiences_appClipDefaultExperienceLocalizations_getToManyRelated")
 		}
 
 		public struct GetParameters {
 			public var filterLocale: [String]?
-			public var fieldsAppClipDefaultExperiences: [FieldsAppClipDefaultExperiences]?
 			public var fieldsAppClipDefaultExperienceLocalizations: [FieldsAppClipDefaultExperienceLocalizations]?
+			public var fieldsAppClipDefaultExperiences: [FieldsAppClipDefaultExperiences]?
 			public var fieldsAppClipHeaderImages: [FieldsAppClipHeaderImages]?
 			public var limit: Int?
 			public var include: [Include]?
 
+			public enum FieldsAppClipDefaultExperienceLocalizations: String, Codable, CaseIterable {
+				case locale
+				case subtitle
+				case appClipDefaultExperience
+				case appClipHeaderImage
+			}
+
 			public enum FieldsAppClipDefaultExperiences: String, Codable, CaseIterable {
 				case action
 				case appClip
-				case appClipAppStoreReviewDetail
-				case appClipDefaultExperienceLocalizations
-				case appClipDefaultExperienceTemplate
 				case releaseWithAppStoreVersion
-			}
-
-			public enum FieldsAppClipDefaultExperienceLocalizations: String, Codable, CaseIterable {
-				case appClipDefaultExperience
-				case appClipHeaderImage
-				case locale
-				case subtitle
+				case appClipDefaultExperienceLocalizations
+				case appClipAppStoreReviewDetail
+				case appClipDefaultExperienceTemplate
 			}
 
 			public enum FieldsAppClipHeaderImages: String, Codable, CaseIterable {
-				case appClipDefaultExperienceLocalization
-				case assetDeliveryState
-				case fileName
 				case fileSize
-				case imageAsset
+				case fileName
 				case sourceFileChecksum
+				case imageAsset
 				case uploadOperations
+				case assetDeliveryState
 				case uploaded
+				case appClipDefaultExperienceLocalization
 			}
 
 			public enum Include: String, Codable, CaseIterable {
@@ -57,10 +57,10 @@ extension APIEndpoint.V1.AppClipDefaultExperiences.WithID {
 				case appClipHeaderImage
 			}
 
-			public init(filterLocale: [String]? = nil, fieldsAppClipDefaultExperiences: [FieldsAppClipDefaultExperiences]? = nil, fieldsAppClipDefaultExperienceLocalizations: [FieldsAppClipDefaultExperienceLocalizations]? = nil, fieldsAppClipHeaderImages: [FieldsAppClipHeaderImages]? = nil, limit: Int? = nil, include: [Include]? = nil) {
+			public init(filterLocale: [String]? = nil, fieldsAppClipDefaultExperienceLocalizations: [FieldsAppClipDefaultExperienceLocalizations]? = nil, fieldsAppClipDefaultExperiences: [FieldsAppClipDefaultExperiences]? = nil, fieldsAppClipHeaderImages: [FieldsAppClipHeaderImages]? = nil, limit: Int? = nil, include: [Include]? = nil) {
 				self.filterLocale = filterLocale
-				self.fieldsAppClipDefaultExperiences = fieldsAppClipDefaultExperiences
 				self.fieldsAppClipDefaultExperienceLocalizations = fieldsAppClipDefaultExperienceLocalizations
+				self.fieldsAppClipDefaultExperiences = fieldsAppClipDefaultExperiences
 				self.fieldsAppClipHeaderImages = fieldsAppClipHeaderImages
 				self.limit = limit
 				self.include = include
@@ -69,8 +69,8 @@ extension APIEndpoint.V1.AppClipDefaultExperiences.WithID {
 			public var asQuery: [(String, String?)] {
 				let encoder = URLQueryEncoder(explode: false)
 				encoder.encode(filterLocale, forKey: "filter[locale]")
-				encoder.encode(fieldsAppClipDefaultExperiences, forKey: "fields[appClipDefaultExperiences]")
 				encoder.encode(fieldsAppClipDefaultExperienceLocalizations, forKey: "fields[appClipDefaultExperienceLocalizations]")
+				encoder.encode(fieldsAppClipDefaultExperiences, forKey: "fields[appClipDefaultExperiences]")
 				encoder.encode(fieldsAppClipHeaderImages, forKey: "fields[appClipHeaderImages]")
 				encoder.encode(limit, forKey: "limit")
 				encoder.encode(include, forKey: "include")

@@ -19,7 +19,7 @@ public struct AppEvent: Codable, Identifiable {
 		public var badge: Badge?
 		public var eventState: EventState?
 		public var deepLink: URL?
-		public var purchaseRequirement: PurchaseRequirement?
+		public var purchaseRequirement: String?
 		public var primaryLocale: String?
 		public var priority: Priority?
 		public var purpose: Purpose?
@@ -47,14 +47,6 @@ public struct AppEvent: Codable, Identifiable {
 			case published = "PUBLISHED"
 			case past = "PAST"
 			case archived = "ARCHIVED"
-		}
-
-		public enum PurchaseRequirement: String, Codable, CaseIterable {
-			case noCostAssociated = "NO_COST_ASSOCIATED"
-			case inAppPurchase = "IN_APP_PURCHASE"
-			case subscription = "SUBSCRIPTION"
-			case inAppPurchaseAndSubscription = "IN_APP_PURCHASE_AND_SUBSCRIPTION"
-			case inAppPurchaseOrSubscription = "IN_APP_PURCHASE_OR_SUBSCRIPTION"
 		}
 
 		public enum Priority: String, Codable, CaseIterable {
@@ -129,7 +121,7 @@ public struct AppEvent: Codable, Identifiable {
 			}
 		}
 
-		public init(referenceName: String? = nil, badge: Badge? = nil, eventState: EventState? = nil, deepLink: URL? = nil, purchaseRequirement: PurchaseRequirement? = nil, primaryLocale: String? = nil, priority: Priority? = nil, purpose: Purpose? = nil, territorySchedules: [TerritorySchedule]? = nil, archivedTerritorySchedules: [ArchivedTerritorySchedule]? = nil) {
+		public init(referenceName: String? = nil, badge: Badge? = nil, eventState: EventState? = nil, deepLink: URL? = nil, purchaseRequirement: String? = nil, primaryLocale: String? = nil, priority: Priority? = nil, purpose: Purpose? = nil, territorySchedules: [TerritorySchedule]? = nil, archivedTerritorySchedules: [ArchivedTerritorySchedule]? = nil) {
 			self.referenceName = referenceName
 			self.badge = badge
 			self.eventState = eventState
@@ -148,7 +140,7 @@ public struct AppEvent: Codable, Identifiable {
 			self.badge = try values.decodeIfPresent(Badge.self, forKey: "badge")
 			self.eventState = try values.decodeIfPresent(EventState.self, forKey: "eventState")
 			self.deepLink = try values.decodeIfPresent(URL.self, forKey: "deepLink")
-			self.purchaseRequirement = try values.decodeIfPresent(PurchaseRequirement.self, forKey: "purchaseRequirement")
+			self.purchaseRequirement = try values.decodeIfPresent(String.self, forKey: "purchaseRequirement")
 			self.primaryLocale = try values.decodeIfPresent(String.self, forKey: "primaryLocale")
 			self.priority = try values.decodeIfPresent(Priority.self, forKey: "priority")
 			self.purpose = try values.decodeIfPresent(Purpose.self, forKey: "purpose")
@@ -175,31 +167,9 @@ public struct AppEvent: Codable, Identifiable {
 		public var localizations: Localizations?
 
 		public struct Localizations: Codable {
-			public var links: Links?
+			public var links: RelationshipLinks?
 			public var meta: PagingInformation?
 			public var data: [Datum]?
-
-			public struct Links: Codable {
-				public var this: String?
-				public var related: String?
-
-				public init(this: String? = nil, related: String? = nil) {
-					self.this = this
-					self.related = related
-				}
-
-				public init(from decoder: Decoder) throws {
-					let values = try decoder.container(keyedBy: StringCodingKey.self)
-					self.this = try values.decodeIfPresent(String.self, forKey: "self")
-					self.related = try values.decodeIfPresent(String.self, forKey: "related")
-				}
-
-				public func encode(to encoder: Encoder) throws {
-					var values = encoder.container(keyedBy: StringCodingKey.self)
-					try values.encodeIfPresent(this, forKey: "self")
-					try values.encodeIfPresent(related, forKey: "related")
-				}
-			}
 
 			public struct Datum: Codable, Identifiable {
 				public var type: `Type`
@@ -227,7 +197,7 @@ public struct AppEvent: Codable, Identifiable {
 				}
 			}
 
-			public init(links: Links? = nil, meta: PagingInformation? = nil, data: [Datum]? = nil) {
+			public init(links: RelationshipLinks? = nil, meta: PagingInformation? = nil, data: [Datum]? = nil) {
 				self.links = links
 				self.meta = meta
 				self.data = data
@@ -235,7 +205,7 @@ public struct AppEvent: Codable, Identifiable {
 
 			public init(from decoder: Decoder) throws {
 				let values = try decoder.container(keyedBy: StringCodingKey.self)
-				self.links = try values.decodeIfPresent(Links.self, forKey: "links")
+				self.links = try values.decodeIfPresent(RelationshipLinks.self, forKey: "links")
 				self.meta = try values.decodeIfPresent(PagingInformation.self, forKey: "meta")
 				self.data = try values.decodeIfPresent([Datum].self, forKey: "data")
 			}

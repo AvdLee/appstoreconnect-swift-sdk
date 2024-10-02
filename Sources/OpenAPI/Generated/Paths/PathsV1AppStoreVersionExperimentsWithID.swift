@@ -15,25 +15,35 @@ extension APIEndpoint.V1.AppStoreVersionExperiments {
 
 		@available(*, deprecated, message: "Deprecated")
 		public func get(parameters: GetParameters? = nil) -> Request<AppStoreConnect_Swift_SDK.AppStoreVersionExperimentResponse> {
-			Request(path: path, method: "GET", query: parameters?.asQuery, id: "appStoreVersionExperiments-get_instance")
+			Request(path: path, method: "GET", query: parameters?.asQuery, id: "appStoreVersionExperiments_getInstance")
 		}
 
 		public struct GetParameters {
 			public var fieldsAppStoreVersionExperiments: [FieldsAppStoreVersionExperiments]?
-			public var include: [Include]?
 			public var fieldsAppStoreVersionExperimentTreatments: [FieldsAppStoreVersionExperimentTreatments]?
+			public var include: [Include]?
 			public var limitAppStoreVersionExperimentTreatments: Int?
 
 			public enum FieldsAppStoreVersionExperiments: String, Codable, CaseIterable {
-				case appStoreVersion
-				case appStoreVersionExperimentTreatments
-				case endDate
 				case name
+				case trafficProportion
+				case state
 				case reviewRequired
 				case startDate
+				case endDate
 				case started
-				case state
-				case trafficProportion
+				case appStoreVersion
+				case appStoreVersionExperimentTreatments
+			}
+
+			public enum FieldsAppStoreVersionExperimentTreatments: String, Codable, CaseIterable {
+				case name
+				case appIcon
+				case appIconName
+				case promotedDate
+				case appStoreVersionExperiment
+				case appStoreVersionExperimentV2
+				case appStoreVersionExperimentTreatmentLocalizations
 			}
 
 			public enum Include: String, Codable, CaseIterable {
@@ -41,28 +51,18 @@ extension APIEndpoint.V1.AppStoreVersionExperiments {
 				case appStoreVersionExperimentTreatments
 			}
 
-			public enum FieldsAppStoreVersionExperimentTreatments: String, Codable, CaseIterable {
-				case appIcon
-				case appIconName
-				case appStoreVersionExperiment
-				case appStoreVersionExperimentTreatmentLocalizations
-				case appStoreVersionExperimentV2
-				case name
-				case promotedDate
-			}
-
-			public init(fieldsAppStoreVersionExperiments: [FieldsAppStoreVersionExperiments]? = nil, include: [Include]? = nil, fieldsAppStoreVersionExperimentTreatments: [FieldsAppStoreVersionExperimentTreatments]? = nil, limitAppStoreVersionExperimentTreatments: Int? = nil) {
+			public init(fieldsAppStoreVersionExperiments: [FieldsAppStoreVersionExperiments]? = nil, fieldsAppStoreVersionExperimentTreatments: [FieldsAppStoreVersionExperimentTreatments]? = nil, include: [Include]? = nil, limitAppStoreVersionExperimentTreatments: Int? = nil) {
 				self.fieldsAppStoreVersionExperiments = fieldsAppStoreVersionExperiments
-				self.include = include
 				self.fieldsAppStoreVersionExperimentTreatments = fieldsAppStoreVersionExperimentTreatments
+				self.include = include
 				self.limitAppStoreVersionExperimentTreatments = limitAppStoreVersionExperimentTreatments
 			}
 
 			public var asQuery: [(String, String?)] {
 				let encoder = URLQueryEncoder(explode: false)
 				encoder.encode(fieldsAppStoreVersionExperiments, forKey: "fields[appStoreVersionExperiments]")
-				encoder.encode(include, forKey: "include")
 				encoder.encode(fieldsAppStoreVersionExperimentTreatments, forKey: "fields[appStoreVersionExperimentTreatments]")
+				encoder.encode(include, forKey: "include")
 				encoder.encode(limitAppStoreVersionExperimentTreatments, forKey: "limit[appStoreVersionExperimentTreatments]")
 				return encoder.items
 			}
@@ -70,12 +70,12 @@ extension APIEndpoint.V1.AppStoreVersionExperiments {
 
 		@available(*, deprecated, message: "Deprecated")
 		public func patch(_ body: AppStoreConnect_Swift_SDK.AppStoreVersionExperimentUpdateRequest) -> Request<AppStoreConnect_Swift_SDK.AppStoreVersionExperimentResponse> {
-			Request(path: path, method: "PATCH", body: body, id: "appStoreVersionExperiments-update_instance")
+			Request(path: path, method: "PATCH", body: body, id: "appStoreVersionExperiments_updateInstance")
 		}
 
 		@available(*, deprecated, message: "Deprecated")
 		public var delete: Request<Void> {
-			Request(path: path, method: "DELETE", id: "appStoreVersionExperiments-delete_instance")
+			Request(path: path, method: "DELETE", id: "appStoreVersionExperiments_deleteInstance")
 		}
 	}
 }

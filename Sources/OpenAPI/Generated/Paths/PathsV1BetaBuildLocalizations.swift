@@ -14,61 +14,61 @@ extension APIEndpoint.V1 {
 		public let path: String
 
 		public func get(parameters: GetParameters? = nil) -> Request<AppStoreConnect_Swift_SDK.BetaBuildLocalizationsResponse> {
-			Request(path: path, method: "GET", query: parameters?.asQuery, id: "betaBuildLocalizations-get_collection")
+			Request(path: path, method: "GET", query: parameters?.asQuery, id: "betaBuildLocalizations_getCollection")
 		}
 
 		public struct GetParameters {
 			public var filterLocale: [String]?
 			public var filterBuild: [String]?
 			public var fieldsBetaBuildLocalizations: [FieldsBetaBuildLocalizations]?
+			public var fieldsBuilds: [FieldsBuilds]?
 			public var limit: Int?
 			public var include: [Include]?
-			public var fieldsBuilds: [FieldsBuilds]?
 
 			public enum FieldsBetaBuildLocalizations: String, Codable, CaseIterable {
-				case build
-				case locale
 				case whatsNew
+				case locale
+				case build
+			}
+
+			public enum FieldsBuilds: String, Codable, CaseIterable {
+				case version
+				case uploadedDate
+				case expirationDate
+				case expired
+				case minOsVersion
+				case lsMinimumSystemVersion
+				case computedMinMacOsVersion
+				case iconAssetToken
+				case processingState
+				case buildAudienceType
+				case usesNonExemptEncryption
+				case preReleaseVersion
+				case individualTesters
+				case betaGroups
+				case betaBuildLocalizations
+				case appEncryptionDeclaration
+				case betaAppReviewSubmission
+				case app
+				case buildBetaDetail
+				case appStoreVersion
+				case icons
+				case buildBundles
+				case perfPowerMetrics
+				case diagnosticSignatures
 			}
 
 			public enum Include: String, Codable, CaseIterable {
 				case build
 			}
 
-			public enum FieldsBuilds: String, Codable, CaseIterable {
-				case app
-				case appEncryptionDeclaration
-				case appStoreVersion
-				case betaAppReviewSubmission
-				case betaBuildLocalizations
-				case betaGroups
-				case buildAudienceType
-				case buildBetaDetail
-				case buildBundles
-				case computedMinMacOsVersion
-				case diagnosticSignatures
-				case expirationDate
-				case expired
-				case iconAssetToken
-				case icons
-				case individualTesters
-				case lsMinimumSystemVersion
-				case minOsVersion
-				case perfPowerMetrics
-				case preReleaseVersion
-				case processingState
-				case uploadedDate
-				case usesNonExemptEncryption
-				case version
-			}
-
-			public init(filterLocale: [String]? = nil, filterBuild: [String]? = nil, fieldsBetaBuildLocalizations: [FieldsBetaBuildLocalizations]? = nil, limit: Int? = nil, include: [Include]? = nil, fieldsBuilds: [FieldsBuilds]? = nil) {
+			public init(filterLocale: [String]? = nil, filterBuild: [String]? = nil, fieldsBetaBuildLocalizations: [FieldsBetaBuildLocalizations]? = nil, fieldsBuilds: [FieldsBuilds]? = nil, limit: Int? = nil, include: [Include]? = nil) {
 				self.filterLocale = filterLocale
 				self.filterBuild = filterBuild
 				self.fieldsBetaBuildLocalizations = fieldsBetaBuildLocalizations
+				self.fieldsBuilds = fieldsBuilds
 				self.limit = limit
 				self.include = include
-				self.fieldsBuilds = fieldsBuilds
 			}
 
 			public var asQuery: [(String, String?)] {
@@ -76,15 +76,15 @@ extension APIEndpoint.V1 {
 				encoder.encode(filterLocale, forKey: "filter[locale]")
 				encoder.encode(filterBuild, forKey: "filter[build]")
 				encoder.encode(fieldsBetaBuildLocalizations, forKey: "fields[betaBuildLocalizations]")
+				encoder.encode(fieldsBuilds, forKey: "fields[builds]")
 				encoder.encode(limit, forKey: "limit")
 				encoder.encode(include, forKey: "include")
-				encoder.encode(fieldsBuilds, forKey: "fields[builds]")
 				return encoder.items
 			}
 		}
 
 		public func post(_ body: AppStoreConnect_Swift_SDK.BetaBuildLocalizationCreateRequest) -> Request<AppStoreConnect_Swift_SDK.BetaBuildLocalizationResponse> {
-			Request(path: path, method: "POST", body: body, id: "betaBuildLocalizations-create_instance")
+			Request(path: path, method: "POST", body: body, id: "betaBuildLocalizations_createInstance")
 		}
 	}
 }

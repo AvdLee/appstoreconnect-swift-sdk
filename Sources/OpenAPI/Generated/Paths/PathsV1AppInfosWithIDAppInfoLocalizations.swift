@@ -14,52 +14,54 @@ extension APIEndpoint.V1.AppInfos.WithID {
 		public let path: String
 
 		public func get(parameters: GetParameters? = nil) -> Request<AppStoreConnect_Swift_SDK.AppInfoLocalizationsResponse> {
-			Request(path: path, method: "GET", query: parameters?.asQuery, id: "appInfos-appInfoLocalizations-get_to_many_related")
+			Request(path: path, method: "GET", query: parameters?.asQuery, id: "appInfos_appInfoLocalizations_getToManyRelated")
 		}
 
 		public struct GetParameters {
 			public var filterLocale: [String]?
-			public var fieldsAppInfos: [FieldsAppInfos]?
 			public var fieldsAppInfoLocalizations: [FieldsAppInfoLocalizations]?
+			public var fieldsAppInfos: [FieldsAppInfos]?
 			public var limit: Int?
 			public var include: [Include]?
 
+			public enum FieldsAppInfoLocalizations: String, Codable, CaseIterable {
+				case locale
+				case name
+				case subtitle
+				case privacyPolicyURL = "privacyPolicyUrl"
+				case privacyChoicesURL = "privacyChoicesUrl"
+				case privacyPolicyText
+				case appInfo
+			}
+
 			public enum FieldsAppInfos: String, Codable, CaseIterable {
-				case ageRatingDeclaration
-				case app
-				case appInfoLocalizations
-				case appStoreAgeRating
 				case appStoreState
+				case state
+				case appStoreAgeRating
+				case australiaAgeRating
 				case brazilAgeRating
 				case brazilAgeRatingV2
+				case koreaAgeRating
 				case kidsAgeBand
+				case app
+				case ageRatingDeclaration
+				case appInfoLocalizations
 				case primaryCategory
 				case primarySubcategoryOne
 				case primarySubcategoryTwo
 				case secondaryCategory
 				case secondarySubcategoryOne
 				case secondarySubcategoryTwo
-				case state
-			}
-
-			public enum FieldsAppInfoLocalizations: String, Codable, CaseIterable {
-				case appInfo
-				case locale
-				case name
-				case privacyChoicesURL = "privacyChoicesUrl"
-				case privacyPolicyText
-				case privacyPolicyURL = "privacyPolicyUrl"
-				case subtitle
 			}
 
 			public enum Include: String, Codable, CaseIterable {
 				case appInfo
 			}
 
-			public init(filterLocale: [String]? = nil, fieldsAppInfos: [FieldsAppInfos]? = nil, fieldsAppInfoLocalizations: [FieldsAppInfoLocalizations]? = nil, limit: Int? = nil, include: [Include]? = nil) {
+			public init(filterLocale: [String]? = nil, fieldsAppInfoLocalizations: [FieldsAppInfoLocalizations]? = nil, fieldsAppInfos: [FieldsAppInfos]? = nil, limit: Int? = nil, include: [Include]? = nil) {
 				self.filterLocale = filterLocale
-				self.fieldsAppInfos = fieldsAppInfos
 				self.fieldsAppInfoLocalizations = fieldsAppInfoLocalizations
+				self.fieldsAppInfos = fieldsAppInfos
 				self.limit = limit
 				self.include = include
 			}
@@ -67,8 +69,8 @@ extension APIEndpoint.V1.AppInfos.WithID {
 			public var asQuery: [(String, String?)] {
 				let encoder = URLQueryEncoder(explode: false)
 				encoder.encode(filterLocale, forKey: "filter[locale]")
-				encoder.encode(fieldsAppInfos, forKey: "fields[appInfos]")
 				encoder.encode(fieldsAppInfoLocalizations, forKey: "fields[appInfoLocalizations]")
+				encoder.encode(fieldsAppInfos, forKey: "fields[appInfos]")
 				encoder.encode(limit, forKey: "limit")
 				encoder.encode(include, forKey: "include")
 				return encoder.items

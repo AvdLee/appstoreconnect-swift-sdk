@@ -15,7 +15,7 @@ extension APIEndpoint.V1.InAppPurchases {
 
 		@available(*, deprecated, message: "Deprecated")
 		public func get(parameters: GetParameters? = nil) -> Request<AppStoreConnect_Swift_SDK.InAppPurchaseResponse> {
-			Request(path: path, method: "GET", query: parameters?.asQuery, id: "inAppPurchases-get_instance")
+			Request(path: path, method: "GET", query: parameters?.asQuery, id: "inAppPurchases_getInstance")
 		}
 
 		public struct GetParameters {
@@ -24,11 +24,11 @@ extension APIEndpoint.V1.InAppPurchases {
 			public var limitApps: Int?
 
 			public enum FieldsInAppPurchases: String, Codable, CaseIterable {
-				case apps
-				case inAppPurchaseType
-				case productID = "productId"
 				case referenceName
+				case productID = "productId"
+				case inAppPurchaseType
 				case state
+				case apps
 			}
 
 			public enum Include: String, Codable, CaseIterable {

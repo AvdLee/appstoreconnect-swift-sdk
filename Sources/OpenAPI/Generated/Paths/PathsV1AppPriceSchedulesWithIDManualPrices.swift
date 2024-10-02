@@ -14,12 +14,12 @@ extension APIEndpoint.V1.AppPriceSchedules.WithID {
 		public let path: String
 
 		public func get(parameters: GetParameters? = nil) -> Request<AppStoreConnect_Swift_SDK.AppPricesV2Response> {
-			Request(path: path, method: "GET", query: parameters?.asQuery, id: "appPriceSchedules-manualPrices-get_to_many_related")
+			Request(path: path, method: "GET", query: parameters?.asQuery, id: "appPriceSchedules_manualPrices_getToManyRelated")
 		}
 
 		public struct GetParameters {
-			public var filterEndDate: [String]?
 			public var filterStartDate: [String]?
+			public var filterEndDate: [String]?
 			public var filterTerritory: [String]?
 			public var fieldsAppPrices: [FieldsAppPrices]?
 			public var fieldsAppPricePoints: [FieldsAppPricePoints]?
@@ -28,18 +28,18 @@ extension APIEndpoint.V1.AppPriceSchedules.WithID {
 			public var include: [Include]?
 
 			public enum FieldsAppPrices: String, Codable, CaseIterable {
-				case appPricePoint
-				case endDate
 				case manual
 				case startDate
+				case endDate
+				case appPricePoint
 				case territory
 			}
 
 			public enum FieldsAppPricePoints: String, Codable, CaseIterable {
-				case app
 				case customerPrice
-				case equalizations
 				case proceeds
+				case app
+				case equalizations
 				case territory
 			}
 
@@ -52,9 +52,9 @@ extension APIEndpoint.V1.AppPriceSchedules.WithID {
 				case territory
 			}
 
-			public init(filterEndDate: [String]? = nil, filterStartDate: [String]? = nil, filterTerritory: [String]? = nil, fieldsAppPrices: [FieldsAppPrices]? = nil, fieldsAppPricePoints: [FieldsAppPricePoints]? = nil, fieldsTerritories: [FieldsTerritories]? = nil, limit: Int? = nil, include: [Include]? = nil) {
-				self.filterEndDate = filterEndDate
+			public init(filterStartDate: [String]? = nil, filterEndDate: [String]? = nil, filterTerritory: [String]? = nil, fieldsAppPrices: [FieldsAppPrices]? = nil, fieldsAppPricePoints: [FieldsAppPricePoints]? = nil, fieldsTerritories: [FieldsTerritories]? = nil, limit: Int? = nil, include: [Include]? = nil) {
 				self.filterStartDate = filterStartDate
+				self.filterEndDate = filterEndDate
 				self.filterTerritory = filterTerritory
 				self.fieldsAppPrices = fieldsAppPrices
 				self.fieldsAppPricePoints = fieldsAppPricePoints
@@ -65,8 +65,8 @@ extension APIEndpoint.V1.AppPriceSchedules.WithID {
 
 			public var asQuery: [(String, String?)] {
 				let encoder = URLQueryEncoder(explode: false)
-				encoder.encode(filterEndDate, forKey: "filter[endDate]")
 				encoder.encode(filterStartDate, forKey: "filter[startDate]")
+				encoder.encode(filterEndDate, forKey: "filter[endDate]")
 				encoder.encode(filterTerritory, forKey: "filter[territory]")
 				encoder.encode(fieldsAppPrices, forKey: "fields[appPrices]")
 				encoder.encode(fieldsAppPricePoints, forKey: "fields[appPricePoints]")

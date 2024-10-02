@@ -14,132 +14,132 @@ extension APIEndpoint.V1.GameCenterDetails.WithID {
 		public let path: String
 
 		public func get(parameters: GetParameters? = nil) -> Request<AppStoreConnect_Swift_SDK.GameCenterLeaderboardSetsResponse> {
-			Request(path: path, method: "GET", query: parameters?.asQuery, id: "gameCenterDetails-gameCenterLeaderboardSets-get_to_many_related")
+			Request(path: path, method: "GET", query: parameters?.asQuery, id: "gameCenterDetails_gameCenterLeaderboardSets_getToManyRelated")
 		}
 
 		public struct GetParameters {
 			public var filterReferenceName: [String]?
 			public var filterID: [String]?
-			public var fieldsGameCenterLeaderboardSetLocalizations: [FieldsGameCenterLeaderboardSetLocalizations]?
-			public var fieldsGameCenterLeaderboardSetReleases: [FieldsGameCenterLeaderboardSetReleases]?
 			public var fieldsGameCenterLeaderboardSets: [FieldsGameCenterLeaderboardSets]?
-			public var fieldsGameCenterGroups: [FieldsGameCenterGroups]?
 			public var fieldsGameCenterDetails: [FieldsGameCenterDetails]?
+			public var fieldsGameCenterGroups: [FieldsGameCenterGroups]?
+			public var fieldsGameCenterLeaderboardSetLocalizations: [FieldsGameCenterLeaderboardSetLocalizations]?
 			public var fieldsGameCenterLeaderboards: [FieldsGameCenterLeaderboards]?
+			public var fieldsGameCenterLeaderboardSetReleases: [FieldsGameCenterLeaderboardSetReleases]?
 			public var limit: Int?
+			public var include: [Include]?
 			public var limitLocalizations: Int?
 			public var limitGameCenterLeaderboards: Int?
 			public var limitReleases: Int?
-			public var include: [Include]?
-
-			public enum FieldsGameCenterLeaderboardSetLocalizations: String, Codable, CaseIterable {
-				case gameCenterLeaderboardSet
-				case gameCenterLeaderboardSetImage
-				case locale
-				case name
-			}
-
-			public enum FieldsGameCenterLeaderboardSetReleases: String, Codable, CaseIterable {
-				case gameCenterDetail
-				case gameCenterLeaderboardSet
-				case live
-			}
 
 			public enum FieldsGameCenterLeaderboardSets: String, Codable, CaseIterable {
+				case referenceName
+				case vendorIdentifier
 				case gameCenterDetail
 				case gameCenterGroup
-				case gameCenterLeaderboards
 				case groupLeaderboardSet
 				case localizations
-				case referenceName
-				case releases
-				case vendorIdentifier
-			}
-
-			public enum FieldsGameCenterGroups: String, Codable, CaseIterable {
-				case gameCenterAchievements
-				case gameCenterDetails
-				case gameCenterLeaderboardSets
 				case gameCenterLeaderboards
-				case referenceName
+				case releases
 			}
 
 			public enum FieldsGameCenterDetails: String, Codable, CaseIterable {
-				case achievementReleases
-				case app
 				case arcadeEnabled
 				case challengeEnabled
-				case defaultGroupLeaderboard
-				case defaultLeaderboard
-				case gameCenterAchievements
+				case app
 				case gameCenterAppVersions
 				case gameCenterGroup
-				case gameCenterLeaderboardSets
 				case gameCenterLeaderboards
+				case gameCenterLeaderboardSets
+				case gameCenterAchievements
+				case defaultLeaderboard
+				case defaultGroupLeaderboard
+				case achievementReleases
 				case leaderboardReleases
 				case leaderboardSetReleases
 			}
 
-			public enum FieldsGameCenterLeaderboards: String, Codable, CaseIterable {
-				case archived
-				case defaultFormatter
-				case gameCenterDetail
-				case gameCenterGroup
+			public enum FieldsGameCenterGroups: String, Codable, CaseIterable {
+				case referenceName
+				case gameCenterDetails
+				case gameCenterLeaderboards
 				case gameCenterLeaderboardSets
-				case groupLeaderboard
-				case localizations
+				case gameCenterAchievements
+			}
+
+			public enum FieldsGameCenterLeaderboardSetLocalizations: String, Codable, CaseIterable {
+				case locale
+				case name
+				case gameCenterLeaderboardSet
+				case gameCenterLeaderboardSetImage
+			}
+
+			public enum FieldsGameCenterLeaderboards: String, Codable, CaseIterable {
+				case defaultFormatter
+				case referenceName
+				case vendorIdentifier
+				case submissionType
+				case scoreSortType
+				case scoreRangeStart
+				case scoreRangeEnd
+				case recurrenceStartDate
 				case recurrenceDuration
 				case recurrenceRule
-				case recurrenceStartDate
-				case referenceName
+				case archived
+				case gameCenterDetail
+				case gameCenterGroup
+				case groupLeaderboard
+				case gameCenterLeaderboardSets
+				case localizations
 				case releases
-				case scoreRangeEnd
-				case scoreRangeStart
-				case scoreSortType
-				case submissionType
-				case vendorIdentifier
+			}
+
+			public enum FieldsGameCenterLeaderboardSetReleases: String, Codable, CaseIterable {
+				case live
+				case gameCenterDetail
+				case gameCenterLeaderboardSet
 			}
 
 			public enum Include: String, Codable, CaseIterable {
 				case gameCenterDetail
 				case gameCenterGroup
-				case gameCenterLeaderboards
 				case groupLeaderboardSet
 				case localizations
+				case gameCenterLeaderboards
 				case releases
 			}
 
-			public init(filterReferenceName: [String]? = nil, filterID: [String]? = nil, fieldsGameCenterLeaderboardSetLocalizations: [FieldsGameCenterLeaderboardSetLocalizations]? = nil, fieldsGameCenterLeaderboardSetReleases: [FieldsGameCenterLeaderboardSetReleases]? = nil, fieldsGameCenterLeaderboardSets: [FieldsGameCenterLeaderboardSets]? = nil, fieldsGameCenterGroups: [FieldsGameCenterGroups]? = nil, fieldsGameCenterDetails: [FieldsGameCenterDetails]? = nil, fieldsGameCenterLeaderboards: [FieldsGameCenterLeaderboards]? = nil, limit: Int? = nil, limitLocalizations: Int? = nil, limitGameCenterLeaderboards: Int? = nil, limitReleases: Int? = nil, include: [Include]? = nil) {
+			public init(filterReferenceName: [String]? = nil, filterID: [String]? = nil, fieldsGameCenterLeaderboardSets: [FieldsGameCenterLeaderboardSets]? = nil, fieldsGameCenterDetails: [FieldsGameCenterDetails]? = nil, fieldsGameCenterGroups: [FieldsGameCenterGroups]? = nil, fieldsGameCenterLeaderboardSetLocalizations: [FieldsGameCenterLeaderboardSetLocalizations]? = nil, fieldsGameCenterLeaderboards: [FieldsGameCenterLeaderboards]? = nil, fieldsGameCenterLeaderboardSetReleases: [FieldsGameCenterLeaderboardSetReleases]? = nil, limit: Int? = nil, include: [Include]? = nil, limitLocalizations: Int? = nil, limitGameCenterLeaderboards: Int? = nil, limitReleases: Int? = nil) {
 				self.filterReferenceName = filterReferenceName
 				self.filterID = filterID
-				self.fieldsGameCenterLeaderboardSetLocalizations = fieldsGameCenterLeaderboardSetLocalizations
-				self.fieldsGameCenterLeaderboardSetReleases = fieldsGameCenterLeaderboardSetReleases
 				self.fieldsGameCenterLeaderboardSets = fieldsGameCenterLeaderboardSets
-				self.fieldsGameCenterGroups = fieldsGameCenterGroups
 				self.fieldsGameCenterDetails = fieldsGameCenterDetails
+				self.fieldsGameCenterGroups = fieldsGameCenterGroups
+				self.fieldsGameCenterLeaderboardSetLocalizations = fieldsGameCenterLeaderboardSetLocalizations
 				self.fieldsGameCenterLeaderboards = fieldsGameCenterLeaderboards
+				self.fieldsGameCenterLeaderboardSetReleases = fieldsGameCenterLeaderboardSetReleases
 				self.limit = limit
+				self.include = include
 				self.limitLocalizations = limitLocalizations
 				self.limitGameCenterLeaderboards = limitGameCenterLeaderboards
 				self.limitReleases = limitReleases
-				self.include = include
 			}
 
 			public var asQuery: [(String, String?)] {
 				let encoder = URLQueryEncoder(explode: false)
 				encoder.encode(filterReferenceName, forKey: "filter[referenceName]")
 				encoder.encode(filterID, forKey: "filter[id]")
-				encoder.encode(fieldsGameCenterLeaderboardSetLocalizations, forKey: "fields[gameCenterLeaderboardSetLocalizations]")
-				encoder.encode(fieldsGameCenterLeaderboardSetReleases, forKey: "fields[gameCenterLeaderboardSetReleases]")
 				encoder.encode(fieldsGameCenterLeaderboardSets, forKey: "fields[gameCenterLeaderboardSets]")
-				encoder.encode(fieldsGameCenterGroups, forKey: "fields[gameCenterGroups]")
 				encoder.encode(fieldsGameCenterDetails, forKey: "fields[gameCenterDetails]")
+				encoder.encode(fieldsGameCenterGroups, forKey: "fields[gameCenterGroups]")
+				encoder.encode(fieldsGameCenterLeaderboardSetLocalizations, forKey: "fields[gameCenterLeaderboardSetLocalizations]")
 				encoder.encode(fieldsGameCenterLeaderboards, forKey: "fields[gameCenterLeaderboards]")
+				encoder.encode(fieldsGameCenterLeaderboardSetReleases, forKey: "fields[gameCenterLeaderboardSetReleases]")
 				encoder.encode(limit, forKey: "limit")
+				encoder.encode(include, forKey: "include")
 				encoder.encode(limitLocalizations, forKey: "limit[localizations]")
 				encoder.encode(limitGameCenterLeaderboards, forKey: "limit[gameCenterLeaderboards]")
 				encoder.encode(limitReleases, forKey: "limit[releases]")
-				encoder.encode(include, forKey: "include")
 				return encoder.items
 			}
 		}

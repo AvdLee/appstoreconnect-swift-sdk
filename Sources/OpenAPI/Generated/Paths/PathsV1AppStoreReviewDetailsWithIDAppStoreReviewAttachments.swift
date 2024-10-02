@@ -14,53 +14,53 @@ extension APIEndpoint.V1.AppStoreReviewDetails.WithID {
 		public let path: String
 
 		public func get(parameters: GetParameters? = nil) -> Request<AppStoreConnect_Swift_SDK.AppStoreReviewAttachmentsResponse> {
-			Request(path: path, method: "GET", query: parameters?.asQuery, id: "appStoreReviewDetails-appStoreReviewAttachments-get_to_many_related")
+			Request(path: path, method: "GET", query: parameters?.asQuery, id: "appStoreReviewDetails_appStoreReviewAttachments_getToManyRelated")
 		}
 
 		public struct GetParameters {
-			public var fieldsAppStoreReviewDetails: [FieldsAppStoreReviewDetails]?
 			public var fieldsAppStoreReviewAttachments: [FieldsAppStoreReviewAttachments]?
+			public var fieldsAppStoreReviewDetails: [FieldsAppStoreReviewDetails]?
 			public var limit: Int?
 			public var include: [Include]?
 
+			public enum FieldsAppStoreReviewAttachments: String, Codable, CaseIterable {
+				case fileSize
+				case fileName
+				case sourceFileChecksum
+				case uploadOperations
+				case assetDeliveryState
+				case uploaded
+				case appStoreReviewDetail
+			}
+
 			public enum FieldsAppStoreReviewDetails: String, Codable, CaseIterable {
-				case appStoreReviewAttachments
-				case appStoreVersion
-				case contactEmail
 				case contactFirstName
 				case contactLastName
 				case contactPhone
+				case contactEmail
 				case demoAccountName
 				case demoAccountPassword
 				case demoAccountRequired
 				case notes
-			}
-
-			public enum FieldsAppStoreReviewAttachments: String, Codable, CaseIterable {
-				case appStoreReviewDetail
-				case assetDeliveryState
-				case fileName
-				case fileSize
-				case sourceFileChecksum
-				case uploadOperations
-				case uploaded
+				case appStoreVersion
+				case appStoreReviewAttachments
 			}
 
 			public enum Include: String, Codable, CaseIterable {
 				case appStoreReviewDetail
 			}
 
-			public init(fieldsAppStoreReviewDetails: [FieldsAppStoreReviewDetails]? = nil, fieldsAppStoreReviewAttachments: [FieldsAppStoreReviewAttachments]? = nil, limit: Int? = nil, include: [Include]? = nil) {
-				self.fieldsAppStoreReviewDetails = fieldsAppStoreReviewDetails
+			public init(fieldsAppStoreReviewAttachments: [FieldsAppStoreReviewAttachments]? = nil, fieldsAppStoreReviewDetails: [FieldsAppStoreReviewDetails]? = nil, limit: Int? = nil, include: [Include]? = nil) {
 				self.fieldsAppStoreReviewAttachments = fieldsAppStoreReviewAttachments
+				self.fieldsAppStoreReviewDetails = fieldsAppStoreReviewDetails
 				self.limit = limit
 				self.include = include
 			}
 
 			public var asQuery: [(String, String?)] {
 				let encoder = URLQueryEncoder(explode: false)
-				encoder.encode(fieldsAppStoreReviewDetails, forKey: "fields[appStoreReviewDetails]")
 				encoder.encode(fieldsAppStoreReviewAttachments, forKey: "fields[appStoreReviewAttachments]")
+				encoder.encode(fieldsAppStoreReviewDetails, forKey: "fields[appStoreReviewDetails]")
 				encoder.encode(limit, forKey: "limit")
 				encoder.encode(include, forKey: "include")
 				return encoder.items

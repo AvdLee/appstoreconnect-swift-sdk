@@ -9,7 +9,7 @@ public struct AppStoreVersionExperimentTreatmentCreateRequest: Codable {
 	public struct Data: Codable {
 		public var type: `Type`
 		public var attributes: Attributes
-		public var relationships: Relationships
+		public var relationships: Relationships?
 
 		public enum `Type`: String, Codable, CaseIterable {
 			case appStoreVersionExperimentTreatments
@@ -38,11 +38,11 @@ public struct AppStoreVersionExperimentTreatmentCreateRequest: Codable {
 		}
 
 		public struct Relationships: Codable {
-			public var appStoreVersionExperiment: AppStoreVersionExperiment
+			public var appStoreVersionExperiment: AppStoreVersionExperiment?
 			public var appStoreVersionExperimentV2: AppStoreVersionExperimentV2?
 
 			public struct AppStoreVersionExperiment: Codable {
-				public var data: Data
+				public var data: Data?
 
 				public struct Data: Codable, Identifiable {
 					public var type: `Type`
@@ -70,18 +70,18 @@ public struct AppStoreVersionExperimentTreatmentCreateRequest: Codable {
 					}
 				}
 
-				public init(data: Data) {
+				public init(data: Data? = nil) {
 					self.data = data
 				}
 
 				public init(from decoder: Decoder) throws {
 					let values = try decoder.container(keyedBy: StringCodingKey.self)
-					self.data = try values.decode(Data.self, forKey: "data")
+					self.data = try values.decodeIfPresent(Data.self, forKey: "data")
 				}
 
 				public func encode(to encoder: Encoder) throws {
 					var values = encoder.container(keyedBy: StringCodingKey.self)
-					try values.encode(data, forKey: "data")
+					try values.encodeIfPresent(data, forKey: "data")
 				}
 			}
 
@@ -129,25 +129,25 @@ public struct AppStoreVersionExperimentTreatmentCreateRequest: Codable {
 				}
 			}
 
-			public init(appStoreVersionExperiment: AppStoreVersionExperiment, appStoreVersionExperimentV2: AppStoreVersionExperimentV2? = nil) {
+			public init(appStoreVersionExperiment: AppStoreVersionExperiment? = nil, appStoreVersionExperimentV2: AppStoreVersionExperimentV2? = nil) {
 				self.appStoreVersionExperiment = appStoreVersionExperiment
 				self.appStoreVersionExperimentV2 = appStoreVersionExperimentV2
 			}
 
 			public init(from decoder: Decoder) throws {
 				let values = try decoder.container(keyedBy: StringCodingKey.self)
-				self.appStoreVersionExperiment = try values.decode(AppStoreVersionExperiment.self, forKey: "appStoreVersionExperiment")
+				self.appStoreVersionExperiment = try values.decodeIfPresent(AppStoreVersionExperiment.self, forKey: "appStoreVersionExperiment")
 				self.appStoreVersionExperimentV2 = try values.decodeIfPresent(AppStoreVersionExperimentV2.self, forKey: "appStoreVersionExperimentV2")
 			}
 
 			public func encode(to encoder: Encoder) throws {
 				var values = encoder.container(keyedBy: StringCodingKey.self)
-				try values.encode(appStoreVersionExperiment, forKey: "appStoreVersionExperiment")
+				try values.encodeIfPresent(appStoreVersionExperiment, forKey: "appStoreVersionExperiment")
 				try values.encodeIfPresent(appStoreVersionExperimentV2, forKey: "appStoreVersionExperimentV2")
 			}
 		}
 
-		public init(type: `Type`, attributes: Attributes, relationships: Relationships) {
+		public init(type: `Type`, attributes: Attributes, relationships: Relationships? = nil) {
 			self.type = type
 			self.attributes = attributes
 			self.relationships = relationships
@@ -157,14 +157,14 @@ public struct AppStoreVersionExperimentTreatmentCreateRequest: Codable {
 			let values = try decoder.container(keyedBy: StringCodingKey.self)
 			self.type = try values.decode(`Type`.self, forKey: "type")
 			self.attributes = try values.decode(Attributes.self, forKey: "attributes")
-			self.relationships = try values.decode(Relationships.self, forKey: "relationships")
+			self.relationships = try values.decodeIfPresent(Relationships.self, forKey: "relationships")
 		}
 
 		public func encode(to encoder: Encoder) throws {
 			var values = encoder.container(keyedBy: StringCodingKey.self)
 			try values.encode(type, forKey: "type")
 			try values.encode(attributes, forKey: "attributes")
-			try values.encode(relationships, forKey: "relationships")
+			try values.encodeIfPresent(relationships, forKey: "relationships")
 		}
 	}
 

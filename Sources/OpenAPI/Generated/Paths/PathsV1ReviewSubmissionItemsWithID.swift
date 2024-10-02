@@ -14,11 +14,11 @@ extension APIEndpoint.V1.ReviewSubmissionItems {
 		public let path: String
 
 		public func patch(_ body: AppStoreConnect_Swift_SDK.ReviewSubmissionItemUpdateRequest) -> Request<AppStoreConnect_Swift_SDK.ReviewSubmissionItemResponse> {
-			Request(path: path, method: "PATCH", body: body, id: "reviewSubmissionItems-update_instance")
+			Request(path: path, method: "PATCH", body: body, id: "reviewSubmissionItems_updateInstance")
 		}
 
 		public var delete: Request<Void> {
-			Request(path: path, method: "DELETE", id: "reviewSubmissionItems-delete_instance")
+			Request(path: path, method: "DELETE", id: "reviewSubmissionItems_deleteInstance")
 		}
 	}
 }

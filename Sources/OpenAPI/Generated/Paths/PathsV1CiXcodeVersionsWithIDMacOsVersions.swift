@@ -14,48 +14,48 @@ extension APIEndpoint.V1.CiXcodeVersions.WithID {
 		public let path: String
 
 		public func get(parameters: GetParameters? = nil) -> Request<AppStoreConnect_Swift_SDK.CiMacOsVersionsResponse> {
-			Request(path: path, method: "GET", query: parameters?.asQuery, id: "ciXcodeVersions-macOsVersions-get_to_many_related")
+			Request(path: path, method: "GET", query: parameters?.asQuery, id: "ciXcodeVersions_macOsVersions_getToManyRelated")
 		}
 
 		public struct GetParameters {
-			public var fieldsCiXcodeVersions: [FieldsCiXcodeVersions]?
 			public var fieldsCiMacOsVersions: [FieldsCiMacOsVersions]?
+			public var fieldsCiXcodeVersions: [FieldsCiXcodeVersions]?
 			public var limit: Int?
-			public var limitXcodeVersions: Int?
 			public var include: [Include]?
-
-			public enum FieldsCiXcodeVersions: String, Codable, CaseIterable {
-				case macOsVersions
-				case name
-				case testDestinations
-				case version
-			}
+			public var limitXcodeVersions: Int?
 
 			public enum FieldsCiMacOsVersions: String, Codable, CaseIterable {
-				case name
 				case version
+				case name
 				case xcodeVersions
+			}
+
+			public enum FieldsCiXcodeVersions: String, Codable, CaseIterable {
+				case version
+				case name
+				case testDestinations
+				case macOsVersions
 			}
 
 			public enum Include: String, Codable, CaseIterable {
 				case xcodeVersions
 			}
 
-			public init(fieldsCiXcodeVersions: [FieldsCiXcodeVersions]? = nil, fieldsCiMacOsVersions: [FieldsCiMacOsVersions]? = nil, limit: Int? = nil, limitXcodeVersions: Int? = nil, include: [Include]? = nil) {
-				self.fieldsCiXcodeVersions = fieldsCiXcodeVersions
+			public init(fieldsCiMacOsVersions: [FieldsCiMacOsVersions]? = nil, fieldsCiXcodeVersions: [FieldsCiXcodeVersions]? = nil, limit: Int? = nil, include: [Include]? = nil, limitXcodeVersions: Int? = nil) {
 				self.fieldsCiMacOsVersions = fieldsCiMacOsVersions
+				self.fieldsCiXcodeVersions = fieldsCiXcodeVersions
 				self.limit = limit
-				self.limitXcodeVersions = limitXcodeVersions
 				self.include = include
+				self.limitXcodeVersions = limitXcodeVersions
 			}
 
 			public var asQuery: [(String, String?)] {
 				let encoder = URLQueryEncoder(explode: false)
-				encoder.encode(fieldsCiXcodeVersions, forKey: "fields[ciXcodeVersions]")
 				encoder.encode(fieldsCiMacOsVersions, forKey: "fields[ciMacOsVersions]")
+				encoder.encode(fieldsCiXcodeVersions, forKey: "fields[ciXcodeVersions]")
 				encoder.encode(limit, forKey: "limit")
-				encoder.encode(limitXcodeVersions, forKey: "limit[xcodeVersions]")
 				encoder.encode(include, forKey: "include")
+				encoder.encode(limitXcodeVersions, forKey: "limit[xcodeVersions]")
 				return encoder.items
 			}
 		}

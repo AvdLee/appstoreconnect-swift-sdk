@@ -14,7 +14,7 @@ extension APIEndpoint.V1.SubscriptionGracePeriods {
 		public let path: String
 
 		public func get(fieldsSubscriptionGracePeriods: [FieldsSubscriptionGracePeriods]? = nil) -> Request<AppStoreConnect_Swift_SDK.SubscriptionGracePeriodResponse> {
-			Request(path: path, method: "GET", query: makeGetQuery(fieldsSubscriptionGracePeriods), id: "subscriptionGracePeriods-get_instance")
+			Request(path: path, method: "GET", query: makeGetQuery(fieldsSubscriptionGracePeriods), id: "subscriptionGracePeriods_getInstance")
 		}
 
 		private func makeGetQuery(_ fieldsSubscriptionGracePeriods: [FieldsSubscriptionGracePeriods]?) -> [(String, String?)] {
@@ -24,14 +24,14 @@ extension APIEndpoint.V1.SubscriptionGracePeriods {
 		}
 
 		public enum FieldsSubscriptionGracePeriods: String, Codable, CaseIterable {
-			case duration
 			case optIn
-			case renewalType
 			case sandboxOptIn
+			case duration
+			case renewalType
 		}
 
 		public func patch(_ body: AppStoreConnect_Swift_SDK.SubscriptionGracePeriodUpdateRequest) -> Request<AppStoreConnect_Swift_SDK.SubscriptionGracePeriodResponse> {
-			Request(path: path, method: "PATCH", body: body, id: "subscriptionGracePeriods-update_instance")
+			Request(path: path, method: "PATCH", body: body, id: "subscriptionGracePeriods_updateInstance")
 		}
 	}
 }

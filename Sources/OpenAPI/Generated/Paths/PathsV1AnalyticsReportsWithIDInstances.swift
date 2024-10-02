@@ -14,7 +14,7 @@ extension APIEndpoint.V1.AnalyticsReports.WithID {
 		public let path: String
 
 		public func get(parameters: GetParameters? = nil) -> Request<AppStoreConnect_Swift_SDK.AnalyticsReportInstancesResponse> {
-			Request(path: path, method: "GET", query: parameters?.asQuery, id: "analyticsReports-instances-get_to_many_related")
+			Request(path: path, method: "GET", query: parameters?.asQuery, id: "analyticsReports_instances_getToManyRelated")
 		}
 
 		public struct GetParameters {

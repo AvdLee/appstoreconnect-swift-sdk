@@ -14,7 +14,7 @@ extension APIEndpoint.V1 {
 		public let path: String
 
 		public func post(_ body: AppStoreConnect_Swift_SDK.BundleIDCapabilityCreateRequest) -> Request<AppStoreConnect_Swift_SDK.BundleIDCapabilityResponse> {
-			Request(path: path, method: "POST", body: body, id: "bundleIdCapabilities-create_instance")
+			Request(path: path, method: "POST", body: body, id: "bundleIdCapabilities_createInstance")
 		}
 	}
 }

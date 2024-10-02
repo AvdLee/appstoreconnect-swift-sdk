@@ -14,51 +14,51 @@ extension APIEndpoint.V1.AppScreenshotSets.WithID {
 		public let path: String
 
 		public func get(parameters: GetParameters? = nil) -> Request<AppStoreConnect_Swift_SDK.AppScreenshotsResponse> {
-			Request(path: path, method: "GET", query: parameters?.asQuery, id: "appScreenshotSets-appScreenshots-get_to_many_related")
+			Request(path: path, method: "GET", query: parameters?.asQuery, id: "appScreenshotSets_appScreenshots_getToManyRelated")
 		}
 
 		public struct GetParameters {
-			public var fieldsAppScreenshotSets: [FieldsAppScreenshotSets]?
 			public var fieldsAppScreenshots: [FieldsAppScreenshots]?
+			public var fieldsAppScreenshotSets: [FieldsAppScreenshotSets]?
 			public var limit: Int?
 			public var include: [Include]?
 
-			public enum FieldsAppScreenshotSets: String, Codable, CaseIterable {
-				case appCustomProductPageLocalization
-				case appScreenshots
-				case appStoreVersionExperimentTreatmentLocalization
-				case appStoreVersionLocalization
-				case screenshotDisplayType
-			}
-
 			public enum FieldsAppScreenshots: String, Codable, CaseIterable {
-				case appScreenshotSet
-				case assetDeliveryState
+				case fileSize
+				case fileName
+				case sourceFileChecksum
+				case imageAsset
 				case assetToken
 				case assetType
-				case fileName
-				case fileSize
-				case imageAsset
-				case sourceFileChecksum
 				case uploadOperations
+				case assetDeliveryState
 				case uploaded
+				case appScreenshotSet
+			}
+
+			public enum FieldsAppScreenshotSets: String, Codable, CaseIterable {
+				case screenshotDisplayType
+				case appStoreVersionLocalization
+				case appCustomProductPageLocalization
+				case appStoreVersionExperimentTreatmentLocalization
+				case appScreenshots
 			}
 
 			public enum Include: String, Codable, CaseIterable {
 				case appScreenshotSet
 			}
 
-			public init(fieldsAppScreenshotSets: [FieldsAppScreenshotSets]? = nil, fieldsAppScreenshots: [FieldsAppScreenshots]? = nil, limit: Int? = nil, include: [Include]? = nil) {
-				self.fieldsAppScreenshotSets = fieldsAppScreenshotSets
+			public init(fieldsAppScreenshots: [FieldsAppScreenshots]? = nil, fieldsAppScreenshotSets: [FieldsAppScreenshotSets]? = nil, limit: Int? = nil, include: [Include]? = nil) {
 				self.fieldsAppScreenshots = fieldsAppScreenshots
+				self.fieldsAppScreenshotSets = fieldsAppScreenshotSets
 				self.limit = limit
 				self.include = include
 			}
 
 			public var asQuery: [(String, String?)] {
 				let encoder = URLQueryEncoder(explode: false)
-				encoder.encode(fieldsAppScreenshotSets, forKey: "fields[appScreenshotSets]")
 				encoder.encode(fieldsAppScreenshots, forKey: "fields[appScreenshots]")
+				encoder.encode(fieldsAppScreenshotSets, forKey: "fields[appScreenshotSets]")
 				encoder.encode(limit, forKey: "limit")
 				encoder.encode(include, forKey: "include")
 				return encoder.items

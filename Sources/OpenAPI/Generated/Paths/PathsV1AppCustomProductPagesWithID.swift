@@ -14,23 +14,31 @@ extension APIEndpoint.V1.AppCustomProductPages {
 		public let path: String
 
 		public func get(parameters: GetParameters? = nil) -> Request<AppStoreConnect_Swift_SDK.AppCustomProductPageResponse> {
-			Request(path: path, method: "GET", query: parameters?.asQuery, id: "appCustomProductPages-get_instance")
+			Request(path: path, method: "GET", query: parameters?.asQuery, id: "appCustomProductPages_getInstance")
 		}
 
 		public struct GetParameters {
 			public var fieldsAppCustomProductPages: [FieldsAppCustomProductPages]?
-			public var include: [Include]?
 			public var fieldsAppCustomProductPageVersions: [FieldsAppCustomProductPageVersions]?
+			public var include: [Include]?
 			public var limitAppCustomProductPageVersions: Int?
 
 			public enum FieldsAppCustomProductPages: String, Codable, CaseIterable {
+				case name
+				case url
+				case visible
 				case app
 				case appCustomProductPageVersions
 				case appStoreVersionTemplate
 				case customProductPageTemplate
-				case name
-				case url
-				case visible
+			}
+
+			public enum FieldsAppCustomProductPageVersions: String, Codable, CaseIterable {
+				case version
+				case state
+				case deepLink
+				case appCustomProductPage
+				case appCustomProductPageLocalizations
 			}
 
 			public enum Include: String, Codable, CaseIterable {
@@ -38,37 +46,29 @@ extension APIEndpoint.V1.AppCustomProductPages {
 				case appCustomProductPageVersions
 			}
 
-			public enum FieldsAppCustomProductPageVersions: String, Codable, CaseIterable {
-				case appCustomProductPage
-				case appCustomProductPageLocalizations
-				case deepLink
-				case state
-				case version
-			}
-
-			public init(fieldsAppCustomProductPages: [FieldsAppCustomProductPages]? = nil, include: [Include]? = nil, fieldsAppCustomProductPageVersions: [FieldsAppCustomProductPageVersions]? = nil, limitAppCustomProductPageVersions: Int? = nil) {
+			public init(fieldsAppCustomProductPages: [FieldsAppCustomProductPages]? = nil, fieldsAppCustomProductPageVersions: [FieldsAppCustomProductPageVersions]? = nil, include: [Include]? = nil, limitAppCustomProductPageVersions: Int? = nil) {
 				self.fieldsAppCustomProductPages = fieldsAppCustomProductPages
-				self.include = include
 				self.fieldsAppCustomProductPageVersions = fieldsAppCustomProductPageVersions
+				self.include = include
 				self.limitAppCustomProductPageVersions = limitAppCustomProductPageVersions
 			}
 
 			public var asQuery: [(String, String?)] {
 				let encoder = URLQueryEncoder(explode: false)
 				encoder.encode(fieldsAppCustomProductPages, forKey: "fields[appCustomProductPages]")
-				encoder.encode(include, forKey: "include")
 				encoder.encode(fieldsAppCustomProductPageVersions, forKey: "fields[appCustomProductPageVersions]")
+				encoder.encode(include, forKey: "include")
 				encoder.encode(limitAppCustomProductPageVersions, forKey: "limit[appCustomProductPageVersions]")
 				return encoder.items
 			}
 		}
 
 		public func patch(_ body: AppStoreConnect_Swift_SDK.AppCustomProductPageUpdateRequest) -> Request<AppStoreConnect_Swift_SDK.AppCustomProductPageResponse> {
-			Request(path: path, method: "PATCH", body: body, id: "appCustomProductPages-update_instance")
+			Request(path: path, method: "PATCH", body: body, id: "appCustomProductPages_updateInstance")
 		}
 
 		public var delete: Request<Void> {
-			Request(path: path, method: "DELETE", id: "appCustomProductPages-delete_instance")
+			Request(path: path, method: "DELETE", id: "appCustomProductPages_deleteInstance")
 		}
 	}
 }

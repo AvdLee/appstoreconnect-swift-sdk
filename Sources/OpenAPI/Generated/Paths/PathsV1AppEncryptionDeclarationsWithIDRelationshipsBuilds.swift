@@ -15,7 +15,7 @@ extension APIEndpoint.V1.AppEncryptionDeclarations.WithID.Relationships {
 
 		@available(*, deprecated, message: "Deprecated")
 		public func post(_ body: AppStoreConnect_Swift_SDK.AppEncryptionDeclarationBuildsLinkagesRequest) -> Request<Void> {
-			Request(path: path, method: "POST", body: body, id: "appEncryptionDeclarations-builds-create_to_many_relationship")
+			Request(path: path, method: "POST", body: body, id: "appEncryptionDeclarations_builds_createToManyRelationship")
 		}
 	}
 }

@@ -14,36 +14,36 @@ extension APIEndpoint.V1.AppInfos.WithID {
 		public let path: String
 
 		public func get(parameters: GetParameters? = nil) -> Request<AppStoreConnect_Swift_SDK.AppCategoryResponse> {
-			Request(path: path, method: "GET", query: parameters?.asQuery, id: "appInfos-secondarySubcategoryTwo-get_to_one_related")
+			Request(path: path, method: "GET", query: parameters?.asQuery, id: "appInfos_secondarySubcategoryTwo_getToOneRelated")
 		}
 
 		public struct GetParameters {
 			public var fieldsAppCategories: [FieldsAppCategories]?
-			public var limitSubcategories: Int?
 			public var include: [Include]?
+			public var limitSubcategories: Int?
 
 			public enum FieldsAppCategories: String, Codable, CaseIterable {
-				case parent
 				case platforms
 				case subcategories
+				case parent
 			}
 
 			public enum Include: String, Codable, CaseIterable {
-				case parent
 				case subcategories
+				case parent
 			}
 
-			public init(fieldsAppCategories: [FieldsAppCategories]? = nil, limitSubcategories: Int? = nil, include: [Include]? = nil) {
+			public init(fieldsAppCategories: [FieldsAppCategories]? = nil, include: [Include]? = nil, limitSubcategories: Int? = nil) {
 				self.fieldsAppCategories = fieldsAppCategories
-				self.limitSubcategories = limitSubcategories
 				self.include = include
+				self.limitSubcategories = limitSubcategories
 			}
 
 			public var asQuery: [(String, String?)] {
 				let encoder = URLQueryEncoder(explode: false)
 				encoder.encode(fieldsAppCategories, forKey: "fields[appCategories]")
-				encoder.encode(limitSubcategories, forKey: "limit[subcategories]")
 				encoder.encode(include, forKey: "include")
+				encoder.encode(limitSubcategories, forKey: "limit[subcategories]")
 				return encoder.items
 			}
 		}

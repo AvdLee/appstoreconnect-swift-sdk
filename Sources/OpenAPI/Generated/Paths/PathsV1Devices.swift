@@ -14,14 +14,14 @@ extension APIEndpoint.V1 {
 		public let path: String
 
 		public func get(parameters: GetParameters? = nil) -> Request<AppStoreConnect_Swift_SDK.DevicesResponse> {
-			Request(path: path, method: "GET", query: parameters?.asQuery, id: "devices-get_collection")
+			Request(path: path, method: "GET", query: parameters?.asQuery, id: "devices_getCollection")
 		}
 
 		public struct GetParameters {
 			public var filterName: [String]?
 			public var filterPlatform: [FilterPlatform]?
-			public var filterStatus: [FilterStatus]?
 			public var filterUdid: [String]?
+			public var filterStatus: [FilterStatus]?
 			public var filterID: [String]?
 			public var sort: [Sort]?
 			public var fieldsDevices: [FieldsDevices]?
@@ -38,33 +38,33 @@ extension APIEndpoint.V1 {
 			}
 
 			public enum Sort: String, Codable, CaseIterable {
-				case id
-				case minusid = "-id"
 				case name
 				case minusname = "-name"
 				case platform
 				case minusplatform = "-platform"
-				case status
-				case minusstatus = "-status"
 				case udid
 				case minusudid = "-udid"
+				case status
+				case minusstatus = "-status"
+				case id
+				case minusid = "-id"
 			}
 
 			public enum FieldsDevices: String, Codable, CaseIterable {
-				case addedDate
-				case deviceClass
-				case model
 				case name
 				case platform
-				case status
 				case udid
+				case deviceClass
+				case status
+				case model
+				case addedDate
 			}
 
-			public init(filterName: [String]? = nil, filterPlatform: [FilterPlatform]? = nil, filterStatus: [FilterStatus]? = nil, filterUdid: [String]? = nil, filterID: [String]? = nil, sort: [Sort]? = nil, fieldsDevices: [FieldsDevices]? = nil, limit: Int? = nil) {
+			public init(filterName: [String]? = nil, filterPlatform: [FilterPlatform]? = nil, filterUdid: [String]? = nil, filterStatus: [FilterStatus]? = nil, filterID: [String]? = nil, sort: [Sort]? = nil, fieldsDevices: [FieldsDevices]? = nil, limit: Int? = nil) {
 				self.filterName = filterName
 				self.filterPlatform = filterPlatform
-				self.filterStatus = filterStatus
 				self.filterUdid = filterUdid
+				self.filterStatus = filterStatus
 				self.filterID = filterID
 				self.sort = sort
 				self.fieldsDevices = fieldsDevices
@@ -75,8 +75,8 @@ extension APIEndpoint.V1 {
 				let encoder = URLQueryEncoder(explode: false)
 				encoder.encode(filterName, forKey: "filter[name]")
 				encoder.encode(filterPlatform, forKey: "filter[platform]")
-				encoder.encode(filterStatus, forKey: "filter[status]")
 				encoder.encode(filterUdid, forKey: "filter[udid]")
+				encoder.encode(filterStatus, forKey: "filter[status]")
 				encoder.encode(filterID, forKey: "filter[id]")
 				encoder.encode(sort, forKey: "sort")
 				encoder.encode(fieldsDevices, forKey: "fields[devices]")
@@ -86,7 +86,7 @@ extension APIEndpoint.V1 {
 		}
 
 		public func post(_ body: AppStoreConnect_Swift_SDK.DeviceCreateRequest) -> Request<AppStoreConnect_Swift_SDK.DeviceResponse> {
-			Request(path: path, method: "POST", body: body, id: "devices-create_instance")
+			Request(path: path, method: "POST", body: body, id: "devices_createInstance")
 		}
 	}
 }

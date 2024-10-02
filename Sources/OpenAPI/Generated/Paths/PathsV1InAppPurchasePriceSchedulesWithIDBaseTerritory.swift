@@ -14,7 +14,7 @@ extension APIEndpoint.V1.InAppPurchasePriceSchedules.WithID {
 		public let path: String
 
 		public func get(fieldsTerritories: [FieldsTerritories]? = nil) -> Request<AppStoreConnect_Swift_SDK.TerritoryResponse> {
-			Request(path: path, method: "GET", query: makeGetQuery(fieldsTerritories), id: "inAppPurchasePriceSchedules-baseTerritory-get_to_one_related")
+			Request(path: path, method: "GET", query: makeGetQuery(fieldsTerritories), id: "inAppPurchasePriceSchedules_baseTerritory_getToOneRelated")
 		}
 
 		private func makeGetQuery(_ fieldsTerritories: [FieldsTerritories]?) -> [(String, String?)] {

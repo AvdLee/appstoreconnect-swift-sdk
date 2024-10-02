@@ -13,8 +13,9 @@ extension APIEndpoint.V1.PromotedPurchaseImages {
 		/// Path: `/v1/promotedPurchaseImages/{id}`
 		public let path: String
 
+		@available(*, deprecated, message: "Deprecated")
 		public func get(fieldsPromotedPurchaseImages: [FieldsPromotedPurchaseImages]? = nil, include: [Include]? = nil) -> Request<AppStoreConnect_Swift_SDK.PromotedPurchaseImageResponse> {
-			Request(path: path, method: "GET", query: makeGetQuery(fieldsPromotedPurchaseImages, include), id: "promotedPurchaseImages-get_instance")
+			Request(path: path, method: "GET", query: makeGetQuery(fieldsPromotedPurchaseImages, include), id: "promotedPurchaseImages_getInstance")
 		}
 
 		private func makeGetQuery(_ fieldsPromotedPurchaseImages: [FieldsPromotedPurchaseImages]?, _ include: [Include]?) -> [(String, String?)] {
@@ -25,28 +26,30 @@ extension APIEndpoint.V1.PromotedPurchaseImages {
 		}
 
 		public enum FieldsPromotedPurchaseImages: String, Codable, CaseIterable {
-			case assetToken
-			case assetType
-			case fileName
 			case fileSize
-			case imageAsset
-			case promotedPurchase
+			case fileName
 			case sourceFileChecksum
-			case state
+			case assetToken
+			case imageAsset
+			case assetType
 			case uploadOperations
 			case uploaded
+			case state
+			case promotedPurchase
 		}
 
 		public enum Include: String, Codable, CaseIterable {
 			case promotedPurchase
 		}
 
+		@available(*, deprecated, message: "Deprecated")
 		public func patch(_ body: AppStoreConnect_Swift_SDK.PromotedPurchaseImageUpdateRequest) -> Request<AppStoreConnect_Swift_SDK.PromotedPurchaseImageResponse> {
-			Request(path: path, method: "PATCH", body: body, id: "promotedPurchaseImages-update_instance")
+			Request(path: path, method: "PATCH", body: body, id: "promotedPurchaseImages_updateInstance")
 		}
 
+		@available(*, deprecated, message: "Deprecated")
 		public var delete: Request<Void> {
-			Request(path: path, method: "DELETE", id: "promotedPurchaseImages-delete_instance")
+			Request(path: path, method: "DELETE", id: "promotedPurchaseImages_deleteInstance")
 		}
 	}
 }

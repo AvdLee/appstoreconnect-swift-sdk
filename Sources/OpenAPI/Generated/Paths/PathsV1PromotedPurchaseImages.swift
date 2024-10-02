@@ -13,8 +13,9 @@ extension APIEndpoint.V1 {
 		/// Path: `/v1/promotedPurchaseImages`
 		public let path: String
 
+		@available(*, deprecated, message: "Deprecated")
 		public func post(_ body: AppStoreConnect_Swift_SDK.PromotedPurchaseImageCreateRequest) -> Request<AppStoreConnect_Swift_SDK.PromotedPurchaseImageResponse> {
-			Request(path: path, method: "POST", body: body, id: "promotedPurchaseImages-create_instance")
+			Request(path: path, method: "POST", body: body, id: "promotedPurchaseImages_createInstance")
 		}
 	}
 }

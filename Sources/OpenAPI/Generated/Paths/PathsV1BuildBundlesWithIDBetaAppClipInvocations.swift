@@ -14,38 +14,38 @@ extension APIEndpoint.V1.BuildBundles.WithID {
 		public let path: String
 
 		public func get(parameters: GetParameters? = nil) -> Request<AppStoreConnect_Swift_SDK.BetaAppClipInvocationsResponse> {
-			Request(path: path, method: "GET", query: parameters?.asQuery, id: "buildBundles-betaAppClipInvocations-get_to_many_related")
+			Request(path: path, method: "GET", query: parameters?.asQuery, id: "buildBundles_betaAppClipInvocations_getToManyRelated")
 		}
 
 		public struct GetParameters {
 			public var fieldsBetaAppClipInvocations: [FieldsBetaAppClipInvocations]?
 			public var fieldsBetaAppClipInvocationLocalizations: [FieldsBetaAppClipInvocationLocalizations]?
 			public var limit: Int?
-			public var limitBetaAppClipInvocationLocalizations: Int?
 			public var include: [Include]?
+			public var limitBetaAppClipInvocationLocalizations: Int?
 
 			public enum FieldsBetaAppClipInvocations: String, Codable, CaseIterable {
-				case betaAppClipInvocationLocalizations
-				case buildBundle
 				case url
+				case buildBundle
+				case betaAppClipInvocationLocalizations
 			}
 
 			public enum FieldsBetaAppClipInvocationLocalizations: String, Codable, CaseIterable {
-				case betaAppClipInvocation
-				case locale
 				case title
+				case locale
+				case betaAppClipInvocation
 			}
 
 			public enum Include: String, Codable, CaseIterable {
 				case betaAppClipInvocationLocalizations
 			}
 
-			public init(fieldsBetaAppClipInvocations: [FieldsBetaAppClipInvocations]? = nil, fieldsBetaAppClipInvocationLocalizations: [FieldsBetaAppClipInvocationLocalizations]? = nil, limit: Int? = nil, limitBetaAppClipInvocationLocalizations: Int? = nil, include: [Include]? = nil) {
+			public init(fieldsBetaAppClipInvocations: [FieldsBetaAppClipInvocations]? = nil, fieldsBetaAppClipInvocationLocalizations: [FieldsBetaAppClipInvocationLocalizations]? = nil, limit: Int? = nil, include: [Include]? = nil, limitBetaAppClipInvocationLocalizations: Int? = nil) {
 				self.fieldsBetaAppClipInvocations = fieldsBetaAppClipInvocations
 				self.fieldsBetaAppClipInvocationLocalizations = fieldsBetaAppClipInvocationLocalizations
 				self.limit = limit
-				self.limitBetaAppClipInvocationLocalizations = limitBetaAppClipInvocationLocalizations
 				self.include = include
+				self.limitBetaAppClipInvocationLocalizations = limitBetaAppClipInvocationLocalizations
 			}
 
 			public var asQuery: [(String, String?)] {
@@ -53,8 +53,8 @@ extension APIEndpoint.V1.BuildBundles.WithID {
 				encoder.encode(fieldsBetaAppClipInvocations, forKey: "fields[betaAppClipInvocations]")
 				encoder.encode(fieldsBetaAppClipInvocationLocalizations, forKey: "fields[betaAppClipInvocationLocalizations]")
 				encoder.encode(limit, forKey: "limit")
-				encoder.encode(limitBetaAppClipInvocationLocalizations, forKey: "limit[betaAppClipInvocationLocalizations]")
 				encoder.encode(include, forKey: "include")
+				encoder.encode(limitBetaAppClipInvocationLocalizations, forKey: "limit[betaAppClipInvocationLocalizations]")
 				return encoder.items
 			}
 		}

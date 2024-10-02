@@ -14,7 +14,7 @@ extension APIEndpoint.V1.ScmGitReferences {
 		public let path: String
 
 		public func get(fieldsScmGitReferences: [FieldsScmGitReferences]? = nil, include: [Include]? = nil) -> Request<AppStoreConnect_Swift_SDK.ScmGitReferenceResponse> {
-			Request(path: path, method: "GET", query: makeGetQuery(fieldsScmGitReferences, include), id: "scmGitReferences-get_instance")
+			Request(path: path, method: "GET", query: makeGetQuery(fieldsScmGitReferences, include), id: "scmGitReferences_getInstance")
 		}
 
 		private func makeGetQuery(_ fieldsScmGitReferences: [FieldsScmGitReferences]?, _ include: [Include]?) -> [(String, String?)] {
@@ -25,10 +25,10 @@ extension APIEndpoint.V1.ScmGitReferences {
 		}
 
 		public enum FieldsScmGitReferences: String, Codable, CaseIterable {
+			case name
 			case canonicalName
 			case isDeleted
 			case kind
-			case name
 			case repository
 		}
 

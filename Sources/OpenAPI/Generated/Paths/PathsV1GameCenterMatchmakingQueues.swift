@@ -14,7 +14,7 @@ extension APIEndpoint.V1 {
 		public let path: String
 
 		public func get(parameters: GetParameters? = nil) -> Request<AppStoreConnect_Swift_SDK.GameCenterMatchmakingQueuesResponse> {
-			Request(path: path, method: "GET", query: parameters?.asQuery, id: "gameCenterMatchmakingQueues-get_collection")
+			Request(path: path, method: "GET", query: parameters?.asQuery, id: "gameCenterMatchmakingQueues_getCollection")
 		}
 
 		public struct GetParameters {
@@ -23,15 +23,15 @@ extension APIEndpoint.V1 {
 			public var include: [Include]?
 
 			public enum FieldsGameCenterMatchmakingQueues: String, Codable, CaseIterable {
-				case classicMatchmakingBundleIDs = "classicMatchmakingBundleIds"
-				case experimentRuleSet
 				case referenceName
+				case classicMatchmakingBundleIDs = "classicMatchmakingBundleIds"
 				case ruleSet
+				case experimentRuleSet
 			}
 
 			public enum Include: String, Codable, CaseIterable {
-				case experimentRuleSet
 				case ruleSet
+				case experimentRuleSet
 			}
 
 			public init(fieldsGameCenterMatchmakingQueues: [FieldsGameCenterMatchmakingQueues]? = nil, limit: Int? = nil, include: [Include]? = nil) {
@@ -50,7 +50,7 @@ extension APIEndpoint.V1 {
 		}
 
 		public func post(_ body: AppStoreConnect_Swift_SDK.GameCenterMatchmakingQueueCreateRequest) -> Request<AppStoreConnect_Swift_SDK.GameCenterMatchmakingQueueResponse> {
-			Request(path: path, method: "POST", body: body, id: "gameCenterMatchmakingQueues-create_instance")
+			Request(path: path, method: "POST", body: body, id: "gameCenterMatchmakingQueues_createInstance")
 		}
 	}
 }

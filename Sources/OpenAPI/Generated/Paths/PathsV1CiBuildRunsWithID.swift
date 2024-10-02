@@ -14,105 +14,87 @@ extension APIEndpoint.V1.CiBuildRuns {
 		public let path: String
 
 		public func get(parameters: GetParameters? = nil) -> Request<AppStoreConnect_Swift_SDK.CiBuildRunResponse> {
-			Request(path: path, method: "GET", query: parameters?.asQuery, id: "ciBuildRuns-get_instance")
+			Request(path: path, method: "GET", query: parameters?.asQuery, id: "ciBuildRuns_getInstance")
 		}
 
 		public struct GetParameters {
 			public var fieldsCiBuildRuns: [FieldsCiBuildRuns]?
-			public var include: [Include]?
-			public var fieldsCiBuildActions: [FieldsCiBuildActions]?
 			public var fieldsBuilds: [FieldsBuilds]?
+			public var include: [Include]?
 			public var limitBuilds: Int?
 
 			public enum FieldsCiBuildRuns: String, Codable, CaseIterable {
-				case actions
-				case buildRun
-				case builds
-				case cancelReason
 				case clean
-				case completionStatus
+				case number
 				case createdDate
-				case destinationBranch
-				case destinationCommit
-				case executionProgress
+				case startedDate
 				case finishedDate
+				case sourceCommit
+				case destinationCommit
 				case isPullRequestBuild
 				case issueCounts
-				case number
-				case product
-				case pullRequest
-				case sourceBranchOrTag
-				case sourceCommit
+				case executionProgress
+				case completionStatus
 				case startReason
-				case startedDate
+				case cancelReason
+				case buildRun
+				case builds
 				case workflow
+				case product
+				case sourceBranchOrTag
+				case destinationBranch
+				case actions
+				case pullRequest
+			}
+
+			public enum FieldsBuilds: String, Codable, CaseIterable {
+				case version
+				case uploadedDate
+				case expirationDate
+				case expired
+				case minOsVersion
+				case lsMinimumSystemVersion
+				case computedMinMacOsVersion
+				case iconAssetToken
+				case processingState
+				case buildAudienceType
+				case usesNonExemptEncryption
+				case preReleaseVersion
+				case individualTesters
+				case betaGroups
+				case betaBuildLocalizations
+				case appEncryptionDeclaration
+				case betaAppReviewSubmission
+				case app
+				case buildBetaDetail
+				case appStoreVersion
+				case icons
+				case buildBundles
+				case perfPowerMetrics
+				case diagnosticSignatures
 			}
 
 			public enum Include: String, Codable, CaseIterable {
 				case builds
-				case destinationBranch
-				case product
-				case pullRequest
-				case sourceBranchOrTag
 				case workflow
+				case product
+				case sourceBranchOrTag
+				case destinationBranch
+				case pullRequest
 			}
 
-			public enum FieldsCiBuildActions: String, Codable, CaseIterable {
-				case actionType
-				case artifacts
-				case buildRun
-				case completionStatus
-				case executionProgress
-				case finishedDate
-				case isRequiredToPass
-				case issueCounts
-				case issues
-				case name
-				case startedDate
-				case testResults
-			}
-
-			public enum FieldsBuilds: String, Codable, CaseIterable {
-				case app
-				case appEncryptionDeclaration
-				case appStoreVersion
-				case betaAppReviewSubmission
-				case betaBuildLocalizations
-				case betaGroups
-				case buildAudienceType
-				case buildBetaDetail
-				case buildBundles
-				case computedMinMacOsVersion
-				case diagnosticSignatures
-				case expirationDate
-				case expired
-				case iconAssetToken
-				case icons
-				case individualTesters
-				case lsMinimumSystemVersion
-				case minOsVersion
-				case perfPowerMetrics
-				case preReleaseVersion
-				case processingState
-				case uploadedDate
-				case usesNonExemptEncryption
-				case version
-			}
-
-			public init(fieldsCiBuildRuns: [FieldsCiBuildRuns]? = nil, include: [Include]? = nil, fieldsCiBuildActions: [FieldsCiBuildActions]? = nil, fieldsBuilds: [FieldsBuilds]? = nil, limitBuilds: Int? = nil) {
+			public init(fieldsCiBuildRuns: [FieldsCiBuildRuns]? = nil, fieldsBuilds: [FieldsBuilds]? = nil, include: [Include]? = nil, limitBuilds: Int? = nil) {
 				self.fieldsCiBuildRuns = fieldsCiBuildRuns
-				self.include = include
-				self.fieldsCiBuildActions = fieldsCiBuildActions
 				self.fieldsBuilds = fieldsBuilds
+				self.include = include
 				self.limitBuilds = limitBuilds
 			}
 
 			public var asQuery: [(String, String?)] {
 				let encoder = URLQueryEncoder(explode: false)
 				encoder.encode(fieldsCiBuildRuns, forKey: "fields[ciBuildRuns]")
-				encoder.encode(include, forKey: "include")
-				encoder.encode(fieldsCiBuildActions, forKey: "fields[ciBuildActions]")
 				encoder.encode(fieldsBuilds, forKey: "fields[builds]")
+				encoder.encode(include, forKey: "include")
 				encoder.encode(limitBuilds, forKey: "limit[builds]")
 				return encoder.items
 			}

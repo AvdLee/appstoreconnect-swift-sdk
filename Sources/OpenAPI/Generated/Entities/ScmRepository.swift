@@ -51,32 +51,11 @@ public struct ScmRepository: Codable, Identifiable {
 	public struct Relationships: Codable {
 		public var scmProvider: ScmProvider?
 		public var defaultBranch: DefaultBranch?
+		public var gitReferences: GitReferences?
+		public var pullRequests: PullRequests?
 
 		public struct ScmProvider: Codable {
-			public var links: Links?
 			public var data: Data?
-
-			public struct Links: Codable {
-				public var this: String?
-				public var related: String?
-
-				public init(this: String? = nil, related: String? = nil) {
-					self.this = this
-					self.related = related
-				}
-
-				public init(from decoder: Decoder) throws {
-					let values = try decoder.container(keyedBy: StringCodingKey.self)
-					self.this = try values.decodeIfPresent(String.self, forKey: "self")
-					self.related = try values.decodeIfPresent(String.self, forKey: "related")
-				}
-
-				public func encode(to encoder: Encoder) throws {
-					var values = encoder.container(keyedBy: StringCodingKey.self)
-					try values.encodeIfPresent(this, forKey: "self")
-					try values.encodeIfPresent(related, forKey: "related")
-				}
-			}
 
 			public struct Data: Codable, Identifiable {
 				public var type: `Type`
@@ -104,49 +83,23 @@ public struct ScmRepository: Codable, Identifiable {
 				}
 			}
 
-			public init(links: Links? = nil, data: Data? = nil) {
-				self.links = links
+			public init(data: Data? = nil) {
 				self.data = data
 			}
 
 			public init(from decoder: Decoder) throws {
 				let values = try decoder.container(keyedBy: StringCodingKey.self)
-				self.links = try values.decodeIfPresent(Links.self, forKey: "links")
 				self.data = try values.decodeIfPresent(Data.self, forKey: "data")
 			}
 
 			public func encode(to encoder: Encoder) throws {
 				var values = encoder.container(keyedBy: StringCodingKey.self)
-				try values.encodeIfPresent(links, forKey: "links")
 				try values.encodeIfPresent(data, forKey: "data")
 			}
 		}
 
 		public struct DefaultBranch: Codable {
-			public var links: Links?
 			public var data: Data?
-
-			public struct Links: Codable {
-				public var this: String?
-				public var related: String?
-
-				public init(this: String? = nil, related: String? = nil) {
-					self.this = this
-					self.related = related
-				}
-
-				public init(from decoder: Decoder) throws {
-					let values = try decoder.container(keyedBy: StringCodingKey.self)
-					self.this = try values.decodeIfPresent(String.self, forKey: "self")
-					self.related = try values.decodeIfPresent(String.self, forKey: "related")
-				}
-
-				public func encode(to encoder: Encoder) throws {
-					var values = encoder.container(keyedBy: StringCodingKey.self)
-					try values.encodeIfPresent(this, forKey: "self")
-					try values.encodeIfPresent(related, forKey: "related")
-				}
-			}
 
 			public struct Data: Codable, Identifiable {
 				public var type: `Type`
@@ -174,39 +127,78 @@ public struct ScmRepository: Codable, Identifiable {
 				}
 			}
 
-			public init(links: Links? = nil, data: Data? = nil) {
-				self.links = links
+			public init(data: Data? = nil) {
 				self.data = data
 			}
 
 			public init(from decoder: Decoder) throws {
 				let values = try decoder.container(keyedBy: StringCodingKey.self)
-				self.links = try values.decodeIfPresent(Links.self, forKey: "links")
 				self.data = try values.decodeIfPresent(Data.self, forKey: "data")
 			}
 
 			public func encode(to encoder: Encoder) throws {
 				var values = encoder.container(keyedBy: StringCodingKey.self)
-				try values.encodeIfPresent(links, forKey: "links")
 				try values.encodeIfPresent(data, forKey: "data")
 			}
 		}
 
-		public init(scmProvider: ScmProvider? = nil, defaultBranch: DefaultBranch? = nil) {
+		public struct GitReferences: Codable {
+			public var links: RelationshipLinks?
+
+			public init(links: RelationshipLinks? = nil) {
+				self.links = links
+			}
+
+			public init(from decoder: Decoder) throws {
+				let values = try decoder.container(keyedBy: StringCodingKey.self)
+				self.links = try values.decodeIfPresent(RelationshipLinks.self, forKey: "links")
+			}
+
+			public func encode(to encoder: Encoder) throws {
+				var values = encoder.container(keyedBy: StringCodingKey.self)
+				try values.encodeIfPresent(links, forKey: "links")
+			}
+		}
+
+		public struct PullRequests: Codable {
+			public var links: RelationshipLinks?
+
+			public init(links: RelationshipLinks? = nil) {
+				self.links = links
+			}
+
+			public init(from decoder: Decoder) throws {
+				let values = try decoder.container(keyedBy: StringCodingKey.self)
+				self.links = try values.decodeIfPresent(RelationshipLinks.self, forKey: "links")
+			}
+
+			public func encode(to encoder: Encoder) throws {
+				var values = encoder.container(keyedBy: StringCodingKey.self)
+				try values.encodeIfPresent(links, forKey: "links")
+			}
+		}
+
+		public init(scmProvider: ScmProvider? = nil, defaultBranch: DefaultBranch? = nil, gitReferences: GitReferences? = nil, pullRequests: PullRequests? = nil) {
 			self.scmProvider = scmProvider
 			self.defaultBranch = defaultBranch
+			self.gitReferences = gitReferences
+			self.pullRequests = pullRequests
 		}
 
 		public init(from decoder: Decoder) throws {
 			let values = try decoder.container(keyedBy: StringCodingKey.self)
 			self.scmProvider = try values.decodeIfPresent(ScmProvider.self, forKey: "scmProvider")
 			self.defaultBranch = try values.decodeIfPresent(DefaultBranch.self, forKey: "defaultBranch")
+			self.gitReferences = try values.decodeIfPresent(GitReferences.self, forKey: "gitReferences")
+			self.pullRequests = try values.decodeIfPresent(PullRequests.self, forKey: "pullRequests")
 		}
 
 		public func encode(to encoder: Encoder) throws {
 			var values = encoder.container(keyedBy: StringCodingKey.self)
 			try values.encodeIfPresent(scmProvider, forKey: "scmProvider")
 			try values.encodeIfPresent(defaultBranch, forKey: "defaultBranch")
+			try values.encodeIfPresent(gitReferences, forKey: "gitReferences")
+			try values.encodeIfPresent(pullRequests, forKey: "pullRequests")
 		}
 	}
 

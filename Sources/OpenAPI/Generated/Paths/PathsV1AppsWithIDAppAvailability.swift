@@ -15,66 +15,68 @@ extension APIEndpoint.V1.Apps.WithID {
 
 		@available(*, deprecated, message: "Deprecated")
 		public func get(parameters: GetParameters? = nil) -> Request<AppStoreConnect_Swift_SDK.AppAvailabilityResponse> {
-			Request(path: path, method: "GET", query: parameters?.asQuery, id: "apps-appAvailability-get_to_one_related")
+			Request(path: path, method: "GET", query: parameters?.asQuery, id: "apps_appAvailability_getToOneRelated")
 		}
 
 		public struct GetParameters {
 			public var fieldsAppAvailabilities: [FieldsAppAvailabilities]?
 			public var fieldsApps: [FieldsApps]?
 			public var fieldsTerritories: [FieldsTerritories]?
-			public var limitAvailableTerritories: Int?
 			public var include: [Include]?
+			public var limitAvailableTerritories: Int?
 
 			public enum FieldsAppAvailabilities: String, Codable, CaseIterable {
-				case app
 				case availableInNewTerritories
+				case app
 				case availableTerritories
 			}
 
 			public enum FieldsApps: String, Codable, CaseIterable {
+				case name
+				case bundleID = "bundleId"
+				case sku
+				case primaryLocale
+				case isOrEverWasMadeForKids
+				case subscriptionStatusURL = "subscriptionStatusUrl"
+				case subscriptionStatusURLVersion = "subscriptionStatusUrlVersion"
+				case subscriptionStatusURLForSandbox = "subscriptionStatusUrlForSandbox"
+				case subscriptionStatusURLVersionForSandbox = "subscriptionStatusUrlVersionForSandbox"
+				case contentRightsDeclaration
+				case streamlinedPurchasingEnabled
+				case appEncryptionDeclarations
+				case ciProduct
+				case betaTesters
+				case betaGroups
+				case appStoreVersions
+				case preReleaseVersions
+				case betaAppLocalizations
+				case builds
+				case betaLicenseAgreement
+				case betaAppReviewDetail
+				case appInfos
+				case appClips
+				case appPricePoints
+				case endUserLicenseAgreement
+				case preOrder
+				case appPriceSchedule
+				case appAvailability
+				case appAvailabilityV2
+				case inAppPurchases
+				case subscriptionGroups
+				case gameCenterEnabledVersions
+				case perfPowerMetrics
+				case appCustomProductPages
+				case inAppPurchasesV2
+				case promotedPurchases
+				case appEvents
+				case reviewSubmissions
+				case subscriptionGracePeriod
+				case customerReviews
+				case gameCenterDetail
+				case appStoreVersionExperimentsV2
 				case alternativeDistributionKey
 				case analyticsReportRequests
-				case appAvailability
-				case appClips
-				case appCustomProductPages
-				case appEncryptionDeclarations
-				case appEvents
-				case appInfos
-				case appPricePoints
-				case appPriceSchedule
-				case appStoreVersionExperimentsV2
-				case appStoreVersions
-				case betaAppLocalizations
-				case betaAppReviewDetail
-				case betaGroups
-				case betaLicenseAgreement
-				case betaTesters
-				case builds
-				case bundleID = "bundleId"
-				case ciProduct
-				case contentRightsDeclaration
-				case customerReviews
-				case endUserLicenseAgreement
-				case gameCenterDetail
-				case gameCenterEnabledVersions
-				case inAppPurchases
-				case inAppPurchasesV2
-				case isOrEverWasMadeForKids
 				case marketplaceSearchDetail
-				case name
-				case perfPowerMetrics
-				case preOrder
-				case preReleaseVersions
-				case primaryLocale
-				case promotedPurchases
-				case reviewSubmissions
-				case sku
-				case subscriptionGracePeriod
-				case subscriptionGroups
-				case subscriptionStatusURL = "subscriptionStatusUrl"
-				case subscriptionStatusURLForSandbox = "subscriptionStatusUrlForSandbox"
-				case subscriptionStatusURLVersion = "subscriptionStatusUrlVersion"
-				case subscriptionStatusURLVersionForSandbox = "subscriptionStatusUrlVersionForSandbox"
 			}
 
 			public enum FieldsTerritories: String, Codable, CaseIterable {
@@ -86,12 +88,12 @@ extension APIEndpoint.V1.Apps.WithID {
 				case availableTerritories
 			}
 
-			public init(fieldsAppAvailabilities: [FieldsAppAvailabilities]? = nil, fieldsApps: [FieldsApps]? = nil, fieldsTerritories: [FieldsTerritories]? = nil, limitAvailableTerritories: Int? = nil, include: [Include]? = nil) {
+			public init(fieldsAppAvailabilities: [FieldsAppAvailabilities]? = nil, fieldsApps: [FieldsApps]? = nil, fieldsTerritories: [FieldsTerritories]? = nil, include: [Include]? = nil, limitAvailableTerritories: Int? = nil) {
 				self.fieldsAppAvailabilities = fieldsAppAvailabilities
 				self.fieldsApps = fieldsApps
 				self.fieldsTerritories = fieldsTerritories
-				self.limitAvailableTerritories = limitAvailableTerritories
 				self.include = include
+				self.limitAvailableTerritories = limitAvailableTerritories
 			}
 
 			public var asQuery: [(String, String?)] {
@@ -99,8 +101,8 @@ extension APIEndpoint.V1.Apps.WithID {
 				encoder.encode(fieldsAppAvailabilities, forKey: "fields[appAvailabilities]")
 				encoder.encode(fieldsApps, forKey: "fields[apps]")
 				encoder.encode(fieldsTerritories, forKey: "fields[territories]")
-				encoder.encode(limitAvailableTerritories, forKey: "limit[availableTerritories]")
 				encoder.encode(include, forKey: "include")
+				encoder.encode(limitAvailableTerritories, forKey: "limit[availableTerritories]")
 				return encoder.items
 			}
 		}

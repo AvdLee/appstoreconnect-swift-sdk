@@ -14,45 +14,45 @@ extension APIEndpoint.V1.SubscriptionPromotionalOffers.WithID {
 		public let path: String
 
 		public func get(parameters: GetParameters? = nil) -> Request<AppStoreConnect_Swift_SDK.SubscriptionPromotionalOfferPricesResponse> {
-			Request(path: path, method: "GET", query: parameters?.asQuery, id: "subscriptionPromotionalOffers-prices-get_to_many_related")
+			Request(path: path, method: "GET", query: parameters?.asQuery, id: "subscriptionPromotionalOffers_prices_getToManyRelated")
 		}
 
 		public struct GetParameters {
 			public var filterTerritory: [String]?
-			public var fieldsSubscriptionPricePoints: [FieldsSubscriptionPricePoints]?
-			public var fieldsTerritories: [FieldsTerritories]?
 			public var fieldsSubscriptionPromotionalOfferPrices: [FieldsSubscriptionPromotionalOfferPrices]?
+			public var fieldsTerritories: [FieldsTerritories]?
+			public var fieldsSubscriptionPricePoints: [FieldsSubscriptionPricePoints]?
 			public var limit: Int?
 			public var include: [Include]?
 
-			public enum FieldsSubscriptionPricePoints: String, Codable, CaseIterable {
-				case customerPrice
-				case equalizations
-				case proceeds
-				case proceedsYear2
-				case subscription
+			public enum FieldsSubscriptionPromotionalOfferPrices: String, Codable, CaseIterable {
 				case territory
+				case subscriptionPricePoint
 			}
 
 			public enum FieldsTerritories: String, Codable, CaseIterable {
 				case currency
 			}
 
-			public enum FieldsSubscriptionPromotionalOfferPrices: String, Codable, CaseIterable {
-				case subscriptionPricePoint
+			public enum FieldsSubscriptionPricePoints: String, Codable, CaseIterable {
+				case customerPrice
+				case proceeds
+				case proceedsYear2
 				case territory
+				case subscription
+				case equalizations
 			}
 
 			public enum Include: String, Codable, CaseIterable {
-				case subscriptionPricePoint
 				case territory
+				case subscriptionPricePoint
 			}
 
-			public init(filterTerritory: [String]? = nil, fieldsSubscriptionPricePoints: [FieldsSubscriptionPricePoints]? = nil, fieldsTerritories: [FieldsTerritories]? = nil, fieldsSubscriptionPromotionalOfferPrices: [FieldsSubscriptionPromotionalOfferPrices]? = nil, limit: Int? = nil, include: [Include]? = nil) {
+			public init(filterTerritory: [String]? = nil, fieldsSubscriptionPromotionalOfferPrices: [FieldsSubscriptionPromotionalOfferPrices]? = nil, fieldsTerritories: [FieldsTerritories]? = nil, fieldsSubscriptionPricePoints: [FieldsSubscriptionPricePoints]? = nil, limit: Int? = nil, include: [Include]? = nil) {
 				self.filterTerritory = filterTerritory
-				self.fieldsSubscriptionPricePoints = fieldsSubscriptionPricePoints
-				self.fieldsTerritories = fieldsTerritories
 				self.fieldsSubscriptionPromotionalOfferPrices = fieldsSubscriptionPromotionalOfferPrices
+				self.fieldsTerritories = fieldsTerritories
+				self.fieldsSubscriptionPricePoints = fieldsSubscriptionPricePoints
 				self.limit = limit
 				self.include = include
 			}
@@ -60,9 +60,9 @@ extension APIEndpoint.V1.SubscriptionPromotionalOffers.WithID {
 			public var asQuery: [(String, String?)] {
 				let encoder = URLQueryEncoder(explode: false)
 				encoder.encode(filterTerritory, forKey: "filter[territory]")
-				encoder.encode(fieldsSubscriptionPricePoints, forKey: "fields[subscriptionPricePoints]")
-				encoder.encode(fieldsTerritories, forKey: "fields[territories]")
 				encoder.encode(fieldsSubscriptionPromotionalOfferPrices, forKey: "fields[subscriptionPromotionalOfferPrices]")
+				encoder.encode(fieldsTerritories, forKey: "fields[territories]")
+				encoder.encode(fieldsSubscriptionPricePoints, forKey: "fields[subscriptionPricePoints]")
 				encoder.encode(limit, forKey: "limit")
 				encoder.encode(include, forKey: "include")
 				return encoder.items

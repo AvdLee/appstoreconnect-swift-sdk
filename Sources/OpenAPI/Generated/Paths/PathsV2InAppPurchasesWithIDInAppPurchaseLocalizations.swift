@@ -14,7 +14,7 @@ extension APIEndpoint.V2.InAppPurchases.WithID {
 		public let path: String
 
 		public func get(parameters: GetParameters? = nil) -> Request<AppStoreConnect_Swift_SDK.InAppPurchaseLocalizationsResponse> {
-			Request(path: path, method: "GET", query: parameters?.asQuery, id: "inAppPurchasesV2-inAppPurchaseLocalizations-get_to_many_related")
+			Request(path: path, method: "GET", query: parameters?.asQuery, id: "inAppPurchasesV2_inAppPurchaseLocalizations_getToManyRelated")
 		}
 
 		public struct GetParameters {
@@ -24,29 +24,30 @@ extension APIEndpoint.V2.InAppPurchases.WithID {
 			public var include: [Include]?
 
 			public enum FieldsInAppPurchaseLocalizations: String, Codable, CaseIterable {
-				case description
-				case inAppPurchaseV2
-				case locale
 				case name
+				case locale
+				case description
 				case state
+				case inAppPurchaseV2
 			}
 
 			public enum FieldsInAppPurchases: String, Codable, CaseIterable {
-				case app
-				case appStoreReviewScreenshot
-				case content
-				case contentHosting
+				case name
+				case productID = "productId"
+				case inAppPurchaseType
+				case state
+				case reviewNote
 				case familySharable
+				case contentHosting
+				case app
+				case inAppPurchaseLocalizations
+				case pricePoints
+				case content
+				case appStoreReviewScreenshot
+				case promotedPurchase
 				case iapPriceSchedule
 				case inAppPurchaseAvailability
-				case inAppPurchaseLocalizations
-				case inAppPurchaseType
-				case name
-				case pricePoints
-				case productID = "productId"
-				case promotedPurchase
-				case reviewNote
-				case state
+				case images
 			}
 
 			public enum Include: String, Codable, CaseIterable {

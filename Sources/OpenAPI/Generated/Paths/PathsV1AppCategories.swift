@@ -14,7 +14,7 @@ extension APIEndpoint.V1 {
 		public let path: String
 
 		public func get(parameters: GetParameters? = nil) -> Request<AppStoreConnect_Swift_SDK.AppCategoriesResponse> {
-			Request(path: path, method: "GET", query: parameters?.asQuery, id: "appCategories-get_collection")
+			Request(path: path, method: "GET", query: parameters?.asQuery, id: "appCategories_getCollection")
 		}
 
 		public struct GetParameters {
@@ -33,14 +33,14 @@ extension APIEndpoint.V1 {
 			}
 
 			public enum FieldsAppCategories: String, Codable, CaseIterable {
-				case parent
 				case platforms
 				case subcategories
+				case parent
 			}
 
 			public enum Include: String, Codable, CaseIterable {
-				case parent
 				case subcategories
+				case parent
 			}
 
 			public init(filterPlatforms: [FilterPlatforms]? = nil, isExistsParent: Bool? = nil, fieldsAppCategories: [FieldsAppCategories]? = nil, limit: Int? = nil, include: [Include]? = nil, limitSubcategories: Int? = nil) {

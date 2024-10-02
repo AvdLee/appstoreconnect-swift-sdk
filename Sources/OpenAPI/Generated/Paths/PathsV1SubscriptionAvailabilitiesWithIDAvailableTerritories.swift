@@ -14,7 +14,7 @@ extension APIEndpoint.V1.SubscriptionAvailabilities.WithID {
 		public let path: String
 
 		public func get(fieldsTerritories: [FieldsTerritories]? = nil, limit: Int? = nil) -> Request<AppStoreConnect_Swift_SDK.TerritoriesResponse> {
-			Request(path: path, method: "GET", query: makeGetQuery(fieldsTerritories, limit), id: "subscriptionAvailabilities-availableTerritories-get_to_many_related")
+			Request(path: path, method: "GET", query: makeGetQuery(fieldsTerritories, limit), id: "subscriptionAvailabilities_availableTerritories_getToManyRelated")
 		}
 
 		private func makeGetQuery(_ fieldsTerritories: [FieldsTerritories]?, _ limit: Int?) -> [(String, String?)] {

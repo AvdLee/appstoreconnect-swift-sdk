@@ -14,13 +14,13 @@ extension APIEndpoint.V1.BetaTesters.WithID.Metrics {
 		public let path: String
 
 		public func get(parameters: GetParameters) -> Request<AppStoreConnect_Swift_SDK.BetaTesterUsagesV1MetricResponse> {
-			Request(path: path, method: "GET", query: parameters.asQuery, id: "betaTesters-betaTesterUsages-get_metrics")
+			Request(path: path, method: "GET", query: parameters.asQuery, id: "betaTesters_betaTesterUsages_getMetrics")
 		}
 
 		public struct GetParameters {
-			public var limit: Int?
-			public var filterApps: String
 			public var period: Period?
+			public var filterApps: String
+			public var limit: Int?
 
 			public enum Period: String, Codable, CaseIterable {
 				case p7d = "P7D"
@@ -29,17 +29,17 @@ extension APIEndpoint.V1.BetaTesters.WithID.Metrics {
 				case p365d = "P365D"
 			}
 
-			public init(limit: Int? = nil, filterApps: String, period: Period? = nil) {
-				self.limit = limit
-				self.filterApps = filterApps
+			public init(period: Period? = nil, filterApps: String, limit: Int? = nil) {
 				self.period = period
+				self.filterApps = filterApps
+				self.limit = limit
 			}
 
 			public var asQuery: [(String, String?)] {
 				let encoder = URLQueryEncoder(explode: false)
-				encoder.encode(limit, forKey: "limit")
-				encoder.encode(filterApps, forKey: "filter[apps]")
 				encoder.encode(period, forKey: "period")
+				encoder.encode(filterApps, forKey: "filter[apps]")
+				encoder.encode(limit, forKey: "limit")
 				return encoder.items
 			}
 		}

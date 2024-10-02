@@ -15,7 +15,7 @@ extension APIEndpoint.V1 {
 
 		@available(*, deprecated, message: "Deprecated")
 		public func post(_ body: AppStoreConnect_Swift_SDK.AppAvailabilityCreateRequest) -> Request<AppStoreConnect_Swift_SDK.AppAvailabilityResponse> {
-			Request(path: path, method: "POST", body: body, id: "appAvailabilities-create_instance")
+			Request(path: path, method: "POST", body: body, id: "appAvailabilities_createInstance")
 		}
 	}
 }

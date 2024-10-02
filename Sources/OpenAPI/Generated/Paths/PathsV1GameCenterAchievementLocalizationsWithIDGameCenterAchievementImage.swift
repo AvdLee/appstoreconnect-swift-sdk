@@ -14,7 +14,7 @@ extension APIEndpoint.V1.GameCenterAchievementLocalizations.WithID {
 		public let path: String
 
 		public func get(parameters: GetParameters? = nil) -> Request<AppStoreConnect_Swift_SDK.GameCenterAchievementImageResponse> {
-			Request(path: path, method: "GET", query: parameters?.asQuery, id: "gameCenterAchievementLocalizations-gameCenterAchievementImage-get_to_one_related")
+			Request(path: path, method: "GET", query: parameters?.asQuery, id: "gameCenterAchievementLocalizations_gameCenterAchievementImage_getToOneRelated")
 		}
 
 		public struct GetParameters {
@@ -23,22 +23,22 @@ extension APIEndpoint.V1.GameCenterAchievementLocalizations.WithID {
 			public var include: [Include]?
 
 			public enum FieldsGameCenterAchievementImages: String, Codable, CaseIterable {
-				case assetDeliveryState
-				case fileName
 				case fileSize
-				case gameCenterAchievementLocalization
+				case fileName
 				case imageAsset
 				case uploadOperations
+				case assetDeliveryState
 				case uploaded
+				case gameCenterAchievementLocalization
 			}
 
 			public enum FieldsGameCenterAchievementLocalizations: String, Codable, CaseIterable {
-				case afterEarnedDescription
-				case beforeEarnedDescription
-				case gameCenterAchievement
-				case gameCenterAchievementImage
 				case locale
 				case name
+				case beforeEarnedDescription
+				case afterEarnedDescription
+				case gameCenterAchievement
+				case gameCenterAchievementImage
 			}
 
 			public enum Include: String, Codable, CaseIterable {

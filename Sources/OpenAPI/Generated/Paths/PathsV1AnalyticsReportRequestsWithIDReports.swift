@@ -14,12 +14,12 @@ extension APIEndpoint.V1.AnalyticsReportRequests.WithID {
 		public let path: String
 
 		public func get(parameters: GetParameters? = nil) -> Request<AppStoreConnect_Swift_SDK.AnalyticsReportsResponse> {
-			Request(path: path, method: "GET", query: parameters?.asQuery, id: "analyticsReportRequests-reports-get_to_many_related")
+			Request(path: path, method: "GET", query: parameters?.asQuery, id: "analyticsReportRequests_reports_getToManyRelated")
 		}
 
 		public struct GetParameters {
-			public var filterCategory: [FilterCategory]?
 			public var filterName: [String]?
+			public var filterCategory: [FilterCategory]?
 			public var fieldsAnalyticsReports: [FieldsAnalyticsReports]?
 			public var limit: Int?
 
@@ -32,22 +32,22 @@ extension APIEndpoint.V1.AnalyticsReportRequests.WithID {
 			}
 
 			public enum FieldsAnalyticsReports: String, Codable, CaseIterable {
+				case name
 				case category
 				case instances
-				case name
 			}
 
-			public init(filterCategory: [FilterCategory]? = nil, filterName: [String]? = nil, fieldsAnalyticsReports: [FieldsAnalyticsReports]? = nil, limit: Int? = nil) {
-				self.filterCategory = filterCategory
+			public init(filterName: [String]? = nil, filterCategory: [FilterCategory]? = nil, fieldsAnalyticsReports: [FieldsAnalyticsReports]? = nil, limit: Int? = nil) {
 				self.filterName = filterName
+				self.filterCategory = filterCategory
 				self.fieldsAnalyticsReports = fieldsAnalyticsReports
 				self.limit = limit
 			}
 
 			public var asQuery: [(String, String?)] {
 				let encoder = URLQueryEncoder(explode: false)
-				encoder.encode(filterCategory, forKey: "filter[category]")
 				encoder.encode(filterName, forKey: "filter[name]")
+				encoder.encode(filterCategory, forKey: "filter[category]")
 				encoder.encode(fieldsAnalyticsReports, forKey: "fields[analyticsReports]")
 				encoder.encode(limit, forKey: "limit")
 				return encoder.items

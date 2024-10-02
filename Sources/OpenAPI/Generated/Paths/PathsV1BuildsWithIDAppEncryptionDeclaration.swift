@@ -14,7 +14,7 @@ extension APIEndpoint.V1.Builds.WithID {
 		public let path: String
 
 		public func get(fieldsAppEncryptionDeclarations: [FieldsAppEncryptionDeclarations]? = nil) -> Request<AppStoreConnect_Swift_SDK.AppEncryptionDeclarationWithoutIncludesResponse> {
-			Request(path: path, method: "GET", query: makeGetQuery(fieldsAppEncryptionDeclarations), id: "builds-appEncryptionDeclaration-get_to_one_related")
+			Request(path: path, method: "GET", query: makeGetQuery(fieldsAppEncryptionDeclarations), id: "builds_appEncryptionDeclaration_getToOneRelated")
 		}
 
 		private func makeGetQuery(_ fieldsAppEncryptionDeclarations: [FieldsAppEncryptionDeclarations]?) -> [(String, String?)] {
@@ -24,23 +24,23 @@ extension APIEndpoint.V1.Builds.WithID {
 		}
 
 		public enum FieldsAppEncryptionDeclarations: String, Codable, CaseIterable {
-			case app
 			case appDescription
-			case appEncryptionDeclarationDocument
-			case appEncryptionDeclarationState
-			case availableOnFrenchStore
-			case builds
-			case codeValue
+			case createdDate
+			case usesEncryption
+			case exempt
 			case containsProprietaryCryptography
 			case containsThirdPartyCryptography
-			case createdDate
-			case documentName
-			case documentType
-			case documentURL = "documentUrl"
-			case exempt
+			case availableOnFrenchStore
 			case platform
 			case uploadedDate
-			case usesEncryption
+			case documentURL = "documentUrl"
+			case documentName
+			case documentType
+			case appEncryptionDeclarationState
+			case codeValue
+			case app
+			case builds
+			case appEncryptionDeclarationDocument
 		}
 	}
 }

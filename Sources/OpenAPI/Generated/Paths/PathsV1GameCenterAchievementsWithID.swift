@@ -14,29 +14,44 @@ extension APIEndpoint.V1.GameCenterAchievements {
 		public let path: String
 
 		public func get(parameters: GetParameters? = nil) -> Request<AppStoreConnect_Swift_SDK.GameCenterAchievementResponse> {
-			Request(path: path, method: "GET", query: parameters?.asQuery, id: "gameCenterAchievements-get_instance")
+			Request(path: path, method: "GET", query: parameters?.asQuery, id: "gameCenterAchievements_getInstance")
 		}
 
 		public struct GetParameters {
 			public var fieldsGameCenterAchievements: [FieldsGameCenterAchievements]?
-			public var include: [Include]?
-			public var fieldsGameCenterAchievementReleases: [FieldsGameCenterAchievementReleases]?
 			public var fieldsGameCenterAchievementLocalizations: [FieldsGameCenterAchievementLocalizations]?
+			public var fieldsGameCenterAchievementReleases: [FieldsGameCenterAchievementReleases]?
+			public var include: [Include]?
 			public var limitLocalizations: Int?
 			public var limitReleases: Int?
 
 			public enum FieldsGameCenterAchievements: String, Codable, CaseIterable {
+				case referenceName
+				case vendorIdentifier
+				case points
+				case showBeforeEarned
+				case repeatable
 				case archived
 				case gameCenterDetail
 				case gameCenterGroup
 				case groupAchievement
 				case localizations
-				case points
-				case referenceName
 				case releases
-				case repeatable
-				case showBeforeEarned
-				case vendorIdentifier
+			}
+
+			public enum FieldsGameCenterAchievementLocalizations: String, Codable, CaseIterable {
+				case locale
+				case name
+				case beforeEarnedDescription
+				case afterEarnedDescription
+				case gameCenterAchievement
+				case gameCenterAchievementImage
+			}
+
+			public enum FieldsGameCenterAchievementReleases: String, Codable, CaseIterable {
+				case live
+				case gameCenterDetail
+				case gameCenterAchievement
 			}
 
 			public enum Include: String, Codable, CaseIterable {
@@ -47,26 +62,11 @@ extension APIEndpoint.V1.GameCenterAchievements {
 				case releases
 			}
 
-			public enum FieldsGameCenterAchievementReleases: String, Codable, CaseIterable {
-				case gameCenterAchievement
-				case gameCenterDetail
-				case live
-			}
-
-			public enum FieldsGameCenterAchievementLocalizations: String, Codable, CaseIterable {
-				case afterEarnedDescription
-				case beforeEarnedDescription
-				case gameCenterAchievement
-				case gameCenterAchievementImage
-				case locale
-				case name
-			}
-
-			public init(fieldsGameCenterAchievements: [FieldsGameCenterAchievements]? = nil, include: [Include]? = nil, fieldsGameCenterAchievementReleases: [FieldsGameCenterAchievementReleases]? = nil, fieldsGameCenterAchievementLocalizations: [FieldsGameCenterAchievementLocalizations]? = nil, limitLocalizations: Int? = nil, limitReleases: Int? = nil) {
+			public init(fieldsGameCenterAchievements: [FieldsGameCenterAchievements]? = nil, fieldsGameCenterAchievementLocalizations: [FieldsGameCenterAchievementLocalizations]? = nil, fieldsGameCenterAchievementReleases: [FieldsGameCenterAchievementReleases]? = nil, include: [Include]? = nil, limitLocalizations: Int? = nil, limitReleases: Int? = nil) {
 				self.fieldsGameCenterAchievements = fieldsGameCenterAchievements
-				self.include = include
-				self.fieldsGameCenterAchievementReleases = fieldsGameCenterAchievementReleases
 				self.fieldsGameCenterAchievementLocalizations = fieldsGameCenterAchievementLocalizations
+				self.fieldsGameCenterAchievementReleases = fieldsGameCenterAchievementReleases
+				self.include = include
 				self.limitLocalizations = limitLocalizations
 				self.limitReleases = limitReleases
 			}
@@ -74,9 +74,9 @@ extension APIEndpoint.V1.GameCenterAchievements {
 			public var asQuery: [(String, String?)] {
 				let encoder = URLQueryEncoder(explode: false)
 				encoder.encode(fieldsGameCenterAchievements, forKey: "fields[gameCenterAchievements]")
-				encoder.encode(include, forKey: "include")
-				encoder.encode(fieldsGameCenterAchievementReleases, forKey: "fields[gameCenterAchievementReleases]")
 				encoder.encode(fieldsGameCenterAchievementLocalizations, forKey: "fields[gameCenterAchievementLocalizations]")
+				encoder.encode(fieldsGameCenterAchievementReleases, forKey: "fields[gameCenterAchievementReleases]")
+				encoder.encode(include, forKey: "include")
 				encoder.encode(limitLocalizations, forKey: "limit[localizations]")
 				encoder.encode(limitReleases, forKey: "limit[releases]")
 				return encoder.items
@@ -84,11 +84,11 @@ extension APIEndpoint.V1.GameCenterAchievements {
 		}
 
 		public func patch(_ body: AppStoreConnect_Swift_SDK.GameCenterAchievementUpdateRequest) -> Request<AppStoreConnect_Swift_SDK.GameCenterAchievementResponse> {
-			Request(path: path, method: "PATCH", body: body, id: "gameCenterAchievements-update_instance")
+			Request(path: path, method: "PATCH", body: body, id: "gameCenterAchievements_updateInstance")
 		}
 
 		public var delete: Request<Void> {
-			Request(path: path, method: "DELETE", id: "gameCenterAchievements-delete_instance")
+			Request(path: path, method: "DELETE", id: "gameCenterAchievements_deleteInstance")
 		}
 	}
 }
