@@ -15,6 +15,7 @@ public struct AppStoreVersionResponse: Codable {
 		case appStoreVersionLocalization(AppStoreVersionLocalization)
 		case build(Build)
 		case appStoreVersionPhasedRelease(AppStoreVersionPhasedRelease)
+		case gameCenterAppVersion(GameCenterAppVersion)
 		case routingAppCoverage(RoutingAppCoverage)
 		case appStoreReviewDetail(AppStoreReviewDetail)
 		case appStoreVersionSubmission(AppStoreVersionSubmission)
@@ -35,6 +36,8 @@ public struct AppStoreVersionResponse: Codable {
 				self = .build(value)
 			} else if let value = try? container.decode(AppStoreVersionPhasedRelease.self) {
 				self = .appStoreVersionPhasedRelease(value)
+			} else if let value = try? container.decode(GameCenterAppVersion.self) {
+				self = .gameCenterAppVersion(value)
 			} else if let value = try? container.decode(RoutingAppCoverage.self) {
 				self = .routingAppCoverage(value)
 			} else if let value = try? container.decode(AppStoreReviewDetail.self) {
@@ -52,7 +55,7 @@ public struct AppStoreVersionResponse: Codable {
 			} else {
 				throw DecodingError.dataCorruptedError(
 					in: container,
-					debugDescription: "Data could not be decoded as any of the expected types (App, AgeRatingDeclaration, AppStoreVersionLocalization, Build, AppStoreVersionPhasedRelease, RoutingAppCoverage, AppStoreReviewDetail, AppStoreVersionSubmission, AppClipDefaultExperience, AppStoreVersionExperiment, AppStoreVersionExperimentV2, AlternativeDistributionPackage)."
+					debugDescription: "Data could not be decoded as any of the expected types (App, AgeRatingDeclaration, AppStoreVersionLocalization, Build, AppStoreVersionPhasedRelease, GameCenterAppVersion, RoutingAppCoverage, AppStoreReviewDetail, AppStoreVersionSubmission, AppClipDefaultExperience, AppStoreVersionExperiment, AppStoreVersionExperimentV2, AlternativeDistributionPackage)."
 				)
 			}
 		}
@@ -65,6 +68,7 @@ public struct AppStoreVersionResponse: Codable {
 			case .appStoreVersionLocalization(let value): try container.encode(value)
 			case .build(let value): try container.encode(value)
 			case .appStoreVersionPhasedRelease(let value): try container.encode(value)
+			case .gameCenterAppVersion(let value): try container.encode(value)
 			case .routingAppCoverage(let value): try container.encode(value)
 			case .appStoreReviewDetail(let value): try container.encode(value)
 			case .appStoreVersionSubmission(let value): try container.encode(value)

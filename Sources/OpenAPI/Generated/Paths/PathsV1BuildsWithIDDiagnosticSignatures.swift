@@ -14,7 +14,7 @@ extension APIEndpoint.V1.Builds.WithID {
 		public let path: String
 
 		public func get(parameters: GetParameters? = nil) -> Request<AppStoreConnect_Swift_SDK.DiagnosticSignaturesResponse> {
-			Request(path: path, method: "GET", query: parameters?.asQuery, id: "builds-diagnosticSignatures-get_to_many_related")
+			Request(path: path, method: "GET", query: parameters?.asQuery, id: "builds_diagnosticSignatures_getToManyRelated")
 		}
 
 		public struct GetParameters {
@@ -30,10 +30,10 @@ extension APIEndpoint.V1.Builds.WithID {
 
 			public enum FieldsDiagnosticSignatures: String, Codable, CaseIterable {
 				case diagnosticType
-				case insight
-				case logs
 				case signature
 				case weight
+				case insight
+				case logs
 			}
 
 			public init(filterDiagnosticType: [FilterDiagnosticType]? = nil, fieldsDiagnosticSignatures: [FieldsDiagnosticSignatures]? = nil, limit: Int? = nil) {

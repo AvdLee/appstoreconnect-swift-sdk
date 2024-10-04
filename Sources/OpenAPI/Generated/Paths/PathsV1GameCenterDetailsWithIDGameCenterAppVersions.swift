@@ -14,71 +14,72 @@ extension APIEndpoint.V1.GameCenterDetails.WithID {
 		public let path: String
 
 		public func get(parameters: GetParameters? = nil) -> Request<AppStoreConnect_Swift_SDK.GameCenterAppVersionsResponse> {
-			Request(path: path, method: "GET", query: parameters?.asQuery, id: "gameCenterDetails-gameCenterAppVersions-get_to_many_related")
+			Request(path: path, method: "GET", query: parameters?.asQuery, id: "gameCenterDetails_gameCenterAppVersions_getToManyRelated")
 		}
 
 		public struct GetParameters {
 			public var filterEnabled: [String]?
-			public var fieldsAppStoreVersions: [FieldsAppStoreVersions]?
 			public var fieldsGameCenterAppVersions: [FieldsGameCenterAppVersions]?
+			public var fieldsAppStoreVersions: [FieldsAppStoreVersions]?
 			public var limit: Int?
-			public var limitCompatibilityVersions: Int?
 			public var include: [Include]?
-
-			public enum FieldsAppStoreVersions: String, Codable, CaseIterable {
-				case ageRatingDeclaration
-				case alternativeDistributionPackage
-				case app
-				case appClipDefaultExperience
-				case appStoreReviewDetail
-				case appStoreState
-				case appStoreVersionExperiments
-				case appStoreVersionExperimentsV2
-				case appStoreVersionLocalizations
-				case appStoreVersionPhasedRelease
-				case appStoreVersionSubmission
-				case appVersionState
-				case build
-				case copyright
-				case createdDate
-				case customerReviews
-				case downloadable
-				case earliestReleaseDate
-				case platform
-				case releaseType
-				case reviewType
-				case routingAppCoverage
-				case versionString
-			}
+			public var limitCompatibilityVersions: Int?
 
 			public enum FieldsGameCenterAppVersions: String, Codable, CaseIterable {
-				case appStoreVersion
-				case compatibilityVersions
 				case enabled
+				case compatibilityVersions
+				case appStoreVersion
+			}
+
+			public enum FieldsAppStoreVersions: String, Codable, CaseIterable {
+				case platform
+				case versionString
+				case appStoreState
+				case appVersionState
+				case copyright
+				case reviewType
+				case releaseType
+				case earliestReleaseDate
+				case downloadable
+				case createdDate
+				case app
+				case ageRatingDeclaration
+				case appStoreVersionLocalizations
+				case build
+				case appStoreVersionPhasedRelease
+				case gameCenterAppVersion
+				case routingAppCoverage
+				case appStoreReviewDetail
+				case appStoreVersionSubmission
+				case appClipDefaultExperience
+				case appStoreVersionExperiments
+				case appStoreVersionExperimentsV2
+				case customerReviews
+				case alternativeDistributionPackage
 			}
 
 			public enum Include: String, Codable, CaseIterable {
-				case appStoreVersion
 				case compatibilityVersions
+				case appStoreVersion
 			}
 
-			public init(filterEnabled: [String]? = nil, fieldsAppStoreVersions: [FieldsAppStoreVersions]? = nil, fieldsGameCenterAppVersions: [FieldsGameCenterAppVersions]? = nil, limit: Int? = nil, limitCompatibilityVersions: Int? = nil, include: [Include]? = nil) {
+			public init(filterEnabled: [String]? = nil, fieldsGameCenterAppVersions: [FieldsGameCenterAppVersions]? = nil, fieldsAppStoreVersions: [FieldsAppStoreVersions]? = nil, limit: Int? = nil, include: [Include]? = nil, limitCompatibilityVersions: Int? = nil) {
 				self.filterEnabled = filterEnabled
-				self.fieldsAppStoreVersions = fieldsAppStoreVersions
 				self.fieldsGameCenterAppVersions = fieldsGameCenterAppVersions
+				self.fieldsAppStoreVersions = fieldsAppStoreVersions
 				self.limit = limit
-				self.limitCompatibilityVersions = limitCompatibilityVersions
 				self.include = include
+				self.limitCompatibilityVersions = limitCompatibilityVersions
 			}
 
 			public var asQuery: [(String, String?)] {
 				let encoder = URLQueryEncoder(explode: false)
 				encoder.encode(filterEnabled, forKey: "filter[enabled]")
-				encoder.encode(fieldsAppStoreVersions, forKey: "fields[appStoreVersions]")
 				encoder.encode(fieldsGameCenterAppVersions, forKey: "fields[gameCenterAppVersions]")
+				encoder.encode(fieldsAppStoreVersions, forKey: "fields[appStoreVersions]")
 				encoder.encode(limit, forKey: "limit")
-				encoder.encode(limitCompatibilityVersions, forKey: "limit[compatibilityVersions]")
 				encoder.encode(include, forKey: "include")
+				encoder.encode(limitCompatibilityVersions, forKey: "limit[compatibilityVersions]")
 				return encoder.items
 			}
 		}

@@ -62,32 +62,13 @@ public struct CiBuildAction: Codable, Identifiable {
 
 	public struct Relationships: Codable {
 		public var buildRun: BuildRun?
+		public var artifacts: Artifacts?
+		public var issues: Issues?
+		public var testResults: TestResults?
 
 		public struct BuildRun: Codable {
-			public var links: Links?
+			public var links: RelationshipLinks?
 			public var data: Data?
-
-			public struct Links: Codable {
-				public var this: String?
-				public var related: String?
-
-				public init(this: String? = nil, related: String? = nil) {
-					self.this = this
-					self.related = related
-				}
-
-				public init(from decoder: Decoder) throws {
-					let values = try decoder.container(keyedBy: StringCodingKey.self)
-					self.this = try values.decodeIfPresent(String.self, forKey: "self")
-					self.related = try values.decodeIfPresent(String.self, forKey: "related")
-				}
-
-				public func encode(to encoder: Encoder) throws {
-					var values = encoder.container(keyedBy: StringCodingKey.self)
-					try values.encodeIfPresent(this, forKey: "self")
-					try values.encodeIfPresent(related, forKey: "related")
-				}
-			}
 
 			public struct Data: Codable, Identifiable {
 				public var type: `Type`
@@ -115,14 +96,14 @@ public struct CiBuildAction: Codable, Identifiable {
 				}
 			}
 
-			public init(links: Links? = nil, data: Data? = nil) {
+			public init(links: RelationshipLinks? = nil, data: Data? = nil) {
 				self.links = links
 				self.data = data
 			}
 
 			public init(from decoder: Decoder) throws {
 				let values = try decoder.container(keyedBy: StringCodingKey.self)
-				self.links = try values.decodeIfPresent(Links.self, forKey: "links")
+				self.links = try values.decodeIfPresent(RelationshipLinks.self, forKey: "links")
 				self.data = try values.decodeIfPresent(Data.self, forKey: "data")
 			}
 
@@ -133,18 +114,81 @@ public struct CiBuildAction: Codable, Identifiable {
 			}
 		}
 
-		public init(buildRun: BuildRun? = nil) {
+		public struct Artifacts: Codable {
+			public var links: RelationshipLinks?
+
+			public init(links: RelationshipLinks? = nil) {
+				self.links = links
+			}
+
+			public init(from decoder: Decoder) throws {
+				let values = try decoder.container(keyedBy: StringCodingKey.self)
+				self.links = try values.decodeIfPresent(RelationshipLinks.self, forKey: "links")
+			}
+
+			public func encode(to encoder: Encoder) throws {
+				var values = encoder.container(keyedBy: StringCodingKey.self)
+				try values.encodeIfPresent(links, forKey: "links")
+			}
+		}
+
+		public struct Issues: Codable {
+			public var links: RelationshipLinks?
+
+			public init(links: RelationshipLinks? = nil) {
+				self.links = links
+			}
+
+			public init(from decoder: Decoder) throws {
+				let values = try decoder.container(keyedBy: StringCodingKey.self)
+				self.links = try values.decodeIfPresent(RelationshipLinks.self, forKey: "links")
+			}
+
+			public func encode(to encoder: Encoder) throws {
+				var values = encoder.container(keyedBy: StringCodingKey.self)
+				try values.encodeIfPresent(links, forKey: "links")
+			}
+		}
+
+		public struct TestResults: Codable {
+			public var links: RelationshipLinks?
+
+			public init(links: RelationshipLinks? = nil) {
+				self.links = links
+			}
+
+			public init(from decoder: Decoder) throws {
+				let values = try decoder.container(keyedBy: StringCodingKey.self)
+				self.links = try values.decodeIfPresent(RelationshipLinks.self, forKey: "links")
+			}
+
+			public func encode(to encoder: Encoder) throws {
+				var values = encoder.container(keyedBy: StringCodingKey.self)
+				try values.encodeIfPresent(links, forKey: "links")
+			}
+		}
+
+		public init(buildRun: BuildRun? = nil, artifacts: Artifacts? = nil, issues: Issues? = nil, testResults: TestResults? = nil) {
 			self.buildRun = buildRun
+			self.artifacts = artifacts
+			self.issues = issues
+			self.testResults = testResults
 		}
 
 		public init(from decoder: Decoder) throws {
 			let values = try decoder.container(keyedBy: StringCodingKey.self)
 			self.buildRun = try values.decodeIfPresent(BuildRun.self, forKey: "buildRun")
+			self.artifacts = try values.decodeIfPresent(Artifacts.self, forKey: "artifacts")
+			self.issues = try values.decodeIfPresent(Issues.self, forKey: "issues")
+			self.testResults = try values.decodeIfPresent(TestResults.self, forKey: "testResults")
 		}
 
 		public func encode(to encoder: Encoder) throws {
 			var values = encoder.container(keyedBy: StringCodingKey.self)
 			try values.encodeIfPresent(buildRun, forKey: "buildRun")
+			try values.encodeIfPresent(artifacts, forKey: "artifacts")
+			try values.encodeIfPresent(issues, forKey: "issues")
+			try values.encodeIfPresent(testResults, forKey: "testResults")
 		}
 	}
 

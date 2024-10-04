@@ -14,7 +14,7 @@ extension APIEndpoint.V1.Subscriptions.WithID {
 		public let path: String
 
 		public func get(parameters: GetParameters? = nil) -> Request<AppStoreConnect_Swift_SDK.SubscriptionAppStoreReviewScreenshotResponse> {
-			Request(path: path, method: "GET", query: parameters?.asQuery, id: "subscriptions-appStoreReviewScreenshot-get_to_one_related")
+			Request(path: path, method: "GET", query: parameters?.asQuery, id: "subscriptions_appStoreReviewScreenshot_getToOneRelated")
 		}
 
 		public struct GetParameters {
@@ -23,36 +23,38 @@ extension APIEndpoint.V1.Subscriptions.WithID {
 			public var include: [Include]?
 
 			public enum FieldsSubscriptionAppStoreReviewScreenshots: String, Codable, CaseIterable {
-				case assetDeliveryState
+				case fileSize
+				case fileName
+				case sourceFileChecksum
+				case imageAsset
 				case assetToken
 				case assetType
-				case fileName
-				case fileSize
-				case imageAsset
-				case sourceFileChecksum
-				case subscription
 				case uploadOperations
+				case assetDeliveryState
 				case uploaded
+				case subscription
 			}
 
 			public enum FieldsSubscriptions: String, Codable, CaseIterable {
-				case appStoreReviewScreenshot
-				case familySharable
-				case group
-				case groupLevel
-				case introductoryOffers
 				case name
-				case offerCodes
-				case pricePoints
-				case prices
 				case productID = "productId"
-				case promotedPurchase
-				case promotionalOffers
-				case reviewNote
+				case familySharable
 				case state
-				case subscriptionAvailability
-				case subscriptionLocalizations
 				case subscriptionPeriod
+				case reviewNote
+				case groupLevel
+				case subscriptionLocalizations
+				case appStoreReviewScreenshot
+				case group
+				case introductoryOffers
+				case promotionalOffers
+				case offerCodes
+				case prices
+				case pricePoints
+				case promotedPurchase
+				case subscriptionAvailability
+				case winBackOffers
+				case images
 			}
 
 			public enum Include: String, Codable, CaseIterable {

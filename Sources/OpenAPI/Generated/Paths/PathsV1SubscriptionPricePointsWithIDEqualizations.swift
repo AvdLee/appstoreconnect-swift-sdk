@@ -14,12 +14,12 @@ extension APIEndpoint.V1.SubscriptionPricePoints.WithID {
 		public let path: String
 
 		public func get(parameters: GetParameters? = nil) -> Request<AppStoreConnect_Swift_SDK.SubscriptionPricePointsResponse> {
-			Request(path: path, method: "GET", query: parameters?.asQuery, id: "subscriptionPricePoints-equalizations-get_to_many_related")
+			Request(path: path, method: "GET", query: parameters?.asQuery, id: "subscriptionPricePoints_equalizations_getToManyRelated")
 		}
 
 		public struct GetParameters {
-			public var filterSubscription: [String]?
 			public var filterTerritory: [String]?
+			public var filterSubscription: [String]?
 			public var fieldsSubscriptionPricePoints: [FieldsSubscriptionPricePoints]?
 			public var fieldsTerritories: [FieldsTerritories]?
 			public var limit: Int?
@@ -27,11 +27,11 @@ extension APIEndpoint.V1.SubscriptionPricePoints.WithID {
 
 			public enum FieldsSubscriptionPricePoints: String, Codable, CaseIterable {
 				case customerPrice
-				case equalizations
 				case proceeds
 				case proceedsYear2
-				case subscription
 				case territory
+				case subscription
+				case equalizations
 			}
 
 			public enum FieldsTerritories: String, Codable, CaseIterable {
@@ -42,9 +42,9 @@ extension APIEndpoint.V1.SubscriptionPricePoints.WithID {
 				case territory
 			}
 
-			public init(filterSubscription: [String]? = nil, filterTerritory: [String]? = nil, fieldsSubscriptionPricePoints: [FieldsSubscriptionPricePoints]? = nil, fieldsTerritories: [FieldsTerritories]? = nil, limit: Int? = nil, include: [Include]? = nil) {
-				self.filterSubscription = filterSubscription
+			public init(filterTerritory: [String]? = nil, filterSubscription: [String]? = nil, fieldsSubscriptionPricePoints: [FieldsSubscriptionPricePoints]? = nil, fieldsTerritories: [FieldsTerritories]? = nil, limit: Int? = nil, include: [Include]? = nil) {
 				self.filterTerritory = filterTerritory
+				self.filterSubscription = filterSubscription
 				self.fieldsSubscriptionPricePoints = fieldsSubscriptionPricePoints
 				self.fieldsTerritories = fieldsTerritories
 				self.limit = limit
@@ -53,8 +53,8 @@ extension APIEndpoint.V1.SubscriptionPricePoints.WithID {
 
 			public var asQuery: [(String, String?)] {
 				let encoder = URLQueryEncoder(explode: false)
-				encoder.encode(filterSubscription, forKey: "filter[subscription]")
 				encoder.encode(filterTerritory, forKey: "filter[territory]")
+				encoder.encode(filterSubscription, forKey: "filter[subscription]")
 				encoder.encode(fieldsSubscriptionPricePoints, forKey: "fields[subscriptionPricePoints]")
 				encoder.encode(fieldsTerritories, forKey: "fields[territories]")
 				encoder.encode(limit, forKey: "limit")

@@ -14,7 +14,7 @@ extension APIEndpoint.V1 {
 		public let path: String
 
 		public func post(_ body: AppStoreConnect_Swift_SDK.GameCenterMatchmakingTeamCreateRequest) -> Request<AppStoreConnect_Swift_SDK.GameCenterMatchmakingTeamResponse> {
-			Request(path: path, method: "POST", body: body, id: "gameCenterMatchmakingTeams-create_instance")
+			Request(path: path, method: "POST", body: body, id: "gameCenterMatchmakingTeams_createInstance")
 		}
 	}
 }

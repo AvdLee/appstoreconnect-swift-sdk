@@ -13,54 +13,55 @@ extension APIEndpoint.V1.PromotedPurchases.WithID {
 		/// Path: `/v1/promotedPurchases/{id}/promotionImages`
 		public let path: String
 
+		@available(*, deprecated, message: "Deprecated")
 		public func get(parameters: GetParameters? = nil) -> Request<AppStoreConnect_Swift_SDK.PromotedPurchaseImagesResponse> {
-			Request(path: path, method: "GET", query: parameters?.asQuery, id: "promotedPurchases-promotionImages-get_to_many_related")
+			Request(path: path, method: "GET", query: parameters?.asQuery, id: "promotedPurchases_promotionImages_getToManyRelated")
 		}
 
 		public struct GetParameters {
-			public var fieldsPromotedPurchases: [FieldsPromotedPurchases]?
 			public var fieldsPromotedPurchaseImages: [FieldsPromotedPurchaseImages]?
+			public var fieldsPromotedPurchases: [FieldsPromotedPurchases]?
 			public var limit: Int?
 			public var include: [Include]?
 
-			public enum FieldsPromotedPurchases: String, Codable, CaseIterable {
-				case app
-				case enabled
-				case inAppPurchaseV2
-				case promotionImages
-				case state
-				case subscription
-				case visibleForAllUsers
-			}
-
 			public enum FieldsPromotedPurchaseImages: String, Codable, CaseIterable {
-				case assetToken
-				case assetType
-				case fileName
 				case fileSize
-				case imageAsset
-				case promotedPurchase
+				case fileName
 				case sourceFileChecksum
-				case state
+				case assetToken
+				case imageAsset
+				case assetType
 				case uploadOperations
 				case uploaded
+				case state
+				case promotedPurchase
+			}
+
+			public enum FieldsPromotedPurchases: String, Codable, CaseIterable {
+				case visibleForAllUsers
+				case enabled
+				case state
+				case app
+				case inAppPurchaseV2
+				case subscription
+				case promotionImages
 			}
 
 			public enum Include: String, Codable, CaseIterable {
 				case promotedPurchase
 			}
 
-			public init(fieldsPromotedPurchases: [FieldsPromotedPurchases]? = nil, fieldsPromotedPurchaseImages: [FieldsPromotedPurchaseImages]? = nil, limit: Int? = nil, include: [Include]? = nil) {
-				self.fieldsPromotedPurchases = fieldsPromotedPurchases
+			public init(fieldsPromotedPurchaseImages: [FieldsPromotedPurchaseImages]? = nil, fieldsPromotedPurchases: [FieldsPromotedPurchases]? = nil, limit: Int? = nil, include: [Include]? = nil) {
 				self.fieldsPromotedPurchaseImages = fieldsPromotedPurchaseImages
+				self.fieldsPromotedPurchases = fieldsPromotedPurchases
 				self.limit = limit
 				self.include = include
 			}
 
 			public var asQuery: [(String, String?)] {
 				let encoder = URLQueryEncoder(explode: false)
-				encoder.encode(fieldsPromotedPurchases, forKey: "fields[promotedPurchases]")
 				encoder.encode(fieldsPromotedPurchaseImages, forKey: "fields[promotedPurchaseImages]")
+				encoder.encode(fieldsPromotedPurchases, forKey: "fields[promotedPurchases]")
 				encoder.encode(limit, forKey: "limit")
 				encoder.encode(include, forKey: "include")
 				return encoder.items

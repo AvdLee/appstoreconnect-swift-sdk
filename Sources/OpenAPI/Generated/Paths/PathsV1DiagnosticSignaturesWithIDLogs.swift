@@ -14,7 +14,7 @@ extension APIEndpoint.V1.DiagnosticSignatures.WithID {
 		public let path: String
 
 		public func get(limit: Int? = nil) -> Request<DiagnosticLogs> {
-			Request(path: path, method: "GET", query: makeGetQuery(limit), id: "diagnosticSignatures-logs-get_to_many_related")
+			Request(path: path, method: "GET", query: makeGetQuery(limit), id: "diagnosticSignatures_logs_getToManyRelated")
 		}
 
 		private func makeGetQuery(_ limit: Int?) -> [(String, String?)] {

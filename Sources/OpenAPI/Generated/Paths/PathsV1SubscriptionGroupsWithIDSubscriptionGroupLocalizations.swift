@@ -14,45 +14,45 @@ extension APIEndpoint.V1.SubscriptionGroups.WithID {
 		public let path: String
 
 		public func get(parameters: GetParameters? = nil) -> Request<AppStoreConnect_Swift_SDK.SubscriptionGroupLocalizationsResponse> {
-			Request(path: path, method: "GET", query: parameters?.asQuery, id: "subscriptionGroups-subscriptionGroupLocalizations-get_to_many_related")
+			Request(path: path, method: "GET", query: parameters?.asQuery, id: "subscriptionGroups_subscriptionGroupLocalizations_getToManyRelated")
 		}
 
 		public struct GetParameters {
-			public var fieldsSubscriptionGroups: [FieldsSubscriptionGroups]?
 			public var fieldsSubscriptionGroupLocalizations: [FieldsSubscriptionGroupLocalizations]?
+			public var fieldsSubscriptionGroups: [FieldsSubscriptionGroups]?
 			public var limit: Int?
 			public var include: [Include]?
 
-			public enum FieldsSubscriptionGroups: String, Codable, CaseIterable {
-				case app
-				case referenceName
-				case subscriptionGroupLocalizations
-				case subscriptions
-			}
-
 			public enum FieldsSubscriptionGroupLocalizations: String, Codable, CaseIterable {
+				case name
 				case customAppName
 				case locale
-				case name
 				case state
 				case subscriptionGroup
+			}
+
+			public enum FieldsSubscriptionGroups: String, Codable, CaseIterable {
+				case referenceName
+				case app
+				case subscriptions
+				case subscriptionGroupLocalizations
 			}
 
 			public enum Include: String, Codable, CaseIterable {
 				case subscriptionGroup
 			}
 
-			public init(fieldsSubscriptionGroups: [FieldsSubscriptionGroups]? = nil, fieldsSubscriptionGroupLocalizations: [FieldsSubscriptionGroupLocalizations]? = nil, limit: Int? = nil, include: [Include]? = nil) {
-				self.fieldsSubscriptionGroups = fieldsSubscriptionGroups
+			public init(fieldsSubscriptionGroupLocalizations: [FieldsSubscriptionGroupLocalizations]? = nil, fieldsSubscriptionGroups: [FieldsSubscriptionGroups]? = nil, limit: Int? = nil, include: [Include]? = nil) {
 				self.fieldsSubscriptionGroupLocalizations = fieldsSubscriptionGroupLocalizations
+				self.fieldsSubscriptionGroups = fieldsSubscriptionGroups
 				self.limit = limit
 				self.include = include
 			}
 
 			public var asQuery: [(String, String?)] {
 				let encoder = URLQueryEncoder(explode: false)
-				encoder.encode(fieldsSubscriptionGroups, forKey: "fields[subscriptionGroups]")
 				encoder.encode(fieldsSubscriptionGroupLocalizations, forKey: "fields[subscriptionGroupLocalizations]")
+				encoder.encode(fieldsSubscriptionGroups, forKey: "fields[subscriptionGroups]")
 				encoder.encode(limit, forKey: "limit")
 				encoder.encode(include, forKey: "include")
 				return encoder.items

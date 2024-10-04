@@ -14,7 +14,7 @@ extension APIEndpoint.V1.AgeRatingDeclarations {
 		public let path: String
 
 		public func patch(_ body: AppStoreConnect_Swift_SDK.AgeRatingDeclarationUpdateRequest) -> Request<AppStoreConnect_Swift_SDK.AgeRatingDeclarationResponse> {
-			Request(path: path, method: "PATCH", body: body, id: "ageRatingDeclarations-update_instance")
+			Request(path: path, method: "PATCH", body: body, id: "ageRatingDeclarations_updateInstance")
 		}
 	}
 }

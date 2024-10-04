@@ -14,102 +14,102 @@ extension APIEndpoint.V1.CiProducts.WithID {
 		public let path: String
 
 		public func get(parameters: GetParameters? = nil) -> Request<AppStoreConnect_Swift_SDK.CiWorkflowsResponse> {
-			Request(path: path, method: "GET", query: parameters?.asQuery, id: "ciProducts-workflows-get_to_many_related")
+			Request(path: path, method: "GET", query: parameters?.asQuery, id: "ciProducts_workflows_getToManyRelated")
 		}
 
 		public struct GetParameters {
-			public var fieldsCiXcodeVersions: [FieldsCiXcodeVersions]?
 			public var fieldsCiWorkflows: [FieldsCiWorkflows]?
-			public var fieldsCiMacOsVersions: [FieldsCiMacOsVersions]?
 			public var fieldsCiProducts: [FieldsCiProducts]?
 			public var fieldsScmRepositories: [FieldsScmRepositories]?
+			public var fieldsCiXcodeVersions: [FieldsCiXcodeVersions]?
+			public var fieldsCiMacOsVersions: [FieldsCiMacOsVersions]?
 			public var limit: Int?
 			public var include: [Include]?
 
-			public enum FieldsCiXcodeVersions: String, Codable, CaseIterable {
-				case macOsVersions
-				case name
-				case testDestinations
-				case version
-			}
-
 			public enum FieldsCiWorkflows: String, Codable, CaseIterable {
-				case actions
-				case branchStartCondition
-				case buildRuns
-				case clean
-				case containerFilePath
+				case name
 				case description
+				case branchStartCondition
+				case tagStartCondition
+				case pullRequestStartCondition
+				case scheduledStartCondition
+				case manualBranchStartCondition
+				case manualTagStartCondition
+				case manualPullRequestStartCondition
+				case actions
 				case isEnabled
 				case isLockedForEditing
+				case clean
+				case containerFilePath
 				case lastModifiedDate
-				case macOsVersion
-				case manualBranchStartCondition
-				case manualPullRequestStartCondition
-				case manualTagStartCondition
-				case name
 				case product
-				case pullRequestStartCondition
 				case repository
-				case scheduledStartCondition
-				case tagStartCondition
 				case xcodeVersion
-			}
-
-			public enum FieldsCiMacOsVersions: String, Codable, CaseIterable {
-				case name
-				case version
-				case xcodeVersions
+				case macOsVersion
+				case buildRuns
 			}
 
 			public enum FieldsCiProducts: String, Codable, CaseIterable {
-				case additionalRepositories
-				case app
-				case buildRuns
-				case bundleID = "bundleId"
-				case createdDate
 				case name
-				case primaryRepositories
+				case createdDate
 				case productType
+				case app
+				case bundleID = "bundleId"
 				case workflows
+				case primaryRepositories
+				case additionalRepositories
+				case buildRuns
 			}
 
 			public enum FieldsScmRepositories: String, Codable, CaseIterable {
-				case defaultBranch
-				case gitReferences
-				case httpCloneURL = "httpCloneUrl"
 				case lastAccessedDate
+				case httpCloneURL = "httpCloneUrl"
+				case sshCloneURL = "sshCloneUrl"
 				case ownerName
-				case pullRequests
 				case repositoryName
 				case scmProvider
-				case sshCloneURL = "sshCloneUrl"
+				case defaultBranch
+				case gitReferences
+				case pullRequests
+			}
+
+			public enum FieldsCiXcodeVersions: String, Codable, CaseIterable {
+				case version
+				case name
+				case testDestinations
+				case macOsVersions
+			}
+
+			public enum FieldsCiMacOsVersions: String, Codable, CaseIterable {
+				case version
+				case name
+				case xcodeVersions
 			}
 
 			public enum Include: String, Codable, CaseIterable {
-				case macOsVersion
 				case product
 				case repository
 				case xcodeVersion
+				case macOsVersion
 			}
 
-			public init(fieldsCiXcodeVersions: [FieldsCiXcodeVersions]? = nil, fieldsCiWorkflows: [FieldsCiWorkflows]? = nil, fieldsCiMacOsVersions: [FieldsCiMacOsVersions]? = nil, fieldsCiProducts: [FieldsCiProducts]? = nil, fieldsScmRepositories: [FieldsScmRepositories]? = nil, limit: Int? = nil, include: [Include]? = nil) {
-				self.fieldsCiXcodeVersions = fieldsCiXcodeVersions
+			public init(fieldsCiWorkflows: [FieldsCiWorkflows]? = nil, fieldsCiProducts: [FieldsCiProducts]? = nil, fieldsScmRepositories: [FieldsScmRepositories]? = nil, fieldsCiXcodeVersions: [FieldsCiXcodeVersions]? = nil, fieldsCiMacOsVersions: [FieldsCiMacOsVersions]? = nil, limit: Int? = nil, include: [Include]? = nil) {
 				self.fieldsCiWorkflows = fieldsCiWorkflows
-				self.fieldsCiMacOsVersions = fieldsCiMacOsVersions
 				self.fieldsCiProducts = fieldsCiProducts
 				self.fieldsScmRepositories = fieldsScmRepositories
+				self.fieldsCiXcodeVersions = fieldsCiXcodeVersions
+				self.fieldsCiMacOsVersions = fieldsCiMacOsVersions
 				self.limit = limit
 				self.include = include
 			}
 
 			public var asQuery: [(String, String?)] {
 				let encoder = URLQueryEncoder(explode: false)
-				encoder.encode(fieldsCiXcodeVersions, forKey: "fields[ciXcodeVersions]")
 				encoder.encode(fieldsCiWorkflows, forKey: "fields[ciWorkflows]")
-				encoder.encode(fieldsCiMacOsVersions, forKey: "fields[ciMacOsVersions]")
 				encoder.encode(fieldsCiProducts, forKey: "fields[ciProducts]")
 				encoder.encode(fieldsScmRepositories, forKey: "fields[scmRepositories]")
+				encoder.encode(fieldsCiXcodeVersions, forKey: "fields[ciXcodeVersions]")
+				encoder.encode(fieldsCiMacOsVersions, forKey: "fields[ciMacOsVersions]")
 				encoder.encode(limit, forKey: "limit")
 				encoder.encode(include, forKey: "include")
 				return encoder.items

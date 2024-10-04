@@ -14,75 +14,75 @@ extension APIEndpoint.V1.Profiles {
 		public let path: String
 
 		public func get(parameters: GetParameters? = nil) -> Request<AppStoreConnect_Swift_SDK.ProfileResponse> {
-			Request(path: path, method: "GET", query: parameters?.asQuery, id: "profiles-get_instance")
+			Request(path: path, method: "GET", query: parameters?.asQuery, id: "profiles_getInstance")
 		}
 
 		public struct GetParameters {
 			public var fieldsProfiles: [FieldsProfiles]?
-			public var include: [Include]?
-			public var fieldsCertificates: [FieldsCertificates]?
-			public var fieldsDevices: [FieldsDevices]?
 			public var fieldsBundleIDs: [FieldsBundleIDs]?
+			public var fieldsDevices: [FieldsDevices]?
+			public var fieldsCertificates: [FieldsCertificates]?
+			public var include: [Include]?
 			public var limitCertificates: Int?
 			public var limitDevices: Int?
 
 			public enum FieldsProfiles: String, Codable, CaseIterable {
-				case bundleID = "bundleId"
-				case certificates
-				case createdDate
-				case devices
-				case expirationDate
 				case name
 				case platform
-				case profileContent
-				case profileState
 				case profileType
+				case profileState
+				case profileContent
 				case uuid
+				case createdDate
+				case expirationDate
+				case bundleID = "bundleId"
+				case devices
+				case certificates
+			}
+
+			public enum FieldsBundleIDs: String, Codable, CaseIterable {
+				case name
+				case platform
+				case identifier
+				case seedID = "seedId"
+				case profiles
+				case bundleIDCapabilities = "bundleIdCapabilities"
+				case app
+			}
+
+			public enum FieldsDevices: String, Codable, CaseIterable {
+				case name
+				case platform
+				case udid
+				case deviceClass
+				case status
+				case model
+				case addedDate
+			}
+
+			public enum FieldsCertificates: String, Codable, CaseIterable {
+				case name
+				case csrContent
+				case certificateType
+				case displayName
+				case serialNumber
+				case platform
+				case expirationDate
+				case certificateContent
 			}
 
 			public enum Include: String, Codable, CaseIterable {
 				case bundleID = "bundleId"
-				case certificates
 				case devices
+				case certificates
 			}
 
-			public enum FieldsCertificates: String, Codable, CaseIterable {
-				case certificateContent
-				case certificateType
-				case csrContent
-				case displayName
-				case expirationDate
-				case name
-				case platform
-				case serialNumber
-			}
-
-			public enum FieldsDevices: String, Codable, CaseIterable {
-				case addedDate
-				case deviceClass
-				case model
-				case name
-				case platform
-				case status
-				case udid
-			}
-
-			public enum FieldsBundleIDs: String, Codable, CaseIterable {
-				case app
-				case bundleIDCapabilities = "bundleIdCapabilities"
-				case identifier
-				case name
-				case platform
-				case profiles
-				case seedID = "seedId"
-			}
-
-			public init(fieldsProfiles: [FieldsProfiles]? = nil, include: [Include]? = nil, fieldsCertificates: [FieldsCertificates]? = nil, fieldsDevices: [FieldsDevices]? = nil, fieldsBundleIDs: [FieldsBundleIDs]? = nil, limitCertificates: Int? = nil, limitDevices: Int? = nil) {
+			public init(fieldsProfiles: [FieldsProfiles]? = nil, fieldsBundleIDs: [FieldsBundleIDs]? = nil, fieldsDevices: [FieldsDevices]? = nil, fieldsCertificates: [FieldsCertificates]? = nil, include: [Include]? = nil, limitCertificates: Int? = nil, limitDevices: Int? = nil) {
 				self.fieldsProfiles = fieldsProfiles
-				self.include = include
-				self.fieldsCertificates = fieldsCertificates
-				self.fieldsDevices = fieldsDevices
 				self.fieldsBundleIDs = fieldsBundleIDs
+				self.fieldsDevices = fieldsDevices
+				self.fieldsCertificates = fieldsCertificates
+				self.include = include
 				self.limitCertificates = limitCertificates
 				self.limitDevices = limitDevices
 			}
@@ -90,10 +90,10 @@ extension APIEndpoint.V1.Profiles {
 			public var asQuery: [(String, String?)] {
 				let encoder = URLQueryEncoder(explode: false)
 				encoder.encode(fieldsProfiles, forKey: "fields[profiles]")
-				encoder.encode(include, forKey: "include")
-				encoder.encode(fieldsCertificates, forKey: "fields[certificates]")
-				encoder.encode(fieldsDevices, forKey: "fields[devices]")
 				encoder.encode(fieldsBundleIDs, forKey: "fields[bundleIds]")
+				encoder.encode(fieldsDevices, forKey: "fields[devices]")
+				encoder.encode(fieldsCertificates, forKey: "fields[certificates]")
+				encoder.encode(include, forKey: "include")
 				encoder.encode(limitCertificates, forKey: "limit[certificates]")
 				encoder.encode(limitDevices, forKey: "limit[devices]")
 				return encoder.items
@@ -101,7 +101,7 @@ extension APIEndpoint.V1.Profiles {
 		}
 
 		public var delete: Request<Void> {
-			Request(path: path, method: "DELETE", id: "profiles-delete_instance")
+			Request(path: path, method: "DELETE", id: "profiles_deleteInstance")
 		}
 	}
 }

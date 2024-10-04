@@ -14,76 +14,77 @@ extension APIEndpoint.V1.AppStoreVersions.WithID {
 		public let path: String
 
 		public func get(parameters: GetParameters? = nil) -> Request<AppStoreConnect_Swift_SDK.AppStoreReviewDetailResponse> {
-			Request(path: path, method: "GET", query: parameters?.asQuery, id: "appStoreVersions-appStoreReviewDetail-get_to_one_related")
+			Request(path: path, method: "GET", query: parameters?.asQuery, id: "appStoreVersions_appStoreReviewDetail_getToOneRelated")
 		}
 
 		public struct GetParameters {
 			public var fieldsAppStoreReviewDetails: [FieldsAppStoreReviewDetails]?
 			public var fieldsAppStoreVersions: [FieldsAppStoreVersions]?
 			public var fieldsAppStoreReviewAttachments: [FieldsAppStoreReviewAttachments]?
-			public var limitAppStoreReviewAttachments: Int?
 			public var include: [Include]?
+			public var limitAppStoreReviewAttachments: Int?
 
 			public enum FieldsAppStoreReviewDetails: String, Codable, CaseIterable {
-				case appStoreReviewAttachments
-				case appStoreVersion
-				case contactEmail
 				case contactFirstName
 				case contactLastName
 				case contactPhone
+				case contactEmail
 				case demoAccountName
 				case demoAccountPassword
 				case demoAccountRequired
 				case notes
+				case appStoreVersion
+				case appStoreReviewAttachments
 			}
 
 			public enum FieldsAppStoreVersions: String, Codable, CaseIterable {
-				case ageRatingDeclaration
-				case alternativeDistributionPackage
-				case app
-				case appClipDefaultExperience
-				case appStoreReviewDetail
+				case platform
+				case versionString
 				case appStoreState
+				case appVersionState
+				case copyright
+				case reviewType
+				case releaseType
+				case earliestReleaseDate
+				case downloadable
+				case createdDate
+				case app
+				case ageRatingDeclaration
+				case appStoreVersionLocalizations
+				case build
+				case appStoreVersionPhasedRelease
+				case gameCenterAppVersion
+				case routingAppCoverage
+				case appStoreReviewDetail
+				case appStoreVersionSubmission
+				case appClipDefaultExperience
 				case appStoreVersionExperiments
 				case appStoreVersionExperimentsV2
-				case appStoreVersionLocalizations
-				case appStoreVersionPhasedRelease
-				case appStoreVersionSubmission
-				case appVersionState
-				case build
-				case copyright
-				case createdDate
 				case customerReviews
-				case downloadable
-				case earliestReleaseDate
-				case platform
-				case releaseType
-				case reviewType
-				case routingAppCoverage
-				case versionString
+				case alternativeDistributionPackage
 			}
 
 			public enum FieldsAppStoreReviewAttachments: String, Codable, CaseIterable {
-				case appStoreReviewDetail
-				case assetDeliveryState
-				case fileName
 				case fileSize
+				case fileName
 				case sourceFileChecksum
 				case uploadOperations
+				case assetDeliveryState
 				case uploaded
+				case appStoreReviewDetail
 			}
 
 			public enum Include: String, Codable, CaseIterable {
-				case appStoreReviewAttachments
 				case appStoreVersion
+				case appStoreReviewAttachments
 			}
 
-			public init(fieldsAppStoreReviewDetails: [FieldsAppStoreReviewDetails]? = nil, fieldsAppStoreVersions: [FieldsAppStoreVersions]? = nil, fieldsAppStoreReviewAttachments: [FieldsAppStoreReviewAttachments]? = nil, limitAppStoreReviewAttachments: Int? = nil, include: [Include]? = nil) {
+			public init(fieldsAppStoreReviewDetails: [FieldsAppStoreReviewDetails]? = nil, fieldsAppStoreVersions: [FieldsAppStoreVersions]? = nil, fieldsAppStoreReviewAttachments: [FieldsAppStoreReviewAttachments]? = nil, include: [Include]? = nil, limitAppStoreReviewAttachments: Int? = nil) {
 				self.fieldsAppStoreReviewDetails = fieldsAppStoreReviewDetails
 				self.fieldsAppStoreVersions = fieldsAppStoreVersions
 				self.fieldsAppStoreReviewAttachments = fieldsAppStoreReviewAttachments
-				self.limitAppStoreReviewAttachments = limitAppStoreReviewAttachments
 				self.include = include
+				self.limitAppStoreReviewAttachments = limitAppStoreReviewAttachments
 			}
 
 			public var asQuery: [(String, String?)] {
@@ -91,8 +92,8 @@ extension APIEndpoint.V1.AppStoreVersions.WithID {
 				encoder.encode(fieldsAppStoreReviewDetails, forKey: "fields[appStoreReviewDetails]")
 				encoder.encode(fieldsAppStoreVersions, forKey: "fields[appStoreVersions]")
 				encoder.encode(fieldsAppStoreReviewAttachments, forKey: "fields[appStoreReviewAttachments]")
-				encoder.encode(limitAppStoreReviewAttachments, forKey: "limit[appStoreReviewAttachments]")
 				encoder.encode(include, forKey: "include")
+				encoder.encode(limitAppStoreReviewAttachments, forKey: "limit[appStoreReviewAttachments]")
 				return encoder.items
 			}
 		}

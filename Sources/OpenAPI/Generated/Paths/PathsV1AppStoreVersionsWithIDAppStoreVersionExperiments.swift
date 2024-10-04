@@ -15,17 +15,17 @@ extension APIEndpoint.V1.AppStoreVersions.WithID {
 
 		@available(*, deprecated, message: "Deprecated")
 		public func get(parameters: GetParameters? = nil) -> Request<AppStoreConnect_Swift_SDK.AppStoreVersionExperimentsResponse> {
-			Request(path: path, method: "GET", query: parameters?.asQuery, id: "appStoreVersions-appStoreVersionExperiments-get_to_many_related")
+			Request(path: path, method: "GET", query: parameters?.asQuery, id: "appStoreVersions_appStoreVersionExperiments_getToManyRelated")
 		}
 
 		public struct GetParameters {
 			public var filterState: [FilterState]?
 			public var fieldsAppStoreVersionExperiments: [FieldsAppStoreVersionExperiments]?
-			public var fieldsAppStoreVersionExperimentTreatments: [FieldsAppStoreVersionExperimentTreatments]?
 			public var fieldsAppStoreVersions: [FieldsAppStoreVersions]?
+			public var fieldsAppStoreVersionExperimentTreatments: [FieldsAppStoreVersionExperimentTreatments]?
 			public var limit: Int?
-			public var limitAppStoreVersionExperimentTreatments: Int?
 			public var include: [Include]?
+			public var limitAppStoreVersionExperimentTreatments: Int?
 
 			public enum FilterState: String, Codable, CaseIterable {
 				case prepareForSubmission = "PREPARE_FOR_SUBMISSION"
@@ -40,51 +40,52 @@ extension APIEndpoint.V1.AppStoreVersions.WithID {
 			}
 
 			public enum FieldsAppStoreVersionExperiments: String, Codable, CaseIterable {
-				case appStoreVersion
-				case appStoreVersionExperimentTreatments
-				case endDate
 				case name
+				case trafficProportion
+				case state
 				case reviewRequired
 				case startDate
+				case endDate
 				case started
-				case state
-				case trafficProportion
-			}
-
-			public enum FieldsAppStoreVersionExperimentTreatments: String, Codable, CaseIterable {
-				case appIcon
-				case appIconName
-				case appStoreVersionExperiment
-				case appStoreVersionExperimentTreatmentLocalizations
-				case appStoreVersionExperimentV2
-				case name
-				case promotedDate
+				case appStoreVersion
+				case appStoreVersionExperimentTreatments
 			}
 
 			public enum FieldsAppStoreVersions: String, Codable, CaseIterable {
-				case ageRatingDeclaration
-				case alternativeDistributionPackage
-				case app
-				case appClipDefaultExperience
-				case appStoreReviewDetail
+				case platform
+				case versionString
 				case appStoreState
+				case appVersionState
+				case copyright
+				case reviewType
+				case releaseType
+				case earliestReleaseDate
+				case downloadable
+				case createdDate
+				case app
+				case ageRatingDeclaration
+				case appStoreVersionLocalizations
+				case build
+				case appStoreVersionPhasedRelease
+				case gameCenterAppVersion
+				case routingAppCoverage
+				case appStoreReviewDetail
+				case appStoreVersionSubmission
+				case appClipDefaultExperience
 				case appStoreVersionExperiments
 				case appStoreVersionExperimentsV2
-				case appStoreVersionLocalizations
-				case appStoreVersionPhasedRelease
-				case appStoreVersionSubmission
-				case appVersionState
-				case build
-				case copyright
-				case createdDate
 				case customerReviews
-				case downloadable
-				case earliestReleaseDate
-				case platform
-				case releaseType
-				case reviewType
-				case routingAppCoverage
-				case versionString
+				case alternativeDistributionPackage
+			}
+
+			public enum FieldsAppStoreVersionExperimentTreatments: String, Codable, CaseIterable {
+				case name
+				case appIcon
+				case appIconName
+				case promotedDate
+				case appStoreVersionExperiment
+				case appStoreVersionExperimentV2
+				case appStoreVersionExperimentTreatmentLocalizations
 			}
 
 			public enum Include: String, Codable, CaseIterable {
@@ -92,25 +93,25 @@ extension APIEndpoint.V1.AppStoreVersions.WithID {
 				case appStoreVersionExperimentTreatments
 			}
 
-			public init(filterState: [FilterState]? = nil, fieldsAppStoreVersionExperiments: [FieldsAppStoreVersionExperiments]? = nil, fieldsAppStoreVersionExperimentTreatments: [FieldsAppStoreVersionExperimentTreatments]? = nil, fieldsAppStoreVersions: [FieldsAppStoreVersions]? = nil, limit: Int? = nil, limitAppStoreVersionExperimentTreatments: Int? = nil, include: [Include]? = nil) {
+			public init(filterState: [FilterState]? = nil, fieldsAppStoreVersionExperiments: [FieldsAppStoreVersionExperiments]? = nil, fieldsAppStoreVersions: [FieldsAppStoreVersions]? = nil, fieldsAppStoreVersionExperimentTreatments: [FieldsAppStoreVersionExperimentTreatments]? = nil, limit: Int? = nil, include: [Include]? = nil, limitAppStoreVersionExperimentTreatments: Int? = nil) {
 				self.filterState = filterState
 				self.fieldsAppStoreVersionExperiments = fieldsAppStoreVersionExperiments
-				self.fieldsAppStoreVersionExperimentTreatments = fieldsAppStoreVersionExperimentTreatments
 				self.fieldsAppStoreVersions = fieldsAppStoreVersions
+				self.fieldsAppStoreVersionExperimentTreatments = fieldsAppStoreVersionExperimentTreatments
 				self.limit = limit
-				self.limitAppStoreVersionExperimentTreatments = limitAppStoreVersionExperimentTreatments
 				self.include = include
+				self.limitAppStoreVersionExperimentTreatments = limitAppStoreVersionExperimentTreatments
 			}
 
 			public var asQuery: [(String, String?)] {
 				let encoder = URLQueryEncoder(explode: false)
 				encoder.encode(filterState, forKey: "filter[state]")
 				encoder.encode(fieldsAppStoreVersionExperiments, forKey: "fields[appStoreVersionExperiments]")
-				encoder.encode(fieldsAppStoreVersionExperimentTreatments, forKey: "fields[appStoreVersionExperimentTreatments]")
 				encoder.encode(fieldsAppStoreVersions, forKey: "fields[appStoreVersions]")
+				encoder.encode(fieldsAppStoreVersionExperimentTreatments, forKey: "fields[appStoreVersionExperimentTreatments]")
 				encoder.encode(limit, forKey: "limit")
-				encoder.encode(limitAppStoreVersionExperimentTreatments, forKey: "limit[appStoreVersionExperimentTreatments]")
 				encoder.encode(include, forKey: "include")
+				encoder.encode(limitAppStoreVersionExperimentTreatments, forKey: "limit[appStoreVersionExperimentTreatments]")
 				return encoder.items
 			}
 		}

@@ -15,7 +15,7 @@ extension APIEndpoint.V1.GameCenterEnabledVersions.WithID.Relationships {
 
 		@available(*, deprecated, message: "Deprecated")
 		public func get(limit: Int? = nil) -> Request<AppStoreConnect_Swift_SDK.GameCenterEnabledVersionCompatibleVersionsLinkagesResponse> {
-			Request(path: path, method: "GET", query: makeGetQuery(limit), id: "gameCenterEnabledVersions-compatibleVersions-get_to_many_relationship")
+			Request(path: path, method: "GET", query: makeGetQuery(limit), id: "gameCenterEnabledVersions_compatibleVersions_getToManyRelationship")
 		}
 
 		private func makeGetQuery(_ limit: Int?) -> [(String, String?)] {
@@ -26,17 +26,17 @@ extension APIEndpoint.V1.GameCenterEnabledVersions.WithID.Relationships {
 
 		@available(*, deprecated, message: "Deprecated")
 		public func post(_ body: AppStoreConnect_Swift_SDK.GameCenterEnabledVersionCompatibleVersionsLinkagesRequest) -> Request<Void> {
-			Request(path: path, method: "POST", body: body, id: "gameCenterEnabledVersions-compatibleVersions-create_to_many_relationship")
+			Request(path: path, method: "POST", body: body, id: "gameCenterEnabledVersions_compatibleVersions_createToManyRelationship")
 		}
 
 		@available(*, deprecated, message: "Deprecated")
 		public func patch(_ body: AppStoreConnect_Swift_SDK.GameCenterEnabledVersionCompatibleVersionsLinkagesRequest) -> Request<Void> {
-			Request(path: path, method: "PATCH", body: body, id: "gameCenterEnabledVersions-compatibleVersions-replace_to_many_relationship")
+			Request(path: path, method: "PATCH", body: body, id: "gameCenterEnabledVersions_compatibleVersions_replaceToManyRelationship")
 		}
 
 		@available(*, deprecated, message: "Deprecated")
 		public func delete(_ body: AppStoreConnect_Swift_SDK.GameCenterEnabledVersionCompatibleVersionsLinkagesRequest) -> Request<Void> {
-			Request(path: path, method: "DELETE", body: body, id: "gameCenterEnabledVersions-compatibleVersions-delete_to_many_relationship")
+			Request(path: path, method: "DELETE", body: body, id: "gameCenterEnabledVersions_compatibleVersions_deleteToManyRelationship")
 		}
 	}
 }

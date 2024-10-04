@@ -14,49 +14,49 @@ extension APIEndpoint.V1.GameCenterDetails.WithID {
 		public let path: String
 
 		public func get(parameters: GetParameters? = nil) -> Request<AppStoreConnect_Swift_SDK.GameCenterLeaderboardSetReleasesResponse> {
-			Request(path: path, method: "GET", query: parameters?.asQuery, id: "gameCenterDetails-leaderboardSetReleases-get_to_many_related")
+			Request(path: path, method: "GET", query: parameters?.asQuery, id: "gameCenterDetails_leaderboardSetReleases_getToManyRelated")
 		}
 
 		public struct GetParameters {
 			public var filterLive: [String]?
 			public var filterGameCenterLeaderboardSet: [String]?
 			public var fieldsGameCenterLeaderboardSetReleases: [FieldsGameCenterLeaderboardSetReleases]?
-			public var fieldsGameCenterLeaderboardSets: [FieldsGameCenterLeaderboardSets]?
 			public var fieldsGameCenterDetails: [FieldsGameCenterDetails]?
+			public var fieldsGameCenterLeaderboardSets: [FieldsGameCenterLeaderboardSets]?
 			public var limit: Int?
 			public var include: [Include]?
 
 			public enum FieldsGameCenterLeaderboardSetReleases: String, Codable, CaseIterable {
+				case live
 				case gameCenterDetail
 				case gameCenterLeaderboardSet
-				case live
-			}
-
-			public enum FieldsGameCenterLeaderboardSets: String, Codable, CaseIterable {
-				case gameCenterDetail
-				case gameCenterGroup
-				case gameCenterLeaderboards
-				case groupLeaderboardSet
-				case localizations
-				case referenceName
-				case releases
-				case vendorIdentifier
 			}
 
 			public enum FieldsGameCenterDetails: String, Codable, CaseIterable {
-				case achievementReleases
-				case app
 				case arcadeEnabled
 				case challengeEnabled
-				case defaultGroupLeaderboard
-				case defaultLeaderboard
-				case gameCenterAchievements
+				case app
 				case gameCenterAppVersions
 				case gameCenterGroup
-				case gameCenterLeaderboardSets
 				case gameCenterLeaderboards
+				case gameCenterLeaderboardSets
+				case gameCenterAchievements
+				case defaultLeaderboard
+				case defaultGroupLeaderboard
+				case achievementReleases
 				case leaderboardReleases
 				case leaderboardSetReleases
+			}
+
+			public enum FieldsGameCenterLeaderboardSets: String, Codable, CaseIterable {
+				case referenceName
+				case vendorIdentifier
+				case gameCenterDetail
+				case gameCenterGroup
+				case groupLeaderboardSet
+				case localizations
+				case gameCenterLeaderboards
+				case releases
 			}
 
 			public enum Include: String, Codable, CaseIterable {
@@ -64,12 +64,12 @@ extension APIEndpoint.V1.GameCenterDetails.WithID {
 				case gameCenterLeaderboardSet
 			}
 
-			public init(filterLive: [String]? = nil, filterGameCenterLeaderboardSet: [String]? = nil, fieldsGameCenterLeaderboardSetReleases: [FieldsGameCenterLeaderboardSetReleases]? = nil, fieldsGameCenterLeaderboardSets: [FieldsGameCenterLeaderboardSets]? = nil, fieldsGameCenterDetails: [FieldsGameCenterDetails]? = nil, limit: Int? = nil, include: [Include]? = nil) {
+			public init(filterLive: [String]? = nil, filterGameCenterLeaderboardSet: [String]? = nil, fieldsGameCenterLeaderboardSetReleases: [FieldsGameCenterLeaderboardSetReleases]? = nil, fieldsGameCenterDetails: [FieldsGameCenterDetails]? = nil, fieldsGameCenterLeaderboardSets: [FieldsGameCenterLeaderboardSets]? = nil, limit: Int? = nil, include: [Include]? = nil) {
 				self.filterLive = filterLive
 				self.filterGameCenterLeaderboardSet = filterGameCenterLeaderboardSet
 				self.fieldsGameCenterLeaderboardSetReleases = fieldsGameCenterLeaderboardSetReleases
-				self.fieldsGameCenterLeaderboardSets = fieldsGameCenterLeaderboardSets
 				self.fieldsGameCenterDetails = fieldsGameCenterDetails
+				self.fieldsGameCenterLeaderboardSets = fieldsGameCenterLeaderboardSets
 				self.limit = limit
 				self.include = include
 			}
@@ -79,8 +79,8 @@ extension APIEndpoint.V1.GameCenterDetails.WithID {
 				encoder.encode(filterLive, forKey: "filter[live]")
 				encoder.encode(filterGameCenterLeaderboardSet, forKey: "filter[gameCenterLeaderboardSet]")
 				encoder.encode(fieldsGameCenterLeaderboardSetReleases, forKey: "fields[gameCenterLeaderboardSetReleases]")
-				encoder.encode(fieldsGameCenterLeaderboardSets, forKey: "fields[gameCenterLeaderboardSets]")
 				encoder.encode(fieldsGameCenterDetails, forKey: "fields[gameCenterDetails]")
+				encoder.encode(fieldsGameCenterLeaderboardSets, forKey: "fields[gameCenterLeaderboardSets]")
 				encoder.encode(limit, forKey: "limit")
 				encoder.encode(include, forKey: "include")
 				return encoder.items

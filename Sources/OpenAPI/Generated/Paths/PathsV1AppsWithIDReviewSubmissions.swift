@@ -14,20 +14,20 @@ extension APIEndpoint.V1.Apps.WithID {
 		public let path: String
 
 		public func get(parameters: GetParameters? = nil) -> Request<AppStoreConnect_Swift_SDK.ReviewSubmissionsResponse> {
-			Request(path: path, method: "GET", query: parameters?.asQuery, id: "apps-reviewSubmissions-get_to_many_related")
+			Request(path: path, method: "GET", query: parameters?.asQuery, id: "apps_reviewSubmissions_getToManyRelated")
 		}
 
 		public struct GetParameters {
 			public var filterPlatform: [FilterPlatform]?
 			public var filterState: [FilterState]?
-			public var fieldsReviewSubmissionItems: [FieldsReviewSubmissionItems]?
-			public var fieldsActors: [FieldsActors]?
-			public var fieldsAppStoreVersions: [FieldsAppStoreVersions]?
-			public var fieldsApps: [FieldsApps]?
 			public var fieldsReviewSubmissions: [FieldsReviewSubmissions]?
+			public var fieldsApps: [FieldsApps]?
+			public var fieldsReviewSubmissionItems: [FieldsReviewSubmissionItems]?
+			public var fieldsAppStoreVersions: [FieldsAppStoreVersions]?
+			public var fieldsActors: [FieldsActors]?
 			public var limit: Int?
-			public var limitItems: Int?
 			public var include: [Include]?
+			public var limitItems: Int?
 
 			public enum FilterPlatform: String, Codable, CaseIterable {
 				case ios = "IOS"
@@ -46,144 +46,147 @@ extension APIEndpoint.V1.Apps.WithID {
 				case complete = "COMPLETE"
 			}
 
+			public enum FieldsReviewSubmissions: String, Codable, CaseIterable {
+				case platform
+				case submittedDate
+				case state
+				case submitted
+				case canceled
+				case app
+				case items
+				case appStoreVersionForReview
+				case submittedByActor
+				case lastUpdatedByActor
+			}
+
+			public enum FieldsApps: String, Codable, CaseIterable {
+				case name
+				case bundleID = "bundleId"
+				case sku
+				case primaryLocale
+				case isOrEverWasMadeForKids
+				case subscriptionStatusURL = "subscriptionStatusUrl"
+				case subscriptionStatusURLVersion = "subscriptionStatusUrlVersion"
+				case subscriptionStatusURLForSandbox = "subscriptionStatusUrlForSandbox"
+				case subscriptionStatusURLVersionForSandbox = "subscriptionStatusUrlVersionForSandbox"
+				case contentRightsDeclaration
+				case streamlinedPurchasingEnabled
+				case appEncryptionDeclarations
+				case ciProduct
+				case betaTesters
+				case betaGroups
+				case appStoreVersions
+				case preReleaseVersions
+				case betaAppLocalizations
+				case builds
+				case betaLicenseAgreement
+				case betaAppReviewDetail
+				case appInfos
+				case appClips
+				case appPricePoints
+				case endUserLicenseAgreement
+				case preOrder
+				case appPriceSchedule
+				case appAvailability
+				case appAvailabilityV2
+				case inAppPurchases
+				case subscriptionGroups
+				case gameCenterEnabledVersions
+				case perfPowerMetrics
+				case appCustomProductPages
+				case inAppPurchasesV2
+				case promotedPurchases
+				case appEvents
+				case reviewSubmissions
+				case subscriptionGracePeriod
+				case customerReviews
+				case gameCenterDetail
+				case appStoreVersionExperimentsV2
+				case alternativeDistributionKey
+				case analyticsReportRequests
+				case marketplaceSearchDetail
+			}
+
 			public enum FieldsReviewSubmissionItems: String, Codable, CaseIterable {
-				case appCustomProductPageVersion
-				case appEvent
+				case state
+				case resolved
+				case removed
+				case reviewSubmission
 				case appStoreVersion
+				case appCustomProductPageVersion
 				case appStoreVersionExperiment
 				case appStoreVersionExperimentV2
-				case removed
-				case resolved
-				case reviewSubmission
-				case state
+				case appEvent
+			}
+
+			public enum FieldsAppStoreVersions: String, Codable, CaseIterable {
+				case platform
+				case versionString
+				case appStoreState
+				case appVersionState
+				case copyright
+				case reviewType
+				case releaseType
+				case earliestReleaseDate
+				case downloadable
+				case createdDate
+				case app
+				case ageRatingDeclaration
+				case appStoreVersionLocalizations
+				case build
+				case appStoreVersionPhasedRelease
+				case gameCenterAppVersion
+				case routingAppCoverage
+				case appStoreReviewDetail
+				case appStoreVersionSubmission
+				case appClipDefaultExperience
+				case appStoreVersionExperiments
+				case appStoreVersionExperimentsV2
+				case customerReviews
+				case alternativeDistributionPackage
 			}
 
 			public enum FieldsActors: String, Codable, CaseIterable {
 				case actorType
-				case apiKeyID = "apiKeyId"
-				case userEmail
 				case userFirstName
 				case userLastName
-			}
-
-			public enum FieldsAppStoreVersions: String, Codable, CaseIterable {
-				case ageRatingDeclaration
-				case alternativeDistributionPackage
-				case app
-				case appClipDefaultExperience
-				case appStoreReviewDetail
-				case appStoreState
-				case appStoreVersionExperiments
-				case appStoreVersionExperimentsV2
-				case appStoreVersionLocalizations
-				case appStoreVersionPhasedRelease
-				case appStoreVersionSubmission
-				case appVersionState
-				case build
-				case copyright
-				case createdDate
-				case customerReviews
-				case downloadable
-				case earliestReleaseDate
-				case platform
-				case releaseType
-				case reviewType
-				case routingAppCoverage
-				case versionString
-			}
-
-			public enum FieldsApps: String, Codable, CaseIterable {
-				case alternativeDistributionKey
-				case analyticsReportRequests
-				case appAvailability
-				case appClips
-				case appCustomProductPages
-				case appEncryptionDeclarations
-				case appEvents
-				case appInfos
-				case appPricePoints
-				case appPriceSchedule
-				case appStoreVersionExperimentsV2
-				case appStoreVersions
-				case betaAppLocalizations
-				case betaAppReviewDetail
-				case betaGroups
-				case betaLicenseAgreement
-				case betaTesters
-				case builds
-				case bundleID = "bundleId"
-				case ciProduct
-				case contentRightsDeclaration
-				case customerReviews
-				case endUserLicenseAgreement
-				case gameCenterDetail
-				case gameCenterEnabledVersions
-				case inAppPurchases
-				case inAppPurchasesV2
-				case isOrEverWasMadeForKids
-				case marketplaceSearchDetail
-				case name
-				case perfPowerMetrics
-				case preOrder
-				case preReleaseVersions
-				case primaryLocale
-				case promotedPurchases
-				case reviewSubmissions
-				case sku
-				case subscriptionGracePeriod
-				case subscriptionGroups
-				case subscriptionStatusURL = "subscriptionStatusUrl"
-				case subscriptionStatusURLForSandbox = "subscriptionStatusUrlForSandbox"
-				case subscriptionStatusURLVersion = "subscriptionStatusUrlVersion"
-				case subscriptionStatusURLVersionForSandbox = "subscriptionStatusUrlVersionForSandbox"
-			}
-
-			public enum FieldsReviewSubmissions: String, Codable, CaseIterable {
-				case app
-				case appStoreVersionForReview
-				case canceled
-				case items
-				case lastUpdatedByActor
-				case platform
-				case state
-				case submitted
-				case submittedByActor
-				case submittedDate
+				case userEmail
+				case apiKeyID = "apiKeyId"
 			}
 
 			public enum Include: String, Codable, CaseIterable {
 				case app
-				case appStoreVersionForReview
 				case items
-				case lastUpdatedByActor
+				case appStoreVersionForReview
 				case submittedByActor
+				case lastUpdatedByActor
 			}
 
-			public init(filterPlatform: [FilterPlatform]? = nil, filterState: [FilterState]? = nil, fieldsReviewSubmissionItems: [FieldsReviewSubmissionItems]? = nil, fieldsActors: [FieldsActors]? = nil, fieldsAppStoreVersions: [FieldsAppStoreVersions]? = nil, fieldsApps: [FieldsApps]? = nil, fieldsReviewSubmissions: [FieldsReviewSubmissions]? = nil, limit: Int? = nil, limitItems: Int? = nil, include: [Include]? = nil) {
+			public init(filterPlatform: [FilterPlatform]? = nil, filterState: [FilterState]? = nil, fieldsReviewSubmissions: [FieldsReviewSubmissions]? = nil, fieldsApps: [FieldsApps]? = nil, fieldsReviewSubmissionItems: [FieldsReviewSubmissionItems]? = nil, fieldsAppStoreVersions: [FieldsAppStoreVersions]? = nil, fieldsActors: [FieldsActors]? = nil, limit: Int? = nil, include: [Include]? = nil, limitItems: Int? = nil) {
 				self.filterPlatform = filterPlatform
 				self.filterState = filterState
-				self.fieldsReviewSubmissionItems = fieldsReviewSubmissionItems
-				self.fieldsActors = fieldsActors
-				self.fieldsAppStoreVersions = fieldsAppStoreVersions
-				self.fieldsApps = fieldsApps
 				self.fieldsReviewSubmissions = fieldsReviewSubmissions
+				self.fieldsApps = fieldsApps
+				self.fieldsReviewSubmissionItems = fieldsReviewSubmissionItems
+				self.fieldsAppStoreVersions = fieldsAppStoreVersions
+				self.fieldsActors = fieldsActors
 				self.limit = limit
-				self.limitItems = limitItems
 				self.include = include
+				self.limitItems = limitItems
 			}
 
 			public var asQuery: [(String, String?)] {
 				let encoder = URLQueryEncoder(explode: false)
 				encoder.encode(filterPlatform, forKey: "filter[platform]")
 				encoder.encode(filterState, forKey: "filter[state]")
-				encoder.encode(fieldsReviewSubmissionItems, forKey: "fields[reviewSubmissionItems]")
-				encoder.encode(fieldsActors, forKey: "fields[actors]")
-				encoder.encode(fieldsAppStoreVersions, forKey: "fields[appStoreVersions]")
-				encoder.encode(fieldsApps, forKey: "fields[apps]")
 				encoder.encode(fieldsReviewSubmissions, forKey: "fields[reviewSubmissions]")
+				encoder.encode(fieldsApps, forKey: "fields[apps]")
+				encoder.encode(fieldsReviewSubmissionItems, forKey: "fields[reviewSubmissionItems]")
+				encoder.encode(fieldsAppStoreVersions, forKey: "fields[appStoreVersions]")
+				encoder.encode(fieldsActors, forKey: "fields[actors]")
 				encoder.encode(limit, forKey: "limit")
-				encoder.encode(limitItems, forKey: "limit[items]")
 				encoder.encode(include, forKey: "include")
+				encoder.encode(limitItems, forKey: "limit[items]")
 				return encoder.items
 			}
 		}

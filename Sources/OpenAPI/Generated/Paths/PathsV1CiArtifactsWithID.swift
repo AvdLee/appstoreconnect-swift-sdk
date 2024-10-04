@@ -14,7 +14,7 @@ extension APIEndpoint.V1.CiArtifacts {
 		public let path: String
 
 		public func get(fieldsCiArtifacts: [FieldsCiArtifacts]? = nil) -> Request<AppStoreConnect_Swift_SDK.CiArtifactResponse> {
-			Request(path: path, method: "GET", query: makeGetQuery(fieldsCiArtifacts), id: "ciArtifacts-get_instance")
+			Request(path: path, method: "GET", query: makeGetQuery(fieldsCiArtifacts), id: "ciArtifacts_getInstance")
 		}
 
 		private func makeGetQuery(_ fieldsCiArtifacts: [FieldsCiArtifacts]?) -> [(String, String?)] {
@@ -24,10 +24,10 @@ extension APIEndpoint.V1.CiArtifacts {
 		}
 
 		public enum FieldsCiArtifacts: String, Codable, CaseIterable {
-			case downloadURL = "downloadUrl"
+			case fileType
 			case fileName
 			case fileSize
-			case fileType
+			case downloadURL = "downloadUrl"
 		}
 	}
 }

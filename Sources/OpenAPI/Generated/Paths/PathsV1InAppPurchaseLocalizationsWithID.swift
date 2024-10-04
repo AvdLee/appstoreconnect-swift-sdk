@@ -14,7 +14,7 @@ extension APIEndpoint.V1.InAppPurchaseLocalizations {
 		public let path: String
 
 		public func get(fieldsInAppPurchaseLocalizations: [FieldsInAppPurchaseLocalizations]? = nil, include: [Include]? = nil) -> Request<AppStoreConnect_Swift_SDK.InAppPurchaseLocalizationResponse> {
-			Request(path: path, method: "GET", query: makeGetQuery(fieldsInAppPurchaseLocalizations, include), id: "inAppPurchaseLocalizations-get_instance")
+			Request(path: path, method: "GET", query: makeGetQuery(fieldsInAppPurchaseLocalizations, include), id: "inAppPurchaseLocalizations_getInstance")
 		}
 
 		private func makeGetQuery(_ fieldsInAppPurchaseLocalizations: [FieldsInAppPurchaseLocalizations]?, _ include: [Include]?) -> [(String, String?)] {
@@ -25,11 +25,11 @@ extension APIEndpoint.V1.InAppPurchaseLocalizations {
 		}
 
 		public enum FieldsInAppPurchaseLocalizations: String, Codable, CaseIterable {
-			case description
-			case inAppPurchaseV2
-			case locale
 			case name
+			case locale
+			case description
 			case state
+			case inAppPurchaseV2
 		}
 
 		public enum Include: String, Codable, CaseIterable {
@@ -37,11 +37,11 @@ extension APIEndpoint.V1.InAppPurchaseLocalizations {
 		}
 
 		public func patch(_ body: AppStoreConnect_Swift_SDK.InAppPurchaseLocalizationUpdateRequest) -> Request<AppStoreConnect_Swift_SDK.InAppPurchaseLocalizationResponse> {
-			Request(path: path, method: "PATCH", body: body, id: "inAppPurchaseLocalizations-update_instance")
+			Request(path: path, method: "PATCH", body: body, id: "inAppPurchaseLocalizations_updateInstance")
 		}
 
 		public var delete: Request<Void> {
-			Request(path: path, method: "DELETE", id: "inAppPurchaseLocalizations-delete_instance")
+			Request(path: path, method: "DELETE", id: "inAppPurchaseLocalizations_deleteInstance")
 		}
 	}
 }

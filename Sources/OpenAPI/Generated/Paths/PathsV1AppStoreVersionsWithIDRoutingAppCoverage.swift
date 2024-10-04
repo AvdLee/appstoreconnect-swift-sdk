@@ -14,7 +14,7 @@ extension APIEndpoint.V1.AppStoreVersions.WithID {
 		public let path: String
 
 		public func get(fieldsRoutingAppCoverages: [FieldsRoutingAppCoverages]? = nil) -> Request<AppStoreConnect_Swift_SDK.RoutingAppCoverageWithoutIncludesResponse> {
-			Request(path: path, method: "GET", query: makeGetQuery(fieldsRoutingAppCoverages), id: "appStoreVersions-routingAppCoverage-get_to_one_related")
+			Request(path: path, method: "GET", query: makeGetQuery(fieldsRoutingAppCoverages), id: "appStoreVersions_routingAppCoverage_getToOneRelated")
 		}
 
 		private func makeGetQuery(_ fieldsRoutingAppCoverages: [FieldsRoutingAppCoverages]?) -> [(String, String?)] {
@@ -24,13 +24,13 @@ extension APIEndpoint.V1.AppStoreVersions.WithID {
 		}
 
 		public enum FieldsRoutingAppCoverages: String, Codable, CaseIterable {
-			case appStoreVersion
-			case assetDeliveryState
-			case fileName
 			case fileSize
+			case fileName
 			case sourceFileChecksum
 			case uploadOperations
+			case assetDeliveryState
 			case uploaded
+			case appStoreVersion
 		}
 	}
 }

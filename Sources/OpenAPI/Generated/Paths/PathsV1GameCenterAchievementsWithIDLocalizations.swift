@@ -14,47 +14,47 @@ extension APIEndpoint.V1.GameCenterAchievements.WithID {
 		public let path: String
 
 		public func get(parameters: GetParameters? = nil) -> Request<AppStoreConnect_Swift_SDK.GameCenterAchievementLocalizationsResponse> {
-			Request(path: path, method: "GET", query: parameters?.asQuery, id: "gameCenterAchievements-localizations-get_to_many_related")
+			Request(path: path, method: "GET", query: parameters?.asQuery, id: "gameCenterAchievements_localizations_getToManyRelated")
 		}
 
 		public struct GetParameters {
-			public var fieldsGameCenterAchievementImages: [FieldsGameCenterAchievementImages]?
 			public var fieldsGameCenterAchievementLocalizations: [FieldsGameCenterAchievementLocalizations]?
 			public var fieldsGameCenterAchievements: [FieldsGameCenterAchievements]?
+			public var fieldsGameCenterAchievementImages: [FieldsGameCenterAchievementImages]?
 			public var limit: Int?
 			public var include: [Include]?
 
-			public enum FieldsGameCenterAchievementImages: String, Codable, CaseIterable {
-				case assetDeliveryState
-				case fileName
-				case fileSize
-				case gameCenterAchievementLocalization
-				case imageAsset
-				case uploadOperations
-				case uploaded
-			}
-
 			public enum FieldsGameCenterAchievementLocalizations: String, Codable, CaseIterable {
-				case afterEarnedDescription
-				case beforeEarnedDescription
-				case gameCenterAchievement
-				case gameCenterAchievementImage
 				case locale
 				case name
+				case beforeEarnedDescription
+				case afterEarnedDescription
+				case gameCenterAchievement
+				case gameCenterAchievementImage
 			}
 
 			public enum FieldsGameCenterAchievements: String, Codable, CaseIterable {
+				case referenceName
+				case vendorIdentifier
+				case points
+				case showBeforeEarned
+				case repeatable
 				case archived
 				case gameCenterDetail
 				case gameCenterGroup
 				case groupAchievement
 				case localizations
-				case points
-				case referenceName
 				case releases
-				case repeatable
-				case showBeforeEarned
-				case vendorIdentifier
+			}
+
+			public enum FieldsGameCenterAchievementImages: String, Codable, CaseIterable {
+				case fileSize
+				case fileName
+				case imageAsset
+				case uploadOperations
+				case assetDeliveryState
+				case uploaded
+				case gameCenterAchievementLocalization
 			}
 
 			public enum Include: String, Codable, CaseIterable {
@@ -62,19 +62,19 @@ extension APIEndpoint.V1.GameCenterAchievements.WithID {
 				case gameCenterAchievementImage
 			}
 
-			public init(fieldsGameCenterAchievementImages: [FieldsGameCenterAchievementImages]? = nil, fieldsGameCenterAchievementLocalizations: [FieldsGameCenterAchievementLocalizations]? = nil, fieldsGameCenterAchievements: [FieldsGameCenterAchievements]? = nil, limit: Int? = nil, include: [Include]? = nil) {
-				self.fieldsGameCenterAchievementImages = fieldsGameCenterAchievementImages
+			public init(fieldsGameCenterAchievementLocalizations: [FieldsGameCenterAchievementLocalizations]? = nil, fieldsGameCenterAchievements: [FieldsGameCenterAchievements]? = nil, fieldsGameCenterAchievementImages: [FieldsGameCenterAchievementImages]? = nil, limit: Int? = nil, include: [Include]? = nil) {
 				self.fieldsGameCenterAchievementLocalizations = fieldsGameCenterAchievementLocalizations
 				self.fieldsGameCenterAchievements = fieldsGameCenterAchievements
+				self.fieldsGameCenterAchievementImages = fieldsGameCenterAchievementImages
 				self.limit = limit
 				self.include = include
 			}
 
 			public var asQuery: [(String, String?)] {
 				let encoder = URLQueryEncoder(explode: false)
-				encoder.encode(fieldsGameCenterAchievementImages, forKey: "fields[gameCenterAchievementImages]")
 				encoder.encode(fieldsGameCenterAchievementLocalizations, forKey: "fields[gameCenterAchievementLocalizations]")
 				encoder.encode(fieldsGameCenterAchievements, forKey: "fields[gameCenterAchievements]")
+				encoder.encode(fieldsGameCenterAchievementImages, forKey: "fields[gameCenterAchievementImages]")
 				encoder.encode(limit, forKey: "limit")
 				encoder.encode(include, forKey: "include")
 				return encoder.items

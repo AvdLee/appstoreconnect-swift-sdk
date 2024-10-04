@@ -14,7 +14,7 @@ extension APIEndpoint.V1.Apps.WithID.Relationships {
 		public let path: String
 
 		public func delete(_ body: AppStoreConnect_Swift_SDK.AppBetaTestersLinkagesRequest) -> Request<Void> {
-			Request(path: path, method: "DELETE", body: body, id: "apps-betaTesters-delete_to_many_relationship")
+			Request(path: path, method: "DELETE", body: body, id: "apps_betaTesters_deleteToManyRelationship")
 		}
 	}
 }

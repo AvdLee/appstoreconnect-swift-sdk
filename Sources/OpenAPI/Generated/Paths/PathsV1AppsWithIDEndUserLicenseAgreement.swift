@@ -14,7 +14,7 @@ extension APIEndpoint.V1.Apps.WithID {
 		public let path: String
 
 		public func get(fieldsEndUserLicenseAgreements: [FieldsEndUserLicenseAgreements]? = nil) -> Request<AppStoreConnect_Swift_SDK.EndUserLicenseAgreementWithoutIncludesResponse> {
-			Request(path: path, method: "GET", query: makeGetQuery(fieldsEndUserLicenseAgreements), id: "apps-endUserLicenseAgreement-get_to_one_related")
+			Request(path: path, method: "GET", query: makeGetQuery(fieldsEndUserLicenseAgreements), id: "apps_endUserLicenseAgreement_getToOneRelated")
 		}
 
 		private func makeGetQuery(_ fieldsEndUserLicenseAgreements: [FieldsEndUserLicenseAgreements]?) -> [(String, String?)] {

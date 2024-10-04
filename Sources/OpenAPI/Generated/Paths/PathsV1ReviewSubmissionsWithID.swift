@@ -14,67 +14,67 @@ extension APIEndpoint.V1.ReviewSubmissions {
 		public let path: String
 
 		public func get(parameters: GetParameters? = nil) -> Request<AppStoreConnect_Swift_SDK.ReviewSubmissionResponse> {
-			Request(path: path, method: "GET", query: parameters?.asQuery, id: "reviewSubmissions-get_instance")
+			Request(path: path, method: "GET", query: parameters?.asQuery, id: "reviewSubmissions_getInstance")
 		}
 
 		public struct GetParameters {
 			public var fieldsReviewSubmissions: [FieldsReviewSubmissions]?
-			public var include: [Include]?
 			public var fieldsReviewSubmissionItems: [FieldsReviewSubmissionItems]?
+			public var include: [Include]?
 			public var limitItems: Int?
 
 			public enum FieldsReviewSubmissions: String, Codable, CaseIterable {
-				case app
-				case appStoreVersionForReview
-				case canceled
-				case items
-				case lastUpdatedByActor
 				case platform
+				case submittedDate
 				case state
 				case submitted
+				case canceled
+				case app
+				case items
+				case appStoreVersionForReview
 				case submittedByActor
-				case submittedDate
+				case lastUpdatedByActor
+			}
+
+			public enum FieldsReviewSubmissionItems: String, Codable, CaseIterable {
+				case state
+				case resolved
+				case removed
+				case reviewSubmission
+				case appStoreVersion
+				case appCustomProductPageVersion
+				case appStoreVersionExperiment
+				case appStoreVersionExperimentV2
+				case appEvent
 			}
 
 			public enum Include: String, Codable, CaseIterable {
 				case app
-				case appStoreVersionForReview
 				case items
-				case lastUpdatedByActor
+				case appStoreVersionForReview
 				case submittedByActor
+				case lastUpdatedByActor
 			}
 
-			public enum FieldsReviewSubmissionItems: String, Codable, CaseIterable {
-				case appCustomProductPageVersion
-				case appEvent
-				case appStoreVersion
-				case appStoreVersionExperiment
-				case appStoreVersionExperimentV2
-				case removed
-				case resolved
-				case reviewSubmission
-				case state
-			}
-
-			public init(fieldsReviewSubmissions: [FieldsReviewSubmissions]? = nil, include: [Include]? = nil, fieldsReviewSubmissionItems: [FieldsReviewSubmissionItems]? = nil, limitItems: Int? = nil) {
+			public init(fieldsReviewSubmissions: [FieldsReviewSubmissions]? = nil, fieldsReviewSubmissionItems: [FieldsReviewSubmissionItems]? = nil, include: [Include]? = nil, limitItems: Int? = nil) {
 				self.fieldsReviewSubmissions = fieldsReviewSubmissions
-				self.include = include
 				self.fieldsReviewSubmissionItems = fieldsReviewSubmissionItems
+				self.include = include
 				self.limitItems = limitItems
 			}
 
 			public var asQuery: [(String, String?)] {
 				let encoder = URLQueryEncoder(explode: false)
 				encoder.encode(fieldsReviewSubmissions, forKey: "fields[reviewSubmissions]")
-				encoder.encode(include, forKey: "include")
 				encoder.encode(fieldsReviewSubmissionItems, forKey: "fields[reviewSubmissionItems]")
+				encoder.encode(include, forKey: "include")
 				encoder.encode(limitItems, forKey: "limit[items]")
 				return encoder.items
 			}
 		}
 
 		public func patch(_ body: AppStoreConnect_Swift_SDK.ReviewSubmissionUpdateRequest) -> Request<AppStoreConnect_Swift_SDK.ReviewSubmissionResponse> {
-			Request(path: path, method: "PATCH", body: body, id: "reviewSubmissions-update_instance")
+			Request(path: path, method: "PATCH", body: body, id: "reviewSubmissions_updateInstance")
 		}
 	}
 }

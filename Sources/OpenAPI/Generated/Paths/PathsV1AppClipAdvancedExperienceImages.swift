@@ -14,7 +14,7 @@ extension APIEndpoint.V1 {
 		public let path: String
 
 		public func post(_ body: AppStoreConnect_Swift_SDK.AppClipAdvancedExperienceImageCreateRequest) -> Request<AppStoreConnect_Swift_SDK.AppClipAdvancedExperienceImageResponse> {
-			Request(path: path, method: "POST", body: body, id: "appClipAdvancedExperienceImages-create_instance")
+			Request(path: path, method: "POST", body: body, id: "appClipAdvancedExperienceImages_createInstance")
 		}
 	}
 }

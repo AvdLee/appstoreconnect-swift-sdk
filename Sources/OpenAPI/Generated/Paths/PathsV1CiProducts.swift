@@ -14,19 +14,17 @@ extension APIEndpoint.V1 {
 		public let path: String
 
 		public func get(parameters: GetParameters? = nil) -> Request<AppStoreConnect_Swift_SDK.CiProductsResponse> {
-			Request(path: path, method: "GET", query: parameters?.asQuery, id: "ciProducts-get_collection")
+			Request(path: path, method: "GET", query: parameters?.asQuery, id: "ciProducts_getCollection")
 		}
 
 		public struct GetParameters {
 			public var filterProductType: [FilterProductType]?
 			public var filterApp: [String]?
 			public var fieldsCiProducts: [FieldsCiProducts]?
-			public var limit: Int?
-			public var include: [Include]?
-			public var fieldsCiBuildRuns: [FieldsCiBuildRuns]?
-			public var fieldsCiWorkflows: [FieldsCiWorkflows]?
 			public var fieldsApps: [FieldsApps]?
 			public var fieldsScmRepositories: [FieldsScmRepositories]?
+			public var limit: Int?
+			public var include: [Include]?
 			public var limitPrimaryRepositories: Int?
 
 			public enum FilterProductType: String, Codable, CaseIterable {
@@ -35,15 +33,75 @@ extension APIEndpoint.V1 {
 			}
 
 			public enum FieldsCiProducts: String, Codable, CaseIterable {
-				case additionalRepositories
-				case app
-				case buildRuns
-				case bundleID = "bundleId"
-				case createdDate
 				case name
-				case primaryRepositories
+				case createdDate
 				case productType
+				case app
+				case bundleID = "bundleId"
 				case workflows
+				case primaryRepositories
+				case additionalRepositories
+				case buildRuns
+			}
+
+			public enum FieldsApps: String, Codable, CaseIterable {
+				case name
+				case bundleID = "bundleId"
+				case sku
+				case primaryLocale
+				case isOrEverWasMadeForKids
+				case subscriptionStatusURL = "subscriptionStatusUrl"
+				case subscriptionStatusURLVersion = "subscriptionStatusUrlVersion"
+				case subscriptionStatusURLForSandbox = "subscriptionStatusUrlForSandbox"
+				case subscriptionStatusURLVersionForSandbox = "subscriptionStatusUrlVersionForSandbox"
+				case contentRightsDeclaration
+				case streamlinedPurchasingEnabled
+				case appEncryptionDeclarations
+				case ciProduct
+				case betaTesters
+				case betaGroups
+				case appStoreVersions
+				case preReleaseVersions
+				case betaAppLocalizations
+				case builds
+				case betaLicenseAgreement
+				case betaAppReviewDetail
+				case appInfos
+				case appClips
+				case appPricePoints
+				case endUserLicenseAgreement
+				case preOrder
+				case appPriceSchedule
+				case appAvailability
+				case appAvailabilityV2
+				case inAppPurchases
+				case subscriptionGroups
+				case gameCenterEnabledVersions
+				case perfPowerMetrics
+				case appCustomProductPages
+				case inAppPurchasesV2
+				case promotedPurchases
+				case appEvents
+				case reviewSubmissions
+				case subscriptionGracePeriod
+				case customerReviews
+				case gameCenterDetail
+				case appStoreVersionExperimentsV2
+				case alternativeDistributionKey
+				case analyticsReportRequests
+				case marketplaceSearchDetail
+			}
+
+			public enum FieldsScmRepositories: String, Codable, CaseIterable {
+				case lastAccessedDate
+				case httpCloneURL = "httpCloneUrl"
+				case sshCloneURL = "sshCloneUrl"
+				case ownerName
+				case repositoryName
+				case scmProvider
+				case defaultBranch
+				case gitReferences
+				case pullRequests
 			}
 
 			public enum Include: String, Codable, CaseIterable {
@@ -52,121 +110,14 @@ extension APIEndpoint.V1 {
 				case primaryRepositories
 			}
 
-			public enum FieldsCiBuildRuns: String, Codable, CaseIterable {
-				case actions
-				case buildRun
-				case builds
-				case cancelReason
-				case clean
-				case completionStatus
-				case createdDate
-				case destinationBranch
-				case destinationCommit
-				case executionProgress
-				case finishedDate
-				case isPullRequestBuild
-				case issueCounts
-				case number
-				case product
-				case pullRequest
-				case sourceBranchOrTag
-				case sourceCommit
-				case startReason
-				case startedDate
-				case workflow
-			}
-
-			public enum FieldsCiWorkflows: String, Codable, CaseIterable {
-				case actions
-				case branchStartCondition
-				case buildRuns
-				case clean
-				case containerFilePath
-				case description
-				case isEnabled
-				case isLockedForEditing
-				case lastModifiedDate
-				case macOsVersion
-				case manualBranchStartCondition
-				case manualPullRequestStartCondition
-				case manualTagStartCondition
-				case name
-				case product
-				case pullRequestStartCondition
-				case repository
-				case scheduledStartCondition
-				case tagStartCondition
-				case xcodeVersion
-			}
-
-			public enum FieldsApps: String, Codable, CaseIterable {
-				case alternativeDistributionKey
-				case analyticsReportRequests
-				case appAvailability
-				case appClips
-				case appCustomProductPages
-				case appEncryptionDeclarations
-				case appEvents
-				case appInfos
-				case appPricePoints
-				case appPriceSchedule
-				case appStoreVersionExperimentsV2
-				case appStoreVersions
-				case betaAppLocalizations
-				case betaAppReviewDetail
-				case betaGroups
-				case betaLicenseAgreement
-				case betaTesters
-				case builds
-				case bundleID = "bundleId"
-				case ciProduct
-				case contentRightsDeclaration
-				case customerReviews
-				case endUserLicenseAgreement
-				case gameCenterDetail
-				case gameCenterEnabledVersions
-				case inAppPurchases
-				case inAppPurchasesV2
-				case isOrEverWasMadeForKids
-				case marketplaceSearchDetail
-				case name
-				case perfPowerMetrics
-				case preOrder
-				case preReleaseVersions
-				case primaryLocale
-				case promotedPurchases
-				case reviewSubmissions
-				case sku
-				case subscriptionGracePeriod
-				case subscriptionGroups
-				case subscriptionStatusURL = "subscriptionStatusUrl"
-				case subscriptionStatusURLForSandbox = "subscriptionStatusUrlForSandbox"
-				case subscriptionStatusURLVersion = "subscriptionStatusUrlVersion"
-				case subscriptionStatusURLVersionForSandbox = "subscriptionStatusUrlVersionForSandbox"
-			}
-
-			public enum FieldsScmRepositories: String, Codable, CaseIterable {
-				case defaultBranch
-				case gitReferences
-				case httpCloneURL = "httpCloneUrl"
-				case lastAccessedDate
-				case ownerName
-				case pullRequests
-				case repositoryName
-				case scmProvider
-				case sshCloneURL = "sshCloneUrl"
-			}
-
-			public init(filterProductType: [FilterProductType]? = nil, filterApp: [String]? = nil, fieldsCiProducts: [FieldsCiProducts]? = nil, limit: Int? = nil, include: [Include]? = nil, fieldsCiBuildRuns: [FieldsCiBuildRuns]? = nil, fieldsCiWorkflows: [FieldsCiWorkflows]? = nil, fieldsApps: [FieldsApps]? = nil, fieldsScmRepositories: [FieldsScmRepositories]? = nil, limitPrimaryRepositories: Int? = nil) {
+			public init(filterProductType: [FilterProductType]? = nil, filterApp: [String]? = nil, fieldsCiProducts: [FieldsCiProducts]? = nil, fieldsApps: [FieldsApps]? = nil, fieldsScmRepositories: [FieldsScmRepositories]? = nil, limit: Int? = nil, include: [Include]? = nil, limitPrimaryRepositories: Int? = nil) {
 				self.filterProductType = filterProductType
 				self.filterApp = filterApp
 				self.fieldsCiProducts = fieldsCiProducts
-				self.limit = limit
-				self.include = include
-				self.fieldsCiBuildRuns = fieldsCiBuildRuns
-				self.fieldsCiWorkflows = fieldsCiWorkflows
 				self.fieldsApps = fieldsApps
 				self.fieldsScmRepositories = fieldsScmRepositories
+				self.limit = limit
+				self.include = include
 				self.limitPrimaryRepositories = limitPrimaryRepositories
 			}
 
@@ -175,12 +126,10 @@ extension APIEndpoint.V1 {
 				encoder.encode(filterProductType, forKey: "filter[productType]")
 				encoder.encode(filterApp, forKey: "filter[app]")
 				encoder.encode(fieldsCiProducts, forKey: "fields[ciProducts]")
-				encoder.encode(limit, forKey: "limit")
-				encoder.encode(include, forKey: "include")
-				encoder.encode(fieldsCiBuildRuns, forKey: "fields[ciBuildRuns]")
-				encoder.encode(fieldsCiWorkflows, forKey: "fields[ciWorkflows]")
 				encoder.encode(fieldsApps, forKey: "fields[apps]")
 				encoder.encode(fieldsScmRepositories, forKey: "fields[scmRepositories]")
+				encoder.encode(limit, forKey: "limit")
+				encoder.encode(include, forKey: "include")
 				encoder.encode(limitPrimaryRepositories, forKey: "limit[primaryRepositories]")
 				return encoder.items
 			}

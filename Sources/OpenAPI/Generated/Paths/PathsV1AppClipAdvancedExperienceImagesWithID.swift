@@ -14,7 +14,7 @@ extension APIEndpoint.V1.AppClipAdvancedExperienceImages {
 		public let path: String
 
 		public func get(fieldsAppClipAdvancedExperienceImages: [FieldsAppClipAdvancedExperienceImages]? = nil) -> Request<AppStoreConnect_Swift_SDK.AppClipAdvancedExperienceImageResponse> {
-			Request(path: path, method: "GET", query: makeGetQuery(fieldsAppClipAdvancedExperienceImages), id: "appClipAdvancedExperienceImages-get_instance")
+			Request(path: path, method: "GET", query: makeGetQuery(fieldsAppClipAdvancedExperienceImages), id: "appClipAdvancedExperienceImages_getInstance")
 		}
 
 		private func makeGetQuery(_ fieldsAppClipAdvancedExperienceImages: [FieldsAppClipAdvancedExperienceImages]?) -> [(String, String?)] {
@@ -24,17 +24,17 @@ extension APIEndpoint.V1.AppClipAdvancedExperienceImages {
 		}
 
 		public enum FieldsAppClipAdvancedExperienceImages: String, Codable, CaseIterable {
-			case assetDeliveryState
-			case fileName
 			case fileSize
-			case imageAsset
+			case fileName
 			case sourceFileChecksum
+			case imageAsset
 			case uploadOperations
+			case assetDeliveryState
 			case uploaded
 		}
 
 		public func patch(_ body: AppStoreConnect_Swift_SDK.AppClipAdvancedExperienceImageUpdateRequest) -> Request<AppStoreConnect_Swift_SDK.AppClipAdvancedExperienceImageResponse> {
-			Request(path: path, method: "PATCH", body: body, id: "appClipAdvancedExperienceImages-update_instance")
+			Request(path: path, method: "PATCH", body: body, id: "appClipAdvancedExperienceImages_updateInstance")
 		}
 	}
 }

@@ -14,7 +14,7 @@ extension APIEndpoint.V1.Devices {
 		public let path: String
 
 		public func get(fieldsDevices: [FieldsDevices]? = nil) -> Request<AppStoreConnect_Swift_SDK.DeviceResponse> {
-			Request(path: path, method: "GET", query: makeGetQuery(fieldsDevices), id: "devices-get_instance")
+			Request(path: path, method: "GET", query: makeGetQuery(fieldsDevices), id: "devices_getInstance")
 		}
 
 		private func makeGetQuery(_ fieldsDevices: [FieldsDevices]?) -> [(String, String?)] {
@@ -24,17 +24,17 @@ extension APIEndpoint.V1.Devices {
 		}
 
 		public enum FieldsDevices: String, Codable, CaseIterable {
-			case addedDate
-			case deviceClass
-			case model
 			case name
 			case platform
-			case status
 			case udid
+			case deviceClass
+			case status
+			case model
+			case addedDate
 		}
 
 		public func patch(_ body: AppStoreConnect_Swift_SDK.DeviceUpdateRequest) -> Request<AppStoreConnect_Swift_SDK.DeviceResponse> {
-			Request(path: path, method: "PATCH", body: body, id: "devices-update_instance")
+			Request(path: path, method: "PATCH", body: body, id: "devices_updateInstance")
 		}
 	}
 }

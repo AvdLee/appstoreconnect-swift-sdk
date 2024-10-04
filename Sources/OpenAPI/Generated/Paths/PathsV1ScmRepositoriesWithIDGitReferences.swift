@@ -14,7 +14,7 @@ extension APIEndpoint.V1.ScmRepositories.WithID {
 		public let path: String
 
 		public func get(parameters: GetParameters? = nil) -> Request<AppStoreConnect_Swift_SDK.ScmGitReferencesResponse> {
-			Request(path: path, method: "GET", query: parameters?.asQuery, id: "scmRepositories-gitReferences-get_to_many_related")
+			Request(path: path, method: "GET", query: parameters?.asQuery, id: "scmRepositories_gitReferences_getToManyRelated")
 		}
 
 		public struct GetParameters {
@@ -24,23 +24,23 @@ extension APIEndpoint.V1.ScmRepositories.WithID {
 			public var include: [Include]?
 
 			public enum FieldsScmGitReferences: String, Codable, CaseIterable {
+				case name
 				case canonicalName
 				case isDeleted
 				case kind
-				case name
 				case repository
 			}
 
 			public enum FieldsScmRepositories: String, Codable, CaseIterable {
-				case defaultBranch
-				case gitReferences
-				case httpCloneURL = "httpCloneUrl"
 				case lastAccessedDate
+				case httpCloneURL = "httpCloneUrl"
+				case sshCloneURL = "sshCloneUrl"
 				case ownerName
-				case pullRequests
 				case repositoryName
 				case scmProvider
-				case sshCloneURL = "sshCloneUrl"
+				case defaultBranch
+				case gitReferences
+				case pullRequests
 			}
 
 			public enum Include: String, Codable, CaseIterable {

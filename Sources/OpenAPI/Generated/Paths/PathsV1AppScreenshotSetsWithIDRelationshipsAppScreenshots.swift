@@ -14,7 +14,7 @@ extension APIEndpoint.V1.AppScreenshotSets.WithID.Relationships {
 		public let path: String
 
 		public func get(limit: Int? = nil) -> Request<AppStoreConnect_Swift_SDK.AppScreenshotSetAppScreenshotsLinkagesResponse> {
-			Request(path: path, method: "GET", query: makeGetQuery(limit), id: "appScreenshotSets-appScreenshots-get_to_many_relationship")
+			Request(path: path, method: "GET", query: makeGetQuery(limit), id: "appScreenshotSets_appScreenshots_getToManyRelationship")
 		}
 
 		private func makeGetQuery(_ limit: Int?) -> [(String, String?)] {
@@ -24,7 +24,7 @@ extension APIEndpoint.V1.AppScreenshotSets.WithID.Relationships {
 		}
 
 		public func patch(_ body: AppStoreConnect_Swift_SDK.AppScreenshotSetAppScreenshotsLinkagesRequest) -> Request<Void> {
-			Request(path: path, method: "PATCH", body: body, id: "appScreenshotSets-appScreenshots-replace_to_many_relationship")
+			Request(path: path, method: "PATCH", body: body, id: "appScreenshotSets_appScreenshots_replaceToManyRelationship")
 		}
 	}
 }

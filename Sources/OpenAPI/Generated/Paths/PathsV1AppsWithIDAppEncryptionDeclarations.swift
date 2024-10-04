@@ -14,7 +14,7 @@ extension APIEndpoint.V1.Apps.WithID {
 		public let path: String
 
 		public func get(parameters: GetParameters? = nil) -> Request<AppStoreConnect_Swift_SDK.AppEncryptionDeclarationsResponse> {
-			Request(path: path, method: "GET", query: parameters?.asQuery, id: "apps-appEncryptionDeclarations-get_to_many_related")
+			Request(path: path, method: "GET", query: parameters?.asQuery, id: "apps_appEncryptionDeclarations_getToManyRelated")
 		}
 
 		public struct GetParameters {
@@ -22,11 +22,11 @@ extension APIEndpoint.V1.Apps.WithID {
 			public var filterBuilds: [String]?
 			public var fieldsAppEncryptionDeclarations: [FieldsAppEncryptionDeclarations]?
 			public var fieldsApps: [FieldsApps]?
-			public var fieldsAppEncryptionDeclarationDocuments: [FieldsAppEncryptionDeclarationDocuments]?
 			public var fieldsBuilds: [FieldsBuilds]?
+			public var fieldsAppEncryptionDeclarationDocuments: [FieldsAppEncryptionDeclarationDocuments]?
 			public var limit: Int?
-			public var limitBuilds: Int?
 			public var include: [Include]?
+			public var limitBuilds: Int?
 
 			public enum FilterPlatform: String, Codable, CaseIterable {
 				case ios = "IOS"
@@ -36,126 +36,128 @@ extension APIEndpoint.V1.Apps.WithID {
 			}
 
 			public enum FieldsAppEncryptionDeclarations: String, Codable, CaseIterable {
-				case app
 				case appDescription
-				case appEncryptionDeclarationDocument
-				case appEncryptionDeclarationState
-				case availableOnFrenchStore
-				case builds
-				case codeValue
+				case createdDate
+				case usesEncryption
+				case exempt
 				case containsProprietaryCryptography
 				case containsThirdPartyCryptography
-				case createdDate
-				case documentName
-				case documentType
-				case documentURL = "documentUrl"
-				case exempt
+				case availableOnFrenchStore
 				case platform
 				case uploadedDate
-				case usesEncryption
+				case documentURL = "documentUrl"
+				case documentName
+				case documentType
+				case appEncryptionDeclarationState
+				case codeValue
+				case app
+				case builds
+				case appEncryptionDeclarationDocument
 			}
 
 			public enum FieldsApps: String, Codable, CaseIterable {
+				case name
+				case bundleID = "bundleId"
+				case sku
+				case primaryLocale
+				case isOrEverWasMadeForKids
+				case subscriptionStatusURL = "subscriptionStatusUrl"
+				case subscriptionStatusURLVersion = "subscriptionStatusUrlVersion"
+				case subscriptionStatusURLForSandbox = "subscriptionStatusUrlForSandbox"
+				case subscriptionStatusURLVersionForSandbox = "subscriptionStatusUrlVersionForSandbox"
+				case contentRightsDeclaration
+				case streamlinedPurchasingEnabled
+				case appEncryptionDeclarations
+				case ciProduct
+				case betaTesters
+				case betaGroups
+				case appStoreVersions
+				case preReleaseVersions
+				case betaAppLocalizations
+				case builds
+				case betaLicenseAgreement
+				case betaAppReviewDetail
+				case appInfos
+				case appClips
+				case appPricePoints
+				case endUserLicenseAgreement
+				case preOrder
+				case appPriceSchedule
+				case appAvailability
+				case appAvailabilityV2
+				case inAppPurchases
+				case subscriptionGroups
+				case gameCenterEnabledVersions
+				case perfPowerMetrics
+				case appCustomProductPages
+				case inAppPurchasesV2
+				case promotedPurchases
+				case appEvents
+				case reviewSubmissions
+				case subscriptionGracePeriod
+				case customerReviews
+				case gameCenterDetail
+				case appStoreVersionExperimentsV2
 				case alternativeDistributionKey
 				case analyticsReportRequests
-				case appAvailability
-				case appClips
-				case appCustomProductPages
-				case appEncryptionDeclarations
-				case appEvents
-				case appInfos
-				case appPricePoints
-				case appPriceSchedule
-				case appStoreVersionExperimentsV2
-				case appStoreVersions
-				case betaAppLocalizations
-				case betaAppReviewDetail
-				case betaGroups
-				case betaLicenseAgreement
-				case betaTesters
-				case builds
-				case bundleID = "bundleId"
-				case ciProduct
-				case contentRightsDeclaration
-				case customerReviews
-				case endUserLicenseAgreement
-				case gameCenterDetail
-				case gameCenterEnabledVersions
-				case inAppPurchases
-				case inAppPurchasesV2
-				case isOrEverWasMadeForKids
 				case marketplaceSearchDetail
-				case name
-				case perfPowerMetrics
-				case preOrder
-				case preReleaseVersions
-				case primaryLocale
-				case promotedPurchases
-				case reviewSubmissions
-				case sku
-				case subscriptionGracePeriod
-				case subscriptionGroups
-				case subscriptionStatusURL = "subscriptionStatusUrl"
-				case subscriptionStatusURLForSandbox = "subscriptionStatusUrlForSandbox"
-				case subscriptionStatusURLVersion = "subscriptionStatusUrlVersion"
-				case subscriptionStatusURLVersionForSandbox = "subscriptionStatusUrlVersionForSandbox"
-			}
-
-			public enum FieldsAppEncryptionDeclarationDocuments: String, Codable, CaseIterable {
-				case appEncryptionDeclaration
-				case assetDeliveryState
-				case assetToken
-				case downloadURL = "downloadUrl"
-				case fileName
-				case fileSize
-				case sourceFileChecksum
-				case uploadOperations
-				case uploaded
 			}
 
 			public enum FieldsBuilds: String, Codable, CaseIterable {
-				case app
-				case appEncryptionDeclaration
-				case appStoreVersion
-				case betaAppReviewSubmission
-				case betaBuildLocalizations
-				case betaGroups
-				case buildAudienceType
-				case buildBetaDetail
-				case buildBundles
-				case computedMinMacOsVersion
-				case diagnosticSignatures
+				case version
+				case uploadedDate
 				case expirationDate
 				case expired
-				case iconAssetToken
-				case icons
-				case individualTesters
-				case lsMinimumSystemVersion
 				case minOsVersion
-				case perfPowerMetrics
-				case preReleaseVersion
+				case lsMinimumSystemVersion
+				case computedMinMacOsVersion
+				case iconAssetToken
 				case processingState
-				case uploadedDate
+				case buildAudienceType
 				case usesNonExemptEncryption
-				case version
+				case preReleaseVersion
+				case individualTesters
+				case betaGroups
+				case betaBuildLocalizations
+				case appEncryptionDeclaration
+				case betaAppReviewSubmission
+				case app
+				case buildBetaDetail
+				case appStoreVersion
+				case icons
+				case buildBundles
+				case perfPowerMetrics
+				case diagnosticSignatures
+			}
+
+			public enum FieldsAppEncryptionDeclarationDocuments: String, Codable, CaseIterable {
+				case fileSize
+				case fileName
+				case assetToken
+				case downloadURL = "downloadUrl"
+				case sourceFileChecksum
+				case uploadOperations
+				case assetDeliveryState
+				case uploaded
+				case appEncryptionDeclaration
 			}
 
 			public enum Include: String, Codable, CaseIterable {
 				case app
-				case appEncryptionDeclarationDocument
 				case builds
+				case appEncryptionDeclarationDocument
 			}
 
-			public init(filterPlatform: [FilterPlatform]? = nil, filterBuilds: [String]? = nil, fieldsAppEncryptionDeclarations: [FieldsAppEncryptionDeclarations]? = nil, fieldsApps: [FieldsApps]? = nil, fieldsAppEncryptionDeclarationDocuments: [FieldsAppEncryptionDeclarationDocuments]? = nil, fieldsBuilds: [FieldsBuilds]? = nil, limit: Int? = nil, limitBuilds: Int? = nil, include: [Include]? = nil) {
+			public init(filterPlatform: [FilterPlatform]? = nil, filterBuilds: [String]? = nil, fieldsAppEncryptionDeclarations: [FieldsAppEncryptionDeclarations]? = nil, fieldsApps: [FieldsApps]? = nil, fieldsBuilds: [FieldsBuilds]? = nil, fieldsAppEncryptionDeclarationDocuments: [FieldsAppEncryptionDeclarationDocuments]? = nil, limit: Int? = nil, include: [Include]? = nil, limitBuilds: Int? = nil) {
 				self.filterPlatform = filterPlatform
 				self.filterBuilds = filterBuilds
 				self.fieldsAppEncryptionDeclarations = fieldsAppEncryptionDeclarations
 				self.fieldsApps = fieldsApps
-				self.fieldsAppEncryptionDeclarationDocuments = fieldsAppEncryptionDeclarationDocuments
 				self.fieldsBuilds = fieldsBuilds
+				self.fieldsAppEncryptionDeclarationDocuments = fieldsAppEncryptionDeclarationDocuments
 				self.limit = limit
-				self.limitBuilds = limitBuilds
 				self.include = include
+				self.limitBuilds = limitBuilds
 			}
 
 			public var asQuery: [(String, String?)] {
@@ -164,11 +166,11 @@ extension APIEndpoint.V1.Apps.WithID {
 				encoder.encode(filterBuilds, forKey: "filter[builds]")
 				encoder.encode(fieldsAppEncryptionDeclarations, forKey: "fields[appEncryptionDeclarations]")
 				encoder.encode(fieldsApps, forKey: "fields[apps]")
-				encoder.encode(fieldsAppEncryptionDeclarationDocuments, forKey: "fields[appEncryptionDeclarationDocuments]")
 				encoder.encode(fieldsBuilds, forKey: "fields[builds]")
+				encoder.encode(fieldsAppEncryptionDeclarationDocuments, forKey: "fields[appEncryptionDeclarationDocuments]")
 				encoder.encode(limit, forKey: "limit")
-				encoder.encode(limitBuilds, forKey: "limit[builds]")
 				encoder.encode(include, forKey: "include")
+				encoder.encode(limitBuilds, forKey: "limit[builds]")
 				return encoder.items
 			}
 		}

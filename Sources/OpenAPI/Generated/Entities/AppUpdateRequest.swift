@@ -23,13 +23,14 @@ public struct AppUpdateRequest: Codable {
 			public var subscriptionStatusURLForSandbox: URL?
 			public var subscriptionStatusURLVersionForSandbox: SubscriptionStatusURLVersion?
 			public var contentRightsDeclaration: ContentRightsDeclaration?
+			public var isStreamlinedPurchasingEnabled: Bool?
 
 			public enum ContentRightsDeclaration: String, Codable, CaseIterable {
 				case doesNotUseThirdPartyContent = "DOES_NOT_USE_THIRD_PARTY_CONTENT"
 				case usesThirdPartyContent = "USES_THIRD_PARTY_CONTENT"
 			}
 
-			public init(bundleID: String? = nil, primaryLocale: String? = nil, subscriptionStatusURL: URL? = nil, subscriptionStatusURLVersion: SubscriptionStatusURLVersion? = nil, subscriptionStatusURLForSandbox: URL? = nil, subscriptionStatusURLVersionForSandbox: SubscriptionStatusURLVersion? = nil, contentRightsDeclaration: ContentRightsDeclaration? = nil) {
+			public init(bundleID: String? = nil, primaryLocale: String? = nil, subscriptionStatusURL: URL? = nil, subscriptionStatusURLVersion: SubscriptionStatusURLVersion? = nil, subscriptionStatusURLForSandbox: URL? = nil, subscriptionStatusURLVersionForSandbox: SubscriptionStatusURLVersion? = nil, contentRightsDeclaration: ContentRightsDeclaration? = nil, isStreamlinedPurchasingEnabled: Bool? = nil) {
 				self.bundleID = bundleID
 				self.primaryLocale = primaryLocale
 				self.subscriptionStatusURL = subscriptionStatusURL
@@ -37,6 +38,7 @@ public struct AppUpdateRequest: Codable {
 				self.subscriptionStatusURLForSandbox = subscriptionStatusURLForSandbox
 				self.subscriptionStatusURLVersionForSandbox = subscriptionStatusURLVersionForSandbox
 				self.contentRightsDeclaration = contentRightsDeclaration
+				self.isStreamlinedPurchasingEnabled = isStreamlinedPurchasingEnabled
 			}
 
 			public init(from decoder: Decoder) throws {
@@ -48,6 +50,7 @@ public struct AppUpdateRequest: Codable {
 				self.subscriptionStatusURLForSandbox = try values.decodeIfPresent(URL.self, forKey: "subscriptionStatusUrlForSandbox")
 				self.subscriptionStatusURLVersionForSandbox = try values.decodeIfPresent(SubscriptionStatusURLVersion.self, forKey: "subscriptionStatusUrlVersionForSandbox")
 				self.contentRightsDeclaration = try values.decodeIfPresent(ContentRightsDeclaration.self, forKey: "contentRightsDeclaration")
+				self.isStreamlinedPurchasingEnabled = try values.decodeIfPresent(Bool.self, forKey: "streamlinedPurchasingEnabled")
 			}
 
 			public func encode(to encoder: Encoder) throws {
@@ -59,6 +62,7 @@ public struct AppUpdateRequest: Codable {
 				try values.encodeIfPresent(subscriptionStatusURLForSandbox, forKey: "subscriptionStatusUrlForSandbox")
 				try values.encodeIfPresent(subscriptionStatusURLVersionForSandbox, forKey: "subscriptionStatusUrlVersionForSandbox")
 				try values.encodeIfPresent(contentRightsDeclaration, forKey: "contentRightsDeclaration")
+				try values.encodeIfPresent(isStreamlinedPurchasingEnabled, forKey: "streamlinedPurchasingEnabled")
 			}
 		}
 

@@ -14,25 +14,25 @@ extension APIEndpoint.V1 {
 		public let path: String
 
 		public func get(parameters: GetParameters? = nil) -> Request<AppStoreConnect_Swift_SDK.BetaTestersResponse> {
-			Request(path: path, method: "GET", query: parameters?.asQuery, id: "betaTesters-get_collection")
+			Request(path: path, method: "GET", query: parameters?.asQuery, id: "betaTesters_getCollection")
 		}
 
 		public struct GetParameters {
-			public var filterEmail: [String]?
 			public var filterFirstName: [String]?
-			public var filterInviteType: [FilterInviteType]?
 			public var filterLastName: [String]?
+			public var filterEmail: [String]?
+			public var filterInviteType: [FilterInviteType]?
 			public var filterApps: [String]?
 			public var filterBetaGroups: [String]?
 			public var filterBuilds: [String]?
 			public var filterID: [String]?
 			public var sort: [Sort]?
 			public var fieldsBetaTesters: [FieldsBetaTesters]?
+			public var fieldsApps: [FieldsApps]?
+			public var fieldsBetaGroups: [FieldsBetaGroups]?
+			public var fieldsBuilds: [FieldsBuilds]?
 			public var limit: Int?
 			public var include: [Include]?
-			public var fieldsApps: [FieldsApps]?
-			public var fieldsBuilds: [FieldsBuilds]?
-			public var fieldsBetaGroups: [FieldsBetaGroups]?
 			public var limitApps: Int?
 			public var limitBetaGroups: Int?
 			public var limitBuilds: Int?
@@ -43,27 +43,119 @@ extension APIEndpoint.V1 {
 			}
 
 			public enum Sort: String, Codable, CaseIterable {
-				case email
-				case minusemail = "-email"
 				case firstName
 				case minusfirstName = "-firstName"
-				case inviteType
-				case minusinviteType = "-inviteType"
 				case lastName
 				case minuslastName = "-lastName"
+				case email
+				case minusemail = "-email"
+				case inviteType
+				case minusinviteType = "-inviteType"
 				case state
 				case minusstate = "-state"
 			}
 
 			public enum FieldsBetaTesters: String, Codable, CaseIterable {
+				case firstName
+				case lastName
+				case email
+				case inviteType
+				case state
 				case apps
 				case betaGroups
 				case builds
-				case email
-				case firstName
-				case inviteType
-				case lastName
-				case state
+			}
+
+			public enum FieldsApps: String, Codable, CaseIterable {
+				case name
+				case bundleID = "bundleId"
+				case sku
+				case primaryLocale
+				case isOrEverWasMadeForKids
+				case subscriptionStatusURL = "subscriptionStatusUrl"
+				case subscriptionStatusURLVersion = "subscriptionStatusUrlVersion"
+				case subscriptionStatusURLForSandbox = "subscriptionStatusUrlForSandbox"
+				case subscriptionStatusURLVersionForSandbox = "subscriptionStatusUrlVersionForSandbox"
+				case contentRightsDeclaration
+				case streamlinedPurchasingEnabled
+				case appEncryptionDeclarations
+				case ciProduct
+				case betaTesters
+				case betaGroups
+				case appStoreVersions
+				case preReleaseVersions
+				case betaAppLocalizations
+				case builds
+				case betaLicenseAgreement
+				case betaAppReviewDetail
+				case appInfos
+				case appClips
+				case appPricePoints
+				case endUserLicenseAgreement
+				case preOrder
+				case appPriceSchedule
+				case appAvailability
+				case appAvailabilityV2
+				case inAppPurchases
+				case subscriptionGroups
+				case gameCenterEnabledVersions
+				case perfPowerMetrics
+				case appCustomProductPages
+				case inAppPurchasesV2
+				case promotedPurchases
+				case appEvents
+				case reviewSubmissions
+				case subscriptionGracePeriod
+				case customerReviews
+				case gameCenterDetail
+				case appStoreVersionExperimentsV2
+				case alternativeDistributionKey
+				case analyticsReportRequests
+				case marketplaceSearchDetail
+			}
+
+			public enum FieldsBetaGroups: String, Codable, CaseIterable {
+				case name
+				case createdDate
+				case isInternalGroup
+				case hasAccessToAllBuilds
+				case publicLinkEnabled
+				case publicLinkID = "publicLinkId"
+				case publicLinkLimitEnabled
+				case publicLinkLimit
+				case publicLink
+				case feedbackEnabled
+				case iosBuildsAvailableForAppleSiliconMac
+				case app
+				case builds
+				case betaTesters
+			}
+
+			public enum FieldsBuilds: String, Codable, CaseIterable {
+				case version
+				case uploadedDate
+				case expirationDate
+				case expired
+				case minOsVersion
+				case lsMinimumSystemVersion
+				case computedMinMacOsVersion
+				case iconAssetToken
+				case processingState
+				case buildAudienceType
+				case usesNonExemptEncryption
+				case preReleaseVersion
+				case individualTesters
+				case betaGroups
+				case betaBuildLocalizations
+				case appEncryptionDeclaration
+				case betaAppReviewSubmission
+				case app
+				case buildBetaDetail
+				case appStoreVersion
+				case icons
+				case buildBundles
+				case perfPowerMetrics
+				case diagnosticSignatures
 			}
 
 			public enum Include: String, Codable, CaseIterable {
@@ -72,112 +164,22 @@ extension APIEndpoint.V1 {
 				case builds
 			}
 
-			public enum FieldsApps: String, Codable, CaseIterable {
-				case alternativeDistributionKey
-				case analyticsReportRequests
-				case appAvailability
-				case appClips
-				case appCustomProductPages
-				case appEncryptionDeclarations
-				case appEvents
-				case appInfos
-				case appPricePoints
-				case appPriceSchedule
-				case appStoreVersionExperimentsV2
-				case appStoreVersions
-				case betaAppLocalizations
-				case betaAppReviewDetail
-				case betaGroups
-				case betaLicenseAgreement
-				case betaTesters
-				case builds
-				case bundleID = "bundleId"
-				case ciProduct
-				case contentRightsDeclaration
-				case customerReviews
-				case endUserLicenseAgreement
-				case gameCenterDetail
-				case gameCenterEnabledVersions
-				case inAppPurchases
-				case inAppPurchasesV2
-				case isOrEverWasMadeForKids
-				case marketplaceSearchDetail
-				case name
-				case perfPowerMetrics
-				case preOrder
-				case preReleaseVersions
-				case primaryLocale
-				case promotedPurchases
-				case reviewSubmissions
-				case sku
-				case subscriptionGracePeriod
-				case subscriptionGroups
-				case subscriptionStatusURL = "subscriptionStatusUrl"
-				case subscriptionStatusURLForSandbox = "subscriptionStatusUrlForSandbox"
-				case subscriptionStatusURLVersion = "subscriptionStatusUrlVersion"
-				case subscriptionStatusURLVersionForSandbox = "subscriptionStatusUrlVersionForSandbox"
-			}
-
-			public enum FieldsBuilds: String, Codable, CaseIterable {
-				case app
-				case appEncryptionDeclaration
-				case appStoreVersion
-				case betaAppReviewSubmission
-				case betaBuildLocalizations
-				case betaGroups
-				case buildAudienceType
-				case buildBetaDetail
-				case buildBundles
-				case computedMinMacOsVersion
-				case diagnosticSignatures
-				case expirationDate
-				case expired
-				case iconAssetToken
-				case icons
-				case individualTesters
-				case lsMinimumSystemVersion
-				case minOsVersion
-				case perfPowerMetrics
-				case preReleaseVersion
-				case processingState
-				case uploadedDate
-				case usesNonExemptEncryption
-				case version
-			}
-
-			public enum FieldsBetaGroups: String, Codable, CaseIterable {
-				case app
-				case betaTesters
-				case builds
-				case createdDate
-				case feedbackEnabled
-				case hasAccessToAllBuilds
-				case iosBuildsAvailableForAppleSiliconMac
-				case isInternalGroup
-				case name
-				case publicLink
-				case publicLinkEnabled
-				case publicLinkID = "publicLinkId"
-				case publicLinkLimit
-				case publicLinkLimitEnabled
-			}
-
-			public init(filterEmail: [String]? = nil, filterFirstName: [String]? = nil, filterInviteType: [FilterInviteType]? = nil, filterLastName: [String]? = nil, filterApps: [String]? = nil, filterBetaGroups: [String]? = nil, filterBuilds: [String]? = nil, filterID: [String]? = nil, sort: [Sort]? = nil, fieldsBetaTesters: [FieldsBetaTesters]? = nil, limit: Int? = nil, include: [Include]? = nil, fieldsApps: [FieldsApps]? = nil, fieldsBuilds: [FieldsBuilds]? = nil, fieldsBetaGroups: [FieldsBetaGroups]? = nil, limitApps: Int? = nil, limitBetaGroups: Int? = nil, limitBuilds: Int? = nil) {
-				self.filterEmail = filterEmail
+			public init(filterFirstName: [String]? = nil, filterLastName: [String]? = nil, filterEmail: [String]? = nil, filterInviteType: [FilterInviteType]? = nil, filterApps: [String]? = nil, filterBetaGroups: [String]? = nil, filterBuilds: [String]? = nil, filterID: [String]? = nil, sort: [Sort]? = nil, fieldsBetaTesters: [FieldsBetaTesters]? = nil, fieldsApps: [FieldsApps]? = nil, fieldsBetaGroups: [FieldsBetaGroups]? = nil, fieldsBuilds: [FieldsBuilds]? = nil, limit: Int? = nil, include: [Include]? = nil, limitApps: Int? = nil, limitBetaGroups: Int? = nil, limitBuilds: Int? = nil) {
 				self.filterFirstName = filterFirstName
-				self.filterInviteType = filterInviteType
 				self.filterLastName = filterLastName
+				self.filterEmail = filterEmail
+				self.filterInviteType = filterInviteType
 				self.filterApps = filterApps
 				self.filterBetaGroups = filterBetaGroups
 				self.filterBuilds = filterBuilds
 				self.filterID = filterID
 				self.sort = sort
 				self.fieldsBetaTesters = fieldsBetaTesters
+				self.fieldsApps = fieldsApps
+				self.fieldsBetaGroups = fieldsBetaGroups
+				self.fieldsBuilds = fieldsBuilds
 				self.limit = limit
 				self.include = include
-				self.fieldsApps = fieldsApps
-				self.fieldsBuilds = fieldsBuilds
-				self.fieldsBetaGroups = fieldsBetaGroups
 				self.limitApps = limitApps
 				self.limitBetaGroups = limitBetaGroups
 				self.limitBuilds = limitBuilds
@@ -185,21 +187,21 @@ extension APIEndpoint.V1 {
 
 			public var asQuery: [(String, String?)] {
 				let encoder = URLQueryEncoder(explode: false)
-				encoder.encode(filterEmail, forKey: "filter[email]")
 				encoder.encode(filterFirstName, forKey: "filter[firstName]")
-				encoder.encode(filterInviteType, forKey: "filter[inviteType]")
 				encoder.encode(filterLastName, forKey: "filter[lastName]")
+				encoder.encode(filterEmail, forKey: "filter[email]")
+				encoder.encode(filterInviteType, forKey: "filter[inviteType]")
 				encoder.encode(filterApps, forKey: "filter[apps]")
 				encoder.encode(filterBetaGroups, forKey: "filter[betaGroups]")
 				encoder.encode(filterBuilds, forKey: "filter[builds]")
 				encoder.encode(filterID, forKey: "filter[id]")
 				encoder.encode(sort, forKey: "sort")
 				encoder.encode(fieldsBetaTesters, forKey: "fields[betaTesters]")
+				encoder.encode(fieldsApps, forKey: "fields[apps]")
+				encoder.encode(fieldsBetaGroups, forKey: "fields[betaGroups]")
+				encoder.encode(fieldsBuilds, forKey: "fields[builds]")
 				encoder.encode(limit, forKey: "limit")
 				encoder.encode(include, forKey: "include")
-				encoder.encode(fieldsApps, forKey: "fields[apps]")
-				encoder.encode(fieldsBuilds, forKey: "fields[builds]")
-				encoder.encode(fieldsBetaGroups, forKey: "fields[betaGroups]")
 				encoder.encode(limitApps, forKey: "limit[apps]")
 				encoder.encode(limitBetaGroups, forKey: "limit[betaGroups]")
 				encoder.encode(limitBuilds, forKey: "limit[builds]")
@@ -208,7 +210,7 @@ extension APIEndpoint.V1 {
 		}
 
 		public func post(_ body: AppStoreConnect_Swift_SDK.BetaTesterCreateRequest) -> Request<AppStoreConnect_Swift_SDK.BetaTesterResponse> {
-			Request(path: path, method: "POST", body: body, id: "betaTesters-create_instance")
+			Request(path: path, method: "POST", body: body, id: "betaTesters_createInstance")
 		}
 	}
 }

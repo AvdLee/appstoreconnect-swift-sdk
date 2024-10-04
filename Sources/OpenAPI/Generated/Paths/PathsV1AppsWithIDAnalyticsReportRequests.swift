@@ -14,7 +14,7 @@ extension APIEndpoint.V1.Apps.WithID {
 		public let path: String
 
 		public func get(parameters: GetParameters? = nil) -> Request<AppStoreConnect_Swift_SDK.AnalyticsReportRequestsResponse> {
-			Request(path: path, method: "GET", query: parameters?.asQuery, id: "apps-analyticsReportRequests-get_to_many_related")
+			Request(path: path, method: "GET", query: parameters?.asQuery, id: "apps_analyticsReportRequests_getToManyRelated")
 		}
 
 		public struct GetParameters {
@@ -22,8 +22,8 @@ extension APIEndpoint.V1.Apps.WithID {
 			public var fieldsAnalyticsReportRequests: [FieldsAnalyticsReportRequests]?
 			public var fieldsAnalyticsReports: [FieldsAnalyticsReports]?
 			public var limit: Int?
-			public var limitReports: Int?
 			public var include: [Include]?
+			public var limitReports: Int?
 
 			public enum FilterAccessType: String, Codable, CaseIterable {
 				case oneTimeSnapshot = "ONE_TIME_SNAPSHOT"
@@ -32,28 +32,28 @@ extension APIEndpoint.V1.Apps.WithID {
 
 			public enum FieldsAnalyticsReportRequests: String, Codable, CaseIterable {
 				case accessType
+				case stoppedDueToInactivity
 				case app
 				case reports
-				case stoppedDueToInactivity
 			}
 
 			public enum FieldsAnalyticsReports: String, Codable, CaseIterable {
+				case name
 				case category
 				case instances
-				case name
 			}
 
 			public enum Include: String, Codable, CaseIterable {
 				case reports
 			}
 
-			public init(filterAccessType: [FilterAccessType]? = nil, fieldsAnalyticsReportRequests: [FieldsAnalyticsReportRequests]? = nil, fieldsAnalyticsReports: [FieldsAnalyticsReports]? = nil, limit: Int? = nil, limitReports: Int? = nil, include: [Include]? = nil) {
+			public init(filterAccessType: [FilterAccessType]? = nil, fieldsAnalyticsReportRequests: [FieldsAnalyticsReportRequests]? = nil, fieldsAnalyticsReports: [FieldsAnalyticsReports]? = nil, limit: Int? = nil, include: [Include]? = nil, limitReports: Int? = nil) {
 				self.filterAccessType = filterAccessType
 				self.fieldsAnalyticsReportRequests = fieldsAnalyticsReportRequests
 				self.fieldsAnalyticsReports = fieldsAnalyticsReports
 				self.limit = limit
-				self.limitReports = limitReports
 				self.include = include
+				self.limitReports = limitReports
 			}
 
 			public var asQuery: [(String, String?)] {
@@ -62,8 +62,8 @@ extension APIEndpoint.V1.Apps.WithID {
 				encoder.encode(fieldsAnalyticsReportRequests, forKey: "fields[analyticsReportRequests]")
 				encoder.encode(fieldsAnalyticsReports, forKey: "fields[analyticsReports]")
 				encoder.encode(limit, forKey: "limit")
-				encoder.encode(limitReports, forKey: "limit[reports]")
 				encoder.encode(include, forKey: "include")
+				encoder.encode(limitReports, forKey: "limit[reports]")
 				return encoder.items
 			}
 		}

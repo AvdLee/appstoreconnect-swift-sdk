@@ -14,93 +14,95 @@ extension APIEndpoint.V1 {
 		public let path: String
 
 		public func get(parameters: GetParameters) -> Request<AppStoreConnect_Swift_SDK.BetaAppReviewDetailsResponse> {
-			Request(path: path, method: "GET", query: parameters.asQuery, id: "betaAppReviewDetails-get_collection")
+			Request(path: path, method: "GET", query: parameters.asQuery, id: "betaAppReviewDetails_getCollection")
 		}
 
 		public struct GetParameters {
 			public var filterApp: [String]
 			public var fieldsBetaAppReviewDetails: [FieldsBetaAppReviewDetails]?
+			public var fieldsApps: [FieldsApps]?
 			public var limit: Int?
 			public var include: [Include]?
-			public var fieldsApps: [FieldsApps]?
 
 			public enum FieldsBetaAppReviewDetails: String, Codable, CaseIterable {
-				case app
-				case contactEmail
 				case contactFirstName
 				case contactLastName
 				case contactPhone
+				case contactEmail
 				case demoAccountName
 				case demoAccountPassword
 				case demoAccountRequired
 				case notes
+				case app
+			}
+
+			public enum FieldsApps: String, Codable, CaseIterable {
+				case name
+				case bundleID = "bundleId"
+				case sku
+				case primaryLocale
+				case isOrEverWasMadeForKids
+				case subscriptionStatusURL = "subscriptionStatusUrl"
+				case subscriptionStatusURLVersion = "subscriptionStatusUrlVersion"
+				case subscriptionStatusURLForSandbox = "subscriptionStatusUrlForSandbox"
+				case subscriptionStatusURLVersionForSandbox = "subscriptionStatusUrlVersionForSandbox"
+				case contentRightsDeclaration
+				case streamlinedPurchasingEnabled
+				case appEncryptionDeclarations
+				case ciProduct
+				case betaTesters
+				case betaGroups
+				case appStoreVersions
+				case preReleaseVersions
+				case betaAppLocalizations
+				case builds
+				case betaLicenseAgreement
+				case betaAppReviewDetail
+				case appInfos
+				case appClips
+				case appPricePoints
+				case endUserLicenseAgreement
+				case preOrder
+				case appPriceSchedule
+				case appAvailability
+				case appAvailabilityV2
+				case inAppPurchases
+				case subscriptionGroups
+				case gameCenterEnabledVersions
+				case perfPowerMetrics
+				case appCustomProductPages
+				case inAppPurchasesV2
+				case promotedPurchases
+				case appEvents
+				case reviewSubmissions
+				case subscriptionGracePeriod
+				case customerReviews
+				case gameCenterDetail
+				case appStoreVersionExperimentsV2
+				case alternativeDistributionKey
+				case analyticsReportRequests
+				case marketplaceSearchDetail
 			}
 
 			public enum Include: String, Codable, CaseIterable {
 				case app
 			}
 
-			public enum FieldsApps: String, Codable, CaseIterable {
-				case alternativeDistributionKey
-				case analyticsReportRequests
-				case appAvailability
-				case appClips
-				case appCustomProductPages
-				case appEncryptionDeclarations
-				case appEvents
-				case appInfos
-				case appPricePoints
-				case appPriceSchedule
-				case appStoreVersionExperimentsV2
-				case appStoreVersions
-				case betaAppLocalizations
-				case betaAppReviewDetail
-				case betaGroups
-				case betaLicenseAgreement
-				case betaTesters
-				case builds
-				case bundleID = "bundleId"
-				case ciProduct
-				case contentRightsDeclaration
-				case customerReviews
-				case endUserLicenseAgreement
-				case gameCenterDetail
-				case gameCenterEnabledVersions
-				case inAppPurchases
-				case inAppPurchasesV2
-				case isOrEverWasMadeForKids
-				case marketplaceSearchDetail
-				case name
-				case perfPowerMetrics
-				case preOrder
-				case preReleaseVersions
-				case primaryLocale
-				case promotedPurchases
-				case reviewSubmissions
-				case sku
-				case subscriptionGracePeriod
-				case subscriptionGroups
-				case subscriptionStatusURL = "subscriptionStatusUrl"
-				case subscriptionStatusURLForSandbox = "subscriptionStatusUrlForSandbox"
-				case subscriptionStatusURLVersion = "subscriptionStatusUrlVersion"
-				case subscriptionStatusURLVersionForSandbox = "subscriptionStatusUrlVersionForSandbox"
-			}
-
-			public init(filterApp: [String], fieldsBetaAppReviewDetails: [FieldsBetaAppReviewDetails]? = nil, limit: Int? = nil, include: [Include]? = nil, fieldsApps: [FieldsApps]? = nil) {
+			public init(filterApp: [String], fieldsBetaAppReviewDetails: [FieldsBetaAppReviewDetails]? = nil, fieldsApps: [FieldsApps]? = nil, limit: Int? = nil, include: [Include]? = nil) {
 				self.filterApp = filterApp
 				self.fieldsBetaAppReviewDetails = fieldsBetaAppReviewDetails
+				self.fieldsApps = fieldsApps
 				self.limit = limit
 				self.include = include
-				self.fieldsApps = fieldsApps
 			}
 
 			public var asQuery: [(String, String?)] {
 				let encoder = URLQueryEncoder(explode: false)
 				encoder.encode(filterApp, forKey: "filter[app]")
 				encoder.encode(fieldsBetaAppReviewDetails, forKey: "fields[betaAppReviewDetails]")
+				encoder.encode(fieldsApps, forKey: "fields[apps]")
 				encoder.encode(limit, forKey: "limit")
 				encoder.encode(include, forKey: "include")
-				encoder.encode(fieldsApps, forKey: "fields[apps]")
 				return encoder.items
 			}
 		}

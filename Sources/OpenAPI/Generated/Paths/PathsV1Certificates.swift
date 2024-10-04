@@ -14,12 +14,12 @@ extension APIEndpoint.V1 {
 		public let path: String
 
 		public func get(parameters: GetParameters? = nil) -> Request<AppStoreConnect_Swift_SDK.CertificatesResponse> {
-			Request(path: path, method: "GET", query: parameters?.asQuery, id: "certificates-get_collection")
+			Request(path: path, method: "GET", query: parameters?.asQuery, id: "certificates_getCollection")
 		}
 
 		public struct GetParameters {
-			public var filterCertificateType: [FilterCertificateType]?
 			public var filterDisplayName: [String]?
+			public var filterCertificateType: [FilterCertificateType]?
 			public var filterSerialNumber: [String]?
 			public var filterID: [String]?
 			public var sort: [Sort]?
@@ -42,30 +42,30 @@ extension APIEndpoint.V1 {
 			}
 
 			public enum Sort: String, Codable, CaseIterable {
-				case certificateType
-				case minuscertificateType = "-certificateType"
 				case displayName
 				case minusdisplayName = "-displayName"
-				case id
-				case minusid = "-id"
+				case certificateType
+				case minuscertificateType = "-certificateType"
 				case serialNumber
 				case minusserialNumber = "-serialNumber"
+				case id
+				case minusid = "-id"
 			}
 
 			public enum FieldsCertificates: String, Codable, CaseIterable {
-				case certificateContent
-				case certificateType
-				case csrContent
-				case displayName
-				case expirationDate
 				case name
-				case platform
+				case csrContent
+				case certificateType
+				case displayName
 				case serialNumber
+				case platform
+				case expirationDate
+				case certificateContent
 			}
 
-			public init(filterCertificateType: [FilterCertificateType]? = nil, filterDisplayName: [String]? = nil, filterSerialNumber: [String]? = nil, filterID: [String]? = nil, sort: [Sort]? = nil, fieldsCertificates: [FieldsCertificates]? = nil, limit: Int? = nil) {
-				self.filterCertificateType = filterCertificateType
+			public init(filterDisplayName: [String]? = nil, filterCertificateType: [FilterCertificateType]? = nil, filterSerialNumber: [String]? = nil, filterID: [String]? = nil, sort: [Sort]? = nil, fieldsCertificates: [FieldsCertificates]? = nil, limit: Int? = nil) {
 				self.filterDisplayName = filterDisplayName
+				self.filterCertificateType = filterCertificateType
 				self.filterSerialNumber = filterSerialNumber
 				self.filterID = filterID
 				self.sort = sort
@@ -75,8 +75,8 @@ extension APIEndpoint.V1 {
 
 			public var asQuery: [(String, String?)] {
 				let encoder = URLQueryEncoder(explode: false)
-				encoder.encode(filterCertificateType, forKey: "filter[certificateType]")
 				encoder.encode(filterDisplayName, forKey: "filter[displayName]")
+				encoder.encode(filterCertificateType, forKey: "filter[certificateType]")
 				encoder.encode(filterSerialNumber, forKey: "filter[serialNumber]")
 				encoder.encode(filterID, forKey: "filter[id]")
 				encoder.encode(sort, forKey: "sort")
@@ -87,7 +87,7 @@ extension APIEndpoint.V1 {
 		}
 
 		public func post(_ body: AppStoreConnect_Swift_SDK.CertificateCreateRequest) -> Request<AppStoreConnect_Swift_SDK.CertificateResponse> {
-			Request(path: path, method: "POST", body: body, id: "certificates-create_instance")
+			Request(path: path, method: "POST", body: body, id: "certificates_createInstance")
 		}
 	}
 }

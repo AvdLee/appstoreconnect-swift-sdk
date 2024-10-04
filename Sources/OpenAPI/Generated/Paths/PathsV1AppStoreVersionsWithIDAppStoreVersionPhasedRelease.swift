@@ -14,7 +14,7 @@ extension APIEndpoint.V1.AppStoreVersions.WithID {
 		public let path: String
 
 		public func get(fieldsAppStoreVersionPhasedReleases: [FieldsAppStoreVersionPhasedReleases]? = nil) -> Request<AppStoreConnect_Swift_SDK.AppStoreVersionPhasedReleaseWithoutIncludesResponse> {
-			Request(path: path, method: "GET", query: makeGetQuery(fieldsAppStoreVersionPhasedReleases), id: "appStoreVersions-appStoreVersionPhasedRelease-get_to_one_related")
+			Request(path: path, method: "GET", query: makeGetQuery(fieldsAppStoreVersionPhasedReleases), id: "appStoreVersions_appStoreVersionPhasedRelease_getToOneRelated")
 		}
 
 		private func makeGetQuery(_ fieldsAppStoreVersionPhasedReleases: [FieldsAppStoreVersionPhasedReleases]?) -> [(String, String?)] {
@@ -24,11 +24,11 @@ extension APIEndpoint.V1.AppStoreVersions.WithID {
 		}
 
 		public enum FieldsAppStoreVersionPhasedReleases: String, Codable, CaseIterable {
-			case appStoreVersion
-			case currentDayNumber
 			case phasedReleaseState
 			case startDate
 			case totalPauseDuration
+			case currentDayNumber
+			case appStoreVersion
 		}
 	}
 }

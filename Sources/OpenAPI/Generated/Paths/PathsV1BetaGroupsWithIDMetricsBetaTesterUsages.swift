@@ -14,18 +14,14 @@ extension APIEndpoint.V1.BetaGroups.WithID.Metrics {
 		public let path: String
 
 		public func get(parameters: GetParameters? = nil) -> Request<AppStoreConnect_Swift_SDK.AppsBetaTesterUsagesV1MetricResponse> {
-			Request(path: path, method: "GET", query: parameters?.asQuery, id: "betaGroups-betaTesterUsages-get_metrics")
+			Request(path: path, method: "GET", query: parameters?.asQuery, id: "betaGroups_betaTesterUsages_getMetrics")
 		}
 
 		public struct GetParameters {
-			public var limit: Int?
+			public var period: Period?
 			public var groupBy: [GroupBy]?
 			public var filterBetaTesters: String?
-			public var period: Period?
-
-			public enum GroupBy: String, Codable, CaseIterable {
-				case betaTesters
-			}
+			public var limit: Int?
 
 			public enum Period: String, Codable, CaseIterable {
 				case p7d = "P7D"
@@ -34,19 +30,23 @@ extension APIEndpoint.V1.BetaGroups.WithID.Metrics {
 				case p365d = "P365D"
 			}
 
-			public init(limit: Int? = nil, groupBy: [GroupBy]? = nil, filterBetaTesters: String? = nil, period: Period? = nil) {
-				self.limit = limit
+			public enum GroupBy: String, Codable, CaseIterable {
+				case betaTesters
+			}
+
+			public init(period: Period? = nil, groupBy: [GroupBy]? = nil, filterBetaTesters: String? = nil, limit: Int? = nil) {
+				self.period = period
 				self.groupBy = groupBy
 				self.filterBetaTesters = filterBetaTesters
-				self.period = period
+				self.limit = limit
 			}
 
 			public var asQuery: [(String, String?)] {
 				let encoder = URLQueryEncoder(explode: false)
-				encoder.encode(limit, forKey: "limit")
+				encoder.encode(period, forKey: "period")
 				encoder.encode(groupBy, forKey: "groupBy")
 				encoder.encode(filterBetaTesters, forKey: "filter[betaTesters]")
-				encoder.encode(period, forKey: "period")
+				encoder.encode(limit, forKey: "limit")
 				return encoder.items
 			}
 		}

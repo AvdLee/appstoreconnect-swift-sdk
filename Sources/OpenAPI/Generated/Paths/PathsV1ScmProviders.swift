@@ -13,46 +13,21 @@ extension APIEndpoint.V1 {
 		/// Path: `/v1/scmProviders`
 		public let path: String
 
-		public func get(parameters: GetParameters? = nil) -> Request<AppStoreConnect_Swift_SDK.ScmProvidersResponse> {
-			Request(path: path, method: "GET", query: parameters?.asQuery, id: "scmProviders-get_collection")
+		public func get(fieldsScmProviders: [FieldsScmProviders]? = nil, limit: Int? = nil) -> Request<AppStoreConnect_Swift_SDK.ScmProvidersResponse> {
+			Request(path: path, method: "GET", query: makeGetQuery(fieldsScmProviders, limit), id: "scmProviders_getCollection")
 		}
 
-		public struct GetParameters {
-			public var fieldsScmProviders: [FieldsScmProviders]?
-			public var limit: Int?
-			public var fieldsScmRepositories: [FieldsScmRepositories]?
+		private func makeGetQuery(_ fieldsScmProviders: [FieldsScmProviders]?, _ limit: Int?) -> [(String, String?)] {
+			let encoder = URLQueryEncoder()
+			encoder.encode(fieldsScmProviders, forKey: "fields[scmProviders]", explode: false)
+			encoder.encode(limit, forKey: "limit")
+			return encoder.items
+		}
 
-			public enum FieldsScmProviders: String, Codable, CaseIterable {
-				case repositories
-				case scmProviderType
-				case url
-			}
-
-			public enum FieldsScmRepositories: String, Codable, CaseIterable {
-				case defaultBranch
-				case gitReferences
-				case httpCloneURL = "httpCloneUrl"
-				case lastAccessedDate
-				case ownerName
-				case pullRequests
-				case repositoryName
-				case scmProvider
-				case sshCloneURL = "sshCloneUrl"
-			}
-
-			public init(fieldsScmProviders: [FieldsScmProviders]? = nil, limit: Int? = nil, fieldsScmRepositories: [FieldsScmRepositories]? = nil) {
-				self.fieldsScmProviders = fieldsScmProviders
-				self.limit = limit
-				self.fieldsScmRepositories = fieldsScmRepositories
-			}
-
-			public var asQuery: [(String, String?)] {
-				let encoder = URLQueryEncoder(explode: false)
-				encoder.encode(fieldsScmProviders, forKey: "fields[scmProviders]")
-				encoder.encode(limit, forKey: "limit")
-				encoder.encode(fieldsScmRepositories, forKey: "fields[scmRepositories]")
-				return encoder.items
-			}
+		public enum FieldsScmProviders: String, Codable, CaseIterable {
+			case scmProviderType
+			case url
+			case repositories
 		}
 	}
 }

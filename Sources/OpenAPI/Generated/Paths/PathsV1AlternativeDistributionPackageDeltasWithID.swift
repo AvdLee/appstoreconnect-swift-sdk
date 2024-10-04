@@ -14,7 +14,7 @@ extension APIEndpoint.V1.AlternativeDistributionPackageDeltas {
 		public let path: String
 
 		public func get(fieldsAlternativeDistributionPackageDeltas: [FieldsAlternativeDistributionPackageDeltas]? = nil) -> Request<AppStoreConnect_Swift_SDK.AlternativeDistributionPackageDeltaResponse> {
-			Request(path: path, method: "GET", query: makeGetQuery(fieldsAlternativeDistributionPackageDeltas), id: "alternativeDistributionPackageDeltas-get_instance")
+			Request(path: path, method: "GET", query: makeGetQuery(fieldsAlternativeDistributionPackageDeltas), id: "alternativeDistributionPackageDeltas_getInstance")
 		}
 
 		private func makeGetQuery(_ fieldsAlternativeDistributionPackageDeltas: [FieldsAlternativeDistributionPackageDeltas]?) -> [(String, String?)] {
@@ -24,10 +24,10 @@ extension APIEndpoint.V1.AlternativeDistributionPackageDeltas {
 		}
 
 		public enum FieldsAlternativeDistributionPackageDeltas: String, Codable, CaseIterable {
-			case alternativeDistributionKeyBlob
-			case fileChecksum
 			case url
 			case urlExpirationDate
+			case alternativeDistributionKeyBlob
+			case fileChecksum
 		}
 	}
 }

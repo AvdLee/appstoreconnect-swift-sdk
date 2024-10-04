@@ -14,67 +14,67 @@ extension APIEndpoint.V1.AppEvents {
 		public let path: String
 
 		public func get(parameters: GetParameters? = nil) -> Request<AppStoreConnect_Swift_SDK.AppEventResponse> {
-			Request(path: path, method: "GET", query: parameters?.asQuery, id: "appEvents-get_instance")
+			Request(path: path, method: "GET", query: parameters?.asQuery, id: "appEvents_getInstance")
 		}
 
 		public struct GetParameters {
 			public var fieldsAppEvents: [FieldsAppEvents]?
-			public var include: [Include]?
 			public var fieldsAppEventLocalizations: [FieldsAppEventLocalizations]?
+			public var include: [Include]?
 			public var limitLocalizations: Int?
 
 			public enum FieldsAppEvents: String, Codable, CaseIterable {
-				case app
-				case archivedTerritorySchedules
+				case referenceName
 				case badge
-				case deepLink
 				case eventState
-				case localizations
+				case deepLink
+				case purchaseRequirement
 				case primaryLocale
 				case priority
-				case purchaseRequirement
 				case purpose
-				case referenceName
 				case territorySchedules
+				case archivedTerritorySchedules
+				case app
+				case localizations
+			}
+
+			public enum FieldsAppEventLocalizations: String, Codable, CaseIterable {
+				case locale
+				case name
+				case shortDescription
+				case longDescription
+				case appEvent
+				case appEventScreenshots
+				case appEventVideoClips
 			}
 
 			public enum Include: String, Codable, CaseIterable {
 				case localizations
 			}
 
-			public enum FieldsAppEventLocalizations: String, Codable, CaseIterable {
-				case appEvent
-				case appEventScreenshots
-				case appEventVideoClips
-				case locale
-				case longDescription
-				case name
-				case shortDescription
-			}
-
-			public init(fieldsAppEvents: [FieldsAppEvents]? = nil, include: [Include]? = nil, fieldsAppEventLocalizations: [FieldsAppEventLocalizations]? = nil, limitLocalizations: Int? = nil) {
+			public init(fieldsAppEvents: [FieldsAppEvents]? = nil, fieldsAppEventLocalizations: [FieldsAppEventLocalizations]? = nil, include: [Include]? = nil, limitLocalizations: Int? = nil) {
 				self.fieldsAppEvents = fieldsAppEvents
-				self.include = include
 				self.fieldsAppEventLocalizations = fieldsAppEventLocalizations
+				self.include = include
 				self.limitLocalizations = limitLocalizations
 			}
 
 			public var asQuery: [(String, String?)] {
 				let encoder = URLQueryEncoder(explode: false)
 				encoder.encode(fieldsAppEvents, forKey: "fields[appEvents]")
-				encoder.encode(include, forKey: "include")
 				encoder.encode(fieldsAppEventLocalizations, forKey: "fields[appEventLocalizations]")
+				encoder.encode(include, forKey: "include")
 				encoder.encode(limitLocalizations, forKey: "limit[localizations]")
 				return encoder.items
 			}
 		}
 
 		public func patch(_ body: AppStoreConnect_Swift_SDK.AppEventUpdateRequest) -> Request<AppStoreConnect_Swift_SDK.AppEventResponse> {
-			Request(path: path, method: "PATCH", body: body, id: "appEvents-update_instance")
+			Request(path: path, method: "PATCH", body: body, id: "appEvents_updateInstance")
 		}
 
 		public var delete: Request<Void> {
-			Request(path: path, method: "DELETE", id: "appEvents-delete_instance")
+			Request(path: path, method: "DELETE", id: "appEvents_deleteInstance")
 		}
 	}
 }

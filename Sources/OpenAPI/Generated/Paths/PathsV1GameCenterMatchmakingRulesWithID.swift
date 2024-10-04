@@ -14,11 +14,11 @@ extension APIEndpoint.V1.GameCenterMatchmakingRules {
 		public let path: String
 
 		public func patch(_ body: AppStoreConnect_Swift_SDK.GameCenterMatchmakingRuleUpdateRequest) -> Request<AppStoreConnect_Swift_SDK.GameCenterMatchmakingRuleResponse> {
-			Request(path: path, method: "PATCH", body: body, id: "gameCenterMatchmakingRules-update_instance")
+			Request(path: path, method: "PATCH", body: body, id: "gameCenterMatchmakingRules_updateInstance")
 		}
 
 		public var delete: Request<Void> {
-			Request(path: path, method: "DELETE", id: "gameCenterMatchmakingRules-delete_instance")
+			Request(path: path, method: "DELETE", id: "gameCenterMatchmakingRules_deleteInstance")
 		}
 	}
 }

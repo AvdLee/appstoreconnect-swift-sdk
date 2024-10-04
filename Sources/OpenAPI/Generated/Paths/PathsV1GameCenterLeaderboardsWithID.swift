@@ -14,68 +14,68 @@ extension APIEndpoint.V1.GameCenterLeaderboards {
 		public let path: String
 
 		public func get(parameters: GetParameters? = nil) -> Request<AppStoreConnect_Swift_SDK.GameCenterLeaderboardResponse> {
-			Request(path: path, method: "GET", query: parameters?.asQuery, id: "gameCenterLeaderboards-get_instance")
+			Request(path: path, method: "GET", query: parameters?.asQuery, id: "gameCenterLeaderboards_getInstance")
 		}
 
 		public struct GetParameters {
 			public var fieldsGameCenterLeaderboards: [FieldsGameCenterLeaderboards]?
-			public var include: [Include]?
 			public var fieldsGameCenterLeaderboardLocalizations: [FieldsGameCenterLeaderboardLocalizations]?
 			public var fieldsGameCenterLeaderboardReleases: [FieldsGameCenterLeaderboardReleases]?
+			public var include: [Include]?
 			public var limitGameCenterLeaderboardSets: Int?
 			public var limitLocalizations: Int?
 			public var limitReleases: Int?
 
 			public enum FieldsGameCenterLeaderboards: String, Codable, CaseIterable {
-				case archived
 				case defaultFormatter
-				case gameCenterDetail
-				case gameCenterGroup
-				case gameCenterLeaderboardSets
-				case groupLeaderboard
-				case localizations
+				case referenceName
+				case vendorIdentifier
+				case submissionType
+				case scoreSortType
+				case scoreRangeStart
+				case scoreRangeEnd
+				case recurrenceStartDate
 				case recurrenceDuration
 				case recurrenceRule
-				case recurrenceStartDate
-				case referenceName
-				case releases
-				case scoreRangeEnd
-				case scoreRangeStart
-				case scoreSortType
-				case submissionType
-				case vendorIdentifier
-			}
-
-			public enum Include: String, Codable, CaseIterable {
+				case archived
 				case gameCenterDetail
 				case gameCenterGroup
-				case gameCenterLeaderboardSets
 				case groupLeaderboard
+				case gameCenterLeaderboardSets
 				case localizations
 				case releases
 			}
 
 			public enum FieldsGameCenterLeaderboardLocalizations: String, Codable, CaseIterable {
+				case locale
+				case name
 				case formatterOverride
 				case formatterSuffix
 				case formatterSuffixSingular
 				case gameCenterLeaderboard
 				case gameCenterLeaderboardImage
-				case locale
-				case name
 			}
 
 			public enum FieldsGameCenterLeaderboardReleases: String, Codable, CaseIterable {
+				case live
 				case gameCenterDetail
 				case gameCenterLeaderboard
-				case live
 			}
 
-			public init(fieldsGameCenterLeaderboards: [FieldsGameCenterLeaderboards]? = nil, include: [Include]? = nil, fieldsGameCenterLeaderboardLocalizations: [FieldsGameCenterLeaderboardLocalizations]? = nil, fieldsGameCenterLeaderboardReleases: [FieldsGameCenterLeaderboardReleases]? = nil, limitGameCenterLeaderboardSets: Int? = nil, limitLocalizations: Int? = nil, limitReleases: Int? = nil) {
+			public enum Include: String, Codable, CaseIterable {
+				case gameCenterDetail
+				case gameCenterGroup
+				case groupLeaderboard
+				case gameCenterLeaderboardSets
+				case localizations
+				case releases
+			}
+
+			public init(fieldsGameCenterLeaderboards: [FieldsGameCenterLeaderboards]? = nil, fieldsGameCenterLeaderboardLocalizations: [FieldsGameCenterLeaderboardLocalizations]? = nil, fieldsGameCenterLeaderboardReleases: [FieldsGameCenterLeaderboardReleases]? = nil, include: [Include]? = nil, limitGameCenterLeaderboardSets: Int? = nil, limitLocalizations: Int? = nil, limitReleases: Int? = nil) {
 				self.fieldsGameCenterLeaderboards = fieldsGameCenterLeaderboards
-				self.include = include
 				self.fieldsGameCenterLeaderboardLocalizations = fieldsGameCenterLeaderboardLocalizations
 				self.fieldsGameCenterLeaderboardReleases = fieldsGameCenterLeaderboardReleases
+				self.include = include
 				self.limitGameCenterLeaderboardSets = limitGameCenterLeaderboardSets
 				self.limitLocalizations = limitLocalizations
 				self.limitReleases = limitReleases
@@ -84,9 +84,9 @@ extension APIEndpoint.V1.GameCenterLeaderboards {
 			public var asQuery: [(String, String?)] {
 				let encoder = URLQueryEncoder(explode: false)
 				encoder.encode(fieldsGameCenterLeaderboards, forKey: "fields[gameCenterLeaderboards]")
-				encoder.encode(include, forKey: "include")
 				encoder.encode(fieldsGameCenterLeaderboardLocalizations, forKey: "fields[gameCenterLeaderboardLocalizations]")
 				encoder.encode(fieldsGameCenterLeaderboardReleases, forKey: "fields[gameCenterLeaderboardReleases]")
+				encoder.encode(include, forKey: "include")
 				encoder.encode(limitGameCenterLeaderboardSets, forKey: "limit[gameCenterLeaderboardSets]")
 				encoder.encode(limitLocalizations, forKey: "limit[localizations]")
 				encoder.encode(limitReleases, forKey: "limit[releases]")
@@ -95,11 +95,11 @@ extension APIEndpoint.V1.GameCenterLeaderboards {
 		}
 
 		public func patch(_ body: AppStoreConnect_Swift_SDK.GameCenterLeaderboardUpdateRequest) -> Request<AppStoreConnect_Swift_SDK.GameCenterLeaderboardResponse> {
-			Request(path: path, method: "PATCH", body: body, id: "gameCenterLeaderboards-update_instance")
+			Request(path: path, method: "PATCH", body: body, id: "gameCenterLeaderboards_updateInstance")
 		}
 
 		public var delete: Request<Void> {
-			Request(path: path, method: "DELETE", id: "gameCenterLeaderboards-delete_instance")
+			Request(path: path, method: "DELETE", id: "gameCenterLeaderboards_deleteInstance")
 		}
 	}
 }

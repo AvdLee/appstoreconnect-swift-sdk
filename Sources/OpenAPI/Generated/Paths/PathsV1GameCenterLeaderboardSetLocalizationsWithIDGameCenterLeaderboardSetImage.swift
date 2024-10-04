@@ -14,45 +14,45 @@ extension APIEndpoint.V1.GameCenterLeaderboardSetLocalizations.WithID {
 		public let path: String
 
 		public func get(parameters: GetParameters? = nil) -> Request<AppStoreConnect_Swift_SDK.GameCenterLeaderboardSetImageResponse> {
-			Request(path: path, method: "GET", query: parameters?.asQuery, id: "gameCenterLeaderboardSetLocalizations-gameCenterLeaderboardSetImage-get_to_one_related")
+			Request(path: path, method: "GET", query: parameters?.asQuery, id: "gameCenterLeaderboardSetLocalizations_gameCenterLeaderboardSetImage_getToOneRelated")
 		}
 
 		public struct GetParameters {
-			public var fieldsGameCenterLeaderboardSetLocalizations: [FieldsGameCenterLeaderboardSetLocalizations]?
 			public var fieldsGameCenterLeaderboardSetImages: [FieldsGameCenterLeaderboardSetImages]?
+			public var fieldsGameCenterLeaderboardSetLocalizations: [FieldsGameCenterLeaderboardSetLocalizations]?
 			public var include: [Include]?
 
-			public enum FieldsGameCenterLeaderboardSetLocalizations: String, Codable, CaseIterable {
-				case gameCenterLeaderboardSet
-				case gameCenterLeaderboardSetImage
-				case locale
-				case name
-			}
-
 			public enum FieldsGameCenterLeaderboardSetImages: String, Codable, CaseIterable {
-				case assetDeliveryState
-				case fileName
 				case fileSize
-				case gameCenterLeaderboardSetLocalization
+				case fileName
 				case imageAsset
 				case uploadOperations
+				case assetDeliveryState
 				case uploaded
+				case gameCenterLeaderboardSetLocalization
+			}
+
+			public enum FieldsGameCenterLeaderboardSetLocalizations: String, Codable, CaseIterable {
+				case locale
+				case name
+				case gameCenterLeaderboardSet
+				case gameCenterLeaderboardSetImage
 			}
 
 			public enum Include: String, Codable, CaseIterable {
 				case gameCenterLeaderboardSetLocalization
 			}
 
-			public init(fieldsGameCenterLeaderboardSetLocalizations: [FieldsGameCenterLeaderboardSetLocalizations]? = nil, fieldsGameCenterLeaderboardSetImages: [FieldsGameCenterLeaderboardSetImages]? = nil, include: [Include]? = nil) {
-				self.fieldsGameCenterLeaderboardSetLocalizations = fieldsGameCenterLeaderboardSetLocalizations
+			public init(fieldsGameCenterLeaderboardSetImages: [FieldsGameCenterLeaderboardSetImages]? = nil, fieldsGameCenterLeaderboardSetLocalizations: [FieldsGameCenterLeaderboardSetLocalizations]? = nil, include: [Include]? = nil) {
 				self.fieldsGameCenterLeaderboardSetImages = fieldsGameCenterLeaderboardSetImages
+				self.fieldsGameCenterLeaderboardSetLocalizations = fieldsGameCenterLeaderboardSetLocalizations
 				self.include = include
 			}
 
 			public var asQuery: [(String, String?)] {
 				let encoder = URLQueryEncoder(explode: false)
-				encoder.encode(fieldsGameCenterLeaderboardSetLocalizations, forKey: "fields[gameCenterLeaderboardSetLocalizations]")
 				encoder.encode(fieldsGameCenterLeaderboardSetImages, forKey: "fields[gameCenterLeaderboardSetImages]")
+				encoder.encode(fieldsGameCenterLeaderboardSetLocalizations, forKey: "fields[gameCenterLeaderboardSetLocalizations]")
 				encoder.encode(include, forKey: "include")
 				return encoder.items
 			}

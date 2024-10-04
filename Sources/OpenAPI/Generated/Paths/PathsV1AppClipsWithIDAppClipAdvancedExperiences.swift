@@ -14,25 +14,25 @@ extension APIEndpoint.V1.AppClips.WithID {
 		public let path: String
 
 		public func get(parameters: GetParameters? = nil) -> Request<AppStoreConnect_Swift_SDK.AppClipAdvancedExperiencesResponse> {
-			Request(path: path, method: "GET", query: parameters?.asQuery, id: "appClips-appClipAdvancedExperiences-get_to_many_related")
+			Request(path: path, method: "GET", query: parameters?.asQuery, id: "appClips_appClipAdvancedExperiences_getToManyRelated")
 		}
 
 		public struct GetParameters {
-			public var filterAction: [FilterAction]?
-			public var filterPlaceStatus: [FilterPlaceStatus]?
 			public var filterStatus: [FilterStatus]?
+			public var filterPlaceStatus: [FilterPlaceStatus]?
+			public var filterAction: [FilterAction]?
 			public var fieldsAppClipAdvancedExperiences: [FieldsAppClipAdvancedExperiences]?
 			public var fieldsAppClips: [FieldsAppClips]?
 			public var fieldsAppClipAdvancedExperienceImages: [FieldsAppClipAdvancedExperienceImages]?
 			public var fieldsAppClipAdvancedExperienceLocalizations: [FieldsAppClipAdvancedExperienceLocalizations]?
 			public var limit: Int?
-			public var limitLocalizations: Int?
 			public var include: [Include]?
+			public var limitLocalizations: Int?
 
-			public enum FilterAction: String, Codable, CaseIterable {
-				case `open` = "OPEN"
-				case view = "VIEW"
-				case play = "PLAY"
+			public enum FilterStatus: String, Codable, CaseIterable {
+				case received = "RECEIVED"
+				case deactivated = "DEACTIVATED"
+				case appTransferInProgress = "APP_TRANSFER_IN_PROGRESS"
 			}
 
 			public enum FilterPlaceStatus: String, Codable, CaseIterable {
@@ -41,49 +41,49 @@ extension APIEndpoint.V1.AppClips.WithID {
 				case noMatch = "NO_MATCH"
 			}
 
-			public enum FilterStatus: String, Codable, CaseIterable {
-				case received = "RECEIVED"
-				case deactivated = "DEACTIVATED"
-				case appTransferInProgress = "APP_TRANSFER_IN_PROGRESS"
+			public enum FilterAction: String, Codable, CaseIterable {
+				case `open` = "OPEN"
+				case view = "VIEW"
+				case play = "PLAY"
 			}
 
 			public enum FieldsAppClipAdvancedExperiences: String, Codable, CaseIterable {
-				case action
-				case appClip
-				case businessCategory
-				case defaultLanguage
-				case headerImage
-				case isPoweredBy
 				case link
-				case localizations
+				case version
+				case status
+				case action
+				case isPoweredBy
 				case place
 				case placeStatus
+				case businessCategory
+				case defaultLanguage
 				case removed
-				case status
-				case version
+				case appClip
+				case headerImage
+				case localizations
 			}
 
 			public enum FieldsAppClips: String, Codable, CaseIterable {
-				case app
-				case appClipAdvancedExperiences
-				case appClipDefaultExperiences
 				case bundleID = "bundleId"
+				case app
+				case appClipDefaultExperiences
+				case appClipAdvancedExperiences
 			}
 
 			public enum FieldsAppClipAdvancedExperienceImages: String, Codable, CaseIterable {
-				case assetDeliveryState
-				case fileName
 				case fileSize
-				case imageAsset
+				case fileName
 				case sourceFileChecksum
+				case imageAsset
 				case uploadOperations
+				case assetDeliveryState
 				case uploaded
 			}
 
 			public enum FieldsAppClipAdvancedExperienceLocalizations: String, Codable, CaseIterable {
 				case language
-				case subtitle
 				case title
+				case subtitle
 			}
 
 			public enum Include: String, Codable, CaseIterable {
@@ -92,31 +92,31 @@ extension APIEndpoint.V1.AppClips.WithID {
 				case localizations
 			}
 
-			public init(filterAction: [FilterAction]? = nil, filterPlaceStatus: [FilterPlaceStatus]? = nil, filterStatus: [FilterStatus]? = nil, fieldsAppClipAdvancedExperiences: [FieldsAppClipAdvancedExperiences]? = nil, fieldsAppClips: [FieldsAppClips]? = nil, fieldsAppClipAdvancedExperienceImages: [FieldsAppClipAdvancedExperienceImages]? = nil, fieldsAppClipAdvancedExperienceLocalizations: [FieldsAppClipAdvancedExperienceLocalizations]? = nil, limit: Int? = nil, limitLocalizations: Int? = nil, include: [Include]? = nil) {
-				self.filterAction = filterAction
-				self.filterPlaceStatus = filterPlaceStatus
+			public init(filterStatus: [FilterStatus]? = nil, filterPlaceStatus: [FilterPlaceStatus]? = nil, filterAction: [FilterAction]? = nil, fieldsAppClipAdvancedExperiences: [FieldsAppClipAdvancedExperiences]? = nil, fieldsAppClips: [FieldsAppClips]? = nil, fieldsAppClipAdvancedExperienceImages: [FieldsAppClipAdvancedExperienceImages]? = nil, fieldsAppClipAdvancedExperienceLocalizations: [FieldsAppClipAdvancedExperienceLocalizations]? = nil, limit: Int? = nil, include: [Include]? = nil, limitLocalizations: Int? = nil) {
 				self.filterStatus = filterStatus
+				self.filterPlaceStatus = filterPlaceStatus
+				self.filterAction = filterAction
 				self.fieldsAppClipAdvancedExperiences = fieldsAppClipAdvancedExperiences
 				self.fieldsAppClips = fieldsAppClips
 				self.fieldsAppClipAdvancedExperienceImages = fieldsAppClipAdvancedExperienceImages
 				self.fieldsAppClipAdvancedExperienceLocalizations = fieldsAppClipAdvancedExperienceLocalizations
 				self.limit = limit
-				self.limitLocalizations = limitLocalizations
 				self.include = include
+				self.limitLocalizations = limitLocalizations
 			}
 
 			public var asQuery: [(String, String?)] {
 				let encoder = URLQueryEncoder(explode: false)
-				encoder.encode(filterAction, forKey: "filter[action]")
-				encoder.encode(filterPlaceStatus, forKey: "filter[placeStatus]")
 				encoder.encode(filterStatus, forKey: "filter[status]")
+				encoder.encode(filterPlaceStatus, forKey: "filter[placeStatus]")
+				encoder.encode(filterAction, forKey: "filter[action]")
 				encoder.encode(fieldsAppClipAdvancedExperiences, forKey: "fields[appClipAdvancedExperiences]")
 				encoder.encode(fieldsAppClips, forKey: "fields[appClips]")
 				encoder.encode(fieldsAppClipAdvancedExperienceImages, forKey: "fields[appClipAdvancedExperienceImages]")
 				encoder.encode(fieldsAppClipAdvancedExperienceLocalizations, forKey: "fields[appClipAdvancedExperienceLocalizations]")
 				encoder.encode(limit, forKey: "limit")
-				encoder.encode(limitLocalizations, forKey: "limit[localizations]")
 				encoder.encode(include, forKey: "include")
+				encoder.encode(limitLocalizations, forKey: "limit[localizations]")
 				return encoder.items
 			}
 		}

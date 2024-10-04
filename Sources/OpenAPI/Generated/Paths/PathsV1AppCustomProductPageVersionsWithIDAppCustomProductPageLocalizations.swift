@@ -14,81 +14,81 @@ extension APIEndpoint.V1.AppCustomProductPageVersions.WithID {
 		public let path: String
 
 		public func get(parameters: GetParameters? = nil) -> Request<AppStoreConnect_Swift_SDK.AppCustomProductPageLocalizationsResponse> {
-			Request(path: path, method: "GET", query: parameters?.asQuery, id: "appCustomProductPageVersions-appCustomProductPageLocalizations-get_to_many_related")
+			Request(path: path, method: "GET", query: parameters?.asQuery, id: "appCustomProductPageVersions_appCustomProductPageLocalizations_getToManyRelated")
 		}
 
 		public struct GetParameters {
 			public var filterLocale: [String]?
-			public var fieldsAppScreenshotSets: [FieldsAppScreenshotSets]?
 			public var fieldsAppCustomProductPageLocalizations: [FieldsAppCustomProductPageLocalizations]?
 			public var fieldsAppCustomProductPageVersions: [FieldsAppCustomProductPageVersions]?
+			public var fieldsAppScreenshotSets: [FieldsAppScreenshotSets]?
 			public var fieldsAppPreviewSets: [FieldsAppPreviewSets]?
 			public var limit: Int?
+			public var include: [Include]?
 			public var limitAppScreenshotSets: Int?
 			public var limitAppPreviewSets: Int?
-			public var include: [Include]?
-
-			public enum FieldsAppScreenshotSets: String, Codable, CaseIterable {
-				case appCustomProductPageLocalization
-				case appScreenshots
-				case appStoreVersionExperimentTreatmentLocalization
-				case appStoreVersionLocalization
-				case screenshotDisplayType
-			}
 
 			public enum FieldsAppCustomProductPageLocalizations: String, Codable, CaseIterable {
-				case appCustomProductPageVersion
-				case appPreviewSets
-				case appScreenshotSets
 				case locale
 				case promotionalText
+				case appCustomProductPageVersion
+				case appScreenshotSets
+				case appPreviewSets
 			}
 
 			public enum FieldsAppCustomProductPageVersions: String, Codable, CaseIterable {
+				case version
+				case state
+				case deepLink
 				case appCustomProductPage
 				case appCustomProductPageLocalizations
-				case deepLink
-				case state
-				case version
+			}
+
+			public enum FieldsAppScreenshotSets: String, Codable, CaseIterable {
+				case screenshotDisplayType
+				case appStoreVersionLocalization
+				case appCustomProductPageLocalization
+				case appStoreVersionExperimentTreatmentLocalization
+				case appScreenshots
 			}
 
 			public enum FieldsAppPreviewSets: String, Codable, CaseIterable {
-				case appCustomProductPageLocalization
-				case appPreviews
-				case appStoreVersionExperimentTreatmentLocalization
-				case appStoreVersionLocalization
 				case previewType
+				case appStoreVersionLocalization
+				case appCustomProductPageLocalization
+				case appStoreVersionExperimentTreatmentLocalization
+				case appPreviews
 			}
 
 			public enum Include: String, Codable, CaseIterable {
 				case appCustomProductPageVersion
-				case appPreviewSets
 				case appScreenshotSets
+				case appPreviewSets
 			}
 
-			public init(filterLocale: [String]? = nil, fieldsAppScreenshotSets: [FieldsAppScreenshotSets]? = nil, fieldsAppCustomProductPageLocalizations: [FieldsAppCustomProductPageLocalizations]? = nil, fieldsAppCustomProductPageVersions: [FieldsAppCustomProductPageVersions]? = nil, fieldsAppPreviewSets: [FieldsAppPreviewSets]? = nil, limit: Int? = nil, limitAppScreenshotSets: Int? = nil, limitAppPreviewSets: Int? = nil, include: [Include]? = nil) {
+			public init(filterLocale: [String]? = nil, fieldsAppCustomProductPageLocalizations: [FieldsAppCustomProductPageLocalizations]? = nil, fieldsAppCustomProductPageVersions: [FieldsAppCustomProductPageVersions]? = nil, fieldsAppScreenshotSets: [FieldsAppScreenshotSets]? = nil, fieldsAppPreviewSets: [FieldsAppPreviewSets]? = nil, limit: Int? = nil, include: [Include]? = nil, limitAppScreenshotSets: Int? = nil, limitAppPreviewSets: Int? = nil) {
 				self.filterLocale = filterLocale
-				self.fieldsAppScreenshotSets = fieldsAppScreenshotSets
 				self.fieldsAppCustomProductPageLocalizations = fieldsAppCustomProductPageLocalizations
 				self.fieldsAppCustomProductPageVersions = fieldsAppCustomProductPageVersions
+				self.fieldsAppScreenshotSets = fieldsAppScreenshotSets
 				self.fieldsAppPreviewSets = fieldsAppPreviewSets
 				self.limit = limit
+				self.include = include
 				self.limitAppScreenshotSets = limitAppScreenshotSets
 				self.limitAppPreviewSets = limitAppPreviewSets
-				self.include = include
 			}
 
 			public var asQuery: [(String, String?)] {
 				let encoder = URLQueryEncoder(explode: false)
 				encoder.encode(filterLocale, forKey: "filter[locale]")
-				encoder.encode(fieldsAppScreenshotSets, forKey: "fields[appScreenshotSets]")
 				encoder.encode(fieldsAppCustomProductPageLocalizations, forKey: "fields[appCustomProductPageLocalizations]")
 				encoder.encode(fieldsAppCustomProductPageVersions, forKey: "fields[appCustomProductPageVersions]")
+				encoder.encode(fieldsAppScreenshotSets, forKey: "fields[appScreenshotSets]")
 				encoder.encode(fieldsAppPreviewSets, forKey: "fields[appPreviewSets]")
 				encoder.encode(limit, forKey: "limit")
+				encoder.encode(include, forKey: "include")
 				encoder.encode(limitAppScreenshotSets, forKey: "limit[appScreenshotSets]")
 				encoder.encode(limitAppPreviewSets, forKey: "limit[appPreviewSets]")
-				encoder.encode(include, forKey: "include")
 				return encoder.items
 			}
 		}

@@ -14,7 +14,7 @@ extension APIEndpoint.V1 {
 		public let path: String
 
 		public func post(_ body: AppStoreConnect_Swift_SDK.AppClipDefaultExperienceLocalizationCreateRequest) -> Request<AppStoreConnect_Swift_SDK.AppClipDefaultExperienceLocalizationResponse> {
-			Request(path: path, method: "POST", body: body, id: "appClipDefaultExperienceLocalizations-create_instance")
+			Request(path: path, method: "POST", body: body, id: "appClipDefaultExperienceLocalizations_createInstance")
 		}
 	}
 }

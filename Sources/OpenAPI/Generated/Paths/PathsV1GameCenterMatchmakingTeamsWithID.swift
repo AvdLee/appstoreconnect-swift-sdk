@@ -14,11 +14,11 @@ extension APIEndpoint.V1.GameCenterMatchmakingTeams {
 		public let path: String
 
 		public func patch(_ body: AppStoreConnect_Swift_SDK.GameCenterMatchmakingTeamUpdateRequest) -> Request<AppStoreConnect_Swift_SDK.GameCenterMatchmakingTeamResponse> {
-			Request(path: path, method: "PATCH", body: body, id: "gameCenterMatchmakingTeams-update_instance")
+			Request(path: path, method: "PATCH", body: body, id: "gameCenterMatchmakingTeams_updateInstance")
 		}
 
 		public var delete: Request<Void> {
-			Request(path: path, method: "DELETE", id: "gameCenterMatchmakingTeams-delete_instance")
+			Request(path: path, method: "DELETE", id: "gameCenterMatchmakingTeams_deleteInstance")
 		}
 	}
 }

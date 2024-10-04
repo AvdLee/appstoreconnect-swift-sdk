@@ -14,13 +14,13 @@ extension APIEndpoint.V1.EndUserLicenseAgreements {
 		public let path: String
 
 		public func get(parameters: GetParameters? = nil) -> Request<AppStoreConnect_Swift_SDK.EndUserLicenseAgreementResponse> {
-			Request(path: path, method: "GET", query: parameters?.asQuery, id: "endUserLicenseAgreements-get_instance")
+			Request(path: path, method: "GET", query: parameters?.asQuery, id: "endUserLicenseAgreements_getInstance")
 		}
 
 		public struct GetParameters {
 			public var fieldsEndUserLicenseAgreements: [FieldsEndUserLicenseAgreements]?
-			public var include: [Include]?
 			public var fieldsTerritories: [FieldsTerritories]?
+			public var include: [Include]?
 			public var limitTerritories: Int?
 
 			public enum FieldsEndUserLicenseAgreements: String, Codable, CaseIterable {
@@ -29,38 +29,38 @@ extension APIEndpoint.V1.EndUserLicenseAgreements {
 				case territories
 			}
 
+			public enum FieldsTerritories: String, Codable, CaseIterable {
+				case currency
+			}
+
 			public enum Include: String, Codable, CaseIterable {
 				case app
 				case territories
 			}
 
-			public enum FieldsTerritories: String, Codable, CaseIterable {
-				case currency
-			}
-
-			public init(fieldsEndUserLicenseAgreements: [FieldsEndUserLicenseAgreements]? = nil, include: [Include]? = nil, fieldsTerritories: [FieldsTerritories]? = nil, limitTerritories: Int? = nil) {
+			public init(fieldsEndUserLicenseAgreements: [FieldsEndUserLicenseAgreements]? = nil, fieldsTerritories: [FieldsTerritories]? = nil, include: [Include]? = nil, limitTerritories: Int? = nil) {
 				self.fieldsEndUserLicenseAgreements = fieldsEndUserLicenseAgreements
-				self.include = include
 				self.fieldsTerritories = fieldsTerritories
+				self.include = include
 				self.limitTerritories = limitTerritories
 			}
 
 			public var asQuery: [(String, String?)] {
 				let encoder = URLQueryEncoder(explode: false)
 				encoder.encode(fieldsEndUserLicenseAgreements, forKey: "fields[endUserLicenseAgreements]")
-				encoder.encode(include, forKey: "include")
 				encoder.encode(fieldsTerritories, forKey: "fields[territories]")
+				encoder.encode(include, forKey: "include")
 				encoder.encode(limitTerritories, forKey: "limit[territories]")
 				return encoder.items
 			}
 		}
 
 		public func patch(_ body: AppStoreConnect_Swift_SDK.EndUserLicenseAgreementUpdateRequest) -> Request<AppStoreConnect_Swift_SDK.EndUserLicenseAgreementResponse> {
-			Request(path: path, method: "PATCH", body: body, id: "endUserLicenseAgreements-update_instance")
+			Request(path: path, method: "PATCH", body: body, id: "endUserLicenseAgreements_updateInstance")
 		}
 
 		public var delete: Request<Void> {
-			Request(path: path, method: "DELETE", id: "endUserLicenseAgreements-delete_instance")
+			Request(path: path, method: "DELETE", id: "endUserLicenseAgreements_deleteInstance")
 		}
 	}
 }

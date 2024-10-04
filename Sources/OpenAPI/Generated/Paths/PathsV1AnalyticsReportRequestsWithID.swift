@@ -14,51 +14,51 @@ extension APIEndpoint.V1.AnalyticsReportRequests {
 		public let path: String
 
 		public func get(parameters: GetParameters? = nil) -> Request<AppStoreConnect_Swift_SDK.AnalyticsReportRequestResponse> {
-			Request(path: path, method: "GET", query: parameters?.asQuery, id: "analyticsReportRequests-get_instance")
+			Request(path: path, method: "GET", query: parameters?.asQuery, id: "analyticsReportRequests_getInstance")
 		}
 
 		public struct GetParameters {
 			public var fieldsAnalyticsReportRequests: [FieldsAnalyticsReportRequests]?
-			public var include: [Include]?
 			public var fieldsAnalyticsReports: [FieldsAnalyticsReports]?
+			public var include: [Include]?
 			public var limitReports: Int?
 
 			public enum FieldsAnalyticsReportRequests: String, Codable, CaseIterable {
 				case accessType
+				case stoppedDueToInactivity
 				case app
 				case reports
-				case stoppedDueToInactivity
+			}
+
+			public enum FieldsAnalyticsReports: String, Codable, CaseIterable {
+				case name
+				case category
+				case instances
 			}
 
 			public enum Include: String, Codable, CaseIterable {
 				case reports
 			}
 
-			public enum FieldsAnalyticsReports: String, Codable, CaseIterable {
-				case category
-				case instances
-				case name
-			}
-
-			public init(fieldsAnalyticsReportRequests: [FieldsAnalyticsReportRequests]? = nil, include: [Include]? = nil, fieldsAnalyticsReports: [FieldsAnalyticsReports]? = nil, limitReports: Int? = nil) {
+			public init(fieldsAnalyticsReportRequests: [FieldsAnalyticsReportRequests]? = nil, fieldsAnalyticsReports: [FieldsAnalyticsReports]? = nil, include: [Include]? = nil, limitReports: Int? = nil) {
 				self.fieldsAnalyticsReportRequests = fieldsAnalyticsReportRequests
-				self.include = include
 				self.fieldsAnalyticsReports = fieldsAnalyticsReports
+				self.include = include
 				self.limitReports = limitReports
 			}
 
 			public var asQuery: [(String, String?)] {
 				let encoder = URLQueryEncoder(explode: false)
 				encoder.encode(fieldsAnalyticsReportRequests, forKey: "fields[analyticsReportRequests]")
-				encoder.encode(include, forKey: "include")
 				encoder.encode(fieldsAnalyticsReports, forKey: "fields[analyticsReports]")
+				encoder.encode(include, forKey: "include")
 				encoder.encode(limitReports, forKey: "limit[reports]")
 				return encoder.items
 			}
 		}
 
 		public var delete: Request<Void> {
-			Request(path: path, method: "DELETE", id: "analyticsReportRequests-delete_instance")
+			Request(path: path, method: "DELETE", id: "analyticsReportRequests_deleteInstance")
 		}
 	}
 }

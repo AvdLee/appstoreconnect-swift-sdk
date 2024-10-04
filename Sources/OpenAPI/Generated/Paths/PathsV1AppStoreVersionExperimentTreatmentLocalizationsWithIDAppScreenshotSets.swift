@@ -14,21 +14,21 @@ extension APIEndpoint.V1.AppStoreVersionExperimentTreatmentLocalizations.WithID 
 		public let path: String
 
 		public func get(parameters: GetParameters? = nil) -> Request<AppStoreConnect_Swift_SDK.AppScreenshotSetsResponse> {
-			Request(path: path, method: "GET", query: parameters?.asQuery, id: "appStoreVersionExperimentTreatmentLocalizations-appScreenshotSets-get_to_many_related")
+			Request(path: path, method: "GET", query: parameters?.asQuery, id: "appStoreVersionExperimentTreatmentLocalizations_appScreenshotSets_getToManyRelated")
 		}
 
 		public struct GetParameters {
 			public var filterScreenshotDisplayType: [FilterScreenshotDisplayType]?
-			public var filterAppCustomProductPageLocalization: [String]?
 			public var filterAppStoreVersionLocalization: [String]?
+			public var filterAppCustomProductPageLocalization: [String]?
 			public var fieldsAppScreenshotSets: [FieldsAppScreenshotSets]?
+			public var fieldsAppStoreVersionLocalizations: [FieldsAppStoreVersionLocalizations]?
 			public var fieldsAppCustomProductPageLocalizations: [FieldsAppCustomProductPageLocalizations]?
 			public var fieldsAppStoreVersionExperimentTreatmentLocalizations: [FieldsAppStoreVersionExperimentTreatmentLocalizations]?
 			public var fieldsAppScreenshots: [FieldsAppScreenshots]?
-			public var fieldsAppStoreVersionLocalizations: [FieldsAppStoreVersionLocalizations]?
 			public var limit: Int?
-			public var limitAppScreenshots: Int?
 			public var include: [Include]?
+			public var limitAppScreenshots: Int?
 
 			public enum FilterScreenshotDisplayType: String, Codable, CaseIterable {
 				case appIphone67 = "APP_IPHONE_67"
@@ -46,6 +46,7 @@ extension APIEndpoint.V1.AppStoreVersionExperimentTreatmentLocalizations.WithID 
 				case appIpad97 = "APP_IPAD_97"
 				case appDesktop = "APP_DESKTOP"
 				case appWatchUltra = "APP_WATCH_ULTRA"
+				case appWatchSeries10 = "APP_WATCH_SERIES_10"
 				case appWatchSeries7 = "APP_WATCH_SERIES_7"
 				case appWatchSeries4 = "APP_WATCH_SERIES_4"
 				case appWatchSeries3 = "APP_WATCH_SERIES_3"
@@ -66,88 +67,88 @@ extension APIEndpoint.V1.AppStoreVersionExperimentTreatmentLocalizations.WithID 
 			}
 
 			public enum FieldsAppScreenshotSets: String, Codable, CaseIterable {
-				case appCustomProductPageLocalization
-				case appScreenshots
-				case appStoreVersionExperimentTreatmentLocalization
-				case appStoreVersionLocalization
 				case screenshotDisplayType
-			}
-
-			public enum FieldsAppCustomProductPageLocalizations: String, Codable, CaseIterable {
-				case appCustomProductPageVersion
-				case appPreviewSets
-				case appScreenshotSets
-				case locale
-				case promotionalText
-			}
-
-			public enum FieldsAppStoreVersionExperimentTreatmentLocalizations: String, Codable, CaseIterable {
-				case appPreviewSets
-				case appScreenshotSets
-				case appStoreVersionExperimentTreatment
-				case locale
-			}
-
-			public enum FieldsAppScreenshots: String, Codable, CaseIterable {
-				case appScreenshotSet
-				case assetDeliveryState
-				case assetToken
-				case assetType
-				case fileName
-				case fileSize
-				case imageAsset
-				case sourceFileChecksum
-				case uploadOperations
-				case uploaded
+				case appStoreVersionLocalization
+				case appCustomProductPageLocalization
+				case appStoreVersionExperimentTreatmentLocalization
+				case appScreenshots
 			}
 
 			public enum FieldsAppStoreVersionLocalizations: String, Codable, CaseIterable {
-				case appPreviewSets
-				case appScreenshotSets
-				case appStoreVersion
 				case description
-				case keywords
 				case locale
+				case keywords
 				case marketingURL = "marketingUrl"
 				case promotionalText
 				case supportURL = "supportUrl"
 				case whatsNew
+				case appStoreVersion
+				case appScreenshotSets
+				case appPreviewSets
+			}
+
+			public enum FieldsAppCustomProductPageLocalizations: String, Codable, CaseIterable {
+				case locale
+				case promotionalText
+				case appCustomProductPageVersion
+				case appScreenshotSets
+				case appPreviewSets
+			}
+
+			public enum FieldsAppStoreVersionExperimentTreatmentLocalizations: String, Codable, CaseIterable {
+				case locale
+				case appStoreVersionExperimentTreatment
+				case appScreenshotSets
+				case appPreviewSets
+			}
+
+			public enum FieldsAppScreenshots: String, Codable, CaseIterable {
+				case fileSize
+				case fileName
+				case sourceFileChecksum
+				case imageAsset
+				case assetToken
+				case assetType
+				case uploadOperations
+				case assetDeliveryState
+				case uploaded
+				case appScreenshotSet
 			}
 
 			public enum Include: String, Codable, CaseIterable {
-				case appCustomProductPageLocalization
-				case appScreenshots
-				case appStoreVersionExperimentTreatmentLocalization
 				case appStoreVersionLocalization
+				case appCustomProductPageLocalization
+				case appStoreVersionExperimentTreatmentLocalization
+				case appScreenshots
 			}
 
-			public init(filterScreenshotDisplayType: [FilterScreenshotDisplayType]? = nil, filterAppCustomProductPageLocalization: [String]? = nil, filterAppStoreVersionLocalization: [String]? = nil, fieldsAppScreenshotSets: [FieldsAppScreenshotSets]? = nil, fieldsAppCustomProductPageLocalizations: [FieldsAppCustomProductPageLocalizations]? = nil, fieldsAppStoreVersionExperimentTreatmentLocalizations: [FieldsAppStoreVersionExperimentTreatmentLocalizations]? = nil, fieldsAppScreenshots: [FieldsAppScreenshots]? = nil, fieldsAppStoreVersionLocalizations: [FieldsAppStoreVersionLocalizations]? = nil, limit: Int? = nil, limitAppScreenshots: Int? = nil, include: [Include]? = nil) {
+			public init(filterScreenshotDisplayType: [FilterScreenshotDisplayType]? = nil, filterAppStoreVersionLocalization: [String]? = nil, filterAppCustomProductPageLocalization: [String]? = nil, fieldsAppScreenshotSets: [FieldsAppScreenshotSets]? = nil, fieldsAppStoreVersionLocalizations: [FieldsAppStoreVersionLocalizations]? = nil, fieldsAppCustomProductPageLocalizations: [FieldsAppCustomProductPageLocalizations]? = nil, fieldsAppStoreVersionExperimentTreatmentLocalizations: [FieldsAppStoreVersionExperimentTreatmentLocalizations]? = nil, fieldsAppScreenshots: [FieldsAppScreenshots]? = nil, limit: Int? = nil, include: [Include]? = nil, limitAppScreenshots: Int? = nil) {
 				self.filterScreenshotDisplayType = filterScreenshotDisplayType
-				self.filterAppCustomProductPageLocalization = filterAppCustomProductPageLocalization
 				self.filterAppStoreVersionLocalization = filterAppStoreVersionLocalization
+				self.filterAppCustomProductPageLocalization = filterAppCustomProductPageLocalization
 				self.fieldsAppScreenshotSets = fieldsAppScreenshotSets
+				self.fieldsAppStoreVersionLocalizations = fieldsAppStoreVersionLocalizations
 				self.fieldsAppCustomProductPageLocalizations = fieldsAppCustomProductPageLocalizations
 				self.fieldsAppStoreVersionExperimentTreatmentLocalizations = fieldsAppStoreVersionExperimentTreatmentLocalizations
 				self.fieldsAppScreenshots = fieldsAppScreenshots
-				self.fieldsAppStoreVersionLocalizations = fieldsAppStoreVersionLocalizations
 				self.limit = limit
-				self.limitAppScreenshots = limitAppScreenshots
 				self.include = include
+				self.limitAppScreenshots = limitAppScreenshots
 			}
 
 			public var asQuery: [(String, String?)] {
 				let encoder = URLQueryEncoder(explode: false)
 				encoder.encode(filterScreenshotDisplayType, forKey: "filter[screenshotDisplayType]")
-				encoder.encode(filterAppCustomProductPageLocalization, forKey: "filter[appCustomProductPageLocalization]")
 				encoder.encode(filterAppStoreVersionLocalization, forKey: "filter[appStoreVersionLocalization]")
+				encoder.encode(filterAppCustomProductPageLocalization, forKey: "filter[appCustomProductPageLocalization]")
 				encoder.encode(fieldsAppScreenshotSets, forKey: "fields[appScreenshotSets]")
+				encoder.encode(fieldsAppStoreVersionLocalizations, forKey: "fields[appStoreVersionLocalizations]")
 				encoder.encode(fieldsAppCustomProductPageLocalizations, forKey: "fields[appCustomProductPageLocalizations]")
 				encoder.encode(fieldsAppStoreVersionExperimentTreatmentLocalizations, forKey: "fields[appStoreVersionExperimentTreatmentLocalizations]")
 				encoder.encode(fieldsAppScreenshots, forKey: "fields[appScreenshots]")
-				encoder.encode(fieldsAppStoreVersionLocalizations, forKey: "fields[appStoreVersionLocalizations]")
 				encoder.encode(limit, forKey: "limit")
-				encoder.encode(limitAppScreenshots, forKey: "limit[appScreenshots]")
 				encoder.encode(include, forKey: "include")
+				encoder.encode(limitAppScreenshots, forKey: "limit[appScreenshots]")
 				return encoder.items
 			}
 		}

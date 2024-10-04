@@ -14,7 +14,7 @@ extension APIEndpoint.V1.GameCenterLeaderboardLocalizations.WithID {
 		public let path: String
 
 		public func get(parameters: GetParameters? = nil) -> Request<AppStoreConnect_Swift_SDK.GameCenterLeaderboardImageResponse> {
-			Request(path: path, method: "GET", query: parameters?.asQuery, id: "gameCenterLeaderboardLocalizations-gameCenterLeaderboardImage-get_to_one_related")
+			Request(path: path, method: "GET", query: parameters?.asQuery, id: "gameCenterLeaderboardLocalizations_gameCenterLeaderboardImage_getToOneRelated")
 		}
 
 		public struct GetParameters {
@@ -23,23 +23,23 @@ extension APIEndpoint.V1.GameCenterLeaderboardLocalizations.WithID {
 			public var include: [Include]?
 
 			public enum FieldsGameCenterLeaderboardImages: String, Codable, CaseIterable {
-				case assetDeliveryState
-				case fileName
 				case fileSize
-				case gameCenterLeaderboardLocalization
+				case fileName
 				case imageAsset
 				case uploadOperations
+				case assetDeliveryState
 				case uploaded
+				case gameCenterLeaderboardLocalization
 			}
 
 			public enum FieldsGameCenterLeaderboardLocalizations: String, Codable, CaseIterable {
+				case locale
+				case name
 				case formatterOverride
 				case formatterSuffix
 				case formatterSuffixSingular
 				case gameCenterLeaderboard
 				case gameCenterLeaderboardImage
-				case locale
-				case name
 			}
 
 			public enum Include: String, Codable, CaseIterable {

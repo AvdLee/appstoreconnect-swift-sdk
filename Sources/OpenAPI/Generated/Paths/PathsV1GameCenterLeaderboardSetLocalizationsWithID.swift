@@ -14,19 +14,29 @@ extension APIEndpoint.V1.GameCenterLeaderboardSetLocalizations {
 		public let path: String
 
 		public func get(parameters: GetParameters? = nil) -> Request<AppStoreConnect_Swift_SDK.GameCenterLeaderboardSetLocalizationResponse> {
-			Request(path: path, method: "GET", query: parameters?.asQuery, id: "gameCenterLeaderboardSetLocalizations-get_instance")
+			Request(path: path, method: "GET", query: parameters?.asQuery, id: "gameCenterLeaderboardSetLocalizations_getInstance")
 		}
 
 		public struct GetParameters {
 			public var fieldsGameCenterLeaderboardSetLocalizations: [FieldsGameCenterLeaderboardSetLocalizations]?
-			public var include: [Include]?
 			public var fieldsGameCenterLeaderboardSetImages: [FieldsGameCenterLeaderboardSetImages]?
+			public var include: [Include]?
 
 			public enum FieldsGameCenterLeaderboardSetLocalizations: String, Codable, CaseIterable {
-				case gameCenterLeaderboardSet
-				case gameCenterLeaderboardSetImage
 				case locale
 				case name
+				case gameCenterLeaderboardSet
+				case gameCenterLeaderboardSetImage
+			}
+
+			public enum FieldsGameCenterLeaderboardSetImages: String, Codable, CaseIterable {
+				case fileSize
+				case fileName
+				case imageAsset
+				case uploadOperations
+				case assetDeliveryState
+				case uploaded
+				case gameCenterLeaderboardSetLocalization
 			}
 
 			public enum Include: String, Codable, CaseIterable {
@@ -34,37 +44,27 @@ extension APIEndpoint.V1.GameCenterLeaderboardSetLocalizations {
 				case gameCenterLeaderboardSetImage
 			}
 
-			public enum FieldsGameCenterLeaderboardSetImages: String, Codable, CaseIterable {
-				case assetDeliveryState
-				case fileName
-				case fileSize
-				case gameCenterLeaderboardSetLocalization
-				case imageAsset
-				case uploadOperations
-				case uploaded
-			}
-
-			public init(fieldsGameCenterLeaderboardSetLocalizations: [FieldsGameCenterLeaderboardSetLocalizations]? = nil, include: [Include]? = nil, fieldsGameCenterLeaderboardSetImages: [FieldsGameCenterLeaderboardSetImages]? = nil) {
+			public init(fieldsGameCenterLeaderboardSetLocalizations: [FieldsGameCenterLeaderboardSetLocalizations]? = nil, fieldsGameCenterLeaderboardSetImages: [FieldsGameCenterLeaderboardSetImages]? = nil, include: [Include]? = nil) {
 				self.fieldsGameCenterLeaderboardSetLocalizations = fieldsGameCenterLeaderboardSetLocalizations
-				self.include = include
 				self.fieldsGameCenterLeaderboardSetImages = fieldsGameCenterLeaderboardSetImages
+				self.include = include
 			}
 
 			public var asQuery: [(String, String?)] {
 				let encoder = URLQueryEncoder(explode: false)
 				encoder.encode(fieldsGameCenterLeaderboardSetLocalizations, forKey: "fields[gameCenterLeaderboardSetLocalizations]")
-				encoder.encode(include, forKey: "include")
 				encoder.encode(fieldsGameCenterLeaderboardSetImages, forKey: "fields[gameCenterLeaderboardSetImages]")
+				encoder.encode(include, forKey: "include")
 				return encoder.items
 			}
 		}
 
 		public func patch(_ body: AppStoreConnect_Swift_SDK.GameCenterLeaderboardSetLocalizationUpdateRequest) -> Request<AppStoreConnect_Swift_SDK.GameCenterLeaderboardSetLocalizationResponse> {
-			Request(path: path, method: "PATCH", body: body, id: "gameCenterLeaderboardSetLocalizations-update_instance")
+			Request(path: path, method: "PATCH", body: body, id: "gameCenterLeaderboardSetLocalizations_updateInstance")
 		}
 
 		public var delete: Request<Void> {
-			Request(path: path, method: "DELETE", id: "gameCenterLeaderboardSetLocalizations-delete_instance")
+			Request(path: path, method: "DELETE", id: "gameCenterLeaderboardSetLocalizations_deleteInstance")
 		}
 	}
 }

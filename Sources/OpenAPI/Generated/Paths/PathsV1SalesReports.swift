@@ -14,31 +14,16 @@ extension APIEndpoint.V1 {
 		public let path: String
 
 		public func get(parameters: GetParameters) -> Request<Data> {
-			Request(path: path, method: "GET", query: parameters.asQuery, id: "salesReports-get_collection")
+			Request(path: path, method: "GET", query: parameters.asQuery, id: "salesReports_getCollection")
 		}
 
 		public struct GetParameters {
+			public var filterVendorNumber: [String]
+			public var filterReportType: [FilterReportType]
+			public var filterReportSubType: [FilterReportSubType]
 			public var filterFrequency: [FilterFrequency]
 			public var filterReportDate: [String]?
-			public var filterReportSubType: [FilterReportSubType]
-			public var filterReportType: [FilterReportType]
-			public var filterVendorNumber: [String]
 			public var filterVersion: [String]?
-
-			public enum FilterFrequency: String, Codable, CaseIterable {
-				case daily = "DAILY"
-				case weekly = "WEEKLY"
-				case monthly = "MONTHLY"
-				case yearly = "YEARLY"
-			}
-
-			public enum FilterReportSubType: String, Codable, CaseIterable {
-				case summary = "SUMMARY"
-				case detailed = "DETAILED"
-				case summaryInstallType = "SUMMARY_INSTALL_TYPE"
-				case summaryTerritory = "SUMMARY_TERRITORY"
-				case summaryChannel = "SUMMARY_CHANNEL"
-			}
 
 			public enum FilterReportType: String, Codable, CaseIterable {
 				case sales = "SALES"
@@ -52,22 +37,37 @@ extension APIEndpoint.V1 {
 				case firstAnnual = "FIRST_ANNUAL"
 			}
 
-			public init(filterFrequency: [FilterFrequency], filterReportDate: [String]? = nil, filterReportSubType: [FilterReportSubType], filterReportType: [FilterReportType], filterVendorNumber: [String], filterVersion: [String]? = nil) {
+			public enum FilterReportSubType: String, Codable, CaseIterable {
+				case summary = "SUMMARY"
+				case detailed = "DETAILED"
+				case summaryInstallType = "SUMMARY_INSTALL_TYPE"
+				case summaryTerritory = "SUMMARY_TERRITORY"
+				case summaryChannel = "SUMMARY_CHANNEL"
+			}
+
+			public enum FilterFrequency: String, Codable, CaseIterable {
+				case daily = "DAILY"
+				case weekly = "WEEKLY"
+				case monthly = "MONTHLY"
+				case yearly = "YEARLY"
+			}
+
+			public init(filterVendorNumber: [String], filterReportType: [FilterReportType], filterReportSubType: [FilterReportSubType], filterFrequency: [FilterFrequency], filterReportDate: [String]? = nil, filterVersion: [String]? = nil) {
+				self.filterVendorNumber = filterVendorNumber
+				self.filterReportType = filterReportType
+				self.filterReportSubType = filterReportSubType
 				self.filterFrequency = filterFrequency
 				self.filterReportDate = filterReportDate
-				self.filterReportSubType = filterReportSubType
-				self.filterReportType = filterReportType
-				self.filterVendorNumber = filterVendorNumber
 				self.filterVersion = filterVersion
 			}
 
 			public var asQuery: [(String, String?)] {
 				let encoder = URLQueryEncoder(explode: false)
+				encoder.encode(filterVendorNumber, forKey: "filter[vendorNumber]")
+				encoder.encode(filterReportType, forKey: "filter[reportType]")
+				encoder.encode(filterReportSubType, forKey: "filter[reportSubType]")
 				encoder.encode(filterFrequency, forKey: "filter[frequency]")
 				encoder.encode(filterReportDate, forKey: "filter[reportDate]")
-				encoder.encode(filterReportSubType, forKey: "filter[reportSubType]")
-				encoder.encode(filterReportType, forKey: "filter[reportType]")
-				encoder.encode(filterVendorNumber, forKey: "filter[vendorNumber]")
 				encoder.encode(filterVersion, forKey: "filter[version]")
 				return encoder.items
 			}

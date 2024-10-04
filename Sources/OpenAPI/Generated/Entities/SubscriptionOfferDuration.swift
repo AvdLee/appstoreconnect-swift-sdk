@@ -4,7 +4,6 @@
 import Foundation
 
 public enum SubscriptionOfferDuration: String, Codable, CaseIterable {
-	case oneDay = "ONE_DAY"
 	case threeDays = "THREE_DAYS"
 	case oneWeek = "ONE_WEEK"
 	case twoWeeks = "TWO_WEEKS"

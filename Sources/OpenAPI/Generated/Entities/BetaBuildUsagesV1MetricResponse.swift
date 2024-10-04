@@ -10,7 +10,6 @@ public struct BetaBuildUsagesV1MetricResponse: Codable {
 
 	public struct Datum: Codable {
 		public var dataPoints: DataPoints?
-		public var dimensions: Dimensions?
 
 		public struct DataPoints: Codable {
 			public var start: Date?
@@ -72,75 +71,18 @@ public struct BetaBuildUsagesV1MetricResponse: Codable {
 			}
 		}
 
-		public struct Dimensions: Codable {
-			public var bundleIDs: BundleIDs?
-
-			public struct BundleIDs: Codable {
-				public var links: Links?
-
-				public struct Links: Codable {
-					public var groupBy: String?
-
-					public init(groupBy: String? = nil) {
-						self.groupBy = groupBy
-					}
-
-					public init(from decoder: Decoder) throws {
-						let values = try decoder.container(keyedBy: StringCodingKey.self)
-						self.groupBy = try values.decodeIfPresent(String.self, forKey: "groupBy")
-					}
-
-					public func encode(to encoder: Encoder) throws {
-						var values = encoder.container(keyedBy: StringCodingKey.self)
-						try values.encodeIfPresent(groupBy, forKey: "groupBy")
-					}
-				}
-
-				public init(links: Links? = nil) {
-					self.links = links
-				}
-
-				public init(from decoder: Decoder) throws {
-					let values = try decoder.container(keyedBy: StringCodingKey.self)
-					self.links = try values.decodeIfPresent(Links.self, forKey: "links")
-				}
-
-				public func encode(to encoder: Encoder) throws {
-					var values = encoder.container(keyedBy: StringCodingKey.self)
-					try values.encodeIfPresent(links, forKey: "links")
-				}
-			}
-
-			public init(bundleIDs: BundleIDs? = nil) {
-				self.bundleIDs = bundleIDs
-			}
-
-			public init(from decoder: Decoder) throws {
-				let values = try decoder.container(keyedBy: StringCodingKey.self)
-				self.bundleIDs = try values.decodeIfPresent(BundleIDs.self, forKey: "bundleIds")
-			}
-
-			public func encode(to encoder: Encoder) throws {
-				var values = encoder.container(keyedBy: StringCodingKey.self)
-				try values.encodeIfPresent(bundleIDs, forKey: "bundleIds")
-			}
-		}
-
-		public init(dataPoints: DataPoints? = nil, dimensions: Dimensions? = nil) {
+		public init(dataPoints: DataPoints? = nil) {
 			self.dataPoints = dataPoints
-			self.dimensions = dimensions
 		}
 
 		public init(from decoder: Decoder) throws {
 			let values = try decoder.container(keyedBy: StringCodingKey.self)
 			self.dataPoints = try values.decodeIfPresent(DataPoints.self, forKey: "dataPoints")
-			self.dimensions = try values.decodeIfPresent(Dimensions.self, forKey: "dimensions")
 		}
 
 		public func encode(to encoder: Encoder) throws {
 			var values = encoder.container(keyedBy: StringCodingKey.self)
 			try values.encodeIfPresent(dataPoints, forKey: "dataPoints")
-			try values.encodeIfPresent(dimensions, forKey: "dimensions")
 		}
 	}
 

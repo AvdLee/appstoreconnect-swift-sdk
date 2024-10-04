@@ -14,7 +14,7 @@ extension APIEndpoint.V1.GameCenterMatchmakingRuleSets.WithID {
 		public let path: String
 
 		public func get(parameters: GetParameters? = nil) -> Request<AppStoreConnect_Swift_SDK.GameCenterMatchmakingQueuesResponse> {
-			Request(path: path, method: "GET", query: parameters?.asQuery, id: "gameCenterMatchmakingRuleSets-matchmakingQueues-get_to_many_related")
+			Request(path: path, method: "GET", query: parameters?.asQuery, id: "gameCenterMatchmakingRuleSets_matchmakingQueues_getToManyRelated")
 		}
 
 		public struct GetParameters {
@@ -24,25 +24,25 @@ extension APIEndpoint.V1.GameCenterMatchmakingRuleSets.WithID {
 			public var include: [Include]?
 
 			public enum FieldsGameCenterMatchmakingQueues: String, Codable, CaseIterable {
-				case classicMatchmakingBundleIDs = "classicMatchmakingBundleIds"
-				case experimentRuleSet
 				case referenceName
+				case classicMatchmakingBundleIDs = "classicMatchmakingBundleIds"
 				case ruleSet
+				case experimentRuleSet
 			}
 
 			public enum FieldsGameCenterMatchmakingRuleSets: String, Codable, CaseIterable {
-				case matchmakingQueues
-				case maxPlayers
-				case minPlayers
 				case referenceName
 				case ruleLanguageVersion
-				case rules
+				case minPlayers
+				case maxPlayers
 				case teams
+				case rules
+				case matchmakingQueues
 			}
 
 			public enum Include: String, Codable, CaseIterable {
-				case experimentRuleSet
 				case ruleSet
+				case experimentRuleSet
 			}
 
 			public init(fieldsGameCenterMatchmakingQueues: [FieldsGameCenterMatchmakingQueues]? = nil, fieldsGameCenterMatchmakingRuleSets: [FieldsGameCenterMatchmakingRuleSets]? = nil, limit: Int? = nil, include: [Include]? = nil) {

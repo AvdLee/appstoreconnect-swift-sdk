@@ -14,7 +14,7 @@ extension APIEndpoint.V1 {
 		public let path: String
 
 		public func post(_ body: AppStoreConnect_Swift_SDK.AppPreviewSetCreateRequest) -> Request<AppStoreConnect_Swift_SDK.AppPreviewSetResponse> {
-			Request(path: path, method: "POST", body: body, id: "appPreviewSets-create_instance")
+			Request(path: path, method: "POST", body: body, id: "appPreviewSets_createInstance")
 		}
 	}
 }

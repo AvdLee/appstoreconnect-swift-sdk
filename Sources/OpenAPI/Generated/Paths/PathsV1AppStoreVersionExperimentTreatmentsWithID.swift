@@ -14,61 +14,61 @@ extension APIEndpoint.V1.AppStoreVersionExperimentTreatments {
 		public let path: String
 
 		public func get(parameters: GetParameters? = nil) -> Request<AppStoreConnect_Swift_SDK.AppStoreVersionExperimentTreatmentResponse> {
-			Request(path: path, method: "GET", query: parameters?.asQuery, id: "appStoreVersionExperimentTreatments-get_instance")
+			Request(path: path, method: "GET", query: parameters?.asQuery, id: "appStoreVersionExperimentTreatments_getInstance")
 		}
 
 		public struct GetParameters {
 			public var fieldsAppStoreVersionExperimentTreatments: [FieldsAppStoreVersionExperimentTreatments]?
-			public var include: [Include]?
 			public var fieldsAppStoreVersionExperimentTreatmentLocalizations: [FieldsAppStoreVersionExperimentTreatmentLocalizations]?
+			public var include: [Include]?
 			public var limitAppStoreVersionExperimentTreatmentLocalizations: Int?
 
 			public enum FieldsAppStoreVersionExperimentTreatments: String, Codable, CaseIterable {
+				case name
 				case appIcon
 				case appIconName
-				case appStoreVersionExperiment
-				case appStoreVersionExperimentTreatmentLocalizations
-				case appStoreVersionExperimentV2
-				case name
 				case promotedDate
+				case appStoreVersionExperiment
+				case appStoreVersionExperimentV2
+				case appStoreVersionExperimentTreatmentLocalizations
+			}
+
+			public enum FieldsAppStoreVersionExperimentTreatmentLocalizations: String, Codable, CaseIterable {
+				case locale
+				case appStoreVersionExperimentTreatment
+				case appScreenshotSets
+				case appPreviewSets
 			}
 
 			public enum Include: String, Codable, CaseIterable {
 				case appStoreVersionExperiment
-				case appStoreVersionExperimentTreatmentLocalizations
 				case appStoreVersionExperimentV2
+				case appStoreVersionExperimentTreatmentLocalizations
 			}
 
-			public enum FieldsAppStoreVersionExperimentTreatmentLocalizations: String, Codable, CaseIterable {
-				case appPreviewSets
-				case appScreenshotSets
-				case appStoreVersionExperimentTreatment
-				case locale
-			}
-
-			public init(fieldsAppStoreVersionExperimentTreatments: [FieldsAppStoreVersionExperimentTreatments]? = nil, include: [Include]? = nil, fieldsAppStoreVersionExperimentTreatmentLocalizations: [FieldsAppStoreVersionExperimentTreatmentLocalizations]? = nil, limitAppStoreVersionExperimentTreatmentLocalizations: Int? = nil) {
+			public init(fieldsAppStoreVersionExperimentTreatments: [FieldsAppStoreVersionExperimentTreatments]? = nil, fieldsAppStoreVersionExperimentTreatmentLocalizations: [FieldsAppStoreVersionExperimentTreatmentLocalizations]? = nil, include: [Include]? = nil, limitAppStoreVersionExperimentTreatmentLocalizations: Int? = nil) {
 				self.fieldsAppStoreVersionExperimentTreatments = fieldsAppStoreVersionExperimentTreatments
-				self.include = include
 				self.fieldsAppStoreVersionExperimentTreatmentLocalizations = fieldsAppStoreVersionExperimentTreatmentLocalizations
+				self.include = include
 				self.limitAppStoreVersionExperimentTreatmentLocalizations = limitAppStoreVersionExperimentTreatmentLocalizations
 			}
 
 			public var asQuery: [(String, String?)] {
 				let encoder = URLQueryEncoder(explode: false)
 				encoder.encode(fieldsAppStoreVersionExperimentTreatments, forKey: "fields[appStoreVersionExperimentTreatments]")
-				encoder.encode(include, forKey: "include")
 				encoder.encode(fieldsAppStoreVersionExperimentTreatmentLocalizations, forKey: "fields[appStoreVersionExperimentTreatmentLocalizations]")
+				encoder.encode(include, forKey: "include")
 				encoder.encode(limitAppStoreVersionExperimentTreatmentLocalizations, forKey: "limit[appStoreVersionExperimentTreatmentLocalizations]")
 				return encoder.items
 			}
 		}
 
 		public func patch(_ body: AppStoreConnect_Swift_SDK.AppStoreVersionExperimentTreatmentUpdateRequest) -> Request<AppStoreConnect_Swift_SDK.AppStoreVersionExperimentTreatmentResponse> {
-			Request(path: path, method: "PATCH", body: body, id: "appStoreVersionExperimentTreatments-update_instance")
+			Request(path: path, method: "PATCH", body: body, id: "appStoreVersionExperimentTreatments_updateInstance")
 		}
 
 		public var delete: Request<Void> {
-			Request(path: path, method: "DELETE", id: "appStoreVersionExperimentTreatments-delete_instance")
+			Request(path: path, method: "DELETE", id: "appStoreVersionExperimentTreatments_deleteInstance")
 		}
 	}
 }

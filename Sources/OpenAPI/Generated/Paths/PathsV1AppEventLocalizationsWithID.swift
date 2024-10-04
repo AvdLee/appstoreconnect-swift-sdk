@@ -14,25 +14,50 @@ extension APIEndpoint.V1.AppEventLocalizations {
 		public let path: String
 
 		public func get(parameters: GetParameters? = nil) -> Request<AppStoreConnect_Swift_SDK.AppEventLocalizationResponse> {
-			Request(path: path, method: "GET", query: parameters?.asQuery, id: "appEventLocalizations-get_instance")
+			Request(path: path, method: "GET", query: parameters?.asQuery, id: "appEventLocalizations_getInstance")
 		}
 
 		public struct GetParameters {
 			public var fieldsAppEventLocalizations: [FieldsAppEventLocalizations]?
-			public var include: [Include]?
 			public var fieldsAppEventScreenshots: [FieldsAppEventScreenshots]?
 			public var fieldsAppEventVideoClips: [FieldsAppEventVideoClips]?
+			public var include: [Include]?
 			public var limitAppEventScreenshots: Int?
 			public var limitAppEventVideoClips: Int?
 
 			public enum FieldsAppEventLocalizations: String, Codable, CaseIterable {
+				case locale
+				case name
+				case shortDescription
+				case longDescription
 				case appEvent
 				case appEventScreenshots
 				case appEventVideoClips
-				case locale
-				case longDescription
-				case name
-				case shortDescription
+			}
+
+			public enum FieldsAppEventScreenshots: String, Codable, CaseIterable {
+				case fileSize
+				case fileName
+				case imageAsset
+				case assetToken
+				case uploadOperations
+				case assetDeliveryState
+				case uploaded
+				case appEventAssetType
+				case appEventLocalization
+			}
+
+			public enum FieldsAppEventVideoClips: String, Codable, CaseIterable {
+				case fileSize
+				case fileName
+				case previewFrameTimeCode
+				case videoURL = "videoUrl"
+				case previewImage
+				case uploadOperations
+				case assetDeliveryState
+				case uploaded
+				case appEventAssetType
+				case appEventLocalization
 			}
 
 			public enum Include: String, Codable, CaseIterable {
@@ -41,36 +66,11 @@ extension APIEndpoint.V1.AppEventLocalizations {
 				case appEventVideoClips
 			}
 
-			public enum FieldsAppEventScreenshots: String, Codable, CaseIterable {
-				case appEventAssetType
-				case appEventLocalization
-				case assetDeliveryState
-				case assetToken
-				case fileName
-				case fileSize
-				case imageAsset
-				case uploadOperations
-				case uploaded
-			}
-
-			public enum FieldsAppEventVideoClips: String, Codable, CaseIterable {
-				case appEventAssetType
-				case appEventLocalization
-				case assetDeliveryState
-				case fileName
-				case fileSize
-				case previewFrameTimeCode
-				case previewImage
-				case uploadOperations
-				case uploaded
-				case videoURL = "videoUrl"
-			}
-
-			public init(fieldsAppEventLocalizations: [FieldsAppEventLocalizations]? = nil, include: [Include]? = nil, fieldsAppEventScreenshots: [FieldsAppEventScreenshots]? = nil, fieldsAppEventVideoClips: [FieldsAppEventVideoClips]? = nil, limitAppEventScreenshots: Int? = nil, limitAppEventVideoClips: Int? = nil) {
+			public init(fieldsAppEventLocalizations: [FieldsAppEventLocalizations]? = nil, fieldsAppEventScreenshots: [FieldsAppEventScreenshots]? = nil, fieldsAppEventVideoClips: [FieldsAppEventVideoClips]? = nil, include: [Include]? = nil, limitAppEventScreenshots: Int? = nil, limitAppEventVideoClips: Int? = nil) {
 				self.fieldsAppEventLocalizations = fieldsAppEventLocalizations
-				self.include = include
 				self.fieldsAppEventScreenshots = fieldsAppEventScreenshots
 				self.fieldsAppEventVideoClips = fieldsAppEventVideoClips
+				self.include = include
 				self.limitAppEventScreenshots = limitAppEventScreenshots
 				self.limitAppEventVideoClips = limitAppEventVideoClips
 			}
@@ -78,9 +78,9 @@ extension APIEndpoint.V1.AppEventLocalizations {
 			public var asQuery: [(String, String?)] {
 				let encoder = URLQueryEncoder(explode: false)
 				encoder.encode(fieldsAppEventLocalizations, forKey: "fields[appEventLocalizations]")
-				encoder.encode(include, forKey: "include")
 				encoder.encode(fieldsAppEventScreenshots, forKey: "fields[appEventScreenshots]")
 				encoder.encode(fieldsAppEventVideoClips, forKey: "fields[appEventVideoClips]")
+				encoder.encode(include, forKey: "include")
 				encoder.encode(limitAppEventScreenshots, forKey: "limit[appEventScreenshots]")
 				encoder.encode(limitAppEventVideoClips, forKey: "limit[appEventVideoClips]")
 				return encoder.items
@@ -88,11 +88,11 @@ extension APIEndpoint.V1.AppEventLocalizations {
 		}
 
 		public func patch(_ body: AppStoreConnect_Swift_SDK.AppEventLocalizationUpdateRequest) -> Request<AppStoreConnect_Swift_SDK.AppEventLocalizationResponse> {
-			Request(path: path, method: "PATCH", body: body, id: "appEventLocalizations-update_instance")
+			Request(path: path, method: "PATCH", body: body, id: "appEventLocalizations_updateInstance")
 		}
 
 		public var delete: Request<Void> {
-			Request(path: path, method: "DELETE", id: "appEventLocalizations-delete_instance")
+			Request(path: path, method: "DELETE", id: "appEventLocalizations_deleteInstance")
 		}
 	}
 }

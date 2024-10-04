@@ -14,7 +14,7 @@ extension APIEndpoint.V1.AppPreviewSets.WithID {
 		public let path: String
 
 		public func get(parameters: GetParameters? = nil) -> Request<AppStoreConnect_Swift_SDK.AppPreviewsResponse> {
-			Request(path: path, method: "GET", query: parameters?.asQuery, id: "appPreviewSets-appPreviews-get_to_many_related")
+			Request(path: path, method: "GET", query: parameters?.asQuery, id: "appPreviewSets_appPreviews_getToManyRelated")
 		}
 
 		public struct GetParameters {
@@ -24,25 +24,25 @@ extension APIEndpoint.V1.AppPreviewSets.WithID {
 			public var include: [Include]?
 
 			public enum FieldsAppPreviews: String, Codable, CaseIterable {
-				case appPreviewSet
-				case assetDeliveryState
-				case fileName
 				case fileSize
-				case mimeType
-				case previewFrameTimeCode
-				case previewImage
+				case fileName
 				case sourceFileChecksum
-				case uploadOperations
-				case uploaded
+				case previewFrameTimeCode
+				case mimeType
 				case videoURL = "videoUrl"
+				case previewImage
+				case uploadOperations
+				case assetDeliveryState
+				case uploaded
+				case appPreviewSet
 			}
 
 			public enum FieldsAppPreviewSets: String, Codable, CaseIterable {
-				case appCustomProductPageLocalization
-				case appPreviews
-				case appStoreVersionExperimentTreatmentLocalization
-				case appStoreVersionLocalization
 				case previewType
+				case appStoreVersionLocalization
+				case appCustomProductPageLocalization
+				case appStoreVersionExperimentTreatmentLocalization
+				case appPreviews
 			}
 
 			public enum Include: String, Codable, CaseIterable {

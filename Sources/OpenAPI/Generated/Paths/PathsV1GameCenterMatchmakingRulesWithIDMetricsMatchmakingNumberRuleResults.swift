@@ -14,15 +14,15 @@ extension APIEndpoint.V1.GameCenterMatchmakingRules.WithID.Metrics {
 		public let path: String
 
 		public func get(parameters: GetParameters) -> Request<AppStoreConnect_Swift_SDK.GameCenterMatchmakingNumberRuleResultsV1MetricResponse> {
-			Request(path: path, method: "GET", query: parameters.asQuery, id: "gameCenterMatchmakingRules-matchmakingNumberRuleResults-get_metrics")
+			Request(path: path, method: "GET", query: parameters.asQuery, id: "gameCenterMatchmakingRules_matchmakingNumberRuleResults_getMetrics")
 		}
 
 		public struct GetParameters {
-			public var limit: Int?
 			public var granularity: Granularity
 			public var groupBy: [GroupBy]?
 			public var filterGameCenterMatchmakingQueue: String?
 			public var sort: [Sort]?
+			public var limit: Int?
 
 			public enum Granularity: String, Codable, CaseIterable {
 				case p1d = "P1D"
@@ -35,31 +35,31 @@ extension APIEndpoint.V1.GameCenterMatchmakingRules.WithID.Metrics {
 			}
 
 			public enum Sort: String, Codable, CaseIterable {
-				case averageResult
-				case minusaverageResult = "-averageResult"
 				case count
 				case minuscount = "-count"
+				case averageResult
+				case minusaverageResult = "-averageResult"
 				case p50Result
 				case minusp50Result = "-p50Result"
 				case p95Result
 				case minusp95Result = "-p95Result"
 			}
 
-			public init(limit: Int? = nil, granularity: Granularity, groupBy: [GroupBy]? = nil, filterGameCenterMatchmakingQueue: String? = nil, sort: [Sort]? = nil) {
-				self.limit = limit
+			public init(granularity: Granularity, groupBy: [GroupBy]? = nil, filterGameCenterMatchmakingQueue: String? = nil, sort: [Sort]? = nil, limit: Int? = nil) {
 				self.granularity = granularity
 				self.groupBy = groupBy
 				self.filterGameCenterMatchmakingQueue = filterGameCenterMatchmakingQueue
 				self.sort = sort
+				self.limit = limit
 			}
 
 			public var asQuery: [(String, String?)] {
 				let encoder = URLQueryEncoder(explode: false)
-				encoder.encode(limit, forKey: "limit")
 				encoder.encode(granularity, forKey: "granularity")
 				encoder.encode(groupBy, forKey: "groupBy")
 				encoder.encode(filterGameCenterMatchmakingQueue, forKey: "filter[gameCenterMatchmakingQueue]")
 				encoder.encode(sort, forKey: "sort")
+				encoder.encode(limit, forKey: "limit")
 				return encoder.items
 			}
 		}

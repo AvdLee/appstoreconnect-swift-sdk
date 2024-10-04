@@ -14,7 +14,7 @@ extension APIEndpoint.V1.GameCenterAchievements.WithID {
 		public let path: String
 
 		public func get(parameters: GetParameters? = nil) -> Request<AppStoreConnect_Swift_SDK.GameCenterAchievementReleasesResponse> {
-			Request(path: path, method: "GET", query: parameters?.asQuery, id: "gameCenterAchievements-releases-get_to_many_related")
+			Request(path: path, method: "GET", query: parameters?.asQuery, id: "gameCenterAchievements_releases_getToManyRelated")
 		}
 
 		public struct GetParameters {
@@ -27,44 +27,44 @@ extension APIEndpoint.V1.GameCenterAchievements.WithID {
 			public var include: [Include]?
 
 			public enum FieldsGameCenterAchievementReleases: String, Codable, CaseIterable {
-				case gameCenterAchievement
-				case gameCenterDetail
 				case live
+				case gameCenterDetail
+				case gameCenterAchievement
 			}
 
 			public enum FieldsGameCenterDetails: String, Codable, CaseIterable {
-				case achievementReleases
-				case app
 				case arcadeEnabled
 				case challengeEnabled
-				case defaultGroupLeaderboard
-				case defaultLeaderboard
-				case gameCenterAchievements
+				case app
 				case gameCenterAppVersions
 				case gameCenterGroup
-				case gameCenterLeaderboardSets
 				case gameCenterLeaderboards
+				case gameCenterLeaderboardSets
+				case gameCenterAchievements
+				case defaultLeaderboard
+				case defaultGroupLeaderboard
+				case achievementReleases
 				case leaderboardReleases
 				case leaderboardSetReleases
 			}
 
 			public enum FieldsGameCenterAchievements: String, Codable, CaseIterable {
+				case referenceName
+				case vendorIdentifier
+				case points
+				case showBeforeEarned
+				case repeatable
 				case archived
 				case gameCenterDetail
 				case gameCenterGroup
 				case groupAchievement
 				case localizations
-				case points
-				case referenceName
 				case releases
-				case repeatable
-				case showBeforeEarned
-				case vendorIdentifier
 			}
 
 			public enum Include: String, Codable, CaseIterable {
-				case gameCenterAchievement
 				case gameCenterDetail
+				case gameCenterAchievement
 			}
 
 			public init(filterLive: [String]? = nil, filterGameCenterDetail: [String]? = nil, fieldsGameCenterAchievementReleases: [FieldsGameCenterAchievementReleases]? = nil, fieldsGameCenterDetails: [FieldsGameCenterDetails]? = nil, fieldsGameCenterAchievements: [FieldsGameCenterAchievements]? = nil, limit: Int? = nil, include: [Include]? = nil) {

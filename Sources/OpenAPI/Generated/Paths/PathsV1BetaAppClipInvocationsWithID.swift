@@ -14,7 +14,7 @@ extension APIEndpoint.V1.BetaAppClipInvocations {
 		public let path: String
 
 		public func get(parameters: GetParameters? = nil) -> Request<AppStoreConnect_Swift_SDK.BetaAppClipInvocationResponse> {
-			Request(path: path, method: "GET", query: parameters?.asQuery, id: "betaAppClipInvocations-get_instance")
+			Request(path: path, method: "GET", query: parameters?.asQuery, id: "betaAppClipInvocations_getInstance")
 		}
 
 		public struct GetParameters {
@@ -23,9 +23,9 @@ extension APIEndpoint.V1.BetaAppClipInvocations {
 			public var limitBetaAppClipInvocationLocalizations: Int?
 
 			public enum FieldsBetaAppClipInvocations: String, Codable, CaseIterable {
-				case betaAppClipInvocationLocalizations
-				case buildBundle
 				case url
+				case buildBundle
+				case betaAppClipInvocationLocalizations
 			}
 
 			public enum Include: String, Codable, CaseIterable {
@@ -48,11 +48,11 @@ extension APIEndpoint.V1.BetaAppClipInvocations {
 		}
 
 		public func patch(_ body: AppStoreConnect_Swift_SDK.BetaAppClipInvocationUpdateRequest) -> Request<AppStoreConnect_Swift_SDK.BetaAppClipInvocationResponse> {
-			Request(path: path, method: "PATCH", body: body, id: "betaAppClipInvocations-update_instance")
+			Request(path: path, method: "PATCH", body: body, id: "betaAppClipInvocations_updateInstance")
 		}
 
 		public var delete: Request<Void> {
-			Request(path: path, method: "DELETE", id: "betaAppClipInvocations-delete_instance")
+			Request(path: path, method: "DELETE", id: "betaAppClipInvocations_deleteInstance")
 		}
 	}
 }

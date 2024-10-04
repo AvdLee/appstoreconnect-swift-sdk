@@ -14,7 +14,7 @@ extension APIEndpoint.V1.SubscriptionGroupLocalizations {
 		public let path: String
 
 		public func get(fieldsSubscriptionGroupLocalizations: [FieldsSubscriptionGroupLocalizations]? = nil, include: [Include]? = nil) -> Request<AppStoreConnect_Swift_SDK.SubscriptionGroupLocalizationResponse> {
-			Request(path: path, method: "GET", query: makeGetQuery(fieldsSubscriptionGroupLocalizations, include), id: "subscriptionGroupLocalizations-get_instance")
+			Request(path: path, method: "GET", query: makeGetQuery(fieldsSubscriptionGroupLocalizations, include), id: "subscriptionGroupLocalizations_getInstance")
 		}
 
 		private func makeGetQuery(_ fieldsSubscriptionGroupLocalizations: [FieldsSubscriptionGroupLocalizations]?, _ include: [Include]?) -> [(String, String?)] {
@@ -25,9 +25,9 @@ extension APIEndpoint.V1.SubscriptionGroupLocalizations {
 		}
 
 		public enum FieldsSubscriptionGroupLocalizations: String, Codable, CaseIterable {
+			case name
 			case customAppName
 			case locale
-			case name
 			case state
 			case subscriptionGroup
 		}
@@ -37,11 +37,11 @@ extension APIEndpoint.V1.SubscriptionGroupLocalizations {
 		}
 
 		public func patch(_ body: AppStoreConnect_Swift_SDK.SubscriptionGroupLocalizationUpdateRequest) -> Request<AppStoreConnect_Swift_SDK.SubscriptionGroupLocalizationResponse> {
-			Request(path: path, method: "PATCH", body: body, id: "subscriptionGroupLocalizations-update_instance")
+			Request(path: path, method: "PATCH", body: body, id: "subscriptionGroupLocalizations_updateInstance")
 		}
 
 		public var delete: Request<Void> {
-			Request(path: path, method: "DELETE", id: "subscriptionGroupLocalizations-delete_instance")
+			Request(path: path, method: "DELETE", id: "subscriptionGroupLocalizations_deleteInstance")
 		}
 	}
 }

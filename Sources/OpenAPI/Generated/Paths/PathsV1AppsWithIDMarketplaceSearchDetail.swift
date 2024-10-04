@@ -14,7 +14,7 @@ extension APIEndpoint.V1.Apps.WithID {
 		public let path: String
 
 		public func get(fieldsMarketplaceSearchDetails: [FieldsMarketplaceSearchDetails]? = nil) -> Request<AppStoreConnect_Swift_SDK.MarketplaceSearchDetailResponse> {
-			Request(path: path, method: "GET", query: makeGetQuery(fieldsMarketplaceSearchDetails), id: "apps-marketplaceSearchDetail-get_to_one_related")
+			Request(path: path, method: "GET", query: makeGetQuery(fieldsMarketplaceSearchDetails), id: "apps_marketplaceSearchDetail_getToOneRelated")
 		}
 
 		private func makeGetQuery(_ fieldsMarketplaceSearchDetails: [FieldsMarketplaceSearchDetails]?) -> [(String, String?)] {
@@ -24,8 +24,8 @@ extension APIEndpoint.V1.Apps.WithID {
 		}
 
 		public enum FieldsMarketplaceSearchDetails: String, Codable, CaseIterable {
-			case app
 			case catalogURL = "catalogUrl"
+			case app
 		}
 	}
 }

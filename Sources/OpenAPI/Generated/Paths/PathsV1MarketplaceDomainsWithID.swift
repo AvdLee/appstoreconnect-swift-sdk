@@ -15,7 +15,7 @@ extension APIEndpoint.V1.MarketplaceDomains {
 
 		@available(*, deprecated, message: "Deprecated")
 		public func get(fieldsMarketplaceDomains: [FieldsMarketplaceDomains]? = nil) -> Request<AppStoreConnect_Swift_SDK.MarketplaceDomainResponse> {
-			Request(path: path, method: "GET", query: makeGetQuery(fieldsMarketplaceDomains), id: "marketplaceDomains-get_instance")
+			Request(path: path, method: "GET", query: makeGetQuery(fieldsMarketplaceDomains), id: "marketplaceDomains_getInstance")
 		}
 
 		private func makeGetQuery(_ fieldsMarketplaceDomains: [FieldsMarketplaceDomains]?) -> [(String, String?)] {
@@ -25,14 +25,14 @@ extension APIEndpoint.V1.MarketplaceDomains {
 		}
 
 		public enum FieldsMarketplaceDomains: String, Codable, CaseIterable {
-			case createdDate
 			case domain
 			case referenceName
+			case createdDate
 		}
 
 		@available(*, deprecated, message: "Deprecated")
 		public var delete: Request<Void> {
-			Request(path: path, method: "DELETE", id: "marketplaceDomains-delete_instance")
+			Request(path: path, method: "DELETE", id: "marketplaceDomains_deleteInstance")
 		}
 	}
 }

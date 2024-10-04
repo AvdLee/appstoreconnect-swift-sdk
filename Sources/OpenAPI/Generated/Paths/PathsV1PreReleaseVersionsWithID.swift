@@ -14,115 +14,117 @@ extension APIEndpoint.V1.PreReleaseVersions {
 		public let path: String
 
 		public func get(parameters: GetParameters? = nil) -> Request<AppStoreConnect_Swift_SDK.PrereleaseVersionResponse> {
-			Request(path: path, method: "GET", query: parameters?.asQuery, id: "preReleaseVersions-get_instance")
+			Request(path: path, method: "GET", query: parameters?.asQuery, id: "preReleaseVersions_getInstance")
 		}
 
 		public struct GetParameters {
 			public var fieldsPreReleaseVersions: [FieldsPreReleaseVersions]?
-			public var include: [Include]?
-			public var fieldsApps: [FieldsApps]?
 			public var fieldsBuilds: [FieldsBuilds]?
+			public var fieldsApps: [FieldsApps]?
+			public var include: [Include]?
 			public var limitBuilds: Int?
 
 			public enum FieldsPreReleaseVersions: String, Codable, CaseIterable {
-				case app
-				case builds
-				case platform
 				case version
-			}
-
-			public enum Include: String, Codable, CaseIterable {
+				case platform
+				case builds
 				case app
-				case builds
-			}
-
-			public enum FieldsApps: String, Codable, CaseIterable {
-				case alternativeDistributionKey
-				case analyticsReportRequests
-				case appAvailability
-				case appClips
-				case appCustomProductPages
-				case appEncryptionDeclarations
-				case appEvents
-				case appInfos
-				case appPricePoints
-				case appPriceSchedule
-				case appStoreVersionExperimentsV2
-				case appStoreVersions
-				case betaAppLocalizations
-				case betaAppReviewDetail
-				case betaGroups
-				case betaLicenseAgreement
-				case betaTesters
-				case builds
-				case bundleID = "bundleId"
-				case ciProduct
-				case contentRightsDeclaration
-				case customerReviews
-				case endUserLicenseAgreement
-				case gameCenterDetail
-				case gameCenterEnabledVersions
-				case inAppPurchases
-				case inAppPurchasesV2
-				case isOrEverWasMadeForKids
-				case marketplaceSearchDetail
-				case name
-				case perfPowerMetrics
-				case preOrder
-				case preReleaseVersions
-				case primaryLocale
-				case promotedPurchases
-				case reviewSubmissions
-				case sku
-				case subscriptionGracePeriod
-				case subscriptionGroups
-				case subscriptionStatusURL = "subscriptionStatusUrl"
-				case subscriptionStatusURLForSandbox = "subscriptionStatusUrlForSandbox"
-				case subscriptionStatusURLVersion = "subscriptionStatusUrlVersion"
-				case subscriptionStatusURLVersionForSandbox = "subscriptionStatusUrlVersionForSandbox"
 			}
 
 			public enum FieldsBuilds: String, Codable, CaseIterable {
-				case app
-				case appEncryptionDeclaration
-				case appStoreVersion
-				case betaAppReviewSubmission
-				case betaBuildLocalizations
-				case betaGroups
-				case buildAudienceType
-				case buildBetaDetail
-				case buildBundles
-				case computedMinMacOsVersion
-				case diagnosticSignatures
+				case version
+				case uploadedDate
 				case expirationDate
 				case expired
-				case iconAssetToken
-				case icons
-				case individualTesters
-				case lsMinimumSystemVersion
 				case minOsVersion
-				case perfPowerMetrics
-				case preReleaseVersion
+				case lsMinimumSystemVersion
+				case computedMinMacOsVersion
+				case iconAssetToken
 				case processingState
-				case uploadedDate
+				case buildAudienceType
 				case usesNonExemptEncryption
-				case version
+				case preReleaseVersion
+				case individualTesters
+				case betaGroups
+				case betaBuildLocalizations
+				case appEncryptionDeclaration
+				case betaAppReviewSubmission
+				case app
+				case buildBetaDetail
+				case appStoreVersion
+				case icons
+				case buildBundles
+				case perfPowerMetrics
+				case diagnosticSignatures
 			}
 
-			public init(fieldsPreReleaseVersions: [FieldsPreReleaseVersions]? = nil, include: [Include]? = nil, fieldsApps: [FieldsApps]? = nil, fieldsBuilds: [FieldsBuilds]? = nil, limitBuilds: Int? = nil) {
+			public enum FieldsApps: String, Codable, CaseIterable {
+				case name
+				case bundleID = "bundleId"
+				case sku
+				case primaryLocale
+				case isOrEverWasMadeForKids
+				case subscriptionStatusURL = "subscriptionStatusUrl"
+				case subscriptionStatusURLVersion = "subscriptionStatusUrlVersion"
+				case subscriptionStatusURLForSandbox = "subscriptionStatusUrlForSandbox"
+				case subscriptionStatusURLVersionForSandbox = "subscriptionStatusUrlVersionForSandbox"
+				case contentRightsDeclaration
+				case streamlinedPurchasingEnabled
+				case appEncryptionDeclarations
+				case ciProduct
+				case betaTesters
+				case betaGroups
+				case appStoreVersions
+				case preReleaseVersions
+				case betaAppLocalizations
+				case builds
+				case betaLicenseAgreement
+				case betaAppReviewDetail
+				case appInfos
+				case appClips
+				case appPricePoints
+				case endUserLicenseAgreement
+				case preOrder
+				case appPriceSchedule
+				case appAvailability
+				case appAvailabilityV2
+				case inAppPurchases
+				case subscriptionGroups
+				case gameCenterEnabledVersions
+				case perfPowerMetrics
+				case appCustomProductPages
+				case inAppPurchasesV2
+				case promotedPurchases
+				case appEvents
+				case reviewSubmissions
+				case subscriptionGracePeriod
+				case customerReviews
+				case gameCenterDetail
+				case appStoreVersionExperimentsV2
+				case alternativeDistributionKey
+				case analyticsReportRequests
+				case marketplaceSearchDetail
+			}
+
+			public enum Include: String, Codable, CaseIterable {
+				case builds
+				case app
+			}
+
+			public init(fieldsPreReleaseVersions: [FieldsPreReleaseVersions]? = nil, fieldsBuilds: [FieldsBuilds]? = nil, fieldsApps: [FieldsApps]? = nil, include: [Include]? = nil, limitBuilds: Int? = nil) {
 				self.fieldsPreReleaseVersions = fieldsPreReleaseVersions
-				self.include = include
-				self.fieldsApps = fieldsApps
 				self.fieldsBuilds = fieldsBuilds
+				self.fieldsApps = fieldsApps
+				self.include = include
 				self.limitBuilds = limitBuilds
 			}
 
 			public var asQuery: [(String, String?)] {
 				let encoder = URLQueryEncoder(explode: false)
 				encoder.encode(fieldsPreReleaseVersions, forKey: "fields[preReleaseVersions]")
-				encoder.encode(include, forKey: "include")
-				encoder.encode(fieldsApps, forKey: "fields[apps]")
 				encoder.encode(fieldsBuilds, forKey: "fields[builds]")
+				encoder.encode(fieldsApps, forKey: "fields[apps]")
+				encoder.encode(include, forKey: "include")
 				encoder.encode(limitBuilds, forKey: "limit[builds]")
 				return encoder.items
 			}

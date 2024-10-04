@@ -14,158 +14,158 @@ extension APIEndpoint.V1.CiBuildActions.WithID {
 		public let path: String
 
 		public func get(parameters: GetParameters? = nil) -> Request<AppStoreConnect_Swift_SDK.CiBuildRunResponse> {
-			Request(path: path, method: "GET", query: parameters?.asQuery, id: "ciBuildActions-buildRun-get_to_one_related")
+			Request(path: path, method: "GET", query: parameters?.asQuery, id: "ciBuildActions_buildRun_getToOneRelated")
 		}
 
 		public struct GetParameters {
-			public var fieldsScmGitReferences: [FieldsScmGitReferences]?
 			public var fieldsCiBuildRuns: [FieldsCiBuildRuns]?
-			public var fieldsCiWorkflows: [FieldsCiWorkflows]?
-			public var fieldsScmPullRequests: [FieldsScmPullRequests]?
-			public var fieldsCiProducts: [FieldsCiProducts]?
 			public var fieldsBuilds: [FieldsBuilds]?
-			public var limitBuilds: Int?
+			public var fieldsCiWorkflows: [FieldsCiWorkflows]?
+			public var fieldsCiProducts: [FieldsCiProducts]?
+			public var fieldsScmGitReferences: [FieldsScmGitReferences]?
+			public var fieldsScmPullRequests: [FieldsScmPullRequests]?
 			public var include: [Include]?
-
-			public enum FieldsScmGitReferences: String, Codable, CaseIterable {
-				case canonicalName
-				case isDeleted
-				case kind
-				case name
-				case repository
-			}
+			public var limitBuilds: Int?
 
 			public enum FieldsCiBuildRuns: String, Codable, CaseIterable {
-				case actions
-				case buildRun
-				case builds
-				case cancelReason
 				case clean
-				case completionStatus
+				case number
 				case createdDate
-				case destinationBranch
-				case destinationCommit
-				case executionProgress
+				case startedDate
 				case finishedDate
+				case sourceCommit
+				case destinationCommit
 				case isPullRequestBuild
 				case issueCounts
-				case number
-				case product
-				case pullRequest
-				case sourceBranchOrTag
-				case sourceCommit
+				case executionProgress
+				case completionStatus
 				case startReason
-				case startedDate
+				case cancelReason
+				case buildRun
+				case builds
 				case workflow
-			}
-
-			public enum FieldsCiWorkflows: String, Codable, CaseIterable {
-				case actions
-				case branchStartCondition
-				case buildRuns
-				case clean
-				case containerFilePath
-				case description
-				case isEnabled
-				case isLockedForEditing
-				case lastModifiedDate
-				case macOsVersion
-				case manualBranchStartCondition
-				case manualPullRequestStartCondition
-				case manualTagStartCondition
-				case name
 				case product
-				case pullRequestStartCondition
-				case repository
-				case scheduledStartCondition
-				case tagStartCondition
-				case xcodeVersion
-			}
-
-			public enum FieldsScmPullRequests: String, Codable, CaseIterable {
-				case destinationBranchName
-				case destinationRepositoryName
-				case destinationRepositoryOwner
-				case isClosed
-				case isCrossRepository
-				case number
-				case repository
-				case sourceBranchName
-				case sourceRepositoryName
-				case sourceRepositoryOwner
-				case title
-				case webURL = "webUrl"
-			}
-
-			public enum FieldsCiProducts: String, Codable, CaseIterable {
-				case additionalRepositories
-				case app
-				case buildRuns
-				case bundleID = "bundleId"
-				case createdDate
-				case name
-				case primaryRepositories
-				case productType
-				case workflows
+				case sourceBranchOrTag
+				case destinationBranch
+				case actions
+				case pullRequest
 			}
 
 			public enum FieldsBuilds: String, Codable, CaseIterable {
-				case app
-				case appEncryptionDeclaration
-				case appStoreVersion
-				case betaAppReviewSubmission
-				case betaBuildLocalizations
-				case betaGroups
-				case buildAudienceType
-				case buildBetaDetail
-				case buildBundles
-				case computedMinMacOsVersion
-				case diagnosticSignatures
+				case version
+				case uploadedDate
 				case expirationDate
 				case expired
-				case iconAssetToken
-				case icons
-				case individualTesters
-				case lsMinimumSystemVersion
 				case minOsVersion
-				case perfPowerMetrics
-				case preReleaseVersion
+				case lsMinimumSystemVersion
+				case computedMinMacOsVersion
+				case iconAssetToken
 				case processingState
-				case uploadedDate
+				case buildAudienceType
 				case usesNonExemptEncryption
-				case version
+				case preReleaseVersion
+				case individualTesters
+				case betaGroups
+				case betaBuildLocalizations
+				case appEncryptionDeclaration
+				case betaAppReviewSubmission
+				case app
+				case buildBetaDetail
+				case appStoreVersion
+				case icons
+				case buildBundles
+				case perfPowerMetrics
+				case diagnosticSignatures
+			}
+
+			public enum FieldsCiWorkflows: String, Codable, CaseIterable {
+				case name
+				case description
+				case branchStartCondition
+				case tagStartCondition
+				case pullRequestStartCondition
+				case scheduledStartCondition
+				case manualBranchStartCondition
+				case manualTagStartCondition
+				case manualPullRequestStartCondition
+				case actions
+				case isEnabled
+				case isLockedForEditing
+				case clean
+				case containerFilePath
+				case lastModifiedDate
+				case product
+				case repository
+				case xcodeVersion
+				case macOsVersion
+				case buildRuns
+			}
+
+			public enum FieldsCiProducts: String, Codable, CaseIterable {
+				case name
+				case createdDate
+				case productType
+				case app
+				case bundleID = "bundleId"
+				case workflows
+				case primaryRepositories
+				case additionalRepositories
+				case buildRuns
+			}
+
+			public enum FieldsScmGitReferences: String, Codable, CaseIterable {
+				case name
+				case canonicalName
+				case isDeleted
+				case kind
+				case repository
+			}
+
+			public enum FieldsScmPullRequests: String, Codable, CaseIterable {
+				case title
+				case number
+				case webURL = "webUrl"
+				case sourceRepositoryOwner
+				case sourceRepositoryName
+				case sourceBranchName
+				case destinationRepositoryOwner
+				case destinationRepositoryName
+				case destinationBranchName
+				case isClosed
+				case isCrossRepository
+				case repository
 			}
 
 			public enum Include: String, Codable, CaseIterable {
 				case builds
-				case destinationBranch
-				case product
-				case pullRequest
-				case sourceBranchOrTag
 				case workflow
+				case product
+				case sourceBranchOrTag
+				case destinationBranch
+				case pullRequest
 			}
 
-			public init(fieldsScmGitReferences: [FieldsScmGitReferences]? = nil, fieldsCiBuildRuns: [FieldsCiBuildRuns]? = nil, fieldsCiWorkflows: [FieldsCiWorkflows]? = nil, fieldsScmPullRequests: [FieldsScmPullRequests]? = nil, fieldsCiProducts: [FieldsCiProducts]? = nil, fieldsBuilds: [FieldsBuilds]? = nil, limitBuilds: Int? = nil, include: [Include]? = nil) {
-				self.fieldsScmGitReferences = fieldsScmGitReferences
+			public init(fieldsCiBuildRuns: [FieldsCiBuildRuns]? = nil, fieldsBuilds: [FieldsBuilds]? = nil, fieldsCiWorkflows: [FieldsCiWorkflows]? = nil, fieldsCiProducts: [FieldsCiProducts]? = nil, fieldsScmGitReferences: [FieldsScmGitReferences]? = nil, fieldsScmPullRequests: [FieldsScmPullRequests]? = nil, include: [Include]? = nil, limitBuilds: Int? = nil) {
 				self.fieldsCiBuildRuns = fieldsCiBuildRuns
-				self.fieldsCiWorkflows = fieldsCiWorkflows
-				self.fieldsScmPullRequests = fieldsScmPullRequests
-				self.fieldsCiProducts = fieldsCiProducts
 				self.fieldsBuilds = fieldsBuilds
-				self.limitBuilds = limitBuilds
+				self.fieldsCiWorkflows = fieldsCiWorkflows
+				self.fieldsCiProducts = fieldsCiProducts
+				self.fieldsScmGitReferences = fieldsScmGitReferences
+				self.fieldsScmPullRequests = fieldsScmPullRequests
 				self.include = include
+				self.limitBuilds = limitBuilds
 			}
 
 			public var asQuery: [(String, String?)] {
 				let encoder = URLQueryEncoder(explode: false)
-				encoder.encode(fieldsScmGitReferences, forKey: "fields[scmGitReferences]")
 				encoder.encode(fieldsCiBuildRuns, forKey: "fields[ciBuildRuns]")
-				encoder.encode(fieldsCiWorkflows, forKey: "fields[ciWorkflows]")
-				encoder.encode(fieldsScmPullRequests, forKey: "fields[scmPullRequests]")
-				encoder.encode(fieldsCiProducts, forKey: "fields[ciProducts]")
 				encoder.encode(fieldsBuilds, forKey: "fields[builds]")
-				encoder.encode(limitBuilds, forKey: "limit[builds]")
+				encoder.encode(fieldsCiWorkflows, forKey: "fields[ciWorkflows]")
+				encoder.encode(fieldsCiProducts, forKey: "fields[ciProducts]")
+				encoder.encode(fieldsScmGitReferences, forKey: "fields[scmGitReferences]")
+				encoder.encode(fieldsScmPullRequests, forKey: "fields[scmPullRequests]")
 				encoder.encode(include, forKey: "include")
+				encoder.encode(limitBuilds, forKey: "limit[builds]")
 				return encoder.items
 			}
 		}

@@ -14,62 +14,62 @@ extension APIEndpoint.V1.AppStoreReviewDetails {
 		public let path: String
 
 		public func get(parameters: GetParameters? = nil) -> Request<AppStoreConnect_Swift_SDK.AppStoreReviewDetailResponse> {
-			Request(path: path, method: "GET", query: parameters?.asQuery, id: "appStoreReviewDetails-get_instance")
+			Request(path: path, method: "GET", query: parameters?.asQuery, id: "appStoreReviewDetails_getInstance")
 		}
 
 		public struct GetParameters {
 			public var fieldsAppStoreReviewDetails: [FieldsAppStoreReviewDetails]?
-			public var include: [Include]?
 			public var fieldsAppStoreReviewAttachments: [FieldsAppStoreReviewAttachments]?
+			public var include: [Include]?
 			public var limitAppStoreReviewAttachments: Int?
 
 			public enum FieldsAppStoreReviewDetails: String, Codable, CaseIterable {
-				case appStoreReviewAttachments
-				case appStoreVersion
-				case contactEmail
 				case contactFirstName
 				case contactLastName
 				case contactPhone
+				case contactEmail
 				case demoAccountName
 				case demoAccountPassword
 				case demoAccountRequired
 				case notes
-			}
-
-			public enum Include: String, Codable, CaseIterable {
-				case appStoreReviewAttachments
 				case appStoreVersion
+				case appStoreReviewAttachments
 			}
 
 			public enum FieldsAppStoreReviewAttachments: String, Codable, CaseIterable {
-				case appStoreReviewDetail
-				case assetDeliveryState
-				case fileName
 				case fileSize
+				case fileName
 				case sourceFileChecksum
 				case uploadOperations
+				case assetDeliveryState
 				case uploaded
+				case appStoreReviewDetail
 			}
 
-			public init(fieldsAppStoreReviewDetails: [FieldsAppStoreReviewDetails]? = nil, include: [Include]? = nil, fieldsAppStoreReviewAttachments: [FieldsAppStoreReviewAttachments]? = nil, limitAppStoreReviewAttachments: Int? = nil) {
+			public enum Include: String, Codable, CaseIterable {
+				case appStoreVersion
+				case appStoreReviewAttachments
+			}
+
+			public init(fieldsAppStoreReviewDetails: [FieldsAppStoreReviewDetails]? = nil, fieldsAppStoreReviewAttachments: [FieldsAppStoreReviewAttachments]? = nil, include: [Include]? = nil, limitAppStoreReviewAttachments: Int? = nil) {
 				self.fieldsAppStoreReviewDetails = fieldsAppStoreReviewDetails
-				self.include = include
 				self.fieldsAppStoreReviewAttachments = fieldsAppStoreReviewAttachments
+				self.include = include
 				self.limitAppStoreReviewAttachments = limitAppStoreReviewAttachments
 			}
 
 			public var asQuery: [(String, String?)] {
 				let encoder = URLQueryEncoder(explode: false)
 				encoder.encode(fieldsAppStoreReviewDetails, forKey: "fields[appStoreReviewDetails]")
-				encoder.encode(include, forKey: "include")
 				encoder.encode(fieldsAppStoreReviewAttachments, forKey: "fields[appStoreReviewAttachments]")
+				encoder.encode(include, forKey: "include")
 				encoder.encode(limitAppStoreReviewAttachments, forKey: "limit[appStoreReviewAttachments]")
 				return encoder.items
 			}
 		}
 
 		public func patch(_ body: AppStoreConnect_Swift_SDK.AppStoreReviewDetailUpdateRequest) -> Request<AppStoreConnect_Swift_SDK.AppStoreReviewDetailResponse> {
-			Request(path: path, method: "PATCH", body: body, id: "appStoreReviewDetails-update_instance")
+			Request(path: path, method: "PATCH", body: body, id: "appStoreReviewDetails_updateInstance")
 		}
 	}
 }

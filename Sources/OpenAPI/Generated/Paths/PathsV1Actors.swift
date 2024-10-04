@@ -14,7 +14,7 @@ extension APIEndpoint.V1 {
 		public let path: String
 
 		public func get(parameters: GetParameters) -> Request<AppStoreConnect_Swift_SDK.ActorsResponse> {
-			Request(path: path, method: "GET", query: parameters.asQuery, id: "actors-get_collection")
+			Request(path: path, method: "GET", query: parameters.asQuery, id: "actors_getCollection")
 		}
 
 		public struct GetParameters {
@@ -24,10 +24,10 @@ extension APIEndpoint.V1 {
 
 			public enum FieldsActors: String, Codable, CaseIterable {
 				case actorType
-				case apiKeyID = "apiKeyId"
-				case userEmail
 				case userFirstName
 				case userLastName
+				case userEmail
+				case apiKeyID = "apiKeyId"
 			}
 
 			public init(filterID: [String], fieldsActors: [FieldsActors]? = nil, limit: Int? = nil) {

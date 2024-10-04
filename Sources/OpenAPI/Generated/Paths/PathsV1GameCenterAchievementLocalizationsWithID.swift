@@ -14,22 +14,46 @@ extension APIEndpoint.V1.GameCenterAchievementLocalizations {
 		public let path: String
 
 		public func get(parameters: GetParameters? = nil) -> Request<AppStoreConnect_Swift_SDK.GameCenterAchievementLocalizationResponse> {
-			Request(path: path, method: "GET", query: parameters?.asQuery, id: "gameCenterAchievementLocalizations-get_instance")
+			Request(path: path, method: "GET", query: parameters?.asQuery, id: "gameCenterAchievementLocalizations_getInstance")
 		}
 
 		public struct GetParameters {
 			public var fieldsGameCenterAchievementLocalizations: [FieldsGameCenterAchievementLocalizations]?
-			public var include: [Include]?
-			public var fieldsGameCenterAchievementImages: [FieldsGameCenterAchievementImages]?
 			public var fieldsGameCenterAchievements: [FieldsGameCenterAchievements]?
+			public var fieldsGameCenterAchievementImages: [FieldsGameCenterAchievementImages]?
+			public var include: [Include]?
 
 			public enum FieldsGameCenterAchievementLocalizations: String, Codable, CaseIterable {
-				case afterEarnedDescription
-				case beforeEarnedDescription
-				case gameCenterAchievement
-				case gameCenterAchievementImage
 				case locale
 				case name
+				case beforeEarnedDescription
+				case afterEarnedDescription
+				case gameCenterAchievement
+				case gameCenterAchievementImage
+			}
+
+			public enum FieldsGameCenterAchievements: String, Codable, CaseIterable {
+				case referenceName
+				case vendorIdentifier
+				case points
+				case showBeforeEarned
+				case repeatable
+				case archived
+				case gameCenterDetail
+				case gameCenterGroup
+				case groupAchievement
+				case localizations
+				case releases
+			}
+
+			public enum FieldsGameCenterAchievementImages: String, Codable, CaseIterable {
+				case fileSize
+				case fileName
+				case imageAsset
+				case uploadOperations
+				case assetDeliveryState
+				case uploaded
+				case gameCenterAchievementLocalization
 			}
 
 			public enum Include: String, Codable, CaseIterable {
@@ -37,53 +61,29 @@ extension APIEndpoint.V1.GameCenterAchievementLocalizations {
 				case gameCenterAchievementImage
 			}
 
-			public enum FieldsGameCenterAchievementImages: String, Codable, CaseIterable {
-				case assetDeliveryState
-				case fileName
-				case fileSize
-				case gameCenterAchievementLocalization
-				case imageAsset
-				case uploadOperations
-				case uploaded
-			}
-
-			public enum FieldsGameCenterAchievements: String, Codable, CaseIterable {
-				case archived
-				case gameCenterDetail
-				case gameCenterGroup
-				case groupAchievement
-				case localizations
-				case points
-				case referenceName
-				case releases
-				case repeatable
-				case showBeforeEarned
-				case vendorIdentifier
-			}
-
-			public init(fieldsGameCenterAchievementLocalizations: [FieldsGameCenterAchievementLocalizations]? = nil, include: [Include]? = nil, fieldsGameCenterAchievementImages: [FieldsGameCenterAchievementImages]? = nil, fieldsGameCenterAchievements: [FieldsGameCenterAchievements]? = nil) {
+			public init(fieldsGameCenterAchievementLocalizations: [FieldsGameCenterAchievementLocalizations]? = nil, fieldsGameCenterAchievements: [FieldsGameCenterAchievements]? = nil, fieldsGameCenterAchievementImages: [FieldsGameCenterAchievementImages]? = nil, include: [Include]? = nil) {
 				self.fieldsGameCenterAchievementLocalizations = fieldsGameCenterAchievementLocalizations
-				self.include = include
-				self.fieldsGameCenterAchievementImages = fieldsGameCenterAchievementImages
 				self.fieldsGameCenterAchievements = fieldsGameCenterAchievements
+				self.fieldsGameCenterAchievementImages = fieldsGameCenterAchievementImages
+				self.include = include
 			}
 
 			public var asQuery: [(String, String?)] {
 				let encoder = URLQueryEncoder(explode: false)
 				encoder.encode(fieldsGameCenterAchievementLocalizations, forKey: "fields[gameCenterAchievementLocalizations]")
-				encoder.encode(include, forKey: "include")
-				encoder.encode(fieldsGameCenterAchievementImages, forKey: "fields[gameCenterAchievementImages]")
 				encoder.encode(fieldsGameCenterAchievements, forKey: "fields[gameCenterAchievements]")
+				encoder.encode(fieldsGameCenterAchievementImages, forKey: "fields[gameCenterAchievementImages]")
+				encoder.encode(include, forKey: "include")
 				return encoder.items
 			}
 		}
 
 		public func patch(_ body: AppStoreConnect_Swift_SDK.GameCenterAchievementLocalizationUpdateRequest) -> Request<AppStoreConnect_Swift_SDK.GameCenterAchievementLocalizationResponse> {
-			Request(path: path, method: "PATCH", body: body, id: "gameCenterAchievementLocalizations-update_instance")
+			Request(path: path, method: "PATCH", body: body, id: "gameCenterAchievementLocalizations_updateInstance")
 		}
 
 		public var delete: Request<Void> {
-			Request(path: path, method: "DELETE", id: "gameCenterAchievementLocalizations-delete_instance")
+			Request(path: path, method: "DELETE", id: "gameCenterAchievementLocalizations_deleteInstance")
 		}
 	}
 }

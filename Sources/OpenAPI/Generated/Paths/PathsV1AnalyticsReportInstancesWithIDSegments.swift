@@ -14,7 +14,7 @@ extension APIEndpoint.V1.AnalyticsReportInstances.WithID {
 		public let path: String
 
 		public func get(fieldsAnalyticsReportSegments: [FieldsAnalyticsReportSegments]? = nil, limit: Int? = nil) -> Request<AppStoreConnect_Swift_SDK.AnalyticsReportSegmentsResponse> {
-			Request(path: path, method: "GET", query: makeGetQuery(fieldsAnalyticsReportSegments, limit), id: "analyticsReportInstances-segments-get_to_many_related")
+			Request(path: path, method: "GET", query: makeGetQuery(fieldsAnalyticsReportSegments, limit), id: "analyticsReportInstances_segments_getToManyRelated")
 		}
 
 		private func makeGetQuery(_ fieldsAnalyticsReportSegments: [FieldsAnalyticsReportSegments]?, _ limit: Int?) -> [(String, String?)] {

@@ -14,18 +14,18 @@ extension APIEndpoint.V1 {
 		public let path: String
 
 		public func get(parameters: GetParameters? = nil) -> Request<AppStoreConnect_Swift_SDK.UsersResponse> {
-			Request(path: path, method: "GET", query: parameters?.asQuery, id: "users-get_collection")
+			Request(path: path, method: "GET", query: parameters?.asQuery, id: "users_getCollection")
 		}
 
 		public struct GetParameters {
-			public var filterRoles: [FilterRoles]?
 			public var filterUsername: [String]?
+			public var filterRoles: [FilterRoles]?
 			public var filterVisibleApps: [String]?
 			public var sort: [Sort]?
 			public var fieldsUsers: [FieldsUsers]?
+			public var fieldsApps: [FieldsApps]?
 			public var limit: Int?
 			public var include: [Include]?
-			public var fieldsApps: [FieldsApps]?
 			public var limitVisibleApps: Int?
 
 			public enum FilterRoles: String, Codable, CaseIterable {
@@ -45,94 +45,96 @@ extension APIEndpoint.V1 {
 			}
 
 			public enum Sort: String, Codable, CaseIterable {
-				case lastName
-				case minuslastName = "-lastName"
 				case username
 				case minususername = "-username"
+				case lastName
+				case minuslastName = "-lastName"
 			}
 
 			public enum FieldsUsers: String, Codable, CaseIterable {
-				case allAppsVisible
+				case username
 				case firstName
 				case lastName
-				case provisioningAllowed
 				case roles
-				case username
+				case allAppsVisible
+				case provisioningAllowed
 				case visibleApps
+			}
+
+			public enum FieldsApps: String, Codable, CaseIterable {
+				case name
+				case bundleID = "bundleId"
+				case sku
+				case primaryLocale
+				case isOrEverWasMadeForKids
+				case subscriptionStatusURL = "subscriptionStatusUrl"
+				case subscriptionStatusURLVersion = "subscriptionStatusUrlVersion"
+				case subscriptionStatusURLForSandbox = "subscriptionStatusUrlForSandbox"
+				case subscriptionStatusURLVersionForSandbox = "subscriptionStatusUrlVersionForSandbox"
+				case contentRightsDeclaration
+				case streamlinedPurchasingEnabled
+				case appEncryptionDeclarations
+				case ciProduct
+				case betaTesters
+				case betaGroups
+				case appStoreVersions
+				case preReleaseVersions
+				case betaAppLocalizations
+				case builds
+				case betaLicenseAgreement
+				case betaAppReviewDetail
+				case appInfos
+				case appClips
+				case appPricePoints
+				case endUserLicenseAgreement
+				case preOrder
+				case appPriceSchedule
+				case appAvailability
+				case appAvailabilityV2
+				case inAppPurchases
+				case subscriptionGroups
+				case gameCenterEnabledVersions
+				case perfPowerMetrics
+				case appCustomProductPages
+				case inAppPurchasesV2
+				case promotedPurchases
+				case appEvents
+				case reviewSubmissions
+				case subscriptionGracePeriod
+				case customerReviews
+				case gameCenterDetail
+				case appStoreVersionExperimentsV2
+				case alternativeDistributionKey
+				case analyticsReportRequests
+				case marketplaceSearchDetail
 			}
 
 			public enum Include: String, Codable, CaseIterable {
 				case visibleApps
 			}
 
-			public enum FieldsApps: String, Codable, CaseIterable {
-				case alternativeDistributionKey
-				case analyticsReportRequests
-				case appAvailability
-				case appClips
-				case appCustomProductPages
-				case appEncryptionDeclarations
-				case appEvents
-				case appInfos
-				case appPricePoints
-				case appPriceSchedule
-				case appStoreVersionExperimentsV2
-				case appStoreVersions
-				case betaAppLocalizations
-				case betaAppReviewDetail
-				case betaGroups
-				case betaLicenseAgreement
-				case betaTesters
-				case builds
-				case bundleID = "bundleId"
-				case ciProduct
-				case contentRightsDeclaration
-				case customerReviews
-				case endUserLicenseAgreement
-				case gameCenterDetail
-				case gameCenterEnabledVersions
-				case inAppPurchases
-				case inAppPurchasesV2
-				case isOrEverWasMadeForKids
-				case marketplaceSearchDetail
-				case name
-				case perfPowerMetrics
-				case preOrder
-				case preReleaseVersions
-				case primaryLocale
-				case promotedPurchases
-				case reviewSubmissions
-				case sku
-				case subscriptionGracePeriod
-				case subscriptionGroups
-				case subscriptionStatusURL = "subscriptionStatusUrl"
-				case subscriptionStatusURLForSandbox = "subscriptionStatusUrlForSandbox"
-				case subscriptionStatusURLVersion = "subscriptionStatusUrlVersion"
-				case subscriptionStatusURLVersionForSandbox = "subscriptionStatusUrlVersionForSandbox"
-			}
-
-			public init(filterRoles: [FilterRoles]? = nil, filterUsername: [String]? = nil, filterVisibleApps: [String]? = nil, sort: [Sort]? = nil, fieldsUsers: [FieldsUsers]? = nil, limit: Int? = nil, include: [Include]? = nil, fieldsApps: [FieldsApps]? = nil, limitVisibleApps: Int? = nil) {
-				self.filterRoles = filterRoles
+			public init(filterUsername: [String]? = nil, filterRoles: [FilterRoles]? = nil, filterVisibleApps: [String]? = nil, sort: [Sort]? = nil, fieldsUsers: [FieldsUsers]? = nil, fieldsApps: [FieldsApps]? = nil, limit: Int? = nil, include: [Include]? = nil, limitVisibleApps: Int? = nil) {
 				self.filterUsername = filterUsername
+				self.filterRoles = filterRoles
 				self.filterVisibleApps = filterVisibleApps
 				self.sort = sort
 				self.fieldsUsers = fieldsUsers
+				self.fieldsApps = fieldsApps
 				self.limit = limit
 				self.include = include
-				self.fieldsApps = fieldsApps
 				self.limitVisibleApps = limitVisibleApps
 			}
 
 			public var asQuery: [(String, String?)] {
 				let encoder = URLQueryEncoder(explode: false)
-				encoder.encode(filterRoles, forKey: "filter[roles]")
 				encoder.encode(filterUsername, forKey: "filter[username]")
+				encoder.encode(filterRoles, forKey: "filter[roles]")
 				encoder.encode(filterVisibleApps, forKey: "filter[visibleApps]")
 				encoder.encode(sort, forKey: "sort")
 				encoder.encode(fieldsUsers, forKey: "fields[users]")
+				encoder.encode(fieldsApps, forKey: "fields[apps]")
 				encoder.encode(limit, forKey: "limit")
 				encoder.encode(include, forKey: "include")
-				encoder.encode(fieldsApps, forKey: "fields[apps]")
 				encoder.encode(limitVisibleApps, forKey: "limit[visibleApps]")
 				return encoder.items
 			}

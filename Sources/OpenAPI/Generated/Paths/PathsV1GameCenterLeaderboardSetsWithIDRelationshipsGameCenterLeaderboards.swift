@@ -14,7 +14,7 @@ extension APIEndpoint.V1.GameCenterLeaderboardSets.WithID.Relationships {
 		public let path: String
 
 		public func get(limit: Int? = nil) -> Request<AppStoreConnect_Swift_SDK.GameCenterLeaderboardSetGameCenterLeaderboardsLinkagesResponse> {
-			Request(path: path, method: "GET", query: makeGetQuery(limit), id: "gameCenterLeaderboardSets-gameCenterLeaderboards-get_to_many_relationship")
+			Request(path: path, method: "GET", query: makeGetQuery(limit), id: "gameCenterLeaderboardSets_gameCenterLeaderboards_getToManyRelationship")
 		}
 
 		private func makeGetQuery(_ limit: Int?) -> [(String, String?)] {
@@ -24,15 +24,15 @@ extension APIEndpoint.V1.GameCenterLeaderboardSets.WithID.Relationships {
 		}
 
 		public func post(_ body: AppStoreConnect_Swift_SDK.GameCenterLeaderboardSetGameCenterLeaderboardsLinkagesRequest) -> Request<Void> {
-			Request(path: path, method: "POST", body: body, id: "gameCenterLeaderboardSets-gameCenterLeaderboards-create_to_many_relationship")
+			Request(path: path, method: "POST", body: body, id: "gameCenterLeaderboardSets_gameCenterLeaderboards_createToManyRelationship")
 		}
 
 		public func patch(_ body: AppStoreConnect_Swift_SDK.GameCenterLeaderboardSetGameCenterLeaderboardsLinkagesRequest) -> Request<Void> {
-			Request(path: path, method: "PATCH", body: body, id: "gameCenterLeaderboardSets-gameCenterLeaderboards-replace_to_many_relationship")
+			Request(path: path, method: "PATCH", body: body, id: "gameCenterLeaderboardSets_gameCenterLeaderboards_replaceToManyRelationship")
 		}
 
 		public func delete(_ body: AppStoreConnect_Swift_SDK.GameCenterLeaderboardSetGameCenterLeaderboardsLinkagesRequest) -> Request<Void> {
-			Request(path: path, method: "DELETE", body: body, id: "gameCenterLeaderboardSets-gameCenterLeaderboards-delete_to_many_relationship")
+			Request(path: path, method: "DELETE", body: body, id: "gameCenterLeaderboardSets_gameCenterLeaderboards_deleteToManyRelationship")
 		}
 	}
 }

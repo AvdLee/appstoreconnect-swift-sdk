@@ -14,7 +14,7 @@ extension APIEndpoint.V1 {
 		public let path: String
 
 		public func post(_ body: AppStoreConnect_Swift_SDK.MarketplaceSearchDetailCreateRequest) -> Request<AppStoreConnect_Swift_SDK.MarketplaceSearchDetailResponse> {
-			Request(path: path, method: "POST", body: body, id: "marketplaceSearchDetails-create_instance")
+			Request(path: path, method: "POST", body: body, id: "marketplaceSearchDetails_createInstance")
 		}
 	}
 }

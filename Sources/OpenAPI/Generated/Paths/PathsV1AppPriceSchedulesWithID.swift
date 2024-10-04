@@ -14,48 +14,48 @@ extension APIEndpoint.V1.AppPriceSchedules {
 		public let path: String
 
 		public func get(parameters: GetParameters? = nil) -> Request<AppStoreConnect_Swift_SDK.AppPriceScheduleResponse> {
-			Request(path: path, method: "GET", query: parameters?.asQuery, id: "appPriceSchedules-get_instance")
+			Request(path: path, method: "GET", query: parameters?.asQuery, id: "appPriceSchedules_getInstance")
 		}
 
 		public struct GetParameters {
 			public var fieldsAppPriceSchedules: [FieldsAppPriceSchedules]?
-			public var include: [Include]?
-			public var fieldsAppPrices: [FieldsAppPrices]?
 			public var fieldsTerritories: [FieldsTerritories]?
+			public var fieldsAppPrices: [FieldsAppPrices]?
+			public var include: [Include]?
 			public var limitAutomaticPrices: Int?
 			public var limitManualPrices: Int?
 
 			public enum FieldsAppPriceSchedules: String, Codable, CaseIterable {
 				case app
-				case automaticPrices
 				case baseTerritory
 				case manualPrices
-			}
-
-			public enum Include: String, Codable, CaseIterable {
-				case app
 				case automaticPrices
-				case baseTerritory
-				case manualPrices
-			}
-
-			public enum FieldsAppPrices: String, Codable, CaseIterable {
-				case appPricePoint
-				case endDate
-				case manual
-				case startDate
-				case territory
 			}
 
 			public enum FieldsTerritories: String, Codable, CaseIterable {
 				case currency
 			}
 
-			public init(fieldsAppPriceSchedules: [FieldsAppPriceSchedules]? = nil, include: [Include]? = nil, fieldsAppPrices: [FieldsAppPrices]? = nil, fieldsTerritories: [FieldsTerritories]? = nil, limitAutomaticPrices: Int? = nil, limitManualPrices: Int? = nil) {
+			public enum FieldsAppPrices: String, Codable, CaseIterable {
+				case manual
+				case startDate
+				case endDate
+				case appPricePoint
+				case territory
+			}
+
+			public enum Include: String, Codable, CaseIterable {
+				case app
+				case baseTerritory
+				case manualPrices
+				case automaticPrices
+			}
+
+			public init(fieldsAppPriceSchedules: [FieldsAppPriceSchedules]? = nil, fieldsTerritories: [FieldsTerritories]? = nil, fieldsAppPrices: [FieldsAppPrices]? = nil, include: [Include]? = nil, limitAutomaticPrices: Int? = nil, limitManualPrices: Int? = nil) {
 				self.fieldsAppPriceSchedules = fieldsAppPriceSchedules
-				self.include = include
-				self.fieldsAppPrices = fieldsAppPrices
 				self.fieldsTerritories = fieldsTerritories
+				self.fieldsAppPrices = fieldsAppPrices
+				self.include = include
 				self.limitAutomaticPrices = limitAutomaticPrices
 				self.limitManualPrices = limitManualPrices
 			}
@@ -63,9 +63,9 @@ extension APIEndpoint.V1.AppPriceSchedules {
 			public var asQuery: [(String, String?)] {
 				let encoder = URLQueryEncoder(explode: false)
 				encoder.encode(fieldsAppPriceSchedules, forKey: "fields[appPriceSchedules]")
-				encoder.encode(include, forKey: "include")
-				encoder.encode(fieldsAppPrices, forKey: "fields[appPrices]")
 				encoder.encode(fieldsTerritories, forKey: "fields[territories]")
+				encoder.encode(fieldsAppPrices, forKey: "fields[appPrices]")
+				encoder.encode(include, forKey: "include")
 				encoder.encode(limitAutomaticPrices, forKey: "limit[automaticPrices]")
 				encoder.encode(limitManualPrices, forKey: "limit[manualPrices]")
 				return encoder.items

@@ -14,11 +14,11 @@ extension APIEndpoint.V1.MarketplaceWebhooks {
 		public let path: String
 
 		public func patch(_ body: AppStoreConnect_Swift_SDK.MarketplaceWebhookUpdateRequest) -> Request<AppStoreConnect_Swift_SDK.MarketplaceWebhookResponse> {
-			Request(path: path, method: "PATCH", body: body, id: "marketplaceWebhooks-update_instance")
+			Request(path: path, method: "PATCH", body: body, id: "marketplaceWebhooks_updateInstance")
 		}
 
 		public var delete: Request<Void> {
-			Request(path: path, method: "DELETE", id: "marketplaceWebhooks-delete_instance")
+			Request(path: path, method: "DELETE", id: "marketplaceWebhooks_deleteInstance")
 		}
 	}
 }

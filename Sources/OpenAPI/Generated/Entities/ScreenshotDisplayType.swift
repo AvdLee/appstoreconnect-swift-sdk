@@ -19,6 +19,7 @@ public enum ScreenshotDisplayType: String, Codable, CaseIterable {
 	case appIpad97 = "APP_IPAD_97"
 	case appDesktop = "APP_DESKTOP"
 	case appWatchUltra = "APP_WATCH_ULTRA"
+	case appWatchSeries10 = "APP_WATCH_SERIES_10"
 	case appWatchSeries7 = "APP_WATCH_SERIES_7"
 	case appWatchSeries4 = "APP_WATCH_SERIES_4"
 	case appWatchSeries3 = "APP_WATCH_SERIES_3"

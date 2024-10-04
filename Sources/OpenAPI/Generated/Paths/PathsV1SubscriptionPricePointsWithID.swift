@@ -14,7 +14,7 @@ extension APIEndpoint.V1.SubscriptionPricePoints {
 		public let path: String
 
 		public func get(fieldsSubscriptionPricePoints: [FieldsSubscriptionPricePoints]? = nil, include: [Include]? = nil) -> Request<AppStoreConnect_Swift_SDK.SubscriptionPricePointResponse> {
-			Request(path: path, method: "GET", query: makeGetQuery(fieldsSubscriptionPricePoints, include), id: "subscriptionPricePoints-get_instance")
+			Request(path: path, method: "GET", query: makeGetQuery(fieldsSubscriptionPricePoints, include), id: "subscriptionPricePoints_getInstance")
 		}
 
 		private func makeGetQuery(_ fieldsSubscriptionPricePoints: [FieldsSubscriptionPricePoints]?, _ include: [Include]?) -> [(String, String?)] {
@@ -26,11 +26,11 @@ extension APIEndpoint.V1.SubscriptionPricePoints {
 
 		public enum FieldsSubscriptionPricePoints: String, Codable, CaseIterable {
 			case customerPrice
-			case equalizations
 			case proceeds
 			case proceedsYear2
-			case subscription
 			case territory
+			case subscription
+			case equalizations
 		}
 
 		public enum Include: String, Codable, CaseIterable {

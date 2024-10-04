@@ -15,7 +15,7 @@ extension APIEndpoint.V1.AppStoreVersions.WithID {
 
 		@available(*, deprecated, message: "Deprecated")
 		public func get(fieldsAgeRatingDeclarations: [FieldsAgeRatingDeclarations]? = nil) -> Request<AppStoreConnect_Swift_SDK.AgeRatingDeclarationWithoutIncludesResponse> {
-			Request(path: path, method: "GET", query: makeGetQuery(fieldsAgeRatingDeclarations), id: "appStoreVersions-ageRatingDeclaration-get_to_one_related")
+			Request(path: path, method: "GET", query: makeGetQuery(fieldsAgeRatingDeclarations), id: "appStoreVersions_ageRatingDeclaration_getToOneRelated")
 		}
 
 		private func makeGetQuery(_ fieldsAgeRatingDeclarations: [FieldsAgeRatingDeclarations]?) -> [(String, String?)] {
@@ -25,24 +25,26 @@ extension APIEndpoint.V1.AppStoreVersions.WithID {
 		}
 
 		public enum FieldsAgeRatingDeclarations: String, Codable, CaseIterable {
-			case ageRatingOverride
 			case alcoholTobaccoOrDrugUseOrReferences
 			case contests
-			case gambling
 			case gamblingAndContests
+			case gambling
 			case gamblingSimulated
-			case horrorOrFearThemes
 			case kidsAgeBand
-			case matureOrSuggestiveThemes
+			case lootBox
 			case medicalOrTreatmentInformation
 			case profanityOrCrudeHumor
-			case seventeenPlus
 			case sexualContentGraphicAndNudity
 			case sexualContentOrNudity
+			case horrorOrFearThemes
+			case matureOrSuggestiveThemes
 			case unrestrictedWebAccess
 			case violenceCartoonOrFantasy
-			case violenceRealistic
 			case violenceRealisticProlongedGraphicOrSadistic
+			case violenceRealistic
+			case ageRatingOverride
+			case koreaAgeRatingOverride
+			case seventeenPlus
 		}
 	}
 }

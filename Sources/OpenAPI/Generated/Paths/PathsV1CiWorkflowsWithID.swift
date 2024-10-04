@@ -14,104 +14,77 @@ extension APIEndpoint.V1.CiWorkflows {
 		public let path: String
 
 		public func get(parameters: GetParameters? = nil) -> Request<AppStoreConnect_Swift_SDK.CiWorkflowResponse> {
-			Request(path: path, method: "GET", query: parameters?.asQuery, id: "ciWorkflows-get_instance")
+			Request(path: path, method: "GET", query: parameters?.asQuery, id: "ciWorkflows_getInstance")
 		}
 
 		public struct GetParameters {
 			public var fieldsCiWorkflows: [FieldsCiWorkflows]?
-			public var include: [Include]?
-			public var fieldsCiBuildRuns: [FieldsCiBuildRuns]?
 			public var fieldsScmRepositories: [FieldsScmRepositories]?
+			public var include: [Include]?
 
 			public enum FieldsCiWorkflows: String, Codable, CaseIterable {
-				case actions
-				case branchStartCondition
-				case buildRuns
-				case clean
-				case containerFilePath
+				case name
 				case description
+				case branchStartCondition
+				case tagStartCondition
+				case pullRequestStartCondition
+				case scheduledStartCondition
+				case manualBranchStartCondition
+				case manualTagStartCondition
+				case manualPullRequestStartCondition
+				case actions
 				case isEnabled
 				case isLockedForEditing
-				case lastModifiedDate
-				case macOsVersion
-				case manualBranchStartCondition
-				case manualPullRequestStartCondition
-				case manualTagStartCondition
-				case name
-				case product
-				case pullRequestStartCondition
-				case repository
-				case scheduledStartCondition
-				case tagStartCondition
-				case xcodeVersion
-			}
-
-			public enum Include: String, Codable, CaseIterable {
-				case macOsVersion
-				case product
-				case repository
-				case xcodeVersion
-			}
-
-			public enum FieldsCiBuildRuns: String, Codable, CaseIterable {
-				case actions
-				case buildRun
-				case builds
-				case cancelReason
 				case clean
-				case completionStatus
-				case createdDate
-				case destinationBranch
-				case destinationCommit
-				case executionProgress
-				case finishedDate
-				case isPullRequestBuild
-				case issueCounts
-				case number
+				case containerFilePath
+				case lastModifiedDate
 				case product
-				case pullRequest
-				case sourceBranchOrTag
-				case sourceCommit
-				case startReason
-				case startedDate
-				case workflow
+				case repository
+				case xcodeVersion
+				case macOsVersion
+				case buildRuns
 			}
 
 			public enum FieldsScmRepositories: String, Codable, CaseIterable {
-				case defaultBranch
-				case gitReferences
-				case httpCloneURL = "httpCloneUrl"
 				case lastAccessedDate
+				case httpCloneURL = "httpCloneUrl"
+				case sshCloneURL = "sshCloneUrl"
 				case ownerName
-				case pullRequests
 				case repositoryName
 				case scmProvider
-				case sshCloneURL = "sshCloneUrl"
+				case defaultBranch
+				case gitReferences
+				case pullRequests
 			}
 
-			public init(fieldsCiWorkflows: [FieldsCiWorkflows]? = nil, include: [Include]? = nil, fieldsCiBuildRuns: [FieldsCiBuildRuns]? = nil, fieldsScmRepositories: [FieldsScmRepositories]? = nil) {
+			public enum Include: String, Codable, CaseIterable {
+				case product
+				case repository
+				case xcodeVersion
+				case macOsVersion
+			}
+
+			public init(fieldsCiWorkflows: [FieldsCiWorkflows]? = nil, fieldsScmRepositories: [FieldsScmRepositories]? = nil, include: [Include]? = nil) {
 				self.fieldsCiWorkflows = fieldsCiWorkflows
-				self.include = include
-				self.fieldsCiBuildRuns = fieldsCiBuildRuns
 				self.fieldsScmRepositories = fieldsScmRepositories
+				self.include = include
 			}
 
 			public var asQuery: [(String, String?)] {
 				let encoder = URLQueryEncoder(explode: false)
 				encoder.encode(fieldsCiWorkflows, forKey: "fields[ciWorkflows]")
-				encoder.encode(include, forKey: "include")
-				encoder.encode(fieldsCiBuildRuns, forKey: "fields[ciBuildRuns]")
 				encoder.encode(fieldsScmRepositories, forKey: "fields[scmRepositories]")
+				encoder.encode(include, forKey: "include")
 				return encoder.items
 			}
 		}
 
 		public func patch(_ body: AppStoreConnect_Swift_SDK.CiWorkflowUpdateRequest) -> Request<AppStoreConnect_Swift_SDK.CiWorkflowResponse> {
-			Request(path: path, method: "PATCH", body: body, id: "ciWorkflows-update_instance")
+			Request(path: path, method: "PATCH", body: body, id: "ciWorkflows_updateInstance")
 		}
 
 		public var delete: Request<Void> {
-			Request(path: path, method: "DELETE", id: "ciWorkflows-delete_instance")
+			Request(path: path, method: "DELETE", id: "ciWorkflows_deleteInstance")
 		}
 	}
 }

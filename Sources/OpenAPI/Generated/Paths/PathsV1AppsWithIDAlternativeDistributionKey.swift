@@ -14,7 +14,7 @@ extension APIEndpoint.V1.Apps.WithID {
 		public let path: String
 
 		public func get(fieldsAlternativeDistributionKeys: [FieldsAlternativeDistributionKeys]? = nil) -> Request<AppStoreConnect_Swift_SDK.AlternativeDistributionKeyResponse> {
-			Request(path: path, method: "GET", query: makeGetQuery(fieldsAlternativeDistributionKeys), id: "apps-alternativeDistributionKey-get_to_one_related")
+			Request(path: path, method: "GET", query: makeGetQuery(fieldsAlternativeDistributionKeys), id: "apps_alternativeDistributionKey_getToOneRelated")
 		}
 
 		private func makeGetQuery(_ fieldsAlternativeDistributionKeys: [FieldsAlternativeDistributionKeys]?) -> [(String, String?)] {
@@ -24,8 +24,8 @@ extension APIEndpoint.V1.Apps.WithID {
 		}
 
 		public enum FieldsAlternativeDistributionKeys: String, Codable, CaseIterable {
-			case app
 			case publicKey
+			case app
 		}
 	}
 }

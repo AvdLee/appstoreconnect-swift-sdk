@@ -14,54 +14,56 @@ extension APIEndpoint.V1.CiBuildRuns.WithID {
 		public let path: String
 
 		public func get(parameters: GetParameters? = nil) -> Request<AppStoreConnect_Swift_SDK.BuildsResponse> {
-			Request(path: path, method: "GET", query: parameters?.asQuery, id: "ciBuildRuns-builds-get_to_many_related")
+			Request(path: path, method: "GET", query: parameters?.asQuery, id: "ciBuildRuns_builds_getToManyRelated")
 		}
 
 		public struct GetParameters {
-			public var filterBetaAppReviewSubmissionBetaReviewState: [FilterBetaAppReviewSubmissionBetaReviewState]?
-			public var filterBuildAudienceType: [FilterBuildAudienceType]?
-			public var filterExpired: [String]?
-			public var filterPreReleaseVersionPlatform: [FilterPreReleaseVersionPlatform]?
-			public var filterPreReleaseVersionVersion: [String]?
-			public var filterProcessingState: [FilterProcessingState]?
-			public var filterUsesNonExemptEncryption: [String]?
 			public var filterVersion: [String]?
-			public var filterApp: [String]?
-			public var filterAppStoreVersion: [String]?
-			public var filterBetaGroups: [String]?
+			public var filterExpired: [String]?
+			public var filterProcessingState: [FilterProcessingState]?
+			public var filterBetaAppReviewSubmissionBetaReviewState: [FilterBetaAppReviewSubmissionBetaReviewState]?
+			public var filterUsesNonExemptEncryption: [String]?
+			public var filterPreReleaseVersionVersion: [String]?
+			public var filterPreReleaseVersionPlatform: [FilterPreReleaseVersionPlatform]?
+			public var filterBuildAudienceType: [FilterBuildAudienceType]?
 			public var filterPreReleaseVersion: [String]?
+			public var filterApp: [String]?
+			public var filterBetaGroups: [String]?
+			public var filterAppStoreVersion: [String]?
 			public var filterID: [String]?
 			public var sort: [Sort]?
-			public var fieldsBuildBundles: [FieldsBuildBundles]?
-			public var fieldsBuildIcons: [FieldsBuildIcons]?
-			public var fieldsBetaAppReviewSubmissions: [FieldsBetaAppReviewSubmissions]?
-			public var fieldsBuildBetaDetails: [FieldsBuildBetaDetails]?
-			public var fieldsBetaTesters: [FieldsBetaTesters]?
-			public var fieldsPreReleaseVersions: [FieldsPreReleaseVersions]?
-			public var fieldsBetaBuildLocalizations: [FieldsBetaBuildLocalizations]?
-			public var fieldsAppStoreVersions: [FieldsAppStoreVersions]?
-			public var fieldsAppEncryptionDeclarations: [FieldsAppEncryptionDeclarations]?
-			public var fieldsApps: [FieldsApps]?
 			public var fieldsBuilds: [FieldsBuilds]?
+			public var fieldsPreReleaseVersions: [FieldsPreReleaseVersions]?
+			public var fieldsBetaTesters: [FieldsBetaTesters]?
 			public var fieldsBetaGroups: [FieldsBetaGroups]?
+			public var fieldsBetaBuildLocalizations: [FieldsBetaBuildLocalizations]?
+			public var fieldsAppEncryptionDeclarations: [FieldsAppEncryptionDeclarations]?
+			public var fieldsBetaAppReviewSubmissions: [FieldsBetaAppReviewSubmissions]?
+			public var fieldsApps: [FieldsApps]?
+			public var fieldsBuildBetaDetails: [FieldsBuildBetaDetails]?
+			public var fieldsAppStoreVersions: [FieldsAppStoreVersions]?
+			public var fieldsBuildIcons: [FieldsBuildIcons]?
+			public var fieldsBuildBundles: [FieldsBuildBundles]?
 			public var limit: Int?
+			public var include: [Include]?
 			public var limitIndividualTesters: Int?
 			public var limitBetaGroups: Int?
 			public var limitBetaBuildLocalizations: Int?
 			public var limitIcons: Int?
 			public var limitBuildBundles: Int?
-			public var include: [Include]?
+
+			public enum FilterProcessingState: String, Codable, CaseIterable {
+				case processing = "PROCESSING"
+				case failed = "FAILED"
+				case invalid = "INVALID"
+				case valid = "VALID"
+			}
 
 			public enum FilterBetaAppReviewSubmissionBetaReviewState: String, Codable, CaseIterable {
 				case waitingForReview = "WAITING_FOR_REVIEW"
 				case inReview = "IN_REVIEW"
 				case rejected = "REJECTED"
 				case approved = "APPROVED"
-			}
-
-			public enum FilterBuildAudienceType: String, Codable, CaseIterable {
-				case internalOnly = "INTERNAL_ONLY"
-				case appStoreEligible = "APP_STORE_ELIGIBLE"
 			}
 
 			public enum FilterPreReleaseVersionPlatform: String, Codable, CaseIterable {
@@ -71,310 +73,311 @@ extension APIEndpoint.V1.CiBuildRuns.WithID {
 				case visionOs = "VISION_OS"
 			}
 
-			public enum FilterProcessingState: String, Codable, CaseIterable {
-				case processing = "PROCESSING"
-				case failed = "FAILED"
-				case invalid = "INVALID"
-				case valid = "VALID"
+			public enum FilterBuildAudienceType: String, Codable, CaseIterable {
+				case internalOnly = "INTERNAL_ONLY"
+				case appStoreEligible = "APP_STORE_ELIGIBLE"
 			}
 
 			public enum Sort: String, Codable, CaseIterable {
-				case preReleaseVersion
-				case minuspreReleaseVersion = "-preReleaseVersion"
-				case uploadedDate
-				case minusuploadedDate = "-uploadedDate"
 				case version
 				case minusversion = "-version"
+				case uploadedDate
+				case minusuploadedDate = "-uploadedDate"
+				case preReleaseVersion
+				case minuspreReleaseVersion = "-preReleaseVersion"
 			}
 
-			public enum FieldsBuildBundles: String, Codable, CaseIterable {
-				case appClipDomainCacheStatus
-				case appClipDomainDebugStatus
-				case betaAppClipInvocations
-				case buildBundleFileSizes
-				case bundleID = "bundleId"
-				case bundleType
-				case dSYMURL = "dSYMUrl"
-				case deviceProtocols
-				case entitlements
-				case fileName
-				case hasOnDemandResources
-				case hasPrerenderedIcon
-				case hasSirikit
-				case includesSymbols
-				case isIosBuildMacAppStoreCompatible
-				case locales
-				case platformBuild
-				case requiredCapabilities
-				case sdkBuild
-				case supportedArchitectures
-				case usesLocationServices
+			public enum FieldsBuilds: String, Codable, CaseIterable {
+				case version
+				case uploadedDate
+				case expirationDate
+				case expired
+				case minOsVersion
+				case lsMinimumSystemVersion
+				case computedMinMacOsVersion
+				case iconAssetToken
+				case processingState
+				case buildAudienceType
+				case usesNonExemptEncryption
+				case preReleaseVersion
+				case individualTesters
+				case betaGroups
+				case betaBuildLocalizations
+				case appEncryptionDeclaration
+				case betaAppReviewSubmission
+				case app
+				case buildBetaDetail
+				case appStoreVersion
+				case icons
+				case buildBundles
+				case perfPowerMetrics
+				case diagnosticSignatures
 			}
 
-			public enum FieldsBuildIcons: String, Codable, CaseIterable {
-				case iconAsset
-				case iconType
+			public enum FieldsPreReleaseVersions: String, Codable, CaseIterable {
+				case version
+				case platform
+				case builds
+				case app
+			}
+
+			public enum FieldsBetaTesters: String, Codable, CaseIterable {
+				case firstName
+				case lastName
+				case email
+				case inviteType
+				case state
+				case apps
+				case betaGroups
+				case builds
+			}
+
+			public enum FieldsBetaGroups: String, Codable, CaseIterable {
 				case name
+				case createdDate
+				case isInternalGroup
+				case hasAccessToAllBuilds
+				case publicLinkEnabled
+				case publicLinkID = "publicLinkId"
+				case publicLinkLimitEnabled
+				case publicLinkLimit
+				case publicLink
+				case feedbackEnabled
+				case iosBuildsAvailableForAppleSiliconMac
+				case app
+				case builds
+				case betaTesters
+			}
+
+			public enum FieldsBetaBuildLocalizations: String, Codable, CaseIterable {
+				case whatsNew
+				case locale
+				case build
+			}
+
+			public enum FieldsAppEncryptionDeclarations: String, Codable, CaseIterable {
+				case appDescription
+				case createdDate
+				case usesEncryption
+				case exempt
+				case containsProprietaryCryptography
+				case containsThirdPartyCryptography
+				case availableOnFrenchStore
+				case platform
+				case uploadedDate
+				case documentURL = "documentUrl"
+				case documentName
+				case documentType
+				case appEncryptionDeclarationState
+				case codeValue
+				case app
+				case builds
+				case appEncryptionDeclarationDocument
 			}
 
 			public enum FieldsBetaAppReviewSubmissions: String, Codable, CaseIterable {
 				case betaReviewState
-				case build
 				case submittedDate
+				case build
+			}
+
+			public enum FieldsApps: String, Codable, CaseIterable {
+				case name
+				case bundleID = "bundleId"
+				case sku
+				case primaryLocale
+				case isOrEverWasMadeForKids
+				case subscriptionStatusURL = "subscriptionStatusUrl"
+				case subscriptionStatusURLVersion = "subscriptionStatusUrlVersion"
+				case subscriptionStatusURLForSandbox = "subscriptionStatusUrlForSandbox"
+				case subscriptionStatusURLVersionForSandbox = "subscriptionStatusUrlVersionForSandbox"
+				case contentRightsDeclaration
+				case streamlinedPurchasingEnabled
+				case appEncryptionDeclarations
+				case ciProduct
+				case betaTesters
+				case betaGroups
+				case appStoreVersions
+				case preReleaseVersions
+				case betaAppLocalizations
+				case builds
+				case betaLicenseAgreement
+				case betaAppReviewDetail
+				case appInfos
+				case appClips
+				case appPricePoints
+				case endUserLicenseAgreement
+				case preOrder
+				case appPriceSchedule
+				case appAvailability
+				case appAvailabilityV2
+				case inAppPurchases
+				case subscriptionGroups
+				case gameCenterEnabledVersions
+				case perfPowerMetrics
+				case appCustomProductPages
+				case inAppPurchasesV2
+				case promotedPurchases
+				case appEvents
+				case reviewSubmissions
+				case subscriptionGracePeriod
+				case customerReviews
+				case gameCenterDetail
+				case appStoreVersionExperimentsV2
+				case alternativeDistributionKey
+				case analyticsReportRequests
+				case marketplaceSearchDetail
 			}
 
 			public enum FieldsBuildBetaDetails: String, Codable, CaseIterable {
 				case autoNotifyEnabled
-				case build
-				case externalBuildState
 				case internalBuildState
-			}
-
-			public enum FieldsBetaTesters: String, Codable, CaseIterable {
-				case apps
-				case betaGroups
-				case builds
-				case email
-				case firstName
-				case inviteType
-				case lastName
-				case state
-			}
-
-			public enum FieldsPreReleaseVersions: String, Codable, CaseIterable {
-				case app
-				case builds
-				case platform
-				case version
-			}
-
-			public enum FieldsBetaBuildLocalizations: String, Codable, CaseIterable {
+				case externalBuildState
 				case build
-				case locale
-				case whatsNew
 			}
 
 			public enum FieldsAppStoreVersions: String, Codable, CaseIterable {
-				case ageRatingDeclaration
-				case alternativeDistributionPackage
-				case app
-				case appClipDefaultExperience
-				case appStoreReviewDetail
+				case platform
+				case versionString
 				case appStoreState
+				case appVersionState
+				case copyright
+				case reviewType
+				case releaseType
+				case earliestReleaseDate
+				case downloadable
+				case createdDate
+				case app
+				case ageRatingDeclaration
+				case appStoreVersionLocalizations
+				case build
+				case appStoreVersionPhasedRelease
+				case gameCenterAppVersion
+				case routingAppCoverage
+				case appStoreReviewDetail
+				case appStoreVersionSubmission
+				case appClipDefaultExperience
 				case appStoreVersionExperiments
 				case appStoreVersionExperimentsV2
-				case appStoreVersionLocalizations
-				case appStoreVersionPhasedRelease
-				case appStoreVersionSubmission
-				case appVersionState
-				case build
-				case copyright
-				case createdDate
 				case customerReviews
-				case downloadable
-				case earliestReleaseDate
-				case platform
-				case releaseType
-				case reviewType
-				case routingAppCoverage
-				case versionString
+				case alternativeDistributionPackage
 			}
 
-			public enum FieldsAppEncryptionDeclarations: String, Codable, CaseIterable {
-				case app
-				case appDescription
-				case appEncryptionDeclarationDocument
-				case appEncryptionDeclarationState
-				case availableOnFrenchStore
-				case builds
-				case codeValue
-				case containsProprietaryCryptography
-				case containsThirdPartyCryptography
-				case createdDate
-				case documentName
-				case documentType
-				case documentURL = "documentUrl"
-				case exempt
-				case platform
-				case uploadedDate
-				case usesEncryption
+			public enum FieldsBuildIcons: String, Codable, CaseIterable {
+				case name
+				case iconAsset
+				case iconType
 			}
 
-			public enum FieldsApps: String, Codable, CaseIterable {
-				case alternativeDistributionKey
-				case analyticsReportRequests
-				case appAvailability
-				case appClips
-				case appCustomProductPages
-				case appEncryptionDeclarations
-				case appEvents
-				case appInfos
-				case appPricePoints
-				case appPriceSchedule
-				case appStoreVersionExperimentsV2
-				case appStoreVersions
-				case betaAppLocalizations
-				case betaAppReviewDetail
-				case betaGroups
-				case betaLicenseAgreement
-				case betaTesters
-				case builds
+			public enum FieldsBuildBundles: String, Codable, CaseIterable {
 				case bundleID = "bundleId"
-				case ciProduct
-				case contentRightsDeclaration
-				case customerReviews
-				case endUserLicenseAgreement
-				case gameCenterDetail
-				case gameCenterEnabledVersions
-				case inAppPurchases
-				case inAppPurchasesV2
-				case isOrEverWasMadeForKids
-				case marketplaceSearchDetail
-				case name
-				case perfPowerMetrics
-				case preOrder
-				case preReleaseVersions
-				case primaryLocale
-				case promotedPurchases
-				case reviewSubmissions
-				case sku
-				case subscriptionGracePeriod
-				case subscriptionGroups
-				case subscriptionStatusURL = "subscriptionStatusUrl"
-				case subscriptionStatusURLForSandbox = "subscriptionStatusUrlForSandbox"
-				case subscriptionStatusURLVersion = "subscriptionStatusUrlVersion"
-				case subscriptionStatusURLVersionForSandbox = "subscriptionStatusUrlVersionForSandbox"
-			}
-
-			public enum FieldsBuilds: String, Codable, CaseIterable {
-				case app
-				case appEncryptionDeclaration
-				case appStoreVersion
-				case betaAppReviewSubmission
-				case betaBuildLocalizations
-				case betaGroups
-				case buildAudienceType
-				case buildBetaDetail
-				case buildBundles
-				case computedMinMacOsVersion
-				case diagnosticSignatures
-				case expirationDate
-				case expired
-				case iconAssetToken
-				case icons
-				case individualTesters
-				case lsMinimumSystemVersion
-				case minOsVersion
-				case perfPowerMetrics
-				case preReleaseVersion
-				case processingState
-				case uploadedDate
-				case usesNonExemptEncryption
-				case version
-			}
-
-			public enum FieldsBetaGroups: String, Codable, CaseIterable {
-				case app
-				case betaTesters
-				case builds
-				case createdDate
-				case feedbackEnabled
-				case hasAccessToAllBuilds
-				case iosBuildsAvailableForAppleSiliconMac
-				case isInternalGroup
-				case name
-				case publicLink
-				case publicLinkEnabled
-				case publicLinkID = "publicLinkId"
-				case publicLinkLimit
-				case publicLinkLimitEnabled
+				case bundleType
+				case sdkBuild
+				case platformBuild
+				case fileName
+				case hasSirikit
+				case hasOnDemandResources
+				case hasPrerenderedIcon
+				case usesLocationServices
+				case isIosBuildMacAppStoreCompatible
+				case includesSymbols
+				case dSYMURL = "dSYMUrl"
+				case supportedArchitectures
+				case requiredCapabilities
+				case deviceProtocols
+				case locales
+				case entitlements
+				case appClipDomainCacheStatus
+				case appClipDomainDebugStatus
+				case betaAppClipInvocations
+				case buildBundleFileSizes
 			}
 
 			public enum Include: String, Codable, CaseIterable {
-				case app
-				case appEncryptionDeclaration
-				case appStoreVersion
-				case betaAppReviewSubmission
-				case betaBuildLocalizations
-				case betaGroups
-				case buildBetaDetail
-				case buildBundles
-				case icons
-				case individualTesters
 				case preReleaseVersion
+				case individualTesters
+				case betaGroups
+				case betaBuildLocalizations
+				case appEncryptionDeclaration
+				case betaAppReviewSubmission
+				case app
+				case buildBetaDetail
+				case appStoreVersion
+				case icons
+				case buildBundles
 			}
 
-			public init(filterBetaAppReviewSubmissionBetaReviewState: [FilterBetaAppReviewSubmissionBetaReviewState]? = nil, filterBuildAudienceType: [FilterBuildAudienceType]? = nil, filterExpired: [String]? = nil, filterPreReleaseVersionPlatform: [FilterPreReleaseVersionPlatform]? = nil, filterPreReleaseVersionVersion: [String]? = nil, filterProcessingState: [FilterProcessingState]? = nil, filterUsesNonExemptEncryption: [String]? = nil, filterVersion: [String]? = nil, filterApp: [String]? = nil, filterAppStoreVersion: [String]? = nil, filterBetaGroups: [String]? = nil, filterPreReleaseVersion: [String]? = nil, filterID: [String]? = nil, sort: [Sort]? = nil, fieldsBuildBundles: [FieldsBuildBundles]? = nil, fieldsBuildIcons: [FieldsBuildIcons]? = nil, fieldsBetaAppReviewSubmissions: [FieldsBetaAppReviewSubmissions]? = nil, fieldsBuildBetaDetails: [FieldsBuildBetaDetails]? = nil, fieldsBetaTesters: [FieldsBetaTesters]? = nil, fieldsPreReleaseVersions: [FieldsPreReleaseVersions]? = nil, fieldsBetaBuildLocalizations: [FieldsBetaBuildLocalizations]? = nil, fieldsAppStoreVersions: [FieldsAppStoreVersions]? = nil, fieldsAppEncryptionDeclarations: [FieldsAppEncryptionDeclarations]? = nil, fieldsApps: [FieldsApps]? = nil, fieldsBuilds: [FieldsBuilds]? = nil, fieldsBetaGroups: [FieldsBetaGroups]? = nil, limit: Int? = nil, limitIndividualTesters: Int? = nil, limitBetaGroups: Int? = nil, limitBetaBuildLocalizations: Int? = nil, limitIcons: Int? = nil, limitBuildBundles: Int? = nil, include: [Include]? = nil) {
-				self.filterBetaAppReviewSubmissionBetaReviewState = filterBetaAppReviewSubmissionBetaReviewState
-				self.filterBuildAudienceType = filterBuildAudienceType
-				self.filterExpired = filterExpired
-				self.filterPreReleaseVersionPlatform = filterPreReleaseVersionPlatform
-				self.filterPreReleaseVersionVersion = filterPreReleaseVersionVersion
-				self.filterProcessingState = filterProcessingState
-				self.filterUsesNonExemptEncryption = filterUsesNonExemptEncryption
+			public init(filterVersion: [String]? = nil, filterExpired: [String]? = nil, filterProcessingState: [FilterProcessingState]? = nil, filterBetaAppReviewSubmissionBetaReviewState: [FilterBetaAppReviewSubmissionBetaReviewState]? = nil, filterUsesNonExemptEncryption: [String]? = nil, filterPreReleaseVersionVersion: [String]? = nil, filterPreReleaseVersionPlatform: [FilterPreReleaseVersionPlatform]? = nil, filterBuildAudienceType: [FilterBuildAudienceType]? = nil, filterPreReleaseVersion: [String]? = nil, filterApp: [String]? = nil, filterBetaGroups: [String]? = nil, filterAppStoreVersion: [String]? = nil, filterID: [String]? = nil, sort: [Sort]? = nil, fieldsBuilds: [FieldsBuilds]? = nil, fieldsPreReleaseVersions: [FieldsPreReleaseVersions]? = nil, fieldsBetaTesters: [FieldsBetaTesters]? = nil, fieldsBetaGroups: [FieldsBetaGroups]? = nil, fieldsBetaBuildLocalizations: [FieldsBetaBuildLocalizations]? = nil, fieldsAppEncryptionDeclarations: [FieldsAppEncryptionDeclarations]? = nil, fieldsBetaAppReviewSubmissions: [FieldsBetaAppReviewSubmissions]? = nil, fieldsApps: [FieldsApps]? = nil, fieldsBuildBetaDetails: [FieldsBuildBetaDetails]? = nil, fieldsAppStoreVersions: [FieldsAppStoreVersions]? = nil, fieldsBuildIcons: [FieldsBuildIcons]? = nil, fieldsBuildBundles: [FieldsBuildBundles]? = nil, limit: Int? = nil, include: [Include]? = nil, limitIndividualTesters: Int? = nil, limitBetaGroups: Int? = nil, limitBetaBuildLocalizations: Int? = nil, limitIcons: Int? = nil, limitBuildBundles: Int? = nil) {
 				self.filterVersion = filterVersion
-				self.filterApp = filterApp
-				self.filterAppStoreVersion = filterAppStoreVersion
-				self.filterBetaGroups = filterBetaGroups
+				self.filterExpired = filterExpired
+				self.filterProcessingState = filterProcessingState
+				self.filterBetaAppReviewSubmissionBetaReviewState = filterBetaAppReviewSubmissionBetaReviewState
+				self.filterUsesNonExemptEncryption = filterUsesNonExemptEncryption
+				self.filterPreReleaseVersionVersion = filterPreReleaseVersionVersion
+				self.filterPreReleaseVersionPlatform = filterPreReleaseVersionPlatform
+				self.filterBuildAudienceType = filterBuildAudienceType
 				self.filterPreReleaseVersion = filterPreReleaseVersion
+				self.filterApp = filterApp
+				self.filterBetaGroups = filterBetaGroups
+				self.filterAppStoreVersion = filterAppStoreVersion
 				self.filterID = filterID
 				self.sort = sort
-				self.fieldsBuildBundles = fieldsBuildBundles
-				self.fieldsBuildIcons = fieldsBuildIcons
-				self.fieldsBetaAppReviewSubmissions = fieldsBetaAppReviewSubmissions
-				self.fieldsBuildBetaDetails = fieldsBuildBetaDetails
-				self.fieldsBetaTesters = fieldsBetaTesters
-				self.fieldsPreReleaseVersions = fieldsPreReleaseVersions
-				self.fieldsBetaBuildLocalizations = fieldsBetaBuildLocalizations
-				self.fieldsAppStoreVersions = fieldsAppStoreVersions
-				self.fieldsAppEncryptionDeclarations = fieldsAppEncryptionDeclarations
-				self.fieldsApps = fieldsApps
 				self.fieldsBuilds = fieldsBuilds
+				self.fieldsPreReleaseVersions = fieldsPreReleaseVersions
+				self.fieldsBetaTesters = fieldsBetaTesters
 				self.fieldsBetaGroups = fieldsBetaGroups
+				self.fieldsBetaBuildLocalizations = fieldsBetaBuildLocalizations
+				self.fieldsAppEncryptionDeclarations = fieldsAppEncryptionDeclarations
+				self.fieldsBetaAppReviewSubmissions = fieldsBetaAppReviewSubmissions
+				self.fieldsApps = fieldsApps
+				self.fieldsBuildBetaDetails = fieldsBuildBetaDetails
+				self.fieldsAppStoreVersions = fieldsAppStoreVersions
+				self.fieldsBuildIcons = fieldsBuildIcons
+				self.fieldsBuildBundles = fieldsBuildBundles
 				self.limit = limit
+				self.include = include
 				self.limitIndividualTesters = limitIndividualTesters
 				self.limitBetaGroups = limitBetaGroups
 				self.limitBetaBuildLocalizations = limitBetaBuildLocalizations
 				self.limitIcons = limitIcons
 				self.limitBuildBundles = limitBuildBundles
-				self.include = include
 			}
 
 			public var asQuery: [(String, String?)] {
 				let encoder = URLQueryEncoder(explode: false)
-				encoder.encode(filterBetaAppReviewSubmissionBetaReviewState, forKey: "filter[betaAppReviewSubmission.betaReviewState]")
-				encoder.encode(filterBuildAudienceType, forKey: "filter[buildAudienceType]")
-				encoder.encode(filterExpired, forKey: "filter[expired]")
-				encoder.encode(filterPreReleaseVersionPlatform, forKey: "filter[preReleaseVersion.platform]")
-				encoder.encode(filterPreReleaseVersionVersion, forKey: "filter[preReleaseVersion.version]")
-				encoder.encode(filterProcessingState, forKey: "filter[processingState]")
-				encoder.encode(filterUsesNonExemptEncryption, forKey: "filter[usesNonExemptEncryption]")
 				encoder.encode(filterVersion, forKey: "filter[version]")
-				encoder.encode(filterApp, forKey: "filter[app]")
-				encoder.encode(filterAppStoreVersion, forKey: "filter[appStoreVersion]")
-				encoder.encode(filterBetaGroups, forKey: "filter[betaGroups]")
+				encoder.encode(filterExpired, forKey: "filter[expired]")
+				encoder.encode(filterProcessingState, forKey: "filter[processingState]")
+				encoder.encode(filterBetaAppReviewSubmissionBetaReviewState, forKey: "filter[betaAppReviewSubmission.betaReviewState]")
+				encoder.encode(filterUsesNonExemptEncryption, forKey: "filter[usesNonExemptEncryption]")
+				encoder.encode(filterPreReleaseVersionVersion, forKey: "filter[preReleaseVersion.version]")
+				encoder.encode(filterPreReleaseVersionPlatform, forKey: "filter[preReleaseVersion.platform]")
+				encoder.encode(filterBuildAudienceType, forKey: "filter[buildAudienceType]")
 				encoder.encode(filterPreReleaseVersion, forKey: "filter[preReleaseVersion]")
+				encoder.encode(filterApp, forKey: "filter[app]")
+				encoder.encode(filterBetaGroups, forKey: "filter[betaGroups]")
+				encoder.encode(filterAppStoreVersion, forKey: "filter[appStoreVersion]")
 				encoder.encode(filterID, forKey: "filter[id]")
 				encoder.encode(sort, forKey: "sort")
-				encoder.encode(fieldsBuildBundles, forKey: "fields[buildBundles]")
-				encoder.encode(fieldsBuildIcons, forKey: "fields[buildIcons]")
-				encoder.encode(fieldsBetaAppReviewSubmissions, forKey: "fields[betaAppReviewSubmissions]")
-				encoder.encode(fieldsBuildBetaDetails, forKey: "fields[buildBetaDetails]")
-				encoder.encode(fieldsBetaTesters, forKey: "fields[betaTesters]")
-				encoder.encode(fieldsPreReleaseVersions, forKey: "fields[preReleaseVersions]")
-				encoder.encode(fieldsBetaBuildLocalizations, forKey: "fields[betaBuildLocalizations]")
-				encoder.encode(fieldsAppStoreVersions, forKey: "fields[appStoreVersions]")
-				encoder.encode(fieldsAppEncryptionDeclarations, forKey: "fields[appEncryptionDeclarations]")
-				encoder.encode(fieldsApps, forKey: "fields[apps]")
 				encoder.encode(fieldsBuilds, forKey: "fields[builds]")
+				encoder.encode(fieldsPreReleaseVersions, forKey: "fields[preReleaseVersions]")
+				encoder.encode(fieldsBetaTesters, forKey: "fields[betaTesters]")
 				encoder.encode(fieldsBetaGroups, forKey: "fields[betaGroups]")
+				encoder.encode(fieldsBetaBuildLocalizations, forKey: "fields[betaBuildLocalizations]")
+				encoder.encode(fieldsAppEncryptionDeclarations, forKey: "fields[appEncryptionDeclarations]")
+				encoder.encode(fieldsBetaAppReviewSubmissions, forKey: "fields[betaAppReviewSubmissions]")
+				encoder.encode(fieldsApps, forKey: "fields[apps]")
+				encoder.encode(fieldsBuildBetaDetails, forKey: "fields[buildBetaDetails]")
+				encoder.encode(fieldsAppStoreVersions, forKey: "fields[appStoreVersions]")
+				encoder.encode(fieldsBuildIcons, forKey: "fields[buildIcons]")
+				encoder.encode(fieldsBuildBundles, forKey: "fields[buildBundles]")
 				encoder.encode(limit, forKey: "limit")
+				encoder.encode(include, forKey: "include")
 				encoder.encode(limitIndividualTesters, forKey: "limit[individualTesters]")
 				encoder.encode(limitBetaGroups, forKey: "limit[betaGroups]")
 				encoder.encode(limitBetaBuildLocalizations, forKey: "limit[betaBuildLocalizations]")
 				encoder.encode(limitIcons, forKey: "limit[icons]")
 				encoder.encode(limitBuildBundles, forKey: "limit[buildBundles]")
-				encoder.encode(include, forKey: "include")
 				return encoder.items
 			}
 		}

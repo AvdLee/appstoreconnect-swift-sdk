@@ -14,7 +14,7 @@ extension APIEndpoint.V1.PreReleaseVersions.WithID {
 		public let path: String
 
 		public func get(fieldsBuilds: [FieldsBuilds]? = nil, limit: Int? = nil) -> Request<AppStoreConnect_Swift_SDK.BuildsWithoutIncludesResponse> {
-			Request(path: path, method: "GET", query: makeGetQuery(fieldsBuilds, limit), id: "preReleaseVersions-builds-get_to_many_related")
+			Request(path: path, method: "GET", query: makeGetQuery(fieldsBuilds, limit), id: "preReleaseVersions_builds_getToManyRelated")
 		}
 
 		private func makeGetQuery(_ fieldsBuilds: [FieldsBuilds]?, _ limit: Int?) -> [(String, String?)] {
@@ -25,30 +25,30 @@ extension APIEndpoint.V1.PreReleaseVersions.WithID {
 		}
 
 		public enum FieldsBuilds: String, Codable, CaseIterable {
-			case app
-			case appEncryptionDeclaration
-			case appStoreVersion
-			case betaAppReviewSubmission
-			case betaBuildLocalizations
-			case betaGroups
-			case buildAudienceType
-			case buildBetaDetail
-			case buildBundles
-			case computedMinMacOsVersion
-			case diagnosticSignatures
+			case version
+			case uploadedDate
 			case expirationDate
 			case expired
-			case iconAssetToken
-			case icons
-			case individualTesters
-			case lsMinimumSystemVersion
 			case minOsVersion
-			case perfPowerMetrics
-			case preReleaseVersion
+			case lsMinimumSystemVersion
+			case computedMinMacOsVersion
+			case iconAssetToken
 			case processingState
-			case uploadedDate
+			case buildAudienceType
 			case usesNonExemptEncryption
-			case version
+			case preReleaseVersion
+			case individualTesters
+			case betaGroups
+			case betaBuildLocalizations
+			case appEncryptionDeclaration
+			case betaAppReviewSubmission
+			case app
+			case buildBetaDetail
+			case appStoreVersion
+			case icons
+			case buildBundles
+			case perfPowerMetrics
+			case diagnosticSignatures
 		}
 	}
 }

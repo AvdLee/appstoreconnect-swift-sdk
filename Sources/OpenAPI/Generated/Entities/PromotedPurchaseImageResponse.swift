@@ -3,8 +3,11 @@
 
 import Foundation
 
+@available(*, deprecated, message: "Deprecated")
 public struct PromotedPurchaseImageResponse: Codable {
 	/// PromotedPurchaseImage
+	///
+	/// - warning: Deprecated.
 	public var data: PromotedPurchaseImage
 	public var included: [PromotedPurchase]?
 	public var links: DocumentLinks

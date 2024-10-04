@@ -13,71 +13,32 @@ extension APIEndpoint.V1.ScmRepositories {
 		/// Path: `/v1/scmRepositories/{id}`
 		public let path: String
 
-		public func get(parameters: GetParameters? = nil) -> Request<AppStoreConnect_Swift_SDK.ScmRepositoryResponse> {
-			Request(path: path, method: "GET", query: parameters?.asQuery, id: "scmRepositories-get_instance")
+		public func get(fieldsScmRepositories: [FieldsScmRepositories]? = nil, include: [Include]? = nil) -> Request<AppStoreConnect_Swift_SDK.ScmRepositoryResponse> {
+			Request(path: path, method: "GET", query: makeGetQuery(fieldsScmRepositories, include), id: "scmRepositories_getInstance")
 		}
 
-		public struct GetParameters {
-			public var fieldsScmRepositories: [FieldsScmRepositories]?
-			public var include: [Include]?
-			public var fieldsScmGitReferences: [FieldsScmGitReferences]?
-			public var fieldsScmPullRequests: [FieldsScmPullRequests]?
+		private func makeGetQuery(_ fieldsScmRepositories: [FieldsScmRepositories]?, _ include: [Include]?) -> [(String, String?)] {
+			let encoder = URLQueryEncoder(explode: false)
+			encoder.encode(fieldsScmRepositories, forKey: "fields[scmRepositories]")
+			encoder.encode(include, forKey: "include")
+			return encoder.items
+		}
 
-			public enum FieldsScmRepositories: String, Codable, CaseIterable {
-				case defaultBranch
-				case gitReferences
-				case httpCloneURL = "httpCloneUrl"
-				case lastAccessedDate
-				case ownerName
-				case pullRequests
-				case repositoryName
-				case scmProvider
-				case sshCloneURL = "sshCloneUrl"
-			}
+		public enum FieldsScmRepositories: String, Codable, CaseIterable {
+			case lastAccessedDate
+			case httpCloneURL = "httpCloneUrl"
+			case sshCloneURL = "sshCloneUrl"
+			case ownerName
+			case repositoryName
+			case scmProvider
+			case defaultBranch
+			case gitReferences
+			case pullRequests
+		}
 
-			public enum Include: String, Codable, CaseIterable {
-				case defaultBranch
-				case scmProvider
-			}
-
-			public enum FieldsScmGitReferences: String, Codable, CaseIterable {
-				case canonicalName
-				case isDeleted
-				case kind
-				case name
-				case repository
-			}
-
-			public enum FieldsScmPullRequests: String, Codable, CaseIterable {
-				case destinationBranchName
-				case destinationRepositoryName
-				case destinationRepositoryOwner
-				case isClosed
-				case isCrossRepository
-				case number
-				case repository
-				case sourceBranchName
-				case sourceRepositoryName
-				case sourceRepositoryOwner
-				case title
-				case webURL = "webUrl"
-			}
-
-			public init(fieldsScmRepositories: [FieldsScmRepositories]? = nil, include: [Include]? = nil, fieldsScmGitReferences: [FieldsScmGitReferences]? = nil, fieldsScmPullRequests: [FieldsScmPullRequests]? = nil) {
-				self.fieldsScmRepositories = fieldsScmRepositories
-				self.include = include
-				self.fieldsScmGitReferences = fieldsScmGitReferences
-				self.fieldsScmPullRequests = fieldsScmPullRequests
-			}
-
-			public var asQuery: [(String, String?)] {
-				let encoder = URLQueryEncoder(explode: false)
-				encoder.encode(fieldsScmRepositories, forKey: "fields[scmRepositories]")
-				encoder.encode(include, forKey: "include")
-				encoder.encode(fieldsScmGitReferences, forKey: "fields[scmGitReferences]")
-				encoder.encode(fieldsScmPullRequests, forKey: "fields[scmPullRequests]")
-				return encoder.items
-			}
+		public enum Include: String, Codable, CaseIterable {
+			case scmProvider
+			case defaultBranch
 		}
 	}
 }

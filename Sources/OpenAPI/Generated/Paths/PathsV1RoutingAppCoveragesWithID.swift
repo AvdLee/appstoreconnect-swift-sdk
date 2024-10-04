@@ -14,7 +14,7 @@ extension APIEndpoint.V1.RoutingAppCoverages {
 		public let path: String
 
 		public func get(fieldsRoutingAppCoverages: [FieldsRoutingAppCoverages]? = nil, include: [Include]? = nil) -> Request<AppStoreConnect_Swift_SDK.RoutingAppCoverageResponse> {
-			Request(path: path, method: "GET", query: makeGetQuery(fieldsRoutingAppCoverages, include), id: "routingAppCoverages-get_instance")
+			Request(path: path, method: "GET", query: makeGetQuery(fieldsRoutingAppCoverages, include), id: "routingAppCoverages_getInstance")
 		}
 
 		private func makeGetQuery(_ fieldsRoutingAppCoverages: [FieldsRoutingAppCoverages]?, _ include: [Include]?) -> [(String, String?)] {
@@ -25,13 +25,13 @@ extension APIEndpoint.V1.RoutingAppCoverages {
 		}
 
 		public enum FieldsRoutingAppCoverages: String, Codable, CaseIterable {
-			case appStoreVersion
-			case assetDeliveryState
-			case fileName
 			case fileSize
+			case fileName
 			case sourceFileChecksum
 			case uploadOperations
+			case assetDeliveryState
 			case uploaded
+			case appStoreVersion
 		}
 
 		public enum Include: String, Codable, CaseIterable {
@@ -39,11 +39,11 @@ extension APIEndpoint.V1.RoutingAppCoverages {
 		}
 
 		public func patch(_ body: AppStoreConnect_Swift_SDK.RoutingAppCoverageUpdateRequest) -> Request<AppStoreConnect_Swift_SDK.RoutingAppCoverageResponse> {
-			Request(path: path, method: "PATCH", body: body, id: "routingAppCoverages-update_instance")
+			Request(path: path, method: "PATCH", body: body, id: "routingAppCoverages_updateInstance")
 		}
 
 		public var delete: Request<Void> {
-			Request(path: path, method: "DELETE", id: "routingAppCoverages-delete_instance")
+			Request(path: path, method: "DELETE", id: "routingAppCoverages_deleteInstance")
 		}
 	}
 }

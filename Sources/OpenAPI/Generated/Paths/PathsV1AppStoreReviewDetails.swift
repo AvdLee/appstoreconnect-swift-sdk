@@ -14,7 +14,7 @@ extension APIEndpoint.V1 {
 		public let path: String
 
 		public func post(_ body: AppStoreConnect_Swift_SDK.AppStoreReviewDetailCreateRequest) -> Request<AppStoreConnect_Swift_SDK.AppStoreReviewDetailResponse> {
-			Request(path: path, method: "POST", body: body, id: "appStoreReviewDetails-create_instance")
+			Request(path: path, method: "POST", body: body, id: "appStoreReviewDetails_createInstance")
 		}
 	}
 }

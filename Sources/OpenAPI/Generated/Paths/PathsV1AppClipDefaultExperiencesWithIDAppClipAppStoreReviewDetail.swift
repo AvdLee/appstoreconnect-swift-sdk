@@ -14,7 +14,7 @@ extension APIEndpoint.V1.AppClipDefaultExperiences.WithID {
 		public let path: String
 
 		public func get(parameters: GetParameters? = nil) -> Request<AppStoreConnect_Swift_SDK.AppClipAppStoreReviewDetailResponse> {
-			Request(path: path, method: "GET", query: parameters?.asQuery, id: "appClipDefaultExperiences-appClipAppStoreReviewDetail-get_to_one_related")
+			Request(path: path, method: "GET", query: parameters?.asQuery, id: "appClipDefaultExperiences_appClipAppStoreReviewDetail_getToOneRelated")
 		}
 
 		public struct GetParameters {
@@ -23,17 +23,17 @@ extension APIEndpoint.V1.AppClipDefaultExperiences.WithID {
 			public var include: [Include]?
 
 			public enum FieldsAppClipAppStoreReviewDetails: String, Codable, CaseIterable {
-				case appClipDefaultExperience
 				case invocationURLs = "invocationUrls"
+				case appClipDefaultExperience
 			}
 
 			public enum FieldsAppClipDefaultExperiences: String, Codable, CaseIterable {
 				case action
 				case appClip
-				case appClipAppStoreReviewDetail
-				case appClipDefaultExperienceLocalizations
-				case appClipDefaultExperienceTemplate
 				case releaseWithAppStoreVersion
+				case appClipDefaultExperienceLocalizations
+				case appClipAppStoreReviewDetail
+				case appClipDefaultExperienceTemplate
 			}
 
 			public enum Include: String, Codable, CaseIterable {

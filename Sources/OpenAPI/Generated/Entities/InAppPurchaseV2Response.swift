@@ -17,6 +17,7 @@ public struct InAppPurchaseV2Response: Codable {
 		case promotedPurchase(PromotedPurchase)
 		case inAppPurchasePriceSchedule(InAppPurchasePriceSchedule)
 		case inAppPurchaseAvailability(InAppPurchaseAvailability)
+		case inAppPurchaseImage(InAppPurchaseImage)
 
 		public init(from decoder: Decoder) throws {
 			let container = try decoder.singleValueContainer()
@@ -34,10 +35,12 @@ public struct InAppPurchaseV2Response: Codable {
 				self = .inAppPurchasePriceSchedule(value)
 			} else if let value = try? container.decode(InAppPurchaseAvailability.self) {
 				self = .inAppPurchaseAvailability(value)
+			} else if let value = try? container.decode(InAppPurchaseImage.self) {
+				self = .inAppPurchaseImage(value)
 			} else {
 				throw DecodingError.dataCorruptedError(
 					in: container,
-					debugDescription: "Data could not be decoded as any of the expected types (InAppPurchaseLocalization, InAppPurchasePricePoint, InAppPurchaseContent, InAppPurchaseAppStoreReviewScreenshot, PromotedPurchase, InAppPurchasePriceSchedule, InAppPurchaseAvailability)."
+					debugDescription: "Data could not be decoded as any of the expected types (InAppPurchaseLocalization, InAppPurchasePricePoint, InAppPurchaseContent, InAppPurchaseAppStoreReviewScreenshot, PromotedPurchase, InAppPurchasePriceSchedule, InAppPurchaseAvailability, InAppPurchaseImage)."
 				)
 			}
 		}
@@ -52,6 +55,7 @@ public struct InAppPurchaseV2Response: Codable {
 			case .promotedPurchase(let value): try container.encode(value)
 			case .inAppPurchasePriceSchedule(let value): try container.encode(value)
 			case .inAppPurchaseAvailability(let value): try container.encode(value)
+			case .inAppPurchaseImage(let value): try container.encode(value)
 			}
 		}
 	}

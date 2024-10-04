@@ -14,7 +14,7 @@ extension APIEndpoint.V1 {
 		public let path: String
 
 		public func get(parameters: GetParameters) -> Request<AppStoreConnect_Swift_SDK.ReviewSubmissionsResponse> {
-			Request(path: path, method: "GET", query: parameters.asQuery, id: "reviewSubmissions-get_collection")
+			Request(path: path, method: "GET", query: parameters.asQuery, id: "reviewSubmissions_getCollection")
 		}
 
 		public struct GetParameters {
@@ -22,9 +22,9 @@ extension APIEndpoint.V1 {
 			public var filterState: [FilterState]?
 			public var filterApp: [String]
 			public var fieldsReviewSubmissions: [FieldsReviewSubmissions]?
+			public var fieldsReviewSubmissionItems: [FieldsReviewSubmissionItems]?
 			public var limit: Int?
 			public var include: [Include]?
-			public var fieldsReviewSubmissionItems: [FieldsReviewSubmissionItems]?
 			public var limitItems: Int?
 
 			public enum FilterPlatform: String, Codable, CaseIterable {
@@ -45,46 +45,46 @@ extension APIEndpoint.V1 {
 			}
 
 			public enum FieldsReviewSubmissions: String, Codable, CaseIterable {
-				case app
-				case appStoreVersionForReview
-				case canceled
-				case items
-				case lastUpdatedByActor
 				case platform
+				case submittedDate
 				case state
 				case submitted
+				case canceled
+				case app
+				case items
+				case appStoreVersionForReview
 				case submittedByActor
-				case submittedDate
+				case lastUpdatedByActor
+			}
+
+			public enum FieldsReviewSubmissionItems: String, Codable, CaseIterable {
+				case state
+				case resolved
+				case removed
+				case reviewSubmission
+				case appStoreVersion
+				case appCustomProductPageVersion
+				case appStoreVersionExperiment
+				case appStoreVersionExperimentV2
+				case appEvent
 			}
 
 			public enum Include: String, Codable, CaseIterable {
 				case app
-				case appStoreVersionForReview
 				case items
-				case lastUpdatedByActor
+				case appStoreVersionForReview
 				case submittedByActor
+				case lastUpdatedByActor
 			}
 
-			public enum FieldsReviewSubmissionItems: String, Codable, CaseIterable {
-				case appCustomProductPageVersion
-				case appEvent
-				case appStoreVersion
-				case appStoreVersionExperiment
-				case appStoreVersionExperimentV2
-				case removed
-				case resolved
-				case reviewSubmission
-				case state
-			}
-
-			public init(filterPlatform: [FilterPlatform]? = nil, filterState: [FilterState]? = nil, filterApp: [String], fieldsReviewSubmissions: [FieldsReviewSubmissions]? = nil, limit: Int? = nil, include: [Include]? = nil, fieldsReviewSubmissionItems: [FieldsReviewSubmissionItems]? = nil, limitItems: Int? = nil) {
+			public init(filterPlatform: [FilterPlatform]? = nil, filterState: [FilterState]? = nil, filterApp: [String], fieldsReviewSubmissions: [FieldsReviewSubmissions]? = nil, fieldsReviewSubmissionItems: [FieldsReviewSubmissionItems]? = nil, limit: Int? = nil, include: [Include]? = nil, limitItems: Int? = nil) {
 				self.filterPlatform = filterPlatform
 				self.filterState = filterState
 				self.filterApp = filterApp
 				self.fieldsReviewSubmissions = fieldsReviewSubmissions
+				self.fieldsReviewSubmissionItems = fieldsReviewSubmissionItems
 				self.limit = limit
 				self.include = include
-				self.fieldsReviewSubmissionItems = fieldsReviewSubmissionItems
 				self.limitItems = limitItems
 			}
 
@@ -94,16 +94,16 @@ extension APIEndpoint.V1 {
 				encoder.encode(filterState, forKey: "filter[state]")
 				encoder.encode(filterApp, forKey: "filter[app]")
 				encoder.encode(fieldsReviewSubmissions, forKey: "fields[reviewSubmissions]")
+				encoder.encode(fieldsReviewSubmissionItems, forKey: "fields[reviewSubmissionItems]")
 				encoder.encode(limit, forKey: "limit")
 				encoder.encode(include, forKey: "include")
-				encoder.encode(fieldsReviewSubmissionItems, forKey: "fields[reviewSubmissionItems]")
 				encoder.encode(limitItems, forKey: "limit[items]")
 				return encoder.items
 			}
 		}
 
 		public func post(_ body: AppStoreConnect_Swift_SDK.ReviewSubmissionCreateRequest) -> Request<AppStoreConnect_Swift_SDK.ReviewSubmissionResponse> {
-			Request(path: path, method: "POST", body: body, id: "reviewSubmissions-create_instance")
+			Request(path: path, method: "POST", body: body, id: "reviewSubmissions_createInstance")
 		}
 	}
 }

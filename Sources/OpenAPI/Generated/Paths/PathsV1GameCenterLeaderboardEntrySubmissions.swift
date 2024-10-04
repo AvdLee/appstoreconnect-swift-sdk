@@ -14,7 +14,7 @@ extension APIEndpoint.V1 {
 		public let path: String
 
 		public func post(_ body: AppStoreConnect_Swift_SDK.GameCenterLeaderboardEntrySubmissionCreateRequest) -> Request<AppStoreConnect_Swift_SDK.GameCenterLeaderboardEntrySubmissionResponse> {
-			Request(path: path, method: "POST", body: body, id: "gameCenterLeaderboardEntrySubmissions-create_instance")
+			Request(path: path, method: "POST", body: body, id: "gameCenterLeaderboardEntrySubmissions_createInstance")
 		}
 	}
 }

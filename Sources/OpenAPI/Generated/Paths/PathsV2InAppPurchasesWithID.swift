@@ -14,119 +14,137 @@ extension APIEndpoint.V2.InAppPurchases {
 		public let path: String
 
 		public func get(parameters: GetParameters? = nil) -> Request<AppStoreConnect_Swift_SDK.InAppPurchaseV2Response> {
-			Request(path: path, method: "GET", query: parameters?.asQuery, id: "inAppPurchasesV2-get_instance")
+			Request(path: path, method: "GET", query: parameters?.asQuery, id: "inAppPurchasesV2_getInstance")
 		}
 
 		public struct GetParameters {
 			public var fieldsInAppPurchases: [FieldsInAppPurchases]?
-			public var include: [Include]?
-			public var fieldsInAppPurchaseAvailabilities: [FieldsInAppPurchaseAvailabilities]?
+			public var fieldsInAppPurchaseLocalizations: [FieldsInAppPurchaseLocalizations]?
+			public var fieldsInAppPurchasePricePoints: [FieldsInAppPurchasePricePoints]?
+			public var fieldsInAppPurchaseContents: [FieldsInAppPurchaseContents]?
 			public var fieldsInAppPurchaseAppStoreReviewScreenshots: [FieldsInAppPurchaseAppStoreReviewScreenshots]?
 			public var fieldsPromotedPurchases: [FieldsPromotedPurchases]?
-			public var fieldsInAppPurchasePricePoints: [FieldsInAppPurchasePricePoints]?
-			public var fieldsInAppPurchaseLocalizations: [FieldsInAppPurchaseLocalizations]?
 			public var fieldsInAppPurchasePriceSchedules: [FieldsInAppPurchasePriceSchedules]?
-			public var fieldsInAppPurchaseContents: [FieldsInAppPurchaseContents]?
+			public var fieldsInAppPurchaseAvailabilities: [FieldsInAppPurchaseAvailabilities]?
+			public var fieldsInAppPurchaseImages: [FieldsInAppPurchaseImages]?
+			public var include: [Include]?
+			public var limitImages: Int?
 			public var limitInAppPurchaseLocalizations: Int?
 			public var limitPricePoints: Int?
 
 			public enum FieldsInAppPurchases: String, Codable, CaseIterable {
-				case app
-				case appStoreReviewScreenshot
-				case content
-				case contentHosting
-				case familySharable
-				case iapPriceSchedule
-				case inAppPurchaseAvailability
-				case inAppPurchaseLocalizations
-				case inAppPurchaseType
 				case name
-				case pricePoints
 				case productID = "productId"
-				case promotedPurchase
-				case reviewNote
+				case inAppPurchaseType
 				case state
-			}
-
-			public enum Include: String, Codable, CaseIterable {
-				case appStoreReviewScreenshot
-				case content
-				case iapPriceSchedule
-				case inAppPurchaseAvailability
+				case reviewNote
+				case familySharable
+				case contentHosting
+				case app
 				case inAppPurchaseLocalizations
 				case pricePoints
+				case content
+				case appStoreReviewScreenshot
 				case promotedPurchase
+				case iapPriceSchedule
+				case inAppPurchaseAvailability
+				case images
 			}
 
-			public enum FieldsInAppPurchaseAvailabilities: String, Codable, CaseIterable {
-				case availableInNewTerritories
-				case availableTerritories
-				case inAppPurchase
-			}
-
-			public enum FieldsInAppPurchaseAppStoreReviewScreenshots: String, Codable, CaseIterable {
-				case assetDeliveryState
-				case assetToken
-				case assetType
-				case fileName
-				case fileSize
-				case imageAsset
-				case inAppPurchaseV2
-				case sourceFileChecksum
-				case uploadOperations
-				case uploaded
-			}
-
-			public enum FieldsPromotedPurchases: String, Codable, CaseIterable {
-				case app
-				case enabled
-				case inAppPurchaseV2
-				case promotionImages
+			public enum FieldsInAppPurchaseLocalizations: String, Codable, CaseIterable {
+				case name
+				case locale
+				case description
 				case state
-				case subscription
-				case visibleForAllUsers
+				case inAppPurchaseV2
 			}
 
 			public enum FieldsInAppPurchasePricePoints: String, Codable, CaseIterable {
 				case customerPrice
-				case inAppPurchaseV2
 				case proceeds
 				case territory
-			}
-
-			public enum FieldsInAppPurchaseLocalizations: String, Codable, CaseIterable {
-				case description
 				case inAppPurchaseV2
-				case locale
-				case name
-				case state
-			}
-
-			public enum FieldsInAppPurchasePriceSchedules: String, Codable, CaseIterable {
-				case automaticPrices
-				case baseTerritory
-				case inAppPurchase
-				case manualPrices
 			}
 
 			public enum FieldsInAppPurchaseContents: String, Codable, CaseIterable {
 				case fileName
 				case fileSize
-				case inAppPurchaseV2
-				case lastModifiedDate
 				case url
+				case lastModifiedDate
+				case inAppPurchaseV2
 			}
 
-			public init(fieldsInAppPurchases: [FieldsInAppPurchases]? = nil, include: [Include]? = nil, fieldsInAppPurchaseAvailabilities: [FieldsInAppPurchaseAvailabilities]? = nil, fieldsInAppPurchaseAppStoreReviewScreenshots: [FieldsInAppPurchaseAppStoreReviewScreenshots]? = nil, fieldsPromotedPurchases: [FieldsPromotedPurchases]? = nil, fieldsInAppPurchasePricePoints: [FieldsInAppPurchasePricePoints]? = nil, fieldsInAppPurchaseLocalizations: [FieldsInAppPurchaseLocalizations]? = nil, fieldsInAppPurchasePriceSchedules: [FieldsInAppPurchasePriceSchedules]? = nil, fieldsInAppPurchaseContents: [FieldsInAppPurchaseContents]? = nil, limitInAppPurchaseLocalizations: Int? = nil, limitPricePoints: Int? = nil) {
+			public enum FieldsInAppPurchaseAppStoreReviewScreenshots: String, Codable, CaseIterable {
+				case fileSize
+				case fileName
+				case sourceFileChecksum
+				case imageAsset
+				case assetToken
+				case assetType
+				case uploadOperations
+				case assetDeliveryState
+				case uploaded
+				case inAppPurchaseV2
+			}
+
+			public enum FieldsPromotedPurchases: String, Codable, CaseIterable {
+				case visibleForAllUsers
+				case enabled
+				case state
+				case app
+				case inAppPurchaseV2
+				case subscription
+				case promotionImages
+			}
+
+			public enum FieldsInAppPurchasePriceSchedules: String, Codable, CaseIterable {
+				case inAppPurchase
+				case baseTerritory
+				case manualPrices
+				case automaticPrices
+			}
+
+			public enum FieldsInAppPurchaseAvailabilities: String, Codable, CaseIterable {
+				case availableInNewTerritories
+				case inAppPurchase
+				case availableTerritories
+			}
+
+			public enum FieldsInAppPurchaseImages: String, Codable, CaseIterable {
+				case fileSize
+				case fileName
+				case sourceFileChecksum
+				case assetToken
+				case imageAsset
+				case uploadOperations
+				case uploaded
+				case state
+				case inAppPurchase
+			}
+
+			public enum Include: String, Codable, CaseIterable {
+				case inAppPurchaseLocalizations
+				case pricePoints
+				case content
+				case appStoreReviewScreenshot
+				case promotedPurchase
+				case iapPriceSchedule
+				case inAppPurchaseAvailability
+				case images
+			}
+
+			public init(fieldsInAppPurchases: [FieldsInAppPurchases]? = nil, fieldsInAppPurchaseLocalizations: [FieldsInAppPurchaseLocalizations]? = nil, fieldsInAppPurchasePricePoints: [FieldsInAppPurchasePricePoints]? = nil, fieldsInAppPurchaseContents: [FieldsInAppPurchaseContents]? = nil, fieldsInAppPurchaseAppStoreReviewScreenshots: [FieldsInAppPurchaseAppStoreReviewScreenshots]? = nil, fieldsPromotedPurchases: [FieldsPromotedPurchases]? = nil, fieldsInAppPurchasePriceSchedules: [FieldsInAppPurchasePriceSchedules]? = nil, fieldsInAppPurchaseAvailabilities: [FieldsInAppPurchaseAvailabilities]? = nil, fieldsInAppPurchaseImages: [FieldsInAppPurchaseImages]? = nil, include: [Include]? = nil, limitImages: Int? = nil, limitInAppPurchaseLocalizations: Int? = nil, limitPricePoints: Int? = nil) {
 				self.fieldsInAppPurchases = fieldsInAppPurchases
-				self.include = include
-				self.fieldsInAppPurchaseAvailabilities = fieldsInAppPurchaseAvailabilities
+				self.fieldsInAppPurchaseLocalizations = fieldsInAppPurchaseLocalizations
+				self.fieldsInAppPurchasePricePoints = fieldsInAppPurchasePricePoints
+				self.fieldsInAppPurchaseContents = fieldsInAppPurchaseContents
 				self.fieldsInAppPurchaseAppStoreReviewScreenshots = fieldsInAppPurchaseAppStoreReviewScreenshots
 				self.fieldsPromotedPurchases = fieldsPromotedPurchases
-				self.fieldsInAppPurchasePricePoints = fieldsInAppPurchasePricePoints
-				self.fieldsInAppPurchaseLocalizations = fieldsInAppPurchaseLocalizations
 				self.fieldsInAppPurchasePriceSchedules = fieldsInAppPurchasePriceSchedules
-				self.fieldsInAppPurchaseContents = fieldsInAppPurchaseContents
+				self.fieldsInAppPurchaseAvailabilities = fieldsInAppPurchaseAvailabilities
+				self.fieldsInAppPurchaseImages = fieldsInAppPurchaseImages
+				self.include = include
+				self.limitImages = limitImages
 				self.limitInAppPurchaseLocalizations = limitInAppPurchaseLocalizations
 				self.limitPricePoints = limitPricePoints
 			}
@@ -134,14 +152,16 @@ extension APIEndpoint.V2.InAppPurchases {
 			public var asQuery: [(String, String?)] {
 				let encoder = URLQueryEncoder(explode: false)
 				encoder.encode(fieldsInAppPurchases, forKey: "fields[inAppPurchases]")
-				encoder.encode(include, forKey: "include")
-				encoder.encode(fieldsInAppPurchaseAvailabilities, forKey: "fields[inAppPurchaseAvailabilities]")
+				encoder.encode(fieldsInAppPurchaseLocalizations, forKey: "fields[inAppPurchaseLocalizations]")
+				encoder.encode(fieldsInAppPurchasePricePoints, forKey: "fields[inAppPurchasePricePoints]")
+				encoder.encode(fieldsInAppPurchaseContents, forKey: "fields[inAppPurchaseContents]")
 				encoder.encode(fieldsInAppPurchaseAppStoreReviewScreenshots, forKey: "fields[inAppPurchaseAppStoreReviewScreenshots]")
 				encoder.encode(fieldsPromotedPurchases, forKey: "fields[promotedPurchases]")
-				encoder.encode(fieldsInAppPurchasePricePoints, forKey: "fields[inAppPurchasePricePoints]")
-				encoder.encode(fieldsInAppPurchaseLocalizations, forKey: "fields[inAppPurchaseLocalizations]")
 				encoder.encode(fieldsInAppPurchasePriceSchedules, forKey: "fields[inAppPurchasePriceSchedules]")
-				encoder.encode(fieldsInAppPurchaseContents, forKey: "fields[inAppPurchaseContents]")
+				encoder.encode(fieldsInAppPurchaseAvailabilities, forKey: "fields[inAppPurchaseAvailabilities]")
+				encoder.encode(fieldsInAppPurchaseImages, forKey: "fields[inAppPurchaseImages]")
+				encoder.encode(include, forKey: "include")
+				encoder.encode(limitImages, forKey: "limit[images]")
 				encoder.encode(limitInAppPurchaseLocalizations, forKey: "limit[inAppPurchaseLocalizations]")
 				encoder.encode(limitPricePoints, forKey: "limit[pricePoints]")
 				return encoder.items
@@ -149,11 +169,11 @@ extension APIEndpoint.V2.InAppPurchases {
 		}
 
 		public func patch(_ body: AppStoreConnect_Swift_SDK.InAppPurchaseV2UpdateRequest) -> Request<AppStoreConnect_Swift_SDK.InAppPurchaseV2Response> {
-			Request(path: path, method: "PATCH", body: body, id: "inAppPurchasesV2-update_instance")
+			Request(path: path, method: "PATCH", body: body, id: "inAppPurchasesV2_updateInstance")
 		}
 
 		public var delete: Request<Void> {
-			Request(path: path, method: "DELETE", id: "inAppPurchasesV2-delete_instance")
+			Request(path: path, method: "DELETE", id: "inAppPurchasesV2_deleteInstance")
 		}
 	}
 }

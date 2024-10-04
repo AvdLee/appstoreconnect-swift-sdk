@@ -14,67 +14,67 @@ extension APIEndpoint.V1.PromotedPurchases {
 		public let path: String
 
 		public func get(parameters: GetParameters? = nil) -> Request<AppStoreConnect_Swift_SDK.PromotedPurchaseResponse> {
-			Request(path: path, method: "GET", query: parameters?.asQuery, id: "promotedPurchases-get_instance")
+			Request(path: path, method: "GET", query: parameters?.asQuery, id: "promotedPurchases_getInstance")
 		}
 
 		public struct GetParameters {
 			public var fieldsPromotedPurchases: [FieldsPromotedPurchases]?
-			public var include: [Include]?
 			public var fieldsPromotedPurchaseImages: [FieldsPromotedPurchaseImages]?
+			public var include: [Include]?
 			public var limitPromotionImages: Int?
 
 			public enum FieldsPromotedPurchases: String, Codable, CaseIterable {
-				case app
-				case enabled
-				case inAppPurchaseV2
-				case promotionImages
-				case state
-				case subscription
 				case visibleForAllUsers
+				case enabled
+				case state
+				case app
+				case inAppPurchaseV2
+				case subscription
+				case promotionImages
+			}
+
+			public enum FieldsPromotedPurchaseImages: String, Codable, CaseIterable {
+				case fileSize
+				case fileName
+				case sourceFileChecksum
+				case assetToken
+				case imageAsset
+				case assetType
+				case uploadOperations
+				case uploaded
+				case state
+				case promotedPurchase
 			}
 
 			public enum Include: String, Codable, CaseIterable {
 				case inAppPurchaseV2
-				case promotionImages
 				case subscription
+				case promotionImages
 			}
 
-			public enum FieldsPromotedPurchaseImages: String, Codable, CaseIterable {
-				case assetToken
-				case assetType
-				case fileName
-				case fileSize
-				case imageAsset
-				case promotedPurchase
-				case sourceFileChecksum
-				case state
-				case uploadOperations
-				case uploaded
-			}
-
-			public init(fieldsPromotedPurchases: [FieldsPromotedPurchases]? = nil, include: [Include]? = nil, fieldsPromotedPurchaseImages: [FieldsPromotedPurchaseImages]? = nil, limitPromotionImages: Int? = nil) {
+			public init(fieldsPromotedPurchases: [FieldsPromotedPurchases]? = nil, fieldsPromotedPurchaseImages: [FieldsPromotedPurchaseImages]? = nil, include: [Include]? = nil, limitPromotionImages: Int? = nil) {
 				self.fieldsPromotedPurchases = fieldsPromotedPurchases
-				self.include = include
 				self.fieldsPromotedPurchaseImages = fieldsPromotedPurchaseImages
+				self.include = include
 				self.limitPromotionImages = limitPromotionImages
 			}
 
 			public var asQuery: [(String, String?)] {
 				let encoder = URLQueryEncoder(explode: false)
 				encoder.encode(fieldsPromotedPurchases, forKey: "fields[promotedPurchases]")
-				encoder.encode(include, forKey: "include")
 				encoder.encode(fieldsPromotedPurchaseImages, forKey: "fields[promotedPurchaseImages]")
+				encoder.encode(include, forKey: "include")
 				encoder.encode(limitPromotionImages, forKey: "limit[promotionImages]")
 				return encoder.items
 			}
 		}
 
 		public func patch(_ body: AppStoreConnect_Swift_SDK.PromotedPurchaseUpdateRequest) -> Request<AppStoreConnect_Swift_SDK.PromotedPurchaseResponse> {
-			Request(path: path, method: "PATCH", body: body, id: "promotedPurchases-update_instance")
+			Request(path: path, method: "PATCH", body: body, id: "promotedPurchases_updateInstance")
 		}
 
 		public var delete: Request<Void> {
-			Request(path: path, method: "DELETE", id: "promotedPurchases-delete_instance")
+			Request(path: path, method: "DELETE", id: "promotedPurchases_deleteInstance")
 		}
 	}
 }

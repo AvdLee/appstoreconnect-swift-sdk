@@ -14,14 +14,14 @@ extension APIEndpoint.V1.AppStoreVersions.WithID {
 		public let path: String
 
 		public func get(parameters: GetParameters? = nil) -> Request<AppStoreConnect_Swift_SDK.AlternativeDistributionPackageResponse> {
-			Request(path: path, method: "GET", query: parameters?.asQuery, id: "appStoreVersions-alternativeDistributionPackage-get_to_one_related")
+			Request(path: path, method: "GET", query: parameters?.asQuery, id: "appStoreVersions_alternativeDistributionPackage_getToOneRelated")
 		}
 
 		public struct GetParameters {
 			public var fieldsAlternativeDistributionPackages: [FieldsAlternativeDistributionPackages]?
 			public var fieldsAlternativeDistributionPackageVersions: [FieldsAlternativeDistributionPackageVersions]?
-			public var limitVersions: Int?
 			public var include: [Include]?
+			public var limitVersions: Int?
 
 			public enum FieldsAlternativeDistributionPackages: String, Codable, CaseIterable {
 				case appStoreVersion
@@ -29,33 +29,33 @@ extension APIEndpoint.V1.AppStoreVersions.WithID {
 			}
 
 			public enum FieldsAlternativeDistributionPackageVersions: String, Codable, CaseIterable {
-				case alternativeDistributionPackage
-				case deltas
-				case fileChecksum
-				case state
 				case url
 				case urlExpirationDate
-				case variants
 				case version
+				case fileChecksum
+				case state
+				case variants
+				case deltas
+				case alternativeDistributionPackage
 			}
 
 			public enum Include: String, Codable, CaseIterable {
 				case versions
 			}
 
-			public init(fieldsAlternativeDistributionPackages: [FieldsAlternativeDistributionPackages]? = nil, fieldsAlternativeDistributionPackageVersions: [FieldsAlternativeDistributionPackageVersions]? = nil, limitVersions: Int? = nil, include: [Include]? = nil) {
+			public init(fieldsAlternativeDistributionPackages: [FieldsAlternativeDistributionPackages]? = nil, fieldsAlternativeDistributionPackageVersions: [FieldsAlternativeDistributionPackageVersions]? = nil, include: [Include]? = nil, limitVersions: Int? = nil) {
 				self.fieldsAlternativeDistributionPackages = fieldsAlternativeDistributionPackages
 				self.fieldsAlternativeDistributionPackageVersions = fieldsAlternativeDistributionPackageVersions
-				self.limitVersions = limitVersions
 				self.include = include
+				self.limitVersions = limitVersions
 			}
 
 			public var asQuery: [(String, String?)] {
 				let encoder = URLQueryEncoder(explode: false)
 				encoder.encode(fieldsAlternativeDistributionPackages, forKey: "fields[alternativeDistributionPackages]")
 				encoder.encode(fieldsAlternativeDistributionPackageVersions, forKey: "fields[alternativeDistributionPackageVersions]")
-				encoder.encode(limitVersions, forKey: "limit[versions]")
 				encoder.encode(include, forKey: "include")
+				encoder.encode(limitVersions, forKey: "limit[versions]")
 				return encoder.items
 			}
 		}

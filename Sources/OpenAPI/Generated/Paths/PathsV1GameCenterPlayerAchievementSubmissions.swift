@@ -14,7 +14,7 @@ extension APIEndpoint.V1 {
 		public let path: String
 
 		public func post(_ body: AppStoreConnect_Swift_SDK.GameCenterPlayerAchievementSubmissionCreateRequest) -> Request<AppStoreConnect_Swift_SDK.GameCenterPlayerAchievementSubmissionResponse> {
-			Request(path: path, method: "POST", body: body, id: "gameCenterPlayerAchievementSubmissions-create_instance")
+			Request(path: path, method: "POST", body: body, id: "gameCenterPlayerAchievementSubmissions_createInstance")
 		}
 	}
 }

@@ -14,54 +14,55 @@ extension APIEndpoint.V2.InAppPurchases.WithID {
 		public let path: String
 
 		public func get(parameters: GetParameters? = nil) -> Request<AppStoreConnect_Swift_SDK.InAppPurchaseContentResponse> {
-			Request(path: path, method: "GET", query: parameters?.asQuery, id: "inAppPurchasesV2-content-get_to_one_related")
+			Request(path: path, method: "GET", query: parameters?.asQuery, id: "inAppPurchasesV2_content_getToOneRelated")
 		}
 
 		public struct GetParameters {
-			public var fieldsInAppPurchases: [FieldsInAppPurchases]?
 			public var fieldsInAppPurchaseContents: [FieldsInAppPurchaseContents]?
+			public var fieldsInAppPurchases: [FieldsInAppPurchases]?
 			public var include: [Include]?
-
-			public enum FieldsInAppPurchases: String, Codable, CaseIterable {
-				case app
-				case appStoreReviewScreenshot
-				case content
-				case contentHosting
-				case familySharable
-				case iapPriceSchedule
-				case inAppPurchaseAvailability
-				case inAppPurchaseLocalizations
-				case inAppPurchaseType
-				case name
-				case pricePoints
-				case productID = "productId"
-				case promotedPurchase
-				case reviewNote
-				case state
-			}
 
 			public enum FieldsInAppPurchaseContents: String, Codable, CaseIterable {
 				case fileName
 				case fileSize
-				case inAppPurchaseV2
-				case lastModifiedDate
 				case url
+				case lastModifiedDate
+				case inAppPurchaseV2
+			}
+
+			public enum FieldsInAppPurchases: String, Codable, CaseIterable {
+				case name
+				case productID = "productId"
+				case inAppPurchaseType
+				case state
+				case reviewNote
+				case familySharable
+				case contentHosting
+				case app
+				case inAppPurchaseLocalizations
+				case pricePoints
+				case content
+				case appStoreReviewScreenshot
+				case promotedPurchase
+				case iapPriceSchedule
+				case inAppPurchaseAvailability
+				case images
 			}
 
 			public enum Include: String, Codable, CaseIterable {
 				case inAppPurchaseV2
 			}
 
-			public init(fieldsInAppPurchases: [FieldsInAppPurchases]? = nil, fieldsInAppPurchaseContents: [FieldsInAppPurchaseContents]? = nil, include: [Include]? = nil) {
-				self.fieldsInAppPurchases = fieldsInAppPurchases
+			public init(fieldsInAppPurchaseContents: [FieldsInAppPurchaseContents]? = nil, fieldsInAppPurchases: [FieldsInAppPurchases]? = nil, include: [Include]? = nil) {
 				self.fieldsInAppPurchaseContents = fieldsInAppPurchaseContents
+				self.fieldsInAppPurchases = fieldsInAppPurchases
 				self.include = include
 			}
 
 			public var asQuery: [(String, String?)] {
 				let encoder = URLQueryEncoder(explode: false)
-				encoder.encode(fieldsInAppPurchases, forKey: "fields[inAppPurchases]")
 				encoder.encode(fieldsInAppPurchaseContents, forKey: "fields[inAppPurchaseContents]")
+				encoder.encode(fieldsInAppPurchases, forKey: "fields[inAppPurchases]")
 				encoder.encode(include, forKey: "include")
 				return encoder.items
 			}

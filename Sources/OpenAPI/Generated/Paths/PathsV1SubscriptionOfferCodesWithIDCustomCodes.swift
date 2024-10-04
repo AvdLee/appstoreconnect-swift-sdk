@@ -14,7 +14,7 @@ extension APIEndpoint.V1.SubscriptionOfferCodes.WithID {
 		public let path: String
 
 		public func get(parameters: GetParameters? = nil) -> Request<AppStoreConnect_Swift_SDK.SubscriptionOfferCodeCustomCodesResponse> {
-			Request(path: path, method: "GET", query: parameters?.asQuery, id: "subscriptionOfferCodes-customCodes-get_to_many_related")
+			Request(path: path, method: "GET", query: parameters?.asQuery, id: "subscriptionOfferCodes_customCodes_getToManyRelated")
 		}
 
 		public struct GetParameters {
@@ -24,27 +24,27 @@ extension APIEndpoint.V1.SubscriptionOfferCodes.WithID {
 			public var include: [Include]?
 
 			public enum FieldsSubscriptionOfferCodeCustomCodes: String, Codable, CaseIterable {
-				case active
-				case createdDate
 				case customCode
-				case expirationDate
 				case numberOfCodes
+				case createdDate
+				case expirationDate
+				case active
 				case offerCode
 			}
 
 			public enum FieldsSubscriptionOfferCodes: String, Codable, CaseIterable {
-				case active
-				case customCodes
-				case customerEligibilities
-				case duration
 				case name
-				case numberOfPeriods
+				case customerEligibilities
 				case offerEligibility
+				case duration
 				case offerMode
-				case oneTimeUseCodes
-				case prices
-				case subscription
+				case numberOfPeriods
 				case totalNumberOfCodes
+				case active
+				case subscription
+				case oneTimeUseCodes
+				case customCodes
+				case prices
 			}
 
 			public enum Include: String, Codable, CaseIterable {

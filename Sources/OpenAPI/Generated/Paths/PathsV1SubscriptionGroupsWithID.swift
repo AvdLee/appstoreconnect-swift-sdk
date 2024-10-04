@@ -14,62 +14,64 @@ extension APIEndpoint.V1.SubscriptionGroups {
 		public let path: String
 
 		public func get(parameters: GetParameters? = nil) -> Request<AppStoreConnect_Swift_SDK.SubscriptionGroupResponse> {
-			Request(path: path, method: "GET", query: parameters?.asQuery, id: "subscriptionGroups-get_instance")
+			Request(path: path, method: "GET", query: parameters?.asQuery, id: "subscriptionGroups_getInstance")
 		}
 
 		public struct GetParameters {
 			public var fieldsSubscriptionGroups: [FieldsSubscriptionGroups]?
-			public var include: [Include]?
 			public var fieldsSubscriptions: [FieldsSubscriptions]?
 			public var fieldsSubscriptionGroupLocalizations: [FieldsSubscriptionGroupLocalizations]?
+			public var include: [Include]?
 			public var limitSubscriptionGroupLocalizations: Int?
 			public var limitSubscriptions: Int?
 
 			public enum FieldsSubscriptionGroups: String, Codable, CaseIterable {
-				case app
 				case referenceName
-				case subscriptionGroupLocalizations
+				case app
 				case subscriptions
-			}
-
-			public enum Include: String, Codable, CaseIterable {
 				case subscriptionGroupLocalizations
-				case subscriptions
 			}
 
 			public enum FieldsSubscriptions: String, Codable, CaseIterable {
-				case appStoreReviewScreenshot
-				case familySharable
-				case group
-				case groupLevel
-				case introductoryOffers
 				case name
-				case offerCodes
-				case pricePoints
-				case prices
 				case productID = "productId"
-				case promotedPurchase
-				case promotionalOffers
-				case reviewNote
+				case familySharable
 				case state
-				case subscriptionAvailability
-				case subscriptionLocalizations
 				case subscriptionPeriod
+				case reviewNote
+				case groupLevel
+				case subscriptionLocalizations
+				case appStoreReviewScreenshot
+				case group
+				case introductoryOffers
+				case promotionalOffers
+				case offerCodes
+				case prices
+				case pricePoints
+				case promotedPurchase
+				case subscriptionAvailability
+				case winBackOffers
+				case images
 			}
 
 			public enum FieldsSubscriptionGroupLocalizations: String, Codable, CaseIterable {
+				case name
 				case customAppName
 				case locale
-				case name
 				case state
 				case subscriptionGroup
 			}
 
-			public init(fieldsSubscriptionGroups: [FieldsSubscriptionGroups]? = nil, include: [Include]? = nil, fieldsSubscriptions: [FieldsSubscriptions]? = nil, fieldsSubscriptionGroupLocalizations: [FieldsSubscriptionGroupLocalizations]? = nil, limitSubscriptionGroupLocalizations: Int? = nil, limitSubscriptions: Int? = nil) {
+			public enum Include: String, Codable, CaseIterable {
+				case subscriptions
+				case subscriptionGroupLocalizations
+			}
+
+			public init(fieldsSubscriptionGroups: [FieldsSubscriptionGroups]? = nil, fieldsSubscriptions: [FieldsSubscriptions]? = nil, fieldsSubscriptionGroupLocalizations: [FieldsSubscriptionGroupLocalizations]? = nil, include: [Include]? = nil, limitSubscriptionGroupLocalizations: Int? = nil, limitSubscriptions: Int? = nil) {
 				self.fieldsSubscriptionGroups = fieldsSubscriptionGroups
-				self.include = include
 				self.fieldsSubscriptions = fieldsSubscriptions
 				self.fieldsSubscriptionGroupLocalizations = fieldsSubscriptionGroupLocalizations
+				self.include = include
 				self.limitSubscriptionGroupLocalizations = limitSubscriptionGroupLocalizations
 				self.limitSubscriptions = limitSubscriptions
 			}
@@ -77,9 +79,9 @@ extension APIEndpoint.V1.SubscriptionGroups {
 			public var asQuery: [(String, String?)] {
 				let encoder = URLQueryEncoder(explode: false)
 				encoder.encode(fieldsSubscriptionGroups, forKey: "fields[subscriptionGroups]")
-				encoder.encode(include, forKey: "include")
 				encoder.encode(fieldsSubscriptions, forKey: "fields[subscriptions]")
 				encoder.encode(fieldsSubscriptionGroupLocalizations, forKey: "fields[subscriptionGroupLocalizations]")
+				encoder.encode(include, forKey: "include")
 				encoder.encode(limitSubscriptionGroupLocalizations, forKey: "limit[subscriptionGroupLocalizations]")
 				encoder.encode(limitSubscriptions, forKey: "limit[subscriptions]")
 				return encoder.items
@@ -87,11 +89,11 @@ extension APIEndpoint.V1.SubscriptionGroups {
 		}
 
 		public func patch(_ body: AppStoreConnect_Swift_SDK.SubscriptionGroupUpdateRequest) -> Request<AppStoreConnect_Swift_SDK.SubscriptionGroupResponse> {
-			Request(path: path, method: "PATCH", body: body, id: "subscriptionGroups-update_instance")
+			Request(path: path, method: "PATCH", body: body, id: "subscriptionGroups_updateInstance")
 		}
 
 		public var delete: Request<Void> {
-			Request(path: path, method: "DELETE", id: "subscriptionGroups-delete_instance")
+			Request(path: path, method: "DELETE", id: "subscriptionGroups_deleteInstance")
 		}
 	}
 }

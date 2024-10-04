@@ -107,10 +107,10 @@ final class APIProviderTests: XCTestCase {
 
         let apiProvider = APIProvider(configuration: configuration, requestExecutor: mockRequestExecutor)
 
-        let reportEndpoint = APIEndpoint.v1.salesReports.get(parameters: .init(filterFrequency: [],
-                                                                               filterReportSubType: [],
+        let reportEndpoint = APIEndpoint.v1.salesReports.get(parameters: .init(filterVendorNumber: [],
                                                                                filterReportType: [],
-                                                                               filterVendorNumber: []))
+                                                                               filterReportSubType: [],
+                                                                               filterFrequency: []))
         apiProvider.download(reportEndpoint) { result in
             // using the mock request executor the block is called sync
             XCTAssertTrue(result.isSuccess)
@@ -123,10 +123,10 @@ final class APIProviderTests: XCTestCase {
         let mockRequestExecutor = MockRequestExecutor(expectedResponse: Result.success(response))
 
         let apiProvider = APIProvider(configuration: configuration, requestExecutor: mockRequestExecutor)
-        let reportEndpoint = APIEndpoint.v1.salesReports.get(parameters: .init(filterFrequency: [],
-                                                                               filterReportSubType: [],
+        let reportEndpoint = APIEndpoint.v1.salesReports.get(parameters: .init(filterVendorNumber: [],
                                                                                filterReportType: [],
-                                                                               filterVendorNumber: []))
+                                                                               filterReportSubType: [],
+                                                                               filterFrequency: []))
         apiProvider.download(reportEndpoint) { result in
             // using the mock request executor the block is called sync
             XCTAssertTrue(result.isFailure)
@@ -145,10 +145,10 @@ final class APIProviderTests: XCTestCase {
         let mockRequestExecutor = MockRequestExecutor(expectedResponse: Result.success(response))
 
         let apiProvider = APIProvider(configuration: configuration, requestExecutor: mockRequestExecutor)
-        let reportEndpoint = APIEndpoint.v1.salesReports.get(parameters: .init(filterFrequency: [],
-                                                                               filterReportSubType: [],
+        let reportEndpoint = APIEndpoint.v1.salesReports.get(parameters: .init(filterVendorNumber: [],
                                                                                filterReportType: [],
-                                                                               filterVendorNumber: []))
+                                                                               filterReportSubType: [],
+                                                                               filterFrequency: []))
         apiProvider.download(reportEndpoint) { result in
             // using the mock request executor the block is called sync
             XCTAssertTrue(result.isFailure)

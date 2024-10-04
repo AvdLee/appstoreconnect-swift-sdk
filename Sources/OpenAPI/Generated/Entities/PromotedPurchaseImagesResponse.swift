@@ -3,6 +3,7 @@
 
 import Foundation
 
+@available(*, deprecated, message: "Deprecated")
 public struct PromotedPurchaseImagesResponse: Codable {
 	public var data: [PromotedPurchaseImage]
 	public var included: [PromotedPurchase]?

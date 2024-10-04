@@ -19,6 +19,8 @@ public struct SubscriptionResponse: Codable {
 		case subscriptionPrice(SubscriptionPrice)
 		case promotedPurchase(PromotedPurchase)
 		case subscriptionAvailability(SubscriptionAvailability)
+		case winBackOffer(WinBackOffer)
+		case subscriptionImage(SubscriptionImage)
 
 		public init(from decoder: Decoder) throws {
 			let container = try decoder.singleValueContainer()
@@ -40,10 +42,14 @@ public struct SubscriptionResponse: Codable {
 				self = .promotedPurchase(value)
 			} else if let value = try? container.decode(SubscriptionAvailability.self) {
 				self = .subscriptionAvailability(value)
+			} else if let value = try? container.decode(WinBackOffer.self) {
+				self = .winBackOffer(value)
+			} else if let value = try? container.decode(SubscriptionImage.self) {
+				self = .subscriptionImage(value)
 			} else {
 				throw DecodingError.dataCorruptedError(
 					in: container,
-					debugDescription: "Data could not be decoded as any of the expected types (SubscriptionLocalization, SubscriptionAppStoreReviewScreenshot, SubscriptionGroup, SubscriptionIntroductoryOffer, SubscriptionPromotionalOffer, SubscriptionOfferCode, SubscriptionPrice, PromotedPurchase, SubscriptionAvailability)."
+					debugDescription: "Data could not be decoded as any of the expected types (SubscriptionLocalization, SubscriptionAppStoreReviewScreenshot, SubscriptionGroup, SubscriptionIntroductoryOffer, SubscriptionPromotionalOffer, SubscriptionOfferCode, SubscriptionPrice, PromotedPurchase, SubscriptionAvailability, WinBackOffer, SubscriptionImage)."
 				)
 			}
 		}
@@ -60,6 +66,8 @@ public struct SubscriptionResponse: Codable {
 			case .subscriptionPrice(let value): try container.encode(value)
 			case .promotedPurchase(let value): try container.encode(value)
 			case .subscriptionAvailability(let value): try container.encode(value)
+			case .winBackOffer(let value): try container.encode(value)
+			case .subscriptionImage(let value): try container.encode(value)
 			}
 		}
 	}

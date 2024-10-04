@@ -14,57 +14,57 @@ extension APIEndpoint.V1.AppStoreVersionLocalizations {
 		public let path: String
 
 		public func get(parameters: GetParameters? = nil) -> Request<AppStoreConnect_Swift_SDK.AppStoreVersionLocalizationResponse> {
-			Request(path: path, method: "GET", query: parameters?.asQuery, id: "appStoreVersionLocalizations-get_instance")
+			Request(path: path, method: "GET", query: parameters?.asQuery, id: "appStoreVersionLocalizations_getInstance")
 		}
 
 		public struct GetParameters {
 			public var fieldsAppStoreVersionLocalizations: [FieldsAppStoreVersionLocalizations]?
-			public var include: [Include]?
 			public var fieldsAppScreenshotSets: [FieldsAppScreenshotSets]?
 			public var fieldsAppPreviewSets: [FieldsAppPreviewSets]?
+			public var include: [Include]?
 			public var limitAppPreviewSets: Int?
 			public var limitAppScreenshotSets: Int?
 
 			public enum FieldsAppStoreVersionLocalizations: String, Codable, CaseIterable {
-				case appPreviewSets
-				case appScreenshotSets
-				case appStoreVersion
 				case description
-				case keywords
 				case locale
+				case keywords
 				case marketingURL = "marketingUrl"
 				case promotionalText
 				case supportURL = "supportUrl"
 				case whatsNew
-			}
-
-			public enum Include: String, Codable, CaseIterable {
-				case appPreviewSets
-				case appScreenshotSets
 				case appStoreVersion
+				case appScreenshotSets
+				case appPreviewSets
 			}
 
 			public enum FieldsAppScreenshotSets: String, Codable, CaseIterable {
-				case appCustomProductPageLocalization
-				case appScreenshots
-				case appStoreVersionExperimentTreatmentLocalization
-				case appStoreVersionLocalization
 				case screenshotDisplayType
+				case appStoreVersionLocalization
+				case appCustomProductPageLocalization
+				case appStoreVersionExperimentTreatmentLocalization
+				case appScreenshots
 			}
 
 			public enum FieldsAppPreviewSets: String, Codable, CaseIterable {
-				case appCustomProductPageLocalization
-				case appPreviews
-				case appStoreVersionExperimentTreatmentLocalization
-				case appStoreVersionLocalization
 				case previewType
+				case appStoreVersionLocalization
+				case appCustomProductPageLocalization
+				case appStoreVersionExperimentTreatmentLocalization
+				case appPreviews
 			}
 
-			public init(fieldsAppStoreVersionLocalizations: [FieldsAppStoreVersionLocalizations]? = nil, include: [Include]? = nil, fieldsAppScreenshotSets: [FieldsAppScreenshotSets]? = nil, fieldsAppPreviewSets: [FieldsAppPreviewSets]? = nil, limitAppPreviewSets: Int? = nil, limitAppScreenshotSets: Int? = nil) {
+			public enum Include: String, Codable, CaseIterable {
+				case appStoreVersion
+				case appScreenshotSets
+				case appPreviewSets
+			}
+
+			public init(fieldsAppStoreVersionLocalizations: [FieldsAppStoreVersionLocalizations]? = nil, fieldsAppScreenshotSets: [FieldsAppScreenshotSets]? = nil, fieldsAppPreviewSets: [FieldsAppPreviewSets]? = nil, include: [Include]? = nil, limitAppPreviewSets: Int? = nil, limitAppScreenshotSets: Int? = nil) {
 				self.fieldsAppStoreVersionLocalizations = fieldsAppStoreVersionLocalizations
-				self.include = include
 				self.fieldsAppScreenshotSets = fieldsAppScreenshotSets
 				self.fieldsAppPreviewSets = fieldsAppPreviewSets
+				self.include = include
 				self.limitAppPreviewSets = limitAppPreviewSets
 				self.limitAppScreenshotSets = limitAppScreenshotSets
 			}
@@ -72,9 +72,9 @@ extension APIEndpoint.V1.AppStoreVersionLocalizations {
 			public var asQuery: [(String, String?)] {
 				let encoder = URLQueryEncoder(explode: false)
 				encoder.encode(fieldsAppStoreVersionLocalizations, forKey: "fields[appStoreVersionLocalizations]")
-				encoder.encode(include, forKey: "include")
 				encoder.encode(fieldsAppScreenshotSets, forKey: "fields[appScreenshotSets]")
 				encoder.encode(fieldsAppPreviewSets, forKey: "fields[appPreviewSets]")
+				encoder.encode(include, forKey: "include")
 				encoder.encode(limitAppPreviewSets, forKey: "limit[appPreviewSets]")
 				encoder.encode(limitAppScreenshotSets, forKey: "limit[appScreenshotSets]")
 				return encoder.items
@@ -82,11 +82,11 @@ extension APIEndpoint.V1.AppStoreVersionLocalizations {
 		}
 
 		public func patch(_ body: AppStoreConnect_Swift_SDK.AppStoreVersionLocalizationUpdateRequest) -> Request<AppStoreConnect_Swift_SDK.AppStoreVersionLocalizationResponse> {
-			Request(path: path, method: "PATCH", body: body, id: "appStoreVersionLocalizations-update_instance")
+			Request(path: path, method: "PATCH", body: body, id: "appStoreVersionLocalizations_updateInstance")
 		}
 
 		public var delete: Request<Void> {
-			Request(path: path, method: "DELETE", id: "appStoreVersionLocalizations-delete_instance")
+			Request(path: path, method: "DELETE", id: "appStoreVersionLocalizations_deleteInstance")
 		}
 	}
 }

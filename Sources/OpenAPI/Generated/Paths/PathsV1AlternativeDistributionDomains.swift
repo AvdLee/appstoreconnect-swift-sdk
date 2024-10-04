@@ -14,7 +14,7 @@ extension APIEndpoint.V1 {
 		public let path: String
 
 		public func get(fieldsAlternativeDistributionDomains: [FieldsAlternativeDistributionDomains]? = nil, limit: Int? = nil) -> Request<AppStoreConnect_Swift_SDK.AlternativeDistributionDomainsResponse> {
-			Request(path: path, method: "GET", query: makeGetQuery(fieldsAlternativeDistributionDomains, limit), id: "alternativeDistributionDomains-get_collection")
+			Request(path: path, method: "GET", query: makeGetQuery(fieldsAlternativeDistributionDomains, limit), id: "alternativeDistributionDomains_getCollection")
 		}
 
 		private func makeGetQuery(_ fieldsAlternativeDistributionDomains: [FieldsAlternativeDistributionDomains]?, _ limit: Int?) -> [(String, String?)] {
@@ -25,13 +25,13 @@ extension APIEndpoint.V1 {
 		}
 
 		public enum FieldsAlternativeDistributionDomains: String, Codable, CaseIterable {
-			case createdDate
 			case domain
 			case referenceName
+			case createdDate
 		}
 
 		public func post(_ body: AppStoreConnect_Swift_SDK.AlternativeDistributionDomainCreateRequest) -> Request<AppStoreConnect_Swift_SDK.AlternativeDistributionDomainResponse> {
-			Request(path: path, method: "POST", body: body, id: "alternativeDistributionDomains-create_instance")
+			Request(path: path, method: "POST", body: body, id: "alternativeDistributionDomains_createInstance")
 		}
 	}
 }

@@ -14,7 +14,7 @@ extension APIEndpoint.V2.InAppPurchases.WithID {
 		public let path: String
 
 		public func get(parameters: GetParameters? = nil) -> Request<AppStoreConnect_Swift_SDK.InAppPurchasePricePointsResponse> {
-			Request(path: path, method: "GET", query: parameters?.asQuery, id: "inAppPurchasesV2-pricePoints-get_to_many_related")
+			Request(path: path, method: "GET", query: parameters?.asQuery, id: "inAppPurchasesV2_pricePoints_getToManyRelated")
 		}
 
 		public struct GetParameters {
@@ -26,9 +26,9 @@ extension APIEndpoint.V2.InAppPurchases.WithID {
 
 			public enum FieldsInAppPurchasePricePoints: String, Codable, CaseIterable {
 				case customerPrice
-				case inAppPurchaseV2
 				case proceeds
 				case territory
+				case inAppPurchaseV2
 			}
 
 			public enum FieldsTerritories: String, Codable, CaseIterable {

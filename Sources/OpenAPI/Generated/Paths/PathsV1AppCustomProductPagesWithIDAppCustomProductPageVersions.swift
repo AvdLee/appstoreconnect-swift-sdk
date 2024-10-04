@@ -14,17 +14,17 @@ extension APIEndpoint.V1.AppCustomProductPages.WithID {
 		public let path: String
 
 		public func get(parameters: GetParameters? = nil) -> Request<AppStoreConnect_Swift_SDK.AppCustomProductPageVersionsResponse> {
-			Request(path: path, method: "GET", query: parameters?.asQuery, id: "appCustomProductPages-appCustomProductPageVersions-get_to_many_related")
+			Request(path: path, method: "GET", query: parameters?.asQuery, id: "appCustomProductPages_appCustomProductPageVersions_getToManyRelated")
 		}
 
 		public struct GetParameters {
 			public var filterState: [FilterState]?
-			public var fieldsAppCustomProductPageLocalizations: [FieldsAppCustomProductPageLocalizations]?
 			public var fieldsAppCustomProductPageVersions: [FieldsAppCustomProductPageVersions]?
 			public var fieldsAppCustomProductPages: [FieldsAppCustomProductPages]?
+			public var fieldsAppCustomProductPageLocalizations: [FieldsAppCustomProductPageLocalizations]?
 			public var limit: Int?
-			public var limitAppCustomProductPageLocalizations: Int?
 			public var include: [Include]?
+			public var limitAppCustomProductPageLocalizations: Int?
 
 			public enum FilterState: String, Codable, CaseIterable {
 				case prepareForSubmission = "PREPARE_FOR_SUBMISSION"
@@ -37,30 +37,30 @@ extension APIEndpoint.V1.AppCustomProductPages.WithID {
 				case rejected = "REJECTED"
 			}
 
-			public enum FieldsAppCustomProductPageLocalizations: String, Codable, CaseIterable {
-				case appCustomProductPageVersion
-				case appPreviewSets
-				case appScreenshotSets
-				case locale
-				case promotionalText
-			}
-
 			public enum FieldsAppCustomProductPageVersions: String, Codable, CaseIterable {
+				case version
+				case state
+				case deepLink
 				case appCustomProductPage
 				case appCustomProductPageLocalizations
-				case deepLink
-				case state
-				case version
 			}
 
 			public enum FieldsAppCustomProductPages: String, Codable, CaseIterable {
+				case name
+				case url
+				case visible
 				case app
 				case appCustomProductPageVersions
 				case appStoreVersionTemplate
 				case customProductPageTemplate
-				case name
-				case url
-				case visible
+			}
+
+			public enum FieldsAppCustomProductPageLocalizations: String, Codable, CaseIterable {
+				case locale
+				case promotionalText
+				case appCustomProductPageVersion
+				case appScreenshotSets
+				case appPreviewSets
 			}
 
 			public enum Include: String, Codable, CaseIterable {
@@ -68,25 +68,25 @@ extension APIEndpoint.V1.AppCustomProductPages.WithID {
 				case appCustomProductPageLocalizations
 			}
 
-			public init(filterState: [FilterState]? = nil, fieldsAppCustomProductPageLocalizations: [FieldsAppCustomProductPageLocalizations]? = nil, fieldsAppCustomProductPageVersions: [FieldsAppCustomProductPageVersions]? = nil, fieldsAppCustomProductPages: [FieldsAppCustomProductPages]? = nil, limit: Int? = nil, limitAppCustomProductPageLocalizations: Int? = nil, include: [Include]? = nil) {
+			public init(filterState: [FilterState]? = nil, fieldsAppCustomProductPageVersions: [FieldsAppCustomProductPageVersions]? = nil, fieldsAppCustomProductPages: [FieldsAppCustomProductPages]? = nil, fieldsAppCustomProductPageLocalizations: [FieldsAppCustomProductPageLocalizations]? = nil, limit: Int? = nil, include: [Include]? = nil, limitAppCustomProductPageLocalizations: Int? = nil) {
 				self.filterState = filterState
-				self.fieldsAppCustomProductPageLocalizations = fieldsAppCustomProductPageLocalizations
 				self.fieldsAppCustomProductPageVersions = fieldsAppCustomProductPageVersions
 				self.fieldsAppCustomProductPages = fieldsAppCustomProductPages
+				self.fieldsAppCustomProductPageLocalizations = fieldsAppCustomProductPageLocalizations
 				self.limit = limit
-				self.limitAppCustomProductPageLocalizations = limitAppCustomProductPageLocalizations
 				self.include = include
+				self.limitAppCustomProductPageLocalizations = limitAppCustomProductPageLocalizations
 			}
 
 			public var asQuery: [(String, String?)] {
 				let encoder = URLQueryEncoder(explode: false)
 				encoder.encode(filterState, forKey: "filter[state]")
-				encoder.encode(fieldsAppCustomProductPageLocalizations, forKey: "fields[appCustomProductPageLocalizations]")
 				encoder.encode(fieldsAppCustomProductPageVersions, forKey: "fields[appCustomProductPageVersions]")
 				encoder.encode(fieldsAppCustomProductPages, forKey: "fields[appCustomProductPages]")
+				encoder.encode(fieldsAppCustomProductPageLocalizations, forKey: "fields[appCustomProductPageLocalizations]")
 				encoder.encode(limit, forKey: "limit")
-				encoder.encode(limitAppCustomProductPageLocalizations, forKey: "limit[appCustomProductPageLocalizations]")
 				encoder.encode(include, forKey: "include")
+				encoder.encode(limitAppCustomProductPageLocalizations, forKey: "limit[appCustomProductPageLocalizations]")
 				return encoder.items
 			}
 		}

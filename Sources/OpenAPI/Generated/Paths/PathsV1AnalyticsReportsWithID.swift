@@ -13,27 +13,20 @@ extension APIEndpoint.V1.AnalyticsReports {
 		/// Path: `/v1/analyticsReports/{id}`
 		public let path: String
 
-		public func get(fieldsAnalyticsReports: [FieldsAnalyticsReports]? = nil, fieldsAnalyticsReportInstances: [FieldsAnalyticsReportInstances]? = nil) -> Request<AppStoreConnect_Swift_SDK.AnalyticsReportResponse> {
-			Request(path: path, method: "GET", query: makeGetQuery(fieldsAnalyticsReports, fieldsAnalyticsReportInstances), id: "analyticsReports-get_instance")
+		public func get(fieldsAnalyticsReports: [FieldsAnalyticsReports]? = nil) -> Request<AppStoreConnect_Swift_SDK.AnalyticsReportResponse> {
+			Request(path: path, method: "GET", query: makeGetQuery(fieldsAnalyticsReports), id: "analyticsReports_getInstance")
 		}
 
-		private func makeGetQuery(_ fieldsAnalyticsReports: [FieldsAnalyticsReports]?, _ fieldsAnalyticsReportInstances: [FieldsAnalyticsReportInstances]?) -> [(String, String?)] {
-			let encoder = URLQueryEncoder(explode: false)
-			encoder.encode(fieldsAnalyticsReports, forKey: "fields[analyticsReports]")
-			encoder.encode(fieldsAnalyticsReportInstances, forKey: "fields[analyticsReportInstances]")
+		private func makeGetQuery(_ fieldsAnalyticsReports: [FieldsAnalyticsReports]?) -> [(String, String?)] {
+			let encoder = URLQueryEncoder()
+			encoder.encode(fieldsAnalyticsReports, forKey: "fields[analyticsReports]", explode: false)
 			return encoder.items
 		}
 
 		public enum FieldsAnalyticsReports: String, Codable, CaseIterable {
+			case name
 			case category
 			case instances
-			case name
-		}
-
-		public enum FieldsAnalyticsReportInstances: String, Codable, CaseIterable {
-			case granularity
-			case processingDate
-			case segments
 		}
 	}
 }
