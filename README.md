@@ -195,6 +195,8 @@ Alternatively, you can run `make download` and `make generate` individually.
 - If you **want to contribute**, submit a [pull request](https://github.com/AvdLee/appstoreconnect-swift-sdk/pulls).
 
 ## Applications that use the SDK
+ - [Helm for App Store Connect](https://apps.apple.com/app/apple-store/id6479357934?pt=670995&ct=website&mt=8) developed by [Pol Piella](https://x.com/polpielladev) & [Hidde van der Ploeg](https://x.com/hiddevdploeg).
+Helm is an all-in-one macOS app that replaces App Store Connect, supercharging your app updates, localization, and ASO with AI-powered tools. It also lets you easily manage TestFlight releases and turns reviews into better support and deeper customer insights. [Learn more about Helm](https://helm-app.com).
 
 - [Starly: reviews, reply to apps](https://apps.apple.com/app/id1644699015) developed by [Viktor Grushevskiy](https://twitter.com/Viktorianec).
 The Starly app is a project that will allow developers to manage reviews on the App Store with ease. You can reply to them, translate them to the language you want, filter them, and create templates. iOS and macOS versions available.
