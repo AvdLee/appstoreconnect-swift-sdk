@@ -34,26 +34,6 @@ let package = Package(
             dependencies: targetDependencies,
             path: "Sources",
             exclude: ["OpenAPI/app_store_connect_api.json", "OpenAPI/create-api.yml"]
-        ),
-        .binaryTarget(
-            name: "create-api", // Find the URL and checksum at https://github.com/createapi/createapi/releases/latest
-            url: "https://github.com/CreateAPI/CreateAPI/releases/download/0.2.0/create-api.artifactbundle.zip",
-            checksum: "6f8a3ce099f07eb2655ccaf6f66d8c9a09b74bb2307781c4adec36609ddac009"
-        ),
-        .plugin(
-            name: "CreateAPI",
-            capability: .command(
-                intent: .custom(
-                    verb: "generate-open-api",
-                    description: "Generates the OpenAPI entities and paths using CreateAPI"
-                ),
-                permissions: [
-                    .writeToPackageDirectory(reason: "To output the generated source code")
-                ]
-            ),
-            dependencies: [
-                .target(name: "create-api")
-            ]
         )
     ]
 )
