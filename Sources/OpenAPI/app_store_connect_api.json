@@ -24006,8 +24006,7 @@
                   "DEVELOPMENT",
                   "DISTRIBUTION",
                   "PASS_TYPE_ID",
-                  "PASS_TYPE_ID_WITH_NFC",
-                  "DEVELOPER_ID_APPLICATION_G2"
+                  "PASS_TYPE_ID_WITH_NFC"
                 ]
               }
             },
@@ -142744,8 +142743,7 @@
           "DEVELOPMENT",
           "DISTRIBUTION",
           "PASS_TYPE_ID",
-          "PASS_TYPE_ID_WITH_NFC",
-          "DEVELOPER_ID_APPLICATION_G2"
+          "PASS_TYPE_ID_WITH_NFC"
         ]
       },
       "CiAction": {
