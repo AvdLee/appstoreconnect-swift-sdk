@@ -25,7 +25,6 @@ extension APIEndpoint.V1.SubscriptionAvailabilities {
 
 			public enum FieldsSubscriptionAvailabilities: String, Codable, CaseIterable {
 				case availableInNewTerritories
-				case subscription
 				case availableTerritories
 			}
 
@@ -34,7 +33,6 @@ extension APIEndpoint.V1.SubscriptionAvailabilities {
 			}
 
 			public enum Include: String, Codable, CaseIterable {
-				case subscription
 				case availableTerritories
 			}
 

@@ -48,7 +48,6 @@ extension APIEndpoint.V1.AppEvents.WithID {
 				case purpose
 				case territorySchedules
 				case archivedTerritorySchedules
-				case app
 				case localizations
 			}
 
@@ -59,7 +58,6 @@ extension APIEndpoint.V1.AppEvents.WithID {
 				case assetToken
 				case uploadOperations
 				case assetDeliveryState
-				case uploaded
 				case appEventAssetType
 				case appEventLocalization
 			}
@@ -69,10 +67,11 @@ extension APIEndpoint.V1.AppEvents.WithID {
 				case fileName
 				case previewFrameTimeCode
 				case videoURL = "videoUrl"
+				case previewFrameImage
 				case previewImage
 				case uploadOperations
 				case assetDeliveryState
-				case uploaded
+				case videoDeliveryState
 				case appEventAssetType
 				case appEventLocalization
 			}

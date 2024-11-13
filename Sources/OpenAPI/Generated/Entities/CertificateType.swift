@@ -10,10 +10,12 @@ public enum CertificateType: String, Codable, CaseIterable {
 	case macInstallerDistribution = "MAC_INSTALLER_DISTRIBUTION"
 	case macAppDevelopment = "MAC_APP_DEVELOPMENT"
 	case developerIDKext = "DEVELOPER_ID_KEXT"
+	case developerIDKextG2 = "DEVELOPER_ID_KEXT_G2"
 	case developerIDApplication = "DEVELOPER_ID_APPLICATION"
+	case developerIDApplicationG2 = "DEVELOPER_ID_APPLICATION_G2"
 	case development = "DEVELOPMENT"
 	case distribution = "DISTRIBUTION"
 	case passTypeID = "PASS_TYPE_ID"
 	case passTypeIDWithNfc = "PASS_TYPE_ID_WITH_NFC"
-	case developerIDApplicationG2 = "DEVELOPER_ID_APPLICATION_G2"
+	case developerIDApplicationG22 = "DEVELOPER_ID_APPLICATION_G2"
 }

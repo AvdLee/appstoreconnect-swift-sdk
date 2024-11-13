@@ -31,7 +31,6 @@ extension APIEndpoint.V1.SubscriptionImages {
 			case assetToken
 			case imageAsset
 			case uploadOperations
-			case uploaded
 			case state
 			case subscription
 		}

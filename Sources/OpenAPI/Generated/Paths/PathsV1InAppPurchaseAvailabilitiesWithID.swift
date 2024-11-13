@@ -25,7 +25,6 @@ extension APIEndpoint.V1.InAppPurchaseAvailabilities {
 
 			public enum FieldsInAppPurchaseAvailabilities: String, Codable, CaseIterable {
 				case availableInNewTerritories
-				case inAppPurchase
 				case availableTerritories
 			}
 

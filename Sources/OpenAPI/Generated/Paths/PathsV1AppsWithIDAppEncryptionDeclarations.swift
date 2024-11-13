@@ -81,9 +81,7 @@ extension APIEndpoint.V1.Apps.WithID {
 				case appClips
 				case appPricePoints
 				case endUserLicenseAgreement
-				case preOrder
 				case appPriceSchedule
-				case appAvailability
 				case appAvailabilityV2
 				case inAppPurchases
 				case subscriptionGroups
@@ -138,8 +136,6 @@ extension APIEndpoint.V1.Apps.WithID {
 				case sourceFileChecksum
 				case uploadOperations
 				case assetDeliveryState
-				case uploaded
-				case appEncryptionDeclaration
 			}
 
 			public enum Include: String, Codable, CaseIterable {

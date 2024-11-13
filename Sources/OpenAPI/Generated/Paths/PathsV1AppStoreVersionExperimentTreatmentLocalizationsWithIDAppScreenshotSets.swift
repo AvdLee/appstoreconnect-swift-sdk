@@ -111,7 +111,6 @@ extension APIEndpoint.V1.AppStoreVersionExperimentTreatmentLocalizations.WithID 
 				case assetType
 				case uploadOperations
 				case assetDeliveryState
-				case uploaded
 				case appScreenshotSet
 			}
 

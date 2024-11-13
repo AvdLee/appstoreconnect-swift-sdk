@@ -111,7 +111,6 @@ extension APIEndpoint.V1.AppCustomProductPageLocalizations.WithID {
 				case assetType
 				case uploadOperations
 				case assetDeliveryState
-				case uploaded
 				case appScreenshotSet
 			}
 

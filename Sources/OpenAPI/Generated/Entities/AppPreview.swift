@@ -21,20 +21,24 @@ public struct AppPreview: Codable, Identifiable {
 		public var previewFrameTimeCode: String?
 		public var mimeType: String?
 		public var videoURL: String?
+		public var previewFrameImage: PreviewFrameImage?
 		public var previewImage: ImageAsset?
 		public var uploadOperations: [UploadOperation]?
 		public var assetDeliveryState: AppMediaAssetState?
+		public var videoDeliveryState: AppMediaVideoState?
 
-		public init(fileSize: Int? = nil, fileName: String? = nil, sourceFileChecksum: String? = nil, previewFrameTimeCode: String? = nil, mimeType: String? = nil, videoURL: String? = nil, previewImage: ImageAsset? = nil, uploadOperations: [UploadOperation]? = nil, assetDeliveryState: AppMediaAssetState? = nil) {
+		public init(fileSize: Int? = nil, fileName: String? = nil, sourceFileChecksum: String? = nil, previewFrameTimeCode: String? = nil, mimeType: String? = nil, videoURL: String? = nil, previewFrameImage: PreviewFrameImage? = nil, previewImage: ImageAsset? = nil, uploadOperations: [UploadOperation]? = nil, assetDeliveryState: AppMediaAssetState? = nil, videoDeliveryState: AppMediaVideoState? = nil) {
 			self.fileSize = fileSize
 			self.fileName = fileName
 			self.sourceFileChecksum = sourceFileChecksum
 			self.previewFrameTimeCode = previewFrameTimeCode
 			self.mimeType = mimeType
 			self.videoURL = videoURL
+			self.previewFrameImage = previewFrameImage
 			self.previewImage = previewImage
 			self.uploadOperations = uploadOperations
 			self.assetDeliveryState = assetDeliveryState
+			self.videoDeliveryState = videoDeliveryState
 		}
 
 		public init(from decoder: Decoder) throws {
@@ -45,9 +49,11 @@ public struct AppPreview: Codable, Identifiable {
 			self.previewFrameTimeCode = try values.decodeIfPresent(String.self, forKey: "previewFrameTimeCode")
 			self.mimeType = try values.decodeIfPresent(String.self, forKey: "mimeType")
 			self.videoURL = try values.decodeIfPresent(String.self, forKey: "videoUrl")
+			self.previewFrameImage = try values.decodeIfPresent(PreviewFrameImage.self, forKey: "previewFrameImage")
 			self.previewImage = try values.decodeIfPresent(ImageAsset.self, forKey: "previewImage")
 			self.uploadOperations = try values.decodeIfPresent([UploadOperation].self, forKey: "uploadOperations")
 			self.assetDeliveryState = try values.decodeIfPresent(AppMediaAssetState.self, forKey: "assetDeliveryState")
+			self.videoDeliveryState = try values.decodeIfPresent(AppMediaVideoState.self, forKey: "videoDeliveryState")
 		}
 
 		public func encode(to encoder: Encoder) throws {
@@ -58,9 +64,11 @@ public struct AppPreview: Codable, Identifiable {
 			try values.encodeIfPresent(previewFrameTimeCode, forKey: "previewFrameTimeCode")
 			try values.encodeIfPresent(mimeType, forKey: "mimeType")
 			try values.encodeIfPresent(videoURL, forKey: "videoUrl")
+			try values.encodeIfPresent(previewFrameImage, forKey: "previewFrameImage")
 			try values.encodeIfPresent(previewImage, forKey: "previewImage")
 			try values.encodeIfPresent(uploadOperations, forKey: "uploadOperations")
 			try values.encodeIfPresent(assetDeliveryState, forKey: "assetDeliveryState")
+			try values.encodeIfPresent(videoDeliveryState, forKey: "videoDeliveryState")
 		}
 	}
 

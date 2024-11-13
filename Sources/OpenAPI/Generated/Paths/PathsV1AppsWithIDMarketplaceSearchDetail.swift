@@ -25,7 +25,6 @@ extension APIEndpoint.V1.Apps.WithID {
 
 		public enum FieldsMarketplaceSearchDetails: String, Codable, CaseIterable {
 			case catalogURL = "catalogUrl"
-			case app
 		}
 	}
 }

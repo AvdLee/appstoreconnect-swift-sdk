@@ -29,7 +29,6 @@ extension APIEndpoint.V1.SubscriptionPricePoints {
 			case proceeds
 			case proceedsYear2
 			case territory
-			case subscription
 			case equalizations
 		}
 

@@ -27,7 +27,6 @@ extension APIEndpoint.V1.PromotedPurchases {
 				case visibleForAllUsers
 				case enabled
 				case state
-				case app
 				case inAppPurchaseV2
 				case subscription
 				case promotionImages
@@ -41,7 +40,6 @@ extension APIEndpoint.V1.PromotedPurchases {
 				case imageAsset
 				case assetType
 				case uploadOperations
-				case uploaded
 				case state
 				case promotedPurchase
 			}
