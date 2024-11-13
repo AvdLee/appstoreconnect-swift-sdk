@@ -18,6 +18,7 @@ echo $NEW_VERSION > spec-version
 
 make update
 
+git config --local user.name "App Store Connect Swift SDK CI"
 git switch --create spec-update-$NEW_VERSION
 git add --all
 git commit -m "[ci skip] Update spec to $NEW_VERSION"
