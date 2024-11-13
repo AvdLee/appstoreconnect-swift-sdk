@@ -17,13 +17,13 @@ public struct AppInfoLocalizationCreateRequest: Codable {
 
 		public struct Attributes: Codable {
 			public var locale: String
-			public var name: String?
+			public var name: String
 			public var subtitle: String?
 			public var privacyPolicyURL: String?
 			public var privacyChoicesURL: String?
 			public var privacyPolicyText: String?
 
-			public init(locale: String, name: String? = nil, subtitle: String? = nil, privacyPolicyURL: String? = nil, privacyChoicesURL: String? = nil, privacyPolicyText: String? = nil) {
+			public init(locale: String, name: String, subtitle: String? = nil, privacyPolicyURL: String? = nil, privacyChoicesURL: String? = nil, privacyPolicyText: String? = nil) {
 				self.locale = locale
 				self.name = name
 				self.subtitle = subtitle
@@ -35,7 +35,7 @@ public struct AppInfoLocalizationCreateRequest: Codable {
 			public init(from decoder: Decoder) throws {
 				let values = try decoder.container(keyedBy: StringCodingKey.self)
 				self.locale = try values.decode(String.self, forKey: "locale")
-				self.name = try values.decodeIfPresent(String.self, forKey: "name")
+				self.name = try values.decode(String.self, forKey: "name")
 				self.subtitle = try values.decodeIfPresent(String.self, forKey: "subtitle")
 				self.privacyPolicyURL = try values.decodeIfPresent(String.self, forKey: "privacyPolicyUrl")
 				self.privacyChoicesURL = try values.decodeIfPresent(String.self, forKey: "privacyChoicesUrl")
@@ -45,7 +45,7 @@ public struct AppInfoLocalizationCreateRequest: Codable {
 			public func encode(to encoder: Encoder) throws {
 				var values = encoder.container(keyedBy: StringCodingKey.self)
 				try values.encode(locale, forKey: "locale")
-				try values.encodeIfPresent(name, forKey: "name")
+				try values.encode(name, forKey: "name")
 				try values.encodeIfPresent(subtitle, forKey: "subtitle")
 				try values.encodeIfPresent(privacyPolicyURL, forKey: "privacyPolicyUrl")
 				try values.encodeIfPresent(privacyChoicesURL, forKey: "privacyChoicesUrl")

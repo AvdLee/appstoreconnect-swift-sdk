@@ -34,6 +34,7 @@ extension APIEndpoint.V1.Apps.WithID {
 				case australiaAgeRating
 				case brazilAgeRating
 				case brazilAgeRatingV2
+				case franceAgeRating
 				case koreaAgeRating
 				case kidsAgeBand
 				case app
@@ -73,9 +74,7 @@ extension APIEndpoint.V1.Apps.WithID {
 				case appClips
 				case appPricePoints
 				case endUserLicenseAgreement
-				case preOrder
 				case appPriceSchedule
-				case appAvailability
 				case appAvailabilityV2
 				case inAppPurchases
 				case subscriptionGroups

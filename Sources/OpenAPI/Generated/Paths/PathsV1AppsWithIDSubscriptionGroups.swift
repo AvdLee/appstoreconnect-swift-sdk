@@ -49,7 +49,6 @@ extension APIEndpoint.V1.Apps.WithID {
 
 			public enum FieldsSubscriptionGroups: String, Codable, CaseIterable {
 				case referenceName
-				case app
 				case subscriptions
 				case subscriptionGroupLocalizations
 			}

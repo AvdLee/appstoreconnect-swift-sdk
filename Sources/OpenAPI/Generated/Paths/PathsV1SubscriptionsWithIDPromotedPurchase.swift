@@ -29,7 +29,6 @@ extension APIEndpoint.V1.Subscriptions.WithID {
 				case visibleForAllUsers
 				case enabled
 				case state
-				case app
 				case inAppPurchaseV2
 				case subscription
 				case promotionImages
@@ -43,7 +42,6 @@ extension APIEndpoint.V1.Subscriptions.WithID {
 				case reviewNote
 				case familySharable
 				case contentHosting
-				case app
 				case inAppPurchaseLocalizations
 				case pricePoints
 				case content
@@ -84,7 +82,6 @@ extension APIEndpoint.V1.Subscriptions.WithID {
 				case imageAsset
 				case assetType
 				case uploadOperations
-				case uploaded
 				case state
 				case promotedPurchase
 			}

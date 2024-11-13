@@ -26,14 +26,12 @@ extension APIEndpoint.V1.BuildBundles.WithID {
 
 			public enum FieldsBetaAppClipInvocations: String, Codable, CaseIterable {
 				case url
-				case buildBundle
 				case betaAppClipInvocationLocalizations
 			}
 
 			public enum FieldsBetaAppClipInvocationLocalizations: String, Codable, CaseIterable {
 				case title
 				case locale
-				case betaAppClipInvocation
 			}
 
 			public enum Include: String, Codable, CaseIterable {

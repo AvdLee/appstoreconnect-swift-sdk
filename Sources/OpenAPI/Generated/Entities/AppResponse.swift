@@ -22,7 +22,6 @@ public struct AppResponse: Codable {
 		case appInfo(AppInfo)
 		case appClip(AppClip)
 		case endUserLicenseAgreement(EndUserLicenseAgreement)
-		case appPreOrder(AppPreOrder)
 		case inAppPurchase(InAppPurchase)
 		case subscriptionGroup(SubscriptionGroup)
 		case gameCenterEnabledVersion(GameCenterEnabledVersion)
@@ -61,8 +60,6 @@ public struct AppResponse: Codable {
 				self = .appClip(value)
 			} else if let value = try? container.decode(EndUserLicenseAgreement.self) {
 				self = .endUserLicenseAgreement(value)
-			} else if let value = try? container.decode(AppPreOrder.self) {
-				self = .appPreOrder(value)
 			} else if let value = try? container.decode(InAppPurchase.self) {
 				self = .inAppPurchase(value)
 			} else if let value = try? container.decode(SubscriptionGroup.self) {
@@ -88,7 +85,7 @@ public struct AppResponse: Codable {
 			} else {
 				throw DecodingError.dataCorruptedError(
 					in: container,
-					debugDescription: "Data could not be decoded as any of the expected types (AppEncryptionDeclaration, CiProduct, BetaGroup, AppStoreVersion, PrereleaseVersion, BetaAppLocalization, Build, BetaLicenseAgreement, BetaAppReviewDetail, AppInfo, AppClip, EndUserLicenseAgreement, AppPreOrder, InAppPurchase, SubscriptionGroup, GameCenterEnabledVersion, AppCustomProductPage, InAppPurchaseV2, PromotedPurchase, AppEvent, ReviewSubmission, SubscriptionGracePeriod, GameCenterDetail, AppStoreVersionExperimentV2)."
+					debugDescription: "Data could not be decoded as any of the expected types (AppEncryptionDeclaration, CiProduct, BetaGroup, AppStoreVersion, PrereleaseVersion, BetaAppLocalization, Build, BetaLicenseAgreement, BetaAppReviewDetail, AppInfo, AppClip, EndUserLicenseAgreement, InAppPurchase, SubscriptionGroup, GameCenterEnabledVersion, AppCustomProductPage, InAppPurchaseV2, PromotedPurchase, AppEvent, ReviewSubmission, SubscriptionGracePeriod, GameCenterDetail, AppStoreVersionExperimentV2)."
 				)
 			}
 		}
@@ -108,7 +105,6 @@ public struct AppResponse: Codable {
 			case .appInfo(let value): try container.encode(value)
 			case .appClip(let value): try container.encode(value)
 			case .endUserLicenseAgreement(let value): try container.encode(value)
-			case .appPreOrder(let value): try container.encode(value)
 			case .inAppPurchase(let value): try container.encode(value)
 			case .subscriptionGroup(let value): try container.encode(value)
 			case .gameCenterEnabledVersion(let value): try container.encode(value)

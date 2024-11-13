@@ -28,7 +28,6 @@ extension APIEndpoint.V1.AppStoreVersions.WithID {
 			case startDate
 			case totalPauseDuration
 			case currentDayNumber
-			case appStoreVersion
 		}
 	}
 }

@@ -30,6 +30,7 @@ extension APIEndpoint.V1 {
 			public enum FilterPlatform: String, Codable, CaseIterable {
 				case ios = "IOS"
 				case macOs = "MAC_OS"
+				case universal = "UNIVERSAL"
 			}
 
 			public enum FilterStatus: String, Codable, CaseIterable {

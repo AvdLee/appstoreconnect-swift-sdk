@@ -62,7 +62,6 @@ extension APIEndpoint.V1.Profiles {
 
 			public enum FieldsCertificates: String, Codable, CaseIterable {
 				case name
-				case csrContent
 				case certificateType
 				case displayName
 				case serialNumber

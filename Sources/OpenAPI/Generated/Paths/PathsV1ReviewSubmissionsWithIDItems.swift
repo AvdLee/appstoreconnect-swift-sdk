@@ -28,9 +28,6 @@ extension APIEndpoint.V1.ReviewSubmissions.WithID {
 
 			public enum FieldsReviewSubmissionItems: String, Codable, CaseIterable {
 				case state
-				case resolved
-				case removed
-				case reviewSubmission
 				case appStoreVersion
 				case appCustomProductPageVersion
 				case appStoreVersionExperiment
@@ -80,7 +77,6 @@ extension APIEndpoint.V1.ReviewSubmissions.WithID {
 				case reviewRequired
 				case startDate
 				case endDate
-				case started
 				case appStoreVersion
 				case appStoreVersionExperimentTreatments
 				case platform
@@ -100,7 +96,6 @@ extension APIEndpoint.V1.ReviewSubmissions.WithID {
 				case purpose
 				case territorySchedules
 				case archivedTerritorySchedules
-				case app
 				case localizations
 			}
 
