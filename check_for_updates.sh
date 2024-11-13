@@ -22,4 +22,6 @@ git config --local user.name "App Store Connect Swift SDK CI"
 git switch --create spec-update-$NEW_VERSION
 git add --all
 git commit -m "[ci skip] Update spec to $NEW_VERSION"
-# git push origin spec-update-$NEW_VERSION
+git push -u origin spec-update-$NEW_VERSION
+create_pr_output=$(gh pr create --title "Update OpenAPI spec to $NEW_VERSION" --body "$warnings")
+echo "Pull request created: $create_pr_output"
