@@ -25,7 +25,6 @@ extension APIEndpoint.V1.AlternativeDistributionKeys {
 
 		public enum FieldsAlternativeDistributionKeys: String, Codable, CaseIterable {
 			case publicKey
-			case app
 		}
 
 		public var delete: Request<Void> {

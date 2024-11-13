@@ -36,7 +36,6 @@ extension APIEndpoint.V1.WinBackOffers {
 				case endDate
 				case priority
 				case promotionIntent
-				case subscription
 				case prices
 			}
 

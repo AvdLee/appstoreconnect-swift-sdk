@@ -40,7 +40,6 @@ extension APIEndpoint.V2.InAppPurchases {
 				case reviewNote
 				case familySharable
 				case contentHosting
-				case app
 				case inAppPurchaseLocalizations
 				case pricePoints
 				case content
@@ -63,7 +62,7 @@ extension APIEndpoint.V2.InAppPurchases {
 				case customerPrice
 				case proceeds
 				case territory
-				case inAppPurchaseV2
+				case equalizations
 			}
 
 			public enum FieldsInAppPurchaseContents: String, Codable, CaseIterable {
@@ -83,7 +82,6 @@ extension APIEndpoint.V2.InAppPurchases {
 				case assetType
 				case uploadOperations
 				case assetDeliveryState
-				case uploaded
 				case inAppPurchaseV2
 			}
 
@@ -91,14 +89,12 @@ extension APIEndpoint.V2.InAppPurchases {
 				case visibleForAllUsers
 				case enabled
 				case state
-				case app
 				case inAppPurchaseV2
 				case subscription
 				case promotionImages
 			}
 
 			public enum FieldsInAppPurchasePriceSchedules: String, Codable, CaseIterable {
-				case inAppPurchase
 				case baseTerritory
 				case manualPrices
 				case automaticPrices
@@ -106,7 +102,6 @@ extension APIEndpoint.V2.InAppPurchases {
 
 			public enum FieldsInAppPurchaseAvailabilities: String, Codable, CaseIterable {
 				case availableInNewTerritories
-				case inAppPurchase
 				case availableTerritories
 			}
 
@@ -117,7 +112,6 @@ extension APIEndpoint.V2.InAppPurchases {
 				case assetToken
 				case imageAsset
 				case uploadOperations
-				case uploaded
 				case state
 				case inAppPurchase
 			}

@@ -53,7 +53,6 @@ extension APIEndpoint.V1.GameCenterAchievements.WithID {
 				case imageAsset
 				case uploadOperations
 				case assetDeliveryState
-				case uploaded
 				case gameCenterAchievementLocalization
 			}
 

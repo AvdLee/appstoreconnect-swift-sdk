@@ -25,7 +25,6 @@ extension APIEndpoint.V1.Apps.WithID {
 
 		public enum FieldsAlternativeDistributionKeys: String, Codable, CaseIterable {
 			case publicKey
-			case app
 		}
 	}
 }

@@ -35,6 +35,7 @@ extension APIEndpoint.V1 {
 				case subscriptionOfferCodeRedemption = "SUBSCRIPTION_OFFER_CODE_REDEMPTION"
 				case installs = "INSTALLS"
 				case firstAnnual = "FIRST_ANNUAL"
+				case winBackEligibility = "WIN_BACK_ELIGIBILITY"
 			}
 
 			public enum FilterReportSubType: String, Codable, CaseIterable {

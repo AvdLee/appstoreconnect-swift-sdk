@@ -50,8 +50,6 @@ extension APIEndpoint.V1.Apps.WithID {
 				case platform
 				case submittedDate
 				case state
-				case submitted
-				case canceled
 				case app
 				case items
 				case appStoreVersionForReview
@@ -85,9 +83,7 @@ extension APIEndpoint.V1.Apps.WithID {
 				case appClips
 				case appPricePoints
 				case endUserLicenseAgreement
-				case preOrder
 				case appPriceSchedule
-				case appAvailability
 				case appAvailabilityV2
 				case inAppPurchases
 				case subscriptionGroups
@@ -109,9 +105,6 @@ extension APIEndpoint.V1.Apps.WithID {
 
 			public enum FieldsReviewSubmissionItems: String, Codable, CaseIterable {
 				case state
-				case resolved
-				case removed
-				case reviewSubmission
 				case appStoreVersion
 				case appCustomProductPageVersion
 				case appStoreVersionExperiment

@@ -30,7 +30,6 @@ extension APIEndpoint.V1.GameCenterMatchmakingRuleSets.WithID {
 			case type
 			case expression
 			case weight
-			case ruleSet
 		}
 	}
 }

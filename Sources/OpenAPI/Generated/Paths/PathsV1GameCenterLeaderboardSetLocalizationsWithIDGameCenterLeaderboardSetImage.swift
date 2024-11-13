@@ -28,7 +28,6 @@ extension APIEndpoint.V1.GameCenterLeaderboardSetLocalizations.WithID {
 				case imageAsset
 				case uploadOperations
 				case assetDeliveryState
-				case uploaded
 				case gameCenterLeaderboardSetLocalization
 			}
 

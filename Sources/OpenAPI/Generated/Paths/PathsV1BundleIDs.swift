@@ -36,6 +36,7 @@ extension APIEndpoint.V1 {
 			public enum FilterPlatform: String, Codable, CaseIterable {
 				case ios = "IOS"
 				case macOs = "MAC_OS"
+				case universal = "UNIVERSAL"
 			}
 
 			public enum Sort: String, Codable, CaseIterable {
@@ -78,7 +79,6 @@ extension APIEndpoint.V1 {
 			public enum FieldsBundleIDCapabilities: String, Codable, CaseIterable {
 				case capabilityType
 				case settings
-				case bundleID = "bundleId"
 			}
 
 			public enum FieldsApps: String, Codable, CaseIterable {
@@ -107,9 +107,7 @@ extension APIEndpoint.V1 {
 				case appClips
 				case appPricePoints
 				case endUserLicenseAgreement
-				case preOrder
 				case appPriceSchedule
-				case appAvailability
 				case appAvailabilityV2
 				case inAppPurchases
 				case subscriptionGroups

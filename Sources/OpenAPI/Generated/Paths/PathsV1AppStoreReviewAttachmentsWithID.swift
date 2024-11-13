@@ -30,7 +30,6 @@ extension APIEndpoint.V1.AppStoreReviewAttachments {
 			case sourceFileChecksum
 			case uploadOperations
 			case assetDeliveryState
-			case uploaded
 			case appStoreReviewDetail
 		}
 

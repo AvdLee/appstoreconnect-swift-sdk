@@ -25,7 +25,6 @@ extension APIEndpoint.V2.AppAvailabilities {
 
 			public enum FieldsAppAvailabilities: String, Codable, CaseIterable {
 				case availableInNewTerritories
-				case app
 				case territoryAvailabilities
 			}
 

@@ -33,7 +33,6 @@ extension APIEndpoint.V1.SubscriptionAppStoreReviewScreenshots {
 			case assetType
 			case uploadOperations
 			case assetDeliveryState
-			case uploaded
 			case subscription
 		}
 

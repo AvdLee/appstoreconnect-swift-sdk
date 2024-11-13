@@ -31,8 +31,6 @@ extension APIEndpoint.V1.AppEncryptionDeclarations.WithID {
 			case sourceFileChecksum
 			case uploadOperations
 			case assetDeliveryState
-			case uploaded
-			case appEncryptionDeclaration
 		}
 	}
 }

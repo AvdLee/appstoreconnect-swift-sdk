@@ -43,7 +43,6 @@ extension APIEndpoint.V1 {
 			public var fieldsAppInfos: [FieldsAppInfos]?
 			public var fieldsAppClips: [FieldsAppClips]?
 			public var fieldsEndUserLicenseAgreements: [FieldsEndUserLicenseAgreements]?
-			public var fieldsAppPreOrders: [FieldsAppPreOrders]?
 			public var fieldsInAppPurchases: [FieldsInAppPurchases]?
 			public var fieldsSubscriptionGroups: [FieldsSubscriptionGroups]?
 			public var fieldsGameCenterEnabledVersions: [FieldsGameCenterEnabledVersions]?
@@ -174,9 +173,7 @@ extension APIEndpoint.V1 {
 				case appClips
 				case appPricePoints
 				case endUserLicenseAgreement
-				case preOrder
 				case appPriceSchedule
-				case appAvailability
 				case appAvailabilityV2
 				case inAppPurchases
 				case subscriptionGroups
@@ -340,6 +337,7 @@ extension APIEndpoint.V1 {
 				case australiaAgeRating
 				case brazilAgeRating
 				case brazilAgeRatingV2
+				case franceAgeRating
 				case koreaAgeRating
 				case kidsAgeBand
 				case app
@@ -366,12 +364,6 @@ extension APIEndpoint.V1 {
 				case territories
 			}
 
-			public enum FieldsAppPreOrders: String, Codable, CaseIterable {
-				case preOrderAvailableDate
-				case appReleaseDate
-				case app
-			}
-
 			public enum FieldsInAppPurchases: String, Codable, CaseIterable {
 				case referenceName
 				case productID = "productId"
@@ -382,7 +374,6 @@ extension APIEndpoint.V1 {
 				case reviewNote
 				case familySharable
 				case contentHosting
-				case app
 				case inAppPurchaseLocalizations
 				case pricePoints
 				case content
@@ -395,7 +386,6 @@ extension APIEndpoint.V1 {
 
 			public enum FieldsSubscriptionGroups: String, Codable, CaseIterable {
 				case referenceName
-				case app
 				case subscriptions
 				case subscriptionGroupLocalizations
 			}
@@ -414,15 +404,12 @@ extension APIEndpoint.V1 {
 				case visible
 				case app
 				case appCustomProductPageVersions
-				case appStoreVersionTemplate
-				case customProductPageTemplate
 			}
 
 			public enum FieldsPromotedPurchases: String, Codable, CaseIterable {
 				case visibleForAllUsers
 				case enabled
 				case state
-				case app
 				case inAppPurchaseV2
 				case subscription
 				case promotionImages
@@ -439,7 +426,6 @@ extension APIEndpoint.V1 {
 				case purpose
 				case territorySchedules
 				case archivedTerritorySchedules
-				case app
 				case localizations
 			}
 
@@ -447,8 +433,6 @@ extension APIEndpoint.V1 {
 				case platform
 				case submittedDate
 				case state
-				case submitted
-				case canceled
 				case app
 				case items
 				case appStoreVersionForReview
@@ -487,7 +471,6 @@ extension APIEndpoint.V1 {
 				case reviewRequired
 				case startDate
 				case endDate
-				case started
 				case app
 				case latestControlVersion
 				case controlVersions
@@ -507,7 +490,6 @@ extension APIEndpoint.V1 {
 				case appInfos
 				case appClips
 				case endUserLicenseAgreement
-				case preOrder
 				case inAppPurchases
 				case subscriptionGroups
 				case gameCenterEnabledVersions
@@ -521,7 +503,7 @@ extension APIEndpoint.V1 {
 				case appStoreVersionExperimentsV2
 			}
 
-			public init(filterName: [String]? = nil, filterBundleID: [String]? = nil, filterSku: [String]? = nil, filterAppStoreVersionsAppStoreState: [FilterAppStoreVersionsAppStoreState]? = nil, filterAppStoreVersionsPlatform: [FilterAppStoreVersionsPlatform]? = nil, filterAppStoreVersionsAppVersionState: [FilterAppStoreVersionsAppVersionState]? = nil, filterReviewSubmissionsState: [FilterReviewSubmissionsState]? = nil, filterReviewSubmissionsPlatform: [FilterReviewSubmissionsPlatform]? = nil, filterAppStoreVersions: [String]? = nil, filterID: [String]? = nil, isExistsGameCenterEnabledVersions: Bool? = nil, sort: [Sort]? = nil, fieldsApps: [FieldsApps]? = nil, fieldsAppEncryptionDeclarations: [FieldsAppEncryptionDeclarations]? = nil, fieldsCiProducts: [FieldsCiProducts]? = nil, fieldsBetaGroups: [FieldsBetaGroups]? = nil, fieldsAppStoreVersions: [FieldsAppStoreVersions]? = nil, fieldsPreReleaseVersions: [FieldsPreReleaseVersions]? = nil, fieldsBetaAppLocalizations: [FieldsBetaAppLocalizations]? = nil, fieldsBuilds: [FieldsBuilds]? = nil, fieldsBetaLicenseAgreements: [FieldsBetaLicenseAgreements]? = nil, fieldsBetaAppReviewDetails: [FieldsBetaAppReviewDetails]? = nil, fieldsAppInfos: [FieldsAppInfos]? = nil, fieldsAppClips: [FieldsAppClips]? = nil, fieldsEndUserLicenseAgreements: [FieldsEndUserLicenseAgreements]? = nil, fieldsAppPreOrders: [FieldsAppPreOrders]? = nil, fieldsInAppPurchases: [FieldsInAppPurchases]? = nil, fieldsSubscriptionGroups: [FieldsSubscriptionGroups]? = nil, fieldsGameCenterEnabledVersions: [FieldsGameCenterEnabledVersions]? = nil, fieldsAppCustomProductPages: [FieldsAppCustomProductPages]? = nil, fieldsPromotedPurchases: [FieldsPromotedPurchases]? = nil, fieldsAppEvents: [FieldsAppEvents]? = nil, fieldsReviewSubmissions: [FieldsReviewSubmissions]? = nil, fieldsSubscriptionGracePeriods: [FieldsSubscriptionGracePeriods]? = nil, fieldsGameCenterDetails: [FieldsGameCenterDetails]? = nil, fieldsAppStoreVersionExperiments: [FieldsAppStoreVersionExperiments]? = nil, limit: Int? = nil, include: [Include]? = nil, limitAppClips: Int? = nil, limitAppCustomProductPages: Int? = nil, limitAppEncryptionDeclarations: Int? = nil, limitAppEvents: Int? = nil, limitAppInfos: Int? = nil, limitAppStoreVersionExperimentsV2: Int? = nil, limitAppStoreVersions: Int? = nil, limitBetaAppLocalizations: Int? = nil, limitBetaGroups: Int? = nil, limitBuilds: Int? = nil, limitGameCenterEnabledVersions: Int? = nil, limitInAppPurchases: Int? = nil, limitInAppPurchasesV2: Int? = nil, limitPreReleaseVersions: Int? = nil, limitPromotedPurchases: Int? = nil, limitReviewSubmissions: Int? = nil, limitSubscriptionGroups: Int? = nil) {
+			public init(filterName: [String]? = nil, filterBundleID: [String]? = nil, filterSku: [String]? = nil, filterAppStoreVersionsAppStoreState: [FilterAppStoreVersionsAppStoreState]? = nil, filterAppStoreVersionsPlatform: [FilterAppStoreVersionsPlatform]? = nil, filterAppStoreVersionsAppVersionState: [FilterAppStoreVersionsAppVersionState]? = nil, filterReviewSubmissionsState: [FilterReviewSubmissionsState]? = nil, filterReviewSubmissionsPlatform: [FilterReviewSubmissionsPlatform]? = nil, filterAppStoreVersions: [String]? = nil, filterID: [String]? = nil, isExistsGameCenterEnabledVersions: Bool? = nil, sort: [Sort]? = nil, fieldsApps: [FieldsApps]? = nil, fieldsAppEncryptionDeclarations: [FieldsAppEncryptionDeclarations]? = nil, fieldsCiProducts: [FieldsCiProducts]? = nil, fieldsBetaGroups: [FieldsBetaGroups]? = nil, fieldsAppStoreVersions: [FieldsAppStoreVersions]? = nil, fieldsPreReleaseVersions: [FieldsPreReleaseVersions]? = nil, fieldsBetaAppLocalizations: [FieldsBetaAppLocalizations]? = nil, fieldsBuilds: [FieldsBuilds]? = nil, fieldsBetaLicenseAgreements: [FieldsBetaLicenseAgreements]? = nil, fieldsBetaAppReviewDetails: [FieldsBetaAppReviewDetails]? = nil, fieldsAppInfos: [FieldsAppInfos]? = nil, fieldsAppClips: [FieldsAppClips]? = nil, fieldsEndUserLicenseAgreements: [FieldsEndUserLicenseAgreements]? = nil, fieldsInAppPurchases: [FieldsInAppPurchases]? = nil, fieldsSubscriptionGroups: [FieldsSubscriptionGroups]? = nil, fieldsGameCenterEnabledVersions: [FieldsGameCenterEnabledVersions]? = nil, fieldsAppCustomProductPages: [FieldsAppCustomProductPages]? = nil, fieldsPromotedPurchases: [FieldsPromotedPurchases]? = nil, fieldsAppEvents: [FieldsAppEvents]? = nil, fieldsReviewSubmissions: [FieldsReviewSubmissions]? = nil, fieldsSubscriptionGracePeriods: [FieldsSubscriptionGracePeriods]? = nil, fieldsGameCenterDetails: [FieldsGameCenterDetails]? = nil, fieldsAppStoreVersionExperiments: [FieldsAppStoreVersionExperiments]? = nil, limit: Int? = nil, include: [Include]? = nil, limitAppClips: Int? = nil, limitAppCustomProductPages: Int? = nil, limitAppEncryptionDeclarations: Int? = nil, limitAppEvents: Int? = nil, limitAppInfos: Int? = nil, limitAppStoreVersionExperimentsV2: Int? = nil, limitAppStoreVersions: Int? = nil, limitBetaAppLocalizations: Int? = nil, limitBetaGroups: Int? = nil, limitBuilds: Int? = nil, limitGameCenterEnabledVersions: Int? = nil, limitInAppPurchases: Int? = nil, limitInAppPurchasesV2: Int? = nil, limitPreReleaseVersions: Int? = nil, limitPromotedPurchases: Int? = nil, limitReviewSubmissions: Int? = nil, limitSubscriptionGroups: Int? = nil) {
 				self.filterName = filterName
 				self.filterBundleID = filterBundleID
 				self.filterSku = filterSku
@@ -547,7 +529,6 @@ extension APIEndpoint.V1 {
 				self.fieldsAppInfos = fieldsAppInfos
 				self.fieldsAppClips = fieldsAppClips
 				self.fieldsEndUserLicenseAgreements = fieldsEndUserLicenseAgreements
-				self.fieldsAppPreOrders = fieldsAppPreOrders
 				self.fieldsInAppPurchases = fieldsInAppPurchases
 				self.fieldsSubscriptionGroups = fieldsSubscriptionGroups
 				self.fieldsGameCenterEnabledVersions = fieldsGameCenterEnabledVersions
@@ -606,7 +587,6 @@ extension APIEndpoint.V1 {
 				encoder.encode(fieldsAppInfos, forKey: "fields[appInfos]")
 				encoder.encode(fieldsAppClips, forKey: "fields[appClips]")
 				encoder.encode(fieldsEndUserLicenseAgreements, forKey: "fields[endUserLicenseAgreements]")
-				encoder.encode(fieldsAppPreOrders, forKey: "fields[appPreOrders]")
 				encoder.encode(fieldsInAppPurchases, forKey: "fields[inAppPurchases]")
 				encoder.encode(fieldsSubscriptionGroups, forKey: "fields[subscriptionGroups]")
 				encoder.encode(fieldsGameCenterEnabledVersions, forKey: "fields[gameCenterEnabledVersions]")

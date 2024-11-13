@@ -39,7 +39,6 @@ extension APIEndpoint.V1.SubscriptionOfferCodes.WithID {
 				case proceeds
 				case proceedsYear2
 				case territory
-				case subscription
 				case equalizations
 			}
 

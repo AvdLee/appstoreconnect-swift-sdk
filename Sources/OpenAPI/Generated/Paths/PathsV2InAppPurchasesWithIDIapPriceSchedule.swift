@@ -19,7 +19,6 @@ extension APIEndpoint.V2.InAppPurchases.WithID {
 
 		public struct GetParameters {
 			public var fieldsInAppPurchasePriceSchedules: [FieldsInAppPurchasePriceSchedules]?
-			public var fieldsInAppPurchases: [FieldsInAppPurchases]?
 			public var fieldsTerritories: [FieldsTerritories]?
 			public var fieldsInAppPurchasePrices: [FieldsInAppPurchasePrices]?
 			public var include: [Include]?
@@ -27,29 +26,9 @@ extension APIEndpoint.V2.InAppPurchases.WithID {
 			public var limitAutomaticPrices: Int?
 
 			public enum FieldsInAppPurchasePriceSchedules: String, Codable, CaseIterable {
-				case inAppPurchase
 				case baseTerritory
 				case manualPrices
 				case automaticPrices
-			}
-
-			public enum FieldsInAppPurchases: String, Codable, CaseIterable {
-				case name
-				case productID = "productId"
-				case inAppPurchaseType
-				case state
-				case reviewNote
-				case familySharable
-				case contentHosting
-				case app
-				case inAppPurchaseLocalizations
-				case pricePoints
-				case content
-				case appStoreReviewScreenshot
-				case promotedPurchase
-				case iapPriceSchedule
-				case inAppPurchaseAvailability
-				case images
 			}
 
 			public enum FieldsTerritories: String, Codable, CaseIterable {
@@ -60,21 +39,18 @@ extension APIEndpoint.V2.InAppPurchases.WithID {
 				case startDate
 				case endDate
 				case manual
-				case inAppPurchaseV2
 				case inAppPurchasePricePoint
 				case territory
 			}
 
 			public enum Include: String, Codable, CaseIterable {
-				case inAppPurchase
 				case baseTerritory
 				case manualPrices
 				case automaticPrices
 			}
 
-			public init(fieldsInAppPurchasePriceSchedules: [FieldsInAppPurchasePriceSchedules]? = nil, fieldsInAppPurchases: [FieldsInAppPurchases]? = nil, fieldsTerritories: [FieldsTerritories]? = nil, fieldsInAppPurchasePrices: [FieldsInAppPurchasePrices]? = nil, include: [Include]? = nil, limitManualPrices: Int? = nil, limitAutomaticPrices: Int? = nil) {
+			public init(fieldsInAppPurchasePriceSchedules: [FieldsInAppPurchasePriceSchedules]? = nil, fieldsTerritories: [FieldsTerritories]? = nil, fieldsInAppPurchasePrices: [FieldsInAppPurchasePrices]? = nil, include: [Include]? = nil, limitManualPrices: Int? = nil, limitAutomaticPrices: Int? = nil) {
 				self.fieldsInAppPurchasePriceSchedules = fieldsInAppPurchasePriceSchedules
-				self.fieldsInAppPurchases = fieldsInAppPurchases
 				self.fieldsTerritories = fieldsTerritories
 				self.fieldsInAppPurchasePrices = fieldsInAppPurchasePrices
 				self.include = include
@@ -85,7 +61,6 @@ extension APIEndpoint.V2.InAppPurchases.WithID {
 			public var asQuery: [(String, String?)] {
 				let encoder = URLQueryEncoder(explode: false)
 				encoder.encode(fieldsInAppPurchasePriceSchedules, forKey: "fields[inAppPurchasePriceSchedules]")
-				encoder.encode(fieldsInAppPurchases, forKey: "fields[inAppPurchases]")
 				encoder.encode(fieldsTerritories, forKey: "fields[territories]")
 				encoder.encode(fieldsInAppPurchasePrices, forKey: "fields[inAppPurchasePrices]")
 				encoder.encode(include, forKey: "include")

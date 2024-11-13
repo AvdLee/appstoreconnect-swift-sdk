@@ -130,7 +130,6 @@ extension APIEndpoint.V1.AppStoreVersions {
 				case startDate
 				case totalPauseDuration
 				case currentDayNumber
-				case appStoreVersion
 			}
 
 			public enum FieldsGameCenterAppVersions: String, Codable, CaseIterable {
@@ -145,7 +144,6 @@ extension APIEndpoint.V1.AppStoreVersions {
 				case sourceFileChecksum
 				case uploadOperations
 				case assetDeliveryState
-				case uploaded
 				case appStoreVersion
 			}
 
@@ -172,7 +170,6 @@ extension APIEndpoint.V1.AppStoreVersions {
 				case releaseWithAppStoreVersion
 				case appClipDefaultExperienceLocalizations
 				case appClipAppStoreReviewDetail
-				case appClipDefaultExperienceTemplate
 			}
 
 			public enum FieldsAppStoreVersionExperiments: String, Codable, CaseIterable {
@@ -182,7 +179,6 @@ extension APIEndpoint.V1.AppStoreVersions {
 				case reviewRequired
 				case startDate
 				case endDate
-				case started
 				case appStoreVersion
 				case appStoreVersionExperimentTreatments
 				case platform
@@ -192,7 +188,6 @@ extension APIEndpoint.V1.AppStoreVersions {
 			}
 
 			public enum FieldsAlternativeDistributionPackages: String, Codable, CaseIterable {
-				case appStoreVersion
 				case versions
 			}
 
