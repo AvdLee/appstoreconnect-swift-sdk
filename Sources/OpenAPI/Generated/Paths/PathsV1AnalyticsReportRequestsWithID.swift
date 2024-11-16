@@ -26,7 +26,6 @@ extension APIEndpoint.V1.AnalyticsReportRequests {
 			public enum FieldsAnalyticsReportRequests: String, Codable, CaseIterable {
 				case accessType
 				case stoppedDueToInactivity
-				case app
 				case reports
 			}
 

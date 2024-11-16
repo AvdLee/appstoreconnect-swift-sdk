@@ -27,7 +27,6 @@ extension APIEndpoint.V1.BundleIDs.WithID {
 		public enum FieldsBundleIDCapabilities: String, Codable, CaseIterable {
 			case capabilityType
 			case settings
-			case bundleID = "bundleId"
 		}
 	}
 }

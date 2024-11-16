@@ -26,7 +26,6 @@ extension APIEndpoint.V1.InAppPurchasePriceSchedules {
 			public var limitManualPrices: Int?
 
 			public enum FieldsInAppPurchasePriceSchedules: String, Codable, CaseIterable {
-				case inAppPurchase
 				case baseTerritory
 				case manualPrices
 				case automaticPrices
@@ -40,13 +39,11 @@ extension APIEndpoint.V1.InAppPurchasePriceSchedules {
 				case startDate
 				case endDate
 				case manual
-				case inAppPurchaseV2
 				case inAppPurchasePricePoint
 				case territory
 			}
 
 			public enum Include: String, Codable, CaseIterable {
-				case inAppPurchase
 				case baseTerritory
 				case manualPrices
 				case automaticPrices

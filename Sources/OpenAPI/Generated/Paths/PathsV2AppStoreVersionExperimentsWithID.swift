@@ -32,7 +32,6 @@ extension APIEndpoint.V2.AppStoreVersionExperiments {
 				case reviewRequired
 				case startDate
 				case endDate
-				case started
 				case app
 				case latestControlVersion
 				case controlVersions

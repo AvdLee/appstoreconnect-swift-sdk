@@ -36,7 +36,6 @@ extension APIEndpoint.V1.AppClipDefaultExperienceLocalizations {
 				case imageAsset
 				case uploadOperations
 				case assetDeliveryState
-				case uploaded
 				case appClipDefaultExperienceLocalization
 			}
 

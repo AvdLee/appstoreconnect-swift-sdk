@@ -30,7 +30,6 @@ extension APIEndpoint.V1.AppClipAdvancedExperienceImages {
 			case imageAsset
 			case uploadOperations
 			case assetDeliveryState
-			case uploaded
 		}
 
 		public func patch(_ body: AppStoreConnect_Swift_SDK.AppClipAdvancedExperienceImageUpdateRequest) -> Request<AppStoreConnect_Swift_SDK.AppClipAdvancedExperienceImageResponse> {

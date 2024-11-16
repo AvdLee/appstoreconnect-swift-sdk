@@ -42,7 +42,6 @@ extension APIEndpoint.V1.AppEventLocalizations {
 				case assetToken
 				case uploadOperations
 				case assetDeliveryState
-				case uploaded
 				case appEventAssetType
 				case appEventLocalization
 			}
@@ -52,10 +51,11 @@ extension APIEndpoint.V1.AppEventLocalizations {
 				case fileName
 				case previewFrameTimeCode
 				case videoURL = "videoUrl"
+				case previewFrameImage
 				case previewImage
 				case uploadOperations
 				case assetDeliveryState
-				case uploaded
+				case videoDeliveryState
 				case appEventAssetType
 				case appEventLocalization
 			}

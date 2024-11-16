@@ -33,7 +33,6 @@ extension APIEndpoint.V1.PromotedPurchaseImages {
 			case imageAsset
 			case assetType
 			case uploadOperations
-			case uploaded
 			case state
 			case promotedPurchase
 		}

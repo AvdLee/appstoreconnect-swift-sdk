@@ -28,7 +28,6 @@ extension APIEndpoint.V1.CiBuildActions.WithID {
 			public var limitBuilds: Int?
 
 			public enum FieldsCiBuildRuns: String, Codable, CaseIterable {
-				case clean
 				case number
 				case createdDate
 				case startedDate
@@ -41,7 +40,6 @@ extension APIEndpoint.V1.CiBuildActions.WithID {
 				case completionStatus
 				case startReason
 				case cancelReason
-				case buildRun
 				case builds
 				case workflow
 				case product

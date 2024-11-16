@@ -13,10 +13,12 @@ extension APIEndpoint.V1.GameCenterAchievements.WithID.Relationships {
 		/// Path: `/v1/gameCenterAchievements/{id}/relationships/groupAchievement`
 		public let path: String
 
+		@available(*, deprecated, message: "Deprecated")
 		public var get: Request<AppStoreConnect_Swift_SDK.GameCenterAchievementGroupAchievementLinkageResponse> {
 			Request(path: path, method: "GET", id: "gameCenterAchievements_groupAchievement_getToOneRelationship")
 		}
 
+		@available(*, deprecated, message: "Deprecated")
 		public func patch(_ body: AppStoreConnect_Swift_SDK.GameCenterAchievementGroupAchievementLinkageRequest) -> Request<Void> {
 			Request(path: path, method: "PATCH", body: body, id: "gameCenterAchievements_groupAchievement_updateToOneRelationship")
 		}

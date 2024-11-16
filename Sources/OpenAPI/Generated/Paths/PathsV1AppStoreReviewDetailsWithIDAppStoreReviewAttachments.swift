@@ -29,7 +29,6 @@ extension APIEndpoint.V1.AppStoreReviewDetails.WithID {
 				case sourceFileChecksum
 				case uploadOperations
 				case assetDeliveryState
-				case uploaded
 				case appStoreReviewDetail
 			}
 

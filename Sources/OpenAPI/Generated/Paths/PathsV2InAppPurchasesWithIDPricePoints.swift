@@ -28,7 +28,7 @@ extension APIEndpoint.V2.InAppPurchases.WithID {
 				case customerPrice
 				case proceeds
 				case territory
-				case inAppPurchaseV2
+				case equalizations
 			}
 
 			public enum FieldsTerritories: String, Codable, CaseIterable {

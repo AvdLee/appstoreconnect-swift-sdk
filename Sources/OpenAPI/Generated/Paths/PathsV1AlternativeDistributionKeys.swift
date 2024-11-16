@@ -24,7 +24,6 @@ extension APIEndpoint.V1 {
 
 			public enum FieldsAlternativeDistributionKeys: String, Codable, CaseIterable {
 				case publicKey
-				case app
 			}
 
 			public init(isExistsApp: Bool? = nil, fieldsAlternativeDistributionKeys: [FieldsAlternativeDistributionKeys]? = nil, limit: Int? = nil) {

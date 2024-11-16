@@ -19,19 +19,23 @@ public struct AppEventVideoClip: Codable, Identifiable {
 		public var fileName: String?
 		public var previewFrameTimeCode: String?
 		public var videoURL: String?
+		public var previewFrameImage: PreviewFrameImage?
 		public var previewImage: ImageAsset?
 		public var uploadOperations: [UploadOperation]?
 		public var assetDeliveryState: AppMediaAssetState?
+		public var videoDeliveryState: AppMediaVideoState?
 		public var appEventAssetType: AppEventAssetType?
 
-		public init(fileSize: Int? = nil, fileName: String? = nil, previewFrameTimeCode: String? = nil, videoURL: String? = nil, previewImage: ImageAsset? = nil, uploadOperations: [UploadOperation]? = nil, assetDeliveryState: AppMediaAssetState? = nil, appEventAssetType: AppEventAssetType? = nil) {
+		public init(fileSize: Int? = nil, fileName: String? = nil, previewFrameTimeCode: String? = nil, videoURL: String? = nil, previewFrameImage: PreviewFrameImage? = nil, previewImage: ImageAsset? = nil, uploadOperations: [UploadOperation]? = nil, assetDeliveryState: AppMediaAssetState? = nil, videoDeliveryState: AppMediaVideoState? = nil, appEventAssetType: AppEventAssetType? = nil) {
 			self.fileSize = fileSize
 			self.fileName = fileName
 			self.previewFrameTimeCode = previewFrameTimeCode
 			self.videoURL = videoURL
+			self.previewFrameImage = previewFrameImage
 			self.previewImage = previewImage
 			self.uploadOperations = uploadOperations
 			self.assetDeliveryState = assetDeliveryState
+			self.videoDeliveryState = videoDeliveryState
 			self.appEventAssetType = appEventAssetType
 		}
 
@@ -41,9 +45,11 @@ public struct AppEventVideoClip: Codable, Identifiable {
 			self.fileName = try values.decodeIfPresent(String.self, forKey: "fileName")
 			self.previewFrameTimeCode = try values.decodeIfPresent(String.self, forKey: "previewFrameTimeCode")
 			self.videoURL = try values.decodeIfPresent(String.self, forKey: "videoUrl")
+			self.previewFrameImage = try values.decodeIfPresent(PreviewFrameImage.self, forKey: "previewFrameImage")
 			self.previewImage = try values.decodeIfPresent(ImageAsset.self, forKey: "previewImage")
 			self.uploadOperations = try values.decodeIfPresent([UploadOperation].self, forKey: "uploadOperations")
 			self.assetDeliveryState = try values.decodeIfPresent(AppMediaAssetState.self, forKey: "assetDeliveryState")
+			self.videoDeliveryState = try values.decodeIfPresent(AppMediaVideoState.self, forKey: "videoDeliveryState")
 			self.appEventAssetType = try values.decodeIfPresent(AppEventAssetType.self, forKey: "appEventAssetType")
 		}
 
@@ -53,9 +59,11 @@ public struct AppEventVideoClip: Codable, Identifiable {
 			try values.encodeIfPresent(fileName, forKey: "fileName")
 			try values.encodeIfPresent(previewFrameTimeCode, forKey: "previewFrameTimeCode")
 			try values.encodeIfPresent(videoURL, forKey: "videoUrl")
+			try values.encodeIfPresent(previewFrameImage, forKey: "previewFrameImage")
 			try values.encodeIfPresent(previewImage, forKey: "previewImage")
 			try values.encodeIfPresent(uploadOperations, forKey: "uploadOperations")
 			try values.encodeIfPresent(assetDeliveryState, forKey: "assetDeliveryState")
+			try values.encodeIfPresent(videoDeliveryState, forKey: "videoDeliveryState")
 			try values.encodeIfPresent(appEventAssetType, forKey: "appEventAssetType")
 		}
 	}

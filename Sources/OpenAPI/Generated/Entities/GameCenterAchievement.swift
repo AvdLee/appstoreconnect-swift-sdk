@@ -55,6 +55,7 @@ public struct GameCenterAchievement: Codable, Identifiable {
 	public struct Relationships: Codable {
 		public var gameCenterDetail: GameCenterDetail?
 		public var gameCenterGroup: GameCenterGroup?
+		/// - warning: Deprecated.
 		public var groupAchievement: GroupAchievement?
 		public var localizations: Localizations?
 		public var releases: Releases?
@@ -147,6 +148,7 @@ public struct GameCenterAchievement: Codable, Identifiable {
 			}
 		}
 
+		@available(*, deprecated, message: "Deprecated")
 		public struct GroupAchievement: Codable {
 			public var links: RelationshipLinks?
 			public var data: Data?

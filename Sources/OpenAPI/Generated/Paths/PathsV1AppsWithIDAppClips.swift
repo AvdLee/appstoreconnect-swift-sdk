@@ -59,9 +59,7 @@ extension APIEndpoint.V1.Apps.WithID {
 				case appClips
 				case appPricePoints
 				case endUserLicenseAgreement
-				case preOrder
 				case appPriceSchedule
-				case appAvailability
 				case appAvailabilityV2
 				case inAppPurchases
 				case subscriptionGroups
@@ -87,7 +85,6 @@ extension APIEndpoint.V1.Apps.WithID {
 				case releaseWithAppStoreVersion
 				case appClipDefaultExperienceLocalizations
 				case appClipAppStoreReviewDetail
-				case appClipDefaultExperienceTemplate
 			}
 
 			public enum Include: String, Codable, CaseIterable {

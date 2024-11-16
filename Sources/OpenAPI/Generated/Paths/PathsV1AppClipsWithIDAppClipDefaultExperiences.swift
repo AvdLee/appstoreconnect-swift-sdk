@@ -34,7 +34,6 @@ extension APIEndpoint.V1.AppClips.WithID {
 				case releaseWithAppStoreVersion
 				case appClipDefaultExperienceLocalizations
 				case appClipAppStoreReviewDetail
-				case appClipDefaultExperienceTemplate
 			}
 
 			public enum FieldsAppClips: String, Codable, CaseIterable {

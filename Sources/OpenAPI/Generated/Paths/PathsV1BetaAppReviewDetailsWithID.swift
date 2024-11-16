@@ -60,9 +60,7 @@ extension APIEndpoint.V1.BetaAppReviewDetails {
 				case appClips
 				case appPricePoints
 				case endUserLicenseAgreement
-				case preOrder
 				case appPriceSchedule
-				case appAvailability
 				case appAvailabilityV2
 				case inAppPurchases
 				case subscriptionGroups
