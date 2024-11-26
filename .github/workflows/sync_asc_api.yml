@@ -1,22 +1,24 @@
 name: Synchronize ASC API
 
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+permissions:
+    contents: write
+    pull-requests: write
+
 on:
-  workflow_dispatch:
-  pull_request:
-    branches: [ main ]
   schedule:
-    # run once per day
-    - cron: '0 12 * * *'
+    - cron: '0 * * * *'
+  workflow_dispatch:
 
 jobs:
   diff_spec:
     runs-on: macos-latest
     steps:
       - uses: actions/checkout@v2
-      - run: make download
-
-      # If there are any differences, this step will fail
-      # and issue a notification. The api will then need to be
-      # updated and tagged manually.
-      - run: git diff --ignore-all-space --exit-code
+      - run: ./check_for_updates.sh
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
