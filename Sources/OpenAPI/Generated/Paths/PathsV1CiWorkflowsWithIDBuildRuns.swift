@@ -36,7 +36,6 @@ extension APIEndpoint.V1.CiWorkflows.WithID {
 			}
 
 			public enum FieldsCiBuildRuns: String, Codable, CaseIterable {
-				case clean
 				case number
 				case createdDate
 				case startedDate
@@ -49,7 +48,6 @@ extension APIEndpoint.V1.CiWorkflows.WithID {
 				case completionStatus
 				case startReason
 				case cancelReason
-				case buildRun
 				case builds
 				case workflow
 				case product

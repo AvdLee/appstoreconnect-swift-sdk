@@ -32,7 +32,6 @@ extension APIEndpoint.V1.AppScreenshotSets.WithID {
 				case assetType
 				case uploadOperations
 				case assetDeliveryState
-				case uploaded
 				case appScreenshotSet
 			}
 

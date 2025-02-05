@@ -14,54 +14,9 @@ public struct InAppPurchasePriceSchedule: Codable, Identifiable {
 	}
 
 	public struct Relationships: Codable {
-		public var inAppPurchase: InAppPurchase?
 		public var baseTerritory: BaseTerritory?
 		public var manualPrices: ManualPrices?
 		public var automaticPrices: AutomaticPrices?
-
-		public struct InAppPurchase: Codable {
-			public var data: Data?
-
-			public struct Data: Codable, Identifiable {
-				public var type: `Type`
-				public var id: String
-
-				public enum `Type`: String, Codable, CaseIterable {
-					case inAppPurchases
-				}
-
-				public init(type: `Type`, id: String) {
-					self.type = type
-					self.id = id
-				}
-
-				public init(from decoder: Decoder) throws {
-					let values = try decoder.container(keyedBy: StringCodingKey.self)
-					self.type = try values.decode(`Type`.self, forKey: "type")
-					self.id = try values.decode(String.self, forKey: "id")
-				}
-
-				public func encode(to encoder: Encoder) throws {
-					var values = encoder.container(keyedBy: StringCodingKey.self)
-					try values.encode(type, forKey: "type")
-					try values.encode(id, forKey: "id")
-				}
-			}
-
-			public init(data: Data? = nil) {
-				self.data = data
-			}
-
-			public init(from decoder: Decoder) throws {
-				let values = try decoder.container(keyedBy: StringCodingKey.self)
-				self.data = try values.decodeIfPresent(Data.self, forKey: "data")
-			}
-
-			public func encode(to encoder: Encoder) throws {
-				var values = encoder.container(keyedBy: StringCodingKey.self)
-				try values.encodeIfPresent(data, forKey: "data")
-			}
-		}
 
 		public struct BaseTerritory: Codable {
 			public var links: RelationshipLinks?
@@ -215,8 +170,7 @@ public struct InAppPurchasePriceSchedule: Codable, Identifiable {
 			}
 		}
 
-		public init(inAppPurchase: InAppPurchase? = nil, baseTerritory: BaseTerritory? = nil, manualPrices: ManualPrices? = nil, automaticPrices: AutomaticPrices? = nil) {
-			self.inAppPurchase = inAppPurchase
+		public init(baseTerritory: BaseTerritory? = nil, manualPrices: ManualPrices? = nil, automaticPrices: AutomaticPrices? = nil) {
 			self.baseTerritory = baseTerritory
 			self.manualPrices = manualPrices
 			self.automaticPrices = automaticPrices
@@ -224,7 +178,6 @@ public struct InAppPurchasePriceSchedule: Codable, Identifiable {
 
 		public init(from decoder: Decoder) throws {
 			let values = try decoder.container(keyedBy: StringCodingKey.self)
-			self.inAppPurchase = try values.decodeIfPresent(InAppPurchase.self, forKey: "inAppPurchase")
 			self.baseTerritory = try values.decodeIfPresent(BaseTerritory.self, forKey: "baseTerritory")
 			self.manualPrices = try values.decodeIfPresent(ManualPrices.self, forKey: "manualPrices")
 			self.automaticPrices = try values.decodeIfPresent(AutomaticPrices.self, forKey: "automaticPrices")
@@ -232,7 +185,6 @@ public struct InAppPurchasePriceSchedule: Codable, Identifiable {
 
 		public func encode(to encoder: Encoder) throws {
 			var values = encoder.container(keyedBy: StringCodingKey.self)
-			try values.encodeIfPresent(inAppPurchase, forKey: "inAppPurchase")
 			try values.encodeIfPresent(baseTerritory, forKey: "baseTerritory")
 			try values.encodeIfPresent(manualPrices, forKey: "manualPrices")
 			try values.encodeIfPresent(automaticPrices, forKey: "automaticPrices")

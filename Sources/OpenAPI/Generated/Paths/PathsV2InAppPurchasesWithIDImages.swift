@@ -30,7 +30,6 @@ extension APIEndpoint.V2.InAppPurchases.WithID {
 				case assetToken
 				case imageAsset
 				case uploadOperations
-				case uploaded
 				case state
 				case inAppPurchase
 			}
@@ -43,7 +42,6 @@ extension APIEndpoint.V2.InAppPurchases.WithID {
 				case reviewNote
 				case familySharable
 				case contentHosting
-				case app
 				case inAppPurchaseLocalizations
 				case pricePoints
 				case content

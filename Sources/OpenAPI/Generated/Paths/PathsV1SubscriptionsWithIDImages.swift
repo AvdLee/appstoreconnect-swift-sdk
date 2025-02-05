@@ -30,7 +30,6 @@ extension APIEndpoint.V1.Subscriptions.WithID {
 				case assetToken
 				case imageAsset
 				case uploadOperations
-				case uploaded
 				case state
 				case subscription
 			}

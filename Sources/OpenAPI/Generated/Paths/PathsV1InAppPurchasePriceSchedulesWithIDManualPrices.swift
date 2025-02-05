@@ -29,7 +29,6 @@ extension APIEndpoint.V1.InAppPurchasePriceSchedules.WithID {
 				case startDate
 				case endDate
 				case manual
-				case inAppPurchaseV2
 				case inAppPurchasePricePoint
 				case territory
 			}
@@ -38,7 +37,7 @@ extension APIEndpoint.V1.InAppPurchasePriceSchedules.WithID {
 				case customerPrice
 				case proceeds
 				case territory
-				case inAppPurchaseV2
+				case equalizations
 			}
 
 			public enum FieldsTerritories: String, Codable, CaseIterable {

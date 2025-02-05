@@ -30,7 +30,6 @@ extension APIEndpoint.V1.RoutingAppCoverages {
 			case sourceFileChecksum
 			case uploadOperations
 			case assetDeliveryState
-			case uploaded
 			case appStoreVersion
 		}
 

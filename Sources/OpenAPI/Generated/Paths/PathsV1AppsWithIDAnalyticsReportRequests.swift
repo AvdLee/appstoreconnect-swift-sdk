@@ -33,7 +33,6 @@ extension APIEndpoint.V1.Apps.WithID {
 			public enum FieldsAnalyticsReportRequests: String, Codable, CaseIterable {
 				case accessType
 				case stoppedDueToInactivity
-				case app
 				case reports
 			}
 

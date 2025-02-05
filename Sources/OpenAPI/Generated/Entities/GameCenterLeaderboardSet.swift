@@ -39,6 +39,7 @@ public struct GameCenterLeaderboardSet: Codable, Identifiable {
 	public struct Relationships: Codable {
 		public var gameCenterDetail: GameCenterDetail?
 		public var gameCenterGroup: GameCenterGroup?
+		/// - warning: Deprecated.
 		public var groupLeaderboardSet: GroupLeaderboardSet?
 		public var localizations: Localizations?
 		public var gameCenterLeaderboards: GameCenterLeaderboards?
@@ -132,6 +133,7 @@ public struct GameCenterLeaderboardSet: Codable, Identifiable {
 			}
 		}
 
+		@available(*, deprecated, message: "Deprecated")
 		public struct GroupLeaderboardSet: Codable {
 			public var links: RelationshipLinks?
 			public var data: Data?

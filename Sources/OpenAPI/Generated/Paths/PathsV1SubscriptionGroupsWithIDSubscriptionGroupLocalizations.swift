@@ -33,7 +33,6 @@ extension APIEndpoint.V1.SubscriptionGroups.WithID {
 
 			public enum FieldsSubscriptionGroups: String, Codable, CaseIterable {
 				case referenceName
-				case app
 				case subscriptions
 				case subscriptionGroupLocalizations
 			}

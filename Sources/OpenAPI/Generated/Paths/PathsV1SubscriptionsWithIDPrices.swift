@@ -29,8 +29,6 @@ extension APIEndpoint.V1.Subscriptions.WithID {
 			public enum FieldsSubscriptionPrices: String, Codable, CaseIterable {
 				case startDate
 				case preserved
-				case preserveCurrentPrice
-				case subscription
 				case territory
 				case subscriptionPricePoint
 			}
@@ -44,7 +42,6 @@ extension APIEndpoint.V1.Subscriptions.WithID {
 				case proceeds
 				case proceedsYear2
 				case territory
-				case subscription
 				case equalizations
 			}
 

@@ -31,7 +31,6 @@ extension APIEndpoint.V1.Subscriptions.WithID {
 				case assetType
 				case uploadOperations
 				case assetDeliveryState
-				case uploaded
 				case subscription
 			}
 

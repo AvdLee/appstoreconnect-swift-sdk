@@ -24,7 +24,6 @@ extension APIEndpoint.V1.BetaAppClipInvocations {
 
 			public enum FieldsBetaAppClipInvocations: String, Codable, CaseIterable {
 				case url
-				case buildBundle
 				case betaAppClipInvocationLocalizations
 			}
 

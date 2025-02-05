@@ -77,7 +77,6 @@ extension APIEndpoint.V1.Subscriptions {
 				case assetType
 				case uploadOperations
 				case assetDeliveryState
-				case uploaded
 				case subscription
 			}
 
@@ -120,8 +119,6 @@ extension APIEndpoint.V1.Subscriptions {
 			public enum FieldsSubscriptionPrices: String, Codable, CaseIterable {
 				case startDate
 				case preserved
-				case preserveCurrentPrice
-				case subscription
 				case territory
 				case subscriptionPricePoint
 			}
@@ -130,7 +127,6 @@ extension APIEndpoint.V1.Subscriptions {
 				case visibleForAllUsers
 				case enabled
 				case state
-				case app
 				case inAppPurchaseV2
 				case subscription
 				case promotionImages
@@ -138,7 +134,6 @@ extension APIEndpoint.V1.Subscriptions {
 
 			public enum FieldsSubscriptionAvailabilities: String, Codable, CaseIterable {
 				case availableInNewTerritories
-				case subscription
 				case availableTerritories
 			}
 
@@ -155,7 +150,6 @@ extension APIEndpoint.V1.Subscriptions {
 				case endDate
 				case priority
 				case promotionIntent
-				case subscription
 				case prices
 			}
 
@@ -166,7 +160,6 @@ extension APIEndpoint.V1.Subscriptions {
 				case assetToken
 				case imageAsset
 				case uploadOperations
-				case uploaded
 				case state
 				case subscription
 			}
