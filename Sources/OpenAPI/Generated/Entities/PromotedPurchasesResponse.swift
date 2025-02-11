@@ -12,7 +12,6 @@ public struct PromotedPurchasesResponse: Codable {
 	public enum IncludedItem: Codable {
 		case inAppPurchaseV2(InAppPurchaseV2)
 		case subscription(Subscription)
-		case promotedPurchaseImage(PromotedPurchaseImage)
 
 		public init(from decoder: Decoder) throws {
 			let container = try decoder.singleValueContainer()
@@ -20,12 +19,10 @@ public struct PromotedPurchasesResponse: Codable {
 				self = .inAppPurchaseV2(value)
 			} else if let value = try? container.decode(Subscription.self) {
 				self = .subscription(value)
-			} else if let value = try? container.decode(PromotedPurchaseImage.self) {
-				self = .promotedPurchaseImage(value)
 			} else {
 				throw DecodingError.dataCorruptedError(
 					in: container,
-					debugDescription: "Data could not be decoded as any of the expected types (InAppPurchaseV2, Subscription, PromotedPurchaseImage)."
+					debugDescription: "Data could not be decoded as any of the expected types (InAppPurchaseV2, Subscription)."
 				)
 			}
 		}
@@ -35,7 +32,6 @@ public struct PromotedPurchasesResponse: Codable {
 			switch self {
 			case .inAppPurchaseV2(let value): try container.encode(value)
 			case .subscription(let value): try container.encode(value)
-			case .promotedPurchaseImage(let value): try container.encode(value)
 			}
 		}
 	}

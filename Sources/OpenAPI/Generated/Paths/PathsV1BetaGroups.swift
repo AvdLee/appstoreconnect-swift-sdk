@@ -31,6 +31,7 @@ extension APIEndpoint.V1 {
 			public var fieldsApps: [FieldsApps]?
 			public var fieldsBuilds: [FieldsBuilds]?
 			public var fieldsBetaTesters: [FieldsBetaTesters]?
+			public var fieldsBetaRecruitmentCriteria: [FieldsBetaRecruitmentCriteria]?
 			public var limit: Int?
 			public var include: [Include]?
 			public var limitBetaTesters: Int?
@@ -59,9 +60,12 @@ extension APIEndpoint.V1 {
 				case publicLink
 				case feedbackEnabled
 				case iosBuildsAvailableForAppleSiliconMac
+				case iosBuildsAvailableForAppleVision
 				case app
 				case builds
 				case betaTesters
+				case betaRecruitmentCriteria
+				case betaRecruitmentCriterionCompatibleBuildCheck
 			}
 
 			public enum FieldsApps: String, Codable, CaseIterable {
@@ -148,13 +152,19 @@ extension APIEndpoint.V1 {
 				case builds
 			}
 
+			public enum FieldsBetaRecruitmentCriteria: String, Codable, CaseIterable {
+				case lastModifiedDate
+				case deviceFamilyOsVersionFilters
+			}
+
 			public enum Include: String, Codable, CaseIterable {
 				case app
 				case builds
 				case betaTesters
+				case betaRecruitmentCriteria
 			}
 
-			public init(filterName: [String]? = nil, filterIsInternalGroup: [String]? = nil, filterPublicLinkEnabled: [String]? = nil, filterPublicLinkLimitEnabled: [String]? = nil, filterPublicLink: [String]? = nil, filterApp: [String]? = nil, filterBuilds: [String]? = nil, filterID: [String]? = nil, sort: [Sort]? = nil, fieldsBetaGroups: [FieldsBetaGroups]? = nil, fieldsApps: [FieldsApps]? = nil, fieldsBuilds: [FieldsBuilds]? = nil, fieldsBetaTesters: [FieldsBetaTesters]? = nil, limit: Int? = nil, include: [Include]? = nil, limitBetaTesters: Int? = nil, limitBuilds: Int? = nil) {
+			public init(filterName: [String]? = nil, filterIsInternalGroup: [String]? = nil, filterPublicLinkEnabled: [String]? = nil, filterPublicLinkLimitEnabled: [String]? = nil, filterPublicLink: [String]? = nil, filterApp: [String]? = nil, filterBuilds: [String]? = nil, filterID: [String]? = nil, sort: [Sort]? = nil, fieldsBetaGroups: [FieldsBetaGroups]? = nil, fieldsApps: [FieldsApps]? = nil, fieldsBuilds: [FieldsBuilds]? = nil, fieldsBetaTesters: [FieldsBetaTesters]? = nil, fieldsBetaRecruitmentCriteria: [FieldsBetaRecruitmentCriteria]? = nil, limit: Int? = nil, include: [Include]? = nil, limitBetaTesters: Int? = nil, limitBuilds: Int? = nil) {
 				self.filterName = filterName
 				self.filterIsInternalGroup = filterIsInternalGroup
 				self.filterPublicLinkEnabled = filterPublicLinkEnabled
@@ -168,6 +178,7 @@ extension APIEndpoint.V1 {
 				self.fieldsApps = fieldsApps
 				self.fieldsBuilds = fieldsBuilds
 				self.fieldsBetaTesters = fieldsBetaTesters
+				self.fieldsBetaRecruitmentCriteria = fieldsBetaRecruitmentCriteria
 				self.limit = limit
 				self.include = include
 				self.limitBetaTesters = limitBetaTesters
@@ -189,6 +200,7 @@ extension APIEndpoint.V1 {
 				encoder.encode(fieldsApps, forKey: "fields[apps]")
 				encoder.encode(fieldsBuilds, forKey: "fields[builds]")
 				encoder.encode(fieldsBetaTesters, forKey: "fields[betaTesters]")
+				encoder.encode(fieldsBetaRecruitmentCriteria, forKey: "fields[betaRecruitmentCriteria]")
 				encoder.encode(limit, forKey: "limit")
 				encoder.encode(include, forKey: "include")
 				encoder.encode(limitBetaTesters, forKey: "limit[betaTesters]")

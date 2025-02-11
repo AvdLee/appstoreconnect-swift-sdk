@@ -3,14 +3,13 @@
 
 import Foundation
 
-@available(*, deprecated, message: "Deprecated")
-public struct PromotedPurchaseImagesResponse: Codable {
-	public var data: [PromotedPurchaseImage]
-	public var included: [PromotedPurchase]?
+public struct MerchantIDsResponse: Codable {
+	public var data: [MerchantID]
+	public var included: [Certificate]?
 	public var links: PagedDocumentLinks
 	public var meta: PagingInformation?
 
-	public init(data: [PromotedPurchaseImage], included: [PromotedPurchase]? = nil, links: PagedDocumentLinks, meta: PagingInformation? = nil) {
+	public init(data: [MerchantID], included: [Certificate]? = nil, links: PagedDocumentLinks, meta: PagingInformation? = nil) {
 		self.data = data
 		self.included = included
 		self.links = links
@@ -19,8 +18,8 @@ public struct PromotedPurchaseImagesResponse: Codable {
 
 	public init(from decoder: Decoder) throws {
 		let values = try decoder.container(keyedBy: StringCodingKey.self)
-		self.data = try values.decode([PromotedPurchaseImage].self, forKey: "data")
-		self.included = try values.decodeIfPresent([PromotedPurchase].self, forKey: "included")
+		self.data = try values.decode([MerchantID].self, forKey: "data")
+		self.included = try values.decodeIfPresent([Certificate].self, forKey: "included")
 		self.links = try values.decode(PagedDocumentLinks.self, forKey: "links")
 		self.meta = try values.decodeIfPresent(PagingInformation.self, forKey: "meta")
 	}

@@ -32,6 +32,7 @@ extension APIEndpoint.V1.Profiles.WithID {
 			case platform
 			case expirationDate
 			case certificateContent
+			case activated
 		}
 	}
 }

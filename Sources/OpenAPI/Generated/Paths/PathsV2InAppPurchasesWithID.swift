@@ -91,7 +91,6 @@ extension APIEndpoint.V2.InAppPurchases {
 				case state
 				case inAppPurchaseV2
 				case subscription
-				case promotionImages
 			}
 
 			public enum FieldsInAppPurchasePriceSchedules: String, Codable, CaseIterable {

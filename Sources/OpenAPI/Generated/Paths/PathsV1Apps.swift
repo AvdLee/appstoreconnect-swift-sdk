@@ -237,9 +237,12 @@ extension APIEndpoint.V1 {
 				case publicLink
 				case feedbackEnabled
 				case iosBuildsAvailableForAppleSiliconMac
+				case iosBuildsAvailableForAppleVision
 				case app
 				case builds
 				case betaTesters
+				case betaRecruitmentCriteria
+				case betaRecruitmentCriterionCompatibleBuildCheck
 			}
 
 			public enum FieldsAppStoreVersions: String, Codable, CaseIterable {
@@ -412,7 +415,6 @@ extension APIEndpoint.V1 {
 				case state
 				case inAppPurchaseV2
 				case subscription
-				case promotionImages
 			}
 
 			public enum FieldsAppEvents: String, Codable, CaseIterable {

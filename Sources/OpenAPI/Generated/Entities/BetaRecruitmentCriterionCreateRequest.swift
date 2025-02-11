@@ -3,8 +3,7 @@
 
 import Foundation
 
-@available(*, deprecated, message: "Deprecated")
-public struct PromotedPurchaseImageCreateRequest: Codable {
+public struct BetaRecruitmentCriterionCreateRequest: Codable {
 	public var data: Data
 
 	public struct Data: Codable {
@@ -13,35 +12,31 @@ public struct PromotedPurchaseImageCreateRequest: Codable {
 		public var relationships: Relationships
 
 		public enum `Type`: String, Codable, CaseIterable {
-			case promotedPurchaseImages
+			case betaRecruitmentCriteria
 		}
 
 		public struct Attributes: Codable {
-			public var fileSize: Int
-			public var fileName: String
+			public var deviceFamilyOsVersionFilters: [DeviceFamilyOsVersionFilter]
 
-			public init(fileSize: Int, fileName: String) {
-				self.fileSize = fileSize
-				self.fileName = fileName
+			public init(deviceFamilyOsVersionFilters: [DeviceFamilyOsVersionFilter]) {
+				self.deviceFamilyOsVersionFilters = deviceFamilyOsVersionFilters
 			}
 
 			public init(from decoder: Decoder) throws {
 				let values = try decoder.container(keyedBy: StringCodingKey.self)
-				self.fileSize = try values.decode(Int.self, forKey: "fileSize")
-				self.fileName = try values.decode(String.self, forKey: "fileName")
+				self.deviceFamilyOsVersionFilters = try values.decode([DeviceFamilyOsVersionFilter].self, forKey: "deviceFamilyOsVersionFilters")
 			}
 
 			public func encode(to encoder: Encoder) throws {
 				var values = encoder.container(keyedBy: StringCodingKey.self)
-				try values.encode(fileSize, forKey: "fileSize")
-				try values.encode(fileName, forKey: "fileName")
+				try values.encode(deviceFamilyOsVersionFilters, forKey: "deviceFamilyOsVersionFilters")
 			}
 		}
 
 		public struct Relationships: Codable {
-			public var promotedPurchase: PromotedPurchase
+			public var betaGroup: BetaGroup
 
-			public struct PromotedPurchase: Codable {
+			public struct BetaGroup: Codable {
 				public var data: Data
 
 				public struct Data: Codable, Identifiable {
@@ -49,7 +44,7 @@ public struct PromotedPurchaseImageCreateRequest: Codable {
 					public var id: String
 
 					public enum `Type`: String, Codable, CaseIterable {
-						case promotedPurchases
+						case betaGroups
 					}
 
 					public init(type: `Type`, id: String) {
@@ -85,18 +80,18 @@ public struct PromotedPurchaseImageCreateRequest: Codable {
 				}
 			}
 
-			public init(promotedPurchase: PromotedPurchase) {
-				self.promotedPurchase = promotedPurchase
+			public init(betaGroup: BetaGroup) {
+				self.betaGroup = betaGroup
 			}
 
 			public init(from decoder: Decoder) throws {
 				let values = try decoder.container(keyedBy: StringCodingKey.self)
-				self.promotedPurchase = try values.decode(PromotedPurchase.self, forKey: "promotedPurchase")
+				self.betaGroup = try values.decode(BetaGroup.self, forKey: "betaGroup")
 			}
 
 			public func encode(to encoder: Encoder) throws {
 				var values = encoder.container(keyedBy: StringCodingKey.self)
-				try values.encode(promotedPurchase, forKey: "promotedPurchase")
+				try values.encode(betaGroup, forKey: "betaGroup")
 			}
 		}
 

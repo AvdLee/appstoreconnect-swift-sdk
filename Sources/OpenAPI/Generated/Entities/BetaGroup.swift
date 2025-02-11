@@ -26,8 +26,9 @@ public struct BetaGroup: Codable, Identifiable {
 		public var publicLink: String?
 		public var isFeedbackEnabled: Bool?
 		public var isIosBuildsAvailableForAppleSiliconMac: Bool?
+		public var isIosBuildsAvailableForAppleVision: Bool?
 
-		public init(name: String? = nil, createdDate: Date? = nil, isInternalGroup: Bool? = nil, hasAccessToAllBuilds: Bool? = nil, isPublicLinkEnabled: Bool? = nil, publicLinkID: String? = nil, isPublicLinkLimitEnabled: Bool? = nil, publicLinkLimit: Int? = nil, publicLink: String? = nil, isFeedbackEnabled: Bool? = nil, isIosBuildsAvailableForAppleSiliconMac: Bool? = nil) {
+		public init(name: String? = nil, createdDate: Date? = nil, isInternalGroup: Bool? = nil, hasAccessToAllBuilds: Bool? = nil, isPublicLinkEnabled: Bool? = nil, publicLinkID: String? = nil, isPublicLinkLimitEnabled: Bool? = nil, publicLinkLimit: Int? = nil, publicLink: String? = nil, isFeedbackEnabled: Bool? = nil, isIosBuildsAvailableForAppleSiliconMac: Bool? = nil, isIosBuildsAvailableForAppleVision: Bool? = nil) {
 			self.name = name
 			self.createdDate = createdDate
 			self.isInternalGroup = isInternalGroup
@@ -39,6 +40,7 @@ public struct BetaGroup: Codable, Identifiable {
 			self.publicLink = publicLink
 			self.isFeedbackEnabled = isFeedbackEnabled
 			self.isIosBuildsAvailableForAppleSiliconMac = isIosBuildsAvailableForAppleSiliconMac
+			self.isIosBuildsAvailableForAppleVision = isIosBuildsAvailableForAppleVision
 		}
 
 		public init(from decoder: Decoder) throws {
@@ -54,6 +56,7 @@ public struct BetaGroup: Codable, Identifiable {
 			self.publicLink = try values.decodeIfPresent(String.self, forKey: "publicLink")
 			self.isFeedbackEnabled = try values.decodeIfPresent(Bool.self, forKey: "feedbackEnabled")
 			self.isIosBuildsAvailableForAppleSiliconMac = try values.decodeIfPresent(Bool.self, forKey: "iosBuildsAvailableForAppleSiliconMac")
+			self.isIosBuildsAvailableForAppleVision = try values.decodeIfPresent(Bool.self, forKey: "iosBuildsAvailableForAppleVision")
 		}
 
 		public func encode(to encoder: Encoder) throws {
@@ -69,6 +72,7 @@ public struct BetaGroup: Codable, Identifiable {
 			try values.encodeIfPresent(publicLink, forKey: "publicLink")
 			try values.encodeIfPresent(isFeedbackEnabled, forKey: "feedbackEnabled")
 			try values.encodeIfPresent(isIosBuildsAvailableForAppleSiliconMac, forKey: "iosBuildsAvailableForAppleSiliconMac")
+			try values.encodeIfPresent(isIosBuildsAvailableForAppleVision, forKey: "iosBuildsAvailableForAppleVision")
 		}
 	}
 
@@ -76,6 +80,8 @@ public struct BetaGroup: Codable, Identifiable {
 		public var app: App?
 		public var builds: Builds?
 		public var betaTesters: BetaTesters?
+		public var betaRecruitmentCriteria: BetaRecruitmentCriteria?
+		public var betaRecruitmentCriterionCompatibleBuildCheck: BetaRecruitmentCriterionCompatibleBuildCheck?
 
 		public struct App: Codable {
 			public var links: RelationshipLinks?
@@ -229,10 +235,78 @@ public struct BetaGroup: Codable, Identifiable {
 			}
 		}
 
-		public init(app: App? = nil, builds: Builds? = nil, betaTesters: BetaTesters? = nil) {
+		public struct BetaRecruitmentCriteria: Codable {
+			public var links: RelationshipLinks?
+			public var data: Data?
+
+			public struct Data: Codable, Identifiable {
+				public var type: `Type`
+				public var id: String
+
+				public enum `Type`: String, Codable, CaseIterable {
+					case betaRecruitmentCriteria
+				}
+
+				public init(type: `Type`, id: String) {
+					self.type = type
+					self.id = id
+				}
+
+				public init(from decoder: Decoder) throws {
+					let values = try decoder.container(keyedBy: StringCodingKey.self)
+					self.type = try values.decode(`Type`.self, forKey: "type")
+					self.id = try values.decode(String.self, forKey: "id")
+				}
+
+				public func encode(to encoder: Encoder) throws {
+					var values = encoder.container(keyedBy: StringCodingKey.self)
+					try values.encode(type, forKey: "type")
+					try values.encode(id, forKey: "id")
+				}
+			}
+
+			public init(links: RelationshipLinks? = nil, data: Data? = nil) {
+				self.links = links
+				self.data = data
+			}
+
+			public init(from decoder: Decoder) throws {
+				let values = try decoder.container(keyedBy: StringCodingKey.self)
+				self.links = try values.decodeIfPresent(RelationshipLinks.self, forKey: "links")
+				self.data = try values.decodeIfPresent(Data.self, forKey: "data")
+			}
+
+			public func encode(to encoder: Encoder) throws {
+				var values = encoder.container(keyedBy: StringCodingKey.self)
+				try values.encodeIfPresent(links, forKey: "links")
+				try values.encodeIfPresent(data, forKey: "data")
+			}
+		}
+
+		public struct BetaRecruitmentCriterionCompatibleBuildCheck: Codable {
+			public var links: RelationshipLinks?
+
+			public init(links: RelationshipLinks? = nil) {
+				self.links = links
+			}
+
+			public init(from decoder: Decoder) throws {
+				let values = try decoder.container(keyedBy: StringCodingKey.self)
+				self.links = try values.decodeIfPresent(RelationshipLinks.self, forKey: "links")
+			}
+
+			public func encode(to encoder: Encoder) throws {
+				var values = encoder.container(keyedBy: StringCodingKey.self)
+				try values.encodeIfPresent(links, forKey: "links")
+			}
+		}
+
+		public init(app: App? = nil, builds: Builds? = nil, betaTesters: BetaTesters? = nil, betaRecruitmentCriteria: BetaRecruitmentCriteria? = nil, betaRecruitmentCriterionCompatibleBuildCheck: BetaRecruitmentCriterionCompatibleBuildCheck? = nil) {
 			self.app = app
 			self.builds = builds
 			self.betaTesters = betaTesters
+			self.betaRecruitmentCriteria = betaRecruitmentCriteria
+			self.betaRecruitmentCriterionCompatibleBuildCheck = betaRecruitmentCriterionCompatibleBuildCheck
 		}
 
 		public init(from decoder: Decoder) throws {
@@ -240,6 +314,8 @@ public struct BetaGroup: Codable, Identifiable {
 			self.app = try values.decodeIfPresent(App.self, forKey: "app")
 			self.builds = try values.decodeIfPresent(Builds.self, forKey: "builds")
 			self.betaTesters = try values.decodeIfPresent(BetaTesters.self, forKey: "betaTesters")
+			self.betaRecruitmentCriteria = try values.decodeIfPresent(BetaRecruitmentCriteria.self, forKey: "betaRecruitmentCriteria")
+			self.betaRecruitmentCriterionCompatibleBuildCheck = try values.decodeIfPresent(BetaRecruitmentCriterionCompatibleBuildCheck.self, forKey: "betaRecruitmentCriterionCompatibleBuildCheck")
 		}
 
 		public func encode(to encoder: Encoder) throws {
@@ -247,6 +323,8 @@ public struct BetaGroup: Codable, Identifiable {
 			try values.encodeIfPresent(app, forKey: "app")
 			try values.encodeIfPresent(builds, forKey: "builds")
 			try values.encodeIfPresent(betaTesters, forKey: "betaTesters")
+			try values.encodeIfPresent(betaRecruitmentCriteria, forKey: "betaRecruitmentCriteria")
+			try values.encodeIfPresent(betaRecruitmentCriterionCompatibleBuildCheck, forKey: "betaRecruitmentCriterionCompatibleBuildCheck")
 		}
 	}
 
