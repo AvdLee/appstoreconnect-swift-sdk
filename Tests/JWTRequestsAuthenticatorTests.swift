@@ -9,6 +9,10 @@
 import XCTest
 import Crypto
 @testable import AppStoreConnect_Swift_SDK
+import Foundation
+#if canImport(FoundationNetworking)
+import FoundationNetworking
+#endif
 
 final class JWTRequestsAuthenticatorTests: XCTestCase {
 

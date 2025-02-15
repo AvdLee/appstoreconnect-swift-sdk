@@ -7,6 +7,10 @@
 
 @testable import AppStoreConnect_Swift_SDK
 import XCTest
+import Foundation
+#if canImport(FoundationNetworking)
+import FoundationNetworking
+#endif
 
 final class RateLimitTests: XCTestCase {
 
