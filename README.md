@@ -84,7 +84,7 @@ let request = APIEndpoint
         limit: 5
     ))
 let apps = try await self.provider.request(request).data
-print("Did fetch \(apps.count) apps")
+print("Did fetch \(apps.count) apps.")
 ```
 
 ### Handling paged responses
