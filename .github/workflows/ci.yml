@@ -36,7 +36,7 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       - name: Test platform ${{ matrix.destination }}
-        run: set -o pipefail && xcodebuild -scheme Template -destination "${{ matrix.destination }}" test | xcbeautify
+        run: set -o pipefail && xcodebuild -scheme AppStoreConnect-Swift-SDK -destination "${{ matrix.destination }}" test | xcbeautify
 
   linux_test:
     name: Test Linux
