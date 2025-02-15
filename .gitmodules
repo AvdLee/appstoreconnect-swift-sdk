@@ -1,4 +1,0 @@
-[submodule "Submodules/WeTransfer-iOS-CI"]
-	path = Submodules/WeTransfer-iOS-CI
-	url = https://github.com/WeTransfer/WeTransfer-iOS-CI.git
-	branch = master
