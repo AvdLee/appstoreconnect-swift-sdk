@@ -3,8 +3,7 @@
 
 import Foundation
 
-@available(*, deprecated, message: "Deprecated")
-public struct PromotedPurchaseImageUpdateRequest: Codable {
+public struct CertificateUpdateRequest: Codable {
 	public var data: Data
 
 	public struct Data: Codable, Identifiable {
@@ -13,28 +12,24 @@ public struct PromotedPurchaseImageUpdateRequest: Codable {
 		public var attributes: Attributes?
 
 		public enum `Type`: String, Codable, CaseIterable {
-			case promotedPurchaseImages
+			case certificates
 		}
 
 		public struct Attributes: Codable {
-			public var sourceFileChecksum: String?
-			public var isUploaded: Bool?
+			public var isActivated: Bool?
 
-			public init(sourceFileChecksum: String? = nil, isUploaded: Bool? = nil) {
-				self.sourceFileChecksum = sourceFileChecksum
-				self.isUploaded = isUploaded
+			public init(isActivated: Bool? = nil) {
+				self.isActivated = isActivated
 			}
 
 			public init(from decoder: Decoder) throws {
 				let values = try decoder.container(keyedBy: StringCodingKey.self)
-				self.sourceFileChecksum = try values.decodeIfPresent(String.self, forKey: "sourceFileChecksum")
-				self.isUploaded = try values.decodeIfPresent(Bool.self, forKey: "uploaded")
+				self.isActivated = try values.decodeIfPresent(Bool.self, forKey: "activated")
 			}
 
 			public func encode(to encoder: Encoder) throws {
 				var values = encoder.container(keyedBy: StringCodingKey.self)
-				try values.encodeIfPresent(sourceFileChecksum, forKey: "sourceFileChecksum")
-				try values.encodeIfPresent(isUploaded, forKey: "uploaded")
+				try values.encodeIfPresent(isActivated, forKey: "activated")
 			}
 		}
 

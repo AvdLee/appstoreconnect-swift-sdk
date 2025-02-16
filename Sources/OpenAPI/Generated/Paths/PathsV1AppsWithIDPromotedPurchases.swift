@@ -21,10 +21,8 @@ extension APIEndpoint.V1.Apps.WithID {
 			public var fieldsPromotedPurchases: [FieldsPromotedPurchases]?
 			public var fieldsInAppPurchases: [FieldsInAppPurchases]?
 			public var fieldsSubscriptions: [FieldsSubscriptions]?
-			public var fieldsPromotedPurchaseImages: [FieldsPromotedPurchaseImages]?
 			public var limit: Int?
 			public var include: [Include]?
-			public var limitPromotionImages: Int?
 
 			public enum FieldsPromotedPurchases: String, Codable, CaseIterable {
 				case visibleForAllUsers
@@ -32,7 +30,6 @@ extension APIEndpoint.V1.Apps.WithID {
 				case state
 				case inAppPurchaseV2
 				case subscription
-				case promotionImages
 			}
 
 			public enum FieldsInAppPurchases: String, Codable, CaseIterable {
@@ -75,32 +72,17 @@ extension APIEndpoint.V1.Apps.WithID {
 				case images
 			}
 
-			public enum FieldsPromotedPurchaseImages: String, Codable, CaseIterable {
-				case fileSize
-				case fileName
-				case sourceFileChecksum
-				case assetToken
-				case imageAsset
-				case assetType
-				case uploadOperations
-				case state
-				case promotedPurchase
-			}
-
 			public enum Include: String, Codable, CaseIterable {
 				case inAppPurchaseV2
 				case subscription
-				case promotionImages
 			}
 
-			public init(fieldsPromotedPurchases: [FieldsPromotedPurchases]? = nil, fieldsInAppPurchases: [FieldsInAppPurchases]? = nil, fieldsSubscriptions: [FieldsSubscriptions]? = nil, fieldsPromotedPurchaseImages: [FieldsPromotedPurchaseImages]? = nil, limit: Int? = nil, include: [Include]? = nil, limitPromotionImages: Int? = nil) {
+			public init(fieldsPromotedPurchases: [FieldsPromotedPurchases]? = nil, fieldsInAppPurchases: [FieldsInAppPurchases]? = nil, fieldsSubscriptions: [FieldsSubscriptions]? = nil, limit: Int? = nil, include: [Include]? = nil) {
 				self.fieldsPromotedPurchases = fieldsPromotedPurchases
 				self.fieldsInAppPurchases = fieldsInAppPurchases
 				self.fieldsSubscriptions = fieldsSubscriptions
-				self.fieldsPromotedPurchaseImages = fieldsPromotedPurchaseImages
 				self.limit = limit
 				self.include = include
-				self.limitPromotionImages = limitPromotionImages
 			}
 
 			public var asQuery: [(String, String?)] {
@@ -108,10 +90,8 @@ extension APIEndpoint.V1.Apps.WithID {
 				encoder.encode(fieldsPromotedPurchases, forKey: "fields[promotedPurchases]")
 				encoder.encode(fieldsInAppPurchases, forKey: "fields[inAppPurchases]")
 				encoder.encode(fieldsSubscriptions, forKey: "fields[subscriptions]")
-				encoder.encode(fieldsPromotedPurchaseImages, forKey: "fields[promotedPurchaseImages]")
 				encoder.encode(limit, forKey: "limit")
 				encoder.encode(include, forKey: "include")
-				encoder.encode(limitPromotionImages, forKey: "limit[promotionImages]")
 				return encoder.items
 			}
 		}

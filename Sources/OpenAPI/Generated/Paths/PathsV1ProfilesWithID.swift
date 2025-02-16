@@ -68,6 +68,7 @@ extension APIEndpoint.V1.Profiles {
 				case platform
 				case expirationDate
 				case certificateContent
+				case activated
 			}
 
 			public enum Include: String, Codable, CaseIterable {

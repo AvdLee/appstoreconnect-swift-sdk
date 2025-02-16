@@ -22,14 +22,16 @@ public struct BetaGroupUpdateRequest: Codable {
 			public var publicLinkLimit: Int?
 			public var isFeedbackEnabled: Bool?
 			public var isIosBuildsAvailableForAppleSiliconMac: Bool?
+			public var isIosBuildsAvailableForAppleVision: Bool?
 
-			public init(name: String? = nil, isPublicLinkEnabled: Bool? = nil, isPublicLinkLimitEnabled: Bool? = nil, publicLinkLimit: Int? = nil, isFeedbackEnabled: Bool? = nil, isIosBuildsAvailableForAppleSiliconMac: Bool? = nil) {
+			public init(name: String? = nil, isPublicLinkEnabled: Bool? = nil, isPublicLinkLimitEnabled: Bool? = nil, publicLinkLimit: Int? = nil, isFeedbackEnabled: Bool? = nil, isIosBuildsAvailableForAppleSiliconMac: Bool? = nil, isIosBuildsAvailableForAppleVision: Bool? = nil) {
 				self.name = name
 				self.isPublicLinkEnabled = isPublicLinkEnabled
 				self.isPublicLinkLimitEnabled = isPublicLinkLimitEnabled
 				self.publicLinkLimit = publicLinkLimit
 				self.isFeedbackEnabled = isFeedbackEnabled
 				self.isIosBuildsAvailableForAppleSiliconMac = isIosBuildsAvailableForAppleSiliconMac
+				self.isIosBuildsAvailableForAppleVision = isIosBuildsAvailableForAppleVision
 			}
 
 			public init(from decoder: Decoder) throws {
@@ -40,6 +42,7 @@ public struct BetaGroupUpdateRequest: Codable {
 				self.publicLinkLimit = try values.decodeIfPresent(Int.self, forKey: "publicLinkLimit")
 				self.isFeedbackEnabled = try values.decodeIfPresent(Bool.self, forKey: "feedbackEnabled")
 				self.isIosBuildsAvailableForAppleSiliconMac = try values.decodeIfPresent(Bool.self, forKey: "iosBuildsAvailableForAppleSiliconMac")
+				self.isIosBuildsAvailableForAppleVision = try values.decodeIfPresent(Bool.self, forKey: "iosBuildsAvailableForAppleVision")
 			}
 
 			public func encode(to encoder: Encoder) throws {
@@ -50,6 +53,7 @@ public struct BetaGroupUpdateRequest: Codable {
 				try values.encodeIfPresent(publicLinkLimit, forKey: "publicLinkLimit")
 				try values.encodeIfPresent(isFeedbackEnabled, forKey: "feedbackEnabled")
 				try values.encodeIfPresent(isIosBuildsAvailableForAppleSiliconMac, forKey: "iosBuildsAvailableForAppleSiliconMac")
+				try values.encodeIfPresent(isIosBuildsAvailableForAppleVision, forKey: "iosBuildsAvailableForAppleVision")
 			}
 		}
 

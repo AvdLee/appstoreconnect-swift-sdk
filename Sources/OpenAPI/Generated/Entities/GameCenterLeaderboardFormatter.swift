@@ -8,7 +8,6 @@ public enum GameCenterLeaderboardFormatter: String, Codable, CaseIterable {
 	case decimalPoint1Place = "DECIMAL_POINT_1_PLACE"
 	case decimalPoint2Place = "DECIMAL_POINT_2_PLACE"
 	case decimalPoint3Place = "DECIMAL_POINT_3_PLACE"
-	case elapsedTimeMillisecond = "ELAPSED_TIME_MILLISECOND"
 	case elapsedTimeCentisecond = "ELAPSED_TIME_CENTISECOND"
 	case elapsedTimeMinute = "ELAPSED_TIME_MINUTE"
 	case elapsedTimeSecond = "ELAPSED_TIME_SECOND"

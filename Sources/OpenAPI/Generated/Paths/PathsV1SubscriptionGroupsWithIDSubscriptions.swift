@@ -159,7 +159,6 @@ extension APIEndpoint.V1.SubscriptionGroups.WithID {
 				case state
 				case inAppPurchaseV2
 				case subscription
-				case promotionImages
 			}
 
 			public enum FieldsSubscriptionAvailabilities: String, Codable, CaseIterable {

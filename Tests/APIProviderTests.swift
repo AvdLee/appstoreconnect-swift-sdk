@@ -7,6 +7,10 @@
 
 import XCTest
 @testable import AppStoreConnect_Swift_SDK
+import Foundation
+#if canImport(FoundationNetworking)
+import FoundationNetworking
+#endif
 
 final class APIProviderTests: XCTestCase {
 

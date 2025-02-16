@@ -22,6 +22,7 @@ extension APIEndpoint.V1.BetaGroups {
 			public var fieldsApps: [FieldsApps]?
 			public var fieldsBuilds: [FieldsBuilds]?
 			public var fieldsBetaTesters: [FieldsBetaTesters]?
+			public var fieldsBetaRecruitmentCriteria: [FieldsBetaRecruitmentCriteria]?
 			public var include: [Include]?
 			public var limitBetaTesters: Int?
 			public var limitBuilds: Int?
@@ -38,9 +39,12 @@ extension APIEndpoint.V1.BetaGroups {
 				case publicLink
 				case feedbackEnabled
 				case iosBuildsAvailableForAppleSiliconMac
+				case iosBuildsAvailableForAppleVision
 				case app
 				case builds
 				case betaTesters
+				case betaRecruitmentCriteria
+				case betaRecruitmentCriterionCompatibleBuildCheck
 			}
 
 			public enum FieldsApps: String, Codable, CaseIterable {
@@ -127,17 +131,24 @@ extension APIEndpoint.V1.BetaGroups {
 				case builds
 			}
 
+			public enum FieldsBetaRecruitmentCriteria: String, Codable, CaseIterable {
+				case lastModifiedDate
+				case deviceFamilyOsVersionFilters
+			}
+
 			public enum Include: String, Codable, CaseIterable {
 				case app
 				case builds
 				case betaTesters
+				case betaRecruitmentCriteria
 			}
 
-			public init(fieldsBetaGroups: [FieldsBetaGroups]? = nil, fieldsApps: [FieldsApps]? = nil, fieldsBuilds: [FieldsBuilds]? = nil, fieldsBetaTesters: [FieldsBetaTesters]? = nil, include: [Include]? = nil, limitBetaTesters: Int? = nil, limitBuilds: Int? = nil) {
+			public init(fieldsBetaGroups: [FieldsBetaGroups]? = nil, fieldsApps: [FieldsApps]? = nil, fieldsBuilds: [FieldsBuilds]? = nil, fieldsBetaTesters: [FieldsBetaTesters]? = nil, fieldsBetaRecruitmentCriteria: [FieldsBetaRecruitmentCriteria]? = nil, include: [Include]? = nil, limitBetaTesters: Int? = nil, limitBuilds: Int? = nil) {
 				self.fieldsBetaGroups = fieldsBetaGroups
 				self.fieldsApps = fieldsApps
 				self.fieldsBuilds = fieldsBuilds
 				self.fieldsBetaTesters = fieldsBetaTesters
+				self.fieldsBetaRecruitmentCriteria = fieldsBetaRecruitmentCriteria
 				self.include = include
 				self.limitBetaTesters = limitBetaTesters
 				self.limitBuilds = limitBuilds
@@ -149,6 +160,7 @@ extension APIEndpoint.V1.BetaGroups {
 				encoder.encode(fieldsApps, forKey: "fields[apps]")
 				encoder.encode(fieldsBuilds, forKey: "fields[builds]")
 				encoder.encode(fieldsBetaTesters, forKey: "fields[betaTesters]")
+				encoder.encode(fieldsBetaRecruitmentCriteria, forKey: "fields[betaRecruitmentCriteria]")
 				encoder.encode(include, forKey: "include")
 				encoder.encode(limitBetaTesters, forKey: "limit[betaTesters]")
 				encoder.encode(limitBuilds, forKey: "limit[builds]")
