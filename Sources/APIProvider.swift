@@ -122,7 +122,7 @@ public struct APIConfiguration {
             self.privateKeyID = individualPrivateKeyID
         } else {
             let filename = privateKeyURL.deletingPathExtension().lastPathComponent
-            self.privateKeyID = String(filename.suffix(10))
+            self.privateKeyID = String(filename.reversed().prefix(while: { $0 != "_" }).reversed())
         }
         do {
             let pemEncodedPrivateKey = try String(contentsOf: privateKeyURL)
