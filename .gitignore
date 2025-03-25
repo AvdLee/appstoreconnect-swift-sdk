@@ -25,6 +25,7 @@ xcuserdata/
 *.moved-aside
 *.xccheckout
 *.xcscmblueprint
+*.orig
 
 ## Obj-C/Swift specific
 *.hmap
