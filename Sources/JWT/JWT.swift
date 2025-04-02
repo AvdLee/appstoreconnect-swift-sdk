@@ -34,6 +34,7 @@ private struct TeamPayload: Codable {
         case issuerIdentifier = "iss"
         case expirationTime = "exp"
         case audience = "aud"
+        case issuedAtTime = "iat"
     }
 
     /// Your issuer identifier from the API Keys page in App Store Connect (Ex: 57246542-96fe-1a63-e053-0824d011072a)
@@ -41,6 +42,9 @@ private struct TeamPayload: Codable {
 
     /// The token's expiration time, in Unix epoch time; tokens that expire more than 20 minutes in the future are not valid (Ex: 1528408800)
     let expirationTime: TimeInterval
+    
+    /// The token’s creation time, in UNIX epoch time (Ex: 1528407600)
+    let issuedAtTime: TimeInterval
 
     /// The required audience which is set to the App Store Connect version.
     let audience: String = "appstoreconnect-v1"
@@ -52,6 +56,7 @@ private struct IndividualPayload: Codable {
         case subject = "sub"
         case expirationTime = "exp"
         case audience = "aud"
+        case issuedAtTime = "iat"
     }
 
     /// The subject to pass to the payload when using individual keys
@@ -59,6 +64,9 @@ private struct IndividualPayload: Codable {
 
     /// The token's expiration time, in Unix epoch time; tokens that expire more than 20 minutes in the future are not valid (Ex: 1528408800)
     let expirationTime: TimeInterval
+    
+    /// The token’s creation time, in UNIX epoch time (Ex: 1528407600)
+    let issuedAtTime: TimeInterval
 
     /// The required audience which is set to the App Store Connect version.
     let audience: String = "appstoreconnect-v1"
@@ -122,12 +130,20 @@ public struct JWT: Codable, JWTCreatable {
 
     /// Combine the header and the payload as a digest for signing.
     private func digest(dateProvider: DateProvider) throws -> String {
-        let expirationTime = dateProvider().addingTimeInterval(expireDuration).timeIntervalSince1970
+        let now = dateProvider()
+        let expirationTime = now.addingTimeInterval(expireDuration).timeIntervalSince1970
         let payload: Codable
         if let issuerIdentifier {
-            payload = TeamPayload(issuerIdentifier: issuerIdentifier, expirationTime: expirationTime)
+            payload = TeamPayload(
+                issuerIdentifier: issuerIdentifier,
+                expirationTime: expirationTime,
+                issuedAtTime: now.timeIntervalSince1970
+            )
         } else {
-            payload = IndividualPayload(expirationTime: expirationTime)
+            payload = IndividualPayload(
+                expirationTime: expirationTime,
+                issuedAtTime: now.timeIntervalSince1970
+            )
         }
         
         let headerString = try JSONEncoder().encode(header.self).base64URLEncoded()
