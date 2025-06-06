@@ -153,7 +153,7 @@ Once you have your Swift package set up, adding the SDK as a dependency is as ea
 
 ```swift
 dependencies: [
-    .package(url: "https://github.com/AvdLee/appstoreconnect-swift-sdk.git", .upToNextMajor(from: "2.0.0"))
+    .package(url: "https://github.com/AvdLee/appstoreconnect-swift-sdk.git", .upToNextMajor(from: "3.0.0"))
 ]
 ```
 
