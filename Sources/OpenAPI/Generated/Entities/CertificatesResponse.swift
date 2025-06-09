@@ -5,11 +5,13 @@ import Foundation
 
 public struct CertificatesResponse: Codable {
 	public var data: [Certificate]
+	public var included: [PassTypeID]?
 	public var links: PagedDocumentLinks
 	public var meta: PagingInformation?
 
-	public init(data: [Certificate], links: PagedDocumentLinks, meta: PagingInformation? = nil) {
+	public init(data: [Certificate], included: [PassTypeID]? = nil, links: PagedDocumentLinks, meta: PagingInformation? = nil) {
 		self.data = data
+		self.included = included
 		self.links = links
 		self.meta = meta
 	}
@@ -17,6 +19,7 @@ public struct CertificatesResponse: Codable {
 	public init(from decoder: Decoder) throws {
 		let values = try decoder.container(keyedBy: StringCodingKey.self)
 		self.data = try values.decode([Certificate].self, forKey: "data")
+		self.included = try values.decodeIfPresent([PassTypeID].self, forKey: "included")
 		self.links = try values.decode(PagedDocumentLinks.self, forKey: "links")
 		self.meta = try values.decodeIfPresent(PagingInformation.self, forKey: "meta")
 	}
@@ -24,6 +27,7 @@ public struct CertificatesResponse: Codable {
 	public func encode(to encoder: Encoder) throws {
 		var values = encoder.container(keyedBy: StringCodingKey.self)
 		try values.encode(data, forKey: "data")
+		try values.encodeIfPresent(included, forKey: "included")
 		try values.encode(links, forKey: "links")
 		try values.encodeIfPresent(meta, forKey: "meta")
 	}

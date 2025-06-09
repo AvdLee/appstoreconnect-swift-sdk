@@ -22,6 +22,8 @@ public struct AppStoreVersionUpdateRequest: Codable {
 			public var reviewType: ReviewType?
 			public var releaseType: ReleaseType?
 			public var earliestReleaseDate: Date?
+			/// - warning: Deprecated.
+			public var usesIdfa: Bool?
 			public var isDownloadable: Bool?
 
 			public enum ReviewType: String, Codable, CaseIterable {
@@ -35,12 +37,13 @@ public struct AppStoreVersionUpdateRequest: Codable {
 				case scheduled = "SCHEDULED"
 			}
 
-			public init(versionString: String? = nil, copyright: String? = nil, reviewType: ReviewType? = nil, releaseType: ReleaseType? = nil, earliestReleaseDate: Date? = nil, isDownloadable: Bool? = nil) {
+			public init(versionString: String? = nil, copyright: String? = nil, reviewType: ReviewType? = nil, releaseType: ReleaseType? = nil, earliestReleaseDate: Date? = nil, usesIdfa: Bool? = nil, isDownloadable: Bool? = nil) {
 				self.versionString = versionString
 				self.copyright = copyright
 				self.reviewType = reviewType
 				self.releaseType = releaseType
 				self.earliestReleaseDate = earliestReleaseDate
+				self.usesIdfa = usesIdfa
 				self.isDownloadable = isDownloadable
 			}
 
@@ -51,6 +54,7 @@ public struct AppStoreVersionUpdateRequest: Codable {
 				self.reviewType = try values.decodeIfPresent(ReviewType.self, forKey: "reviewType")
 				self.releaseType = try values.decodeIfPresent(ReleaseType.self, forKey: "releaseType")
 				self.earliestReleaseDate = try values.decodeIfPresent(Date.self, forKey: "earliestReleaseDate")
+				self.usesIdfa = try values.decodeIfPresent(Bool.self, forKey: "usesIdfa")
 				self.isDownloadable = try values.decodeIfPresent(Bool.self, forKey: "downloadable")
 			}
 
@@ -61,6 +65,7 @@ public struct AppStoreVersionUpdateRequest: Codable {
 				try values.encodeIfPresent(reviewType, forKey: "reviewType")
 				try values.encodeIfPresent(releaseType, forKey: "releaseType")
 				try values.encodeIfPresent(earliestReleaseDate, forKey: "earliestReleaseDate")
+				try values.encodeIfPresent(usesIdfa, forKey: "usesIdfa")
 				try values.encodeIfPresent(isDownloadable, forKey: "downloadable")
 			}
 		}

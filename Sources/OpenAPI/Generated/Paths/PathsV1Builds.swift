@@ -31,6 +31,7 @@ extension APIEndpoint.V1 {
 			public var filterBetaGroups: [String]?
 			public var filterAppStoreVersion: [String]?
 			public var filterID: [String]?
+			public var existsUsesNonExemptEncryption: Bool?
 			public var sort: [Sort]?
 			public var fieldsBuilds: [FieldsBuilds]?
 			public var fieldsPreReleaseVersions: [FieldsPreReleaseVersions]?
@@ -93,6 +94,7 @@ extension APIEndpoint.V1 {
 				case minOsVersion
 				case lsMinimumSystemVersion
 				case computedMinMacOsVersion
+				case computedMinVisionOsVersion
 				case iconAssetToken
 				case processingState
 				case buildAudienceType
@@ -163,6 +165,7 @@ extension APIEndpoint.V1 {
 			}
 
 			public enum FieldsApps: String, Codable, CaseIterable {
+				case accessibilityURL = "accessibilityUrl"
 				case name
 				case bundleID = "bundleId"
 				case sku
@@ -174,6 +177,7 @@ extension APIEndpoint.V1 {
 				case subscriptionStatusURLVersionForSandbox = "subscriptionStatusUrlVersionForSandbox"
 				case contentRightsDeclaration
 				case streamlinedPurchasingEnabled
+				case accessibilityDeclarations
 				case appEncryptionDeclarations
 				case ciProduct
 				case betaTesters
@@ -201,11 +205,16 @@ extension APIEndpoint.V1 {
 				case reviewSubmissions
 				case subscriptionGracePeriod
 				case customerReviews
+				case customerReviewSummarizations
 				case gameCenterDetail
 				case appStoreVersionExperimentsV2
 				case alternativeDistributionKey
 				case analyticsReportRequests
 				case marketplaceSearchDetail
+				case backgroundAssets
+				case betaFeedbackScreenshotSubmissions
+				case betaFeedbackCrashSubmissions
+				case webhooks
 			}
 
 			public enum FieldsBuildBetaDetails: String, Codable, CaseIterable {
@@ -224,6 +233,7 @@ extension APIEndpoint.V1 {
 				case reviewType
 				case releaseType
 				case earliestReleaseDate
+				case usesIdfa
 				case downloadable
 				case createdDate
 				case app
@@ -243,9 +253,9 @@ extension APIEndpoint.V1 {
 			}
 
 			public enum FieldsBuildIcons: String, Codable, CaseIterable {
-				case name
 				case iconAsset
 				case iconType
+				case name
 			}
 
 			public enum Include: String, Codable, CaseIterable {
@@ -262,7 +272,7 @@ extension APIEndpoint.V1 {
 				case buildBundles
 			}
 
-			public init(filterVersion: [String]? = nil, filterExpired: [String]? = nil, filterProcessingState: [FilterProcessingState]? = nil, filterBetaAppReviewSubmissionBetaReviewState: [FilterBetaAppReviewSubmissionBetaReviewState]? = nil, filterUsesNonExemptEncryption: [String]? = nil, filterPreReleaseVersionVersion: [String]? = nil, filterPreReleaseVersionPlatform: [FilterPreReleaseVersionPlatform]? = nil, filterBuildAudienceType: [FilterBuildAudienceType]? = nil, filterPreReleaseVersion: [String]? = nil, filterApp: [String]? = nil, filterBetaGroups: [String]? = nil, filterAppStoreVersion: [String]? = nil, filterID: [String]? = nil, sort: [Sort]? = nil, fieldsBuilds: [FieldsBuilds]? = nil, fieldsPreReleaseVersions: [FieldsPreReleaseVersions]? = nil, fieldsBetaTesters: [FieldsBetaTesters]? = nil, fieldsBetaBuildLocalizations: [FieldsBetaBuildLocalizations]? = nil, fieldsAppEncryptionDeclarations: [FieldsAppEncryptionDeclarations]? = nil, fieldsBetaAppReviewSubmissions: [FieldsBetaAppReviewSubmissions]? = nil, fieldsApps: [FieldsApps]? = nil, fieldsBuildBetaDetails: [FieldsBuildBetaDetails]? = nil, fieldsAppStoreVersions: [FieldsAppStoreVersions]? = nil, fieldsBuildIcons: [FieldsBuildIcons]? = nil, limit: Int? = nil, include: [Include]? = nil, limitBetaBuildLocalizations: Int? = nil, limitBetaGroups: Int? = nil, limitBuildBundles: Int? = nil, limitIcons: Int? = nil, limitIndividualTesters: Int? = nil) {
+			public init(filterVersion: [String]? = nil, filterExpired: [String]? = nil, filterProcessingState: [FilterProcessingState]? = nil, filterBetaAppReviewSubmissionBetaReviewState: [FilterBetaAppReviewSubmissionBetaReviewState]? = nil, filterUsesNonExemptEncryption: [String]? = nil, filterPreReleaseVersionVersion: [String]? = nil, filterPreReleaseVersionPlatform: [FilterPreReleaseVersionPlatform]? = nil, filterBuildAudienceType: [FilterBuildAudienceType]? = nil, filterPreReleaseVersion: [String]? = nil, filterApp: [String]? = nil, filterBetaGroups: [String]? = nil, filterAppStoreVersion: [String]? = nil, filterID: [String]? = nil, existsUsesNonExemptEncryption: Bool? = nil, sort: [Sort]? = nil, fieldsBuilds: [FieldsBuilds]? = nil, fieldsPreReleaseVersions: [FieldsPreReleaseVersions]? = nil, fieldsBetaTesters: [FieldsBetaTesters]? = nil, fieldsBetaBuildLocalizations: [FieldsBetaBuildLocalizations]? = nil, fieldsAppEncryptionDeclarations: [FieldsAppEncryptionDeclarations]? = nil, fieldsBetaAppReviewSubmissions: [FieldsBetaAppReviewSubmissions]? = nil, fieldsApps: [FieldsApps]? = nil, fieldsBuildBetaDetails: [FieldsBuildBetaDetails]? = nil, fieldsAppStoreVersions: [FieldsAppStoreVersions]? = nil, fieldsBuildIcons: [FieldsBuildIcons]? = nil, limit: Int? = nil, include: [Include]? = nil, limitBetaBuildLocalizations: Int? = nil, limitBetaGroups: Int? = nil, limitBuildBundles: Int? = nil, limitIcons: Int? = nil, limitIndividualTesters: Int? = nil) {
 				self.filterVersion = filterVersion
 				self.filterExpired = filterExpired
 				self.filterProcessingState = filterProcessingState
@@ -276,6 +286,7 @@ extension APIEndpoint.V1 {
 				self.filterBetaGroups = filterBetaGroups
 				self.filterAppStoreVersion = filterAppStoreVersion
 				self.filterID = filterID
+				self.existsUsesNonExemptEncryption = existsUsesNonExemptEncryption
 				self.sort = sort
 				self.fieldsBuilds = fieldsBuilds
 				self.fieldsPreReleaseVersions = fieldsPreReleaseVersions
@@ -311,6 +322,7 @@ extension APIEndpoint.V1 {
 				encoder.encode(filterBetaGroups, forKey: "filter[betaGroups]")
 				encoder.encode(filterAppStoreVersion, forKey: "filter[appStoreVersion]")
 				encoder.encode(filterID, forKey: "filter[id]")
+				encoder.encode(existsUsesNonExemptEncryption, forKey: "exists[usesNonExemptEncryption]")
 				encoder.encode(sort, forKey: "sort")
 				encoder.encode(fieldsBuilds, forKey: "fields[builds]")
 				encoder.encode(fieldsPreReleaseVersions, forKey: "fields[preReleaseVersions]")

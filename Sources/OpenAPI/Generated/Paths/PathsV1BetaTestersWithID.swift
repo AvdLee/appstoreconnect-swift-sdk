@@ -39,6 +39,7 @@ extension APIEndpoint.V1.BetaTesters {
 			}
 
 			public enum FieldsApps: String, Codable, CaseIterable {
+				case accessibilityURL = "accessibilityUrl"
 				case name
 				case bundleID = "bundleId"
 				case sku
@@ -50,6 +51,7 @@ extension APIEndpoint.V1.BetaTesters {
 				case subscriptionStatusURLVersionForSandbox = "subscriptionStatusUrlVersionForSandbox"
 				case contentRightsDeclaration
 				case streamlinedPurchasingEnabled
+				case accessibilityDeclarations
 				case appEncryptionDeclarations
 				case ciProduct
 				case betaTesters
@@ -77,11 +79,16 @@ extension APIEndpoint.V1.BetaTesters {
 				case reviewSubmissions
 				case subscriptionGracePeriod
 				case customerReviews
+				case customerReviewSummarizations
 				case gameCenterDetail
 				case appStoreVersionExperimentsV2
 				case alternativeDistributionKey
 				case analyticsReportRequests
 				case marketplaceSearchDetail
+				case backgroundAssets
+				case betaFeedbackScreenshotSubmissions
+				case betaFeedbackCrashSubmissions
+				case webhooks
 			}
 
 			public enum FieldsBetaGroups: String, Codable, CaseIterable {
@@ -112,6 +119,7 @@ extension APIEndpoint.V1.BetaTesters {
 				case minOsVersion
 				case lsMinimumSystemVersion
 				case computedMinMacOsVersion
+				case computedMinVisionOsVersion
 				case iconAssetToken
 				case processingState
 				case buildAudienceType

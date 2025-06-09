@@ -22,6 +22,7 @@ public struct Build: Codable, Identifiable {
 		public var minOsVersion: String?
 		public var lsMinimumSystemVersion: String?
 		public var computedMinMacOsVersion: String?
+		public var computedMinVisionOsVersion: String?
 		public var iconAssetToken: ImageAsset?
 		public var processingState: ProcessingState?
 		public var buildAudienceType: BuildAudienceType?
@@ -34,7 +35,7 @@ public struct Build: Codable, Identifiable {
 			case valid = "VALID"
 		}
 
-		public init(version: String? = nil, uploadedDate: Date? = nil, expirationDate: Date? = nil, isExpired: Bool? = nil, minOsVersion: String? = nil, lsMinimumSystemVersion: String? = nil, computedMinMacOsVersion: String? = nil, iconAssetToken: ImageAsset? = nil, processingState: ProcessingState? = nil, buildAudienceType: BuildAudienceType? = nil, usesNonExemptEncryption: Bool? = nil) {
+		public init(version: String? = nil, uploadedDate: Date? = nil, expirationDate: Date? = nil, isExpired: Bool? = nil, minOsVersion: String? = nil, lsMinimumSystemVersion: String? = nil, computedMinMacOsVersion: String? = nil, computedMinVisionOsVersion: String? = nil, iconAssetToken: ImageAsset? = nil, processingState: ProcessingState? = nil, buildAudienceType: BuildAudienceType? = nil, usesNonExemptEncryption: Bool? = nil) {
 			self.version = version
 			self.uploadedDate = uploadedDate
 			self.expirationDate = expirationDate
@@ -42,6 +43,7 @@ public struct Build: Codable, Identifiable {
 			self.minOsVersion = minOsVersion
 			self.lsMinimumSystemVersion = lsMinimumSystemVersion
 			self.computedMinMacOsVersion = computedMinMacOsVersion
+			self.computedMinVisionOsVersion = computedMinVisionOsVersion
 			self.iconAssetToken = iconAssetToken
 			self.processingState = processingState
 			self.buildAudienceType = buildAudienceType
@@ -57,6 +59,7 @@ public struct Build: Codable, Identifiable {
 			self.minOsVersion = try values.decodeIfPresent(String.self, forKey: "minOsVersion")
 			self.lsMinimumSystemVersion = try values.decodeIfPresent(String.self, forKey: "lsMinimumSystemVersion")
 			self.computedMinMacOsVersion = try values.decodeIfPresent(String.self, forKey: "computedMinMacOsVersion")
+			self.computedMinVisionOsVersion = try values.decodeIfPresent(String.self, forKey: "computedMinVisionOsVersion")
 			self.iconAssetToken = try values.decodeIfPresent(ImageAsset.self, forKey: "iconAssetToken")
 			self.processingState = try values.decodeIfPresent(ProcessingState.self, forKey: "processingState")
 			self.buildAudienceType = try values.decodeIfPresent(BuildAudienceType.self, forKey: "buildAudienceType")
@@ -72,6 +75,7 @@ public struct Build: Codable, Identifiable {
 			try values.encodeIfPresent(minOsVersion, forKey: "minOsVersion")
 			try values.encodeIfPresent(lsMinimumSystemVersion, forKey: "lsMinimumSystemVersion")
 			try values.encodeIfPresent(computedMinMacOsVersion, forKey: "computedMinMacOsVersion")
+			try values.encodeIfPresent(computedMinVisionOsVersion, forKey: "computedMinVisionOsVersion")
 			try values.encodeIfPresent(iconAssetToken, forKey: "iconAssetToken")
 			try values.encodeIfPresent(processingState, forKey: "processingState")
 			try values.encodeIfPresent(buildAudienceType, forKey: "buildAudienceType")

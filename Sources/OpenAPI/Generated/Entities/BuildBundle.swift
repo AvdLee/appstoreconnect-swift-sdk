@@ -16,7 +16,7 @@ public struct BuildBundle: Codable, Identifiable {
 
 	public struct Attributes: Codable {
 		public var bundleID: String?
-		public var bundleType: BundleType?
+		public var bundleType: BuildBundleType?
 		public var sdkBuild: String?
 		public var platformBuild: String?
 		public var fileName: String?
@@ -32,13 +32,10 @@ public struct BuildBundle: Codable, Identifiable {
 		public var deviceProtocols: [String]?
 		public var locales: [String]?
 		public var entitlements: [String: [String: String]]?
+		public var baDownloadAllowance: Int?
+		public var baMaxInstallSize: Int?
 
-		public enum BundleType: String, Codable, CaseIterable {
-			case app = "APP"
-			case appClip = "APP_CLIP"
-		}
-
-		public init(bundleID: String? = nil, bundleType: BundleType? = nil, sdkBuild: String? = nil, platformBuild: String? = nil, fileName: String? = nil, hasSirikit: Bool? = nil, hasOnDemandResources: Bool? = nil, hasPrerenderedIcon: Bool? = nil, usesLocationServices: Bool? = nil, isIosBuildMacAppStoreCompatible: Bool? = nil, isIncludesSymbols: Bool? = nil, dSYMURL: URL? = nil, supportedArchitectures: [String]? = nil, requiredCapabilities: [String]? = nil, deviceProtocols: [String]? = nil, locales: [String]? = nil, entitlements: [String: [String: String]]? = nil) {
+		public init(bundleID: String? = nil, bundleType: BuildBundleType? = nil, sdkBuild: String? = nil, platformBuild: String? = nil, fileName: String? = nil, hasSirikit: Bool? = nil, hasOnDemandResources: Bool? = nil, hasPrerenderedIcon: Bool? = nil, usesLocationServices: Bool? = nil, isIosBuildMacAppStoreCompatible: Bool? = nil, isIncludesSymbols: Bool? = nil, dSYMURL: URL? = nil, supportedArchitectures: [String]? = nil, requiredCapabilities: [String]? = nil, deviceProtocols: [String]? = nil, locales: [String]? = nil, entitlements: [String: [String: String]]? = nil, baDownloadAllowance: Int? = nil, baMaxInstallSize: Int? = nil) {
 			self.bundleID = bundleID
 			self.bundleType = bundleType
 			self.sdkBuild = sdkBuild
@@ -56,12 +53,14 @@ public struct BuildBundle: Codable, Identifiable {
 			self.deviceProtocols = deviceProtocols
 			self.locales = locales
 			self.entitlements = entitlements
+			self.baDownloadAllowance = baDownloadAllowance
+			self.baMaxInstallSize = baMaxInstallSize
 		}
 
 		public init(from decoder: Decoder) throws {
 			let values = try decoder.container(keyedBy: StringCodingKey.self)
 			self.bundleID = try values.decodeIfPresent(String.self, forKey: "bundleId")
-			self.bundleType = try values.decodeIfPresent(BundleType.self, forKey: "bundleType")
+			self.bundleType = try values.decodeIfPresent(BuildBundleType.self, forKey: "bundleType")
 			self.sdkBuild = try values.decodeIfPresent(String.self, forKey: "sdkBuild")
 			self.platformBuild = try values.decodeIfPresent(String.self, forKey: "platformBuild")
 			self.fileName = try values.decodeIfPresent(String.self, forKey: "fileName")
@@ -77,6 +76,8 @@ public struct BuildBundle: Codable, Identifiable {
 			self.deviceProtocols = try values.decodeIfPresent([String].self, forKey: "deviceProtocols")
 			self.locales = try values.decodeIfPresent([String].self, forKey: "locales")
 			self.entitlements = try values.decodeIfPresent([String: [String: String]].self, forKey: "entitlements")
+			self.baDownloadAllowance = try values.decodeIfPresent(Int.self, forKey: "baDownloadAllowance")
+			self.baMaxInstallSize = try values.decodeIfPresent(Int.self, forKey: "baMaxInstallSize")
 		}
 
 		public func encode(to encoder: Encoder) throws {
@@ -98,6 +99,8 @@ public struct BuildBundle: Codable, Identifiable {
 			try values.encodeIfPresent(deviceProtocols, forKey: "deviceProtocols")
 			try values.encodeIfPresent(locales, forKey: "locales")
 			try values.encodeIfPresent(entitlements, forKey: "entitlements")
+			try values.encodeIfPresent(baDownloadAllowance, forKey: "baDownloadAllowance")
+			try values.encodeIfPresent(baMaxInstallSize, forKey: "baMaxInstallSize")
 		}
 	}
 

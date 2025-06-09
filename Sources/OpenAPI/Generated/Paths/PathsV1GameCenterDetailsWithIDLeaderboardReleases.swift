@@ -41,11 +41,16 @@ extension APIEndpoint.V1.GameCenterDetails.WithID {
 				case gameCenterLeaderboards
 				case gameCenterLeaderboardSets
 				case gameCenterAchievements
+				case gameCenterActivities
+				case gameCenterChallenges
 				case defaultLeaderboard
 				case defaultGroupLeaderboard
 				case achievementReleases
+				case activityReleases
+				case challengeReleases
 				case leaderboardReleases
 				case leaderboardSetReleases
+				case challengesMinimumPlatformVersions
 			}
 
 			public enum FieldsGameCenterLeaderboards: String, Codable, CaseIterable {
@@ -60,12 +65,16 @@ extension APIEndpoint.V1.GameCenterDetails.WithID {
 				case recurrenceDuration
 				case recurrenceRule
 				case archived
+				case activityProperties
+				case visibility
 				case gameCenterDetail
 				case gameCenterGroup
 				case groupLeaderboard
 				case gameCenterLeaderboardSets
 				case localizations
 				case releases
+				case activity
+				case challenge
 			}
 
 			public enum Include: String, Codable, CaseIterable {

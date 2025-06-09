@@ -16,9 +16,14 @@ public struct GameCenterDetailResponse: Codable {
 		case gameCenterLeaderboard(GameCenterLeaderboard)
 		case gameCenterLeaderboardSet(GameCenterLeaderboardSet)
 		case gameCenterAchievement(GameCenterAchievement)
+		case gameCenterActivity(GameCenterActivity)
+		case gameCenterChallenge(GameCenterChallenge)
 		case gameCenterAchievementRelease(GameCenterAchievementRelease)
+		case gameCenterActivityVersionRelease(GameCenterActivityVersionRelease)
+		case gameCenterChallengeVersionRelease(GameCenterChallengeVersionRelease)
 		case gameCenterLeaderboardRelease(GameCenterLeaderboardRelease)
 		case gameCenterLeaderboardSetRelease(GameCenterLeaderboardSetRelease)
+		case appStoreVersion(AppStoreVersion)
 
 		public init(from decoder: Decoder) throws {
 			let container = try decoder.singleValueContainer()
@@ -34,16 +39,26 @@ public struct GameCenterDetailResponse: Codable {
 				self = .gameCenterLeaderboardSet(value)
 			} else if let value = try? container.decode(GameCenterAchievement.self) {
 				self = .gameCenterAchievement(value)
+			} else if let value = try? container.decode(GameCenterActivity.self) {
+				self = .gameCenterActivity(value)
+			} else if let value = try? container.decode(GameCenterChallenge.self) {
+				self = .gameCenterChallenge(value)
 			} else if let value = try? container.decode(GameCenterAchievementRelease.self) {
 				self = .gameCenterAchievementRelease(value)
+			} else if let value = try? container.decode(GameCenterActivityVersionRelease.self) {
+				self = .gameCenterActivityVersionRelease(value)
+			} else if let value = try? container.decode(GameCenterChallengeVersionRelease.self) {
+				self = .gameCenterChallengeVersionRelease(value)
 			} else if let value = try? container.decode(GameCenterLeaderboardRelease.self) {
 				self = .gameCenterLeaderboardRelease(value)
 			} else if let value = try? container.decode(GameCenterLeaderboardSetRelease.self) {
 				self = .gameCenterLeaderboardSetRelease(value)
+			} else if let value = try? container.decode(AppStoreVersion.self) {
+				self = .appStoreVersion(value)
 			} else {
 				throw DecodingError.dataCorruptedError(
 					in: container,
-					debugDescription: "Data could not be decoded as any of the expected types (App, GameCenterAppVersion, GameCenterGroup, GameCenterLeaderboard, GameCenterLeaderboardSet, GameCenterAchievement, GameCenterAchievementRelease, GameCenterLeaderboardRelease, GameCenterLeaderboardSetRelease)."
+					debugDescription: "Data could not be decoded as any of the expected types (App, GameCenterAppVersion, GameCenterGroup, GameCenterLeaderboard, GameCenterLeaderboardSet, GameCenterAchievement, GameCenterActivity, GameCenterChallenge, GameCenterAchievementRelease, GameCenterActivityVersionRelease, GameCenterChallengeVersionRelease, GameCenterLeaderboardRelease, GameCenterLeaderboardSetRelease, AppStoreVersion)."
 				)
 			}
 		}
@@ -57,9 +72,14 @@ public struct GameCenterDetailResponse: Codable {
 			case .gameCenterLeaderboard(let value): try container.encode(value)
 			case .gameCenterLeaderboardSet(let value): try container.encode(value)
 			case .gameCenterAchievement(let value): try container.encode(value)
+			case .gameCenterActivity(let value): try container.encode(value)
+			case .gameCenterChallenge(let value): try container.encode(value)
 			case .gameCenterAchievementRelease(let value): try container.encode(value)
+			case .gameCenterActivityVersionRelease(let value): try container.encode(value)
+			case .gameCenterChallengeVersionRelease(let value): try container.encode(value)
 			case .gameCenterLeaderboardRelease(let value): try container.encode(value)
 			case .gameCenterLeaderboardSetRelease(let value): try container.encode(value)
+			case .appStoreVersion(let value): try container.encode(value)
 			}
 		}
 	}

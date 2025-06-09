@@ -22,6 +22,8 @@ public struct AppStoreVersionCreateRequest: Codable {
 			public var reviewType: ReviewType?
 			public var releaseType: ReleaseType?
 			public var earliestReleaseDate: Date?
+			/// - warning: Deprecated.
+			public var usesIdfa: Bool?
 
 			public enum ReviewType: String, Codable, CaseIterable {
 				case appStore = "APP_STORE"
@@ -34,13 +36,14 @@ public struct AppStoreVersionCreateRequest: Codable {
 				case scheduled = "SCHEDULED"
 			}
 
-			public init(platform: Platform, versionString: String, copyright: String? = nil, reviewType: ReviewType? = nil, releaseType: ReleaseType? = nil, earliestReleaseDate: Date? = nil) {
+			public init(platform: Platform, versionString: String, copyright: String? = nil, reviewType: ReviewType? = nil, releaseType: ReleaseType? = nil, earliestReleaseDate: Date? = nil, usesIdfa: Bool? = nil) {
 				self.platform = platform
 				self.versionString = versionString
 				self.copyright = copyright
 				self.reviewType = reviewType
 				self.releaseType = releaseType
 				self.earliestReleaseDate = earliestReleaseDate
+				self.usesIdfa = usesIdfa
 			}
 
 			public init(from decoder: Decoder) throws {
@@ -51,6 +54,7 @@ public struct AppStoreVersionCreateRequest: Codable {
 				self.reviewType = try values.decodeIfPresent(ReviewType.self, forKey: "reviewType")
 				self.releaseType = try values.decodeIfPresent(ReleaseType.self, forKey: "releaseType")
 				self.earliestReleaseDate = try values.decodeIfPresent(Date.self, forKey: "earliestReleaseDate")
+				self.usesIdfa = try values.decodeIfPresent(Bool.self, forKey: "usesIdfa")
 			}
 
 			public func encode(to encoder: Encoder) throws {
@@ -61,6 +65,7 @@ public struct AppStoreVersionCreateRequest: Codable {
 				try values.encodeIfPresent(reviewType, forKey: "reviewType")
 				try values.encodeIfPresent(releaseType, forKey: "releaseType")
 				try values.encodeIfPresent(earliestReleaseDate, forKey: "earliestReleaseDate")
+				try values.encodeIfPresent(usesIdfa, forKey: "usesIdfa")
 			}
 		}
 

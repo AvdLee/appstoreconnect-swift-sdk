@@ -16,6 +16,7 @@ public struct AppUpdateRequest: Codable {
 		}
 
 		public struct Attributes: Codable {
+			public var accessibilityURL: URL?
 			public var bundleID: String?
 			public var primaryLocale: String?
 			public var subscriptionStatusURL: URL?
@@ -30,7 +31,8 @@ public struct AppUpdateRequest: Codable {
 				case usesThirdPartyContent = "USES_THIRD_PARTY_CONTENT"
 			}
 
-			public init(bundleID: String? = nil, primaryLocale: String? = nil, subscriptionStatusURL: URL? = nil, subscriptionStatusURLVersion: SubscriptionStatusURLVersion? = nil, subscriptionStatusURLForSandbox: URL? = nil, subscriptionStatusURLVersionForSandbox: SubscriptionStatusURLVersion? = nil, contentRightsDeclaration: ContentRightsDeclaration? = nil, isStreamlinedPurchasingEnabled: Bool? = nil) {
+			public init(accessibilityURL: URL? = nil, bundleID: String? = nil, primaryLocale: String? = nil, subscriptionStatusURL: URL? = nil, subscriptionStatusURLVersion: SubscriptionStatusURLVersion? = nil, subscriptionStatusURLForSandbox: URL? = nil, subscriptionStatusURLVersionForSandbox: SubscriptionStatusURLVersion? = nil, contentRightsDeclaration: ContentRightsDeclaration? = nil, isStreamlinedPurchasingEnabled: Bool? = nil) {
+				self.accessibilityURL = accessibilityURL
 				self.bundleID = bundleID
 				self.primaryLocale = primaryLocale
 				self.subscriptionStatusURL = subscriptionStatusURL
@@ -43,6 +45,7 @@ public struct AppUpdateRequest: Codable {
 
 			public init(from decoder: Decoder) throws {
 				let values = try decoder.container(keyedBy: StringCodingKey.self)
+				self.accessibilityURL = try values.decodeIfPresent(URL.self, forKey: "accessibilityUrl")
 				self.bundleID = try values.decodeIfPresent(String.self, forKey: "bundleId")
 				self.primaryLocale = try values.decodeIfPresent(String.self, forKey: "primaryLocale")
 				self.subscriptionStatusURL = try values.decodeIfPresent(URL.self, forKey: "subscriptionStatusUrl")
@@ -55,6 +58,7 @@ public struct AppUpdateRequest: Codable {
 
 			public func encode(to encoder: Encoder) throws {
 				var values = encoder.container(keyedBy: StringCodingKey.self)
+				try values.encodeIfPresent(accessibilityURL, forKey: "accessibilityUrl")
 				try values.encodeIfPresent(bundleID, forKey: "bundleId")
 				try values.encodeIfPresent(primaryLocale, forKey: "primaryLocale")
 				try values.encodeIfPresent(subscriptionStatusURL, forKey: "subscriptionStatusUrl")

@@ -39,6 +39,7 @@ public struct CertificateCreateRequest: Codable {
 
 		public struct Relationships: Codable {
 			public var merchantID: MerchantID?
+			public var passTypeID: PassTypeID?
 
 			public struct MerchantID: Codable {
 				public var data: Data?
@@ -84,18 +85,65 @@ public struct CertificateCreateRequest: Codable {
 				}
 			}
 
-			public init(merchantID: MerchantID? = nil) {
+			public struct PassTypeID: Codable {
+				public var data: Data?
+
+				public struct Data: Codable, Identifiable {
+					public var type: `Type`
+					public var id: String
+
+					public enum `Type`: String, Codable, CaseIterable {
+						case passTypeIDs = "passTypeIds"
+					}
+
+					public init(type: `Type`, id: String) {
+						self.type = type
+						self.id = id
+					}
+
+					public init(from decoder: Decoder) throws {
+						let values = try decoder.container(keyedBy: StringCodingKey.self)
+						self.type = try values.decode(`Type`.self, forKey: "type")
+						self.id = try values.decode(String.self, forKey: "id")
+					}
+
+					public func encode(to encoder: Encoder) throws {
+						var values = encoder.container(keyedBy: StringCodingKey.self)
+						try values.encode(type, forKey: "type")
+						try values.encode(id, forKey: "id")
+					}
+				}
+
+				public init(data: Data? = nil) {
+					self.data = data
+				}
+
+				public init(from decoder: Decoder) throws {
+					let values = try decoder.container(keyedBy: StringCodingKey.self)
+					self.data = try values.decodeIfPresent(Data.self, forKey: "data")
+				}
+
+				public func encode(to encoder: Encoder) throws {
+					var values = encoder.container(keyedBy: StringCodingKey.self)
+					try values.encodeIfPresent(data, forKey: "data")
+				}
+			}
+
+			public init(merchantID: MerchantID? = nil, passTypeID: PassTypeID? = nil) {
 				self.merchantID = merchantID
+				self.passTypeID = passTypeID
 			}
 
 			public init(from decoder: Decoder) throws {
 				let values = try decoder.container(keyedBy: StringCodingKey.self)
 				self.merchantID = try values.decodeIfPresent(MerchantID.self, forKey: "merchantId")
+				self.passTypeID = try values.decodeIfPresent(PassTypeID.self, forKey: "passTypeId")
 			}
 
 			public func encode(to encoder: Encoder) throws {
 				var values = encoder.container(keyedBy: StringCodingKey.self)
 				try values.encodeIfPresent(merchantID, forKey: "merchantId")
+				try values.encodeIfPresent(passTypeID, forKey: "passTypeId")
 			}
 		}
 

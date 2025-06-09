@@ -14,36 +14,36 @@ public struct SubscriptionPromotionalOfferInlineCreate: Codable, Identifiable {
 	}
 
 	public struct Attributes: Codable {
-		public var name: String
-		public var offerCode: String
 		public var duration: SubscriptionOfferDuration
-		public var offerMode: SubscriptionOfferMode
+		public var name: String
 		public var numberOfPeriods: Int
+		public var offerCode: String
+		public var offerMode: SubscriptionOfferMode
 
-		public init(name: String, offerCode: String, duration: SubscriptionOfferDuration, offerMode: SubscriptionOfferMode, numberOfPeriods: Int) {
-			self.name = name
-			self.offerCode = offerCode
+		public init(duration: SubscriptionOfferDuration, name: String, numberOfPeriods: Int, offerCode: String, offerMode: SubscriptionOfferMode) {
 			self.duration = duration
-			self.offerMode = offerMode
+			self.name = name
 			self.numberOfPeriods = numberOfPeriods
+			self.offerCode = offerCode
+			self.offerMode = offerMode
 		}
 
 		public init(from decoder: Decoder) throws {
 			let values = try decoder.container(keyedBy: StringCodingKey.self)
-			self.name = try values.decode(String.self, forKey: "name")
-			self.offerCode = try values.decode(String.self, forKey: "offerCode")
 			self.duration = try values.decode(SubscriptionOfferDuration.self, forKey: "duration")
-			self.offerMode = try values.decode(SubscriptionOfferMode.self, forKey: "offerMode")
+			self.name = try values.decode(String.self, forKey: "name")
 			self.numberOfPeriods = try values.decode(Int.self, forKey: "numberOfPeriods")
+			self.offerCode = try values.decode(String.self, forKey: "offerCode")
+			self.offerMode = try values.decode(SubscriptionOfferMode.self, forKey: "offerMode")
 		}
 
 		public func encode(to encoder: Encoder) throws {
 			var values = encoder.container(keyedBy: StringCodingKey.self)
-			try values.encode(name, forKey: "name")
-			try values.encode(offerCode, forKey: "offerCode")
 			try values.encode(duration, forKey: "duration")
-			try values.encode(offerMode, forKey: "offerMode")
+			try values.encode(name, forKey: "name")
 			try values.encode(numberOfPeriods, forKey: "numberOfPeriods")
+			try values.encode(offerCode, forKey: "offerCode")
+			try values.encode(offerMode, forKey: "offerMode")
 		}
 	}
 

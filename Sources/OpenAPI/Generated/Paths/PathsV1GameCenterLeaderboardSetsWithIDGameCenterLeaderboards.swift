@@ -27,6 +27,8 @@ extension APIEndpoint.V1.GameCenterLeaderboardSets.WithID {
 			public var fieldsGameCenterLeaderboardSets: [FieldsGameCenterLeaderboardSets]?
 			public var fieldsGameCenterLeaderboardLocalizations: [FieldsGameCenterLeaderboardLocalizations]?
 			public var fieldsGameCenterLeaderboardReleases: [FieldsGameCenterLeaderboardReleases]?
+			public var fieldsGameCenterActivities: [FieldsGameCenterActivities]?
+			public var fieldsGameCenterChallenges: [FieldsGameCenterChallenges]?
 			public var limit: Int?
 			public var include: [Include]?
 			public var limitGameCenterLeaderboardSets: Int?
@@ -45,12 +47,16 @@ extension APIEndpoint.V1.GameCenterLeaderboardSets.WithID {
 				case recurrenceDuration
 				case recurrenceRule
 				case archived
+				case activityProperties
+				case visibility
 				case gameCenterDetail
 				case gameCenterGroup
 				case groupLeaderboard
 				case gameCenterLeaderboardSets
 				case localizations
 				case releases
+				case activity
+				case challenge
 			}
 
 			public enum FieldsGameCenterDetails: String, Codable, CaseIterable {
@@ -62,11 +68,16 @@ extension APIEndpoint.V1.GameCenterLeaderboardSets.WithID {
 				case gameCenterLeaderboards
 				case gameCenterLeaderboardSets
 				case gameCenterAchievements
+				case gameCenterActivities
+				case gameCenterChallenges
 				case defaultLeaderboard
 				case defaultGroupLeaderboard
 				case achievementReleases
+				case activityReleases
+				case challengeReleases
 				case leaderboardReleases
 				case leaderboardSetReleases
+				case challengesMinimumPlatformVersions
 			}
 
 			public enum FieldsGameCenterGroups: String, Codable, CaseIterable {
@@ -75,6 +86,8 @@ extension APIEndpoint.V1.GameCenterLeaderboardSets.WithID {
 				case gameCenterLeaderboards
 				case gameCenterLeaderboardSets
 				case gameCenterAchievements
+				case gameCenterActivities
+				case gameCenterChallenges
 			}
 
 			public enum FieldsGameCenterLeaderboardSets: String, Codable, CaseIterable {
@@ -104,6 +117,35 @@ extension APIEndpoint.V1.GameCenterLeaderboardSets.WithID {
 				case gameCenterLeaderboard
 			}
 
+			public enum FieldsGameCenterActivities: String, Codable, CaseIterable {
+				case referenceName
+				case vendorIdentifier
+				case playStyle
+				case minimumPlayersCount
+				case maximumPlayersCount
+				case supportsPartyCode
+				case archived
+				case properties
+				case gameCenterDetail
+				case gameCenterGroup
+				case achievements
+				case leaderboards
+				case versions
+			}
+
+			public enum FieldsGameCenterChallenges: String, Codable, CaseIterable {
+				case referenceName
+				case vendorIdentifier
+				case allowedDurations
+				case archived
+				case challengeType
+				case repeatable
+				case gameCenterDetail
+				case gameCenterGroup
+				case versions
+				case leaderboard
+			}
+
 			public enum Include: String, Codable, CaseIterable {
 				case gameCenterDetail
 				case gameCenterGroup
@@ -111,9 +153,11 @@ extension APIEndpoint.V1.GameCenterLeaderboardSets.WithID {
 				case gameCenterLeaderboardSets
 				case localizations
 				case releases
+				case activity
+				case challenge
 			}
 
-			public init(filterReferenceName: [String]? = nil, filterArchived: [String]? = nil, filterID: [String]? = nil, fieldsGameCenterLeaderboards: [FieldsGameCenterLeaderboards]? = nil, fieldsGameCenterDetails: [FieldsGameCenterDetails]? = nil, fieldsGameCenterGroups: [FieldsGameCenterGroups]? = nil, fieldsGameCenterLeaderboardSets: [FieldsGameCenterLeaderboardSets]? = nil, fieldsGameCenterLeaderboardLocalizations: [FieldsGameCenterLeaderboardLocalizations]? = nil, fieldsGameCenterLeaderboardReleases: [FieldsGameCenterLeaderboardReleases]? = nil, limit: Int? = nil, include: [Include]? = nil, limitGameCenterLeaderboardSets: Int? = nil, limitLocalizations: Int? = nil, limitReleases: Int? = nil) {
+			public init(filterReferenceName: [String]? = nil, filterArchived: [String]? = nil, filterID: [String]? = nil, fieldsGameCenterLeaderboards: [FieldsGameCenterLeaderboards]? = nil, fieldsGameCenterDetails: [FieldsGameCenterDetails]? = nil, fieldsGameCenterGroups: [FieldsGameCenterGroups]? = nil, fieldsGameCenterLeaderboardSets: [FieldsGameCenterLeaderboardSets]? = nil, fieldsGameCenterLeaderboardLocalizations: [FieldsGameCenterLeaderboardLocalizations]? = nil, fieldsGameCenterLeaderboardReleases: [FieldsGameCenterLeaderboardReleases]? = nil, fieldsGameCenterActivities: [FieldsGameCenterActivities]? = nil, fieldsGameCenterChallenges: [FieldsGameCenterChallenges]? = nil, limit: Int? = nil, include: [Include]? = nil, limitGameCenterLeaderboardSets: Int? = nil, limitLocalizations: Int? = nil, limitReleases: Int? = nil) {
 				self.filterReferenceName = filterReferenceName
 				self.filterArchived = filterArchived
 				self.filterID = filterID
@@ -123,6 +167,8 @@ extension APIEndpoint.V1.GameCenterLeaderboardSets.WithID {
 				self.fieldsGameCenterLeaderboardSets = fieldsGameCenterLeaderboardSets
 				self.fieldsGameCenterLeaderboardLocalizations = fieldsGameCenterLeaderboardLocalizations
 				self.fieldsGameCenterLeaderboardReleases = fieldsGameCenterLeaderboardReleases
+				self.fieldsGameCenterActivities = fieldsGameCenterActivities
+				self.fieldsGameCenterChallenges = fieldsGameCenterChallenges
 				self.limit = limit
 				self.include = include
 				self.limitGameCenterLeaderboardSets = limitGameCenterLeaderboardSets
@@ -141,6 +187,8 @@ extension APIEndpoint.V1.GameCenterLeaderboardSets.WithID {
 				encoder.encode(fieldsGameCenterLeaderboardSets, forKey: "fields[gameCenterLeaderboardSets]")
 				encoder.encode(fieldsGameCenterLeaderboardLocalizations, forKey: "fields[gameCenterLeaderboardLocalizations]")
 				encoder.encode(fieldsGameCenterLeaderboardReleases, forKey: "fields[gameCenterLeaderboardReleases]")
+				encoder.encode(fieldsGameCenterActivities, forKey: "fields[gameCenterActivities]")
+				encoder.encode(fieldsGameCenterChallenges, forKey: "fields[gameCenterChallenges]")
 				encoder.encode(limit, forKey: "limit")
 				encoder.encode(include, forKey: "include")
 				encoder.encode(limitGameCenterLeaderboardSets, forKey: "limit[gameCenterLeaderboardSets]")

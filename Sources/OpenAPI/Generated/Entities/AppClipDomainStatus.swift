@@ -28,6 +28,7 @@ public struct AppClipDomainStatus: Codable, Identifiable {
 				case badJSONContent = "BAD_JSON_CONTENT"
 				case badPkcs7Signature = "BAD_PKCS7_SIGNATURE"
 				case cannotReachAasaFile = "CANNOT_REACH_AASA_FILE"
+				case crossSiteRedirectsForbidden = "CROSS_SITE_REDIRECTS_FORBIDDEN"
 				case dnsError = "DNS_ERROR"
 				case insecureRedirectsForbidden = "INSECURE_REDIRECTS_FORBIDDEN"
 				case invalidEntitlementMissingSection = "INVALID_ENTITLEMENT_MISSING_SECTION"
@@ -39,6 +40,7 @@ public struct AppClipDomainStatus: Codable, Identifiable {
 				case otherError = "OTHER_ERROR"
 				case timeout = "TIMEOUT"
 				case tlsError = "TLS_ERROR"
+				case tooManyRedirects = "TOO_MANY_REDIRECTS"
 				case unexpectedError = "UNEXPECTED_ERROR"
 			}
 

@@ -45,6 +45,7 @@ extension APIEndpoint.V1.AppEncryptionDeclarations {
 			}
 
 			public enum FieldsApps: String, Codable, CaseIterable {
+				case accessibilityURL = "accessibilityUrl"
 				case name
 				case bundleID = "bundleId"
 				case sku
@@ -56,6 +57,7 @@ extension APIEndpoint.V1.AppEncryptionDeclarations {
 				case subscriptionStatusURLVersionForSandbox = "subscriptionStatusUrlVersionForSandbox"
 				case contentRightsDeclaration
 				case streamlinedPurchasingEnabled
+				case accessibilityDeclarations
 				case appEncryptionDeclarations
 				case ciProduct
 				case betaTesters
@@ -83,11 +85,16 @@ extension APIEndpoint.V1.AppEncryptionDeclarations {
 				case reviewSubmissions
 				case subscriptionGracePeriod
 				case customerReviews
+				case customerReviewSummarizations
 				case gameCenterDetail
 				case appStoreVersionExperimentsV2
 				case alternativeDistributionKey
 				case analyticsReportRequests
 				case marketplaceSearchDetail
+				case backgroundAssets
+				case betaFeedbackScreenshotSubmissions
+				case betaFeedbackCrashSubmissions
+				case webhooks
 			}
 
 			public enum FieldsAppEncryptionDeclarationDocuments: String, Codable, CaseIterable {

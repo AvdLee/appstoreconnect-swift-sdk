@@ -26,6 +26,8 @@ public struct GameCenterLeaderboardCreateRequest: Codable {
 			public var recurrenceStartDate: Date?
 			public var recurrenceDuration: String?
 			public var recurrenceRule: String?
+			public var activityProperties: [String: String]?
+			public var visibility: Visibility?
 
 			public enum SubmissionType: String, Codable, CaseIterable {
 				case bestScore = "BEST_SCORE"
@@ -37,7 +39,12 @@ public struct GameCenterLeaderboardCreateRequest: Codable {
 				case desc = "DESC"
 			}
 
-			public init(defaultFormatter: GameCenterLeaderboardFormatter, referenceName: String, vendorIdentifier: String, submissionType: SubmissionType, scoreSortType: ScoreSortType, scoreRangeStart: String? = nil, scoreRangeEnd: String? = nil, recurrenceStartDate: Date? = nil, recurrenceDuration: String? = nil, recurrenceRule: String? = nil) {
+			public enum Visibility: String, Codable, CaseIterable {
+				case showForAll = "SHOW_FOR_ALL"
+				case hideForAll = "HIDE_FOR_ALL"
+			}
+
+			public init(defaultFormatter: GameCenterLeaderboardFormatter, referenceName: String, vendorIdentifier: String, submissionType: SubmissionType, scoreSortType: ScoreSortType, scoreRangeStart: String? = nil, scoreRangeEnd: String? = nil, recurrenceStartDate: Date? = nil, recurrenceDuration: String? = nil, recurrenceRule: String? = nil, activityProperties: [String: String]? = nil, visibility: Visibility? = nil) {
 				self.defaultFormatter = defaultFormatter
 				self.referenceName = referenceName
 				self.vendorIdentifier = vendorIdentifier
@@ -48,6 +55,8 @@ public struct GameCenterLeaderboardCreateRequest: Codable {
 				self.recurrenceStartDate = recurrenceStartDate
 				self.recurrenceDuration = recurrenceDuration
 				self.recurrenceRule = recurrenceRule
+				self.activityProperties = activityProperties
+				self.visibility = visibility
 			}
 
 			public init(from decoder: Decoder) throws {
@@ -62,6 +71,8 @@ public struct GameCenterLeaderboardCreateRequest: Codable {
 				self.recurrenceStartDate = try values.decodeIfPresent(Date.self, forKey: "recurrenceStartDate")
 				self.recurrenceDuration = try values.decodeIfPresent(String.self, forKey: "recurrenceDuration")
 				self.recurrenceRule = try values.decodeIfPresent(String.self, forKey: "recurrenceRule")
+				self.activityProperties = try values.decodeIfPresent([String: String].self, forKey: "activityProperties")
+				self.visibility = try values.decodeIfPresent(Visibility.self, forKey: "visibility")
 			}
 
 			public func encode(to encoder: Encoder) throws {
@@ -76,6 +87,8 @@ public struct GameCenterLeaderboardCreateRequest: Codable {
 				try values.encodeIfPresent(recurrenceStartDate, forKey: "recurrenceStartDate")
 				try values.encodeIfPresent(recurrenceDuration, forKey: "recurrenceDuration")
 				try values.encodeIfPresent(recurrenceRule, forKey: "recurrenceRule")
+				try values.encodeIfPresent(activityProperties, forKey: "activityProperties")
+				try values.encodeIfPresent(visibility, forKey: "visibility")
 			}
 		}
 

@@ -18,6 +18,7 @@ extension APIEndpoint.V1 {
 		}
 
 		public struct GetParameters {
+			public var filterBuildsBuildAudienceType: [FilterBuildsBuildAudienceType]?
 			public var filterBuildsExpired: [String]?
 			public var filterBuildsProcessingState: [FilterBuildsProcessingState]?
 			public var filterBuildsVersion: [String]?
@@ -32,6 +33,11 @@ extension APIEndpoint.V1 {
 			public var limit: Int?
 			public var include: [Include]?
 			public var limitBuilds: Int?
+
+			public enum FilterBuildsBuildAudienceType: String, Codable, CaseIterable {
+				case internalOnly = "INTERNAL_ONLY"
+				case appStoreEligible = "APP_STORE_ELIGIBLE"
+			}
 
 			public enum FilterBuildsProcessingState: String, Codable, CaseIterable {
 				case processing = "PROCESSING"
@@ -67,6 +73,7 @@ extension APIEndpoint.V1 {
 				case minOsVersion
 				case lsMinimumSystemVersion
 				case computedMinMacOsVersion
+				case computedMinVisionOsVersion
 				case iconAssetToken
 				case processingState
 				case buildAudienceType
@@ -87,6 +94,7 @@ extension APIEndpoint.V1 {
 			}
 
 			public enum FieldsApps: String, Codable, CaseIterable {
+				case accessibilityURL = "accessibilityUrl"
 				case name
 				case bundleID = "bundleId"
 				case sku
@@ -98,6 +106,7 @@ extension APIEndpoint.V1 {
 				case subscriptionStatusURLVersionForSandbox = "subscriptionStatusUrlVersionForSandbox"
 				case contentRightsDeclaration
 				case streamlinedPurchasingEnabled
+				case accessibilityDeclarations
 				case appEncryptionDeclarations
 				case ciProduct
 				case betaTesters
@@ -125,11 +134,16 @@ extension APIEndpoint.V1 {
 				case reviewSubmissions
 				case subscriptionGracePeriod
 				case customerReviews
+				case customerReviewSummarizations
 				case gameCenterDetail
 				case appStoreVersionExperimentsV2
 				case alternativeDistributionKey
 				case analyticsReportRequests
 				case marketplaceSearchDetail
+				case backgroundAssets
+				case betaFeedbackScreenshotSubmissions
+				case betaFeedbackCrashSubmissions
+				case webhooks
 			}
 
 			public enum Include: String, Codable, CaseIterable {
@@ -137,7 +151,8 @@ extension APIEndpoint.V1 {
 				case app
 			}
 
-			public init(filterBuildsExpired: [String]? = nil, filterBuildsProcessingState: [FilterBuildsProcessingState]? = nil, filterBuildsVersion: [String]? = nil, filterPlatform: [FilterPlatform]? = nil, filterVersion: [String]? = nil, filterApp: [String]? = nil, filterBuilds: [String]? = nil, sort: [Sort]? = nil, fieldsPreReleaseVersions: [FieldsPreReleaseVersions]? = nil, fieldsBuilds: [FieldsBuilds]? = nil, fieldsApps: [FieldsApps]? = nil, limit: Int? = nil, include: [Include]? = nil, limitBuilds: Int? = nil) {
+			public init(filterBuildsBuildAudienceType: [FilterBuildsBuildAudienceType]? = nil, filterBuildsExpired: [String]? = nil, filterBuildsProcessingState: [FilterBuildsProcessingState]? = nil, filterBuildsVersion: [String]? = nil, filterPlatform: [FilterPlatform]? = nil, filterVersion: [String]? = nil, filterApp: [String]? = nil, filterBuilds: [String]? = nil, sort: [Sort]? = nil, fieldsPreReleaseVersions: [FieldsPreReleaseVersions]? = nil, fieldsBuilds: [FieldsBuilds]? = nil, fieldsApps: [FieldsApps]? = nil, limit: Int? = nil, include: [Include]? = nil, limitBuilds: Int? = nil) {
+				self.filterBuildsBuildAudienceType = filterBuildsBuildAudienceType
 				self.filterBuildsExpired = filterBuildsExpired
 				self.filterBuildsProcessingState = filterBuildsProcessingState
 				self.filterBuildsVersion = filterBuildsVersion
@@ -156,6 +171,7 @@ extension APIEndpoint.V1 {
 
 			public var asQuery: [(String, String?)] {
 				let encoder = URLQueryEncoder(explode: false)
+				encoder.encode(filterBuildsBuildAudienceType, forKey: "filter[builds.buildAudienceType]")
 				encoder.encode(filterBuildsExpired, forKey: "filter[builds.expired]")
 				encoder.encode(filterBuildsProcessingState, forKey: "filter[builds.processingState]")
 				encoder.encode(filterBuildsVersion, forKey: "filter[builds.version]")
