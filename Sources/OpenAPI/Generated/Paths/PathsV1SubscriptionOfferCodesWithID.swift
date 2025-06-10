@@ -34,6 +34,7 @@ extension APIEndpoint.V1.SubscriptionOfferCodes {
 				case duration
 				case offerMode
 				case numberOfPeriods
+				case totalNumberOfCodes
 				case active
 				case subscription
 				case oneTimeUseCodes
