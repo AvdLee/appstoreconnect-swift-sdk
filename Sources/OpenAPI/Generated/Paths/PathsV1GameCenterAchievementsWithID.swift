@@ -32,11 +32,13 @@ extension APIEndpoint.V1.GameCenterAchievements {
 				case showBeforeEarned
 				case repeatable
 				case archived
+				case activityProperties
 				case gameCenterDetail
 				case gameCenterGroup
 				case groupAchievement
 				case localizations
 				case releases
+				case activity
 			}
 
 			public enum FieldsGameCenterAchievementLocalizations: String, Codable, CaseIterable {
@@ -60,6 +62,7 @@ extension APIEndpoint.V1.GameCenterAchievements {
 				case groupAchievement
 				case localizations
 				case releases
+				case activity
 			}
 
 			public init(fieldsGameCenterAchievements: [FieldsGameCenterAchievements]? = nil, fieldsGameCenterAchievementLocalizations: [FieldsGameCenterAchievementLocalizations]? = nil, fieldsGameCenterAchievementReleases: [FieldsGameCenterAchievementReleases]? = nil, include: [Include]? = nil, limitLocalizations: Int? = nil, limitReleases: Int? = nil) {

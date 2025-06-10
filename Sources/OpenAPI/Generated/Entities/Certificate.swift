@@ -7,6 +7,7 @@ public struct Certificate: Codable, Identifiable {
 	public var type: `Type`
 	public var id: String
 	public var attributes: Attributes?
+	public var relationships: Relationships?
 	public var links: ResourceLinks?
 
 	public enum `Type`: String, Codable, CaseIterable {
@@ -59,10 +60,77 @@ public struct Certificate: Codable, Identifiable {
 		}
 	}
 
-	public init(type: `Type`, id: String, attributes: Attributes? = nil, links: ResourceLinks? = nil) {
+	public struct Relationships: Codable {
+		public var passTypeID: PassTypeID?
+
+		public struct PassTypeID: Codable {
+			public var links: RelationshipLinks?
+			public var data: Data?
+
+			public struct Data: Codable, Identifiable {
+				public var type: `Type`
+				public var id: String
+
+				public enum `Type`: String, Codable, CaseIterable {
+					case passTypeIDs = "passTypeIds"
+				}
+
+				public init(type: `Type`, id: String) {
+					self.type = type
+					self.id = id
+				}
+
+				public init(from decoder: Decoder) throws {
+					let values = try decoder.container(keyedBy: StringCodingKey.self)
+					self.type = try values.decode(`Type`.self, forKey: "type")
+					self.id = try values.decode(String.self, forKey: "id")
+				}
+
+				public func encode(to encoder: Encoder) throws {
+					var values = encoder.container(keyedBy: StringCodingKey.self)
+					try values.encode(type, forKey: "type")
+					try values.encode(id, forKey: "id")
+				}
+			}
+
+			public init(links: RelationshipLinks? = nil, data: Data? = nil) {
+				self.links = links
+				self.data = data
+			}
+
+			public init(from decoder: Decoder) throws {
+				let values = try decoder.container(keyedBy: StringCodingKey.self)
+				self.links = try values.decodeIfPresent(RelationshipLinks.self, forKey: "links")
+				self.data = try values.decodeIfPresent(Data.self, forKey: "data")
+			}
+
+			public func encode(to encoder: Encoder) throws {
+				var values = encoder.container(keyedBy: StringCodingKey.self)
+				try values.encodeIfPresent(links, forKey: "links")
+				try values.encodeIfPresent(data, forKey: "data")
+			}
+		}
+
+		public init(passTypeID: PassTypeID? = nil) {
+			self.passTypeID = passTypeID
+		}
+
+		public init(from decoder: Decoder) throws {
+			let values = try decoder.container(keyedBy: StringCodingKey.self)
+			self.passTypeID = try values.decodeIfPresent(PassTypeID.self, forKey: "passTypeId")
+		}
+
+		public func encode(to encoder: Encoder) throws {
+			var values = encoder.container(keyedBy: StringCodingKey.self)
+			try values.encodeIfPresent(passTypeID, forKey: "passTypeId")
+		}
+	}
+
+	public init(type: `Type`, id: String, attributes: Attributes? = nil, relationships: Relationships? = nil, links: ResourceLinks? = nil) {
 		self.type = type
 		self.id = id
 		self.attributes = attributes
+		self.relationships = relationships
 		self.links = links
 	}
 
@@ -71,6 +139,7 @@ public struct Certificate: Codable, Identifiable {
 		self.type = try values.decode(`Type`.self, forKey: "type")
 		self.id = try values.decode(String.self, forKey: "id")
 		self.attributes = try values.decodeIfPresent(Attributes.self, forKey: "attributes")
+		self.relationships = try values.decodeIfPresent(Relationships.self, forKey: "relationships")
 		self.links = try values.decodeIfPresent(ResourceLinks.self, forKey: "links")
 	}
 
@@ -79,6 +148,7 @@ public struct Certificate: Codable, Identifiable {
 		try values.encode(type, forKey: "type")
 		try values.encode(id, forKey: "id")
 		try values.encodeIfPresent(attributes, forKey: "attributes")
+		try values.encodeIfPresent(relationships, forKey: "relationships")
 		try values.encodeIfPresent(links, forKey: "links")
 	}
 }

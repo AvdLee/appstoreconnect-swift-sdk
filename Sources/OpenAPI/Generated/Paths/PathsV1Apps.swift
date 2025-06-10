@@ -148,6 +148,7 @@ extension APIEndpoint.V1 {
 			}
 
 			public enum FieldsApps: String, Codable, CaseIterable {
+				case accessibilityURL = "accessibilityUrl"
 				case name
 				case bundleID = "bundleId"
 				case sku
@@ -159,6 +160,7 @@ extension APIEndpoint.V1 {
 				case subscriptionStatusURLVersionForSandbox = "subscriptionStatusUrlVersionForSandbox"
 				case contentRightsDeclaration
 				case streamlinedPurchasingEnabled
+				case accessibilityDeclarations
 				case appEncryptionDeclarations
 				case ciProduct
 				case betaTesters
@@ -186,11 +188,16 @@ extension APIEndpoint.V1 {
 				case reviewSubmissions
 				case subscriptionGracePeriod
 				case customerReviews
+				case customerReviewSummarizations
 				case gameCenterDetail
 				case appStoreVersionExperimentsV2
 				case alternativeDistributionKey
 				case analyticsReportRequests
 				case marketplaceSearchDetail
+				case backgroundAssets
+				case betaFeedbackScreenshotSubmissions
+				case betaFeedbackCrashSubmissions
+				case webhooks
 			}
 
 			public enum FieldsAppEncryptionDeclarations: String, Codable, CaseIterable {
@@ -254,6 +261,7 @@ extension APIEndpoint.V1 {
 				case reviewType
 				case releaseType
 				case earliestReleaseDate
+				case usesIdfa
 				case downloadable
 				case createdDate
 				case app
@@ -297,6 +305,7 @@ extension APIEndpoint.V1 {
 				case minOsVersion
 				case lsMinimumSystemVersion
 				case computedMinMacOsVersion
+				case computedMinVisionOsVersion
 				case iconAssetToken
 				case processingState
 				case buildAudienceType
@@ -458,11 +467,16 @@ extension APIEndpoint.V1 {
 				case gameCenterLeaderboards
 				case gameCenterLeaderboardSets
 				case gameCenterAchievements
+				case gameCenterActivities
+				case gameCenterChallenges
 				case defaultLeaderboard
 				case defaultGroupLeaderboard
 				case achievementReleases
+				case activityReleases
+				case challengeReleases
 				case leaderboardReleases
 				case leaderboardSetReleases
+				case challengesMinimumPlatformVersions
 			}
 
 			public enum FieldsAppStoreVersionExperiments: String, Codable, CaseIterable {

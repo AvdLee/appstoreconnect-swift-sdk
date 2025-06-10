@@ -122,11 +122,11 @@ extension APIEndpoint.V1.SubscriptionGroups.WithID {
 			}
 
 			public enum FieldsSubscriptionPromotionalOffers: String, Codable, CaseIterable {
-				case name
-				case offerCode
 				case duration
-				case offerMode
+				case name
 				case numberOfPeriods
+				case offerCode
+				case offerMode
 				case subscription
 				case prices
 			}
@@ -138,7 +138,6 @@ extension APIEndpoint.V1.SubscriptionGroups.WithID {
 				case duration
 				case offerMode
 				case numberOfPeriods
-				case totalNumberOfCodes
 				case active
 				case subscription
 				case oneTimeUseCodes

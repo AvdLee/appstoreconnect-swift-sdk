@@ -44,6 +44,7 @@ extension APIEndpoint.V1.AppStoreVersions {
 				case reviewType
 				case releaseType
 				case earliestReleaseDate
+				case usesIdfa
 				case downloadable
 				case createdDate
 				case app
@@ -65,7 +66,6 @@ extension APIEndpoint.V1.AppStoreVersions {
 			public enum FieldsAgeRatingDeclarations: String, Codable, CaseIterable {
 				case alcoholTobaccoOrDrugUseOrReferences
 				case contests
-				case gamblingAndContests
 				case gambling
 				case gamblingSimulated
 				case kidsAgeBand
@@ -80,9 +80,7 @@ extension APIEndpoint.V1.AppStoreVersions {
 				case violenceCartoonOrFantasy
 				case violenceRealisticProlongedGraphicOrSadistic
 				case violenceRealistic
-				case ageRatingOverride
 				case koreaAgeRatingOverride
-				case seventeenPlus
 			}
 
 			public enum FieldsAppStoreVersionLocalizations: String, Codable, CaseIterable {
@@ -106,6 +104,7 @@ extension APIEndpoint.V1.AppStoreVersions {
 				case minOsVersion
 				case lsMinimumSystemVersion
 				case computedMinMacOsVersion
+				case computedMinVisionOsVersion
 				case iconAssetToken
 				case processingState
 				case buildAudienceType

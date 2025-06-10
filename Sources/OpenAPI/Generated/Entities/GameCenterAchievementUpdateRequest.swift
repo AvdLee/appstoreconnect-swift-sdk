@@ -21,13 +21,15 @@ public struct GameCenterAchievementUpdateRequest: Codable {
 			public var isShowBeforeEarned: Bool?
 			public var isRepeatable: Bool?
 			public var isArchived: Bool?
+			public var activityProperties: [String: String]?
 
-			public init(referenceName: String? = nil, points: Int? = nil, isShowBeforeEarned: Bool? = nil, isRepeatable: Bool? = nil, isArchived: Bool? = nil) {
+			public init(referenceName: String? = nil, points: Int? = nil, isShowBeforeEarned: Bool? = nil, isRepeatable: Bool? = nil, isArchived: Bool? = nil, activityProperties: [String: String]? = nil) {
 				self.referenceName = referenceName
 				self.points = points
 				self.isShowBeforeEarned = isShowBeforeEarned
 				self.isRepeatable = isRepeatable
 				self.isArchived = isArchived
+				self.activityProperties = activityProperties
 			}
 
 			public init(from decoder: Decoder) throws {
@@ -37,6 +39,7 @@ public struct GameCenterAchievementUpdateRequest: Codable {
 				self.isShowBeforeEarned = try values.decodeIfPresent(Bool.self, forKey: "showBeforeEarned")
 				self.isRepeatable = try values.decodeIfPresent(Bool.self, forKey: "repeatable")
 				self.isArchived = try values.decodeIfPresent(Bool.self, forKey: "archived")
+				self.activityProperties = try values.decodeIfPresent([String: String].self, forKey: "activityProperties")
 			}
 
 			public func encode(to encoder: Encoder) throws {
@@ -46,6 +49,7 @@ public struct GameCenterAchievementUpdateRequest: Codable {
 				try values.encodeIfPresent(isShowBeforeEarned, forKey: "showBeforeEarned")
 				try values.encodeIfPresent(isRepeatable, forKey: "repeatable")
 				try values.encodeIfPresent(isArchived, forKey: "archived")
+				try values.encodeIfPresent(activityProperties, forKey: "activityProperties")
 			}
 		}
 

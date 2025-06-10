@@ -23,6 +23,8 @@ public struct AppStoreVersion: Codable, Identifiable {
 		public var reviewType: ReviewType?
 		public var releaseType: ReleaseType?
 		public var earliestReleaseDate: Date?
+		/// - warning: Deprecated.
+		public var usesIdfa: Bool?
 		public var isDownloadable: Bool?
 		public var createdDate: Date?
 
@@ -37,7 +39,7 @@ public struct AppStoreVersion: Codable, Identifiable {
 			case scheduled = "SCHEDULED"
 		}
 
-		public init(platform: Platform? = nil, versionString: String? = nil, appStoreState: AppStoreVersionState? = nil, appVersionState: AppVersionState? = nil, copyright: String? = nil, reviewType: ReviewType? = nil, releaseType: ReleaseType? = nil, earliestReleaseDate: Date? = nil, isDownloadable: Bool? = nil, createdDate: Date? = nil) {
+		public init(platform: Platform? = nil, versionString: String? = nil, appStoreState: AppStoreVersionState? = nil, appVersionState: AppVersionState? = nil, copyright: String? = nil, reviewType: ReviewType? = nil, releaseType: ReleaseType? = nil, earliestReleaseDate: Date? = nil, usesIdfa: Bool? = nil, isDownloadable: Bool? = nil, createdDate: Date? = nil) {
 			self.platform = platform
 			self.versionString = versionString
 			self.appStoreState = appStoreState
@@ -46,6 +48,7 @@ public struct AppStoreVersion: Codable, Identifiable {
 			self.reviewType = reviewType
 			self.releaseType = releaseType
 			self.earliestReleaseDate = earliestReleaseDate
+			self.usesIdfa = usesIdfa
 			self.isDownloadable = isDownloadable
 			self.createdDate = createdDate
 		}
@@ -60,6 +63,7 @@ public struct AppStoreVersion: Codable, Identifiable {
 			self.reviewType = try values.decodeIfPresent(ReviewType.self, forKey: "reviewType")
 			self.releaseType = try values.decodeIfPresent(ReleaseType.self, forKey: "releaseType")
 			self.earliestReleaseDate = try values.decodeIfPresent(Date.self, forKey: "earliestReleaseDate")
+			self.usesIdfa = try values.decodeIfPresent(Bool.self, forKey: "usesIdfa")
 			self.isDownloadable = try values.decodeIfPresent(Bool.self, forKey: "downloadable")
 			self.createdDate = try values.decodeIfPresent(Date.self, forKey: "createdDate")
 		}
@@ -74,6 +78,7 @@ public struct AppStoreVersion: Codable, Identifiable {
 			try values.encodeIfPresent(reviewType, forKey: "reviewType")
 			try values.encodeIfPresent(releaseType, forKey: "releaseType")
 			try values.encodeIfPresent(earliestReleaseDate, forKey: "earliestReleaseDate")
+			try values.encodeIfPresent(usesIdfa, forKey: "usesIdfa")
 			try values.encodeIfPresent(isDownloadable, forKey: "downloadable")
 			try values.encodeIfPresent(createdDate, forKey: "createdDate")
 		}

@@ -95,6 +95,7 @@ public struct XcodeMetrics: Codable {
 				public struct Dataset: Codable {
 					public var filterCriteria: FilterCriteria?
 					public var points: [Point]?
+					public var recommendedMetricGoal: RecommendedMetricGoal?
 
 					public struct FilterCriteria: Codable {
 						public var percentile: String?
@@ -178,21 +179,46 @@ public struct XcodeMetrics: Codable {
 						}
 					}
 
-					public init(filterCriteria: FilterCriteria? = nil, points: [Point]? = nil) {
+					public struct RecommendedMetricGoal: Codable {
+						public var value: Double?
+						public var detail: String?
+
+						public init(value: Double? = nil, detail: String? = nil) {
+							self.value = value
+							self.detail = detail
+						}
+
+						public init(from decoder: Decoder) throws {
+							let values = try decoder.container(keyedBy: StringCodingKey.self)
+							self.value = try values.decodeIfPresent(Double.self, forKey: "value")
+							self.detail = try values.decodeIfPresent(String.self, forKey: "detail")
+						}
+
+						public func encode(to encoder: Encoder) throws {
+							var values = encoder.container(keyedBy: StringCodingKey.self)
+							try values.encodeIfPresent(value, forKey: "value")
+							try values.encodeIfPresent(detail, forKey: "detail")
+						}
+					}
+
+					public init(filterCriteria: FilterCriteria? = nil, points: [Point]? = nil, recommendedMetricGoal: RecommendedMetricGoal? = nil) {
 						self.filterCriteria = filterCriteria
 						self.points = points
+						self.recommendedMetricGoal = recommendedMetricGoal
 					}
 
 					public init(from decoder: Decoder) throws {
 						let values = try decoder.container(keyedBy: StringCodingKey.self)
 						self.filterCriteria = try values.decodeIfPresent(FilterCriteria.self, forKey: "filterCriteria")
 						self.points = try values.decodeIfPresent([Point].self, forKey: "points")
+						self.recommendedMetricGoal = try values.decodeIfPresent(RecommendedMetricGoal.self, forKey: "recommendedMetricGoal")
 					}
 
 					public func encode(to encoder: Encoder) throws {
 						var values = encoder.container(keyedBy: StringCodingKey.self)
 						try values.encodeIfPresent(filterCriteria, forKey: "filterCriteria")
 						try values.encodeIfPresent(points, forKey: "points")
+						try values.encodeIfPresent(recommendedMetricGoal, forKey: "recommendedMetricGoal")
 					}
 				}
 

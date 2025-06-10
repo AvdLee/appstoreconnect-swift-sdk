@@ -23,6 +23,7 @@ extension APIEndpoint.V1.GameCenterAchievementLocalizations.WithID {
 			public var fieldsGameCenterGroups: [FieldsGameCenterGroups]?
 			public var fieldsGameCenterAchievementLocalizations: [FieldsGameCenterAchievementLocalizations]?
 			public var fieldsGameCenterAchievementReleases: [FieldsGameCenterAchievementReleases]?
+			public var fieldsGameCenterActivities: [FieldsGameCenterActivities]?
 			public var include: [Include]?
 			public var limitLocalizations: Int?
 			public var limitReleases: Int?
@@ -34,11 +35,13 @@ extension APIEndpoint.V1.GameCenterAchievementLocalizations.WithID {
 				case showBeforeEarned
 				case repeatable
 				case archived
+				case activityProperties
 				case gameCenterDetail
 				case gameCenterGroup
 				case groupAchievement
 				case localizations
 				case releases
+				case activity
 			}
 
 			public enum FieldsGameCenterDetails: String, Codable, CaseIterable {
@@ -50,11 +53,16 @@ extension APIEndpoint.V1.GameCenterAchievementLocalizations.WithID {
 				case gameCenterLeaderboards
 				case gameCenterLeaderboardSets
 				case gameCenterAchievements
+				case gameCenterActivities
+				case gameCenterChallenges
 				case defaultLeaderboard
 				case defaultGroupLeaderboard
 				case achievementReleases
+				case activityReleases
+				case challengeReleases
 				case leaderboardReleases
 				case leaderboardSetReleases
+				case challengesMinimumPlatformVersions
 			}
 
 			public enum FieldsGameCenterGroups: String, Codable, CaseIterable {
@@ -63,6 +71,8 @@ extension APIEndpoint.V1.GameCenterAchievementLocalizations.WithID {
 				case gameCenterLeaderboards
 				case gameCenterLeaderboardSets
 				case gameCenterAchievements
+				case gameCenterActivities
+				case gameCenterChallenges
 			}
 
 			public enum FieldsGameCenterAchievementLocalizations: String, Codable, CaseIterable {
@@ -80,20 +90,38 @@ extension APIEndpoint.V1.GameCenterAchievementLocalizations.WithID {
 				case gameCenterAchievement
 			}
 
+			public enum FieldsGameCenterActivities: String, Codable, CaseIterable {
+				case referenceName
+				case vendorIdentifier
+				case playStyle
+				case minimumPlayersCount
+				case maximumPlayersCount
+				case supportsPartyCode
+				case archived
+				case properties
+				case gameCenterDetail
+				case gameCenterGroup
+				case achievements
+				case leaderboards
+				case versions
+			}
+
 			public enum Include: String, Codable, CaseIterable {
 				case gameCenterDetail
 				case gameCenterGroup
 				case groupAchievement
 				case localizations
 				case releases
+				case activity
 			}
 
-			public init(fieldsGameCenterAchievements: [FieldsGameCenterAchievements]? = nil, fieldsGameCenterDetails: [FieldsGameCenterDetails]? = nil, fieldsGameCenterGroups: [FieldsGameCenterGroups]? = nil, fieldsGameCenterAchievementLocalizations: [FieldsGameCenterAchievementLocalizations]? = nil, fieldsGameCenterAchievementReleases: [FieldsGameCenterAchievementReleases]? = nil, include: [Include]? = nil, limitLocalizations: Int? = nil, limitReleases: Int? = nil) {
+			public init(fieldsGameCenterAchievements: [FieldsGameCenterAchievements]? = nil, fieldsGameCenterDetails: [FieldsGameCenterDetails]? = nil, fieldsGameCenterGroups: [FieldsGameCenterGroups]? = nil, fieldsGameCenterAchievementLocalizations: [FieldsGameCenterAchievementLocalizations]? = nil, fieldsGameCenterAchievementReleases: [FieldsGameCenterAchievementReleases]? = nil, fieldsGameCenterActivities: [FieldsGameCenterActivities]? = nil, include: [Include]? = nil, limitLocalizations: Int? = nil, limitReleases: Int? = nil) {
 				self.fieldsGameCenterAchievements = fieldsGameCenterAchievements
 				self.fieldsGameCenterDetails = fieldsGameCenterDetails
 				self.fieldsGameCenterGroups = fieldsGameCenterGroups
 				self.fieldsGameCenterAchievementLocalizations = fieldsGameCenterAchievementLocalizations
 				self.fieldsGameCenterAchievementReleases = fieldsGameCenterAchievementReleases
+				self.fieldsGameCenterActivities = fieldsGameCenterActivities
 				self.include = include
 				self.limitLocalizations = limitLocalizations
 				self.limitReleases = limitReleases
@@ -106,6 +134,7 @@ extension APIEndpoint.V1.GameCenterAchievementLocalizations.WithID {
 				encoder.encode(fieldsGameCenterGroups, forKey: "fields[gameCenterGroups]")
 				encoder.encode(fieldsGameCenterAchievementLocalizations, forKey: "fields[gameCenterAchievementLocalizations]")
 				encoder.encode(fieldsGameCenterAchievementReleases, forKey: "fields[gameCenterAchievementReleases]")
+				encoder.encode(fieldsGameCenterActivities, forKey: "fields[gameCenterActivities]")
 				encoder.encode(include, forKey: "include")
 				encoder.encode(limitLocalizations, forKey: "limit[localizations]")
 				encoder.encode(limitReleases, forKey: "limit[releases]")

@@ -21,17 +21,15 @@ public struct SubscriptionOfferCode: Codable, Identifiable {
 		public var duration: SubscriptionOfferDuration?
 		public var offerMode: SubscriptionOfferMode?
 		public var numberOfPeriods: Int?
-		public var totalNumberOfCodes: Int?
 		public var isActive: Bool?
 
-		public init(name: String? = nil, customerEligibilities: [SubscriptionCustomerEligibility]? = nil, offerEligibility: SubscriptionOfferEligibility? = nil, duration: SubscriptionOfferDuration? = nil, offerMode: SubscriptionOfferMode? = nil, numberOfPeriods: Int? = nil, totalNumberOfCodes: Int? = nil, isActive: Bool? = nil) {
+		public init(name: String? = nil, customerEligibilities: [SubscriptionCustomerEligibility]? = nil, offerEligibility: SubscriptionOfferEligibility? = nil, duration: SubscriptionOfferDuration? = nil, offerMode: SubscriptionOfferMode? = nil, numberOfPeriods: Int? = nil, isActive: Bool? = nil) {
 			self.name = name
 			self.customerEligibilities = customerEligibilities
 			self.offerEligibility = offerEligibility
 			self.duration = duration
 			self.offerMode = offerMode
 			self.numberOfPeriods = numberOfPeriods
-			self.totalNumberOfCodes = totalNumberOfCodes
 			self.isActive = isActive
 		}
 
@@ -43,7 +41,6 @@ public struct SubscriptionOfferCode: Codable, Identifiable {
 			self.duration = try values.decodeIfPresent(SubscriptionOfferDuration.self, forKey: "duration")
 			self.offerMode = try values.decodeIfPresent(SubscriptionOfferMode.self, forKey: "offerMode")
 			self.numberOfPeriods = try values.decodeIfPresent(Int.self, forKey: "numberOfPeriods")
-			self.totalNumberOfCodes = try values.decodeIfPresent(Int.self, forKey: "totalNumberOfCodes")
 			self.isActive = try values.decodeIfPresent(Bool.self, forKey: "active")
 		}
 
@@ -55,7 +52,6 @@ public struct SubscriptionOfferCode: Codable, Identifiable {
 			try values.encodeIfPresent(duration, forKey: "duration")
 			try values.encodeIfPresent(offerMode, forKey: "offerMode")
 			try values.encodeIfPresent(numberOfPeriods, forKey: "numberOfPeriods")
-			try values.encodeIfPresent(totalNumberOfCodes, forKey: "totalNumberOfCodes")
 			try values.encodeIfPresent(isActive, forKey: "active")
 		}
 	}

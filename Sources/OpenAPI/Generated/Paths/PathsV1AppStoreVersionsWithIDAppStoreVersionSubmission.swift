@@ -36,6 +36,7 @@ extension APIEndpoint.V1.AppStoreVersions.WithID {
 				case reviewType
 				case releaseType
 				case earliestReleaseDate
+				case usesIdfa
 				case downloadable
 				case createdDate
 				case app

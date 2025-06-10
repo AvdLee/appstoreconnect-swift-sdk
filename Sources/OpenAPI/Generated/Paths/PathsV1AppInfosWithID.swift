@@ -49,7 +49,6 @@ extension APIEndpoint.V1.AppInfos {
 			public enum FieldsAgeRatingDeclarations: String, Codable, CaseIterable {
 				case alcoholTobaccoOrDrugUseOrReferences
 				case contests
-				case gamblingAndContests
 				case gambling
 				case gamblingSimulated
 				case kidsAgeBand
@@ -64,9 +63,7 @@ extension APIEndpoint.V1.AppInfos {
 				case violenceCartoonOrFantasy
 				case violenceRealisticProlongedGraphicOrSadistic
 				case violenceRealistic
-				case ageRatingOverride
 				case koreaAgeRatingOverride
-				case seventeenPlus
 			}
 
 			public enum FieldsAppInfoLocalizations: String, Codable, CaseIterable {
