@@ -30,6 +30,7 @@ public struct AgeRatingDeclaration: Codable, Identifiable {
 		public var violenceCartoonOrFantasy: ViolenceCartoonOrFantasy?
 		public var violenceRealisticProlongedGraphicOrSadistic: ViolenceRealisticProlongedGraphicOrSadistic?
 		public var violenceRealistic: ViolenceRealistic?
+		public var ageRatingOverride: AgeRatingOverride?
 		public var koreaAgeRatingOverride: KoreaAgeRatingOverride?
 
 		public enum AlcoholTobaccoOrDrugUseOrReferences: String, Codable, CaseIterable {
@@ -80,13 +81,19 @@ public struct AgeRatingDeclaration: Codable, Identifiable {
 			case `none` = "NONE"
 		}
 
+		public enum AgeRatingOverride: String, Codable, CaseIterable {
+			case `none` = "NONE"
+			case seventeenPlus = "SEVENTEEN_PLUS"
+			case unrated = "UNRATED"
+		}
+
 		public enum KoreaAgeRatingOverride: String, Codable, CaseIterable {
 			case `none` = "NONE"
 			case fifteenPlus = "FIFTEEN_PLUS"
 			case nineteenPlus = "NINETEEN_PLUS"
 		}
 
-		public init(alcoholTobaccoOrDrugUseOrReferences: AlcoholTobaccoOrDrugUseOrReferences? = nil, contests: Contests? = nil, isGambling: Bool? = nil, gamblingSimulated: GamblingSimulated? = nil, kidsAgeBand: KidsAgeBand? = nil, isLootBox: Bool? = nil, medicalOrTreatmentInformation: MedicalOrTreatmentInformation? = nil, profanityOrCrudeHumor: ProfanityOrCrudeHumor? = nil, sexualContentGraphicAndNudity: SexualContentGraphicAndNudity? = nil, sexualContentOrNudity: SexualContentOrNudity? = nil, horrorOrFearThemes: HorrorOrFearThemes? = nil, matureOrSuggestiveThemes: MatureOrSuggestiveThemes? = nil, isUnrestrictedWebAccess: Bool? = nil, violenceCartoonOrFantasy: ViolenceCartoonOrFantasy? = nil, violenceRealisticProlongedGraphicOrSadistic: ViolenceRealisticProlongedGraphicOrSadistic? = nil, violenceRealistic: ViolenceRealistic? = nil, koreaAgeRatingOverride: KoreaAgeRatingOverride? = nil) {
+		public init(alcoholTobaccoOrDrugUseOrReferences: AlcoholTobaccoOrDrugUseOrReferences? = nil, contests: Contests? = nil, isGambling: Bool? = nil, gamblingSimulated: GamblingSimulated? = nil, kidsAgeBand: KidsAgeBand? = nil, isLootBox: Bool? = nil, medicalOrTreatmentInformation: MedicalOrTreatmentInformation? = nil, profanityOrCrudeHumor: ProfanityOrCrudeHumor? = nil, sexualContentGraphicAndNudity: SexualContentGraphicAndNudity? = nil, sexualContentOrNudity: SexualContentOrNudity? = nil, horrorOrFearThemes: HorrorOrFearThemes? = nil, matureOrSuggestiveThemes: MatureOrSuggestiveThemes? = nil, isUnrestrictedWebAccess: Bool? = nil, violenceCartoonOrFantasy: ViolenceCartoonOrFantasy? = nil, violenceRealisticProlongedGraphicOrSadistic: ViolenceRealisticProlongedGraphicOrSadistic? = nil, violenceRealistic: ViolenceRealistic? = nil, ageRatingOverride: AgeRatingOverride? = nil, koreaAgeRatingOverride: KoreaAgeRatingOverride? = nil) {
 			self.alcoholTobaccoOrDrugUseOrReferences = alcoholTobaccoOrDrugUseOrReferences
 			self.contests = contests
 			self.isGambling = isGambling
@@ -103,6 +110,7 @@ public struct AgeRatingDeclaration: Codable, Identifiable {
 			self.violenceCartoonOrFantasy = violenceCartoonOrFantasy
 			self.violenceRealisticProlongedGraphicOrSadistic = violenceRealisticProlongedGraphicOrSadistic
 			self.violenceRealistic = violenceRealistic
+			self.ageRatingOverride = ageRatingOverride
 			self.koreaAgeRatingOverride = koreaAgeRatingOverride
 		}
 
@@ -124,6 +132,7 @@ public struct AgeRatingDeclaration: Codable, Identifiable {
 			self.violenceCartoonOrFantasy = try values.decodeIfPresent(ViolenceCartoonOrFantasy.self, forKey: "violenceCartoonOrFantasy")
 			self.violenceRealisticProlongedGraphicOrSadistic = try values.decodeIfPresent(ViolenceRealisticProlongedGraphicOrSadistic.self, forKey: "violenceRealisticProlongedGraphicOrSadistic")
 			self.violenceRealistic = try values.decodeIfPresent(ViolenceRealistic.self, forKey: "violenceRealistic")
+			self.ageRatingOverride = try values.decodeIfPresent(AgeRatingOverride.self, forKey: "ageRatingOverride")
 			self.koreaAgeRatingOverride = try values.decodeIfPresent(KoreaAgeRatingOverride.self, forKey: "koreaAgeRatingOverride")
 		}
 
@@ -145,6 +154,7 @@ public struct AgeRatingDeclaration: Codable, Identifiable {
 			try values.encodeIfPresent(violenceCartoonOrFantasy, forKey: "violenceCartoonOrFantasy")
 			try values.encodeIfPresent(violenceRealisticProlongedGraphicOrSadistic, forKey: "violenceRealisticProlongedGraphicOrSadistic")
 			try values.encodeIfPresent(violenceRealistic, forKey: "violenceRealistic")
+			try values.encodeIfPresent(ageRatingOverride, forKey: "ageRatingOverride")
 			try values.encodeIfPresent(koreaAgeRatingOverride, forKey: "koreaAgeRatingOverride")
 		}
 	}

@@ -63,6 +63,7 @@ extension APIEndpoint.V1.AppInfos {
 				case violenceCartoonOrFantasy
 				case violenceRealisticProlongedGraphicOrSadistic
 				case violenceRealistic
+				case ageRatingOverride
 				case koreaAgeRatingOverride
 			}
 
