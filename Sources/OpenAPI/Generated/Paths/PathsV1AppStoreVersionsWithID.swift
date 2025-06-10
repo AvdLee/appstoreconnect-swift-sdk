@@ -80,6 +80,7 @@ extension APIEndpoint.V1.AppStoreVersions {
 				case violenceCartoonOrFantasy
 				case violenceRealisticProlongedGraphicOrSadistic
 				case violenceRealistic
+				case ageRatingOverride
 				case koreaAgeRatingOverride
 			}
 
