@@ -39,11 +39,13 @@ extension APIEndpoint.V1.GameCenterAchievementLocalizations {
 				case showBeforeEarned
 				case repeatable
 				case archived
+				case activityProperties
 				case gameCenterDetail
 				case gameCenterGroup
 				case groupAchievement
 				case localizations
 				case releases
+				case activity
 			}
 
 			public enum FieldsGameCenterAchievementImages: String, Codable, CaseIterable {

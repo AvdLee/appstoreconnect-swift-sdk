@@ -16,6 +16,8 @@ public struct GameCenterLeaderboardResponse: Codable {
 		case gameCenterLeaderboardSet(GameCenterLeaderboardSet)
 		case gameCenterLeaderboardLocalization(GameCenterLeaderboardLocalization)
 		case gameCenterLeaderboardRelease(GameCenterLeaderboardRelease)
+		case gameCenterActivity(GameCenterActivity)
+		case gameCenterChallenge(GameCenterChallenge)
 
 		public init(from decoder: Decoder) throws {
 			let container = try decoder.singleValueContainer()
@@ -31,10 +33,14 @@ public struct GameCenterLeaderboardResponse: Codable {
 				self = .gameCenterLeaderboardLocalization(value)
 			} else if let value = try? container.decode(GameCenterLeaderboardRelease.self) {
 				self = .gameCenterLeaderboardRelease(value)
+			} else if let value = try? container.decode(GameCenterActivity.self) {
+				self = .gameCenterActivity(value)
+			} else if let value = try? container.decode(GameCenterChallenge.self) {
+				self = .gameCenterChallenge(value)
 			} else {
 				throw DecodingError.dataCorruptedError(
 					in: container,
-					debugDescription: "Data could not be decoded as any of the expected types (GameCenterDetail, GameCenterGroup, GameCenterLeaderboard, GameCenterLeaderboardSet, GameCenterLeaderboardLocalization, GameCenterLeaderboardRelease)."
+					debugDescription: "Data could not be decoded as any of the expected types (GameCenterDetail, GameCenterGroup, GameCenterLeaderboard, GameCenterLeaderboardSet, GameCenterLeaderboardLocalization, GameCenterLeaderboardRelease, GameCenterActivity, GameCenterChallenge)."
 				)
 			}
 		}
@@ -48,6 +54,8 @@ public struct GameCenterLeaderboardResponse: Codable {
 			case .gameCenterLeaderboardSet(let value): try container.encode(value)
 			case .gameCenterLeaderboardLocalization(let value): try container.encode(value)
 			case .gameCenterLeaderboardRelease(let value): try container.encode(value)
+			case .gameCenterActivity(let value): try container.encode(value)
+			case .gameCenterChallenge(let value): try container.encode(value)
 			}
 		}
 	}

@@ -24,7 +24,9 @@ extension APIEndpoint.V1.MerchantIDs.WithID {
 			public var filterID: [String]?
 			public var sort: [Sort]?
 			public var fieldsCertificates: [FieldsCertificates]?
+			public var fieldsPassTypeIDs: [FieldsPassTypeIDs]?
 			public var limit: Int?
+			public var include: [Include]?
 
 			public enum FilterCertificateType: String, Codable, CaseIterable {
 				case applePay = "APPLE_PAY"
@@ -67,16 +69,29 @@ extension APIEndpoint.V1.MerchantIDs.WithID {
 				case expirationDate
 				case certificateContent
 				case activated
+				case passTypeID = "passTypeId"
 			}
 
-			public init(filterDisplayName: [String]? = nil, filterCertificateType: [FilterCertificateType]? = nil, filterSerialNumber: [String]? = nil, filterID: [String]? = nil, sort: [Sort]? = nil, fieldsCertificates: [FieldsCertificates]? = nil, limit: Int? = nil) {
+			public enum FieldsPassTypeIDs: String, Codable, CaseIterable {
+				case name
+				case identifier
+				case certificates
+			}
+
+			public enum Include: String, Codable, CaseIterable {
+				case passTypeID = "passTypeId"
+			}
+
+			public init(filterDisplayName: [String]? = nil, filterCertificateType: [FilterCertificateType]? = nil, filterSerialNumber: [String]? = nil, filterID: [String]? = nil, sort: [Sort]? = nil, fieldsCertificates: [FieldsCertificates]? = nil, fieldsPassTypeIDs: [FieldsPassTypeIDs]? = nil, limit: Int? = nil, include: [Include]? = nil) {
 				self.filterDisplayName = filterDisplayName
 				self.filterCertificateType = filterCertificateType
 				self.filterSerialNumber = filterSerialNumber
 				self.filterID = filterID
 				self.sort = sort
 				self.fieldsCertificates = fieldsCertificates
+				self.fieldsPassTypeIDs = fieldsPassTypeIDs
 				self.limit = limit
+				self.include = include
 			}
 
 			public var asQuery: [(String, String?)] {
@@ -87,7 +102,9 @@ extension APIEndpoint.V1.MerchantIDs.WithID {
 				encoder.encode(filterID, forKey: "filter[id]")
 				encoder.encode(sort, forKey: "sort")
 				encoder.encode(fieldsCertificates, forKey: "fields[certificates]")
+				encoder.encode(fieldsPassTypeIDs, forKey: "fields[passTypeIds]")
 				encoder.encode(limit, forKey: "limit")
+				encoder.encode(include, forKey: "include")
 				return encoder.items
 			}
 		}

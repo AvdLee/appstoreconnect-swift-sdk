@@ -16,6 +16,7 @@ public struct GameCenterDetailCreateRequest: Codable {
 		}
 
 		public struct Attributes: Codable {
+			/// - warning: Deprecated.
 			public var isChallengeEnabled: Bool?
 
 			public init(isChallengeEnabled: Bool? = nil) {

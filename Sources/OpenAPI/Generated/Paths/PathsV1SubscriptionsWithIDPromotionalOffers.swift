@@ -27,11 +27,11 @@ extension APIEndpoint.V1.Subscriptions.WithID {
 			public var limitPrices: Int?
 
 			public enum FieldsSubscriptionPromotionalOffers: String, Codable, CaseIterable {
-				case name
-				case offerCode
 				case duration
-				case offerMode
+				case name
 				case numberOfPeriods
+				case offerCode
+				case offerMode
 				case subscription
 				case prices
 			}

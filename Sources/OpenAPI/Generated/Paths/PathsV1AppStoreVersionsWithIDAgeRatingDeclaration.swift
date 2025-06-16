@@ -27,7 +27,6 @@ extension APIEndpoint.V1.AppStoreVersions.WithID {
 		public enum FieldsAgeRatingDeclarations: String, Codable, CaseIterable {
 			case alcoholTobaccoOrDrugUseOrReferences
 			case contests
-			case gamblingAndContests
 			case gambling
 			case gamblingSimulated
 			case kidsAgeBand
@@ -44,7 +43,6 @@ extension APIEndpoint.V1.AppStoreVersions.WithID {
 			case violenceRealistic
 			case ageRatingOverride
 			case koreaAgeRatingOverride
-			case seventeenPlus
 		}
 	}
 }

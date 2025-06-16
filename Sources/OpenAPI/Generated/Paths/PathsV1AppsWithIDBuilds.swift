@@ -32,6 +32,7 @@ extension APIEndpoint.V1.Apps.WithID {
 			case minOsVersion
 			case lsMinimumSystemVersion
 			case computedMinMacOsVersion
+			case computedMinVisionOsVersion
 			case iconAssetToken
 			case processingState
 			case buildAudienceType

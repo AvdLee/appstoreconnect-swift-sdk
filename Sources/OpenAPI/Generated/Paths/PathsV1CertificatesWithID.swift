@@ -13,25 +13,50 @@ extension APIEndpoint.V1.Certificates {
 		/// Path: `/v1/certificates/{id}`
 		public let path: String
 
-		public func get(fieldsCertificates: [FieldsCertificates]? = nil) -> Request<AppStoreConnect_Swift_SDK.CertificateResponse> {
-			Request(path: path, method: "GET", query: makeGetQuery(fieldsCertificates), id: "certificates_getInstance")
+		public func get(parameters: GetParameters? = nil) -> Request<AppStoreConnect_Swift_SDK.CertificateResponse> {
+			Request(path: path, method: "GET", query: parameters?.asQuery, id: "certificates_getInstance")
 		}
 
-		private func makeGetQuery(_ fieldsCertificates: [FieldsCertificates]?) -> [(String, String?)] {
-			let encoder = URLQueryEncoder()
-			encoder.encode(fieldsCertificates, forKey: "fields[certificates]", explode: false)
-			return encoder.items
-		}
+		public struct GetParameters {
+			public var fieldsCertificates: [FieldsCertificates]?
+			public var fieldsPassTypeIDs: [FieldsPassTypeIDs]?
+			public var include: [Include]?
 
-		public enum FieldsCertificates: String, Codable, CaseIterable {
-			case name
-			case certificateType
-			case displayName
-			case serialNumber
-			case platform
-			case expirationDate
-			case certificateContent
-			case activated
+			public enum FieldsCertificates: String, Codable, CaseIterable {
+				case name
+				case certificateType
+				case displayName
+				case serialNumber
+				case platform
+				case expirationDate
+				case certificateContent
+				case activated
+				case passTypeID = "passTypeId"
+			}
+
+			public enum FieldsPassTypeIDs: String, Codable, CaseIterable {
+				case name
+				case identifier
+				case certificates
+			}
+
+			public enum Include: String, Codable, CaseIterable {
+				case passTypeID = "passTypeId"
+			}
+
+			public init(fieldsCertificates: [FieldsCertificates]? = nil, fieldsPassTypeIDs: [FieldsPassTypeIDs]? = nil, include: [Include]? = nil) {
+				self.fieldsCertificates = fieldsCertificates
+				self.fieldsPassTypeIDs = fieldsPassTypeIDs
+				self.include = include
+			}
+
+			public var asQuery: [(String, String?)] {
+				let encoder = URLQueryEncoder(explode: false)
+				encoder.encode(fieldsCertificates, forKey: "fields[certificates]")
+				encoder.encode(fieldsPassTypeIDs, forKey: "fields[passTypeIds]")
+				encoder.encode(include, forKey: "include")
+				return encoder.items
+			}
 		}
 
 		public func patch(_ body: AppStoreConnect_Swift_SDK.CertificateUpdateRequest) -> Request<AppStoreConnect_Swift_SDK.CertificateResponse> {

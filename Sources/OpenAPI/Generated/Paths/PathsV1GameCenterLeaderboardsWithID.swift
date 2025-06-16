@@ -38,12 +38,16 @@ extension APIEndpoint.V1.GameCenterLeaderboards {
 				case recurrenceDuration
 				case recurrenceRule
 				case archived
+				case activityProperties
+				case visibility
 				case gameCenterDetail
 				case gameCenterGroup
 				case groupLeaderboard
 				case gameCenterLeaderboardSets
 				case localizations
 				case releases
+				case activity
+				case challenge
 			}
 
 			public enum FieldsGameCenterLeaderboardLocalizations: String, Codable, CaseIterable {
@@ -69,6 +73,8 @@ extension APIEndpoint.V1.GameCenterLeaderboards {
 				case gameCenterLeaderboardSets
 				case localizations
 				case releases
+				case activity
+				case challenge
 			}
 
 			public init(fieldsGameCenterLeaderboards: [FieldsGameCenterLeaderboards]? = nil, fieldsGameCenterLeaderboardLocalizations: [FieldsGameCenterLeaderboardLocalizations]? = nil, fieldsGameCenterLeaderboardReleases: [FieldsGameCenterLeaderboardReleases]? = nil, include: [Include]? = nil, limitGameCenterLeaderboardSets: Int? = nil, limitLocalizations: Int? = nil, limitReleases: Int? = nil) {

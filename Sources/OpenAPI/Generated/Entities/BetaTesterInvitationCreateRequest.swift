@@ -15,11 +15,13 @@ public struct BetaTesterInvitationCreateRequest: Codable {
 		}
 
 		public struct Relationships: Codable {
-			public var betaTester: BetaTester
+			/// - warning: Deprecated.
+			public var betaTester: BetaTester?
 			public var app: App
 
+			@available(*, deprecated, message: "Deprecated")
 			public struct BetaTester: Codable {
-				public var data: Data
+				public var data: Data?
 
 				public struct Data: Codable, Identifiable {
 					public var type: `Type`
@@ -47,18 +49,18 @@ public struct BetaTesterInvitationCreateRequest: Codable {
 					}
 				}
 
-				public init(data: Data) {
+				public init(data: Data? = nil) {
 					self.data = data
 				}
 
 				public init(from decoder: Decoder) throws {
 					let values = try decoder.container(keyedBy: StringCodingKey.self)
-					self.data = try values.decode(Data.self, forKey: "data")
+					self.data = try values.decodeIfPresent(Data.self, forKey: "data")
 				}
 
 				public func encode(to encoder: Encoder) throws {
 					var values = encoder.container(keyedBy: StringCodingKey.self)
-					try values.encode(data, forKey: "data")
+					try values.encodeIfPresent(data, forKey: "data")
 				}
 			}
 
@@ -106,20 +108,20 @@ public struct BetaTesterInvitationCreateRequest: Codable {
 				}
 			}
 
-			public init(betaTester: BetaTester, app: App) {
+			public init(betaTester: BetaTester? = nil, app: App) {
 				self.betaTester = betaTester
 				self.app = app
 			}
 
 			public init(from decoder: Decoder) throws {
 				let values = try decoder.container(keyedBy: StringCodingKey.self)
-				self.betaTester = try values.decode(BetaTester.self, forKey: "betaTester")
+				self.betaTester = try values.decodeIfPresent(BetaTester.self, forKey: "betaTester")
 				self.app = try values.decode(App.self, forKey: "app")
 			}
 
 			public func encode(to encoder: Encoder) throws {
 				var values = encoder.container(keyedBy: StringCodingKey.self)
-				try values.encode(betaTester, forKey: "betaTester")
+				try values.encodeIfPresent(betaTester, forKey: "betaTester")
 				try values.encode(app, forKey: "app")
 			}
 		}

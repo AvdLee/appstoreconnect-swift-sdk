@@ -16,8 +16,6 @@ public struct AgeRatingDeclaration: Codable, Identifiable {
 	public struct Attributes: Codable {
 		public var alcoholTobaccoOrDrugUseOrReferences: AlcoholTobaccoOrDrugUseOrReferences?
 		public var contests: Contests?
-		/// - warning: Deprecated.
-		public var isGamblingAndContests: Bool?
 		public var isGambling: Bool?
 		public var gamblingSimulated: GamblingSimulated?
 		public var kidsAgeBand: KidsAgeBand?
@@ -34,79 +32,53 @@ public struct AgeRatingDeclaration: Codable, Identifiable {
 		public var violenceRealistic: ViolenceRealistic?
 		public var ageRatingOverride: AgeRatingOverride?
 		public var koreaAgeRatingOverride: KoreaAgeRatingOverride?
-		/// - warning: Deprecated.
-		public var isSeventeenPlus: Bool?
 
 		public enum AlcoholTobaccoOrDrugUseOrReferences: String, Codable, CaseIterable {
 			case `none` = "NONE"
-			case infrequentOrMild = "INFREQUENT_OR_MILD"
-			case frequentOrIntense = "FREQUENT_OR_INTENSE"
 		}
 
 		public enum Contests: String, Codable, CaseIterable {
 			case `none` = "NONE"
-			case infrequentOrMild = "INFREQUENT_OR_MILD"
-			case frequentOrIntense = "FREQUENT_OR_INTENSE"
 		}
 
 		public enum GamblingSimulated: String, Codable, CaseIterable {
 			case `none` = "NONE"
-			case infrequentOrMild = "INFREQUENT_OR_MILD"
-			case frequentOrIntense = "FREQUENT_OR_INTENSE"
 		}
 
 		public enum MedicalOrTreatmentInformation: String, Codable, CaseIterable {
 			case `none` = "NONE"
-			case infrequentOrMild = "INFREQUENT_OR_MILD"
-			case frequentOrIntense = "FREQUENT_OR_INTENSE"
 		}
 
 		public enum ProfanityOrCrudeHumor: String, Codable, CaseIterable {
 			case `none` = "NONE"
-			case infrequentOrMild = "INFREQUENT_OR_MILD"
-			case frequentOrIntense = "FREQUENT_OR_INTENSE"
 		}
 
 		public enum SexualContentGraphicAndNudity: String, Codable, CaseIterable {
 			case `none` = "NONE"
-			case infrequentOrMild = "INFREQUENT_OR_MILD"
-			case frequentOrIntense = "FREQUENT_OR_INTENSE"
 		}
 
 		public enum SexualContentOrNudity: String, Codable, CaseIterable {
 			case `none` = "NONE"
-			case infrequentOrMild = "INFREQUENT_OR_MILD"
-			case frequentOrIntense = "FREQUENT_OR_INTENSE"
 		}
 
 		public enum HorrorOrFearThemes: String, Codable, CaseIterable {
 			case `none` = "NONE"
-			case infrequentOrMild = "INFREQUENT_OR_MILD"
-			case frequentOrIntense = "FREQUENT_OR_INTENSE"
 		}
 
 		public enum MatureOrSuggestiveThemes: String, Codable, CaseIterable {
 			case `none` = "NONE"
-			case infrequentOrMild = "INFREQUENT_OR_MILD"
-			case frequentOrIntense = "FREQUENT_OR_INTENSE"
 		}
 
 		public enum ViolenceCartoonOrFantasy: String, Codable, CaseIterable {
 			case `none` = "NONE"
-			case infrequentOrMild = "INFREQUENT_OR_MILD"
-			case frequentOrIntense = "FREQUENT_OR_INTENSE"
 		}
 
 		public enum ViolenceRealisticProlongedGraphicOrSadistic: String, Codable, CaseIterable {
 			case `none` = "NONE"
-			case infrequentOrMild = "INFREQUENT_OR_MILD"
-			case frequentOrIntense = "FREQUENT_OR_INTENSE"
 		}
 
 		public enum ViolenceRealistic: String, Codable, CaseIterable {
 			case `none` = "NONE"
-			case infrequentOrMild = "INFREQUENT_OR_MILD"
-			case frequentOrIntense = "FREQUENT_OR_INTENSE"
 		}
 
 		public enum AgeRatingOverride: String, Codable, CaseIterable {
@@ -121,10 +93,9 @@ public struct AgeRatingDeclaration: Codable, Identifiable {
 			case nineteenPlus = "NINETEEN_PLUS"
 		}
 
-		public init(alcoholTobaccoOrDrugUseOrReferences: AlcoholTobaccoOrDrugUseOrReferences? = nil, contests: Contests? = nil, isGamblingAndContests: Bool? = nil, isGambling: Bool? = nil, gamblingSimulated: GamblingSimulated? = nil, kidsAgeBand: KidsAgeBand? = nil, isLootBox: Bool? = nil, medicalOrTreatmentInformation: MedicalOrTreatmentInformation? = nil, profanityOrCrudeHumor: ProfanityOrCrudeHumor? = nil, sexualContentGraphicAndNudity: SexualContentGraphicAndNudity? = nil, sexualContentOrNudity: SexualContentOrNudity? = nil, horrorOrFearThemes: HorrorOrFearThemes? = nil, matureOrSuggestiveThemes: MatureOrSuggestiveThemes? = nil, isUnrestrictedWebAccess: Bool? = nil, violenceCartoonOrFantasy: ViolenceCartoonOrFantasy? = nil, violenceRealisticProlongedGraphicOrSadistic: ViolenceRealisticProlongedGraphicOrSadistic? = nil, violenceRealistic: ViolenceRealistic? = nil, ageRatingOverride: AgeRatingOverride? = nil, koreaAgeRatingOverride: KoreaAgeRatingOverride? = nil, isSeventeenPlus: Bool? = nil) {
+		public init(alcoholTobaccoOrDrugUseOrReferences: AlcoholTobaccoOrDrugUseOrReferences? = nil, contests: Contests? = nil, isGambling: Bool? = nil, gamblingSimulated: GamblingSimulated? = nil, kidsAgeBand: KidsAgeBand? = nil, isLootBox: Bool? = nil, medicalOrTreatmentInformation: MedicalOrTreatmentInformation? = nil, profanityOrCrudeHumor: ProfanityOrCrudeHumor? = nil, sexualContentGraphicAndNudity: SexualContentGraphicAndNudity? = nil, sexualContentOrNudity: SexualContentOrNudity? = nil, horrorOrFearThemes: HorrorOrFearThemes? = nil, matureOrSuggestiveThemes: MatureOrSuggestiveThemes? = nil, isUnrestrictedWebAccess: Bool? = nil, violenceCartoonOrFantasy: ViolenceCartoonOrFantasy? = nil, violenceRealisticProlongedGraphicOrSadistic: ViolenceRealisticProlongedGraphicOrSadistic? = nil, violenceRealistic: ViolenceRealistic? = nil, ageRatingOverride: AgeRatingOverride? = nil, koreaAgeRatingOverride: KoreaAgeRatingOverride? = nil) {
 			self.alcoholTobaccoOrDrugUseOrReferences = alcoholTobaccoOrDrugUseOrReferences
 			self.contests = contests
-			self.isGamblingAndContests = isGamblingAndContests
 			self.isGambling = isGambling
 			self.gamblingSimulated = gamblingSimulated
 			self.kidsAgeBand = kidsAgeBand
@@ -141,14 +112,12 @@ public struct AgeRatingDeclaration: Codable, Identifiable {
 			self.violenceRealistic = violenceRealistic
 			self.ageRatingOverride = ageRatingOverride
 			self.koreaAgeRatingOverride = koreaAgeRatingOverride
-			self.isSeventeenPlus = isSeventeenPlus
 		}
 
 		public init(from decoder: Decoder) throws {
 			let values = try decoder.container(keyedBy: StringCodingKey.self)
 			self.alcoholTobaccoOrDrugUseOrReferences = try values.decodeIfPresent(AlcoholTobaccoOrDrugUseOrReferences.self, forKey: "alcoholTobaccoOrDrugUseOrReferences")
 			self.contests = try values.decodeIfPresent(Contests.self, forKey: "contests")
-			self.isGamblingAndContests = try values.decodeIfPresent(Bool.self, forKey: "gamblingAndContests")
 			self.isGambling = try values.decodeIfPresent(Bool.self, forKey: "gambling")
 			self.gamblingSimulated = try values.decodeIfPresent(GamblingSimulated.self, forKey: "gamblingSimulated")
 			self.kidsAgeBand = try values.decodeIfPresent(KidsAgeBand.self, forKey: "kidsAgeBand")
@@ -165,14 +134,12 @@ public struct AgeRatingDeclaration: Codable, Identifiable {
 			self.violenceRealistic = try values.decodeIfPresent(ViolenceRealistic.self, forKey: "violenceRealistic")
 			self.ageRatingOverride = try values.decodeIfPresent(AgeRatingOverride.self, forKey: "ageRatingOverride")
 			self.koreaAgeRatingOverride = try values.decodeIfPresent(KoreaAgeRatingOverride.self, forKey: "koreaAgeRatingOverride")
-			self.isSeventeenPlus = try values.decodeIfPresent(Bool.self, forKey: "seventeenPlus")
 		}
 
 		public func encode(to encoder: Encoder) throws {
 			var values = encoder.container(keyedBy: StringCodingKey.self)
 			try values.encodeIfPresent(alcoholTobaccoOrDrugUseOrReferences, forKey: "alcoholTobaccoOrDrugUseOrReferences")
 			try values.encodeIfPresent(contests, forKey: "contests")
-			try values.encodeIfPresent(isGamblingAndContests, forKey: "gamblingAndContests")
 			try values.encodeIfPresent(isGambling, forKey: "gambling")
 			try values.encodeIfPresent(gamblingSimulated, forKey: "gamblingSimulated")
 			try values.encodeIfPresent(kidsAgeBand, forKey: "kidsAgeBand")
@@ -189,7 +156,6 @@ public struct AgeRatingDeclaration: Codable, Identifiable {
 			try values.encodeIfPresent(violenceRealistic, forKey: "violenceRealistic")
 			try values.encodeIfPresent(ageRatingOverride, forKey: "ageRatingOverride")
 			try values.encodeIfPresent(koreaAgeRatingOverride, forKey: "koreaAgeRatingOverride")
-			try values.encodeIfPresent(isSeventeenPlus, forKey: "seventeenPlus")
 		}
 	}
 

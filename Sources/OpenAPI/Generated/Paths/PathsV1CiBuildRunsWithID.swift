@@ -53,6 +53,7 @@ extension APIEndpoint.V1.CiBuildRuns {
 				case minOsVersion
 				case lsMinimumSystemVersion
 				case computedMinMacOsVersion
+				case computedMinVisionOsVersion
 				case iconAssetToken
 				case processingState
 				case buildAudienceType

@@ -8,7 +8,7 @@ public struct ReviewSubmissionCreateRequest: Codable {
 
 	public struct Data: Codable {
 		public var type: `Type`
-		public var attributes: Attributes
+		public var attributes: Attributes?
 		public var relationships: Relationships
 
 		public enum `Type`: String, Codable, CaseIterable {
@@ -16,20 +16,20 @@ public struct ReviewSubmissionCreateRequest: Codable {
 		}
 
 		public struct Attributes: Codable {
-			public var platform: Platform
+			public var platform: Platform?
 
-			public init(platform: Platform) {
+			public init(platform: Platform? = nil) {
 				self.platform = platform
 			}
 
 			public init(from decoder: Decoder) throws {
 				let values = try decoder.container(keyedBy: StringCodingKey.self)
-				self.platform = try values.decode(Platform.self, forKey: "platform")
+				self.platform = try values.decodeIfPresent(Platform.self, forKey: "platform")
 			}
 
 			public func encode(to encoder: Encoder) throws {
 				var values = encoder.container(keyedBy: StringCodingKey.self)
-				try values.encode(platform, forKey: "platform")
+				try values.encodeIfPresent(platform, forKey: "platform")
 			}
 		}
 
@@ -95,7 +95,7 @@ public struct ReviewSubmissionCreateRequest: Codable {
 			}
 		}
 
-		public init(type: `Type`, attributes: Attributes, relationships: Relationships) {
+		public init(type: `Type`, attributes: Attributes? = nil, relationships: Relationships) {
 			self.type = type
 			self.attributes = attributes
 			self.relationships = relationships
@@ -104,14 +104,14 @@ public struct ReviewSubmissionCreateRequest: Codable {
 		public init(from decoder: Decoder) throws {
 			let values = try decoder.container(keyedBy: StringCodingKey.self)
 			self.type = try values.decode(`Type`.self, forKey: "type")
-			self.attributes = try values.decode(Attributes.self, forKey: "attributes")
+			self.attributes = try values.decodeIfPresent(Attributes.self, forKey: "attributes")
 			self.relationships = try values.decode(Relationships.self, forKey: "relationships")
 		}
 
 		public func encode(to encoder: Encoder) throws {
 			var values = encoder.container(keyedBy: StringCodingKey.self)
 			try values.encode(type, forKey: "type")
-			try values.encode(attributes, forKey: "attributes")
+			try values.encodeIfPresent(attributes, forKey: "attributes")
 			try values.encode(relationships, forKey: "relationships")
 		}
 	}

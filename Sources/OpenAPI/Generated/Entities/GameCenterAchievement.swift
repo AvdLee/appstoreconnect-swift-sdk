@@ -21,14 +21,16 @@ public struct GameCenterAchievement: Codable, Identifiable {
 		public var isShowBeforeEarned: Bool?
 		public var isRepeatable: Bool?
 		public var isArchived: Bool?
+		public var activityProperties: [String: String]?
 
-		public init(referenceName: String? = nil, vendorIdentifier: String? = nil, points: Int? = nil, isShowBeforeEarned: Bool? = nil, isRepeatable: Bool? = nil, isArchived: Bool? = nil) {
+		public init(referenceName: String? = nil, vendorIdentifier: String? = nil, points: Int? = nil, isShowBeforeEarned: Bool? = nil, isRepeatable: Bool? = nil, isArchived: Bool? = nil, activityProperties: [String: String]? = nil) {
 			self.referenceName = referenceName
 			self.vendorIdentifier = vendorIdentifier
 			self.points = points
 			self.isShowBeforeEarned = isShowBeforeEarned
 			self.isRepeatable = isRepeatable
 			self.isArchived = isArchived
+			self.activityProperties = activityProperties
 		}
 
 		public init(from decoder: Decoder) throws {
@@ -39,6 +41,7 @@ public struct GameCenterAchievement: Codable, Identifiable {
 			self.isShowBeforeEarned = try values.decodeIfPresent(Bool.self, forKey: "showBeforeEarned")
 			self.isRepeatable = try values.decodeIfPresent(Bool.self, forKey: "repeatable")
 			self.isArchived = try values.decodeIfPresent(Bool.self, forKey: "archived")
+			self.activityProperties = try values.decodeIfPresent([String: String].self, forKey: "activityProperties")
 		}
 
 		public func encode(to encoder: Encoder) throws {
@@ -49,6 +52,7 @@ public struct GameCenterAchievement: Codable, Identifiable {
 			try values.encodeIfPresent(isShowBeforeEarned, forKey: "showBeforeEarned")
 			try values.encodeIfPresent(isRepeatable, forKey: "repeatable")
 			try values.encodeIfPresent(isArchived, forKey: "archived")
+			try values.encodeIfPresent(activityProperties, forKey: "activityProperties")
 		}
 	}
 
@@ -59,6 +63,7 @@ public struct GameCenterAchievement: Codable, Identifiable {
 		public var groupAchievement: GroupAchievement?
 		public var localizations: Localizations?
 		public var releases: Releases?
+		public var activity: Activity?
 
 		public struct GameCenterDetail: Codable {
 			public var data: Data?
@@ -301,12 +306,61 @@ public struct GameCenterAchievement: Codable, Identifiable {
 			}
 		}
 
-		public init(gameCenterDetail: GameCenterDetail? = nil, gameCenterGroup: GameCenterGroup? = nil, groupAchievement: GroupAchievement? = nil, localizations: Localizations? = nil, releases: Releases? = nil) {
+		public struct Activity: Codable {
+			public var links: RelationshipLinks?
+			public var data: Data?
+
+			public struct Data: Codable, Identifiable {
+				public var type: `Type`
+				public var id: String
+
+				public enum `Type`: String, Codable, CaseIterable {
+					case gameCenterActivities
+				}
+
+				public init(type: `Type`, id: String) {
+					self.type = type
+					self.id = id
+				}
+
+				public init(from decoder: Decoder) throws {
+					let values = try decoder.container(keyedBy: StringCodingKey.self)
+					self.type = try values.decode(`Type`.self, forKey: "type")
+					self.id = try values.decode(String.self, forKey: "id")
+				}
+
+				public func encode(to encoder: Encoder) throws {
+					var values = encoder.container(keyedBy: StringCodingKey.self)
+					try values.encode(type, forKey: "type")
+					try values.encode(id, forKey: "id")
+				}
+			}
+
+			public init(links: RelationshipLinks? = nil, data: Data? = nil) {
+				self.links = links
+				self.data = data
+			}
+
+			public init(from decoder: Decoder) throws {
+				let values = try decoder.container(keyedBy: StringCodingKey.self)
+				self.links = try values.decodeIfPresent(RelationshipLinks.self, forKey: "links")
+				self.data = try values.decodeIfPresent(Data.self, forKey: "data")
+			}
+
+			public func encode(to encoder: Encoder) throws {
+				var values = encoder.container(keyedBy: StringCodingKey.self)
+				try values.encodeIfPresent(links, forKey: "links")
+				try values.encodeIfPresent(data, forKey: "data")
+			}
+		}
+
+		public init(gameCenterDetail: GameCenterDetail? = nil, gameCenterGroup: GameCenterGroup? = nil, groupAchievement: GroupAchievement? = nil, localizations: Localizations? = nil, releases: Releases? = nil, activity: Activity? = nil) {
 			self.gameCenterDetail = gameCenterDetail
 			self.gameCenterGroup = gameCenterGroup
 			self.groupAchievement = groupAchievement
 			self.localizations = localizations
 			self.releases = releases
+			self.activity = activity
 		}
 
 		public init(from decoder: Decoder) throws {
@@ -316,6 +370,7 @@ public struct GameCenterAchievement: Codable, Identifiable {
 			self.groupAchievement = try values.decodeIfPresent(GroupAchievement.self, forKey: "groupAchievement")
 			self.localizations = try values.decodeIfPresent(Localizations.self, forKey: "localizations")
 			self.releases = try values.decodeIfPresent(Releases.self, forKey: "releases")
+			self.activity = try values.decodeIfPresent(Activity.self, forKey: "activity")
 		}
 
 		public func encode(to encoder: Encoder) throws {
@@ -325,6 +380,7 @@ public struct GameCenterAchievement: Codable, Identifiable {
 			try values.encodeIfPresent(groupAchievement, forKey: "groupAchievement")
 			try values.encodeIfPresent(localizations, forKey: "localizations")
 			try values.encodeIfPresent(releases, forKey: "releases")
+			try values.encodeIfPresent(activity, forKey: "activity")
 		}
 	}
 

@@ -16,4 +16,5 @@ public enum ExternalBetaState: String, Codable, CaseIterable {
 	case inBetaReview = "IN_BETA_REVIEW"
 	case betaRejected = "BETA_REJECTED"
 	case betaApproved = "BETA_APPROVED"
+	case notApplicable = "NOT_APPLICABLE"
 }

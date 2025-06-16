@@ -15,36 +15,36 @@ public struct SubscriptionPromotionalOffer: Codable, Identifiable {
 	}
 
 	public struct Attributes: Codable {
-		public var name: String?
-		public var offerCode: String?
 		public var duration: SubscriptionOfferDuration?
-		public var offerMode: SubscriptionOfferMode?
+		public var name: String?
 		public var numberOfPeriods: Int?
+		public var offerCode: String?
+		public var offerMode: SubscriptionOfferMode?
 
-		public init(name: String? = nil, offerCode: String? = nil, duration: SubscriptionOfferDuration? = nil, offerMode: SubscriptionOfferMode? = nil, numberOfPeriods: Int? = nil) {
-			self.name = name
-			self.offerCode = offerCode
+		public init(duration: SubscriptionOfferDuration? = nil, name: String? = nil, numberOfPeriods: Int? = nil, offerCode: String? = nil, offerMode: SubscriptionOfferMode? = nil) {
 			self.duration = duration
-			self.offerMode = offerMode
+			self.name = name
 			self.numberOfPeriods = numberOfPeriods
+			self.offerCode = offerCode
+			self.offerMode = offerMode
 		}
 
 		public init(from decoder: Decoder) throws {
 			let values = try decoder.container(keyedBy: StringCodingKey.self)
-			self.name = try values.decodeIfPresent(String.self, forKey: "name")
-			self.offerCode = try values.decodeIfPresent(String.self, forKey: "offerCode")
 			self.duration = try values.decodeIfPresent(SubscriptionOfferDuration.self, forKey: "duration")
-			self.offerMode = try values.decodeIfPresent(SubscriptionOfferMode.self, forKey: "offerMode")
+			self.name = try values.decodeIfPresent(String.self, forKey: "name")
 			self.numberOfPeriods = try values.decodeIfPresent(Int.self, forKey: "numberOfPeriods")
+			self.offerCode = try values.decodeIfPresent(String.self, forKey: "offerCode")
+			self.offerMode = try values.decodeIfPresent(SubscriptionOfferMode.self, forKey: "offerMode")
 		}
 
 		public func encode(to encoder: Encoder) throws {
 			var values = encoder.container(keyedBy: StringCodingKey.self)
-			try values.encodeIfPresent(name, forKey: "name")
-			try values.encodeIfPresent(offerCode, forKey: "offerCode")
 			try values.encodeIfPresent(duration, forKey: "duration")
-			try values.encodeIfPresent(offerMode, forKey: "offerMode")
+			try values.encodeIfPresent(name, forKey: "name")
 			try values.encodeIfPresent(numberOfPeriods, forKey: "numberOfPeriods")
+			try values.encodeIfPresent(offerCode, forKey: "offerCode")
+			try values.encodeIfPresent(offerMode, forKey: "offerMode")
 		}
 	}
 

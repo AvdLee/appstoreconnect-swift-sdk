@@ -18,10 +18,14 @@ public struct AppInfo: Codable, Identifiable {
 		public var appStoreState: AppStoreVersionState?
 		public var state: State?
 		public var appStoreAgeRating: AppStoreAgeRating?
+		/// - warning: Deprecated.
 		public var australiaAgeRating: AustraliaAgeRating?
 		public var brazilAgeRating: BrazilAgeRating?
+		/// - warning: Deprecated.
 		public var brazilAgeRatingV2: BrazilAgeRatingV2?
+		/// - warning: Deprecated.
 		public var franceAgeRating: FranceAgeRating?
+		/// - warning: Deprecated.
 		public var koreaAgeRating: KoreaAgeRating?
 		public var kidsAgeBand: KidsAgeBand?
 
@@ -38,11 +42,13 @@ public struct AppInfo: Codable, Identifiable {
 			case waitingForReview = "WAITING_FOR_REVIEW"
 		}
 
+		@available(*, deprecated, message: "Deprecated")
 		public enum AustraliaAgeRating: String, Codable, CaseIterable {
 			case fifteen = "FIFTEEN"
 			case eighteen = "EIGHTEEN"
 		}
 
+		@available(*, deprecated, message: "Deprecated")
 		public enum BrazilAgeRatingV2: String, Codable, CaseIterable {
 			case selfRatedL = "SELF_RATED_L"
 			case selfRatedTen = "SELF_RATED_TEN"
@@ -58,10 +64,12 @@ public struct AppInfo: Codable, Identifiable {
 			case officialEighteen = "OFFICIAL_EIGHTEEN"
 		}
 
+		@available(*, deprecated, message: "Deprecated")
 		public enum FranceAgeRating: String, Codable, CaseIterable {
 			case eighteen = "EIGHTEEN"
 		}
 
+		@available(*, deprecated, message: "Deprecated")
 		public enum KoreaAgeRating: String, Codable, CaseIterable {
 			case all = "ALL"
 			case twelve = "TWELVE"

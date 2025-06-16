@@ -49,6 +49,7 @@ extension APIEndpoint.V1 {
 				case expirationDate
 				case certificateContent
 				case activated
+				case passTypeID = "passTypeId"
 			}
 
 			public enum Include: String, Codable, CaseIterable {
