@@ -1,4 +1,4 @@
-// swift-tools-version:5.6
+// swift-tools-version:5.9
 import PackageDescription
 
 var dependencies: [Package.Dependency] = [
@@ -21,7 +21,8 @@ let package = Package(
     platforms: [
         .iOS(.v14),
         .macOS(.v11),
-        .tvOS(.v14)
+        .tvOS(.v14),
+        .watchOS(.v9),
     ],
     products: [
         .library(name: "AppStoreConnect-Swift-SDK", targets: ["AppStoreConnect-Swift-SDK"])
