@@ -1,4 +1,4 @@
-// swift-tools-version:5.6
+// swift-tools-version:5.7
 import PackageDescription
 
 var dependencies: [Package.Dependency] = [
@@ -7,8 +7,8 @@ var dependencies: [Package.Dependency] = [
 ]
 
 var targetDependencies: [Target.Dependency] = [
-    .productItem(name: "URLQueryEncoder", package: "URLQueryEncoder"),
-    .productItem(name: "Crypto", package: "swift-crypto")
+    .product(name: "URLQueryEncoder", package: "URLQueryEncoder"),
+    .product(name: "Crypto", package: "swift-crypto")
 ]
 
 #if os(Linux)
@@ -21,7 +21,8 @@ let package = Package(
     platforms: [
         .iOS(.v14),
         .macOS(.v11),
-        .tvOS(.v14)
+        .tvOS(.v14),
+        .watchOS(.v9),
     ],
     products: [
         .library(name: "AppStoreConnect-Swift-SDK", targets: ["AppStoreConnect-Swift-SDK"])
