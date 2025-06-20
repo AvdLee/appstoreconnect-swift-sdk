@@ -7,8 +7,8 @@ var dependencies: [Package.Dependency] = [
 ]
 
 var targetDependencies: [Target.Dependency] = [
-    .productItem(name: "URLQueryEncoder", package: "URLQueryEncoder"),
-    .productItem(name: "Crypto", package: "swift-crypto")
+    .product(name: "URLQueryEncoder", package: "URLQueryEncoder"),
+    .product(name: "Crypto", package: "swift-crypto")
 ]
 
 #if os(Linux)
