@@ -3,7 +3,7 @@ import PackageDescription
 
 var dependencies: [Package.Dependency] = [
     .package(url: "https://github.com/CreateAPI/URLQueryEncoder.git", from: "0.2.0"),
-    .package(url: "https://github.com/apple/swift-crypto.git", from: "2.5.0")
+    .package(url: "https://github.com/apple/swift-crypto.git", from: "3.12.3")
 ]
 
 var targetDependencies: [Target.Dependency] = [
