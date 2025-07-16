@@ -158,7 +158,7 @@ public struct AppStoreVersionUpdateRequest: Codable {
 
 				public func encode(to encoder: Encoder) throws {
 					var values = encoder.container(keyedBy: StringCodingKey.self)
-					try values.encodeIfPresent(data, forKey: "data")
+					try values.encode(data, forKey: "data")
 				}
 			}
 
