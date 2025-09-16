@@ -5,7 +5,7 @@ import PackagePlugin
 struct Plugin: CommandPlugin {
     func performCommand(context: PluginContext, arguments: [String]) async throws {
         let createAPI = try context.tool(named: "create-api")
-        let openAPIDirectory = context.package.directory.appending("Sources", "OpenAPI")
+        let openAPIDirectory = context.package.directory.appending("Sources", "AppStoreConnect-Swift-SDK", "OpenAPI")
 
         let process = Process()
         process.currentDirectoryURL = URL(fileURLWithPath: openAPIDirectory.string)

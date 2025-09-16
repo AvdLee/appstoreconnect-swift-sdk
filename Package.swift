@@ -33,7 +33,6 @@ let package = Package(
         .target(
             name: "AppStoreConnect-Swift-SDK",
             dependencies: targetDependencies,
-            path: "Sources",
             exclude: ["OpenAPI/app_store_connect_api.json"]
         ),
         .binaryTarget(
