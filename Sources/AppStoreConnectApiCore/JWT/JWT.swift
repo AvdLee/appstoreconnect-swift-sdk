@@ -47,7 +47,14 @@ private struct TeamPayload: Codable {
     let issuedAtTime: TimeInterval
 
     /// The required audience which is set to the App Store Connect version.
-    let audience: String = "appstoreconnect-v1"
+    let audience: String
+
+    init(issuerIdentifier: String, expirationTime: TimeInterval, issuedAtTime: TimeInterval, isEnterprise: Bool) {
+        self.issuerIdentifier = issuerIdentifier
+        self.expirationTime = expirationTime
+        self.issuedAtTime = issuedAtTime
+        audience = isEnterprise ? "apple-developer-enterprise-v1" : "appstoreconnect-v1"
+    }
 }
 
 private struct IndividualPayload: Codable {
@@ -116,16 +123,19 @@ public struct JWT: Codable, JWTCreatable {
     /// The token's expiration duration in seconds. Tokens that expire more than 20 minutes in the future are not valid, so set it to a max of 20 minutes.
     private let expireDuration: TimeInterval
 
+    private let isEnterprise: Bool
+
     /// Creates a new JWT Factory to create signed requests for the App Store Connect API.
     ///
     /// - Parameters:
     ///   - keyIdentifier: Your private key ID from App Store Connect (Ex: 2X9R4HXF34)
     ///   - issuerIdentifier: Your issuer identifier from the API Keys page in App Store Connect (Ex: 57246542-96fe-1a63-e053-0824d011072a)
     ///   - expireDuration: The token's expiration duration in seconds. Tokens that expire more than 20 minutes in the future are not valid, so set it to a max of 20 minutes.
-    public init(keyIdentifier: String, issuerIdentifier: String?, expireDuration: TimeInterval) {
+    public init(keyIdentifier: String, issuerIdentifier: String?, expireDuration: TimeInterval, isEnterprise: Bool) {
         header = Header(keyIdentifier: keyIdentifier)
         self.issuerIdentifier = issuerIdentifier
         self.expireDuration = expireDuration
+        self.isEnterprise = isEnterprise
     }
 
     /// Combine the header and the payload as a digest for signing.
@@ -137,7 +147,8 @@ public struct JWT: Codable, JWTCreatable {
             payload = TeamPayload(
                 issuerIdentifier: issuerIdentifier,
                 expirationTime: expirationTime,
-                issuedAtTime: now.timeIntervalSince1970
+                issuedAtTime: now.timeIntervalSince1970,
+                isEnterprise: isEnterprise
             )
         } else {
             payload = IndividualPayload(
