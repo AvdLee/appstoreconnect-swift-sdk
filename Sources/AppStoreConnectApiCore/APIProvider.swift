@@ -154,7 +154,7 @@ public final class APIProvider {
     public enum Error: Swift.Error, CustomDebugStringConvertible, LocalizedError {
         case requestGeneration
         case unknownResponseType
-        case requestFailure(StatusCode, String?, URL?)
+        case requestFailure(StatusCode, CoreErrorResponse?, URL?)
         case decodingError(Swift.Error, Data)
         case downloadError
         case dateDecodingError(String)

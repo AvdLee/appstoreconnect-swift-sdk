@@ -17,7 +17,7 @@ public struct Response<T:Codable>: Codable{
     public let requestURL: URL?
     public let statusCode: Int
     public let data: T?
-    public let errorResponse: String?
+    public let errorResponse: CoreErrorResponse?
     public let rateLimit: RateLimit?
 
     public init(requestURL: URL?, statusCode: StatusCode, rateLimit: RateLimit?, data: T?) {
@@ -27,7 +27,7 @@ public struct Response<T:Codable>: Codable{
         self.data = data
 
         if let data = data as? Data {
-            self.errorResponse = try? APIProvider.jsonDecoder.decode(CoreErrorResponse.self, from: data).description
+            self.errorResponse = try? APIProvider.jsonDecoder.decode(CoreErrorResponse.self, from: data)
         } else {
             self.errorResponse = nil
         }
