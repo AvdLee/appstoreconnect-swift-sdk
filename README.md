@@ -49,26 +49,53 @@ FDFDGgEAMBMGByqGSM49AgEGCCqGSM49AwEHBHkwdwQgPaXyFvZfNydDEjxgjUCUxyGjXcQxiulEdGxo
 
 Copy the contents and remove the whitelines, `-----BEGIN PRIVATE KEY-----` and `-----END PRIVATE KEY-----`.
 
-Use this private key together with the issuer ID and the private key ID to create your configuration file:
+Use this private key together with the issuer ID and the private key ID to create your configuration:
 
+#### Organization Developer Account (Standard):
 ```swift
-let configuration = APIConfiguration(issuerID: "<YOUR ISSUER ID>", privateKeyID: "<YOUR PRIVATE KEY ID>", privateKey: "<YOUR PRIVATE KEY>")
+let configuration = try APIConfiguration(
+    issuerID: "<YOUR ISSUER ID>", 
+    privateKeyID: "<YOUR PRIVATE KEY ID>", 
+    privateKey: "<YOUR PRIVATE KEY>"
+)
 ```
 
-Alternatively you can pass the path to the .p8 file:
-
+#### Individual Developer Account:
 ```swift
-let configuration = APIConfiguration(issuerID: "<YOUR ISSUER ID>", privateKeyID: "<YOUR PRIVATE KEY ID>", privateKeyURL: URL(fileURLWithPath: "~/AuthKey_<YOUR PRIVATE KEY ID>.p8"))
+let configuration = try APIConfiguration(
+    individualPrivateKeyID: "<YOUR PRIVATE KEY ID>", 
+    individualPrivateKey: "<YOUR PRIVATE KEY>"
+)
 ```
 
-Both methods also accept an optional `expirationDuration` parameter that defaults to 20 minutes which is the max duration allowed by the API. In some cases it might be useful to specify a shorter value in seconds to account for possible clock skews:
-
+#### Using .p8 file (Organization):
 ```swift
-APIConfiguration(issuerID: "<YOUR ISSUER ID>", privateKeyID: "<YOUR PRIVATE KEY ID>", privateKey: "<YOUR PRIVATE KEY>", expirationDuration: "<OPTIONAL EXPIRATION DURATION>"))
-APIConfiguration(issuerID: "<YOUR ISSUER ID>", privateKeyID: "<YOUR PRIVATE KEY ID>", privateKeyURL: URL(fileURLWithPath: "~/AuthKey_<YOUR PRIVATE KEY ID>.p8"), expirationDuration: "<OPTIONAL EXPIRATION DURATION>")
+let configuration = try APIConfiguration(
+    issuerID: "<YOUR ISSUER ID>", 
+    privateKeyID: "<YOUR PRIVATE KEY ID>", 
+    privateKeyURL: URL(fileURLWithPath: "~/AuthKey_<YOUR PRIVATE KEY ID>.p8")
+)
 ```
 
-You can even omit the `privateKeyID` as it can be inferred from the name of the .p8 file.
+#### Using .p8 file (Individual):
+```swift
+let configuration = try APIConfiguration(
+    privateKeyURL: URL(fileURLWithPath: "~/AuthKey_<YOUR PRIVATE KEY ID>.p8")
+)
+```
+
+#### Enterprise Account:
+For enterprise accounts, add the `isEnterprise: true` parameter:
+```swift
+let configuration = try APIConfiguration(
+    issuerID: "<YOUR ISSUER ID>", 
+    privateKeyID: "<YOUR PRIVATE KEY ID>", 
+    privateKey: "<YOUR PRIVATE KEY>",
+    isEnterprise: true
+)
+```
+
+All methods also accept an optional `expirationDuration` parameter that defaults to 20 minutes which is the max duration allowed by the API. You can even omit the `privateKeyID` when using file URLs as it can be inferred from the .p8 filename.
 
 #### 3. Create an APIProvider and perform a request
 
@@ -86,6 +113,18 @@ let request = APIEndpoint
 let apps = try await self.provider.request(request).data
 print("Did fetch \(apps.count) apps")
 ```
+
+```swift
+let request = EnterpriseAPIEndpoint
+    .v1
+    .profiles
+    .get(parameters: .init(
+        sort: [.name]
+    ))
+let profiles = try await self.provider.request(request).data
+print("Did fetch \(profiles.count) profile")
+```
+
 
 ### Handling paged responses
 

@@ -6,7 +6,8 @@
 //
 
 import XCTest
-@testable import AppStoreConnect_Swift_SDK
+@testable import AppStoreConnectApiCore
+import AppStoreConnectApi
 import Foundation
 #if canImport(FoundationNetworking)
 import FoundationNetworking
@@ -68,7 +69,7 @@ final class APIProviderTests: XCTestCase {
 
     func testRequestExecutionErrorResponse() throws {
         let expectedURL = URL(string: "https://api.appstoreconnect.apple.com")!
-        let errorResponse = ErrorResponse(errors: [
+        let errorResponse = AppStoreConnectApi.ErrorResponse(errors: [
             .init(
                 id: UUID().uuidString,
                 status: "404",

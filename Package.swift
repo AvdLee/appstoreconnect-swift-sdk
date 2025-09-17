@@ -7,6 +7,7 @@ var dependencies: [Package.Dependency] = [
 ]
 
 var targetDependencies: [Target.Dependency] = [
+    "AppStoreConnectApiCore",
     .product(name: "URLQueryEncoder", package: "URLQueryEncoder"),
     .product(name: "Crypto", package: "swift-crypto")
 ]
@@ -25,13 +26,34 @@ let package = Package(
         .watchOS(.v9),
     ],
     products: [
-        .library(name: "AppStoreConnect-Swift-SDK", targets: ["AppStoreConnect-Swift-SDK"])
+        .library(name: "AppStoreConnect-Swift-SDK", targets: ["AppStoreConnect-Swift-SDK"]),
+        .library(name: "AppStoreConnectApi", targets: ["AppStoreConnectApi"]),
+        .library(name: "AppStoreConnectEnterpriseApi", targets: ["AppStoreConnectEnterpriseApi"]),
     ],
     dependencies: dependencies,
     targets: [
-        .testTarget(name: "AppStoreConnect-Swift-SDK-Tests", dependencies: ["AppStoreConnect-Swift-SDK"], path: "Tests"),
         .target(
             name: "AppStoreConnect-Swift-SDK",
+            dependencies: [
+                "AppStoreConnectApiCore",
+                "AppStoreConnectApi",
+                "AppStoreConnectEnterpriseApi",
+            ]
+        ),
+        .target(
+            name: "AppStoreConnectApiCore",
+            dependencies: [
+                .product(name: "URLQueryEncoder", package: "URLQueryEncoder"),
+                .product(name: "Crypto", package: "swift-crypto"),
+            ]
+        ),
+        .target(
+            name: "AppStoreConnectApi",
+            dependencies: targetDependencies,
+            exclude: ["OpenAPI/app_store_connect_api.json"]
+        ),
+        .target(
+            name: "AppStoreConnectEnterpriseApi",
             dependencies: targetDependencies,
             exclude: ["OpenAPI/app_store_connect_api.json"]
         ),
@@ -54,6 +76,7 @@ let package = Package(
             dependencies: [
                 .target(name: "create-api")
             ]
-        )
+        ),
+        .testTarget(name: "AppStoreConnectApi-Tests", dependencies: ["AppStoreConnectApi"], path: "Tests"),
     ]
 )

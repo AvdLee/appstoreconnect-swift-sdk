@@ -49,7 +49,7 @@ struct AppsListView_Previews: PreviewProvider {
 }
 
 final class AppsListViewModel: ObservableObject {
-    @Published var apps: [AppStoreConnect_Swift_SDK.App] = []
+    @Published var apps: [AppStoreConnectApi.App] = []
 
     /// Go to https://appstoreconnect.apple.com/access/api and create your own key. This is also the page to find the private key ID and the issuer ID.
     /// Download the private key and open it in a text editor. Remove the enters and copy the contents over to the private key parameter.
@@ -89,11 +89,7 @@ final class AppsListViewModel: ObservableObject {
                 print(try await self.provider.request(requestWithError).data)
             } catch APIProvider.Error.requestFailure(let statusCode, let errorResponse, _) {
                 print("Request failed with statuscode: \(statusCode) and the following errors:")
-                errorResponse?.errors?.forEach({ error in
-                    print("Error code: \(error.code)")
-                    print("Error title: \(error.title)")
-                    print("Error detail: \(error.detail)")
-                })
+                print(errorResponse ?? "No error response")
             } catch {
                 print("Something went wrong fetching the apps: \(error.localizedDescription)")
             }
@@ -101,7 +97,7 @@ final class AppsListViewModel: ObservableObject {
     }
 
     @MainActor
-    private func updateApps(to apps: [AppStoreConnect_Swift_SDK.App]) {
+    private func updateApps(to apps: [AppStoreConnectApi.App]) {
         self.apps = apps
     }
 }
