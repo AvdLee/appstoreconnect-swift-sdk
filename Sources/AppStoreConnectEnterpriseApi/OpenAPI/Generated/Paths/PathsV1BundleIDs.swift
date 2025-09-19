@@ -5,181 +5,125 @@ import Foundation
 import AppStoreConnectApiCore
 import URLQueryEncoder
 
-extension EnterpriseAPIEndpoint.V1 {
-	public var bundleIDs: BundleIDs {
-		BundleIDs(path: path + "/bundleIds")
+extension EnterpriseAPIEndpoint {
+	public static var bundleIDs: BundleIDs {
+		BundleIDs(path: "/v1/bundleIds")
 	}
 
 	public struct BundleIDs {
 		/// Path: `/v1/bundleIds`
 		public let path: String
 
+		/// List Bundle Ids
 		public func get(parameters: GetParameters? = nil) -> Request<AppStoreConnectEnterpriseApi.BundleIDsResponse> {
-			Request(path: path, method: "GET", query: parameters?.asQuery, id: "bundleIds_getCollection")
+			Request(path: path, method: "GET", query: parameters?.asQuery, id: "bundleIds-get_collection")
 		}
 
 		public struct GetParameters {
+			public var filterIdentifier: [String]?
 			public var filterName: [String]?
 			public var filterPlatform: [FilterPlatform]?
-			public var filterIdentifier: [String]?
 			public var filterSeedID: [String]?
 			public var filterID: [String]?
 			public var sort: [Sort]?
 			public var fieldsBundleIDs: [FieldsBundleIDs]?
-			public var fieldsProfiles: [FieldsProfiles]?
-			public var fieldsBundleIDCapabilities: [FieldsBundleIDCapabilities]?
-			public var fieldsApps: [FieldsApps]?
 			public var limit: Int?
 			public var include: [Include]?
+			public var fieldsBundleIDCapabilities: [FieldsBundleIDCapabilities]?
+			public var fieldsProfiles: [FieldsProfiles]?
 			public var limitBundleIDCapabilities: Int?
 			public var limitProfiles: Int?
 
 			public enum FilterPlatform: String, Codable, CaseIterable {
 				case ios = "IOS"
 				case macOs = "MAC_OS"
-				case universal = "UNIVERSAL"
 			}
 
 			public enum Sort: String, Codable, CaseIterable {
+				case id
+				case minusid = "-id"
+				case identifier
+				case minusidentifier = "-identifier"
 				case name
 				case minusname = "-name"
 				case platform
 				case minusplatform = "-platform"
-				case identifier
-				case minusidentifier = "-identifier"
 				case seedID = "seedId"
 				case minusseedID = "-seedId"
-				case id
-				case minusid = "-id"
 			}
 
 			public enum FieldsBundleIDs: String, Codable, CaseIterable {
+				case bundleIDCapabilities = "bundleIdCapabilities"
+				case identifier
 				case name
 				case platform
-				case identifier
-				case seedID = "seedId"
 				case profiles
-				case bundleIDCapabilities = "bundleIdCapabilities"
-				case app
+				case seedID = "seedId"
 			}
 
-			public enum FieldsProfiles: String, Codable, CaseIterable {
-				case name
-				case platform
-				case profileType
-				case profileState
-				case profileContent
-				case uuid
-				case createdDate
-				case expirationDate
-				case bundleID = "bundleId"
-				case devices
-				case certificates
+			public enum Include: String, Codable, CaseIterable {
+				case bundleIDCapabilities = "bundleIdCapabilities"
+				case profiles
 			}
 
 			public enum FieldsBundleIDCapabilities: String, Codable, CaseIterable {
+				case bundleID = "bundleId"
 				case capabilityType
 				case settings
 			}
 
-			public enum FieldsApps: String, Codable, CaseIterable {
-				case accessibilityURL = "accessibilityUrl"
-				case name
+			public enum FieldsProfiles: String, Codable, CaseIterable {
 				case bundleID = "bundleId"
-				case sku
-				case primaryLocale
-				case isOrEverWasMadeForKids
-				case subscriptionStatusURL = "subscriptionStatusUrl"
-				case subscriptionStatusURLVersion = "subscriptionStatusUrlVersion"
-				case subscriptionStatusURLForSandbox = "subscriptionStatusUrlForSandbox"
-				case subscriptionStatusURLVersionForSandbox = "subscriptionStatusUrlVersionForSandbox"
-				case contentRightsDeclaration
-				case streamlinedPurchasingEnabled
-				case accessibilityDeclarations
-				case appEncryptionDeclarations
-				case ciProduct
-				case betaTesters
-				case betaGroups
-				case appStoreVersions
-				case preReleaseVersions
-				case betaAppLocalizations
-				case builds
-				case betaLicenseAgreement
-				case betaAppReviewDetail
-				case appInfos
-				case appClips
-				case appPricePoints
-				case endUserLicenseAgreement
-				case appPriceSchedule
-				case appAvailabilityV2
-				case inAppPurchases
-				case subscriptionGroups
-				case gameCenterEnabledVersions
-				case perfPowerMetrics
-				case appCustomProductPages
-				case inAppPurchasesV2
-				case promotedPurchases
-				case appEvents
-				case reviewSubmissions
-				case subscriptionGracePeriod
-				case customerReviews
-				case customerReviewSummarizations
-				case gameCenterDetail
-				case appStoreVersionExperimentsV2
-				case alternativeDistributionKey
-				case analyticsReportRequests
-				case marketplaceSearchDetail
-				case backgroundAssets
-				case betaFeedbackScreenshotSubmissions
-				case betaFeedbackCrashSubmissions
-				case webhooks
+				case certificates
+				case createdDate
+				case devices
+				case expirationDate
+				case name
+				case platform
+				case profileContent
+				case profileState
+				case profileType
+				case uuid
 			}
 
-			public enum Include: String, Codable, CaseIterable {
-				case profiles
-				case bundleIDCapabilities = "bundleIdCapabilities"
-				case app
-			}
-
-			public init(filterName: [String]? = nil, filterPlatform: [FilterPlatform]? = nil, filterIdentifier: [String]? = nil, filterSeedID: [String]? = nil, filterID: [String]? = nil, sort: [Sort]? = nil, fieldsBundleIDs: [FieldsBundleIDs]? = nil, fieldsProfiles: [FieldsProfiles]? = nil, fieldsBundleIDCapabilities: [FieldsBundleIDCapabilities]? = nil, fieldsApps: [FieldsApps]? = nil, limit: Int? = nil, include: [Include]? = nil, limitBundleIDCapabilities: Int? = nil, limitProfiles: Int? = nil) {
+			public init(filterIdentifier: [String]? = nil, filterName: [String]? = nil, filterPlatform: [FilterPlatform]? = nil, filterSeedID: [String]? = nil, filterID: [String]? = nil, sort: [Sort]? = nil, fieldsBundleIDs: [FieldsBundleIDs]? = nil, limit: Int? = nil, include: [Include]? = nil, fieldsBundleIDCapabilities: [FieldsBundleIDCapabilities]? = nil, fieldsProfiles: [FieldsProfiles]? = nil, limitBundleIDCapabilities: Int? = nil, limitProfiles: Int? = nil) {
+				self.filterIdentifier = filterIdentifier
 				self.filterName = filterName
 				self.filterPlatform = filterPlatform
-				self.filterIdentifier = filterIdentifier
 				self.filterSeedID = filterSeedID
 				self.filterID = filterID
 				self.sort = sort
 				self.fieldsBundleIDs = fieldsBundleIDs
-				self.fieldsProfiles = fieldsProfiles
-				self.fieldsBundleIDCapabilities = fieldsBundleIDCapabilities
-				self.fieldsApps = fieldsApps
 				self.limit = limit
 				self.include = include
+				self.fieldsBundleIDCapabilities = fieldsBundleIDCapabilities
+				self.fieldsProfiles = fieldsProfiles
 				self.limitBundleIDCapabilities = limitBundleIDCapabilities
 				self.limitProfiles = limitProfiles
 			}
 
 			public var asQuery: [(String, String?)] {
 				let encoder = URLQueryEncoder(explode: false)
+				encoder.encode(filterIdentifier, forKey: "filter[identifier]")
 				encoder.encode(filterName, forKey: "filter[name]")
 				encoder.encode(filterPlatform, forKey: "filter[platform]")
-				encoder.encode(filterIdentifier, forKey: "filter[identifier]")
 				encoder.encode(filterSeedID, forKey: "filter[seedId]")
 				encoder.encode(filterID, forKey: "filter[id]")
 				encoder.encode(sort, forKey: "sort")
 				encoder.encode(fieldsBundleIDs, forKey: "fields[bundleIds]")
-				encoder.encode(fieldsProfiles, forKey: "fields[profiles]")
-				encoder.encode(fieldsBundleIDCapabilities, forKey: "fields[bundleIdCapabilities]")
-				encoder.encode(fieldsApps, forKey: "fields[apps]")
 				encoder.encode(limit, forKey: "limit")
 				encoder.encode(include, forKey: "include")
+				encoder.encode(fieldsBundleIDCapabilities, forKey: "fields[bundleIdCapabilities]")
+				encoder.encode(fieldsProfiles, forKey: "fields[profiles]")
 				encoder.encode(limitBundleIDCapabilities, forKey: "limit[bundleIdCapabilities]")
 				encoder.encode(limitProfiles, forKey: "limit[profiles]")
 				return encoder.items
 			}
 		}
 
+		/// Register a New Bundle ID
 		public func post(_ body: AppStoreConnectEnterpriseApi.BundleIDCreateRequest) -> Request<AppStoreConnectEnterpriseApi.BundleIDResponse> {
-			Request(path: path, method: "POST", body: body, id: "bundleIds_createInstance")
+			Request(path: path, method: "POST", body: body, id: "bundleIds-create_instance")
 		}
 	}
 }

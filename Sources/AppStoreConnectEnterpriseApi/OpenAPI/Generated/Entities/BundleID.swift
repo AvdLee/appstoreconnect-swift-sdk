@@ -47,7 +47,6 @@ public struct BundleID: Codable, Identifiable {
 	public struct Relationships: Codable {
 		public var profiles: Profiles?
 		public var bundleIDCapabilities: BundleIDCapabilities?
-		public var app: App?
 
 		public struct Profiles: Codable {
 			public var links: RelationshipLinks?
@@ -153,72 +152,21 @@ public struct BundleID: Codable, Identifiable {
 			}
 		}
 
-		public struct App: Codable {
-			public var links: RelationshipLinks?
-			public var data: Data?
-
-			public struct Data: Codable, Identifiable {
-				public var type: `Type`
-				public var id: String
-
-				public enum `Type`: String, Codable, CaseIterable {
-					case apps
-				}
-
-				public init(type: `Type`, id: String) {
-					self.type = type
-					self.id = id
-				}
-
-				public init(from decoder: Decoder) throws {
-					let values = try decoder.container(keyedBy: StringCodingKey.self)
-					self.type = try values.decode(`Type`.self, forKey: "type")
-					self.id = try values.decode(String.self, forKey: "id")
-				}
-
-				public func encode(to encoder: Encoder) throws {
-					var values = encoder.container(keyedBy: StringCodingKey.self)
-					try values.encode(type, forKey: "type")
-					try values.encode(id, forKey: "id")
-				}
-			}
-
-			public init(links: RelationshipLinks? = nil, data: Data? = nil) {
-				self.links = links
-				self.data = data
-			}
-
-			public init(from decoder: Decoder) throws {
-				let values = try decoder.container(keyedBy: StringCodingKey.self)
-				self.links = try values.decodeIfPresent(RelationshipLinks.self, forKey: "links")
-				self.data = try values.decodeIfPresent(Data.self, forKey: "data")
-			}
-
-			public func encode(to encoder: Encoder) throws {
-				var values = encoder.container(keyedBy: StringCodingKey.self)
-				try values.encodeIfPresent(links, forKey: "links")
-				try values.encodeIfPresent(data, forKey: "data")
-			}
-		}
-
-		public init(profiles: Profiles? = nil, bundleIDCapabilities: BundleIDCapabilities? = nil, app: App? = nil) {
+		public init(profiles: Profiles? = nil, bundleIDCapabilities: BundleIDCapabilities? = nil) {
 			self.profiles = profiles
 			self.bundleIDCapabilities = bundleIDCapabilities
-			self.app = app
 		}
 
 		public init(from decoder: Decoder) throws {
 			let values = try decoder.container(keyedBy: StringCodingKey.self)
 			self.profiles = try values.decodeIfPresent(Profiles.self, forKey: "profiles")
 			self.bundleIDCapabilities = try values.decodeIfPresent(BundleIDCapabilities.self, forKey: "bundleIdCapabilities")
-			self.app = try values.decodeIfPresent(App.self, forKey: "app")
 		}
 
 		public func encode(to encoder: Encoder) throws {
 			var values = encoder.container(keyedBy: StringCodingKey.self)
 			try values.encodeIfPresent(profiles, forKey: "profiles")
 			try values.encodeIfPresent(bundleIDCapabilities, forKey: "bundleIdCapabilities")
-			try values.encodeIfPresent(app, forKey: "app")
 		}
 	}
 

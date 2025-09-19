@@ -5,90 +5,92 @@ import Foundation
 import AppStoreConnectApiCore
 import URLQueryEncoder
 
-extension EnterpriseAPIEndpoint.V1 {
-	public var passTypeIDs: PassTypeIDs {
-		PassTypeIDs(path: path + "/passTypeIds")
+extension EnterpriseAPIEndpoint {
+	public static var passTypeIDs: PassTypeIDs {
+		PassTypeIDs(path: "/v1/passTypeIds")
 	}
 
 	public struct PassTypeIDs {
 		/// Path: `/v1/passTypeIds`
 		public let path: String
 
+		/// List Pass Type Ids
 		public func get(parameters: GetParameters? = nil) -> Request<AppStoreConnectEnterpriseApi.PassTypeIDsResponse> {
-			Request(path: path, method: "GET", query: parameters?.asQuery, id: "passTypeIds_getCollection")
+			Request(path: path, method: "GET", query: parameters?.asQuery, id: "passTypeIds-get_collection")
 		}
 
 		public struct GetParameters {
-			public var filterName: [String]?
 			public var filterIdentifier: [String]?
+			public var filterName: [String]?
 			public var filterID: [String]?
 			public var sort: [Sort]?
 			public var fieldsPassTypeIDs: [FieldsPassTypeIDs]?
-			public var fieldsCertificates: [FieldsCertificates]?
 			public var limit: Int?
 			public var include: [Include]?
+			public var fieldsCertificates: [FieldsCertificates]?
 			public var limitCertificates: Int?
 
 			public enum Sort: String, Codable, CaseIterable {
-				case name
-				case minusname = "-name"
-				case identifier
-				case minusidentifier = "-identifier"
 				case id
 				case minusid = "-id"
+				case identifier
+				case minusidentifier = "-identifier"
+				case name
+				case minusname = "-name"
 			}
 
 			public enum FieldsPassTypeIDs: String, Codable, CaseIterable {
-				case name
-				case identifier
 				case certificates
-			}
-
-			public enum FieldsCertificates: String, Codable, CaseIterable {
+				case identifier
 				case name
-				case certificateType
-				case displayName
-				case serialNumber
-				case platform
-				case expirationDate
-				case certificateContent
-				case activated
-				case passTypeID = "passTypeId"
 			}
 
 			public enum Include: String, Codable, CaseIterable {
 				case certificates
 			}
 
-			public init(filterName: [String]? = nil, filterIdentifier: [String]? = nil, filterID: [String]? = nil, sort: [Sort]? = nil, fieldsPassTypeIDs: [FieldsPassTypeIDs]? = nil, fieldsCertificates: [FieldsCertificates]? = nil, limit: Int? = nil, include: [Include]? = nil, limitCertificates: Int? = nil) {
-				self.filterName = filterName
+			public enum FieldsCertificates: String, Codable, CaseIterable {
+				case certificateContent
+				case certificateType
+				case csrContent
+				case displayName
+				case expirationDate
+				case name
+				case passTypeID = "passTypeId"
+				case platform
+				case serialNumber
+			}
+
+			public init(filterIdentifier: [String]? = nil, filterName: [String]? = nil, filterID: [String]? = nil, sort: [Sort]? = nil, fieldsPassTypeIDs: [FieldsPassTypeIDs]? = nil, limit: Int? = nil, include: [Include]? = nil, fieldsCertificates: [FieldsCertificates]? = nil, limitCertificates: Int? = nil) {
 				self.filterIdentifier = filterIdentifier
+				self.filterName = filterName
 				self.filterID = filterID
 				self.sort = sort
 				self.fieldsPassTypeIDs = fieldsPassTypeIDs
-				self.fieldsCertificates = fieldsCertificates
 				self.limit = limit
 				self.include = include
+				self.fieldsCertificates = fieldsCertificates
 				self.limitCertificates = limitCertificates
 			}
 
 			public var asQuery: [(String, String?)] {
 				let encoder = URLQueryEncoder(explode: false)
-				encoder.encode(filterName, forKey: "filter[name]")
 				encoder.encode(filterIdentifier, forKey: "filter[identifier]")
+				encoder.encode(filterName, forKey: "filter[name]")
 				encoder.encode(filterID, forKey: "filter[id]")
 				encoder.encode(sort, forKey: "sort")
 				encoder.encode(fieldsPassTypeIDs, forKey: "fields[passTypeIds]")
-				encoder.encode(fieldsCertificates, forKey: "fields[certificates]")
 				encoder.encode(limit, forKey: "limit")
 				encoder.encode(include, forKey: "include")
+				encoder.encode(fieldsCertificates, forKey: "fields[certificates]")
 				encoder.encode(limitCertificates, forKey: "limit[certificates]")
 				return encoder.items
 			}
 		}
 
+		/// Create a PassTypeId
 		public func post(_ body: AppStoreConnectEnterpriseApi.PassTypeIDCreateRequest) -> Request<AppStoreConnectEnterpriseApi.PassTypeIDResponse> {
-			Request(path: path, method: "POST", body: body, id: "passTypeIds_createInstance")
+			Request(path: path, method: "POST", body: body, id: "passTypeIds-create_instance")
 		}
 	}
 }

@@ -5,24 +5,25 @@ import Foundation
 import AppStoreConnectApiCore
 import URLQueryEncoder
 
-extension EnterpriseAPIEndpoint.V1 {
-	public var devices: Devices {
-		Devices(path: path + "/devices")
+extension EnterpriseAPIEndpoint {
+	public static var devices: Devices {
+		Devices(path: "/v1/devices")
 	}
 
 	public struct Devices {
 		/// Path: `/v1/devices`
 		public let path: String
 
+		/// List Devices
 		public func get(parameters: GetParameters? = nil) -> Request<AppStoreConnectEnterpriseApi.DevicesResponse> {
-			Request(path: path, method: "GET", query: parameters?.asQuery, id: "devices_getCollection")
+			Request(path: path, method: "GET", query: parameters?.asQuery, id: "devices-get_collection")
 		}
 
 		public struct GetParameters {
 			public var filterName: [String]?
 			public var filterPlatform: [FilterPlatform]?
-			public var filterUdid: [String]?
 			public var filterStatus: [FilterStatus]?
+			public var filterUdid: [String]?
 			public var filterID: [String]?
 			public var sort: [Sort]?
 			public var fieldsDevices: [FieldsDevices]?
@@ -31,7 +32,6 @@ extension EnterpriseAPIEndpoint.V1 {
 			public enum FilterPlatform: String, Codable, CaseIterable {
 				case ios = "IOS"
 				case macOs = "MAC_OS"
-				case universal = "UNIVERSAL"
 			}
 
 			public enum FilterStatus: String, Codable, CaseIterable {
@@ -40,33 +40,33 @@ extension EnterpriseAPIEndpoint.V1 {
 			}
 
 			public enum Sort: String, Codable, CaseIterable {
+				case id
+				case minusid = "-id"
 				case name
 				case minusname = "-name"
 				case platform
 				case minusplatform = "-platform"
-				case udid
-				case minusudid = "-udid"
 				case status
 				case minusstatus = "-status"
-				case id
-				case minusid = "-id"
+				case udid
+				case minusudid = "-udid"
 			}
 
 			public enum FieldsDevices: String, Codable, CaseIterable {
+				case addedDate
+				case deviceClass
+				case model
 				case name
 				case platform
-				case udid
-				case deviceClass
 				case status
-				case model
-				case addedDate
+				case udid
 			}
 
-			public init(filterName: [String]? = nil, filterPlatform: [FilterPlatform]? = nil, filterUdid: [String]? = nil, filterStatus: [FilterStatus]? = nil, filterID: [String]? = nil, sort: [Sort]? = nil, fieldsDevices: [FieldsDevices]? = nil, limit: Int? = nil) {
+			public init(filterName: [String]? = nil, filterPlatform: [FilterPlatform]? = nil, filterStatus: [FilterStatus]? = nil, filterUdid: [String]? = nil, filterID: [String]? = nil, sort: [Sort]? = nil, fieldsDevices: [FieldsDevices]? = nil, limit: Int? = nil) {
 				self.filterName = filterName
 				self.filterPlatform = filterPlatform
-				self.filterUdid = filterUdid
 				self.filterStatus = filterStatus
+				self.filterUdid = filterUdid
 				self.filterID = filterID
 				self.sort = sort
 				self.fieldsDevices = fieldsDevices
@@ -77,8 +77,8 @@ extension EnterpriseAPIEndpoint.V1 {
 				let encoder = URLQueryEncoder(explode: false)
 				encoder.encode(filterName, forKey: "filter[name]")
 				encoder.encode(filterPlatform, forKey: "filter[platform]")
-				encoder.encode(filterUdid, forKey: "filter[udid]")
 				encoder.encode(filterStatus, forKey: "filter[status]")
+				encoder.encode(filterUdid, forKey: "filter[udid]")
 				encoder.encode(filterID, forKey: "filter[id]")
 				encoder.encode(sort, forKey: "sort")
 				encoder.encode(fieldsDevices, forKey: "fields[devices]")
@@ -87,8 +87,9 @@ extension EnterpriseAPIEndpoint.V1 {
 			}
 		}
 
+		/// Register a New Device
 		public func post(_ body: AppStoreConnectEnterpriseApi.DeviceCreateRequest) -> Request<AppStoreConnectEnterpriseApi.DeviceResponse> {
-			Request(path: path, method: "POST", body: body, id: "devices_createInstance")
+			Request(path: path, method: "POST", body: body, id: "devices-create_instance")
 		}
 	}
 }

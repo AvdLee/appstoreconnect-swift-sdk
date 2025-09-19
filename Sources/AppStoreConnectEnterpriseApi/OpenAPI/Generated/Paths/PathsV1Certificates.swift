@@ -5,113 +5,108 @@ import Foundation
 import AppStoreConnectApiCore
 import URLQueryEncoder
 
-extension EnterpriseAPIEndpoint.V1 {
-	public var certificates: Certificates {
-		Certificates(path: path + "/certificates")
+extension EnterpriseAPIEndpoint {
+	public static var certificates: Certificates {
+		Certificates(path: "/v1/certificates")
 	}
 
 	public struct Certificates {
 		/// Path: `/v1/certificates`
 		public let path: String
 
+		/// List and Download Certificates
 		public func get(parameters: GetParameters? = nil) -> Request<AppStoreConnectEnterpriseApi.CertificatesResponse> {
-			Request(path: path, method: "GET", query: parameters?.asQuery, id: "certificates_getCollection")
+			Request(path: path, method: "GET", query: parameters?.asQuery, id: "certificates-get_collection")
 		}
 
 		public struct GetParameters {
-			public var filterDisplayName: [String]?
 			public var filterCertificateType: [FilterCertificateType]?
+			public var filterDisplayName: [String]?
 			public var filterSerialNumber: [String]?
 			public var filterID: [String]?
 			public var sort: [Sort]?
 			public var fieldsCertificates: [FieldsCertificates]?
-			public var fieldsPassTypeIDs: [FieldsPassTypeIDs]?
 			public var limit: Int?
 			public var include: [Include]?
+			public var fieldsPassTypeIDs: [FieldsPassTypeIDs]?
 
 			public enum FilterCertificateType: String, Codable, CaseIterable {
-				case applePay = "APPLE_PAY"
-				case applePayMerchantIdentity = "APPLE_PAY_MERCHANT_IDENTITY"
-				case applePayPspIdentity = "APPLE_PAY_PSP_IDENTITY"
-				case applePayRsa = "APPLE_PAY_RSA"
-				case developerIDKext = "DEVELOPER_ID_KEXT"
-				case developerIDKextG2 = "DEVELOPER_ID_KEXT_G2"
-				case developerIDApplication = "DEVELOPER_ID_APPLICATION"
-				case developerIDApplicationG2 = "DEVELOPER_ID_APPLICATION_G2"
-				case development = "DEVELOPMENT"
-				case distribution = "DISTRIBUTION"
-				case identityAccess = "IDENTITY_ACCESS"
 				case iosDevelopment = "IOS_DEVELOPMENT"
 				case iosDistribution = "IOS_DISTRIBUTION"
 				case macAppDistribution = "MAC_APP_DISTRIBUTION"
 				case macInstallerDistribution = "MAC_INSTALLER_DISTRIBUTION"
 				case macAppDevelopment = "MAC_APP_DEVELOPMENT"
+				case developerIDKext = "DEVELOPER_ID_KEXT"
+				case developerIDApplication = "DEVELOPER_ID_APPLICATION"
+				case development = "DEVELOPMENT"
+				case distribution = "DISTRIBUTION"
 				case passTypeID = "PASS_TYPE_ID"
 				case passTypeIDWithNfc = "PASS_TYPE_ID_WITH_NFC"
 			}
 
 			public enum Sort: String, Codable, CaseIterable {
-				case displayName
-				case minusdisplayName = "-displayName"
 				case certificateType
 				case minuscertificateType = "-certificateType"
-				case serialNumber
-				case minusserialNumber = "-serialNumber"
+				case displayName
+				case minusdisplayName = "-displayName"
 				case id
 				case minusid = "-id"
+				case serialNumber
+				case minusserialNumber = "-serialNumber"
 			}
 
 			public enum FieldsCertificates: String, Codable, CaseIterable {
-				case name
-				case certificateType
-				case displayName
-				case serialNumber
-				case platform
-				case expirationDate
 				case certificateContent
-				case activated
-				case passTypeID = "passTypeId"
-			}
-
-			public enum FieldsPassTypeIDs: String, Codable, CaseIterable {
+				case certificateType
+				case csrContent
+				case displayName
+				case expirationDate
 				case name
-				case identifier
-				case certificates
+				case passTypeID = "passTypeId"
+				case platform
+				case serialNumber
 			}
 
 			public enum Include: String, Codable, CaseIterable {
 				case passTypeID = "passTypeId"
 			}
 
-			public init(filterDisplayName: [String]? = nil, filterCertificateType: [FilterCertificateType]? = nil, filterSerialNumber: [String]? = nil, filterID: [String]? = nil, sort: [Sort]? = nil, fieldsCertificates: [FieldsCertificates]? = nil, fieldsPassTypeIDs: [FieldsPassTypeIDs]? = nil, limit: Int? = nil, include: [Include]? = nil) {
-				self.filterDisplayName = filterDisplayName
+			public enum FieldsPassTypeIDs: String, Codable, CaseIterable {
+				case certificates
+				case identifier
+				case name
+			}
+
+			public init(filterCertificateType: [FilterCertificateType]? = nil, filterDisplayName: [String]? = nil, filterSerialNumber: [String]? = nil, filterID: [String]? = nil, sort: [Sort]? = nil, fieldsCertificates: [FieldsCertificates]? = nil, limit: Int? = nil, include: [Include]? = nil, fieldsPassTypeIDs: [FieldsPassTypeIDs]? = nil) {
 				self.filterCertificateType = filterCertificateType
+				self.filterDisplayName = filterDisplayName
 				self.filterSerialNumber = filterSerialNumber
 				self.filterID = filterID
 				self.sort = sort
 				self.fieldsCertificates = fieldsCertificates
-				self.fieldsPassTypeIDs = fieldsPassTypeIDs
 				self.limit = limit
 				self.include = include
+				self.fieldsPassTypeIDs = fieldsPassTypeIDs
 			}
 
 			public var asQuery: [(String, String?)] {
 				let encoder = URLQueryEncoder(explode: false)
-				encoder.encode(filterDisplayName, forKey: "filter[displayName]")
 				encoder.encode(filterCertificateType, forKey: "filter[certificateType]")
+				encoder.encode(filterDisplayName, forKey: "filter[displayName]")
 				encoder.encode(filterSerialNumber, forKey: "filter[serialNumber]")
 				encoder.encode(filterID, forKey: "filter[id]")
 				encoder.encode(sort, forKey: "sort")
 				encoder.encode(fieldsCertificates, forKey: "fields[certificates]")
-				encoder.encode(fieldsPassTypeIDs, forKey: "fields[passTypeIds]")
 				encoder.encode(limit, forKey: "limit")
 				encoder.encode(include, forKey: "include")
+				encoder.encode(fieldsPassTypeIDs, forKey: "fields[passTypeIds]")
 				return encoder.items
 			}
 		}
 
+		/// Create a Certificate
 		public func post(_ body: AppStoreConnectEnterpriseApi.CertificateCreateRequest) -> Request<AppStoreConnectEnterpriseApi.CertificateResponse> {
-			Request(path: path, method: "POST", body: body, id: "certificates_createInstance")
+			Request(path: path, method: "POST", body: body, id: "certificates-create_instance")
 		}
 	}
 }

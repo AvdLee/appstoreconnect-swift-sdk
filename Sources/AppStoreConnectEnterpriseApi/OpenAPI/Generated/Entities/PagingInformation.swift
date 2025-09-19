@@ -9,26 +9,22 @@ public struct PagingInformation: Codable {
 	public struct Paging: Codable {
 		public var total: Int?
 		public var limit: Int
-		public var nextCursor: String?
 
-		public init(total: Int? = nil, limit: Int, nextCursor: String? = nil) {
+		public init(total: Int? = nil, limit: Int) {
 			self.total = total
 			self.limit = limit
-			self.nextCursor = nextCursor
 		}
 
 		public init(from decoder: Decoder) throws {
 			let values = try decoder.container(keyedBy: StringCodingKey.self)
 			self.total = try values.decodeIfPresent(Int.self, forKey: "total")
 			self.limit = try values.decode(Int.self, forKey: "limit")
-			self.nextCursor = try values.decodeIfPresent(String.self, forKey: "nextCursor")
 		}
 
 		public func encode(to encoder: Encoder) throws {
 			var values = encoder.container(keyedBy: StringCodingKey.self)
 			try values.encodeIfPresent(total, forKey: "total")
 			try values.encode(limit, forKey: "limit")
-			try values.encodeIfPresent(nextCursor, forKey: "nextCursor")
 		}
 	}
 

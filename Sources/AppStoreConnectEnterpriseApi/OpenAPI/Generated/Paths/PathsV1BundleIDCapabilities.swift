@@ -5,17 +5,18 @@ import Foundation
 import AppStoreConnectApiCore
 import URLQueryEncoder
 
-extension EnterpriseAPIEndpoint.V1 {
-	public var bundleIDCapabilities: BundleIDCapabilities {
-		BundleIDCapabilities(path: path + "/bundleIdCapabilities")
+extension EnterpriseAPIEndpoint {
+	public static var bundleIDCapabilities: BundleIDCapabilities {
+		BundleIDCapabilities(path: "/v1/bundleIdCapabilities")
 	}
 
 	public struct BundleIDCapabilities {
 		/// Path: `/v1/bundleIdCapabilities`
 		public let path: String
 
+		/// Create a BundleIdCapability
 		public func post(_ body: AppStoreConnectEnterpriseApi.BundleIDCapabilityCreateRequest) -> Request<AppStoreConnectEnterpriseApi.BundleIDCapabilityResponse> {
-			Request(path: path, method: "POST", body: body, id: "bundleIdCapabilities_createInstance")
+			Request(path: path, method: "POST", body: body, id: "bundleIdCapabilities-create_instance")
 		}
 	}
 }

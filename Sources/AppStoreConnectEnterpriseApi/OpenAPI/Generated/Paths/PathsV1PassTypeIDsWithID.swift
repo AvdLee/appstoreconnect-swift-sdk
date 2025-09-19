@@ -5,7 +5,7 @@ import Foundation
 import AppStoreConnectApiCore
 import URLQueryEncoder
 
-extension EnterpriseAPIEndpoint.V1.PassTypeIDs {
+extension EnterpriseAPIEndpoint.PassTypeIDs {
 	public func id(_ id: String) -> WithID {
 		WithID(path: "\(path)/\(id)")
 	}
@@ -14,61 +14,64 @@ extension EnterpriseAPIEndpoint.V1.PassTypeIDs {
 		/// Path: `/v1/passTypeIds/{id}`
 		public let path: String
 
+		/// Read PassTypeId Information
 		public func get(parameters: GetParameters? = nil) -> Request<AppStoreConnectEnterpriseApi.PassTypeIDResponse> {
-			Request(path: path, method: "GET", query: parameters?.asQuery, id: "passTypeIds_getInstance")
+			Request(path: path, method: "GET", query: parameters?.asQuery, id: "passTypeIds-get_instance")
 		}
 
 		public struct GetParameters {
 			public var fieldsPassTypeIDs: [FieldsPassTypeIDs]?
-			public var fieldsCertificates: [FieldsCertificates]?
 			public var include: [Include]?
+			public var fieldsCertificates: [FieldsCertificates]?
 			public var limitCertificates: Int?
 
 			public enum FieldsPassTypeIDs: String, Codable, CaseIterable {
-				case name
-				case identifier
 				case certificates
-			}
-
-			public enum FieldsCertificates: String, Codable, CaseIterable {
+				case identifier
 				case name
-				case certificateType
-				case displayName
-				case serialNumber
-				case platform
-				case expirationDate
-				case certificateContent
-				case activated
-				case passTypeID = "passTypeId"
 			}
 
 			public enum Include: String, Codable, CaseIterable {
 				case certificates
 			}
 
-			public init(fieldsPassTypeIDs: [FieldsPassTypeIDs]? = nil, fieldsCertificates: [FieldsCertificates]? = nil, include: [Include]? = nil, limitCertificates: Int? = nil) {
+			public enum FieldsCertificates: String, Codable, CaseIterable {
+				case certificateContent
+				case certificateType
+				case csrContent
+				case displayName
+				case expirationDate
+				case name
+				case passTypeID = "passTypeId"
+				case platform
+				case serialNumber
+			}
+
+			public init(fieldsPassTypeIDs: [FieldsPassTypeIDs]? = nil, include: [Include]? = nil, fieldsCertificates: [FieldsCertificates]? = nil, limitCertificates: Int? = nil) {
 				self.fieldsPassTypeIDs = fieldsPassTypeIDs
-				self.fieldsCertificates = fieldsCertificates
 				self.include = include
+				self.fieldsCertificates = fieldsCertificates
 				self.limitCertificates = limitCertificates
 			}
 
 			public var asQuery: [(String, String?)] {
 				let encoder = URLQueryEncoder(explode: false)
 				encoder.encode(fieldsPassTypeIDs, forKey: "fields[passTypeIds]")
-				encoder.encode(fieldsCertificates, forKey: "fields[certificates]")
 				encoder.encode(include, forKey: "include")
+				encoder.encode(fieldsCertificates, forKey: "fields[certificates]")
 				encoder.encode(limitCertificates, forKey: "limit[certificates]")
 				return encoder.items
 			}
 		}
 
+		/// Modify a PassTypeId
 		public func patch(_ body: AppStoreConnectEnterpriseApi.PassTypeIDUpdateRequest) -> Request<AppStoreConnectEnterpriseApi.PassTypeIDResponse> {
-			Request(path: path, method: "PATCH", body: body, id: "passTypeIds_updateInstance")
+			Request(path: path, method: "PATCH", body: body, id: "passTypeIds-update_instance")
 		}
 
+		/// Delete a PassTypeId
 		public var delete: Request<Void> {
-			Request(path: path, method: "DELETE", id: "passTypeIds_deleteInstance")
+			Request(path: path, method: "DELETE", id: "passTypeIds-delete_instance")
 		}
 	}
 }

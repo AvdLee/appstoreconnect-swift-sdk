@@ -1,7 +1,7 @@
-diff --git a/Sources/OpenAPI/Generated/Entities/CiBuildRun.swift b/Sources/OpenAPI/Generated/Entities/CiBuildRun.swift
+diff --git a/Sources/AppStoreConnectApi/OpenAPI/Generated/Entities/CiBuildRun.swift b/Sources/AppStoreConnectApi/OpenAPI/Generated/Entities/CiBuildRun.swift
 index aa6cf8089bd6b3548c8e7862d920aa07c64060c4..51711a2e789ff99fab7eec9bb1f35744131d1dbc 100644
---- a/Sources/OpenAPI/Generated/Entities/CiBuildRun.swift
-+++ b/Sources/OpenAPI/Generated/Entities/CiBuildRun.swift
+--- a/Sources/AppStoreConnectApi/OpenAPI/Generated/Entities/CiBuildRun.swift
++++ b/Sources/AppStoreConnectApi/OpenAPI/Generated/Entities/CiBuildRun.swift
 @@ -33,9 +33,9 @@ public struct CiBuildRun: Codable, Identifiable {
  			public var message: String?
  			public var author: CiGitUser?

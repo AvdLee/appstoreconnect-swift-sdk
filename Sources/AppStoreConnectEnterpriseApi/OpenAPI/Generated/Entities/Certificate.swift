@@ -22,9 +22,8 @@ public struct Certificate: Codable, Identifiable {
 		public var platform: BundleIDPlatform?
 		public var expirationDate: Date?
 		public var certificateContent: String?
-		public var isActivated: Bool?
 
-		public init(name: String? = nil, certificateType: CertificateType? = nil, displayName: String? = nil, serialNumber: String? = nil, platform: BundleIDPlatform? = nil, expirationDate: Date? = nil, certificateContent: String? = nil, isActivated: Bool? = nil) {
+		public init(name: String? = nil, certificateType: CertificateType? = nil, displayName: String? = nil, serialNumber: String? = nil, platform: BundleIDPlatform? = nil, expirationDate: Date? = nil, certificateContent: String? = nil) {
 			self.name = name
 			self.certificateType = certificateType
 			self.displayName = displayName
@@ -32,7 +31,6 @@ public struct Certificate: Codable, Identifiable {
 			self.platform = platform
 			self.expirationDate = expirationDate
 			self.certificateContent = certificateContent
-			self.isActivated = isActivated
 		}
 
 		public init(from decoder: Decoder) throws {
@@ -44,7 +42,6 @@ public struct Certificate: Codable, Identifiable {
 			self.platform = try values.decodeIfPresent(BundleIDPlatform.self, forKey: "platform")
 			self.expirationDate = try values.decodeIfPresent(Date.self, forKey: "expirationDate")
 			self.certificateContent = try values.decodeIfPresent(String.self, forKey: "certificateContent")
-			self.isActivated = try values.decodeIfPresent(Bool.self, forKey: "activated")
 		}
 
 		public func encode(to encoder: Encoder) throws {
@@ -56,7 +53,6 @@ public struct Certificate: Codable, Identifiable {
 			try values.encodeIfPresent(platform, forKey: "platform")
 			try values.encodeIfPresent(expirationDate, forKey: "expirationDate")
 			try values.encodeIfPresent(certificateContent, forKey: "certificateContent")
-			try values.encodeIfPresent(isActivated, forKey: "activated")
 		}
 	}
 

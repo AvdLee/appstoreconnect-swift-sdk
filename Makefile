@@ -17,6 +17,6 @@ download:
 .PHONY: generate
 generate:
 	swift package --allow-writing-to-package-directory generate-open-api
-	for patch in Sources/Sources/AppStoreConnectApi/OpenAPI/app_store_connect_api.json/OpenAPI/patches/generated/*.patch; do \
+	for patch in Sources/AppStoreConnectApi/OpenAPI/patches/generated/*.patch; do \
 		patch -p1 < "$$patch"; \
 	done

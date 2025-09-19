@@ -5,7 +5,7 @@ import Foundation
 import AppStoreConnectApiCore
 import URLQueryEncoder
 
-extension EnterpriseAPIEndpoint.V1.Users {
+extension EnterpriseAPIEndpoint.Users {
 	public func id(_ id: String) -> WithID {
 		WithID(path: "\(path)/\(id)")
 	}
@@ -14,106 +14,32 @@ extension EnterpriseAPIEndpoint.V1.Users {
 		/// Path: `/v1/users/{id}`
 		public let path: String
 
-		public func get(parameters: GetParameters? = nil) -> Request<AppStoreConnectEnterpriseApi.UserResponse> {
-			Request(path: path, method: "GET", query: parameters?.asQuery, id: "users_getInstance")
+		/// Read User Information
+		public func get(fieldsUsers: [FieldsUsers]? = nil) -> Request<AppStoreConnectEnterpriseApi.UserResponse> {
+			Request(path: path, method: "GET", query: makeGetQuery(fieldsUsers), id: "users-get_instance")
 		}
 
-		public struct GetParameters {
-			public var fieldsUsers: [FieldsUsers]?
-			public var fieldsApps: [FieldsApps]?
-			public var include: [Include]?
-			public var limitVisibleApps: Int?
-
-			public enum FieldsUsers: String, Codable, CaseIterable {
-				case username
-				case firstName
-				case lastName
-				case roles
-				case allAppsVisible
-				case provisioningAllowed
-				case visibleApps
-			}
-
-			public enum FieldsApps: String, Codable, CaseIterable {
-				case accessibilityURL = "accessibilityUrl"
-				case name
-				case bundleID = "bundleId"
-				case sku
-				case primaryLocale
-				case isOrEverWasMadeForKids
-				case subscriptionStatusURL = "subscriptionStatusUrl"
-				case subscriptionStatusURLVersion = "subscriptionStatusUrlVersion"
-				case subscriptionStatusURLForSandbox = "subscriptionStatusUrlForSandbox"
-				case subscriptionStatusURLVersionForSandbox = "subscriptionStatusUrlVersionForSandbox"
-				case contentRightsDeclaration
-				case streamlinedPurchasingEnabled
-				case accessibilityDeclarations
-				case appEncryptionDeclarations
-				case ciProduct
-				case betaTesters
-				case betaGroups
-				case appStoreVersions
-				case preReleaseVersions
-				case betaAppLocalizations
-				case builds
-				case betaLicenseAgreement
-				case betaAppReviewDetail
-				case appInfos
-				case appClips
-				case appPricePoints
-				case endUserLicenseAgreement
-				case appPriceSchedule
-				case appAvailabilityV2
-				case inAppPurchases
-				case subscriptionGroups
-				case gameCenterEnabledVersions
-				case perfPowerMetrics
-				case appCustomProductPages
-				case inAppPurchasesV2
-				case promotedPurchases
-				case appEvents
-				case reviewSubmissions
-				case subscriptionGracePeriod
-				case customerReviews
-				case customerReviewSummarizations
-				case gameCenterDetail
-				case appStoreVersionExperimentsV2
-				case alternativeDistributionKey
-				case analyticsReportRequests
-				case marketplaceSearchDetail
-				case backgroundAssets
-				case betaFeedbackScreenshotSubmissions
-				case betaFeedbackCrashSubmissions
-				case webhooks
-			}
-
-			public enum Include: String, Codable, CaseIterable {
-				case visibleApps
-			}
-
-			public init(fieldsUsers: [FieldsUsers]? = nil, fieldsApps: [FieldsApps]? = nil, include: [Include]? = nil, limitVisibleApps: Int? = nil) {
-				self.fieldsUsers = fieldsUsers
-				self.fieldsApps = fieldsApps
-				self.include = include
-				self.limitVisibleApps = limitVisibleApps
-			}
-
-			public var asQuery: [(String, String?)] {
-				let encoder = URLQueryEncoder(explode: false)
-				encoder.encode(fieldsUsers, forKey: "fields[users]")
-				encoder.encode(fieldsApps, forKey: "fields[apps]")
-				encoder.encode(include, forKey: "include")
-				encoder.encode(limitVisibleApps, forKey: "limit[visibleApps]")
-				return encoder.items
-			}
+		private func makeGetQuery(_ fieldsUsers: [FieldsUsers]?) -> [(String, String?)] {
+			let encoder = URLQueryEncoder()
+			encoder.encode(fieldsUsers, forKey: "fields[users]", explode: false)
+			return encoder.items
 		}
 
+		public enum FieldsUsers: String, Codable, CaseIterable {
+			case firstName
+			case lastName
+			case roles
+			case username
+		}
+
+		/// Modify a User Account
 		public func patch(_ body: AppStoreConnectEnterpriseApi.UserUpdateRequest) -> Request<AppStoreConnectEnterpriseApi.UserResponse> {
-			Request(path: path, method: "PATCH", body: body, id: "users_updateInstance")
+			Request(path: path, method: "PATCH", body: body, id: "users-update_instance")
 		}
 
+		/// Delete a User Account
 		public var delete: Request<Void> {
-			Request(path: path, method: "DELETE", id: "users_deleteInstance")
+			Request(path: path, method: "DELETE", id: "users-delete_instance")
 		}
 	}
 }

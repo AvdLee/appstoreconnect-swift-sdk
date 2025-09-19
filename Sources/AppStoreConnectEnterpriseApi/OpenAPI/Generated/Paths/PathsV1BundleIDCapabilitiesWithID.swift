@@ -5,7 +5,7 @@ import Foundation
 import AppStoreConnectApiCore
 import URLQueryEncoder
 
-extension EnterpriseAPIEndpoint.V1.BundleIDCapabilities {
+extension EnterpriseAPIEndpoint.BundleIDCapabilities {
 	public func id(_ id: String) -> WithID {
 		WithID(path: "\(path)/\(id)")
 	}
@@ -14,12 +14,14 @@ extension EnterpriseAPIEndpoint.V1.BundleIDCapabilities {
 		/// Path: `/v1/bundleIdCapabilities/{id}`
 		public let path: String
 
+		/// Modify a BundleIdCapability
 		public func patch(_ body: AppStoreConnectEnterpriseApi.BundleIDCapabilityUpdateRequest) -> Request<AppStoreConnectEnterpriseApi.BundleIDCapabilityResponse> {
-			Request(path: path, method: "PATCH", body: body, id: "bundleIdCapabilities_updateInstance")
+			Request(path: path, method: "PATCH", body: body, id: "bundleIdCapabilities-update_instance")
 		}
 
+		/// Delete a BundleIdCapability
 		public var delete: Request<Void> {
-			Request(path: path, method: "DELETE", id: "bundleIdCapabilities_deleteInstance")
+			Request(path: path, method: "DELETE", id: "bundleIdCapabilities-delete_instance")
 		}
 	}
 }

@@ -5,7 +5,7 @@ import Foundation
 import AppStoreConnectApiCore
 import URLQueryEncoder
 
-extension EnterpriseAPIEndpoint.V1.Devices {
+extension EnterpriseAPIEndpoint.Devices {
 	public func id(_ id: String) -> WithID {
 		WithID(path: "\(path)/\(id)")
 	}
@@ -14,8 +14,9 @@ extension EnterpriseAPIEndpoint.V1.Devices {
 		/// Path: `/v1/devices/{id}`
 		public let path: String
 
+		/// Read Device Information
 		public func get(fieldsDevices: [FieldsDevices]? = nil) -> Request<AppStoreConnectEnterpriseApi.DeviceResponse> {
-			Request(path: path, method: "GET", query: makeGetQuery(fieldsDevices), id: "devices_getInstance")
+			Request(path: path, method: "GET", query: makeGetQuery(fieldsDevices), id: "devices-get_instance")
 		}
 
 		private func makeGetQuery(_ fieldsDevices: [FieldsDevices]?) -> [(String, String?)] {
@@ -25,17 +26,18 @@ extension EnterpriseAPIEndpoint.V1.Devices {
 		}
 
 		public enum FieldsDevices: String, Codable, CaseIterable {
+			case addedDate
+			case deviceClass
+			case model
 			case name
 			case platform
-			case udid
-			case deviceClass
 			case status
-			case model
-			case addedDate
+			case udid
 		}
 
+		/// Modify a Registered Device
 		public func patch(_ body: AppStoreConnectEnterpriseApi.DeviceUpdateRequest) -> Request<AppStoreConnectEnterpriseApi.DeviceResponse> {
-			Request(path: path, method: "PATCH", body: body, id: "devices_updateInstance")
+			Request(path: path, method: "PATCH", body: body, id: "devices-update_instance")
 		}
 	}
 }

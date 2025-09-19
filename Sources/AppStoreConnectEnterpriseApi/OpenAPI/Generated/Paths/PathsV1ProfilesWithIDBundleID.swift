@@ -5,7 +5,7 @@ import Foundation
 import AppStoreConnectApiCore
 import URLQueryEncoder
 
-extension EnterpriseAPIEndpoint.V1.Profiles.WithID {
+extension EnterpriseAPIEndpoint.Profiles.WithID {
 	public var bundleID: BundleID {
 		BundleID(path: path + "/bundleId")
 	}
@@ -14,8 +14,9 @@ extension EnterpriseAPIEndpoint.V1.Profiles.WithID {
 		/// Path: `/v1/profiles/{id}/bundleId`
 		public let path: String
 
+		/// Read the Bundle ID in a Profile
 		public func get(fieldsBundleIDs: [FieldsBundleIDs]? = nil) -> Request<AppStoreConnectEnterpriseApi.BundleIDWithoutIncludesResponse> {
-			Request(path: path, method: "GET", query: makeGetQuery(fieldsBundleIDs), id: "profiles_bundleId_getToOneRelated")
+			Request(path: path, method: "GET", query: makeGetQuery(fieldsBundleIDs), id: "profiles-bundleId-get_to_one_related")
 		}
 
 		private func makeGetQuery(_ fieldsBundleIDs: [FieldsBundleIDs]?) -> [(String, String?)] {
@@ -25,13 +26,12 @@ extension EnterpriseAPIEndpoint.V1.Profiles.WithID {
 		}
 
 		public enum FieldsBundleIDs: String, Codable, CaseIterable {
+			case bundleIDCapabilities = "bundleIdCapabilities"
+			case identifier
 			case name
 			case platform
-			case identifier
-			case seedID = "seedId"
 			case profiles
-			case bundleIDCapabilities = "bundleIdCapabilities"
-			case app
+			case seedID = "seedId"
 		}
 	}
 }

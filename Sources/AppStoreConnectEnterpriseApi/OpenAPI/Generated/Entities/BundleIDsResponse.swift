@@ -12,7 +12,6 @@ public struct BundleIDsResponse: Codable {
 	public enum IncludedItem: Codable {
 		case profile(Profile)
 		case bundleIDCapability(BundleIDCapability)
-		case app(App)
 
 		public init(from decoder: Decoder) throws {
 			let container = try decoder.singleValueContainer()
@@ -20,12 +19,10 @@ public struct BundleIDsResponse: Codable {
 				self = .profile(value)
 			} else if let value = try? container.decode(BundleIDCapability.self) {
 				self = .bundleIDCapability(value)
-			} else if let value = try? container.decode(App.self) {
-				self = .app(value)
 			} else {
 				throw DecodingError.dataCorruptedError(
 					in: container,
-					debugDescription: "Data could not be decoded as any of the expected types (Profile, BundleIDCapability, App)."
+					debugDescription: "Data could not be decoded as any of the expected types (Profile, BundleIDCapability)."
 				)
 			}
 		}
@@ -35,7 +32,6 @@ public struct BundleIDsResponse: Codable {
 			switch self {
 			case .profile(let value): try container.encode(value)
 			case .bundleIDCapability(let value): try container.encode(value)
-			case .app(let value): try container.encode(value)
 			}
 		}
 	}

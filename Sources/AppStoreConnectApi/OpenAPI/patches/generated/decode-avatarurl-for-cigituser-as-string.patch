@@ -1,7 +1,7 @@
-diff --git a/Sources/OpenAPI/Generated/Entities/CiGitUser.swift b/Sources/OpenAPI/Generated/Entities/CiGitUser.swift
+diff --git a/Sources/AppStoreConnectApi/OpenAPI/Generated/Entities/CiGitUser.swift b/Sources/AppStoreConnectApi/OpenAPI/Generated/Entities/CiGitUser.swift
 index d76a2e9c7e65890f240d41b12f11dcafaf3ca287..1444fbb128a23289e202bbd45d941ed43be87fa3 100644
---- a/Sources/OpenAPI/Generated/Entities/CiGitUser.swift
-+++ b/Sources/OpenAPI/Generated/Entities/CiGitUser.swift
+--- a/Sources/AppStoreConnectApi/OpenAPI/Generated/Entities/CiGitUser.swift
++++ b/Sources/AppStoreConnectApi/OpenAPI/Generated/Entities/CiGitUser.swift
 @@ -5,9 +5,9 @@ import Foundation
  
  public struct CiGitUser: Codable {

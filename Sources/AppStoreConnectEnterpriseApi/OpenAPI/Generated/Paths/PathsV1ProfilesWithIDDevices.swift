@@ -5,7 +5,7 @@ import Foundation
 import AppStoreConnectApiCore
 import URLQueryEncoder
 
-extension EnterpriseAPIEndpoint.V1.Profiles.WithID {
+extension EnterpriseAPIEndpoint.Profiles.WithID {
 	public var devices: Devices {
 		Devices(path: path + "/devices")
 	}
@@ -14,8 +14,9 @@ extension EnterpriseAPIEndpoint.V1.Profiles.WithID {
 		/// Path: `/v1/profiles/{id}/devices`
 		public let path: String
 
+		/// List All Devices in a Profile
 		public func get(fieldsDevices: [FieldsDevices]? = nil, limit: Int? = nil) -> Request<AppStoreConnectEnterpriseApi.DevicesWithoutIncludesResponse> {
-			Request(path: path, method: "GET", query: makeGetQuery(fieldsDevices, limit), id: "profiles_devices_getToManyRelated")
+			Request(path: path, method: "GET", query: makeGetQuery(fieldsDevices, limit), id: "profiles-devices-get_to_many_related")
 		}
 
 		private func makeGetQuery(_ fieldsDevices: [FieldsDevices]?, _ limit: Int?) -> [(String, String?)] {
@@ -26,13 +27,13 @@ extension EnterpriseAPIEndpoint.V1.Profiles.WithID {
 		}
 
 		public enum FieldsDevices: String, Codable, CaseIterable {
+			case addedDate
+			case deviceClass
+			case model
 			case name
 			case platform
-			case udid
-			case deviceClass
 			case status
-			case model
-			case addedDate
+			case udid
 		}
 	}
 }
