@@ -5,7 +5,7 @@
 //  Created by Mathias Emil Mortensen on 05/04/2023.
 //
 
-@testable import AppStoreConnect_Swift_SDK
+@testable import AppStoreConnectApiCore
 import XCTest
 import Foundation
 #if canImport(FoundationNetworking)

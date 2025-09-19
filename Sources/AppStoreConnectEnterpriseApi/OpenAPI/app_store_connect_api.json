@@ -1,0 +1,6895 @@
+{
+  "openapi": "3.0.1",
+  "info": {
+    "title": "Enterprise Program API",
+    "version": "1.0",
+    "x-platforms": {
+      "app_store_connect_api": "App Store Connect"
+    }
+  },
+  "servers": [
+    {
+      "url": "https://api.enterprise.developer.apple.com/"
+    }
+  ],
+  "paths": {
+    "/v1/bundleIdCapabilities": {
+      "post": {
+        "summary": "Create a BundleIdCapability",
+        "tags": [
+          "BundleIdCapabilities"
+        ],
+        "operationId": "bundleIdCapabilities-create_instance",
+        "requestBody": {
+          "description": "BundleIdCapability representation",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/BundleIdCapabilityCreateRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "400": {
+            "description": "Parameter error(s)",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized error(s)",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Unprocessable request entity error(s)",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "201": {
+            "description": "Single BundleIdCapability",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/BundleIdCapabilityResponse"
+                }
+              }
+            }
+          },
+          "409": {
+            "description": "Request entity error(s)",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/v1/bundleIdCapabilities/{id}": {
+      "patch": {
+        "summary": "Modify a BundleIdCapability",
+        "tags": [
+          "BundleIdCapabilities"
+        ],
+        "operationId": "bundleIdCapabilities-update_instance",
+        "requestBody": {
+          "description": "BundleIdCapability representation",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/BundleIdCapabilityUpdateRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "400": {
+            "description": "Parameter error(s)",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized error(s)",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not found error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Unprocessable request entity error(s)",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "200": {
+            "description": "Single BundleIdCapability",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/BundleIdCapabilityResponse"
+                }
+              }
+            }
+          },
+          "409": {
+            "description": "Request entity error(s)",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          }
+        }
+      },
+      "delete": {
+        "summary": "Delete a BundleIdCapability",
+        "tags": [
+          "BundleIdCapabilities"
+        ],
+        "operationId": "bundleIdCapabilities-delete_instance",
+        "responses": {
+          "400": {
+            "description": "Parameter error(s)",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized error(s)",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not found error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "409": {
+            "description": "Request entity error(s)",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "204": {
+            "description": "Success (no content)"
+          }
+        }
+      },
+      "parameters": [
+        {
+          "name": "id",
+          "in": "path",
+          "description": "the id of the requested resource",
+          "schema": {
+            "type": "string"
+          },
+          "style": "simple",
+          "required": true
+        }
+      ]
+    },
+    "/v1/bundleIds": {
+      "get": {
+        "summary": "List Bundle Ids",
+        "tags": [
+          "BundleIds"
+        ],
+        "operationId": "bundleIds-get_collection",
+        "parameters": [
+          {
+            "name": "filter[identifier]",
+            "in": "query",
+            "description": "filter by attribute 'identifier'",
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            },
+            "style": "form",
+            "explode": false,
+            "required": false
+          },
+          {
+            "name": "filter[name]",
+            "in": "query",
+            "description": "filter by attribute 'name'",
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            },
+            "style": "form",
+            "explode": false,
+            "required": false
+          },
+          {
+            "name": "filter[platform]",
+            "in": "query",
+            "description": "filter by attribute 'platform'",
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "string",
+                "enum": [
+                  "IOS",
+                  "MAC_OS"
+                ]
+              }
+            },
+            "style": "form",
+            "explode": false,
+            "required": false
+          },
+          {
+            "name": "filter[seedId]",
+            "in": "query",
+            "description": "filter by attribute 'seedId'",
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            },
+            "style": "form",
+            "explode": false,
+            "required": false
+          },
+          {
+            "name": "filter[id]",
+            "in": "query",
+            "description": "filter by id(s)",
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            },
+            "style": "form",
+            "explode": false,
+            "required": false
+          },
+          {
+            "name": "sort",
+            "in": "query",
+            "description": "comma-separated list of sort expressions; resources will be sorted as specified",
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "string",
+                "enum": [
+                  "id",
+                  "-id",
+                  "identifier",
+                  "-identifier",
+                  "name",
+                  "-name",
+                  "platform",
+                  "-platform",
+                  "seedId",
+                  "-seedId"
+                ]
+              }
+            },
+            "style": "form",
+            "explode": false,
+            "required": false
+          },
+          {
+            "name": "fields[bundleIds]",
+            "in": "query",
+            "description": "the fields to include for returned resources of type bundleIds",
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "string",
+                "enum": [
+                  "bundleIdCapabilities",
+                  "identifier",
+                  "name",
+                  "platform",
+                  "profiles",
+                  "seedId"
+                ]
+              }
+            },
+            "style": "form",
+            "explode": false,
+            "required": false
+          },
+          {
+            "name": "limit",
+            "in": "query",
+            "description": "maximum resources per page",
+            "schema": {
+              "type": "integer",
+              "maximum": 200
+            },
+            "style": "form"
+          },
+          {
+            "name": "include",
+            "in": "query",
+            "description": "comma-separated list of relationships to include",
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "string",
+                "enum": [
+                  "bundleIdCapabilities",
+                  "profiles"
+                ]
+              }
+            },
+            "style": "form",
+            "explode": false,
+            "required": false
+          },
+          {
+            "name": "fields[bundleIdCapabilities]",
+            "in": "query",
+            "description": "the fields to include for returned resources of type bundleIdCapabilities",
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "string",
+                "enum": [
+                  "bundleId",
+                  "capabilityType",
+                  "settings"
+                ]
+              }
+            },
+            "style": "form",
+            "explode": false,
+            "required": false
+          },
+          {
+            "name": "fields[profiles]",
+            "in": "query",
+            "description": "the fields to include for returned resources of type profiles",
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "string",
+                "enum": [
+                  "bundleId",
+                  "certificates",
+                  "createdDate",
+                  "devices",
+                  "expirationDate",
+                  "name",
+                  "platform",
+                  "profileContent",
+                  "profileState",
+                  "profileType",
+                  "uuid"
+                ]
+              }
+            },
+            "style": "form",
+            "explode": false,
+            "required": false
+          },
+          {
+            "name": "limit[bundleIdCapabilities]",
+            "in": "query",
+            "description": "maximum number of related bundleIdCapabilities returned (when they are included)",
+            "schema": {
+              "type": "integer",
+              "maximum": 50
+            },
+            "style": "form",
+            "required": false
+          },
+          {
+            "name": "limit[profiles]",
+            "in": "query",
+            "description": "maximum number of related profiles returned (when they are included)",
+            "schema": {
+              "type": "integer",
+              "maximum": 50
+            },
+            "style": "form",
+            "required": false
+          }
+        ],
+        "responses": {
+          "400": {
+            "description": "Parameter error(s)",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized error(s)",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "200": {
+            "description": "List of BundleIds",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/BundleIdsResponse"
+                }
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "summary": "Register a New Bundle ID",
+        "tags": [
+          "BundleIds"
+        ],
+        "operationId": "bundleIds-create_instance",
+        "requestBody": {
+          "description": "BundleId representation",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/BundleIdCreateRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "400": {
+            "description": "Parameter error(s)",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized error(s)",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Unprocessable request entity error(s)",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "201": {
+            "description": "Single BundleId",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/BundleIdResponse"
+                }
+              }
+            }
+          },
+          "409": {
+            "description": "Request entity error(s)",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/v1/bundleIds/{id}": {
+      "get": {
+        "summary": "Read BundleId Information",
+        "tags": [
+          "BundleIds"
+        ],
+        "operationId": "bundleIds-get_instance",
+        "parameters": [
+          {
+            "name": "fields[bundleIds]",
+            "in": "query",
+            "description": "the fields to include for returned resources of type bundleIds",
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "string",
+                "enum": [
+                  "bundleIdCapabilities",
+                  "identifier",
+                  "name",
+                  "platform",
+                  "profiles",
+                  "seedId"
+                ]
+              }
+            },
+            "style": "form",
+            "explode": false,
+            "required": false
+          },
+          {
+            "name": "include",
+            "in": "query",
+            "description": "comma-separated list of relationships to include",
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "string",
+                "enum": [
+                  "bundleIdCapabilities",
+                  "profiles"
+                ]
+              }
+            },
+            "style": "form",
+            "explode": false,
+            "required": false
+          },
+          {
+            "name": "fields[bundleIdCapabilities]",
+            "in": "query",
+            "description": "the fields to include for returned resources of type bundleIdCapabilities",
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "string",
+                "enum": [
+                  "bundleId",
+                  "capabilityType",
+                  "settings"
+                ]
+              }
+            },
+            "style": "form",
+            "explode": false,
+            "required": false
+          },
+          {
+            "name": "fields[profiles]",
+            "in": "query",
+            "description": "the fields to include for returned resources of type profiles",
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "string",
+                "enum": [
+                  "bundleId",
+                  "certificates",
+                  "createdDate",
+                  "devices",
+                  "expirationDate",
+                  "name",
+                  "platform",
+                  "profileContent",
+                  "profileState",
+                  "profileType",
+                  "uuid"
+                ]
+              }
+            },
+            "style": "form",
+            "explode": false,
+            "required": false
+          },
+          {
+            "name": "limit[bundleIdCapabilities]",
+            "in": "query",
+            "description": "maximum number of related bundleIdCapabilities returned (when they are included)",
+            "schema": {
+              "type": "integer",
+              "maximum": 50
+            },
+            "style": "form",
+            "required": false
+          },
+          {
+            "name": "limit[profiles]",
+            "in": "query",
+            "description": "maximum number of related profiles returned (when they are included)",
+            "schema": {
+              "type": "integer",
+              "maximum": 50
+            },
+            "style": "form",
+            "required": false
+          }
+        ],
+        "responses": {
+          "400": {
+            "description": "Parameter error(s)",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized error(s)",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not found error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "200": {
+            "description": "Single BundleId",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/BundleIdResponse"
+                }
+              }
+            }
+          }
+        }
+      },
+      "patch": {
+        "summary": "Modify a BundleId",
+        "tags": [
+          "BundleIds"
+        ],
+        "operationId": "bundleIds-update_instance",
+        "requestBody": {
+          "description": "BundleId representation",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/BundleIdUpdateRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "400": {
+            "description": "Parameter error(s)",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized error(s)",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not found error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Unprocessable request entity error(s)",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "200": {
+            "description": "Single BundleId",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/BundleIdResponse"
+                }
+              }
+            }
+          },
+          "409": {
+            "description": "Request entity error(s)",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          }
+        }
+      },
+      "delete": {
+        "summary": "Delete a BundleId",
+        "tags": [
+          "BundleIds"
+        ],
+        "operationId": "bundleIds-delete_instance",
+        "responses": {
+          "400": {
+            "description": "Parameter error(s)",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized error(s)",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not found error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "409": {
+            "description": "Request entity error(s)",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "204": {
+            "description": "Success (no content)"
+          }
+        }
+      },
+      "parameters": [
+        {
+          "name": "id",
+          "in": "path",
+          "description": "the id of the requested resource",
+          "schema": {
+            "type": "string"
+          },
+          "style": "simple",
+          "required": true
+        }
+      ]
+    },
+    "/v1/certificates": {
+      "get": {
+        "summary": "List and Download Certificates",
+        "tags": [
+          "Certificates"
+        ],
+        "operationId": "certificates-get_collection",
+        "parameters": [
+          {
+            "name": "filter[certificateType]",
+            "in": "query",
+            "description": "filter by attribute 'certificateType'",
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "string",
+                "enum": [
+                  "IOS_DEVELOPMENT",
+                  "IOS_DISTRIBUTION",
+                  "MAC_APP_DISTRIBUTION",
+                  "MAC_INSTALLER_DISTRIBUTION",
+                  "MAC_APP_DEVELOPMENT",
+                  "DEVELOPER_ID_KEXT",
+                  "DEVELOPER_ID_APPLICATION",
+                  "DEVELOPMENT",
+                  "DISTRIBUTION",
+                  "PASS_TYPE_ID",
+                  "PASS_TYPE_ID_WITH_NFC"
+                ]
+              }
+            },
+            "style": "form",
+            "explode": false,
+            "required": false
+          },
+          {
+            "name": "filter[displayName]",
+            "in": "query",
+            "description": "filter by attribute 'displayName'",
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            },
+            "style": "form",
+            "explode": false,
+            "required": false
+          },
+          {
+            "name": "filter[serialNumber]",
+            "in": "query",
+            "description": "filter by attribute 'serialNumber'",
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            },
+            "style": "form",
+            "explode": false,
+            "required": false
+          },
+          {
+            "name": "filter[id]",
+            "in": "query",
+            "description": "filter by id(s)",
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            },
+            "style": "form",
+            "explode": false,
+            "required": false
+          },
+          {
+            "name": "sort",
+            "in": "query",
+            "description": "comma-separated list of sort expressions; resources will be sorted as specified",
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "string",
+                "enum": [
+                  "certificateType",
+                  "-certificateType",
+                  "displayName",
+                  "-displayName",
+                  "id",
+                  "-id",
+                  "serialNumber",
+                  "-serialNumber"
+                ]
+              }
+            },
+            "style": "form",
+            "explode": false,
+            "required": false
+          },
+          {
+            "name": "fields[certificates]",
+            "in": "query",
+            "description": "the fields to include for returned resources of type certificates",
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "string",
+                "enum": [
+                  "certificateContent",
+                  "certificateType",
+                  "csrContent",
+                  "displayName",
+                  "expirationDate",
+                  "name",
+                  "passTypeId",
+                  "platform",
+                  "serialNumber"
+                ]
+              }
+            },
+            "style": "form",
+            "explode": false,
+            "required": false
+          },
+          {
+            "name": "limit",
+            "in": "query",
+            "description": "maximum resources per page",
+            "schema": {
+              "type": "integer",
+              "maximum": 200
+            },
+            "style": "form"
+          },
+          {
+            "name": "include",
+            "in": "query",
+            "description": "comma-separated list of relationships to include",
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "string",
+                "enum": [
+                  "passTypeId"
+                ]
+              }
+            },
+            "style": "form",
+            "explode": false,
+            "required": false
+          },
+          {
+            "name": "fields[passTypeIds]",
+            "in": "query",
+            "description": "the fields to include for returned resources of type passTypeIds",
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "string",
+                "enum": [
+                  "certificates",
+                  "identifier",
+                  "name"
+                ]
+              }
+            },
+            "style": "form",
+            "explode": false,
+            "required": false
+          }
+        ],
+        "responses": {
+          "400": {
+            "description": "Parameter error(s)",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized error(s)",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "200": {
+            "description": "List of Certificates",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CertificatesResponse"
+                }
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "summary": "Create a Certificate",
+        "tags": [
+          "Certificates"
+        ],
+        "operationId": "certificates-create_instance",
+        "requestBody": {
+          "description": "Certificate representation",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CertificateCreateRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "400": {
+            "description": "Parameter error(s)",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized error(s)",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Unprocessable request entity error(s)",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "201": {
+            "description": "Single Certificate",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CertificateResponse"
+                }
+              }
+            }
+          },
+          "409": {
+            "description": "Request entity error(s)",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/v1/certificates/{id}": {
+      "get": {
+        "summary": "Read and Download Certificate Information",
+        "tags": [
+          "Certificates"
+        ],
+        "operationId": "certificates-get_instance",
+        "parameters": [
+          {
+            "name": "fields[certificates]",
+            "in": "query",
+            "description": "the fields to include for returned resources of type certificates",
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "string",
+                "enum": [
+                  "certificateContent",
+                  "certificateType",
+                  "csrContent",
+                  "displayName",
+                  "expirationDate",
+                  "name",
+                  "passTypeId",
+                  "platform",
+                  "serialNumber"
+                ]
+              }
+            },
+            "style": "form",
+            "explode": false,
+            "required": false
+          },
+          {
+            "name": "include",
+            "in": "query",
+            "description": "comma-separated list of relationships to include",
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "string",
+                "enum": [
+                  "passTypeId"
+                ]
+              }
+            },
+            "style": "form",
+            "explode": false,
+            "required": false
+          },
+          {
+            "name": "fields[passTypeIds]",
+            "in": "query",
+            "description": "the fields to include for returned resources of type passTypeIds",
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "string",
+                "enum": [
+                  "certificates",
+                  "identifier",
+                  "name"
+                ]
+              }
+            },
+            "style": "form",
+            "explode": false,
+            "required": false
+          }
+        ],
+        "responses": {
+          "400": {
+            "description": "Parameter error(s)",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized error(s)",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not found error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "200": {
+            "description": "Single Certificate",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CertificateResponse"
+                }
+              }
+            }
+          }
+        }
+      },
+      "delete": {
+        "summary": "Revoke a Certificate",
+        "tags": [
+          "Certificates"
+        ],
+        "operationId": "certificates-delete_instance",
+        "responses": {
+          "400": {
+            "description": "Parameter error(s)",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized error(s)",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not found error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "409": {
+            "description": "Request entity error(s)",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "204": {
+            "description": "Success (no content)"
+          }
+        }
+      },
+      "parameters": [
+        {
+          "name": "id",
+          "in": "path",
+          "description": "the id of the requested resource",
+          "schema": {
+            "type": "string"
+          },
+          "style": "simple",
+          "required": true
+        }
+      ]
+    },
+    "/v1/devices": {
+      "get": {
+        "summary": "List Devices",
+        "tags": [
+          "Devices"
+        ],
+        "operationId": "devices-get_collection",
+        "parameters": [
+          {
+            "name": "filter[name]",
+            "in": "query",
+            "description": "filter by attribute 'name'",
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            },
+            "style": "form",
+            "explode": false,
+            "required": false
+          },
+          {
+            "name": "filter[platform]",
+            "in": "query",
+            "description": "filter by attribute 'platform'",
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "string",
+                "enum": [
+                  "IOS",
+                  "MAC_OS"
+                ]
+              }
+            },
+            "style": "form",
+            "explode": false,
+            "required": false
+          },
+          {
+            "name": "filter[status]",
+            "in": "query",
+            "description": "filter by attribute 'status'",
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "string",
+                "enum": [
+                  "ENABLED",
+                  "DISABLED"
+                ]
+              }
+            },
+            "style": "form",
+            "explode": false,
+            "required": false
+          },
+          {
+            "name": "filter[udid]",
+            "in": "query",
+            "description": "filter by attribute 'udid'",
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            },
+            "style": "form",
+            "explode": false,
+            "required": false
+          },
+          {
+            "name": "filter[id]",
+            "in": "query",
+            "description": "filter by id(s)",
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            },
+            "style": "form",
+            "explode": false,
+            "required": false
+          },
+          {
+            "name": "sort",
+            "in": "query",
+            "description": "comma-separated list of sort expressions; resources will be sorted as specified",
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "string",
+                "enum": [
+                  "id",
+                  "-id",
+                  "name",
+                  "-name",
+                  "platform",
+                  "-platform",
+                  "status",
+                  "-status",
+                  "udid",
+                  "-udid"
+                ]
+              }
+            },
+            "style": "form",
+            "explode": false,
+            "required": false
+          },
+          {
+            "name": "fields[devices]",
+            "in": "query",
+            "description": "the fields to include for returned resources of type devices",
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "string",
+                "enum": [
+                  "addedDate",
+                  "deviceClass",
+                  "model",
+                  "name",
+                  "platform",
+                  "status",
+                  "udid"
+                ]
+              }
+            },
+            "style": "form",
+            "explode": false,
+            "required": false
+          },
+          {
+            "name": "limit",
+            "in": "query",
+            "description": "maximum resources per page",
+            "schema": {
+              "type": "integer",
+              "maximum": 200
+            },
+            "style": "form"
+          }
+        ],
+        "responses": {
+          "400": {
+            "description": "Parameter error(s)",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized error(s)",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "200": {
+            "description": "List of Devices",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/DevicesResponse"
+                }
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "summary": "Register a New Device",
+        "tags": [
+          "Devices"
+        ],
+        "operationId": "devices-create_instance",
+        "requestBody": {
+          "description": "Device representation",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/DeviceCreateRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "400": {
+            "description": "Parameter error(s)",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized error(s)",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Unprocessable request entity error(s)",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "201": {
+            "description": "Single Device",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/DeviceResponse"
+                }
+              }
+            }
+          },
+          "409": {
+            "description": "Request entity error(s)",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/v1/devices/{id}": {
+      "get": {
+        "summary": "Read Device Information",
+        "tags": [
+          "Devices"
+        ],
+        "operationId": "devices-get_instance",
+        "parameters": [
+          {
+            "name": "fields[devices]",
+            "in": "query",
+            "description": "the fields to include for returned resources of type devices",
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "string",
+                "enum": [
+                  "addedDate",
+                  "deviceClass",
+                  "model",
+                  "name",
+                  "platform",
+                  "status",
+                  "udid"
+                ]
+              }
+            },
+            "style": "form",
+            "explode": false,
+            "required": false
+          }
+        ],
+        "responses": {
+          "400": {
+            "description": "Parameter error(s)",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized error(s)",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not found error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "200": {
+            "description": "Single Device",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/DeviceResponse"
+                }
+              }
+            }
+          }
+        }
+      },
+      "patch": {
+        "summary": "Modify a Registered Device",
+        "tags": [
+          "Devices"
+        ],
+        "operationId": "devices-update_instance",
+        "requestBody": {
+          "description": "Device representation",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/DeviceUpdateRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "400": {
+            "description": "Parameter error(s)",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized error(s)",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not found error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Unprocessable request entity error(s)",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "200": {
+            "description": "Single Device",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/DeviceResponse"
+                }
+              }
+            }
+          },
+          "409": {
+            "description": "Request entity error(s)",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          }
+        }
+      },
+      "parameters": [
+        {
+          "name": "id",
+          "in": "path",
+          "description": "the id of the requested resource",
+          "schema": {
+            "type": "string"
+          },
+          "style": "simple",
+          "required": true
+        }
+      ]
+    },
+    "/v1/passTypeIds": {
+      "get": {
+        "summary": "List Pass Type Ids",
+        "tags": [
+          "PassTypeIds"
+        ],
+        "operationId": "passTypeIds-get_collection",
+        "parameters": [
+          {
+            "name": "filter[identifier]",
+            "in": "query",
+            "description": "filter by attribute 'identifier'",
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            },
+            "style": "form",
+            "explode": false,
+            "required": false
+          },
+          {
+            "name": "filter[name]",
+            "in": "query",
+            "description": "filter by attribute 'name'",
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            },
+            "style": "form",
+            "explode": false,
+            "required": false
+          },
+          {
+            "name": "filter[id]",
+            "in": "query",
+            "description": "filter by id(s)",
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            },
+            "style": "form",
+            "explode": false,
+            "required": false
+          },
+          {
+            "name": "sort",
+            "in": "query",
+            "description": "comma-separated list of sort expressions; resources will be sorted as specified",
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "string",
+                "enum": [
+                  "id",
+                  "-id",
+                  "identifier",
+                  "-identifier",
+                  "name",
+                  "-name"
+                ]
+              }
+            },
+            "style": "form",
+            "explode": false,
+            "required": false
+          },
+          {
+            "name": "fields[passTypeIds]",
+            "in": "query",
+            "description": "the fields to include for returned resources of type passTypeIds",
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "string",
+                "enum": [
+                  "certificates",
+                  "identifier",
+                  "name"
+                ]
+              }
+            },
+            "style": "form",
+            "explode": false,
+            "required": false
+          },
+          {
+            "name": "limit",
+            "in": "query",
+            "description": "maximum resources per page",
+            "schema": {
+              "type": "integer",
+              "maximum": 200
+            },
+            "style": "form"
+          },
+          {
+            "name": "include",
+            "in": "query",
+            "description": "comma-separated list of relationships to include",
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "string",
+                "enum": [
+                  "certificates"
+                ]
+              }
+            },
+            "style": "form",
+            "explode": false,
+            "required": false
+          },
+          {
+            "name": "fields[certificates]",
+            "in": "query",
+            "description": "the fields to include for returned resources of type certificates",
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "string",
+                "enum": [
+                  "certificateContent",
+                  "certificateType",
+                  "csrContent",
+                  "displayName",
+                  "expirationDate",
+                  "name",
+                  "passTypeId",
+                  "platform",
+                  "serialNumber"
+                ]
+              }
+            },
+            "style": "form",
+            "explode": false,
+            "required": false
+          },
+          {
+            "name": "limit[certificates]",
+            "in": "query",
+            "description": "maximum number of related certificates returned (when they are included)",
+            "schema": {
+              "type": "integer",
+              "maximum": 50
+            },
+            "style": "form",
+            "required": false
+          }
+        ],
+        "responses": {
+          "400": {
+            "description": "Parameter error(s)",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized error(s)",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "200": {
+            "description": "List of PassTypeIds",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PassTypeIdsResponse"
+                }
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "summary": "Create a PassTypeId",
+        "tags": [
+          "PassTypeIds"
+        ],
+        "operationId": "passTypeIds-create_instance",
+        "requestBody": {
+          "description": "PassTypeId representation",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/PassTypeIdCreateRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "400": {
+            "description": "Parameter error(s)",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized error(s)",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Unprocessable request entity error(s)",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "201": {
+            "description": "Single PassTypeId",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PassTypeIdResponse"
+                }
+              }
+            }
+          },
+          "409": {
+            "description": "Request entity error(s)",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/v1/passTypeIds/{id}": {
+      "get": {
+        "summary": "Read PassTypeId Information",
+        "tags": [
+          "PassTypeIds"
+        ],
+        "operationId": "passTypeIds-get_instance",
+        "parameters": [
+          {
+            "name": "fields[passTypeIds]",
+            "in": "query",
+            "description": "the fields to include for returned resources of type passTypeIds",
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "string",
+                "enum": [
+                  "certificates",
+                  "identifier",
+                  "name"
+                ]
+              }
+            },
+            "style": "form",
+            "explode": false,
+            "required": false
+          },
+          {
+            "name": "include",
+            "in": "query",
+            "description": "comma-separated list of relationships to include",
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "string",
+                "enum": [
+                  "certificates"
+                ]
+              }
+            },
+            "style": "form",
+            "explode": false,
+            "required": false
+          },
+          {
+            "name": "fields[certificates]",
+            "in": "query",
+            "description": "the fields to include for returned resources of type certificates",
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "string",
+                "enum": [
+                  "certificateContent",
+                  "certificateType",
+                  "csrContent",
+                  "displayName",
+                  "expirationDate",
+                  "name",
+                  "passTypeId",
+                  "platform",
+                  "serialNumber"
+                ]
+              }
+            },
+            "style": "form",
+            "explode": false,
+            "required": false
+          },
+          {
+            "name": "limit[certificates]",
+            "in": "query",
+            "description": "maximum number of related certificates returned (when they are included)",
+            "schema": {
+              "type": "integer",
+              "maximum": 50
+            },
+            "style": "form",
+            "required": false
+          }
+        ],
+        "responses": {
+          "400": {
+            "description": "Parameter error(s)",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized error(s)",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not found error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "200": {
+            "description": "Single PassTypeId",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PassTypeIdResponse"
+                }
+              }
+            }
+          }
+        }
+      },
+      "patch": {
+        "summary": "Modify a PassTypeId",
+        "tags": [
+          "PassTypeIds"
+        ],
+        "operationId": "passTypeIds-update_instance",
+        "requestBody": {
+          "description": "PassTypeId representation",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/PassTypeIdUpdateRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "400": {
+            "description": "Parameter error(s)",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized error(s)",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not found error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Unprocessable request entity error(s)",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "200": {
+            "description": "Single PassTypeId",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PassTypeIdResponse"
+                }
+              }
+            }
+          },
+          "409": {
+            "description": "Request entity error(s)",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          }
+        }
+      },
+      "delete": {
+        "summary": "Delete a PassTypeId",
+        "tags": [
+          "PassTypeIds"
+        ],
+        "operationId": "passTypeIds-delete_instance",
+        "responses": {
+          "400": {
+            "description": "Parameter error(s)",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized error(s)",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not found error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "409": {
+            "description": "Request entity error(s)",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "204": {
+            "description": "Success (no content)"
+          }
+        }
+      },
+      "parameters": [
+        {
+          "name": "id",
+          "in": "path",
+          "description": "the id of the requested resource",
+          "schema": {
+            "type": "string"
+          },
+          "style": "simple",
+          "required": true
+        }
+      ]
+    },
+    "/v1/profiles": {
+      "get": {
+        "summary": "List and Download Profiles",
+        "tags": [
+          "Profiles"
+        ],
+        "operationId": "profiles-get_collection",
+        "parameters": [
+          {
+            "name": "filter[name]",
+            "in": "query",
+            "description": "filter by attribute 'name'",
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            },
+            "style": "form",
+            "explode": false,
+            "required": false
+          },
+          {
+            "name": "filter[profileState]",
+            "in": "query",
+            "description": "filter by attribute 'profileState'",
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "string",
+                "enum": [
+                  "ACTIVE",
+                  "INVALID"
+                ]
+              }
+            },
+            "style": "form",
+            "explode": false,
+            "required": false
+          },
+          {
+            "name": "filter[profileType]",
+            "in": "query",
+            "description": "filter by attribute 'profileType'",
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "string",
+                "enum": [
+                  "IOS_APP_DEVELOPMENT",
+                  "IOS_APP_STORE",
+                  "IOS_APP_ADHOC",
+                  "IOS_APP_INHOUSE",
+                  "MAC_APP_DEVELOPMENT",
+                  "MAC_APP_STORE",
+                  "MAC_APP_DIRECT",
+                  "TVOS_APP_DEVELOPMENT",
+                  "TVOS_APP_STORE",
+                  "TVOS_APP_ADHOC",
+                  "TVOS_APP_INHOUSE",
+                  "MAC_CATALYST_APP_DEVELOPMENT",
+                  "MAC_CATALYST_APP_STORE",
+                  "MAC_CATALYST_APP_DIRECT"
+                ]
+              }
+            },
+            "style": "form",
+            "explode": false,
+            "required": false
+          },
+          {
+            "name": "filter[id]",
+            "in": "query",
+            "description": "filter by id(s)",
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            },
+            "style": "form",
+            "explode": false,
+            "required": false
+          },
+          {
+            "name": "sort",
+            "in": "query",
+            "description": "comma-separated list of sort expressions; resources will be sorted as specified",
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "string",
+                "enum": [
+                  "id",
+                  "-id",
+                  "name",
+                  "-name",
+                  "profileState",
+                  "-profileState",
+                  "profileType",
+                  "-profileType"
+                ]
+              }
+            },
+            "style": "form",
+            "explode": false,
+            "required": false
+          },
+          {
+            "name": "fields[profiles]",
+            "in": "query",
+            "description": "the fields to include for returned resources of type profiles",
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "string",
+                "enum": [
+                  "bundleId",
+                  "certificates",
+                  "createdDate",
+                  "devices",
+                  "expirationDate",
+                  "name",
+                  "platform",
+                  "profileContent",
+                  "profileState",
+                  "profileType",
+                  "uuid"
+                ]
+              }
+            },
+            "style": "form",
+            "explode": false,
+            "required": false
+          },
+          {
+            "name": "limit",
+            "in": "query",
+            "description": "maximum resources per page",
+            "schema": {
+              "type": "integer",
+              "maximum": 200
+            },
+            "style": "form"
+          },
+          {
+            "name": "include",
+            "in": "query",
+            "description": "comma-separated list of relationships to include",
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "string",
+                "enum": [
+                  "bundleId",
+                  "certificates",
+                  "devices"
+                ]
+              }
+            },
+            "style": "form",
+            "explode": false,
+            "required": false
+          },
+          {
+            "name": "fields[certificates]",
+            "in": "query",
+            "description": "the fields to include for returned resources of type certificates",
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "string",
+                "enum": [
+                  "certificateContent",
+                  "certificateType",
+                  "csrContent",
+                  "displayName",
+                  "expirationDate",
+                  "name",
+                  "passTypeId",
+                  "platform",
+                  "serialNumber"
+                ]
+              }
+            },
+            "style": "form",
+            "explode": false,
+            "required": false
+          },
+          {
+            "name": "fields[devices]",
+            "in": "query",
+            "description": "the fields to include for returned resources of type devices",
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "string",
+                "enum": [
+                  "addedDate",
+                  "deviceClass",
+                  "model",
+                  "name",
+                  "platform",
+                  "status",
+                  "udid"
+                ]
+              }
+            },
+            "style": "form",
+            "explode": false,
+            "required": false
+          },
+          {
+            "name": "fields[bundleIds]",
+            "in": "query",
+            "description": "the fields to include for returned resources of type bundleIds",
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "string",
+                "enum": [
+                  "bundleIdCapabilities",
+                  "identifier",
+                  "name",
+                  "platform",
+                  "profiles",
+                  "seedId"
+                ]
+              }
+            },
+            "style": "form",
+            "explode": false,
+            "required": false
+          },
+          {
+            "name": "limit[certificates]",
+            "in": "query",
+            "description": "maximum number of related certificates returned (when they are included)",
+            "schema": {
+              "type": "integer",
+              "maximum": 50
+            },
+            "style": "form",
+            "required": false
+          },
+          {
+            "name": "limit[devices]",
+            "in": "query",
+            "description": "maximum number of related devices returned (when they are included)",
+            "schema": {
+              "type": "integer",
+              "maximum": 50
+            },
+            "style": "form",
+            "required": false
+          }
+        ],
+        "responses": {
+          "400": {
+            "description": "Parameter error(s)",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized error(s)",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "200": {
+            "description": "List of Profiles",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProfilesResponse"
+                }
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "summary": "Create a Profile",
+        "tags": [
+          "Profiles"
+        ],
+        "operationId": "profiles-create_instance",
+        "requestBody": {
+          "description": "Profile representation",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ProfileCreateRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "400": {
+            "description": "Parameter error(s)",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized error(s)",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Unprocessable request entity error(s)",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "201": {
+            "description": "Single Profile",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProfileResponse"
+                }
+              }
+            }
+          },
+          "409": {
+            "description": "Request entity error(s)",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/v1/profiles/{id}": {
+      "get": {
+        "summary": "Read and Download Profile Information",
+        "tags": [
+          "Profiles"
+        ],
+        "operationId": "profiles-get_instance",
+        "parameters": [
+          {
+            "name": "fields[profiles]",
+            "in": "query",
+            "description": "the fields to include for returned resources of type profiles",
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "string",
+                "enum": [
+                  "bundleId",
+                  "certificates",
+                  "createdDate",
+                  "devices",
+                  "expirationDate",
+                  "name",
+                  "platform",
+                  "profileContent",
+                  "profileState",
+                  "profileType",
+                  "uuid"
+                ]
+              }
+            },
+            "style": "form",
+            "explode": false,
+            "required": false
+          },
+          {
+            "name": "include",
+            "in": "query",
+            "description": "comma-separated list of relationships to include",
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "string",
+                "enum": [
+                  "bundleId",
+                  "certificates",
+                  "devices"
+                ]
+              }
+            },
+            "style": "form",
+            "explode": false,
+            "required": false
+          },
+          {
+            "name": "fields[certificates]",
+            "in": "query",
+            "description": "the fields to include for returned resources of type certificates",
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "string",
+                "enum": [
+                  "certificateContent",
+                  "certificateType",
+                  "csrContent",
+                  "displayName",
+                  "expirationDate",
+                  "name",
+                  "passTypeId",
+                  "platform",
+                  "serialNumber"
+                ]
+              }
+            },
+            "style": "form",
+            "explode": false,
+            "required": false
+          },
+          {
+            "name": "fields[devices]",
+            "in": "query",
+            "description": "the fields to include for returned resources of type devices",
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "string",
+                "enum": [
+                  "addedDate",
+                  "deviceClass",
+                  "model",
+                  "name",
+                  "platform",
+                  "status",
+                  "udid"
+                ]
+              }
+            },
+            "style": "form",
+            "explode": false,
+            "required": false
+          },
+          {
+            "name": "fields[bundleIds]",
+            "in": "query",
+            "description": "the fields to include for returned resources of type bundleIds",
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "string",
+                "enum": [
+                  "bundleIdCapabilities",
+                  "identifier",
+                  "name",
+                  "platform",
+                  "profiles",
+                  "seedId"
+                ]
+              }
+            },
+            "style": "form",
+            "explode": false,
+            "required": false
+          },
+          {
+            "name": "limit[certificates]",
+            "in": "query",
+            "description": "maximum number of related certificates returned (when they are included)",
+            "schema": {
+              "type": "integer",
+              "maximum": 50
+            },
+            "style": "form",
+            "required": false
+          },
+          {
+            "name": "limit[devices]",
+            "in": "query",
+            "description": "maximum number of related devices returned (when they are included)",
+            "schema": {
+              "type": "integer",
+              "maximum": 50
+            },
+            "style": "form",
+            "required": false
+          }
+        ],
+        "responses": {
+          "400": {
+            "description": "Parameter error(s)",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized error(s)",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not found error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "200": {
+            "description": "Single Profile",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProfileResponse"
+                }
+              }
+            }
+          }
+        }
+      },
+      "delete": {
+        "summary": "Delete a Profile",
+        "tags": [
+          "Profiles"
+        ],
+        "operationId": "profiles-delete_instance",
+        "responses": {
+          "400": {
+            "description": "Parameter error(s)",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized error(s)",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not found error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "409": {
+            "description": "Request entity error(s)",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "204": {
+            "description": "Success (no content)"
+          }
+        }
+      },
+      "parameters": [
+        {
+          "name": "id",
+          "in": "path",
+          "description": "the id of the requested resource",
+          "schema": {
+            "type": "string"
+          },
+          "style": "simple",
+          "required": true
+        }
+      ]
+    },
+    "/v1/userInvitations": {
+      "get": {
+        "summary": "List Invited Users",
+        "tags": [
+          "UserInvitations"
+        ],
+        "operationId": "userInvitations-get_collection",
+        "parameters": [
+          {
+            "name": "filter[email]",
+            "in": "query",
+            "description": "filter by attribute 'email'",
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            },
+            "style": "form",
+            "explode": false,
+            "required": false
+          },
+          {
+            "name": "filter[roles]",
+            "in": "query",
+            "description": "filter by attribute 'roles'",
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "string",
+                "enum": [
+                  "ADMIN",
+                  "ACCOUNT_HOLDER",
+                  "DEVELOPER"
+                ]
+              }
+            },
+            "style": "form",
+            "explode": false,
+            "required": false
+          },
+          {
+            "name": "sort",
+            "in": "query",
+            "description": "comma-separated list of sort expressions; resources will be sorted as specified",
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "string",
+                "enum": [
+                  "email",
+                  "-email",
+                  "lastName",
+                  "-lastName"
+                ]
+              }
+            },
+            "style": "form",
+            "explode": false,
+            "required": false
+          },
+          {
+            "name": "fields[userInvitations]",
+            "in": "query",
+            "description": "the fields to include for returned resources of type userInvitations",
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "string",
+                "enum": [
+                  "email",
+                  "expirationDate",
+                  "firstName",
+                  "lastName",
+                  "roles"
+                ]
+              }
+            },
+            "style": "form",
+            "explode": false,
+            "required": false
+          },
+          {
+            "name": "limit",
+            "in": "query",
+            "description": "maximum resources per page",
+            "schema": {
+              "type": "integer",
+              "maximum": 200
+            },
+            "style": "form"
+          }
+        ],
+        "responses": {
+          "400": {
+            "description": "Parameter error(s)",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized error(s)",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "200": {
+            "description": "List of UserInvitations",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/UserInvitationsResponse"
+                }
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "summary": "Invite a User",
+        "tags": [
+          "UserInvitations"
+        ],
+        "operationId": "userInvitations-create_instance",
+        "requestBody": {
+          "description": "UserInvitation representation",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UserInvitationCreateRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "400": {
+            "description": "Parameter error(s)",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized error(s)",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Unprocessable request entity error(s)",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "201": {
+            "description": "Single UserInvitation",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/UserInvitationResponse"
+                }
+              }
+            }
+          },
+          "409": {
+            "description": "Request entity error(s)",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/v1/userInvitations/{id}": {
+      "get": {
+        "summary": "Read UserInvitation Information",
+        "tags": [
+          "UserInvitations"
+        ],
+        "operationId": "userInvitations-get_instance",
+        "parameters": [
+          {
+            "name": "fields[userInvitations]",
+            "in": "query",
+            "description": "the fields to include for returned resources of type userInvitations",
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "string",
+                "enum": [
+                  "email",
+                  "expirationDate",
+                  "firstName",
+                  "lastName",
+                  "roles"
+                ]
+              }
+            },
+            "style": "form",
+            "explode": false,
+            "required": false
+          }
+        ],
+        "responses": {
+          "400": {
+            "description": "Parameter error(s)",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized error(s)",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not found error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "200": {
+            "description": "Single UserInvitation",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/UserInvitationResponse"
+                }
+              }
+            }
+          }
+        }
+      },
+      "delete": {
+        "summary": "Cancel a User Invitation",
+        "tags": [
+          "UserInvitations"
+        ],
+        "operationId": "userInvitations-delete_instance",
+        "responses": {
+          "400": {
+            "description": "Parameter error(s)",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized error(s)",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not found error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "409": {
+            "description": "Request entity error(s)",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "204": {
+            "description": "Success (no content)"
+          }
+        }
+      },
+      "parameters": [
+        {
+          "name": "id",
+          "in": "path",
+          "description": "the id of the requested resource",
+          "schema": {
+            "type": "string"
+          },
+          "style": "simple",
+          "required": true
+        }
+      ]
+    },
+    "/v1/users": {
+      "get": {
+        "summary": "List Users",
+        "tags": [
+          "Users"
+        ],
+        "operationId": "users-get_collection",
+        "parameters": [
+          {
+            "name": "filter[roles]",
+            "in": "query",
+            "description": "filter by attribute 'roles'",
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "string",
+                "enum": [
+                  "ADMIN",
+                  "ACCOUNT_HOLDER",
+                  "DEVELOPER"
+                ]
+              }
+            },
+            "style": "form",
+            "explode": false,
+            "required": false
+          },
+          {
+            "name": "filter[username]",
+            "in": "query",
+            "description": "filter by attribute 'username'",
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            },
+            "style": "form",
+            "explode": false,
+            "required": false
+          },
+          {
+            "name": "sort",
+            "in": "query",
+            "description": "comma-separated list of sort expressions; resources will be sorted as specified",
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "string",
+                "enum": [
+                  "lastName",
+                  "-lastName",
+                  "username",
+                  "-username"
+                ]
+              }
+            },
+            "style": "form",
+            "explode": false,
+            "required": false
+          },
+          {
+            "name": "fields[users]",
+            "in": "query",
+            "description": "the fields to include for returned resources of type users",
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "string",
+                "enum": [
+                  "firstName",
+                  "lastName",
+                  "roles",
+                  "username"
+                ]
+              }
+            },
+            "style": "form",
+            "explode": false,
+            "required": false
+          },
+          {
+            "name": "limit",
+            "in": "query",
+            "description": "maximum resources per page",
+            "schema": {
+              "type": "integer",
+              "maximum": 200
+            },
+            "style": "form"
+          }
+        ],
+        "responses": {
+          "400": {
+            "description": "Parameter error(s)",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized error(s)",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "200": {
+            "description": "List of Users",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/UsersResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/v1/users/{id}": {
+      "get": {
+        "summary": "Read User Information",
+        "tags": [
+          "Users"
+        ],
+        "operationId": "users-get_instance",
+        "parameters": [
+          {
+            "name": "fields[users]",
+            "in": "query",
+            "description": "the fields to include for returned resources of type users",
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "string",
+                "enum": [
+                  "firstName",
+                  "lastName",
+                  "roles",
+                  "username"
+                ]
+              }
+            },
+            "style": "form",
+            "explode": false,
+            "required": false
+          }
+        ],
+        "responses": {
+          "400": {
+            "description": "Parameter error(s)",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized error(s)",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not found error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "200": {
+            "description": "Single User",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/UserResponse"
+                }
+              }
+            }
+          }
+        }
+      },
+      "patch": {
+        "summary": "Modify a User Account",
+        "tags": [
+          "Users"
+        ],
+        "operationId": "users-update_instance",
+        "requestBody": {
+          "description": "User representation",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UserUpdateRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "400": {
+            "description": "Parameter error(s)",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized error(s)",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not found error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Unprocessable request entity error(s)",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "200": {
+            "description": "Single User",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/UserResponse"
+                }
+              }
+            }
+          },
+          "409": {
+            "description": "Request entity error(s)",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          }
+        }
+      },
+      "delete": {
+        "summary": "Delete a User Account",
+        "tags": [
+          "Users"
+        ],
+        "operationId": "users-delete_instance",
+        "responses": {
+          "400": {
+            "description": "Parameter error(s)",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized error(s)",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not found error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "409": {
+            "description": "Request entity error(s)",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "204": {
+            "description": "Success (no content)"
+          }
+        }
+      },
+      "parameters": [
+        {
+          "name": "id",
+          "in": "path",
+          "description": "the id of the requested resource",
+          "schema": {
+            "type": "string"
+          },
+          "style": "simple",
+          "required": true
+        }
+      ]
+    },
+    "/v1/bundleIds/{id}/bundleIdCapabilities": {
+      "get": {
+        "summary": "List All Bundle Id Capabilities for a BundleId",
+        "tags": [
+          "BundleIds"
+        ],
+        "operationId": "bundleIds-bundleIdCapabilities-get_to_many_related",
+        "parameters": [
+          {
+            "name": "fields[bundleIdCapabilities]",
+            "in": "query",
+            "description": "the fields to include for returned resources of type bundleIdCapabilities",
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "string",
+                "enum": [
+                  "bundleId",
+                  "capabilityType",
+                  "settings"
+                ]
+              }
+            },
+            "style": "form",
+            "explode": false
+          },
+          {
+            "name": "limit",
+            "in": "query",
+            "description": "maximum resources per page",
+            "schema": {
+              "type": "integer",
+              "maximum": 200
+            },
+            "style": "form"
+          }
+        ],
+        "responses": {
+          "400": {
+            "description": "Parameter error(s)",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized error(s)",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not found error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "200": {
+            "description": "List of BundleIdCapabilities with get",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/BundleIdCapabilitiesWithoutIncludesResponse"
+                }
+              }
+            }
+          }
+        }
+      },
+      "parameters": [
+        {
+          "name": "id",
+          "in": "path",
+          "description": "the id of the requested resource",
+          "schema": {
+            "type": "string"
+          },
+          "style": "simple",
+          "required": true
+        }
+      ]
+    },
+    "/v1/bundleIds/{id}/profiles": {
+      "get": {
+        "summary": "List All Profiles for a BundleId",
+        "tags": [
+          "BundleIds"
+        ],
+        "operationId": "bundleIds-profiles-get_to_many_related",
+        "parameters": [
+          {
+            "name": "fields[profiles]",
+            "in": "query",
+            "description": "the fields to include for returned resources of type profiles",
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "string",
+                "enum": [
+                  "bundleId",
+                  "certificates",
+                  "createdDate",
+                  "devices",
+                  "expirationDate",
+                  "name",
+                  "platform",
+                  "profileContent",
+                  "profileState",
+                  "profileType",
+                  "uuid"
+                ]
+              }
+            },
+            "style": "form",
+            "explode": false
+          },
+          {
+            "name": "limit",
+            "in": "query",
+            "description": "maximum resources per page",
+            "schema": {
+              "type": "integer",
+              "maximum": 200
+            },
+            "style": "form"
+          }
+        ],
+        "responses": {
+          "400": {
+            "description": "Parameter error(s)",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized error(s)",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not found error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "200": {
+            "description": "List of Profiles with get",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProfilesWithoutIncludesResponse"
+                }
+              }
+            }
+          }
+        }
+      },
+      "parameters": [
+        {
+          "name": "id",
+          "in": "path",
+          "description": "the id of the requested resource",
+          "schema": {
+            "type": "string"
+          },
+          "style": "simple",
+          "required": true
+        }
+      ]
+    },
+    "/v1/certificates/{id}/passTypeId": {
+      "get": {
+        "summary": "Read the Pass Type Id Information of a Certificate",
+        "tags": [
+          "Certificates"
+        ],
+        "operationId": "certificates-passTypeId-get_to_one_related",
+        "parameters": [
+          {
+            "name": "fields[certificates]",
+            "in": "query",
+            "description": "the fields to include for returned resources of type certificates",
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "string",
+                "enum": [
+                  "certificateContent",
+                  "certificateType",
+                  "csrContent",
+                  "displayName",
+                  "expirationDate",
+                  "name",
+                  "passTypeId",
+                  "platform",
+                  "serialNumber"
+                ]
+              }
+            },
+            "style": "form",
+            "explode": false
+          },
+          {
+            "name": "fields[passTypeIds]",
+            "in": "query",
+            "description": "the fields to include for returned resources of type passTypeIds",
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "string",
+                "enum": [
+                  "certificates",
+                  "identifier",
+                  "name"
+                ]
+              }
+            },
+            "style": "form",
+            "explode": false
+          },
+          {
+            "name": "limit[certificates]",
+            "in": "query",
+            "description": "maximum number of related certificates returned (when they are included)",
+            "schema": {
+              "type": "integer",
+              "maximum": 50
+            },
+            "style": "form"
+          },
+          {
+            "name": "include",
+            "in": "query",
+            "description": "comma-separated list of relationships to include",
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "string",
+                "enum": [
+                  "certificates"
+                ]
+              }
+            },
+            "style": "form",
+            "explode": false
+          }
+        ],
+        "responses": {
+          "400": {
+            "description": "Parameter error(s)",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized error(s)",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not found error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "200": {
+            "description": "Single PassTypeId",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PassTypeIdResponse"
+                }
+              }
+            }
+          }
+        }
+      },
+      "parameters": [
+        {
+          "name": "id",
+          "in": "path",
+          "description": "the id of the requested resource",
+          "schema": {
+            "type": "string"
+          },
+          "style": "simple",
+          "required": true
+        }
+      ]
+    },
+    "/v1/passTypeIds/{id}/certificates": {
+      "get": {
+        "summary": "List All Certificates for a PassTypeId",
+        "tags": [
+          "PassTypeIds"
+        ],
+        "operationId": "passTypeIds-certificates-get_to_many_related",
+        "parameters": [
+          {
+            "name": "filter[certificateType]",
+            "in": "query",
+            "description": "filter by attribute 'certificateType'",
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "string",
+                "enum": [
+                  "IOS_DEVELOPMENT",
+                  "IOS_DISTRIBUTION",
+                  "MAC_APP_DISTRIBUTION",
+                  "MAC_INSTALLER_DISTRIBUTION",
+                  "MAC_APP_DEVELOPMENT",
+                  "DEVELOPER_ID_KEXT",
+                  "DEVELOPER_ID_APPLICATION",
+                  "DEVELOPMENT",
+                  "DISTRIBUTION",
+                  "PASS_TYPE_ID",
+                  "PASS_TYPE_ID_WITH_NFC"
+                ]
+              }
+            },
+            "style": "form",
+            "explode": false
+          },
+          {
+            "name": "filter[displayName]",
+            "in": "query",
+            "description": "filter by attribute 'displayName'",
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            },
+            "style": "form",
+            "explode": false
+          },
+          {
+            "name": "filter[serialNumber]",
+            "in": "query",
+            "description": "filter by attribute 'serialNumber'",
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            },
+            "style": "form",
+            "explode": false
+          },
+          {
+            "name": "filter[id]",
+            "in": "query",
+            "description": "filter by id(s)",
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            },
+            "style": "form",
+            "explode": false
+          },
+          {
+            "name": "sort",
+            "in": "query",
+            "description": "comma-separated list of sort expressions; resources will be sorted as specified",
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "string",
+                "enum": [
+                  "certificateType",
+                  "-certificateType",
+                  "displayName",
+                  "-displayName",
+                  "id",
+                  "-id",
+                  "serialNumber",
+                  "-serialNumber"
+                ]
+              }
+            },
+            "style": "form",
+            "explode": false
+          },
+          {
+            "name": "fields[certificates]",
+            "in": "query",
+            "description": "the fields to include for returned resources of type certificates",
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "string",
+                "enum": [
+                  "certificateContent",
+                  "certificateType",
+                  "csrContent",
+                  "displayName",
+                  "expirationDate",
+                  "name",
+                  "passTypeId",
+                  "platform",
+                  "serialNumber"
+                ]
+              }
+            },
+            "style": "form",
+            "explode": false
+          },
+          {
+            "name": "fields[passTypeIds]",
+            "in": "query",
+            "description": "the fields to include for returned resources of type passTypeIds",
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "string",
+                "enum": [
+                  "certificates",
+                  "identifier",
+                  "name"
+                ]
+              }
+            },
+            "style": "form",
+            "explode": false
+          },
+          {
+            "name": "limit",
+            "in": "query",
+            "description": "maximum resources per page",
+            "schema": {
+              "type": "integer",
+              "maximum": 200
+            },
+            "style": "form"
+          },
+          {
+            "name": "include",
+            "in": "query",
+            "description": "comma-separated list of relationships to include",
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "string",
+                "enum": [
+                  "passTypeId"
+                ]
+              }
+            },
+            "style": "form",
+            "explode": false
+          }
+        ],
+        "responses": {
+          "400": {
+            "description": "Parameter error(s)",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized error(s)",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not found error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "200": {
+            "description": "List of Certificates",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CertificatesResponse"
+                }
+              }
+            }
+          }
+        }
+      },
+      "parameters": [
+        {
+          "name": "id",
+          "in": "path",
+          "description": "the id of the requested resource",
+          "schema": {
+            "type": "string"
+          },
+          "style": "simple",
+          "required": true
+        }
+      ]
+    },
+    "/v1/profiles/{id}/bundleId": {
+      "get": {
+        "summary": "Read the Bundle ID in a Profile",
+        "tags": [
+          "Profiles"
+        ],
+        "operationId": "profiles-bundleId-get_to_one_related",
+        "parameters": [
+          {
+            "name": "fields[bundleIds]",
+            "in": "query",
+            "description": "the fields to include for returned resources of type bundleIds",
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "string",
+                "enum": [
+                  "bundleIdCapabilities",
+                  "identifier",
+                  "name",
+                  "platform",
+                  "profiles",
+                  "seedId"
+                ]
+              }
+            },
+            "style": "form",
+            "explode": false
+          }
+        ],
+        "responses": {
+          "400": {
+            "description": "Parameter error(s)",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized error(s)",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not found error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "200": {
+            "description": "Single BundleId with get",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/BundleIdWithoutIncludesResponse"
+                }
+              }
+            }
+          }
+        }
+      },
+      "parameters": [
+        {
+          "name": "id",
+          "in": "path",
+          "description": "the id of the requested resource",
+          "schema": {
+            "type": "string"
+          },
+          "style": "simple",
+          "required": true
+        }
+      ]
+    },
+    "/v1/profiles/{id}/certificates": {
+      "get": {
+        "summary": "List All Certificates in a Profile",
+        "tags": [
+          "Profiles"
+        ],
+        "operationId": "profiles-certificates-get_to_many_related",
+        "parameters": [
+          {
+            "name": "fields[certificates]",
+            "in": "query",
+            "description": "the fields to include for returned resources of type certificates",
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "string",
+                "enum": [
+                  "certificateContent",
+                  "certificateType",
+                  "csrContent",
+                  "displayName",
+                  "expirationDate",
+                  "name",
+                  "passTypeId",
+                  "platform",
+                  "serialNumber"
+                ]
+              }
+            },
+            "style": "form",
+            "explode": false
+          },
+          {
+            "name": "limit",
+            "in": "query",
+            "description": "maximum resources per page",
+            "schema": {
+              "type": "integer",
+              "maximum": 200
+            },
+            "style": "form"
+          }
+        ],
+        "responses": {
+          "400": {
+            "description": "Parameter error(s)",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized error(s)",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not found error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "200": {
+            "description": "List of Certificates with get",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CertificatesWithoutIncludesResponse"
+                }
+              }
+            }
+          }
+        }
+      },
+      "parameters": [
+        {
+          "name": "id",
+          "in": "path",
+          "description": "the id of the requested resource",
+          "schema": {
+            "type": "string"
+          },
+          "style": "simple",
+          "required": true
+        }
+      ]
+    },
+    "/v1/profiles/{id}/devices": {
+      "get": {
+        "summary": "List All Devices in a Profile",
+        "tags": [
+          "Profiles"
+        ],
+        "operationId": "profiles-devices-get_to_many_related",
+        "parameters": [
+          {
+            "name": "fields[devices]",
+            "in": "query",
+            "description": "the fields to include for returned resources of type devices",
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "string",
+                "enum": [
+                  "addedDate",
+                  "deviceClass",
+                  "model",
+                  "name",
+                  "platform",
+                  "status",
+                  "udid"
+                ]
+              }
+            },
+            "style": "form",
+            "explode": false
+          },
+          {
+            "name": "limit",
+            "in": "query",
+            "description": "maximum resources per page",
+            "schema": {
+              "type": "integer",
+              "maximum": 200
+            },
+            "style": "form"
+          }
+        ],
+        "responses": {
+          "400": {
+            "description": "Parameter error(s)",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized error(s)",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not found error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "200": {
+            "description": "List of Devices with get",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/DevicesWithoutIncludesResponse"
+                }
+              }
+            }
+          }
+        }
+      },
+      "parameters": [
+        {
+          "name": "id",
+          "in": "path",
+          "description": "the id of the requested resource",
+          "schema": {
+            "type": "string"
+          },
+          "style": "simple",
+          "required": true
+        }
+      ]
+    }
+  },
+  "components": {
+    "schemas": {
+      "BundleIdCapability": {
+        "type": "object",
+        "title": "BundleIdCapability",
+        "properties": {
+          "type": {
+            "type": "string",
+            "enum": [
+              "bundleIdCapabilities"
+            ]
+          },
+          "id": {
+            "type": "string"
+          },
+          "attributes": {
+            "type": "object",
+            "properties": {
+              "capabilityType": {
+                "$ref": "#/components/schemas/CapabilityType"
+              },
+              "settings": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/components/schemas/CapabilitySetting"
+                }
+              }
+            }
+          },
+          "links": {
+            "$ref": "#/components/schemas/ResourceLinks"
+          }
+        },
+        "required": [
+          "id",
+          "type"
+        ]
+      },
+      "BundleIdCapabilitiesResponse": {
+        "type": "object",
+        "title": "BundleIdCapabilitiesResponse",
+        "properties": {
+          "data": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/BundleIdCapability"
+            }
+          },
+          "links": {
+            "$ref": "#/components/schemas/PagedDocumentLinks"
+          },
+          "meta": {
+            "$ref": "#/components/schemas/PagingInformation"
+          }
+        },
+        "required": [
+          "data",
+          "links"
+        ]
+      },
+      "BundleIdCapabilityResponse": {
+        "type": "object",
+        "title": "BundleIdCapabilityResponse",
+        "properties": {
+          "data": {
+            "$ref": "#/components/schemas/BundleIdCapability"
+          },
+          "links": {
+            "$ref": "#/components/schemas/DocumentLinks"
+          }
+        },
+        "required": [
+          "data",
+          "links"
+        ]
+      },
+      "BundleIdCapabilityCreateRequest": {
+        "type": "object",
+        "title": "BundleIdCapabilityCreateRequest",
+        "properties": {
+          "data": {
+            "type": "object",
+            "properties": {
+              "type": {
+                "type": "string",
+                "enum": [
+                  "bundleIdCapabilities"
+                ]
+              },
+              "attributes": {
+                "type": "object",
+                "properties": {
+                  "capabilityType": {
+                    "$ref": "#/components/schemas/CapabilityType"
+                  },
+                  "settings": {
+                    "type": "array",
+                    "items": {
+                      "$ref": "#/components/schemas/CapabilitySetting"
+                    }
+                  }
+                },
+                "required": [
+                  "capabilityType"
+                ]
+              },
+              "relationships": {
+                "type": "object",
+                "properties": {
+                  "bundleId": {
+                    "type": "object",
+                    "properties": {
+                      "data": {
+                        "type": "object",
+                        "properties": {
+                          "type": {
+                            "type": "string",
+                            "enum": [
+                              "bundleIds"
+                            ]
+                          },
+                          "id": {
+                            "type": "string"
+                          }
+                        },
+                        "required": [
+                          "id",
+                          "type"
+                        ]
+                      }
+                    },
+                    "required": [
+                      "data"
+                    ]
+                  }
+                },
+                "required": [
+                  "bundleId"
+                ]
+              }
+            },
+            "required": [
+              "relationships",
+              "attributes",
+              "type"
+            ]
+          }
+        },
+        "required": [
+          "data"
+        ]
+      },
+      "BundleIdCapabilityUpdateRequest": {
+        "type": "object",
+        "title": "BundleIdCapabilityUpdateRequest",
+        "properties": {
+          "data": {
+            "type": "object",
+            "properties": {
+              "type": {
+                "type": "string",
+                "enum": [
+                  "bundleIdCapabilities"
+                ]
+              },
+              "id": {
+                "type": "string"
+              },
+              "attributes": {
+                "type": "object",
+                "properties": {
+                  "capabilityType": {
+                    "$ref": "#/components/schemas/CapabilityType"
+                  },
+                  "settings": {
+                    "type": "array",
+                    "items": {
+                      "$ref": "#/components/schemas/CapabilitySetting"
+                    }
+                  }
+                }
+              }
+            },
+            "required": [
+              "id",
+              "type"
+            ]
+          }
+        },
+        "required": [
+          "data"
+        ]
+      },
+      "BundleId": {
+        "type": "object",
+        "title": "BundleId",
+        "properties": {
+          "type": {
+            "type": "string",
+            "enum": [
+              "bundleIds"
+            ]
+          },
+          "id": {
+            "type": "string"
+          },
+          "attributes": {
+            "type": "object",
+            "properties": {
+              "name": {
+                "type": "string"
+              },
+              "platform": {
+                "$ref": "#/components/schemas/BundleIdPlatform"
+              },
+              "identifier": {
+                "type": "string"
+              },
+              "seedId": {
+                "type": "string"
+              }
+            }
+          },
+          "relationships": {
+            "type": "object",
+            "properties": {
+              "profiles": {
+                "type": "object",
+                "properties": {
+                  "links": {
+                    "$ref": "#/components/schemas/RelationshipLinks"
+                  },
+                  "meta": {
+                    "$ref": "#/components/schemas/PagingInformation"
+                  },
+                  "data": {
+                    "type": "array",
+                    "items": {
+                      "type": "object",
+                      "properties": {
+                        "type": {
+                          "type": "string",
+                          "enum": [
+                            "profiles"
+                          ]
+                        },
+                        "id": {
+                          "type": "string"
+                        }
+                      },
+                      "required": [
+                        "id",
+                        "type"
+                      ]
+                    }
+                  }
+                }
+              },
+              "bundleIdCapabilities": {
+                "type": "object",
+                "properties": {
+                  "links": {
+                    "$ref": "#/components/schemas/RelationshipLinks"
+                  },
+                  "meta": {
+                    "$ref": "#/components/schemas/PagingInformation"
+                  },
+                  "data": {
+                    "type": "array",
+                    "items": {
+                      "type": "object",
+                      "properties": {
+                        "type": {
+                          "type": "string",
+                          "enum": [
+                            "bundleIdCapabilities"
+                          ]
+                        },
+                        "id": {
+                          "type": "string"
+                        }
+                      },
+                      "required": [
+                        "id",
+                        "type"
+                      ]
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "links": {
+            "$ref": "#/components/schemas/ResourceLinks"
+          }
+        },
+        "required": [
+          "id",
+          "type"
+        ]
+      },
+      "BundleIdsResponse": {
+        "type": "object",
+        "title": "BundleIdsResponse",
+        "properties": {
+          "data": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/BundleId"
+            }
+          },
+          "included": {
+            "type": "array",
+            "items": {
+              "oneOf": [
+                {
+                  "$ref": "#/components/schemas/Profile"
+                },
+                {
+                  "$ref": "#/components/schemas/BundleIdCapability"
+                }
+              ]
+            }
+          },
+          "links": {
+            "$ref": "#/components/schemas/PagedDocumentLinks"
+          },
+          "meta": {
+            "$ref": "#/components/schemas/PagingInformation"
+          }
+        },
+        "required": [
+          "data",
+          "links"
+        ]
+      },
+      "BundleIdResponse": {
+        "type": "object",
+        "title": "BundleIdResponse",
+        "properties": {
+          "data": {
+            "$ref": "#/components/schemas/BundleId"
+          },
+          "included": {
+            "type": "array",
+            "items": {
+              "oneOf": [
+                {
+                  "$ref": "#/components/schemas/Profile"
+                },
+                {
+                  "$ref": "#/components/schemas/BundleIdCapability"
+                }
+              ]
+            }
+          },
+          "links": {
+            "$ref": "#/components/schemas/DocumentLinks"
+          }
+        },
+        "required": [
+          "data",
+          "links"
+        ]
+      },
+      "BundleIdCreateRequest": {
+        "type": "object",
+        "title": "BundleIdCreateRequest",
+        "properties": {
+          "data": {
+            "type": "object",
+            "properties": {
+              "type": {
+                "type": "string",
+                "enum": [
+                  "bundleIds"
+                ]
+              },
+              "attributes": {
+                "type": "object",
+                "properties": {
+                  "name": {
+                    "type": "string"
+                  },
+                  "platform": {
+                    "$ref": "#/components/schemas/BundleIdPlatform"
+                  },
+                  "identifier": {
+                    "type": "string"
+                  },
+                  "seedId": {
+                    "type": "string"
+                  }
+                },
+                "required": [
+                  "identifier",
+                  "name",
+                  "platform"
+                ]
+              }
+            },
+            "required": [
+              "attributes",
+              "type"
+            ]
+          }
+        },
+        "required": [
+          "data"
+        ]
+      },
+      "BundleIdUpdateRequest": {
+        "type": "object",
+        "title": "BundleIdUpdateRequest",
+        "properties": {
+          "data": {
+            "type": "object",
+            "properties": {
+              "type": {
+                "type": "string",
+                "enum": [
+                  "bundleIds"
+                ]
+              },
+              "id": {
+                "type": "string"
+              },
+              "attributes": {
+                "type": "object",
+                "properties": {
+                  "name": {
+                    "type": "string"
+                  }
+                }
+              }
+            },
+            "required": [
+              "id",
+              "type"
+            ]
+          }
+        },
+        "required": [
+          "data"
+        ]
+      },
+      "Certificate": {
+        "type": "object",
+        "title": "Certificate",
+        "properties": {
+          "type": {
+            "type": "string",
+            "enum": [
+              "certificates"
+            ]
+          },
+          "id": {
+            "type": "string"
+          },
+          "attributes": {
+            "type": "object",
+            "properties": {
+              "name": {
+                "type": "string"
+              },
+              "certificateType": {
+                "$ref": "#/components/schemas/CertificateType"
+              },
+              "displayName": {
+                "type": "string"
+              },
+              "serialNumber": {
+                "type": "string"
+              },
+              "platform": {
+                "$ref": "#/components/schemas/BundleIdPlatform"
+              },
+              "expirationDate": {
+                "type": "string",
+                "format": "date-time"
+              },
+              "certificateContent": {
+                "type": "string"
+              }
+            }
+          },
+          "relationships": {
+            "type": "object",
+            "properties": {
+              "passTypeId": {
+                "type": "object",
+                "properties": {
+                  "links": {
+                    "$ref": "#/components/schemas/RelationshipLinks"
+                  },
+                  "data": {
+                    "type": "object",
+                    "properties": {
+                      "type": {
+                        "type": "string",
+                        "enum": [
+                          "passTypeIds"
+                        ]
+                      },
+                      "id": {
+                        "type": "string"
+                      }
+                    },
+                    "required": [
+                      "id",
+                      "type"
+                    ]
+                  }
+                }
+              }
+            }
+          },
+          "links": {
+            "$ref": "#/components/schemas/ResourceLinks"
+          }
+        },
+        "required": [
+          "id",
+          "type"
+        ]
+      },
+      "CertificatesResponse": {
+        "type": "object",
+        "title": "CertificatesResponse",
+        "properties": {
+          "data": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Certificate"
+            }
+          },
+          "included": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/PassTypeId"
+            }
+          },
+          "links": {
+            "$ref": "#/components/schemas/PagedDocumentLinks"
+          },
+          "meta": {
+            "$ref": "#/components/schemas/PagingInformation"
+          }
+        },
+        "required": [
+          "data",
+          "links"
+        ]
+      },
+      "CertificateResponse": {
+        "type": "object",
+        "title": "CertificateResponse",
+        "properties": {
+          "data": {
+            "$ref": "#/components/schemas/Certificate"
+          },
+          "included": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/PassTypeId"
+            }
+          },
+          "links": {
+            "$ref": "#/components/schemas/DocumentLinks"
+          }
+        },
+        "required": [
+          "data",
+          "links"
+        ]
+      },
+      "CertificateCreateRequest": {
+        "type": "object",
+        "title": "CertificateCreateRequest",
+        "properties": {
+          "data": {
+            "type": "object",
+            "properties": {
+              "type": {
+                "type": "string",
+                "enum": [
+                  "certificates"
+                ]
+              },
+              "attributes": {
+                "type": "object",
+                "properties": {
+                  "csrContent": {
+                    "type": "string"
+                  },
+                  "certificateType": {
+                    "$ref": "#/components/schemas/CertificateType"
+                  }
+                },
+                "required": [
+                  "csrContent",
+                  "certificateType"
+                ]
+              },
+              "relationships": {
+                "type": "object",
+                "properties": {
+                  "passTypeId": {
+                    "type": "object",
+                    "properties": {
+                      "data": {
+                        "type": "object",
+                        "properties": {
+                          "type": {
+                            "type": "string",
+                            "enum": [
+                              "passTypeIds"
+                            ]
+                          },
+                          "id": {
+                            "type": "string"
+                          }
+                        },
+                        "required": [
+                          "id",
+                          "type"
+                        ]
+                      }
+                    }
+                  }
+                }
+              }
+            },
+            "required": [
+              "attributes",
+              "type"
+            ]
+          }
+        },
+        "required": [
+          "data"
+        ]
+      },
+      "Device": {
+        "type": "object",
+        "title": "Device",
+        "properties": {
+          "type": {
+            "type": "string",
+            "enum": [
+              "devices"
+            ]
+          },
+          "id": {
+            "type": "string"
+          },
+          "attributes": {
+            "type": "object",
+            "properties": {
+              "name": {
+                "type": "string"
+              },
+              "platform": {
+                "$ref": "#/components/schemas/BundleIdPlatform"
+              },
+              "udid": {
+                "type": "string"
+              },
+              "deviceClass": {
+                "type": "string",
+                "enum": [
+                  "APPLE_WATCH",
+                  "IPAD",
+                  "IPHONE",
+                  "IPOD",
+                  "APPLE_TV",
+                  "MAC"
+                ]
+              },
+              "status": {
+                "type": "string",
+                "enum": [
+                  "ENABLED",
+                  "DISABLED"
+                ]
+              },
+              "model": {
+                "type": "string"
+              },
+              "addedDate": {
+                "type": "string",
+                "format": "date-time"
+              }
+            }
+          },
+          "links": {
+            "$ref": "#/components/schemas/ResourceLinks"
+          }
+        },
+        "required": [
+          "id",
+          "type"
+        ]
+      },
+      "DevicesResponse": {
+        "type": "object",
+        "title": "DevicesResponse",
+        "properties": {
+          "data": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Device"
+            }
+          },
+          "links": {
+            "$ref": "#/components/schemas/PagedDocumentLinks"
+          },
+          "meta": {
+            "$ref": "#/components/schemas/PagingInformation"
+          }
+        },
+        "required": [
+          "data",
+          "links"
+        ]
+      },
+      "DeviceResponse": {
+        "type": "object",
+        "title": "DeviceResponse",
+        "properties": {
+          "data": {
+            "$ref": "#/components/schemas/Device"
+          },
+          "links": {
+            "$ref": "#/components/schemas/DocumentLinks"
+          }
+        },
+        "required": [
+          "data",
+          "links"
+        ]
+      },
+      "DeviceCreateRequest": {
+        "type": "object",
+        "title": "DeviceCreateRequest",
+        "properties": {
+          "data": {
+            "type": "object",
+            "properties": {
+              "type": {
+                "type": "string",
+                "enum": [
+                  "devices"
+                ]
+              },
+              "attributes": {
+                "type": "object",
+                "properties": {
+                  "name": {
+                    "type": "string"
+                  },
+                  "platform": {
+                    "$ref": "#/components/schemas/BundleIdPlatform"
+                  },
+                  "udid": {
+                    "type": "string"
+                  }
+                },
+                "required": [
+                  "name",
+                  "udid",
+                  "platform"
+                ]
+              }
+            },
+            "required": [
+              "attributes",
+              "type"
+            ]
+          }
+        },
+        "required": [
+          "data"
+        ]
+      },
+      "DeviceUpdateRequest": {
+        "type": "object",
+        "title": "DeviceUpdateRequest",
+        "properties": {
+          "data": {
+            "type": "object",
+            "properties": {
+              "type": {
+                "type": "string",
+                "enum": [
+                  "devices"
+                ]
+              },
+              "id": {
+                "type": "string"
+              },
+              "attributes": {
+                "type": "object",
+                "properties": {
+                  "name": {
+                    "type": "string"
+                  },
+                  "status": {
+                    "type": "string",
+                    "enum": [
+                      "ENABLED",
+                      "DISABLED"
+                    ]
+                  }
+                }
+              }
+            },
+            "required": [
+              "id",
+              "type"
+            ]
+          }
+        },
+        "required": [
+          "data"
+        ]
+      },
+      "PassTypeId": {
+        "type": "object",
+        "title": "PassTypeId",
+        "properties": {
+          "type": {
+            "type": "string",
+            "enum": [
+              "passTypeIds"
+            ]
+          },
+          "id": {
+            "type": "string"
+          },
+          "attributes": {
+            "type": "object",
+            "properties": {
+              "name": {
+                "type": "string"
+              },
+              "identifier": {
+                "type": "string"
+              }
+            }
+          },
+          "relationships": {
+            "type": "object",
+            "properties": {
+              "certificates": {
+                "type": "object",
+                "properties": {
+                  "links": {
+                    "$ref": "#/components/schemas/RelationshipLinks"
+                  },
+                  "meta": {
+                    "$ref": "#/components/schemas/PagingInformation"
+                  },
+                  "data": {
+                    "type": "array",
+                    "items": {
+                      "type": "object",
+                      "properties": {
+                        "type": {
+                          "type": "string",
+                          "enum": [
+                            "certificates"
+                          ]
+                        },
+                        "id": {
+                          "type": "string"
+                        }
+                      },
+                      "required": [
+                        "id",
+                        "type"
+                      ]
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "links": {
+            "$ref": "#/components/schemas/ResourceLinks"
+          }
+        },
+        "required": [
+          "id",
+          "type"
+        ]
+      },
+      "PassTypeIdsResponse": {
+        "type": "object",
+        "title": "PassTypeIdsResponse",
+        "properties": {
+          "data": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/PassTypeId"
+            }
+          },
+          "included": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Certificate"
+            }
+          },
+          "links": {
+            "$ref": "#/components/schemas/PagedDocumentLinks"
+          },
+          "meta": {
+            "$ref": "#/components/schemas/PagingInformation"
+          }
+        },
+        "required": [
+          "data",
+          "links"
+        ]
+      },
+      "PassTypeIdResponse": {
+        "type": "object",
+        "title": "PassTypeIdResponse",
+        "properties": {
+          "data": {
+            "$ref": "#/components/schemas/PassTypeId"
+          },
+          "included": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Certificate"
+            }
+          },
+          "links": {
+            "$ref": "#/components/schemas/DocumentLinks"
+          }
+        },
+        "required": [
+          "data",
+          "links"
+        ]
+      },
+      "PassTypeIdCreateRequest": {
+        "type": "object",
+        "title": "PassTypeIdCreateRequest",
+        "properties": {
+          "data": {
+            "type": "object",
+            "properties": {
+              "type": {
+                "type": "string",
+                "enum": [
+                  "passTypeIds"
+                ]
+              },
+              "attributes": {
+                "type": "object",
+                "properties": {
+                  "name": {
+                    "type": "string"
+                  },
+                  "identifier": {
+                    "type": "string"
+                  }
+                },
+                "required": [
+                  "identifier",
+                  "name"
+                ]
+              }
+            },
+            "required": [
+              "attributes",
+              "type"
+            ]
+          }
+        },
+        "required": [
+          "data"
+        ]
+      },
+      "PassTypeIdUpdateRequest": {
+        "type": "object",
+        "title": "PassTypeIdUpdateRequest",
+        "properties": {
+          "data": {
+            "type": "object",
+            "properties": {
+              "type": {
+                "type": "string",
+                "enum": [
+                  "passTypeIds"
+                ]
+              },
+              "id": {
+                "type": "string"
+              },
+              "attributes": {
+                "type": "object",
+                "properties": {
+                  "name": {
+                    "type": "string"
+                  }
+                }
+              }
+            },
+            "required": [
+              "id",
+              "type"
+            ]
+          }
+        },
+        "required": [
+          "data"
+        ]
+      },
+      "Profile": {
+        "type": "object",
+        "title": "Profile",
+        "properties": {
+          "type": {
+            "type": "string",
+            "enum": [
+              "profiles"
+            ]
+          },
+          "id": {
+            "type": "string"
+          },
+          "attributes": {
+            "type": "object",
+            "properties": {
+              "name": {
+                "type": "string"
+              },
+              "platform": {
+                "$ref": "#/components/schemas/BundleIdPlatform"
+              },
+              "profileType": {
+                "type": "string",
+                "enum": [
+                  "IOS_APP_DEVELOPMENT",
+                  "IOS_APP_STORE",
+                  "IOS_APP_ADHOC",
+                  "IOS_APP_INHOUSE",
+                  "MAC_APP_DEVELOPMENT",
+                  "MAC_APP_STORE",
+                  "MAC_APP_DIRECT",
+                  "TVOS_APP_DEVELOPMENT",
+                  "TVOS_APP_STORE",
+                  "TVOS_APP_ADHOC",
+                  "TVOS_APP_INHOUSE",
+                  "MAC_CATALYST_APP_DEVELOPMENT",
+                  "MAC_CATALYST_APP_STORE",
+                  "MAC_CATALYST_APP_DIRECT"
+                ]
+              },
+              "profileState": {
+                "type": "string",
+                "enum": [
+                  "ACTIVE",
+                  "INVALID"
+                ]
+              },
+              "profileContent": {
+                "type": "string"
+              },
+              "uuid": {
+                "type": "string"
+              },
+              "createdDate": {
+                "type": "string",
+                "format": "date-time"
+              },
+              "expirationDate": {
+                "type": "string",
+                "format": "date-time"
+              }
+            }
+          },
+          "relationships": {
+            "type": "object",
+            "properties": {
+              "bundleId": {
+                "type": "object",
+                "properties": {
+                  "links": {
+                    "$ref": "#/components/schemas/RelationshipLinks"
+                  },
+                  "data": {
+                    "type": "object",
+                    "properties": {
+                      "type": {
+                        "type": "string",
+                        "enum": [
+                          "bundleIds"
+                        ]
+                      },
+                      "id": {
+                        "type": "string"
+                      }
+                    },
+                    "required": [
+                      "id",
+                      "type"
+                    ]
+                  }
+                }
+              },
+              "devices": {
+                "type": "object",
+                "properties": {
+                  "links": {
+                    "$ref": "#/components/schemas/RelationshipLinks"
+                  },
+                  "meta": {
+                    "$ref": "#/components/schemas/PagingInformation"
+                  },
+                  "data": {
+                    "type": "array",
+                    "items": {
+                      "type": "object",
+                      "properties": {
+                        "type": {
+                          "type": "string",
+                          "enum": [
+                            "devices"
+                          ]
+                        },
+                        "id": {
+                          "type": "string"
+                        }
+                      },
+                      "required": [
+                        "id",
+                        "type"
+                      ]
+                    }
+                  }
+                }
+              },
+              "certificates": {
+                "type": "object",
+                "properties": {
+                  "links": {
+                    "$ref": "#/components/schemas/RelationshipLinks"
+                  },
+                  "meta": {
+                    "$ref": "#/components/schemas/PagingInformation"
+                  },
+                  "data": {
+                    "type": "array",
+                    "items": {
+                      "type": "object",
+                      "properties": {
+                        "type": {
+                          "type": "string",
+                          "enum": [
+                            "certificates"
+                          ]
+                        },
+                        "id": {
+                          "type": "string"
+                        }
+                      },
+                      "required": [
+                        "id",
+                        "type"
+                      ]
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "links": {
+            "$ref": "#/components/schemas/ResourceLinks"
+          }
+        },
+        "required": [
+          "id",
+          "type"
+        ]
+      },
+      "ProfilesResponse": {
+        "type": "object",
+        "title": "ProfilesResponse",
+        "properties": {
+          "data": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Profile"
+            }
+          },
+          "included": {
+            "type": "array",
+            "items": {
+              "oneOf": [
+                {
+                  "$ref": "#/components/schemas/BundleId"
+                },
+                {
+                  "$ref": "#/components/schemas/Device"
+                },
+                {
+                  "$ref": "#/components/schemas/Certificate"
+                }
+              ]
+            }
+          },
+          "links": {
+            "$ref": "#/components/schemas/PagedDocumentLinks"
+          },
+          "meta": {
+            "$ref": "#/components/schemas/PagingInformation"
+          }
+        },
+        "required": [
+          "data",
+          "links"
+        ]
+      },
+      "ProfileResponse": {
+        "type": "object",
+        "title": "ProfileResponse",
+        "properties": {
+          "data": {
+            "$ref": "#/components/schemas/Profile"
+          },
+          "included": {
+            "type": "array",
+            "items": {
+              "oneOf": [
+                {
+                  "$ref": "#/components/schemas/BundleId"
+                },
+                {
+                  "$ref": "#/components/schemas/Device"
+                },
+                {
+                  "$ref": "#/components/schemas/Certificate"
+                }
+              ]
+            }
+          },
+          "links": {
+            "$ref": "#/components/schemas/DocumentLinks"
+          }
+        },
+        "required": [
+          "data",
+          "links"
+        ]
+      },
+      "ProfileCreateRequest": {
+        "type": "object",
+        "title": "ProfileCreateRequest",
+        "properties": {
+          "data": {
+            "type": "object",
+            "properties": {
+              "type": {
+                "type": "string",
+                "enum": [
+                  "profiles"
+                ]
+              },
+              "attributes": {
+                "type": "object",
+                "properties": {
+                  "name": {
+                    "type": "string"
+                  },
+                  "profileType": {
+                    "type": "string",
+                    "enum": [
+                      "IOS_APP_DEVELOPMENT",
+                      "IOS_APP_STORE",
+                      "IOS_APP_ADHOC",
+                      "IOS_APP_INHOUSE",
+                      "MAC_APP_DEVELOPMENT",
+                      "MAC_APP_STORE",
+                      "MAC_APP_DIRECT",
+                      "TVOS_APP_DEVELOPMENT",
+                      "TVOS_APP_STORE",
+                      "TVOS_APP_ADHOC",
+                      "TVOS_APP_INHOUSE",
+                      "MAC_CATALYST_APP_DEVELOPMENT",
+                      "MAC_CATALYST_APP_STORE",
+                      "MAC_CATALYST_APP_DIRECT"
+                    ]
+                  }
+                },
+                "required": [
+                  "profileType",
+                  "name"
+                ]
+              },
+              "relationships": {
+                "type": "object",
+                "properties": {
+                  "bundleId": {
+                    "type": "object",
+                    "properties": {
+                      "data": {
+                        "type": "object",
+                        "properties": {
+                          "type": {
+                            "type": "string",
+                            "enum": [
+                              "bundleIds"
+                            ]
+                          },
+                          "id": {
+                            "type": "string"
+                          }
+                        },
+                        "required": [
+                          "id",
+                          "type"
+                        ]
+                      }
+                    },
+                    "required": [
+                      "data"
+                    ]
+                  },
+                  "devices": {
+                    "type": "object",
+                    "properties": {
+                      "data": {
+                        "type": "array",
+                        "items": {
+                          "type": "object",
+                          "properties": {
+                            "type": {
+                              "type": "string",
+                              "enum": [
+                                "devices"
+                              ]
+                            },
+                            "id": {
+                              "type": "string"
+                            }
+                          },
+                          "required": [
+                            "id",
+                            "type"
+                          ]
+                        }
+                      }
+                    }
+                  },
+                  "certificates": {
+                    "type": "object",
+                    "properties": {
+                      "data": {
+                        "type": "array",
+                        "items": {
+                          "type": "object",
+                          "properties": {
+                            "type": {
+                              "type": "string",
+                              "enum": [
+                                "certificates"
+                              ]
+                            },
+                            "id": {
+                              "type": "string"
+                            }
+                          },
+                          "required": [
+                            "id",
+                            "type"
+                          ]
+                        }
+                      }
+                    },
+                    "required": [
+                      "data"
+                    ]
+                  }
+                },
+                "required": [
+                  "certificates",
+                  "bundleId"
+                ]
+              }
+            },
+            "required": [
+              "relationships",
+              "attributes",
+              "type"
+            ]
+          }
+        },
+        "required": [
+          "data"
+        ]
+      },
+      "UserInvitation": {
+        "type": "object",
+        "title": "UserInvitation",
+        "properties": {
+          "type": {
+            "type": "string",
+            "enum": [
+              "userInvitations"
+            ]
+          },
+          "id": {
+            "type": "string"
+          },
+          "attributes": {
+            "type": "object",
+            "properties": {
+              "email": {
+                "type": "string",
+                "format": "email"
+              },
+              "firstName": {
+                "type": "string"
+              },
+              "lastName": {
+                "type": "string"
+              },
+              "expirationDate": {
+                "type": "string",
+                "format": "date-time"
+              },
+              "roles": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/components/schemas/UserRole"
+                }
+              }
+            }
+          },
+          "links": {
+            "$ref": "#/components/schemas/ResourceLinks"
+          }
+        },
+        "required": [
+          "id",
+          "type"
+        ]
+      },
+      "UserInvitationsResponse": {
+        "type": "object",
+        "title": "UserInvitationsResponse",
+        "properties": {
+          "data": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/UserInvitation"
+            }
+          },
+          "links": {
+            "$ref": "#/components/schemas/PagedDocumentLinks"
+          },
+          "meta": {
+            "$ref": "#/components/schemas/PagingInformation"
+          }
+        },
+        "required": [
+          "data",
+          "links"
+        ]
+      },
+      "UserInvitationResponse": {
+        "type": "object",
+        "title": "UserInvitationResponse",
+        "properties": {
+          "data": {
+            "$ref": "#/components/schemas/UserInvitation"
+          },
+          "links": {
+            "$ref": "#/components/schemas/DocumentLinks"
+          }
+        },
+        "required": [
+          "data",
+          "links"
+        ]
+      },
+      "UserInvitationCreateRequest": {
+        "type": "object",
+        "title": "UserInvitationCreateRequest",
+        "properties": {
+          "data": {
+            "type": "object",
+            "properties": {
+              "type": {
+                "type": "string",
+                "enum": [
+                  "userInvitations"
+                ]
+              },
+              "attributes": {
+                "type": "object",
+                "properties": {
+                  "email": {
+                    "type": "string",
+                    "format": "email"
+                  },
+                  "firstName": {
+                    "type": "string"
+                  },
+                  "lastName": {
+                    "type": "string"
+                  },
+                  "roles": {
+                    "type": "array",
+                    "items": {
+                      "$ref": "#/components/schemas/UserRole"
+                    }
+                  }
+                },
+                "required": [
+                  "firstName",
+                  "lastName",
+                  "roles",
+                  "email"
+                ]
+              }
+            },
+            "required": [
+              "attributes",
+              "type"
+            ]
+          }
+        },
+        "required": [
+          "data"
+        ]
+      },
+      "User": {
+        "type": "object",
+        "title": "User",
+        "properties": {
+          "type": {
+            "type": "string",
+            "enum": [
+              "users"
+            ]
+          },
+          "id": {
+            "type": "string"
+          },
+          "attributes": {
+            "type": "object",
+            "properties": {
+              "username": {
+                "type": "string"
+              },
+              "firstName": {
+                "type": "string"
+              },
+              "lastName": {
+                "type": "string"
+              },
+              "roles": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/components/schemas/UserRole"
+                }
+              }
+            }
+          },
+          "links": {
+            "$ref": "#/components/schemas/ResourceLinks"
+          }
+        },
+        "required": [
+          "id",
+          "type"
+        ]
+      },
+      "UsersResponse": {
+        "type": "object",
+        "title": "UsersResponse",
+        "properties": {
+          "data": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/User"
+            }
+          },
+          "links": {
+            "$ref": "#/components/schemas/PagedDocumentLinks"
+          },
+          "meta": {
+            "$ref": "#/components/schemas/PagingInformation"
+          }
+        },
+        "required": [
+          "data",
+          "links"
+        ]
+      },
+      "UserResponse": {
+        "type": "object",
+        "title": "UserResponse",
+        "properties": {
+          "data": {
+            "$ref": "#/components/schemas/User"
+          },
+          "links": {
+            "$ref": "#/components/schemas/DocumentLinks"
+          }
+        },
+        "required": [
+          "data",
+          "links"
+        ]
+      },
+      "UserUpdateRequest": {
+        "type": "object",
+        "title": "UserUpdateRequest",
+        "properties": {
+          "data": {
+            "type": "object",
+            "properties": {
+              "type": {
+                "type": "string",
+                "enum": [
+                  "users"
+                ]
+              },
+              "id": {
+                "type": "string"
+              },
+              "attributes": {
+                "type": "object",
+                "properties": {
+                  "roles": {
+                    "type": "array",
+                    "items": {
+                      "$ref": "#/components/schemas/UserRole"
+                    }
+                  }
+                }
+              }
+            },
+            "required": [
+              "id",
+              "type"
+            ]
+          }
+        },
+        "required": [
+          "data"
+        ]
+      },
+      "BundleIdCapabilitiesWithoutIncludesResponse": {
+        "type": "object",
+        "title": "BundleIdCapabilitiesWithoutIncludesResponse",
+        "properties": {
+          "data": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/BundleIdCapability"
+            }
+          },
+          "links": {
+            "$ref": "#/components/schemas/PagedDocumentLinks"
+          },
+          "meta": {
+            "$ref": "#/components/schemas/PagingInformation"
+          }
+        },
+        "required": [
+          "data",
+          "links"
+        ]
+      },
+      "ProfilesWithoutIncludesResponse": {
+        "type": "object",
+        "title": "ProfilesWithoutIncludesResponse",
+        "properties": {
+          "data": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Profile"
+            }
+          },
+          "links": {
+            "$ref": "#/components/schemas/PagedDocumentLinks"
+          },
+          "meta": {
+            "$ref": "#/components/schemas/PagingInformation"
+          }
+        },
+        "required": [
+          "data",
+          "links"
+        ]
+      },
+      "BundleIdWithoutIncludesResponse": {
+        "type": "object",
+        "title": "BundleIdWithoutIncludesResponse",
+        "properties": {
+          "data": {
+            "$ref": "#/components/schemas/BundleId"
+          },
+          "links": {
+            "$ref": "#/components/schemas/DocumentLinks"
+          }
+        },
+        "required": [
+          "data",
+          "links"
+        ]
+      },
+      "CertificatesWithoutIncludesResponse": {
+        "type": "object",
+        "title": "CertificatesWithoutIncludesResponse",
+        "properties": {
+          "data": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Certificate"
+            }
+          },
+          "links": {
+            "$ref": "#/components/schemas/PagedDocumentLinks"
+          },
+          "meta": {
+            "$ref": "#/components/schemas/PagingInformation"
+          }
+        },
+        "required": [
+          "data",
+          "links"
+        ]
+      },
+      "DevicesWithoutIncludesResponse": {
+        "type": "object",
+        "title": "DevicesWithoutIncludesResponse",
+        "properties": {
+          "data": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Device"
+            }
+          },
+          "links": {
+            "$ref": "#/components/schemas/PagedDocumentLinks"
+          },
+          "meta": {
+            "$ref": "#/components/schemas/PagingInformation"
+          }
+        },
+        "required": [
+          "data",
+          "links"
+        ]
+      },
+      "ErrorResponse": {
+        "type": "object",
+        "properties": {
+          "errors": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "id": {
+                  "type": "string"
+                },
+                "status": {
+                  "type": "string"
+                },
+                "code": {
+                  "type": "string"
+                },
+                "title": {
+                  "type": "string"
+                },
+                "detail": {
+                  "type": "string"
+                },
+                "source": {
+                  "oneOf": [
+                    {
+                      "$ref": "#/components/schemas/ErrorSourcePointer"
+                    },
+                    {
+                      "$ref": "#/components/schemas/ErrorSourceParameter"
+                    }
+                  ]
+                },
+                "links": {
+                  "$ref": "#/components/schemas/ErrorLinks"
+                },
+                "meta": {
+                  "type": "object",
+                  "additionalProperties": {}
+                }
+              },
+              "required": [
+                "code",
+                "detail",
+                "status",
+                "title"
+              ]
+            }
+          }
+        }
+      },
+      "ErrorSourceParameter": {
+        "type": "object",
+        "title": "Parameter",
+        "properties": {
+          "parameter": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "parameter"
+        ]
+      },
+      "ErrorSourcePointer": {
+        "type": "object",
+        "title": "JsonPointer",
+        "properties": {
+          "pointer": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "pointer"
+        ]
+      },
+      "ErrorLinks": {
+        "type": "object",
+        "properties": {
+          "about": {
+            "type": "string",
+            "format": "uri-reference"
+          },
+          "associated": {
+            "oneOf": [
+              {
+                "type": "string",
+                "format": "uri-reference"
+              },
+              {
+                "type": "object",
+                "properties": {
+                  "href": {
+                    "type": "string",
+                    "format": "uri-reference"
+                  },
+                  "meta": {
+                    "type": "object",
+                    "properties": {
+                      "source": {
+                        "type": "string"
+                      }
+                    }
+                  }
+                }
+              }
+            ]
+          }
+        }
+      },
+      "PagedDocumentLinks": {
+        "type": "object",
+        "properties": {
+          "self": {
+            "type": "string",
+            "format": "uri-reference"
+          },
+          "first": {
+            "type": "string",
+            "format": "uri-reference"
+          },
+          "next": {
+            "type": "string",
+            "format": "uri-reference"
+          }
+        },
+        "required": [
+          "self"
+        ]
+      },
+      "PagingInformation": {
+        "type": "object",
+        "properties": {
+          "paging": {
+            "type": "object",
+            "properties": {
+              "total": {
+                "type": "integer"
+              },
+              "limit": {
+                "type": "integer"
+              }
+            },
+            "required": [
+              "limit"
+            ]
+          }
+        },
+        "required": [
+          "paging"
+        ]
+      },
+      "DocumentLinks": {
+        "type": "object",
+        "properties": {
+          "self": {
+            "type": "string",
+            "format": "uri-reference"
+          }
+        },
+        "required": [
+          "self"
+        ]
+      },
+      "ResourceLinks": {
+        "type": "object",
+        "properties": {
+          "self": {
+            "type": "string",
+            "format": "uri-reference"
+          }
+        }
+      },
+      "RelationshipLinks": {
+        "type": "object",
+        "properties": {
+          "self": {
+            "type": "string",
+            "format": "uri-reference"
+          },
+          "related": {
+            "type": "string",
+            "format": "uri-reference"
+          }
+        }
+      },
+      "BundleIdPlatform": {
+        "type": "string",
+        "enum": [
+          "IOS",
+          "MAC_OS"
+        ]
+      },
+      "CapabilityOption": {
+        "type": "object",
+        "properties": {
+          "key": {
+            "type": "string",
+            "enum": [
+              "XCODE_5",
+              "XCODE_6",
+              "COMPLETE_PROTECTION",
+              "PROTECTED_UNLESS_OPEN",
+              "PROTECTED_UNTIL_FIRST_USER_AUTH",
+              "PRIMARY_APP_CONSENT"
+            ]
+          },
+          "name": {
+            "type": "string"
+          },
+          "description": {
+            "type": "string"
+          },
+          "enabledByDefault": {
+            "type": "boolean"
+          },
+          "enabled": {
+            "type": "boolean"
+          },
+          "supportsWildcard": {
+            "type": "boolean"
+          }
+        }
+      },
+      "CapabilitySetting": {
+        "type": "object",
+        "properties": {
+          "key": {
+            "type": "string",
+            "enum": [
+              "ICLOUD_VERSION",
+              "DATA_PROTECTION_PERMISSION_LEVEL",
+              "APPLE_ID_AUTH_APP_CONSENT"
+            ]
+          },
+          "name": {
+            "type": "string"
+          },
+          "description": {
+            "type": "string"
+          },
+          "enabledByDefault": {
+            "type": "boolean"
+          },
+          "visible": {
+            "type": "boolean"
+          },
+          "allowedInstances": {
+            "type": "string",
+            "enum": [
+              "ENTRY",
+              "SINGLE",
+              "MULTIPLE"
+            ]
+          },
+          "minInstances": {
+            "type": "integer"
+          },
+          "options": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/CapabilityOption"
+            }
+          }
+        }
+      },
+      "CapabilityType": {
+        "type": "string",
+        "enum": [
+          "ICLOUD",
+          "IN_APP_PURCHASE",
+          "GAME_CENTER",
+          "PUSH_NOTIFICATIONS",
+          "WALLET",
+          "INTER_APP_AUDIO",
+          "MAPS",
+          "ASSOCIATED_DOMAINS",
+          "PERSONAL_VPN",
+          "APP_GROUPS",
+          "HEALTHKIT",
+          "HOMEKIT",
+          "WIRELESS_ACCESSORY_CONFIGURATION",
+          "APPLE_PAY",
+          "DATA_PROTECTION",
+          "SIRIKIT",
+          "NETWORK_EXTENSIONS",
+          "MULTIPATH",
+          "HOT_SPOT",
+          "NFC_TAG_READING",
+          "CLASSKIT",
+          "AUTOFILL_CREDENTIAL_PROVIDER",
+          "ACCESS_WIFI_INFORMATION",
+          "NETWORK_CUSTOM_PROTOCOL",
+          "COREMEDIA_HLS_LOW_LATENCY",
+          "SYSTEM_EXTENSION_INSTALL",
+          "USER_MANAGEMENT",
+          "APPLE_ID_AUTH"
+        ]
+      },
+      "CertificateType": {
+        "type": "string",
+        "enum": [
+          "IOS_DEVELOPMENT",
+          "IOS_DISTRIBUTION",
+          "MAC_APP_DISTRIBUTION",
+          "MAC_INSTALLER_DISTRIBUTION",
+          "MAC_APP_DEVELOPMENT",
+          "DEVELOPER_ID_KEXT",
+          "DEVELOPER_ID_APPLICATION",
+          "DEVELOPMENT",
+          "DISTRIBUTION",
+          "PASS_TYPE_ID",
+          "PASS_TYPE_ID_WITH_NFC"
+        ]
+      },
+      "UserRole": {
+        "type": "string",
+        "enum": [
+          "ADMIN",
+          "ACCOUNT_HOLDER",
+          "DEVELOPER"
+        ]
+      }
+    },
+    "securitySchemes": {
+      "itc-bearer-token": {
+        "type": "http",
+        "scheme": "bearer",
+        "bearerFormat": "JWT"
+      }
+    }
+  },
+  "security": [
+    {
+      "itc-bearer-token": []
+    }
+  ]
+}

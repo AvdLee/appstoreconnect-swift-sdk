@@ -8,7 +8,7 @@
 
 import XCTest
 import Crypto
-@testable import AppStoreConnect_Swift_SDK
+@testable import AppStoreConnectApiCore
 import Foundation
 #if canImport(FoundationNetworking)
 import FoundationNetworking
