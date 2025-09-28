@@ -160,3 +160,99 @@
                "active": {
                  "type": "boolean"
                }
+@@ -66896,6 +66896,7 @@
+                 "type": "string",
+                 "enum": [
+                   "IPHONE_67",
++                  "IPHONE_63",
+                   "IPHONE_61",
+                   "IPHONE_65",
+                   "IPHONE_58",
+@@ -67281,6 +67282,7 @@
+                 "type": "string",
+                 "enum": [
+                   "APP_IPHONE_67",
++                  "APP_IPHONE_63",
+                   "APP_IPHONE_61",
+                   "APP_IPHONE_65",
+                   "APP_IPHONE_58",
+@@ -67302,6 +67304,7 @@
+                   "APP_APPLE_TV",
+                   "APP_APPLE_VISION_PRO",
+                   "IMESSAGE_APP_IPHONE_67",
++                  "IMESSAGE_APP_IPHONE_63",
+                   "IMESSAGE_APP_IPHONE_61",
+                   "IMESSAGE_APP_IPHONE_65",
+                   "IMESSAGE_APP_IPHONE_58",
+@@ -73405,6 +73408,7 @@
+                 "type": "string",
+                 "enum": [
+                   "IPHONE_67",
++                  "IPHONE_63",
+                   "IPHONE_61",
+                   "IPHONE_65",
+                   "IPHONE_58",
+@@ -73790,6 +73794,7 @@
+                 "type": "string",
+                 "enum": [
+                   "APP_IPHONE_67",
++                  "APP_IPHONE_63",
+                   "APP_IPHONE_61",
+                   "APP_IPHONE_65",
+                   "APP_IPHONE_58",
+@@ -73811,6 +73816,7 @@
+                   "APP_APPLE_TV",
+                   "APP_APPLE_VISION_PRO",
+                   "IMESSAGE_APP_IPHONE_67",
++                  "IMESSAGE_APP_IPHONE_63",
+                   "IMESSAGE_APP_IPHONE_61",
+                   "IMESSAGE_APP_IPHONE_65",
+                   "IMESSAGE_APP_IPHONE_58",
+@@ -75079,6 +75085,7 @@
+                 "type": "string",
+                 "enum": [
+                   "IPHONE_67",
++                  "IPHONE_63",
+                   "IPHONE_61",
+                   "IPHONE_65",
+                   "IPHONE_58",
+@@ -75464,6 +75471,7 @@
+                 "type": "string",
+                 "enum": [
+                   "APP_IPHONE_67",
++                  "APP_IPHONE_63",
+                   "APP_IPHONE_61",
+                   "APP_IPHONE_65",
+                   "APP_IPHONE_58",
+@@ -75485,6 +75493,7 @@
+                   "APP_APPLE_TV",
+                   "APP_APPLE_VISION_PRO",
+                   "IMESSAGE_APP_IPHONE_67",
++                  "IMESSAGE_APP_IPHONE_63",
+                   "IMESSAGE_APP_IPHONE_61",
+                   "IMESSAGE_APP_IPHONE_65",
+                   "IMESSAGE_APP_IPHONE_58",
+@@ -200588,6 +200597,7 @@
+         "type": "string",
+         "enum": [
+           "IPHONE_67",
++          "IPHONE_63",
+           "IPHONE_61",
+           "IPHONE_65",
+           "IPHONE_58",
+@@ -200642,6 +200652,7 @@
+         "type": "string",
+         "enum": [
+           "APP_IPHONE_67",
++          "APP_IPHONE_63",
+           "APP_IPHONE_61",
+           "APP_IPHONE_65",
+           "APP_IPHONE_58",
+@@ -200663,6 +200674,7 @@
+           "APP_APPLE_TV",
+           "APP_APPLE_VISION_PRO",
+           "IMESSAGE_APP_IPHONE_67",
++          "IMESSAGE_APP_IPHONE_63",
+           "IMESSAGE_APP_IPHONE_61",
+           "IMESSAGE_APP_IPHONE_65",
+           "IMESSAGE_APP_IPHONE_58",
