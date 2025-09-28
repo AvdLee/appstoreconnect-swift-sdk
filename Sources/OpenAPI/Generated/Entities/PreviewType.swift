@@ -5,6 +5,7 @@ import Foundation
 
 public enum PreviewType: String, Codable, CaseIterable {
 	case iphone67 = "IPHONE_67"
+	case iphone63 = "IPHONE_63"
 	case iphone61 = "IPHONE_61"
 	case iphone65 = "IPHONE_65"
 	case iphone58 = "IPHONE_58"

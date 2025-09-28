@@ -32,6 +32,7 @@ extension APIEndpoint.V1.AppStoreVersionExperimentTreatmentLocalizations.WithID 
 
 			public enum FilterScreenshotDisplayType: String, Codable, CaseIterable {
 				case appIphone67 = "APP_IPHONE_67"
+				case appIphone63 = "APP_IPHONE_63"
 				case appIphone61 = "APP_IPHONE_61"
 				case appIphone65 = "APP_IPHONE_65"
 				case appIphone58 = "APP_IPHONE_58"
@@ -53,6 +54,7 @@ extension APIEndpoint.V1.AppStoreVersionExperimentTreatmentLocalizations.WithID 
 				case appAppleTv = "APP_APPLE_TV"
 				case appAppleVisionPro = "APP_APPLE_VISION_PRO"
 				case imessageAppIphone67 = "IMESSAGE_APP_IPHONE_67"
+				case imessageAppIphone63 = "IMESSAGE_APP_IPHONE_63"
 				case imessageAppIphone61 = "IMESSAGE_APP_IPHONE_61"
 				case imessageAppIphone65 = "IMESSAGE_APP_IPHONE_65"
 				case imessageAppIphone58 = "IMESSAGE_APP_IPHONE_58"
