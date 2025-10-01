@@ -59,6 +59,7 @@ extension APIEndpoint.V1.AppCustomProductPages.WithID {
 				case appCustomProductPageVersion
 				case appScreenshotSets
 				case appPreviewSets
+				case searchKeywords
 			}
 
 			public enum Include: String, Codable, CaseIterable {

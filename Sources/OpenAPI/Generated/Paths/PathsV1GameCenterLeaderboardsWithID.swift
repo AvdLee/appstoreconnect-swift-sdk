@@ -56,6 +56,7 @@ extension APIEndpoint.V1.GameCenterLeaderboards {
 				case formatterOverride
 				case formatterSuffix
 				case formatterSuffixSingular
+				case description
 				case gameCenterLeaderboard
 				case gameCenterLeaderboardImage
 			}

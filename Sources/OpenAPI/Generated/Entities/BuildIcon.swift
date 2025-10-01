@@ -16,11 +16,13 @@ public struct BuildIcon: Codable, Identifiable {
 	public struct Attributes: Codable {
 		public var iconAsset: ImageAsset?
 		public var iconType: IconAssetType?
+		public var isMasked: Bool?
 		public var name: String?
 
-		public init(iconAsset: ImageAsset? = nil, iconType: IconAssetType? = nil, name: String? = nil) {
+		public init(iconAsset: ImageAsset? = nil, iconType: IconAssetType? = nil, isMasked: Bool? = nil, name: String? = nil) {
 			self.iconAsset = iconAsset
 			self.iconType = iconType
+			self.isMasked = isMasked
 			self.name = name
 		}
 
@@ -28,6 +30,7 @@ public struct BuildIcon: Codable, Identifiable {
 			let values = try decoder.container(keyedBy: StringCodingKey.self)
 			self.iconAsset = try values.decodeIfPresent(ImageAsset.self, forKey: "iconAsset")
 			self.iconType = try values.decodeIfPresent(IconAssetType.self, forKey: "iconType")
+			self.isMasked = try values.decodeIfPresent(Bool.self, forKey: "masked")
 			self.name = try values.decodeIfPresent(String.self, forKey: "name")
 		}
 
@@ -35,6 +38,7 @@ public struct BuildIcon: Codable, Identifiable {
 			var values = encoder.container(keyedBy: StringCodingKey.self)
 			try values.encodeIfPresent(iconAsset, forKey: "iconAsset")
 			try values.encodeIfPresent(iconType, forKey: "iconType")
+			try values.encodeIfPresent(isMasked, forKey: "masked")
 			try values.encodeIfPresent(name, forKey: "name")
 		}
 	}

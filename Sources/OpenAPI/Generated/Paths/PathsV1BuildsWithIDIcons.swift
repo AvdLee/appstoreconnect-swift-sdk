@@ -27,6 +27,7 @@ extension APIEndpoint.V1.Builds.WithID {
 		public enum FieldsBuildIcons: String, Codable, CaseIterable {
 			case iconAsset
 			case iconType
+			case masked
 			case name
 		}
 	}

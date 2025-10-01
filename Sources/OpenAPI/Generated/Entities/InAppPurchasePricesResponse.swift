@@ -14,15 +14,22 @@ public struct InAppPurchasePricesResponse: Codable {
 		case territory(Territory)
 
 		public init(from decoder: Decoder) throws {
+
+			struct Discriminator: Decodable {
+				let type: String
+			}
+
 			let container = try decoder.singleValueContainer()
-			if let value = try? container.decode(InAppPurchasePricePoint.self) {
-				self = .inAppPurchasePricePoint(value)
-			} else if let value = try? container.decode(Territory.self) {
-				self = .territory(value)
-			} else {
+			let discriminatorValue = try container.decode(Discriminator.self).type
+
+			switch discriminatorValue {
+			case "inAppPurchasePricePoints": self = .inAppPurchasePricePoint(try container.decode(InAppPurchasePricePoint.self))
+			case "territories": self = .territory(try container.decode(Territory.self))
+
+			default:
 				throw DecodingError.dataCorruptedError(
 					in: container,
-					debugDescription: "Data could not be decoded as any of the expected types (InAppPurchasePricePoint, Territory)."
+					debugDescription: "Discriminator value '\(discriminatorValue)' does not match any expected values (inAppPurchasePricePoints, territories)."
 				)
 			}
 		}

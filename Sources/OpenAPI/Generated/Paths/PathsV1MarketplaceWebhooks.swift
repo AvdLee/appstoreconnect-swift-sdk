@@ -13,6 +13,7 @@ extension APIEndpoint.V1 {
 		/// Path: `/v1/marketplaceWebhooks`
 		public let path: String
 
+		@available(*, deprecated, message: "Deprecated")
 		public func get(fieldsMarketplaceWebhooks: [FieldsMarketplaceWebhooks]? = nil, limit: Int? = nil) -> Request<AppStoreConnect_Swift_SDK.MarketplaceWebhooksResponse> {
 			Request(path: path, method: "GET", query: makeGetQuery(fieldsMarketplaceWebhooks, limit), id: "marketplaceWebhooks_getCollection")
 		}
@@ -28,6 +29,7 @@ extension APIEndpoint.V1 {
 			case endpointURL = "endpointUrl"
 		}
 
+		@available(*, deprecated, message: "Deprecated")
 		public func post(_ body: AppStoreConnect_Swift_SDK.MarketplaceWebhookCreateRequest) -> Request<AppStoreConnect_Swift_SDK.MarketplaceWebhookResponse> {
 			Request(path: path, method: "POST", body: body, id: "marketplaceWebhooks_createInstance")
 		}

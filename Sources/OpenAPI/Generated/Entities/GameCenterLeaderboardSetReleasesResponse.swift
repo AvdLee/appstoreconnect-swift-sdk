@@ -14,15 +14,22 @@ public struct GameCenterLeaderboardSetReleasesResponse: Codable {
 		case gameCenterLeaderboardSet(GameCenterLeaderboardSet)
 
 		public init(from decoder: Decoder) throws {
+
+			struct Discriminator: Decodable {
+				let type: String
+			}
+
 			let container = try decoder.singleValueContainer()
-			if let value = try? container.decode(GameCenterDetail.self) {
-				self = .gameCenterDetail(value)
-			} else if let value = try? container.decode(GameCenterLeaderboardSet.self) {
-				self = .gameCenterLeaderboardSet(value)
-			} else {
+			let discriminatorValue = try container.decode(Discriminator.self).type
+
+			switch discriminatorValue {
+			case "gameCenterDetails": self = .gameCenterDetail(try container.decode(GameCenterDetail.self))
+			case "gameCenterLeaderboardSets": self = .gameCenterLeaderboardSet(try container.decode(GameCenterLeaderboardSet.self))
+
+			default:
 				throw DecodingError.dataCorruptedError(
 					in: container,
-					debugDescription: "Data could not be decoded as any of the expected types (GameCenterDetail, GameCenterLeaderboardSet)."
+					debugDescription: "Discriminator value '\(discriminatorValue)' does not match any expected values (gameCenterDetails, gameCenterLeaderboardSets)."
 				)
 			}
 		}

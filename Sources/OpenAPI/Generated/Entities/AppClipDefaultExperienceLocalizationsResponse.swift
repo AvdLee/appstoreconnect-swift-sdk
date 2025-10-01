@@ -14,15 +14,22 @@ public struct AppClipDefaultExperienceLocalizationsResponse: Codable {
 		case appClipHeaderImage(AppClipHeaderImage)
 
 		public init(from decoder: Decoder) throws {
+
+			struct Discriminator: Decodable {
+				let type: String
+			}
+
 			let container = try decoder.singleValueContainer()
-			if let value = try? container.decode(AppClipDefaultExperience.self) {
-				self = .appClipDefaultExperience(value)
-			} else if let value = try? container.decode(AppClipHeaderImage.self) {
-				self = .appClipHeaderImage(value)
-			} else {
+			let discriminatorValue = try container.decode(Discriminator.self).type
+
+			switch discriminatorValue {
+			case "appClipDefaultExperiences": self = .appClipDefaultExperience(try container.decode(AppClipDefaultExperience.self))
+			case "appClipHeaderImages": self = .appClipHeaderImage(try container.decode(AppClipHeaderImage.self))
+
+			default:
 				throw DecodingError.dataCorruptedError(
 					in: container,
-					debugDescription: "Data could not be decoded as any of the expected types (AppClipDefaultExperience, AppClipHeaderImage)."
+					debugDescription: "Discriminator value '\(discriminatorValue)' does not match any expected values (appClipDefaultExperiences, appClipHeaderImages)."
 				)
 			}
 		}

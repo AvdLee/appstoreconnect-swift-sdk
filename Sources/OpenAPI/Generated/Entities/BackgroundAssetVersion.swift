@@ -45,10 +45,57 @@ public struct BackgroundAssetVersion: Codable, Identifiable {
 	}
 
 	public struct Relationships: Codable {
+		public var backgroundAsset: BackgroundAsset?
 		public var internalBetaRelease: InternalBetaRelease?
+		public var externalBetaRelease: ExternalBetaRelease?
+		public var appStoreRelease: AppStoreRelease?
 		public var assetFile: AssetFile?
 		public var manifestFile: ManifestFile?
 		public var backgroundAssetUploadFiles: BackgroundAssetUploadFiles?
+
+		public struct BackgroundAsset: Codable {
+			public var data: Data?
+
+			public struct Data: Codable, Identifiable {
+				public var type: `Type`
+				public var id: String
+
+				public enum `Type`: String, Codable, CaseIterable {
+					case backgroundAssets
+				}
+
+				public init(type: `Type`, id: String) {
+					self.type = type
+					self.id = id
+				}
+
+				public init(from decoder: Decoder) throws {
+					let values = try decoder.container(keyedBy: StringCodingKey.self)
+					self.type = try values.decode(`Type`.self, forKey: "type")
+					self.id = try values.decode(String.self, forKey: "id")
+				}
+
+				public func encode(to encoder: Encoder) throws {
+					var values = encoder.container(keyedBy: StringCodingKey.self)
+					try values.encode(type, forKey: "type")
+					try values.encode(id, forKey: "id")
+				}
+			}
+
+			public init(data: Data? = nil) {
+				self.data = data
+			}
+
+			public init(from decoder: Decoder) throws {
+				let values = try decoder.container(keyedBy: StringCodingKey.self)
+				self.data = try values.decodeIfPresent(Data.self, forKey: "data")
+			}
+
+			public func encode(to encoder: Encoder) throws {
+				var values = encoder.container(keyedBy: StringCodingKey.self)
+				try values.encodeIfPresent(data, forKey: "data")
+			}
+		}
 
 		public struct InternalBetaRelease: Codable {
 			public var data: Data?
@@ -59,6 +106,94 @@ public struct BackgroundAssetVersion: Codable, Identifiable {
 
 				public enum `Type`: String, Codable, CaseIterable {
 					case backgroundAssetVersionInternalBetaReleases
+				}
+
+				public init(type: `Type`, id: String) {
+					self.type = type
+					self.id = id
+				}
+
+				public init(from decoder: Decoder) throws {
+					let values = try decoder.container(keyedBy: StringCodingKey.self)
+					self.type = try values.decode(`Type`.self, forKey: "type")
+					self.id = try values.decode(String.self, forKey: "id")
+				}
+
+				public func encode(to encoder: Encoder) throws {
+					var values = encoder.container(keyedBy: StringCodingKey.self)
+					try values.encode(type, forKey: "type")
+					try values.encode(id, forKey: "id")
+				}
+			}
+
+			public init(data: Data? = nil) {
+				self.data = data
+			}
+
+			public init(from decoder: Decoder) throws {
+				let values = try decoder.container(keyedBy: StringCodingKey.self)
+				self.data = try values.decodeIfPresent(Data.self, forKey: "data")
+			}
+
+			public func encode(to encoder: Encoder) throws {
+				var values = encoder.container(keyedBy: StringCodingKey.self)
+				try values.encodeIfPresent(data, forKey: "data")
+			}
+		}
+
+		public struct ExternalBetaRelease: Codable {
+			public var data: Data?
+
+			public struct Data: Codable, Identifiable {
+				public var type: `Type`
+				public var id: String
+
+				public enum `Type`: String, Codable, CaseIterable {
+					case backgroundAssetVersionExternalBetaReleases
+				}
+
+				public init(type: `Type`, id: String) {
+					self.type = type
+					self.id = id
+				}
+
+				public init(from decoder: Decoder) throws {
+					let values = try decoder.container(keyedBy: StringCodingKey.self)
+					self.type = try values.decode(`Type`.self, forKey: "type")
+					self.id = try values.decode(String.self, forKey: "id")
+				}
+
+				public func encode(to encoder: Encoder) throws {
+					var values = encoder.container(keyedBy: StringCodingKey.self)
+					try values.encode(type, forKey: "type")
+					try values.encode(id, forKey: "id")
+				}
+			}
+
+			public init(data: Data? = nil) {
+				self.data = data
+			}
+
+			public init(from decoder: Decoder) throws {
+				let values = try decoder.container(keyedBy: StringCodingKey.self)
+				self.data = try values.decodeIfPresent(Data.self, forKey: "data")
+			}
+
+			public func encode(to encoder: Encoder) throws {
+				var values = encoder.container(keyedBy: StringCodingKey.self)
+				try values.encodeIfPresent(data, forKey: "data")
+			}
+		}
+
+		public struct AppStoreRelease: Codable {
+			public var data: Data?
+
+			public struct Data: Codable, Identifiable {
+				public var type: `Type`
+				public var id: String
+
+				public enum `Type`: String, Codable, CaseIterable {
+					case backgroundAssetVersionAppStoreReleases
 				}
 
 				public init(type: `Type`, id: String) {
@@ -200,8 +335,11 @@ public struct BackgroundAssetVersion: Codable, Identifiable {
 			}
 		}
 
-		public init(internalBetaRelease: InternalBetaRelease? = nil, assetFile: AssetFile? = nil, manifestFile: ManifestFile? = nil, backgroundAssetUploadFiles: BackgroundAssetUploadFiles? = nil) {
+		public init(backgroundAsset: BackgroundAsset? = nil, internalBetaRelease: InternalBetaRelease? = nil, externalBetaRelease: ExternalBetaRelease? = nil, appStoreRelease: AppStoreRelease? = nil, assetFile: AssetFile? = nil, manifestFile: ManifestFile? = nil, backgroundAssetUploadFiles: BackgroundAssetUploadFiles? = nil) {
+			self.backgroundAsset = backgroundAsset
 			self.internalBetaRelease = internalBetaRelease
+			self.externalBetaRelease = externalBetaRelease
+			self.appStoreRelease = appStoreRelease
 			self.assetFile = assetFile
 			self.manifestFile = manifestFile
 			self.backgroundAssetUploadFiles = backgroundAssetUploadFiles
@@ -209,7 +347,10 @@ public struct BackgroundAssetVersion: Codable, Identifiable {
 
 		public init(from decoder: Decoder) throws {
 			let values = try decoder.container(keyedBy: StringCodingKey.self)
+			self.backgroundAsset = try values.decodeIfPresent(BackgroundAsset.self, forKey: "backgroundAsset")
 			self.internalBetaRelease = try values.decodeIfPresent(InternalBetaRelease.self, forKey: "internalBetaRelease")
+			self.externalBetaRelease = try values.decodeIfPresent(ExternalBetaRelease.self, forKey: "externalBetaRelease")
+			self.appStoreRelease = try values.decodeIfPresent(AppStoreRelease.self, forKey: "appStoreRelease")
 			self.assetFile = try values.decodeIfPresent(AssetFile.self, forKey: "assetFile")
 			self.manifestFile = try values.decodeIfPresent(ManifestFile.self, forKey: "manifestFile")
 			self.backgroundAssetUploadFiles = try values.decodeIfPresent(BackgroundAssetUploadFiles.self, forKey: "backgroundAssetUploadFiles")
@@ -217,7 +358,10 @@ public struct BackgroundAssetVersion: Codable, Identifiable {
 
 		public func encode(to encoder: Encoder) throws {
 			var values = encoder.container(keyedBy: StringCodingKey.self)
+			try values.encodeIfPresent(backgroundAsset, forKey: "backgroundAsset")
 			try values.encodeIfPresent(internalBetaRelease, forKey: "internalBetaRelease")
+			try values.encodeIfPresent(externalBetaRelease, forKey: "externalBetaRelease")
+			try values.encodeIfPresent(appStoreRelease, forKey: "appStoreRelease")
 			try values.encodeIfPresent(assetFile, forKey: "assetFile")
 			try values.encodeIfPresent(manifestFile, forKey: "manifestFile")
 			try values.encodeIfPresent(backgroundAssetUploadFiles, forKey: "backgroundAssetUploadFiles")

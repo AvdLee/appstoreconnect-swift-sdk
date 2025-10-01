@@ -10,55 +10,50 @@ public struct GameCenterDetailsResponse: Codable {
 	public var meta: PagingInformation?
 
 	public enum IncludedItem: Codable {
+		case appStoreVersion(AppStoreVersion)
 		case app(App)
-		case gameCenterAppVersion(GameCenterAppVersion)
-		case gameCenterGroup(GameCenterGroup)
-		case gameCenterLeaderboard(GameCenterLeaderboard)
-		case gameCenterLeaderboardSet(GameCenterLeaderboardSet)
+		case gameCenterAchievementRelease(GameCenterAchievementRelease)
 		case gameCenterAchievement(GameCenterAchievement)
 		case gameCenterActivity(GameCenterActivity)
-		case gameCenterChallenge(GameCenterChallenge)
-		case gameCenterAchievementRelease(GameCenterAchievementRelease)
 		case gameCenterActivityVersionRelease(GameCenterActivityVersionRelease)
+		case gameCenterAppVersion(GameCenterAppVersion)
 		case gameCenterChallengeVersionRelease(GameCenterChallengeVersionRelease)
+		case gameCenterChallenge(GameCenterChallenge)
+		case gameCenterGroup(GameCenterGroup)
 		case gameCenterLeaderboardRelease(GameCenterLeaderboardRelease)
 		case gameCenterLeaderboardSetRelease(GameCenterLeaderboardSetRelease)
-		case appStoreVersion(AppStoreVersion)
+		case gameCenterLeaderboardSet(GameCenterLeaderboardSet)
+		case gameCenterLeaderboard(GameCenterLeaderboard)
 
 		public init(from decoder: Decoder) throws {
+
+			struct Discriminator: Decodable {
+				let type: String
+			}
+
 			let container = try decoder.singleValueContainer()
-			if let value = try? container.decode(App.self) {
-				self = .app(value)
-			} else if let value = try? container.decode(GameCenterAppVersion.self) {
-				self = .gameCenterAppVersion(value)
-			} else if let value = try? container.decode(GameCenterGroup.self) {
-				self = .gameCenterGroup(value)
-			} else if let value = try? container.decode(GameCenterLeaderboard.self) {
-				self = .gameCenterLeaderboard(value)
-			} else if let value = try? container.decode(GameCenterLeaderboardSet.self) {
-				self = .gameCenterLeaderboardSet(value)
-			} else if let value = try? container.decode(GameCenterAchievement.self) {
-				self = .gameCenterAchievement(value)
-			} else if let value = try? container.decode(GameCenterActivity.self) {
-				self = .gameCenterActivity(value)
-			} else if let value = try? container.decode(GameCenterChallenge.self) {
-				self = .gameCenterChallenge(value)
-			} else if let value = try? container.decode(GameCenterAchievementRelease.self) {
-				self = .gameCenterAchievementRelease(value)
-			} else if let value = try? container.decode(GameCenterActivityVersionRelease.self) {
-				self = .gameCenterActivityVersionRelease(value)
-			} else if let value = try? container.decode(GameCenterChallengeVersionRelease.self) {
-				self = .gameCenterChallengeVersionRelease(value)
-			} else if let value = try? container.decode(GameCenterLeaderboardRelease.self) {
-				self = .gameCenterLeaderboardRelease(value)
-			} else if let value = try? container.decode(GameCenterLeaderboardSetRelease.self) {
-				self = .gameCenterLeaderboardSetRelease(value)
-			} else if let value = try? container.decode(AppStoreVersion.self) {
-				self = .appStoreVersion(value)
-			} else {
+			let discriminatorValue = try container.decode(Discriminator.self).type
+
+			switch discriminatorValue {
+			case "appStoreVersions": self = .appStoreVersion(try container.decode(AppStoreVersion.self))
+			case "apps": self = .app(try container.decode(App.self))
+			case "gameCenterAchievementReleases": self = .gameCenterAchievementRelease(try container.decode(GameCenterAchievementRelease.self))
+			case "gameCenterAchievements": self = .gameCenterAchievement(try container.decode(GameCenterAchievement.self))
+			case "gameCenterActivities": self = .gameCenterActivity(try container.decode(GameCenterActivity.self))
+			case "gameCenterActivityVersionReleases": self = .gameCenterActivityVersionRelease(try container.decode(GameCenterActivityVersionRelease.self))
+			case "gameCenterAppVersions": self = .gameCenterAppVersion(try container.decode(GameCenterAppVersion.self))
+			case "gameCenterChallengeVersionReleases": self = .gameCenterChallengeVersionRelease(try container.decode(GameCenterChallengeVersionRelease.self))
+			case "gameCenterChallenges": self = .gameCenterChallenge(try container.decode(GameCenterChallenge.self))
+			case "gameCenterGroups": self = .gameCenterGroup(try container.decode(GameCenterGroup.self))
+			case "gameCenterLeaderboardReleases": self = .gameCenterLeaderboardRelease(try container.decode(GameCenterLeaderboardRelease.self))
+			case "gameCenterLeaderboardSetReleases": self = .gameCenterLeaderboardSetRelease(try container.decode(GameCenterLeaderboardSetRelease.self))
+			case "gameCenterLeaderboardSets": self = .gameCenterLeaderboardSet(try container.decode(GameCenterLeaderboardSet.self))
+			case "gameCenterLeaderboards": self = .gameCenterLeaderboard(try container.decode(GameCenterLeaderboard.self))
+
+			default:
 				throw DecodingError.dataCorruptedError(
 					in: container,
-					debugDescription: "Data could not be decoded as any of the expected types (App, GameCenterAppVersion, GameCenterGroup, GameCenterLeaderboard, GameCenterLeaderboardSet, GameCenterAchievement, GameCenterActivity, GameCenterChallenge, GameCenterAchievementRelease, GameCenterActivityVersionRelease, GameCenterChallengeVersionRelease, GameCenterLeaderboardRelease, GameCenterLeaderboardSetRelease, AppStoreVersion)."
+					debugDescription: "Discriminator value '\(discriminatorValue)' does not match any expected values (appStoreVersions, apps, gameCenterAchievementReleases, gameCenterAchievements, gameCenterActivities, gameCenterActivityVersionReleases, gameCenterAppVersions, gameCenterChallengeVersionReleases, gameCenterChallenges, gameCenterGroups, gameCenterLeaderboardReleases, gameCenterLeaderboardSetReleases, gameCenterLeaderboardSets, gameCenterLeaderboards)."
 				)
 			}
 		}
@@ -66,20 +61,20 @@ public struct GameCenterDetailsResponse: Codable {
 		public func encode(to encoder: Encoder) throws {
 			var container = encoder.singleValueContainer()
 			switch self {
+			case .appStoreVersion(let value): try container.encode(value)
 			case .app(let value): try container.encode(value)
-			case .gameCenterAppVersion(let value): try container.encode(value)
-			case .gameCenterGroup(let value): try container.encode(value)
-			case .gameCenterLeaderboard(let value): try container.encode(value)
-			case .gameCenterLeaderboardSet(let value): try container.encode(value)
+			case .gameCenterAchievementRelease(let value): try container.encode(value)
 			case .gameCenterAchievement(let value): try container.encode(value)
 			case .gameCenterActivity(let value): try container.encode(value)
-			case .gameCenterChallenge(let value): try container.encode(value)
-			case .gameCenterAchievementRelease(let value): try container.encode(value)
 			case .gameCenterActivityVersionRelease(let value): try container.encode(value)
+			case .gameCenterAppVersion(let value): try container.encode(value)
 			case .gameCenterChallengeVersionRelease(let value): try container.encode(value)
+			case .gameCenterChallenge(let value): try container.encode(value)
+			case .gameCenterGroup(let value): try container.encode(value)
 			case .gameCenterLeaderboardRelease(let value): try container.encode(value)
 			case .gameCenterLeaderboardSetRelease(let value): try container.encode(value)
-			case .appStoreVersion(let value): try container.encode(value)
+			case .gameCenterLeaderboardSet(let value): try container.encode(value)
+			case .gameCenterLeaderboard(let value): try container.encode(value)
 			}
 		}
 	}

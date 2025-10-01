@@ -20,13 +20,15 @@ public struct GameCenterLeaderboardLocalization: Codable, Identifiable {
 		public var formatterOverride: GameCenterLeaderboardFormatter?
 		public var formatterSuffix: String?
 		public var formatterSuffixSingular: String?
+		public var description: String?
 
-		public init(locale: String? = nil, name: String? = nil, formatterOverride: GameCenterLeaderboardFormatter? = nil, formatterSuffix: String? = nil, formatterSuffixSingular: String? = nil) {
+		public init(locale: String? = nil, name: String? = nil, formatterOverride: GameCenterLeaderboardFormatter? = nil, formatterSuffix: String? = nil, formatterSuffixSingular: String? = nil, description: String? = nil) {
 			self.locale = locale
 			self.name = name
 			self.formatterOverride = formatterOverride
 			self.formatterSuffix = formatterSuffix
 			self.formatterSuffixSingular = formatterSuffixSingular
+			self.description = description
 		}
 
 		public init(from decoder: Decoder) throws {
@@ -36,6 +38,7 @@ public struct GameCenterLeaderboardLocalization: Codable, Identifiable {
 			self.formatterOverride = try values.decodeIfPresent(GameCenterLeaderboardFormatter.self, forKey: "formatterOverride")
 			self.formatterSuffix = try values.decodeIfPresent(String.self, forKey: "formatterSuffix")
 			self.formatterSuffixSingular = try values.decodeIfPresent(String.self, forKey: "formatterSuffixSingular")
+			self.description = try values.decodeIfPresent(String.self, forKey: "description")
 		}
 
 		public func encode(to encoder: Encoder) throws {
@@ -45,6 +48,7 @@ public struct GameCenterLeaderboardLocalization: Codable, Identifiable {
 			try values.encodeIfPresent(formatterOverride, forKey: "formatterOverride")
 			try values.encodeIfPresent(formatterSuffix, forKey: "formatterSuffix")
 			try values.encodeIfPresent(formatterSuffixSingular, forKey: "formatterSuffixSingular")
+			try values.encodeIfPresent(description, forKey: "description")
 		}
 	}
 

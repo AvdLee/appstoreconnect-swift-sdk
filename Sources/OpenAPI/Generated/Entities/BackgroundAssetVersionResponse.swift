@@ -10,19 +10,32 @@ public struct BackgroundAssetVersionResponse: Codable {
 	public var links: DocumentLinks
 
 	public enum IncludedItem: Codable {
-		case backgroundAssetVersionInternalBetaRelease(BackgroundAssetVersionInternalBetaRelease)
 		case backgroundAssetUploadFile(BackgroundAssetUploadFile)
+		case backgroundAssetVersionAppStoreRelease(BackgroundAssetVersionAppStoreRelease)
+		case backgroundAssetVersionExternalBetaRelease(BackgroundAssetVersionExternalBetaRelease)
+		case backgroundAssetVersionInternalBetaRelease(BackgroundAssetVersionInternalBetaRelease)
+		case backgroundAsset(BackgroundAsset)
 
 		public init(from decoder: Decoder) throws {
+
+			struct Discriminator: Decodable {
+				let type: String
+			}
+
 			let container = try decoder.singleValueContainer()
-			if let value = try? container.decode(BackgroundAssetVersionInternalBetaRelease.self) {
-				self = .backgroundAssetVersionInternalBetaRelease(value)
-			} else if let value = try? container.decode(BackgroundAssetUploadFile.self) {
-				self = .backgroundAssetUploadFile(value)
-			} else {
+			let discriminatorValue = try container.decode(Discriminator.self).type
+
+			switch discriminatorValue {
+			case "backgroundAssetUploadFiles": self = .backgroundAssetUploadFile(try container.decode(BackgroundAssetUploadFile.self))
+			case "backgroundAssetVersionAppStoreReleases": self = .backgroundAssetVersionAppStoreRelease(try container.decode(BackgroundAssetVersionAppStoreRelease.self))
+			case "backgroundAssetVersionExternalBetaReleases": self = .backgroundAssetVersionExternalBetaRelease(try container.decode(BackgroundAssetVersionExternalBetaRelease.self))
+			case "backgroundAssetVersionInternalBetaReleases": self = .backgroundAssetVersionInternalBetaRelease(try container.decode(BackgroundAssetVersionInternalBetaRelease.self))
+			case "backgroundAssets": self = .backgroundAsset(try container.decode(BackgroundAsset.self))
+
+			default:
 				throw DecodingError.dataCorruptedError(
 					in: container,
-					debugDescription: "Data could not be decoded as any of the expected types (BackgroundAssetVersionInternalBetaRelease, BackgroundAssetUploadFile)."
+					debugDescription: "Discriminator value '\(discriminatorValue)' does not match any expected values (backgroundAssetUploadFiles, backgroundAssetVersionAppStoreReleases, backgroundAssetVersionExternalBetaReleases, backgroundAssetVersionInternalBetaReleases, backgroundAssets)."
 				)
 			}
 		}
@@ -30,8 +43,11 @@ public struct BackgroundAssetVersionResponse: Codable {
 		public func encode(to encoder: Encoder) throws {
 			var container = encoder.singleValueContainer()
 			switch self {
-			case .backgroundAssetVersionInternalBetaRelease(let value): try container.encode(value)
 			case .backgroundAssetUploadFile(let value): try container.encode(value)
+			case .backgroundAssetVersionAppStoreRelease(let value): try container.encode(value)
+			case .backgroundAssetVersionExternalBetaRelease(let value): try container.encode(value)
+			case .backgroundAssetVersionInternalBetaRelease(let value): try container.encode(value)
+			case .backgroundAsset(let value): try container.encode(value)
 			}
 		}
 	}

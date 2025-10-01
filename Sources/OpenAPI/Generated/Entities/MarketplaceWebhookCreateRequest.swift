@@ -3,6 +3,7 @@
 
 import Foundation
 
+@available(*, deprecated, message: "Deprecated")
 public struct MarketplaceWebhookCreateRequest: Codable {
 	public var data: Data
 

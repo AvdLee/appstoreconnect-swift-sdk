@@ -10,52 +10,46 @@ public struct AppStoreVersionsResponse: Codable {
 	public var meta: PagingInformation?
 
 	public enum IncludedItem: Codable {
-		case app(App)
 		case ageRatingDeclaration(AgeRatingDeclaration)
+		case alternativeDistributionPackage(AlternativeDistributionPackage)
+		case appClipDefaultExperience(AppClipDefaultExperience)
+		case appStoreReviewDetail(AppStoreReviewDetail)
+		case appStoreVersionExperiment(AppStoreVersionExperiment)
 		case appStoreVersionLocalization(AppStoreVersionLocalization)
-		case build(Build)
 		case appStoreVersionPhasedRelease(AppStoreVersionPhasedRelease)
+		case appStoreVersionSubmission(AppStoreVersionSubmission)
+		case app(App)
+		case build(Build)
 		case gameCenterAppVersion(GameCenterAppVersion)
 		case routingAppCoverage(RoutingAppCoverage)
-		case appStoreReviewDetail(AppStoreReviewDetail)
-		case appStoreVersionSubmission(AppStoreVersionSubmission)
-		case appClipDefaultExperience(AppClipDefaultExperience)
-		case appStoreVersionExperiment(AppStoreVersionExperiment)
-		case appStoreVersionExperimentV2(AppStoreVersionExperimentV2)
-		case alternativeDistributionPackage(AlternativeDistributionPackage)
 
 		public init(from decoder: Decoder) throws {
+
+			struct Discriminator: Decodable {
+				let type: String
+			}
+
 			let container = try decoder.singleValueContainer()
-			if let value = try? container.decode(App.self) {
-				self = .app(value)
-			} else if let value = try? container.decode(AgeRatingDeclaration.self) {
-				self = .ageRatingDeclaration(value)
-			} else if let value = try? container.decode(AppStoreVersionLocalization.self) {
-				self = .appStoreVersionLocalization(value)
-			} else if let value = try? container.decode(Build.self) {
-				self = .build(value)
-			} else if let value = try? container.decode(AppStoreVersionPhasedRelease.self) {
-				self = .appStoreVersionPhasedRelease(value)
-			} else if let value = try? container.decode(GameCenterAppVersion.self) {
-				self = .gameCenterAppVersion(value)
-			} else if let value = try? container.decode(RoutingAppCoverage.self) {
-				self = .routingAppCoverage(value)
-			} else if let value = try? container.decode(AppStoreReviewDetail.self) {
-				self = .appStoreReviewDetail(value)
-			} else if let value = try? container.decode(AppStoreVersionSubmission.self) {
-				self = .appStoreVersionSubmission(value)
-			} else if let value = try? container.decode(AppClipDefaultExperience.self) {
-				self = .appClipDefaultExperience(value)
-			} else if let value = try? container.decode(AppStoreVersionExperiment.self) {
-				self = .appStoreVersionExperiment(value)
-			} else if let value = try? container.decode(AppStoreVersionExperimentV2.self) {
-				self = .appStoreVersionExperimentV2(value)
-			} else if let value = try? container.decode(AlternativeDistributionPackage.self) {
-				self = .alternativeDistributionPackage(value)
-			} else {
+			let discriminatorValue = try container.decode(Discriminator.self).type
+
+			switch discriminatorValue {
+			case "ageRatingDeclarations": self = .ageRatingDeclaration(try container.decode(AgeRatingDeclaration.self))
+			case "alternativeDistributionPackages": self = .alternativeDistributionPackage(try container.decode(AlternativeDistributionPackage.self))
+			case "appClipDefaultExperiences": self = .appClipDefaultExperience(try container.decode(AppClipDefaultExperience.self))
+			case "appStoreReviewDetails": self = .appStoreReviewDetail(try container.decode(AppStoreReviewDetail.self))
+			case "appStoreVersionExperiments": self = .appStoreVersionExperiment(try container.decode(AppStoreVersionExperiment.self))
+			case "appStoreVersionLocalizations": self = .appStoreVersionLocalization(try container.decode(AppStoreVersionLocalization.self))
+			case "appStoreVersionPhasedReleases": self = .appStoreVersionPhasedRelease(try container.decode(AppStoreVersionPhasedRelease.self))
+			case "appStoreVersionSubmissions": self = .appStoreVersionSubmission(try container.decode(AppStoreVersionSubmission.self))
+			case "apps": self = .app(try container.decode(App.self))
+			case "builds": self = .build(try container.decode(Build.self))
+			case "gameCenterAppVersions": self = .gameCenterAppVersion(try container.decode(GameCenterAppVersion.self))
+			case "routingAppCoverages": self = .routingAppCoverage(try container.decode(RoutingAppCoverage.self))
+
+			default:
 				throw DecodingError.dataCorruptedError(
 					in: container,
-					debugDescription: "Data could not be decoded as any of the expected types (App, AgeRatingDeclaration, AppStoreVersionLocalization, Build, AppStoreVersionPhasedRelease, GameCenterAppVersion, RoutingAppCoverage, AppStoreReviewDetail, AppStoreVersionSubmission, AppClipDefaultExperience, AppStoreVersionExperiment, AppStoreVersionExperimentV2, AlternativeDistributionPackage)."
+					debugDescription: "Discriminator value '\(discriminatorValue)' does not match any expected values (ageRatingDeclarations, alternativeDistributionPackages, appClipDefaultExperiences, appStoreReviewDetails, appStoreVersionExperiments, appStoreVersionLocalizations, appStoreVersionPhasedReleases, appStoreVersionSubmissions, apps, builds, gameCenterAppVersions, routingAppCoverages)."
 				)
 			}
 		}
@@ -63,19 +57,18 @@ public struct AppStoreVersionsResponse: Codable {
 		public func encode(to encoder: Encoder) throws {
 			var container = encoder.singleValueContainer()
 			switch self {
-			case .app(let value): try container.encode(value)
 			case .ageRatingDeclaration(let value): try container.encode(value)
+			case .alternativeDistributionPackage(let value): try container.encode(value)
+			case .appClipDefaultExperience(let value): try container.encode(value)
+			case .appStoreReviewDetail(let value): try container.encode(value)
+			case .appStoreVersionExperiment(let value): try container.encode(value)
 			case .appStoreVersionLocalization(let value): try container.encode(value)
-			case .build(let value): try container.encode(value)
 			case .appStoreVersionPhasedRelease(let value): try container.encode(value)
+			case .appStoreVersionSubmission(let value): try container.encode(value)
+			case .app(let value): try container.encode(value)
+			case .build(let value): try container.encode(value)
 			case .gameCenterAppVersion(let value): try container.encode(value)
 			case .routingAppCoverage(let value): try container.encode(value)
-			case .appStoreReviewDetail(let value): try container.encode(value)
-			case .appStoreVersionSubmission(let value): try container.encode(value)
-			case .appClipDefaultExperience(let value): try container.encode(value)
-			case .appStoreVersionExperiment(let value): try container.encode(value)
-			case .appStoreVersionExperimentV2(let value): try container.encode(value)
-			case .alternativeDistributionPackage(let value): try container.encode(value)
 			}
 		}
 	}

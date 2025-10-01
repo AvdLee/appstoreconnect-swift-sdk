@@ -10,28 +10,32 @@ public struct GameCenterActivitiesResponse: Codable {
 	public var meta: PagingInformation?
 
 	public enum IncludedItem: Codable {
+		case gameCenterAchievement(GameCenterAchievement)
+		case gameCenterActivityVersion(GameCenterActivityVersion)
 		case gameCenterDetail(GameCenterDetail)
 		case gameCenterGroup(GameCenterGroup)
-		case gameCenterAchievement(GameCenterAchievement)
 		case gameCenterLeaderboard(GameCenterLeaderboard)
-		case gameCenterActivityVersion(GameCenterActivityVersion)
 
 		public init(from decoder: Decoder) throws {
+
+			struct Discriminator: Decodable {
+				let type: String
+			}
+
 			let container = try decoder.singleValueContainer()
-			if let value = try? container.decode(GameCenterDetail.self) {
-				self = .gameCenterDetail(value)
-			} else if let value = try? container.decode(GameCenterGroup.self) {
-				self = .gameCenterGroup(value)
-			} else if let value = try? container.decode(GameCenterAchievement.self) {
-				self = .gameCenterAchievement(value)
-			} else if let value = try? container.decode(GameCenterLeaderboard.self) {
-				self = .gameCenterLeaderboard(value)
-			} else if let value = try? container.decode(GameCenterActivityVersion.self) {
-				self = .gameCenterActivityVersion(value)
-			} else {
+			let discriminatorValue = try container.decode(Discriminator.self).type
+
+			switch discriminatorValue {
+			case "gameCenterAchievements": self = .gameCenterAchievement(try container.decode(GameCenterAchievement.self))
+			case "gameCenterActivityVersions": self = .gameCenterActivityVersion(try container.decode(GameCenterActivityVersion.self))
+			case "gameCenterDetails": self = .gameCenterDetail(try container.decode(GameCenterDetail.self))
+			case "gameCenterGroups": self = .gameCenterGroup(try container.decode(GameCenterGroup.self))
+			case "gameCenterLeaderboards": self = .gameCenterLeaderboard(try container.decode(GameCenterLeaderboard.self))
+
+			default:
 				throw DecodingError.dataCorruptedError(
 					in: container,
-					debugDescription: "Data could not be decoded as any of the expected types (GameCenterDetail, GameCenterGroup, GameCenterAchievement, GameCenterLeaderboard, GameCenterActivityVersion)."
+					debugDescription: "Discriminator value '\(discriminatorValue)' does not match any expected values (gameCenterAchievements, gameCenterActivityVersions, gameCenterDetails, gameCenterGroups, gameCenterLeaderboards)."
 				)
 			}
 		}
@@ -39,11 +43,11 @@ public struct GameCenterActivitiesResponse: Codable {
 		public func encode(to encoder: Encoder) throws {
 			var container = encoder.singleValueContainer()
 			switch self {
+			case .gameCenterAchievement(let value): try container.encode(value)
+			case .gameCenterActivityVersion(let value): try container.encode(value)
 			case .gameCenterDetail(let value): try container.encode(value)
 			case .gameCenterGroup(let value): try container.encode(value)
-			case .gameCenterAchievement(let value): try container.encode(value)
 			case .gameCenterLeaderboard(let value): try container.encode(value)
-			case .gameCenterActivityVersion(let value): try container.encode(value)
 			}
 		}
 	}

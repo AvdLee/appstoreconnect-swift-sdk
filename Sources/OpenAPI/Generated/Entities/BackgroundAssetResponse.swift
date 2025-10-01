@@ -6,10 +6,44 @@ import Foundation
 public struct BackgroundAssetResponse: Codable {
 	/// BackgroundAsset
 	public var data: BackgroundAsset
-	public var included: [BackgroundAssetVersion]?
+	public var included: [IncludedItem]?
 	public var links: DocumentLinks
 
-	public init(data: BackgroundAsset, included: [BackgroundAssetVersion]? = nil, links: DocumentLinks) {
+	public enum IncludedItem: Codable {
+		case app(App)
+		case backgroundAssetVersion(BackgroundAssetVersion)
+
+		public init(from decoder: Decoder) throws {
+
+			struct Discriminator: Decodable {
+				let type: String
+			}
+
+			let container = try decoder.singleValueContainer()
+			let discriminatorValue = try container.decode(Discriminator.self).type
+
+			switch discriminatorValue {
+			case "apps": self = .app(try container.decode(App.self))
+			case "backgroundAssetVersions": self = .backgroundAssetVersion(try container.decode(BackgroundAssetVersion.self))
+
+			default:
+				throw DecodingError.dataCorruptedError(
+					in: container,
+					debugDescription: "Discriminator value '\(discriminatorValue)' does not match any expected values (apps, backgroundAssetVersions)."
+				)
+			}
+		}
+
+		public func encode(to encoder: Encoder) throws {
+			var container = encoder.singleValueContainer()
+			switch self {
+			case .app(let value): try container.encode(value)
+			case .backgroundAssetVersion(let value): try container.encode(value)
+			}
+		}
+	}
+
+	public init(data: BackgroundAsset, included: [IncludedItem]? = nil, links: DocumentLinks) {
 		self.data = data
 		self.included = included
 		self.links = links
@@ -18,7 +52,7 @@ public struct BackgroundAssetResponse: Codable {
 	public init(from decoder: Decoder) throws {
 		let values = try decoder.container(keyedBy: StringCodingKey.self)
 		self.data = try values.decode(BackgroundAsset.self, forKey: "data")
-		self.included = try values.decodeIfPresent([BackgroundAssetVersion].self, forKey: "included")
+		self.included = try values.decodeIfPresent([IncludedItem].self, forKey: "included")
 		self.links = try values.decode(DocumentLinks.self, forKey: "links")
 	}
 

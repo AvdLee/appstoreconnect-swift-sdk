@@ -10,22 +10,28 @@ public struct AppStoreVersionExperimentTreatmentLocalizationResponse: Codable {
 	public var links: DocumentLinks
 
 	public enum IncludedItem: Codable {
-		case appStoreVersionExperimentTreatment(AppStoreVersionExperimentTreatment)
-		case appScreenshotSet(AppScreenshotSet)
 		case appPreviewSet(AppPreviewSet)
+		case appScreenshotSet(AppScreenshotSet)
+		case appStoreVersionExperimentTreatment(AppStoreVersionExperimentTreatment)
 
 		public init(from decoder: Decoder) throws {
+
+			struct Discriminator: Decodable {
+				let type: String
+			}
+
 			let container = try decoder.singleValueContainer()
-			if let value = try? container.decode(AppStoreVersionExperimentTreatment.self) {
-				self = .appStoreVersionExperimentTreatment(value)
-			} else if let value = try? container.decode(AppScreenshotSet.self) {
-				self = .appScreenshotSet(value)
-			} else if let value = try? container.decode(AppPreviewSet.self) {
-				self = .appPreviewSet(value)
-			} else {
+			let discriminatorValue = try container.decode(Discriminator.self).type
+
+			switch discriminatorValue {
+			case "appPreviewSets": self = .appPreviewSet(try container.decode(AppPreviewSet.self))
+			case "appScreenshotSets": self = .appScreenshotSet(try container.decode(AppScreenshotSet.self))
+			case "appStoreVersionExperimentTreatments": self = .appStoreVersionExperimentTreatment(try container.decode(AppStoreVersionExperimentTreatment.self))
+
+			default:
 				throw DecodingError.dataCorruptedError(
 					in: container,
-					debugDescription: "Data could not be decoded as any of the expected types (AppStoreVersionExperimentTreatment, AppScreenshotSet, AppPreviewSet)."
+					debugDescription: "Discriminator value '\(discriminatorValue)' does not match any expected values (appPreviewSets, appScreenshotSets, appStoreVersionExperimentTreatments)."
 				)
 			}
 		}
@@ -33,9 +39,9 @@ public struct AppStoreVersionExperimentTreatmentLocalizationResponse: Codable {
 		public func encode(to encoder: Encoder) throws {
 			var container = encoder.singleValueContainer()
 			switch self {
-			case .appStoreVersionExperimentTreatment(let value): try container.encode(value)
-			case .appScreenshotSet(let value): try container.encode(value)
 			case .appPreviewSet(let value): try container.encode(value)
+			case .appScreenshotSet(let value): try container.encode(value)
+			case .appStoreVersionExperimentTreatment(let value): try container.encode(value)
 			}
 		}
 	}

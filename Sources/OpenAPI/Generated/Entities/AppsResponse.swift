@@ -10,82 +10,66 @@ public struct AppsResponse: Codable {
 	public var meta: PagingInformation?
 
 	public enum IncludedItem: Codable {
-		case appEncryptionDeclaration(AppEncryptionDeclaration)
-		case ciProduct(CiProduct)
-		case betaGroup(BetaGroup)
-		case appStoreVersion(AppStoreVersion)
-		case prereleaseVersion(PrereleaseVersion)
-		case betaAppLocalization(BetaAppLocalization)
-		case build(Build)
-		case betaLicenseAgreement(BetaLicenseAgreement)
-		case betaAppReviewDetail(BetaAppReviewDetail)
-		case appInfo(AppInfo)
 		case appClip(AppClip)
-		case endUserLicenseAgreement(EndUserLicenseAgreement)
-		case inAppPurchase(InAppPurchase)
-		case subscriptionGroup(SubscriptionGroup)
-		case gameCenterEnabledVersion(GameCenterEnabledVersion)
 		case appCustomProductPage(AppCustomProductPage)
-		case inAppPurchaseV2(InAppPurchaseV2)
-		case promotedPurchase(PromotedPurchase)
+		case appEncryptionDeclaration(AppEncryptionDeclaration)
 		case appEvent(AppEvent)
+		case appInfo(AppInfo)
+		case appStoreVersionExperimentV2(AppStoreVersionExperimentV2)
+		case appStoreVersion(AppStoreVersion)
+		case betaAppLocalization(BetaAppLocalization)
+		case betaAppReviewDetail(BetaAppReviewDetail)
+		case betaGroup(BetaGroup)
+		case betaLicenseAgreement(BetaLicenseAgreement)
+		case build(Build)
+		case ciProduct(CiProduct)
+		case endUserLicenseAgreement(EndUserLicenseAgreement)
+		case gameCenterDetail(GameCenterDetail)
+		case gameCenterEnabledVersion(GameCenterEnabledVersion)
+		case inAppPurchase(InAppPurchase)
+		case prereleaseVersion(PrereleaseVersion)
+		case promotedPurchase(PromotedPurchase)
 		case reviewSubmission(ReviewSubmission)
 		case subscriptionGracePeriod(SubscriptionGracePeriod)
-		case gameCenterDetail(GameCenterDetail)
-		case appStoreVersionExperimentV2(AppStoreVersionExperimentV2)
+		case subscriptionGroup(SubscriptionGroup)
 
 		public init(from decoder: Decoder) throws {
+
+			struct Discriminator: Decodable {
+				let type: String
+			}
+
 			let container = try decoder.singleValueContainer()
-			if let value = try? container.decode(AppEncryptionDeclaration.self) {
-				self = .appEncryptionDeclaration(value)
-			} else if let value = try? container.decode(CiProduct.self) {
-				self = .ciProduct(value)
-			} else if let value = try? container.decode(BetaGroup.self) {
-				self = .betaGroup(value)
-			} else if let value = try? container.decode(AppStoreVersion.self) {
-				self = .appStoreVersion(value)
-			} else if let value = try? container.decode(PrereleaseVersion.self) {
-				self = .prereleaseVersion(value)
-			} else if let value = try? container.decode(BetaAppLocalization.self) {
-				self = .betaAppLocalization(value)
-			} else if let value = try? container.decode(Build.self) {
-				self = .build(value)
-			} else if let value = try? container.decode(BetaLicenseAgreement.self) {
-				self = .betaLicenseAgreement(value)
-			} else if let value = try? container.decode(BetaAppReviewDetail.self) {
-				self = .betaAppReviewDetail(value)
-			} else if let value = try? container.decode(AppInfo.self) {
-				self = .appInfo(value)
-			} else if let value = try? container.decode(AppClip.self) {
-				self = .appClip(value)
-			} else if let value = try? container.decode(EndUserLicenseAgreement.self) {
-				self = .endUserLicenseAgreement(value)
-			} else if let value = try? container.decode(InAppPurchase.self) {
-				self = .inAppPurchase(value)
-			} else if let value = try? container.decode(SubscriptionGroup.self) {
-				self = .subscriptionGroup(value)
-			} else if let value = try? container.decode(GameCenterEnabledVersion.self) {
-				self = .gameCenterEnabledVersion(value)
-			} else if let value = try? container.decode(AppCustomProductPage.self) {
-				self = .appCustomProductPage(value)
-			} else if let value = try? container.decode(InAppPurchaseV2.self) {
-				self = .inAppPurchaseV2(value)
-			} else if let value = try? container.decode(PromotedPurchase.self) {
-				self = .promotedPurchase(value)
-			} else if let value = try? container.decode(AppEvent.self) {
-				self = .appEvent(value)
-			} else if let value = try? container.decode(ReviewSubmission.self) {
-				self = .reviewSubmission(value)
-			} else if let value = try? container.decode(SubscriptionGracePeriod.self) {
-				self = .subscriptionGracePeriod(value)
-			} else if let value = try? container.decode(GameCenterDetail.self) {
-				self = .gameCenterDetail(value)
-			} else if let value = try? container.decode(AppStoreVersionExperimentV2.self) {
-				self = .appStoreVersionExperimentV2(value)
-			} else {
+			let discriminatorValue = try container.decode(Discriminator.self).type
+
+			switch discriminatorValue {
+			case "appClips": self = .appClip(try container.decode(AppClip.self))
+			case "appCustomProductPages": self = .appCustomProductPage(try container.decode(AppCustomProductPage.self))
+			case "appEncryptionDeclarations": self = .appEncryptionDeclaration(try container.decode(AppEncryptionDeclaration.self))
+			case "appEvents": self = .appEvent(try container.decode(AppEvent.self))
+			case "appInfos": self = .appInfo(try container.decode(AppInfo.self))
+			case "appStoreVersionExperiments": self = .appStoreVersionExperimentV2(try container.decode(AppStoreVersionExperimentV2.self))
+			case "appStoreVersions": self = .appStoreVersion(try container.decode(AppStoreVersion.self))
+			case "betaAppLocalizations": self = .betaAppLocalization(try container.decode(BetaAppLocalization.self))
+			case "betaAppReviewDetails": self = .betaAppReviewDetail(try container.decode(BetaAppReviewDetail.self))
+			case "betaGroups": self = .betaGroup(try container.decode(BetaGroup.self))
+			case "betaLicenseAgreements": self = .betaLicenseAgreement(try container.decode(BetaLicenseAgreement.self))
+			case "builds": self = .build(try container.decode(Build.self))
+			case "ciProducts": self = .ciProduct(try container.decode(CiProduct.self))
+			case "endUserLicenseAgreements": self = .endUserLicenseAgreement(try container.decode(EndUserLicenseAgreement.self))
+			case "gameCenterDetails": self = .gameCenterDetail(try container.decode(GameCenterDetail.self))
+			case "gameCenterEnabledVersions": self = .gameCenterEnabledVersion(try container.decode(GameCenterEnabledVersion.self))
+			case "inAppPurchases": self = .inAppPurchase(try container.decode(InAppPurchase.self))
+			case "preReleaseVersions": self = .prereleaseVersion(try container.decode(PrereleaseVersion.self))
+			case "promotedPurchases": self = .promotedPurchase(try container.decode(PromotedPurchase.self))
+			case "reviewSubmissions": self = .reviewSubmission(try container.decode(ReviewSubmission.self))
+			case "subscriptionGracePeriods": self = .subscriptionGracePeriod(try container.decode(SubscriptionGracePeriod.self))
+			case "subscriptionGroups": self = .subscriptionGroup(try container.decode(SubscriptionGroup.self))
+
+			default:
 				throw DecodingError.dataCorruptedError(
 					in: container,
-					debugDescription: "Data could not be decoded as any of the expected types (AppEncryptionDeclaration, CiProduct, BetaGroup, AppStoreVersion, PrereleaseVersion, BetaAppLocalization, Build, BetaLicenseAgreement, BetaAppReviewDetail, AppInfo, AppClip, EndUserLicenseAgreement, InAppPurchase, SubscriptionGroup, GameCenterEnabledVersion, AppCustomProductPage, InAppPurchaseV2, PromotedPurchase, AppEvent, ReviewSubmission, SubscriptionGracePeriod, GameCenterDetail, AppStoreVersionExperimentV2)."
+					debugDescription: "Discriminator value '\(discriminatorValue)' does not match any expected values (appClips, appCustomProductPages, appEncryptionDeclarations, appEvents, appInfos, appStoreVersionExperiments, appStoreVersions, betaAppLocalizations, betaAppReviewDetails, betaGroups, betaLicenseAgreements, builds, ciProducts, endUserLicenseAgreements, gameCenterDetails, gameCenterEnabledVersions, inAppPurchases, preReleaseVersions, promotedPurchases, reviewSubmissions, subscriptionGracePeriods, subscriptionGroups)."
 				)
 			}
 		}
@@ -93,29 +77,28 @@ public struct AppsResponse: Codable {
 		public func encode(to encoder: Encoder) throws {
 			var container = encoder.singleValueContainer()
 			switch self {
-			case .appEncryptionDeclaration(let value): try container.encode(value)
-			case .ciProduct(let value): try container.encode(value)
-			case .betaGroup(let value): try container.encode(value)
-			case .appStoreVersion(let value): try container.encode(value)
-			case .prereleaseVersion(let value): try container.encode(value)
-			case .betaAppLocalization(let value): try container.encode(value)
-			case .build(let value): try container.encode(value)
-			case .betaLicenseAgreement(let value): try container.encode(value)
-			case .betaAppReviewDetail(let value): try container.encode(value)
-			case .appInfo(let value): try container.encode(value)
 			case .appClip(let value): try container.encode(value)
-			case .endUserLicenseAgreement(let value): try container.encode(value)
-			case .inAppPurchase(let value): try container.encode(value)
-			case .subscriptionGroup(let value): try container.encode(value)
-			case .gameCenterEnabledVersion(let value): try container.encode(value)
 			case .appCustomProductPage(let value): try container.encode(value)
-			case .inAppPurchaseV2(let value): try container.encode(value)
-			case .promotedPurchase(let value): try container.encode(value)
+			case .appEncryptionDeclaration(let value): try container.encode(value)
 			case .appEvent(let value): try container.encode(value)
+			case .appInfo(let value): try container.encode(value)
+			case .appStoreVersionExperimentV2(let value): try container.encode(value)
+			case .appStoreVersion(let value): try container.encode(value)
+			case .betaAppLocalization(let value): try container.encode(value)
+			case .betaAppReviewDetail(let value): try container.encode(value)
+			case .betaGroup(let value): try container.encode(value)
+			case .betaLicenseAgreement(let value): try container.encode(value)
+			case .build(let value): try container.encode(value)
+			case .ciProduct(let value): try container.encode(value)
+			case .endUserLicenseAgreement(let value): try container.encode(value)
+			case .gameCenterDetail(let value): try container.encode(value)
+			case .gameCenterEnabledVersion(let value): try container.encode(value)
+			case .inAppPurchase(let value): try container.encode(value)
+			case .prereleaseVersion(let value): try container.encode(value)
+			case .promotedPurchase(let value): try container.encode(value)
 			case .reviewSubmission(let value): try container.encode(value)
 			case .subscriptionGracePeriod(let value): try container.encode(value)
-			case .gameCenterDetail(let value): try container.encode(value)
-			case .appStoreVersionExperimentV2(let value): try container.encode(value)
+			case .subscriptionGroup(let value): try container.encode(value)
 			}
 		}
 	}

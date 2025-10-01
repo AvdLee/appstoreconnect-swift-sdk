@@ -1,0 +1,120 @@
+@@ -9787,6 +9787,7 @@
+                   "violenceCartoonOrFantasy",
+                   "violenceRealisticProlongedGraphicOrSadistic",
+                   "violenceRealistic",
++                  "ageRatingOverride",
+                   "koreaAgeRatingOverride"
+                 ]
+               }
+@@ -15399,6 +15400,7 @@
+                   "violenceCartoonOrFantasy",
+                   "violenceRealisticProlongedGraphicOrSadistic",
+                   "violenceRealistic",
++                  "ageRatingOverride",
+                   "koreaAgeRatingOverride"
+                 ]
+               }
+@@ -58365,6 +58367,7 @@
+                   "duration",
+                   "offerMode",
+                   "numberOfPeriods",
++                  "totalNumberOfCodes",
+                   "active",
+                   "subscription",
+                   "oneTimeUseCodes",
+@@ -59714,6 +59717,7 @@
+                   "duration",
+                   "offerMode",
+                   "numberOfPeriods",
++                  "totalNumberOfCodes",
+                   "active",
+                   "subscription",
+                   "oneTimeUseCodes",
+@@ -65717,6 +65721,7 @@
+                   "violenceCartoonOrFantasy",
+                   "violenceRealisticProlongedGraphicOrSadistic",
+                   "violenceRealistic",
++                  "ageRatingOverride",
+                   "koreaAgeRatingOverride"
+                 ]
+               }
+@@ -69645,6 +69650,7 @@
+                   "violenceCartoonOrFantasy",
+                   "violenceRealisticProlongedGraphicOrSadistic",
+                   "violenceRealistic",
++                  "ageRatingOverride",
+                   "koreaAgeRatingOverride"
+                 ]
+               }
+@@ -75869,6 +75875,7 @@
+                   "violenceCartoonOrFantasy",
+                   "violenceRealisticProlongedGraphicOrSadistic",
+                   "violenceRealistic",
++                  "ageRatingOverride",
+                   "koreaAgeRatingOverride"
+                 ]
+               }
+@@ -82154,6 +82161,7 @@
+                   "violenceCartoonOrFantasy",
+                   "violenceRealisticProlongedGraphicOrSadistic",
+                   "violenceRealistic",
++                  "ageRatingOverride",
+                   "koreaAgeRatingOverride"
+                 ]
+               }
+@@ -83719,6 +83726,7 @@
+                   "violenceCartoonOrFantasy",
+                   "violenceRealisticProlongedGraphicOrSadistic",
+                   "violenceRealistic",
++                  "ageRatingOverride",
+                   "koreaAgeRatingOverride"
+                 ]
+               }
+@@ -98135,6 +98143,7 @@
+                   "violenceCartoonOrFantasy",
+                   "violenceRealisticProlongedGraphicOrSadistic",
+                   "violenceRealistic",
++                  "ageRatingOverride",
+                   "koreaAgeRatingOverride"
+                 ]
+               }
+@@ -110716,6 +110725,7 @@
+                   "violenceCartoonOrFantasy",
+                   "violenceRealisticProlongedGraphicOrSadistic",
+                   "violenceRealistic",
++                  "ageRatingOverride",
+                   "koreaAgeRatingOverride"
+                 ]
+               }
+@@ -132774,6 +132784,7 @@
+                   "duration",
+                   "offerMode",
+                   "numberOfPeriods",
++                  "totalNumberOfCodes",
+                   "active",
+                   "subscription",
+                   "oneTimeUseCodes",
+@@ -133296,6 +133307,7 @@
+                   "duration",
+                   "offerMode",
+                   "numberOfPeriods",
++                  "totalNumberOfCodes",
+                   "active",
+                   "subscription",
+                   "oneTimeUseCodes",
+@@ -133548,6 +133560,7 @@
+                   "duration",
+                   "offerMode",
+                   "numberOfPeriods",
++                  "totalNumberOfCodes",
+                   "active",
+                   "subscription",
+                   "oneTimeUseCodes",
+@@ -135501,6 +135514,7 @@
+                   "duration",
+                   "offerMode",
+                   "numberOfPeriods",
++                  "totalNumberOfCodes",
+                   "active",
+                   "subscription",
+                   "oneTimeUseCodes",

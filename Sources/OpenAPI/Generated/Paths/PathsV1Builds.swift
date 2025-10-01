@@ -110,6 +110,7 @@ extension APIEndpoint.V1 {
 				case appStoreVersion
 				case icons
 				case buildBundles
+				case buildUpload
 				case perfPowerMetrics
 				case diagnosticSignatures
 			}
@@ -183,6 +184,7 @@ extension APIEndpoint.V1 {
 				case betaTesters
 				case betaGroups
 				case appStoreVersions
+				case appTags
 				case preReleaseVersions
 				case betaAppLocalizations
 				case builds
@@ -211,9 +213,11 @@ extension APIEndpoint.V1 {
 				case alternativeDistributionKey
 				case analyticsReportRequests
 				case marketplaceSearchDetail
+				case buildUploads
 				case backgroundAssets
 				case betaFeedbackScreenshotSubmissions
 				case betaFeedbackCrashSubmissions
+				case searchKeywords
 				case webhooks
 			}
 
@@ -255,6 +259,7 @@ extension APIEndpoint.V1 {
 			public enum FieldsBuildIcons: String, Codable, CaseIterable {
 				case iconAsset
 				case iconType
+				case masked
 				case name
 			}
 
@@ -270,6 +275,7 @@ extension APIEndpoint.V1 {
 				case appStoreVersion
 				case icons
 				case buildBundles
+				case buildUpload
 			}
 
 			public init(filterVersion: [String]? = nil, filterExpired: [String]? = nil, filterProcessingState: [FilterProcessingState]? = nil, filterBetaAppReviewSubmissionBetaReviewState: [FilterBetaAppReviewSubmissionBetaReviewState]? = nil, filterUsesNonExemptEncryption: [String]? = nil, filterPreReleaseVersionVersion: [String]? = nil, filterPreReleaseVersionPlatform: [FilterPreReleaseVersionPlatform]? = nil, filterBuildAudienceType: [FilterBuildAudienceType]? = nil, filterPreReleaseVersion: [String]? = nil, filterApp: [String]? = nil, filterBetaGroups: [String]? = nil, filterAppStoreVersion: [String]? = nil, filterID: [String]? = nil, existsUsesNonExemptEncryption: Bool? = nil, sort: [Sort]? = nil, fieldsBuilds: [FieldsBuilds]? = nil, fieldsPreReleaseVersions: [FieldsPreReleaseVersions]? = nil, fieldsBetaTesters: [FieldsBetaTesters]? = nil, fieldsBetaBuildLocalizations: [FieldsBetaBuildLocalizations]? = nil, fieldsAppEncryptionDeclarations: [FieldsAppEncryptionDeclarations]? = nil, fieldsBetaAppReviewSubmissions: [FieldsBetaAppReviewSubmissions]? = nil, fieldsApps: [FieldsApps]? = nil, fieldsBuildBetaDetails: [FieldsBuildBetaDetails]? = nil, fieldsAppStoreVersions: [FieldsAppStoreVersions]? = nil, fieldsBuildIcons: [FieldsBuildIcons]? = nil, limit: Int? = nil, include: [Include]? = nil, limitBetaBuildLocalizations: Int? = nil, limitBetaGroups: Int? = nil, limitBuildBundles: Int? = nil, limitIcons: Int? = nil, limitIndividualTesters: Int? = nil) {

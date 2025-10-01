@@ -48,6 +48,7 @@ extension APIEndpoint.V1.PreReleaseVersions.WithID {
 			case appStoreVersion
 			case icons
 			case buildBundles
+			case buildUpload
 			case perfPowerMetrics
 			case diagnosticSignatures
 		}

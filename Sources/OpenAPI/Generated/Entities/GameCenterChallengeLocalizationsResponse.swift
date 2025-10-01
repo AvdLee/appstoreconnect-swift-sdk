@@ -10,19 +10,26 @@ public struct GameCenterChallengeLocalizationsResponse: Codable {
 	public var meta: PagingInformation?
 
 	public enum IncludedItem: Codable {
-		case gameCenterChallengeVersion(GameCenterChallengeVersion)
 		case gameCenterChallengeImage(GameCenterChallengeImage)
+		case gameCenterChallengeVersion(GameCenterChallengeVersion)
 
 		public init(from decoder: Decoder) throws {
+
+			struct Discriminator: Decodable {
+				let type: String
+			}
+
 			let container = try decoder.singleValueContainer()
-			if let value = try? container.decode(GameCenterChallengeVersion.self) {
-				self = .gameCenterChallengeVersion(value)
-			} else if let value = try? container.decode(GameCenterChallengeImage.self) {
-				self = .gameCenterChallengeImage(value)
-			} else {
+			let discriminatorValue = try container.decode(Discriminator.self).type
+
+			switch discriminatorValue {
+			case "gameCenterChallengeImages": self = .gameCenterChallengeImage(try container.decode(GameCenterChallengeImage.self))
+			case "gameCenterChallengeVersions": self = .gameCenterChallengeVersion(try container.decode(GameCenterChallengeVersion.self))
+
+			default:
 				throw DecodingError.dataCorruptedError(
 					in: container,
-					debugDescription: "Data could not be decoded as any of the expected types (GameCenterChallengeVersion, GameCenterChallengeImage)."
+					debugDescription: "Discriminator value '\(discriminatorValue)' does not match any expected values (gameCenterChallengeImages, gameCenterChallengeVersions)."
 				)
 			}
 		}
@@ -30,8 +37,8 @@ public struct GameCenterChallengeLocalizationsResponse: Codable {
 		public func encode(to encoder: Encoder) throws {
 			var container = encoder.singleValueContainer()
 			switch self {
-			case .gameCenterChallengeVersion(let value): try container.encode(value)
 			case .gameCenterChallengeImage(let value): try container.encode(value)
+			case .gameCenterChallengeVersion(let value): try container.encode(value)
 			}
 		}
 	}

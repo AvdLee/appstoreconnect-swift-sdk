@@ -13,10 +13,12 @@ extension APIEndpoint.V1.MarketplaceWebhooks {
 		/// Path: `/v1/marketplaceWebhooks/{id}`
 		public let path: String
 
+		@available(*, deprecated, message: "Deprecated")
 		public func patch(_ body: AppStoreConnect_Swift_SDK.MarketplaceWebhookUpdateRequest) -> Request<AppStoreConnect_Swift_SDK.MarketplaceWebhookResponse> {
 			Request(path: path, method: "PATCH", body: body, id: "marketplaceWebhooks_updateInstance")
 		}
 
+		@available(*, deprecated, message: "Deprecated")
 		public var delete: Request<Void> {
 			Request(path: path, method: "DELETE", id: "marketplaceWebhooks_deleteInstance")
 		}

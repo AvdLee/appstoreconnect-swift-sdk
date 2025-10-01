@@ -21,9 +21,14 @@ extension APIEndpoint.V1.BackgroundAssets.WithID {
 			public var filterState: [FilterState]?
 			public var filterVersion: [String]?
 			public var filterInternalBetaReleaseState: [FilterInternalBetaReleaseState]?
+			public var filterExternalBetaReleaseState: [FilterExternalBetaReleaseState]?
+			public var filterAppStoreReleaseState: [FilterAppStoreReleaseState]?
 			public var sort: [Sort]?
 			public var fieldsBackgroundAssetVersions: [FieldsBackgroundAssetVersions]?
+			public var fieldsBackgroundAssets: [FieldsBackgroundAssets]?
 			public var fieldsBackgroundAssetVersionInternalBetaReleases: [FieldsBackgroundAssetVersionInternalBetaReleases]?
+			public var fieldsBackgroundAssetVersionExternalBetaReleases: [FieldsBackgroundAssetVersionExternalBetaReleases]?
+			public var fieldsBackgroundAssetVersionAppStoreReleases: [FieldsBackgroundAssetVersionAppStoreReleases]?
 			public var fieldsBackgroundAssetUploadFiles: [FieldsBackgroundAssetUploadFiles]?
 			public var limit: Int?
 			public var include: [Include]?
@@ -40,6 +45,28 @@ extension APIEndpoint.V1.BackgroundAssets.WithID {
 				case superseded = "SUPERSEDED"
 			}
 
+			public enum FilterExternalBetaReleaseState: String, Codable, CaseIterable {
+				case readyForBetaSubmission = "READY_FOR_BETA_SUBMISSION"
+				case waitingForReview = "WAITING_FOR_REVIEW"
+				case inReview = "IN_REVIEW"
+				case rejected = "REJECTED"
+				case processingForTesting = "PROCESSING_FOR_TESTING"
+				case readyForTesting = "READY_FOR_TESTING"
+				case superseded = "SUPERSEDED"
+			}
+
+			public enum FilterAppStoreReleaseState: String, Codable, CaseIterable {
+				case prepareForSubmission = "PREPARE_FOR_SUBMISSION"
+				case readyForReview = "READY_FOR_REVIEW"
+				case waitingForReview = "WAITING_FOR_REVIEW"
+				case inReview = "IN_REVIEW"
+				case accepted = "ACCEPTED"
+				case rejected = "REJECTED"
+				case processingForDistribution = "PROCESSING_FOR_DISTRIBUTION"
+				case readyForDistribution = "READY_FOR_DISTRIBUTION"
+				case superseded = "SUPERSEDED"
+			}
+
 			public enum Sort: String, Codable, CaseIterable {
 				case version
 				case minusversion = "-version"
@@ -50,13 +77,36 @@ extension APIEndpoint.V1.BackgroundAssets.WithID {
 				case platforms
 				case state
 				case version
+				case backgroundAsset
 				case internalBetaRelease
+				case externalBetaRelease
+				case appStoreRelease
 				case assetFile
 				case manifestFile
 				case backgroundAssetUploadFiles
 			}
 
+			public enum FieldsBackgroundAssets: String, Codable, CaseIterable {
+				case assetPackIdentifier
+				case createdDate
+				case app
+				case versions
+				case appStoreVersion
+				case internalBetaVersion
+				case externalBetaVersion
+			}
+
 			public enum FieldsBackgroundAssetVersionInternalBetaReleases: String, Codable, CaseIterable {
+				case state
+				case backgroundAssetVersion
+			}
+
+			public enum FieldsBackgroundAssetVersionExternalBetaReleases: String, Codable, CaseIterable {
+				case state
+				case backgroundAssetVersion
+			}
+
+			public enum FieldsBackgroundAssetVersionAppStoreReleases: String, Codable, CaseIterable {
 				case state
 				case backgroundAssetVersion
 			}
@@ -68,22 +118,31 @@ extension APIEndpoint.V1.BackgroundAssets.WithID {
 				case fileName
 				case fileSize
 				case sourceFileChecksum
+				case sourceFileChecksums
 				case uploadOperations
 			}
 
 			public enum Include: String, Codable, CaseIterable {
+				case backgroundAsset
 				case internalBetaRelease
+				case externalBetaRelease
+				case appStoreRelease
 				case assetFile
 				case manifestFile
 			}
 
-			public init(filterState: [FilterState]? = nil, filterVersion: [String]? = nil, filterInternalBetaReleaseState: [FilterInternalBetaReleaseState]? = nil, sort: [Sort]? = nil, fieldsBackgroundAssetVersions: [FieldsBackgroundAssetVersions]? = nil, fieldsBackgroundAssetVersionInternalBetaReleases: [FieldsBackgroundAssetVersionInternalBetaReleases]? = nil, fieldsBackgroundAssetUploadFiles: [FieldsBackgroundAssetUploadFiles]? = nil, limit: Int? = nil, include: [Include]? = nil) {
+			public init(filterState: [FilterState]? = nil, filterVersion: [String]? = nil, filterInternalBetaReleaseState: [FilterInternalBetaReleaseState]? = nil, filterExternalBetaReleaseState: [FilterExternalBetaReleaseState]? = nil, filterAppStoreReleaseState: [FilterAppStoreReleaseState]? = nil, sort: [Sort]? = nil, fieldsBackgroundAssetVersions: [FieldsBackgroundAssetVersions]? = nil, fieldsBackgroundAssets: [FieldsBackgroundAssets]? = nil, fieldsBackgroundAssetVersionInternalBetaReleases: [FieldsBackgroundAssetVersionInternalBetaReleases]? = nil, fieldsBackgroundAssetVersionExternalBetaReleases: [FieldsBackgroundAssetVersionExternalBetaReleases]? = nil, fieldsBackgroundAssetVersionAppStoreReleases: [FieldsBackgroundAssetVersionAppStoreReleases]? = nil, fieldsBackgroundAssetUploadFiles: [FieldsBackgroundAssetUploadFiles]? = nil, limit: Int? = nil, include: [Include]? = nil) {
 				self.filterState = filterState
 				self.filterVersion = filterVersion
 				self.filterInternalBetaReleaseState = filterInternalBetaReleaseState
+				self.filterExternalBetaReleaseState = filterExternalBetaReleaseState
+				self.filterAppStoreReleaseState = filterAppStoreReleaseState
 				self.sort = sort
 				self.fieldsBackgroundAssetVersions = fieldsBackgroundAssetVersions
+				self.fieldsBackgroundAssets = fieldsBackgroundAssets
 				self.fieldsBackgroundAssetVersionInternalBetaReleases = fieldsBackgroundAssetVersionInternalBetaReleases
+				self.fieldsBackgroundAssetVersionExternalBetaReleases = fieldsBackgroundAssetVersionExternalBetaReleases
+				self.fieldsBackgroundAssetVersionAppStoreReleases = fieldsBackgroundAssetVersionAppStoreReleases
 				self.fieldsBackgroundAssetUploadFiles = fieldsBackgroundAssetUploadFiles
 				self.limit = limit
 				self.include = include
@@ -94,9 +153,14 @@ extension APIEndpoint.V1.BackgroundAssets.WithID {
 				encoder.encode(filterState, forKey: "filter[state]")
 				encoder.encode(filterVersion, forKey: "filter[version]")
 				encoder.encode(filterInternalBetaReleaseState, forKey: "filter[internalBetaRelease.state]")
+				encoder.encode(filterExternalBetaReleaseState, forKey: "filter[externalBetaRelease.state]")
+				encoder.encode(filterAppStoreReleaseState, forKey: "filter[appStoreRelease.state]")
 				encoder.encode(sort, forKey: "sort")
 				encoder.encode(fieldsBackgroundAssetVersions, forKey: "fields[backgroundAssetVersions]")
+				encoder.encode(fieldsBackgroundAssets, forKey: "fields[backgroundAssets]")
 				encoder.encode(fieldsBackgroundAssetVersionInternalBetaReleases, forKey: "fields[backgroundAssetVersionInternalBetaReleases]")
+				encoder.encode(fieldsBackgroundAssetVersionExternalBetaReleases, forKey: "fields[backgroundAssetVersionExternalBetaReleases]")
+				encoder.encode(fieldsBackgroundAssetVersionAppStoreReleases, forKey: "fields[backgroundAssetVersionAppStoreReleases]")
 				encoder.encode(fieldsBackgroundAssetUploadFiles, forKey: "fields[backgroundAssetUploadFiles]")
 				encoder.encode(limit, forKey: "limit")
 				encoder.encode(include, forKey: "include")

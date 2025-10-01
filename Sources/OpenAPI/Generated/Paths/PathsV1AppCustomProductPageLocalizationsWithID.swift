@@ -24,6 +24,7 @@ extension APIEndpoint.V1.AppCustomProductPageLocalizations {
 			public var include: [Include]?
 			public var limitAppPreviewSets: Int?
 			public var limitAppScreenshotSets: Int?
+			public var limitSearchKeywords: Int?
 
 			public enum FieldsAppCustomProductPageLocalizations: String, Codable, CaseIterable {
 				case locale
@@ -31,6 +32,7 @@ extension APIEndpoint.V1.AppCustomProductPageLocalizations {
 				case appCustomProductPageVersion
 				case appScreenshotSets
 				case appPreviewSets
+				case searchKeywords
 			}
 
 			public enum FieldsAppScreenshotSets: String, Codable, CaseIterable {
@@ -53,15 +55,17 @@ extension APIEndpoint.V1.AppCustomProductPageLocalizations {
 				case appCustomProductPageVersion
 				case appScreenshotSets
 				case appPreviewSets
+				case searchKeywords
 			}
 
-			public init(fieldsAppCustomProductPageLocalizations: [FieldsAppCustomProductPageLocalizations]? = nil, fieldsAppScreenshotSets: [FieldsAppScreenshotSets]? = nil, fieldsAppPreviewSets: [FieldsAppPreviewSets]? = nil, include: [Include]? = nil, limitAppPreviewSets: Int? = nil, limitAppScreenshotSets: Int? = nil) {
+			public init(fieldsAppCustomProductPageLocalizations: [FieldsAppCustomProductPageLocalizations]? = nil, fieldsAppScreenshotSets: [FieldsAppScreenshotSets]? = nil, fieldsAppPreviewSets: [FieldsAppPreviewSets]? = nil, include: [Include]? = nil, limitAppPreviewSets: Int? = nil, limitAppScreenshotSets: Int? = nil, limitSearchKeywords: Int? = nil) {
 				self.fieldsAppCustomProductPageLocalizations = fieldsAppCustomProductPageLocalizations
 				self.fieldsAppScreenshotSets = fieldsAppScreenshotSets
 				self.fieldsAppPreviewSets = fieldsAppPreviewSets
 				self.include = include
 				self.limitAppPreviewSets = limitAppPreviewSets
 				self.limitAppScreenshotSets = limitAppScreenshotSets
+				self.limitSearchKeywords = limitSearchKeywords
 			}
 
 			public var asQuery: [(String, String?)] {
@@ -72,6 +76,7 @@ extension APIEndpoint.V1.AppCustomProductPageLocalizations {
 				encoder.encode(include, forKey: "include")
 				encoder.encode(limitAppPreviewSets, forKey: "limit[appPreviewSets]")
 				encoder.encode(limitAppScreenshotSets, forKey: "limit[appScreenshotSets]")
+				encoder.encode(limitSearchKeywords, forKey: "limit[searchKeywords]")
 				return encoder.items
 			}
 		}

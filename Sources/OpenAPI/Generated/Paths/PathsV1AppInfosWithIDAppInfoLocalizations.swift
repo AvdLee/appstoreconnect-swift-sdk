@@ -53,6 +53,7 @@ extension APIEndpoint.V1.AppInfos.WithID {
 				case secondaryCategory
 				case secondarySubcategoryOne
 				case secondarySubcategoryTwo
+				case territoryAgeRatings
 			}
 
 			public enum Include: String, Codable, CaseIterable {

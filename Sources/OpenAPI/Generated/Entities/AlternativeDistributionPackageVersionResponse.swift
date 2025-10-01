@@ -10,22 +10,28 @@ public struct AlternativeDistributionPackageVersionResponse: Codable {
 	public var links: DocumentLinks
 
 	public enum IncludedItem: Codable {
-		case alternativeDistributionPackageVariant(AlternativeDistributionPackageVariant)
 		case alternativeDistributionPackageDelta(AlternativeDistributionPackageDelta)
+		case alternativeDistributionPackageVariant(AlternativeDistributionPackageVariant)
 		case alternativeDistributionPackage(AlternativeDistributionPackage)
 
 		public init(from decoder: Decoder) throws {
+
+			struct Discriminator: Decodable {
+				let type: String
+			}
+
 			let container = try decoder.singleValueContainer()
-			if let value = try? container.decode(AlternativeDistributionPackageVariant.self) {
-				self = .alternativeDistributionPackageVariant(value)
-			} else if let value = try? container.decode(AlternativeDistributionPackageDelta.self) {
-				self = .alternativeDistributionPackageDelta(value)
-			} else if let value = try? container.decode(AlternativeDistributionPackage.self) {
-				self = .alternativeDistributionPackage(value)
-			} else {
+			let discriminatorValue = try container.decode(Discriminator.self).type
+
+			switch discriminatorValue {
+			case "alternativeDistributionPackageDeltas": self = .alternativeDistributionPackageDelta(try container.decode(AlternativeDistributionPackageDelta.self))
+			case "alternativeDistributionPackageVariants": self = .alternativeDistributionPackageVariant(try container.decode(AlternativeDistributionPackageVariant.self))
+			case "alternativeDistributionPackages": self = .alternativeDistributionPackage(try container.decode(AlternativeDistributionPackage.self))
+
+			default:
 				throw DecodingError.dataCorruptedError(
 					in: container,
-					debugDescription: "Data could not be decoded as any of the expected types (AlternativeDistributionPackageVariant, AlternativeDistributionPackageDelta, AlternativeDistributionPackage)."
+					debugDescription: "Discriminator value '\(discriminatorValue)' does not match any expected values (alternativeDistributionPackageDeltas, alternativeDistributionPackageVariants, alternativeDistributionPackages)."
 				)
 			}
 		}
@@ -33,8 +39,8 @@ public struct AlternativeDistributionPackageVersionResponse: Codable {
 		public func encode(to encoder: Encoder) throws {
 			var container = encoder.singleValueContainer()
 			switch self {
-			case .alternativeDistributionPackageVariant(let value): try container.encode(value)
 			case .alternativeDistributionPackageDelta(let value): try container.encode(value)
+			case .alternativeDistributionPackageVariant(let value): try container.encode(value)
 			case .alternativeDistributionPackage(let value): try container.encode(value)
 			}
 		}

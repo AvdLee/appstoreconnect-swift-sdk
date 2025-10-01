@@ -17,25 +17,17 @@ public struct GameCenterChallenge: Codable, Identifiable {
 	public struct Attributes: Codable {
 		public var referenceName: String?
 		public var vendorIdentifier: String?
-		public var allowedDurations: [AllowedDuration]?
 		public var isArchived: Bool?
 		public var challengeType: ChallengeType?
 		public var isRepeatable: Bool?
-
-		public enum AllowedDuration: String, Codable, CaseIterable {
-			case oneDay = "ONE_DAY"
-			case threeDays = "THREE_DAYS"
-			case oneWeek = "ONE_WEEK"
-		}
 
 		public enum ChallengeType: String, Codable, CaseIterable {
 			case leaderboard = "LEADERBOARD"
 		}
 
-		public init(referenceName: String? = nil, vendorIdentifier: String? = nil, allowedDurations: [AllowedDuration]? = nil, isArchived: Bool? = nil, challengeType: ChallengeType? = nil, isRepeatable: Bool? = nil) {
+		public init(referenceName: String? = nil, vendorIdentifier: String? = nil, isArchived: Bool? = nil, challengeType: ChallengeType? = nil, isRepeatable: Bool? = nil) {
 			self.referenceName = referenceName
 			self.vendorIdentifier = vendorIdentifier
-			self.allowedDurations = allowedDurations
 			self.isArchived = isArchived
 			self.challengeType = challengeType
 			self.isRepeatable = isRepeatable
@@ -45,7 +37,6 @@ public struct GameCenterChallenge: Codable, Identifiable {
 			let values = try decoder.container(keyedBy: StringCodingKey.self)
 			self.referenceName = try values.decodeIfPresent(String.self, forKey: "referenceName")
 			self.vendorIdentifier = try values.decodeIfPresent(String.self, forKey: "vendorIdentifier")
-			self.allowedDurations = try values.decodeIfPresent([AllowedDuration].self, forKey: "allowedDurations")
 			self.isArchived = try values.decodeIfPresent(Bool.self, forKey: "archived")
 			self.challengeType = try values.decodeIfPresent(ChallengeType.self, forKey: "challengeType")
 			self.isRepeatable = try values.decodeIfPresent(Bool.self, forKey: "repeatable")
@@ -55,7 +46,6 @@ public struct GameCenterChallenge: Codable, Identifiable {
 			var values = encoder.container(keyedBy: StringCodingKey.self)
 			try values.encodeIfPresent(referenceName, forKey: "referenceName")
 			try values.encodeIfPresent(vendorIdentifier, forKey: "vendorIdentifier")
-			try values.encodeIfPresent(allowedDurations, forKey: "allowedDurations")
 			try values.encodeIfPresent(isArchived, forKey: "archived")
 			try values.encodeIfPresent(challengeType, forKey: "challengeType")
 			try values.encodeIfPresent(isRepeatable, forKey: "repeatable")

@@ -21,6 +21,7 @@ public struct ReviewSubmissionItemCreateRequest: Codable {
 			public var appStoreVersionExperiment: AppStoreVersionExperiment?
 			public var appStoreVersionExperimentV2: AppStoreVersionExperimentV2?
 			public var appEvent: AppEvent?
+			public var backgroundAssetVersion: BackgroundAssetVersion?
 
 			public struct ReviewSubmission: Codable {
 				public var data: Data
@@ -286,13 +287,58 @@ public struct ReviewSubmissionItemCreateRequest: Codable {
 				}
 			}
 
-			public init(reviewSubmission: ReviewSubmission, appStoreVersion: AppStoreVersion? = nil, appCustomProductPageVersion: AppCustomProductPageVersion? = nil, appStoreVersionExperiment: AppStoreVersionExperiment? = nil, appStoreVersionExperimentV2: AppStoreVersionExperimentV2? = nil, appEvent: AppEvent? = nil) {
+			public struct BackgroundAssetVersion: Codable {
+				public var data: Data?
+
+				public struct Data: Codable, Identifiable {
+					public var type: `Type`
+					public var id: String
+
+					public enum `Type`: String, Codable, CaseIterable {
+						case backgroundAssetVersions
+					}
+
+					public init(type: `Type`, id: String) {
+						self.type = type
+						self.id = id
+					}
+
+					public init(from decoder: Decoder) throws {
+						let values = try decoder.container(keyedBy: StringCodingKey.self)
+						self.type = try values.decode(`Type`.self, forKey: "type")
+						self.id = try values.decode(String.self, forKey: "id")
+					}
+
+					public func encode(to encoder: Encoder) throws {
+						var values = encoder.container(keyedBy: StringCodingKey.self)
+						try values.encode(type, forKey: "type")
+						try values.encode(id, forKey: "id")
+					}
+				}
+
+				public init(data: Data? = nil) {
+					self.data = data
+				}
+
+				public init(from decoder: Decoder) throws {
+					let values = try decoder.container(keyedBy: StringCodingKey.self)
+					self.data = try values.decodeIfPresent(Data.self, forKey: "data")
+				}
+
+				public func encode(to encoder: Encoder) throws {
+					var values = encoder.container(keyedBy: StringCodingKey.self)
+					try values.encodeIfPresent(data, forKey: "data")
+				}
+			}
+
+			public init(reviewSubmission: ReviewSubmission, appStoreVersion: AppStoreVersion? = nil, appCustomProductPageVersion: AppCustomProductPageVersion? = nil, appStoreVersionExperiment: AppStoreVersionExperiment? = nil, appStoreVersionExperimentV2: AppStoreVersionExperimentV2? = nil, appEvent: AppEvent? = nil, backgroundAssetVersion: BackgroundAssetVersion? = nil) {
 				self.reviewSubmission = reviewSubmission
 				self.appStoreVersion = appStoreVersion
 				self.appCustomProductPageVersion = appCustomProductPageVersion
 				self.appStoreVersionExperiment = appStoreVersionExperiment
 				self.appStoreVersionExperimentV2 = appStoreVersionExperimentV2
 				self.appEvent = appEvent
+				self.backgroundAssetVersion = backgroundAssetVersion
 			}
 
 			public init(from decoder: Decoder) throws {
@@ -303,6 +349,7 @@ public struct ReviewSubmissionItemCreateRequest: Codable {
 				self.appStoreVersionExperiment = try values.decodeIfPresent(AppStoreVersionExperiment.self, forKey: "appStoreVersionExperiment")
 				self.appStoreVersionExperimentV2 = try values.decodeIfPresent(AppStoreVersionExperimentV2.self, forKey: "appStoreVersionExperimentV2")
 				self.appEvent = try values.decodeIfPresent(AppEvent.self, forKey: "appEvent")
+				self.backgroundAssetVersion = try values.decodeIfPresent(BackgroundAssetVersion.self, forKey: "backgroundAssetVersion")
 			}
 
 			public func encode(to encoder: Encoder) throws {
@@ -313,6 +360,7 @@ public struct ReviewSubmissionItemCreateRequest: Codable {
 				try values.encodeIfPresent(appStoreVersionExperiment, forKey: "appStoreVersionExperiment")
 				try values.encodeIfPresent(appStoreVersionExperimentV2, forKey: "appStoreVersionExperimentV2")
 				try values.encodeIfPresent(appEvent, forKey: "appEvent")
+				try values.encodeIfPresent(backgroundAssetVersion, forKey: "backgroundAssetVersion")
 			}
 		}
 

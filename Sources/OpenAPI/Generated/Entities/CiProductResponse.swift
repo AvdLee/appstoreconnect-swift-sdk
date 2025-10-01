@@ -15,17 +15,23 @@ public struct CiProductResponse: Codable {
 		case scmRepository(ScmRepository)
 
 		public init(from decoder: Decoder) throws {
+
+			struct Discriminator: Decodable {
+				let type: String
+			}
+
 			let container = try decoder.singleValueContainer()
-			if let value = try? container.decode(App.self) {
-				self = .app(value)
-			} else if let value = try? container.decode(BundleID.self) {
-				self = .bundleID(value)
-			} else if let value = try? container.decode(ScmRepository.self) {
-				self = .scmRepository(value)
-			} else {
+			let discriminatorValue = try container.decode(Discriminator.self).type
+
+			switch discriminatorValue {
+			case "apps": self = .app(try container.decode(App.self))
+			case "bundleIds": self = .bundleID(try container.decode(BundleID.self))
+			case "scmRepositories": self = .scmRepository(try container.decode(ScmRepository.self))
+
+			default:
 				throw DecodingError.dataCorruptedError(
 					in: container,
-					debugDescription: "Data could not be decoded as any of the expected types (App, BundleID, ScmRepository)."
+					debugDescription: "Discriminator value '\(discriminatorValue)' does not match any expected values (apps, bundleIds, scmRepositories)."
 				)
 			}
 		}

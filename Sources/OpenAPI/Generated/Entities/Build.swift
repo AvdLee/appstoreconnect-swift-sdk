@@ -95,6 +95,7 @@ public struct Build: Codable, Identifiable {
 		public var appStoreVersion: AppStoreVersion?
 		public var icons: Icons?
 		public var buildBundles: BuildBundles?
+		public var buildUpload: BuildUpload?
 		public var perfPowerMetrics: PerfPowerMetrics?
 		public var diagnosticSignatures: DiagnosticSignatures?
 
@@ -642,6 +643,50 @@ public struct Build: Codable, Identifiable {
 			}
 		}
 
+		public struct BuildUpload: Codable {
+			public var data: Data?
+
+			public struct Data: Codable, Identifiable {
+				public var type: `Type`
+				public var id: String
+
+				public enum `Type`: String, Codable, CaseIterable {
+					case buildUploads
+				}
+
+				public init(type: `Type`, id: String) {
+					self.type = type
+					self.id = id
+				}
+
+				public init(from decoder: Decoder) throws {
+					let values = try decoder.container(keyedBy: StringCodingKey.self)
+					self.type = try values.decode(`Type`.self, forKey: "type")
+					self.id = try values.decode(String.self, forKey: "id")
+				}
+
+				public func encode(to encoder: Encoder) throws {
+					var values = encoder.container(keyedBy: StringCodingKey.self)
+					try values.encode(type, forKey: "type")
+					try values.encode(id, forKey: "id")
+				}
+			}
+
+			public init(data: Data? = nil) {
+				self.data = data
+			}
+
+			public init(from decoder: Decoder) throws {
+				let values = try decoder.container(keyedBy: StringCodingKey.self)
+				self.data = try values.decodeIfPresent(Data.self, forKey: "data")
+			}
+
+			public func encode(to encoder: Encoder) throws {
+				var values = encoder.container(keyedBy: StringCodingKey.self)
+				try values.encodeIfPresent(data, forKey: "data")
+			}
+		}
+
 		public struct PerfPowerMetrics: Codable {
 			public var links: RelationshipLinks?
 
@@ -678,7 +723,7 @@ public struct Build: Codable, Identifiable {
 			}
 		}
 
-		public init(preReleaseVersion: PreReleaseVersion? = nil, individualTesters: IndividualTesters? = nil, betaGroups: BetaGroups? = nil, betaBuildLocalizations: BetaBuildLocalizations? = nil, appEncryptionDeclaration: AppEncryptionDeclaration? = nil, betaAppReviewSubmission: BetaAppReviewSubmission? = nil, app: App? = nil, buildBetaDetail: BuildBetaDetail? = nil, appStoreVersion: AppStoreVersion? = nil, icons: Icons? = nil, buildBundles: BuildBundles? = nil, perfPowerMetrics: PerfPowerMetrics? = nil, diagnosticSignatures: DiagnosticSignatures? = nil) {
+		public init(preReleaseVersion: PreReleaseVersion? = nil, individualTesters: IndividualTesters? = nil, betaGroups: BetaGroups? = nil, betaBuildLocalizations: BetaBuildLocalizations? = nil, appEncryptionDeclaration: AppEncryptionDeclaration? = nil, betaAppReviewSubmission: BetaAppReviewSubmission? = nil, app: App? = nil, buildBetaDetail: BuildBetaDetail? = nil, appStoreVersion: AppStoreVersion? = nil, icons: Icons? = nil, buildBundles: BuildBundles? = nil, buildUpload: BuildUpload? = nil, perfPowerMetrics: PerfPowerMetrics? = nil, diagnosticSignatures: DiagnosticSignatures? = nil) {
 			self.preReleaseVersion = preReleaseVersion
 			self.individualTesters = individualTesters
 			self.betaGroups = betaGroups
@@ -690,6 +735,7 @@ public struct Build: Codable, Identifiable {
 			self.appStoreVersion = appStoreVersion
 			self.icons = icons
 			self.buildBundles = buildBundles
+			self.buildUpload = buildUpload
 			self.perfPowerMetrics = perfPowerMetrics
 			self.diagnosticSignatures = diagnosticSignatures
 		}
@@ -707,6 +753,7 @@ public struct Build: Codable, Identifiable {
 			self.appStoreVersion = try values.decodeIfPresent(AppStoreVersion.self, forKey: "appStoreVersion")
 			self.icons = try values.decodeIfPresent(Icons.self, forKey: "icons")
 			self.buildBundles = try values.decodeIfPresent(BuildBundles.self, forKey: "buildBundles")
+			self.buildUpload = try values.decodeIfPresent(BuildUpload.self, forKey: "buildUpload")
 			self.perfPowerMetrics = try values.decodeIfPresent(PerfPowerMetrics.self, forKey: "perfPowerMetrics")
 			self.diagnosticSignatures = try values.decodeIfPresent(DiagnosticSignatures.self, forKey: "diagnosticSignatures")
 		}
@@ -724,6 +771,7 @@ public struct Build: Codable, Identifiable {
 			try values.encodeIfPresent(appStoreVersion, forKey: "appStoreVersion")
 			try values.encodeIfPresent(icons, forKey: "icons")
 			try values.encodeIfPresent(buildBundles, forKey: "buildBundles")
+			try values.encodeIfPresent(buildUpload, forKey: "buildUpload")
 			try values.encodeIfPresent(perfPowerMetrics, forKey: "perfPowerMetrics")
 			try values.encodeIfPresent(diagnosticSignatures, forKey: "diagnosticSignatures")
 		}

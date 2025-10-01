@@ -10,22 +10,26 @@ public struct AppStoreVersionExperimentTreatmentsResponse: Codable {
 	public var meta: PagingInformation?
 
 	public enum IncludedItem: Codable {
-		case appStoreVersionExperiment(AppStoreVersionExperiment)
-		case appStoreVersionExperimentV2(AppStoreVersionExperimentV2)
 		case appStoreVersionExperimentTreatmentLocalization(AppStoreVersionExperimentTreatmentLocalization)
+		case appStoreVersionExperiment(AppStoreVersionExperiment)
 
 		public init(from decoder: Decoder) throws {
+
+			struct Discriminator: Decodable {
+				let type: String
+			}
+
 			let container = try decoder.singleValueContainer()
-			if let value = try? container.decode(AppStoreVersionExperiment.self) {
-				self = .appStoreVersionExperiment(value)
-			} else if let value = try? container.decode(AppStoreVersionExperimentV2.self) {
-				self = .appStoreVersionExperimentV2(value)
-			} else if let value = try? container.decode(AppStoreVersionExperimentTreatmentLocalization.self) {
-				self = .appStoreVersionExperimentTreatmentLocalization(value)
-			} else {
+			let discriminatorValue = try container.decode(Discriminator.self).type
+
+			switch discriminatorValue {
+			case "appStoreVersionExperimentTreatmentLocalizations": self = .appStoreVersionExperimentTreatmentLocalization(try container.decode(AppStoreVersionExperimentTreatmentLocalization.self))
+			case "appStoreVersionExperiments": self = .appStoreVersionExperiment(try container.decode(AppStoreVersionExperiment.self))
+
+			default:
 				throw DecodingError.dataCorruptedError(
 					in: container,
-					debugDescription: "Data could not be decoded as any of the expected types (AppStoreVersionExperiment, AppStoreVersionExperimentV2, AppStoreVersionExperimentTreatmentLocalization)."
+					debugDescription: "Discriminator value '\(discriminatorValue)' does not match any expected values (appStoreVersionExperimentTreatmentLocalizations, appStoreVersionExperiments)."
 				)
 			}
 		}
@@ -33,9 +37,8 @@ public struct AppStoreVersionExperimentTreatmentsResponse: Codable {
 		public func encode(to encoder: Encoder) throws {
 			var container = encoder.singleValueContainer()
 			switch self {
-			case .appStoreVersionExperiment(let value): try container.encode(value)
-			case .appStoreVersionExperimentV2(let value): try container.encode(value)
 			case .appStoreVersionExperimentTreatmentLocalization(let value): try container.encode(value)
+			case .appStoreVersionExperiment(let value): try container.encode(value)
 			}
 		}
 	}

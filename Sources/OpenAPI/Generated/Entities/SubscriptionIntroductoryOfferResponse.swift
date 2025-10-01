@@ -10,22 +10,28 @@ public struct SubscriptionIntroductoryOfferResponse: Codable {
 	public var links: DocumentLinks
 
 	public enum IncludedItem: Codable {
+		case subscriptionPricePoint(SubscriptionPricePoint)
 		case subscription(Subscription)
 		case territory(Territory)
-		case subscriptionPricePoint(SubscriptionPricePoint)
 
 		public init(from decoder: Decoder) throws {
+
+			struct Discriminator: Decodable {
+				let type: String
+			}
+
 			let container = try decoder.singleValueContainer()
-			if let value = try? container.decode(Subscription.self) {
-				self = .subscription(value)
-			} else if let value = try? container.decode(Territory.self) {
-				self = .territory(value)
-			} else if let value = try? container.decode(SubscriptionPricePoint.self) {
-				self = .subscriptionPricePoint(value)
-			} else {
+			let discriminatorValue = try container.decode(Discriminator.self).type
+
+			switch discriminatorValue {
+			case "subscriptionPricePoints": self = .subscriptionPricePoint(try container.decode(SubscriptionPricePoint.self))
+			case "subscriptions": self = .subscription(try container.decode(Subscription.self))
+			case "territories": self = .territory(try container.decode(Territory.self))
+
+			default:
 				throw DecodingError.dataCorruptedError(
 					in: container,
-					debugDescription: "Data could not be decoded as any of the expected types (Subscription, Territory, SubscriptionPricePoint)."
+					debugDescription: "Discriminator value '\(discriminatorValue)' does not match any expected values (subscriptionPricePoints, subscriptions, territories)."
 				)
 			}
 		}
@@ -33,9 +39,9 @@ public struct SubscriptionIntroductoryOfferResponse: Codable {
 		public func encode(to encoder: Encoder) throws {
 			var container = encoder.singleValueContainer()
 			switch self {
+			case .subscriptionPricePoint(let value): try container.encode(value)
 			case .subscription(let value): try container.encode(value)
 			case .territory(let value): try container.encode(value)
-			case .subscriptionPricePoint(let value): try container.encode(value)
 			}
 		}
 	}

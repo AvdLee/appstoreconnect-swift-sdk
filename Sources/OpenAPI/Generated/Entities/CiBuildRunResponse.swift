@@ -11,27 +11,31 @@ public struct CiBuildRunResponse: Codable {
 
 	public enum IncludedItem: Codable {
 		case build(Build)
-		case ciWorkflow(CiWorkflow)
 		case ciProduct(CiProduct)
+		case ciWorkflow(CiWorkflow)
 		case scmGitReference(ScmGitReference)
 		case scmPullRequest(ScmPullRequest)
 
 		public init(from decoder: Decoder) throws {
+
+			struct Discriminator: Decodable {
+				let type: String
+			}
+
 			let container = try decoder.singleValueContainer()
-			if let value = try? container.decode(Build.self) {
-				self = .build(value)
-			} else if let value = try? container.decode(CiWorkflow.self) {
-				self = .ciWorkflow(value)
-			} else if let value = try? container.decode(CiProduct.self) {
-				self = .ciProduct(value)
-			} else if let value = try? container.decode(ScmGitReference.self) {
-				self = .scmGitReference(value)
-			} else if let value = try? container.decode(ScmPullRequest.self) {
-				self = .scmPullRequest(value)
-			} else {
+			let discriminatorValue = try container.decode(Discriminator.self).type
+
+			switch discriminatorValue {
+			case "builds": self = .build(try container.decode(Build.self))
+			case "ciProducts": self = .ciProduct(try container.decode(CiProduct.self))
+			case "ciWorkflows": self = .ciWorkflow(try container.decode(CiWorkflow.self))
+			case "scmGitReferences": self = .scmGitReference(try container.decode(ScmGitReference.self))
+			case "scmPullRequests": self = .scmPullRequest(try container.decode(ScmPullRequest.self))
+
+			default:
 				throw DecodingError.dataCorruptedError(
 					in: container,
-					debugDescription: "Data could not be decoded as any of the expected types (Build, CiWorkflow, CiProduct, ScmGitReference, ScmPullRequest)."
+					debugDescription: "Discriminator value '\(discriminatorValue)' does not match any expected values (builds, ciProducts, ciWorkflows, scmGitReferences, scmPullRequests)."
 				)
 			}
 		}
@@ -40,8 +44,8 @@ public struct CiBuildRunResponse: Codable {
 			var container = encoder.singleValueContainer()
 			switch self {
 			case .build(let value): try container.encode(value)
-			case .ciWorkflow(let value): try container.encode(value)
 			case .ciProduct(let value): try container.encode(value)
+			case .ciWorkflow(let value): try container.encode(value)
 			case .scmGitReference(let value): try container.encode(value)
 			case .scmPullRequest(let value): try container.encode(value)
 			}

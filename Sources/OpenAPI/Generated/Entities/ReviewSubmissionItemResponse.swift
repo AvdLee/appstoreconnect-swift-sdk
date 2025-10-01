@@ -10,28 +10,32 @@ public struct ReviewSubmissionItemResponse: Codable {
 	public var links: DocumentLinks
 
 	public enum IncludedItem: Codable {
-		case appStoreVersion(AppStoreVersion)
 		case appCustomProductPageVersion(AppCustomProductPageVersion)
-		case appStoreVersionExperiment(AppStoreVersionExperiment)
-		case appStoreVersionExperimentV2(AppStoreVersionExperimentV2)
 		case appEvent(AppEvent)
+		case appStoreVersionExperiment(AppStoreVersionExperiment)
+		case appStoreVersion(AppStoreVersion)
+		case backgroundAssetVersion(BackgroundAssetVersion)
 
 		public init(from decoder: Decoder) throws {
+
+			struct Discriminator: Decodable {
+				let type: String
+			}
+
 			let container = try decoder.singleValueContainer()
-			if let value = try? container.decode(AppStoreVersion.self) {
-				self = .appStoreVersion(value)
-			} else if let value = try? container.decode(AppCustomProductPageVersion.self) {
-				self = .appCustomProductPageVersion(value)
-			} else if let value = try? container.decode(AppStoreVersionExperiment.self) {
-				self = .appStoreVersionExperiment(value)
-			} else if let value = try? container.decode(AppStoreVersionExperimentV2.self) {
-				self = .appStoreVersionExperimentV2(value)
-			} else if let value = try? container.decode(AppEvent.self) {
-				self = .appEvent(value)
-			} else {
+			let discriminatorValue = try container.decode(Discriminator.self).type
+
+			switch discriminatorValue {
+			case "appCustomProductPageVersions": self = .appCustomProductPageVersion(try container.decode(AppCustomProductPageVersion.self))
+			case "appEvents": self = .appEvent(try container.decode(AppEvent.self))
+			case "appStoreVersionExperiments": self = .appStoreVersionExperiment(try container.decode(AppStoreVersionExperiment.self))
+			case "appStoreVersions": self = .appStoreVersion(try container.decode(AppStoreVersion.self))
+			case "backgroundAssetVersions": self = .backgroundAssetVersion(try container.decode(BackgroundAssetVersion.self))
+
+			default:
 				throw DecodingError.dataCorruptedError(
 					in: container,
-					debugDescription: "Data could not be decoded as any of the expected types (AppStoreVersion, AppCustomProductPageVersion, AppStoreVersionExperiment, AppStoreVersionExperimentV2, AppEvent)."
+					debugDescription: "Discriminator value '\(discriminatorValue)' does not match any expected values (appCustomProductPageVersions, appEvents, appStoreVersionExperiments, appStoreVersions, backgroundAssetVersions)."
 				)
 			}
 		}
@@ -39,11 +43,11 @@ public struct ReviewSubmissionItemResponse: Codable {
 		public func encode(to encoder: Encoder) throws {
 			var container = encoder.singleValueContainer()
 			switch self {
-			case .appStoreVersion(let value): try container.encode(value)
 			case .appCustomProductPageVersion(let value): try container.encode(value)
-			case .appStoreVersionExperiment(let value): try container.encode(value)
-			case .appStoreVersionExperimentV2(let value): try container.encode(value)
 			case .appEvent(let value): try container.encode(value)
+			case .appStoreVersionExperiment(let value): try container.encode(value)
+			case .appStoreVersion(let value): try container.encode(value)
+			case .backgroundAssetVersion(let value): try container.encode(value)
 			}
 		}
 	}

@@ -10,19 +10,26 @@ public struct BetaFeedbackScreenshotSubmissionResponse: Codable {
 	public var links: DocumentLinks
 
 	public enum IncludedItem: Codable {
-		case build(Build)
 		case betaTester(BetaTester)
+		case build(Build)
 
 		public init(from decoder: Decoder) throws {
+
+			struct Discriminator: Decodable {
+				let type: String
+			}
+
 			let container = try decoder.singleValueContainer()
-			if let value = try? container.decode(Build.self) {
-				self = .build(value)
-			} else if let value = try? container.decode(BetaTester.self) {
-				self = .betaTester(value)
-			} else {
+			let discriminatorValue = try container.decode(Discriminator.self).type
+
+			switch discriminatorValue {
+			case "betaTesters": self = .betaTester(try container.decode(BetaTester.self))
+			case "builds": self = .build(try container.decode(Build.self))
+
+			default:
 				throw DecodingError.dataCorruptedError(
 					in: container,
-					debugDescription: "Data could not be decoded as any of the expected types (Build, BetaTester)."
+					debugDescription: "Discriminator value '\(discriminatorValue)' does not match any expected values (betaTesters, builds)."
 				)
 			}
 		}
@@ -30,8 +37,8 @@ public struct BetaFeedbackScreenshotSubmissionResponse: Codable {
 		public func encode(to encoder: Encoder) throws {
 			var container = encoder.singleValueContainer()
 			switch self {
-			case .build(let value): try container.encode(value)
 			case .betaTester(let value): try container.encode(value)
+			case .build(let value): try container.encode(value)
 			}
 		}
 	}

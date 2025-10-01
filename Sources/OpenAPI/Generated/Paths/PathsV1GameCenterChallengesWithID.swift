@@ -26,7 +26,6 @@ extension APIEndpoint.V1.GameCenterChallenges {
 			public enum FieldsGameCenterChallenges: String, Codable, CaseIterable {
 				case referenceName
 				case vendorIdentifier
-				case allowedDurations
 				case archived
 				case challengeType
 				case repeatable
