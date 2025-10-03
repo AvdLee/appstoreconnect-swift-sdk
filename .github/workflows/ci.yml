@@ -29,10 +29,10 @@ jobs:
         destination:
           - "platform=macOS"
           - "platform=macOS,variant=Mac Catalyst"
-          - "platform=iOS Simulator,name=iPhone 17 Pro"
-          - "platform=tvOS Simulator,name=Apple TV"
-          - "platform=watchOS Simulator,name=Apple Watch Series 11 (46mm)"
-          - "platform=visionOS Simulator,name=Apple Vision Pro"
+          - "platform=iOS Simulator"
+          - "platform=tvOS Simulator"
+          - "platform=watchOS Simulator"
+          - "platform=visionOS Simulator"
     steps:
       - uses: actions/checkout@v4
       - name: Test platform ${{ matrix.destination }}
