@@ -1,0 +1,28 @@
+diff --git a/Sources/OpenAPI/app_store_connect_api.json b/Sources/OpenAPI/app_store_connect_api.json
+index ebae109..3ba5436 100644
+--- a/Sources/OpenAPI/app_store_connect_api.json
++++ b/Sources/OpenAPI/app_store_connect_api.json
+@@ -81220,6 +81220,7 @@
+                   "VUT",
+                   "WLF",
+                   "WSM",
++                  "XKS",
+                   "YEM",
+                   "ZAF",
+                   "ZMB",
+@@ -90408,6 +90409,7 @@
+                   "VUT",
+                   "WLF",
+                   "WSM",
++                  "XKS",
+                   "YEM",
+                   "ZAF",
+                   "ZMB",
+@@ -208748,6 +208750,7 @@
+           "VUT",
+           "WLF",
+           "WSM",
++          "XKS",
+           "YEM",
+           "ZAF",
+           "ZMB",
