@@ -53,6 +53,7 @@ extension APIEndpoint.V1.UserInvitations {
 				case betaTesters
 				case betaGroups
 				case appStoreVersions
+				case appTags
 				case preReleaseVersions
 				case betaAppLocalizations
 				case builds
@@ -81,9 +82,11 @@ extension APIEndpoint.V1.UserInvitations {
 				case alternativeDistributionKey
 				case analyticsReportRequests
 				case marketplaceSearchDetail
+				case buildUploads
 				case backgroundAssets
 				case betaFeedbackScreenshotSubmissions
 				case betaFeedbackCrashSubmissions
+				case searchKeywords
 				case webhooks
 			}
 

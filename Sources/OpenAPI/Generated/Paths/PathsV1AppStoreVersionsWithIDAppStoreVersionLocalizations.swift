@@ -23,10 +23,12 @@ extension APIEndpoint.V1.AppStoreVersions.WithID {
 			public var fieldsAppStoreVersions: [FieldsAppStoreVersions]?
 			public var fieldsAppScreenshotSets: [FieldsAppScreenshotSets]?
 			public var fieldsAppPreviewSets: [FieldsAppPreviewSets]?
+			public var fieldsAppKeywords: [String]?
 			public var limit: Int?
 			public var include: [Include]?
 			public var limitAppScreenshotSets: Int?
 			public var limitAppPreviewSets: Int?
+			public var limitSearchKeywords: Int?
 
 			public enum FieldsAppStoreVersionLocalizations: String, Codable, CaseIterable {
 				case description
@@ -39,6 +41,7 @@ extension APIEndpoint.V1.AppStoreVersions.WithID {
 				case appStoreVersion
 				case appScreenshotSets
 				case appPreviewSets
+				case searchKeywords
 			}
 
 			public enum FieldsAppStoreVersions: String, Codable, CaseIterable {
@@ -89,18 +92,21 @@ extension APIEndpoint.V1.AppStoreVersions.WithID {
 				case appStoreVersion
 				case appScreenshotSets
 				case appPreviewSets
+				case searchKeywords
 			}
 
-			public init(filterLocale: [String]? = nil, fieldsAppStoreVersionLocalizations: [FieldsAppStoreVersionLocalizations]? = nil, fieldsAppStoreVersions: [FieldsAppStoreVersions]? = nil, fieldsAppScreenshotSets: [FieldsAppScreenshotSets]? = nil, fieldsAppPreviewSets: [FieldsAppPreviewSets]? = nil, limit: Int? = nil, include: [Include]? = nil, limitAppScreenshotSets: Int? = nil, limitAppPreviewSets: Int? = nil) {
+			public init(filterLocale: [String]? = nil, fieldsAppStoreVersionLocalizations: [FieldsAppStoreVersionLocalizations]? = nil, fieldsAppStoreVersions: [FieldsAppStoreVersions]? = nil, fieldsAppScreenshotSets: [FieldsAppScreenshotSets]? = nil, fieldsAppPreviewSets: [FieldsAppPreviewSets]? = nil, fieldsAppKeywords: [String]? = nil, limit: Int? = nil, include: [Include]? = nil, limitAppScreenshotSets: Int? = nil, limitAppPreviewSets: Int? = nil, limitSearchKeywords: Int? = nil) {
 				self.filterLocale = filterLocale
 				self.fieldsAppStoreVersionLocalizations = fieldsAppStoreVersionLocalizations
 				self.fieldsAppStoreVersions = fieldsAppStoreVersions
 				self.fieldsAppScreenshotSets = fieldsAppScreenshotSets
 				self.fieldsAppPreviewSets = fieldsAppPreviewSets
+				self.fieldsAppKeywords = fieldsAppKeywords
 				self.limit = limit
 				self.include = include
 				self.limitAppScreenshotSets = limitAppScreenshotSets
 				self.limitAppPreviewSets = limitAppPreviewSets
+				self.limitSearchKeywords = limitSearchKeywords
 			}
 
 			public var asQuery: [(String, String?)] {
@@ -110,10 +116,12 @@ extension APIEndpoint.V1.AppStoreVersions.WithID {
 				encoder.encode(fieldsAppStoreVersions, forKey: "fields[appStoreVersions]")
 				encoder.encode(fieldsAppScreenshotSets, forKey: "fields[appScreenshotSets]")
 				encoder.encode(fieldsAppPreviewSets, forKey: "fields[appPreviewSets]")
+				encoder.encode(fieldsAppKeywords, forKey: "fields[appKeywords]")
 				encoder.encode(limit, forKey: "limit")
 				encoder.encode(include, forKey: "include")
 				encoder.encode(limitAppScreenshotSets, forKey: "limit[appScreenshotSets]")
 				encoder.encode(limitAppPreviewSets, forKey: "limit[appPreviewSets]")
+				encoder.encode(limitSearchKeywords, forKey: "limit[searchKeywords]")
 				return encoder.items
 			}
 		}

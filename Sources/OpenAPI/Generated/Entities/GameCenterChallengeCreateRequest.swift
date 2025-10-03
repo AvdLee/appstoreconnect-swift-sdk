@@ -18,24 +18,16 @@ public struct GameCenterChallengeCreateRequest: Codable {
 		public struct Attributes: Codable {
 			public var referenceName: String
 			public var vendorIdentifier: String
-			public var allowedDurations: [AllowedDuration]?
 			public var challengeType: ChallengeType
 			public var isRepeatable: Bool?
-
-			public enum AllowedDuration: String, Codable, CaseIterable {
-				case oneDay = "ONE_DAY"
-				case threeDays = "THREE_DAYS"
-				case oneWeek = "ONE_WEEK"
-			}
 
 			public enum ChallengeType: String, Codable, CaseIterable {
 				case leaderboard = "LEADERBOARD"
 			}
 
-			public init(referenceName: String, vendorIdentifier: String, allowedDurations: [AllowedDuration]? = nil, challengeType: ChallengeType, isRepeatable: Bool? = nil) {
+			public init(referenceName: String, vendorIdentifier: String, challengeType: ChallengeType, isRepeatable: Bool? = nil) {
 				self.referenceName = referenceName
 				self.vendorIdentifier = vendorIdentifier
-				self.allowedDurations = allowedDurations
 				self.challengeType = challengeType
 				self.isRepeatable = isRepeatable
 			}
@@ -44,7 +36,6 @@ public struct GameCenterChallengeCreateRequest: Codable {
 				let values = try decoder.container(keyedBy: StringCodingKey.self)
 				self.referenceName = try values.decode(String.self, forKey: "referenceName")
 				self.vendorIdentifier = try values.decode(String.self, forKey: "vendorIdentifier")
-				self.allowedDurations = try values.decodeIfPresent([AllowedDuration].self, forKey: "allowedDurations")
 				self.challengeType = try values.decode(ChallengeType.self, forKey: "challengeType")
 				self.isRepeatable = try values.decodeIfPresent(Bool.self, forKey: "repeatable")
 			}
@@ -53,7 +44,6 @@ public struct GameCenterChallengeCreateRequest: Codable {
 				var values = encoder.container(keyedBy: StringCodingKey.self)
 				try values.encode(referenceName, forKey: "referenceName")
 				try values.encode(vendorIdentifier, forKey: "vendorIdentifier")
-				try values.encodeIfPresent(allowedDurations, forKey: "allowedDurations")
 				try values.encode(challengeType, forKey: "challengeType")
 				try values.encodeIfPresent(isRepeatable, forKey: "repeatable")
 			}

@@ -19,7 +19,9 @@ public struct BackgroundAssetUploadFile: Codable, Identifiable {
 		public var assetType: AssetType?
 		public var fileName: String?
 		public var fileSize: Int64?
+		/// - warning: Deprecated.
 		public var sourceFileChecksum: String?
+		public var sourceFileChecksums: Checksums?
 		public var uploadOperations: [DeliveryFileUploadOperation]?
 
 		public enum AssetType: String, Codable, CaseIterable {
@@ -27,13 +29,14 @@ public struct BackgroundAssetUploadFile: Codable, Identifiable {
 			case manifest = "MANIFEST"
 		}
 
-		public init(assetDeliveryState: AppMediaAssetState? = nil, assetToken: String? = nil, assetType: AssetType? = nil, fileName: String? = nil, fileSize: Int64? = nil, sourceFileChecksum: String? = nil, uploadOperations: [DeliveryFileUploadOperation]? = nil) {
+		public init(assetDeliveryState: AppMediaAssetState? = nil, assetToken: String? = nil, assetType: AssetType? = nil, fileName: String? = nil, fileSize: Int64? = nil, sourceFileChecksum: String? = nil, sourceFileChecksums: Checksums? = nil, uploadOperations: [DeliveryFileUploadOperation]? = nil) {
 			self.assetDeliveryState = assetDeliveryState
 			self.assetToken = assetToken
 			self.assetType = assetType
 			self.fileName = fileName
 			self.fileSize = fileSize
 			self.sourceFileChecksum = sourceFileChecksum
+			self.sourceFileChecksums = sourceFileChecksums
 			self.uploadOperations = uploadOperations
 		}
 
@@ -45,6 +48,7 @@ public struct BackgroundAssetUploadFile: Codable, Identifiable {
 			self.fileName = try values.decodeIfPresent(String.self, forKey: "fileName")
 			self.fileSize = try values.decodeIfPresent(Int64.self, forKey: "fileSize")
 			self.sourceFileChecksum = try values.decodeIfPresent(String.self, forKey: "sourceFileChecksum")
+			self.sourceFileChecksums = try values.decodeIfPresent(Checksums.self, forKey: "sourceFileChecksums")
 			self.uploadOperations = try values.decodeIfPresent([DeliveryFileUploadOperation].self, forKey: "uploadOperations")
 		}
 
@@ -56,6 +60,7 @@ public struct BackgroundAssetUploadFile: Codable, Identifiable {
 			try values.encodeIfPresent(fileName, forKey: "fileName")
 			try values.encodeIfPresent(fileSize, forKey: "fileSize")
 			try values.encodeIfPresent(sourceFileChecksum, forKey: "sourceFileChecksum")
+			try values.encodeIfPresent(sourceFileChecksums, forKey: "sourceFileChecksums")
 			try values.encodeIfPresent(uploadOperations, forKey: "uploadOperations")
 		}
 	}

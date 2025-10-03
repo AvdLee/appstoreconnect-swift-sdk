@@ -10,19 +10,26 @@ public struct GameCenterLeaderboardSetLocalizationResponse: Codable {
 	public var links: DocumentLinks
 
 	public enum IncludedItem: Codable {
-		case gameCenterLeaderboardSet(GameCenterLeaderboardSet)
 		case gameCenterLeaderboardSetImage(GameCenterLeaderboardSetImage)
+		case gameCenterLeaderboardSet(GameCenterLeaderboardSet)
 
 		public init(from decoder: Decoder) throws {
+
+			struct Discriminator: Decodable {
+				let type: String
+			}
+
 			let container = try decoder.singleValueContainer()
-			if let value = try? container.decode(GameCenterLeaderboardSet.self) {
-				self = .gameCenterLeaderboardSet(value)
-			} else if let value = try? container.decode(GameCenterLeaderboardSetImage.self) {
-				self = .gameCenterLeaderboardSetImage(value)
-			} else {
+			let discriminatorValue = try container.decode(Discriminator.self).type
+
+			switch discriminatorValue {
+			case "gameCenterLeaderboardSetImages": self = .gameCenterLeaderboardSetImage(try container.decode(GameCenterLeaderboardSetImage.self))
+			case "gameCenterLeaderboardSets": self = .gameCenterLeaderboardSet(try container.decode(GameCenterLeaderboardSet.self))
+
+			default:
 				throw DecodingError.dataCorruptedError(
 					in: container,
-					debugDescription: "Data could not be decoded as any of the expected types (GameCenterLeaderboardSet, GameCenterLeaderboardSetImage)."
+					debugDescription: "Discriminator value '\(discriminatorValue)' does not match any expected values (gameCenterLeaderboardSetImages, gameCenterLeaderboardSets)."
 				)
 			}
 		}
@@ -30,8 +37,8 @@ public struct GameCenterLeaderboardSetLocalizationResponse: Codable {
 		public func encode(to encoder: Encoder) throws {
 			var container = encoder.singleValueContainer()
 			switch self {
-			case .gameCenterLeaderboardSet(let value): try container.encode(value)
 			case .gameCenterLeaderboardSetImage(let value): try container.encode(value)
+			case .gameCenterLeaderboardSet(let value): try container.encode(value)
 			}
 		}
 	}

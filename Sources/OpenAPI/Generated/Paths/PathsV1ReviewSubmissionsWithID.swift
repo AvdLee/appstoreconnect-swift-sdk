@@ -41,6 +41,7 @@ extension APIEndpoint.V1.ReviewSubmissions {
 				case appStoreVersionExperiment
 				case appStoreVersionExperimentV2
 				case appEvent
+				case backgroundAssetVersion
 			}
 
 			public enum Include: String, Codable, CaseIterable {

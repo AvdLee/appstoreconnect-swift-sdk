@@ -29,14 +29,20 @@ extension APIEndpoint.V1.BackgroundAssetVersions {
 			case platforms
 			case state
 			case version
+			case backgroundAsset
 			case internalBetaRelease
+			case externalBetaRelease
+			case appStoreRelease
 			case assetFile
 			case manifestFile
 			case backgroundAssetUploadFiles
 		}
 
 		public enum Include: String, Codable, CaseIterable {
+			case backgroundAsset
 			case internalBetaRelease
+			case externalBetaRelease
+			case appStoreRelease
 			case assetFile
 			case manifestFile
 		}

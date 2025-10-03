@@ -101,6 +101,7 @@ extension APIEndpoint.V1.Apps.WithID {
 				case appStoreVersion
 				case icons
 				case buildBundles
+				case buildUpload
 				case perfPowerMetrics
 				case diagnosticSignatures
 			}

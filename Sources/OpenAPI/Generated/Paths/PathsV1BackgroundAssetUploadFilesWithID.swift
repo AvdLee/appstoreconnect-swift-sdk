@@ -30,6 +30,7 @@ extension APIEndpoint.V1.BackgroundAssetUploadFiles {
 			case fileName
 			case fileSize
 			case sourceFileChecksum
+			case sourceFileChecksums
 			case uploadOperations
 		}
 

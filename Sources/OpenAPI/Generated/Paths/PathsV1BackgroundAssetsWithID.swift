@@ -27,12 +27,18 @@ extension APIEndpoint.V1.BackgroundAssets {
 		public enum FieldsBackgroundAssets: String, Codable, CaseIterable {
 			case assetPackIdentifier
 			case createdDate
+			case app
 			case versions
+			case appStoreVersion
 			case internalBetaVersion
+			case externalBetaVersion
 		}
 
 		public enum Include: String, Codable, CaseIterable {
+			case app
+			case appStoreVersion
 			case internalBetaVersion
+			case externalBetaVersion
 		}
 	}
 }

@@ -20,19 +20,19 @@ concurrency:
 jobs:
   test:
     name: Test macOS
-    runs-on: macOS-15
+    runs-on: macOS-26
     timeout-minutes: 30
     env:
-      DEVELOPER_DIR: /Applications/Xcode_16.2.app
+      DEVELOPER_DIR: /Applications/Xcode_26.app
     strategy:
       matrix:
         destination:
           - "platform=macOS"
           - "platform=macOS,variant=Mac Catalyst"
-          - "platform=iOS Simulator,name=iPhone 16"
-          - "platform=tvOS Simulator,name=Apple TV"
-          - "platform=watchOS Simulator,name=Apple Watch Series 10 (42mm)"
-          - "platform=visionOS Simulator,name=Apple Vision Pro"
+          - "platform=iOS Simulator,name=iPhone 17 Pro,OS=26.0"
+          - "platform=tvOS Simulator,name=Apple TV 4K (3rd generation) (at 1080p),OS=26.0"
+          - "platform=watchOS Simulator,name=Apple Watch Ultra 3 (49mm),OS=26.0"
+          - "platform=visionOS Simulator,name=Apple Vision Pro,OS=26.0"
     steps:
       - uses: actions/checkout@v4
       - name: Test platform ${{ matrix.destination }}
@@ -40,7 +40,7 @@ jobs:
 
   linux_test:
     name: Test Linux
-    runs-on: ubuntu-22.04
+    runs-on: ubuntu-latest
     timeout-minutes: 30
     steps:
       - name: Checkout

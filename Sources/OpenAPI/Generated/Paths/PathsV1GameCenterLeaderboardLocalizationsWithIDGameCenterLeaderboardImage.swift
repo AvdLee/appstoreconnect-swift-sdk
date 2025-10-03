@@ -37,6 +37,7 @@ extension APIEndpoint.V1.GameCenterLeaderboardLocalizations.WithID {
 				case formatterOverride
 				case formatterSuffix
 				case formatterSuffixSingular
+				case description
 				case gameCenterLeaderboard
 				case gameCenterLeaderboardImage
 			}

@@ -10,19 +10,26 @@ public struct PreReleaseVersionsResponse: Codable {
 	public var meta: PagingInformation?
 
 	public enum IncludedItem: Codable {
-		case build(Build)
 		case app(App)
+		case build(Build)
 
 		public init(from decoder: Decoder) throws {
+
+			struct Discriminator: Decodable {
+				let type: String
+			}
+
 			let container = try decoder.singleValueContainer()
-			if let value = try? container.decode(Build.self) {
-				self = .build(value)
-			} else if let value = try? container.decode(App.self) {
-				self = .app(value)
-			} else {
+			let discriminatorValue = try container.decode(Discriminator.self).type
+
+			switch discriminatorValue {
+			case "apps": self = .app(try container.decode(App.self))
+			case "builds": self = .build(try container.decode(Build.self))
+
+			default:
 				throw DecodingError.dataCorruptedError(
 					in: container,
-					debugDescription: "Data could not be decoded as any of the expected types (Build, App)."
+					debugDescription: "Discriminator value '\(discriminatorValue)' does not match any expected values (apps, builds)."
 				)
 			}
 		}
@@ -30,8 +37,8 @@ public struct PreReleaseVersionsResponse: Codable {
 		public func encode(to encoder: Encoder) throws {
 			var container = encoder.singleValueContainer()
 			switch self {
-			case .build(let value): try container.encode(value)
 			case .app(let value): try container.encode(value)
+			case .build(let value): try container.encode(value)
 			}
 		}
 	}

@@ -18,19 +18,11 @@ public struct GameCenterChallengeUpdateRequest: Codable {
 
 		public struct Attributes: Codable {
 			public var referenceName: String?
-			public var allowedDurations: [AllowedDuration]?
 			public var isArchived: Bool?
 			public var isRepeatable: Bool?
 
-			public enum AllowedDuration: String, Codable, CaseIterable {
-				case oneDay = "ONE_DAY"
-				case threeDays = "THREE_DAYS"
-				case oneWeek = "ONE_WEEK"
-			}
-
-			public init(referenceName: String? = nil, allowedDurations: [AllowedDuration]? = nil, isArchived: Bool? = nil, isRepeatable: Bool? = nil) {
+			public init(referenceName: String? = nil, isArchived: Bool? = nil, isRepeatable: Bool? = nil) {
 				self.referenceName = referenceName
-				self.allowedDurations = allowedDurations
 				self.isArchived = isArchived
 				self.isRepeatable = isRepeatable
 			}
@@ -38,7 +30,6 @@ public struct GameCenterChallengeUpdateRequest: Codable {
 			public init(from decoder: Decoder) throws {
 				let values = try decoder.container(keyedBy: StringCodingKey.self)
 				self.referenceName = try values.decodeIfPresent(String.self, forKey: "referenceName")
-				self.allowedDurations = try values.decodeIfPresent([AllowedDuration].self, forKey: "allowedDurations")
 				self.isArchived = try values.decodeIfPresent(Bool.self, forKey: "archived")
 				self.isRepeatable = try values.decodeIfPresent(Bool.self, forKey: "repeatable")
 			}
@@ -46,7 +37,6 @@ public struct GameCenterChallengeUpdateRequest: Codable {
 			public func encode(to encoder: Encoder) throws {
 				var values = encoder.container(keyedBy: StringCodingKey.self)
 				try values.encodeIfPresent(referenceName, forKey: "referenceName")
-				try values.encodeIfPresent(allowedDurations, forKey: "allowedDurations")
 				try values.encodeIfPresent(isArchived, forKey: "archived")
 				try values.encodeIfPresent(isRepeatable, forKey: "repeatable")
 			}

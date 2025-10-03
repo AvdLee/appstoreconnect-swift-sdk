@@ -16,23 +16,28 @@ public struct BackgroundAssetUploadFileUpdateRequest: Codable {
 		}
 
 		public struct Attributes: Codable {
+			/// - warning: Deprecated.
 			public var sourceFileChecksum: String?
+			public var sourceFileChecksums: Checksums?
 			public var isUploaded: Bool?
 
-			public init(sourceFileChecksum: String? = nil, isUploaded: Bool? = nil) {
+			public init(sourceFileChecksum: String? = nil, sourceFileChecksums: Checksums? = nil, isUploaded: Bool? = nil) {
 				self.sourceFileChecksum = sourceFileChecksum
+				self.sourceFileChecksums = sourceFileChecksums
 				self.isUploaded = isUploaded
 			}
 
 			public init(from decoder: Decoder) throws {
 				let values = try decoder.container(keyedBy: StringCodingKey.self)
 				self.sourceFileChecksum = try values.decodeIfPresent(String.self, forKey: "sourceFileChecksum")
+				self.sourceFileChecksums = try values.decodeIfPresent(Checksums.self, forKey: "sourceFileChecksums")
 				self.isUploaded = try values.decodeIfPresent(Bool.self, forKey: "uploaded")
 			}
 
 			public func encode(to encoder: Encoder) throws {
 				var values = encoder.container(keyedBy: StringCodingKey.self)
 				try values.encodeIfPresent(sourceFileChecksum, forKey: "sourceFileChecksum")
+				try values.encodeIfPresent(sourceFileChecksums, forKey: "sourceFileChecksums")
 				try values.encodeIfPresent(isUploaded, forKey: "uploaded")
 			}
 		}

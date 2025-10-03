@@ -79,6 +79,7 @@ extension APIEndpoint.V1.Apps {
 				case betaTesters
 				case betaGroups
 				case appStoreVersions
+				case appTags
 				case preReleaseVersions
 				case betaAppLocalizations
 				case builds
@@ -107,9 +108,11 @@ extension APIEndpoint.V1.Apps {
 				case alternativeDistributionKey
 				case analyticsReportRequests
 				case marketplaceSearchDetail
+				case buildUploads
 				case backgroundAssets
 				case betaFeedbackScreenshotSubmissions
 				case betaFeedbackCrashSubmissions
+				case searchKeywords
 				case webhooks
 			}
 
@@ -234,6 +237,7 @@ extension APIEndpoint.V1.Apps {
 				case appStoreVersion
 				case icons
 				case buildBundles
+				case buildUpload
 				case perfPowerMetrics
 				case diagnosticSignatures
 			}
@@ -274,6 +278,7 @@ extension APIEndpoint.V1.Apps {
 				case secondaryCategory
 				case secondarySubcategoryOne
 				case secondarySubcategoryTwo
+				case territoryAgeRatings
 			}
 
 			public enum FieldsAppClips: String, Codable, CaseIterable {

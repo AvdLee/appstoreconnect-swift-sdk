@@ -10,37 +10,38 @@ public struct GameCenterLeaderboardsResponse: Codable {
 	public var meta: PagingInformation?
 
 	public enum IncludedItem: Codable {
-		case gameCenterDetail(GameCenterDetail)
-		case gameCenterGroup(GameCenterGroup)
-		case gameCenterLeaderboard(GameCenterLeaderboard)
-		case gameCenterLeaderboardSet(GameCenterLeaderboardSet)
-		case gameCenterLeaderboardLocalization(GameCenterLeaderboardLocalization)
-		case gameCenterLeaderboardRelease(GameCenterLeaderboardRelease)
 		case gameCenterActivity(GameCenterActivity)
 		case gameCenterChallenge(GameCenterChallenge)
+		case gameCenterDetail(GameCenterDetail)
+		case gameCenterGroup(GameCenterGroup)
+		case gameCenterLeaderboardLocalization(GameCenterLeaderboardLocalization)
+		case gameCenterLeaderboardRelease(GameCenterLeaderboardRelease)
+		case gameCenterLeaderboardSet(GameCenterLeaderboardSet)
+		case gameCenterLeaderboard(GameCenterLeaderboard)
 
 		public init(from decoder: Decoder) throws {
+
+			struct Discriminator: Decodable {
+				let type: String
+			}
+
 			let container = try decoder.singleValueContainer()
-			if let value = try? container.decode(GameCenterDetail.self) {
-				self = .gameCenterDetail(value)
-			} else if let value = try? container.decode(GameCenterGroup.self) {
-				self = .gameCenterGroup(value)
-			} else if let value = try? container.decode(GameCenterLeaderboard.self) {
-				self = .gameCenterLeaderboard(value)
-			} else if let value = try? container.decode(GameCenterLeaderboardSet.self) {
-				self = .gameCenterLeaderboardSet(value)
-			} else if let value = try? container.decode(GameCenterLeaderboardLocalization.self) {
-				self = .gameCenterLeaderboardLocalization(value)
-			} else if let value = try? container.decode(GameCenterLeaderboardRelease.self) {
-				self = .gameCenterLeaderboardRelease(value)
-			} else if let value = try? container.decode(GameCenterActivity.self) {
-				self = .gameCenterActivity(value)
-			} else if let value = try? container.decode(GameCenterChallenge.self) {
-				self = .gameCenterChallenge(value)
-			} else {
+			let discriminatorValue = try container.decode(Discriminator.self).type
+
+			switch discriminatorValue {
+			case "gameCenterActivities": self = .gameCenterActivity(try container.decode(GameCenterActivity.self))
+			case "gameCenterChallenges": self = .gameCenterChallenge(try container.decode(GameCenterChallenge.self))
+			case "gameCenterDetails": self = .gameCenterDetail(try container.decode(GameCenterDetail.self))
+			case "gameCenterGroups": self = .gameCenterGroup(try container.decode(GameCenterGroup.self))
+			case "gameCenterLeaderboardLocalizations": self = .gameCenterLeaderboardLocalization(try container.decode(GameCenterLeaderboardLocalization.self))
+			case "gameCenterLeaderboardReleases": self = .gameCenterLeaderboardRelease(try container.decode(GameCenterLeaderboardRelease.self))
+			case "gameCenterLeaderboardSets": self = .gameCenterLeaderboardSet(try container.decode(GameCenterLeaderboardSet.self))
+			case "gameCenterLeaderboards": self = .gameCenterLeaderboard(try container.decode(GameCenterLeaderboard.self))
+
+			default:
 				throw DecodingError.dataCorruptedError(
 					in: container,
-					debugDescription: "Data could not be decoded as any of the expected types (GameCenterDetail, GameCenterGroup, GameCenterLeaderboard, GameCenterLeaderboardSet, GameCenterLeaderboardLocalization, GameCenterLeaderboardRelease, GameCenterActivity, GameCenterChallenge)."
+					debugDescription: "Discriminator value '\(discriminatorValue)' does not match any expected values (gameCenterActivities, gameCenterChallenges, gameCenterDetails, gameCenterGroups, gameCenterLeaderboardLocalizations, gameCenterLeaderboardReleases, gameCenterLeaderboardSets, gameCenterLeaderboards)."
 				)
 			}
 		}
@@ -48,14 +49,14 @@ public struct GameCenterLeaderboardsResponse: Codable {
 		public func encode(to encoder: Encoder) throws {
 			var container = encoder.singleValueContainer()
 			switch self {
-			case .gameCenterDetail(let value): try container.encode(value)
-			case .gameCenterGroup(let value): try container.encode(value)
-			case .gameCenterLeaderboard(let value): try container.encode(value)
-			case .gameCenterLeaderboardSet(let value): try container.encode(value)
-			case .gameCenterLeaderboardLocalization(let value): try container.encode(value)
-			case .gameCenterLeaderboardRelease(let value): try container.encode(value)
 			case .gameCenterActivity(let value): try container.encode(value)
 			case .gameCenterChallenge(let value): try container.encode(value)
+			case .gameCenterDetail(let value): try container.encode(value)
+			case .gameCenterGroup(let value): try container.encode(value)
+			case .gameCenterLeaderboardLocalization(let value): try container.encode(value)
+			case .gameCenterLeaderboardRelease(let value): try container.encode(value)
+			case .gameCenterLeaderboardSet(let value): try container.encode(value)
+			case .gameCenterLeaderboard(let value): try container.encode(value)
 			}
 		}
 	}

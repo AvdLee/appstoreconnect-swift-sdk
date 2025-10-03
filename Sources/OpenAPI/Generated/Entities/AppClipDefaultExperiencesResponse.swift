@@ -10,25 +10,30 @@ public struct AppClipDefaultExperiencesResponse: Codable {
 	public var meta: PagingInformation?
 
 	public enum IncludedItem: Codable {
+		case appClipAppStoreReviewDetail(AppClipAppStoreReviewDetail)
+		case appClipDefaultExperienceLocalization(AppClipDefaultExperienceLocalization)
 		case appClip(AppClip)
 		case appStoreVersion(AppStoreVersion)
-		case appClipDefaultExperienceLocalization(AppClipDefaultExperienceLocalization)
-		case appClipAppStoreReviewDetail(AppClipAppStoreReviewDetail)
 
 		public init(from decoder: Decoder) throws {
+
+			struct Discriminator: Decodable {
+				let type: String
+			}
+
 			let container = try decoder.singleValueContainer()
-			if let value = try? container.decode(AppClip.self) {
-				self = .appClip(value)
-			} else if let value = try? container.decode(AppStoreVersion.self) {
-				self = .appStoreVersion(value)
-			} else if let value = try? container.decode(AppClipDefaultExperienceLocalization.self) {
-				self = .appClipDefaultExperienceLocalization(value)
-			} else if let value = try? container.decode(AppClipAppStoreReviewDetail.self) {
-				self = .appClipAppStoreReviewDetail(value)
-			} else {
+			let discriminatorValue = try container.decode(Discriminator.self).type
+
+			switch discriminatorValue {
+			case "appClipAppStoreReviewDetails": self = .appClipAppStoreReviewDetail(try container.decode(AppClipAppStoreReviewDetail.self))
+			case "appClipDefaultExperienceLocalizations": self = .appClipDefaultExperienceLocalization(try container.decode(AppClipDefaultExperienceLocalization.self))
+			case "appClips": self = .appClip(try container.decode(AppClip.self))
+			case "appStoreVersions": self = .appStoreVersion(try container.decode(AppStoreVersion.self))
+
+			default:
 				throw DecodingError.dataCorruptedError(
 					in: container,
-					debugDescription: "Data could not be decoded as any of the expected types (AppClip, AppStoreVersion, AppClipDefaultExperienceLocalization, AppClipAppStoreReviewDetail)."
+					debugDescription: "Discriminator value '\(discriminatorValue)' does not match any expected values (appClipAppStoreReviewDetails, appClipDefaultExperienceLocalizations, appClips, appStoreVersions)."
 				)
 			}
 		}
@@ -36,10 +41,10 @@ public struct AppClipDefaultExperiencesResponse: Codable {
 		public func encode(to encoder: Encoder) throws {
 			var container = encoder.singleValueContainer()
 			switch self {
+			case .appClipAppStoreReviewDetail(let value): try container.encode(value)
+			case .appClipDefaultExperienceLocalization(let value): try container.encode(value)
 			case .appClip(let value): try container.encode(value)
 			case .appStoreVersion(let value): try container.encode(value)
-			case .appClipDefaultExperienceLocalization(let value): try container.encode(value)
-			case .appClipAppStoreReviewDetail(let value): try container.encode(value)
 			}
 		}
 	}

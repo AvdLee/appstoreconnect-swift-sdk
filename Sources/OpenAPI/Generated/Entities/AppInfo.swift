@@ -127,6 +127,7 @@ public struct AppInfo: Codable, Identifiable {
 		public var secondaryCategory: SecondaryCategory?
 		public var secondarySubcategoryOne: SecondarySubcategoryOne?
 		public var secondarySubcategoryTwo: SecondarySubcategoryTwo?
+		public var territoryAgeRatings: TerritoryAgeRatings?
 
 		public struct App: Codable {
 			public var data: Data?
@@ -560,7 +561,25 @@ public struct AppInfo: Codable, Identifiable {
 			}
 		}
 
-		public init(app: App? = nil, ageRatingDeclaration: AgeRatingDeclaration? = nil, appInfoLocalizations: AppInfoLocalizations? = nil, primaryCategory: PrimaryCategory? = nil, primarySubcategoryOne: PrimarySubcategoryOne? = nil, primarySubcategoryTwo: PrimarySubcategoryTwo? = nil, secondaryCategory: SecondaryCategory? = nil, secondarySubcategoryOne: SecondarySubcategoryOne? = nil, secondarySubcategoryTwo: SecondarySubcategoryTwo? = nil) {
+		public struct TerritoryAgeRatings: Codable {
+			public var links: RelationshipLinks?
+
+			public init(links: RelationshipLinks? = nil) {
+				self.links = links
+			}
+
+			public init(from decoder: Decoder) throws {
+				let values = try decoder.container(keyedBy: StringCodingKey.self)
+				self.links = try values.decodeIfPresent(RelationshipLinks.self, forKey: "links")
+			}
+
+			public func encode(to encoder: Encoder) throws {
+				var values = encoder.container(keyedBy: StringCodingKey.self)
+				try values.encodeIfPresent(links, forKey: "links")
+			}
+		}
+
+		public init(app: App? = nil, ageRatingDeclaration: AgeRatingDeclaration? = nil, appInfoLocalizations: AppInfoLocalizations? = nil, primaryCategory: PrimaryCategory? = nil, primarySubcategoryOne: PrimarySubcategoryOne? = nil, primarySubcategoryTwo: PrimarySubcategoryTwo? = nil, secondaryCategory: SecondaryCategory? = nil, secondarySubcategoryOne: SecondarySubcategoryOne? = nil, secondarySubcategoryTwo: SecondarySubcategoryTwo? = nil, territoryAgeRatings: TerritoryAgeRatings? = nil) {
 			self.app = app
 			self.ageRatingDeclaration = ageRatingDeclaration
 			self.appInfoLocalizations = appInfoLocalizations
@@ -570,6 +589,7 @@ public struct AppInfo: Codable, Identifiable {
 			self.secondaryCategory = secondaryCategory
 			self.secondarySubcategoryOne = secondarySubcategoryOne
 			self.secondarySubcategoryTwo = secondarySubcategoryTwo
+			self.territoryAgeRatings = territoryAgeRatings
 		}
 
 		public init(from decoder: Decoder) throws {
@@ -583,6 +603,7 @@ public struct AppInfo: Codable, Identifiable {
 			self.secondaryCategory = try values.decodeIfPresent(SecondaryCategory.self, forKey: "secondaryCategory")
 			self.secondarySubcategoryOne = try values.decodeIfPresent(SecondarySubcategoryOne.self, forKey: "secondarySubcategoryOne")
 			self.secondarySubcategoryTwo = try values.decodeIfPresent(SecondarySubcategoryTwo.self, forKey: "secondarySubcategoryTwo")
+			self.territoryAgeRatings = try values.decodeIfPresent(TerritoryAgeRatings.self, forKey: "territoryAgeRatings")
 		}
 
 		public func encode(to encoder: Encoder) throws {
@@ -596,6 +617,7 @@ public struct AppInfo: Codable, Identifiable {
 			try values.encodeIfPresent(secondaryCategory, forKey: "secondaryCategory")
 			try values.encodeIfPresent(secondarySubcategoryOne, forKey: "secondarySubcategoryOne")
 			try values.encodeIfPresent(secondarySubcategoryTwo, forKey: "secondarySubcategoryTwo")
+			try values.encodeIfPresent(territoryAgeRatings, forKey: "territoryAgeRatings")
 		}
 	}
 

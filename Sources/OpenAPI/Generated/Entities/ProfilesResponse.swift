@@ -11,21 +11,27 @@ public struct ProfilesResponse: Codable {
 
 	public enum IncludedItem: Codable {
 		case bundleID(BundleID)
-		case device(Device)
 		case certificate(Certificate)
+		case device(Device)
 
 		public init(from decoder: Decoder) throws {
+
+			struct Discriminator: Decodable {
+				let type: String
+			}
+
 			let container = try decoder.singleValueContainer()
-			if let value = try? container.decode(BundleID.self) {
-				self = .bundleID(value)
-			} else if let value = try? container.decode(Device.self) {
-				self = .device(value)
-			} else if let value = try? container.decode(Certificate.self) {
-				self = .certificate(value)
-			} else {
+			let discriminatorValue = try container.decode(Discriminator.self).type
+
+			switch discriminatorValue {
+			case "bundleIds": self = .bundleID(try container.decode(BundleID.self))
+			case "certificates": self = .certificate(try container.decode(Certificate.self))
+			case "devices": self = .device(try container.decode(Device.self))
+
+			default:
 				throw DecodingError.dataCorruptedError(
 					in: container,
-					debugDescription: "Data could not be decoded as any of the expected types (BundleID, Device, Certificate)."
+					debugDescription: "Discriminator value '\(discriminatorValue)' does not match any expected values (bundleIds, certificates, devices)."
 				)
 			}
 		}
@@ -34,8 +40,8 @@ public struct ProfilesResponse: Codable {
 			var container = encoder.singleValueContainer()
 			switch self {
 			case .bundleID(let value): try container.encode(value)
-			case .device(let value): try container.encode(value)
 			case .certificate(let value): try container.encode(value)
+			case .device(let value): try container.encode(value)
 			}
 		}
 	}

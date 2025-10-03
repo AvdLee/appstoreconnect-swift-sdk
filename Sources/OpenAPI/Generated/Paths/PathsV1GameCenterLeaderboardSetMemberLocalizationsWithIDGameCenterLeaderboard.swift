@@ -103,6 +103,7 @@ extension APIEndpoint.V1.GameCenterLeaderboardSetMemberLocalizations.WithID {
 				case formatterOverride
 				case formatterSuffix
 				case formatterSuffixSingular
+				case description
 				case gameCenterLeaderboard
 				case gameCenterLeaderboardImage
 			}
@@ -132,7 +133,6 @@ extension APIEndpoint.V1.GameCenterLeaderboardSetMemberLocalizations.WithID {
 			public enum FieldsGameCenterChallenges: String, Codable, CaseIterable {
 				case referenceName
 				case vendorIdentifier
-				case allowedDurations
 				case archived
 				case challengeType
 				case repeatable

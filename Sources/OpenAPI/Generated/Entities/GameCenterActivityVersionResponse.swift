@@ -11,24 +11,29 @@ public struct GameCenterActivityVersionResponse: Codable {
 
 	public enum IncludedItem: Codable {
 		case gameCenterActivity(GameCenterActivity)
-		case gameCenterActivityLocalization(GameCenterActivityLocalization)
 		case gameCenterActivityImage(GameCenterActivityImage)
+		case gameCenterActivityLocalization(GameCenterActivityLocalization)
 		case gameCenterActivityVersionRelease(GameCenterActivityVersionRelease)
 
 		public init(from decoder: Decoder) throws {
+
+			struct Discriminator: Decodable {
+				let type: String
+			}
+
 			let container = try decoder.singleValueContainer()
-			if let value = try? container.decode(GameCenterActivity.self) {
-				self = .gameCenterActivity(value)
-			} else if let value = try? container.decode(GameCenterActivityLocalization.self) {
-				self = .gameCenterActivityLocalization(value)
-			} else if let value = try? container.decode(GameCenterActivityImage.self) {
-				self = .gameCenterActivityImage(value)
-			} else if let value = try? container.decode(GameCenterActivityVersionRelease.self) {
-				self = .gameCenterActivityVersionRelease(value)
-			} else {
+			let discriminatorValue = try container.decode(Discriminator.self).type
+
+			switch discriminatorValue {
+			case "gameCenterActivities": self = .gameCenterActivity(try container.decode(GameCenterActivity.self))
+			case "gameCenterActivityImages": self = .gameCenterActivityImage(try container.decode(GameCenterActivityImage.self))
+			case "gameCenterActivityLocalizations": self = .gameCenterActivityLocalization(try container.decode(GameCenterActivityLocalization.self))
+			case "gameCenterActivityVersionReleases": self = .gameCenterActivityVersionRelease(try container.decode(GameCenterActivityVersionRelease.self))
+
+			default:
 				throw DecodingError.dataCorruptedError(
 					in: container,
-					debugDescription: "Data could not be decoded as any of the expected types (GameCenterActivity, GameCenterActivityLocalization, GameCenterActivityImage, GameCenterActivityVersionRelease)."
+					debugDescription: "Discriminator value '\(discriminatorValue)' does not match any expected values (gameCenterActivities, gameCenterActivityImages, gameCenterActivityLocalizations, gameCenterActivityVersionReleases)."
 				)
 			}
 		}
@@ -37,8 +42,8 @@ public struct GameCenterActivityVersionResponse: Codable {
 			var container = encoder.singleValueContainer()
 			switch self {
 			case .gameCenterActivity(let value): try container.encode(value)
-			case .gameCenterActivityLocalization(let value): try container.encode(value)
 			case .gameCenterActivityImage(let value): try container.encode(value)
+			case .gameCenterActivityLocalization(let value): try container.encode(value)
 			case .gameCenterActivityVersionRelease(let value): try container.encode(value)
 			}
 		}

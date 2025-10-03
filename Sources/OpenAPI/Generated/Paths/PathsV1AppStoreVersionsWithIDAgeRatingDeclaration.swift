@@ -25,24 +25,33 @@ extension APIEndpoint.V1.AppStoreVersions.WithID {
 		}
 
 		public enum FieldsAgeRatingDeclarations: String, Codable, CaseIterable {
+			case advertising
 			case alcoholTobaccoOrDrugUseOrReferences
 			case contests
 			case gambling
 			case gamblingSimulated
+			case gunsOrOtherWeapons
+			case healthOrWellnessTopics
 			case kidsAgeBand
 			case lootBox
 			case medicalOrTreatmentInformation
+			case messagingAndChat
+			case parentalControls
 			case profanityOrCrudeHumor
+			case ageAssurance
 			case sexualContentGraphicAndNudity
 			case sexualContentOrNudity
 			case horrorOrFearThemes
 			case matureOrSuggestiveThemes
 			case unrestrictedWebAccess
+			case userGeneratedContent
 			case violenceCartoonOrFantasy
 			case violenceRealisticProlongedGraphicOrSadistic
 			case violenceRealistic
 			case ageRatingOverride
+			case ageRatingOverrideV2
 			case koreaAgeRatingOverride
+			case developerAgeRatingInfoURL = "developerAgeRatingInfoUrl"
 		}
 	}
 }

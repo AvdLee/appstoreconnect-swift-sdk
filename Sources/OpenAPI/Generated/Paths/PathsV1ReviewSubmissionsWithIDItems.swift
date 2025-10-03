@@ -23,6 +23,7 @@ extension APIEndpoint.V1.ReviewSubmissions.WithID {
 			public var fieldsAppCustomProductPageVersions: [FieldsAppCustomProductPageVersions]?
 			public var fieldsAppStoreVersionExperiments: [FieldsAppStoreVersionExperiments]?
 			public var fieldsAppEvents: [FieldsAppEvents]?
+			public var fieldsBackgroundAssetVersions: [FieldsBackgroundAssetVersions]?
 			public var limit: Int?
 			public var include: [Include]?
 
@@ -33,6 +34,7 @@ extension APIEndpoint.V1.ReviewSubmissions.WithID {
 				case appStoreVersionExperiment
 				case appStoreVersionExperimentV2
 				case appEvent
+				case backgroundAssetVersion
 			}
 
 			public enum FieldsAppStoreVersions: String, Codable, CaseIterable {
@@ -100,20 +102,36 @@ extension APIEndpoint.V1.ReviewSubmissions.WithID {
 				case localizations
 			}
 
+			public enum FieldsBackgroundAssetVersions: String, Codable, CaseIterable {
+				case createdDate
+				case platforms
+				case state
+				case version
+				case backgroundAsset
+				case internalBetaRelease
+				case externalBetaRelease
+				case appStoreRelease
+				case assetFile
+				case manifestFile
+				case backgroundAssetUploadFiles
+			}
+
 			public enum Include: String, Codable, CaseIterable {
 				case appStoreVersion
 				case appCustomProductPageVersion
 				case appStoreVersionExperiment
 				case appStoreVersionExperimentV2
 				case appEvent
+				case backgroundAssetVersion
 			}
 
-			public init(fieldsReviewSubmissionItems: [FieldsReviewSubmissionItems]? = nil, fieldsAppStoreVersions: [FieldsAppStoreVersions]? = nil, fieldsAppCustomProductPageVersions: [FieldsAppCustomProductPageVersions]? = nil, fieldsAppStoreVersionExperiments: [FieldsAppStoreVersionExperiments]? = nil, fieldsAppEvents: [FieldsAppEvents]? = nil, limit: Int? = nil, include: [Include]? = nil) {
+			public init(fieldsReviewSubmissionItems: [FieldsReviewSubmissionItems]? = nil, fieldsAppStoreVersions: [FieldsAppStoreVersions]? = nil, fieldsAppCustomProductPageVersions: [FieldsAppCustomProductPageVersions]? = nil, fieldsAppStoreVersionExperiments: [FieldsAppStoreVersionExperiments]? = nil, fieldsAppEvents: [FieldsAppEvents]? = nil, fieldsBackgroundAssetVersions: [FieldsBackgroundAssetVersions]? = nil, limit: Int? = nil, include: [Include]? = nil) {
 				self.fieldsReviewSubmissionItems = fieldsReviewSubmissionItems
 				self.fieldsAppStoreVersions = fieldsAppStoreVersions
 				self.fieldsAppCustomProductPageVersions = fieldsAppCustomProductPageVersions
 				self.fieldsAppStoreVersionExperiments = fieldsAppStoreVersionExperiments
 				self.fieldsAppEvents = fieldsAppEvents
+				self.fieldsBackgroundAssetVersions = fieldsBackgroundAssetVersions
 				self.limit = limit
 				self.include = include
 			}
@@ -125,6 +143,7 @@ extension APIEndpoint.V1.ReviewSubmissions.WithID {
 				encoder.encode(fieldsAppCustomProductPageVersions, forKey: "fields[appCustomProductPageVersions]")
 				encoder.encode(fieldsAppStoreVersionExperiments, forKey: "fields[appStoreVersionExperiments]")
 				encoder.encode(fieldsAppEvents, forKey: "fields[appEvents]")
+				encoder.encode(fieldsBackgroundAssetVersions, forKey: "fields[backgroundAssetVersions]")
 				encoder.encode(limit, forKey: "limit")
 				encoder.encode(include, forKey: "include")
 				return encoder.items

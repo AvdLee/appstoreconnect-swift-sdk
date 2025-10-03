@@ -10,22 +10,30 @@ public struct AppStoreVersionLocalizationsResponse: Codable {
 	public var meta: PagingInformation?
 
 	public enum IncludedItem: Codable {
-		case appStoreVersion(AppStoreVersion)
-		case appScreenshotSet(AppScreenshotSet)
+		case appKeyword(AppKeyword)
 		case appPreviewSet(AppPreviewSet)
+		case appScreenshotSet(AppScreenshotSet)
+		case appStoreVersion(AppStoreVersion)
 
 		public init(from decoder: Decoder) throws {
+
+			struct Discriminator: Decodable {
+				let type: String
+			}
+
 			let container = try decoder.singleValueContainer()
-			if let value = try? container.decode(AppStoreVersion.self) {
-				self = .appStoreVersion(value)
-			} else if let value = try? container.decode(AppScreenshotSet.self) {
-				self = .appScreenshotSet(value)
-			} else if let value = try? container.decode(AppPreviewSet.self) {
-				self = .appPreviewSet(value)
-			} else {
+			let discriminatorValue = try container.decode(Discriminator.self).type
+
+			switch discriminatorValue {
+			case "appKeywords": self = .appKeyword(try container.decode(AppKeyword.self))
+			case "appPreviewSets": self = .appPreviewSet(try container.decode(AppPreviewSet.self))
+			case "appScreenshotSets": self = .appScreenshotSet(try container.decode(AppScreenshotSet.self))
+			case "appStoreVersions": self = .appStoreVersion(try container.decode(AppStoreVersion.self))
+
+			default:
 				throw DecodingError.dataCorruptedError(
 					in: container,
-					debugDescription: "Data could not be decoded as any of the expected types (AppStoreVersion, AppScreenshotSet, AppPreviewSet)."
+					debugDescription: "Discriminator value '\(discriminatorValue)' does not match any expected values (appKeywords, appPreviewSets, appScreenshotSets, appStoreVersions)."
 				)
 			}
 		}
@@ -33,9 +41,10 @@ public struct AppStoreVersionLocalizationsResponse: Codable {
 		public func encode(to encoder: Encoder) throws {
 			var container = encoder.singleValueContainer()
 			switch self {
-			case .appStoreVersion(let value): try container.encode(value)
-			case .appScreenshotSet(let value): try container.encode(value)
+			case .appKeyword(let value): try container.encode(value)
 			case .appPreviewSet(let value): try container.encode(value)
+			case .appScreenshotSet(let value): try container.encode(value)
+			case .appStoreVersion(let value): try container.encode(value)
 			}
 		}
 	}

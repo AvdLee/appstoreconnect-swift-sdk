@@ -10,19 +10,26 @@ public struct SubscriptionGroupsResponse: Codable {
 	public var meta: PagingInformation?
 
 	public enum IncludedItem: Codable {
-		case subscription(Subscription)
 		case subscriptionGroupLocalization(SubscriptionGroupLocalization)
+		case subscription(Subscription)
 
 		public init(from decoder: Decoder) throws {
+
+			struct Discriminator: Decodable {
+				let type: String
+			}
+
 			let container = try decoder.singleValueContainer()
-			if let value = try? container.decode(Subscription.self) {
-				self = .subscription(value)
-			} else if let value = try? container.decode(SubscriptionGroupLocalization.self) {
-				self = .subscriptionGroupLocalization(value)
-			} else {
+			let discriminatorValue = try container.decode(Discriminator.self).type
+
+			switch discriminatorValue {
+			case "subscriptionGroupLocalizations": self = .subscriptionGroupLocalization(try container.decode(SubscriptionGroupLocalization.self))
+			case "subscriptions": self = .subscription(try container.decode(Subscription.self))
+
+			default:
 				throw DecodingError.dataCorruptedError(
 					in: container,
-					debugDescription: "Data could not be decoded as any of the expected types (Subscription, SubscriptionGroupLocalization)."
+					debugDescription: "Discriminator value '\(discriminatorValue)' does not match any expected values (subscriptionGroupLocalizations, subscriptions)."
 				)
 			}
 		}
@@ -30,8 +37,8 @@ public struct SubscriptionGroupsResponse: Codable {
 		public func encode(to encoder: Encoder) throws {
 			var container = encoder.singleValueContainer()
 			switch self {
-			case .subscription(let value): try container.encode(value)
 			case .subscriptionGroupLocalization(let value): try container.encode(value)
+			case .subscription(let value): try container.encode(value)
 			}
 		}
 	}

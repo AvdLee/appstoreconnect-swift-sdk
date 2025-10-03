@@ -10,31 +10,34 @@ public struct GameCenterAchievementsResponse: Codable {
 	public var meta: PagingInformation?
 
 	public enum IncludedItem: Codable {
-		case gameCenterDetail(GameCenterDetail)
-		case gameCenterGroup(GameCenterGroup)
-		case gameCenterAchievement(GameCenterAchievement)
 		case gameCenterAchievementLocalization(GameCenterAchievementLocalization)
 		case gameCenterAchievementRelease(GameCenterAchievementRelease)
+		case gameCenterAchievement(GameCenterAchievement)
 		case gameCenterActivity(GameCenterActivity)
+		case gameCenterDetail(GameCenterDetail)
+		case gameCenterGroup(GameCenterGroup)
 
 		public init(from decoder: Decoder) throws {
+
+			struct Discriminator: Decodable {
+				let type: String
+			}
+
 			let container = try decoder.singleValueContainer()
-			if let value = try? container.decode(GameCenterDetail.self) {
-				self = .gameCenterDetail(value)
-			} else if let value = try? container.decode(GameCenterGroup.self) {
-				self = .gameCenterGroup(value)
-			} else if let value = try? container.decode(GameCenterAchievement.self) {
-				self = .gameCenterAchievement(value)
-			} else if let value = try? container.decode(GameCenterAchievementLocalization.self) {
-				self = .gameCenterAchievementLocalization(value)
-			} else if let value = try? container.decode(GameCenterAchievementRelease.self) {
-				self = .gameCenterAchievementRelease(value)
-			} else if let value = try? container.decode(GameCenterActivity.self) {
-				self = .gameCenterActivity(value)
-			} else {
+			let discriminatorValue = try container.decode(Discriminator.self).type
+
+			switch discriminatorValue {
+			case "gameCenterAchievementLocalizations": self = .gameCenterAchievementLocalization(try container.decode(GameCenterAchievementLocalization.self))
+			case "gameCenterAchievementReleases": self = .gameCenterAchievementRelease(try container.decode(GameCenterAchievementRelease.self))
+			case "gameCenterAchievements": self = .gameCenterAchievement(try container.decode(GameCenterAchievement.self))
+			case "gameCenterActivities": self = .gameCenterActivity(try container.decode(GameCenterActivity.self))
+			case "gameCenterDetails": self = .gameCenterDetail(try container.decode(GameCenterDetail.self))
+			case "gameCenterGroups": self = .gameCenterGroup(try container.decode(GameCenterGroup.self))
+
+			default:
 				throw DecodingError.dataCorruptedError(
 					in: container,
-					debugDescription: "Data could not be decoded as any of the expected types (GameCenterDetail, GameCenterGroup, GameCenterAchievement, GameCenterAchievementLocalization, GameCenterAchievementRelease, GameCenterActivity)."
+					debugDescription: "Discriminator value '\(discriminatorValue)' does not match any expected values (gameCenterAchievementLocalizations, gameCenterAchievementReleases, gameCenterAchievements, gameCenterActivities, gameCenterDetails, gameCenterGroups)."
 				)
 			}
 		}
@@ -42,12 +45,12 @@ public struct GameCenterAchievementsResponse: Codable {
 		public func encode(to encoder: Encoder) throws {
 			var container = encoder.singleValueContainer()
 			switch self {
-			case .gameCenterDetail(let value): try container.encode(value)
-			case .gameCenterGroup(let value): try container.encode(value)
-			case .gameCenterAchievement(let value): try container.encode(value)
 			case .gameCenterAchievementLocalization(let value): try container.encode(value)
 			case .gameCenterAchievementRelease(let value): try container.encode(value)
+			case .gameCenterAchievement(let value): try container.encode(value)
 			case .gameCenterActivity(let value): try container.encode(value)
+			case .gameCenterDetail(let value): try container.encode(value)
+			case .gameCenterGroup(let value): try container.encode(value)
 			}
 		}
 	}

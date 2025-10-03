@@ -87,6 +87,7 @@ extension APIEndpoint.V1.Apps.WithID {
 				case betaTesters
 				case betaGroups
 				case appStoreVersions
+				case appTags
 				case preReleaseVersions
 				case betaAppLocalizations
 				case builds
@@ -115,9 +116,11 @@ extension APIEndpoint.V1.Apps.WithID {
 				case alternativeDistributionKey
 				case analyticsReportRequests
 				case marketplaceSearchDetail
+				case buildUploads
 				case backgroundAssets
 				case betaFeedbackScreenshotSubmissions
 				case betaFeedbackCrashSubmissions
+				case searchKeywords
 				case webhooks
 			}
 
@@ -207,7 +210,6 @@ extension APIEndpoint.V1.Apps.WithID {
 			public enum FieldsGameCenterChallenges: String, Codable, CaseIterable {
 				case referenceName
 				case vendorIdentifier
-				case allowedDurations
 				case archived
 				case challengeType
 				case repeatable

@@ -3,6 +3,7 @@
 
 import Foundation
 
+@available(*, deprecated, message: "Deprecated")
 public struct MarketplaceWebhook: Codable, Identifiable {
 	public var type: `Type`
 	public var id: String

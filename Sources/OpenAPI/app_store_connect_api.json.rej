@@ -1,5 +1,3 @@
---- a/Sources/OpenAPI/app_store_connect_api.json
-+++ b/Sources/OpenAPI/app_store_connect_api.json
 @@ -9787,6 +9787,7 @@
                    "violenceCartoonOrFantasy",
                    "violenceRealisticProlongedGraphicOrSadistic",
@@ -120,43 +118,3 @@
                    "active",
                    "subscription",
                    "oneTimeUseCodes",
-@@ -141826,6 +141840,14 @@
-                   "NONE"
-                 ]
-               },
-+              "ageRatingOverride": {
-+                "type": "string",
-+                "enum": [
-+                  "NONE",
-+                  "SEVENTEEN_PLUS",
-+                  "UNRATED"
-+                ]
-+              },
-               "koreaAgeRatingOverride": {
-                 "type": "string",
-                 "enum": [
-@@ -141972,6 +141994,14 @@
-                       "NONE"
-                     ]
-                   },
-+                  "ageRatingOverride": {
-+                    "type": "string",
-+                    "enum": [
-+                      "NONE",
-+                      "SEVENTEEN_PLUS",
-+                      "UNRATED"
-+                    ]
-+                  },
-                   "koreaAgeRatingOverride": {
-                     "type": "string",
-                     "enum": [
-@@ -184127,6 +184157,9 @@
-               "numberOfPeriods": {
-                 "type": "integer"
-               },
-+              "totalNumberOfCodes": {
-+                "type": "integer"
-+              },
-               "active": {
-                 "type": "boolean"
-               }

@@ -10,19 +10,26 @@ public struct SubscriptionPromotionalOfferResponse: Codable {
 	public var links: DocumentLinks
 
 	public enum IncludedItem: Codable {
-		case subscription(Subscription)
 		case subscriptionPromotionalOfferPrice(SubscriptionPromotionalOfferPrice)
+		case subscription(Subscription)
 
 		public init(from decoder: Decoder) throws {
+
+			struct Discriminator: Decodable {
+				let type: String
+			}
+
 			let container = try decoder.singleValueContainer()
-			if let value = try? container.decode(Subscription.self) {
-				self = .subscription(value)
-			} else if let value = try? container.decode(SubscriptionPromotionalOfferPrice.self) {
-				self = .subscriptionPromotionalOfferPrice(value)
-			} else {
+			let discriminatorValue = try container.decode(Discriminator.self).type
+
+			switch discriminatorValue {
+			case "subscriptionPromotionalOfferPrices": self = .subscriptionPromotionalOfferPrice(try container.decode(SubscriptionPromotionalOfferPrice.self))
+			case "subscriptions": self = .subscription(try container.decode(Subscription.self))
+
+			default:
 				throw DecodingError.dataCorruptedError(
 					in: container,
-					debugDescription: "Data could not be decoded as any of the expected types (Subscription, SubscriptionPromotionalOfferPrice)."
+					debugDescription: "Discriminator value '\(discriminatorValue)' does not match any expected values (subscriptionPromotionalOfferPrices, subscriptions)."
 				)
 			}
 		}
@@ -30,8 +37,8 @@ public struct SubscriptionPromotionalOfferResponse: Codable {
 		public func encode(to encoder: Encoder) throws {
 			var container = encoder.singleValueContainer()
 			switch self {
-			case .subscription(let value): try container.encode(value)
 			case .subscriptionPromotionalOfferPrice(let value): try container.encode(value)
+			case .subscription(let value): try container.encode(value)
 			}
 		}
 	}

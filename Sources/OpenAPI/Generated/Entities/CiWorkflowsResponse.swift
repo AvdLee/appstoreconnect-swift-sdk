@@ -10,25 +10,30 @@ public struct CiWorkflowsResponse: Codable {
 	public var meta: PagingInformation?
 
 	public enum IncludedItem: Codable {
-		case ciProduct(CiProduct)
-		case scmRepository(ScmRepository)
-		case ciXcodeVersion(CiXcodeVersion)
 		case ciMacOsVersion(CiMacOsVersion)
+		case ciProduct(CiProduct)
+		case ciXcodeVersion(CiXcodeVersion)
+		case scmRepository(ScmRepository)
 
 		public init(from decoder: Decoder) throws {
+
+			struct Discriminator: Decodable {
+				let type: String
+			}
+
 			let container = try decoder.singleValueContainer()
-			if let value = try? container.decode(CiProduct.self) {
-				self = .ciProduct(value)
-			} else if let value = try? container.decode(ScmRepository.self) {
-				self = .scmRepository(value)
-			} else if let value = try? container.decode(CiXcodeVersion.self) {
-				self = .ciXcodeVersion(value)
-			} else if let value = try? container.decode(CiMacOsVersion.self) {
-				self = .ciMacOsVersion(value)
-			} else {
+			let discriminatorValue = try container.decode(Discriminator.self).type
+
+			switch discriminatorValue {
+			case "ciMacOsVersions": self = .ciMacOsVersion(try container.decode(CiMacOsVersion.self))
+			case "ciProducts": self = .ciProduct(try container.decode(CiProduct.self))
+			case "ciXcodeVersions": self = .ciXcodeVersion(try container.decode(CiXcodeVersion.self))
+			case "scmRepositories": self = .scmRepository(try container.decode(ScmRepository.self))
+
+			default:
 				throw DecodingError.dataCorruptedError(
 					in: container,
-					debugDescription: "Data could not be decoded as any of the expected types (CiProduct, ScmRepository, CiXcodeVersion, CiMacOsVersion)."
+					debugDescription: "Discriminator value '\(discriminatorValue)' does not match any expected values (ciMacOsVersions, ciProducts, ciXcodeVersions, scmRepositories)."
 				)
 			}
 		}
@@ -36,10 +41,10 @@ public struct CiWorkflowsResponse: Codable {
 		public func encode(to encoder: Encoder) throws {
 			var container = encoder.singleValueContainer()
 			switch self {
-			case .ciProduct(let value): try container.encode(value)
-			case .scmRepository(let value): try container.encode(value)
-			case .ciXcodeVersion(let value): try container.encode(value)
 			case .ciMacOsVersion(let value): try container.encode(value)
+			case .ciProduct(let value): try container.encode(value)
+			case .ciXcodeVersion(let value): try container.encode(value)
+			case .scmRepository(let value): try container.encode(value)
 			}
 		}
 	}

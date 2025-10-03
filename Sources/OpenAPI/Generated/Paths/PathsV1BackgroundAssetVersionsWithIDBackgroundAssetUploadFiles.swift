@@ -31,6 +31,7 @@ extension APIEndpoint.V1.BackgroundAssetVersions.WithID {
 			case fileName
 			case fileSize
 			case sourceFileChecksum
+			case sourceFileChecksums
 			case uploadOperations
 		}
 	}

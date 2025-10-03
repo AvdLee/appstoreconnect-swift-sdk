@@ -10,25 +10,30 @@ public struct AppInfosResponse: Codable {
 	public var meta: PagingInformation?
 
 	public enum IncludedItem: Codable {
-		case app(App)
 		case ageRatingDeclaration(AgeRatingDeclaration)
-		case appInfoLocalization(AppInfoLocalization)
 		case appCategory(AppCategory)
+		case appInfoLocalization(AppInfoLocalization)
+		case app(App)
 
 		public init(from decoder: Decoder) throws {
+
+			struct Discriminator: Decodable {
+				let type: String
+			}
+
 			let container = try decoder.singleValueContainer()
-			if let value = try? container.decode(App.self) {
-				self = .app(value)
-			} else if let value = try? container.decode(AgeRatingDeclaration.self) {
-				self = .ageRatingDeclaration(value)
-			} else if let value = try? container.decode(AppInfoLocalization.self) {
-				self = .appInfoLocalization(value)
-			} else if let value = try? container.decode(AppCategory.self) {
-				self = .appCategory(value)
-			} else {
+			let discriminatorValue = try container.decode(Discriminator.self).type
+
+			switch discriminatorValue {
+			case "ageRatingDeclarations": self = .ageRatingDeclaration(try container.decode(AgeRatingDeclaration.self))
+			case "appCategories": self = .appCategory(try container.decode(AppCategory.self))
+			case "appInfoLocalizations": self = .appInfoLocalization(try container.decode(AppInfoLocalization.self))
+			case "apps": self = .app(try container.decode(App.self))
+
+			default:
 				throw DecodingError.dataCorruptedError(
 					in: container,
-					debugDescription: "Data could not be decoded as any of the expected types (App, AgeRatingDeclaration, AppInfoLocalization, AppCategory)."
+					debugDescription: "Discriminator value '\(discriminatorValue)' does not match any expected values (ageRatingDeclarations, appCategories, appInfoLocalizations, apps)."
 				)
 			}
 		}
@@ -36,10 +41,10 @@ public struct AppInfosResponse: Codable {
 		public func encode(to encoder: Encoder) throws {
 			var container = encoder.singleValueContainer()
 			switch self {
-			case .app(let value): try container.encode(value)
 			case .ageRatingDeclaration(let value): try container.encode(value)
-			case .appInfoLocalization(let value): try container.encode(value)
 			case .appCategory(let value): try container.encode(value)
+			case .appInfoLocalization(let value): try container.encode(value)
+			case .app(let value): try container.encode(value)
 			}
 		}
 	}

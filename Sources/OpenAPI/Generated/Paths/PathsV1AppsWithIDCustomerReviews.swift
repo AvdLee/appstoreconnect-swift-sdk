@@ -256,6 +256,7 @@ extension APIEndpoint.V1.Apps.WithID {
 				case vut = "VUT"
 				case wlf = "WLF"
 				case wsm = "WSM"
+				case xks = "XKS"
 				case yem = "YEM"
 				case zaf = "ZAF"
 				case zmb = "ZMB"

@@ -10,46 +10,44 @@ public struct SubscriptionResponse: Codable {
 	public var links: DocumentLinks
 
 	public enum IncludedItem: Codable {
-		case subscriptionLocalization(SubscriptionLocalization)
+		case promotedPurchase(PromotedPurchase)
 		case subscriptionAppStoreReviewScreenshot(SubscriptionAppStoreReviewScreenshot)
+		case subscriptionAvailability(SubscriptionAvailability)
 		case subscriptionGroup(SubscriptionGroup)
+		case subscriptionImage(SubscriptionImage)
 		case subscriptionIntroductoryOffer(SubscriptionIntroductoryOffer)
-		case subscriptionPromotionalOffer(SubscriptionPromotionalOffer)
+		case subscriptionLocalization(SubscriptionLocalization)
 		case subscriptionOfferCode(SubscriptionOfferCode)
 		case subscriptionPrice(SubscriptionPrice)
-		case promotedPurchase(PromotedPurchase)
-		case subscriptionAvailability(SubscriptionAvailability)
+		case subscriptionPromotionalOffer(SubscriptionPromotionalOffer)
 		case winBackOffer(WinBackOffer)
-		case subscriptionImage(SubscriptionImage)
 
 		public init(from decoder: Decoder) throws {
+
+			struct Discriminator: Decodable {
+				let type: String
+			}
+
 			let container = try decoder.singleValueContainer()
-			if let value = try? container.decode(SubscriptionLocalization.self) {
-				self = .subscriptionLocalization(value)
-			} else if let value = try? container.decode(SubscriptionAppStoreReviewScreenshot.self) {
-				self = .subscriptionAppStoreReviewScreenshot(value)
-			} else if let value = try? container.decode(SubscriptionGroup.self) {
-				self = .subscriptionGroup(value)
-			} else if let value = try? container.decode(SubscriptionIntroductoryOffer.self) {
-				self = .subscriptionIntroductoryOffer(value)
-			} else if let value = try? container.decode(SubscriptionPromotionalOffer.self) {
-				self = .subscriptionPromotionalOffer(value)
-			} else if let value = try? container.decode(SubscriptionOfferCode.self) {
-				self = .subscriptionOfferCode(value)
-			} else if let value = try? container.decode(SubscriptionPrice.self) {
-				self = .subscriptionPrice(value)
-			} else if let value = try? container.decode(PromotedPurchase.self) {
-				self = .promotedPurchase(value)
-			} else if let value = try? container.decode(SubscriptionAvailability.self) {
-				self = .subscriptionAvailability(value)
-			} else if let value = try? container.decode(WinBackOffer.self) {
-				self = .winBackOffer(value)
-			} else if let value = try? container.decode(SubscriptionImage.self) {
-				self = .subscriptionImage(value)
-			} else {
+			let discriminatorValue = try container.decode(Discriminator.self).type
+
+			switch discriminatorValue {
+			case "promotedPurchases": self = .promotedPurchase(try container.decode(PromotedPurchase.self))
+			case "subscriptionAppStoreReviewScreenshots": self = .subscriptionAppStoreReviewScreenshot(try container.decode(SubscriptionAppStoreReviewScreenshot.self))
+			case "subscriptionAvailabilities": self = .subscriptionAvailability(try container.decode(SubscriptionAvailability.self))
+			case "subscriptionGroups": self = .subscriptionGroup(try container.decode(SubscriptionGroup.self))
+			case "subscriptionImages": self = .subscriptionImage(try container.decode(SubscriptionImage.self))
+			case "subscriptionIntroductoryOffers": self = .subscriptionIntroductoryOffer(try container.decode(SubscriptionIntroductoryOffer.self))
+			case "subscriptionLocalizations": self = .subscriptionLocalization(try container.decode(SubscriptionLocalization.self))
+			case "subscriptionOfferCodes": self = .subscriptionOfferCode(try container.decode(SubscriptionOfferCode.self))
+			case "subscriptionPrices": self = .subscriptionPrice(try container.decode(SubscriptionPrice.self))
+			case "subscriptionPromotionalOffers": self = .subscriptionPromotionalOffer(try container.decode(SubscriptionPromotionalOffer.self))
+			case "winBackOffers": self = .winBackOffer(try container.decode(WinBackOffer.self))
+
+			default:
 				throw DecodingError.dataCorruptedError(
 					in: container,
-					debugDescription: "Data could not be decoded as any of the expected types (SubscriptionLocalization, SubscriptionAppStoreReviewScreenshot, SubscriptionGroup, SubscriptionIntroductoryOffer, SubscriptionPromotionalOffer, SubscriptionOfferCode, SubscriptionPrice, PromotedPurchase, SubscriptionAvailability, WinBackOffer, SubscriptionImage)."
+					debugDescription: "Discriminator value '\(discriminatorValue)' does not match any expected values (promotedPurchases, subscriptionAppStoreReviewScreenshots, subscriptionAvailabilities, subscriptionGroups, subscriptionImages, subscriptionIntroductoryOffers, subscriptionLocalizations, subscriptionOfferCodes, subscriptionPrices, subscriptionPromotionalOffers, winBackOffers)."
 				)
 			}
 		}
@@ -57,17 +55,17 @@ public struct SubscriptionResponse: Codable {
 		public func encode(to encoder: Encoder) throws {
 			var container = encoder.singleValueContainer()
 			switch self {
-			case .subscriptionLocalization(let value): try container.encode(value)
+			case .promotedPurchase(let value): try container.encode(value)
 			case .subscriptionAppStoreReviewScreenshot(let value): try container.encode(value)
+			case .subscriptionAvailability(let value): try container.encode(value)
 			case .subscriptionGroup(let value): try container.encode(value)
+			case .subscriptionImage(let value): try container.encode(value)
 			case .subscriptionIntroductoryOffer(let value): try container.encode(value)
-			case .subscriptionPromotionalOffer(let value): try container.encode(value)
+			case .subscriptionLocalization(let value): try container.encode(value)
 			case .subscriptionOfferCode(let value): try container.encode(value)
 			case .subscriptionPrice(let value): try container.encode(value)
-			case .promotedPurchase(let value): try container.encode(value)
-			case .subscriptionAvailability(let value): try container.encode(value)
+			case .subscriptionPromotionalOffer(let value): try container.encode(value)
 			case .winBackOffer(let value): try container.encode(value)
-			case .subscriptionImage(let value): try container.encode(value)
 			}
 		}
 	}

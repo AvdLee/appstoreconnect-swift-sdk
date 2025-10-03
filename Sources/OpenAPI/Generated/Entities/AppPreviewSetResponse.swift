@@ -10,25 +10,30 @@ public struct AppPreviewSetResponse: Codable {
 	public var links: DocumentLinks
 
 	public enum IncludedItem: Codable {
-		case appStoreVersionLocalization(AppStoreVersionLocalization)
 		case appCustomProductPageLocalization(AppCustomProductPageLocalization)
-		case appStoreVersionExperimentTreatmentLocalization(AppStoreVersionExperimentTreatmentLocalization)
 		case appPreview(AppPreview)
+		case appStoreVersionExperimentTreatmentLocalization(AppStoreVersionExperimentTreatmentLocalization)
+		case appStoreVersionLocalization(AppStoreVersionLocalization)
 
 		public init(from decoder: Decoder) throws {
+
+			struct Discriminator: Decodable {
+				let type: String
+			}
+
 			let container = try decoder.singleValueContainer()
-			if let value = try? container.decode(AppStoreVersionLocalization.self) {
-				self = .appStoreVersionLocalization(value)
-			} else if let value = try? container.decode(AppCustomProductPageLocalization.self) {
-				self = .appCustomProductPageLocalization(value)
-			} else if let value = try? container.decode(AppStoreVersionExperimentTreatmentLocalization.self) {
-				self = .appStoreVersionExperimentTreatmentLocalization(value)
-			} else if let value = try? container.decode(AppPreview.self) {
-				self = .appPreview(value)
-			} else {
+			let discriminatorValue = try container.decode(Discriminator.self).type
+
+			switch discriminatorValue {
+			case "appCustomProductPageLocalizations": self = .appCustomProductPageLocalization(try container.decode(AppCustomProductPageLocalization.self))
+			case "appPreviews": self = .appPreview(try container.decode(AppPreview.self))
+			case "appStoreVersionExperimentTreatmentLocalizations": self = .appStoreVersionExperimentTreatmentLocalization(try container.decode(AppStoreVersionExperimentTreatmentLocalization.self))
+			case "appStoreVersionLocalizations": self = .appStoreVersionLocalization(try container.decode(AppStoreVersionLocalization.self))
+
+			default:
 				throw DecodingError.dataCorruptedError(
 					in: container,
-					debugDescription: "Data could not be decoded as any of the expected types (AppStoreVersionLocalization, AppCustomProductPageLocalization, AppStoreVersionExperimentTreatmentLocalization, AppPreview)."
+					debugDescription: "Discriminator value '\(discriminatorValue)' does not match any expected values (appCustomProductPageLocalizations, appPreviews, appStoreVersionExperimentTreatmentLocalizations, appStoreVersionLocalizations)."
 				)
 			}
 		}
@@ -36,10 +41,10 @@ public struct AppPreviewSetResponse: Codable {
 		public func encode(to encoder: Encoder) throws {
 			var container = encoder.singleValueContainer()
 			switch self {
-			case .appStoreVersionLocalization(let value): try container.encode(value)
 			case .appCustomProductPageLocalization(let value): try container.encode(value)
-			case .appStoreVersionExperimentTreatmentLocalization(let value): try container.encode(value)
 			case .appPreview(let value): try container.encode(value)
+			case .appStoreVersionExperimentTreatmentLocalization(let value): try container.encode(value)
+			case .appStoreVersionLocalization(let value): try container.encode(value)
 			}
 		}
 	}

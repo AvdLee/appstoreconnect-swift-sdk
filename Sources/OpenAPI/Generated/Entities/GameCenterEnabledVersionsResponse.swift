@@ -11,19 +11,26 @@ public struct GameCenterEnabledVersionsResponse: Codable {
 	public var meta: PagingInformation?
 
 	public enum IncludedItem: Codable {
-		case gameCenterEnabledVersion(GameCenterEnabledVersion)
 		case app(App)
+		case gameCenterEnabledVersion(GameCenterEnabledVersion)
 
 		public init(from decoder: Decoder) throws {
+
+			struct Discriminator: Decodable {
+				let type: String
+			}
+
 			let container = try decoder.singleValueContainer()
-			if let value = try? container.decode(GameCenterEnabledVersion.self) {
-				self = .gameCenterEnabledVersion(value)
-			} else if let value = try? container.decode(App.self) {
-				self = .app(value)
-			} else {
+			let discriminatorValue = try container.decode(Discriminator.self).type
+
+			switch discriminatorValue {
+			case "apps": self = .app(try container.decode(App.self))
+			case "gameCenterEnabledVersions": self = .gameCenterEnabledVersion(try container.decode(GameCenterEnabledVersion.self))
+
+			default:
 				throw DecodingError.dataCorruptedError(
 					in: container,
-					debugDescription: "Data could not be decoded as any of the expected types (GameCenterEnabledVersion, App)."
+					debugDescription: "Discriminator value '\(discriminatorValue)' does not match any expected values (apps, gameCenterEnabledVersions)."
 				)
 			}
 		}
@@ -31,8 +38,8 @@ public struct GameCenterEnabledVersionsResponse: Codable {
 		public func encode(to encoder: Encoder) throws {
 			var container = encoder.singleValueContainer()
 			switch self {
-			case .gameCenterEnabledVersion(let value): try container.encode(value)
 			case .app(let value): try container.encode(value)
+			case .gameCenterEnabledVersion(let value): try container.encode(value)
 			}
 		}
 	}

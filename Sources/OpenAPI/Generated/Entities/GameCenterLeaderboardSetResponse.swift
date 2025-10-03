@@ -12,29 +12,32 @@ public struct GameCenterLeaderboardSetResponse: Codable {
 	public enum IncludedItem: Codable {
 		case gameCenterDetail(GameCenterDetail)
 		case gameCenterGroup(GameCenterGroup)
-		case gameCenterLeaderboardSet(GameCenterLeaderboardSet)
 		case gameCenterLeaderboardSetLocalization(GameCenterLeaderboardSetLocalization)
-		case gameCenterLeaderboard(GameCenterLeaderboard)
 		case gameCenterLeaderboardSetRelease(GameCenterLeaderboardSetRelease)
+		case gameCenterLeaderboardSet(GameCenterLeaderboardSet)
+		case gameCenterLeaderboard(GameCenterLeaderboard)
 
 		public init(from decoder: Decoder) throws {
+
+			struct Discriminator: Decodable {
+				let type: String
+			}
+
 			let container = try decoder.singleValueContainer()
-			if let value = try? container.decode(GameCenterDetail.self) {
-				self = .gameCenterDetail(value)
-			} else if let value = try? container.decode(GameCenterGroup.self) {
-				self = .gameCenterGroup(value)
-			} else if let value = try? container.decode(GameCenterLeaderboardSet.self) {
-				self = .gameCenterLeaderboardSet(value)
-			} else if let value = try? container.decode(GameCenterLeaderboardSetLocalization.self) {
-				self = .gameCenterLeaderboardSetLocalization(value)
-			} else if let value = try? container.decode(GameCenterLeaderboard.self) {
-				self = .gameCenterLeaderboard(value)
-			} else if let value = try? container.decode(GameCenterLeaderboardSetRelease.self) {
-				self = .gameCenterLeaderboardSetRelease(value)
-			} else {
+			let discriminatorValue = try container.decode(Discriminator.self).type
+
+			switch discriminatorValue {
+			case "gameCenterDetails": self = .gameCenterDetail(try container.decode(GameCenterDetail.self))
+			case "gameCenterGroups": self = .gameCenterGroup(try container.decode(GameCenterGroup.self))
+			case "gameCenterLeaderboardSetLocalizations": self = .gameCenterLeaderboardSetLocalization(try container.decode(GameCenterLeaderboardSetLocalization.self))
+			case "gameCenterLeaderboardSetReleases": self = .gameCenterLeaderboardSetRelease(try container.decode(GameCenterLeaderboardSetRelease.self))
+			case "gameCenterLeaderboardSets": self = .gameCenterLeaderboardSet(try container.decode(GameCenterLeaderboardSet.self))
+			case "gameCenterLeaderboards": self = .gameCenterLeaderboard(try container.decode(GameCenterLeaderboard.self))
+
+			default:
 				throw DecodingError.dataCorruptedError(
 					in: container,
-					debugDescription: "Data could not be decoded as any of the expected types (GameCenterDetail, GameCenterGroup, GameCenterLeaderboardSet, GameCenterLeaderboardSetLocalization, GameCenterLeaderboard, GameCenterLeaderboardSetRelease)."
+					debugDescription: "Discriminator value '\(discriminatorValue)' does not match any expected values (gameCenterDetails, gameCenterGroups, gameCenterLeaderboardSetLocalizations, gameCenterLeaderboardSetReleases, gameCenterLeaderboardSets, gameCenterLeaderboards)."
 				)
 			}
 		}
@@ -44,10 +47,10 @@ public struct GameCenterLeaderboardSetResponse: Codable {
 			switch self {
 			case .gameCenterDetail(let value): try container.encode(value)
 			case .gameCenterGroup(let value): try container.encode(value)
-			case .gameCenterLeaderboardSet(let value): try container.encode(value)
 			case .gameCenterLeaderboardSetLocalization(let value): try container.encode(value)
-			case .gameCenterLeaderboard(let value): try container.encode(value)
 			case .gameCenterLeaderboardSetRelease(let value): try container.encode(value)
+			case .gameCenterLeaderboardSet(let value): try container.encode(value)
+			case .gameCenterLeaderboard(let value): try container.encode(value)
 			}
 		}
 	}

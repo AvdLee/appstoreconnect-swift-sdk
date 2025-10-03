@@ -4,9 +4,28 @@
 import Foundation
 
 public enum AppStoreAgeRating: String, Codable, CaseIterable {
+	case l = "L"
+	case all = "ALL"
+	case onePlus = "ONE_PLUS"
+	case twoPlus = "TWO_PLUS"
+	case threePlus = "THREE_PLUS"
 	case fourPlus = "FOUR_PLUS"
+	case fivePlus = "FIVE_PLUS"
+	case sixPlus = "SIX_PLUS"
+	case sevenPlus = "SEVEN_PLUS"
+	case eightPlus = "EIGHT_PLUS"
 	case ninePlus = "NINE_PLUS"
+	case tenPlus = "TEN_PLUS"
+	case elevenPlus = "ELEVEN_PLUS"
 	case twelvePlus = "TWELVE_PLUS"
+	case thirteenPlus = "THIRTEEN_PLUS"
+	case fourteenPlus = "FOURTEEN_PLUS"
+	case fifteenPlus = "FIFTEEN_PLUS"
+	case sixteenPlus = "SIXTEEN_PLUS"
 	case seventeenPlus = "SEVENTEEN_PLUS"
+	case eighteenPlus = "EIGHTEEN_PLUS"
+	case nineteenPlus = "NINETEEN_PLUS"
+	case twentyPlus = "TWENTY_PLUS"
+	case twentyOnePlus = "TWENTY_ONE_PLUS"
 	case unrated = "UNRATED"
 }

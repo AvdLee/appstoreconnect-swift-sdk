@@ -10,19 +10,26 @@ public struct GameCenterAchievementLocalizationsResponse: Codable {
 	public var meta: PagingInformation?
 
 	public enum IncludedItem: Codable {
-		case gameCenterAchievement(GameCenterAchievement)
 		case gameCenterAchievementImage(GameCenterAchievementImage)
+		case gameCenterAchievement(GameCenterAchievement)
 
 		public init(from decoder: Decoder) throws {
+
+			struct Discriminator: Decodable {
+				let type: String
+			}
+
 			let container = try decoder.singleValueContainer()
-			if let value = try? container.decode(GameCenterAchievement.self) {
-				self = .gameCenterAchievement(value)
-			} else if let value = try? container.decode(GameCenterAchievementImage.self) {
-				self = .gameCenterAchievementImage(value)
-			} else {
+			let discriminatorValue = try container.decode(Discriminator.self).type
+
+			switch discriminatorValue {
+			case "gameCenterAchievementImages": self = .gameCenterAchievementImage(try container.decode(GameCenterAchievementImage.self))
+			case "gameCenterAchievements": self = .gameCenterAchievement(try container.decode(GameCenterAchievement.self))
+
+			default:
 				throw DecodingError.dataCorruptedError(
 					in: container,
-					debugDescription: "Data could not be decoded as any of the expected types (GameCenterAchievement, GameCenterAchievementImage)."
+					debugDescription: "Discriminator value '\(discriminatorValue)' does not match any expected values (gameCenterAchievementImages, gameCenterAchievements)."
 				)
 			}
 		}
@@ -30,8 +37,8 @@ public struct GameCenterAchievementLocalizationsResponse: Codable {
 		public func encode(to encoder: Encoder) throws {
 			var container = encoder.singleValueContainer()
 			switch self {
-			case .gameCenterAchievement(let value): try container.encode(value)
 			case .gameCenterAchievementImage(let value): try container.encode(value)
+			case .gameCenterAchievement(let value): try container.encode(value)
 			}
 		}
 	}
