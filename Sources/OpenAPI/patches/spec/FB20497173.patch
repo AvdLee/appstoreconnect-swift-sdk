@@ -1,0 +1,12 @@
+diff --git a/Sources/OpenAPI/app_store_connect_api.json b/Sources/OpenAPI/app_store_connect_api.json
+index ebae109..64badd8 100644
+--- a/Sources/OpenAPI/app_store_connect_api.json
++++ b/Sources/OpenAPI/app_store_connect_api.json
+@@ -206899,7 +206899,6 @@
+               },
+               "required": [
+                 "code",
+-                "detail",
+                 "status",
+                 "title"
+               ]
