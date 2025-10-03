@@ -37,6 +37,7 @@ public struct AgeRatingDeclaration: Codable, Identifiable {
 		public var violenceCartoonOrFantasy: ViolenceCartoonOrFantasy?
 		public var violenceRealisticProlongedGraphicOrSadistic: ViolenceRealisticProlongedGraphicOrSadistic?
 		public var violenceRealistic: ViolenceRealistic?
+		/// - warning: Deprecated.
 		public var ageRatingOverride: AgeRatingOverride?
 		public var ageRatingOverrideV2: AgeRatingOverrideV2?
 		public var koreaAgeRatingOverride: KoreaAgeRatingOverride?
@@ -146,8 +147,12 @@ public struct AgeRatingDeclaration: Codable, Identifiable {
 			case frequent = "FREQUENT"
 		}
 
+		@available(*, deprecated, message: "Deprecated")
 		public enum AgeRatingOverride: String, Codable, CaseIterable {
 			case `none` = "NONE"
+			case ninePlus = "NINE_PLUS"
+			case thirteenPlus = "THIRTEEN_PLUS"
+			case sixteenPlus = "SIXTEEN_PLUS"
 			case seventeenPlus = "SEVENTEEN_PLUS"
 			case unrated = "UNRATED"
 		}

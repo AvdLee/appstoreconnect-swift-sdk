@@ -19,7 +19,7 @@ public struct AppEventUpdateRequest: Codable {
 			public var referenceName: String?
 			public var badge: Badge?
 			public var deepLink: URL?
-			public var purchaseRequirement: String?
+			public var purchaseRequirement: PurchaseRequirement?
 			public var primaryLocale: String?
 			public var priority: Priority?
 			public var purpose: Purpose?
@@ -33,6 +33,11 @@ public struct AppEventUpdateRequest: Codable {
 				case newSeason = "NEW_SEASON"
 				case majorUpdate = "MAJOR_UPDATE"
 				case specialEvent = "SPECIAL_EVENT"
+			}
+
+			public enum PurchaseRequirement: String, Codable, CaseIterable {
+				case noCostAssociated = "NO_COST_ASSOCIATED"
+				case inAppPurchase = "IN_APP_PURCHASE"
 			}
 
 			public enum Priority: String, Codable, CaseIterable {
@@ -77,7 +82,7 @@ public struct AppEventUpdateRequest: Codable {
 				}
 			}
 
-			public init(referenceName: String? = nil, badge: Badge? = nil, deepLink: URL? = nil, purchaseRequirement: String? = nil, primaryLocale: String? = nil, priority: Priority? = nil, purpose: Purpose? = nil, territorySchedules: [TerritorySchedule]? = nil) {
+			public init(referenceName: String? = nil, badge: Badge? = nil, deepLink: URL? = nil, purchaseRequirement: PurchaseRequirement? = nil, primaryLocale: String? = nil, priority: Priority? = nil, purpose: Purpose? = nil, territorySchedules: [TerritorySchedule]? = nil) {
 				self.referenceName = referenceName
 				self.badge = badge
 				self.deepLink = deepLink
@@ -93,7 +98,7 @@ public struct AppEventUpdateRequest: Codable {
 				self.referenceName = try values.decodeIfPresent(String.self, forKey: "referenceName")
 				self.badge = try values.decodeIfPresent(Badge.self, forKey: "badge")
 				self.deepLink = try values.decodeIfPresent(URL.self, forKey: "deepLink")
-				self.purchaseRequirement = try values.decodeIfPresent(String.self, forKey: "purchaseRequirement")
+				self.purchaseRequirement = try values.decodeIfPresent(PurchaseRequirement.self, forKey: "purchaseRequirement")
 				self.primaryLocale = try values.decodeIfPresent(String.self, forKey: "primaryLocale")
 				self.priority = try values.decodeIfPresent(Priority.self, forKey: "priority")
 				self.purpose = try values.decodeIfPresent(Purpose.self, forKey: "purpose")
