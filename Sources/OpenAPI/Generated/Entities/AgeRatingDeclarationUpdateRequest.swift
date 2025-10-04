@@ -244,7 +244,7 @@ public struct AgeRatingDeclarationUpdateRequest: Codable {
 				try values.encodeIfPresent(gamblingSimulated, forKey: "gamblingSimulated")
 				try values.encodeIfPresent(gunsOrOtherWeapons, forKey: "gunsOrOtherWeapons")
 				try values.encodeIfPresent(isHealthOrWellnessTopics, forKey: "healthOrWellnessTopics")
-				try values.encodeIfPresent(kidsAgeBand, forKey: "kidsAgeBand")
+				try values.encode(kidsAgeBand, forKey: "kidsAgeBand")
 				try values.encodeIfPresent(isLootBox, forKey: "lootBox")
 				try values.encodeIfPresent(medicalOrTreatmentInformation, forKey: "medicalOrTreatmentInformation")
 				try values.encodeIfPresent(isMessagingAndChat, forKey: "messagingAndChat")
