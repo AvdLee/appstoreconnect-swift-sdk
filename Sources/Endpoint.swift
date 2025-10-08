@@ -78,12 +78,18 @@ extension Request {
         let url = try makeURL(path: path, query: query)
         var urlRequest = URLRequest(url: url)
         urlRequest.httpMethod = method
-
-        if let body = body {
+        
+        if let headers {
+            headers.forEach { key, value in
+                urlRequest.addValue(value, forHTTPHeaderField: key)
+            }
+        }
+        
+        if let body {
             urlRequest.httpBody = try encoder.encode(body)
             urlRequest.setValue("application/json", forHTTPHeaderField: "Content-Type")
         }
-
+        
         return urlRequest
     }
 }
