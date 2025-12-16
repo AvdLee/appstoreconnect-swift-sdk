@@ -31,10 +31,12 @@ extension APIEndpoint.V1.Apps.WithID {
 			public var fieldsInAppPurchasePriceSchedules: [FieldsInAppPurchasePriceSchedules]?
 			public var fieldsInAppPurchaseAvailabilities: [FieldsInAppPurchaseAvailabilities]?
 			public var fieldsInAppPurchaseImages: [FieldsInAppPurchaseImages]?
+			public var fieldsInAppPurchaseOfferCodes: [FieldsInAppPurchaseOfferCodes]?
 			public var limit: Int?
 			public var include: [Include]?
 			public var limitInAppPurchaseLocalizations: Int?
 			public var limitImages: Int?
+			public var limitOfferCodes: Int?
 
 			public enum FilterState: String, Codable, CaseIterable {
 				case missingMetadata = "MISSING_METADATA"
@@ -80,6 +82,7 @@ extension APIEndpoint.V1.Apps.WithID {
 				case iapPriceSchedule
 				case inAppPurchaseAvailability
 				case images
+				case offerCodes
 			}
 
 			public enum FieldsInAppPurchaseLocalizations: String, Codable, CaseIterable {
@@ -140,6 +143,17 @@ extension APIEndpoint.V1.Apps.WithID {
 				case inAppPurchase
 			}
 
+			public enum FieldsInAppPurchaseOfferCodes: String, Codable, CaseIterable {
+				case name
+				case customerEligibilities
+				case productionCodeCount
+				case sandboxCodeCount
+				case active
+				case oneTimeUseCodes
+				case customCodes
+				case prices
+			}
+
 			public enum Include: String, Codable, CaseIterable {
 				case inAppPurchaseLocalizations
 				case content
@@ -148,9 +162,10 @@ extension APIEndpoint.V1.Apps.WithID {
 				case iapPriceSchedule
 				case inAppPurchaseAvailability
 				case images
+				case offerCodes
 			}
 
-			public init(filterProductID: [String]? = nil, filterName: [String]? = nil, filterState: [FilterState]? = nil, filterInAppPurchaseType: [FilterInAppPurchaseType]? = nil, sort: [Sort]? = nil, fieldsInAppPurchases: [FieldsInAppPurchases]? = nil, fieldsInAppPurchaseLocalizations: [FieldsInAppPurchaseLocalizations]? = nil, fieldsInAppPurchaseContents: [FieldsInAppPurchaseContents]? = nil, fieldsInAppPurchaseAppStoreReviewScreenshots: [FieldsInAppPurchaseAppStoreReviewScreenshots]? = nil, fieldsPromotedPurchases: [FieldsPromotedPurchases]? = nil, fieldsInAppPurchasePriceSchedules: [FieldsInAppPurchasePriceSchedules]? = nil, fieldsInAppPurchaseAvailabilities: [FieldsInAppPurchaseAvailabilities]? = nil, fieldsInAppPurchaseImages: [FieldsInAppPurchaseImages]? = nil, limit: Int? = nil, include: [Include]? = nil, limitInAppPurchaseLocalizations: Int? = nil, limitImages: Int? = nil) {
+			public init(filterProductID: [String]? = nil, filterName: [String]? = nil, filterState: [FilterState]? = nil, filterInAppPurchaseType: [FilterInAppPurchaseType]? = nil, sort: [Sort]? = nil, fieldsInAppPurchases: [FieldsInAppPurchases]? = nil, fieldsInAppPurchaseLocalizations: [FieldsInAppPurchaseLocalizations]? = nil, fieldsInAppPurchaseContents: [FieldsInAppPurchaseContents]? = nil, fieldsInAppPurchaseAppStoreReviewScreenshots: [FieldsInAppPurchaseAppStoreReviewScreenshots]? = nil, fieldsPromotedPurchases: [FieldsPromotedPurchases]? = nil, fieldsInAppPurchasePriceSchedules: [FieldsInAppPurchasePriceSchedules]? = nil, fieldsInAppPurchaseAvailabilities: [FieldsInAppPurchaseAvailabilities]? = nil, fieldsInAppPurchaseImages: [FieldsInAppPurchaseImages]? = nil, fieldsInAppPurchaseOfferCodes: [FieldsInAppPurchaseOfferCodes]? = nil, limit: Int? = nil, include: [Include]? = nil, limitInAppPurchaseLocalizations: Int? = nil, limitImages: Int? = nil, limitOfferCodes: Int? = nil) {
 				self.filterProductID = filterProductID
 				self.filterName = filterName
 				self.filterState = filterState
@@ -164,10 +179,12 @@ extension APIEndpoint.V1.Apps.WithID {
 				self.fieldsInAppPurchasePriceSchedules = fieldsInAppPurchasePriceSchedules
 				self.fieldsInAppPurchaseAvailabilities = fieldsInAppPurchaseAvailabilities
 				self.fieldsInAppPurchaseImages = fieldsInAppPurchaseImages
+				self.fieldsInAppPurchaseOfferCodes = fieldsInAppPurchaseOfferCodes
 				self.limit = limit
 				self.include = include
 				self.limitInAppPurchaseLocalizations = limitInAppPurchaseLocalizations
 				self.limitImages = limitImages
+				self.limitOfferCodes = limitOfferCodes
 			}
 
 			public var asQuery: [(String, String?)] {
@@ -185,10 +202,12 @@ extension APIEndpoint.V1.Apps.WithID {
 				encoder.encode(fieldsInAppPurchasePriceSchedules, forKey: "fields[inAppPurchasePriceSchedules]")
 				encoder.encode(fieldsInAppPurchaseAvailabilities, forKey: "fields[inAppPurchaseAvailabilities]")
 				encoder.encode(fieldsInAppPurchaseImages, forKey: "fields[inAppPurchaseImages]")
+				encoder.encode(fieldsInAppPurchaseOfferCodes, forKey: "fields[inAppPurchaseOfferCodes]")
 				encoder.encode(limit, forKey: "limit")
 				encoder.encode(include, forKey: "include")
 				encoder.encode(limitInAppPurchaseLocalizations, forKey: "limit[inAppPurchaseLocalizations]")
 				encoder.encode(limitImages, forKey: "limit[images]")
+				encoder.encode(limitOfferCodes, forKey: "limit[offerCodes]")
 				return encoder.items
 			}
 		}

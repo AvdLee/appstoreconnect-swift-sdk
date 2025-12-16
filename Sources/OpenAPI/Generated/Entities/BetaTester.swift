@@ -20,13 +20,53 @@ public struct BetaTester: Codable, Identifiable {
 		public var email: String?
 		public var inviteType: BetaInviteType?
 		public var state: BetaTesterState?
+		public var appDevices: [AppDevice]?
 
-		public init(firstName: String? = nil, lastName: String? = nil, email: String? = nil, inviteType: BetaInviteType? = nil, state: BetaTesterState? = nil) {
+		public struct AppDevice: Codable {
+			public var model: String?
+			public var platform: Platform?
+			public var osVersion: String?
+			public var appBuildVersion: String?
+
+			public enum Platform: String, Codable, CaseIterable {
+				case ios = "IOS"
+				case macOs = "MAC_OS"
+				case tvOs = "TV_OS"
+				case watchOs = "WATCH_OS"
+				case visionOs = "VISION_OS"
+			}
+
+			public init(model: String? = nil, platform: Platform? = nil, osVersion: String? = nil, appBuildVersion: String? = nil) {
+				self.model = model
+				self.platform = platform
+				self.osVersion = osVersion
+				self.appBuildVersion = appBuildVersion
+			}
+
+			public init(from decoder: Decoder) throws {
+				let values = try decoder.container(keyedBy: StringCodingKey.self)
+				self.model = try values.decodeIfPresent(String.self, forKey: "model")
+				self.platform = try values.decodeIfPresent(Platform.self, forKey: "platform")
+				self.osVersion = try values.decodeIfPresent(String.self, forKey: "osVersion")
+				self.appBuildVersion = try values.decodeIfPresent(String.self, forKey: "appBuildVersion")
+			}
+
+			public func encode(to encoder: Encoder) throws {
+				var values = encoder.container(keyedBy: StringCodingKey.self)
+				try values.encodeIfPresent(model, forKey: "model")
+				try values.encodeIfPresent(platform, forKey: "platform")
+				try values.encodeIfPresent(osVersion, forKey: "osVersion")
+				try values.encodeIfPresent(appBuildVersion, forKey: "appBuildVersion")
+			}
+		}
+
+		public init(firstName: String? = nil, lastName: String? = nil, email: String? = nil, inviteType: BetaInviteType? = nil, state: BetaTesterState? = nil, appDevices: [AppDevice]? = nil) {
 			self.firstName = firstName
 			self.lastName = lastName
 			self.email = email
 			self.inviteType = inviteType
 			self.state = state
+			self.appDevices = appDevices
 		}
 
 		public init(from decoder: Decoder) throws {
@@ -36,6 +76,7 @@ public struct BetaTester: Codable, Identifiable {
 			self.email = try values.decodeIfPresent(String.self, forKey: "email")
 			self.inviteType = try values.decodeIfPresent(BetaInviteType.self, forKey: "inviteType")
 			self.state = try values.decodeIfPresent(BetaTesterState.self, forKey: "state")
+			self.appDevices = try values.decodeIfPresent([AppDevice].self, forKey: "appDevices")
 		}
 
 		public func encode(to encoder: Encoder) throws {
@@ -45,6 +86,7 @@ public struct BetaTester: Codable, Identifiable {
 			try values.encodeIfPresent(email, forKey: "email")
 			try values.encodeIfPresent(inviteType, forKey: "inviteType")
 			try values.encodeIfPresent(state, forKey: "state")
+			try values.encodeIfPresent(appDevices, forKey: "appDevices")
 		}
 	}
 

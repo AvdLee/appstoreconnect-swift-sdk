@@ -22,9 +22,12 @@ public struct SubscriptionOfferCode: Codable, Identifiable {
 		public var offerMode: SubscriptionOfferMode?
 		public var numberOfPeriods: Int?
 		public var totalNumberOfCodes: Int?
+		public var productionCodeCount: Int?
+		public var sandboxCodeCount: Int?
 		public var isActive: Bool?
+		public var isAutoRenewEnabled: Bool?
 
-		public init(name: String? = nil, customerEligibilities: [SubscriptionCustomerEligibility]? = nil, offerEligibility: SubscriptionOfferEligibility? = nil, duration: SubscriptionOfferDuration? = nil, offerMode: SubscriptionOfferMode? = nil, numberOfPeriods: Int? = nil, totalNumberOfCodes: Int? = nil, isActive: Bool? = nil) {
+		public init(name: String? = nil, customerEligibilities: [SubscriptionCustomerEligibility]? = nil, offerEligibility: SubscriptionOfferEligibility? = nil, duration: SubscriptionOfferDuration? = nil, offerMode: SubscriptionOfferMode? = nil, numberOfPeriods: Int? = nil, totalNumberOfCodes: Int? = nil, productionCodeCount: Int? = nil, sandboxCodeCount: Int? = nil, isActive: Bool? = nil, isAutoRenewEnabled: Bool? = nil) {
 			self.name = name
 			self.customerEligibilities = customerEligibilities
 			self.offerEligibility = offerEligibility
@@ -32,7 +35,10 @@ public struct SubscriptionOfferCode: Codable, Identifiable {
 			self.offerMode = offerMode
 			self.numberOfPeriods = numberOfPeriods
 			self.totalNumberOfCodes = totalNumberOfCodes
+			self.productionCodeCount = productionCodeCount
+			self.sandboxCodeCount = sandboxCodeCount
 			self.isActive = isActive
+			self.isAutoRenewEnabled = isAutoRenewEnabled
 		}
 
 		public init(from decoder: Decoder) throws {
@@ -44,7 +50,10 @@ public struct SubscriptionOfferCode: Codable, Identifiable {
 			self.offerMode = try values.decodeIfPresent(SubscriptionOfferMode.self, forKey: "offerMode")
 			self.numberOfPeriods = try values.decodeIfPresent(Int.self, forKey: "numberOfPeriods")
 			self.totalNumberOfCodes = try values.decodeIfPresent(Int.self, forKey: "totalNumberOfCodes")
+			self.productionCodeCount = try values.decodeIfPresent(Int.self, forKey: "productionCodeCount")
+			self.sandboxCodeCount = try values.decodeIfPresent(Int.self, forKey: "sandboxCodeCount")
 			self.isActive = try values.decodeIfPresent(Bool.self, forKey: "active")
+			self.isAutoRenewEnabled = try values.decodeIfPresent(Bool.self, forKey: "autoRenewEnabled")
 		}
 
 		public func encode(to encoder: Encoder) throws {
@@ -56,7 +65,10 @@ public struct SubscriptionOfferCode: Codable, Identifiable {
 			try values.encodeIfPresent(offerMode, forKey: "offerMode")
 			try values.encodeIfPresent(numberOfPeriods, forKey: "numberOfPeriods")
 			try values.encodeIfPresent(totalNumberOfCodes, forKey: "totalNumberOfCodes")
+			try values.encodeIfPresent(productionCodeCount, forKey: "productionCodeCount")
+			try values.encodeIfPresent(sandboxCodeCount, forKey: "sandboxCodeCount")
 			try values.encodeIfPresent(isActive, forKey: "active")
+			try values.encodeIfPresent(isAutoRenewEnabled, forKey: "autoRenewEnabled")
 		}
 	}
 
