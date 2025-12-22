@@ -122,7 +122,7 @@ public enum OpenAPIGeneratorCore {
 
     private static func download(url: URL, to fileURL: URL, timeoutSeconds: TimeInterval) async throws {
         let request = URLRequest(url: url, cachePolicy: .reloadIgnoringLocalCacheData, timeoutInterval: timeoutSeconds)
-        let (data, response) = try await URLSession.shared.data(for: .init(url: url))
+        let (data, response) = try await URLSession.shared.data(for: request)
         guard let http = response as? HTTPURLResponse, (200..<300).contains(http.statusCode) else {
             throw OpenAPIGeneratorCoreError.downloadFailed("Unexpected response for \(url.absoluteString)")
         }

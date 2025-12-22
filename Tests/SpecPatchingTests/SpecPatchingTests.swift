@@ -1,3 +1,4 @@
+#if os(macOS)
 import XCTest
 @testable import OpenAPIGeneratorCore
 
@@ -64,5 +65,6 @@ final class SpecPatchingTests: XCTestCase {
         XCTAssertEqual(items?["$ref"] as? String, "#/components/schemas/ResponseError")
     }
 }
+#endif
 
 

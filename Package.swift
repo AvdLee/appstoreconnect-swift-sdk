@@ -33,7 +33,10 @@ let package = Package(
     targets: [
         .testTarget(
             name: "AppStoreConnect-Swift-SDK-Tests",
-            dependencies: ["AppStoreConnect-Swift-SDK", "OpenAPIGeneratorCore"],
+            dependencies: [
+                "AppStoreConnect-Swift-SDK",
+                .target(name: "OpenAPIGeneratorCore", condition: .when(platforms: [.macOS])),
+            ],
             path: "Tests"
         ),
         .target(

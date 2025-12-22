@@ -1,3 +1,4 @@
+#if os(macOS)
 import Foundation
 import XCTest
 @testable import OpenAPIGeneratorCore
@@ -42,6 +43,7 @@ final class GeneratedPatchingTests: XCTestCase {
         XCTAssertTrue(out.contains(#"decodeIfPresent(String.self, forKey: "avatarUrl")"#))
     }
 }
+#endif
 
 
 
