@@ -4,67 +4,67 @@
 import Foundation
 
 public struct DiagnosticLogCallStackNode: Codable {
-	public var binaryUUID: String?
-	public var subFrames: [DiagnosticLogCallStackNode]?
-	public var offsetIntoBinaryTextSegment: String?
-	public var address: String?
-	public var sampleCount: Int?
 	public var isBlameFrame: Bool?
-	public var symbolName: String?
 	public var fileName: String?
-	public var offsetIntoSymbol: String?
-	public var lineNumber: String?
 	public var binaryName: String?
-	public var rawFrame: String?
+	public var subFrames: [DiagnosticLogCallStackNode]?
+	public var sampleCount: Int?
+	public var symbolName: String?
+	public var lineNumber: String?
+	public var address: String?
+	public var offsetIntoSymbol: String?
 	public var insightsCategory: String?
+	public var rawFrame: String?
+	public var binaryUUID: String?
+	public var offsetIntoBinaryTextSegment: String?
 
-	public init(binaryUUID: String? = nil, subFrames: [DiagnosticLogCallStackNode]? = nil, offsetIntoBinaryTextSegment: String? = nil, address: String? = nil, sampleCount: Int? = nil, isBlameFrame: Bool? = nil, symbolName: String? = nil, fileName: String? = nil, offsetIntoSymbol: String? = nil, lineNumber: String? = nil, binaryName: String? = nil, rawFrame: String? = nil, insightsCategory: String? = nil) {
-		self.binaryUUID = binaryUUID
-		self.subFrames = subFrames
-		self.offsetIntoBinaryTextSegment = offsetIntoBinaryTextSegment
-		self.address = address
-		self.sampleCount = sampleCount
+	public init(isBlameFrame: Bool? = nil, fileName: String? = nil, binaryName: String? = nil, subFrames: [DiagnosticLogCallStackNode]? = nil, sampleCount: Int? = nil, symbolName: String? = nil, lineNumber: String? = nil, address: String? = nil, offsetIntoSymbol: String? = nil, insightsCategory: String? = nil, rawFrame: String? = nil, binaryUUID: String? = nil, offsetIntoBinaryTextSegment: String? = nil) {
 		self.isBlameFrame = isBlameFrame
-		self.symbolName = symbolName
 		self.fileName = fileName
-		self.offsetIntoSymbol = offsetIntoSymbol
-		self.lineNumber = lineNumber
 		self.binaryName = binaryName
-		self.rawFrame = rawFrame
+		self.subFrames = subFrames
+		self.sampleCount = sampleCount
+		self.symbolName = symbolName
+		self.lineNumber = lineNumber
+		self.address = address
+		self.offsetIntoSymbol = offsetIntoSymbol
 		self.insightsCategory = insightsCategory
+		self.rawFrame = rawFrame
+		self.binaryUUID = binaryUUID
+		self.offsetIntoBinaryTextSegment = offsetIntoBinaryTextSegment
 	}
 
 	public init(from decoder: Decoder) throws {
 		let values = try decoder.container(keyedBy: StringCodingKey.self)
-		self.binaryUUID = try values.decodeIfPresent(String.self, forKey: "binaryUUID")
-		self.subFrames = try values.decodeIfPresent([DiagnosticLogCallStackNode].self, forKey: "subFrames")
-		self.offsetIntoBinaryTextSegment = try values.decodeIfPresent(String.self, forKey: "offsetIntoBinaryTextSegment")
-		self.address = try values.decodeIfPresent(String.self, forKey: "address")
-		self.sampleCount = try values.decodeIfPresent(Int.self, forKey: "sampleCount")
 		self.isBlameFrame = try values.decodeIfPresent(Bool.self, forKey: "isBlameFrame")
-		self.symbolName = try values.decodeIfPresent(String.self, forKey: "symbolName")
 		self.fileName = try values.decodeIfPresent(String.self, forKey: "fileName")
-		self.offsetIntoSymbol = try values.decodeIfPresent(String.self, forKey: "offsetIntoSymbol")
-		self.lineNumber = try values.decodeIfPresent(String.self, forKey: "lineNumber")
 		self.binaryName = try values.decodeIfPresent(String.self, forKey: "binaryName")
-		self.rawFrame = try values.decodeIfPresent(String.self, forKey: "rawFrame")
+		self.subFrames = try values.decodeIfPresent([DiagnosticLogCallStackNode].self, forKey: "subFrames")
+		self.sampleCount = try values.decodeIfPresent(Int.self, forKey: "sampleCount")
+		self.symbolName = try values.decodeIfPresent(String.self, forKey: "symbolName")
+		self.lineNumber = try values.decodeIfPresent(String.self, forKey: "lineNumber")
+		self.address = try values.decodeIfPresent(String.self, forKey: "address")
+		self.offsetIntoSymbol = try values.decodeIfPresent(String.self, forKey: "offsetIntoSymbol")
 		self.insightsCategory = try values.decodeIfPresent(String.self, forKey: "insightsCategory")
+		self.rawFrame = try values.decodeIfPresent(String.self, forKey: "rawFrame")
+		self.binaryUUID = try values.decodeIfPresent(String.self, forKey: "binaryUUID")
+		self.offsetIntoBinaryTextSegment = try values.decodeIfPresent(String.self, forKey: "offsetIntoBinaryTextSegment")
 	}
 
 	public func encode(to encoder: Encoder) throws {
 		var values = encoder.container(keyedBy: StringCodingKey.self)
-		try values.encodeIfPresent(binaryUUID, forKey: "binaryUUID")
-		try values.encodeIfPresent(subFrames, forKey: "subFrames")
-		try values.encodeIfPresent(offsetIntoBinaryTextSegment, forKey: "offsetIntoBinaryTextSegment")
-		try values.encodeIfPresent(address, forKey: "address")
-		try values.encodeIfPresent(sampleCount, forKey: "sampleCount")
 		try values.encodeIfPresent(isBlameFrame, forKey: "isBlameFrame")
-		try values.encodeIfPresent(symbolName, forKey: "symbolName")
 		try values.encodeIfPresent(fileName, forKey: "fileName")
-		try values.encodeIfPresent(offsetIntoSymbol, forKey: "offsetIntoSymbol")
-		try values.encodeIfPresent(lineNumber, forKey: "lineNumber")
 		try values.encodeIfPresent(binaryName, forKey: "binaryName")
-		try values.encodeIfPresent(rawFrame, forKey: "rawFrame")
+		try values.encodeIfPresent(subFrames, forKey: "subFrames")
+		try values.encodeIfPresent(sampleCount, forKey: "sampleCount")
+		try values.encodeIfPresent(symbolName, forKey: "symbolName")
+		try values.encodeIfPresent(lineNumber, forKey: "lineNumber")
+		try values.encodeIfPresent(address, forKey: "address")
+		try values.encodeIfPresent(offsetIntoSymbol, forKey: "offsetIntoSymbol")
 		try values.encodeIfPresent(insightsCategory, forKey: "insightsCategory")
+		try values.encodeIfPresent(rawFrame, forKey: "rawFrame")
+		try values.encodeIfPresent(binaryUUID, forKey: "binaryUUID")
+		try values.encodeIfPresent(offsetIntoBinaryTextSegment, forKey: "offsetIntoBinaryTextSegment")
 	}
 }

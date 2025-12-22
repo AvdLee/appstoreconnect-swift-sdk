@@ -7,58 +7,58 @@ public struct GameCenterAchievementLocalizationV2UpdateRequest: Codable {
 	public var data: Data
 
 	public struct Data: Codable, Identifiable {
-		public var attributes: Attributes?
 		public var type: `Type`
 		public var id: String
-
-		public struct Attributes: Codable {
-			public var name: String?
-			public var afterEarnedDescription: String?
-			public var beforeEarnedDescription: String?
-
-			public init(name: String? = nil, afterEarnedDescription: String? = nil, beforeEarnedDescription: String? = nil) {
-				self.name = name
-				self.afterEarnedDescription = afterEarnedDescription
-				self.beforeEarnedDescription = beforeEarnedDescription
-			}
-
-			public init(from decoder: Decoder) throws {
-				let values = try decoder.container(keyedBy: StringCodingKey.self)
-				self.name = try values.decodeIfPresent(String.self, forKey: "name")
-				self.afterEarnedDescription = try values.decodeIfPresent(String.self, forKey: "afterEarnedDescription")
-				self.beforeEarnedDescription = try values.decodeIfPresent(String.self, forKey: "beforeEarnedDescription")
-			}
-
-			public func encode(to encoder: Encoder) throws {
-				var values = encoder.container(keyedBy: StringCodingKey.self)
-				try values.encodeIfPresent(name, forKey: "name")
-				try values.encodeIfPresent(afterEarnedDescription, forKey: "afterEarnedDescription")
-				try values.encodeIfPresent(beforeEarnedDescription, forKey: "beforeEarnedDescription")
-			}
-		}
+		public var attributes: Attributes?
 
 		public enum `Type`: String, Codable, CaseIterable {
 			case gameCenterAchievementLocalizations
 		}
 
-		public init(attributes: Attributes? = nil, type: `Type`, id: String) {
-			self.attributes = attributes
+		public struct Attributes: Codable {
+			public var name: String?
+			public var beforeEarnedDescription: String?
+			public var afterEarnedDescription: String?
+
+			public init(name: String? = nil, beforeEarnedDescription: String? = nil, afterEarnedDescription: String? = nil) {
+				self.name = name
+				self.beforeEarnedDescription = beforeEarnedDescription
+				self.afterEarnedDescription = afterEarnedDescription
+			}
+
+			public init(from decoder: Decoder) throws {
+				let values = try decoder.container(keyedBy: StringCodingKey.self)
+				self.name = try values.decodeIfPresent(String.self, forKey: "name")
+				self.beforeEarnedDescription = try values.decodeIfPresent(String.self, forKey: "beforeEarnedDescription")
+				self.afterEarnedDescription = try values.decodeIfPresent(String.self, forKey: "afterEarnedDescription")
+			}
+
+			public func encode(to encoder: Encoder) throws {
+				var values = encoder.container(keyedBy: StringCodingKey.self)
+				try values.encodeIfPresent(name, forKey: "name")
+				try values.encodeIfPresent(beforeEarnedDescription, forKey: "beforeEarnedDescription")
+				try values.encodeIfPresent(afterEarnedDescription, forKey: "afterEarnedDescription")
+			}
+		}
+
+		public init(type: `Type`, id: String, attributes: Attributes? = nil) {
 			self.type = type
 			self.id = id
+			self.attributes = attributes
 		}
 
 		public init(from decoder: Decoder) throws {
 			let values = try decoder.container(keyedBy: StringCodingKey.self)
-			self.attributes = try values.decodeIfPresent(Attributes.self, forKey: "attributes")
 			self.type = try values.decode(`Type`.self, forKey: "type")
 			self.id = try values.decode(String.self, forKey: "id")
+			self.attributes = try values.decodeIfPresent(Attributes.self, forKey: "attributes")
 		}
 
 		public func encode(to encoder: Encoder) throws {
 			var values = encoder.container(keyedBy: StringCodingKey.self)
-			try values.encodeIfPresent(attributes, forKey: "attributes")
 			try values.encode(type, forKey: "type")
 			try values.encode(id, forKey: "id")
+			try values.encodeIfPresent(attributes, forKey: "attributes")
 		}
 	}
 

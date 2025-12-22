@@ -11,8 +11,60 @@ public struct GameCenterLeaderboardSetVersionV2: Codable, Identifiable {
 	public var attributes: Attributes?
 
 	public struct Relationships: Codable {
-		public var leaderboardSet: LeaderboardSet?
 		public var localizations: Localizations?
+		public var leaderboardSet: LeaderboardSet?
+
+		public struct Localizations: Codable {
+			public var links: RelationshipLinks?
+			public var meta: PagingInformation?
+			public var data: [Datum]?
+
+			public struct Datum: Codable, Identifiable {
+				public var type: `Type`
+				public var id: String
+
+				public enum `Type`: String, Codable, CaseIterable {
+					case gameCenterLeaderboardSetLocalizations
+				}
+
+				public init(type: `Type`, id: String) {
+					self.type = type
+					self.id = id
+				}
+
+				public init(from decoder: Decoder) throws {
+					let values = try decoder.container(keyedBy: StringCodingKey.self)
+					self.type = try values.decode(`Type`.self, forKey: "type")
+					self.id = try values.decode(String.self, forKey: "id")
+				}
+
+				public func encode(to encoder: Encoder) throws {
+					var values = encoder.container(keyedBy: StringCodingKey.self)
+					try values.encode(type, forKey: "type")
+					try values.encode(id, forKey: "id")
+				}
+			}
+
+			public init(links: RelationshipLinks? = nil, meta: PagingInformation? = nil, data: [Datum]? = nil) {
+				self.links = links
+				self.meta = meta
+				self.data = data
+			}
+
+			public init(from decoder: Decoder) throws {
+				let values = try decoder.container(keyedBy: StringCodingKey.self)
+				self.links = try values.decodeIfPresent(RelationshipLinks.self, forKey: "links")
+				self.meta = try values.decodeIfPresent(PagingInformation.self, forKey: "meta")
+				self.data = try values.decodeIfPresent([Datum].self, forKey: "data")
+			}
+
+			public func encode(to encoder: Encoder) throws {
+				var values = encoder.container(keyedBy: StringCodingKey.self)
+				try values.encodeIfPresent(links, forKey: "links")
+				try values.encodeIfPresent(meta, forKey: "meta")
+				try values.encodeIfPresent(data, forKey: "data")
+			}
+		}
 
 		public struct LeaderboardSet: Codable {
 			public var data: Data?
@@ -58,73 +110,21 @@ public struct GameCenterLeaderboardSetVersionV2: Codable, Identifiable {
 			}
 		}
 
-		public struct Localizations: Codable {
-			public var links: RelationshipLinks?
-			public var data: [Datum]?
-			public var meta: PagingInformation?
-
-			public struct Datum: Codable, Identifiable {
-				public var id: String
-				public var type: `Type`
-
-				public enum `Type`: String, Codable, CaseIterable {
-					case gameCenterLeaderboardSetLocalizations
-				}
-
-				public init(id: String, type: `Type`) {
-					self.id = id
-					self.type = type
-				}
-
-				public init(from decoder: Decoder) throws {
-					let values = try decoder.container(keyedBy: StringCodingKey.self)
-					self.id = try values.decode(String.self, forKey: "id")
-					self.type = try values.decode(`Type`.self, forKey: "type")
-				}
-
-				public func encode(to encoder: Encoder) throws {
-					var values = encoder.container(keyedBy: StringCodingKey.self)
-					try values.encode(id, forKey: "id")
-					try values.encode(type, forKey: "type")
-				}
-			}
-
-			public init(links: RelationshipLinks? = nil, data: [Datum]? = nil, meta: PagingInformation? = nil) {
-				self.links = links
-				self.data = data
-				self.meta = meta
-			}
-
-			public init(from decoder: Decoder) throws {
-				let values = try decoder.container(keyedBy: StringCodingKey.self)
-				self.links = try values.decodeIfPresent(RelationshipLinks.self, forKey: "links")
-				self.data = try values.decodeIfPresent([Datum].self, forKey: "data")
-				self.meta = try values.decodeIfPresent(PagingInformation.self, forKey: "meta")
-			}
-
-			public func encode(to encoder: Encoder) throws {
-				var values = encoder.container(keyedBy: StringCodingKey.self)
-				try values.encodeIfPresent(links, forKey: "links")
-				try values.encodeIfPresent(data, forKey: "data")
-				try values.encodeIfPresent(meta, forKey: "meta")
-			}
-		}
-
-		public init(leaderboardSet: LeaderboardSet? = nil, localizations: Localizations? = nil) {
-			self.leaderboardSet = leaderboardSet
+		public init(localizations: Localizations? = nil, leaderboardSet: LeaderboardSet? = nil) {
 			self.localizations = localizations
+			self.leaderboardSet = leaderboardSet
 		}
 
 		public init(from decoder: Decoder) throws {
 			let values = try decoder.container(keyedBy: StringCodingKey.self)
-			self.leaderboardSet = try values.decodeIfPresent(LeaderboardSet.self, forKey: "leaderboardSet")
 			self.localizations = try values.decodeIfPresent(Localizations.self, forKey: "localizations")
+			self.leaderboardSet = try values.decodeIfPresent(LeaderboardSet.self, forKey: "leaderboardSet")
 		}
 
 		public func encode(to encoder: Encoder) throws {
 			var values = encoder.container(keyedBy: StringCodingKey.self)
-			try values.encodeIfPresent(leaderboardSet, forKey: "leaderboardSet")
 			try values.encodeIfPresent(localizations, forKey: "localizations")
+			try values.encodeIfPresent(leaderboardSet, forKey: "leaderboardSet")
 		}
 	}
 
@@ -133,24 +133,24 @@ public struct GameCenterLeaderboardSetVersionV2: Codable, Identifiable {
 	}
 
 	public struct Attributes: Codable {
-		public var state: GameCenterVersionState?
 		public var version: Int?
+		public var state: GameCenterVersionState?
 
-		public init(state: GameCenterVersionState? = nil, version: Int? = nil) {
-			self.state = state
+		public init(version: Int? = nil, state: GameCenterVersionState? = nil) {
 			self.version = version
+			self.state = state
 		}
 
 		public init(from decoder: Decoder) throws {
 			let values = try decoder.container(keyedBy: StringCodingKey.self)
-			self.state = try values.decodeIfPresent(GameCenterVersionState.self, forKey: "state")
 			self.version = try values.decodeIfPresent(Int.self, forKey: "version")
+			self.state = try values.decodeIfPresent(GameCenterVersionState.self, forKey: "state")
 		}
 
 		public func encode(to encoder: Encoder) throws {
 			var values = encoder.container(keyedBy: StringCodingKey.self)
-			try values.encodeIfPresent(state, forKey: "state")
 			try values.encodeIfPresent(version, forKey: "version")
+			try values.encodeIfPresent(state, forKey: "state")
 		}
 	}
 

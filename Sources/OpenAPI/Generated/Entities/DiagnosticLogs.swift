@@ -4,8 +4,8 @@
 import Foundation
 
 public struct DiagnosticLogs: Codable {
-	public var productData: [ProductDatum]?
 	public var version: String?
+	public var productData: [ProductDatum]?
 
 	public struct ProductDatum: Codable {
 		public var signatureID: String?
@@ -13,28 +13,28 @@ public struct DiagnosticLogs: Codable {
 		public var diagnosticLogs: [DiagnosticLog]?
 
 		public struct DiagnosticInsight: Codable {
+			public var insightsURL: String?
 			public var insightsString: String?
 			public var insightsCategory: String?
-			public var insightsURL: String?
 
-			public init(insightsString: String? = nil, insightsCategory: String? = nil, insightsURL: String? = nil) {
+			public init(insightsURL: String? = nil, insightsString: String? = nil, insightsCategory: String? = nil) {
+				self.insightsURL = insightsURL
 				self.insightsString = insightsString
 				self.insightsCategory = insightsCategory
-				self.insightsURL = insightsURL
 			}
 
 			public init(from decoder: Decoder) throws {
 				let values = try decoder.container(keyedBy: StringCodingKey.self)
+				self.insightsURL = try values.decodeIfPresent(String.self, forKey: "insightsURL")
 				self.insightsString = try values.decodeIfPresent(String.self, forKey: "insightsString")
 				self.insightsCategory = try values.decodeIfPresent(String.self, forKey: "insightsCategory")
-				self.insightsURL = try values.decodeIfPresent(String.self, forKey: "insightsURL")
 			}
 
 			public func encode(to encoder: Encoder) throws {
 				var values = encoder.container(keyedBy: StringCodingKey.self)
+				try values.encodeIfPresent(insightsURL, forKey: "insightsURL")
 				try values.encodeIfPresent(insightsString, forKey: "insightsString")
 				try values.encodeIfPresent(insightsCategory, forKey: "insightsCategory")
-				try values.encodeIfPresent(insightsURL, forKey: "insightsURL")
 			}
 		}
 
@@ -43,8 +43,8 @@ public struct DiagnosticLogs: Codable {
 			public var diagnosticMetaData: DiagnosticMetaData?
 
 			public struct CallStackTreeItem: Codable {
-				public var isCallStackPerThread: Bool?
 				public var callStacks: [CallStack]?
+				public var isCallStackPerThread: Bool?
 
 				public struct CallStack: Codable {
 					public var callStackRootFrames: [DiagnosticLogCallStackNode]?
@@ -64,71 +64,71 @@ public struct DiagnosticLogs: Codable {
 					}
 				}
 
-				public init(isCallStackPerThread: Bool? = nil, callStacks: [CallStack]? = nil) {
-					self.isCallStackPerThread = isCallStackPerThread
+				public init(callStacks: [CallStack]? = nil, isCallStackPerThread: Bool? = nil) {
 					self.callStacks = callStacks
+					self.isCallStackPerThread = isCallStackPerThread
 				}
 
 				public init(from decoder: Decoder) throws {
 					let values = try decoder.container(keyedBy: StringCodingKey.self)
-					self.isCallStackPerThread = try values.decodeIfPresent(Bool.self, forKey: "callStackPerThread")
 					self.callStacks = try values.decodeIfPresent([CallStack].self, forKey: "callStacks")
+					self.isCallStackPerThread = try values.decodeIfPresent(Bool.self, forKey: "callStackPerThread")
 				}
 
 				public func encode(to encoder: Encoder) throws {
 					var values = encoder.container(keyedBy: StringCodingKey.self)
-					try values.encodeIfPresent(isCallStackPerThread, forKey: "callStackPerThread")
 					try values.encodeIfPresent(callStacks, forKey: "callStacks")
+					try values.encodeIfPresent(isCallStackPerThread, forKey: "callStackPerThread")
 				}
 			}
 
 			public struct DiagnosticMetaData: Codable {
-				public var platformArchitecture: String?
-				public var writesCaused: String?
-				public var bundleID: String?
-				public var buildVersion: String?
-				public var osVersion: String?
-				public var event: String?
 				public var appVersion: String?
+				public var writesCaused: String?
+				public var buildVersion: String?
+				public var event: String?
+				public var osVersion: String?
 				public var deviceType: String?
+				public var bundleID: String?
 				public var eventDetail: String?
+				public var platformArchitecture: String?
 
-				public init(platformArchitecture: String? = nil, writesCaused: String? = nil, bundleID: String? = nil, buildVersion: String? = nil, osVersion: String? = nil, event: String? = nil, appVersion: String? = nil, deviceType: String? = nil, eventDetail: String? = nil) {
-					self.platformArchitecture = platformArchitecture
-					self.writesCaused = writesCaused
-					self.bundleID = bundleID
-					self.buildVersion = buildVersion
-					self.osVersion = osVersion
-					self.event = event
+				public init(appVersion: String? = nil, writesCaused: String? = nil, buildVersion: String? = nil, event: String? = nil, osVersion: String? = nil, deviceType: String? = nil, bundleID: String? = nil, eventDetail: String? = nil, platformArchitecture: String? = nil) {
 					self.appVersion = appVersion
+					self.writesCaused = writesCaused
+					self.buildVersion = buildVersion
+					self.event = event
+					self.osVersion = osVersion
 					self.deviceType = deviceType
+					self.bundleID = bundleID
 					self.eventDetail = eventDetail
+					self.platformArchitecture = platformArchitecture
 				}
 
 				public init(from decoder: Decoder) throws {
 					let values = try decoder.container(keyedBy: StringCodingKey.self)
-					self.platformArchitecture = try values.decodeIfPresent(String.self, forKey: "platformArchitecture")
-					self.writesCaused = try values.decodeIfPresent(String.self, forKey: "writesCaused")
-					self.bundleID = try values.decodeIfPresent(String.self, forKey: "bundleId")
-					self.buildVersion = try values.decodeIfPresent(String.self, forKey: "buildVersion")
-					self.osVersion = try values.decodeIfPresent(String.self, forKey: "osVersion")
-					self.event = try values.decodeIfPresent(String.self, forKey: "event")
 					self.appVersion = try values.decodeIfPresent(String.self, forKey: "appVersion")
+					self.writesCaused = try values.decodeIfPresent(String.self, forKey: "writesCaused")
+					self.buildVersion = try values.decodeIfPresent(String.self, forKey: "buildVersion")
+					self.event = try values.decodeIfPresent(String.self, forKey: "event")
+					self.osVersion = try values.decodeIfPresent(String.self, forKey: "osVersion")
 					self.deviceType = try values.decodeIfPresent(String.self, forKey: "deviceType")
+					self.bundleID = try values.decodeIfPresent(String.self, forKey: "bundleId")
 					self.eventDetail = try values.decodeIfPresent(String.self, forKey: "eventDetail")
+					self.platformArchitecture = try values.decodeIfPresent(String.self, forKey: "platformArchitecture")
 				}
 
 				public func encode(to encoder: Encoder) throws {
 					var values = encoder.container(keyedBy: StringCodingKey.self)
-					try values.encodeIfPresent(platformArchitecture, forKey: "platformArchitecture")
-					try values.encodeIfPresent(writesCaused, forKey: "writesCaused")
-					try values.encodeIfPresent(bundleID, forKey: "bundleId")
-					try values.encodeIfPresent(buildVersion, forKey: "buildVersion")
-					try values.encodeIfPresent(osVersion, forKey: "osVersion")
-					try values.encodeIfPresent(event, forKey: "event")
 					try values.encodeIfPresent(appVersion, forKey: "appVersion")
+					try values.encodeIfPresent(writesCaused, forKey: "writesCaused")
+					try values.encodeIfPresent(buildVersion, forKey: "buildVersion")
+					try values.encodeIfPresent(event, forKey: "event")
+					try values.encodeIfPresent(osVersion, forKey: "osVersion")
 					try values.encodeIfPresent(deviceType, forKey: "deviceType")
+					try values.encodeIfPresent(bundleID, forKey: "bundleId")
 					try values.encodeIfPresent(eventDetail, forKey: "eventDetail")
+					try values.encodeIfPresent(platformArchitecture, forKey: "platformArchitecture")
 				}
 			}
 
@@ -171,20 +171,20 @@ public struct DiagnosticLogs: Codable {
 		}
 	}
 
-	public init(productData: [ProductDatum]? = nil, version: String? = nil) {
-		self.productData = productData
+	public init(version: String? = nil, productData: [ProductDatum]? = nil) {
 		self.version = version
+		self.productData = productData
 	}
 
 	public init(from decoder: Decoder) throws {
 		let values = try decoder.container(keyedBy: StringCodingKey.self)
-		self.productData = try values.decodeIfPresent([ProductDatum].self, forKey: "productData")
 		self.version = try values.decodeIfPresent(String.self, forKey: "version")
+		self.productData = try values.decodeIfPresent([ProductDatum].self, forKey: "productData")
 	}
 
 	public func encode(to encoder: Encoder) throws {
 		var values = encoder.container(keyedBy: StringCodingKey.self)
-		try values.encodeIfPresent(productData, forKey: "productData")
 		try values.encodeIfPresent(version, forKey: "version")
+		try values.encodeIfPresent(productData, forKey: "productData")
 	}
 }

@@ -17,17 +17,17 @@ public struct GameCenterAchievementCreateRequest: Codable {
 
 		public struct Attributes: Codable {
 			public var referenceName: String
-			public var isRepeatable: Bool
 			public var points: Int
 			public var isShowBeforeEarned: Bool
+			public var isRepeatable: Bool
 			public var vendorIdentifier: String
 			public var activityProperties: [String: String]?
 
-			public init(referenceName: String, isRepeatable: Bool, points: Int, isShowBeforeEarned: Bool, vendorIdentifier: String, activityProperties: [String: String]? = nil) {
+			public init(referenceName: String, points: Int, isShowBeforeEarned: Bool, isRepeatable: Bool, vendorIdentifier: String, activityProperties: [String: String]? = nil) {
 				self.referenceName = referenceName
-				self.isRepeatable = isRepeatable
 				self.points = points
 				self.isShowBeforeEarned = isShowBeforeEarned
+				self.isRepeatable = isRepeatable
 				self.vendorIdentifier = vendorIdentifier
 				self.activityProperties = activityProperties
 			}
@@ -35,9 +35,9 @@ public struct GameCenterAchievementCreateRequest: Codable {
 			public init(from decoder: Decoder) throws {
 				let values = try decoder.container(keyedBy: StringCodingKey.self)
 				self.referenceName = try values.decode(String.self, forKey: "referenceName")
-				self.isRepeatable = try values.decode(Bool.self, forKey: "repeatable")
 				self.points = try values.decode(Int.self, forKey: "points")
 				self.isShowBeforeEarned = try values.decode(Bool.self, forKey: "showBeforeEarned")
+				self.isRepeatable = try values.decode(Bool.self, forKey: "repeatable")
 				self.vendorIdentifier = try values.decode(String.self, forKey: "vendorIdentifier")
 				self.activityProperties = try values.decodeIfPresent([String: String].self, forKey: "activityProperties")
 			}
@@ -45,9 +45,9 @@ public struct GameCenterAchievementCreateRequest: Codable {
 			public func encode(to encoder: Encoder) throws {
 				var values = encoder.container(keyedBy: StringCodingKey.self)
 				try values.encode(referenceName, forKey: "referenceName")
-				try values.encode(isRepeatable, forKey: "repeatable")
 				try values.encode(points, forKey: "points")
 				try values.encode(isShowBeforeEarned, forKey: "showBeforeEarned")
+				try values.encode(isRepeatable, forKey: "repeatable")
 				try values.encode(vendorIdentifier, forKey: "vendorIdentifier")
 				try values.encodeIfPresent(activityProperties, forKey: "activityProperties")
 			}

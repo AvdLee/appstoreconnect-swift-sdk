@@ -35,20 +35,20 @@ public struct AppCustomProductPageCreateRequest: Codable {
 		}
 
 		public struct Relationships: Codable {
-			public var customProductPageTemplate: CustomProductPageTemplate?
+			public var app: App
 			public var appStoreVersionTemplate: AppStoreVersionTemplate?
 			public var appCustomProductPageVersions: AppCustomProductPageVersions?
-			public var app: App
+			public var customProductPageTemplate: CustomProductPageTemplate?
 
-			public struct CustomProductPageTemplate: Codable {
-				public var data: Data?
+			public struct App: Codable {
+				public var data: Data
 
 				public struct Data: Codable, Identifiable {
 					public var type: `Type`
 					public var id: String
 
 					public enum `Type`: String, Codable, CaseIterable {
-						case appCustomProductPages
+						case apps
 					}
 
 					public init(type: `Type`, id: String) {
@@ -69,18 +69,18 @@ public struct AppCustomProductPageCreateRequest: Codable {
 					}
 				}
 
-				public init(data: Data? = nil) {
+				public init(data: Data) {
 					self.data = data
 				}
 
 				public init(from decoder: Decoder) throws {
 					let values = try decoder.container(keyedBy: StringCodingKey.self)
-					self.data = try values.decodeIfPresent(Data.self, forKey: "data")
+					self.data = try values.decode(Data.self, forKey: "data")
 				}
 
 				public func encode(to encoder: Encoder) throws {
 					var values = encoder.container(keyedBy: StringCodingKey.self)
-					try values.encodeIfPresent(data, forKey: "data")
+					try values.encode(data, forKey: "data")
 				}
 			}
 
@@ -88,28 +88,28 @@ public struct AppCustomProductPageCreateRequest: Codable {
 				public var data: Data?
 
 				public struct Data: Codable, Identifiable {
-					public var id: String
 					public var type: `Type`
+					public var id: String
 
 					public enum `Type`: String, Codable, CaseIterable {
 						case appStoreVersions
 					}
 
-					public init(id: String, type: `Type`) {
-						self.id = id
+					public init(type: `Type`, id: String) {
 						self.type = type
+						self.id = id
 					}
 
 					public init(from decoder: Decoder) throws {
 						let values = try decoder.container(keyedBy: StringCodingKey.self)
-						self.id = try values.decode(String.self, forKey: "id")
 						self.type = try values.decode(`Type`.self, forKey: "type")
+						self.id = try values.decode(String.self, forKey: "id")
 					}
 
 					public func encode(to encoder: Encoder) throws {
 						var values = encoder.container(keyedBy: StringCodingKey.self)
-						try values.encode(id, forKey: "id")
 						try values.encode(type, forKey: "type")
+						try values.encode(id, forKey: "id")
 					}
 				}
 
@@ -172,71 +172,71 @@ public struct AppCustomProductPageCreateRequest: Codable {
 				}
 			}
 
-			public struct App: Codable {
-				public var data: Data
+			public struct CustomProductPageTemplate: Codable {
+				public var data: Data?
 
 				public struct Data: Codable, Identifiable {
-					public var id: String
 					public var type: `Type`
+					public var id: String
 
 					public enum `Type`: String, Codable, CaseIterable {
-						case apps
+						case appCustomProductPages
 					}
 
-					public init(id: String, type: `Type`) {
-						self.id = id
+					public init(type: `Type`, id: String) {
 						self.type = type
+						self.id = id
 					}
 
 					public init(from decoder: Decoder) throws {
 						let values = try decoder.container(keyedBy: StringCodingKey.self)
-						self.id = try values.decode(String.self, forKey: "id")
 						self.type = try values.decode(`Type`.self, forKey: "type")
+						self.id = try values.decode(String.self, forKey: "id")
 					}
 
 					public func encode(to encoder: Encoder) throws {
 						var values = encoder.container(keyedBy: StringCodingKey.self)
-						try values.encode(id, forKey: "id")
 						try values.encode(type, forKey: "type")
+						try values.encode(id, forKey: "id")
 					}
 				}
 
-				public init(data: Data) {
+				public init(data: Data? = nil) {
 					self.data = data
 				}
 
 				public init(from decoder: Decoder) throws {
 					let values = try decoder.container(keyedBy: StringCodingKey.self)
-					self.data = try values.decode(Data.self, forKey: "data")
+					self.data = try values.decodeIfPresent(Data.self, forKey: "data")
 				}
 
 				public func encode(to encoder: Encoder) throws {
 					var values = encoder.container(keyedBy: StringCodingKey.self)
-					try values.encode(data, forKey: "data")
+					try values.encodeIfPresent(data, forKey: "data")
 				}
 			}
 
-			public init(customProductPageTemplate: CustomProductPageTemplate? = nil, appStoreVersionTemplate: AppStoreVersionTemplate? = nil, appCustomProductPageVersions: AppCustomProductPageVersions? = nil, app: App) {
-				self.customProductPageTemplate = customProductPageTemplate
+			public init(app: App, appStoreVersionTemplate: AppStoreVersionTemplate? = nil, appCustomProductPageVersions: AppCustomProductPageVersions? = nil, customProductPageTemplate: CustomProductPageTemplate? = nil) {
+				self.app = app
 				self.appStoreVersionTemplate = appStoreVersionTemplate
 				self.appCustomProductPageVersions = appCustomProductPageVersions
-				self.app = app
+				self.customProductPageTemplate = customProductPageTemplate
 			}
 
 			public init(from decoder: Decoder) throws {
 				let values = try decoder.container(keyedBy: StringCodingKey.self)
-				self.customProductPageTemplate = try values.decodeIfPresent(CustomProductPageTemplate.self, forKey: "customProductPageTemplate")
+				self.app = try values.decode(App.self, forKey: "app")
 				self.appStoreVersionTemplate = try values.decodeIfPresent(AppStoreVersionTemplate.self, forKey: "appStoreVersionTemplate")
 				self.appCustomProductPageVersions = try values.decodeIfPresent(AppCustomProductPageVersions.self, forKey: "appCustomProductPageVersions")
-				self.app = try values.decode(App.self, forKey: "app")
+				self.customProductPageTemplate = try values.decodeIfPresent(CustomProductPageTemplate.self, forKey: "customProductPageTemplate")
 			}
 
 			public func encode(to encoder: Encoder) throws {
 				var values = encoder.container(keyedBy: StringCodingKey.self)
-				try values.encodeIfPresent(customProductPageTemplate, forKey: "customProductPageTemplate")
+				try values.encode(app, forKey: "app")
 				try values.encodeIfPresent(appStoreVersionTemplate, forKey: "appStoreVersionTemplate")
 				try values.encodeIfPresent(appCustomProductPageVersions, forKey: "appCustomProductPageVersions")
-				try values.encode(app, forKey: "app")
+				try values.encodeIfPresent(customProductPageTemplate, forKey: "customProductPageTemplate")
 			}
 		}
 

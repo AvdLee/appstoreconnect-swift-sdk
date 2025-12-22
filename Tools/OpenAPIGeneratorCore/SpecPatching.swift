@@ -1,4 +1,5 @@
 import Foundation
+import OrderedCollections
 
 public enum SpecPatchingError: Error, CustomStringConvertible {
     case invalidRootJSON
@@ -15,6 +16,7 @@ public enum SpecPatchingError: Error, CustomStringConvertible {
 }
 
 /// Applies the project’s “spec fixes” in a structure-aware way (no line-based patches).
+/// This version uses `OrderedDictionary`-backed JSON to preserve key ordering when rewriting the spec.
 public enum SpecPatcher {
     public enum RuleID: String, CaseIterable {
         case bundleIdPlatformEnum = "bundleidplatform-enum"
@@ -50,46 +52,51 @@ public enum SpecPatcher {
         }
     }
 
-    public static func patch(_ root: inout [String: Any]) throws -> Result {
+    public static func patch(_ root: inout JSONValue) throws -> Result {
+        guard case .object(var rootObject) = root else {
+            throw SpecPatchingError.invalidRootJSON
+        }
+
         var didChange = false
         var changes: [String] = []
         var rules: [RuleResult] = []
 
-        let bundle = ensureBundleIdPlatformEnum(&root)
+        let bundle = ensureBundleIdPlatformEnum(&rootObject)
         rules.append(.init(id: .bundleIdPlatformEnum, didChange: bundle.didChange, matchCount: bundle.matchCount))
         if bundle.didChange {
             didChange = true
             changes.append("Ensured BundleIdPlatform enum values")
         }
 
-        let emptyEnums = removeEmptyEnums(&root)
+        let emptyEnums = removeEmptyEnums(&rootObject)
         rules.append(.init(id: .removeEmptyEnums, didChange: emptyEnums.didChange, matchCount: emptyEnums.matchCount, zeroMatchesIsOK: true))
         if emptyEnums.didChange {
             didChange = true
             changes.append("Removed empty enums")
         }
 
-        let deepLink = ensureAppEventDeepLinkIsStringWithoutFormat(&root)
+        let deepLink = ensureAppEventDeepLinkIsStringWithoutFormat(&rootObject)
         rules.append(.init(id: .appEventDeepLinkFormat, didChange: deepLink.didChange, matchCount: deepLink.matchCount))
         if deepLink.didChange {
             didChange = true
             changes.append("Ensured AppEvent.deepLink is string with null format")
         }
 
-        let pr = ensurePurchaseRequirementEnum(&root)
+        let pr = ensurePurchaseRequirementEnum(&rootObject)
         rules.append(.init(id: .purchaseRequirementEnum, didChange: pr.didChange, matchCount: pr.matchCount))
         if pr.didChange {
             didChange = true
             changes.append("Ensured purchaseRequirement enum values")
         }
 
-        let re = try ensureResponseErrorSchemaAndRef(&root)
+        let re = try ensureResponseErrorSchemaAndRef(&rootObject)
         rules.append(.init(id: .responseErrorSchema, didChange: re.didChange, matchCount: re.matchCount))
         if re.didChange {
             didChange = true
             changes.append("Ensured ResponseError schema and referenced it from ErrorResponse")
         }
 
+        root = .object(rootObject)
         return .init(didChange: didChange, changes: changes, rules: rules)
     }
 }
@@ -101,12 +108,12 @@ private struct PatchOutcome {
     var matchCount: Int
 }
 
-private func ensureBundleIdPlatformEnum(_ root: inout [String: Any]) -> PatchOutcome {
+private func ensureBundleIdPlatformEnum(_ root: inout OrderedDictionary<String, JSONValue>) -> PatchOutcome {
     guard
-        var components = root["components"] as? [String: Any],
-        var schemas = components["schemas"] as? [String: Any],
-        var bundleIdPlatform = schemas["BundleIdPlatform"] as? [String: Any],
-        var values = bundleIdPlatform["enum"] as? [Any]
+        var components = root["components"]?.objectValue,
+        var schemas = components["schemas"]?.objectValue,
+        var bundleIdPlatform = schemas["BundleIdPlatform"]?.objectValue,
+        var values = bundleIdPlatform["enum"]?.arrayValue
     else {
         return .init(didChange: false, matchCount: 0)
     }
@@ -114,69 +121,69 @@ private func ensureBundleIdPlatformEnum(_ root: inout [String: Any]) -> PatchOut
     var didChange = false
     let matchCount = 1
 
-    if !values.contains(where: { ($0 as? String) == "SERVICES" }) {
-        values.append("SERVICES")
+    if !values.contains(.string("SERVICES")) {
+        values.append(.string("SERVICES"))
         didChange = true
     }
 
     if didChange {
-        bundleIdPlatform["enum"] = values
-        schemas["BundleIdPlatform"] = bundleIdPlatform
-        components["schemas"] = schemas
-        root["components"] = components
+        bundleIdPlatform["enum"] = .array(values)
+        schemas["BundleIdPlatform"] = .object(bundleIdPlatform)
+        components["schemas"] = .object(schemas)
+        root["components"] = .object(components)
     }
 
     return .init(didChange: didChange, matchCount: matchCount)
 }
 
-private func removeEmptyEnums(_ root: inout [String: Any]) -> PatchOutcome {
+private func removeEmptyEnums(_ root: inout OrderedDictionary<String, JSONValue>) -> PatchOutcome {
     var didChange = false
     var removedCount = 0
 
-    func patchNode(_ node: inout Any) {
-        if var dict = node as? [String: Any] {
-            if let e = dict["enum"] as? [Any], e.isEmpty {
+    func patchNode(_ node: inout JSONValue) {
+        switch node {
+        case .object(var dict):
+            if case .array(let e) = dict["enum"], e.isEmpty {
                 dict.removeValue(forKey: "enum")
                 removedCount += 1
                 didChange = true
             }
+
             for key in Array(dict.keys) {
-                var v = dict[key] as Any
+                guard var v = dict[key] else { continue }
                 patchNode(&v)
                 dict[key] = v
             }
-            node = dict
-            return
-        }
-
-        if var arr = node as? [Any] {
+            node = .object(dict)
+        case .array(var arr):
             for i in arr.indices {
                 var v = arr[i]
                 patchNode(&v)
                 arr[i] = v
             }
-            node = arr
-            return
+            node = .array(arr)
+        default:
+            break
         }
     }
 
-    var anyRoot: Any = root
-    patchNode(&anyRoot)
-    if let patchedRoot = anyRoot as? [String: Any] {
-        root = patchedRoot
+    var rootValue: JSONValue = .object(root)
+    patchNode(&rootValue)
+    if case .object(let patched) = rootValue {
+        root = patched
     }
     return .init(didChange: didChange, matchCount: removedCount)
 }
 
-private func ensureAppEventDeepLinkIsStringWithoutFormat(_ root: inout [String: Any]) -> PatchOutcome {
+private func ensureAppEventDeepLinkIsStringWithoutFormat(_ root: inout OrderedDictionary<String, JSONValue>) -> PatchOutcome {
     guard
-        var components = root["components"] as? [String: Any],
-        var schemas = components["schemas"] as? [String: Any],
-        var appEvent = schemas["AppEvent"] as? [String: Any],
-        var props = appEvent["properties"] as? [String: Any],
-        var attributes = props["attributes"] as? [String: Any],
-        var attrProps = attributes["properties"] as? [String: Any],
-        var deepLink = attrProps["deepLink"] as? [String: Any]
+        var components = root["components"]?.objectValue,
+        var schemas = components["schemas"]?.objectValue,
+        var appEvent = schemas["AppEvent"]?.objectValue,
+        var props = appEvent["properties"]?.objectValue,
+        var attributes = props["attributes"]?.objectValue,
+        var attrProps = attributes["properties"]?.objectValue,
+        var deepLink = attrProps["deepLink"]?.objectValue
     else {
         return .init(didChange: false, matchCount: 0)
     }
@@ -184,83 +191,83 @@ private func ensureAppEventDeepLinkIsStringWithoutFormat(_ root: inout [String: 
     var didChange = false
     let matchCount = 1
 
-    if (deepLink["type"] as? String) != "string" {
-        deepLink["type"] = "string"
+    if deepLink["type"] != .string("string") {
+        deepLink["type"] = .string("string")
         didChange = true
     }
 
-    if let format = deepLink["format"], !(format is NSNull) {
-        deepLink["format"] = NSNull()
-        didChange = true
-    } else if deepLink["format"] == nil {
-        deepLink["format"] = NSNull()
+    if let format = deepLink["format"] {
+        if format != .null {
+            deepLink["format"] = .null
+            didChange = true
+        }
+    } else {
+        deepLink["format"] = .null
         didChange = true
     }
 
     if didChange {
-        attrProps["deepLink"] = deepLink
-        attributes["properties"] = attrProps
-        props["attributes"] = attributes
-        appEvent["properties"] = props
-        schemas["AppEvent"] = appEvent
-        components["schemas"] = schemas
-        root["components"] = components
+        attrProps["deepLink"] = .object(deepLink)
+        attributes["properties"] = .object(attrProps)
+        props["attributes"] = .object(attributes)
+        appEvent["properties"] = .object(props)
+        schemas["AppEvent"] = .object(appEvent)
+        components["schemas"] = .object(schemas)
+        root["components"] = .object(components)
     }
 
     return .init(didChange: didChange, matchCount: matchCount)
 }
 
-private func ensurePurchaseRequirementEnum(_ root: inout [String: Any]) -> PatchOutcome {
+private func ensurePurchaseRequirementEnum(_ root: inout OrderedDictionary<String, JSONValue>) -> PatchOutcome {
     var didChange = false
     var matchCount = 0
-    let desiredEnum: [Any] = ["NO_COST_ASSOCIATED", "IN_APP_PURCHASE"]
+    let desiredEnum: JSONValue = .array([.string("NO_COST_ASSOCIATED"), .string("IN_APP_PURCHASE")])
 
-    func patchNode(_ node: inout Any) {
-        if var dict = node as? [String: Any] {
-            if var pr = dict["purchaseRequirement"] as? [String: Any],
-               (pr["type"] as? String) == "string" {
+    func patchNode(_ node: inout JSONValue) {
+        switch node {
+        case .object(var dict):
+            if var pr = dict["purchaseRequirement"]?.objectValue,
+               pr["type"] == .string("string") {
                 matchCount += 1
-                let existing = pr["enum"] as? [Any]
-                if existing == nil || !NSArray(array: existing ?? []).isEqual(to: desiredEnum) {
+                if pr["enum"] != desiredEnum {
                     pr["enum"] = desiredEnum
-                    dict["purchaseRequirement"] = pr
+                    dict["purchaseRequirement"] = .object(pr)
                     didChange = true
                 }
             }
 
-            for key in dict.keys {
-                var v = dict[key] as Any
+            for key in Array(dict.keys) {
+                guard var v = dict[key] else { continue }
                 patchNode(&v)
                 dict[key] = v
             }
-            node = dict
-            return
-        }
-
-        if var arr = node as? [Any] {
+            node = .object(dict)
+        case .array(var arr):
             for i in arr.indices {
                 var v = arr[i]
                 patchNode(&v)
                 arr[i] = v
             }
-            node = arr
-            return
+            node = .array(arr)
+        default:
+            break
         }
     }
 
-    var anyRoot: Any = root
-    patchNode(&anyRoot)
-    if let patchedRoot = anyRoot as? [String: Any] {
-        root = patchedRoot
+    var rootValue: JSONValue = .object(root)
+    patchNode(&rootValue)
+    if case .object(let patched) = rootValue {
+        root = patched
     }
 
     return .init(didChange: didChange, matchCount: matchCount)
 }
 
-private func ensureResponseErrorSchemaAndRef(_ root: inout [String: Any]) throws -> PatchOutcome {
+private func ensureResponseErrorSchemaAndRef(_ root: inout OrderedDictionary<String, JSONValue>) throws -> PatchOutcome {
     guard
-        var components = root["components"] as? [String: Any],
-        var schemas = components["schemas"] as? [String: Any]
+        var components = root["components"]?.objectValue,
+        var schemas = components["schemas"]?.objectValue
     else {
         throw SpecPatchingError.invalidComponentsSchemas
     }
@@ -269,81 +276,71 @@ private func ensureResponseErrorSchemaAndRef(_ root: inout [String: Any]) throws
 
     var matchCount = 0
     guard
-        var errorResponse = schemas["ErrorResponse"] as? [String: Any],
-        var props = errorResponse["properties"] as? [String: Any],
-        var errors = props["errors"] as? [String: Any]
+        var errorResponse = schemas["ErrorResponse"]?.objectValue,
+        var props = errorResponse["properties"]?.objectValue,
+        var errors = props["errors"]?.objectValue
     else {
         return .init(didChange: false, matchCount: 0)
     }
 
     matchCount = 1
 
-    let responseErrorSchema: [String: Any] = [
-        "type": "object",
-        "properties": [
-            "id": ["type": "string"],
-            "status": ["type": "string"],
-            "code": ["type": "string"],
-            "title": ["type": "string"],
-            "detail": ["type": "string"],
-            "source": [
-                "oneOf": [
-                    ["$ref": "#/components/schemas/ErrorSourcePointer"],
-                    ["$ref": "#/components/schemas/ErrorSourceParameter"],
-                ]
-            ],
-            "links": ["$ref": "#/components/schemas/ErrorLinks"],
-            "meta": [
-                "type": "object",
-                "properties": [
-                    "associatedErrors": [
-                        "type": "object",
-                        "additionalProperties": [
-                            "type": "array",
-                            "items": ["$ref": "#/components/schemas/ResponseError"],
-                        ]
-                    ]
-                ],
-                "additionalProperties": true,
-            ],
-        ],
-        "required": ["code", "status", "title"],
-    ]
+    func obj(_ pairs: [(String, JSONValue)]) -> JSONValue {
+        .object(OrderedDictionary(uniqueKeysWithValues: pairs))
+    }
 
-    if let existing = schemas["ResponseError"] as? [String: Any] {
-        if !NSDictionary(dictionary: existing).isEqual(to: responseErrorSchema) {
-            schemas["ResponseError"] = responseErrorSchema
-            didChange = true
-        }
-    } else {
+    let responseErrorSchema: JSONValue = obj([
+        ("type", .string("object")),
+        ("properties", obj([
+            ("id", obj([("type", .string("string"))])),
+            ("status", obj([("type", .string("string"))])),
+            ("code", obj([("type", .string("string"))])),
+            ("title", obj([("type", .string("string"))])),
+            ("detail", obj([("type", .string("string"))])),
+            ("source", obj([
+                ("oneOf", .array([
+                    obj([("$ref", .string("#/components/schemas/ErrorSourcePointer"))]),
+                    obj([("$ref", .string("#/components/schemas/ErrorSourceParameter"))]),
+                ])),
+            ])),
+            ("links", obj([("$ref", .string("#/components/schemas/ErrorLinks"))])),
+            ("meta", obj([
+                ("type", .string("object")),
+                ("properties", obj([
+                    ("associatedErrors", obj([
+                        ("type", .string("object")),
+                        ("additionalProperties", obj([
+                            ("type", .string("array")),
+                            ("items", obj([("$ref", .string("#/components/schemas/ResponseError"))])),
+                        ])),
+                    ])),
+                ])),
+                ("additionalProperties", .bool(true)),
+            ])),
+        ])),
+        ("required", .array([.string("code"), .string("status"), .string("title")])),
+    ])
+
+    if schemas["ResponseError"] != responseErrorSchema {
         schemas["ResponseError"] = responseErrorSchema
         didChange = true
     }
 
-    let desiredItems: [String: Any] = ["$ref": "#/components/schemas/ResponseError"]
-    if let items = errors["items"] as? [String: Any] {
-        if !NSDictionary(dictionary: items).isEqual(to: desiredItems) {
-            errors["items"] = desiredItems
-            props["errors"] = errors
-            errorResponse["properties"] = props
-            schemas["ErrorResponse"] = errorResponse
-            didChange = true
-        }
-    } else {
+    let desiredItems: JSONValue = obj([("$ref", .string("#/components/schemas/ResponseError"))])
+    if errors["items"] != desiredItems {
         errors["items"] = desiredItems
-        props["errors"] = errors
-        errorResponse["properties"] = props
-        schemas["ErrorResponse"] = errorResponse
+        props["errors"] = .object(errors)
+        errorResponse["properties"] = .object(props)
+        schemas["ErrorResponse"] = .object(errorResponse)
         didChange = true
     }
 
     if didChange {
-        components["schemas"] = schemas
-        root["components"] = components
+        components["schemas"] = .object(schemas)
+        root["components"] = .object(components)
     }
 
     return .init(didChange: didChange, matchCount: matchCount)
 }
-
 
 

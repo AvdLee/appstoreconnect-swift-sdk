@@ -4,27 +4,27 @@
 import Foundation
 
 public struct AppsWithoutIncludesResponse: Codable {
+	public var links: PagedDocumentLinks
 	public var data: [App]
 	public var meta: PagingInformation?
-	public var links: PagedDocumentLinks
 
-	public init(data: [App], meta: PagingInformation? = nil, links: PagedDocumentLinks) {
+	public init(links: PagedDocumentLinks, data: [App], meta: PagingInformation? = nil) {
+		self.links = links
 		self.data = data
 		self.meta = meta
-		self.links = links
 	}
 
 	public init(from decoder: Decoder) throws {
 		let values = try decoder.container(keyedBy: StringCodingKey.self)
+		self.links = try values.decode(PagedDocumentLinks.self, forKey: "links")
 		self.data = try values.decode([App].self, forKey: "data")
 		self.meta = try values.decodeIfPresent(PagingInformation.self, forKey: "meta")
-		self.links = try values.decode(PagedDocumentLinks.self, forKey: "links")
 	}
 
 	public func encode(to encoder: Encoder) throws {
 		var values = encoder.container(keyedBy: StringCodingKey.self)
+		try values.encode(links, forKey: "links")
 		try values.encode(data, forKey: "data")
 		try values.encodeIfPresent(meta, forKey: "meta")
-		try values.encode(links, forKey: "links")
 	}
 }

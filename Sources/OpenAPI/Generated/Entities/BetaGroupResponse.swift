@@ -4,9 +4,9 @@
 import Foundation
 
 public struct BetaGroupResponse: Codable {
+	public var links: DocumentLinks
 	/// BetaGroup
 	public var data: BetaGroup
-	public var links: DocumentLinks
 	public var included: [IncludedItem]?
 
 	public enum IncludedItem: Codable {
@@ -49,23 +49,23 @@ public struct BetaGroupResponse: Codable {
 		}
 	}
 
-	public init(data: BetaGroup, links: DocumentLinks, included: [IncludedItem]? = nil) {
-		self.data = data
+	public init(links: DocumentLinks, data: BetaGroup, included: [IncludedItem]? = nil) {
 		self.links = links
+		self.data = data
 		self.included = included
 	}
 
 	public init(from decoder: Decoder) throws {
 		let values = try decoder.container(keyedBy: StringCodingKey.self)
-		self.data = try values.decode(BetaGroup.self, forKey: "data")
 		self.links = try values.decode(DocumentLinks.self, forKey: "links")
+		self.data = try values.decode(BetaGroup.self, forKey: "data")
 		self.included = try values.decodeIfPresent([IncludedItem].self, forKey: "included")
 	}
 
 	public func encode(to encoder: Encoder) throws {
 		var values = encoder.container(keyedBy: StringCodingKey.self)
-		try values.encode(data, forKey: "data")
 		try values.encode(links, forKey: "links")
+		try values.encode(data, forKey: "data")
 		try values.encodeIfPresent(included, forKey: "included")
 	}
 }

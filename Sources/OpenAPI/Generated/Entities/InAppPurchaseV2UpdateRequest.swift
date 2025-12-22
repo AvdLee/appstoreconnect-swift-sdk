@@ -7,58 +7,58 @@ public struct InAppPurchaseV2UpdateRequest: Codable {
 	public var data: Data
 
 	public struct Data: Codable, Identifiable {
+		public var type: `Type`
 		public var id: String
 		public var attributes: Attributes?
-		public var type: `Type`
-
-		public struct Attributes: Codable {
-			public var reviewNote: String?
-			public var name: String?
-			public var isFamilySharable: Bool?
-
-			public init(reviewNote: String? = nil, name: String? = nil, isFamilySharable: Bool? = nil) {
-				self.reviewNote = reviewNote
-				self.name = name
-				self.isFamilySharable = isFamilySharable
-			}
-
-			public init(from decoder: Decoder) throws {
-				let values = try decoder.container(keyedBy: StringCodingKey.self)
-				self.reviewNote = try values.decodeIfPresent(String.self, forKey: "reviewNote")
-				self.name = try values.decodeIfPresent(String.self, forKey: "name")
-				self.isFamilySharable = try values.decodeIfPresent(Bool.self, forKey: "familySharable")
-			}
-
-			public func encode(to encoder: Encoder) throws {
-				var values = encoder.container(keyedBy: StringCodingKey.self)
-				try values.encodeIfPresent(reviewNote, forKey: "reviewNote")
-				try values.encodeIfPresent(name, forKey: "name")
-				try values.encodeIfPresent(isFamilySharable, forKey: "familySharable")
-			}
-		}
 
 		public enum `Type`: String, Codable, CaseIterable {
 			case inAppPurchases
 		}
 
-		public init(id: String, attributes: Attributes? = nil, type: `Type`) {
+		public struct Attributes: Codable {
+			public var name: String?
+			public var reviewNote: String?
+			public var isFamilySharable: Bool?
+
+			public init(name: String? = nil, reviewNote: String? = nil, isFamilySharable: Bool? = nil) {
+				self.name = name
+				self.reviewNote = reviewNote
+				self.isFamilySharable = isFamilySharable
+			}
+
+			public init(from decoder: Decoder) throws {
+				let values = try decoder.container(keyedBy: StringCodingKey.self)
+				self.name = try values.decodeIfPresent(String.self, forKey: "name")
+				self.reviewNote = try values.decodeIfPresent(String.self, forKey: "reviewNote")
+				self.isFamilySharable = try values.decodeIfPresent(Bool.self, forKey: "familySharable")
+			}
+
+			public func encode(to encoder: Encoder) throws {
+				var values = encoder.container(keyedBy: StringCodingKey.self)
+				try values.encodeIfPresent(name, forKey: "name")
+				try values.encodeIfPresent(reviewNote, forKey: "reviewNote")
+				try values.encodeIfPresent(isFamilySharable, forKey: "familySharable")
+			}
+		}
+
+		public init(type: `Type`, id: String, attributes: Attributes? = nil) {
+			self.type = type
 			self.id = id
 			self.attributes = attributes
-			self.type = type
 		}
 
 		public init(from decoder: Decoder) throws {
 			let values = try decoder.container(keyedBy: StringCodingKey.self)
+			self.type = try values.decode(`Type`.self, forKey: "type")
 			self.id = try values.decode(String.self, forKey: "id")
 			self.attributes = try values.decodeIfPresent(Attributes.self, forKey: "attributes")
-			self.type = try values.decode(`Type`.self, forKey: "type")
 		}
 
 		public func encode(to encoder: Encoder) throws {
 			var values = encoder.container(keyedBy: StringCodingKey.self)
+			try values.encode(type, forKey: "type")
 			try values.encode(id, forKey: "id")
 			try values.encodeIfPresent(attributes, forKey: "attributes")
-			try values.encode(type, forKey: "type")
 		}
 	}
 

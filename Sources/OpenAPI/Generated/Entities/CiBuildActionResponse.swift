@@ -5,27 +5,27 @@ import Foundation
 
 public struct CiBuildActionResponse: Codable {
 	public var links: DocumentLinks
-	public var included: [CiBuildRun]?
 	/// CiBuildAction
 	public var data: CiBuildAction
+	public var included: [CiBuildRun]?
 
-	public init(links: DocumentLinks, included: [CiBuildRun]? = nil, data: CiBuildAction) {
+	public init(links: DocumentLinks, data: CiBuildAction, included: [CiBuildRun]? = nil) {
 		self.links = links
-		self.included = included
 		self.data = data
+		self.included = included
 	}
 
 	public init(from decoder: Decoder) throws {
 		let values = try decoder.container(keyedBy: StringCodingKey.self)
 		self.links = try values.decode(DocumentLinks.self, forKey: "links")
-		self.included = try values.decodeIfPresent([CiBuildRun].self, forKey: "included")
 		self.data = try values.decode(CiBuildAction.self, forKey: "data")
+		self.included = try values.decodeIfPresent([CiBuildRun].self, forKey: "included")
 	}
 
 	public func encode(to encoder: Encoder) throws {
 		var values = encoder.container(keyedBy: StringCodingKey.self)
 		try values.encode(links, forKey: "links")
-		try values.encodeIfPresent(included, forKey: "included")
 		try values.encode(data, forKey: "data")
+		try values.encodeIfPresent(included, forKey: "included")
 	}
 }

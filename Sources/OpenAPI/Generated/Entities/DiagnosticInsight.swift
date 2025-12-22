@@ -4,49 +4,49 @@
 import Foundation
 
 public struct DiagnosticInsight: Codable {
-	public var direction: DiagnosticInsightDirection?
 	public var insightType: DiagnosticInsightType?
+	public var direction: DiagnosticInsightDirection?
 	public var referenceVersions: [ReferenceVersion]?
 
 	public struct ReferenceVersion: Codable {
-		public var value: Double?
 		public var version: String?
+		public var value: Double?
 
-		public init(value: Double? = nil, version: String? = nil) {
-			self.value = value
+		public init(version: String? = nil, value: Double? = nil) {
 			self.version = version
+			self.value = value
 		}
 
 		public init(from decoder: Decoder) throws {
 			let values = try decoder.container(keyedBy: StringCodingKey.self)
-			self.value = try values.decodeIfPresent(Double.self, forKey: "value")
 			self.version = try values.decodeIfPresent(String.self, forKey: "version")
+			self.value = try values.decodeIfPresent(Double.self, forKey: "value")
 		}
 
 		public func encode(to encoder: Encoder) throws {
 			var values = encoder.container(keyedBy: StringCodingKey.self)
-			try values.encodeIfPresent(value, forKey: "value")
 			try values.encodeIfPresent(version, forKey: "version")
+			try values.encodeIfPresent(value, forKey: "value")
 		}
 	}
 
-	public init(direction: DiagnosticInsightDirection? = nil, insightType: DiagnosticInsightType? = nil, referenceVersions: [ReferenceVersion]? = nil) {
-		self.direction = direction
+	public init(insightType: DiagnosticInsightType? = nil, direction: DiagnosticInsightDirection? = nil, referenceVersions: [ReferenceVersion]? = nil) {
 		self.insightType = insightType
+		self.direction = direction
 		self.referenceVersions = referenceVersions
 	}
 
 	public init(from decoder: Decoder) throws {
 		let values = try decoder.container(keyedBy: StringCodingKey.self)
-		self.direction = try values.decodeIfPresent(DiagnosticInsightDirection.self, forKey: "direction")
 		self.insightType = try values.decodeIfPresent(DiagnosticInsightType.self, forKey: "insightType")
+		self.direction = try values.decodeIfPresent(DiagnosticInsightDirection.self, forKey: "direction")
 		self.referenceVersions = try values.decodeIfPresent([ReferenceVersion].self, forKey: "referenceVersions")
 	}
 
 	public func encode(to encoder: Encoder) throws {
 		var values = encoder.container(keyedBy: StringCodingKey.self)
-		try values.encodeIfPresent(direction, forKey: "direction")
 		try values.encodeIfPresent(insightType, forKey: "insightType")
+		try values.encodeIfPresent(direction, forKey: "direction")
 		try values.encodeIfPresent(referenceVersions, forKey: "referenceVersions")
 	}
 }

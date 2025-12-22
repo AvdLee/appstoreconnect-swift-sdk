@@ -7,9 +7,35 @@ public struct RoutingAppCoverageCreateRequest: Codable {
 	public var data: Data
 
 	public struct Data: Codable {
-		public var relationships: Relationships
 		public var type: `Type`
 		public var attributes: Attributes
+		public var relationships: Relationships
+
+		public enum `Type`: String, Codable, CaseIterable {
+			case routingAppCoverages
+		}
+
+		public struct Attributes: Codable {
+			public var fileSize: Int
+			public var fileName: String
+
+			public init(fileSize: Int, fileName: String) {
+				self.fileSize = fileSize
+				self.fileName = fileName
+			}
+
+			public init(from decoder: Decoder) throws {
+				let values = try decoder.container(keyedBy: StringCodingKey.self)
+				self.fileSize = try values.decode(Int.self, forKey: "fileSize")
+				self.fileName = try values.decode(String.self, forKey: "fileName")
+			}
+
+			public func encode(to encoder: Encoder) throws {
+				var values = encoder.container(keyedBy: StringCodingKey.self)
+				try values.encode(fileSize, forKey: "fileSize")
+				try values.encode(fileName, forKey: "fileName")
+			}
+		}
 
 		public struct Relationships: Codable {
 			public var appStoreVersion: AppStoreVersion
@@ -73,50 +99,24 @@ public struct RoutingAppCoverageCreateRequest: Codable {
 			}
 		}
 
-		public enum `Type`: String, Codable, CaseIterable {
-			case routingAppCoverages
-		}
-
-		public struct Attributes: Codable {
-			public var fileName: String
-			public var fileSize: Int
-
-			public init(fileName: String, fileSize: Int) {
-				self.fileName = fileName
-				self.fileSize = fileSize
-			}
-
-			public init(from decoder: Decoder) throws {
-				let values = try decoder.container(keyedBy: StringCodingKey.self)
-				self.fileName = try values.decode(String.self, forKey: "fileName")
-				self.fileSize = try values.decode(Int.self, forKey: "fileSize")
-			}
-
-			public func encode(to encoder: Encoder) throws {
-				var values = encoder.container(keyedBy: StringCodingKey.self)
-				try values.encode(fileName, forKey: "fileName")
-				try values.encode(fileSize, forKey: "fileSize")
-			}
-		}
-
-		public init(relationships: Relationships, type: `Type`, attributes: Attributes) {
-			self.relationships = relationships
+		public init(type: `Type`, attributes: Attributes, relationships: Relationships) {
 			self.type = type
 			self.attributes = attributes
+			self.relationships = relationships
 		}
 
 		public init(from decoder: Decoder) throws {
 			let values = try decoder.container(keyedBy: StringCodingKey.self)
-			self.relationships = try values.decode(Relationships.self, forKey: "relationships")
 			self.type = try values.decode(`Type`.self, forKey: "type")
 			self.attributes = try values.decode(Attributes.self, forKey: "attributes")
+			self.relationships = try values.decode(Relationships.self, forKey: "relationships")
 		}
 
 		public func encode(to encoder: Encoder) throws {
 			var values = encoder.container(keyedBy: StringCodingKey.self)
-			try values.encode(relationships, forKey: "relationships")
 			try values.encode(type, forKey: "type")
 			try values.encode(attributes, forKey: "attributes")
+			try values.encode(relationships, forKey: "relationships")
 		}
 	}
 

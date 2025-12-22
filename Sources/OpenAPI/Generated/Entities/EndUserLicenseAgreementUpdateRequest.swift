@@ -7,28 +7,10 @@ public struct EndUserLicenseAgreementUpdateRequest: Codable {
 	public var data: Data
 
 	public struct Data: Codable, Identifiable {
-		public var attributes: Attributes?
-		public var relationships: Relationships?
 		public var id: String
+		public var relationships: Relationships?
 		public var type: `Type`
-
-		public struct Attributes: Codable {
-			public var agreementText: String?
-
-			public init(agreementText: String? = nil) {
-				self.agreementText = agreementText
-			}
-
-			public init(from decoder: Decoder) throws {
-				let values = try decoder.container(keyedBy: StringCodingKey.self)
-				self.agreementText = try values.decodeIfPresent(String.self, forKey: "agreementText")
-			}
-
-			public func encode(to encoder: Encoder) throws {
-				var values = encoder.container(keyedBy: StringCodingKey.self)
-				try values.encodeIfPresent(agreementText, forKey: "agreementText")
-			}
-		}
+		public var attributes: Attributes?
 
 		public struct Relationships: Codable {
 			public var territories: Territories?
@@ -96,27 +78,45 @@ public struct EndUserLicenseAgreementUpdateRequest: Codable {
 			case endUserLicenseAgreements
 		}
 
-		public init(attributes: Attributes? = nil, relationships: Relationships? = nil, id: String, type: `Type`) {
-			self.attributes = attributes
-			self.relationships = relationships
+		public struct Attributes: Codable {
+			public var agreementText: String?
+
+			public init(agreementText: String? = nil) {
+				self.agreementText = agreementText
+			}
+
+			public init(from decoder: Decoder) throws {
+				let values = try decoder.container(keyedBy: StringCodingKey.self)
+				self.agreementText = try values.decodeIfPresent(String.self, forKey: "agreementText")
+			}
+
+			public func encode(to encoder: Encoder) throws {
+				var values = encoder.container(keyedBy: StringCodingKey.self)
+				try values.encodeIfPresent(agreementText, forKey: "agreementText")
+			}
+		}
+
+		public init(id: String, relationships: Relationships? = nil, type: `Type`, attributes: Attributes? = nil) {
 			self.id = id
+			self.relationships = relationships
 			self.type = type
+			self.attributes = attributes
 		}
 
 		public init(from decoder: Decoder) throws {
 			let values = try decoder.container(keyedBy: StringCodingKey.self)
-			self.attributes = try values.decodeIfPresent(Attributes.self, forKey: "attributes")
-			self.relationships = try values.decodeIfPresent(Relationships.self, forKey: "relationships")
 			self.id = try values.decode(String.self, forKey: "id")
+			self.relationships = try values.decodeIfPresent(Relationships.self, forKey: "relationships")
 			self.type = try values.decode(`Type`.self, forKey: "type")
+			self.attributes = try values.decodeIfPresent(Attributes.self, forKey: "attributes")
 		}
 
 		public func encode(to encoder: Encoder) throws {
 			var values = encoder.container(keyedBy: StringCodingKey.self)
-			try values.encodeIfPresent(attributes, forKey: "attributes")
-			try values.encodeIfPresent(relationships, forKey: "relationships")
 			try values.encode(id, forKey: "id")
+			try values.encodeIfPresent(relationships, forKey: "relationships")
 			try values.encode(type, forKey: "type")
+			try values.encodeIfPresent(attributes, forKey: "attributes")
 		}
 	}
 

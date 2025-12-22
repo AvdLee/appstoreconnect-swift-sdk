@@ -4,10 +4,10 @@
 import Foundation
 
 public struct AppClipDomainStatus: Codable, Identifiable {
-	public var type: `Type`
-	public var attributes: Attributes?
 	public var id: String
 	public var links: ResourceLinks?
+	public var type: `Type`
+	public var attributes: Attributes?
 
 	public enum `Type`: String, Codable, CaseIterable {
 		case appClipDomainStatuses
@@ -18,10 +18,10 @@ public struct AppClipDomainStatus: Codable, Identifiable {
 		public var lastUpdatedDate: Date?
 
 		public struct Domain: Codable {
-			public var domain: String?
-			public var lastUpdatedDate: Date?
 			public var isValid: Bool?
 			public var errorCode: ErrorCode?
+			public var domain: String?
+			public var lastUpdatedDate: Date?
 
 			public enum ErrorCode: String, Codable, CaseIterable {
 				case badHTTPResponse = "BAD_HTTP_RESPONSE"
@@ -44,27 +44,27 @@ public struct AppClipDomainStatus: Codable, Identifiable {
 				case unexpectedError = "UNEXPECTED_ERROR"
 			}
 
-			public init(domain: String? = nil, lastUpdatedDate: Date? = nil, isValid: Bool? = nil, errorCode: ErrorCode? = nil) {
-				self.domain = domain
-				self.lastUpdatedDate = lastUpdatedDate
+			public init(isValid: Bool? = nil, errorCode: ErrorCode? = nil, domain: String? = nil, lastUpdatedDate: Date? = nil) {
 				self.isValid = isValid
 				self.errorCode = errorCode
+				self.domain = domain
+				self.lastUpdatedDate = lastUpdatedDate
 			}
 
 			public init(from decoder: Decoder) throws {
 				let values = try decoder.container(keyedBy: StringCodingKey.self)
-				self.domain = try values.decodeIfPresent(String.self, forKey: "domain")
-				self.lastUpdatedDate = try values.decodeIfPresent(Date.self, forKey: "lastUpdatedDate")
 				self.isValid = try values.decodeIfPresent(Bool.self, forKey: "isValid")
 				self.errorCode = try values.decodeIfPresent(ErrorCode.self, forKey: "errorCode")
+				self.domain = try values.decodeIfPresent(String.self, forKey: "domain")
+				self.lastUpdatedDate = try values.decodeIfPresent(Date.self, forKey: "lastUpdatedDate")
 			}
 
 			public func encode(to encoder: Encoder) throws {
 				var values = encoder.container(keyedBy: StringCodingKey.self)
-				try values.encodeIfPresent(domain, forKey: "domain")
-				try values.encodeIfPresent(lastUpdatedDate, forKey: "lastUpdatedDate")
 				try values.encodeIfPresent(isValid, forKey: "isValid")
 				try values.encodeIfPresent(errorCode, forKey: "errorCode")
+				try values.encodeIfPresent(domain, forKey: "domain")
+				try values.encodeIfPresent(lastUpdatedDate, forKey: "lastUpdatedDate")
 			}
 		}
 
@@ -86,26 +86,26 @@ public struct AppClipDomainStatus: Codable, Identifiable {
 		}
 	}
 
-	public init(type: `Type`, attributes: Attributes? = nil, id: String, links: ResourceLinks? = nil) {
-		self.type = type
-		self.attributes = attributes
+	public init(id: String, links: ResourceLinks? = nil, type: `Type`, attributes: Attributes? = nil) {
 		self.id = id
 		self.links = links
+		self.type = type
+		self.attributes = attributes
 	}
 
 	public init(from decoder: Decoder) throws {
 		let values = try decoder.container(keyedBy: StringCodingKey.self)
-		self.type = try values.decode(`Type`.self, forKey: "type")
-		self.attributes = try values.decodeIfPresent(Attributes.self, forKey: "attributes")
 		self.id = try values.decode(String.self, forKey: "id")
 		self.links = try values.decodeIfPresent(ResourceLinks.self, forKey: "links")
+		self.type = try values.decode(`Type`.self, forKey: "type")
+		self.attributes = try values.decodeIfPresent(Attributes.self, forKey: "attributes")
 	}
 
 	public func encode(to encoder: Encoder) throws {
 		var values = encoder.container(keyedBy: StringCodingKey.self)
-		try values.encode(type, forKey: "type")
-		try values.encodeIfPresent(attributes, forKey: "attributes")
 		try values.encode(id, forKey: "id")
 		try values.encodeIfPresent(links, forKey: "links")
+		try values.encode(type, forKey: "type")
+		try values.encodeIfPresent(attributes, forKey: "attributes")
 	}
 }

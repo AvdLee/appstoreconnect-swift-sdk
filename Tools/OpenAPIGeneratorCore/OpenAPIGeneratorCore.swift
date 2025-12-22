@@ -100,13 +100,15 @@ public enum OpenAPIGeneratorCore {
     
     private static func patchSpecJSON(_ jsonData: Data, writingTo specURL: URL) throws -> SpecPatcher.Result {
         let json = try JSONSerialization.jsonObject(with: jsonData, options: [.fragmentsAllowed])
-        guard var root = json as? [String: Any] else { throw SpecPatchingError.invalidRootJSON }
-        
+        guard let rootObj = json as? NSDictionary else { throw SpecPatchingError.invalidRootJSON }
+
+        // Preserve upstream key ordering by keeping Foundation containers for parsing/writing,
+        // and only converting into an OrderedDictionary-backed JSONValue for patching.
+        var root = JSONValue(foundationObject: rootObj)
         let upstreamResult = try SpecPatcher.patch(&root)
-        
-        // Keep output closer to upstream ordering (CreateAPI output can be order-sensitive).
+
         let outData = try JSONSerialization.data(
-            withJSONObject: root,
+            withJSONObject: root.toFoundationObject(),
             options: [.prettyPrinted, .withoutEscapingSlashes]
         )
         

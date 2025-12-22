@@ -7,9 +7,39 @@ public struct BuildUploadCreateRequest: Codable {
 	public var data: Data
 
 	public struct Data: Codable {
-		public var relationships: Relationships
-		public var attributes: Attributes
 		public var type: `Type`
+		public var attributes: Attributes
+		public var relationships: Relationships
+
+		public enum `Type`: String, Codable, CaseIterable {
+			case buildUploads
+		}
+
+		public struct Attributes: Codable {
+			public var platform: Platform
+			public var cfBundleShortVersionString: String
+			public var cfBundleVersion: String
+
+			public init(platform: Platform, cfBundleShortVersionString: String, cfBundleVersion: String) {
+				self.platform = platform
+				self.cfBundleShortVersionString = cfBundleShortVersionString
+				self.cfBundleVersion = cfBundleVersion
+			}
+
+			public init(from decoder: Decoder) throws {
+				let values = try decoder.container(keyedBy: StringCodingKey.self)
+				self.platform = try values.decode(Platform.self, forKey: "platform")
+				self.cfBundleShortVersionString = try values.decode(String.self, forKey: "cfBundleShortVersionString")
+				self.cfBundleVersion = try values.decode(String.self, forKey: "cfBundleVersion")
+			}
+
+			public func encode(to encoder: Encoder) throws {
+				var values = encoder.container(keyedBy: StringCodingKey.self)
+				try values.encode(platform, forKey: "platform")
+				try values.encode(cfBundleShortVersionString, forKey: "cfBundleShortVersionString")
+				try values.encode(cfBundleVersion, forKey: "cfBundleVersion")
+			}
+		}
 
 		public struct Relationships: Codable {
 			public var app: App
@@ -73,54 +103,24 @@ public struct BuildUploadCreateRequest: Codable {
 			}
 		}
 
-		public struct Attributes: Codable {
-			public var platform: Platform
-			public var cfBundleVersion: String
-			public var cfBundleShortVersionString: String
-
-			public init(platform: Platform, cfBundleVersion: String, cfBundleShortVersionString: String) {
-				self.platform = platform
-				self.cfBundleVersion = cfBundleVersion
-				self.cfBundleShortVersionString = cfBundleShortVersionString
-			}
-
-			public init(from decoder: Decoder) throws {
-				let values = try decoder.container(keyedBy: StringCodingKey.self)
-				self.platform = try values.decode(Platform.self, forKey: "platform")
-				self.cfBundleVersion = try values.decode(String.self, forKey: "cfBundleVersion")
-				self.cfBundleShortVersionString = try values.decode(String.self, forKey: "cfBundleShortVersionString")
-			}
-
-			public func encode(to encoder: Encoder) throws {
-				var values = encoder.container(keyedBy: StringCodingKey.self)
-				try values.encode(platform, forKey: "platform")
-				try values.encode(cfBundleVersion, forKey: "cfBundleVersion")
-				try values.encode(cfBundleShortVersionString, forKey: "cfBundleShortVersionString")
-			}
-		}
-
-		public enum `Type`: String, Codable, CaseIterable {
-			case buildUploads
-		}
-
-		public init(relationships: Relationships, attributes: Attributes, type: `Type`) {
-			self.relationships = relationships
-			self.attributes = attributes
+		public init(type: `Type`, attributes: Attributes, relationships: Relationships) {
 			self.type = type
+			self.attributes = attributes
+			self.relationships = relationships
 		}
 
 		public init(from decoder: Decoder) throws {
 			let values = try decoder.container(keyedBy: StringCodingKey.self)
-			self.relationships = try values.decode(Relationships.self, forKey: "relationships")
-			self.attributes = try values.decode(Attributes.self, forKey: "attributes")
 			self.type = try values.decode(`Type`.self, forKey: "type")
+			self.attributes = try values.decode(Attributes.self, forKey: "attributes")
+			self.relationships = try values.decode(Relationships.self, forKey: "relationships")
 		}
 
 		public func encode(to encoder: Encoder) throws {
 			var values = encoder.container(keyedBy: StringCodingKey.self)
-			try values.encode(relationships, forKey: "relationships")
-			try values.encode(attributes, forKey: "attributes")
 			try values.encode(type, forKey: "type")
+			try values.encode(attributes, forKey: "attributes")
+			try values.encode(relationships, forKey: "relationships")
 		}
 	}
 

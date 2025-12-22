@@ -7,9 +7,13 @@ public struct InAppPurchaseOfferCodeCustomCodeUpdateRequest: Codable {
 	public var data: Data
 
 	public struct Data: Codable, Identifiable {
+		public var type: `Type`
 		public var id: String
 		public var attributes: Attributes?
-		public var type: `Type`
+
+		public enum `Type`: String, Codable, CaseIterable {
+			case inAppPurchaseOfferCodeCustomCodes
+		}
 
 		public struct Attributes: Codable {
 			public var isActive: Bool?
@@ -29,28 +33,24 @@ public struct InAppPurchaseOfferCodeCustomCodeUpdateRequest: Codable {
 			}
 		}
 
-		public enum `Type`: String, Codable, CaseIterable {
-			case inAppPurchaseOfferCodeCustomCodes
-		}
-
-		public init(id: String, attributes: Attributes? = nil, type: `Type`) {
+		public init(type: `Type`, id: String, attributes: Attributes? = nil) {
+			self.type = type
 			self.id = id
 			self.attributes = attributes
-			self.type = type
 		}
 
 		public init(from decoder: Decoder) throws {
 			let values = try decoder.container(keyedBy: StringCodingKey.self)
+			self.type = try values.decode(`Type`.self, forKey: "type")
 			self.id = try values.decode(String.self, forKey: "id")
 			self.attributes = try values.decodeIfPresent(Attributes.self, forKey: "attributes")
-			self.type = try values.decode(`Type`.self, forKey: "type")
 		}
 
 		public func encode(to encoder: Encoder) throws {
 			var values = encoder.container(keyedBy: StringCodingKey.self)
+			try values.encode(type, forKey: "type")
 			try values.encode(id, forKey: "id")
 			try values.encodeIfPresent(attributes, forKey: "attributes")
-			try values.encode(type, forKey: "type")
 		}
 	}
 

@@ -4,7 +4,7 @@ import XCTest
 
 final class SpecPatchingTests: XCTestCase {
     func testEnsuresPurchaseRequirementEnum() throws {
-        var root: [String: Any] = [
+        let rootObj: NSDictionary = [
             "components": [
                 "schemas": [:]
             ],
@@ -16,18 +16,18 @@ final class SpecPatchingTests: XCTestCase {
                 ]
             ]
         ]
+        var root = JSONValue(foundationObject: rootObj)
 
         _ = try SpecPatcher.patch(&root)
 
-        let schema = root["schema"] as? [String: Any]
-        let props = schema?["properties"] as? [String: Any]
-        let pr = props?["purchaseRequirement"] as? [String: Any]
-        let values = pr?["enum"] as? [Any]
-        XCTAssertEqual(values?.compactMap { $0 as? String }, ["NO_COST_ASSOCIATED", "IN_APP_PURCHASE"])
+        let values =
+            root.objectValue?["schema"]?.objectValue?["properties"]?.objectValue?["purchaseRequirement"]?.objectValue?["enum"]?.arrayValue?
+            .compactMap { $0.stringValue }
+        XCTAssertEqual(values, ["NO_COST_ASSOCIATED", "IN_APP_PURCHASE"])
     }
 
     func testEnsuresResponseErrorAndErrorResponseItemsRef() throws {
-        var root: [String: Any] = [
+        let rootObj: NSDictionary = [
             "components": [
                 "schemas": [
                     "ErrorResponse": [
@@ -50,19 +50,17 @@ final class SpecPatchingTests: XCTestCase {
                 ]
             ]
         ]
+        var root = JSONValue(foundationObject: rootObj)
 
         let result = try SpecPatcher.patch(&root)
         XCTAssertTrue(result.didChange)
 
-        let components = root["components"] as? [String: Any]
-        let schemas = components?["schemas"] as? [String: Any]
+        let schemas = root.objectValue?["components"]?.objectValue?["schemas"]?.objectValue
         XCTAssertNotNil(schemas?["ResponseError"])
 
-        let errorResponse = schemas?["ErrorResponse"] as? [String: Any]
-        let props = errorResponse?["properties"] as? [String: Any]
-        let errors = props?["errors"] as? [String: Any]
-        let items = errors?["items"] as? [String: Any]
-        XCTAssertEqual(items?["$ref"] as? String, "#/components/schemas/ResponseError")
+        let itemsRef =
+            schemas?["ErrorResponse"]?.objectValue?["properties"]?.objectValue?["errors"]?.objectValue?["items"]?.objectValue?["$ref"]?.stringValue
+        XCTAssertEqual(itemsRef, "#/components/schemas/ResponseError")
     }
 }
 #endif

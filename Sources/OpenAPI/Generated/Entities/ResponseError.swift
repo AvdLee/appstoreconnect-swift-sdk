@@ -4,32 +4,14 @@
 import Foundation
 
 public struct ResponseError: Codable, Identifiable {
-	public var id: String?
 	public var status: String
-	public var title: String
 	public var detail: String?
-	public var meta: Meta?
-	public var links: ErrorLinks?
 	public var source: Source?
+	public var id: String?
 	public var code: String
-
-	public struct Meta: Codable {
-		public var associatedErrors: [String: [ResponseError]]?
-
-		public init(associatedErrors: [String: [ResponseError]]? = nil) {
-			self.associatedErrors = associatedErrors
-		}
-
-		public init(from decoder: Decoder) throws {
-			let values = try decoder.container(keyedBy: StringCodingKey.self)
-			self.associatedErrors = try values.decodeIfPresent([String: [ResponseError]].self, forKey: "associatedErrors")
-		}
-
-		public func encode(to encoder: Encoder) throws {
-			var values = encoder.container(keyedBy: StringCodingKey.self)
-			try values.encodeIfPresent(associatedErrors, forKey: "associatedErrors")
-		}
-	}
+	public var title: String
+	public var links: ErrorLinks?
+	public var meta: Meta?
 
 	public enum Source: Codable {
 		case errorSourcePointer(ErrorSourcePointer)
@@ -58,38 +40,56 @@ public struct ResponseError: Codable, Identifiable {
 		}
 	}
 
-	public init(id: String? = nil, status: String, title: String, detail: String? = nil, meta: Meta? = nil, links: ErrorLinks? = nil, source: Source? = nil, code: String) {
-		self.id = id
+	public struct Meta: Codable {
+		public var associatedErrors: [String: [ResponseError]]?
+
+		public init(associatedErrors: [String: [ResponseError]]? = nil) {
+			self.associatedErrors = associatedErrors
+		}
+
+		public init(from decoder: Decoder) throws {
+			let values = try decoder.container(keyedBy: StringCodingKey.self)
+			self.associatedErrors = try values.decodeIfPresent([String: [ResponseError]].self, forKey: "associatedErrors")
+		}
+
+		public func encode(to encoder: Encoder) throws {
+			var values = encoder.container(keyedBy: StringCodingKey.self)
+			try values.encodeIfPresent(associatedErrors, forKey: "associatedErrors")
+		}
+	}
+
+	public init(status: String, detail: String? = nil, source: Source? = nil, id: String? = nil, code: String, title: String, links: ErrorLinks? = nil, meta: Meta? = nil) {
 		self.status = status
-		self.title = title
 		self.detail = detail
-		self.meta = meta
-		self.links = links
 		self.source = source
+		self.id = id
 		self.code = code
+		self.title = title
+		self.links = links
+		self.meta = meta
 	}
 
 	public init(from decoder: Decoder) throws {
 		let values = try decoder.container(keyedBy: StringCodingKey.self)
-		self.id = try values.decodeIfPresent(String.self, forKey: "id")
 		self.status = try values.decode(String.self, forKey: "status")
-		self.title = try values.decode(String.self, forKey: "title")
 		self.detail = try values.decodeIfPresent(String.self, forKey: "detail")
-		self.meta = try values.decodeIfPresent(Meta.self, forKey: "meta")
-		self.links = try values.decodeIfPresent(ErrorLinks.self, forKey: "links")
 		self.source = try values.decodeIfPresent(Source.self, forKey: "source")
+		self.id = try values.decodeIfPresent(String.self, forKey: "id")
 		self.code = try values.decode(String.self, forKey: "code")
+		self.title = try values.decode(String.self, forKey: "title")
+		self.links = try values.decodeIfPresent(ErrorLinks.self, forKey: "links")
+		self.meta = try values.decodeIfPresent(Meta.self, forKey: "meta")
 	}
 
 	public func encode(to encoder: Encoder) throws {
 		var values = encoder.container(keyedBy: StringCodingKey.self)
-		try values.encodeIfPresent(id, forKey: "id")
 		try values.encode(status, forKey: "status")
-		try values.encode(title, forKey: "title")
 		try values.encodeIfPresent(detail, forKey: "detail")
-		try values.encodeIfPresent(meta, forKey: "meta")
-		try values.encodeIfPresent(links, forKey: "links")
 		try values.encodeIfPresent(source, forKey: "source")
+		try values.encodeIfPresent(id, forKey: "id")
 		try values.encode(code, forKey: "code")
+		try values.encode(title, forKey: "title")
+		try values.encodeIfPresent(links, forKey: "links")
+		try values.encodeIfPresent(meta, forKey: "meta")
 	}
 }

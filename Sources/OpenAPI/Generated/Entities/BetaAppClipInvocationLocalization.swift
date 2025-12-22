@@ -4,10 +4,14 @@
 import Foundation
 
 public struct BetaAppClipInvocationLocalization: Codable, Identifiable {
-	public var attributes: Attributes?
-	public var type: `Type`
-	public var links: ResourceLinks?
 	public var id: String
+	public var links: ResourceLinks?
+	public var type: `Type`
+	public var attributes: Attributes?
+
+	public enum `Type`: String, Codable, CaseIterable {
+		case betaAppClipInvocationLocalizations
+	}
 
 	public struct Attributes: Codable {
 		public var title: String?
@@ -31,30 +35,26 @@ public struct BetaAppClipInvocationLocalization: Codable, Identifiable {
 		}
 	}
 
-	public enum `Type`: String, Codable, CaseIterable {
-		case betaAppClipInvocationLocalizations
-	}
-
-	public init(attributes: Attributes? = nil, type: `Type`, links: ResourceLinks? = nil, id: String) {
-		self.attributes = attributes
-		self.type = type
-		self.links = links
+	public init(id: String, links: ResourceLinks? = nil, type: `Type`, attributes: Attributes? = nil) {
 		self.id = id
+		self.links = links
+		self.type = type
+		self.attributes = attributes
 	}
 
 	public init(from decoder: Decoder) throws {
 		let values = try decoder.container(keyedBy: StringCodingKey.self)
-		self.attributes = try values.decodeIfPresent(Attributes.self, forKey: "attributes")
-		self.type = try values.decode(`Type`.self, forKey: "type")
-		self.links = try values.decodeIfPresent(ResourceLinks.self, forKey: "links")
 		self.id = try values.decode(String.self, forKey: "id")
+		self.links = try values.decodeIfPresent(ResourceLinks.self, forKey: "links")
+		self.type = try values.decode(`Type`.self, forKey: "type")
+		self.attributes = try values.decodeIfPresent(Attributes.self, forKey: "attributes")
 	}
 
 	public func encode(to encoder: Encoder) throws {
 		var values = encoder.container(keyedBy: StringCodingKey.self)
-		try values.encodeIfPresent(attributes, forKey: "attributes")
-		try values.encode(type, forKey: "type")
-		try values.encodeIfPresent(links, forKey: "links")
 		try values.encode(id, forKey: "id")
+		try values.encodeIfPresent(links, forKey: "links")
+		try values.encode(type, forKey: "type")
+		try values.encodeIfPresent(attributes, forKey: "attributes")
 	}
 }

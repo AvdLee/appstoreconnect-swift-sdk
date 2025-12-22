@@ -15,40 +15,40 @@ public struct GameCenterPlayerAchievementSubmissionCreateRequest: Codable {
 		}
 
 		public struct Attributes: Codable {
+			public var challengeIDs: [String]?
 			public var submittedDate: Date?
+			public var percentageAchieved: Int
 			public var scopedPlayerID: String
 			public var bundleID: String
 			public var vendorIdentifier: String
-			public var percentageAchieved: Int
-			public var challengeIDs: [String]?
 
-			public init(submittedDate: Date? = nil, scopedPlayerID: String, bundleID: String, vendorIdentifier: String, percentageAchieved: Int, challengeIDs: [String]? = nil) {
+			public init(challengeIDs: [String]? = nil, submittedDate: Date? = nil, percentageAchieved: Int, scopedPlayerID: String, bundleID: String, vendorIdentifier: String) {
+				self.challengeIDs = challengeIDs
 				self.submittedDate = submittedDate
+				self.percentageAchieved = percentageAchieved
 				self.scopedPlayerID = scopedPlayerID
 				self.bundleID = bundleID
 				self.vendorIdentifier = vendorIdentifier
-				self.percentageAchieved = percentageAchieved
-				self.challengeIDs = challengeIDs
 			}
 
 			public init(from decoder: Decoder) throws {
 				let values = try decoder.container(keyedBy: StringCodingKey.self)
+				self.challengeIDs = try values.decodeIfPresent([String].self, forKey: "challengeIds")
 				self.submittedDate = try values.decodeIfPresent(Date.self, forKey: "submittedDate")
+				self.percentageAchieved = try values.decode(Int.self, forKey: "percentageAchieved")
 				self.scopedPlayerID = try values.decode(String.self, forKey: "scopedPlayerId")
 				self.bundleID = try values.decode(String.self, forKey: "bundleId")
 				self.vendorIdentifier = try values.decode(String.self, forKey: "vendorIdentifier")
-				self.percentageAchieved = try values.decode(Int.self, forKey: "percentageAchieved")
-				self.challengeIDs = try values.decodeIfPresent([String].self, forKey: "challengeIds")
 			}
 
 			public func encode(to encoder: Encoder) throws {
 				var values = encoder.container(keyedBy: StringCodingKey.self)
+				try values.encodeIfPresent(challengeIDs, forKey: "challengeIds")
 				try values.encodeIfPresent(submittedDate, forKey: "submittedDate")
+				try values.encode(percentageAchieved, forKey: "percentageAchieved")
 				try values.encode(scopedPlayerID, forKey: "scopedPlayerId")
 				try values.encode(bundleID, forKey: "bundleId")
 				try values.encode(vendorIdentifier, forKey: "vendorIdentifier")
-				try values.encode(percentageAchieved, forKey: "percentageAchieved")
-				try values.encodeIfPresent(challengeIDs, forKey: "challengeIds")
 			}
 		}
 

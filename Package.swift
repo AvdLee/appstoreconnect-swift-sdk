@@ -5,7 +5,8 @@ var dependencies: [Package.Dependency] = [
     .package(url: "https://github.com/CreateAPI/URLQueryEncoder.git", from: "0.2.0"),
     .package(url: "https://github.com/apple/swift-crypto.git", from: "3.12.3"),
     .package(url: "https://github.com/apple/swift-argument-parser", from: "1.7.0"),
-    .package(url: "https://github.com/weichsel/ZIPFoundation", from: "0.9.20")
+    .package(url: "https://github.com/weichsel/ZIPFoundation", from: "0.9.20"),
+    .package(url: "https://github.com/apple/swift-collections.git", .upToNextMinor(from: "1.1.0"))
 ]
 
 var targetDependencies: [Target.Dependency] = [
@@ -54,6 +55,7 @@ let package = Package(
             name: "OpenAPIGeneratorCore",
             dependencies: [
                 .product(name: "ZIPFoundation", package: "ZIPFoundation"),
+                .product(name: "OrderedCollections", package: "swift-collections"),
             ],
             path: "Tools/OpenAPIGeneratorCore"
         ),

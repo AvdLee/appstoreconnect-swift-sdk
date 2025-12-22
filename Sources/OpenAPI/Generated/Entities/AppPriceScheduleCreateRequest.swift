@@ -4,39 +4,16 @@
 import Foundation
 
 public struct AppPriceScheduleCreateRequest: Codable {
-	public var included: [IncludedItem]?
 	public var data: Data
-
-	public enum IncludedItem: Codable {
-		case appPriceV2InlineCreate(AppPriceV2InlineCreate)
-		case territoryInlineCreate(TerritoryInlineCreate)
-
-		public init(from decoder: Decoder) throws {
-			let container = try decoder.singleValueContainer()
-			if let value = try? container.decode(AppPriceV2InlineCreate.self) {
-				self = .appPriceV2InlineCreate(value)
-			} else if let value = try? container.decode(TerritoryInlineCreate.self) {
-				self = .territoryInlineCreate(value)
-			} else {
-				throw DecodingError.dataCorruptedError(
-					in: container,
-					debugDescription: "Data could not be decoded as any of the expected types (AppPriceV2InlineCreate, TerritoryInlineCreate)."
-				)
-			}
-		}
-
-		public func encode(to encoder: Encoder) throws {
-			var container = encoder.singleValueContainer()
-			switch self {
-			case .appPriceV2InlineCreate(let value): try container.encode(value)
-			case .territoryInlineCreate(let value): try container.encode(value)
-			}
-		}
-	}
+	public var included: [IncludedItem]?
 
 	public struct Data: Codable {
-		public var relationships: Relationships
 		public var type: `Type`
+		public var relationships: Relationships
+
+		public enum `Type`: String, Codable, CaseIterable {
+			case appPriceSchedules
+		}
 
 		public struct Relationships: Codable {
 			public var app: App
@@ -91,28 +68,28 @@ public struct AppPriceScheduleCreateRequest: Codable {
 				public var data: [Datum]
 
 				public struct Datum: Codable, Identifiable {
-					public var id: String
 					public var type: `Type`
+					public var id: String
 
 					public enum `Type`: String, Codable, CaseIterable {
 						case appPrices
 					}
 
-					public init(id: String, type: `Type`) {
-						self.id = id
+					public init(type: `Type`, id: String) {
 						self.type = type
+						self.id = id
 					}
 
 					public init(from decoder: Decoder) throws {
 						let values = try decoder.container(keyedBy: StringCodingKey.self)
-						self.id = try values.decode(String.self, forKey: "id")
 						self.type = try values.decode(`Type`.self, forKey: "type")
+						self.id = try values.decode(String.self, forKey: "id")
 					}
 
 					public func encode(to encoder: Encoder) throws {
 						var values = encoder.container(keyedBy: StringCodingKey.self)
-						try values.encode(id, forKey: "id")
 						try values.encode(type, forKey: "type")
+						try values.encode(id, forKey: "id")
 					}
 				}
 
@@ -196,42 +173,65 @@ public struct AppPriceScheduleCreateRequest: Codable {
 			}
 		}
 
-		public enum `Type`: String, Codable, CaseIterable {
-			case appPriceSchedules
-		}
-
-		public init(relationships: Relationships, type: `Type`) {
-			self.relationships = relationships
+		public init(type: `Type`, relationships: Relationships) {
 			self.type = type
+			self.relationships = relationships
 		}
 
 		public init(from decoder: Decoder) throws {
 			let values = try decoder.container(keyedBy: StringCodingKey.self)
-			self.relationships = try values.decode(Relationships.self, forKey: "relationships")
 			self.type = try values.decode(`Type`.self, forKey: "type")
+			self.relationships = try values.decode(Relationships.self, forKey: "relationships")
 		}
 
 		public func encode(to encoder: Encoder) throws {
 			var values = encoder.container(keyedBy: StringCodingKey.self)
-			try values.encode(relationships, forKey: "relationships")
 			try values.encode(type, forKey: "type")
+			try values.encode(relationships, forKey: "relationships")
 		}
 	}
 
-	public init(included: [IncludedItem]? = nil, data: Data) {
-		self.included = included
+	public enum IncludedItem: Codable {
+		case appPriceV2InlineCreate(AppPriceV2InlineCreate)
+		case territoryInlineCreate(TerritoryInlineCreate)
+
+		public init(from decoder: Decoder) throws {
+			let container = try decoder.singleValueContainer()
+			if let value = try? container.decode(AppPriceV2InlineCreate.self) {
+				self = .appPriceV2InlineCreate(value)
+			} else if let value = try? container.decode(TerritoryInlineCreate.self) {
+				self = .territoryInlineCreate(value)
+			} else {
+				throw DecodingError.dataCorruptedError(
+					in: container,
+					debugDescription: "Data could not be decoded as any of the expected types (AppPriceV2InlineCreate, TerritoryInlineCreate)."
+				)
+			}
+		}
+
+		public func encode(to encoder: Encoder) throws {
+			var container = encoder.singleValueContainer()
+			switch self {
+			case .appPriceV2InlineCreate(let value): try container.encode(value)
+			case .territoryInlineCreate(let value): try container.encode(value)
+			}
+		}
+	}
+
+	public init(data: Data, included: [IncludedItem]? = nil) {
 		self.data = data
+		self.included = included
 	}
 
 	public init(from decoder: Decoder) throws {
 		let values = try decoder.container(keyedBy: StringCodingKey.self)
-		self.included = try values.decodeIfPresent([IncludedItem].self, forKey: "included")
 		self.data = try values.decode(Data.self, forKey: "data")
+		self.included = try values.decodeIfPresent([IncludedItem].self, forKey: "included")
 	}
 
 	public func encode(to encoder: Encoder) throws {
 		var values = encoder.container(keyedBy: StringCodingKey.self)
-		try values.encodeIfPresent(included, forKey: "included")
 		try values.encode(data, forKey: "data")
+		try values.encodeIfPresent(included, forKey: "included")
 	}
 }

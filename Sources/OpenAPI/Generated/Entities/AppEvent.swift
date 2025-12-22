@@ -4,15 +4,11 @@
 import Foundation
 
 public struct AppEvent: Codable, Identifiable {
-	public var type: `Type`
 	public var id: String
 	public var relationships: Relationships?
-	public var attributes: Attributes?
 	public var links: ResourceLinks?
-
-	public enum `Type`: String, Codable, CaseIterable {
-		case appEvents
-	}
+	public var type: `Type`
+	public var attributes: Attributes?
 
 	public struct Relationships: Codable {
 		public var localizations: Localizations?
@@ -23,28 +19,28 @@ public struct AppEvent: Codable, Identifiable {
 			public var data: [Datum]?
 
 			public struct Datum: Codable, Identifiable {
-				public var id: String
 				public var type: `Type`
+				public var id: String
 
 				public enum `Type`: String, Codable, CaseIterable {
 					case appEventLocalizations
 				}
 
-				public init(id: String, type: `Type`) {
-					self.id = id
+				public init(type: `Type`, id: String) {
 					self.type = type
+					self.id = id
 				}
 
 				public init(from decoder: Decoder) throws {
 					let values = try decoder.container(keyedBy: StringCodingKey.self)
-					self.id = try values.decode(String.self, forKey: "id")
 					self.type = try values.decode(`Type`.self, forKey: "type")
+					self.id = try values.decode(String.self, forKey: "id")
 				}
 
 				public func encode(to encoder: Encoder) throws {
 					var values = encoder.container(keyedBy: StringCodingKey.self)
-					try values.encode(id, forKey: "id")
 					try values.encode(type, forKey: "type")
+					try values.encode(id, forKey: "id")
 				}
 			}
 
@@ -84,17 +80,36 @@ public struct AppEvent: Codable, Identifiable {
 		}
 	}
 
+	public enum `Type`: String, Codable, CaseIterable {
+		case appEvents
+	}
+
 	public struct Attributes: Codable {
+		public var priority: Priority?
+		public var badge: Badge?
 		public var referenceName: String?
 		public var purpose: Purpose?
-		public var archivedTerritorySchedules: [ArchivedTerritorySchedule]?
-		public var primaryLocale: String?
 		public var territorySchedules: [TerritorySchedule]?
-		public var eventState: EventState?
-		public var badge: Badge?
-		public var purchaseRequirement: PurchaseRequirement?
-		public var priority: Priority?
+		public var primaryLocale: String?
 		public var deepLink: String?
+		public var archivedTerritorySchedules: [ArchivedTerritorySchedule]?
+		public var purchaseRequirement: PurchaseRequirement?
+		public var eventState: EventState?
+
+		public enum Priority: String, Codable, CaseIterable {
+			case high = "HIGH"
+			case normal = "NORMAL"
+		}
+
+		public enum Badge: String, Codable, CaseIterable {
+			case liveEvent = "LIVE_EVENT"
+			case premiere = "PREMIERE"
+			case challenge = "CHALLENGE"
+			case competition = "COMPETITION"
+			case newSeason = "NEW_SEASON"
+			case majorUpdate = "MAJOR_UPDATE"
+			case specialEvent = "SPECIAL_EVENT"
+		}
 
 		public enum Purpose: String, Codable, CaseIterable {
 			case appropriateForAllUsers = "APPROPRIATE_FOR_ALL_USERS"
@@ -103,64 +118,69 @@ public struct AppEvent: Codable, Identifiable {
 			case bringBackLapsedUsers = "BRING_BACK_LAPSED_USERS"
 		}
 
-		public struct ArchivedTerritorySchedule: Codable {
-			public var territories: [String]?
-			public var eventEnd: Date?
-			public var publishStart: Date?
+		public struct TerritorySchedule: Codable {
 			public var eventStart: Date?
+			public var eventEnd: Date?
+			public var territories: [String]?
+			public var publishStart: Date?
 
-			public init(territories: [String]? = nil, eventEnd: Date? = nil, publishStart: Date? = nil, eventStart: Date? = nil) {
-				self.territories = territories
-				self.eventEnd = eventEnd
-				self.publishStart = publishStart
+			public init(eventStart: Date? = nil, eventEnd: Date? = nil, territories: [String]? = nil, publishStart: Date? = nil) {
 				self.eventStart = eventStart
+				self.eventEnd = eventEnd
+				self.territories = territories
+				self.publishStart = publishStart
 			}
 
 			public init(from decoder: Decoder) throws {
 				let values = try decoder.container(keyedBy: StringCodingKey.self)
-				self.territories = try values.decodeIfPresent([String].self, forKey: "territories")
-				self.eventEnd = try values.decodeIfPresent(Date.self, forKey: "eventEnd")
-				self.publishStart = try values.decodeIfPresent(Date.self, forKey: "publishStart")
 				self.eventStart = try values.decodeIfPresent(Date.self, forKey: "eventStart")
+				self.eventEnd = try values.decodeIfPresent(Date.self, forKey: "eventEnd")
+				self.territories = try values.decodeIfPresent([String].self, forKey: "territories")
+				self.publishStart = try values.decodeIfPresent(Date.self, forKey: "publishStart")
 			}
 
 			public func encode(to encoder: Encoder) throws {
 				var values = encoder.container(keyedBy: StringCodingKey.self)
-				try values.encodeIfPresent(territories, forKey: "territories")
-				try values.encodeIfPresent(eventEnd, forKey: "eventEnd")
-				try values.encodeIfPresent(publishStart, forKey: "publishStart")
 				try values.encodeIfPresent(eventStart, forKey: "eventStart")
+				try values.encodeIfPresent(eventEnd, forKey: "eventEnd")
+				try values.encodeIfPresent(territories, forKey: "territories")
+				try values.encodeIfPresent(publishStart, forKey: "publishStart")
 			}
 		}
 
-		public struct TerritorySchedule: Codable {
-			public var publishStart: Date?
-			public var territories: [String]?
-			public var eventEnd: Date?
+		public struct ArchivedTerritorySchedule: Codable {
 			public var eventStart: Date?
+			public var eventEnd: Date?
+			public var territories: [String]?
+			public var publishStart: Date?
 
-			public init(publishStart: Date? = nil, territories: [String]? = nil, eventEnd: Date? = nil, eventStart: Date? = nil) {
-				self.publishStart = publishStart
-				self.territories = territories
-				self.eventEnd = eventEnd
+			public init(eventStart: Date? = nil, eventEnd: Date? = nil, territories: [String]? = nil, publishStart: Date? = nil) {
 				self.eventStart = eventStart
+				self.eventEnd = eventEnd
+				self.territories = territories
+				self.publishStart = publishStart
 			}
 
 			public init(from decoder: Decoder) throws {
 				let values = try decoder.container(keyedBy: StringCodingKey.self)
-				self.publishStart = try values.decodeIfPresent(Date.self, forKey: "publishStart")
-				self.territories = try values.decodeIfPresent([String].self, forKey: "territories")
-				self.eventEnd = try values.decodeIfPresent(Date.self, forKey: "eventEnd")
 				self.eventStart = try values.decodeIfPresent(Date.self, forKey: "eventStart")
+				self.eventEnd = try values.decodeIfPresent(Date.self, forKey: "eventEnd")
+				self.territories = try values.decodeIfPresent([String].self, forKey: "territories")
+				self.publishStart = try values.decodeIfPresent(Date.self, forKey: "publishStart")
 			}
 
 			public func encode(to encoder: Encoder) throws {
 				var values = encoder.container(keyedBy: StringCodingKey.self)
-				try values.encodeIfPresent(publishStart, forKey: "publishStart")
-				try values.encodeIfPresent(territories, forKey: "territories")
-				try values.encodeIfPresent(eventEnd, forKey: "eventEnd")
 				try values.encodeIfPresent(eventStart, forKey: "eventStart")
+				try values.encodeIfPresent(eventEnd, forKey: "eventEnd")
+				try values.encodeIfPresent(territories, forKey: "territories")
+				try values.encodeIfPresent(publishStart, forKey: "publishStart")
 			}
+		}
+
+		public enum PurchaseRequirement: String, Codable, CaseIterable {
+			case noCostAssociated = "NO_COST_ASSOCIATED"
+			case inAppPurchase = "IN_APP_PURCHASE"
 		}
 
 		public enum EventState: String, Codable, CaseIterable {
@@ -176,91 +196,71 @@ public struct AppEvent: Codable, Identifiable {
 			case archived = "ARCHIVED"
 		}
 
-		public enum Badge: String, Codable, CaseIterable {
-			case liveEvent = "LIVE_EVENT"
-			case premiere = "PREMIERE"
-			case challenge = "CHALLENGE"
-			case competition = "COMPETITION"
-			case newSeason = "NEW_SEASON"
-			case majorUpdate = "MAJOR_UPDATE"
-			case specialEvent = "SPECIAL_EVENT"
-		}
-
-		public enum PurchaseRequirement: String, Codable, CaseIterable {
-			case noCostAssociated = "NO_COST_ASSOCIATED"
-			case inAppPurchase = "IN_APP_PURCHASE"
-		}
-
-		public enum Priority: String, Codable, CaseIterable {
-			case high = "HIGH"
-			case normal = "NORMAL"
-		}
-
-		public init(referenceName: String? = nil, purpose: Purpose? = nil, archivedTerritorySchedules: [ArchivedTerritorySchedule]? = nil, primaryLocale: String? = nil, territorySchedules: [TerritorySchedule]? = nil, eventState: EventState? = nil, badge: Badge? = nil, purchaseRequirement: PurchaseRequirement? = nil, priority: Priority? = nil, deepLink: String? = nil) {
+		public init(priority: Priority? = nil, badge: Badge? = nil, referenceName: String? = nil, purpose: Purpose? = nil, territorySchedules: [TerritorySchedule]? = nil, primaryLocale: String? = nil, deepLink: String? = nil, archivedTerritorySchedules: [ArchivedTerritorySchedule]? = nil, purchaseRequirement: PurchaseRequirement? = nil, eventState: EventState? = nil) {
+			self.priority = priority
+			self.badge = badge
 			self.referenceName = referenceName
 			self.purpose = purpose
-			self.archivedTerritorySchedules = archivedTerritorySchedules
-			self.primaryLocale = primaryLocale
 			self.territorySchedules = territorySchedules
-			self.eventState = eventState
-			self.badge = badge
-			self.purchaseRequirement = purchaseRequirement
-			self.priority = priority
+			self.primaryLocale = primaryLocale
 			self.deepLink = deepLink
+			self.archivedTerritorySchedules = archivedTerritorySchedules
+			self.purchaseRequirement = purchaseRequirement
+			self.eventState = eventState
 		}
 
 		public init(from decoder: Decoder) throws {
 			let values = try decoder.container(keyedBy: StringCodingKey.self)
+			self.priority = try values.decodeIfPresent(Priority.self, forKey: "priority")
+			self.badge = try values.decodeIfPresent(Badge.self, forKey: "badge")
 			self.referenceName = try values.decodeIfPresent(String.self, forKey: "referenceName")
 			self.purpose = try values.decodeIfPresent(Purpose.self, forKey: "purpose")
-			self.archivedTerritorySchedules = try values.decodeIfPresent([ArchivedTerritorySchedule].self, forKey: "archivedTerritorySchedules")
-			self.primaryLocale = try values.decodeIfPresent(String.self, forKey: "primaryLocale")
 			self.territorySchedules = try values.decodeIfPresent([TerritorySchedule].self, forKey: "territorySchedules")
-			self.eventState = try values.decodeIfPresent(EventState.self, forKey: "eventState")
-			self.badge = try values.decodeIfPresent(Badge.self, forKey: "badge")
-			self.purchaseRequirement = try values.decodeIfPresent(PurchaseRequirement.self, forKey: "purchaseRequirement")
-			self.priority = try values.decodeIfPresent(Priority.self, forKey: "priority")
+			self.primaryLocale = try values.decodeIfPresent(String.self, forKey: "primaryLocale")
 			self.deepLink = try values.decodeIfPresent(String.self, forKey: "deepLink")
+			self.archivedTerritorySchedules = try values.decodeIfPresent([ArchivedTerritorySchedule].self, forKey: "archivedTerritorySchedules")
+			self.purchaseRequirement = try values.decodeIfPresent(PurchaseRequirement.self, forKey: "purchaseRequirement")
+			self.eventState = try values.decodeIfPresent(EventState.self, forKey: "eventState")
 		}
 
 		public func encode(to encoder: Encoder) throws {
 			var values = encoder.container(keyedBy: StringCodingKey.self)
+			try values.encodeIfPresent(priority, forKey: "priority")
+			try values.encodeIfPresent(badge, forKey: "badge")
 			try values.encodeIfPresent(referenceName, forKey: "referenceName")
 			try values.encodeIfPresent(purpose, forKey: "purpose")
-			try values.encodeIfPresent(archivedTerritorySchedules, forKey: "archivedTerritorySchedules")
-			try values.encodeIfPresent(primaryLocale, forKey: "primaryLocale")
 			try values.encodeIfPresent(territorySchedules, forKey: "territorySchedules")
-			try values.encodeIfPresent(eventState, forKey: "eventState")
-			try values.encodeIfPresent(badge, forKey: "badge")
-			try values.encodeIfPresent(purchaseRequirement, forKey: "purchaseRequirement")
-			try values.encodeIfPresent(priority, forKey: "priority")
+			try values.encodeIfPresent(primaryLocale, forKey: "primaryLocale")
 			try values.encodeIfPresent(deepLink, forKey: "deepLink")
+			try values.encodeIfPresent(archivedTerritorySchedules, forKey: "archivedTerritorySchedules")
+			try values.encodeIfPresent(purchaseRequirement, forKey: "purchaseRequirement")
+			try values.encodeIfPresent(eventState, forKey: "eventState")
 		}
 	}
 
-	public init(type: `Type`, id: String, relationships: Relationships? = nil, attributes: Attributes? = nil, links: ResourceLinks? = nil) {
-		self.type = type
+	public init(id: String, relationships: Relationships? = nil, links: ResourceLinks? = nil, type: `Type`, attributes: Attributes? = nil) {
 		self.id = id
 		self.relationships = relationships
-		self.attributes = attributes
 		self.links = links
+		self.type = type
+		self.attributes = attributes
 	}
 
 	public init(from decoder: Decoder) throws {
 		let values = try decoder.container(keyedBy: StringCodingKey.self)
-		self.type = try values.decode(`Type`.self, forKey: "type")
 		self.id = try values.decode(String.self, forKey: "id")
 		self.relationships = try values.decodeIfPresent(Relationships.self, forKey: "relationships")
-		self.attributes = try values.decodeIfPresent(Attributes.self, forKey: "attributes")
 		self.links = try values.decodeIfPresent(ResourceLinks.self, forKey: "links")
+		self.type = try values.decode(`Type`.self, forKey: "type")
+		self.attributes = try values.decodeIfPresent(Attributes.self, forKey: "attributes")
 	}
 
 	public func encode(to encoder: Encoder) throws {
 		var values = encoder.container(keyedBy: StringCodingKey.self)
-		try values.encode(type, forKey: "type")
 		try values.encode(id, forKey: "id")
 		try values.encodeIfPresent(relationships, forKey: "relationships")
-		try values.encodeIfPresent(attributes, forKey: "attributes")
 		try values.encodeIfPresent(links, forKey: "links")
+		try values.encode(type, forKey: "type")
+		try values.encodeIfPresent(attributes, forKey: "attributes")
 	}
 }

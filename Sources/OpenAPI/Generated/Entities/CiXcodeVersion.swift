@@ -4,97 +4,19 @@
 import Foundation
 
 public struct CiXcodeVersion: Codable, Identifiable {
-	public var attributes: Attributes?
-	public var links: ResourceLinks?
-	public var relationships: Relationships?
-	public var type: `Type`
 	public var id: String
-
-	public struct Attributes: Codable {
-		public var name: String?
-		public var version: String?
-		public var testDestinations: [TestDestination]?
-
-		public struct TestDestination: Codable {
-			public var availableRuntimes: [AvailableRuntime]?
-			public var deviceTypeName: String?
-			public var kind: CiTestDestinationKind?
-			public var deviceTypeIdentifier: String?
-
-			public struct AvailableRuntime: Codable {
-				public var runtimeName: String?
-				public var runtimeIdentifier: String?
-
-				public init(runtimeName: String? = nil, runtimeIdentifier: String? = nil) {
-					self.runtimeName = runtimeName
-					self.runtimeIdentifier = runtimeIdentifier
-				}
-
-				public init(from decoder: Decoder) throws {
-					let values = try decoder.container(keyedBy: StringCodingKey.self)
-					self.runtimeName = try values.decodeIfPresent(String.self, forKey: "runtimeName")
-					self.runtimeIdentifier = try values.decodeIfPresent(String.self, forKey: "runtimeIdentifier")
-				}
-
-				public func encode(to encoder: Encoder) throws {
-					var values = encoder.container(keyedBy: StringCodingKey.self)
-					try values.encodeIfPresent(runtimeName, forKey: "runtimeName")
-					try values.encodeIfPresent(runtimeIdentifier, forKey: "runtimeIdentifier")
-				}
-			}
-
-			public init(availableRuntimes: [AvailableRuntime]? = nil, deviceTypeName: String? = nil, kind: CiTestDestinationKind? = nil, deviceTypeIdentifier: String? = nil) {
-				self.availableRuntimes = availableRuntimes
-				self.deviceTypeName = deviceTypeName
-				self.kind = kind
-				self.deviceTypeIdentifier = deviceTypeIdentifier
-			}
-
-			public init(from decoder: Decoder) throws {
-				let values = try decoder.container(keyedBy: StringCodingKey.self)
-				self.availableRuntimes = try values.decodeIfPresent([AvailableRuntime].self, forKey: "availableRuntimes")
-				self.deviceTypeName = try values.decodeIfPresent(String.self, forKey: "deviceTypeName")
-				self.kind = try values.decodeIfPresent(CiTestDestinationKind.self, forKey: "kind")
-				self.deviceTypeIdentifier = try values.decodeIfPresent(String.self, forKey: "deviceTypeIdentifier")
-			}
-
-			public func encode(to encoder: Encoder) throws {
-				var values = encoder.container(keyedBy: StringCodingKey.self)
-				try values.encodeIfPresent(availableRuntimes, forKey: "availableRuntimes")
-				try values.encodeIfPresent(deviceTypeName, forKey: "deviceTypeName")
-				try values.encodeIfPresent(kind, forKey: "kind")
-				try values.encodeIfPresent(deviceTypeIdentifier, forKey: "deviceTypeIdentifier")
-			}
-		}
-
-		public init(name: String? = nil, version: String? = nil, testDestinations: [TestDestination]? = nil) {
-			self.name = name
-			self.version = version
-			self.testDestinations = testDestinations
-		}
-
-		public init(from decoder: Decoder) throws {
-			let values = try decoder.container(keyedBy: StringCodingKey.self)
-			self.name = try values.decodeIfPresent(String.self, forKey: "name")
-			self.version = try values.decodeIfPresent(String.self, forKey: "version")
-			self.testDestinations = try values.decodeIfPresent([TestDestination].self, forKey: "testDestinations")
-		}
-
-		public func encode(to encoder: Encoder) throws {
-			var values = encoder.container(keyedBy: StringCodingKey.self)
-			try values.encodeIfPresent(name, forKey: "name")
-			try values.encodeIfPresent(version, forKey: "version")
-			try values.encodeIfPresent(testDestinations, forKey: "testDestinations")
-		}
-	}
+	public var relationships: Relationships?
+	public var links: ResourceLinks?
+	public var type: `Type`
+	public var attributes: Attributes?
 
 	public struct Relationships: Codable {
 		public var macOsVersions: MacOsVersions?
 
 		public struct MacOsVersions: Codable {
 			public var links: RelationshipLinks?
-			public var data: [Datum]?
 			public var meta: PagingInformation?
+			public var data: [Datum]?
 
 			public struct Datum: Codable, Identifiable {
 				public var type: `Type`
@@ -122,24 +44,24 @@ public struct CiXcodeVersion: Codable, Identifiable {
 				}
 			}
 
-			public init(links: RelationshipLinks? = nil, data: [Datum]? = nil, meta: PagingInformation? = nil) {
+			public init(links: RelationshipLinks? = nil, meta: PagingInformation? = nil, data: [Datum]? = nil) {
 				self.links = links
-				self.data = data
 				self.meta = meta
+				self.data = data
 			}
 
 			public init(from decoder: Decoder) throws {
 				let values = try decoder.container(keyedBy: StringCodingKey.self)
 				self.links = try values.decodeIfPresent(RelationshipLinks.self, forKey: "links")
-				self.data = try values.decodeIfPresent([Datum].self, forKey: "data")
 				self.meta = try values.decodeIfPresent(PagingInformation.self, forKey: "meta")
+				self.data = try values.decodeIfPresent([Datum].self, forKey: "data")
 			}
 
 			public func encode(to encoder: Encoder) throws {
 				var values = encoder.container(keyedBy: StringCodingKey.self)
 				try values.encodeIfPresent(links, forKey: "links")
-				try values.encodeIfPresent(data, forKey: "data")
 				try values.encodeIfPresent(meta, forKey: "meta")
+				try values.encodeIfPresent(data, forKey: "data")
 			}
 		}
 
@@ -162,29 +84,107 @@ public struct CiXcodeVersion: Codable, Identifiable {
 		case ciXcodeVersions
 	}
 
-	public init(attributes: Attributes? = nil, links: ResourceLinks? = nil, relationships: Relationships? = nil, type: `Type`, id: String) {
-		self.attributes = attributes
-		self.links = links
-		self.relationships = relationships
-		self.type = type
+	public struct Attributes: Codable {
+		public var version: String?
+		public var name: String?
+		public var testDestinations: [TestDestination]?
+
+		public struct TestDestination: Codable {
+			public var deviceTypeName: String?
+			public var kind: CiTestDestinationKind?
+			public var deviceTypeIdentifier: String?
+			public var availableRuntimes: [AvailableRuntime]?
+
+			public struct AvailableRuntime: Codable {
+				public var runtimeIdentifier: String?
+				public var runtimeName: String?
+
+				public init(runtimeIdentifier: String? = nil, runtimeName: String? = nil) {
+					self.runtimeIdentifier = runtimeIdentifier
+					self.runtimeName = runtimeName
+				}
+
+				public init(from decoder: Decoder) throws {
+					let values = try decoder.container(keyedBy: StringCodingKey.self)
+					self.runtimeIdentifier = try values.decodeIfPresent(String.self, forKey: "runtimeIdentifier")
+					self.runtimeName = try values.decodeIfPresent(String.self, forKey: "runtimeName")
+				}
+
+				public func encode(to encoder: Encoder) throws {
+					var values = encoder.container(keyedBy: StringCodingKey.self)
+					try values.encodeIfPresent(runtimeIdentifier, forKey: "runtimeIdentifier")
+					try values.encodeIfPresent(runtimeName, forKey: "runtimeName")
+				}
+			}
+
+			public init(deviceTypeName: String? = nil, kind: CiTestDestinationKind? = nil, deviceTypeIdentifier: String? = nil, availableRuntimes: [AvailableRuntime]? = nil) {
+				self.deviceTypeName = deviceTypeName
+				self.kind = kind
+				self.deviceTypeIdentifier = deviceTypeIdentifier
+				self.availableRuntimes = availableRuntimes
+			}
+
+			public init(from decoder: Decoder) throws {
+				let values = try decoder.container(keyedBy: StringCodingKey.self)
+				self.deviceTypeName = try values.decodeIfPresent(String.self, forKey: "deviceTypeName")
+				self.kind = try values.decodeIfPresent(CiTestDestinationKind.self, forKey: "kind")
+				self.deviceTypeIdentifier = try values.decodeIfPresent(String.self, forKey: "deviceTypeIdentifier")
+				self.availableRuntimes = try values.decodeIfPresent([AvailableRuntime].self, forKey: "availableRuntimes")
+			}
+
+			public func encode(to encoder: Encoder) throws {
+				var values = encoder.container(keyedBy: StringCodingKey.self)
+				try values.encodeIfPresent(deviceTypeName, forKey: "deviceTypeName")
+				try values.encodeIfPresent(kind, forKey: "kind")
+				try values.encodeIfPresent(deviceTypeIdentifier, forKey: "deviceTypeIdentifier")
+				try values.encodeIfPresent(availableRuntimes, forKey: "availableRuntimes")
+			}
+		}
+
+		public init(version: String? = nil, name: String? = nil, testDestinations: [TestDestination]? = nil) {
+			self.version = version
+			self.name = name
+			self.testDestinations = testDestinations
+		}
+
+		public init(from decoder: Decoder) throws {
+			let values = try decoder.container(keyedBy: StringCodingKey.self)
+			self.version = try values.decodeIfPresent(String.self, forKey: "version")
+			self.name = try values.decodeIfPresent(String.self, forKey: "name")
+			self.testDestinations = try values.decodeIfPresent([TestDestination].self, forKey: "testDestinations")
+		}
+
+		public func encode(to encoder: Encoder) throws {
+			var values = encoder.container(keyedBy: StringCodingKey.self)
+			try values.encodeIfPresent(version, forKey: "version")
+			try values.encodeIfPresent(name, forKey: "name")
+			try values.encodeIfPresent(testDestinations, forKey: "testDestinations")
+		}
+	}
+
+	public init(id: String, relationships: Relationships? = nil, links: ResourceLinks? = nil, type: `Type`, attributes: Attributes? = nil) {
 		self.id = id
+		self.relationships = relationships
+		self.links = links
+		self.type = type
+		self.attributes = attributes
 	}
 
 	public init(from decoder: Decoder) throws {
 		let values = try decoder.container(keyedBy: StringCodingKey.self)
-		self.attributes = try values.decodeIfPresent(Attributes.self, forKey: "attributes")
-		self.links = try values.decodeIfPresent(ResourceLinks.self, forKey: "links")
-		self.relationships = try values.decodeIfPresent(Relationships.self, forKey: "relationships")
-		self.type = try values.decode(`Type`.self, forKey: "type")
 		self.id = try values.decode(String.self, forKey: "id")
+		self.relationships = try values.decodeIfPresent(Relationships.self, forKey: "relationships")
+		self.links = try values.decodeIfPresent(ResourceLinks.self, forKey: "links")
+		self.type = try values.decode(`Type`.self, forKey: "type")
+		self.attributes = try values.decodeIfPresent(Attributes.self, forKey: "attributes")
 	}
 
 	public func encode(to encoder: Encoder) throws {
 		var values = encoder.container(keyedBy: StringCodingKey.self)
-		try values.encodeIfPresent(attributes, forKey: "attributes")
-		try values.encodeIfPresent(links, forKey: "links")
-		try values.encodeIfPresent(relationships, forKey: "relationships")
-		try values.encode(type, forKey: "type")
 		try values.encode(id, forKey: "id")
+		try values.encodeIfPresent(relationships, forKey: "relationships")
+		try values.encodeIfPresent(links, forKey: "links")
+		try values.encode(type, forKey: "type")
+		try values.encodeIfPresent(attributes, forKey: "attributes")
 	}
 }

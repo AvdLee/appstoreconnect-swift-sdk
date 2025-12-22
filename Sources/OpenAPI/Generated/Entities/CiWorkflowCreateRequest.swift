@@ -7,9 +7,83 @@ public struct CiWorkflowCreateRequest: Codable {
 	public var data: Data
 
 	public struct Data: Codable {
-		public var relationships: Relationships
-		public var attributes: Attributes
 		public var type: `Type`
+		public var attributes: Attributes
+		public var relationships: Relationships
+
+		public enum `Type`: String, Codable, CaseIterable {
+			case ciWorkflows
+		}
+
+		public struct Attributes: Codable {
+			public var description: String
+			public var scheduledStartCondition: CiScheduledStartCondition?
+			public var actions: [CiAction]
+			public var pullRequestStartCondition: CiPullRequestStartCondition?
+			public var isClean: Bool
+			public var containerFilePath: String
+			public var branchStartCondition: CiBranchStartCondition?
+			public var manualPullRequestStartCondition: CiManualPullRequestStartCondition?
+			public var isEnabled: Bool
+			public var manualTagStartCondition: CiManualTagStartCondition?
+			public var isLockedForEditing: Bool?
+			public var tagStartCondition: CiTagStartCondition?
+			public var name: String
+			public var manualBranchStartCondition: CiManualBranchStartCondition?
+
+			public init(description: String, scheduledStartCondition: CiScheduledStartCondition? = nil, actions: [CiAction], pullRequestStartCondition: CiPullRequestStartCondition? = nil, isClean: Bool, containerFilePath: String, branchStartCondition: CiBranchStartCondition? = nil, manualPullRequestStartCondition: CiManualPullRequestStartCondition? = nil, isEnabled: Bool, manualTagStartCondition: CiManualTagStartCondition? = nil, isLockedForEditing: Bool? = nil, tagStartCondition: CiTagStartCondition? = nil, name: String, manualBranchStartCondition: CiManualBranchStartCondition? = nil) {
+				self.description = description
+				self.scheduledStartCondition = scheduledStartCondition
+				self.actions = actions
+				self.pullRequestStartCondition = pullRequestStartCondition
+				self.isClean = isClean
+				self.containerFilePath = containerFilePath
+				self.branchStartCondition = branchStartCondition
+				self.manualPullRequestStartCondition = manualPullRequestStartCondition
+				self.isEnabled = isEnabled
+				self.manualTagStartCondition = manualTagStartCondition
+				self.isLockedForEditing = isLockedForEditing
+				self.tagStartCondition = tagStartCondition
+				self.name = name
+				self.manualBranchStartCondition = manualBranchStartCondition
+			}
+
+			public init(from decoder: Decoder) throws {
+				let values = try decoder.container(keyedBy: StringCodingKey.self)
+				self.description = try values.decode(String.self, forKey: "description")
+				self.scheduledStartCondition = try values.decodeIfPresent(CiScheduledStartCondition.self, forKey: "scheduledStartCondition")
+				self.actions = try values.decode([CiAction].self, forKey: "actions")
+				self.pullRequestStartCondition = try values.decodeIfPresent(CiPullRequestStartCondition.self, forKey: "pullRequestStartCondition")
+				self.isClean = try values.decode(Bool.self, forKey: "clean")
+				self.containerFilePath = try values.decode(String.self, forKey: "containerFilePath")
+				self.branchStartCondition = try values.decodeIfPresent(CiBranchStartCondition.self, forKey: "branchStartCondition")
+				self.manualPullRequestStartCondition = try values.decodeIfPresent(CiManualPullRequestStartCondition.self, forKey: "manualPullRequestStartCondition")
+				self.isEnabled = try values.decode(Bool.self, forKey: "isEnabled")
+				self.manualTagStartCondition = try values.decodeIfPresent(CiManualTagStartCondition.self, forKey: "manualTagStartCondition")
+				self.isLockedForEditing = try values.decodeIfPresent(Bool.self, forKey: "isLockedForEditing")
+				self.tagStartCondition = try values.decodeIfPresent(CiTagStartCondition.self, forKey: "tagStartCondition")
+				self.name = try values.decode(String.self, forKey: "name")
+				self.manualBranchStartCondition = try values.decodeIfPresent(CiManualBranchStartCondition.self, forKey: "manualBranchStartCondition")
+			}
+
+			public func encode(to encoder: Encoder) throws {
+				var values = encoder.container(keyedBy: StringCodingKey.self)
+				try values.encode(description, forKey: "description")
+				try values.encodeIfPresent(scheduledStartCondition, forKey: "scheduledStartCondition")
+				try values.encode(actions, forKey: "actions")
+				try values.encodeIfPresent(pullRequestStartCondition, forKey: "pullRequestStartCondition")
+				try values.encode(isClean, forKey: "clean")
+				try values.encode(containerFilePath, forKey: "containerFilePath")
+				try values.encodeIfPresent(branchStartCondition, forKey: "branchStartCondition")
+				try values.encodeIfPresent(manualPullRequestStartCondition, forKey: "manualPullRequestStartCondition")
+				try values.encode(isEnabled, forKey: "isEnabled")
+				try values.encodeIfPresent(manualTagStartCondition, forKey: "manualTagStartCondition")
+				try values.encodeIfPresent(isLockedForEditing, forKey: "isLockedForEditing")
+				try values.encodeIfPresent(tagStartCondition, forKey: "tagStartCondition")
+				try values.encode(name, forKey: "name")
+				try values.encodeIfPresent(manualBranchStartCondition, forKey: "manualBranchStartCondition")
+			}
+		}
 
 		public struct Relationships: Codable {
 			public var product: Product
@@ -217,98 +291,24 @@ public struct CiWorkflowCreateRequest: Codable {
 			}
 		}
 
-		public struct Attributes: Codable {
-			public var manualPullRequestStartCondition: CiManualPullRequestStartCondition?
-			public var containerFilePath: String
-			public var actions: [CiAction]
-			public var description: String
-			public var isClean: Bool
-			public var branchStartCondition: CiBranchStartCondition?
-			public var pullRequestStartCondition: CiPullRequestStartCondition?
-			public var manualBranchStartCondition: CiManualBranchStartCondition?
-			public var manualTagStartCondition: CiManualTagStartCondition?
-			public var name: String
-			public var scheduledStartCondition: CiScheduledStartCondition?
-			public var tagStartCondition: CiTagStartCondition?
-			public var isLockedForEditing: Bool?
-			public var isEnabled: Bool
-
-			public init(manualPullRequestStartCondition: CiManualPullRequestStartCondition? = nil, containerFilePath: String, actions: [CiAction], description: String, isClean: Bool, branchStartCondition: CiBranchStartCondition? = nil, pullRequestStartCondition: CiPullRequestStartCondition? = nil, manualBranchStartCondition: CiManualBranchStartCondition? = nil, manualTagStartCondition: CiManualTagStartCondition? = nil, name: String, scheduledStartCondition: CiScheduledStartCondition? = nil, tagStartCondition: CiTagStartCondition? = nil, isLockedForEditing: Bool? = nil, isEnabled: Bool) {
-				self.manualPullRequestStartCondition = manualPullRequestStartCondition
-				self.containerFilePath = containerFilePath
-				self.actions = actions
-				self.description = description
-				self.isClean = isClean
-				self.branchStartCondition = branchStartCondition
-				self.pullRequestStartCondition = pullRequestStartCondition
-				self.manualBranchStartCondition = manualBranchStartCondition
-				self.manualTagStartCondition = manualTagStartCondition
-				self.name = name
-				self.scheduledStartCondition = scheduledStartCondition
-				self.tagStartCondition = tagStartCondition
-				self.isLockedForEditing = isLockedForEditing
-				self.isEnabled = isEnabled
-			}
-
-			public init(from decoder: Decoder) throws {
-				let values = try decoder.container(keyedBy: StringCodingKey.self)
-				self.manualPullRequestStartCondition = try values.decodeIfPresent(CiManualPullRequestStartCondition.self, forKey: "manualPullRequestStartCondition")
-				self.containerFilePath = try values.decode(String.self, forKey: "containerFilePath")
-				self.actions = try values.decode([CiAction].self, forKey: "actions")
-				self.description = try values.decode(String.self, forKey: "description")
-				self.isClean = try values.decode(Bool.self, forKey: "clean")
-				self.branchStartCondition = try values.decodeIfPresent(CiBranchStartCondition.self, forKey: "branchStartCondition")
-				self.pullRequestStartCondition = try values.decodeIfPresent(CiPullRequestStartCondition.self, forKey: "pullRequestStartCondition")
-				self.manualBranchStartCondition = try values.decodeIfPresent(CiManualBranchStartCondition.self, forKey: "manualBranchStartCondition")
-				self.manualTagStartCondition = try values.decodeIfPresent(CiManualTagStartCondition.self, forKey: "manualTagStartCondition")
-				self.name = try values.decode(String.self, forKey: "name")
-				self.scheduledStartCondition = try values.decodeIfPresent(CiScheduledStartCondition.self, forKey: "scheduledStartCondition")
-				self.tagStartCondition = try values.decodeIfPresent(CiTagStartCondition.self, forKey: "tagStartCondition")
-				self.isLockedForEditing = try values.decodeIfPresent(Bool.self, forKey: "isLockedForEditing")
-				self.isEnabled = try values.decode(Bool.self, forKey: "isEnabled")
-			}
-
-			public func encode(to encoder: Encoder) throws {
-				var values = encoder.container(keyedBy: StringCodingKey.self)
-				try values.encodeIfPresent(manualPullRequestStartCondition, forKey: "manualPullRequestStartCondition")
-				try values.encode(containerFilePath, forKey: "containerFilePath")
-				try values.encode(actions, forKey: "actions")
-				try values.encode(description, forKey: "description")
-				try values.encode(isClean, forKey: "clean")
-				try values.encodeIfPresent(branchStartCondition, forKey: "branchStartCondition")
-				try values.encodeIfPresent(pullRequestStartCondition, forKey: "pullRequestStartCondition")
-				try values.encodeIfPresent(manualBranchStartCondition, forKey: "manualBranchStartCondition")
-				try values.encodeIfPresent(manualTagStartCondition, forKey: "manualTagStartCondition")
-				try values.encode(name, forKey: "name")
-				try values.encodeIfPresent(scheduledStartCondition, forKey: "scheduledStartCondition")
-				try values.encodeIfPresent(tagStartCondition, forKey: "tagStartCondition")
-				try values.encodeIfPresent(isLockedForEditing, forKey: "isLockedForEditing")
-				try values.encode(isEnabled, forKey: "isEnabled")
-			}
-		}
-
-		public enum `Type`: String, Codable, CaseIterable {
-			case ciWorkflows
-		}
-
-		public init(relationships: Relationships, attributes: Attributes, type: `Type`) {
-			self.relationships = relationships
-			self.attributes = attributes
+		public init(type: `Type`, attributes: Attributes, relationships: Relationships) {
 			self.type = type
+			self.attributes = attributes
+			self.relationships = relationships
 		}
 
 		public init(from decoder: Decoder) throws {
 			let values = try decoder.container(keyedBy: StringCodingKey.self)
-			self.relationships = try values.decode(Relationships.self, forKey: "relationships")
-			self.attributes = try values.decode(Attributes.self, forKey: "attributes")
 			self.type = try values.decode(`Type`.self, forKey: "type")
+			self.attributes = try values.decode(Attributes.self, forKey: "attributes")
+			self.relationships = try values.decode(Relationships.self, forKey: "relationships")
 		}
 
 		public func encode(to encoder: Encoder) throws {
 			var values = encoder.container(keyedBy: StringCodingKey.self)
-			try values.encode(relationships, forKey: "relationships")
-			try values.encode(attributes, forKey: "attributes")
 			try values.encode(type, forKey: "type")
+			try values.encode(attributes, forKey: "attributes")
+			try values.encode(relationships, forKey: "relationships")
 		}
 	}
 

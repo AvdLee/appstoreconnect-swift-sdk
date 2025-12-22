@@ -4,31 +4,31 @@
 import Foundation
 
 public struct CiBuildActionsResponse: Codable {
-	public var meta: PagingInformation?
 	public var data: [CiBuildAction]
 	public var links: PagedDocumentLinks
+	public var meta: PagingInformation?
 	public var included: [CiBuildRun]?
 
-	public init(meta: PagingInformation? = nil, data: [CiBuildAction], links: PagedDocumentLinks, included: [CiBuildRun]? = nil) {
-		self.meta = meta
+	public init(data: [CiBuildAction], links: PagedDocumentLinks, meta: PagingInformation? = nil, included: [CiBuildRun]? = nil) {
 		self.data = data
 		self.links = links
+		self.meta = meta
 		self.included = included
 	}
 
 	public init(from decoder: Decoder) throws {
 		let values = try decoder.container(keyedBy: StringCodingKey.self)
-		self.meta = try values.decodeIfPresent(PagingInformation.self, forKey: "meta")
 		self.data = try values.decode([CiBuildAction].self, forKey: "data")
 		self.links = try values.decode(PagedDocumentLinks.self, forKey: "links")
+		self.meta = try values.decodeIfPresent(PagingInformation.self, forKey: "meta")
 		self.included = try values.decodeIfPresent([CiBuildRun].self, forKey: "included")
 	}
 
 	public func encode(to encoder: Encoder) throws {
 		var values = encoder.container(keyedBy: StringCodingKey.self)
-		try values.encodeIfPresent(meta, forKey: "meta")
 		try values.encode(data, forKey: "data")
 		try values.encode(links, forKey: "links")
+		try values.encodeIfPresent(meta, forKey: "meta")
 		try values.encodeIfPresent(included, forKey: "included")
 	}
 }

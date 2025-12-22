@@ -4,17 +4,21 @@
 import Foundation
 
 public struct Actor: Codable, Identifiable {
-	public var attributes: Attributes?
-	public var links: ResourceLinks?
 	public var id: String
+	public var links: ResourceLinks?
 	public var type: `Type`
+	public var attributes: Attributes?
+
+	public enum `Type`: String, Codable, CaseIterable {
+		case actors
+	}
 
 	public struct Attributes: Codable {
-		public var actorType: ActorType?
+		public var userFirstName: String?
 		public var userLastName: String?
 		public var apiKeyID: String?
 		public var userEmail: String?
-		public var userFirstName: String?
+		public var actorType: ActorType?
 
 		public enum ActorType: String, Codable, CaseIterable {
 			case user = "USER"
@@ -23,57 +27,53 @@ public struct Actor: Codable, Identifiable {
 			case apple = "APPLE"
 		}
 
-		public init(actorType: ActorType? = nil, userLastName: String? = nil, apiKeyID: String? = nil, userEmail: String? = nil, userFirstName: String? = nil) {
-			self.actorType = actorType
+		public init(userFirstName: String? = nil, userLastName: String? = nil, apiKeyID: String? = nil, userEmail: String? = nil, actorType: ActorType? = nil) {
+			self.userFirstName = userFirstName
 			self.userLastName = userLastName
 			self.apiKeyID = apiKeyID
 			self.userEmail = userEmail
-			self.userFirstName = userFirstName
+			self.actorType = actorType
 		}
 
 		public init(from decoder: Decoder) throws {
 			let values = try decoder.container(keyedBy: StringCodingKey.self)
-			self.actorType = try values.decodeIfPresent(ActorType.self, forKey: "actorType")
+			self.userFirstName = try values.decodeIfPresent(String.self, forKey: "userFirstName")
 			self.userLastName = try values.decodeIfPresent(String.self, forKey: "userLastName")
 			self.apiKeyID = try values.decodeIfPresent(String.self, forKey: "apiKeyId")
 			self.userEmail = try values.decodeIfPresent(String.self, forKey: "userEmail")
-			self.userFirstName = try values.decodeIfPresent(String.self, forKey: "userFirstName")
+			self.actorType = try values.decodeIfPresent(ActorType.self, forKey: "actorType")
 		}
 
 		public func encode(to encoder: Encoder) throws {
 			var values = encoder.container(keyedBy: StringCodingKey.self)
-			try values.encodeIfPresent(actorType, forKey: "actorType")
+			try values.encodeIfPresent(userFirstName, forKey: "userFirstName")
 			try values.encodeIfPresent(userLastName, forKey: "userLastName")
 			try values.encodeIfPresent(apiKeyID, forKey: "apiKeyId")
 			try values.encodeIfPresent(userEmail, forKey: "userEmail")
-			try values.encodeIfPresent(userFirstName, forKey: "userFirstName")
+			try values.encodeIfPresent(actorType, forKey: "actorType")
 		}
 	}
 
-	public enum `Type`: String, Codable, CaseIterable {
-		case actors
-	}
-
-	public init(attributes: Attributes? = nil, links: ResourceLinks? = nil, id: String, type: `Type`) {
-		self.attributes = attributes
-		self.links = links
+	public init(id: String, links: ResourceLinks? = nil, type: `Type`, attributes: Attributes? = nil) {
 		self.id = id
+		self.links = links
 		self.type = type
+		self.attributes = attributes
 	}
 
 	public init(from decoder: Decoder) throws {
 		let values = try decoder.container(keyedBy: StringCodingKey.self)
-		self.attributes = try values.decodeIfPresent(Attributes.self, forKey: "attributes")
-		self.links = try values.decodeIfPresent(ResourceLinks.self, forKey: "links")
 		self.id = try values.decode(String.self, forKey: "id")
+		self.links = try values.decodeIfPresent(ResourceLinks.self, forKey: "links")
 		self.type = try values.decode(`Type`.self, forKey: "type")
+		self.attributes = try values.decodeIfPresent(Attributes.self, forKey: "attributes")
 	}
 
 	public func encode(to encoder: Encoder) throws {
 		var values = encoder.container(keyedBy: StringCodingKey.self)
-		try values.encodeIfPresent(attributes, forKey: "attributes")
-		try values.encodeIfPresent(links, forKey: "links")
 		try values.encode(id, forKey: "id")
+		try values.encodeIfPresent(links, forKey: "links")
 		try values.encode(type, forKey: "type")
+		try values.encodeIfPresent(attributes, forKey: "attributes")
 	}
 }

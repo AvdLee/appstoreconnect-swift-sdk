@@ -16,40 +16,40 @@ public struct AppStoreVersionLocalizationUpdateRequest: Codable {
 		}
 
 		public struct Attributes: Codable {
-			public var keywords: String?
-			public var marketingURL: URL?
-			public var whatsNew: String?
-			public var promotionalText: String?
 			public var supportURL: URL?
+			public var promotionalText: String?
+			public var marketingURL: URL?
+			public var keywords: String?
 			public var description: String?
+			public var whatsNew: String?
 
-			public init(keywords: String? = nil, marketingURL: URL? = nil, whatsNew: String? = nil, promotionalText: String? = nil, supportURL: URL? = nil, description: String? = nil) {
-				self.keywords = keywords
-				self.marketingURL = marketingURL
-				self.whatsNew = whatsNew
-				self.promotionalText = promotionalText
+			public init(supportURL: URL? = nil, promotionalText: String? = nil, marketingURL: URL? = nil, keywords: String? = nil, description: String? = nil, whatsNew: String? = nil) {
 				self.supportURL = supportURL
+				self.promotionalText = promotionalText
+				self.marketingURL = marketingURL
+				self.keywords = keywords
 				self.description = description
+				self.whatsNew = whatsNew
 			}
 
 			public init(from decoder: Decoder) throws {
 				let values = try decoder.container(keyedBy: StringCodingKey.self)
-				self.keywords = try values.decodeIfPresent(String.self, forKey: "keywords")
-				self.marketingURL = try values.decodeIfPresent(URL.self, forKey: "marketingUrl")
-				self.whatsNew = try values.decodeIfPresent(String.self, forKey: "whatsNew")
-				self.promotionalText = try values.decodeIfPresent(String.self, forKey: "promotionalText")
 				self.supportURL = try values.decodeIfPresent(URL.self, forKey: "supportUrl")
+				self.promotionalText = try values.decodeIfPresent(String.self, forKey: "promotionalText")
+				self.marketingURL = try values.decodeIfPresent(URL.self, forKey: "marketingUrl")
+				self.keywords = try values.decodeIfPresent(String.self, forKey: "keywords")
 				self.description = try values.decodeIfPresent(String.self, forKey: "description")
+				self.whatsNew = try values.decodeIfPresent(String.self, forKey: "whatsNew")
 			}
 
 			public func encode(to encoder: Encoder) throws {
 				var values = encoder.container(keyedBy: StringCodingKey.self)
-				try values.encodeIfPresent(keywords, forKey: "keywords")
-				try values.encodeIfPresent(marketingURL, forKey: "marketingUrl")
-				try values.encodeIfPresent(whatsNew, forKey: "whatsNew")
-				try values.encodeIfPresent(promotionalText, forKey: "promotionalText")
 				try values.encodeIfPresent(supportURL, forKey: "supportUrl")
+				try values.encodeIfPresent(promotionalText, forKey: "promotionalText")
+				try values.encodeIfPresent(marketingURL, forKey: "marketingUrl")
+				try values.encodeIfPresent(keywords, forKey: "keywords")
 				try values.encodeIfPresent(description, forKey: "description")
+				try values.encodeIfPresent(whatsNew, forKey: "whatsNew")
 			}
 		}
 

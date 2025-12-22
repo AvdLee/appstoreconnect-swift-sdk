@@ -16,28 +16,28 @@ public struct ReviewSubmissionUpdateRequest: Codable {
 		}
 
 		public struct Attributes: Codable {
-			public var isCanceled: Bool?
-			public var isSubmitted: Bool?
 			public var platform: Platform?
+			public var isSubmitted: Bool?
+			public var isCanceled: Bool?
 
-			public init(isCanceled: Bool? = nil, isSubmitted: Bool? = nil, platform: Platform? = nil) {
-				self.isCanceled = isCanceled
-				self.isSubmitted = isSubmitted
+			public init(platform: Platform? = nil, isSubmitted: Bool? = nil, isCanceled: Bool? = nil) {
 				self.platform = platform
+				self.isSubmitted = isSubmitted
+				self.isCanceled = isCanceled
 			}
 
 			public init(from decoder: Decoder) throws {
 				let values = try decoder.container(keyedBy: StringCodingKey.self)
-				self.isCanceled = try values.decodeIfPresent(Bool.self, forKey: "canceled")
-				self.isSubmitted = try values.decodeIfPresent(Bool.self, forKey: "submitted")
 				self.platform = try values.decodeIfPresent(Platform.self, forKey: "platform")
+				self.isSubmitted = try values.decodeIfPresent(Bool.self, forKey: "submitted")
+				self.isCanceled = try values.decodeIfPresent(Bool.self, forKey: "canceled")
 			}
 
 			public func encode(to encoder: Encoder) throws {
 				var values = encoder.container(keyedBy: StringCodingKey.self)
-				try values.encodeIfPresent(isCanceled, forKey: "canceled")
-				try values.encodeIfPresent(isSubmitted, forKey: "submitted")
 				try values.encodeIfPresent(platform, forKey: "platform")
+				try values.encodeIfPresent(isSubmitted, forKey: "submitted")
+				try values.encodeIfPresent(isCanceled, forKey: "canceled")
 			}
 		}
 

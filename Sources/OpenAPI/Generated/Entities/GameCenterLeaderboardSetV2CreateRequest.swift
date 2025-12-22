@@ -8,59 +8,41 @@ public struct GameCenterLeaderboardSetV2CreateRequest: Codable {
 	public var included: [GameCenterLeaderboardSetVersionV2InlineCreate]?
 
 	public struct Data: Codable {
-		public var relationships: Relationships
 		public var type: `Type`
 		public var attributes: Attributes
+		public var relationships: Relationships
+
+		public enum `Type`: String, Codable, CaseIterable {
+			case gameCenterLeaderboardSets
+		}
+
+		public struct Attributes: Codable {
+			public var referenceName: String
+			public var vendorIdentifier: String
+
+			public init(referenceName: String, vendorIdentifier: String) {
+				self.referenceName = referenceName
+				self.vendorIdentifier = vendorIdentifier
+			}
+
+			public init(from decoder: Decoder) throws {
+				let values = try decoder.container(keyedBy: StringCodingKey.self)
+				self.referenceName = try values.decode(String.self, forKey: "referenceName")
+				self.vendorIdentifier = try values.decode(String.self, forKey: "vendorIdentifier")
+			}
+
+			public func encode(to encoder: Encoder) throws {
+				var values = encoder.container(keyedBy: StringCodingKey.self)
+				try values.encode(referenceName, forKey: "referenceName")
+				try values.encode(vendorIdentifier, forKey: "vendorIdentifier")
+			}
+		}
 
 		public struct Relationships: Codable {
-			public var gameCenterDetail: GameCenterDetail?
 			public var gameCenterLeaderboards: GameCenterLeaderboards?
-			public var gameCenterGroup: GameCenterGroup?
 			public var versions: Versions
-
-			public struct GameCenterDetail: Codable {
-				public var data: Data?
-
-				public struct Data: Codable, Identifiable {
-					public var type: `Type`
-					public var id: String
-
-					public enum `Type`: String, Codable, CaseIterable {
-						case gameCenterDetails
-					}
-
-					public init(type: `Type`, id: String) {
-						self.type = type
-						self.id = id
-					}
-
-					public init(from decoder: Decoder) throws {
-						let values = try decoder.container(keyedBy: StringCodingKey.self)
-						self.type = try values.decode(`Type`.self, forKey: "type")
-						self.id = try values.decode(String.self, forKey: "id")
-					}
-
-					public func encode(to encoder: Encoder) throws {
-						var values = encoder.container(keyedBy: StringCodingKey.self)
-						try values.encode(type, forKey: "type")
-						try values.encode(id, forKey: "id")
-					}
-				}
-
-				public init(data: Data? = nil) {
-					self.data = data
-				}
-
-				public init(from decoder: Decoder) throws {
-					let values = try decoder.container(keyedBy: StringCodingKey.self)
-					self.data = try values.decodeIfPresent(Data.self, forKey: "data")
-				}
-
-				public func encode(to encoder: Encoder) throws {
-					var values = encoder.container(keyedBy: StringCodingKey.self)
-					try values.encodeIfPresent(data, forKey: "data")
-				}
-			}
+			public var gameCenterGroup: GameCenterGroup?
+			public var gameCenterDetail: GameCenterDetail?
 
 			public struct GameCenterLeaderboards: Codable {
 				public var data: [Datum]?
@@ -103,6 +85,50 @@ public struct GameCenterLeaderboardSetV2CreateRequest: Codable {
 				public func encode(to encoder: Encoder) throws {
 					var values = encoder.container(keyedBy: StringCodingKey.self)
 					try values.encodeIfPresent(data, forKey: "data")
+				}
+			}
+
+			public struct Versions: Codable {
+				public var data: [Datum]
+
+				public struct Datum: Codable, Identifiable {
+					public var type: `Type`
+					public var id: String
+
+					public enum `Type`: String, Codable, CaseIterable {
+						case gameCenterLeaderboardSetVersions
+					}
+
+					public init(type: `Type`, id: String) {
+						self.type = type
+						self.id = id
+					}
+
+					public init(from decoder: Decoder) throws {
+						let values = try decoder.container(keyedBy: StringCodingKey.self)
+						self.type = try values.decode(`Type`.self, forKey: "type")
+						self.id = try values.decode(String.self, forKey: "id")
+					}
+
+					public func encode(to encoder: Encoder) throws {
+						var values = encoder.container(keyedBy: StringCodingKey.self)
+						try values.encode(type, forKey: "type")
+						try values.encode(id, forKey: "id")
+					}
+				}
+
+				public init(data: [Datum]) {
+					self.data = data
+				}
+
+				public init(from decoder: Decoder) throws {
+					let values = try decoder.container(keyedBy: StringCodingKey.self)
+					self.data = try values.decode([Datum].self, forKey: "data")
+				}
+
+				public func encode(to encoder: Encoder) throws {
+					var values = encoder.container(keyedBy: StringCodingKey.self)
+					try values.encode(data, forKey: "data")
 				}
 			}
 
@@ -150,118 +176,92 @@ public struct GameCenterLeaderboardSetV2CreateRequest: Codable {
 				}
 			}
 
-			public struct Versions: Codable {
-				public var data: [Datum]
+			public struct GameCenterDetail: Codable {
+				public var data: Data?
 
-				public struct Datum: Codable, Identifiable {
-					public var id: String
+				public struct Data: Codable, Identifiable {
 					public var type: `Type`
+					public var id: String
 
 					public enum `Type`: String, Codable, CaseIterable {
-						case gameCenterLeaderboardSetVersions
+						case gameCenterDetails
 					}
 
-					public init(id: String, type: `Type`) {
-						self.id = id
+					public init(type: `Type`, id: String) {
 						self.type = type
+						self.id = id
 					}
 
 					public init(from decoder: Decoder) throws {
 						let values = try decoder.container(keyedBy: StringCodingKey.self)
-						self.id = try values.decode(String.self, forKey: "id")
 						self.type = try values.decode(`Type`.self, forKey: "type")
+						self.id = try values.decode(String.self, forKey: "id")
 					}
 
 					public func encode(to encoder: Encoder) throws {
 						var values = encoder.container(keyedBy: StringCodingKey.self)
-						try values.encode(id, forKey: "id")
 						try values.encode(type, forKey: "type")
+						try values.encode(id, forKey: "id")
 					}
 				}
 
-				public init(data: [Datum]) {
+				public init(data: Data? = nil) {
 					self.data = data
 				}
 
 				public init(from decoder: Decoder) throws {
 					let values = try decoder.container(keyedBy: StringCodingKey.self)
-					self.data = try values.decode([Datum].self, forKey: "data")
+					self.data = try values.decodeIfPresent(Data.self, forKey: "data")
 				}
 
 				public func encode(to encoder: Encoder) throws {
 					var values = encoder.container(keyedBy: StringCodingKey.self)
-					try values.encode(data, forKey: "data")
+					try values.encodeIfPresent(data, forKey: "data")
 				}
 			}
 
-			public init(gameCenterDetail: GameCenterDetail? = nil, gameCenterLeaderboards: GameCenterLeaderboards? = nil, gameCenterGroup: GameCenterGroup? = nil, versions: Versions) {
-				self.gameCenterDetail = gameCenterDetail
+			public init(gameCenterLeaderboards: GameCenterLeaderboards? = nil, versions: Versions, gameCenterGroup: GameCenterGroup? = nil, gameCenterDetail: GameCenterDetail? = nil) {
 				self.gameCenterLeaderboards = gameCenterLeaderboards
-				self.gameCenterGroup = gameCenterGroup
 				self.versions = versions
+				self.gameCenterGroup = gameCenterGroup
+				self.gameCenterDetail = gameCenterDetail
 			}
 
 			public init(from decoder: Decoder) throws {
 				let values = try decoder.container(keyedBy: StringCodingKey.self)
-				self.gameCenterDetail = try values.decodeIfPresent(GameCenterDetail.self, forKey: "gameCenterDetail")
 				self.gameCenterLeaderboards = try values.decodeIfPresent(GameCenterLeaderboards.self, forKey: "gameCenterLeaderboards")
-				self.gameCenterGroup = try values.decodeIfPresent(GameCenterGroup.self, forKey: "gameCenterGroup")
 				self.versions = try values.decode(Versions.self, forKey: "versions")
+				self.gameCenterGroup = try values.decodeIfPresent(GameCenterGroup.self, forKey: "gameCenterGroup")
+				self.gameCenterDetail = try values.decodeIfPresent(GameCenterDetail.self, forKey: "gameCenterDetail")
 			}
 
 			public func encode(to encoder: Encoder) throws {
 				var values = encoder.container(keyedBy: StringCodingKey.self)
-				try values.encodeIfPresent(gameCenterDetail, forKey: "gameCenterDetail")
 				try values.encodeIfPresent(gameCenterLeaderboards, forKey: "gameCenterLeaderboards")
-				try values.encodeIfPresent(gameCenterGroup, forKey: "gameCenterGroup")
 				try values.encode(versions, forKey: "versions")
+				try values.encodeIfPresent(gameCenterGroup, forKey: "gameCenterGroup")
+				try values.encodeIfPresent(gameCenterDetail, forKey: "gameCenterDetail")
 			}
 		}
 
-		public enum `Type`: String, Codable, CaseIterable {
-			case gameCenterLeaderboardSets
-		}
-
-		public struct Attributes: Codable {
-			public var referenceName: String
-			public var vendorIdentifier: String
-
-			public init(referenceName: String, vendorIdentifier: String) {
-				self.referenceName = referenceName
-				self.vendorIdentifier = vendorIdentifier
-			}
-
-			public init(from decoder: Decoder) throws {
-				let values = try decoder.container(keyedBy: StringCodingKey.self)
-				self.referenceName = try values.decode(String.self, forKey: "referenceName")
-				self.vendorIdentifier = try values.decode(String.self, forKey: "vendorIdentifier")
-			}
-
-			public func encode(to encoder: Encoder) throws {
-				var values = encoder.container(keyedBy: StringCodingKey.self)
-				try values.encode(referenceName, forKey: "referenceName")
-				try values.encode(vendorIdentifier, forKey: "vendorIdentifier")
-			}
-		}
-
-		public init(relationships: Relationships, type: `Type`, attributes: Attributes) {
-			self.relationships = relationships
+		public init(type: `Type`, attributes: Attributes, relationships: Relationships) {
 			self.type = type
 			self.attributes = attributes
+			self.relationships = relationships
 		}
 
 		public init(from decoder: Decoder) throws {
 			let values = try decoder.container(keyedBy: StringCodingKey.self)
-			self.relationships = try values.decode(Relationships.self, forKey: "relationships")
 			self.type = try values.decode(`Type`.self, forKey: "type")
 			self.attributes = try values.decode(Attributes.self, forKey: "attributes")
+			self.relationships = try values.decode(Relationships.self, forKey: "relationships")
 		}
 
 		public func encode(to encoder: Encoder) throws {
 			var values = encoder.container(keyedBy: StringCodingKey.self)
-			try values.encode(relationships, forKey: "relationships")
 			try values.encode(type, forKey: "type")
 			try values.encode(attributes, forKey: "attributes")
+			try values.encode(relationships, forKey: "relationships")
 		}
 	}
 

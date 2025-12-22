@@ -16,48 +16,48 @@ public struct AppStoreReviewDetailUpdateRequest: Codable {
 		}
 
 		public struct Attributes: Codable {
-			public var demoAccountPassword: String?
-			public var contactEmail: String?
 			public var contactFirstName: String?
 			public var contactLastName: String?
+			public var contactEmail: String?
+			public var notes: String?
+			public var demoAccountPassword: String?
+			public var demoAccountName: String?
 			public var isDemoAccountRequired: Bool?
 			public var contactPhone: String?
-			public var demoAccountName: String?
-			public var notes: String?
 
-			public init(demoAccountPassword: String? = nil, contactEmail: String? = nil, contactFirstName: String? = nil, contactLastName: String? = nil, isDemoAccountRequired: Bool? = nil, contactPhone: String? = nil, demoAccountName: String? = nil, notes: String? = nil) {
-				self.demoAccountPassword = demoAccountPassword
-				self.contactEmail = contactEmail
+			public init(contactFirstName: String? = nil, contactLastName: String? = nil, contactEmail: String? = nil, notes: String? = nil, demoAccountPassword: String? = nil, demoAccountName: String? = nil, isDemoAccountRequired: Bool? = nil, contactPhone: String? = nil) {
 				self.contactFirstName = contactFirstName
 				self.contactLastName = contactLastName
+				self.contactEmail = contactEmail
+				self.notes = notes
+				self.demoAccountPassword = demoAccountPassword
+				self.demoAccountName = demoAccountName
 				self.isDemoAccountRequired = isDemoAccountRequired
 				self.contactPhone = contactPhone
-				self.demoAccountName = demoAccountName
-				self.notes = notes
 			}
 
 			public init(from decoder: Decoder) throws {
 				let values = try decoder.container(keyedBy: StringCodingKey.self)
-				self.demoAccountPassword = try values.decodeIfPresent(String.self, forKey: "demoAccountPassword")
-				self.contactEmail = try values.decodeIfPresent(String.self, forKey: "contactEmail")
 				self.contactFirstName = try values.decodeIfPresent(String.self, forKey: "contactFirstName")
 				self.contactLastName = try values.decodeIfPresent(String.self, forKey: "contactLastName")
+				self.contactEmail = try values.decodeIfPresent(String.self, forKey: "contactEmail")
+				self.notes = try values.decodeIfPresent(String.self, forKey: "notes")
+				self.demoAccountPassword = try values.decodeIfPresent(String.self, forKey: "demoAccountPassword")
+				self.demoAccountName = try values.decodeIfPresent(String.self, forKey: "demoAccountName")
 				self.isDemoAccountRequired = try values.decodeIfPresent(Bool.self, forKey: "demoAccountRequired")
 				self.contactPhone = try values.decodeIfPresent(String.self, forKey: "contactPhone")
-				self.demoAccountName = try values.decodeIfPresent(String.self, forKey: "demoAccountName")
-				self.notes = try values.decodeIfPresent(String.self, forKey: "notes")
 			}
 
 			public func encode(to encoder: Encoder) throws {
 				var values = encoder.container(keyedBy: StringCodingKey.self)
-				try values.encodeIfPresent(demoAccountPassword, forKey: "demoAccountPassword")
-				try values.encodeIfPresent(contactEmail, forKey: "contactEmail")
 				try values.encodeIfPresent(contactFirstName, forKey: "contactFirstName")
 				try values.encodeIfPresent(contactLastName, forKey: "contactLastName")
+				try values.encodeIfPresent(contactEmail, forKey: "contactEmail")
+				try values.encodeIfPresent(notes, forKey: "notes")
+				try values.encodeIfPresent(demoAccountPassword, forKey: "demoAccountPassword")
+				try values.encodeIfPresent(demoAccountName, forKey: "demoAccountName")
 				try values.encodeIfPresent(isDemoAccountRequired, forKey: "demoAccountRequired")
 				try values.encodeIfPresent(contactPhone, forKey: "contactPhone")
-				try values.encodeIfPresent(demoAccountName, forKey: "demoAccountName")
-				try values.encodeIfPresent(notes, forKey: "notes")
 			}
 		}
 

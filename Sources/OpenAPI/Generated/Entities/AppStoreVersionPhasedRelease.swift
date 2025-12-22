@@ -4,65 +4,65 @@
 import Foundation
 
 public struct AppStoreVersionPhasedRelease: Codable, Identifiable {
-	public var type: `Type`
-	public var links: ResourceLinks?
-	public var attributes: Attributes?
 	public var id: String
+	public var links: ResourceLinks?
+	public var type: `Type`
+	public var attributes: Attributes?
 
 	public enum `Type`: String, Codable, CaseIterable {
 		case appStoreVersionPhasedReleases
 	}
 
 	public struct Attributes: Codable {
+		public var phasedReleaseState: PhasedReleaseState?
 		public var totalPauseDuration: Int?
 		public var startDate: Date?
 		public var currentDayNumber: Int?
-		public var phasedReleaseState: PhasedReleaseState?
 
-		public init(totalPauseDuration: Int? = nil, startDate: Date? = nil, currentDayNumber: Int? = nil, phasedReleaseState: PhasedReleaseState? = nil) {
+		public init(phasedReleaseState: PhasedReleaseState? = nil, totalPauseDuration: Int? = nil, startDate: Date? = nil, currentDayNumber: Int? = nil) {
+			self.phasedReleaseState = phasedReleaseState
 			self.totalPauseDuration = totalPauseDuration
 			self.startDate = startDate
 			self.currentDayNumber = currentDayNumber
-			self.phasedReleaseState = phasedReleaseState
 		}
 
 		public init(from decoder: Decoder) throws {
 			let values = try decoder.container(keyedBy: StringCodingKey.self)
+			self.phasedReleaseState = try values.decodeIfPresent(PhasedReleaseState.self, forKey: "phasedReleaseState")
 			self.totalPauseDuration = try values.decodeIfPresent(Int.self, forKey: "totalPauseDuration")
 			self.startDate = try values.decodeIfPresent(Date.self, forKey: "startDate")
 			self.currentDayNumber = try values.decodeIfPresent(Int.self, forKey: "currentDayNumber")
-			self.phasedReleaseState = try values.decodeIfPresent(PhasedReleaseState.self, forKey: "phasedReleaseState")
 		}
 
 		public func encode(to encoder: Encoder) throws {
 			var values = encoder.container(keyedBy: StringCodingKey.self)
+			try values.encodeIfPresent(phasedReleaseState, forKey: "phasedReleaseState")
 			try values.encodeIfPresent(totalPauseDuration, forKey: "totalPauseDuration")
 			try values.encodeIfPresent(startDate, forKey: "startDate")
 			try values.encodeIfPresent(currentDayNumber, forKey: "currentDayNumber")
-			try values.encodeIfPresent(phasedReleaseState, forKey: "phasedReleaseState")
 		}
 	}
 
-	public init(type: `Type`, links: ResourceLinks? = nil, attributes: Attributes? = nil, id: String) {
-		self.type = type
-		self.links = links
-		self.attributes = attributes
+	public init(id: String, links: ResourceLinks? = nil, type: `Type`, attributes: Attributes? = nil) {
 		self.id = id
+		self.links = links
+		self.type = type
+		self.attributes = attributes
 	}
 
 	public init(from decoder: Decoder) throws {
 		let values = try decoder.container(keyedBy: StringCodingKey.self)
-		self.type = try values.decode(`Type`.self, forKey: "type")
-		self.links = try values.decodeIfPresent(ResourceLinks.self, forKey: "links")
-		self.attributes = try values.decodeIfPresent(Attributes.self, forKey: "attributes")
 		self.id = try values.decode(String.self, forKey: "id")
+		self.links = try values.decodeIfPresent(ResourceLinks.self, forKey: "links")
+		self.type = try values.decode(`Type`.self, forKey: "type")
+		self.attributes = try values.decodeIfPresent(Attributes.self, forKey: "attributes")
 	}
 
 	public func encode(to encoder: Encoder) throws {
 		var values = encoder.container(keyedBy: StringCodingKey.self)
-		try values.encode(type, forKey: "type")
-		try values.encodeIfPresent(links, forKey: "links")
-		try values.encodeIfPresent(attributes, forKey: "attributes")
 		try values.encode(id, forKey: "id")
+		try values.encodeIfPresent(links, forKey: "links")
+		try values.encode(type, forKey: "type")
+		try values.encodeIfPresent(attributes, forKey: "attributes")
 	}
 }

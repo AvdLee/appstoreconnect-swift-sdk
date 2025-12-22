@@ -7,58 +7,58 @@ public struct GameCenterMatchmakingRuleUpdateRequest: Codable {
 	public var data: Data
 
 	public struct Data: Codable, Identifiable {
-		public var attributes: Attributes?
-		public var id: String
 		public var type: `Type`
-
-		public struct Attributes: Codable {
-			public var description: String?
-			public var weight: Double?
-			public var expression: String?
-
-			public init(description: String? = nil, weight: Double? = nil, expression: String? = nil) {
-				self.description = description
-				self.weight = weight
-				self.expression = expression
-			}
-
-			public init(from decoder: Decoder) throws {
-				let values = try decoder.container(keyedBy: StringCodingKey.self)
-				self.description = try values.decodeIfPresent(String.self, forKey: "description")
-				self.weight = try values.decodeIfPresent(Double.self, forKey: "weight")
-				self.expression = try values.decodeIfPresent(String.self, forKey: "expression")
-			}
-
-			public func encode(to encoder: Encoder) throws {
-				var values = encoder.container(keyedBy: StringCodingKey.self)
-				try values.encodeIfPresent(description, forKey: "description")
-				try values.encodeIfPresent(weight, forKey: "weight")
-				try values.encodeIfPresent(expression, forKey: "expression")
-			}
-		}
+		public var id: String
+		public var attributes: Attributes?
 
 		public enum `Type`: String, Codable, CaseIterable {
 			case gameCenterMatchmakingRules
 		}
 
-		public init(attributes: Attributes? = nil, id: String, type: `Type`) {
-			self.attributes = attributes
-			self.id = id
+		public struct Attributes: Codable {
+			public var expression: String?
+			public var description: String?
+			public var weight: Double?
+
+			public init(expression: String? = nil, description: String? = nil, weight: Double? = nil) {
+				self.expression = expression
+				self.description = description
+				self.weight = weight
+			}
+
+			public init(from decoder: Decoder) throws {
+				let values = try decoder.container(keyedBy: StringCodingKey.self)
+				self.expression = try values.decodeIfPresent(String.self, forKey: "expression")
+				self.description = try values.decodeIfPresent(String.self, forKey: "description")
+				self.weight = try values.decodeIfPresent(Double.self, forKey: "weight")
+			}
+
+			public func encode(to encoder: Encoder) throws {
+				var values = encoder.container(keyedBy: StringCodingKey.self)
+				try values.encodeIfPresent(expression, forKey: "expression")
+				try values.encodeIfPresent(description, forKey: "description")
+				try values.encodeIfPresent(weight, forKey: "weight")
+			}
+		}
+
+		public init(type: `Type`, id: String, attributes: Attributes? = nil) {
 			self.type = type
+			self.id = id
+			self.attributes = attributes
 		}
 
 		public init(from decoder: Decoder) throws {
 			let values = try decoder.container(keyedBy: StringCodingKey.self)
-			self.attributes = try values.decodeIfPresent(Attributes.self, forKey: "attributes")
-			self.id = try values.decode(String.self, forKey: "id")
 			self.type = try values.decode(`Type`.self, forKey: "type")
+			self.id = try values.decode(String.self, forKey: "id")
+			self.attributes = try values.decodeIfPresent(Attributes.self, forKey: "attributes")
 		}
 
 		public func encode(to encoder: Encoder) throws {
 			var values = encoder.container(keyedBy: StringCodingKey.self)
-			try values.encodeIfPresent(attributes, forKey: "attributes")
-			try values.encode(id, forKey: "id")
 			try values.encode(type, forKey: "type")
+			try values.encode(id, forKey: "id")
+			try values.encodeIfPresent(attributes, forKey: "attributes")
 		}
 	}
 

@@ -7,32 +7,36 @@ public struct SubscriptionLocalizationCreateRequest: Codable {
 	public var data: Data
 
 	public struct Data: Codable {
+		public var type: `Type`
 		public var attributes: Attributes
 		public var relationships: Relationships
-		public var type: `Type`
+
+		public enum `Type`: String, Codable, CaseIterable {
+			case subscriptionLocalizations
+		}
 
 		public struct Attributes: Codable {
-			public var locale: String
 			public var name: String
+			public var locale: String
 			public var description: String?
 
-			public init(locale: String, name: String, description: String? = nil) {
-				self.locale = locale
+			public init(name: String, locale: String, description: String? = nil) {
 				self.name = name
+				self.locale = locale
 				self.description = description
 			}
 
 			public init(from decoder: Decoder) throws {
 				let values = try decoder.container(keyedBy: StringCodingKey.self)
-				self.locale = try values.decode(String.self, forKey: "locale")
 				self.name = try values.decode(String.self, forKey: "name")
+				self.locale = try values.decode(String.self, forKey: "locale")
 				self.description = try values.decodeIfPresent(String.self, forKey: "description")
 			}
 
 			public func encode(to encoder: Encoder) throws {
 				var values = encoder.container(keyedBy: StringCodingKey.self)
-				try values.encode(locale, forKey: "locale")
 				try values.encode(name, forKey: "name")
+				try values.encode(locale, forKey: "locale")
 				try values.encodeIfPresent(description, forKey: "description")
 			}
 		}
@@ -44,28 +48,28 @@ public struct SubscriptionLocalizationCreateRequest: Codable {
 				public var data: Data
 
 				public struct Data: Codable, Identifiable {
-					public var id: String
 					public var type: `Type`
+					public var id: String
 
 					public enum `Type`: String, Codable, CaseIterable {
 						case subscriptions
 					}
 
-					public init(id: String, type: `Type`) {
-						self.id = id
+					public init(type: `Type`, id: String) {
 						self.type = type
+						self.id = id
 					}
 
 					public init(from decoder: Decoder) throws {
 						let values = try decoder.container(keyedBy: StringCodingKey.self)
-						self.id = try values.decode(String.self, forKey: "id")
 						self.type = try values.decode(`Type`.self, forKey: "type")
+						self.id = try values.decode(String.self, forKey: "id")
 					}
 
 					public func encode(to encoder: Encoder) throws {
 						var values = encoder.container(keyedBy: StringCodingKey.self)
-						try values.encode(id, forKey: "id")
 						try values.encode(type, forKey: "type")
+						try values.encode(id, forKey: "id")
 					}
 				}
 
@@ -99,28 +103,24 @@ public struct SubscriptionLocalizationCreateRequest: Codable {
 			}
 		}
 
-		public enum `Type`: String, Codable, CaseIterable {
-			case subscriptionLocalizations
-		}
-
-		public init(attributes: Attributes, relationships: Relationships, type: `Type`) {
+		public init(type: `Type`, attributes: Attributes, relationships: Relationships) {
+			self.type = type
 			self.attributes = attributes
 			self.relationships = relationships
-			self.type = type
 		}
 
 		public init(from decoder: Decoder) throws {
 			let values = try decoder.container(keyedBy: StringCodingKey.self)
+			self.type = try values.decode(`Type`.self, forKey: "type")
 			self.attributes = try values.decode(Attributes.self, forKey: "attributes")
 			self.relationships = try values.decode(Relationships.self, forKey: "relationships")
-			self.type = try values.decode(`Type`.self, forKey: "type")
 		}
 
 		public func encode(to encoder: Encoder) throws {
 			var values = encoder.container(keyedBy: StringCodingKey.self)
+			try values.encode(type, forKey: "type")
 			try values.encode(attributes, forKey: "attributes")
 			try values.encode(relationships, forKey: "relationships")
-			try values.encode(type, forKey: "type")
 		}
 	}
 

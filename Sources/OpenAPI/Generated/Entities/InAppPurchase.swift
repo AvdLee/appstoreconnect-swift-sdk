@@ -6,74 +6,10 @@ import Foundation
 @available(*, deprecated, message: "Deprecated")
 public struct InAppPurchase: Codable, Identifiable {
 	public var id: String
-	public var attributes: Attributes?
+	public var relationships: Relationships?
 	public var links: ResourceLinks?
 	public var type: `Type`
-	public var relationships: Relationships?
-
-	public struct Attributes: Codable {
-		public var referenceName: String?
-		public var inAppPurchaseType: InAppPurchaseType?
-		public var productID: String?
-		public var state: State?
-
-		public enum InAppPurchaseType: String, Codable, CaseIterable {
-			case automaticallyRenewableSubscription = "AUTOMATICALLY_RENEWABLE_SUBSCRIPTION"
-			case nonConsumable = "NON_CONSUMABLE"
-			case consumable = "CONSUMABLE"
-			case nonRenewingSubscription = "NON_RENEWING_SUBSCRIPTION"
-			case freeSubscription = "FREE_SUBSCRIPTION"
-		}
-
-		public enum State: String, Codable, CaseIterable {
-			case created = "CREATED"
-			case developerSignedOff = "DEVELOPER_SIGNED_OFF"
-			case developerActionNeeded = "DEVELOPER_ACTION_NEEDED"
-			case deletionInProgress = "DELETION_IN_PROGRESS"
-			case approved = "APPROVED"
-			case deleted = "DELETED"
-			case removedFromSale = "REMOVED_FROM_SALE"
-			case developerRemovedFromSale = "DEVELOPER_REMOVED_FROM_SALE"
-			case waitingForUpload = "WAITING_FOR_UPLOAD"
-			case processingContent = "PROCESSING_CONTENT"
-			case replaced = "REPLACED"
-			case rejected = "REJECTED"
-			case waitingForScreenshot = "WAITING_FOR_SCREENSHOT"
-			case prepareForSubmission = "PREPARE_FOR_SUBMISSION"
-			case missingMetadata = "MISSING_METADATA"
-			case readyToSubmit = "READY_TO_SUBMIT"
-			case waitingForReview = "WAITING_FOR_REVIEW"
-			case inReview = "IN_REVIEW"
-			case pendingDeveloperRelease = "PENDING_DEVELOPER_RELEASE"
-		}
-
-		public init(referenceName: String? = nil, inAppPurchaseType: InAppPurchaseType? = nil, productID: String? = nil, state: State? = nil) {
-			self.referenceName = referenceName
-			self.inAppPurchaseType = inAppPurchaseType
-			self.productID = productID
-			self.state = state
-		}
-
-		public init(from decoder: Decoder) throws {
-			let values = try decoder.container(keyedBy: StringCodingKey.self)
-			self.referenceName = try values.decodeIfPresent(String.self, forKey: "referenceName")
-			self.inAppPurchaseType = try values.decodeIfPresent(InAppPurchaseType.self, forKey: "inAppPurchaseType")
-			self.productID = try values.decodeIfPresent(String.self, forKey: "productId")
-			self.state = try values.decodeIfPresent(State.self, forKey: "state")
-		}
-
-		public func encode(to encoder: Encoder) throws {
-			var values = encoder.container(keyedBy: StringCodingKey.self)
-			try values.encodeIfPresent(referenceName, forKey: "referenceName")
-			try values.encodeIfPresent(inAppPurchaseType, forKey: "inAppPurchaseType")
-			try values.encodeIfPresent(productID, forKey: "productId")
-			try values.encodeIfPresent(state, forKey: "state")
-		}
-	}
-
-	public enum `Type`: String, Codable, CaseIterable {
-		case inAppPurchases
-	}
+	public var attributes: Attributes?
 
 	public struct Relationships: Codable {
 		public var apps: Apps?
@@ -141,29 +77,93 @@ public struct InAppPurchase: Codable, Identifiable {
 		}
 	}
 
-	public init(id: String, attributes: Attributes? = nil, links: ResourceLinks? = nil, type: `Type`, relationships: Relationships? = nil) {
+	public enum `Type`: String, Codable, CaseIterable {
+		case inAppPurchases
+	}
+
+	public struct Attributes: Codable {
+		public var referenceName: String?
+		public var inAppPurchaseType: InAppPurchaseType?
+		public var state: State?
+		public var productID: String?
+
+		public enum InAppPurchaseType: String, Codable, CaseIterable {
+			case automaticallyRenewableSubscription = "AUTOMATICALLY_RENEWABLE_SUBSCRIPTION"
+			case nonConsumable = "NON_CONSUMABLE"
+			case consumable = "CONSUMABLE"
+			case nonRenewingSubscription = "NON_RENEWING_SUBSCRIPTION"
+			case freeSubscription = "FREE_SUBSCRIPTION"
+		}
+
+		public enum State: String, Codable, CaseIterable {
+			case created = "CREATED"
+			case developerSignedOff = "DEVELOPER_SIGNED_OFF"
+			case developerActionNeeded = "DEVELOPER_ACTION_NEEDED"
+			case deletionInProgress = "DELETION_IN_PROGRESS"
+			case approved = "APPROVED"
+			case deleted = "DELETED"
+			case removedFromSale = "REMOVED_FROM_SALE"
+			case developerRemovedFromSale = "DEVELOPER_REMOVED_FROM_SALE"
+			case waitingForUpload = "WAITING_FOR_UPLOAD"
+			case processingContent = "PROCESSING_CONTENT"
+			case replaced = "REPLACED"
+			case rejected = "REJECTED"
+			case waitingForScreenshot = "WAITING_FOR_SCREENSHOT"
+			case prepareForSubmission = "PREPARE_FOR_SUBMISSION"
+			case missingMetadata = "MISSING_METADATA"
+			case readyToSubmit = "READY_TO_SUBMIT"
+			case waitingForReview = "WAITING_FOR_REVIEW"
+			case inReview = "IN_REVIEW"
+			case pendingDeveloperRelease = "PENDING_DEVELOPER_RELEASE"
+		}
+
+		public init(referenceName: String? = nil, inAppPurchaseType: InAppPurchaseType? = nil, state: State? = nil, productID: String? = nil) {
+			self.referenceName = referenceName
+			self.inAppPurchaseType = inAppPurchaseType
+			self.state = state
+			self.productID = productID
+		}
+
+		public init(from decoder: Decoder) throws {
+			let values = try decoder.container(keyedBy: StringCodingKey.self)
+			self.referenceName = try values.decodeIfPresent(String.self, forKey: "referenceName")
+			self.inAppPurchaseType = try values.decodeIfPresent(InAppPurchaseType.self, forKey: "inAppPurchaseType")
+			self.state = try values.decodeIfPresent(State.self, forKey: "state")
+			self.productID = try values.decodeIfPresent(String.self, forKey: "productId")
+		}
+
+		public func encode(to encoder: Encoder) throws {
+			var values = encoder.container(keyedBy: StringCodingKey.self)
+			try values.encodeIfPresent(referenceName, forKey: "referenceName")
+			try values.encodeIfPresent(inAppPurchaseType, forKey: "inAppPurchaseType")
+			try values.encodeIfPresent(state, forKey: "state")
+			try values.encodeIfPresent(productID, forKey: "productId")
+		}
+	}
+
+	public init(id: String, relationships: Relationships? = nil, links: ResourceLinks? = nil, type: `Type`, attributes: Attributes? = nil) {
 		self.id = id
-		self.attributes = attributes
+		self.relationships = relationships
 		self.links = links
 		self.type = type
-		self.relationships = relationships
+		self.attributes = attributes
 	}
 
 	public init(from decoder: Decoder) throws {
 		let values = try decoder.container(keyedBy: StringCodingKey.self)
 		self.id = try values.decode(String.self, forKey: "id")
-		self.attributes = try values.decodeIfPresent(Attributes.self, forKey: "attributes")
+		self.relationships = try values.decodeIfPresent(Relationships.self, forKey: "relationships")
 		self.links = try values.decodeIfPresent(ResourceLinks.self, forKey: "links")
 		self.type = try values.decode(`Type`.self, forKey: "type")
-		self.relationships = try values.decodeIfPresent(Relationships.self, forKey: "relationships")
+		self.attributes = try values.decodeIfPresent(Attributes.self, forKey: "attributes")
 	}
 
 	public func encode(to encoder: Encoder) throws {
 		var values = encoder.container(keyedBy: StringCodingKey.self)
 		try values.encode(id, forKey: "id")
-		try values.encodeIfPresent(attributes, forKey: "attributes")
+		try values.encodeIfPresent(relationships, forKey: "relationships")
 		try values.encodeIfPresent(links, forKey: "links")
 		try values.encode(type, forKey: "type")
-		try values.encodeIfPresent(relationships, forKey: "relationships")
+		try values.encodeIfPresent(attributes, forKey: "attributes")
 	}
 }

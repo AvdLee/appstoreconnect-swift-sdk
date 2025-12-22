@@ -4,70 +4,70 @@
 import Foundation
 
 public struct SubscriptionGracePeriod: Codable, Identifiable {
+	public var id: String
+	public var links: ResourceLinks?
 	public var type: `Type`
 	public var attributes: Attributes?
-	public var links: ResourceLinks?
-	public var id: String
 
 	public enum `Type`: String, Codable, CaseIterable {
 		case subscriptionGracePeriods
 	}
 
 	public struct Attributes: Codable {
-		public var isSandboxOptIn: Bool?
-		public var renewalType: RenewalType?
-		public var isOptIn: Bool?
 		public var duration: SubscriptionGracePeriodDuration?
+		public var isOptIn: Bool?
+		public var renewalType: RenewalType?
+		public var isSandboxOptIn: Bool?
 
 		public enum RenewalType: String, Codable, CaseIterable {
 			case allRenewals = "ALL_RENEWALS"
 			case paidToPaidOnly = "PAID_TO_PAID_ONLY"
 		}
 
-		public init(isSandboxOptIn: Bool? = nil, renewalType: RenewalType? = nil, isOptIn: Bool? = nil, duration: SubscriptionGracePeriodDuration? = nil) {
-			self.isSandboxOptIn = isSandboxOptIn
-			self.renewalType = renewalType
-			self.isOptIn = isOptIn
+		public init(duration: SubscriptionGracePeriodDuration? = nil, isOptIn: Bool? = nil, renewalType: RenewalType? = nil, isSandboxOptIn: Bool? = nil) {
 			self.duration = duration
+			self.isOptIn = isOptIn
+			self.renewalType = renewalType
+			self.isSandboxOptIn = isSandboxOptIn
 		}
 
 		public init(from decoder: Decoder) throws {
 			let values = try decoder.container(keyedBy: StringCodingKey.self)
-			self.isSandboxOptIn = try values.decodeIfPresent(Bool.self, forKey: "sandboxOptIn")
-			self.renewalType = try values.decodeIfPresent(RenewalType.self, forKey: "renewalType")
-			self.isOptIn = try values.decodeIfPresent(Bool.self, forKey: "optIn")
 			self.duration = try values.decodeIfPresent(SubscriptionGracePeriodDuration.self, forKey: "duration")
+			self.isOptIn = try values.decodeIfPresent(Bool.self, forKey: "optIn")
+			self.renewalType = try values.decodeIfPresent(RenewalType.self, forKey: "renewalType")
+			self.isSandboxOptIn = try values.decodeIfPresent(Bool.self, forKey: "sandboxOptIn")
 		}
 
 		public func encode(to encoder: Encoder) throws {
 			var values = encoder.container(keyedBy: StringCodingKey.self)
-			try values.encodeIfPresent(isSandboxOptIn, forKey: "sandboxOptIn")
-			try values.encodeIfPresent(renewalType, forKey: "renewalType")
-			try values.encodeIfPresent(isOptIn, forKey: "optIn")
 			try values.encodeIfPresent(duration, forKey: "duration")
+			try values.encodeIfPresent(isOptIn, forKey: "optIn")
+			try values.encodeIfPresent(renewalType, forKey: "renewalType")
+			try values.encodeIfPresent(isSandboxOptIn, forKey: "sandboxOptIn")
 		}
 	}
 
-	public init(type: `Type`, attributes: Attributes? = nil, links: ResourceLinks? = nil, id: String) {
+	public init(id: String, links: ResourceLinks? = nil, type: `Type`, attributes: Attributes? = nil) {
+		self.id = id
+		self.links = links
 		self.type = type
 		self.attributes = attributes
-		self.links = links
-		self.id = id
 	}
 
 	public init(from decoder: Decoder) throws {
 		let values = try decoder.container(keyedBy: StringCodingKey.self)
+		self.id = try values.decode(String.self, forKey: "id")
+		self.links = try values.decodeIfPresent(ResourceLinks.self, forKey: "links")
 		self.type = try values.decode(`Type`.self, forKey: "type")
 		self.attributes = try values.decodeIfPresent(Attributes.self, forKey: "attributes")
-		self.links = try values.decodeIfPresent(ResourceLinks.self, forKey: "links")
-		self.id = try values.decode(String.self, forKey: "id")
 	}
 
 	public func encode(to encoder: Encoder) throws {
 		var values = encoder.container(keyedBy: StringCodingKey.self)
+		try values.encode(id, forKey: "id")
+		try values.encodeIfPresent(links, forKey: "links")
 		try values.encode(type, forKey: "type")
 		try values.encodeIfPresent(attributes, forKey: "attributes")
-		try values.encodeIfPresent(links, forKey: "links")
-		try values.encode(id, forKey: "id")
 	}
 }

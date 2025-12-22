@@ -16,30 +16,30 @@ public struct BundleIDCreateRequest: Codable {
 
 		public struct Attributes: Codable {
 			public var platform: BundleIDPlatform
-			public var identifier: String
 			public var name: String
+			public var identifier: String
 			public var seedID: String?
 
-			public init(platform: BundleIDPlatform, identifier: String, name: String, seedID: String? = nil) {
+			public init(platform: BundleIDPlatform, name: String, identifier: String, seedID: String? = nil) {
 				self.platform = platform
-				self.identifier = identifier
 				self.name = name
+				self.identifier = identifier
 				self.seedID = seedID
 			}
 
 			public init(from decoder: Decoder) throws {
 				let values = try decoder.container(keyedBy: StringCodingKey.self)
 				self.platform = try values.decode(BundleIDPlatform.self, forKey: "platform")
-				self.identifier = try values.decode(String.self, forKey: "identifier")
 				self.name = try values.decode(String.self, forKey: "name")
+				self.identifier = try values.decode(String.self, forKey: "identifier")
 				self.seedID = try values.decodeIfPresent(String.self, forKey: "seedId")
 			}
 
 			public func encode(to encoder: Encoder) throws {
 				var values = encoder.container(keyedBy: StringCodingKey.self)
 				try values.encode(platform, forKey: "platform")
-				try values.encode(identifier, forKey: "identifier")
 				try values.encode(name, forKey: "name")
+				try values.encode(identifier, forKey: "identifier")
 				try values.encodeIfPresent(seedID, forKey: "seedId")
 			}
 		}

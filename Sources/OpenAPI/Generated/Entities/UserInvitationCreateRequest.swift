@@ -7,9 +7,51 @@ public struct UserInvitationCreateRequest: Codable {
 	public var data: Data
 
 	public struct Data: Codable {
-		public var relationships: Relationships?
-		public var attributes: Attributes
 		public var type: `Type`
+		public var attributes: Attributes
+		public var relationships: Relationships?
+
+		public enum `Type`: String, Codable, CaseIterable {
+			case userInvitations
+		}
+
+		public struct Attributes: Codable {
+			public var email: String
+			public var firstName: String
+			public var lastName: String
+			public var roles: [UserRole]
+			public var isProvisioningAllowed: Bool?
+			public var isAllAppsVisible: Bool?
+
+			public init(email: String, firstName: String, lastName: String, roles: [UserRole], isProvisioningAllowed: Bool? = nil, isAllAppsVisible: Bool? = nil) {
+				self.email = email
+				self.firstName = firstName
+				self.lastName = lastName
+				self.roles = roles
+				self.isProvisioningAllowed = isProvisioningAllowed
+				self.isAllAppsVisible = isAllAppsVisible
+			}
+
+			public init(from decoder: Decoder) throws {
+				let values = try decoder.container(keyedBy: StringCodingKey.self)
+				self.email = try values.decode(String.self, forKey: "email")
+				self.firstName = try values.decode(String.self, forKey: "firstName")
+				self.lastName = try values.decode(String.self, forKey: "lastName")
+				self.roles = try values.decode([UserRole].self, forKey: "roles")
+				self.isProvisioningAllowed = try values.decodeIfPresent(Bool.self, forKey: "provisioningAllowed")
+				self.isAllAppsVisible = try values.decodeIfPresent(Bool.self, forKey: "allAppsVisible")
+			}
+
+			public func encode(to encoder: Encoder) throws {
+				var values = encoder.container(keyedBy: StringCodingKey.self)
+				try values.encode(email, forKey: "email")
+				try values.encode(firstName, forKey: "firstName")
+				try values.encode(lastName, forKey: "lastName")
+				try values.encode(roles, forKey: "roles")
+				try values.encodeIfPresent(isProvisioningAllowed, forKey: "provisioningAllowed")
+				try values.encodeIfPresent(isAllAppsVisible, forKey: "allAppsVisible")
+			}
+		}
 
 		public struct Relationships: Codable {
 			public var visibleApps: VisibleApps?
@@ -18,28 +60,28 @@ public struct UserInvitationCreateRequest: Codable {
 				public var data: [Datum]?
 
 				public struct Datum: Codable, Identifiable {
-					public var id: String
 					public var type: `Type`
+					public var id: String
 
 					public enum `Type`: String, Codable, CaseIterable {
 						case apps
 					}
 
-					public init(id: String, type: `Type`) {
-						self.id = id
+					public init(type: `Type`, id: String) {
 						self.type = type
+						self.id = id
 					}
 
 					public init(from decoder: Decoder) throws {
 						let values = try decoder.container(keyedBy: StringCodingKey.self)
-						self.id = try values.decode(String.self, forKey: "id")
 						self.type = try values.decode(`Type`.self, forKey: "type")
+						self.id = try values.decode(String.self, forKey: "id")
 					}
 
 					public func encode(to encoder: Encoder) throws {
 						var values = encoder.container(keyedBy: StringCodingKey.self)
-						try values.encode(id, forKey: "id")
 						try values.encode(type, forKey: "type")
+						try values.encode(id, forKey: "id")
 					}
 				}
 
@@ -73,66 +115,24 @@ public struct UserInvitationCreateRequest: Codable {
 			}
 		}
 
-		public struct Attributes: Codable {
-			public var isProvisioningAllowed: Bool?
-			public var roles: [UserRole]
-			public var firstName: String
-			public var email: String
-			public var lastName: String
-			public var isAllAppsVisible: Bool?
-
-			public init(isProvisioningAllowed: Bool? = nil, roles: [UserRole], firstName: String, email: String, lastName: String, isAllAppsVisible: Bool? = nil) {
-				self.isProvisioningAllowed = isProvisioningAllowed
-				self.roles = roles
-				self.firstName = firstName
-				self.email = email
-				self.lastName = lastName
-				self.isAllAppsVisible = isAllAppsVisible
-			}
-
-			public init(from decoder: Decoder) throws {
-				let values = try decoder.container(keyedBy: StringCodingKey.self)
-				self.isProvisioningAllowed = try values.decodeIfPresent(Bool.self, forKey: "provisioningAllowed")
-				self.roles = try values.decode([UserRole].self, forKey: "roles")
-				self.firstName = try values.decode(String.self, forKey: "firstName")
-				self.email = try values.decode(String.self, forKey: "email")
-				self.lastName = try values.decode(String.self, forKey: "lastName")
-				self.isAllAppsVisible = try values.decodeIfPresent(Bool.self, forKey: "allAppsVisible")
-			}
-
-			public func encode(to encoder: Encoder) throws {
-				var values = encoder.container(keyedBy: StringCodingKey.self)
-				try values.encodeIfPresent(isProvisioningAllowed, forKey: "provisioningAllowed")
-				try values.encode(roles, forKey: "roles")
-				try values.encode(firstName, forKey: "firstName")
-				try values.encode(email, forKey: "email")
-				try values.encode(lastName, forKey: "lastName")
-				try values.encodeIfPresent(isAllAppsVisible, forKey: "allAppsVisible")
-			}
-		}
-
-		public enum `Type`: String, Codable, CaseIterable {
-			case userInvitations
-		}
-
-		public init(relationships: Relationships? = nil, attributes: Attributes, type: `Type`) {
-			self.relationships = relationships
-			self.attributes = attributes
+		public init(type: `Type`, attributes: Attributes, relationships: Relationships? = nil) {
 			self.type = type
+			self.attributes = attributes
+			self.relationships = relationships
 		}
 
 		public init(from decoder: Decoder) throws {
 			let values = try decoder.container(keyedBy: StringCodingKey.self)
-			self.relationships = try values.decodeIfPresent(Relationships.self, forKey: "relationships")
-			self.attributes = try values.decode(Attributes.self, forKey: "attributes")
 			self.type = try values.decode(`Type`.self, forKey: "type")
+			self.attributes = try values.decode(Attributes.self, forKey: "attributes")
+			self.relationships = try values.decodeIfPresent(Relationships.self, forKey: "relationships")
 		}
 
 		public func encode(to encoder: Encoder) throws {
 			var values = encoder.container(keyedBy: StringCodingKey.self)
-			try values.encodeIfPresent(relationships, forKey: "relationships")
-			try values.encode(attributes, forKey: "attributes")
 			try values.encode(type, forKey: "type")
+			try values.encode(attributes, forKey: "attributes")
+			try values.encodeIfPresent(relationships, forKey: "relationships")
 		}
 	}
 

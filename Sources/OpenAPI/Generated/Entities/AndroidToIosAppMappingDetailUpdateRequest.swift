@@ -16,24 +16,24 @@ public struct AndroidToIosAppMappingDetailUpdateRequest: Codable {
 		}
 
 		public struct Attributes: Codable {
-			public var appSigningKeyPublicCertificateSha256Fingerprints: [String]?
 			public var packageName: String?
+			public var appSigningKeyPublicCertificateSha256Fingerprints: [String]?
 
-			public init(appSigningKeyPublicCertificateSha256Fingerprints: [String]? = nil, packageName: String? = nil) {
-				self.appSigningKeyPublicCertificateSha256Fingerprints = appSigningKeyPublicCertificateSha256Fingerprints
+			public init(packageName: String? = nil, appSigningKeyPublicCertificateSha256Fingerprints: [String]? = nil) {
 				self.packageName = packageName
+				self.appSigningKeyPublicCertificateSha256Fingerprints = appSigningKeyPublicCertificateSha256Fingerprints
 			}
 
 			public init(from decoder: Decoder) throws {
 				let values = try decoder.container(keyedBy: StringCodingKey.self)
-				self.appSigningKeyPublicCertificateSha256Fingerprints = try values.decodeIfPresent([String].self, forKey: "appSigningKeyPublicCertificateSha256Fingerprints")
 				self.packageName = try values.decodeIfPresent(String.self, forKey: "packageName")
+				self.appSigningKeyPublicCertificateSha256Fingerprints = try values.decodeIfPresent([String].self, forKey: "appSigningKeyPublicCertificateSha256Fingerprints")
 			}
 
 			public func encode(to encoder: Encoder) throws {
 				var values = encoder.container(keyedBy: StringCodingKey.self)
-				try values.encodeIfPresent(appSigningKeyPublicCertificateSha256Fingerprints, forKey: "appSigningKeyPublicCertificateSha256Fingerprints")
 				try values.encodeIfPresent(packageName, forKey: "packageName")
+				try values.encodeIfPresent(appSigningKeyPublicCertificateSha256Fingerprints, forKey: "appSigningKeyPublicCertificateSha256Fingerprints")
 			}
 		}
 

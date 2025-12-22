@@ -4,9 +4,13 @@
 import Foundation
 
 public struct InAppPurchaseOfferPriceInlineCreate: Codable, Identifiable {
-	public var relationships: Relationships?
 	public var type: `Type`
 	public var id: String?
+	public var relationships: Relationships?
+
+	public enum `Type`: String, Codable, CaseIterable {
+		case inAppPurchaseOfferPrices
+	}
 
 	public struct Relationships: Codable {
 		public var territory: Territory?
@@ -118,27 +122,23 @@ public struct InAppPurchaseOfferPriceInlineCreate: Codable, Identifiable {
 		}
 	}
 
-	public enum `Type`: String, Codable, CaseIterable {
-		case inAppPurchaseOfferPrices
-	}
-
-	public init(relationships: Relationships? = nil, type: `Type`, id: String? = nil) {
-		self.relationships = relationships
+	public init(type: `Type`, id: String? = nil, relationships: Relationships? = nil) {
 		self.type = type
 		self.id = id
+		self.relationships = relationships
 	}
 
 	public init(from decoder: Decoder) throws {
 		let values = try decoder.container(keyedBy: StringCodingKey.self)
-		self.relationships = try values.decodeIfPresent(Relationships.self, forKey: "relationships")
 		self.type = try values.decode(`Type`.self, forKey: "type")
 		self.id = try values.decodeIfPresent(String.self, forKey: "id")
+		self.relationships = try values.decodeIfPresent(Relationships.self, forKey: "relationships")
 	}
 
 	public func encode(to encoder: Encoder) throws {
 		var values = encoder.container(keyedBy: StringCodingKey.self)
-		try values.encodeIfPresent(relationships, forKey: "relationships")
 		try values.encode(type, forKey: "type")
 		try values.encodeIfPresent(id, forKey: "id")
+		try values.encodeIfPresent(relationships, forKey: "relationships")
 	}
 }

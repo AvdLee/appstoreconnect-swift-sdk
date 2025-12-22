@@ -70,11 +70,11 @@ final class APIProviderTests: XCTestCase {
         let expectedURL = URL(string: "https://api.appstoreconnect.apple.com")!
         let errorResponse = ErrorResponse(errors: [
             .init(
-                code: "NOT_FOUND",
-                detail: "There is no resource of type 'builds' with id 'app.appId'",
                 id: UUID().uuidString,
                 status: "404",
-                title: "The specified resource does not exist"
+                title: "The specified resource does not exist",
+                detail: "There is no resource of type 'builds' with id 'app.appId'",
+                code: "NOT_FOUND"
             )
         ])
         let responseData = try JSONEncoder().encode(errorResponse)

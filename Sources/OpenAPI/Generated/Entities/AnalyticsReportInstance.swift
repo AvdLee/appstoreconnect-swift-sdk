@@ -4,11 +4,11 @@
 import Foundation
 
 public struct AnalyticsReportInstance: Codable, Identifiable {
+	public var id: String
 	public var relationships: Relationships?
-	public var attributes: Attributes?
 	public var links: ResourceLinks?
 	public var type: `Type`
-	public var id: String
+	public var attributes: Attributes?
 
 	public struct Relationships: Codable {
 		public var segments: Segments?
@@ -46,6 +46,10 @@ public struct AnalyticsReportInstance: Codable, Identifiable {
 		}
 	}
 
+	public enum `Type`: String, Codable, CaseIterable {
+		case analyticsReportInstances
+	}
+
 	public struct Attributes: Codable {
 		public var granularity: Granularity?
 		public var processingDate: String?
@@ -74,33 +78,29 @@ public struct AnalyticsReportInstance: Codable, Identifiable {
 		}
 	}
 
-	public enum `Type`: String, Codable, CaseIterable {
-		case analyticsReportInstances
-	}
-
-	public init(relationships: Relationships? = nil, attributes: Attributes? = nil, links: ResourceLinks? = nil, type: `Type`, id: String) {
+	public init(id: String, relationships: Relationships? = nil, links: ResourceLinks? = nil, type: `Type`, attributes: Attributes? = nil) {
+		self.id = id
 		self.relationships = relationships
-		self.attributes = attributes
 		self.links = links
 		self.type = type
-		self.id = id
+		self.attributes = attributes
 	}
 
 	public init(from decoder: Decoder) throws {
 		let values = try decoder.container(keyedBy: StringCodingKey.self)
+		self.id = try values.decode(String.self, forKey: "id")
 		self.relationships = try values.decodeIfPresent(Relationships.self, forKey: "relationships")
-		self.attributes = try values.decodeIfPresent(Attributes.self, forKey: "attributes")
 		self.links = try values.decodeIfPresent(ResourceLinks.self, forKey: "links")
 		self.type = try values.decode(`Type`.self, forKey: "type")
-		self.id = try values.decode(String.self, forKey: "id")
+		self.attributes = try values.decodeIfPresent(Attributes.self, forKey: "attributes")
 	}
 
 	public func encode(to encoder: Encoder) throws {
 		var values = encoder.container(keyedBy: StringCodingKey.self)
+		try values.encode(id, forKey: "id")
 		try values.encodeIfPresent(relationships, forKey: "relationships")
-		try values.encodeIfPresent(attributes, forKey: "attributes")
 		try values.encodeIfPresent(links, forKey: "links")
 		try values.encode(type, forKey: "type")
-		try values.encode(id, forKey: "id")
+		try values.encodeIfPresent(attributes, forKey: "attributes")
 	}
 }

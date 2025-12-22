@@ -4,10 +4,10 @@
 import Foundation
 
 public struct AppStoreVersionsResponse: Codable {
-	public var links: PagedDocumentLinks
-	public var included: [IncludedItem]?
-	public var meta: PagingInformation?
 	public var data: [AppStoreVersion]
+	public var links: PagedDocumentLinks
+	public var meta: PagingInformation?
+	public var included: [IncludedItem]?
 
 	public enum IncludedItem: Codable {
 		case ageRatingDeclaration(AgeRatingDeclaration)
@@ -73,26 +73,26 @@ public struct AppStoreVersionsResponse: Codable {
 		}
 	}
 
-	public init(links: PagedDocumentLinks, included: [IncludedItem]? = nil, meta: PagingInformation? = nil, data: [AppStoreVersion]) {
-		self.links = links
-		self.included = included
-		self.meta = meta
+	public init(data: [AppStoreVersion], links: PagedDocumentLinks, meta: PagingInformation? = nil, included: [IncludedItem]? = nil) {
 		self.data = data
+		self.links = links
+		self.meta = meta
+		self.included = included
 	}
 
 	public init(from decoder: Decoder) throws {
 		let values = try decoder.container(keyedBy: StringCodingKey.self)
-		self.links = try values.decode(PagedDocumentLinks.self, forKey: "links")
-		self.included = try values.decodeIfPresent([IncludedItem].self, forKey: "included")
-		self.meta = try values.decodeIfPresent(PagingInformation.self, forKey: "meta")
 		self.data = try values.decode([AppStoreVersion].self, forKey: "data")
+		self.links = try values.decode(PagedDocumentLinks.self, forKey: "links")
+		self.meta = try values.decodeIfPresent(PagingInformation.self, forKey: "meta")
+		self.included = try values.decodeIfPresent([IncludedItem].self, forKey: "included")
 	}
 
 	public func encode(to encoder: Encoder) throws {
 		var values = encoder.container(keyedBy: StringCodingKey.self)
-		try values.encode(links, forKey: "links")
-		try values.encodeIfPresent(included, forKey: "included")
-		try values.encodeIfPresent(meta, forKey: "meta")
 		try values.encode(data, forKey: "data")
+		try values.encode(links, forKey: "links")
+		try values.encodeIfPresent(meta, forKey: "meta")
+		try values.encodeIfPresent(included, forKey: "included")
 	}
 }

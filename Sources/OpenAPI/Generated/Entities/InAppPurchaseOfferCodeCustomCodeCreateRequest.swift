@@ -7,9 +7,39 @@ public struct InAppPurchaseOfferCodeCustomCodeCreateRequest: Codable {
 	public var data: Data
 
 	public struct Data: Codable {
-		public var relationships: Relationships
-		public var attributes: Attributes
 		public var type: `Type`
+		public var attributes: Attributes
+		public var relationships: Relationships
+
+		public enum `Type`: String, Codable, CaseIterable {
+			case inAppPurchaseOfferCodeCustomCodes
+		}
+
+		public struct Attributes: Codable {
+			public var numberOfCodes: Int
+			public var expirationDate: String?
+			public var customCode: String
+
+			public init(numberOfCodes: Int, expirationDate: String? = nil, customCode: String) {
+				self.numberOfCodes = numberOfCodes
+				self.expirationDate = expirationDate
+				self.customCode = customCode
+			}
+
+			public init(from decoder: Decoder) throws {
+				let values = try decoder.container(keyedBy: StringCodingKey.self)
+				self.numberOfCodes = try values.decode(Int.self, forKey: "numberOfCodes")
+				self.expirationDate = try values.decodeIfPresent(String.self, forKey: "expirationDate")
+				self.customCode = try values.decode(String.self, forKey: "customCode")
+			}
+
+			public func encode(to encoder: Encoder) throws {
+				var values = encoder.container(keyedBy: StringCodingKey.self)
+				try values.encode(numberOfCodes, forKey: "numberOfCodes")
+				try values.encodeIfPresent(expirationDate, forKey: "expirationDate")
+				try values.encode(customCode, forKey: "customCode")
+			}
+		}
 
 		public struct Relationships: Codable {
 			public var offerCode: OfferCode
@@ -18,28 +48,28 @@ public struct InAppPurchaseOfferCodeCustomCodeCreateRequest: Codable {
 				public var data: Data
 
 				public struct Data: Codable, Identifiable {
-					public var id: String
 					public var type: `Type`
+					public var id: String
 
 					public enum `Type`: String, Codable, CaseIterable {
 						case inAppPurchaseOfferCodes
 					}
 
-					public init(id: String, type: `Type`) {
-						self.id = id
+					public init(type: `Type`, id: String) {
 						self.type = type
+						self.id = id
 					}
 
 					public init(from decoder: Decoder) throws {
 						let values = try decoder.container(keyedBy: StringCodingKey.self)
-						self.id = try values.decode(String.self, forKey: "id")
 						self.type = try values.decode(`Type`.self, forKey: "type")
+						self.id = try values.decode(String.self, forKey: "id")
 					}
 
 					public func encode(to encoder: Encoder) throws {
 						var values = encoder.container(keyedBy: StringCodingKey.self)
-						try values.encode(id, forKey: "id")
 						try values.encode(type, forKey: "type")
+						try values.encode(id, forKey: "id")
 					}
 				}
 
@@ -73,54 +103,24 @@ public struct InAppPurchaseOfferCodeCustomCodeCreateRequest: Codable {
 			}
 		}
 
-		public struct Attributes: Codable {
-			public var numberOfCodes: Int
-			public var expirationDate: String?
-			public var customCode: String
-
-			public init(numberOfCodes: Int, expirationDate: String? = nil, customCode: String) {
-				self.numberOfCodes = numberOfCodes
-				self.expirationDate = expirationDate
-				self.customCode = customCode
-			}
-
-			public init(from decoder: Decoder) throws {
-				let values = try decoder.container(keyedBy: StringCodingKey.self)
-				self.numberOfCodes = try values.decode(Int.self, forKey: "numberOfCodes")
-				self.expirationDate = try values.decodeIfPresent(String.self, forKey: "expirationDate")
-				self.customCode = try values.decode(String.self, forKey: "customCode")
-			}
-
-			public func encode(to encoder: Encoder) throws {
-				var values = encoder.container(keyedBy: StringCodingKey.self)
-				try values.encode(numberOfCodes, forKey: "numberOfCodes")
-				try values.encodeIfPresent(expirationDate, forKey: "expirationDate")
-				try values.encode(customCode, forKey: "customCode")
-			}
-		}
-
-		public enum `Type`: String, Codable, CaseIterable {
-			case inAppPurchaseOfferCodeCustomCodes
-		}
-
-		public init(relationships: Relationships, attributes: Attributes, type: `Type`) {
-			self.relationships = relationships
-			self.attributes = attributes
+		public init(type: `Type`, attributes: Attributes, relationships: Relationships) {
 			self.type = type
+			self.attributes = attributes
+			self.relationships = relationships
 		}
 
 		public init(from decoder: Decoder) throws {
 			let values = try decoder.container(keyedBy: StringCodingKey.self)
-			self.relationships = try values.decode(Relationships.self, forKey: "relationships")
-			self.attributes = try values.decode(Attributes.self, forKey: "attributes")
 			self.type = try values.decode(`Type`.self, forKey: "type")
+			self.attributes = try values.decode(Attributes.self, forKey: "attributes")
+			self.relationships = try values.decode(Relationships.self, forKey: "relationships")
 		}
 
 		public func encode(to encoder: Encoder) throws {
 			var values = encoder.container(keyedBy: StringCodingKey.self)
-			try values.encode(relationships, forKey: "relationships")
-			try values.encode(attributes, forKey: "attributes")
 			try values.encode(type, forKey: "type")
+			try values.encode(attributes, forKey: "attributes")
+			try values.encode(relationships, forKey: "relationships")
 		}
 	}
 

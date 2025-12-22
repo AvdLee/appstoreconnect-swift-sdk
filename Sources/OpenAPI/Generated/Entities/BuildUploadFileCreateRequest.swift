@@ -7,15 +7,25 @@ public struct BuildUploadFileCreateRequest: Codable {
 	public var data: Data
 
 	public struct Data: Codable {
+		public var type: `Type`
 		public var attributes: Attributes
 		public var relationships: Relationships
-		public var type: `Type`
+
+		public enum `Type`: String, Codable, CaseIterable {
+			case buildUploadFiles
+		}
 
 		public struct Attributes: Codable {
-			public var uti: Uti
 			public var fileName: String
-			public var fileSize: Int64
 			public var assetType: AssetType
+			public var uti: Uti
+			public var fileSize: Int64
+
+			public enum AssetType: String, Codable, CaseIterable {
+				case asset = "ASSET"
+				case assetDescription = "ASSET_DESCRIPTION"
+				case assetSpi = "ASSET_SPI"
+			}
 
 			public enum Uti: String, Codable, CaseIterable {
 				case comAppleBinaryPropertyList = "com.apple.binary-property-list"
@@ -25,33 +35,27 @@ public struct BuildUploadFileCreateRequest: Codable {
 				case comPkwareZipArchive = "com.pkware.zip-archive"
 			}
 
-			public enum AssetType: String, Codable, CaseIterable {
-				case asset = "ASSET"
-				case assetDescription = "ASSET_DESCRIPTION"
-				case assetSpi = "ASSET_SPI"
-			}
-
-			public init(uti: Uti, fileName: String, fileSize: Int64, assetType: AssetType) {
-				self.uti = uti
+			public init(fileName: String, assetType: AssetType, uti: Uti, fileSize: Int64) {
 				self.fileName = fileName
-				self.fileSize = fileSize
 				self.assetType = assetType
+				self.uti = uti
+				self.fileSize = fileSize
 			}
 
 			public init(from decoder: Decoder) throws {
 				let values = try decoder.container(keyedBy: StringCodingKey.self)
-				self.uti = try values.decode(Uti.self, forKey: "uti")
 				self.fileName = try values.decode(String.self, forKey: "fileName")
-				self.fileSize = try values.decode(Int64.self, forKey: "fileSize")
 				self.assetType = try values.decode(AssetType.self, forKey: "assetType")
+				self.uti = try values.decode(Uti.self, forKey: "uti")
+				self.fileSize = try values.decode(Int64.self, forKey: "fileSize")
 			}
 
 			public func encode(to encoder: Encoder) throws {
 				var values = encoder.container(keyedBy: StringCodingKey.self)
-				try values.encode(uti, forKey: "uti")
 				try values.encode(fileName, forKey: "fileName")
-				try values.encode(fileSize, forKey: "fileSize")
 				try values.encode(assetType, forKey: "assetType")
+				try values.encode(uti, forKey: "uti")
+				try values.encode(fileSize, forKey: "fileSize")
 			}
 		}
 
@@ -62,28 +66,28 @@ public struct BuildUploadFileCreateRequest: Codable {
 				public var data: Data
 
 				public struct Data: Codable, Identifiable {
-					public var id: String
 					public var type: `Type`
+					public var id: String
 
 					public enum `Type`: String, Codable, CaseIterable {
 						case buildUploads
 					}
 
-					public init(id: String, type: `Type`) {
-						self.id = id
+					public init(type: `Type`, id: String) {
 						self.type = type
+						self.id = id
 					}
 
 					public init(from decoder: Decoder) throws {
 						let values = try decoder.container(keyedBy: StringCodingKey.self)
-						self.id = try values.decode(String.self, forKey: "id")
 						self.type = try values.decode(`Type`.self, forKey: "type")
+						self.id = try values.decode(String.self, forKey: "id")
 					}
 
 					public func encode(to encoder: Encoder) throws {
 						var values = encoder.container(keyedBy: StringCodingKey.self)
-						try values.encode(id, forKey: "id")
 						try values.encode(type, forKey: "type")
+						try values.encode(id, forKey: "id")
 					}
 				}
 
@@ -117,28 +121,24 @@ public struct BuildUploadFileCreateRequest: Codable {
 			}
 		}
 
-		public enum `Type`: String, Codable, CaseIterable {
-			case buildUploadFiles
-		}
-
-		public init(attributes: Attributes, relationships: Relationships, type: `Type`) {
+		public init(type: `Type`, attributes: Attributes, relationships: Relationships) {
+			self.type = type
 			self.attributes = attributes
 			self.relationships = relationships
-			self.type = type
 		}
 
 		public init(from decoder: Decoder) throws {
 			let values = try decoder.container(keyedBy: StringCodingKey.self)
+			self.type = try values.decode(`Type`.self, forKey: "type")
 			self.attributes = try values.decode(Attributes.self, forKey: "attributes")
 			self.relationships = try values.decode(Relationships.self, forKey: "relationships")
-			self.type = try values.decode(`Type`.self, forKey: "type")
 		}
 
 		public func encode(to encoder: Encoder) throws {
 			var values = encoder.container(keyedBy: StringCodingKey.self)
+			try values.encode(type, forKey: "type")
 			try values.encode(attributes, forKey: "attributes")
 			try values.encode(relationships, forKey: "relationships")
-			try values.encode(type, forKey: "type")
 		}
 	}
 

@@ -4,8 +4,8 @@
 import Foundation
 
 public struct ScmProviderType: Codable {
-	public var isOnPremise: Bool?
 	public var kind: Kind?
+	public var isOnPremise: Bool?
 	public var displayName: String?
 
 	public enum Kind: String, Codable, CaseIterable {
@@ -17,23 +17,23 @@ public struct ScmProviderType: Codable {
 		case gitlabSelfManaged = "GITLAB_SELF_MANAGED"
 	}
 
-	public init(isOnPremise: Bool? = nil, kind: Kind? = nil, displayName: String? = nil) {
-		self.isOnPremise = isOnPremise
+	public init(kind: Kind? = nil, isOnPremise: Bool? = nil, displayName: String? = nil) {
 		self.kind = kind
+		self.isOnPremise = isOnPremise
 		self.displayName = displayName
 	}
 
 	public init(from decoder: Decoder) throws {
 		let values = try decoder.container(keyedBy: StringCodingKey.self)
-		self.isOnPremise = try values.decodeIfPresent(Bool.self, forKey: "isOnPremise")
 		self.kind = try values.decodeIfPresent(Kind.self, forKey: "kind")
+		self.isOnPremise = try values.decodeIfPresent(Bool.self, forKey: "isOnPremise")
 		self.displayName = try values.decodeIfPresent(String.self, forKey: "displayName")
 	}
 
 	public func encode(to encoder: Encoder) throws {
 		var values = encoder.container(keyedBy: StringCodingKey.self)
-		try values.encodeIfPresent(isOnPremise, forKey: "isOnPremise")
 		try values.encodeIfPresent(kind, forKey: "kind")
+		try values.encodeIfPresent(isOnPremise, forKey: "isOnPremise")
 		try values.encodeIfPresent(displayName, forKey: "displayName")
 	}
 }

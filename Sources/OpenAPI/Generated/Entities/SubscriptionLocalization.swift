@@ -4,52 +4,11 @@
 import Foundation
 
 public struct SubscriptionLocalization: Codable, Identifiable {
+	public var id: String
+	public var relationships: Relationships?
+	public var links: ResourceLinks?
 	public var type: `Type`
 	public var attributes: Attributes?
-	public var links: ResourceLinks?
-	public var relationships: Relationships?
-	public var id: String
-
-	public enum `Type`: String, Codable, CaseIterable {
-		case subscriptionLocalizations
-	}
-
-	public struct Attributes: Codable {
-		public var name: String?
-		public var state: State?
-		public var description: String?
-		public var locale: String?
-
-		public enum State: String, Codable, CaseIterable {
-			case prepareForSubmission = "PREPARE_FOR_SUBMISSION"
-			case waitingForReview = "WAITING_FOR_REVIEW"
-			case approved = "APPROVED"
-			case rejected = "REJECTED"
-		}
-
-		public init(name: String? = nil, state: State? = nil, description: String? = nil, locale: String? = nil) {
-			self.name = name
-			self.state = state
-			self.description = description
-			self.locale = locale
-		}
-
-		public init(from decoder: Decoder) throws {
-			let values = try decoder.container(keyedBy: StringCodingKey.self)
-			self.name = try values.decodeIfPresent(String.self, forKey: "name")
-			self.state = try values.decodeIfPresent(State.self, forKey: "state")
-			self.description = try values.decodeIfPresent(String.self, forKey: "description")
-			self.locale = try values.decodeIfPresent(String.self, forKey: "locale")
-		}
-
-		public func encode(to encoder: Encoder) throws {
-			var values = encoder.container(keyedBy: StringCodingKey.self)
-			try values.encodeIfPresent(name, forKey: "name")
-			try values.encodeIfPresent(state, forKey: "state")
-			try values.encodeIfPresent(description, forKey: "description")
-			try values.encodeIfPresent(locale, forKey: "locale")
-		}
-	}
 
 	public struct Relationships: Codable {
 		public var subscription: Subscription?
@@ -58,28 +17,28 @@ public struct SubscriptionLocalization: Codable, Identifiable {
 			public var data: Data?
 
 			public struct Data: Codable, Identifiable {
-				public var id: String
 				public var type: `Type`
+				public var id: String
 
 				public enum `Type`: String, Codable, CaseIterable {
 					case subscriptions
 				}
 
-				public init(id: String, type: `Type`) {
-					self.id = id
+				public init(type: `Type`, id: String) {
 					self.type = type
+					self.id = id
 				}
 
 				public init(from decoder: Decoder) throws {
 					let values = try decoder.container(keyedBy: StringCodingKey.self)
-					self.id = try values.decode(String.self, forKey: "id")
 					self.type = try values.decode(`Type`.self, forKey: "type")
+					self.id = try values.decode(String.self, forKey: "id")
 				}
 
 				public func encode(to encoder: Encoder) throws {
 					var values = encoder.container(keyedBy: StringCodingKey.self)
-					try values.encode(id, forKey: "id")
 					try values.encode(type, forKey: "type")
+					try values.encode(id, forKey: "id")
 				}
 			}
 
@@ -113,29 +72,70 @@ public struct SubscriptionLocalization: Codable, Identifiable {
 		}
 	}
 
-	public init(type: `Type`, attributes: Attributes? = nil, links: ResourceLinks? = nil, relationships: Relationships? = nil, id: String) {
+	public enum `Type`: String, Codable, CaseIterable {
+		case subscriptionLocalizations
+	}
+
+	public struct Attributes: Codable {
+		public var locale: String?
+		public var state: State?
+		public var name: String?
+		public var description: String?
+
+		public enum State: String, Codable, CaseIterable {
+			case prepareForSubmission = "PREPARE_FOR_SUBMISSION"
+			case waitingForReview = "WAITING_FOR_REVIEW"
+			case approved = "APPROVED"
+			case rejected = "REJECTED"
+		}
+
+		public init(locale: String? = nil, state: State? = nil, name: String? = nil, description: String? = nil) {
+			self.locale = locale
+			self.state = state
+			self.name = name
+			self.description = description
+		}
+
+		public init(from decoder: Decoder) throws {
+			let values = try decoder.container(keyedBy: StringCodingKey.self)
+			self.locale = try values.decodeIfPresent(String.self, forKey: "locale")
+			self.state = try values.decodeIfPresent(State.self, forKey: "state")
+			self.name = try values.decodeIfPresent(String.self, forKey: "name")
+			self.description = try values.decodeIfPresent(String.self, forKey: "description")
+		}
+
+		public func encode(to encoder: Encoder) throws {
+			var values = encoder.container(keyedBy: StringCodingKey.self)
+			try values.encodeIfPresent(locale, forKey: "locale")
+			try values.encodeIfPresent(state, forKey: "state")
+			try values.encodeIfPresent(name, forKey: "name")
+			try values.encodeIfPresent(description, forKey: "description")
+		}
+	}
+
+	public init(id: String, relationships: Relationships? = nil, links: ResourceLinks? = nil, type: `Type`, attributes: Attributes? = nil) {
+		self.id = id
+		self.relationships = relationships
+		self.links = links
 		self.type = type
 		self.attributes = attributes
-		self.links = links
-		self.relationships = relationships
-		self.id = id
 	}
 
 	public init(from decoder: Decoder) throws {
 		let values = try decoder.container(keyedBy: StringCodingKey.self)
+		self.id = try values.decode(String.self, forKey: "id")
+		self.relationships = try values.decodeIfPresent(Relationships.self, forKey: "relationships")
+		self.links = try values.decodeIfPresent(ResourceLinks.self, forKey: "links")
 		self.type = try values.decode(`Type`.self, forKey: "type")
 		self.attributes = try values.decodeIfPresent(Attributes.self, forKey: "attributes")
-		self.links = try values.decodeIfPresent(ResourceLinks.self, forKey: "links")
-		self.relationships = try values.decodeIfPresent(Relationships.self, forKey: "relationships")
-		self.id = try values.decode(String.self, forKey: "id")
 	}
 
 	public func encode(to encoder: Encoder) throws {
 		var values = encoder.container(keyedBy: StringCodingKey.self)
+		try values.encode(id, forKey: "id")
+		try values.encodeIfPresent(relationships, forKey: "relationships")
+		try values.encodeIfPresent(links, forKey: "links")
 		try values.encode(type, forKey: "type")
 		try values.encodeIfPresent(attributes, forKey: "attributes")
-		try values.encodeIfPresent(links, forKey: "links")
-		try values.encodeIfPresent(relationships, forKey: "relationships")
-		try values.encode(id, forKey: "id")
 	}
 }

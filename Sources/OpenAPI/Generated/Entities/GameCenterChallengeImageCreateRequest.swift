@@ -7,9 +7,35 @@ public struct GameCenterChallengeImageCreateRequest: Codable {
 	public var data: Data
 
 	public struct Data: Codable {
-		public var relationships: Relationships?
 		public var type: `Type`
 		public var attributes: Attributes
+		public var relationships: Relationships?
+
+		public enum `Type`: String, Codable, CaseIterable {
+			case gameCenterChallengeImages
+		}
+
+		public struct Attributes: Codable {
+			public var fileSize: Int
+			public var fileName: String
+
+			public init(fileSize: Int, fileName: String) {
+				self.fileSize = fileSize
+				self.fileName = fileName
+			}
+
+			public init(from decoder: Decoder) throws {
+				let values = try decoder.container(keyedBy: StringCodingKey.self)
+				self.fileSize = try values.decode(Int.self, forKey: "fileSize")
+				self.fileName = try values.decode(String.self, forKey: "fileName")
+			}
+
+			public func encode(to encoder: Encoder) throws {
+				var values = encoder.container(keyedBy: StringCodingKey.self)
+				try values.encode(fileSize, forKey: "fileSize")
+				try values.encode(fileName, forKey: "fileName")
+			}
+		}
 
 		public struct Relationships: Codable {
 			public var version: Version?
@@ -121,50 +147,24 @@ public struct GameCenterChallengeImageCreateRequest: Codable {
 			}
 		}
 
-		public enum `Type`: String, Codable, CaseIterable {
-			case gameCenterChallengeImages
-		}
-
-		public struct Attributes: Codable {
-			public var fileSize: Int
-			public var fileName: String
-
-			public init(fileSize: Int, fileName: String) {
-				self.fileSize = fileSize
-				self.fileName = fileName
-			}
-
-			public init(from decoder: Decoder) throws {
-				let values = try decoder.container(keyedBy: StringCodingKey.self)
-				self.fileSize = try values.decode(Int.self, forKey: "fileSize")
-				self.fileName = try values.decode(String.self, forKey: "fileName")
-			}
-
-			public func encode(to encoder: Encoder) throws {
-				var values = encoder.container(keyedBy: StringCodingKey.self)
-				try values.encode(fileSize, forKey: "fileSize")
-				try values.encode(fileName, forKey: "fileName")
-			}
-		}
-
-		public init(relationships: Relationships? = nil, type: `Type`, attributes: Attributes) {
-			self.relationships = relationships
+		public init(type: `Type`, attributes: Attributes, relationships: Relationships? = nil) {
 			self.type = type
 			self.attributes = attributes
+			self.relationships = relationships
 		}
 
 		public init(from decoder: Decoder) throws {
 			let values = try decoder.container(keyedBy: StringCodingKey.self)
-			self.relationships = try values.decodeIfPresent(Relationships.self, forKey: "relationships")
 			self.type = try values.decode(`Type`.self, forKey: "type")
 			self.attributes = try values.decode(Attributes.self, forKey: "attributes")
+			self.relationships = try values.decodeIfPresent(Relationships.self, forKey: "relationships")
 		}
 
 		public func encode(to encoder: Encoder) throws {
 			var values = encoder.container(keyedBy: StringCodingKey.self)
-			try values.encodeIfPresent(relationships, forKey: "relationships")
 			try values.encode(type, forKey: "type")
 			try values.encode(attributes, forKey: "attributes")
+			try values.encodeIfPresent(relationships, forKey: "relationships")
 		}
 	}
 

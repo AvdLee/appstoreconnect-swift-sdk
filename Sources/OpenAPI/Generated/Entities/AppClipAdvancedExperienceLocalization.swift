@@ -4,61 +4,61 @@
 import Foundation
 
 public struct AppClipAdvancedExperienceLocalization: Codable, Identifiable {
-	public var attributes: Attributes?
-	public var type: `Type`
-	public var links: ResourceLinks?
 	public var id: String
-
-	public struct Attributes: Codable {
-		public var subtitle: String?
-		public var language: AppClipAdvancedExperienceLanguage?
-		public var title: String?
-
-		public init(subtitle: String? = nil, language: AppClipAdvancedExperienceLanguage? = nil, title: String? = nil) {
-			self.subtitle = subtitle
-			self.language = language
-			self.title = title
-		}
-
-		public init(from decoder: Decoder) throws {
-			let values = try decoder.container(keyedBy: StringCodingKey.self)
-			self.subtitle = try values.decodeIfPresent(String.self, forKey: "subtitle")
-			self.language = try values.decodeIfPresent(AppClipAdvancedExperienceLanguage.self, forKey: "language")
-			self.title = try values.decodeIfPresent(String.self, forKey: "title")
-		}
-
-		public func encode(to encoder: Encoder) throws {
-			var values = encoder.container(keyedBy: StringCodingKey.self)
-			try values.encodeIfPresent(subtitle, forKey: "subtitle")
-			try values.encodeIfPresent(language, forKey: "language")
-			try values.encodeIfPresent(title, forKey: "title")
-		}
-	}
+	public var links: ResourceLinks?
+	public var type: `Type`
+	public var attributes: Attributes?
 
 	public enum `Type`: String, Codable, CaseIterable {
 		case appClipAdvancedExperienceLocalizations
 	}
 
-	public init(attributes: Attributes? = nil, type: `Type`, links: ResourceLinks? = nil, id: String) {
-		self.attributes = attributes
-		self.type = type
-		self.links = links
+	public struct Attributes: Codable {
+		public var title: String?
+		public var subtitle: String?
+		public var language: AppClipAdvancedExperienceLanguage?
+
+		public init(title: String? = nil, subtitle: String? = nil, language: AppClipAdvancedExperienceLanguage? = nil) {
+			self.title = title
+			self.subtitle = subtitle
+			self.language = language
+		}
+
+		public init(from decoder: Decoder) throws {
+			let values = try decoder.container(keyedBy: StringCodingKey.self)
+			self.title = try values.decodeIfPresent(String.self, forKey: "title")
+			self.subtitle = try values.decodeIfPresent(String.self, forKey: "subtitle")
+			self.language = try values.decodeIfPresent(AppClipAdvancedExperienceLanguage.self, forKey: "language")
+		}
+
+		public func encode(to encoder: Encoder) throws {
+			var values = encoder.container(keyedBy: StringCodingKey.self)
+			try values.encodeIfPresent(title, forKey: "title")
+			try values.encodeIfPresent(subtitle, forKey: "subtitle")
+			try values.encodeIfPresent(language, forKey: "language")
+		}
+	}
+
+	public init(id: String, links: ResourceLinks? = nil, type: `Type`, attributes: Attributes? = nil) {
 		self.id = id
+		self.links = links
+		self.type = type
+		self.attributes = attributes
 	}
 
 	public init(from decoder: Decoder) throws {
 		let values = try decoder.container(keyedBy: StringCodingKey.self)
-		self.attributes = try values.decodeIfPresent(Attributes.self, forKey: "attributes")
-		self.type = try values.decode(`Type`.self, forKey: "type")
-		self.links = try values.decodeIfPresent(ResourceLinks.self, forKey: "links")
 		self.id = try values.decode(String.self, forKey: "id")
+		self.links = try values.decodeIfPresent(ResourceLinks.self, forKey: "links")
+		self.type = try values.decode(`Type`.self, forKey: "type")
+		self.attributes = try values.decodeIfPresent(Attributes.self, forKey: "attributes")
 	}
 
 	public func encode(to encoder: Encoder) throws {
 		var values = encoder.container(keyedBy: StringCodingKey.self)
-		try values.encodeIfPresent(attributes, forKey: "attributes")
-		try values.encode(type, forKey: "type")
-		try values.encodeIfPresent(links, forKey: "links")
 		try values.encode(id, forKey: "id")
+		try values.encodeIfPresent(links, forKey: "links")
+		try values.encode(type, forKey: "type")
+		try values.encodeIfPresent(attributes, forKey: "attributes")
 	}
 }

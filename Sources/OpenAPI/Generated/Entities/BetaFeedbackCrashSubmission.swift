@@ -4,172 +4,16 @@
 import Foundation
 
 public struct BetaFeedbackCrashSubmission: Codable, Identifiable {
-	public var links: ResourceLinks?
-	public var attributes: Attributes?
-	public var relationships: Relationships?
-	public var type: `Type`
 	public var id: String
-
-	public struct Attributes: Codable {
-		public var appUptimeInMilliseconds: Int64?
-		public var locale: String?
-		public var diskBytesTotal: Int64?
-		public var osVersion: String?
-		public var comment: String?
-		public var batteryPercentage: Int?
-		public var connectionType: DeviceConnectionType?
-		public var deviceFamily: DeviceFamily?
-		public var architecture: String?
-		public var pairedAppleWatch: String?
-		public var timeZone: String?
-		public var screenWidthInPoints: Int?
-		public var buildBundleID: String?
-		public var appPlatform: Platform?
-		public var screenHeightInPoints: Int?
-		public var email: String?
-		public var devicePlatform: Platform?
-		public var createdDate: Date?
-		public var diskBytesAvailable: Int64?
-		public var deviceModel: String?
-
-		public init(appUptimeInMilliseconds: Int64? = nil, locale: String? = nil, diskBytesTotal: Int64? = nil, osVersion: String? = nil, comment: String? = nil, batteryPercentage: Int? = nil, connectionType: DeviceConnectionType? = nil, deviceFamily: DeviceFamily? = nil, architecture: String? = nil, pairedAppleWatch: String? = nil, timeZone: String? = nil, screenWidthInPoints: Int? = nil, buildBundleID: String? = nil, appPlatform: Platform? = nil, screenHeightInPoints: Int? = nil, email: String? = nil, devicePlatform: Platform? = nil, createdDate: Date? = nil, diskBytesAvailable: Int64? = nil, deviceModel: String? = nil) {
-			self.appUptimeInMilliseconds = appUptimeInMilliseconds
-			self.locale = locale
-			self.diskBytesTotal = diskBytesTotal
-			self.osVersion = osVersion
-			self.comment = comment
-			self.batteryPercentage = batteryPercentage
-			self.connectionType = connectionType
-			self.deviceFamily = deviceFamily
-			self.architecture = architecture
-			self.pairedAppleWatch = pairedAppleWatch
-			self.timeZone = timeZone
-			self.screenWidthInPoints = screenWidthInPoints
-			self.buildBundleID = buildBundleID
-			self.appPlatform = appPlatform
-			self.screenHeightInPoints = screenHeightInPoints
-			self.email = email
-			self.devicePlatform = devicePlatform
-			self.createdDate = createdDate
-			self.diskBytesAvailable = diskBytesAvailable
-			self.deviceModel = deviceModel
-		}
-
-		public init(from decoder: Decoder) throws {
-			let values = try decoder.container(keyedBy: StringCodingKey.self)
-			self.appUptimeInMilliseconds = try values.decodeIfPresent(Int64.self, forKey: "appUptimeInMilliseconds")
-			self.locale = try values.decodeIfPresent(String.self, forKey: "locale")
-			self.diskBytesTotal = try values.decodeIfPresent(Int64.self, forKey: "diskBytesTotal")
-			self.osVersion = try values.decodeIfPresent(String.self, forKey: "osVersion")
-			self.comment = try values.decodeIfPresent(String.self, forKey: "comment")
-			self.batteryPercentage = try values.decodeIfPresent(Int.self, forKey: "batteryPercentage")
-			self.connectionType = try values.decodeIfPresent(DeviceConnectionType.self, forKey: "connectionType")
-			self.deviceFamily = try values.decodeIfPresent(DeviceFamily.self, forKey: "deviceFamily")
-			self.architecture = try values.decodeIfPresent(String.self, forKey: "architecture")
-			self.pairedAppleWatch = try values.decodeIfPresent(String.self, forKey: "pairedAppleWatch")
-			self.timeZone = try values.decodeIfPresent(String.self, forKey: "timeZone")
-			self.screenWidthInPoints = try values.decodeIfPresent(Int.self, forKey: "screenWidthInPoints")
-			self.buildBundleID = try values.decodeIfPresent(String.self, forKey: "buildBundleId")
-			self.appPlatform = try values.decodeIfPresent(Platform.self, forKey: "appPlatform")
-			self.screenHeightInPoints = try values.decodeIfPresent(Int.self, forKey: "screenHeightInPoints")
-			self.email = try values.decodeIfPresent(String.self, forKey: "email")
-			self.devicePlatform = try values.decodeIfPresent(Platform.self, forKey: "devicePlatform")
-			self.createdDate = try values.decodeIfPresent(Date.self, forKey: "createdDate")
-			self.diskBytesAvailable = try values.decodeIfPresent(Int64.self, forKey: "diskBytesAvailable")
-			self.deviceModel = try values.decodeIfPresent(String.self, forKey: "deviceModel")
-		}
-
-		public func encode(to encoder: Encoder) throws {
-			var values = encoder.container(keyedBy: StringCodingKey.self)
-			try values.encodeIfPresent(appUptimeInMilliseconds, forKey: "appUptimeInMilliseconds")
-			try values.encodeIfPresent(locale, forKey: "locale")
-			try values.encodeIfPresent(diskBytesTotal, forKey: "diskBytesTotal")
-			try values.encodeIfPresent(osVersion, forKey: "osVersion")
-			try values.encodeIfPresent(comment, forKey: "comment")
-			try values.encodeIfPresent(batteryPercentage, forKey: "batteryPercentage")
-			try values.encodeIfPresent(connectionType, forKey: "connectionType")
-			try values.encodeIfPresent(deviceFamily, forKey: "deviceFamily")
-			try values.encodeIfPresent(architecture, forKey: "architecture")
-			try values.encodeIfPresent(pairedAppleWatch, forKey: "pairedAppleWatch")
-			try values.encodeIfPresent(timeZone, forKey: "timeZone")
-			try values.encodeIfPresent(screenWidthInPoints, forKey: "screenWidthInPoints")
-			try values.encodeIfPresent(buildBundleID, forKey: "buildBundleId")
-			try values.encodeIfPresent(appPlatform, forKey: "appPlatform")
-			try values.encodeIfPresent(screenHeightInPoints, forKey: "screenHeightInPoints")
-			try values.encodeIfPresent(email, forKey: "email")
-			try values.encodeIfPresent(devicePlatform, forKey: "devicePlatform")
-			try values.encodeIfPresent(createdDate, forKey: "createdDate")
-			try values.encodeIfPresent(diskBytesAvailable, forKey: "diskBytesAvailable")
-			try values.encodeIfPresent(deviceModel, forKey: "deviceModel")
-		}
-	}
+	public var relationships: Relationships?
+	public var links: ResourceLinks?
+	public var type: `Type`
+	public var attributes: Attributes?
 
 	public struct Relationships: Codable {
+		public var build: Build?
 		public var crashLog: CrashLog?
 		public var tester: Tester?
-		public var build: Build?
-
-		public struct CrashLog: Codable {
-			public var links: RelationshipLinks?
-
-			public init(links: RelationshipLinks? = nil) {
-				self.links = links
-			}
-
-			public init(from decoder: Decoder) throws {
-				let values = try decoder.container(keyedBy: StringCodingKey.self)
-				self.links = try values.decodeIfPresent(RelationshipLinks.self, forKey: "links")
-			}
-
-			public func encode(to encoder: Encoder) throws {
-				var values = encoder.container(keyedBy: StringCodingKey.self)
-				try values.encodeIfPresent(links, forKey: "links")
-			}
-		}
-
-		public struct Tester: Codable {
-			public var data: Data?
-
-			public struct Data: Codable, Identifiable {
-				public var id: String
-				public var type: `Type`
-
-				public enum `Type`: String, Codable, CaseIterable {
-					case betaTesters
-				}
-
-				public init(id: String, type: `Type`) {
-					self.id = id
-					self.type = type
-				}
-
-				public init(from decoder: Decoder) throws {
-					let values = try decoder.container(keyedBy: StringCodingKey.self)
-					self.id = try values.decode(String.self, forKey: "id")
-					self.type = try values.decode(`Type`.self, forKey: "type")
-				}
-
-				public func encode(to encoder: Encoder) throws {
-					var values = encoder.container(keyedBy: StringCodingKey.self)
-					try values.encode(id, forKey: "id")
-					try values.encode(type, forKey: "type")
-				}
-			}
-
-			public init(data: Data? = nil) {
-				self.data = data
-			}
-
-			public init(from decoder: Decoder) throws {
-				let values = try decoder.container(keyedBy: StringCodingKey.self)
-				self.data = try values.decodeIfPresent(Data.self, forKey: "data")
-			}
-
-			public func encode(to encoder: Encoder) throws {
-				var values = encoder.container(keyedBy: StringCodingKey.self)
-				try values.encodeIfPresent(data, forKey: "data")
-			}
-		}
 
 		public struct Build: Codable {
 			public var data: Data?
@@ -215,24 +59,86 @@ public struct BetaFeedbackCrashSubmission: Codable, Identifiable {
 			}
 		}
 
-		public init(crashLog: CrashLog? = nil, tester: Tester? = nil, build: Build? = nil) {
+		public struct CrashLog: Codable {
+			public var links: RelationshipLinks?
+
+			public init(links: RelationshipLinks? = nil) {
+				self.links = links
+			}
+
+			public init(from decoder: Decoder) throws {
+				let values = try decoder.container(keyedBy: StringCodingKey.self)
+				self.links = try values.decodeIfPresent(RelationshipLinks.self, forKey: "links")
+			}
+
+			public func encode(to encoder: Encoder) throws {
+				var values = encoder.container(keyedBy: StringCodingKey.self)
+				try values.encodeIfPresent(links, forKey: "links")
+			}
+		}
+
+		public struct Tester: Codable {
+			public var data: Data?
+
+			public struct Data: Codable, Identifiable {
+				public var type: `Type`
+				public var id: String
+
+				public enum `Type`: String, Codable, CaseIterable {
+					case betaTesters
+				}
+
+				public init(type: `Type`, id: String) {
+					self.type = type
+					self.id = id
+				}
+
+				public init(from decoder: Decoder) throws {
+					let values = try decoder.container(keyedBy: StringCodingKey.self)
+					self.type = try values.decode(`Type`.self, forKey: "type")
+					self.id = try values.decode(String.self, forKey: "id")
+				}
+
+				public func encode(to encoder: Encoder) throws {
+					var values = encoder.container(keyedBy: StringCodingKey.self)
+					try values.encode(type, forKey: "type")
+					try values.encode(id, forKey: "id")
+				}
+			}
+
+			public init(data: Data? = nil) {
+				self.data = data
+			}
+
+			public init(from decoder: Decoder) throws {
+				let values = try decoder.container(keyedBy: StringCodingKey.self)
+				self.data = try values.decodeIfPresent(Data.self, forKey: "data")
+			}
+
+			public func encode(to encoder: Encoder) throws {
+				var values = encoder.container(keyedBy: StringCodingKey.self)
+				try values.encodeIfPresent(data, forKey: "data")
+			}
+		}
+
+		public init(build: Build? = nil, crashLog: CrashLog? = nil, tester: Tester? = nil) {
+			self.build = build
 			self.crashLog = crashLog
 			self.tester = tester
-			self.build = build
 		}
 
 		public init(from decoder: Decoder) throws {
 			let values = try decoder.container(keyedBy: StringCodingKey.self)
+			self.build = try values.decodeIfPresent(Build.self, forKey: "build")
 			self.crashLog = try values.decodeIfPresent(CrashLog.self, forKey: "crashLog")
 			self.tester = try values.decodeIfPresent(Tester.self, forKey: "tester")
-			self.build = try values.decodeIfPresent(Build.self, forKey: "build")
 		}
 
 		public func encode(to encoder: Encoder) throws {
 			var values = encoder.container(keyedBy: StringCodingKey.self)
+			try values.encodeIfPresent(build, forKey: "build")
 			try values.encodeIfPresent(crashLog, forKey: "crashLog")
 			try values.encodeIfPresent(tester, forKey: "tester")
-			try values.encodeIfPresent(build, forKey: "build")
 		}
 	}
 
@@ -240,29 +146,123 @@ public struct BetaFeedbackCrashSubmission: Codable, Identifiable {
 		case betaFeedbackCrashSubmissions
 	}
 
-	public init(links: ResourceLinks? = nil, attributes: Attributes? = nil, relationships: Relationships? = nil, type: `Type`, id: String) {
-		self.links = links
-		self.attributes = attributes
-		self.relationships = relationships
-		self.type = type
+	public struct Attributes: Codable {
+		public var osVersion: String?
+		public var devicePlatform: Platform?
+		public var screenHeightInPoints: Int?
+		public var appPlatform: Platform?
+		public var locale: String?
+		public var timeZone: String?
+		public var appUptimeInMilliseconds: Int64?
+		public var email: String?
+		public var createdDate: Date?
+		public var diskBytesAvailable: Int64?
+		public var diskBytesTotal: Int64?
+		public var deviceModel: String?
+		public var architecture: String?
+		public var connectionType: DeviceConnectionType?
+		public var screenWidthInPoints: Int?
+		public var deviceFamily: DeviceFamily?
+		public var buildBundleID: String?
+		public var comment: String?
+		public var batteryPercentage: Int?
+		public var pairedAppleWatch: String?
+
+		public init(osVersion: String? = nil, devicePlatform: Platform? = nil, screenHeightInPoints: Int? = nil, appPlatform: Platform? = nil, locale: String? = nil, timeZone: String? = nil, appUptimeInMilliseconds: Int64? = nil, email: String? = nil, createdDate: Date? = nil, diskBytesAvailable: Int64? = nil, diskBytesTotal: Int64? = nil, deviceModel: String? = nil, architecture: String? = nil, connectionType: DeviceConnectionType? = nil, screenWidthInPoints: Int? = nil, deviceFamily: DeviceFamily? = nil, buildBundleID: String? = nil, comment: String? = nil, batteryPercentage: Int? = nil, pairedAppleWatch: String? = nil) {
+			self.osVersion = osVersion
+			self.devicePlatform = devicePlatform
+			self.screenHeightInPoints = screenHeightInPoints
+			self.appPlatform = appPlatform
+			self.locale = locale
+			self.timeZone = timeZone
+			self.appUptimeInMilliseconds = appUptimeInMilliseconds
+			self.email = email
+			self.createdDate = createdDate
+			self.diskBytesAvailable = diskBytesAvailable
+			self.diskBytesTotal = diskBytesTotal
+			self.deviceModel = deviceModel
+			self.architecture = architecture
+			self.connectionType = connectionType
+			self.screenWidthInPoints = screenWidthInPoints
+			self.deviceFamily = deviceFamily
+			self.buildBundleID = buildBundleID
+			self.comment = comment
+			self.batteryPercentage = batteryPercentage
+			self.pairedAppleWatch = pairedAppleWatch
+		}
+
+		public init(from decoder: Decoder) throws {
+			let values = try decoder.container(keyedBy: StringCodingKey.self)
+			self.osVersion = try values.decodeIfPresent(String.self, forKey: "osVersion")
+			self.devicePlatform = try values.decodeIfPresent(Platform.self, forKey: "devicePlatform")
+			self.screenHeightInPoints = try values.decodeIfPresent(Int.self, forKey: "screenHeightInPoints")
+			self.appPlatform = try values.decodeIfPresent(Platform.self, forKey: "appPlatform")
+			self.locale = try values.decodeIfPresent(String.self, forKey: "locale")
+			self.timeZone = try values.decodeIfPresent(String.self, forKey: "timeZone")
+			self.appUptimeInMilliseconds = try values.decodeIfPresent(Int64.self, forKey: "appUptimeInMilliseconds")
+			self.email = try values.decodeIfPresent(String.self, forKey: "email")
+			self.createdDate = try values.decodeIfPresent(Date.self, forKey: "createdDate")
+			self.diskBytesAvailable = try values.decodeIfPresent(Int64.self, forKey: "diskBytesAvailable")
+			self.diskBytesTotal = try values.decodeIfPresent(Int64.self, forKey: "diskBytesTotal")
+			self.deviceModel = try values.decodeIfPresent(String.self, forKey: "deviceModel")
+			self.architecture = try values.decodeIfPresent(String.self, forKey: "architecture")
+			self.connectionType = try values.decodeIfPresent(DeviceConnectionType.self, forKey: "connectionType")
+			self.screenWidthInPoints = try values.decodeIfPresent(Int.self, forKey: "screenWidthInPoints")
+			self.deviceFamily = try values.decodeIfPresent(DeviceFamily.self, forKey: "deviceFamily")
+			self.buildBundleID = try values.decodeIfPresent(String.self, forKey: "buildBundleId")
+			self.comment = try values.decodeIfPresent(String.self, forKey: "comment")
+			self.batteryPercentage = try values.decodeIfPresent(Int.self, forKey: "batteryPercentage")
+			self.pairedAppleWatch = try values.decodeIfPresent(String.self, forKey: "pairedAppleWatch")
+		}
+
+		public func encode(to encoder: Encoder) throws {
+			var values = encoder.container(keyedBy: StringCodingKey.self)
+			try values.encodeIfPresent(osVersion, forKey: "osVersion")
+			try values.encodeIfPresent(devicePlatform, forKey: "devicePlatform")
+			try values.encodeIfPresent(screenHeightInPoints, forKey: "screenHeightInPoints")
+			try values.encodeIfPresent(appPlatform, forKey: "appPlatform")
+			try values.encodeIfPresent(locale, forKey: "locale")
+			try values.encodeIfPresent(timeZone, forKey: "timeZone")
+			try values.encodeIfPresent(appUptimeInMilliseconds, forKey: "appUptimeInMilliseconds")
+			try values.encodeIfPresent(email, forKey: "email")
+			try values.encodeIfPresent(createdDate, forKey: "createdDate")
+			try values.encodeIfPresent(diskBytesAvailable, forKey: "diskBytesAvailable")
+			try values.encodeIfPresent(diskBytesTotal, forKey: "diskBytesTotal")
+			try values.encodeIfPresent(deviceModel, forKey: "deviceModel")
+			try values.encodeIfPresent(architecture, forKey: "architecture")
+			try values.encodeIfPresent(connectionType, forKey: "connectionType")
+			try values.encodeIfPresent(screenWidthInPoints, forKey: "screenWidthInPoints")
+			try values.encodeIfPresent(deviceFamily, forKey: "deviceFamily")
+			try values.encodeIfPresent(buildBundleID, forKey: "buildBundleId")
+			try values.encodeIfPresent(comment, forKey: "comment")
+			try values.encodeIfPresent(batteryPercentage, forKey: "batteryPercentage")
+			try values.encodeIfPresent(pairedAppleWatch, forKey: "pairedAppleWatch")
+		}
+	}
+
+	public init(id: String, relationships: Relationships? = nil, links: ResourceLinks? = nil, type: `Type`, attributes: Attributes? = nil) {
 		self.id = id
+		self.relationships = relationships
+		self.links = links
+		self.type = type
+		self.attributes = attributes
 	}
 
 	public init(from decoder: Decoder) throws {
 		let values = try decoder.container(keyedBy: StringCodingKey.self)
-		self.links = try values.decodeIfPresent(ResourceLinks.self, forKey: "links")
-		self.attributes = try values.decodeIfPresent(Attributes.self, forKey: "attributes")
-		self.relationships = try values.decodeIfPresent(Relationships.self, forKey: "relationships")
-		self.type = try values.decode(`Type`.self, forKey: "type")
 		self.id = try values.decode(String.self, forKey: "id")
+		self.relationships = try values.decodeIfPresent(Relationships.self, forKey: "relationships")
+		self.links = try values.decodeIfPresent(ResourceLinks.self, forKey: "links")
+		self.type = try values.decode(`Type`.self, forKey: "type")
+		self.attributes = try values.decodeIfPresent(Attributes.self, forKey: "attributes")
 	}
 
 	public func encode(to encoder: Encoder) throws {
 		var values = encoder.container(keyedBy: StringCodingKey.self)
-		try values.encodeIfPresent(links, forKey: "links")
-		try values.encodeIfPresent(attributes, forKey: "attributes")
-		try values.encodeIfPresent(relationships, forKey: "relationships")
-		try values.encode(type, forKey: "type")
 		try values.encode(id, forKey: "id")
+		try values.encodeIfPresent(relationships, forKey: "relationships")
+		try values.encodeIfPresent(links, forKey: "links")
+		try values.encode(type, forKey: "type")
+		try values.encodeIfPresent(attributes, forKey: "attributes")
 	}
 }
