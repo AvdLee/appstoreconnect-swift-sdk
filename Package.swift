@@ -22,7 +22,7 @@ let package = Package(
     name: "AppStoreConnect-Swift-SDK",
     platforms: [
         .iOS(.v14),
-        .macOS(.v12),
+        .macOS(.v11),
         .tvOS(.v14),
         .watchOS(.v9),
     ],
@@ -45,7 +45,6 @@ let package = Package(
                 "OpenAPI/app_store_connect_api.json.orig",
                 "OpenAPI/app_store_connect_api.json.rej",
                 "OpenAPI/create-api.yml",
-                "OpenAPI/patches",
             ]
         ),
         .target(

@@ -122,28 +122,11 @@ public enum OpenAPIGeneratorCore {
 
     private static func download(url: URL, to fileURL: URL, timeoutSeconds: TimeInterval) async throws {
         let request = URLRequest(url: url, cachePolicy: .reloadIgnoringLocalCacheData, timeoutInterval: timeoutSeconds)
-        let (tmpFileURL, response) = try await URLSession.shared.download(for: request)
+        let (data, response) = try await URLSession.shared.data(for: .init(url: url))
         guard let http = response as? HTTPURLResponse, (200..<300).contains(http.statusCode) else {
             throw OpenAPIGeneratorCoreError.downloadFailed("Unexpected response for \(url.absoluteString)")
         }
-
-        // Move into place atomically-ish (best effort).
-        let fm = FileManager.default
-        do {
-            if fm.fileExists(atPath: fileURL.path) {
-                try fm.removeItem(at: fileURL)
-            }
-            try fm.moveItem(at: tmpFileURL, to: fileURL)
-        } catch {
-            do {
-                if fm.fileExists(atPath: fileURL.path) {
-                    try fm.removeItem(at: fileURL)
-                }
-                try fm.copyItem(at: tmpFileURL, to: fileURL)
-            } catch {
-                throw OpenAPIGeneratorCoreError.downloadFailed("Failed to move downloaded file into place: \(error)")
-            }
-        }
+        try data.write(to: fileURL, options: [.atomic])
     }
 
     private static func unzipSingleFileToData(zipURL: URL) throws -> Data {
