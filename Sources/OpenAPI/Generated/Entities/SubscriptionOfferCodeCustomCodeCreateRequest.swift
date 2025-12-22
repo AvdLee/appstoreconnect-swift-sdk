@@ -74,27 +74,27 @@ public struct SubscriptionOfferCodeCustomCodeCreateRequest: Codable {
 		}
 
 		public struct Attributes: Codable {
-			public var numberOfCodes: Int
 			public var customCode: String
+			public var numberOfCodes: Int
 			public var expirationDate: String?
 
-			public init(numberOfCodes: Int, customCode: String, expirationDate: String? = nil) {
-				self.numberOfCodes = numberOfCodes
+			public init(customCode: String, numberOfCodes: Int, expirationDate: String? = nil) {
 				self.customCode = customCode
+				self.numberOfCodes = numberOfCodes
 				self.expirationDate = expirationDate
 			}
 
 			public init(from decoder: Decoder) throws {
 				let values = try decoder.container(keyedBy: StringCodingKey.self)
-				self.numberOfCodes = try values.decode(Int.self, forKey: "numberOfCodes")
 				self.customCode = try values.decode(String.self, forKey: "customCode")
+				self.numberOfCodes = try values.decode(Int.self, forKey: "numberOfCodes")
 				self.expirationDate = try values.decodeIfPresent(String.self, forKey: "expirationDate")
 			}
 
 			public func encode(to encoder: Encoder) throws {
 				var values = encoder.container(keyedBy: StringCodingKey.self)
-				try values.encode(numberOfCodes, forKey: "numberOfCodes")
 				try values.encode(customCode, forKey: "customCode")
+				try values.encode(numberOfCodes, forKey: "numberOfCodes")
 				try values.encodeIfPresent(expirationDate, forKey: "expirationDate")
 			}
 		}

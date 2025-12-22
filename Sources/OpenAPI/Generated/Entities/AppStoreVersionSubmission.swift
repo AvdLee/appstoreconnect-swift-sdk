@@ -6,9 +6,9 @@ import Foundation
 @available(*, deprecated, message: "Deprecated")
 public struct AppStoreVersionSubmission: Codable, Identifiable {
 	public var relationships: Relationships?
-	public var type: `Type`
 	public var links: ResourceLinks?
 	public var id: String
+	public var type: `Type`
 
 	public struct Relationships: Codable {
 		public var appStoreVersion: AppStoreVersion?
@@ -76,26 +76,26 @@ public struct AppStoreVersionSubmission: Codable, Identifiable {
 		case appStoreVersionSubmissions
 	}
 
-	public init(relationships: Relationships? = nil, type: `Type`, links: ResourceLinks? = nil, id: String) {
+	public init(relationships: Relationships? = nil, links: ResourceLinks? = nil, id: String, type: `Type`) {
 		self.relationships = relationships
-		self.type = type
 		self.links = links
 		self.id = id
+		self.type = type
 	}
 
 	public init(from decoder: Decoder) throws {
 		let values = try decoder.container(keyedBy: StringCodingKey.self)
 		self.relationships = try values.decodeIfPresent(Relationships.self, forKey: "relationships")
-		self.type = try values.decode(`Type`.self, forKey: "type")
 		self.links = try values.decodeIfPresent(ResourceLinks.self, forKey: "links")
 		self.id = try values.decode(String.self, forKey: "id")
+		self.type = try values.decode(`Type`.self, forKey: "type")
 	}
 
 	public func encode(to encoder: Encoder) throws {
 		var values = encoder.container(keyedBy: StringCodingKey.self)
 		try values.encodeIfPresent(relationships, forKey: "relationships")
-		try values.encode(type, forKey: "type")
 		try values.encodeIfPresent(links, forKey: "links")
 		try values.encode(id, forKey: "id")
+		try values.encode(type, forKey: "type")
 	}
 }

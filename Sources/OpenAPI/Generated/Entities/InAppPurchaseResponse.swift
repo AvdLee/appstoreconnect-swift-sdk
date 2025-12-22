@@ -6,29 +6,29 @@ import Foundation
 @available(*, deprecated, message: "Deprecated")
 public struct InAppPurchaseResponse: Codable {
 	public var included: [App]?
+	public var links: DocumentLinks
 	/// InAppPurchase
 	///
 	/// - warning: Deprecated.
 	public var data: InAppPurchase
-	public var links: DocumentLinks
 
-	public init(included: [App]? = nil, data: InAppPurchase, links: DocumentLinks) {
+	public init(included: [App]? = nil, links: DocumentLinks, data: InAppPurchase) {
 		self.included = included
-		self.data = data
 		self.links = links
+		self.data = data
 	}
 
 	public init(from decoder: Decoder) throws {
 		let values = try decoder.container(keyedBy: StringCodingKey.self)
 		self.included = try values.decodeIfPresent([App].self, forKey: "included")
-		self.data = try values.decode(InAppPurchase.self, forKey: "data")
 		self.links = try values.decode(DocumentLinks.self, forKey: "links")
+		self.data = try values.decode(InAppPurchase.self, forKey: "data")
 	}
 
 	public func encode(to encoder: Encoder) throws {
 		var values = encoder.container(keyedBy: StringCodingKey.self)
 		try values.encodeIfPresent(included, forKey: "included")
-		try values.encode(data, forKey: "data")
 		try values.encode(links, forKey: "links")
+		try values.encode(data, forKey: "data")
 	}
 }

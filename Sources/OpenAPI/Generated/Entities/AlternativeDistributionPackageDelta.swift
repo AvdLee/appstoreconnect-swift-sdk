@@ -14,32 +14,32 @@ public struct AlternativeDistributionPackageDelta: Codable, Identifiable {
 	}
 
 	public struct Attributes: Codable {
-		public var fileChecksum: String?
-		public var url: URL?
-		public var alternativeDistributionKeyBlob: String?
 		public var urlExpirationDate: Date?
+		public var fileChecksum: String?
+		public var alternativeDistributionKeyBlob: String?
+		public var url: URL?
 
-		public init(fileChecksum: String? = nil, url: URL? = nil, alternativeDistributionKeyBlob: String? = nil, urlExpirationDate: Date? = nil) {
-			self.fileChecksum = fileChecksum
-			self.url = url
-			self.alternativeDistributionKeyBlob = alternativeDistributionKeyBlob
+		public init(urlExpirationDate: Date? = nil, fileChecksum: String? = nil, alternativeDistributionKeyBlob: String? = nil, url: URL? = nil) {
 			self.urlExpirationDate = urlExpirationDate
+			self.fileChecksum = fileChecksum
+			self.alternativeDistributionKeyBlob = alternativeDistributionKeyBlob
+			self.url = url
 		}
 
 		public init(from decoder: Decoder) throws {
 			let values = try decoder.container(keyedBy: StringCodingKey.self)
-			self.fileChecksum = try values.decodeIfPresent(String.self, forKey: "fileChecksum")
-			self.url = try values.decodeIfPresent(URL.self, forKey: "url")
-			self.alternativeDistributionKeyBlob = try values.decodeIfPresent(String.self, forKey: "alternativeDistributionKeyBlob")
 			self.urlExpirationDate = try values.decodeIfPresent(Date.self, forKey: "urlExpirationDate")
+			self.fileChecksum = try values.decodeIfPresent(String.self, forKey: "fileChecksum")
+			self.alternativeDistributionKeyBlob = try values.decodeIfPresent(String.self, forKey: "alternativeDistributionKeyBlob")
+			self.url = try values.decodeIfPresent(URL.self, forKey: "url")
 		}
 
 		public func encode(to encoder: Encoder) throws {
 			var values = encoder.container(keyedBy: StringCodingKey.self)
-			try values.encodeIfPresent(fileChecksum, forKey: "fileChecksum")
-			try values.encodeIfPresent(url, forKey: "url")
-			try values.encodeIfPresent(alternativeDistributionKeyBlob, forKey: "alternativeDistributionKeyBlob")
 			try values.encodeIfPresent(urlExpirationDate, forKey: "urlExpirationDate")
+			try values.encodeIfPresent(fileChecksum, forKey: "fileChecksum")
+			try values.encodeIfPresent(alternativeDistributionKeyBlob, forKey: "alternativeDistributionKeyBlob")
+			try values.encodeIfPresent(url, forKey: "url")
 		}
 	}
 

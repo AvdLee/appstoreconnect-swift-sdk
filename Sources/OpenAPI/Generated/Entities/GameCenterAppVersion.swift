@@ -7,8 +7,8 @@ public struct GameCenterAppVersion: Codable, Identifiable {
 	public var links: ResourceLinks?
 	public var id: String
 	public var relationships: Relationships?
-	public var attributes: Attributes?
 	public var type: `Type`
+	public var attributes: Attributes?
 
 	public struct Relationships: Codable {
 		public var compatibilityVersions: CompatibilityVersions?
@@ -20,28 +20,28 @@ public struct GameCenterAppVersion: Codable, Identifiable {
 			public var data: [Datum]?
 
 			public struct Datum: Codable, Identifiable {
-				public var type: `Type`
 				public var id: String
+				public var type: `Type`
 
 				public enum `Type`: String, Codable, CaseIterable {
 					case gameCenterAppVersions
 				}
 
-				public init(type: `Type`, id: String) {
-					self.type = type
+				public init(id: String, type: `Type`) {
 					self.id = id
+					self.type = type
 				}
 
 				public init(from decoder: Decoder) throws {
 					let values = try decoder.container(keyedBy: StringCodingKey.self)
-					self.type = try values.decode(`Type`.self, forKey: "type")
 					self.id = try values.decode(String.self, forKey: "id")
+					self.type = try values.decode(`Type`.self, forKey: "type")
 				}
 
 				public func encode(to encoder: Encoder) throws {
 					var values = encoder.container(keyedBy: StringCodingKey.self)
-					try values.encode(type, forKey: "type")
 					try values.encode(id, forKey: "id")
+					try values.encode(type, forKey: "type")
 				}
 			}
 
@@ -67,8 +67,8 @@ public struct GameCenterAppVersion: Codable, Identifiable {
 		}
 
 		public struct AppStoreVersion: Codable {
-			public var data: Data?
 			public var links: RelationshipLinks?
+			public var data: Data?
 
 			public struct Data: Codable, Identifiable {
 				public var type: `Type`
@@ -96,21 +96,21 @@ public struct GameCenterAppVersion: Codable, Identifiable {
 				}
 			}
 
-			public init(data: Data? = nil, links: RelationshipLinks? = nil) {
-				self.data = data
+			public init(links: RelationshipLinks? = nil, data: Data? = nil) {
 				self.links = links
+				self.data = data
 			}
 
 			public init(from decoder: Decoder) throws {
 				let values = try decoder.container(keyedBy: StringCodingKey.self)
-				self.data = try values.decodeIfPresent(Data.self, forKey: "data")
 				self.links = try values.decodeIfPresent(RelationshipLinks.self, forKey: "links")
+				self.data = try values.decodeIfPresent(Data.self, forKey: "data")
 			}
 
 			public func encode(to encoder: Encoder) throws {
 				var values = encoder.container(keyedBy: StringCodingKey.self)
-				try values.encodeIfPresent(data, forKey: "data")
 				try values.encodeIfPresent(links, forKey: "links")
+				try values.encodeIfPresent(data, forKey: "data")
 			}
 		}
 
@@ -132,6 +132,10 @@ public struct GameCenterAppVersion: Codable, Identifiable {
 		}
 	}
 
+	public enum `Type`: String, Codable, CaseIterable {
+		case gameCenterAppVersions
+	}
+
 	public struct Attributes: Codable {
 		public var isEnabled: Bool?
 
@@ -150,16 +154,12 @@ public struct GameCenterAppVersion: Codable, Identifiable {
 		}
 	}
 
-	public enum `Type`: String, Codable, CaseIterable {
-		case gameCenterAppVersions
-	}
-
-	public init(links: ResourceLinks? = nil, id: String, relationships: Relationships? = nil, attributes: Attributes? = nil, type: `Type`) {
+	public init(links: ResourceLinks? = nil, id: String, relationships: Relationships? = nil, type: `Type`, attributes: Attributes? = nil) {
 		self.links = links
 		self.id = id
 		self.relationships = relationships
-		self.attributes = attributes
 		self.type = type
+		self.attributes = attributes
 	}
 
 	public init(from decoder: Decoder) throws {
@@ -167,8 +167,8 @@ public struct GameCenterAppVersion: Codable, Identifiable {
 		self.links = try values.decodeIfPresent(ResourceLinks.self, forKey: "links")
 		self.id = try values.decode(String.self, forKey: "id")
 		self.relationships = try values.decodeIfPresent(Relationships.self, forKey: "relationships")
-		self.attributes = try values.decodeIfPresent(Attributes.self, forKey: "attributes")
 		self.type = try values.decode(`Type`.self, forKey: "type")
+		self.attributes = try values.decodeIfPresent(Attributes.self, forKey: "attributes")
 	}
 
 	public func encode(to encoder: Encoder) throws {
@@ -176,7 +176,7 @@ public struct GameCenterAppVersion: Codable, Identifiable {
 		try values.encodeIfPresent(links, forKey: "links")
 		try values.encode(id, forKey: "id")
 		try values.encodeIfPresent(relationships, forKey: "relationships")
-		try values.encodeIfPresent(attributes, forKey: "attributes")
 		try values.encode(type, forKey: "type")
+		try values.encodeIfPresent(attributes, forKey: "attributes")
 	}
 }

@@ -4,11 +4,11 @@
 import Foundation
 
 public struct DiagnosticSignature: Codable, Identifiable {
-	public var id: String
 	public var type: `Type`
 	public var attributes: Attributes?
-	public var links: ResourceLinks?
 	public var relationships: Relationships?
+	public var id: String
+	public var links: ResourceLinks?
 
 	public enum `Type`: String, Codable, CaseIterable {
 		case diagnosticSignatures
@@ -86,29 +86,29 @@ public struct DiagnosticSignature: Codable, Identifiable {
 		}
 	}
 
-	public init(id: String, type: `Type`, attributes: Attributes? = nil, links: ResourceLinks? = nil, relationships: Relationships? = nil) {
-		self.id = id
+	public init(type: `Type`, attributes: Attributes? = nil, relationships: Relationships? = nil, id: String, links: ResourceLinks? = nil) {
 		self.type = type
 		self.attributes = attributes
-		self.links = links
 		self.relationships = relationships
+		self.id = id
+		self.links = links
 	}
 
 	public init(from decoder: Decoder) throws {
 		let values = try decoder.container(keyedBy: StringCodingKey.self)
-		self.id = try values.decode(String.self, forKey: "id")
 		self.type = try values.decode(`Type`.self, forKey: "type")
 		self.attributes = try values.decodeIfPresent(Attributes.self, forKey: "attributes")
-		self.links = try values.decodeIfPresent(ResourceLinks.self, forKey: "links")
 		self.relationships = try values.decodeIfPresent(Relationships.self, forKey: "relationships")
+		self.id = try values.decode(String.self, forKey: "id")
+		self.links = try values.decodeIfPresent(ResourceLinks.self, forKey: "links")
 	}
 
 	public func encode(to encoder: Encoder) throws {
 		var values = encoder.container(keyedBy: StringCodingKey.self)
-		try values.encode(id, forKey: "id")
 		try values.encode(type, forKey: "type")
 		try values.encodeIfPresent(attributes, forKey: "attributes")
-		try values.encodeIfPresent(links, forKey: "links")
 		try values.encodeIfPresent(relationships, forKey: "relationships")
+		try values.encode(id, forKey: "id")
+		try values.encodeIfPresent(links, forKey: "links")
 	}
 }

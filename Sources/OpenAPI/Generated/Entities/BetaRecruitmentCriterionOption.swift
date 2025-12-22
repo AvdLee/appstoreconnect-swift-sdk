@@ -6,8 +6,8 @@ import Foundation
 public struct BetaRecruitmentCriterionOption: Codable, Identifiable {
 	public var links: ResourceLinks?
 	public var attributes: Attributes?
-	public var type: `Type`
 	public var id: String
+	public var type: `Type`
 
 	public struct Attributes: Codable {
 		public var deviceFamilyOsVersions: [DeviceFamilyOsVersion]?
@@ -53,26 +53,26 @@ public struct BetaRecruitmentCriterionOption: Codable, Identifiable {
 		case betaRecruitmentCriterionOptions
 	}
 
-	public init(links: ResourceLinks? = nil, attributes: Attributes? = nil, type: `Type`, id: String) {
+	public init(links: ResourceLinks? = nil, attributes: Attributes? = nil, id: String, type: `Type`) {
 		self.links = links
 		self.attributes = attributes
-		self.type = type
 		self.id = id
+		self.type = type
 	}
 
 	public init(from decoder: Decoder) throws {
 		let values = try decoder.container(keyedBy: StringCodingKey.self)
 		self.links = try values.decodeIfPresent(ResourceLinks.self, forKey: "links")
 		self.attributes = try values.decodeIfPresent(Attributes.self, forKey: "attributes")
-		self.type = try values.decode(`Type`.self, forKey: "type")
 		self.id = try values.decode(String.self, forKey: "id")
+		self.type = try values.decode(`Type`.self, forKey: "type")
 	}
 
 	public func encode(to encoder: Encoder) throws {
 		var values = encoder.container(keyedBy: StringCodingKey.self)
 		try values.encodeIfPresent(links, forKey: "links")
 		try values.encodeIfPresent(attributes, forKey: "attributes")
-		try values.encode(type, forKey: "type")
 		try values.encode(id, forKey: "id")
+		try values.encode(type, forKey: "type")
 	}
 }

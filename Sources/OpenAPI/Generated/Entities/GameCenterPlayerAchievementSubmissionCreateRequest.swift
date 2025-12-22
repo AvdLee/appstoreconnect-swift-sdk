@@ -13,38 +13,38 @@ public struct GameCenterPlayerAchievementSubmissionCreateRequest: Codable {
 		public struct Attributes: Codable {
 			public var percentageAchieved: Int
 			public var challengeIDs: [String]?
-			public var scopedPlayerID: String
-			public var vendorIdentifier: String
 			public var bundleID: String
+			public var scopedPlayerID: String
 			public var submittedDate: Date?
+			public var vendorIdentifier: String
 
-			public init(percentageAchieved: Int, challengeIDs: [String]? = nil, scopedPlayerID: String, vendorIdentifier: String, bundleID: String, submittedDate: Date? = nil) {
+			public init(percentageAchieved: Int, challengeIDs: [String]? = nil, bundleID: String, scopedPlayerID: String, submittedDate: Date? = nil, vendorIdentifier: String) {
 				self.percentageAchieved = percentageAchieved
 				self.challengeIDs = challengeIDs
-				self.scopedPlayerID = scopedPlayerID
-				self.vendorIdentifier = vendorIdentifier
 				self.bundleID = bundleID
+				self.scopedPlayerID = scopedPlayerID
 				self.submittedDate = submittedDate
+				self.vendorIdentifier = vendorIdentifier
 			}
 
 			public init(from decoder: Decoder) throws {
 				let values = try decoder.container(keyedBy: StringCodingKey.self)
 				self.percentageAchieved = try values.decode(Int.self, forKey: "percentageAchieved")
 				self.challengeIDs = try values.decodeIfPresent([String].self, forKey: "challengeIds")
-				self.scopedPlayerID = try values.decode(String.self, forKey: "scopedPlayerId")
-				self.vendorIdentifier = try values.decode(String.self, forKey: "vendorIdentifier")
 				self.bundleID = try values.decode(String.self, forKey: "bundleId")
+				self.scopedPlayerID = try values.decode(String.self, forKey: "scopedPlayerId")
 				self.submittedDate = try values.decodeIfPresent(Date.self, forKey: "submittedDate")
+				self.vendorIdentifier = try values.decode(String.self, forKey: "vendorIdentifier")
 			}
 
 			public func encode(to encoder: Encoder) throws {
 				var values = encoder.container(keyedBy: StringCodingKey.self)
 				try values.encode(percentageAchieved, forKey: "percentageAchieved")
 				try values.encodeIfPresent(challengeIDs, forKey: "challengeIds")
-				try values.encode(scopedPlayerID, forKey: "scopedPlayerId")
-				try values.encode(vendorIdentifier, forKey: "vendorIdentifier")
 				try values.encode(bundleID, forKey: "bundleId")
+				try values.encode(scopedPlayerID, forKey: "scopedPlayerId")
 				try values.encodeIfPresent(submittedDate, forKey: "submittedDate")
+				try values.encode(vendorIdentifier, forKey: "vendorIdentifier")
 			}
 		}
 

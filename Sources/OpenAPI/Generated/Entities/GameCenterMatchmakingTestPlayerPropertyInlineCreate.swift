@@ -4,8 +4,8 @@
 import Foundation
 
 public struct GameCenterMatchmakingTestPlayerPropertyInlineCreate: Codable, Identifiable {
-	public var type: `Type`
 	public var id: String?
+	public var type: `Type`
 	public var attributes: Attributes
 
 	public enum `Type`: String, Codable, CaseIterable {
@@ -34,23 +34,23 @@ public struct GameCenterMatchmakingTestPlayerPropertyInlineCreate: Codable, Iden
 		}
 	}
 
-	public init(type: `Type`, id: String? = nil, attributes: Attributes) {
-		self.type = type
+	public init(id: String? = nil, type: `Type`, attributes: Attributes) {
 		self.id = id
+		self.type = type
 		self.attributes = attributes
 	}
 
 	public init(from decoder: Decoder) throws {
 		let values = try decoder.container(keyedBy: StringCodingKey.self)
-		self.type = try values.decode(`Type`.self, forKey: "type")
 		self.id = try values.decodeIfPresent(String.self, forKey: "id")
+		self.type = try values.decode(`Type`.self, forKey: "type")
 		self.attributes = try values.decode(Attributes.self, forKey: "attributes")
 	}
 
 	public func encode(to encoder: Encoder) throws {
 		var values = encoder.container(keyedBy: StringCodingKey.self)
-		try values.encode(type, forKey: "type")
 		try values.encodeIfPresent(id, forKey: "id")
+		try values.encode(type, forKey: "type")
 		try values.encode(attributes, forKey: "attributes")
 	}
 }

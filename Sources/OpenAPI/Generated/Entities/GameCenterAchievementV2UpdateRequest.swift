@@ -12,40 +12,40 @@ public struct GameCenterAchievementV2UpdateRequest: Codable {
 		public var type: `Type`
 
 		public struct Attributes: Codable {
-			public var isArchived: Bool?
+			public var isRepeatable: Bool?
+			public var points: Int?
 			public var activityProperties: [String: String]?
 			public var referenceName: String?
-			public var isRepeatable: Bool?
+			public var isArchived: Bool?
 			public var isShowBeforeEarned: Bool?
-			public var points: Int?
 
-			public init(isArchived: Bool? = nil, activityProperties: [String: String]? = nil, referenceName: String? = nil, isRepeatable: Bool? = nil, isShowBeforeEarned: Bool? = nil, points: Int? = nil) {
-				self.isArchived = isArchived
+			public init(isRepeatable: Bool? = nil, points: Int? = nil, activityProperties: [String: String]? = nil, referenceName: String? = nil, isArchived: Bool? = nil, isShowBeforeEarned: Bool? = nil) {
+				self.isRepeatable = isRepeatable
+				self.points = points
 				self.activityProperties = activityProperties
 				self.referenceName = referenceName
-				self.isRepeatable = isRepeatable
+				self.isArchived = isArchived
 				self.isShowBeforeEarned = isShowBeforeEarned
-				self.points = points
 			}
 
 			public init(from decoder: Decoder) throws {
 				let values = try decoder.container(keyedBy: StringCodingKey.self)
-				self.isArchived = try values.decodeIfPresent(Bool.self, forKey: "archived")
+				self.isRepeatable = try values.decodeIfPresent(Bool.self, forKey: "repeatable")
+				self.points = try values.decodeIfPresent(Int.self, forKey: "points")
 				self.activityProperties = try values.decodeIfPresent([String: String].self, forKey: "activityProperties")
 				self.referenceName = try values.decodeIfPresent(String.self, forKey: "referenceName")
-				self.isRepeatable = try values.decodeIfPresent(Bool.self, forKey: "repeatable")
+				self.isArchived = try values.decodeIfPresent(Bool.self, forKey: "archived")
 				self.isShowBeforeEarned = try values.decodeIfPresent(Bool.self, forKey: "showBeforeEarned")
-				self.points = try values.decodeIfPresent(Int.self, forKey: "points")
 			}
 
 			public func encode(to encoder: Encoder) throws {
 				var values = encoder.container(keyedBy: StringCodingKey.self)
-				try values.encodeIfPresent(isArchived, forKey: "archived")
+				try values.encodeIfPresent(isRepeatable, forKey: "repeatable")
+				try values.encodeIfPresent(points, forKey: "points")
 				try values.encodeIfPresent(activityProperties, forKey: "activityProperties")
 				try values.encodeIfPresent(referenceName, forKey: "referenceName")
-				try values.encodeIfPresent(isRepeatable, forKey: "repeatable")
+				try values.encodeIfPresent(isArchived, forKey: "archived")
 				try values.encodeIfPresent(isShowBeforeEarned, forKey: "showBeforeEarned")
-				try values.encodeIfPresent(points, forKey: "points")
 			}
 		}
 

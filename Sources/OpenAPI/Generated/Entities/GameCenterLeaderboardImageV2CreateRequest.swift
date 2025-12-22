@@ -78,24 +78,24 @@ public struct GameCenterLeaderboardImageV2CreateRequest: Codable {
 		}
 
 		public struct Attributes: Codable {
-			public var fileSize: Int
 			public var fileName: String
+			public var fileSize: Int
 
-			public init(fileSize: Int, fileName: String) {
-				self.fileSize = fileSize
+			public init(fileName: String, fileSize: Int) {
 				self.fileName = fileName
+				self.fileSize = fileSize
 			}
 
 			public init(from decoder: Decoder) throws {
 				let values = try decoder.container(keyedBy: StringCodingKey.self)
-				self.fileSize = try values.decode(Int.self, forKey: "fileSize")
 				self.fileName = try values.decode(String.self, forKey: "fileName")
+				self.fileSize = try values.decode(Int.self, forKey: "fileSize")
 			}
 
 			public func encode(to encoder: Encoder) throws {
 				var values = encoder.container(keyedBy: StringCodingKey.self)
-				try values.encode(fileSize, forKey: "fileSize")
 				try values.encode(fileName, forKey: "fileName")
+				try values.encode(fileSize, forKey: "fileSize")
 			}
 		}
 

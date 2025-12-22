@@ -5,9 +5,9 @@ import Foundation
 
 public struct GameCenterLeaderboardLocalizationsV2Response: Codable {
 	public var meta: PagingInformation?
-	public var data: [GameCenterLeaderboardLocalizationV2]
-	public var included: [IncludedItem]?
 	public var links: PagedDocumentLinks
+	public var included: [IncludedItem]?
+	public var data: [GameCenterLeaderboardLocalizationV2]
 
 	public enum IncludedItem: Codable {
 		case gameCenterLeaderboardImageV2(GameCenterLeaderboardImageV2)
@@ -43,26 +43,26 @@ public struct GameCenterLeaderboardLocalizationsV2Response: Codable {
 		}
 	}
 
-	public init(meta: PagingInformation? = nil, data: [GameCenterLeaderboardLocalizationV2], included: [IncludedItem]? = nil, links: PagedDocumentLinks) {
+	public init(meta: PagingInformation? = nil, links: PagedDocumentLinks, included: [IncludedItem]? = nil, data: [GameCenterLeaderboardLocalizationV2]) {
 		self.meta = meta
-		self.data = data
-		self.included = included
 		self.links = links
+		self.included = included
+		self.data = data
 	}
 
 	public init(from decoder: Decoder) throws {
 		let values = try decoder.container(keyedBy: StringCodingKey.self)
 		self.meta = try values.decodeIfPresent(PagingInformation.self, forKey: "meta")
-		self.data = try values.decode([GameCenterLeaderboardLocalizationV2].self, forKey: "data")
-		self.included = try values.decodeIfPresent([IncludedItem].self, forKey: "included")
 		self.links = try values.decode(PagedDocumentLinks.self, forKey: "links")
+		self.included = try values.decodeIfPresent([IncludedItem].self, forKey: "included")
+		self.data = try values.decode([GameCenterLeaderboardLocalizationV2].self, forKey: "data")
 	}
 
 	public func encode(to encoder: Encoder) throws {
 		var values = encoder.container(keyedBy: StringCodingKey.self)
 		try values.encodeIfPresent(meta, forKey: "meta")
-		try values.encode(data, forKey: "data")
-		try values.encodeIfPresent(included, forKey: "included")
 		try values.encode(links, forKey: "links")
+		try values.encodeIfPresent(included, forKey: "included")
+		try values.encode(data, forKey: "data")
 	}
 }

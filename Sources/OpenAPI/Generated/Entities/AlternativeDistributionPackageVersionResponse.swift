@@ -4,10 +4,10 @@
 import Foundation
 
 public struct AlternativeDistributionPackageVersionResponse: Codable {
-	public var links: DocumentLinks
-	public var included: [IncludedItem]?
 	/// AlternativeDistributionPackageVersion
 	public var data: AlternativeDistributionPackageVersion
+	public var links: DocumentLinks
+	public var included: [IncludedItem]?
 
 	public enum IncludedItem: Codable {
 		case alternativeDistributionPackageDelta(AlternativeDistributionPackageDelta)
@@ -46,23 +46,23 @@ public struct AlternativeDistributionPackageVersionResponse: Codable {
 		}
 	}
 
-	public init(links: DocumentLinks, included: [IncludedItem]? = nil, data: AlternativeDistributionPackageVersion) {
+	public init(data: AlternativeDistributionPackageVersion, links: DocumentLinks, included: [IncludedItem]? = nil) {
+		self.data = data
 		self.links = links
 		self.included = included
-		self.data = data
 	}
 
 	public init(from decoder: Decoder) throws {
 		let values = try decoder.container(keyedBy: StringCodingKey.self)
+		self.data = try values.decode(AlternativeDistributionPackageVersion.self, forKey: "data")
 		self.links = try values.decode(DocumentLinks.self, forKey: "links")
 		self.included = try values.decodeIfPresent([IncludedItem].self, forKey: "included")
-		self.data = try values.decode(AlternativeDistributionPackageVersion.self, forKey: "data")
 	}
 
 	public func encode(to encoder: Encoder) throws {
 		var values = encoder.container(keyedBy: StringCodingKey.self)
+		try values.encode(data, forKey: "data")
 		try values.encode(links, forKey: "links")
 		try values.encodeIfPresent(included, forKey: "included")
-		try values.encode(data, forKey: "data")
 	}
 }

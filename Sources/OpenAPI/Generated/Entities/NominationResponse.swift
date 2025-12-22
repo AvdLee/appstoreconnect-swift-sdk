@@ -5,9 +5,9 @@ import Foundation
 
 public struct NominationResponse: Codable {
 	public var links: DocumentLinks
+	public var included: [IncludedItem]?
 	/// Nomination
 	public var data: Nomination
-	public var included: [IncludedItem]?
 
 	public enum IncludedItem: Codable {
 		case actor(Actor)
@@ -49,23 +49,23 @@ public struct NominationResponse: Codable {
 		}
 	}
 
-	public init(links: DocumentLinks, data: Nomination, included: [IncludedItem]? = nil) {
+	public init(links: DocumentLinks, included: [IncludedItem]? = nil, data: Nomination) {
 		self.links = links
-		self.data = data
 		self.included = included
+		self.data = data
 	}
 
 	public init(from decoder: Decoder) throws {
 		let values = try decoder.container(keyedBy: StringCodingKey.self)
 		self.links = try values.decode(DocumentLinks.self, forKey: "links")
-		self.data = try values.decode(Nomination.self, forKey: "data")
 		self.included = try values.decodeIfPresent([IncludedItem].self, forKey: "included")
+		self.data = try values.decode(Nomination.self, forKey: "data")
 	}
 
 	public func encode(to encoder: Encoder) throws {
 		var values = encoder.container(keyedBy: StringCodingKey.self)
 		try values.encode(links, forKey: "links")
-		try values.encode(data, forKey: "data")
 		try values.encodeIfPresent(included, forKey: "included")
+		try values.encode(data, forKey: "data")
 	}
 }

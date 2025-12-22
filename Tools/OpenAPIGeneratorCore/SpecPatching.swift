@@ -17,23 +17,24 @@ public enum SpecPatchingError: Error, CustomStringConvertible {
 /// Applies the project’s “spec fixes” in a structure-aware way (no line-based patches).
 public enum SpecPatcher {
     public enum RuleID: String, CaseIterable {
-        case insertXKSIntoTerritoryEnums = "insert-xks"
+        case bundleIdPlatformEnum = "bundleidplatform-enum"
+        case removeEmptyEnums = "remove-empty-enums"
+        case appEventDeepLinkFormat = "appevent-deeplink-format"
         case purchaseRequirementEnum = "purchase-requirement-enum"
         case responseErrorSchema = "response-error-schema"
     }
 
     public struct RuleResult {
         public var id: RuleID
-        /// Whether this rule modified the spec when evaluated.
         public var didChange: Bool
-        /// How many targets in the spec matched what this rule expects.
-        /// If this is 0, the upstream shape may have changed and the rule might need maintenance.
         public var matchCount: Int
+        public var zeroMatchesIsOK: Bool
 
-        public init(id: RuleID, didChange: Bool, matchCount: Int) {
+        public init(id: RuleID, didChange: Bool, matchCount: Int, zeroMatchesIsOK: Bool = false) {
             self.id = id
             self.didChange = didChange
             self.matchCount = matchCount
+            self.zeroMatchesIsOK = zeroMatchesIsOK
         }
     }
 
@@ -54,7 +55,27 @@ public enum SpecPatcher {
         var changes: [String] = []
         var rules: [RuleResult] = []
 
-        // 1) Constrain purchaseRequirement to the known enum values.
+        let bundle = ensureBundleIdPlatformEnum(&root)
+        rules.append(.init(id: .bundleIdPlatformEnum, didChange: bundle.didChange, matchCount: bundle.matchCount))
+        if bundle.didChange {
+            didChange = true
+            changes.append("Ensured BundleIdPlatform enum values")
+        }
+
+        let emptyEnums = removeEmptyEnums(&root)
+        rules.append(.init(id: .removeEmptyEnums, didChange: emptyEnums.didChange, matchCount: emptyEnums.matchCount, zeroMatchesIsOK: true))
+        if emptyEnums.didChange {
+            didChange = true
+            changes.append("Removed empty enums")
+        }
+
+        let deepLink = ensureAppEventDeepLinkIsStringWithoutFormat(&root)
+        rules.append(.init(id: .appEventDeepLinkFormat, didChange: deepLink.didChange, matchCount: deepLink.matchCount))
+        if deepLink.didChange {
+            didChange = true
+            changes.append("Ensured AppEvent.deepLink is string with null format")
+        }
+
         let pr = ensurePurchaseRequirementEnum(&root)
         rules.append(.init(id: .purchaseRequirementEnum, didChange: pr.didChange, matchCount: pr.matchCount))
         if pr.didChange {
@@ -62,7 +83,6 @@ public enum SpecPatcher {
             changes.append("Ensured purchaseRequirement enum values")
         }
 
-        // 2) Factor ErrorResponse.errors.items into a reusable ResponseError schema.
         let re = try ensureResponseErrorSchemaAndRef(&root)
         rules.append(.init(id: .responseErrorSchema, didChange: re.didChange, matchCount: re.matchCount))
         if re.didChange {
@@ -79,6 +99,115 @@ public enum SpecPatcher {
 private struct PatchOutcome {
     var didChange: Bool
     var matchCount: Int
+}
+
+private func ensureBundleIdPlatformEnum(_ root: inout [String: Any]) -> PatchOutcome {
+    guard
+        var components = root["components"] as? [String: Any],
+        var schemas = components["schemas"] as? [String: Any],
+        var bundleIdPlatform = schemas["BundleIdPlatform"] as? [String: Any],
+        var values = bundleIdPlatform["enum"] as? [Any]
+    else {
+        return .init(didChange: false, matchCount: 0)
+    }
+
+    var didChange = false
+    let matchCount = 1
+
+    if !values.contains(where: { ($0 as? String) == "SERVICES" }) {
+        values.append("SERVICES")
+        didChange = true
+    }
+
+    if didChange {
+        bundleIdPlatform["enum"] = values
+        schemas["BundleIdPlatform"] = bundleIdPlatform
+        components["schemas"] = schemas
+        root["components"] = components
+    }
+
+    return .init(didChange: didChange, matchCount: matchCount)
+}
+
+private func removeEmptyEnums(_ root: inout [String: Any]) -> PatchOutcome {
+    var didChange = false
+    var removedCount = 0
+
+    func patchNode(_ node: inout Any) {
+        if var dict = node as? [String: Any] {
+            if let e = dict["enum"] as? [Any], e.isEmpty {
+                dict.removeValue(forKey: "enum")
+                removedCount += 1
+                didChange = true
+            }
+            for key in Array(dict.keys) {
+                var v = dict[key] as Any
+                patchNode(&v)
+                dict[key] = v
+            }
+            node = dict
+            return
+        }
+
+        if var arr = node as? [Any] {
+            for i in arr.indices {
+                var v = arr[i]
+                patchNode(&v)
+                arr[i] = v
+            }
+            node = arr
+            return
+        }
+    }
+
+    var anyRoot: Any = root
+    patchNode(&anyRoot)
+    if let patchedRoot = anyRoot as? [String: Any] {
+        root = patchedRoot
+    }
+    return .init(didChange: didChange, matchCount: removedCount)
+}
+
+private func ensureAppEventDeepLinkIsStringWithoutFormat(_ root: inout [String: Any]) -> PatchOutcome {
+    guard
+        var components = root["components"] as? [String: Any],
+        var schemas = components["schemas"] as? [String: Any],
+        var appEvent = schemas["AppEvent"] as? [String: Any],
+        var props = appEvent["properties"] as? [String: Any],
+        var attributes = props["attributes"] as? [String: Any],
+        var attrProps = attributes["properties"] as? [String: Any],
+        var deepLink = attrProps["deepLink"] as? [String: Any]
+    else {
+        return .init(didChange: false, matchCount: 0)
+    }
+
+    var didChange = false
+    let matchCount = 1
+
+    if (deepLink["type"] as? String) != "string" {
+        deepLink["type"] = "string"
+        didChange = true
+    }
+
+    if let format = deepLink["format"], !(format is NSNull) {
+        deepLink["format"] = NSNull()
+        didChange = true
+    } else if deepLink["format"] == nil {
+        deepLink["format"] = NSNull()
+        didChange = true
+    }
+
+    if didChange {
+        attrProps["deepLink"] = deepLink
+        attributes["properties"] = attrProps
+        props["attributes"] = attributes
+        appEvent["properties"] = props
+        schemas["AppEvent"] = appEvent
+        components["schemas"] = schemas
+        root["components"] = components
+    }
+
+    return .init(didChange: didChange, matchCount: matchCount)
 }
 
 private func ensurePurchaseRequirementEnum(_ root: inout [String: Any]) -> PatchOutcome {
@@ -125,14 +254,6 @@ private func ensurePurchaseRequirementEnum(_ root: inout [String: Any]) -> Patch
         root = patchedRoot
     }
 
-    if matchCount == 0 {
-        // Not throwing here can hide upstream spec shape changes; this is a maintenance signal.
-        // Keeping it strict for "temporary patches" workflows.
-        // (If this becomes noisy in the future, we can downgrade to a warning.)
-        // NOTE: can't throw from here without changing signature; we already did.
-        // So: represent as matchCount=0 and let CLI decide via --check-strict.
-    }
-
     return .init(didChange: didChange, matchCount: matchCount)
 }
 
@@ -146,8 +267,6 @@ private func ensureResponseErrorSchemaAndRef(_ root: inout [String: Any]) throws
 
     var didChange = false
 
-    // If the spec doesn't have ErrorResponse, we can't apply this rule meaningfully.
-    // Return matchCount=0 so `SpecPatcher --check --strict` can flag it for maintenance.
     var matchCount = 0
     guard
         var errorResponse = schemas["ErrorResponse"] as? [String: Any],
@@ -192,7 +311,6 @@ private func ensureResponseErrorSchemaAndRef(_ root: inout [String: Any]) throws
     ]
 
     if let existing = schemas["ResponseError"] as? [String: Any] {
-        // If it exists but differs, overwrite to keep it deterministic.
         if !NSDictionary(dictionary: existing).isEqual(to: responseErrorSchema) {
             schemas["ResponseError"] = responseErrorSchema
             didChange = true
@@ -226,5 +344,6 @@ private func ensureResponseErrorSchemaAndRef(_ root: inout [String: Any]) throws
 
     return .init(didChange: didChange, matchCount: matchCount)
 }
+
 
 

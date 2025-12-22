@@ -22,28 +22,28 @@ public struct AppEventLocalizationCreateRequest: Codable {
 				public var data: Data
 
 				public struct Data: Codable, Identifiable {
-					public var id: String
 					public var type: `Type`
+					public var id: String
 
 					public enum `Type`: String, Codable, CaseIterable {
 						case appEvents
 					}
 
-					public init(id: String, type: `Type`) {
-						self.id = id
+					public init(type: `Type`, id: String) {
 						self.type = type
+						self.id = id
 					}
 
 					public init(from decoder: Decoder) throws {
 						let values = try decoder.container(keyedBy: StringCodingKey.self)
-						self.id = try values.decode(String.self, forKey: "id")
 						self.type = try values.decode(`Type`.self, forKey: "type")
+						self.id = try values.decode(String.self, forKey: "id")
 					}
 
 					public func encode(to encoder: Encoder) throws {
 						var values = encoder.container(keyedBy: StringCodingKey.self)
-						try values.encode(id, forKey: "id")
 						try values.encode(type, forKey: "type")
+						try values.encode(id, forKey: "id")
 					}
 				}
 
@@ -78,31 +78,31 @@ public struct AppEventLocalizationCreateRequest: Codable {
 		}
 
 		public struct Attributes: Codable {
-			public var shortDescription: String?
 			public var name: String?
 			public var locale: String
+			public var shortDescription: String?
 			public var longDescription: String?
 
-			public init(shortDescription: String? = nil, name: String? = nil, locale: String, longDescription: String? = nil) {
-				self.shortDescription = shortDescription
+			public init(name: String? = nil, locale: String, shortDescription: String? = nil, longDescription: String? = nil) {
 				self.name = name
 				self.locale = locale
+				self.shortDescription = shortDescription
 				self.longDescription = longDescription
 			}
 
 			public init(from decoder: Decoder) throws {
 				let values = try decoder.container(keyedBy: StringCodingKey.self)
-				self.shortDescription = try values.decodeIfPresent(String.self, forKey: "shortDescription")
 				self.name = try values.decodeIfPresent(String.self, forKey: "name")
 				self.locale = try values.decode(String.self, forKey: "locale")
+				self.shortDescription = try values.decodeIfPresent(String.self, forKey: "shortDescription")
 				self.longDescription = try values.decodeIfPresent(String.self, forKey: "longDescription")
 			}
 
 			public func encode(to encoder: Encoder) throws {
 				var values = encoder.container(keyedBy: StringCodingKey.self)
-				try values.encodeIfPresent(shortDescription, forKey: "shortDescription")
 				try values.encodeIfPresent(name, forKey: "name")
 				try values.encode(locale, forKey: "locale")
+				try values.encodeIfPresent(shortDescription, forKey: "shortDescription")
 				try values.encodeIfPresent(longDescription, forKey: "longDescription")
 			}
 		}

@@ -4,33 +4,11 @@
 import Foundation
 
 public struct BetaBuildLocalization: Codable, Identifiable {
+	public var relationships: Relationships?
+	public var type: `Type`
 	public var links: ResourceLinks?
 	public var attributes: Attributes?
 	public var id: String
-	public var relationships: Relationships?
-	public var type: `Type`
-
-	public struct Attributes: Codable {
-		public var locale: String?
-		public var whatsNew: String?
-
-		public init(locale: String? = nil, whatsNew: String? = nil) {
-			self.locale = locale
-			self.whatsNew = whatsNew
-		}
-
-		public init(from decoder: Decoder) throws {
-			let values = try decoder.container(keyedBy: StringCodingKey.self)
-			self.locale = try values.decodeIfPresent(String.self, forKey: "locale")
-			self.whatsNew = try values.decodeIfPresent(String.self, forKey: "whatsNew")
-		}
-
-		public func encode(to encoder: Encoder) throws {
-			var values = encoder.container(keyedBy: StringCodingKey.self)
-			try values.encodeIfPresent(locale, forKey: "locale")
-			try values.encodeIfPresent(whatsNew, forKey: "whatsNew")
-		}
-	}
 
 	public struct Relationships: Codable {
 		public var build: Build?
@@ -102,29 +80,51 @@ public struct BetaBuildLocalization: Codable, Identifiable {
 		case betaBuildLocalizations
 	}
 
-	public init(links: ResourceLinks? = nil, attributes: Attributes? = nil, id: String, relationships: Relationships? = nil, type: `Type`) {
+	public struct Attributes: Codable {
+		public var whatsNew: String?
+		public var locale: String?
+
+		public init(whatsNew: String? = nil, locale: String? = nil) {
+			self.whatsNew = whatsNew
+			self.locale = locale
+		}
+
+		public init(from decoder: Decoder) throws {
+			let values = try decoder.container(keyedBy: StringCodingKey.self)
+			self.whatsNew = try values.decodeIfPresent(String.self, forKey: "whatsNew")
+			self.locale = try values.decodeIfPresent(String.self, forKey: "locale")
+		}
+
+		public func encode(to encoder: Encoder) throws {
+			var values = encoder.container(keyedBy: StringCodingKey.self)
+			try values.encodeIfPresent(whatsNew, forKey: "whatsNew")
+			try values.encodeIfPresent(locale, forKey: "locale")
+		}
+	}
+
+	public init(relationships: Relationships? = nil, type: `Type`, links: ResourceLinks? = nil, attributes: Attributes? = nil, id: String) {
+		self.relationships = relationships
+		self.type = type
 		self.links = links
 		self.attributes = attributes
 		self.id = id
-		self.relationships = relationships
-		self.type = type
 	}
 
 	public init(from decoder: Decoder) throws {
 		let values = try decoder.container(keyedBy: StringCodingKey.self)
+		self.relationships = try values.decodeIfPresent(Relationships.self, forKey: "relationships")
+		self.type = try values.decode(`Type`.self, forKey: "type")
 		self.links = try values.decodeIfPresent(ResourceLinks.self, forKey: "links")
 		self.attributes = try values.decodeIfPresent(Attributes.self, forKey: "attributes")
 		self.id = try values.decode(String.self, forKey: "id")
-		self.relationships = try values.decodeIfPresent(Relationships.self, forKey: "relationships")
-		self.type = try values.decode(`Type`.self, forKey: "type")
 	}
 
 	public func encode(to encoder: Encoder) throws {
 		var values = encoder.container(keyedBy: StringCodingKey.self)
+		try values.encodeIfPresent(relationships, forKey: "relationships")
+		try values.encode(type, forKey: "type")
 		try values.encodeIfPresent(links, forKey: "links")
 		try values.encodeIfPresent(attributes, forKey: "attributes")
 		try values.encode(id, forKey: "id")
-		try values.encodeIfPresent(relationships, forKey: "relationships")
-		try values.encode(type, forKey: "type")
 	}
 }

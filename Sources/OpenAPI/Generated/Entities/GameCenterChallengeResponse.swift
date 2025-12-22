@@ -4,10 +4,10 @@
 import Foundation
 
 public struct GameCenterChallengeResponse: Codable {
-	public var links: DocumentLinks
 	public var included: [IncludedItem]?
 	/// GameCenterChallenge
 	public var data: GameCenterChallenge
+	public var links: DocumentLinks
 
 	public enum IncludedItem: Codable {
 		case gameCenterChallengeVersion(GameCenterChallengeVersion)
@@ -49,23 +49,23 @@ public struct GameCenterChallengeResponse: Codable {
 		}
 	}
 
-	public init(links: DocumentLinks, included: [IncludedItem]? = nil, data: GameCenterChallenge) {
-		self.links = links
+	public init(included: [IncludedItem]? = nil, data: GameCenterChallenge, links: DocumentLinks) {
 		self.included = included
 		self.data = data
+		self.links = links
 	}
 
 	public init(from decoder: Decoder) throws {
 		let values = try decoder.container(keyedBy: StringCodingKey.self)
-		self.links = try values.decode(DocumentLinks.self, forKey: "links")
 		self.included = try values.decodeIfPresent([IncludedItem].self, forKey: "included")
 		self.data = try values.decode(GameCenterChallenge.self, forKey: "data")
+		self.links = try values.decode(DocumentLinks.self, forKey: "links")
 	}
 
 	public func encode(to encoder: Encoder) throws {
 		var values = encoder.container(keyedBy: StringCodingKey.self)
-		try values.encode(links, forKey: "links")
 		try values.encodeIfPresent(included, forKey: "included")
 		try values.encode(data, forKey: "data")
+		try values.encode(links, forKey: "links")
 	}
 }

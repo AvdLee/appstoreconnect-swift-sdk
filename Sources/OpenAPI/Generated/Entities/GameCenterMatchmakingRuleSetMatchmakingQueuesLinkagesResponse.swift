@@ -4,8 +4,8 @@
 import Foundation
 
 public struct GameCenterMatchmakingRuleSetMatchmakingQueuesLinkagesResponse: Codable {
-	public var data: [Datum]
 	public var meta: PagingInformation?
+	public var data: [Datum]
 	public var links: PagedDocumentLinks
 
 	public struct Datum: Codable, Identifiable {
@@ -34,23 +34,23 @@ public struct GameCenterMatchmakingRuleSetMatchmakingQueuesLinkagesResponse: Cod
 		}
 	}
 
-	public init(data: [Datum], meta: PagingInformation? = nil, links: PagedDocumentLinks) {
-		self.data = data
+	public init(meta: PagingInformation? = nil, data: [Datum], links: PagedDocumentLinks) {
 		self.meta = meta
+		self.data = data
 		self.links = links
 	}
 
 	public init(from decoder: Decoder) throws {
 		let values = try decoder.container(keyedBy: StringCodingKey.self)
-		self.data = try values.decode([Datum].self, forKey: "data")
 		self.meta = try values.decodeIfPresent(PagingInformation.self, forKey: "meta")
+		self.data = try values.decode([Datum].self, forKey: "data")
 		self.links = try values.decode(PagedDocumentLinks.self, forKey: "links")
 	}
 
 	public func encode(to encoder: Encoder) throws {
 		var values = encoder.container(keyedBy: StringCodingKey.self)
-		try values.encode(data, forKey: "data")
 		try values.encodeIfPresent(meta, forKey: "meta")
+		try values.encode(data, forKey: "data")
 		try values.encode(links, forKey: "links")
 	}
 }

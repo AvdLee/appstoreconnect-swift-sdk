@@ -7,13 +7,9 @@ public struct BundleIDCapabilityCreateRequest: Codable {
 	public var data: Data
 
 	public struct Data: Codable {
-		public var type: `Type`
 		public var relationships: Relationships
+		public var type: `Type`
 		public var attributes: Attributes
-
-		public enum `Type`: String, Codable, CaseIterable {
-			case bundleIDCapabilities = "bundleIdCapabilities"
-		}
 
 		public struct Relationships: Codable {
 			public var bundleID: BundleID
@@ -77,6 +73,10 @@ public struct BundleIDCapabilityCreateRequest: Codable {
 			}
 		}
 
+		public enum `Type`: String, Codable, CaseIterable {
+			case bundleIDCapabilities = "bundleIdCapabilities"
+		}
+
 		public struct Attributes: Codable {
 			public var settings: [CapabilitySetting]?
 			public var capabilityType: CapabilityType
@@ -99,23 +99,23 @@ public struct BundleIDCapabilityCreateRequest: Codable {
 			}
 		}
 
-		public init(type: `Type`, relationships: Relationships, attributes: Attributes) {
-			self.type = type
+		public init(relationships: Relationships, type: `Type`, attributes: Attributes) {
 			self.relationships = relationships
+			self.type = type
 			self.attributes = attributes
 		}
 
 		public init(from decoder: Decoder) throws {
 			let values = try decoder.container(keyedBy: StringCodingKey.self)
-			self.type = try values.decode(`Type`.self, forKey: "type")
 			self.relationships = try values.decode(Relationships.self, forKey: "relationships")
+			self.type = try values.decode(`Type`.self, forKey: "type")
 			self.attributes = try values.decode(Attributes.self, forKey: "attributes")
 		}
 
 		public func encode(to encoder: Encoder) throws {
 			var values = encoder.container(keyedBy: StringCodingKey.self)
-			try values.encode(type, forKey: "type")
 			try values.encode(relationships, forKey: "relationships")
+			try values.encode(type, forKey: "type")
 			try values.encode(attributes, forKey: "attributes")
 		}
 	}

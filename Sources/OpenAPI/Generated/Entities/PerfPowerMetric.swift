@@ -4,15 +4,19 @@
 import Foundation
 
 public struct PerfPowerMetric: Codable, Identifiable {
-	public var links: ResourceLinks?
-	public var id: String
-	public var attributes: Attributes?
 	public var type: `Type`
+	public var attributes: Attributes?
+	public var id: String
+	public var links: ResourceLinks?
+
+	public enum `Type`: String, Codable, CaseIterable {
+		case perfPowerMetrics
+	}
 
 	public struct Attributes: Codable {
+		public var deviceType: String?
 		public var metricType: MetricType?
 		public var platform: Platform?
-		public var deviceType: String?
 
 		public enum MetricType: String, Codable, CaseIterable {
 			case disk = "DISK"
@@ -28,51 +32,47 @@ public struct PerfPowerMetric: Codable, Identifiable {
 			case ios = "IOS"
 		}
 
-		public init(metricType: MetricType? = nil, platform: Platform? = nil, deviceType: String? = nil) {
+		public init(deviceType: String? = nil, metricType: MetricType? = nil, platform: Platform? = nil) {
+			self.deviceType = deviceType
 			self.metricType = metricType
 			self.platform = platform
-			self.deviceType = deviceType
 		}
 
 		public init(from decoder: Decoder) throws {
 			let values = try decoder.container(keyedBy: StringCodingKey.self)
+			self.deviceType = try values.decodeIfPresent(String.self, forKey: "deviceType")
 			self.metricType = try values.decodeIfPresent(MetricType.self, forKey: "metricType")
 			self.platform = try values.decodeIfPresent(Platform.self, forKey: "platform")
-			self.deviceType = try values.decodeIfPresent(String.self, forKey: "deviceType")
 		}
 
 		public func encode(to encoder: Encoder) throws {
 			var values = encoder.container(keyedBy: StringCodingKey.self)
+			try values.encodeIfPresent(deviceType, forKey: "deviceType")
 			try values.encodeIfPresent(metricType, forKey: "metricType")
 			try values.encodeIfPresent(platform, forKey: "platform")
-			try values.encodeIfPresent(deviceType, forKey: "deviceType")
 		}
 	}
 
-	public enum `Type`: String, Codable, CaseIterable {
-		case perfPowerMetrics
-	}
-
-	public init(links: ResourceLinks? = nil, id: String, attributes: Attributes? = nil, type: `Type`) {
-		self.links = links
-		self.id = id
-		self.attributes = attributes
+	public init(type: `Type`, attributes: Attributes? = nil, id: String, links: ResourceLinks? = nil) {
 		self.type = type
+		self.attributes = attributes
+		self.id = id
+		self.links = links
 	}
 
 	public init(from decoder: Decoder) throws {
 		let values = try decoder.container(keyedBy: StringCodingKey.self)
-		self.links = try values.decodeIfPresent(ResourceLinks.self, forKey: "links")
-		self.id = try values.decode(String.self, forKey: "id")
-		self.attributes = try values.decodeIfPresent(Attributes.self, forKey: "attributes")
 		self.type = try values.decode(`Type`.self, forKey: "type")
+		self.attributes = try values.decodeIfPresent(Attributes.self, forKey: "attributes")
+		self.id = try values.decode(String.self, forKey: "id")
+		self.links = try values.decodeIfPresent(ResourceLinks.self, forKey: "links")
 	}
 
 	public func encode(to encoder: Encoder) throws {
 		var values = encoder.container(keyedBy: StringCodingKey.self)
-		try values.encodeIfPresent(links, forKey: "links")
-		try values.encode(id, forKey: "id")
-		try values.encodeIfPresent(attributes, forKey: "attributes")
 		try values.encode(type, forKey: "type")
+		try values.encodeIfPresent(attributes, forKey: "attributes")
+		try values.encode(id, forKey: "id")
+		try values.encodeIfPresent(links, forKey: "links")
 	}
 }

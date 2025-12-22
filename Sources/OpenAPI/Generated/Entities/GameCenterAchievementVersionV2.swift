@@ -4,15 +4,11 @@
 import Foundation
 
 public struct GameCenterAchievementVersionV2: Codable, Identifiable {
-	public var type: `Type`
 	public var attributes: Attributes?
-	public var id: String
-	public var relationships: Relationships?
 	public var links: ResourceLinks?
-
-	public enum `Type`: String, Codable, CaseIterable {
-		case gameCenterAchievementVersions
-	}
+	public var relationships: Relationships?
+	public var id: String
+	public var type: `Type`
 
 	public struct Attributes: Codable {
 		public var state: GameCenterVersionState?
@@ -85,9 +81,9 @@ public struct GameCenterAchievementVersionV2: Codable, Identifiable {
 		}
 
 		public struct Localizations: Codable {
-			public var data: [Datum]?
-			public var links: RelationshipLinks?
 			public var meta: PagingInformation?
+			public var links: RelationshipLinks?
+			public var data: [Datum]?
 
 			public struct Datum: Codable, Identifiable {
 				public var id: String
@@ -115,24 +111,24 @@ public struct GameCenterAchievementVersionV2: Codable, Identifiable {
 				}
 			}
 
-			public init(data: [Datum]? = nil, links: RelationshipLinks? = nil, meta: PagingInformation? = nil) {
-				self.data = data
-				self.links = links
+			public init(meta: PagingInformation? = nil, links: RelationshipLinks? = nil, data: [Datum]? = nil) {
 				self.meta = meta
+				self.links = links
+				self.data = data
 			}
 
 			public init(from decoder: Decoder) throws {
 				let values = try decoder.container(keyedBy: StringCodingKey.self)
-				self.data = try values.decodeIfPresent([Datum].self, forKey: "data")
-				self.links = try values.decodeIfPresent(RelationshipLinks.self, forKey: "links")
 				self.meta = try values.decodeIfPresent(PagingInformation.self, forKey: "meta")
+				self.links = try values.decodeIfPresent(RelationshipLinks.self, forKey: "links")
+				self.data = try values.decodeIfPresent([Datum].self, forKey: "data")
 			}
 
 			public func encode(to encoder: Encoder) throws {
 				var values = encoder.container(keyedBy: StringCodingKey.self)
-				try values.encodeIfPresent(data, forKey: "data")
-				try values.encodeIfPresent(links, forKey: "links")
 				try values.encodeIfPresent(meta, forKey: "meta")
+				try values.encodeIfPresent(links, forKey: "links")
+				try values.encodeIfPresent(data, forKey: "data")
 			}
 		}
 
@@ -154,29 +150,33 @@ public struct GameCenterAchievementVersionV2: Codable, Identifiable {
 		}
 	}
 
-	public init(type: `Type`, attributes: Attributes? = nil, id: String, relationships: Relationships? = nil, links: ResourceLinks? = nil) {
-		self.type = type
+	public enum `Type`: String, Codable, CaseIterable {
+		case gameCenterAchievementVersions
+	}
+
+	public init(attributes: Attributes? = nil, links: ResourceLinks? = nil, relationships: Relationships? = nil, id: String, type: `Type`) {
 		self.attributes = attributes
-		self.id = id
-		self.relationships = relationships
 		self.links = links
+		self.relationships = relationships
+		self.id = id
+		self.type = type
 	}
 
 	public init(from decoder: Decoder) throws {
 		let values = try decoder.container(keyedBy: StringCodingKey.self)
-		self.type = try values.decode(`Type`.self, forKey: "type")
 		self.attributes = try values.decodeIfPresent(Attributes.self, forKey: "attributes")
-		self.id = try values.decode(String.self, forKey: "id")
-		self.relationships = try values.decodeIfPresent(Relationships.self, forKey: "relationships")
 		self.links = try values.decodeIfPresent(ResourceLinks.self, forKey: "links")
+		self.relationships = try values.decodeIfPresent(Relationships.self, forKey: "relationships")
+		self.id = try values.decode(String.self, forKey: "id")
+		self.type = try values.decode(`Type`.self, forKey: "type")
 	}
 
 	public func encode(to encoder: Encoder) throws {
 		var values = encoder.container(keyedBy: StringCodingKey.self)
-		try values.encode(type, forKey: "type")
 		try values.encodeIfPresent(attributes, forKey: "attributes")
-		try values.encode(id, forKey: "id")
-		try values.encodeIfPresent(relationships, forKey: "relationships")
 		try values.encodeIfPresent(links, forKey: "links")
+		try values.encodeIfPresent(relationships, forKey: "relationships")
+		try values.encode(id, forKey: "id")
+		try values.encode(type, forKey: "type")
 	}
 }

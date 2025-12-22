@@ -16,48 +16,48 @@ public struct BetaAppReviewDetailUpdateRequest: Codable {
 		}
 
 		public struct Attributes: Codable {
-			public var contactEmail: String?
-			public var notes: String?
-			public var contactPhone: String?
 			public var contactFirstName: String?
-			public var contactLastName: String?
-			public var isDemoAccountRequired: Bool?
 			public var demoAccountPassword: String?
 			public var demoAccountName: String?
+			public var contactEmail: String?
+			public var contactLastName: String?
+			public var notes: String?
+			public var isDemoAccountRequired: Bool?
+			public var contactPhone: String?
 
-			public init(contactEmail: String? = nil, notes: String? = nil, contactPhone: String? = nil, contactFirstName: String? = nil, contactLastName: String? = nil, isDemoAccountRequired: Bool? = nil, demoAccountPassword: String? = nil, demoAccountName: String? = nil) {
-				self.contactEmail = contactEmail
-				self.notes = notes
-				self.contactPhone = contactPhone
+			public init(contactFirstName: String? = nil, demoAccountPassword: String? = nil, demoAccountName: String? = nil, contactEmail: String? = nil, contactLastName: String? = nil, notes: String? = nil, isDemoAccountRequired: Bool? = nil, contactPhone: String? = nil) {
 				self.contactFirstName = contactFirstName
-				self.contactLastName = contactLastName
-				self.isDemoAccountRequired = isDemoAccountRequired
 				self.demoAccountPassword = demoAccountPassword
 				self.demoAccountName = demoAccountName
+				self.contactEmail = contactEmail
+				self.contactLastName = contactLastName
+				self.notes = notes
+				self.isDemoAccountRequired = isDemoAccountRequired
+				self.contactPhone = contactPhone
 			}
 
 			public init(from decoder: Decoder) throws {
 				let values = try decoder.container(keyedBy: StringCodingKey.self)
-				self.contactEmail = try values.decodeIfPresent(String.self, forKey: "contactEmail")
-				self.notes = try values.decodeIfPresent(String.self, forKey: "notes")
-				self.contactPhone = try values.decodeIfPresent(String.self, forKey: "contactPhone")
 				self.contactFirstName = try values.decodeIfPresent(String.self, forKey: "contactFirstName")
-				self.contactLastName = try values.decodeIfPresent(String.self, forKey: "contactLastName")
-				self.isDemoAccountRequired = try values.decodeIfPresent(Bool.self, forKey: "demoAccountRequired")
 				self.demoAccountPassword = try values.decodeIfPresent(String.self, forKey: "demoAccountPassword")
 				self.demoAccountName = try values.decodeIfPresent(String.self, forKey: "demoAccountName")
+				self.contactEmail = try values.decodeIfPresent(String.self, forKey: "contactEmail")
+				self.contactLastName = try values.decodeIfPresent(String.self, forKey: "contactLastName")
+				self.notes = try values.decodeIfPresent(String.self, forKey: "notes")
+				self.isDemoAccountRequired = try values.decodeIfPresent(Bool.self, forKey: "demoAccountRequired")
+				self.contactPhone = try values.decodeIfPresent(String.self, forKey: "contactPhone")
 			}
 
 			public func encode(to encoder: Encoder) throws {
 				var values = encoder.container(keyedBy: StringCodingKey.self)
-				try values.encodeIfPresent(contactEmail, forKey: "contactEmail")
-				try values.encodeIfPresent(notes, forKey: "notes")
-				try values.encodeIfPresent(contactPhone, forKey: "contactPhone")
 				try values.encodeIfPresent(contactFirstName, forKey: "contactFirstName")
-				try values.encodeIfPresent(contactLastName, forKey: "contactLastName")
-				try values.encodeIfPresent(isDemoAccountRequired, forKey: "demoAccountRequired")
 				try values.encodeIfPresent(demoAccountPassword, forKey: "demoAccountPassword")
 				try values.encodeIfPresent(demoAccountName, forKey: "demoAccountName")
+				try values.encodeIfPresent(contactEmail, forKey: "contactEmail")
+				try values.encodeIfPresent(contactLastName, forKey: "contactLastName")
+				try values.encodeIfPresent(notes, forKey: "notes")
+				try values.encodeIfPresent(isDemoAccountRequired, forKey: "demoAccountRequired")
+				try values.encodeIfPresent(contactPhone, forKey: "contactPhone")
 			}
 		}
 

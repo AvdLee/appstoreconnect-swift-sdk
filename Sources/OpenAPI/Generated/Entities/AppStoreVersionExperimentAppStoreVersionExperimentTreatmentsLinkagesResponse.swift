@@ -5,8 +5,8 @@ import Foundation
 
 @available(*, deprecated, message: "Deprecated")
 public struct AppStoreVersionExperimentAppStoreVersionExperimentTreatmentsLinkagesResponse: Codable {
-	public var links: PagedDocumentLinks
 	public var meta: PagingInformation?
+	public var links: PagedDocumentLinks
 	public var data: [Datum]
 
 	public struct Datum: Codable, Identifiable {
@@ -35,23 +35,23 @@ public struct AppStoreVersionExperimentAppStoreVersionExperimentTreatmentsLinkag
 		}
 	}
 
-	public init(links: PagedDocumentLinks, meta: PagingInformation? = nil, data: [Datum]) {
-		self.links = links
+	public init(meta: PagingInformation? = nil, links: PagedDocumentLinks, data: [Datum]) {
 		self.meta = meta
+		self.links = links
 		self.data = data
 	}
 
 	public init(from decoder: Decoder) throws {
 		let values = try decoder.container(keyedBy: StringCodingKey.self)
-		self.links = try values.decode(PagedDocumentLinks.self, forKey: "links")
 		self.meta = try values.decodeIfPresent(PagingInformation.self, forKey: "meta")
+		self.links = try values.decode(PagedDocumentLinks.self, forKey: "links")
 		self.data = try values.decode([Datum].self, forKey: "data")
 	}
 
 	public func encode(to encoder: Encoder) throws {
 		var values = encoder.container(keyedBy: StringCodingKey.self)
-		try values.encode(links, forKey: "links")
 		try values.encodeIfPresent(meta, forKey: "meta")
+		try values.encode(links, forKey: "links")
 		try values.encode(data, forKey: "data")
 	}
 }

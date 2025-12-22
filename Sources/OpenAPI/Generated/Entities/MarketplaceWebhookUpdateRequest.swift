@@ -9,28 +9,28 @@ public struct MarketplaceWebhookUpdateRequest: Codable {
 
 	public struct Data: Codable, Identifiable {
 		public var attributes: Attributes?
-		public var id: String
 		public var type: `Type`
+		public var id: String
 
 		public struct Attributes: Codable {
-			public var secret: String?
 			public var endpointURL: URL?
+			public var secret: String?
 
-			public init(secret: String? = nil, endpointURL: URL? = nil) {
-				self.secret = secret
+			public init(endpointURL: URL? = nil, secret: String? = nil) {
 				self.endpointURL = endpointURL
+				self.secret = secret
 			}
 
 			public init(from decoder: Decoder) throws {
 				let values = try decoder.container(keyedBy: StringCodingKey.self)
-				self.secret = try values.decodeIfPresent(String.self, forKey: "secret")
 				self.endpointURL = try values.decodeIfPresent(URL.self, forKey: "endpointUrl")
+				self.secret = try values.decodeIfPresent(String.self, forKey: "secret")
 			}
 
 			public func encode(to encoder: Encoder) throws {
 				var values = encoder.container(keyedBy: StringCodingKey.self)
-				try values.encodeIfPresent(secret, forKey: "secret")
 				try values.encodeIfPresent(endpointURL, forKey: "endpointUrl")
+				try values.encodeIfPresent(secret, forKey: "secret")
 			}
 		}
 
@@ -38,24 +38,24 @@ public struct MarketplaceWebhookUpdateRequest: Codable {
 			case marketplaceWebhooks
 		}
 
-		public init(attributes: Attributes? = nil, id: String, type: `Type`) {
+		public init(attributes: Attributes? = nil, type: `Type`, id: String) {
 			self.attributes = attributes
-			self.id = id
 			self.type = type
+			self.id = id
 		}
 
 		public init(from decoder: Decoder) throws {
 			let values = try decoder.container(keyedBy: StringCodingKey.self)
 			self.attributes = try values.decodeIfPresent(Attributes.self, forKey: "attributes")
-			self.id = try values.decode(String.self, forKey: "id")
 			self.type = try values.decode(`Type`.self, forKey: "type")
+			self.id = try values.decode(String.self, forKey: "id")
 		}
 
 		public func encode(to encoder: Encoder) throws {
 			var values = encoder.container(keyedBy: StringCodingKey.self)
 			try values.encodeIfPresent(attributes, forKey: "attributes")
-			try values.encode(id, forKey: "id")
 			try values.encode(type, forKey: "type")
+			try values.encode(id, forKey: "id")
 		}
 	}
 

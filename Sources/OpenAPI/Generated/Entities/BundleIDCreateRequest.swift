@@ -11,31 +11,31 @@ public struct BundleIDCreateRequest: Codable {
 		public var type: `Type`
 
 		public struct Attributes: Codable {
-			public var identifier: String
-			public var name: String
 			public var seedID: String?
+			public var name: String
+			public var identifier: String
 			public var platform: BundleIDPlatform
 
-			public init(identifier: String, name: String, seedID: String? = nil, platform: BundleIDPlatform) {
-				self.identifier = identifier
-				self.name = name
+			public init(seedID: String? = nil, name: String, identifier: String, platform: BundleIDPlatform) {
 				self.seedID = seedID
+				self.name = name
+				self.identifier = identifier
 				self.platform = platform
 			}
 
 			public init(from decoder: Decoder) throws {
 				let values = try decoder.container(keyedBy: StringCodingKey.self)
-				self.identifier = try values.decode(String.self, forKey: "identifier")
-				self.name = try values.decode(String.self, forKey: "name")
 				self.seedID = try values.decodeIfPresent(String.self, forKey: "seedId")
+				self.name = try values.decode(String.self, forKey: "name")
+				self.identifier = try values.decode(String.self, forKey: "identifier")
 				self.platform = try values.decode(BundleIDPlatform.self, forKey: "platform")
 			}
 
 			public func encode(to encoder: Encoder) throws {
 				var values = encoder.container(keyedBy: StringCodingKey.self)
-				try values.encode(identifier, forKey: "identifier")
-				try values.encode(name, forKey: "name")
 				try values.encodeIfPresent(seedID, forKey: "seedId")
+				try values.encode(name, forKey: "name")
+				try values.encode(identifier, forKey: "identifier")
 				try values.encode(platform, forKey: "platform")
 			}
 		}

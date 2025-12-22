@@ -4,28 +4,28 @@
 import Foundation
 
 public struct GameCenterAchievementImageV2Response: Codable {
-	public var links: DocumentLinks
 	public var included: [GameCenterAchievementLocalizationV2]?
+	public var links: DocumentLinks
 	/// GameCenterAchievementImageV2
 	public var data: GameCenterAchievementImageV2
 
-	public init(links: DocumentLinks, included: [GameCenterAchievementLocalizationV2]? = nil, data: GameCenterAchievementImageV2) {
-		self.links = links
+	public init(included: [GameCenterAchievementLocalizationV2]? = nil, links: DocumentLinks, data: GameCenterAchievementImageV2) {
 		self.included = included
+		self.links = links
 		self.data = data
 	}
 
 	public init(from decoder: Decoder) throws {
 		let values = try decoder.container(keyedBy: StringCodingKey.self)
-		self.links = try values.decode(DocumentLinks.self, forKey: "links")
 		self.included = try values.decodeIfPresent([GameCenterAchievementLocalizationV2].self, forKey: "included")
+		self.links = try values.decode(DocumentLinks.self, forKey: "links")
 		self.data = try values.decode(GameCenterAchievementImageV2.self, forKey: "data")
 	}
 
 	public func encode(to encoder: Encoder) throws {
 		var values = encoder.container(keyedBy: StringCodingKey.self)
-		try values.encode(links, forKey: "links")
 		try values.encodeIfPresent(included, forKey: "included")
+		try values.encode(links, forKey: "links")
 		try values.encode(data, forKey: "data")
 	}
 }

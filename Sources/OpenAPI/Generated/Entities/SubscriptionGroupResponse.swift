@@ -4,10 +4,10 @@
 import Foundation
 
 public struct SubscriptionGroupResponse: Codable {
-	/// SubscriptionGroup
-	public var data: SubscriptionGroup
 	public var links: DocumentLinks
 	public var included: [IncludedItem]?
+	/// SubscriptionGroup
+	public var data: SubscriptionGroup
 
 	public enum IncludedItem: Codable {
 		case subscriptionGroupLocalization(SubscriptionGroupLocalization)
@@ -43,23 +43,23 @@ public struct SubscriptionGroupResponse: Codable {
 		}
 	}
 
-	public init(data: SubscriptionGroup, links: DocumentLinks, included: [IncludedItem]? = nil) {
-		self.data = data
+	public init(links: DocumentLinks, included: [IncludedItem]? = nil, data: SubscriptionGroup) {
 		self.links = links
 		self.included = included
+		self.data = data
 	}
 
 	public init(from decoder: Decoder) throws {
 		let values = try decoder.container(keyedBy: StringCodingKey.self)
-		self.data = try values.decode(SubscriptionGroup.self, forKey: "data")
 		self.links = try values.decode(DocumentLinks.self, forKey: "links")
 		self.included = try values.decodeIfPresent([IncludedItem].self, forKey: "included")
+		self.data = try values.decode(SubscriptionGroup.self, forKey: "data")
 	}
 
 	public func encode(to encoder: Encoder) throws {
 		var values = encoder.container(keyedBy: StringCodingKey.self)
-		try values.encode(data, forKey: "data")
 		try values.encode(links, forKey: "links")
 		try values.encodeIfPresent(included, forKey: "included")
+		try values.encode(data, forKey: "data")
 	}
 }

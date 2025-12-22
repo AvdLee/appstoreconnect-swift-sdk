@@ -4,18 +4,44 @@
 import Foundation
 
 public struct BetaAppReviewSubmission: Codable, Identifiable {
+	public var type: `Type`
+	public var attributes: Attributes?
 	public var id: String
 	public var links: ResourceLinks?
 	public var relationships: Relationships?
-	public var attributes: Attributes?
-	public var type: `Type`
+
+	public enum `Type`: String, Codable, CaseIterable {
+		case betaAppReviewSubmissions
+	}
+
+	public struct Attributes: Codable {
+		public var betaReviewState: BetaReviewState?
+		public var submittedDate: Date?
+
+		public init(betaReviewState: BetaReviewState? = nil, submittedDate: Date? = nil) {
+			self.betaReviewState = betaReviewState
+			self.submittedDate = submittedDate
+		}
+
+		public init(from decoder: Decoder) throws {
+			let values = try decoder.container(keyedBy: StringCodingKey.self)
+			self.betaReviewState = try values.decodeIfPresent(BetaReviewState.self, forKey: "betaReviewState")
+			self.submittedDate = try values.decodeIfPresent(Date.self, forKey: "submittedDate")
+		}
+
+		public func encode(to encoder: Encoder) throws {
+			var values = encoder.container(keyedBy: StringCodingKey.self)
+			try values.encodeIfPresent(betaReviewState, forKey: "betaReviewState")
+			try values.encodeIfPresent(submittedDate, forKey: "submittedDate")
+		}
+	}
 
 	public struct Relationships: Codable {
 		public var build: Build?
 
 		public struct Build: Codable {
-			public var data: Data?
 			public var links: RelationshipLinks?
+			public var data: Data?
 
 			public struct Data: Codable, Identifiable {
 				public var type: `Type`
@@ -43,21 +69,21 @@ public struct BetaAppReviewSubmission: Codable, Identifiable {
 				}
 			}
 
-			public init(data: Data? = nil, links: RelationshipLinks? = nil) {
-				self.data = data
+			public init(links: RelationshipLinks? = nil, data: Data? = nil) {
 				self.links = links
+				self.data = data
 			}
 
 			public init(from decoder: Decoder) throws {
 				let values = try decoder.container(keyedBy: StringCodingKey.self)
-				self.data = try values.decodeIfPresent(Data.self, forKey: "data")
 				self.links = try values.decodeIfPresent(RelationshipLinks.self, forKey: "links")
+				self.data = try values.decodeIfPresent(Data.self, forKey: "data")
 			}
 
 			public func encode(to encoder: Encoder) throws {
 				var values = encoder.container(keyedBy: StringCodingKey.self)
-				try values.encodeIfPresent(data, forKey: "data")
 				try values.encodeIfPresent(links, forKey: "links")
+				try values.encodeIfPresent(data, forKey: "data")
 			}
 		}
 
@@ -76,55 +102,29 @@ public struct BetaAppReviewSubmission: Codable, Identifiable {
 		}
 	}
 
-	public struct Attributes: Codable {
-		public var betaReviewState: BetaReviewState?
-		public var submittedDate: Date?
-
-		public init(betaReviewState: BetaReviewState? = nil, submittedDate: Date? = nil) {
-			self.betaReviewState = betaReviewState
-			self.submittedDate = submittedDate
-		}
-
-		public init(from decoder: Decoder) throws {
-			let values = try decoder.container(keyedBy: StringCodingKey.self)
-			self.betaReviewState = try values.decodeIfPresent(BetaReviewState.self, forKey: "betaReviewState")
-			self.submittedDate = try values.decodeIfPresent(Date.self, forKey: "submittedDate")
-		}
-
-		public func encode(to encoder: Encoder) throws {
-			var values = encoder.container(keyedBy: StringCodingKey.self)
-			try values.encodeIfPresent(betaReviewState, forKey: "betaReviewState")
-			try values.encodeIfPresent(submittedDate, forKey: "submittedDate")
-		}
-	}
-
-	public enum `Type`: String, Codable, CaseIterable {
-		case betaAppReviewSubmissions
-	}
-
-	public init(id: String, links: ResourceLinks? = nil, relationships: Relationships? = nil, attributes: Attributes? = nil, type: `Type`) {
+	public init(type: `Type`, attributes: Attributes? = nil, id: String, links: ResourceLinks? = nil, relationships: Relationships? = nil) {
+		self.type = type
+		self.attributes = attributes
 		self.id = id
 		self.links = links
 		self.relationships = relationships
-		self.attributes = attributes
-		self.type = type
 	}
 
 	public init(from decoder: Decoder) throws {
 		let values = try decoder.container(keyedBy: StringCodingKey.self)
+		self.type = try values.decode(`Type`.self, forKey: "type")
+		self.attributes = try values.decodeIfPresent(Attributes.self, forKey: "attributes")
 		self.id = try values.decode(String.self, forKey: "id")
 		self.links = try values.decodeIfPresent(ResourceLinks.self, forKey: "links")
 		self.relationships = try values.decodeIfPresent(Relationships.self, forKey: "relationships")
-		self.attributes = try values.decodeIfPresent(Attributes.self, forKey: "attributes")
-		self.type = try values.decode(`Type`.self, forKey: "type")
 	}
 
 	public func encode(to encoder: Encoder) throws {
 		var values = encoder.container(keyedBy: StringCodingKey.self)
+		try values.encode(type, forKey: "type")
+		try values.encodeIfPresent(attributes, forKey: "attributes")
 		try values.encode(id, forKey: "id")
 		try values.encodeIfPresent(links, forKey: "links")
 		try values.encodeIfPresent(relationships, forKey: "relationships")
-		try values.encodeIfPresent(attributes, forKey: "attributes")
-		try values.encode(type, forKey: "type")
 	}
 }

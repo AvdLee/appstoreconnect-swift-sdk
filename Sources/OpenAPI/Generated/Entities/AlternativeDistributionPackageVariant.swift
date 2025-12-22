@@ -4,65 +4,65 @@
 import Foundation
 
 public struct AlternativeDistributionPackageVariant: Codable, Identifiable {
-	public var attributes: Attributes?
-	public var links: ResourceLinks?
-	public var type: `Type`
 	public var id: String
-
-	public struct Attributes: Codable {
-		public var fileChecksum: String?
-		public var alternativeDistributionKeyBlob: String?
-		public var url: URL?
-		public var urlExpirationDate: Date?
-
-		public init(fileChecksum: String? = nil, alternativeDistributionKeyBlob: String? = nil, url: URL? = nil, urlExpirationDate: Date? = nil) {
-			self.fileChecksum = fileChecksum
-			self.alternativeDistributionKeyBlob = alternativeDistributionKeyBlob
-			self.url = url
-			self.urlExpirationDate = urlExpirationDate
-		}
-
-		public init(from decoder: Decoder) throws {
-			let values = try decoder.container(keyedBy: StringCodingKey.self)
-			self.fileChecksum = try values.decodeIfPresent(String.self, forKey: "fileChecksum")
-			self.alternativeDistributionKeyBlob = try values.decodeIfPresent(String.self, forKey: "alternativeDistributionKeyBlob")
-			self.url = try values.decodeIfPresent(URL.self, forKey: "url")
-			self.urlExpirationDate = try values.decodeIfPresent(Date.self, forKey: "urlExpirationDate")
-		}
-
-		public func encode(to encoder: Encoder) throws {
-			var values = encoder.container(keyedBy: StringCodingKey.self)
-			try values.encodeIfPresent(fileChecksum, forKey: "fileChecksum")
-			try values.encodeIfPresent(alternativeDistributionKeyBlob, forKey: "alternativeDistributionKeyBlob")
-			try values.encodeIfPresent(url, forKey: "url")
-			try values.encodeIfPresent(urlExpirationDate, forKey: "urlExpirationDate")
-		}
-	}
+	public var type: `Type`
+	public var links: ResourceLinks?
+	public var attributes: Attributes?
 
 	public enum `Type`: String, Codable, CaseIterable {
 		case alternativeDistributionPackageVariants
 	}
 
-	public init(attributes: Attributes? = nil, links: ResourceLinks? = nil, type: `Type`, id: String) {
-		self.attributes = attributes
-		self.links = links
-		self.type = type
+	public struct Attributes: Codable {
+		public var fileChecksum: String?
+		public var url: URL?
+		public var urlExpirationDate: Date?
+		public var alternativeDistributionKeyBlob: String?
+
+		public init(fileChecksum: String? = nil, url: URL? = nil, urlExpirationDate: Date? = nil, alternativeDistributionKeyBlob: String? = nil) {
+			self.fileChecksum = fileChecksum
+			self.url = url
+			self.urlExpirationDate = urlExpirationDate
+			self.alternativeDistributionKeyBlob = alternativeDistributionKeyBlob
+		}
+
+		public init(from decoder: Decoder) throws {
+			let values = try decoder.container(keyedBy: StringCodingKey.self)
+			self.fileChecksum = try values.decodeIfPresent(String.self, forKey: "fileChecksum")
+			self.url = try values.decodeIfPresent(URL.self, forKey: "url")
+			self.urlExpirationDate = try values.decodeIfPresent(Date.self, forKey: "urlExpirationDate")
+			self.alternativeDistributionKeyBlob = try values.decodeIfPresent(String.self, forKey: "alternativeDistributionKeyBlob")
+		}
+
+		public func encode(to encoder: Encoder) throws {
+			var values = encoder.container(keyedBy: StringCodingKey.self)
+			try values.encodeIfPresent(fileChecksum, forKey: "fileChecksum")
+			try values.encodeIfPresent(url, forKey: "url")
+			try values.encodeIfPresent(urlExpirationDate, forKey: "urlExpirationDate")
+			try values.encodeIfPresent(alternativeDistributionKeyBlob, forKey: "alternativeDistributionKeyBlob")
+		}
+	}
+
+	public init(id: String, type: `Type`, links: ResourceLinks? = nil, attributes: Attributes? = nil) {
 		self.id = id
+		self.type = type
+		self.links = links
+		self.attributes = attributes
 	}
 
 	public init(from decoder: Decoder) throws {
 		let values = try decoder.container(keyedBy: StringCodingKey.self)
-		self.attributes = try values.decodeIfPresent(Attributes.self, forKey: "attributes")
-		self.links = try values.decodeIfPresent(ResourceLinks.self, forKey: "links")
-		self.type = try values.decode(`Type`.self, forKey: "type")
 		self.id = try values.decode(String.self, forKey: "id")
+		self.type = try values.decode(`Type`.self, forKey: "type")
+		self.links = try values.decodeIfPresent(ResourceLinks.self, forKey: "links")
+		self.attributes = try values.decodeIfPresent(Attributes.self, forKey: "attributes")
 	}
 
 	public func encode(to encoder: Encoder) throws {
 		var values = encoder.container(keyedBy: StringCodingKey.self)
-		try values.encodeIfPresent(attributes, forKey: "attributes")
-		try values.encodeIfPresent(links, forKey: "links")
-		try values.encode(type, forKey: "type")
 		try values.encode(id, forKey: "id")
+		try values.encode(type, forKey: "type")
+		try values.encodeIfPresent(links, forKey: "links")
+		try values.encodeIfPresent(attributes, forKey: "attributes")
 	}
 }

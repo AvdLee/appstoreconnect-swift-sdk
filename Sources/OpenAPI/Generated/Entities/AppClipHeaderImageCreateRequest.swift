@@ -7,31 +7,9 @@ public struct AppClipHeaderImageCreateRequest: Codable {
 	public var data: Data
 
 	public struct Data: Codable {
-		public var attributes: Attributes
 		public var type: `Type`
 		public var relationships: Relationships
-
-		public struct Attributes: Codable {
-			public var fileSize: Int
-			public var fileName: String
-
-			public init(fileSize: Int, fileName: String) {
-				self.fileSize = fileSize
-				self.fileName = fileName
-			}
-
-			public init(from decoder: Decoder) throws {
-				let values = try decoder.container(keyedBy: StringCodingKey.self)
-				self.fileSize = try values.decode(Int.self, forKey: "fileSize")
-				self.fileName = try values.decode(String.self, forKey: "fileName")
-			}
-
-			public func encode(to encoder: Encoder) throws {
-				var values = encoder.container(keyedBy: StringCodingKey.self)
-				try values.encode(fileSize, forKey: "fileSize")
-				try values.encode(fileName, forKey: "fileName")
-			}
-		}
+		public var attributes: Attributes
 
 		public enum `Type`: String, Codable, CaseIterable {
 			case appClipHeaderImages
@@ -99,24 +77,46 @@ public struct AppClipHeaderImageCreateRequest: Codable {
 			}
 		}
 
-		public init(attributes: Attributes, type: `Type`, relationships: Relationships) {
-			self.attributes = attributes
+		public struct Attributes: Codable {
+			public var fileSize: Int
+			public var fileName: String
+
+			public init(fileSize: Int, fileName: String) {
+				self.fileSize = fileSize
+				self.fileName = fileName
+			}
+
+			public init(from decoder: Decoder) throws {
+				let values = try decoder.container(keyedBy: StringCodingKey.self)
+				self.fileSize = try values.decode(Int.self, forKey: "fileSize")
+				self.fileName = try values.decode(String.self, forKey: "fileName")
+			}
+
+			public func encode(to encoder: Encoder) throws {
+				var values = encoder.container(keyedBy: StringCodingKey.self)
+				try values.encode(fileSize, forKey: "fileSize")
+				try values.encode(fileName, forKey: "fileName")
+			}
+		}
+
+		public init(type: `Type`, relationships: Relationships, attributes: Attributes) {
 			self.type = type
 			self.relationships = relationships
+			self.attributes = attributes
 		}
 
 		public init(from decoder: Decoder) throws {
 			let values = try decoder.container(keyedBy: StringCodingKey.self)
-			self.attributes = try values.decode(Attributes.self, forKey: "attributes")
 			self.type = try values.decode(`Type`.self, forKey: "type")
 			self.relationships = try values.decode(Relationships.self, forKey: "relationships")
+			self.attributes = try values.decode(Attributes.self, forKey: "attributes")
 		}
 
 		public func encode(to encoder: Encoder) throws {
 			var values = encoder.container(keyedBy: StringCodingKey.self)
-			try values.encode(attributes, forKey: "attributes")
 			try values.encode(type, forKey: "type")
 			try values.encode(relationships, forKey: "relationships")
+			try values.encode(attributes, forKey: "attributes")
 		}
 	}
 

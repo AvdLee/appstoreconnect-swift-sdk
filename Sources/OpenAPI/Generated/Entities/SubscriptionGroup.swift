@@ -4,9 +4,9 @@
 import Foundation
 
 public struct SubscriptionGroup: Codable, Identifiable {
-	public var id: String
-	public var attributes: Attributes?
 	public var links: ResourceLinks?
+	public var attributes: Attributes?
+	public var id: String
 	public var relationships: Relationships?
 	public var type: `Type`
 
@@ -29,20 +29,20 @@ public struct SubscriptionGroup: Codable, Identifiable {
 	}
 
 	public struct Relationships: Codable {
-		public var subscriptions: Subscriptions?
 		public var subscriptionGroupLocalizations: SubscriptionGroupLocalizations?
+		public var subscriptions: Subscriptions?
 
-		public struct Subscriptions: Codable {
-			public var data: [Datum]?
-			public var links: RelationshipLinks?
+		public struct SubscriptionGroupLocalizations: Codable {
 			public var meta: PagingInformation?
+			public var links: RelationshipLinks?
+			public var data: [Datum]?
 
 			public struct Datum: Codable, Identifiable {
 				public var type: `Type`
 				public var id: String
 
 				public enum `Type`: String, Codable, CaseIterable {
-					case subscriptions
+					case subscriptionGroupLocalizations
 				}
 
 				public init(type: `Type`, id: String) {
@@ -63,38 +63,38 @@ public struct SubscriptionGroup: Codable, Identifiable {
 				}
 			}
 
-			public init(data: [Datum]? = nil, links: RelationshipLinks? = nil, meta: PagingInformation? = nil) {
-				self.data = data
-				self.links = links
+			public init(meta: PagingInformation? = nil, links: RelationshipLinks? = nil, data: [Datum]? = nil) {
 				self.meta = meta
+				self.links = links
+				self.data = data
 			}
 
 			public init(from decoder: Decoder) throws {
 				let values = try decoder.container(keyedBy: StringCodingKey.self)
-				self.data = try values.decodeIfPresent([Datum].self, forKey: "data")
-				self.links = try values.decodeIfPresent(RelationshipLinks.self, forKey: "links")
 				self.meta = try values.decodeIfPresent(PagingInformation.self, forKey: "meta")
+				self.links = try values.decodeIfPresent(RelationshipLinks.self, forKey: "links")
+				self.data = try values.decodeIfPresent([Datum].self, forKey: "data")
 			}
 
 			public func encode(to encoder: Encoder) throws {
 				var values = encoder.container(keyedBy: StringCodingKey.self)
-				try values.encodeIfPresent(data, forKey: "data")
-				try values.encodeIfPresent(links, forKey: "links")
 				try values.encodeIfPresent(meta, forKey: "meta")
+				try values.encodeIfPresent(links, forKey: "links")
+				try values.encodeIfPresent(data, forKey: "data")
 			}
 		}
 
-		public struct SubscriptionGroupLocalizations: Codable {
-			public var data: [Datum]?
+		public struct Subscriptions: Codable {
 			public var meta: PagingInformation?
 			public var links: RelationshipLinks?
+			public var data: [Datum]?
 
 			public struct Datum: Codable, Identifiable {
 				public var id: String
 				public var type: `Type`
 
 				public enum `Type`: String, Codable, CaseIterable {
-					case subscriptionGroupLocalizations
+					case subscriptions
 				}
 
 				public init(id: String, type: `Type`) {
@@ -115,42 +115,42 @@ public struct SubscriptionGroup: Codable, Identifiable {
 				}
 			}
 
-			public init(data: [Datum]? = nil, meta: PagingInformation? = nil, links: RelationshipLinks? = nil) {
-				self.data = data
+			public init(meta: PagingInformation? = nil, links: RelationshipLinks? = nil, data: [Datum]? = nil) {
 				self.meta = meta
 				self.links = links
+				self.data = data
 			}
 
 			public init(from decoder: Decoder) throws {
 				let values = try decoder.container(keyedBy: StringCodingKey.self)
-				self.data = try values.decodeIfPresent([Datum].self, forKey: "data")
 				self.meta = try values.decodeIfPresent(PagingInformation.self, forKey: "meta")
 				self.links = try values.decodeIfPresent(RelationshipLinks.self, forKey: "links")
+				self.data = try values.decodeIfPresent([Datum].self, forKey: "data")
 			}
 
 			public func encode(to encoder: Encoder) throws {
 				var values = encoder.container(keyedBy: StringCodingKey.self)
-				try values.encodeIfPresent(data, forKey: "data")
 				try values.encodeIfPresent(meta, forKey: "meta")
 				try values.encodeIfPresent(links, forKey: "links")
+				try values.encodeIfPresent(data, forKey: "data")
 			}
 		}
 
-		public init(subscriptions: Subscriptions? = nil, subscriptionGroupLocalizations: SubscriptionGroupLocalizations? = nil) {
-			self.subscriptions = subscriptions
+		public init(subscriptionGroupLocalizations: SubscriptionGroupLocalizations? = nil, subscriptions: Subscriptions? = nil) {
 			self.subscriptionGroupLocalizations = subscriptionGroupLocalizations
+			self.subscriptions = subscriptions
 		}
 
 		public init(from decoder: Decoder) throws {
 			let values = try decoder.container(keyedBy: StringCodingKey.self)
-			self.subscriptions = try values.decodeIfPresent(Subscriptions.self, forKey: "subscriptions")
 			self.subscriptionGroupLocalizations = try values.decodeIfPresent(SubscriptionGroupLocalizations.self, forKey: "subscriptionGroupLocalizations")
+			self.subscriptions = try values.decodeIfPresent(Subscriptions.self, forKey: "subscriptions")
 		}
 
 		public func encode(to encoder: Encoder) throws {
 			var values = encoder.container(keyedBy: StringCodingKey.self)
-			try values.encodeIfPresent(subscriptions, forKey: "subscriptions")
 			try values.encodeIfPresent(subscriptionGroupLocalizations, forKey: "subscriptionGroupLocalizations")
+			try values.encodeIfPresent(subscriptions, forKey: "subscriptions")
 		}
 	}
 
@@ -158,28 +158,28 @@ public struct SubscriptionGroup: Codable, Identifiable {
 		case subscriptionGroups
 	}
 
-	public init(id: String, attributes: Attributes? = nil, links: ResourceLinks? = nil, relationships: Relationships? = nil, type: `Type`) {
-		self.id = id
-		self.attributes = attributes
+	public init(links: ResourceLinks? = nil, attributes: Attributes? = nil, id: String, relationships: Relationships? = nil, type: `Type`) {
 		self.links = links
+		self.attributes = attributes
+		self.id = id
 		self.relationships = relationships
 		self.type = type
 	}
 
 	public init(from decoder: Decoder) throws {
 		let values = try decoder.container(keyedBy: StringCodingKey.self)
-		self.id = try values.decode(String.self, forKey: "id")
-		self.attributes = try values.decodeIfPresent(Attributes.self, forKey: "attributes")
 		self.links = try values.decodeIfPresent(ResourceLinks.self, forKey: "links")
+		self.attributes = try values.decodeIfPresent(Attributes.self, forKey: "attributes")
+		self.id = try values.decode(String.self, forKey: "id")
 		self.relationships = try values.decodeIfPresent(Relationships.self, forKey: "relationships")
 		self.type = try values.decode(`Type`.self, forKey: "type")
 	}
 
 	public func encode(to encoder: Encoder) throws {
 		var values = encoder.container(keyedBy: StringCodingKey.self)
-		try values.encode(id, forKey: "id")
-		try values.encodeIfPresent(attributes, forKey: "attributes")
 		try values.encodeIfPresent(links, forKey: "links")
+		try values.encodeIfPresent(attributes, forKey: "attributes")
+		try values.encode(id, forKey: "id")
 		try values.encodeIfPresent(relationships, forKey: "relationships")
 		try values.encode(type, forKey: "type")
 	}

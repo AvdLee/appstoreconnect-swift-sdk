@@ -12,53 +12,9 @@ public struct AppScreenshotSetCreateRequest: Codable {
 		public var type: `Type`
 
 		public struct Relationships: Codable {
-			public var appStoreVersionLocalization: AppStoreVersionLocalization?
 			public var appCustomProductPageLocalization: AppCustomProductPageLocalization?
 			public var appStoreVersionExperimentTreatmentLocalization: AppStoreVersionExperimentTreatmentLocalization?
-
-			public struct AppStoreVersionLocalization: Codable {
-				public var data: Data?
-
-				public struct Data: Codable, Identifiable {
-					public var id: String
-					public var type: `Type`
-
-					public enum `Type`: String, Codable, CaseIterable {
-						case appStoreVersionLocalizations
-					}
-
-					public init(id: String, type: `Type`) {
-						self.id = id
-						self.type = type
-					}
-
-					public init(from decoder: Decoder) throws {
-						let values = try decoder.container(keyedBy: StringCodingKey.self)
-						self.id = try values.decode(String.self, forKey: "id")
-						self.type = try values.decode(`Type`.self, forKey: "type")
-					}
-
-					public func encode(to encoder: Encoder) throws {
-						var values = encoder.container(keyedBy: StringCodingKey.self)
-						try values.encode(id, forKey: "id")
-						try values.encode(type, forKey: "type")
-					}
-				}
-
-				public init(data: Data? = nil) {
-					self.data = data
-				}
-
-				public init(from decoder: Decoder) throws {
-					let values = try decoder.container(keyedBy: StringCodingKey.self)
-					self.data = try values.decodeIfPresent(Data.self, forKey: "data")
-				}
-
-				public func encode(to encoder: Encoder) throws {
-					var values = encoder.container(keyedBy: StringCodingKey.self)
-					try values.encodeIfPresent(data, forKey: "data")
-				}
-			}
+			public var appStoreVersionLocalization: AppStoreVersionLocalization?
 
 			public struct AppCustomProductPageLocalization: Codable {
 				public var data: Data?
@@ -108,11 +64,55 @@ public struct AppScreenshotSetCreateRequest: Codable {
 				public var data: Data?
 
 				public struct Data: Codable, Identifiable {
+					public var id: String
+					public var type: `Type`
+
+					public enum `Type`: String, Codable, CaseIterable {
+						case appStoreVersionExperimentTreatmentLocalizations
+					}
+
+					public init(id: String, type: `Type`) {
+						self.id = id
+						self.type = type
+					}
+
+					public init(from decoder: Decoder) throws {
+						let values = try decoder.container(keyedBy: StringCodingKey.self)
+						self.id = try values.decode(String.self, forKey: "id")
+						self.type = try values.decode(`Type`.self, forKey: "type")
+					}
+
+					public func encode(to encoder: Encoder) throws {
+						var values = encoder.container(keyedBy: StringCodingKey.self)
+						try values.encode(id, forKey: "id")
+						try values.encode(type, forKey: "type")
+					}
+				}
+
+				public init(data: Data? = nil) {
+					self.data = data
+				}
+
+				public init(from decoder: Decoder) throws {
+					let values = try decoder.container(keyedBy: StringCodingKey.self)
+					self.data = try values.decodeIfPresent(Data.self, forKey: "data")
+				}
+
+				public func encode(to encoder: Encoder) throws {
+					var values = encoder.container(keyedBy: StringCodingKey.self)
+					try values.encodeIfPresent(data, forKey: "data")
+				}
+			}
+
+			public struct AppStoreVersionLocalization: Codable {
+				public var data: Data?
+
+				public struct Data: Codable, Identifiable {
 					public var type: `Type`
 					public var id: String
 
 					public enum `Type`: String, Codable, CaseIterable {
-						case appStoreVersionExperimentTreatmentLocalizations
+						case appStoreVersionLocalizations
 					}
 
 					public init(type: `Type`, id: String) {
@@ -148,24 +148,24 @@ public struct AppScreenshotSetCreateRequest: Codable {
 				}
 			}
 
-			public init(appStoreVersionLocalization: AppStoreVersionLocalization? = nil, appCustomProductPageLocalization: AppCustomProductPageLocalization? = nil, appStoreVersionExperimentTreatmentLocalization: AppStoreVersionExperimentTreatmentLocalization? = nil) {
-				self.appStoreVersionLocalization = appStoreVersionLocalization
+			public init(appCustomProductPageLocalization: AppCustomProductPageLocalization? = nil, appStoreVersionExperimentTreatmentLocalization: AppStoreVersionExperimentTreatmentLocalization? = nil, appStoreVersionLocalization: AppStoreVersionLocalization? = nil) {
 				self.appCustomProductPageLocalization = appCustomProductPageLocalization
 				self.appStoreVersionExperimentTreatmentLocalization = appStoreVersionExperimentTreatmentLocalization
+				self.appStoreVersionLocalization = appStoreVersionLocalization
 			}
 
 			public init(from decoder: Decoder) throws {
 				let values = try decoder.container(keyedBy: StringCodingKey.self)
-				self.appStoreVersionLocalization = try values.decodeIfPresent(AppStoreVersionLocalization.self, forKey: "appStoreVersionLocalization")
 				self.appCustomProductPageLocalization = try values.decodeIfPresent(AppCustomProductPageLocalization.self, forKey: "appCustomProductPageLocalization")
 				self.appStoreVersionExperimentTreatmentLocalization = try values.decodeIfPresent(AppStoreVersionExperimentTreatmentLocalization.self, forKey: "appStoreVersionExperimentTreatmentLocalization")
+				self.appStoreVersionLocalization = try values.decodeIfPresent(AppStoreVersionLocalization.self, forKey: "appStoreVersionLocalization")
 			}
 
 			public func encode(to encoder: Encoder) throws {
 				var values = encoder.container(keyedBy: StringCodingKey.self)
-				try values.encodeIfPresent(appStoreVersionLocalization, forKey: "appStoreVersionLocalization")
 				try values.encodeIfPresent(appCustomProductPageLocalization, forKey: "appCustomProductPageLocalization")
 				try values.encodeIfPresent(appStoreVersionExperimentTreatmentLocalization, forKey: "appStoreVersionExperimentTreatmentLocalization")
+				try values.encodeIfPresent(appStoreVersionLocalization, forKey: "appStoreVersionLocalization")
 			}
 		}
 

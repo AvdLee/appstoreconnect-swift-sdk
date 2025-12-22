@@ -4,10 +4,10 @@
 import Foundation
 
 public struct AppClipDefaultExperienceResponse: Codable {
-	public var included: [IncludedItem]?
-	public var links: DocumentLinks
 	/// AppClipDefaultExperience
 	public var data: AppClipDefaultExperience
+	public var links: DocumentLinks
+	public var included: [IncludedItem]?
 
 	public enum IncludedItem: Codable {
 		case appClipAppStoreReviewDetail(AppClipAppStoreReviewDetail)
@@ -49,23 +49,23 @@ public struct AppClipDefaultExperienceResponse: Codable {
 		}
 	}
 
-	public init(included: [IncludedItem]? = nil, links: DocumentLinks, data: AppClipDefaultExperience) {
-		self.included = included
-		self.links = links
+	public init(data: AppClipDefaultExperience, links: DocumentLinks, included: [IncludedItem]? = nil) {
 		self.data = data
+		self.links = links
+		self.included = included
 	}
 
 	public init(from decoder: Decoder) throws {
 		let values = try decoder.container(keyedBy: StringCodingKey.self)
-		self.included = try values.decodeIfPresent([IncludedItem].self, forKey: "included")
-		self.links = try values.decode(DocumentLinks.self, forKey: "links")
 		self.data = try values.decode(AppClipDefaultExperience.self, forKey: "data")
+		self.links = try values.decode(DocumentLinks.self, forKey: "links")
+		self.included = try values.decodeIfPresent([IncludedItem].self, forKey: "included")
 	}
 
 	public func encode(to encoder: Encoder) throws {
 		var values = encoder.container(keyedBy: StringCodingKey.self)
-		try values.encodeIfPresent(included, forKey: "included")
-		try values.encode(links, forKey: "links")
 		try values.encode(data, forKey: "data")
+		try values.encode(links, forKey: "links")
+		try values.encodeIfPresent(included, forKey: "included")
 	}
 }

@@ -4,31 +4,31 @@
 import Foundation
 
 public struct AppEventsResponse: Codable {
+	public var data: [AppEvent]
+	public var included: [AppEventLocalization]?
 	public var meta: PagingInformation?
 	public var links: PagedDocumentLinks
-	public var included: [AppEventLocalization]?
-	public var data: [AppEvent]
 
-	public init(meta: PagingInformation? = nil, links: PagedDocumentLinks, included: [AppEventLocalization]? = nil, data: [AppEvent]) {
+	public init(data: [AppEvent], included: [AppEventLocalization]? = nil, meta: PagingInformation? = nil, links: PagedDocumentLinks) {
+		self.data = data
+		self.included = included
 		self.meta = meta
 		self.links = links
-		self.included = included
-		self.data = data
 	}
 
 	public init(from decoder: Decoder) throws {
 		let values = try decoder.container(keyedBy: StringCodingKey.self)
+		self.data = try values.decode([AppEvent].self, forKey: "data")
+		self.included = try values.decodeIfPresent([AppEventLocalization].self, forKey: "included")
 		self.meta = try values.decodeIfPresent(PagingInformation.self, forKey: "meta")
 		self.links = try values.decode(PagedDocumentLinks.self, forKey: "links")
-		self.included = try values.decodeIfPresent([AppEventLocalization].self, forKey: "included")
-		self.data = try values.decode([AppEvent].self, forKey: "data")
 	}
 
 	public func encode(to encoder: Encoder) throws {
 		var values = encoder.container(keyedBy: StringCodingKey.self)
+		try values.encode(data, forKey: "data")
+		try values.encodeIfPresent(included, forKey: "included")
 		try values.encodeIfPresent(meta, forKey: "meta")
 		try values.encode(links, forKey: "links")
-		try values.encodeIfPresent(included, forKey: "included")
-		try values.encode(data, forKey: "data")
 	}
 }

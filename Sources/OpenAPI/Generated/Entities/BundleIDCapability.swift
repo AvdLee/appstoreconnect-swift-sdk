@@ -4,30 +4,30 @@
 import Foundation
 
 public struct BundleIDCapability: Codable, Identifiable {
+	public var id: String
 	public var attributes: Attributes?
 	public var type: `Type`
 	public var links: ResourceLinks?
-	public var id: String
 
 	public struct Attributes: Codable {
-		public var capabilityType: CapabilityType?
 		public var settings: [CapabilitySetting]?
+		public var capabilityType: CapabilityType?
 
-		public init(capabilityType: CapabilityType? = nil, settings: [CapabilitySetting]? = nil) {
-			self.capabilityType = capabilityType
+		public init(settings: [CapabilitySetting]? = nil, capabilityType: CapabilityType? = nil) {
 			self.settings = settings
+			self.capabilityType = capabilityType
 		}
 
 		public init(from decoder: Decoder) throws {
 			let values = try decoder.container(keyedBy: StringCodingKey.self)
-			self.capabilityType = try values.decodeIfPresent(CapabilityType.self, forKey: "capabilityType")
 			self.settings = try values.decodeIfPresent([CapabilitySetting].self, forKey: "settings")
+			self.capabilityType = try values.decodeIfPresent(CapabilityType.self, forKey: "capabilityType")
 		}
 
 		public func encode(to encoder: Encoder) throws {
 			var values = encoder.container(keyedBy: StringCodingKey.self)
-			try values.encodeIfPresent(capabilityType, forKey: "capabilityType")
 			try values.encodeIfPresent(settings, forKey: "settings")
+			try values.encodeIfPresent(capabilityType, forKey: "capabilityType")
 		}
 	}
 
@@ -35,26 +35,26 @@ public struct BundleIDCapability: Codable, Identifiable {
 		case bundleIDCapabilities = "bundleIdCapabilities"
 	}
 
-	public init(attributes: Attributes? = nil, type: `Type`, links: ResourceLinks? = nil, id: String) {
+	public init(id: String, attributes: Attributes? = nil, type: `Type`, links: ResourceLinks? = nil) {
+		self.id = id
 		self.attributes = attributes
 		self.type = type
 		self.links = links
-		self.id = id
 	}
 
 	public init(from decoder: Decoder) throws {
 		let values = try decoder.container(keyedBy: StringCodingKey.self)
+		self.id = try values.decode(String.self, forKey: "id")
 		self.attributes = try values.decodeIfPresent(Attributes.self, forKey: "attributes")
 		self.type = try values.decode(`Type`.self, forKey: "type")
 		self.links = try values.decodeIfPresent(ResourceLinks.self, forKey: "links")
-		self.id = try values.decode(String.self, forKey: "id")
 	}
 
 	public func encode(to encoder: Encoder) throws {
 		var values = encoder.container(keyedBy: StringCodingKey.self)
+		try values.encode(id, forKey: "id")
 		try values.encodeIfPresent(attributes, forKey: "attributes")
 		try values.encode(type, forKey: "type")
 		try values.encodeIfPresent(links, forKey: "links")
-		try values.encode(id, forKey: "id")
 	}
 }

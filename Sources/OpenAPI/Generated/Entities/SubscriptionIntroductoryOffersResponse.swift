@@ -6,8 +6,8 @@ import Foundation
 public struct SubscriptionIntroductoryOffersResponse: Codable {
 	public var links: PagedDocumentLinks
 	public var data: [SubscriptionIntroductoryOffer]
-	public var included: [IncludedItem]?
 	public var meta: PagingInformation?
+	public var included: [IncludedItem]?
 
 	public enum IncludedItem: Codable {
 		case subscriptionPricePoint(SubscriptionPricePoint)
@@ -46,26 +46,26 @@ public struct SubscriptionIntroductoryOffersResponse: Codable {
 		}
 	}
 
-	public init(links: PagedDocumentLinks, data: [SubscriptionIntroductoryOffer], included: [IncludedItem]? = nil, meta: PagingInformation? = nil) {
+	public init(links: PagedDocumentLinks, data: [SubscriptionIntroductoryOffer], meta: PagingInformation? = nil, included: [IncludedItem]? = nil) {
 		self.links = links
 		self.data = data
-		self.included = included
 		self.meta = meta
+		self.included = included
 	}
 
 	public init(from decoder: Decoder) throws {
 		let values = try decoder.container(keyedBy: StringCodingKey.self)
 		self.links = try values.decode(PagedDocumentLinks.self, forKey: "links")
 		self.data = try values.decode([SubscriptionIntroductoryOffer].self, forKey: "data")
-		self.included = try values.decodeIfPresent([IncludedItem].self, forKey: "included")
 		self.meta = try values.decodeIfPresent(PagingInformation.self, forKey: "meta")
+		self.included = try values.decodeIfPresent([IncludedItem].self, forKey: "included")
 	}
 
 	public func encode(to encoder: Encoder) throws {
 		var values = encoder.container(keyedBy: StringCodingKey.self)
 		try values.encode(links, forKey: "links")
 		try values.encode(data, forKey: "data")
-		try values.encodeIfPresent(included, forKey: "included")
 		try values.encodeIfPresent(meta, forKey: "meta")
+		try values.encodeIfPresent(included, forKey: "included")
 	}
 }

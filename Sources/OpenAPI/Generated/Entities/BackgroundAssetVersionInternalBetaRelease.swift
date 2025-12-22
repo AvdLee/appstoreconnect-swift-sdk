@@ -4,15 +4,11 @@
 import Foundation
 
 public struct BackgroundAssetVersionInternalBetaRelease: Codable, Identifiable {
-	public var type: `Type`
 	public var id: String
 	public var attributes: Attributes?
-	public var relationships: Relationships?
+	public var type: `Type`
 	public var links: ResourceLinks?
-
-	public enum `Type`: String, Codable, CaseIterable {
-		case backgroundAssetVersionInternalBetaReleases
-	}
+	public var relationships: Relationships?
 
 	public struct Attributes: Codable {
 		public var state: State?
@@ -37,6 +33,10 @@ public struct BackgroundAssetVersionInternalBetaRelease: Codable, Identifiable {
 		}
 	}
 
+	public enum `Type`: String, Codable, CaseIterable {
+		case backgroundAssetVersionInternalBetaReleases
+	}
+
 	public struct Relationships: Codable {
 		public var backgroundAssetVersion: BackgroundAssetVersion?
 
@@ -44,28 +44,28 @@ public struct BackgroundAssetVersionInternalBetaRelease: Codable, Identifiable {
 			public var data: Data?
 
 			public struct Data: Codable, Identifiable {
-				public var id: String
 				public var type: `Type`
+				public var id: String
 
 				public enum `Type`: String, Codable, CaseIterable {
 					case backgroundAssetVersions
 				}
 
-				public init(id: String, type: `Type`) {
-					self.id = id
+				public init(type: `Type`, id: String) {
 					self.type = type
+					self.id = id
 				}
 
 				public init(from decoder: Decoder) throws {
 					let values = try decoder.container(keyedBy: StringCodingKey.self)
-					self.id = try values.decode(String.self, forKey: "id")
 					self.type = try values.decode(`Type`.self, forKey: "type")
+					self.id = try values.decode(String.self, forKey: "id")
 				}
 
 				public func encode(to encoder: Encoder) throws {
 					var values = encoder.container(keyedBy: StringCodingKey.self)
-					try values.encode(id, forKey: "id")
 					try values.encode(type, forKey: "type")
+					try values.encode(id, forKey: "id")
 				}
 			}
 
@@ -99,29 +99,29 @@ public struct BackgroundAssetVersionInternalBetaRelease: Codable, Identifiable {
 		}
 	}
 
-	public init(type: `Type`, id: String, attributes: Attributes? = nil, relationships: Relationships? = nil, links: ResourceLinks? = nil) {
-		self.type = type
+	public init(id: String, attributes: Attributes? = nil, type: `Type`, links: ResourceLinks? = nil, relationships: Relationships? = nil) {
 		self.id = id
 		self.attributes = attributes
-		self.relationships = relationships
+		self.type = type
 		self.links = links
+		self.relationships = relationships
 	}
 
 	public init(from decoder: Decoder) throws {
 		let values = try decoder.container(keyedBy: StringCodingKey.self)
-		self.type = try values.decode(`Type`.self, forKey: "type")
 		self.id = try values.decode(String.self, forKey: "id")
 		self.attributes = try values.decodeIfPresent(Attributes.self, forKey: "attributes")
-		self.relationships = try values.decodeIfPresent(Relationships.self, forKey: "relationships")
+		self.type = try values.decode(`Type`.self, forKey: "type")
 		self.links = try values.decodeIfPresent(ResourceLinks.self, forKey: "links")
+		self.relationships = try values.decodeIfPresent(Relationships.self, forKey: "relationships")
 	}
 
 	public func encode(to encoder: Encoder) throws {
 		var values = encoder.container(keyedBy: StringCodingKey.self)
-		try values.encode(type, forKey: "type")
 		try values.encode(id, forKey: "id")
 		try values.encodeIfPresent(attributes, forKey: "attributes")
-		try values.encodeIfPresent(relationships, forKey: "relationships")
+		try values.encode(type, forKey: "type")
 		try values.encodeIfPresent(links, forKey: "links")
+		try values.encodeIfPresent(relationships, forKey: "relationships")
 	}
 }

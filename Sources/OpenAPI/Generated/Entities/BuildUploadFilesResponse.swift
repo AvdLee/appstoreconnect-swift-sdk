@@ -4,27 +4,27 @@
 import Foundation
 
 public struct BuildUploadFilesResponse: Codable {
-	public var data: [BuildUploadFile]
 	public var meta: PagingInformation?
 	public var links: PagedDocumentLinks
+	public var data: [BuildUploadFile]
 
-	public init(data: [BuildUploadFile], meta: PagingInformation? = nil, links: PagedDocumentLinks) {
-		self.data = data
+	public init(meta: PagingInformation? = nil, links: PagedDocumentLinks, data: [BuildUploadFile]) {
 		self.meta = meta
 		self.links = links
+		self.data = data
 	}
 
 	public init(from decoder: Decoder) throws {
 		let values = try decoder.container(keyedBy: StringCodingKey.self)
-		self.data = try values.decode([BuildUploadFile].self, forKey: "data")
 		self.meta = try values.decodeIfPresent(PagingInformation.self, forKey: "meta")
 		self.links = try values.decode(PagedDocumentLinks.self, forKey: "links")
+		self.data = try values.decode([BuildUploadFile].self, forKey: "data")
 	}
 
 	public func encode(to encoder: Encoder) throws {
 		var values = encoder.container(keyedBy: StringCodingKey.self)
-		try values.encode(data, forKey: "data")
 		try values.encodeIfPresent(meta, forKey: "meta")
 		try values.encode(links, forKey: "links")
+		try values.encode(data, forKey: "data")
 	}
 }

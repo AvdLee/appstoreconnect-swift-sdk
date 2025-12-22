@@ -4,10 +4,10 @@
 import Foundation
 
 public struct GameCenterAchievementReleasesResponse: Codable {
+	public var meta: PagingInformation?
+	public var links: PagedDocumentLinks
 	public var included: [IncludedItem]?
 	public var data: [GameCenterAchievementRelease]
-	public var links: PagedDocumentLinks
-	public var meta: PagingInformation?
 
 	public enum IncludedItem: Codable {
 		case gameCenterAchievement(GameCenterAchievement)
@@ -43,26 +43,26 @@ public struct GameCenterAchievementReleasesResponse: Codable {
 		}
 	}
 
-	public init(included: [IncludedItem]? = nil, data: [GameCenterAchievementRelease], links: PagedDocumentLinks, meta: PagingInformation? = nil) {
+	public init(meta: PagingInformation? = nil, links: PagedDocumentLinks, included: [IncludedItem]? = nil, data: [GameCenterAchievementRelease]) {
+		self.meta = meta
+		self.links = links
 		self.included = included
 		self.data = data
-		self.links = links
-		self.meta = meta
 	}
 
 	public init(from decoder: Decoder) throws {
 		let values = try decoder.container(keyedBy: StringCodingKey.self)
+		self.meta = try values.decodeIfPresent(PagingInformation.self, forKey: "meta")
+		self.links = try values.decode(PagedDocumentLinks.self, forKey: "links")
 		self.included = try values.decodeIfPresent([IncludedItem].self, forKey: "included")
 		self.data = try values.decode([GameCenterAchievementRelease].self, forKey: "data")
-		self.links = try values.decode(PagedDocumentLinks.self, forKey: "links")
-		self.meta = try values.decodeIfPresent(PagingInformation.self, forKey: "meta")
 	}
 
 	public func encode(to encoder: Encoder) throws {
 		var values = encoder.container(keyedBy: StringCodingKey.self)
+		try values.encodeIfPresent(meta, forKey: "meta")
+		try values.encode(links, forKey: "links")
 		try values.encodeIfPresent(included, forKey: "included")
 		try values.encode(data, forKey: "data")
-		try values.encode(links, forKey: "links")
-		try values.encodeIfPresent(meta, forKey: "meta")
 	}
 }

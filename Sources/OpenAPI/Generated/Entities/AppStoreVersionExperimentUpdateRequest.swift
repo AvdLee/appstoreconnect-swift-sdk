@@ -14,27 +14,27 @@ public struct AppStoreVersionExperimentUpdateRequest: Codable {
 
 		public struct Attributes: Codable {
 			public var isStarted: Bool?
-			public var name: String?
 			public var trafficProportion: Int?
+			public var name: String?
 
-			public init(isStarted: Bool? = nil, name: String? = nil, trafficProportion: Int? = nil) {
+			public init(isStarted: Bool? = nil, trafficProportion: Int? = nil, name: String? = nil) {
 				self.isStarted = isStarted
-				self.name = name
 				self.trafficProportion = trafficProportion
+				self.name = name
 			}
 
 			public init(from decoder: Decoder) throws {
 				let values = try decoder.container(keyedBy: StringCodingKey.self)
 				self.isStarted = try values.decodeIfPresent(Bool.self, forKey: "started")
-				self.name = try values.decodeIfPresent(String.self, forKey: "name")
 				self.trafficProportion = try values.decodeIfPresent(Int.self, forKey: "trafficProportion")
+				self.name = try values.decodeIfPresent(String.self, forKey: "name")
 			}
 
 			public func encode(to encoder: Encoder) throws {
 				var values = encoder.container(keyedBy: StringCodingKey.self)
 				try values.encodeIfPresent(isStarted, forKey: "started")
-				try values.encodeIfPresent(name, forKey: "name")
 				try values.encodeIfPresent(trafficProportion, forKey: "trafficProportion")
+				try values.encodeIfPresent(name, forKey: "name")
 			}
 		}
 

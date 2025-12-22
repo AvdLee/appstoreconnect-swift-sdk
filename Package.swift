@@ -4,7 +4,8 @@ import PackageDescription
 var dependencies: [Package.Dependency] = [
     .package(url: "https://github.com/CreateAPI/URLQueryEncoder.git", from: "0.2.0"),
     .package(url: "https://github.com/apple/swift-crypto.git", from: "3.12.3"),
-    .package(url: "https://github.com/apple/swift-argument-parser", from: "1.7.0")
+    .package(url: "https://github.com/apple/swift-argument-parser", from: "1.7.0"),
+    .package(url: "https://github.com/weichsel/ZIPFoundation", from: "0.9.20")
 ]
 
 var targetDependencies: [Target.Dependency] = [
@@ -21,7 +22,7 @@ let package = Package(
     name: "AppStoreConnect-Swift-SDK",
     platforms: [
         .iOS(.v14),
-        .macOS(.v11),
+        .macOS(.v12),
         .tvOS(.v14),
         .watchOS(.v9),
     ],
@@ -32,38 +33,35 @@ let package = Package(
     targets: [
         .testTarget(
             name: "AppStoreConnect-Swift-SDK-Tests",
-            dependencies: ["AppStoreConnect-Swift-SDK", "SpecPatching", "GeneratedPatching"],
+            dependencies: ["AppStoreConnect-Swift-SDK", "OpenAPIGeneratorCore"],
             path: "Tests"
         ),
         .target(
             name: "AppStoreConnect-Swift-SDK",
             dependencies: targetDependencies,
             path: "Sources",
-            exclude: ["OpenAPI/app_store_connect_api.json"]
+            exclude: [
+                "OpenAPI/app_store_connect_api.json",
+                "OpenAPI/app_store_connect_api.json.orig",
+                "OpenAPI/app_store_connect_api.json.rej",
+                "OpenAPI/create-api.yml",
+                "OpenAPI/patches",
+            ]
         ),
         .target(
-            name: "SpecPatching",
-            path: "Tools/SpecPatching"
+            name: "OpenAPIGeneratorCore",
+            dependencies: [
+                .product(name: "ZIPFoundation", package: "ZIPFoundation"),
+            ],
+            path: "Tools/OpenAPIGeneratorCore"
         ),
         .executableTarget(
-            name: "SpecPatcher",
+            name: "OpenAPIGenerator",
             dependencies: [
-                "SpecPatching",
+                "OpenAPIGeneratorCore",
                 .product(name: "ArgumentParser", package: "swift-argument-parser"),
             ],
-            path: "Tools/SpecPatcher"
-        ),
-        .target(
-            name: "GeneratedPatching",
-            path: "Tools/GeneratedPatching"
-        ),
-        .executableTarget(
-            name: "GeneratedPatcher",
-            dependencies: [
-                "GeneratedPatching",
-                .product(name: "ArgumentParser", package: "swift-argument-parser"),
-            ],
-            path: "Tools/GeneratedPatcher"
+            path: "Tools/OpenAPIGenerator"
         ),
         .binaryTarget(
             name: "create-api", // Find the URL and checksum at https://github.com/createapi/createapi/releases/latest

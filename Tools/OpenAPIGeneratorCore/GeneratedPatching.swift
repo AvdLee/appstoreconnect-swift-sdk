@@ -1,15 +1,12 @@
 import Foundation
 
 public enum GeneratedPatchingError: Error, CustomStringConvertible {
-    case notAFile(URL)
     case cannotRead(URL, Error)
     case cannotWrite(URL, Error)
     case expectedSubstringNotFound(file: String, needle: String)
 
     public var description: String {
         switch self {
-        case .notAFile(let url):
-            return "Not a file: \(url.path)"
         case .cannotRead(let url, let error):
             return "Failed to read \(url.path): \(error)"
         case .cannotWrite(let url, let error):
@@ -152,7 +149,6 @@ private func patchFile(_ url: URL, dryRun: Bool, replacements: [Replacement], re
     let fm = FileManager.default
     var isDir: ObjCBool = false
     guard fm.fileExists(atPath: url.path, isDirectory: &isDir), !isDir.boolValue else {
-        // Generated outputs can change; treat missing files as non-fatal.
         return
     }
 
@@ -172,7 +168,6 @@ private func patchFile(_ url: URL, dryRun: Bool, replacements: [Replacement], re
             fileChanged = true
             report.changes.append("\(url.lastPathComponent): \(r.description)")
         } else if updated.contains(r.to) {
-            // Already patched / upstream generator output changed in our favor.
             continue
         } else if r.required {
             throw GeneratedPatchingError.expectedSubstringNotFound(file: url.path, needle: r.from)

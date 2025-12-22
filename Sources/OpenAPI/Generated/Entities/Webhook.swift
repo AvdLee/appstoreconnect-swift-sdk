@@ -4,59 +4,45 @@
 import Foundation
 
 public struct Webhook: Codable, Identifiable {
-	public var relationships: Relationships?
-	public var attributes: Attributes?
-	public var type: `Type`
-	public var id: String
 	public var links: ResourceLinks?
+	public var attributes: Attributes?
+	public var id: String
+	public var relationships: Relationships?
+	public var type: `Type`
+
+	public struct Attributes: Codable {
+		public var isEnabled: Bool?
+		public var name: String?
+		public var url: URL?
+		public var eventTypes: [WebhookEventType]?
+
+		public init(isEnabled: Bool? = nil, name: String? = nil, url: URL? = nil, eventTypes: [WebhookEventType]? = nil) {
+			self.isEnabled = isEnabled
+			self.name = name
+			self.url = url
+			self.eventTypes = eventTypes
+		}
+
+		public init(from decoder: Decoder) throws {
+			let values = try decoder.container(keyedBy: StringCodingKey.self)
+			self.isEnabled = try values.decodeIfPresent(Bool.self, forKey: "enabled")
+			self.name = try values.decodeIfPresent(String.self, forKey: "name")
+			self.url = try values.decodeIfPresent(URL.self, forKey: "url")
+			self.eventTypes = try values.decodeIfPresent([WebhookEventType].self, forKey: "eventTypes")
+		}
+
+		public func encode(to encoder: Encoder) throws {
+			var values = encoder.container(keyedBy: StringCodingKey.self)
+			try values.encodeIfPresent(isEnabled, forKey: "enabled")
+			try values.encodeIfPresent(name, forKey: "name")
+			try values.encodeIfPresent(url, forKey: "url")
+			try values.encodeIfPresent(eventTypes, forKey: "eventTypes")
+		}
+	}
 
 	public struct Relationships: Codable {
-		public var app: App?
 		public var deliveries: Deliveries?
-
-		public struct App: Codable {
-			public var data: Data?
-
-			public struct Data: Codable, Identifiable {
-				public var id: String
-				public var type: `Type`
-
-				public enum `Type`: String, Codable, CaseIterable {
-					case apps
-				}
-
-				public init(id: String, type: `Type`) {
-					self.id = id
-					self.type = type
-				}
-
-				public init(from decoder: Decoder) throws {
-					let values = try decoder.container(keyedBy: StringCodingKey.self)
-					self.id = try values.decode(String.self, forKey: "id")
-					self.type = try values.decode(`Type`.self, forKey: "type")
-				}
-
-				public func encode(to encoder: Encoder) throws {
-					var values = encoder.container(keyedBy: StringCodingKey.self)
-					try values.encode(id, forKey: "id")
-					try values.encode(type, forKey: "type")
-				}
-			}
-
-			public init(data: Data? = nil) {
-				self.data = data
-			}
-
-			public init(from decoder: Decoder) throws {
-				let values = try decoder.container(keyedBy: StringCodingKey.self)
-				self.data = try values.decodeIfPresent(Data.self, forKey: "data")
-			}
-
-			public func encode(to encoder: Encoder) throws {
-				var values = encoder.container(keyedBy: StringCodingKey.self)
-				try values.encodeIfPresent(data, forKey: "data")
-			}
-		}
+		public var app: App?
 
 		public struct Deliveries: Codable {
 			public var links: RelationshipLinks?
@@ -76,51 +62,65 @@ public struct Webhook: Codable, Identifiable {
 			}
 		}
 
-		public init(app: App? = nil, deliveries: Deliveries? = nil) {
-			self.app = app
+		public struct App: Codable {
+			public var data: Data?
+
+			public struct Data: Codable, Identifiable {
+				public var type: `Type`
+				public var id: String
+
+				public enum `Type`: String, Codable, CaseIterable {
+					case apps
+				}
+
+				public init(type: `Type`, id: String) {
+					self.type = type
+					self.id = id
+				}
+
+				public init(from decoder: Decoder) throws {
+					let values = try decoder.container(keyedBy: StringCodingKey.self)
+					self.type = try values.decode(`Type`.self, forKey: "type")
+					self.id = try values.decode(String.self, forKey: "id")
+				}
+
+				public func encode(to encoder: Encoder) throws {
+					var values = encoder.container(keyedBy: StringCodingKey.self)
+					try values.encode(type, forKey: "type")
+					try values.encode(id, forKey: "id")
+				}
+			}
+
+			public init(data: Data? = nil) {
+				self.data = data
+			}
+
+			public init(from decoder: Decoder) throws {
+				let values = try decoder.container(keyedBy: StringCodingKey.self)
+				self.data = try values.decodeIfPresent(Data.self, forKey: "data")
+			}
+
+			public func encode(to encoder: Encoder) throws {
+				var values = encoder.container(keyedBy: StringCodingKey.self)
+				try values.encodeIfPresent(data, forKey: "data")
+			}
+		}
+
+		public init(deliveries: Deliveries? = nil, app: App? = nil) {
 			self.deliveries = deliveries
+			self.app = app
 		}
 
 		public init(from decoder: Decoder) throws {
 			let values = try decoder.container(keyedBy: StringCodingKey.self)
-			self.app = try values.decodeIfPresent(App.self, forKey: "app")
 			self.deliveries = try values.decodeIfPresent(Deliveries.self, forKey: "deliveries")
+			self.app = try values.decodeIfPresent(App.self, forKey: "app")
 		}
 
 		public func encode(to encoder: Encoder) throws {
 			var values = encoder.container(keyedBy: StringCodingKey.self)
-			try values.encodeIfPresent(app, forKey: "app")
 			try values.encodeIfPresent(deliveries, forKey: "deliveries")
-		}
-	}
-
-	public struct Attributes: Codable {
-		public var url: URL?
-		public var name: String?
-		public var eventTypes: [WebhookEventType]?
-		public var isEnabled: Bool?
-
-		public init(url: URL? = nil, name: String? = nil, eventTypes: [WebhookEventType]? = nil, isEnabled: Bool? = nil) {
-			self.url = url
-			self.name = name
-			self.eventTypes = eventTypes
-			self.isEnabled = isEnabled
-		}
-
-		public init(from decoder: Decoder) throws {
-			let values = try decoder.container(keyedBy: StringCodingKey.self)
-			self.url = try values.decodeIfPresent(URL.self, forKey: "url")
-			self.name = try values.decodeIfPresent(String.self, forKey: "name")
-			self.eventTypes = try values.decodeIfPresent([WebhookEventType].self, forKey: "eventTypes")
-			self.isEnabled = try values.decodeIfPresent(Bool.self, forKey: "enabled")
-		}
-
-		public func encode(to encoder: Encoder) throws {
-			var values = encoder.container(keyedBy: StringCodingKey.self)
-			try values.encodeIfPresent(url, forKey: "url")
-			try values.encodeIfPresent(name, forKey: "name")
-			try values.encodeIfPresent(eventTypes, forKey: "eventTypes")
-			try values.encodeIfPresent(isEnabled, forKey: "enabled")
+			try values.encodeIfPresent(app, forKey: "app")
 		}
 	}
 
@@ -128,29 +128,29 @@ public struct Webhook: Codable, Identifiable {
 		case webhooks
 	}
 
-	public init(relationships: Relationships? = nil, attributes: Attributes? = nil, type: `Type`, id: String, links: ResourceLinks? = nil) {
-		self.relationships = relationships
-		self.attributes = attributes
-		self.type = type
-		self.id = id
+	public init(links: ResourceLinks? = nil, attributes: Attributes? = nil, id: String, relationships: Relationships? = nil, type: `Type`) {
 		self.links = links
+		self.attributes = attributes
+		self.id = id
+		self.relationships = relationships
+		self.type = type
 	}
 
 	public init(from decoder: Decoder) throws {
 		let values = try decoder.container(keyedBy: StringCodingKey.self)
-		self.relationships = try values.decodeIfPresent(Relationships.self, forKey: "relationships")
-		self.attributes = try values.decodeIfPresent(Attributes.self, forKey: "attributes")
-		self.type = try values.decode(`Type`.self, forKey: "type")
-		self.id = try values.decode(String.self, forKey: "id")
 		self.links = try values.decodeIfPresent(ResourceLinks.self, forKey: "links")
+		self.attributes = try values.decodeIfPresent(Attributes.self, forKey: "attributes")
+		self.id = try values.decode(String.self, forKey: "id")
+		self.relationships = try values.decodeIfPresent(Relationships.self, forKey: "relationships")
+		self.type = try values.decode(`Type`.self, forKey: "type")
 	}
 
 	public func encode(to encoder: Encoder) throws {
 		var values = encoder.container(keyedBy: StringCodingKey.self)
-		try values.encodeIfPresent(relationships, forKey: "relationships")
-		try values.encodeIfPresent(attributes, forKey: "attributes")
-		try values.encode(type, forKey: "type")
-		try values.encode(id, forKey: "id")
 		try values.encodeIfPresent(links, forKey: "links")
+		try values.encodeIfPresent(attributes, forKey: "attributes")
+		try values.encode(id, forKey: "id")
+		try values.encodeIfPresent(relationships, forKey: "relationships")
+		try values.encode(type, forKey: "type")
 	}
 }

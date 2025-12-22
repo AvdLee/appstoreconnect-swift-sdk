@@ -9,60 +9,8 @@ public struct BetaTesterUsagesV1MetricResponse: Codable {
 	public var meta: PagingInformation?
 
 	public struct Datum: Codable {
-		public var dataPoints: DataPoints?
 		public var dimensions: Dimensions?
-
-		public struct DataPoints: Codable {
-			public var start: Date?
-			public var values: Values?
-			public var end: Date?
-
-			public struct Values: Codable {
-				public var sessionCount: Int?
-				public var crashCount: Int?
-				public var feedbackCount: Int?
-
-				public init(sessionCount: Int? = nil, crashCount: Int? = nil, feedbackCount: Int? = nil) {
-					self.sessionCount = sessionCount
-					self.crashCount = crashCount
-					self.feedbackCount = feedbackCount
-				}
-
-				public init(from decoder: Decoder) throws {
-					let values = try decoder.container(keyedBy: StringCodingKey.self)
-					self.sessionCount = try values.decodeIfPresent(Int.self, forKey: "sessionCount")
-					self.crashCount = try values.decodeIfPresent(Int.self, forKey: "crashCount")
-					self.feedbackCount = try values.decodeIfPresent(Int.self, forKey: "feedbackCount")
-				}
-
-				public func encode(to encoder: Encoder) throws {
-					var values = encoder.container(keyedBy: StringCodingKey.self)
-					try values.encodeIfPresent(sessionCount, forKey: "sessionCount")
-					try values.encodeIfPresent(crashCount, forKey: "crashCount")
-					try values.encodeIfPresent(feedbackCount, forKey: "feedbackCount")
-				}
-			}
-
-			public init(start: Date? = nil, values: Values? = nil, end: Date? = nil) {
-				self.start = start
-				self.values = values
-				self.end = end
-			}
-
-			public init(from decoder: Decoder) throws {
-				let values = try decoder.container(keyedBy: StringCodingKey.self)
-				self.start = try values.decodeIfPresent(Date.self, forKey: "start")
-				self.values = try values.decodeIfPresent(Values.self, forKey: "values")
-				self.end = try values.decodeIfPresent(Date.self, forKey: "end")
-			}
-
-			public func encode(to encoder: Encoder) throws {
-				var values = encoder.container(keyedBy: StringCodingKey.self)
-				try values.encodeIfPresent(start, forKey: "start")
-				try values.encodeIfPresent(self.values, forKey: "values")
-				try values.encodeIfPresent(end, forKey: "end")
-			}
-		}
+		public var dataPoints: DataPoints?
 
 		public struct Dimensions: Codable {
 			public var apps: Apps?
@@ -72,24 +20,24 @@ public struct BetaTesterUsagesV1MetricResponse: Codable {
 				public var data: String?
 
 				public struct Links: Codable {
-					public var related: String?
 					public var groupBy: String?
+					public var related: String?
 
-					public init(related: String? = nil, groupBy: String? = nil) {
-						self.related = related
+					public init(groupBy: String? = nil, related: String? = nil) {
 						self.groupBy = groupBy
+						self.related = related
 					}
 
 					public init(from decoder: Decoder) throws {
 						let values = try decoder.container(keyedBy: StringCodingKey.self)
-						self.related = try values.decodeIfPresent(String.self, forKey: "related")
 						self.groupBy = try values.decodeIfPresent(String.self, forKey: "groupBy")
+						self.related = try values.decodeIfPresent(String.self, forKey: "related")
 					}
 
 					public func encode(to encoder: Encoder) throws {
 						var values = encoder.container(keyedBy: StringCodingKey.self)
-						try values.encodeIfPresent(related, forKey: "related")
 						try values.encodeIfPresent(groupBy, forKey: "groupBy")
+						try values.encodeIfPresent(related, forKey: "related")
 					}
 				}
 
@@ -126,21 +74,73 @@ public struct BetaTesterUsagesV1MetricResponse: Codable {
 			}
 		}
 
-		public init(dataPoints: DataPoints? = nil, dimensions: Dimensions? = nil) {
-			self.dataPoints = dataPoints
+		public struct DataPoints: Codable {
+			public var start: Date?
+			public var values: Values?
+			public var end: Date?
+
+			public struct Values: Codable {
+				public var sessionCount: Int?
+				public var feedbackCount: Int?
+				public var crashCount: Int?
+
+				public init(sessionCount: Int? = nil, feedbackCount: Int? = nil, crashCount: Int? = nil) {
+					self.sessionCount = sessionCount
+					self.feedbackCount = feedbackCount
+					self.crashCount = crashCount
+				}
+
+				public init(from decoder: Decoder) throws {
+					let values = try decoder.container(keyedBy: StringCodingKey.self)
+					self.sessionCount = try values.decodeIfPresent(Int.self, forKey: "sessionCount")
+					self.feedbackCount = try values.decodeIfPresent(Int.self, forKey: "feedbackCount")
+					self.crashCount = try values.decodeIfPresent(Int.self, forKey: "crashCount")
+				}
+
+				public func encode(to encoder: Encoder) throws {
+					var values = encoder.container(keyedBy: StringCodingKey.self)
+					try values.encodeIfPresent(sessionCount, forKey: "sessionCount")
+					try values.encodeIfPresent(feedbackCount, forKey: "feedbackCount")
+					try values.encodeIfPresent(crashCount, forKey: "crashCount")
+				}
+			}
+
+			public init(start: Date? = nil, values: Values? = nil, end: Date? = nil) {
+				self.start = start
+				self.values = values
+				self.end = end
+			}
+
+			public init(from decoder: Decoder) throws {
+				let values = try decoder.container(keyedBy: StringCodingKey.self)
+				self.start = try values.decodeIfPresent(Date.self, forKey: "start")
+				self.values = try values.decodeIfPresent(Values.self, forKey: "values")
+				self.end = try values.decodeIfPresent(Date.self, forKey: "end")
+			}
+
+			public func encode(to encoder: Encoder) throws {
+				var values = encoder.container(keyedBy: StringCodingKey.self)
+				try values.encodeIfPresent(start, forKey: "start")
+				try values.encodeIfPresent(self.values, forKey: "values")
+				try values.encodeIfPresent(end, forKey: "end")
+			}
+		}
+
+		public init(dimensions: Dimensions? = nil, dataPoints: DataPoints? = nil) {
 			self.dimensions = dimensions
+			self.dataPoints = dataPoints
 		}
 
 		public init(from decoder: Decoder) throws {
 			let values = try decoder.container(keyedBy: StringCodingKey.self)
-			self.dataPoints = try values.decodeIfPresent(DataPoints.self, forKey: "dataPoints")
 			self.dimensions = try values.decodeIfPresent(Dimensions.self, forKey: "dimensions")
+			self.dataPoints = try values.decodeIfPresent(DataPoints.self, forKey: "dataPoints")
 		}
 
 		public func encode(to encoder: Encoder) throws {
 			var values = encoder.container(keyedBy: StringCodingKey.self)
-			try values.encodeIfPresent(dataPoints, forKey: "dataPoints")
 			try values.encodeIfPresent(dimensions, forKey: "dimensions")
+			try values.encodeIfPresent(dataPoints, forKey: "dataPoints")
 		}
 	}
 

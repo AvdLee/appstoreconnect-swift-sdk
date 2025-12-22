@@ -4,10 +4,10 @@
 import Foundation
 
 public struct SubscriptionPriceResponse: Codable {
+	public var included: [IncludedItem]?
 	/// SubscriptionPrice
 	public var data: SubscriptionPrice
 	public var links: DocumentLinks
-	public var included: [IncludedItem]?
 
 	public enum IncludedItem: Codable {
 		case subscriptionPricePoint(SubscriptionPricePoint)
@@ -43,23 +43,23 @@ public struct SubscriptionPriceResponse: Codable {
 		}
 	}
 
-	public init(data: SubscriptionPrice, links: DocumentLinks, included: [IncludedItem]? = nil) {
+	public init(included: [IncludedItem]? = nil, data: SubscriptionPrice, links: DocumentLinks) {
+		self.included = included
 		self.data = data
 		self.links = links
-		self.included = included
 	}
 
 	public init(from decoder: Decoder) throws {
 		let values = try decoder.container(keyedBy: StringCodingKey.self)
+		self.included = try values.decodeIfPresent([IncludedItem].self, forKey: "included")
 		self.data = try values.decode(SubscriptionPrice.self, forKey: "data")
 		self.links = try values.decode(DocumentLinks.self, forKey: "links")
-		self.included = try values.decodeIfPresent([IncludedItem].self, forKey: "included")
 	}
 
 	public func encode(to encoder: Encoder) throws {
 		var values = encoder.container(keyedBy: StringCodingKey.self)
+		try values.encodeIfPresent(included, forKey: "included")
 		try values.encode(data, forKey: "data")
 		try values.encode(links, forKey: "links")
-		try values.encodeIfPresent(included, forKey: "included")
 	}
 }

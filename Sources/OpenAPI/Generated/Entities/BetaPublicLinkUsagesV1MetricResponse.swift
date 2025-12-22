@@ -4,9 +4,9 @@
 import Foundation
 
 public struct BetaPublicLinkUsagesV1MetricResponse: Codable {
+	public var links: PagedDocumentLinks
 	public var meta: PagingInformation?
 	public var data: [Datum]
-	public var links: PagedDocumentLinks
 
 	public struct Datum: Codable {
 		public var dataPoints: DataPoints?
@@ -17,44 +17,44 @@ public struct BetaPublicLinkUsagesV1MetricResponse: Codable {
 			public var values: Values?
 
 			public struct Values: Codable {
-				public var notRelevantRatio: Double?
-				public var notClearRatio: Double?
-				public var viewCount: Int?
-				public var acceptedCount: Int?
-				public var didNotAcceptCount: Int?
-				public var notInterestingRatio: Double?
 				public var didNotMeetCriteriaCount: Int?
+				public var didNotAcceptCount: Int?
+				public var acceptedCount: Int?
+				public var notClearRatio: Double?
+				public var notInterestingRatio: Double?
+				public var notRelevantRatio: Double?
+				public var viewCount: Int?
 
-				public init(notRelevantRatio: Double? = nil, notClearRatio: Double? = nil, viewCount: Int? = nil, acceptedCount: Int? = nil, didNotAcceptCount: Int? = nil, notInterestingRatio: Double? = nil, didNotMeetCriteriaCount: Int? = nil) {
-					self.notRelevantRatio = notRelevantRatio
-					self.notClearRatio = notClearRatio
-					self.viewCount = viewCount
-					self.acceptedCount = acceptedCount
-					self.didNotAcceptCount = didNotAcceptCount
-					self.notInterestingRatio = notInterestingRatio
+				public init(didNotMeetCriteriaCount: Int? = nil, didNotAcceptCount: Int? = nil, acceptedCount: Int? = nil, notClearRatio: Double? = nil, notInterestingRatio: Double? = nil, notRelevantRatio: Double? = nil, viewCount: Int? = nil) {
 					self.didNotMeetCriteriaCount = didNotMeetCriteriaCount
+					self.didNotAcceptCount = didNotAcceptCount
+					self.acceptedCount = acceptedCount
+					self.notClearRatio = notClearRatio
+					self.notInterestingRatio = notInterestingRatio
+					self.notRelevantRatio = notRelevantRatio
+					self.viewCount = viewCount
 				}
 
 				public init(from decoder: Decoder) throws {
 					let values = try decoder.container(keyedBy: StringCodingKey.self)
-					self.notRelevantRatio = try values.decodeIfPresent(Double.self, forKey: "notRelevantRatio")
-					self.notClearRatio = try values.decodeIfPresent(Double.self, forKey: "notClearRatio")
-					self.viewCount = try values.decodeIfPresent(Int.self, forKey: "viewCount")
-					self.acceptedCount = try values.decodeIfPresent(Int.self, forKey: "acceptedCount")
-					self.didNotAcceptCount = try values.decodeIfPresent(Int.self, forKey: "didNotAcceptCount")
-					self.notInterestingRatio = try values.decodeIfPresent(Double.self, forKey: "notInterestingRatio")
 					self.didNotMeetCriteriaCount = try values.decodeIfPresent(Int.self, forKey: "didNotMeetCriteriaCount")
+					self.didNotAcceptCount = try values.decodeIfPresent(Int.self, forKey: "didNotAcceptCount")
+					self.acceptedCount = try values.decodeIfPresent(Int.self, forKey: "acceptedCount")
+					self.notClearRatio = try values.decodeIfPresent(Double.self, forKey: "notClearRatio")
+					self.notInterestingRatio = try values.decodeIfPresent(Double.self, forKey: "notInterestingRatio")
+					self.notRelevantRatio = try values.decodeIfPresent(Double.self, forKey: "notRelevantRatio")
+					self.viewCount = try values.decodeIfPresent(Int.self, forKey: "viewCount")
 				}
 
 				public func encode(to encoder: Encoder) throws {
 					var values = encoder.container(keyedBy: StringCodingKey.self)
-					try values.encodeIfPresent(notRelevantRatio, forKey: "notRelevantRatio")
-					try values.encodeIfPresent(notClearRatio, forKey: "notClearRatio")
-					try values.encodeIfPresent(viewCount, forKey: "viewCount")
-					try values.encodeIfPresent(acceptedCount, forKey: "acceptedCount")
-					try values.encodeIfPresent(didNotAcceptCount, forKey: "didNotAcceptCount")
-					try values.encodeIfPresent(notInterestingRatio, forKey: "notInterestingRatio")
 					try values.encodeIfPresent(didNotMeetCriteriaCount, forKey: "didNotMeetCriteriaCount")
+					try values.encodeIfPresent(didNotAcceptCount, forKey: "didNotAcceptCount")
+					try values.encodeIfPresent(acceptedCount, forKey: "acceptedCount")
+					try values.encodeIfPresent(notClearRatio, forKey: "notClearRatio")
+					try values.encodeIfPresent(notInterestingRatio, forKey: "notInterestingRatio")
+					try values.encodeIfPresent(notRelevantRatio, forKey: "notRelevantRatio")
+					try values.encodeIfPresent(viewCount, forKey: "viewCount")
 				}
 			}
 
@@ -94,23 +94,23 @@ public struct BetaPublicLinkUsagesV1MetricResponse: Codable {
 		}
 	}
 
-	public init(meta: PagingInformation? = nil, data: [Datum], links: PagedDocumentLinks) {
+	public init(links: PagedDocumentLinks, meta: PagingInformation? = nil, data: [Datum]) {
+		self.links = links
 		self.meta = meta
 		self.data = data
-		self.links = links
 	}
 
 	public init(from decoder: Decoder) throws {
 		let values = try decoder.container(keyedBy: StringCodingKey.self)
+		self.links = try values.decode(PagedDocumentLinks.self, forKey: "links")
 		self.meta = try values.decodeIfPresent(PagingInformation.self, forKey: "meta")
 		self.data = try values.decode([Datum].self, forKey: "data")
-		self.links = try values.decode(PagedDocumentLinks.self, forKey: "links")
 	}
 
 	public func encode(to encoder: Encoder) throws {
 		var values = encoder.container(keyedBy: StringCodingKey.self)
+		try values.encode(links, forKey: "links")
 		try values.encodeIfPresent(meta, forKey: "meta")
 		try values.encode(data, forKey: "data")
-		try values.encode(links, forKey: "links")
 	}
 }

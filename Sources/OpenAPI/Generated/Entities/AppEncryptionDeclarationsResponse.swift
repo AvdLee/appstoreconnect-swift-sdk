@@ -4,10 +4,10 @@
 import Foundation
 
 public struct AppEncryptionDeclarationsResponse: Codable {
+	public var links: PagedDocumentLinks
 	public var included: [IncludedItem]?
 	public var data: [AppEncryptionDeclaration]
 	public var meta: PagingInformation?
-	public var links: PagedDocumentLinks
 
 	public enum IncludedItem: Codable {
 		case appEncryptionDeclarationDocument(AppEncryptionDeclarationDocument)
@@ -46,26 +46,26 @@ public struct AppEncryptionDeclarationsResponse: Codable {
 		}
 	}
 
-	public init(included: [IncludedItem]? = nil, data: [AppEncryptionDeclaration], meta: PagingInformation? = nil, links: PagedDocumentLinks) {
+	public init(links: PagedDocumentLinks, included: [IncludedItem]? = nil, data: [AppEncryptionDeclaration], meta: PagingInformation? = nil) {
+		self.links = links
 		self.included = included
 		self.data = data
 		self.meta = meta
-		self.links = links
 	}
 
 	public init(from decoder: Decoder) throws {
 		let values = try decoder.container(keyedBy: StringCodingKey.self)
+		self.links = try values.decode(PagedDocumentLinks.self, forKey: "links")
 		self.included = try values.decodeIfPresent([IncludedItem].self, forKey: "included")
 		self.data = try values.decode([AppEncryptionDeclaration].self, forKey: "data")
 		self.meta = try values.decodeIfPresent(PagingInformation.self, forKey: "meta")
-		self.links = try values.decode(PagedDocumentLinks.self, forKey: "links")
 	}
 
 	public func encode(to encoder: Encoder) throws {
 		var values = encoder.container(keyedBy: StringCodingKey.self)
+		try values.encode(links, forKey: "links")
 		try values.encodeIfPresent(included, forKey: "included")
 		try values.encode(data, forKey: "data")
 		try values.encodeIfPresent(meta, forKey: "meta")
-		try values.encode(links, forKey: "links")
 	}
 }

@@ -4,27 +4,27 @@
 import Foundation
 
 public struct DeviceFamilyOsVersionFilter: Codable {
-	public var minimumOsInclusive: String?
 	public var maximumOsInclusive: String?
+	public var minimumOsInclusive: String?
 	public var deviceFamily: DeviceFamily?
 
-	public init(minimumOsInclusive: String? = nil, maximumOsInclusive: String? = nil, deviceFamily: DeviceFamily? = nil) {
-		self.minimumOsInclusive = minimumOsInclusive
+	public init(maximumOsInclusive: String? = nil, minimumOsInclusive: String? = nil, deviceFamily: DeviceFamily? = nil) {
 		self.maximumOsInclusive = maximumOsInclusive
+		self.minimumOsInclusive = minimumOsInclusive
 		self.deviceFamily = deviceFamily
 	}
 
 	public init(from decoder: Decoder) throws {
 		let values = try decoder.container(keyedBy: StringCodingKey.self)
-		self.minimumOsInclusive = try values.decodeIfPresent(String.self, forKey: "minimumOsInclusive")
 		self.maximumOsInclusive = try values.decodeIfPresent(String.self, forKey: "maximumOsInclusive")
+		self.minimumOsInclusive = try values.decodeIfPresent(String.self, forKey: "minimumOsInclusive")
 		self.deviceFamily = try values.decodeIfPresent(DeviceFamily.self, forKey: "deviceFamily")
 	}
 
 	public func encode(to encoder: Encoder) throws {
 		var values = encoder.container(keyedBy: StringCodingKey.self)
-		try values.encodeIfPresent(minimumOsInclusive, forKey: "minimumOsInclusive")
 		try values.encodeIfPresent(maximumOsInclusive, forKey: "maximumOsInclusive")
+		try values.encodeIfPresent(minimumOsInclusive, forKey: "minimumOsInclusive")
 		try values.encodeIfPresent(deviceFamily, forKey: "deviceFamily")
 	}
 }

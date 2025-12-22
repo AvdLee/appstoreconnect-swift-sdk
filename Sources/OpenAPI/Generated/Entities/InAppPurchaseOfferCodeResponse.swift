@@ -5,9 +5,9 @@ import Foundation
 
 public struct InAppPurchaseOfferCodeResponse: Codable {
 	public var included: [IncludedItem]?
+	public var links: DocumentLinks
 	/// InAppPurchaseOfferCode
 	public var data: InAppPurchaseOfferCode
-	public var links: DocumentLinks
 
 	public enum IncludedItem: Codable {
 		case inAppPurchaseOfferCodeCustomCode(InAppPurchaseOfferCodeCustomCode)
@@ -46,23 +46,23 @@ public struct InAppPurchaseOfferCodeResponse: Codable {
 		}
 	}
 
-	public init(included: [IncludedItem]? = nil, data: InAppPurchaseOfferCode, links: DocumentLinks) {
+	public init(included: [IncludedItem]? = nil, links: DocumentLinks, data: InAppPurchaseOfferCode) {
 		self.included = included
-		self.data = data
 		self.links = links
+		self.data = data
 	}
 
 	public init(from decoder: Decoder) throws {
 		let values = try decoder.container(keyedBy: StringCodingKey.self)
 		self.included = try values.decodeIfPresent([IncludedItem].self, forKey: "included")
-		self.data = try values.decode(InAppPurchaseOfferCode.self, forKey: "data")
 		self.links = try values.decode(DocumentLinks.self, forKey: "links")
+		self.data = try values.decode(InAppPurchaseOfferCode.self, forKey: "data")
 	}
 
 	public func encode(to encoder: Encoder) throws {
 		var values = encoder.container(keyedBy: StringCodingKey.self)
 		try values.encodeIfPresent(included, forKey: "included")
-		try values.encode(data, forKey: "data")
 		try values.encode(links, forKey: "links")
+		try values.encode(data, forKey: "data")
 	}
 }

@@ -7,35 +7,9 @@ public struct InAppPurchaseLocalizationCreateRequest: Codable {
 	public var data: Data
 
 	public struct Data: Codable {
-		public var attributes: Attributes
 		public var relationships: Relationships
+		public var attributes: Attributes
 		public var type: `Type`
-
-		public struct Attributes: Codable {
-			public var name: String
-			public var locale: String
-			public var description: String?
-
-			public init(name: String, locale: String, description: String? = nil) {
-				self.name = name
-				self.locale = locale
-				self.description = description
-			}
-
-			public init(from decoder: Decoder) throws {
-				let values = try decoder.container(keyedBy: StringCodingKey.self)
-				self.name = try values.decode(String.self, forKey: "name")
-				self.locale = try values.decode(String.self, forKey: "locale")
-				self.description = try values.decodeIfPresent(String.self, forKey: "description")
-			}
-
-			public func encode(to encoder: Encoder) throws {
-				var values = encoder.container(keyedBy: StringCodingKey.self)
-				try values.encode(name, forKey: "name")
-				try values.encode(locale, forKey: "locale")
-				try values.encodeIfPresent(description, forKey: "description")
-			}
-		}
 
 		public struct Relationships: Codable {
 			public var inAppPurchaseV2: InAppPurchaseV2
@@ -99,27 +73,53 @@ public struct InAppPurchaseLocalizationCreateRequest: Codable {
 			}
 		}
 
+		public struct Attributes: Codable {
+			public var name: String
+			public var description: String?
+			public var locale: String
+
+			public init(name: String, description: String? = nil, locale: String) {
+				self.name = name
+				self.description = description
+				self.locale = locale
+			}
+
+			public init(from decoder: Decoder) throws {
+				let values = try decoder.container(keyedBy: StringCodingKey.self)
+				self.name = try values.decode(String.self, forKey: "name")
+				self.description = try values.decodeIfPresent(String.self, forKey: "description")
+				self.locale = try values.decode(String.self, forKey: "locale")
+			}
+
+			public func encode(to encoder: Encoder) throws {
+				var values = encoder.container(keyedBy: StringCodingKey.self)
+				try values.encode(name, forKey: "name")
+				try values.encodeIfPresent(description, forKey: "description")
+				try values.encode(locale, forKey: "locale")
+			}
+		}
+
 		public enum `Type`: String, Codable, CaseIterable {
 			case inAppPurchaseLocalizations
 		}
 
-		public init(attributes: Attributes, relationships: Relationships, type: `Type`) {
-			self.attributes = attributes
+		public init(relationships: Relationships, attributes: Attributes, type: `Type`) {
 			self.relationships = relationships
+			self.attributes = attributes
 			self.type = type
 		}
 
 		public init(from decoder: Decoder) throws {
 			let values = try decoder.container(keyedBy: StringCodingKey.self)
-			self.attributes = try values.decode(Attributes.self, forKey: "attributes")
 			self.relationships = try values.decode(Relationships.self, forKey: "relationships")
+			self.attributes = try values.decode(Attributes.self, forKey: "attributes")
 			self.type = try values.decode(`Type`.self, forKey: "type")
 		}
 
 		public func encode(to encoder: Encoder) throws {
 			var values = encoder.container(keyedBy: StringCodingKey.self)
-			try values.encode(attributes, forKey: "attributes")
 			try values.encode(relationships, forKey: "relationships")
+			try values.encode(attributes, forKey: "attributes")
 			try values.encode(type, forKey: "type")
 		}
 	}

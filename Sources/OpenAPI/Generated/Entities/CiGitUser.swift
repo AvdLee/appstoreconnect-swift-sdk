@@ -4,23 +4,23 @@
 import Foundation
 
 public struct CiGitUser: Codable {
-	public var avatarURL: String?
 	public var displayName: String?
+	public var avatarURL: String?
 
-	public init(avatarURL: String? = nil, displayName: String? = nil) {
-		self.avatarURL = avatarURL
+	public init(displayName: String? = nil, avatarURL: String? = nil) {
 		self.displayName = displayName
+		self.avatarURL = avatarURL
 	}
 
 	public init(from decoder: Decoder) throws {
 		let values = try decoder.container(keyedBy: StringCodingKey.self)
-		self.avatarURL = try values.decodeIfPresent(String.self, forKey: "avatarUrl")
 		self.displayName = try values.decodeIfPresent(String.self, forKey: "displayName")
+		self.avatarURL = try values.decodeIfPresent(String.self, forKey: "avatarUrl")
 	}
 
 	public func encode(to encoder: Encoder) throws {
 		var values = encoder.container(keyedBy: StringCodingKey.self)
-		try values.encodeIfPresent(avatarURL, forKey: "avatarUrl")
 		try values.encodeIfPresent(displayName, forKey: "displayName")
+		try values.encodeIfPresent(avatarURL, forKey: "avatarUrl")
 	}
 }

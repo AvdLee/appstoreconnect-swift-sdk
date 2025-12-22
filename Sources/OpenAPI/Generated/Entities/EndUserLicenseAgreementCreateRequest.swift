@@ -7,23 +7,45 @@ public struct EndUserLicenseAgreementCreateRequest: Codable {
 	public var data: Data
 
 	public struct Data: Codable {
-		public var relationships: Relationships
-		public var type: `Type`
 		public var attributes: Attributes
+		public var type: `Type`
+		public var relationships: Relationships
+
+		public struct Attributes: Codable {
+			public var agreementText: String
+
+			public init(agreementText: String) {
+				self.agreementText = agreementText
+			}
+
+			public init(from decoder: Decoder) throws {
+				let values = try decoder.container(keyedBy: StringCodingKey.self)
+				self.agreementText = try values.decode(String.self, forKey: "agreementText")
+			}
+
+			public func encode(to encoder: Encoder) throws {
+				var values = encoder.container(keyedBy: StringCodingKey.self)
+				try values.encode(agreementText, forKey: "agreementText")
+			}
+		}
+
+		public enum `Type`: String, Codable, CaseIterable {
+			case endUserLicenseAgreements
+		}
 
 		public struct Relationships: Codable {
-			public var territories: Territories
 			public var app: App
+			public var territories: Territories
 
-			public struct Territories: Codable {
-				public var data: [Datum]
+			public struct App: Codable {
+				public var data: Data
 
-				public struct Datum: Codable, Identifiable {
+				public struct Data: Codable, Identifiable {
 					public var type: `Type`
 					public var id: String
 
 					public enum `Type`: String, Codable, CaseIterable {
-						case territories
+						case apps
 					}
 
 					public init(type: `Type`, id: String) {
@@ -44,13 +66,13 @@ public struct EndUserLicenseAgreementCreateRequest: Codable {
 					}
 				}
 
-				public init(data: [Datum]) {
+				public init(data: Data) {
 					self.data = data
 				}
 
 				public init(from decoder: Decoder) throws {
 					let values = try decoder.container(keyedBy: StringCodingKey.self)
-					self.data = try values.decode([Datum].self, forKey: "data")
+					self.data = try values.decode(Data.self, forKey: "data")
 				}
 
 				public func encode(to encoder: Encoder) throws {
@@ -59,15 +81,15 @@ public struct EndUserLicenseAgreementCreateRequest: Codable {
 				}
 			}
 
-			public struct App: Codable {
-				public var data: Data
+			public struct Territories: Codable {
+				public var data: [Datum]
 
-				public struct Data: Codable, Identifiable {
+				public struct Datum: Codable, Identifiable {
 					public var id: String
 					public var type: `Type`
 
 					public enum `Type`: String, Codable, CaseIterable {
-						case apps
+						case territories
 					}
 
 					public init(id: String, type: `Type`) {
@@ -88,13 +110,13 @@ public struct EndUserLicenseAgreementCreateRequest: Codable {
 					}
 				}
 
-				public init(data: Data) {
+				public init(data: [Datum]) {
 					self.data = data
 				}
 
 				public init(from decoder: Decoder) throws {
 					let values = try decoder.container(keyedBy: StringCodingKey.self)
-					self.data = try values.decode(Data.self, forKey: "data")
+					self.data = try values.decode([Datum].self, forKey: "data")
 				}
 
 				public func encode(to encoder: Encoder) throws {
@@ -103,64 +125,42 @@ public struct EndUserLicenseAgreementCreateRequest: Codable {
 				}
 			}
 
-			public init(territories: Territories, app: App) {
-				self.territories = territories
+			public init(app: App, territories: Territories) {
 				self.app = app
+				self.territories = territories
 			}
 
 			public init(from decoder: Decoder) throws {
 				let values = try decoder.container(keyedBy: StringCodingKey.self)
-				self.territories = try values.decode(Territories.self, forKey: "territories")
 				self.app = try values.decode(App.self, forKey: "app")
+				self.territories = try values.decode(Territories.self, forKey: "territories")
 			}
 
 			public func encode(to encoder: Encoder) throws {
 				var values = encoder.container(keyedBy: StringCodingKey.self)
-				try values.encode(territories, forKey: "territories")
 				try values.encode(app, forKey: "app")
+				try values.encode(territories, forKey: "territories")
 			}
 		}
 
-		public enum `Type`: String, Codable, CaseIterable {
-			case endUserLicenseAgreements
-		}
-
-		public struct Attributes: Codable {
-			public var agreementText: String
-
-			public init(agreementText: String) {
-				self.agreementText = agreementText
-			}
-
-			public init(from decoder: Decoder) throws {
-				let values = try decoder.container(keyedBy: StringCodingKey.self)
-				self.agreementText = try values.decode(String.self, forKey: "agreementText")
-			}
-
-			public func encode(to encoder: Encoder) throws {
-				var values = encoder.container(keyedBy: StringCodingKey.self)
-				try values.encode(agreementText, forKey: "agreementText")
-			}
-		}
-
-		public init(relationships: Relationships, type: `Type`, attributes: Attributes) {
-			self.relationships = relationships
-			self.type = type
+		public init(attributes: Attributes, type: `Type`, relationships: Relationships) {
 			self.attributes = attributes
+			self.type = type
+			self.relationships = relationships
 		}
 
 		public init(from decoder: Decoder) throws {
 			let values = try decoder.container(keyedBy: StringCodingKey.self)
-			self.relationships = try values.decode(Relationships.self, forKey: "relationships")
-			self.type = try values.decode(`Type`.self, forKey: "type")
 			self.attributes = try values.decode(Attributes.self, forKey: "attributes")
+			self.type = try values.decode(`Type`.self, forKey: "type")
+			self.relationships = try values.decode(Relationships.self, forKey: "relationships")
 		}
 
 		public func encode(to encoder: Encoder) throws {
 			var values = encoder.container(keyedBy: StringCodingKey.self)
-			try values.encode(relationships, forKey: "relationships")
-			try values.encode(type, forKey: "type")
 			try values.encode(attributes, forKey: "attributes")
+			try values.encode(type, forKey: "type")
+			try values.encode(relationships, forKey: "relationships")
 		}
 	}
 

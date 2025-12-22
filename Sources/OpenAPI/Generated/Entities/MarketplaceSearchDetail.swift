@@ -4,14 +4,10 @@
 import Foundation
 
 public struct MarketplaceSearchDetail: Codable, Identifiable {
-	public var type: `Type`
-	public var links: ResourceLinks?
 	public var attributes: Attributes?
+	public var links: ResourceLinks?
 	public var id: String
-
-	public enum `Type`: String, Codable, CaseIterable {
-		case marketplaceSearchDetails
-	}
+	public var type: `Type`
 
 	public struct Attributes: Codable {
 		public var catalogURL: URL?
@@ -31,26 +27,30 @@ public struct MarketplaceSearchDetail: Codable, Identifiable {
 		}
 	}
 
-	public init(type: `Type`, links: ResourceLinks? = nil, attributes: Attributes? = nil, id: String) {
-		self.type = type
-		self.links = links
+	public enum `Type`: String, Codable, CaseIterable {
+		case marketplaceSearchDetails
+	}
+
+	public init(attributes: Attributes? = nil, links: ResourceLinks? = nil, id: String, type: `Type`) {
 		self.attributes = attributes
+		self.links = links
 		self.id = id
+		self.type = type
 	}
 
 	public init(from decoder: Decoder) throws {
 		let values = try decoder.container(keyedBy: StringCodingKey.self)
-		self.type = try values.decode(`Type`.self, forKey: "type")
-		self.links = try values.decodeIfPresent(ResourceLinks.self, forKey: "links")
 		self.attributes = try values.decodeIfPresent(Attributes.self, forKey: "attributes")
+		self.links = try values.decodeIfPresent(ResourceLinks.self, forKey: "links")
 		self.id = try values.decode(String.self, forKey: "id")
+		self.type = try values.decode(`Type`.self, forKey: "type")
 	}
 
 	public func encode(to encoder: Encoder) throws {
 		var values = encoder.container(keyedBy: StringCodingKey.self)
-		try values.encode(type, forKey: "type")
-		try values.encodeIfPresent(links, forKey: "links")
 		try values.encodeIfPresent(attributes, forKey: "attributes")
+		try values.encodeIfPresent(links, forKey: "links")
 		try values.encode(id, forKey: "id")
+		try values.encode(type, forKey: "type")
 	}
 }

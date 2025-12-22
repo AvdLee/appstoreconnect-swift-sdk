@@ -6,21 +6,21 @@ import Foundation
 public struct AccessibilityDeclaration: Codable, Identifiable {
 	public var id: String
 	public var attributes: Attributes?
-	public var type: `Type`
 	public var links: ResourceLinks?
+	public var type: `Type`
 
 	public struct Attributes: Codable {
-		public var isSupportsDifferentiateWithoutColorAlone: Bool?
+		public var isSupportsLargerText: Bool?
 		public var isSupportsVoiceover: Bool?
-		public var isSupportsDarkInterface: Bool?
-		public var isSupportsReducedMotion: Bool?
 		public var state: State?
+		public var isSupportsDarkInterface: Bool?
+		public var isSupportsSufficientContrast: Bool?
 		public var deviceFamily: DeviceFamily?
-		public var isSupportsCaptions: Bool?
+		public var isSupportsDifferentiateWithoutColorAlone: Bool?
 		public var isSupportsAudioDescriptions: Bool?
 		public var isSupportsVoiceControl: Bool?
-		public var isSupportsSufficientContrast: Bool?
-		public var isSupportsLargerText: Bool?
+		public var isSupportsCaptions: Bool?
+		public var isSupportsReducedMotion: Bool?
 
 		public enum State: String, Codable, CaseIterable {
 			case draft = "DRAFT"
@@ -28,48 +28,48 @@ public struct AccessibilityDeclaration: Codable, Identifiable {
 			case replaced = "REPLACED"
 		}
 
-		public init(isSupportsDifferentiateWithoutColorAlone: Bool? = nil, isSupportsVoiceover: Bool? = nil, isSupportsDarkInterface: Bool? = nil, isSupportsReducedMotion: Bool? = nil, state: State? = nil, deviceFamily: DeviceFamily? = nil, isSupportsCaptions: Bool? = nil, isSupportsAudioDescriptions: Bool? = nil, isSupportsVoiceControl: Bool? = nil, isSupportsSufficientContrast: Bool? = nil, isSupportsLargerText: Bool? = nil) {
-			self.isSupportsDifferentiateWithoutColorAlone = isSupportsDifferentiateWithoutColorAlone
+		public init(isSupportsLargerText: Bool? = nil, isSupportsVoiceover: Bool? = nil, state: State? = nil, isSupportsDarkInterface: Bool? = nil, isSupportsSufficientContrast: Bool? = nil, deviceFamily: DeviceFamily? = nil, isSupportsDifferentiateWithoutColorAlone: Bool? = nil, isSupportsAudioDescriptions: Bool? = nil, isSupportsVoiceControl: Bool? = nil, isSupportsCaptions: Bool? = nil, isSupportsReducedMotion: Bool? = nil) {
+			self.isSupportsLargerText = isSupportsLargerText
 			self.isSupportsVoiceover = isSupportsVoiceover
-			self.isSupportsDarkInterface = isSupportsDarkInterface
-			self.isSupportsReducedMotion = isSupportsReducedMotion
 			self.state = state
+			self.isSupportsDarkInterface = isSupportsDarkInterface
+			self.isSupportsSufficientContrast = isSupportsSufficientContrast
 			self.deviceFamily = deviceFamily
-			self.isSupportsCaptions = isSupportsCaptions
+			self.isSupportsDifferentiateWithoutColorAlone = isSupportsDifferentiateWithoutColorAlone
 			self.isSupportsAudioDescriptions = isSupportsAudioDescriptions
 			self.isSupportsVoiceControl = isSupportsVoiceControl
-			self.isSupportsSufficientContrast = isSupportsSufficientContrast
-			self.isSupportsLargerText = isSupportsLargerText
+			self.isSupportsCaptions = isSupportsCaptions
+			self.isSupportsReducedMotion = isSupportsReducedMotion
 		}
 
 		public init(from decoder: Decoder) throws {
 			let values = try decoder.container(keyedBy: StringCodingKey.self)
-			self.isSupportsDifferentiateWithoutColorAlone = try values.decodeIfPresent(Bool.self, forKey: "supportsDifferentiateWithoutColorAlone")
+			self.isSupportsLargerText = try values.decodeIfPresent(Bool.self, forKey: "supportsLargerText")
 			self.isSupportsVoiceover = try values.decodeIfPresent(Bool.self, forKey: "supportsVoiceover")
-			self.isSupportsDarkInterface = try values.decodeIfPresent(Bool.self, forKey: "supportsDarkInterface")
-			self.isSupportsReducedMotion = try values.decodeIfPresent(Bool.self, forKey: "supportsReducedMotion")
 			self.state = try values.decodeIfPresent(State.self, forKey: "state")
+			self.isSupportsDarkInterface = try values.decodeIfPresent(Bool.self, forKey: "supportsDarkInterface")
+			self.isSupportsSufficientContrast = try values.decodeIfPresent(Bool.self, forKey: "supportsSufficientContrast")
 			self.deviceFamily = try values.decodeIfPresent(DeviceFamily.self, forKey: "deviceFamily")
-			self.isSupportsCaptions = try values.decodeIfPresent(Bool.self, forKey: "supportsCaptions")
+			self.isSupportsDifferentiateWithoutColorAlone = try values.decodeIfPresent(Bool.self, forKey: "supportsDifferentiateWithoutColorAlone")
 			self.isSupportsAudioDescriptions = try values.decodeIfPresent(Bool.self, forKey: "supportsAudioDescriptions")
 			self.isSupportsVoiceControl = try values.decodeIfPresent(Bool.self, forKey: "supportsVoiceControl")
-			self.isSupportsSufficientContrast = try values.decodeIfPresent(Bool.self, forKey: "supportsSufficientContrast")
-			self.isSupportsLargerText = try values.decodeIfPresent(Bool.self, forKey: "supportsLargerText")
+			self.isSupportsCaptions = try values.decodeIfPresent(Bool.self, forKey: "supportsCaptions")
+			self.isSupportsReducedMotion = try values.decodeIfPresent(Bool.self, forKey: "supportsReducedMotion")
 		}
 
 		public func encode(to encoder: Encoder) throws {
 			var values = encoder.container(keyedBy: StringCodingKey.self)
-			try values.encodeIfPresent(isSupportsDifferentiateWithoutColorAlone, forKey: "supportsDifferentiateWithoutColorAlone")
+			try values.encodeIfPresent(isSupportsLargerText, forKey: "supportsLargerText")
 			try values.encodeIfPresent(isSupportsVoiceover, forKey: "supportsVoiceover")
-			try values.encodeIfPresent(isSupportsDarkInterface, forKey: "supportsDarkInterface")
-			try values.encodeIfPresent(isSupportsReducedMotion, forKey: "supportsReducedMotion")
 			try values.encodeIfPresent(state, forKey: "state")
+			try values.encodeIfPresent(isSupportsDarkInterface, forKey: "supportsDarkInterface")
+			try values.encodeIfPresent(isSupportsSufficientContrast, forKey: "supportsSufficientContrast")
 			try values.encodeIfPresent(deviceFamily, forKey: "deviceFamily")
-			try values.encodeIfPresent(isSupportsCaptions, forKey: "supportsCaptions")
+			try values.encodeIfPresent(isSupportsDifferentiateWithoutColorAlone, forKey: "supportsDifferentiateWithoutColorAlone")
 			try values.encodeIfPresent(isSupportsAudioDescriptions, forKey: "supportsAudioDescriptions")
 			try values.encodeIfPresent(isSupportsVoiceControl, forKey: "supportsVoiceControl")
-			try values.encodeIfPresent(isSupportsSufficientContrast, forKey: "supportsSufficientContrast")
-			try values.encodeIfPresent(isSupportsLargerText, forKey: "supportsLargerText")
+			try values.encodeIfPresent(isSupportsCaptions, forKey: "supportsCaptions")
+			try values.encodeIfPresent(isSupportsReducedMotion, forKey: "supportsReducedMotion")
 		}
 	}
 
@@ -77,26 +77,26 @@ public struct AccessibilityDeclaration: Codable, Identifiable {
 		case accessibilityDeclarations
 	}
 
-	public init(id: String, attributes: Attributes? = nil, type: `Type`, links: ResourceLinks? = nil) {
+	public init(id: String, attributes: Attributes? = nil, links: ResourceLinks? = nil, type: `Type`) {
 		self.id = id
 		self.attributes = attributes
-		self.type = type
 		self.links = links
+		self.type = type
 	}
 
 	public init(from decoder: Decoder) throws {
 		let values = try decoder.container(keyedBy: StringCodingKey.self)
 		self.id = try values.decode(String.self, forKey: "id")
 		self.attributes = try values.decodeIfPresent(Attributes.self, forKey: "attributes")
-		self.type = try values.decode(`Type`.self, forKey: "type")
 		self.links = try values.decodeIfPresent(ResourceLinks.self, forKey: "links")
+		self.type = try values.decode(`Type`.self, forKey: "type")
 	}
 
 	public func encode(to encoder: Encoder) throws {
 		var values = encoder.container(keyedBy: StringCodingKey.self)
 		try values.encode(id, forKey: "id")
 		try values.encodeIfPresent(attributes, forKey: "attributes")
-		try values.encode(type, forKey: "type")
 		try values.encodeIfPresent(links, forKey: "links")
+		try values.encode(type, forKey: "type")
 	}
 }

@@ -1,6 +1,6 @@
 import Foundation
 import XCTest
-@testable import GeneratedPatching
+@testable import OpenAPIGeneratorCore
 
 final class GeneratedPatchingTests: XCTestCase {
     func testPatchesCiGitUserAvatarURLToString() throws {

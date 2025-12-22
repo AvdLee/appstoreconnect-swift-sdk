@@ -4,36 +4,10 @@
 import Foundation
 
 public struct AppCustomProductPageLocalizationInlineCreate: Codable, Identifiable {
-	public var attributes: Attributes
-	public var id: String?
-	public var type: `Type`
 	public var relationships: Relationships?
-
-	public struct Attributes: Codable {
-		public var promotionalText: String?
-		public var locale: String
-
-		public init(promotionalText: String? = nil, locale: String) {
-			self.promotionalText = promotionalText
-			self.locale = locale
-		}
-
-		public init(from decoder: Decoder) throws {
-			let values = try decoder.container(keyedBy: StringCodingKey.self)
-			self.promotionalText = try values.decodeIfPresent(String.self, forKey: "promotionalText")
-			self.locale = try values.decode(String.self, forKey: "locale")
-		}
-
-		public func encode(to encoder: Encoder) throws {
-			var values = encoder.container(keyedBy: StringCodingKey.self)
-			try values.encodeIfPresent(promotionalText, forKey: "promotionalText")
-			try values.encode(locale, forKey: "locale")
-		}
-	}
-
-	public enum `Type`: String, Codable, CaseIterable {
-		case appCustomProductPageLocalizations
-	}
+	public var attributes: Attributes
+	public var type: `Type`
+	public var id: String?
 
 	public struct Relationships: Codable {
 		public var appCustomProductPageVersion: AppCustomProductPageVersion?
@@ -97,26 +71,52 @@ public struct AppCustomProductPageLocalizationInlineCreate: Codable, Identifiabl
 		}
 	}
 
-	public init(attributes: Attributes, id: String? = nil, type: `Type`, relationships: Relationships? = nil) {
-		self.attributes = attributes
-		self.id = id
-		self.type = type
+	public struct Attributes: Codable {
+		public var promotionalText: String?
+		public var locale: String
+
+		public init(promotionalText: String? = nil, locale: String) {
+			self.promotionalText = promotionalText
+			self.locale = locale
+		}
+
+		public init(from decoder: Decoder) throws {
+			let values = try decoder.container(keyedBy: StringCodingKey.self)
+			self.promotionalText = try values.decodeIfPresent(String.self, forKey: "promotionalText")
+			self.locale = try values.decode(String.self, forKey: "locale")
+		}
+
+		public func encode(to encoder: Encoder) throws {
+			var values = encoder.container(keyedBy: StringCodingKey.self)
+			try values.encodeIfPresent(promotionalText, forKey: "promotionalText")
+			try values.encode(locale, forKey: "locale")
+		}
+	}
+
+	public enum `Type`: String, Codable, CaseIterable {
+		case appCustomProductPageLocalizations
+	}
+
+	public init(relationships: Relationships? = nil, attributes: Attributes, type: `Type`, id: String? = nil) {
 		self.relationships = relationships
+		self.attributes = attributes
+		self.type = type
+		self.id = id
 	}
 
 	public init(from decoder: Decoder) throws {
 		let values = try decoder.container(keyedBy: StringCodingKey.self)
-		self.attributes = try values.decode(Attributes.self, forKey: "attributes")
-		self.id = try values.decodeIfPresent(String.self, forKey: "id")
-		self.type = try values.decode(`Type`.self, forKey: "type")
 		self.relationships = try values.decodeIfPresent(Relationships.self, forKey: "relationships")
+		self.attributes = try values.decode(Attributes.self, forKey: "attributes")
+		self.type = try values.decode(`Type`.self, forKey: "type")
+		self.id = try values.decodeIfPresent(String.self, forKey: "id")
 	}
 
 	public func encode(to encoder: Encoder) throws {
 		var values = encoder.container(keyedBy: StringCodingKey.self)
-		try values.encode(attributes, forKey: "attributes")
-		try values.encodeIfPresent(id, forKey: "id")
-		try values.encode(type, forKey: "type")
 		try values.encodeIfPresent(relationships, forKey: "relationships")
+		try values.encode(attributes, forKey: "attributes")
+		try values.encode(type, forKey: "type")
+		try values.encodeIfPresent(id, forKey: "id")
 	}
 }

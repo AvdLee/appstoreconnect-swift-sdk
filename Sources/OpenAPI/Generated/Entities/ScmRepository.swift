@@ -4,17 +4,95 @@
 import Foundation
 
 public struct ScmRepository: Codable, Identifiable {
-	public var relationships: Relationships?
-	public var type: `Type`
-	public var id: String
 	public var attributes: Attributes?
+	public var relationships: Relationships?
+	public var id: String
+	public var type: `Type`
 	public var links: ResourceLinks?
 
+	public struct Attributes: Codable {
+		public var sshCloneURL: URL?
+		public var httpCloneURL: URL?
+		public var ownerName: String?
+		public var lastAccessedDate: Date?
+		public var repositoryName: String?
+
+		public init(sshCloneURL: URL? = nil, httpCloneURL: URL? = nil, ownerName: String? = nil, lastAccessedDate: Date? = nil, repositoryName: String? = nil) {
+			self.sshCloneURL = sshCloneURL
+			self.httpCloneURL = httpCloneURL
+			self.ownerName = ownerName
+			self.lastAccessedDate = lastAccessedDate
+			self.repositoryName = repositoryName
+		}
+
+		public init(from decoder: Decoder) throws {
+			let values = try decoder.container(keyedBy: StringCodingKey.self)
+			self.sshCloneURL = try values.decodeIfPresent(URL.self, forKey: "sshCloneUrl")
+			self.httpCloneURL = try values.decodeIfPresent(URL.self, forKey: "httpCloneUrl")
+			self.ownerName = try values.decodeIfPresent(String.self, forKey: "ownerName")
+			self.lastAccessedDate = try values.decodeIfPresent(Date.self, forKey: "lastAccessedDate")
+			self.repositoryName = try values.decodeIfPresent(String.self, forKey: "repositoryName")
+		}
+
+		public func encode(to encoder: Encoder) throws {
+			var values = encoder.container(keyedBy: StringCodingKey.self)
+			try values.encodeIfPresent(sshCloneURL, forKey: "sshCloneUrl")
+			try values.encodeIfPresent(httpCloneURL, forKey: "httpCloneUrl")
+			try values.encodeIfPresent(ownerName, forKey: "ownerName")
+			try values.encodeIfPresent(lastAccessedDate, forKey: "lastAccessedDate")
+			try values.encodeIfPresent(repositoryName, forKey: "repositoryName")
+		}
+	}
+
 	public struct Relationships: Codable {
+		public var defaultBranch: DefaultBranch?
 		public var pullRequests: PullRequests?
 		public var gitReferences: GitReferences?
 		public var scmProvider: ScmProvider?
-		public var defaultBranch: DefaultBranch?
+
+		public struct DefaultBranch: Codable {
+			public var data: Data?
+
+			public struct Data: Codable, Identifiable {
+				public var type: `Type`
+				public var id: String
+
+				public enum `Type`: String, Codable, CaseIterable {
+					case scmGitReferences
+				}
+
+				public init(type: `Type`, id: String) {
+					self.type = type
+					self.id = id
+				}
+
+				public init(from decoder: Decoder) throws {
+					let values = try decoder.container(keyedBy: StringCodingKey.self)
+					self.type = try values.decode(`Type`.self, forKey: "type")
+					self.id = try values.decode(String.self, forKey: "id")
+				}
+
+				public func encode(to encoder: Encoder) throws {
+					var values = encoder.container(keyedBy: StringCodingKey.self)
+					try values.encode(type, forKey: "type")
+					try values.encode(id, forKey: "id")
+				}
+			}
+
+			public init(data: Data? = nil) {
+				self.data = data
+			}
+
+			public init(from decoder: Decoder) throws {
+				let values = try decoder.container(keyedBy: StringCodingKey.self)
+				self.data = try values.decodeIfPresent(Data.self, forKey: "data")
+			}
+
+			public func encode(to encoder: Encoder) throws {
+				var values = encoder.container(keyedBy: StringCodingKey.self)
+				try values.encodeIfPresent(data, forKey: "data")
+			}
+		}
 
 		public struct PullRequests: Codable {
 			public var links: RelationshipLinks?
@@ -96,71 +174,27 @@ public struct ScmRepository: Codable, Identifiable {
 			}
 		}
 
-		public struct DefaultBranch: Codable {
-			public var data: Data?
-
-			public struct Data: Codable, Identifiable {
-				public var id: String
-				public var type: `Type`
-
-				public enum `Type`: String, Codable, CaseIterable {
-					case scmGitReferences
-				}
-
-				public init(id: String, type: `Type`) {
-					self.id = id
-					self.type = type
-				}
-
-				public init(from decoder: Decoder) throws {
-					let values = try decoder.container(keyedBy: StringCodingKey.self)
-					self.id = try values.decode(String.self, forKey: "id")
-					self.type = try values.decode(`Type`.self, forKey: "type")
-				}
-
-				public func encode(to encoder: Encoder) throws {
-					var values = encoder.container(keyedBy: StringCodingKey.self)
-					try values.encode(id, forKey: "id")
-					try values.encode(type, forKey: "type")
-				}
-			}
-
-			public init(data: Data? = nil) {
-				self.data = data
-			}
-
-			public init(from decoder: Decoder) throws {
-				let values = try decoder.container(keyedBy: StringCodingKey.self)
-				self.data = try values.decodeIfPresent(Data.self, forKey: "data")
-			}
-
-			public func encode(to encoder: Encoder) throws {
-				var values = encoder.container(keyedBy: StringCodingKey.self)
-				try values.encodeIfPresent(data, forKey: "data")
-			}
-		}
-
-		public init(pullRequests: PullRequests? = nil, gitReferences: GitReferences? = nil, scmProvider: ScmProvider? = nil, defaultBranch: DefaultBranch? = nil) {
+		public init(defaultBranch: DefaultBranch? = nil, pullRequests: PullRequests? = nil, gitReferences: GitReferences? = nil, scmProvider: ScmProvider? = nil) {
+			self.defaultBranch = defaultBranch
 			self.pullRequests = pullRequests
 			self.gitReferences = gitReferences
 			self.scmProvider = scmProvider
-			self.defaultBranch = defaultBranch
 		}
 
 		public init(from decoder: Decoder) throws {
 			let values = try decoder.container(keyedBy: StringCodingKey.self)
+			self.defaultBranch = try values.decodeIfPresent(DefaultBranch.self, forKey: "defaultBranch")
 			self.pullRequests = try values.decodeIfPresent(PullRequests.self, forKey: "pullRequests")
 			self.gitReferences = try values.decodeIfPresent(GitReferences.self, forKey: "gitReferences")
 			self.scmProvider = try values.decodeIfPresent(ScmProvider.self, forKey: "scmProvider")
-			self.defaultBranch = try values.decodeIfPresent(DefaultBranch.self, forKey: "defaultBranch")
 		}
 
 		public func encode(to encoder: Encoder) throws {
 			var values = encoder.container(keyedBy: StringCodingKey.self)
+			try values.encodeIfPresent(defaultBranch, forKey: "defaultBranch")
 			try values.encodeIfPresent(pullRequests, forKey: "pullRequests")
 			try values.encodeIfPresent(gitReferences, forKey: "gitReferences")
 			try values.encodeIfPresent(scmProvider, forKey: "scmProvider")
-			try values.encodeIfPresent(defaultBranch, forKey: "defaultBranch")
 		}
 	}
 
@@ -168,63 +202,29 @@ public struct ScmRepository: Codable, Identifiable {
 		case scmRepositories
 	}
 
-	public struct Attributes: Codable {
-		public var httpCloneURL: URL?
-		public var lastAccessedDate: Date?
-		public var sshCloneURL: URL?
-		public var ownerName: String?
-		public var repositoryName: String?
-
-		public init(httpCloneURL: URL? = nil, lastAccessedDate: Date? = nil, sshCloneURL: URL? = nil, ownerName: String? = nil, repositoryName: String? = nil) {
-			self.httpCloneURL = httpCloneURL
-			self.lastAccessedDate = lastAccessedDate
-			self.sshCloneURL = sshCloneURL
-			self.ownerName = ownerName
-			self.repositoryName = repositoryName
-		}
-
-		public init(from decoder: Decoder) throws {
-			let values = try decoder.container(keyedBy: StringCodingKey.self)
-			self.httpCloneURL = try values.decodeIfPresent(URL.self, forKey: "httpCloneUrl")
-			self.lastAccessedDate = try values.decodeIfPresent(Date.self, forKey: "lastAccessedDate")
-			self.sshCloneURL = try values.decodeIfPresent(URL.self, forKey: "sshCloneUrl")
-			self.ownerName = try values.decodeIfPresent(String.self, forKey: "ownerName")
-			self.repositoryName = try values.decodeIfPresent(String.self, forKey: "repositoryName")
-		}
-
-		public func encode(to encoder: Encoder) throws {
-			var values = encoder.container(keyedBy: StringCodingKey.self)
-			try values.encodeIfPresent(httpCloneURL, forKey: "httpCloneUrl")
-			try values.encodeIfPresent(lastAccessedDate, forKey: "lastAccessedDate")
-			try values.encodeIfPresent(sshCloneURL, forKey: "sshCloneUrl")
-			try values.encodeIfPresent(ownerName, forKey: "ownerName")
-			try values.encodeIfPresent(repositoryName, forKey: "repositoryName")
-		}
-	}
-
-	public init(relationships: Relationships? = nil, type: `Type`, id: String, attributes: Attributes? = nil, links: ResourceLinks? = nil) {
-		self.relationships = relationships
-		self.type = type
-		self.id = id
+	public init(attributes: Attributes? = nil, relationships: Relationships? = nil, id: String, type: `Type`, links: ResourceLinks? = nil) {
 		self.attributes = attributes
+		self.relationships = relationships
+		self.id = id
+		self.type = type
 		self.links = links
 	}
 
 	public init(from decoder: Decoder) throws {
 		let values = try decoder.container(keyedBy: StringCodingKey.self)
-		self.relationships = try values.decodeIfPresent(Relationships.self, forKey: "relationships")
-		self.type = try values.decode(`Type`.self, forKey: "type")
-		self.id = try values.decode(String.self, forKey: "id")
 		self.attributes = try values.decodeIfPresent(Attributes.self, forKey: "attributes")
+		self.relationships = try values.decodeIfPresent(Relationships.self, forKey: "relationships")
+		self.id = try values.decode(String.self, forKey: "id")
+		self.type = try values.decode(`Type`.self, forKey: "type")
 		self.links = try values.decodeIfPresent(ResourceLinks.self, forKey: "links")
 	}
 
 	public func encode(to encoder: Encoder) throws {
 		var values = encoder.container(keyedBy: StringCodingKey.self)
-		try values.encodeIfPresent(relationships, forKey: "relationships")
-		try values.encode(type, forKey: "type")
-		try values.encode(id, forKey: "id")
 		try values.encodeIfPresent(attributes, forKey: "attributes")
+		try values.encodeIfPresent(relationships, forKey: "relationships")
+		try values.encode(id, forKey: "id")
+		try values.encode(type, forKey: "type")
 		try values.encodeIfPresent(links, forKey: "links")
 	}
 }

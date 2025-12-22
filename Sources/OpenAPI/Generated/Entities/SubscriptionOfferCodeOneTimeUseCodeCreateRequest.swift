@@ -12,27 +12,27 @@ public struct SubscriptionOfferCodeOneTimeUseCodeCreateRequest: Codable {
 		public var type: `Type`
 
 		public struct Attributes: Codable {
-			public var environment: OfferCodeEnvironment?
 			public var numberOfCodes: Int
+			public var environment: OfferCodeEnvironment?
 			public var expirationDate: String
 
-			public init(environment: OfferCodeEnvironment? = nil, numberOfCodes: Int, expirationDate: String) {
-				self.environment = environment
+			public init(numberOfCodes: Int, environment: OfferCodeEnvironment? = nil, expirationDate: String) {
 				self.numberOfCodes = numberOfCodes
+				self.environment = environment
 				self.expirationDate = expirationDate
 			}
 
 			public init(from decoder: Decoder) throws {
 				let values = try decoder.container(keyedBy: StringCodingKey.self)
-				self.environment = try values.decodeIfPresent(OfferCodeEnvironment.self, forKey: "environment")
 				self.numberOfCodes = try values.decode(Int.self, forKey: "numberOfCodes")
+				self.environment = try values.decodeIfPresent(OfferCodeEnvironment.self, forKey: "environment")
 				self.expirationDate = try values.decode(String.self, forKey: "expirationDate")
 			}
 
 			public func encode(to encoder: Encoder) throws {
 				var values = encoder.container(keyedBy: StringCodingKey.self)
-				try values.encodeIfPresent(environment, forKey: "environment")
 				try values.encode(numberOfCodes, forKey: "numberOfCodes")
+				try values.encodeIfPresent(environment, forKey: "environment")
 				try values.encode(expirationDate, forKey: "expirationDate")
 			}
 		}

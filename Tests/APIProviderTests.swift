@@ -71,10 +71,10 @@ final class APIProviderTests: XCTestCase {
         let errorResponse = ErrorResponse(errors: [
             .init(
                 id: UUID().uuidString,
-                status: "404",
-                code: "NOT_FOUND",
+                detail: "There is no resource of type 'builds' with id 'app.appId'",
                 title: "The specified resource does not exist",
-                detail: "There is no resource of type 'builds' with id 'app.appId'"
+                status: "404",
+                code: "NOT_FOUND"
             )
         ])
         let responseData = try JSONEncoder().encode(errorResponse)

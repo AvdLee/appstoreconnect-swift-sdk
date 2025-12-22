@@ -4,8 +4,8 @@
 import Foundation
 
 public struct SandboxTesterV2: Codable, Identifiable {
-	public var id: String
 	public var type: `Type`
+	public var id: String
 	public var links: ResourceLinks?
 	public var attributes: Attributes?
 
@@ -14,13 +14,13 @@ public struct SandboxTesterV2: Codable, Identifiable {
 	}
 
 	public struct Attributes: Codable {
-		public var isInterruptPurchases: Bool?
-		public var subscriptionRenewalRate: SubscriptionRenewalRate?
-		public var acAccountName: String?
 		public var territory: TerritoryCode?
-		public var lastName: String?
+		public var acAccountName: String?
+		public var subscriptionRenewalRate: SubscriptionRenewalRate?
+		public var isInterruptPurchases: Bool?
 		public var firstName: String?
 		public var isApplePayCompatible: Bool?
+		public var lastName: String?
 
 		public enum SubscriptionRenewalRate: String, Codable, CaseIterable {
 			case monthlyRenewalEveryOneHour = "MONTHLY_RENEWAL_EVERY_ONE_HOUR"
@@ -30,58 +30,58 @@ public struct SandboxTesterV2: Codable, Identifiable {
 			case monthlyRenewalEveryThreeMinutes = "MONTHLY_RENEWAL_EVERY_THREE_MINUTES"
 		}
 
-		public init(isInterruptPurchases: Bool? = nil, subscriptionRenewalRate: SubscriptionRenewalRate? = nil, acAccountName: String? = nil, territory: TerritoryCode? = nil, lastName: String? = nil, firstName: String? = nil, isApplePayCompatible: Bool? = nil) {
-			self.isInterruptPurchases = isInterruptPurchases
-			self.subscriptionRenewalRate = subscriptionRenewalRate
-			self.acAccountName = acAccountName
+		public init(territory: TerritoryCode? = nil, acAccountName: String? = nil, subscriptionRenewalRate: SubscriptionRenewalRate? = nil, isInterruptPurchases: Bool? = nil, firstName: String? = nil, isApplePayCompatible: Bool? = nil, lastName: String? = nil) {
 			self.territory = territory
-			self.lastName = lastName
+			self.acAccountName = acAccountName
+			self.subscriptionRenewalRate = subscriptionRenewalRate
+			self.isInterruptPurchases = isInterruptPurchases
 			self.firstName = firstName
 			self.isApplePayCompatible = isApplePayCompatible
+			self.lastName = lastName
 		}
 
 		public init(from decoder: Decoder) throws {
 			let values = try decoder.container(keyedBy: StringCodingKey.self)
-			self.isInterruptPurchases = try values.decodeIfPresent(Bool.self, forKey: "interruptPurchases")
-			self.subscriptionRenewalRate = try values.decodeIfPresent(SubscriptionRenewalRate.self, forKey: "subscriptionRenewalRate")
-			self.acAccountName = try values.decodeIfPresent(String.self, forKey: "acAccountName")
 			self.territory = try values.decodeIfPresent(TerritoryCode.self, forKey: "territory")
-			self.lastName = try values.decodeIfPresent(String.self, forKey: "lastName")
+			self.acAccountName = try values.decodeIfPresent(String.self, forKey: "acAccountName")
+			self.subscriptionRenewalRate = try values.decodeIfPresent(SubscriptionRenewalRate.self, forKey: "subscriptionRenewalRate")
+			self.isInterruptPurchases = try values.decodeIfPresent(Bool.self, forKey: "interruptPurchases")
 			self.firstName = try values.decodeIfPresent(String.self, forKey: "firstName")
 			self.isApplePayCompatible = try values.decodeIfPresent(Bool.self, forKey: "applePayCompatible")
+			self.lastName = try values.decodeIfPresent(String.self, forKey: "lastName")
 		}
 
 		public func encode(to encoder: Encoder) throws {
 			var values = encoder.container(keyedBy: StringCodingKey.self)
-			try values.encodeIfPresent(isInterruptPurchases, forKey: "interruptPurchases")
-			try values.encodeIfPresent(subscriptionRenewalRate, forKey: "subscriptionRenewalRate")
-			try values.encodeIfPresent(acAccountName, forKey: "acAccountName")
 			try values.encodeIfPresent(territory, forKey: "territory")
-			try values.encodeIfPresent(lastName, forKey: "lastName")
+			try values.encodeIfPresent(acAccountName, forKey: "acAccountName")
+			try values.encodeIfPresent(subscriptionRenewalRate, forKey: "subscriptionRenewalRate")
+			try values.encodeIfPresent(isInterruptPurchases, forKey: "interruptPurchases")
 			try values.encodeIfPresent(firstName, forKey: "firstName")
 			try values.encodeIfPresent(isApplePayCompatible, forKey: "applePayCompatible")
+			try values.encodeIfPresent(lastName, forKey: "lastName")
 		}
 	}
 
-	public init(id: String, type: `Type`, links: ResourceLinks? = nil, attributes: Attributes? = nil) {
-		self.id = id
+	public init(type: `Type`, id: String, links: ResourceLinks? = nil, attributes: Attributes? = nil) {
 		self.type = type
+		self.id = id
 		self.links = links
 		self.attributes = attributes
 	}
 
 	public init(from decoder: Decoder) throws {
 		let values = try decoder.container(keyedBy: StringCodingKey.self)
-		self.id = try values.decode(String.self, forKey: "id")
 		self.type = try values.decode(`Type`.self, forKey: "type")
+		self.id = try values.decode(String.self, forKey: "id")
 		self.links = try values.decodeIfPresent(ResourceLinks.self, forKey: "links")
 		self.attributes = try values.decodeIfPresent(Attributes.self, forKey: "attributes")
 	}
 
 	public func encode(to encoder: Encoder) throws {
 		var values = encoder.container(keyedBy: StringCodingKey.self)
-		try values.encode(id, forKey: "id")
 		try values.encode(type, forKey: "type")
+		try values.encode(id, forKey: "id")
 		try values.encodeIfPresent(links, forKey: "links")
 		try values.encodeIfPresent(attributes, forKey: "attributes")
 	}

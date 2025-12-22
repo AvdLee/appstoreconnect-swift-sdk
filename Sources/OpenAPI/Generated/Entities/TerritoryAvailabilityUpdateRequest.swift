@@ -12,27 +12,27 @@ public struct TerritoryAvailabilityUpdateRequest: Codable {
 		public var type: `Type`
 
 		public struct Attributes: Codable {
-			public var isAvailable: Bool?
 			public var isPreOrderEnabled: Bool?
+			public var isAvailable: Bool?
 			public var releaseDate: String?
 
-			public init(isAvailable: Bool? = nil, isPreOrderEnabled: Bool? = nil, releaseDate: String? = nil) {
-				self.isAvailable = isAvailable
+			public init(isPreOrderEnabled: Bool? = nil, isAvailable: Bool? = nil, releaseDate: String? = nil) {
 				self.isPreOrderEnabled = isPreOrderEnabled
+				self.isAvailable = isAvailable
 				self.releaseDate = releaseDate
 			}
 
 			public init(from decoder: Decoder) throws {
 				let values = try decoder.container(keyedBy: StringCodingKey.self)
-				self.isAvailable = try values.decodeIfPresent(Bool.self, forKey: "available")
 				self.isPreOrderEnabled = try values.decodeIfPresent(Bool.self, forKey: "preOrderEnabled")
+				self.isAvailable = try values.decodeIfPresent(Bool.self, forKey: "available")
 				self.releaseDate = try values.decodeIfPresent(String.self, forKey: "releaseDate")
 			}
 
 			public func encode(to encoder: Encoder) throws {
 				var values = encoder.container(keyedBy: StringCodingKey.self)
-				try values.encodeIfPresent(isAvailable, forKey: "available")
 				try values.encodeIfPresent(isPreOrderEnabled, forKey: "preOrderEnabled")
+				try values.encodeIfPresent(isAvailable, forKey: "available")
 				try values.encodeIfPresent(releaseDate, forKey: "releaseDate")
 			}
 		}

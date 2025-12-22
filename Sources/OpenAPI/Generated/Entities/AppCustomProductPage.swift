@@ -4,40 +4,14 @@
 import Foundation
 
 public struct AppCustomProductPage: Codable, Identifiable {
-	public var id: String
 	public var type: `Type`
-	public var attributes: Attributes?
+	public var id: String
 	public var links: ResourceLinks?
 	public var relationships: Relationships?
+	public var attributes: Attributes?
 
 	public enum `Type`: String, Codable, CaseIterable {
 		case appCustomProductPages
-	}
-
-	public struct Attributes: Codable {
-		public var name: String?
-		public var isVisible: Bool?
-		public var url: URL?
-
-		public init(name: String? = nil, isVisible: Bool? = nil, url: URL? = nil) {
-			self.name = name
-			self.isVisible = isVisible
-			self.url = url
-		}
-
-		public init(from decoder: Decoder) throws {
-			let values = try decoder.container(keyedBy: StringCodingKey.self)
-			self.name = try values.decodeIfPresent(String.self, forKey: "name")
-			self.isVisible = try values.decodeIfPresent(Bool.self, forKey: "visible")
-			self.url = try values.decodeIfPresent(URL.self, forKey: "url")
-		}
-
-		public func encode(to encoder: Encoder) throws {
-			var values = encoder.container(keyedBy: StringCodingKey.self)
-			try values.encodeIfPresent(name, forKey: "name")
-			try values.encodeIfPresent(isVisible, forKey: "visible")
-			try values.encodeIfPresent(url, forKey: "url")
-		}
 	}
 
 	public struct Relationships: Codable {
@@ -158,29 +132,55 @@ public struct AppCustomProductPage: Codable, Identifiable {
 		}
 	}
 
-	public init(id: String, type: `Type`, attributes: Attributes? = nil, links: ResourceLinks? = nil, relationships: Relationships? = nil) {
-		self.id = id
+	public struct Attributes: Codable {
+		public var name: String?
+		public var isVisible: Bool?
+		public var url: URL?
+
+		public init(name: String? = nil, isVisible: Bool? = nil, url: URL? = nil) {
+			self.name = name
+			self.isVisible = isVisible
+			self.url = url
+		}
+
+		public init(from decoder: Decoder) throws {
+			let values = try decoder.container(keyedBy: StringCodingKey.self)
+			self.name = try values.decodeIfPresent(String.self, forKey: "name")
+			self.isVisible = try values.decodeIfPresent(Bool.self, forKey: "visible")
+			self.url = try values.decodeIfPresent(URL.self, forKey: "url")
+		}
+
+		public func encode(to encoder: Encoder) throws {
+			var values = encoder.container(keyedBy: StringCodingKey.self)
+			try values.encodeIfPresent(name, forKey: "name")
+			try values.encodeIfPresent(isVisible, forKey: "visible")
+			try values.encodeIfPresent(url, forKey: "url")
+		}
+	}
+
+	public init(type: `Type`, id: String, links: ResourceLinks? = nil, relationships: Relationships? = nil, attributes: Attributes? = nil) {
 		self.type = type
-		self.attributes = attributes
+		self.id = id
 		self.links = links
 		self.relationships = relationships
+		self.attributes = attributes
 	}
 
 	public init(from decoder: Decoder) throws {
 		let values = try decoder.container(keyedBy: StringCodingKey.self)
-		self.id = try values.decode(String.self, forKey: "id")
 		self.type = try values.decode(`Type`.self, forKey: "type")
-		self.attributes = try values.decodeIfPresent(Attributes.self, forKey: "attributes")
+		self.id = try values.decode(String.self, forKey: "id")
 		self.links = try values.decodeIfPresent(ResourceLinks.self, forKey: "links")
 		self.relationships = try values.decodeIfPresent(Relationships.self, forKey: "relationships")
+		self.attributes = try values.decodeIfPresent(Attributes.self, forKey: "attributes")
 	}
 
 	public func encode(to encoder: Encoder) throws {
 		var values = encoder.container(keyedBy: StringCodingKey.self)
-		try values.encode(id, forKey: "id")
 		try values.encode(type, forKey: "type")
-		try values.encodeIfPresent(attributes, forKey: "attributes")
+		try values.encode(id, forKey: "id")
 		try values.encodeIfPresent(links, forKey: "links")
 		try values.encodeIfPresent(relationships, forKey: "relationships")
+		try values.encodeIfPresent(attributes, forKey: "attributes")
 	}
 }

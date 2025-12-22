@@ -12,28 +12,28 @@ public struct InAppPurchaseV2UpdateRequest: Codable {
 		public var id: String
 
 		public struct Attributes: Codable {
-			public var isFamilySharable: Bool?
-			public var reviewNote: String?
 			public var name: String?
+			public var reviewNote: String?
+			public var isFamilySharable: Bool?
 
-			public init(isFamilySharable: Bool? = nil, reviewNote: String? = nil, name: String? = nil) {
-				self.isFamilySharable = isFamilySharable
-				self.reviewNote = reviewNote
+			public init(name: String? = nil, reviewNote: String? = nil, isFamilySharable: Bool? = nil) {
 				self.name = name
+				self.reviewNote = reviewNote
+				self.isFamilySharable = isFamilySharable
 			}
 
 			public init(from decoder: Decoder) throws {
 				let values = try decoder.container(keyedBy: StringCodingKey.self)
-				self.isFamilySharable = try values.decodeIfPresent(Bool.self, forKey: "familySharable")
-				self.reviewNote = try values.decodeIfPresent(String.self, forKey: "reviewNote")
 				self.name = try values.decodeIfPresent(String.self, forKey: "name")
+				self.reviewNote = try values.decodeIfPresent(String.self, forKey: "reviewNote")
+				self.isFamilySharable = try values.decodeIfPresent(Bool.self, forKey: "familySharable")
 			}
 
 			public func encode(to encoder: Encoder) throws {
 				var values = encoder.container(keyedBy: StringCodingKey.self)
-				try values.encodeIfPresent(isFamilySharable, forKey: "familySharable")
-				try values.encodeIfPresent(reviewNote, forKey: "reviewNote")
 				try values.encodeIfPresent(name, forKey: "name")
+				try values.encodeIfPresent(reviewNote, forKey: "reviewNote")
+				try values.encodeIfPresent(isFamilySharable, forKey: "familySharable")
 			}
 		}
 

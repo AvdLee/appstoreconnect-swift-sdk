@@ -5,9 +5,9 @@ import Foundation
 
 public struct BackgroundAssetVersionsResponse: Codable {
 	public var links: PagedDocumentLinks
-	public var data: [BackgroundAssetVersion]
 	public var included: [IncludedItem]?
 	public var meta: PagingInformation?
+	public var data: [BackgroundAssetVersion]
 
 	public enum IncludedItem: Codable {
 		case backgroundAssetUploadFile(BackgroundAssetUploadFile)
@@ -52,26 +52,26 @@ public struct BackgroundAssetVersionsResponse: Codable {
 		}
 	}
 
-	public init(links: PagedDocumentLinks, data: [BackgroundAssetVersion], included: [IncludedItem]? = nil, meta: PagingInformation? = nil) {
+	public init(links: PagedDocumentLinks, included: [IncludedItem]? = nil, meta: PagingInformation? = nil, data: [BackgroundAssetVersion]) {
 		self.links = links
-		self.data = data
 		self.included = included
 		self.meta = meta
+		self.data = data
 	}
 
 	public init(from decoder: Decoder) throws {
 		let values = try decoder.container(keyedBy: StringCodingKey.self)
 		self.links = try values.decode(PagedDocumentLinks.self, forKey: "links")
-		self.data = try values.decode([BackgroundAssetVersion].self, forKey: "data")
 		self.included = try values.decodeIfPresent([IncludedItem].self, forKey: "included")
 		self.meta = try values.decodeIfPresent(PagingInformation.self, forKey: "meta")
+		self.data = try values.decode([BackgroundAssetVersion].self, forKey: "data")
 	}
 
 	public func encode(to encoder: Encoder) throws {
 		var values = encoder.container(keyedBy: StringCodingKey.self)
 		try values.encode(links, forKey: "links")
-		try values.encode(data, forKey: "data")
 		try values.encodeIfPresent(included, forKey: "included")
 		try values.encodeIfPresent(meta, forKey: "meta")
+		try values.encode(data, forKey: "data")
 	}
 }

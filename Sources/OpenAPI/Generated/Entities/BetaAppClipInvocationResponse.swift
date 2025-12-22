@@ -4,28 +4,28 @@
 import Foundation
 
 public struct BetaAppClipInvocationResponse: Codable {
-	public var links: DocumentLinks
+	public var included: [BetaAppClipInvocationLocalization]?
 	/// BetaAppClipInvocation
 	public var data: BetaAppClipInvocation
-	public var included: [BetaAppClipInvocationLocalization]?
+	public var links: DocumentLinks
 
-	public init(links: DocumentLinks, data: BetaAppClipInvocation, included: [BetaAppClipInvocationLocalization]? = nil) {
-		self.links = links
-		self.data = data
+	public init(included: [BetaAppClipInvocationLocalization]? = nil, data: BetaAppClipInvocation, links: DocumentLinks) {
 		self.included = included
+		self.data = data
+		self.links = links
 	}
 
 	public init(from decoder: Decoder) throws {
 		let values = try decoder.container(keyedBy: StringCodingKey.self)
-		self.links = try values.decode(DocumentLinks.self, forKey: "links")
-		self.data = try values.decode(BetaAppClipInvocation.self, forKey: "data")
 		self.included = try values.decodeIfPresent([BetaAppClipInvocationLocalization].self, forKey: "included")
+		self.data = try values.decode(BetaAppClipInvocation.self, forKey: "data")
+		self.links = try values.decode(DocumentLinks.self, forKey: "links")
 	}
 
 	public func encode(to encoder: Encoder) throws {
 		var values = encoder.container(keyedBy: StringCodingKey.self)
-		try values.encode(links, forKey: "links")
-		try values.encode(data, forKey: "data")
 		try values.encodeIfPresent(included, forKey: "included")
+		try values.encode(data, forKey: "data")
+		try values.encode(links, forKey: "links")
 	}
 }

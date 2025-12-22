@@ -5,9 +5,13 @@ import Foundation
 
 public struct GameCenterMatchmakingRuleSetTest: Codable, Identifiable {
 	public var id: String
-	public var attributes: Attributes?
 	public var type: `Type`
 	public var links: ResourceLinks?
+	public var attributes: Attributes?
+
+	public enum `Type`: String, Codable, CaseIterable {
+		case gameCenterMatchmakingRuleSetTests
+	}
 
 	public struct Attributes: Codable {
 		public var matchmakingResults: [[MatchmakingResultItem]]?
@@ -49,30 +53,26 @@ public struct GameCenterMatchmakingRuleSetTest: Codable, Identifiable {
 		}
 	}
 
-	public enum `Type`: String, Codable, CaseIterable {
-		case gameCenterMatchmakingRuleSetTests
-	}
-
-	public init(id: String, attributes: Attributes? = nil, type: `Type`, links: ResourceLinks? = nil) {
+	public init(id: String, type: `Type`, links: ResourceLinks? = nil, attributes: Attributes? = nil) {
 		self.id = id
-		self.attributes = attributes
 		self.type = type
 		self.links = links
+		self.attributes = attributes
 	}
 
 	public init(from decoder: Decoder) throws {
 		let values = try decoder.container(keyedBy: StringCodingKey.self)
 		self.id = try values.decode(String.self, forKey: "id")
-		self.attributes = try values.decodeIfPresent(Attributes.self, forKey: "attributes")
 		self.type = try values.decode(`Type`.self, forKey: "type")
 		self.links = try values.decodeIfPresent(ResourceLinks.self, forKey: "links")
+		self.attributes = try values.decodeIfPresent(Attributes.self, forKey: "attributes")
 	}
 
 	public func encode(to encoder: Encoder) throws {
 		var values = encoder.container(keyedBy: StringCodingKey.self)
 		try values.encode(id, forKey: "id")
-		try values.encodeIfPresent(attributes, forKey: "attributes")
 		try values.encode(type, forKey: "type")
 		try values.encodeIfPresent(links, forKey: "links")
+		try values.encodeIfPresent(attributes, forKey: "attributes")
 	}
 }

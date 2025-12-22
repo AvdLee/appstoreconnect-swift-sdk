@@ -5,30 +5,30 @@ import Foundation
 
 public struct GameCenterMatchmakingTestPlayerProperty: Codable, Identifiable {
 	public var links: ResourceLinks?
-	public var id: String
 	public var type: `Type`
+	public var id: String
 
 	public enum `Type`: String, Codable, CaseIterable {
 		case gameCenterMatchmakingTestPlayerProperties
 	}
 
-	public init(links: ResourceLinks? = nil, id: String, type: `Type`) {
+	public init(links: ResourceLinks? = nil, type: `Type`, id: String) {
 		self.links = links
-		self.id = id
 		self.type = type
+		self.id = id
 	}
 
 	public init(from decoder: Decoder) throws {
 		let values = try decoder.container(keyedBy: StringCodingKey.self)
 		self.links = try values.decodeIfPresent(ResourceLinks.self, forKey: "links")
-		self.id = try values.decode(String.self, forKey: "id")
 		self.type = try values.decode(`Type`.self, forKey: "type")
+		self.id = try values.decode(String.self, forKey: "id")
 	}
 
 	public func encode(to encoder: Encoder) throws {
 		var values = encoder.container(keyedBy: StringCodingKey.self)
 		try values.encodeIfPresent(links, forKey: "links")
-		try values.encode(id, forKey: "id")
 		try values.encode(type, forKey: "type")
+		try values.encode(id, forKey: "id")
 	}
 }

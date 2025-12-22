@@ -16,24 +16,24 @@ public struct GameCenterMatchmakingRuleSetUpdateRequest: Codable {
 		}
 
 		public struct Attributes: Codable {
-			public var minPlayers: Int?
 			public var maxPlayers: Int?
+			public var minPlayers: Int?
 
-			public init(minPlayers: Int? = nil, maxPlayers: Int? = nil) {
-				self.minPlayers = minPlayers
+			public init(maxPlayers: Int? = nil, minPlayers: Int? = nil) {
 				self.maxPlayers = maxPlayers
+				self.minPlayers = minPlayers
 			}
 
 			public init(from decoder: Decoder) throws {
 				let values = try decoder.container(keyedBy: StringCodingKey.self)
-				self.minPlayers = try values.decodeIfPresent(Int.self, forKey: "minPlayers")
 				self.maxPlayers = try values.decodeIfPresent(Int.self, forKey: "maxPlayers")
+				self.minPlayers = try values.decodeIfPresent(Int.self, forKey: "minPlayers")
 			}
 
 			public func encode(to encoder: Encoder) throws {
 				var values = encoder.container(keyedBy: StringCodingKey.self)
-				try values.encodeIfPresent(minPlayers, forKey: "minPlayers")
 				try values.encodeIfPresent(maxPlayers, forKey: "maxPlayers")
+				try values.encodeIfPresent(minPlayers, forKey: "minPlayers")
 			}
 		}
 

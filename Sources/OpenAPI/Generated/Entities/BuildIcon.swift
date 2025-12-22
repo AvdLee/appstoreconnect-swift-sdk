@@ -4,65 +4,65 @@
 import Foundation
 
 public struct BuildIcon: Codable, Identifiable {
-	public var id: String
-	public var attributes: Attributes?
 	public var type: `Type`
 	public var links: ResourceLinks?
-
-	public struct Attributes: Codable {
-		public var iconAsset: ImageAsset?
-		public var isMasked: Bool?
-		public var name: String?
-		public var iconType: IconAssetType?
-
-		public init(iconAsset: ImageAsset? = nil, isMasked: Bool? = nil, name: String? = nil, iconType: IconAssetType? = nil) {
-			self.iconAsset = iconAsset
-			self.isMasked = isMasked
-			self.name = name
-			self.iconType = iconType
-		}
-
-		public init(from decoder: Decoder) throws {
-			let values = try decoder.container(keyedBy: StringCodingKey.self)
-			self.iconAsset = try values.decodeIfPresent(ImageAsset.self, forKey: "iconAsset")
-			self.isMasked = try values.decodeIfPresent(Bool.self, forKey: "masked")
-			self.name = try values.decodeIfPresent(String.self, forKey: "name")
-			self.iconType = try values.decodeIfPresent(IconAssetType.self, forKey: "iconType")
-		}
-
-		public func encode(to encoder: Encoder) throws {
-			var values = encoder.container(keyedBy: StringCodingKey.self)
-			try values.encodeIfPresent(iconAsset, forKey: "iconAsset")
-			try values.encodeIfPresent(isMasked, forKey: "masked")
-			try values.encodeIfPresent(name, forKey: "name")
-			try values.encodeIfPresent(iconType, forKey: "iconType")
-		}
-	}
+	public var attributes: Attributes?
+	public var id: String
 
 	public enum `Type`: String, Codable, CaseIterable {
 		case buildIcons
 	}
 
-	public init(id: String, attributes: Attributes? = nil, type: `Type`, links: ResourceLinks? = nil) {
-		self.id = id
-		self.attributes = attributes
+	public struct Attributes: Codable {
+		public var name: String?
+		public var iconAsset: ImageAsset?
+		public var isMasked: Bool?
+		public var iconType: IconAssetType?
+
+		public init(name: String? = nil, iconAsset: ImageAsset? = nil, isMasked: Bool? = nil, iconType: IconAssetType? = nil) {
+			self.name = name
+			self.iconAsset = iconAsset
+			self.isMasked = isMasked
+			self.iconType = iconType
+		}
+
+		public init(from decoder: Decoder) throws {
+			let values = try decoder.container(keyedBy: StringCodingKey.self)
+			self.name = try values.decodeIfPresent(String.self, forKey: "name")
+			self.iconAsset = try values.decodeIfPresent(ImageAsset.self, forKey: "iconAsset")
+			self.isMasked = try values.decodeIfPresent(Bool.self, forKey: "masked")
+			self.iconType = try values.decodeIfPresent(IconAssetType.self, forKey: "iconType")
+		}
+
+		public func encode(to encoder: Encoder) throws {
+			var values = encoder.container(keyedBy: StringCodingKey.self)
+			try values.encodeIfPresent(name, forKey: "name")
+			try values.encodeIfPresent(iconAsset, forKey: "iconAsset")
+			try values.encodeIfPresent(isMasked, forKey: "masked")
+			try values.encodeIfPresent(iconType, forKey: "iconType")
+		}
+	}
+
+	public init(type: `Type`, links: ResourceLinks? = nil, attributes: Attributes? = nil, id: String) {
 		self.type = type
 		self.links = links
+		self.attributes = attributes
+		self.id = id
 	}
 
 	public init(from decoder: Decoder) throws {
 		let values = try decoder.container(keyedBy: StringCodingKey.self)
-		self.id = try values.decode(String.self, forKey: "id")
-		self.attributes = try values.decodeIfPresent(Attributes.self, forKey: "attributes")
 		self.type = try values.decode(`Type`.self, forKey: "type")
 		self.links = try values.decodeIfPresent(ResourceLinks.self, forKey: "links")
+		self.attributes = try values.decodeIfPresent(Attributes.self, forKey: "attributes")
+		self.id = try values.decode(String.self, forKey: "id")
 	}
 
 	public func encode(to encoder: Encoder) throws {
 		var values = encoder.container(keyedBy: StringCodingKey.self)
-		try values.encode(id, forKey: "id")
-		try values.encodeIfPresent(attributes, forKey: "attributes")
 		try values.encode(type, forKey: "type")
 		try values.encodeIfPresent(links, forKey: "links")
+		try values.encodeIfPresent(attributes, forKey: "attributes")
+		try values.encode(id, forKey: "id")
 	}
 }

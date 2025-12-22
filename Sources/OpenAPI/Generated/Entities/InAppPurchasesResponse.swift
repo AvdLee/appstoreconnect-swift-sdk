@@ -5,31 +5,31 @@ import Foundation
 
 @available(*, deprecated, message: "Deprecated")
 public struct InAppPurchasesResponse: Codable {
-	public var data: [InAppPurchase]
 	public var included: [App]?
 	public var meta: PagingInformation?
+	public var data: [InAppPurchase]
 	public var links: PagedDocumentLinks
 
-	public init(data: [InAppPurchase], included: [App]? = nil, meta: PagingInformation? = nil, links: PagedDocumentLinks) {
-		self.data = data
+	public init(included: [App]? = nil, meta: PagingInformation? = nil, data: [InAppPurchase], links: PagedDocumentLinks) {
 		self.included = included
 		self.meta = meta
+		self.data = data
 		self.links = links
 	}
 
 	public init(from decoder: Decoder) throws {
 		let values = try decoder.container(keyedBy: StringCodingKey.self)
-		self.data = try values.decode([InAppPurchase].self, forKey: "data")
 		self.included = try values.decodeIfPresent([App].self, forKey: "included")
 		self.meta = try values.decodeIfPresent(PagingInformation.self, forKey: "meta")
+		self.data = try values.decode([InAppPurchase].self, forKey: "data")
 		self.links = try values.decode(PagedDocumentLinks.self, forKey: "links")
 	}
 
 	public func encode(to encoder: Encoder) throws {
 		var values = encoder.container(keyedBy: StringCodingKey.self)
-		try values.encode(data, forKey: "data")
 		try values.encodeIfPresent(included, forKey: "included")
 		try values.encodeIfPresent(meta, forKey: "meta")
+		try values.encode(data, forKey: "data")
 		try values.encode(links, forKey: "links")
 	}
 }

@@ -5,9 +5,9 @@ import Foundation
 
 public struct GameCenterAchievementRelease: Codable, Identifiable {
 	public var type: `Type`
+	public var links: ResourceLinks?
 	public var id: String
 	public var attributes: Attributes?
-	public var links: ResourceLinks?
 	public var relationships: Relationships?
 
 	public enum `Type`: String, Codable, CaseIterable {
@@ -33,8 +33,52 @@ public struct GameCenterAchievementRelease: Codable, Identifiable {
 	}
 
 	public struct Relationships: Codable {
-		public var gameCenterAchievement: GameCenterAchievement?
 		public var gameCenterDetail: GameCenterDetail?
+		public var gameCenterAchievement: GameCenterAchievement?
+
+		public struct GameCenterDetail: Codable {
+			public var data: Data?
+
+			public struct Data: Codable, Identifiable {
+				public var id: String
+				public var type: `Type`
+
+				public enum `Type`: String, Codable, CaseIterable {
+					case gameCenterDetails
+				}
+
+				public init(id: String, type: `Type`) {
+					self.id = id
+					self.type = type
+				}
+
+				public init(from decoder: Decoder) throws {
+					let values = try decoder.container(keyedBy: StringCodingKey.self)
+					self.id = try values.decode(String.self, forKey: "id")
+					self.type = try values.decode(`Type`.self, forKey: "type")
+				}
+
+				public func encode(to encoder: Encoder) throws {
+					var values = encoder.container(keyedBy: StringCodingKey.self)
+					try values.encode(id, forKey: "id")
+					try values.encode(type, forKey: "type")
+				}
+			}
+
+			public init(data: Data? = nil) {
+				self.data = data
+			}
+
+			public init(from decoder: Decoder) throws {
+				let values = try decoder.container(keyedBy: StringCodingKey.self)
+				self.data = try values.decodeIfPresent(Data.self, forKey: "data")
+			}
+
+			public func encode(to encoder: Encoder) throws {
+				var values = encoder.container(keyedBy: StringCodingKey.self)
+				try values.encodeIfPresent(data, forKey: "data")
+			}
+		}
 
 		public struct GameCenterAchievement: Codable {
 			public var data: Data?
@@ -80,91 +124,47 @@ public struct GameCenterAchievementRelease: Codable, Identifiable {
 			}
 		}
 
-		public struct GameCenterDetail: Codable {
-			public var data: Data?
-
-			public struct Data: Codable, Identifiable {
-				public var type: `Type`
-				public var id: String
-
-				public enum `Type`: String, Codable, CaseIterable {
-					case gameCenterDetails
-				}
-
-				public init(type: `Type`, id: String) {
-					self.type = type
-					self.id = id
-				}
-
-				public init(from decoder: Decoder) throws {
-					let values = try decoder.container(keyedBy: StringCodingKey.self)
-					self.type = try values.decode(`Type`.self, forKey: "type")
-					self.id = try values.decode(String.self, forKey: "id")
-				}
-
-				public func encode(to encoder: Encoder) throws {
-					var values = encoder.container(keyedBy: StringCodingKey.self)
-					try values.encode(type, forKey: "type")
-					try values.encode(id, forKey: "id")
-				}
-			}
-
-			public init(data: Data? = nil) {
-				self.data = data
-			}
-
-			public init(from decoder: Decoder) throws {
-				let values = try decoder.container(keyedBy: StringCodingKey.self)
-				self.data = try values.decodeIfPresent(Data.self, forKey: "data")
-			}
-
-			public func encode(to encoder: Encoder) throws {
-				var values = encoder.container(keyedBy: StringCodingKey.self)
-				try values.encodeIfPresent(data, forKey: "data")
-			}
-		}
-
-		public init(gameCenterAchievement: GameCenterAchievement? = nil, gameCenterDetail: GameCenterDetail? = nil) {
-			self.gameCenterAchievement = gameCenterAchievement
+		public init(gameCenterDetail: GameCenterDetail? = nil, gameCenterAchievement: GameCenterAchievement? = nil) {
 			self.gameCenterDetail = gameCenterDetail
+			self.gameCenterAchievement = gameCenterAchievement
 		}
 
 		public init(from decoder: Decoder) throws {
 			let values = try decoder.container(keyedBy: StringCodingKey.self)
-			self.gameCenterAchievement = try values.decodeIfPresent(GameCenterAchievement.self, forKey: "gameCenterAchievement")
 			self.gameCenterDetail = try values.decodeIfPresent(GameCenterDetail.self, forKey: "gameCenterDetail")
+			self.gameCenterAchievement = try values.decodeIfPresent(GameCenterAchievement.self, forKey: "gameCenterAchievement")
 		}
 
 		public func encode(to encoder: Encoder) throws {
 			var values = encoder.container(keyedBy: StringCodingKey.self)
-			try values.encodeIfPresent(gameCenterAchievement, forKey: "gameCenterAchievement")
 			try values.encodeIfPresent(gameCenterDetail, forKey: "gameCenterDetail")
+			try values.encodeIfPresent(gameCenterAchievement, forKey: "gameCenterAchievement")
 		}
 	}
 
-	public init(type: `Type`, id: String, attributes: Attributes? = nil, links: ResourceLinks? = nil, relationships: Relationships? = nil) {
+	public init(type: `Type`, links: ResourceLinks? = nil, id: String, attributes: Attributes? = nil, relationships: Relationships? = nil) {
 		self.type = type
+		self.links = links
 		self.id = id
 		self.attributes = attributes
-		self.links = links
 		self.relationships = relationships
 	}
 
 	public init(from decoder: Decoder) throws {
 		let values = try decoder.container(keyedBy: StringCodingKey.self)
 		self.type = try values.decode(`Type`.self, forKey: "type")
+		self.links = try values.decodeIfPresent(ResourceLinks.self, forKey: "links")
 		self.id = try values.decode(String.self, forKey: "id")
 		self.attributes = try values.decodeIfPresent(Attributes.self, forKey: "attributes")
-		self.links = try values.decodeIfPresent(ResourceLinks.self, forKey: "links")
 		self.relationships = try values.decodeIfPresent(Relationships.self, forKey: "relationships")
 	}
 
 	public func encode(to encoder: Encoder) throws {
 		var values = encoder.container(keyedBy: StringCodingKey.self)
 		try values.encode(type, forKey: "type")
+		try values.encodeIfPresent(links, forKey: "links")
 		try values.encode(id, forKey: "id")
 		try values.encodeIfPresent(attributes, forKey: "attributes")
-		try values.encodeIfPresent(links, forKey: "links")
 		try values.encodeIfPresent(relationships, forKey: "relationships")
 	}
 }

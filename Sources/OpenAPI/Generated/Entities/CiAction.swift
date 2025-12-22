@@ -4,44 +4,52 @@
 import Foundation
 
 public struct CiAction: Codable {
-	public var buildDistributionAudience: BuildAudienceType?
 	public var name: String?
 	public var testConfiguration: TestConfiguration?
-	public var destination: Destination?
-	public var isRequiredToPass: Bool?
-	public var actionType: CiActionType?
-	public var scheme: String?
 	public var platform: Platform?
+	public var buildDistributionAudience: BuildAudienceType?
+	public var isRequiredToPass: Bool?
+	public var scheme: String?
+	public var destination: Destination?
+	public var actionType: CiActionType?
 
 	public struct TestConfiguration: Codable {
-		public var testDestinations: [CiTestDestination]?
-		public var kind: Kind?
 		public var testPlanName: String?
+		public var kind: Kind?
+		public var testDestinations: [CiTestDestination]?
 
 		public enum Kind: String, Codable, CaseIterable {
 			case useSchemeSettings = "USE_SCHEME_SETTINGS"
 			case specificTestPlans = "SPECIFIC_TEST_PLANS"
 		}
 
-		public init(testDestinations: [CiTestDestination]? = nil, kind: Kind? = nil, testPlanName: String? = nil) {
-			self.testDestinations = testDestinations
-			self.kind = kind
+		public init(testPlanName: String? = nil, kind: Kind? = nil, testDestinations: [CiTestDestination]? = nil) {
 			self.testPlanName = testPlanName
+			self.kind = kind
+			self.testDestinations = testDestinations
 		}
 
 		public init(from decoder: Decoder) throws {
 			let values = try decoder.container(keyedBy: StringCodingKey.self)
-			self.testDestinations = try values.decodeIfPresent([CiTestDestination].self, forKey: "testDestinations")
-			self.kind = try values.decodeIfPresent(Kind.self, forKey: "kind")
 			self.testPlanName = try values.decodeIfPresent(String.self, forKey: "testPlanName")
+			self.kind = try values.decodeIfPresent(Kind.self, forKey: "kind")
+			self.testDestinations = try values.decodeIfPresent([CiTestDestination].self, forKey: "testDestinations")
 		}
 
 		public func encode(to encoder: Encoder) throws {
 			var values = encoder.container(keyedBy: StringCodingKey.self)
-			try values.encodeIfPresent(testDestinations, forKey: "testDestinations")
-			try values.encodeIfPresent(kind, forKey: "kind")
 			try values.encodeIfPresent(testPlanName, forKey: "testPlanName")
+			try values.encodeIfPresent(kind, forKey: "kind")
+			try values.encodeIfPresent(testDestinations, forKey: "testDestinations")
 		}
+	}
+
+	public enum Platform: String, Codable, CaseIterable {
+		case macos = "MACOS"
+		case ios = "IOS"
+		case tvos = "TVOS"
+		case watchos = "WATCHOS"
+		case visionos = "VISIONOS"
 	}
 
 	public enum Destination: String, Codable, CaseIterable {
@@ -57,46 +65,38 @@ public struct CiAction: Codable {
 		case anyVisionosSimulator = "ANY_VISIONOS_SIMULATOR"
 	}
 
-	public enum Platform: String, Codable, CaseIterable {
-		case macos = "MACOS"
-		case ios = "IOS"
-		case tvos = "TVOS"
-		case watchos = "WATCHOS"
-		case visionos = "VISIONOS"
-	}
-
-	public init(buildDistributionAudience: BuildAudienceType? = nil, name: String? = nil, testConfiguration: TestConfiguration? = nil, destination: Destination? = nil, isRequiredToPass: Bool? = nil, actionType: CiActionType? = nil, scheme: String? = nil, platform: Platform? = nil) {
-		self.buildDistributionAudience = buildDistributionAudience
+	public init(name: String? = nil, testConfiguration: TestConfiguration? = nil, platform: Platform? = nil, buildDistributionAudience: BuildAudienceType? = nil, isRequiredToPass: Bool? = nil, scheme: String? = nil, destination: Destination? = nil, actionType: CiActionType? = nil) {
 		self.name = name
 		self.testConfiguration = testConfiguration
-		self.destination = destination
-		self.isRequiredToPass = isRequiredToPass
-		self.actionType = actionType
-		self.scheme = scheme
 		self.platform = platform
+		self.buildDistributionAudience = buildDistributionAudience
+		self.isRequiredToPass = isRequiredToPass
+		self.scheme = scheme
+		self.destination = destination
+		self.actionType = actionType
 	}
 
 	public init(from decoder: Decoder) throws {
 		let values = try decoder.container(keyedBy: StringCodingKey.self)
-		self.buildDistributionAudience = try values.decodeIfPresent(BuildAudienceType.self, forKey: "buildDistributionAudience")
 		self.name = try values.decodeIfPresent(String.self, forKey: "name")
 		self.testConfiguration = try values.decodeIfPresent(TestConfiguration.self, forKey: "testConfiguration")
-		self.destination = try values.decodeIfPresent(Destination.self, forKey: "destination")
-		self.isRequiredToPass = try values.decodeIfPresent(Bool.self, forKey: "isRequiredToPass")
-		self.actionType = try values.decodeIfPresent(CiActionType.self, forKey: "actionType")
-		self.scheme = try values.decodeIfPresent(String.self, forKey: "scheme")
 		self.platform = try values.decodeIfPresent(Platform.self, forKey: "platform")
+		self.buildDistributionAudience = try values.decodeIfPresent(BuildAudienceType.self, forKey: "buildDistributionAudience")
+		self.isRequiredToPass = try values.decodeIfPresent(Bool.self, forKey: "isRequiredToPass")
+		self.scheme = try values.decodeIfPresent(String.self, forKey: "scheme")
+		self.destination = try values.decodeIfPresent(Destination.self, forKey: "destination")
+		self.actionType = try values.decodeIfPresent(CiActionType.self, forKey: "actionType")
 	}
 
 	public func encode(to encoder: Encoder) throws {
 		var values = encoder.container(keyedBy: StringCodingKey.self)
-		try values.encodeIfPresent(buildDistributionAudience, forKey: "buildDistributionAudience")
 		try values.encodeIfPresent(name, forKey: "name")
 		try values.encodeIfPresent(testConfiguration, forKey: "testConfiguration")
-		try values.encodeIfPresent(destination, forKey: "destination")
-		try values.encodeIfPresent(isRequiredToPass, forKey: "isRequiredToPass")
-		try values.encodeIfPresent(actionType, forKey: "actionType")
-		try values.encodeIfPresent(scheme, forKey: "scheme")
 		try values.encodeIfPresent(platform, forKey: "platform")
+		try values.encodeIfPresent(buildDistributionAudience, forKey: "buildDistributionAudience")
+		try values.encodeIfPresent(isRequiredToPass, forKey: "isRequiredToPass")
+		try values.encodeIfPresent(scheme, forKey: "scheme")
+		try values.encodeIfPresent(destination, forKey: "destination")
+		try values.encodeIfPresent(actionType, forKey: "actionType")
 	}
 }

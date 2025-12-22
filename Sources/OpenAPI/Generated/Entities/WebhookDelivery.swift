@@ -4,10 +4,10 @@
 import Foundation
 
 public struct WebhookDelivery: Codable, Identifiable {
-	public var id: String
 	public var type: `Type`
-	public var links: ResourceLinks?
+	public var id: String
 	public var relationships: Relationships?
+	public var links: ResourceLinks?
 	public var attributes: Attributes?
 
 	public enum `Type`: String, Codable, CaseIterable {
@@ -21,28 +21,28 @@ public struct WebhookDelivery: Codable, Identifiable {
 			public var data: Data?
 
 			public struct Data: Codable, Identifiable {
-				public var id: String
 				public var type: `Type`
+				public var id: String
 
 				public enum `Type`: String, Codable, CaseIterable {
 					case webhookEvents
 				}
 
-				public init(id: String, type: `Type`) {
-					self.id = id
+				public init(type: `Type`, id: String) {
 					self.type = type
+					self.id = id
 				}
 
 				public init(from decoder: Decoder) throws {
 					let values = try decoder.container(keyedBy: StringCodingKey.self)
-					self.id = try values.decode(String.self, forKey: "id")
 					self.type = try values.decode(`Type`.self, forKey: "type")
+					self.id = try values.decode(String.self, forKey: "id")
 				}
 
 				public func encode(to encoder: Encoder) throws {
 					var values = encoder.container(keyedBy: StringCodingKey.self)
-					try values.encode(id, forKey: "id")
 					try values.encode(type, forKey: "type")
+					try values.encode(id, forKey: "id")
 				}
 			}
 
@@ -77,35 +77,13 @@ public struct WebhookDelivery: Codable, Identifiable {
 	}
 
 	public struct Attributes: Codable {
-		public var response: Response?
-		public var request: Request?
-		public var errorMessage: String?
-		public var deliveryState: DeliveryState?
-		public var sentDate: Date?
-		public var createdDate: Date?
 		public var isRedelivery: Bool?
-
-		public struct Response: Codable {
-			public var body: String?
-			public var httpstatusCode: Int?
-
-			public init(body: String? = nil, httpstatusCode: Int? = nil) {
-				self.body = body
-				self.httpstatusCode = httpstatusCode
-			}
-
-			public init(from decoder: Decoder) throws {
-				let values = try decoder.container(keyedBy: StringCodingKey.self)
-				self.body = try values.decodeIfPresent(String.self, forKey: "body")
-				self.httpstatusCode = try values.decodeIfPresent(Int.self, forKey: "httpStatusCode")
-			}
-
-			public func encode(to encoder: Encoder) throws {
-				var values = encoder.container(keyedBy: StringCodingKey.self)
-				try values.encodeIfPresent(body, forKey: "body")
-				try values.encodeIfPresent(httpstatusCode, forKey: "httpStatusCode")
-			}
-		}
+		public var request: Request?
+		public var sentDate: Date?
+		public var deliveryState: DeliveryState?
+		public var errorMessage: String?
+		public var response: Response?
+		public var createdDate: Date?
 
 		public struct Request: Codable {
 			public var url: URL?
@@ -131,62 +109,84 @@ public struct WebhookDelivery: Codable, Identifiable {
 			case pending = "PENDING"
 		}
 
-		public init(response: Response? = nil, request: Request? = nil, errorMessage: String? = nil, deliveryState: DeliveryState? = nil, sentDate: Date? = nil, createdDate: Date? = nil, isRedelivery: Bool? = nil) {
-			self.response = response
-			self.request = request
-			self.errorMessage = errorMessage
-			self.deliveryState = deliveryState
-			self.sentDate = sentDate
-			self.createdDate = createdDate
+		public struct Response: Codable {
+			public var body: String?
+			public var httpstatusCode: Int?
+
+			public init(body: String? = nil, httpstatusCode: Int? = nil) {
+				self.body = body
+				self.httpstatusCode = httpstatusCode
+			}
+
+			public init(from decoder: Decoder) throws {
+				let values = try decoder.container(keyedBy: StringCodingKey.self)
+				self.body = try values.decodeIfPresent(String.self, forKey: "body")
+				self.httpstatusCode = try values.decodeIfPresent(Int.self, forKey: "httpStatusCode")
+			}
+
+			public func encode(to encoder: Encoder) throws {
+				var values = encoder.container(keyedBy: StringCodingKey.self)
+				try values.encodeIfPresent(body, forKey: "body")
+				try values.encodeIfPresent(httpstatusCode, forKey: "httpStatusCode")
+			}
+		}
+
+		public init(isRedelivery: Bool? = nil, request: Request? = nil, sentDate: Date? = nil, deliveryState: DeliveryState? = nil, errorMessage: String? = nil, response: Response? = nil, createdDate: Date? = nil) {
 			self.isRedelivery = isRedelivery
+			self.request = request
+			self.sentDate = sentDate
+			self.deliveryState = deliveryState
+			self.errorMessage = errorMessage
+			self.response = response
+			self.createdDate = createdDate
 		}
 
 		public init(from decoder: Decoder) throws {
 			let values = try decoder.container(keyedBy: StringCodingKey.self)
-			self.response = try values.decodeIfPresent(Response.self, forKey: "response")
-			self.request = try values.decodeIfPresent(Request.self, forKey: "request")
-			self.errorMessage = try values.decodeIfPresent(String.self, forKey: "errorMessage")
-			self.deliveryState = try values.decodeIfPresent(DeliveryState.self, forKey: "deliveryState")
-			self.sentDate = try values.decodeIfPresent(Date.self, forKey: "sentDate")
-			self.createdDate = try values.decodeIfPresent(Date.self, forKey: "createdDate")
 			self.isRedelivery = try values.decodeIfPresent(Bool.self, forKey: "redelivery")
+			self.request = try values.decodeIfPresent(Request.self, forKey: "request")
+			self.sentDate = try values.decodeIfPresent(Date.self, forKey: "sentDate")
+			self.deliveryState = try values.decodeIfPresent(DeliveryState.self, forKey: "deliveryState")
+			self.errorMessage = try values.decodeIfPresent(String.self, forKey: "errorMessage")
+			self.response = try values.decodeIfPresent(Response.self, forKey: "response")
+			self.createdDate = try values.decodeIfPresent(Date.self, forKey: "createdDate")
 		}
 
 		public func encode(to encoder: Encoder) throws {
 			var values = encoder.container(keyedBy: StringCodingKey.self)
-			try values.encodeIfPresent(response, forKey: "response")
-			try values.encodeIfPresent(request, forKey: "request")
-			try values.encodeIfPresent(errorMessage, forKey: "errorMessage")
-			try values.encodeIfPresent(deliveryState, forKey: "deliveryState")
-			try values.encodeIfPresent(sentDate, forKey: "sentDate")
-			try values.encodeIfPresent(createdDate, forKey: "createdDate")
 			try values.encodeIfPresent(isRedelivery, forKey: "redelivery")
+			try values.encodeIfPresent(request, forKey: "request")
+			try values.encodeIfPresent(sentDate, forKey: "sentDate")
+			try values.encodeIfPresent(deliveryState, forKey: "deliveryState")
+			try values.encodeIfPresent(errorMessage, forKey: "errorMessage")
+			try values.encodeIfPresent(response, forKey: "response")
+			try values.encodeIfPresent(createdDate, forKey: "createdDate")
 		}
 	}
 
-	public init(id: String, type: `Type`, links: ResourceLinks? = nil, relationships: Relationships? = nil, attributes: Attributes? = nil) {
-		self.id = id
+	public init(type: `Type`, id: String, relationships: Relationships? = nil, links: ResourceLinks? = nil, attributes: Attributes? = nil) {
 		self.type = type
-		self.links = links
+		self.id = id
 		self.relationships = relationships
+		self.links = links
 		self.attributes = attributes
 	}
 
 	public init(from decoder: Decoder) throws {
 		let values = try decoder.container(keyedBy: StringCodingKey.self)
-		self.id = try values.decode(String.self, forKey: "id")
 		self.type = try values.decode(`Type`.self, forKey: "type")
-		self.links = try values.decodeIfPresent(ResourceLinks.self, forKey: "links")
+		self.id = try values.decode(String.self, forKey: "id")
 		self.relationships = try values.decodeIfPresent(Relationships.self, forKey: "relationships")
+		self.links = try values.decodeIfPresent(ResourceLinks.self, forKey: "links")
 		self.attributes = try values.decodeIfPresent(Attributes.self, forKey: "attributes")
 	}
 
 	public func encode(to encoder: Encoder) throws {
 		var values = encoder.container(keyedBy: StringCodingKey.self)
-		try values.encode(id, forKey: "id")
 		try values.encode(type, forKey: "type")
-		try values.encodeIfPresent(links, forKey: "links")
+		try values.encode(id, forKey: "id")
 		try values.encodeIfPresent(relationships, forKey: "relationships")
+		try values.encodeIfPresent(links, forKey: "links")
 		try values.encodeIfPresent(attributes, forKey: "attributes")
 	}
 }

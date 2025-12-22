@@ -5,10 +5,10 @@ import Foundation
 
 @available(*, deprecated, message: "Deprecated")
 public struct AppStoreVersionExperimentsResponse: Codable {
-	public var meta: PagingInformation?
-	public var included: [IncludedItem]?
 	public var links: PagedDocumentLinks
 	public var data: [AppStoreVersionExperiment]
+	public var included: [IncludedItem]?
+	public var meta: PagingInformation?
 
 	public enum IncludedItem: Codable {
 		case appStoreVersionExperimentTreatment(AppStoreVersionExperimentTreatment)
@@ -44,26 +44,26 @@ public struct AppStoreVersionExperimentsResponse: Codable {
 		}
 	}
 
-	public init(meta: PagingInformation? = nil, included: [IncludedItem]? = nil, links: PagedDocumentLinks, data: [AppStoreVersionExperiment]) {
-		self.meta = meta
-		self.included = included
+	public init(links: PagedDocumentLinks, data: [AppStoreVersionExperiment], included: [IncludedItem]? = nil, meta: PagingInformation? = nil) {
 		self.links = links
 		self.data = data
+		self.included = included
+		self.meta = meta
 	}
 
 	public init(from decoder: Decoder) throws {
 		let values = try decoder.container(keyedBy: StringCodingKey.self)
-		self.meta = try values.decodeIfPresent(PagingInformation.self, forKey: "meta")
-		self.included = try values.decodeIfPresent([IncludedItem].self, forKey: "included")
 		self.links = try values.decode(PagedDocumentLinks.self, forKey: "links")
 		self.data = try values.decode([AppStoreVersionExperiment].self, forKey: "data")
+		self.included = try values.decodeIfPresent([IncludedItem].self, forKey: "included")
+		self.meta = try values.decodeIfPresent(PagingInformation.self, forKey: "meta")
 	}
 
 	public func encode(to encoder: Encoder) throws {
 		var values = encoder.container(keyedBy: StringCodingKey.self)
-		try values.encodeIfPresent(meta, forKey: "meta")
-		try values.encodeIfPresent(included, forKey: "included")
 		try values.encode(links, forKey: "links")
 		try values.encode(data, forKey: "data")
+		try values.encodeIfPresent(included, forKey: "included")
+		try values.encodeIfPresent(meta, forKey: "meta")
 	}
 }

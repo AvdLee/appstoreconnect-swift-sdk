@@ -8,24 +8,24 @@ public struct Checksums: Codable {
 	public var composite: Composite?
 
 	public struct File: Codable {
-		public var algorithm: ChecksumAlgorithm?
 		public var hash: String?
+		public var algorithm: ChecksumAlgorithm?
 
-		public init(algorithm: ChecksumAlgorithm? = nil, hash: String? = nil) {
-			self.algorithm = algorithm
+		public init(hash: String? = nil, algorithm: ChecksumAlgorithm? = nil) {
 			self.hash = hash
+			self.algorithm = algorithm
 		}
 
 		public init(from decoder: Decoder) throws {
 			let values = try decoder.container(keyedBy: StringCodingKey.self)
-			self.algorithm = try values.decodeIfPresent(ChecksumAlgorithm.self, forKey: "algorithm")
 			self.hash = try values.decodeIfPresent(String.self, forKey: "hash")
+			self.algorithm = try values.decodeIfPresent(ChecksumAlgorithm.self, forKey: "algorithm")
 		}
 
 		public func encode(to encoder: Encoder) throws {
 			var values = encoder.container(keyedBy: StringCodingKey.self)
-			try values.encodeIfPresent(algorithm, forKey: "algorithm")
 			try values.encodeIfPresent(hash, forKey: "hash")
+			try values.encodeIfPresent(algorithm, forKey: "algorithm")
 		}
 	}
 

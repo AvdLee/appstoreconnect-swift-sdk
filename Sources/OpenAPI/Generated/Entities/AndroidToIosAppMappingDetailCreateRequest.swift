@@ -7,13 +7,9 @@ public struct AndroidToIosAppMappingDetailCreateRequest: Codable {
 	public var data: Data
 
 	public struct Data: Codable {
-		public var type: `Type`
 		public var relationships: Relationships
 		public var attributes: Attributes
-
-		public enum `Type`: String, Codable, CaseIterable {
-			case androidToIosAppMappingDetails
-		}
+		public var type: `Type`
 
 		public struct Relationships: Codable {
 			public var app: App
@@ -22,28 +18,28 @@ public struct AndroidToIosAppMappingDetailCreateRequest: Codable {
 				public var data: Data
 
 				public struct Data: Codable, Identifiable {
-					public var id: String
 					public var type: `Type`
+					public var id: String
 
 					public enum `Type`: String, Codable, CaseIterable {
 						case apps
 					}
 
-					public init(id: String, type: `Type`) {
-						self.id = id
+					public init(type: `Type`, id: String) {
 						self.type = type
+						self.id = id
 					}
 
 					public init(from decoder: Decoder) throws {
 						let values = try decoder.container(keyedBy: StringCodingKey.self)
-						self.id = try values.decode(String.self, forKey: "id")
 						self.type = try values.decode(`Type`.self, forKey: "type")
+						self.id = try values.decode(String.self, forKey: "id")
 					}
 
 					public func encode(to encoder: Encoder) throws {
 						var values = encoder.container(keyedBy: StringCodingKey.self)
-						try values.encode(id, forKey: "id")
 						try values.encode(type, forKey: "type")
+						try values.encode(id, forKey: "id")
 					}
 				}
 
@@ -78,45 +74,49 @@ public struct AndroidToIosAppMappingDetailCreateRequest: Codable {
 		}
 
 		public struct Attributes: Codable {
-			public var packageName: String
 			public var appSigningKeyPublicCertificateSha256Fingerprints: [String]
+			public var packageName: String
 
-			public init(packageName: String, appSigningKeyPublicCertificateSha256Fingerprints: [String]) {
-				self.packageName = packageName
+			public init(appSigningKeyPublicCertificateSha256Fingerprints: [String], packageName: String) {
 				self.appSigningKeyPublicCertificateSha256Fingerprints = appSigningKeyPublicCertificateSha256Fingerprints
+				self.packageName = packageName
 			}
 
 			public init(from decoder: Decoder) throws {
 				let values = try decoder.container(keyedBy: StringCodingKey.self)
-				self.packageName = try values.decode(String.self, forKey: "packageName")
 				self.appSigningKeyPublicCertificateSha256Fingerprints = try values.decode([String].self, forKey: "appSigningKeyPublicCertificateSha256Fingerprints")
+				self.packageName = try values.decode(String.self, forKey: "packageName")
 			}
 
 			public func encode(to encoder: Encoder) throws {
 				var values = encoder.container(keyedBy: StringCodingKey.self)
-				try values.encode(packageName, forKey: "packageName")
 				try values.encode(appSigningKeyPublicCertificateSha256Fingerprints, forKey: "appSigningKeyPublicCertificateSha256Fingerprints")
+				try values.encode(packageName, forKey: "packageName")
 			}
 		}
 
-		public init(type: `Type`, relationships: Relationships, attributes: Attributes) {
-			self.type = type
+		public enum `Type`: String, Codable, CaseIterable {
+			case androidToIosAppMappingDetails
+		}
+
+		public init(relationships: Relationships, attributes: Attributes, type: `Type`) {
 			self.relationships = relationships
 			self.attributes = attributes
+			self.type = type
 		}
 
 		public init(from decoder: Decoder) throws {
 			let values = try decoder.container(keyedBy: StringCodingKey.self)
-			self.type = try values.decode(`Type`.self, forKey: "type")
 			self.relationships = try values.decode(Relationships.self, forKey: "relationships")
 			self.attributes = try values.decode(Attributes.self, forKey: "attributes")
+			self.type = try values.decode(`Type`.self, forKey: "type")
 		}
 
 		public func encode(to encoder: Encoder) throws {
 			var values = encoder.container(keyedBy: StringCodingKey.self)
-			try values.encode(type, forKey: "type")
 			try values.encode(relationships, forKey: "relationships")
 			try values.encode(attributes, forKey: "attributes")
+			try values.encode(type, forKey: "type")
 		}
 	}
 

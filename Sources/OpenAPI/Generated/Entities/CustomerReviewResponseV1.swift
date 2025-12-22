@@ -4,42 +4,11 @@
 import Foundation
 
 public struct CustomerReviewResponseV1: Codable, Identifiable {
-	public var links: ResourceLinks?
-	public var attributes: Attributes?
 	public var id: String
 	public var type: `Type`
 	public var relationships: Relationships?
-
-	public struct Attributes: Codable {
-		public var lastModifiedDate: Date?
-		public var state: State?
-		public var responseBody: String?
-
-		public enum State: String, Codable, CaseIterable {
-			case published = "PUBLISHED"
-			case pendingPublish = "PENDING_PUBLISH"
-		}
-
-		public init(lastModifiedDate: Date? = nil, state: State? = nil, responseBody: String? = nil) {
-			self.lastModifiedDate = lastModifiedDate
-			self.state = state
-			self.responseBody = responseBody
-		}
-
-		public init(from decoder: Decoder) throws {
-			let values = try decoder.container(keyedBy: StringCodingKey.self)
-			self.lastModifiedDate = try values.decodeIfPresent(Date.self, forKey: "lastModifiedDate")
-			self.state = try values.decodeIfPresent(State.self, forKey: "state")
-			self.responseBody = try values.decodeIfPresent(String.self, forKey: "responseBody")
-		}
-
-		public func encode(to encoder: Encoder) throws {
-			var values = encoder.container(keyedBy: StringCodingKey.self)
-			try values.encodeIfPresent(lastModifiedDate, forKey: "lastModifiedDate")
-			try values.encodeIfPresent(state, forKey: "state")
-			try values.encodeIfPresent(responseBody, forKey: "responseBody")
-		}
-	}
+	public var links: ResourceLinks?
+	public var attributes: Attributes?
 
 	public enum `Type`: String, Codable, CaseIterable {
 		case customerReviewResponses
@@ -52,28 +21,28 @@ public struct CustomerReviewResponseV1: Codable, Identifiable {
 			public var data: Data?
 
 			public struct Data: Codable, Identifiable {
-				public var type: `Type`
 				public var id: String
+				public var type: `Type`
 
 				public enum `Type`: String, Codable, CaseIterable {
 					case customerReviews
 				}
 
-				public init(type: `Type`, id: String) {
-					self.type = type
+				public init(id: String, type: `Type`) {
 					self.id = id
+					self.type = type
 				}
 
 				public init(from decoder: Decoder) throws {
 					let values = try decoder.container(keyedBy: StringCodingKey.self)
-					self.type = try values.decode(`Type`.self, forKey: "type")
 					self.id = try values.decode(String.self, forKey: "id")
+					self.type = try values.decode(`Type`.self, forKey: "type")
 				}
 
 				public func encode(to encoder: Encoder) throws {
 					var values = encoder.container(keyedBy: StringCodingKey.self)
-					try values.encode(type, forKey: "type")
 					try values.encode(id, forKey: "id")
+					try values.encode(type, forKey: "type")
 				}
 			}
 
@@ -107,29 +76,60 @@ public struct CustomerReviewResponseV1: Codable, Identifiable {
 		}
 	}
 
-	public init(links: ResourceLinks? = nil, attributes: Attributes? = nil, id: String, type: `Type`, relationships: Relationships? = nil) {
-		self.links = links
-		self.attributes = attributes
+	public struct Attributes: Codable {
+		public var lastModifiedDate: Date?
+		public var responseBody: String?
+		public var state: State?
+
+		public enum State: String, Codable, CaseIterable {
+			case published = "PUBLISHED"
+			case pendingPublish = "PENDING_PUBLISH"
+		}
+
+		public init(lastModifiedDate: Date? = nil, responseBody: String? = nil, state: State? = nil) {
+			self.lastModifiedDate = lastModifiedDate
+			self.responseBody = responseBody
+			self.state = state
+		}
+
+		public init(from decoder: Decoder) throws {
+			let values = try decoder.container(keyedBy: StringCodingKey.self)
+			self.lastModifiedDate = try values.decodeIfPresent(Date.self, forKey: "lastModifiedDate")
+			self.responseBody = try values.decodeIfPresent(String.self, forKey: "responseBody")
+			self.state = try values.decodeIfPresent(State.self, forKey: "state")
+		}
+
+		public func encode(to encoder: Encoder) throws {
+			var values = encoder.container(keyedBy: StringCodingKey.self)
+			try values.encodeIfPresent(lastModifiedDate, forKey: "lastModifiedDate")
+			try values.encodeIfPresent(responseBody, forKey: "responseBody")
+			try values.encodeIfPresent(state, forKey: "state")
+		}
+	}
+
+	public init(id: String, type: `Type`, relationships: Relationships? = nil, links: ResourceLinks? = nil, attributes: Attributes? = nil) {
 		self.id = id
 		self.type = type
 		self.relationships = relationships
+		self.links = links
+		self.attributes = attributes
 	}
 
 	public init(from decoder: Decoder) throws {
 		let values = try decoder.container(keyedBy: StringCodingKey.self)
-		self.links = try values.decodeIfPresent(ResourceLinks.self, forKey: "links")
-		self.attributes = try values.decodeIfPresent(Attributes.self, forKey: "attributes")
 		self.id = try values.decode(String.self, forKey: "id")
 		self.type = try values.decode(`Type`.self, forKey: "type")
 		self.relationships = try values.decodeIfPresent(Relationships.self, forKey: "relationships")
+		self.links = try values.decodeIfPresent(ResourceLinks.self, forKey: "links")
+		self.attributes = try values.decodeIfPresent(Attributes.self, forKey: "attributes")
 	}
 
 	public func encode(to encoder: Encoder) throws {
 		var values = encoder.container(keyedBy: StringCodingKey.self)
-		try values.encodeIfPresent(links, forKey: "links")
-		try values.encodeIfPresent(attributes, forKey: "attributes")
 		try values.encode(id, forKey: "id")
 		try values.encode(type, forKey: "type")
 		try values.encodeIfPresent(relationships, forKey: "relationships")
+		try values.encodeIfPresent(links, forKey: "links")
+		try values.encodeIfPresent(attributes, forKey: "attributes")
 	}
 }

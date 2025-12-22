@@ -4,73 +4,11 @@
 import Foundation
 
 public struct ScmPullRequest: Codable, Identifiable {
-	public var id: String
-	public var attributes: Attributes?
-	public var type: `Type`
-	public var links: ResourceLinks?
 	public var relationships: Relationships?
-
-	public struct Attributes: Codable {
-		public var sourceRepositoryName: String?
-		public var destinationBranchName: String?
-		public var sourceRepositoryOwner: String?
-		public var sourceBranchName: String?
-		public var webURL: URL?
-		public var isCrossRepository: Bool?
-		public var title: String?
-		public var destinationRepositoryName: String?
-		public var destinationRepositoryOwner: String?
-		public var number: Int?
-		public var isClosed: Bool?
-
-		public init(sourceRepositoryName: String? = nil, destinationBranchName: String? = nil, sourceRepositoryOwner: String? = nil, sourceBranchName: String? = nil, webURL: URL? = nil, isCrossRepository: Bool? = nil, title: String? = nil, destinationRepositoryName: String? = nil, destinationRepositoryOwner: String? = nil, number: Int? = nil, isClosed: Bool? = nil) {
-			self.sourceRepositoryName = sourceRepositoryName
-			self.destinationBranchName = destinationBranchName
-			self.sourceRepositoryOwner = sourceRepositoryOwner
-			self.sourceBranchName = sourceBranchName
-			self.webURL = webURL
-			self.isCrossRepository = isCrossRepository
-			self.title = title
-			self.destinationRepositoryName = destinationRepositoryName
-			self.destinationRepositoryOwner = destinationRepositoryOwner
-			self.number = number
-			self.isClosed = isClosed
-		}
-
-		public init(from decoder: Decoder) throws {
-			let values = try decoder.container(keyedBy: StringCodingKey.self)
-			self.sourceRepositoryName = try values.decodeIfPresent(String.self, forKey: "sourceRepositoryName")
-			self.destinationBranchName = try values.decodeIfPresent(String.self, forKey: "destinationBranchName")
-			self.sourceRepositoryOwner = try values.decodeIfPresent(String.self, forKey: "sourceRepositoryOwner")
-			self.sourceBranchName = try values.decodeIfPresent(String.self, forKey: "sourceBranchName")
-			self.webURL = try values.decodeIfPresent(URL.self, forKey: "webUrl")
-			self.isCrossRepository = try values.decodeIfPresent(Bool.self, forKey: "isCrossRepository")
-			self.title = try values.decodeIfPresent(String.self, forKey: "title")
-			self.destinationRepositoryName = try values.decodeIfPresent(String.self, forKey: "destinationRepositoryName")
-			self.destinationRepositoryOwner = try values.decodeIfPresent(String.self, forKey: "destinationRepositoryOwner")
-			self.number = try values.decodeIfPresent(Int.self, forKey: "number")
-			self.isClosed = try values.decodeIfPresent(Bool.self, forKey: "isClosed")
-		}
-
-		public func encode(to encoder: Encoder) throws {
-			var values = encoder.container(keyedBy: StringCodingKey.self)
-			try values.encodeIfPresent(sourceRepositoryName, forKey: "sourceRepositoryName")
-			try values.encodeIfPresent(destinationBranchName, forKey: "destinationBranchName")
-			try values.encodeIfPresent(sourceRepositoryOwner, forKey: "sourceRepositoryOwner")
-			try values.encodeIfPresent(sourceBranchName, forKey: "sourceBranchName")
-			try values.encodeIfPresent(webURL, forKey: "webUrl")
-			try values.encodeIfPresent(isCrossRepository, forKey: "isCrossRepository")
-			try values.encodeIfPresent(title, forKey: "title")
-			try values.encodeIfPresent(destinationRepositoryName, forKey: "destinationRepositoryName")
-			try values.encodeIfPresent(destinationRepositoryOwner, forKey: "destinationRepositoryOwner")
-			try values.encodeIfPresent(number, forKey: "number")
-			try values.encodeIfPresent(isClosed, forKey: "isClosed")
-		}
-	}
-
-	public enum `Type`: String, Codable, CaseIterable {
-		case scmPullRequests
-	}
+	public var type: `Type`
+	public var id: String
+	public var links: ResourceLinks?
+	public var attributes: Attributes?
 
 	public struct Relationships: Codable {
 		public var repository: Repository?
@@ -79,28 +17,28 @@ public struct ScmPullRequest: Codable, Identifiable {
 			public var data: Data?
 
 			public struct Data: Codable, Identifiable {
-				public var type: `Type`
 				public var id: String
+				public var type: `Type`
 
 				public enum `Type`: String, Codable, CaseIterable {
 					case scmRepositories
 				}
 
-				public init(type: `Type`, id: String) {
-					self.type = type
+				public init(id: String, type: `Type`) {
 					self.id = id
+					self.type = type
 				}
 
 				public init(from decoder: Decoder) throws {
 					let values = try decoder.container(keyedBy: StringCodingKey.self)
-					self.type = try values.decode(`Type`.self, forKey: "type")
 					self.id = try values.decode(String.self, forKey: "id")
+					self.type = try values.decode(`Type`.self, forKey: "type")
 				}
 
 				public func encode(to encoder: Encoder) throws {
 					var values = encoder.container(keyedBy: StringCodingKey.self)
-					try values.encode(type, forKey: "type")
 					try values.encode(id, forKey: "id")
+					try values.encode(type, forKey: "type")
 				}
 			}
 
@@ -134,29 +72,91 @@ public struct ScmPullRequest: Codable, Identifiable {
 		}
 	}
 
-	public init(id: String, attributes: Attributes? = nil, type: `Type`, links: ResourceLinks? = nil, relationships: Relationships? = nil) {
-		self.id = id
-		self.attributes = attributes
-		self.type = type
-		self.links = links
+	public enum `Type`: String, Codable, CaseIterable {
+		case scmPullRequests
+	}
+
+	public struct Attributes: Codable {
+		public var destinationRepositoryOwner: String?
+		public var isCrossRepository: Bool?
+		public var sourceRepositoryName: String?
+		public var title: String?
+		public var number: Int?
+		public var sourceBranchName: String?
+		public var isClosed: Bool?
+		public var sourceRepositoryOwner: String?
+		public var destinationRepositoryName: String?
+		public var webURL: URL?
+		public var destinationBranchName: String?
+
+		public init(destinationRepositoryOwner: String? = nil, isCrossRepository: Bool? = nil, sourceRepositoryName: String? = nil, title: String? = nil, number: Int? = nil, sourceBranchName: String? = nil, isClosed: Bool? = nil, sourceRepositoryOwner: String? = nil, destinationRepositoryName: String? = nil, webURL: URL? = nil, destinationBranchName: String? = nil) {
+			self.destinationRepositoryOwner = destinationRepositoryOwner
+			self.isCrossRepository = isCrossRepository
+			self.sourceRepositoryName = sourceRepositoryName
+			self.title = title
+			self.number = number
+			self.sourceBranchName = sourceBranchName
+			self.isClosed = isClosed
+			self.sourceRepositoryOwner = sourceRepositoryOwner
+			self.destinationRepositoryName = destinationRepositoryName
+			self.webURL = webURL
+			self.destinationBranchName = destinationBranchName
+		}
+
+		public init(from decoder: Decoder) throws {
+			let values = try decoder.container(keyedBy: StringCodingKey.self)
+			self.destinationRepositoryOwner = try values.decodeIfPresent(String.self, forKey: "destinationRepositoryOwner")
+			self.isCrossRepository = try values.decodeIfPresent(Bool.self, forKey: "isCrossRepository")
+			self.sourceRepositoryName = try values.decodeIfPresent(String.self, forKey: "sourceRepositoryName")
+			self.title = try values.decodeIfPresent(String.self, forKey: "title")
+			self.number = try values.decodeIfPresent(Int.self, forKey: "number")
+			self.sourceBranchName = try values.decodeIfPresent(String.self, forKey: "sourceBranchName")
+			self.isClosed = try values.decodeIfPresent(Bool.self, forKey: "isClosed")
+			self.sourceRepositoryOwner = try values.decodeIfPresent(String.self, forKey: "sourceRepositoryOwner")
+			self.destinationRepositoryName = try values.decodeIfPresent(String.self, forKey: "destinationRepositoryName")
+			self.webURL = try values.decodeIfPresent(URL.self, forKey: "webUrl")
+			self.destinationBranchName = try values.decodeIfPresent(String.self, forKey: "destinationBranchName")
+		}
+
+		public func encode(to encoder: Encoder) throws {
+			var values = encoder.container(keyedBy: StringCodingKey.self)
+			try values.encodeIfPresent(destinationRepositoryOwner, forKey: "destinationRepositoryOwner")
+			try values.encodeIfPresent(isCrossRepository, forKey: "isCrossRepository")
+			try values.encodeIfPresent(sourceRepositoryName, forKey: "sourceRepositoryName")
+			try values.encodeIfPresent(title, forKey: "title")
+			try values.encodeIfPresent(number, forKey: "number")
+			try values.encodeIfPresent(sourceBranchName, forKey: "sourceBranchName")
+			try values.encodeIfPresent(isClosed, forKey: "isClosed")
+			try values.encodeIfPresent(sourceRepositoryOwner, forKey: "sourceRepositoryOwner")
+			try values.encodeIfPresent(destinationRepositoryName, forKey: "destinationRepositoryName")
+			try values.encodeIfPresent(webURL, forKey: "webUrl")
+			try values.encodeIfPresent(destinationBranchName, forKey: "destinationBranchName")
+		}
+	}
+
+	public init(relationships: Relationships? = nil, type: `Type`, id: String, links: ResourceLinks? = nil, attributes: Attributes? = nil) {
 		self.relationships = relationships
+		self.type = type
+		self.id = id
+		self.links = links
+		self.attributes = attributes
 	}
 
 	public init(from decoder: Decoder) throws {
 		let values = try decoder.container(keyedBy: StringCodingKey.self)
-		self.id = try values.decode(String.self, forKey: "id")
-		self.attributes = try values.decodeIfPresent(Attributes.self, forKey: "attributes")
-		self.type = try values.decode(`Type`.self, forKey: "type")
-		self.links = try values.decodeIfPresent(ResourceLinks.self, forKey: "links")
 		self.relationships = try values.decodeIfPresent(Relationships.self, forKey: "relationships")
+		self.type = try values.decode(`Type`.self, forKey: "type")
+		self.id = try values.decode(String.self, forKey: "id")
+		self.links = try values.decodeIfPresent(ResourceLinks.self, forKey: "links")
+		self.attributes = try values.decodeIfPresent(Attributes.self, forKey: "attributes")
 	}
 
 	public func encode(to encoder: Encoder) throws {
 		var values = encoder.container(keyedBy: StringCodingKey.self)
-		try values.encode(id, forKey: "id")
-		try values.encodeIfPresent(attributes, forKey: "attributes")
-		try values.encode(type, forKey: "type")
-		try values.encodeIfPresent(links, forKey: "links")
 		try values.encodeIfPresent(relationships, forKey: "relationships")
+		try values.encode(type, forKey: "type")
+		try values.encode(id, forKey: "id")
+		try values.encodeIfPresent(links, forKey: "links")
+		try values.encodeIfPresent(attributes, forKey: "attributes")
 	}
 }

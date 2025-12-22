@@ -4,11 +4,29 @@
 import Foundation
 
 public struct AppClipAppStoreReviewDetail: Codable, Identifiable {
-	public var type: `Type`
-	public var relationships: Relationships?
 	public var links: ResourceLinks?
-	public var id: String
 	public var attributes: Attributes?
+	public var type: `Type`
+	public var id: String
+	public var relationships: Relationships?
+
+	public struct Attributes: Codable {
+		public var invocationURLs: [URL]?
+
+		public init(invocationURLs: [URL]? = nil) {
+			self.invocationURLs = invocationURLs
+		}
+
+		public init(from decoder: Decoder) throws {
+			let values = try decoder.container(keyedBy: StringCodingKey.self)
+			self.invocationURLs = try values.decodeIfPresent([URL].self, forKey: "invocationUrls")
+		}
+
+		public func encode(to encoder: Encoder) throws {
+			var values = encoder.container(keyedBy: StringCodingKey.self)
+			try values.encodeIfPresent(invocationURLs, forKey: "invocationUrls")
+		}
+	}
 
 	public enum `Type`: String, Codable, CaseIterable {
 		case appClipAppStoreReviewDetails
@@ -21,28 +39,28 @@ public struct AppClipAppStoreReviewDetail: Codable, Identifiable {
 			public var data: Data?
 
 			public struct Data: Codable, Identifiable {
-				public var id: String
 				public var type: `Type`
+				public var id: String
 
 				public enum `Type`: String, Codable, CaseIterable {
 					case appClipDefaultExperiences
 				}
 
-				public init(id: String, type: `Type`) {
-					self.id = id
+				public init(type: `Type`, id: String) {
 					self.type = type
+					self.id = id
 				}
 
 				public init(from decoder: Decoder) throws {
 					let values = try decoder.container(keyedBy: StringCodingKey.self)
-					self.id = try values.decode(String.self, forKey: "id")
 					self.type = try values.decode(`Type`.self, forKey: "type")
+					self.id = try values.decode(String.self, forKey: "id")
 				}
 
 				public func encode(to encoder: Encoder) throws {
 					var values = encoder.container(keyedBy: StringCodingKey.self)
-					try values.encode(id, forKey: "id")
 					try values.encode(type, forKey: "type")
+					try values.encode(id, forKey: "id")
 				}
 			}
 
@@ -76,47 +94,29 @@ public struct AppClipAppStoreReviewDetail: Codable, Identifiable {
 		}
 	}
 
-	public struct Attributes: Codable {
-		public var invocationURLs: [URL]?
-
-		public init(invocationURLs: [URL]? = nil) {
-			self.invocationURLs = invocationURLs
-		}
-
-		public init(from decoder: Decoder) throws {
-			let values = try decoder.container(keyedBy: StringCodingKey.self)
-			self.invocationURLs = try values.decodeIfPresent([URL].self, forKey: "invocationUrls")
-		}
-
-		public func encode(to encoder: Encoder) throws {
-			var values = encoder.container(keyedBy: StringCodingKey.self)
-			try values.encodeIfPresent(invocationURLs, forKey: "invocationUrls")
-		}
-	}
-
-	public init(type: `Type`, relationships: Relationships? = nil, links: ResourceLinks? = nil, id: String, attributes: Attributes? = nil) {
-		self.type = type
-		self.relationships = relationships
+	public init(links: ResourceLinks? = nil, attributes: Attributes? = nil, type: `Type`, id: String, relationships: Relationships? = nil) {
 		self.links = links
-		self.id = id
 		self.attributes = attributes
+		self.type = type
+		self.id = id
+		self.relationships = relationships
 	}
 
 	public init(from decoder: Decoder) throws {
 		let values = try decoder.container(keyedBy: StringCodingKey.self)
-		self.type = try values.decode(`Type`.self, forKey: "type")
-		self.relationships = try values.decodeIfPresent(Relationships.self, forKey: "relationships")
 		self.links = try values.decodeIfPresent(ResourceLinks.self, forKey: "links")
-		self.id = try values.decode(String.self, forKey: "id")
 		self.attributes = try values.decodeIfPresent(Attributes.self, forKey: "attributes")
+		self.type = try values.decode(`Type`.self, forKey: "type")
+		self.id = try values.decode(String.self, forKey: "id")
+		self.relationships = try values.decodeIfPresent(Relationships.self, forKey: "relationships")
 	}
 
 	public func encode(to encoder: Encoder) throws {
 		var values = encoder.container(keyedBy: StringCodingKey.self)
-		try values.encode(type, forKey: "type")
-		try values.encodeIfPresent(relationships, forKey: "relationships")
 		try values.encodeIfPresent(links, forKey: "links")
-		try values.encode(id, forKey: "id")
 		try values.encodeIfPresent(attributes, forKey: "attributes")
+		try values.encode(type, forKey: "type")
+		try values.encode(id, forKey: "id")
+		try values.encodeIfPresent(relationships, forKey: "relationships")
 	}
 }

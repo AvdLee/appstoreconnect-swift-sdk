@@ -1,5 +1,5 @@
 import XCTest
-@testable import SpecPatching
+@testable import OpenAPIGeneratorCore
 
 final class SpecPatchingTests: XCTestCase {
     func testEnsuresPurchaseRequirementEnum() throws {

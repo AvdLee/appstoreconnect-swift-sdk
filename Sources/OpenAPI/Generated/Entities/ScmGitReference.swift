@@ -4,41 +4,11 @@
 import Foundation
 
 public struct ScmGitReference: Codable, Identifiable {
-	public var attributes: Attributes?
 	public var id: String
 	public var type: `Type`
 	public var relationships: Relationships?
+	public var attributes: Attributes?
 	public var links: ResourceLinks?
-
-	public struct Attributes: Codable {
-		public var isDeleted: Bool?
-		public var kind: CiGitRefKind?
-		public var canonicalName: String?
-		public var name: String?
-
-		public init(isDeleted: Bool? = nil, kind: CiGitRefKind? = nil, canonicalName: String? = nil, name: String? = nil) {
-			self.isDeleted = isDeleted
-			self.kind = kind
-			self.canonicalName = canonicalName
-			self.name = name
-		}
-
-		public init(from decoder: Decoder) throws {
-			let values = try decoder.container(keyedBy: StringCodingKey.self)
-			self.isDeleted = try values.decodeIfPresent(Bool.self, forKey: "isDeleted")
-			self.kind = try values.decodeIfPresent(CiGitRefKind.self, forKey: "kind")
-			self.canonicalName = try values.decodeIfPresent(String.self, forKey: "canonicalName")
-			self.name = try values.decodeIfPresent(String.self, forKey: "name")
-		}
-
-		public func encode(to encoder: Encoder) throws {
-			var values = encoder.container(keyedBy: StringCodingKey.self)
-			try values.encodeIfPresent(isDeleted, forKey: "isDeleted")
-			try values.encodeIfPresent(kind, forKey: "kind")
-			try values.encodeIfPresent(canonicalName, forKey: "canonicalName")
-			try values.encodeIfPresent(name, forKey: "name")
-		}
-	}
 
 	public enum `Type`: String, Codable, CaseIterable {
 		case scmGitReferences
@@ -51,28 +21,28 @@ public struct ScmGitReference: Codable, Identifiable {
 			public var data: Data?
 
 			public struct Data: Codable, Identifiable {
-				public var type: `Type`
 				public var id: String
+				public var type: `Type`
 
 				public enum `Type`: String, Codable, CaseIterable {
 					case scmRepositories
 				}
 
-				public init(type: `Type`, id: String) {
-					self.type = type
+				public init(id: String, type: `Type`) {
 					self.id = id
+					self.type = type
 				}
 
 				public init(from decoder: Decoder) throws {
 					let values = try decoder.container(keyedBy: StringCodingKey.self)
-					self.type = try values.decode(`Type`.self, forKey: "type")
 					self.id = try values.decode(String.self, forKey: "id")
+					self.type = try values.decode(`Type`.self, forKey: "type")
 				}
 
 				public func encode(to encoder: Encoder) throws {
 					var values = encoder.container(keyedBy: StringCodingKey.self)
-					try values.encode(type, forKey: "type")
 					try values.encode(id, forKey: "id")
+					try values.encode(type, forKey: "type")
 				}
 			}
 
@@ -106,29 +76,59 @@ public struct ScmGitReference: Codable, Identifiable {
 		}
 	}
 
-	public init(attributes: Attributes? = nil, id: String, type: `Type`, relationships: Relationships? = nil, links: ResourceLinks? = nil) {
-		self.attributes = attributes
+	public struct Attributes: Codable {
+		public var isDeleted: Bool?
+		public var canonicalName: String?
+		public var kind: CiGitRefKind?
+		public var name: String?
+
+		public init(isDeleted: Bool? = nil, canonicalName: String? = nil, kind: CiGitRefKind? = nil, name: String? = nil) {
+			self.isDeleted = isDeleted
+			self.canonicalName = canonicalName
+			self.kind = kind
+			self.name = name
+		}
+
+		public init(from decoder: Decoder) throws {
+			let values = try decoder.container(keyedBy: StringCodingKey.self)
+			self.isDeleted = try values.decodeIfPresent(Bool.self, forKey: "isDeleted")
+			self.canonicalName = try values.decodeIfPresent(String.self, forKey: "canonicalName")
+			self.kind = try values.decodeIfPresent(CiGitRefKind.self, forKey: "kind")
+			self.name = try values.decodeIfPresent(String.self, forKey: "name")
+		}
+
+		public func encode(to encoder: Encoder) throws {
+			var values = encoder.container(keyedBy: StringCodingKey.self)
+			try values.encodeIfPresent(isDeleted, forKey: "isDeleted")
+			try values.encodeIfPresent(canonicalName, forKey: "canonicalName")
+			try values.encodeIfPresent(kind, forKey: "kind")
+			try values.encodeIfPresent(name, forKey: "name")
+		}
+	}
+
+	public init(id: String, type: `Type`, relationships: Relationships? = nil, attributes: Attributes? = nil, links: ResourceLinks? = nil) {
 		self.id = id
 		self.type = type
 		self.relationships = relationships
+		self.attributes = attributes
 		self.links = links
 	}
 
 	public init(from decoder: Decoder) throws {
 		let values = try decoder.container(keyedBy: StringCodingKey.self)
-		self.attributes = try values.decodeIfPresent(Attributes.self, forKey: "attributes")
 		self.id = try values.decode(String.self, forKey: "id")
 		self.type = try values.decode(`Type`.self, forKey: "type")
 		self.relationships = try values.decodeIfPresent(Relationships.self, forKey: "relationships")
+		self.attributes = try values.decodeIfPresent(Attributes.self, forKey: "attributes")
 		self.links = try values.decodeIfPresent(ResourceLinks.self, forKey: "links")
 	}
 
 	public func encode(to encoder: Encoder) throws {
 		var values = encoder.container(keyedBy: StringCodingKey.self)
-		try values.encodeIfPresent(attributes, forKey: "attributes")
 		try values.encode(id, forKey: "id")
 		try values.encode(type, forKey: "type")
 		try values.encodeIfPresent(relationships, forKey: "relationships")
+		try values.encodeIfPresent(attributes, forKey: "attributes")
 		try values.encodeIfPresent(links, forKey: "links")
 	}
 }

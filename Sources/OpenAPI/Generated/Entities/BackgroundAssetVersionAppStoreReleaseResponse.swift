@@ -4,28 +4,28 @@
 import Foundation
 
 public struct BackgroundAssetVersionAppStoreReleaseResponse: Codable {
-	public var links: DocumentLinks
 	public var included: [BackgroundAssetVersion]?
 	/// BackgroundAssetVersionAppStoreRelease
 	public var data: BackgroundAssetVersionAppStoreRelease
+	public var links: DocumentLinks
 
-	public init(links: DocumentLinks, included: [BackgroundAssetVersion]? = nil, data: BackgroundAssetVersionAppStoreRelease) {
-		self.links = links
+	public init(included: [BackgroundAssetVersion]? = nil, data: BackgroundAssetVersionAppStoreRelease, links: DocumentLinks) {
 		self.included = included
 		self.data = data
+		self.links = links
 	}
 
 	public init(from decoder: Decoder) throws {
 		let values = try decoder.container(keyedBy: StringCodingKey.self)
-		self.links = try values.decode(DocumentLinks.self, forKey: "links")
 		self.included = try values.decodeIfPresent([BackgroundAssetVersion].self, forKey: "included")
 		self.data = try values.decode(BackgroundAssetVersionAppStoreRelease.self, forKey: "data")
+		self.links = try values.decode(DocumentLinks.self, forKey: "links")
 	}
 
 	public func encode(to encoder: Encoder) throws {
 		var values = encoder.container(keyedBy: StringCodingKey.self)
-		try values.encode(links, forKey: "links")
 		try values.encodeIfPresent(included, forKey: "included")
 		try values.encode(data, forKey: "data")
+		try values.encode(links, forKey: "links")
 	}
 }

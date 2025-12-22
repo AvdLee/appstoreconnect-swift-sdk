@@ -4,10 +4,10 @@
 import Foundation
 
 public struct NominationsResponse: Codable {
-	public var links: PagedDocumentLinks
 	public var data: [Nomination]
-	public var included: [IncludedItem]?
 	public var meta: PagingInformation?
+	public var included: [IncludedItem]?
+	public var links: PagedDocumentLinks
 
 	public enum IncludedItem: Codable {
 		case actor(Actor)
@@ -49,26 +49,26 @@ public struct NominationsResponse: Codable {
 		}
 	}
 
-	public init(links: PagedDocumentLinks, data: [Nomination], included: [IncludedItem]? = nil, meta: PagingInformation? = nil) {
-		self.links = links
+	public init(data: [Nomination], meta: PagingInformation? = nil, included: [IncludedItem]? = nil, links: PagedDocumentLinks) {
 		self.data = data
-		self.included = included
 		self.meta = meta
+		self.included = included
+		self.links = links
 	}
 
 	public init(from decoder: Decoder) throws {
 		let values = try decoder.container(keyedBy: StringCodingKey.self)
-		self.links = try values.decode(PagedDocumentLinks.self, forKey: "links")
 		self.data = try values.decode([Nomination].self, forKey: "data")
-		self.included = try values.decodeIfPresent([IncludedItem].self, forKey: "included")
 		self.meta = try values.decodeIfPresent(PagingInformation.self, forKey: "meta")
+		self.included = try values.decodeIfPresent([IncludedItem].self, forKey: "included")
+		self.links = try values.decode(PagedDocumentLinks.self, forKey: "links")
 	}
 
 	public func encode(to encoder: Encoder) throws {
 		var values = encoder.container(keyedBy: StringCodingKey.self)
-		try values.encode(links, forKey: "links")
 		try values.encode(data, forKey: "data")
-		try values.encodeIfPresent(included, forKey: "included")
 		try values.encodeIfPresent(meta, forKey: "meta")
+		try values.encodeIfPresent(included, forKey: "included")
+		try values.encode(links, forKey: "links")
 	}
 }

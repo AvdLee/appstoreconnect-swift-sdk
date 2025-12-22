@@ -7,9 +7,9 @@ public struct GameCenterActivityUpdateRequest: Codable {
 	public var data: Data
 
 	public struct Data: Codable, Identifiable {
-		public var id: String
 		public var type: `Type`
 		public var attributes: Attributes?
+		public var id: String
 
 		public enum `Type`: String, Codable, CaseIterable {
 			case gameCenterActivities
@@ -18,68 +18,68 @@ public struct GameCenterActivityUpdateRequest: Codable {
 		public struct Attributes: Codable {
 			public var maximumPlayersCount: Int?
 			public var isSupportsPartyCode: Bool?
-			public var properties: [String: String]?
-			public var minimumPlayersCount: Int?
-			public var referenceName: String?
 			public var isArchived: Bool?
 			public var playStyle: PlayStyle?
+			public var minimumPlayersCount: Int?
+			public var properties: [String: String]?
+			public var referenceName: String?
 
 			public enum PlayStyle: String, Codable, CaseIterable {
 				case asynchronous = "ASYNCHRONOUS"
 				case synchronous = "SYNCHRONOUS"
 			}
 
-			public init(maximumPlayersCount: Int? = nil, isSupportsPartyCode: Bool? = nil, properties: [String: String]? = nil, minimumPlayersCount: Int? = nil, referenceName: String? = nil, isArchived: Bool? = nil, playStyle: PlayStyle? = nil) {
+			public init(maximumPlayersCount: Int? = nil, isSupportsPartyCode: Bool? = nil, isArchived: Bool? = nil, playStyle: PlayStyle? = nil, minimumPlayersCount: Int? = nil, properties: [String: String]? = nil, referenceName: String? = nil) {
 				self.maximumPlayersCount = maximumPlayersCount
 				self.isSupportsPartyCode = isSupportsPartyCode
-				self.properties = properties
-				self.minimumPlayersCount = minimumPlayersCount
-				self.referenceName = referenceName
 				self.isArchived = isArchived
 				self.playStyle = playStyle
+				self.minimumPlayersCount = minimumPlayersCount
+				self.properties = properties
+				self.referenceName = referenceName
 			}
 
 			public init(from decoder: Decoder) throws {
 				let values = try decoder.container(keyedBy: StringCodingKey.self)
 				self.maximumPlayersCount = try values.decodeIfPresent(Int.self, forKey: "maximumPlayersCount")
 				self.isSupportsPartyCode = try values.decodeIfPresent(Bool.self, forKey: "supportsPartyCode")
-				self.properties = try values.decodeIfPresent([String: String].self, forKey: "properties")
-				self.minimumPlayersCount = try values.decodeIfPresent(Int.self, forKey: "minimumPlayersCount")
-				self.referenceName = try values.decodeIfPresent(String.self, forKey: "referenceName")
 				self.isArchived = try values.decodeIfPresent(Bool.self, forKey: "archived")
 				self.playStyle = try values.decodeIfPresent(PlayStyle.self, forKey: "playStyle")
+				self.minimumPlayersCount = try values.decodeIfPresent(Int.self, forKey: "minimumPlayersCount")
+				self.properties = try values.decodeIfPresent([String: String].self, forKey: "properties")
+				self.referenceName = try values.decodeIfPresent(String.self, forKey: "referenceName")
 			}
 
 			public func encode(to encoder: Encoder) throws {
 				var values = encoder.container(keyedBy: StringCodingKey.self)
 				try values.encodeIfPresent(maximumPlayersCount, forKey: "maximumPlayersCount")
 				try values.encodeIfPresent(isSupportsPartyCode, forKey: "supportsPartyCode")
-				try values.encodeIfPresent(properties, forKey: "properties")
-				try values.encodeIfPresent(minimumPlayersCount, forKey: "minimumPlayersCount")
-				try values.encodeIfPresent(referenceName, forKey: "referenceName")
 				try values.encodeIfPresent(isArchived, forKey: "archived")
 				try values.encodeIfPresent(playStyle, forKey: "playStyle")
+				try values.encodeIfPresent(minimumPlayersCount, forKey: "minimumPlayersCount")
+				try values.encodeIfPresent(properties, forKey: "properties")
+				try values.encodeIfPresent(referenceName, forKey: "referenceName")
 			}
 		}
 
-		public init(id: String, type: `Type`, attributes: Attributes? = nil) {
-			self.id = id
+		public init(type: `Type`, attributes: Attributes? = nil, id: String) {
 			self.type = type
 			self.attributes = attributes
+			self.id = id
 		}
 
 		public init(from decoder: Decoder) throws {
 			let values = try decoder.container(keyedBy: StringCodingKey.self)
-			self.id = try values.decode(String.self, forKey: "id")
 			self.type = try values.decode(`Type`.self, forKey: "type")
 			self.attributes = try values.decodeIfPresent(Attributes.self, forKey: "attributes")
+			self.id = try values.decode(String.self, forKey: "id")
 		}
 
 		public func encode(to encoder: Encoder) throws {
 			var values = encoder.container(keyedBy: StringCodingKey.self)
-			try values.encode(id, forKey: "id")
 			try values.encode(type, forKey: "type")
 			try values.encodeIfPresent(attributes, forKey: "attributes")
+			try values.encode(id, forKey: "id")
 		}
 	}
 

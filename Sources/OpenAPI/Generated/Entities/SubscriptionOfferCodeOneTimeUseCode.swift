@@ -4,33 +4,19 @@
 import Foundation
 
 public struct SubscriptionOfferCodeOneTimeUseCode: Codable, Identifiable {
-	public var links: ResourceLinks?
-	public var relationships: Relationships?
-	public var attributes: Attributes?
 	public var type: `Type`
+	public var relationships: Relationships?
+	public var links: ResourceLinks?
 	public var id: String
+	public var attributes: Attributes?
+
+	public enum `Type`: String, Codable, CaseIterable {
+		case subscriptionOfferCodeOneTimeUseCodes
+	}
 
 	public struct Relationships: Codable {
-		public var values: Values?
 		public var offerCode: OfferCode?
-
-		public struct Values: Codable {
-			public var links: RelationshipLinks?
-
-			public init(links: RelationshipLinks? = nil) {
-				self.links = links
-			}
-
-			public init(from decoder: Decoder) throws {
-				let values = try decoder.container(keyedBy: StringCodingKey.self)
-				self.links = try values.decodeIfPresent(RelationshipLinks.self, forKey: "links")
-			}
-
-			public func encode(to encoder: Encoder) throws {
-				var values = encoder.container(keyedBy: StringCodingKey.self)
-				try values.encodeIfPresent(links, forKey: "links")
-			}
-		}
+		public var values: Values?
 
 		public struct OfferCode: Codable {
 			public var data: Data?
@@ -76,85 +62,99 @@ public struct SubscriptionOfferCodeOneTimeUseCode: Codable, Identifiable {
 			}
 		}
 
-		public init(values: Values? = nil, offerCode: OfferCode? = nil) {
-			self.values = values
+		public struct Values: Codable {
+			public var links: RelationshipLinks?
+
+			public init(links: RelationshipLinks? = nil) {
+				self.links = links
+			}
+
+			public init(from decoder: Decoder) throws {
+				let values = try decoder.container(keyedBy: StringCodingKey.self)
+				self.links = try values.decodeIfPresent(RelationshipLinks.self, forKey: "links")
+			}
+
+			public func encode(to encoder: Encoder) throws {
+				var values = encoder.container(keyedBy: StringCodingKey.self)
+				try values.encodeIfPresent(links, forKey: "links")
+			}
+		}
+
+		public init(offerCode: OfferCode? = nil, values: Values? = nil) {
 			self.offerCode = offerCode
+			self.values = values
 		}
 
 		public init(from decoder: Decoder) throws {
 			let values = try decoder.container(keyedBy: StringCodingKey.self)
-			self.values = try values.decodeIfPresent(Values.self, forKey: "values")
 			self.offerCode = try values.decodeIfPresent(OfferCode.self, forKey: "offerCode")
+			self.values = try values.decodeIfPresent(Values.self, forKey: "values")
 		}
 
 		public func encode(to encoder: Encoder) throws {
 			var values = encoder.container(keyedBy: StringCodingKey.self)
-			try values.encodeIfPresent(self.values, forKey: "values")
 			try values.encodeIfPresent(offerCode, forKey: "offerCode")
+			try values.encodeIfPresent(self.values, forKey: "values")
 		}
 	}
 
 	public struct Attributes: Codable {
-		public var expirationDate: String?
-		public var createdDate: Date?
-		public var numberOfCodes: Int?
-		public var isActive: Bool?
 		public var environment: OfferCodeEnvironment?
+		public var isActive: Bool?
+		public var numberOfCodes: Int?
+		public var createdDate: Date?
+		public var expirationDate: String?
 
-		public init(expirationDate: String? = nil, createdDate: Date? = nil, numberOfCodes: Int? = nil, isActive: Bool? = nil, environment: OfferCodeEnvironment? = nil) {
-			self.expirationDate = expirationDate
-			self.createdDate = createdDate
-			self.numberOfCodes = numberOfCodes
-			self.isActive = isActive
+		public init(environment: OfferCodeEnvironment? = nil, isActive: Bool? = nil, numberOfCodes: Int? = nil, createdDate: Date? = nil, expirationDate: String? = nil) {
 			self.environment = environment
+			self.isActive = isActive
+			self.numberOfCodes = numberOfCodes
+			self.createdDate = createdDate
+			self.expirationDate = expirationDate
 		}
 
 		public init(from decoder: Decoder) throws {
 			let values = try decoder.container(keyedBy: StringCodingKey.self)
-			self.expirationDate = try values.decodeIfPresent(String.self, forKey: "expirationDate")
-			self.createdDate = try values.decodeIfPresent(Date.self, forKey: "createdDate")
-			self.numberOfCodes = try values.decodeIfPresent(Int.self, forKey: "numberOfCodes")
-			self.isActive = try values.decodeIfPresent(Bool.self, forKey: "active")
 			self.environment = try values.decodeIfPresent(OfferCodeEnvironment.self, forKey: "environment")
+			self.isActive = try values.decodeIfPresent(Bool.self, forKey: "active")
+			self.numberOfCodes = try values.decodeIfPresent(Int.self, forKey: "numberOfCodes")
+			self.createdDate = try values.decodeIfPresent(Date.self, forKey: "createdDate")
+			self.expirationDate = try values.decodeIfPresent(String.self, forKey: "expirationDate")
 		}
 
 		public func encode(to encoder: Encoder) throws {
 			var values = encoder.container(keyedBy: StringCodingKey.self)
-			try values.encodeIfPresent(expirationDate, forKey: "expirationDate")
-			try values.encodeIfPresent(createdDate, forKey: "createdDate")
-			try values.encodeIfPresent(numberOfCodes, forKey: "numberOfCodes")
-			try values.encodeIfPresent(isActive, forKey: "active")
 			try values.encodeIfPresent(environment, forKey: "environment")
+			try values.encodeIfPresent(isActive, forKey: "active")
+			try values.encodeIfPresent(numberOfCodes, forKey: "numberOfCodes")
+			try values.encodeIfPresent(createdDate, forKey: "createdDate")
+			try values.encodeIfPresent(expirationDate, forKey: "expirationDate")
 		}
 	}
 
-	public enum `Type`: String, Codable, CaseIterable {
-		case subscriptionOfferCodeOneTimeUseCodes
-	}
-
-	public init(links: ResourceLinks? = nil, relationships: Relationships? = nil, attributes: Attributes? = nil, type: `Type`, id: String) {
-		self.links = links
-		self.relationships = relationships
-		self.attributes = attributes
+	public init(type: `Type`, relationships: Relationships? = nil, links: ResourceLinks? = nil, id: String, attributes: Attributes? = nil) {
 		self.type = type
+		self.relationships = relationships
+		self.links = links
 		self.id = id
+		self.attributes = attributes
 	}
 
 	public init(from decoder: Decoder) throws {
 		let values = try decoder.container(keyedBy: StringCodingKey.self)
-		self.links = try values.decodeIfPresent(ResourceLinks.self, forKey: "links")
-		self.relationships = try values.decodeIfPresent(Relationships.self, forKey: "relationships")
-		self.attributes = try values.decodeIfPresent(Attributes.self, forKey: "attributes")
 		self.type = try values.decode(`Type`.self, forKey: "type")
+		self.relationships = try values.decodeIfPresent(Relationships.self, forKey: "relationships")
+		self.links = try values.decodeIfPresent(ResourceLinks.self, forKey: "links")
 		self.id = try values.decode(String.self, forKey: "id")
+		self.attributes = try values.decodeIfPresent(Attributes.self, forKey: "attributes")
 	}
 
 	public func encode(to encoder: Encoder) throws {
 		var values = encoder.container(keyedBy: StringCodingKey.self)
-		try values.encodeIfPresent(links, forKey: "links")
-		try values.encodeIfPresent(relationships, forKey: "relationships")
-		try values.encodeIfPresent(attributes, forKey: "attributes")
 		try values.encode(type, forKey: "type")
+		try values.encodeIfPresent(relationships, forKey: "relationships")
+		try values.encodeIfPresent(links, forKey: "links")
 		try values.encode(id, forKey: "id")
+		try values.encodeIfPresent(attributes, forKey: "attributes")
 	}
 }

@@ -15,24 +15,24 @@ public struct MerchantIDCreateRequest: Codable {
 		}
 
 		public struct Attributes: Codable {
-			public var name: String
 			public var identifier: String
+			public var name: String
 
-			public init(name: String, identifier: String) {
-				self.name = name
+			public init(identifier: String, name: String) {
 				self.identifier = identifier
+				self.name = name
 			}
 
 			public init(from decoder: Decoder) throws {
 				let values = try decoder.container(keyedBy: StringCodingKey.self)
-				self.name = try values.decode(String.self, forKey: "name")
 				self.identifier = try values.decode(String.self, forKey: "identifier")
+				self.name = try values.decode(String.self, forKey: "name")
 			}
 
 			public func encode(to encoder: Encoder) throws {
 				var values = encoder.container(keyedBy: StringCodingKey.self)
-				try values.encode(name, forKey: "name")
 				try values.encode(identifier, forKey: "identifier")
+				try values.encode(name, forKey: "name")
 			}
 		}
 

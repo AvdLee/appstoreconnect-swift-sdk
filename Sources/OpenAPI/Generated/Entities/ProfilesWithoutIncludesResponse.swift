@@ -4,27 +4,27 @@
 import Foundation
 
 public struct ProfilesWithoutIncludesResponse: Codable {
-	public var data: [Profile]
 	public var meta: PagingInformation?
+	public var data: [Profile]
 	public var links: PagedDocumentLinks
 
-	public init(data: [Profile], meta: PagingInformation? = nil, links: PagedDocumentLinks) {
-		self.data = data
+	public init(meta: PagingInformation? = nil, data: [Profile], links: PagedDocumentLinks) {
 		self.meta = meta
+		self.data = data
 		self.links = links
 	}
 
 	public init(from decoder: Decoder) throws {
 		let values = try decoder.container(keyedBy: StringCodingKey.self)
-		self.data = try values.decode([Profile].self, forKey: "data")
 		self.meta = try values.decodeIfPresent(PagingInformation.self, forKey: "meta")
+		self.data = try values.decode([Profile].self, forKey: "data")
 		self.links = try values.decode(PagedDocumentLinks.self, forKey: "links")
 	}
 
 	public func encode(to encoder: Encoder) throws {
 		var values = encoder.container(keyedBy: StringCodingKey.self)
-		try values.encode(data, forKey: "data")
 		try values.encodeIfPresent(meta, forKey: "meta")
+		try values.encode(data, forKey: "data")
 		try values.encode(links, forKey: "links")
 	}
 }

@@ -7,30 +7,12 @@ public struct CertificateCreateRequest: Codable {
 	public var data: Data
 
 	public struct Data: Codable {
-		public var attributes: Attributes
-		public var relationships: Relationships?
 		public var type: `Type`
+		public var relationships: Relationships?
+		public var attributes: Attributes
 
-		public struct Attributes: Codable {
-			public var csrContent: String
-			public var certificateType: CertificateType
-
-			public init(csrContent: String, certificateType: CertificateType) {
-				self.csrContent = csrContent
-				self.certificateType = certificateType
-			}
-
-			public init(from decoder: Decoder) throws {
-				let values = try decoder.container(keyedBy: StringCodingKey.self)
-				self.csrContent = try values.decode(String.self, forKey: "csrContent")
-				self.certificateType = try values.decode(CertificateType.self, forKey: "certificateType")
-			}
-
-			public func encode(to encoder: Encoder) throws {
-				var values = encoder.container(keyedBy: StringCodingKey.self)
-				try values.encode(csrContent, forKey: "csrContent")
-				try values.encode(certificateType, forKey: "certificateType")
-			}
+		public enum `Type`: String, Codable, CaseIterable {
+			case certificates
 		}
 
 		public struct Relationships: Codable {
@@ -41,28 +23,28 @@ public struct CertificateCreateRequest: Codable {
 				public var data: Data?
 
 				public struct Data: Codable, Identifiable {
-					public var id: String
 					public var type: `Type`
+					public var id: String
 
 					public enum `Type`: String, Codable, CaseIterable {
 						case passTypeIDs = "passTypeIds"
 					}
 
-					public init(id: String, type: `Type`) {
-						self.id = id
+					public init(type: `Type`, id: String) {
 						self.type = type
+						self.id = id
 					}
 
 					public init(from decoder: Decoder) throws {
 						let values = try decoder.container(keyedBy: StringCodingKey.self)
-						self.id = try values.decode(String.self, forKey: "id")
 						self.type = try values.decode(`Type`.self, forKey: "type")
+						self.id = try values.decode(String.self, forKey: "id")
 					}
 
 					public func encode(to encoder: Encoder) throws {
 						var values = encoder.container(keyedBy: StringCodingKey.self)
-						try values.encode(id, forKey: "id")
 						try values.encode(type, forKey: "type")
+						try values.encode(id, forKey: "id")
 					}
 				}
 
@@ -85,28 +67,28 @@ public struct CertificateCreateRequest: Codable {
 				public var data: Data?
 
 				public struct Data: Codable, Identifiable {
-					public var id: String
 					public var type: `Type`
+					public var id: String
 
 					public enum `Type`: String, Codable, CaseIterable {
 						case merchantIDs = "merchantIds"
 					}
 
-					public init(id: String, type: `Type`) {
-						self.id = id
+					public init(type: `Type`, id: String) {
 						self.type = type
+						self.id = id
 					}
 
 					public init(from decoder: Decoder) throws {
 						let values = try decoder.container(keyedBy: StringCodingKey.self)
-						self.id = try values.decode(String.self, forKey: "id")
 						self.type = try values.decode(`Type`.self, forKey: "type")
+						self.id = try values.decode(String.self, forKey: "id")
 					}
 
 					public func encode(to encoder: Encoder) throws {
 						var values = encoder.container(keyedBy: StringCodingKey.self)
-						try values.encode(id, forKey: "id")
 						try values.encode(type, forKey: "type")
+						try values.encode(id, forKey: "id")
 					}
 				}
 
@@ -143,28 +125,46 @@ public struct CertificateCreateRequest: Codable {
 			}
 		}
 
-		public enum `Type`: String, Codable, CaseIterable {
-			case certificates
+		public struct Attributes: Codable {
+			public var csrContent: String
+			public var certificateType: CertificateType
+
+			public init(csrContent: String, certificateType: CertificateType) {
+				self.csrContent = csrContent
+				self.certificateType = certificateType
+			}
+
+			public init(from decoder: Decoder) throws {
+				let values = try decoder.container(keyedBy: StringCodingKey.self)
+				self.csrContent = try values.decode(String.self, forKey: "csrContent")
+				self.certificateType = try values.decode(CertificateType.self, forKey: "certificateType")
+			}
+
+			public func encode(to encoder: Encoder) throws {
+				var values = encoder.container(keyedBy: StringCodingKey.self)
+				try values.encode(csrContent, forKey: "csrContent")
+				try values.encode(certificateType, forKey: "certificateType")
+			}
 		}
 
-		public init(attributes: Attributes, relationships: Relationships? = nil, type: `Type`) {
-			self.attributes = attributes
-			self.relationships = relationships
+		public init(type: `Type`, relationships: Relationships? = nil, attributes: Attributes) {
 			self.type = type
+			self.relationships = relationships
+			self.attributes = attributes
 		}
 
 		public init(from decoder: Decoder) throws {
 			let values = try decoder.container(keyedBy: StringCodingKey.self)
-			self.attributes = try values.decode(Attributes.self, forKey: "attributes")
-			self.relationships = try values.decodeIfPresent(Relationships.self, forKey: "relationships")
 			self.type = try values.decode(`Type`.self, forKey: "type")
+			self.relationships = try values.decodeIfPresent(Relationships.self, forKey: "relationships")
+			self.attributes = try values.decode(Attributes.self, forKey: "attributes")
 		}
 
 		public func encode(to encoder: Encoder) throws {
 			var values = encoder.container(keyedBy: StringCodingKey.self)
-			try values.encode(attributes, forKey: "attributes")
-			try values.encodeIfPresent(relationships, forKey: "relationships")
 			try values.encode(type, forKey: "type")
+			try values.encodeIfPresent(relationships, forKey: "relationships")
+			try values.encode(attributes, forKey: "attributes")
 		}
 	}
 

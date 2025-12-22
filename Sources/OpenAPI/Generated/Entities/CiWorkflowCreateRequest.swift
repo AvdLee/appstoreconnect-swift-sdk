@@ -16,10 +16,142 @@ public struct CiWorkflowCreateRequest: Codable {
 		}
 
 		public struct Relationships: Codable {
-			public var product: Product
+			public var macOsVersion: MacOsVersion
 			public var repository: Repository
 			public var xcodeVersion: XcodeVersion
-			public var macOsVersion: MacOsVersion
+			public var product: Product
+
+			public struct MacOsVersion: Codable {
+				public var data: Data
+
+				public struct Data: Codable, Identifiable {
+					public var id: String
+					public var type: `Type`
+
+					public enum `Type`: String, Codable, CaseIterable {
+						case ciMacOsVersions
+					}
+
+					public init(id: String, type: `Type`) {
+						self.id = id
+						self.type = type
+					}
+
+					public init(from decoder: Decoder) throws {
+						let values = try decoder.container(keyedBy: StringCodingKey.self)
+						self.id = try values.decode(String.self, forKey: "id")
+						self.type = try values.decode(`Type`.self, forKey: "type")
+					}
+
+					public func encode(to encoder: Encoder) throws {
+						var values = encoder.container(keyedBy: StringCodingKey.self)
+						try values.encode(id, forKey: "id")
+						try values.encode(type, forKey: "type")
+					}
+				}
+
+				public init(data: Data) {
+					self.data = data
+				}
+
+				public init(from decoder: Decoder) throws {
+					let values = try decoder.container(keyedBy: StringCodingKey.self)
+					self.data = try values.decode(Data.self, forKey: "data")
+				}
+
+				public func encode(to encoder: Encoder) throws {
+					var values = encoder.container(keyedBy: StringCodingKey.self)
+					try values.encode(data, forKey: "data")
+				}
+			}
+
+			public struct Repository: Codable {
+				public var data: Data
+
+				public struct Data: Codable, Identifiable {
+					public var type: `Type`
+					public var id: String
+
+					public enum `Type`: String, Codable, CaseIterable {
+						case scmRepositories
+					}
+
+					public init(type: `Type`, id: String) {
+						self.type = type
+						self.id = id
+					}
+
+					public init(from decoder: Decoder) throws {
+						let values = try decoder.container(keyedBy: StringCodingKey.self)
+						self.type = try values.decode(`Type`.self, forKey: "type")
+						self.id = try values.decode(String.self, forKey: "id")
+					}
+
+					public func encode(to encoder: Encoder) throws {
+						var values = encoder.container(keyedBy: StringCodingKey.self)
+						try values.encode(type, forKey: "type")
+						try values.encode(id, forKey: "id")
+					}
+				}
+
+				public init(data: Data) {
+					self.data = data
+				}
+
+				public init(from decoder: Decoder) throws {
+					let values = try decoder.container(keyedBy: StringCodingKey.self)
+					self.data = try values.decode(Data.self, forKey: "data")
+				}
+
+				public func encode(to encoder: Encoder) throws {
+					var values = encoder.container(keyedBy: StringCodingKey.self)
+					try values.encode(data, forKey: "data")
+				}
+			}
+
+			public struct XcodeVersion: Codable {
+				public var data: Data
+
+				public struct Data: Codable, Identifiable {
+					public var id: String
+					public var type: `Type`
+
+					public enum `Type`: String, Codable, CaseIterable {
+						case ciXcodeVersions
+					}
+
+					public init(id: String, type: `Type`) {
+						self.id = id
+						self.type = type
+					}
+
+					public init(from decoder: Decoder) throws {
+						let values = try decoder.container(keyedBy: StringCodingKey.self)
+						self.id = try values.decode(String.self, forKey: "id")
+						self.type = try values.decode(`Type`.self, forKey: "type")
+					}
+
+					public func encode(to encoder: Encoder) throws {
+						var values = encoder.container(keyedBy: StringCodingKey.self)
+						try values.encode(id, forKey: "id")
+						try values.encode(type, forKey: "type")
+					}
+				}
+
+				public init(data: Data) {
+					self.data = data
+				}
+
+				public init(from decoder: Decoder) throws {
+					let values = try decoder.container(keyedBy: StringCodingKey.self)
+					self.data = try values.decode(Data.self, forKey: "data")
+				}
+
+				public func encode(to encoder: Encoder) throws {
+					var values = encoder.container(keyedBy: StringCodingKey.self)
+					try values.encode(data, forKey: "data")
+				}
+			}
 
 			public struct Product: Codable {
 				public var data: Data
@@ -65,229 +197,97 @@ public struct CiWorkflowCreateRequest: Codable {
 				}
 			}
 
-			public struct Repository: Codable {
-				public var data: Data
-
-				public struct Data: Codable, Identifiable {
-					public var id: String
-					public var type: `Type`
-
-					public enum `Type`: String, Codable, CaseIterable {
-						case scmRepositories
-					}
-
-					public init(id: String, type: `Type`) {
-						self.id = id
-						self.type = type
-					}
-
-					public init(from decoder: Decoder) throws {
-						let values = try decoder.container(keyedBy: StringCodingKey.self)
-						self.id = try values.decode(String.self, forKey: "id")
-						self.type = try values.decode(`Type`.self, forKey: "type")
-					}
-
-					public func encode(to encoder: Encoder) throws {
-						var values = encoder.container(keyedBy: StringCodingKey.self)
-						try values.encode(id, forKey: "id")
-						try values.encode(type, forKey: "type")
-					}
-				}
-
-				public init(data: Data) {
-					self.data = data
-				}
-
-				public init(from decoder: Decoder) throws {
-					let values = try decoder.container(keyedBy: StringCodingKey.self)
-					self.data = try values.decode(Data.self, forKey: "data")
-				}
-
-				public func encode(to encoder: Encoder) throws {
-					var values = encoder.container(keyedBy: StringCodingKey.self)
-					try values.encode(data, forKey: "data")
-				}
-			}
-
-			public struct XcodeVersion: Codable {
-				public var data: Data
-
-				public struct Data: Codable, Identifiable {
-					public var type: `Type`
-					public var id: String
-
-					public enum `Type`: String, Codable, CaseIterable {
-						case ciXcodeVersions
-					}
-
-					public init(type: `Type`, id: String) {
-						self.type = type
-						self.id = id
-					}
-
-					public init(from decoder: Decoder) throws {
-						let values = try decoder.container(keyedBy: StringCodingKey.self)
-						self.type = try values.decode(`Type`.self, forKey: "type")
-						self.id = try values.decode(String.self, forKey: "id")
-					}
-
-					public func encode(to encoder: Encoder) throws {
-						var values = encoder.container(keyedBy: StringCodingKey.self)
-						try values.encode(type, forKey: "type")
-						try values.encode(id, forKey: "id")
-					}
-				}
-
-				public init(data: Data) {
-					self.data = data
-				}
-
-				public init(from decoder: Decoder) throws {
-					let values = try decoder.container(keyedBy: StringCodingKey.self)
-					self.data = try values.decode(Data.self, forKey: "data")
-				}
-
-				public func encode(to encoder: Encoder) throws {
-					var values = encoder.container(keyedBy: StringCodingKey.self)
-					try values.encode(data, forKey: "data")
-				}
-			}
-
-			public struct MacOsVersion: Codable {
-				public var data: Data
-
-				public struct Data: Codable, Identifiable {
-					public var type: `Type`
-					public var id: String
-
-					public enum `Type`: String, Codable, CaseIterable {
-						case ciMacOsVersions
-					}
-
-					public init(type: `Type`, id: String) {
-						self.type = type
-						self.id = id
-					}
-
-					public init(from decoder: Decoder) throws {
-						let values = try decoder.container(keyedBy: StringCodingKey.self)
-						self.type = try values.decode(`Type`.self, forKey: "type")
-						self.id = try values.decode(String.self, forKey: "id")
-					}
-
-					public func encode(to encoder: Encoder) throws {
-						var values = encoder.container(keyedBy: StringCodingKey.self)
-						try values.encode(type, forKey: "type")
-						try values.encode(id, forKey: "id")
-					}
-				}
-
-				public init(data: Data) {
-					self.data = data
-				}
-
-				public init(from decoder: Decoder) throws {
-					let values = try decoder.container(keyedBy: StringCodingKey.self)
-					self.data = try values.decode(Data.self, forKey: "data")
-				}
-
-				public func encode(to encoder: Encoder) throws {
-					var values = encoder.container(keyedBy: StringCodingKey.self)
-					try values.encode(data, forKey: "data")
-				}
-			}
-
-			public init(product: Product, repository: Repository, xcodeVersion: XcodeVersion, macOsVersion: MacOsVersion) {
-				self.product = product
+			public init(macOsVersion: MacOsVersion, repository: Repository, xcodeVersion: XcodeVersion, product: Product) {
+				self.macOsVersion = macOsVersion
 				self.repository = repository
 				self.xcodeVersion = xcodeVersion
-				self.macOsVersion = macOsVersion
+				self.product = product
 			}
 
 			public init(from decoder: Decoder) throws {
 				let values = try decoder.container(keyedBy: StringCodingKey.self)
-				self.product = try values.decode(Product.self, forKey: "product")
+				self.macOsVersion = try values.decode(MacOsVersion.self, forKey: "macOsVersion")
 				self.repository = try values.decode(Repository.self, forKey: "repository")
 				self.xcodeVersion = try values.decode(XcodeVersion.self, forKey: "xcodeVersion")
-				self.macOsVersion = try values.decode(MacOsVersion.self, forKey: "macOsVersion")
+				self.product = try values.decode(Product.self, forKey: "product")
 			}
 
 			public func encode(to encoder: Encoder) throws {
 				var values = encoder.container(keyedBy: StringCodingKey.self)
-				try values.encode(product, forKey: "product")
+				try values.encode(macOsVersion, forKey: "macOsVersion")
 				try values.encode(repository, forKey: "repository")
 				try values.encode(xcodeVersion, forKey: "xcodeVersion")
-				try values.encode(macOsVersion, forKey: "macOsVersion")
+				try values.encode(product, forKey: "product")
 			}
 		}
 
 		public struct Attributes: Codable {
-			public var tagStartCondition: CiTagStartCondition?
 			public var manualBranchStartCondition: CiManualBranchStartCondition?
-			public var scheduledStartCondition: CiScheduledStartCondition?
-			public var isClean: Bool
-			public var containerFilePath: String
-			public var manualTagStartCondition: CiManualTagStartCondition?
-			public var manualPullRequestStartCondition: CiManualPullRequestStartCondition?
-			public var description: String
-			public var name: String
-			public var isLockedForEditing: Bool?
-			public var isEnabled: Bool
-			public var branchStartCondition: CiBranchStartCondition?
 			public var pullRequestStartCondition: CiPullRequestStartCondition?
+			public var manualPullRequestStartCondition: CiManualPullRequestStartCondition?
+			public var isClean: Bool
+			public var scheduledStartCondition: CiScheduledStartCondition?
 			public var actions: [CiAction]
+			public var containerFilePath: String
+			public var name: String
+			public var description: String
+			public var manualTagStartCondition: CiManualTagStartCondition?
+			public var branchStartCondition: CiBranchStartCondition?
+			public var tagStartCondition: CiTagStartCondition?
+			public var isEnabled: Bool
+			public var isLockedForEditing: Bool?
 
-			public init(tagStartCondition: CiTagStartCondition? = nil, manualBranchStartCondition: CiManualBranchStartCondition? = nil, scheduledStartCondition: CiScheduledStartCondition? = nil, isClean: Bool, containerFilePath: String, manualTagStartCondition: CiManualTagStartCondition? = nil, manualPullRequestStartCondition: CiManualPullRequestStartCondition? = nil, description: String, name: String, isLockedForEditing: Bool? = nil, isEnabled: Bool, branchStartCondition: CiBranchStartCondition? = nil, pullRequestStartCondition: CiPullRequestStartCondition? = nil, actions: [CiAction]) {
-				self.tagStartCondition = tagStartCondition
+			public init(manualBranchStartCondition: CiManualBranchStartCondition? = nil, pullRequestStartCondition: CiPullRequestStartCondition? = nil, manualPullRequestStartCondition: CiManualPullRequestStartCondition? = nil, isClean: Bool, scheduledStartCondition: CiScheduledStartCondition? = nil, actions: [CiAction], containerFilePath: String, name: String, description: String, manualTagStartCondition: CiManualTagStartCondition? = nil, branchStartCondition: CiBranchStartCondition? = nil, tagStartCondition: CiTagStartCondition? = nil, isEnabled: Bool, isLockedForEditing: Bool? = nil) {
 				self.manualBranchStartCondition = manualBranchStartCondition
-				self.scheduledStartCondition = scheduledStartCondition
-				self.isClean = isClean
-				self.containerFilePath = containerFilePath
-				self.manualTagStartCondition = manualTagStartCondition
-				self.manualPullRequestStartCondition = manualPullRequestStartCondition
-				self.description = description
-				self.name = name
-				self.isLockedForEditing = isLockedForEditing
-				self.isEnabled = isEnabled
-				self.branchStartCondition = branchStartCondition
 				self.pullRequestStartCondition = pullRequestStartCondition
+				self.manualPullRequestStartCondition = manualPullRequestStartCondition
+				self.isClean = isClean
+				self.scheduledStartCondition = scheduledStartCondition
 				self.actions = actions
+				self.containerFilePath = containerFilePath
+				self.name = name
+				self.description = description
+				self.manualTagStartCondition = manualTagStartCondition
+				self.branchStartCondition = branchStartCondition
+				self.tagStartCondition = tagStartCondition
+				self.isEnabled = isEnabled
+				self.isLockedForEditing = isLockedForEditing
 			}
 
 			public init(from decoder: Decoder) throws {
 				let values = try decoder.container(keyedBy: StringCodingKey.self)
-				self.tagStartCondition = try values.decodeIfPresent(CiTagStartCondition.self, forKey: "tagStartCondition")
 				self.manualBranchStartCondition = try values.decodeIfPresent(CiManualBranchStartCondition.self, forKey: "manualBranchStartCondition")
-				self.scheduledStartCondition = try values.decodeIfPresent(CiScheduledStartCondition.self, forKey: "scheduledStartCondition")
-				self.isClean = try values.decode(Bool.self, forKey: "clean")
-				self.containerFilePath = try values.decode(String.self, forKey: "containerFilePath")
-				self.manualTagStartCondition = try values.decodeIfPresent(CiManualTagStartCondition.self, forKey: "manualTagStartCondition")
-				self.manualPullRequestStartCondition = try values.decodeIfPresent(CiManualPullRequestStartCondition.self, forKey: "manualPullRequestStartCondition")
-				self.description = try values.decode(String.self, forKey: "description")
-				self.name = try values.decode(String.self, forKey: "name")
-				self.isLockedForEditing = try values.decodeIfPresent(Bool.self, forKey: "isLockedForEditing")
-				self.isEnabled = try values.decode(Bool.self, forKey: "isEnabled")
-				self.branchStartCondition = try values.decodeIfPresent(CiBranchStartCondition.self, forKey: "branchStartCondition")
 				self.pullRequestStartCondition = try values.decodeIfPresent(CiPullRequestStartCondition.self, forKey: "pullRequestStartCondition")
+				self.manualPullRequestStartCondition = try values.decodeIfPresent(CiManualPullRequestStartCondition.self, forKey: "manualPullRequestStartCondition")
+				self.isClean = try values.decode(Bool.self, forKey: "clean")
+				self.scheduledStartCondition = try values.decodeIfPresent(CiScheduledStartCondition.self, forKey: "scheduledStartCondition")
 				self.actions = try values.decode([CiAction].self, forKey: "actions")
+				self.containerFilePath = try values.decode(String.self, forKey: "containerFilePath")
+				self.name = try values.decode(String.self, forKey: "name")
+				self.description = try values.decode(String.self, forKey: "description")
+				self.manualTagStartCondition = try values.decodeIfPresent(CiManualTagStartCondition.self, forKey: "manualTagStartCondition")
+				self.branchStartCondition = try values.decodeIfPresent(CiBranchStartCondition.self, forKey: "branchStartCondition")
+				self.tagStartCondition = try values.decodeIfPresent(CiTagStartCondition.self, forKey: "tagStartCondition")
+				self.isEnabled = try values.decode(Bool.self, forKey: "isEnabled")
+				self.isLockedForEditing = try values.decodeIfPresent(Bool.self, forKey: "isLockedForEditing")
 			}
 
 			public func encode(to encoder: Encoder) throws {
 				var values = encoder.container(keyedBy: StringCodingKey.self)
-				try values.encodeIfPresent(tagStartCondition, forKey: "tagStartCondition")
 				try values.encodeIfPresent(manualBranchStartCondition, forKey: "manualBranchStartCondition")
-				try values.encodeIfPresent(scheduledStartCondition, forKey: "scheduledStartCondition")
-				try values.encode(isClean, forKey: "clean")
-				try values.encode(containerFilePath, forKey: "containerFilePath")
-				try values.encodeIfPresent(manualTagStartCondition, forKey: "manualTagStartCondition")
-				try values.encodeIfPresent(manualPullRequestStartCondition, forKey: "manualPullRequestStartCondition")
-				try values.encode(description, forKey: "description")
-				try values.encode(name, forKey: "name")
-				try values.encodeIfPresent(isLockedForEditing, forKey: "isLockedForEditing")
-				try values.encode(isEnabled, forKey: "isEnabled")
-				try values.encodeIfPresent(branchStartCondition, forKey: "branchStartCondition")
 				try values.encodeIfPresent(pullRequestStartCondition, forKey: "pullRequestStartCondition")
+				try values.encodeIfPresent(manualPullRequestStartCondition, forKey: "manualPullRequestStartCondition")
+				try values.encode(isClean, forKey: "clean")
+				try values.encodeIfPresent(scheduledStartCondition, forKey: "scheduledStartCondition")
 				try values.encode(actions, forKey: "actions")
+				try values.encode(containerFilePath, forKey: "containerFilePath")
+				try values.encode(name, forKey: "name")
+				try values.encode(description, forKey: "description")
+				try values.encodeIfPresent(manualTagStartCondition, forKey: "manualTagStartCondition")
+				try values.encodeIfPresent(branchStartCondition, forKey: "branchStartCondition")
+				try values.encodeIfPresent(tagStartCondition, forKey: "tagStartCondition")
+				try values.encode(isEnabled, forKey: "isEnabled")
+				try values.encodeIfPresent(isLockedForEditing, forKey: "isLockedForEditing")
 			}
 		}
 

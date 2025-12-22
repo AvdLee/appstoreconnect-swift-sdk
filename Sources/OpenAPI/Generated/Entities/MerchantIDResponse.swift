@@ -4,28 +4,28 @@
 import Foundation
 
 public struct MerchantIDResponse: Codable {
+	public var included: [Certificate]?
+	public var links: DocumentLinks
 	/// MerchantId
 	public var data: MerchantID
-	public var links: DocumentLinks
-	public var included: [Certificate]?
 
-	public init(data: MerchantID, links: DocumentLinks, included: [Certificate]? = nil) {
-		self.data = data
-		self.links = links
+	public init(included: [Certificate]? = nil, links: DocumentLinks, data: MerchantID) {
 		self.included = included
+		self.links = links
+		self.data = data
 	}
 
 	public init(from decoder: Decoder) throws {
 		let values = try decoder.container(keyedBy: StringCodingKey.self)
-		self.data = try values.decode(MerchantID.self, forKey: "data")
-		self.links = try values.decode(DocumentLinks.self, forKey: "links")
 		self.included = try values.decodeIfPresent([Certificate].self, forKey: "included")
+		self.links = try values.decode(DocumentLinks.self, forKey: "links")
+		self.data = try values.decode(MerchantID.self, forKey: "data")
 	}
 
 	public func encode(to encoder: Encoder) throws {
 		var values = encoder.container(keyedBy: StringCodingKey.self)
-		try values.encode(data, forKey: "data")
-		try values.encode(links, forKey: "links")
 		try values.encodeIfPresent(included, forKey: "included")
+		try values.encode(links, forKey: "links")
+		try values.encode(data, forKey: "data")
 	}
 }

@@ -4,23 +4,23 @@
 import Foundation
 
 public struct RelationshipLinks: Codable {
-	public var this: String?
 	public var related: String?
+	public var this: String?
 
-	public init(this: String? = nil, related: String? = nil) {
-		self.this = this
+	public init(related: String? = nil, this: String? = nil) {
 		self.related = related
+		self.this = this
 	}
 
 	public init(from decoder: Decoder) throws {
 		let values = try decoder.container(keyedBy: StringCodingKey.self)
-		self.this = try values.decodeIfPresent(String.self, forKey: "self")
 		self.related = try values.decodeIfPresent(String.self, forKey: "related")
+		self.this = try values.decodeIfPresent(String.self, forKey: "self")
 	}
 
 	public func encode(to encoder: Encoder) throws {
 		var values = encoder.container(keyedBy: StringCodingKey.self)
-		try values.encodeIfPresent(this, forKey: "self")
 		try values.encodeIfPresent(related, forKey: "related")
+		try values.encodeIfPresent(this, forKey: "self")
 	}
 }

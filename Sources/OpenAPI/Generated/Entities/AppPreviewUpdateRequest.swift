@@ -7,58 +7,58 @@ public struct AppPreviewUpdateRequest: Codable {
 	public var data: Data
 
 	public struct Data: Codable, Identifiable {
-		public var type: `Type`
-		public var attributes: Attributes?
 		public var id: String
+		public var attributes: Attributes?
+		public var type: `Type`
+
+		public struct Attributes: Codable {
+			public var previewFrameTimeCode: String?
+			public var sourceFileChecksum: String?
+			public var isUploaded: Bool?
+
+			public init(previewFrameTimeCode: String? = nil, sourceFileChecksum: String? = nil, isUploaded: Bool? = nil) {
+				self.previewFrameTimeCode = previewFrameTimeCode
+				self.sourceFileChecksum = sourceFileChecksum
+				self.isUploaded = isUploaded
+			}
+
+			public init(from decoder: Decoder) throws {
+				let values = try decoder.container(keyedBy: StringCodingKey.self)
+				self.previewFrameTimeCode = try values.decodeIfPresent(String.self, forKey: "previewFrameTimeCode")
+				self.sourceFileChecksum = try values.decodeIfPresent(String.self, forKey: "sourceFileChecksum")
+				self.isUploaded = try values.decodeIfPresent(Bool.self, forKey: "uploaded")
+			}
+
+			public func encode(to encoder: Encoder) throws {
+				var values = encoder.container(keyedBy: StringCodingKey.self)
+				try values.encodeIfPresent(previewFrameTimeCode, forKey: "previewFrameTimeCode")
+				try values.encodeIfPresent(sourceFileChecksum, forKey: "sourceFileChecksum")
+				try values.encodeIfPresent(isUploaded, forKey: "uploaded")
+			}
+		}
 
 		public enum `Type`: String, Codable, CaseIterable {
 			case appPreviews
 		}
 
-		public struct Attributes: Codable {
-			public var isUploaded: Bool?
-			public var previewFrameTimeCode: String?
-			public var sourceFileChecksum: String?
-
-			public init(isUploaded: Bool? = nil, previewFrameTimeCode: String? = nil, sourceFileChecksum: String? = nil) {
-				self.isUploaded = isUploaded
-				self.previewFrameTimeCode = previewFrameTimeCode
-				self.sourceFileChecksum = sourceFileChecksum
-			}
-
-			public init(from decoder: Decoder) throws {
-				let values = try decoder.container(keyedBy: StringCodingKey.self)
-				self.isUploaded = try values.decodeIfPresent(Bool.self, forKey: "uploaded")
-				self.previewFrameTimeCode = try values.decodeIfPresent(String.self, forKey: "previewFrameTimeCode")
-				self.sourceFileChecksum = try values.decodeIfPresent(String.self, forKey: "sourceFileChecksum")
-			}
-
-			public func encode(to encoder: Encoder) throws {
-				var values = encoder.container(keyedBy: StringCodingKey.self)
-				try values.encodeIfPresent(isUploaded, forKey: "uploaded")
-				try values.encodeIfPresent(previewFrameTimeCode, forKey: "previewFrameTimeCode")
-				try values.encodeIfPresent(sourceFileChecksum, forKey: "sourceFileChecksum")
-			}
-		}
-
-		public init(type: `Type`, attributes: Attributes? = nil, id: String) {
-			self.type = type
-			self.attributes = attributes
+		public init(id: String, attributes: Attributes? = nil, type: `Type`) {
 			self.id = id
+			self.attributes = attributes
+			self.type = type
 		}
 
 		public init(from decoder: Decoder) throws {
 			let values = try decoder.container(keyedBy: StringCodingKey.self)
-			self.type = try values.decode(`Type`.self, forKey: "type")
-			self.attributes = try values.decodeIfPresent(Attributes.self, forKey: "attributes")
 			self.id = try values.decode(String.self, forKey: "id")
+			self.attributes = try values.decodeIfPresent(Attributes.self, forKey: "attributes")
+			self.type = try values.decode(`Type`.self, forKey: "type")
 		}
 
 		public func encode(to encoder: Encoder) throws {
 			var values = encoder.container(keyedBy: StringCodingKey.self)
-			try values.encode(type, forKey: "type")
-			try values.encodeIfPresent(attributes, forKey: "attributes")
 			try values.encode(id, forKey: "id")
+			try values.encodeIfPresent(attributes, forKey: "attributes")
+			try values.encode(type, forKey: "type")
 		}
 	}
 

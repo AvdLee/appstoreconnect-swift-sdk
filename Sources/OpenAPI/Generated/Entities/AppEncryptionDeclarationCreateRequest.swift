@@ -7,9 +7,39 @@ public struct AppEncryptionDeclarationCreateRequest: Codable {
 	public var data: Data
 
 	public struct Data: Codable {
-		public var relationships: Relationships
 		public var attributes: Attributes
+		public var relationships: Relationships
 		public var type: `Type`
+
+		public struct Attributes: Codable {
+			public var appDescription: String
+			public var containsThirdPartyCryptography: Bool
+			public var isAvailableOnFrenchStore: Bool
+			public var containsProprietaryCryptography: Bool
+
+			public init(appDescription: String, containsThirdPartyCryptography: Bool, isAvailableOnFrenchStore: Bool, containsProprietaryCryptography: Bool) {
+				self.appDescription = appDescription
+				self.containsThirdPartyCryptography = containsThirdPartyCryptography
+				self.isAvailableOnFrenchStore = isAvailableOnFrenchStore
+				self.containsProprietaryCryptography = containsProprietaryCryptography
+			}
+
+			public init(from decoder: Decoder) throws {
+				let values = try decoder.container(keyedBy: StringCodingKey.self)
+				self.appDescription = try values.decode(String.self, forKey: "appDescription")
+				self.containsThirdPartyCryptography = try values.decode(Bool.self, forKey: "containsThirdPartyCryptography")
+				self.isAvailableOnFrenchStore = try values.decode(Bool.self, forKey: "availableOnFrenchStore")
+				self.containsProprietaryCryptography = try values.decode(Bool.self, forKey: "containsProprietaryCryptography")
+			}
+
+			public func encode(to encoder: Encoder) throws {
+				var values = encoder.container(keyedBy: StringCodingKey.self)
+				try values.encode(appDescription, forKey: "appDescription")
+				try values.encode(containsThirdPartyCryptography, forKey: "containsThirdPartyCryptography")
+				try values.encode(isAvailableOnFrenchStore, forKey: "availableOnFrenchStore")
+				try values.encode(containsProprietaryCryptography, forKey: "containsProprietaryCryptography")
+			}
+		}
 
 		public struct Relationships: Codable {
 			/// - warning: Deprecated.
@@ -75,57 +105,27 @@ public struct AppEncryptionDeclarationCreateRequest: Codable {
 			}
 		}
 
-		public struct Attributes: Codable {
-			public var isAvailableOnFrenchStore: Bool
-			public var containsProprietaryCryptography: Bool
-			public var containsThirdPartyCryptography: Bool
-			public var appDescription: String
-
-			public init(isAvailableOnFrenchStore: Bool, containsProprietaryCryptography: Bool, containsThirdPartyCryptography: Bool, appDescription: String) {
-				self.isAvailableOnFrenchStore = isAvailableOnFrenchStore
-				self.containsProprietaryCryptography = containsProprietaryCryptography
-				self.containsThirdPartyCryptography = containsThirdPartyCryptography
-				self.appDescription = appDescription
-			}
-
-			public init(from decoder: Decoder) throws {
-				let values = try decoder.container(keyedBy: StringCodingKey.self)
-				self.isAvailableOnFrenchStore = try values.decode(Bool.self, forKey: "availableOnFrenchStore")
-				self.containsProprietaryCryptography = try values.decode(Bool.self, forKey: "containsProprietaryCryptography")
-				self.containsThirdPartyCryptography = try values.decode(Bool.self, forKey: "containsThirdPartyCryptography")
-				self.appDescription = try values.decode(String.self, forKey: "appDescription")
-			}
-
-			public func encode(to encoder: Encoder) throws {
-				var values = encoder.container(keyedBy: StringCodingKey.self)
-				try values.encode(isAvailableOnFrenchStore, forKey: "availableOnFrenchStore")
-				try values.encode(containsProprietaryCryptography, forKey: "containsProprietaryCryptography")
-				try values.encode(containsThirdPartyCryptography, forKey: "containsThirdPartyCryptography")
-				try values.encode(appDescription, forKey: "appDescription")
-			}
-		}
-
 		public enum `Type`: String, Codable, CaseIterable {
 			case appEncryptionDeclarations
 		}
 
-		public init(relationships: Relationships, attributes: Attributes, type: `Type`) {
-			self.relationships = relationships
+		public init(attributes: Attributes, relationships: Relationships, type: `Type`) {
 			self.attributes = attributes
+			self.relationships = relationships
 			self.type = type
 		}
 
 		public init(from decoder: Decoder) throws {
 			let values = try decoder.container(keyedBy: StringCodingKey.self)
-			self.relationships = try values.decode(Relationships.self, forKey: "relationships")
 			self.attributes = try values.decode(Attributes.self, forKey: "attributes")
+			self.relationships = try values.decode(Relationships.self, forKey: "relationships")
 			self.type = try values.decode(`Type`.self, forKey: "type")
 		}
 
 		public func encode(to encoder: Encoder) throws {
 			var values = encoder.container(keyedBy: StringCodingKey.self)
-			try values.encode(relationships, forKey: "relationships")
 			try values.encode(attributes, forKey: "attributes")
+			try values.encode(relationships, forKey: "relationships")
 			try values.encode(type, forKey: "type")
 		}
 	}
