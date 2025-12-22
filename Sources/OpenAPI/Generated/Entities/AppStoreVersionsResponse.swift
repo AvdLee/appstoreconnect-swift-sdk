@@ -5,9 +5,9 @@ import Foundation
 
 public struct AppStoreVersionsResponse: Codable {
 	public var data: [AppStoreVersion]
-	public var links: PagedDocumentLinks
 	public var meta: PagingInformation?
 	public var included: [IncludedItem]?
+	public var links: PagedDocumentLinks
 
 	public enum IncludedItem: Codable {
 		case ageRatingDeclaration(AgeRatingDeclaration)
@@ -73,26 +73,26 @@ public struct AppStoreVersionsResponse: Codable {
 		}
 	}
 
-	public init(data: [AppStoreVersion], links: PagedDocumentLinks, meta: PagingInformation? = nil, included: [IncludedItem]? = nil) {
+	public init(data: [AppStoreVersion], meta: PagingInformation? = nil, included: [IncludedItem]? = nil, links: PagedDocumentLinks) {
 		self.data = data
-		self.links = links
 		self.meta = meta
 		self.included = included
+		self.links = links
 	}
 
 	public init(from decoder: Decoder) throws {
 		let values = try decoder.container(keyedBy: StringCodingKey.self)
 		self.data = try values.decode([AppStoreVersion].self, forKey: "data")
-		self.links = try values.decode(PagedDocumentLinks.self, forKey: "links")
 		self.meta = try values.decodeIfPresent(PagingInformation.self, forKey: "meta")
 		self.included = try values.decodeIfPresent([IncludedItem].self, forKey: "included")
+		self.links = try values.decode(PagedDocumentLinks.self, forKey: "links")
 	}
 
 	public func encode(to encoder: Encoder) throws {
 		var values = encoder.container(keyedBy: StringCodingKey.self)
 		try values.encode(data, forKey: "data")
-		try values.encode(links, forKey: "links")
 		try values.encodeIfPresent(meta, forKey: "meta")
 		try values.encodeIfPresent(included, forKey: "included")
+		try values.encode(links, forKey: "links")
 	}
 }

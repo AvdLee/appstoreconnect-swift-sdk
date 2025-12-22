@@ -7,56 +7,12 @@ public struct InAppPurchasePricePoint: Codable, Identifiable {
 	public var id: String
 	public var relationships: Relationships?
 	public var links: ResourceLinks?
-	public var type: `Type`
 	public var attributes: Attributes?
+	public var type: `Type`
 
 	public struct Relationships: Codable {
-		public var territory: Territory?
 		public var equalizations: Equalizations?
-
-		public struct Territory: Codable {
-			public var data: Data?
-
-			public struct Data: Codable, Identifiable {
-				public var type: `Type`
-				public var id: String
-
-				public enum `Type`: String, Codable, CaseIterable {
-					case territories
-				}
-
-				public init(type: `Type`, id: String) {
-					self.type = type
-					self.id = id
-				}
-
-				public init(from decoder: Decoder) throws {
-					let values = try decoder.container(keyedBy: StringCodingKey.self)
-					self.type = try values.decode(`Type`.self, forKey: "type")
-					self.id = try values.decode(String.self, forKey: "id")
-				}
-
-				public func encode(to encoder: Encoder) throws {
-					var values = encoder.container(keyedBy: StringCodingKey.self)
-					try values.encode(type, forKey: "type")
-					try values.encode(id, forKey: "id")
-				}
-			}
-
-			public init(data: Data? = nil) {
-				self.data = data
-			}
-
-			public init(from decoder: Decoder) throws {
-				let values = try decoder.container(keyedBy: StringCodingKey.self)
-				self.data = try values.decodeIfPresent(Data.self, forKey: "data")
-			}
-
-			public func encode(to encoder: Encoder) throws {
-				var values = encoder.container(keyedBy: StringCodingKey.self)
-				try values.encodeIfPresent(data, forKey: "data")
-			}
-		}
+		public var territory: Territory?
 
 		public struct Equalizations: Codable {
 			public var links: RelationshipLinks?
@@ -76,26 +32,66 @@ public struct InAppPurchasePricePoint: Codable, Identifiable {
 			}
 		}
 
-		public init(territory: Territory? = nil, equalizations: Equalizations? = nil) {
-			self.territory = territory
+		public struct Territory: Codable {
+			public var data: Data?
+
+			public struct Data: Codable, Identifiable {
+				public var id: String
+				public var type: `Type`
+
+				public enum `Type`: String, Codable, CaseIterable {
+					case territories
+				}
+
+				public init(id: String, type: `Type`) {
+					self.id = id
+					self.type = type
+				}
+
+				public init(from decoder: Decoder) throws {
+					let values = try decoder.container(keyedBy: StringCodingKey.self)
+					self.id = try values.decode(String.self, forKey: "id")
+					self.type = try values.decode(`Type`.self, forKey: "type")
+				}
+
+				public func encode(to encoder: Encoder) throws {
+					var values = encoder.container(keyedBy: StringCodingKey.self)
+					try values.encode(id, forKey: "id")
+					try values.encode(type, forKey: "type")
+				}
+			}
+
+			public init(data: Data? = nil) {
+				self.data = data
+			}
+
+			public init(from decoder: Decoder) throws {
+				let values = try decoder.container(keyedBy: StringCodingKey.self)
+				self.data = try values.decodeIfPresent(Data.self, forKey: "data")
+			}
+
+			public func encode(to encoder: Encoder) throws {
+				var values = encoder.container(keyedBy: StringCodingKey.self)
+				try values.encodeIfPresent(data, forKey: "data")
+			}
+		}
+
+		public init(equalizations: Equalizations? = nil, territory: Territory? = nil) {
 			self.equalizations = equalizations
+			self.territory = territory
 		}
 
 		public init(from decoder: Decoder) throws {
 			let values = try decoder.container(keyedBy: StringCodingKey.self)
-			self.territory = try values.decodeIfPresent(Territory.self, forKey: "territory")
 			self.equalizations = try values.decodeIfPresent(Equalizations.self, forKey: "equalizations")
+			self.territory = try values.decodeIfPresent(Territory.self, forKey: "territory")
 		}
 
 		public func encode(to encoder: Encoder) throws {
 			var values = encoder.container(keyedBy: StringCodingKey.self)
-			try values.encodeIfPresent(territory, forKey: "territory")
 			try values.encodeIfPresent(equalizations, forKey: "equalizations")
+			try values.encodeIfPresent(territory, forKey: "territory")
 		}
-	}
-
-	public enum `Type`: String, Codable, CaseIterable {
-		case inAppPurchasePricePoints
 	}
 
 	public struct Attributes: Codable {
@@ -120,12 +116,16 @@ public struct InAppPurchasePricePoint: Codable, Identifiable {
 		}
 	}
 
-	public init(id: String, relationships: Relationships? = nil, links: ResourceLinks? = nil, type: `Type`, attributes: Attributes? = nil) {
+	public enum `Type`: String, Codable, CaseIterable {
+		case inAppPurchasePricePoints
+	}
+
+	public init(id: String, relationships: Relationships? = nil, links: ResourceLinks? = nil, attributes: Attributes? = nil, type: `Type`) {
 		self.id = id
 		self.relationships = relationships
 		self.links = links
-		self.type = type
 		self.attributes = attributes
+		self.type = type
 	}
 
 	public init(from decoder: Decoder) throws {
@@ -133,8 +133,8 @@ public struct InAppPurchasePricePoint: Codable, Identifiable {
 		self.id = try values.decode(String.self, forKey: "id")
 		self.relationships = try values.decodeIfPresent(Relationships.self, forKey: "relationships")
 		self.links = try values.decodeIfPresent(ResourceLinks.self, forKey: "links")
-		self.type = try values.decode(`Type`.self, forKey: "type")
 		self.attributes = try values.decodeIfPresent(Attributes.self, forKey: "attributes")
+		self.type = try values.decode(`Type`.self, forKey: "type")
 	}
 
 	public func encode(to encoder: Encoder) throws {
@@ -142,7 +142,7 @@ public struct InAppPurchasePricePoint: Codable, Identifiable {
 		try values.encode(id, forKey: "id")
 		try values.encodeIfPresent(relationships, forKey: "relationships")
 		try values.encodeIfPresent(links, forKey: "links")
-		try values.encode(type, forKey: "type")
 		try values.encodeIfPresent(attributes, forKey: "attributes")
+		try values.encode(type, forKey: "type")
 	}
 }

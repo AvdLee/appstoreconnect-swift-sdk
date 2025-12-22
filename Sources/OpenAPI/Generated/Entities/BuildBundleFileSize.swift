@@ -6,63 +6,63 @@ import Foundation
 public struct BuildBundleFileSize: Codable, Identifiable {
 	public var id: String
 	public var links: ResourceLinks?
-	public var type: `Type`
 	public var attributes: Attributes?
+	public var type: `Type`
+
+	public struct Attributes: Codable {
+		public var installBytes: Int?
+		public var downloadBytes: Int?
+		public var osVersion: String?
+		public var deviceModel: String?
+
+		public init(installBytes: Int? = nil, downloadBytes: Int? = nil, osVersion: String? = nil, deviceModel: String? = nil) {
+			self.installBytes = installBytes
+			self.downloadBytes = downloadBytes
+			self.osVersion = osVersion
+			self.deviceModel = deviceModel
+		}
+
+		public init(from decoder: Decoder) throws {
+			let values = try decoder.container(keyedBy: StringCodingKey.self)
+			self.installBytes = try values.decodeIfPresent(Int.self, forKey: "installBytes")
+			self.downloadBytes = try values.decodeIfPresent(Int.self, forKey: "downloadBytes")
+			self.osVersion = try values.decodeIfPresent(String.self, forKey: "osVersion")
+			self.deviceModel = try values.decodeIfPresent(String.self, forKey: "deviceModel")
+		}
+
+		public func encode(to encoder: Encoder) throws {
+			var values = encoder.container(keyedBy: StringCodingKey.self)
+			try values.encodeIfPresent(installBytes, forKey: "installBytes")
+			try values.encodeIfPresent(downloadBytes, forKey: "downloadBytes")
+			try values.encodeIfPresent(osVersion, forKey: "osVersion")
+			try values.encodeIfPresent(deviceModel, forKey: "deviceModel")
+		}
+	}
 
 	public enum `Type`: String, Codable, CaseIterable {
 		case buildBundleFileSizes
 	}
 
-	public struct Attributes: Codable {
-		public var downloadBytes: Int?
-		public var osVersion: String?
-		public var deviceModel: String?
-		public var installBytes: Int?
-
-		public init(downloadBytes: Int? = nil, osVersion: String? = nil, deviceModel: String? = nil, installBytes: Int? = nil) {
-			self.downloadBytes = downloadBytes
-			self.osVersion = osVersion
-			self.deviceModel = deviceModel
-			self.installBytes = installBytes
-		}
-
-		public init(from decoder: Decoder) throws {
-			let values = try decoder.container(keyedBy: StringCodingKey.self)
-			self.downloadBytes = try values.decodeIfPresent(Int.self, forKey: "downloadBytes")
-			self.osVersion = try values.decodeIfPresent(String.self, forKey: "osVersion")
-			self.deviceModel = try values.decodeIfPresent(String.self, forKey: "deviceModel")
-			self.installBytes = try values.decodeIfPresent(Int.self, forKey: "installBytes")
-		}
-
-		public func encode(to encoder: Encoder) throws {
-			var values = encoder.container(keyedBy: StringCodingKey.self)
-			try values.encodeIfPresent(downloadBytes, forKey: "downloadBytes")
-			try values.encodeIfPresent(osVersion, forKey: "osVersion")
-			try values.encodeIfPresent(deviceModel, forKey: "deviceModel")
-			try values.encodeIfPresent(installBytes, forKey: "installBytes")
-		}
-	}
-
-	public init(id: String, links: ResourceLinks? = nil, type: `Type`, attributes: Attributes? = nil) {
+	public init(id: String, links: ResourceLinks? = nil, attributes: Attributes? = nil, type: `Type`) {
 		self.id = id
 		self.links = links
-		self.type = type
 		self.attributes = attributes
+		self.type = type
 	}
 
 	public init(from decoder: Decoder) throws {
 		let values = try decoder.container(keyedBy: StringCodingKey.self)
 		self.id = try values.decode(String.self, forKey: "id")
 		self.links = try values.decodeIfPresent(ResourceLinks.self, forKey: "links")
-		self.type = try values.decode(`Type`.self, forKey: "type")
 		self.attributes = try values.decodeIfPresent(Attributes.self, forKey: "attributes")
+		self.type = try values.decode(`Type`.self, forKey: "type")
 	}
 
 	public func encode(to encoder: Encoder) throws {
 		var values = encoder.container(keyedBy: StringCodingKey.self)
 		try values.encode(id, forKey: "id")
 		try values.encodeIfPresent(links, forKey: "links")
-		try values.encode(type, forKey: "type")
 		try values.encodeIfPresent(attributes, forKey: "attributes")
+		try values.encode(type, forKey: "type")
 	}
 }

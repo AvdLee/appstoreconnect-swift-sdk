@@ -6,12 +6,8 @@ import Foundation
 public struct BetaRecruitmentCriterionCompatibleBuildCheck: Codable, Identifiable {
 	public var id: String
 	public var links: ResourceLinks?
-	public var type: `Type`
 	public var attributes: Attributes?
-
-	public enum `Type`: String, Codable, CaseIterable {
-		case betaRecruitmentCriterionCompatibleBuildChecks
-	}
+	public var type: `Type`
 
 	public struct Attributes: Codable {
 		public var hasCompatibleBuild: Bool?
@@ -31,26 +27,30 @@ public struct BetaRecruitmentCriterionCompatibleBuildCheck: Codable, Identifiabl
 		}
 	}
 
-	public init(id: String, links: ResourceLinks? = nil, type: `Type`, attributes: Attributes? = nil) {
+	public enum `Type`: String, Codable, CaseIterable {
+		case betaRecruitmentCriterionCompatibleBuildChecks
+	}
+
+	public init(id: String, links: ResourceLinks? = nil, attributes: Attributes? = nil, type: `Type`) {
 		self.id = id
 		self.links = links
-		self.type = type
 		self.attributes = attributes
+		self.type = type
 	}
 
 	public init(from decoder: Decoder) throws {
 		let values = try decoder.container(keyedBy: StringCodingKey.self)
 		self.id = try values.decode(String.self, forKey: "id")
 		self.links = try values.decodeIfPresent(ResourceLinks.self, forKey: "links")
-		self.type = try values.decode(`Type`.self, forKey: "type")
 		self.attributes = try values.decodeIfPresent(Attributes.self, forKey: "attributes")
+		self.type = try values.decode(`Type`.self, forKey: "type")
 	}
 
 	public func encode(to encoder: Encoder) throws {
 		var values = encoder.container(keyedBy: StringCodingKey.self)
 		try values.encode(id, forKey: "id")
 		try values.encodeIfPresent(links, forKey: "links")
-		try values.encode(type, forKey: "type")
 		try values.encodeIfPresent(attributes, forKey: "attributes")
+		try values.encode(type, forKey: "type")
 	}
 }

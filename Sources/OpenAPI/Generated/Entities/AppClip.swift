@@ -7,8 +7,8 @@ public struct AppClip: Codable, Identifiable {
 	public var id: String
 	public var relationships: Relationships?
 	public var links: ResourceLinks?
-	public var type: `Type`
 	public var attributes: Attributes?
+	public var type: `Type`
 
 	public struct Relationships: Codable {
 		public var app: App?
@@ -19,28 +19,28 @@ public struct AppClip: Codable, Identifiable {
 			public var data: Data?
 
 			public struct Data: Codable, Identifiable {
-				public var type: `Type`
 				public var id: String
+				public var type: `Type`
 
 				public enum `Type`: String, Codable, CaseIterable {
 					case apps
 				}
 
-				public init(type: `Type`, id: String) {
-					self.type = type
+				public init(id: String, type: `Type`) {
 					self.id = id
+					self.type = type
 				}
 
 				public init(from decoder: Decoder) throws {
 					let values = try decoder.container(keyedBy: StringCodingKey.self)
-					self.type = try values.decode(`Type`.self, forKey: "type")
 					self.id = try values.decode(String.self, forKey: "id")
+					self.type = try values.decode(`Type`.self, forKey: "type")
 				}
 
 				public func encode(to encoder: Encoder) throws {
 					var values = encoder.container(keyedBy: StringCodingKey.self)
-					try values.encode(type, forKey: "type")
 					try values.encode(id, forKey: "id")
+					try values.encode(type, forKey: "type")
 				}
 			}
 
@@ -78,54 +78,54 @@ public struct AppClip: Codable, Identifiable {
 		}
 
 		public struct AppClipDefaultExperiences: Codable {
-			public var links: RelationshipLinks?
 			public var meta: PagingInformation?
 			public var data: [Datum]?
+			public var links: RelationshipLinks?
 
 			public struct Datum: Codable, Identifiable {
-				public var type: `Type`
 				public var id: String
+				public var type: `Type`
 
 				public enum `Type`: String, Codable, CaseIterable {
 					case appClipDefaultExperiences
 				}
 
-				public init(type: `Type`, id: String) {
-					self.type = type
+				public init(id: String, type: `Type`) {
 					self.id = id
+					self.type = type
 				}
 
 				public init(from decoder: Decoder) throws {
 					let values = try decoder.container(keyedBy: StringCodingKey.self)
-					self.type = try values.decode(`Type`.self, forKey: "type")
 					self.id = try values.decode(String.self, forKey: "id")
+					self.type = try values.decode(`Type`.self, forKey: "type")
 				}
 
 				public func encode(to encoder: Encoder) throws {
 					var values = encoder.container(keyedBy: StringCodingKey.self)
-					try values.encode(type, forKey: "type")
 					try values.encode(id, forKey: "id")
+					try values.encode(type, forKey: "type")
 				}
 			}
 
-			public init(links: RelationshipLinks? = nil, meta: PagingInformation? = nil, data: [Datum]? = nil) {
-				self.links = links
+			public init(meta: PagingInformation? = nil, data: [Datum]? = nil, links: RelationshipLinks? = nil) {
 				self.meta = meta
 				self.data = data
+				self.links = links
 			}
 
 			public init(from decoder: Decoder) throws {
 				let values = try decoder.container(keyedBy: StringCodingKey.self)
-				self.links = try values.decodeIfPresent(RelationshipLinks.self, forKey: "links")
 				self.meta = try values.decodeIfPresent(PagingInformation.self, forKey: "meta")
 				self.data = try values.decodeIfPresent([Datum].self, forKey: "data")
+				self.links = try values.decodeIfPresent(RelationshipLinks.self, forKey: "links")
 			}
 
 			public func encode(to encoder: Encoder) throws {
 				var values = encoder.container(keyedBy: StringCodingKey.self)
-				try values.encodeIfPresent(links, forKey: "links")
 				try values.encodeIfPresent(meta, forKey: "meta")
 				try values.encodeIfPresent(data, forKey: "data")
+				try values.encodeIfPresent(links, forKey: "links")
 			}
 		}
 
@@ -150,10 +150,6 @@ public struct AppClip: Codable, Identifiable {
 		}
 	}
 
-	public enum `Type`: String, Codable, CaseIterable {
-		case appClips
-	}
-
 	public struct Attributes: Codable {
 		public var bundleID: String?
 
@@ -172,12 +168,16 @@ public struct AppClip: Codable, Identifiable {
 		}
 	}
 
-	public init(id: String, relationships: Relationships? = nil, links: ResourceLinks? = nil, type: `Type`, attributes: Attributes? = nil) {
+	public enum `Type`: String, Codable, CaseIterable {
+		case appClips
+	}
+
+	public init(id: String, relationships: Relationships? = nil, links: ResourceLinks? = nil, attributes: Attributes? = nil, type: `Type`) {
 		self.id = id
 		self.relationships = relationships
 		self.links = links
-		self.type = type
 		self.attributes = attributes
+		self.type = type
 	}
 
 	public init(from decoder: Decoder) throws {
@@ -185,8 +185,8 @@ public struct AppClip: Codable, Identifiable {
 		self.id = try values.decode(String.self, forKey: "id")
 		self.relationships = try values.decodeIfPresent(Relationships.self, forKey: "relationships")
 		self.links = try values.decodeIfPresent(ResourceLinks.self, forKey: "links")
-		self.type = try values.decode(`Type`.self, forKey: "type")
 		self.attributes = try values.decodeIfPresent(Attributes.self, forKey: "attributes")
+		self.type = try values.decode(`Type`.self, forKey: "type")
 	}
 
 	public func encode(to encoder: Encoder) throws {
@@ -194,7 +194,7 @@ public struct AppClip: Codable, Identifiable {
 		try values.encode(id, forKey: "id")
 		try values.encodeIfPresent(relationships, forKey: "relationships")
 		try values.encodeIfPresent(links, forKey: "links")
-		try values.encode(type, forKey: "type")
 		try values.encodeIfPresent(attributes, forKey: "attributes")
+		try values.encode(type, forKey: "type")
 	}
 }

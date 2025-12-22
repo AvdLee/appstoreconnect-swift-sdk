@@ -16,80 +16,36 @@ public struct AppPriceScheduleCreateRequest: Codable {
 		}
 
 		public struct Relationships: Codable {
-			public var app: App
 			public var manualPrices: ManualPrices
+			public var app: App
 			public var baseTerritory: BaseTerritory
-
-			public struct App: Codable {
-				public var data: Data
-
-				public struct Data: Codable, Identifiable {
-					public var type: `Type`
-					public var id: String
-
-					public enum `Type`: String, Codable, CaseIterable {
-						case apps
-					}
-
-					public init(type: `Type`, id: String) {
-						self.type = type
-						self.id = id
-					}
-
-					public init(from decoder: Decoder) throws {
-						let values = try decoder.container(keyedBy: StringCodingKey.self)
-						self.type = try values.decode(`Type`.self, forKey: "type")
-						self.id = try values.decode(String.self, forKey: "id")
-					}
-
-					public func encode(to encoder: Encoder) throws {
-						var values = encoder.container(keyedBy: StringCodingKey.self)
-						try values.encode(type, forKey: "type")
-						try values.encode(id, forKey: "id")
-					}
-				}
-
-				public init(data: Data) {
-					self.data = data
-				}
-
-				public init(from decoder: Decoder) throws {
-					let values = try decoder.container(keyedBy: StringCodingKey.self)
-					self.data = try values.decode(Data.self, forKey: "data")
-				}
-
-				public func encode(to encoder: Encoder) throws {
-					var values = encoder.container(keyedBy: StringCodingKey.self)
-					try values.encode(data, forKey: "data")
-				}
-			}
 
 			public struct ManualPrices: Codable {
 				public var data: [Datum]
 
 				public struct Datum: Codable, Identifiable {
-					public var type: `Type`
 					public var id: String
+					public var type: `Type`
 
 					public enum `Type`: String, Codable, CaseIterable {
 						case appPrices
 					}
 
-					public init(type: `Type`, id: String) {
-						self.type = type
+					public init(id: String, type: `Type`) {
 						self.id = id
+						self.type = type
 					}
 
 					public init(from decoder: Decoder) throws {
 						let values = try decoder.container(keyedBy: StringCodingKey.self)
-						self.type = try values.decode(`Type`.self, forKey: "type")
 						self.id = try values.decode(String.self, forKey: "id")
+						self.type = try values.decode(`Type`.self, forKey: "type")
 					}
 
 					public func encode(to encoder: Encoder) throws {
 						var values = encoder.container(keyedBy: StringCodingKey.self)
-						try values.encode(type, forKey: "type")
 						try values.encode(id, forKey: "id")
+						try values.encode(type, forKey: "type")
 					}
 				}
 
@@ -108,32 +64,32 @@ public struct AppPriceScheduleCreateRequest: Codable {
 				}
 			}
 
-			public struct BaseTerritory: Codable {
+			public struct App: Codable {
 				public var data: Data
 
 				public struct Data: Codable, Identifiable {
-					public var type: `Type`
 					public var id: String
+					public var type: `Type`
 
 					public enum `Type`: String, Codable, CaseIterable {
-						case territories
+						case apps
 					}
 
-					public init(type: `Type`, id: String) {
-						self.type = type
+					public init(id: String, type: `Type`) {
 						self.id = id
+						self.type = type
 					}
 
 					public init(from decoder: Decoder) throws {
 						let values = try decoder.container(keyedBy: StringCodingKey.self)
-						self.type = try values.decode(`Type`.self, forKey: "type")
 						self.id = try values.decode(String.self, forKey: "id")
+						self.type = try values.decode(`Type`.self, forKey: "type")
 					}
 
 					public func encode(to encoder: Encoder) throws {
 						var values = encoder.container(keyedBy: StringCodingKey.self)
-						try values.encode(type, forKey: "type")
 						try values.encode(id, forKey: "id")
+						try values.encode(type, forKey: "type")
 					}
 				}
 
@@ -152,23 +108,67 @@ public struct AppPriceScheduleCreateRequest: Codable {
 				}
 			}
 
-			public init(app: App, manualPrices: ManualPrices, baseTerritory: BaseTerritory) {
-				self.app = app
+			public struct BaseTerritory: Codable {
+				public var data: Data
+
+				public struct Data: Codable, Identifiable {
+					public var id: String
+					public var type: `Type`
+
+					public enum `Type`: String, Codable, CaseIterable {
+						case territories
+					}
+
+					public init(id: String, type: `Type`) {
+						self.id = id
+						self.type = type
+					}
+
+					public init(from decoder: Decoder) throws {
+						let values = try decoder.container(keyedBy: StringCodingKey.self)
+						self.id = try values.decode(String.self, forKey: "id")
+						self.type = try values.decode(`Type`.self, forKey: "type")
+					}
+
+					public func encode(to encoder: Encoder) throws {
+						var values = encoder.container(keyedBy: StringCodingKey.self)
+						try values.encode(id, forKey: "id")
+						try values.encode(type, forKey: "type")
+					}
+				}
+
+				public init(data: Data) {
+					self.data = data
+				}
+
+				public init(from decoder: Decoder) throws {
+					let values = try decoder.container(keyedBy: StringCodingKey.self)
+					self.data = try values.decode(Data.self, forKey: "data")
+				}
+
+				public func encode(to encoder: Encoder) throws {
+					var values = encoder.container(keyedBy: StringCodingKey.self)
+					try values.encode(data, forKey: "data")
+				}
+			}
+
+			public init(manualPrices: ManualPrices, app: App, baseTerritory: BaseTerritory) {
 				self.manualPrices = manualPrices
+				self.app = app
 				self.baseTerritory = baseTerritory
 			}
 
 			public init(from decoder: Decoder) throws {
 				let values = try decoder.container(keyedBy: StringCodingKey.self)
-				self.app = try values.decode(App.self, forKey: "app")
 				self.manualPrices = try values.decode(ManualPrices.self, forKey: "manualPrices")
+				self.app = try values.decode(App.self, forKey: "app")
 				self.baseTerritory = try values.decode(BaseTerritory.self, forKey: "baseTerritory")
 			}
 
 			public func encode(to encoder: Encoder) throws {
 				var values = encoder.container(keyedBy: StringCodingKey.self)
-				try values.encode(app, forKey: "app")
 				try values.encode(manualPrices, forKey: "manualPrices")
+				try values.encode(app, forKey: "app")
 				try values.encode(baseTerritory, forKey: "baseTerritory")
 			}
 		}

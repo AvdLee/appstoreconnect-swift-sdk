@@ -7,57 +7,57 @@ public struct Certificate: Codable, Identifiable {
 	public var id: String
 	public var relationships: Relationships?
 	public var links: ResourceLinks?
-	public var type: `Type`
 	public var attributes: Attributes?
+	public var type: `Type`
 
 	public struct Relationships: Codable {
 		public var passTypeID: PassTypeID?
 
 		public struct PassTypeID: Codable {
-			public var links: RelationshipLinks?
 			public var data: Data?
+			public var links: RelationshipLinks?
 
 			public struct Data: Codable, Identifiable {
-				public var type: `Type`
 				public var id: String
+				public var type: `Type`
 
 				public enum `Type`: String, Codable, CaseIterable {
 					case passTypeIDs = "passTypeIds"
 				}
 
-				public init(type: `Type`, id: String) {
-					self.type = type
+				public init(id: String, type: `Type`) {
 					self.id = id
+					self.type = type
 				}
 
 				public init(from decoder: Decoder) throws {
 					let values = try decoder.container(keyedBy: StringCodingKey.self)
-					self.type = try values.decode(`Type`.self, forKey: "type")
 					self.id = try values.decode(String.self, forKey: "id")
+					self.type = try values.decode(`Type`.self, forKey: "type")
 				}
 
 				public func encode(to encoder: Encoder) throws {
 					var values = encoder.container(keyedBy: StringCodingKey.self)
-					try values.encode(type, forKey: "type")
 					try values.encode(id, forKey: "id")
+					try values.encode(type, forKey: "type")
 				}
 			}
 
-			public init(links: RelationshipLinks? = nil, data: Data? = nil) {
-				self.links = links
+			public init(data: Data? = nil, links: RelationshipLinks? = nil) {
 				self.data = data
+				self.links = links
 			}
 
 			public init(from decoder: Decoder) throws {
 				let values = try decoder.container(keyedBy: StringCodingKey.self)
-				self.links = try values.decodeIfPresent(RelationshipLinks.self, forKey: "links")
 				self.data = try values.decodeIfPresent(Data.self, forKey: "data")
+				self.links = try values.decodeIfPresent(RelationshipLinks.self, forKey: "links")
 			}
 
 			public func encode(to encoder: Encoder) throws {
 				var values = encoder.container(keyedBy: StringCodingKey.self)
-				try values.encodeIfPresent(links, forKey: "links")
 				try values.encodeIfPresent(data, forKey: "data")
+				try values.encodeIfPresent(links, forKey: "links")
 			}
 		}
 
@@ -76,62 +76,62 @@ public struct Certificate: Codable, Identifiable {
 		}
 	}
 
-	public enum `Type`: String, Codable, CaseIterable {
-		case certificates
-	}
-
 	public struct Attributes: Codable {
-		public var displayName: String?
+		public var platform: BundleIDPlatform?
+		public var certificateType: CertificateType?
+		public var certificateContent: String?
 		public var serialNumber: String?
 		public var expirationDate: Date?
-		public var certificateContent: String?
-		public var platform: BundleIDPlatform?
-		public var isActivated: Bool?
+		public var displayName: String?
 		public var name: String?
-		public var certificateType: CertificateType?
+		public var isActivated: Bool?
 
-		public init(displayName: String? = nil, serialNumber: String? = nil, expirationDate: Date? = nil, certificateContent: String? = nil, platform: BundleIDPlatform? = nil, isActivated: Bool? = nil, name: String? = nil, certificateType: CertificateType? = nil) {
-			self.displayName = displayName
+		public init(platform: BundleIDPlatform? = nil, certificateType: CertificateType? = nil, certificateContent: String? = nil, serialNumber: String? = nil, expirationDate: Date? = nil, displayName: String? = nil, name: String? = nil, isActivated: Bool? = nil) {
+			self.platform = platform
+			self.certificateType = certificateType
+			self.certificateContent = certificateContent
 			self.serialNumber = serialNumber
 			self.expirationDate = expirationDate
-			self.certificateContent = certificateContent
-			self.platform = platform
-			self.isActivated = isActivated
+			self.displayName = displayName
 			self.name = name
-			self.certificateType = certificateType
+			self.isActivated = isActivated
 		}
 
 		public init(from decoder: Decoder) throws {
 			let values = try decoder.container(keyedBy: StringCodingKey.self)
-			self.displayName = try values.decodeIfPresent(String.self, forKey: "displayName")
+			self.platform = try values.decodeIfPresent(BundleIDPlatform.self, forKey: "platform")
+			self.certificateType = try values.decodeIfPresent(CertificateType.self, forKey: "certificateType")
+			self.certificateContent = try values.decodeIfPresent(String.self, forKey: "certificateContent")
 			self.serialNumber = try values.decodeIfPresent(String.self, forKey: "serialNumber")
 			self.expirationDate = try values.decodeIfPresent(Date.self, forKey: "expirationDate")
-			self.certificateContent = try values.decodeIfPresent(String.self, forKey: "certificateContent")
-			self.platform = try values.decodeIfPresent(BundleIDPlatform.self, forKey: "platform")
-			self.isActivated = try values.decodeIfPresent(Bool.self, forKey: "activated")
+			self.displayName = try values.decodeIfPresent(String.self, forKey: "displayName")
 			self.name = try values.decodeIfPresent(String.self, forKey: "name")
-			self.certificateType = try values.decodeIfPresent(CertificateType.self, forKey: "certificateType")
+			self.isActivated = try values.decodeIfPresent(Bool.self, forKey: "activated")
 		}
 
 		public func encode(to encoder: Encoder) throws {
 			var values = encoder.container(keyedBy: StringCodingKey.self)
-			try values.encodeIfPresent(displayName, forKey: "displayName")
+			try values.encodeIfPresent(platform, forKey: "platform")
+			try values.encodeIfPresent(certificateType, forKey: "certificateType")
+			try values.encodeIfPresent(certificateContent, forKey: "certificateContent")
 			try values.encodeIfPresent(serialNumber, forKey: "serialNumber")
 			try values.encodeIfPresent(expirationDate, forKey: "expirationDate")
-			try values.encodeIfPresent(certificateContent, forKey: "certificateContent")
-			try values.encodeIfPresent(platform, forKey: "platform")
-			try values.encodeIfPresent(isActivated, forKey: "activated")
+			try values.encodeIfPresent(displayName, forKey: "displayName")
 			try values.encodeIfPresent(name, forKey: "name")
-			try values.encodeIfPresent(certificateType, forKey: "certificateType")
+			try values.encodeIfPresent(isActivated, forKey: "activated")
 		}
 	}
 
-	public init(id: String, relationships: Relationships? = nil, links: ResourceLinks? = nil, type: `Type`, attributes: Attributes? = nil) {
+	public enum `Type`: String, Codable, CaseIterable {
+		case certificates
+	}
+
+	public init(id: String, relationships: Relationships? = nil, links: ResourceLinks? = nil, attributes: Attributes? = nil, type: `Type`) {
 		self.id = id
 		self.relationships = relationships
 		self.links = links
-		self.type = type
 		self.attributes = attributes
+		self.type = type
 	}
 
 	public init(from decoder: Decoder) throws {
@@ -139,8 +139,8 @@ public struct Certificate: Codable, Identifiable {
 		self.id = try values.decode(String.self, forKey: "id")
 		self.relationships = try values.decodeIfPresent(Relationships.self, forKey: "relationships")
 		self.links = try values.decodeIfPresent(ResourceLinks.self, forKey: "links")
-		self.type = try values.decode(`Type`.self, forKey: "type")
 		self.attributes = try values.decodeIfPresent(Attributes.self, forKey: "attributes")
+		self.type = try values.decode(`Type`.self, forKey: "type")
 	}
 
 	public func encode(to encoder: Encoder) throws {
@@ -148,7 +148,7 @@ public struct Certificate: Codable, Identifiable {
 		try values.encode(id, forKey: "id")
 		try values.encodeIfPresent(relationships, forKey: "relationships")
 		try values.encodeIfPresent(links, forKey: "links")
-		try values.encode(type, forKey: "type")
 		try values.encodeIfPresent(attributes, forKey: "attributes")
+		try values.encode(type, forKey: "type")
 	}
 }

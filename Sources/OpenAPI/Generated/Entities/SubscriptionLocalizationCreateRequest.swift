@@ -7,38 +7,38 @@ public struct SubscriptionLocalizationCreateRequest: Codable {
 	public var data: Data
 
 	public struct Data: Codable {
-		public var type: `Type`
 		public var attributes: Attributes
+		public var type: `Type`
 		public var relationships: Relationships
 
-		public enum `Type`: String, Codable, CaseIterable {
-			case subscriptionLocalizations
-		}
-
 		public struct Attributes: Codable {
-			public var name: String
-			public var locale: String
 			public var description: String?
+			public var locale: String
+			public var name: String
 
-			public init(name: String, locale: String, description: String? = nil) {
-				self.name = name
-				self.locale = locale
+			public init(description: String? = nil, locale: String, name: String) {
 				self.description = description
+				self.locale = locale
+				self.name = name
 			}
 
 			public init(from decoder: Decoder) throws {
 				let values = try decoder.container(keyedBy: StringCodingKey.self)
-				self.name = try values.decode(String.self, forKey: "name")
-				self.locale = try values.decode(String.self, forKey: "locale")
 				self.description = try values.decodeIfPresent(String.self, forKey: "description")
+				self.locale = try values.decode(String.self, forKey: "locale")
+				self.name = try values.decode(String.self, forKey: "name")
 			}
 
 			public func encode(to encoder: Encoder) throws {
 				var values = encoder.container(keyedBy: StringCodingKey.self)
-				try values.encode(name, forKey: "name")
-				try values.encode(locale, forKey: "locale")
 				try values.encodeIfPresent(description, forKey: "description")
+				try values.encode(locale, forKey: "locale")
+				try values.encode(name, forKey: "name")
 			}
+		}
+
+		public enum `Type`: String, Codable, CaseIterable {
+			case subscriptionLocalizations
 		}
 
 		public struct Relationships: Codable {
@@ -48,28 +48,28 @@ public struct SubscriptionLocalizationCreateRequest: Codable {
 				public var data: Data
 
 				public struct Data: Codable, Identifiable {
-					public var type: `Type`
 					public var id: String
+					public var type: `Type`
 
 					public enum `Type`: String, Codable, CaseIterable {
 						case subscriptions
 					}
 
-					public init(type: `Type`, id: String) {
-						self.type = type
+					public init(id: String, type: `Type`) {
 						self.id = id
+						self.type = type
 					}
 
 					public init(from decoder: Decoder) throws {
 						let values = try decoder.container(keyedBy: StringCodingKey.self)
-						self.type = try values.decode(`Type`.self, forKey: "type")
 						self.id = try values.decode(String.self, forKey: "id")
+						self.type = try values.decode(`Type`.self, forKey: "type")
 					}
 
 					public func encode(to encoder: Encoder) throws {
 						var values = encoder.container(keyedBy: StringCodingKey.self)
-						try values.encode(type, forKey: "type")
 						try values.encode(id, forKey: "id")
+						try values.encode(type, forKey: "type")
 					}
 				}
 
@@ -103,23 +103,23 @@ public struct SubscriptionLocalizationCreateRequest: Codable {
 			}
 		}
 
-		public init(type: `Type`, attributes: Attributes, relationships: Relationships) {
-			self.type = type
+		public init(attributes: Attributes, type: `Type`, relationships: Relationships) {
 			self.attributes = attributes
+			self.type = type
 			self.relationships = relationships
 		}
 
 		public init(from decoder: Decoder) throws {
 			let values = try decoder.container(keyedBy: StringCodingKey.self)
-			self.type = try values.decode(`Type`.self, forKey: "type")
 			self.attributes = try values.decode(Attributes.self, forKey: "attributes")
+			self.type = try values.decode(`Type`.self, forKey: "type")
 			self.relationships = try values.decode(Relationships.self, forKey: "relationships")
 		}
 
 		public func encode(to encoder: Encoder) throws {
 			var values = encoder.container(keyedBy: StringCodingKey.self)
-			try values.encode(type, forKey: "type")
 			try values.encode(attributes, forKey: "attributes")
+			try values.encode(type, forKey: "type")
 			try values.encode(relationships, forKey: "relationships")
 		}
 	}

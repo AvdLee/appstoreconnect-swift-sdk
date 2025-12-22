@@ -5,30 +5,30 @@ import Foundation
 
 public struct BetaAppClipInvocationsResponse: Codable {
 	public var data: [BetaAppClipInvocation]
-	public var links: PagedDocumentLinks
 	public var meta: PagingInformation?
 	public var included: [BetaAppClipInvocationLocalization]?
+	public var links: PagedDocumentLinks
 
-	public init(data: [BetaAppClipInvocation], links: PagedDocumentLinks, meta: PagingInformation? = nil, included: [BetaAppClipInvocationLocalization]? = nil) {
+	public init(data: [BetaAppClipInvocation], meta: PagingInformation? = nil, included: [BetaAppClipInvocationLocalization]? = nil, links: PagedDocumentLinks) {
 		self.data = data
-		self.links = links
 		self.meta = meta
 		self.included = included
+		self.links = links
 	}
 
 	public init(from decoder: Decoder) throws {
 		let values = try decoder.container(keyedBy: StringCodingKey.self)
 		self.data = try values.decode([BetaAppClipInvocation].self, forKey: "data")
-		self.links = try values.decode(PagedDocumentLinks.self, forKey: "links")
 		self.meta = try values.decodeIfPresent(PagingInformation.self, forKey: "meta")
 		self.included = try values.decodeIfPresent([BetaAppClipInvocationLocalization].self, forKey: "included")
+		self.links = try values.decode(PagedDocumentLinks.self, forKey: "links")
 	}
 
 	public func encode(to encoder: Encoder) throws {
 		var values = encoder.container(keyedBy: StringCodingKey.self)
 		try values.encode(data, forKey: "data")
-		try values.encode(links, forKey: "links")
 		try values.encodeIfPresent(meta, forKey: "meta")
 		try values.encodeIfPresent(included, forKey: "included")
+		try values.encode(links, forKey: "links")
 	}
 }

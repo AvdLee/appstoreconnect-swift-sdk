@@ -7,8 +7,8 @@ public struct SubscriptionGroupLocalization: Codable, Identifiable {
 	public var id: String
 	public var relationships: Relationships?
 	public var links: ResourceLinks?
-	public var type: `Type`
 	public var attributes: Attributes?
+	public var type: `Type`
 
 	public struct Relationships: Codable {
 		public var subscriptionGroup: SubscriptionGroup?
@@ -17,28 +17,28 @@ public struct SubscriptionGroupLocalization: Codable, Identifiable {
 			public var data: Data?
 
 			public struct Data: Codable, Identifiable {
-				public var type: `Type`
 				public var id: String
+				public var type: `Type`
 
 				public enum `Type`: String, Codable, CaseIterable {
 					case subscriptionGroups
 				}
 
-				public init(type: `Type`, id: String) {
-					self.type = type
+				public init(id: String, type: `Type`) {
 					self.id = id
+					self.type = type
 				}
 
 				public init(from decoder: Decoder) throws {
 					let values = try decoder.container(keyedBy: StringCodingKey.self)
-					self.type = try values.decode(`Type`.self, forKey: "type")
 					self.id = try values.decode(String.self, forKey: "id")
+					self.type = try values.decode(`Type`.self, forKey: "type")
 				}
 
 				public func encode(to encoder: Encoder) throws {
 					var values = encoder.container(keyedBy: StringCodingKey.self)
-					try values.encode(type, forKey: "type")
 					try values.encode(id, forKey: "id")
+					try values.encode(type, forKey: "type")
 				}
 			}
 
@@ -72,15 +72,11 @@ public struct SubscriptionGroupLocalization: Codable, Identifiable {
 		}
 	}
 
-	public enum `Type`: String, Codable, CaseIterable {
-		case subscriptionGroupLocalizations
-	}
-
 	public struct Attributes: Codable {
-		public var locale: String?
 		public var customAppName: String?
 		public var state: State?
 		public var name: String?
+		public var locale: String?
 
 		public enum State: String, Codable, CaseIterable {
 			case prepareForSubmission = "PREPARE_FOR_SUBMISSION"
@@ -89,36 +85,40 @@ public struct SubscriptionGroupLocalization: Codable, Identifiable {
 			case rejected = "REJECTED"
 		}
 
-		public init(locale: String? = nil, customAppName: String? = nil, state: State? = nil, name: String? = nil) {
-			self.locale = locale
+		public init(customAppName: String? = nil, state: State? = nil, name: String? = nil, locale: String? = nil) {
 			self.customAppName = customAppName
 			self.state = state
 			self.name = name
+			self.locale = locale
 		}
 
 		public init(from decoder: Decoder) throws {
 			let values = try decoder.container(keyedBy: StringCodingKey.self)
-			self.locale = try values.decodeIfPresent(String.self, forKey: "locale")
 			self.customAppName = try values.decodeIfPresent(String.self, forKey: "customAppName")
 			self.state = try values.decodeIfPresent(State.self, forKey: "state")
 			self.name = try values.decodeIfPresent(String.self, forKey: "name")
+			self.locale = try values.decodeIfPresent(String.self, forKey: "locale")
 		}
 
 		public func encode(to encoder: Encoder) throws {
 			var values = encoder.container(keyedBy: StringCodingKey.self)
-			try values.encodeIfPresent(locale, forKey: "locale")
 			try values.encodeIfPresent(customAppName, forKey: "customAppName")
 			try values.encodeIfPresent(state, forKey: "state")
 			try values.encodeIfPresent(name, forKey: "name")
+			try values.encodeIfPresent(locale, forKey: "locale")
 		}
 	}
 
-	public init(id: String, relationships: Relationships? = nil, links: ResourceLinks? = nil, type: `Type`, attributes: Attributes? = nil) {
+	public enum `Type`: String, Codable, CaseIterable {
+		case subscriptionGroupLocalizations
+	}
+
+	public init(id: String, relationships: Relationships? = nil, links: ResourceLinks? = nil, attributes: Attributes? = nil, type: `Type`) {
 		self.id = id
 		self.relationships = relationships
 		self.links = links
-		self.type = type
 		self.attributes = attributes
+		self.type = type
 	}
 
 	public init(from decoder: Decoder) throws {
@@ -126,8 +126,8 @@ public struct SubscriptionGroupLocalization: Codable, Identifiable {
 		self.id = try values.decode(String.self, forKey: "id")
 		self.relationships = try values.decodeIfPresent(Relationships.self, forKey: "relationships")
 		self.links = try values.decodeIfPresent(ResourceLinks.self, forKey: "links")
-		self.type = try values.decode(`Type`.self, forKey: "type")
 		self.attributes = try values.decodeIfPresent(Attributes.self, forKey: "attributes")
+		self.type = try values.decode(`Type`.self, forKey: "type")
 	}
 
 	public func encode(to encoder: Encoder) throws {
@@ -135,7 +135,7 @@ public struct SubscriptionGroupLocalization: Codable, Identifiable {
 		try values.encode(id, forKey: "id")
 		try values.encodeIfPresent(relationships, forKey: "relationships")
 		try values.encodeIfPresent(links, forKey: "links")
-		try values.encode(type, forKey: "type")
 		try values.encodeIfPresent(attributes, forKey: "attributes")
+		try values.encode(type, forKey: "type")
 	}
 }

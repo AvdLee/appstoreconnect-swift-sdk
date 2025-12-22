@@ -4,23 +4,23 @@
 import Foundation
 
 public struct Location: Codable {
-	public var longitude: Double?
 	public var latitude: Double?
+	public var longitude: Double?
 
-	public init(longitude: Double? = nil, latitude: Double? = nil) {
-		self.longitude = longitude
+	public init(latitude: Double? = nil, longitude: Double? = nil) {
 		self.latitude = latitude
+		self.longitude = longitude
 	}
 
 	public init(from decoder: Decoder) throws {
 		let values = try decoder.container(keyedBy: StringCodingKey.self)
-		self.longitude = try values.decodeIfPresent(Double.self, forKey: "longitude")
 		self.latitude = try values.decodeIfPresent(Double.self, forKey: "latitude")
+		self.longitude = try values.decodeIfPresent(Double.self, forKey: "longitude")
 	}
 
 	public func encode(to encoder: Encoder) throws {
 		var values = encoder.container(keyedBy: StringCodingKey.self)
-		try values.encodeIfPresent(longitude, forKey: "longitude")
 		try values.encodeIfPresent(latitude, forKey: "latitude")
+		try values.encodeIfPresent(longitude, forKey: "longitude")
 	}
 }

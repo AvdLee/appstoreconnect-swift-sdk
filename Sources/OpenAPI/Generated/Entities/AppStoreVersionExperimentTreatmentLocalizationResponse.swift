@@ -4,10 +4,10 @@
 import Foundation
 
 public struct AppStoreVersionExperimentTreatmentLocalizationResponse: Codable {
-	public var links: DocumentLinks
 	/// AppStoreVersionExperimentTreatmentLocalization
 	public var data: AppStoreVersionExperimentTreatmentLocalization
 	public var included: [IncludedItem]?
+	public var links: DocumentLinks
 
 	public enum IncludedItem: Codable {
 		case appPreviewSet(AppPreviewSet)
@@ -46,23 +46,23 @@ public struct AppStoreVersionExperimentTreatmentLocalizationResponse: Codable {
 		}
 	}
 
-	public init(links: DocumentLinks, data: AppStoreVersionExperimentTreatmentLocalization, included: [IncludedItem]? = nil) {
-		self.links = links
+	public init(data: AppStoreVersionExperimentTreatmentLocalization, included: [IncludedItem]? = nil, links: DocumentLinks) {
 		self.data = data
 		self.included = included
+		self.links = links
 	}
 
 	public init(from decoder: Decoder) throws {
 		let values = try decoder.container(keyedBy: StringCodingKey.self)
-		self.links = try values.decode(DocumentLinks.self, forKey: "links")
 		self.data = try values.decode(AppStoreVersionExperimentTreatmentLocalization.self, forKey: "data")
 		self.included = try values.decodeIfPresent([IncludedItem].self, forKey: "included")
+		self.links = try values.decode(DocumentLinks.self, forKey: "links")
 	}
 
 	public func encode(to encoder: Encoder) throws {
 		var values = encoder.container(keyedBy: StringCodingKey.self)
-		try values.encode(links, forKey: "links")
 		try values.encode(data, forKey: "data")
 		try values.encodeIfPresent(included, forKey: "included")
+		try values.encode(links, forKey: "links")
 	}
 }

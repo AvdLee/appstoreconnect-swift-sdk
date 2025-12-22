@@ -7,8 +7,8 @@ public struct InAppPurchaseV2UpdateRequest: Codable {
 	public var data: Data
 
 	public struct Data: Codable, Identifiable {
-		public var type: `Type`
 		public var id: String
+		public var type: `Type`
 		public var attributes: Attributes?
 
 		public enum `Type`: String, Codable, CaseIterable {
@@ -16,48 +16,48 @@ public struct InAppPurchaseV2UpdateRequest: Codable {
 		}
 
 		public struct Attributes: Codable {
-			public var name: String?
 			public var reviewNote: String?
 			public var isFamilySharable: Bool?
+			public var name: String?
 
-			public init(name: String? = nil, reviewNote: String? = nil, isFamilySharable: Bool? = nil) {
-				self.name = name
+			public init(reviewNote: String? = nil, isFamilySharable: Bool? = nil, name: String? = nil) {
 				self.reviewNote = reviewNote
 				self.isFamilySharable = isFamilySharable
+				self.name = name
 			}
 
 			public init(from decoder: Decoder) throws {
 				let values = try decoder.container(keyedBy: StringCodingKey.self)
-				self.name = try values.decodeIfPresent(String.self, forKey: "name")
 				self.reviewNote = try values.decodeIfPresent(String.self, forKey: "reviewNote")
 				self.isFamilySharable = try values.decodeIfPresent(Bool.self, forKey: "familySharable")
+				self.name = try values.decodeIfPresent(String.self, forKey: "name")
 			}
 
 			public func encode(to encoder: Encoder) throws {
 				var values = encoder.container(keyedBy: StringCodingKey.self)
-				try values.encodeIfPresent(name, forKey: "name")
 				try values.encodeIfPresent(reviewNote, forKey: "reviewNote")
 				try values.encodeIfPresent(isFamilySharable, forKey: "familySharable")
+				try values.encodeIfPresent(name, forKey: "name")
 			}
 		}
 
-		public init(type: `Type`, id: String, attributes: Attributes? = nil) {
-			self.type = type
+		public init(id: String, type: `Type`, attributes: Attributes? = nil) {
 			self.id = id
+			self.type = type
 			self.attributes = attributes
 		}
 
 		public init(from decoder: Decoder) throws {
 			let values = try decoder.container(keyedBy: StringCodingKey.self)
-			self.type = try values.decode(`Type`.self, forKey: "type")
 			self.id = try values.decode(String.self, forKey: "id")
+			self.type = try values.decode(`Type`.self, forKey: "type")
 			self.attributes = try values.decodeIfPresent(Attributes.self, forKey: "attributes")
 		}
 
 		public func encode(to encoder: Encoder) throws {
 			var values = encoder.container(keyedBy: StringCodingKey.self)
-			try values.encode(type, forKey: "type")
 			try values.encode(id, forKey: "id")
+			try values.encode(type, forKey: "type")
 			try values.encodeIfPresent(attributes, forKey: "attributes")
 		}
 	}

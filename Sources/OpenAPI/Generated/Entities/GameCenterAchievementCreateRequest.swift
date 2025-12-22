@@ -7,50 +7,50 @@ public struct GameCenterAchievementCreateRequest: Codable {
 	public var data: Data
 
 	public struct Data: Codable {
-		public var type: `Type`
 		public var attributes: Attributes
+		public var type: `Type`
 		public var relationships: Relationships?
-
-		public enum `Type`: String, Codable, CaseIterable {
-			case gameCenterAchievements
-		}
 
 		public struct Attributes: Codable {
 			public var referenceName: String
+			public var vendorIdentifier: String
 			public var points: Int
 			public var isShowBeforeEarned: Bool
 			public var isRepeatable: Bool
-			public var vendorIdentifier: String
 			public var activityProperties: [String: String]?
 
-			public init(referenceName: String, points: Int, isShowBeforeEarned: Bool, isRepeatable: Bool, vendorIdentifier: String, activityProperties: [String: String]? = nil) {
+			public init(referenceName: String, vendorIdentifier: String, points: Int, isShowBeforeEarned: Bool, isRepeatable: Bool, activityProperties: [String: String]? = nil) {
 				self.referenceName = referenceName
+				self.vendorIdentifier = vendorIdentifier
 				self.points = points
 				self.isShowBeforeEarned = isShowBeforeEarned
 				self.isRepeatable = isRepeatable
-				self.vendorIdentifier = vendorIdentifier
 				self.activityProperties = activityProperties
 			}
 
 			public init(from decoder: Decoder) throws {
 				let values = try decoder.container(keyedBy: StringCodingKey.self)
 				self.referenceName = try values.decode(String.self, forKey: "referenceName")
+				self.vendorIdentifier = try values.decode(String.self, forKey: "vendorIdentifier")
 				self.points = try values.decode(Int.self, forKey: "points")
 				self.isShowBeforeEarned = try values.decode(Bool.self, forKey: "showBeforeEarned")
 				self.isRepeatable = try values.decode(Bool.self, forKey: "repeatable")
-				self.vendorIdentifier = try values.decode(String.self, forKey: "vendorIdentifier")
 				self.activityProperties = try values.decodeIfPresent([String: String].self, forKey: "activityProperties")
 			}
 
 			public func encode(to encoder: Encoder) throws {
 				var values = encoder.container(keyedBy: StringCodingKey.self)
 				try values.encode(referenceName, forKey: "referenceName")
+				try values.encode(vendorIdentifier, forKey: "vendorIdentifier")
 				try values.encode(points, forKey: "points")
 				try values.encode(isShowBeforeEarned, forKey: "showBeforeEarned")
 				try values.encode(isRepeatable, forKey: "repeatable")
-				try values.encode(vendorIdentifier, forKey: "vendorIdentifier")
 				try values.encodeIfPresent(activityProperties, forKey: "activityProperties")
 			}
+		}
+
+		public enum `Type`: String, Codable, CaseIterable {
+			case gameCenterAchievements
 		}
 
 		public struct Relationships: Codable {
@@ -61,28 +61,28 @@ public struct GameCenterAchievementCreateRequest: Codable {
 				public var data: Data?
 
 				public struct Data: Codable, Identifiable {
-					public var type: `Type`
 					public var id: String
+					public var type: `Type`
 
 					public enum `Type`: String, Codable, CaseIterable {
 						case gameCenterDetails
 					}
 
-					public init(type: `Type`, id: String) {
-						self.type = type
+					public init(id: String, type: `Type`) {
 						self.id = id
+						self.type = type
 					}
 
 					public init(from decoder: Decoder) throws {
 						let values = try decoder.container(keyedBy: StringCodingKey.self)
-						self.type = try values.decode(`Type`.self, forKey: "type")
 						self.id = try values.decode(String.self, forKey: "id")
+						self.type = try values.decode(`Type`.self, forKey: "type")
 					}
 
 					public func encode(to encoder: Encoder) throws {
 						var values = encoder.container(keyedBy: StringCodingKey.self)
-						try values.encode(type, forKey: "type")
 						try values.encode(id, forKey: "id")
+						try values.encode(type, forKey: "type")
 					}
 				}
 
@@ -105,28 +105,28 @@ public struct GameCenterAchievementCreateRequest: Codable {
 				public var data: Data?
 
 				public struct Data: Codable, Identifiable {
-					public var type: `Type`
 					public var id: String
+					public var type: `Type`
 
 					public enum `Type`: String, Codable, CaseIterable {
 						case gameCenterGroups
 					}
 
-					public init(type: `Type`, id: String) {
-						self.type = type
+					public init(id: String, type: `Type`) {
 						self.id = id
+						self.type = type
 					}
 
 					public init(from decoder: Decoder) throws {
 						let values = try decoder.container(keyedBy: StringCodingKey.self)
-						self.type = try values.decode(`Type`.self, forKey: "type")
 						self.id = try values.decode(String.self, forKey: "id")
+						self.type = try values.decode(`Type`.self, forKey: "type")
 					}
 
 					public func encode(to encoder: Encoder) throws {
 						var values = encoder.container(keyedBy: StringCodingKey.self)
-						try values.encode(type, forKey: "type")
 						try values.encode(id, forKey: "id")
+						try values.encode(type, forKey: "type")
 					}
 				}
 
@@ -163,23 +163,23 @@ public struct GameCenterAchievementCreateRequest: Codable {
 			}
 		}
 
-		public init(type: `Type`, attributes: Attributes, relationships: Relationships? = nil) {
-			self.type = type
+		public init(attributes: Attributes, type: `Type`, relationships: Relationships? = nil) {
 			self.attributes = attributes
+			self.type = type
 			self.relationships = relationships
 		}
 
 		public init(from decoder: Decoder) throws {
 			let values = try decoder.container(keyedBy: StringCodingKey.self)
-			self.type = try values.decode(`Type`.self, forKey: "type")
 			self.attributes = try values.decode(Attributes.self, forKey: "attributes")
+			self.type = try values.decode(`Type`.self, forKey: "type")
 			self.relationships = try values.decodeIfPresent(Relationships.self, forKey: "relationships")
 		}
 
 		public func encode(to encoder: Encoder) throws {
 			var values = encoder.container(keyedBy: StringCodingKey.self)
-			try values.encode(type, forKey: "type")
 			try values.encode(attributes, forKey: "attributes")
+			try values.encode(type, forKey: "type")
 			try values.encodeIfPresent(relationships, forKey: "relationships")
 		}
 	}

@@ -4,16 +4,16 @@
 import Foundation
 
 public struct ErrorLinks: Codable {
-	public var about: String?
 	public var associated: Associated?
+	public var about: String?
 
 	public enum Associated: Codable {
 		case string(String)
 		case object(Object)
 
 		public struct Object: Codable {
-			public var meta: Meta?
 			public var href: String?
+			public var meta: Meta?
 
 			public struct Meta: Codable {
 				public var source: String?
@@ -33,21 +33,21 @@ public struct ErrorLinks: Codable {
 				}
 			}
 
-			public init(meta: Meta? = nil, href: String? = nil) {
-				self.meta = meta
+			public init(href: String? = nil, meta: Meta? = nil) {
 				self.href = href
+				self.meta = meta
 			}
 
 			public init(from decoder: Decoder) throws {
 				let values = try decoder.container(keyedBy: StringCodingKey.self)
-				self.meta = try values.decodeIfPresent(Meta.self, forKey: "meta")
 				self.href = try values.decodeIfPresent(String.self, forKey: "href")
+				self.meta = try values.decodeIfPresent(Meta.self, forKey: "meta")
 			}
 
 			public func encode(to encoder: Encoder) throws {
 				var values = encoder.container(keyedBy: StringCodingKey.self)
-				try values.encodeIfPresent(meta, forKey: "meta")
 				try values.encodeIfPresent(href, forKey: "href")
+				try values.encodeIfPresent(meta, forKey: "meta")
 			}
 		}
 
@@ -74,20 +74,20 @@ public struct ErrorLinks: Codable {
 		}
 	}
 
-	public init(about: String? = nil, associated: Associated? = nil) {
-		self.about = about
+	public init(associated: Associated? = nil, about: String? = nil) {
 		self.associated = associated
+		self.about = about
 	}
 
 	public init(from decoder: Decoder) throws {
 		let values = try decoder.container(keyedBy: StringCodingKey.self)
-		self.about = try values.decodeIfPresent(String.self, forKey: "about")
 		self.associated = try values.decodeIfPresent(Associated.self, forKey: "associated")
+		self.about = try values.decodeIfPresent(String.self, forKey: "about")
 	}
 
 	public func encode(to encoder: Encoder) throws {
 		var values = encoder.container(keyedBy: StringCodingKey.self)
-		try values.encodeIfPresent(about, forKey: "about")
 		try values.encodeIfPresent(associated, forKey: "associated")
+		try values.encodeIfPresent(about, forKey: "about")
 	}
 }

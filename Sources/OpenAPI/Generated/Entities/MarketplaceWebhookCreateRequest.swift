@@ -8,50 +8,50 @@ public struct MarketplaceWebhookCreateRequest: Codable {
 	public var data: Data
 
 	public struct Data: Codable {
-		public var type: `Type`
 		public var attributes: Attributes
+		public var type: `Type`
+
+		public struct Attributes: Codable {
+			public var secret: String
+			public var endpointURL: URL
+
+			public init(secret: String, endpointURL: URL) {
+				self.secret = secret
+				self.endpointURL = endpointURL
+			}
+
+			public init(from decoder: Decoder) throws {
+				let values = try decoder.container(keyedBy: StringCodingKey.self)
+				self.secret = try values.decode(String.self, forKey: "secret")
+				self.endpointURL = try values.decode(URL.self, forKey: "endpointUrl")
+			}
+
+			public func encode(to encoder: Encoder) throws {
+				var values = encoder.container(keyedBy: StringCodingKey.self)
+				try values.encode(secret, forKey: "secret")
+				try values.encode(endpointURL, forKey: "endpointUrl")
+			}
+		}
 
 		public enum `Type`: String, Codable, CaseIterable {
 			case marketplaceWebhooks
 		}
 
-		public struct Attributes: Codable {
-			public var endpointURL: URL
-			public var secret: String
-
-			public init(endpointURL: URL, secret: String) {
-				self.endpointURL = endpointURL
-				self.secret = secret
-			}
-
-			public init(from decoder: Decoder) throws {
-				let values = try decoder.container(keyedBy: StringCodingKey.self)
-				self.endpointURL = try values.decode(URL.self, forKey: "endpointUrl")
-				self.secret = try values.decode(String.self, forKey: "secret")
-			}
-
-			public func encode(to encoder: Encoder) throws {
-				var values = encoder.container(keyedBy: StringCodingKey.self)
-				try values.encode(endpointURL, forKey: "endpointUrl")
-				try values.encode(secret, forKey: "secret")
-			}
-		}
-
-		public init(type: `Type`, attributes: Attributes) {
-			self.type = type
+		public init(attributes: Attributes, type: `Type`) {
 			self.attributes = attributes
+			self.type = type
 		}
 
 		public init(from decoder: Decoder) throws {
 			let values = try decoder.container(keyedBy: StringCodingKey.self)
-			self.type = try values.decode(`Type`.self, forKey: "type")
 			self.attributes = try values.decode(Attributes.self, forKey: "attributes")
+			self.type = try values.decode(`Type`.self, forKey: "type")
 		}
 
 		public func encode(to encoder: Encoder) throws {
 			var values = encoder.container(keyedBy: StringCodingKey.self)
-			try values.encode(type, forKey: "type")
 			try values.encode(attributes, forKey: "attributes")
+			try values.encode(type, forKey: "type")
 		}
 	}
 

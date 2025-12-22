@@ -7,41 +7,41 @@ public struct AppStoreVersionExperimentV2: Codable, Identifiable {
 	public var id: String
 	public var relationships: Relationships?
 	public var links: ResourceLinks?
-	public var type: `Type`
 	public var attributes: Attributes?
+	public var type: `Type`
 
 	public struct Relationships: Codable {
-		public var app: App?
 		public var latestControlVersion: LatestControlVersion?
+		public var app: App?
 		public var appStoreVersionExperimentTreatments: AppStoreVersionExperimentTreatments?
 		public var controlVersions: ControlVersions?
 
-		public struct App: Codable {
+		public struct LatestControlVersion: Codable {
 			public var data: Data?
 
 			public struct Data: Codable, Identifiable {
-				public var type: `Type`
 				public var id: String
+				public var type: `Type`
 
 				public enum `Type`: String, Codable, CaseIterable {
-					case apps
+					case appStoreVersions
 				}
 
-				public init(type: `Type`, id: String) {
-					self.type = type
+				public init(id: String, type: `Type`) {
 					self.id = id
+					self.type = type
 				}
 
 				public init(from decoder: Decoder) throws {
 					let values = try decoder.container(keyedBy: StringCodingKey.self)
-					self.type = try values.decode(`Type`.self, forKey: "type")
 					self.id = try values.decode(String.self, forKey: "id")
+					self.type = try values.decode(`Type`.self, forKey: "type")
 				}
 
 				public func encode(to encoder: Encoder) throws {
 					var values = encoder.container(keyedBy: StringCodingKey.self)
-					try values.encode(type, forKey: "type")
 					try values.encode(id, forKey: "id")
+					try values.encode(type, forKey: "type")
 				}
 			}
 
@@ -60,32 +60,32 @@ public struct AppStoreVersionExperimentV2: Codable, Identifiable {
 			}
 		}
 
-		public struct LatestControlVersion: Codable {
+		public struct App: Codable {
 			public var data: Data?
 
 			public struct Data: Codable, Identifiable {
-				public var type: `Type`
 				public var id: String
+				public var type: `Type`
 
 				public enum `Type`: String, Codable, CaseIterable {
-					case appStoreVersions
+					case apps
 				}
 
-				public init(type: `Type`, id: String) {
-					self.type = type
+				public init(id: String, type: `Type`) {
 					self.id = id
+					self.type = type
 				}
 
 				public init(from decoder: Decoder) throws {
 					let values = try decoder.container(keyedBy: StringCodingKey.self)
-					self.type = try values.decode(`Type`.self, forKey: "type")
 					self.id = try values.decode(String.self, forKey: "id")
+					self.type = try values.decode(`Type`.self, forKey: "type")
 				}
 
 				public func encode(to encoder: Encoder) throws {
 					var values = encoder.container(keyedBy: StringCodingKey.self)
-					try values.encode(type, forKey: "type")
 					try values.encode(id, forKey: "id")
+					try values.encode(type, forKey: "type")
 				}
 			}
 
@@ -105,54 +105,54 @@ public struct AppStoreVersionExperimentV2: Codable, Identifiable {
 		}
 
 		public struct AppStoreVersionExperimentTreatments: Codable {
-			public var links: RelationshipLinks?
 			public var meta: PagingInformation?
 			public var data: [Datum]?
+			public var links: RelationshipLinks?
 
 			public struct Datum: Codable, Identifiable {
-				public var type: `Type`
 				public var id: String
+				public var type: `Type`
 
 				public enum `Type`: String, Codable, CaseIterable {
 					case appStoreVersionExperimentTreatments
 				}
 
-				public init(type: `Type`, id: String) {
-					self.type = type
+				public init(id: String, type: `Type`) {
 					self.id = id
+					self.type = type
 				}
 
 				public init(from decoder: Decoder) throws {
 					let values = try decoder.container(keyedBy: StringCodingKey.self)
-					self.type = try values.decode(`Type`.self, forKey: "type")
 					self.id = try values.decode(String.self, forKey: "id")
+					self.type = try values.decode(`Type`.self, forKey: "type")
 				}
 
 				public func encode(to encoder: Encoder) throws {
 					var values = encoder.container(keyedBy: StringCodingKey.self)
-					try values.encode(type, forKey: "type")
 					try values.encode(id, forKey: "id")
+					try values.encode(type, forKey: "type")
 				}
 			}
 
-			public init(links: RelationshipLinks? = nil, meta: PagingInformation? = nil, data: [Datum]? = nil) {
-				self.links = links
+			public init(meta: PagingInformation? = nil, data: [Datum]? = nil, links: RelationshipLinks? = nil) {
 				self.meta = meta
 				self.data = data
+				self.links = links
 			}
 
 			public init(from decoder: Decoder) throws {
 				let values = try decoder.container(keyedBy: StringCodingKey.self)
-				self.links = try values.decodeIfPresent(RelationshipLinks.self, forKey: "links")
 				self.meta = try values.decodeIfPresent(PagingInformation.self, forKey: "meta")
 				self.data = try values.decodeIfPresent([Datum].self, forKey: "data")
+				self.links = try values.decodeIfPresent(RelationshipLinks.self, forKey: "links")
 			}
 
 			public func encode(to encoder: Encoder) throws {
 				var values = encoder.container(keyedBy: StringCodingKey.self)
-				try values.encodeIfPresent(links, forKey: "links")
 				try values.encodeIfPresent(meta, forKey: "meta")
 				try values.encodeIfPresent(data, forKey: "data")
+				try values.encodeIfPresent(links, forKey: "links")
 			}
 		}
 
@@ -161,28 +161,28 @@ public struct AppStoreVersionExperimentV2: Codable, Identifiable {
 			public var data: [Datum]?
 
 			public struct Datum: Codable, Identifiable {
-				public var type: `Type`
 				public var id: String
+				public var type: `Type`
 
 				public enum `Type`: String, Codable, CaseIterable {
 					case appStoreVersions
 				}
 
-				public init(type: `Type`, id: String) {
-					self.type = type
+				public init(id: String, type: `Type`) {
 					self.id = id
+					self.type = type
 				}
 
 				public init(from decoder: Decoder) throws {
 					let values = try decoder.container(keyedBy: StringCodingKey.self)
-					self.type = try values.decode(`Type`.self, forKey: "type")
 					self.id = try values.decode(String.self, forKey: "id")
+					self.type = try values.decode(`Type`.self, forKey: "type")
 				}
 
 				public func encode(to encoder: Encoder) throws {
 					var values = encoder.container(keyedBy: StringCodingKey.self)
-					try values.encode(type, forKey: "type")
 					try values.encode(id, forKey: "id")
+					try values.encode(type, forKey: "type")
 				}
 			}
 
@@ -204,42 +204,38 @@ public struct AppStoreVersionExperimentV2: Codable, Identifiable {
 			}
 		}
 
-		public init(app: App? = nil, latestControlVersion: LatestControlVersion? = nil, appStoreVersionExperimentTreatments: AppStoreVersionExperimentTreatments? = nil, controlVersions: ControlVersions? = nil) {
-			self.app = app
+		public init(latestControlVersion: LatestControlVersion? = nil, app: App? = nil, appStoreVersionExperimentTreatments: AppStoreVersionExperimentTreatments? = nil, controlVersions: ControlVersions? = nil) {
 			self.latestControlVersion = latestControlVersion
+			self.app = app
 			self.appStoreVersionExperimentTreatments = appStoreVersionExperimentTreatments
 			self.controlVersions = controlVersions
 		}
 
 		public init(from decoder: Decoder) throws {
 			let values = try decoder.container(keyedBy: StringCodingKey.self)
-			self.app = try values.decodeIfPresent(App.self, forKey: "app")
 			self.latestControlVersion = try values.decodeIfPresent(LatestControlVersion.self, forKey: "latestControlVersion")
+			self.app = try values.decodeIfPresent(App.self, forKey: "app")
 			self.appStoreVersionExperimentTreatments = try values.decodeIfPresent(AppStoreVersionExperimentTreatments.self, forKey: "appStoreVersionExperimentTreatments")
 			self.controlVersions = try values.decodeIfPresent(ControlVersions.self, forKey: "controlVersions")
 		}
 
 		public func encode(to encoder: Encoder) throws {
 			var values = encoder.container(keyedBy: StringCodingKey.self)
-			try values.encodeIfPresent(app, forKey: "app")
 			try values.encodeIfPresent(latestControlVersion, forKey: "latestControlVersion")
+			try values.encodeIfPresent(app, forKey: "app")
 			try values.encodeIfPresent(appStoreVersionExperimentTreatments, forKey: "appStoreVersionExperimentTreatments")
 			try values.encodeIfPresent(controlVersions, forKey: "controlVersions")
 		}
 	}
 
-	public enum `Type`: String, Codable, CaseIterable {
-		case appStoreVersionExperiments
-	}
-
 	public struct Attributes: Codable {
-		public var trafficProportion: Int?
-		public var endDate: Date?
-		public var startDate: Date?
 		public var platform: Platform?
-		public var isReviewRequired: Bool?
-		public var name: String?
 		public var state: State?
+		public var isReviewRequired: Bool?
+		public var trafficProportion: Int?
+		public var startDate: Date?
+		public var name: String?
+		public var endDate: Date?
 
 		public enum State: String, Codable, CaseIterable {
 			case prepareForSubmission = "PREPARE_FOR_SUBMISSION"
@@ -253,45 +249,49 @@ public struct AppStoreVersionExperimentV2: Codable, Identifiable {
 			case stopped = "STOPPED"
 		}
 
-		public init(trafficProportion: Int? = nil, endDate: Date? = nil, startDate: Date? = nil, platform: Platform? = nil, isReviewRequired: Bool? = nil, name: String? = nil, state: State? = nil) {
-			self.trafficProportion = trafficProportion
-			self.endDate = endDate
-			self.startDate = startDate
+		public init(platform: Platform? = nil, state: State? = nil, isReviewRequired: Bool? = nil, trafficProportion: Int? = nil, startDate: Date? = nil, name: String? = nil, endDate: Date? = nil) {
 			self.platform = platform
-			self.isReviewRequired = isReviewRequired
-			self.name = name
 			self.state = state
+			self.isReviewRequired = isReviewRequired
+			self.trafficProportion = trafficProportion
+			self.startDate = startDate
+			self.name = name
+			self.endDate = endDate
 		}
 
 		public init(from decoder: Decoder) throws {
 			let values = try decoder.container(keyedBy: StringCodingKey.self)
-			self.trafficProportion = try values.decodeIfPresent(Int.self, forKey: "trafficProportion")
-			self.endDate = try values.decodeIfPresent(Date.self, forKey: "endDate")
-			self.startDate = try values.decodeIfPresent(Date.self, forKey: "startDate")
 			self.platform = try values.decodeIfPresent(Platform.self, forKey: "platform")
-			self.isReviewRequired = try values.decodeIfPresent(Bool.self, forKey: "reviewRequired")
-			self.name = try values.decodeIfPresent(String.self, forKey: "name")
 			self.state = try values.decodeIfPresent(State.self, forKey: "state")
+			self.isReviewRequired = try values.decodeIfPresent(Bool.self, forKey: "reviewRequired")
+			self.trafficProportion = try values.decodeIfPresent(Int.self, forKey: "trafficProportion")
+			self.startDate = try values.decodeIfPresent(Date.self, forKey: "startDate")
+			self.name = try values.decodeIfPresent(String.self, forKey: "name")
+			self.endDate = try values.decodeIfPresent(Date.self, forKey: "endDate")
 		}
 
 		public func encode(to encoder: Encoder) throws {
 			var values = encoder.container(keyedBy: StringCodingKey.self)
-			try values.encodeIfPresent(trafficProportion, forKey: "trafficProportion")
-			try values.encodeIfPresent(endDate, forKey: "endDate")
-			try values.encodeIfPresent(startDate, forKey: "startDate")
 			try values.encodeIfPresent(platform, forKey: "platform")
-			try values.encodeIfPresent(isReviewRequired, forKey: "reviewRequired")
-			try values.encodeIfPresent(name, forKey: "name")
 			try values.encodeIfPresent(state, forKey: "state")
+			try values.encodeIfPresent(isReviewRequired, forKey: "reviewRequired")
+			try values.encodeIfPresent(trafficProportion, forKey: "trafficProportion")
+			try values.encodeIfPresent(startDate, forKey: "startDate")
+			try values.encodeIfPresent(name, forKey: "name")
+			try values.encodeIfPresent(endDate, forKey: "endDate")
 		}
 	}
 
-	public init(id: String, relationships: Relationships? = nil, links: ResourceLinks? = nil, type: `Type`, attributes: Attributes? = nil) {
+	public enum `Type`: String, Codable, CaseIterable {
+		case appStoreVersionExperiments
+	}
+
+	public init(id: String, relationships: Relationships? = nil, links: ResourceLinks? = nil, attributes: Attributes? = nil, type: `Type`) {
 		self.id = id
 		self.relationships = relationships
 		self.links = links
-		self.type = type
 		self.attributes = attributes
+		self.type = type
 	}
 
 	public init(from decoder: Decoder) throws {
@@ -299,8 +299,8 @@ public struct AppStoreVersionExperimentV2: Codable, Identifiable {
 		self.id = try values.decode(String.self, forKey: "id")
 		self.relationships = try values.decodeIfPresent(Relationships.self, forKey: "relationships")
 		self.links = try values.decodeIfPresent(ResourceLinks.self, forKey: "links")
-		self.type = try values.decode(`Type`.self, forKey: "type")
 		self.attributes = try values.decodeIfPresent(Attributes.self, forKey: "attributes")
+		self.type = try values.decode(`Type`.self, forKey: "type")
 	}
 
 	public func encode(to encoder: Encoder) throws {
@@ -308,7 +308,7 @@ public struct AppStoreVersionExperimentV2: Codable, Identifiable {
 		try values.encode(id, forKey: "id")
 		try values.encodeIfPresent(relationships, forKey: "relationships")
 		try values.encodeIfPresent(links, forKey: "links")
-		try values.encode(type, forKey: "type")
 		try values.encodeIfPresent(attributes, forKey: "attributes")
+		try values.encode(type, forKey: "type")
 	}
 }

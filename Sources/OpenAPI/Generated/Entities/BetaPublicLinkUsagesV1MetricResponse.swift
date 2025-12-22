@@ -4,78 +4,78 @@
 import Foundation
 
 public struct BetaPublicLinkUsagesV1MetricResponse: Codable {
-	public var links: PagedDocumentLinks
 	public var data: [Datum]
 	public var meta: PagingInformation?
+	public var links: PagedDocumentLinks
 
 	public struct Datum: Codable {
 		public var dataPoints: DataPoints?
 
 		public struct DataPoints: Codable {
+			public var values: Values?
 			public var start: Date?
 			public var end: Date?
-			public var values: Values?
 
 			public struct Values: Codable {
-				public var notClearRatio: Double?
-				public var notRelevantRatio: Double?
 				public var acceptedCount: Int?
-				public var didNotMeetCriteriaCount: Int?
+				public var notClearRatio: Double?
 				public var viewCount: Int?
+				public var notRelevantRatio: Double?
+				public var didNotMeetCriteriaCount: Int?
 				public var notInterestingRatio: Double?
 				public var didNotAcceptCount: Int?
 
-				public init(notClearRatio: Double? = nil, notRelevantRatio: Double? = nil, acceptedCount: Int? = nil, didNotMeetCriteriaCount: Int? = nil, viewCount: Int? = nil, notInterestingRatio: Double? = nil, didNotAcceptCount: Int? = nil) {
-					self.notClearRatio = notClearRatio
-					self.notRelevantRatio = notRelevantRatio
+				public init(acceptedCount: Int? = nil, notClearRatio: Double? = nil, viewCount: Int? = nil, notRelevantRatio: Double? = nil, didNotMeetCriteriaCount: Int? = nil, notInterestingRatio: Double? = nil, didNotAcceptCount: Int? = nil) {
 					self.acceptedCount = acceptedCount
-					self.didNotMeetCriteriaCount = didNotMeetCriteriaCount
+					self.notClearRatio = notClearRatio
 					self.viewCount = viewCount
+					self.notRelevantRatio = notRelevantRatio
+					self.didNotMeetCriteriaCount = didNotMeetCriteriaCount
 					self.notInterestingRatio = notInterestingRatio
 					self.didNotAcceptCount = didNotAcceptCount
 				}
 
 				public init(from decoder: Decoder) throws {
 					let values = try decoder.container(keyedBy: StringCodingKey.self)
-					self.notClearRatio = try values.decodeIfPresent(Double.self, forKey: "notClearRatio")
-					self.notRelevantRatio = try values.decodeIfPresent(Double.self, forKey: "notRelevantRatio")
 					self.acceptedCount = try values.decodeIfPresent(Int.self, forKey: "acceptedCount")
-					self.didNotMeetCriteriaCount = try values.decodeIfPresent(Int.self, forKey: "didNotMeetCriteriaCount")
+					self.notClearRatio = try values.decodeIfPresent(Double.self, forKey: "notClearRatio")
 					self.viewCount = try values.decodeIfPresent(Int.self, forKey: "viewCount")
+					self.notRelevantRatio = try values.decodeIfPresent(Double.self, forKey: "notRelevantRatio")
+					self.didNotMeetCriteriaCount = try values.decodeIfPresent(Int.self, forKey: "didNotMeetCriteriaCount")
 					self.notInterestingRatio = try values.decodeIfPresent(Double.self, forKey: "notInterestingRatio")
 					self.didNotAcceptCount = try values.decodeIfPresent(Int.self, forKey: "didNotAcceptCount")
 				}
 
 				public func encode(to encoder: Encoder) throws {
 					var values = encoder.container(keyedBy: StringCodingKey.self)
-					try values.encodeIfPresent(notClearRatio, forKey: "notClearRatio")
-					try values.encodeIfPresent(notRelevantRatio, forKey: "notRelevantRatio")
 					try values.encodeIfPresent(acceptedCount, forKey: "acceptedCount")
-					try values.encodeIfPresent(didNotMeetCriteriaCount, forKey: "didNotMeetCriteriaCount")
+					try values.encodeIfPresent(notClearRatio, forKey: "notClearRatio")
 					try values.encodeIfPresent(viewCount, forKey: "viewCount")
+					try values.encodeIfPresent(notRelevantRatio, forKey: "notRelevantRatio")
+					try values.encodeIfPresent(didNotMeetCriteriaCount, forKey: "didNotMeetCriteriaCount")
 					try values.encodeIfPresent(notInterestingRatio, forKey: "notInterestingRatio")
 					try values.encodeIfPresent(didNotAcceptCount, forKey: "didNotAcceptCount")
 				}
 			}
 
-			public init(start: Date? = nil, end: Date? = nil, values: Values? = nil) {
+			public init(values: Values? = nil, start: Date? = nil, end: Date? = nil) {
+				self.values = values
 				self.start = start
 				self.end = end
-				self.values = values
 			}
 
 			public init(from decoder: Decoder) throws {
 				let values = try decoder.container(keyedBy: StringCodingKey.self)
+				self.values = try values.decodeIfPresent(Values.self, forKey: "values")
 				self.start = try values.decodeIfPresent(Date.self, forKey: "start")
 				self.end = try values.decodeIfPresent(Date.self, forKey: "end")
-				self.values = try values.decodeIfPresent(Values.self, forKey: "values")
 			}
 
 			public func encode(to encoder: Encoder) throws {
 				var values = encoder.container(keyedBy: StringCodingKey.self)
+				try values.encodeIfPresent(self.values, forKey: "values")
 				try values.encodeIfPresent(start, forKey: "start")
 				try values.encodeIfPresent(end, forKey: "end")
-				try values.encodeIfPresent(self.values, forKey: "values")
 			}
 		}
 
@@ -94,23 +94,23 @@ public struct BetaPublicLinkUsagesV1MetricResponse: Codable {
 		}
 	}
 
-	public init(links: PagedDocumentLinks, data: [Datum], meta: PagingInformation? = nil) {
-		self.links = links
+	public init(data: [Datum], meta: PagingInformation? = nil, links: PagedDocumentLinks) {
 		self.data = data
 		self.meta = meta
+		self.links = links
 	}
 
 	public init(from decoder: Decoder) throws {
 		let values = try decoder.container(keyedBy: StringCodingKey.self)
-		self.links = try values.decode(PagedDocumentLinks.self, forKey: "links")
 		self.data = try values.decode([Datum].self, forKey: "data")
 		self.meta = try values.decodeIfPresent(PagingInformation.self, forKey: "meta")
+		self.links = try values.decode(PagedDocumentLinks.self, forKey: "links")
 	}
 
 	public func encode(to encoder: Encoder) throws {
 		var values = encoder.container(keyedBy: StringCodingKey.self)
-		try values.encode(links, forKey: "links")
 		try values.encode(data, forKey: "data")
 		try values.encodeIfPresent(meta, forKey: "meta")
+		try values.encode(links, forKey: "links")
 	}
 }

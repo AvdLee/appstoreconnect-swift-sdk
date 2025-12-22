@@ -5,30 +5,30 @@ import Foundation
 
 public struct BuildBetaDetailsResponse: Codable {
 	public var data: [BuildBetaDetail]
-	public var links: PagedDocumentLinks
 	public var meta: PagingInformation?
 	public var included: [Build]?
+	public var links: PagedDocumentLinks
 
-	public init(data: [BuildBetaDetail], links: PagedDocumentLinks, meta: PagingInformation? = nil, included: [Build]? = nil) {
+	public init(data: [BuildBetaDetail], meta: PagingInformation? = nil, included: [Build]? = nil, links: PagedDocumentLinks) {
 		self.data = data
-		self.links = links
 		self.meta = meta
 		self.included = included
+		self.links = links
 	}
 
 	public init(from decoder: Decoder) throws {
 		let values = try decoder.container(keyedBy: StringCodingKey.self)
 		self.data = try values.decode([BuildBetaDetail].self, forKey: "data")
-		self.links = try values.decode(PagedDocumentLinks.self, forKey: "links")
 		self.meta = try values.decodeIfPresent(PagingInformation.self, forKey: "meta")
 		self.included = try values.decodeIfPresent([Build].self, forKey: "included")
+		self.links = try values.decode(PagedDocumentLinks.self, forKey: "links")
 	}
 
 	public func encode(to encoder: Encoder) throws {
 		var values = encoder.container(keyedBy: StringCodingKey.self)
 		try values.encode(data, forKey: "data")
-		try values.encode(links, forKey: "links")
 		try values.encodeIfPresent(meta, forKey: "meta")
 		try values.encodeIfPresent(included, forKey: "included")
+		try values.encode(links, forKey: "links")
 	}
 }

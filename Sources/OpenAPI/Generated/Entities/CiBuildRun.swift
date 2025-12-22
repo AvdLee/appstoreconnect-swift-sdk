@@ -7,96 +7,44 @@ public struct CiBuildRun: Codable, Identifiable {
 	public var id: String
 	public var relationships: Relationships?
 	public var links: ResourceLinks?
-	public var type: `Type`
 	public var attributes: Attributes?
+	public var type: `Type`
 
 	public struct Relationships: Codable {
-		public var builds: Builds?
 		public var product: Product?
-		public var sourceBranchOrTag: SourceBranchOrTag?
-		public var destinationBranch: DestinationBranch?
-		public var workflow: Workflow?
-		public var actions: Actions?
 		public var pullRequest: PullRequest?
-
-		public struct Builds: Codable {
-			public var links: RelationshipLinks?
-			public var meta: PagingInformation?
-			public var data: [Datum]?
-
-			public struct Datum: Codable, Identifiable {
-				public var type: `Type`
-				public var id: String
-
-				public enum `Type`: String, Codable, CaseIterable {
-					case builds
-				}
-
-				public init(type: `Type`, id: String) {
-					self.type = type
-					self.id = id
-				}
-
-				public init(from decoder: Decoder) throws {
-					let values = try decoder.container(keyedBy: StringCodingKey.self)
-					self.type = try values.decode(`Type`.self, forKey: "type")
-					self.id = try values.decode(String.self, forKey: "id")
-				}
-
-				public func encode(to encoder: Encoder) throws {
-					var values = encoder.container(keyedBy: StringCodingKey.self)
-					try values.encode(type, forKey: "type")
-					try values.encode(id, forKey: "id")
-				}
-			}
-
-			public init(links: RelationshipLinks? = nil, meta: PagingInformation? = nil, data: [Datum]? = nil) {
-				self.links = links
-				self.meta = meta
-				self.data = data
-			}
-
-			public init(from decoder: Decoder) throws {
-				let values = try decoder.container(keyedBy: StringCodingKey.self)
-				self.links = try values.decodeIfPresent(RelationshipLinks.self, forKey: "links")
-				self.meta = try values.decodeIfPresent(PagingInformation.self, forKey: "meta")
-				self.data = try values.decodeIfPresent([Datum].self, forKey: "data")
-			}
-
-			public func encode(to encoder: Encoder) throws {
-				var values = encoder.container(keyedBy: StringCodingKey.self)
-				try values.encodeIfPresent(links, forKey: "links")
-				try values.encodeIfPresent(meta, forKey: "meta")
-				try values.encodeIfPresent(data, forKey: "data")
-			}
-		}
+		public var destinationBranch: DestinationBranch?
+		public var sourceBranchOrTag: SourceBranchOrTag?
+		public var builds: Builds?
+		public var actions: Actions?
+		public var workflow: Workflow?
 
 		public struct Product: Codable {
 			public var data: Data?
 
 			public struct Data: Codable, Identifiable {
-				public var type: `Type`
 				public var id: String
+				public var type: `Type`
 
 				public enum `Type`: String, Codable, CaseIterable {
 					case ciProducts
 				}
 
-				public init(type: `Type`, id: String) {
-					self.type = type
+				public init(id: String, type: `Type`) {
 					self.id = id
+					self.type = type
 				}
 
 				public init(from decoder: Decoder) throws {
 					let values = try decoder.container(keyedBy: StringCodingKey.self)
-					self.type = try values.decode(`Type`.self, forKey: "type")
 					self.id = try values.decode(String.self, forKey: "id")
+					self.type = try values.decode(`Type`.self, forKey: "type")
 				}
 
 				public func encode(to encoder: Encoder) throws {
 					var values = encoder.container(keyedBy: StringCodingKey.self)
-					try values.encode(type, forKey: "type")
 					try values.encode(id, forKey: "id")
+					try values.encode(type, forKey: "type")
 				}
 			}
 
@@ -115,32 +63,32 @@ public struct CiBuildRun: Codable, Identifiable {
 			}
 		}
 
-		public struct SourceBranchOrTag: Codable {
+		public struct PullRequest: Codable {
 			public var data: Data?
 
 			public struct Data: Codable, Identifiable {
-				public var type: `Type`
 				public var id: String
+				public var type: `Type`
 
 				public enum `Type`: String, Codable, CaseIterable {
-					case scmGitReferences
+					case scmPullRequests
 				}
 
-				public init(type: `Type`, id: String) {
-					self.type = type
+				public init(id: String, type: `Type`) {
 					self.id = id
+					self.type = type
 				}
 
 				public init(from decoder: Decoder) throws {
 					let values = try decoder.container(keyedBy: StringCodingKey.self)
-					self.type = try values.decode(`Type`.self, forKey: "type")
 					self.id = try values.decode(String.self, forKey: "id")
+					self.type = try values.decode(`Type`.self, forKey: "type")
 				}
 
 				public func encode(to encoder: Encoder) throws {
 					var values = encoder.container(keyedBy: StringCodingKey.self)
-					try values.encode(type, forKey: "type")
 					try values.encode(id, forKey: "id")
+					try values.encode(type, forKey: "type")
 				}
 			}
 
@@ -163,28 +111,28 @@ public struct CiBuildRun: Codable, Identifiable {
 			public var data: Data?
 
 			public struct Data: Codable, Identifiable {
-				public var type: `Type`
 				public var id: String
+				public var type: `Type`
 
 				public enum `Type`: String, Codable, CaseIterable {
 					case scmGitReferences
 				}
 
-				public init(type: `Type`, id: String) {
-					self.type = type
+				public init(id: String, type: `Type`) {
 					self.id = id
+					self.type = type
 				}
 
 				public init(from decoder: Decoder) throws {
 					let values = try decoder.container(keyedBy: StringCodingKey.self)
-					self.type = try values.decode(`Type`.self, forKey: "type")
 					self.id = try values.decode(String.self, forKey: "id")
+					self.type = try values.decode(`Type`.self, forKey: "type")
 				}
 
 				public func encode(to encoder: Encoder) throws {
 					var values = encoder.container(keyedBy: StringCodingKey.self)
-					try values.encode(type, forKey: "type")
 					try values.encode(id, forKey: "id")
+					try values.encode(type, forKey: "type")
 				}
 			}
 
@@ -203,32 +151,32 @@ public struct CiBuildRun: Codable, Identifiable {
 			}
 		}
 
-		public struct Workflow: Codable {
+		public struct SourceBranchOrTag: Codable {
 			public var data: Data?
 
 			public struct Data: Codable, Identifiable {
-				public var type: `Type`
 				public var id: String
+				public var type: `Type`
 
 				public enum `Type`: String, Codable, CaseIterable {
-					case ciWorkflows
+					case scmGitReferences
 				}
 
-				public init(type: `Type`, id: String) {
-					self.type = type
+				public init(id: String, type: `Type`) {
 					self.id = id
+					self.type = type
 				}
 
 				public init(from decoder: Decoder) throws {
 					let values = try decoder.container(keyedBy: StringCodingKey.self)
-					self.type = try values.decode(`Type`.self, forKey: "type")
 					self.id = try values.decode(String.self, forKey: "id")
+					self.type = try values.decode(`Type`.self, forKey: "type")
 				}
 
 				public func encode(to encoder: Encoder) throws {
 					var values = encoder.container(keyedBy: StringCodingKey.self)
-					try values.encode(type, forKey: "type")
 					try values.encode(id, forKey: "id")
+					try values.encode(type, forKey: "type")
 				}
 			}
 
@@ -244,6 +192,58 @@ public struct CiBuildRun: Codable, Identifiable {
 			public func encode(to encoder: Encoder) throws {
 				var values = encoder.container(keyedBy: StringCodingKey.self)
 				try values.encodeIfPresent(data, forKey: "data")
+			}
+		}
+
+		public struct Builds: Codable {
+			public var meta: PagingInformation?
+			public var data: [Datum]?
+			public var links: RelationshipLinks?
+
+			public struct Datum: Codable, Identifiable {
+				public var id: String
+				public var type: `Type`
+
+				public enum `Type`: String, Codable, CaseIterable {
+					case builds
+				}
+
+				public init(id: String, type: `Type`) {
+					self.id = id
+					self.type = type
+				}
+
+				public init(from decoder: Decoder) throws {
+					let values = try decoder.container(keyedBy: StringCodingKey.self)
+					self.id = try values.decode(String.self, forKey: "id")
+					self.type = try values.decode(`Type`.self, forKey: "type")
+				}
+
+				public func encode(to encoder: Encoder) throws {
+					var values = encoder.container(keyedBy: StringCodingKey.self)
+					try values.encode(id, forKey: "id")
+					try values.encode(type, forKey: "type")
+				}
+			}
+
+			public init(meta: PagingInformation? = nil, data: [Datum]? = nil, links: RelationshipLinks? = nil) {
+				self.meta = meta
+				self.data = data
+				self.links = links
+			}
+
+			public init(from decoder: Decoder) throws {
+				let values = try decoder.container(keyedBy: StringCodingKey.self)
+				self.meta = try values.decodeIfPresent(PagingInformation.self, forKey: "meta")
+				self.data = try values.decodeIfPresent([Datum].self, forKey: "data")
+				self.links = try values.decodeIfPresent(RelationshipLinks.self, forKey: "links")
+			}
+
+			public func encode(to encoder: Encoder) throws {
+				var values = encoder.container(keyedBy: StringCodingKey.self)
+				try values.encodeIfPresent(meta, forKey: "meta")
+				try values.encodeIfPresent(data, forKey: "data")
+				try values.encodeIfPresent(links, forKey: "links")
 			}
 		}
 
@@ -265,32 +265,32 @@ public struct CiBuildRun: Codable, Identifiable {
 			}
 		}
 
-		public struct PullRequest: Codable {
+		public struct Workflow: Codable {
 			public var data: Data?
 
 			public struct Data: Codable, Identifiable {
-				public var type: `Type`
 				public var id: String
+				public var type: `Type`
 
 				public enum `Type`: String, Codable, CaseIterable {
-					case scmPullRequests
+					case ciWorkflows
 				}
 
-				public init(type: `Type`, id: String) {
-					self.type = type
+				public init(id: String, type: `Type`) {
 					self.id = id
+					self.type = type
 				}
 
 				public init(from decoder: Decoder) throws {
 					let values = try decoder.container(keyedBy: StringCodingKey.self)
-					self.type = try values.decode(`Type`.self, forKey: "type")
 					self.id = try values.decode(String.self, forKey: "id")
+					self.type = try values.decode(`Type`.self, forKey: "type")
 				}
 
 				public func encode(to encoder: Encoder) throws {
 					var values = encoder.container(keyedBy: StringCodingKey.self)
-					try values.encode(type, forKey: "type")
 					try values.encode(id, forKey: "id")
+					try values.encode(type, forKey: "type")
 				}
 			}
 
@@ -309,67 +309,68 @@ public struct CiBuildRun: Codable, Identifiable {
 			}
 		}
 
-		public init(builds: Builds? = nil, product: Product? = nil, sourceBranchOrTag: SourceBranchOrTag? = nil, destinationBranch: DestinationBranch? = nil, workflow: Workflow? = nil, actions: Actions? = nil, pullRequest: PullRequest? = nil) {
-			self.builds = builds
+		public init(product: Product? = nil, pullRequest: PullRequest? = nil, destinationBranch: DestinationBranch? = nil, sourceBranchOrTag: SourceBranchOrTag? = nil, builds: Builds? = nil, actions: Actions? = nil, workflow: Workflow? = nil) {
 			self.product = product
-			self.sourceBranchOrTag = sourceBranchOrTag
-			self.destinationBranch = destinationBranch
-			self.workflow = workflow
-			self.actions = actions
 			self.pullRequest = pullRequest
+			self.destinationBranch = destinationBranch
+			self.sourceBranchOrTag = sourceBranchOrTag
+			self.builds = builds
+			self.actions = actions
+			self.workflow = workflow
 		}
 
 		public init(from decoder: Decoder) throws {
 			let values = try decoder.container(keyedBy: StringCodingKey.self)
-			self.builds = try values.decodeIfPresent(Builds.self, forKey: "builds")
 			self.product = try values.decodeIfPresent(Product.self, forKey: "product")
-			self.sourceBranchOrTag = try values.decodeIfPresent(SourceBranchOrTag.self, forKey: "sourceBranchOrTag")
-			self.destinationBranch = try values.decodeIfPresent(DestinationBranch.self, forKey: "destinationBranch")
-			self.workflow = try values.decodeIfPresent(Workflow.self, forKey: "workflow")
-			self.actions = try values.decodeIfPresent(Actions.self, forKey: "actions")
 			self.pullRequest = try values.decodeIfPresent(PullRequest.self, forKey: "pullRequest")
+			self.destinationBranch = try values.decodeIfPresent(DestinationBranch.self, forKey: "destinationBranch")
+			self.sourceBranchOrTag = try values.decodeIfPresent(SourceBranchOrTag.self, forKey: "sourceBranchOrTag")
+			self.builds = try values.decodeIfPresent(Builds.self, forKey: "builds")
+			self.actions = try values.decodeIfPresent(Actions.self, forKey: "actions")
+			self.workflow = try values.decodeIfPresent(Workflow.self, forKey: "workflow")
 		}
 
 		public func encode(to encoder: Encoder) throws {
 			var values = encoder.container(keyedBy: StringCodingKey.self)
-			try values.encodeIfPresent(builds, forKey: "builds")
 			try values.encodeIfPresent(product, forKey: "product")
-			try values.encodeIfPresent(sourceBranchOrTag, forKey: "sourceBranchOrTag")
-			try values.encodeIfPresent(destinationBranch, forKey: "destinationBranch")
-			try values.encodeIfPresent(workflow, forKey: "workflow")
-			try values.encodeIfPresent(actions, forKey: "actions")
 			try values.encodeIfPresent(pullRequest, forKey: "pullRequest")
+			try values.encodeIfPresent(destinationBranch, forKey: "destinationBranch")
+			try values.encodeIfPresent(sourceBranchOrTag, forKey: "sourceBranchOrTag")
+			try values.encodeIfPresent(builds, forKey: "builds")
+			try values.encodeIfPresent(actions, forKey: "actions")
+			try values.encodeIfPresent(workflow, forKey: "workflow")
 		}
 	}
 
-	public enum `Type`: String, Codable, CaseIterable {
-		case ciBuildRuns
-	}
-
 	public struct Attributes: Codable {
-		public var issueCounts: CiIssueCounts?
-		public var isPullRequestBuild: Bool?
-		public var sourceCommit: SourceCommit?
-		public var startReason: StartReason?
-		public var startedDate: Date?
-		public var createdDate: Date?
+		public var finishedDate: Date?
+		public var cancelReason: CancelReason?
+		public var destinationCommit: DestinationCommit?
 		public var executionProgress: CiExecutionProgress?
 		public var completionStatus: CiCompletionStatus?
-		public var destinationCommit: DestinationCommit?
 		public var number: Int?
-		public var cancelReason: CancelReason?
-		public var finishedDate: Date?
+		public var startedDate: Date?
+		public var issueCounts: CiIssueCounts?
+		public var sourceCommit: SourceCommit?
+		public var isPullRequestBuild: Bool?
+		public var createdDate: Date?
+		public var startReason: StartReason?
 
-		public struct SourceCommit: Codable {
-			public var commitSha: String?
+		public enum CancelReason: String, Codable, CaseIterable {
+			case automaticallyByNewerBuild = "AUTOMATICALLY_BY_NEWER_BUILD"
+			case manuallyByUser = "MANUALLY_BY_USER"
+		}
+
+		public struct DestinationCommit: Codable {
 			public var message: String?
+			public var commitSha: String?
 			public var author: CiGitUser?
 			public var committer: CiGitUser?
 			public var webURL: String?
 
-			public init(commitSha: String? = nil, message: String? = nil, author: CiGitUser? = nil, committer: CiGitUser? = nil, webURL: String? = nil) {
-				self.commitSha = commitSha
+			public init(message: String? = nil, commitSha: String? = nil, author: CiGitUser? = nil, committer: CiGitUser? = nil, webURL: String? = nil) {
 				self.message = message
+				self.commitSha = commitSha
 				self.author = author
 				self.committer = committer
 				self.webURL = webURL
@@ -377,8 +378,8 @@ public struct CiBuildRun: Codable, Identifiable {
 
 			public init(from decoder: Decoder) throws {
 				let values = try decoder.container(keyedBy: StringCodingKey.self)
-				self.commitSha = try values.decodeIfPresent(String.self, forKey: "commitSha")
 				self.message = try values.decodeIfPresent(String.self, forKey: "message")
+				self.commitSha = try values.decodeIfPresent(String.self, forKey: "commitSha")
 				self.author = try values.decodeIfPresent(CiGitUser.self, forKey: "author")
 				self.committer = try values.decodeIfPresent(CiGitUser.self, forKey: "committer")
 				self.webURL = try values.decodeIfPresent(String.self, forKey: "webUrl")
@@ -386,11 +387,45 @@ public struct CiBuildRun: Codable, Identifiable {
 
 			public func encode(to encoder: Encoder) throws {
 				var values = encoder.container(keyedBy: StringCodingKey.self)
-				try values.encodeIfPresent(commitSha, forKey: "commitSha")
 				try values.encodeIfPresent(message, forKey: "message")
+				try values.encodeIfPresent(commitSha, forKey: "commitSha")
 				try values.encodeIfPresent(author, forKey: "author")
 				try values.encodeIfPresent(committer, forKey: "committer")
 				try values.encodeIfPresent(webURL, forKey: "webUrl")
+			}
+		}
+
+		public struct SourceCommit: Codable {
+			public var webURL: String?
+			public var committer: CiGitUser?
+			public var commitSha: String?
+			public var message: String?
+			public var author: CiGitUser?
+
+			public init(webURL: String? = nil, committer: CiGitUser? = nil, commitSha: String? = nil, message: String? = nil, author: CiGitUser? = nil) {
+				self.webURL = webURL
+				self.committer = committer
+				self.commitSha = commitSha
+				self.message = message
+				self.author = author
+			}
+
+			public init(from decoder: Decoder) throws {
+				let values = try decoder.container(keyedBy: StringCodingKey.self)
+				self.webURL = try values.decodeIfPresent(String.self, forKey: "webUrl")
+				self.committer = try values.decodeIfPresent(CiGitUser.self, forKey: "committer")
+				self.commitSha = try values.decodeIfPresent(String.self, forKey: "commitSha")
+				self.message = try values.decodeIfPresent(String.self, forKey: "message")
+				self.author = try values.decodeIfPresent(CiGitUser.self, forKey: "author")
+			}
+
+			public func encode(to encoder: Encoder) throws {
+				var values = encoder.container(keyedBy: StringCodingKey.self)
+				try values.encodeIfPresent(webURL, forKey: "webUrl")
+				try values.encodeIfPresent(committer, forKey: "committer")
+				try values.encodeIfPresent(commitSha, forKey: "commitSha")
+				try values.encodeIfPresent(message, forKey: "message")
+				try values.encodeIfPresent(author, forKey: "author")
 			}
 		}
 
@@ -403,99 +438,64 @@ public struct CiBuildRun: Codable, Identifiable {
 			case schedule = "SCHEDULE"
 		}
 
-		public struct DestinationCommit: Codable {
-			public var commitSha: String?
-			public var message: String?
-			public var author: CiGitUser?
-			public var committer: CiGitUser?
-			public var webURL: String?
-
-			public init(commitSha: String? = nil, message: String? = nil, author: CiGitUser? = nil, committer: CiGitUser? = nil, webURL: String? = nil) {
-				self.commitSha = commitSha
-				self.message = message
-				self.author = author
-				self.committer = committer
-				self.webURL = webURL
-			}
-
-			public init(from decoder: Decoder) throws {
-				let values = try decoder.container(keyedBy: StringCodingKey.self)
-				self.commitSha = try values.decodeIfPresent(String.self, forKey: "commitSha")
-				self.message = try values.decodeIfPresent(String.self, forKey: "message")
-				self.author = try values.decodeIfPresent(CiGitUser.self, forKey: "author")
-				self.committer = try values.decodeIfPresent(CiGitUser.self, forKey: "committer")
-				self.webURL = try values.decodeIfPresent(String.self, forKey: "webUrl")
-			}
-
-			public func encode(to encoder: Encoder) throws {
-				var values = encoder.container(keyedBy: StringCodingKey.self)
-				try values.encodeIfPresent(commitSha, forKey: "commitSha")
-				try values.encodeIfPresent(message, forKey: "message")
-				try values.encodeIfPresent(author, forKey: "author")
-				try values.encodeIfPresent(committer, forKey: "committer")
-				try values.encodeIfPresent(webURL, forKey: "webUrl")
-			}
-		}
-
-		public enum CancelReason: String, Codable, CaseIterable {
-			case automaticallyByNewerBuild = "AUTOMATICALLY_BY_NEWER_BUILD"
-			case manuallyByUser = "MANUALLY_BY_USER"
-		}
-
-		public init(issueCounts: CiIssueCounts? = nil, isPullRequestBuild: Bool? = nil, sourceCommit: SourceCommit? = nil, startReason: StartReason? = nil, startedDate: Date? = nil, createdDate: Date? = nil, executionProgress: CiExecutionProgress? = nil, completionStatus: CiCompletionStatus? = nil, destinationCommit: DestinationCommit? = nil, number: Int? = nil, cancelReason: CancelReason? = nil, finishedDate: Date? = nil) {
-			self.issueCounts = issueCounts
-			self.isPullRequestBuild = isPullRequestBuild
-			self.sourceCommit = sourceCommit
-			self.startReason = startReason
-			self.startedDate = startedDate
-			self.createdDate = createdDate
+		public init(finishedDate: Date? = nil, cancelReason: CancelReason? = nil, destinationCommit: DestinationCommit? = nil, executionProgress: CiExecutionProgress? = nil, completionStatus: CiCompletionStatus? = nil, number: Int? = nil, startedDate: Date? = nil, issueCounts: CiIssueCounts? = nil, sourceCommit: SourceCommit? = nil, isPullRequestBuild: Bool? = nil, createdDate: Date? = nil, startReason: StartReason? = nil) {
+			self.finishedDate = finishedDate
+			self.cancelReason = cancelReason
+			self.destinationCommit = destinationCommit
 			self.executionProgress = executionProgress
 			self.completionStatus = completionStatus
-			self.destinationCommit = destinationCommit
 			self.number = number
-			self.cancelReason = cancelReason
-			self.finishedDate = finishedDate
+			self.startedDate = startedDate
+			self.issueCounts = issueCounts
+			self.sourceCommit = sourceCommit
+			self.isPullRequestBuild = isPullRequestBuild
+			self.createdDate = createdDate
+			self.startReason = startReason
 		}
 
 		public init(from decoder: Decoder) throws {
 			let values = try decoder.container(keyedBy: StringCodingKey.self)
-			self.issueCounts = try values.decodeIfPresent(CiIssueCounts.self, forKey: "issueCounts")
-			self.isPullRequestBuild = try values.decodeIfPresent(Bool.self, forKey: "isPullRequestBuild")
-			self.sourceCommit = try values.decodeIfPresent(SourceCommit.self, forKey: "sourceCommit")
-			self.startReason = try values.decodeIfPresent(StartReason.self, forKey: "startReason")
-			self.startedDate = try values.decodeIfPresent(Date.self, forKey: "startedDate")
-			self.createdDate = try values.decodeIfPresent(Date.self, forKey: "createdDate")
+			self.finishedDate = try values.decodeIfPresent(Date.self, forKey: "finishedDate")
+			self.cancelReason = try values.decodeIfPresent(CancelReason.self, forKey: "cancelReason")
+			self.destinationCommit = try values.decodeIfPresent(DestinationCommit.self, forKey: "destinationCommit")
 			self.executionProgress = try values.decodeIfPresent(CiExecutionProgress.self, forKey: "executionProgress")
 			self.completionStatus = try values.decodeIfPresent(CiCompletionStatus.self, forKey: "completionStatus")
-			self.destinationCommit = try values.decodeIfPresent(DestinationCommit.self, forKey: "destinationCommit")
 			self.number = try values.decodeIfPresent(Int.self, forKey: "number")
-			self.cancelReason = try values.decodeIfPresent(CancelReason.self, forKey: "cancelReason")
-			self.finishedDate = try values.decodeIfPresent(Date.self, forKey: "finishedDate")
+			self.startedDate = try values.decodeIfPresent(Date.self, forKey: "startedDate")
+			self.issueCounts = try values.decodeIfPresent(CiIssueCounts.self, forKey: "issueCounts")
+			self.sourceCommit = try values.decodeIfPresent(SourceCommit.self, forKey: "sourceCommit")
+			self.isPullRequestBuild = try values.decodeIfPresent(Bool.self, forKey: "isPullRequestBuild")
+			self.createdDate = try values.decodeIfPresent(Date.self, forKey: "createdDate")
+			self.startReason = try values.decodeIfPresent(StartReason.self, forKey: "startReason")
 		}
 
 		public func encode(to encoder: Encoder) throws {
 			var values = encoder.container(keyedBy: StringCodingKey.self)
-			try values.encodeIfPresent(issueCounts, forKey: "issueCounts")
-			try values.encodeIfPresent(isPullRequestBuild, forKey: "isPullRequestBuild")
-			try values.encodeIfPresent(sourceCommit, forKey: "sourceCommit")
-			try values.encodeIfPresent(startReason, forKey: "startReason")
-			try values.encodeIfPresent(startedDate, forKey: "startedDate")
-			try values.encodeIfPresent(createdDate, forKey: "createdDate")
+			try values.encodeIfPresent(finishedDate, forKey: "finishedDate")
+			try values.encodeIfPresent(cancelReason, forKey: "cancelReason")
+			try values.encodeIfPresent(destinationCommit, forKey: "destinationCommit")
 			try values.encodeIfPresent(executionProgress, forKey: "executionProgress")
 			try values.encodeIfPresent(completionStatus, forKey: "completionStatus")
-			try values.encodeIfPresent(destinationCommit, forKey: "destinationCommit")
 			try values.encodeIfPresent(number, forKey: "number")
-			try values.encodeIfPresent(cancelReason, forKey: "cancelReason")
-			try values.encodeIfPresent(finishedDate, forKey: "finishedDate")
+			try values.encodeIfPresent(startedDate, forKey: "startedDate")
+			try values.encodeIfPresent(issueCounts, forKey: "issueCounts")
+			try values.encodeIfPresent(sourceCommit, forKey: "sourceCommit")
+			try values.encodeIfPresent(isPullRequestBuild, forKey: "isPullRequestBuild")
+			try values.encodeIfPresent(createdDate, forKey: "createdDate")
+			try values.encodeIfPresent(startReason, forKey: "startReason")
 		}
 	}
 
-	public init(id: String, relationships: Relationships? = nil, links: ResourceLinks? = nil, type: `Type`, attributes: Attributes? = nil) {
+	public enum `Type`: String, Codable, CaseIterable {
+		case ciBuildRuns
+	}
+
+	public init(id: String, relationships: Relationships? = nil, links: ResourceLinks? = nil, attributes: Attributes? = nil, type: `Type`) {
 		self.id = id
 		self.relationships = relationships
 		self.links = links
-		self.type = type
 		self.attributes = attributes
+		self.type = type
 	}
 
 	public init(from decoder: Decoder) throws {
@@ -503,8 +503,8 @@ public struct CiBuildRun: Codable, Identifiable {
 		self.id = try values.decode(String.self, forKey: "id")
 		self.relationships = try values.decodeIfPresent(Relationships.self, forKey: "relationships")
 		self.links = try values.decodeIfPresent(ResourceLinks.self, forKey: "links")
-		self.type = try values.decode(`Type`.self, forKey: "type")
 		self.attributes = try values.decodeIfPresent(Attributes.self, forKey: "attributes")
+		self.type = try values.decode(`Type`.self, forKey: "type")
 	}
 
 	public func encode(to encoder: Encoder) throws {
@@ -512,7 +512,7 @@ public struct CiBuildRun: Codable, Identifiable {
 		try values.encode(id, forKey: "id")
 		try values.encodeIfPresent(relationships, forKey: "relationships")
 		try values.encodeIfPresent(links, forKey: "links")
-		try values.encode(type, forKey: "type")
 		try values.encodeIfPresent(attributes, forKey: "attributes")
+		try values.encode(type, forKey: "type")
 	}
 }

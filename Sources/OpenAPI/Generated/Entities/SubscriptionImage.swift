@@ -7,8 +7,8 @@ public struct SubscriptionImage: Codable, Identifiable {
 	public var id: String
 	public var relationships: Relationships?
 	public var links: ResourceLinks?
-	public var type: `Type`
 	public var attributes: Attributes?
+	public var type: `Type`
 
 	public struct Relationships: Codable {
 		public var subscription: Subscription?
@@ -17,28 +17,28 @@ public struct SubscriptionImage: Codable, Identifiable {
 			public var data: Data?
 
 			public struct Data: Codable, Identifiable {
-				public var type: `Type`
 				public var id: String
+				public var type: `Type`
 
 				public enum `Type`: String, Codable, CaseIterable {
 					case subscriptions
 				}
 
-				public init(type: `Type`, id: String) {
-					self.type = type
+				public init(id: String, type: `Type`) {
 					self.id = id
+					self.type = type
 				}
 
 				public init(from decoder: Decoder) throws {
 					let values = try decoder.container(keyedBy: StringCodingKey.self)
-					self.type = try values.decode(`Type`.self, forKey: "type")
 					self.id = try values.decode(String.self, forKey: "id")
+					self.type = try values.decode(`Type`.self, forKey: "type")
 				}
 
 				public func encode(to encoder: Encoder) throws {
 					var values = encoder.container(keyedBy: StringCodingKey.self)
-					try values.encode(type, forKey: "type")
 					try values.encode(id, forKey: "id")
+					try values.encode(type, forKey: "type")
 				}
 			}
 
@@ -72,18 +72,14 @@ public struct SubscriptionImage: Codable, Identifiable {
 		}
 	}
 
-	public enum `Type`: String, Codable, CaseIterable {
-		case subscriptionImages
-	}
-
 	public struct Attributes: Codable {
-		public var fileName: String?
-		public var assetToken: String?
 		public var imageAsset: ImageAsset?
+		public var state: State?
+		public var uploadOperations: [UploadOperation]?
+		public var assetToken: String?
 		public var sourceFileChecksum: String?
 		public var fileSize: Int?
-		public var uploadOperations: [UploadOperation]?
-		public var state: State?
+		public var fileName: String?
 
 		public enum State: String, Codable, CaseIterable {
 			case awaitingUpload = "AWAITING_UPLOAD"
@@ -95,45 +91,49 @@ public struct SubscriptionImage: Codable, Identifiable {
 			case rejected = "REJECTED"
 		}
 
-		public init(fileName: String? = nil, assetToken: String? = nil, imageAsset: ImageAsset? = nil, sourceFileChecksum: String? = nil, fileSize: Int? = nil, uploadOperations: [UploadOperation]? = nil, state: State? = nil) {
-			self.fileName = fileName
-			self.assetToken = assetToken
+		public init(imageAsset: ImageAsset? = nil, state: State? = nil, uploadOperations: [UploadOperation]? = nil, assetToken: String? = nil, sourceFileChecksum: String? = nil, fileSize: Int? = nil, fileName: String? = nil) {
 			self.imageAsset = imageAsset
+			self.state = state
+			self.uploadOperations = uploadOperations
+			self.assetToken = assetToken
 			self.sourceFileChecksum = sourceFileChecksum
 			self.fileSize = fileSize
-			self.uploadOperations = uploadOperations
-			self.state = state
+			self.fileName = fileName
 		}
 
 		public init(from decoder: Decoder) throws {
 			let values = try decoder.container(keyedBy: StringCodingKey.self)
-			self.fileName = try values.decodeIfPresent(String.self, forKey: "fileName")
-			self.assetToken = try values.decodeIfPresent(String.self, forKey: "assetToken")
 			self.imageAsset = try values.decodeIfPresent(ImageAsset.self, forKey: "imageAsset")
+			self.state = try values.decodeIfPresent(State.self, forKey: "state")
+			self.uploadOperations = try values.decodeIfPresent([UploadOperation].self, forKey: "uploadOperations")
+			self.assetToken = try values.decodeIfPresent(String.self, forKey: "assetToken")
 			self.sourceFileChecksum = try values.decodeIfPresent(String.self, forKey: "sourceFileChecksum")
 			self.fileSize = try values.decodeIfPresent(Int.self, forKey: "fileSize")
-			self.uploadOperations = try values.decodeIfPresent([UploadOperation].self, forKey: "uploadOperations")
-			self.state = try values.decodeIfPresent(State.self, forKey: "state")
+			self.fileName = try values.decodeIfPresent(String.self, forKey: "fileName")
 		}
 
 		public func encode(to encoder: Encoder) throws {
 			var values = encoder.container(keyedBy: StringCodingKey.self)
-			try values.encodeIfPresent(fileName, forKey: "fileName")
-			try values.encodeIfPresent(assetToken, forKey: "assetToken")
 			try values.encodeIfPresent(imageAsset, forKey: "imageAsset")
+			try values.encodeIfPresent(state, forKey: "state")
+			try values.encodeIfPresent(uploadOperations, forKey: "uploadOperations")
+			try values.encodeIfPresent(assetToken, forKey: "assetToken")
 			try values.encodeIfPresent(sourceFileChecksum, forKey: "sourceFileChecksum")
 			try values.encodeIfPresent(fileSize, forKey: "fileSize")
-			try values.encodeIfPresent(uploadOperations, forKey: "uploadOperations")
-			try values.encodeIfPresent(state, forKey: "state")
+			try values.encodeIfPresent(fileName, forKey: "fileName")
 		}
 	}
 
-	public init(id: String, relationships: Relationships? = nil, links: ResourceLinks? = nil, type: `Type`, attributes: Attributes? = nil) {
+	public enum `Type`: String, Codable, CaseIterable {
+		case subscriptionImages
+	}
+
+	public init(id: String, relationships: Relationships? = nil, links: ResourceLinks? = nil, attributes: Attributes? = nil, type: `Type`) {
 		self.id = id
 		self.relationships = relationships
 		self.links = links
-		self.type = type
 		self.attributes = attributes
+		self.type = type
 	}
 
 	public init(from decoder: Decoder) throws {
@@ -141,8 +141,8 @@ public struct SubscriptionImage: Codable, Identifiable {
 		self.id = try values.decode(String.self, forKey: "id")
 		self.relationships = try values.decodeIfPresent(Relationships.self, forKey: "relationships")
 		self.links = try values.decodeIfPresent(ResourceLinks.self, forKey: "links")
-		self.type = try values.decode(`Type`.self, forKey: "type")
 		self.attributes = try values.decodeIfPresent(Attributes.self, forKey: "attributes")
+		self.type = try values.decode(`Type`.self, forKey: "type")
 	}
 
 	public func encode(to encoder: Encoder) throws {
@@ -150,7 +150,7 @@ public struct SubscriptionImage: Codable, Identifiable {
 		try values.encode(id, forKey: "id")
 		try values.encodeIfPresent(relationships, forKey: "relationships")
 		try values.encodeIfPresent(links, forKey: "links")
-		try values.encode(type, forKey: "type")
 		try values.encodeIfPresent(attributes, forKey: "attributes")
+		try values.encode(type, forKey: "type")
 	}
 }

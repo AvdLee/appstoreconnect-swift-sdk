@@ -4,23 +4,23 @@
 import Foundation
 
 public struct FileLocation: Codable {
-	public var path: String?
 	public var lineNumber: Int?
+	public var path: String?
 
-	public init(path: String? = nil, lineNumber: Int? = nil) {
-		self.path = path
+	public init(lineNumber: Int? = nil, path: String? = nil) {
 		self.lineNumber = lineNumber
+		self.path = path
 	}
 
 	public init(from decoder: Decoder) throws {
 		let values = try decoder.container(keyedBy: StringCodingKey.self)
-		self.path = try values.decodeIfPresent(String.self, forKey: "path")
 		self.lineNumber = try values.decodeIfPresent(Int.self, forKey: "lineNumber")
+		self.path = try values.decodeIfPresent(String.self, forKey: "path")
 	}
 
 	public func encode(to encoder: Encoder) throws {
 		var values = encoder.container(keyedBy: StringCodingKey.self)
-		try values.encodeIfPresent(path, forKey: "path")
 		try values.encodeIfPresent(lineNumber, forKey: "lineNumber")
+		try values.encodeIfPresent(path, forKey: "path")
 	}
 }

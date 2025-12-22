@@ -9,214 +9,149 @@ public struct AppClipAdvancedExperienceUpdateRequest: Codable {
 
 	public struct Data: Codable, Identifiable {
 		public var id: String
-		public var relationships: Relationships?
-		public var type: `Type`
 		public var attributes: Attributes?
-
-		public struct Relationships: Codable {
-			public var appClip: AppClip?
-			public var localizations: Localizations?
-			public var headerImage: HeaderImage?
-
-			public struct AppClip: Codable {
-				public var data: Data?
-
-				public struct Data: Codable, Identifiable {
-					public var type: `Type`
-					public var id: String
-
-					public enum `Type`: String, Codable, CaseIterable {
-						case appClips
-					}
-
-					public init(type: `Type`, id: String) {
-						self.type = type
-						self.id = id
-					}
-
-					public init(from decoder: Decoder) throws {
-						let values = try decoder.container(keyedBy: StringCodingKey.self)
-						self.type = try values.decode(`Type`.self, forKey: "type")
-						self.id = try values.decode(String.self, forKey: "id")
-					}
-
-					public func encode(to encoder: Encoder) throws {
-						var values = encoder.container(keyedBy: StringCodingKey.self)
-						try values.encode(type, forKey: "type")
-						try values.encode(id, forKey: "id")
-					}
-				}
-
-				public init(data: Data? = nil) {
-					self.data = data
-				}
-
-				public init(from decoder: Decoder) throws {
-					let values = try decoder.container(keyedBy: StringCodingKey.self)
-					self.data = try values.decodeIfPresent(Data.self, forKey: "data")
-				}
-
-				public func encode(to encoder: Encoder) throws {
-					var values = encoder.container(keyedBy: StringCodingKey.self)
-					try values.encodeIfPresent(data, forKey: "data")
-				}
-			}
-
-			public struct Localizations: Codable {
-				public var data: [Datum]?
-
-				public struct Datum: Codable, Identifiable {
-					public var type: `Type`
-					public var id: String
-
-					public enum `Type`: String, Codable, CaseIterable {
-						case appClipAdvancedExperienceLocalizations
-					}
-
-					public init(type: `Type`, id: String) {
-						self.type = type
-						self.id = id
-					}
-
-					public init(from decoder: Decoder) throws {
-						let values = try decoder.container(keyedBy: StringCodingKey.self)
-						self.type = try values.decode(`Type`.self, forKey: "type")
-						self.id = try values.decode(String.self, forKey: "id")
-					}
-
-					public func encode(to encoder: Encoder) throws {
-						var values = encoder.container(keyedBy: StringCodingKey.self)
-						try values.encode(type, forKey: "type")
-						try values.encode(id, forKey: "id")
-					}
-				}
-
-				public init(data: [Datum]? = nil) {
-					self.data = data
-				}
-
-				public init(from decoder: Decoder) throws {
-					let values = try decoder.container(keyedBy: StringCodingKey.self)
-					self.data = try values.decodeIfPresent([Datum].self, forKey: "data")
-				}
-
-				public func encode(to encoder: Encoder) throws {
-					var values = encoder.container(keyedBy: StringCodingKey.self)
-					try values.encodeIfPresent(data, forKey: "data")
-				}
-			}
-
-			public struct HeaderImage: Codable {
-				public var data: Data?
-
-				public struct Data: Codable, Identifiable {
-					public var type: `Type`
-					public var id: String
-
-					public enum `Type`: String, Codable, CaseIterable {
-						case appClipAdvancedExperienceImages
-					}
-
-					public init(type: `Type`, id: String) {
-						self.type = type
-						self.id = id
-					}
-
-					public init(from decoder: Decoder) throws {
-						let values = try decoder.container(keyedBy: StringCodingKey.self)
-						self.type = try values.decode(`Type`.self, forKey: "type")
-						self.id = try values.decode(String.self, forKey: "id")
-					}
-
-					public func encode(to encoder: Encoder) throws {
-						var values = encoder.container(keyedBy: StringCodingKey.self)
-						try values.encode(type, forKey: "type")
-						try values.encode(id, forKey: "id")
-					}
-				}
-
-				public init(data: Data? = nil) {
-					self.data = data
-				}
-
-				public init(from decoder: Decoder) throws {
-					let values = try decoder.container(keyedBy: StringCodingKey.self)
-					self.data = try values.decodeIfPresent(Data.self, forKey: "data")
-				}
-
-				public func encode(to encoder: Encoder) throws {
-					var values = encoder.container(keyedBy: StringCodingKey.self)
-					try values.encodeIfPresent(data, forKey: "data")
-				}
-			}
-
-			public init(appClip: AppClip? = nil, localizations: Localizations? = nil, headerImage: HeaderImage? = nil) {
-				self.appClip = appClip
-				self.localizations = localizations
-				self.headerImage = headerImage
-			}
-
-			public init(from decoder: Decoder) throws {
-				let values = try decoder.container(keyedBy: StringCodingKey.self)
-				self.appClip = try values.decodeIfPresent(AppClip.self, forKey: "appClip")
-				self.localizations = try values.decodeIfPresent(Localizations.self, forKey: "localizations")
-				self.headerImage = try values.decodeIfPresent(HeaderImage.self, forKey: "headerImage")
-			}
-
-			public func encode(to encoder: Encoder) throws {
-				var values = encoder.container(keyedBy: StringCodingKey.self)
-				try values.encodeIfPresent(appClip, forKey: "appClip")
-				try values.encodeIfPresent(localizations, forKey: "localizations")
-				try values.encodeIfPresent(headerImage, forKey: "headerImage")
-			}
-		}
-
-		public enum `Type`: String, Codable, CaseIterable {
-			case appClipAdvancedExperiences
-		}
+		public var type: `Type`
+		public var relationships: Relationships?
 
 		public struct Attributes: Codable {
+			public var isRemoved: Bool?
+			public var defaultLanguage: AppClipAdvancedExperienceLanguage?
+			public var action: AppClipAction?
 			public var place: Place?
 			public var businessCategory: BusinessCategory?
 			public var isPoweredBy: Bool?
-			public var defaultLanguage: AppClipAdvancedExperienceLanguage?
-			public var isRemoved: Bool?
-			public var action: AppClipAction?
 
 			public struct Place: Codable {
 				public var names: [String]?
-				public var categories: [String]?
+				public var phoneNumber: PhoneNumber?
+				public var mainAddress: MainAddress?
 				public var displayPoint: DisplayPoint?
+				public var categories: [String]?
 				public var placeID: String?
-				public var homePage: String?
 				public var relationship: Relationship?
 				public var mapAction: MapAction?
-				public var mainAddress: MainAddress?
-				public var phoneNumber: PhoneNumber?
+				public var homePage: String?
+
+				public struct PhoneNumber: Codable {
+					public var intent: String?
+					public var type: `Type`?
+					public var number: String?
+
+					public enum `Type`: String, Codable, CaseIterable {
+						case fax = "FAX"
+						case landline = "LANDLINE"
+						case mobile = "MOBILE"
+						case tollfree = "TOLLFREE"
+					}
+
+					public init(intent: String? = nil, type: `Type`? = nil, number: String? = nil) {
+						self.intent = intent
+						self.type = type
+						self.number = number
+					}
+
+					public init(from decoder: Decoder) throws {
+						let values = try decoder.container(keyedBy: StringCodingKey.self)
+						self.intent = try values.decodeIfPresent(String.self, forKey: "intent")
+						self.type = try values.decodeIfPresent(`Type`.self, forKey: "type")
+						self.number = try values.decodeIfPresent(String.self, forKey: "number")
+					}
+
+					public func encode(to encoder: Encoder) throws {
+						var values = encoder.container(keyedBy: StringCodingKey.self)
+						try values.encodeIfPresent(intent, forKey: "intent")
+						try values.encodeIfPresent(type, forKey: "type")
+						try values.encodeIfPresent(number, forKey: "number")
+					}
+				}
+
+				public struct MainAddress: Codable {
+					public var fullAddress: String?
+					public var structuredAddress: StructuredAddress?
+
+					public struct StructuredAddress: Codable {
+						public var postalCode: String?
+						public var stateProvince: String?
+						public var streetAddress: [String]?
+						public var neighborhood: String?
+						public var countryCode: String?
+						public var locality: String?
+						public var floor: String?
+
+						public init(postalCode: String? = nil, stateProvince: String? = nil, streetAddress: [String]? = nil, neighborhood: String? = nil, countryCode: String? = nil, locality: String? = nil, floor: String? = nil) {
+							self.postalCode = postalCode
+							self.stateProvince = stateProvince
+							self.streetAddress = streetAddress
+							self.neighborhood = neighborhood
+							self.countryCode = countryCode
+							self.locality = locality
+							self.floor = floor
+						}
+
+						public init(from decoder: Decoder) throws {
+							let values = try decoder.container(keyedBy: StringCodingKey.self)
+							self.postalCode = try values.decodeIfPresent(String.self, forKey: "postalCode")
+							self.stateProvince = try values.decodeIfPresent(String.self, forKey: "stateProvince")
+							self.streetAddress = try values.decodeIfPresent([String].self, forKey: "streetAddress")
+							self.neighborhood = try values.decodeIfPresent(String.self, forKey: "neighborhood")
+							self.countryCode = try values.decodeIfPresent(String.self, forKey: "countryCode")
+							self.locality = try values.decodeIfPresent(String.self, forKey: "locality")
+							self.floor = try values.decodeIfPresent(String.self, forKey: "floor")
+						}
+
+						public func encode(to encoder: Encoder) throws {
+							var values = encoder.container(keyedBy: StringCodingKey.self)
+							try values.encodeIfPresent(postalCode, forKey: "postalCode")
+							try values.encodeIfPresent(stateProvince, forKey: "stateProvince")
+							try values.encodeIfPresent(streetAddress, forKey: "streetAddress")
+							try values.encodeIfPresent(neighborhood, forKey: "neighborhood")
+							try values.encodeIfPresent(countryCode, forKey: "countryCode")
+							try values.encodeIfPresent(locality, forKey: "locality")
+							try values.encodeIfPresent(floor, forKey: "floor")
+						}
+					}
+
+					public init(fullAddress: String? = nil, structuredAddress: StructuredAddress? = nil) {
+						self.fullAddress = fullAddress
+						self.structuredAddress = structuredAddress
+					}
+
+					public init(from decoder: Decoder) throws {
+						let values = try decoder.container(keyedBy: StringCodingKey.self)
+						self.fullAddress = try values.decodeIfPresent(String.self, forKey: "fullAddress")
+						self.structuredAddress = try values.decodeIfPresent(StructuredAddress.self, forKey: "structuredAddress")
+					}
+
+					public func encode(to encoder: Encoder) throws {
+						var values = encoder.container(keyedBy: StringCodingKey.self)
+						try values.encodeIfPresent(fullAddress, forKey: "fullAddress")
+						try values.encodeIfPresent(structuredAddress, forKey: "structuredAddress")
+					}
+				}
 
 				public struct DisplayPoint: Codable {
 					public var coordinates: Coordinates?
 					public var source: Source?
 
 					public struct Coordinates: Codable {
-						public var longitude: Double?
 						public var latitude: Double?
+						public var longitude: Double?
 
-						public init(longitude: Double? = nil, latitude: Double? = nil) {
-							self.longitude = longitude
+						public init(latitude: Double? = nil, longitude: Double? = nil) {
 							self.latitude = latitude
+							self.longitude = longitude
 						}
 
 						public init(from decoder: Decoder) throws {
 							let values = try decoder.container(keyedBy: StringCodingKey.self)
-							self.longitude = try values.decodeIfPresent(Double.self, forKey: "longitude")
 							self.latitude = try values.decodeIfPresent(Double.self, forKey: "latitude")
+							self.longitude = try values.decodeIfPresent(Double.self, forKey: "longitude")
 						}
 
 						public func encode(to encoder: Encoder) throws {
 							var values = encoder.container(keyedBy: StringCodingKey.self)
-							try values.encodeIfPresent(longitude, forKey: "longitude")
 							try values.encodeIfPresent(latitude, forKey: "latitude")
+							try values.encodeIfPresent(longitude, forKey: "longitude")
 						}
 					}
 
@@ -293,139 +228,42 @@ public struct AppClipAdvancedExperienceUpdateRequest: Codable {
 					case payToPark = "PAY_TO_PARK"
 				}
 
-				public struct MainAddress: Codable {
-					public var fullAddress: String?
-					public var structuredAddress: StructuredAddress?
-
-					public struct StructuredAddress: Codable {
-						public var floor: String?
-						public var locality: String?
-						public var stateProvince: String?
-						public var postalCode: String?
-						public var neighborhood: String?
-						public var countryCode: String?
-						public var streetAddress: [String]?
-
-						public init(floor: String? = nil, locality: String? = nil, stateProvince: String? = nil, postalCode: String? = nil, neighborhood: String? = nil, countryCode: String? = nil, streetAddress: [String]? = nil) {
-							self.floor = floor
-							self.locality = locality
-							self.stateProvince = stateProvince
-							self.postalCode = postalCode
-							self.neighborhood = neighborhood
-							self.countryCode = countryCode
-							self.streetAddress = streetAddress
-						}
-
-						public init(from decoder: Decoder) throws {
-							let values = try decoder.container(keyedBy: StringCodingKey.self)
-							self.floor = try values.decodeIfPresent(String.self, forKey: "floor")
-							self.locality = try values.decodeIfPresent(String.self, forKey: "locality")
-							self.stateProvince = try values.decodeIfPresent(String.self, forKey: "stateProvince")
-							self.postalCode = try values.decodeIfPresent(String.self, forKey: "postalCode")
-							self.neighborhood = try values.decodeIfPresent(String.self, forKey: "neighborhood")
-							self.countryCode = try values.decodeIfPresent(String.self, forKey: "countryCode")
-							self.streetAddress = try values.decodeIfPresent([String].self, forKey: "streetAddress")
-						}
-
-						public func encode(to encoder: Encoder) throws {
-							var values = encoder.container(keyedBy: StringCodingKey.self)
-							try values.encodeIfPresent(floor, forKey: "floor")
-							try values.encodeIfPresent(locality, forKey: "locality")
-							try values.encodeIfPresent(stateProvince, forKey: "stateProvince")
-							try values.encodeIfPresent(postalCode, forKey: "postalCode")
-							try values.encodeIfPresent(neighborhood, forKey: "neighborhood")
-							try values.encodeIfPresent(countryCode, forKey: "countryCode")
-							try values.encodeIfPresent(streetAddress, forKey: "streetAddress")
-						}
-					}
-
-					public init(fullAddress: String? = nil, structuredAddress: StructuredAddress? = nil) {
-						self.fullAddress = fullAddress
-						self.structuredAddress = structuredAddress
-					}
-
-					public init(from decoder: Decoder) throws {
-						let values = try decoder.container(keyedBy: StringCodingKey.self)
-						self.fullAddress = try values.decodeIfPresent(String.self, forKey: "fullAddress")
-						self.structuredAddress = try values.decodeIfPresent(StructuredAddress.self, forKey: "structuredAddress")
-					}
-
-					public func encode(to encoder: Encoder) throws {
-						var values = encoder.container(keyedBy: StringCodingKey.self)
-						try values.encodeIfPresent(fullAddress, forKey: "fullAddress")
-						try values.encodeIfPresent(structuredAddress, forKey: "structuredAddress")
-					}
-				}
-
-				public struct PhoneNumber: Codable {
-					public var number: String?
-					public var type: `Type`?
-					public var intent: String?
-
-					public enum `Type`: String, Codable, CaseIterable {
-						case fax = "FAX"
-						case landline = "LANDLINE"
-						case mobile = "MOBILE"
-						case tollfree = "TOLLFREE"
-					}
-
-					public init(number: String? = nil, type: `Type`? = nil, intent: String? = nil) {
-						self.number = number
-						self.type = type
-						self.intent = intent
-					}
-
-					public init(from decoder: Decoder) throws {
-						let values = try decoder.container(keyedBy: StringCodingKey.self)
-						self.number = try values.decodeIfPresent(String.self, forKey: "number")
-						self.type = try values.decodeIfPresent(`Type`.self, forKey: "type")
-						self.intent = try values.decodeIfPresent(String.self, forKey: "intent")
-					}
-
-					public func encode(to encoder: Encoder) throws {
-						var values = encoder.container(keyedBy: StringCodingKey.self)
-						try values.encodeIfPresent(number, forKey: "number")
-						try values.encodeIfPresent(type, forKey: "type")
-						try values.encodeIfPresent(intent, forKey: "intent")
-					}
-				}
-
-				public init(names: [String]? = nil, categories: [String]? = nil, displayPoint: DisplayPoint? = nil, placeID: String? = nil, homePage: String? = nil, relationship: Relationship? = nil, mapAction: MapAction? = nil, mainAddress: MainAddress? = nil, phoneNumber: PhoneNumber? = nil) {
+				public init(names: [String]? = nil, phoneNumber: PhoneNumber? = nil, mainAddress: MainAddress? = nil, displayPoint: DisplayPoint? = nil, categories: [String]? = nil, placeID: String? = nil, relationship: Relationship? = nil, mapAction: MapAction? = nil, homePage: String? = nil) {
 					self.names = names
-					self.categories = categories
+					self.phoneNumber = phoneNumber
+					self.mainAddress = mainAddress
 					self.displayPoint = displayPoint
+					self.categories = categories
 					self.placeID = placeID
-					self.homePage = homePage
 					self.relationship = relationship
 					self.mapAction = mapAction
-					self.mainAddress = mainAddress
-					self.phoneNumber = phoneNumber
+					self.homePage = homePage
 				}
 
 				public init(from decoder: Decoder) throws {
 					let values = try decoder.container(keyedBy: StringCodingKey.self)
 					self.names = try values.decodeIfPresent([String].self, forKey: "names")
-					self.categories = try values.decodeIfPresent([String].self, forKey: "categories")
+					self.phoneNumber = try values.decodeIfPresent(PhoneNumber.self, forKey: "phoneNumber")
+					self.mainAddress = try values.decodeIfPresent(MainAddress.self, forKey: "mainAddress")
 					self.displayPoint = try values.decodeIfPresent(DisplayPoint.self, forKey: "displayPoint")
+					self.categories = try values.decodeIfPresent([String].self, forKey: "categories")
 					self.placeID = try values.decodeIfPresent(String.self, forKey: "placeId")
-					self.homePage = try values.decodeIfPresent(String.self, forKey: "homePage")
 					self.relationship = try values.decodeIfPresent(Relationship.self, forKey: "relationship")
 					self.mapAction = try values.decodeIfPresent(MapAction.self, forKey: "mapAction")
-					self.mainAddress = try values.decodeIfPresent(MainAddress.self, forKey: "mainAddress")
-					self.phoneNumber = try values.decodeIfPresent(PhoneNumber.self, forKey: "phoneNumber")
+					self.homePage = try values.decodeIfPresent(String.self, forKey: "homePage")
 				}
 
 				public func encode(to encoder: Encoder) throws {
 					var values = encoder.container(keyedBy: StringCodingKey.self)
 					try values.encodeIfPresent(names, forKey: "names")
-					try values.encodeIfPresent(categories, forKey: "categories")
+					try values.encodeIfPresent(phoneNumber, forKey: "phoneNumber")
+					try values.encodeIfPresent(mainAddress, forKey: "mainAddress")
 					try values.encodeIfPresent(displayPoint, forKey: "displayPoint")
+					try values.encodeIfPresent(categories, forKey: "categories")
 					try values.encodeIfPresent(placeID, forKey: "placeId")
-					try values.encodeIfPresent(homePage, forKey: "homePage")
 					try values.encodeIfPresent(relationship, forKey: "relationship")
 					try values.encodeIfPresent(mapAction, forKey: "mapAction")
-					try values.encodeIfPresent(mainAddress, forKey: "mainAddress")
-					try values.encodeIfPresent(phoneNumber, forKey: "phoneNumber")
+					try values.encodeIfPresent(homePage, forKey: "homePage")
 				}
 			}
 
@@ -459,57 +297,219 @@ public struct AppClipAdvancedExperienceUpdateRequest: Codable {
 				case transit = "TRANSIT"
 			}
 
-			public init(place: Place? = nil, businessCategory: BusinessCategory? = nil, isPoweredBy: Bool? = nil, defaultLanguage: AppClipAdvancedExperienceLanguage? = nil, isRemoved: Bool? = nil, action: AppClipAction? = nil) {
+			public init(isRemoved: Bool? = nil, defaultLanguage: AppClipAdvancedExperienceLanguage? = nil, action: AppClipAction? = nil, place: Place? = nil, businessCategory: BusinessCategory? = nil, isPoweredBy: Bool? = nil) {
+				self.isRemoved = isRemoved
+				self.defaultLanguage = defaultLanguage
+				self.action = action
 				self.place = place
 				self.businessCategory = businessCategory
 				self.isPoweredBy = isPoweredBy
-				self.defaultLanguage = defaultLanguage
-				self.isRemoved = isRemoved
-				self.action = action
 			}
 
 			public init(from decoder: Decoder) throws {
 				let values = try decoder.container(keyedBy: StringCodingKey.self)
+				self.isRemoved = try values.decodeIfPresent(Bool.self, forKey: "removed")
+				self.defaultLanguage = try values.decodeIfPresent(AppClipAdvancedExperienceLanguage.self, forKey: "defaultLanguage")
+				self.action = try values.decodeIfPresent(AppClipAction.self, forKey: "action")
 				self.place = try values.decodeIfPresent(Place.self, forKey: "place")
 				self.businessCategory = try values.decodeIfPresent(BusinessCategory.self, forKey: "businessCategory")
 				self.isPoweredBy = try values.decodeIfPresent(Bool.self, forKey: "isPoweredBy")
-				self.defaultLanguage = try values.decodeIfPresent(AppClipAdvancedExperienceLanguage.self, forKey: "defaultLanguage")
-				self.isRemoved = try values.decodeIfPresent(Bool.self, forKey: "removed")
-				self.action = try values.decodeIfPresent(AppClipAction.self, forKey: "action")
 			}
 
 			public func encode(to encoder: Encoder) throws {
 				var values = encoder.container(keyedBy: StringCodingKey.self)
+				try values.encodeIfPresent(isRemoved, forKey: "removed")
+				try values.encodeIfPresent(defaultLanguage, forKey: "defaultLanguage")
+				try values.encodeIfPresent(action, forKey: "action")
 				try values.encodeIfPresent(place, forKey: "place")
 				try values.encodeIfPresent(businessCategory, forKey: "businessCategory")
 				try values.encodeIfPresent(isPoweredBy, forKey: "isPoweredBy")
-				try values.encodeIfPresent(defaultLanguage, forKey: "defaultLanguage")
-				try values.encodeIfPresent(isRemoved, forKey: "removed")
-				try values.encodeIfPresent(action, forKey: "action")
 			}
 		}
 
-		public init(id: String, relationships: Relationships? = nil, type: `Type`, attributes: Attributes? = nil) {
+		public enum `Type`: String, Codable, CaseIterable {
+			case appClipAdvancedExperiences
+		}
+
+		public struct Relationships: Codable {
+			public var localizations: Localizations?
+			public var appClip: AppClip?
+			public var headerImage: HeaderImage?
+
+			public struct Localizations: Codable {
+				public var data: [Datum]?
+
+				public struct Datum: Codable, Identifiable {
+					public var id: String
+					public var type: `Type`
+
+					public enum `Type`: String, Codable, CaseIterable {
+						case appClipAdvancedExperienceLocalizations
+					}
+
+					public init(id: String, type: `Type`) {
+						self.id = id
+						self.type = type
+					}
+
+					public init(from decoder: Decoder) throws {
+						let values = try decoder.container(keyedBy: StringCodingKey.self)
+						self.id = try values.decode(String.self, forKey: "id")
+						self.type = try values.decode(`Type`.self, forKey: "type")
+					}
+
+					public func encode(to encoder: Encoder) throws {
+						var values = encoder.container(keyedBy: StringCodingKey.self)
+						try values.encode(id, forKey: "id")
+						try values.encode(type, forKey: "type")
+					}
+				}
+
+				public init(data: [Datum]? = nil) {
+					self.data = data
+				}
+
+				public init(from decoder: Decoder) throws {
+					let values = try decoder.container(keyedBy: StringCodingKey.self)
+					self.data = try values.decodeIfPresent([Datum].self, forKey: "data")
+				}
+
+				public func encode(to encoder: Encoder) throws {
+					var values = encoder.container(keyedBy: StringCodingKey.self)
+					try values.encodeIfPresent(data, forKey: "data")
+				}
+			}
+
+			public struct AppClip: Codable {
+				public var data: Data?
+
+				public struct Data: Codable, Identifiable {
+					public var id: String
+					public var type: `Type`
+
+					public enum `Type`: String, Codable, CaseIterable {
+						case appClips
+					}
+
+					public init(id: String, type: `Type`) {
+						self.id = id
+						self.type = type
+					}
+
+					public init(from decoder: Decoder) throws {
+						let values = try decoder.container(keyedBy: StringCodingKey.self)
+						self.id = try values.decode(String.self, forKey: "id")
+						self.type = try values.decode(`Type`.self, forKey: "type")
+					}
+
+					public func encode(to encoder: Encoder) throws {
+						var values = encoder.container(keyedBy: StringCodingKey.self)
+						try values.encode(id, forKey: "id")
+						try values.encode(type, forKey: "type")
+					}
+				}
+
+				public init(data: Data? = nil) {
+					self.data = data
+				}
+
+				public init(from decoder: Decoder) throws {
+					let values = try decoder.container(keyedBy: StringCodingKey.self)
+					self.data = try values.decodeIfPresent(Data.self, forKey: "data")
+				}
+
+				public func encode(to encoder: Encoder) throws {
+					var values = encoder.container(keyedBy: StringCodingKey.self)
+					try values.encodeIfPresent(data, forKey: "data")
+				}
+			}
+
+			public struct HeaderImage: Codable {
+				public var data: Data?
+
+				public struct Data: Codable, Identifiable {
+					public var id: String
+					public var type: `Type`
+
+					public enum `Type`: String, Codable, CaseIterable {
+						case appClipAdvancedExperienceImages
+					}
+
+					public init(id: String, type: `Type`) {
+						self.id = id
+						self.type = type
+					}
+
+					public init(from decoder: Decoder) throws {
+						let values = try decoder.container(keyedBy: StringCodingKey.self)
+						self.id = try values.decode(String.self, forKey: "id")
+						self.type = try values.decode(`Type`.self, forKey: "type")
+					}
+
+					public func encode(to encoder: Encoder) throws {
+						var values = encoder.container(keyedBy: StringCodingKey.self)
+						try values.encode(id, forKey: "id")
+						try values.encode(type, forKey: "type")
+					}
+				}
+
+				public init(data: Data? = nil) {
+					self.data = data
+				}
+
+				public init(from decoder: Decoder) throws {
+					let values = try decoder.container(keyedBy: StringCodingKey.self)
+					self.data = try values.decodeIfPresent(Data.self, forKey: "data")
+				}
+
+				public func encode(to encoder: Encoder) throws {
+					var values = encoder.container(keyedBy: StringCodingKey.self)
+					try values.encodeIfPresent(data, forKey: "data")
+				}
+			}
+
+			public init(localizations: Localizations? = nil, appClip: AppClip? = nil, headerImage: HeaderImage? = nil) {
+				self.localizations = localizations
+				self.appClip = appClip
+				self.headerImage = headerImage
+			}
+
+			public init(from decoder: Decoder) throws {
+				let values = try decoder.container(keyedBy: StringCodingKey.self)
+				self.localizations = try values.decodeIfPresent(Localizations.self, forKey: "localizations")
+				self.appClip = try values.decodeIfPresent(AppClip.self, forKey: "appClip")
+				self.headerImage = try values.decodeIfPresent(HeaderImage.self, forKey: "headerImage")
+			}
+
+			public func encode(to encoder: Encoder) throws {
+				var values = encoder.container(keyedBy: StringCodingKey.self)
+				try values.encodeIfPresent(localizations, forKey: "localizations")
+				try values.encodeIfPresent(appClip, forKey: "appClip")
+				try values.encodeIfPresent(headerImage, forKey: "headerImage")
+			}
+		}
+
+		public init(id: String, attributes: Attributes? = nil, type: `Type`, relationships: Relationships? = nil) {
 			self.id = id
-			self.relationships = relationships
-			self.type = type
 			self.attributes = attributes
+			self.type = type
+			self.relationships = relationships
 		}
 
 		public init(from decoder: Decoder) throws {
 			let values = try decoder.container(keyedBy: StringCodingKey.self)
 			self.id = try values.decode(String.self, forKey: "id")
-			self.relationships = try values.decodeIfPresent(Relationships.self, forKey: "relationships")
-			self.type = try values.decode(`Type`.self, forKey: "type")
 			self.attributes = try values.decodeIfPresent(Attributes.self, forKey: "attributes")
+			self.type = try values.decode(`Type`.self, forKey: "type")
+			self.relationships = try values.decodeIfPresent(Relationships.self, forKey: "relationships")
 		}
 
 		public func encode(to encoder: Encoder) throws {
 			var values = encoder.container(keyedBy: StringCodingKey.self)
 			try values.encode(id, forKey: "id")
-			try values.encodeIfPresent(relationships, forKey: "relationships")
-			try values.encode(type, forKey: "type")
 			try values.encodeIfPresent(attributes, forKey: "attributes")
+			try values.encode(type, forKey: "type")
+			try values.encodeIfPresent(relationships, forKey: "relationships")
 		}
 	}
 

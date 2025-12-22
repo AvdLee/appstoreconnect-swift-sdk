@@ -4,27 +4,27 @@
 import Foundation
 
 public struct ImageAsset: Codable {
-	public var width: Int?
 	public var templateURL: String?
+	public var width: Int?
 	public var height: Int?
 
-	public init(width: Int? = nil, templateURL: String? = nil, height: Int? = nil) {
-		self.width = width
+	public init(templateURL: String? = nil, width: Int? = nil, height: Int? = nil) {
 		self.templateURL = templateURL
+		self.width = width
 		self.height = height
 	}
 
 	public init(from decoder: Decoder) throws {
 		let values = try decoder.container(keyedBy: StringCodingKey.self)
-		self.width = try values.decodeIfPresent(Int.self, forKey: "width")
 		self.templateURL = try values.decodeIfPresent(String.self, forKey: "templateUrl")
+		self.width = try values.decodeIfPresent(Int.self, forKey: "width")
 		self.height = try values.decodeIfPresent(Int.self, forKey: "height")
 	}
 
 	public func encode(to encoder: Encoder) throws {
 		var values = encoder.container(keyedBy: StringCodingKey.self)
-		try values.encodeIfPresent(width, forKey: "width")
 		try values.encodeIfPresent(templateURL, forKey: "templateUrl")
+		try values.encodeIfPresent(width, forKey: "width")
 		try values.encodeIfPresent(height, forKey: "height")
 	}
 }

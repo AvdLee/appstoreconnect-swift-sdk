@@ -4,31 +4,31 @@
 import Foundation
 
 public struct SubscriptionOfferCodeOneTimeUseCodeValue: Codable, Identifiable {
-	public var type: `Type`
 	public var id: String
 	public var links: ResourceLinks?
+	public var type: `Type`
 
 	public enum `Type`: String, Codable, CaseIterable {
 		case subscriptionOfferCodeOneTimeUseCodeValues
 	}
 
-	public init(type: `Type`, id: String, links: ResourceLinks? = nil) {
-		self.type = type
+	public init(id: String, links: ResourceLinks? = nil, type: `Type`) {
 		self.id = id
 		self.links = links
+		self.type = type
 	}
 
 	public init(from decoder: Decoder) throws {
 		let values = try decoder.container(keyedBy: StringCodingKey.self)
-		self.type = try values.decode(`Type`.self, forKey: "type")
 		self.id = try values.decode(String.self, forKey: "id")
 		self.links = try values.decodeIfPresent(ResourceLinks.self, forKey: "links")
+		self.type = try values.decode(`Type`.self, forKey: "type")
 	}
 
 	public func encode(to encoder: Encoder) throws {
 		var values = encoder.container(keyedBy: StringCodingKey.self)
-		try values.encode(type, forKey: "type")
 		try values.encode(id, forKey: "id")
 		try values.encodeIfPresent(links, forKey: "links")
+		try values.encode(type, forKey: "type")
 	}
 }

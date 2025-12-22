@@ -7,42 +7,42 @@ public struct AppEventLocalizationCreateRequest: Codable {
 	public var data: Data
 
 	public struct Data: Codable {
-		public var type: `Type`
 		public var attributes: Attributes
+		public var type: `Type`
 		public var relationships: Relationships
 
-		public enum `Type`: String, Codable, CaseIterable {
-			case appEventLocalizations
-		}
-
 		public struct Attributes: Codable {
-			public var locale: String
 			public var shortDescription: String?
-			public var name: String?
+			public var locale: String
 			public var longDescription: String?
+			public var name: String?
 
-			public init(locale: String, shortDescription: String? = nil, name: String? = nil, longDescription: String? = nil) {
-				self.locale = locale
+			public init(shortDescription: String? = nil, locale: String, longDescription: String? = nil, name: String? = nil) {
 				self.shortDescription = shortDescription
-				self.name = name
+				self.locale = locale
 				self.longDescription = longDescription
+				self.name = name
 			}
 
 			public init(from decoder: Decoder) throws {
 				let values = try decoder.container(keyedBy: StringCodingKey.self)
-				self.locale = try values.decode(String.self, forKey: "locale")
 				self.shortDescription = try values.decodeIfPresent(String.self, forKey: "shortDescription")
-				self.name = try values.decodeIfPresent(String.self, forKey: "name")
+				self.locale = try values.decode(String.self, forKey: "locale")
 				self.longDescription = try values.decodeIfPresent(String.self, forKey: "longDescription")
+				self.name = try values.decodeIfPresent(String.self, forKey: "name")
 			}
 
 			public func encode(to encoder: Encoder) throws {
 				var values = encoder.container(keyedBy: StringCodingKey.self)
-				try values.encode(locale, forKey: "locale")
 				try values.encodeIfPresent(shortDescription, forKey: "shortDescription")
-				try values.encodeIfPresent(name, forKey: "name")
+				try values.encode(locale, forKey: "locale")
 				try values.encodeIfPresent(longDescription, forKey: "longDescription")
+				try values.encodeIfPresent(name, forKey: "name")
 			}
+		}
+
+		public enum `Type`: String, Codable, CaseIterable {
+			case appEventLocalizations
 		}
 
 		public struct Relationships: Codable {
@@ -52,28 +52,28 @@ public struct AppEventLocalizationCreateRequest: Codable {
 				public var data: Data
 
 				public struct Data: Codable, Identifiable {
-					public var type: `Type`
 					public var id: String
+					public var type: `Type`
 
 					public enum `Type`: String, Codable, CaseIterable {
 						case appEvents
 					}
 
-					public init(type: `Type`, id: String) {
-						self.type = type
+					public init(id: String, type: `Type`) {
 						self.id = id
+						self.type = type
 					}
 
 					public init(from decoder: Decoder) throws {
 						let values = try decoder.container(keyedBy: StringCodingKey.self)
-						self.type = try values.decode(`Type`.self, forKey: "type")
 						self.id = try values.decode(String.self, forKey: "id")
+						self.type = try values.decode(`Type`.self, forKey: "type")
 					}
 
 					public func encode(to encoder: Encoder) throws {
 						var values = encoder.container(keyedBy: StringCodingKey.self)
-						try values.encode(type, forKey: "type")
 						try values.encode(id, forKey: "id")
+						try values.encode(type, forKey: "type")
 					}
 				}
 
@@ -107,23 +107,23 @@ public struct AppEventLocalizationCreateRequest: Codable {
 			}
 		}
 
-		public init(type: `Type`, attributes: Attributes, relationships: Relationships) {
-			self.type = type
+		public init(attributes: Attributes, type: `Type`, relationships: Relationships) {
 			self.attributes = attributes
+			self.type = type
 			self.relationships = relationships
 		}
 
 		public init(from decoder: Decoder) throws {
 			let values = try decoder.container(keyedBy: StringCodingKey.self)
-			self.type = try values.decode(`Type`.self, forKey: "type")
 			self.attributes = try values.decode(Attributes.self, forKey: "attributes")
+			self.type = try values.decode(`Type`.self, forKey: "type")
 			self.relationships = try values.decode(Relationships.self, forKey: "relationships")
 		}
 
 		public func encode(to encoder: Encoder) throws {
 			var values = encoder.container(keyedBy: StringCodingKey.self)
-			try values.encode(type, forKey: "type")
 			try values.encode(attributes, forKey: "attributes")
+			try values.encode(type, forKey: "type")
 			try values.encode(relationships, forKey: "relationships")
 		}
 	}

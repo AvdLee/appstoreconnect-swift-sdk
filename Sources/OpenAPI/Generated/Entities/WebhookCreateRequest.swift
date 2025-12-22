@@ -7,46 +7,46 @@ public struct WebhookCreateRequest: Codable {
 	public var data: Data
 
 	public struct Data: Codable {
-		public var type: `Type`
 		public var attributes: Attributes
+		public var type: `Type`
 		public var relationships: Relationships
-
-		public enum `Type`: String, Codable, CaseIterable {
-			case webhooks
-		}
 
 		public struct Attributes: Codable {
 			public var secret: String
+			public var name: String
 			public var isEnabled: Bool
 			public var eventTypes: [WebhookEventType]
-			public var name: String
 			public var url: URL
 
-			public init(secret: String, isEnabled: Bool, eventTypes: [WebhookEventType], name: String, url: URL) {
+			public init(secret: String, name: String, isEnabled: Bool, eventTypes: [WebhookEventType], url: URL) {
 				self.secret = secret
+				self.name = name
 				self.isEnabled = isEnabled
 				self.eventTypes = eventTypes
-				self.name = name
 				self.url = url
 			}
 
 			public init(from decoder: Decoder) throws {
 				let values = try decoder.container(keyedBy: StringCodingKey.self)
 				self.secret = try values.decode(String.self, forKey: "secret")
+				self.name = try values.decode(String.self, forKey: "name")
 				self.isEnabled = try values.decode(Bool.self, forKey: "enabled")
 				self.eventTypes = try values.decode([WebhookEventType].self, forKey: "eventTypes")
-				self.name = try values.decode(String.self, forKey: "name")
 				self.url = try values.decode(URL.self, forKey: "url")
 			}
 
 			public func encode(to encoder: Encoder) throws {
 				var values = encoder.container(keyedBy: StringCodingKey.self)
 				try values.encode(secret, forKey: "secret")
+				try values.encode(name, forKey: "name")
 				try values.encode(isEnabled, forKey: "enabled")
 				try values.encode(eventTypes, forKey: "eventTypes")
-				try values.encode(name, forKey: "name")
 				try values.encode(url, forKey: "url")
 			}
+		}
+
+		public enum `Type`: String, Codable, CaseIterable {
+			case webhooks
 		}
 
 		public struct Relationships: Codable {
@@ -56,28 +56,28 @@ public struct WebhookCreateRequest: Codable {
 				public var data: Data
 
 				public struct Data: Codable, Identifiable {
-					public var type: `Type`
 					public var id: String
+					public var type: `Type`
 
 					public enum `Type`: String, Codable, CaseIterable {
 						case apps
 					}
 
-					public init(type: `Type`, id: String) {
-						self.type = type
+					public init(id: String, type: `Type`) {
 						self.id = id
+						self.type = type
 					}
 
 					public init(from decoder: Decoder) throws {
 						let values = try decoder.container(keyedBy: StringCodingKey.self)
-						self.type = try values.decode(`Type`.self, forKey: "type")
 						self.id = try values.decode(String.self, forKey: "id")
+						self.type = try values.decode(`Type`.self, forKey: "type")
 					}
 
 					public func encode(to encoder: Encoder) throws {
 						var values = encoder.container(keyedBy: StringCodingKey.self)
-						try values.encode(type, forKey: "type")
 						try values.encode(id, forKey: "id")
+						try values.encode(type, forKey: "type")
 					}
 				}
 
@@ -111,23 +111,23 @@ public struct WebhookCreateRequest: Codable {
 			}
 		}
 
-		public init(type: `Type`, attributes: Attributes, relationships: Relationships) {
-			self.type = type
+		public init(attributes: Attributes, type: `Type`, relationships: Relationships) {
 			self.attributes = attributes
+			self.type = type
 			self.relationships = relationships
 		}
 
 		public init(from decoder: Decoder) throws {
 			let values = try decoder.container(keyedBy: StringCodingKey.self)
-			self.type = try values.decode(`Type`.self, forKey: "type")
 			self.attributes = try values.decode(Attributes.self, forKey: "attributes")
+			self.type = try values.decode(`Type`.self, forKey: "type")
 			self.relationships = try values.decode(Relationships.self, forKey: "relationships")
 		}
 
 		public func encode(to encoder: Encoder) throws {
 			var values = encoder.container(keyedBy: StringCodingKey.self)
-			try values.encode(type, forKey: "type")
 			try values.encode(attributes, forKey: "attributes")
+			try values.encode(type, forKey: "type")
 			try values.encode(relationships, forKey: "relationships")
 		}
 	}

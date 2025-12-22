@@ -7,8 +7,8 @@ public struct TerritoryAvailabilityUpdateRequest: Codable {
 	public var data: Data
 
 	public struct Data: Codable, Identifiable {
-		public var type: `Type`
 		public var id: String
+		public var type: `Type`
 		public var attributes: Attributes?
 
 		public enum `Type`: String, Codable, CaseIterable {
@@ -16,48 +16,48 @@ public struct TerritoryAvailabilityUpdateRequest: Codable {
 		}
 
 		public struct Attributes: Codable {
-			public var isPreOrderEnabled: Bool?
-			public var isAvailable: Bool?
 			public var releaseDate: String?
+			public var isAvailable: Bool?
+			public var isPreOrderEnabled: Bool?
 
-			public init(isPreOrderEnabled: Bool? = nil, isAvailable: Bool? = nil, releaseDate: String? = nil) {
-				self.isPreOrderEnabled = isPreOrderEnabled
-				self.isAvailable = isAvailable
+			public init(releaseDate: String? = nil, isAvailable: Bool? = nil, isPreOrderEnabled: Bool? = nil) {
 				self.releaseDate = releaseDate
+				self.isAvailable = isAvailable
+				self.isPreOrderEnabled = isPreOrderEnabled
 			}
 
 			public init(from decoder: Decoder) throws {
 				let values = try decoder.container(keyedBy: StringCodingKey.self)
-				self.isPreOrderEnabled = try values.decodeIfPresent(Bool.self, forKey: "preOrderEnabled")
-				self.isAvailable = try values.decodeIfPresent(Bool.self, forKey: "available")
 				self.releaseDate = try values.decodeIfPresent(String.self, forKey: "releaseDate")
+				self.isAvailable = try values.decodeIfPresent(Bool.self, forKey: "available")
+				self.isPreOrderEnabled = try values.decodeIfPresent(Bool.self, forKey: "preOrderEnabled")
 			}
 
 			public func encode(to encoder: Encoder) throws {
 				var values = encoder.container(keyedBy: StringCodingKey.self)
-				try values.encodeIfPresent(isPreOrderEnabled, forKey: "preOrderEnabled")
-				try values.encodeIfPresent(isAvailable, forKey: "available")
 				try values.encodeIfPresent(releaseDate, forKey: "releaseDate")
+				try values.encodeIfPresent(isAvailable, forKey: "available")
+				try values.encodeIfPresent(isPreOrderEnabled, forKey: "preOrderEnabled")
 			}
 		}
 
-		public init(type: `Type`, id: String, attributes: Attributes? = nil) {
-			self.type = type
+		public init(id: String, type: `Type`, attributes: Attributes? = nil) {
 			self.id = id
+			self.type = type
 			self.attributes = attributes
 		}
 
 		public init(from decoder: Decoder) throws {
 			let values = try decoder.container(keyedBy: StringCodingKey.self)
-			self.type = try values.decode(`Type`.self, forKey: "type")
 			self.id = try values.decode(String.self, forKey: "id")
+			self.type = try values.decode(`Type`.self, forKey: "type")
 			self.attributes = try values.decodeIfPresent(Attributes.self, forKey: "attributes")
 		}
 
 		public func encode(to encoder: Encoder) throws {
 			var values = encoder.container(keyedBy: StringCodingKey.self)
-			try values.encode(type, forKey: "type")
 			try values.encode(id, forKey: "id")
+			try values.encode(type, forKey: "type")
 			try values.encodeIfPresent(attributes, forKey: "attributes")
 		}
 	}

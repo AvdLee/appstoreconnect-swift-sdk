@@ -6,18 +6,14 @@ import Foundation
 public struct GameCenterMatchmakingRule: Codable, Identifiable {
 	public var id: String
 	public var links: ResourceLinks?
-	public var type: `Type`
 	public var attributes: Attributes?
-
-	public enum `Type`: String, Codable, CaseIterable {
-		case gameCenterMatchmakingRules
-	}
+	public var type: `Type`
 
 	public struct Attributes: Codable {
 		public var referenceName: String?
-		public var expression: String?
-		public var weight: Double?
 		public var description: String?
+		public var weight: Double?
+		public var expression: String?
 		public var type: `Type`?
 
 		public enum `Type`: String, Codable, CaseIterable {
@@ -27,53 +23,57 @@ public struct GameCenterMatchmakingRule: Codable, Identifiable {
 			case team = "TEAM"
 		}
 
-		public init(referenceName: String? = nil, expression: String? = nil, weight: Double? = nil, description: String? = nil, type: `Type`? = nil) {
+		public init(referenceName: String? = nil, description: String? = nil, weight: Double? = nil, expression: String? = nil, type: `Type`? = nil) {
 			self.referenceName = referenceName
-			self.expression = expression
-			self.weight = weight
 			self.description = description
+			self.weight = weight
+			self.expression = expression
 			self.type = type
 		}
 
 		public init(from decoder: Decoder) throws {
 			let values = try decoder.container(keyedBy: StringCodingKey.self)
 			self.referenceName = try values.decodeIfPresent(String.self, forKey: "referenceName")
-			self.expression = try values.decodeIfPresent(String.self, forKey: "expression")
-			self.weight = try values.decodeIfPresent(Double.self, forKey: "weight")
 			self.description = try values.decodeIfPresent(String.self, forKey: "description")
+			self.weight = try values.decodeIfPresent(Double.self, forKey: "weight")
+			self.expression = try values.decodeIfPresent(String.self, forKey: "expression")
 			self.type = try values.decodeIfPresent(`Type`.self, forKey: "type")
 		}
 
 		public func encode(to encoder: Encoder) throws {
 			var values = encoder.container(keyedBy: StringCodingKey.self)
 			try values.encodeIfPresent(referenceName, forKey: "referenceName")
-			try values.encodeIfPresent(expression, forKey: "expression")
-			try values.encodeIfPresent(weight, forKey: "weight")
 			try values.encodeIfPresent(description, forKey: "description")
+			try values.encodeIfPresent(weight, forKey: "weight")
+			try values.encodeIfPresent(expression, forKey: "expression")
 			try values.encodeIfPresent(type, forKey: "type")
 		}
 	}
 
-	public init(id: String, links: ResourceLinks? = nil, type: `Type`, attributes: Attributes? = nil) {
+	public enum `Type`: String, Codable, CaseIterable {
+		case gameCenterMatchmakingRules
+	}
+
+	public init(id: String, links: ResourceLinks? = nil, attributes: Attributes? = nil, type: `Type`) {
 		self.id = id
 		self.links = links
-		self.type = type
 		self.attributes = attributes
+		self.type = type
 	}
 
 	public init(from decoder: Decoder) throws {
 		let values = try decoder.container(keyedBy: StringCodingKey.self)
 		self.id = try values.decode(String.self, forKey: "id")
 		self.links = try values.decodeIfPresent(ResourceLinks.self, forKey: "links")
-		self.type = try values.decode(`Type`.self, forKey: "type")
 		self.attributes = try values.decodeIfPresent(Attributes.self, forKey: "attributes")
+		self.type = try values.decode(`Type`.self, forKey: "type")
 	}
 
 	public func encode(to encoder: Encoder) throws {
 		var values = encoder.container(keyedBy: StringCodingKey.self)
 		try values.encode(id, forKey: "id")
 		try values.encodeIfPresent(links, forKey: "links")
-		try values.encode(type, forKey: "type")
 		try values.encodeIfPresent(attributes, forKey: "attributes")
+		try values.encode(type, forKey: "type")
 	}
 }

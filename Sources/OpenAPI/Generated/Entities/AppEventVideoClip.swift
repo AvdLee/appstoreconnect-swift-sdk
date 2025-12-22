@@ -7,8 +7,8 @@ public struct AppEventVideoClip: Codable, Identifiable {
 	public var id: String
 	public var relationships: Relationships?
 	public var links: ResourceLinks?
-	public var type: `Type`
 	public var attributes: Attributes?
+	public var type: `Type`
 
 	public struct Relationships: Codable {
 		public var appEventLocalization: AppEventLocalization?
@@ -17,28 +17,28 @@ public struct AppEventVideoClip: Codable, Identifiable {
 			public var data: Data?
 
 			public struct Data: Codable, Identifiable {
-				public var type: `Type`
 				public var id: String
+				public var type: `Type`
 
 				public enum `Type`: String, Codable, CaseIterable {
 					case appEventLocalizations
 				}
 
-				public init(type: `Type`, id: String) {
-					self.type = type
+				public init(id: String, type: `Type`) {
 					self.id = id
+					self.type = type
 				}
 
 				public init(from decoder: Decoder) throws {
 					let values = try decoder.container(keyedBy: StringCodingKey.self)
-					self.type = try values.decode(`Type`.self, forKey: "type")
 					self.id = try values.decode(String.self, forKey: "id")
+					self.type = try values.decode(`Type`.self, forKey: "type")
 				}
 
 				public func encode(to encoder: Encoder) throws {
 					var values = encoder.container(keyedBy: StringCodingKey.self)
-					try values.encode(type, forKey: "type")
 					try values.encode(id, forKey: "id")
+					try values.encode(type, forKey: "type")
 				}
 			}
 
@@ -72,70 +72,70 @@ public struct AppEventVideoClip: Codable, Identifiable {
 		}
 	}
 
-	public enum `Type`: String, Codable, CaseIterable {
-		case appEventVideoClips
-	}
-
 	public struct Attributes: Codable {
 		public var previewFrameImage: PreviewFrameImage?
+		public var previewFrameTimeCode: String?
 		public var previewImage: ImageAsset?
-		public var fileName: String?
-		public var assetDeliveryState: AppMediaAssetState?
-		public var appEventAssetType: AppEventAssetType?
 		public var uploadOperations: [UploadOperation]?
+		public var appEventAssetType: AppEventAssetType?
+		public var assetDeliveryState: AppMediaAssetState?
 		public var videoURL: String?
 		public var fileSize: Int?
-		public var previewFrameTimeCode: String?
+		public var fileName: String?
 		public var videoDeliveryState: AppMediaVideoState?
 
-		public init(previewFrameImage: PreviewFrameImage? = nil, previewImage: ImageAsset? = nil, fileName: String? = nil, assetDeliveryState: AppMediaAssetState? = nil, appEventAssetType: AppEventAssetType? = nil, uploadOperations: [UploadOperation]? = nil, videoURL: String? = nil, fileSize: Int? = nil, previewFrameTimeCode: String? = nil, videoDeliveryState: AppMediaVideoState? = nil) {
+		public init(previewFrameImage: PreviewFrameImage? = nil, previewFrameTimeCode: String? = nil, previewImage: ImageAsset? = nil, uploadOperations: [UploadOperation]? = nil, appEventAssetType: AppEventAssetType? = nil, assetDeliveryState: AppMediaAssetState? = nil, videoURL: String? = nil, fileSize: Int? = nil, fileName: String? = nil, videoDeliveryState: AppMediaVideoState? = nil) {
 			self.previewFrameImage = previewFrameImage
+			self.previewFrameTimeCode = previewFrameTimeCode
 			self.previewImage = previewImage
-			self.fileName = fileName
-			self.assetDeliveryState = assetDeliveryState
-			self.appEventAssetType = appEventAssetType
 			self.uploadOperations = uploadOperations
+			self.appEventAssetType = appEventAssetType
+			self.assetDeliveryState = assetDeliveryState
 			self.videoURL = videoURL
 			self.fileSize = fileSize
-			self.previewFrameTimeCode = previewFrameTimeCode
+			self.fileName = fileName
 			self.videoDeliveryState = videoDeliveryState
 		}
 
 		public init(from decoder: Decoder) throws {
 			let values = try decoder.container(keyedBy: StringCodingKey.self)
 			self.previewFrameImage = try values.decodeIfPresent(PreviewFrameImage.self, forKey: "previewFrameImage")
+			self.previewFrameTimeCode = try values.decodeIfPresent(String.self, forKey: "previewFrameTimeCode")
 			self.previewImage = try values.decodeIfPresent(ImageAsset.self, forKey: "previewImage")
-			self.fileName = try values.decodeIfPresent(String.self, forKey: "fileName")
-			self.assetDeliveryState = try values.decodeIfPresent(AppMediaAssetState.self, forKey: "assetDeliveryState")
-			self.appEventAssetType = try values.decodeIfPresent(AppEventAssetType.self, forKey: "appEventAssetType")
 			self.uploadOperations = try values.decodeIfPresent([UploadOperation].self, forKey: "uploadOperations")
+			self.appEventAssetType = try values.decodeIfPresent(AppEventAssetType.self, forKey: "appEventAssetType")
+			self.assetDeliveryState = try values.decodeIfPresent(AppMediaAssetState.self, forKey: "assetDeliveryState")
 			self.videoURL = try values.decodeIfPresent(String.self, forKey: "videoUrl")
 			self.fileSize = try values.decodeIfPresent(Int.self, forKey: "fileSize")
-			self.previewFrameTimeCode = try values.decodeIfPresent(String.self, forKey: "previewFrameTimeCode")
+			self.fileName = try values.decodeIfPresent(String.self, forKey: "fileName")
 			self.videoDeliveryState = try values.decodeIfPresent(AppMediaVideoState.self, forKey: "videoDeliveryState")
 		}
 
 		public func encode(to encoder: Encoder) throws {
 			var values = encoder.container(keyedBy: StringCodingKey.self)
 			try values.encodeIfPresent(previewFrameImage, forKey: "previewFrameImage")
+			try values.encodeIfPresent(previewFrameTimeCode, forKey: "previewFrameTimeCode")
 			try values.encodeIfPresent(previewImage, forKey: "previewImage")
-			try values.encodeIfPresent(fileName, forKey: "fileName")
-			try values.encodeIfPresent(assetDeliveryState, forKey: "assetDeliveryState")
-			try values.encodeIfPresent(appEventAssetType, forKey: "appEventAssetType")
 			try values.encodeIfPresent(uploadOperations, forKey: "uploadOperations")
+			try values.encodeIfPresent(appEventAssetType, forKey: "appEventAssetType")
+			try values.encodeIfPresent(assetDeliveryState, forKey: "assetDeliveryState")
 			try values.encodeIfPresent(videoURL, forKey: "videoUrl")
 			try values.encodeIfPresent(fileSize, forKey: "fileSize")
-			try values.encodeIfPresent(previewFrameTimeCode, forKey: "previewFrameTimeCode")
+			try values.encodeIfPresent(fileName, forKey: "fileName")
 			try values.encodeIfPresent(videoDeliveryState, forKey: "videoDeliveryState")
 		}
 	}
 
-	public init(id: String, relationships: Relationships? = nil, links: ResourceLinks? = nil, type: `Type`, attributes: Attributes? = nil) {
+	public enum `Type`: String, Codable, CaseIterable {
+		case appEventVideoClips
+	}
+
+	public init(id: String, relationships: Relationships? = nil, links: ResourceLinks? = nil, attributes: Attributes? = nil, type: `Type`) {
 		self.id = id
 		self.relationships = relationships
 		self.links = links
-		self.type = type
 		self.attributes = attributes
+		self.type = type
 	}
 
 	public init(from decoder: Decoder) throws {
@@ -143,8 +143,8 @@ public struct AppEventVideoClip: Codable, Identifiable {
 		self.id = try values.decode(String.self, forKey: "id")
 		self.relationships = try values.decodeIfPresent(Relationships.self, forKey: "relationships")
 		self.links = try values.decodeIfPresent(ResourceLinks.self, forKey: "links")
-		self.type = try values.decode(`Type`.self, forKey: "type")
 		self.attributes = try values.decodeIfPresent(Attributes.self, forKey: "attributes")
+		self.type = try values.decode(`Type`.self, forKey: "type")
 	}
 
 	public func encode(to encoder: Encoder) throws {
@@ -152,7 +152,7 @@ public struct AppEventVideoClip: Codable, Identifiable {
 		try values.encode(id, forKey: "id")
 		try values.encodeIfPresent(relationships, forKey: "relationships")
 		try values.encodeIfPresent(links, forKey: "links")
-		try values.encode(type, forKey: "type")
 		try values.encodeIfPresent(attributes, forKey: "attributes")
+		try values.encode(type, forKey: "type")
 	}
 }

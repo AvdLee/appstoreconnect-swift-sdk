@@ -4,13 +4,9 @@
 import Foundation
 
 public struct GameCenterAchievementVersionV2InlineCreate: Codable, Identifiable {
-	public var type: `Type`
 	public var id: String?
 	public var relationships: Relationships?
-
-	public enum `Type`: String, Codable, CaseIterable {
-		case gameCenterAchievementVersions
-	}
+	public var type: `Type`
 
 	public struct Relationships: Codable {
 		public var achievement: Achievement?
@@ -19,28 +15,28 @@ public struct GameCenterAchievementVersionV2InlineCreate: Codable, Identifiable 
 			public var data: Data?
 
 			public struct Data: Codable, Identifiable {
-				public var type: `Type`
 				public var id: String
+				public var type: `Type`
 
 				public enum `Type`: String, Codable, CaseIterable {
 					case gameCenterAchievements
 				}
 
-				public init(type: `Type`, id: String) {
-					self.type = type
+				public init(id: String, type: `Type`) {
 					self.id = id
+					self.type = type
 				}
 
 				public init(from decoder: Decoder) throws {
 					let values = try decoder.container(keyedBy: StringCodingKey.self)
-					self.type = try values.decode(`Type`.self, forKey: "type")
 					self.id = try values.decode(String.self, forKey: "id")
+					self.type = try values.decode(`Type`.self, forKey: "type")
 				}
 
 				public func encode(to encoder: Encoder) throws {
 					var values = encoder.container(keyedBy: StringCodingKey.self)
-					try values.encode(type, forKey: "type")
 					try values.encode(id, forKey: "id")
+					try values.encode(type, forKey: "type")
 				}
 			}
 
@@ -74,23 +70,27 @@ public struct GameCenterAchievementVersionV2InlineCreate: Codable, Identifiable 
 		}
 	}
 
-	public init(type: `Type`, id: String? = nil, relationships: Relationships? = nil) {
-		self.type = type
+	public enum `Type`: String, Codable, CaseIterable {
+		case gameCenterAchievementVersions
+	}
+
+	public init(id: String? = nil, relationships: Relationships? = nil, type: `Type`) {
 		self.id = id
 		self.relationships = relationships
+		self.type = type
 	}
 
 	public init(from decoder: Decoder) throws {
 		let values = try decoder.container(keyedBy: StringCodingKey.self)
-		self.type = try values.decode(`Type`.self, forKey: "type")
 		self.id = try values.decodeIfPresent(String.self, forKey: "id")
 		self.relationships = try values.decodeIfPresent(Relationships.self, forKey: "relationships")
+		self.type = try values.decode(`Type`.self, forKey: "type")
 	}
 
 	public func encode(to encoder: Encoder) throws {
 		var values = encoder.container(keyedBy: StringCodingKey.self)
-		try values.encode(type, forKey: "type")
 		try values.encodeIfPresent(id, forKey: "id")
 		try values.encodeIfPresent(relationships, forKey: "relationships")
+		try values.encode(type, forKey: "type")
 	}
 }

@@ -1,5 +1,6 @@
 import Foundation
 import ZIPFoundation
+import OrderedCollections
 
 #if canImport(FoundationNetworking)
 import FoundationNetworking
@@ -99,19 +100,9 @@ public enum OpenAPIGeneratorCore {
     // MARK: - Internals
     
     private static func patchSpecJSON(_ jsonData: Data, writingTo specURL: URL) throws -> SpecPatcher.Result {
-        let json = try JSONSerialization.jsonObject(with: jsonData, options: [.fragmentsAllowed])
-        guard let rootObj = json as? NSDictionary else { throw SpecPatchingError.invalidRootJSON }
-
-        // Preserve upstream key ordering by keeping Foundation containers for parsing/writing,
-        // and only converting into an OrderedDictionary-backed JSONValue for patching.
-        var root = JSONValue(foundationObject: rootObj)
+        var root = try JSONDecoder().decode(JSONValue.self, from: jsonData)
         let upstreamResult = try SpecPatcher.patch(&root)
-
-        let outData = try JSONSerialization.data(
-            withJSONObject: root.toFoundationObject(),
-            options: [.prettyPrinted, .withoutEscapingSlashes]
-        )
-        
+        let outData = try JSONEncoder().encode(root)
         try outData.write(to: specURL, options: [.atomic])
         return upstreamResult
     }

@@ -4,35 +4,35 @@
 import Foundation
 
 public struct UploadOperation: Codable {
-	public var requestHeaders: [HTTPHeader]?
-	public var method: String?
 	public var length: Int?
+	public var requestHeaders: [HTTPHeader]?
 	public var url: String?
 	public var offset: Int?
+	public var method: String?
 
-	public init(requestHeaders: [HTTPHeader]? = nil, method: String? = nil, length: Int? = nil, url: String? = nil, offset: Int? = nil) {
-		self.requestHeaders = requestHeaders
-		self.method = method
+	public init(length: Int? = nil, requestHeaders: [HTTPHeader]? = nil, url: String? = nil, offset: Int? = nil, method: String? = nil) {
 		self.length = length
+		self.requestHeaders = requestHeaders
 		self.url = url
 		self.offset = offset
+		self.method = method
 	}
 
 	public init(from decoder: Decoder) throws {
 		let values = try decoder.container(keyedBy: StringCodingKey.self)
-		self.requestHeaders = try values.decodeIfPresent([HTTPHeader].self, forKey: "requestHeaders")
-		self.method = try values.decodeIfPresent(String.self, forKey: "method")
 		self.length = try values.decodeIfPresent(Int.self, forKey: "length")
+		self.requestHeaders = try values.decodeIfPresent([HTTPHeader].self, forKey: "requestHeaders")
 		self.url = try values.decodeIfPresent(String.self, forKey: "url")
 		self.offset = try values.decodeIfPresent(Int.self, forKey: "offset")
+		self.method = try values.decodeIfPresent(String.self, forKey: "method")
 	}
 
 	public func encode(to encoder: Encoder) throws {
 		var values = encoder.container(keyedBy: StringCodingKey.self)
-		try values.encodeIfPresent(requestHeaders, forKey: "requestHeaders")
-		try values.encodeIfPresent(method, forKey: "method")
 		try values.encodeIfPresent(length, forKey: "length")
+		try values.encodeIfPresent(requestHeaders, forKey: "requestHeaders")
 		try values.encodeIfPresent(url, forKey: "url")
 		try values.encodeIfPresent(offset, forKey: "offset")
+		try values.encodeIfPresent(method, forKey: "method")
 	}
 }

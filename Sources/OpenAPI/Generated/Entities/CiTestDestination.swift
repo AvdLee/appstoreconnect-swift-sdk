@@ -4,34 +4,34 @@
 import Foundation
 
 public struct CiTestDestination: Codable {
+	public var kind: CiTestDestinationKind?
 	public var deviceTypeName: String?
 	public var runtimeIdentifier: String?
-	public var kind: CiTestDestinationKind?
 	public var deviceTypeIdentifier: String?
 	public var runtimeName: String?
 
-	public init(deviceTypeName: String? = nil, runtimeIdentifier: String? = nil, kind: CiTestDestinationKind? = nil, deviceTypeIdentifier: String? = nil, runtimeName: String? = nil) {
+	public init(kind: CiTestDestinationKind? = nil, deviceTypeName: String? = nil, runtimeIdentifier: String? = nil, deviceTypeIdentifier: String? = nil, runtimeName: String? = nil) {
+		self.kind = kind
 		self.deviceTypeName = deviceTypeName
 		self.runtimeIdentifier = runtimeIdentifier
-		self.kind = kind
 		self.deviceTypeIdentifier = deviceTypeIdentifier
 		self.runtimeName = runtimeName
 	}
 
 	public init(from decoder: Decoder) throws {
 		let values = try decoder.container(keyedBy: StringCodingKey.self)
+		self.kind = try values.decodeIfPresent(CiTestDestinationKind.self, forKey: "kind")
 		self.deviceTypeName = try values.decodeIfPresent(String.self, forKey: "deviceTypeName")
 		self.runtimeIdentifier = try values.decodeIfPresent(String.self, forKey: "runtimeIdentifier")
-		self.kind = try values.decodeIfPresent(CiTestDestinationKind.self, forKey: "kind")
 		self.deviceTypeIdentifier = try values.decodeIfPresent(String.self, forKey: "deviceTypeIdentifier")
 		self.runtimeName = try values.decodeIfPresent(String.self, forKey: "runtimeName")
 	}
 
 	public func encode(to encoder: Encoder) throws {
 		var values = encoder.container(keyedBy: StringCodingKey.self)
+		try values.encodeIfPresent(kind, forKey: "kind")
 		try values.encodeIfPresent(deviceTypeName, forKey: "deviceTypeName")
 		try values.encodeIfPresent(runtimeIdentifier, forKey: "runtimeIdentifier")
-		try values.encodeIfPresent(kind, forKey: "kind")
 		try values.encodeIfPresent(deviceTypeIdentifier, forKey: "deviceTypeIdentifier")
 		try values.encodeIfPresent(runtimeName, forKey: "runtimeName")
 	}

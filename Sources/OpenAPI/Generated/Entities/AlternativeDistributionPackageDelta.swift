@@ -6,63 +6,63 @@ import Foundation
 public struct AlternativeDistributionPackageDelta: Codable, Identifiable {
 	public var id: String
 	public var links: ResourceLinks?
-	public var type: `Type`
 	public var attributes: Attributes?
-
-	public enum `Type`: String, Codable, CaseIterable {
-		case alternativeDistributionPackageDeltas
-	}
+	public var type: `Type`
 
 	public struct Attributes: Codable {
 		public var urlExpirationDate: Date?
 		public var url: URL?
-		public var alternativeDistributionKeyBlob: String?
 		public var fileChecksum: String?
+		public var alternativeDistributionKeyBlob: String?
 
-		public init(urlExpirationDate: Date? = nil, url: URL? = nil, alternativeDistributionKeyBlob: String? = nil, fileChecksum: String? = nil) {
+		public init(urlExpirationDate: Date? = nil, url: URL? = nil, fileChecksum: String? = nil, alternativeDistributionKeyBlob: String? = nil) {
 			self.urlExpirationDate = urlExpirationDate
 			self.url = url
-			self.alternativeDistributionKeyBlob = alternativeDistributionKeyBlob
 			self.fileChecksum = fileChecksum
+			self.alternativeDistributionKeyBlob = alternativeDistributionKeyBlob
 		}
 
 		public init(from decoder: Decoder) throws {
 			let values = try decoder.container(keyedBy: StringCodingKey.self)
 			self.urlExpirationDate = try values.decodeIfPresent(Date.self, forKey: "urlExpirationDate")
 			self.url = try values.decodeIfPresent(URL.self, forKey: "url")
-			self.alternativeDistributionKeyBlob = try values.decodeIfPresent(String.self, forKey: "alternativeDistributionKeyBlob")
 			self.fileChecksum = try values.decodeIfPresent(String.self, forKey: "fileChecksum")
+			self.alternativeDistributionKeyBlob = try values.decodeIfPresent(String.self, forKey: "alternativeDistributionKeyBlob")
 		}
 
 		public func encode(to encoder: Encoder) throws {
 			var values = encoder.container(keyedBy: StringCodingKey.self)
 			try values.encodeIfPresent(urlExpirationDate, forKey: "urlExpirationDate")
 			try values.encodeIfPresent(url, forKey: "url")
-			try values.encodeIfPresent(alternativeDistributionKeyBlob, forKey: "alternativeDistributionKeyBlob")
 			try values.encodeIfPresent(fileChecksum, forKey: "fileChecksum")
+			try values.encodeIfPresent(alternativeDistributionKeyBlob, forKey: "alternativeDistributionKeyBlob")
 		}
 	}
 
-	public init(id: String, links: ResourceLinks? = nil, type: `Type`, attributes: Attributes? = nil) {
+	public enum `Type`: String, Codable, CaseIterable {
+		case alternativeDistributionPackageDeltas
+	}
+
+	public init(id: String, links: ResourceLinks? = nil, attributes: Attributes? = nil, type: `Type`) {
 		self.id = id
 		self.links = links
-		self.type = type
 		self.attributes = attributes
+		self.type = type
 	}
 
 	public init(from decoder: Decoder) throws {
 		let values = try decoder.container(keyedBy: StringCodingKey.self)
 		self.id = try values.decode(String.self, forKey: "id")
 		self.links = try values.decodeIfPresent(ResourceLinks.self, forKey: "links")
-		self.type = try values.decode(`Type`.self, forKey: "type")
 		self.attributes = try values.decodeIfPresent(Attributes.self, forKey: "attributes")
+		self.type = try values.decode(`Type`.self, forKey: "type")
 	}
 
 	public func encode(to encoder: Encoder) throws {
 		var values = encoder.container(keyedBy: StringCodingKey.self)
 		try values.encode(id, forKey: "id")
 		try values.encodeIfPresent(links, forKey: "links")
-		try values.encode(type, forKey: "type")
 		try values.encodeIfPresent(attributes, forKey: "attributes")
+		try values.encode(type, forKey: "type")
 	}
 }

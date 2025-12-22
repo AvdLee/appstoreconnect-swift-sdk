@@ -15,79 +15,35 @@ public struct AppStoreVersionPromotionCreateRequest: Codable {
 		}
 
 		public struct Relationships: Codable {
-			public var appStoreVersionExperimentTreatment: AppStoreVersionExperimentTreatment
 			public var appStoreVersion: AppStoreVersion
-
-			public struct AppStoreVersionExperimentTreatment: Codable {
-				public var data: Data
-
-				public struct Data: Codable, Identifiable {
-					public var type: `Type`
-					public var id: String
-
-					public enum `Type`: String, Codable, CaseIterable {
-						case appStoreVersionExperimentTreatments
-					}
-
-					public init(type: `Type`, id: String) {
-						self.type = type
-						self.id = id
-					}
-
-					public init(from decoder: Decoder) throws {
-						let values = try decoder.container(keyedBy: StringCodingKey.self)
-						self.type = try values.decode(`Type`.self, forKey: "type")
-						self.id = try values.decode(String.self, forKey: "id")
-					}
-
-					public func encode(to encoder: Encoder) throws {
-						var values = encoder.container(keyedBy: StringCodingKey.self)
-						try values.encode(type, forKey: "type")
-						try values.encode(id, forKey: "id")
-					}
-				}
-
-				public init(data: Data) {
-					self.data = data
-				}
-
-				public init(from decoder: Decoder) throws {
-					let values = try decoder.container(keyedBy: StringCodingKey.self)
-					self.data = try values.decode(Data.self, forKey: "data")
-				}
-
-				public func encode(to encoder: Encoder) throws {
-					var values = encoder.container(keyedBy: StringCodingKey.self)
-					try values.encode(data, forKey: "data")
-				}
-			}
+			public var appStoreVersionExperimentTreatment: AppStoreVersionExperimentTreatment
 
 			public struct AppStoreVersion: Codable {
 				public var data: Data
 
 				public struct Data: Codable, Identifiable {
-					public var type: `Type`
 					public var id: String
+					public var type: `Type`
 
 					public enum `Type`: String, Codable, CaseIterable {
 						case appStoreVersions
 					}
 
-					public init(type: `Type`, id: String) {
-						self.type = type
+					public init(id: String, type: `Type`) {
 						self.id = id
+						self.type = type
 					}
 
 					public init(from decoder: Decoder) throws {
 						let values = try decoder.container(keyedBy: StringCodingKey.self)
-						self.type = try values.decode(`Type`.self, forKey: "type")
 						self.id = try values.decode(String.self, forKey: "id")
+						self.type = try values.decode(`Type`.self, forKey: "type")
 					}
 
 					public func encode(to encoder: Encoder) throws {
 						var values = encoder.container(keyedBy: StringCodingKey.self)
-						try values.encode(type, forKey: "type")
 						try values.encode(id, forKey: "id")
+						try values.encode(type, forKey: "type")
 					}
 				}
 
@@ -106,21 +62,65 @@ public struct AppStoreVersionPromotionCreateRequest: Codable {
 				}
 			}
 
-			public init(appStoreVersionExperimentTreatment: AppStoreVersionExperimentTreatment, appStoreVersion: AppStoreVersion) {
-				self.appStoreVersionExperimentTreatment = appStoreVersionExperimentTreatment
+			public struct AppStoreVersionExperimentTreatment: Codable {
+				public var data: Data
+
+				public struct Data: Codable, Identifiable {
+					public var id: String
+					public var type: `Type`
+
+					public enum `Type`: String, Codable, CaseIterable {
+						case appStoreVersionExperimentTreatments
+					}
+
+					public init(id: String, type: `Type`) {
+						self.id = id
+						self.type = type
+					}
+
+					public init(from decoder: Decoder) throws {
+						let values = try decoder.container(keyedBy: StringCodingKey.self)
+						self.id = try values.decode(String.self, forKey: "id")
+						self.type = try values.decode(`Type`.self, forKey: "type")
+					}
+
+					public func encode(to encoder: Encoder) throws {
+						var values = encoder.container(keyedBy: StringCodingKey.self)
+						try values.encode(id, forKey: "id")
+						try values.encode(type, forKey: "type")
+					}
+				}
+
+				public init(data: Data) {
+					self.data = data
+				}
+
+				public init(from decoder: Decoder) throws {
+					let values = try decoder.container(keyedBy: StringCodingKey.self)
+					self.data = try values.decode(Data.self, forKey: "data")
+				}
+
+				public func encode(to encoder: Encoder) throws {
+					var values = encoder.container(keyedBy: StringCodingKey.self)
+					try values.encode(data, forKey: "data")
+				}
+			}
+
+			public init(appStoreVersion: AppStoreVersion, appStoreVersionExperimentTreatment: AppStoreVersionExperimentTreatment) {
 				self.appStoreVersion = appStoreVersion
+				self.appStoreVersionExperimentTreatment = appStoreVersionExperimentTreatment
 			}
 
 			public init(from decoder: Decoder) throws {
 				let values = try decoder.container(keyedBy: StringCodingKey.self)
-				self.appStoreVersionExperimentTreatment = try values.decode(AppStoreVersionExperimentTreatment.self, forKey: "appStoreVersionExperimentTreatment")
 				self.appStoreVersion = try values.decode(AppStoreVersion.self, forKey: "appStoreVersion")
+				self.appStoreVersionExperimentTreatment = try values.decode(AppStoreVersionExperimentTreatment.self, forKey: "appStoreVersionExperimentTreatment")
 			}
 
 			public func encode(to encoder: Encoder) throws {
 				var values = encoder.container(keyedBy: StringCodingKey.self)
-				try values.encode(appStoreVersionExperimentTreatment, forKey: "appStoreVersionExperimentTreatment")
 				try values.encode(appStoreVersion, forKey: "appStoreVersion")
+				try values.encode(appStoreVersionExperimentTreatment, forKey: "appStoreVersionExperimentTreatment")
 			}
 		}
 

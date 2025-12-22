@@ -4,9 +4,9 @@
 import Foundation
 
 public struct GameCenterDetailLeaderboardReleasesLinkagesResponse: Codable {
-	public var links: PagedDocumentLinks
 	public var data: [Datum]
 	public var meta: PagingInformation?
+	public var links: PagedDocumentLinks
 
 	public struct Datum: Codable, Identifiable {
 		public var type: `Type`
@@ -34,23 +34,23 @@ public struct GameCenterDetailLeaderboardReleasesLinkagesResponse: Codable {
 		}
 	}
 
-	public init(links: PagedDocumentLinks, data: [Datum], meta: PagingInformation? = nil) {
-		self.links = links
+	public init(data: [Datum], meta: PagingInformation? = nil, links: PagedDocumentLinks) {
 		self.data = data
 		self.meta = meta
+		self.links = links
 	}
 
 	public init(from decoder: Decoder) throws {
 		let values = try decoder.container(keyedBy: StringCodingKey.self)
-		self.links = try values.decode(PagedDocumentLinks.self, forKey: "links")
 		self.data = try values.decode([Datum].self, forKey: "data")
 		self.meta = try values.decodeIfPresent(PagingInformation.self, forKey: "meta")
+		self.links = try values.decode(PagedDocumentLinks.self, forKey: "links")
 	}
 
 	public func encode(to encoder: Encoder) throws {
 		var values = encoder.container(keyedBy: StringCodingKey.self)
-		try values.encode(links, forKey: "links")
 		try values.encode(data, forKey: "data")
 		try values.encodeIfPresent(meta, forKey: "meta")
+		try values.encode(links, forKey: "links")
 	}
 }

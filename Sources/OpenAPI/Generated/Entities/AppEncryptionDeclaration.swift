@@ -7,92 +7,43 @@ public struct AppEncryptionDeclaration: Codable, Identifiable {
 	public var id: String
 	public var relationships: Relationships?
 	public var links: ResourceLinks?
-	public var type: `Type`
 	public var attributes: Attributes?
+	public var type: `Type`
 
 	public struct Relationships: Codable {
-		/// - warning: Deprecated.
-		public var app: App?
 		public var appEncryptionDeclarationDocument: AppEncryptionDeclarationDocument?
 		/// - warning: Deprecated.
 		public var builds: Builds?
-
-		@available(*, deprecated, message: "Deprecated")
-		public struct App: Codable {
-			public var links: RelationshipLinks?
-			public var data: Data?
-
-			public struct Data: Codable, Identifiable {
-				public var type: `Type`
-				public var id: String
-
-				public enum `Type`: String, Codable, CaseIterable {
-					case apps
-				}
-
-				public init(type: `Type`, id: String) {
-					self.type = type
-					self.id = id
-				}
-
-				public init(from decoder: Decoder) throws {
-					let values = try decoder.container(keyedBy: StringCodingKey.self)
-					self.type = try values.decode(`Type`.self, forKey: "type")
-					self.id = try values.decode(String.self, forKey: "id")
-				}
-
-				public func encode(to encoder: Encoder) throws {
-					var values = encoder.container(keyedBy: StringCodingKey.self)
-					try values.encode(type, forKey: "type")
-					try values.encode(id, forKey: "id")
-				}
-			}
-
-			public init(links: RelationshipLinks? = nil, data: Data? = nil) {
-				self.links = links
-				self.data = data
-			}
-
-			public init(from decoder: Decoder) throws {
-				let values = try decoder.container(keyedBy: StringCodingKey.self)
-				self.links = try values.decodeIfPresent(RelationshipLinks.self, forKey: "links")
-				self.data = try values.decodeIfPresent(Data.self, forKey: "data")
-			}
-
-			public func encode(to encoder: Encoder) throws {
-				var values = encoder.container(keyedBy: StringCodingKey.self)
-				try values.encodeIfPresent(links, forKey: "links")
-				try values.encodeIfPresent(data, forKey: "data")
-			}
-		}
+		/// - warning: Deprecated.
+		public var app: App?
 
 		public struct AppEncryptionDeclarationDocument: Codable {
 			public var links: RelationshipLinks?
 			public var data: Data?
 
 			public struct Data: Codable, Identifiable {
-				public var type: `Type`
 				public var id: String
+				public var type: `Type`
 
 				public enum `Type`: String, Codable, CaseIterable {
 					case appEncryptionDeclarationDocuments
 				}
 
-				public init(type: `Type`, id: String) {
-					self.type = type
+				public init(id: String, type: `Type`) {
 					self.id = id
+					self.type = type
 				}
 
 				public init(from decoder: Decoder) throws {
 					let values = try decoder.container(keyedBy: StringCodingKey.self)
-					self.type = try values.decode(`Type`.self, forKey: "type")
 					self.id = try values.decode(String.self, forKey: "id")
+					self.type = try values.decode(`Type`.self, forKey: "type")
 				}
 
 				public func encode(to encoder: Encoder) throws {
 					var values = encoder.container(keyedBy: StringCodingKey.self)
-					try values.encode(type, forKey: "type")
 					try values.encode(id, forKey: "id")
+					try values.encode(type, forKey: "type")
 				}
 			}
 
@@ -116,75 +67,199 @@ public struct AppEncryptionDeclaration: Codable, Identifiable {
 
 		@available(*, deprecated, message: "Deprecated")
 		public struct Builds: Codable {
-			public var links: RelationshipLinks?
 			public var meta: PagingInformation?
 			public var data: [Datum]?
+			public var links: RelationshipLinks?
 
 			public struct Datum: Codable, Identifiable {
-				public var type: `Type`
 				public var id: String
+				public var type: `Type`
 
 				public enum `Type`: String, Codable, CaseIterable {
 					case builds
 				}
 
-				public init(type: `Type`, id: String) {
-					self.type = type
+				public init(id: String, type: `Type`) {
 					self.id = id
+					self.type = type
 				}
 
 				public init(from decoder: Decoder) throws {
 					let values = try decoder.container(keyedBy: StringCodingKey.self)
-					self.type = try values.decode(`Type`.self, forKey: "type")
 					self.id = try values.decode(String.self, forKey: "id")
+					self.type = try values.decode(`Type`.self, forKey: "type")
 				}
 
 				public func encode(to encoder: Encoder) throws {
 					var values = encoder.container(keyedBy: StringCodingKey.self)
-					try values.encode(type, forKey: "type")
 					try values.encode(id, forKey: "id")
+					try values.encode(type, forKey: "type")
 				}
 			}
 
-			public init(links: RelationshipLinks? = nil, meta: PagingInformation? = nil, data: [Datum]? = nil) {
-				self.links = links
+			public init(meta: PagingInformation? = nil, data: [Datum]? = nil, links: RelationshipLinks? = nil) {
 				self.meta = meta
+				self.data = data
+				self.links = links
+			}
+
+			public init(from decoder: Decoder) throws {
+				let values = try decoder.container(keyedBy: StringCodingKey.self)
+				self.meta = try values.decodeIfPresent(PagingInformation.self, forKey: "meta")
+				self.data = try values.decodeIfPresent([Datum].self, forKey: "data")
+				self.links = try values.decodeIfPresent(RelationshipLinks.self, forKey: "links")
+			}
+
+			public func encode(to encoder: Encoder) throws {
+				var values = encoder.container(keyedBy: StringCodingKey.self)
+				try values.encodeIfPresent(meta, forKey: "meta")
+				try values.encodeIfPresent(data, forKey: "data")
+				try values.encodeIfPresent(links, forKey: "links")
+			}
+		}
+
+		@available(*, deprecated, message: "Deprecated")
+		public struct App: Codable {
+			public var links: RelationshipLinks?
+			public var data: Data?
+
+			public struct Data: Codable, Identifiable {
+				public var id: String
+				public var type: `Type`
+
+				public enum `Type`: String, Codable, CaseIterable {
+					case apps
+				}
+
+				public init(id: String, type: `Type`) {
+					self.id = id
+					self.type = type
+				}
+
+				public init(from decoder: Decoder) throws {
+					let values = try decoder.container(keyedBy: StringCodingKey.self)
+					self.id = try values.decode(String.self, forKey: "id")
+					self.type = try values.decode(`Type`.self, forKey: "type")
+				}
+
+				public func encode(to encoder: Encoder) throws {
+					var values = encoder.container(keyedBy: StringCodingKey.self)
+					try values.encode(id, forKey: "id")
+					try values.encode(type, forKey: "type")
+				}
+			}
+
+			public init(links: RelationshipLinks? = nil, data: Data? = nil) {
+				self.links = links
 				self.data = data
 			}
 
 			public init(from decoder: Decoder) throws {
 				let values = try decoder.container(keyedBy: StringCodingKey.self)
 				self.links = try values.decodeIfPresent(RelationshipLinks.self, forKey: "links")
-				self.meta = try values.decodeIfPresent(PagingInformation.self, forKey: "meta")
-				self.data = try values.decodeIfPresent([Datum].self, forKey: "data")
+				self.data = try values.decodeIfPresent(Data.self, forKey: "data")
 			}
 
 			public func encode(to encoder: Encoder) throws {
 				var values = encoder.container(keyedBy: StringCodingKey.self)
 				try values.encodeIfPresent(links, forKey: "links")
-				try values.encodeIfPresent(meta, forKey: "meta")
 				try values.encodeIfPresent(data, forKey: "data")
 			}
 		}
 
-		public init(app: App? = nil, appEncryptionDeclarationDocument: AppEncryptionDeclarationDocument? = nil, builds: Builds? = nil) {
-			self.app = app
+		public init(appEncryptionDeclarationDocument: AppEncryptionDeclarationDocument? = nil, builds: Builds? = nil, app: App? = nil) {
 			self.appEncryptionDeclarationDocument = appEncryptionDeclarationDocument
 			self.builds = builds
+			self.app = app
 		}
 
 		public init(from decoder: Decoder) throws {
 			let values = try decoder.container(keyedBy: StringCodingKey.self)
-			self.app = try values.decodeIfPresent(App.self, forKey: "app")
 			self.appEncryptionDeclarationDocument = try values.decodeIfPresent(AppEncryptionDeclarationDocument.self, forKey: "appEncryptionDeclarationDocument")
 			self.builds = try values.decodeIfPresent(Builds.self, forKey: "builds")
+			self.app = try values.decodeIfPresent(App.self, forKey: "app")
 		}
 
 		public func encode(to encoder: Encoder) throws {
 			var values = encoder.container(keyedBy: StringCodingKey.self)
-			try values.encodeIfPresent(app, forKey: "app")
 			try values.encodeIfPresent(appEncryptionDeclarationDocument, forKey: "appEncryptionDeclarationDocument")
 			try values.encodeIfPresent(builds, forKey: "builds")
+			try values.encodeIfPresent(app, forKey: "app")
+		}
+	}
+
+	public struct Attributes: Codable {
+		public var isAvailableOnFrenchStore: Bool?
+		public var codeValue: String?
+		/// - warning: Deprecated.
+		public var usesEncryption: Bool?
+		public var platform: Platform?
+		public var appDescription: String?
+		public var containsThirdPartyCryptography: Bool?
+		/// - warning: Deprecated.
+		public var documentName: String?
+		public var containsProprietaryCryptography: Bool?
+		/// - warning: Deprecated.
+		public var documentType: String?
+		/// - warning: Deprecated.
+		public var documentURL: String?
+		/// - warning: Deprecated.
+		public var uploadedDate: Date?
+		public var isExempt: Bool?
+		public var appEncryptionDeclarationState: AppEncryptionDeclarationState?
+		public var createdDate: Date?
+
+		public init(isAvailableOnFrenchStore: Bool? = nil, codeValue: String? = nil, usesEncryption: Bool? = nil, platform: Platform? = nil, appDescription: String? = nil, containsThirdPartyCryptography: Bool? = nil, documentName: String? = nil, containsProprietaryCryptography: Bool? = nil, documentType: String? = nil, documentURL: String? = nil, uploadedDate: Date? = nil, isExempt: Bool? = nil, appEncryptionDeclarationState: AppEncryptionDeclarationState? = nil, createdDate: Date? = nil) {
+			self.isAvailableOnFrenchStore = isAvailableOnFrenchStore
+			self.codeValue = codeValue
+			self.usesEncryption = usesEncryption
+			self.platform = platform
+			self.appDescription = appDescription
+			self.containsThirdPartyCryptography = containsThirdPartyCryptography
+			self.documentName = documentName
+			self.containsProprietaryCryptography = containsProprietaryCryptography
+			self.documentType = documentType
+			self.documentURL = documentURL
+			self.uploadedDate = uploadedDate
+			self.isExempt = isExempt
+			self.appEncryptionDeclarationState = appEncryptionDeclarationState
+			self.createdDate = createdDate
+		}
+
+		public init(from decoder: Decoder) throws {
+			let values = try decoder.container(keyedBy: StringCodingKey.self)
+			self.isAvailableOnFrenchStore = try values.decodeIfPresent(Bool.self, forKey: "availableOnFrenchStore")
+			self.codeValue = try values.decodeIfPresent(String.self, forKey: "codeValue")
+			self.usesEncryption = try values.decodeIfPresent(Bool.self, forKey: "usesEncryption")
+			self.platform = try values.decodeIfPresent(Platform.self, forKey: "platform")
+			self.appDescription = try values.decodeIfPresent(String.self, forKey: "appDescription")
+			self.containsThirdPartyCryptography = try values.decodeIfPresent(Bool.self, forKey: "containsThirdPartyCryptography")
+			self.documentName = try values.decodeIfPresent(String.self, forKey: "documentName")
+			self.containsProprietaryCryptography = try values.decodeIfPresent(Bool.self, forKey: "containsProprietaryCryptography")
+			self.documentType = try values.decodeIfPresent(String.self, forKey: "documentType")
+			self.documentURL = try values.decodeIfPresent(String.self, forKey: "documentUrl")
+			self.uploadedDate = try values.decodeIfPresent(Date.self, forKey: "uploadedDate")
+			self.isExempt = try values.decodeIfPresent(Bool.self, forKey: "exempt")
+			self.appEncryptionDeclarationState = try values.decodeIfPresent(AppEncryptionDeclarationState.self, forKey: "appEncryptionDeclarationState")
+			self.createdDate = try values.decodeIfPresent(Date.self, forKey: "createdDate")
+		}
+
+		public func encode(to encoder: Encoder) throws {
+			var values = encoder.container(keyedBy: StringCodingKey.self)
+			try values.encodeIfPresent(isAvailableOnFrenchStore, forKey: "availableOnFrenchStore")
+			try values.encodeIfPresent(codeValue, forKey: "codeValue")
+			try values.encodeIfPresent(usesEncryption, forKey: "usesEncryption")
+			try values.encodeIfPresent(platform, forKey: "platform")
+			try values.encodeIfPresent(appDescription, forKey: "appDescription")
+			try values.encodeIfPresent(containsThirdPartyCryptography, forKey: "containsThirdPartyCryptography")
+			try values.encodeIfPresent(documentName, forKey: "documentName")
+			try values.encodeIfPresent(containsProprietaryCryptography, forKey: "containsProprietaryCryptography")
+			try values.encodeIfPresent(documentType, forKey: "documentType")
+			try values.encodeIfPresent(documentURL, forKey: "documentUrl")
+			try values.encodeIfPresent(uploadedDate, forKey: "uploadedDate")
+			try values.encodeIfPresent(isExempt, forKey: "exempt")
+			try values.encodeIfPresent(appEncryptionDeclarationState, forKey: "appEncryptionDeclarationState")
+			try values.encodeIfPresent(createdDate, forKey: "createdDate")
 		}
 	}
 
@@ -192,87 +267,12 @@ public struct AppEncryptionDeclaration: Codable, Identifiable {
 		case appEncryptionDeclarations
 	}
 
-	public struct Attributes: Codable {
-		/// - warning: Deprecated.
-		public var documentType: String?
-		/// - warning: Deprecated.
-		public var uploadedDate: Date?
-		public var appEncryptionDeclarationState: AppEncryptionDeclarationState?
-		public var createdDate: Date?
-		/// - warning: Deprecated.
-		public var usesEncryption: Bool?
-		public var appDescription: String?
-		public var isExempt: Bool?
-		public var isAvailableOnFrenchStore: Bool?
-		/// - warning: Deprecated.
-		public var documentName: String?
-		public var platform: Platform?
-		public var codeValue: String?
-		public var containsThirdPartyCryptography: Bool?
-		public var containsProprietaryCryptography: Bool?
-		/// - warning: Deprecated.
-		public var documentURL: String?
-
-		public init(documentType: String? = nil, uploadedDate: Date? = nil, appEncryptionDeclarationState: AppEncryptionDeclarationState? = nil, createdDate: Date? = nil, usesEncryption: Bool? = nil, appDescription: String? = nil, isExempt: Bool? = nil, isAvailableOnFrenchStore: Bool? = nil, documentName: String? = nil, platform: Platform? = nil, codeValue: String? = nil, containsThirdPartyCryptography: Bool? = nil, containsProprietaryCryptography: Bool? = nil, documentURL: String? = nil) {
-			self.documentType = documentType
-			self.uploadedDate = uploadedDate
-			self.appEncryptionDeclarationState = appEncryptionDeclarationState
-			self.createdDate = createdDate
-			self.usesEncryption = usesEncryption
-			self.appDescription = appDescription
-			self.isExempt = isExempt
-			self.isAvailableOnFrenchStore = isAvailableOnFrenchStore
-			self.documentName = documentName
-			self.platform = platform
-			self.codeValue = codeValue
-			self.containsThirdPartyCryptography = containsThirdPartyCryptography
-			self.containsProprietaryCryptography = containsProprietaryCryptography
-			self.documentURL = documentURL
-		}
-
-		public init(from decoder: Decoder) throws {
-			let values = try decoder.container(keyedBy: StringCodingKey.self)
-			self.documentType = try values.decodeIfPresent(String.self, forKey: "documentType")
-			self.uploadedDate = try values.decodeIfPresent(Date.self, forKey: "uploadedDate")
-			self.appEncryptionDeclarationState = try values.decodeIfPresent(AppEncryptionDeclarationState.self, forKey: "appEncryptionDeclarationState")
-			self.createdDate = try values.decodeIfPresent(Date.self, forKey: "createdDate")
-			self.usesEncryption = try values.decodeIfPresent(Bool.self, forKey: "usesEncryption")
-			self.appDescription = try values.decodeIfPresent(String.self, forKey: "appDescription")
-			self.isExempt = try values.decodeIfPresent(Bool.self, forKey: "exempt")
-			self.isAvailableOnFrenchStore = try values.decodeIfPresent(Bool.self, forKey: "availableOnFrenchStore")
-			self.documentName = try values.decodeIfPresent(String.self, forKey: "documentName")
-			self.platform = try values.decodeIfPresent(Platform.self, forKey: "platform")
-			self.codeValue = try values.decodeIfPresent(String.self, forKey: "codeValue")
-			self.containsThirdPartyCryptography = try values.decodeIfPresent(Bool.self, forKey: "containsThirdPartyCryptography")
-			self.containsProprietaryCryptography = try values.decodeIfPresent(Bool.self, forKey: "containsProprietaryCryptography")
-			self.documentURL = try values.decodeIfPresent(String.self, forKey: "documentUrl")
-		}
-
-		public func encode(to encoder: Encoder) throws {
-			var values = encoder.container(keyedBy: StringCodingKey.self)
-			try values.encodeIfPresent(documentType, forKey: "documentType")
-			try values.encodeIfPresent(uploadedDate, forKey: "uploadedDate")
-			try values.encodeIfPresent(appEncryptionDeclarationState, forKey: "appEncryptionDeclarationState")
-			try values.encodeIfPresent(createdDate, forKey: "createdDate")
-			try values.encodeIfPresent(usesEncryption, forKey: "usesEncryption")
-			try values.encodeIfPresent(appDescription, forKey: "appDescription")
-			try values.encodeIfPresent(isExempt, forKey: "exempt")
-			try values.encodeIfPresent(isAvailableOnFrenchStore, forKey: "availableOnFrenchStore")
-			try values.encodeIfPresent(documentName, forKey: "documentName")
-			try values.encodeIfPresent(platform, forKey: "platform")
-			try values.encodeIfPresent(codeValue, forKey: "codeValue")
-			try values.encodeIfPresent(containsThirdPartyCryptography, forKey: "containsThirdPartyCryptography")
-			try values.encodeIfPresent(containsProprietaryCryptography, forKey: "containsProprietaryCryptography")
-			try values.encodeIfPresent(documentURL, forKey: "documentUrl")
-		}
-	}
-
-	public init(id: String, relationships: Relationships? = nil, links: ResourceLinks? = nil, type: `Type`, attributes: Attributes? = nil) {
+	public init(id: String, relationships: Relationships? = nil, links: ResourceLinks? = nil, attributes: Attributes? = nil, type: `Type`) {
 		self.id = id
 		self.relationships = relationships
 		self.links = links
-		self.type = type
 		self.attributes = attributes
+		self.type = type
 	}
 
 	public init(from decoder: Decoder) throws {
@@ -280,8 +280,8 @@ public struct AppEncryptionDeclaration: Codable, Identifiable {
 		self.id = try values.decode(String.self, forKey: "id")
 		self.relationships = try values.decodeIfPresent(Relationships.self, forKey: "relationships")
 		self.links = try values.decodeIfPresent(ResourceLinks.self, forKey: "links")
-		self.type = try values.decode(`Type`.self, forKey: "type")
 		self.attributes = try values.decodeIfPresent(Attributes.self, forKey: "attributes")
+		self.type = try values.decode(`Type`.self, forKey: "type")
 	}
 
 	public func encode(to encoder: Encoder) throws {
@@ -289,7 +289,7 @@ public struct AppEncryptionDeclaration: Codable, Identifiable {
 		try values.encode(id, forKey: "id")
 		try values.encodeIfPresent(relationships, forKey: "relationships")
 		try values.encodeIfPresent(links, forKey: "links")
-		try values.encode(type, forKey: "type")
 		try values.encodeIfPresent(attributes, forKey: "attributes")
+		try values.encode(type, forKey: "type")
 	}
 }

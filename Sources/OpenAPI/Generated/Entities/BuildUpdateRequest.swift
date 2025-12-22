@@ -8,9 +8,35 @@ public struct BuildUpdateRequest: Codable {
 
 	public struct Data: Codable, Identifiable {
 		public var id: String
-		public var relationships: Relationships?
-		public var type: `Type`
 		public var attributes: Attributes?
+		public var type: `Type`
+		public var relationships: Relationships?
+
+		public struct Attributes: Codable {
+			public var usesNonExemptEncryption: Bool?
+			public var isExpired: Bool?
+
+			public init(usesNonExemptEncryption: Bool? = nil, isExpired: Bool? = nil) {
+				self.usesNonExemptEncryption = usesNonExemptEncryption
+				self.isExpired = isExpired
+			}
+
+			public init(from decoder: Decoder) throws {
+				let values = try decoder.container(keyedBy: StringCodingKey.self)
+				self.usesNonExemptEncryption = try values.decodeIfPresent(Bool.self, forKey: "usesNonExemptEncryption")
+				self.isExpired = try values.decodeIfPresent(Bool.self, forKey: "expired")
+			}
+
+			public func encode(to encoder: Encoder) throws {
+				var values = encoder.container(keyedBy: StringCodingKey.self)
+				try values.encodeIfPresent(usesNonExemptEncryption, forKey: "usesNonExemptEncryption")
+				try values.encodeIfPresent(isExpired, forKey: "expired")
+			}
+		}
+
+		public enum `Type`: String, Codable, CaseIterable {
+			case builds
+		}
 
 		public struct Relationships: Codable {
 			public var appEncryptionDeclaration: AppEncryptionDeclaration?
@@ -19,28 +45,28 @@ public struct BuildUpdateRequest: Codable {
 				public var data: Data?
 
 				public struct Data: Codable, Identifiable {
-					public var type: `Type`
 					public var id: String
+					public var type: `Type`
 
 					public enum `Type`: String, Codable, CaseIterable {
 						case appEncryptionDeclarations
 					}
 
-					public init(type: `Type`, id: String) {
-						self.type = type
+					public init(id: String, type: `Type`) {
 						self.id = id
+						self.type = type
 					}
 
 					public init(from decoder: Decoder) throws {
 						let values = try decoder.container(keyedBy: StringCodingKey.self)
-						self.type = try values.decode(`Type`.self, forKey: "type")
 						self.id = try values.decode(String.self, forKey: "id")
+						self.type = try values.decode(`Type`.self, forKey: "type")
 					}
 
 					public func encode(to encoder: Encoder) throws {
 						var values = encoder.container(keyedBy: StringCodingKey.self)
-						try values.encode(type, forKey: "type")
 						try values.encode(id, forKey: "id")
+						try values.encode(type, forKey: "type")
 					}
 				}
 
@@ -74,53 +100,27 @@ public struct BuildUpdateRequest: Codable {
 			}
 		}
 
-		public enum `Type`: String, Codable, CaseIterable {
-			case builds
-		}
-
-		public struct Attributes: Codable {
-			public var isExpired: Bool?
-			public var usesNonExemptEncryption: Bool?
-
-			public init(isExpired: Bool? = nil, usesNonExemptEncryption: Bool? = nil) {
-				self.isExpired = isExpired
-				self.usesNonExemptEncryption = usesNonExemptEncryption
-			}
-
-			public init(from decoder: Decoder) throws {
-				let values = try decoder.container(keyedBy: StringCodingKey.self)
-				self.isExpired = try values.decodeIfPresent(Bool.self, forKey: "expired")
-				self.usesNonExemptEncryption = try values.decodeIfPresent(Bool.self, forKey: "usesNonExemptEncryption")
-			}
-
-			public func encode(to encoder: Encoder) throws {
-				var values = encoder.container(keyedBy: StringCodingKey.self)
-				try values.encodeIfPresent(isExpired, forKey: "expired")
-				try values.encodeIfPresent(usesNonExemptEncryption, forKey: "usesNonExemptEncryption")
-			}
-		}
-
-		public init(id: String, relationships: Relationships? = nil, type: `Type`, attributes: Attributes? = nil) {
+		public init(id: String, attributes: Attributes? = nil, type: `Type`, relationships: Relationships? = nil) {
 			self.id = id
-			self.relationships = relationships
-			self.type = type
 			self.attributes = attributes
+			self.type = type
+			self.relationships = relationships
 		}
 
 		public init(from decoder: Decoder) throws {
 			let values = try decoder.container(keyedBy: StringCodingKey.self)
 			self.id = try values.decode(String.self, forKey: "id")
-			self.relationships = try values.decodeIfPresent(Relationships.self, forKey: "relationships")
-			self.type = try values.decode(`Type`.self, forKey: "type")
 			self.attributes = try values.decodeIfPresent(Attributes.self, forKey: "attributes")
+			self.type = try values.decode(`Type`.self, forKey: "type")
+			self.relationships = try values.decodeIfPresent(Relationships.self, forKey: "relationships")
 		}
 
 		public func encode(to encoder: Encoder) throws {
 			var values = encoder.container(keyedBy: StringCodingKey.self)
 			try values.encode(id, forKey: "id")
-			try values.encodeIfPresent(relationships, forKey: "relationships")
-			try values.encode(type, forKey: "type")
 			try values.encodeIfPresent(attributes, forKey: "attributes")
+			try values.encode(type, forKey: "type")
+			try values.encodeIfPresent(relationships, forKey: "relationships")
 		}
 	}
 

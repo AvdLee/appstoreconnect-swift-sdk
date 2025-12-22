@@ -7,8 +7,8 @@ public struct WinBackOfferUpdateRequest: Codable {
 	public var data: Data
 
 	public struct Data: Codable, Identifiable {
-		public var type: `Type`
 		public var id: String
+		public var type: `Type`
 		public var attributes: Attributes?
 
 		public enum `Type`: String, Codable, CaseIterable {
@@ -16,13 +16,13 @@ public struct WinBackOfferUpdateRequest: Codable {
 		}
 
 		public struct Attributes: Codable {
-			public var customerEligibilityTimeSinceLastSubscribedInMonths: IntegerRange?
-			public var endDate: String?
-			public var startDate: String?
-			public var customerEligibilityPaidSubscriptionDurationInMonths: Int?
-			public var promotionIntent: PromotionIntent?
-			public var priority: Priority?
 			public var customerEligibilityWaitBetweenOffersInMonths: Int?
+			public var customerEligibilityPaidSubscriptionDurationInMonths: Int?
+			public var customerEligibilityTimeSinceLastSubscribedInMonths: IntegerRange?
+			public var startDate: String?
+			public var promotionIntent: PromotionIntent?
+			public var endDate: String?
+			public var priority: Priority?
 
 			public enum PromotionIntent: String, Codable, CaseIterable {
 				case notPromoted = "NOT_PROMOTED"
@@ -34,56 +34,56 @@ public struct WinBackOfferUpdateRequest: Codable {
 				case normal = "NORMAL"
 			}
 
-			public init(customerEligibilityTimeSinceLastSubscribedInMonths: IntegerRange? = nil, endDate: String? = nil, startDate: String? = nil, customerEligibilityPaidSubscriptionDurationInMonths: Int? = nil, promotionIntent: PromotionIntent? = nil, priority: Priority? = nil, customerEligibilityWaitBetweenOffersInMonths: Int? = nil) {
-				self.customerEligibilityTimeSinceLastSubscribedInMonths = customerEligibilityTimeSinceLastSubscribedInMonths
-				self.endDate = endDate
-				self.startDate = startDate
-				self.customerEligibilityPaidSubscriptionDurationInMonths = customerEligibilityPaidSubscriptionDurationInMonths
-				self.promotionIntent = promotionIntent
-				self.priority = priority
+			public init(customerEligibilityWaitBetweenOffersInMonths: Int? = nil, customerEligibilityPaidSubscriptionDurationInMonths: Int? = nil, customerEligibilityTimeSinceLastSubscribedInMonths: IntegerRange? = nil, startDate: String? = nil, promotionIntent: PromotionIntent? = nil, endDate: String? = nil, priority: Priority? = nil) {
 				self.customerEligibilityWaitBetweenOffersInMonths = customerEligibilityWaitBetweenOffersInMonths
+				self.customerEligibilityPaidSubscriptionDurationInMonths = customerEligibilityPaidSubscriptionDurationInMonths
+				self.customerEligibilityTimeSinceLastSubscribedInMonths = customerEligibilityTimeSinceLastSubscribedInMonths
+				self.startDate = startDate
+				self.promotionIntent = promotionIntent
+				self.endDate = endDate
+				self.priority = priority
 			}
 
 			public init(from decoder: Decoder) throws {
 				let values = try decoder.container(keyedBy: StringCodingKey.self)
-				self.customerEligibilityTimeSinceLastSubscribedInMonths = try values.decodeIfPresent(IntegerRange.self, forKey: "customerEligibilityTimeSinceLastSubscribedInMonths")
-				self.endDate = try values.decodeIfPresent(String.self, forKey: "endDate")
-				self.startDate = try values.decodeIfPresent(String.self, forKey: "startDate")
-				self.customerEligibilityPaidSubscriptionDurationInMonths = try values.decodeIfPresent(Int.self, forKey: "customerEligibilityPaidSubscriptionDurationInMonths")
-				self.promotionIntent = try values.decodeIfPresent(PromotionIntent.self, forKey: "promotionIntent")
-				self.priority = try values.decodeIfPresent(Priority.self, forKey: "priority")
 				self.customerEligibilityWaitBetweenOffersInMonths = try values.decodeIfPresent(Int.self, forKey: "customerEligibilityWaitBetweenOffersInMonths")
+				self.customerEligibilityPaidSubscriptionDurationInMonths = try values.decodeIfPresent(Int.self, forKey: "customerEligibilityPaidSubscriptionDurationInMonths")
+				self.customerEligibilityTimeSinceLastSubscribedInMonths = try values.decodeIfPresent(IntegerRange.self, forKey: "customerEligibilityTimeSinceLastSubscribedInMonths")
+				self.startDate = try values.decodeIfPresent(String.self, forKey: "startDate")
+				self.promotionIntent = try values.decodeIfPresent(PromotionIntent.self, forKey: "promotionIntent")
+				self.endDate = try values.decodeIfPresent(String.self, forKey: "endDate")
+				self.priority = try values.decodeIfPresent(Priority.self, forKey: "priority")
 			}
 
 			public func encode(to encoder: Encoder) throws {
 				var values = encoder.container(keyedBy: StringCodingKey.self)
-				try values.encodeIfPresent(customerEligibilityTimeSinceLastSubscribedInMonths, forKey: "customerEligibilityTimeSinceLastSubscribedInMonths")
-				try values.encodeIfPresent(endDate, forKey: "endDate")
-				try values.encodeIfPresent(startDate, forKey: "startDate")
-				try values.encodeIfPresent(customerEligibilityPaidSubscriptionDurationInMonths, forKey: "customerEligibilityPaidSubscriptionDurationInMonths")
-				try values.encodeIfPresent(promotionIntent, forKey: "promotionIntent")
-				try values.encodeIfPresent(priority, forKey: "priority")
 				try values.encodeIfPresent(customerEligibilityWaitBetweenOffersInMonths, forKey: "customerEligibilityWaitBetweenOffersInMonths")
+				try values.encodeIfPresent(customerEligibilityPaidSubscriptionDurationInMonths, forKey: "customerEligibilityPaidSubscriptionDurationInMonths")
+				try values.encodeIfPresent(customerEligibilityTimeSinceLastSubscribedInMonths, forKey: "customerEligibilityTimeSinceLastSubscribedInMonths")
+				try values.encodeIfPresent(startDate, forKey: "startDate")
+				try values.encodeIfPresent(promotionIntent, forKey: "promotionIntent")
+				try values.encodeIfPresent(endDate, forKey: "endDate")
+				try values.encodeIfPresent(priority, forKey: "priority")
 			}
 		}
 
-		public init(type: `Type`, id: String, attributes: Attributes? = nil) {
-			self.type = type
+		public init(id: String, type: `Type`, attributes: Attributes? = nil) {
 			self.id = id
+			self.type = type
 			self.attributes = attributes
 		}
 
 		public init(from decoder: Decoder) throws {
 			let values = try decoder.container(keyedBy: StringCodingKey.self)
-			self.type = try values.decode(`Type`.self, forKey: "type")
 			self.id = try values.decode(String.self, forKey: "id")
+			self.type = try values.decode(`Type`.self, forKey: "type")
 			self.attributes = try values.decodeIfPresent(Attributes.self, forKey: "attributes")
 		}
 
 		public func encode(to encoder: Encoder) throws {
 			var values = encoder.container(keyedBy: StringCodingKey.self)
-			try values.encode(type, forKey: "type")
 			try values.encode(id, forKey: "id")
+			try values.encode(type, forKey: "type")
 			try values.encodeIfPresent(attributes, forKey: "attributes")
 		}
 	}
