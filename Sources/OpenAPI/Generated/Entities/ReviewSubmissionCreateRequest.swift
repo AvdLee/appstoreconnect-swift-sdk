@@ -8,29 +8,11 @@ public struct ReviewSubmissionCreateRequest: Codable {
 
 	public struct Data: Codable {
 		public var type: `Type`
-		public var attributes: Attributes?
 		public var relationships: Relationships
+		public var attributes: Attributes?
 
 		public enum `Type`: String, Codable, CaseIterable {
 			case reviewSubmissions
-		}
-
-		public struct Attributes: Codable {
-			public var platform: Platform?
-
-			public init(platform: Platform? = nil) {
-				self.platform = platform
-			}
-
-			public init(from decoder: Decoder) throws {
-				let values = try decoder.container(keyedBy: StringCodingKey.self)
-				self.platform = try values.decodeIfPresent(Platform.self, forKey: "platform")
-			}
-
-			public func encode(to encoder: Encoder) throws {
-				var values = encoder.container(keyedBy: StringCodingKey.self)
-				try values.encodeIfPresent(platform, forKey: "platform")
-			}
 		}
 
 		public struct Relationships: Codable {
@@ -40,28 +22,28 @@ public struct ReviewSubmissionCreateRequest: Codable {
 				public var data: Data
 
 				public struct Data: Codable, Identifiable {
-					public var type: `Type`
 					public var id: String
+					public var type: `Type`
 
 					public enum `Type`: String, Codable, CaseIterable {
 						case apps
 					}
 
-					public init(type: `Type`, id: String) {
-						self.type = type
+					public init(id: String, type: `Type`) {
 						self.id = id
+						self.type = type
 					}
 
 					public init(from decoder: Decoder) throws {
 						let values = try decoder.container(keyedBy: StringCodingKey.self)
-						self.type = try values.decode(`Type`.self, forKey: "type")
 						self.id = try values.decode(String.self, forKey: "id")
+						self.type = try values.decode(`Type`.self, forKey: "type")
 					}
 
 					public func encode(to encoder: Encoder) throws {
 						var values = encoder.container(keyedBy: StringCodingKey.self)
-						try values.encode(type, forKey: "type")
 						try values.encode(id, forKey: "id")
+						try values.encode(type, forKey: "type")
 					}
 				}
 
@@ -95,24 +77,42 @@ public struct ReviewSubmissionCreateRequest: Codable {
 			}
 		}
 
-		public init(type: `Type`, attributes: Attributes? = nil, relationships: Relationships) {
+		public struct Attributes: Codable {
+			public var platform: Platform?
+
+			public init(platform: Platform? = nil) {
+				self.platform = platform
+			}
+
+			public init(from decoder: Decoder) throws {
+				let values = try decoder.container(keyedBy: StringCodingKey.self)
+				self.platform = try values.decodeIfPresent(Platform.self, forKey: "platform")
+			}
+
+			public func encode(to encoder: Encoder) throws {
+				var values = encoder.container(keyedBy: StringCodingKey.self)
+				try values.encodeIfPresent(platform, forKey: "platform")
+			}
+		}
+
+		public init(type: `Type`, relationships: Relationships, attributes: Attributes? = nil) {
 			self.type = type
-			self.attributes = attributes
 			self.relationships = relationships
+			self.attributes = attributes
 		}
 
 		public init(from decoder: Decoder) throws {
 			let values = try decoder.container(keyedBy: StringCodingKey.self)
 			self.type = try values.decode(`Type`.self, forKey: "type")
-			self.attributes = try values.decodeIfPresent(Attributes.self, forKey: "attributes")
 			self.relationships = try values.decode(Relationships.self, forKey: "relationships")
+			self.attributes = try values.decodeIfPresent(Attributes.self, forKey: "attributes")
 		}
 
 		public func encode(to encoder: Encoder) throws {
 			var values = encoder.container(keyedBy: StringCodingKey.self)
 			try values.encode(type, forKey: "type")
-			try values.encodeIfPresent(attributes, forKey: "attributes")
 			try values.encode(relationships, forKey: "relationships")
+			try values.encodeIfPresent(attributes, forKey: "attributes")
 		}
 	}
 

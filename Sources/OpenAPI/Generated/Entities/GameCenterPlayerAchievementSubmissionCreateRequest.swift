@@ -7,66 +7,66 @@ public struct GameCenterPlayerAchievementSubmissionCreateRequest: Codable {
 	public var data: Data
 
 	public struct Data: Codable {
-		public var type: `Type`
 		public var attributes: Attributes
+		public var type: `Type`
+
+		public struct Attributes: Codable {
+			public var percentageAchieved: Int
+			public var challengeIDs: [String]?
+			public var scopedPlayerID: String
+			public var vendorIdentifier: String
+			public var bundleID: String
+			public var submittedDate: Date?
+
+			public init(percentageAchieved: Int, challengeIDs: [String]? = nil, scopedPlayerID: String, vendorIdentifier: String, bundleID: String, submittedDate: Date? = nil) {
+				self.percentageAchieved = percentageAchieved
+				self.challengeIDs = challengeIDs
+				self.scopedPlayerID = scopedPlayerID
+				self.vendorIdentifier = vendorIdentifier
+				self.bundleID = bundleID
+				self.submittedDate = submittedDate
+			}
+
+			public init(from decoder: Decoder) throws {
+				let values = try decoder.container(keyedBy: StringCodingKey.self)
+				self.percentageAchieved = try values.decode(Int.self, forKey: "percentageAchieved")
+				self.challengeIDs = try values.decodeIfPresent([String].self, forKey: "challengeIds")
+				self.scopedPlayerID = try values.decode(String.self, forKey: "scopedPlayerId")
+				self.vendorIdentifier = try values.decode(String.self, forKey: "vendorIdentifier")
+				self.bundleID = try values.decode(String.self, forKey: "bundleId")
+				self.submittedDate = try values.decodeIfPresent(Date.self, forKey: "submittedDate")
+			}
+
+			public func encode(to encoder: Encoder) throws {
+				var values = encoder.container(keyedBy: StringCodingKey.self)
+				try values.encode(percentageAchieved, forKey: "percentageAchieved")
+				try values.encodeIfPresent(challengeIDs, forKey: "challengeIds")
+				try values.encode(scopedPlayerID, forKey: "scopedPlayerId")
+				try values.encode(vendorIdentifier, forKey: "vendorIdentifier")
+				try values.encode(bundleID, forKey: "bundleId")
+				try values.encodeIfPresent(submittedDate, forKey: "submittedDate")
+			}
+		}
 
 		public enum `Type`: String, Codable, CaseIterable {
 			case gameCenterPlayerAchievementSubmissions
 		}
 
-		public struct Attributes: Codable {
-			public var bundleID: String
-			public var challengeIDs: [String]?
-			public var percentageAchieved: Int
-			public var scopedPlayerID: String
-			public var submittedDate: Date?
-			public var vendorIdentifier: String
-
-			public init(bundleID: String, challengeIDs: [String]? = nil, percentageAchieved: Int, scopedPlayerID: String, submittedDate: Date? = nil, vendorIdentifier: String) {
-				self.bundleID = bundleID
-				self.challengeIDs = challengeIDs
-				self.percentageAchieved = percentageAchieved
-				self.scopedPlayerID = scopedPlayerID
-				self.submittedDate = submittedDate
-				self.vendorIdentifier = vendorIdentifier
-			}
-
-			public init(from decoder: Decoder) throws {
-				let values = try decoder.container(keyedBy: StringCodingKey.self)
-				self.bundleID = try values.decode(String.self, forKey: "bundleId")
-				self.challengeIDs = try values.decodeIfPresent([String].self, forKey: "challengeIds")
-				self.percentageAchieved = try values.decode(Int.self, forKey: "percentageAchieved")
-				self.scopedPlayerID = try values.decode(String.self, forKey: "scopedPlayerId")
-				self.submittedDate = try values.decodeIfPresent(Date.self, forKey: "submittedDate")
-				self.vendorIdentifier = try values.decode(String.self, forKey: "vendorIdentifier")
-			}
-
-			public func encode(to encoder: Encoder) throws {
-				var values = encoder.container(keyedBy: StringCodingKey.self)
-				try values.encode(bundleID, forKey: "bundleId")
-				try values.encodeIfPresent(challengeIDs, forKey: "challengeIds")
-				try values.encode(percentageAchieved, forKey: "percentageAchieved")
-				try values.encode(scopedPlayerID, forKey: "scopedPlayerId")
-				try values.encodeIfPresent(submittedDate, forKey: "submittedDate")
-				try values.encode(vendorIdentifier, forKey: "vendorIdentifier")
-			}
-		}
-
-		public init(type: `Type`, attributes: Attributes) {
-			self.type = type
+		public init(attributes: Attributes, type: `Type`) {
 			self.attributes = attributes
+			self.type = type
 		}
 
 		public init(from decoder: Decoder) throws {
 			let values = try decoder.container(keyedBy: StringCodingKey.self)
-			self.type = try values.decode(`Type`.self, forKey: "type")
 			self.attributes = try values.decode(Attributes.self, forKey: "attributes")
+			self.type = try values.decode(`Type`.self, forKey: "type")
 		}
 
 		public func encode(to encoder: Encoder) throws {
 			var values = encoder.container(keyedBy: StringCodingKey.self)
-			try values.encode(type, forKey: "type")
 			try values.encode(attributes, forKey: "attributes")
+			try values.encode(type, forKey: "type")
 		}
 	}
 

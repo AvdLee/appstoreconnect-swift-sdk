@@ -4,37 +4,33 @@
 import Foundation
 
 public struct GameCenterMatchmakingRuleSetTest: Codable, Identifiable {
-	public var type: `Type`
 	public var id: String
 	public var attributes: Attributes?
+	public var type: `Type`
 	public var links: ResourceLinks?
-
-	public enum `Type`: String, Codable, CaseIterable {
-		case gameCenterMatchmakingRuleSetTests
-	}
 
 	public struct Attributes: Codable {
 		public var matchmakingResults: [[MatchmakingResultItem]]?
 
 		public struct MatchmakingResultItem: Codable {
-			public var requestName: String?
 			public var teamAssignments: [GameCenterMatchmakingTeamAssignment]?
+			public var requestName: String?
 
-			public init(requestName: String? = nil, teamAssignments: [GameCenterMatchmakingTeamAssignment]? = nil) {
-				self.requestName = requestName
+			public init(teamAssignments: [GameCenterMatchmakingTeamAssignment]? = nil, requestName: String? = nil) {
 				self.teamAssignments = teamAssignments
+				self.requestName = requestName
 			}
 
 			public init(from decoder: Decoder) throws {
 				let values = try decoder.container(keyedBy: StringCodingKey.self)
-				self.requestName = try values.decodeIfPresent(String.self, forKey: "requestName")
 				self.teamAssignments = try values.decodeIfPresent([GameCenterMatchmakingTeamAssignment].self, forKey: "teamAssignments")
+				self.requestName = try values.decodeIfPresent(String.self, forKey: "requestName")
 			}
 
 			public func encode(to encoder: Encoder) throws {
 				var values = encoder.container(keyedBy: StringCodingKey.self)
-				try values.encodeIfPresent(requestName, forKey: "requestName")
 				try values.encodeIfPresent(teamAssignments, forKey: "teamAssignments")
+				try values.encodeIfPresent(requestName, forKey: "requestName")
 			}
 		}
 
@@ -53,26 +49,30 @@ public struct GameCenterMatchmakingRuleSetTest: Codable, Identifiable {
 		}
 	}
 
-	public init(type: `Type`, id: String, attributes: Attributes? = nil, links: ResourceLinks? = nil) {
-		self.type = type
+	public enum `Type`: String, Codable, CaseIterable {
+		case gameCenterMatchmakingRuleSetTests
+	}
+
+	public init(id: String, attributes: Attributes? = nil, type: `Type`, links: ResourceLinks? = nil) {
 		self.id = id
 		self.attributes = attributes
+		self.type = type
 		self.links = links
 	}
 
 	public init(from decoder: Decoder) throws {
 		let values = try decoder.container(keyedBy: StringCodingKey.self)
-		self.type = try values.decode(`Type`.self, forKey: "type")
 		self.id = try values.decode(String.self, forKey: "id")
 		self.attributes = try values.decodeIfPresent(Attributes.self, forKey: "attributes")
+		self.type = try values.decode(`Type`.self, forKey: "type")
 		self.links = try values.decodeIfPresent(ResourceLinks.self, forKey: "links")
 	}
 
 	public func encode(to encoder: Encoder) throws {
 		var values = encoder.container(keyedBy: StringCodingKey.self)
-		try values.encode(type, forKey: "type")
 		try values.encode(id, forKey: "id")
 		try values.encodeIfPresent(attributes, forKey: "attributes")
+		try values.encode(type, forKey: "type")
 		try values.encodeIfPresent(links, forKey: "links")
 	}
 }

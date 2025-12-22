@@ -16,36 +16,36 @@ public struct WebhookCreateRequest: Codable {
 		}
 
 		public struct Attributes: Codable {
-			public var isEnabled: Bool
 			public var eventTypes: [WebhookEventType]
+			public var url: URL
 			public var name: String
 			public var secret: String
-			public var url: URL
+			public var isEnabled: Bool
 
-			public init(isEnabled: Bool, eventTypes: [WebhookEventType], name: String, secret: String, url: URL) {
-				self.isEnabled = isEnabled
+			public init(eventTypes: [WebhookEventType], url: URL, name: String, secret: String, isEnabled: Bool) {
 				self.eventTypes = eventTypes
+				self.url = url
 				self.name = name
 				self.secret = secret
-				self.url = url
+				self.isEnabled = isEnabled
 			}
 
 			public init(from decoder: Decoder) throws {
 				let values = try decoder.container(keyedBy: StringCodingKey.self)
-				self.isEnabled = try values.decode(Bool.self, forKey: "enabled")
 				self.eventTypes = try values.decode([WebhookEventType].self, forKey: "eventTypes")
+				self.url = try values.decode(URL.self, forKey: "url")
 				self.name = try values.decode(String.self, forKey: "name")
 				self.secret = try values.decode(String.self, forKey: "secret")
-				self.url = try values.decode(URL.self, forKey: "url")
+				self.isEnabled = try values.decode(Bool.self, forKey: "enabled")
 			}
 
 			public func encode(to encoder: Encoder) throws {
 				var values = encoder.container(keyedBy: StringCodingKey.self)
-				try values.encode(isEnabled, forKey: "enabled")
 				try values.encode(eventTypes, forKey: "eventTypes")
+				try values.encode(url, forKey: "url")
 				try values.encode(name, forKey: "name")
 				try values.encode(secret, forKey: "secret")
-				try values.encode(url, forKey: "url")
+				try values.encode(isEnabled, forKey: "enabled")
 			}
 		}
 

@@ -4,9 +4,9 @@
 import Foundation
 
 public struct GameCenterChallengesResponse: Codable {
-	public var data: [GameCenterChallenge]
-	public var included: [IncludedItem]?
 	public var links: PagedDocumentLinks
+	public var included: [IncludedItem]?
+	public var data: [GameCenterChallenge]
 	public var meta: PagingInformation?
 
 	public enum IncludedItem: Codable {
@@ -49,26 +49,26 @@ public struct GameCenterChallengesResponse: Codable {
 		}
 	}
 
-	public init(data: [GameCenterChallenge], included: [IncludedItem]? = nil, links: PagedDocumentLinks, meta: PagingInformation? = nil) {
-		self.data = data
-		self.included = included
+	public init(links: PagedDocumentLinks, included: [IncludedItem]? = nil, data: [GameCenterChallenge], meta: PagingInformation? = nil) {
 		self.links = links
+		self.included = included
+		self.data = data
 		self.meta = meta
 	}
 
 	public init(from decoder: Decoder) throws {
 		let values = try decoder.container(keyedBy: StringCodingKey.self)
-		self.data = try values.decode([GameCenterChallenge].self, forKey: "data")
-		self.included = try values.decodeIfPresent([IncludedItem].self, forKey: "included")
 		self.links = try values.decode(PagedDocumentLinks.self, forKey: "links")
+		self.included = try values.decodeIfPresent([IncludedItem].self, forKey: "included")
+		self.data = try values.decode([GameCenterChallenge].self, forKey: "data")
 		self.meta = try values.decodeIfPresent(PagingInformation.self, forKey: "meta")
 	}
 
 	public func encode(to encoder: Encoder) throws {
 		var values = encoder.container(keyedBy: StringCodingKey.self)
-		try values.encode(data, forKey: "data")
-		try values.encodeIfPresent(included, forKey: "included")
 		try values.encode(links, forKey: "links")
+		try values.encodeIfPresent(included, forKey: "included")
+		try values.encode(data, forKey: "data")
 		try values.encodeIfPresent(meta, forKey: "meta")
 	}
 }

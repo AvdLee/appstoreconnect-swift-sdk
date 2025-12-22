@@ -7,8 +7,8 @@ public struct AppEventVideoClipUpdateRequest: Codable {
 	public var data: Data
 
 	public struct Data: Codable, Identifiable {
-		public var type: `Type`
 		public var id: String
+		public var type: `Type`
 		public var attributes: Attributes?
 
 		public enum `Type`: String, Codable, CaseIterable {
@@ -16,44 +16,44 @@ public struct AppEventVideoClipUpdateRequest: Codable {
 		}
 
 		public struct Attributes: Codable {
-			public var previewFrameTimeCode: String?
 			public var isUploaded: Bool?
+			public var previewFrameTimeCode: String?
 
-			public init(previewFrameTimeCode: String? = nil, isUploaded: Bool? = nil) {
-				self.previewFrameTimeCode = previewFrameTimeCode
+			public init(isUploaded: Bool? = nil, previewFrameTimeCode: String? = nil) {
 				self.isUploaded = isUploaded
+				self.previewFrameTimeCode = previewFrameTimeCode
 			}
 
 			public init(from decoder: Decoder) throws {
 				let values = try decoder.container(keyedBy: StringCodingKey.self)
-				self.previewFrameTimeCode = try values.decodeIfPresent(String.self, forKey: "previewFrameTimeCode")
 				self.isUploaded = try values.decodeIfPresent(Bool.self, forKey: "uploaded")
+				self.previewFrameTimeCode = try values.decodeIfPresent(String.self, forKey: "previewFrameTimeCode")
 			}
 
 			public func encode(to encoder: Encoder) throws {
 				var values = encoder.container(keyedBy: StringCodingKey.self)
-				try values.encodeIfPresent(previewFrameTimeCode, forKey: "previewFrameTimeCode")
 				try values.encodeIfPresent(isUploaded, forKey: "uploaded")
+				try values.encodeIfPresent(previewFrameTimeCode, forKey: "previewFrameTimeCode")
 			}
 		}
 
-		public init(type: `Type`, id: String, attributes: Attributes? = nil) {
-			self.type = type
+		public init(id: String, type: `Type`, attributes: Attributes? = nil) {
 			self.id = id
+			self.type = type
 			self.attributes = attributes
 		}
 
 		public init(from decoder: Decoder) throws {
 			let values = try decoder.container(keyedBy: StringCodingKey.self)
-			self.type = try values.decode(`Type`.self, forKey: "type")
 			self.id = try values.decode(String.self, forKey: "id")
+			self.type = try values.decode(`Type`.self, forKey: "type")
 			self.attributes = try values.decodeIfPresent(Attributes.self, forKey: "attributes")
 		}
 
 		public func encode(to encoder: Encoder) throws {
 			var values = encoder.container(keyedBy: StringCodingKey.self)
-			try values.encode(type, forKey: "type")
 			try values.encode(id, forKey: "id")
+			try values.encode(type, forKey: "type")
 			try values.encodeIfPresent(attributes, forKey: "attributes")
 		}
 	}

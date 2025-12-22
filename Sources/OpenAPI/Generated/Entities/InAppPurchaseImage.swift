@@ -4,24 +4,20 @@
 import Foundation
 
 public struct InAppPurchaseImage: Codable, Identifiable {
-	public var type: `Type`
-	public var id: String
 	public var attributes: Attributes?
+	public var type: `Type`
 	public var relationships: Relationships?
 	public var links: ResourceLinks?
-
-	public enum `Type`: String, Codable, CaseIterable {
-		case inAppPurchaseImages
-	}
+	public var id: String
 
 	public struct Attributes: Codable {
 		public var fileSize: Int?
-		public var fileName: String?
-		public var sourceFileChecksum: String?
 		public var assetToken: String?
-		public var imageAsset: ImageAsset?
-		public var uploadOperations: [UploadOperation]?
+		public var sourceFileChecksum: String?
 		public var state: State?
+		public var uploadOperations: [UploadOperation]?
+		public var imageAsset: ImageAsset?
+		public var fileName: String?
 
 		public enum State: String, Codable, CaseIterable {
 			case awaitingUpload = "AWAITING_UPLOAD"
@@ -33,37 +29,41 @@ public struct InAppPurchaseImage: Codable, Identifiable {
 			case rejected = "REJECTED"
 		}
 
-		public init(fileSize: Int? = nil, fileName: String? = nil, sourceFileChecksum: String? = nil, assetToken: String? = nil, imageAsset: ImageAsset? = nil, uploadOperations: [UploadOperation]? = nil, state: State? = nil) {
+		public init(fileSize: Int? = nil, assetToken: String? = nil, sourceFileChecksum: String? = nil, state: State? = nil, uploadOperations: [UploadOperation]? = nil, imageAsset: ImageAsset? = nil, fileName: String? = nil) {
 			self.fileSize = fileSize
-			self.fileName = fileName
-			self.sourceFileChecksum = sourceFileChecksum
 			self.assetToken = assetToken
-			self.imageAsset = imageAsset
-			self.uploadOperations = uploadOperations
+			self.sourceFileChecksum = sourceFileChecksum
 			self.state = state
+			self.uploadOperations = uploadOperations
+			self.imageAsset = imageAsset
+			self.fileName = fileName
 		}
 
 		public init(from decoder: Decoder) throws {
 			let values = try decoder.container(keyedBy: StringCodingKey.self)
 			self.fileSize = try values.decodeIfPresent(Int.self, forKey: "fileSize")
-			self.fileName = try values.decodeIfPresent(String.self, forKey: "fileName")
-			self.sourceFileChecksum = try values.decodeIfPresent(String.self, forKey: "sourceFileChecksum")
 			self.assetToken = try values.decodeIfPresent(String.self, forKey: "assetToken")
-			self.imageAsset = try values.decodeIfPresent(ImageAsset.self, forKey: "imageAsset")
-			self.uploadOperations = try values.decodeIfPresent([UploadOperation].self, forKey: "uploadOperations")
+			self.sourceFileChecksum = try values.decodeIfPresent(String.self, forKey: "sourceFileChecksum")
 			self.state = try values.decodeIfPresent(State.self, forKey: "state")
+			self.uploadOperations = try values.decodeIfPresent([UploadOperation].self, forKey: "uploadOperations")
+			self.imageAsset = try values.decodeIfPresent(ImageAsset.self, forKey: "imageAsset")
+			self.fileName = try values.decodeIfPresent(String.self, forKey: "fileName")
 		}
 
 		public func encode(to encoder: Encoder) throws {
 			var values = encoder.container(keyedBy: StringCodingKey.self)
 			try values.encodeIfPresent(fileSize, forKey: "fileSize")
-			try values.encodeIfPresent(fileName, forKey: "fileName")
-			try values.encodeIfPresent(sourceFileChecksum, forKey: "sourceFileChecksum")
 			try values.encodeIfPresent(assetToken, forKey: "assetToken")
-			try values.encodeIfPresent(imageAsset, forKey: "imageAsset")
-			try values.encodeIfPresent(uploadOperations, forKey: "uploadOperations")
+			try values.encodeIfPresent(sourceFileChecksum, forKey: "sourceFileChecksum")
 			try values.encodeIfPresent(state, forKey: "state")
+			try values.encodeIfPresent(uploadOperations, forKey: "uploadOperations")
+			try values.encodeIfPresent(imageAsset, forKey: "imageAsset")
+			try values.encodeIfPresent(fileName, forKey: "fileName")
 		}
+	}
+
+	public enum `Type`: String, Codable, CaseIterable {
+		case inAppPurchaseImages
 	}
 
 	public struct Relationships: Codable {
@@ -73,28 +73,28 @@ public struct InAppPurchaseImage: Codable, Identifiable {
 			public var data: Data?
 
 			public struct Data: Codable, Identifiable {
-				public var type: `Type`
 				public var id: String
+				public var type: `Type`
 
 				public enum `Type`: String, Codable, CaseIterable {
 					case inAppPurchases
 				}
 
-				public init(type: `Type`, id: String) {
-					self.type = type
+				public init(id: String, type: `Type`) {
 					self.id = id
+					self.type = type
 				}
 
 				public init(from decoder: Decoder) throws {
 					let values = try decoder.container(keyedBy: StringCodingKey.self)
-					self.type = try values.decode(`Type`.self, forKey: "type")
 					self.id = try values.decode(String.self, forKey: "id")
+					self.type = try values.decode(`Type`.self, forKey: "type")
 				}
 
 				public func encode(to encoder: Encoder) throws {
 					var values = encoder.container(keyedBy: StringCodingKey.self)
-					try values.encode(type, forKey: "type")
 					try values.encode(id, forKey: "id")
+					try values.encode(type, forKey: "type")
 				}
 			}
 
@@ -128,29 +128,29 @@ public struct InAppPurchaseImage: Codable, Identifiable {
 		}
 	}
 
-	public init(type: `Type`, id: String, attributes: Attributes? = nil, relationships: Relationships? = nil, links: ResourceLinks? = nil) {
-		self.type = type
-		self.id = id
+	public init(attributes: Attributes? = nil, type: `Type`, relationships: Relationships? = nil, links: ResourceLinks? = nil, id: String) {
 		self.attributes = attributes
+		self.type = type
 		self.relationships = relationships
 		self.links = links
+		self.id = id
 	}
 
 	public init(from decoder: Decoder) throws {
 		let values = try decoder.container(keyedBy: StringCodingKey.self)
-		self.type = try values.decode(`Type`.self, forKey: "type")
-		self.id = try values.decode(String.self, forKey: "id")
 		self.attributes = try values.decodeIfPresent(Attributes.self, forKey: "attributes")
+		self.type = try values.decode(`Type`.self, forKey: "type")
 		self.relationships = try values.decodeIfPresent(Relationships.self, forKey: "relationships")
 		self.links = try values.decodeIfPresent(ResourceLinks.self, forKey: "links")
+		self.id = try values.decode(String.self, forKey: "id")
 	}
 
 	public func encode(to encoder: Encoder) throws {
 		var values = encoder.container(keyedBy: StringCodingKey.self)
-		try values.encode(type, forKey: "type")
-		try values.encode(id, forKey: "id")
 		try values.encodeIfPresent(attributes, forKey: "attributes")
+		try values.encode(type, forKey: "type")
 		try values.encodeIfPresent(relationships, forKey: "relationships")
 		try values.encodeIfPresent(links, forKey: "links")
+		try values.encode(id, forKey: "id")
 	}
 }

@@ -4,10 +4,10 @@
 import Foundation
 
 public struct ReviewSubmissionItemsResponse: Codable {
-	public var data: [ReviewSubmissionItem]
 	public var included: [IncludedItem]?
-	public var links: PagedDocumentLinks
 	public var meta: PagingInformation?
+	public var links: PagedDocumentLinks
+	public var data: [ReviewSubmissionItem]
 
 	public enum IncludedItem: Codable {
 		case appCustomProductPageVersion(AppCustomProductPageVersion)
@@ -15,6 +15,11 @@ public struct ReviewSubmissionItemsResponse: Codable {
 		case appStoreVersionExperiment(AppStoreVersionExperiment)
 		case appStoreVersion(AppStoreVersion)
 		case backgroundAssetVersion(BackgroundAssetVersion)
+		case gameCenterAchievementVersionV2(GameCenterAchievementVersionV2)
+		case gameCenterActivityVersion(GameCenterActivityVersion)
+		case gameCenterChallengeVersion(GameCenterChallengeVersion)
+		case gameCenterLeaderboardSetVersionV2(GameCenterLeaderboardSetVersionV2)
+		case gameCenterLeaderboardVersionV2(GameCenterLeaderboardVersionV2)
 
 		public init(from decoder: Decoder) throws {
 
@@ -31,11 +36,16 @@ public struct ReviewSubmissionItemsResponse: Codable {
 			case "appStoreVersionExperiments": self = .appStoreVersionExperiment(try container.decode(AppStoreVersionExperiment.self))
 			case "appStoreVersions": self = .appStoreVersion(try container.decode(AppStoreVersion.self))
 			case "backgroundAssetVersions": self = .backgroundAssetVersion(try container.decode(BackgroundAssetVersion.self))
+			case "gameCenterAchievementVersions": self = .gameCenterAchievementVersionV2(try container.decode(GameCenterAchievementVersionV2.self))
+			case "gameCenterActivityVersions": self = .gameCenterActivityVersion(try container.decode(GameCenterActivityVersion.self))
+			case "gameCenterChallengeVersions": self = .gameCenterChallengeVersion(try container.decode(GameCenterChallengeVersion.self))
+			case "gameCenterLeaderboardSetVersions": self = .gameCenterLeaderboardSetVersionV2(try container.decode(GameCenterLeaderboardSetVersionV2.self))
+			case "gameCenterLeaderboardVersions": self = .gameCenterLeaderboardVersionV2(try container.decode(GameCenterLeaderboardVersionV2.self))
 
 			default:
 				throw DecodingError.dataCorruptedError(
 					in: container,
-					debugDescription: "Discriminator value '\(discriminatorValue)' does not match any expected values (appCustomProductPageVersions, appEvents, appStoreVersionExperiments, appStoreVersions, backgroundAssetVersions)."
+					debugDescription: "Discriminator value '\(discriminatorValue)' does not match any expected values (appCustomProductPageVersions, appEvents, appStoreVersionExperiments, appStoreVersions, backgroundAssetVersions, gameCenterAchievementVersions, gameCenterActivityVersions, gameCenterChallengeVersions, gameCenterLeaderboardSetVersions, gameCenterLeaderboardVersions)."
 				)
 			}
 		}
@@ -48,30 +58,35 @@ public struct ReviewSubmissionItemsResponse: Codable {
 			case .appStoreVersionExperiment(let value): try container.encode(value)
 			case .appStoreVersion(let value): try container.encode(value)
 			case .backgroundAssetVersion(let value): try container.encode(value)
+			case .gameCenterAchievementVersionV2(let value): try container.encode(value)
+			case .gameCenterActivityVersion(let value): try container.encode(value)
+			case .gameCenterChallengeVersion(let value): try container.encode(value)
+			case .gameCenterLeaderboardSetVersionV2(let value): try container.encode(value)
+			case .gameCenterLeaderboardVersionV2(let value): try container.encode(value)
 			}
 		}
 	}
 
-	public init(data: [ReviewSubmissionItem], included: [IncludedItem]? = nil, links: PagedDocumentLinks, meta: PagingInformation? = nil) {
-		self.data = data
+	public init(included: [IncludedItem]? = nil, meta: PagingInformation? = nil, links: PagedDocumentLinks, data: [ReviewSubmissionItem]) {
 		self.included = included
-		self.links = links
 		self.meta = meta
+		self.links = links
+		self.data = data
 	}
 
 	public init(from decoder: Decoder) throws {
 		let values = try decoder.container(keyedBy: StringCodingKey.self)
-		self.data = try values.decode([ReviewSubmissionItem].self, forKey: "data")
 		self.included = try values.decodeIfPresent([IncludedItem].self, forKey: "included")
-		self.links = try values.decode(PagedDocumentLinks.self, forKey: "links")
 		self.meta = try values.decodeIfPresent(PagingInformation.self, forKey: "meta")
+		self.links = try values.decode(PagedDocumentLinks.self, forKey: "links")
+		self.data = try values.decode([ReviewSubmissionItem].self, forKey: "data")
 	}
 
 	public func encode(to encoder: Encoder) throws {
 		var values = encoder.container(keyedBy: StringCodingKey.self)
-		try values.encode(data, forKey: "data")
 		try values.encodeIfPresent(included, forKey: "included")
-		try values.encode(links, forKey: "links")
 		try values.encodeIfPresent(meta, forKey: "meta")
+		try values.encode(links, forKey: "links")
+		try values.encode(data, forKey: "data")
 	}
 }

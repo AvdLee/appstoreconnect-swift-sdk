@@ -182,6 +182,10 @@ This will attempt to download the App Store Connect [OpenAPI specification](http
 
 Alternatively, you can run `make download` and `make generate` individually.
 
+#### Spec patching
+
+The downloaded OpenAPI spec is post-processed by the `SpecPatcher` Swift executable (see `Tools/SpecPatcher` / `Tools/SpecPatching`) to apply small, **structure-aware** fixes without relying on line-based patch files. This makes spec updates resilient when upstream JSON shifts between releases.
+
 ## Communication
 
 - If you **found a bug**, open an [issue](https://github.com/AvdLee/appstoreconnect-swift-sdk/issues).

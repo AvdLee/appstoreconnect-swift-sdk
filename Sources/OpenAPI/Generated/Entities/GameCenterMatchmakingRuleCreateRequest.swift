@@ -7,20 +7,16 @@ public struct GameCenterMatchmakingRuleCreateRequest: Codable {
 	public var data: Data
 
 	public struct Data: Codable {
-		public var type: `Type`
 		public var attributes: Attributes
 		public var relationships: Relationships
-
-		public enum `Type`: String, Codable, CaseIterable {
-			case gameCenterMatchmakingRules
-		}
+		public var type: `Type`
 
 		public struct Attributes: Codable {
+			public var weight: Double?
+			public var expression: String
+			public var type: `Type`
 			public var referenceName: String
 			public var description: String
-			public var type: `Type`
-			public var expression: String
-			public var weight: Double?
 
 			public enum `Type`: String, Codable, CaseIterable {
 				case compatible = "COMPATIBLE"
@@ -29,30 +25,30 @@ public struct GameCenterMatchmakingRuleCreateRequest: Codable {
 				case team = "TEAM"
 			}
 
-			public init(referenceName: String, description: String, type: `Type`, expression: String, weight: Double? = nil) {
+			public init(weight: Double? = nil, expression: String, type: `Type`, referenceName: String, description: String) {
+				self.weight = weight
+				self.expression = expression
+				self.type = type
 				self.referenceName = referenceName
 				self.description = description
-				self.type = type
-				self.expression = expression
-				self.weight = weight
 			}
 
 			public init(from decoder: Decoder) throws {
 				let values = try decoder.container(keyedBy: StringCodingKey.self)
+				self.weight = try values.decodeIfPresent(Double.self, forKey: "weight")
+				self.expression = try values.decode(String.self, forKey: "expression")
+				self.type = try values.decode(`Type`.self, forKey: "type")
 				self.referenceName = try values.decode(String.self, forKey: "referenceName")
 				self.description = try values.decode(String.self, forKey: "description")
-				self.type = try values.decode(`Type`.self, forKey: "type")
-				self.expression = try values.decode(String.self, forKey: "expression")
-				self.weight = try values.decodeIfPresent(Double.self, forKey: "weight")
 			}
 
 			public func encode(to encoder: Encoder) throws {
 				var values = encoder.container(keyedBy: StringCodingKey.self)
+				try values.encodeIfPresent(weight, forKey: "weight")
+				try values.encode(expression, forKey: "expression")
+				try values.encode(type, forKey: "type")
 				try values.encode(referenceName, forKey: "referenceName")
 				try values.encode(description, forKey: "description")
-				try values.encode(type, forKey: "type")
-				try values.encode(expression, forKey: "expression")
-				try values.encodeIfPresent(weight, forKey: "weight")
 			}
 		}
 
@@ -63,28 +59,28 @@ public struct GameCenterMatchmakingRuleCreateRequest: Codable {
 				public var data: Data
 
 				public struct Data: Codable, Identifiable {
-					public var type: `Type`
 					public var id: String
+					public var type: `Type`
 
 					public enum `Type`: String, Codable, CaseIterable {
 						case gameCenterMatchmakingRuleSets
 					}
 
-					public init(type: `Type`, id: String) {
-						self.type = type
+					public init(id: String, type: `Type`) {
 						self.id = id
+						self.type = type
 					}
 
 					public init(from decoder: Decoder) throws {
 						let values = try decoder.container(keyedBy: StringCodingKey.self)
-						self.type = try values.decode(`Type`.self, forKey: "type")
 						self.id = try values.decode(String.self, forKey: "id")
+						self.type = try values.decode(`Type`.self, forKey: "type")
 					}
 
 					public func encode(to encoder: Encoder) throws {
 						var values = encoder.container(keyedBy: StringCodingKey.self)
-						try values.encode(type, forKey: "type")
 						try values.encode(id, forKey: "id")
+						try values.encode(type, forKey: "type")
 					}
 				}
 
@@ -118,24 +114,28 @@ public struct GameCenterMatchmakingRuleCreateRequest: Codable {
 			}
 		}
 
-		public init(type: `Type`, attributes: Attributes, relationships: Relationships) {
-			self.type = type
+		public enum `Type`: String, Codable, CaseIterable {
+			case gameCenterMatchmakingRules
+		}
+
+		public init(attributes: Attributes, relationships: Relationships, type: `Type`) {
 			self.attributes = attributes
 			self.relationships = relationships
+			self.type = type
 		}
 
 		public init(from decoder: Decoder) throws {
 			let values = try decoder.container(keyedBy: StringCodingKey.self)
-			self.type = try values.decode(`Type`.self, forKey: "type")
 			self.attributes = try values.decode(Attributes.self, forKey: "attributes")
 			self.relationships = try values.decode(Relationships.self, forKey: "relationships")
+			self.type = try values.decode(`Type`.self, forKey: "type")
 		}
 
 		public func encode(to encoder: Encoder) throws {
 			var values = encoder.container(keyedBy: StringCodingKey.self)
-			try values.encode(type, forKey: "type")
 			try values.encode(attributes, forKey: "attributes")
 			try values.encode(relationships, forKey: "relationships")
+			try values.encode(type, forKey: "type")
 		}
 	}
 

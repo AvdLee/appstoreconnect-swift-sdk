@@ -6,8 +6,8 @@ import Foundation
 public struct WebhookEvent: Codable, Identifiable {
 	public var type: `Type`
 	public var id: String
-	public var attributes: Attributes?
 	public var links: ResourceLinks?
+	public var attributes: Attributes?
 
 	public enum `Type`: String, Codable, CaseIterable {
 		case webhookEvents
@@ -15,54 +15,54 @@ public struct WebhookEvent: Codable, Identifiable {
 
 	public struct Attributes: Codable {
 		public var eventType: WebhookEventType?
-		public var payload: String?
 		public var isPing: Bool?
 		public var createdDate: Date?
+		public var payload: String?
 
-		public init(eventType: WebhookEventType? = nil, payload: String? = nil, isPing: Bool? = nil, createdDate: Date? = nil) {
+		public init(eventType: WebhookEventType? = nil, isPing: Bool? = nil, createdDate: Date? = nil, payload: String? = nil) {
 			self.eventType = eventType
-			self.payload = payload
 			self.isPing = isPing
 			self.createdDate = createdDate
+			self.payload = payload
 		}
 
 		public init(from decoder: Decoder) throws {
 			let values = try decoder.container(keyedBy: StringCodingKey.self)
 			self.eventType = try values.decodeIfPresent(WebhookEventType.self, forKey: "eventType")
-			self.payload = try values.decodeIfPresent(String.self, forKey: "payload")
 			self.isPing = try values.decodeIfPresent(Bool.self, forKey: "ping")
 			self.createdDate = try values.decodeIfPresent(Date.self, forKey: "createdDate")
+			self.payload = try values.decodeIfPresent(String.self, forKey: "payload")
 		}
 
 		public func encode(to encoder: Encoder) throws {
 			var values = encoder.container(keyedBy: StringCodingKey.self)
 			try values.encodeIfPresent(eventType, forKey: "eventType")
-			try values.encodeIfPresent(payload, forKey: "payload")
 			try values.encodeIfPresent(isPing, forKey: "ping")
 			try values.encodeIfPresent(createdDate, forKey: "createdDate")
+			try values.encodeIfPresent(payload, forKey: "payload")
 		}
 	}
 
-	public init(type: `Type`, id: String, attributes: Attributes? = nil, links: ResourceLinks? = nil) {
+	public init(type: `Type`, id: String, links: ResourceLinks? = nil, attributes: Attributes? = nil) {
 		self.type = type
 		self.id = id
-		self.attributes = attributes
 		self.links = links
+		self.attributes = attributes
 	}
 
 	public init(from decoder: Decoder) throws {
 		let values = try decoder.container(keyedBy: StringCodingKey.self)
 		self.type = try values.decode(`Type`.self, forKey: "type")
 		self.id = try values.decode(String.self, forKey: "id")
-		self.attributes = try values.decodeIfPresent(Attributes.self, forKey: "attributes")
 		self.links = try values.decodeIfPresent(ResourceLinks.self, forKey: "links")
+		self.attributes = try values.decodeIfPresent(Attributes.self, forKey: "attributes")
 	}
 
 	public func encode(to encoder: Encoder) throws {
 		var values = encoder.container(keyedBy: StringCodingKey.self)
 		try values.encode(type, forKey: "type")
 		try values.encode(id, forKey: "id")
-		try values.encodeIfPresent(attributes, forKey: "attributes")
 		try values.encodeIfPresent(links, forKey: "links")
+		try values.encodeIfPresent(attributes, forKey: "attributes")
 	}
 }

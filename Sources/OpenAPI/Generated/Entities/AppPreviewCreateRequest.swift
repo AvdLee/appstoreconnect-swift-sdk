@@ -16,32 +16,32 @@ public struct AppPreviewCreateRequest: Codable {
 		}
 
 		public struct Attributes: Codable {
-			public var fileSize: Int
-			public var fileName: String
-			public var previewFrameTimeCode: String?
 			public var mimeType: String?
+			public var fileSize: Int
+			public var previewFrameTimeCode: String?
+			public var fileName: String
 
-			public init(fileSize: Int, fileName: String, previewFrameTimeCode: String? = nil, mimeType: String? = nil) {
-				self.fileSize = fileSize
-				self.fileName = fileName
-				self.previewFrameTimeCode = previewFrameTimeCode
+			public init(mimeType: String? = nil, fileSize: Int, previewFrameTimeCode: String? = nil, fileName: String) {
 				self.mimeType = mimeType
+				self.fileSize = fileSize
+				self.previewFrameTimeCode = previewFrameTimeCode
+				self.fileName = fileName
 			}
 
 			public init(from decoder: Decoder) throws {
 				let values = try decoder.container(keyedBy: StringCodingKey.self)
-				self.fileSize = try values.decode(Int.self, forKey: "fileSize")
-				self.fileName = try values.decode(String.self, forKey: "fileName")
-				self.previewFrameTimeCode = try values.decodeIfPresent(String.self, forKey: "previewFrameTimeCode")
 				self.mimeType = try values.decodeIfPresent(String.self, forKey: "mimeType")
+				self.fileSize = try values.decode(Int.self, forKey: "fileSize")
+				self.previewFrameTimeCode = try values.decodeIfPresent(String.self, forKey: "previewFrameTimeCode")
+				self.fileName = try values.decode(String.self, forKey: "fileName")
 			}
 
 			public func encode(to encoder: Encoder) throws {
 				var values = encoder.container(keyedBy: StringCodingKey.self)
-				try values.encode(fileSize, forKey: "fileSize")
-				try values.encode(fileName, forKey: "fileName")
-				try values.encodeIfPresent(previewFrameTimeCode, forKey: "previewFrameTimeCode")
 				try values.encodeIfPresent(mimeType, forKey: "mimeType")
+				try values.encode(fileSize, forKey: "fileSize")
+				try values.encodeIfPresent(previewFrameTimeCode, forKey: "previewFrameTimeCode")
+				try values.encode(fileName, forKey: "fileName")
 			}
 		}
 

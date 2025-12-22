@@ -38,6 +38,7 @@ extension APIEndpoint.V1.BetaAppReviewDetails.WithID {
 			case streamlinedPurchasingEnabled
 			case accessibilityDeclarations
 			case appEncryptionDeclarations
+			case appStoreIcon
 			case ciProduct
 			case betaTesters
 			case betaGroups
@@ -77,6 +78,7 @@ extension APIEndpoint.V1.BetaAppReviewDetails.WithID {
 			case betaFeedbackCrashSubmissions
 			case searchKeywords
 			case webhooks
+			case androidToIosAppMappingDetails
 		}
 	}
 }

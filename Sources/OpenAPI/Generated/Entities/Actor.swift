@@ -4,21 +4,17 @@
 import Foundation
 
 public struct Actor: Codable, Identifiable {
-	public var type: `Type`
-	public var id: String
 	public var attributes: Attributes?
+	public var type: `Type`
 	public var links: ResourceLinks?
-
-	public enum `Type`: String, Codable, CaseIterable {
-		case actors
-	}
+	public var id: String
 
 	public struct Attributes: Codable {
 		public var actorType: ActorType?
-		public var userFirstName: String?
 		public var userLastName: String?
-		public var userEmail: String?
+		public var userFirstName: String?
 		public var apiKeyID: String?
+		public var userEmail: String?
 
 		public enum ActorType: String, Codable, CaseIterable {
 			case user = "USER"
@@ -27,53 +23,57 @@ public struct Actor: Codable, Identifiable {
 			case apple = "APPLE"
 		}
 
-		public init(actorType: ActorType? = nil, userFirstName: String? = nil, userLastName: String? = nil, userEmail: String? = nil, apiKeyID: String? = nil) {
+		public init(actorType: ActorType? = nil, userLastName: String? = nil, userFirstName: String? = nil, apiKeyID: String? = nil, userEmail: String? = nil) {
 			self.actorType = actorType
-			self.userFirstName = userFirstName
 			self.userLastName = userLastName
-			self.userEmail = userEmail
+			self.userFirstName = userFirstName
 			self.apiKeyID = apiKeyID
+			self.userEmail = userEmail
 		}
 
 		public init(from decoder: Decoder) throws {
 			let values = try decoder.container(keyedBy: StringCodingKey.self)
 			self.actorType = try values.decodeIfPresent(ActorType.self, forKey: "actorType")
-			self.userFirstName = try values.decodeIfPresent(String.self, forKey: "userFirstName")
 			self.userLastName = try values.decodeIfPresent(String.self, forKey: "userLastName")
-			self.userEmail = try values.decodeIfPresent(String.self, forKey: "userEmail")
+			self.userFirstName = try values.decodeIfPresent(String.self, forKey: "userFirstName")
 			self.apiKeyID = try values.decodeIfPresent(String.self, forKey: "apiKeyId")
+			self.userEmail = try values.decodeIfPresent(String.self, forKey: "userEmail")
 		}
 
 		public func encode(to encoder: Encoder) throws {
 			var values = encoder.container(keyedBy: StringCodingKey.self)
 			try values.encodeIfPresent(actorType, forKey: "actorType")
-			try values.encodeIfPresent(userFirstName, forKey: "userFirstName")
 			try values.encodeIfPresent(userLastName, forKey: "userLastName")
-			try values.encodeIfPresent(userEmail, forKey: "userEmail")
+			try values.encodeIfPresent(userFirstName, forKey: "userFirstName")
 			try values.encodeIfPresent(apiKeyID, forKey: "apiKeyId")
+			try values.encodeIfPresent(userEmail, forKey: "userEmail")
 		}
 	}
 
-	public init(type: `Type`, id: String, attributes: Attributes? = nil, links: ResourceLinks? = nil) {
-		self.type = type
-		self.id = id
+	public enum `Type`: String, Codable, CaseIterable {
+		case actors
+	}
+
+	public init(attributes: Attributes? = nil, type: `Type`, links: ResourceLinks? = nil, id: String) {
 		self.attributes = attributes
+		self.type = type
 		self.links = links
+		self.id = id
 	}
 
 	public init(from decoder: Decoder) throws {
 		let values = try decoder.container(keyedBy: StringCodingKey.self)
-		self.type = try values.decode(`Type`.self, forKey: "type")
-		self.id = try values.decode(String.self, forKey: "id")
 		self.attributes = try values.decodeIfPresent(Attributes.self, forKey: "attributes")
+		self.type = try values.decode(`Type`.self, forKey: "type")
 		self.links = try values.decodeIfPresent(ResourceLinks.self, forKey: "links")
+		self.id = try values.decode(String.self, forKey: "id")
 	}
 
 	public func encode(to encoder: Encoder) throws {
 		var values = encoder.container(keyedBy: StringCodingKey.self)
-		try values.encode(type, forKey: "type")
-		try values.encode(id, forKey: "id")
 		try values.encodeIfPresent(attributes, forKey: "attributes")
+		try values.encode(type, forKey: "type")
 		try values.encodeIfPresent(links, forKey: "links")
+		try values.encode(id, forKey: "id")
 	}
 }

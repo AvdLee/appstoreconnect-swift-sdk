@@ -3,25 +3,25 @@
 
 import Foundation
 
-public struct RoutingAppCoverageWithoutIncludesResponse: Codable {
-	/// RoutingAppCoverage
-	public var data: RoutingAppCoverage
+public struct AndroidToIosAppMappingDetailResponse: Codable {
 	public var links: DocumentLinks
+	/// AndroidToIosAppMappingDetail
+	public var data: AndroidToIosAppMappingDetail
 
-	public init(data: RoutingAppCoverage, links: DocumentLinks) {
-		self.data = data
+	public init(links: DocumentLinks, data: AndroidToIosAppMappingDetail) {
 		self.links = links
+		self.data = data
 	}
 
 	public init(from decoder: Decoder) throws {
 		let values = try decoder.container(keyedBy: StringCodingKey.self)
-		self.data = try values.decode(RoutingAppCoverage.self, forKey: "data")
 		self.links = try values.decode(DocumentLinks.self, forKey: "links")
+		self.data = try values.decode(AndroidToIosAppMappingDetail.self, forKey: "data")
 	}
 
 	public func encode(to encoder: Encoder) throws {
 		var values = encoder.container(keyedBy: StringCodingKey.self)
-		try values.encode(data, forKey: "data")
 		try values.encode(links, forKey: "links")
+		try values.encode(data, forKey: "data")
 	}
 }

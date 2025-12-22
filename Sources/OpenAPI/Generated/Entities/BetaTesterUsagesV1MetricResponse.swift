@@ -14,53 +14,53 @@ public struct BetaTesterUsagesV1MetricResponse: Codable {
 
 		public struct DataPoints: Codable {
 			public var start: Date?
-			public var end: Date?
 			public var values: Values?
+			public var end: Date?
 
 			public struct Values: Codable {
-				public var crashCount: Int?
 				public var sessionCount: Int?
+				public var crashCount: Int?
 				public var feedbackCount: Int?
 
-				public init(crashCount: Int? = nil, sessionCount: Int? = nil, feedbackCount: Int? = nil) {
-					self.crashCount = crashCount
+				public init(sessionCount: Int? = nil, crashCount: Int? = nil, feedbackCount: Int? = nil) {
 					self.sessionCount = sessionCount
+					self.crashCount = crashCount
 					self.feedbackCount = feedbackCount
 				}
 
 				public init(from decoder: Decoder) throws {
 					let values = try decoder.container(keyedBy: StringCodingKey.self)
-					self.crashCount = try values.decodeIfPresent(Int.self, forKey: "crashCount")
 					self.sessionCount = try values.decodeIfPresent(Int.self, forKey: "sessionCount")
+					self.crashCount = try values.decodeIfPresent(Int.self, forKey: "crashCount")
 					self.feedbackCount = try values.decodeIfPresent(Int.self, forKey: "feedbackCount")
 				}
 
 				public func encode(to encoder: Encoder) throws {
 					var values = encoder.container(keyedBy: StringCodingKey.self)
-					try values.encodeIfPresent(crashCount, forKey: "crashCount")
 					try values.encodeIfPresent(sessionCount, forKey: "sessionCount")
+					try values.encodeIfPresent(crashCount, forKey: "crashCount")
 					try values.encodeIfPresent(feedbackCount, forKey: "feedbackCount")
 				}
 			}
 
-			public init(start: Date? = nil, end: Date? = nil, values: Values? = nil) {
+			public init(start: Date? = nil, values: Values? = nil, end: Date? = nil) {
 				self.start = start
-				self.end = end
 				self.values = values
+				self.end = end
 			}
 
 			public init(from decoder: Decoder) throws {
 				let values = try decoder.container(keyedBy: StringCodingKey.self)
 				self.start = try values.decodeIfPresent(Date.self, forKey: "start")
-				self.end = try values.decodeIfPresent(Date.self, forKey: "end")
 				self.values = try values.decodeIfPresent(Values.self, forKey: "values")
+				self.end = try values.decodeIfPresent(Date.self, forKey: "end")
 			}
 
 			public func encode(to encoder: Encoder) throws {
 				var values = encoder.container(keyedBy: StringCodingKey.self)
 				try values.encodeIfPresent(start, forKey: "start")
-				try values.encodeIfPresent(end, forKey: "end")
 				try values.encodeIfPresent(self.values, forKey: "values")
+				try values.encodeIfPresent(end, forKey: "end")
 			}
 		}
 
@@ -72,24 +72,24 @@ public struct BetaTesterUsagesV1MetricResponse: Codable {
 				public var data: String?
 
 				public struct Links: Codable {
-					public var groupBy: String?
 					public var related: String?
+					public var groupBy: String?
 
-					public init(groupBy: String? = nil, related: String? = nil) {
-						self.groupBy = groupBy
+					public init(related: String? = nil, groupBy: String? = nil) {
 						self.related = related
+						self.groupBy = groupBy
 					}
 
 					public init(from decoder: Decoder) throws {
 						let values = try decoder.container(keyedBy: StringCodingKey.self)
-						self.groupBy = try values.decodeIfPresent(String.self, forKey: "groupBy")
 						self.related = try values.decodeIfPresent(String.self, forKey: "related")
+						self.groupBy = try values.decodeIfPresent(String.self, forKey: "groupBy")
 					}
 
 					public func encode(to encoder: Encoder) throws {
 						var values = encoder.container(keyedBy: StringCodingKey.self)
-						try values.encodeIfPresent(groupBy, forKey: "groupBy")
 						try values.encodeIfPresent(related, forKey: "related")
+						try values.encodeIfPresent(groupBy, forKey: "groupBy")
 					}
 				}
 

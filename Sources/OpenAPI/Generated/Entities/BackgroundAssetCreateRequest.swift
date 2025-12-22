@@ -7,31 +7,9 @@ public struct BackgroundAssetCreateRequest: Codable {
 	public var data: Data
 
 	public struct Data: Codable {
+		public var relationships: Relationships
 		public var type: `Type`
 		public var attributes: Attributes
-		public var relationships: Relationships
-
-		public enum `Type`: String, Codable, CaseIterable {
-			case backgroundAssets
-		}
-
-		public struct Attributes: Codable {
-			public var assetPackIdentifier: String
-
-			public init(assetPackIdentifier: String) {
-				self.assetPackIdentifier = assetPackIdentifier
-			}
-
-			public init(from decoder: Decoder) throws {
-				let values = try decoder.container(keyedBy: StringCodingKey.self)
-				self.assetPackIdentifier = try values.decode(String.self, forKey: "assetPackIdentifier")
-			}
-
-			public func encode(to encoder: Encoder) throws {
-				var values = encoder.container(keyedBy: StringCodingKey.self)
-				try values.encode(assetPackIdentifier, forKey: "assetPackIdentifier")
-			}
-		}
 
 		public struct Relationships: Codable {
 			public var app: App
@@ -40,28 +18,28 @@ public struct BackgroundAssetCreateRequest: Codable {
 				public var data: Data
 
 				public struct Data: Codable, Identifiable {
-					public var type: `Type`
 					public var id: String
+					public var type: `Type`
 
 					public enum `Type`: String, Codable, CaseIterable {
 						case apps
 					}
 
-					public init(type: `Type`, id: String) {
-						self.type = type
+					public init(id: String, type: `Type`) {
 						self.id = id
+						self.type = type
 					}
 
 					public init(from decoder: Decoder) throws {
 						let values = try decoder.container(keyedBy: StringCodingKey.self)
-						self.type = try values.decode(`Type`.self, forKey: "type")
 						self.id = try values.decode(String.self, forKey: "id")
+						self.type = try values.decode(`Type`.self, forKey: "type")
 					}
 
 					public func encode(to encoder: Encoder) throws {
 						var values = encoder.container(keyedBy: StringCodingKey.self)
-						try values.encode(type, forKey: "type")
 						try values.encode(id, forKey: "id")
+						try values.encode(type, forKey: "type")
 					}
 				}
 
@@ -95,24 +73,46 @@ public struct BackgroundAssetCreateRequest: Codable {
 			}
 		}
 
-		public init(type: `Type`, attributes: Attributes, relationships: Relationships) {
+		public enum `Type`: String, Codable, CaseIterable {
+			case backgroundAssets
+		}
+
+		public struct Attributes: Codable {
+			public var assetPackIdentifier: String
+
+			public init(assetPackIdentifier: String) {
+				self.assetPackIdentifier = assetPackIdentifier
+			}
+
+			public init(from decoder: Decoder) throws {
+				let values = try decoder.container(keyedBy: StringCodingKey.self)
+				self.assetPackIdentifier = try values.decode(String.self, forKey: "assetPackIdentifier")
+			}
+
+			public func encode(to encoder: Encoder) throws {
+				var values = encoder.container(keyedBy: StringCodingKey.self)
+				try values.encode(assetPackIdentifier, forKey: "assetPackIdentifier")
+			}
+		}
+
+		public init(relationships: Relationships, type: `Type`, attributes: Attributes) {
+			self.relationships = relationships
 			self.type = type
 			self.attributes = attributes
-			self.relationships = relationships
 		}
 
 		public init(from decoder: Decoder) throws {
 			let values = try decoder.container(keyedBy: StringCodingKey.self)
+			self.relationships = try values.decode(Relationships.self, forKey: "relationships")
 			self.type = try values.decode(`Type`.self, forKey: "type")
 			self.attributes = try values.decode(Attributes.self, forKey: "attributes")
-			self.relationships = try values.decode(Relationships.self, forKey: "relationships")
 		}
 
 		public func encode(to encoder: Encoder) throws {
 			var values = encoder.container(keyedBy: StringCodingKey.self)
+			try values.encode(relationships, forKey: "relationships")
 			try values.encode(type, forKey: "type")
 			try values.encode(attributes, forKey: "attributes")
-			try values.encode(relationships, forKey: "relationships")
 		}
 	}
 

@@ -4,27 +4,27 @@
 import Foundation
 
 public struct GameCenterMatchmakingTeamsResponse: Codable {
-	public var data: [GameCenterMatchmakingTeam]
 	public var links: PagedDocumentLinks
 	public var meta: PagingInformation?
+	public var data: [GameCenterMatchmakingTeam]
 
-	public init(data: [GameCenterMatchmakingTeam], links: PagedDocumentLinks, meta: PagingInformation? = nil) {
-		self.data = data
+	public init(links: PagedDocumentLinks, meta: PagingInformation? = nil, data: [GameCenterMatchmakingTeam]) {
 		self.links = links
 		self.meta = meta
+		self.data = data
 	}
 
 	public init(from decoder: Decoder) throws {
 		let values = try decoder.container(keyedBy: StringCodingKey.self)
-		self.data = try values.decode([GameCenterMatchmakingTeam].self, forKey: "data")
 		self.links = try values.decode(PagedDocumentLinks.self, forKey: "links")
 		self.meta = try values.decodeIfPresent(PagingInformation.self, forKey: "meta")
+		self.data = try values.decode([GameCenterMatchmakingTeam].self, forKey: "data")
 	}
 
 	public func encode(to encoder: Encoder) throws {
 		var values = encoder.container(keyedBy: StringCodingKey.self)
-		try values.encode(data, forKey: "data")
 		try values.encode(links, forKey: "links")
 		try values.encodeIfPresent(meta, forKey: "meta")
+		try values.encode(data, forKey: "data")
 	}
 }

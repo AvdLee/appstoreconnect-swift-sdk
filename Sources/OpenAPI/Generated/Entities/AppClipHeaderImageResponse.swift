@@ -4,28 +4,28 @@
 import Foundation
 
 public struct AppClipHeaderImageResponse: Codable {
+	public var links: DocumentLinks
+	public var included: [AppClipDefaultExperienceLocalization]?
 	/// AppClipHeaderImage
 	public var data: AppClipHeaderImage
-	public var included: [AppClipDefaultExperienceLocalization]?
-	public var links: DocumentLinks
 
-	public init(data: AppClipHeaderImage, included: [AppClipDefaultExperienceLocalization]? = nil, links: DocumentLinks) {
-		self.data = data
-		self.included = included
+	public init(links: DocumentLinks, included: [AppClipDefaultExperienceLocalization]? = nil, data: AppClipHeaderImage) {
 		self.links = links
+		self.included = included
+		self.data = data
 	}
 
 	public init(from decoder: Decoder) throws {
 		let values = try decoder.container(keyedBy: StringCodingKey.self)
-		self.data = try values.decode(AppClipHeaderImage.self, forKey: "data")
-		self.included = try values.decodeIfPresent([AppClipDefaultExperienceLocalization].self, forKey: "included")
 		self.links = try values.decode(DocumentLinks.self, forKey: "links")
+		self.included = try values.decodeIfPresent([AppClipDefaultExperienceLocalization].self, forKey: "included")
+		self.data = try values.decode(AppClipHeaderImage.self, forKey: "data")
 	}
 
 	public func encode(to encoder: Encoder) throws {
 		var values = encoder.container(keyedBy: StringCodingKey.self)
-		try values.encode(data, forKey: "data")
-		try values.encodeIfPresent(included, forKey: "included")
 		try values.encode(links, forKey: "links")
+		try values.encodeIfPresent(included, forKey: "included")
+		try values.encode(data, forKey: "data")
 	}
 }

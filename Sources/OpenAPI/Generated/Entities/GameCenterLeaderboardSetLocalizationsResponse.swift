@@ -4,10 +4,10 @@
 import Foundation
 
 public struct GameCenterLeaderboardSetLocalizationsResponse: Codable {
+	public var meta: PagingInformation?
+	public var links: PagedDocumentLinks
 	public var data: [GameCenterLeaderboardSetLocalization]
 	public var included: [IncludedItem]?
-	public var links: PagedDocumentLinks
-	public var meta: PagingInformation?
 
 	public enum IncludedItem: Codable {
 		case gameCenterLeaderboardSetImage(GameCenterLeaderboardSetImage)
@@ -43,26 +43,26 @@ public struct GameCenterLeaderboardSetLocalizationsResponse: Codable {
 		}
 	}
 
-	public init(data: [GameCenterLeaderboardSetLocalization], included: [IncludedItem]? = nil, links: PagedDocumentLinks, meta: PagingInformation? = nil) {
+	public init(meta: PagingInformation? = nil, links: PagedDocumentLinks, data: [GameCenterLeaderboardSetLocalization], included: [IncludedItem]? = nil) {
+		self.meta = meta
+		self.links = links
 		self.data = data
 		self.included = included
-		self.links = links
-		self.meta = meta
 	}
 
 	public init(from decoder: Decoder) throws {
 		let values = try decoder.container(keyedBy: StringCodingKey.self)
+		self.meta = try values.decodeIfPresent(PagingInformation.self, forKey: "meta")
+		self.links = try values.decode(PagedDocumentLinks.self, forKey: "links")
 		self.data = try values.decode([GameCenterLeaderboardSetLocalization].self, forKey: "data")
 		self.included = try values.decodeIfPresent([IncludedItem].self, forKey: "included")
-		self.links = try values.decode(PagedDocumentLinks.self, forKey: "links")
-		self.meta = try values.decodeIfPresent(PagingInformation.self, forKey: "meta")
 	}
 
 	public func encode(to encoder: Encoder) throws {
 		var values = encoder.container(keyedBy: StringCodingKey.self)
+		try values.encodeIfPresent(meta, forKey: "meta")
+		try values.encode(links, forKey: "links")
 		try values.encode(data, forKey: "data")
 		try values.encodeIfPresent(included, forKey: "included")
-		try values.encode(links, forKey: "links")
-		try values.encodeIfPresent(meta, forKey: "meta")
 	}
 }

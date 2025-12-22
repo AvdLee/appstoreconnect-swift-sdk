@@ -5,41 +5,41 @@ import Foundation
 
 public struct AppPricePointV3: Codable, Identifiable {
 	public var type: `Type`
-	public var id: String
 	public var attributes: Attributes?
-	public var relationships: Relationships?
 	public var links: ResourceLinks?
+	public var relationships: Relationships?
+	public var id: String
 
 	public enum `Type`: String, Codable, CaseIterable {
 		case appPricePoints
 	}
 
 	public struct Attributes: Codable {
-		public var customerPrice: String?
 		public var proceeds: String?
+		public var customerPrice: String?
 
-		public init(customerPrice: String? = nil, proceeds: String? = nil) {
-			self.customerPrice = customerPrice
+		public init(proceeds: String? = nil, customerPrice: String? = nil) {
 			self.proceeds = proceeds
+			self.customerPrice = customerPrice
 		}
 
 		public init(from decoder: Decoder) throws {
 			let values = try decoder.container(keyedBy: StringCodingKey.self)
-			self.customerPrice = try values.decodeIfPresent(String.self, forKey: "customerPrice")
 			self.proceeds = try values.decodeIfPresent(String.self, forKey: "proceeds")
+			self.customerPrice = try values.decodeIfPresent(String.self, forKey: "customerPrice")
 		}
 
 		public func encode(to encoder: Encoder) throws {
 			var values = encoder.container(keyedBy: StringCodingKey.self)
-			try values.encodeIfPresent(customerPrice, forKey: "customerPrice")
 			try values.encodeIfPresent(proceeds, forKey: "proceeds")
+			try values.encodeIfPresent(customerPrice, forKey: "customerPrice")
 		}
 	}
 
 	public struct Relationships: Codable {
 		public var app: App?
-		public var equalizations: Equalizations?
 		public var territory: Territory?
+		public var equalizations: Equalizations?
 
 		public struct App: Codable {
 			public var data: Data?
@@ -50,6 +50,50 @@ public struct AppPricePointV3: Codable, Identifiable {
 
 				public enum `Type`: String, Codable, CaseIterable {
 					case apps
+				}
+
+				public init(type: `Type`, id: String) {
+					self.type = type
+					self.id = id
+				}
+
+				public init(from decoder: Decoder) throws {
+					let values = try decoder.container(keyedBy: StringCodingKey.self)
+					self.type = try values.decode(`Type`.self, forKey: "type")
+					self.id = try values.decode(String.self, forKey: "id")
+				}
+
+				public func encode(to encoder: Encoder) throws {
+					var values = encoder.container(keyedBy: StringCodingKey.self)
+					try values.encode(type, forKey: "type")
+					try values.encode(id, forKey: "id")
+				}
+			}
+
+			public init(data: Data? = nil) {
+				self.data = data
+			}
+
+			public init(from decoder: Decoder) throws {
+				let values = try decoder.container(keyedBy: StringCodingKey.self)
+				self.data = try values.decodeIfPresent(Data.self, forKey: "data")
+			}
+
+			public func encode(to encoder: Encoder) throws {
+				var values = encoder.container(keyedBy: StringCodingKey.self)
+				try values.encodeIfPresent(data, forKey: "data")
+			}
+		}
+
+		public struct Territory: Codable {
+			public var data: Data?
+
+			public struct Data: Codable, Identifiable {
+				public var type: `Type`
+				public var id: String
+
+				public enum `Type`: String, Codable, CaseIterable {
+					case territories
 				}
 
 				public init(type: `Type`, id: String) {
@@ -103,94 +147,50 @@ public struct AppPricePointV3: Codable, Identifiable {
 			}
 		}
 
-		public struct Territory: Codable {
-			public var data: Data?
-
-			public struct Data: Codable, Identifiable {
-				public var type: `Type`
-				public var id: String
-
-				public enum `Type`: String, Codable, CaseIterable {
-					case territories
-				}
-
-				public init(type: `Type`, id: String) {
-					self.type = type
-					self.id = id
-				}
-
-				public init(from decoder: Decoder) throws {
-					let values = try decoder.container(keyedBy: StringCodingKey.self)
-					self.type = try values.decode(`Type`.self, forKey: "type")
-					self.id = try values.decode(String.self, forKey: "id")
-				}
-
-				public func encode(to encoder: Encoder) throws {
-					var values = encoder.container(keyedBy: StringCodingKey.self)
-					try values.encode(type, forKey: "type")
-					try values.encode(id, forKey: "id")
-				}
-			}
-
-			public init(data: Data? = nil) {
-				self.data = data
-			}
-
-			public init(from decoder: Decoder) throws {
-				let values = try decoder.container(keyedBy: StringCodingKey.self)
-				self.data = try values.decodeIfPresent(Data.self, forKey: "data")
-			}
-
-			public func encode(to encoder: Encoder) throws {
-				var values = encoder.container(keyedBy: StringCodingKey.self)
-				try values.encodeIfPresent(data, forKey: "data")
-			}
-		}
-
-		public init(app: App? = nil, equalizations: Equalizations? = nil, territory: Territory? = nil) {
+		public init(app: App? = nil, territory: Territory? = nil, equalizations: Equalizations? = nil) {
 			self.app = app
-			self.equalizations = equalizations
 			self.territory = territory
+			self.equalizations = equalizations
 		}
 
 		public init(from decoder: Decoder) throws {
 			let values = try decoder.container(keyedBy: StringCodingKey.self)
 			self.app = try values.decodeIfPresent(App.self, forKey: "app")
-			self.equalizations = try values.decodeIfPresent(Equalizations.self, forKey: "equalizations")
 			self.territory = try values.decodeIfPresent(Territory.self, forKey: "territory")
+			self.equalizations = try values.decodeIfPresent(Equalizations.self, forKey: "equalizations")
 		}
 
 		public func encode(to encoder: Encoder) throws {
 			var values = encoder.container(keyedBy: StringCodingKey.self)
 			try values.encodeIfPresent(app, forKey: "app")
-			try values.encodeIfPresent(equalizations, forKey: "equalizations")
 			try values.encodeIfPresent(territory, forKey: "territory")
+			try values.encodeIfPresent(equalizations, forKey: "equalizations")
 		}
 	}
 
-	public init(type: `Type`, id: String, attributes: Attributes? = nil, relationships: Relationships? = nil, links: ResourceLinks? = nil) {
+	public init(type: `Type`, attributes: Attributes? = nil, links: ResourceLinks? = nil, relationships: Relationships? = nil, id: String) {
 		self.type = type
-		self.id = id
 		self.attributes = attributes
-		self.relationships = relationships
 		self.links = links
+		self.relationships = relationships
+		self.id = id
 	}
 
 	public init(from decoder: Decoder) throws {
 		let values = try decoder.container(keyedBy: StringCodingKey.self)
 		self.type = try values.decode(`Type`.self, forKey: "type")
-		self.id = try values.decode(String.self, forKey: "id")
 		self.attributes = try values.decodeIfPresent(Attributes.self, forKey: "attributes")
-		self.relationships = try values.decodeIfPresent(Relationships.self, forKey: "relationships")
 		self.links = try values.decodeIfPresent(ResourceLinks.self, forKey: "links")
+		self.relationships = try values.decodeIfPresent(Relationships.self, forKey: "relationships")
+		self.id = try values.decode(String.self, forKey: "id")
 	}
 
 	public func encode(to encoder: Encoder) throws {
 		var values = encoder.container(keyedBy: StringCodingKey.self)
 		try values.encode(type, forKey: "type")
-		try values.encode(id, forKey: "id")
 		try values.encodeIfPresent(attributes, forKey: "attributes")
-		try values.encodeIfPresent(relationships, forKey: "relationships")
 		try values.encodeIfPresent(links, forKey: "links")
+		try values.encodeIfPresent(relationships, forKey: "relationships")
+		try values.encode(id, forKey: "id")
 	}
 }

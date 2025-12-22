@@ -4,45 +4,45 @@
 import Foundation
 
 public struct CiTagPatterns: Codable {
-	public var isAllMatch: Bool?
 	public var patterns: [Pattern]?
+	public var isAllMatch: Bool?
 
 	public struct Pattern: Codable {
-		public var pattern: String?
 		public var isPrefix: Bool?
+		public var pattern: String?
 
-		public init(pattern: String? = nil, isPrefix: Bool? = nil) {
-			self.pattern = pattern
+		public init(isPrefix: Bool? = nil, pattern: String? = nil) {
 			self.isPrefix = isPrefix
+			self.pattern = pattern
 		}
 
 		public init(from decoder: Decoder) throws {
 			let values = try decoder.container(keyedBy: StringCodingKey.self)
-			self.pattern = try values.decodeIfPresent(String.self, forKey: "pattern")
 			self.isPrefix = try values.decodeIfPresent(Bool.self, forKey: "isPrefix")
+			self.pattern = try values.decodeIfPresent(String.self, forKey: "pattern")
 		}
 
 		public func encode(to encoder: Encoder) throws {
 			var values = encoder.container(keyedBy: StringCodingKey.self)
-			try values.encodeIfPresent(pattern, forKey: "pattern")
 			try values.encodeIfPresent(isPrefix, forKey: "isPrefix")
+			try values.encodeIfPresent(pattern, forKey: "pattern")
 		}
 	}
 
-	public init(isAllMatch: Bool? = nil, patterns: [Pattern]? = nil) {
-		self.isAllMatch = isAllMatch
+	public init(patterns: [Pattern]? = nil, isAllMatch: Bool? = nil) {
 		self.patterns = patterns
+		self.isAllMatch = isAllMatch
 	}
 
 	public init(from decoder: Decoder) throws {
 		let values = try decoder.container(keyedBy: StringCodingKey.self)
-		self.isAllMatch = try values.decodeIfPresent(Bool.self, forKey: "isAllMatch")
 		self.patterns = try values.decodeIfPresent([Pattern].self, forKey: "patterns")
+		self.isAllMatch = try values.decodeIfPresent(Bool.self, forKey: "isAllMatch")
 	}
 
 	public func encode(to encoder: Encoder) throws {
 		var values = encoder.container(keyedBy: StringCodingKey.self)
-		try values.encodeIfPresent(isAllMatch, forKey: "isAllMatch")
 		try values.encodeIfPresent(patterns, forKey: "patterns")
+		try values.encodeIfPresent(isAllMatch, forKey: "isAllMatch")
 	}
 }

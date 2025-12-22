@@ -4,32 +4,10 @@
 import Foundation
 
 public struct AppCustomProductPageVersionInlineCreate: Codable, Identifiable {
-	public var type: `Type`
-	public var id: String?
-	public var attributes: Attributes?
 	public var relationships: Relationships?
-
-	public enum `Type`: String, Codable, CaseIterable {
-		case appCustomProductPageVersions
-	}
-
-	public struct Attributes: Codable {
-		public var deepLink: URL?
-
-		public init(deepLink: URL? = nil) {
-			self.deepLink = deepLink
-		}
-
-		public init(from decoder: Decoder) throws {
-			let values = try decoder.container(keyedBy: StringCodingKey.self)
-			self.deepLink = try values.decodeIfPresent(URL.self, forKey: "deepLink")
-		}
-
-		public func encode(to encoder: Encoder) throws {
-			var values = encoder.container(keyedBy: StringCodingKey.self)
-			try values.encodeIfPresent(deepLink, forKey: "deepLink")
-		}
-	}
+	public var type: `Type`
+	public var attributes: Attributes?
+	public var id: String?
 
 	public struct Relationships: Codable {
 		public var appCustomProductPage: AppCustomProductPage?
@@ -141,26 +119,48 @@ public struct AppCustomProductPageVersionInlineCreate: Codable, Identifiable {
 		}
 	}
 
-	public init(type: `Type`, id: String? = nil, attributes: Attributes? = nil, relationships: Relationships? = nil) {
-		self.type = type
-		self.id = id
-		self.attributes = attributes
+	public enum `Type`: String, Codable, CaseIterable {
+		case appCustomProductPageVersions
+	}
+
+	public struct Attributes: Codable {
+		public var deepLink: URL?
+
+		public init(deepLink: URL? = nil) {
+			self.deepLink = deepLink
+		}
+
+		public init(from decoder: Decoder) throws {
+			let values = try decoder.container(keyedBy: StringCodingKey.self)
+			self.deepLink = try values.decodeIfPresent(URL.self, forKey: "deepLink")
+		}
+
+		public func encode(to encoder: Encoder) throws {
+			var values = encoder.container(keyedBy: StringCodingKey.self)
+			try values.encodeIfPresent(deepLink, forKey: "deepLink")
+		}
+	}
+
+	public init(relationships: Relationships? = nil, type: `Type`, attributes: Attributes? = nil, id: String? = nil) {
 		self.relationships = relationships
+		self.type = type
+		self.attributes = attributes
+		self.id = id
 	}
 
 	public init(from decoder: Decoder) throws {
 		let values = try decoder.container(keyedBy: StringCodingKey.self)
-		self.type = try values.decode(`Type`.self, forKey: "type")
-		self.id = try values.decodeIfPresent(String.self, forKey: "id")
-		self.attributes = try values.decodeIfPresent(Attributes.self, forKey: "attributes")
 		self.relationships = try values.decodeIfPresent(Relationships.self, forKey: "relationships")
+		self.type = try values.decode(`Type`.self, forKey: "type")
+		self.attributes = try values.decodeIfPresent(Attributes.self, forKey: "attributes")
+		self.id = try values.decodeIfPresent(String.self, forKey: "id")
 	}
 
 	public func encode(to encoder: Encoder) throws {
 		var values = encoder.container(keyedBy: StringCodingKey.self)
-		try values.encode(type, forKey: "type")
-		try values.encodeIfPresent(id, forKey: "id")
-		try values.encodeIfPresent(attributes, forKey: "attributes")
 		try values.encodeIfPresent(relationships, forKey: "relationships")
+		try values.encode(type, forKey: "type")
+		try values.encodeIfPresent(attributes, forKey: "attributes")
+		try values.encodeIfPresent(id, forKey: "id")
 	}
 }

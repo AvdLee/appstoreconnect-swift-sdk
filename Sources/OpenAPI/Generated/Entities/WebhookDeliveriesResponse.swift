@@ -4,30 +4,30 @@
 import Foundation
 
 public struct WebhookDeliveriesResponse: Codable {
-	public var data: [WebhookDelivery]
 	public var included: [WebhookEvent]?
+	public var data: [WebhookDelivery]
 	public var links: PagedDocumentLinks
 	public var meta: PagingInformation?
 
-	public init(data: [WebhookDelivery], included: [WebhookEvent]? = nil, links: PagedDocumentLinks, meta: PagingInformation? = nil) {
-		self.data = data
+	public init(included: [WebhookEvent]? = nil, data: [WebhookDelivery], links: PagedDocumentLinks, meta: PagingInformation? = nil) {
 		self.included = included
+		self.data = data
 		self.links = links
 		self.meta = meta
 	}
 
 	public init(from decoder: Decoder) throws {
 		let values = try decoder.container(keyedBy: StringCodingKey.self)
-		self.data = try values.decode([WebhookDelivery].self, forKey: "data")
 		self.included = try values.decodeIfPresent([WebhookEvent].self, forKey: "included")
+		self.data = try values.decode([WebhookDelivery].self, forKey: "data")
 		self.links = try values.decode(PagedDocumentLinks.self, forKey: "links")
 		self.meta = try values.decodeIfPresent(PagingInformation.self, forKey: "meta")
 	}
 
 	public func encode(to encoder: Encoder) throws {
 		var values = encoder.container(keyedBy: StringCodingKey.self)
-		try values.encode(data, forKey: "data")
 		try values.encodeIfPresent(included, forKey: "included")
+		try values.encode(data, forKey: "data")
 		try values.encode(links, forKey: "links")
 		try values.encodeIfPresent(meta, forKey: "meta")
 	}

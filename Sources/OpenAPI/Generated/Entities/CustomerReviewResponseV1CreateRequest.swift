@@ -7,13 +7,9 @@ public struct CustomerReviewResponseV1CreateRequest: Codable {
 	public var data: Data
 
 	public struct Data: Codable {
-		public var type: `Type`
 		public var attributes: Attributes
+		public var type: `Type`
 		public var relationships: Relationships
-
-		public enum `Type`: String, Codable, CaseIterable {
-			case customerReviewResponses
-		}
 
 		public struct Attributes: Codable {
 			public var responseBody: String
@@ -31,6 +27,10 @@ public struct CustomerReviewResponseV1CreateRequest: Codable {
 				var values = encoder.container(keyedBy: StringCodingKey.self)
 				try values.encode(responseBody, forKey: "responseBody")
 			}
+		}
+
+		public enum `Type`: String, Codable, CaseIterable {
+			case customerReviewResponses
 		}
 
 		public struct Relationships: Codable {
@@ -95,23 +95,23 @@ public struct CustomerReviewResponseV1CreateRequest: Codable {
 			}
 		}
 
-		public init(type: `Type`, attributes: Attributes, relationships: Relationships) {
-			self.type = type
+		public init(attributes: Attributes, type: `Type`, relationships: Relationships) {
 			self.attributes = attributes
+			self.type = type
 			self.relationships = relationships
 		}
 
 		public init(from decoder: Decoder) throws {
 			let values = try decoder.container(keyedBy: StringCodingKey.self)
-			self.type = try values.decode(`Type`.self, forKey: "type")
 			self.attributes = try values.decode(Attributes.self, forKey: "attributes")
+			self.type = try values.decode(`Type`.self, forKey: "type")
 			self.relationships = try values.decode(Relationships.self, forKey: "relationships")
 		}
 
 		public func encode(to encoder: Encoder) throws {
 			var values = encoder.container(keyedBy: StringCodingKey.self)
-			try values.encode(type, forKey: "type")
 			try values.encode(attributes, forKey: "attributes")
+			try values.encode(type, forKey: "type")
 			try values.encode(relationships, forKey: "relationships")
 		}
 	}

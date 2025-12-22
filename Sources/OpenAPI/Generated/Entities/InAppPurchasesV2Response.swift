@@ -4,10 +4,10 @@
 import Foundation
 
 public struct InAppPurchasesV2Response: Codable {
-	public var data: [InAppPurchaseV2]
-	public var included: [IncludedItem]?
 	public var links: PagedDocumentLinks
 	public var meta: PagingInformation?
+	public var data: [InAppPurchaseV2]
+	public var included: [IncludedItem]?
 
 	public enum IncludedItem: Codable {
 		case inAppPurchaseAppStoreReviewScreenshot(InAppPurchaseAppStoreReviewScreenshot)
@@ -15,6 +15,7 @@ public struct InAppPurchasesV2Response: Codable {
 		case inAppPurchaseContent(InAppPurchaseContent)
 		case inAppPurchaseImage(InAppPurchaseImage)
 		case inAppPurchaseLocalization(InAppPurchaseLocalization)
+		case inAppPurchaseOfferCode(InAppPurchaseOfferCode)
 		case inAppPurchasePricePoint(InAppPurchasePricePoint)
 		case inAppPurchasePriceSchedule(InAppPurchasePriceSchedule)
 		case promotedPurchase(PromotedPurchase)
@@ -34,6 +35,7 @@ public struct InAppPurchasesV2Response: Codable {
 			case "inAppPurchaseContents": self = .inAppPurchaseContent(try container.decode(InAppPurchaseContent.self))
 			case "inAppPurchaseImages": self = .inAppPurchaseImage(try container.decode(InAppPurchaseImage.self))
 			case "inAppPurchaseLocalizations": self = .inAppPurchaseLocalization(try container.decode(InAppPurchaseLocalization.self))
+			case "inAppPurchaseOfferCodes": self = .inAppPurchaseOfferCode(try container.decode(InAppPurchaseOfferCode.self))
 			case "inAppPurchasePricePoints": self = .inAppPurchasePricePoint(try container.decode(InAppPurchasePricePoint.self))
 			case "inAppPurchasePriceSchedules": self = .inAppPurchasePriceSchedule(try container.decode(InAppPurchasePriceSchedule.self))
 			case "promotedPurchases": self = .promotedPurchase(try container.decode(PromotedPurchase.self))
@@ -41,7 +43,7 @@ public struct InAppPurchasesV2Response: Codable {
 			default:
 				throw DecodingError.dataCorruptedError(
 					in: container,
-					debugDescription: "Discriminator value '\(discriminatorValue)' does not match any expected values (inAppPurchaseAppStoreReviewScreenshots, inAppPurchaseAvailabilities, inAppPurchaseContents, inAppPurchaseImages, inAppPurchaseLocalizations, inAppPurchasePricePoints, inAppPurchasePriceSchedules, promotedPurchases)."
+					debugDescription: "Discriminator value '\(discriminatorValue)' does not match any expected values (inAppPurchaseAppStoreReviewScreenshots, inAppPurchaseAvailabilities, inAppPurchaseContents, inAppPurchaseImages, inAppPurchaseLocalizations, inAppPurchaseOfferCodes, inAppPurchasePricePoints, inAppPurchasePriceSchedules, promotedPurchases)."
 				)
 			}
 		}
@@ -54,6 +56,7 @@ public struct InAppPurchasesV2Response: Codable {
 			case .inAppPurchaseContent(let value): try container.encode(value)
 			case .inAppPurchaseImage(let value): try container.encode(value)
 			case .inAppPurchaseLocalization(let value): try container.encode(value)
+			case .inAppPurchaseOfferCode(let value): try container.encode(value)
 			case .inAppPurchasePricePoint(let value): try container.encode(value)
 			case .inAppPurchasePriceSchedule(let value): try container.encode(value)
 			case .promotedPurchase(let value): try container.encode(value)
@@ -61,26 +64,26 @@ public struct InAppPurchasesV2Response: Codable {
 		}
 	}
 
-	public init(data: [InAppPurchaseV2], included: [IncludedItem]? = nil, links: PagedDocumentLinks, meta: PagingInformation? = nil) {
-		self.data = data
-		self.included = included
+	public init(links: PagedDocumentLinks, meta: PagingInformation? = nil, data: [InAppPurchaseV2], included: [IncludedItem]? = nil) {
 		self.links = links
 		self.meta = meta
+		self.data = data
+		self.included = included
 	}
 
 	public init(from decoder: Decoder) throws {
 		let values = try decoder.container(keyedBy: StringCodingKey.self)
-		self.data = try values.decode([InAppPurchaseV2].self, forKey: "data")
-		self.included = try values.decodeIfPresent([IncludedItem].self, forKey: "included")
 		self.links = try values.decode(PagedDocumentLinks.self, forKey: "links")
 		self.meta = try values.decodeIfPresent(PagingInformation.self, forKey: "meta")
+		self.data = try values.decode([InAppPurchaseV2].self, forKey: "data")
+		self.included = try values.decodeIfPresent([IncludedItem].self, forKey: "included")
 	}
 
 	public func encode(to encoder: Encoder) throws {
 		var values = encoder.container(keyedBy: StringCodingKey.self)
-		try values.encode(data, forKey: "data")
-		try values.encodeIfPresent(included, forKey: "included")
 		try values.encode(links, forKey: "links")
 		try values.encodeIfPresent(meta, forKey: "meta")
+		try values.encode(data, forKey: "data")
+		try values.encodeIfPresent(included, forKey: "included")
 	}
 }

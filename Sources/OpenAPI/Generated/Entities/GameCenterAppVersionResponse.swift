@@ -6,8 +6,8 @@ import Foundation
 public struct GameCenterAppVersionResponse: Codable {
 	/// GameCenterAppVersion
 	public var data: GameCenterAppVersion
-	public var included: [IncludedItem]?
 	public var links: DocumentLinks
+	public var included: [IncludedItem]?
 
 	public enum IncludedItem: Codable {
 		case appStoreVersion(AppStoreVersion)
@@ -43,23 +43,23 @@ public struct GameCenterAppVersionResponse: Codable {
 		}
 	}
 
-	public init(data: GameCenterAppVersion, included: [IncludedItem]? = nil, links: DocumentLinks) {
+	public init(data: GameCenterAppVersion, links: DocumentLinks, included: [IncludedItem]? = nil) {
 		self.data = data
-		self.included = included
 		self.links = links
+		self.included = included
 	}
 
 	public init(from decoder: Decoder) throws {
 		let values = try decoder.container(keyedBy: StringCodingKey.self)
 		self.data = try values.decode(GameCenterAppVersion.self, forKey: "data")
-		self.included = try values.decodeIfPresent([IncludedItem].self, forKey: "included")
 		self.links = try values.decode(DocumentLinks.self, forKey: "links")
+		self.included = try values.decodeIfPresent([IncludedItem].self, forKey: "included")
 	}
 
 	public func encode(to encoder: Encoder) throws {
 		var values = encoder.container(keyedBy: StringCodingKey.self)
 		try values.encode(data, forKey: "data")
-		try values.encodeIfPresent(included, forKey: "included")
 		try values.encode(links, forKey: "links")
+		try values.encodeIfPresent(included, forKey: "included")
 	}
 }

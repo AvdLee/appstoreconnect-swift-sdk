@@ -7,58 +7,58 @@ public struct BundleIDCreateRequest: Codable {
 	public var data: Data
 
 	public struct Data: Codable {
-		public var type: `Type`
 		public var attributes: Attributes
+		public var type: `Type`
+
+		public struct Attributes: Codable {
+			public var identifier: String
+			public var name: String
+			public var seedID: String?
+			public var platform: BundleIDPlatform
+
+			public init(identifier: String, name: String, seedID: String? = nil, platform: BundleIDPlatform) {
+				self.identifier = identifier
+				self.name = name
+				self.seedID = seedID
+				self.platform = platform
+			}
+
+			public init(from decoder: Decoder) throws {
+				let values = try decoder.container(keyedBy: StringCodingKey.self)
+				self.identifier = try values.decode(String.self, forKey: "identifier")
+				self.name = try values.decode(String.self, forKey: "name")
+				self.seedID = try values.decodeIfPresent(String.self, forKey: "seedId")
+				self.platform = try values.decode(BundleIDPlatform.self, forKey: "platform")
+			}
+
+			public func encode(to encoder: Encoder) throws {
+				var values = encoder.container(keyedBy: StringCodingKey.self)
+				try values.encode(identifier, forKey: "identifier")
+				try values.encode(name, forKey: "name")
+				try values.encodeIfPresent(seedID, forKey: "seedId")
+				try values.encode(platform, forKey: "platform")
+			}
+		}
 
 		public enum `Type`: String, Codable, CaseIterable {
 			case bundleIDs = "bundleIds"
 		}
 
-		public struct Attributes: Codable {
-			public var name: String
-			public var platform: BundleIDPlatform
-			public var identifier: String
-			public var seedID: String?
-
-			public init(name: String, platform: BundleIDPlatform, identifier: String, seedID: String? = nil) {
-				self.name = name
-				self.platform = platform
-				self.identifier = identifier
-				self.seedID = seedID
-			}
-
-			public init(from decoder: Decoder) throws {
-				let values = try decoder.container(keyedBy: StringCodingKey.self)
-				self.name = try values.decode(String.self, forKey: "name")
-				self.platform = try values.decode(BundleIDPlatform.self, forKey: "platform")
-				self.identifier = try values.decode(String.self, forKey: "identifier")
-				self.seedID = try values.decodeIfPresent(String.self, forKey: "seedId")
-			}
-
-			public func encode(to encoder: Encoder) throws {
-				var values = encoder.container(keyedBy: StringCodingKey.self)
-				try values.encode(name, forKey: "name")
-				try values.encode(platform, forKey: "platform")
-				try values.encode(identifier, forKey: "identifier")
-				try values.encodeIfPresent(seedID, forKey: "seedId")
-			}
-		}
-
-		public init(type: `Type`, attributes: Attributes) {
-			self.type = type
+		public init(attributes: Attributes, type: `Type`) {
 			self.attributes = attributes
+			self.type = type
 		}
 
 		public init(from decoder: Decoder) throws {
 			let values = try decoder.container(keyedBy: StringCodingKey.self)
-			self.type = try values.decode(`Type`.self, forKey: "type")
 			self.attributes = try values.decode(Attributes.self, forKey: "attributes")
+			self.type = try values.decode(`Type`.self, forKey: "type")
 		}
 
 		public func encode(to encoder: Encoder) throws {
 			var values = encoder.container(keyedBy: StringCodingKey.self)
-			try values.encode(type, forKey: "type")
 			try values.encode(attributes, forKey: "attributes")
+			try values.encode(type, forKey: "type")
 		}
 	}
 

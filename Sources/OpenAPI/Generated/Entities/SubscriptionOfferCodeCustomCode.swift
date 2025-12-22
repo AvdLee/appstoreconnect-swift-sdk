@@ -15,36 +15,36 @@ public struct SubscriptionOfferCodeCustomCode: Codable, Identifiable {
 	}
 
 	public struct Attributes: Codable {
+		public var expirationDate: String?
 		public var customCode: String?
+		public var isActive: Bool?
 		public var numberOfCodes: Int?
 		public var createdDate: Date?
-		public var expirationDate: String?
-		public var isActive: Bool?
 
-		public init(customCode: String? = nil, numberOfCodes: Int? = nil, createdDate: Date? = nil, expirationDate: String? = nil, isActive: Bool? = nil) {
+		public init(expirationDate: String? = nil, customCode: String? = nil, isActive: Bool? = nil, numberOfCodes: Int? = nil, createdDate: Date? = nil) {
+			self.expirationDate = expirationDate
 			self.customCode = customCode
+			self.isActive = isActive
 			self.numberOfCodes = numberOfCodes
 			self.createdDate = createdDate
-			self.expirationDate = expirationDate
-			self.isActive = isActive
 		}
 
 		public init(from decoder: Decoder) throws {
 			let values = try decoder.container(keyedBy: StringCodingKey.self)
+			self.expirationDate = try values.decodeIfPresent(String.self, forKey: "expirationDate")
 			self.customCode = try values.decodeIfPresent(String.self, forKey: "customCode")
+			self.isActive = try values.decodeIfPresent(Bool.self, forKey: "active")
 			self.numberOfCodes = try values.decodeIfPresent(Int.self, forKey: "numberOfCodes")
 			self.createdDate = try values.decodeIfPresent(Date.self, forKey: "createdDate")
-			self.expirationDate = try values.decodeIfPresent(String.self, forKey: "expirationDate")
-			self.isActive = try values.decodeIfPresent(Bool.self, forKey: "active")
 		}
 
 		public func encode(to encoder: Encoder) throws {
 			var values = encoder.container(keyedBy: StringCodingKey.self)
+			try values.encodeIfPresent(expirationDate, forKey: "expirationDate")
 			try values.encodeIfPresent(customCode, forKey: "customCode")
+			try values.encodeIfPresent(isActive, forKey: "active")
 			try values.encodeIfPresent(numberOfCodes, forKey: "numberOfCodes")
 			try values.encodeIfPresent(createdDate, forKey: "createdDate")
-			try values.encodeIfPresent(expirationDate, forKey: "expirationDate")
-			try values.encodeIfPresent(isActive, forKey: "active")
 		}
 	}
 

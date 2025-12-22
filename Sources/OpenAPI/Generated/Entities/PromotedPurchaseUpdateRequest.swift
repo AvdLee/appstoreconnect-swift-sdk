@@ -7,54 +7,54 @@ public struct PromotedPurchaseUpdateRequest: Codable {
 	public var data: Data
 
 	public struct Data: Codable, Identifiable {
-		public var type: `Type`
 		public var id: String
 		public var attributes: Attributes?
+		public var type: `Type`
+
+		public struct Attributes: Codable {
+			public var isEnabled: Bool?
+			public var isVisibleForAllUsers: Bool?
+
+			public init(isEnabled: Bool? = nil, isVisibleForAllUsers: Bool? = nil) {
+				self.isEnabled = isEnabled
+				self.isVisibleForAllUsers = isVisibleForAllUsers
+			}
+
+			public init(from decoder: Decoder) throws {
+				let values = try decoder.container(keyedBy: StringCodingKey.self)
+				self.isEnabled = try values.decodeIfPresent(Bool.self, forKey: "enabled")
+				self.isVisibleForAllUsers = try values.decodeIfPresent(Bool.self, forKey: "visibleForAllUsers")
+			}
+
+			public func encode(to encoder: Encoder) throws {
+				var values = encoder.container(keyedBy: StringCodingKey.self)
+				try values.encodeIfPresent(isEnabled, forKey: "enabled")
+				try values.encodeIfPresent(isVisibleForAllUsers, forKey: "visibleForAllUsers")
+			}
+		}
 
 		public enum `Type`: String, Codable, CaseIterable {
 			case promotedPurchases
 		}
 
-		public struct Attributes: Codable {
-			public var isVisibleForAllUsers: Bool?
-			public var isEnabled: Bool?
-
-			public init(isVisibleForAllUsers: Bool? = nil, isEnabled: Bool? = nil) {
-				self.isVisibleForAllUsers = isVisibleForAllUsers
-				self.isEnabled = isEnabled
-			}
-
-			public init(from decoder: Decoder) throws {
-				let values = try decoder.container(keyedBy: StringCodingKey.self)
-				self.isVisibleForAllUsers = try values.decodeIfPresent(Bool.self, forKey: "visibleForAllUsers")
-				self.isEnabled = try values.decodeIfPresent(Bool.self, forKey: "enabled")
-			}
-
-			public func encode(to encoder: Encoder) throws {
-				var values = encoder.container(keyedBy: StringCodingKey.self)
-				try values.encodeIfPresent(isVisibleForAllUsers, forKey: "visibleForAllUsers")
-				try values.encodeIfPresent(isEnabled, forKey: "enabled")
-			}
-		}
-
-		public init(type: `Type`, id: String, attributes: Attributes? = nil) {
-			self.type = type
+		public init(id: String, attributes: Attributes? = nil, type: `Type`) {
 			self.id = id
 			self.attributes = attributes
+			self.type = type
 		}
 
 		public init(from decoder: Decoder) throws {
 			let values = try decoder.container(keyedBy: StringCodingKey.self)
-			self.type = try values.decode(`Type`.self, forKey: "type")
 			self.id = try values.decode(String.self, forKey: "id")
 			self.attributes = try values.decodeIfPresent(Attributes.self, forKey: "attributes")
+			self.type = try values.decode(`Type`.self, forKey: "type")
 		}
 
 		public func encode(to encoder: Encoder) throws {
 			var values = encoder.container(keyedBy: StringCodingKey.self)
-			try values.encode(type, forKey: "type")
 			try values.encode(id, forKey: "id")
 			try values.encodeIfPresent(attributes, forKey: "attributes")
+			try values.encode(type, forKey: "type")
 		}
 	}
 

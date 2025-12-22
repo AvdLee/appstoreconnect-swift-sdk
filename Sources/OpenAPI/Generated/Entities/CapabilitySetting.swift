@@ -4,20 +4,14 @@
 import Foundation
 
 public struct CapabilitySetting: Codable {
-	public var key: Key?
-	public var name: String?
 	public var description: String?
-	public var isEnabledByDefault: Bool?
-	public var isVisible: Bool?
 	public var allowedInstances: AllowedInstances?
-	public var minInstances: Int?
+	public var name: String?
 	public var options: [CapabilityOption]?
-
-	public enum Key: String, Codable, CaseIterable {
-		case icloudVersion = "ICLOUD_VERSION"
-		case dataProtectionPermissionLevel = "DATA_PROTECTION_PERMISSION_LEVEL"
-		case appleIDAuthAppConsent = "APPLE_ID_AUTH_APP_CONSENT"
-	}
+	public var key: Key?
+	public var isEnabledByDefault: Bool?
+	public var minInstances: Int?
+	public var isVisible: Bool?
 
 	public enum AllowedInstances: String, Codable, CaseIterable {
 		case entry = "ENTRY"
@@ -25,38 +19,44 @@ public struct CapabilitySetting: Codable {
 		case multiple = "MULTIPLE"
 	}
 
-	public init(key: Key? = nil, name: String? = nil, description: String? = nil, isEnabledByDefault: Bool? = nil, isVisible: Bool? = nil, allowedInstances: AllowedInstances? = nil, minInstances: Int? = nil, options: [CapabilityOption]? = nil) {
-		self.key = key
-		self.name = name
+	public enum Key: String, Codable, CaseIterable {
+		case icloudVersion = "ICLOUD_VERSION"
+		case dataProtectionPermissionLevel = "DATA_PROTECTION_PERMISSION_LEVEL"
+		case appleIDAuthAppConsent = "APPLE_ID_AUTH_APP_CONSENT"
+	}
+
+	public init(description: String? = nil, allowedInstances: AllowedInstances? = nil, name: String? = nil, options: [CapabilityOption]? = nil, key: Key? = nil, isEnabledByDefault: Bool? = nil, minInstances: Int? = nil, isVisible: Bool? = nil) {
 		self.description = description
-		self.isEnabledByDefault = isEnabledByDefault
-		self.isVisible = isVisible
 		self.allowedInstances = allowedInstances
-		self.minInstances = minInstances
+		self.name = name
 		self.options = options
+		self.key = key
+		self.isEnabledByDefault = isEnabledByDefault
+		self.minInstances = minInstances
+		self.isVisible = isVisible
 	}
 
 	public init(from decoder: Decoder) throws {
 		let values = try decoder.container(keyedBy: StringCodingKey.self)
-		self.key = try values.decodeIfPresent(Key.self, forKey: "key")
-		self.name = try values.decodeIfPresent(String.self, forKey: "name")
 		self.description = try values.decodeIfPresent(String.self, forKey: "description")
-		self.isEnabledByDefault = try values.decodeIfPresent(Bool.self, forKey: "enabledByDefault")
-		self.isVisible = try values.decodeIfPresent(Bool.self, forKey: "visible")
 		self.allowedInstances = try values.decodeIfPresent(AllowedInstances.self, forKey: "allowedInstances")
-		self.minInstances = try values.decodeIfPresent(Int.self, forKey: "minInstances")
+		self.name = try values.decodeIfPresent(String.self, forKey: "name")
 		self.options = try values.decodeIfPresent([CapabilityOption].self, forKey: "options")
+		self.key = try values.decodeIfPresent(Key.self, forKey: "key")
+		self.isEnabledByDefault = try values.decodeIfPresent(Bool.self, forKey: "enabledByDefault")
+		self.minInstances = try values.decodeIfPresent(Int.self, forKey: "minInstances")
+		self.isVisible = try values.decodeIfPresent(Bool.self, forKey: "visible")
 	}
 
 	public func encode(to encoder: Encoder) throws {
 		var values = encoder.container(keyedBy: StringCodingKey.self)
-		try values.encodeIfPresent(key, forKey: "key")
-		try values.encodeIfPresent(name, forKey: "name")
 		try values.encodeIfPresent(description, forKey: "description")
-		try values.encodeIfPresent(isEnabledByDefault, forKey: "enabledByDefault")
-		try values.encodeIfPresent(isVisible, forKey: "visible")
 		try values.encodeIfPresent(allowedInstances, forKey: "allowedInstances")
-		try values.encodeIfPresent(minInstances, forKey: "minInstances")
+		try values.encodeIfPresent(name, forKey: "name")
 		try values.encodeIfPresent(options, forKey: "options")
+		try values.encodeIfPresent(key, forKey: "key")
+		try values.encodeIfPresent(isEnabledByDefault, forKey: "enabledByDefault")
+		try values.encodeIfPresent(minInstances, forKey: "minInstances")
+		try values.encodeIfPresent(isVisible, forKey: "visible")
 	}
 }

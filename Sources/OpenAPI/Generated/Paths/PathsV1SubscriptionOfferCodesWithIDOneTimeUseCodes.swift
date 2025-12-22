@@ -28,6 +28,7 @@ extension APIEndpoint.V1.SubscriptionOfferCodes.WithID {
 				case createdDate
 				case expirationDate
 				case active
+				case environment
 				case offerCode
 				case values
 			}
@@ -40,7 +41,10 @@ extension APIEndpoint.V1.SubscriptionOfferCodes.WithID {
 				case offerMode
 				case numberOfPeriods
 				case totalNumberOfCodes
+				case productionCodeCount
+				case sandboxCodeCount
 				case active
+				case autoRenewEnabled
 				case subscription
 				case oneTimeUseCodes
 				case customCodes

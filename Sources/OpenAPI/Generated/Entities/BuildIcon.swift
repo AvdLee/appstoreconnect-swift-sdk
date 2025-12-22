@@ -4,65 +4,65 @@
 import Foundation
 
 public struct BuildIcon: Codable, Identifiable {
-	public var type: `Type`
 	public var id: String
 	public var attributes: Attributes?
+	public var type: `Type`
 	public var links: ResourceLinks?
-
-	public enum `Type`: String, Codable, CaseIterable {
-		case buildIcons
-	}
 
 	public struct Attributes: Codable {
 		public var iconAsset: ImageAsset?
-		public var iconType: IconAssetType?
 		public var isMasked: Bool?
 		public var name: String?
+		public var iconType: IconAssetType?
 
-		public init(iconAsset: ImageAsset? = nil, iconType: IconAssetType? = nil, isMasked: Bool? = nil, name: String? = nil) {
+		public init(iconAsset: ImageAsset? = nil, isMasked: Bool? = nil, name: String? = nil, iconType: IconAssetType? = nil) {
 			self.iconAsset = iconAsset
-			self.iconType = iconType
 			self.isMasked = isMasked
 			self.name = name
+			self.iconType = iconType
 		}
 
 		public init(from decoder: Decoder) throws {
 			let values = try decoder.container(keyedBy: StringCodingKey.self)
 			self.iconAsset = try values.decodeIfPresent(ImageAsset.self, forKey: "iconAsset")
-			self.iconType = try values.decodeIfPresent(IconAssetType.self, forKey: "iconType")
 			self.isMasked = try values.decodeIfPresent(Bool.self, forKey: "masked")
 			self.name = try values.decodeIfPresent(String.self, forKey: "name")
+			self.iconType = try values.decodeIfPresent(IconAssetType.self, forKey: "iconType")
 		}
 
 		public func encode(to encoder: Encoder) throws {
 			var values = encoder.container(keyedBy: StringCodingKey.self)
 			try values.encodeIfPresent(iconAsset, forKey: "iconAsset")
-			try values.encodeIfPresent(iconType, forKey: "iconType")
 			try values.encodeIfPresent(isMasked, forKey: "masked")
 			try values.encodeIfPresent(name, forKey: "name")
+			try values.encodeIfPresent(iconType, forKey: "iconType")
 		}
 	}
 
-	public init(type: `Type`, id: String, attributes: Attributes? = nil, links: ResourceLinks? = nil) {
-		self.type = type
+	public enum `Type`: String, Codable, CaseIterable {
+		case buildIcons
+	}
+
+	public init(id: String, attributes: Attributes? = nil, type: `Type`, links: ResourceLinks? = nil) {
 		self.id = id
 		self.attributes = attributes
+		self.type = type
 		self.links = links
 	}
 
 	public init(from decoder: Decoder) throws {
 		let values = try decoder.container(keyedBy: StringCodingKey.self)
-		self.type = try values.decode(`Type`.self, forKey: "type")
 		self.id = try values.decode(String.self, forKey: "id")
 		self.attributes = try values.decodeIfPresent(Attributes.self, forKey: "attributes")
+		self.type = try values.decode(`Type`.self, forKey: "type")
 		self.links = try values.decodeIfPresent(ResourceLinks.self, forKey: "links")
 	}
 
 	public func encode(to encoder: Encoder) throws {
 		var values = encoder.container(keyedBy: StringCodingKey.self)
-		try values.encode(type, forKey: "type")
 		try values.encode(id, forKey: "id")
 		try values.encodeIfPresent(attributes, forKey: "attributes")
+		try values.encode(type, forKey: "type")
 		try values.encodeIfPresent(links, forKey: "links")
 	}
 }

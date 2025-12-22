@@ -4,24 +4,24 @@
 import Foundation
 
 public struct AppStoreVersionPromotionResponse: Codable {
+	public var links: DocumentLinks
 	/// AppStoreVersionPromotion
 	public var data: AppStoreVersionPromotion
-	public var links: DocumentLinks
 
-	public init(data: AppStoreVersionPromotion, links: DocumentLinks) {
-		self.data = data
+	public init(links: DocumentLinks, data: AppStoreVersionPromotion) {
 		self.links = links
+		self.data = data
 	}
 
 	public init(from decoder: Decoder) throws {
 		let values = try decoder.container(keyedBy: StringCodingKey.self)
-		self.data = try values.decode(AppStoreVersionPromotion.self, forKey: "data")
 		self.links = try values.decode(DocumentLinks.self, forKey: "links")
+		self.data = try values.decode(AppStoreVersionPromotion.self, forKey: "data")
 	}
 
 	public func encode(to encoder: Encoder) throws {
 		var values = encoder.container(keyedBy: StringCodingKey.self)
-		try values.encode(data, forKey: "data")
 		try values.encode(links, forKey: "links")
+		try values.encode(data, forKey: "data")
 	}
 }

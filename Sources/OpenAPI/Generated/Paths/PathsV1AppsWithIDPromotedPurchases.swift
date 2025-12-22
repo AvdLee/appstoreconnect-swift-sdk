@@ -48,6 +48,7 @@ extension APIEndpoint.V1.Apps.WithID {
 				case iapPriceSchedule
 				case inAppPurchaseAvailability
 				case images
+				case offerCodes
 			}
 
 			public enum FieldsSubscriptions: String, Codable, CaseIterable {

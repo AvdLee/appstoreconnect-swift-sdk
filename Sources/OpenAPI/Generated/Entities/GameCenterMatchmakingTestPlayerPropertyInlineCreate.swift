@@ -13,24 +13,24 @@ public struct GameCenterMatchmakingTestPlayerPropertyInlineCreate: Codable, Iden
 	}
 
 	public struct Attributes: Codable {
-		public var playerID: String
 		public var properties: [Property]?
+		public var playerID: String
 
-		public init(playerID: String, properties: [Property]? = nil) {
-			self.playerID = playerID
+		public init(properties: [Property]? = nil, playerID: String) {
 			self.properties = properties
+			self.playerID = playerID
 		}
 
 		public init(from decoder: Decoder) throws {
 			let values = try decoder.container(keyedBy: StringCodingKey.self)
-			self.playerID = try values.decode(String.self, forKey: "playerId")
 			self.properties = try values.decodeIfPresent([Property].self, forKey: "properties")
+			self.playerID = try values.decode(String.self, forKey: "playerId")
 		}
 
 		public func encode(to encoder: Encoder) throws {
 			var values = encoder.container(keyedBy: StringCodingKey.self)
-			try values.encode(playerID, forKey: "playerId")
 			try values.encodeIfPresent(properties, forKey: "properties")
+			try values.encode(playerID, forKey: "playerId")
 		}
 	}
 

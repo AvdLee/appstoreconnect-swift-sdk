@@ -4,12 +4,13 @@
 import Foundation
 
 public struct AppsResponse: Codable {
-	public var data: [App]
 	public var included: [IncludedItem]?
 	public var links: PagedDocumentLinks
 	public var meta: PagingInformation?
+	public var data: [App]
 
 	public enum IncludedItem: Codable {
+		case androidToIosAppMappingDetail(AndroidToIosAppMappingDetail)
 		case appClip(AppClip)
 		case appCustomProductPage(AppCustomProductPage)
 		case appEncryptionDeclaration(AppEncryptionDeclaration)
@@ -21,6 +22,7 @@ public struct AppsResponse: Codable {
 		case betaAppReviewDetail(BetaAppReviewDetail)
 		case betaGroup(BetaGroup)
 		case betaLicenseAgreement(BetaLicenseAgreement)
+		case buildIcon(BuildIcon)
 		case build(Build)
 		case ciProduct(CiProduct)
 		case endUserLicenseAgreement(EndUserLicenseAgreement)
@@ -43,6 +45,7 @@ public struct AppsResponse: Codable {
 			let discriminatorValue = try container.decode(Discriminator.self).type
 
 			switch discriminatorValue {
+			case "androidToIosAppMappingDetails": self = .androidToIosAppMappingDetail(try container.decode(AndroidToIosAppMappingDetail.self))
 			case "appClips": self = .appClip(try container.decode(AppClip.self))
 			case "appCustomProductPages": self = .appCustomProductPage(try container.decode(AppCustomProductPage.self))
 			case "appEncryptionDeclarations": self = .appEncryptionDeclaration(try container.decode(AppEncryptionDeclaration.self))
@@ -54,6 +57,7 @@ public struct AppsResponse: Codable {
 			case "betaAppReviewDetails": self = .betaAppReviewDetail(try container.decode(BetaAppReviewDetail.self))
 			case "betaGroups": self = .betaGroup(try container.decode(BetaGroup.self))
 			case "betaLicenseAgreements": self = .betaLicenseAgreement(try container.decode(BetaLicenseAgreement.self))
+			case "buildIcons": self = .buildIcon(try container.decode(BuildIcon.self))
 			case "builds": self = .build(try container.decode(Build.self))
 			case "ciProducts": self = .ciProduct(try container.decode(CiProduct.self))
 			case "endUserLicenseAgreements": self = .endUserLicenseAgreement(try container.decode(EndUserLicenseAgreement.self))
@@ -69,7 +73,7 @@ public struct AppsResponse: Codable {
 			default:
 				throw DecodingError.dataCorruptedError(
 					in: container,
-					debugDescription: "Discriminator value '\(discriminatorValue)' does not match any expected values (appClips, appCustomProductPages, appEncryptionDeclarations, appEvents, appInfos, appStoreVersionExperiments, appStoreVersions, betaAppLocalizations, betaAppReviewDetails, betaGroups, betaLicenseAgreements, builds, ciProducts, endUserLicenseAgreements, gameCenterDetails, gameCenterEnabledVersions, inAppPurchases, preReleaseVersions, promotedPurchases, reviewSubmissions, subscriptionGracePeriods, subscriptionGroups)."
+					debugDescription: "Discriminator value '\(discriminatorValue)' does not match any expected values (androidToIosAppMappingDetails, appClips, appCustomProductPages, appEncryptionDeclarations, appEvents, appInfos, appStoreVersionExperiments, appStoreVersions, betaAppLocalizations, betaAppReviewDetails, betaGroups, betaLicenseAgreements, buildIcons, builds, ciProducts, endUserLicenseAgreements, gameCenterDetails, gameCenterEnabledVersions, inAppPurchases, preReleaseVersions, promotedPurchases, reviewSubmissions, subscriptionGracePeriods, subscriptionGroups)."
 				)
 			}
 		}
@@ -77,6 +81,7 @@ public struct AppsResponse: Codable {
 		public func encode(to encoder: Encoder) throws {
 			var container = encoder.singleValueContainer()
 			switch self {
+			case .androidToIosAppMappingDetail(let value): try container.encode(value)
 			case .appClip(let value): try container.encode(value)
 			case .appCustomProductPage(let value): try container.encode(value)
 			case .appEncryptionDeclaration(let value): try container.encode(value)
@@ -88,6 +93,7 @@ public struct AppsResponse: Codable {
 			case .betaAppReviewDetail(let value): try container.encode(value)
 			case .betaGroup(let value): try container.encode(value)
 			case .betaLicenseAgreement(let value): try container.encode(value)
+			case .buildIcon(let value): try container.encode(value)
 			case .build(let value): try container.encode(value)
 			case .ciProduct(let value): try container.encode(value)
 			case .endUserLicenseAgreement(let value): try container.encode(value)
@@ -103,26 +109,26 @@ public struct AppsResponse: Codable {
 		}
 	}
 
-	public init(data: [App], included: [IncludedItem]? = nil, links: PagedDocumentLinks, meta: PagingInformation? = nil) {
-		self.data = data
+	public init(included: [IncludedItem]? = nil, links: PagedDocumentLinks, meta: PagingInformation? = nil, data: [App]) {
 		self.included = included
 		self.links = links
 		self.meta = meta
+		self.data = data
 	}
 
 	public init(from decoder: Decoder) throws {
 		let values = try decoder.container(keyedBy: StringCodingKey.self)
-		self.data = try values.decode([App].self, forKey: "data")
 		self.included = try values.decodeIfPresent([IncludedItem].self, forKey: "included")
 		self.links = try values.decode(PagedDocumentLinks.self, forKey: "links")
 		self.meta = try values.decodeIfPresent(PagingInformation.self, forKey: "meta")
+		self.data = try values.decode([App].self, forKey: "data")
 	}
 
 	public func encode(to encoder: Encoder) throws {
 		var values = encoder.container(keyedBy: StringCodingKey.self)
-		try values.encode(data, forKey: "data")
 		try values.encodeIfPresent(included, forKey: "included")
 		try values.encode(links, forKey: "links")
 		try values.encodeIfPresent(meta, forKey: "meta")
+		try values.encode(data, forKey: "data")
 	}
 }

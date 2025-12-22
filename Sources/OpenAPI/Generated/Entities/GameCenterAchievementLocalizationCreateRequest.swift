@@ -16,32 +16,32 @@ public struct GameCenterAchievementLocalizationCreateRequest: Codable {
 		}
 
 		public struct Attributes: Codable {
-			public var locale: String
-			public var name: String
 			public var beforeEarnedDescription: String
+			public var name: String
 			public var afterEarnedDescription: String
+			public var locale: String
 
-			public init(locale: String, name: String, beforeEarnedDescription: String, afterEarnedDescription: String) {
-				self.locale = locale
-				self.name = name
+			public init(beforeEarnedDescription: String, name: String, afterEarnedDescription: String, locale: String) {
 				self.beforeEarnedDescription = beforeEarnedDescription
+				self.name = name
 				self.afterEarnedDescription = afterEarnedDescription
+				self.locale = locale
 			}
 
 			public init(from decoder: Decoder) throws {
 				let values = try decoder.container(keyedBy: StringCodingKey.self)
-				self.locale = try values.decode(String.self, forKey: "locale")
-				self.name = try values.decode(String.self, forKey: "name")
 				self.beforeEarnedDescription = try values.decode(String.self, forKey: "beforeEarnedDescription")
+				self.name = try values.decode(String.self, forKey: "name")
 				self.afterEarnedDescription = try values.decode(String.self, forKey: "afterEarnedDescription")
+				self.locale = try values.decode(String.self, forKey: "locale")
 			}
 
 			public func encode(to encoder: Encoder) throws {
 				var values = encoder.container(keyedBy: StringCodingKey.self)
-				try values.encode(locale, forKey: "locale")
-				try values.encode(name, forKey: "name")
 				try values.encode(beforeEarnedDescription, forKey: "beforeEarnedDescription")
+				try values.encode(name, forKey: "name")
 				try values.encode(afterEarnedDescription, forKey: "afterEarnedDescription")
+				try values.encode(locale, forKey: "locale")
 			}
 		}
 
@@ -52,28 +52,28 @@ public struct GameCenterAchievementLocalizationCreateRequest: Codable {
 				public var data: Data
 
 				public struct Data: Codable, Identifiable {
-					public var type: `Type`
 					public var id: String
+					public var type: `Type`
 
 					public enum `Type`: String, Codable, CaseIterable {
 						case gameCenterAchievements
 					}
 
-					public init(type: `Type`, id: String) {
-						self.type = type
+					public init(id: String, type: `Type`) {
 						self.id = id
+						self.type = type
 					}
 
 					public init(from decoder: Decoder) throws {
 						let values = try decoder.container(keyedBy: StringCodingKey.self)
-						self.type = try values.decode(`Type`.self, forKey: "type")
 						self.id = try values.decode(String.self, forKey: "id")
+						self.type = try values.decode(`Type`.self, forKey: "type")
 					}
 
 					public func encode(to encoder: Encoder) throws {
 						var values = encoder.container(keyedBy: StringCodingKey.self)
-						try values.encode(type, forKey: "type")
 						try values.encode(id, forKey: "id")
+						try values.encode(type, forKey: "type")
 					}
 				}
 

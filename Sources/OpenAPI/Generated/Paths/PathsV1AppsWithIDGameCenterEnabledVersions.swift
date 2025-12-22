@@ -64,6 +64,7 @@ extension APIEndpoint.V1.Apps.WithID {
 				case streamlinedPurchasingEnabled
 				case accessibilityDeclarations
 				case appEncryptionDeclarations
+				case appStoreIcon
 				case ciProduct
 				case betaTesters
 				case betaGroups
@@ -103,6 +104,7 @@ extension APIEndpoint.V1.Apps.WithID {
 				case betaFeedbackCrashSubmissions
 				case searchKeywords
 				case webhooks
+				case androidToIosAppMappingDetails
 			}
 
 			public enum Include: String, Codable, CaseIterable {

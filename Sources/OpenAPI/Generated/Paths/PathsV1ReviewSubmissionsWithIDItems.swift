@@ -24,6 +24,11 @@ extension APIEndpoint.V1.ReviewSubmissions.WithID {
 			public var fieldsAppStoreVersionExperiments: [FieldsAppStoreVersionExperiments]?
 			public var fieldsAppEvents: [FieldsAppEvents]?
 			public var fieldsBackgroundAssetVersions: [FieldsBackgroundAssetVersions]?
+			public var fieldsGameCenterAchievementVersions: [FieldsGameCenterAchievementVersions]?
+			public var fieldsGameCenterActivityVersions: [FieldsGameCenterActivityVersions]?
+			public var fieldsGameCenterChallengeVersions: [FieldsGameCenterChallengeVersions]?
+			public var fieldsGameCenterLeaderboardSetVersions: [FieldsGameCenterLeaderboardSetVersions]?
+			public var fieldsGameCenterLeaderboardVersions: [FieldsGameCenterLeaderboardVersions]?
 			public var limit: Int?
 			public var include: [Include]?
 
@@ -35,6 +40,11 @@ extension APIEndpoint.V1.ReviewSubmissions.WithID {
 				case appStoreVersionExperimentV2
 				case appEvent
 				case backgroundAssetVersion
+				case gameCenterAchievementVersion
+				case gameCenterActivityVersion
+				case gameCenterChallengeVersion
+				case gameCenterLeaderboardSetVersion
+				case gameCenterLeaderboardVersion
 			}
 
 			public enum FieldsAppStoreVersions: String, Codable, CaseIterable {
@@ -106,6 +116,7 @@ extension APIEndpoint.V1.ReviewSubmissions.WithID {
 				case createdDate
 				case platforms
 				case state
+				case stateDetails
 				case version
 				case backgroundAsset
 				case internalBetaRelease
@@ -116,6 +127,46 @@ extension APIEndpoint.V1.ReviewSubmissions.WithID {
 				case backgroundAssetUploadFiles
 			}
 
+			public enum FieldsGameCenterAchievementVersions: String, Codable, CaseIterable {
+				case version
+				case state
+				case achievement
+				case localizations
+			}
+
+			public enum FieldsGameCenterActivityVersions: String, Codable, CaseIterable {
+				case version
+				case state
+				case fallbackURL = "fallbackUrl"
+				case activity
+				case localizations
+				case defaultImage
+				case releases
+			}
+
+			public enum FieldsGameCenterChallengeVersions: String, Codable, CaseIterable {
+				case version
+				case state
+				case challenge
+				case localizations
+				case releases
+				case defaultImage
+			}
+
+			public enum FieldsGameCenterLeaderboardSetVersions: String, Codable, CaseIterable {
+				case version
+				case state
+				case leaderboardSet
+				case localizations
+			}
+
+			public enum FieldsGameCenterLeaderboardVersions: String, Codable, CaseIterable {
+				case version
+				case state
+				case leaderboard
+				case localizations
+			}
+
 			public enum Include: String, Codable, CaseIterable {
 				case appStoreVersion
 				case appCustomProductPageVersion
@@ -123,15 +174,25 @@ extension APIEndpoint.V1.ReviewSubmissions.WithID {
 				case appStoreVersionExperimentV2
 				case appEvent
 				case backgroundAssetVersion
+				case gameCenterAchievementVersion
+				case gameCenterActivityVersion
+				case gameCenterChallengeVersion
+				case gameCenterLeaderboardSetVersion
+				case gameCenterLeaderboardVersion
 			}
 
-			public init(fieldsReviewSubmissionItems: [FieldsReviewSubmissionItems]? = nil, fieldsAppStoreVersions: [FieldsAppStoreVersions]? = nil, fieldsAppCustomProductPageVersions: [FieldsAppCustomProductPageVersions]? = nil, fieldsAppStoreVersionExperiments: [FieldsAppStoreVersionExperiments]? = nil, fieldsAppEvents: [FieldsAppEvents]? = nil, fieldsBackgroundAssetVersions: [FieldsBackgroundAssetVersions]? = nil, limit: Int? = nil, include: [Include]? = nil) {
+			public init(fieldsReviewSubmissionItems: [FieldsReviewSubmissionItems]? = nil, fieldsAppStoreVersions: [FieldsAppStoreVersions]? = nil, fieldsAppCustomProductPageVersions: [FieldsAppCustomProductPageVersions]? = nil, fieldsAppStoreVersionExperiments: [FieldsAppStoreVersionExperiments]? = nil, fieldsAppEvents: [FieldsAppEvents]? = nil, fieldsBackgroundAssetVersions: [FieldsBackgroundAssetVersions]? = nil, fieldsGameCenterAchievementVersions: [FieldsGameCenterAchievementVersions]? = nil, fieldsGameCenterActivityVersions: [FieldsGameCenterActivityVersions]? = nil, fieldsGameCenterChallengeVersions: [FieldsGameCenterChallengeVersions]? = nil, fieldsGameCenterLeaderboardSetVersions: [FieldsGameCenterLeaderboardSetVersions]? = nil, fieldsGameCenterLeaderboardVersions: [FieldsGameCenterLeaderboardVersions]? = nil, limit: Int? = nil, include: [Include]? = nil) {
 				self.fieldsReviewSubmissionItems = fieldsReviewSubmissionItems
 				self.fieldsAppStoreVersions = fieldsAppStoreVersions
 				self.fieldsAppCustomProductPageVersions = fieldsAppCustomProductPageVersions
 				self.fieldsAppStoreVersionExperiments = fieldsAppStoreVersionExperiments
 				self.fieldsAppEvents = fieldsAppEvents
 				self.fieldsBackgroundAssetVersions = fieldsBackgroundAssetVersions
+				self.fieldsGameCenterAchievementVersions = fieldsGameCenterAchievementVersions
+				self.fieldsGameCenterActivityVersions = fieldsGameCenterActivityVersions
+				self.fieldsGameCenterChallengeVersions = fieldsGameCenterChallengeVersions
+				self.fieldsGameCenterLeaderboardSetVersions = fieldsGameCenterLeaderboardSetVersions
+				self.fieldsGameCenterLeaderboardVersions = fieldsGameCenterLeaderboardVersions
 				self.limit = limit
 				self.include = include
 			}
@@ -144,6 +205,11 @@ extension APIEndpoint.V1.ReviewSubmissions.WithID {
 				encoder.encode(fieldsAppStoreVersionExperiments, forKey: "fields[appStoreVersionExperiments]")
 				encoder.encode(fieldsAppEvents, forKey: "fields[appEvents]")
 				encoder.encode(fieldsBackgroundAssetVersions, forKey: "fields[backgroundAssetVersions]")
+				encoder.encode(fieldsGameCenterAchievementVersions, forKey: "fields[gameCenterAchievementVersions]")
+				encoder.encode(fieldsGameCenterActivityVersions, forKey: "fields[gameCenterActivityVersions]")
+				encoder.encode(fieldsGameCenterChallengeVersions, forKey: "fields[gameCenterChallengeVersions]")
+				encoder.encode(fieldsGameCenterLeaderboardSetVersions, forKey: "fields[gameCenterLeaderboardSetVersions]")
+				encoder.encode(fieldsGameCenterLeaderboardVersions, forKey: "fields[gameCenterLeaderboardVersions]")
 				encoder.encode(limit, forKey: "limit")
 				encoder.encode(include, forKey: "include")
 				return encoder.items
