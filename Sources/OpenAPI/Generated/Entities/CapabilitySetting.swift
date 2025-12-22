@@ -4,14 +4,14 @@
 import Foundation
 
 public struct CapabilitySetting: Codable {
-	public var key: Key?
-	public var name: String?
-	public var options: [CapabilityOption]?
-	public var isVisible: Bool?
-	public var allowedInstances: AllowedInstances?
-	public var isEnabledByDefault: Bool?
 	public var minInstances: Int?
 	public var description: String?
+	public var key: Key?
+	public var isVisible: Bool?
+	public var name: String?
+	public var options: [CapabilityOption]?
+	public var isEnabledByDefault: Bool?
+	public var allowedInstances: AllowedInstances?
 
 	public enum Key: String, Codable, CaseIterable {
 		case icloudVersion = "ICLOUD_VERSION"
@@ -25,38 +25,38 @@ public struct CapabilitySetting: Codable {
 		case multiple = "MULTIPLE"
 	}
 
-	public init(key: Key? = nil, name: String? = nil, options: [CapabilityOption]? = nil, isVisible: Bool? = nil, allowedInstances: AllowedInstances? = nil, isEnabledByDefault: Bool? = nil, minInstances: Int? = nil, description: String? = nil) {
-		self.key = key
-		self.name = name
-		self.options = options
-		self.isVisible = isVisible
-		self.allowedInstances = allowedInstances
-		self.isEnabledByDefault = isEnabledByDefault
+	public init(minInstances: Int? = nil, description: String? = nil, key: Key? = nil, isVisible: Bool? = nil, name: String? = nil, options: [CapabilityOption]? = nil, isEnabledByDefault: Bool? = nil, allowedInstances: AllowedInstances? = nil) {
 		self.minInstances = minInstances
 		self.description = description
+		self.key = key
+		self.isVisible = isVisible
+		self.name = name
+		self.options = options
+		self.isEnabledByDefault = isEnabledByDefault
+		self.allowedInstances = allowedInstances
 	}
 
 	public init(from decoder: Decoder) throws {
 		let values = try decoder.container(keyedBy: StringCodingKey.self)
-		self.key = try values.decodeIfPresent(Key.self, forKey: "key")
-		self.name = try values.decodeIfPresent(String.self, forKey: "name")
-		self.options = try values.decodeIfPresent([CapabilityOption].self, forKey: "options")
-		self.isVisible = try values.decodeIfPresent(Bool.self, forKey: "visible")
-		self.allowedInstances = try values.decodeIfPresent(AllowedInstances.self, forKey: "allowedInstances")
-		self.isEnabledByDefault = try values.decodeIfPresent(Bool.self, forKey: "enabledByDefault")
 		self.minInstances = try values.decodeIfPresent(Int.self, forKey: "minInstances")
 		self.description = try values.decodeIfPresent(String.self, forKey: "description")
+		self.key = try values.decodeIfPresent(Key.self, forKey: "key")
+		self.isVisible = try values.decodeIfPresent(Bool.self, forKey: "visible")
+		self.name = try values.decodeIfPresent(String.self, forKey: "name")
+		self.options = try values.decodeIfPresent([CapabilityOption].self, forKey: "options")
+		self.isEnabledByDefault = try values.decodeIfPresent(Bool.self, forKey: "enabledByDefault")
+		self.allowedInstances = try values.decodeIfPresent(AllowedInstances.self, forKey: "allowedInstances")
 	}
 
 	public func encode(to encoder: Encoder) throws {
 		var values = encoder.container(keyedBy: StringCodingKey.self)
-		try values.encodeIfPresent(key, forKey: "key")
-		try values.encodeIfPresent(name, forKey: "name")
-		try values.encodeIfPresent(options, forKey: "options")
-		try values.encodeIfPresent(isVisible, forKey: "visible")
-		try values.encodeIfPresent(allowedInstances, forKey: "allowedInstances")
-		try values.encodeIfPresent(isEnabledByDefault, forKey: "enabledByDefault")
 		try values.encodeIfPresent(minInstances, forKey: "minInstances")
 		try values.encodeIfPresent(description, forKey: "description")
+		try values.encodeIfPresent(key, forKey: "key")
+		try values.encodeIfPresent(isVisible, forKey: "visible")
+		try values.encodeIfPresent(name, forKey: "name")
+		try values.encodeIfPresent(options, forKey: "options")
+		try values.encodeIfPresent(isEnabledByDefault, forKey: "enabledByDefault")
+		try values.encodeIfPresent(allowedInstances, forKey: "allowedInstances")
 	}
 }

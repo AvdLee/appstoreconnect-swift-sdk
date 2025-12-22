@@ -4,8 +4,8 @@
 import Foundation
 
 public struct SubscriptionPromotionalOfferPricesResponse: Codable {
-	public var included: [IncludedItem]?
 	public var meta: PagingInformation?
+	public var included: [IncludedItem]?
 	public var links: PagedDocumentLinks
 	public var data: [SubscriptionPromotionalOfferPrice]
 
@@ -43,25 +43,25 @@ public struct SubscriptionPromotionalOfferPricesResponse: Codable {
 		}
 	}
 
-	public init(included: [IncludedItem]? = nil, meta: PagingInformation? = nil, links: PagedDocumentLinks, data: [SubscriptionPromotionalOfferPrice]) {
-		self.included = included
+	public init(meta: PagingInformation? = nil, included: [IncludedItem]? = nil, links: PagedDocumentLinks, data: [SubscriptionPromotionalOfferPrice]) {
 		self.meta = meta
+		self.included = included
 		self.links = links
 		self.data = data
 	}
 
 	public init(from decoder: Decoder) throws {
 		let values = try decoder.container(keyedBy: StringCodingKey.self)
-		self.included = try values.decodeIfPresent([IncludedItem].self, forKey: "included")
 		self.meta = try values.decodeIfPresent(PagingInformation.self, forKey: "meta")
+		self.included = try values.decodeIfPresent([IncludedItem].self, forKey: "included")
 		self.links = try values.decode(PagedDocumentLinks.self, forKey: "links")
 		self.data = try values.decode([SubscriptionPromotionalOfferPrice].self, forKey: "data")
 	}
 
 	public func encode(to encoder: Encoder) throws {
 		var values = encoder.container(keyedBy: StringCodingKey.self)
-		try values.encodeIfPresent(included, forKey: "included")
 		try values.encodeIfPresent(meta, forKey: "meta")
+		try values.encodeIfPresent(included, forKey: "included")
 		try values.encode(links, forKey: "links")
 		try values.encode(data, forKey: "data")
 	}

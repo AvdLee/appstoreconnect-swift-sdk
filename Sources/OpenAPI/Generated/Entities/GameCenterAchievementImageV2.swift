@@ -4,11 +4,15 @@
 import Foundation
 
 public struct GameCenterAchievementImageV2: Codable, Identifiable {
-	public var relationships: Relationships?
 	public var id: String
-	public var links: ResourceLinks?
 	public var type: `Type`
+	public var relationships: Relationships?
+	public var links: ResourceLinks?
 	public var attributes: Attributes?
+
+	public enum `Type`: String, Codable, CaseIterable {
+		case gameCenterAchievementImages
+	}
 
 	public struct Relationships: Codable {
 		public var localization: Localization?
@@ -17,28 +21,28 @@ public struct GameCenterAchievementImageV2: Codable, Identifiable {
 			public var data: Data?
 
 			public struct Data: Codable, Identifiable {
-				public var type: `Type`
 				public var id: String
+				public var type: `Type`
 
 				public enum `Type`: String, Codable, CaseIterable {
 					case gameCenterAchievementLocalizations
 				}
 
-				public init(type: `Type`, id: String) {
-					self.type = type
+				public init(id: String, type: `Type`) {
 					self.id = id
+					self.type = type
 				}
 
 				public init(from decoder: Decoder) throws {
 					let values = try decoder.container(keyedBy: StringCodingKey.self)
-					self.type = try values.decode(`Type`.self, forKey: "type")
 					self.id = try values.decode(String.self, forKey: "id")
+					self.type = try values.decode(`Type`.self, forKey: "type")
 				}
 
 				public func encode(to encoder: Encoder) throws {
 					var values = encoder.container(keyedBy: StringCodingKey.self)
-					try values.encode(type, forKey: "type")
 					try values.encode(id, forKey: "id")
+					try values.encode(type, forKey: "type")
 				}
 			}
 
@@ -72,67 +76,63 @@ public struct GameCenterAchievementImageV2: Codable, Identifiable {
 		}
 	}
 
-	public enum `Type`: String, Codable, CaseIterable {
-		case gameCenterAchievementImages
-	}
-
 	public struct Attributes: Codable {
-		public var uploadOperations: [UploadOperation]?
 		public var fileName: String?
-		public var assetDeliveryState: AppMediaAssetState?
-		public var fileSize: Int?
 		public var imageAsset: ImageAsset?
+		public var assetDeliveryState: AppMediaAssetState?
+		public var uploadOperations: [UploadOperation]?
+		public var fileSize: Int?
 
-		public init(uploadOperations: [UploadOperation]? = nil, fileName: String? = nil, assetDeliveryState: AppMediaAssetState? = nil, fileSize: Int? = nil, imageAsset: ImageAsset? = nil) {
-			self.uploadOperations = uploadOperations
+		public init(fileName: String? = nil, imageAsset: ImageAsset? = nil, assetDeliveryState: AppMediaAssetState? = nil, uploadOperations: [UploadOperation]? = nil, fileSize: Int? = nil) {
 			self.fileName = fileName
-			self.assetDeliveryState = assetDeliveryState
-			self.fileSize = fileSize
 			self.imageAsset = imageAsset
+			self.assetDeliveryState = assetDeliveryState
+			self.uploadOperations = uploadOperations
+			self.fileSize = fileSize
 		}
 
 		public init(from decoder: Decoder) throws {
 			let values = try decoder.container(keyedBy: StringCodingKey.self)
-			self.uploadOperations = try values.decodeIfPresent([UploadOperation].self, forKey: "uploadOperations")
 			self.fileName = try values.decodeIfPresent(String.self, forKey: "fileName")
-			self.assetDeliveryState = try values.decodeIfPresent(AppMediaAssetState.self, forKey: "assetDeliveryState")
-			self.fileSize = try values.decodeIfPresent(Int.self, forKey: "fileSize")
 			self.imageAsset = try values.decodeIfPresent(ImageAsset.self, forKey: "imageAsset")
+			self.assetDeliveryState = try values.decodeIfPresent(AppMediaAssetState.self, forKey: "assetDeliveryState")
+			self.uploadOperations = try values.decodeIfPresent([UploadOperation].self, forKey: "uploadOperations")
+			self.fileSize = try values.decodeIfPresent(Int.self, forKey: "fileSize")
 		}
 
 		public func encode(to encoder: Encoder) throws {
 			var values = encoder.container(keyedBy: StringCodingKey.self)
-			try values.encodeIfPresent(uploadOperations, forKey: "uploadOperations")
 			try values.encodeIfPresent(fileName, forKey: "fileName")
-			try values.encodeIfPresent(assetDeliveryState, forKey: "assetDeliveryState")
-			try values.encodeIfPresent(fileSize, forKey: "fileSize")
 			try values.encodeIfPresent(imageAsset, forKey: "imageAsset")
+			try values.encodeIfPresent(assetDeliveryState, forKey: "assetDeliveryState")
+			try values.encodeIfPresent(uploadOperations, forKey: "uploadOperations")
+			try values.encodeIfPresent(fileSize, forKey: "fileSize")
 		}
 	}
 
-	public init(relationships: Relationships? = nil, id: String, links: ResourceLinks? = nil, type: `Type`, attributes: Attributes? = nil) {
-		self.relationships = relationships
+	public init(id: String, type: `Type`, relationships: Relationships? = nil, links: ResourceLinks? = nil, attributes: Attributes? = nil) {
 		self.id = id
-		self.links = links
 		self.type = type
+		self.relationships = relationships
+		self.links = links
 		self.attributes = attributes
 	}
 
 	public init(from decoder: Decoder) throws {
 		let values = try decoder.container(keyedBy: StringCodingKey.self)
-		self.relationships = try values.decodeIfPresent(Relationships.self, forKey: "relationships")
 		self.id = try values.decode(String.self, forKey: "id")
-		self.links = try values.decodeIfPresent(ResourceLinks.self, forKey: "links")
 		self.type = try values.decode(`Type`.self, forKey: "type")
+		self.relationships = try values.decodeIfPresent(Relationships.self, forKey: "relationships")
+		self.links = try values.decodeIfPresent(ResourceLinks.self, forKey: "links")
 		self.attributes = try values.decodeIfPresent(Attributes.self, forKey: "attributes")
 	}
 
 	public func encode(to encoder: Encoder) throws {
 		var values = encoder.container(keyedBy: StringCodingKey.self)
-		try values.encodeIfPresent(relationships, forKey: "relationships")
 		try values.encode(id, forKey: "id")
-		try values.encodeIfPresent(links, forKey: "links")
 		try values.encode(type, forKey: "type")
+		try values.encodeIfPresent(relationships, forKey: "relationships")
+		try values.encodeIfPresent(links, forKey: "links")
 		try values.encodeIfPresent(attributes, forKey: "attributes")
 	}
 }

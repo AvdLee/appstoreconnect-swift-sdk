@@ -7,18 +7,14 @@ public struct CiBuildRunCreateRequest: Codable {
 	public var data: Data
 
 	public struct Data: Codable {
-		public var type: `Type`
 		public var relationships: Relationships?
+		public var type: `Type`
 		public var attributes: Attributes?
-
-		public enum `Type`: String, Codable, CaseIterable {
-			case ciBuildRuns
-		}
 
 		public struct Relationships: Codable {
 			public var buildRun: BuildRun?
-			public var sourceBranchOrTag: SourceBranchOrTag?
 			public var workflow: Workflow?
+			public var sourceBranchOrTag: SourceBranchOrTag?
 			public var pullRequest: PullRequest?
 
 			public struct BuildRun: Codable {
@@ -30,6 +26,50 @@ public struct CiBuildRunCreateRequest: Codable {
 
 					public enum `Type`: String, Codable, CaseIterable {
 						case ciBuildRuns
+					}
+
+					public init(id: String, type: `Type`) {
+						self.id = id
+						self.type = type
+					}
+
+					public init(from decoder: Decoder) throws {
+						let values = try decoder.container(keyedBy: StringCodingKey.self)
+						self.id = try values.decode(String.self, forKey: "id")
+						self.type = try values.decode(`Type`.self, forKey: "type")
+					}
+
+					public func encode(to encoder: Encoder) throws {
+						var values = encoder.container(keyedBy: StringCodingKey.self)
+						try values.encode(id, forKey: "id")
+						try values.encode(type, forKey: "type")
+					}
+				}
+
+				public init(data: Data? = nil) {
+					self.data = data
+				}
+
+				public init(from decoder: Decoder) throws {
+					let values = try decoder.container(keyedBy: StringCodingKey.self)
+					self.data = try values.decodeIfPresent(Data.self, forKey: "data")
+				}
+
+				public func encode(to encoder: Encoder) throws {
+					var values = encoder.container(keyedBy: StringCodingKey.self)
+					try values.encodeIfPresent(data, forKey: "data")
+				}
+			}
+
+			public struct Workflow: Codable {
+				public var data: Data?
+
+				public struct Data: Codable, Identifiable {
+					public var id: String
+					public var type: `Type`
+
+					public enum `Type`: String, Codable, CaseIterable {
+						case ciWorkflows
 					}
 
 					public init(id: String, type: `Type`) {
@@ -109,50 +149,6 @@ public struct CiBuildRunCreateRequest: Codable {
 				}
 			}
 
-			public struct Workflow: Codable {
-				public var data: Data?
-
-				public struct Data: Codable, Identifiable {
-					public var id: String
-					public var type: `Type`
-
-					public enum `Type`: String, Codable, CaseIterable {
-						case ciWorkflows
-					}
-
-					public init(id: String, type: `Type`) {
-						self.id = id
-						self.type = type
-					}
-
-					public init(from decoder: Decoder) throws {
-						let values = try decoder.container(keyedBy: StringCodingKey.self)
-						self.id = try values.decode(String.self, forKey: "id")
-						self.type = try values.decode(`Type`.self, forKey: "type")
-					}
-
-					public func encode(to encoder: Encoder) throws {
-						var values = encoder.container(keyedBy: StringCodingKey.self)
-						try values.encode(id, forKey: "id")
-						try values.encode(type, forKey: "type")
-					}
-				}
-
-				public init(data: Data? = nil) {
-					self.data = data
-				}
-
-				public init(from decoder: Decoder) throws {
-					let values = try decoder.container(keyedBy: StringCodingKey.self)
-					self.data = try values.decodeIfPresent(Data.self, forKey: "data")
-				}
-
-				public func encode(to encoder: Encoder) throws {
-					var values = encoder.container(keyedBy: StringCodingKey.self)
-					try values.encodeIfPresent(data, forKey: "data")
-				}
-			}
-
 			public struct PullRequest: Codable {
 				public var data: Data?
 
@@ -197,28 +193,32 @@ public struct CiBuildRunCreateRequest: Codable {
 				}
 			}
 
-			public init(buildRun: BuildRun? = nil, sourceBranchOrTag: SourceBranchOrTag? = nil, workflow: Workflow? = nil, pullRequest: PullRequest? = nil) {
+			public init(buildRun: BuildRun? = nil, workflow: Workflow? = nil, sourceBranchOrTag: SourceBranchOrTag? = nil, pullRequest: PullRequest? = nil) {
 				self.buildRun = buildRun
-				self.sourceBranchOrTag = sourceBranchOrTag
 				self.workflow = workflow
+				self.sourceBranchOrTag = sourceBranchOrTag
 				self.pullRequest = pullRequest
 			}
 
 			public init(from decoder: Decoder) throws {
 				let values = try decoder.container(keyedBy: StringCodingKey.self)
 				self.buildRun = try values.decodeIfPresent(BuildRun.self, forKey: "buildRun")
-				self.sourceBranchOrTag = try values.decodeIfPresent(SourceBranchOrTag.self, forKey: "sourceBranchOrTag")
 				self.workflow = try values.decodeIfPresent(Workflow.self, forKey: "workflow")
+				self.sourceBranchOrTag = try values.decodeIfPresent(SourceBranchOrTag.self, forKey: "sourceBranchOrTag")
 				self.pullRequest = try values.decodeIfPresent(PullRequest.self, forKey: "pullRequest")
 			}
 
 			public func encode(to encoder: Encoder) throws {
 				var values = encoder.container(keyedBy: StringCodingKey.self)
 				try values.encodeIfPresent(buildRun, forKey: "buildRun")
-				try values.encodeIfPresent(sourceBranchOrTag, forKey: "sourceBranchOrTag")
 				try values.encodeIfPresent(workflow, forKey: "workflow")
+				try values.encodeIfPresent(sourceBranchOrTag, forKey: "sourceBranchOrTag")
 				try values.encodeIfPresent(pullRequest, forKey: "pullRequest")
 			}
+		}
+
+		public enum `Type`: String, Codable, CaseIterable {
+			case ciBuildRuns
 		}
 
 		public struct Attributes: Codable {
@@ -239,23 +239,23 @@ public struct CiBuildRunCreateRequest: Codable {
 			}
 		}
 
-		public init(type: `Type`, relationships: Relationships? = nil, attributes: Attributes? = nil) {
-			self.type = type
+		public init(relationships: Relationships? = nil, type: `Type`, attributes: Attributes? = nil) {
 			self.relationships = relationships
+			self.type = type
 			self.attributes = attributes
 		}
 
 		public init(from decoder: Decoder) throws {
 			let values = try decoder.container(keyedBy: StringCodingKey.self)
-			self.type = try values.decode(`Type`.self, forKey: "type")
 			self.relationships = try values.decodeIfPresent(Relationships.self, forKey: "relationships")
+			self.type = try values.decode(`Type`.self, forKey: "type")
 			self.attributes = try values.decodeIfPresent(Attributes.self, forKey: "attributes")
 		}
 
 		public func encode(to encoder: Encoder) throws {
 			var values = encoder.container(keyedBy: StringCodingKey.self)
-			try values.encode(type, forKey: "type")
 			try values.encodeIfPresent(relationships, forKey: "relationships")
+			try values.encode(type, forKey: "type")
 			try values.encodeIfPresent(attributes, forKey: "attributes")
 		}
 	}

@@ -7,29 +7,29 @@ public struct SubscriptionGroupLocalizationUpdateRequest: Codable {
 	public var data: Data
 
 	public struct Data: Codable, Identifiable {
-		public var id: String
 		public var attributes: Attributes?
 		public var type: `Type`
+		public var id: String
 
 		public struct Attributes: Codable {
-			public var name: String?
 			public var customAppName: String?
+			public var name: String?
 
-			public init(name: String? = nil, customAppName: String? = nil) {
-				self.name = name
+			public init(customAppName: String? = nil, name: String? = nil) {
 				self.customAppName = customAppName
+				self.name = name
 			}
 
 			public init(from decoder: Decoder) throws {
 				let values = try decoder.container(keyedBy: StringCodingKey.self)
-				self.name = try values.decodeIfPresent(String.self, forKey: "name")
 				self.customAppName = try values.decodeIfPresent(String.self, forKey: "customAppName")
+				self.name = try values.decodeIfPresent(String.self, forKey: "name")
 			}
 
 			public func encode(to encoder: Encoder) throws {
 				var values = encoder.container(keyedBy: StringCodingKey.self)
-				try values.encodeIfPresent(name, forKey: "name")
 				try values.encodeIfPresent(customAppName, forKey: "customAppName")
+				try values.encodeIfPresent(name, forKey: "name")
 			}
 		}
 
@@ -37,24 +37,24 @@ public struct SubscriptionGroupLocalizationUpdateRequest: Codable {
 			case subscriptionGroupLocalizations
 		}
 
-		public init(id: String, attributes: Attributes? = nil, type: `Type`) {
-			self.id = id
+		public init(attributes: Attributes? = nil, type: `Type`, id: String) {
 			self.attributes = attributes
 			self.type = type
+			self.id = id
 		}
 
 		public init(from decoder: Decoder) throws {
 			let values = try decoder.container(keyedBy: StringCodingKey.self)
-			self.id = try values.decode(String.self, forKey: "id")
 			self.attributes = try values.decodeIfPresent(Attributes.self, forKey: "attributes")
 			self.type = try values.decode(`Type`.self, forKey: "type")
+			self.id = try values.decode(String.self, forKey: "id")
 		}
 
 		public func encode(to encoder: Encoder) throws {
 			var values = encoder.container(keyedBy: StringCodingKey.self)
-			try values.encode(id, forKey: "id")
 			try values.encodeIfPresent(attributes, forKey: "attributes")
 			try values.encode(type, forKey: "type")
+			try values.encode(id, forKey: "id")
 		}
 	}
 

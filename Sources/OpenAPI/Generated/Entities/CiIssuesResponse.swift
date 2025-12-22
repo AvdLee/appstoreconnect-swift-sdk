@@ -5,26 +5,26 @@ import Foundation
 
 public struct CiIssuesResponse: Codable {
 	public var meta: PagingInformation?
-	public var data: [CiIssue]
 	public var links: PagedDocumentLinks
+	public var data: [CiIssue]
 
-	public init(meta: PagingInformation? = nil, data: [CiIssue], links: PagedDocumentLinks) {
+	public init(meta: PagingInformation? = nil, links: PagedDocumentLinks, data: [CiIssue]) {
 		self.meta = meta
-		self.data = data
 		self.links = links
+		self.data = data
 	}
 
 	public init(from decoder: Decoder) throws {
 		let values = try decoder.container(keyedBy: StringCodingKey.self)
 		self.meta = try values.decodeIfPresent(PagingInformation.self, forKey: "meta")
-		self.data = try values.decode([CiIssue].self, forKey: "data")
 		self.links = try values.decode(PagedDocumentLinks.self, forKey: "links")
+		self.data = try values.decode([CiIssue].self, forKey: "data")
 	}
 
 	public func encode(to encoder: Encoder) throws {
 		var values = encoder.container(keyedBy: StringCodingKey.self)
 		try values.encodeIfPresent(meta, forKey: "meta")
-		try values.encode(data, forKey: "data")
 		try values.encode(links, forKey: "links")
+		try values.encode(data, forKey: "data")
 	}
 }

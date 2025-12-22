@@ -13,8 +13,8 @@ public struct InAppPurchaseOfferCodeCreateRequest: Codable {
 		public var type: `Type`
 
 		public struct Attributes: Codable {
-			public var customerEligibilities: [CustomerEligibility]
 			public var name: String
+			public var customerEligibilities: [CustomerEligibility]
 
 			public enum CustomerEligibility: String, Codable, CaseIterable {
 				case nonSpender = "NON_SPENDER"
@@ -22,21 +22,21 @@ public struct InAppPurchaseOfferCodeCreateRequest: Codable {
 				case churnedSpender = "CHURNED_SPENDER"
 			}
 
-			public init(customerEligibilities: [CustomerEligibility], name: String) {
-				self.customerEligibilities = customerEligibilities
+			public init(name: String, customerEligibilities: [CustomerEligibility]) {
 				self.name = name
+				self.customerEligibilities = customerEligibilities
 			}
 
 			public init(from decoder: Decoder) throws {
 				let values = try decoder.container(keyedBy: StringCodingKey.self)
-				self.customerEligibilities = try values.decode([CustomerEligibility].self, forKey: "customerEligibilities")
 				self.name = try values.decode(String.self, forKey: "name")
+				self.customerEligibilities = try values.decode([CustomerEligibility].self, forKey: "customerEligibilities")
 			}
 
 			public func encode(to encoder: Encoder) throws {
 				var values = encoder.container(keyedBy: StringCodingKey.self)
-				try values.encode(customerEligibilities, forKey: "customerEligibilities")
 				try values.encode(name, forKey: "name")
+				try values.encode(customerEligibilities, forKey: "customerEligibilities")
 			}
 		}
 
@@ -48,28 +48,28 @@ public struct InAppPurchaseOfferCodeCreateRequest: Codable {
 				public var data: Data
 
 				public struct Data: Codable, Identifiable {
-					public var id: String
 					public var type: `Type`
+					public var id: String
 
 					public enum `Type`: String, Codable, CaseIterable {
 						case inAppPurchases
 					}
 
-					public init(id: String, type: `Type`) {
-						self.id = id
+					public init(type: `Type`, id: String) {
 						self.type = type
+						self.id = id
 					}
 
 					public init(from decoder: Decoder) throws {
 						let values = try decoder.container(keyedBy: StringCodingKey.self)
-						self.id = try values.decode(String.self, forKey: "id")
 						self.type = try values.decode(`Type`.self, forKey: "type")
+						self.id = try values.decode(String.self, forKey: "id")
 					}
 
 					public func encode(to encoder: Encoder) throws {
 						var values = encoder.container(keyedBy: StringCodingKey.self)
-						try values.encode(id, forKey: "id")
 						try values.encode(type, forKey: "type")
+						try values.encode(id, forKey: "id")
 					}
 				}
 

@@ -4,10 +4,10 @@
 import Foundation
 
 public struct GameCenterMatchmakingRuleSetsResponse: Codable {
+	public var included: [IncludedItem]?
 	public var meta: PagingInformation?
 	public var links: PagedDocumentLinks
 	public var data: [GameCenterMatchmakingRuleSet]
-	public var included: [IncludedItem]?
 
 	public enum IncludedItem: Codable {
 		case gameCenterMatchmakingQueue(GameCenterMatchmakingQueue)
@@ -46,26 +46,26 @@ public struct GameCenterMatchmakingRuleSetsResponse: Codable {
 		}
 	}
 
-	public init(meta: PagingInformation? = nil, links: PagedDocumentLinks, data: [GameCenterMatchmakingRuleSet], included: [IncludedItem]? = nil) {
+	public init(included: [IncludedItem]? = nil, meta: PagingInformation? = nil, links: PagedDocumentLinks, data: [GameCenterMatchmakingRuleSet]) {
+		self.included = included
 		self.meta = meta
 		self.links = links
 		self.data = data
-		self.included = included
 	}
 
 	public init(from decoder: Decoder) throws {
 		let values = try decoder.container(keyedBy: StringCodingKey.self)
+		self.included = try values.decodeIfPresent([IncludedItem].self, forKey: "included")
 		self.meta = try values.decodeIfPresent(PagingInformation.self, forKey: "meta")
 		self.links = try values.decode(PagedDocumentLinks.self, forKey: "links")
 		self.data = try values.decode([GameCenterMatchmakingRuleSet].self, forKey: "data")
-		self.included = try values.decodeIfPresent([IncludedItem].self, forKey: "included")
 	}
 
 	public func encode(to encoder: Encoder) throws {
 		var values = encoder.container(keyedBy: StringCodingKey.self)
+		try values.encodeIfPresent(included, forKey: "included")
 		try values.encodeIfPresent(meta, forKey: "meta")
 		try values.encode(links, forKey: "links")
 		try values.encode(data, forKey: "data")
-		try values.encodeIfPresent(included, forKey: "included")
 	}
 }

@@ -5,44 +5,40 @@ import Foundation
 
 public struct AppTag: Codable, Identifiable {
 	public var attributes: Attributes?
-	public var type: `Type`
-	public var id: String
-	public var links: ResourceLinks?
 	public var relationships: Relationships?
+	public var type: `Type`
+	public var links: ResourceLinks?
+	public var id: String
 
 	public struct Attributes: Codable {
-		public var isVisibleInAppStore: Bool?
 		public var name: String?
+		public var isVisibleInAppStore: Bool?
 
-		public init(isVisibleInAppStore: Bool? = nil, name: String? = nil) {
-			self.isVisibleInAppStore = isVisibleInAppStore
+		public init(name: String? = nil, isVisibleInAppStore: Bool? = nil) {
 			self.name = name
+			self.isVisibleInAppStore = isVisibleInAppStore
 		}
 
 		public init(from decoder: Decoder) throws {
 			let values = try decoder.container(keyedBy: StringCodingKey.self)
-			self.isVisibleInAppStore = try values.decodeIfPresent(Bool.self, forKey: "visibleInAppStore")
 			self.name = try values.decodeIfPresent(String.self, forKey: "name")
+			self.isVisibleInAppStore = try values.decodeIfPresent(Bool.self, forKey: "visibleInAppStore")
 		}
 
 		public func encode(to encoder: Encoder) throws {
 			var values = encoder.container(keyedBy: StringCodingKey.self)
-			try values.encodeIfPresent(isVisibleInAppStore, forKey: "visibleInAppStore")
 			try values.encodeIfPresent(name, forKey: "name")
+			try values.encodeIfPresent(isVisibleInAppStore, forKey: "visibleInAppStore")
 		}
-	}
-
-	public enum `Type`: String, Codable, CaseIterable {
-		case appTags
 	}
 
 	public struct Relationships: Codable {
 		public var territories: Territories?
 
 		public struct Territories: Codable {
-			public var data: [Datum]?
 			public var meta: PagingInformation?
 			public var links: RelationshipLinks?
+			public var data: [Datum]?
 
 			public struct Datum: Codable, Identifiable {
 				public var type: `Type`
@@ -70,24 +66,24 @@ public struct AppTag: Codable, Identifiable {
 				}
 			}
 
-			public init(data: [Datum]? = nil, meta: PagingInformation? = nil, links: RelationshipLinks? = nil) {
-				self.data = data
+			public init(meta: PagingInformation? = nil, links: RelationshipLinks? = nil, data: [Datum]? = nil) {
 				self.meta = meta
 				self.links = links
+				self.data = data
 			}
 
 			public init(from decoder: Decoder) throws {
 				let values = try decoder.container(keyedBy: StringCodingKey.self)
-				self.data = try values.decodeIfPresent([Datum].self, forKey: "data")
 				self.meta = try values.decodeIfPresent(PagingInformation.self, forKey: "meta")
 				self.links = try values.decodeIfPresent(RelationshipLinks.self, forKey: "links")
+				self.data = try values.decodeIfPresent([Datum].self, forKey: "data")
 			}
 
 			public func encode(to encoder: Encoder) throws {
 				var values = encoder.container(keyedBy: StringCodingKey.self)
-				try values.encodeIfPresent(data, forKey: "data")
 				try values.encodeIfPresent(meta, forKey: "meta")
 				try values.encodeIfPresent(links, forKey: "links")
+				try values.encodeIfPresent(data, forKey: "data")
 			}
 		}
 
@@ -106,29 +102,33 @@ public struct AppTag: Codable, Identifiable {
 		}
 	}
 
-	public init(attributes: Attributes? = nil, type: `Type`, id: String, links: ResourceLinks? = nil, relationships: Relationships? = nil) {
+	public enum `Type`: String, Codable, CaseIterable {
+		case appTags
+	}
+
+	public init(attributes: Attributes? = nil, relationships: Relationships? = nil, type: `Type`, links: ResourceLinks? = nil, id: String) {
 		self.attributes = attributes
-		self.type = type
-		self.id = id
-		self.links = links
 		self.relationships = relationships
+		self.type = type
+		self.links = links
+		self.id = id
 	}
 
 	public init(from decoder: Decoder) throws {
 		let values = try decoder.container(keyedBy: StringCodingKey.self)
 		self.attributes = try values.decodeIfPresent(Attributes.self, forKey: "attributes")
-		self.type = try values.decode(`Type`.self, forKey: "type")
-		self.id = try values.decode(String.self, forKey: "id")
-		self.links = try values.decodeIfPresent(ResourceLinks.self, forKey: "links")
 		self.relationships = try values.decodeIfPresent(Relationships.self, forKey: "relationships")
+		self.type = try values.decode(`Type`.self, forKey: "type")
+		self.links = try values.decodeIfPresent(ResourceLinks.self, forKey: "links")
+		self.id = try values.decode(String.self, forKey: "id")
 	}
 
 	public func encode(to encoder: Encoder) throws {
 		var values = encoder.container(keyedBy: StringCodingKey.self)
 		try values.encodeIfPresent(attributes, forKey: "attributes")
-		try values.encode(type, forKey: "type")
-		try values.encode(id, forKey: "id")
-		try values.encodeIfPresent(links, forKey: "links")
 		try values.encodeIfPresent(relationships, forKey: "relationships")
+		try values.encode(type, forKey: "type")
+		try values.encodeIfPresent(links, forKey: "links")
+		try values.encode(id, forKey: "id")
 	}
 }

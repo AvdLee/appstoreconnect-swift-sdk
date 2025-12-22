@@ -4,27 +4,27 @@
 import Foundation
 
 public struct BuildIconsResponse: Codable {
-	public var data: [BuildIcon]
 	public var meta: PagingInformation?
 	public var links: PagedDocumentLinks
+	public var data: [BuildIcon]
 
-	public init(data: [BuildIcon], meta: PagingInformation? = nil, links: PagedDocumentLinks) {
-		self.data = data
+	public init(meta: PagingInformation? = nil, links: PagedDocumentLinks, data: [BuildIcon]) {
 		self.meta = meta
 		self.links = links
+		self.data = data
 	}
 
 	public init(from decoder: Decoder) throws {
 		let values = try decoder.container(keyedBy: StringCodingKey.self)
-		self.data = try values.decode([BuildIcon].self, forKey: "data")
 		self.meta = try values.decodeIfPresent(PagingInformation.self, forKey: "meta")
 		self.links = try values.decode(PagedDocumentLinks.self, forKey: "links")
+		self.data = try values.decode([BuildIcon].self, forKey: "data")
 	}
 
 	public func encode(to encoder: Encoder) throws {
 		var values = encoder.container(keyedBy: StringCodingKey.self)
-		try values.encode(data, forKey: "data")
 		try values.encodeIfPresent(meta, forKey: "meta")
 		try values.encode(links, forKey: "links")
+		try values.encode(data, forKey: "data")
 	}
 }

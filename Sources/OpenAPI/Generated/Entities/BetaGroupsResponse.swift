@@ -5,8 +5,8 @@ import Foundation
 
 public struct BetaGroupsResponse: Codable {
 	public var links: PagedDocumentLinks
-	public var included: [IncludedItem]?
 	public var data: [BetaGroup]
+	public var included: [IncludedItem]?
 	public var meta: PagingInformation?
 
 	public enum IncludedItem: Codable {
@@ -49,26 +49,26 @@ public struct BetaGroupsResponse: Codable {
 		}
 	}
 
-	public init(links: PagedDocumentLinks, included: [IncludedItem]? = nil, data: [BetaGroup], meta: PagingInformation? = nil) {
+	public init(links: PagedDocumentLinks, data: [BetaGroup], included: [IncludedItem]? = nil, meta: PagingInformation? = nil) {
 		self.links = links
-		self.included = included
 		self.data = data
+		self.included = included
 		self.meta = meta
 	}
 
 	public init(from decoder: Decoder) throws {
 		let values = try decoder.container(keyedBy: StringCodingKey.self)
 		self.links = try values.decode(PagedDocumentLinks.self, forKey: "links")
-		self.included = try values.decodeIfPresent([IncludedItem].self, forKey: "included")
 		self.data = try values.decode([BetaGroup].self, forKey: "data")
+		self.included = try values.decodeIfPresent([IncludedItem].self, forKey: "included")
 		self.meta = try values.decodeIfPresent(PagingInformation.self, forKey: "meta")
 	}
 
 	public func encode(to encoder: Encoder) throws {
 		var values = encoder.container(keyedBy: StringCodingKey.self)
 		try values.encode(links, forKey: "links")
-		try values.encodeIfPresent(included, forKey: "included")
 		try values.encode(data, forKey: "data")
+		try values.encodeIfPresent(included, forKey: "included")
 		try values.encodeIfPresent(meta, forKey: "meta")
 	}
 }

@@ -4,19 +4,46 @@
 import Foundation
 
 public struct AnalyticsReportRequest: Codable, Identifiable {
+	public var id: String
+	public var attributes: Attributes?
 	public var relationships: Relationships?
 	public var links: ResourceLinks?
-	public var attributes: Attributes?
 	public var type: `Type`
-	public var id: String
+
+	public struct Attributes: Codable {
+		public var isStoppedDueToInactivity: Bool?
+		public var accessType: AccessType?
+
+		public enum AccessType: String, Codable, CaseIterable {
+			case oneTimeSnapshot = "ONE_TIME_SNAPSHOT"
+			case ongoing = "ONGOING"
+		}
+
+		public init(isStoppedDueToInactivity: Bool? = nil, accessType: AccessType? = nil) {
+			self.isStoppedDueToInactivity = isStoppedDueToInactivity
+			self.accessType = accessType
+		}
+
+		public init(from decoder: Decoder) throws {
+			let values = try decoder.container(keyedBy: StringCodingKey.self)
+			self.isStoppedDueToInactivity = try values.decodeIfPresent(Bool.self, forKey: "stoppedDueToInactivity")
+			self.accessType = try values.decodeIfPresent(AccessType.self, forKey: "accessType")
+		}
+
+		public func encode(to encoder: Encoder) throws {
+			var values = encoder.container(keyedBy: StringCodingKey.self)
+			try values.encodeIfPresent(isStoppedDueToInactivity, forKey: "stoppedDueToInactivity")
+			try values.encodeIfPresent(accessType, forKey: "accessType")
+		}
+	}
 
 	public struct Relationships: Codable {
 		public var reports: Reports?
 
 		public struct Reports: Codable {
 			public var data: [Datum]?
-			public var links: RelationshipLinks?
 			public var meta: PagingInformation?
+			public var links: RelationshipLinks?
 
 			public struct Datum: Codable, Identifiable {
 				public var id: String
@@ -44,24 +71,24 @@ public struct AnalyticsReportRequest: Codable, Identifiable {
 				}
 			}
 
-			public init(data: [Datum]? = nil, links: RelationshipLinks? = nil, meta: PagingInformation? = nil) {
+			public init(data: [Datum]? = nil, meta: PagingInformation? = nil, links: RelationshipLinks? = nil) {
 				self.data = data
-				self.links = links
 				self.meta = meta
+				self.links = links
 			}
 
 			public init(from decoder: Decoder) throws {
 				let values = try decoder.container(keyedBy: StringCodingKey.self)
 				self.data = try values.decodeIfPresent([Datum].self, forKey: "data")
-				self.links = try values.decodeIfPresent(RelationshipLinks.self, forKey: "links")
 				self.meta = try values.decodeIfPresent(PagingInformation.self, forKey: "meta")
+				self.links = try values.decodeIfPresent(RelationshipLinks.self, forKey: "links")
 			}
 
 			public func encode(to encoder: Encoder) throws {
 				var values = encoder.container(keyedBy: StringCodingKey.self)
 				try values.encodeIfPresent(data, forKey: "data")
-				try values.encodeIfPresent(links, forKey: "links")
 				try values.encodeIfPresent(meta, forKey: "meta")
+				try values.encodeIfPresent(links, forKey: "links")
 			}
 		}
 
@@ -80,60 +107,33 @@ public struct AnalyticsReportRequest: Codable, Identifiable {
 		}
 	}
 
-	public struct Attributes: Codable {
-		public var accessType: AccessType?
-		public var isStoppedDueToInactivity: Bool?
-
-		public enum AccessType: String, Codable, CaseIterable {
-			case oneTimeSnapshot = "ONE_TIME_SNAPSHOT"
-			case ongoing = "ONGOING"
-		}
-
-		public init(accessType: AccessType? = nil, isStoppedDueToInactivity: Bool? = nil) {
-			self.accessType = accessType
-			self.isStoppedDueToInactivity = isStoppedDueToInactivity
-		}
-
-		public init(from decoder: Decoder) throws {
-			let values = try decoder.container(keyedBy: StringCodingKey.self)
-			self.accessType = try values.decodeIfPresent(AccessType.self, forKey: "accessType")
-			self.isStoppedDueToInactivity = try values.decodeIfPresent(Bool.self, forKey: "stoppedDueToInactivity")
-		}
-
-		public func encode(to encoder: Encoder) throws {
-			var values = encoder.container(keyedBy: StringCodingKey.self)
-			try values.encodeIfPresent(accessType, forKey: "accessType")
-			try values.encodeIfPresent(isStoppedDueToInactivity, forKey: "stoppedDueToInactivity")
-		}
-	}
-
 	public enum `Type`: String, Codable, CaseIterable {
 		case analyticsReportRequests
 	}
 
-	public init(relationships: Relationships? = nil, links: ResourceLinks? = nil, attributes: Attributes? = nil, type: `Type`, id: String) {
+	public init(id: String, attributes: Attributes? = nil, relationships: Relationships? = nil, links: ResourceLinks? = nil, type: `Type`) {
+		self.id = id
+		self.attributes = attributes
 		self.relationships = relationships
 		self.links = links
-		self.attributes = attributes
 		self.type = type
-		self.id = id
 	}
 
 	public init(from decoder: Decoder) throws {
 		let values = try decoder.container(keyedBy: StringCodingKey.self)
+		self.id = try values.decode(String.self, forKey: "id")
+		self.attributes = try values.decodeIfPresent(Attributes.self, forKey: "attributes")
 		self.relationships = try values.decodeIfPresent(Relationships.self, forKey: "relationships")
 		self.links = try values.decodeIfPresent(ResourceLinks.self, forKey: "links")
-		self.attributes = try values.decodeIfPresent(Attributes.self, forKey: "attributes")
 		self.type = try values.decode(`Type`.self, forKey: "type")
-		self.id = try values.decode(String.self, forKey: "id")
 	}
 
 	public func encode(to encoder: Encoder) throws {
 		var values = encoder.container(keyedBy: StringCodingKey.self)
+		try values.encode(id, forKey: "id")
+		try values.encodeIfPresent(attributes, forKey: "attributes")
 		try values.encodeIfPresent(relationships, forKey: "relationships")
 		try values.encodeIfPresent(links, forKey: "links")
-		try values.encodeIfPresent(attributes, forKey: "attributes")
 		try values.encode(type, forKey: "type")
-		try values.encode(id, forKey: "id")
 	}
 }

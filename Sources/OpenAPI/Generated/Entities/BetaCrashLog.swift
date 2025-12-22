@@ -5,9 +5,9 @@ import Foundation
 
 public struct BetaCrashLog: Codable, Identifiable {
 	public var links: ResourceLinks?
-	public var id: String
 	public var attributes: Attributes?
 	public var type: `Type`
+	public var id: String
 
 	public struct Attributes: Codable {
 		public var logText: String?
@@ -31,26 +31,26 @@ public struct BetaCrashLog: Codable, Identifiable {
 		case betaCrashLogs
 	}
 
-	public init(links: ResourceLinks? = nil, id: String, attributes: Attributes? = nil, type: `Type`) {
+	public init(links: ResourceLinks? = nil, attributes: Attributes? = nil, type: `Type`, id: String) {
 		self.links = links
-		self.id = id
 		self.attributes = attributes
 		self.type = type
+		self.id = id
 	}
 
 	public init(from decoder: Decoder) throws {
 		let values = try decoder.container(keyedBy: StringCodingKey.self)
 		self.links = try values.decodeIfPresent(ResourceLinks.self, forKey: "links")
-		self.id = try values.decode(String.self, forKey: "id")
 		self.attributes = try values.decodeIfPresent(Attributes.self, forKey: "attributes")
 		self.type = try values.decode(`Type`.self, forKey: "type")
+		self.id = try values.decode(String.self, forKey: "id")
 	}
 
 	public func encode(to encoder: Encoder) throws {
 		var values = encoder.container(keyedBy: StringCodingKey.self)
 		try values.encodeIfPresent(links, forKey: "links")
-		try values.encode(id, forKey: "id")
 		try values.encodeIfPresent(attributes, forKey: "attributes")
 		try values.encode(type, forKey: "type")
+		try values.encode(id, forKey: "id")
 	}
 }

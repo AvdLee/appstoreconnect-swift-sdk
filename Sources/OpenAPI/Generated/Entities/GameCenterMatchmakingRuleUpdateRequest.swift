@@ -7,33 +7,33 @@ public struct GameCenterMatchmakingRuleUpdateRequest: Codable {
 	public var data: Data
 
 	public struct Data: Codable, Identifiable {
-		public var id: String
 		public var attributes: Attributes?
 		public var type: `Type`
+		public var id: String
 
 		public struct Attributes: Codable {
 			public var expression: String?
-			public var description: String?
 			public var weight: Double?
+			public var description: String?
 
-			public init(expression: String? = nil, description: String? = nil, weight: Double? = nil) {
+			public init(expression: String? = nil, weight: Double? = nil, description: String? = nil) {
 				self.expression = expression
-				self.description = description
 				self.weight = weight
+				self.description = description
 			}
 
 			public init(from decoder: Decoder) throws {
 				let values = try decoder.container(keyedBy: StringCodingKey.self)
 				self.expression = try values.decodeIfPresent(String.self, forKey: "expression")
-				self.description = try values.decodeIfPresent(String.self, forKey: "description")
 				self.weight = try values.decodeIfPresent(Double.self, forKey: "weight")
+				self.description = try values.decodeIfPresent(String.self, forKey: "description")
 			}
 
 			public func encode(to encoder: Encoder) throws {
 				var values = encoder.container(keyedBy: StringCodingKey.self)
 				try values.encodeIfPresent(expression, forKey: "expression")
-				try values.encodeIfPresent(description, forKey: "description")
 				try values.encodeIfPresent(weight, forKey: "weight")
+				try values.encodeIfPresent(description, forKey: "description")
 			}
 		}
 
@@ -41,24 +41,24 @@ public struct GameCenterMatchmakingRuleUpdateRequest: Codable {
 			case gameCenterMatchmakingRules
 		}
 
-		public init(id: String, attributes: Attributes? = nil, type: `Type`) {
-			self.id = id
+		public init(attributes: Attributes? = nil, type: `Type`, id: String) {
 			self.attributes = attributes
 			self.type = type
+			self.id = id
 		}
 
 		public init(from decoder: Decoder) throws {
 			let values = try decoder.container(keyedBy: StringCodingKey.self)
-			self.id = try values.decode(String.self, forKey: "id")
 			self.attributes = try values.decodeIfPresent(Attributes.self, forKey: "attributes")
 			self.type = try values.decode(`Type`.self, forKey: "type")
+			self.id = try values.decode(String.self, forKey: "id")
 		}
 
 		public func encode(to encoder: Encoder) throws {
 			var values = encoder.container(keyedBy: StringCodingKey.self)
-			try values.encode(id, forKey: "id")
 			try values.encodeIfPresent(attributes, forKey: "attributes")
 			try values.encode(type, forKey: "type")
+			try values.encode(id, forKey: "id")
 		}
 	}
 

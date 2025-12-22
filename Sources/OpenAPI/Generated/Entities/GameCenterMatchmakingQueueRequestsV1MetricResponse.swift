@@ -5,61 +5,23 @@ import Foundation
 
 public struct GameCenterMatchmakingQueueRequestsV1MetricResponse: Codable {
 	public var meta: PagingInformation?
-	public var links: PagedDocumentLinks
 	public var data: [Datum]
+	public var links: PagedDocumentLinks
 
 	public struct Datum: Codable {
-		public var dimensions: Dimensions?
 		public var granularity: Granularity?
+		public var dimensions: Dimensions?
 		public var dataPoints: DataPoints?
 
+		public enum Granularity: String, Codable, CaseIterable {
+			case p1d = "P1D"
+			case pt1h = "PT1H"
+			case pt15m = "PT15M"
+		}
+
 		public struct Dimensions: Codable {
-			public var gameCenterDetail: GameCenterDetail?
 			public var result: Result?
-
-			public struct GameCenterDetail: Codable {
-				public var data: String?
-				public var links: Links?
-
-				public struct Links: Codable {
-					public var related: String?
-					public var groupBy: String?
-
-					public init(related: String? = nil, groupBy: String? = nil) {
-						self.related = related
-						self.groupBy = groupBy
-					}
-
-					public init(from decoder: Decoder) throws {
-						let values = try decoder.container(keyedBy: StringCodingKey.self)
-						self.related = try values.decodeIfPresent(String.self, forKey: "related")
-						self.groupBy = try values.decodeIfPresent(String.self, forKey: "groupBy")
-					}
-
-					public func encode(to encoder: Encoder) throws {
-						var values = encoder.container(keyedBy: StringCodingKey.self)
-						try values.encodeIfPresent(related, forKey: "related")
-						try values.encodeIfPresent(groupBy, forKey: "groupBy")
-					}
-				}
-
-				public init(data: String? = nil, links: Links? = nil) {
-					self.data = data
-					self.links = links
-				}
-
-				public init(from decoder: Decoder) throws {
-					let values = try decoder.container(keyedBy: StringCodingKey.self)
-					self.data = try values.decodeIfPresent(String.self, forKey: "data")
-					self.links = try values.decodeIfPresent(Links.self, forKey: "links")
-				}
-
-				public func encode(to encoder: Encoder) throws {
-					var values = encoder.container(keyedBy: StringCodingKey.self)
-					try values.encodeIfPresent(data, forKey: "data")
-					try values.encodeIfPresent(links, forKey: "links")
-				}
-			}
+			public var gameCenterDetail: GameCenterDetail?
 
 			public struct Result: Codable {
 				public var links: Links?
@@ -107,28 +69,66 @@ public struct GameCenterMatchmakingQueueRequestsV1MetricResponse: Codable {
 				}
 			}
 
-			public init(gameCenterDetail: GameCenterDetail? = nil, result: Result? = nil) {
-				self.gameCenterDetail = gameCenterDetail
+			public struct GameCenterDetail: Codable {
+				public var links: Links?
+				public var data: String?
+
+				public struct Links: Codable {
+					public var related: String?
+					public var groupBy: String?
+
+					public init(related: String? = nil, groupBy: String? = nil) {
+						self.related = related
+						self.groupBy = groupBy
+					}
+
+					public init(from decoder: Decoder) throws {
+						let values = try decoder.container(keyedBy: StringCodingKey.self)
+						self.related = try values.decodeIfPresent(String.self, forKey: "related")
+						self.groupBy = try values.decodeIfPresent(String.self, forKey: "groupBy")
+					}
+
+					public func encode(to encoder: Encoder) throws {
+						var values = encoder.container(keyedBy: StringCodingKey.self)
+						try values.encodeIfPresent(related, forKey: "related")
+						try values.encodeIfPresent(groupBy, forKey: "groupBy")
+					}
+				}
+
+				public init(links: Links? = nil, data: String? = nil) {
+					self.links = links
+					self.data = data
+				}
+
+				public init(from decoder: Decoder) throws {
+					let values = try decoder.container(keyedBy: StringCodingKey.self)
+					self.links = try values.decodeIfPresent(Links.self, forKey: "links")
+					self.data = try values.decodeIfPresent(String.self, forKey: "data")
+				}
+
+				public func encode(to encoder: Encoder) throws {
+					var values = encoder.container(keyedBy: StringCodingKey.self)
+					try values.encodeIfPresent(links, forKey: "links")
+					try values.encodeIfPresent(data, forKey: "data")
+				}
+			}
+
+			public init(result: Result? = nil, gameCenterDetail: GameCenterDetail? = nil) {
 				self.result = result
+				self.gameCenterDetail = gameCenterDetail
 			}
 
 			public init(from decoder: Decoder) throws {
 				let values = try decoder.container(keyedBy: StringCodingKey.self)
-				self.gameCenterDetail = try values.decodeIfPresent(GameCenterDetail.self, forKey: "gameCenterDetail")
 				self.result = try values.decodeIfPresent(Result.self, forKey: "result")
+				self.gameCenterDetail = try values.decodeIfPresent(GameCenterDetail.self, forKey: "gameCenterDetail")
 			}
 
 			public func encode(to encoder: Encoder) throws {
 				var values = encoder.container(keyedBy: StringCodingKey.self)
-				try values.encodeIfPresent(gameCenterDetail, forKey: "gameCenterDetail")
 				try values.encodeIfPresent(result, forKey: "result")
+				try values.encodeIfPresent(gameCenterDetail, forKey: "gameCenterDetail")
 			}
-		}
-
-		public enum Granularity: String, Codable, CaseIterable {
-			case p1d = "P1D"
-			case pt1h = "PT1H"
-			case pt15m = "PT15M"
 		}
 
 		public struct DataPoints: Codable {
@@ -137,32 +137,32 @@ public struct GameCenterMatchmakingQueueRequestsV1MetricResponse: Codable {
 			public var end: Date?
 
 			public struct Values: Codable {
-				public var count: Int?
-				public var p50SecondsInQueue: Double?
-				public var p95SecondsInQueue: Double?
 				public var averageSecondsInQueue: Double?
+				public var p95SecondsInQueue: Double?
+				public var p50SecondsInQueue: Double?
+				public var count: Int?
 
-				public init(count: Int? = nil, p50SecondsInQueue: Double? = nil, p95SecondsInQueue: Double? = nil, averageSecondsInQueue: Double? = nil) {
-					self.count = count
-					self.p50SecondsInQueue = p50SecondsInQueue
-					self.p95SecondsInQueue = p95SecondsInQueue
+				public init(averageSecondsInQueue: Double? = nil, p95SecondsInQueue: Double? = nil, p50SecondsInQueue: Double? = nil, count: Int? = nil) {
 					self.averageSecondsInQueue = averageSecondsInQueue
+					self.p95SecondsInQueue = p95SecondsInQueue
+					self.p50SecondsInQueue = p50SecondsInQueue
+					self.count = count
 				}
 
 				public init(from decoder: Decoder) throws {
 					let values = try decoder.container(keyedBy: StringCodingKey.self)
-					self.count = try values.decodeIfPresent(Int.self, forKey: "count")
-					self.p50SecondsInQueue = try values.decodeIfPresent(Double.self, forKey: "p50SecondsInQueue")
-					self.p95SecondsInQueue = try values.decodeIfPresent(Double.self, forKey: "p95SecondsInQueue")
 					self.averageSecondsInQueue = try values.decodeIfPresent(Double.self, forKey: "averageSecondsInQueue")
+					self.p95SecondsInQueue = try values.decodeIfPresent(Double.self, forKey: "p95SecondsInQueue")
+					self.p50SecondsInQueue = try values.decodeIfPresent(Double.self, forKey: "p50SecondsInQueue")
+					self.count = try values.decodeIfPresent(Int.self, forKey: "count")
 				}
 
 				public func encode(to encoder: Encoder) throws {
 					var values = encoder.container(keyedBy: StringCodingKey.self)
-					try values.encodeIfPresent(count, forKey: "count")
-					try values.encodeIfPresent(p50SecondsInQueue, forKey: "p50SecondsInQueue")
-					try values.encodeIfPresent(p95SecondsInQueue, forKey: "p95SecondsInQueue")
 					try values.encodeIfPresent(averageSecondsInQueue, forKey: "averageSecondsInQueue")
+					try values.encodeIfPresent(p95SecondsInQueue, forKey: "p95SecondsInQueue")
+					try values.encodeIfPresent(p50SecondsInQueue, forKey: "p50SecondsInQueue")
+					try values.encodeIfPresent(count, forKey: "count")
 				}
 			}
 
@@ -187,44 +187,44 @@ public struct GameCenterMatchmakingQueueRequestsV1MetricResponse: Codable {
 			}
 		}
 
-		public init(dimensions: Dimensions? = nil, granularity: Granularity? = nil, dataPoints: DataPoints? = nil) {
-			self.dimensions = dimensions
+		public init(granularity: Granularity? = nil, dimensions: Dimensions? = nil, dataPoints: DataPoints? = nil) {
 			self.granularity = granularity
+			self.dimensions = dimensions
 			self.dataPoints = dataPoints
 		}
 
 		public init(from decoder: Decoder) throws {
 			let values = try decoder.container(keyedBy: StringCodingKey.self)
-			self.dimensions = try values.decodeIfPresent(Dimensions.self, forKey: "dimensions")
 			self.granularity = try values.decodeIfPresent(Granularity.self, forKey: "granularity")
+			self.dimensions = try values.decodeIfPresent(Dimensions.self, forKey: "dimensions")
 			self.dataPoints = try values.decodeIfPresent(DataPoints.self, forKey: "dataPoints")
 		}
 
 		public func encode(to encoder: Encoder) throws {
 			var values = encoder.container(keyedBy: StringCodingKey.self)
-			try values.encodeIfPresent(dimensions, forKey: "dimensions")
 			try values.encodeIfPresent(granularity, forKey: "granularity")
+			try values.encodeIfPresent(dimensions, forKey: "dimensions")
 			try values.encodeIfPresent(dataPoints, forKey: "dataPoints")
 		}
 	}
 
-	public init(meta: PagingInformation? = nil, links: PagedDocumentLinks, data: [Datum]) {
+	public init(meta: PagingInformation? = nil, data: [Datum], links: PagedDocumentLinks) {
 		self.meta = meta
-		self.links = links
 		self.data = data
+		self.links = links
 	}
 
 	public init(from decoder: Decoder) throws {
 		let values = try decoder.container(keyedBy: StringCodingKey.self)
 		self.meta = try values.decodeIfPresent(PagingInformation.self, forKey: "meta")
-		self.links = try values.decode(PagedDocumentLinks.self, forKey: "links")
 		self.data = try values.decode([Datum].self, forKey: "data")
+		self.links = try values.decode(PagedDocumentLinks.self, forKey: "links")
 	}
 
 	public func encode(to encoder: Encoder) throws {
 		var values = encoder.container(keyedBy: StringCodingKey.self)
 		try values.encodeIfPresent(meta, forKey: "meta")
-		try values.encode(links, forKey: "links")
 		try values.encode(data, forKey: "data")
+		try values.encode(links, forKey: "links")
 	}
 }

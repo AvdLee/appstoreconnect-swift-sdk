@@ -4,14 +4,10 @@
 import Foundation
 
 public struct BetaAppClipInvocationLocalization: Codable, Identifiable {
-	public var links: ResourceLinks?
-	public var type: `Type`
 	public var attributes: Attributes?
+	public var type: `Type`
+	public var links: ResourceLinks?
 	public var id: String
-
-	public enum `Type`: String, Codable, CaseIterable {
-		case betaAppClipInvocationLocalizations
-	}
 
 	public struct Attributes: Codable {
 		public var locale: String?
@@ -35,26 +31,30 @@ public struct BetaAppClipInvocationLocalization: Codable, Identifiable {
 		}
 	}
 
-	public init(links: ResourceLinks? = nil, type: `Type`, attributes: Attributes? = nil, id: String) {
-		self.links = links
-		self.type = type
+	public enum `Type`: String, Codable, CaseIterable {
+		case betaAppClipInvocationLocalizations
+	}
+
+	public init(attributes: Attributes? = nil, type: `Type`, links: ResourceLinks? = nil, id: String) {
 		self.attributes = attributes
+		self.type = type
+		self.links = links
 		self.id = id
 	}
 
 	public init(from decoder: Decoder) throws {
 		let values = try decoder.container(keyedBy: StringCodingKey.self)
-		self.links = try values.decodeIfPresent(ResourceLinks.self, forKey: "links")
-		self.type = try values.decode(`Type`.self, forKey: "type")
 		self.attributes = try values.decodeIfPresent(Attributes.self, forKey: "attributes")
+		self.type = try values.decode(`Type`.self, forKey: "type")
+		self.links = try values.decodeIfPresent(ResourceLinks.self, forKey: "links")
 		self.id = try values.decode(String.self, forKey: "id")
 	}
 
 	public func encode(to encoder: Encoder) throws {
 		var values = encoder.container(keyedBy: StringCodingKey.self)
-		try values.encodeIfPresent(links, forKey: "links")
-		try values.encode(type, forKey: "type")
 		try values.encodeIfPresent(attributes, forKey: "attributes")
+		try values.encode(type, forKey: "type")
+		try values.encodeIfPresent(links, forKey: "links")
 		try values.encode(id, forKey: "id")
 	}
 }

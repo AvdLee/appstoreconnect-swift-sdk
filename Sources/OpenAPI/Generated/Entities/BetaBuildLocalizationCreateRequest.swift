@@ -7,9 +7,35 @@ public struct BetaBuildLocalizationCreateRequest: Codable {
 	public var data: Data
 
 	public struct Data: Codable {
-		public var relationships: Relationships
 		public var attributes: Attributes
 		public var type: `Type`
+		public var relationships: Relationships
+
+		public struct Attributes: Codable {
+			public var locale: String
+			public var whatsNew: String?
+
+			public init(locale: String, whatsNew: String? = nil) {
+				self.locale = locale
+				self.whatsNew = whatsNew
+			}
+
+			public init(from decoder: Decoder) throws {
+				let values = try decoder.container(keyedBy: StringCodingKey.self)
+				self.locale = try values.decode(String.self, forKey: "locale")
+				self.whatsNew = try values.decodeIfPresent(String.self, forKey: "whatsNew")
+			}
+
+			public func encode(to encoder: Encoder) throws {
+				var values = encoder.container(keyedBy: StringCodingKey.self)
+				try values.encode(locale, forKey: "locale")
+				try values.encodeIfPresent(whatsNew, forKey: "whatsNew")
+			}
+		}
+
+		public enum `Type`: String, Codable, CaseIterable {
+			case betaBuildLocalizations
+		}
 
 		public struct Relationships: Codable {
 			public var build: Build
@@ -73,50 +99,24 @@ public struct BetaBuildLocalizationCreateRequest: Codable {
 			}
 		}
 
-		public struct Attributes: Codable {
-			public var locale: String
-			public var whatsNew: String?
-
-			public init(locale: String, whatsNew: String? = nil) {
-				self.locale = locale
-				self.whatsNew = whatsNew
-			}
-
-			public init(from decoder: Decoder) throws {
-				let values = try decoder.container(keyedBy: StringCodingKey.self)
-				self.locale = try values.decode(String.self, forKey: "locale")
-				self.whatsNew = try values.decodeIfPresent(String.self, forKey: "whatsNew")
-			}
-
-			public func encode(to encoder: Encoder) throws {
-				var values = encoder.container(keyedBy: StringCodingKey.self)
-				try values.encode(locale, forKey: "locale")
-				try values.encodeIfPresent(whatsNew, forKey: "whatsNew")
-			}
-		}
-
-		public enum `Type`: String, Codable, CaseIterable {
-			case betaBuildLocalizations
-		}
-
-		public init(relationships: Relationships, attributes: Attributes, type: `Type`) {
-			self.relationships = relationships
+		public init(attributes: Attributes, type: `Type`, relationships: Relationships) {
 			self.attributes = attributes
 			self.type = type
+			self.relationships = relationships
 		}
 
 		public init(from decoder: Decoder) throws {
 			let values = try decoder.container(keyedBy: StringCodingKey.self)
-			self.relationships = try values.decode(Relationships.self, forKey: "relationships")
 			self.attributes = try values.decode(Attributes.self, forKey: "attributes")
 			self.type = try values.decode(`Type`.self, forKey: "type")
+			self.relationships = try values.decode(Relationships.self, forKey: "relationships")
 		}
 
 		public func encode(to encoder: Encoder) throws {
 			var values = encoder.container(keyedBy: StringCodingKey.self)
-			try values.encode(relationships, forKey: "relationships")
 			try values.encode(attributes, forKey: "attributes")
 			try values.encode(type, forKey: "type")
+			try values.encode(relationships, forKey: "relationships")
 		}
 	}
 

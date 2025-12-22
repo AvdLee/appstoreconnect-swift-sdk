@@ -4,10 +4,10 @@
 import Foundation
 
 public struct AppStoreVersionExperimentsV2Response: Codable {
-	public var links: PagedDocumentLinks
 	public var meta: PagingInformation?
-	public var data: [AppStoreVersionExperimentV2]
+	public var links: PagedDocumentLinks
 	public var included: [IncludedItem]?
+	public var data: [AppStoreVersionExperimentV2]
 
 	public enum IncludedItem: Codable {
 		case appStoreVersionExperimentTreatment(AppStoreVersionExperimentTreatment)
@@ -46,26 +46,26 @@ public struct AppStoreVersionExperimentsV2Response: Codable {
 		}
 	}
 
-	public init(links: PagedDocumentLinks, meta: PagingInformation? = nil, data: [AppStoreVersionExperimentV2], included: [IncludedItem]? = nil) {
-		self.links = links
+	public init(meta: PagingInformation? = nil, links: PagedDocumentLinks, included: [IncludedItem]? = nil, data: [AppStoreVersionExperimentV2]) {
 		self.meta = meta
-		self.data = data
+		self.links = links
 		self.included = included
+		self.data = data
 	}
 
 	public init(from decoder: Decoder) throws {
 		let values = try decoder.container(keyedBy: StringCodingKey.self)
-		self.links = try values.decode(PagedDocumentLinks.self, forKey: "links")
 		self.meta = try values.decodeIfPresent(PagingInformation.self, forKey: "meta")
-		self.data = try values.decode([AppStoreVersionExperimentV2].self, forKey: "data")
+		self.links = try values.decode(PagedDocumentLinks.self, forKey: "links")
 		self.included = try values.decodeIfPresent([IncludedItem].self, forKey: "included")
+		self.data = try values.decode([AppStoreVersionExperimentV2].self, forKey: "data")
 	}
 
 	public func encode(to encoder: Encoder) throws {
 		var values = encoder.container(keyedBy: StringCodingKey.self)
-		try values.encode(links, forKey: "links")
 		try values.encodeIfPresent(meta, forKey: "meta")
-		try values.encode(data, forKey: "data")
+		try values.encode(links, forKey: "links")
 		try values.encodeIfPresent(included, forKey: "included")
+		try values.encode(data, forKey: "data")
 	}
 }

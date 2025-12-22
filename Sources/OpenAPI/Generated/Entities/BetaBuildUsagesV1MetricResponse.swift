@@ -4,69 +4,69 @@
 import Foundation
 
 public struct BetaBuildUsagesV1MetricResponse: Codable {
-	public var meta: PagingInformation?
 	public var data: [Datum]
+	public var meta: PagingInformation?
 	public var links: PagedDocumentLinks
 
 	public struct Datum: Codable {
 		public var dataPoints: DataPoints?
 
 		public struct DataPoints: Codable {
-			public var values: Values?
 			public var end: Date?
+			public var values: Values?
 			public var start: Date?
 
 			public struct Values: Codable {
 				public var installCount: Int?
-				public var crashCount: Int?
-				public var sessionCount: Int?
 				public var feedbackCount: Int?
+				public var sessionCount: Int?
+				public var crashCount: Int?
 				public var inviteCount: Int?
 
-				public init(installCount: Int? = nil, crashCount: Int? = nil, sessionCount: Int? = nil, feedbackCount: Int? = nil, inviteCount: Int? = nil) {
+				public init(installCount: Int? = nil, feedbackCount: Int? = nil, sessionCount: Int? = nil, crashCount: Int? = nil, inviteCount: Int? = nil) {
 					self.installCount = installCount
-					self.crashCount = crashCount
-					self.sessionCount = sessionCount
 					self.feedbackCount = feedbackCount
+					self.sessionCount = sessionCount
+					self.crashCount = crashCount
 					self.inviteCount = inviteCount
 				}
 
 				public init(from decoder: Decoder) throws {
 					let values = try decoder.container(keyedBy: StringCodingKey.self)
 					self.installCount = try values.decodeIfPresent(Int.self, forKey: "installCount")
-					self.crashCount = try values.decodeIfPresent(Int.self, forKey: "crashCount")
-					self.sessionCount = try values.decodeIfPresent(Int.self, forKey: "sessionCount")
 					self.feedbackCount = try values.decodeIfPresent(Int.self, forKey: "feedbackCount")
+					self.sessionCount = try values.decodeIfPresent(Int.self, forKey: "sessionCount")
+					self.crashCount = try values.decodeIfPresent(Int.self, forKey: "crashCount")
 					self.inviteCount = try values.decodeIfPresent(Int.self, forKey: "inviteCount")
 				}
 
 				public func encode(to encoder: Encoder) throws {
 					var values = encoder.container(keyedBy: StringCodingKey.self)
 					try values.encodeIfPresent(installCount, forKey: "installCount")
-					try values.encodeIfPresent(crashCount, forKey: "crashCount")
-					try values.encodeIfPresent(sessionCount, forKey: "sessionCount")
 					try values.encodeIfPresent(feedbackCount, forKey: "feedbackCount")
+					try values.encodeIfPresent(sessionCount, forKey: "sessionCount")
+					try values.encodeIfPresent(crashCount, forKey: "crashCount")
 					try values.encodeIfPresent(inviteCount, forKey: "inviteCount")
 				}
 			}
 
-			public init(values: Values? = nil, end: Date? = nil, start: Date? = nil) {
-				self.values = values
+			public init(end: Date? = nil, values: Values? = nil, start: Date? = nil) {
 				self.end = end
+				self.values = values
 				self.start = start
 			}
 
 			public init(from decoder: Decoder) throws {
 				let values = try decoder.container(keyedBy: StringCodingKey.self)
-				self.values = try values.decodeIfPresent(Values.self, forKey: "values")
 				self.end = try values.decodeIfPresent(Date.self, forKey: "end")
+				self.values = try values.decodeIfPresent(Values.self, forKey: "values")
 				self.start = try values.decodeIfPresent(Date.self, forKey: "start")
 			}
 
 			public func encode(to encoder: Encoder) throws {
 				var values = encoder.container(keyedBy: StringCodingKey.self)
-				try values.encodeIfPresent(self.values, forKey: "values")
 				try values.encodeIfPresent(end, forKey: "end")
+				try values.encodeIfPresent(self.values, forKey: "values")
 				try values.encodeIfPresent(start, forKey: "start")
 			}
 		}
@@ -86,23 +86,23 @@ public struct BetaBuildUsagesV1MetricResponse: Codable {
 		}
 	}
 
-	public init(meta: PagingInformation? = nil, data: [Datum], links: PagedDocumentLinks) {
-		self.meta = meta
+	public init(data: [Datum], meta: PagingInformation? = nil, links: PagedDocumentLinks) {
 		self.data = data
+		self.meta = meta
 		self.links = links
 	}
 
 	public init(from decoder: Decoder) throws {
 		let values = try decoder.container(keyedBy: StringCodingKey.self)
-		self.meta = try values.decodeIfPresent(PagingInformation.self, forKey: "meta")
 		self.data = try values.decode([Datum].self, forKey: "data")
+		self.meta = try values.decodeIfPresent(PagingInformation.self, forKey: "meta")
 		self.links = try values.decode(PagedDocumentLinks.self, forKey: "links")
 	}
 
 	public func encode(to encoder: Encoder) throws {
 		var values = encoder.container(keyedBy: StringCodingKey.self)
-		try values.encodeIfPresent(meta, forKey: "meta")
 		try values.encode(data, forKey: "data")
+		try values.encodeIfPresent(meta, forKey: "meta")
 		try values.encode(links, forKey: "links")
 	}
 }

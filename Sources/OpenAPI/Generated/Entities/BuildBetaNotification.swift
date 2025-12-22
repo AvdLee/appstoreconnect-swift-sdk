@@ -4,31 +4,31 @@
 import Foundation
 
 public struct BuildBetaNotification: Codable, Identifiable {
-	public var links: ResourceLinks?
 	public var id: String
 	public var type: `Type`
+	public var links: ResourceLinks?
 
 	public enum `Type`: String, Codable, CaseIterable {
 		case buildBetaNotifications
 	}
 
-	public init(links: ResourceLinks? = nil, id: String, type: `Type`) {
-		self.links = links
+	public init(id: String, type: `Type`, links: ResourceLinks? = nil) {
 		self.id = id
 		self.type = type
+		self.links = links
 	}
 
 	public init(from decoder: Decoder) throws {
 		let values = try decoder.container(keyedBy: StringCodingKey.self)
-		self.links = try values.decodeIfPresent(ResourceLinks.self, forKey: "links")
 		self.id = try values.decode(String.self, forKey: "id")
 		self.type = try values.decode(`Type`.self, forKey: "type")
+		self.links = try values.decodeIfPresent(ResourceLinks.self, forKey: "links")
 	}
 
 	public func encode(to encoder: Encoder) throws {
 		var values = encoder.container(keyedBy: StringCodingKey.self)
-		try values.encodeIfPresent(links, forKey: "links")
 		try values.encode(id, forKey: "id")
 		try values.encode(type, forKey: "type")
+		try values.encodeIfPresent(links, forKey: "links")
 	}
 }

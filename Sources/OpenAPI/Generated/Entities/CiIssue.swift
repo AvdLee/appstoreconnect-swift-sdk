@@ -4,19 +4,19 @@
 import Foundation
 
 public struct CiIssue: Codable, Identifiable {
+	public var id: String
 	public var type: `Type`
 	public var attributes: Attributes?
 	public var links: ResourceLinks?
-	public var id: String
 
 	public enum `Type`: String, Codable, CaseIterable {
 		case ciIssues
 	}
 
 	public struct Attributes: Codable {
-		public var message: String?
 		public var issueType: IssueType?
 		public var fileSource: FileLocation?
+		public var message: String?
 		public var category: String?
 
 		public enum IssueType: String, Codable, CaseIterable {
@@ -26,50 +26,50 @@ public struct CiIssue: Codable, Identifiable {
 			case warning = "WARNING"
 		}
 
-		public init(message: String? = nil, issueType: IssueType? = nil, fileSource: FileLocation? = nil, category: String? = nil) {
-			self.message = message
+		public init(issueType: IssueType? = nil, fileSource: FileLocation? = nil, message: String? = nil, category: String? = nil) {
 			self.issueType = issueType
 			self.fileSource = fileSource
+			self.message = message
 			self.category = category
 		}
 
 		public init(from decoder: Decoder) throws {
 			let values = try decoder.container(keyedBy: StringCodingKey.self)
-			self.message = try values.decodeIfPresent(String.self, forKey: "message")
 			self.issueType = try values.decodeIfPresent(IssueType.self, forKey: "issueType")
 			self.fileSource = try values.decodeIfPresent(FileLocation.self, forKey: "fileSource")
+			self.message = try values.decodeIfPresent(String.self, forKey: "message")
 			self.category = try values.decodeIfPresent(String.self, forKey: "category")
 		}
 
 		public func encode(to encoder: Encoder) throws {
 			var values = encoder.container(keyedBy: StringCodingKey.self)
-			try values.encodeIfPresent(message, forKey: "message")
 			try values.encodeIfPresent(issueType, forKey: "issueType")
 			try values.encodeIfPresent(fileSource, forKey: "fileSource")
+			try values.encodeIfPresent(message, forKey: "message")
 			try values.encodeIfPresent(category, forKey: "category")
 		}
 	}
 
-	public init(type: `Type`, attributes: Attributes? = nil, links: ResourceLinks? = nil, id: String) {
+	public init(id: String, type: `Type`, attributes: Attributes? = nil, links: ResourceLinks? = nil) {
+		self.id = id
 		self.type = type
 		self.attributes = attributes
 		self.links = links
-		self.id = id
 	}
 
 	public init(from decoder: Decoder) throws {
 		let values = try decoder.container(keyedBy: StringCodingKey.self)
+		self.id = try values.decode(String.self, forKey: "id")
 		self.type = try values.decode(`Type`.self, forKey: "type")
 		self.attributes = try values.decodeIfPresent(Attributes.self, forKey: "attributes")
 		self.links = try values.decodeIfPresent(ResourceLinks.self, forKey: "links")
-		self.id = try values.decode(String.self, forKey: "id")
 	}
 
 	public func encode(to encoder: Encoder) throws {
 		var values = encoder.container(keyedBy: StringCodingKey.self)
+		try values.encode(id, forKey: "id")
 		try values.encode(type, forKey: "type")
 		try values.encodeIfPresent(attributes, forKey: "attributes")
 		try values.encodeIfPresent(links, forKey: "links")
-		try values.encode(id, forKey: "id")
 	}
 }

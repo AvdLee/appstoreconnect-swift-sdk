@@ -79,24 +79,24 @@ public struct AppStoreVersionExperimentCreateRequest: Codable {
 		}
 
 		public struct Attributes: Codable {
-			public var trafficProportion: Int
 			public var name: String
+			public var trafficProportion: Int
 
-			public init(trafficProportion: Int, name: String) {
-				self.trafficProportion = trafficProportion
+			public init(name: String, trafficProportion: Int) {
 				self.name = name
+				self.trafficProportion = trafficProportion
 			}
 
 			public init(from decoder: Decoder) throws {
 				let values = try decoder.container(keyedBy: StringCodingKey.self)
-				self.trafficProportion = try values.decode(Int.self, forKey: "trafficProportion")
 				self.name = try values.decode(String.self, forKey: "name")
+				self.trafficProportion = try values.decode(Int.self, forKey: "trafficProportion")
 			}
 
 			public func encode(to encoder: Encoder) throws {
 				var values = encoder.container(keyedBy: StringCodingKey.self)
-				try values.encode(trafficProportion, forKey: "trafficProportion")
 				try values.encode(name, forKey: "name")
+				try values.encode(trafficProportion, forKey: "trafficProportion")
 			}
 		}
 

@@ -4,61 +4,61 @@
 import Foundation
 
 public struct AnalyticsReportSegment: Codable, Identifiable {
-	public var type: `Type`
-	public var links: ResourceLinks?
 	public var attributes: Attributes?
 	public var id: String
+	public var type: `Type`
+	public var links: ResourceLinks?
+
+	public struct Attributes: Codable {
+		public var checksum: String?
+		public var sizeInBytes: Int?
+		public var url: URL?
+
+		public init(checksum: String? = nil, sizeInBytes: Int? = nil, url: URL? = nil) {
+			self.checksum = checksum
+			self.sizeInBytes = sizeInBytes
+			self.url = url
+		}
+
+		public init(from decoder: Decoder) throws {
+			let values = try decoder.container(keyedBy: StringCodingKey.self)
+			self.checksum = try values.decodeIfPresent(String.self, forKey: "checksum")
+			self.sizeInBytes = try values.decodeIfPresent(Int.self, forKey: "sizeInBytes")
+			self.url = try values.decodeIfPresent(URL.self, forKey: "url")
+		}
+
+		public func encode(to encoder: Encoder) throws {
+			var values = encoder.container(keyedBy: StringCodingKey.self)
+			try values.encodeIfPresent(checksum, forKey: "checksum")
+			try values.encodeIfPresent(sizeInBytes, forKey: "sizeInBytes")
+			try values.encodeIfPresent(url, forKey: "url")
+		}
+	}
 
 	public enum `Type`: String, Codable, CaseIterable {
 		case analyticsReportSegments
 	}
 
-	public struct Attributes: Codable {
-		public var sizeInBytes: Int?
-		public var url: URL?
-		public var checksum: String?
-
-		public init(sizeInBytes: Int? = nil, url: URL? = nil, checksum: String? = nil) {
-			self.sizeInBytes = sizeInBytes
-			self.url = url
-			self.checksum = checksum
-		}
-
-		public init(from decoder: Decoder) throws {
-			let values = try decoder.container(keyedBy: StringCodingKey.self)
-			self.sizeInBytes = try values.decodeIfPresent(Int.self, forKey: "sizeInBytes")
-			self.url = try values.decodeIfPresent(URL.self, forKey: "url")
-			self.checksum = try values.decodeIfPresent(String.self, forKey: "checksum")
-		}
-
-		public func encode(to encoder: Encoder) throws {
-			var values = encoder.container(keyedBy: StringCodingKey.self)
-			try values.encodeIfPresent(sizeInBytes, forKey: "sizeInBytes")
-			try values.encodeIfPresent(url, forKey: "url")
-			try values.encodeIfPresent(checksum, forKey: "checksum")
-		}
-	}
-
-	public init(type: `Type`, links: ResourceLinks? = nil, attributes: Attributes? = nil, id: String) {
-		self.type = type
-		self.links = links
+	public init(attributes: Attributes? = nil, id: String, type: `Type`, links: ResourceLinks? = nil) {
 		self.attributes = attributes
 		self.id = id
+		self.type = type
+		self.links = links
 	}
 
 	public init(from decoder: Decoder) throws {
 		let values = try decoder.container(keyedBy: StringCodingKey.self)
-		self.type = try values.decode(`Type`.self, forKey: "type")
-		self.links = try values.decodeIfPresent(ResourceLinks.self, forKey: "links")
 		self.attributes = try values.decodeIfPresent(Attributes.self, forKey: "attributes")
 		self.id = try values.decode(String.self, forKey: "id")
+		self.type = try values.decode(`Type`.self, forKey: "type")
+		self.links = try values.decodeIfPresent(ResourceLinks.self, forKey: "links")
 	}
 
 	public func encode(to encoder: Encoder) throws {
 		var values = encoder.container(keyedBy: StringCodingKey.self)
-		try values.encode(type, forKey: "type")
-		try values.encodeIfPresent(links, forKey: "links")
 		try values.encodeIfPresent(attributes, forKey: "attributes")
 		try values.encode(id, forKey: "id")
+		try values.encode(type, forKey: "type")
+		try values.encodeIfPresent(links, forKey: "links")
 	}
 }

@@ -74,27 +74,27 @@ public struct GameCenterChallengeLocalizationCreateRequest: Codable {
 		}
 
 		public struct Attributes: Codable {
-			public var description: String?
 			public var name: String
+			public var description: String?
 			public var locale: String
 
-			public init(description: String? = nil, name: String, locale: String) {
-				self.description = description
+			public init(name: String, description: String? = nil, locale: String) {
 				self.name = name
+				self.description = description
 				self.locale = locale
 			}
 
 			public init(from decoder: Decoder) throws {
 				let values = try decoder.container(keyedBy: StringCodingKey.self)
-				self.description = try values.decodeIfPresent(String.self, forKey: "description")
 				self.name = try values.decode(String.self, forKey: "name")
+				self.description = try values.decodeIfPresent(String.self, forKey: "description")
 				self.locale = try values.decode(String.self, forKey: "locale")
 			}
 
 			public func encode(to encoder: Encoder) throws {
 				var values = encoder.container(keyedBy: StringCodingKey.self)
-				try values.encodeIfPresent(description, forKey: "description")
 				try values.encode(name, forKey: "name")
+				try values.encodeIfPresent(description, forKey: "description")
 				try values.encode(locale, forKey: "locale")
 			}
 		}

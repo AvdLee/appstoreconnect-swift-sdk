@@ -4,94 +4,14 @@
 import Foundation
 
 public struct TerritoryAvailability: Codable, Identifiable {
-	public var attributes: Attributes?
-	public var id: String
-	public var relationships: Relationships?
 	public var type: `Type`
+	public var relationships: Relationships?
+	public var id: String
+	public var attributes: Attributes?
 	public var links: ResourceLinks?
 
-	public struct Attributes: Codable {
-		public var preOrderPublishDate: String?
-		public var contentStatuses: [ContentStatus]?
-		public var isAvailable: Bool?
-		public var isPreOrderEnabled: Bool?
-		public var releaseDate: String?
-
-		public enum ContentStatus: String, Codable, CaseIterable {
-			case available = "AVAILABLE"
-			case availableForPreorderOnDate = "AVAILABLE_FOR_PREORDER_ON_DATE"
-			case processingToNotAvailable = "PROCESSING_TO_NOT_AVAILABLE"
-			case processingToAvailable = "PROCESSING_TO_AVAILABLE"
-			case processingToPreOrder = "PROCESSING_TO_PRE_ORDER"
-			case availableForSaleUnreleasedApp = "AVAILABLE_FOR_SALE_UNRELEASED_APP"
-			case preorderOnUnreleasedApp = "PREORDER_ON_UNRELEASED_APP"
-			case availableForPreorder = "AVAILABLE_FOR_PREORDER"
-			case missingRating = "MISSING_RATING"
-			case cannotSellRestrictedRating = "CANNOT_SELL_RESTRICTED_RATING"
-			case brazilRequiredTaxID = "BRAZIL_REQUIRED_TAX_ID"
-			case missingGrn = "MISSING_GRN"
-			case unverifiedGrn = "UNVERIFIED_GRN"
-			case icpNumberInvalid = "ICP_NUMBER_INVALID"
-			case icpNumberMissing = "ICP_NUMBER_MISSING"
-			case traderStatusNotProvided = "TRADER_STATUS_NOT_PROVIDED"
-			case traderStatusVerificationFailed = "TRADER_STATUS_VERIFICATION_FAILED"
-			case traderStatusVerificationStatusMissing = "TRADER_STATUS_VERIFICATION_STATUS_MISSING"
-			case cannotSellSeventeenPlusApps = "CANNOT_SELL_SEVENTEEN_PLUS_APPS"
-			case cannotSellSexuallyExplicit = "CANNOT_SELL_SEXUALLY_EXPLICIT"
-			case cannotSellNonIosGames = "CANNOT_SELL_NON_IOS_GAMES"
-			case cannotSellSeventeenPlusGames = "CANNOT_SELL_SEVENTEEN_PLUS_GAMES"
-			case cannotSellCasino = "CANNOT_SELL_CASINO"
-			case cannotSellCasinoWithoutGrac = "CANNOT_SELL_CASINO_WITHOUT_GRAC"
-			case cannotSellCasinoWithoutAgeVerification = "CANNOT_SELL_CASINO_WITHOUT_AGE_VERIFICATION"
-			case cannotSellAdultOnly = "CANNOT_SELL_ADULT_ONLY"
-			case cannotSellGamblingContests = "CANNOT_SELL_GAMBLING_CONTESTS"
-			case cannotSellGambling = "CANNOT_SELL_GAMBLING"
-			case cannotSellContests = "CANNOT_SELL_CONTESTS"
-			case cannotSellNineteenPlusWithoutGrac = "CANNOT_SELL_NINETEEN_PLUS_WITHOUT_GRAC"
-			case cannotSell = "CANNOT_SELL"
-			case cannotSellFrequentIntenseGambling = "CANNOT_SELL_FREQUENT_INTENSE_GAMBLING"
-			case cannotSellFrequentIntenseAlcoholTobaccoDrugs = "CANNOT_SELL_FREQUENT_INTENSE_ALCOHOL_TOBACCO_DRUGS"
-			case cannotSellFrequentIntenseViolence = "CANNOT_SELL_FREQUENT_INTENSE_VIOLENCE"
-			case cannotSellFrequentIntenseSexualContentNudity = "CANNOT_SELL_FREQUENT_INTENSE_SEXUAL_CONTENT_NUDITY"
-			case cannotSellInfrequentMildAlcoholTobaccoDrugs = "CANNOT_SELL_INFREQUENT_MILD_ALCOHOL_TOBACCO_DRUGS"
-			case cannotSellInfrequentMildSexualContentNudity = "CANNOT_SELL_INFREQUENT_MILD_SEXUAL_CONTENT_NUDITY"
-			case cannotSellFrequentIntense = "CANNOT_SELL_FREQUENT_INTENSE"
-			case cannotSellFrequentIntenseWithoutGrac = "CANNOT_SELL_FREQUENT_INTENSE_WITHOUT_GRAC"
-			case cannotSellFrequentGambling = "CANNOT_SELL_FREQUENT_GAMBLING"
-			case cannotSellFrequentAlcoholTobaccoDrugs = "CANNOT_SELL_FREQUENT_ALCOHOL_TOBACCO_DRUGS"
-			case cannotSellFrequentViolence = "CANNOT_SELL_FREQUENT_VIOLENCE"
-			case cannotSellFrequentSexualContentNudity = "CANNOT_SELL_FREQUENT_SEXUAL_CONTENT_NUDITY"
-			case cannotSellInfrequentAlcoholTobaccoDrugs = "CANNOT_SELL_INFREQUENT_ALCOHOL_TOBACCO_DRUGS"
-			case cannotSellInfrequentSexualContentNudity = "CANNOT_SELL_INFREQUENT_SEXUAL_CONTENT_NUDITY"
-			case cannotSellFrequent = "CANNOT_SELL_FREQUENT"
-			case cannotSellFrequentWithoutGrac = "CANNOT_SELL_FREQUENT_WITHOUT_GRAC"
-		}
-
-		public init(preOrderPublishDate: String? = nil, contentStatuses: [ContentStatus]? = nil, isAvailable: Bool? = nil, isPreOrderEnabled: Bool? = nil, releaseDate: String? = nil) {
-			self.preOrderPublishDate = preOrderPublishDate
-			self.contentStatuses = contentStatuses
-			self.isAvailable = isAvailable
-			self.isPreOrderEnabled = isPreOrderEnabled
-			self.releaseDate = releaseDate
-		}
-
-		public init(from decoder: Decoder) throws {
-			let values = try decoder.container(keyedBy: StringCodingKey.self)
-			self.preOrderPublishDate = try values.decodeIfPresent(String.self, forKey: "preOrderPublishDate")
-			self.contentStatuses = try values.decodeIfPresent([ContentStatus].self, forKey: "contentStatuses")
-			self.isAvailable = try values.decodeIfPresent(Bool.self, forKey: "available")
-			self.isPreOrderEnabled = try values.decodeIfPresent(Bool.self, forKey: "preOrderEnabled")
-			self.releaseDate = try values.decodeIfPresent(String.self, forKey: "releaseDate")
-		}
-
-		public func encode(to encoder: Encoder) throws {
-			var values = encoder.container(keyedBy: StringCodingKey.self)
-			try values.encodeIfPresent(preOrderPublishDate, forKey: "preOrderPublishDate")
-			try values.encodeIfPresent(contentStatuses, forKey: "contentStatuses")
-			try values.encodeIfPresent(isAvailable, forKey: "available")
-			try values.encodeIfPresent(isPreOrderEnabled, forKey: "preOrderEnabled")
-			try values.encodeIfPresent(releaseDate, forKey: "releaseDate")
-		}
+	public enum `Type`: String, Codable, CaseIterable {
+		case territoryAvailabilities
 	}
 
 	public struct Relationships: Codable {
@@ -156,33 +76,113 @@ public struct TerritoryAvailability: Codable, Identifiable {
 		}
 	}
 
-	public enum `Type`: String, Codable, CaseIterable {
-		case territoryAvailabilities
+	public struct Attributes: Codable {
+		public var contentStatuses: [ContentStatus]?
+		public var isPreOrderEnabled: Bool?
+		public var preOrderPublishDate: String?
+		public var isAvailable: Bool?
+		public var releaseDate: String?
+
+		public enum ContentStatus: String, Codable, CaseIterable {
+			case available = "AVAILABLE"
+			case availableForPreorderOnDate = "AVAILABLE_FOR_PREORDER_ON_DATE"
+			case processingToNotAvailable = "PROCESSING_TO_NOT_AVAILABLE"
+			case processingToAvailable = "PROCESSING_TO_AVAILABLE"
+			case processingToPreOrder = "PROCESSING_TO_PRE_ORDER"
+			case availableForSaleUnreleasedApp = "AVAILABLE_FOR_SALE_UNRELEASED_APP"
+			case preorderOnUnreleasedApp = "PREORDER_ON_UNRELEASED_APP"
+			case availableForPreorder = "AVAILABLE_FOR_PREORDER"
+			case missingRating = "MISSING_RATING"
+			case cannotSellRestrictedRating = "CANNOT_SELL_RESTRICTED_RATING"
+			case brazilRequiredTaxID = "BRAZIL_REQUIRED_TAX_ID"
+			case missingGrn = "MISSING_GRN"
+			case unverifiedGrn = "UNVERIFIED_GRN"
+			case icpNumberInvalid = "ICP_NUMBER_INVALID"
+			case icpNumberMissing = "ICP_NUMBER_MISSING"
+			case traderStatusNotProvided = "TRADER_STATUS_NOT_PROVIDED"
+			case traderStatusVerificationFailed = "TRADER_STATUS_VERIFICATION_FAILED"
+			case traderStatusVerificationStatusMissing = "TRADER_STATUS_VERIFICATION_STATUS_MISSING"
+			case cannotSellSeventeenPlusApps = "CANNOT_SELL_SEVENTEEN_PLUS_APPS"
+			case cannotSellSexuallyExplicit = "CANNOT_SELL_SEXUALLY_EXPLICIT"
+			case cannotSellNonIosGames = "CANNOT_SELL_NON_IOS_GAMES"
+			case cannotSellSeventeenPlusGames = "CANNOT_SELL_SEVENTEEN_PLUS_GAMES"
+			case cannotSellCasino = "CANNOT_SELL_CASINO"
+			case cannotSellCasinoWithoutGrac = "CANNOT_SELL_CASINO_WITHOUT_GRAC"
+			case cannotSellCasinoWithoutAgeVerification = "CANNOT_SELL_CASINO_WITHOUT_AGE_VERIFICATION"
+			case cannotSellAdultOnly = "CANNOT_SELL_ADULT_ONLY"
+			case cannotSellGamblingContests = "CANNOT_SELL_GAMBLING_CONTESTS"
+			case cannotSellGambling = "CANNOT_SELL_GAMBLING"
+			case cannotSellContests = "CANNOT_SELL_CONTESTS"
+			case cannotSellNineteenPlusWithoutGrac = "CANNOT_SELL_NINETEEN_PLUS_WITHOUT_GRAC"
+			case cannotSell = "CANNOT_SELL"
+			case cannotSellFrequentIntenseGambling = "CANNOT_SELL_FREQUENT_INTENSE_GAMBLING"
+			case cannotSellFrequentIntenseAlcoholTobaccoDrugs = "CANNOT_SELL_FREQUENT_INTENSE_ALCOHOL_TOBACCO_DRUGS"
+			case cannotSellFrequentIntenseViolence = "CANNOT_SELL_FREQUENT_INTENSE_VIOLENCE"
+			case cannotSellFrequentIntenseSexualContentNudity = "CANNOT_SELL_FREQUENT_INTENSE_SEXUAL_CONTENT_NUDITY"
+			case cannotSellInfrequentMildAlcoholTobaccoDrugs = "CANNOT_SELL_INFREQUENT_MILD_ALCOHOL_TOBACCO_DRUGS"
+			case cannotSellInfrequentMildSexualContentNudity = "CANNOT_SELL_INFREQUENT_MILD_SEXUAL_CONTENT_NUDITY"
+			case cannotSellFrequentIntense = "CANNOT_SELL_FREQUENT_INTENSE"
+			case cannotSellFrequentIntenseWithoutGrac = "CANNOT_SELL_FREQUENT_INTENSE_WITHOUT_GRAC"
+			case cannotSellFrequentGambling = "CANNOT_SELL_FREQUENT_GAMBLING"
+			case cannotSellFrequentAlcoholTobaccoDrugs = "CANNOT_SELL_FREQUENT_ALCOHOL_TOBACCO_DRUGS"
+			case cannotSellFrequentViolence = "CANNOT_SELL_FREQUENT_VIOLENCE"
+			case cannotSellFrequentSexualContentNudity = "CANNOT_SELL_FREQUENT_SEXUAL_CONTENT_NUDITY"
+			case cannotSellInfrequentAlcoholTobaccoDrugs = "CANNOT_SELL_INFREQUENT_ALCOHOL_TOBACCO_DRUGS"
+			case cannotSellInfrequentSexualContentNudity = "CANNOT_SELL_INFREQUENT_SEXUAL_CONTENT_NUDITY"
+			case cannotSellFrequent = "CANNOT_SELL_FREQUENT"
+			case cannotSellFrequentWithoutGrac = "CANNOT_SELL_FREQUENT_WITHOUT_GRAC"
+		}
+
+		public init(contentStatuses: [ContentStatus]? = nil, isPreOrderEnabled: Bool? = nil, preOrderPublishDate: String? = nil, isAvailable: Bool? = nil, releaseDate: String? = nil) {
+			self.contentStatuses = contentStatuses
+			self.isPreOrderEnabled = isPreOrderEnabled
+			self.preOrderPublishDate = preOrderPublishDate
+			self.isAvailable = isAvailable
+			self.releaseDate = releaseDate
+		}
+
+		public init(from decoder: Decoder) throws {
+			let values = try decoder.container(keyedBy: StringCodingKey.self)
+			self.contentStatuses = try values.decodeIfPresent([ContentStatus].self, forKey: "contentStatuses")
+			self.isPreOrderEnabled = try values.decodeIfPresent(Bool.self, forKey: "preOrderEnabled")
+			self.preOrderPublishDate = try values.decodeIfPresent(String.self, forKey: "preOrderPublishDate")
+			self.isAvailable = try values.decodeIfPresent(Bool.self, forKey: "available")
+			self.releaseDate = try values.decodeIfPresent(String.self, forKey: "releaseDate")
+		}
+
+		public func encode(to encoder: Encoder) throws {
+			var values = encoder.container(keyedBy: StringCodingKey.self)
+			try values.encodeIfPresent(contentStatuses, forKey: "contentStatuses")
+			try values.encodeIfPresent(isPreOrderEnabled, forKey: "preOrderEnabled")
+			try values.encodeIfPresent(preOrderPublishDate, forKey: "preOrderPublishDate")
+			try values.encodeIfPresent(isAvailable, forKey: "available")
+			try values.encodeIfPresent(releaseDate, forKey: "releaseDate")
+		}
 	}
 
-	public init(attributes: Attributes? = nil, id: String, relationships: Relationships? = nil, type: `Type`, links: ResourceLinks? = nil) {
-		self.attributes = attributes
-		self.id = id
-		self.relationships = relationships
+	public init(type: `Type`, relationships: Relationships? = nil, id: String, attributes: Attributes? = nil, links: ResourceLinks? = nil) {
 		self.type = type
+		self.relationships = relationships
+		self.id = id
+		self.attributes = attributes
 		self.links = links
 	}
 
 	public init(from decoder: Decoder) throws {
 		let values = try decoder.container(keyedBy: StringCodingKey.self)
-		self.attributes = try values.decodeIfPresent(Attributes.self, forKey: "attributes")
-		self.id = try values.decode(String.self, forKey: "id")
-		self.relationships = try values.decodeIfPresent(Relationships.self, forKey: "relationships")
 		self.type = try values.decode(`Type`.self, forKey: "type")
+		self.relationships = try values.decodeIfPresent(Relationships.self, forKey: "relationships")
+		self.id = try values.decode(String.self, forKey: "id")
+		self.attributes = try values.decodeIfPresent(Attributes.self, forKey: "attributes")
 		self.links = try values.decodeIfPresent(ResourceLinks.self, forKey: "links")
 	}
 
 	public func encode(to encoder: Encoder) throws {
 		var values = encoder.container(keyedBy: StringCodingKey.self)
-		try values.encodeIfPresent(attributes, forKey: "attributes")
-		try values.encode(id, forKey: "id")
-		try values.encodeIfPresent(relationships, forKey: "relationships")
 		try values.encode(type, forKey: "type")
+		try values.encodeIfPresent(relationships, forKey: "relationships")
+		try values.encode(id, forKey: "id")
+		try values.encodeIfPresent(attributes, forKey: "attributes")
 		try values.encodeIfPresent(links, forKey: "links")
 	}
 }

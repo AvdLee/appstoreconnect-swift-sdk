@@ -12,28 +12,28 @@ public struct AppEventLocalizationUpdateRequest: Codable {
 		public var type: `Type`
 
 		public struct Attributes: Codable {
-			public var name: String?
 			public var shortDescription: String?
 			public var longDescription: String?
+			public var name: String?
 
-			public init(name: String? = nil, shortDescription: String? = nil, longDescription: String? = nil) {
-				self.name = name
+			public init(shortDescription: String? = nil, longDescription: String? = nil, name: String? = nil) {
 				self.shortDescription = shortDescription
 				self.longDescription = longDescription
+				self.name = name
 			}
 
 			public init(from decoder: Decoder) throws {
 				let values = try decoder.container(keyedBy: StringCodingKey.self)
-				self.name = try values.decodeIfPresent(String.self, forKey: "name")
 				self.shortDescription = try values.decodeIfPresent(String.self, forKey: "shortDescription")
 				self.longDescription = try values.decodeIfPresent(String.self, forKey: "longDescription")
+				self.name = try values.decodeIfPresent(String.self, forKey: "name")
 			}
 
 			public func encode(to encoder: Encoder) throws {
 				var values = encoder.container(keyedBy: StringCodingKey.self)
-				try values.encodeIfPresent(name, forKey: "name")
 				try values.encodeIfPresent(shortDescription, forKey: "shortDescription")
 				try values.encodeIfPresent(longDescription, forKey: "longDescription")
+				try values.encodeIfPresent(name, forKey: "name")
 			}
 		}
 

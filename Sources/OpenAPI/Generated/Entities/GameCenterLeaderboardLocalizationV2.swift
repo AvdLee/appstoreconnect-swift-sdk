@@ -5,49 +5,49 @@ import Foundation
 
 public struct GameCenterLeaderboardLocalizationV2: Codable, Identifiable {
 	public var type: `Type`
-	public var id: String
-	public var attributes: Attributes?
 	public var links: ResourceLinks?
+	public var attributes: Attributes?
 	public var relationships: Relationships?
+	public var id: String
 
 	public enum `Type`: String, Codable, CaseIterable {
 		case gameCenterLeaderboardLocalizations
 	}
 
 	public struct Attributes: Codable {
-		public var locale: String?
-		public var formatterOverride: GameCenterLeaderboardFormatter?
 		public var formatterSuffix: String?
-		public var name: String?
+		public var formatterOverride: GameCenterLeaderboardFormatter?
 		public var formatterSuffixSingular: String?
+		public var name: String?
+		public var locale: String?
 		public var description: String?
 
-		public init(locale: String? = nil, formatterOverride: GameCenterLeaderboardFormatter? = nil, formatterSuffix: String? = nil, name: String? = nil, formatterSuffixSingular: String? = nil, description: String? = nil) {
-			self.locale = locale
-			self.formatterOverride = formatterOverride
+		public init(formatterSuffix: String? = nil, formatterOverride: GameCenterLeaderboardFormatter? = nil, formatterSuffixSingular: String? = nil, name: String? = nil, locale: String? = nil, description: String? = nil) {
 			self.formatterSuffix = formatterSuffix
-			self.name = name
+			self.formatterOverride = formatterOverride
 			self.formatterSuffixSingular = formatterSuffixSingular
+			self.name = name
+			self.locale = locale
 			self.description = description
 		}
 
 		public init(from decoder: Decoder) throws {
 			let values = try decoder.container(keyedBy: StringCodingKey.self)
-			self.locale = try values.decodeIfPresent(String.self, forKey: "locale")
-			self.formatterOverride = try values.decodeIfPresent(GameCenterLeaderboardFormatter.self, forKey: "formatterOverride")
 			self.formatterSuffix = try values.decodeIfPresent(String.self, forKey: "formatterSuffix")
-			self.name = try values.decodeIfPresent(String.self, forKey: "name")
+			self.formatterOverride = try values.decodeIfPresent(GameCenterLeaderboardFormatter.self, forKey: "formatterOverride")
 			self.formatterSuffixSingular = try values.decodeIfPresent(String.self, forKey: "formatterSuffixSingular")
+			self.name = try values.decodeIfPresent(String.self, forKey: "name")
+			self.locale = try values.decodeIfPresent(String.self, forKey: "locale")
 			self.description = try values.decodeIfPresent(String.self, forKey: "description")
 		}
 
 		public func encode(to encoder: Encoder) throws {
 			var values = encoder.container(keyedBy: StringCodingKey.self)
-			try values.encodeIfPresent(locale, forKey: "locale")
-			try values.encodeIfPresent(formatterOverride, forKey: "formatterOverride")
 			try values.encodeIfPresent(formatterSuffix, forKey: "formatterSuffix")
-			try values.encodeIfPresent(name, forKey: "name")
+			try values.encodeIfPresent(formatterOverride, forKey: "formatterOverride")
 			try values.encodeIfPresent(formatterSuffixSingular, forKey: "formatterSuffixSingular")
+			try values.encodeIfPresent(name, forKey: "name")
+			try values.encodeIfPresent(locale, forKey: "locale")
 			try values.encodeIfPresent(description, forKey: "description")
 		}
 	}
@@ -60,28 +60,28 @@ public struct GameCenterLeaderboardLocalizationV2: Codable, Identifiable {
 			public var data: Data?
 
 			public struct Data: Codable, Identifiable {
-				public var type: `Type`
 				public var id: String
+				public var type: `Type`
 
 				public enum `Type`: String, Codable, CaseIterable {
 					case gameCenterLeaderboardVersions
 				}
 
-				public init(type: `Type`, id: String) {
-					self.type = type
+				public init(id: String, type: `Type`) {
 					self.id = id
+					self.type = type
 				}
 
 				public init(from decoder: Decoder) throws {
 					let values = try decoder.container(keyedBy: StringCodingKey.self)
-					self.type = try values.decode(`Type`.self, forKey: "type")
 					self.id = try values.decode(String.self, forKey: "id")
+					self.type = try values.decode(`Type`.self, forKey: "type")
 				}
 
 				public func encode(to encoder: Encoder) throws {
 					var values = encoder.container(keyedBy: StringCodingKey.self)
-					try values.encode(type, forKey: "type")
 					try values.encode(id, forKey: "id")
+					try values.encode(type, forKey: "type")
 				}
 			}
 
@@ -101,8 +101,8 @@ public struct GameCenterLeaderboardLocalizationV2: Codable, Identifiable {
 		}
 
 		public struct Image: Codable {
-			public var data: Data?
 			public var links: RelationshipLinks?
+			public var data: Data?
 
 			public struct Data: Codable, Identifiable {
 				public var type: `Type`
@@ -130,21 +130,21 @@ public struct GameCenterLeaderboardLocalizationV2: Codable, Identifiable {
 				}
 			}
 
-			public init(data: Data? = nil, links: RelationshipLinks? = nil) {
-				self.data = data
+			public init(links: RelationshipLinks? = nil, data: Data? = nil) {
 				self.links = links
+				self.data = data
 			}
 
 			public init(from decoder: Decoder) throws {
 				let values = try decoder.container(keyedBy: StringCodingKey.self)
-				self.data = try values.decodeIfPresent(Data.self, forKey: "data")
 				self.links = try values.decodeIfPresent(RelationshipLinks.self, forKey: "links")
+				self.data = try values.decodeIfPresent(Data.self, forKey: "data")
 			}
 
 			public func encode(to encoder: Encoder) throws {
 				var values = encoder.container(keyedBy: StringCodingKey.self)
-				try values.encodeIfPresent(data, forKey: "data")
 				try values.encodeIfPresent(links, forKey: "links")
+				try values.encodeIfPresent(data, forKey: "data")
 			}
 		}
 
@@ -166,29 +166,29 @@ public struct GameCenterLeaderboardLocalizationV2: Codable, Identifiable {
 		}
 	}
 
-	public init(type: `Type`, id: String, attributes: Attributes? = nil, links: ResourceLinks? = nil, relationships: Relationships? = nil) {
+	public init(type: `Type`, links: ResourceLinks? = nil, attributes: Attributes? = nil, relationships: Relationships? = nil, id: String) {
 		self.type = type
-		self.id = id
-		self.attributes = attributes
 		self.links = links
+		self.attributes = attributes
 		self.relationships = relationships
+		self.id = id
 	}
 
 	public init(from decoder: Decoder) throws {
 		let values = try decoder.container(keyedBy: StringCodingKey.self)
 		self.type = try values.decode(`Type`.self, forKey: "type")
-		self.id = try values.decode(String.self, forKey: "id")
-		self.attributes = try values.decodeIfPresent(Attributes.self, forKey: "attributes")
 		self.links = try values.decodeIfPresent(ResourceLinks.self, forKey: "links")
+		self.attributes = try values.decodeIfPresent(Attributes.self, forKey: "attributes")
 		self.relationships = try values.decodeIfPresent(Relationships.self, forKey: "relationships")
+		self.id = try values.decode(String.self, forKey: "id")
 	}
 
 	public func encode(to encoder: Encoder) throws {
 		var values = encoder.container(keyedBy: StringCodingKey.self)
 		try values.encode(type, forKey: "type")
-		try values.encode(id, forKey: "id")
-		try values.encodeIfPresent(attributes, forKey: "attributes")
 		try values.encodeIfPresent(links, forKey: "links")
+		try values.encodeIfPresent(attributes, forKey: "attributes")
 		try values.encodeIfPresent(relationships, forKey: "relationships")
+		try values.encode(id, forKey: "id")
 	}
 }

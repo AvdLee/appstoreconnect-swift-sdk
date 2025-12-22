@@ -7,9 +7,39 @@ public struct AppEventLocalizationCreateRequest: Codable {
 	public var data: Data
 
 	public struct Data: Codable {
+		public var attributes: Attributes
 		public var type: `Type`
 		public var relationships: Relationships
-		public var attributes: Attributes
+
+		public struct Attributes: Codable {
+			public var shortDescription: String?
+			public var longDescription: String?
+			public var name: String?
+			public var locale: String
+
+			public init(shortDescription: String? = nil, longDescription: String? = nil, name: String? = nil, locale: String) {
+				self.shortDescription = shortDescription
+				self.longDescription = longDescription
+				self.name = name
+				self.locale = locale
+			}
+
+			public init(from decoder: Decoder) throws {
+				let values = try decoder.container(keyedBy: StringCodingKey.self)
+				self.shortDescription = try values.decodeIfPresent(String.self, forKey: "shortDescription")
+				self.longDescription = try values.decodeIfPresent(String.self, forKey: "longDescription")
+				self.name = try values.decodeIfPresent(String.self, forKey: "name")
+				self.locale = try values.decode(String.self, forKey: "locale")
+			}
+
+			public func encode(to encoder: Encoder) throws {
+				var values = encoder.container(keyedBy: StringCodingKey.self)
+				try values.encodeIfPresent(shortDescription, forKey: "shortDescription")
+				try values.encodeIfPresent(longDescription, forKey: "longDescription")
+				try values.encodeIfPresent(name, forKey: "name")
+				try values.encode(locale, forKey: "locale")
+			}
+		}
 
 		public enum `Type`: String, Codable, CaseIterable {
 			case appEventLocalizations
@@ -77,54 +107,24 @@ public struct AppEventLocalizationCreateRequest: Codable {
 			}
 		}
 
-		public struct Attributes: Codable {
-			public var name: String?
-			public var locale: String
-			public var shortDescription: String?
-			public var longDescription: String?
-
-			public init(name: String? = nil, locale: String, shortDescription: String? = nil, longDescription: String? = nil) {
-				self.name = name
-				self.locale = locale
-				self.shortDescription = shortDescription
-				self.longDescription = longDescription
-			}
-
-			public init(from decoder: Decoder) throws {
-				let values = try decoder.container(keyedBy: StringCodingKey.self)
-				self.name = try values.decodeIfPresent(String.self, forKey: "name")
-				self.locale = try values.decode(String.self, forKey: "locale")
-				self.shortDescription = try values.decodeIfPresent(String.self, forKey: "shortDescription")
-				self.longDescription = try values.decodeIfPresent(String.self, forKey: "longDescription")
-			}
-
-			public func encode(to encoder: Encoder) throws {
-				var values = encoder.container(keyedBy: StringCodingKey.self)
-				try values.encodeIfPresent(name, forKey: "name")
-				try values.encode(locale, forKey: "locale")
-				try values.encodeIfPresent(shortDescription, forKey: "shortDescription")
-				try values.encodeIfPresent(longDescription, forKey: "longDescription")
-			}
-		}
-
-		public init(type: `Type`, relationships: Relationships, attributes: Attributes) {
+		public init(attributes: Attributes, type: `Type`, relationships: Relationships) {
+			self.attributes = attributes
 			self.type = type
 			self.relationships = relationships
-			self.attributes = attributes
 		}
 
 		public init(from decoder: Decoder) throws {
 			let values = try decoder.container(keyedBy: StringCodingKey.self)
+			self.attributes = try values.decode(Attributes.self, forKey: "attributes")
 			self.type = try values.decode(`Type`.self, forKey: "type")
 			self.relationships = try values.decode(Relationships.self, forKey: "relationships")
-			self.attributes = try values.decode(Attributes.self, forKey: "attributes")
 		}
 
 		public func encode(to encoder: Encoder) throws {
 			var values = encoder.container(keyedBy: StringCodingKey.self)
+			try values.encode(attributes, forKey: "attributes")
 			try values.encode(type, forKey: "type")
 			try values.encode(relationships, forKey: "relationships")
-			try values.encode(attributes, forKey: "attributes")
 		}
 	}
 

@@ -4,24 +4,24 @@
 import Foundation
 
 public struct CiIssueResponse: Codable {
-	public var links: DocumentLinks
 	/// CiIssue
 	public var data: CiIssue
+	public var links: DocumentLinks
 
-	public init(links: DocumentLinks, data: CiIssue) {
-		self.links = links
+	public init(data: CiIssue, links: DocumentLinks) {
 		self.data = data
+		self.links = links
 	}
 
 	public init(from decoder: Decoder) throws {
 		let values = try decoder.container(keyedBy: StringCodingKey.self)
-		self.links = try values.decode(DocumentLinks.self, forKey: "links")
 		self.data = try values.decode(CiIssue.self, forKey: "data")
+		self.links = try values.decode(DocumentLinks.self, forKey: "links")
 	}
 
 	public func encode(to encoder: Encoder) throws {
 		var values = encoder.container(keyedBy: StringCodingKey.self)
-		try values.encode(links, forKey: "links")
 		try values.encode(data, forKey: "data")
+		try values.encode(links, forKey: "links")
 	}
 }

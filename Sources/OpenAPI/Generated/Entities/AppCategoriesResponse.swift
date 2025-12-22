@@ -4,31 +4,31 @@
 import Foundation
 
 public struct AppCategoriesResponse: Codable {
+	public var links: PagedDocumentLinks
 	public var meta: PagingInformation?
 	public var included: [AppCategory]?
-	public var links: PagedDocumentLinks
 	public var data: [AppCategory]
 
-	public init(meta: PagingInformation? = nil, included: [AppCategory]? = nil, links: PagedDocumentLinks, data: [AppCategory]) {
+	public init(links: PagedDocumentLinks, meta: PagingInformation? = nil, included: [AppCategory]? = nil, data: [AppCategory]) {
+		self.links = links
 		self.meta = meta
 		self.included = included
-		self.links = links
 		self.data = data
 	}
 
 	public init(from decoder: Decoder) throws {
 		let values = try decoder.container(keyedBy: StringCodingKey.self)
+		self.links = try values.decode(PagedDocumentLinks.self, forKey: "links")
 		self.meta = try values.decodeIfPresent(PagingInformation.self, forKey: "meta")
 		self.included = try values.decodeIfPresent([AppCategory].self, forKey: "included")
-		self.links = try values.decode(PagedDocumentLinks.self, forKey: "links")
 		self.data = try values.decode([AppCategory].self, forKey: "data")
 	}
 
 	public func encode(to encoder: Encoder) throws {
 		var values = encoder.container(keyedBy: StringCodingKey.self)
+		try values.encode(links, forKey: "links")
 		try values.encodeIfPresent(meta, forKey: "meta")
 		try values.encodeIfPresent(included, forKey: "included")
-		try values.encode(links, forKey: "links")
 		try values.encode(data, forKey: "data")
 	}
 }

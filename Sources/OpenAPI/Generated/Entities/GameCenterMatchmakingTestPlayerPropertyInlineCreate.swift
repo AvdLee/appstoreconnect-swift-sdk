@@ -4,53 +4,53 @@
 import Foundation
 
 public struct GameCenterMatchmakingTestPlayerPropertyInlineCreate: Codable, Identifiable {
-	public var id: String?
-	public var type: `Type`
 	public var attributes: Attributes
+	public var type: `Type`
+	public var id: String?
+
+	public struct Attributes: Codable {
+		public var playerID: String
+		public var properties: [Property]?
+
+		public init(playerID: String, properties: [Property]? = nil) {
+			self.playerID = playerID
+			self.properties = properties
+		}
+
+		public init(from decoder: Decoder) throws {
+			let values = try decoder.container(keyedBy: StringCodingKey.self)
+			self.playerID = try values.decode(String.self, forKey: "playerId")
+			self.properties = try values.decodeIfPresent([Property].self, forKey: "properties")
+		}
+
+		public func encode(to encoder: Encoder) throws {
+			var values = encoder.container(keyedBy: StringCodingKey.self)
+			try values.encode(playerID, forKey: "playerId")
+			try values.encodeIfPresent(properties, forKey: "properties")
+		}
+	}
 
 	public enum `Type`: String, Codable, CaseIterable {
 		case gameCenterMatchmakingTestPlayerProperties
 	}
 
-	public struct Attributes: Codable {
-		public var properties: [Property]?
-		public var playerID: String
-
-		public init(properties: [Property]? = nil, playerID: String) {
-			self.properties = properties
-			self.playerID = playerID
-		}
-
-		public init(from decoder: Decoder) throws {
-			let values = try decoder.container(keyedBy: StringCodingKey.self)
-			self.properties = try values.decodeIfPresent([Property].self, forKey: "properties")
-			self.playerID = try values.decode(String.self, forKey: "playerId")
-		}
-
-		public func encode(to encoder: Encoder) throws {
-			var values = encoder.container(keyedBy: StringCodingKey.self)
-			try values.encodeIfPresent(properties, forKey: "properties")
-			try values.encode(playerID, forKey: "playerId")
-		}
-	}
-
-	public init(id: String? = nil, type: `Type`, attributes: Attributes) {
-		self.id = id
-		self.type = type
+	public init(attributes: Attributes, type: `Type`, id: String? = nil) {
 		self.attributes = attributes
+		self.type = type
+		self.id = id
 	}
 
 	public init(from decoder: Decoder) throws {
 		let values = try decoder.container(keyedBy: StringCodingKey.self)
-		self.id = try values.decodeIfPresent(String.self, forKey: "id")
-		self.type = try values.decode(`Type`.self, forKey: "type")
 		self.attributes = try values.decode(Attributes.self, forKey: "attributes")
+		self.type = try values.decode(`Type`.self, forKey: "type")
+		self.id = try values.decodeIfPresent(String.self, forKey: "id")
 	}
 
 	public func encode(to encoder: Encoder) throws {
 		var values = encoder.container(keyedBy: StringCodingKey.self)
-		try values.encodeIfPresent(id, forKey: "id")
-		try values.encode(type, forKey: "type")
 		try values.encode(attributes, forKey: "attributes")
+		try values.encode(type, forKey: "type")
+		try values.encodeIfPresent(id, forKey: "id")
 	}
 }

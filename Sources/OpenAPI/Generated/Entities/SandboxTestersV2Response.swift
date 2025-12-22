@@ -4,27 +4,27 @@
 import Foundation
 
 public struct SandboxTestersV2Response: Codable {
-	public var links: PagedDocumentLinks
-	public var data: [SandboxTesterV2]
 	public var meta: PagingInformation?
+	public var data: [SandboxTesterV2]
+	public var links: PagedDocumentLinks
 
-	public init(links: PagedDocumentLinks, data: [SandboxTesterV2], meta: PagingInformation? = nil) {
-		self.links = links
-		self.data = data
+	public init(meta: PagingInformation? = nil, data: [SandboxTesterV2], links: PagedDocumentLinks) {
 		self.meta = meta
+		self.data = data
+		self.links = links
 	}
 
 	public init(from decoder: Decoder) throws {
 		let values = try decoder.container(keyedBy: StringCodingKey.self)
-		self.links = try values.decode(PagedDocumentLinks.self, forKey: "links")
-		self.data = try values.decode([SandboxTesterV2].self, forKey: "data")
 		self.meta = try values.decodeIfPresent(PagingInformation.self, forKey: "meta")
+		self.data = try values.decode([SandboxTesterV2].self, forKey: "data")
+		self.links = try values.decode(PagedDocumentLinks.self, forKey: "links")
 	}
 
 	public func encode(to encoder: Encoder) throws {
 		var values = encoder.container(keyedBy: StringCodingKey.self)
-		try values.encode(links, forKey: "links")
-		try values.encode(data, forKey: "data")
 		try values.encodeIfPresent(meta, forKey: "meta")
+		try values.encode(data, forKey: "data")
+		try values.encode(links, forKey: "links")
 	}
 }

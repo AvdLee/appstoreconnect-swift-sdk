@@ -4,11 +4,33 @@
 import Foundation
 
 public struct PassTypeID: Codable, Identifiable {
-	public var relationships: Relationships?
-	public var id: String
 	public var attributes: Attributes?
+	public var relationships: Relationships?
 	public var links: ResourceLinks?
 	public var type: `Type`
+	public var id: String
+
+	public struct Attributes: Codable {
+		public var identifier: String?
+		public var name: String?
+
+		public init(identifier: String? = nil, name: String? = nil) {
+			self.identifier = identifier
+			self.name = name
+		}
+
+		public init(from decoder: Decoder) throws {
+			let values = try decoder.container(keyedBy: StringCodingKey.self)
+			self.identifier = try values.decodeIfPresent(String.self, forKey: "identifier")
+			self.name = try values.decodeIfPresent(String.self, forKey: "name")
+		}
+
+		public func encode(to encoder: Encoder) throws {
+			var values = encoder.container(keyedBy: StringCodingKey.self)
+			try values.encodeIfPresent(identifier, forKey: "identifier")
+			try values.encodeIfPresent(name, forKey: "name")
+		}
+	}
 
 	public struct Relationships: Codable {
 		public var certificates: Certificates?
@@ -80,55 +102,33 @@ public struct PassTypeID: Codable, Identifiable {
 		}
 	}
 
-	public struct Attributes: Codable {
-		public var identifier: String?
-		public var name: String?
-
-		public init(identifier: String? = nil, name: String? = nil) {
-			self.identifier = identifier
-			self.name = name
-		}
-
-		public init(from decoder: Decoder) throws {
-			let values = try decoder.container(keyedBy: StringCodingKey.self)
-			self.identifier = try values.decodeIfPresent(String.self, forKey: "identifier")
-			self.name = try values.decodeIfPresent(String.self, forKey: "name")
-		}
-
-		public func encode(to encoder: Encoder) throws {
-			var values = encoder.container(keyedBy: StringCodingKey.self)
-			try values.encodeIfPresent(identifier, forKey: "identifier")
-			try values.encodeIfPresent(name, forKey: "name")
-		}
-	}
-
 	public enum `Type`: String, Codable, CaseIterable {
 		case passTypeIDs = "passTypeIds"
 	}
 
-	public init(relationships: Relationships? = nil, id: String, attributes: Attributes? = nil, links: ResourceLinks? = nil, type: `Type`) {
-		self.relationships = relationships
-		self.id = id
+	public init(attributes: Attributes? = nil, relationships: Relationships? = nil, links: ResourceLinks? = nil, type: `Type`, id: String) {
 		self.attributes = attributes
+		self.relationships = relationships
 		self.links = links
 		self.type = type
+		self.id = id
 	}
 
 	public init(from decoder: Decoder) throws {
 		let values = try decoder.container(keyedBy: StringCodingKey.self)
-		self.relationships = try values.decodeIfPresent(Relationships.self, forKey: "relationships")
-		self.id = try values.decode(String.self, forKey: "id")
 		self.attributes = try values.decodeIfPresent(Attributes.self, forKey: "attributes")
+		self.relationships = try values.decodeIfPresent(Relationships.self, forKey: "relationships")
 		self.links = try values.decodeIfPresent(ResourceLinks.self, forKey: "links")
 		self.type = try values.decode(`Type`.self, forKey: "type")
+		self.id = try values.decode(String.self, forKey: "id")
 	}
 
 	public func encode(to encoder: Encoder) throws {
 		var values = encoder.container(keyedBy: StringCodingKey.self)
-		try values.encodeIfPresent(relationships, forKey: "relationships")
-		try values.encode(id, forKey: "id")
 		try values.encodeIfPresent(attributes, forKey: "attributes")
+		try values.encodeIfPresent(relationships, forKey: "relationships")
 		try values.encodeIfPresent(links, forKey: "links")
 		try values.encode(type, forKey: "type")
+		try values.encode(id, forKey: "id")
 	}
 }

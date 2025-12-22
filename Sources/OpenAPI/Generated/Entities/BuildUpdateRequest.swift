@@ -7,10 +7,36 @@ public struct BuildUpdateRequest: Codable {
 	public var data: Data
 
 	public struct Data: Codable, Identifiable {
-		public var relationships: Relationships?
-		public var id: String
 		public var type: `Type`
 		public var attributes: Attributes?
+		public var relationships: Relationships?
+		public var id: String
+
+		public enum `Type`: String, Codable, CaseIterable {
+			case builds
+		}
+
+		public struct Attributes: Codable {
+			public var isExpired: Bool?
+			public var usesNonExemptEncryption: Bool?
+
+			public init(isExpired: Bool? = nil, usesNonExemptEncryption: Bool? = nil) {
+				self.isExpired = isExpired
+				self.usesNonExemptEncryption = usesNonExemptEncryption
+			}
+
+			public init(from decoder: Decoder) throws {
+				let values = try decoder.container(keyedBy: StringCodingKey.self)
+				self.isExpired = try values.decodeIfPresent(Bool.self, forKey: "expired")
+				self.usesNonExemptEncryption = try values.decodeIfPresent(Bool.self, forKey: "usesNonExemptEncryption")
+			}
+
+			public func encode(to encoder: Encoder) throws {
+				var values = encoder.container(keyedBy: StringCodingKey.self)
+				try values.encodeIfPresent(isExpired, forKey: "expired")
+				try values.encodeIfPresent(usesNonExemptEncryption, forKey: "usesNonExemptEncryption")
+			}
+		}
 
 		public struct Relationships: Codable {
 			public var appEncryptionDeclaration: AppEncryptionDeclaration?
@@ -74,53 +100,27 @@ public struct BuildUpdateRequest: Codable {
 			}
 		}
 
-		public enum `Type`: String, Codable, CaseIterable {
-			case builds
-		}
-
-		public struct Attributes: Codable {
-			public var usesNonExemptEncryption: Bool?
-			public var isExpired: Bool?
-
-			public init(usesNonExemptEncryption: Bool? = nil, isExpired: Bool? = nil) {
-				self.usesNonExemptEncryption = usesNonExemptEncryption
-				self.isExpired = isExpired
-			}
-
-			public init(from decoder: Decoder) throws {
-				let values = try decoder.container(keyedBy: StringCodingKey.self)
-				self.usesNonExemptEncryption = try values.decodeIfPresent(Bool.self, forKey: "usesNonExemptEncryption")
-				self.isExpired = try values.decodeIfPresent(Bool.self, forKey: "expired")
-			}
-
-			public func encode(to encoder: Encoder) throws {
-				var values = encoder.container(keyedBy: StringCodingKey.self)
-				try values.encodeIfPresent(usesNonExemptEncryption, forKey: "usesNonExemptEncryption")
-				try values.encodeIfPresent(isExpired, forKey: "expired")
-			}
-		}
-
-		public init(relationships: Relationships? = nil, id: String, type: `Type`, attributes: Attributes? = nil) {
-			self.relationships = relationships
-			self.id = id
+		public init(type: `Type`, attributes: Attributes? = nil, relationships: Relationships? = nil, id: String) {
 			self.type = type
 			self.attributes = attributes
+			self.relationships = relationships
+			self.id = id
 		}
 
 		public init(from decoder: Decoder) throws {
 			let values = try decoder.container(keyedBy: StringCodingKey.self)
-			self.relationships = try values.decodeIfPresent(Relationships.self, forKey: "relationships")
-			self.id = try values.decode(String.self, forKey: "id")
 			self.type = try values.decode(`Type`.self, forKey: "type")
 			self.attributes = try values.decodeIfPresent(Attributes.self, forKey: "attributes")
+			self.relationships = try values.decodeIfPresent(Relationships.self, forKey: "relationships")
+			self.id = try values.decode(String.self, forKey: "id")
 		}
 
 		public func encode(to encoder: Encoder) throws {
 			var values = encoder.container(keyedBy: StringCodingKey.self)
-			try values.encodeIfPresent(relationships, forKey: "relationships")
-			try values.encode(id, forKey: "id")
 			try values.encode(type, forKey: "type")
 			try values.encodeIfPresent(attributes, forKey: "attributes")
+			try values.encodeIfPresent(relationships, forKey: "relationships")
+			try values.encode(id, forKey: "id")
 		}
 	}
 

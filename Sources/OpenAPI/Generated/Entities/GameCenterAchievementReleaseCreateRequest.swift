@@ -11,52 +11,8 @@ public struct GameCenterAchievementReleaseCreateRequest: Codable {
 		public var type: `Type`
 
 		public struct Relationships: Codable {
-			public var gameCenterDetail: GameCenterDetail
 			public var gameCenterAchievement: GameCenterAchievement
-
-			public struct GameCenterDetail: Codable {
-				public var data: Data
-
-				public struct Data: Codable, Identifiable {
-					public var id: String
-					public var type: `Type`
-
-					public enum `Type`: String, Codable, CaseIterable {
-						case gameCenterDetails
-					}
-
-					public init(id: String, type: `Type`) {
-						self.id = id
-						self.type = type
-					}
-
-					public init(from decoder: Decoder) throws {
-						let values = try decoder.container(keyedBy: StringCodingKey.self)
-						self.id = try values.decode(String.self, forKey: "id")
-						self.type = try values.decode(`Type`.self, forKey: "type")
-					}
-
-					public func encode(to encoder: Encoder) throws {
-						var values = encoder.container(keyedBy: StringCodingKey.self)
-						try values.encode(id, forKey: "id")
-						try values.encode(type, forKey: "type")
-					}
-				}
-
-				public init(data: Data) {
-					self.data = data
-				}
-
-				public init(from decoder: Decoder) throws {
-					let values = try decoder.container(keyedBy: StringCodingKey.self)
-					self.data = try values.decode(Data.self, forKey: "data")
-				}
-
-				public func encode(to encoder: Encoder) throws {
-					var values = encoder.container(keyedBy: StringCodingKey.self)
-					try values.encode(data, forKey: "data")
-				}
-			}
+			public var gameCenterDetail: GameCenterDetail
 
 			public struct GameCenterAchievement: Codable {
 				public var data: Data
@@ -102,21 +58,65 @@ public struct GameCenterAchievementReleaseCreateRequest: Codable {
 				}
 			}
 
-			public init(gameCenterDetail: GameCenterDetail, gameCenterAchievement: GameCenterAchievement) {
-				self.gameCenterDetail = gameCenterDetail
+			public struct GameCenterDetail: Codable {
+				public var data: Data
+
+				public struct Data: Codable, Identifiable {
+					public var id: String
+					public var type: `Type`
+
+					public enum `Type`: String, Codable, CaseIterable {
+						case gameCenterDetails
+					}
+
+					public init(id: String, type: `Type`) {
+						self.id = id
+						self.type = type
+					}
+
+					public init(from decoder: Decoder) throws {
+						let values = try decoder.container(keyedBy: StringCodingKey.self)
+						self.id = try values.decode(String.self, forKey: "id")
+						self.type = try values.decode(`Type`.self, forKey: "type")
+					}
+
+					public func encode(to encoder: Encoder) throws {
+						var values = encoder.container(keyedBy: StringCodingKey.self)
+						try values.encode(id, forKey: "id")
+						try values.encode(type, forKey: "type")
+					}
+				}
+
+				public init(data: Data) {
+					self.data = data
+				}
+
+				public init(from decoder: Decoder) throws {
+					let values = try decoder.container(keyedBy: StringCodingKey.self)
+					self.data = try values.decode(Data.self, forKey: "data")
+				}
+
+				public func encode(to encoder: Encoder) throws {
+					var values = encoder.container(keyedBy: StringCodingKey.self)
+					try values.encode(data, forKey: "data")
+				}
+			}
+
+			public init(gameCenterAchievement: GameCenterAchievement, gameCenterDetail: GameCenterDetail) {
 				self.gameCenterAchievement = gameCenterAchievement
+				self.gameCenterDetail = gameCenterDetail
 			}
 
 			public init(from decoder: Decoder) throws {
 				let values = try decoder.container(keyedBy: StringCodingKey.self)
-				self.gameCenterDetail = try values.decode(GameCenterDetail.self, forKey: "gameCenterDetail")
 				self.gameCenterAchievement = try values.decode(GameCenterAchievement.self, forKey: "gameCenterAchievement")
+				self.gameCenterDetail = try values.decode(GameCenterDetail.self, forKey: "gameCenterDetail")
 			}
 
 			public func encode(to encoder: Encoder) throws {
 				var values = encoder.container(keyedBy: StringCodingKey.self)
-				try values.encode(gameCenterDetail, forKey: "gameCenterDetail")
 				try values.encode(gameCenterAchievement, forKey: "gameCenterAchievement")
+				try values.encode(gameCenterDetail, forKey: "gameCenterDetail")
 			}
 		}
 

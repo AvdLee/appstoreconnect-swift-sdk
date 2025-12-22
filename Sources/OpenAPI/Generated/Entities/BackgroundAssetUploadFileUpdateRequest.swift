@@ -16,29 +16,29 @@ public struct BackgroundAssetUploadFileUpdateRequest: Codable {
 		}
 
 		public struct Attributes: Codable {
-			public var isUploaded: Bool?
-			public var sourceFileChecksums: Checksums?
 			/// - warning: Deprecated.
 			public var sourceFileChecksum: String?
+			public var sourceFileChecksums: Checksums?
+			public var isUploaded: Bool?
 
-			public init(isUploaded: Bool? = nil, sourceFileChecksums: Checksums? = nil, sourceFileChecksum: String? = nil) {
-				self.isUploaded = isUploaded
-				self.sourceFileChecksums = sourceFileChecksums
+			public init(sourceFileChecksum: String? = nil, sourceFileChecksums: Checksums? = nil, isUploaded: Bool? = nil) {
 				self.sourceFileChecksum = sourceFileChecksum
+				self.sourceFileChecksums = sourceFileChecksums
+				self.isUploaded = isUploaded
 			}
 
 			public init(from decoder: Decoder) throws {
 				let values = try decoder.container(keyedBy: StringCodingKey.self)
-				self.isUploaded = try values.decodeIfPresent(Bool.self, forKey: "uploaded")
-				self.sourceFileChecksums = try values.decodeIfPresent(Checksums.self, forKey: "sourceFileChecksums")
 				self.sourceFileChecksum = try values.decodeIfPresent(String.self, forKey: "sourceFileChecksum")
+				self.sourceFileChecksums = try values.decodeIfPresent(Checksums.self, forKey: "sourceFileChecksums")
+				self.isUploaded = try values.decodeIfPresent(Bool.self, forKey: "uploaded")
 			}
 
 			public func encode(to encoder: Encoder) throws {
 				var values = encoder.container(keyedBy: StringCodingKey.self)
-				try values.encodeIfPresent(isUploaded, forKey: "uploaded")
-				try values.encodeIfPresent(sourceFileChecksums, forKey: "sourceFileChecksums")
 				try values.encodeIfPresent(sourceFileChecksum, forKey: "sourceFileChecksum")
+				try values.encodeIfPresent(sourceFileChecksums, forKey: "sourceFileChecksums")
+				try values.encodeIfPresent(isUploaded, forKey: "uploaded")
 			}
 		}
 

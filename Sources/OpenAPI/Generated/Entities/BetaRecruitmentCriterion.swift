@@ -5,29 +5,29 @@ import Foundation
 
 public struct BetaRecruitmentCriterion: Codable, Identifiable {
 	public var attributes: Attributes?
+	public var id: String
 	public var type: `Type`
 	public var links: ResourceLinks?
-	public var id: String
 
 	public struct Attributes: Codable {
-		public var deviceFamilyOsVersionFilters: [DeviceFamilyOsVersionFilter]?
 		public var lastModifiedDate: Date?
+		public var deviceFamilyOsVersionFilters: [DeviceFamilyOsVersionFilter]?
 
-		public init(deviceFamilyOsVersionFilters: [DeviceFamilyOsVersionFilter]? = nil, lastModifiedDate: Date? = nil) {
-			self.deviceFamilyOsVersionFilters = deviceFamilyOsVersionFilters
+		public init(lastModifiedDate: Date? = nil, deviceFamilyOsVersionFilters: [DeviceFamilyOsVersionFilter]? = nil) {
 			self.lastModifiedDate = lastModifiedDate
+			self.deviceFamilyOsVersionFilters = deviceFamilyOsVersionFilters
 		}
 
 		public init(from decoder: Decoder) throws {
 			let values = try decoder.container(keyedBy: StringCodingKey.self)
-			self.deviceFamilyOsVersionFilters = try values.decodeIfPresent([DeviceFamilyOsVersionFilter].self, forKey: "deviceFamilyOsVersionFilters")
 			self.lastModifiedDate = try values.decodeIfPresent(Date.self, forKey: "lastModifiedDate")
+			self.deviceFamilyOsVersionFilters = try values.decodeIfPresent([DeviceFamilyOsVersionFilter].self, forKey: "deviceFamilyOsVersionFilters")
 		}
 
 		public func encode(to encoder: Encoder) throws {
 			var values = encoder.container(keyedBy: StringCodingKey.self)
-			try values.encodeIfPresent(deviceFamilyOsVersionFilters, forKey: "deviceFamilyOsVersionFilters")
 			try values.encodeIfPresent(lastModifiedDate, forKey: "lastModifiedDate")
+			try values.encodeIfPresent(deviceFamilyOsVersionFilters, forKey: "deviceFamilyOsVersionFilters")
 		}
 	}
 
@@ -35,26 +35,26 @@ public struct BetaRecruitmentCriterion: Codable, Identifiable {
 		case betaRecruitmentCriteria
 	}
 
-	public init(attributes: Attributes? = nil, type: `Type`, links: ResourceLinks? = nil, id: String) {
+	public init(attributes: Attributes? = nil, id: String, type: `Type`, links: ResourceLinks? = nil) {
 		self.attributes = attributes
+		self.id = id
 		self.type = type
 		self.links = links
-		self.id = id
 	}
 
 	public init(from decoder: Decoder) throws {
 		let values = try decoder.container(keyedBy: StringCodingKey.self)
 		self.attributes = try values.decodeIfPresent(Attributes.self, forKey: "attributes")
+		self.id = try values.decode(String.self, forKey: "id")
 		self.type = try values.decode(`Type`.self, forKey: "type")
 		self.links = try values.decodeIfPresent(ResourceLinks.self, forKey: "links")
-		self.id = try values.decode(String.self, forKey: "id")
 	}
 
 	public func encode(to encoder: Encoder) throws {
 		var values = encoder.container(keyedBy: StringCodingKey.self)
 		try values.encodeIfPresent(attributes, forKey: "attributes")
+		try values.encode(id, forKey: "id")
 		try values.encode(type, forKey: "type")
 		try values.encodeIfPresent(links, forKey: "links")
-		try values.encode(id, forKey: "id")
 	}
 }

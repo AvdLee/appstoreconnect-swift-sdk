@@ -4,8 +4,8 @@
 import Foundation
 
 public struct GameCenterMatchmakingRuleSetTestResponse: Codable {
-	public var included: [IncludedItem]?
 	public var links: DocumentLinks
+	public var included: [IncludedItem]?
 	/// GameCenterMatchmakingRuleSetTest
 	public var data: GameCenterMatchmakingRuleSetTest
 
@@ -43,23 +43,23 @@ public struct GameCenterMatchmakingRuleSetTestResponse: Codable {
 		}
 	}
 
-	public init(included: [IncludedItem]? = nil, links: DocumentLinks, data: GameCenterMatchmakingRuleSetTest) {
-		self.included = included
+	public init(links: DocumentLinks, included: [IncludedItem]? = nil, data: GameCenterMatchmakingRuleSetTest) {
 		self.links = links
+		self.included = included
 		self.data = data
 	}
 
 	public init(from decoder: Decoder) throws {
 		let values = try decoder.container(keyedBy: StringCodingKey.self)
-		self.included = try values.decodeIfPresent([IncludedItem].self, forKey: "included")
 		self.links = try values.decode(DocumentLinks.self, forKey: "links")
+		self.included = try values.decodeIfPresent([IncludedItem].self, forKey: "included")
 		self.data = try values.decode(GameCenterMatchmakingRuleSetTest.self, forKey: "data")
 	}
 
 	public func encode(to encoder: Encoder) throws {
 		var values = encoder.container(keyedBy: StringCodingKey.self)
-		try values.encodeIfPresent(included, forKey: "included")
 		try values.encode(links, forKey: "links")
+		try values.encodeIfPresent(included, forKey: "included")
 		try values.encode(data, forKey: "data")
 	}
 }

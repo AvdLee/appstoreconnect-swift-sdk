@@ -7,8 +7,8 @@ public struct InAppPurchaseContent: Codable, Identifiable {
 	public var links: ResourceLinks?
 	public var id: String
 	public var relationships: Relationships?
-	public var type: `Type`
 	public var attributes: Attributes?
+	public var type: `Type`
 
 	public struct Relationships: Codable {
 		public var inAppPurchaseV2: InAppPurchaseV2?
@@ -72,46 +72,46 @@ public struct InAppPurchaseContent: Codable, Identifiable {
 		}
 	}
 
-	public enum `Type`: String, Codable, CaseIterable {
-		case inAppPurchaseContents
-	}
-
 	public struct Attributes: Codable {
-		public var fileName: String?
-		public var url: URL?
-		public var fileSize: Int?
 		public var lastModifiedDate: Date?
+		public var fileName: String?
+		public var fileSize: Int?
+		public var url: URL?
 
-		public init(fileName: String? = nil, url: URL? = nil, fileSize: Int? = nil, lastModifiedDate: Date? = nil) {
-			self.fileName = fileName
-			self.url = url
-			self.fileSize = fileSize
+		public init(lastModifiedDate: Date? = nil, fileName: String? = nil, fileSize: Int? = nil, url: URL? = nil) {
 			self.lastModifiedDate = lastModifiedDate
+			self.fileName = fileName
+			self.fileSize = fileSize
+			self.url = url
 		}
 
 		public init(from decoder: Decoder) throws {
 			let values = try decoder.container(keyedBy: StringCodingKey.self)
-			self.fileName = try values.decodeIfPresent(String.self, forKey: "fileName")
-			self.url = try values.decodeIfPresent(URL.self, forKey: "url")
-			self.fileSize = try values.decodeIfPresent(Int.self, forKey: "fileSize")
 			self.lastModifiedDate = try values.decodeIfPresent(Date.self, forKey: "lastModifiedDate")
+			self.fileName = try values.decodeIfPresent(String.self, forKey: "fileName")
+			self.fileSize = try values.decodeIfPresent(Int.self, forKey: "fileSize")
+			self.url = try values.decodeIfPresent(URL.self, forKey: "url")
 		}
 
 		public func encode(to encoder: Encoder) throws {
 			var values = encoder.container(keyedBy: StringCodingKey.self)
-			try values.encodeIfPresent(fileName, forKey: "fileName")
-			try values.encodeIfPresent(url, forKey: "url")
-			try values.encodeIfPresent(fileSize, forKey: "fileSize")
 			try values.encodeIfPresent(lastModifiedDate, forKey: "lastModifiedDate")
+			try values.encodeIfPresent(fileName, forKey: "fileName")
+			try values.encodeIfPresent(fileSize, forKey: "fileSize")
+			try values.encodeIfPresent(url, forKey: "url")
 		}
 	}
 
-	public init(links: ResourceLinks? = nil, id: String, relationships: Relationships? = nil, type: `Type`, attributes: Attributes? = nil) {
+	public enum `Type`: String, Codable, CaseIterable {
+		case inAppPurchaseContents
+	}
+
+	public init(links: ResourceLinks? = nil, id: String, relationships: Relationships? = nil, attributes: Attributes? = nil, type: `Type`) {
 		self.links = links
 		self.id = id
 		self.relationships = relationships
-		self.type = type
 		self.attributes = attributes
+		self.type = type
 	}
 
 	public init(from decoder: Decoder) throws {
@@ -119,8 +119,8 @@ public struct InAppPurchaseContent: Codable, Identifiable {
 		self.links = try values.decodeIfPresent(ResourceLinks.self, forKey: "links")
 		self.id = try values.decode(String.self, forKey: "id")
 		self.relationships = try values.decodeIfPresent(Relationships.self, forKey: "relationships")
-		self.type = try values.decode(`Type`.self, forKey: "type")
 		self.attributes = try values.decodeIfPresent(Attributes.self, forKey: "attributes")
+		self.type = try values.decode(`Type`.self, forKey: "type")
 	}
 
 	public func encode(to encoder: Encoder) throws {
@@ -128,7 +128,7 @@ public struct InAppPurchaseContent: Codable, Identifiable {
 		try values.encodeIfPresent(links, forKey: "links")
 		try values.encode(id, forKey: "id")
 		try values.encodeIfPresent(relationships, forKey: "relationships")
-		try values.encode(type, forKey: "type")
 		try values.encodeIfPresent(attributes, forKey: "attributes")
+		try values.encode(type, forKey: "type")
 	}
 }

@@ -4,21 +4,15 @@
 import Foundation
 
 public struct CiScheduledStartCondition: Codable {
-	public var source: CiBranchPatterns?
 	public var schedule: Schedule?
+	public var source: CiBranchPatterns?
 
 	public struct Schedule: Codable {
-		public var frequency: Frequency?
+		public var days: [Day]?
 		public var minute: Int?
 		public var timezone: String?
+		public var frequency: Frequency?
 		public var hour: Int?
-		public var days: [Day]?
-
-		public enum Frequency: String, Codable, CaseIterable {
-			case weekly = "WEEKLY"
-			case daily = "DAILY"
-			case hourly = "HOURLY"
-		}
 
 		public enum Day: String, Codable, CaseIterable {
 			case sunday = "SUNDAY"
@@ -30,47 +24,53 @@ public struct CiScheduledStartCondition: Codable {
 			case saturday = "SATURDAY"
 		}
 
-		public init(frequency: Frequency? = nil, minute: Int? = nil, timezone: String? = nil, hour: Int? = nil, days: [Day]? = nil) {
-			self.frequency = frequency
+		public enum Frequency: String, Codable, CaseIterable {
+			case weekly = "WEEKLY"
+			case daily = "DAILY"
+			case hourly = "HOURLY"
+		}
+
+		public init(days: [Day]? = nil, minute: Int? = nil, timezone: String? = nil, frequency: Frequency? = nil, hour: Int? = nil) {
+			self.days = days
 			self.minute = minute
 			self.timezone = timezone
+			self.frequency = frequency
 			self.hour = hour
-			self.days = days
 		}
 
 		public init(from decoder: Decoder) throws {
 			let values = try decoder.container(keyedBy: StringCodingKey.self)
-			self.frequency = try values.decodeIfPresent(Frequency.self, forKey: "frequency")
+			self.days = try values.decodeIfPresent([Day].self, forKey: "days")
 			self.minute = try values.decodeIfPresent(Int.self, forKey: "minute")
 			self.timezone = try values.decodeIfPresent(String.self, forKey: "timezone")
+			self.frequency = try values.decodeIfPresent(Frequency.self, forKey: "frequency")
 			self.hour = try values.decodeIfPresent(Int.self, forKey: "hour")
-			self.days = try values.decodeIfPresent([Day].self, forKey: "days")
 		}
 
 		public func encode(to encoder: Encoder) throws {
 			var values = encoder.container(keyedBy: StringCodingKey.self)
-			try values.encodeIfPresent(frequency, forKey: "frequency")
+			try values.encodeIfPresent(days, forKey: "days")
 			try values.encodeIfPresent(minute, forKey: "minute")
 			try values.encodeIfPresent(timezone, forKey: "timezone")
+			try values.encodeIfPresent(frequency, forKey: "frequency")
 			try values.encodeIfPresent(hour, forKey: "hour")
-			try values.encodeIfPresent(days, forKey: "days")
 		}
 	}
 
-	public init(source: CiBranchPatterns? = nil, schedule: Schedule? = nil) {
-		self.source = source
+	public init(schedule: Schedule? = nil, source: CiBranchPatterns? = nil) {
 		self.schedule = schedule
+		self.source = source
 	}
 
 	public init(from decoder: Decoder) throws {
 		let values = try decoder.container(keyedBy: StringCodingKey.self)
-		self.source = try values.decodeIfPresent(CiBranchPatterns.self, forKey: "source")
 		self.schedule = try values.decodeIfPresent(Schedule.self, forKey: "schedule")
+		self.source = try values.decodeIfPresent(CiBranchPatterns.self, forKey: "source")
 	}
 
 	public func encode(to encoder: Encoder) throws {
 		var values = encoder.container(keyedBy: StringCodingKey.self)
-		try values.encodeIfPresent(source, forKey: "source")
 		try values.encodeIfPresent(schedule, forKey: "schedule")
+		try values.encodeIfPresent(source, forKey: "source")
 	}
 }

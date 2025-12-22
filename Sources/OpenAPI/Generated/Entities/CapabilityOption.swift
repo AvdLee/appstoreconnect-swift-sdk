@@ -4,12 +4,12 @@
 import Foundation
 
 public struct CapabilityOption: Codable {
-	public var isEnabled: Bool?
-	public var description: String?
-	public var name: String?
-	public var key: Key?
 	public var isSupportsWildcard: Bool?
+	public var description: String?
+	public var isEnabled: Bool?
+	public var key: Key?
 	public var isEnabledByDefault: Bool?
+	public var name: String?
 
 	public enum Key: String, Codable, CaseIterable {
 		case xcode5 = "XCODE_5"
@@ -20,32 +20,32 @@ public struct CapabilityOption: Codable {
 		case primaryAppConsent = "PRIMARY_APP_CONSENT"
 	}
 
-	public init(isEnabled: Bool? = nil, description: String? = nil, name: String? = nil, key: Key? = nil, isSupportsWildcard: Bool? = nil, isEnabledByDefault: Bool? = nil) {
-		self.isEnabled = isEnabled
-		self.description = description
-		self.name = name
-		self.key = key
+	public init(isSupportsWildcard: Bool? = nil, description: String? = nil, isEnabled: Bool? = nil, key: Key? = nil, isEnabledByDefault: Bool? = nil, name: String? = nil) {
 		self.isSupportsWildcard = isSupportsWildcard
+		self.description = description
+		self.isEnabled = isEnabled
+		self.key = key
 		self.isEnabledByDefault = isEnabledByDefault
+		self.name = name
 	}
 
 	public init(from decoder: Decoder) throws {
 		let values = try decoder.container(keyedBy: StringCodingKey.self)
-		self.isEnabled = try values.decodeIfPresent(Bool.self, forKey: "enabled")
-		self.description = try values.decodeIfPresent(String.self, forKey: "description")
-		self.name = try values.decodeIfPresent(String.self, forKey: "name")
-		self.key = try values.decodeIfPresent(Key.self, forKey: "key")
 		self.isSupportsWildcard = try values.decodeIfPresent(Bool.self, forKey: "supportsWildcard")
+		self.description = try values.decodeIfPresent(String.self, forKey: "description")
+		self.isEnabled = try values.decodeIfPresent(Bool.self, forKey: "enabled")
+		self.key = try values.decodeIfPresent(Key.self, forKey: "key")
 		self.isEnabledByDefault = try values.decodeIfPresent(Bool.self, forKey: "enabledByDefault")
+		self.name = try values.decodeIfPresent(String.self, forKey: "name")
 	}
 
 	public func encode(to encoder: Encoder) throws {
 		var values = encoder.container(keyedBy: StringCodingKey.self)
-		try values.encodeIfPresent(isEnabled, forKey: "enabled")
-		try values.encodeIfPresent(description, forKey: "description")
-		try values.encodeIfPresent(name, forKey: "name")
-		try values.encodeIfPresent(key, forKey: "key")
 		try values.encodeIfPresent(isSupportsWildcard, forKey: "supportsWildcard")
+		try values.encodeIfPresent(description, forKey: "description")
+		try values.encodeIfPresent(isEnabled, forKey: "enabled")
+		try values.encodeIfPresent(key, forKey: "key")
 		try values.encodeIfPresent(isEnabledByDefault, forKey: "enabledByDefault")
+		try values.encodeIfPresent(name, forKey: "name")
 	}
 }

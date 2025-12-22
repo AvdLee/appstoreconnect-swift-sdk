@@ -8,8 +8,8 @@ public struct GameCenterAchievementImageV2CreateRequest: Codable {
 
 	public struct Data: Codable {
 		public var relationships: Relationships
-		public var attributes: Attributes
 		public var type: `Type`
+		public var attributes: Attributes
 
 		public struct Relationships: Codable {
 			public var localization: Localization
@@ -73,6 +73,10 @@ public struct GameCenterAchievementImageV2CreateRequest: Codable {
 			}
 		}
 
+		public enum `Type`: String, Codable, CaseIterable {
+			case gameCenterAchievementImages
+		}
+
 		public struct Attributes: Codable {
 			public var fileSize: Int
 			public var fileName: String
@@ -95,28 +99,24 @@ public struct GameCenterAchievementImageV2CreateRequest: Codable {
 			}
 		}
 
-		public enum `Type`: String, Codable, CaseIterable {
-			case gameCenterAchievementImages
-		}
-
-		public init(relationships: Relationships, attributes: Attributes, type: `Type`) {
+		public init(relationships: Relationships, type: `Type`, attributes: Attributes) {
 			self.relationships = relationships
-			self.attributes = attributes
 			self.type = type
+			self.attributes = attributes
 		}
 
 		public init(from decoder: Decoder) throws {
 			let values = try decoder.container(keyedBy: StringCodingKey.self)
 			self.relationships = try values.decode(Relationships.self, forKey: "relationships")
-			self.attributes = try values.decode(Attributes.self, forKey: "attributes")
 			self.type = try values.decode(`Type`.self, forKey: "type")
+			self.attributes = try values.decode(Attributes.self, forKey: "attributes")
 		}
 
 		public func encode(to encoder: Encoder) throws {
 			var values = encoder.container(keyedBy: StringCodingKey.self)
 			try values.encode(relationships, forKey: "relationships")
-			try values.encode(attributes, forKey: "attributes")
 			try values.encode(type, forKey: "type")
+			try values.encode(attributes, forKey: "attributes")
 		}
 	}
 

@@ -4,31 +4,31 @@
 import Foundation
 
 public struct AppStoreVersionPromotion: Codable, Identifiable {
+	public var type: `Type`
 	public var links: ResourceLinks?
 	public var id: String
-	public var type: `Type`
 
 	public enum `Type`: String, Codable, CaseIterable {
 		case appStoreVersionPromotions
 	}
 
-	public init(links: ResourceLinks? = nil, id: String, type: `Type`) {
+	public init(type: `Type`, links: ResourceLinks? = nil, id: String) {
+		self.type = type
 		self.links = links
 		self.id = id
-		self.type = type
 	}
 
 	public init(from decoder: Decoder) throws {
 		let values = try decoder.container(keyedBy: StringCodingKey.self)
+		self.type = try values.decode(`Type`.self, forKey: "type")
 		self.links = try values.decodeIfPresent(ResourceLinks.self, forKey: "links")
 		self.id = try values.decode(String.self, forKey: "id")
-		self.type = try values.decode(`Type`.self, forKey: "type")
 	}
 
 	public func encode(to encoder: Encoder) throws {
 		var values = encoder.container(keyedBy: StringCodingKey.self)
+		try values.encode(type, forKey: "type")
 		try values.encodeIfPresent(links, forKey: "links")
 		try values.encode(id, forKey: "id")
-		try values.encode(type, forKey: "type")
 	}
 }

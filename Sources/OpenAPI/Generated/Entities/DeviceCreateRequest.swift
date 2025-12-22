@@ -7,54 +7,54 @@ public struct DeviceCreateRequest: Codable {
 	public var data: Data
 
 	public struct Data: Codable {
-		public var type: `Type`
 		public var attributes: Attributes
+		public var type: `Type`
+
+		public struct Attributes: Codable {
+			public var name: String
+			public var udid: String
+			public var platform: BundleIDPlatform
+
+			public init(name: String, udid: String, platform: BundleIDPlatform) {
+				self.name = name
+				self.udid = udid
+				self.platform = platform
+			}
+
+			public init(from decoder: Decoder) throws {
+				let values = try decoder.container(keyedBy: StringCodingKey.self)
+				self.name = try values.decode(String.self, forKey: "name")
+				self.udid = try values.decode(String.self, forKey: "udid")
+				self.platform = try values.decode(BundleIDPlatform.self, forKey: "platform")
+			}
+
+			public func encode(to encoder: Encoder) throws {
+				var values = encoder.container(keyedBy: StringCodingKey.self)
+				try values.encode(name, forKey: "name")
+				try values.encode(udid, forKey: "udid")
+				try values.encode(platform, forKey: "platform")
+			}
+		}
 
 		public enum `Type`: String, Codable, CaseIterable {
 			case devices
 		}
 
-		public struct Attributes: Codable {
-			public var platform: BundleIDPlatform
-			public var name: String
-			public var udid: String
-
-			public init(platform: BundleIDPlatform, name: String, udid: String) {
-				self.platform = platform
-				self.name = name
-				self.udid = udid
-			}
-
-			public init(from decoder: Decoder) throws {
-				let values = try decoder.container(keyedBy: StringCodingKey.self)
-				self.platform = try values.decode(BundleIDPlatform.self, forKey: "platform")
-				self.name = try values.decode(String.self, forKey: "name")
-				self.udid = try values.decode(String.self, forKey: "udid")
-			}
-
-			public func encode(to encoder: Encoder) throws {
-				var values = encoder.container(keyedBy: StringCodingKey.self)
-				try values.encode(platform, forKey: "platform")
-				try values.encode(name, forKey: "name")
-				try values.encode(udid, forKey: "udid")
-			}
-		}
-
-		public init(type: `Type`, attributes: Attributes) {
-			self.type = type
+		public init(attributes: Attributes, type: `Type`) {
 			self.attributes = attributes
+			self.type = type
 		}
 
 		public init(from decoder: Decoder) throws {
 			let values = try decoder.container(keyedBy: StringCodingKey.self)
-			self.type = try values.decode(`Type`.self, forKey: "type")
 			self.attributes = try values.decode(Attributes.self, forKey: "attributes")
+			self.type = try values.decode(`Type`.self, forKey: "type")
 		}
 
 		public func encode(to encoder: Encoder) throws {
 			var values = encoder.container(keyedBy: StringCodingKey.self)
-			try values.encode(type, forKey: "type")
 			try values.encode(attributes, forKey: "attributes")
+			try values.encode(type, forKey: "type")
 		}
 	}
 

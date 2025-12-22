@@ -4,13 +4,13 @@
 import Foundation
 
 public struct ResponseError: Codable, Identifiable {
-	public var links: ErrorLinks?
+	public var detail: String?
 	public var id: String?
 	public var source: Source?
-	public var detail: String?
-	public var meta: Meta?
-	public var title: String
+	public var links: ErrorLinks?
 	public var status: String
+	public var title: String
+	public var meta: Meta?
 	public var code: String
 
 	public enum Source: Codable {
@@ -58,38 +58,38 @@ public struct ResponseError: Codable, Identifiable {
 		}
 	}
 
-	public init(links: ErrorLinks? = nil, id: String? = nil, source: Source? = nil, detail: String? = nil, meta: Meta? = nil, title: String, status: String, code: String) {
-		self.links = links
+	public init(detail: String? = nil, id: String? = nil, source: Source? = nil, links: ErrorLinks? = nil, status: String, title: String, meta: Meta? = nil, code: String) {
+		self.detail = detail
 		self.id = id
 		self.source = source
-		self.detail = detail
-		self.meta = meta
-		self.title = title
+		self.links = links
 		self.status = status
+		self.title = title
+		self.meta = meta
 		self.code = code
 	}
 
 	public init(from decoder: Decoder) throws {
 		let values = try decoder.container(keyedBy: StringCodingKey.self)
-		self.links = try values.decodeIfPresent(ErrorLinks.self, forKey: "links")
+		self.detail = try values.decodeIfPresent(String.self, forKey: "detail")
 		self.id = try values.decodeIfPresent(String.self, forKey: "id")
 		self.source = try values.decodeIfPresent(Source.self, forKey: "source")
-		self.detail = try values.decodeIfPresent(String.self, forKey: "detail")
-		self.meta = try values.decodeIfPresent(Meta.self, forKey: "meta")
-		self.title = try values.decode(String.self, forKey: "title")
+		self.links = try values.decodeIfPresent(ErrorLinks.self, forKey: "links")
 		self.status = try values.decode(String.self, forKey: "status")
+		self.title = try values.decode(String.self, forKey: "title")
+		self.meta = try values.decodeIfPresent(Meta.self, forKey: "meta")
 		self.code = try values.decode(String.self, forKey: "code")
 	}
 
 	public func encode(to encoder: Encoder) throws {
 		var values = encoder.container(keyedBy: StringCodingKey.self)
-		try values.encodeIfPresent(links, forKey: "links")
+		try values.encodeIfPresent(detail, forKey: "detail")
 		try values.encodeIfPresent(id, forKey: "id")
 		try values.encodeIfPresent(source, forKey: "source")
-		try values.encodeIfPresent(detail, forKey: "detail")
-		try values.encodeIfPresent(meta, forKey: "meta")
-		try values.encode(title, forKey: "title")
+		try values.encodeIfPresent(links, forKey: "links")
 		try values.encode(status, forKey: "status")
+		try values.encode(title, forKey: "title")
+		try values.encodeIfPresent(meta, forKey: "meta")
 		try values.encode(code, forKey: "code")
 	}
 }

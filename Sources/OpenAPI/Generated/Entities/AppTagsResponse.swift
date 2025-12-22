@@ -6,29 +6,29 @@ import Foundation
 public struct AppTagsResponse: Codable {
 	public var links: PagedDocumentLinks
 	public var data: [AppTag]
-	public var meta: PagingInformation?
 	public var included: [Territory]?
+	public var meta: PagingInformation?
 
-	public init(links: PagedDocumentLinks, data: [AppTag], meta: PagingInformation? = nil, included: [Territory]? = nil) {
+	public init(links: PagedDocumentLinks, data: [AppTag], included: [Territory]? = nil, meta: PagingInformation? = nil) {
 		self.links = links
 		self.data = data
-		self.meta = meta
 		self.included = included
+		self.meta = meta
 	}
 
 	public init(from decoder: Decoder) throws {
 		let values = try decoder.container(keyedBy: StringCodingKey.self)
 		self.links = try values.decode(PagedDocumentLinks.self, forKey: "links")
 		self.data = try values.decode([AppTag].self, forKey: "data")
-		self.meta = try values.decodeIfPresent(PagingInformation.self, forKey: "meta")
 		self.included = try values.decodeIfPresent([Territory].self, forKey: "included")
+		self.meta = try values.decodeIfPresent(PagingInformation.self, forKey: "meta")
 	}
 
 	public func encode(to encoder: Encoder) throws {
 		var values = encoder.container(keyedBy: StringCodingKey.self)
 		try values.encode(links, forKey: "links")
 		try values.encode(data, forKey: "data")
-		try values.encodeIfPresent(meta, forKey: "meta")
 		try values.encodeIfPresent(included, forKey: "included")
+		try values.encodeIfPresent(meta, forKey: "meta")
 	}
 }

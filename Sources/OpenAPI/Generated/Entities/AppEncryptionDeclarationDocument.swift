@@ -4,77 +4,77 @@
 import Foundation
 
 public struct AppEncryptionDeclarationDocument: Codable, Identifiable {
-	public var attributes: Attributes?
+	public var type: `Type`
 	public var id: String
 	public var links: ResourceLinks?
-	public var type: `Type`
-
-	public struct Attributes: Codable {
-		public var assetDeliveryState: AppMediaAssetState?
-		public var fileName: String?
-		public var uploadOperations: [UploadOperation]?
-		public var fileSize: Int?
-		public var downloadURL: URL?
-		public var assetToken: String?
-		public var sourceFileChecksum: String?
-
-		public init(assetDeliveryState: AppMediaAssetState? = nil, fileName: String? = nil, uploadOperations: [UploadOperation]? = nil, fileSize: Int? = nil, downloadURL: URL? = nil, assetToken: String? = nil, sourceFileChecksum: String? = nil) {
-			self.assetDeliveryState = assetDeliveryState
-			self.fileName = fileName
-			self.uploadOperations = uploadOperations
-			self.fileSize = fileSize
-			self.downloadURL = downloadURL
-			self.assetToken = assetToken
-			self.sourceFileChecksum = sourceFileChecksum
-		}
-
-		public init(from decoder: Decoder) throws {
-			let values = try decoder.container(keyedBy: StringCodingKey.self)
-			self.assetDeliveryState = try values.decodeIfPresent(AppMediaAssetState.self, forKey: "assetDeliveryState")
-			self.fileName = try values.decodeIfPresent(String.self, forKey: "fileName")
-			self.uploadOperations = try values.decodeIfPresent([UploadOperation].self, forKey: "uploadOperations")
-			self.fileSize = try values.decodeIfPresent(Int.self, forKey: "fileSize")
-			self.downloadURL = try values.decodeIfPresent(URL.self, forKey: "downloadUrl")
-			self.assetToken = try values.decodeIfPresent(String.self, forKey: "assetToken")
-			self.sourceFileChecksum = try values.decodeIfPresent(String.self, forKey: "sourceFileChecksum")
-		}
-
-		public func encode(to encoder: Encoder) throws {
-			var values = encoder.container(keyedBy: StringCodingKey.self)
-			try values.encodeIfPresent(assetDeliveryState, forKey: "assetDeliveryState")
-			try values.encodeIfPresent(fileName, forKey: "fileName")
-			try values.encodeIfPresent(uploadOperations, forKey: "uploadOperations")
-			try values.encodeIfPresent(fileSize, forKey: "fileSize")
-			try values.encodeIfPresent(downloadURL, forKey: "downloadUrl")
-			try values.encodeIfPresent(assetToken, forKey: "assetToken")
-			try values.encodeIfPresent(sourceFileChecksum, forKey: "sourceFileChecksum")
-		}
-	}
+	public var attributes: Attributes?
 
 	public enum `Type`: String, Codable, CaseIterable {
 		case appEncryptionDeclarationDocuments
 	}
 
-	public init(attributes: Attributes? = nil, id: String, links: ResourceLinks? = nil, type: `Type`) {
-		self.attributes = attributes
+	public struct Attributes: Codable {
+		public var fileName: String?
+		public var sourceFileChecksum: String?
+		public var uploadOperations: [UploadOperation]?
+		public var assetDeliveryState: AppMediaAssetState?
+		public var fileSize: Int?
+		public var downloadURL: URL?
+		public var assetToken: String?
+
+		public init(fileName: String? = nil, sourceFileChecksum: String? = nil, uploadOperations: [UploadOperation]? = nil, assetDeliveryState: AppMediaAssetState? = nil, fileSize: Int? = nil, downloadURL: URL? = nil, assetToken: String? = nil) {
+			self.fileName = fileName
+			self.sourceFileChecksum = sourceFileChecksum
+			self.uploadOperations = uploadOperations
+			self.assetDeliveryState = assetDeliveryState
+			self.fileSize = fileSize
+			self.downloadURL = downloadURL
+			self.assetToken = assetToken
+		}
+
+		public init(from decoder: Decoder) throws {
+			let values = try decoder.container(keyedBy: StringCodingKey.self)
+			self.fileName = try values.decodeIfPresent(String.self, forKey: "fileName")
+			self.sourceFileChecksum = try values.decodeIfPresent(String.self, forKey: "sourceFileChecksum")
+			self.uploadOperations = try values.decodeIfPresent([UploadOperation].self, forKey: "uploadOperations")
+			self.assetDeliveryState = try values.decodeIfPresent(AppMediaAssetState.self, forKey: "assetDeliveryState")
+			self.fileSize = try values.decodeIfPresent(Int.self, forKey: "fileSize")
+			self.downloadURL = try values.decodeIfPresent(URL.self, forKey: "downloadUrl")
+			self.assetToken = try values.decodeIfPresent(String.self, forKey: "assetToken")
+		}
+
+		public func encode(to encoder: Encoder) throws {
+			var values = encoder.container(keyedBy: StringCodingKey.self)
+			try values.encodeIfPresent(fileName, forKey: "fileName")
+			try values.encodeIfPresent(sourceFileChecksum, forKey: "sourceFileChecksum")
+			try values.encodeIfPresent(uploadOperations, forKey: "uploadOperations")
+			try values.encodeIfPresent(assetDeliveryState, forKey: "assetDeliveryState")
+			try values.encodeIfPresent(fileSize, forKey: "fileSize")
+			try values.encodeIfPresent(downloadURL, forKey: "downloadUrl")
+			try values.encodeIfPresent(assetToken, forKey: "assetToken")
+		}
+	}
+
+	public init(type: `Type`, id: String, links: ResourceLinks? = nil, attributes: Attributes? = nil) {
+		self.type = type
 		self.id = id
 		self.links = links
-		self.type = type
+		self.attributes = attributes
 	}
 
 	public init(from decoder: Decoder) throws {
 		let values = try decoder.container(keyedBy: StringCodingKey.self)
-		self.attributes = try values.decodeIfPresent(Attributes.self, forKey: "attributes")
+		self.type = try values.decode(`Type`.self, forKey: "type")
 		self.id = try values.decode(String.self, forKey: "id")
 		self.links = try values.decodeIfPresent(ResourceLinks.self, forKey: "links")
-		self.type = try values.decode(`Type`.self, forKey: "type")
+		self.attributes = try values.decodeIfPresent(Attributes.self, forKey: "attributes")
 	}
 
 	public func encode(to encoder: Encoder) throws {
 		var values = encoder.container(keyedBy: StringCodingKey.self)
-		try values.encodeIfPresent(attributes, forKey: "attributes")
+		try values.encode(type, forKey: "type")
 		try values.encode(id, forKey: "id")
 		try values.encodeIfPresent(links, forKey: "links")
-		try values.encode(type, forKey: "type")
+		try values.encodeIfPresent(attributes, forKey: "attributes")
 	}
 }

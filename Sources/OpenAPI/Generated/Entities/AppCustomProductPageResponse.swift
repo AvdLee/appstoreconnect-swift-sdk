@@ -4,10 +4,10 @@
 import Foundation
 
 public struct AppCustomProductPageResponse: Codable {
-	public var links: DocumentLinks
 	public var included: [IncludedItem]?
 	/// AppCustomProductPage
 	public var data: AppCustomProductPage
+	public var links: DocumentLinks
 
 	public enum IncludedItem: Codable {
 		case appCustomProductPageLocalization(AppCustomProductPageLocalization)
@@ -46,23 +46,23 @@ public struct AppCustomProductPageResponse: Codable {
 		}
 	}
 
-	public init(links: DocumentLinks, included: [IncludedItem]? = nil, data: AppCustomProductPage) {
-		self.links = links
+	public init(included: [IncludedItem]? = nil, data: AppCustomProductPage, links: DocumentLinks) {
 		self.included = included
 		self.data = data
+		self.links = links
 	}
 
 	public init(from decoder: Decoder) throws {
 		let values = try decoder.container(keyedBy: StringCodingKey.self)
-		self.links = try values.decode(DocumentLinks.self, forKey: "links")
 		self.included = try values.decodeIfPresent([IncludedItem].self, forKey: "included")
 		self.data = try values.decode(AppCustomProductPage.self, forKey: "data")
+		self.links = try values.decode(DocumentLinks.self, forKey: "links")
 	}
 
 	public func encode(to encoder: Encoder) throws {
 		var values = encoder.container(keyedBy: StringCodingKey.self)
-		try values.encode(links, forKey: "links")
 		try values.encodeIfPresent(included, forKey: "included")
 		try values.encode(data, forKey: "data")
+		try values.encode(links, forKey: "links")
 	}
 }

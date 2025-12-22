@@ -4,10 +4,10 @@
 import Foundation
 
 public struct AppStoreVersionResponse: Codable {
-	/// AppStoreVersion
-	public var data: AppStoreVersion
 	public var links: DocumentLinks
 	public var included: [IncludedItem]?
+	/// AppStoreVersion
+	public var data: AppStoreVersion
 
 	public enum IncludedItem: Codable {
 		case ageRatingDeclaration(AgeRatingDeclaration)
@@ -73,23 +73,23 @@ public struct AppStoreVersionResponse: Codable {
 		}
 	}
 
-	public init(data: AppStoreVersion, links: DocumentLinks, included: [IncludedItem]? = nil) {
-		self.data = data
+	public init(links: DocumentLinks, included: [IncludedItem]? = nil, data: AppStoreVersion) {
 		self.links = links
 		self.included = included
+		self.data = data
 	}
 
 	public init(from decoder: Decoder) throws {
 		let values = try decoder.container(keyedBy: StringCodingKey.self)
-		self.data = try values.decode(AppStoreVersion.self, forKey: "data")
 		self.links = try values.decode(DocumentLinks.self, forKey: "links")
 		self.included = try values.decodeIfPresent([IncludedItem].self, forKey: "included")
+		self.data = try values.decode(AppStoreVersion.self, forKey: "data")
 	}
 
 	public func encode(to encoder: Encoder) throws {
 		var values = encoder.container(keyedBy: StringCodingKey.self)
-		try values.encode(data, forKey: "data")
 		try values.encode(links, forKey: "links")
 		try values.encodeIfPresent(included, forKey: "included")
+		try values.encode(data, forKey: "data")
 	}
 }

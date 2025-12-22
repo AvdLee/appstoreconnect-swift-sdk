@@ -12,29 +12,29 @@ public struct DeviceUpdateRequest: Codable {
 		public var id: String
 
 		public struct Attributes: Codable {
-			public var name: String?
 			public var status: Status?
+			public var name: String?
 
 			public enum Status: String, Codable, CaseIterable {
 				case enabled = "ENABLED"
 				case disabled = "DISABLED"
 			}
 
-			public init(name: String? = nil, status: Status? = nil) {
-				self.name = name
+			public init(status: Status? = nil, name: String? = nil) {
 				self.status = status
+				self.name = name
 			}
 
 			public init(from decoder: Decoder) throws {
 				let values = try decoder.container(keyedBy: StringCodingKey.self)
-				self.name = try values.decodeIfPresent(String.self, forKey: "name")
 				self.status = try values.decodeIfPresent(Status.self, forKey: "status")
+				self.name = try values.decodeIfPresent(String.self, forKey: "name")
 			}
 
 			public func encode(to encoder: Encoder) throws {
 				var values = encoder.container(keyedBy: StringCodingKey.self)
-				try values.encodeIfPresent(name, forKey: "name")
 				try values.encodeIfPresent(status, forKey: "status")
+				try values.encodeIfPresent(name, forKey: "name")
 			}
 		}
 

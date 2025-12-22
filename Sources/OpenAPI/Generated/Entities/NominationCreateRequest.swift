@@ -7,24 +7,28 @@ public struct NominationCreateRequest: Codable {
 	public var data: Data
 
 	public struct Data: Codable {
+		public var type: `Type`
 		public var attributes: Attributes
 		public var relationships: Relationships
-		public var type: `Type`
+
+		public enum `Type`: String, Codable, CaseIterable {
+			case nominations
+		}
 
 		public struct Attributes: Codable {
-			public var publishEndDate: Date?
-			public var deviceFamilies: [DeviceFamily]?
 			public var description: String
-			public var publishStartDate: Date
-			public var isPreOrderEnabled: Bool?
 			public var notes: String?
+			public var publishEndDate: Date?
 			public var isSubmitted: Bool
+			public var isPreOrderEnabled: Bool?
 			public var isLaunchInSelectMarketsFirst: Bool?
-			public var name: String
+			public var publishStartDate: Date
 			public var hasInAppEvents: Bool?
+			public var name: String
 			public var type: `Type`
 			public var locales: [String]?
 			public var supplementalMaterialsUris: [URL]?
+			public var deviceFamilies: [DeviceFamily]?
 
 			public enum `Type`: String, Codable, CaseIterable {
 				case appLaunch = "APP_LAUNCH"
@@ -32,63 +36,107 @@ public struct NominationCreateRequest: Codable {
 				case newContent = "NEW_CONTENT"
 			}
 
-			public init(publishEndDate: Date? = nil, deviceFamilies: [DeviceFamily]? = nil, description: String, publishStartDate: Date, isPreOrderEnabled: Bool? = nil, notes: String? = nil, isSubmitted: Bool, isLaunchInSelectMarketsFirst: Bool? = nil, name: String, hasInAppEvents: Bool? = nil, type: `Type`, locales: [String]? = nil, supplementalMaterialsUris: [URL]? = nil) {
-				self.publishEndDate = publishEndDate
-				self.deviceFamilies = deviceFamilies
+			public init(description: String, notes: String? = nil, publishEndDate: Date? = nil, isSubmitted: Bool, isPreOrderEnabled: Bool? = nil, isLaunchInSelectMarketsFirst: Bool? = nil, publishStartDate: Date, hasInAppEvents: Bool? = nil, name: String, type: `Type`, locales: [String]? = nil, supplementalMaterialsUris: [URL]? = nil, deviceFamilies: [DeviceFamily]? = nil) {
 				self.description = description
-				self.publishStartDate = publishStartDate
-				self.isPreOrderEnabled = isPreOrderEnabled
 				self.notes = notes
+				self.publishEndDate = publishEndDate
 				self.isSubmitted = isSubmitted
+				self.isPreOrderEnabled = isPreOrderEnabled
 				self.isLaunchInSelectMarketsFirst = isLaunchInSelectMarketsFirst
-				self.name = name
+				self.publishStartDate = publishStartDate
 				self.hasInAppEvents = hasInAppEvents
+				self.name = name
 				self.type = type
 				self.locales = locales
 				self.supplementalMaterialsUris = supplementalMaterialsUris
+				self.deviceFamilies = deviceFamilies
 			}
 
 			public init(from decoder: Decoder) throws {
 				let values = try decoder.container(keyedBy: StringCodingKey.self)
-				self.publishEndDate = try values.decodeIfPresent(Date.self, forKey: "publishEndDate")
-				self.deviceFamilies = try values.decodeIfPresent([DeviceFamily].self, forKey: "deviceFamilies")
 				self.description = try values.decode(String.self, forKey: "description")
-				self.publishStartDate = try values.decode(Date.self, forKey: "publishStartDate")
-				self.isPreOrderEnabled = try values.decodeIfPresent(Bool.self, forKey: "preOrderEnabled")
 				self.notes = try values.decodeIfPresent(String.self, forKey: "notes")
+				self.publishEndDate = try values.decodeIfPresent(Date.self, forKey: "publishEndDate")
 				self.isSubmitted = try values.decode(Bool.self, forKey: "submitted")
+				self.isPreOrderEnabled = try values.decodeIfPresent(Bool.self, forKey: "preOrderEnabled")
 				self.isLaunchInSelectMarketsFirst = try values.decodeIfPresent(Bool.self, forKey: "launchInSelectMarketsFirst")
-				self.name = try values.decode(String.self, forKey: "name")
+				self.publishStartDate = try values.decode(Date.self, forKey: "publishStartDate")
 				self.hasInAppEvents = try values.decodeIfPresent(Bool.self, forKey: "hasInAppEvents")
+				self.name = try values.decode(String.self, forKey: "name")
 				self.type = try values.decode(`Type`.self, forKey: "type")
 				self.locales = try values.decodeIfPresent([String].self, forKey: "locales")
 				self.supplementalMaterialsUris = try values.decodeIfPresent([URL].self, forKey: "supplementalMaterialsUris")
+				self.deviceFamilies = try values.decodeIfPresent([DeviceFamily].self, forKey: "deviceFamilies")
 			}
 
 			public func encode(to encoder: Encoder) throws {
 				var values = encoder.container(keyedBy: StringCodingKey.self)
-				try values.encodeIfPresent(publishEndDate, forKey: "publishEndDate")
-				try values.encodeIfPresent(deviceFamilies, forKey: "deviceFamilies")
 				try values.encode(description, forKey: "description")
-				try values.encode(publishStartDate, forKey: "publishStartDate")
-				try values.encodeIfPresent(isPreOrderEnabled, forKey: "preOrderEnabled")
 				try values.encodeIfPresent(notes, forKey: "notes")
+				try values.encodeIfPresent(publishEndDate, forKey: "publishEndDate")
 				try values.encode(isSubmitted, forKey: "submitted")
+				try values.encodeIfPresent(isPreOrderEnabled, forKey: "preOrderEnabled")
 				try values.encodeIfPresent(isLaunchInSelectMarketsFirst, forKey: "launchInSelectMarketsFirst")
-				try values.encode(name, forKey: "name")
+				try values.encode(publishStartDate, forKey: "publishStartDate")
 				try values.encodeIfPresent(hasInAppEvents, forKey: "hasInAppEvents")
+				try values.encode(name, forKey: "name")
 				try values.encode(type, forKey: "type")
 				try values.encodeIfPresent(locales, forKey: "locales")
 				try values.encodeIfPresent(supplementalMaterialsUris, forKey: "supplementalMaterialsUris")
+				try values.encodeIfPresent(deviceFamilies, forKey: "deviceFamilies")
 			}
 		}
 
 		public struct Relationships: Codable {
-			public var supportedTerritories: SupportedTerritories?
 			public var relatedApps: RelatedApps
 			public var inAppEvents: InAppEvents?
+			public var supportedTerritories: SupportedTerritories?
 
-			public struct SupportedTerritories: Codable {
+			public struct RelatedApps: Codable {
+				public var data: [Datum]
+
+				public struct Datum: Codable, Identifiable {
+					public var type: `Type`
+					public var id: String
+
+					public enum `Type`: String, Codable, CaseIterable {
+						case apps
+					}
+
+					public init(type: `Type`, id: String) {
+						self.type = type
+						self.id = id
+					}
+
+					public init(from decoder: Decoder) throws {
+						let values = try decoder.container(keyedBy: StringCodingKey.self)
+						self.type = try values.decode(`Type`.self, forKey: "type")
+						self.id = try values.decode(String.self, forKey: "id")
+					}
+
+					public func encode(to encoder: Encoder) throws {
+						var values = encoder.container(keyedBy: StringCodingKey.self)
+						try values.encode(type, forKey: "type")
+						try values.encode(id, forKey: "id")
+					}
+				}
+
+				public init(data: [Datum]) {
+					self.data = data
+				}
+
+				public init(from decoder: Decoder) throws {
+					let values = try decoder.container(keyedBy: StringCodingKey.self)
+					self.data = try values.decode([Datum].self, forKey: "data")
+				}
+
+				public func encode(to encoder: Encoder) throws {
+					var values = encoder.container(keyedBy: StringCodingKey.self)
+					try values.encode(data, forKey: "data")
+				}
+			}
+
+			public struct InAppEvents: Codable {
 				public var data: [Datum]?
 
 				public struct Datum: Codable, Identifiable {
@@ -96,7 +144,7 @@ public struct NominationCreateRequest: Codable {
 					public var type: `Type`
 
 					public enum `Type`: String, Codable, CaseIterable {
-						case territories
+						case appEvents
 					}
 
 					public init(id: String, type: `Type`) {
@@ -132,51 +180,7 @@ public struct NominationCreateRequest: Codable {
 				}
 			}
 
-			public struct RelatedApps: Codable {
-				public var data: [Datum]
-
-				public struct Datum: Codable, Identifiable {
-					public var id: String
-					public var type: `Type`
-
-					public enum `Type`: String, Codable, CaseIterable {
-						case apps
-					}
-
-					public init(id: String, type: `Type`) {
-						self.id = id
-						self.type = type
-					}
-
-					public init(from decoder: Decoder) throws {
-						let values = try decoder.container(keyedBy: StringCodingKey.self)
-						self.id = try values.decode(String.self, forKey: "id")
-						self.type = try values.decode(`Type`.self, forKey: "type")
-					}
-
-					public func encode(to encoder: Encoder) throws {
-						var values = encoder.container(keyedBy: StringCodingKey.self)
-						try values.encode(id, forKey: "id")
-						try values.encode(type, forKey: "type")
-					}
-				}
-
-				public init(data: [Datum]) {
-					self.data = data
-				}
-
-				public init(from decoder: Decoder) throws {
-					let values = try decoder.container(keyedBy: StringCodingKey.self)
-					self.data = try values.decode([Datum].self, forKey: "data")
-				}
-
-				public func encode(to encoder: Encoder) throws {
-					var values = encoder.container(keyedBy: StringCodingKey.self)
-					try values.encode(data, forKey: "data")
-				}
-			}
-
-			public struct InAppEvents: Codable {
+			public struct SupportedTerritories: Codable {
 				public var data: [Datum]?
 
 				public struct Datum: Codable, Identifiable {
@@ -184,7 +188,7 @@ public struct NominationCreateRequest: Codable {
 					public var id: String
 
 					public enum `Type`: String, Codable, CaseIterable {
-						case appEvents
+						case territories
 					}
 
 					public init(type: `Type`, id: String) {
@@ -220,49 +224,45 @@ public struct NominationCreateRequest: Codable {
 				}
 			}
 
-			public init(supportedTerritories: SupportedTerritories? = nil, relatedApps: RelatedApps, inAppEvents: InAppEvents? = nil) {
-				self.supportedTerritories = supportedTerritories
+			public init(relatedApps: RelatedApps, inAppEvents: InAppEvents? = nil, supportedTerritories: SupportedTerritories? = nil) {
 				self.relatedApps = relatedApps
 				self.inAppEvents = inAppEvents
+				self.supportedTerritories = supportedTerritories
 			}
 
 			public init(from decoder: Decoder) throws {
 				let values = try decoder.container(keyedBy: StringCodingKey.self)
-				self.supportedTerritories = try values.decodeIfPresent(SupportedTerritories.self, forKey: "supportedTerritories")
 				self.relatedApps = try values.decode(RelatedApps.self, forKey: "relatedApps")
 				self.inAppEvents = try values.decodeIfPresent(InAppEvents.self, forKey: "inAppEvents")
+				self.supportedTerritories = try values.decodeIfPresent(SupportedTerritories.self, forKey: "supportedTerritories")
 			}
 
 			public func encode(to encoder: Encoder) throws {
 				var values = encoder.container(keyedBy: StringCodingKey.self)
-				try values.encodeIfPresent(supportedTerritories, forKey: "supportedTerritories")
 				try values.encode(relatedApps, forKey: "relatedApps")
 				try values.encodeIfPresent(inAppEvents, forKey: "inAppEvents")
+				try values.encodeIfPresent(supportedTerritories, forKey: "supportedTerritories")
 			}
 		}
 
-		public enum `Type`: String, Codable, CaseIterable {
-			case nominations
-		}
-
-		public init(attributes: Attributes, relationships: Relationships, type: `Type`) {
+		public init(type: `Type`, attributes: Attributes, relationships: Relationships) {
+			self.type = type
 			self.attributes = attributes
 			self.relationships = relationships
-			self.type = type
 		}
 
 		public init(from decoder: Decoder) throws {
 			let values = try decoder.container(keyedBy: StringCodingKey.self)
+			self.type = try values.decode(`Type`.self, forKey: "type")
 			self.attributes = try values.decode(Attributes.self, forKey: "attributes")
 			self.relationships = try values.decode(Relationships.self, forKey: "relationships")
-			self.type = try values.decode(`Type`.self, forKey: "type")
 		}
 
 		public func encode(to encoder: Encoder) throws {
 			var values = encoder.container(keyedBy: StringCodingKey.self)
+			try values.encode(type, forKey: "type")
 			try values.encode(attributes, forKey: "attributes")
 			try values.encode(relationships, forKey: "relationships")
-			try values.encode(type, forKey: "type")
 		}
 	}
 

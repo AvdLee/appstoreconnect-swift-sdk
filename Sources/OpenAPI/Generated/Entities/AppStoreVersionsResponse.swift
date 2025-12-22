@@ -4,10 +4,10 @@
 import Foundation
 
 public struct AppStoreVersionsResponse: Codable {
-	public var meta: PagingInformation?
-	public var data: [AppStoreVersion]
-	public var included: [IncludedItem]?
 	public var links: PagedDocumentLinks
+	public var meta: PagingInformation?
+	public var included: [IncludedItem]?
+	public var data: [AppStoreVersion]
 
 	public enum IncludedItem: Codable {
 		case ageRatingDeclaration(AgeRatingDeclaration)
@@ -73,26 +73,26 @@ public struct AppStoreVersionsResponse: Codable {
 		}
 	}
 
-	public init(meta: PagingInformation? = nil, data: [AppStoreVersion], included: [IncludedItem]? = nil, links: PagedDocumentLinks) {
-		self.meta = meta
-		self.data = data
-		self.included = included
+	public init(links: PagedDocumentLinks, meta: PagingInformation? = nil, included: [IncludedItem]? = nil, data: [AppStoreVersion]) {
 		self.links = links
+		self.meta = meta
+		self.included = included
+		self.data = data
 	}
 
 	public init(from decoder: Decoder) throws {
 		let values = try decoder.container(keyedBy: StringCodingKey.self)
-		self.meta = try values.decodeIfPresent(PagingInformation.self, forKey: "meta")
-		self.data = try values.decode([AppStoreVersion].self, forKey: "data")
-		self.included = try values.decodeIfPresent([IncludedItem].self, forKey: "included")
 		self.links = try values.decode(PagedDocumentLinks.self, forKey: "links")
+		self.meta = try values.decodeIfPresent(PagingInformation.self, forKey: "meta")
+		self.included = try values.decodeIfPresent([IncludedItem].self, forKey: "included")
+		self.data = try values.decode([AppStoreVersion].self, forKey: "data")
 	}
 
 	public func encode(to encoder: Encoder) throws {
 		var values = encoder.container(keyedBy: StringCodingKey.self)
-		try values.encodeIfPresent(meta, forKey: "meta")
-		try values.encode(data, forKey: "data")
-		try values.encodeIfPresent(included, forKey: "included")
 		try values.encode(links, forKey: "links")
+		try values.encodeIfPresent(meta, forKey: "meta")
+		try values.encodeIfPresent(included, forKey: "included")
+		try values.encode(data, forKey: "data")
 	}
 }

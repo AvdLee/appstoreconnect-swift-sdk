@@ -6,26 +6,26 @@ import Foundation
 public struct GameCenterLeaderboardSetImageV2Response: Codable {
 	/// GameCenterLeaderboardSetImageV2
 	public var data: GameCenterLeaderboardSetImageV2
-	public var included: [GameCenterLeaderboardSetLocalizationV2]?
 	public var links: DocumentLinks
+	public var included: [GameCenterLeaderboardSetLocalizationV2]?
 
-	public init(data: GameCenterLeaderboardSetImageV2, included: [GameCenterLeaderboardSetLocalizationV2]? = nil, links: DocumentLinks) {
+	public init(data: GameCenterLeaderboardSetImageV2, links: DocumentLinks, included: [GameCenterLeaderboardSetLocalizationV2]? = nil) {
 		self.data = data
-		self.included = included
 		self.links = links
+		self.included = included
 	}
 
 	public init(from decoder: Decoder) throws {
 		let values = try decoder.container(keyedBy: StringCodingKey.self)
 		self.data = try values.decode(GameCenterLeaderboardSetImageV2.self, forKey: "data")
-		self.included = try values.decodeIfPresent([GameCenterLeaderboardSetLocalizationV2].self, forKey: "included")
 		self.links = try values.decode(DocumentLinks.self, forKey: "links")
+		self.included = try values.decodeIfPresent([GameCenterLeaderboardSetLocalizationV2].self, forKey: "included")
 	}
 
 	public func encode(to encoder: Encoder) throws {
 		var values = encoder.container(keyedBy: StringCodingKey.self)
 		try values.encode(data, forKey: "data")
-		try values.encodeIfPresent(included, forKey: "included")
 		try values.encode(links, forKey: "links")
+		try values.encodeIfPresent(included, forKey: "included")
 	}
 }

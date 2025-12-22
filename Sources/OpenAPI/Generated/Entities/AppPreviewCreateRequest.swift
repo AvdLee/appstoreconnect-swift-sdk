@@ -7,9 +7,43 @@ public struct AppPreviewCreateRequest: Codable {
 	public var data: Data
 
 	public struct Data: Codable {
-		public var relationships: Relationships
-		public var attributes: Attributes
 		public var type: `Type`
+		public var attributes: Attributes
+		public var relationships: Relationships
+
+		public enum `Type`: String, Codable, CaseIterable {
+			case appPreviews
+		}
+
+		public struct Attributes: Codable {
+			public var fileName: String
+			public var fileSize: Int
+			public var previewFrameTimeCode: String?
+			public var mimeType: String?
+
+			public init(fileName: String, fileSize: Int, previewFrameTimeCode: String? = nil, mimeType: String? = nil) {
+				self.fileName = fileName
+				self.fileSize = fileSize
+				self.previewFrameTimeCode = previewFrameTimeCode
+				self.mimeType = mimeType
+			}
+
+			public init(from decoder: Decoder) throws {
+				let values = try decoder.container(keyedBy: StringCodingKey.self)
+				self.fileName = try values.decode(String.self, forKey: "fileName")
+				self.fileSize = try values.decode(Int.self, forKey: "fileSize")
+				self.previewFrameTimeCode = try values.decodeIfPresent(String.self, forKey: "previewFrameTimeCode")
+				self.mimeType = try values.decodeIfPresent(String.self, forKey: "mimeType")
+			}
+
+			public func encode(to encoder: Encoder) throws {
+				var values = encoder.container(keyedBy: StringCodingKey.self)
+				try values.encode(fileName, forKey: "fileName")
+				try values.encode(fileSize, forKey: "fileSize")
+				try values.encodeIfPresent(previewFrameTimeCode, forKey: "previewFrameTimeCode")
+				try values.encodeIfPresent(mimeType, forKey: "mimeType")
+			}
+		}
 
 		public struct Relationships: Codable {
 			public var appPreviewSet: AppPreviewSet
@@ -18,28 +52,28 @@ public struct AppPreviewCreateRequest: Codable {
 				public var data: Data
 
 				public struct Data: Codable, Identifiable {
-					public var type: `Type`
 					public var id: String
+					public var type: `Type`
 
 					public enum `Type`: String, Codable, CaseIterable {
 						case appPreviewSets
 					}
 
-					public init(type: `Type`, id: String) {
-						self.type = type
+					public init(id: String, type: `Type`) {
 						self.id = id
+						self.type = type
 					}
 
 					public init(from decoder: Decoder) throws {
 						let values = try decoder.container(keyedBy: StringCodingKey.self)
-						self.type = try values.decode(`Type`.self, forKey: "type")
 						self.id = try values.decode(String.self, forKey: "id")
+						self.type = try values.decode(`Type`.self, forKey: "type")
 					}
 
 					public func encode(to encoder: Encoder) throws {
 						var values = encoder.container(keyedBy: StringCodingKey.self)
-						try values.encode(type, forKey: "type")
 						try values.encode(id, forKey: "id")
+						try values.encode(type, forKey: "type")
 					}
 				}
 
@@ -73,58 +107,24 @@ public struct AppPreviewCreateRequest: Codable {
 			}
 		}
 
-		public struct Attributes: Codable {
-			public var mimeType: String?
-			public var fileSize: Int
-			public var previewFrameTimeCode: String?
-			public var fileName: String
-
-			public init(mimeType: String? = nil, fileSize: Int, previewFrameTimeCode: String? = nil, fileName: String) {
-				self.mimeType = mimeType
-				self.fileSize = fileSize
-				self.previewFrameTimeCode = previewFrameTimeCode
-				self.fileName = fileName
-			}
-
-			public init(from decoder: Decoder) throws {
-				let values = try decoder.container(keyedBy: StringCodingKey.self)
-				self.mimeType = try values.decodeIfPresent(String.self, forKey: "mimeType")
-				self.fileSize = try values.decode(Int.self, forKey: "fileSize")
-				self.previewFrameTimeCode = try values.decodeIfPresent(String.self, forKey: "previewFrameTimeCode")
-				self.fileName = try values.decode(String.self, forKey: "fileName")
-			}
-
-			public func encode(to encoder: Encoder) throws {
-				var values = encoder.container(keyedBy: StringCodingKey.self)
-				try values.encodeIfPresent(mimeType, forKey: "mimeType")
-				try values.encode(fileSize, forKey: "fileSize")
-				try values.encodeIfPresent(previewFrameTimeCode, forKey: "previewFrameTimeCode")
-				try values.encode(fileName, forKey: "fileName")
-			}
-		}
-
-		public enum `Type`: String, Codable, CaseIterable {
-			case appPreviews
-		}
-
-		public init(relationships: Relationships, attributes: Attributes, type: `Type`) {
-			self.relationships = relationships
-			self.attributes = attributes
+		public init(type: `Type`, attributes: Attributes, relationships: Relationships) {
 			self.type = type
+			self.attributes = attributes
+			self.relationships = relationships
 		}
 
 		public init(from decoder: Decoder) throws {
 			let values = try decoder.container(keyedBy: StringCodingKey.self)
-			self.relationships = try values.decode(Relationships.self, forKey: "relationships")
-			self.attributes = try values.decode(Attributes.self, forKey: "attributes")
 			self.type = try values.decode(`Type`.self, forKey: "type")
+			self.attributes = try values.decode(Attributes.self, forKey: "attributes")
+			self.relationships = try values.decode(Relationships.self, forKey: "relationships")
 		}
 
 		public func encode(to encoder: Encoder) throws {
 			var values = encoder.container(keyedBy: StringCodingKey.self)
-			try values.encode(relationships, forKey: "relationships")
-			try values.encode(attributes, forKey: "attributes")
 			try values.encode(type, forKey: "type")
+			try values.encode(attributes, forKey: "attributes")
+			try values.encode(relationships, forKey: "relationships")
 		}
 	}
 

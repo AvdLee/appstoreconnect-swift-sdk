@@ -6,8 +6,8 @@ import Foundation
 public struct AppsResponse: Codable {
 	public var links: PagedDocumentLinks
 	public var included: [IncludedItem]?
-	public var data: [App]
 	public var meta: PagingInformation?
+	public var data: [App]
 
 	public enum IncludedItem: Codable {
 		case androidToIosAppMappingDetail(AndroidToIosAppMappingDetail)
@@ -109,26 +109,26 @@ public struct AppsResponse: Codable {
 		}
 	}
 
-	public init(links: PagedDocumentLinks, included: [IncludedItem]? = nil, data: [App], meta: PagingInformation? = nil) {
+	public init(links: PagedDocumentLinks, included: [IncludedItem]? = nil, meta: PagingInformation? = nil, data: [App]) {
 		self.links = links
 		self.included = included
-		self.data = data
 		self.meta = meta
+		self.data = data
 	}
 
 	public init(from decoder: Decoder) throws {
 		let values = try decoder.container(keyedBy: StringCodingKey.self)
 		self.links = try values.decode(PagedDocumentLinks.self, forKey: "links")
 		self.included = try values.decodeIfPresent([IncludedItem].self, forKey: "included")
-		self.data = try values.decode([App].self, forKey: "data")
 		self.meta = try values.decodeIfPresent(PagingInformation.self, forKey: "meta")
+		self.data = try values.decode([App].self, forKey: "data")
 	}
 
 	public func encode(to encoder: Encoder) throws {
 		var values = encoder.container(keyedBy: StringCodingKey.self)
 		try values.encode(links, forKey: "links")
 		try values.encodeIfPresent(included, forKey: "included")
-		try values.encode(data, forKey: "data")
 		try values.encodeIfPresent(meta, forKey: "meta")
+		try values.encode(data, forKey: "data")
 	}
 }

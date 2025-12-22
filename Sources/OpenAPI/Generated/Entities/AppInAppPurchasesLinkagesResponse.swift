@@ -5,9 +5,9 @@ import Foundation
 
 @available(*, deprecated, message: "Deprecated")
 public struct AppInAppPurchasesLinkagesResponse: Codable {
-	public var meta: PagingInformation?
-	public var data: [Datum]
 	public var links: PagedDocumentLinks
+	public var data: [Datum]
+	public var meta: PagingInformation?
 
 	public struct Datum: Codable, Identifiable {
 		public var type: `Type`
@@ -35,23 +35,23 @@ public struct AppInAppPurchasesLinkagesResponse: Codable {
 		}
 	}
 
-	public init(meta: PagingInformation? = nil, data: [Datum], links: PagedDocumentLinks) {
-		self.meta = meta
-		self.data = data
+	public init(links: PagedDocumentLinks, data: [Datum], meta: PagingInformation? = nil) {
 		self.links = links
+		self.data = data
+		self.meta = meta
 	}
 
 	public init(from decoder: Decoder) throws {
 		let values = try decoder.container(keyedBy: StringCodingKey.self)
-		self.meta = try values.decodeIfPresent(PagingInformation.self, forKey: "meta")
-		self.data = try values.decode([Datum].self, forKey: "data")
 		self.links = try values.decode(PagedDocumentLinks.self, forKey: "links")
+		self.data = try values.decode([Datum].self, forKey: "data")
+		self.meta = try values.decodeIfPresent(PagingInformation.self, forKey: "meta")
 	}
 
 	public func encode(to encoder: Encoder) throws {
 		var values = encoder.container(keyedBy: StringCodingKey.self)
-		try values.encodeIfPresent(meta, forKey: "meta")
-		try values.encode(data, forKey: "data")
 		try values.encode(links, forKey: "links")
+		try values.encode(data, forKey: "data")
+		try values.encodeIfPresent(meta, forKey: "meta")
 	}
 }

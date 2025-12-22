@@ -12,57 +12,57 @@ public struct AppUpdateRequest: Codable {
 		public var type: `Type`
 
 		public struct Attributes: Codable {
-			public var contentRightsDeclaration: ContentRightsDeclaration?
-			public var subscriptionStatusURL: URL?
-			public var bundleID: String?
-			public var subscriptionStatusURLForSandbox: URL?
-			public var subscriptionStatusURLVersion: SubscriptionStatusURLVersion?
-			public var primaryLocale: String?
 			public var accessibilityURL: URL?
+			public var subscriptionStatusURL: URL?
+			public var primaryLocale: String?
 			public var isStreamlinedPurchasingEnabled: Bool?
+			public var bundleID: String?
+			public var subscriptionStatusURLVersion: SubscriptionStatusURLVersion?
+			public var contentRightsDeclaration: ContentRightsDeclaration?
 			public var subscriptionStatusURLVersionForSandbox: SubscriptionStatusURLVersion?
+			public var subscriptionStatusURLForSandbox: URL?
 
 			public enum ContentRightsDeclaration: String, Codable, CaseIterable {
 				case doesNotUseThirdPartyContent = "DOES_NOT_USE_THIRD_PARTY_CONTENT"
 				case usesThirdPartyContent = "USES_THIRD_PARTY_CONTENT"
 			}
 
-			public init(contentRightsDeclaration: ContentRightsDeclaration? = nil, subscriptionStatusURL: URL? = nil, bundleID: String? = nil, subscriptionStatusURLForSandbox: URL? = nil, subscriptionStatusURLVersion: SubscriptionStatusURLVersion? = nil, primaryLocale: String? = nil, accessibilityURL: URL? = nil, isStreamlinedPurchasingEnabled: Bool? = nil, subscriptionStatusURLVersionForSandbox: SubscriptionStatusURLVersion? = nil) {
-				self.contentRightsDeclaration = contentRightsDeclaration
-				self.subscriptionStatusURL = subscriptionStatusURL
-				self.bundleID = bundleID
-				self.subscriptionStatusURLForSandbox = subscriptionStatusURLForSandbox
-				self.subscriptionStatusURLVersion = subscriptionStatusURLVersion
-				self.primaryLocale = primaryLocale
+			public init(accessibilityURL: URL? = nil, subscriptionStatusURL: URL? = nil, primaryLocale: String? = nil, isStreamlinedPurchasingEnabled: Bool? = nil, bundleID: String? = nil, subscriptionStatusURLVersion: SubscriptionStatusURLVersion? = nil, contentRightsDeclaration: ContentRightsDeclaration? = nil, subscriptionStatusURLVersionForSandbox: SubscriptionStatusURLVersion? = nil, subscriptionStatusURLForSandbox: URL? = nil) {
 				self.accessibilityURL = accessibilityURL
+				self.subscriptionStatusURL = subscriptionStatusURL
+				self.primaryLocale = primaryLocale
 				self.isStreamlinedPurchasingEnabled = isStreamlinedPurchasingEnabled
+				self.bundleID = bundleID
+				self.subscriptionStatusURLVersion = subscriptionStatusURLVersion
+				self.contentRightsDeclaration = contentRightsDeclaration
 				self.subscriptionStatusURLVersionForSandbox = subscriptionStatusURLVersionForSandbox
+				self.subscriptionStatusURLForSandbox = subscriptionStatusURLForSandbox
 			}
 
 			public init(from decoder: Decoder) throws {
 				let values = try decoder.container(keyedBy: StringCodingKey.self)
-				self.contentRightsDeclaration = try values.decodeIfPresent(ContentRightsDeclaration.self, forKey: "contentRightsDeclaration")
-				self.subscriptionStatusURL = try values.decodeIfPresent(URL.self, forKey: "subscriptionStatusUrl")
-				self.bundleID = try values.decodeIfPresent(String.self, forKey: "bundleId")
-				self.subscriptionStatusURLForSandbox = try values.decodeIfPresent(URL.self, forKey: "subscriptionStatusUrlForSandbox")
-				self.subscriptionStatusURLVersion = try values.decodeIfPresent(SubscriptionStatusURLVersion.self, forKey: "subscriptionStatusUrlVersion")
-				self.primaryLocale = try values.decodeIfPresent(String.self, forKey: "primaryLocale")
 				self.accessibilityURL = try values.decodeIfPresent(URL.self, forKey: "accessibilityUrl")
+				self.subscriptionStatusURL = try values.decodeIfPresent(URL.self, forKey: "subscriptionStatusUrl")
+				self.primaryLocale = try values.decodeIfPresent(String.self, forKey: "primaryLocale")
 				self.isStreamlinedPurchasingEnabled = try values.decodeIfPresent(Bool.self, forKey: "streamlinedPurchasingEnabled")
+				self.bundleID = try values.decodeIfPresent(String.self, forKey: "bundleId")
+				self.subscriptionStatusURLVersion = try values.decodeIfPresent(SubscriptionStatusURLVersion.self, forKey: "subscriptionStatusUrlVersion")
+				self.contentRightsDeclaration = try values.decodeIfPresent(ContentRightsDeclaration.self, forKey: "contentRightsDeclaration")
 				self.subscriptionStatusURLVersionForSandbox = try values.decodeIfPresent(SubscriptionStatusURLVersion.self, forKey: "subscriptionStatusUrlVersionForSandbox")
+				self.subscriptionStatusURLForSandbox = try values.decodeIfPresent(URL.self, forKey: "subscriptionStatusUrlForSandbox")
 			}
 
 			public func encode(to encoder: Encoder) throws {
 				var values = encoder.container(keyedBy: StringCodingKey.self)
-				try values.encodeIfPresent(contentRightsDeclaration, forKey: "contentRightsDeclaration")
-				try values.encodeIfPresent(subscriptionStatusURL, forKey: "subscriptionStatusUrl")
-				try values.encodeIfPresent(bundleID, forKey: "bundleId")
-				try values.encodeIfPresent(subscriptionStatusURLForSandbox, forKey: "subscriptionStatusUrlForSandbox")
-				try values.encodeIfPresent(subscriptionStatusURLVersion, forKey: "subscriptionStatusUrlVersion")
-				try values.encodeIfPresent(primaryLocale, forKey: "primaryLocale")
 				try values.encodeIfPresent(accessibilityURL, forKey: "accessibilityUrl")
+				try values.encodeIfPresent(subscriptionStatusURL, forKey: "subscriptionStatusUrl")
+				try values.encodeIfPresent(primaryLocale, forKey: "primaryLocale")
 				try values.encodeIfPresent(isStreamlinedPurchasingEnabled, forKey: "streamlinedPurchasingEnabled")
+				try values.encodeIfPresent(bundleID, forKey: "bundleId")
+				try values.encodeIfPresent(subscriptionStatusURLVersion, forKey: "subscriptionStatusUrlVersion")
+				try values.encodeIfPresent(contentRightsDeclaration, forKey: "contentRightsDeclaration")
 				try values.encodeIfPresent(subscriptionStatusURLVersionForSandbox, forKey: "subscriptionStatusUrlVersionForSandbox")
+				try values.encodeIfPresent(subscriptionStatusURLForSandbox, forKey: "subscriptionStatusUrlForSandbox")
 			}
 		}
 

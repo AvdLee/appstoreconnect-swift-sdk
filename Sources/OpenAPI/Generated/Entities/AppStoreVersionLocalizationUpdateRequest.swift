@@ -18,17 +18,17 @@ public struct AppStoreVersionLocalizationUpdateRequest: Codable {
 		public struct Attributes: Codable {
 			public var keywords: String?
 			public var whatsNew: String?
-			public var marketingURL: URL?
 			public var supportURL: URL?
 			public var description: String?
+			public var marketingURL: URL?
 			public var promotionalText: String?
 
-			public init(keywords: String? = nil, whatsNew: String? = nil, marketingURL: URL? = nil, supportURL: URL? = nil, description: String? = nil, promotionalText: String? = nil) {
+			public init(keywords: String? = nil, whatsNew: String? = nil, supportURL: URL? = nil, description: String? = nil, marketingURL: URL? = nil, promotionalText: String? = nil) {
 				self.keywords = keywords
 				self.whatsNew = whatsNew
-				self.marketingURL = marketingURL
 				self.supportURL = supportURL
 				self.description = description
+				self.marketingURL = marketingURL
 				self.promotionalText = promotionalText
 			}
 
@@ -36,9 +36,9 @@ public struct AppStoreVersionLocalizationUpdateRequest: Codable {
 				let values = try decoder.container(keyedBy: StringCodingKey.self)
 				self.keywords = try values.decodeIfPresent(String.self, forKey: "keywords")
 				self.whatsNew = try values.decodeIfPresent(String.self, forKey: "whatsNew")
-				self.marketingURL = try values.decodeIfPresent(URL.self, forKey: "marketingUrl")
 				self.supportURL = try values.decodeIfPresent(URL.self, forKey: "supportUrl")
 				self.description = try values.decodeIfPresent(String.self, forKey: "description")
+				self.marketingURL = try values.decodeIfPresent(URL.self, forKey: "marketingUrl")
 				self.promotionalText = try values.decodeIfPresent(String.self, forKey: "promotionalText")
 			}
 
@@ -46,9 +46,9 @@ public struct AppStoreVersionLocalizationUpdateRequest: Codable {
 				var values = encoder.container(keyedBy: StringCodingKey.self)
 				try values.encodeIfPresent(keywords, forKey: "keywords")
 				try values.encodeIfPresent(whatsNew, forKey: "whatsNew")
-				try values.encodeIfPresent(marketingURL, forKey: "marketingUrl")
 				try values.encodeIfPresent(supportURL, forKey: "supportUrl")
 				try values.encodeIfPresent(description, forKey: "description")
+				try values.encodeIfPresent(marketingURL, forKey: "marketingUrl")
 				try values.encodeIfPresent(promotionalText, forKey: "promotionalText")
 			}
 		}

@@ -4,10 +4,10 @@
 import Foundation
 
 public struct BackgroundAssetVersionsResponse: Codable {
-	public var links: PagedDocumentLinks
-	public var included: [IncludedItem]?
-	public var meta: PagingInformation?
 	public var data: [BackgroundAssetVersion]
+	public var meta: PagingInformation?
+	public var included: [IncludedItem]?
+	public var links: PagedDocumentLinks
 
 	public enum IncludedItem: Codable {
 		case backgroundAssetUploadFile(BackgroundAssetUploadFile)
@@ -52,26 +52,26 @@ public struct BackgroundAssetVersionsResponse: Codable {
 		}
 	}
 
-	public init(links: PagedDocumentLinks, included: [IncludedItem]? = nil, meta: PagingInformation? = nil, data: [BackgroundAssetVersion]) {
-		self.links = links
-		self.included = included
-		self.meta = meta
+	public init(data: [BackgroundAssetVersion], meta: PagingInformation? = nil, included: [IncludedItem]? = nil, links: PagedDocumentLinks) {
 		self.data = data
+		self.meta = meta
+		self.included = included
+		self.links = links
 	}
 
 	public init(from decoder: Decoder) throws {
 		let values = try decoder.container(keyedBy: StringCodingKey.self)
-		self.links = try values.decode(PagedDocumentLinks.self, forKey: "links")
-		self.included = try values.decodeIfPresent([IncludedItem].self, forKey: "included")
-		self.meta = try values.decodeIfPresent(PagingInformation.self, forKey: "meta")
 		self.data = try values.decode([BackgroundAssetVersion].self, forKey: "data")
+		self.meta = try values.decodeIfPresent(PagingInformation.self, forKey: "meta")
+		self.included = try values.decodeIfPresent([IncludedItem].self, forKey: "included")
+		self.links = try values.decode(PagedDocumentLinks.self, forKey: "links")
 	}
 
 	public func encode(to encoder: Encoder) throws {
 		var values = encoder.container(keyedBy: StringCodingKey.self)
-		try values.encode(links, forKey: "links")
-		try values.encodeIfPresent(included, forKey: "included")
-		try values.encodeIfPresent(meta, forKey: "meta")
 		try values.encode(data, forKey: "data")
+		try values.encodeIfPresent(meta, forKey: "meta")
+		try values.encodeIfPresent(included, forKey: "included")
+		try values.encode(links, forKey: "links")
 	}
 }

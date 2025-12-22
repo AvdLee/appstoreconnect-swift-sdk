@@ -12,27 +12,27 @@ public struct ReviewSubmissionUpdateRequest: Codable {
 		public var type: `Type`
 
 		public struct Attributes: Codable {
-			public var isCanceled: Bool?
 			public var isSubmitted: Bool?
+			public var isCanceled: Bool?
 			public var platform: Platform?
 
-			public init(isCanceled: Bool? = nil, isSubmitted: Bool? = nil, platform: Platform? = nil) {
-				self.isCanceled = isCanceled
+			public init(isSubmitted: Bool? = nil, isCanceled: Bool? = nil, platform: Platform? = nil) {
 				self.isSubmitted = isSubmitted
+				self.isCanceled = isCanceled
 				self.platform = platform
 			}
 
 			public init(from decoder: Decoder) throws {
 				let values = try decoder.container(keyedBy: StringCodingKey.self)
-				self.isCanceled = try values.decodeIfPresent(Bool.self, forKey: "canceled")
 				self.isSubmitted = try values.decodeIfPresent(Bool.self, forKey: "submitted")
+				self.isCanceled = try values.decodeIfPresent(Bool.self, forKey: "canceled")
 				self.platform = try values.decodeIfPresent(Platform.self, forKey: "platform")
 			}
 
 			public func encode(to encoder: Encoder) throws {
 				var values = encoder.container(keyedBy: StringCodingKey.self)
-				try values.encodeIfPresent(isCanceled, forKey: "canceled")
 				try values.encodeIfPresent(isSubmitted, forKey: "submitted")
+				try values.encodeIfPresent(isCanceled, forKey: "canceled")
 				try values.encodeIfPresent(platform, forKey: "platform")
 			}
 		}

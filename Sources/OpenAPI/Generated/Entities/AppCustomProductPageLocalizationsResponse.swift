@@ -4,9 +4,9 @@
 import Foundation
 
 public struct AppCustomProductPageLocalizationsResponse: Codable {
-	public var data: [AppCustomProductPageLocalization]
 	public var meta: PagingInformation?
 	public var links: PagedDocumentLinks
+	public var data: [AppCustomProductPageLocalization]
 	public var included: [IncludedItem]?
 
 	public enum IncludedItem: Codable {
@@ -49,26 +49,26 @@ public struct AppCustomProductPageLocalizationsResponse: Codable {
 		}
 	}
 
-	public init(data: [AppCustomProductPageLocalization], meta: PagingInformation? = nil, links: PagedDocumentLinks, included: [IncludedItem]? = nil) {
-		self.data = data
+	public init(meta: PagingInformation? = nil, links: PagedDocumentLinks, data: [AppCustomProductPageLocalization], included: [IncludedItem]? = nil) {
 		self.meta = meta
 		self.links = links
+		self.data = data
 		self.included = included
 	}
 
 	public init(from decoder: Decoder) throws {
 		let values = try decoder.container(keyedBy: StringCodingKey.self)
-		self.data = try values.decode([AppCustomProductPageLocalization].self, forKey: "data")
 		self.meta = try values.decodeIfPresent(PagingInformation.self, forKey: "meta")
 		self.links = try values.decode(PagedDocumentLinks.self, forKey: "links")
+		self.data = try values.decode([AppCustomProductPageLocalization].self, forKey: "data")
 		self.included = try values.decodeIfPresent([IncludedItem].self, forKey: "included")
 	}
 
 	public func encode(to encoder: Encoder) throws {
 		var values = encoder.container(keyedBy: StringCodingKey.self)
-		try values.encode(data, forKey: "data")
 		try values.encodeIfPresent(meta, forKey: "meta")
 		try values.encode(links, forKey: "links")
+		try values.encode(data, forKey: "data")
 		try values.encodeIfPresent(included, forKey: "included")
 	}
 }

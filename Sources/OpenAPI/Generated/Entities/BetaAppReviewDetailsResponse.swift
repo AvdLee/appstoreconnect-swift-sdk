@@ -4,30 +4,30 @@
 import Foundation
 
 public struct BetaAppReviewDetailsResponse: Codable {
-	public var data: [BetaAppReviewDetail]
 	public var included: [App]?
+	public var data: [BetaAppReviewDetail]
 	public var meta: PagingInformation?
 	public var links: PagedDocumentLinks
 
-	public init(data: [BetaAppReviewDetail], included: [App]? = nil, meta: PagingInformation? = nil, links: PagedDocumentLinks) {
-		self.data = data
+	public init(included: [App]? = nil, data: [BetaAppReviewDetail], meta: PagingInformation? = nil, links: PagedDocumentLinks) {
 		self.included = included
+		self.data = data
 		self.meta = meta
 		self.links = links
 	}
 
 	public init(from decoder: Decoder) throws {
 		let values = try decoder.container(keyedBy: StringCodingKey.self)
-		self.data = try values.decode([BetaAppReviewDetail].self, forKey: "data")
 		self.included = try values.decodeIfPresent([App].self, forKey: "included")
+		self.data = try values.decode([BetaAppReviewDetail].self, forKey: "data")
 		self.meta = try values.decodeIfPresent(PagingInformation.self, forKey: "meta")
 		self.links = try values.decode(PagedDocumentLinks.self, forKey: "links")
 	}
 
 	public func encode(to encoder: Encoder) throws {
 		var values = encoder.container(keyedBy: StringCodingKey.self)
-		try values.encode(data, forKey: "data")
 		try values.encodeIfPresent(included, forKey: "included")
+		try values.encode(data, forKey: "data")
 		try values.encodeIfPresent(meta, forKey: "meta")
 		try values.encode(links, forKey: "links")
 	}

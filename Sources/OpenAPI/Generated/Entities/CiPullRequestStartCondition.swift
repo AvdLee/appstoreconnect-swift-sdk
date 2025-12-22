@@ -4,31 +4,31 @@
 import Foundation
 
 public struct CiPullRequestStartCondition: Codable {
-	public var filesAndFoldersRule: CiFilesAndFoldersRule?
-	public var source: CiBranchPatterns?
 	public var isAutoCancel: Bool?
+	public var source: CiBranchPatterns?
+	public var filesAndFoldersRule: CiFilesAndFoldersRule?
 	public var destination: CiBranchPatterns?
 
-	public init(filesAndFoldersRule: CiFilesAndFoldersRule? = nil, source: CiBranchPatterns? = nil, isAutoCancel: Bool? = nil, destination: CiBranchPatterns? = nil) {
-		self.filesAndFoldersRule = filesAndFoldersRule
-		self.source = source
+	public init(isAutoCancel: Bool? = nil, source: CiBranchPatterns? = nil, filesAndFoldersRule: CiFilesAndFoldersRule? = nil, destination: CiBranchPatterns? = nil) {
 		self.isAutoCancel = isAutoCancel
+		self.source = source
+		self.filesAndFoldersRule = filesAndFoldersRule
 		self.destination = destination
 	}
 
 	public init(from decoder: Decoder) throws {
 		let values = try decoder.container(keyedBy: StringCodingKey.self)
-		self.filesAndFoldersRule = try values.decodeIfPresent(CiFilesAndFoldersRule.self, forKey: "filesAndFoldersRule")
-		self.source = try values.decodeIfPresent(CiBranchPatterns.self, forKey: "source")
 		self.isAutoCancel = try values.decodeIfPresent(Bool.self, forKey: "autoCancel")
+		self.source = try values.decodeIfPresent(CiBranchPatterns.self, forKey: "source")
+		self.filesAndFoldersRule = try values.decodeIfPresent(CiFilesAndFoldersRule.self, forKey: "filesAndFoldersRule")
 		self.destination = try values.decodeIfPresent(CiBranchPatterns.self, forKey: "destination")
 	}
 
 	public func encode(to encoder: Encoder) throws {
 		var values = encoder.container(keyedBy: StringCodingKey.self)
-		try values.encodeIfPresent(filesAndFoldersRule, forKey: "filesAndFoldersRule")
-		try values.encodeIfPresent(source, forKey: "source")
 		try values.encodeIfPresent(isAutoCancel, forKey: "autoCancel")
+		try values.encodeIfPresent(source, forKey: "source")
+		try values.encodeIfPresent(filesAndFoldersRule, forKey: "filesAndFoldersRule")
 		try values.encodeIfPresent(destination, forKey: "destination")
 	}
 }

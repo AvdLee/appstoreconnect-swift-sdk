@@ -8,8 +8,12 @@ public struct GameCenterAchievementImageV2UpdateRequest: Codable {
 
 	public struct Data: Codable, Identifiable {
 		public var id: String
-		public var attributes: Attributes?
 		public var type: `Type`
+		public var attributes: Attributes?
+
+		public enum `Type`: String, Codable, CaseIterable {
+			case gameCenterAchievementImages
+		}
 
 		public struct Attributes: Codable {
 			public var isUploaded: Bool?
@@ -29,28 +33,24 @@ public struct GameCenterAchievementImageV2UpdateRequest: Codable {
 			}
 		}
 
-		public enum `Type`: String, Codable, CaseIterable {
-			case gameCenterAchievementImages
-		}
-
-		public init(id: String, attributes: Attributes? = nil, type: `Type`) {
+		public init(id: String, type: `Type`, attributes: Attributes? = nil) {
 			self.id = id
-			self.attributes = attributes
 			self.type = type
+			self.attributes = attributes
 		}
 
 		public init(from decoder: Decoder) throws {
 			let values = try decoder.container(keyedBy: StringCodingKey.self)
 			self.id = try values.decode(String.self, forKey: "id")
-			self.attributes = try values.decodeIfPresent(Attributes.self, forKey: "attributes")
 			self.type = try values.decode(`Type`.self, forKey: "type")
+			self.attributes = try values.decodeIfPresent(Attributes.self, forKey: "attributes")
 		}
 
 		public func encode(to encoder: Encoder) throws {
 			var values = encoder.container(keyedBy: StringCodingKey.self)
 			try values.encode(id, forKey: "id")
-			try values.encodeIfPresent(attributes, forKey: "attributes")
 			try values.encode(type, forKey: "type")
+			try values.encodeIfPresent(attributes, forKey: "attributes")
 		}
 	}
 

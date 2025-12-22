@@ -4,10 +4,10 @@
 import Foundation
 
 public struct CiBuildRunsResponse: Codable {
-	public var links: PagedDocumentLinks
-	public var data: [CiBuildRun]
-	public var meta: PagingInformation?
 	public var included: [IncludedItem]?
+	public var data: [CiBuildRun]
+	public var links: PagedDocumentLinks
+	public var meta: PagingInformation?
 
 	public enum IncludedItem: Codable {
 		case build(Build)
@@ -52,26 +52,26 @@ public struct CiBuildRunsResponse: Codable {
 		}
 	}
 
-	public init(links: PagedDocumentLinks, data: [CiBuildRun], meta: PagingInformation? = nil, included: [IncludedItem]? = nil) {
-		self.links = links
-		self.data = data
-		self.meta = meta
+	public init(included: [IncludedItem]? = nil, data: [CiBuildRun], links: PagedDocumentLinks, meta: PagingInformation? = nil) {
 		self.included = included
+		self.data = data
+		self.links = links
+		self.meta = meta
 	}
 
 	public init(from decoder: Decoder) throws {
 		let values = try decoder.container(keyedBy: StringCodingKey.self)
-		self.links = try values.decode(PagedDocumentLinks.self, forKey: "links")
-		self.data = try values.decode([CiBuildRun].self, forKey: "data")
-		self.meta = try values.decodeIfPresent(PagingInformation.self, forKey: "meta")
 		self.included = try values.decodeIfPresent([IncludedItem].self, forKey: "included")
+		self.data = try values.decode([CiBuildRun].self, forKey: "data")
+		self.links = try values.decode(PagedDocumentLinks.self, forKey: "links")
+		self.meta = try values.decodeIfPresent(PagingInformation.self, forKey: "meta")
 	}
 
 	public func encode(to encoder: Encoder) throws {
 		var values = encoder.container(keyedBy: StringCodingKey.self)
-		try values.encode(links, forKey: "links")
-		try values.encode(data, forKey: "data")
-		try values.encodeIfPresent(meta, forKey: "meta")
 		try values.encodeIfPresent(included, forKey: "included")
+		try values.encode(data, forKey: "data")
+		try values.encode(links, forKey: "links")
+		try values.encodeIfPresent(meta, forKey: "meta")
 	}
 }

@@ -4,23 +4,23 @@
 import Foundation
 
 public struct AppMediaStateError: Codable {
-	public var code: String?
 	public var description: String?
+	public var code: String?
 
-	public init(code: String? = nil, description: String? = nil) {
-		self.code = code
+	public init(description: String? = nil, code: String? = nil) {
 		self.description = description
+		self.code = code
 	}
 
 	public init(from decoder: Decoder) throws {
 		let values = try decoder.container(keyedBy: StringCodingKey.self)
-		self.code = try values.decodeIfPresent(String.self, forKey: "code")
 		self.description = try values.decodeIfPresent(String.self, forKey: "description")
+		self.code = try values.decodeIfPresent(String.self, forKey: "code")
 	}
 
 	public func encode(to encoder: Encoder) throws {
 		var values = encoder.container(keyedBy: StringCodingKey.self)
-		try values.encodeIfPresent(code, forKey: "code")
 		try values.encodeIfPresent(description, forKey: "description")
+		try values.encodeIfPresent(code, forKey: "code")
 	}
 }

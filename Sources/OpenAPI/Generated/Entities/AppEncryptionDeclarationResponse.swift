@@ -4,9 +4,9 @@
 import Foundation
 
 public struct AppEncryptionDeclarationResponse: Codable {
-	public var links: DocumentLinks
 	/// AppEncryptionDeclaration
 	public var data: AppEncryptionDeclaration
+	public var links: DocumentLinks
 	public var included: [IncludedItem]?
 
 	public enum IncludedItem: Codable {
@@ -46,23 +46,23 @@ public struct AppEncryptionDeclarationResponse: Codable {
 		}
 	}
 
-	public init(links: DocumentLinks, data: AppEncryptionDeclaration, included: [IncludedItem]? = nil) {
-		self.links = links
+	public init(data: AppEncryptionDeclaration, links: DocumentLinks, included: [IncludedItem]? = nil) {
 		self.data = data
+		self.links = links
 		self.included = included
 	}
 
 	public init(from decoder: Decoder) throws {
 		let values = try decoder.container(keyedBy: StringCodingKey.self)
-		self.links = try values.decode(DocumentLinks.self, forKey: "links")
 		self.data = try values.decode(AppEncryptionDeclaration.self, forKey: "data")
+		self.links = try values.decode(DocumentLinks.self, forKey: "links")
 		self.included = try values.decodeIfPresent([IncludedItem].self, forKey: "included")
 	}
 
 	public func encode(to encoder: Encoder) throws {
 		var values = encoder.container(keyedBy: StringCodingKey.self)
-		try values.encode(links, forKey: "links")
 		try values.encode(data, forKey: "data")
+		try values.encode(links, forKey: "links")
 		try values.encodeIfPresent(included, forKey: "included")
 	}
 }

@@ -7,9 +7,43 @@ public struct InAppPurchaseV2CreateRequest: Codable {
 	public var data: Data
 
 	public struct Data: Codable {
-		public var relationships: Relationships
 		public var attributes: Attributes
+		public var relationships: Relationships
 		public var type: `Type`
+
+		public struct Attributes: Codable {
+			public var name: String
+			public var reviewNote: String?
+			public var isFamilySharable: Bool?
+			public var productID: String
+			public var inAppPurchaseType: InAppPurchaseType
+
+			public init(name: String, reviewNote: String? = nil, isFamilySharable: Bool? = nil, productID: String, inAppPurchaseType: InAppPurchaseType) {
+				self.name = name
+				self.reviewNote = reviewNote
+				self.isFamilySharable = isFamilySharable
+				self.productID = productID
+				self.inAppPurchaseType = inAppPurchaseType
+			}
+
+			public init(from decoder: Decoder) throws {
+				let values = try decoder.container(keyedBy: StringCodingKey.self)
+				self.name = try values.decode(String.self, forKey: "name")
+				self.reviewNote = try values.decodeIfPresent(String.self, forKey: "reviewNote")
+				self.isFamilySharable = try values.decodeIfPresent(Bool.self, forKey: "familySharable")
+				self.productID = try values.decode(String.self, forKey: "productId")
+				self.inAppPurchaseType = try values.decode(InAppPurchaseType.self, forKey: "inAppPurchaseType")
+			}
+
+			public func encode(to encoder: Encoder) throws {
+				var values = encoder.container(keyedBy: StringCodingKey.self)
+				try values.encode(name, forKey: "name")
+				try values.encodeIfPresent(reviewNote, forKey: "reviewNote")
+				try values.encodeIfPresent(isFamilySharable, forKey: "familySharable")
+				try values.encode(productID, forKey: "productId")
+				try values.encode(inAppPurchaseType, forKey: "inAppPurchaseType")
+			}
+		}
 
 		public struct Relationships: Codable {
 			public var app: App
@@ -18,28 +52,28 @@ public struct InAppPurchaseV2CreateRequest: Codable {
 				public var data: Data
 
 				public struct Data: Codable, Identifiable {
-					public var type: `Type`
 					public var id: String
+					public var type: `Type`
 
 					public enum `Type`: String, Codable, CaseIterable {
 						case apps
 					}
 
-					public init(type: `Type`, id: String) {
-						self.type = type
+					public init(id: String, type: `Type`) {
 						self.id = id
+						self.type = type
 					}
 
 					public init(from decoder: Decoder) throws {
 						let values = try decoder.container(keyedBy: StringCodingKey.self)
-						self.type = try values.decode(`Type`.self, forKey: "type")
 						self.id = try values.decode(String.self, forKey: "id")
+						self.type = try values.decode(`Type`.self, forKey: "type")
 					}
 
 					public func encode(to encoder: Encoder) throws {
 						var values = encoder.container(keyedBy: StringCodingKey.self)
-						try values.encode(type, forKey: "type")
 						try values.encode(id, forKey: "id")
+						try values.encode(type, forKey: "type")
 					}
 				}
 
@@ -73,61 +107,27 @@ public struct InAppPurchaseV2CreateRequest: Codable {
 			}
 		}
 
-		public struct Attributes: Codable {
-			public var name: String
-			public var inAppPurchaseType: InAppPurchaseType
-			public var productID: String
-			public var reviewNote: String?
-			public var isFamilySharable: Bool?
-
-			public init(name: String, inAppPurchaseType: InAppPurchaseType, productID: String, reviewNote: String? = nil, isFamilySharable: Bool? = nil) {
-				self.name = name
-				self.inAppPurchaseType = inAppPurchaseType
-				self.productID = productID
-				self.reviewNote = reviewNote
-				self.isFamilySharable = isFamilySharable
-			}
-
-			public init(from decoder: Decoder) throws {
-				let values = try decoder.container(keyedBy: StringCodingKey.self)
-				self.name = try values.decode(String.self, forKey: "name")
-				self.inAppPurchaseType = try values.decode(InAppPurchaseType.self, forKey: "inAppPurchaseType")
-				self.productID = try values.decode(String.self, forKey: "productId")
-				self.reviewNote = try values.decodeIfPresent(String.self, forKey: "reviewNote")
-				self.isFamilySharable = try values.decodeIfPresent(Bool.self, forKey: "familySharable")
-			}
-
-			public func encode(to encoder: Encoder) throws {
-				var values = encoder.container(keyedBy: StringCodingKey.self)
-				try values.encode(name, forKey: "name")
-				try values.encode(inAppPurchaseType, forKey: "inAppPurchaseType")
-				try values.encode(productID, forKey: "productId")
-				try values.encodeIfPresent(reviewNote, forKey: "reviewNote")
-				try values.encodeIfPresent(isFamilySharable, forKey: "familySharable")
-			}
-		}
-
 		public enum `Type`: String, Codable, CaseIterable {
 			case inAppPurchases
 		}
 
-		public init(relationships: Relationships, attributes: Attributes, type: `Type`) {
-			self.relationships = relationships
+		public init(attributes: Attributes, relationships: Relationships, type: `Type`) {
 			self.attributes = attributes
+			self.relationships = relationships
 			self.type = type
 		}
 
 		public init(from decoder: Decoder) throws {
 			let values = try decoder.container(keyedBy: StringCodingKey.self)
-			self.relationships = try values.decode(Relationships.self, forKey: "relationships")
 			self.attributes = try values.decode(Attributes.self, forKey: "attributes")
+			self.relationships = try values.decode(Relationships.self, forKey: "relationships")
 			self.type = try values.decode(`Type`.self, forKey: "type")
 		}
 
 		public func encode(to encoder: Encoder) throws {
 			var values = encoder.container(keyedBy: StringCodingKey.self)
-			try values.encode(relationships, forKey: "relationships")
 			try values.encode(attributes, forKey: "attributes")
+			try values.encode(relationships, forKey: "relationships")
 			try values.encode(type, forKey: "type")
 		}
 	}

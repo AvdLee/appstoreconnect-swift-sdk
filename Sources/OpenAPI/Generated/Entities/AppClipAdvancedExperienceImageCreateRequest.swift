@@ -7,12 +7,8 @@ public struct AppClipAdvancedExperienceImageCreateRequest: Codable {
 	public var data: Data
 
 	public struct Data: Codable {
-		public var type: `Type`
 		public var attributes: Attributes
-
-		public enum `Type`: String, Codable, CaseIterable {
-			case appClipAdvancedExperienceImages
-		}
+		public var type: `Type`
 
 		public struct Attributes: Codable {
 			public var fileName: String
@@ -36,21 +32,25 @@ public struct AppClipAdvancedExperienceImageCreateRequest: Codable {
 			}
 		}
 
-		public init(type: `Type`, attributes: Attributes) {
-			self.type = type
+		public enum `Type`: String, Codable, CaseIterable {
+			case appClipAdvancedExperienceImages
+		}
+
+		public init(attributes: Attributes, type: `Type`) {
 			self.attributes = attributes
+			self.type = type
 		}
 
 		public init(from decoder: Decoder) throws {
 			let values = try decoder.container(keyedBy: StringCodingKey.self)
-			self.type = try values.decode(`Type`.self, forKey: "type")
 			self.attributes = try values.decode(Attributes.self, forKey: "attributes")
+			self.type = try values.decode(`Type`.self, forKey: "type")
 		}
 
 		public func encode(to encoder: Encoder) throws {
 			var values = encoder.container(keyedBy: StringCodingKey.self)
-			try values.encode(type, forKey: "type")
 			try values.encode(attributes, forKey: "attributes")
+			try values.encode(type, forKey: "type")
 		}
 	}
 

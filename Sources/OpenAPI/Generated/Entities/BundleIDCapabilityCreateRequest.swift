@@ -7,9 +7,35 @@ public struct BundleIDCapabilityCreateRequest: Codable {
 	public var data: Data
 
 	public struct Data: Codable {
-		public var relationships: Relationships
 		public var type: `Type`
 		public var attributes: Attributes
+		public var relationships: Relationships
+
+		public enum `Type`: String, Codable, CaseIterable {
+			case bundleIDCapabilities = "bundleIdCapabilities"
+		}
+
+		public struct Attributes: Codable {
+			public var capabilityType: CapabilityType
+			public var settings: [CapabilitySetting]?
+
+			public init(capabilityType: CapabilityType, settings: [CapabilitySetting]? = nil) {
+				self.capabilityType = capabilityType
+				self.settings = settings
+			}
+
+			public init(from decoder: Decoder) throws {
+				let values = try decoder.container(keyedBy: StringCodingKey.self)
+				self.capabilityType = try values.decode(CapabilityType.self, forKey: "capabilityType")
+				self.settings = try values.decodeIfPresent([CapabilitySetting].self, forKey: "settings")
+			}
+
+			public func encode(to encoder: Encoder) throws {
+				var values = encoder.container(keyedBy: StringCodingKey.self)
+				try values.encode(capabilityType, forKey: "capabilityType")
+				try values.encodeIfPresent(settings, forKey: "settings")
+			}
+		}
 
 		public struct Relationships: Codable {
 			public var bundleID: BundleID
@@ -73,50 +99,24 @@ public struct BundleIDCapabilityCreateRequest: Codable {
 			}
 		}
 
-		public enum `Type`: String, Codable, CaseIterable {
-			case bundleIDCapabilities = "bundleIdCapabilities"
-		}
-
-		public struct Attributes: Codable {
-			public var settings: [CapabilitySetting]?
-			public var capabilityType: CapabilityType
-
-			public init(settings: [CapabilitySetting]? = nil, capabilityType: CapabilityType) {
-				self.settings = settings
-				self.capabilityType = capabilityType
-			}
-
-			public init(from decoder: Decoder) throws {
-				let values = try decoder.container(keyedBy: StringCodingKey.self)
-				self.settings = try values.decodeIfPresent([CapabilitySetting].self, forKey: "settings")
-				self.capabilityType = try values.decode(CapabilityType.self, forKey: "capabilityType")
-			}
-
-			public func encode(to encoder: Encoder) throws {
-				var values = encoder.container(keyedBy: StringCodingKey.self)
-				try values.encodeIfPresent(settings, forKey: "settings")
-				try values.encode(capabilityType, forKey: "capabilityType")
-			}
-		}
-
-		public init(relationships: Relationships, type: `Type`, attributes: Attributes) {
-			self.relationships = relationships
+		public init(type: `Type`, attributes: Attributes, relationships: Relationships) {
 			self.type = type
 			self.attributes = attributes
+			self.relationships = relationships
 		}
 
 		public init(from decoder: Decoder) throws {
 			let values = try decoder.container(keyedBy: StringCodingKey.self)
-			self.relationships = try values.decode(Relationships.self, forKey: "relationships")
 			self.type = try values.decode(`Type`.self, forKey: "type")
 			self.attributes = try values.decode(Attributes.self, forKey: "attributes")
+			self.relationships = try values.decode(Relationships.self, forKey: "relationships")
 		}
 
 		public func encode(to encoder: Encoder) throws {
 			var values = encoder.container(keyedBy: StringCodingKey.self)
-			try values.encode(relationships, forKey: "relationships")
 			try values.encode(type, forKey: "type")
 			try values.encode(attributes, forKey: "attributes")
+			try values.encode(relationships, forKey: "relationships")
 		}
 	}
 

@@ -4,73 +4,73 @@
 import Foundation
 
 public struct GameCenterPlayerAchievementSubmission: Codable, Identifiable {
-	public var type: `Type`
 	public var attributes: Attributes?
-	public var links: ResourceLinks?
 	public var id: String
-
-	public enum `Type`: String, Codable, CaseIterable {
-		case gameCenterPlayerAchievementSubmissions
-	}
+	public var links: ResourceLinks?
+	public var type: `Type`
 
 	public struct Attributes: Codable {
 		public var challengeIDs: [String]?
-		public var submittedDate: Date?
+		public var scopedPlayerID: String?
 		public var percentageAchieved: Int?
 		public var vendorIdentifier: String?
-		public var scopedPlayerID: String?
 		public var bundleID: String?
+		public var submittedDate: Date?
 
-		public init(challengeIDs: [String]? = nil, submittedDate: Date? = nil, percentageAchieved: Int? = nil, vendorIdentifier: String? = nil, scopedPlayerID: String? = nil, bundleID: String? = nil) {
+		public init(challengeIDs: [String]? = nil, scopedPlayerID: String? = nil, percentageAchieved: Int? = nil, vendorIdentifier: String? = nil, bundleID: String? = nil, submittedDate: Date? = nil) {
 			self.challengeIDs = challengeIDs
-			self.submittedDate = submittedDate
+			self.scopedPlayerID = scopedPlayerID
 			self.percentageAchieved = percentageAchieved
 			self.vendorIdentifier = vendorIdentifier
-			self.scopedPlayerID = scopedPlayerID
 			self.bundleID = bundleID
+			self.submittedDate = submittedDate
 		}
 
 		public init(from decoder: Decoder) throws {
 			let values = try decoder.container(keyedBy: StringCodingKey.self)
 			self.challengeIDs = try values.decodeIfPresent([String].self, forKey: "challengeIds")
-			self.submittedDate = try values.decodeIfPresent(Date.self, forKey: "submittedDate")
+			self.scopedPlayerID = try values.decodeIfPresent(String.self, forKey: "scopedPlayerId")
 			self.percentageAchieved = try values.decodeIfPresent(Int.self, forKey: "percentageAchieved")
 			self.vendorIdentifier = try values.decodeIfPresent(String.self, forKey: "vendorIdentifier")
-			self.scopedPlayerID = try values.decodeIfPresent(String.self, forKey: "scopedPlayerId")
 			self.bundleID = try values.decodeIfPresent(String.self, forKey: "bundleId")
+			self.submittedDate = try values.decodeIfPresent(Date.self, forKey: "submittedDate")
 		}
 
 		public func encode(to encoder: Encoder) throws {
 			var values = encoder.container(keyedBy: StringCodingKey.self)
 			try values.encodeIfPresent(challengeIDs, forKey: "challengeIds")
-			try values.encodeIfPresent(submittedDate, forKey: "submittedDate")
+			try values.encodeIfPresent(scopedPlayerID, forKey: "scopedPlayerId")
 			try values.encodeIfPresent(percentageAchieved, forKey: "percentageAchieved")
 			try values.encodeIfPresent(vendorIdentifier, forKey: "vendorIdentifier")
-			try values.encodeIfPresent(scopedPlayerID, forKey: "scopedPlayerId")
 			try values.encodeIfPresent(bundleID, forKey: "bundleId")
+			try values.encodeIfPresent(submittedDate, forKey: "submittedDate")
 		}
 	}
 
-	public init(type: `Type`, attributes: Attributes? = nil, links: ResourceLinks? = nil, id: String) {
-		self.type = type
+	public enum `Type`: String, Codable, CaseIterable {
+		case gameCenterPlayerAchievementSubmissions
+	}
+
+	public init(attributes: Attributes? = nil, id: String, links: ResourceLinks? = nil, type: `Type`) {
 		self.attributes = attributes
-		self.links = links
 		self.id = id
+		self.links = links
+		self.type = type
 	}
 
 	public init(from decoder: Decoder) throws {
 		let values = try decoder.container(keyedBy: StringCodingKey.self)
-		self.type = try values.decode(`Type`.self, forKey: "type")
 		self.attributes = try values.decodeIfPresent(Attributes.self, forKey: "attributes")
-		self.links = try values.decodeIfPresent(ResourceLinks.self, forKey: "links")
 		self.id = try values.decode(String.self, forKey: "id")
+		self.links = try values.decodeIfPresent(ResourceLinks.self, forKey: "links")
+		self.type = try values.decode(`Type`.self, forKey: "type")
 	}
 
 	public func encode(to encoder: Encoder) throws {
 		var values = encoder.container(keyedBy: StringCodingKey.self)
-		try values.encode(type, forKey: "type")
 		try values.encodeIfPresent(attributes, forKey: "attributes")
-		try values.encodeIfPresent(links, forKey: "links")
 		try values.encode(id, forKey: "id")
+		try values.encodeIfPresent(links, forKey: "links")
+		try values.encode(type, forKey: "type")
 	}
 }

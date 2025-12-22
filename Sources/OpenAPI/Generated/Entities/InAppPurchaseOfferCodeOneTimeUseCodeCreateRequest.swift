@@ -12,28 +12,28 @@ public struct InAppPurchaseOfferCodeOneTimeUseCodeCreateRequest: Codable {
 		public var relationships: Relationships
 
 		public struct Attributes: Codable {
-			public var expirationDate: String
-			public var numberOfCodes: Int
 			public var environment: OfferCodeEnvironment?
+			public var numberOfCodes: Int
+			public var expirationDate: String
 
-			public init(expirationDate: String, numberOfCodes: Int, environment: OfferCodeEnvironment? = nil) {
-				self.expirationDate = expirationDate
-				self.numberOfCodes = numberOfCodes
+			public init(environment: OfferCodeEnvironment? = nil, numberOfCodes: Int, expirationDate: String) {
 				self.environment = environment
+				self.numberOfCodes = numberOfCodes
+				self.expirationDate = expirationDate
 			}
 
 			public init(from decoder: Decoder) throws {
 				let values = try decoder.container(keyedBy: StringCodingKey.self)
-				self.expirationDate = try values.decode(String.self, forKey: "expirationDate")
-				self.numberOfCodes = try values.decode(Int.self, forKey: "numberOfCodes")
 				self.environment = try values.decodeIfPresent(OfferCodeEnvironment.self, forKey: "environment")
+				self.numberOfCodes = try values.decode(Int.self, forKey: "numberOfCodes")
+				self.expirationDate = try values.decode(String.self, forKey: "expirationDate")
 			}
 
 			public func encode(to encoder: Encoder) throws {
 				var values = encoder.container(keyedBy: StringCodingKey.self)
-				try values.encode(expirationDate, forKey: "expirationDate")
-				try values.encode(numberOfCodes, forKey: "numberOfCodes")
 				try values.encodeIfPresent(environment, forKey: "environment")
+				try values.encode(numberOfCodes, forKey: "numberOfCodes")
+				try values.encode(expirationDate, forKey: "expirationDate")
 			}
 		}
 

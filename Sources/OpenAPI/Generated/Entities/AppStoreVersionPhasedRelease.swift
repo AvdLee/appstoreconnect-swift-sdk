@@ -4,65 +4,65 @@
 import Foundation
 
 public struct AppStoreVersionPhasedRelease: Codable, Identifiable {
-	public var attributes: Attributes?
-	public var links: ResourceLinks?
 	public var type: `Type`
 	public var id: String
-
-	public struct Attributes: Codable {
-		public var totalPauseDuration: Int?
-		public var phasedReleaseState: PhasedReleaseState?
-		public var currentDayNumber: Int?
-		public var startDate: Date?
-
-		public init(totalPauseDuration: Int? = nil, phasedReleaseState: PhasedReleaseState? = nil, currentDayNumber: Int? = nil, startDate: Date? = nil) {
-			self.totalPauseDuration = totalPauseDuration
-			self.phasedReleaseState = phasedReleaseState
-			self.currentDayNumber = currentDayNumber
-			self.startDate = startDate
-		}
-
-		public init(from decoder: Decoder) throws {
-			let values = try decoder.container(keyedBy: StringCodingKey.self)
-			self.totalPauseDuration = try values.decodeIfPresent(Int.self, forKey: "totalPauseDuration")
-			self.phasedReleaseState = try values.decodeIfPresent(PhasedReleaseState.self, forKey: "phasedReleaseState")
-			self.currentDayNumber = try values.decodeIfPresent(Int.self, forKey: "currentDayNumber")
-			self.startDate = try values.decodeIfPresent(Date.self, forKey: "startDate")
-		}
-
-		public func encode(to encoder: Encoder) throws {
-			var values = encoder.container(keyedBy: StringCodingKey.self)
-			try values.encodeIfPresent(totalPauseDuration, forKey: "totalPauseDuration")
-			try values.encodeIfPresent(phasedReleaseState, forKey: "phasedReleaseState")
-			try values.encodeIfPresent(currentDayNumber, forKey: "currentDayNumber")
-			try values.encodeIfPresent(startDate, forKey: "startDate")
-		}
-	}
+	public var links: ResourceLinks?
+	public var attributes: Attributes?
 
 	public enum `Type`: String, Codable, CaseIterable {
 		case appStoreVersionPhasedReleases
 	}
 
-	public init(attributes: Attributes? = nil, links: ResourceLinks? = nil, type: `Type`, id: String) {
-		self.attributes = attributes
-		self.links = links
+	public struct Attributes: Codable {
+		public var currentDayNumber: Int?
+		public var startDate: Date?
+		public var totalPauseDuration: Int?
+		public var phasedReleaseState: PhasedReleaseState?
+
+		public init(currentDayNumber: Int? = nil, startDate: Date? = nil, totalPauseDuration: Int? = nil, phasedReleaseState: PhasedReleaseState? = nil) {
+			self.currentDayNumber = currentDayNumber
+			self.startDate = startDate
+			self.totalPauseDuration = totalPauseDuration
+			self.phasedReleaseState = phasedReleaseState
+		}
+
+		public init(from decoder: Decoder) throws {
+			let values = try decoder.container(keyedBy: StringCodingKey.self)
+			self.currentDayNumber = try values.decodeIfPresent(Int.self, forKey: "currentDayNumber")
+			self.startDate = try values.decodeIfPresent(Date.self, forKey: "startDate")
+			self.totalPauseDuration = try values.decodeIfPresent(Int.self, forKey: "totalPauseDuration")
+			self.phasedReleaseState = try values.decodeIfPresent(PhasedReleaseState.self, forKey: "phasedReleaseState")
+		}
+
+		public func encode(to encoder: Encoder) throws {
+			var values = encoder.container(keyedBy: StringCodingKey.self)
+			try values.encodeIfPresent(currentDayNumber, forKey: "currentDayNumber")
+			try values.encodeIfPresent(startDate, forKey: "startDate")
+			try values.encodeIfPresent(totalPauseDuration, forKey: "totalPauseDuration")
+			try values.encodeIfPresent(phasedReleaseState, forKey: "phasedReleaseState")
+		}
+	}
+
+	public init(type: `Type`, id: String, links: ResourceLinks? = nil, attributes: Attributes? = nil) {
 		self.type = type
 		self.id = id
+		self.links = links
+		self.attributes = attributes
 	}
 
 	public init(from decoder: Decoder) throws {
 		let values = try decoder.container(keyedBy: StringCodingKey.self)
-		self.attributes = try values.decodeIfPresent(Attributes.self, forKey: "attributes")
-		self.links = try values.decodeIfPresent(ResourceLinks.self, forKey: "links")
 		self.type = try values.decode(`Type`.self, forKey: "type")
 		self.id = try values.decode(String.self, forKey: "id")
+		self.links = try values.decodeIfPresent(ResourceLinks.self, forKey: "links")
+		self.attributes = try values.decodeIfPresent(Attributes.self, forKey: "attributes")
 	}
 
 	public func encode(to encoder: Encoder) throws {
 		var values = encoder.container(keyedBy: StringCodingKey.self)
-		try values.encodeIfPresent(attributes, forKey: "attributes")
-		try values.encodeIfPresent(links, forKey: "links")
 		try values.encode(type, forKey: "type")
 		try values.encode(id, forKey: "id")
+		try values.encodeIfPresent(links, forKey: "links")
+		try values.encodeIfPresent(attributes, forKey: "attributes")
 	}
 }

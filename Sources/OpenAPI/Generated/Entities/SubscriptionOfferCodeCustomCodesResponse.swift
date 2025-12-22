@@ -4,31 +4,31 @@
 import Foundation
 
 public struct SubscriptionOfferCodeCustomCodesResponse: Codable {
+	public var links: PagedDocumentLinks
 	public var included: [SubscriptionOfferCode]?
 	public var meta: PagingInformation?
 	public var data: [SubscriptionOfferCodeCustomCode]
-	public var links: PagedDocumentLinks
 
-	public init(included: [SubscriptionOfferCode]? = nil, meta: PagingInformation? = nil, data: [SubscriptionOfferCodeCustomCode], links: PagedDocumentLinks) {
+	public init(links: PagedDocumentLinks, included: [SubscriptionOfferCode]? = nil, meta: PagingInformation? = nil, data: [SubscriptionOfferCodeCustomCode]) {
+		self.links = links
 		self.included = included
 		self.meta = meta
 		self.data = data
-		self.links = links
 	}
 
 	public init(from decoder: Decoder) throws {
 		let values = try decoder.container(keyedBy: StringCodingKey.self)
+		self.links = try values.decode(PagedDocumentLinks.self, forKey: "links")
 		self.included = try values.decodeIfPresent([SubscriptionOfferCode].self, forKey: "included")
 		self.meta = try values.decodeIfPresent(PagingInformation.self, forKey: "meta")
 		self.data = try values.decode([SubscriptionOfferCodeCustomCode].self, forKey: "data")
-		self.links = try values.decode(PagedDocumentLinks.self, forKey: "links")
 	}
 
 	public func encode(to encoder: Encoder) throws {
 		var values = encoder.container(keyedBy: StringCodingKey.self)
+		try values.encode(links, forKey: "links")
 		try values.encodeIfPresent(included, forKey: "included")
 		try values.encodeIfPresent(meta, forKey: "meta")
 		try values.encode(data, forKey: "data")
-		try values.encode(links, forKey: "links")
 	}
 }
