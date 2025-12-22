@@ -4,37 +4,37 @@
 import Foundation
 
 public struct WebhookEvent: Codable, Identifiable {
-	public var attributes: Attributes?
-	public var id: String
 	public var links: ResourceLinks?
+	public var attributes: Attributes?
 	public var type: `Type`
+	public var id: String
 
 	public struct Attributes: Codable {
-		public var createdDate: Date?
-		public var eventType: WebhookEventType?
 		public var payload: String?
+		public var eventType: WebhookEventType?
+		public var createdDate: Date?
 		public var isPing: Bool?
 
-		public init(createdDate: Date? = nil, eventType: WebhookEventType? = nil, payload: String? = nil, isPing: Bool? = nil) {
-			self.createdDate = createdDate
-			self.eventType = eventType
+		public init(payload: String? = nil, eventType: WebhookEventType? = nil, createdDate: Date? = nil, isPing: Bool? = nil) {
 			self.payload = payload
+			self.eventType = eventType
+			self.createdDate = createdDate
 			self.isPing = isPing
 		}
 
 		public init(from decoder: Decoder) throws {
 			let values = try decoder.container(keyedBy: StringCodingKey.self)
-			self.createdDate = try values.decodeIfPresent(Date.self, forKey: "createdDate")
-			self.eventType = try values.decodeIfPresent(WebhookEventType.self, forKey: "eventType")
 			self.payload = try values.decodeIfPresent(String.self, forKey: "payload")
+			self.eventType = try values.decodeIfPresent(WebhookEventType.self, forKey: "eventType")
+			self.createdDate = try values.decodeIfPresent(Date.self, forKey: "createdDate")
 			self.isPing = try values.decodeIfPresent(Bool.self, forKey: "ping")
 		}
 
 		public func encode(to encoder: Encoder) throws {
 			var values = encoder.container(keyedBy: StringCodingKey.self)
-			try values.encodeIfPresent(createdDate, forKey: "createdDate")
-			try values.encodeIfPresent(eventType, forKey: "eventType")
 			try values.encodeIfPresent(payload, forKey: "payload")
+			try values.encodeIfPresent(eventType, forKey: "eventType")
+			try values.encodeIfPresent(createdDate, forKey: "createdDate")
 			try values.encodeIfPresent(isPing, forKey: "ping")
 		}
 	}
@@ -43,26 +43,26 @@ public struct WebhookEvent: Codable, Identifiable {
 		case webhookEvents
 	}
 
-	public init(attributes: Attributes? = nil, id: String, links: ResourceLinks? = nil, type: `Type`) {
-		self.attributes = attributes
-		self.id = id
+	public init(links: ResourceLinks? = nil, attributes: Attributes? = nil, type: `Type`, id: String) {
 		self.links = links
+		self.attributes = attributes
 		self.type = type
+		self.id = id
 	}
 
 	public init(from decoder: Decoder) throws {
 		let values = try decoder.container(keyedBy: StringCodingKey.self)
-		self.attributes = try values.decodeIfPresent(Attributes.self, forKey: "attributes")
-		self.id = try values.decode(String.self, forKey: "id")
 		self.links = try values.decodeIfPresent(ResourceLinks.self, forKey: "links")
+		self.attributes = try values.decodeIfPresent(Attributes.self, forKey: "attributes")
 		self.type = try values.decode(`Type`.self, forKey: "type")
+		self.id = try values.decode(String.self, forKey: "id")
 	}
 
 	public func encode(to encoder: Encoder) throws {
 		var values = encoder.container(keyedBy: StringCodingKey.self)
-		try values.encodeIfPresent(attributes, forKey: "attributes")
-		try values.encode(id, forKey: "id")
 		try values.encodeIfPresent(links, forKey: "links")
+		try values.encodeIfPresent(attributes, forKey: "attributes")
 		try values.encode(type, forKey: "type")
+		try values.encode(id, forKey: "id")
 	}
 }

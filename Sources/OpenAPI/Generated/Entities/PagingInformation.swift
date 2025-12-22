@@ -7,27 +7,27 @@ public struct PagingInformation: Codable {
 	public var paging: Paging
 
 	public struct Paging: Codable {
-		public var limit: Int
 		public var nextCursor: String?
+		public var limit: Int
 		public var total: Int?
 
-		public init(limit: Int, nextCursor: String? = nil, total: Int? = nil) {
-			self.limit = limit
+		public init(nextCursor: String? = nil, limit: Int, total: Int? = nil) {
 			self.nextCursor = nextCursor
+			self.limit = limit
 			self.total = total
 		}
 
 		public init(from decoder: Decoder) throws {
 			let values = try decoder.container(keyedBy: StringCodingKey.self)
-			self.limit = try values.decode(Int.self, forKey: "limit")
 			self.nextCursor = try values.decodeIfPresent(String.self, forKey: "nextCursor")
+			self.limit = try values.decode(Int.self, forKey: "limit")
 			self.total = try values.decodeIfPresent(Int.self, forKey: "total")
 		}
 
 		public func encode(to encoder: Encoder) throws {
 			var values = encoder.container(keyedBy: StringCodingKey.self)
-			try values.encode(limit, forKey: "limit")
 			try values.encodeIfPresent(nextCursor, forKey: "nextCursor")
+			try values.encode(limit, forKey: "limit")
 			try values.encodeIfPresent(total, forKey: "total")
 		}
 	}

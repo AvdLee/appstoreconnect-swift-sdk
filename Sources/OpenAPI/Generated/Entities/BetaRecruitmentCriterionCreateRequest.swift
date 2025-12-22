@@ -7,27 +7,9 @@ public struct BetaRecruitmentCriterionCreateRequest: Codable {
 	public var data: Data
 
 	public struct Data: Codable {
-		public var attributes: Attributes
 		public var relationships: Relationships
+		public var attributes: Attributes
 		public var type: `Type`
-
-		public struct Attributes: Codable {
-			public var deviceFamilyOsVersionFilters: [DeviceFamilyOsVersionFilter]
-
-			public init(deviceFamilyOsVersionFilters: [DeviceFamilyOsVersionFilter]) {
-				self.deviceFamilyOsVersionFilters = deviceFamilyOsVersionFilters
-			}
-
-			public init(from decoder: Decoder) throws {
-				let values = try decoder.container(keyedBy: StringCodingKey.self)
-				self.deviceFamilyOsVersionFilters = try values.decode([DeviceFamilyOsVersionFilter].self, forKey: "deviceFamilyOsVersionFilters")
-			}
-
-			public func encode(to encoder: Encoder) throws {
-				var values = encoder.container(keyedBy: StringCodingKey.self)
-				try values.encode(deviceFamilyOsVersionFilters, forKey: "deviceFamilyOsVersionFilters")
-			}
-		}
 
 		public struct Relationships: Codable {
 			public var betaGroup: BetaGroup
@@ -36,28 +18,28 @@ public struct BetaRecruitmentCriterionCreateRequest: Codable {
 				public var data: Data
 
 				public struct Data: Codable, Identifiable {
-					public var id: String
 					public var type: `Type`
+					public var id: String
 
 					public enum `Type`: String, Codable, CaseIterable {
 						case betaGroups
 					}
 
-					public init(id: String, type: `Type`) {
-						self.id = id
+					public init(type: `Type`, id: String) {
 						self.type = type
+						self.id = id
 					}
 
 					public init(from decoder: Decoder) throws {
 						let values = try decoder.container(keyedBy: StringCodingKey.self)
-						self.id = try values.decode(String.self, forKey: "id")
 						self.type = try values.decode(`Type`.self, forKey: "type")
+						self.id = try values.decode(String.self, forKey: "id")
 					}
 
 					public func encode(to encoder: Encoder) throws {
 						var values = encoder.container(keyedBy: StringCodingKey.self)
-						try values.encode(id, forKey: "id")
 						try values.encode(type, forKey: "type")
+						try values.encode(id, forKey: "id")
 					}
 				}
 
@@ -91,27 +73,45 @@ public struct BetaRecruitmentCriterionCreateRequest: Codable {
 			}
 		}
 
+		public struct Attributes: Codable {
+			public var deviceFamilyOsVersionFilters: [DeviceFamilyOsVersionFilter]
+
+			public init(deviceFamilyOsVersionFilters: [DeviceFamilyOsVersionFilter]) {
+				self.deviceFamilyOsVersionFilters = deviceFamilyOsVersionFilters
+			}
+
+			public init(from decoder: Decoder) throws {
+				let values = try decoder.container(keyedBy: StringCodingKey.self)
+				self.deviceFamilyOsVersionFilters = try values.decode([DeviceFamilyOsVersionFilter].self, forKey: "deviceFamilyOsVersionFilters")
+			}
+
+			public func encode(to encoder: Encoder) throws {
+				var values = encoder.container(keyedBy: StringCodingKey.self)
+				try values.encode(deviceFamilyOsVersionFilters, forKey: "deviceFamilyOsVersionFilters")
+			}
+		}
+
 		public enum `Type`: String, Codable, CaseIterable {
 			case betaRecruitmentCriteria
 		}
 
-		public init(attributes: Attributes, relationships: Relationships, type: `Type`) {
-			self.attributes = attributes
+		public init(relationships: Relationships, attributes: Attributes, type: `Type`) {
 			self.relationships = relationships
+			self.attributes = attributes
 			self.type = type
 		}
 
 		public init(from decoder: Decoder) throws {
 			let values = try decoder.container(keyedBy: StringCodingKey.self)
-			self.attributes = try values.decode(Attributes.self, forKey: "attributes")
 			self.relationships = try values.decode(Relationships.self, forKey: "relationships")
+			self.attributes = try values.decode(Attributes.self, forKey: "attributes")
 			self.type = try values.decode(`Type`.self, forKey: "type")
 		}
 
 		public func encode(to encoder: Encoder) throws {
 			var values = encoder.container(keyedBy: StringCodingKey.self)
-			try values.encode(attributes, forKey: "attributes")
 			try values.encode(relationships, forKey: "relationships")
+			try values.encode(attributes, forKey: "attributes")
 			try values.encode(type, forKey: "type")
 		}
 	}

@@ -4,8 +4,30 @@
 import Foundation
 
 public struct Checksums: Codable {
-	public var composite: Composite?
 	public var file: File?
+	public var composite: Composite?
+
+	public struct File: Codable {
+		public var algorithm: ChecksumAlgorithm?
+		public var hash: String?
+
+		public init(algorithm: ChecksumAlgorithm? = nil, hash: String? = nil) {
+			self.algorithm = algorithm
+			self.hash = hash
+		}
+
+		public init(from decoder: Decoder) throws {
+			let values = try decoder.container(keyedBy: StringCodingKey.self)
+			self.algorithm = try values.decodeIfPresent(ChecksumAlgorithm.self, forKey: "algorithm")
+			self.hash = try values.decodeIfPresent(String.self, forKey: "hash")
+		}
+
+		public func encode(to encoder: Encoder) throws {
+			var values = encoder.container(keyedBy: StringCodingKey.self)
+			try values.encodeIfPresent(algorithm, forKey: "algorithm")
+			try values.encodeIfPresent(hash, forKey: "hash")
+		}
+	}
 
 	public struct Composite: Codable {
 		public var algorithm: Algorithm?
@@ -33,42 +55,20 @@ public struct Checksums: Codable {
 		}
 	}
 
-	public struct File: Codable {
-		public var algorithm: ChecksumAlgorithm?
-		public var hash: String?
-
-		public init(algorithm: ChecksumAlgorithm? = nil, hash: String? = nil) {
-			self.algorithm = algorithm
-			self.hash = hash
-		}
-
-		public init(from decoder: Decoder) throws {
-			let values = try decoder.container(keyedBy: StringCodingKey.self)
-			self.algorithm = try values.decodeIfPresent(ChecksumAlgorithm.self, forKey: "algorithm")
-			self.hash = try values.decodeIfPresent(String.self, forKey: "hash")
-		}
-
-		public func encode(to encoder: Encoder) throws {
-			var values = encoder.container(keyedBy: StringCodingKey.self)
-			try values.encodeIfPresent(algorithm, forKey: "algorithm")
-			try values.encodeIfPresent(hash, forKey: "hash")
-		}
-	}
-
-	public init(composite: Composite? = nil, file: File? = nil) {
-		self.composite = composite
+	public init(file: File? = nil, composite: Composite? = nil) {
 		self.file = file
+		self.composite = composite
 	}
 
 	public init(from decoder: Decoder) throws {
 		let values = try decoder.container(keyedBy: StringCodingKey.self)
-		self.composite = try values.decodeIfPresent(Composite.self, forKey: "composite")
 		self.file = try values.decodeIfPresent(File.self, forKey: "file")
+		self.composite = try values.decodeIfPresent(Composite.self, forKey: "composite")
 	}
 
 	public func encode(to encoder: Encoder) throws {
 		var values = encoder.container(keyedBy: StringCodingKey.self)
-		try values.encodeIfPresent(composite, forKey: "composite")
 		try values.encodeIfPresent(file, forKey: "file")
+		try values.encodeIfPresent(composite, forKey: "composite")
 	}
 }

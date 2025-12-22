@@ -12,16 +12,10 @@ public struct BuildUploadFileCreateRequest: Codable {
 		public var type: `Type`
 
 		public struct Attributes: Codable {
-			public var assetType: AssetType
+			public var uti: Uti
 			public var fileName: String
 			public var fileSize: Int64
-			public var uti: Uti
-
-			public enum AssetType: String, Codable, CaseIterable {
-				case asset = "ASSET"
-				case assetDescription = "ASSET_DESCRIPTION"
-				case assetSpi = "ASSET_SPI"
-			}
+			public var assetType: AssetType
 
 			public enum Uti: String, Codable, CaseIterable {
 				case comAppleBinaryPropertyList = "com.apple.binary-property-list"
@@ -31,27 +25,33 @@ public struct BuildUploadFileCreateRequest: Codable {
 				case comPkwareZipArchive = "com.pkware.zip-archive"
 			}
 
-			public init(assetType: AssetType, fileName: String, fileSize: Int64, uti: Uti) {
-				self.assetType = assetType
+			public enum AssetType: String, Codable, CaseIterable {
+				case asset = "ASSET"
+				case assetDescription = "ASSET_DESCRIPTION"
+				case assetSpi = "ASSET_SPI"
+			}
+
+			public init(uti: Uti, fileName: String, fileSize: Int64, assetType: AssetType) {
+				self.uti = uti
 				self.fileName = fileName
 				self.fileSize = fileSize
-				self.uti = uti
+				self.assetType = assetType
 			}
 
 			public init(from decoder: Decoder) throws {
 				let values = try decoder.container(keyedBy: StringCodingKey.self)
-				self.assetType = try values.decode(AssetType.self, forKey: "assetType")
+				self.uti = try values.decode(Uti.self, forKey: "uti")
 				self.fileName = try values.decode(String.self, forKey: "fileName")
 				self.fileSize = try values.decode(Int64.self, forKey: "fileSize")
-				self.uti = try values.decode(Uti.self, forKey: "uti")
+				self.assetType = try values.decode(AssetType.self, forKey: "assetType")
 			}
 
 			public func encode(to encoder: Encoder) throws {
 				var values = encoder.container(keyedBy: StringCodingKey.self)
-				try values.encode(assetType, forKey: "assetType")
+				try values.encode(uti, forKey: "uti")
 				try values.encode(fileName, forKey: "fileName")
 				try values.encode(fileSize, forKey: "fileSize")
-				try values.encode(uti, forKey: "uti")
+				try values.encode(assetType, forKey: "assetType")
 			}
 		}
 

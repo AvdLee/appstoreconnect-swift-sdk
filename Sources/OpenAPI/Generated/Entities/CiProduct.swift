@@ -4,50 +4,63 @@
 import Foundation
 
 public struct CiProduct: Codable, Identifiable {
-	public var attributes: Attributes?
+	public var relationships: Relationships?
 	public var id: String
 	public var links: ResourceLinks?
-	public var relationships: Relationships?
+	public var attributes: Attributes?
 	public var type: `Type`
 
-	public struct Attributes: Codable {
-		public var createdDate: Date?
-		public var name: String?
-		public var productType: ProductType?
-
-		public enum ProductType: String, Codable, CaseIterable {
-			case app = "APP"
-			case framework = "FRAMEWORK"
-		}
-
-		public init(createdDate: Date? = nil, name: String? = nil, productType: ProductType? = nil) {
-			self.createdDate = createdDate
-			self.name = name
-			self.productType = productType
-		}
-
-		public init(from decoder: Decoder) throws {
-			let values = try decoder.container(keyedBy: StringCodingKey.self)
-			self.createdDate = try values.decodeIfPresent(Date.self, forKey: "createdDate")
-			self.name = try values.decodeIfPresent(String.self, forKey: "name")
-			self.productType = try values.decodeIfPresent(ProductType.self, forKey: "productType")
-		}
-
-		public func encode(to encoder: Encoder) throws {
-			var values = encoder.container(keyedBy: StringCodingKey.self)
-			try values.encodeIfPresent(createdDate, forKey: "createdDate")
-			try values.encodeIfPresent(name, forKey: "name")
-			try values.encodeIfPresent(productType, forKey: "productType")
-		}
-	}
-
 	public struct Relationships: Codable {
-		public var additionalRepositories: AdditionalRepositories?
-		public var app: App?
-		public var buildRuns: BuildRuns?
 		public var bundleID: BundleID?
-		public var primaryRepositories: PrimaryRepositories?
+		public var additionalRepositories: AdditionalRepositories?
 		public var workflows: Workflows?
+		public var buildRuns: BuildRuns?
+		public var primaryRepositories: PrimaryRepositories?
+		public var app: App?
+
+		public struct BundleID: Codable {
+			public var data: Data?
+
+			public struct Data: Codable, Identifiable {
+				public var id: String
+				public var type: `Type`
+
+				public enum `Type`: String, Codable, CaseIterable {
+					case bundleIDs = "bundleIds"
+				}
+
+				public init(id: String, type: `Type`) {
+					self.id = id
+					self.type = type
+				}
+
+				public init(from decoder: Decoder) throws {
+					let values = try decoder.container(keyedBy: StringCodingKey.self)
+					self.id = try values.decode(String.self, forKey: "id")
+					self.type = try values.decode(`Type`.self, forKey: "type")
+				}
+
+				public func encode(to encoder: Encoder) throws {
+					var values = encoder.container(keyedBy: StringCodingKey.self)
+					try values.encode(id, forKey: "id")
+					try values.encode(type, forKey: "type")
+				}
+			}
+
+			public init(data: Data? = nil) {
+				self.data = data
+			}
+
+			public init(from decoder: Decoder) throws {
+				let values = try decoder.container(keyedBy: StringCodingKey.self)
+				self.data = try values.decodeIfPresent(Data.self, forKey: "data")
+			}
+
+			public func encode(to encoder: Encoder) throws {
+				var values = encoder.container(keyedBy: StringCodingKey.self)
+				try values.encodeIfPresent(data, forKey: "data")
+			}
+		}
 
 		public struct AdditionalRepositories: Codable {
 			public var links: RelationshipLinks?
@@ -64,6 +77,94 @@ public struct CiProduct: Codable, Identifiable {
 			public func encode(to encoder: Encoder) throws {
 				var values = encoder.container(keyedBy: StringCodingKey.self)
 				try values.encodeIfPresent(links, forKey: "links")
+			}
+		}
+
+		public struct Workflows: Codable {
+			public var links: RelationshipLinks?
+
+			public init(links: RelationshipLinks? = nil) {
+				self.links = links
+			}
+
+			public init(from decoder: Decoder) throws {
+				let values = try decoder.container(keyedBy: StringCodingKey.self)
+				self.links = try values.decodeIfPresent(RelationshipLinks.self, forKey: "links")
+			}
+
+			public func encode(to encoder: Encoder) throws {
+				var values = encoder.container(keyedBy: StringCodingKey.self)
+				try values.encodeIfPresent(links, forKey: "links")
+			}
+		}
+
+		public struct BuildRuns: Codable {
+			public var links: RelationshipLinks?
+
+			public init(links: RelationshipLinks? = nil) {
+				self.links = links
+			}
+
+			public init(from decoder: Decoder) throws {
+				let values = try decoder.container(keyedBy: StringCodingKey.self)
+				self.links = try values.decodeIfPresent(RelationshipLinks.self, forKey: "links")
+			}
+
+			public func encode(to encoder: Encoder) throws {
+				var values = encoder.container(keyedBy: StringCodingKey.self)
+				try values.encodeIfPresent(links, forKey: "links")
+			}
+		}
+
+		public struct PrimaryRepositories: Codable {
+			public var links: RelationshipLinks?
+			public var data: [Datum]?
+			public var meta: PagingInformation?
+
+			public struct Datum: Codable, Identifiable {
+				public var type: `Type`
+				public var id: String
+
+				public enum `Type`: String, Codable, CaseIterable {
+					case scmRepositories
+				}
+
+				public init(type: `Type`, id: String) {
+					self.type = type
+					self.id = id
+				}
+
+				public init(from decoder: Decoder) throws {
+					let values = try decoder.container(keyedBy: StringCodingKey.self)
+					self.type = try values.decode(`Type`.self, forKey: "type")
+					self.id = try values.decode(String.self, forKey: "id")
+				}
+
+				public func encode(to encoder: Encoder) throws {
+					var values = encoder.container(keyedBy: StringCodingKey.self)
+					try values.encode(type, forKey: "type")
+					try values.encode(id, forKey: "id")
+				}
+			}
+
+			public init(links: RelationshipLinks? = nil, data: [Datum]? = nil, meta: PagingInformation? = nil) {
+				self.links = links
+				self.data = data
+				self.meta = meta
+			}
+
+			public init(from decoder: Decoder) throws {
+				let values = try decoder.container(keyedBy: StringCodingKey.self)
+				self.links = try values.decodeIfPresent(RelationshipLinks.self, forKey: "links")
+				self.data = try values.decodeIfPresent([Datum].self, forKey: "data")
+				self.meta = try values.decodeIfPresent(PagingInformation.self, forKey: "meta")
+			}
+
+			public func encode(to encoder: Encoder) throws {
+				var values = encoder.container(keyedBy: StringCodingKey.self)
+				try values.encodeIfPresent(links, forKey: "links")
+				try values.encodeIfPresent(data, forKey: "data")
+				try values.encodeIfPresent(meta, forKey: "meta")
 			}
 		}
 
@@ -115,165 +216,64 @@ public struct CiProduct: Codable, Identifiable {
 			}
 		}
 
-		public struct BuildRuns: Codable {
-			public var links: RelationshipLinks?
-
-			public init(links: RelationshipLinks? = nil) {
-				self.links = links
-			}
-
-			public init(from decoder: Decoder) throws {
-				let values = try decoder.container(keyedBy: StringCodingKey.self)
-				self.links = try values.decodeIfPresent(RelationshipLinks.self, forKey: "links")
-			}
-
-			public func encode(to encoder: Encoder) throws {
-				var values = encoder.container(keyedBy: StringCodingKey.self)
-				try values.encodeIfPresent(links, forKey: "links")
-			}
-		}
-
-		public struct BundleID: Codable {
-			public var data: Data?
-
-			public struct Data: Codable, Identifiable {
-				public var id: String
-				public var type: `Type`
-
-				public enum `Type`: String, Codable, CaseIterable {
-					case bundleIDs = "bundleIds"
-				}
-
-				public init(id: String, type: `Type`) {
-					self.id = id
-					self.type = type
-				}
-
-				public init(from decoder: Decoder) throws {
-					let values = try decoder.container(keyedBy: StringCodingKey.self)
-					self.id = try values.decode(String.self, forKey: "id")
-					self.type = try values.decode(`Type`.self, forKey: "type")
-				}
-
-				public func encode(to encoder: Encoder) throws {
-					var values = encoder.container(keyedBy: StringCodingKey.self)
-					try values.encode(id, forKey: "id")
-					try values.encode(type, forKey: "type")
-				}
-			}
-
-			public init(data: Data? = nil) {
-				self.data = data
-			}
-
-			public init(from decoder: Decoder) throws {
-				let values = try decoder.container(keyedBy: StringCodingKey.self)
-				self.data = try values.decodeIfPresent(Data.self, forKey: "data")
-			}
-
-			public func encode(to encoder: Encoder) throws {
-				var values = encoder.container(keyedBy: StringCodingKey.self)
-				try values.encodeIfPresent(data, forKey: "data")
-			}
-		}
-
-		public struct PrimaryRepositories: Codable {
-			public var data: [Datum]?
-			public var links: RelationshipLinks?
-			public var meta: PagingInformation?
-
-			public struct Datum: Codable, Identifiable {
-				public var id: String
-				public var type: `Type`
-
-				public enum `Type`: String, Codable, CaseIterable {
-					case scmRepositories
-				}
-
-				public init(id: String, type: `Type`) {
-					self.id = id
-					self.type = type
-				}
-
-				public init(from decoder: Decoder) throws {
-					let values = try decoder.container(keyedBy: StringCodingKey.self)
-					self.id = try values.decode(String.self, forKey: "id")
-					self.type = try values.decode(`Type`.self, forKey: "type")
-				}
-
-				public func encode(to encoder: Encoder) throws {
-					var values = encoder.container(keyedBy: StringCodingKey.self)
-					try values.encode(id, forKey: "id")
-					try values.encode(type, forKey: "type")
-				}
-			}
-
-			public init(data: [Datum]? = nil, links: RelationshipLinks? = nil, meta: PagingInformation? = nil) {
-				self.data = data
-				self.links = links
-				self.meta = meta
-			}
-
-			public init(from decoder: Decoder) throws {
-				let values = try decoder.container(keyedBy: StringCodingKey.self)
-				self.data = try values.decodeIfPresent([Datum].self, forKey: "data")
-				self.links = try values.decodeIfPresent(RelationshipLinks.self, forKey: "links")
-				self.meta = try values.decodeIfPresent(PagingInformation.self, forKey: "meta")
-			}
-
-			public func encode(to encoder: Encoder) throws {
-				var values = encoder.container(keyedBy: StringCodingKey.self)
-				try values.encodeIfPresent(data, forKey: "data")
-				try values.encodeIfPresent(links, forKey: "links")
-				try values.encodeIfPresent(meta, forKey: "meta")
-			}
-		}
-
-		public struct Workflows: Codable {
-			public var links: RelationshipLinks?
-
-			public init(links: RelationshipLinks? = nil) {
-				self.links = links
-			}
-
-			public init(from decoder: Decoder) throws {
-				let values = try decoder.container(keyedBy: StringCodingKey.self)
-				self.links = try values.decodeIfPresent(RelationshipLinks.self, forKey: "links")
-			}
-
-			public func encode(to encoder: Encoder) throws {
-				var values = encoder.container(keyedBy: StringCodingKey.self)
-				try values.encodeIfPresent(links, forKey: "links")
-			}
-		}
-
-		public init(additionalRepositories: AdditionalRepositories? = nil, app: App? = nil, buildRuns: BuildRuns? = nil, bundleID: BundleID? = nil, primaryRepositories: PrimaryRepositories? = nil, workflows: Workflows? = nil) {
-			self.additionalRepositories = additionalRepositories
-			self.app = app
-			self.buildRuns = buildRuns
+		public init(bundleID: BundleID? = nil, additionalRepositories: AdditionalRepositories? = nil, workflows: Workflows? = nil, buildRuns: BuildRuns? = nil, primaryRepositories: PrimaryRepositories? = nil, app: App? = nil) {
 			self.bundleID = bundleID
-			self.primaryRepositories = primaryRepositories
+			self.additionalRepositories = additionalRepositories
 			self.workflows = workflows
+			self.buildRuns = buildRuns
+			self.primaryRepositories = primaryRepositories
+			self.app = app
 		}
 
 		public init(from decoder: Decoder) throws {
 			let values = try decoder.container(keyedBy: StringCodingKey.self)
-			self.additionalRepositories = try values.decodeIfPresent(AdditionalRepositories.self, forKey: "additionalRepositories")
-			self.app = try values.decodeIfPresent(App.self, forKey: "app")
-			self.buildRuns = try values.decodeIfPresent(BuildRuns.self, forKey: "buildRuns")
 			self.bundleID = try values.decodeIfPresent(BundleID.self, forKey: "bundleId")
-			self.primaryRepositories = try values.decodeIfPresent(PrimaryRepositories.self, forKey: "primaryRepositories")
+			self.additionalRepositories = try values.decodeIfPresent(AdditionalRepositories.self, forKey: "additionalRepositories")
 			self.workflows = try values.decodeIfPresent(Workflows.self, forKey: "workflows")
+			self.buildRuns = try values.decodeIfPresent(BuildRuns.self, forKey: "buildRuns")
+			self.primaryRepositories = try values.decodeIfPresent(PrimaryRepositories.self, forKey: "primaryRepositories")
+			self.app = try values.decodeIfPresent(App.self, forKey: "app")
 		}
 
 		public func encode(to encoder: Encoder) throws {
 			var values = encoder.container(keyedBy: StringCodingKey.self)
-			try values.encodeIfPresent(additionalRepositories, forKey: "additionalRepositories")
-			try values.encodeIfPresent(app, forKey: "app")
-			try values.encodeIfPresent(buildRuns, forKey: "buildRuns")
 			try values.encodeIfPresent(bundleID, forKey: "bundleId")
-			try values.encodeIfPresent(primaryRepositories, forKey: "primaryRepositories")
+			try values.encodeIfPresent(additionalRepositories, forKey: "additionalRepositories")
 			try values.encodeIfPresent(workflows, forKey: "workflows")
+			try values.encodeIfPresent(buildRuns, forKey: "buildRuns")
+			try values.encodeIfPresent(primaryRepositories, forKey: "primaryRepositories")
+			try values.encodeIfPresent(app, forKey: "app")
+		}
+	}
+
+	public struct Attributes: Codable {
+		public var productType: ProductType?
+		public var name: String?
+		public var createdDate: Date?
+
+		public enum ProductType: String, Codable, CaseIterable {
+			case app = "APP"
+			case framework = "FRAMEWORK"
+		}
+
+		public init(productType: ProductType? = nil, name: String? = nil, createdDate: Date? = nil) {
+			self.productType = productType
+			self.name = name
+			self.createdDate = createdDate
+		}
+
+		public init(from decoder: Decoder) throws {
+			let values = try decoder.container(keyedBy: StringCodingKey.self)
+			self.productType = try values.decodeIfPresent(ProductType.self, forKey: "productType")
+			self.name = try values.decodeIfPresent(String.self, forKey: "name")
+			self.createdDate = try values.decodeIfPresent(Date.self, forKey: "createdDate")
+		}
+
+		public func encode(to encoder: Encoder) throws {
+			var values = encoder.container(keyedBy: StringCodingKey.self)
+			try values.encodeIfPresent(productType, forKey: "productType")
+			try values.encodeIfPresent(name, forKey: "name")
+			try values.encodeIfPresent(createdDate, forKey: "createdDate")
 		}
 	}
 
@@ -281,29 +281,29 @@ public struct CiProduct: Codable, Identifiable {
 		case ciProducts
 	}
 
-	public init(attributes: Attributes? = nil, id: String, links: ResourceLinks? = nil, relationships: Relationships? = nil, type: `Type`) {
-		self.attributes = attributes
+	public init(relationships: Relationships? = nil, id: String, links: ResourceLinks? = nil, attributes: Attributes? = nil, type: `Type`) {
+		self.relationships = relationships
 		self.id = id
 		self.links = links
-		self.relationships = relationships
+		self.attributes = attributes
 		self.type = type
 	}
 
 	public init(from decoder: Decoder) throws {
 		let values = try decoder.container(keyedBy: StringCodingKey.self)
-		self.attributes = try values.decodeIfPresent(Attributes.self, forKey: "attributes")
+		self.relationships = try values.decodeIfPresent(Relationships.self, forKey: "relationships")
 		self.id = try values.decode(String.self, forKey: "id")
 		self.links = try values.decodeIfPresent(ResourceLinks.self, forKey: "links")
-		self.relationships = try values.decodeIfPresent(Relationships.self, forKey: "relationships")
+		self.attributes = try values.decodeIfPresent(Attributes.self, forKey: "attributes")
 		self.type = try values.decode(`Type`.self, forKey: "type")
 	}
 
 	public func encode(to encoder: Encoder) throws {
 		var values = encoder.container(keyedBy: StringCodingKey.self)
-		try values.encodeIfPresent(attributes, forKey: "attributes")
+		try values.encodeIfPresent(relationships, forKey: "relationships")
 		try values.encode(id, forKey: "id")
 		try values.encodeIfPresent(links, forKey: "links")
-		try values.encodeIfPresent(relationships, forKey: "relationships")
+		try values.encodeIfPresent(attributes, forKey: "attributes")
 		try values.encode(type, forKey: "type")
 	}
 }

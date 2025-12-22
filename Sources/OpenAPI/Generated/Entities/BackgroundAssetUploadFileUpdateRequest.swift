@@ -8,33 +8,33 @@ public struct BackgroundAssetUploadFileUpdateRequest: Codable {
 
 	public struct Data: Codable, Identifiable {
 		public var attributes: Attributes?
-		public var id: String
 		public var type: `Type`
+		public var id: String
 
 		public struct Attributes: Codable {
 			/// - warning: Deprecated.
 			public var sourceFileChecksum: String?
-			public var sourceFileChecksums: Checksums?
 			public var isUploaded: Bool?
+			public var sourceFileChecksums: Checksums?
 
-			public init(sourceFileChecksum: String? = nil, sourceFileChecksums: Checksums? = nil, isUploaded: Bool? = nil) {
+			public init(sourceFileChecksum: String? = nil, isUploaded: Bool? = nil, sourceFileChecksums: Checksums? = nil) {
 				self.sourceFileChecksum = sourceFileChecksum
-				self.sourceFileChecksums = sourceFileChecksums
 				self.isUploaded = isUploaded
+				self.sourceFileChecksums = sourceFileChecksums
 			}
 
 			public init(from decoder: Decoder) throws {
 				let values = try decoder.container(keyedBy: StringCodingKey.self)
 				self.sourceFileChecksum = try values.decodeIfPresent(String.self, forKey: "sourceFileChecksum")
-				self.sourceFileChecksums = try values.decodeIfPresent(Checksums.self, forKey: "sourceFileChecksums")
 				self.isUploaded = try values.decodeIfPresent(Bool.self, forKey: "uploaded")
+				self.sourceFileChecksums = try values.decodeIfPresent(Checksums.self, forKey: "sourceFileChecksums")
 			}
 
 			public func encode(to encoder: Encoder) throws {
 				var values = encoder.container(keyedBy: StringCodingKey.self)
 				try values.encodeIfPresent(sourceFileChecksum, forKey: "sourceFileChecksum")
-				try values.encodeIfPresent(sourceFileChecksums, forKey: "sourceFileChecksums")
 				try values.encodeIfPresent(isUploaded, forKey: "uploaded")
+				try values.encodeIfPresent(sourceFileChecksums, forKey: "sourceFileChecksums")
 			}
 		}
 
@@ -42,24 +42,24 @@ public struct BackgroundAssetUploadFileUpdateRequest: Codable {
 			case backgroundAssetUploadFiles
 		}
 
-		public init(attributes: Attributes? = nil, id: String, type: `Type`) {
+		public init(attributes: Attributes? = nil, type: `Type`, id: String) {
 			self.attributes = attributes
-			self.id = id
 			self.type = type
+			self.id = id
 		}
 
 		public init(from decoder: Decoder) throws {
 			let values = try decoder.container(keyedBy: StringCodingKey.self)
 			self.attributes = try values.decodeIfPresent(Attributes.self, forKey: "attributes")
-			self.id = try values.decode(String.self, forKey: "id")
 			self.type = try values.decode(`Type`.self, forKey: "type")
+			self.id = try values.decode(String.self, forKey: "id")
 		}
 
 		public func encode(to encoder: Encoder) throws {
 			var values = encoder.container(keyedBy: StringCodingKey.self)
 			try values.encodeIfPresent(attributes, forKey: "attributes")
-			try values.encode(id, forKey: "id")
 			try values.encode(type, forKey: "type")
+			try values.encode(id, forKey: "id")
 		}
 	}
 

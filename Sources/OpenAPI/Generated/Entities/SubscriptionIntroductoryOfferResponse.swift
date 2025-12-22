@@ -4,9 +4,9 @@
 import Foundation
 
 public struct SubscriptionIntroductoryOfferResponse: Codable {
+	public var included: [IncludedItem]?
 	/// SubscriptionIntroductoryOffer
 	public var data: SubscriptionIntroductoryOffer
-	public var included: [IncludedItem]?
 	public var links: DocumentLinks
 
 	public enum IncludedItem: Codable {
@@ -46,23 +46,23 @@ public struct SubscriptionIntroductoryOfferResponse: Codable {
 		}
 	}
 
-	public init(data: SubscriptionIntroductoryOffer, included: [IncludedItem]? = nil, links: DocumentLinks) {
-		self.data = data
+	public init(included: [IncludedItem]? = nil, data: SubscriptionIntroductoryOffer, links: DocumentLinks) {
 		self.included = included
+		self.data = data
 		self.links = links
 	}
 
 	public init(from decoder: Decoder) throws {
 		let values = try decoder.container(keyedBy: StringCodingKey.self)
-		self.data = try values.decode(SubscriptionIntroductoryOffer.self, forKey: "data")
 		self.included = try values.decodeIfPresent([IncludedItem].self, forKey: "included")
+		self.data = try values.decode(SubscriptionIntroductoryOffer.self, forKey: "data")
 		self.links = try values.decode(DocumentLinks.self, forKey: "links")
 	}
 
 	public func encode(to encoder: Encoder) throws {
 		var values = encoder.container(keyedBy: StringCodingKey.self)
-		try values.encode(data, forKey: "data")
 		try values.encodeIfPresent(included, forKey: "included")
+		try values.encode(data, forKey: "data")
 		try values.encode(links, forKey: "links")
 	}
 }

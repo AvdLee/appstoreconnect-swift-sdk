@@ -30,54 +30,10 @@ public struct CiBuildRunCreateRequest: Codable {
 		}
 
 		public struct Relationships: Codable {
-			public var buildRun: BuildRun?
 			public var pullRequest: PullRequest?
 			public var sourceBranchOrTag: SourceBranchOrTag?
+			public var buildRun: BuildRun?
 			public var workflow: Workflow?
-
-			public struct BuildRun: Codable {
-				public var data: Data?
-
-				public struct Data: Codable, Identifiable {
-					public var id: String
-					public var type: `Type`
-
-					public enum `Type`: String, Codable, CaseIterable {
-						case ciBuildRuns
-					}
-
-					public init(id: String, type: `Type`) {
-						self.id = id
-						self.type = type
-					}
-
-					public init(from decoder: Decoder) throws {
-						let values = try decoder.container(keyedBy: StringCodingKey.self)
-						self.id = try values.decode(String.self, forKey: "id")
-						self.type = try values.decode(`Type`.self, forKey: "type")
-					}
-
-					public func encode(to encoder: Encoder) throws {
-						var values = encoder.container(keyedBy: StringCodingKey.self)
-						try values.encode(id, forKey: "id")
-						try values.encode(type, forKey: "type")
-					}
-				}
-
-				public init(data: Data? = nil) {
-					self.data = data
-				}
-
-				public init(from decoder: Decoder) throws {
-					let values = try decoder.container(keyedBy: StringCodingKey.self)
-					self.data = try values.decodeIfPresent(Data.self, forKey: "data")
-				}
-
-				public func encode(to encoder: Encoder) throws {
-					var values = encoder.container(keyedBy: StringCodingKey.self)
-					try values.encodeIfPresent(data, forKey: "data")
-				}
-			}
 
 			public struct PullRequest: Codable {
 				public var data: Data?
@@ -127,11 +83,55 @@ public struct CiBuildRunCreateRequest: Codable {
 				public var data: Data?
 
 				public struct Data: Codable, Identifiable {
+					public var type: `Type`
+					public var id: String
+
+					public enum `Type`: String, Codable, CaseIterable {
+						case scmGitReferences
+					}
+
+					public init(type: `Type`, id: String) {
+						self.type = type
+						self.id = id
+					}
+
+					public init(from decoder: Decoder) throws {
+						let values = try decoder.container(keyedBy: StringCodingKey.self)
+						self.type = try values.decode(`Type`.self, forKey: "type")
+						self.id = try values.decode(String.self, forKey: "id")
+					}
+
+					public func encode(to encoder: Encoder) throws {
+						var values = encoder.container(keyedBy: StringCodingKey.self)
+						try values.encode(type, forKey: "type")
+						try values.encode(id, forKey: "id")
+					}
+				}
+
+				public init(data: Data? = nil) {
+					self.data = data
+				}
+
+				public init(from decoder: Decoder) throws {
+					let values = try decoder.container(keyedBy: StringCodingKey.self)
+					self.data = try values.decodeIfPresent(Data.self, forKey: "data")
+				}
+
+				public func encode(to encoder: Encoder) throws {
+					var values = encoder.container(keyedBy: StringCodingKey.self)
+					try values.encodeIfPresent(data, forKey: "data")
+				}
+			}
+
+			public struct BuildRun: Codable {
+				public var data: Data?
+
+				public struct Data: Codable, Identifiable {
 					public var id: String
 					public var type: `Type`
 
 					public enum `Type`: String, Codable, CaseIterable {
-						case scmGitReferences
+						case ciBuildRuns
 					}
 
 					public init(id: String, type: `Type`) {
@@ -211,26 +211,26 @@ public struct CiBuildRunCreateRequest: Codable {
 				}
 			}
 
-			public init(buildRun: BuildRun? = nil, pullRequest: PullRequest? = nil, sourceBranchOrTag: SourceBranchOrTag? = nil, workflow: Workflow? = nil) {
-				self.buildRun = buildRun
+			public init(pullRequest: PullRequest? = nil, sourceBranchOrTag: SourceBranchOrTag? = nil, buildRun: BuildRun? = nil, workflow: Workflow? = nil) {
 				self.pullRequest = pullRequest
 				self.sourceBranchOrTag = sourceBranchOrTag
+				self.buildRun = buildRun
 				self.workflow = workflow
 			}
 
 			public init(from decoder: Decoder) throws {
 				let values = try decoder.container(keyedBy: StringCodingKey.self)
-				self.buildRun = try values.decodeIfPresent(BuildRun.self, forKey: "buildRun")
 				self.pullRequest = try values.decodeIfPresent(PullRequest.self, forKey: "pullRequest")
 				self.sourceBranchOrTag = try values.decodeIfPresent(SourceBranchOrTag.self, forKey: "sourceBranchOrTag")
+				self.buildRun = try values.decodeIfPresent(BuildRun.self, forKey: "buildRun")
 				self.workflow = try values.decodeIfPresent(Workflow.self, forKey: "workflow")
 			}
 
 			public func encode(to encoder: Encoder) throws {
 				var values = encoder.container(keyedBy: StringCodingKey.self)
-				try values.encodeIfPresent(buildRun, forKey: "buildRun")
 				try values.encodeIfPresent(pullRequest, forKey: "pullRequest")
 				try values.encodeIfPresent(sourceBranchOrTag, forKey: "sourceBranchOrTag")
+				try values.encodeIfPresent(buildRun, forKey: "buildRun")
 				try values.encodeIfPresent(workflow, forKey: "workflow")
 			}
 		}

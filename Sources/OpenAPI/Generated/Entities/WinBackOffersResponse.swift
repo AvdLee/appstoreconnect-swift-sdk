@@ -4,31 +4,31 @@
 import Foundation
 
 public struct WinBackOffersResponse: Codable {
-	public var data: [WinBackOffer]
 	public var included: [WinBackOfferPrice]?
 	public var links: PagedDocumentLinks
 	public var meta: PagingInformation?
+	public var data: [WinBackOffer]
 
-	public init(data: [WinBackOffer], included: [WinBackOfferPrice]? = nil, links: PagedDocumentLinks, meta: PagingInformation? = nil) {
-		self.data = data
+	public init(included: [WinBackOfferPrice]? = nil, links: PagedDocumentLinks, meta: PagingInformation? = nil, data: [WinBackOffer]) {
 		self.included = included
 		self.links = links
 		self.meta = meta
+		self.data = data
 	}
 
 	public init(from decoder: Decoder) throws {
 		let values = try decoder.container(keyedBy: StringCodingKey.self)
-		self.data = try values.decode([WinBackOffer].self, forKey: "data")
 		self.included = try values.decodeIfPresent([WinBackOfferPrice].self, forKey: "included")
 		self.links = try values.decode(PagedDocumentLinks.self, forKey: "links")
 		self.meta = try values.decodeIfPresent(PagingInformation.self, forKey: "meta")
+		self.data = try values.decode([WinBackOffer].self, forKey: "data")
 	}
 
 	public func encode(to encoder: Encoder) throws {
 		var values = encoder.container(keyedBy: StringCodingKey.self)
-		try values.encode(data, forKey: "data")
 		try values.encodeIfPresent(included, forKey: "included")
 		try values.encode(links, forKey: "links")
 		try values.encodeIfPresent(meta, forKey: "meta")
+		try values.encode(data, forKey: "data")
 	}
 }

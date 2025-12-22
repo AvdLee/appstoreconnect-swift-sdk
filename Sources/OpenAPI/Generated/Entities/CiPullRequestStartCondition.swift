@@ -4,31 +4,31 @@
 import Foundation
 
 public struct CiPullRequestStartCondition: Codable {
-	public var isAutoCancel: Bool?
-	public var destination: CiBranchPatterns?
 	public var filesAndFoldersRule: CiFilesAndFoldersRule?
 	public var source: CiBranchPatterns?
+	public var destination: CiBranchPatterns?
+	public var isAutoCancel: Bool?
 
-	public init(isAutoCancel: Bool? = nil, destination: CiBranchPatterns? = nil, filesAndFoldersRule: CiFilesAndFoldersRule? = nil, source: CiBranchPatterns? = nil) {
-		self.isAutoCancel = isAutoCancel
-		self.destination = destination
+	public init(filesAndFoldersRule: CiFilesAndFoldersRule? = nil, source: CiBranchPatterns? = nil, destination: CiBranchPatterns? = nil, isAutoCancel: Bool? = nil) {
 		self.filesAndFoldersRule = filesAndFoldersRule
 		self.source = source
+		self.destination = destination
+		self.isAutoCancel = isAutoCancel
 	}
 
 	public init(from decoder: Decoder) throws {
 		let values = try decoder.container(keyedBy: StringCodingKey.self)
-		self.isAutoCancel = try values.decodeIfPresent(Bool.self, forKey: "autoCancel")
-		self.destination = try values.decodeIfPresent(CiBranchPatterns.self, forKey: "destination")
 		self.filesAndFoldersRule = try values.decodeIfPresent(CiFilesAndFoldersRule.self, forKey: "filesAndFoldersRule")
 		self.source = try values.decodeIfPresent(CiBranchPatterns.self, forKey: "source")
+		self.destination = try values.decodeIfPresent(CiBranchPatterns.self, forKey: "destination")
+		self.isAutoCancel = try values.decodeIfPresent(Bool.self, forKey: "autoCancel")
 	}
 
 	public func encode(to encoder: Encoder) throws {
 		var values = encoder.container(keyedBy: StringCodingKey.self)
-		try values.encodeIfPresent(isAutoCancel, forKey: "autoCancel")
-		try values.encodeIfPresent(destination, forKey: "destination")
 		try values.encodeIfPresent(filesAndFoldersRule, forKey: "filesAndFoldersRule")
 		try values.encodeIfPresent(source, forKey: "source")
+		try values.encodeIfPresent(destination, forKey: "destination")
+		try values.encodeIfPresent(isAutoCancel, forKey: "autoCancel")
 	}
 }

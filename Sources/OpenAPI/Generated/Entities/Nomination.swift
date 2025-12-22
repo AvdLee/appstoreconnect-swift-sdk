@@ -4,111 +4,21 @@
 import Foundation
 
 public struct Nomination: Codable, Identifiable {
-	public var attributes: Attributes?
 	public var id: String
-	public var links: ResourceLinks?
 	public var relationships: Relationships?
 	public var type: `Type`
-
-	public struct Attributes: Codable {
-		public var createdDate: Date?
-		public var description: String?
-		public var deviceFamilies: [DeviceFamily]?
-		public var hasInAppEvents: Bool?
-		public var lastModifiedDate: Date?
-		public var isLaunchInSelectMarketsFirst: Bool?
-		public var locales: [String]?
-		public var name: String?
-		public var notes: String?
-		public var isPreOrderEnabled: Bool?
-		public var publishEndDate: Date?
-		public var publishStartDate: Date?
-		public var state: State?
-		public var submittedDate: Date?
-		public var supplementalMaterialsUris: [URL]?
-		public var type: `Type`?
-
-		public enum State: String, Codable, CaseIterable {
-			case draft = "DRAFT"
-			case submitted = "SUBMITTED"
-			case archived = "ARCHIVED"
-		}
-
-		public enum `Type`: String, Codable, CaseIterable {
-			case appLaunch = "APP_LAUNCH"
-			case appEnhancements = "APP_ENHANCEMENTS"
-			case newContent = "NEW_CONTENT"
-		}
-
-		public init(createdDate: Date? = nil, description: String? = nil, deviceFamilies: [DeviceFamily]? = nil, hasInAppEvents: Bool? = nil, lastModifiedDate: Date? = nil, isLaunchInSelectMarketsFirst: Bool? = nil, locales: [String]? = nil, name: String? = nil, notes: String? = nil, isPreOrderEnabled: Bool? = nil, publishEndDate: Date? = nil, publishStartDate: Date? = nil, state: State? = nil, submittedDate: Date? = nil, supplementalMaterialsUris: [URL]? = nil, type: `Type`? = nil) {
-			self.createdDate = createdDate
-			self.description = description
-			self.deviceFamilies = deviceFamilies
-			self.hasInAppEvents = hasInAppEvents
-			self.lastModifiedDate = lastModifiedDate
-			self.isLaunchInSelectMarketsFirst = isLaunchInSelectMarketsFirst
-			self.locales = locales
-			self.name = name
-			self.notes = notes
-			self.isPreOrderEnabled = isPreOrderEnabled
-			self.publishEndDate = publishEndDate
-			self.publishStartDate = publishStartDate
-			self.state = state
-			self.submittedDate = submittedDate
-			self.supplementalMaterialsUris = supplementalMaterialsUris
-			self.type = type
-		}
-
-		public init(from decoder: Decoder) throws {
-			let values = try decoder.container(keyedBy: StringCodingKey.self)
-			self.createdDate = try values.decodeIfPresent(Date.self, forKey: "createdDate")
-			self.description = try values.decodeIfPresent(String.self, forKey: "description")
-			self.deviceFamilies = try values.decodeIfPresent([DeviceFamily].self, forKey: "deviceFamilies")
-			self.hasInAppEvents = try values.decodeIfPresent(Bool.self, forKey: "hasInAppEvents")
-			self.lastModifiedDate = try values.decodeIfPresent(Date.self, forKey: "lastModifiedDate")
-			self.isLaunchInSelectMarketsFirst = try values.decodeIfPresent(Bool.self, forKey: "launchInSelectMarketsFirst")
-			self.locales = try values.decodeIfPresent([String].self, forKey: "locales")
-			self.name = try values.decodeIfPresent(String.self, forKey: "name")
-			self.notes = try values.decodeIfPresent(String.self, forKey: "notes")
-			self.isPreOrderEnabled = try values.decodeIfPresent(Bool.self, forKey: "preOrderEnabled")
-			self.publishEndDate = try values.decodeIfPresent(Date.self, forKey: "publishEndDate")
-			self.publishStartDate = try values.decodeIfPresent(Date.self, forKey: "publishStartDate")
-			self.state = try values.decodeIfPresent(State.self, forKey: "state")
-			self.submittedDate = try values.decodeIfPresent(Date.self, forKey: "submittedDate")
-			self.supplementalMaterialsUris = try values.decodeIfPresent([URL].self, forKey: "supplementalMaterialsUris")
-			self.type = try values.decodeIfPresent(`Type`.self, forKey: "type")
-		}
-
-		public func encode(to encoder: Encoder) throws {
-			var values = encoder.container(keyedBy: StringCodingKey.self)
-			try values.encodeIfPresent(createdDate, forKey: "createdDate")
-			try values.encodeIfPresent(description, forKey: "description")
-			try values.encodeIfPresent(deviceFamilies, forKey: "deviceFamilies")
-			try values.encodeIfPresent(hasInAppEvents, forKey: "hasInAppEvents")
-			try values.encodeIfPresent(lastModifiedDate, forKey: "lastModifiedDate")
-			try values.encodeIfPresent(isLaunchInSelectMarketsFirst, forKey: "launchInSelectMarketsFirst")
-			try values.encodeIfPresent(locales, forKey: "locales")
-			try values.encodeIfPresent(name, forKey: "name")
-			try values.encodeIfPresent(notes, forKey: "notes")
-			try values.encodeIfPresent(isPreOrderEnabled, forKey: "preOrderEnabled")
-			try values.encodeIfPresent(publishEndDate, forKey: "publishEndDate")
-			try values.encodeIfPresent(publishStartDate, forKey: "publishStartDate")
-			try values.encodeIfPresent(state, forKey: "state")
-			try values.encodeIfPresent(submittedDate, forKey: "submittedDate")
-			try values.encodeIfPresent(supplementalMaterialsUris, forKey: "supplementalMaterialsUris")
-			try values.encodeIfPresent(type, forKey: "type")
-		}
-	}
+	public var links: ResourceLinks?
+	public var attributes: Attributes?
 
 	public struct Relationships: Codable {
+		public var submittedByActor: SubmittedByActor?
+		public var lastModifiedByActor: LastModifiedByActor?
+		public var supportedTerritories: SupportedTerritories?
 		public var createdByActor: CreatedByActor?
 		public var inAppEvents: InAppEvents?
-		public var lastModifiedByActor: LastModifiedByActor?
 		public var relatedApps: RelatedApps?
-		public var submittedByActor: SubmittedByActor?
-		public var supportedTerritories: SupportedTerritories?
 
-		public struct CreatedByActor: Codable {
+		public struct SubmittedByActor: Codable {
 			public var data: Data?
 
 			public struct Data: Codable, Identifiable {
@@ -149,150 +59,10 @@ public struct Nomination: Codable, Identifiable {
 			public func encode(to encoder: Encoder) throws {
 				var values = encoder.container(keyedBy: StringCodingKey.self)
 				try values.encodeIfPresent(data, forKey: "data")
-			}
-		}
-
-		public struct InAppEvents: Codable {
-			public var data: [Datum]?
-			public var meta: PagingInformation?
-
-			public struct Datum: Codable, Identifiable {
-				public var id: String
-				public var type: `Type`
-
-				public enum `Type`: String, Codable, CaseIterable {
-					case appEvents
-				}
-
-				public init(id: String, type: `Type`) {
-					self.id = id
-					self.type = type
-				}
-
-				public init(from decoder: Decoder) throws {
-					let values = try decoder.container(keyedBy: StringCodingKey.self)
-					self.id = try values.decode(String.self, forKey: "id")
-					self.type = try values.decode(`Type`.self, forKey: "type")
-				}
-
-				public func encode(to encoder: Encoder) throws {
-					var values = encoder.container(keyedBy: StringCodingKey.self)
-					try values.encode(id, forKey: "id")
-					try values.encode(type, forKey: "type")
-				}
-			}
-
-			public init(data: [Datum]? = nil, meta: PagingInformation? = nil) {
-				self.data = data
-				self.meta = meta
-			}
-
-			public init(from decoder: Decoder) throws {
-				let values = try decoder.container(keyedBy: StringCodingKey.self)
-				self.data = try values.decodeIfPresent([Datum].self, forKey: "data")
-				self.meta = try values.decodeIfPresent(PagingInformation.self, forKey: "meta")
-			}
-
-			public func encode(to encoder: Encoder) throws {
-				var values = encoder.container(keyedBy: StringCodingKey.self)
-				try values.encodeIfPresent(data, forKey: "data")
-				try values.encodeIfPresent(meta, forKey: "meta")
 			}
 		}
 
 		public struct LastModifiedByActor: Codable {
-			public var data: Data?
-
-			public struct Data: Codable, Identifiable {
-				public var id: String
-				public var type: `Type`
-
-				public enum `Type`: String, Codable, CaseIterable {
-					case actors
-				}
-
-				public init(id: String, type: `Type`) {
-					self.id = id
-					self.type = type
-				}
-
-				public init(from decoder: Decoder) throws {
-					let values = try decoder.container(keyedBy: StringCodingKey.self)
-					self.id = try values.decode(String.self, forKey: "id")
-					self.type = try values.decode(`Type`.self, forKey: "type")
-				}
-
-				public func encode(to encoder: Encoder) throws {
-					var values = encoder.container(keyedBy: StringCodingKey.self)
-					try values.encode(id, forKey: "id")
-					try values.encode(type, forKey: "type")
-				}
-			}
-
-			public init(data: Data? = nil) {
-				self.data = data
-			}
-
-			public init(from decoder: Decoder) throws {
-				let values = try decoder.container(keyedBy: StringCodingKey.self)
-				self.data = try values.decodeIfPresent(Data.self, forKey: "data")
-			}
-
-			public func encode(to encoder: Encoder) throws {
-				var values = encoder.container(keyedBy: StringCodingKey.self)
-				try values.encodeIfPresent(data, forKey: "data")
-			}
-		}
-
-		public struct RelatedApps: Codable {
-			public var data: [Datum]?
-			public var meta: PagingInformation?
-
-			public struct Datum: Codable, Identifiable {
-				public var id: String
-				public var type: `Type`
-
-				public enum `Type`: String, Codable, CaseIterable {
-					case apps
-				}
-
-				public init(id: String, type: `Type`) {
-					self.id = id
-					self.type = type
-				}
-
-				public init(from decoder: Decoder) throws {
-					let values = try decoder.container(keyedBy: StringCodingKey.self)
-					self.id = try values.decode(String.self, forKey: "id")
-					self.type = try values.decode(`Type`.self, forKey: "type")
-				}
-
-				public func encode(to encoder: Encoder) throws {
-					var values = encoder.container(keyedBy: StringCodingKey.self)
-					try values.encode(id, forKey: "id")
-					try values.encode(type, forKey: "type")
-				}
-			}
-
-			public init(data: [Datum]? = nil, meta: PagingInformation? = nil) {
-				self.data = data
-				self.meta = meta
-			}
-
-			public init(from decoder: Decoder) throws {
-				let values = try decoder.container(keyedBy: StringCodingKey.self)
-				self.data = try values.decodeIfPresent([Datum].self, forKey: "data")
-				self.meta = try values.decodeIfPresent(PagingInformation.self, forKey: "meta")
-			}
-
-			public func encode(to encoder: Encoder) throws {
-				var values = encoder.container(keyedBy: StringCodingKey.self)
-				try values.encodeIfPresent(data, forKey: "data")
-				try values.encodeIfPresent(meta, forKey: "meta")
-			}
-		}
-
-		public struct SubmittedByActor: Codable {
 			public var data: Data?
 
 			public struct Data: Codable, Identifiable {
@@ -384,33 +154,173 @@ public struct Nomination: Codable, Identifiable {
 			}
 		}
 
-		public init(createdByActor: CreatedByActor? = nil, inAppEvents: InAppEvents? = nil, lastModifiedByActor: LastModifiedByActor? = nil, relatedApps: RelatedApps? = nil, submittedByActor: SubmittedByActor? = nil, supportedTerritories: SupportedTerritories? = nil) {
+		public struct CreatedByActor: Codable {
+			public var data: Data?
+
+			public struct Data: Codable, Identifiable {
+				public var type: `Type`
+				public var id: String
+
+				public enum `Type`: String, Codable, CaseIterable {
+					case actors
+				}
+
+				public init(type: `Type`, id: String) {
+					self.type = type
+					self.id = id
+				}
+
+				public init(from decoder: Decoder) throws {
+					let values = try decoder.container(keyedBy: StringCodingKey.self)
+					self.type = try values.decode(`Type`.self, forKey: "type")
+					self.id = try values.decode(String.self, forKey: "id")
+				}
+
+				public func encode(to encoder: Encoder) throws {
+					var values = encoder.container(keyedBy: StringCodingKey.self)
+					try values.encode(type, forKey: "type")
+					try values.encode(id, forKey: "id")
+				}
+			}
+
+			public init(data: Data? = nil) {
+				self.data = data
+			}
+
+			public init(from decoder: Decoder) throws {
+				let values = try decoder.container(keyedBy: StringCodingKey.self)
+				self.data = try values.decodeIfPresent(Data.self, forKey: "data")
+			}
+
+			public func encode(to encoder: Encoder) throws {
+				var values = encoder.container(keyedBy: StringCodingKey.self)
+				try values.encodeIfPresent(data, forKey: "data")
+			}
+		}
+
+		public struct InAppEvents: Codable {
+			public var data: [Datum]?
+			public var meta: PagingInformation?
+
+			public struct Datum: Codable, Identifiable {
+				public var id: String
+				public var type: `Type`
+
+				public enum `Type`: String, Codable, CaseIterable {
+					case appEvents
+				}
+
+				public init(id: String, type: `Type`) {
+					self.id = id
+					self.type = type
+				}
+
+				public init(from decoder: Decoder) throws {
+					let values = try decoder.container(keyedBy: StringCodingKey.self)
+					self.id = try values.decode(String.self, forKey: "id")
+					self.type = try values.decode(`Type`.self, forKey: "type")
+				}
+
+				public func encode(to encoder: Encoder) throws {
+					var values = encoder.container(keyedBy: StringCodingKey.self)
+					try values.encode(id, forKey: "id")
+					try values.encode(type, forKey: "type")
+				}
+			}
+
+			public init(data: [Datum]? = nil, meta: PagingInformation? = nil) {
+				self.data = data
+				self.meta = meta
+			}
+
+			public init(from decoder: Decoder) throws {
+				let values = try decoder.container(keyedBy: StringCodingKey.self)
+				self.data = try values.decodeIfPresent([Datum].self, forKey: "data")
+				self.meta = try values.decodeIfPresent(PagingInformation.self, forKey: "meta")
+			}
+
+			public func encode(to encoder: Encoder) throws {
+				var values = encoder.container(keyedBy: StringCodingKey.self)
+				try values.encodeIfPresent(data, forKey: "data")
+				try values.encodeIfPresent(meta, forKey: "meta")
+			}
+		}
+
+		public struct RelatedApps: Codable {
+			public var data: [Datum]?
+			public var meta: PagingInformation?
+
+			public struct Datum: Codable, Identifiable {
+				public var type: `Type`
+				public var id: String
+
+				public enum `Type`: String, Codable, CaseIterable {
+					case apps
+				}
+
+				public init(type: `Type`, id: String) {
+					self.type = type
+					self.id = id
+				}
+
+				public init(from decoder: Decoder) throws {
+					let values = try decoder.container(keyedBy: StringCodingKey.self)
+					self.type = try values.decode(`Type`.self, forKey: "type")
+					self.id = try values.decode(String.self, forKey: "id")
+				}
+
+				public func encode(to encoder: Encoder) throws {
+					var values = encoder.container(keyedBy: StringCodingKey.self)
+					try values.encode(type, forKey: "type")
+					try values.encode(id, forKey: "id")
+				}
+			}
+
+			public init(data: [Datum]? = nil, meta: PagingInformation? = nil) {
+				self.data = data
+				self.meta = meta
+			}
+
+			public init(from decoder: Decoder) throws {
+				let values = try decoder.container(keyedBy: StringCodingKey.self)
+				self.data = try values.decodeIfPresent([Datum].self, forKey: "data")
+				self.meta = try values.decodeIfPresent(PagingInformation.self, forKey: "meta")
+			}
+
+			public func encode(to encoder: Encoder) throws {
+				var values = encoder.container(keyedBy: StringCodingKey.self)
+				try values.encodeIfPresent(data, forKey: "data")
+				try values.encodeIfPresent(meta, forKey: "meta")
+			}
+		}
+
+		public init(submittedByActor: SubmittedByActor? = nil, lastModifiedByActor: LastModifiedByActor? = nil, supportedTerritories: SupportedTerritories? = nil, createdByActor: CreatedByActor? = nil, inAppEvents: InAppEvents? = nil, relatedApps: RelatedApps? = nil) {
+			self.submittedByActor = submittedByActor
+			self.lastModifiedByActor = lastModifiedByActor
+			self.supportedTerritories = supportedTerritories
 			self.createdByActor = createdByActor
 			self.inAppEvents = inAppEvents
-			self.lastModifiedByActor = lastModifiedByActor
 			self.relatedApps = relatedApps
-			self.submittedByActor = submittedByActor
-			self.supportedTerritories = supportedTerritories
 		}
 
 		public init(from decoder: Decoder) throws {
 			let values = try decoder.container(keyedBy: StringCodingKey.self)
+			self.submittedByActor = try values.decodeIfPresent(SubmittedByActor.self, forKey: "submittedByActor")
+			self.lastModifiedByActor = try values.decodeIfPresent(LastModifiedByActor.self, forKey: "lastModifiedByActor")
+			self.supportedTerritories = try values.decodeIfPresent(SupportedTerritories.self, forKey: "supportedTerritories")
 			self.createdByActor = try values.decodeIfPresent(CreatedByActor.self, forKey: "createdByActor")
 			self.inAppEvents = try values.decodeIfPresent(InAppEvents.self, forKey: "inAppEvents")
-			self.lastModifiedByActor = try values.decodeIfPresent(LastModifiedByActor.self, forKey: "lastModifiedByActor")
 			self.relatedApps = try values.decodeIfPresent(RelatedApps.self, forKey: "relatedApps")
-			self.submittedByActor = try values.decodeIfPresent(SubmittedByActor.self, forKey: "submittedByActor")
-			self.supportedTerritories = try values.decodeIfPresent(SupportedTerritories.self, forKey: "supportedTerritories")
 		}
 
 		public func encode(to encoder: Encoder) throws {
 			var values = encoder.container(keyedBy: StringCodingKey.self)
+			try values.encodeIfPresent(submittedByActor, forKey: "submittedByActor")
+			try values.encodeIfPresent(lastModifiedByActor, forKey: "lastModifiedByActor")
+			try values.encodeIfPresent(supportedTerritories, forKey: "supportedTerritories")
 			try values.encodeIfPresent(createdByActor, forKey: "createdByActor")
 			try values.encodeIfPresent(inAppEvents, forKey: "inAppEvents")
-			try values.encodeIfPresent(lastModifiedByActor, forKey: "lastModifiedByActor")
 			try values.encodeIfPresent(relatedApps, forKey: "relatedApps")
-			try values.encodeIfPresent(submittedByActor, forKey: "submittedByActor")
-			try values.encodeIfPresent(supportedTerritories, forKey: "supportedTerritories")
 		}
 	}
 
@@ -418,29 +328,119 @@ public struct Nomination: Codable, Identifiable {
 		case nominations
 	}
 
-	public init(attributes: Attributes? = nil, id: String, links: ResourceLinks? = nil, relationships: Relationships? = nil, type: `Type`) {
-		self.attributes = attributes
+	public struct Attributes: Codable {
+		public var notes: String?
+		public var deviceFamilies: [DeviceFamily]?
+		public var publishStartDate: Date?
+		public var description: String?
+		public var locales: [String]?
+		public var isLaunchInSelectMarketsFirst: Bool?
+		public var isPreOrderEnabled: Bool?
+		public var name: String?
+		public var hasInAppEvents: Bool?
+		public var createdDate: Date?
+		public var state: State?
+		public var submittedDate: Date?
+		public var publishEndDate: Date?
+		public var supplementalMaterialsUris: [URL]?
+		public var lastModifiedDate: Date?
+		public var type: `Type`?
+
+		public enum State: String, Codable, CaseIterable {
+			case draft = "DRAFT"
+			case submitted = "SUBMITTED"
+			case archived = "ARCHIVED"
+		}
+
+		public enum `Type`: String, Codable, CaseIterable {
+			case appLaunch = "APP_LAUNCH"
+			case appEnhancements = "APP_ENHANCEMENTS"
+			case newContent = "NEW_CONTENT"
+		}
+
+		public init(notes: String? = nil, deviceFamilies: [DeviceFamily]? = nil, publishStartDate: Date? = nil, description: String? = nil, locales: [String]? = nil, isLaunchInSelectMarketsFirst: Bool? = nil, isPreOrderEnabled: Bool? = nil, name: String? = nil, hasInAppEvents: Bool? = nil, createdDate: Date? = nil, state: State? = nil, submittedDate: Date? = nil, publishEndDate: Date? = nil, supplementalMaterialsUris: [URL]? = nil, lastModifiedDate: Date? = nil, type: `Type`? = nil) {
+			self.notes = notes
+			self.deviceFamilies = deviceFamilies
+			self.publishStartDate = publishStartDate
+			self.description = description
+			self.locales = locales
+			self.isLaunchInSelectMarketsFirst = isLaunchInSelectMarketsFirst
+			self.isPreOrderEnabled = isPreOrderEnabled
+			self.name = name
+			self.hasInAppEvents = hasInAppEvents
+			self.createdDate = createdDate
+			self.state = state
+			self.submittedDate = submittedDate
+			self.publishEndDate = publishEndDate
+			self.supplementalMaterialsUris = supplementalMaterialsUris
+			self.lastModifiedDate = lastModifiedDate
+			self.type = type
+		}
+
+		public init(from decoder: Decoder) throws {
+			let values = try decoder.container(keyedBy: StringCodingKey.self)
+			self.notes = try values.decodeIfPresent(String.self, forKey: "notes")
+			self.deviceFamilies = try values.decodeIfPresent([DeviceFamily].self, forKey: "deviceFamilies")
+			self.publishStartDate = try values.decodeIfPresent(Date.self, forKey: "publishStartDate")
+			self.description = try values.decodeIfPresent(String.self, forKey: "description")
+			self.locales = try values.decodeIfPresent([String].self, forKey: "locales")
+			self.isLaunchInSelectMarketsFirst = try values.decodeIfPresent(Bool.self, forKey: "launchInSelectMarketsFirst")
+			self.isPreOrderEnabled = try values.decodeIfPresent(Bool.self, forKey: "preOrderEnabled")
+			self.name = try values.decodeIfPresent(String.self, forKey: "name")
+			self.hasInAppEvents = try values.decodeIfPresent(Bool.self, forKey: "hasInAppEvents")
+			self.createdDate = try values.decodeIfPresent(Date.self, forKey: "createdDate")
+			self.state = try values.decodeIfPresent(State.self, forKey: "state")
+			self.submittedDate = try values.decodeIfPresent(Date.self, forKey: "submittedDate")
+			self.publishEndDate = try values.decodeIfPresent(Date.self, forKey: "publishEndDate")
+			self.supplementalMaterialsUris = try values.decodeIfPresent([URL].self, forKey: "supplementalMaterialsUris")
+			self.lastModifiedDate = try values.decodeIfPresent(Date.self, forKey: "lastModifiedDate")
+			self.type = try values.decodeIfPresent(`Type`.self, forKey: "type")
+		}
+
+		public func encode(to encoder: Encoder) throws {
+			var values = encoder.container(keyedBy: StringCodingKey.self)
+			try values.encodeIfPresent(notes, forKey: "notes")
+			try values.encodeIfPresent(deviceFamilies, forKey: "deviceFamilies")
+			try values.encodeIfPresent(publishStartDate, forKey: "publishStartDate")
+			try values.encodeIfPresent(description, forKey: "description")
+			try values.encodeIfPresent(locales, forKey: "locales")
+			try values.encodeIfPresent(isLaunchInSelectMarketsFirst, forKey: "launchInSelectMarketsFirst")
+			try values.encodeIfPresent(isPreOrderEnabled, forKey: "preOrderEnabled")
+			try values.encodeIfPresent(name, forKey: "name")
+			try values.encodeIfPresent(hasInAppEvents, forKey: "hasInAppEvents")
+			try values.encodeIfPresent(createdDate, forKey: "createdDate")
+			try values.encodeIfPresent(state, forKey: "state")
+			try values.encodeIfPresent(submittedDate, forKey: "submittedDate")
+			try values.encodeIfPresent(publishEndDate, forKey: "publishEndDate")
+			try values.encodeIfPresent(supplementalMaterialsUris, forKey: "supplementalMaterialsUris")
+			try values.encodeIfPresent(lastModifiedDate, forKey: "lastModifiedDate")
+			try values.encodeIfPresent(type, forKey: "type")
+		}
+	}
+
+	public init(id: String, relationships: Relationships? = nil, type: `Type`, links: ResourceLinks? = nil, attributes: Attributes? = nil) {
 		self.id = id
-		self.links = links
 		self.relationships = relationships
 		self.type = type
+		self.links = links
+		self.attributes = attributes
 	}
 
 	public init(from decoder: Decoder) throws {
 		let values = try decoder.container(keyedBy: StringCodingKey.self)
-		self.attributes = try values.decodeIfPresent(Attributes.self, forKey: "attributes")
 		self.id = try values.decode(String.self, forKey: "id")
-		self.links = try values.decodeIfPresent(ResourceLinks.self, forKey: "links")
 		self.relationships = try values.decodeIfPresent(Relationships.self, forKey: "relationships")
 		self.type = try values.decode(`Type`.self, forKey: "type")
+		self.links = try values.decodeIfPresent(ResourceLinks.self, forKey: "links")
+		self.attributes = try values.decodeIfPresent(Attributes.self, forKey: "attributes")
 	}
 
 	public func encode(to encoder: Encoder) throws {
 		var values = encoder.container(keyedBy: StringCodingKey.self)
-		try values.encodeIfPresent(attributes, forKey: "attributes")
 		try values.encode(id, forKey: "id")
-		try values.encodeIfPresent(links, forKey: "links")
 		try values.encodeIfPresent(relationships, forKey: "relationships")
 		try values.encode(type, forKey: "type")
+		try values.encodeIfPresent(links, forKey: "links")
+		try values.encodeIfPresent(attributes, forKey: "attributes")
 	}
 }

@@ -4,19 +4,19 @@
 import Foundation
 
 public struct SandboxTesterV2: Codable, Identifiable {
-	public var attributes: Attributes?
-	public var id: String
 	public var links: ResourceLinks?
+	public var id: String
+	public var attributes: Attributes?
 	public var type: `Type`
 
 	public struct Attributes: Codable {
-		public var acAccountName: String?
+		public var territory: TerritoryCode?
 		public var isApplePayCompatible: Bool?
 		public var firstName: String?
-		public var isInterruptPurchases: Bool?
 		public var lastName: String?
 		public var subscriptionRenewalRate: SubscriptionRenewalRate?
-		public var territory: TerritoryCode?
+		public var isInterruptPurchases: Bool?
+		public var acAccountName: String?
 
 		public enum SubscriptionRenewalRate: String, Codable, CaseIterable {
 			case monthlyRenewalEveryOneHour = "MONTHLY_RENEWAL_EVERY_ONE_HOUR"
@@ -26,36 +26,36 @@ public struct SandboxTesterV2: Codable, Identifiable {
 			case monthlyRenewalEveryThreeMinutes = "MONTHLY_RENEWAL_EVERY_THREE_MINUTES"
 		}
 
-		public init(acAccountName: String? = nil, isApplePayCompatible: Bool? = nil, firstName: String? = nil, isInterruptPurchases: Bool? = nil, lastName: String? = nil, subscriptionRenewalRate: SubscriptionRenewalRate? = nil, territory: TerritoryCode? = nil) {
-			self.acAccountName = acAccountName
+		public init(territory: TerritoryCode? = nil, isApplePayCompatible: Bool? = nil, firstName: String? = nil, lastName: String? = nil, subscriptionRenewalRate: SubscriptionRenewalRate? = nil, isInterruptPurchases: Bool? = nil, acAccountName: String? = nil) {
+			self.territory = territory
 			self.isApplePayCompatible = isApplePayCompatible
 			self.firstName = firstName
-			self.isInterruptPurchases = isInterruptPurchases
 			self.lastName = lastName
 			self.subscriptionRenewalRate = subscriptionRenewalRate
-			self.territory = territory
+			self.isInterruptPurchases = isInterruptPurchases
+			self.acAccountName = acAccountName
 		}
 
 		public init(from decoder: Decoder) throws {
 			let values = try decoder.container(keyedBy: StringCodingKey.self)
-			self.acAccountName = try values.decodeIfPresent(String.self, forKey: "acAccountName")
+			self.territory = try values.decodeIfPresent(TerritoryCode.self, forKey: "territory")
 			self.isApplePayCompatible = try values.decodeIfPresent(Bool.self, forKey: "applePayCompatible")
 			self.firstName = try values.decodeIfPresent(String.self, forKey: "firstName")
-			self.isInterruptPurchases = try values.decodeIfPresent(Bool.self, forKey: "interruptPurchases")
 			self.lastName = try values.decodeIfPresent(String.self, forKey: "lastName")
 			self.subscriptionRenewalRate = try values.decodeIfPresent(SubscriptionRenewalRate.self, forKey: "subscriptionRenewalRate")
-			self.territory = try values.decodeIfPresent(TerritoryCode.self, forKey: "territory")
+			self.isInterruptPurchases = try values.decodeIfPresent(Bool.self, forKey: "interruptPurchases")
+			self.acAccountName = try values.decodeIfPresent(String.self, forKey: "acAccountName")
 		}
 
 		public func encode(to encoder: Encoder) throws {
 			var values = encoder.container(keyedBy: StringCodingKey.self)
-			try values.encodeIfPresent(acAccountName, forKey: "acAccountName")
+			try values.encodeIfPresent(territory, forKey: "territory")
 			try values.encodeIfPresent(isApplePayCompatible, forKey: "applePayCompatible")
 			try values.encodeIfPresent(firstName, forKey: "firstName")
-			try values.encodeIfPresent(isInterruptPurchases, forKey: "interruptPurchases")
 			try values.encodeIfPresent(lastName, forKey: "lastName")
 			try values.encodeIfPresent(subscriptionRenewalRate, forKey: "subscriptionRenewalRate")
-			try values.encodeIfPresent(territory, forKey: "territory")
+			try values.encodeIfPresent(isInterruptPurchases, forKey: "interruptPurchases")
+			try values.encodeIfPresent(acAccountName, forKey: "acAccountName")
 		}
 	}
 
@@ -63,26 +63,26 @@ public struct SandboxTesterV2: Codable, Identifiable {
 		case sandboxTesters
 	}
 
-	public init(attributes: Attributes? = nil, id: String, links: ResourceLinks? = nil, type: `Type`) {
-		self.attributes = attributes
-		self.id = id
+	public init(links: ResourceLinks? = nil, id: String, attributes: Attributes? = nil, type: `Type`) {
 		self.links = links
+		self.id = id
+		self.attributes = attributes
 		self.type = type
 	}
 
 	public init(from decoder: Decoder) throws {
 		let values = try decoder.container(keyedBy: StringCodingKey.self)
-		self.attributes = try values.decodeIfPresent(Attributes.self, forKey: "attributes")
-		self.id = try values.decode(String.self, forKey: "id")
 		self.links = try values.decodeIfPresent(ResourceLinks.self, forKey: "links")
+		self.id = try values.decode(String.self, forKey: "id")
+		self.attributes = try values.decodeIfPresent(Attributes.self, forKey: "attributes")
 		self.type = try values.decode(`Type`.self, forKey: "type")
 	}
 
 	public func encode(to encoder: Encoder) throws {
 		var values = encoder.container(keyedBy: StringCodingKey.self)
-		try values.encodeIfPresent(attributes, forKey: "attributes")
-		try values.encode(id, forKey: "id")
 		try values.encodeIfPresent(links, forKey: "links")
+		try values.encode(id, forKey: "id")
+		try values.encodeIfPresent(attributes, forKey: "attributes")
 		try values.encode(type, forKey: "type")
 	}
 }

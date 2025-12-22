@@ -4,27 +4,27 @@
 import Foundation
 
 public struct TerritoryAvailabilityInlineCreate: Codable, Identifiable {
-	public var id: String?
 	public var type: `Type`
+	public var id: String?
 
 	public enum `Type`: String, Codable, CaseIterable {
 		case territoryAvailabilities
 	}
 
-	public init(id: String? = nil, type: `Type`) {
-		self.id = id
+	public init(type: `Type`, id: String? = nil) {
 		self.type = type
+		self.id = id
 	}
 
 	public init(from decoder: Decoder) throws {
 		let values = try decoder.container(keyedBy: StringCodingKey.self)
-		self.id = try values.decodeIfPresent(String.self, forKey: "id")
 		self.type = try values.decode(`Type`.self, forKey: "type")
+		self.id = try values.decodeIfPresent(String.self, forKey: "id")
 	}
 
 	public func encode(to encoder: Encoder) throws {
 		var values = encoder.container(keyedBy: StringCodingKey.self)
-		try values.encodeIfPresent(id, forKey: "id")
 		try values.encode(type, forKey: "type")
+		try values.encodeIfPresent(id, forKey: "id")
 	}
 }

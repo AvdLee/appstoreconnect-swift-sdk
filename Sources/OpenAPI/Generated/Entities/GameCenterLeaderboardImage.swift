@@ -4,44 +4,48 @@
 import Foundation
 
 public struct GameCenterLeaderboardImage: Codable, Identifiable {
-	public var attributes: Attributes?
-	public var id: String
 	public var links: ResourceLinks?
-	public var relationships: Relationships?
+	public var id: String
+	public var attributes: Attributes?
 	public var type: `Type`
+	public var relationships: Relationships?
 
 	public struct Attributes: Codable {
-		public var assetDeliveryState: AppMediaAssetState?
 		public var fileName: String?
 		public var fileSize: Int?
-		public var imageAsset: ImageAsset?
 		public var uploadOperations: [UploadOperation]?
+		public var assetDeliveryState: AppMediaAssetState?
+		public var imageAsset: ImageAsset?
 
-		public init(assetDeliveryState: AppMediaAssetState? = nil, fileName: String? = nil, fileSize: Int? = nil, imageAsset: ImageAsset? = nil, uploadOperations: [UploadOperation]? = nil) {
-			self.assetDeliveryState = assetDeliveryState
+		public init(fileName: String? = nil, fileSize: Int? = nil, uploadOperations: [UploadOperation]? = nil, assetDeliveryState: AppMediaAssetState? = nil, imageAsset: ImageAsset? = nil) {
 			self.fileName = fileName
 			self.fileSize = fileSize
-			self.imageAsset = imageAsset
 			self.uploadOperations = uploadOperations
+			self.assetDeliveryState = assetDeliveryState
+			self.imageAsset = imageAsset
 		}
 
 		public init(from decoder: Decoder) throws {
 			let values = try decoder.container(keyedBy: StringCodingKey.self)
-			self.assetDeliveryState = try values.decodeIfPresent(AppMediaAssetState.self, forKey: "assetDeliveryState")
 			self.fileName = try values.decodeIfPresent(String.self, forKey: "fileName")
 			self.fileSize = try values.decodeIfPresent(Int.self, forKey: "fileSize")
-			self.imageAsset = try values.decodeIfPresent(ImageAsset.self, forKey: "imageAsset")
 			self.uploadOperations = try values.decodeIfPresent([UploadOperation].self, forKey: "uploadOperations")
+			self.assetDeliveryState = try values.decodeIfPresent(AppMediaAssetState.self, forKey: "assetDeliveryState")
+			self.imageAsset = try values.decodeIfPresent(ImageAsset.self, forKey: "imageAsset")
 		}
 
 		public func encode(to encoder: Encoder) throws {
 			var values = encoder.container(keyedBy: StringCodingKey.self)
-			try values.encodeIfPresent(assetDeliveryState, forKey: "assetDeliveryState")
 			try values.encodeIfPresent(fileName, forKey: "fileName")
 			try values.encodeIfPresent(fileSize, forKey: "fileSize")
-			try values.encodeIfPresent(imageAsset, forKey: "imageAsset")
 			try values.encodeIfPresent(uploadOperations, forKey: "uploadOperations")
+			try values.encodeIfPresent(assetDeliveryState, forKey: "assetDeliveryState")
+			try values.encodeIfPresent(imageAsset, forKey: "imageAsset")
 		}
+	}
+
+	public enum `Type`: String, Codable, CaseIterable {
+		case gameCenterLeaderboardImages
 	}
 
 	public struct Relationships: Codable {
@@ -51,28 +55,28 @@ public struct GameCenterLeaderboardImage: Codable, Identifiable {
 			public var data: Data?
 
 			public struct Data: Codable, Identifiable {
-				public var id: String
 				public var type: `Type`
+				public var id: String
 
 				public enum `Type`: String, Codable, CaseIterable {
 					case gameCenterLeaderboardLocalizations
 				}
 
-				public init(id: String, type: `Type`) {
-					self.id = id
+				public init(type: `Type`, id: String) {
 					self.type = type
+					self.id = id
 				}
 
 				public init(from decoder: Decoder) throws {
 					let values = try decoder.container(keyedBy: StringCodingKey.self)
-					self.id = try values.decode(String.self, forKey: "id")
 					self.type = try values.decode(`Type`.self, forKey: "type")
+					self.id = try values.decode(String.self, forKey: "id")
 				}
 
 				public func encode(to encoder: Encoder) throws {
 					var values = encoder.container(keyedBy: StringCodingKey.self)
-					try values.encode(id, forKey: "id")
 					try values.encode(type, forKey: "type")
+					try values.encode(id, forKey: "id")
 				}
 			}
 
@@ -106,33 +110,29 @@ public struct GameCenterLeaderboardImage: Codable, Identifiable {
 		}
 	}
 
-	public enum `Type`: String, Codable, CaseIterable {
-		case gameCenterLeaderboardImages
-	}
-
-	public init(attributes: Attributes? = nil, id: String, links: ResourceLinks? = nil, relationships: Relationships? = nil, type: `Type`) {
-		self.attributes = attributes
-		self.id = id
+	public init(links: ResourceLinks? = nil, id: String, attributes: Attributes? = nil, type: `Type`, relationships: Relationships? = nil) {
 		self.links = links
-		self.relationships = relationships
+		self.id = id
+		self.attributes = attributes
 		self.type = type
+		self.relationships = relationships
 	}
 
 	public init(from decoder: Decoder) throws {
 		let values = try decoder.container(keyedBy: StringCodingKey.self)
-		self.attributes = try values.decodeIfPresent(Attributes.self, forKey: "attributes")
-		self.id = try values.decode(String.self, forKey: "id")
 		self.links = try values.decodeIfPresent(ResourceLinks.self, forKey: "links")
-		self.relationships = try values.decodeIfPresent(Relationships.self, forKey: "relationships")
+		self.id = try values.decode(String.self, forKey: "id")
+		self.attributes = try values.decodeIfPresent(Attributes.self, forKey: "attributes")
 		self.type = try values.decode(`Type`.self, forKey: "type")
+		self.relationships = try values.decodeIfPresent(Relationships.self, forKey: "relationships")
 	}
 
 	public func encode(to encoder: Encoder) throws {
 		var values = encoder.container(keyedBy: StringCodingKey.self)
-		try values.encodeIfPresent(attributes, forKey: "attributes")
-		try values.encode(id, forKey: "id")
 		try values.encodeIfPresent(links, forKey: "links")
-		try values.encodeIfPresent(relationships, forKey: "relationships")
+		try values.encode(id, forKey: "id")
+		try values.encodeIfPresent(attributes, forKey: "attributes")
 		try values.encode(type, forKey: "type")
+		try values.encodeIfPresent(relationships, forKey: "relationships")
 	}
 }

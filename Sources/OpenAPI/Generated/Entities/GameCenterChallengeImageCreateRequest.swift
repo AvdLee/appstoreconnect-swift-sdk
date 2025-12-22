@@ -7,106 +7,40 @@ public struct GameCenterChallengeImageCreateRequest: Codable {
 	public var data: Data
 
 	public struct Data: Codable {
-		public var attributes: Attributes
 		public var relationships: Relationships?
 		public var type: `Type`
-
-		public struct Attributes: Codable {
-			public var fileName: String
-			public var fileSize: Int
-
-			public init(fileName: String, fileSize: Int) {
-				self.fileName = fileName
-				self.fileSize = fileSize
-			}
-
-			public init(from decoder: Decoder) throws {
-				let values = try decoder.container(keyedBy: StringCodingKey.self)
-				self.fileName = try values.decode(String.self, forKey: "fileName")
-				self.fileSize = try values.decode(Int.self, forKey: "fileSize")
-			}
-
-			public func encode(to encoder: Encoder) throws {
-				var values = encoder.container(keyedBy: StringCodingKey.self)
-				try values.encode(fileName, forKey: "fileName")
-				try values.encode(fileSize, forKey: "fileSize")
-			}
-		}
+		public var attributes: Attributes
 
 		public struct Relationships: Codable {
-			public var localization: Localization?
 			public var version: Version?
-
-			public struct Localization: Codable {
-				public var data: Data?
-
-				public struct Data: Codable, Identifiable {
-					public var id: String
-					public var type: `Type`
-
-					public enum `Type`: String, Codable, CaseIterable {
-						case gameCenterChallengeLocalizations
-					}
-
-					public init(id: String, type: `Type`) {
-						self.id = id
-						self.type = type
-					}
-
-					public init(from decoder: Decoder) throws {
-						let values = try decoder.container(keyedBy: StringCodingKey.self)
-						self.id = try values.decode(String.self, forKey: "id")
-						self.type = try values.decode(`Type`.self, forKey: "type")
-					}
-
-					public func encode(to encoder: Encoder) throws {
-						var values = encoder.container(keyedBy: StringCodingKey.self)
-						try values.encode(id, forKey: "id")
-						try values.encode(type, forKey: "type")
-					}
-				}
-
-				public init(data: Data? = nil) {
-					self.data = data
-				}
-
-				public init(from decoder: Decoder) throws {
-					let values = try decoder.container(keyedBy: StringCodingKey.self)
-					self.data = try values.decodeIfPresent(Data.self, forKey: "data")
-				}
-
-				public func encode(to encoder: Encoder) throws {
-					var values = encoder.container(keyedBy: StringCodingKey.self)
-					try values.encodeIfPresent(data, forKey: "data")
-				}
-			}
+			public var localization: Localization?
 
 			public struct Version: Codable {
 				public var data: Data?
 
 				public struct Data: Codable, Identifiable {
-					public var id: String
 					public var type: `Type`
+					public var id: String
 
 					public enum `Type`: String, Codable, CaseIterable {
 						case gameCenterChallengeVersions
 					}
 
-					public init(id: String, type: `Type`) {
-						self.id = id
+					public init(type: `Type`, id: String) {
 						self.type = type
+						self.id = id
 					}
 
 					public init(from decoder: Decoder) throws {
 						let values = try decoder.container(keyedBy: StringCodingKey.self)
-						self.id = try values.decode(String.self, forKey: "id")
 						self.type = try values.decode(`Type`.self, forKey: "type")
+						self.id = try values.decode(String.self, forKey: "id")
 					}
 
 					public func encode(to encoder: Encoder) throws {
 						var values = encoder.container(keyedBy: StringCodingKey.self)
-						try values.encode(id, forKey: "id")
 						try values.encode(type, forKey: "type")
+						try values.encode(id, forKey: "id")
 					}
 				}
 
@@ -125,21 +59,65 @@ public struct GameCenterChallengeImageCreateRequest: Codable {
 				}
 			}
 
-			public init(localization: Localization? = nil, version: Version? = nil) {
-				self.localization = localization
+			public struct Localization: Codable {
+				public var data: Data?
+
+				public struct Data: Codable, Identifiable {
+					public var type: `Type`
+					public var id: String
+
+					public enum `Type`: String, Codable, CaseIterable {
+						case gameCenterChallengeLocalizations
+					}
+
+					public init(type: `Type`, id: String) {
+						self.type = type
+						self.id = id
+					}
+
+					public init(from decoder: Decoder) throws {
+						let values = try decoder.container(keyedBy: StringCodingKey.self)
+						self.type = try values.decode(`Type`.self, forKey: "type")
+						self.id = try values.decode(String.self, forKey: "id")
+					}
+
+					public func encode(to encoder: Encoder) throws {
+						var values = encoder.container(keyedBy: StringCodingKey.self)
+						try values.encode(type, forKey: "type")
+						try values.encode(id, forKey: "id")
+					}
+				}
+
+				public init(data: Data? = nil) {
+					self.data = data
+				}
+
+				public init(from decoder: Decoder) throws {
+					let values = try decoder.container(keyedBy: StringCodingKey.self)
+					self.data = try values.decodeIfPresent(Data.self, forKey: "data")
+				}
+
+				public func encode(to encoder: Encoder) throws {
+					var values = encoder.container(keyedBy: StringCodingKey.self)
+					try values.encodeIfPresent(data, forKey: "data")
+				}
+			}
+
+			public init(version: Version? = nil, localization: Localization? = nil) {
 				self.version = version
+				self.localization = localization
 			}
 
 			public init(from decoder: Decoder) throws {
 				let values = try decoder.container(keyedBy: StringCodingKey.self)
-				self.localization = try values.decodeIfPresent(Localization.self, forKey: "localization")
 				self.version = try values.decodeIfPresent(Version.self, forKey: "version")
+				self.localization = try values.decodeIfPresent(Localization.self, forKey: "localization")
 			}
 
 			public func encode(to encoder: Encoder) throws {
 				var values = encoder.container(keyedBy: StringCodingKey.self)
-				try values.encodeIfPresent(localization, forKey: "localization")
 				try values.encodeIfPresent(version, forKey: "version")
+				try values.encodeIfPresent(localization, forKey: "localization")
 			}
 		}
 
@@ -147,24 +125,46 @@ public struct GameCenterChallengeImageCreateRequest: Codable {
 			case gameCenterChallengeImages
 		}
 
-		public init(attributes: Attributes, relationships: Relationships? = nil, type: `Type`) {
-			self.attributes = attributes
+		public struct Attributes: Codable {
+			public var fileSize: Int
+			public var fileName: String
+
+			public init(fileSize: Int, fileName: String) {
+				self.fileSize = fileSize
+				self.fileName = fileName
+			}
+
+			public init(from decoder: Decoder) throws {
+				let values = try decoder.container(keyedBy: StringCodingKey.self)
+				self.fileSize = try values.decode(Int.self, forKey: "fileSize")
+				self.fileName = try values.decode(String.self, forKey: "fileName")
+			}
+
+			public func encode(to encoder: Encoder) throws {
+				var values = encoder.container(keyedBy: StringCodingKey.self)
+				try values.encode(fileSize, forKey: "fileSize")
+				try values.encode(fileName, forKey: "fileName")
+			}
+		}
+
+		public init(relationships: Relationships? = nil, type: `Type`, attributes: Attributes) {
 			self.relationships = relationships
 			self.type = type
+			self.attributes = attributes
 		}
 
 		public init(from decoder: Decoder) throws {
 			let values = try decoder.container(keyedBy: StringCodingKey.self)
-			self.attributes = try values.decode(Attributes.self, forKey: "attributes")
 			self.relationships = try values.decodeIfPresent(Relationships.self, forKey: "relationships")
 			self.type = try values.decode(`Type`.self, forKey: "type")
+			self.attributes = try values.decode(Attributes.self, forKey: "attributes")
 		}
 
 		public func encode(to encoder: Encoder) throws {
 			var values = encoder.container(keyedBy: StringCodingKey.self)
-			try values.encode(attributes, forKey: "attributes")
 			try values.encodeIfPresent(relationships, forKey: "relationships")
 			try values.encode(type, forKey: "type")
+			try values.encode(attributes, forKey: "attributes")
 		}
 	}
 

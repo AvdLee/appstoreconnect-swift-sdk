@@ -7,28 +7,10 @@ public struct AppClipDefaultExperienceUpdateRequest: Codable {
 	public var data: Data
 
 	public struct Data: Codable, Identifiable {
-		public var attributes: Attributes?
-		public var id: String
 		public var relationships: Relationships?
+		public var id: String
+		public var attributes: Attributes?
 		public var type: `Type`
-
-		public struct Attributes: Codable {
-			public var action: AppClipAction?
-
-			public init(action: AppClipAction? = nil) {
-				self.action = action
-			}
-
-			public init(from decoder: Decoder) throws {
-				let values = try decoder.container(keyedBy: StringCodingKey.self)
-				self.action = try values.decodeIfPresent(AppClipAction.self, forKey: "action")
-			}
-
-			public func encode(to encoder: Encoder) throws {
-				var values = encoder.container(keyedBy: StringCodingKey.self)
-				try values.encodeIfPresent(action, forKey: "action")
-			}
-		}
 
 		public struct Relationships: Codable {
 			public var releaseWithAppStoreVersion: ReleaseWithAppStoreVersion?
@@ -92,30 +74,48 @@ public struct AppClipDefaultExperienceUpdateRequest: Codable {
 			}
 		}
 
+		public struct Attributes: Codable {
+			public var action: AppClipAction?
+
+			public init(action: AppClipAction? = nil) {
+				self.action = action
+			}
+
+			public init(from decoder: Decoder) throws {
+				let values = try decoder.container(keyedBy: StringCodingKey.self)
+				self.action = try values.decodeIfPresent(AppClipAction.self, forKey: "action")
+			}
+
+			public func encode(to encoder: Encoder) throws {
+				var values = encoder.container(keyedBy: StringCodingKey.self)
+				try values.encodeIfPresent(action, forKey: "action")
+			}
+		}
+
 		public enum `Type`: String, Codable, CaseIterable {
 			case appClipDefaultExperiences
 		}
 
-		public init(attributes: Attributes? = nil, id: String, relationships: Relationships? = nil, type: `Type`) {
-			self.attributes = attributes
-			self.id = id
+		public init(relationships: Relationships? = nil, id: String, attributes: Attributes? = nil, type: `Type`) {
 			self.relationships = relationships
+			self.id = id
+			self.attributes = attributes
 			self.type = type
 		}
 
 		public init(from decoder: Decoder) throws {
 			let values = try decoder.container(keyedBy: StringCodingKey.self)
-			self.attributes = try values.decodeIfPresent(Attributes.self, forKey: "attributes")
-			self.id = try values.decode(String.self, forKey: "id")
 			self.relationships = try values.decodeIfPresent(Relationships.self, forKey: "relationships")
+			self.id = try values.decode(String.self, forKey: "id")
+			self.attributes = try values.decodeIfPresent(Attributes.self, forKey: "attributes")
 			self.type = try values.decode(`Type`.self, forKey: "type")
 		}
 
 		public func encode(to encoder: Encoder) throws {
 			var values = encoder.container(keyedBy: StringCodingKey.self)
-			try values.encodeIfPresent(attributes, forKey: "attributes")
-			try values.encode(id, forKey: "id")
 			try values.encodeIfPresent(relationships, forKey: "relationships")
+			try values.encode(id, forKey: "id")
+			try values.encodeIfPresent(attributes, forKey: "attributes")
 			try values.encode(type, forKey: "type")
 		}
 	}

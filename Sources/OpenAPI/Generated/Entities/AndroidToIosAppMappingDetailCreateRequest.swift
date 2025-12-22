@@ -8,29 +8,33 @@ public struct AndroidToIosAppMappingDetailCreateRequest: Codable {
 
 	public struct Data: Codable {
 		public var attributes: Attributes
-		public var relationships: Relationships
 		public var type: `Type`
+		public var relationships: Relationships
 
 		public struct Attributes: Codable {
-			public var appSigningKeyPublicCertificateSha256Fingerprints: [String]
 			public var packageName: String
+			public var appSigningKeyPublicCertificateSha256Fingerprints: [String]
 
-			public init(appSigningKeyPublicCertificateSha256Fingerprints: [String], packageName: String) {
-				self.appSigningKeyPublicCertificateSha256Fingerprints = appSigningKeyPublicCertificateSha256Fingerprints
+			public init(packageName: String, appSigningKeyPublicCertificateSha256Fingerprints: [String]) {
 				self.packageName = packageName
+				self.appSigningKeyPublicCertificateSha256Fingerprints = appSigningKeyPublicCertificateSha256Fingerprints
 			}
 
 			public init(from decoder: Decoder) throws {
 				let values = try decoder.container(keyedBy: StringCodingKey.self)
-				self.appSigningKeyPublicCertificateSha256Fingerprints = try values.decode([String].self, forKey: "appSigningKeyPublicCertificateSha256Fingerprints")
 				self.packageName = try values.decode(String.self, forKey: "packageName")
+				self.appSigningKeyPublicCertificateSha256Fingerprints = try values.decode([String].self, forKey: "appSigningKeyPublicCertificateSha256Fingerprints")
 			}
 
 			public func encode(to encoder: Encoder) throws {
 				var values = encoder.container(keyedBy: StringCodingKey.self)
-				try values.encode(appSigningKeyPublicCertificateSha256Fingerprints, forKey: "appSigningKeyPublicCertificateSha256Fingerprints")
 				try values.encode(packageName, forKey: "packageName")
+				try values.encode(appSigningKeyPublicCertificateSha256Fingerprints, forKey: "appSigningKeyPublicCertificateSha256Fingerprints")
 			}
+		}
+
+		public enum `Type`: String, Codable, CaseIterable {
+			case androidToIosAppMappingDetails
 		}
 
 		public struct Relationships: Codable {
@@ -95,28 +99,24 @@ public struct AndroidToIosAppMappingDetailCreateRequest: Codable {
 			}
 		}
 
-		public enum `Type`: String, Codable, CaseIterable {
-			case androidToIosAppMappingDetails
-		}
-
-		public init(attributes: Attributes, relationships: Relationships, type: `Type`) {
+		public init(attributes: Attributes, type: `Type`, relationships: Relationships) {
 			self.attributes = attributes
-			self.relationships = relationships
 			self.type = type
+			self.relationships = relationships
 		}
 
 		public init(from decoder: Decoder) throws {
 			let values = try decoder.container(keyedBy: StringCodingKey.self)
 			self.attributes = try values.decode(Attributes.self, forKey: "attributes")
-			self.relationships = try values.decode(Relationships.self, forKey: "relationships")
 			self.type = try values.decode(`Type`.self, forKey: "type")
+			self.relationships = try values.decode(Relationships.self, forKey: "relationships")
 		}
 
 		public func encode(to encoder: Encoder) throws {
 			var values = encoder.container(keyedBy: StringCodingKey.self)
 			try values.encode(attributes, forKey: "attributes")
-			try values.encode(relationships, forKey: "relationships")
 			try values.encode(type, forKey: "type")
+			try values.encode(relationships, forKey: "relationships")
 		}
 	}
 

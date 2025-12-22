@@ -9,26 +9,26 @@ public struct AppStoreVersionSubmissionResponse: Codable {
 	///
 	/// - warning: Deprecated.
 	public var data: AppStoreVersionSubmission
-	public var included: [AppStoreVersion]?
 	public var links: DocumentLinks
+	public var included: [AppStoreVersion]?
 
-	public init(data: AppStoreVersionSubmission, included: [AppStoreVersion]? = nil, links: DocumentLinks) {
+	public init(data: AppStoreVersionSubmission, links: DocumentLinks, included: [AppStoreVersion]? = nil) {
 		self.data = data
-		self.included = included
 		self.links = links
+		self.included = included
 	}
 
 	public init(from decoder: Decoder) throws {
 		let values = try decoder.container(keyedBy: StringCodingKey.self)
 		self.data = try values.decode(AppStoreVersionSubmission.self, forKey: "data")
-		self.included = try values.decodeIfPresent([AppStoreVersion].self, forKey: "included")
 		self.links = try values.decode(DocumentLinks.self, forKey: "links")
+		self.included = try values.decodeIfPresent([AppStoreVersion].self, forKey: "included")
 	}
 
 	public func encode(to encoder: Encoder) throws {
 		var values = encoder.container(keyedBy: StringCodingKey.self)
 		try values.encode(data, forKey: "data")
-		try values.encodeIfPresent(included, forKey: "included")
 		try values.encode(links, forKey: "links")
+		try values.encodeIfPresent(included, forKey: "included")
 	}
 }

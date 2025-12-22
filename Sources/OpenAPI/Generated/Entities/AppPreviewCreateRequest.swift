@@ -7,39 +7,9 @@ public struct AppPreviewCreateRequest: Codable {
 	public var data: Data
 
 	public struct Data: Codable {
-		public var attributes: Attributes
 		public var relationships: Relationships
+		public var attributes: Attributes
 		public var type: `Type`
-
-		public struct Attributes: Codable {
-			public var fileName: String
-			public var fileSize: Int
-			public var mimeType: String?
-			public var previewFrameTimeCode: String?
-
-			public init(fileName: String, fileSize: Int, mimeType: String? = nil, previewFrameTimeCode: String? = nil) {
-				self.fileName = fileName
-				self.fileSize = fileSize
-				self.mimeType = mimeType
-				self.previewFrameTimeCode = previewFrameTimeCode
-			}
-
-			public init(from decoder: Decoder) throws {
-				let values = try decoder.container(keyedBy: StringCodingKey.self)
-				self.fileName = try values.decode(String.self, forKey: "fileName")
-				self.fileSize = try values.decode(Int.self, forKey: "fileSize")
-				self.mimeType = try values.decodeIfPresent(String.self, forKey: "mimeType")
-				self.previewFrameTimeCode = try values.decodeIfPresent(String.self, forKey: "previewFrameTimeCode")
-			}
-
-			public func encode(to encoder: Encoder) throws {
-				var values = encoder.container(keyedBy: StringCodingKey.self)
-				try values.encode(fileName, forKey: "fileName")
-				try values.encode(fileSize, forKey: "fileSize")
-				try values.encodeIfPresent(mimeType, forKey: "mimeType")
-				try values.encodeIfPresent(previewFrameTimeCode, forKey: "previewFrameTimeCode")
-			}
-		}
 
 		public struct Relationships: Codable {
 			public var appPreviewSet: AppPreviewSet
@@ -103,27 +73,57 @@ public struct AppPreviewCreateRequest: Codable {
 			}
 		}
 
+		public struct Attributes: Codable {
+			public var fileName: String
+			public var mimeType: String?
+			public var fileSize: Int
+			public var previewFrameTimeCode: String?
+
+			public init(fileName: String, mimeType: String? = nil, fileSize: Int, previewFrameTimeCode: String? = nil) {
+				self.fileName = fileName
+				self.mimeType = mimeType
+				self.fileSize = fileSize
+				self.previewFrameTimeCode = previewFrameTimeCode
+			}
+
+			public init(from decoder: Decoder) throws {
+				let values = try decoder.container(keyedBy: StringCodingKey.self)
+				self.fileName = try values.decode(String.self, forKey: "fileName")
+				self.mimeType = try values.decodeIfPresent(String.self, forKey: "mimeType")
+				self.fileSize = try values.decode(Int.self, forKey: "fileSize")
+				self.previewFrameTimeCode = try values.decodeIfPresent(String.self, forKey: "previewFrameTimeCode")
+			}
+
+			public func encode(to encoder: Encoder) throws {
+				var values = encoder.container(keyedBy: StringCodingKey.self)
+				try values.encode(fileName, forKey: "fileName")
+				try values.encodeIfPresent(mimeType, forKey: "mimeType")
+				try values.encode(fileSize, forKey: "fileSize")
+				try values.encodeIfPresent(previewFrameTimeCode, forKey: "previewFrameTimeCode")
+			}
+		}
+
 		public enum `Type`: String, Codable, CaseIterable {
 			case appPreviews
 		}
 
-		public init(attributes: Attributes, relationships: Relationships, type: `Type`) {
-			self.attributes = attributes
+		public init(relationships: Relationships, attributes: Attributes, type: `Type`) {
 			self.relationships = relationships
+			self.attributes = attributes
 			self.type = type
 		}
 
 		public init(from decoder: Decoder) throws {
 			let values = try decoder.container(keyedBy: StringCodingKey.self)
-			self.attributes = try values.decode(Attributes.self, forKey: "attributes")
 			self.relationships = try values.decode(Relationships.self, forKey: "relationships")
+			self.attributes = try values.decode(Attributes.self, forKey: "attributes")
 			self.type = try values.decode(`Type`.self, forKey: "type")
 		}
 
 		public func encode(to encoder: Encoder) throws {
 			var values = encoder.container(keyedBy: StringCodingKey.self)
-			try values.encode(attributes, forKey: "attributes")
 			try values.encode(relationships, forKey: "relationships")
+			try values.encode(attributes, forKey: "attributes")
 			try values.encode(type, forKey: "type")
 		}
 	}

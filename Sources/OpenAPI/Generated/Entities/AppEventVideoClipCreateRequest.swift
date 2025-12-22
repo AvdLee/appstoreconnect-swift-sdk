@@ -8,37 +8,41 @@ public struct AppEventVideoClipCreateRequest: Codable {
 
 	public struct Data: Codable {
 		public var attributes: Attributes
-		public var relationships: Relationships
 		public var type: `Type`
+		public var relationships: Relationships
 
 		public struct Attributes: Codable {
+			public var previewFrameTimeCode: String?
 			public var appEventAssetType: AppEventAssetType
 			public var fileName: String
 			public var fileSize: Int
-			public var previewFrameTimeCode: String?
 
-			public init(appEventAssetType: AppEventAssetType, fileName: String, fileSize: Int, previewFrameTimeCode: String? = nil) {
+			public init(previewFrameTimeCode: String? = nil, appEventAssetType: AppEventAssetType, fileName: String, fileSize: Int) {
+				self.previewFrameTimeCode = previewFrameTimeCode
 				self.appEventAssetType = appEventAssetType
 				self.fileName = fileName
 				self.fileSize = fileSize
-				self.previewFrameTimeCode = previewFrameTimeCode
 			}
 
 			public init(from decoder: Decoder) throws {
 				let values = try decoder.container(keyedBy: StringCodingKey.self)
+				self.previewFrameTimeCode = try values.decodeIfPresent(String.self, forKey: "previewFrameTimeCode")
 				self.appEventAssetType = try values.decode(AppEventAssetType.self, forKey: "appEventAssetType")
 				self.fileName = try values.decode(String.self, forKey: "fileName")
 				self.fileSize = try values.decode(Int.self, forKey: "fileSize")
-				self.previewFrameTimeCode = try values.decodeIfPresent(String.self, forKey: "previewFrameTimeCode")
 			}
 
 			public func encode(to encoder: Encoder) throws {
 				var values = encoder.container(keyedBy: StringCodingKey.self)
+				try values.encodeIfPresent(previewFrameTimeCode, forKey: "previewFrameTimeCode")
 				try values.encode(appEventAssetType, forKey: "appEventAssetType")
 				try values.encode(fileName, forKey: "fileName")
 				try values.encode(fileSize, forKey: "fileSize")
-				try values.encodeIfPresent(previewFrameTimeCode, forKey: "previewFrameTimeCode")
 			}
+		}
+
+		public enum `Type`: String, Codable, CaseIterable {
+			case appEventVideoClips
 		}
 
 		public struct Relationships: Codable {
@@ -103,28 +107,24 @@ public struct AppEventVideoClipCreateRequest: Codable {
 			}
 		}
 
-		public enum `Type`: String, Codable, CaseIterable {
-			case appEventVideoClips
-		}
-
-		public init(attributes: Attributes, relationships: Relationships, type: `Type`) {
+		public init(attributes: Attributes, type: `Type`, relationships: Relationships) {
 			self.attributes = attributes
-			self.relationships = relationships
 			self.type = type
+			self.relationships = relationships
 		}
 
 		public init(from decoder: Decoder) throws {
 			let values = try decoder.container(keyedBy: StringCodingKey.self)
 			self.attributes = try values.decode(Attributes.self, forKey: "attributes")
-			self.relationships = try values.decode(Relationships.self, forKey: "relationships")
 			self.type = try values.decode(`Type`.self, forKey: "type")
+			self.relationships = try values.decode(Relationships.self, forKey: "relationships")
 		}
 
 		public func encode(to encoder: Encoder) throws {
 			var values = encoder.container(keyedBy: StringCodingKey.self)
 			try values.encode(attributes, forKey: "attributes")
-			try values.encode(relationships, forKey: "relationships")
 			try values.encode(type, forKey: "type")
+			try values.encode(relationships, forKey: "relationships")
 		}
 	}
 

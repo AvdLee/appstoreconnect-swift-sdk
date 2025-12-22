@@ -12,28 +12,28 @@ public struct SubscriptionLocalizationCreateRequest: Codable {
 		public var type: `Type`
 
 		public struct Attributes: Codable {
-			public var description: String?
 			public var locale: String
 			public var name: String
+			public var description: String?
 
-			public init(description: String? = nil, locale: String, name: String) {
-				self.description = description
+			public init(locale: String, name: String, description: String? = nil) {
 				self.locale = locale
 				self.name = name
+				self.description = description
 			}
 
 			public init(from decoder: Decoder) throws {
 				let values = try decoder.container(keyedBy: StringCodingKey.self)
-				self.description = try values.decodeIfPresent(String.self, forKey: "description")
 				self.locale = try values.decode(String.self, forKey: "locale")
 				self.name = try values.decode(String.self, forKey: "name")
+				self.description = try values.decodeIfPresent(String.self, forKey: "description")
 			}
 
 			public func encode(to encoder: Encoder) throws {
 				var values = encoder.container(keyedBy: StringCodingKey.self)
-				try values.encodeIfPresent(description, forKey: "description")
 				try values.encode(locale, forKey: "locale")
 				try values.encode(name, forKey: "name")
+				try values.encodeIfPresent(description, forKey: "description")
 			}
 		}
 

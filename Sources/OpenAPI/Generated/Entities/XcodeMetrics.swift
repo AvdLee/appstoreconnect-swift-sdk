@@ -9,77 +9,99 @@ public struct XcodeMetrics: Codable {
 	public var version: String?
 
 	public struct Insights: Codable {
-		public var regressions: [MetricsInsight]?
 		public var trendingUp: [MetricsInsight]?
+		public var regressions: [MetricsInsight]?
 
-		public init(regressions: [MetricsInsight]? = nil, trendingUp: [MetricsInsight]? = nil) {
-			self.regressions = regressions
+		public init(trendingUp: [MetricsInsight]? = nil, regressions: [MetricsInsight]? = nil) {
 			self.trendingUp = trendingUp
+			self.regressions = regressions
 		}
 
 		public init(from decoder: Decoder) throws {
 			let values = try decoder.container(keyedBy: StringCodingKey.self)
-			self.regressions = try values.decodeIfPresent([MetricsInsight].self, forKey: "regressions")
 			self.trendingUp = try values.decodeIfPresent([MetricsInsight].self, forKey: "trendingUp")
+			self.regressions = try values.decodeIfPresent([MetricsInsight].self, forKey: "regressions")
 		}
 
 		public func encode(to encoder: Encoder) throws {
 			var values = encoder.container(keyedBy: StringCodingKey.self)
-			try values.encodeIfPresent(regressions, forKey: "regressions")
 			try values.encodeIfPresent(trendingUp, forKey: "trendingUp")
+			try values.encodeIfPresent(regressions, forKey: "regressions")
 		}
 	}
 
 	public struct ProductDatum: Codable {
-		public var metricCategories: [MetricCategory]?
 		public var platform: String?
+		public var metricCategories: [MetricCategory]?
 
 		public final class MetricCategory: Codable {
 			public let identifier: AppStoreConnect_Swift_SDK.MetricCategory?
 			public let metrics: [Metric]?
 
 			public struct Metric: Codable {
-				public var datasets: [Dataset]?
 				public var goalKeys: [GoalKey]?
-				public var identifier: String?
+				public var datasets: [Dataset]?
 				public var unit: Unit?
+				public var identifier: String?
+
+				public struct GoalKey: Codable {
+					public var lowerBound: Int?
+					public var upperBound: Int?
+					public var goalKey: String?
+
+					public init(lowerBound: Int? = nil, upperBound: Int? = nil, goalKey: String? = nil) {
+						self.lowerBound = lowerBound
+						self.upperBound = upperBound
+						self.goalKey = goalKey
+					}
+
+					public init(from decoder: Decoder) throws {
+						let values = try decoder.container(keyedBy: StringCodingKey.self)
+						self.lowerBound = try values.decodeIfPresent(Int.self, forKey: "lowerBound")
+						self.upperBound = try values.decodeIfPresent(Int.self, forKey: "upperBound")
+						self.goalKey = try values.decodeIfPresent(String.self, forKey: "goalKey")
+					}
+
+					public func encode(to encoder: Encoder) throws {
+						var values = encoder.container(keyedBy: StringCodingKey.self)
+						try values.encodeIfPresent(lowerBound, forKey: "lowerBound")
+						try values.encodeIfPresent(upperBound, forKey: "upperBound")
+						try values.encodeIfPresent(goalKey, forKey: "goalKey")
+					}
+				}
 
 				public struct Dataset: Codable {
-					public var filterCriteria: FilterCriteria?
-					public var points: [Point]?
 					public var recommendedMetricGoal: RecommendedMetricGoal?
+					public var points: [Point]?
+					public var filterCriteria: FilterCriteria?
 
-					public struct FilterCriteria: Codable {
-						public var device: String?
-						public var deviceMarketingName: String?
-						public var percentile: String?
+					public struct RecommendedMetricGoal: Codable {
+						public var detail: String?
+						public var value: Double?
 
-						public init(device: String? = nil, deviceMarketingName: String? = nil, percentile: String? = nil) {
-							self.device = device
-							self.deviceMarketingName = deviceMarketingName
-							self.percentile = percentile
+						public init(detail: String? = nil, value: Double? = nil) {
+							self.detail = detail
+							self.value = value
 						}
 
 						public init(from decoder: Decoder) throws {
 							let values = try decoder.container(keyedBy: StringCodingKey.self)
-							self.device = try values.decodeIfPresent(String.self, forKey: "device")
-							self.deviceMarketingName = try values.decodeIfPresent(String.self, forKey: "deviceMarketingName")
-							self.percentile = try values.decodeIfPresent(String.self, forKey: "percentile")
+							self.detail = try values.decodeIfPresent(String.self, forKey: "detail")
+							self.value = try values.decodeIfPresent(Double.self, forKey: "value")
 						}
 
 						public func encode(to encoder: Encoder) throws {
 							var values = encoder.container(keyedBy: StringCodingKey.self)
-							try values.encodeIfPresent(device, forKey: "device")
-							try values.encodeIfPresent(deviceMarketingName, forKey: "deviceMarketingName")
-							try values.encodeIfPresent(percentile, forKey: "percentile")
+							try values.encodeIfPresent(detail, forKey: "detail")
+							try values.encodeIfPresent(value, forKey: "value")
 						}
 					}
 
 					public struct Point: Codable {
 						public var errorMargin: Double?
 						public var goal: String?
-						public var percentageBreakdown: PercentageBreakdown?
 						public var value: Double?
+						public var percentageBreakdown: PercentageBreakdown?
 						public var version: String?
 
 						public struct PercentageBreakdown: Codable {
@@ -104,11 +126,11 @@ public struct XcodeMetrics: Codable {
 							}
 						}
 
-						public init(errorMargin: Double? = nil, goal: String? = nil, percentageBreakdown: PercentageBreakdown? = nil, value: Double? = nil, version: String? = nil) {
+						public init(errorMargin: Double? = nil, goal: String? = nil, value: Double? = nil, percentageBreakdown: PercentageBreakdown? = nil, version: String? = nil) {
 							self.errorMargin = errorMargin
 							self.goal = goal
-							self.percentageBreakdown = percentageBreakdown
 							self.value = value
+							self.percentageBreakdown = percentageBreakdown
 							self.version = version
 						}
 
@@ -116,8 +138,8 @@ public struct XcodeMetrics: Codable {
 							let values = try decoder.container(keyedBy: StringCodingKey.self)
 							self.errorMargin = try values.decodeIfPresent(Double.self, forKey: "errorMargin")
 							self.goal = try values.decodeIfPresent(String.self, forKey: "goal")
-							self.percentageBreakdown = try values.decodeIfPresent(PercentageBreakdown.self, forKey: "percentageBreakdown")
 							self.value = try values.decodeIfPresent(Double.self, forKey: "value")
+							self.percentageBreakdown = try values.decodeIfPresent(PercentageBreakdown.self, forKey: "percentageBreakdown")
 							self.version = try values.decodeIfPresent(String.self, forKey: "version")
 						}
 
@@ -125,78 +147,56 @@ public struct XcodeMetrics: Codable {
 							var values = encoder.container(keyedBy: StringCodingKey.self)
 							try values.encodeIfPresent(errorMargin, forKey: "errorMargin")
 							try values.encodeIfPresent(goal, forKey: "goal")
-							try values.encodeIfPresent(percentageBreakdown, forKey: "percentageBreakdown")
 							try values.encodeIfPresent(value, forKey: "value")
+							try values.encodeIfPresent(percentageBreakdown, forKey: "percentageBreakdown")
 							try values.encodeIfPresent(version, forKey: "version")
 						}
 					}
 
-					public struct RecommendedMetricGoal: Codable {
-						public var detail: String?
-						public var value: Double?
+					public struct FilterCriteria: Codable {
+						public var percentile: String?
+						public var deviceMarketingName: String?
+						public var device: String?
 
-						public init(detail: String? = nil, value: Double? = nil) {
-							self.detail = detail
-							self.value = value
+						public init(percentile: String? = nil, deviceMarketingName: String? = nil, device: String? = nil) {
+							self.percentile = percentile
+							self.deviceMarketingName = deviceMarketingName
+							self.device = device
 						}
 
 						public init(from decoder: Decoder) throws {
 							let values = try decoder.container(keyedBy: StringCodingKey.self)
-							self.detail = try values.decodeIfPresent(String.self, forKey: "detail")
-							self.value = try values.decodeIfPresent(Double.self, forKey: "value")
+							self.percentile = try values.decodeIfPresent(String.self, forKey: "percentile")
+							self.deviceMarketingName = try values.decodeIfPresent(String.self, forKey: "deviceMarketingName")
+							self.device = try values.decodeIfPresent(String.self, forKey: "device")
 						}
 
 						public func encode(to encoder: Encoder) throws {
 							var values = encoder.container(keyedBy: StringCodingKey.self)
-							try values.encodeIfPresent(detail, forKey: "detail")
-							try values.encodeIfPresent(value, forKey: "value")
+							try values.encodeIfPresent(percentile, forKey: "percentile")
+							try values.encodeIfPresent(deviceMarketingName, forKey: "deviceMarketingName")
+							try values.encodeIfPresent(device, forKey: "device")
 						}
 					}
 
-					public init(filterCriteria: FilterCriteria? = nil, points: [Point]? = nil, recommendedMetricGoal: RecommendedMetricGoal? = nil) {
-						self.filterCriteria = filterCriteria
-						self.points = points
+					public init(recommendedMetricGoal: RecommendedMetricGoal? = nil, points: [Point]? = nil, filterCriteria: FilterCriteria? = nil) {
 						self.recommendedMetricGoal = recommendedMetricGoal
+						self.points = points
+						self.filterCriteria = filterCriteria
 					}
 
 					public init(from decoder: Decoder) throws {
 						let values = try decoder.container(keyedBy: StringCodingKey.self)
-						self.filterCriteria = try values.decodeIfPresent(FilterCriteria.self, forKey: "filterCriteria")
-						self.points = try values.decodeIfPresent([Point].self, forKey: "points")
 						self.recommendedMetricGoal = try values.decodeIfPresent(RecommendedMetricGoal.self, forKey: "recommendedMetricGoal")
+						self.points = try values.decodeIfPresent([Point].self, forKey: "points")
+						self.filterCriteria = try values.decodeIfPresent(FilterCriteria.self, forKey: "filterCriteria")
 					}
 
 					public func encode(to encoder: Encoder) throws {
 						var values = encoder.container(keyedBy: StringCodingKey.self)
-						try values.encodeIfPresent(filterCriteria, forKey: "filterCriteria")
-						try values.encodeIfPresent(points, forKey: "points")
 						try values.encodeIfPresent(recommendedMetricGoal, forKey: "recommendedMetricGoal")
-					}
-				}
-
-				public struct GoalKey: Codable {
-					public var goalKey: String?
-					public var lowerBound: Int?
-					public var upperBound: Int?
-
-					public init(goalKey: String? = nil, lowerBound: Int? = nil, upperBound: Int? = nil) {
-						self.goalKey = goalKey
-						self.lowerBound = lowerBound
-						self.upperBound = upperBound
-					}
-
-					public init(from decoder: Decoder) throws {
-						let values = try decoder.container(keyedBy: StringCodingKey.self)
-						self.goalKey = try values.decodeIfPresent(String.self, forKey: "goalKey")
-						self.lowerBound = try values.decodeIfPresent(Int.self, forKey: "lowerBound")
-						self.upperBound = try values.decodeIfPresent(Int.self, forKey: "upperBound")
-					}
-
-					public func encode(to encoder: Encoder) throws {
-						var values = encoder.container(keyedBy: StringCodingKey.self)
-						try values.encodeIfPresent(goalKey, forKey: "goalKey")
-						try values.encodeIfPresent(lowerBound, forKey: "lowerBound")
-						try values.encodeIfPresent(upperBound, forKey: "upperBound")
+						try values.encodeIfPresent(points, forKey: "points")
+						try values.encodeIfPresent(filterCriteria, forKey: "filterCriteria")
 					}
 				}
 
@@ -222,27 +222,27 @@ public struct XcodeMetrics: Codable {
 					}
 				}
 
-				public init(datasets: [Dataset]? = nil, goalKeys: [GoalKey]? = nil, identifier: String? = nil, unit: Unit? = nil) {
-					self.datasets = datasets
+				public init(goalKeys: [GoalKey]? = nil, datasets: [Dataset]? = nil, unit: Unit? = nil, identifier: String? = nil) {
 					self.goalKeys = goalKeys
-					self.identifier = identifier
+					self.datasets = datasets
 					self.unit = unit
+					self.identifier = identifier
 				}
 
 				public init(from decoder: Decoder) throws {
 					let values = try decoder.container(keyedBy: StringCodingKey.self)
-					self.datasets = try values.decodeIfPresent([Dataset].self, forKey: "datasets")
 					self.goalKeys = try values.decodeIfPresent([GoalKey].self, forKey: "goalKeys")
-					self.identifier = try values.decodeIfPresent(String.self, forKey: "identifier")
+					self.datasets = try values.decodeIfPresent([Dataset].self, forKey: "datasets")
 					self.unit = try values.decodeIfPresent(Unit.self, forKey: "unit")
+					self.identifier = try values.decodeIfPresent(String.self, forKey: "identifier")
 				}
 
 				public func encode(to encoder: Encoder) throws {
 					var values = encoder.container(keyedBy: StringCodingKey.self)
-					try values.encodeIfPresent(datasets, forKey: "datasets")
 					try values.encodeIfPresent(goalKeys, forKey: "goalKeys")
-					try values.encodeIfPresent(identifier, forKey: "identifier")
+					try values.encodeIfPresent(datasets, forKey: "datasets")
 					try values.encodeIfPresent(unit, forKey: "unit")
+					try values.encodeIfPresent(identifier, forKey: "identifier")
 				}
 			}
 
@@ -264,21 +264,21 @@ public struct XcodeMetrics: Codable {
 			}
 		}
 
-		public init(metricCategories: [MetricCategory]? = nil, platform: String? = nil) {
-			self.metricCategories = metricCategories
+		public init(platform: String? = nil, metricCategories: [MetricCategory]? = nil) {
 			self.platform = platform
+			self.metricCategories = metricCategories
 		}
 
 		public init(from decoder: Decoder) throws {
 			let values = try decoder.container(keyedBy: StringCodingKey.self)
-			self.metricCategories = try values.decodeIfPresent([MetricCategory].self, forKey: "metricCategories")
 			self.platform = try values.decodeIfPresent(String.self, forKey: "platform")
+			self.metricCategories = try values.decodeIfPresent([MetricCategory].self, forKey: "metricCategories")
 		}
 
 		public func encode(to encoder: Encoder) throws {
 			var values = encoder.container(keyedBy: StringCodingKey.self)
-			try values.encodeIfPresent(metricCategories, forKey: "metricCategories")
 			try values.encodeIfPresent(platform, forKey: "platform")
+			try values.encodeIfPresent(metricCategories, forKey: "metricCategories")
 		}
 	}
 

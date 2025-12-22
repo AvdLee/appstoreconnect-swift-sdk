@@ -7,30 +7,12 @@ public struct AppClipDefaultExperienceLocalizationCreateRequest: Codable {
 	public var data: Data
 
 	public struct Data: Codable {
-		public var attributes: Attributes
-		public var relationships: Relationships
 		public var type: `Type`
+		public var relationships: Relationships
+		public var attributes: Attributes
 
-		public struct Attributes: Codable {
-			public var locale: String
-			public var subtitle: String?
-
-			public init(locale: String, subtitle: String? = nil) {
-				self.locale = locale
-				self.subtitle = subtitle
-			}
-
-			public init(from decoder: Decoder) throws {
-				let values = try decoder.container(keyedBy: StringCodingKey.self)
-				self.locale = try values.decode(String.self, forKey: "locale")
-				self.subtitle = try values.decodeIfPresent(String.self, forKey: "subtitle")
-			}
-
-			public func encode(to encoder: Encoder) throws {
-				var values = encoder.container(keyedBy: StringCodingKey.self)
-				try values.encode(locale, forKey: "locale")
-				try values.encodeIfPresent(subtitle, forKey: "subtitle")
-			}
+		public enum `Type`: String, Codable, CaseIterable {
+			case appClipDefaultExperienceLocalizations
 		}
 
 		public struct Relationships: Codable {
@@ -95,28 +77,46 @@ public struct AppClipDefaultExperienceLocalizationCreateRequest: Codable {
 			}
 		}
 
-		public enum `Type`: String, Codable, CaseIterable {
-			case appClipDefaultExperienceLocalizations
+		public struct Attributes: Codable {
+			public var subtitle: String?
+			public var locale: String
+
+			public init(subtitle: String? = nil, locale: String) {
+				self.subtitle = subtitle
+				self.locale = locale
+			}
+
+			public init(from decoder: Decoder) throws {
+				let values = try decoder.container(keyedBy: StringCodingKey.self)
+				self.subtitle = try values.decodeIfPresent(String.self, forKey: "subtitle")
+				self.locale = try values.decode(String.self, forKey: "locale")
+			}
+
+			public func encode(to encoder: Encoder) throws {
+				var values = encoder.container(keyedBy: StringCodingKey.self)
+				try values.encodeIfPresent(subtitle, forKey: "subtitle")
+				try values.encode(locale, forKey: "locale")
+			}
 		}
 
-		public init(attributes: Attributes, relationships: Relationships, type: `Type`) {
-			self.attributes = attributes
-			self.relationships = relationships
+		public init(type: `Type`, relationships: Relationships, attributes: Attributes) {
 			self.type = type
+			self.relationships = relationships
+			self.attributes = attributes
 		}
 
 		public init(from decoder: Decoder) throws {
 			let values = try decoder.container(keyedBy: StringCodingKey.self)
-			self.attributes = try values.decode(Attributes.self, forKey: "attributes")
-			self.relationships = try values.decode(Relationships.self, forKey: "relationships")
 			self.type = try values.decode(`Type`.self, forKey: "type")
+			self.relationships = try values.decode(Relationships.self, forKey: "relationships")
+			self.attributes = try values.decode(Attributes.self, forKey: "attributes")
 		}
 
 		public func encode(to encoder: Encoder) throws {
 			var values = encoder.container(keyedBy: StringCodingKey.self)
-			try values.encode(attributes, forKey: "attributes")
-			try values.encode(relationships, forKey: "relationships")
 			try values.encode(type, forKey: "type")
+			try values.encode(relationships, forKey: "relationships")
+			try values.encode(attributes, forKey: "attributes")
 		}
 	}
 

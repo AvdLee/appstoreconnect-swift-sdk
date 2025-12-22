@@ -8,40 +8,40 @@ public struct AppInfoLocalizationUpdateRequest: Codable {
 
 	public struct Data: Codable, Identifiable {
 		public var attributes: Attributes?
-		public var id: String
 		public var type: `Type`
+		public var id: String
 
 		public struct Attributes: Codable {
-			public var name: String?
-			public var privacyChoicesURL: String?
-			public var privacyPolicyText: String?
-			public var privacyPolicyURL: String?
 			public var subtitle: String?
+			public var privacyChoicesURL: String?
+			public var name: String?
+			public var privacyPolicyURL: String?
+			public var privacyPolicyText: String?
 
-			public init(name: String? = nil, privacyChoicesURL: String? = nil, privacyPolicyText: String? = nil, privacyPolicyURL: String? = nil, subtitle: String? = nil) {
-				self.name = name
-				self.privacyChoicesURL = privacyChoicesURL
-				self.privacyPolicyText = privacyPolicyText
-				self.privacyPolicyURL = privacyPolicyURL
+			public init(subtitle: String? = nil, privacyChoicesURL: String? = nil, name: String? = nil, privacyPolicyURL: String? = nil, privacyPolicyText: String? = nil) {
 				self.subtitle = subtitle
+				self.privacyChoicesURL = privacyChoicesURL
+				self.name = name
+				self.privacyPolicyURL = privacyPolicyURL
+				self.privacyPolicyText = privacyPolicyText
 			}
 
 			public init(from decoder: Decoder) throws {
 				let values = try decoder.container(keyedBy: StringCodingKey.self)
-				self.name = try values.decodeIfPresent(String.self, forKey: "name")
-				self.privacyChoicesURL = try values.decodeIfPresent(String.self, forKey: "privacyChoicesUrl")
-				self.privacyPolicyText = try values.decodeIfPresent(String.self, forKey: "privacyPolicyText")
-				self.privacyPolicyURL = try values.decodeIfPresent(String.self, forKey: "privacyPolicyUrl")
 				self.subtitle = try values.decodeIfPresent(String.self, forKey: "subtitle")
+				self.privacyChoicesURL = try values.decodeIfPresent(String.self, forKey: "privacyChoicesUrl")
+				self.name = try values.decodeIfPresent(String.self, forKey: "name")
+				self.privacyPolicyURL = try values.decodeIfPresent(String.self, forKey: "privacyPolicyUrl")
+				self.privacyPolicyText = try values.decodeIfPresent(String.self, forKey: "privacyPolicyText")
 			}
 
 			public func encode(to encoder: Encoder) throws {
 				var values = encoder.container(keyedBy: StringCodingKey.self)
-				try values.encodeIfPresent(name, forKey: "name")
-				try values.encodeIfPresent(privacyChoicesURL, forKey: "privacyChoicesUrl")
-				try values.encodeIfPresent(privacyPolicyText, forKey: "privacyPolicyText")
-				try values.encodeIfPresent(privacyPolicyURL, forKey: "privacyPolicyUrl")
 				try values.encodeIfPresent(subtitle, forKey: "subtitle")
+				try values.encodeIfPresent(privacyChoicesURL, forKey: "privacyChoicesUrl")
+				try values.encodeIfPresent(name, forKey: "name")
+				try values.encodeIfPresent(privacyPolicyURL, forKey: "privacyPolicyUrl")
+				try values.encodeIfPresent(privacyPolicyText, forKey: "privacyPolicyText")
 			}
 		}
 
@@ -49,24 +49,24 @@ public struct AppInfoLocalizationUpdateRequest: Codable {
 			case appInfoLocalizations
 		}
 
-		public init(attributes: Attributes? = nil, id: String, type: `Type`) {
+		public init(attributes: Attributes? = nil, type: `Type`, id: String) {
 			self.attributes = attributes
-			self.id = id
 			self.type = type
+			self.id = id
 		}
 
 		public init(from decoder: Decoder) throws {
 			let values = try decoder.container(keyedBy: StringCodingKey.self)
 			self.attributes = try values.decodeIfPresent(Attributes.self, forKey: "attributes")
-			self.id = try values.decode(String.self, forKey: "id")
 			self.type = try values.decode(`Type`.self, forKey: "type")
+			self.id = try values.decode(String.self, forKey: "id")
 		}
 
 		public func encode(to encoder: Encoder) throws {
 			var values = encoder.container(keyedBy: StringCodingKey.self)
 			try values.encodeIfPresent(attributes, forKey: "attributes")
-			try values.encode(id, forKey: "id")
 			try values.encode(type, forKey: "type")
+			try values.encode(id, forKey: "id")
 		}
 	}
 

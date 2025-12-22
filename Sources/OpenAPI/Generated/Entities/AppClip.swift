@@ -5,10 +5,10 @@ import Foundation
 
 public struct AppClip: Codable, Identifiable {
 	public var attributes: Attributes?
-	public var id: String
 	public var links: ResourceLinks?
-	public var relationships: Relationships?
 	public var type: `Type`
+	public var relationships: Relationships?
+	public var id: String
 
 	public struct Attributes: Codable {
 		public var bundleID: String?
@@ -28,20 +28,26 @@ public struct AppClip: Codable, Identifiable {
 		}
 	}
 
+	public enum `Type`: String, Codable, CaseIterable {
+		case appClips
+	}
+
 	public struct Relationships: Codable {
+		public var appClipDefaultExperiences: AppClipDefaultExperiences?
 		public var app: App?
 		public var appClipAdvancedExperiences: AppClipAdvancedExperiences?
-		public var appClipDefaultExperiences: AppClipDefaultExperiences?
 
-		public struct App: Codable {
-			public var data: Data?
+		public struct AppClipDefaultExperiences: Codable {
+			public var links: RelationshipLinks?
+			public var meta: PagingInformation?
+			public var data: [Datum]?
 
-			public struct Data: Codable, Identifiable {
+			public struct Datum: Codable, Identifiable {
 				public var id: String
 				public var type: `Type`
 
 				public enum `Type`: String, Codable, CaseIterable {
-					case apps
+					case appClipDefaultExperiences
 				}
 
 				public init(id: String, type: `Type`) {
@@ -59,6 +65,56 @@ public struct AppClip: Codable, Identifiable {
 					var values = encoder.container(keyedBy: StringCodingKey.self)
 					try values.encode(id, forKey: "id")
 					try values.encode(type, forKey: "type")
+				}
+			}
+
+			public init(links: RelationshipLinks? = nil, meta: PagingInformation? = nil, data: [Datum]? = nil) {
+				self.links = links
+				self.meta = meta
+				self.data = data
+			}
+
+			public init(from decoder: Decoder) throws {
+				let values = try decoder.container(keyedBy: StringCodingKey.self)
+				self.links = try values.decodeIfPresent(RelationshipLinks.self, forKey: "links")
+				self.meta = try values.decodeIfPresent(PagingInformation.self, forKey: "meta")
+				self.data = try values.decodeIfPresent([Datum].self, forKey: "data")
+			}
+
+			public func encode(to encoder: Encoder) throws {
+				var values = encoder.container(keyedBy: StringCodingKey.self)
+				try values.encodeIfPresent(links, forKey: "links")
+				try values.encodeIfPresent(meta, forKey: "meta")
+				try values.encodeIfPresent(data, forKey: "data")
+			}
+		}
+
+		public struct App: Codable {
+			public var data: Data?
+
+			public struct Data: Codable, Identifiable {
+				public var type: `Type`
+				public var id: String
+
+				public enum `Type`: String, Codable, CaseIterable {
+					case apps
+				}
+
+				public init(type: `Type`, id: String) {
+					self.type = type
+					self.id = id
+				}
+
+				public init(from decoder: Decoder) throws {
+					let values = try decoder.container(keyedBy: StringCodingKey.self)
+					self.type = try values.decode(`Type`.self, forKey: "type")
+					self.id = try values.decode(String.self, forKey: "id")
+				}
+
+				public func encode(to encoder: Encoder) throws {
+					var values = encoder.container(keyedBy: StringCodingKey.self)
+					try values.encode(type, forKey: "type")
+					try values.encode(id, forKey: "id")
 				}
 			}
 
@@ -95,106 +151,50 @@ public struct AppClip: Codable, Identifiable {
 			}
 		}
 
-		public struct AppClipDefaultExperiences: Codable {
-			public var data: [Datum]?
-			public var links: RelationshipLinks?
-			public var meta: PagingInformation?
-
-			public struct Datum: Codable, Identifiable {
-				public var id: String
-				public var type: `Type`
-
-				public enum `Type`: String, Codable, CaseIterable {
-					case appClipDefaultExperiences
-				}
-
-				public init(id: String, type: `Type`) {
-					self.id = id
-					self.type = type
-				}
-
-				public init(from decoder: Decoder) throws {
-					let values = try decoder.container(keyedBy: StringCodingKey.self)
-					self.id = try values.decode(String.self, forKey: "id")
-					self.type = try values.decode(`Type`.self, forKey: "type")
-				}
-
-				public func encode(to encoder: Encoder) throws {
-					var values = encoder.container(keyedBy: StringCodingKey.self)
-					try values.encode(id, forKey: "id")
-					try values.encode(type, forKey: "type")
-				}
-			}
-
-			public init(data: [Datum]? = nil, links: RelationshipLinks? = nil, meta: PagingInformation? = nil) {
-				self.data = data
-				self.links = links
-				self.meta = meta
-			}
-
-			public init(from decoder: Decoder) throws {
-				let values = try decoder.container(keyedBy: StringCodingKey.self)
-				self.data = try values.decodeIfPresent([Datum].self, forKey: "data")
-				self.links = try values.decodeIfPresent(RelationshipLinks.self, forKey: "links")
-				self.meta = try values.decodeIfPresent(PagingInformation.self, forKey: "meta")
-			}
-
-			public func encode(to encoder: Encoder) throws {
-				var values = encoder.container(keyedBy: StringCodingKey.self)
-				try values.encodeIfPresent(data, forKey: "data")
-				try values.encodeIfPresent(links, forKey: "links")
-				try values.encodeIfPresent(meta, forKey: "meta")
-			}
-		}
-
-		public init(app: App? = nil, appClipAdvancedExperiences: AppClipAdvancedExperiences? = nil, appClipDefaultExperiences: AppClipDefaultExperiences? = nil) {
+		public init(appClipDefaultExperiences: AppClipDefaultExperiences? = nil, app: App? = nil, appClipAdvancedExperiences: AppClipAdvancedExperiences? = nil) {
+			self.appClipDefaultExperiences = appClipDefaultExperiences
 			self.app = app
 			self.appClipAdvancedExperiences = appClipAdvancedExperiences
-			self.appClipDefaultExperiences = appClipDefaultExperiences
 		}
 
 		public init(from decoder: Decoder) throws {
 			let values = try decoder.container(keyedBy: StringCodingKey.self)
+			self.appClipDefaultExperiences = try values.decodeIfPresent(AppClipDefaultExperiences.self, forKey: "appClipDefaultExperiences")
 			self.app = try values.decodeIfPresent(App.self, forKey: "app")
 			self.appClipAdvancedExperiences = try values.decodeIfPresent(AppClipAdvancedExperiences.self, forKey: "appClipAdvancedExperiences")
-			self.appClipDefaultExperiences = try values.decodeIfPresent(AppClipDefaultExperiences.self, forKey: "appClipDefaultExperiences")
 		}
 
 		public func encode(to encoder: Encoder) throws {
 			var values = encoder.container(keyedBy: StringCodingKey.self)
+			try values.encodeIfPresent(appClipDefaultExperiences, forKey: "appClipDefaultExperiences")
 			try values.encodeIfPresent(app, forKey: "app")
 			try values.encodeIfPresent(appClipAdvancedExperiences, forKey: "appClipAdvancedExperiences")
-			try values.encodeIfPresent(appClipDefaultExperiences, forKey: "appClipDefaultExperiences")
 		}
 	}
 
-	public enum `Type`: String, Codable, CaseIterable {
-		case appClips
-	}
-
-	public init(attributes: Attributes? = nil, id: String, links: ResourceLinks? = nil, relationships: Relationships? = nil, type: `Type`) {
+	public init(attributes: Attributes? = nil, links: ResourceLinks? = nil, type: `Type`, relationships: Relationships? = nil, id: String) {
 		self.attributes = attributes
-		self.id = id
 		self.links = links
-		self.relationships = relationships
 		self.type = type
+		self.relationships = relationships
+		self.id = id
 	}
 
 	public init(from decoder: Decoder) throws {
 		let values = try decoder.container(keyedBy: StringCodingKey.self)
 		self.attributes = try values.decodeIfPresent(Attributes.self, forKey: "attributes")
-		self.id = try values.decode(String.self, forKey: "id")
 		self.links = try values.decodeIfPresent(ResourceLinks.self, forKey: "links")
-		self.relationships = try values.decodeIfPresent(Relationships.self, forKey: "relationships")
 		self.type = try values.decode(`Type`.self, forKey: "type")
+		self.relationships = try values.decodeIfPresent(Relationships.self, forKey: "relationships")
+		self.id = try values.decode(String.self, forKey: "id")
 	}
 
 	public func encode(to encoder: Encoder) throws {
 		var values = encoder.container(keyedBy: StringCodingKey.self)
 		try values.encodeIfPresent(attributes, forKey: "attributes")
-		try values.encode(id, forKey: "id")
 		try values.encodeIfPresent(links, forKey: "links")
-		try values.encodeIfPresent(relationships, forKey: "relationships")
 		try values.encode(type, forKey: "type")
+		try values.encodeIfPresent(relationships, forKey: "relationships")
+		try values.encode(id, forKey: "id")
 	}
 }

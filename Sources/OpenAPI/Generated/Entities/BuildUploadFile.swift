@@ -4,26 +4,20 @@
 import Foundation
 
 public struct BuildUploadFile: Codable, Identifiable {
-	public var attributes: Attributes?
 	public var id: String
+	public var attributes: Attributes?
 	public var links: ResourceLinks?
 	public var type: `Type`
 
 	public struct Attributes: Codable {
 		public var assetDeliveryState: AppMediaAssetState?
-		public var assetToken: String?
-		public var assetType: AssetType?
-		public var fileName: String?
-		public var fileSize: Int64?
-		public var sourceFileChecksums: Checksums?
-		public var uploadOperations: [DeliveryFileUploadOperation]?
 		public var uti: Uti?
-
-		public enum AssetType: String, Codable, CaseIterable {
-			case asset = "ASSET"
-			case assetDescription = "ASSET_DESCRIPTION"
-			case assetSpi = "ASSET_SPI"
-		}
+		public var sourceFileChecksums: Checksums?
+		public var fileName: String?
+		public var uploadOperations: [DeliveryFileUploadOperation]?
+		public var fileSize: Int64?
+		public var assetType: AssetType?
+		public var assetToken: String?
 
 		public enum Uti: String, Codable, CaseIterable {
 			case comAppleBinaryPropertyList = "com.apple.binary-property-list"
@@ -33,39 +27,45 @@ public struct BuildUploadFile: Codable, Identifiable {
 			case comPkwareZipArchive = "com.pkware.zip-archive"
 		}
 
-		public init(assetDeliveryState: AppMediaAssetState? = nil, assetToken: String? = nil, assetType: AssetType? = nil, fileName: String? = nil, fileSize: Int64? = nil, sourceFileChecksums: Checksums? = nil, uploadOperations: [DeliveryFileUploadOperation]? = nil, uti: Uti? = nil) {
+		public enum AssetType: String, Codable, CaseIterable {
+			case asset = "ASSET"
+			case assetDescription = "ASSET_DESCRIPTION"
+			case assetSpi = "ASSET_SPI"
+		}
+
+		public init(assetDeliveryState: AppMediaAssetState? = nil, uti: Uti? = nil, sourceFileChecksums: Checksums? = nil, fileName: String? = nil, uploadOperations: [DeliveryFileUploadOperation]? = nil, fileSize: Int64? = nil, assetType: AssetType? = nil, assetToken: String? = nil) {
 			self.assetDeliveryState = assetDeliveryState
-			self.assetToken = assetToken
-			self.assetType = assetType
-			self.fileName = fileName
-			self.fileSize = fileSize
-			self.sourceFileChecksums = sourceFileChecksums
-			self.uploadOperations = uploadOperations
 			self.uti = uti
+			self.sourceFileChecksums = sourceFileChecksums
+			self.fileName = fileName
+			self.uploadOperations = uploadOperations
+			self.fileSize = fileSize
+			self.assetType = assetType
+			self.assetToken = assetToken
 		}
 
 		public init(from decoder: Decoder) throws {
 			let values = try decoder.container(keyedBy: StringCodingKey.self)
 			self.assetDeliveryState = try values.decodeIfPresent(AppMediaAssetState.self, forKey: "assetDeliveryState")
-			self.assetToken = try values.decodeIfPresent(String.self, forKey: "assetToken")
-			self.assetType = try values.decodeIfPresent(AssetType.self, forKey: "assetType")
-			self.fileName = try values.decodeIfPresent(String.self, forKey: "fileName")
-			self.fileSize = try values.decodeIfPresent(Int64.self, forKey: "fileSize")
-			self.sourceFileChecksums = try values.decodeIfPresent(Checksums.self, forKey: "sourceFileChecksums")
-			self.uploadOperations = try values.decodeIfPresent([DeliveryFileUploadOperation].self, forKey: "uploadOperations")
 			self.uti = try values.decodeIfPresent(Uti.self, forKey: "uti")
+			self.sourceFileChecksums = try values.decodeIfPresent(Checksums.self, forKey: "sourceFileChecksums")
+			self.fileName = try values.decodeIfPresent(String.self, forKey: "fileName")
+			self.uploadOperations = try values.decodeIfPresent([DeliveryFileUploadOperation].self, forKey: "uploadOperations")
+			self.fileSize = try values.decodeIfPresent(Int64.self, forKey: "fileSize")
+			self.assetType = try values.decodeIfPresent(AssetType.self, forKey: "assetType")
+			self.assetToken = try values.decodeIfPresent(String.self, forKey: "assetToken")
 		}
 
 		public func encode(to encoder: Encoder) throws {
 			var values = encoder.container(keyedBy: StringCodingKey.self)
 			try values.encodeIfPresent(assetDeliveryState, forKey: "assetDeliveryState")
-			try values.encodeIfPresent(assetToken, forKey: "assetToken")
-			try values.encodeIfPresent(assetType, forKey: "assetType")
-			try values.encodeIfPresent(fileName, forKey: "fileName")
-			try values.encodeIfPresent(fileSize, forKey: "fileSize")
-			try values.encodeIfPresent(sourceFileChecksums, forKey: "sourceFileChecksums")
-			try values.encodeIfPresent(uploadOperations, forKey: "uploadOperations")
 			try values.encodeIfPresent(uti, forKey: "uti")
+			try values.encodeIfPresent(sourceFileChecksums, forKey: "sourceFileChecksums")
+			try values.encodeIfPresent(fileName, forKey: "fileName")
+			try values.encodeIfPresent(uploadOperations, forKey: "uploadOperations")
+			try values.encodeIfPresent(fileSize, forKey: "fileSize")
+			try values.encodeIfPresent(assetType, forKey: "assetType")
+			try values.encodeIfPresent(assetToken, forKey: "assetToken")
 		}
 	}
 
@@ -73,25 +73,25 @@ public struct BuildUploadFile: Codable, Identifiable {
 		case buildUploadFiles
 	}
 
-	public init(attributes: Attributes? = nil, id: String, links: ResourceLinks? = nil, type: `Type`) {
-		self.attributes = attributes
+	public init(id: String, attributes: Attributes? = nil, links: ResourceLinks? = nil, type: `Type`) {
 		self.id = id
+		self.attributes = attributes
 		self.links = links
 		self.type = type
 	}
 
 	public init(from decoder: Decoder) throws {
 		let values = try decoder.container(keyedBy: StringCodingKey.self)
-		self.attributes = try values.decodeIfPresent(Attributes.self, forKey: "attributes")
 		self.id = try values.decode(String.self, forKey: "id")
+		self.attributes = try values.decodeIfPresent(Attributes.self, forKey: "attributes")
 		self.links = try values.decodeIfPresent(ResourceLinks.self, forKey: "links")
 		self.type = try values.decode(`Type`.self, forKey: "type")
 	}
 
 	public func encode(to encoder: Encoder) throws {
 		var values = encoder.container(keyedBy: StringCodingKey.self)
-		try values.encodeIfPresent(attributes, forKey: "attributes")
 		try values.encode(id, forKey: "id")
+		try values.encodeIfPresent(attributes, forKey: "attributes")
 		try values.encodeIfPresent(links, forKey: "links")
 		try values.encode(type, forKey: "type")
 	}

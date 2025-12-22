@@ -4,37 +4,37 @@
 import Foundation
 
 public struct BuildBundleFileSize: Codable, Identifiable {
-	public var attributes: Attributes?
 	public var id: String
 	public var links: ResourceLinks?
+	public var attributes: Attributes?
 	public var type: `Type`
 
 	public struct Attributes: Codable {
-		public var deviceModel: String?
-		public var downloadBytes: Int?
 		public var installBytes: Int?
+		public var downloadBytes: Int?
+		public var deviceModel: String?
 		public var osVersion: String?
 
-		public init(deviceModel: String? = nil, downloadBytes: Int? = nil, installBytes: Int? = nil, osVersion: String? = nil) {
-			self.deviceModel = deviceModel
-			self.downloadBytes = downloadBytes
+		public init(installBytes: Int? = nil, downloadBytes: Int? = nil, deviceModel: String? = nil, osVersion: String? = nil) {
 			self.installBytes = installBytes
+			self.downloadBytes = downloadBytes
+			self.deviceModel = deviceModel
 			self.osVersion = osVersion
 		}
 
 		public init(from decoder: Decoder) throws {
 			let values = try decoder.container(keyedBy: StringCodingKey.self)
-			self.deviceModel = try values.decodeIfPresent(String.self, forKey: "deviceModel")
-			self.downloadBytes = try values.decodeIfPresent(Int.self, forKey: "downloadBytes")
 			self.installBytes = try values.decodeIfPresent(Int.self, forKey: "installBytes")
+			self.downloadBytes = try values.decodeIfPresent(Int.self, forKey: "downloadBytes")
+			self.deviceModel = try values.decodeIfPresent(String.self, forKey: "deviceModel")
 			self.osVersion = try values.decodeIfPresent(String.self, forKey: "osVersion")
 		}
 
 		public func encode(to encoder: Encoder) throws {
 			var values = encoder.container(keyedBy: StringCodingKey.self)
-			try values.encodeIfPresent(deviceModel, forKey: "deviceModel")
-			try values.encodeIfPresent(downloadBytes, forKey: "downloadBytes")
 			try values.encodeIfPresent(installBytes, forKey: "installBytes")
+			try values.encodeIfPresent(downloadBytes, forKey: "downloadBytes")
+			try values.encodeIfPresent(deviceModel, forKey: "deviceModel")
 			try values.encodeIfPresent(osVersion, forKey: "osVersion")
 		}
 	}
@@ -43,26 +43,26 @@ public struct BuildBundleFileSize: Codable, Identifiable {
 		case buildBundleFileSizes
 	}
 
-	public init(attributes: Attributes? = nil, id: String, links: ResourceLinks? = nil, type: `Type`) {
-		self.attributes = attributes
+	public init(id: String, links: ResourceLinks? = nil, attributes: Attributes? = nil, type: `Type`) {
 		self.id = id
 		self.links = links
+		self.attributes = attributes
 		self.type = type
 	}
 
 	public init(from decoder: Decoder) throws {
 		let values = try decoder.container(keyedBy: StringCodingKey.self)
-		self.attributes = try values.decodeIfPresent(Attributes.self, forKey: "attributes")
 		self.id = try values.decode(String.self, forKey: "id")
 		self.links = try values.decodeIfPresent(ResourceLinks.self, forKey: "links")
+		self.attributes = try values.decodeIfPresent(Attributes.self, forKey: "attributes")
 		self.type = try values.decode(`Type`.self, forKey: "type")
 	}
 
 	public func encode(to encoder: Encoder) throws {
 		var values = encoder.container(keyedBy: StringCodingKey.self)
-		try values.encodeIfPresent(attributes, forKey: "attributes")
 		try values.encode(id, forKey: "id")
 		try values.encodeIfPresent(links, forKey: "links")
+		try values.encodeIfPresent(attributes, forKey: "attributes")
 		try values.encode(type, forKey: "type")
 	}
 }

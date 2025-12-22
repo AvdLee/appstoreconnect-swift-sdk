@@ -4,27 +4,27 @@
 import Foundation
 
 public struct PagedDocumentLinks: Codable {
-	public var first: String?
 	public var next: String?
+	public var first: String?
 	public var this: String
 
-	public init(first: String? = nil, next: String? = nil, this: String) {
-		self.first = first
+	public init(next: String? = nil, first: String? = nil, this: String) {
 		self.next = next
+		self.first = first
 		self.this = this
 	}
 
 	public init(from decoder: Decoder) throws {
 		let values = try decoder.container(keyedBy: StringCodingKey.self)
-		self.first = try values.decodeIfPresent(String.self, forKey: "first")
 		self.next = try values.decodeIfPresent(String.self, forKey: "next")
+		self.first = try values.decodeIfPresent(String.self, forKey: "first")
 		self.this = try values.decode(String.self, forKey: "self")
 	}
 
 	public func encode(to encoder: Encoder) throws {
 		var values = encoder.container(keyedBy: StringCodingKey.self)
-		try values.encodeIfPresent(first, forKey: "first")
 		try values.encodeIfPresent(next, forKey: "next")
+		try values.encodeIfPresent(first, forKey: "first")
 		try values.encode(this, forKey: "self")
 	}
 }

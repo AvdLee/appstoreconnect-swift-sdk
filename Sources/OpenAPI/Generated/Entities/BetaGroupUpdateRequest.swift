@@ -13,43 +13,43 @@ public struct BetaGroupUpdateRequest: Codable {
 
 		public struct Attributes: Codable {
 			public var isFeedbackEnabled: Bool?
-			public var isIosBuildsAvailableForAppleSiliconMac: Bool?
-			public var isIosBuildsAvailableForAppleVision: Bool?
-			public var name: String?
 			public var isPublicLinkEnabled: Bool?
-			public var publicLinkLimit: Int?
 			public var isPublicLinkLimitEnabled: Bool?
+			public var name: String?
+			public var isIosBuildsAvailableForAppleVision: Bool?
+			public var isIosBuildsAvailableForAppleSiliconMac: Bool?
+			public var publicLinkLimit: Int?
 
-			public init(isFeedbackEnabled: Bool? = nil, isIosBuildsAvailableForAppleSiliconMac: Bool? = nil, isIosBuildsAvailableForAppleVision: Bool? = nil, name: String? = nil, isPublicLinkEnabled: Bool? = nil, publicLinkLimit: Int? = nil, isPublicLinkLimitEnabled: Bool? = nil) {
+			public init(isFeedbackEnabled: Bool? = nil, isPublicLinkEnabled: Bool? = nil, isPublicLinkLimitEnabled: Bool? = nil, name: String? = nil, isIosBuildsAvailableForAppleVision: Bool? = nil, isIosBuildsAvailableForAppleSiliconMac: Bool? = nil, publicLinkLimit: Int? = nil) {
 				self.isFeedbackEnabled = isFeedbackEnabled
-				self.isIosBuildsAvailableForAppleSiliconMac = isIosBuildsAvailableForAppleSiliconMac
-				self.isIosBuildsAvailableForAppleVision = isIosBuildsAvailableForAppleVision
-				self.name = name
 				self.isPublicLinkEnabled = isPublicLinkEnabled
-				self.publicLinkLimit = publicLinkLimit
 				self.isPublicLinkLimitEnabled = isPublicLinkLimitEnabled
+				self.name = name
+				self.isIosBuildsAvailableForAppleVision = isIosBuildsAvailableForAppleVision
+				self.isIosBuildsAvailableForAppleSiliconMac = isIosBuildsAvailableForAppleSiliconMac
+				self.publicLinkLimit = publicLinkLimit
 			}
 
 			public init(from decoder: Decoder) throws {
 				let values = try decoder.container(keyedBy: StringCodingKey.self)
 				self.isFeedbackEnabled = try values.decodeIfPresent(Bool.self, forKey: "feedbackEnabled")
-				self.isIosBuildsAvailableForAppleSiliconMac = try values.decodeIfPresent(Bool.self, forKey: "iosBuildsAvailableForAppleSiliconMac")
-				self.isIosBuildsAvailableForAppleVision = try values.decodeIfPresent(Bool.self, forKey: "iosBuildsAvailableForAppleVision")
-				self.name = try values.decodeIfPresent(String.self, forKey: "name")
 				self.isPublicLinkEnabled = try values.decodeIfPresent(Bool.self, forKey: "publicLinkEnabled")
-				self.publicLinkLimit = try values.decodeIfPresent(Int.self, forKey: "publicLinkLimit")
 				self.isPublicLinkLimitEnabled = try values.decodeIfPresent(Bool.self, forKey: "publicLinkLimitEnabled")
+				self.name = try values.decodeIfPresent(String.self, forKey: "name")
+				self.isIosBuildsAvailableForAppleVision = try values.decodeIfPresent(Bool.self, forKey: "iosBuildsAvailableForAppleVision")
+				self.isIosBuildsAvailableForAppleSiliconMac = try values.decodeIfPresent(Bool.self, forKey: "iosBuildsAvailableForAppleSiliconMac")
+				self.publicLinkLimit = try values.decodeIfPresent(Int.self, forKey: "publicLinkLimit")
 			}
 
 			public func encode(to encoder: Encoder) throws {
 				var values = encoder.container(keyedBy: StringCodingKey.self)
 				try values.encodeIfPresent(isFeedbackEnabled, forKey: "feedbackEnabled")
-				try values.encodeIfPresent(isIosBuildsAvailableForAppleSiliconMac, forKey: "iosBuildsAvailableForAppleSiliconMac")
-				try values.encodeIfPresent(isIosBuildsAvailableForAppleVision, forKey: "iosBuildsAvailableForAppleVision")
-				try values.encodeIfPresent(name, forKey: "name")
 				try values.encodeIfPresent(isPublicLinkEnabled, forKey: "publicLinkEnabled")
-				try values.encodeIfPresent(publicLinkLimit, forKey: "publicLinkLimit")
 				try values.encodeIfPresent(isPublicLinkLimitEnabled, forKey: "publicLinkLimitEnabled")
+				try values.encodeIfPresent(name, forKey: "name")
+				try values.encodeIfPresent(isIosBuildsAvailableForAppleVision, forKey: "iosBuildsAvailableForAppleVision")
+				try values.encodeIfPresent(isIosBuildsAvailableForAppleSiliconMac, forKey: "iosBuildsAvailableForAppleSiliconMac")
+				try values.encodeIfPresent(publicLinkLimit, forKey: "publicLinkLimit")
 			}
 		}
 

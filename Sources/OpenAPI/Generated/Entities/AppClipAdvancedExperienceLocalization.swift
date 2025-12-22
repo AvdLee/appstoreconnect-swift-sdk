@@ -5,32 +5,32 @@ import Foundation
 
 public struct AppClipAdvancedExperienceLocalization: Codable, Identifiable {
 	public var attributes: Attributes?
-	public var id: String
-	public var links: ResourceLinks?
 	public var type: `Type`
+	public var links: ResourceLinks?
+	public var id: String
 
 	public struct Attributes: Codable {
-		public var language: AppClipAdvancedExperienceLanguage?
 		public var subtitle: String?
+		public var language: AppClipAdvancedExperienceLanguage?
 		public var title: String?
 
-		public init(language: AppClipAdvancedExperienceLanguage? = nil, subtitle: String? = nil, title: String? = nil) {
-			self.language = language
+		public init(subtitle: String? = nil, language: AppClipAdvancedExperienceLanguage? = nil, title: String? = nil) {
 			self.subtitle = subtitle
+			self.language = language
 			self.title = title
 		}
 
 		public init(from decoder: Decoder) throws {
 			let values = try decoder.container(keyedBy: StringCodingKey.self)
-			self.language = try values.decodeIfPresent(AppClipAdvancedExperienceLanguage.self, forKey: "language")
 			self.subtitle = try values.decodeIfPresent(String.self, forKey: "subtitle")
+			self.language = try values.decodeIfPresent(AppClipAdvancedExperienceLanguage.self, forKey: "language")
 			self.title = try values.decodeIfPresent(String.self, forKey: "title")
 		}
 
 		public func encode(to encoder: Encoder) throws {
 			var values = encoder.container(keyedBy: StringCodingKey.self)
-			try values.encodeIfPresent(language, forKey: "language")
 			try values.encodeIfPresent(subtitle, forKey: "subtitle")
+			try values.encodeIfPresent(language, forKey: "language")
 			try values.encodeIfPresent(title, forKey: "title")
 		}
 	}
@@ -39,26 +39,26 @@ public struct AppClipAdvancedExperienceLocalization: Codable, Identifiable {
 		case appClipAdvancedExperienceLocalizations
 	}
 
-	public init(attributes: Attributes? = nil, id: String, links: ResourceLinks? = nil, type: `Type`) {
+	public init(attributes: Attributes? = nil, type: `Type`, links: ResourceLinks? = nil, id: String) {
 		self.attributes = attributes
-		self.id = id
-		self.links = links
 		self.type = type
+		self.links = links
+		self.id = id
 	}
 
 	public init(from decoder: Decoder) throws {
 		let values = try decoder.container(keyedBy: StringCodingKey.self)
 		self.attributes = try values.decodeIfPresent(Attributes.self, forKey: "attributes")
-		self.id = try values.decode(String.self, forKey: "id")
-		self.links = try values.decodeIfPresent(ResourceLinks.self, forKey: "links")
 		self.type = try values.decode(`Type`.self, forKey: "type")
+		self.links = try values.decodeIfPresent(ResourceLinks.self, forKey: "links")
+		self.id = try values.decode(String.self, forKey: "id")
 	}
 
 	public func encode(to encoder: Encoder) throws {
 		var values = encoder.container(keyedBy: StringCodingKey.self)
 		try values.encodeIfPresent(attributes, forKey: "attributes")
-		try values.encode(id, forKey: "id")
-		try values.encodeIfPresent(links, forKey: "links")
 		try values.encode(type, forKey: "type")
+		try values.encodeIfPresent(links, forKey: "links")
+		try values.encode(id, forKey: "id")
 	}
 }

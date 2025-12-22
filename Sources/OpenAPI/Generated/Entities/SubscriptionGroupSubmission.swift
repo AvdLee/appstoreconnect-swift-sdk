@@ -5,30 +5,30 @@ import Foundation
 
 public struct SubscriptionGroupSubmission: Codable, Identifiable {
 	public var id: String
-	public var links: ResourceLinks?
 	public var type: `Type`
+	public var links: ResourceLinks?
 
 	public enum `Type`: String, Codable, CaseIterable {
 		case subscriptionGroupSubmissions
 	}
 
-	public init(id: String, links: ResourceLinks? = nil, type: `Type`) {
+	public init(id: String, type: `Type`, links: ResourceLinks? = nil) {
 		self.id = id
-		self.links = links
 		self.type = type
+		self.links = links
 	}
 
 	public init(from decoder: Decoder) throws {
 		let values = try decoder.container(keyedBy: StringCodingKey.self)
 		self.id = try values.decode(String.self, forKey: "id")
-		self.links = try values.decodeIfPresent(ResourceLinks.self, forKey: "links")
 		self.type = try values.decode(`Type`.self, forKey: "type")
+		self.links = try values.decodeIfPresent(ResourceLinks.self, forKey: "links")
 	}
 
 	public func encode(to encoder: Encoder) throws {
 		var values = encoder.container(keyedBy: StringCodingKey.self)
 		try values.encode(id, forKey: "id")
-		try values.encodeIfPresent(links, forKey: "links")
 		try values.encode(type, forKey: "type")
+		try values.encodeIfPresent(links, forKey: "links")
 	}
 }

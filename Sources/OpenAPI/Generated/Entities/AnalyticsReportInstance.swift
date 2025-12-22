@@ -4,39 +4,11 @@
 import Foundation
 
 public struct AnalyticsReportInstance: Codable, Identifiable {
-	public var attributes: Attributes?
-	public var id: String
-	public var links: ResourceLinks?
 	public var relationships: Relationships?
+	public var attributes: Attributes?
+	public var links: ResourceLinks?
 	public var type: `Type`
-
-	public struct Attributes: Codable {
-		public var granularity: Granularity?
-		public var processingDate: String?
-
-		public enum Granularity: String, Codable, CaseIterable {
-			case daily = "DAILY"
-			case weekly = "WEEKLY"
-			case monthly = "MONTHLY"
-		}
-
-		public init(granularity: Granularity? = nil, processingDate: String? = nil) {
-			self.granularity = granularity
-			self.processingDate = processingDate
-		}
-
-		public init(from decoder: Decoder) throws {
-			let values = try decoder.container(keyedBy: StringCodingKey.self)
-			self.granularity = try values.decodeIfPresent(Granularity.self, forKey: "granularity")
-			self.processingDate = try values.decodeIfPresent(String.self, forKey: "processingDate")
-		}
-
-		public func encode(to encoder: Encoder) throws {
-			var values = encoder.container(keyedBy: StringCodingKey.self)
-			try values.encodeIfPresent(granularity, forKey: "granularity")
-			try values.encodeIfPresent(processingDate, forKey: "processingDate")
-		}
-	}
+	public var id: String
 
 	public struct Relationships: Codable {
 		public var segments: Segments?
@@ -74,33 +46,61 @@ public struct AnalyticsReportInstance: Codable, Identifiable {
 		}
 	}
 
+	public struct Attributes: Codable {
+		public var granularity: Granularity?
+		public var processingDate: String?
+
+		public enum Granularity: String, Codable, CaseIterable {
+			case daily = "DAILY"
+			case weekly = "WEEKLY"
+			case monthly = "MONTHLY"
+		}
+
+		public init(granularity: Granularity? = nil, processingDate: String? = nil) {
+			self.granularity = granularity
+			self.processingDate = processingDate
+		}
+
+		public init(from decoder: Decoder) throws {
+			let values = try decoder.container(keyedBy: StringCodingKey.self)
+			self.granularity = try values.decodeIfPresent(Granularity.self, forKey: "granularity")
+			self.processingDate = try values.decodeIfPresent(String.self, forKey: "processingDate")
+		}
+
+		public func encode(to encoder: Encoder) throws {
+			var values = encoder.container(keyedBy: StringCodingKey.self)
+			try values.encodeIfPresent(granularity, forKey: "granularity")
+			try values.encodeIfPresent(processingDate, forKey: "processingDate")
+		}
+	}
+
 	public enum `Type`: String, Codable, CaseIterable {
 		case analyticsReportInstances
 	}
 
-	public init(attributes: Attributes? = nil, id: String, links: ResourceLinks? = nil, relationships: Relationships? = nil, type: `Type`) {
-		self.attributes = attributes
-		self.id = id
-		self.links = links
+	public init(relationships: Relationships? = nil, attributes: Attributes? = nil, links: ResourceLinks? = nil, type: `Type`, id: String) {
 		self.relationships = relationships
+		self.attributes = attributes
+		self.links = links
 		self.type = type
+		self.id = id
 	}
 
 	public init(from decoder: Decoder) throws {
 		let values = try decoder.container(keyedBy: StringCodingKey.self)
-		self.attributes = try values.decodeIfPresent(Attributes.self, forKey: "attributes")
-		self.id = try values.decode(String.self, forKey: "id")
-		self.links = try values.decodeIfPresent(ResourceLinks.self, forKey: "links")
 		self.relationships = try values.decodeIfPresent(Relationships.self, forKey: "relationships")
+		self.attributes = try values.decodeIfPresent(Attributes.self, forKey: "attributes")
+		self.links = try values.decodeIfPresent(ResourceLinks.self, forKey: "links")
 		self.type = try values.decode(`Type`.self, forKey: "type")
+		self.id = try values.decode(String.self, forKey: "id")
 	}
 
 	public func encode(to encoder: Encoder) throws {
 		var values = encoder.container(keyedBy: StringCodingKey.self)
-		try values.encodeIfPresent(attributes, forKey: "attributes")
-		try values.encode(id, forKey: "id")
-		try values.encodeIfPresent(links, forKey: "links")
 		try values.encodeIfPresent(relationships, forKey: "relationships")
+		try values.encodeIfPresent(attributes, forKey: "attributes")
+		try values.encodeIfPresent(links, forKey: "links")
 		try values.encode(type, forKey: "type")
+		try values.encode(id, forKey: "id")
 	}
 }

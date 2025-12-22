@@ -13,27 +13,27 @@ public struct GameCenterMatchmakingRuleUpdateRequest: Codable {
 
 		public struct Attributes: Codable {
 			public var description: String?
-			public var expression: String?
 			public var weight: Double?
+			public var expression: String?
 
-			public init(description: String? = nil, expression: String? = nil, weight: Double? = nil) {
+			public init(description: String? = nil, weight: Double? = nil, expression: String? = nil) {
 				self.description = description
-				self.expression = expression
 				self.weight = weight
+				self.expression = expression
 			}
 
 			public init(from decoder: Decoder) throws {
 				let values = try decoder.container(keyedBy: StringCodingKey.self)
 				self.description = try values.decodeIfPresent(String.self, forKey: "description")
-				self.expression = try values.decodeIfPresent(String.self, forKey: "expression")
 				self.weight = try values.decodeIfPresent(Double.self, forKey: "weight")
+				self.expression = try values.decodeIfPresent(String.self, forKey: "expression")
 			}
 
 			public func encode(to encoder: Encoder) throws {
 				var values = encoder.container(keyedBy: StringCodingKey.self)
 				try values.encodeIfPresent(description, forKey: "description")
-				try values.encodeIfPresent(expression, forKey: "expression")
 				try values.encodeIfPresent(weight, forKey: "weight")
+				try values.encodeIfPresent(expression, forKey: "expression")
 			}
 		}
 

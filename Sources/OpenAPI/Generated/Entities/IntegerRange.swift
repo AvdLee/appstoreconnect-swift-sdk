@@ -4,23 +4,23 @@
 import Foundation
 
 public struct IntegerRange: Codable {
-	public var maximum: Int?
 	public var minimum: Int?
+	public var maximum: Int?
 
-	public init(maximum: Int? = nil, minimum: Int? = nil) {
-		self.maximum = maximum
+	public init(minimum: Int? = nil, maximum: Int? = nil) {
 		self.minimum = minimum
+		self.maximum = maximum
 	}
 
 	public init(from decoder: Decoder) throws {
 		let values = try decoder.container(keyedBy: StringCodingKey.self)
-		self.maximum = try values.decodeIfPresent(Int.self, forKey: "maximum")
 		self.minimum = try values.decodeIfPresent(Int.self, forKey: "minimum")
+		self.maximum = try values.decodeIfPresent(Int.self, forKey: "maximum")
 	}
 
 	public func encode(to encoder: Encoder) throws {
 		var values = encoder.container(keyedBy: StringCodingKey.self)
-		try values.encodeIfPresent(maximum, forKey: "maximum")
 		try values.encodeIfPresent(minimum, forKey: "minimum")
+		try values.encodeIfPresent(maximum, forKey: "maximum")
 	}
 }

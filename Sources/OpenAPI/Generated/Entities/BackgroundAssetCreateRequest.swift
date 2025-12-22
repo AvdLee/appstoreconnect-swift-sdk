@@ -7,27 +7,9 @@ public struct BackgroundAssetCreateRequest: Codable {
 	public var data: Data
 
 	public struct Data: Codable {
-		public var attributes: Attributes
 		public var relationships: Relationships
 		public var type: `Type`
-
-		public struct Attributes: Codable {
-			public var assetPackIdentifier: String
-
-			public init(assetPackIdentifier: String) {
-				self.assetPackIdentifier = assetPackIdentifier
-			}
-
-			public init(from decoder: Decoder) throws {
-				let values = try decoder.container(keyedBy: StringCodingKey.self)
-				self.assetPackIdentifier = try values.decode(String.self, forKey: "assetPackIdentifier")
-			}
-
-			public func encode(to encoder: Encoder) throws {
-				var values = encoder.container(keyedBy: StringCodingKey.self)
-				try values.encode(assetPackIdentifier, forKey: "assetPackIdentifier")
-			}
-		}
+		public var attributes: Attributes
 
 		public struct Relationships: Codable {
 			public var app: App
@@ -95,24 +77,42 @@ public struct BackgroundAssetCreateRequest: Codable {
 			case backgroundAssets
 		}
 
-		public init(attributes: Attributes, relationships: Relationships, type: `Type`) {
-			self.attributes = attributes
+		public struct Attributes: Codable {
+			public var assetPackIdentifier: String
+
+			public init(assetPackIdentifier: String) {
+				self.assetPackIdentifier = assetPackIdentifier
+			}
+
+			public init(from decoder: Decoder) throws {
+				let values = try decoder.container(keyedBy: StringCodingKey.self)
+				self.assetPackIdentifier = try values.decode(String.self, forKey: "assetPackIdentifier")
+			}
+
+			public func encode(to encoder: Encoder) throws {
+				var values = encoder.container(keyedBy: StringCodingKey.self)
+				try values.encode(assetPackIdentifier, forKey: "assetPackIdentifier")
+			}
+		}
+
+		public init(relationships: Relationships, type: `Type`, attributes: Attributes) {
 			self.relationships = relationships
 			self.type = type
+			self.attributes = attributes
 		}
 
 		public init(from decoder: Decoder) throws {
 			let values = try decoder.container(keyedBy: StringCodingKey.self)
-			self.attributes = try values.decode(Attributes.self, forKey: "attributes")
 			self.relationships = try values.decode(Relationships.self, forKey: "relationships")
 			self.type = try values.decode(`Type`.self, forKey: "type")
+			self.attributes = try values.decode(Attributes.self, forKey: "attributes")
 		}
 
 		public func encode(to encoder: Encoder) throws {
 			var values = encoder.container(keyedBy: StringCodingKey.self)
-			try values.encode(attributes, forKey: "attributes")
 			try values.encode(relationships, forKey: "relationships")
 			try values.encode(type, forKey: "type")
+			try values.encode(attributes, forKey: "attributes")
 		}
 	}
 

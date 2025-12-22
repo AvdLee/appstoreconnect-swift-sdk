@@ -7,43 +7,9 @@ public struct WebhookCreateRequest: Codable {
 	public var data: Data
 
 	public struct Data: Codable {
-		public var attributes: Attributes
 		public var relationships: Relationships
 		public var type: `Type`
-
-		public struct Attributes: Codable {
-			public var isEnabled: Bool
-			public var eventTypes: [WebhookEventType]
-			public var name: String
-			public var secret: String
-			public var url: URL
-
-			public init(isEnabled: Bool, eventTypes: [WebhookEventType], name: String, secret: String, url: URL) {
-				self.isEnabled = isEnabled
-				self.eventTypes = eventTypes
-				self.name = name
-				self.secret = secret
-				self.url = url
-			}
-
-			public init(from decoder: Decoder) throws {
-				let values = try decoder.container(keyedBy: StringCodingKey.self)
-				self.isEnabled = try values.decode(Bool.self, forKey: "enabled")
-				self.eventTypes = try values.decode([WebhookEventType].self, forKey: "eventTypes")
-				self.name = try values.decode(String.self, forKey: "name")
-				self.secret = try values.decode(String.self, forKey: "secret")
-				self.url = try values.decode(URL.self, forKey: "url")
-			}
-
-			public func encode(to encoder: Encoder) throws {
-				var values = encoder.container(keyedBy: StringCodingKey.self)
-				try values.encode(isEnabled, forKey: "enabled")
-				try values.encode(eventTypes, forKey: "eventTypes")
-				try values.encode(name, forKey: "name")
-				try values.encode(secret, forKey: "secret")
-				try values.encode(url, forKey: "url")
-			}
-		}
+		public var attributes: Attributes
 
 		public struct Relationships: Codable {
 			public var app: App
@@ -111,24 +77,58 @@ public struct WebhookCreateRequest: Codable {
 			case webhooks
 		}
 
-		public init(attributes: Attributes, relationships: Relationships, type: `Type`) {
-			self.attributes = attributes
+		public struct Attributes: Codable {
+			public var secret: String
+			public var name: String
+			public var url: URL
+			public var isEnabled: Bool
+			public var eventTypes: [WebhookEventType]
+
+			public init(secret: String, name: String, url: URL, isEnabled: Bool, eventTypes: [WebhookEventType]) {
+				self.secret = secret
+				self.name = name
+				self.url = url
+				self.isEnabled = isEnabled
+				self.eventTypes = eventTypes
+			}
+
+			public init(from decoder: Decoder) throws {
+				let values = try decoder.container(keyedBy: StringCodingKey.self)
+				self.secret = try values.decode(String.self, forKey: "secret")
+				self.name = try values.decode(String.self, forKey: "name")
+				self.url = try values.decode(URL.self, forKey: "url")
+				self.isEnabled = try values.decode(Bool.self, forKey: "enabled")
+				self.eventTypes = try values.decode([WebhookEventType].self, forKey: "eventTypes")
+			}
+
+			public func encode(to encoder: Encoder) throws {
+				var values = encoder.container(keyedBy: StringCodingKey.self)
+				try values.encode(secret, forKey: "secret")
+				try values.encode(name, forKey: "name")
+				try values.encode(url, forKey: "url")
+				try values.encode(isEnabled, forKey: "enabled")
+				try values.encode(eventTypes, forKey: "eventTypes")
+			}
+		}
+
+		public init(relationships: Relationships, type: `Type`, attributes: Attributes) {
 			self.relationships = relationships
 			self.type = type
+			self.attributes = attributes
 		}
 
 		public init(from decoder: Decoder) throws {
 			let values = try decoder.container(keyedBy: StringCodingKey.self)
-			self.attributes = try values.decode(Attributes.self, forKey: "attributes")
 			self.relationships = try values.decode(Relationships.self, forKey: "relationships")
 			self.type = try values.decode(`Type`.self, forKey: "type")
+			self.attributes = try values.decode(Attributes.self, forKey: "attributes")
 		}
 
 		public func encode(to encoder: Encoder) throws {
 			var values = encoder.container(keyedBy: StringCodingKey.self)
-			try values.encode(attributes, forKey: "attributes")
 			try values.encode(relationships, forKey: "relationships")
 			try values.encode(type, forKey: "type")
+			try values.encode(attributes, forKey: "attributes")
 		}
 	}
 

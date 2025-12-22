@@ -4,53 +4,53 @@
 import Foundation
 
 public struct InAppPurchaseOfferCodePricesLinkagesResponse: Codable {
-	public var data: [Datum]
 	public var links: PagedDocumentLinks
 	public var meta: PagingInformation?
+	public var data: [Datum]
 
 	public struct Datum: Codable, Identifiable {
-		public var id: String
 		public var type: `Type`
+		public var id: String
 
 		public enum `Type`: String, Codable, CaseIterable {
 			case inAppPurchaseOfferPrices
 		}
 
-		public init(id: String, type: `Type`) {
-			self.id = id
+		public init(type: `Type`, id: String) {
 			self.type = type
+			self.id = id
 		}
 
 		public init(from decoder: Decoder) throws {
 			let values = try decoder.container(keyedBy: StringCodingKey.self)
-			self.id = try values.decode(String.self, forKey: "id")
 			self.type = try values.decode(`Type`.self, forKey: "type")
+			self.id = try values.decode(String.self, forKey: "id")
 		}
 
 		public func encode(to encoder: Encoder) throws {
 			var values = encoder.container(keyedBy: StringCodingKey.self)
-			try values.encode(id, forKey: "id")
 			try values.encode(type, forKey: "type")
+			try values.encode(id, forKey: "id")
 		}
 	}
 
-	public init(data: [Datum], links: PagedDocumentLinks, meta: PagingInformation? = nil) {
-		self.data = data
+	public init(links: PagedDocumentLinks, meta: PagingInformation? = nil, data: [Datum]) {
 		self.links = links
 		self.meta = meta
+		self.data = data
 	}
 
 	public init(from decoder: Decoder) throws {
 		let values = try decoder.container(keyedBy: StringCodingKey.self)
-		self.data = try values.decode([Datum].self, forKey: "data")
 		self.links = try values.decode(PagedDocumentLinks.self, forKey: "links")
 		self.meta = try values.decodeIfPresent(PagingInformation.self, forKey: "meta")
+		self.data = try values.decode([Datum].self, forKey: "data")
 	}
 
 	public func encode(to encoder: Encoder) throws {
 		var values = encoder.container(keyedBy: StringCodingKey.self)
-		try values.encode(data, forKey: "data")
 		try values.encode(links, forKey: "links")
 		try values.encodeIfPresent(meta, forKey: "meta")
+		try values.encode(data, forKey: "data")
 	}
 }

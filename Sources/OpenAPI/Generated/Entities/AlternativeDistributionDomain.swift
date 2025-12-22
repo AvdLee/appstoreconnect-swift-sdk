@@ -4,61 +4,61 @@
 import Foundation
 
 public struct AlternativeDistributionDomain: Codable, Identifiable {
-	public var attributes: Attributes?
+	public var type: `Type`
 	public var id: String
 	public var links: ResourceLinks?
-	public var type: `Type`
-
-	public struct Attributes: Codable {
-		public var createdDate: Date?
-		public var domain: String?
-		public var referenceName: String?
-
-		public init(createdDate: Date? = nil, domain: String? = nil, referenceName: String? = nil) {
-			self.createdDate = createdDate
-			self.domain = domain
-			self.referenceName = referenceName
-		}
-
-		public init(from decoder: Decoder) throws {
-			let values = try decoder.container(keyedBy: StringCodingKey.self)
-			self.createdDate = try values.decodeIfPresent(Date.self, forKey: "createdDate")
-			self.domain = try values.decodeIfPresent(String.self, forKey: "domain")
-			self.referenceName = try values.decodeIfPresent(String.self, forKey: "referenceName")
-		}
-
-		public func encode(to encoder: Encoder) throws {
-			var values = encoder.container(keyedBy: StringCodingKey.self)
-			try values.encodeIfPresent(createdDate, forKey: "createdDate")
-			try values.encodeIfPresent(domain, forKey: "domain")
-			try values.encodeIfPresent(referenceName, forKey: "referenceName")
-		}
-	}
+	public var attributes: Attributes?
 
 	public enum `Type`: String, Codable, CaseIterable {
 		case alternativeDistributionDomains
 	}
 
-	public init(attributes: Attributes? = nil, id: String, links: ResourceLinks? = nil, type: `Type`) {
-		self.attributes = attributes
+	public struct Attributes: Codable {
+		public var domain: String?
+		public var referenceName: String?
+		public var createdDate: Date?
+
+		public init(domain: String? = nil, referenceName: String? = nil, createdDate: Date? = nil) {
+			self.domain = domain
+			self.referenceName = referenceName
+			self.createdDate = createdDate
+		}
+
+		public init(from decoder: Decoder) throws {
+			let values = try decoder.container(keyedBy: StringCodingKey.self)
+			self.domain = try values.decodeIfPresent(String.self, forKey: "domain")
+			self.referenceName = try values.decodeIfPresent(String.self, forKey: "referenceName")
+			self.createdDate = try values.decodeIfPresent(Date.self, forKey: "createdDate")
+		}
+
+		public func encode(to encoder: Encoder) throws {
+			var values = encoder.container(keyedBy: StringCodingKey.self)
+			try values.encodeIfPresent(domain, forKey: "domain")
+			try values.encodeIfPresent(referenceName, forKey: "referenceName")
+			try values.encodeIfPresent(createdDate, forKey: "createdDate")
+		}
+	}
+
+	public init(type: `Type`, id: String, links: ResourceLinks? = nil, attributes: Attributes? = nil) {
+		self.type = type
 		self.id = id
 		self.links = links
-		self.type = type
+		self.attributes = attributes
 	}
 
 	public init(from decoder: Decoder) throws {
 		let values = try decoder.container(keyedBy: StringCodingKey.self)
-		self.attributes = try values.decodeIfPresent(Attributes.self, forKey: "attributes")
+		self.type = try values.decode(`Type`.self, forKey: "type")
 		self.id = try values.decode(String.self, forKey: "id")
 		self.links = try values.decodeIfPresent(ResourceLinks.self, forKey: "links")
-		self.type = try values.decode(`Type`.self, forKey: "type")
+		self.attributes = try values.decodeIfPresent(Attributes.self, forKey: "attributes")
 	}
 
 	public func encode(to encoder: Encoder) throws {
 		var values = encoder.container(keyedBy: StringCodingKey.self)
-		try values.encodeIfPresent(attributes, forKey: "attributes")
+		try values.encode(type, forKey: "type")
 		try values.encode(id, forKey: "id")
 		try values.encodeIfPresent(links, forKey: "links")
-		try values.encode(type, forKey: "type")
+		try values.encodeIfPresent(attributes, forKey: "attributes")
 	}
 }

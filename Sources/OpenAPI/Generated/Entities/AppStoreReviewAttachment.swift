@@ -4,45 +4,11 @@
 import Foundation
 
 public struct AppStoreReviewAttachment: Codable, Identifiable {
-	public var attributes: Attributes?
-	public var id: String
 	public var links: ResourceLinks?
+	public var id: String
 	public var relationships: Relationships?
+	public var attributes: Attributes?
 	public var type: `Type`
-
-	public struct Attributes: Codable {
-		public var assetDeliveryState: AppMediaAssetState?
-		public var fileName: String?
-		public var fileSize: Int?
-		public var sourceFileChecksum: String?
-		public var uploadOperations: [UploadOperation]?
-
-		public init(assetDeliveryState: AppMediaAssetState? = nil, fileName: String? = nil, fileSize: Int? = nil, sourceFileChecksum: String? = nil, uploadOperations: [UploadOperation]? = nil) {
-			self.assetDeliveryState = assetDeliveryState
-			self.fileName = fileName
-			self.fileSize = fileSize
-			self.sourceFileChecksum = sourceFileChecksum
-			self.uploadOperations = uploadOperations
-		}
-
-		public init(from decoder: Decoder) throws {
-			let values = try decoder.container(keyedBy: StringCodingKey.self)
-			self.assetDeliveryState = try values.decodeIfPresent(AppMediaAssetState.self, forKey: "assetDeliveryState")
-			self.fileName = try values.decodeIfPresent(String.self, forKey: "fileName")
-			self.fileSize = try values.decodeIfPresent(Int.self, forKey: "fileSize")
-			self.sourceFileChecksum = try values.decodeIfPresent(String.self, forKey: "sourceFileChecksum")
-			self.uploadOperations = try values.decodeIfPresent([UploadOperation].self, forKey: "uploadOperations")
-		}
-
-		public func encode(to encoder: Encoder) throws {
-			var values = encoder.container(keyedBy: StringCodingKey.self)
-			try values.encodeIfPresent(assetDeliveryState, forKey: "assetDeliveryState")
-			try values.encodeIfPresent(fileName, forKey: "fileName")
-			try values.encodeIfPresent(fileSize, forKey: "fileSize")
-			try values.encodeIfPresent(sourceFileChecksum, forKey: "sourceFileChecksum")
-			try values.encodeIfPresent(uploadOperations, forKey: "uploadOperations")
-		}
-	}
 
 	public struct Relationships: Codable {
 		public var appStoreReviewDetail: AppStoreReviewDetail?
@@ -106,33 +72,67 @@ public struct AppStoreReviewAttachment: Codable, Identifiable {
 		}
 	}
 
+	public struct Attributes: Codable {
+		public var sourceFileChecksum: String?
+		public var assetDeliveryState: AppMediaAssetState?
+		public var uploadOperations: [UploadOperation]?
+		public var fileName: String?
+		public var fileSize: Int?
+
+		public init(sourceFileChecksum: String? = nil, assetDeliveryState: AppMediaAssetState? = nil, uploadOperations: [UploadOperation]? = nil, fileName: String? = nil, fileSize: Int? = nil) {
+			self.sourceFileChecksum = sourceFileChecksum
+			self.assetDeliveryState = assetDeliveryState
+			self.uploadOperations = uploadOperations
+			self.fileName = fileName
+			self.fileSize = fileSize
+		}
+
+		public init(from decoder: Decoder) throws {
+			let values = try decoder.container(keyedBy: StringCodingKey.self)
+			self.sourceFileChecksum = try values.decodeIfPresent(String.self, forKey: "sourceFileChecksum")
+			self.assetDeliveryState = try values.decodeIfPresent(AppMediaAssetState.self, forKey: "assetDeliveryState")
+			self.uploadOperations = try values.decodeIfPresent([UploadOperation].self, forKey: "uploadOperations")
+			self.fileName = try values.decodeIfPresent(String.self, forKey: "fileName")
+			self.fileSize = try values.decodeIfPresent(Int.self, forKey: "fileSize")
+		}
+
+		public func encode(to encoder: Encoder) throws {
+			var values = encoder.container(keyedBy: StringCodingKey.self)
+			try values.encodeIfPresent(sourceFileChecksum, forKey: "sourceFileChecksum")
+			try values.encodeIfPresent(assetDeliveryState, forKey: "assetDeliveryState")
+			try values.encodeIfPresent(uploadOperations, forKey: "uploadOperations")
+			try values.encodeIfPresent(fileName, forKey: "fileName")
+			try values.encodeIfPresent(fileSize, forKey: "fileSize")
+		}
+	}
+
 	public enum `Type`: String, Codable, CaseIterable {
 		case appStoreReviewAttachments
 	}
 
-	public init(attributes: Attributes? = nil, id: String, links: ResourceLinks? = nil, relationships: Relationships? = nil, type: `Type`) {
-		self.attributes = attributes
-		self.id = id
+	public init(links: ResourceLinks? = nil, id: String, relationships: Relationships? = nil, attributes: Attributes? = nil, type: `Type`) {
 		self.links = links
+		self.id = id
 		self.relationships = relationships
+		self.attributes = attributes
 		self.type = type
 	}
 
 	public init(from decoder: Decoder) throws {
 		let values = try decoder.container(keyedBy: StringCodingKey.self)
-		self.attributes = try values.decodeIfPresent(Attributes.self, forKey: "attributes")
-		self.id = try values.decode(String.self, forKey: "id")
 		self.links = try values.decodeIfPresent(ResourceLinks.self, forKey: "links")
+		self.id = try values.decode(String.self, forKey: "id")
 		self.relationships = try values.decodeIfPresent(Relationships.self, forKey: "relationships")
+		self.attributes = try values.decodeIfPresent(Attributes.self, forKey: "attributes")
 		self.type = try values.decode(`Type`.self, forKey: "type")
 	}
 
 	public func encode(to encoder: Encoder) throws {
 		var values = encoder.container(keyedBy: StringCodingKey.self)
-		try values.encodeIfPresent(attributes, forKey: "attributes")
-		try values.encode(id, forKey: "id")
 		try values.encodeIfPresent(links, forKey: "links")
+		try values.encode(id, forKey: "id")
 		try values.encodeIfPresent(relationships, forKey: "relationships")
+		try values.encodeIfPresent(attributes, forKey: "attributes")
 		try values.encode(type, forKey: "type")
 	}
 }

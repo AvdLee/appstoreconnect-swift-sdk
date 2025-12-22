@@ -8,13 +8,13 @@ public struct SandboxTesterV2UpdateRequest: Codable {
 
 	public struct Data: Codable, Identifiable {
 		public var attributes: Attributes?
-		public var id: String
 		public var type: `Type`
+		public var id: String
 
 		public struct Attributes: Codable {
-			public var isInterruptPurchases: Bool?
 			public var subscriptionRenewalRate: SubscriptionRenewalRate?
 			public var territory: TerritoryCode?
+			public var isInterruptPurchases: Bool?
 
 			public enum SubscriptionRenewalRate: String, Codable, CaseIterable {
 				case monthlyRenewalEveryOneHour = "MONTHLY_RENEWAL_EVERY_ONE_HOUR"
@@ -24,24 +24,24 @@ public struct SandboxTesterV2UpdateRequest: Codable {
 				case monthlyRenewalEveryThreeMinutes = "MONTHLY_RENEWAL_EVERY_THREE_MINUTES"
 			}
 
-			public init(isInterruptPurchases: Bool? = nil, subscriptionRenewalRate: SubscriptionRenewalRate? = nil, territory: TerritoryCode? = nil) {
-				self.isInterruptPurchases = isInterruptPurchases
+			public init(subscriptionRenewalRate: SubscriptionRenewalRate? = nil, territory: TerritoryCode? = nil, isInterruptPurchases: Bool? = nil) {
 				self.subscriptionRenewalRate = subscriptionRenewalRate
 				self.territory = territory
+				self.isInterruptPurchases = isInterruptPurchases
 			}
 
 			public init(from decoder: Decoder) throws {
 				let values = try decoder.container(keyedBy: StringCodingKey.self)
-				self.isInterruptPurchases = try values.decodeIfPresent(Bool.self, forKey: "interruptPurchases")
 				self.subscriptionRenewalRate = try values.decodeIfPresent(SubscriptionRenewalRate.self, forKey: "subscriptionRenewalRate")
 				self.territory = try values.decodeIfPresent(TerritoryCode.self, forKey: "territory")
+				self.isInterruptPurchases = try values.decodeIfPresent(Bool.self, forKey: "interruptPurchases")
 			}
 
 			public func encode(to encoder: Encoder) throws {
 				var values = encoder.container(keyedBy: StringCodingKey.self)
-				try values.encodeIfPresent(isInterruptPurchases, forKey: "interruptPurchases")
 				try values.encodeIfPresent(subscriptionRenewalRate, forKey: "subscriptionRenewalRate")
 				try values.encodeIfPresent(territory, forKey: "territory")
+				try values.encodeIfPresent(isInterruptPurchases, forKey: "interruptPurchases")
 			}
 		}
 
@@ -49,24 +49,24 @@ public struct SandboxTesterV2UpdateRequest: Codable {
 			case sandboxTesters
 		}
 
-		public init(attributes: Attributes? = nil, id: String, type: `Type`) {
+		public init(attributes: Attributes? = nil, type: `Type`, id: String) {
 			self.attributes = attributes
-			self.id = id
 			self.type = type
+			self.id = id
 		}
 
 		public init(from decoder: Decoder) throws {
 			let values = try decoder.container(keyedBy: StringCodingKey.self)
 			self.attributes = try values.decodeIfPresent(Attributes.self, forKey: "attributes")
-			self.id = try values.decode(String.self, forKey: "id")
 			self.type = try values.decode(`Type`.self, forKey: "type")
+			self.id = try values.decode(String.self, forKey: "id")
 		}
 
 		public func encode(to encoder: Encoder) throws {
 			var values = encoder.container(keyedBy: StringCodingKey.self)
 			try values.encodeIfPresent(attributes, forKey: "attributes")
-			try values.encode(id, forKey: "id")
 			try values.encode(type, forKey: "type")
+			try values.encode(id, forKey: "id")
 		}
 	}
 

@@ -8,61 +8,61 @@ public struct AppUpdateRequest: Codable {
 
 	public struct Data: Codable, Identifiable {
 		public var attributes: Attributes?
-		public var id: String
 		public var type: `Type`
+		public var id: String
 
 		public struct Attributes: Codable {
-			public var accessibilityURL: URL?
-			public var bundleID: String?
-			public var contentRightsDeclaration: ContentRightsDeclaration?
-			public var primaryLocale: String?
-			public var isStreamlinedPurchasingEnabled: Bool?
 			public var subscriptionStatusURL: URL?
 			public var subscriptionStatusURLForSandbox: URL?
-			public var subscriptionStatusURLVersion: SubscriptionStatusURLVersion?
+			public var accessibilityURL: URL?
+			public var primaryLocale: String?
 			public var subscriptionStatusURLVersionForSandbox: SubscriptionStatusURLVersion?
+			public var subscriptionStatusURLVersion: SubscriptionStatusURLVersion?
+			public var isStreamlinedPurchasingEnabled: Bool?
+			public var contentRightsDeclaration: ContentRightsDeclaration?
+			public var bundleID: String?
 
 			public enum ContentRightsDeclaration: String, Codable, CaseIterable {
 				case doesNotUseThirdPartyContent = "DOES_NOT_USE_THIRD_PARTY_CONTENT"
 				case usesThirdPartyContent = "USES_THIRD_PARTY_CONTENT"
 			}
 
-			public init(accessibilityURL: URL? = nil, bundleID: String? = nil, contentRightsDeclaration: ContentRightsDeclaration? = nil, primaryLocale: String? = nil, isStreamlinedPurchasingEnabled: Bool? = nil, subscriptionStatusURL: URL? = nil, subscriptionStatusURLForSandbox: URL? = nil, subscriptionStatusURLVersion: SubscriptionStatusURLVersion? = nil, subscriptionStatusURLVersionForSandbox: SubscriptionStatusURLVersion? = nil) {
-				self.accessibilityURL = accessibilityURL
-				self.bundleID = bundleID
-				self.contentRightsDeclaration = contentRightsDeclaration
-				self.primaryLocale = primaryLocale
-				self.isStreamlinedPurchasingEnabled = isStreamlinedPurchasingEnabled
+			public init(subscriptionStatusURL: URL? = nil, subscriptionStatusURLForSandbox: URL? = nil, accessibilityURL: URL? = nil, primaryLocale: String? = nil, subscriptionStatusURLVersionForSandbox: SubscriptionStatusURLVersion? = nil, subscriptionStatusURLVersion: SubscriptionStatusURLVersion? = nil, isStreamlinedPurchasingEnabled: Bool? = nil, contentRightsDeclaration: ContentRightsDeclaration? = nil, bundleID: String? = nil) {
 				self.subscriptionStatusURL = subscriptionStatusURL
 				self.subscriptionStatusURLForSandbox = subscriptionStatusURLForSandbox
-				self.subscriptionStatusURLVersion = subscriptionStatusURLVersion
+				self.accessibilityURL = accessibilityURL
+				self.primaryLocale = primaryLocale
 				self.subscriptionStatusURLVersionForSandbox = subscriptionStatusURLVersionForSandbox
+				self.subscriptionStatusURLVersion = subscriptionStatusURLVersion
+				self.isStreamlinedPurchasingEnabled = isStreamlinedPurchasingEnabled
+				self.contentRightsDeclaration = contentRightsDeclaration
+				self.bundleID = bundleID
 			}
 
 			public init(from decoder: Decoder) throws {
 				let values = try decoder.container(keyedBy: StringCodingKey.self)
-				self.accessibilityURL = try values.decodeIfPresent(URL.self, forKey: "accessibilityUrl")
-				self.bundleID = try values.decodeIfPresent(String.self, forKey: "bundleId")
-				self.contentRightsDeclaration = try values.decodeIfPresent(ContentRightsDeclaration.self, forKey: "contentRightsDeclaration")
-				self.primaryLocale = try values.decodeIfPresent(String.self, forKey: "primaryLocale")
-				self.isStreamlinedPurchasingEnabled = try values.decodeIfPresent(Bool.self, forKey: "streamlinedPurchasingEnabled")
 				self.subscriptionStatusURL = try values.decodeIfPresent(URL.self, forKey: "subscriptionStatusUrl")
 				self.subscriptionStatusURLForSandbox = try values.decodeIfPresent(URL.self, forKey: "subscriptionStatusUrlForSandbox")
-				self.subscriptionStatusURLVersion = try values.decodeIfPresent(SubscriptionStatusURLVersion.self, forKey: "subscriptionStatusUrlVersion")
+				self.accessibilityURL = try values.decodeIfPresent(URL.self, forKey: "accessibilityUrl")
+				self.primaryLocale = try values.decodeIfPresent(String.self, forKey: "primaryLocale")
 				self.subscriptionStatusURLVersionForSandbox = try values.decodeIfPresent(SubscriptionStatusURLVersion.self, forKey: "subscriptionStatusUrlVersionForSandbox")
+				self.subscriptionStatusURLVersion = try values.decodeIfPresent(SubscriptionStatusURLVersion.self, forKey: "subscriptionStatusUrlVersion")
+				self.isStreamlinedPurchasingEnabled = try values.decodeIfPresent(Bool.self, forKey: "streamlinedPurchasingEnabled")
+				self.contentRightsDeclaration = try values.decodeIfPresent(ContentRightsDeclaration.self, forKey: "contentRightsDeclaration")
+				self.bundleID = try values.decodeIfPresent(String.self, forKey: "bundleId")
 			}
 
 			public func encode(to encoder: Encoder) throws {
 				var values = encoder.container(keyedBy: StringCodingKey.self)
-				try values.encodeIfPresent(accessibilityURL, forKey: "accessibilityUrl")
-				try values.encodeIfPresent(bundleID, forKey: "bundleId")
-				try values.encodeIfPresent(contentRightsDeclaration, forKey: "contentRightsDeclaration")
-				try values.encodeIfPresent(primaryLocale, forKey: "primaryLocale")
-				try values.encodeIfPresent(isStreamlinedPurchasingEnabled, forKey: "streamlinedPurchasingEnabled")
 				try values.encodeIfPresent(subscriptionStatusURL, forKey: "subscriptionStatusUrl")
 				try values.encodeIfPresent(subscriptionStatusURLForSandbox, forKey: "subscriptionStatusUrlForSandbox")
-				try values.encodeIfPresent(subscriptionStatusURLVersion, forKey: "subscriptionStatusUrlVersion")
+				try values.encodeIfPresent(accessibilityURL, forKey: "accessibilityUrl")
+				try values.encodeIfPresent(primaryLocale, forKey: "primaryLocale")
 				try values.encodeIfPresent(subscriptionStatusURLVersionForSandbox, forKey: "subscriptionStatusUrlVersionForSandbox")
+				try values.encodeIfPresent(subscriptionStatusURLVersion, forKey: "subscriptionStatusUrlVersion")
+				try values.encodeIfPresent(isStreamlinedPurchasingEnabled, forKey: "streamlinedPurchasingEnabled")
+				try values.encodeIfPresent(contentRightsDeclaration, forKey: "contentRightsDeclaration")
+				try values.encodeIfPresent(bundleID, forKey: "bundleId")
 			}
 		}
 
@@ -70,24 +70,24 @@ public struct AppUpdateRequest: Codable {
 			case apps
 		}
 
-		public init(attributes: Attributes? = nil, id: String, type: `Type`) {
+		public init(attributes: Attributes? = nil, type: `Type`, id: String) {
 			self.attributes = attributes
-			self.id = id
 			self.type = type
+			self.id = id
 		}
 
 		public init(from decoder: Decoder) throws {
 			let values = try decoder.container(keyedBy: StringCodingKey.self)
 			self.attributes = try values.decodeIfPresent(Attributes.self, forKey: "attributes")
-			self.id = try values.decode(String.self, forKey: "id")
 			self.type = try values.decode(`Type`.self, forKey: "type")
+			self.id = try values.decode(String.self, forKey: "id")
 		}
 
 		public func encode(to encoder: Encoder) throws {
 			var values = encoder.container(keyedBy: StringCodingKey.self)
 			try values.encodeIfPresent(attributes, forKey: "attributes")
-			try values.encode(id, forKey: "id")
 			try values.encode(type, forKey: "type")
+			try values.encode(id, forKey: "id")
 		}
 	}
 

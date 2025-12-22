@@ -4,23 +4,23 @@
 import Foundation
 
 public struct PreviewFrameImage: Codable {
-	public var image: ImageAsset?
 	public var state: AppMediaPreviewFrameImageState?
+	public var image: ImageAsset?
 
-	public init(image: ImageAsset? = nil, state: AppMediaPreviewFrameImageState? = nil) {
-		self.image = image
+	public init(state: AppMediaPreviewFrameImageState? = nil, image: ImageAsset? = nil) {
 		self.state = state
+		self.image = image
 	}
 
 	public init(from decoder: Decoder) throws {
 		let values = try decoder.container(keyedBy: StringCodingKey.self)
-		self.image = try values.decodeIfPresent(ImageAsset.self, forKey: "image")
 		self.state = try values.decodeIfPresent(AppMediaPreviewFrameImageState.self, forKey: "state")
+		self.image = try values.decodeIfPresent(ImageAsset.self, forKey: "image")
 	}
 
 	public func encode(to encoder: Encoder) throws {
 		var values = encoder.container(keyedBy: StringCodingKey.self)
-		try values.encodeIfPresent(image, forKey: "image")
 		try values.encodeIfPresent(state, forKey: "state")
+		try values.encodeIfPresent(image, forKey: "image")
 	}
 }

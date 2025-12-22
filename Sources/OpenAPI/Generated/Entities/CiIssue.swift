@@ -4,14 +4,18 @@
 import Foundation
 
 public struct CiIssue: Codable, Identifiable {
-	public var attributes: Attributes?
-	public var id: String
 	public var links: ResourceLinks?
+	public var id: String
 	public var type: `Type`
+	public var attributes: Attributes?
+
+	public enum `Type`: String, Codable, CaseIterable {
+		case ciIssues
+	}
 
 	public struct Attributes: Codable {
-		public var category: String?
 		public var fileSource: FileLocation?
+		public var category: String?
 		public var issueType: IssueType?
 		public var message: String?
 
@@ -22,54 +26,50 @@ public struct CiIssue: Codable, Identifiable {
 			case warning = "WARNING"
 		}
 
-		public init(category: String? = nil, fileSource: FileLocation? = nil, issueType: IssueType? = nil, message: String? = nil) {
-			self.category = category
+		public init(fileSource: FileLocation? = nil, category: String? = nil, issueType: IssueType? = nil, message: String? = nil) {
 			self.fileSource = fileSource
+			self.category = category
 			self.issueType = issueType
 			self.message = message
 		}
 
 		public init(from decoder: Decoder) throws {
 			let values = try decoder.container(keyedBy: StringCodingKey.self)
-			self.category = try values.decodeIfPresent(String.self, forKey: "category")
 			self.fileSource = try values.decodeIfPresent(FileLocation.self, forKey: "fileSource")
+			self.category = try values.decodeIfPresent(String.self, forKey: "category")
 			self.issueType = try values.decodeIfPresent(IssueType.self, forKey: "issueType")
 			self.message = try values.decodeIfPresent(String.self, forKey: "message")
 		}
 
 		public func encode(to encoder: Encoder) throws {
 			var values = encoder.container(keyedBy: StringCodingKey.self)
-			try values.encodeIfPresent(category, forKey: "category")
 			try values.encodeIfPresent(fileSource, forKey: "fileSource")
+			try values.encodeIfPresent(category, forKey: "category")
 			try values.encodeIfPresent(issueType, forKey: "issueType")
 			try values.encodeIfPresent(message, forKey: "message")
 		}
 	}
 
-	public enum `Type`: String, Codable, CaseIterable {
-		case ciIssues
-	}
-
-	public init(attributes: Attributes? = nil, id: String, links: ResourceLinks? = nil, type: `Type`) {
-		self.attributes = attributes
-		self.id = id
+	public init(links: ResourceLinks? = nil, id: String, type: `Type`, attributes: Attributes? = nil) {
 		self.links = links
+		self.id = id
 		self.type = type
+		self.attributes = attributes
 	}
 
 	public init(from decoder: Decoder) throws {
 		let values = try decoder.container(keyedBy: StringCodingKey.self)
-		self.attributes = try values.decodeIfPresent(Attributes.self, forKey: "attributes")
-		self.id = try values.decode(String.self, forKey: "id")
 		self.links = try values.decodeIfPresent(ResourceLinks.self, forKey: "links")
+		self.id = try values.decode(String.self, forKey: "id")
 		self.type = try values.decode(`Type`.self, forKey: "type")
+		self.attributes = try values.decodeIfPresent(Attributes.self, forKey: "attributes")
 	}
 
 	public func encode(to encoder: Encoder) throws {
 		var values = encoder.container(keyedBy: StringCodingKey.self)
-		try values.encodeIfPresent(attributes, forKey: "attributes")
-		try values.encode(id, forKey: "id")
 		try values.encodeIfPresent(links, forKey: "links")
+		try values.encode(id, forKey: "id")
 		try values.encode(type, forKey: "type")
+		try values.encodeIfPresent(attributes, forKey: "attributes")
 	}
 }

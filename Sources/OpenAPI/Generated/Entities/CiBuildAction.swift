@@ -5,64 +5,64 @@ import Foundation
 
 public struct CiBuildAction: Codable, Identifiable {
 	public var attributes: Attributes?
-	public var id: String
 	public var links: ResourceLinks?
+	public var id: String
 	public var relationships: Relationships?
 	public var type: `Type`
 
 	public struct Attributes: Codable {
 		public var actionType: CiActionType?
-		public var completionStatus: CiCompletionStatus?
-		public var executionProgress: CiExecutionProgress?
-		public var finishedDate: Date?
 		public var isRequiredToPass: Bool?
 		public var issueCounts: CiIssueCounts?
-		public var name: String?
 		public var startedDate: Date?
+		public var completionStatus: CiCompletionStatus?
+		public var finishedDate: Date?
+		public var name: String?
+		public var executionProgress: CiExecutionProgress?
 
-		public init(actionType: CiActionType? = nil, completionStatus: CiCompletionStatus? = nil, executionProgress: CiExecutionProgress? = nil, finishedDate: Date? = nil, isRequiredToPass: Bool? = nil, issueCounts: CiIssueCounts? = nil, name: String? = nil, startedDate: Date? = nil) {
+		public init(actionType: CiActionType? = nil, isRequiredToPass: Bool? = nil, issueCounts: CiIssueCounts? = nil, startedDate: Date? = nil, completionStatus: CiCompletionStatus? = nil, finishedDate: Date? = nil, name: String? = nil, executionProgress: CiExecutionProgress? = nil) {
 			self.actionType = actionType
-			self.completionStatus = completionStatus
-			self.executionProgress = executionProgress
-			self.finishedDate = finishedDate
 			self.isRequiredToPass = isRequiredToPass
 			self.issueCounts = issueCounts
-			self.name = name
 			self.startedDate = startedDate
+			self.completionStatus = completionStatus
+			self.finishedDate = finishedDate
+			self.name = name
+			self.executionProgress = executionProgress
 		}
 
 		public init(from decoder: Decoder) throws {
 			let values = try decoder.container(keyedBy: StringCodingKey.self)
 			self.actionType = try values.decodeIfPresent(CiActionType.self, forKey: "actionType")
-			self.completionStatus = try values.decodeIfPresent(CiCompletionStatus.self, forKey: "completionStatus")
-			self.executionProgress = try values.decodeIfPresent(CiExecutionProgress.self, forKey: "executionProgress")
-			self.finishedDate = try values.decodeIfPresent(Date.self, forKey: "finishedDate")
 			self.isRequiredToPass = try values.decodeIfPresent(Bool.self, forKey: "isRequiredToPass")
 			self.issueCounts = try values.decodeIfPresent(CiIssueCounts.self, forKey: "issueCounts")
-			self.name = try values.decodeIfPresent(String.self, forKey: "name")
 			self.startedDate = try values.decodeIfPresent(Date.self, forKey: "startedDate")
+			self.completionStatus = try values.decodeIfPresent(CiCompletionStatus.self, forKey: "completionStatus")
+			self.finishedDate = try values.decodeIfPresent(Date.self, forKey: "finishedDate")
+			self.name = try values.decodeIfPresent(String.self, forKey: "name")
+			self.executionProgress = try values.decodeIfPresent(CiExecutionProgress.self, forKey: "executionProgress")
 		}
 
 		public func encode(to encoder: Encoder) throws {
 			var values = encoder.container(keyedBy: StringCodingKey.self)
 			try values.encodeIfPresent(actionType, forKey: "actionType")
-			try values.encodeIfPresent(completionStatus, forKey: "completionStatus")
-			try values.encodeIfPresent(executionProgress, forKey: "executionProgress")
-			try values.encodeIfPresent(finishedDate, forKey: "finishedDate")
 			try values.encodeIfPresent(isRequiredToPass, forKey: "isRequiredToPass")
 			try values.encodeIfPresent(issueCounts, forKey: "issueCounts")
-			try values.encodeIfPresent(name, forKey: "name")
 			try values.encodeIfPresent(startedDate, forKey: "startedDate")
+			try values.encodeIfPresent(completionStatus, forKey: "completionStatus")
+			try values.encodeIfPresent(finishedDate, forKey: "finishedDate")
+			try values.encodeIfPresent(name, forKey: "name")
+			try values.encodeIfPresent(executionProgress, forKey: "executionProgress")
 		}
 	}
 
 	public struct Relationships: Codable {
-		public var artifacts: Artifacts?
-		public var buildRun: BuildRun?
 		public var issues: Issues?
+		public var buildRun: BuildRun?
 		public var testResults: TestResults?
+		public var artifacts: Artifacts?
 
-		public struct Artifacts: Codable {
+		public struct Issues: Codable {
 			public var links: RelationshipLinks?
 
 			public init(links: RelationshipLinks? = nil) {
@@ -81,8 +81,8 @@ public struct CiBuildAction: Codable, Identifiable {
 		}
 
 		public struct BuildRun: Codable {
-			public var data: Data?
 			public var links: RelationshipLinks?
+			public var data: Data?
 
 			public struct Data: Codable, Identifiable {
 				public var id: String
@@ -110,39 +110,21 @@ public struct CiBuildAction: Codable, Identifiable {
 				}
 			}
 
-			public init(data: Data? = nil, links: RelationshipLinks? = nil) {
+			public init(links: RelationshipLinks? = nil, data: Data? = nil) {
+				self.links = links
 				self.data = data
-				self.links = links
 			}
 
 			public init(from decoder: Decoder) throws {
 				let values = try decoder.container(keyedBy: StringCodingKey.self)
+				self.links = try values.decodeIfPresent(RelationshipLinks.self, forKey: "links")
 				self.data = try values.decodeIfPresent(Data.self, forKey: "data")
-				self.links = try values.decodeIfPresent(RelationshipLinks.self, forKey: "links")
 			}
 
 			public func encode(to encoder: Encoder) throws {
 				var values = encoder.container(keyedBy: StringCodingKey.self)
+				try values.encodeIfPresent(links, forKey: "links")
 				try values.encodeIfPresent(data, forKey: "data")
-				try values.encodeIfPresent(links, forKey: "links")
-			}
-		}
-
-		public struct Issues: Codable {
-			public var links: RelationshipLinks?
-
-			public init(links: RelationshipLinks? = nil) {
-				self.links = links
-			}
-
-			public init(from decoder: Decoder) throws {
-				let values = try decoder.container(keyedBy: StringCodingKey.self)
-				self.links = try values.decodeIfPresent(RelationshipLinks.self, forKey: "links")
-			}
-
-			public func encode(to encoder: Encoder) throws {
-				var values = encoder.container(keyedBy: StringCodingKey.self)
-				try values.encodeIfPresent(links, forKey: "links")
 			}
 		}
 
@@ -164,27 +146,45 @@ public struct CiBuildAction: Codable, Identifiable {
 			}
 		}
 
-		public init(artifacts: Artifacts? = nil, buildRun: BuildRun? = nil, issues: Issues? = nil, testResults: TestResults? = nil) {
-			self.artifacts = artifacts
-			self.buildRun = buildRun
+		public struct Artifacts: Codable {
+			public var links: RelationshipLinks?
+
+			public init(links: RelationshipLinks? = nil) {
+				self.links = links
+			}
+
+			public init(from decoder: Decoder) throws {
+				let values = try decoder.container(keyedBy: StringCodingKey.self)
+				self.links = try values.decodeIfPresent(RelationshipLinks.self, forKey: "links")
+			}
+
+			public func encode(to encoder: Encoder) throws {
+				var values = encoder.container(keyedBy: StringCodingKey.self)
+				try values.encodeIfPresent(links, forKey: "links")
+			}
+		}
+
+		public init(issues: Issues? = nil, buildRun: BuildRun? = nil, testResults: TestResults? = nil, artifacts: Artifacts? = nil) {
 			self.issues = issues
+			self.buildRun = buildRun
 			self.testResults = testResults
+			self.artifacts = artifacts
 		}
 
 		public init(from decoder: Decoder) throws {
 			let values = try decoder.container(keyedBy: StringCodingKey.self)
-			self.artifacts = try values.decodeIfPresent(Artifacts.self, forKey: "artifacts")
-			self.buildRun = try values.decodeIfPresent(BuildRun.self, forKey: "buildRun")
 			self.issues = try values.decodeIfPresent(Issues.self, forKey: "issues")
+			self.buildRun = try values.decodeIfPresent(BuildRun.self, forKey: "buildRun")
 			self.testResults = try values.decodeIfPresent(TestResults.self, forKey: "testResults")
+			self.artifacts = try values.decodeIfPresent(Artifacts.self, forKey: "artifacts")
 		}
 
 		public func encode(to encoder: Encoder) throws {
 			var values = encoder.container(keyedBy: StringCodingKey.self)
-			try values.encodeIfPresent(artifacts, forKey: "artifacts")
-			try values.encodeIfPresent(buildRun, forKey: "buildRun")
 			try values.encodeIfPresent(issues, forKey: "issues")
+			try values.encodeIfPresent(buildRun, forKey: "buildRun")
 			try values.encodeIfPresent(testResults, forKey: "testResults")
+			try values.encodeIfPresent(artifacts, forKey: "artifacts")
 		}
 	}
 
@@ -192,10 +192,10 @@ public struct CiBuildAction: Codable, Identifiable {
 		case ciBuildActions
 	}
 
-	public init(attributes: Attributes? = nil, id: String, links: ResourceLinks? = nil, relationships: Relationships? = nil, type: `Type`) {
+	public init(attributes: Attributes? = nil, links: ResourceLinks? = nil, id: String, relationships: Relationships? = nil, type: `Type`) {
 		self.attributes = attributes
-		self.id = id
 		self.links = links
+		self.id = id
 		self.relationships = relationships
 		self.type = type
 	}
@@ -203,8 +203,8 @@ public struct CiBuildAction: Codable, Identifiable {
 	public init(from decoder: Decoder) throws {
 		let values = try decoder.container(keyedBy: StringCodingKey.self)
 		self.attributes = try values.decodeIfPresent(Attributes.self, forKey: "attributes")
-		self.id = try values.decode(String.self, forKey: "id")
 		self.links = try values.decodeIfPresent(ResourceLinks.self, forKey: "links")
+		self.id = try values.decode(String.self, forKey: "id")
 		self.relationships = try values.decodeIfPresent(Relationships.self, forKey: "relationships")
 		self.type = try values.decode(`Type`.self, forKey: "type")
 	}
@@ -212,8 +212,8 @@ public struct CiBuildAction: Codable, Identifiable {
 	public func encode(to encoder: Encoder) throws {
 		var values = encoder.container(keyedBy: StringCodingKey.self)
 		try values.encodeIfPresent(attributes, forKey: "attributes")
-		try values.encode(id, forKey: "id")
 		try values.encodeIfPresent(links, forKey: "links")
+		try values.encode(id, forKey: "id")
 		try values.encodeIfPresent(relationships, forKey: "relationships")
 		try values.encode(type, forKey: "type")
 	}

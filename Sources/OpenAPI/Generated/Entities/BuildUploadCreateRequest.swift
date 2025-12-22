@@ -7,35 +7,9 @@ public struct BuildUploadCreateRequest: Codable {
 	public var data: Data
 
 	public struct Data: Codable {
-		public var attributes: Attributes
 		public var relationships: Relationships
+		public var attributes: Attributes
 		public var type: `Type`
-
-		public struct Attributes: Codable {
-			public var cfBundleShortVersionString: String
-			public var cfBundleVersion: String
-			public var platform: Platform
-
-			public init(cfBundleShortVersionString: String, cfBundleVersion: String, platform: Platform) {
-				self.cfBundleShortVersionString = cfBundleShortVersionString
-				self.cfBundleVersion = cfBundleVersion
-				self.platform = platform
-			}
-
-			public init(from decoder: Decoder) throws {
-				let values = try decoder.container(keyedBy: StringCodingKey.self)
-				self.cfBundleShortVersionString = try values.decode(String.self, forKey: "cfBundleShortVersionString")
-				self.cfBundleVersion = try values.decode(String.self, forKey: "cfBundleVersion")
-				self.platform = try values.decode(Platform.self, forKey: "platform")
-			}
-
-			public func encode(to encoder: Encoder) throws {
-				var values = encoder.container(keyedBy: StringCodingKey.self)
-				try values.encode(cfBundleShortVersionString, forKey: "cfBundleShortVersionString")
-				try values.encode(cfBundleVersion, forKey: "cfBundleVersion")
-				try values.encode(platform, forKey: "platform")
-			}
-		}
 
 		public struct Relationships: Codable {
 			public var app: App
@@ -44,28 +18,28 @@ public struct BuildUploadCreateRequest: Codable {
 				public var data: Data
 
 				public struct Data: Codable, Identifiable {
-					public var id: String
 					public var type: `Type`
+					public var id: String
 
 					public enum `Type`: String, Codable, CaseIterable {
 						case apps
 					}
 
-					public init(id: String, type: `Type`) {
-						self.id = id
+					public init(type: `Type`, id: String) {
 						self.type = type
+						self.id = id
 					}
 
 					public init(from decoder: Decoder) throws {
 						let values = try decoder.container(keyedBy: StringCodingKey.self)
-						self.id = try values.decode(String.self, forKey: "id")
 						self.type = try values.decode(`Type`.self, forKey: "type")
+						self.id = try values.decode(String.self, forKey: "id")
 					}
 
 					public func encode(to encoder: Encoder) throws {
 						var values = encoder.container(keyedBy: StringCodingKey.self)
-						try values.encode(id, forKey: "id")
 						try values.encode(type, forKey: "type")
+						try values.encode(id, forKey: "id")
 					}
 				}
 
@@ -99,27 +73,53 @@ public struct BuildUploadCreateRequest: Codable {
 			}
 		}
 
+		public struct Attributes: Codable {
+			public var platform: Platform
+			public var cfBundleVersion: String
+			public var cfBundleShortVersionString: String
+
+			public init(platform: Platform, cfBundleVersion: String, cfBundleShortVersionString: String) {
+				self.platform = platform
+				self.cfBundleVersion = cfBundleVersion
+				self.cfBundleShortVersionString = cfBundleShortVersionString
+			}
+
+			public init(from decoder: Decoder) throws {
+				let values = try decoder.container(keyedBy: StringCodingKey.self)
+				self.platform = try values.decode(Platform.self, forKey: "platform")
+				self.cfBundleVersion = try values.decode(String.self, forKey: "cfBundleVersion")
+				self.cfBundleShortVersionString = try values.decode(String.self, forKey: "cfBundleShortVersionString")
+			}
+
+			public func encode(to encoder: Encoder) throws {
+				var values = encoder.container(keyedBy: StringCodingKey.self)
+				try values.encode(platform, forKey: "platform")
+				try values.encode(cfBundleVersion, forKey: "cfBundleVersion")
+				try values.encode(cfBundleShortVersionString, forKey: "cfBundleShortVersionString")
+			}
+		}
+
 		public enum `Type`: String, Codable, CaseIterable {
 			case buildUploads
 		}
 
-		public init(attributes: Attributes, relationships: Relationships, type: `Type`) {
-			self.attributes = attributes
+		public init(relationships: Relationships, attributes: Attributes, type: `Type`) {
 			self.relationships = relationships
+			self.attributes = attributes
 			self.type = type
 		}
 
 		public init(from decoder: Decoder) throws {
 			let values = try decoder.container(keyedBy: StringCodingKey.self)
-			self.attributes = try values.decode(Attributes.self, forKey: "attributes")
 			self.relationships = try values.decode(Relationships.self, forKey: "relationships")
+			self.attributes = try values.decode(Attributes.self, forKey: "attributes")
 			self.type = try values.decode(`Type`.self, forKey: "type")
 		}
 
 		public func encode(to encoder: Encoder) throws {
 			var values = encoder.container(keyedBy: StringCodingKey.self)
-			try values.encode(attributes, forKey: "attributes")
 			try values.encode(relationships, forKey: "relationships")
+			try values.encode(attributes, forKey: "attributes")
 			try values.encode(type, forKey: "type")
 		}
 	}

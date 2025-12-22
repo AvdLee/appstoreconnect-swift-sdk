@@ -6,29 +6,29 @@ import Foundation
 public struct TerritoryAvailabilitiesResponse: Codable {
 	public var data: [TerritoryAvailability]
 	public var included: [Territory]?
-	public var links: PagedDocumentLinks
 	public var meta: PagingInformation?
+	public var links: PagedDocumentLinks
 
-	public init(data: [TerritoryAvailability], included: [Territory]? = nil, links: PagedDocumentLinks, meta: PagingInformation? = nil) {
+	public init(data: [TerritoryAvailability], included: [Territory]? = nil, meta: PagingInformation? = nil, links: PagedDocumentLinks) {
 		self.data = data
 		self.included = included
-		self.links = links
 		self.meta = meta
+		self.links = links
 	}
 
 	public init(from decoder: Decoder) throws {
 		let values = try decoder.container(keyedBy: StringCodingKey.self)
 		self.data = try values.decode([TerritoryAvailability].self, forKey: "data")
 		self.included = try values.decodeIfPresent([Territory].self, forKey: "included")
-		self.links = try values.decode(PagedDocumentLinks.self, forKey: "links")
 		self.meta = try values.decodeIfPresent(PagingInformation.self, forKey: "meta")
+		self.links = try values.decode(PagedDocumentLinks.self, forKey: "links")
 	}
 
 	public func encode(to encoder: Encoder) throws {
 		var values = encoder.container(keyedBy: StringCodingKey.self)
 		try values.encode(data, forKey: "data")
 		try values.encodeIfPresent(included, forKey: "included")
-		try values.encode(links, forKey: "links")
 		try values.encodeIfPresent(meta, forKey: "meta")
+		try values.encode(links, forKey: "links")
 	}
 }

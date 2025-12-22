@@ -4,8 +4,8 @@
 import Foundation
 
 public struct AppAppAvailabilityV2LinkageResponse: Codable {
-	public var data: Data
 	public var links: DocumentLinks
+	public var data: Data
 
 	public struct Data: Codable, Identifiable {
 		public var id: String
@@ -33,20 +33,20 @@ public struct AppAppAvailabilityV2LinkageResponse: Codable {
 		}
 	}
 
-	public init(data: Data, links: DocumentLinks) {
-		self.data = data
+	public init(links: DocumentLinks, data: Data) {
 		self.links = links
+		self.data = data
 	}
 
 	public init(from decoder: Decoder) throws {
 		let values = try decoder.container(keyedBy: StringCodingKey.self)
-		self.data = try values.decode(Data.self, forKey: "data")
 		self.links = try values.decode(DocumentLinks.self, forKey: "links")
+		self.data = try values.decode(Data.self, forKey: "data")
 	}
 
 	public func encode(to encoder: Encoder) throws {
 		var values = encoder.container(keyedBy: StringCodingKey.self)
-		try values.encode(data, forKey: "data")
 		try values.encode(links, forKey: "links")
+		try values.encode(data, forKey: "data")
 	}
 }

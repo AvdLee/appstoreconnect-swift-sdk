@@ -12,24 +12,24 @@ public struct BuildUploadFileUpdateRequest: Codable {
 		public var type: `Type`
 
 		public struct Attributes: Codable {
-			public var sourceFileChecksums: Checksums?
 			public var isUploaded: Bool?
+			public var sourceFileChecksums: Checksums?
 
-			public init(sourceFileChecksums: Checksums? = nil, isUploaded: Bool? = nil) {
-				self.sourceFileChecksums = sourceFileChecksums
+			public init(isUploaded: Bool? = nil, sourceFileChecksums: Checksums? = nil) {
 				self.isUploaded = isUploaded
+				self.sourceFileChecksums = sourceFileChecksums
 			}
 
 			public init(from decoder: Decoder) throws {
 				let values = try decoder.container(keyedBy: StringCodingKey.self)
-				self.sourceFileChecksums = try values.decodeIfPresent(Checksums.self, forKey: "sourceFileChecksums")
 				self.isUploaded = try values.decodeIfPresent(Bool.self, forKey: "uploaded")
+				self.sourceFileChecksums = try values.decodeIfPresent(Checksums.self, forKey: "sourceFileChecksums")
 			}
 
 			public func encode(to encoder: Encoder) throws {
 				var values = encoder.container(keyedBy: StringCodingKey.self)
-				try values.encodeIfPresent(sourceFileChecksums, forKey: "sourceFileChecksums")
 				try values.encodeIfPresent(isUploaded, forKey: "uploaded")
+				try values.encodeIfPresent(sourceFileChecksums, forKey: "sourceFileChecksums")
 			}
 		}
 

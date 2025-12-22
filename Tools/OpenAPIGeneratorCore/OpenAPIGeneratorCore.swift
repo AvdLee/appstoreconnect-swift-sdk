@@ -104,17 +104,11 @@ public enum OpenAPIGeneratorCore {
         
         let upstreamResult = try SpecPatcher.patch(&root)
         
-        // Deterministic output: stable key ordering + stable whitespace.
+        // Keep output closer to upstream ordering (CreateAPI output can be order-sensitive).
         let outData = try JSONSerialization.data(
             withJSONObject: root,
-            options: [.prettyPrinted, .withoutEscapingSlashes, .sortedKeys]
+            options: [.prettyPrinted, .withoutEscapingSlashes]
         )
-        
-        // Avoid touching the file if content is identical (keeps git diffs clean).
-        if let existing = try? Data(contentsOf: specURL), existing == outData {
-            // Nothing changed on disk, even if upstream raw spec still requires patching.
-            return .init(didChange: false, changes: [], rules: upstreamResult.rules)
-        }
         
         try outData.write(to: specURL, options: [.atomic])
         return upstreamResult

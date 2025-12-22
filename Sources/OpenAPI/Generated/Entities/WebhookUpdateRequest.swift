@@ -8,21 +8,21 @@ public struct WebhookUpdateRequest: Codable {
 
 	public struct Data: Codable, Identifiable {
 		public var attributes: Attributes?
-		public var id: String
 		public var type: `Type`
+		public var id: String
 
 		public struct Attributes: Codable {
 			public var isEnabled: Bool?
 			public var eventTypes: [WebhookEventType]?
-			public var name: String?
 			public var secret: String?
+			public var name: String?
 			public var url: URL?
 
-			public init(isEnabled: Bool? = nil, eventTypes: [WebhookEventType]? = nil, name: String? = nil, secret: String? = nil, url: URL? = nil) {
+			public init(isEnabled: Bool? = nil, eventTypes: [WebhookEventType]? = nil, secret: String? = nil, name: String? = nil, url: URL? = nil) {
 				self.isEnabled = isEnabled
 				self.eventTypes = eventTypes
-				self.name = name
 				self.secret = secret
+				self.name = name
 				self.url = url
 			}
 
@@ -30,8 +30,8 @@ public struct WebhookUpdateRequest: Codable {
 				let values = try decoder.container(keyedBy: StringCodingKey.self)
 				self.isEnabled = try values.decodeIfPresent(Bool.self, forKey: "enabled")
 				self.eventTypes = try values.decodeIfPresent([WebhookEventType].self, forKey: "eventTypes")
-				self.name = try values.decodeIfPresent(String.self, forKey: "name")
 				self.secret = try values.decodeIfPresent(String.self, forKey: "secret")
+				self.name = try values.decodeIfPresent(String.self, forKey: "name")
 				self.url = try values.decodeIfPresent(URL.self, forKey: "url")
 			}
 
@@ -39,8 +39,8 @@ public struct WebhookUpdateRequest: Codable {
 				var values = encoder.container(keyedBy: StringCodingKey.self)
 				try values.encodeIfPresent(isEnabled, forKey: "enabled")
 				try values.encodeIfPresent(eventTypes, forKey: "eventTypes")
-				try values.encodeIfPresent(name, forKey: "name")
 				try values.encodeIfPresent(secret, forKey: "secret")
+				try values.encodeIfPresent(name, forKey: "name")
 				try values.encodeIfPresent(url, forKey: "url")
 			}
 		}
@@ -49,24 +49,24 @@ public struct WebhookUpdateRequest: Codable {
 			case webhooks
 		}
 
-		public init(attributes: Attributes? = nil, id: String, type: `Type`) {
+		public init(attributes: Attributes? = nil, type: `Type`, id: String) {
 			self.attributes = attributes
-			self.id = id
 			self.type = type
+			self.id = id
 		}
 
 		public init(from decoder: Decoder) throws {
 			let values = try decoder.container(keyedBy: StringCodingKey.self)
 			self.attributes = try values.decodeIfPresent(Attributes.self, forKey: "attributes")
-			self.id = try values.decode(String.self, forKey: "id")
 			self.type = try values.decode(`Type`.self, forKey: "type")
+			self.id = try values.decode(String.self, forKey: "id")
 		}
 
 		public func encode(to encoder: Encoder) throws {
 			var values = encoder.container(keyedBy: StringCodingKey.self)
 			try values.encodeIfPresent(attributes, forKey: "attributes")
-			try values.encode(id, forKey: "id")
 			try values.encode(type, forKey: "type")
+			try values.encode(id, forKey: "id")
 		}
 	}
 

@@ -4,31 +4,31 @@
 import Foundation
 
 public struct GameCenterActivityVersionReleasesResponse: Codable {
-	public var data: [GameCenterActivityVersionRelease]
 	public var included: [GameCenterActivityVersion]?
-	public var links: PagedDocumentLinks
 	public var meta: PagingInformation?
+	public var links: PagedDocumentLinks
+	public var data: [GameCenterActivityVersionRelease]
 
-	public init(data: [GameCenterActivityVersionRelease], included: [GameCenterActivityVersion]? = nil, links: PagedDocumentLinks, meta: PagingInformation? = nil) {
-		self.data = data
+	public init(included: [GameCenterActivityVersion]? = nil, meta: PagingInformation? = nil, links: PagedDocumentLinks, data: [GameCenterActivityVersionRelease]) {
 		self.included = included
-		self.links = links
 		self.meta = meta
+		self.links = links
+		self.data = data
 	}
 
 	public init(from decoder: Decoder) throws {
 		let values = try decoder.container(keyedBy: StringCodingKey.self)
-		self.data = try values.decode([GameCenterActivityVersionRelease].self, forKey: "data")
 		self.included = try values.decodeIfPresent([GameCenterActivityVersion].self, forKey: "included")
-		self.links = try values.decode(PagedDocumentLinks.self, forKey: "links")
 		self.meta = try values.decodeIfPresent(PagingInformation.self, forKey: "meta")
+		self.links = try values.decode(PagedDocumentLinks.self, forKey: "links")
+		self.data = try values.decode([GameCenterActivityVersionRelease].self, forKey: "data")
 	}
 
 	public func encode(to encoder: Encoder) throws {
 		var values = encoder.container(keyedBy: StringCodingKey.self)
-		try values.encode(data, forKey: "data")
 		try values.encodeIfPresent(included, forKey: "included")
-		try values.encode(links, forKey: "links")
 		try values.encodeIfPresent(meta, forKey: "meta")
+		try values.encode(links, forKey: "links")
+		try values.encode(data, forKey: "data")
 	}
 }

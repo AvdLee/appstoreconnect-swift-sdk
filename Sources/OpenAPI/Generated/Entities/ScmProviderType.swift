@@ -4,9 +4,9 @@
 import Foundation
 
 public struct ScmProviderType: Codable {
-	public var displayName: String?
 	public var isOnPremise: Bool?
 	public var kind: Kind?
+	public var displayName: String?
 
 	public enum Kind: String, Codable, CaseIterable {
 		case bitbucketCloud = "BITBUCKET_CLOUD"
@@ -17,23 +17,23 @@ public struct ScmProviderType: Codable {
 		case gitlabSelfManaged = "GITLAB_SELF_MANAGED"
 	}
 
-	public init(displayName: String? = nil, isOnPremise: Bool? = nil, kind: Kind? = nil) {
-		self.displayName = displayName
+	public init(isOnPremise: Bool? = nil, kind: Kind? = nil, displayName: String? = nil) {
 		self.isOnPremise = isOnPremise
 		self.kind = kind
+		self.displayName = displayName
 	}
 
 	public init(from decoder: Decoder) throws {
 		let values = try decoder.container(keyedBy: StringCodingKey.self)
-		self.displayName = try values.decodeIfPresent(String.self, forKey: "displayName")
 		self.isOnPremise = try values.decodeIfPresent(Bool.self, forKey: "isOnPremise")
 		self.kind = try values.decodeIfPresent(Kind.self, forKey: "kind")
+		self.displayName = try values.decodeIfPresent(String.self, forKey: "displayName")
 	}
 
 	public func encode(to encoder: Encoder) throws {
 		var values = encoder.container(keyedBy: StringCodingKey.self)
-		try values.encodeIfPresent(displayName, forKey: "displayName")
 		try values.encodeIfPresent(isOnPremise, forKey: "isOnPremise")
 		try values.encodeIfPresent(kind, forKey: "kind")
+		try values.encodeIfPresent(displayName, forKey: "displayName")
 	}
 }

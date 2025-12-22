@@ -13,57 +13,57 @@ public struct GameCenterMatchmakingQueueSizesV1MetricResponse: Codable {
 		public var granularity: Granularity?
 
 		public struct DataPoints: Codable {
-			public var end: Date?
 			public var start: Date?
+			public var end: Date?
 			public var values: Values?
 
 			public struct Values: Codable {
-				public var averageNumberOfRequests: Double?
-				public var count: Int?
 				public var p50NumberOfRequests: Double?
 				public var p95NumberOfRequests: Double?
+				public var averageNumberOfRequests: Double?
+				public var count: Int?
 
-				public init(averageNumberOfRequests: Double? = nil, count: Int? = nil, p50NumberOfRequests: Double? = nil, p95NumberOfRequests: Double? = nil) {
-					self.averageNumberOfRequests = averageNumberOfRequests
-					self.count = count
+				public init(p50NumberOfRequests: Double? = nil, p95NumberOfRequests: Double? = nil, averageNumberOfRequests: Double? = nil, count: Int? = nil) {
 					self.p50NumberOfRequests = p50NumberOfRequests
 					self.p95NumberOfRequests = p95NumberOfRequests
+					self.averageNumberOfRequests = averageNumberOfRequests
+					self.count = count
 				}
 
 				public init(from decoder: Decoder) throws {
 					let values = try decoder.container(keyedBy: StringCodingKey.self)
-					self.averageNumberOfRequests = try values.decodeIfPresent(Double.self, forKey: "averageNumberOfRequests")
-					self.count = try values.decodeIfPresent(Int.self, forKey: "count")
 					self.p50NumberOfRequests = try values.decodeIfPresent(Double.self, forKey: "p50NumberOfRequests")
 					self.p95NumberOfRequests = try values.decodeIfPresent(Double.self, forKey: "p95NumberOfRequests")
+					self.averageNumberOfRequests = try values.decodeIfPresent(Double.self, forKey: "averageNumberOfRequests")
+					self.count = try values.decodeIfPresent(Int.self, forKey: "count")
 				}
 
 				public func encode(to encoder: Encoder) throws {
 					var values = encoder.container(keyedBy: StringCodingKey.self)
-					try values.encodeIfPresent(averageNumberOfRequests, forKey: "averageNumberOfRequests")
-					try values.encodeIfPresent(count, forKey: "count")
 					try values.encodeIfPresent(p50NumberOfRequests, forKey: "p50NumberOfRequests")
 					try values.encodeIfPresent(p95NumberOfRequests, forKey: "p95NumberOfRequests")
+					try values.encodeIfPresent(averageNumberOfRequests, forKey: "averageNumberOfRequests")
+					try values.encodeIfPresent(count, forKey: "count")
 				}
 			}
 
-			public init(end: Date? = nil, start: Date? = nil, values: Values? = nil) {
-				self.end = end
+			public init(start: Date? = nil, end: Date? = nil, values: Values? = nil) {
 				self.start = start
+				self.end = end
 				self.values = values
 			}
 
 			public init(from decoder: Decoder) throws {
 				let values = try decoder.container(keyedBy: StringCodingKey.self)
-				self.end = try values.decodeIfPresent(Date.self, forKey: "end")
 				self.start = try values.decodeIfPresent(Date.self, forKey: "start")
+				self.end = try values.decodeIfPresent(Date.self, forKey: "end")
 				self.values = try values.decodeIfPresent(Values.self, forKey: "values")
 			}
 
 			public func encode(to encoder: Encoder) throws {
 				var values = encoder.container(keyedBy: StringCodingKey.self)
-				try values.encodeIfPresent(end, forKey: "end")
 				try values.encodeIfPresent(start, forKey: "start")
+				try values.encodeIfPresent(end, forKey: "end")
 				try values.encodeIfPresent(self.values, forKey: "values")
 			}
 		}

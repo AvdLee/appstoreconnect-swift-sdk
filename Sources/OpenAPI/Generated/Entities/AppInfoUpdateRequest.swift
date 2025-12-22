@@ -12,14 +12,14 @@ public struct AppInfoUpdateRequest: Codable {
 		public var type: `Type`
 
 		public struct Relationships: Codable {
-			public var primaryCategory: PrimaryCategory?
-			public var primarySubcategoryOne: PrimarySubcategoryOne?
-			public var primarySubcategoryTwo: PrimarySubcategoryTwo?
 			public var secondaryCategory: SecondaryCategory?
-			public var secondarySubcategoryOne: SecondarySubcategoryOne?
+			public var primarySubcategoryOne: PrimarySubcategoryOne?
+			public var primaryCategory: PrimaryCategory?
 			public var secondarySubcategoryTwo: SecondarySubcategoryTwo?
+			public var secondarySubcategoryOne: SecondarySubcategoryOne?
+			public var primarySubcategoryTwo: PrimarySubcategoryTwo?
 
-			public struct PrimaryCategory: Codable {
+			public struct SecondaryCategory: Codable {
 				public var data: Data?
 
 				public struct Data: Codable, Identifiable {
@@ -67,28 +67,28 @@ public struct AppInfoUpdateRequest: Codable {
 				public var data: Data?
 
 				public struct Data: Codable, Identifiable {
-					public var id: String
 					public var type: `Type`
+					public var id: String
 
 					public enum `Type`: String, Codable, CaseIterable {
 						case appCategories
 					}
 
-					public init(id: String, type: `Type`) {
-						self.id = id
+					public init(type: `Type`, id: String) {
 						self.type = type
+						self.id = id
 					}
 
 					public init(from decoder: Decoder) throws {
 						let values = try decoder.container(keyedBy: StringCodingKey.self)
-						self.id = try values.decode(String.self, forKey: "id")
 						self.type = try values.decode(`Type`.self, forKey: "type")
+						self.id = try values.decode(String.self, forKey: "id")
 					}
 
 					public func encode(to encoder: Encoder) throws {
 						var values = encoder.container(keyedBy: StringCodingKey.self)
-						try values.encode(id, forKey: "id")
 						try values.encode(type, forKey: "type")
+						try values.encode(id, forKey: "id")
 					}
 				}
 
@@ -107,32 +107,32 @@ public struct AppInfoUpdateRequest: Codable {
 				}
 			}
 
-			public struct PrimarySubcategoryTwo: Codable {
+			public struct PrimaryCategory: Codable {
 				public var data: Data?
 
 				public struct Data: Codable, Identifiable {
-					public var id: String
 					public var type: `Type`
+					public var id: String
 
 					public enum `Type`: String, Codable, CaseIterable {
 						case appCategories
 					}
 
-					public init(id: String, type: `Type`) {
-						self.id = id
+					public init(type: `Type`, id: String) {
 						self.type = type
+						self.id = id
 					}
 
 					public init(from decoder: Decoder) throws {
 						let values = try decoder.container(keyedBy: StringCodingKey.self)
-						self.id = try values.decode(String.self, forKey: "id")
 						self.type = try values.decode(`Type`.self, forKey: "type")
+						self.id = try values.decode(String.self, forKey: "id")
 					}
 
 					public func encode(to encoder: Encoder) throws {
 						var values = encoder.container(keyedBy: StringCodingKey.self)
-						try values.encode(id, forKey: "id")
 						try values.encode(type, forKey: "type")
+						try values.encode(id, forKey: "id")
 					}
 				}
 
@@ -151,7 +151,7 @@ public struct AppInfoUpdateRequest: Codable {
 				}
 			}
 
-			public struct SecondaryCategory: Codable {
+			public struct SecondarySubcategoryTwo: Codable {
 				public var data: Data?
 
 				public struct Data: Codable, Identifiable {
@@ -239,7 +239,7 @@ public struct AppInfoUpdateRequest: Codable {
 				}
 			}
 
-			public struct SecondarySubcategoryTwo: Codable {
+			public struct PrimarySubcategoryTwo: Codable {
 				public var data: Data?
 
 				public struct Data: Codable, Identifiable {
@@ -283,33 +283,33 @@ public struct AppInfoUpdateRequest: Codable {
 				}
 			}
 
-			public init(primaryCategory: PrimaryCategory? = nil, primarySubcategoryOne: PrimarySubcategoryOne? = nil, primarySubcategoryTwo: PrimarySubcategoryTwo? = nil, secondaryCategory: SecondaryCategory? = nil, secondarySubcategoryOne: SecondarySubcategoryOne? = nil, secondarySubcategoryTwo: SecondarySubcategoryTwo? = nil) {
-				self.primaryCategory = primaryCategory
-				self.primarySubcategoryOne = primarySubcategoryOne
-				self.primarySubcategoryTwo = primarySubcategoryTwo
+			public init(secondaryCategory: SecondaryCategory? = nil, primarySubcategoryOne: PrimarySubcategoryOne? = nil, primaryCategory: PrimaryCategory? = nil, secondarySubcategoryTwo: SecondarySubcategoryTwo? = nil, secondarySubcategoryOne: SecondarySubcategoryOne? = nil, primarySubcategoryTwo: PrimarySubcategoryTwo? = nil) {
 				self.secondaryCategory = secondaryCategory
-				self.secondarySubcategoryOne = secondarySubcategoryOne
+				self.primarySubcategoryOne = primarySubcategoryOne
+				self.primaryCategory = primaryCategory
 				self.secondarySubcategoryTwo = secondarySubcategoryTwo
+				self.secondarySubcategoryOne = secondarySubcategoryOne
+				self.primarySubcategoryTwo = primarySubcategoryTwo
 			}
 
 			public init(from decoder: Decoder) throws {
 				let values = try decoder.container(keyedBy: StringCodingKey.self)
-				self.primaryCategory = try values.decodeIfPresent(PrimaryCategory.self, forKey: "primaryCategory")
-				self.primarySubcategoryOne = try values.decodeIfPresent(PrimarySubcategoryOne.self, forKey: "primarySubcategoryOne")
-				self.primarySubcategoryTwo = try values.decodeIfPresent(PrimarySubcategoryTwo.self, forKey: "primarySubcategoryTwo")
 				self.secondaryCategory = try values.decodeIfPresent(SecondaryCategory.self, forKey: "secondaryCategory")
-				self.secondarySubcategoryOne = try values.decodeIfPresent(SecondarySubcategoryOne.self, forKey: "secondarySubcategoryOne")
+				self.primarySubcategoryOne = try values.decodeIfPresent(PrimarySubcategoryOne.self, forKey: "primarySubcategoryOne")
+				self.primaryCategory = try values.decodeIfPresent(PrimaryCategory.self, forKey: "primaryCategory")
 				self.secondarySubcategoryTwo = try values.decodeIfPresent(SecondarySubcategoryTwo.self, forKey: "secondarySubcategoryTwo")
+				self.secondarySubcategoryOne = try values.decodeIfPresent(SecondarySubcategoryOne.self, forKey: "secondarySubcategoryOne")
+				self.primarySubcategoryTwo = try values.decodeIfPresent(PrimarySubcategoryTwo.self, forKey: "primarySubcategoryTwo")
 			}
 
 			public func encode(to encoder: Encoder) throws {
 				var values = encoder.container(keyedBy: StringCodingKey.self)
-				try values.encodeIfPresent(primaryCategory, forKey: "primaryCategory")
-				try values.encodeIfPresent(primarySubcategoryOne, forKey: "primarySubcategoryOne")
-				try values.encodeIfPresent(primarySubcategoryTwo, forKey: "primarySubcategoryTwo")
 				try values.encodeIfPresent(secondaryCategory, forKey: "secondaryCategory")
-				try values.encodeIfPresent(secondarySubcategoryOne, forKey: "secondarySubcategoryOne")
+				try values.encodeIfPresent(primarySubcategoryOne, forKey: "primarySubcategoryOne")
+				try values.encodeIfPresent(primaryCategory, forKey: "primaryCategory")
 				try values.encodeIfPresent(secondarySubcategoryTwo, forKey: "secondarySubcategoryTwo")
+				try values.encodeIfPresent(secondarySubcategoryOne, forKey: "secondarySubcategoryOne")
+				try values.encodeIfPresent(primarySubcategoryTwo, forKey: "primarySubcategoryTwo")
 			}
 		}
 

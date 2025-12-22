@@ -4,8 +4,8 @@
 import Foundation
 
 public struct AppMediaAssetState: Codable {
-	public var errors: [AppMediaStateError]?
 	public var state: State?
+	public var errors: [AppMediaStateError]?
 	public var warnings: [AppMediaStateError]?
 
 	public enum State: String, Codable, CaseIterable {
@@ -15,23 +15,23 @@ public struct AppMediaAssetState: Codable {
 		case failed = "FAILED"
 	}
 
-	public init(errors: [AppMediaStateError]? = nil, state: State? = nil, warnings: [AppMediaStateError]? = nil) {
-		self.errors = errors
+	public init(state: State? = nil, errors: [AppMediaStateError]? = nil, warnings: [AppMediaStateError]? = nil) {
 		self.state = state
+		self.errors = errors
 		self.warnings = warnings
 	}
 
 	public init(from decoder: Decoder) throws {
 		let values = try decoder.container(keyedBy: StringCodingKey.self)
-		self.errors = try values.decodeIfPresent([AppMediaStateError].self, forKey: "errors")
 		self.state = try values.decodeIfPresent(State.self, forKey: "state")
+		self.errors = try values.decodeIfPresent([AppMediaStateError].self, forKey: "errors")
 		self.warnings = try values.decodeIfPresent([AppMediaStateError].self, forKey: "warnings")
 	}
 
 	public func encode(to encoder: Encoder) throws {
 		var values = encoder.container(keyedBy: StringCodingKey.self)
-		try values.encodeIfPresent(errors, forKey: "errors")
 		try values.encodeIfPresent(state, forKey: "state")
+		try values.encodeIfPresent(errors, forKey: "errors")
 		try values.encodeIfPresent(warnings, forKey: "warnings")
 	}
 }

@@ -12,37 +12,37 @@ public struct SubscriptionGracePeriodUpdateRequest: Codable {
 		public var type: `Type`
 
 		public struct Attributes: Codable {
-			public var duration: SubscriptionGracePeriodDuration?
 			public var isOptIn: Bool?
 			public var renewalType: RenewalType?
 			public var isSandboxOptIn: Bool?
+			public var duration: SubscriptionGracePeriodDuration?
 
 			public enum RenewalType: String, Codable, CaseIterable {
 				case allRenewals = "ALL_RENEWALS"
 				case paidToPaidOnly = "PAID_TO_PAID_ONLY"
 			}
 
-			public init(duration: SubscriptionGracePeriodDuration? = nil, isOptIn: Bool? = nil, renewalType: RenewalType? = nil, isSandboxOptIn: Bool? = nil) {
-				self.duration = duration
+			public init(isOptIn: Bool? = nil, renewalType: RenewalType? = nil, isSandboxOptIn: Bool? = nil, duration: SubscriptionGracePeriodDuration? = nil) {
 				self.isOptIn = isOptIn
 				self.renewalType = renewalType
 				self.isSandboxOptIn = isSandboxOptIn
+				self.duration = duration
 			}
 
 			public init(from decoder: Decoder) throws {
 				let values = try decoder.container(keyedBy: StringCodingKey.self)
-				self.duration = try values.decodeIfPresent(SubscriptionGracePeriodDuration.self, forKey: "duration")
 				self.isOptIn = try values.decodeIfPresent(Bool.self, forKey: "optIn")
 				self.renewalType = try values.decodeIfPresent(RenewalType.self, forKey: "renewalType")
 				self.isSandboxOptIn = try values.decodeIfPresent(Bool.self, forKey: "sandboxOptIn")
+				self.duration = try values.decodeIfPresent(SubscriptionGracePeriodDuration.self, forKey: "duration")
 			}
 
 			public func encode(to encoder: Encoder) throws {
 				var values = encoder.container(keyedBy: StringCodingKey.self)
-				try values.encodeIfPresent(duration, forKey: "duration")
 				try values.encodeIfPresent(isOptIn, forKey: "optIn")
 				try values.encodeIfPresent(renewalType, forKey: "renewalType")
 				try values.encodeIfPresent(isSandboxOptIn, forKey: "sandboxOptIn")
+				try values.encodeIfPresent(duration, forKey: "duration")
 			}
 		}
 

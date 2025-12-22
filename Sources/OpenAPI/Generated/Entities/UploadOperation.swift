@@ -4,35 +4,35 @@
 import Foundation
 
 public struct UploadOperation: Codable {
-	public var length: Int?
-	public var method: String?
-	public var offset: Int?
 	public var requestHeaders: [HTTPHeader]?
 	public var url: String?
+	public var length: Int?
+	public var offset: Int?
+	public var method: String?
 
-	public init(length: Int? = nil, method: String? = nil, offset: Int? = nil, requestHeaders: [HTTPHeader]? = nil, url: String? = nil) {
-		self.length = length
-		self.method = method
-		self.offset = offset
+	public init(requestHeaders: [HTTPHeader]? = nil, url: String? = nil, length: Int? = nil, offset: Int? = nil, method: String? = nil) {
 		self.requestHeaders = requestHeaders
 		self.url = url
+		self.length = length
+		self.offset = offset
+		self.method = method
 	}
 
 	public init(from decoder: Decoder) throws {
 		let values = try decoder.container(keyedBy: StringCodingKey.self)
-		self.length = try values.decodeIfPresent(Int.self, forKey: "length")
-		self.method = try values.decodeIfPresent(String.self, forKey: "method")
-		self.offset = try values.decodeIfPresent(Int.self, forKey: "offset")
 		self.requestHeaders = try values.decodeIfPresent([HTTPHeader].self, forKey: "requestHeaders")
 		self.url = try values.decodeIfPresent(String.self, forKey: "url")
+		self.length = try values.decodeIfPresent(Int.self, forKey: "length")
+		self.offset = try values.decodeIfPresent(Int.self, forKey: "offset")
+		self.method = try values.decodeIfPresent(String.self, forKey: "method")
 	}
 
 	public func encode(to encoder: Encoder) throws {
 		var values = encoder.container(keyedBy: StringCodingKey.self)
-		try values.encodeIfPresent(length, forKey: "length")
-		try values.encodeIfPresent(method, forKey: "method")
-		try values.encodeIfPresent(offset, forKey: "offset")
 		try values.encodeIfPresent(requestHeaders, forKey: "requestHeaders")
 		try values.encodeIfPresent(url, forKey: "url")
+		try values.encodeIfPresent(length, forKey: "length")
+		try values.encodeIfPresent(offset, forKey: "offset")
+		try values.encodeIfPresent(method, forKey: "method")
 	}
 }

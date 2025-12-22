@@ -4,31 +4,31 @@
 import Foundation
 
 public struct CiXcodeVersionsResponse: Codable {
-	public var data: [CiXcodeVersion]
+	public var meta: PagingInformation?
 	public var included: [CiMacOsVersion]?
 	public var links: PagedDocumentLinks
-	public var meta: PagingInformation?
+	public var data: [CiXcodeVersion]
 
-	public init(data: [CiXcodeVersion], included: [CiMacOsVersion]? = nil, links: PagedDocumentLinks, meta: PagingInformation? = nil) {
-		self.data = data
+	public init(meta: PagingInformation? = nil, included: [CiMacOsVersion]? = nil, links: PagedDocumentLinks, data: [CiXcodeVersion]) {
+		self.meta = meta
 		self.included = included
 		self.links = links
-		self.meta = meta
+		self.data = data
 	}
 
 	public init(from decoder: Decoder) throws {
 		let values = try decoder.container(keyedBy: StringCodingKey.self)
-		self.data = try values.decode([CiXcodeVersion].self, forKey: "data")
+		self.meta = try values.decodeIfPresent(PagingInformation.self, forKey: "meta")
 		self.included = try values.decodeIfPresent([CiMacOsVersion].self, forKey: "included")
 		self.links = try values.decode(PagedDocumentLinks.self, forKey: "links")
-		self.meta = try values.decodeIfPresent(PagingInformation.self, forKey: "meta")
+		self.data = try values.decode([CiXcodeVersion].self, forKey: "data")
 	}
 
 	public func encode(to encoder: Encoder) throws {
 		var values = encoder.container(keyedBy: StringCodingKey.self)
-		try values.encode(data, forKey: "data")
+		try values.encodeIfPresent(meta, forKey: "meta")
 		try values.encodeIfPresent(included, forKey: "included")
 		try values.encode(links, forKey: "links")
-		try values.encodeIfPresent(meta, forKey: "meta")
+		try values.encode(data, forKey: "data")
 	}
 }

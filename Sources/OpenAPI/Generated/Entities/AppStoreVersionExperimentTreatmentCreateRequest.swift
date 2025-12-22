@@ -7,30 +7,12 @@ public struct AppStoreVersionExperimentTreatmentCreateRequest: Codable {
 	public var data: Data
 
 	public struct Data: Codable {
-		public var attributes: Attributes
-		public var relationships: Relationships?
 		public var type: `Type`
+		public var relationships: Relationships?
+		public var attributes: Attributes
 
-		public struct Attributes: Codable {
-			public var appIconName: String?
-			public var name: String
-
-			public init(appIconName: String? = nil, name: String) {
-				self.appIconName = appIconName
-				self.name = name
-			}
-
-			public init(from decoder: Decoder) throws {
-				let values = try decoder.container(keyedBy: StringCodingKey.self)
-				self.appIconName = try values.decodeIfPresent(String.self, forKey: "appIconName")
-				self.name = try values.decode(String.self, forKey: "name")
-			}
-
-			public func encode(to encoder: Encoder) throws {
-				var values = encoder.container(keyedBy: StringCodingKey.self)
-				try values.encodeIfPresent(appIconName, forKey: "appIconName")
-				try values.encode(name, forKey: "name")
-			}
+		public enum `Type`: String, Codable, CaseIterable {
+			case appStoreVersionExperimentTreatments
 		}
 
 		public struct Relationships: Codable {
@@ -143,28 +125,46 @@ public struct AppStoreVersionExperimentTreatmentCreateRequest: Codable {
 			}
 		}
 
-		public enum `Type`: String, Codable, CaseIterable {
-			case appStoreVersionExperimentTreatments
+		public struct Attributes: Codable {
+			public var name: String
+			public var appIconName: String?
+
+			public init(name: String, appIconName: String? = nil) {
+				self.name = name
+				self.appIconName = appIconName
+			}
+
+			public init(from decoder: Decoder) throws {
+				let values = try decoder.container(keyedBy: StringCodingKey.self)
+				self.name = try values.decode(String.self, forKey: "name")
+				self.appIconName = try values.decodeIfPresent(String.self, forKey: "appIconName")
+			}
+
+			public func encode(to encoder: Encoder) throws {
+				var values = encoder.container(keyedBy: StringCodingKey.self)
+				try values.encode(name, forKey: "name")
+				try values.encodeIfPresent(appIconName, forKey: "appIconName")
+			}
 		}
 
-		public init(attributes: Attributes, relationships: Relationships? = nil, type: `Type`) {
-			self.attributes = attributes
-			self.relationships = relationships
+		public init(type: `Type`, relationships: Relationships? = nil, attributes: Attributes) {
 			self.type = type
+			self.relationships = relationships
+			self.attributes = attributes
 		}
 
 		public init(from decoder: Decoder) throws {
 			let values = try decoder.container(keyedBy: StringCodingKey.self)
-			self.attributes = try values.decode(Attributes.self, forKey: "attributes")
-			self.relationships = try values.decodeIfPresent(Relationships.self, forKey: "relationships")
 			self.type = try values.decode(`Type`.self, forKey: "type")
+			self.relationships = try values.decodeIfPresent(Relationships.self, forKey: "relationships")
+			self.attributes = try values.decode(Attributes.self, forKey: "attributes")
 		}
 
 		public func encode(to encoder: Encoder) throws {
 			var values = encoder.container(keyedBy: StringCodingKey.self)
-			try values.encode(attributes, forKey: "attributes")
-			try values.encodeIfPresent(relationships, forKey: "relationships")
 			try values.encode(type, forKey: "type")
+			try values.encodeIfPresent(relationships, forKey: "relationships")
+			try values.encode(attributes, forKey: "attributes")
 		}
 	}
 

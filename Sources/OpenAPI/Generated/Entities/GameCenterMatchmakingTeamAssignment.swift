@@ -4,23 +4,23 @@
 import Foundation
 
 public struct GameCenterMatchmakingTeamAssignment: Codable {
-	public var playerID: String?
 	public var team: String?
+	public var playerID: String?
 
-	public init(playerID: String? = nil, team: String? = nil) {
-		self.playerID = playerID
+	public init(team: String? = nil, playerID: String? = nil) {
 		self.team = team
+		self.playerID = playerID
 	}
 
 	public init(from decoder: Decoder) throws {
 		let values = try decoder.container(keyedBy: StringCodingKey.self)
-		self.playerID = try values.decodeIfPresent(String.self, forKey: "playerId")
 		self.team = try values.decodeIfPresent(String.self, forKey: "team")
+		self.playerID = try values.decodeIfPresent(String.self, forKey: "playerId")
 	}
 
 	public func encode(to encoder: Encoder) throws {
 		var values = encoder.container(keyedBy: StringCodingKey.self)
-		try values.encodeIfPresent(playerID, forKey: "playerId")
 		try values.encodeIfPresent(team, forKey: "team")
+		try values.encodeIfPresent(playerID, forKey: "playerId")
 	}
 }

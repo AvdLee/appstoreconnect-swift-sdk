@@ -4,8 +4,8 @@
 import Foundation
 
 public struct GameCenterMatchmakingSessionsV1MetricResponse: Codable {
-	public var data: [Datum]
 	public var links: PagedDocumentLinks
+	public var data: [Datum]
 	public var meta: PagingInformation?
 
 	public struct Datum: Codable {
@@ -18,30 +18,30 @@ public struct GameCenterMatchmakingSessionsV1MetricResponse: Codable {
 			public var values: Values?
 
 			public struct Values: Codable {
-				public var averagePlayerCount: Double?
 				public var count: Int?
+				public var averagePlayerCount: Double?
 				public var p50PlayerCount: Double?
 				public var p95PlayerCount: Double?
 
-				public init(averagePlayerCount: Double? = nil, count: Int? = nil, p50PlayerCount: Double? = nil, p95PlayerCount: Double? = nil) {
-					self.averagePlayerCount = averagePlayerCount
+				public init(count: Int? = nil, averagePlayerCount: Double? = nil, p50PlayerCount: Double? = nil, p95PlayerCount: Double? = nil) {
 					self.count = count
+					self.averagePlayerCount = averagePlayerCount
 					self.p50PlayerCount = p50PlayerCount
 					self.p95PlayerCount = p95PlayerCount
 				}
 
 				public init(from decoder: Decoder) throws {
 					let values = try decoder.container(keyedBy: StringCodingKey.self)
-					self.averagePlayerCount = try values.decodeIfPresent(Double.self, forKey: "averagePlayerCount")
 					self.count = try values.decodeIfPresent(Int.self, forKey: "count")
+					self.averagePlayerCount = try values.decodeIfPresent(Double.self, forKey: "averagePlayerCount")
 					self.p50PlayerCount = try values.decodeIfPresent(Double.self, forKey: "p50PlayerCount")
 					self.p95PlayerCount = try values.decodeIfPresent(Double.self, forKey: "p95PlayerCount")
 				}
 
 				public func encode(to encoder: Encoder) throws {
 					var values = encoder.container(keyedBy: StringCodingKey.self)
-					try values.encodeIfPresent(averagePlayerCount, forKey: "averagePlayerCount")
 					try values.encodeIfPresent(count, forKey: "count")
+					try values.encodeIfPresent(averagePlayerCount, forKey: "averagePlayerCount")
 					try values.encodeIfPresent(p50PlayerCount, forKey: "p50PlayerCount")
 					try values.encodeIfPresent(p95PlayerCount, forKey: "p95PlayerCount")
 				}
@@ -92,23 +92,23 @@ public struct GameCenterMatchmakingSessionsV1MetricResponse: Codable {
 		}
 	}
 
-	public init(data: [Datum], links: PagedDocumentLinks, meta: PagingInformation? = nil) {
-		self.data = data
+	public init(links: PagedDocumentLinks, data: [Datum], meta: PagingInformation? = nil) {
 		self.links = links
+		self.data = data
 		self.meta = meta
 	}
 
 	public init(from decoder: Decoder) throws {
 		let values = try decoder.container(keyedBy: StringCodingKey.self)
-		self.data = try values.decode([Datum].self, forKey: "data")
 		self.links = try values.decode(PagedDocumentLinks.self, forKey: "links")
+		self.data = try values.decode([Datum].self, forKey: "data")
 		self.meta = try values.decodeIfPresent(PagingInformation.self, forKey: "meta")
 	}
 
 	public func encode(to encoder: Encoder) throws {
 		var values = encoder.container(keyedBy: StringCodingKey.self)
-		try values.encode(data, forKey: "data")
 		try values.encode(links, forKey: "links")
+		try values.encode(data, forKey: "data")
 		try values.encodeIfPresent(meta, forKey: "meta")
 	}
 }

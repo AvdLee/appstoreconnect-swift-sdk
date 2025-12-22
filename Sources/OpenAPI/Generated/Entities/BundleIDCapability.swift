@@ -4,57 +4,57 @@
 import Foundation
 
 public struct BundleIDCapability: Codable, Identifiable {
-	public var attributes: Attributes?
 	public var id: String
-	public var links: ResourceLinks?
 	public var type: `Type`
-
-	public struct Attributes: Codable {
-		public var capabilityType: CapabilityType?
-		public var settings: [CapabilitySetting]?
-
-		public init(capabilityType: CapabilityType? = nil, settings: [CapabilitySetting]? = nil) {
-			self.capabilityType = capabilityType
-			self.settings = settings
-		}
-
-		public init(from decoder: Decoder) throws {
-			let values = try decoder.container(keyedBy: StringCodingKey.self)
-			self.capabilityType = try values.decodeIfPresent(CapabilityType.self, forKey: "capabilityType")
-			self.settings = try values.decodeIfPresent([CapabilitySetting].self, forKey: "settings")
-		}
-
-		public func encode(to encoder: Encoder) throws {
-			var values = encoder.container(keyedBy: StringCodingKey.self)
-			try values.encodeIfPresent(capabilityType, forKey: "capabilityType")
-			try values.encodeIfPresent(settings, forKey: "settings")
-		}
-	}
+	public var links: ResourceLinks?
+	public var attributes: Attributes?
 
 	public enum `Type`: String, Codable, CaseIterable {
 		case bundleIDCapabilities = "bundleIdCapabilities"
 	}
 
-	public init(attributes: Attributes? = nil, id: String, links: ResourceLinks? = nil, type: `Type`) {
-		self.attributes = attributes
+	public struct Attributes: Codable {
+		public var settings: [CapabilitySetting]?
+		public var capabilityType: CapabilityType?
+
+		public init(settings: [CapabilitySetting]? = nil, capabilityType: CapabilityType? = nil) {
+			self.settings = settings
+			self.capabilityType = capabilityType
+		}
+
+		public init(from decoder: Decoder) throws {
+			let values = try decoder.container(keyedBy: StringCodingKey.self)
+			self.settings = try values.decodeIfPresent([CapabilitySetting].self, forKey: "settings")
+			self.capabilityType = try values.decodeIfPresent(CapabilityType.self, forKey: "capabilityType")
+		}
+
+		public func encode(to encoder: Encoder) throws {
+			var values = encoder.container(keyedBy: StringCodingKey.self)
+			try values.encodeIfPresent(settings, forKey: "settings")
+			try values.encodeIfPresent(capabilityType, forKey: "capabilityType")
+		}
+	}
+
+	public init(id: String, type: `Type`, links: ResourceLinks? = nil, attributes: Attributes? = nil) {
 		self.id = id
-		self.links = links
 		self.type = type
+		self.links = links
+		self.attributes = attributes
 	}
 
 	public init(from decoder: Decoder) throws {
 		let values = try decoder.container(keyedBy: StringCodingKey.self)
-		self.attributes = try values.decodeIfPresent(Attributes.self, forKey: "attributes")
 		self.id = try values.decode(String.self, forKey: "id")
-		self.links = try values.decodeIfPresent(ResourceLinks.self, forKey: "links")
 		self.type = try values.decode(`Type`.self, forKey: "type")
+		self.links = try values.decodeIfPresent(ResourceLinks.self, forKey: "links")
+		self.attributes = try values.decodeIfPresent(Attributes.self, forKey: "attributes")
 	}
 
 	public func encode(to encoder: Encoder) throws {
 		var values = encoder.container(keyedBy: StringCodingKey.self)
-		try values.encodeIfPresent(attributes, forKey: "attributes")
 		try values.encode(id, forKey: "id")
-		try values.encodeIfPresent(links, forKey: "links")
 		try values.encode(type, forKey: "type")
+		try values.encodeIfPresent(links, forKey: "links")
+		try values.encodeIfPresent(attributes, forKey: "attributes")
 	}
 }

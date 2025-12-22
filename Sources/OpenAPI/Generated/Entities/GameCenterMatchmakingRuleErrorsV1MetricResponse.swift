@@ -5,8 +5,8 @@ import Foundation
 
 public struct GameCenterMatchmakingRuleErrorsV1MetricResponse: Codable {
 	public var data: [Datum]
-	public var links: PagedDocumentLinks
 	public var meta: PagingInformation?
+	public var links: PagedDocumentLinks
 
 	public struct Datum: Codable {
 		public var dataPoints: DataPoints?
@@ -14,9 +14,9 @@ public struct GameCenterMatchmakingRuleErrorsV1MetricResponse: Codable {
 		public var granularity: Granularity?
 
 		public struct DataPoints: Codable {
-			public var end: Date?
 			public var start: Date?
 			public var values: Values?
+			public var end: Date?
 
 			public struct Values: Codable {
 				public var count: Int?
@@ -36,24 +36,24 @@ public struct GameCenterMatchmakingRuleErrorsV1MetricResponse: Codable {
 				}
 			}
 
-			public init(end: Date? = nil, start: Date? = nil, values: Values? = nil) {
-				self.end = end
+			public init(start: Date? = nil, values: Values? = nil, end: Date? = nil) {
 				self.start = start
 				self.values = values
+				self.end = end
 			}
 
 			public init(from decoder: Decoder) throws {
 				let values = try decoder.container(keyedBy: StringCodingKey.self)
-				self.end = try values.decodeIfPresent(Date.self, forKey: "end")
 				self.start = try values.decodeIfPresent(Date.self, forKey: "start")
 				self.values = try values.decodeIfPresent(Values.self, forKey: "values")
+				self.end = try values.decodeIfPresent(Date.self, forKey: "end")
 			}
 
 			public func encode(to encoder: Encoder) throws {
 				var values = encoder.container(keyedBy: StringCodingKey.self)
-				try values.encodeIfPresent(end, forKey: "end")
 				try values.encodeIfPresent(start, forKey: "start")
 				try values.encodeIfPresent(self.values, forKey: "values")
+				try values.encodeIfPresent(end, forKey: "end")
 			}
 		}
 
@@ -65,24 +65,24 @@ public struct GameCenterMatchmakingRuleErrorsV1MetricResponse: Codable {
 				public var links: Links?
 
 				public struct Links: Codable {
-					public var groupBy: String?
 					public var related: String?
+					public var groupBy: String?
 
-					public init(groupBy: String? = nil, related: String? = nil) {
-						self.groupBy = groupBy
+					public init(related: String? = nil, groupBy: String? = nil) {
 						self.related = related
+						self.groupBy = groupBy
 					}
 
 					public init(from decoder: Decoder) throws {
 						let values = try decoder.container(keyedBy: StringCodingKey.self)
-						self.groupBy = try values.decodeIfPresent(String.self, forKey: "groupBy")
 						self.related = try values.decodeIfPresent(String.self, forKey: "related")
+						self.groupBy = try values.decodeIfPresent(String.self, forKey: "groupBy")
 					}
 
 					public func encode(to encoder: Encoder) throws {
 						var values = encoder.container(keyedBy: StringCodingKey.self)
-						try values.encodeIfPresent(groupBy, forKey: "groupBy")
 						try values.encodeIfPresent(related, forKey: "related")
+						try values.encodeIfPresent(groupBy, forKey: "groupBy")
 					}
 				}
 
@@ -146,23 +146,23 @@ public struct GameCenterMatchmakingRuleErrorsV1MetricResponse: Codable {
 		}
 	}
 
-	public init(data: [Datum], links: PagedDocumentLinks, meta: PagingInformation? = nil) {
+	public init(data: [Datum], meta: PagingInformation? = nil, links: PagedDocumentLinks) {
 		self.data = data
-		self.links = links
 		self.meta = meta
+		self.links = links
 	}
 
 	public init(from decoder: Decoder) throws {
 		let values = try decoder.container(keyedBy: StringCodingKey.self)
 		self.data = try values.decode([Datum].self, forKey: "data")
-		self.links = try values.decode(PagedDocumentLinks.self, forKey: "links")
 		self.meta = try values.decodeIfPresent(PagingInformation.self, forKey: "meta")
+		self.links = try values.decode(PagedDocumentLinks.self, forKey: "links")
 	}
 
 	public func encode(to encoder: Encoder) throws {
 		var values = encoder.container(keyedBy: StringCodingKey.self)
 		try values.encode(data, forKey: "data")
-		try values.encode(links, forKey: "links")
 		try values.encodeIfPresent(meta, forKey: "meta")
+		try values.encode(links, forKey: "links")
 	}
 }

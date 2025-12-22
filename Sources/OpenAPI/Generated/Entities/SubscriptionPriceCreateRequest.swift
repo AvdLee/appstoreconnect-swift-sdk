@@ -8,8 +8,8 @@ public struct SubscriptionPriceCreateRequest: Codable {
 
 	public struct Data: Codable {
 		public var attributes: Attributes?
-		public var relationships: Relationships
 		public var type: `Type`
+		public var relationships: Relationships
 
 		public struct Attributes: Codable {
 			public var isPreserveCurrentPrice: Bool?
@@ -33,52 +33,56 @@ public struct SubscriptionPriceCreateRequest: Codable {
 			}
 		}
 
-		public struct Relationships: Codable {
-			public var subscription: Subscription
-			public var subscriptionPricePoint: SubscriptionPricePoint
-			public var territory: Territory?
+		public enum `Type`: String, Codable, CaseIterable {
+			case subscriptionPrices
+		}
 
-			public struct Subscription: Codable {
-				public var data: Data
+		public struct Relationships: Codable {
+			public var territory: Territory?
+			public var subscriptionPricePoint: SubscriptionPricePoint
+			public var subscription: Subscription
+
+			public struct Territory: Codable {
+				public var data: Data?
 
 				public struct Data: Codable, Identifiable {
-					public var id: String
 					public var type: `Type`
+					public var id: String
 
 					public enum `Type`: String, Codable, CaseIterable {
-						case subscriptions
+						case territories
 					}
 
-					public init(id: String, type: `Type`) {
-						self.id = id
+					public init(type: `Type`, id: String) {
 						self.type = type
+						self.id = id
 					}
 
 					public init(from decoder: Decoder) throws {
 						let values = try decoder.container(keyedBy: StringCodingKey.self)
-						self.id = try values.decode(String.self, forKey: "id")
 						self.type = try values.decode(`Type`.self, forKey: "type")
+						self.id = try values.decode(String.self, forKey: "id")
 					}
 
 					public func encode(to encoder: Encoder) throws {
 						var values = encoder.container(keyedBy: StringCodingKey.self)
-						try values.encode(id, forKey: "id")
 						try values.encode(type, forKey: "type")
+						try values.encode(id, forKey: "id")
 					}
 				}
 
-				public init(data: Data) {
+				public init(data: Data? = nil) {
 					self.data = data
 				}
 
 				public init(from decoder: Decoder) throws {
 					let values = try decoder.container(keyedBy: StringCodingKey.self)
-					self.data = try values.decode(Data.self, forKey: "data")
+					self.data = try values.decodeIfPresent(Data.self, forKey: "data")
 				}
 
 				public func encode(to encoder: Encoder) throws {
 					var values = encoder.container(keyedBy: StringCodingKey.self)
-					try values.encode(data, forKey: "data")
+					try values.encodeIfPresent(data, forKey: "data")
 				}
 			}
 
@@ -126,15 +130,15 @@ public struct SubscriptionPriceCreateRequest: Codable {
 				}
 			}
 
-			public struct Territory: Codable {
-				public var data: Data?
+			public struct Subscription: Codable {
+				public var data: Data
 
 				public struct Data: Codable, Identifiable {
 					public var id: String
 					public var type: `Type`
 
 					public enum `Type`: String, Codable, CaseIterable {
-						case territories
+						case subscriptions
 					}
 
 					public init(id: String, type: `Type`) {
@@ -155,64 +159,60 @@ public struct SubscriptionPriceCreateRequest: Codable {
 					}
 				}
 
-				public init(data: Data? = nil) {
+				public init(data: Data) {
 					self.data = data
 				}
 
 				public init(from decoder: Decoder) throws {
 					let values = try decoder.container(keyedBy: StringCodingKey.self)
-					self.data = try values.decodeIfPresent(Data.self, forKey: "data")
+					self.data = try values.decode(Data.self, forKey: "data")
 				}
 
 				public func encode(to encoder: Encoder) throws {
 					var values = encoder.container(keyedBy: StringCodingKey.self)
-					try values.encodeIfPresent(data, forKey: "data")
+					try values.encode(data, forKey: "data")
 				}
 			}
 
-			public init(subscription: Subscription, subscriptionPricePoint: SubscriptionPricePoint, territory: Territory? = nil) {
-				self.subscription = subscription
-				self.subscriptionPricePoint = subscriptionPricePoint
+			public init(territory: Territory? = nil, subscriptionPricePoint: SubscriptionPricePoint, subscription: Subscription) {
 				self.territory = territory
+				self.subscriptionPricePoint = subscriptionPricePoint
+				self.subscription = subscription
 			}
 
 			public init(from decoder: Decoder) throws {
 				let values = try decoder.container(keyedBy: StringCodingKey.self)
-				self.subscription = try values.decode(Subscription.self, forKey: "subscription")
-				self.subscriptionPricePoint = try values.decode(SubscriptionPricePoint.self, forKey: "subscriptionPricePoint")
 				self.territory = try values.decodeIfPresent(Territory.self, forKey: "territory")
+				self.subscriptionPricePoint = try values.decode(SubscriptionPricePoint.self, forKey: "subscriptionPricePoint")
+				self.subscription = try values.decode(Subscription.self, forKey: "subscription")
 			}
 
 			public func encode(to encoder: Encoder) throws {
 				var values = encoder.container(keyedBy: StringCodingKey.self)
-				try values.encode(subscription, forKey: "subscription")
-				try values.encode(subscriptionPricePoint, forKey: "subscriptionPricePoint")
 				try values.encodeIfPresent(territory, forKey: "territory")
+				try values.encode(subscriptionPricePoint, forKey: "subscriptionPricePoint")
+				try values.encode(subscription, forKey: "subscription")
 			}
 		}
 
-		public enum `Type`: String, Codable, CaseIterable {
-			case subscriptionPrices
-		}
-
-		public init(attributes: Attributes? = nil, relationships: Relationships, type: `Type`) {
+		public init(attributes: Attributes? = nil, type: `Type`, relationships: Relationships) {
 			self.attributes = attributes
-			self.relationships = relationships
 			self.type = type
+			self.relationships = relationships
 		}
 
 		public init(from decoder: Decoder) throws {
 			let values = try decoder.container(keyedBy: StringCodingKey.self)
 			self.attributes = try values.decodeIfPresent(Attributes.self, forKey: "attributes")
-			self.relationships = try values.decode(Relationships.self, forKey: "relationships")
 			self.type = try values.decode(`Type`.self, forKey: "type")
+			self.relationships = try values.decode(Relationships.self, forKey: "relationships")
 		}
 
 		public func encode(to encoder: Encoder) throws {
 			var values = encoder.container(keyedBy: StringCodingKey.self)
 			try values.encodeIfPresent(attributes, forKey: "attributes")
-			try values.encode(relationships, forKey: "relationships")
 			try values.encode(type, forKey: "type")
+			try values.encode(relationships, forKey: "relationships")
 		}
 	}
 

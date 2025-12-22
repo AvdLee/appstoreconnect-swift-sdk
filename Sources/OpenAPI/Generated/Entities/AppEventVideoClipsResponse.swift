@@ -4,31 +4,31 @@
 import Foundation
 
 public struct AppEventVideoClipsResponse: Codable {
-	public var data: [AppEventVideoClip]
 	public var included: [AppEventLocalization]?
-	public var links: PagedDocumentLinks
+	public var data: [AppEventVideoClip]
 	public var meta: PagingInformation?
+	public var links: PagedDocumentLinks
 
-	public init(data: [AppEventVideoClip], included: [AppEventLocalization]? = nil, links: PagedDocumentLinks, meta: PagingInformation? = nil) {
-		self.data = data
+	public init(included: [AppEventLocalization]? = nil, data: [AppEventVideoClip], meta: PagingInformation? = nil, links: PagedDocumentLinks) {
 		self.included = included
-		self.links = links
+		self.data = data
 		self.meta = meta
+		self.links = links
 	}
 
 	public init(from decoder: Decoder) throws {
 		let values = try decoder.container(keyedBy: StringCodingKey.self)
-		self.data = try values.decode([AppEventVideoClip].self, forKey: "data")
 		self.included = try values.decodeIfPresent([AppEventLocalization].self, forKey: "included")
-		self.links = try values.decode(PagedDocumentLinks.self, forKey: "links")
+		self.data = try values.decode([AppEventVideoClip].self, forKey: "data")
 		self.meta = try values.decodeIfPresent(PagingInformation.self, forKey: "meta")
+		self.links = try values.decode(PagedDocumentLinks.self, forKey: "links")
 	}
 
 	public func encode(to encoder: Encoder) throws {
 		var values = encoder.container(keyedBy: StringCodingKey.self)
-		try values.encode(data, forKey: "data")
 		try values.encodeIfPresent(included, forKey: "included")
-		try values.encode(links, forKey: "links")
+		try values.encode(data, forKey: "data")
 		try values.encodeIfPresent(meta, forKey: "meta")
+		try values.encode(links, forKey: "links")
 	}
 }

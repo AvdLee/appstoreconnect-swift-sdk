@@ -5,32 +5,32 @@ import Foundation
 
 public struct AppClipAdvancedExperienceLocalizationInlineCreate: Codable, Identifiable {
 	public var attributes: Attributes?
-	public var id: String?
 	public var type: `Type`
+	public var id: String?
 
 	public struct Attributes: Codable {
 		public var language: AppClipAdvancedExperienceLanguage?
-		public var subtitle: String?
 		public var title: String?
+		public var subtitle: String?
 
-		public init(language: AppClipAdvancedExperienceLanguage? = nil, subtitle: String? = nil, title: String? = nil) {
+		public init(language: AppClipAdvancedExperienceLanguage? = nil, title: String? = nil, subtitle: String? = nil) {
 			self.language = language
-			self.subtitle = subtitle
 			self.title = title
+			self.subtitle = subtitle
 		}
 
 		public init(from decoder: Decoder) throws {
 			let values = try decoder.container(keyedBy: StringCodingKey.self)
 			self.language = try values.decodeIfPresent(AppClipAdvancedExperienceLanguage.self, forKey: "language")
-			self.subtitle = try values.decodeIfPresent(String.self, forKey: "subtitle")
 			self.title = try values.decodeIfPresent(String.self, forKey: "title")
+			self.subtitle = try values.decodeIfPresent(String.self, forKey: "subtitle")
 		}
 
 		public func encode(to encoder: Encoder) throws {
 			var values = encoder.container(keyedBy: StringCodingKey.self)
 			try values.encodeIfPresent(language, forKey: "language")
-			try values.encodeIfPresent(subtitle, forKey: "subtitle")
 			try values.encodeIfPresent(title, forKey: "title")
+			try values.encodeIfPresent(subtitle, forKey: "subtitle")
 		}
 	}
 
@@ -38,23 +38,23 @@ public struct AppClipAdvancedExperienceLocalizationInlineCreate: Codable, Identi
 		case appClipAdvancedExperienceLocalizations
 	}
 
-	public init(attributes: Attributes? = nil, id: String? = nil, type: `Type`) {
+	public init(attributes: Attributes? = nil, type: `Type`, id: String? = nil) {
 		self.attributes = attributes
-		self.id = id
 		self.type = type
+		self.id = id
 	}
 
 	public init(from decoder: Decoder) throws {
 		let values = try decoder.container(keyedBy: StringCodingKey.self)
 		self.attributes = try values.decodeIfPresent(Attributes.self, forKey: "attributes")
-		self.id = try values.decodeIfPresent(String.self, forKey: "id")
 		self.type = try values.decode(`Type`.self, forKey: "type")
+		self.id = try values.decodeIfPresent(String.self, forKey: "id")
 	}
 
 	public func encode(to encoder: Encoder) throws {
 		var values = encoder.container(keyedBy: StringCodingKey.self)
 		try values.encodeIfPresent(attributes, forKey: "attributes")
-		try values.encodeIfPresent(id, forKey: "id")
 		try values.encode(type, forKey: "type")
+		try values.encodeIfPresent(id, forKey: "id")
 	}
 }

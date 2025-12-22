@@ -4,18 +4,22 @@
 import Foundation
 
 public struct TerritoryAvailability: Codable, Identifiable {
-	public var attributes: Attributes?
+	public var type: `Type`
 	public var id: String
 	public var links: ResourceLinks?
+	public var attributes: Attributes?
 	public var relationships: Relationships?
-	public var type: `Type`
+
+	public enum `Type`: String, Codable, CaseIterable {
+		case territoryAvailabilities
+	}
 
 	public struct Attributes: Codable {
 		public var isAvailable: Bool?
-		public var contentStatuses: [ContentStatus]?
 		public var isPreOrderEnabled: Bool?
-		public var preOrderPublishDate: String?
 		public var releaseDate: String?
+		public var preOrderPublishDate: String?
+		public var contentStatuses: [ContentStatus]?
 
 		public enum ContentStatus: String, Codable, CaseIterable {
 			case available = "AVAILABLE"
@@ -67,30 +71,30 @@ public struct TerritoryAvailability: Codable, Identifiable {
 			case cannotSellFrequentWithoutGrac = "CANNOT_SELL_FREQUENT_WITHOUT_GRAC"
 		}
 
-		public init(isAvailable: Bool? = nil, contentStatuses: [ContentStatus]? = nil, isPreOrderEnabled: Bool? = nil, preOrderPublishDate: String? = nil, releaseDate: String? = nil) {
+		public init(isAvailable: Bool? = nil, isPreOrderEnabled: Bool? = nil, releaseDate: String? = nil, preOrderPublishDate: String? = nil, contentStatuses: [ContentStatus]? = nil) {
 			self.isAvailable = isAvailable
-			self.contentStatuses = contentStatuses
 			self.isPreOrderEnabled = isPreOrderEnabled
-			self.preOrderPublishDate = preOrderPublishDate
 			self.releaseDate = releaseDate
+			self.preOrderPublishDate = preOrderPublishDate
+			self.contentStatuses = contentStatuses
 		}
 
 		public init(from decoder: Decoder) throws {
 			let values = try decoder.container(keyedBy: StringCodingKey.self)
 			self.isAvailable = try values.decodeIfPresent(Bool.self, forKey: "available")
-			self.contentStatuses = try values.decodeIfPresent([ContentStatus].self, forKey: "contentStatuses")
 			self.isPreOrderEnabled = try values.decodeIfPresent(Bool.self, forKey: "preOrderEnabled")
-			self.preOrderPublishDate = try values.decodeIfPresent(String.self, forKey: "preOrderPublishDate")
 			self.releaseDate = try values.decodeIfPresent(String.self, forKey: "releaseDate")
+			self.preOrderPublishDate = try values.decodeIfPresent(String.self, forKey: "preOrderPublishDate")
+			self.contentStatuses = try values.decodeIfPresent([ContentStatus].self, forKey: "contentStatuses")
 		}
 
 		public func encode(to encoder: Encoder) throws {
 			var values = encoder.container(keyedBy: StringCodingKey.self)
 			try values.encodeIfPresent(isAvailable, forKey: "available")
-			try values.encodeIfPresent(contentStatuses, forKey: "contentStatuses")
 			try values.encodeIfPresent(isPreOrderEnabled, forKey: "preOrderEnabled")
-			try values.encodeIfPresent(preOrderPublishDate, forKey: "preOrderPublishDate")
 			try values.encodeIfPresent(releaseDate, forKey: "releaseDate")
+			try values.encodeIfPresent(preOrderPublishDate, forKey: "preOrderPublishDate")
+			try values.encodeIfPresent(contentStatuses, forKey: "contentStatuses")
 		}
 	}
 
@@ -156,33 +160,29 @@ public struct TerritoryAvailability: Codable, Identifiable {
 		}
 	}
 
-	public enum `Type`: String, Codable, CaseIterable {
-		case territoryAvailabilities
-	}
-
-	public init(attributes: Attributes? = nil, id: String, links: ResourceLinks? = nil, relationships: Relationships? = nil, type: `Type`) {
-		self.attributes = attributes
+	public init(type: `Type`, id: String, links: ResourceLinks? = nil, attributes: Attributes? = nil, relationships: Relationships? = nil) {
+		self.type = type
 		self.id = id
 		self.links = links
+		self.attributes = attributes
 		self.relationships = relationships
-		self.type = type
 	}
 
 	public init(from decoder: Decoder) throws {
 		let values = try decoder.container(keyedBy: StringCodingKey.self)
-		self.attributes = try values.decodeIfPresent(Attributes.self, forKey: "attributes")
+		self.type = try values.decode(`Type`.self, forKey: "type")
 		self.id = try values.decode(String.self, forKey: "id")
 		self.links = try values.decodeIfPresent(ResourceLinks.self, forKey: "links")
+		self.attributes = try values.decodeIfPresent(Attributes.self, forKey: "attributes")
 		self.relationships = try values.decodeIfPresent(Relationships.self, forKey: "relationships")
-		self.type = try values.decode(`Type`.self, forKey: "type")
 	}
 
 	public func encode(to encoder: Encoder) throws {
 		var values = encoder.container(keyedBy: StringCodingKey.self)
-		try values.encodeIfPresent(attributes, forKey: "attributes")
+		try values.encode(type, forKey: "type")
 		try values.encode(id, forKey: "id")
 		try values.encodeIfPresent(links, forKey: "links")
+		try values.encodeIfPresent(attributes, forKey: "attributes")
 		try values.encodeIfPresent(relationships, forKey: "relationships")
-		try values.encode(type, forKey: "type")
 	}
 }

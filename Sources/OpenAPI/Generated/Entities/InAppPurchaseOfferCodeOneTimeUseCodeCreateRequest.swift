@@ -7,32 +7,36 @@ public struct InAppPurchaseOfferCodeOneTimeUseCodeCreateRequest: Codable {
 	public var data: Data
 
 	public struct Data: Codable {
+		public var type: `Type`
 		public var attributes: Attributes
 		public var relationships: Relationships
-		public var type: `Type`
+
+		public enum `Type`: String, Codable, CaseIterable {
+			case inAppPurchaseOfferCodeOneTimeUseCodes
+		}
 
 		public struct Attributes: Codable {
-			public var environment: OfferCodeEnvironment?
 			public var expirationDate: String
+			public var environment: OfferCodeEnvironment?
 			public var numberOfCodes: Int
 
-			public init(environment: OfferCodeEnvironment? = nil, expirationDate: String, numberOfCodes: Int) {
-				self.environment = environment
+			public init(expirationDate: String, environment: OfferCodeEnvironment? = nil, numberOfCodes: Int) {
 				self.expirationDate = expirationDate
+				self.environment = environment
 				self.numberOfCodes = numberOfCodes
 			}
 
 			public init(from decoder: Decoder) throws {
 				let values = try decoder.container(keyedBy: StringCodingKey.self)
-				self.environment = try values.decodeIfPresent(OfferCodeEnvironment.self, forKey: "environment")
 				self.expirationDate = try values.decode(String.self, forKey: "expirationDate")
+				self.environment = try values.decodeIfPresent(OfferCodeEnvironment.self, forKey: "environment")
 				self.numberOfCodes = try values.decode(Int.self, forKey: "numberOfCodes")
 			}
 
 			public func encode(to encoder: Encoder) throws {
 				var values = encoder.container(keyedBy: StringCodingKey.self)
-				try values.encodeIfPresent(environment, forKey: "environment")
 				try values.encode(expirationDate, forKey: "expirationDate")
+				try values.encodeIfPresent(environment, forKey: "environment")
 				try values.encode(numberOfCodes, forKey: "numberOfCodes")
 			}
 		}
@@ -44,28 +48,28 @@ public struct InAppPurchaseOfferCodeOneTimeUseCodeCreateRequest: Codable {
 				public var data: Data
 
 				public struct Data: Codable, Identifiable {
-					public var id: String
 					public var type: `Type`
+					public var id: String
 
 					public enum `Type`: String, Codable, CaseIterable {
 						case inAppPurchaseOfferCodes
 					}
 
-					public init(id: String, type: `Type`) {
-						self.id = id
+					public init(type: `Type`, id: String) {
 						self.type = type
+						self.id = id
 					}
 
 					public init(from decoder: Decoder) throws {
 						let values = try decoder.container(keyedBy: StringCodingKey.self)
-						self.id = try values.decode(String.self, forKey: "id")
 						self.type = try values.decode(`Type`.self, forKey: "type")
+						self.id = try values.decode(String.self, forKey: "id")
 					}
 
 					public func encode(to encoder: Encoder) throws {
 						var values = encoder.container(keyedBy: StringCodingKey.self)
-						try values.encode(id, forKey: "id")
 						try values.encode(type, forKey: "type")
+						try values.encode(id, forKey: "id")
 					}
 				}
 
@@ -99,28 +103,24 @@ public struct InAppPurchaseOfferCodeOneTimeUseCodeCreateRequest: Codable {
 			}
 		}
 
-		public enum `Type`: String, Codable, CaseIterable {
-			case inAppPurchaseOfferCodeOneTimeUseCodes
-		}
-
-		public init(attributes: Attributes, relationships: Relationships, type: `Type`) {
+		public init(type: `Type`, attributes: Attributes, relationships: Relationships) {
+			self.type = type
 			self.attributes = attributes
 			self.relationships = relationships
-			self.type = type
 		}
 
 		public init(from decoder: Decoder) throws {
 			let values = try decoder.container(keyedBy: StringCodingKey.self)
+			self.type = try values.decode(`Type`.self, forKey: "type")
 			self.attributes = try values.decode(Attributes.self, forKey: "attributes")
 			self.relationships = try values.decode(Relationships.self, forKey: "relationships")
-			self.type = try values.decode(`Type`.self, forKey: "type")
 		}
 
 		public func encode(to encoder: Encoder) throws {
 			var values = encoder.container(keyedBy: StringCodingKey.self)
+			try values.encode(type, forKey: "type")
 			try values.encode(attributes, forKey: "attributes")
 			try values.encode(relationships, forKey: "relationships")
-			try values.encode(type, forKey: "type")
 		}
 	}
 

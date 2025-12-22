@@ -8,40 +8,40 @@ public struct BetaAppLocalizationUpdateRequest: Codable {
 
 	public struct Data: Codable, Identifiable {
 		public var attributes: Attributes?
-		public var id: String
 		public var type: `Type`
+		public var id: String
 
 		public struct Attributes: Codable {
-			public var description: String?
 			public var feedbackEmail: String?
-			public var marketingURL: String?
+			public var description: String?
 			public var privacyPolicyURL: String?
 			public var tvOsPrivacyPolicy: String?
+			public var marketingURL: String?
 
-			public init(description: String? = nil, feedbackEmail: String? = nil, marketingURL: String? = nil, privacyPolicyURL: String? = nil, tvOsPrivacyPolicy: String? = nil) {
-				self.description = description
+			public init(feedbackEmail: String? = nil, description: String? = nil, privacyPolicyURL: String? = nil, tvOsPrivacyPolicy: String? = nil, marketingURL: String? = nil) {
 				self.feedbackEmail = feedbackEmail
-				self.marketingURL = marketingURL
+				self.description = description
 				self.privacyPolicyURL = privacyPolicyURL
 				self.tvOsPrivacyPolicy = tvOsPrivacyPolicy
+				self.marketingURL = marketingURL
 			}
 
 			public init(from decoder: Decoder) throws {
 				let values = try decoder.container(keyedBy: StringCodingKey.self)
-				self.description = try values.decodeIfPresent(String.self, forKey: "description")
 				self.feedbackEmail = try values.decodeIfPresent(String.self, forKey: "feedbackEmail")
-				self.marketingURL = try values.decodeIfPresent(String.self, forKey: "marketingUrl")
+				self.description = try values.decodeIfPresent(String.self, forKey: "description")
 				self.privacyPolicyURL = try values.decodeIfPresent(String.self, forKey: "privacyPolicyUrl")
 				self.tvOsPrivacyPolicy = try values.decodeIfPresent(String.self, forKey: "tvOsPrivacyPolicy")
+				self.marketingURL = try values.decodeIfPresent(String.self, forKey: "marketingUrl")
 			}
 
 			public func encode(to encoder: Encoder) throws {
 				var values = encoder.container(keyedBy: StringCodingKey.self)
-				try values.encodeIfPresent(description, forKey: "description")
 				try values.encodeIfPresent(feedbackEmail, forKey: "feedbackEmail")
-				try values.encodeIfPresent(marketingURL, forKey: "marketingUrl")
+				try values.encodeIfPresent(description, forKey: "description")
 				try values.encodeIfPresent(privacyPolicyURL, forKey: "privacyPolicyUrl")
 				try values.encodeIfPresent(tvOsPrivacyPolicy, forKey: "tvOsPrivacyPolicy")
+				try values.encodeIfPresent(marketingURL, forKey: "marketingUrl")
 			}
 		}
 
@@ -49,24 +49,24 @@ public struct BetaAppLocalizationUpdateRequest: Codable {
 			case betaAppLocalizations
 		}
 
-		public init(attributes: Attributes? = nil, id: String, type: `Type`) {
+		public init(attributes: Attributes? = nil, type: `Type`, id: String) {
 			self.attributes = attributes
-			self.id = id
 			self.type = type
+			self.id = id
 		}
 
 		public init(from decoder: Decoder) throws {
 			let values = try decoder.container(keyedBy: StringCodingKey.self)
 			self.attributes = try values.decodeIfPresent(Attributes.self, forKey: "attributes")
-			self.id = try values.decode(String.self, forKey: "id")
 			self.type = try values.decode(`Type`.self, forKey: "type")
+			self.id = try values.decode(String.self, forKey: "id")
 		}
 
 		public func encode(to encoder: Encoder) throws {
 			var values = encoder.container(keyedBy: StringCodingKey.self)
 			try values.encodeIfPresent(attributes, forKey: "attributes")
-			try values.encode(id, forKey: "id")
 			try values.encode(type, forKey: "type")
+			try values.encode(id, forKey: "id")
 		}
 	}
 
