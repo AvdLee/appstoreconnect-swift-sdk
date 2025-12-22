@@ -4,20 +4,14 @@
 import Foundation
 
 public struct CapabilitySetting: Codable {
-	public var minInstances: Int?
+	public var allowedInstances: AllowedInstances?
 	public var description: String?
+	public var isEnabledByDefault: Bool?
 	public var key: Key?
-	public var isVisible: Bool?
+	public var minInstances: Int?
 	public var name: String?
 	public var options: [CapabilityOption]?
-	public var isEnabledByDefault: Bool?
-	public var allowedInstances: AllowedInstances?
-
-	public enum Key: String, Codable, CaseIterable {
-		case icloudVersion = "ICLOUD_VERSION"
-		case dataProtectionPermissionLevel = "DATA_PROTECTION_PERMISSION_LEVEL"
-		case appleIDAuthAppConsent = "APPLE_ID_AUTH_APP_CONSENT"
-	}
+	public var isVisible: Bool?
 
 	public enum AllowedInstances: String, Codable, CaseIterable {
 		case entry = "ENTRY"
@@ -25,38 +19,44 @@ public struct CapabilitySetting: Codable {
 		case multiple = "MULTIPLE"
 	}
 
-	public init(minInstances: Int? = nil, description: String? = nil, key: Key? = nil, isVisible: Bool? = nil, name: String? = nil, options: [CapabilityOption]? = nil, isEnabledByDefault: Bool? = nil, allowedInstances: AllowedInstances? = nil) {
-		self.minInstances = minInstances
+	public enum Key: String, Codable, CaseIterable {
+		case icloudVersion = "ICLOUD_VERSION"
+		case dataProtectionPermissionLevel = "DATA_PROTECTION_PERMISSION_LEVEL"
+		case appleIDAuthAppConsent = "APPLE_ID_AUTH_APP_CONSENT"
+	}
+
+	public init(allowedInstances: AllowedInstances? = nil, description: String? = nil, isEnabledByDefault: Bool? = nil, key: Key? = nil, minInstances: Int? = nil, name: String? = nil, options: [CapabilityOption]? = nil, isVisible: Bool? = nil) {
+		self.allowedInstances = allowedInstances
 		self.description = description
+		self.isEnabledByDefault = isEnabledByDefault
 		self.key = key
-		self.isVisible = isVisible
+		self.minInstances = minInstances
 		self.name = name
 		self.options = options
-		self.isEnabledByDefault = isEnabledByDefault
-		self.allowedInstances = allowedInstances
+		self.isVisible = isVisible
 	}
 
 	public init(from decoder: Decoder) throws {
 		let values = try decoder.container(keyedBy: StringCodingKey.self)
-		self.minInstances = try values.decodeIfPresent(Int.self, forKey: "minInstances")
+		self.allowedInstances = try values.decodeIfPresent(AllowedInstances.self, forKey: "allowedInstances")
 		self.description = try values.decodeIfPresent(String.self, forKey: "description")
+		self.isEnabledByDefault = try values.decodeIfPresent(Bool.self, forKey: "enabledByDefault")
 		self.key = try values.decodeIfPresent(Key.self, forKey: "key")
-		self.isVisible = try values.decodeIfPresent(Bool.self, forKey: "visible")
+		self.minInstances = try values.decodeIfPresent(Int.self, forKey: "minInstances")
 		self.name = try values.decodeIfPresent(String.self, forKey: "name")
 		self.options = try values.decodeIfPresent([CapabilityOption].self, forKey: "options")
-		self.isEnabledByDefault = try values.decodeIfPresent(Bool.self, forKey: "enabledByDefault")
-		self.allowedInstances = try values.decodeIfPresent(AllowedInstances.self, forKey: "allowedInstances")
+		self.isVisible = try values.decodeIfPresent(Bool.self, forKey: "visible")
 	}
 
 	public func encode(to encoder: Encoder) throws {
 		var values = encoder.container(keyedBy: StringCodingKey.self)
-		try values.encodeIfPresent(minInstances, forKey: "minInstances")
+		try values.encodeIfPresent(allowedInstances, forKey: "allowedInstances")
 		try values.encodeIfPresent(description, forKey: "description")
+		try values.encodeIfPresent(isEnabledByDefault, forKey: "enabledByDefault")
 		try values.encodeIfPresent(key, forKey: "key")
-		try values.encodeIfPresent(isVisible, forKey: "visible")
+		try values.encodeIfPresent(minInstances, forKey: "minInstances")
 		try values.encodeIfPresent(name, forKey: "name")
 		try values.encodeIfPresent(options, forKey: "options")
-		try values.encodeIfPresent(isEnabledByDefault, forKey: "enabledByDefault")
-		try values.encodeIfPresent(allowedInstances, forKey: "allowedInstances")
+		try values.encodeIfPresent(isVisible, forKey: "visible")
 	}
 }

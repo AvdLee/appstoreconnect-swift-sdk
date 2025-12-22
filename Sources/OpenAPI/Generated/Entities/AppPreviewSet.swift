@@ -4,23 +4,37 @@
 import Foundation
 
 public struct AppPreviewSet: Codable, Identifiable {
-	public var type: `Type`
-	public var relationships: Relationships?
-	public var id: String
 	public var attributes: Attributes?
+	public var id: String
 	public var links: ResourceLinks?
+	public var relationships: Relationships?
+	public var type: `Type`
 
-	public enum `Type`: String, Codable, CaseIterable {
-		case appPreviewSets
+	public struct Attributes: Codable {
+		public var previewType: PreviewType?
+
+		public init(previewType: PreviewType? = nil) {
+			self.previewType = previewType
+		}
+
+		public init(from decoder: Decoder) throws {
+			let values = try decoder.container(keyedBy: StringCodingKey.self)
+			self.previewType = try values.decodeIfPresent(PreviewType.self, forKey: "previewType")
+		}
+
+		public func encode(to encoder: Encoder) throws {
+			var values = encoder.container(keyedBy: StringCodingKey.self)
+			try values.encodeIfPresent(previewType, forKey: "previewType")
+		}
 	}
 
 	public struct Relationships: Codable {
-		public var appStoreVersionLocalization: AppStoreVersionLocalization?
-		public var appStoreVersionExperimentTreatmentLocalization: AppStoreVersionExperimentTreatmentLocalization?
-		public var appPreviews: AppPreviews?
 		public var appCustomProductPageLocalization: AppCustomProductPageLocalization?
+		public var appPreviews: AppPreviews?
+		public var appStoreVersionExperimentTreatmentLocalization: AppStoreVersionExperimentTreatmentLocalization?
+		public var appStoreVersionLocalization: AppStoreVersionLocalization?
 
-		public struct AppStoreVersionLocalization: Codable {
+		public struct AppCustomProductPageLocalization: Codable {
 			public var data: Data?
 
 			public struct Data: Codable, Identifiable {
@@ -28,7 +42,7 @@ public struct AppPreviewSet: Codable, Identifiable {
 				public var type: `Type`
 
 				public enum `Type`: String, Codable, CaseIterable {
-					case appStoreVersionLocalizations
+					case appCustomProductPageLocalizations
 				}
 
 				public init(id: String, type: `Type`) {
@@ -61,6 +75,58 @@ public struct AppPreviewSet: Codable, Identifiable {
 			public func encode(to encoder: Encoder) throws {
 				var values = encoder.container(keyedBy: StringCodingKey.self)
 				try values.encodeIfPresent(data, forKey: "data")
+			}
+		}
+
+		public struct AppPreviews: Codable {
+			public var data: [Datum]?
+			public var links: RelationshipLinks?
+			public var meta: PagingInformation?
+
+			public struct Datum: Codable, Identifiable {
+				public var id: String
+				public var type: `Type`
+
+				public enum `Type`: String, Codable, CaseIterable {
+					case appPreviews
+				}
+
+				public init(id: String, type: `Type`) {
+					self.id = id
+					self.type = type
+				}
+
+				public init(from decoder: Decoder) throws {
+					let values = try decoder.container(keyedBy: StringCodingKey.self)
+					self.id = try values.decode(String.self, forKey: "id")
+					self.type = try values.decode(`Type`.self, forKey: "type")
+				}
+
+				public func encode(to encoder: Encoder) throws {
+					var values = encoder.container(keyedBy: StringCodingKey.self)
+					try values.encode(id, forKey: "id")
+					try values.encode(type, forKey: "type")
+				}
+			}
+
+			public init(data: [Datum]? = nil, links: RelationshipLinks? = nil, meta: PagingInformation? = nil) {
+				self.data = data
+				self.links = links
+				self.meta = meta
+			}
+
+			public init(from decoder: Decoder) throws {
+				let values = try decoder.container(keyedBy: StringCodingKey.self)
+				self.data = try values.decodeIfPresent([Datum].self, forKey: "data")
+				self.links = try values.decodeIfPresent(RelationshipLinks.self, forKey: "links")
+				self.meta = try values.decodeIfPresent(PagingInformation.self, forKey: "meta")
+			}
+
+			public func encode(to encoder: Encoder) throws {
+				var values = encoder.container(keyedBy: StringCodingKey.self)
+				try values.encodeIfPresent(data, forKey: "data")
+				try values.encodeIfPresent(links, forKey: "links")
+				try values.encodeIfPresent(meta, forKey: "meta")
 			}
 		}
 
@@ -108,59 +174,7 @@ public struct AppPreviewSet: Codable, Identifiable {
 			}
 		}
 
-		public struct AppPreviews: Codable {
-			public var links: RelationshipLinks?
-			public var data: [Datum]?
-			public var meta: PagingInformation?
-
-			public struct Datum: Codable, Identifiable {
-				public var type: `Type`
-				public var id: String
-
-				public enum `Type`: String, Codable, CaseIterable {
-					case appPreviews
-				}
-
-				public init(type: `Type`, id: String) {
-					self.type = type
-					self.id = id
-				}
-
-				public init(from decoder: Decoder) throws {
-					let values = try decoder.container(keyedBy: StringCodingKey.self)
-					self.type = try values.decode(`Type`.self, forKey: "type")
-					self.id = try values.decode(String.self, forKey: "id")
-				}
-
-				public func encode(to encoder: Encoder) throws {
-					var values = encoder.container(keyedBy: StringCodingKey.self)
-					try values.encode(type, forKey: "type")
-					try values.encode(id, forKey: "id")
-				}
-			}
-
-			public init(links: RelationshipLinks? = nil, data: [Datum]? = nil, meta: PagingInformation? = nil) {
-				self.links = links
-				self.data = data
-				self.meta = meta
-			}
-
-			public init(from decoder: Decoder) throws {
-				let values = try decoder.container(keyedBy: StringCodingKey.self)
-				self.links = try values.decodeIfPresent(RelationshipLinks.self, forKey: "links")
-				self.data = try values.decodeIfPresent([Datum].self, forKey: "data")
-				self.meta = try values.decodeIfPresent(PagingInformation.self, forKey: "meta")
-			}
-
-			public func encode(to encoder: Encoder) throws {
-				var values = encoder.container(keyedBy: StringCodingKey.self)
-				try values.encodeIfPresent(links, forKey: "links")
-				try values.encodeIfPresent(data, forKey: "data")
-				try values.encodeIfPresent(meta, forKey: "meta")
-			}
-		}
-
-		public struct AppCustomProductPageLocalization: Codable {
+		public struct AppStoreVersionLocalization: Codable {
 			public var data: Data?
 
 			public struct Data: Codable, Identifiable {
@@ -168,7 +182,7 @@ public struct AppPreviewSet: Codable, Identifiable {
 				public var type: `Type`
 
 				public enum `Type`: String, Codable, CaseIterable {
-					case appCustomProductPageLocalizations
+					case appStoreVersionLocalizations
 				}
 
 				public init(id: String, type: `Type`) {
@@ -204,71 +218,57 @@ public struct AppPreviewSet: Codable, Identifiable {
 			}
 		}
 
-		public init(appStoreVersionLocalization: AppStoreVersionLocalization? = nil, appStoreVersionExperimentTreatmentLocalization: AppStoreVersionExperimentTreatmentLocalization? = nil, appPreviews: AppPreviews? = nil, appCustomProductPageLocalization: AppCustomProductPageLocalization? = nil) {
-			self.appStoreVersionLocalization = appStoreVersionLocalization
-			self.appStoreVersionExperimentTreatmentLocalization = appStoreVersionExperimentTreatmentLocalization
-			self.appPreviews = appPreviews
+		public init(appCustomProductPageLocalization: AppCustomProductPageLocalization? = nil, appPreviews: AppPreviews? = nil, appStoreVersionExperimentTreatmentLocalization: AppStoreVersionExperimentTreatmentLocalization? = nil, appStoreVersionLocalization: AppStoreVersionLocalization? = nil) {
 			self.appCustomProductPageLocalization = appCustomProductPageLocalization
+			self.appPreviews = appPreviews
+			self.appStoreVersionExperimentTreatmentLocalization = appStoreVersionExperimentTreatmentLocalization
+			self.appStoreVersionLocalization = appStoreVersionLocalization
 		}
 
 		public init(from decoder: Decoder) throws {
 			let values = try decoder.container(keyedBy: StringCodingKey.self)
-			self.appStoreVersionLocalization = try values.decodeIfPresent(AppStoreVersionLocalization.self, forKey: "appStoreVersionLocalization")
-			self.appStoreVersionExperimentTreatmentLocalization = try values.decodeIfPresent(AppStoreVersionExperimentTreatmentLocalization.self, forKey: "appStoreVersionExperimentTreatmentLocalization")
-			self.appPreviews = try values.decodeIfPresent(AppPreviews.self, forKey: "appPreviews")
 			self.appCustomProductPageLocalization = try values.decodeIfPresent(AppCustomProductPageLocalization.self, forKey: "appCustomProductPageLocalization")
+			self.appPreviews = try values.decodeIfPresent(AppPreviews.self, forKey: "appPreviews")
+			self.appStoreVersionExperimentTreatmentLocalization = try values.decodeIfPresent(AppStoreVersionExperimentTreatmentLocalization.self, forKey: "appStoreVersionExperimentTreatmentLocalization")
+			self.appStoreVersionLocalization = try values.decodeIfPresent(AppStoreVersionLocalization.self, forKey: "appStoreVersionLocalization")
 		}
 
 		public func encode(to encoder: Encoder) throws {
 			var values = encoder.container(keyedBy: StringCodingKey.self)
-			try values.encodeIfPresent(appStoreVersionLocalization, forKey: "appStoreVersionLocalization")
-			try values.encodeIfPresent(appStoreVersionExperimentTreatmentLocalization, forKey: "appStoreVersionExperimentTreatmentLocalization")
-			try values.encodeIfPresent(appPreviews, forKey: "appPreviews")
 			try values.encodeIfPresent(appCustomProductPageLocalization, forKey: "appCustomProductPageLocalization")
+			try values.encodeIfPresent(appPreviews, forKey: "appPreviews")
+			try values.encodeIfPresent(appStoreVersionExperimentTreatmentLocalization, forKey: "appStoreVersionExperimentTreatmentLocalization")
+			try values.encodeIfPresent(appStoreVersionLocalization, forKey: "appStoreVersionLocalization")
 		}
 	}
 
-	public struct Attributes: Codable {
-		public var previewType: PreviewType?
-
-		public init(previewType: PreviewType? = nil) {
-			self.previewType = previewType
-		}
-
-		public init(from decoder: Decoder) throws {
-			let values = try decoder.container(keyedBy: StringCodingKey.self)
-			self.previewType = try values.decodeIfPresent(PreviewType.self, forKey: "previewType")
-		}
-
-		public func encode(to encoder: Encoder) throws {
-			var values = encoder.container(keyedBy: StringCodingKey.self)
-			try values.encodeIfPresent(previewType, forKey: "previewType")
-		}
+	public enum `Type`: String, Codable, CaseIterable {
+		case appPreviewSets
 	}
 
-	public init(type: `Type`, relationships: Relationships? = nil, id: String, attributes: Attributes? = nil, links: ResourceLinks? = nil) {
-		self.type = type
-		self.relationships = relationships
-		self.id = id
+	public init(attributes: Attributes? = nil, id: String, links: ResourceLinks? = nil, relationships: Relationships? = nil, type: `Type`) {
 		self.attributes = attributes
+		self.id = id
 		self.links = links
+		self.relationships = relationships
+		self.type = type
 	}
 
 	public init(from decoder: Decoder) throws {
 		let values = try decoder.container(keyedBy: StringCodingKey.self)
-		self.type = try values.decode(`Type`.self, forKey: "type")
-		self.relationships = try values.decodeIfPresent(Relationships.self, forKey: "relationships")
-		self.id = try values.decode(String.self, forKey: "id")
 		self.attributes = try values.decodeIfPresent(Attributes.self, forKey: "attributes")
+		self.id = try values.decode(String.self, forKey: "id")
 		self.links = try values.decodeIfPresent(ResourceLinks.self, forKey: "links")
+		self.relationships = try values.decodeIfPresent(Relationships.self, forKey: "relationships")
+		self.type = try values.decode(`Type`.self, forKey: "type")
 	}
 
 	public func encode(to encoder: Encoder) throws {
 		var values = encoder.container(keyedBy: StringCodingKey.self)
-		try values.encode(type, forKey: "type")
-		try values.encodeIfPresent(relationships, forKey: "relationships")
-		try values.encode(id, forKey: "id")
 		try values.encodeIfPresent(attributes, forKey: "attributes")
+		try values.encode(id, forKey: "id")
 		try values.encodeIfPresent(links, forKey: "links")
+		try values.encodeIfPresent(relationships, forKey: "relationships")
+		try values.encode(type, forKey: "type")
 	}
 }

@@ -4,11 +4,33 @@
 import Foundation
 
 public struct ScmProvider: Codable, Identifiable {
+	public var attributes: Attributes?
+	public var id: String
 	public var links: ResourceLinks?
 	public var relationships: Relationships?
-	public var id: String
-	public var attributes: Attributes?
 	public var type: `Type`
+
+	public struct Attributes: Codable {
+		public var scmProviderType: ScmProviderType?
+		public var url: URL?
+
+		public init(scmProviderType: ScmProviderType? = nil, url: URL? = nil) {
+			self.scmProviderType = scmProviderType
+			self.url = url
+		}
+
+		public init(from decoder: Decoder) throws {
+			let values = try decoder.container(keyedBy: StringCodingKey.self)
+			self.scmProviderType = try values.decodeIfPresent(ScmProviderType.self, forKey: "scmProviderType")
+			self.url = try values.decodeIfPresent(URL.self, forKey: "url")
+		}
+
+		public func encode(to encoder: Encoder) throws {
+			var values = encoder.container(keyedBy: StringCodingKey.self)
+			try values.encodeIfPresent(scmProviderType, forKey: "scmProviderType")
+			try values.encodeIfPresent(url, forKey: "url")
+		}
+	}
 
 	public struct Relationships: Codable {
 		public var repositories: Repositories?
@@ -46,55 +68,33 @@ public struct ScmProvider: Codable, Identifiable {
 		}
 	}
 
-	public struct Attributes: Codable {
-		public var scmProviderType: ScmProviderType?
-		public var url: URL?
-
-		public init(scmProviderType: ScmProviderType? = nil, url: URL? = nil) {
-			self.scmProviderType = scmProviderType
-			self.url = url
-		}
-
-		public init(from decoder: Decoder) throws {
-			let values = try decoder.container(keyedBy: StringCodingKey.self)
-			self.scmProviderType = try values.decodeIfPresent(ScmProviderType.self, forKey: "scmProviderType")
-			self.url = try values.decodeIfPresent(URL.self, forKey: "url")
-		}
-
-		public func encode(to encoder: Encoder) throws {
-			var values = encoder.container(keyedBy: StringCodingKey.self)
-			try values.encodeIfPresent(scmProviderType, forKey: "scmProviderType")
-			try values.encodeIfPresent(url, forKey: "url")
-		}
-	}
-
 	public enum `Type`: String, Codable, CaseIterable {
 		case scmProviders
 	}
 
-	public init(links: ResourceLinks? = nil, relationships: Relationships? = nil, id: String, attributes: Attributes? = nil, type: `Type`) {
+	public init(attributes: Attributes? = nil, id: String, links: ResourceLinks? = nil, relationships: Relationships? = nil, type: `Type`) {
+		self.attributes = attributes
+		self.id = id
 		self.links = links
 		self.relationships = relationships
-		self.id = id
-		self.attributes = attributes
 		self.type = type
 	}
 
 	public init(from decoder: Decoder) throws {
 		let values = try decoder.container(keyedBy: StringCodingKey.self)
+		self.attributes = try values.decodeIfPresent(Attributes.self, forKey: "attributes")
+		self.id = try values.decode(String.self, forKey: "id")
 		self.links = try values.decodeIfPresent(ResourceLinks.self, forKey: "links")
 		self.relationships = try values.decodeIfPresent(Relationships.self, forKey: "relationships")
-		self.id = try values.decode(String.self, forKey: "id")
-		self.attributes = try values.decodeIfPresent(Attributes.self, forKey: "attributes")
 		self.type = try values.decode(`Type`.self, forKey: "type")
 	}
 
 	public func encode(to encoder: Encoder) throws {
 		var values = encoder.container(keyedBy: StringCodingKey.self)
+		try values.encodeIfPresent(attributes, forKey: "attributes")
+		try values.encode(id, forKey: "id")
 		try values.encodeIfPresent(links, forKey: "links")
 		try values.encodeIfPresent(relationships, forKey: "relationships")
-		try values.encode(id, forKey: "id")
-		try values.encodeIfPresent(attributes, forKey: "attributes")
 		try values.encode(type, forKey: "type")
 	}
 }

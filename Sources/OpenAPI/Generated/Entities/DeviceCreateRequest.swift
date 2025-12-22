@@ -12,27 +12,27 @@ public struct DeviceCreateRequest: Codable {
 
 		public struct Attributes: Codable {
 			public var name: String
-			public var udid: String
 			public var platform: BundleIDPlatform
+			public var udid: String
 
-			public init(name: String, udid: String, platform: BundleIDPlatform) {
+			public init(name: String, platform: BundleIDPlatform, udid: String) {
 				self.name = name
-				self.udid = udid
 				self.platform = platform
+				self.udid = udid
 			}
 
 			public init(from decoder: Decoder) throws {
 				let values = try decoder.container(keyedBy: StringCodingKey.self)
 				self.name = try values.decode(String.self, forKey: "name")
-				self.udid = try values.decode(String.self, forKey: "udid")
 				self.platform = try values.decode(BundleIDPlatform.self, forKey: "platform")
+				self.udid = try values.decode(String.self, forKey: "udid")
 			}
 
 			public func encode(to encoder: Encoder) throws {
 				var values = encoder.container(keyedBy: StringCodingKey.self)
 				try values.encode(name, forKey: "name")
-				try values.encode(udid, forKey: "udid")
 				try values.encode(platform, forKey: "platform")
+				try values.encode(udid, forKey: "udid")
 			}
 		}
 

@@ -4,27 +4,27 @@
 import Foundation
 
 public struct CiStartConditionFileMatcher: Codable {
-	public var fileName: String?
-	public var fileExtension: String?
 	public var directory: String?
+	public var fileExtension: String?
+	public var fileName: String?
 
-	public init(fileName: String? = nil, fileExtension: String? = nil, directory: String? = nil) {
-		self.fileName = fileName
-		self.fileExtension = fileExtension
+	public init(directory: String? = nil, fileExtension: String? = nil, fileName: String? = nil) {
 		self.directory = directory
+		self.fileExtension = fileExtension
+		self.fileName = fileName
 	}
 
 	public init(from decoder: Decoder) throws {
 		let values = try decoder.container(keyedBy: StringCodingKey.self)
-		self.fileName = try values.decodeIfPresent(String.self, forKey: "fileName")
-		self.fileExtension = try values.decodeIfPresent(String.self, forKey: "fileExtension")
 		self.directory = try values.decodeIfPresent(String.self, forKey: "directory")
+		self.fileExtension = try values.decodeIfPresent(String.self, forKey: "fileExtension")
+		self.fileName = try values.decodeIfPresent(String.self, forKey: "fileName")
 	}
 
 	public func encode(to encoder: Encoder) throws {
 		var values = encoder.container(keyedBy: StringCodingKey.self)
-		try values.encodeIfPresent(fileName, forKey: "fileName")
-		try values.encodeIfPresent(fileExtension, forKey: "fileExtension")
 		try values.encodeIfPresent(directory, forKey: "directory")
+		try values.encodeIfPresent(fileExtension, forKey: "fileExtension")
+		try values.encodeIfPresent(fileName, forKey: "fileName")
 	}
 }

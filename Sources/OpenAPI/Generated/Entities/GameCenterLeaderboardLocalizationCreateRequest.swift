@@ -12,40 +12,40 @@ public struct GameCenterLeaderboardLocalizationCreateRequest: Codable {
 		public var type: `Type`
 
 		public struct Attributes: Codable {
+			public var description: String?
+			public var formatterOverride: GameCenterLeaderboardFormatter?
+			public var formatterSuffix: String?
 			public var formatterSuffixSingular: String?
 			public var locale: String
 			public var name: String
-			public var formatterSuffix: String?
-			public var formatterOverride: GameCenterLeaderboardFormatter?
-			public var description: String?
 
-			public init(formatterSuffixSingular: String? = nil, locale: String, name: String, formatterSuffix: String? = nil, formatterOverride: GameCenterLeaderboardFormatter? = nil, description: String? = nil) {
+			public init(description: String? = nil, formatterOverride: GameCenterLeaderboardFormatter? = nil, formatterSuffix: String? = nil, formatterSuffixSingular: String? = nil, locale: String, name: String) {
+				self.description = description
+				self.formatterOverride = formatterOverride
+				self.formatterSuffix = formatterSuffix
 				self.formatterSuffixSingular = formatterSuffixSingular
 				self.locale = locale
 				self.name = name
-				self.formatterSuffix = formatterSuffix
-				self.formatterOverride = formatterOverride
-				self.description = description
 			}
 
 			public init(from decoder: Decoder) throws {
 				let values = try decoder.container(keyedBy: StringCodingKey.self)
+				self.description = try values.decodeIfPresent(String.self, forKey: "description")
+				self.formatterOverride = try values.decodeIfPresent(GameCenterLeaderboardFormatter.self, forKey: "formatterOverride")
+				self.formatterSuffix = try values.decodeIfPresent(String.self, forKey: "formatterSuffix")
 				self.formatterSuffixSingular = try values.decodeIfPresent(String.self, forKey: "formatterSuffixSingular")
 				self.locale = try values.decode(String.self, forKey: "locale")
 				self.name = try values.decode(String.self, forKey: "name")
-				self.formatterSuffix = try values.decodeIfPresent(String.self, forKey: "formatterSuffix")
-				self.formatterOverride = try values.decodeIfPresent(GameCenterLeaderboardFormatter.self, forKey: "formatterOverride")
-				self.description = try values.decodeIfPresent(String.self, forKey: "description")
 			}
 
 			public func encode(to encoder: Encoder) throws {
 				var values = encoder.container(keyedBy: StringCodingKey.self)
+				try values.encodeIfPresent(description, forKey: "description")
+				try values.encodeIfPresent(formatterOverride, forKey: "formatterOverride")
+				try values.encodeIfPresent(formatterSuffix, forKey: "formatterSuffix")
 				try values.encodeIfPresent(formatterSuffixSingular, forKey: "formatterSuffixSingular")
 				try values.encode(locale, forKey: "locale")
 				try values.encode(name, forKey: "name")
-				try values.encodeIfPresent(formatterSuffix, forKey: "formatterSuffix")
-				try values.encodeIfPresent(formatterOverride, forKey: "formatterOverride")
-				try values.encodeIfPresent(description, forKey: "description")
 			}
 		}
 
@@ -56,28 +56,28 @@ public struct GameCenterLeaderboardLocalizationCreateRequest: Codable {
 				public var data: Data
 
 				public struct Data: Codable, Identifiable {
-					public var type: `Type`
 					public var id: String
+					public var type: `Type`
 
 					public enum `Type`: String, Codable, CaseIterable {
 						case gameCenterLeaderboards
 					}
 
-					public init(type: `Type`, id: String) {
-						self.type = type
+					public init(id: String, type: `Type`) {
 						self.id = id
+						self.type = type
 					}
 
 					public init(from decoder: Decoder) throws {
 						let values = try decoder.container(keyedBy: StringCodingKey.self)
-						self.type = try values.decode(`Type`.self, forKey: "type")
 						self.id = try values.decode(String.self, forKey: "id")
+						self.type = try values.decode(`Type`.self, forKey: "type")
 					}
 
 					public func encode(to encoder: Encoder) throws {
 						var values = encoder.container(keyedBy: StringCodingKey.self)
-						try values.encode(type, forKey: "type")
 						try values.encode(id, forKey: "id")
+						try values.encode(type, forKey: "type")
 					}
 				}
 

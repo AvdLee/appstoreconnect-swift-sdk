@@ -7,74 +7,74 @@ public struct BetaGroupUpdateRequest: Codable {
 	public var data: Data
 
 	public struct Data: Codable, Identifiable {
+		public var attributes: Attributes?
 		public var id: String
 		public var type: `Type`
-		public var attributes: Attributes?
+
+		public struct Attributes: Codable {
+			public var isFeedbackEnabled: Bool?
+			public var isIosBuildsAvailableForAppleSiliconMac: Bool?
+			public var isIosBuildsAvailableForAppleVision: Bool?
+			public var name: String?
+			public var isPublicLinkEnabled: Bool?
+			public var publicLinkLimit: Int?
+			public var isPublicLinkLimitEnabled: Bool?
+
+			public init(isFeedbackEnabled: Bool? = nil, isIosBuildsAvailableForAppleSiliconMac: Bool? = nil, isIosBuildsAvailableForAppleVision: Bool? = nil, name: String? = nil, isPublicLinkEnabled: Bool? = nil, publicLinkLimit: Int? = nil, isPublicLinkLimitEnabled: Bool? = nil) {
+				self.isFeedbackEnabled = isFeedbackEnabled
+				self.isIosBuildsAvailableForAppleSiliconMac = isIosBuildsAvailableForAppleSiliconMac
+				self.isIosBuildsAvailableForAppleVision = isIosBuildsAvailableForAppleVision
+				self.name = name
+				self.isPublicLinkEnabled = isPublicLinkEnabled
+				self.publicLinkLimit = publicLinkLimit
+				self.isPublicLinkLimitEnabled = isPublicLinkLimitEnabled
+			}
+
+			public init(from decoder: Decoder) throws {
+				let values = try decoder.container(keyedBy: StringCodingKey.self)
+				self.isFeedbackEnabled = try values.decodeIfPresent(Bool.self, forKey: "feedbackEnabled")
+				self.isIosBuildsAvailableForAppleSiliconMac = try values.decodeIfPresent(Bool.self, forKey: "iosBuildsAvailableForAppleSiliconMac")
+				self.isIosBuildsAvailableForAppleVision = try values.decodeIfPresent(Bool.self, forKey: "iosBuildsAvailableForAppleVision")
+				self.name = try values.decodeIfPresent(String.self, forKey: "name")
+				self.isPublicLinkEnabled = try values.decodeIfPresent(Bool.self, forKey: "publicLinkEnabled")
+				self.publicLinkLimit = try values.decodeIfPresent(Int.self, forKey: "publicLinkLimit")
+				self.isPublicLinkLimitEnabled = try values.decodeIfPresent(Bool.self, forKey: "publicLinkLimitEnabled")
+			}
+
+			public func encode(to encoder: Encoder) throws {
+				var values = encoder.container(keyedBy: StringCodingKey.self)
+				try values.encodeIfPresent(isFeedbackEnabled, forKey: "feedbackEnabled")
+				try values.encodeIfPresent(isIosBuildsAvailableForAppleSiliconMac, forKey: "iosBuildsAvailableForAppleSiliconMac")
+				try values.encodeIfPresent(isIosBuildsAvailableForAppleVision, forKey: "iosBuildsAvailableForAppleVision")
+				try values.encodeIfPresent(name, forKey: "name")
+				try values.encodeIfPresent(isPublicLinkEnabled, forKey: "publicLinkEnabled")
+				try values.encodeIfPresent(publicLinkLimit, forKey: "publicLinkLimit")
+				try values.encodeIfPresent(isPublicLinkLimitEnabled, forKey: "publicLinkLimitEnabled")
+			}
+		}
 
 		public enum `Type`: String, Codable, CaseIterable {
 			case betaGroups
 		}
 
-		public struct Attributes: Codable {
-			public var isPublicLinkLimitEnabled: Bool?
-			public var isIosBuildsAvailableForAppleSiliconMac: Bool?
-			public var publicLinkLimit: Int?
-			public var name: String?
-			public var isFeedbackEnabled: Bool?
-			public var isPublicLinkEnabled: Bool?
-			public var isIosBuildsAvailableForAppleVision: Bool?
-
-			public init(isPublicLinkLimitEnabled: Bool? = nil, isIosBuildsAvailableForAppleSiliconMac: Bool? = nil, publicLinkLimit: Int? = nil, name: String? = nil, isFeedbackEnabled: Bool? = nil, isPublicLinkEnabled: Bool? = nil, isIosBuildsAvailableForAppleVision: Bool? = nil) {
-				self.isPublicLinkLimitEnabled = isPublicLinkLimitEnabled
-				self.isIosBuildsAvailableForAppleSiliconMac = isIosBuildsAvailableForAppleSiliconMac
-				self.publicLinkLimit = publicLinkLimit
-				self.name = name
-				self.isFeedbackEnabled = isFeedbackEnabled
-				self.isPublicLinkEnabled = isPublicLinkEnabled
-				self.isIosBuildsAvailableForAppleVision = isIosBuildsAvailableForAppleVision
-			}
-
-			public init(from decoder: Decoder) throws {
-				let values = try decoder.container(keyedBy: StringCodingKey.self)
-				self.isPublicLinkLimitEnabled = try values.decodeIfPresent(Bool.self, forKey: "publicLinkLimitEnabled")
-				self.isIosBuildsAvailableForAppleSiliconMac = try values.decodeIfPresent(Bool.self, forKey: "iosBuildsAvailableForAppleSiliconMac")
-				self.publicLinkLimit = try values.decodeIfPresent(Int.self, forKey: "publicLinkLimit")
-				self.name = try values.decodeIfPresent(String.self, forKey: "name")
-				self.isFeedbackEnabled = try values.decodeIfPresent(Bool.self, forKey: "feedbackEnabled")
-				self.isPublicLinkEnabled = try values.decodeIfPresent(Bool.self, forKey: "publicLinkEnabled")
-				self.isIosBuildsAvailableForAppleVision = try values.decodeIfPresent(Bool.self, forKey: "iosBuildsAvailableForAppleVision")
-			}
-
-			public func encode(to encoder: Encoder) throws {
-				var values = encoder.container(keyedBy: StringCodingKey.self)
-				try values.encodeIfPresent(isPublicLinkLimitEnabled, forKey: "publicLinkLimitEnabled")
-				try values.encodeIfPresent(isIosBuildsAvailableForAppleSiliconMac, forKey: "iosBuildsAvailableForAppleSiliconMac")
-				try values.encodeIfPresent(publicLinkLimit, forKey: "publicLinkLimit")
-				try values.encodeIfPresent(name, forKey: "name")
-				try values.encodeIfPresent(isFeedbackEnabled, forKey: "feedbackEnabled")
-				try values.encodeIfPresent(isPublicLinkEnabled, forKey: "publicLinkEnabled")
-				try values.encodeIfPresent(isIosBuildsAvailableForAppleVision, forKey: "iosBuildsAvailableForAppleVision")
-			}
-		}
-
-		public init(id: String, type: `Type`, attributes: Attributes? = nil) {
+		public init(attributes: Attributes? = nil, id: String, type: `Type`) {
+			self.attributes = attributes
 			self.id = id
 			self.type = type
-			self.attributes = attributes
 		}
 
 		public init(from decoder: Decoder) throws {
 			let values = try decoder.container(keyedBy: StringCodingKey.self)
+			self.attributes = try values.decodeIfPresent(Attributes.self, forKey: "attributes")
 			self.id = try values.decode(String.self, forKey: "id")
 			self.type = try values.decode(`Type`.self, forKey: "type")
-			self.attributes = try values.decodeIfPresent(Attributes.self, forKey: "attributes")
 		}
 
 		public func encode(to encoder: Encoder) throws {
 			var values = encoder.container(keyedBy: StringCodingKey.self)
+			try values.encodeIfPresent(attributes, forKey: "attributes")
 			try values.encode(id, forKey: "id")
 			try values.encode(type, forKey: "type")
-			try values.encodeIfPresent(attributes, forKey: "attributes")
 		}
 	}
 

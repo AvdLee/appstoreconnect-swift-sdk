@@ -12,24 +12,24 @@ public struct GameCenterLeaderboardSetLocalizationV2CreateRequest: Codable {
 		public var type: `Type`
 
 		public struct Attributes: Codable {
-			public var name: String
 			public var locale: String
+			public var name: String
 
-			public init(name: String, locale: String) {
-				self.name = name
+			public init(locale: String, name: String) {
 				self.locale = locale
+				self.name = name
 			}
 
 			public init(from decoder: Decoder) throws {
 				let values = try decoder.container(keyedBy: StringCodingKey.self)
-				self.name = try values.decode(String.self, forKey: "name")
 				self.locale = try values.decode(String.self, forKey: "locale")
+				self.name = try values.decode(String.self, forKey: "name")
 			}
 
 			public func encode(to encoder: Encoder) throws {
 				var values = encoder.container(keyedBy: StringCodingKey.self)
-				try values.encode(name, forKey: "name")
 				try values.encode(locale, forKey: "locale")
+				try values.encode(name, forKey: "name")
 			}
 		}
 

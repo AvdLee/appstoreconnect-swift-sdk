@@ -7,12 +7,34 @@ public struct GameCenterMatchmakingTeamCreateRequest: Codable {
 	public var data: Data
 
 	public struct Data: Codable {
-		public var type: `Type`
-		public var relationships: Relationships
 		public var attributes: Attributes
+		public var relationships: Relationships
+		public var type: `Type`
 
-		public enum `Type`: String, Codable, CaseIterable {
-			case gameCenterMatchmakingTeams
+		public struct Attributes: Codable {
+			public var maxPlayers: Int
+			public var minPlayers: Int
+			public var referenceName: String
+
+			public init(maxPlayers: Int, minPlayers: Int, referenceName: String) {
+				self.maxPlayers = maxPlayers
+				self.minPlayers = minPlayers
+				self.referenceName = referenceName
+			}
+
+			public init(from decoder: Decoder) throws {
+				let values = try decoder.container(keyedBy: StringCodingKey.self)
+				self.maxPlayers = try values.decode(Int.self, forKey: "maxPlayers")
+				self.minPlayers = try values.decode(Int.self, forKey: "minPlayers")
+				self.referenceName = try values.decode(String.self, forKey: "referenceName")
+			}
+
+			public func encode(to encoder: Encoder) throws {
+				var values = encoder.container(keyedBy: StringCodingKey.self)
+				try values.encode(maxPlayers, forKey: "maxPlayers")
+				try values.encode(minPlayers, forKey: "minPlayers")
+				try values.encode(referenceName, forKey: "referenceName")
+			}
 		}
 
 		public struct Relationships: Codable {
@@ -77,50 +99,28 @@ public struct GameCenterMatchmakingTeamCreateRequest: Codable {
 			}
 		}
 
-		public struct Attributes: Codable {
-			public var maxPlayers: Int
-			public var referenceName: String
-			public var minPlayers: Int
-
-			public init(maxPlayers: Int, referenceName: String, minPlayers: Int) {
-				self.maxPlayers = maxPlayers
-				self.referenceName = referenceName
-				self.minPlayers = minPlayers
-			}
-
-			public init(from decoder: Decoder) throws {
-				let values = try decoder.container(keyedBy: StringCodingKey.self)
-				self.maxPlayers = try values.decode(Int.self, forKey: "maxPlayers")
-				self.referenceName = try values.decode(String.self, forKey: "referenceName")
-				self.minPlayers = try values.decode(Int.self, forKey: "minPlayers")
-			}
-
-			public func encode(to encoder: Encoder) throws {
-				var values = encoder.container(keyedBy: StringCodingKey.self)
-				try values.encode(maxPlayers, forKey: "maxPlayers")
-				try values.encode(referenceName, forKey: "referenceName")
-				try values.encode(minPlayers, forKey: "minPlayers")
-			}
+		public enum `Type`: String, Codable, CaseIterable {
+			case gameCenterMatchmakingTeams
 		}
 
-		public init(type: `Type`, relationships: Relationships, attributes: Attributes) {
-			self.type = type
-			self.relationships = relationships
+		public init(attributes: Attributes, relationships: Relationships, type: `Type`) {
 			self.attributes = attributes
+			self.relationships = relationships
+			self.type = type
 		}
 
 		public init(from decoder: Decoder) throws {
 			let values = try decoder.container(keyedBy: StringCodingKey.self)
-			self.type = try values.decode(`Type`.self, forKey: "type")
-			self.relationships = try values.decode(Relationships.self, forKey: "relationships")
 			self.attributes = try values.decode(Attributes.self, forKey: "attributes")
+			self.relationships = try values.decode(Relationships.self, forKey: "relationships")
+			self.type = try values.decode(`Type`.self, forKey: "type")
 		}
 
 		public func encode(to encoder: Encoder) throws {
 			var values = encoder.container(keyedBy: StringCodingKey.self)
-			try values.encode(type, forKey: "type")
-			try values.encode(relationships, forKey: "relationships")
 			try values.encode(attributes, forKey: "attributes")
+			try values.encode(relationships, forKey: "relationships")
+			try values.encode(type, forKey: "type")
 		}
 	}
 

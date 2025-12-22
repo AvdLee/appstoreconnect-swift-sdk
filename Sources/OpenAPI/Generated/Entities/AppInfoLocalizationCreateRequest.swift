@@ -12,40 +12,40 @@ public struct AppInfoLocalizationCreateRequest: Codable {
 		public var type: `Type`
 
 		public struct Attributes: Codable {
-			public var privacyPolicyText: String?
 			public var locale: String
-			public var privacyChoicesURL: String?
-			public var subtitle: String?
-			public var privacyPolicyURL: String?
 			public var name: String
+			public var privacyChoicesURL: String?
+			public var privacyPolicyText: String?
+			public var privacyPolicyURL: String?
+			public var subtitle: String?
 
-			public init(privacyPolicyText: String? = nil, locale: String, privacyChoicesURL: String? = nil, subtitle: String? = nil, privacyPolicyURL: String? = nil, name: String) {
-				self.privacyPolicyText = privacyPolicyText
+			public init(locale: String, name: String, privacyChoicesURL: String? = nil, privacyPolicyText: String? = nil, privacyPolicyURL: String? = nil, subtitle: String? = nil) {
 				self.locale = locale
-				self.privacyChoicesURL = privacyChoicesURL
-				self.subtitle = subtitle
-				self.privacyPolicyURL = privacyPolicyURL
 				self.name = name
+				self.privacyChoicesURL = privacyChoicesURL
+				self.privacyPolicyText = privacyPolicyText
+				self.privacyPolicyURL = privacyPolicyURL
+				self.subtitle = subtitle
 			}
 
 			public init(from decoder: Decoder) throws {
 				let values = try decoder.container(keyedBy: StringCodingKey.self)
-				self.privacyPolicyText = try values.decodeIfPresent(String.self, forKey: "privacyPolicyText")
 				self.locale = try values.decode(String.self, forKey: "locale")
-				self.privacyChoicesURL = try values.decodeIfPresent(String.self, forKey: "privacyChoicesUrl")
-				self.subtitle = try values.decodeIfPresent(String.self, forKey: "subtitle")
-				self.privacyPolicyURL = try values.decodeIfPresent(String.self, forKey: "privacyPolicyUrl")
 				self.name = try values.decode(String.self, forKey: "name")
+				self.privacyChoicesURL = try values.decodeIfPresent(String.self, forKey: "privacyChoicesUrl")
+				self.privacyPolicyText = try values.decodeIfPresent(String.self, forKey: "privacyPolicyText")
+				self.privacyPolicyURL = try values.decodeIfPresent(String.self, forKey: "privacyPolicyUrl")
+				self.subtitle = try values.decodeIfPresent(String.self, forKey: "subtitle")
 			}
 
 			public func encode(to encoder: Encoder) throws {
 				var values = encoder.container(keyedBy: StringCodingKey.self)
-				try values.encodeIfPresent(privacyPolicyText, forKey: "privacyPolicyText")
 				try values.encode(locale, forKey: "locale")
-				try values.encodeIfPresent(privacyChoicesURL, forKey: "privacyChoicesUrl")
-				try values.encodeIfPresent(subtitle, forKey: "subtitle")
-				try values.encodeIfPresent(privacyPolicyURL, forKey: "privacyPolicyUrl")
 				try values.encode(name, forKey: "name")
+				try values.encodeIfPresent(privacyChoicesURL, forKey: "privacyChoicesUrl")
+				try values.encodeIfPresent(privacyPolicyText, forKey: "privacyPolicyText")
+				try values.encodeIfPresent(privacyPolicyURL, forKey: "privacyPolicyUrl")
+				try values.encodeIfPresent(subtitle, forKey: "subtitle")
 			}
 		}
 
@@ -56,28 +56,28 @@ public struct AppInfoLocalizationCreateRequest: Codable {
 				public var data: Data
 
 				public struct Data: Codable, Identifiable {
-					public var type: `Type`
 					public var id: String
+					public var type: `Type`
 
 					public enum `Type`: String, Codable, CaseIterable {
 						case appInfos
 					}
 
-					public init(type: `Type`, id: String) {
-						self.type = type
+					public init(id: String, type: `Type`) {
 						self.id = id
+						self.type = type
 					}
 
 					public init(from decoder: Decoder) throws {
 						let values = try decoder.container(keyedBy: StringCodingKey.self)
-						self.type = try values.decode(`Type`.self, forKey: "type")
 						self.id = try values.decode(String.self, forKey: "id")
+						self.type = try values.decode(`Type`.self, forKey: "type")
 					}
 
 					public func encode(to encoder: Encoder) throws {
 						var values = encoder.container(keyedBy: StringCodingKey.self)
-						try values.encode(type, forKey: "type")
 						try values.encode(id, forKey: "id")
+						try values.encode(type, forKey: "type")
 					}
 				}
 

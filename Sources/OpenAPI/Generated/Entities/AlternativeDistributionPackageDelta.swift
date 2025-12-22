@@ -4,38 +4,38 @@
 import Foundation
 
 public struct AlternativeDistributionPackageDelta: Codable, Identifiable {
-	public var id: String
 	public var attributes: Attributes?
-	public var type: `Type`
+	public var id: String
 	public var links: ResourceLinks?
+	public var type: `Type`
 
 	public struct Attributes: Codable {
 		public var alternativeDistributionKeyBlob: String?
-		public var urlExpirationDate: Date?
 		public var fileChecksum: String?
 		public var url: URL?
+		public var urlExpirationDate: Date?
 
-		public init(alternativeDistributionKeyBlob: String? = nil, urlExpirationDate: Date? = nil, fileChecksum: String? = nil, url: URL? = nil) {
+		public init(alternativeDistributionKeyBlob: String? = nil, fileChecksum: String? = nil, url: URL? = nil, urlExpirationDate: Date? = nil) {
 			self.alternativeDistributionKeyBlob = alternativeDistributionKeyBlob
-			self.urlExpirationDate = urlExpirationDate
 			self.fileChecksum = fileChecksum
 			self.url = url
+			self.urlExpirationDate = urlExpirationDate
 		}
 
 		public init(from decoder: Decoder) throws {
 			let values = try decoder.container(keyedBy: StringCodingKey.self)
 			self.alternativeDistributionKeyBlob = try values.decodeIfPresent(String.self, forKey: "alternativeDistributionKeyBlob")
-			self.urlExpirationDate = try values.decodeIfPresent(Date.self, forKey: "urlExpirationDate")
 			self.fileChecksum = try values.decodeIfPresent(String.self, forKey: "fileChecksum")
 			self.url = try values.decodeIfPresent(URL.self, forKey: "url")
+			self.urlExpirationDate = try values.decodeIfPresent(Date.self, forKey: "urlExpirationDate")
 		}
 
 		public func encode(to encoder: Encoder) throws {
 			var values = encoder.container(keyedBy: StringCodingKey.self)
 			try values.encodeIfPresent(alternativeDistributionKeyBlob, forKey: "alternativeDistributionKeyBlob")
-			try values.encodeIfPresent(urlExpirationDate, forKey: "urlExpirationDate")
 			try values.encodeIfPresent(fileChecksum, forKey: "fileChecksum")
 			try values.encodeIfPresent(url, forKey: "url")
+			try values.encodeIfPresent(urlExpirationDate, forKey: "urlExpirationDate")
 		}
 	}
 
@@ -43,26 +43,26 @@ public struct AlternativeDistributionPackageDelta: Codable, Identifiable {
 		case alternativeDistributionPackageDeltas
 	}
 
-	public init(id: String, attributes: Attributes? = nil, type: `Type`, links: ResourceLinks? = nil) {
-		self.id = id
+	public init(attributes: Attributes? = nil, id: String, links: ResourceLinks? = nil, type: `Type`) {
 		self.attributes = attributes
-		self.type = type
+		self.id = id
 		self.links = links
+		self.type = type
 	}
 
 	public init(from decoder: Decoder) throws {
 		let values = try decoder.container(keyedBy: StringCodingKey.self)
-		self.id = try values.decode(String.self, forKey: "id")
 		self.attributes = try values.decodeIfPresent(Attributes.self, forKey: "attributes")
-		self.type = try values.decode(`Type`.self, forKey: "type")
+		self.id = try values.decode(String.self, forKey: "id")
 		self.links = try values.decodeIfPresent(ResourceLinks.self, forKey: "links")
+		self.type = try values.decode(`Type`.self, forKey: "type")
 	}
 
 	public func encode(to encoder: Encoder) throws {
 		var values = encoder.container(keyedBy: StringCodingKey.self)
-		try values.encode(id, forKey: "id")
 		try values.encodeIfPresent(attributes, forKey: "attributes")
-		try values.encode(type, forKey: "type")
+		try values.encode(id, forKey: "id")
 		try values.encodeIfPresent(links, forKey: "links")
+		try values.encode(type, forKey: "type")
 	}
 }

@@ -7,9 +7,31 @@ public struct AndroidToIosAppMappingDetailCreateRequest: Codable {
 	public var data: Data
 
 	public struct Data: Codable {
+		public var attributes: Attributes
 		public var relationships: Relationships
 		public var type: `Type`
-		public var attributes: Attributes
+
+		public struct Attributes: Codable {
+			public var appSigningKeyPublicCertificateSha256Fingerprints: [String]
+			public var packageName: String
+
+			public init(appSigningKeyPublicCertificateSha256Fingerprints: [String], packageName: String) {
+				self.appSigningKeyPublicCertificateSha256Fingerprints = appSigningKeyPublicCertificateSha256Fingerprints
+				self.packageName = packageName
+			}
+
+			public init(from decoder: Decoder) throws {
+				let values = try decoder.container(keyedBy: StringCodingKey.self)
+				self.appSigningKeyPublicCertificateSha256Fingerprints = try values.decode([String].self, forKey: "appSigningKeyPublicCertificateSha256Fingerprints")
+				self.packageName = try values.decode(String.self, forKey: "packageName")
+			}
+
+			public func encode(to encoder: Encoder) throws {
+				var values = encoder.container(keyedBy: StringCodingKey.self)
+				try values.encode(appSigningKeyPublicCertificateSha256Fingerprints, forKey: "appSigningKeyPublicCertificateSha256Fingerprints")
+				try values.encode(packageName, forKey: "packageName")
+			}
+		}
 
 		public struct Relationships: Codable {
 			public var app: App
@@ -77,46 +99,24 @@ public struct AndroidToIosAppMappingDetailCreateRequest: Codable {
 			case androidToIosAppMappingDetails
 		}
 
-		public struct Attributes: Codable {
-			public var packageName: String
-			public var appSigningKeyPublicCertificateSha256Fingerprints: [String]
-
-			public init(packageName: String, appSigningKeyPublicCertificateSha256Fingerprints: [String]) {
-				self.packageName = packageName
-				self.appSigningKeyPublicCertificateSha256Fingerprints = appSigningKeyPublicCertificateSha256Fingerprints
-			}
-
-			public init(from decoder: Decoder) throws {
-				let values = try decoder.container(keyedBy: StringCodingKey.self)
-				self.packageName = try values.decode(String.self, forKey: "packageName")
-				self.appSigningKeyPublicCertificateSha256Fingerprints = try values.decode([String].self, forKey: "appSigningKeyPublicCertificateSha256Fingerprints")
-			}
-
-			public func encode(to encoder: Encoder) throws {
-				var values = encoder.container(keyedBy: StringCodingKey.self)
-				try values.encode(packageName, forKey: "packageName")
-				try values.encode(appSigningKeyPublicCertificateSha256Fingerprints, forKey: "appSigningKeyPublicCertificateSha256Fingerprints")
-			}
-		}
-
-		public init(relationships: Relationships, type: `Type`, attributes: Attributes) {
+		public init(attributes: Attributes, relationships: Relationships, type: `Type`) {
+			self.attributes = attributes
 			self.relationships = relationships
 			self.type = type
-			self.attributes = attributes
 		}
 
 		public init(from decoder: Decoder) throws {
 			let values = try decoder.container(keyedBy: StringCodingKey.self)
+			self.attributes = try values.decode(Attributes.self, forKey: "attributes")
 			self.relationships = try values.decode(Relationships.self, forKey: "relationships")
 			self.type = try values.decode(`Type`.self, forKey: "type")
-			self.attributes = try values.decode(Attributes.self, forKey: "attributes")
 		}
 
 		public func encode(to encoder: Encoder) throws {
 			var values = encoder.container(keyedBy: StringCodingKey.self)
+			try values.encode(attributes, forKey: "attributes")
 			try values.encode(relationships, forKey: "relationships")
 			try values.encode(type, forKey: "type")
-			try values.encode(attributes, forKey: "attributes")
 		}
 	}
 

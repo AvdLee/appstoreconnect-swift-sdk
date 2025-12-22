@@ -7,32 +7,23 @@ public struct GameCenterLeaderboardUpdateRequest: Codable {
 	public var data: Data
 
 	public struct Data: Codable, Identifiable {
+		public var attributes: Attributes?
 		public var id: String
 		public var type: `Type`
-		public var attributes: Attributes?
-
-		public enum `Type`: String, Codable, CaseIterable {
-			case gameCenterLeaderboards
-		}
 
 		public struct Attributes: Codable {
-			public var scoreRangeStart: String?
-			public var visibility: Visibility?
-			public var referenceName: String?
-			public var recurrenceStartDate: Date?
-			public var recurrenceRule: String?
-			public var defaultFormatter: GameCenterLeaderboardFormatter?
 			public var activityProperties: [String: String]?
-			public var scoreRangeEnd: String?
 			public var isArchived: Bool?
+			public var defaultFormatter: GameCenterLeaderboardFormatter?
+			public var recurrenceDuration: String?
+			public var recurrenceRule: String?
+			public var recurrenceStartDate: Date?
+			public var referenceName: String?
+			public var scoreRangeEnd: String?
+			public var scoreRangeStart: String?
 			public var scoreSortType: ScoreSortType?
 			public var submissionType: SubmissionType?
-			public var recurrenceDuration: String?
-
-			public enum Visibility: String, Codable, CaseIterable {
-				case showForAll = "SHOW_FOR_ALL"
-				case hideForAll = "HIDE_FOR_ALL"
-			}
+			public var visibility: Visibility?
 
 			public enum ScoreSortType: String, Codable, CaseIterable {
 				case asc = "ASC"
@@ -44,72 +35,81 @@ public struct GameCenterLeaderboardUpdateRequest: Codable {
 				case mostRecentScore = "MOST_RECENT_SCORE"
 			}
 
-			public init(scoreRangeStart: String? = nil, visibility: Visibility? = nil, referenceName: String? = nil, recurrenceStartDate: Date? = nil, recurrenceRule: String? = nil, defaultFormatter: GameCenterLeaderboardFormatter? = nil, activityProperties: [String: String]? = nil, scoreRangeEnd: String? = nil, isArchived: Bool? = nil, scoreSortType: ScoreSortType? = nil, submissionType: SubmissionType? = nil, recurrenceDuration: String? = nil) {
-				self.scoreRangeStart = scoreRangeStart
-				self.visibility = visibility
-				self.referenceName = referenceName
-				self.recurrenceStartDate = recurrenceStartDate
-				self.recurrenceRule = recurrenceRule
-				self.defaultFormatter = defaultFormatter
+			public enum Visibility: String, Codable, CaseIterable {
+				case showForAll = "SHOW_FOR_ALL"
+				case hideForAll = "HIDE_FOR_ALL"
+			}
+
+			public init(activityProperties: [String: String]? = nil, isArchived: Bool? = nil, defaultFormatter: GameCenterLeaderboardFormatter? = nil, recurrenceDuration: String? = nil, recurrenceRule: String? = nil, recurrenceStartDate: Date? = nil, referenceName: String? = nil, scoreRangeEnd: String? = nil, scoreRangeStart: String? = nil, scoreSortType: ScoreSortType? = nil, submissionType: SubmissionType? = nil, visibility: Visibility? = nil) {
 				self.activityProperties = activityProperties
-				self.scoreRangeEnd = scoreRangeEnd
 				self.isArchived = isArchived
+				self.defaultFormatter = defaultFormatter
+				self.recurrenceDuration = recurrenceDuration
+				self.recurrenceRule = recurrenceRule
+				self.recurrenceStartDate = recurrenceStartDate
+				self.referenceName = referenceName
+				self.scoreRangeEnd = scoreRangeEnd
+				self.scoreRangeStart = scoreRangeStart
 				self.scoreSortType = scoreSortType
 				self.submissionType = submissionType
-				self.recurrenceDuration = recurrenceDuration
+				self.visibility = visibility
 			}
 
 			public init(from decoder: Decoder) throws {
 				let values = try decoder.container(keyedBy: StringCodingKey.self)
-				self.scoreRangeStart = try values.decodeIfPresent(String.self, forKey: "scoreRangeStart")
-				self.visibility = try values.decodeIfPresent(Visibility.self, forKey: "visibility")
-				self.referenceName = try values.decodeIfPresent(String.self, forKey: "referenceName")
-				self.recurrenceStartDate = try values.decodeIfPresent(Date.self, forKey: "recurrenceStartDate")
-				self.recurrenceRule = try values.decodeIfPresent(String.self, forKey: "recurrenceRule")
-				self.defaultFormatter = try values.decodeIfPresent(GameCenterLeaderboardFormatter.self, forKey: "defaultFormatter")
 				self.activityProperties = try values.decodeIfPresent([String: String].self, forKey: "activityProperties")
-				self.scoreRangeEnd = try values.decodeIfPresent(String.self, forKey: "scoreRangeEnd")
 				self.isArchived = try values.decodeIfPresent(Bool.self, forKey: "archived")
+				self.defaultFormatter = try values.decodeIfPresent(GameCenterLeaderboardFormatter.self, forKey: "defaultFormatter")
+				self.recurrenceDuration = try values.decodeIfPresent(String.self, forKey: "recurrenceDuration")
+				self.recurrenceRule = try values.decodeIfPresent(String.self, forKey: "recurrenceRule")
+				self.recurrenceStartDate = try values.decodeIfPresent(Date.self, forKey: "recurrenceStartDate")
+				self.referenceName = try values.decodeIfPresent(String.self, forKey: "referenceName")
+				self.scoreRangeEnd = try values.decodeIfPresent(String.self, forKey: "scoreRangeEnd")
+				self.scoreRangeStart = try values.decodeIfPresent(String.self, forKey: "scoreRangeStart")
 				self.scoreSortType = try values.decodeIfPresent(ScoreSortType.self, forKey: "scoreSortType")
 				self.submissionType = try values.decodeIfPresent(SubmissionType.self, forKey: "submissionType")
-				self.recurrenceDuration = try values.decodeIfPresent(String.self, forKey: "recurrenceDuration")
+				self.visibility = try values.decodeIfPresent(Visibility.self, forKey: "visibility")
 			}
 
 			public func encode(to encoder: Encoder) throws {
 				var values = encoder.container(keyedBy: StringCodingKey.self)
-				try values.encodeIfPresent(scoreRangeStart, forKey: "scoreRangeStart")
-				try values.encodeIfPresent(visibility, forKey: "visibility")
-				try values.encodeIfPresent(referenceName, forKey: "referenceName")
-				try values.encodeIfPresent(recurrenceStartDate, forKey: "recurrenceStartDate")
-				try values.encodeIfPresent(recurrenceRule, forKey: "recurrenceRule")
-				try values.encodeIfPresent(defaultFormatter, forKey: "defaultFormatter")
 				try values.encodeIfPresent(activityProperties, forKey: "activityProperties")
-				try values.encodeIfPresent(scoreRangeEnd, forKey: "scoreRangeEnd")
 				try values.encodeIfPresent(isArchived, forKey: "archived")
+				try values.encodeIfPresent(defaultFormatter, forKey: "defaultFormatter")
+				try values.encodeIfPresent(recurrenceDuration, forKey: "recurrenceDuration")
+				try values.encodeIfPresent(recurrenceRule, forKey: "recurrenceRule")
+				try values.encodeIfPresent(recurrenceStartDate, forKey: "recurrenceStartDate")
+				try values.encodeIfPresent(referenceName, forKey: "referenceName")
+				try values.encodeIfPresent(scoreRangeEnd, forKey: "scoreRangeEnd")
+				try values.encodeIfPresent(scoreRangeStart, forKey: "scoreRangeStart")
 				try values.encodeIfPresent(scoreSortType, forKey: "scoreSortType")
 				try values.encodeIfPresent(submissionType, forKey: "submissionType")
-				try values.encodeIfPresent(recurrenceDuration, forKey: "recurrenceDuration")
+				try values.encodeIfPresent(visibility, forKey: "visibility")
 			}
 		}
 
-		public init(id: String, type: `Type`, attributes: Attributes? = nil) {
+		public enum `Type`: String, Codable, CaseIterable {
+			case gameCenterLeaderboards
+		}
+
+		public init(attributes: Attributes? = nil, id: String, type: `Type`) {
+			self.attributes = attributes
 			self.id = id
 			self.type = type
-			self.attributes = attributes
 		}
 
 		public init(from decoder: Decoder) throws {
 			let values = try decoder.container(keyedBy: StringCodingKey.self)
+			self.attributes = try values.decodeIfPresent(Attributes.self, forKey: "attributes")
 			self.id = try values.decode(String.self, forKey: "id")
 			self.type = try values.decode(`Type`.self, forKey: "type")
-			self.attributes = try values.decodeIfPresent(Attributes.self, forKey: "attributes")
 		}
 
 		public func encode(to encoder: Encoder) throws {
 			var values = encoder.container(keyedBy: StringCodingKey.self)
+			try values.encodeIfPresent(attributes, forKey: "attributes")
 			try values.encode(id, forKey: "id")
 			try values.encode(type, forKey: "type")
-			try values.encodeIfPresent(attributes, forKey: "attributes")
 		}
 	}
 

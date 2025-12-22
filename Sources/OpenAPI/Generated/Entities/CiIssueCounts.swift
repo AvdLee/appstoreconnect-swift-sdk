@@ -4,30 +4,30 @@
 import Foundation
 
 public struct CiIssueCounts: Codable {
-	public var errors: Int?
 	public var analyzerWarnings: Int?
+	public var errors: Int?
 	public var testFailures: Int?
 	public var warnings: Int?
 
-	public init(errors: Int? = nil, analyzerWarnings: Int? = nil, testFailures: Int? = nil, warnings: Int? = nil) {
-		self.errors = errors
+	public init(analyzerWarnings: Int? = nil, errors: Int? = nil, testFailures: Int? = nil, warnings: Int? = nil) {
 		self.analyzerWarnings = analyzerWarnings
+		self.errors = errors
 		self.testFailures = testFailures
 		self.warnings = warnings
 	}
 
 	public init(from decoder: Decoder) throws {
 		let values = try decoder.container(keyedBy: StringCodingKey.self)
-		self.errors = try values.decodeIfPresent(Int.self, forKey: "errors")
 		self.analyzerWarnings = try values.decodeIfPresent(Int.self, forKey: "analyzerWarnings")
+		self.errors = try values.decodeIfPresent(Int.self, forKey: "errors")
 		self.testFailures = try values.decodeIfPresent(Int.self, forKey: "testFailures")
 		self.warnings = try values.decodeIfPresent(Int.self, forKey: "warnings")
 	}
 
 	public func encode(to encoder: Encoder) throws {
 		var values = encoder.container(keyedBy: StringCodingKey.self)
-		try values.encodeIfPresent(errors, forKey: "errors")
 		try values.encodeIfPresent(analyzerWarnings, forKey: "analyzerWarnings")
+		try values.encodeIfPresent(errors, forKey: "errors")
 		try values.encodeIfPresent(testFailures, forKey: "testFailures")
 		try values.encodeIfPresent(warnings, forKey: "warnings")
 	}

@@ -7,9 +7,27 @@ public struct AppStoreVersionPhasedReleaseCreateRequest: Codable {
 	public var data: Data
 
 	public struct Data: Codable {
+		public var attributes: Attributes?
 		public var relationships: Relationships
 		public var type: `Type`
-		public var attributes: Attributes?
+
+		public struct Attributes: Codable {
+			public var phasedReleaseState: PhasedReleaseState?
+
+			public init(phasedReleaseState: PhasedReleaseState? = nil) {
+				self.phasedReleaseState = phasedReleaseState
+			}
+
+			public init(from decoder: Decoder) throws {
+				let values = try decoder.container(keyedBy: StringCodingKey.self)
+				self.phasedReleaseState = try values.decodeIfPresent(PhasedReleaseState.self, forKey: "phasedReleaseState")
+			}
+
+			public func encode(to encoder: Encoder) throws {
+				var values = encoder.container(keyedBy: StringCodingKey.self)
+				try values.encodeIfPresent(phasedReleaseState, forKey: "phasedReleaseState")
+			}
+		}
 
 		public struct Relationships: Codable {
 			public var appStoreVersion: AppStoreVersion
@@ -77,42 +95,24 @@ public struct AppStoreVersionPhasedReleaseCreateRequest: Codable {
 			case appStoreVersionPhasedReleases
 		}
 
-		public struct Attributes: Codable {
-			public var phasedReleaseState: PhasedReleaseState?
-
-			public init(phasedReleaseState: PhasedReleaseState? = nil) {
-				self.phasedReleaseState = phasedReleaseState
-			}
-
-			public init(from decoder: Decoder) throws {
-				let values = try decoder.container(keyedBy: StringCodingKey.self)
-				self.phasedReleaseState = try values.decodeIfPresent(PhasedReleaseState.self, forKey: "phasedReleaseState")
-			}
-
-			public func encode(to encoder: Encoder) throws {
-				var values = encoder.container(keyedBy: StringCodingKey.self)
-				try values.encodeIfPresent(phasedReleaseState, forKey: "phasedReleaseState")
-			}
-		}
-
-		public init(relationships: Relationships, type: `Type`, attributes: Attributes? = nil) {
+		public init(attributes: Attributes? = nil, relationships: Relationships, type: `Type`) {
+			self.attributes = attributes
 			self.relationships = relationships
 			self.type = type
-			self.attributes = attributes
 		}
 
 		public init(from decoder: Decoder) throws {
 			let values = try decoder.container(keyedBy: StringCodingKey.self)
+			self.attributes = try values.decodeIfPresent(Attributes.self, forKey: "attributes")
 			self.relationships = try values.decode(Relationships.self, forKey: "relationships")
 			self.type = try values.decode(`Type`.self, forKey: "type")
-			self.attributes = try values.decodeIfPresent(Attributes.self, forKey: "attributes")
 		}
 
 		public func encode(to encoder: Encoder) throws {
 			var values = encoder.container(keyedBy: StringCodingKey.self)
+			try values.encodeIfPresent(attributes, forKey: "attributes")
 			try values.encode(relationships, forKey: "relationships")
 			try values.encode(type, forKey: "type")
-			try values.encodeIfPresent(attributes, forKey: "attributes")
 		}
 	}
 

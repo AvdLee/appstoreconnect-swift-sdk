@@ -4,31 +4,31 @@
 import Foundation
 
 public struct AnalyticsReportRequestsResponse: Codable {
-	public var meta: PagingInformation?
+	public var data: [AnalyticsReportRequest]
 	public var included: [AnalyticsReport]?
 	public var links: PagedDocumentLinks
-	public var data: [AnalyticsReportRequest]
+	public var meta: PagingInformation?
 
-	public init(meta: PagingInformation? = nil, included: [AnalyticsReport]? = nil, links: PagedDocumentLinks, data: [AnalyticsReportRequest]) {
-		self.meta = meta
+	public init(data: [AnalyticsReportRequest], included: [AnalyticsReport]? = nil, links: PagedDocumentLinks, meta: PagingInformation? = nil) {
+		self.data = data
 		self.included = included
 		self.links = links
-		self.data = data
+		self.meta = meta
 	}
 
 	public init(from decoder: Decoder) throws {
 		let values = try decoder.container(keyedBy: StringCodingKey.self)
-		self.meta = try values.decodeIfPresent(PagingInformation.self, forKey: "meta")
+		self.data = try values.decode([AnalyticsReportRequest].self, forKey: "data")
 		self.included = try values.decodeIfPresent([AnalyticsReport].self, forKey: "included")
 		self.links = try values.decode(PagedDocumentLinks.self, forKey: "links")
-		self.data = try values.decode([AnalyticsReportRequest].self, forKey: "data")
+		self.meta = try values.decodeIfPresent(PagingInformation.self, forKey: "meta")
 	}
 
 	public func encode(to encoder: Encoder) throws {
 		var values = encoder.container(keyedBy: StringCodingKey.self)
-		try values.encodeIfPresent(meta, forKey: "meta")
+		try values.encode(data, forKey: "data")
 		try values.encodeIfPresent(included, forKey: "included")
 		try values.encode(links, forKey: "links")
-		try values.encode(data, forKey: "data")
+		try values.encodeIfPresent(meta, forKey: "meta")
 	}
 }

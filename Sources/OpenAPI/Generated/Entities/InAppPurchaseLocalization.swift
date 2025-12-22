@@ -4,21 +4,17 @@
 import Foundation
 
 public struct InAppPurchaseLocalization: Codable, Identifiable {
-	public var type: `Type`
 	public var attributes: Attributes?
-	public var relationships: Relationships?
-	public var links: ResourceLinks?
 	public var id: String
-
-	public enum `Type`: String, Codable, CaseIterable {
-		case inAppPurchaseLocalizations
-	}
+	public var links: ResourceLinks?
+	public var relationships: Relationships?
+	public var type: `Type`
 
 	public struct Attributes: Codable {
 		public var description: String?
 		public var locale: String?
-		public var state: State?
 		public var name: String?
+		public var state: State?
 
 		public enum State: String, Codable, CaseIterable {
 			case prepareForSubmission = "PREPARE_FOR_SUBMISSION"
@@ -27,27 +23,27 @@ public struct InAppPurchaseLocalization: Codable, Identifiable {
 			case rejected = "REJECTED"
 		}
 
-		public init(description: String? = nil, locale: String? = nil, state: State? = nil, name: String? = nil) {
+		public init(description: String? = nil, locale: String? = nil, name: String? = nil, state: State? = nil) {
 			self.description = description
 			self.locale = locale
-			self.state = state
 			self.name = name
+			self.state = state
 		}
 
 		public init(from decoder: Decoder) throws {
 			let values = try decoder.container(keyedBy: StringCodingKey.self)
 			self.description = try values.decodeIfPresent(String.self, forKey: "description")
 			self.locale = try values.decodeIfPresent(String.self, forKey: "locale")
-			self.state = try values.decodeIfPresent(State.self, forKey: "state")
 			self.name = try values.decodeIfPresent(String.self, forKey: "name")
+			self.state = try values.decodeIfPresent(State.self, forKey: "state")
 		}
 
 		public func encode(to encoder: Encoder) throws {
 			var values = encoder.container(keyedBy: StringCodingKey.self)
 			try values.encodeIfPresent(description, forKey: "description")
 			try values.encodeIfPresent(locale, forKey: "locale")
-			try values.encodeIfPresent(state, forKey: "state")
 			try values.encodeIfPresent(name, forKey: "name")
+			try values.encodeIfPresent(state, forKey: "state")
 		}
 	}
 
@@ -113,29 +109,33 @@ public struct InAppPurchaseLocalization: Codable, Identifiable {
 		}
 	}
 
-	public init(type: `Type`, attributes: Attributes? = nil, relationships: Relationships? = nil, links: ResourceLinks? = nil, id: String) {
-		self.type = type
+	public enum `Type`: String, Codable, CaseIterable {
+		case inAppPurchaseLocalizations
+	}
+
+	public init(attributes: Attributes? = nil, id: String, links: ResourceLinks? = nil, relationships: Relationships? = nil, type: `Type`) {
 		self.attributes = attributes
-		self.relationships = relationships
-		self.links = links
 		self.id = id
+		self.links = links
+		self.relationships = relationships
+		self.type = type
 	}
 
 	public init(from decoder: Decoder) throws {
 		let values = try decoder.container(keyedBy: StringCodingKey.self)
-		self.type = try values.decode(`Type`.self, forKey: "type")
 		self.attributes = try values.decodeIfPresent(Attributes.self, forKey: "attributes")
-		self.relationships = try values.decodeIfPresent(Relationships.self, forKey: "relationships")
-		self.links = try values.decodeIfPresent(ResourceLinks.self, forKey: "links")
 		self.id = try values.decode(String.self, forKey: "id")
+		self.links = try values.decodeIfPresent(ResourceLinks.self, forKey: "links")
+		self.relationships = try values.decodeIfPresent(Relationships.self, forKey: "relationships")
+		self.type = try values.decode(`Type`.self, forKey: "type")
 	}
 
 	public func encode(to encoder: Encoder) throws {
 		var values = encoder.container(keyedBy: StringCodingKey.self)
-		try values.encode(type, forKey: "type")
 		try values.encodeIfPresent(attributes, forKey: "attributes")
-		try values.encodeIfPresent(relationships, forKey: "relationships")
-		try values.encodeIfPresent(links, forKey: "links")
 		try values.encode(id, forKey: "id")
+		try values.encodeIfPresent(links, forKey: "links")
+		try values.encodeIfPresent(relationships, forKey: "relationships")
+		try values.encode(type, forKey: "type")
 	}
 }

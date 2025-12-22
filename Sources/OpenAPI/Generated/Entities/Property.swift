@@ -4,23 +4,23 @@
 import Foundation
 
 public struct Property: Codable {
-	public var value: String?
 	public var key: String?
+	public var value: String?
 
-	public init(value: String? = nil, key: String? = nil) {
-		self.value = value
+	public init(key: String? = nil, value: String? = nil) {
 		self.key = key
+		self.value = value
 	}
 
 	public init(from decoder: Decoder) throws {
 		let values = try decoder.container(keyedBy: StringCodingKey.self)
-		self.value = try values.decodeIfPresent(String.self, forKey: "value")
 		self.key = try values.decodeIfPresent(String.self, forKey: "key")
+		self.value = try values.decodeIfPresent(String.self, forKey: "value")
 	}
 
 	public func encode(to encoder: Encoder) throws {
 		var values = encoder.container(keyedBy: StringCodingKey.self)
-		try values.encodeIfPresent(value, forKey: "value")
 		try values.encodeIfPresent(key, forKey: "key")
+		try values.encodeIfPresent(value, forKey: "value")
 	}
 }

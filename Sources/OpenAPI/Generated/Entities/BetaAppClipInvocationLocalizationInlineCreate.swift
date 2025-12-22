@@ -10,24 +10,24 @@ public struct BetaAppClipInvocationLocalizationInlineCreate: Codable, Identifiab
 	public var type: `Type`
 
 	public struct Attributes: Codable {
-		public var title: String
 		public var locale: String
+		public var title: String
 
-		public init(title: String, locale: String) {
-			self.title = title
+		public init(locale: String, title: String) {
 			self.locale = locale
+			self.title = title
 		}
 
 		public init(from decoder: Decoder) throws {
 			let values = try decoder.container(keyedBy: StringCodingKey.self)
-			self.title = try values.decode(String.self, forKey: "title")
 			self.locale = try values.decode(String.self, forKey: "locale")
+			self.title = try values.decode(String.self, forKey: "title")
 		}
 
 		public func encode(to encoder: Encoder) throws {
 			var values = encoder.container(keyedBy: StringCodingKey.self)
-			try values.encode(title, forKey: "title")
 			try values.encode(locale, forKey: "locale")
+			try values.encode(title, forKey: "title")
 		}
 	}
 
@@ -38,28 +38,28 @@ public struct BetaAppClipInvocationLocalizationInlineCreate: Codable, Identifiab
 			public var data: Data?
 
 			public struct Data: Codable, Identifiable {
-				public var type: `Type`
 				public var id: String
+				public var type: `Type`
 
 				public enum `Type`: String, Codable, CaseIterable {
 					case betaAppClipInvocations
 				}
 
-				public init(type: `Type`, id: String) {
-					self.type = type
+				public init(id: String, type: `Type`) {
 					self.id = id
+					self.type = type
 				}
 
 				public init(from decoder: Decoder) throws {
 					let values = try decoder.container(keyedBy: StringCodingKey.self)
-					self.type = try values.decode(`Type`.self, forKey: "type")
 					self.id = try values.decode(String.self, forKey: "id")
+					self.type = try values.decode(`Type`.self, forKey: "type")
 				}
 
 				public func encode(to encoder: Encoder) throws {
 					var values = encoder.container(keyedBy: StringCodingKey.self)
-					try values.encode(type, forKey: "type")
 					try values.encode(id, forKey: "id")
+					try values.encode(type, forKey: "type")
 				}
 			}
 

@@ -7,33 +7,33 @@ public struct AppEventLocalizationUpdateRequest: Codable {
 	public var data: Data
 
 	public struct Data: Codable, Identifiable {
-		public var id: String
 		public var attributes: Attributes?
+		public var id: String
 		public var type: `Type`
 
 		public struct Attributes: Codable {
-			public var shortDescription: String?
 			public var longDescription: String?
 			public var name: String?
+			public var shortDescription: String?
 
-			public init(shortDescription: String? = nil, longDescription: String? = nil, name: String? = nil) {
-				self.shortDescription = shortDescription
+			public init(longDescription: String? = nil, name: String? = nil, shortDescription: String? = nil) {
 				self.longDescription = longDescription
 				self.name = name
+				self.shortDescription = shortDescription
 			}
 
 			public init(from decoder: Decoder) throws {
 				let values = try decoder.container(keyedBy: StringCodingKey.self)
-				self.shortDescription = try values.decodeIfPresent(String.self, forKey: "shortDescription")
 				self.longDescription = try values.decodeIfPresent(String.self, forKey: "longDescription")
 				self.name = try values.decodeIfPresent(String.self, forKey: "name")
+				self.shortDescription = try values.decodeIfPresent(String.self, forKey: "shortDescription")
 			}
 
 			public func encode(to encoder: Encoder) throws {
 				var values = encoder.container(keyedBy: StringCodingKey.self)
-				try values.encodeIfPresent(shortDescription, forKey: "shortDescription")
 				try values.encodeIfPresent(longDescription, forKey: "longDescription")
 				try values.encodeIfPresent(name, forKey: "name")
+				try values.encodeIfPresent(shortDescription, forKey: "shortDescription")
 			}
 		}
 
@@ -41,23 +41,23 @@ public struct AppEventLocalizationUpdateRequest: Codable {
 			case appEventLocalizations
 		}
 
-		public init(id: String, attributes: Attributes? = nil, type: `Type`) {
-			self.id = id
+		public init(attributes: Attributes? = nil, id: String, type: `Type`) {
 			self.attributes = attributes
+			self.id = id
 			self.type = type
 		}
 
 		public init(from decoder: Decoder) throws {
 			let values = try decoder.container(keyedBy: StringCodingKey.self)
-			self.id = try values.decode(String.self, forKey: "id")
 			self.attributes = try values.decodeIfPresent(Attributes.self, forKey: "attributes")
+			self.id = try values.decode(String.self, forKey: "id")
 			self.type = try values.decode(`Type`.self, forKey: "type")
 		}
 
 		public func encode(to encoder: Encoder) throws {
 			var values = encoder.container(keyedBy: StringCodingKey.self)
-			try values.encode(id, forKey: "id")
 			try values.encodeIfPresent(attributes, forKey: "attributes")
+			try values.encode(id, forKey: "id")
 			try values.encode(type, forKey: "type")
 		}
 	}

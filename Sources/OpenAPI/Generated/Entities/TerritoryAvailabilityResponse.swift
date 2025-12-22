@@ -4,28 +4,28 @@
 import Foundation
 
 public struct TerritoryAvailabilityResponse: Codable {
-	public var included: [Territory]?
-	public var links: DocumentLinks
 	/// TerritoryAvailability
 	public var data: TerritoryAvailability
+	public var included: [Territory]?
+	public var links: DocumentLinks
 
-	public init(included: [Territory]? = nil, links: DocumentLinks, data: TerritoryAvailability) {
+	public init(data: TerritoryAvailability, included: [Territory]? = nil, links: DocumentLinks) {
+		self.data = data
 		self.included = included
 		self.links = links
-		self.data = data
 	}
 
 	public init(from decoder: Decoder) throws {
 		let values = try decoder.container(keyedBy: StringCodingKey.self)
+		self.data = try values.decode(TerritoryAvailability.self, forKey: "data")
 		self.included = try values.decodeIfPresent([Territory].self, forKey: "included")
 		self.links = try values.decode(DocumentLinks.self, forKey: "links")
-		self.data = try values.decode(TerritoryAvailability.self, forKey: "data")
 	}
 
 	public func encode(to encoder: Encoder) throws {
 		var values = encoder.container(keyedBy: StringCodingKey.self)
+		try values.encode(data, forKey: "data")
 		try values.encodeIfPresent(included, forKey: "included")
 		try values.encode(links, forKey: "links")
-		try values.encode(data, forKey: "data")
 	}
 }

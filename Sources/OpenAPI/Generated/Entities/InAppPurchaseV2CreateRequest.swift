@@ -12,36 +12,36 @@ public struct InAppPurchaseV2CreateRequest: Codable {
 		public var type: `Type`
 
 		public struct Attributes: Codable {
-			public var name: String
-			public var reviewNote: String?
 			public var isFamilySharable: Bool?
-			public var productID: String
 			public var inAppPurchaseType: InAppPurchaseType
+			public var name: String
+			public var productID: String
+			public var reviewNote: String?
 
-			public init(name: String, reviewNote: String? = nil, isFamilySharable: Bool? = nil, productID: String, inAppPurchaseType: InAppPurchaseType) {
-				self.name = name
-				self.reviewNote = reviewNote
+			public init(isFamilySharable: Bool? = nil, inAppPurchaseType: InAppPurchaseType, name: String, productID: String, reviewNote: String? = nil) {
 				self.isFamilySharable = isFamilySharable
-				self.productID = productID
 				self.inAppPurchaseType = inAppPurchaseType
+				self.name = name
+				self.productID = productID
+				self.reviewNote = reviewNote
 			}
 
 			public init(from decoder: Decoder) throws {
 				let values = try decoder.container(keyedBy: StringCodingKey.self)
-				self.name = try values.decode(String.self, forKey: "name")
-				self.reviewNote = try values.decodeIfPresent(String.self, forKey: "reviewNote")
 				self.isFamilySharable = try values.decodeIfPresent(Bool.self, forKey: "familySharable")
-				self.productID = try values.decode(String.self, forKey: "productId")
 				self.inAppPurchaseType = try values.decode(InAppPurchaseType.self, forKey: "inAppPurchaseType")
+				self.name = try values.decode(String.self, forKey: "name")
+				self.productID = try values.decode(String.self, forKey: "productId")
+				self.reviewNote = try values.decodeIfPresent(String.self, forKey: "reviewNote")
 			}
 
 			public func encode(to encoder: Encoder) throws {
 				var values = encoder.container(keyedBy: StringCodingKey.self)
-				try values.encode(name, forKey: "name")
-				try values.encodeIfPresent(reviewNote, forKey: "reviewNote")
 				try values.encodeIfPresent(isFamilySharable, forKey: "familySharable")
-				try values.encode(productID, forKey: "productId")
 				try values.encode(inAppPurchaseType, forKey: "inAppPurchaseType")
+				try values.encode(name, forKey: "name")
+				try values.encode(productID, forKey: "productId")
+				try values.encodeIfPresent(reviewNote, forKey: "reviewNote")
 			}
 		}
 

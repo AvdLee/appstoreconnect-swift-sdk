@@ -4,30 +4,30 @@
 import Foundation
 
 public struct AndroidToIosAppMappingDetail: Codable, Identifiable {
-	public var id: String
 	public var attributes: Attributes?
-	public var type: `Type`
+	public var id: String
 	public var links: ResourceLinks?
+	public var type: `Type`
 
 	public struct Attributes: Codable {
-		public var packageName: String?
 		public var appSigningKeyPublicCertificateSha256Fingerprints: [String]?
+		public var packageName: String?
 
-		public init(packageName: String? = nil, appSigningKeyPublicCertificateSha256Fingerprints: [String]? = nil) {
-			self.packageName = packageName
+		public init(appSigningKeyPublicCertificateSha256Fingerprints: [String]? = nil, packageName: String? = nil) {
 			self.appSigningKeyPublicCertificateSha256Fingerprints = appSigningKeyPublicCertificateSha256Fingerprints
+			self.packageName = packageName
 		}
 
 		public init(from decoder: Decoder) throws {
 			let values = try decoder.container(keyedBy: StringCodingKey.self)
-			self.packageName = try values.decodeIfPresent(String.self, forKey: "packageName")
 			self.appSigningKeyPublicCertificateSha256Fingerprints = try values.decodeIfPresent([String].self, forKey: "appSigningKeyPublicCertificateSha256Fingerprints")
+			self.packageName = try values.decodeIfPresent(String.self, forKey: "packageName")
 		}
 
 		public func encode(to encoder: Encoder) throws {
 			var values = encoder.container(keyedBy: StringCodingKey.self)
-			try values.encodeIfPresent(packageName, forKey: "packageName")
 			try values.encodeIfPresent(appSigningKeyPublicCertificateSha256Fingerprints, forKey: "appSigningKeyPublicCertificateSha256Fingerprints")
+			try values.encodeIfPresent(packageName, forKey: "packageName")
 		}
 	}
 
@@ -35,26 +35,26 @@ public struct AndroidToIosAppMappingDetail: Codable, Identifiable {
 		case androidToIosAppMappingDetails
 	}
 
-	public init(id: String, attributes: Attributes? = nil, type: `Type`, links: ResourceLinks? = nil) {
-		self.id = id
+	public init(attributes: Attributes? = nil, id: String, links: ResourceLinks? = nil, type: `Type`) {
 		self.attributes = attributes
-		self.type = type
+		self.id = id
 		self.links = links
+		self.type = type
 	}
 
 	public init(from decoder: Decoder) throws {
 		let values = try decoder.container(keyedBy: StringCodingKey.self)
-		self.id = try values.decode(String.self, forKey: "id")
 		self.attributes = try values.decodeIfPresent(Attributes.self, forKey: "attributes")
-		self.type = try values.decode(`Type`.self, forKey: "type")
+		self.id = try values.decode(String.self, forKey: "id")
 		self.links = try values.decodeIfPresent(ResourceLinks.self, forKey: "links")
+		self.type = try values.decode(`Type`.self, forKey: "type")
 	}
 
 	public func encode(to encoder: Encoder) throws {
 		var values = encoder.container(keyedBy: StringCodingKey.self)
-		try values.encode(id, forKey: "id")
 		try values.encodeIfPresent(attributes, forKey: "attributes")
-		try values.encode(type, forKey: "type")
+		try values.encode(id, forKey: "id")
 		try values.encodeIfPresent(links, forKey: "links")
+		try values.encode(type, forKey: "type")
 	}
 }

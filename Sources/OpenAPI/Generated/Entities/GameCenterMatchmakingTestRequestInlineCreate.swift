@@ -5,21 +5,21 @@ import Foundation
 
 public struct GameCenterMatchmakingTestRequestInlineCreate: Codable, Identifiable {
 	public var attributes: Attributes
-	public var type: `Type`
-	public var relationships: Relationships?
 	public var id: String?
+	public var relationships: Relationships?
+	public var type: `Type`
 
 	public struct Attributes: Codable {
-		public var locale: Locale?
-		public var maxPlayers: Int?
-		public var location: Location?
-		public var minPlayers: Int?
-		public var playerCount: Int?
-		public var secondsInQueue: Int
-		public var bundleID: String
-		public var requestName: String
-		public var platform: Platform
 		public var appVersion: String
+		public var bundleID: String
+		public var locale: Locale?
+		public var location: Location?
+		public var maxPlayers: Int?
+		public var minPlayers: Int?
+		public var platform: Platform
+		public var playerCount: Int?
+		public var requestName: String
+		public var secondsInQueue: Int
 
 		public enum Locale: String, Codable, CaseIterable {
 			case arSa = "AR-SA"
@@ -63,50 +63,46 @@ public struct GameCenterMatchmakingTestRequestInlineCreate: Codable, Identifiabl
 			case zhHk = "ZH-HK"
 		}
 
-		public init(locale: Locale? = nil, maxPlayers: Int? = nil, location: Location? = nil, minPlayers: Int? = nil, playerCount: Int? = nil, secondsInQueue: Int, bundleID: String, requestName: String, platform: Platform, appVersion: String) {
-			self.locale = locale
-			self.maxPlayers = maxPlayers
-			self.location = location
-			self.minPlayers = minPlayers
-			self.playerCount = playerCount
-			self.secondsInQueue = secondsInQueue
-			self.bundleID = bundleID
-			self.requestName = requestName
-			self.platform = platform
+		public init(appVersion: String, bundleID: String, locale: Locale? = nil, location: Location? = nil, maxPlayers: Int? = nil, minPlayers: Int? = nil, platform: Platform, playerCount: Int? = nil, requestName: String, secondsInQueue: Int) {
 			self.appVersion = appVersion
+			self.bundleID = bundleID
+			self.locale = locale
+			self.location = location
+			self.maxPlayers = maxPlayers
+			self.minPlayers = minPlayers
+			self.platform = platform
+			self.playerCount = playerCount
+			self.requestName = requestName
+			self.secondsInQueue = secondsInQueue
 		}
 
 		public init(from decoder: Decoder) throws {
 			let values = try decoder.container(keyedBy: StringCodingKey.self)
-			self.locale = try values.decodeIfPresent(Locale.self, forKey: "locale")
-			self.maxPlayers = try values.decodeIfPresent(Int.self, forKey: "maxPlayers")
-			self.location = try values.decodeIfPresent(Location.self, forKey: "location")
-			self.minPlayers = try values.decodeIfPresent(Int.self, forKey: "minPlayers")
-			self.playerCount = try values.decodeIfPresent(Int.self, forKey: "playerCount")
-			self.secondsInQueue = try values.decode(Int.self, forKey: "secondsInQueue")
-			self.bundleID = try values.decode(String.self, forKey: "bundleId")
-			self.requestName = try values.decode(String.self, forKey: "requestName")
-			self.platform = try values.decode(Platform.self, forKey: "platform")
 			self.appVersion = try values.decode(String.self, forKey: "appVersion")
+			self.bundleID = try values.decode(String.self, forKey: "bundleId")
+			self.locale = try values.decodeIfPresent(Locale.self, forKey: "locale")
+			self.location = try values.decodeIfPresent(Location.self, forKey: "location")
+			self.maxPlayers = try values.decodeIfPresent(Int.self, forKey: "maxPlayers")
+			self.minPlayers = try values.decodeIfPresent(Int.self, forKey: "minPlayers")
+			self.platform = try values.decode(Platform.self, forKey: "platform")
+			self.playerCount = try values.decodeIfPresent(Int.self, forKey: "playerCount")
+			self.requestName = try values.decode(String.self, forKey: "requestName")
+			self.secondsInQueue = try values.decode(Int.self, forKey: "secondsInQueue")
 		}
 
 		public func encode(to encoder: Encoder) throws {
 			var values = encoder.container(keyedBy: StringCodingKey.self)
-			try values.encodeIfPresent(locale, forKey: "locale")
-			try values.encodeIfPresent(maxPlayers, forKey: "maxPlayers")
-			try values.encodeIfPresent(location, forKey: "location")
-			try values.encodeIfPresent(minPlayers, forKey: "minPlayers")
-			try values.encodeIfPresent(playerCount, forKey: "playerCount")
-			try values.encode(secondsInQueue, forKey: "secondsInQueue")
-			try values.encode(bundleID, forKey: "bundleId")
-			try values.encode(requestName, forKey: "requestName")
-			try values.encode(platform, forKey: "platform")
 			try values.encode(appVersion, forKey: "appVersion")
+			try values.encode(bundleID, forKey: "bundleId")
+			try values.encodeIfPresent(locale, forKey: "locale")
+			try values.encodeIfPresent(location, forKey: "location")
+			try values.encodeIfPresent(maxPlayers, forKey: "maxPlayers")
+			try values.encodeIfPresent(minPlayers, forKey: "minPlayers")
+			try values.encode(platform, forKey: "platform")
+			try values.encodeIfPresent(playerCount, forKey: "playerCount")
+			try values.encode(requestName, forKey: "requestName")
+			try values.encode(secondsInQueue, forKey: "secondsInQueue")
 		}
-	}
-
-	public enum `Type`: String, Codable, CaseIterable {
-		case gameCenterMatchmakingTestRequests
 	}
 
 	public struct Relationships: Codable {
@@ -116,28 +112,28 @@ public struct GameCenterMatchmakingTestRequestInlineCreate: Codable, Identifiabl
 			public var data: [Datum]?
 
 			public struct Datum: Codable, Identifiable {
-				public var type: `Type`
 				public var id: String
+				public var type: `Type`
 
 				public enum `Type`: String, Codable, CaseIterable {
 					case gameCenterMatchmakingTestPlayerProperties
 				}
 
-				public init(type: `Type`, id: String) {
-					self.type = type
+				public init(id: String, type: `Type`) {
 					self.id = id
+					self.type = type
 				}
 
 				public init(from decoder: Decoder) throws {
 					let values = try decoder.container(keyedBy: StringCodingKey.self)
-					self.type = try values.decode(`Type`.self, forKey: "type")
 					self.id = try values.decode(String.self, forKey: "id")
+					self.type = try values.decode(`Type`.self, forKey: "type")
 				}
 
 				public func encode(to encoder: Encoder) throws {
 					var values = encoder.container(keyedBy: StringCodingKey.self)
-					try values.encode(type, forKey: "type")
 					try values.encode(id, forKey: "id")
+					try values.encode(type, forKey: "type")
 				}
 			}
 
@@ -171,26 +167,30 @@ public struct GameCenterMatchmakingTestRequestInlineCreate: Codable, Identifiabl
 		}
 	}
 
-	public init(attributes: Attributes, type: `Type`, relationships: Relationships? = nil, id: String? = nil) {
+	public enum `Type`: String, Codable, CaseIterable {
+		case gameCenterMatchmakingTestRequests
+	}
+
+	public init(attributes: Attributes, id: String? = nil, relationships: Relationships? = nil, type: `Type`) {
 		self.attributes = attributes
-		self.type = type
-		self.relationships = relationships
 		self.id = id
+		self.relationships = relationships
+		self.type = type
 	}
 
 	public init(from decoder: Decoder) throws {
 		let values = try decoder.container(keyedBy: StringCodingKey.self)
 		self.attributes = try values.decode(Attributes.self, forKey: "attributes")
-		self.type = try values.decode(`Type`.self, forKey: "type")
-		self.relationships = try values.decodeIfPresent(Relationships.self, forKey: "relationships")
 		self.id = try values.decodeIfPresent(String.self, forKey: "id")
+		self.relationships = try values.decodeIfPresent(Relationships.self, forKey: "relationships")
+		self.type = try values.decode(`Type`.self, forKey: "type")
 	}
 
 	public func encode(to encoder: Encoder) throws {
 		var values = encoder.container(keyedBy: StringCodingKey.self)
 		try values.encode(attributes, forKey: "attributes")
-		try values.encode(type, forKey: "type")
-		try values.encodeIfPresent(relationships, forKey: "relationships")
 		try values.encodeIfPresent(id, forKey: "id")
+		try values.encodeIfPresent(relationships, forKey: "relationships")
+		try values.encode(type, forKey: "type")
 	}
 }

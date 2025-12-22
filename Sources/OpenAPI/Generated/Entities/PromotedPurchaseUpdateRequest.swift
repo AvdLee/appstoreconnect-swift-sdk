@@ -12,24 +12,24 @@ public struct PromotedPurchaseUpdateRequest: Codable {
 		public var type: `Type`
 
 		public struct Attributes: Codable {
-			public var isVisibleForAllUsers: Bool?
 			public var isEnabled: Bool?
+			public var isVisibleForAllUsers: Bool?
 
-			public init(isVisibleForAllUsers: Bool? = nil, isEnabled: Bool? = nil) {
-				self.isVisibleForAllUsers = isVisibleForAllUsers
+			public init(isEnabled: Bool? = nil, isVisibleForAllUsers: Bool? = nil) {
 				self.isEnabled = isEnabled
+				self.isVisibleForAllUsers = isVisibleForAllUsers
 			}
 
 			public init(from decoder: Decoder) throws {
 				let values = try decoder.container(keyedBy: StringCodingKey.self)
-				self.isVisibleForAllUsers = try values.decodeIfPresent(Bool.self, forKey: "visibleForAllUsers")
 				self.isEnabled = try values.decodeIfPresent(Bool.self, forKey: "enabled")
+				self.isVisibleForAllUsers = try values.decodeIfPresent(Bool.self, forKey: "visibleForAllUsers")
 			}
 
 			public func encode(to encoder: Encoder) throws {
 				var values = encoder.container(keyedBy: StringCodingKey.self)
-				try values.encodeIfPresent(isVisibleForAllUsers, forKey: "visibleForAllUsers")
 				try values.encodeIfPresent(isEnabled, forKey: "enabled")
+				try values.encodeIfPresent(isVisibleForAllUsers, forKey: "visibleForAllUsers")
 			}
 		}
 

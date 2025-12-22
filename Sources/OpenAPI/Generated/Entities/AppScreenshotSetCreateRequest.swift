@@ -7,9 +7,27 @@ public struct AppScreenshotSetCreateRequest: Codable {
 	public var data: Data
 
 	public struct Data: Codable {
-		public var relationships: Relationships?
 		public var attributes: Attributes
+		public var relationships: Relationships?
 		public var type: `Type`
+
+		public struct Attributes: Codable {
+			public var screenshotDisplayType: ScreenshotDisplayType
+
+			public init(screenshotDisplayType: ScreenshotDisplayType) {
+				self.screenshotDisplayType = screenshotDisplayType
+			}
+
+			public init(from decoder: Decoder) throws {
+				let values = try decoder.container(keyedBy: StringCodingKey.self)
+				self.screenshotDisplayType = try values.decode(ScreenshotDisplayType.self, forKey: "screenshotDisplayType")
+			}
+
+			public func encode(to encoder: Encoder) throws {
+				var values = encoder.container(keyedBy: StringCodingKey.self)
+				try values.encode(screenshotDisplayType, forKey: "screenshotDisplayType")
+			}
+		}
 
 		public struct Relationships: Codable {
 			public var appCustomProductPageLocalization: AppCustomProductPageLocalization?
@@ -169,45 +187,27 @@ public struct AppScreenshotSetCreateRequest: Codable {
 			}
 		}
 
-		public struct Attributes: Codable {
-			public var screenshotDisplayType: ScreenshotDisplayType
-
-			public init(screenshotDisplayType: ScreenshotDisplayType) {
-				self.screenshotDisplayType = screenshotDisplayType
-			}
-
-			public init(from decoder: Decoder) throws {
-				let values = try decoder.container(keyedBy: StringCodingKey.self)
-				self.screenshotDisplayType = try values.decode(ScreenshotDisplayType.self, forKey: "screenshotDisplayType")
-			}
-
-			public func encode(to encoder: Encoder) throws {
-				var values = encoder.container(keyedBy: StringCodingKey.self)
-				try values.encode(screenshotDisplayType, forKey: "screenshotDisplayType")
-			}
-		}
-
 		public enum `Type`: String, Codable, CaseIterable {
 			case appScreenshotSets
 		}
 
-		public init(relationships: Relationships? = nil, attributes: Attributes, type: `Type`) {
-			self.relationships = relationships
+		public init(attributes: Attributes, relationships: Relationships? = nil, type: `Type`) {
 			self.attributes = attributes
+			self.relationships = relationships
 			self.type = type
 		}
 
 		public init(from decoder: Decoder) throws {
 			let values = try decoder.container(keyedBy: StringCodingKey.self)
-			self.relationships = try values.decodeIfPresent(Relationships.self, forKey: "relationships")
 			self.attributes = try values.decode(Attributes.self, forKey: "attributes")
+			self.relationships = try values.decodeIfPresent(Relationships.self, forKey: "relationships")
 			self.type = try values.decode(`Type`.self, forKey: "type")
 		}
 
 		public func encode(to encoder: Encoder) throws {
 			var values = encoder.container(keyedBy: StringCodingKey.self)
-			try values.encodeIfPresent(relationships, forKey: "relationships")
 			try values.encode(attributes, forKey: "attributes")
+			try values.encodeIfPresent(relationships, forKey: "relationships")
 			try values.encode(type, forKey: "type")
 		}
 	}

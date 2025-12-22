@@ -4,40 +4,31 @@
 import Foundation
 
 public struct AppCustomProductPageCreateRequest: Codable {
-	public var included: [IncludedItem]?
 	public var data: Data
-
-	public enum IncludedItem: Codable {
-		case appCustomProductPageLocalizationInlineCreate(AppCustomProductPageLocalizationInlineCreate)
-		case appCustomProductPageVersionInlineCreate(AppCustomProductPageVersionInlineCreate)
-
-		public init(from decoder: Decoder) throws {
-			let container = try decoder.singleValueContainer()
-			if let value = try? container.decode(AppCustomProductPageLocalizationInlineCreate.self) {
-				self = .appCustomProductPageLocalizationInlineCreate(value)
-			} else if let value = try? container.decode(AppCustomProductPageVersionInlineCreate.self) {
-				self = .appCustomProductPageVersionInlineCreate(value)
-			} else {
-				throw DecodingError.dataCorruptedError(
-					in: container,
-					debugDescription: "Data could not be decoded as any of the expected types (AppCustomProductPageLocalizationInlineCreate, AppCustomProductPageVersionInlineCreate)."
-				)
-			}
-		}
-
-		public func encode(to encoder: Encoder) throws {
-			var container = encoder.singleValueContainer()
-			switch self {
-			case .appCustomProductPageLocalizationInlineCreate(let value): try container.encode(value)
-			case .appCustomProductPageVersionInlineCreate(let value): try container.encode(value)
-			}
-		}
-	}
+	public var included: [IncludedItem]?
 
 	public struct Data: Codable {
+		public var attributes: Attributes
 		public var relationships: Relationships
 		public var type: `Type`
-		public var attributes: Attributes
+
+		public struct Attributes: Codable {
+			public var name: String
+
+			public init(name: String) {
+				self.name = name
+			}
+
+			public init(from decoder: Decoder) throws {
+				let values = try decoder.container(keyedBy: StringCodingKey.self)
+				self.name = try values.decode(String.self, forKey: "name")
+			}
+
+			public func encode(to encoder: Encoder) throws {
+				var values = encoder.container(keyedBy: StringCodingKey.self)
+				try values.encode(name, forKey: "name")
+			}
+		}
 
 		public struct Relationships: Codable {
 			public var app: App
@@ -181,28 +172,28 @@ public struct AppCustomProductPageCreateRequest: Codable {
 				public var data: Data?
 
 				public struct Data: Codable, Identifiable {
-					public var type: `Type`
 					public var id: String
+					public var type: `Type`
 
 					public enum `Type`: String, Codable, CaseIterable {
 						case appCustomProductPages
 					}
 
-					public init(type: `Type`, id: String) {
-						self.type = type
+					public init(id: String, type: `Type`) {
 						self.id = id
+						self.type = type
 					}
 
 					public init(from decoder: Decoder) throws {
 						let values = try decoder.container(keyedBy: StringCodingKey.self)
-						self.type = try values.decode(`Type`.self, forKey: "type")
 						self.id = try values.decode(String.self, forKey: "id")
+						self.type = try values.decode(`Type`.self, forKey: "type")
 					}
 
 					public func encode(to encoder: Encoder) throws {
 						var values = encoder.container(keyedBy: StringCodingKey.self)
-						try values.encode(type, forKey: "type")
 						try values.encode(id, forKey: "id")
+						try values.encode(type, forKey: "type")
 					}
 				}
 
@@ -249,59 +240,68 @@ public struct AppCustomProductPageCreateRequest: Codable {
 			case appCustomProductPages
 		}
 
-		public struct Attributes: Codable {
-			public var name: String
-
-			public init(name: String) {
-				self.name = name
-			}
-
-			public init(from decoder: Decoder) throws {
-				let values = try decoder.container(keyedBy: StringCodingKey.self)
-				self.name = try values.decode(String.self, forKey: "name")
-			}
-
-			public func encode(to encoder: Encoder) throws {
-				var values = encoder.container(keyedBy: StringCodingKey.self)
-				try values.encode(name, forKey: "name")
-			}
-		}
-
-		public init(relationships: Relationships, type: `Type`, attributes: Attributes) {
+		public init(attributes: Attributes, relationships: Relationships, type: `Type`) {
+			self.attributes = attributes
 			self.relationships = relationships
 			self.type = type
-			self.attributes = attributes
 		}
 
 		public init(from decoder: Decoder) throws {
 			let values = try decoder.container(keyedBy: StringCodingKey.self)
+			self.attributes = try values.decode(Attributes.self, forKey: "attributes")
 			self.relationships = try values.decode(Relationships.self, forKey: "relationships")
 			self.type = try values.decode(`Type`.self, forKey: "type")
-			self.attributes = try values.decode(Attributes.self, forKey: "attributes")
 		}
 
 		public func encode(to encoder: Encoder) throws {
 			var values = encoder.container(keyedBy: StringCodingKey.self)
+			try values.encode(attributes, forKey: "attributes")
 			try values.encode(relationships, forKey: "relationships")
 			try values.encode(type, forKey: "type")
-			try values.encode(attributes, forKey: "attributes")
 		}
 	}
 
-	public init(included: [IncludedItem]? = nil, data: Data) {
-		self.included = included
+	public enum IncludedItem: Codable {
+		case appCustomProductPageLocalizationInlineCreate(AppCustomProductPageLocalizationInlineCreate)
+		case appCustomProductPageVersionInlineCreate(AppCustomProductPageVersionInlineCreate)
+
+		public init(from decoder: Decoder) throws {
+			let container = try decoder.singleValueContainer()
+			if let value = try? container.decode(AppCustomProductPageLocalizationInlineCreate.self) {
+				self = .appCustomProductPageLocalizationInlineCreate(value)
+			} else if let value = try? container.decode(AppCustomProductPageVersionInlineCreate.self) {
+				self = .appCustomProductPageVersionInlineCreate(value)
+			} else {
+				throw DecodingError.dataCorruptedError(
+					in: container,
+					debugDescription: "Data could not be decoded as any of the expected types (AppCustomProductPageLocalizationInlineCreate, AppCustomProductPageVersionInlineCreate)."
+				)
+			}
+		}
+
+		public func encode(to encoder: Encoder) throws {
+			var container = encoder.singleValueContainer()
+			switch self {
+			case .appCustomProductPageLocalizationInlineCreate(let value): try container.encode(value)
+			case .appCustomProductPageVersionInlineCreate(let value): try container.encode(value)
+			}
+		}
+	}
+
+	public init(data: Data, included: [IncludedItem]? = nil) {
 		self.data = data
+		self.included = included
 	}
 
 	public init(from decoder: Decoder) throws {
 		let values = try decoder.container(keyedBy: StringCodingKey.self)
-		self.included = try values.decodeIfPresent([IncludedItem].self, forKey: "included")
 		self.data = try values.decode(Data.self, forKey: "data")
+		self.included = try values.decodeIfPresent([IncludedItem].self, forKey: "included")
 	}
 
 	public func encode(to encoder: Encoder) throws {
 		var values = encoder.container(keyedBy: StringCodingKey.self)
-		try values.encodeIfPresent(included, forKey: "included")
 		try values.encode(data, forKey: "data")
+		try values.encodeIfPresent(included, forKey: "included")
 	}
 }

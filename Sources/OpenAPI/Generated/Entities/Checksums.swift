@@ -4,71 +4,71 @@
 import Foundation
 
 public struct Checksums: Codable {
-	public var file: File?
 	public var composite: Composite?
-
-	public struct File: Codable {
-		public var hash: String?
-		public var algorithm: ChecksumAlgorithm?
-
-		public init(hash: String? = nil, algorithm: ChecksumAlgorithm? = nil) {
-			self.hash = hash
-			self.algorithm = algorithm
-		}
-
-		public init(from decoder: Decoder) throws {
-			let values = try decoder.container(keyedBy: StringCodingKey.self)
-			self.hash = try values.decodeIfPresent(String.self, forKey: "hash")
-			self.algorithm = try values.decodeIfPresent(ChecksumAlgorithm.self, forKey: "algorithm")
-		}
-
-		public func encode(to encoder: Encoder) throws {
-			var values = encoder.container(keyedBy: StringCodingKey.self)
-			try values.encodeIfPresent(hash, forKey: "hash")
-			try values.encodeIfPresent(algorithm, forKey: "algorithm")
-		}
-	}
+	public var file: File?
 
 	public struct Composite: Codable {
-		public var hash: String?
 		public var algorithm: Algorithm?
+		public var hash: String?
 
 		public enum Algorithm: String, Codable, CaseIterable {
 			case md5 = "MD5"
 		}
 
-		public init(hash: String? = nil, algorithm: Algorithm? = nil) {
-			self.hash = hash
+		public init(algorithm: Algorithm? = nil, hash: String? = nil) {
 			self.algorithm = algorithm
+			self.hash = hash
 		}
 
 		public init(from decoder: Decoder) throws {
 			let values = try decoder.container(keyedBy: StringCodingKey.self)
-			self.hash = try values.decodeIfPresent(String.self, forKey: "hash")
 			self.algorithm = try values.decodeIfPresent(Algorithm.self, forKey: "algorithm")
+			self.hash = try values.decodeIfPresent(String.self, forKey: "hash")
 		}
 
 		public func encode(to encoder: Encoder) throws {
 			var values = encoder.container(keyedBy: StringCodingKey.self)
-			try values.encodeIfPresent(hash, forKey: "hash")
 			try values.encodeIfPresent(algorithm, forKey: "algorithm")
+			try values.encodeIfPresent(hash, forKey: "hash")
 		}
 	}
 
-	public init(file: File? = nil, composite: Composite? = nil) {
-		self.file = file
+	public struct File: Codable {
+		public var algorithm: ChecksumAlgorithm?
+		public var hash: String?
+
+		public init(algorithm: ChecksumAlgorithm? = nil, hash: String? = nil) {
+			self.algorithm = algorithm
+			self.hash = hash
+		}
+
+		public init(from decoder: Decoder) throws {
+			let values = try decoder.container(keyedBy: StringCodingKey.self)
+			self.algorithm = try values.decodeIfPresent(ChecksumAlgorithm.self, forKey: "algorithm")
+			self.hash = try values.decodeIfPresent(String.self, forKey: "hash")
+		}
+
+		public func encode(to encoder: Encoder) throws {
+			var values = encoder.container(keyedBy: StringCodingKey.self)
+			try values.encodeIfPresent(algorithm, forKey: "algorithm")
+			try values.encodeIfPresent(hash, forKey: "hash")
+		}
+	}
+
+	public init(composite: Composite? = nil, file: File? = nil) {
 		self.composite = composite
+		self.file = file
 	}
 
 	public init(from decoder: Decoder) throws {
 		let values = try decoder.container(keyedBy: StringCodingKey.self)
-		self.file = try values.decodeIfPresent(File.self, forKey: "file")
 		self.composite = try values.decodeIfPresent(Composite.self, forKey: "composite")
+		self.file = try values.decodeIfPresent(File.self, forKey: "file")
 	}
 
 	public func encode(to encoder: Encoder) throws {
 		var values = encoder.container(keyedBy: StringCodingKey.self)
-		try values.encodeIfPresent(file, forKey: "file")
 		try values.encodeIfPresent(composite, forKey: "composite")
+		try values.encodeIfPresent(file, forKey: "file")
 	}
 }

@@ -4,9 +4,9 @@
 import Foundation
 
 public struct GameCenterLeaderboardVersionV2InlineCreate: Codable, Identifiable {
+	public var id: String?
 	public var relationships: Relationships?
 	public var type: `Type`
-	public var id: String?
 
 	public struct Relationships: Codable {
 		public var leaderboard: Leaderboard?
@@ -74,23 +74,23 @@ public struct GameCenterLeaderboardVersionV2InlineCreate: Codable, Identifiable 
 		case gameCenterLeaderboardVersions
 	}
 
-	public init(relationships: Relationships? = nil, type: `Type`, id: String? = nil) {
+	public init(id: String? = nil, relationships: Relationships? = nil, type: `Type`) {
+		self.id = id
 		self.relationships = relationships
 		self.type = type
-		self.id = id
 	}
 
 	public init(from decoder: Decoder) throws {
 		let values = try decoder.container(keyedBy: StringCodingKey.self)
+		self.id = try values.decodeIfPresent(String.self, forKey: "id")
 		self.relationships = try values.decodeIfPresent(Relationships.self, forKey: "relationships")
 		self.type = try values.decode(`Type`.self, forKey: "type")
-		self.id = try values.decodeIfPresent(String.self, forKey: "id")
 	}
 
 	public func encode(to encoder: Encoder) throws {
 		var values = encoder.container(keyedBy: StringCodingKey.self)
+		try values.encodeIfPresent(id, forKey: "id")
 		try values.encodeIfPresent(relationships, forKey: "relationships")
 		try values.encode(type, forKey: "type")
-		try values.encodeIfPresent(id, forKey: "id")
 	}
 }

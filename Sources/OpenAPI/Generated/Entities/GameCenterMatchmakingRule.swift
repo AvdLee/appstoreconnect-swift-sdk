@@ -5,16 +5,16 @@ import Foundation
 
 public struct GameCenterMatchmakingRule: Codable, Identifiable {
 	public var attributes: Attributes?
-	public var type: `Type`
-	public var links: ResourceLinks?
 	public var id: String
+	public var links: ResourceLinks?
+	public var type: `Type`
 
 	public struct Attributes: Codable {
 		public var description: String?
-		public var referenceName: String?
-		public var weight: Double?
-		public var type: `Type`?
 		public var expression: String?
+		public var referenceName: String?
+		public var type: `Type`?
+		public var weight: Double?
 
 		public enum `Type`: String, Codable, CaseIterable {
 			case compatible = "COMPATIBLE"
@@ -23,30 +23,30 @@ public struct GameCenterMatchmakingRule: Codable, Identifiable {
 			case team = "TEAM"
 		}
 
-		public init(description: String? = nil, referenceName: String? = nil, weight: Double? = nil, type: `Type`? = nil, expression: String? = nil) {
+		public init(description: String? = nil, expression: String? = nil, referenceName: String? = nil, type: `Type`? = nil, weight: Double? = nil) {
 			self.description = description
-			self.referenceName = referenceName
-			self.weight = weight
-			self.type = type
 			self.expression = expression
+			self.referenceName = referenceName
+			self.type = type
+			self.weight = weight
 		}
 
 		public init(from decoder: Decoder) throws {
 			let values = try decoder.container(keyedBy: StringCodingKey.self)
 			self.description = try values.decodeIfPresent(String.self, forKey: "description")
-			self.referenceName = try values.decodeIfPresent(String.self, forKey: "referenceName")
-			self.weight = try values.decodeIfPresent(Double.self, forKey: "weight")
-			self.type = try values.decodeIfPresent(`Type`.self, forKey: "type")
 			self.expression = try values.decodeIfPresent(String.self, forKey: "expression")
+			self.referenceName = try values.decodeIfPresent(String.self, forKey: "referenceName")
+			self.type = try values.decodeIfPresent(`Type`.self, forKey: "type")
+			self.weight = try values.decodeIfPresent(Double.self, forKey: "weight")
 		}
 
 		public func encode(to encoder: Encoder) throws {
 			var values = encoder.container(keyedBy: StringCodingKey.self)
 			try values.encodeIfPresent(description, forKey: "description")
-			try values.encodeIfPresent(referenceName, forKey: "referenceName")
-			try values.encodeIfPresent(weight, forKey: "weight")
-			try values.encodeIfPresent(type, forKey: "type")
 			try values.encodeIfPresent(expression, forKey: "expression")
+			try values.encodeIfPresent(referenceName, forKey: "referenceName")
+			try values.encodeIfPresent(type, forKey: "type")
+			try values.encodeIfPresent(weight, forKey: "weight")
 		}
 	}
 
@@ -54,26 +54,26 @@ public struct GameCenterMatchmakingRule: Codable, Identifiable {
 		case gameCenterMatchmakingRules
 	}
 
-	public init(attributes: Attributes? = nil, type: `Type`, links: ResourceLinks? = nil, id: String) {
+	public init(attributes: Attributes? = nil, id: String, links: ResourceLinks? = nil, type: `Type`) {
 		self.attributes = attributes
-		self.type = type
-		self.links = links
 		self.id = id
+		self.links = links
+		self.type = type
 	}
 
 	public init(from decoder: Decoder) throws {
 		let values = try decoder.container(keyedBy: StringCodingKey.self)
 		self.attributes = try values.decodeIfPresent(Attributes.self, forKey: "attributes")
-		self.type = try values.decode(`Type`.self, forKey: "type")
-		self.links = try values.decodeIfPresent(ResourceLinks.self, forKey: "links")
 		self.id = try values.decode(String.self, forKey: "id")
+		self.links = try values.decodeIfPresent(ResourceLinks.self, forKey: "links")
+		self.type = try values.decode(`Type`.self, forKey: "type")
 	}
 
 	public func encode(to encoder: Encoder) throws {
 		var values = encoder.container(keyedBy: StringCodingKey.self)
 		try values.encodeIfPresent(attributes, forKey: "attributes")
-		try values.encode(type, forKey: "type")
-		try values.encodeIfPresent(links, forKey: "links")
 		try values.encode(id, forKey: "id")
+		try values.encodeIfPresent(links, forKey: "links")
+		try values.encode(type, forKey: "type")
 	}
 }

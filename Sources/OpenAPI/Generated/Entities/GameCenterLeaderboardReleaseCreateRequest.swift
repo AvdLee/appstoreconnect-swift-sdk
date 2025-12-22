@@ -11,52 +11,8 @@ public struct GameCenterLeaderboardReleaseCreateRequest: Codable {
 		public var type: `Type`
 
 		public struct Relationships: Codable {
-			public var gameCenterLeaderboard: GameCenterLeaderboard
 			public var gameCenterDetail: GameCenterDetail
-
-			public struct GameCenterLeaderboard: Codable {
-				public var data: Data
-
-				public struct Data: Codable, Identifiable {
-					public var id: String
-					public var type: `Type`
-
-					public enum `Type`: String, Codable, CaseIterable {
-						case gameCenterLeaderboards
-					}
-
-					public init(id: String, type: `Type`) {
-						self.id = id
-						self.type = type
-					}
-
-					public init(from decoder: Decoder) throws {
-						let values = try decoder.container(keyedBy: StringCodingKey.self)
-						self.id = try values.decode(String.self, forKey: "id")
-						self.type = try values.decode(`Type`.self, forKey: "type")
-					}
-
-					public func encode(to encoder: Encoder) throws {
-						var values = encoder.container(keyedBy: StringCodingKey.self)
-						try values.encode(id, forKey: "id")
-						try values.encode(type, forKey: "type")
-					}
-				}
-
-				public init(data: Data) {
-					self.data = data
-				}
-
-				public init(from decoder: Decoder) throws {
-					let values = try decoder.container(keyedBy: StringCodingKey.self)
-					self.data = try values.decode(Data.self, forKey: "data")
-				}
-
-				public func encode(to encoder: Encoder) throws {
-					var values = encoder.container(keyedBy: StringCodingKey.self)
-					try values.encode(data, forKey: "data")
-				}
-			}
+			public var gameCenterLeaderboard: GameCenterLeaderboard
 
 			public struct GameCenterDetail: Codable {
 				public var data: Data
@@ -102,21 +58,65 @@ public struct GameCenterLeaderboardReleaseCreateRequest: Codable {
 				}
 			}
 
-			public init(gameCenterLeaderboard: GameCenterLeaderboard, gameCenterDetail: GameCenterDetail) {
-				self.gameCenterLeaderboard = gameCenterLeaderboard
+			public struct GameCenterLeaderboard: Codable {
+				public var data: Data
+
+				public struct Data: Codable, Identifiable {
+					public var id: String
+					public var type: `Type`
+
+					public enum `Type`: String, Codable, CaseIterable {
+						case gameCenterLeaderboards
+					}
+
+					public init(id: String, type: `Type`) {
+						self.id = id
+						self.type = type
+					}
+
+					public init(from decoder: Decoder) throws {
+						let values = try decoder.container(keyedBy: StringCodingKey.self)
+						self.id = try values.decode(String.self, forKey: "id")
+						self.type = try values.decode(`Type`.self, forKey: "type")
+					}
+
+					public func encode(to encoder: Encoder) throws {
+						var values = encoder.container(keyedBy: StringCodingKey.self)
+						try values.encode(id, forKey: "id")
+						try values.encode(type, forKey: "type")
+					}
+				}
+
+				public init(data: Data) {
+					self.data = data
+				}
+
+				public init(from decoder: Decoder) throws {
+					let values = try decoder.container(keyedBy: StringCodingKey.self)
+					self.data = try values.decode(Data.self, forKey: "data")
+				}
+
+				public func encode(to encoder: Encoder) throws {
+					var values = encoder.container(keyedBy: StringCodingKey.self)
+					try values.encode(data, forKey: "data")
+				}
+			}
+
+			public init(gameCenterDetail: GameCenterDetail, gameCenterLeaderboard: GameCenterLeaderboard) {
 				self.gameCenterDetail = gameCenterDetail
+				self.gameCenterLeaderboard = gameCenterLeaderboard
 			}
 
 			public init(from decoder: Decoder) throws {
 				let values = try decoder.container(keyedBy: StringCodingKey.self)
-				self.gameCenterLeaderboard = try values.decode(GameCenterLeaderboard.self, forKey: "gameCenterLeaderboard")
 				self.gameCenterDetail = try values.decode(GameCenterDetail.self, forKey: "gameCenterDetail")
+				self.gameCenterLeaderboard = try values.decode(GameCenterLeaderboard.self, forKey: "gameCenterLeaderboard")
 			}
 
 			public func encode(to encoder: Encoder) throws {
 				var values = encoder.container(keyedBy: StringCodingKey.self)
-				try values.encode(gameCenterLeaderboard, forKey: "gameCenterLeaderboard")
 				try values.encode(gameCenterDetail, forKey: "gameCenterDetail")
+				try values.encode(gameCenterLeaderboard, forKey: "gameCenterLeaderboard")
 			}
 		}
 

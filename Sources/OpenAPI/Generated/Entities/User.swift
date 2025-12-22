@@ -5,46 +5,46 @@ import Foundation
 
 public struct User: Codable, Identifiable {
 	public var attributes: Attributes?
-	public var links: ResourceLinks?
 	public var id: String
+	public var links: ResourceLinks?
 	public var relationships: Relationships?
 	public var type: `Type`
 
 	public struct Attributes: Codable {
-		public var username: String?
-		public var isProvisioningAllowed: Bool?
 		public var isAllAppsVisible: Bool?
-		public var lastName: String?
-		public var roles: [UserRole]?
 		public var firstName: String?
+		public var lastName: String?
+		public var isProvisioningAllowed: Bool?
+		public var roles: [UserRole]?
+		public var username: String?
 
-		public init(username: String? = nil, isProvisioningAllowed: Bool? = nil, isAllAppsVisible: Bool? = nil, lastName: String? = nil, roles: [UserRole]? = nil, firstName: String? = nil) {
-			self.username = username
-			self.isProvisioningAllowed = isProvisioningAllowed
+		public init(isAllAppsVisible: Bool? = nil, firstName: String? = nil, lastName: String? = nil, isProvisioningAllowed: Bool? = nil, roles: [UserRole]? = nil, username: String? = nil) {
 			self.isAllAppsVisible = isAllAppsVisible
-			self.lastName = lastName
-			self.roles = roles
 			self.firstName = firstName
+			self.lastName = lastName
+			self.isProvisioningAllowed = isProvisioningAllowed
+			self.roles = roles
+			self.username = username
 		}
 
 		public init(from decoder: Decoder) throws {
 			let values = try decoder.container(keyedBy: StringCodingKey.self)
-			self.username = try values.decodeIfPresent(String.self, forKey: "username")
-			self.isProvisioningAllowed = try values.decodeIfPresent(Bool.self, forKey: "provisioningAllowed")
 			self.isAllAppsVisible = try values.decodeIfPresent(Bool.self, forKey: "allAppsVisible")
-			self.lastName = try values.decodeIfPresent(String.self, forKey: "lastName")
-			self.roles = try values.decodeIfPresent([UserRole].self, forKey: "roles")
 			self.firstName = try values.decodeIfPresent(String.self, forKey: "firstName")
+			self.lastName = try values.decodeIfPresent(String.self, forKey: "lastName")
+			self.isProvisioningAllowed = try values.decodeIfPresent(Bool.self, forKey: "provisioningAllowed")
+			self.roles = try values.decodeIfPresent([UserRole].self, forKey: "roles")
+			self.username = try values.decodeIfPresent(String.self, forKey: "username")
 		}
 
 		public func encode(to encoder: Encoder) throws {
 			var values = encoder.container(keyedBy: StringCodingKey.self)
-			try values.encodeIfPresent(username, forKey: "username")
-			try values.encodeIfPresent(isProvisioningAllowed, forKey: "provisioningAllowed")
 			try values.encodeIfPresent(isAllAppsVisible, forKey: "allAppsVisible")
-			try values.encodeIfPresent(lastName, forKey: "lastName")
-			try values.encodeIfPresent(roles, forKey: "roles")
 			try values.encodeIfPresent(firstName, forKey: "firstName")
+			try values.encodeIfPresent(lastName, forKey: "lastName")
+			try values.encodeIfPresent(isProvisioningAllowed, forKey: "provisioningAllowed")
+			try values.encodeIfPresent(roles, forKey: "roles")
+			try values.encodeIfPresent(username, forKey: "username")
 		}
 	}
 
@@ -122,10 +122,10 @@ public struct User: Codable, Identifiable {
 		case users
 	}
 
-	public init(attributes: Attributes? = nil, links: ResourceLinks? = nil, id: String, relationships: Relationships? = nil, type: `Type`) {
+	public init(attributes: Attributes? = nil, id: String, links: ResourceLinks? = nil, relationships: Relationships? = nil, type: `Type`) {
 		self.attributes = attributes
-		self.links = links
 		self.id = id
+		self.links = links
 		self.relationships = relationships
 		self.type = type
 	}
@@ -133,8 +133,8 @@ public struct User: Codable, Identifiable {
 	public init(from decoder: Decoder) throws {
 		let values = try decoder.container(keyedBy: StringCodingKey.self)
 		self.attributes = try values.decodeIfPresent(Attributes.self, forKey: "attributes")
-		self.links = try values.decodeIfPresent(ResourceLinks.self, forKey: "links")
 		self.id = try values.decode(String.self, forKey: "id")
+		self.links = try values.decodeIfPresent(ResourceLinks.self, forKey: "links")
 		self.relationships = try values.decodeIfPresent(Relationships.self, forKey: "relationships")
 		self.type = try values.decode(`Type`.self, forKey: "type")
 	}
@@ -142,8 +142,8 @@ public struct User: Codable, Identifiable {
 	public func encode(to encoder: Encoder) throws {
 		var values = encoder.container(keyedBy: StringCodingKey.self)
 		try values.encodeIfPresent(attributes, forKey: "attributes")
-		try values.encodeIfPresent(links, forKey: "links")
 		try values.encode(id, forKey: "id")
+		try values.encodeIfPresent(links, forKey: "links")
 		try values.encodeIfPresent(relationships, forKey: "relationships")
 		try values.encode(type, forKey: "type")
 	}

@@ -5,13 +5,9 @@ import Foundation
 
 public struct GameCenterChallengeVersionRelease: Codable, Identifiable {
 	public var id: String
-	public var type: `Type`
 	public var links: ResourceLinks?
 	public var relationships: Relationships?
-
-	public enum `Type`: String, Codable, CaseIterable {
-		case gameCenterChallengeVersionReleases
-	}
+	public var type: `Type`
 
 	public struct Relationships: Codable {
 		public var version: Version?
@@ -75,26 +71,30 @@ public struct GameCenterChallengeVersionRelease: Codable, Identifiable {
 		}
 	}
 
-	public init(id: String, type: `Type`, links: ResourceLinks? = nil, relationships: Relationships? = nil) {
+	public enum `Type`: String, Codable, CaseIterable {
+		case gameCenterChallengeVersionReleases
+	}
+
+	public init(id: String, links: ResourceLinks? = nil, relationships: Relationships? = nil, type: `Type`) {
 		self.id = id
-		self.type = type
 		self.links = links
 		self.relationships = relationships
+		self.type = type
 	}
 
 	public init(from decoder: Decoder) throws {
 		let values = try decoder.container(keyedBy: StringCodingKey.self)
 		self.id = try values.decode(String.self, forKey: "id")
-		self.type = try values.decode(`Type`.self, forKey: "type")
 		self.links = try values.decodeIfPresent(ResourceLinks.self, forKey: "links")
 		self.relationships = try values.decodeIfPresent(Relationships.self, forKey: "relationships")
+		self.type = try values.decode(`Type`.self, forKey: "type")
 	}
 
 	public func encode(to encoder: Encoder) throws {
 		var values = encoder.container(keyedBy: StringCodingKey.self)
 		try values.encode(id, forKey: "id")
-		try values.encode(type, forKey: "type")
 		try values.encodeIfPresent(links, forKey: "links")
 		try values.encodeIfPresent(relationships, forKey: "relationships")
+		try values.encode(type, forKey: "type")
 	}
 }

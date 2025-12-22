@@ -13,27 +13,27 @@ public struct GameCenterAchievementLocalizationUpdateRequest: Codable {
 
 		public struct Attributes: Codable {
 			public var afterEarnedDescription: String?
-			public var name: String?
 			public var beforeEarnedDescription: String?
+			public var name: String?
 
-			public init(afterEarnedDescription: String? = nil, name: String? = nil, beforeEarnedDescription: String? = nil) {
+			public init(afterEarnedDescription: String? = nil, beforeEarnedDescription: String? = nil, name: String? = nil) {
 				self.afterEarnedDescription = afterEarnedDescription
-				self.name = name
 				self.beforeEarnedDescription = beforeEarnedDescription
+				self.name = name
 			}
 
 			public init(from decoder: Decoder) throws {
 				let values = try decoder.container(keyedBy: StringCodingKey.self)
 				self.afterEarnedDescription = try values.decodeIfPresent(String.self, forKey: "afterEarnedDescription")
-				self.name = try values.decodeIfPresent(String.self, forKey: "name")
 				self.beforeEarnedDescription = try values.decodeIfPresent(String.self, forKey: "beforeEarnedDescription")
+				self.name = try values.decodeIfPresent(String.self, forKey: "name")
 			}
 
 			public func encode(to encoder: Encoder) throws {
 				var values = encoder.container(keyedBy: StringCodingKey.self)
 				try values.encodeIfPresent(afterEarnedDescription, forKey: "afterEarnedDescription")
-				try values.encodeIfPresent(name, forKey: "name")
 				try values.encodeIfPresent(beforeEarnedDescription, forKey: "beforeEarnedDescription")
+				try values.encodeIfPresent(name, forKey: "name")
 			}
 		}
 

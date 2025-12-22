@@ -7,12 +7,30 @@ public struct RoutingAppCoverageCreateRequest: Codable {
 	public var data: Data
 
 	public struct Data: Codable {
-		public var type: `Type`
-		public var relationships: Relationships
 		public var attributes: Attributes
+		public var relationships: Relationships
+		public var type: `Type`
 
-		public enum `Type`: String, Codable, CaseIterable {
-			case routingAppCoverages
+		public struct Attributes: Codable {
+			public var fileName: String
+			public var fileSize: Int
+
+			public init(fileName: String, fileSize: Int) {
+				self.fileName = fileName
+				self.fileSize = fileSize
+			}
+
+			public init(from decoder: Decoder) throws {
+				let values = try decoder.container(keyedBy: StringCodingKey.self)
+				self.fileName = try values.decode(String.self, forKey: "fileName")
+				self.fileSize = try values.decode(Int.self, forKey: "fileSize")
+			}
+
+			public func encode(to encoder: Encoder) throws {
+				var values = encoder.container(keyedBy: StringCodingKey.self)
+				try values.encode(fileName, forKey: "fileName")
+				try values.encode(fileSize, forKey: "fileSize")
+			}
 		}
 
 		public struct Relationships: Codable {
@@ -22,28 +40,28 @@ public struct RoutingAppCoverageCreateRequest: Codable {
 				public var data: Data
 
 				public struct Data: Codable, Identifiable {
-					public var type: `Type`
 					public var id: String
+					public var type: `Type`
 
 					public enum `Type`: String, Codable, CaseIterable {
 						case appStoreVersions
 					}
 
-					public init(type: `Type`, id: String) {
-						self.type = type
+					public init(id: String, type: `Type`) {
 						self.id = id
+						self.type = type
 					}
 
 					public init(from decoder: Decoder) throws {
 						let values = try decoder.container(keyedBy: StringCodingKey.self)
-						self.type = try values.decode(`Type`.self, forKey: "type")
 						self.id = try values.decode(String.self, forKey: "id")
+						self.type = try values.decode(`Type`.self, forKey: "type")
 					}
 
 					public func encode(to encoder: Encoder) throws {
 						var values = encoder.container(keyedBy: StringCodingKey.self)
-						try values.encode(type, forKey: "type")
 						try values.encode(id, forKey: "id")
+						try values.encode(type, forKey: "type")
 					}
 				}
 
@@ -77,46 +95,28 @@ public struct RoutingAppCoverageCreateRequest: Codable {
 			}
 		}
 
-		public struct Attributes: Codable {
-			public var fileName: String
-			public var fileSize: Int
-
-			public init(fileName: String, fileSize: Int) {
-				self.fileName = fileName
-				self.fileSize = fileSize
-			}
-
-			public init(from decoder: Decoder) throws {
-				let values = try decoder.container(keyedBy: StringCodingKey.self)
-				self.fileName = try values.decode(String.self, forKey: "fileName")
-				self.fileSize = try values.decode(Int.self, forKey: "fileSize")
-			}
-
-			public func encode(to encoder: Encoder) throws {
-				var values = encoder.container(keyedBy: StringCodingKey.self)
-				try values.encode(fileName, forKey: "fileName")
-				try values.encode(fileSize, forKey: "fileSize")
-			}
+		public enum `Type`: String, Codable, CaseIterable {
+			case routingAppCoverages
 		}
 
-		public init(type: `Type`, relationships: Relationships, attributes: Attributes) {
-			self.type = type
-			self.relationships = relationships
+		public init(attributes: Attributes, relationships: Relationships, type: `Type`) {
 			self.attributes = attributes
+			self.relationships = relationships
+			self.type = type
 		}
 
 		public init(from decoder: Decoder) throws {
 			let values = try decoder.container(keyedBy: StringCodingKey.self)
-			self.type = try values.decode(`Type`.self, forKey: "type")
-			self.relationships = try values.decode(Relationships.self, forKey: "relationships")
 			self.attributes = try values.decode(Attributes.self, forKey: "attributes")
+			self.relationships = try values.decode(Relationships.self, forKey: "relationships")
+			self.type = try values.decode(`Type`.self, forKey: "type")
 		}
 
 		public func encode(to encoder: Encoder) throws {
 			var values = encoder.container(keyedBy: StringCodingKey.self)
-			try values.encode(type, forKey: "type")
-			try values.encode(relationships, forKey: "relationships")
 			try values.encode(attributes, forKey: "attributes")
+			try values.encode(relationships, forKey: "relationships")
+			try values.encode(type, forKey: "type")
 		}
 	}
 

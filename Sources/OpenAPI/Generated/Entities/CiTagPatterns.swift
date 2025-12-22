@@ -4,8 +4,8 @@
 import Foundation
 
 public struct CiTagPatterns: Codable {
-	public var patterns: [Pattern]?
 	public var isAllMatch: Bool?
+	public var patterns: [Pattern]?
 
 	public struct Pattern: Codable {
 		public var isPrefix: Bool?
@@ -29,20 +29,20 @@ public struct CiTagPatterns: Codable {
 		}
 	}
 
-	public init(patterns: [Pattern]? = nil, isAllMatch: Bool? = nil) {
-		self.patterns = patterns
+	public init(isAllMatch: Bool? = nil, patterns: [Pattern]? = nil) {
 		self.isAllMatch = isAllMatch
+		self.patterns = patterns
 	}
 
 	public init(from decoder: Decoder) throws {
 		let values = try decoder.container(keyedBy: StringCodingKey.self)
-		self.patterns = try values.decodeIfPresent([Pattern].self, forKey: "patterns")
 		self.isAllMatch = try values.decodeIfPresent(Bool.self, forKey: "isAllMatch")
+		self.patterns = try values.decodeIfPresent([Pattern].self, forKey: "patterns")
 	}
 
 	public func encode(to encoder: Encoder) throws {
 		var values = encoder.container(keyedBy: StringCodingKey.self)
-		try values.encodeIfPresent(patterns, forKey: "patterns")
 		try values.encodeIfPresent(isAllMatch, forKey: "isAllMatch")
+		try values.encodeIfPresent(patterns, forKey: "patterns")
 	}
 }

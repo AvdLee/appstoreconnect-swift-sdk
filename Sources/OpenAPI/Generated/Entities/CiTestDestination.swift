@@ -4,35 +4,35 @@
 import Foundation
 
 public struct CiTestDestination: Codable {
-	public var runtimeIdentifier: String?
 	public var deviceTypeIdentifier: String?
 	public var deviceTypeName: String?
 	public var kind: CiTestDestinationKind?
+	public var runtimeIdentifier: String?
 	public var runtimeName: String?
 
-	public init(runtimeIdentifier: String? = nil, deviceTypeIdentifier: String? = nil, deviceTypeName: String? = nil, kind: CiTestDestinationKind? = nil, runtimeName: String? = nil) {
-		self.runtimeIdentifier = runtimeIdentifier
+	public init(deviceTypeIdentifier: String? = nil, deviceTypeName: String? = nil, kind: CiTestDestinationKind? = nil, runtimeIdentifier: String? = nil, runtimeName: String? = nil) {
 		self.deviceTypeIdentifier = deviceTypeIdentifier
 		self.deviceTypeName = deviceTypeName
 		self.kind = kind
+		self.runtimeIdentifier = runtimeIdentifier
 		self.runtimeName = runtimeName
 	}
 
 	public init(from decoder: Decoder) throws {
 		let values = try decoder.container(keyedBy: StringCodingKey.self)
-		self.runtimeIdentifier = try values.decodeIfPresent(String.self, forKey: "runtimeIdentifier")
 		self.deviceTypeIdentifier = try values.decodeIfPresent(String.self, forKey: "deviceTypeIdentifier")
 		self.deviceTypeName = try values.decodeIfPresent(String.self, forKey: "deviceTypeName")
 		self.kind = try values.decodeIfPresent(CiTestDestinationKind.self, forKey: "kind")
+		self.runtimeIdentifier = try values.decodeIfPresent(String.self, forKey: "runtimeIdentifier")
 		self.runtimeName = try values.decodeIfPresent(String.self, forKey: "runtimeName")
 	}
 
 	public func encode(to encoder: Encoder) throws {
 		var values = encoder.container(keyedBy: StringCodingKey.self)
-		try values.encodeIfPresent(runtimeIdentifier, forKey: "runtimeIdentifier")
 		try values.encodeIfPresent(deviceTypeIdentifier, forKey: "deviceTypeIdentifier")
 		try values.encodeIfPresent(deviceTypeName, forKey: "deviceTypeName")
 		try values.encodeIfPresent(kind, forKey: "kind")
+		try values.encodeIfPresent(runtimeIdentifier, forKey: "runtimeIdentifier")
 		try values.encodeIfPresent(runtimeName, forKey: "runtimeName")
 	}
 }

@@ -6,8 +6,8 @@ import Foundation
 public struct AppResponse: Codable {
 	/// App
 	public var data: App
-	public var links: DocumentLinks
 	public var included: [IncludedItem]?
+	public var links: DocumentLinks
 
 	public enum IncludedItem: Codable {
 		case androidToIosAppMappingDetail(AndroidToIosAppMappingDetail)
@@ -109,23 +109,23 @@ public struct AppResponse: Codable {
 		}
 	}
 
-	public init(data: App, links: DocumentLinks, included: [IncludedItem]? = nil) {
+	public init(data: App, included: [IncludedItem]? = nil, links: DocumentLinks) {
 		self.data = data
-		self.links = links
 		self.included = included
+		self.links = links
 	}
 
 	public init(from decoder: Decoder) throws {
 		let values = try decoder.container(keyedBy: StringCodingKey.self)
 		self.data = try values.decode(App.self, forKey: "data")
-		self.links = try values.decode(DocumentLinks.self, forKey: "links")
 		self.included = try values.decodeIfPresent([IncludedItem].self, forKey: "included")
+		self.links = try values.decode(DocumentLinks.self, forKey: "links")
 	}
 
 	public func encode(to encoder: Encoder) throws {
 		var values = encoder.container(keyedBy: StringCodingKey.self)
 		try values.encode(data, forKey: "data")
-		try values.encode(links, forKey: "links")
 		try values.encodeIfPresent(included, forKey: "included")
+		try values.encode(links, forKey: "links")
 	}
 }

@@ -7,58 +7,58 @@ public struct AppStoreVersionExperimentV2UpdateRequest: Codable {
 	public var data: Data
 
 	public struct Data: Codable, Identifiable {
+		public var attributes: Attributes?
 		public var id: String
 		public var type: `Type`
-		public var attributes: Attributes?
+
+		public struct Attributes: Codable {
+			public var name: String?
+			public var isStarted: Bool?
+			public var trafficProportion: Int?
+
+			public init(name: String? = nil, isStarted: Bool? = nil, trafficProportion: Int? = nil) {
+				self.name = name
+				self.isStarted = isStarted
+				self.trafficProportion = trafficProportion
+			}
+
+			public init(from decoder: Decoder) throws {
+				let values = try decoder.container(keyedBy: StringCodingKey.self)
+				self.name = try values.decodeIfPresent(String.self, forKey: "name")
+				self.isStarted = try values.decodeIfPresent(Bool.self, forKey: "started")
+				self.trafficProportion = try values.decodeIfPresent(Int.self, forKey: "trafficProportion")
+			}
+
+			public func encode(to encoder: Encoder) throws {
+				var values = encoder.container(keyedBy: StringCodingKey.self)
+				try values.encodeIfPresent(name, forKey: "name")
+				try values.encodeIfPresent(isStarted, forKey: "started")
+				try values.encodeIfPresent(trafficProportion, forKey: "trafficProportion")
+			}
+		}
 
 		public enum `Type`: String, Codable, CaseIterable {
 			case appStoreVersionExperiments
 		}
 
-		public struct Attributes: Codable {
-			public var isStarted: Bool?
-			public var trafficProportion: Int?
-			public var name: String?
-
-			public init(isStarted: Bool? = nil, trafficProportion: Int? = nil, name: String? = nil) {
-				self.isStarted = isStarted
-				self.trafficProportion = trafficProportion
-				self.name = name
-			}
-
-			public init(from decoder: Decoder) throws {
-				let values = try decoder.container(keyedBy: StringCodingKey.self)
-				self.isStarted = try values.decodeIfPresent(Bool.self, forKey: "started")
-				self.trafficProportion = try values.decodeIfPresent(Int.self, forKey: "trafficProportion")
-				self.name = try values.decodeIfPresent(String.self, forKey: "name")
-			}
-
-			public func encode(to encoder: Encoder) throws {
-				var values = encoder.container(keyedBy: StringCodingKey.self)
-				try values.encodeIfPresent(isStarted, forKey: "started")
-				try values.encodeIfPresent(trafficProportion, forKey: "trafficProportion")
-				try values.encodeIfPresent(name, forKey: "name")
-			}
-		}
-
-		public init(id: String, type: `Type`, attributes: Attributes? = nil) {
+		public init(attributes: Attributes? = nil, id: String, type: `Type`) {
+			self.attributes = attributes
 			self.id = id
 			self.type = type
-			self.attributes = attributes
 		}
 
 		public init(from decoder: Decoder) throws {
 			let values = try decoder.container(keyedBy: StringCodingKey.self)
+			self.attributes = try values.decodeIfPresent(Attributes.self, forKey: "attributes")
 			self.id = try values.decode(String.self, forKey: "id")
 			self.type = try values.decode(`Type`.self, forKey: "type")
-			self.attributes = try values.decodeIfPresent(Attributes.self, forKey: "attributes")
 		}
 
 		public func encode(to encoder: Encoder) throws {
 			var values = encoder.container(keyedBy: StringCodingKey.self)
+			try values.encodeIfPresent(attributes, forKey: "attributes")
 			try values.encode(id, forKey: "id")
 			try values.encode(type, forKey: "type")
-			try values.encodeIfPresent(attributes, forKey: "attributes")
 		}
 	}
 

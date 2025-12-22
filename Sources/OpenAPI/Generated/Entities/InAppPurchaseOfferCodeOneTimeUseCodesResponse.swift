@@ -4,31 +4,31 @@
 import Foundation
 
 public struct InAppPurchaseOfferCodeOneTimeUseCodesResponse: Codable {
+	public var data: [InAppPurchaseOfferCodeOneTimeUseCode]
+	public var included: [Actor]?
 	public var links: PagedDocumentLinks
 	public var meta: PagingInformation?
-	public var included: [Actor]?
-	public var data: [InAppPurchaseOfferCodeOneTimeUseCode]
 
-	public init(links: PagedDocumentLinks, meta: PagingInformation? = nil, included: [Actor]? = nil, data: [InAppPurchaseOfferCodeOneTimeUseCode]) {
+	public init(data: [InAppPurchaseOfferCodeOneTimeUseCode], included: [Actor]? = nil, links: PagedDocumentLinks, meta: PagingInformation? = nil) {
+		self.data = data
+		self.included = included
 		self.links = links
 		self.meta = meta
-		self.included = included
-		self.data = data
 	}
 
 	public init(from decoder: Decoder) throws {
 		let values = try decoder.container(keyedBy: StringCodingKey.self)
+		self.data = try values.decode([InAppPurchaseOfferCodeOneTimeUseCode].self, forKey: "data")
+		self.included = try values.decodeIfPresent([Actor].self, forKey: "included")
 		self.links = try values.decode(PagedDocumentLinks.self, forKey: "links")
 		self.meta = try values.decodeIfPresent(PagingInformation.self, forKey: "meta")
-		self.included = try values.decodeIfPresent([Actor].self, forKey: "included")
-		self.data = try values.decode([InAppPurchaseOfferCodeOneTimeUseCode].self, forKey: "data")
 	}
 
 	public func encode(to encoder: Encoder) throws {
 		var values = encoder.container(keyedBy: StringCodingKey.self)
+		try values.encode(data, forKey: "data")
+		try values.encodeIfPresent(included, forKey: "included")
 		try values.encode(links, forKey: "links")
 		try values.encodeIfPresent(meta, forKey: "meta")
-		try values.encodeIfPresent(included, forKey: "included")
-		try values.encode(data, forKey: "data")
 	}
 }

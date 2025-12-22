@@ -4,14 +4,10 @@
 import Foundation
 
 public struct AlternativeDistributionDomain: Codable, Identifiable {
+	public var attributes: Attributes?
 	public var id: String
 	public var links: ResourceLinks?
 	public var type: `Type`
-	public var attributes: Attributes?
-
-	public enum `Type`: String, Codable, CaseIterable {
-		case alternativeDistributionDomains
-	}
 
 	public struct Attributes: Codable {
 		public var createdDate: Date?
@@ -39,26 +35,30 @@ public struct AlternativeDistributionDomain: Codable, Identifiable {
 		}
 	}
 
-	public init(id: String, links: ResourceLinks? = nil, type: `Type`, attributes: Attributes? = nil) {
+	public enum `Type`: String, Codable, CaseIterable {
+		case alternativeDistributionDomains
+	}
+
+	public init(attributes: Attributes? = nil, id: String, links: ResourceLinks? = nil, type: `Type`) {
+		self.attributes = attributes
 		self.id = id
 		self.links = links
 		self.type = type
-		self.attributes = attributes
 	}
 
 	public init(from decoder: Decoder) throws {
 		let values = try decoder.container(keyedBy: StringCodingKey.self)
+		self.attributes = try values.decodeIfPresent(Attributes.self, forKey: "attributes")
 		self.id = try values.decode(String.self, forKey: "id")
 		self.links = try values.decodeIfPresent(ResourceLinks.self, forKey: "links")
 		self.type = try values.decode(`Type`.self, forKey: "type")
-		self.attributes = try values.decodeIfPresent(Attributes.self, forKey: "attributes")
 	}
 
 	public func encode(to encoder: Encoder) throws {
 		var values = encoder.container(keyedBy: StringCodingKey.self)
+		try values.encodeIfPresent(attributes, forKey: "attributes")
 		try values.encode(id, forKey: "id")
 		try values.encodeIfPresent(links, forKey: "links")
 		try values.encode(type, forKey: "type")
-		try values.encodeIfPresent(attributes, forKey: "attributes")
 	}
 }

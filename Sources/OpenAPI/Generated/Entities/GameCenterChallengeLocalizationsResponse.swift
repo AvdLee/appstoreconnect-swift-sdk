@@ -6,8 +6,8 @@ import Foundation
 public struct GameCenterChallengeLocalizationsResponse: Codable {
 	public var data: [GameCenterChallengeLocalization]
 	public var included: [IncludedItem]?
-	public var meta: PagingInformation?
 	public var links: PagedDocumentLinks
+	public var meta: PagingInformation?
 
 	public enum IncludedItem: Codable {
 		case gameCenterChallengeImage(GameCenterChallengeImage)
@@ -43,26 +43,26 @@ public struct GameCenterChallengeLocalizationsResponse: Codable {
 		}
 	}
 
-	public init(data: [GameCenterChallengeLocalization], included: [IncludedItem]? = nil, meta: PagingInformation? = nil, links: PagedDocumentLinks) {
+	public init(data: [GameCenterChallengeLocalization], included: [IncludedItem]? = nil, links: PagedDocumentLinks, meta: PagingInformation? = nil) {
 		self.data = data
 		self.included = included
-		self.meta = meta
 		self.links = links
+		self.meta = meta
 	}
 
 	public init(from decoder: Decoder) throws {
 		let values = try decoder.container(keyedBy: StringCodingKey.self)
 		self.data = try values.decode([GameCenterChallengeLocalization].self, forKey: "data")
 		self.included = try values.decodeIfPresent([IncludedItem].self, forKey: "included")
-		self.meta = try values.decodeIfPresent(PagingInformation.self, forKey: "meta")
 		self.links = try values.decode(PagedDocumentLinks.self, forKey: "links")
+		self.meta = try values.decodeIfPresent(PagingInformation.self, forKey: "meta")
 	}
 
 	public func encode(to encoder: Encoder) throws {
 		var values = encoder.container(keyedBy: StringCodingKey.self)
 		try values.encode(data, forKey: "data")
 		try values.encodeIfPresent(included, forKey: "included")
-		try values.encodeIfPresent(meta, forKey: "meta")
 		try values.encode(links, forKey: "links")
+		try values.encodeIfPresent(meta, forKey: "meta")
 	}
 }

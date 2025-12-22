@@ -7,15 +7,23 @@ import Foundation
 public struct InAppPurchase: Codable, Identifiable {
 	public var attributes: Attributes?
 	public var id: String
-	public var relationships: Relationships?
 	public var links: ResourceLinks?
+	public var relationships: Relationships?
 	public var type: `Type`
 
 	public struct Attributes: Codable {
-		public var productID: String?
-		public var state: State?
-		public var referenceName: String?
 		public var inAppPurchaseType: InAppPurchaseType?
+		public var productID: String?
+		public var referenceName: String?
+		public var state: State?
+
+		public enum InAppPurchaseType: String, Codable, CaseIterable {
+			case automaticallyRenewableSubscription = "AUTOMATICALLY_RENEWABLE_SUBSCRIPTION"
+			case nonConsumable = "NON_CONSUMABLE"
+			case consumable = "CONSUMABLE"
+			case nonRenewingSubscription = "NON_RENEWING_SUBSCRIPTION"
+			case freeSubscription = "FREE_SUBSCRIPTION"
+		}
 
 		public enum State: String, Codable, CaseIterable {
 			case created = "CREATED"
@@ -39,35 +47,27 @@ public struct InAppPurchase: Codable, Identifiable {
 			case pendingDeveloperRelease = "PENDING_DEVELOPER_RELEASE"
 		}
 
-		public enum InAppPurchaseType: String, Codable, CaseIterable {
-			case automaticallyRenewableSubscription = "AUTOMATICALLY_RENEWABLE_SUBSCRIPTION"
-			case nonConsumable = "NON_CONSUMABLE"
-			case consumable = "CONSUMABLE"
-			case nonRenewingSubscription = "NON_RENEWING_SUBSCRIPTION"
-			case freeSubscription = "FREE_SUBSCRIPTION"
-		}
-
-		public init(productID: String? = nil, state: State? = nil, referenceName: String? = nil, inAppPurchaseType: InAppPurchaseType? = nil) {
-			self.productID = productID
-			self.state = state
-			self.referenceName = referenceName
+		public init(inAppPurchaseType: InAppPurchaseType? = nil, productID: String? = nil, referenceName: String? = nil, state: State? = nil) {
 			self.inAppPurchaseType = inAppPurchaseType
+			self.productID = productID
+			self.referenceName = referenceName
+			self.state = state
 		}
 
 		public init(from decoder: Decoder) throws {
 			let values = try decoder.container(keyedBy: StringCodingKey.self)
-			self.productID = try values.decodeIfPresent(String.self, forKey: "productId")
-			self.state = try values.decodeIfPresent(State.self, forKey: "state")
-			self.referenceName = try values.decodeIfPresent(String.self, forKey: "referenceName")
 			self.inAppPurchaseType = try values.decodeIfPresent(InAppPurchaseType.self, forKey: "inAppPurchaseType")
+			self.productID = try values.decodeIfPresent(String.self, forKey: "productId")
+			self.referenceName = try values.decodeIfPresent(String.self, forKey: "referenceName")
+			self.state = try values.decodeIfPresent(State.self, forKey: "state")
 		}
 
 		public func encode(to encoder: Encoder) throws {
 			var values = encoder.container(keyedBy: StringCodingKey.self)
-			try values.encodeIfPresent(productID, forKey: "productId")
-			try values.encodeIfPresent(state, forKey: "state")
-			try values.encodeIfPresent(referenceName, forKey: "referenceName")
 			try values.encodeIfPresent(inAppPurchaseType, forKey: "inAppPurchaseType")
+			try values.encodeIfPresent(productID, forKey: "productId")
+			try values.encodeIfPresent(referenceName, forKey: "referenceName")
+			try values.encodeIfPresent(state, forKey: "state")
 		}
 	}
 
@@ -79,28 +79,28 @@ public struct InAppPurchase: Codable, Identifiable {
 			public var meta: PagingInformation?
 
 			public struct Datum: Codable, Identifiable {
-				public var type: `Type`
 				public var id: String
+				public var type: `Type`
 
 				public enum `Type`: String, Codable, CaseIterable {
 					case apps
 				}
 
-				public init(type: `Type`, id: String) {
-					self.type = type
+				public init(id: String, type: `Type`) {
 					self.id = id
+					self.type = type
 				}
 
 				public init(from decoder: Decoder) throws {
 					let values = try decoder.container(keyedBy: StringCodingKey.self)
-					self.type = try values.decode(`Type`.self, forKey: "type")
 					self.id = try values.decode(String.self, forKey: "id")
+					self.type = try values.decode(`Type`.self, forKey: "type")
 				}
 
 				public func encode(to encoder: Encoder) throws {
 					var values = encoder.container(keyedBy: StringCodingKey.self)
-					try values.encode(type, forKey: "type")
 					try values.encode(id, forKey: "id")
+					try values.encode(type, forKey: "type")
 				}
 			}
 
@@ -141,11 +141,11 @@ public struct InAppPurchase: Codable, Identifiable {
 		case inAppPurchases
 	}
 
-	public init(attributes: Attributes? = nil, id: String, relationships: Relationships? = nil, links: ResourceLinks? = nil, type: `Type`) {
+	public init(attributes: Attributes? = nil, id: String, links: ResourceLinks? = nil, relationships: Relationships? = nil, type: `Type`) {
 		self.attributes = attributes
 		self.id = id
-		self.relationships = relationships
 		self.links = links
+		self.relationships = relationships
 		self.type = type
 	}
 
@@ -153,8 +153,8 @@ public struct InAppPurchase: Codable, Identifiable {
 		let values = try decoder.container(keyedBy: StringCodingKey.self)
 		self.attributes = try values.decodeIfPresent(Attributes.self, forKey: "attributes")
 		self.id = try values.decode(String.self, forKey: "id")
-		self.relationships = try values.decodeIfPresent(Relationships.self, forKey: "relationships")
 		self.links = try values.decodeIfPresent(ResourceLinks.self, forKey: "links")
+		self.relationships = try values.decodeIfPresent(Relationships.self, forKey: "relationships")
 		self.type = try values.decode(`Type`.self, forKey: "type")
 	}
 
@@ -162,8 +162,8 @@ public struct InAppPurchase: Codable, Identifiable {
 		var values = encoder.container(keyedBy: StringCodingKey.self)
 		try values.encodeIfPresent(attributes, forKey: "attributes")
 		try values.encode(id, forKey: "id")
-		try values.encodeIfPresent(relationships, forKey: "relationships")
 		try values.encodeIfPresent(links, forKey: "links")
+		try values.encodeIfPresent(relationships, forKey: "relationships")
 		try values.encode(type, forKey: "type")
 	}
 }

@@ -7,58 +7,58 @@ public struct GameCenterMatchmakingRuleSetCreateRequest: Codable {
 	public var data: Data
 
 	public struct Data: Codable {
-		public var type: `Type`
 		public var attributes: Attributes
+		public var type: `Type`
+
+		public struct Attributes: Codable {
+			public var maxPlayers: Int
+			public var minPlayers: Int
+			public var referenceName: String
+			public var ruleLanguageVersion: Int
+
+			public init(maxPlayers: Int, minPlayers: Int, referenceName: String, ruleLanguageVersion: Int) {
+				self.maxPlayers = maxPlayers
+				self.minPlayers = minPlayers
+				self.referenceName = referenceName
+				self.ruleLanguageVersion = ruleLanguageVersion
+			}
+
+			public init(from decoder: Decoder) throws {
+				let values = try decoder.container(keyedBy: StringCodingKey.self)
+				self.maxPlayers = try values.decode(Int.self, forKey: "maxPlayers")
+				self.minPlayers = try values.decode(Int.self, forKey: "minPlayers")
+				self.referenceName = try values.decode(String.self, forKey: "referenceName")
+				self.ruleLanguageVersion = try values.decode(Int.self, forKey: "ruleLanguageVersion")
+			}
+
+			public func encode(to encoder: Encoder) throws {
+				var values = encoder.container(keyedBy: StringCodingKey.self)
+				try values.encode(maxPlayers, forKey: "maxPlayers")
+				try values.encode(minPlayers, forKey: "minPlayers")
+				try values.encode(referenceName, forKey: "referenceName")
+				try values.encode(ruleLanguageVersion, forKey: "ruleLanguageVersion")
+			}
+		}
 
 		public enum `Type`: String, Codable, CaseIterable {
 			case gameCenterMatchmakingRuleSets
 		}
 
-		public struct Attributes: Codable {
-			public var minPlayers: Int
-			public var ruleLanguageVersion: Int
-			public var maxPlayers: Int
-			public var referenceName: String
-
-			public init(minPlayers: Int, ruleLanguageVersion: Int, maxPlayers: Int, referenceName: String) {
-				self.minPlayers = minPlayers
-				self.ruleLanguageVersion = ruleLanguageVersion
-				self.maxPlayers = maxPlayers
-				self.referenceName = referenceName
-			}
-
-			public init(from decoder: Decoder) throws {
-				let values = try decoder.container(keyedBy: StringCodingKey.self)
-				self.minPlayers = try values.decode(Int.self, forKey: "minPlayers")
-				self.ruleLanguageVersion = try values.decode(Int.self, forKey: "ruleLanguageVersion")
-				self.maxPlayers = try values.decode(Int.self, forKey: "maxPlayers")
-				self.referenceName = try values.decode(String.self, forKey: "referenceName")
-			}
-
-			public func encode(to encoder: Encoder) throws {
-				var values = encoder.container(keyedBy: StringCodingKey.self)
-				try values.encode(minPlayers, forKey: "minPlayers")
-				try values.encode(ruleLanguageVersion, forKey: "ruleLanguageVersion")
-				try values.encode(maxPlayers, forKey: "maxPlayers")
-				try values.encode(referenceName, forKey: "referenceName")
-			}
-		}
-
-		public init(type: `Type`, attributes: Attributes) {
-			self.type = type
+		public init(attributes: Attributes, type: `Type`) {
 			self.attributes = attributes
+			self.type = type
 		}
 
 		public init(from decoder: Decoder) throws {
 			let values = try decoder.container(keyedBy: StringCodingKey.self)
-			self.type = try values.decode(`Type`.self, forKey: "type")
 			self.attributes = try values.decode(Attributes.self, forKey: "attributes")
+			self.type = try values.decode(`Type`.self, forKey: "type")
 		}
 
 		public func encode(to encoder: Encoder) throws {
 			var values = encoder.container(keyedBy: StringCodingKey.self)
-			try values.encode(type, forKey: "type")
 			try values.encode(attributes, forKey: "attributes")
+			try values.encode(type, forKey: "type")
 		}
 	}
 

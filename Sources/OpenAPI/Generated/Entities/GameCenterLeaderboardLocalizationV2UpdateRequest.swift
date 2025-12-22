@@ -8,38 +8,38 @@ public struct GameCenterLeaderboardLocalizationV2UpdateRequest: Codable {
 
 	public struct Data: Codable, Identifiable {
 		public var attributes: Attributes?
-		public var type: `Type`
 		public var id: String
+		public var type: `Type`
 
 		public struct Attributes: Codable {
+			public var description: String?
 			public var formatterOverride: GameCenterLeaderboardFormatter?
 			public var formatterSuffix: String?
-			public var description: String?
 			public var formatterSuffixSingular: String?
 			public var name: String?
 
-			public init(formatterOverride: GameCenterLeaderboardFormatter? = nil, formatterSuffix: String? = nil, description: String? = nil, formatterSuffixSingular: String? = nil, name: String? = nil) {
+			public init(description: String? = nil, formatterOverride: GameCenterLeaderboardFormatter? = nil, formatterSuffix: String? = nil, formatterSuffixSingular: String? = nil, name: String? = nil) {
+				self.description = description
 				self.formatterOverride = formatterOverride
 				self.formatterSuffix = formatterSuffix
-				self.description = description
 				self.formatterSuffixSingular = formatterSuffixSingular
 				self.name = name
 			}
 
 			public init(from decoder: Decoder) throws {
 				let values = try decoder.container(keyedBy: StringCodingKey.self)
+				self.description = try values.decodeIfPresent(String.self, forKey: "description")
 				self.formatterOverride = try values.decodeIfPresent(GameCenterLeaderboardFormatter.self, forKey: "formatterOverride")
 				self.formatterSuffix = try values.decodeIfPresent(String.self, forKey: "formatterSuffix")
-				self.description = try values.decodeIfPresent(String.self, forKey: "description")
 				self.formatterSuffixSingular = try values.decodeIfPresent(String.self, forKey: "formatterSuffixSingular")
 				self.name = try values.decodeIfPresent(String.self, forKey: "name")
 			}
 
 			public func encode(to encoder: Encoder) throws {
 				var values = encoder.container(keyedBy: StringCodingKey.self)
+				try values.encodeIfPresent(description, forKey: "description")
 				try values.encodeIfPresent(formatterOverride, forKey: "formatterOverride")
 				try values.encodeIfPresent(formatterSuffix, forKey: "formatterSuffix")
-				try values.encodeIfPresent(description, forKey: "description")
 				try values.encodeIfPresent(formatterSuffixSingular, forKey: "formatterSuffixSingular")
 				try values.encodeIfPresent(name, forKey: "name")
 			}
@@ -49,24 +49,24 @@ public struct GameCenterLeaderboardLocalizationV2UpdateRequest: Codable {
 			case gameCenterLeaderboardLocalizations
 		}
 
-		public init(attributes: Attributes? = nil, type: `Type`, id: String) {
+		public init(attributes: Attributes? = nil, id: String, type: `Type`) {
 			self.attributes = attributes
-			self.type = type
 			self.id = id
+			self.type = type
 		}
 
 		public init(from decoder: Decoder) throws {
 			let values = try decoder.container(keyedBy: StringCodingKey.self)
 			self.attributes = try values.decodeIfPresent(Attributes.self, forKey: "attributes")
-			self.type = try values.decode(`Type`.self, forKey: "type")
 			self.id = try values.decode(String.self, forKey: "id")
+			self.type = try values.decode(`Type`.self, forKey: "type")
 		}
 
 		public func encode(to encoder: Encoder) throws {
 			var values = encoder.container(keyedBy: StringCodingKey.self)
 			try values.encodeIfPresent(attributes, forKey: "attributes")
-			try values.encode(type, forKey: "type")
 			try values.encode(id, forKey: "id")
+			try values.encode(type, forKey: "type")
 		}
 	}
 

@@ -4,10 +4,10 @@
 import Foundation
 
 public struct SubscriptionPromotionalOfferPricesResponse: Codable {
-	public var meta: PagingInformation?
+	public var data: [SubscriptionPromotionalOfferPrice]
 	public var included: [IncludedItem]?
 	public var links: PagedDocumentLinks
-	public var data: [SubscriptionPromotionalOfferPrice]
+	public var meta: PagingInformation?
 
 	public enum IncludedItem: Codable {
 		case subscriptionPricePoint(SubscriptionPricePoint)
@@ -43,26 +43,26 @@ public struct SubscriptionPromotionalOfferPricesResponse: Codable {
 		}
 	}
 
-	public init(meta: PagingInformation? = nil, included: [IncludedItem]? = nil, links: PagedDocumentLinks, data: [SubscriptionPromotionalOfferPrice]) {
-		self.meta = meta
+	public init(data: [SubscriptionPromotionalOfferPrice], included: [IncludedItem]? = nil, links: PagedDocumentLinks, meta: PagingInformation? = nil) {
+		self.data = data
 		self.included = included
 		self.links = links
-		self.data = data
+		self.meta = meta
 	}
 
 	public init(from decoder: Decoder) throws {
 		let values = try decoder.container(keyedBy: StringCodingKey.self)
-		self.meta = try values.decodeIfPresent(PagingInformation.self, forKey: "meta")
+		self.data = try values.decode([SubscriptionPromotionalOfferPrice].self, forKey: "data")
 		self.included = try values.decodeIfPresent([IncludedItem].self, forKey: "included")
 		self.links = try values.decode(PagedDocumentLinks.self, forKey: "links")
-		self.data = try values.decode([SubscriptionPromotionalOfferPrice].self, forKey: "data")
+		self.meta = try values.decodeIfPresent(PagingInformation.self, forKey: "meta")
 	}
 
 	public func encode(to encoder: Encoder) throws {
 		var values = encoder.container(keyedBy: StringCodingKey.self)
-		try values.encodeIfPresent(meta, forKey: "meta")
+		try values.encode(data, forKey: "data")
 		try values.encodeIfPresent(included, forKey: "included")
 		try values.encode(links, forKey: "links")
-		try values.encode(data, forKey: "data")
+		try values.encodeIfPresent(meta, forKey: "meta")
 	}
 }

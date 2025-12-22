@@ -4,9 +4,9 @@
 import Foundation
 
 public struct GameCenterMatchmakingRuleErrorsV1MetricResponse: Codable {
-	public var meta: PagingInformation?
 	public var data: [Datum]
 	public var links: PagedDocumentLinks
+	public var meta: PagingInformation?
 
 	public struct Datum: Codable {
 		public var dataPoints: DataPoints?
@@ -14,9 +14,9 @@ public struct GameCenterMatchmakingRuleErrorsV1MetricResponse: Codable {
 		public var granularity: Granularity?
 
 		public struct DataPoints: Codable {
-			public var values: Values?
-			public var start: Date?
 			public var end: Date?
+			public var start: Date?
+			public var values: Values?
 
 			public struct Values: Codable {
 				public var count: Int?
@@ -36,24 +36,24 @@ public struct GameCenterMatchmakingRuleErrorsV1MetricResponse: Codable {
 				}
 			}
 
-			public init(values: Values? = nil, start: Date? = nil, end: Date? = nil) {
-				self.values = values
-				self.start = start
+			public init(end: Date? = nil, start: Date? = nil, values: Values? = nil) {
 				self.end = end
+				self.start = start
+				self.values = values
 			}
 
 			public init(from decoder: Decoder) throws {
 				let values = try decoder.container(keyedBy: StringCodingKey.self)
-				self.values = try values.decodeIfPresent(Values.self, forKey: "values")
-				self.start = try values.decodeIfPresent(Date.self, forKey: "start")
 				self.end = try values.decodeIfPresent(Date.self, forKey: "end")
+				self.start = try values.decodeIfPresent(Date.self, forKey: "start")
+				self.values = try values.decodeIfPresent(Values.self, forKey: "values")
 			}
 
 			public func encode(to encoder: Encoder) throws {
 				var values = encoder.container(keyedBy: StringCodingKey.self)
-				try values.encodeIfPresent(self.values, forKey: "values")
-				try values.encodeIfPresent(start, forKey: "start")
 				try values.encodeIfPresent(end, forKey: "end")
+				try values.encodeIfPresent(start, forKey: "start")
+				try values.encodeIfPresent(self.values, forKey: "values")
 			}
 		}
 
@@ -65,24 +65,24 @@ public struct GameCenterMatchmakingRuleErrorsV1MetricResponse: Codable {
 				public var links: Links?
 
 				public struct Links: Codable {
-					public var related: String?
 					public var groupBy: String?
+					public var related: String?
 
-					public init(related: String? = nil, groupBy: String? = nil) {
-						self.related = related
+					public init(groupBy: String? = nil, related: String? = nil) {
 						self.groupBy = groupBy
+						self.related = related
 					}
 
 					public init(from decoder: Decoder) throws {
 						let values = try decoder.container(keyedBy: StringCodingKey.self)
-						self.related = try values.decodeIfPresent(String.self, forKey: "related")
 						self.groupBy = try values.decodeIfPresent(String.self, forKey: "groupBy")
+						self.related = try values.decodeIfPresent(String.self, forKey: "related")
 					}
 
 					public func encode(to encoder: Encoder) throws {
 						var values = encoder.container(keyedBy: StringCodingKey.self)
-						try values.encodeIfPresent(related, forKey: "related")
 						try values.encodeIfPresent(groupBy, forKey: "groupBy")
+						try values.encodeIfPresent(related, forKey: "related")
 					}
 				}
 
@@ -146,23 +146,23 @@ public struct GameCenterMatchmakingRuleErrorsV1MetricResponse: Codable {
 		}
 	}
 
-	public init(meta: PagingInformation? = nil, data: [Datum], links: PagedDocumentLinks) {
-		self.meta = meta
+	public init(data: [Datum], links: PagedDocumentLinks, meta: PagingInformation? = nil) {
 		self.data = data
 		self.links = links
+		self.meta = meta
 	}
 
 	public init(from decoder: Decoder) throws {
 		let values = try decoder.container(keyedBy: StringCodingKey.self)
-		self.meta = try values.decodeIfPresent(PagingInformation.self, forKey: "meta")
 		self.data = try values.decode([Datum].self, forKey: "data")
 		self.links = try values.decode(PagedDocumentLinks.self, forKey: "links")
+		self.meta = try values.decodeIfPresent(PagingInformation.self, forKey: "meta")
 	}
 
 	public func encode(to encoder: Encoder) throws {
 		var values = encoder.container(keyedBy: StringCodingKey.self)
-		try values.encodeIfPresent(meta, forKey: "meta")
 		try values.encode(data, forKey: "data")
 		try values.encode(links, forKey: "links")
+		try values.encodeIfPresent(meta, forKey: "meta")
 	}
 }

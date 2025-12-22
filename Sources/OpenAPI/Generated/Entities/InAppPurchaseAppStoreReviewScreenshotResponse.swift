@@ -6,26 +6,26 @@ import Foundation
 public struct InAppPurchaseAppStoreReviewScreenshotResponse: Codable {
 	/// InAppPurchaseAppStoreReviewScreenshot
 	public var data: InAppPurchaseAppStoreReviewScreenshot
-	public var links: DocumentLinks
 	public var included: [InAppPurchaseV2]?
+	public var links: DocumentLinks
 
-	public init(data: InAppPurchaseAppStoreReviewScreenshot, links: DocumentLinks, included: [InAppPurchaseV2]? = nil) {
+	public init(data: InAppPurchaseAppStoreReviewScreenshot, included: [InAppPurchaseV2]? = nil, links: DocumentLinks) {
 		self.data = data
-		self.links = links
 		self.included = included
+		self.links = links
 	}
 
 	public init(from decoder: Decoder) throws {
 		let values = try decoder.container(keyedBy: StringCodingKey.self)
 		self.data = try values.decode(InAppPurchaseAppStoreReviewScreenshot.self, forKey: "data")
-		self.links = try values.decode(DocumentLinks.self, forKey: "links")
 		self.included = try values.decodeIfPresent([InAppPurchaseV2].self, forKey: "included")
+		self.links = try values.decode(DocumentLinks.self, forKey: "links")
 	}
 
 	public func encode(to encoder: Encoder) throws {
 		var values = encoder.container(keyedBy: StringCodingKey.self)
 		try values.encode(data, forKey: "data")
-		try values.encode(links, forKey: "links")
 		try values.encodeIfPresent(included, forKey: "included")
+		try values.encode(links, forKey: "links")
 	}
 }

@@ -73,21 +73,13 @@ public enum OpenAPIGeneratorCore {
         let jsonData = try unzipSingleFileToData(zipURL: tmpZip)
         log?("Extracted JSON (\(jsonData.count) bytes)")
 
-        log?("Writing spec to: \(specURL.path)")
-        try jsonData.write(to: specURL, options: [.atomic])
-
-        log?("Patching spec…")
-        return try patchSpec(at: specURL)
+        log?("Patching + writing spec…")
+        return try patchSpecJSON(jsonData, writingTo: specURL)
     }
 
     public static func patchSpec(at specURL: URL) throws -> SpecPatcher.Result {
         let data = try Data(contentsOf: specURL)
-        let json = try JSONSerialization.jsonObject(with: data, options: [.fragmentsAllowed])
-        guard var root = json as? [String: Any] else { throw SpecPatchingError.invalidRootJSON }
-        let result = try SpecPatcher.patch(&root)
-        let outData = try JSONSerialization.data(withJSONObject: root, options: [.prettyPrinted, .withoutEscapingSlashes])
-        try outData.write(to: specURL, options: [.atomic])
-        return result
+        return try patchSpecJSON(data, writingTo: specURL)
     }
 
     public static func generateAndPatchGenerated(
@@ -105,6 +97,28 @@ public enum OpenAPIGeneratorCore {
     }
 
     // MARK: - Internals
+    
+    private static func patchSpecJSON(_ jsonData: Data, writingTo specURL: URL) throws -> SpecPatcher.Result {
+        let json = try JSONSerialization.jsonObject(with: jsonData, options: [.fragmentsAllowed])
+        guard var root = json as? [String: Any] else { throw SpecPatchingError.invalidRootJSON }
+        
+        let upstreamResult = try SpecPatcher.patch(&root)
+        
+        // Deterministic output: stable key ordering + stable whitespace.
+        let outData = try JSONSerialization.data(
+            withJSONObject: root,
+            options: [.prettyPrinted, .withoutEscapingSlashes, .sortedKeys]
+        )
+        
+        // Avoid touching the file if content is identical (keeps git diffs clean).
+        if let existing = try? Data(contentsOf: specURL), existing == outData {
+            // Nothing changed on disk, even if upstream raw spec still requires patching.
+            return .init(didChange: false, changes: [], rules: upstreamResult.rules)
+        }
+        
+        try outData.write(to: specURL, options: [.atomic])
+        return upstreamResult
+    }
 
     private static func download(url: URL, to fileURL: URL, timeoutSeconds: TimeInterval) async throws {
         let request = URLRequest(url: url, cachePolicy: .reloadIgnoringLocalCacheData, timeoutInterval: timeoutSeconds)

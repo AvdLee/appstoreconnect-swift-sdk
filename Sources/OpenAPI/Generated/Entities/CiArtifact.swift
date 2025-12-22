@@ -4,20 +4,16 @@
 import Foundation
 
 public struct CiArtifact: Codable, Identifiable {
+	public var attributes: Attributes?
 	public var id: String
 	public var links: ResourceLinks?
 	public var type: `Type`
-	public var attributes: Attributes?
-
-	public enum `Type`: String, Codable, CaseIterable {
-		case ciArtifacts
-	}
 
 	public struct Attributes: Codable {
 		public var downloadURL: URL?
+		public var fileName: String?
 		public var fileSize: Int?
 		public var fileType: FileType?
-		public var fileName: String?
 
 		public enum FileType: String, Codable, CaseIterable {
 			case archive = "ARCHIVE"
@@ -29,50 +25,54 @@ public struct CiArtifact: Codable, Identifiable {
 			case stapledNotarizedArchive = "STAPLED_NOTARIZED_ARCHIVE"
 		}
 
-		public init(downloadURL: URL? = nil, fileSize: Int? = nil, fileType: FileType? = nil, fileName: String? = nil) {
+		public init(downloadURL: URL? = nil, fileName: String? = nil, fileSize: Int? = nil, fileType: FileType? = nil) {
 			self.downloadURL = downloadURL
+			self.fileName = fileName
 			self.fileSize = fileSize
 			self.fileType = fileType
-			self.fileName = fileName
 		}
 
 		public init(from decoder: Decoder) throws {
 			let values = try decoder.container(keyedBy: StringCodingKey.self)
 			self.downloadURL = try values.decodeIfPresent(URL.self, forKey: "downloadUrl")
+			self.fileName = try values.decodeIfPresent(String.self, forKey: "fileName")
 			self.fileSize = try values.decodeIfPresent(Int.self, forKey: "fileSize")
 			self.fileType = try values.decodeIfPresent(FileType.self, forKey: "fileType")
-			self.fileName = try values.decodeIfPresent(String.self, forKey: "fileName")
 		}
 
 		public func encode(to encoder: Encoder) throws {
 			var values = encoder.container(keyedBy: StringCodingKey.self)
 			try values.encodeIfPresent(downloadURL, forKey: "downloadUrl")
+			try values.encodeIfPresent(fileName, forKey: "fileName")
 			try values.encodeIfPresent(fileSize, forKey: "fileSize")
 			try values.encodeIfPresent(fileType, forKey: "fileType")
-			try values.encodeIfPresent(fileName, forKey: "fileName")
 		}
 	}
 
-	public init(id: String, links: ResourceLinks? = nil, type: `Type`, attributes: Attributes? = nil) {
+	public enum `Type`: String, Codable, CaseIterable {
+		case ciArtifacts
+	}
+
+	public init(attributes: Attributes? = nil, id: String, links: ResourceLinks? = nil, type: `Type`) {
+		self.attributes = attributes
 		self.id = id
 		self.links = links
 		self.type = type
-		self.attributes = attributes
 	}
 
 	public init(from decoder: Decoder) throws {
 		let values = try decoder.container(keyedBy: StringCodingKey.self)
+		self.attributes = try values.decodeIfPresent(Attributes.self, forKey: "attributes")
 		self.id = try values.decode(String.self, forKey: "id")
 		self.links = try values.decodeIfPresent(ResourceLinks.self, forKey: "links")
 		self.type = try values.decode(`Type`.self, forKey: "type")
-		self.attributes = try values.decodeIfPresent(Attributes.self, forKey: "attributes")
 	}
 
 	public func encode(to encoder: Encoder) throws {
 		var values = encoder.container(keyedBy: StringCodingKey.self)
+		try values.encodeIfPresent(attributes, forKey: "attributes")
 		try values.encode(id, forKey: "id")
 		try values.encodeIfPresent(links, forKey: "links")
 		try values.encode(type, forKey: "type")
-		try values.encodeIfPresent(attributes, forKey: "attributes")
 	}
 }

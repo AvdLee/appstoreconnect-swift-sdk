@@ -6,13 +6,9 @@ import Foundation
 @available(*, deprecated, message: "Deprecated")
 public struct AppStoreVersionSubmission: Codable, Identifiable {
 	public var id: String
-	public var type: `Type`
-	public var relationships: Relationships?
 	public var links: ResourceLinks?
-
-	public enum `Type`: String, Codable, CaseIterable {
-		case appStoreVersionSubmissions
-	}
+	public var relationships: Relationships?
+	public var type: `Type`
 
 	public struct Relationships: Codable {
 		public var appStoreVersion: AppStoreVersion?
@@ -76,26 +72,30 @@ public struct AppStoreVersionSubmission: Codable, Identifiable {
 		}
 	}
 
-	public init(id: String, type: `Type`, relationships: Relationships? = nil, links: ResourceLinks? = nil) {
+	public enum `Type`: String, Codable, CaseIterable {
+		case appStoreVersionSubmissions
+	}
+
+	public init(id: String, links: ResourceLinks? = nil, relationships: Relationships? = nil, type: `Type`) {
 		self.id = id
-		self.type = type
-		self.relationships = relationships
 		self.links = links
+		self.relationships = relationships
+		self.type = type
 	}
 
 	public init(from decoder: Decoder) throws {
 		let values = try decoder.container(keyedBy: StringCodingKey.self)
 		self.id = try values.decode(String.self, forKey: "id")
-		self.type = try values.decode(`Type`.self, forKey: "type")
-		self.relationships = try values.decodeIfPresent(Relationships.self, forKey: "relationships")
 		self.links = try values.decodeIfPresent(ResourceLinks.self, forKey: "links")
+		self.relationships = try values.decodeIfPresent(Relationships.self, forKey: "relationships")
+		self.type = try values.decode(`Type`.self, forKey: "type")
 	}
 
 	public func encode(to encoder: Encoder) throws {
 		var values = encoder.container(keyedBy: StringCodingKey.self)
 		try values.encode(id, forKey: "id")
-		try values.encode(type, forKey: "type")
-		try values.encodeIfPresent(relationships, forKey: "relationships")
 		try values.encodeIfPresent(links, forKey: "links")
+		try values.encodeIfPresent(relationships, forKey: "relationships")
+		try values.encode(type, forKey: "type")
 	}
 }

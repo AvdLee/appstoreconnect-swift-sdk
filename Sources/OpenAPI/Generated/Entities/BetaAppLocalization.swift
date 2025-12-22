@@ -4,18 +4,56 @@
 import Foundation
 
 public struct BetaAppLocalization: Codable, Identifiable {
-	public var links: ResourceLinks?
-	public var id: String
-	public var relationships: Relationships?
 	public var attributes: Attributes?
+	public var id: String
+	public var links: ResourceLinks?
+	public var relationships: Relationships?
 	public var type: `Type`
+
+	public struct Attributes: Codable {
+		public var description: String?
+		public var feedbackEmail: String?
+		public var locale: String?
+		public var marketingURL: String?
+		public var privacyPolicyURL: String?
+		public var tvOsPrivacyPolicy: String?
+
+		public init(description: String? = nil, feedbackEmail: String? = nil, locale: String? = nil, marketingURL: String? = nil, privacyPolicyURL: String? = nil, tvOsPrivacyPolicy: String? = nil) {
+			self.description = description
+			self.feedbackEmail = feedbackEmail
+			self.locale = locale
+			self.marketingURL = marketingURL
+			self.privacyPolicyURL = privacyPolicyURL
+			self.tvOsPrivacyPolicy = tvOsPrivacyPolicy
+		}
+
+		public init(from decoder: Decoder) throws {
+			let values = try decoder.container(keyedBy: StringCodingKey.self)
+			self.description = try values.decodeIfPresent(String.self, forKey: "description")
+			self.feedbackEmail = try values.decodeIfPresent(String.self, forKey: "feedbackEmail")
+			self.locale = try values.decodeIfPresent(String.self, forKey: "locale")
+			self.marketingURL = try values.decodeIfPresent(String.self, forKey: "marketingUrl")
+			self.privacyPolicyURL = try values.decodeIfPresent(String.self, forKey: "privacyPolicyUrl")
+			self.tvOsPrivacyPolicy = try values.decodeIfPresent(String.self, forKey: "tvOsPrivacyPolicy")
+		}
+
+		public func encode(to encoder: Encoder) throws {
+			var values = encoder.container(keyedBy: StringCodingKey.self)
+			try values.encodeIfPresent(description, forKey: "description")
+			try values.encodeIfPresent(feedbackEmail, forKey: "feedbackEmail")
+			try values.encodeIfPresent(locale, forKey: "locale")
+			try values.encodeIfPresent(marketingURL, forKey: "marketingUrl")
+			try values.encodeIfPresent(privacyPolicyURL, forKey: "privacyPolicyUrl")
+			try values.encodeIfPresent(tvOsPrivacyPolicy, forKey: "tvOsPrivacyPolicy")
+		}
+	}
 
 	public struct Relationships: Codable {
 		public var app: App?
 
 		public struct App: Codable {
-			public var links: RelationshipLinks?
 			public var data: Data?
+			public var links: RelationshipLinks?
 
 			public struct Data: Codable, Identifiable {
 				public var id: String
@@ -43,21 +81,21 @@ public struct BetaAppLocalization: Codable, Identifiable {
 				}
 			}
 
-			public init(links: RelationshipLinks? = nil, data: Data? = nil) {
-				self.links = links
+			public init(data: Data? = nil, links: RelationshipLinks? = nil) {
 				self.data = data
+				self.links = links
 			}
 
 			public init(from decoder: Decoder) throws {
 				let values = try decoder.container(keyedBy: StringCodingKey.self)
-				self.links = try values.decodeIfPresent(RelationshipLinks.self, forKey: "links")
 				self.data = try values.decodeIfPresent(Data.self, forKey: "data")
+				self.links = try values.decodeIfPresent(RelationshipLinks.self, forKey: "links")
 			}
 
 			public func encode(to encoder: Encoder) throws {
 				var values = encoder.container(keyedBy: StringCodingKey.self)
-				try values.encodeIfPresent(links, forKey: "links")
 				try values.encodeIfPresent(data, forKey: "data")
+				try values.encodeIfPresent(links, forKey: "links")
 			}
 		}
 
@@ -76,71 +114,33 @@ public struct BetaAppLocalization: Codable, Identifiable {
 		}
 	}
 
-	public struct Attributes: Codable {
-		public var tvOsPrivacyPolicy: String?
-		public var locale: String?
-		public var description: String?
-		public var feedbackEmail: String?
-		public var marketingURL: String?
-		public var privacyPolicyURL: String?
-
-		public init(tvOsPrivacyPolicy: String? = nil, locale: String? = nil, description: String? = nil, feedbackEmail: String? = nil, marketingURL: String? = nil, privacyPolicyURL: String? = nil) {
-			self.tvOsPrivacyPolicy = tvOsPrivacyPolicy
-			self.locale = locale
-			self.description = description
-			self.feedbackEmail = feedbackEmail
-			self.marketingURL = marketingURL
-			self.privacyPolicyURL = privacyPolicyURL
-		}
-
-		public init(from decoder: Decoder) throws {
-			let values = try decoder.container(keyedBy: StringCodingKey.self)
-			self.tvOsPrivacyPolicy = try values.decodeIfPresent(String.self, forKey: "tvOsPrivacyPolicy")
-			self.locale = try values.decodeIfPresent(String.self, forKey: "locale")
-			self.description = try values.decodeIfPresent(String.self, forKey: "description")
-			self.feedbackEmail = try values.decodeIfPresent(String.self, forKey: "feedbackEmail")
-			self.marketingURL = try values.decodeIfPresent(String.self, forKey: "marketingUrl")
-			self.privacyPolicyURL = try values.decodeIfPresent(String.self, forKey: "privacyPolicyUrl")
-		}
-
-		public func encode(to encoder: Encoder) throws {
-			var values = encoder.container(keyedBy: StringCodingKey.self)
-			try values.encodeIfPresent(tvOsPrivacyPolicy, forKey: "tvOsPrivacyPolicy")
-			try values.encodeIfPresent(locale, forKey: "locale")
-			try values.encodeIfPresent(description, forKey: "description")
-			try values.encodeIfPresent(feedbackEmail, forKey: "feedbackEmail")
-			try values.encodeIfPresent(marketingURL, forKey: "marketingUrl")
-			try values.encodeIfPresent(privacyPolicyURL, forKey: "privacyPolicyUrl")
-		}
-	}
-
 	public enum `Type`: String, Codable, CaseIterable {
 		case betaAppLocalizations
 	}
 
-	public init(links: ResourceLinks? = nil, id: String, relationships: Relationships? = nil, attributes: Attributes? = nil, type: `Type`) {
-		self.links = links
-		self.id = id
-		self.relationships = relationships
+	public init(attributes: Attributes? = nil, id: String, links: ResourceLinks? = nil, relationships: Relationships? = nil, type: `Type`) {
 		self.attributes = attributes
+		self.id = id
+		self.links = links
+		self.relationships = relationships
 		self.type = type
 	}
 
 	public init(from decoder: Decoder) throws {
 		let values = try decoder.container(keyedBy: StringCodingKey.self)
-		self.links = try values.decodeIfPresent(ResourceLinks.self, forKey: "links")
-		self.id = try values.decode(String.self, forKey: "id")
-		self.relationships = try values.decodeIfPresent(Relationships.self, forKey: "relationships")
 		self.attributes = try values.decodeIfPresent(Attributes.self, forKey: "attributes")
+		self.id = try values.decode(String.self, forKey: "id")
+		self.links = try values.decodeIfPresent(ResourceLinks.self, forKey: "links")
+		self.relationships = try values.decodeIfPresent(Relationships.self, forKey: "relationships")
 		self.type = try values.decode(`Type`.self, forKey: "type")
 	}
 
 	public func encode(to encoder: Encoder) throws {
 		var values = encoder.container(keyedBy: StringCodingKey.self)
-		try values.encodeIfPresent(links, forKey: "links")
-		try values.encode(id, forKey: "id")
-		try values.encodeIfPresent(relationships, forKey: "relationships")
 		try values.encodeIfPresent(attributes, forKey: "attributes")
+		try values.encode(id, forKey: "id")
+		try values.encodeIfPresent(links, forKey: "links")
+		try values.encodeIfPresent(relationships, forKey: "relationships")
 		try values.encode(type, forKey: "type")
 	}
 }

@@ -4,8 +4,8 @@
 import Foundation
 
 public struct BackgroundAssetVersionInternalBetaRelease: Codable, Identifiable {
-	public var id: String
 	public var attributes: Attributes?
+	public var id: String
 	public var links: ResourceLinks?
 	public var relationships: Relationships?
 	public var type: `Type`
@@ -99,9 +99,9 @@ public struct BackgroundAssetVersionInternalBetaRelease: Codable, Identifiable {
 		case backgroundAssetVersionInternalBetaReleases
 	}
 
-	public init(id: String, attributes: Attributes? = nil, links: ResourceLinks? = nil, relationships: Relationships? = nil, type: `Type`) {
-		self.id = id
+	public init(attributes: Attributes? = nil, id: String, links: ResourceLinks? = nil, relationships: Relationships? = nil, type: `Type`) {
 		self.attributes = attributes
+		self.id = id
 		self.links = links
 		self.relationships = relationships
 		self.type = type
@@ -109,8 +109,8 @@ public struct BackgroundAssetVersionInternalBetaRelease: Codable, Identifiable {
 
 	public init(from decoder: Decoder) throws {
 		let values = try decoder.container(keyedBy: StringCodingKey.self)
-		self.id = try values.decode(String.self, forKey: "id")
 		self.attributes = try values.decodeIfPresent(Attributes.self, forKey: "attributes")
+		self.id = try values.decode(String.self, forKey: "id")
 		self.links = try values.decodeIfPresent(ResourceLinks.self, forKey: "links")
 		self.relationships = try values.decodeIfPresent(Relationships.self, forKey: "relationships")
 		self.type = try values.decode(`Type`.self, forKey: "type")
@@ -118,8 +118,8 @@ public struct BackgroundAssetVersionInternalBetaRelease: Codable, Identifiable {
 
 	public func encode(to encoder: Encoder) throws {
 		var values = encoder.container(keyedBy: StringCodingKey.self)
-		try values.encode(id, forKey: "id")
 		try values.encodeIfPresent(attributes, forKey: "attributes")
+		try values.encode(id, forKey: "id")
 		try values.encodeIfPresent(links, forKey: "links")
 		try values.encodeIfPresent(relationships, forKey: "relationships")
 		try values.encode(type, forKey: "type")

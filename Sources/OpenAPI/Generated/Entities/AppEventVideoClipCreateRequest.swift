@@ -12,32 +12,32 @@ public struct AppEventVideoClipCreateRequest: Codable {
 		public var type: `Type`
 
 		public struct Attributes: Codable {
-			public var previewFrameTimeCode: String?
-			public var fileSize: Int
-			public var fileName: String
 			public var appEventAssetType: AppEventAssetType
+			public var fileName: String
+			public var fileSize: Int
+			public var previewFrameTimeCode: String?
 
-			public init(previewFrameTimeCode: String? = nil, fileSize: Int, fileName: String, appEventAssetType: AppEventAssetType) {
-				self.previewFrameTimeCode = previewFrameTimeCode
-				self.fileSize = fileSize
-				self.fileName = fileName
+			public init(appEventAssetType: AppEventAssetType, fileName: String, fileSize: Int, previewFrameTimeCode: String? = nil) {
 				self.appEventAssetType = appEventAssetType
+				self.fileName = fileName
+				self.fileSize = fileSize
+				self.previewFrameTimeCode = previewFrameTimeCode
 			}
 
 			public init(from decoder: Decoder) throws {
 				let values = try decoder.container(keyedBy: StringCodingKey.self)
-				self.previewFrameTimeCode = try values.decodeIfPresent(String.self, forKey: "previewFrameTimeCode")
-				self.fileSize = try values.decode(Int.self, forKey: "fileSize")
-				self.fileName = try values.decode(String.self, forKey: "fileName")
 				self.appEventAssetType = try values.decode(AppEventAssetType.self, forKey: "appEventAssetType")
+				self.fileName = try values.decode(String.self, forKey: "fileName")
+				self.fileSize = try values.decode(Int.self, forKey: "fileSize")
+				self.previewFrameTimeCode = try values.decodeIfPresent(String.self, forKey: "previewFrameTimeCode")
 			}
 
 			public func encode(to encoder: Encoder) throws {
 				var values = encoder.container(keyedBy: StringCodingKey.self)
-				try values.encodeIfPresent(previewFrameTimeCode, forKey: "previewFrameTimeCode")
-				try values.encode(fileSize, forKey: "fileSize")
-				try values.encode(fileName, forKey: "fileName")
 				try values.encode(appEventAssetType, forKey: "appEventAssetType")
+				try values.encode(fileName, forKey: "fileName")
+				try values.encode(fileSize, forKey: "fileSize")
+				try values.encodeIfPresent(previewFrameTimeCode, forKey: "previewFrameTimeCode")
 			}
 		}
 

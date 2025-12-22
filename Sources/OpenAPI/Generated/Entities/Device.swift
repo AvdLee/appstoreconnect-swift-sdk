@@ -4,28 +4,19 @@
 import Foundation
 
 public struct Device: Codable, Identifiable {
-	public var type: `Type`
+	public var attributes: Attributes?
 	public var id: String
 	public var links: ResourceLinks?
-	public var attributes: Attributes?
-
-	public enum `Type`: String, Codable, CaseIterable {
-		case devices
-	}
+	public var type: `Type`
 
 	public struct Attributes: Codable {
-		public var status: Status?
-		public var deviceClass: DeviceClass?
 		public var addedDate: Date?
+		public var deviceClass: DeviceClass?
 		public var model: String?
 		public var name: String?
-		public var udid: String?
 		public var platform: BundleIDPlatform?
-
-		public enum Status: String, Codable, CaseIterable {
-			case enabled = "ENABLED"
-			case disabled = "DISABLED"
-		}
+		public var status: Status?
+		public var udid: String?
 
 		public enum DeviceClass: String, Codable, CaseIterable {
 			case appleVisionPro = "APPLE_VISION_PRO"
@@ -37,59 +28,68 @@ public struct Device: Codable, Identifiable {
 			case mac = "MAC"
 		}
 
-		public init(status: Status? = nil, deviceClass: DeviceClass? = nil, addedDate: Date? = nil, model: String? = nil, name: String? = nil, udid: String? = nil, platform: BundleIDPlatform? = nil) {
-			self.status = status
-			self.deviceClass = deviceClass
+		public enum Status: String, Codable, CaseIterable {
+			case enabled = "ENABLED"
+			case disabled = "DISABLED"
+		}
+
+		public init(addedDate: Date? = nil, deviceClass: DeviceClass? = nil, model: String? = nil, name: String? = nil, platform: BundleIDPlatform? = nil, status: Status? = nil, udid: String? = nil) {
 			self.addedDate = addedDate
+			self.deviceClass = deviceClass
 			self.model = model
 			self.name = name
-			self.udid = udid
 			self.platform = platform
+			self.status = status
+			self.udid = udid
 		}
 
 		public init(from decoder: Decoder) throws {
 			let values = try decoder.container(keyedBy: StringCodingKey.self)
-			self.status = try values.decodeIfPresent(Status.self, forKey: "status")
-			self.deviceClass = try values.decodeIfPresent(DeviceClass.self, forKey: "deviceClass")
 			self.addedDate = try values.decodeIfPresent(Date.self, forKey: "addedDate")
+			self.deviceClass = try values.decodeIfPresent(DeviceClass.self, forKey: "deviceClass")
 			self.model = try values.decodeIfPresent(String.self, forKey: "model")
 			self.name = try values.decodeIfPresent(String.self, forKey: "name")
-			self.udid = try values.decodeIfPresent(String.self, forKey: "udid")
 			self.platform = try values.decodeIfPresent(BundleIDPlatform.self, forKey: "platform")
+			self.status = try values.decodeIfPresent(Status.self, forKey: "status")
+			self.udid = try values.decodeIfPresent(String.self, forKey: "udid")
 		}
 
 		public func encode(to encoder: Encoder) throws {
 			var values = encoder.container(keyedBy: StringCodingKey.self)
-			try values.encodeIfPresent(status, forKey: "status")
-			try values.encodeIfPresent(deviceClass, forKey: "deviceClass")
 			try values.encodeIfPresent(addedDate, forKey: "addedDate")
+			try values.encodeIfPresent(deviceClass, forKey: "deviceClass")
 			try values.encodeIfPresent(model, forKey: "model")
 			try values.encodeIfPresent(name, forKey: "name")
-			try values.encodeIfPresent(udid, forKey: "udid")
 			try values.encodeIfPresent(platform, forKey: "platform")
+			try values.encodeIfPresent(status, forKey: "status")
+			try values.encodeIfPresent(udid, forKey: "udid")
 		}
 	}
 
-	public init(type: `Type`, id: String, links: ResourceLinks? = nil, attributes: Attributes? = nil) {
-		self.type = type
+	public enum `Type`: String, Codable, CaseIterable {
+		case devices
+	}
+
+	public init(attributes: Attributes? = nil, id: String, links: ResourceLinks? = nil, type: `Type`) {
+		self.attributes = attributes
 		self.id = id
 		self.links = links
-		self.attributes = attributes
+		self.type = type
 	}
 
 	public init(from decoder: Decoder) throws {
 		let values = try decoder.container(keyedBy: StringCodingKey.self)
-		self.type = try values.decode(`Type`.self, forKey: "type")
+		self.attributes = try values.decodeIfPresent(Attributes.self, forKey: "attributes")
 		self.id = try values.decode(String.self, forKey: "id")
 		self.links = try values.decodeIfPresent(ResourceLinks.self, forKey: "links")
-		self.attributes = try values.decodeIfPresent(Attributes.self, forKey: "attributes")
+		self.type = try values.decode(`Type`.self, forKey: "type")
 	}
 
 	public func encode(to encoder: Encoder) throws {
 		var values = encoder.container(keyedBy: StringCodingKey.self)
-		try values.encode(type, forKey: "type")
+		try values.encodeIfPresent(attributes, forKey: "attributes")
 		try values.encode(id, forKey: "id")
 		try values.encodeIfPresent(links, forKey: "links")
-		try values.encodeIfPresent(attributes, forKey: "attributes")
+		try values.encode(type, forKey: "type")
 	}
 }

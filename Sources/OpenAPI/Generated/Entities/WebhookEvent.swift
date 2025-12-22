@@ -4,65 +4,65 @@
 import Foundation
 
 public struct WebhookEvent: Codable, Identifiable {
-	public var type: `Type`
-	public var links: ResourceLinks?
 	public var attributes: Attributes?
 	public var id: String
+	public var links: ResourceLinks?
+	public var type: `Type`
+
+	public struct Attributes: Codable {
+		public var createdDate: Date?
+		public var eventType: WebhookEventType?
+		public var payload: String?
+		public var isPing: Bool?
+
+		public init(createdDate: Date? = nil, eventType: WebhookEventType? = nil, payload: String? = nil, isPing: Bool? = nil) {
+			self.createdDate = createdDate
+			self.eventType = eventType
+			self.payload = payload
+			self.isPing = isPing
+		}
+
+		public init(from decoder: Decoder) throws {
+			let values = try decoder.container(keyedBy: StringCodingKey.self)
+			self.createdDate = try values.decodeIfPresent(Date.self, forKey: "createdDate")
+			self.eventType = try values.decodeIfPresent(WebhookEventType.self, forKey: "eventType")
+			self.payload = try values.decodeIfPresent(String.self, forKey: "payload")
+			self.isPing = try values.decodeIfPresent(Bool.self, forKey: "ping")
+		}
+
+		public func encode(to encoder: Encoder) throws {
+			var values = encoder.container(keyedBy: StringCodingKey.self)
+			try values.encodeIfPresent(createdDate, forKey: "createdDate")
+			try values.encodeIfPresent(eventType, forKey: "eventType")
+			try values.encodeIfPresent(payload, forKey: "payload")
+			try values.encodeIfPresent(isPing, forKey: "ping")
+		}
+	}
 
 	public enum `Type`: String, Codable, CaseIterable {
 		case webhookEvents
 	}
 
-	public struct Attributes: Codable {
-		public var isPing: Bool?
-		public var createdDate: Date?
-		public var payload: String?
-		public var eventType: WebhookEventType?
-
-		public init(isPing: Bool? = nil, createdDate: Date? = nil, payload: String? = nil, eventType: WebhookEventType? = nil) {
-			self.isPing = isPing
-			self.createdDate = createdDate
-			self.payload = payload
-			self.eventType = eventType
-		}
-
-		public init(from decoder: Decoder) throws {
-			let values = try decoder.container(keyedBy: StringCodingKey.self)
-			self.isPing = try values.decodeIfPresent(Bool.self, forKey: "ping")
-			self.createdDate = try values.decodeIfPresent(Date.self, forKey: "createdDate")
-			self.payload = try values.decodeIfPresent(String.self, forKey: "payload")
-			self.eventType = try values.decodeIfPresent(WebhookEventType.self, forKey: "eventType")
-		}
-
-		public func encode(to encoder: Encoder) throws {
-			var values = encoder.container(keyedBy: StringCodingKey.self)
-			try values.encodeIfPresent(isPing, forKey: "ping")
-			try values.encodeIfPresent(createdDate, forKey: "createdDate")
-			try values.encodeIfPresent(payload, forKey: "payload")
-			try values.encodeIfPresent(eventType, forKey: "eventType")
-		}
-	}
-
-	public init(type: `Type`, links: ResourceLinks? = nil, attributes: Attributes? = nil, id: String) {
-		self.type = type
-		self.links = links
+	public init(attributes: Attributes? = nil, id: String, links: ResourceLinks? = nil, type: `Type`) {
 		self.attributes = attributes
 		self.id = id
+		self.links = links
+		self.type = type
 	}
 
 	public init(from decoder: Decoder) throws {
 		let values = try decoder.container(keyedBy: StringCodingKey.self)
-		self.type = try values.decode(`Type`.self, forKey: "type")
-		self.links = try values.decodeIfPresent(ResourceLinks.self, forKey: "links")
 		self.attributes = try values.decodeIfPresent(Attributes.self, forKey: "attributes")
 		self.id = try values.decode(String.self, forKey: "id")
+		self.links = try values.decodeIfPresent(ResourceLinks.self, forKey: "links")
+		self.type = try values.decode(`Type`.self, forKey: "type")
 	}
 
 	public func encode(to encoder: Encoder) throws {
 		var values = encoder.container(keyedBy: StringCodingKey.self)
-		try values.encode(type, forKey: "type")
-		try values.encodeIfPresent(links, forKey: "links")
 		try values.encodeIfPresent(attributes, forKey: "attributes")
 		try values.encode(id, forKey: "id")
+		try values.encodeIfPresent(links, forKey: "links")
+		try values.encode(type, forKey: "type")
 	}
 }

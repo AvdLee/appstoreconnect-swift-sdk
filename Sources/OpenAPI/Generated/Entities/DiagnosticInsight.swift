@@ -9,24 +9,24 @@ public struct DiagnosticInsight: Codable {
 	public var referenceVersions: [ReferenceVersion]?
 
 	public struct ReferenceVersion: Codable {
-		public var version: String?
 		public var value: Double?
+		public var version: String?
 
-		public init(version: String? = nil, value: Double? = nil) {
-			self.version = version
+		public init(value: Double? = nil, version: String? = nil) {
 			self.value = value
+			self.version = version
 		}
 
 		public init(from decoder: Decoder) throws {
 			let values = try decoder.container(keyedBy: StringCodingKey.self)
-			self.version = try values.decodeIfPresent(String.self, forKey: "version")
 			self.value = try values.decodeIfPresent(Double.self, forKey: "value")
+			self.version = try values.decodeIfPresent(String.self, forKey: "version")
 		}
 
 		public func encode(to encoder: Encoder) throws {
 			var values = encoder.container(keyedBy: StringCodingKey.self)
-			try values.encodeIfPresent(version, forKey: "version")
 			try values.encodeIfPresent(value, forKey: "value")
+			try values.encodeIfPresent(version, forKey: "version")
 		}
 	}
 

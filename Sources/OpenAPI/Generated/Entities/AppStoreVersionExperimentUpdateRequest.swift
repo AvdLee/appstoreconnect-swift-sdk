@@ -8,58 +8,58 @@ public struct AppStoreVersionExperimentUpdateRequest: Codable {
 	public var data: Data
 
 	public struct Data: Codable, Identifiable {
-		public var type: `Type`
 		public var attributes: Attributes?
 		public var id: String
-
-		public enum `Type`: String, Codable, CaseIterable {
-			case appStoreVersionExperiments
-		}
+		public var type: `Type`
 
 		public struct Attributes: Codable {
 			public var name: String?
-			public var trafficProportion: Int?
 			public var isStarted: Bool?
+			public var trafficProportion: Int?
 
-			public init(name: String? = nil, trafficProportion: Int? = nil, isStarted: Bool? = nil) {
+			public init(name: String? = nil, isStarted: Bool? = nil, trafficProportion: Int? = nil) {
 				self.name = name
-				self.trafficProportion = trafficProportion
 				self.isStarted = isStarted
+				self.trafficProportion = trafficProportion
 			}
 
 			public init(from decoder: Decoder) throws {
 				let values = try decoder.container(keyedBy: StringCodingKey.self)
 				self.name = try values.decodeIfPresent(String.self, forKey: "name")
-				self.trafficProportion = try values.decodeIfPresent(Int.self, forKey: "trafficProportion")
 				self.isStarted = try values.decodeIfPresent(Bool.self, forKey: "started")
+				self.trafficProportion = try values.decodeIfPresent(Int.self, forKey: "trafficProportion")
 			}
 
 			public func encode(to encoder: Encoder) throws {
 				var values = encoder.container(keyedBy: StringCodingKey.self)
 				try values.encodeIfPresent(name, forKey: "name")
-				try values.encodeIfPresent(trafficProportion, forKey: "trafficProportion")
 				try values.encodeIfPresent(isStarted, forKey: "started")
+				try values.encodeIfPresent(trafficProportion, forKey: "trafficProportion")
 			}
 		}
 
-		public init(type: `Type`, attributes: Attributes? = nil, id: String) {
-			self.type = type
+		public enum `Type`: String, Codable, CaseIterable {
+			case appStoreVersionExperiments
+		}
+
+		public init(attributes: Attributes? = nil, id: String, type: `Type`) {
 			self.attributes = attributes
 			self.id = id
+			self.type = type
 		}
 
 		public init(from decoder: Decoder) throws {
 			let values = try decoder.container(keyedBy: StringCodingKey.self)
-			self.type = try values.decode(`Type`.self, forKey: "type")
 			self.attributes = try values.decodeIfPresent(Attributes.self, forKey: "attributes")
 			self.id = try values.decode(String.self, forKey: "id")
+			self.type = try values.decode(`Type`.self, forKey: "type")
 		}
 
 		public func encode(to encoder: Encoder) throws {
 			var values = encoder.container(keyedBy: StringCodingKey.self)
-			try values.encode(type, forKey: "type")
 			try values.encodeIfPresent(attributes, forKey: "attributes")
 			try values.encode(id, forKey: "id")
+			try values.encode(type, forKey: "type")
 		}
 	}
 

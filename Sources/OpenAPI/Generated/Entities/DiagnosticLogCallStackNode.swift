@@ -4,67 +4,67 @@
 import Foundation
 
 public struct DiagnosticLogCallStackNode: Codable {
-	public var rawFrame: String?
-	public var binaryUUID: String?
-	public var insightsCategory: String?
-	public var fileName: String?
-	public var binaryName: String?
-	public var lineNumber: String?
-	public var subFrames: [DiagnosticLogCallStackNode]?
-	public var offsetIntoSymbol: String?
-	public var symbolName: String?
-	public var sampleCount: Int?
-	public var isBlameFrame: Bool?
-	public var offsetIntoBinaryTextSegment: String?
 	public var address: String?
+	public var binaryName: String?
+	public var binaryUUID: String?
+	public var fileName: String?
+	public var insightsCategory: String?
+	public var isBlameFrame: Bool?
+	public var lineNumber: String?
+	public var offsetIntoBinaryTextSegment: String?
+	public var offsetIntoSymbol: String?
+	public var rawFrame: String?
+	public var sampleCount: Int?
+	public var subFrames: [DiagnosticLogCallStackNode]?
+	public var symbolName: String?
 
-	public init(rawFrame: String? = nil, binaryUUID: String? = nil, insightsCategory: String? = nil, fileName: String? = nil, binaryName: String? = nil, lineNumber: String? = nil, subFrames: [DiagnosticLogCallStackNode]? = nil, offsetIntoSymbol: String? = nil, symbolName: String? = nil, sampleCount: Int? = nil, isBlameFrame: Bool? = nil, offsetIntoBinaryTextSegment: String? = nil, address: String? = nil) {
-		self.rawFrame = rawFrame
-		self.binaryUUID = binaryUUID
-		self.insightsCategory = insightsCategory
-		self.fileName = fileName
-		self.binaryName = binaryName
-		self.lineNumber = lineNumber
-		self.subFrames = subFrames
-		self.offsetIntoSymbol = offsetIntoSymbol
-		self.symbolName = symbolName
-		self.sampleCount = sampleCount
-		self.isBlameFrame = isBlameFrame
-		self.offsetIntoBinaryTextSegment = offsetIntoBinaryTextSegment
+	public init(address: String? = nil, binaryName: String? = nil, binaryUUID: String? = nil, fileName: String? = nil, insightsCategory: String? = nil, isBlameFrame: Bool? = nil, lineNumber: String? = nil, offsetIntoBinaryTextSegment: String? = nil, offsetIntoSymbol: String? = nil, rawFrame: String? = nil, sampleCount: Int? = nil, subFrames: [DiagnosticLogCallStackNode]? = nil, symbolName: String? = nil) {
 		self.address = address
+		self.binaryName = binaryName
+		self.binaryUUID = binaryUUID
+		self.fileName = fileName
+		self.insightsCategory = insightsCategory
+		self.isBlameFrame = isBlameFrame
+		self.lineNumber = lineNumber
+		self.offsetIntoBinaryTextSegment = offsetIntoBinaryTextSegment
+		self.offsetIntoSymbol = offsetIntoSymbol
+		self.rawFrame = rawFrame
+		self.sampleCount = sampleCount
+		self.subFrames = subFrames
+		self.symbolName = symbolName
 	}
 
 	public init(from decoder: Decoder) throws {
 		let values = try decoder.container(keyedBy: StringCodingKey.self)
-		self.rawFrame = try values.decodeIfPresent(String.self, forKey: "rawFrame")
-		self.binaryUUID = try values.decodeIfPresent(String.self, forKey: "binaryUUID")
-		self.insightsCategory = try values.decodeIfPresent(String.self, forKey: "insightsCategory")
-		self.fileName = try values.decodeIfPresent(String.self, forKey: "fileName")
-		self.binaryName = try values.decodeIfPresent(String.self, forKey: "binaryName")
-		self.lineNumber = try values.decodeIfPresent(String.self, forKey: "lineNumber")
-		self.subFrames = try values.decodeIfPresent([DiagnosticLogCallStackNode].self, forKey: "subFrames")
-		self.offsetIntoSymbol = try values.decodeIfPresent(String.self, forKey: "offsetIntoSymbol")
-		self.symbolName = try values.decodeIfPresent(String.self, forKey: "symbolName")
-		self.sampleCount = try values.decodeIfPresent(Int.self, forKey: "sampleCount")
-		self.isBlameFrame = try values.decodeIfPresent(Bool.self, forKey: "isBlameFrame")
-		self.offsetIntoBinaryTextSegment = try values.decodeIfPresent(String.self, forKey: "offsetIntoBinaryTextSegment")
 		self.address = try values.decodeIfPresent(String.self, forKey: "address")
+		self.binaryName = try values.decodeIfPresent(String.self, forKey: "binaryName")
+		self.binaryUUID = try values.decodeIfPresent(String.self, forKey: "binaryUUID")
+		self.fileName = try values.decodeIfPresent(String.self, forKey: "fileName")
+		self.insightsCategory = try values.decodeIfPresent(String.self, forKey: "insightsCategory")
+		self.isBlameFrame = try values.decodeIfPresent(Bool.self, forKey: "isBlameFrame")
+		self.lineNumber = try values.decodeIfPresent(String.self, forKey: "lineNumber")
+		self.offsetIntoBinaryTextSegment = try values.decodeIfPresent(String.self, forKey: "offsetIntoBinaryTextSegment")
+		self.offsetIntoSymbol = try values.decodeIfPresent(String.self, forKey: "offsetIntoSymbol")
+		self.rawFrame = try values.decodeIfPresent(String.self, forKey: "rawFrame")
+		self.sampleCount = try values.decodeIfPresent(Int.self, forKey: "sampleCount")
+		self.subFrames = try values.decodeIfPresent([DiagnosticLogCallStackNode].self, forKey: "subFrames")
+		self.symbolName = try values.decodeIfPresent(String.self, forKey: "symbolName")
 	}
 
 	public func encode(to encoder: Encoder) throws {
 		var values = encoder.container(keyedBy: StringCodingKey.self)
-		try values.encodeIfPresent(rawFrame, forKey: "rawFrame")
-		try values.encodeIfPresent(binaryUUID, forKey: "binaryUUID")
-		try values.encodeIfPresent(insightsCategory, forKey: "insightsCategory")
-		try values.encodeIfPresent(fileName, forKey: "fileName")
-		try values.encodeIfPresent(binaryName, forKey: "binaryName")
-		try values.encodeIfPresent(lineNumber, forKey: "lineNumber")
-		try values.encodeIfPresent(subFrames, forKey: "subFrames")
-		try values.encodeIfPresent(offsetIntoSymbol, forKey: "offsetIntoSymbol")
-		try values.encodeIfPresent(symbolName, forKey: "symbolName")
-		try values.encodeIfPresent(sampleCount, forKey: "sampleCount")
-		try values.encodeIfPresent(isBlameFrame, forKey: "isBlameFrame")
-		try values.encodeIfPresent(offsetIntoBinaryTextSegment, forKey: "offsetIntoBinaryTextSegment")
 		try values.encodeIfPresent(address, forKey: "address")
+		try values.encodeIfPresent(binaryName, forKey: "binaryName")
+		try values.encodeIfPresent(binaryUUID, forKey: "binaryUUID")
+		try values.encodeIfPresent(fileName, forKey: "fileName")
+		try values.encodeIfPresent(insightsCategory, forKey: "insightsCategory")
+		try values.encodeIfPresent(isBlameFrame, forKey: "isBlameFrame")
+		try values.encodeIfPresent(lineNumber, forKey: "lineNumber")
+		try values.encodeIfPresent(offsetIntoBinaryTextSegment, forKey: "offsetIntoBinaryTextSegment")
+		try values.encodeIfPresent(offsetIntoSymbol, forKey: "offsetIntoSymbol")
+		try values.encodeIfPresent(rawFrame, forKey: "rawFrame")
+		try values.encodeIfPresent(sampleCount, forKey: "sampleCount")
+		try values.encodeIfPresent(subFrames, forKey: "subFrames")
+		try values.encodeIfPresent(symbolName, forKey: "symbolName")
 	}
 }

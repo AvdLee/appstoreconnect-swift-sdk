@@ -4,27 +4,27 @@
 import Foundation
 
 public struct CiBranchStartCondition: Codable {
-	public var source: CiBranchPatterns?
 	public var isAutoCancel: Bool?
 	public var filesAndFoldersRule: CiFilesAndFoldersRule?
+	public var source: CiBranchPatterns?
 
-	public init(source: CiBranchPatterns? = nil, isAutoCancel: Bool? = nil, filesAndFoldersRule: CiFilesAndFoldersRule? = nil) {
-		self.source = source
+	public init(isAutoCancel: Bool? = nil, filesAndFoldersRule: CiFilesAndFoldersRule? = nil, source: CiBranchPatterns? = nil) {
 		self.isAutoCancel = isAutoCancel
 		self.filesAndFoldersRule = filesAndFoldersRule
+		self.source = source
 	}
 
 	public init(from decoder: Decoder) throws {
 		let values = try decoder.container(keyedBy: StringCodingKey.self)
-		self.source = try values.decodeIfPresent(CiBranchPatterns.self, forKey: "source")
 		self.isAutoCancel = try values.decodeIfPresent(Bool.self, forKey: "autoCancel")
 		self.filesAndFoldersRule = try values.decodeIfPresent(CiFilesAndFoldersRule.self, forKey: "filesAndFoldersRule")
+		self.source = try values.decodeIfPresent(CiBranchPatterns.self, forKey: "source")
 	}
 
 	public func encode(to encoder: Encoder) throws {
 		var values = encoder.container(keyedBy: StringCodingKey.self)
-		try values.encodeIfPresent(source, forKey: "source")
 		try values.encodeIfPresent(isAutoCancel, forKey: "autoCancel")
 		try values.encodeIfPresent(filesAndFoldersRule, forKey: "filesAndFoldersRule")
+		try values.encodeIfPresent(source, forKey: "source")
 	}
 }

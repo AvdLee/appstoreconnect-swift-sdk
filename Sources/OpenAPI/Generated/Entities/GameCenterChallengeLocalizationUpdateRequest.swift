@@ -12,24 +12,24 @@ public struct GameCenterChallengeLocalizationUpdateRequest: Codable {
 		public var type: `Type`
 
 		public struct Attributes: Codable {
-			public var name: String?
 			public var description: String?
+			public var name: String?
 
-			public init(name: String? = nil, description: String? = nil) {
-				self.name = name
+			public init(description: String? = nil, name: String? = nil) {
 				self.description = description
+				self.name = name
 			}
 
 			public init(from decoder: Decoder) throws {
 				let values = try decoder.container(keyedBy: StringCodingKey.self)
-				self.name = try values.decodeIfPresent(String.self, forKey: "name")
 				self.description = try values.decodeIfPresent(String.self, forKey: "description")
+				self.name = try values.decodeIfPresent(String.self, forKey: "name")
 			}
 
 			public func encode(to encoder: Encoder) throws {
 				var values = encoder.container(keyedBy: StringCodingKey.self)
-				try values.encodeIfPresent(name, forKey: "name")
 				try values.encodeIfPresent(description, forKey: "description")
+				try values.encodeIfPresent(name, forKey: "name")
 			}
 		}
 

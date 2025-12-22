@@ -7,33 +7,29 @@ public struct AppCustomProductPageLocalizationCreateRequest: Codable {
 	public var data: Data
 
 	public struct Data: Codable {
-		public var type: `Type`
 		public var attributes: Attributes
 		public var relationships: Relationships
-
-		public enum `Type`: String, Codable, CaseIterable {
-			case appCustomProductPageLocalizations
-		}
+		public var type: `Type`
 
 		public struct Attributes: Codable {
-			public var promotionalText: String?
 			public var locale: String
+			public var promotionalText: String?
 
-			public init(promotionalText: String? = nil, locale: String) {
-				self.promotionalText = promotionalText
+			public init(locale: String, promotionalText: String? = nil) {
 				self.locale = locale
+				self.promotionalText = promotionalText
 			}
 
 			public init(from decoder: Decoder) throws {
 				let values = try decoder.container(keyedBy: StringCodingKey.self)
-				self.promotionalText = try values.decodeIfPresent(String.self, forKey: "promotionalText")
 				self.locale = try values.decode(String.self, forKey: "locale")
+				self.promotionalText = try values.decodeIfPresent(String.self, forKey: "promotionalText")
 			}
 
 			public func encode(to encoder: Encoder) throws {
 				var values = encoder.container(keyedBy: StringCodingKey.self)
-				try values.encodeIfPresent(promotionalText, forKey: "promotionalText")
 				try values.encode(locale, forKey: "locale")
+				try values.encodeIfPresent(promotionalText, forKey: "promotionalText")
 			}
 		}
 
@@ -99,24 +95,28 @@ public struct AppCustomProductPageLocalizationCreateRequest: Codable {
 			}
 		}
 
-		public init(type: `Type`, attributes: Attributes, relationships: Relationships) {
-			self.type = type
+		public enum `Type`: String, Codable, CaseIterable {
+			case appCustomProductPageLocalizations
+		}
+
+		public init(attributes: Attributes, relationships: Relationships, type: `Type`) {
 			self.attributes = attributes
 			self.relationships = relationships
+			self.type = type
 		}
 
 		public init(from decoder: Decoder) throws {
 			let values = try decoder.container(keyedBy: StringCodingKey.self)
-			self.type = try values.decode(`Type`.self, forKey: "type")
 			self.attributes = try values.decode(Attributes.self, forKey: "attributes")
 			self.relationships = try values.decode(Relationships.self, forKey: "relationships")
+			self.type = try values.decode(`Type`.self, forKey: "type")
 		}
 
 		public func encode(to encoder: Encoder) throws {
 			var values = encoder.container(keyedBy: StringCodingKey.self)
-			try values.encode(type, forKey: "type")
 			try values.encode(attributes, forKey: "attributes")
 			try values.encode(relationships, forKey: "relationships")
+			try values.encode(type, forKey: "type")
 		}
 	}
 
