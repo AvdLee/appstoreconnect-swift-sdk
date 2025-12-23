@@ -175,12 +175,21 @@ brew install jq
 Run the following:
 
 ```bash
-$ make update
+swift run OpenAPIGenerator update
 ```
 
 This will attempt to download the App Store Connect [OpenAPI specification](https://developer.apple.com/sample-code/app-store-connect/app-store-connect-openapi-specification.zip) from Apple, and re-run the [CreateAPI](https://github.com/CreateAPI/CreateAPI) generator to produce the updated source code.
 
-Alternatively, you can run `make download` and `make generate` individually.
+Alternatively, you can run:
+
+```bash
+swift run OpenAPIGenerator download
+swift run OpenAPIGenerator generate
+```
+
+#### Spec patching
+
+The downloaded OpenAPI spec and generated sources are post-processed by `OpenAPIGenerator` (logic in `OpenAPIGeneratorCore`) to apply small, **structure-aware** fixes without relying on line-based patch files. This makes updates resilient when upstream JSON shifts between releases.
 
 ## Communication
 

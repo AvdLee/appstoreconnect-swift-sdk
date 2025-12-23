@@ -29,6 +29,7 @@ extension APIEndpoint.V1.SubscriptionOfferCodeOneTimeUseCodes {
 			case createdDate
 			case expirationDate
 			case active
+			case environment
 			case offerCode
 			case values
 		}

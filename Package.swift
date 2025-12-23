@@ -3,7 +3,10 @@ import PackageDescription
 
 var dependencies: [Package.Dependency] = [
     .package(url: "https://github.com/CreateAPI/URLQueryEncoder.git", from: "0.2.0"),
-    .package(url: "https://github.com/apple/swift-crypto.git", from: "3.12.3")
+    .package(url: "https://github.com/apple/swift-crypto.git", from: "3.12.3"),
+    .package(url: "https://github.com/apple/swift-argument-parser", from: "1.7.0"),
+    .package(url: "https://github.com/weichsel/ZIPFoundation", from: "0.9.20"),
+    .package(url: "https://github.com/apple/swift-collections.git", .upToNextMinor(from: "1.1.0"))
 ]
 
 var targetDependencies: [Target.Dependency] = [
@@ -29,12 +32,40 @@ let package = Package(
     ],
     dependencies: dependencies,
     targets: [
-        .testTarget(name: "AppStoreConnect-Swift-SDK-Tests", dependencies: ["AppStoreConnect-Swift-SDK"], path: "Tests"),
+        .testTarget(
+            name: "AppStoreConnect-Swift-SDK-Tests",
+            dependencies: [
+                "AppStoreConnect-Swift-SDK",
+                .target(name: "OpenAPIGeneratorCore", condition: .when(platforms: [.macOS])),
+            ],
+            path: "Tests"
+        ),
         .target(
             name: "AppStoreConnect-Swift-SDK",
             dependencies: targetDependencies,
             path: "Sources",
-            exclude: ["OpenAPI/app_store_connect_api.json"]
+            exclude: [
+                "OpenAPI/app_store_connect_api.json",
+                "OpenAPI/app_store_connect_api.json.orig",
+                "OpenAPI/app_store_connect_api.json.rej",
+                "OpenAPI/create-api.yml",
+            ]
+        ),
+        .target(
+            name: "OpenAPIGeneratorCore",
+            dependencies: [
+                .product(name: "ZIPFoundation", package: "ZIPFoundation"),
+                .product(name: "OrderedCollections", package: "swift-collections"),
+            ],
+            path: "Tools/OpenAPIGeneratorCore"
+        ),
+        .executableTarget(
+            name: "OpenAPIGenerator",
+            dependencies: [
+                "OpenAPIGeneratorCore",
+                .product(name: "ArgumentParser", package: "swift-argument-parser"),
+            ],
+            path: "Tools/OpenAPIGenerator"
         ),
         .binaryTarget(
             name: "create-api", // Find the URL and checksum at https://github.com/createapi/createapi/releases/latest

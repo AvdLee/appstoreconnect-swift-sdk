@@ -42,6 +42,11 @@ extension APIEndpoint.V1.ReviewSubmissions {
 				case appStoreVersionExperimentV2
 				case appEvent
 				case backgroundAssetVersion
+				case gameCenterAchievementVersion
+				case gameCenterActivityVersion
+				case gameCenterChallengeVersion
+				case gameCenterLeaderboardSetVersion
+				case gameCenterLeaderboardVersion
 			}
 
 			public enum Include: String, Codable, CaseIterable {

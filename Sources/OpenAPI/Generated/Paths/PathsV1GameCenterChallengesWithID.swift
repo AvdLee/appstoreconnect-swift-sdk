@@ -33,6 +33,7 @@ extension APIEndpoint.V1.GameCenterChallenges {
 				case gameCenterGroup
 				case versions
 				case leaderboard
+				case leaderboardV2
 			}
 
 			public enum FieldsGameCenterChallengeVersions: String, Codable, CaseIterable {
@@ -49,6 +50,7 @@ extension APIEndpoint.V1.GameCenterChallenges {
 				case gameCenterGroup
 				case versions
 				case leaderboard
+				case leaderboardV2
 			}
 
 			public init(fieldsGameCenterChallenges: [FieldsGameCenterChallenges]? = nil, fieldsGameCenterChallengeVersions: [FieldsGameCenterChallengeVersions]? = nil, include: [Include]? = nil, limitVersions: Int? = nil) {

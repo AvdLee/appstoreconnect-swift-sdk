@@ -48,12 +48,17 @@ extension APIEndpoint.V1.GameCenterLeaderboardSets.WithID {
 				case gameCenterAppVersions
 				case gameCenterGroup
 				case gameCenterLeaderboards
+				case gameCenterLeaderboardsV2
 				case gameCenterLeaderboardSets
+				case gameCenterLeaderboardSetsV2
 				case gameCenterAchievements
+				case gameCenterAchievementsV2
 				case gameCenterActivities
 				case gameCenterChallenges
 				case defaultLeaderboard
+				case defaultLeaderboardV2
 				case defaultGroupLeaderboard
+				case defaultGroupLeaderboardV2
 				case achievementReleases
 				case activityReleases
 				case challengeReleases
@@ -66,8 +71,11 @@ extension APIEndpoint.V1.GameCenterLeaderboardSets.WithID {
 				case referenceName
 				case gameCenterDetails
 				case gameCenterLeaderboards
+				case gameCenterLeaderboardsV2
 				case gameCenterLeaderboardSets
+				case gameCenterLeaderboardSetsV2
 				case gameCenterAchievements
+				case gameCenterAchievementsV2
 				case gameCenterActivities
 				case gameCenterChallenges
 			}

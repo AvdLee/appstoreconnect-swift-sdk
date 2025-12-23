@@ -76,6 +76,7 @@ extension APIEndpoint.V1.BackgroundAssets.WithID {
 				case createdDate
 				case platforms
 				case state
+				case stateDetails
 				case version
 				case backgroundAsset
 				case internalBetaRelease
@@ -87,6 +88,7 @@ extension APIEndpoint.V1.BackgroundAssets.WithID {
 			}
 
 			public enum FieldsBackgroundAssets: String, Codable, CaseIterable {
+				case archived
 				case assetPackIdentifier
 				case createdDate
 				case app

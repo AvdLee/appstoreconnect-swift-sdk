@@ -18,12 +18,40 @@ public struct BackgroundAssetVersion: Codable, Identifiable {
 		public var createdDate: Date?
 		public var platforms: [Platform]?
 		public var state: BackgroundAssetVersionState?
+		public var stateDetails: StateDetails?
 		public var version: String?
 
-		public init(createdDate: Date? = nil, platforms: [Platform]? = nil, state: BackgroundAssetVersionState? = nil, version: String? = nil) {
+		public struct StateDetails: Codable {
+			public var errors: [StateDetail]?
+			public var warnings: [StateDetail]?
+			public var infos: [StateDetail]?
+
+			public init(errors: [StateDetail]? = nil, warnings: [StateDetail]? = nil, infos: [StateDetail]? = nil) {
+				self.errors = errors
+				self.warnings = warnings
+				self.infos = infos
+			}
+
+			public init(from decoder: Decoder) throws {
+				let values = try decoder.container(keyedBy: StringCodingKey.self)
+				self.errors = try values.decodeIfPresent([StateDetail].self, forKey: "errors")
+				self.warnings = try values.decodeIfPresent([StateDetail].self, forKey: "warnings")
+				self.infos = try values.decodeIfPresent([StateDetail].self, forKey: "infos")
+			}
+
+			public func encode(to encoder: Encoder) throws {
+				var values = encoder.container(keyedBy: StringCodingKey.self)
+				try values.encodeIfPresent(errors, forKey: "errors")
+				try values.encodeIfPresent(warnings, forKey: "warnings")
+				try values.encodeIfPresent(infos, forKey: "infos")
+			}
+		}
+
+		public init(createdDate: Date? = nil, platforms: [Platform]? = nil, state: BackgroundAssetVersionState? = nil, stateDetails: StateDetails? = nil, version: String? = nil) {
 			self.createdDate = createdDate
 			self.platforms = platforms
 			self.state = state
+			self.stateDetails = stateDetails
 			self.version = version
 		}
 
@@ -32,6 +60,7 @@ public struct BackgroundAssetVersion: Codable, Identifiable {
 			self.createdDate = try values.decodeIfPresent(Date.self, forKey: "createdDate")
 			self.platforms = try values.decodeIfPresent([Platform].self, forKey: "platforms")
 			self.state = try values.decodeIfPresent(BackgroundAssetVersionState.self, forKey: "state")
+			self.stateDetails = try values.decodeIfPresent(StateDetails.self, forKey: "stateDetails")
 			self.version = try values.decodeIfPresent(String.self, forKey: "version")
 		}
 
@@ -40,6 +69,7 @@ public struct BackgroundAssetVersion: Codable, Identifiable {
 			try values.encodeIfPresent(createdDate, forKey: "createdDate")
 			try values.encodeIfPresent(platforms, forKey: "platforms")
 			try values.encodeIfPresent(state, forKey: "state")
+			try values.encodeIfPresent(stateDetails, forKey: "stateDetails")
 			try values.encodeIfPresent(version, forKey: "version")
 		}
 	}
