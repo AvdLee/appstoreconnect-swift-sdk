@@ -1,5 +1,6 @@
 #if os(macOS)
 import XCTest
+import OrderedCollections
 @testable import OpenAPIGeneratorCore
 
 final class SpecPatchingTests: XCTestCase {
@@ -8,9 +9,10 @@ final class SpecPatchingTests: XCTestCase {
         let input = """
         {"b":1,"a":2,"c":{"y":true,"x":false},"arr":[{"k2":2,"k1":1}]}
         """
-        let data = Data(input.utf8)
+        var parser = JSONParser(bytes: Array(input.utf8))
+        let orderedDictionary = try parser.parseObject()
 
-        let root = try JSONValue(jsonDataPreservingKeyOrder: data)
+        let root = JSONValue.object(orderedDictionary)
 
         let outData = try root.toJSONData(prettyPrinted: false)
         let out = String(data: outData, encoding: .utf8)
@@ -18,19 +20,19 @@ final class SpecPatchingTests: XCTestCase {
     }
 
     func testEnsuresPurchaseRequirementEnum() throws {
-        let rootObj: NSDictionary = [
-            "components": [
-                "schemas": [:]
-            ],
-            "schema": [
-                "properties": [
-                    "purchaseRequirement": [
-                        "type": "string"
-                    ]
-                ]
-            ]
+        let rootObj: OrderedDictionary<String, JSONValue> = [
+            "components": .object(
+                ["schemas": .object([:])]
+            ),
+            "schema": .object(
+                ["properties": .object(
+                    ["purchaseRequirement": .object(
+                        ["type": .string("string")]
+                    )]
+                )]
+            )
         ]
-        var root = JSONValue(foundationObject: rootObj)
+        var root = JSONValue.object(rootObj)
 
         _ = try SpecPatcher.patch(&root)
 
@@ -41,30 +43,30 @@ final class SpecPatchingTests: XCTestCase {
     }
 
     func testEnsuresResponseErrorAndErrorResponseItemsRef() throws {
-        let rootObj: NSDictionary = [
-            "components": [
-                "schemas": [
-                    "ErrorResponse": [
-                        "type": "object",
-                        "properties": [
-                            "errors": [
-                                "type": "array",
-                                "items": [
-                                    "type": "object",
-                                    "properties": [
-                                        "code": ["type": "string"],
-                                        "status": ["type": "string"],
-                                        "title": ["type": "string"],
-                                        "detail": ["type": "string"],
-                                    ]
-                                ]
-                            ]
-                        ]
-                    ]
-                ]
-            ]
+        let rootObj: OrderedDictionary<String, JSONValue> = [
+            "components": .object([
+                "schemas": .object([
+                    "ErrorResponse": .object([
+                        "type": .string("object"),
+                        "properties": .object([
+                            "errors": .object([
+                                "type": .string("array"),
+                                "items": .object([
+                                    "type": .string("object"),
+                                    "properties": .object([
+                                        "code": .object(["type": .string("string")]),
+                                        "status": .object(["type": .string("string")]),
+                                        "title": .object(["type": .string("string")]),
+                                        "detail": .object(["type": .string("string")]),
+                                    ]),
+                                ]),
+                            ]),
+                        ]),
+                    ]),
+                ]),
+            ]),
         ]
-        var root = JSONValue(foundationObject: rootObj)
+        var root = JSONValue.object(rootObj)
 
         let result = try SpecPatcher.patch(&root)
         XCTAssertTrue(result.didChange)
