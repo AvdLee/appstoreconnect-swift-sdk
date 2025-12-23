@@ -3,6 +3,20 @@ import XCTest
 @testable import OpenAPIGeneratorCore
 
 final class SpecPatchingTests: XCTestCase {
+    func testOrderPreservedWhenParsingAndWritingJSON() throws {
+        // This test guards against losing upstream key ordering via JSONDecoder/JSONEncoder.
+        let input = """
+        {"b":1,"a":2,"c":{"y":true,"x":false},"arr":[{"k2":2,"k1":1}]}
+        """
+        let data = Data(input.utf8)
+
+        let root = try JSONValue(jsonDataPreservingKeyOrder: data)
+
+        let outData = try root.toJSONData(prettyPrinted: false)
+        let out = String(data: outData, encoding: .utf8)
+        XCTAssertEqual(out, input)
+    }
+
     func testEnsuresPurchaseRequirementEnum() throws {
         let rootObj: NSDictionary = [
             "components": [

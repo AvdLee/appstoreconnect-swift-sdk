@@ -4,31 +4,31 @@
 import Foundation
 
 public struct BetaFeedbackScreenshotImage: Codable {
-	public var expirationDate: Date?
 	public var url: String?
 	public var width: Int?
 	public var height: Int?
+	public var expirationDate: Date?
 
-	public init(expirationDate: Date? = nil, url: String? = nil, width: Int? = nil, height: Int? = nil) {
-		self.expirationDate = expirationDate
+	public init(url: String? = nil, width: Int? = nil, height: Int? = nil, expirationDate: Date? = nil) {
 		self.url = url
 		self.width = width
 		self.height = height
+		self.expirationDate = expirationDate
 	}
 
 	public init(from decoder: Decoder) throws {
 		let values = try decoder.container(keyedBy: StringCodingKey.self)
-		self.expirationDate = try values.decodeIfPresent(Date.self, forKey: "expirationDate")
 		self.url = try values.decodeIfPresent(String.self, forKey: "url")
 		self.width = try values.decodeIfPresent(Int.self, forKey: "width")
 		self.height = try values.decodeIfPresent(Int.self, forKey: "height")
+		self.expirationDate = try values.decodeIfPresent(Date.self, forKey: "expirationDate")
 	}
 
 	public func encode(to encoder: Encoder) throws {
 		var values = encoder.container(keyedBy: StringCodingKey.self)
-		try values.encodeIfPresent(expirationDate, forKey: "expirationDate")
 		try values.encodeIfPresent(url, forKey: "url")
 		try values.encodeIfPresent(width, forKey: "width")
 		try values.encodeIfPresent(height, forKey: "height")
+		try values.encodeIfPresent(expirationDate, forKey: "expirationDate")
 	}
 }

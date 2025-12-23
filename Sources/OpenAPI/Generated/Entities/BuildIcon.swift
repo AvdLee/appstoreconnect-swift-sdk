@@ -4,65 +4,65 @@
 import Foundation
 
 public struct BuildIcon: Codable, Identifiable {
-	public var id: String
-	public var links: ResourceLinks?
-	public var attributes: Attributes?
 	public var type: `Type`
-
-	public struct Attributes: Codable {
-		public var name: String?
-		public var isMasked: Bool?
-		public var iconType: IconAssetType?
-		public var iconAsset: ImageAsset?
-
-		public init(name: String? = nil, isMasked: Bool? = nil, iconType: IconAssetType? = nil, iconAsset: ImageAsset? = nil) {
-			self.name = name
-			self.isMasked = isMasked
-			self.iconType = iconType
-			self.iconAsset = iconAsset
-		}
-
-		public init(from decoder: Decoder) throws {
-			let values = try decoder.container(keyedBy: StringCodingKey.self)
-			self.name = try values.decodeIfPresent(String.self, forKey: "name")
-			self.isMasked = try values.decodeIfPresent(Bool.self, forKey: "masked")
-			self.iconType = try values.decodeIfPresent(IconAssetType.self, forKey: "iconType")
-			self.iconAsset = try values.decodeIfPresent(ImageAsset.self, forKey: "iconAsset")
-		}
-
-		public func encode(to encoder: Encoder) throws {
-			var values = encoder.container(keyedBy: StringCodingKey.self)
-			try values.encodeIfPresent(name, forKey: "name")
-			try values.encodeIfPresent(isMasked, forKey: "masked")
-			try values.encodeIfPresent(iconType, forKey: "iconType")
-			try values.encodeIfPresent(iconAsset, forKey: "iconAsset")
-		}
-	}
+	public var id: String
+	public var attributes: Attributes?
+	public var links: ResourceLinks?
 
 	public enum `Type`: String, Codable, CaseIterable {
 		case buildIcons
 	}
 
-	public init(id: String, links: ResourceLinks? = nil, attributes: Attributes? = nil, type: `Type`) {
-		self.id = id
-		self.links = links
-		self.attributes = attributes
+	public struct Attributes: Codable {
+		public var iconAsset: ImageAsset?
+		public var iconType: IconAssetType?
+		public var isMasked: Bool?
+		public var name: String?
+
+		public init(iconAsset: ImageAsset? = nil, iconType: IconAssetType? = nil, isMasked: Bool? = nil, name: String? = nil) {
+			self.iconAsset = iconAsset
+			self.iconType = iconType
+			self.isMasked = isMasked
+			self.name = name
+		}
+
+		public init(from decoder: Decoder) throws {
+			let values = try decoder.container(keyedBy: StringCodingKey.self)
+			self.iconAsset = try values.decodeIfPresent(ImageAsset.self, forKey: "iconAsset")
+			self.iconType = try values.decodeIfPresent(IconAssetType.self, forKey: "iconType")
+			self.isMasked = try values.decodeIfPresent(Bool.self, forKey: "masked")
+			self.name = try values.decodeIfPresent(String.self, forKey: "name")
+		}
+
+		public func encode(to encoder: Encoder) throws {
+			var values = encoder.container(keyedBy: StringCodingKey.self)
+			try values.encodeIfPresent(iconAsset, forKey: "iconAsset")
+			try values.encodeIfPresent(iconType, forKey: "iconType")
+			try values.encodeIfPresent(isMasked, forKey: "masked")
+			try values.encodeIfPresent(name, forKey: "name")
+		}
+	}
+
+	public init(type: `Type`, id: String, attributes: Attributes? = nil, links: ResourceLinks? = nil) {
 		self.type = type
+		self.id = id
+		self.attributes = attributes
+		self.links = links
 	}
 
 	public init(from decoder: Decoder) throws {
 		let values = try decoder.container(keyedBy: StringCodingKey.self)
-		self.id = try values.decode(String.self, forKey: "id")
-		self.links = try values.decodeIfPresent(ResourceLinks.self, forKey: "links")
-		self.attributes = try values.decodeIfPresent(Attributes.self, forKey: "attributes")
 		self.type = try values.decode(`Type`.self, forKey: "type")
+		self.id = try values.decode(String.self, forKey: "id")
+		self.attributes = try values.decodeIfPresent(Attributes.self, forKey: "attributes")
+		self.links = try values.decodeIfPresent(ResourceLinks.self, forKey: "links")
 	}
 
 	public func encode(to encoder: Encoder) throws {
 		var values = encoder.container(keyedBy: StringCodingKey.self)
-		try values.encode(id, forKey: "id")
-		try values.encodeIfPresent(links, forKey: "links")
-		try values.encodeIfPresent(attributes, forKey: "attributes")
 		try values.encode(type, forKey: "type")
+		try values.encode(id, forKey: "id")
+		try values.encodeIfPresent(attributes, forKey: "attributes")
+		try values.encodeIfPresent(links, forKey: "links")
 	}
 }

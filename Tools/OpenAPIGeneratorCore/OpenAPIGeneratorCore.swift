@@ -100,9 +100,10 @@ public enum OpenAPIGeneratorCore {
     // MARK: - Internals
     
     private static func patchSpecJSON(_ jsonData: Data, writingTo specURL: URL) throws -> SpecPatcher.Result {
-        var root = try JSONDecoder().decode(JSONValue.self, from: jsonData)
+        var parser = JSONParser(bytes: [UInt8](jsonData))
+        var root = try parser.parse()
         let upstreamResult = try SpecPatcher.patch(&root)
-        let outData = try JSONEncoder().encode(root)
+        let outData = try root.toJSONData(prettyPrinted: false)
         try outData.write(to: specURL, options: [.atomic])
         return upstreamResult
     }

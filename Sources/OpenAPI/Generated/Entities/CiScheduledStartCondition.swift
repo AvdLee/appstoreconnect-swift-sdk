@@ -8,11 +8,17 @@ public struct CiScheduledStartCondition: Codable {
 	public var schedule: Schedule?
 
 	public struct Schedule: Codable {
-		public var days: [Day]?
-		public var minute: Int?
-		public var hour: Int?
 		public var frequency: Frequency?
+		public var days: [Day]?
+		public var hour: Int?
+		public var minute: Int?
 		public var timezone: String?
+
+		public enum Frequency: String, Codable, CaseIterable {
+			case weekly = "WEEKLY"
+			case daily = "DAILY"
+			case hourly = "HOURLY"
+		}
 
 		public enum Day: String, Codable, CaseIterable {
 			case sunday = "SUNDAY"
@@ -24,35 +30,29 @@ public struct CiScheduledStartCondition: Codable {
 			case saturday = "SATURDAY"
 		}
 
-		public enum Frequency: String, Codable, CaseIterable {
-			case weekly = "WEEKLY"
-			case daily = "DAILY"
-			case hourly = "HOURLY"
-		}
-
-		public init(days: [Day]? = nil, minute: Int? = nil, hour: Int? = nil, frequency: Frequency? = nil, timezone: String? = nil) {
-			self.days = days
-			self.minute = minute
-			self.hour = hour
+		public init(frequency: Frequency? = nil, days: [Day]? = nil, hour: Int? = nil, minute: Int? = nil, timezone: String? = nil) {
 			self.frequency = frequency
+			self.days = days
+			self.hour = hour
+			self.minute = minute
 			self.timezone = timezone
 		}
 
 		public init(from decoder: Decoder) throws {
 			let values = try decoder.container(keyedBy: StringCodingKey.self)
-			self.days = try values.decodeIfPresent([Day].self, forKey: "days")
-			self.minute = try values.decodeIfPresent(Int.self, forKey: "minute")
-			self.hour = try values.decodeIfPresent(Int.self, forKey: "hour")
 			self.frequency = try values.decodeIfPresent(Frequency.self, forKey: "frequency")
+			self.days = try values.decodeIfPresent([Day].self, forKey: "days")
+			self.hour = try values.decodeIfPresent(Int.self, forKey: "hour")
+			self.minute = try values.decodeIfPresent(Int.self, forKey: "minute")
 			self.timezone = try values.decodeIfPresent(String.self, forKey: "timezone")
 		}
 
 		public func encode(to encoder: Encoder) throws {
 			var values = encoder.container(keyedBy: StringCodingKey.self)
-			try values.encodeIfPresent(days, forKey: "days")
-			try values.encodeIfPresent(minute, forKey: "minute")
-			try values.encodeIfPresent(hour, forKey: "hour")
 			try values.encodeIfPresent(frequency, forKey: "frequency")
+			try values.encodeIfPresent(days, forKey: "days")
+			try values.encodeIfPresent(hour, forKey: "hour")
+			try values.encodeIfPresent(minute, forKey: "minute")
 			try values.encodeIfPresent(timezone, forKey: "timezone")
 		}
 	}

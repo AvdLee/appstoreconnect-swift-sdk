@@ -4,65 +4,65 @@
 import Foundation
 
 public struct BuildBundleFileSize: Codable, Identifiable {
-	public var id: String
-	public var links: ResourceLinks?
-	public var attributes: Attributes?
 	public var type: `Type`
-
-	public struct Attributes: Codable {
-		public var installBytes: Int?
-		public var downloadBytes: Int?
-		public var osVersion: String?
-		public var deviceModel: String?
-
-		public init(installBytes: Int? = nil, downloadBytes: Int? = nil, osVersion: String? = nil, deviceModel: String? = nil) {
-			self.installBytes = installBytes
-			self.downloadBytes = downloadBytes
-			self.osVersion = osVersion
-			self.deviceModel = deviceModel
-		}
-
-		public init(from decoder: Decoder) throws {
-			let values = try decoder.container(keyedBy: StringCodingKey.self)
-			self.installBytes = try values.decodeIfPresent(Int.self, forKey: "installBytes")
-			self.downloadBytes = try values.decodeIfPresent(Int.self, forKey: "downloadBytes")
-			self.osVersion = try values.decodeIfPresent(String.self, forKey: "osVersion")
-			self.deviceModel = try values.decodeIfPresent(String.self, forKey: "deviceModel")
-		}
-
-		public func encode(to encoder: Encoder) throws {
-			var values = encoder.container(keyedBy: StringCodingKey.self)
-			try values.encodeIfPresent(installBytes, forKey: "installBytes")
-			try values.encodeIfPresent(downloadBytes, forKey: "downloadBytes")
-			try values.encodeIfPresent(osVersion, forKey: "osVersion")
-			try values.encodeIfPresent(deviceModel, forKey: "deviceModel")
-		}
-	}
+	public var id: String
+	public var attributes: Attributes?
+	public var links: ResourceLinks?
 
 	public enum `Type`: String, Codable, CaseIterable {
 		case buildBundleFileSizes
 	}
 
-	public init(id: String, links: ResourceLinks? = nil, attributes: Attributes? = nil, type: `Type`) {
-		self.id = id
-		self.links = links
-		self.attributes = attributes
+	public struct Attributes: Codable {
+		public var deviceModel: String?
+		public var osVersion: String?
+		public var downloadBytes: Int?
+		public var installBytes: Int?
+
+		public init(deviceModel: String? = nil, osVersion: String? = nil, downloadBytes: Int? = nil, installBytes: Int? = nil) {
+			self.deviceModel = deviceModel
+			self.osVersion = osVersion
+			self.downloadBytes = downloadBytes
+			self.installBytes = installBytes
+		}
+
+		public init(from decoder: Decoder) throws {
+			let values = try decoder.container(keyedBy: StringCodingKey.self)
+			self.deviceModel = try values.decodeIfPresent(String.self, forKey: "deviceModel")
+			self.osVersion = try values.decodeIfPresent(String.self, forKey: "osVersion")
+			self.downloadBytes = try values.decodeIfPresent(Int.self, forKey: "downloadBytes")
+			self.installBytes = try values.decodeIfPresent(Int.self, forKey: "installBytes")
+		}
+
+		public func encode(to encoder: Encoder) throws {
+			var values = encoder.container(keyedBy: StringCodingKey.self)
+			try values.encodeIfPresent(deviceModel, forKey: "deviceModel")
+			try values.encodeIfPresent(osVersion, forKey: "osVersion")
+			try values.encodeIfPresent(downloadBytes, forKey: "downloadBytes")
+			try values.encodeIfPresent(installBytes, forKey: "installBytes")
+		}
+	}
+
+	public init(type: `Type`, id: String, attributes: Attributes? = nil, links: ResourceLinks? = nil) {
 		self.type = type
+		self.id = id
+		self.attributes = attributes
+		self.links = links
 	}
 
 	public init(from decoder: Decoder) throws {
 		let values = try decoder.container(keyedBy: StringCodingKey.self)
-		self.id = try values.decode(String.self, forKey: "id")
-		self.links = try values.decodeIfPresent(ResourceLinks.self, forKey: "links")
-		self.attributes = try values.decodeIfPresent(Attributes.self, forKey: "attributes")
 		self.type = try values.decode(`Type`.self, forKey: "type")
+		self.id = try values.decode(String.self, forKey: "id")
+		self.attributes = try values.decodeIfPresent(Attributes.self, forKey: "attributes")
+		self.links = try values.decodeIfPresent(ResourceLinks.self, forKey: "links")
 	}
 
 	public func encode(to encoder: Encoder) throws {
 		var values = encoder.container(keyedBy: StringCodingKey.self)
-		try values.encode(id, forKey: "id")
-		try values.encodeIfPresent(links, forKey: "links")
-		try values.encodeIfPresent(attributes, forKey: "attributes")
 		try values.encode(type, forKey: "type")
+		try values.encode(id, forKey: "id")
+		try values.encodeIfPresent(attributes, forKey: "attributes")
+		try values.encodeIfPresent(links, forKey: "links")
 	}
 }

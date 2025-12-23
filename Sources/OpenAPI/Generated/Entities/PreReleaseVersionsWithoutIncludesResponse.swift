@@ -5,26 +5,26 @@ import Foundation
 
 public struct PreReleaseVersionsWithoutIncludesResponse: Codable {
 	public var data: [PrereleaseVersion]
-	public var meta: PagingInformation?
 	public var links: PagedDocumentLinks
+	public var meta: PagingInformation?
 
-	public init(data: [PrereleaseVersion], meta: PagingInformation? = nil, links: PagedDocumentLinks) {
+	public init(data: [PrereleaseVersion], links: PagedDocumentLinks, meta: PagingInformation? = nil) {
 		self.data = data
-		self.meta = meta
 		self.links = links
+		self.meta = meta
 	}
 
 	public init(from decoder: Decoder) throws {
 		let values = try decoder.container(keyedBy: StringCodingKey.self)
 		self.data = try values.decode([PrereleaseVersion].self, forKey: "data")
-		self.meta = try values.decodeIfPresent(PagingInformation.self, forKey: "meta")
 		self.links = try values.decode(PagedDocumentLinks.self, forKey: "links")
+		self.meta = try values.decodeIfPresent(PagingInformation.self, forKey: "meta")
 	}
 
 	public func encode(to encoder: Encoder) throws {
 		var values = encoder.container(keyedBy: StringCodingKey.self)
 		try values.encode(data, forKey: "data")
-		try values.encodeIfPresent(meta, forKey: "meta")
 		try values.encode(links, forKey: "links")
+		try values.encodeIfPresent(meta, forKey: "meta")
 	}
 }

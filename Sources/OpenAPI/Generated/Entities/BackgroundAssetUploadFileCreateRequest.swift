@@ -7,43 +7,43 @@ public struct BackgroundAssetUploadFileCreateRequest: Codable {
 	public var data: Data
 
 	public struct Data: Codable {
-		public var attributes: Attributes
 		public var type: `Type`
+		public var attributes: Attributes
 		public var relationships: Relationships
+
+		public enum `Type`: String, Codable, CaseIterable {
+			case backgroundAssetUploadFiles
+		}
 
 		public struct Attributes: Codable {
 			public var assetType: AssetType
-			public var fileSize: Int64
 			public var fileName: String
+			public var fileSize: Int64
 
 			public enum AssetType: String, Codable, CaseIterable {
 				case asset = "ASSET"
 				case manifest = "MANIFEST"
 			}
 
-			public init(assetType: AssetType, fileSize: Int64, fileName: String) {
+			public init(assetType: AssetType, fileName: String, fileSize: Int64) {
 				self.assetType = assetType
-				self.fileSize = fileSize
 				self.fileName = fileName
+				self.fileSize = fileSize
 			}
 
 			public init(from decoder: Decoder) throws {
 				let values = try decoder.container(keyedBy: StringCodingKey.self)
 				self.assetType = try values.decode(AssetType.self, forKey: "assetType")
-				self.fileSize = try values.decode(Int64.self, forKey: "fileSize")
 				self.fileName = try values.decode(String.self, forKey: "fileName")
+				self.fileSize = try values.decode(Int64.self, forKey: "fileSize")
 			}
 
 			public func encode(to encoder: Encoder) throws {
 				var values = encoder.container(keyedBy: StringCodingKey.self)
 				try values.encode(assetType, forKey: "assetType")
-				try values.encode(fileSize, forKey: "fileSize")
 				try values.encode(fileName, forKey: "fileName")
+				try values.encode(fileSize, forKey: "fileSize")
 			}
-		}
-
-		public enum `Type`: String, Codable, CaseIterable {
-			case backgroundAssetUploadFiles
 		}
 
 		public struct Relationships: Codable {
@@ -53,28 +53,28 @@ public struct BackgroundAssetUploadFileCreateRequest: Codable {
 				public var data: Data
 
 				public struct Data: Codable, Identifiable {
-					public var id: String
 					public var type: `Type`
+					public var id: String
 
 					public enum `Type`: String, Codable, CaseIterable {
 						case backgroundAssetVersions
 					}
 
-					public init(id: String, type: `Type`) {
-						self.id = id
+					public init(type: `Type`, id: String) {
 						self.type = type
+						self.id = id
 					}
 
 					public init(from decoder: Decoder) throws {
 						let values = try decoder.container(keyedBy: StringCodingKey.self)
-						self.id = try values.decode(String.self, forKey: "id")
 						self.type = try values.decode(`Type`.self, forKey: "type")
+						self.id = try values.decode(String.self, forKey: "id")
 					}
 
 					public func encode(to encoder: Encoder) throws {
 						var values = encoder.container(keyedBy: StringCodingKey.self)
-						try values.encode(id, forKey: "id")
 						try values.encode(type, forKey: "type")
+						try values.encode(id, forKey: "id")
 					}
 				}
 
@@ -108,23 +108,23 @@ public struct BackgroundAssetUploadFileCreateRequest: Codable {
 			}
 		}
 
-		public init(attributes: Attributes, type: `Type`, relationships: Relationships) {
-			self.attributes = attributes
+		public init(type: `Type`, attributes: Attributes, relationships: Relationships) {
 			self.type = type
+			self.attributes = attributes
 			self.relationships = relationships
 		}
 
 		public init(from decoder: Decoder) throws {
 			let values = try decoder.container(keyedBy: StringCodingKey.self)
-			self.attributes = try values.decode(Attributes.self, forKey: "attributes")
 			self.type = try values.decode(`Type`.self, forKey: "type")
+			self.attributes = try values.decode(Attributes.self, forKey: "attributes")
 			self.relationships = try values.decode(Relationships.self, forKey: "relationships")
 		}
 
 		public func encode(to encoder: Encoder) throws {
 			var values = encoder.container(keyedBy: StringCodingKey.self)
-			try values.encode(attributes, forKey: "attributes")
 			try values.encode(type, forKey: "type")
+			try values.encode(attributes, forKey: "attributes")
 			try values.encode(relationships, forKey: "relationships")
 		}
 	}

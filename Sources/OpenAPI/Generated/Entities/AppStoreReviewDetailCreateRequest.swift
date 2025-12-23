@@ -7,58 +7,58 @@ public struct AppStoreReviewDetailCreateRequest: Codable {
 	public var data: Data
 
 	public struct Data: Codable {
-		public var attributes: Attributes?
 		public var type: `Type`
+		public var attributes: Attributes?
 		public var relationships: Relationships
 
-		public struct Attributes: Codable {
-			public var demoAccountName: String?
-			public var notes: String?
-			public var contactFirstName: String?
-			public var demoAccountPassword: String?
-			public var contactEmail: String?
-			public var contactLastName: String?
-			public var isDemoAccountRequired: Bool?
-			public var contactPhone: String?
+		public enum `Type`: String, Codable, CaseIterable {
+			case appStoreReviewDetails
+		}
 
-			public init(demoAccountName: String? = nil, notes: String? = nil, contactFirstName: String? = nil, demoAccountPassword: String? = nil, contactEmail: String? = nil, contactLastName: String? = nil, isDemoAccountRequired: Bool? = nil, contactPhone: String? = nil) {
-				self.demoAccountName = demoAccountName
-				self.notes = notes
+		public struct Attributes: Codable {
+			public var contactFirstName: String?
+			public var contactLastName: String?
+			public var contactPhone: String?
+			public var contactEmail: String?
+			public var demoAccountName: String?
+			public var demoAccountPassword: String?
+			public var isDemoAccountRequired: Bool?
+			public var notes: String?
+
+			public init(contactFirstName: String? = nil, contactLastName: String? = nil, contactPhone: String? = nil, contactEmail: String? = nil, demoAccountName: String? = nil, demoAccountPassword: String? = nil, isDemoAccountRequired: Bool? = nil, notes: String? = nil) {
 				self.contactFirstName = contactFirstName
-				self.demoAccountPassword = demoAccountPassword
-				self.contactEmail = contactEmail
 				self.contactLastName = contactLastName
-				self.isDemoAccountRequired = isDemoAccountRequired
 				self.contactPhone = contactPhone
+				self.contactEmail = contactEmail
+				self.demoAccountName = demoAccountName
+				self.demoAccountPassword = demoAccountPassword
+				self.isDemoAccountRequired = isDemoAccountRequired
+				self.notes = notes
 			}
 
 			public init(from decoder: Decoder) throws {
 				let values = try decoder.container(keyedBy: StringCodingKey.self)
-				self.demoAccountName = try values.decodeIfPresent(String.self, forKey: "demoAccountName")
-				self.notes = try values.decodeIfPresent(String.self, forKey: "notes")
 				self.contactFirstName = try values.decodeIfPresent(String.self, forKey: "contactFirstName")
-				self.demoAccountPassword = try values.decodeIfPresent(String.self, forKey: "demoAccountPassword")
-				self.contactEmail = try values.decodeIfPresent(String.self, forKey: "contactEmail")
 				self.contactLastName = try values.decodeIfPresent(String.self, forKey: "contactLastName")
-				self.isDemoAccountRequired = try values.decodeIfPresent(Bool.self, forKey: "demoAccountRequired")
 				self.contactPhone = try values.decodeIfPresent(String.self, forKey: "contactPhone")
+				self.contactEmail = try values.decodeIfPresent(String.self, forKey: "contactEmail")
+				self.demoAccountName = try values.decodeIfPresent(String.self, forKey: "demoAccountName")
+				self.demoAccountPassword = try values.decodeIfPresent(String.self, forKey: "demoAccountPassword")
+				self.isDemoAccountRequired = try values.decodeIfPresent(Bool.self, forKey: "demoAccountRequired")
+				self.notes = try values.decodeIfPresent(String.self, forKey: "notes")
 			}
 
 			public func encode(to encoder: Encoder) throws {
 				var values = encoder.container(keyedBy: StringCodingKey.self)
-				try values.encodeIfPresent(demoAccountName, forKey: "demoAccountName")
-				try values.encodeIfPresent(notes, forKey: "notes")
 				try values.encodeIfPresent(contactFirstName, forKey: "contactFirstName")
-				try values.encodeIfPresent(demoAccountPassword, forKey: "demoAccountPassword")
-				try values.encodeIfPresent(contactEmail, forKey: "contactEmail")
 				try values.encodeIfPresent(contactLastName, forKey: "contactLastName")
-				try values.encodeIfPresent(isDemoAccountRequired, forKey: "demoAccountRequired")
 				try values.encodeIfPresent(contactPhone, forKey: "contactPhone")
+				try values.encodeIfPresent(contactEmail, forKey: "contactEmail")
+				try values.encodeIfPresent(demoAccountName, forKey: "demoAccountName")
+				try values.encodeIfPresent(demoAccountPassword, forKey: "demoAccountPassword")
+				try values.encodeIfPresent(isDemoAccountRequired, forKey: "demoAccountRequired")
+				try values.encodeIfPresent(notes, forKey: "notes")
 			}
-		}
-
-		public enum `Type`: String, Codable, CaseIterable {
-			case appStoreReviewDetails
 		}
 
 		public struct Relationships: Codable {
@@ -68,28 +68,28 @@ public struct AppStoreReviewDetailCreateRequest: Codable {
 				public var data: Data
 
 				public struct Data: Codable, Identifiable {
-					public var id: String
 					public var type: `Type`
+					public var id: String
 
 					public enum `Type`: String, Codable, CaseIterable {
 						case appStoreVersions
 					}
 
-					public init(id: String, type: `Type`) {
-						self.id = id
+					public init(type: `Type`, id: String) {
 						self.type = type
+						self.id = id
 					}
 
 					public init(from decoder: Decoder) throws {
 						let values = try decoder.container(keyedBy: StringCodingKey.self)
-						self.id = try values.decode(String.self, forKey: "id")
 						self.type = try values.decode(`Type`.self, forKey: "type")
+						self.id = try values.decode(String.self, forKey: "id")
 					}
 
 					public func encode(to encoder: Encoder) throws {
 						var values = encoder.container(keyedBy: StringCodingKey.self)
-						try values.encode(id, forKey: "id")
 						try values.encode(type, forKey: "type")
+						try values.encode(id, forKey: "id")
 					}
 				}
 
@@ -123,23 +123,23 @@ public struct AppStoreReviewDetailCreateRequest: Codable {
 			}
 		}
 
-		public init(attributes: Attributes? = nil, type: `Type`, relationships: Relationships) {
-			self.attributes = attributes
+		public init(type: `Type`, attributes: Attributes? = nil, relationships: Relationships) {
 			self.type = type
+			self.attributes = attributes
 			self.relationships = relationships
 		}
 
 		public init(from decoder: Decoder) throws {
 			let values = try decoder.container(keyedBy: StringCodingKey.self)
-			self.attributes = try values.decodeIfPresent(Attributes.self, forKey: "attributes")
 			self.type = try values.decode(`Type`.self, forKey: "type")
+			self.attributes = try values.decodeIfPresent(Attributes.self, forKey: "attributes")
 			self.relationships = try values.decode(Relationships.self, forKey: "relationships")
 		}
 
 		public func encode(to encoder: Encoder) throws {
 			var values = encoder.container(keyedBy: StringCodingKey.self)
-			try values.encodeIfPresent(attributes, forKey: "attributes")
 			try values.encode(type, forKey: "type")
+			try values.encodeIfPresent(attributes, forKey: "attributes")
 			try values.encode(relationships, forKey: "relationships")
 		}
 	}

@@ -7,8 +7,8 @@ public struct BetaAppLocalizationUpdateRequest: Codable {
 	public var data: Data
 
 	public struct Data: Codable, Identifiable {
-		public var id: String
 		public var type: `Type`
+		public var id: String
 		public var attributes: Attributes?
 
 		public enum `Type`: String, Codable, CaseIterable {
@@ -16,56 +16,56 @@ public struct BetaAppLocalizationUpdateRequest: Codable {
 		}
 
 		public struct Attributes: Codable {
-			public var tvOsPrivacyPolicy: String?
+			public var feedbackEmail: String?
 			public var marketingURL: String?
 			public var privacyPolicyURL: String?
+			public var tvOsPrivacyPolicy: String?
 			public var description: String?
-			public var feedbackEmail: String?
 
-			public init(tvOsPrivacyPolicy: String? = nil, marketingURL: String? = nil, privacyPolicyURL: String? = nil, description: String? = nil, feedbackEmail: String? = nil) {
-				self.tvOsPrivacyPolicy = tvOsPrivacyPolicy
+			public init(feedbackEmail: String? = nil, marketingURL: String? = nil, privacyPolicyURL: String? = nil, tvOsPrivacyPolicy: String? = nil, description: String? = nil) {
+				self.feedbackEmail = feedbackEmail
 				self.marketingURL = marketingURL
 				self.privacyPolicyURL = privacyPolicyURL
+				self.tvOsPrivacyPolicy = tvOsPrivacyPolicy
 				self.description = description
-				self.feedbackEmail = feedbackEmail
 			}
 
 			public init(from decoder: Decoder) throws {
 				let values = try decoder.container(keyedBy: StringCodingKey.self)
-				self.tvOsPrivacyPolicy = try values.decodeIfPresent(String.self, forKey: "tvOsPrivacyPolicy")
+				self.feedbackEmail = try values.decodeIfPresent(String.self, forKey: "feedbackEmail")
 				self.marketingURL = try values.decodeIfPresent(String.self, forKey: "marketingUrl")
 				self.privacyPolicyURL = try values.decodeIfPresent(String.self, forKey: "privacyPolicyUrl")
+				self.tvOsPrivacyPolicy = try values.decodeIfPresent(String.self, forKey: "tvOsPrivacyPolicy")
 				self.description = try values.decodeIfPresent(String.self, forKey: "description")
-				self.feedbackEmail = try values.decodeIfPresent(String.self, forKey: "feedbackEmail")
 			}
 
 			public func encode(to encoder: Encoder) throws {
 				var values = encoder.container(keyedBy: StringCodingKey.self)
-				try values.encodeIfPresent(tvOsPrivacyPolicy, forKey: "tvOsPrivacyPolicy")
+				try values.encodeIfPresent(feedbackEmail, forKey: "feedbackEmail")
 				try values.encodeIfPresent(marketingURL, forKey: "marketingUrl")
 				try values.encodeIfPresent(privacyPolicyURL, forKey: "privacyPolicyUrl")
+				try values.encodeIfPresent(tvOsPrivacyPolicy, forKey: "tvOsPrivacyPolicy")
 				try values.encodeIfPresent(description, forKey: "description")
-				try values.encodeIfPresent(feedbackEmail, forKey: "feedbackEmail")
 			}
 		}
 
-		public init(id: String, type: `Type`, attributes: Attributes? = nil) {
-			self.id = id
+		public init(type: `Type`, id: String, attributes: Attributes? = nil) {
 			self.type = type
+			self.id = id
 			self.attributes = attributes
 		}
 
 		public init(from decoder: Decoder) throws {
 			let values = try decoder.container(keyedBy: StringCodingKey.self)
-			self.id = try values.decode(String.self, forKey: "id")
 			self.type = try values.decode(`Type`.self, forKey: "type")
+			self.id = try values.decode(String.self, forKey: "id")
 			self.attributes = try values.decodeIfPresent(Attributes.self, forKey: "attributes")
 		}
 
 		public func encode(to encoder: Encoder) throws {
 			var values = encoder.container(keyedBy: StringCodingKey.self)
-			try values.encode(id, forKey: "id")
 			try values.encode(type, forKey: "type")
+			try values.encode(id, forKey: "id")
 			try values.encodeIfPresent(attributes, forKey: "attributes")
 		}
 	}

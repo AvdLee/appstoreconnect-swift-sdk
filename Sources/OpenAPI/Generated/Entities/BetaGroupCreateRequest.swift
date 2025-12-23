@@ -7,131 +7,87 @@ public struct BetaGroupCreateRequest: Codable {
 	public var data: Data
 
 	public struct Data: Codable {
-		public var attributes: Attributes
 		public var type: `Type`
+		public var attributes: Attributes
 		public var relationships: Relationships
-
-		public struct Attributes: Codable {
-			public var isPublicLinkEnabled: Bool?
-			public var isFeedbackEnabled: Bool?
-			public var name: String
-			public var isInternalGroup: Bool?
-			public var hasAccessToAllBuilds: Bool?
-			public var isPublicLinkLimitEnabled: Bool?
-			public var publicLinkLimit: Int?
-
-			public init(isPublicLinkEnabled: Bool? = nil, isFeedbackEnabled: Bool? = nil, name: String, isInternalGroup: Bool? = nil, hasAccessToAllBuilds: Bool? = nil, isPublicLinkLimitEnabled: Bool? = nil, publicLinkLimit: Int? = nil) {
-				self.isPublicLinkEnabled = isPublicLinkEnabled
-				self.isFeedbackEnabled = isFeedbackEnabled
-				self.name = name
-				self.isInternalGroup = isInternalGroup
-				self.hasAccessToAllBuilds = hasAccessToAllBuilds
-				self.isPublicLinkLimitEnabled = isPublicLinkLimitEnabled
-				self.publicLinkLimit = publicLinkLimit
-			}
-
-			public init(from decoder: Decoder) throws {
-				let values = try decoder.container(keyedBy: StringCodingKey.self)
-				self.isPublicLinkEnabled = try values.decodeIfPresent(Bool.self, forKey: "publicLinkEnabled")
-				self.isFeedbackEnabled = try values.decodeIfPresent(Bool.self, forKey: "feedbackEnabled")
-				self.name = try values.decode(String.self, forKey: "name")
-				self.isInternalGroup = try values.decodeIfPresent(Bool.self, forKey: "isInternalGroup")
-				self.hasAccessToAllBuilds = try values.decodeIfPresent(Bool.self, forKey: "hasAccessToAllBuilds")
-				self.isPublicLinkLimitEnabled = try values.decodeIfPresent(Bool.self, forKey: "publicLinkLimitEnabled")
-				self.publicLinkLimit = try values.decodeIfPresent(Int.self, forKey: "publicLinkLimit")
-			}
-
-			public func encode(to encoder: Encoder) throws {
-				var values = encoder.container(keyedBy: StringCodingKey.self)
-				try values.encodeIfPresent(isPublicLinkEnabled, forKey: "publicLinkEnabled")
-				try values.encodeIfPresent(isFeedbackEnabled, forKey: "feedbackEnabled")
-				try values.encode(name, forKey: "name")
-				try values.encodeIfPresent(isInternalGroup, forKey: "isInternalGroup")
-				try values.encodeIfPresent(hasAccessToAllBuilds, forKey: "hasAccessToAllBuilds")
-				try values.encodeIfPresent(isPublicLinkLimitEnabled, forKey: "publicLinkLimitEnabled")
-				try values.encodeIfPresent(publicLinkLimit, forKey: "publicLinkLimit")
-			}
-		}
 
 		public enum `Type`: String, Codable, CaseIterable {
 			case betaGroups
 		}
 
-		public struct Relationships: Codable {
-			public var builds: Builds?
-			public var app: App
-			public var betaTesters: BetaTesters?
+		public struct Attributes: Codable {
+			public var name: String
+			public var isInternalGroup: Bool?
+			public var hasAccessToAllBuilds: Bool?
+			public var isPublicLinkEnabled: Bool?
+			public var isPublicLinkLimitEnabled: Bool?
+			public var publicLinkLimit: Int?
+			public var isFeedbackEnabled: Bool?
 
-			public struct Builds: Codable {
-				public var data: [Datum]?
-
-				public struct Datum: Codable, Identifiable {
-					public var id: String
-					public var type: `Type`
-
-					public enum `Type`: String, Codable, CaseIterable {
-						case builds
-					}
-
-					public init(id: String, type: `Type`) {
-						self.id = id
-						self.type = type
-					}
-
-					public init(from decoder: Decoder) throws {
-						let values = try decoder.container(keyedBy: StringCodingKey.self)
-						self.id = try values.decode(String.self, forKey: "id")
-						self.type = try values.decode(`Type`.self, forKey: "type")
-					}
-
-					public func encode(to encoder: Encoder) throws {
-						var values = encoder.container(keyedBy: StringCodingKey.self)
-						try values.encode(id, forKey: "id")
-						try values.encode(type, forKey: "type")
-					}
-				}
-
-				public init(data: [Datum]? = nil) {
-					self.data = data
-				}
-
-				public init(from decoder: Decoder) throws {
-					let values = try decoder.container(keyedBy: StringCodingKey.self)
-					self.data = try values.decodeIfPresent([Datum].self, forKey: "data")
-				}
-
-				public func encode(to encoder: Encoder) throws {
-					var values = encoder.container(keyedBy: StringCodingKey.self)
-					try values.encodeIfPresent(data, forKey: "data")
-				}
+			public init(name: String, isInternalGroup: Bool? = nil, hasAccessToAllBuilds: Bool? = nil, isPublicLinkEnabled: Bool? = nil, isPublicLinkLimitEnabled: Bool? = nil, publicLinkLimit: Int? = nil, isFeedbackEnabled: Bool? = nil) {
+				self.name = name
+				self.isInternalGroup = isInternalGroup
+				self.hasAccessToAllBuilds = hasAccessToAllBuilds
+				self.isPublicLinkEnabled = isPublicLinkEnabled
+				self.isPublicLinkLimitEnabled = isPublicLinkLimitEnabled
+				self.publicLinkLimit = publicLinkLimit
+				self.isFeedbackEnabled = isFeedbackEnabled
 			}
+
+			public init(from decoder: Decoder) throws {
+				let values = try decoder.container(keyedBy: StringCodingKey.self)
+				self.name = try values.decode(String.self, forKey: "name")
+				self.isInternalGroup = try values.decodeIfPresent(Bool.self, forKey: "isInternalGroup")
+				self.hasAccessToAllBuilds = try values.decodeIfPresent(Bool.self, forKey: "hasAccessToAllBuilds")
+				self.isPublicLinkEnabled = try values.decodeIfPresent(Bool.self, forKey: "publicLinkEnabled")
+				self.isPublicLinkLimitEnabled = try values.decodeIfPresent(Bool.self, forKey: "publicLinkLimitEnabled")
+				self.publicLinkLimit = try values.decodeIfPresent(Int.self, forKey: "publicLinkLimit")
+				self.isFeedbackEnabled = try values.decodeIfPresent(Bool.self, forKey: "feedbackEnabled")
+			}
+
+			public func encode(to encoder: Encoder) throws {
+				var values = encoder.container(keyedBy: StringCodingKey.self)
+				try values.encode(name, forKey: "name")
+				try values.encodeIfPresent(isInternalGroup, forKey: "isInternalGroup")
+				try values.encodeIfPresent(hasAccessToAllBuilds, forKey: "hasAccessToAllBuilds")
+				try values.encodeIfPresent(isPublicLinkEnabled, forKey: "publicLinkEnabled")
+				try values.encodeIfPresent(isPublicLinkLimitEnabled, forKey: "publicLinkLimitEnabled")
+				try values.encodeIfPresent(publicLinkLimit, forKey: "publicLinkLimit")
+				try values.encodeIfPresent(isFeedbackEnabled, forKey: "feedbackEnabled")
+			}
+		}
+
+		public struct Relationships: Codable {
+			public var app: App
+			public var builds: Builds?
+			public var betaTesters: BetaTesters?
 
 			public struct App: Codable {
 				public var data: Data
 
 				public struct Data: Codable, Identifiable {
-					public var id: String
 					public var type: `Type`
+					public var id: String
 
 					public enum `Type`: String, Codable, CaseIterable {
 						case apps
 					}
 
-					public init(id: String, type: `Type`) {
-						self.id = id
+					public init(type: `Type`, id: String) {
 						self.type = type
+						self.id = id
 					}
 
 					public init(from decoder: Decoder) throws {
 						let values = try decoder.container(keyedBy: StringCodingKey.self)
-						self.id = try values.decode(String.self, forKey: "id")
 						self.type = try values.decode(`Type`.self, forKey: "type")
+						self.id = try values.decode(String.self, forKey: "id")
 					}
 
 					public func encode(to encoder: Encoder) throws {
 						var values = encoder.container(keyedBy: StringCodingKey.self)
-						try values.encode(id, forKey: "id")
 						try values.encode(type, forKey: "type")
+						try values.encode(id, forKey: "id")
 					}
 				}
 
@@ -150,32 +106,32 @@ public struct BetaGroupCreateRequest: Codable {
 				}
 			}
 
-			public struct BetaTesters: Codable {
+			public struct Builds: Codable {
 				public var data: [Datum]?
 
 				public struct Datum: Codable, Identifiable {
-					public var id: String
 					public var type: `Type`
+					public var id: String
 
 					public enum `Type`: String, Codable, CaseIterable {
-						case betaTesters
+						case builds
 					}
 
-					public init(id: String, type: `Type`) {
-						self.id = id
+					public init(type: `Type`, id: String) {
 						self.type = type
+						self.id = id
 					}
 
 					public init(from decoder: Decoder) throws {
 						let values = try decoder.container(keyedBy: StringCodingKey.self)
-						self.id = try values.decode(String.self, forKey: "id")
 						self.type = try values.decode(`Type`.self, forKey: "type")
+						self.id = try values.decode(String.self, forKey: "id")
 					}
 
 					public func encode(to encoder: Encoder) throws {
 						var values = encoder.container(keyedBy: StringCodingKey.self)
-						try values.encode(id, forKey: "id")
 						try values.encode(type, forKey: "type")
+						try values.encode(id, forKey: "id")
 					}
 				}
 
@@ -194,44 +150,88 @@ public struct BetaGroupCreateRequest: Codable {
 				}
 			}
 
-			public init(builds: Builds? = nil, app: App, betaTesters: BetaTesters? = nil) {
-				self.builds = builds
+			public struct BetaTesters: Codable {
+				public var data: [Datum]?
+
+				public struct Datum: Codable, Identifiable {
+					public var type: `Type`
+					public var id: String
+
+					public enum `Type`: String, Codable, CaseIterable {
+						case betaTesters
+					}
+
+					public init(type: `Type`, id: String) {
+						self.type = type
+						self.id = id
+					}
+
+					public init(from decoder: Decoder) throws {
+						let values = try decoder.container(keyedBy: StringCodingKey.self)
+						self.type = try values.decode(`Type`.self, forKey: "type")
+						self.id = try values.decode(String.self, forKey: "id")
+					}
+
+					public func encode(to encoder: Encoder) throws {
+						var values = encoder.container(keyedBy: StringCodingKey.self)
+						try values.encode(type, forKey: "type")
+						try values.encode(id, forKey: "id")
+					}
+				}
+
+				public init(data: [Datum]? = nil) {
+					self.data = data
+				}
+
+				public init(from decoder: Decoder) throws {
+					let values = try decoder.container(keyedBy: StringCodingKey.self)
+					self.data = try values.decodeIfPresent([Datum].self, forKey: "data")
+				}
+
+				public func encode(to encoder: Encoder) throws {
+					var values = encoder.container(keyedBy: StringCodingKey.self)
+					try values.encodeIfPresent(data, forKey: "data")
+				}
+			}
+
+			public init(app: App, builds: Builds? = nil, betaTesters: BetaTesters? = nil) {
 				self.app = app
+				self.builds = builds
 				self.betaTesters = betaTesters
 			}
 
 			public init(from decoder: Decoder) throws {
 				let values = try decoder.container(keyedBy: StringCodingKey.self)
-				self.builds = try values.decodeIfPresent(Builds.self, forKey: "builds")
 				self.app = try values.decode(App.self, forKey: "app")
+				self.builds = try values.decodeIfPresent(Builds.self, forKey: "builds")
 				self.betaTesters = try values.decodeIfPresent(BetaTesters.self, forKey: "betaTesters")
 			}
 
 			public func encode(to encoder: Encoder) throws {
 				var values = encoder.container(keyedBy: StringCodingKey.self)
-				try values.encodeIfPresent(builds, forKey: "builds")
 				try values.encode(app, forKey: "app")
+				try values.encodeIfPresent(builds, forKey: "builds")
 				try values.encodeIfPresent(betaTesters, forKey: "betaTesters")
 			}
 		}
 
-		public init(attributes: Attributes, type: `Type`, relationships: Relationships) {
-			self.attributes = attributes
+		public init(type: `Type`, attributes: Attributes, relationships: Relationships) {
 			self.type = type
+			self.attributes = attributes
 			self.relationships = relationships
 		}
 
 		public init(from decoder: Decoder) throws {
 			let values = try decoder.container(keyedBy: StringCodingKey.self)
-			self.attributes = try values.decode(Attributes.self, forKey: "attributes")
 			self.type = try values.decode(`Type`.self, forKey: "type")
+			self.attributes = try values.decode(Attributes.self, forKey: "attributes")
 			self.relationships = try values.decode(Relationships.self, forKey: "relationships")
 		}
 
 		public func encode(to encoder: Encoder) throws {
 			var values = encoder.container(keyedBy: StringCodingKey.self)
-			try values.encode(attributes, forKey: "attributes")
 			try values.encode(type, forKey: "type")
+			try values.encode(attributes, forKey: "attributes")
 			try values.encode(relationships, forKey: "relationships")
 		}
 	}

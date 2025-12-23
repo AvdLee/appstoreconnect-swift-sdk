@@ -4,8 +4,8 @@
 import Foundation
 
 public struct ErrorLinks: Codable {
-	public var associated: Associated?
 	public var about: String?
+	public var associated: Associated?
 
 	public enum Associated: Codable {
 		case string(String)
@@ -74,20 +74,20 @@ public struct ErrorLinks: Codable {
 		}
 	}
 
-	public init(associated: Associated? = nil, about: String? = nil) {
-		self.associated = associated
+	public init(about: String? = nil, associated: Associated? = nil) {
 		self.about = about
+		self.associated = associated
 	}
 
 	public init(from decoder: Decoder) throws {
 		let values = try decoder.container(keyedBy: StringCodingKey.self)
-		self.associated = try values.decodeIfPresent(Associated.self, forKey: "associated")
 		self.about = try values.decodeIfPresent(String.self, forKey: "about")
+		self.associated = try values.decodeIfPresent(Associated.self, forKey: "associated")
 	}
 
 	public func encode(to encoder: Encoder) throws {
 		var values = encoder.container(keyedBy: StringCodingKey.self)
-		try values.encodeIfPresent(associated, forKey: "associated")
 		try values.encodeIfPresent(about, forKey: "about")
+		try values.encodeIfPresent(associated, forKey: "associated")
 	}
 }

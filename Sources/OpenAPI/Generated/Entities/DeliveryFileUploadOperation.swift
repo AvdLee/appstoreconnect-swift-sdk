@@ -4,47 +4,47 @@
 import Foundation
 
 public struct DeliveryFileUploadOperation: Codable {
-	public var requestHeaders: [HTTPHeader]?
-	public var offset: Int64?
-	public var url: String?
-	public var expiration: Date?
-	public var length: Int64?
 	public var method: String?
-	public var entityTag: String?
+	public var url: String?
+	public var length: Int64?
+	public var offset: Int64?
+	public var requestHeaders: [HTTPHeader]?
+	public var expiration: Date?
 	public var partNumber: Int64?
+	public var entityTag: String?
 
-	public init(requestHeaders: [HTTPHeader]? = nil, offset: Int64? = nil, url: String? = nil, expiration: Date? = nil, length: Int64? = nil, method: String? = nil, entityTag: String? = nil, partNumber: Int64? = nil) {
-		self.requestHeaders = requestHeaders
-		self.offset = offset
-		self.url = url
-		self.expiration = expiration
-		self.length = length
+	public init(method: String? = nil, url: String? = nil, length: Int64? = nil, offset: Int64? = nil, requestHeaders: [HTTPHeader]? = nil, expiration: Date? = nil, partNumber: Int64? = nil, entityTag: String? = nil) {
 		self.method = method
-		self.entityTag = entityTag
+		self.url = url
+		self.length = length
+		self.offset = offset
+		self.requestHeaders = requestHeaders
+		self.expiration = expiration
 		self.partNumber = partNumber
+		self.entityTag = entityTag
 	}
 
 	public init(from decoder: Decoder) throws {
 		let values = try decoder.container(keyedBy: StringCodingKey.self)
-		self.requestHeaders = try values.decodeIfPresent([HTTPHeader].self, forKey: "requestHeaders")
-		self.offset = try values.decodeIfPresent(Int64.self, forKey: "offset")
-		self.url = try values.decodeIfPresent(String.self, forKey: "url")
-		self.expiration = try values.decodeIfPresent(Date.self, forKey: "expiration")
-		self.length = try values.decodeIfPresent(Int64.self, forKey: "length")
 		self.method = try values.decodeIfPresent(String.self, forKey: "method")
-		self.entityTag = try values.decodeIfPresent(String.self, forKey: "entityTag")
+		self.url = try values.decodeIfPresent(String.self, forKey: "url")
+		self.length = try values.decodeIfPresent(Int64.self, forKey: "length")
+		self.offset = try values.decodeIfPresent(Int64.self, forKey: "offset")
+		self.requestHeaders = try values.decodeIfPresent([HTTPHeader].self, forKey: "requestHeaders")
+		self.expiration = try values.decodeIfPresent(Date.self, forKey: "expiration")
 		self.partNumber = try values.decodeIfPresent(Int64.self, forKey: "partNumber")
+		self.entityTag = try values.decodeIfPresent(String.self, forKey: "entityTag")
 	}
 
 	public func encode(to encoder: Encoder) throws {
 		var values = encoder.container(keyedBy: StringCodingKey.self)
-		try values.encodeIfPresent(requestHeaders, forKey: "requestHeaders")
-		try values.encodeIfPresent(offset, forKey: "offset")
-		try values.encodeIfPresent(url, forKey: "url")
-		try values.encodeIfPresent(expiration, forKey: "expiration")
-		try values.encodeIfPresent(length, forKey: "length")
 		try values.encodeIfPresent(method, forKey: "method")
-		try values.encodeIfPresent(entityTag, forKey: "entityTag")
+		try values.encodeIfPresent(url, forKey: "url")
+		try values.encodeIfPresent(length, forKey: "length")
+		try values.encodeIfPresent(offset, forKey: "offset")
+		try values.encodeIfPresent(requestHeaders, forKey: "requestHeaders")
+		try values.encodeIfPresent(expiration, forKey: "expiration")
 		try values.encodeIfPresent(partNumber, forKey: "partNumber")
+		try values.encodeIfPresent(entityTag, forKey: "entityTag")
 	}
 }

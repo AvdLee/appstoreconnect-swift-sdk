@@ -7,17 +7,21 @@ public struct SubscriptionCreateRequest: Codable {
 	public var data: Data
 
 	public struct Data: Codable {
-		public var attributes: Attributes
 		public var type: `Type`
+		public var attributes: Attributes
 		public var relationships: Relationships
 
+		public enum `Type`: String, Codable, CaseIterable {
+			case subscriptions
+		}
+
 		public struct Attributes: Codable {
-			public var reviewNote: String?
-			public var isFamilySharable: Bool?
-			public var productID: String
-			public var groupLevel: Int?
-			public var subscriptionPeriod: SubscriptionPeriod?
 			public var name: String
+			public var productID: String
+			public var isFamilySharable: Bool?
+			public var subscriptionPeriod: SubscriptionPeriod?
+			public var reviewNote: String?
+			public var groupLevel: Int?
 
 			public enum SubscriptionPeriod: String, Codable, CaseIterable {
 				case oneWeek = "ONE_WEEK"
@@ -28,38 +32,34 @@ public struct SubscriptionCreateRequest: Codable {
 				case oneYear = "ONE_YEAR"
 			}
 
-			public init(reviewNote: String? = nil, isFamilySharable: Bool? = nil, productID: String, groupLevel: Int? = nil, subscriptionPeriod: SubscriptionPeriod? = nil, name: String) {
-				self.reviewNote = reviewNote
-				self.isFamilySharable = isFamilySharable
-				self.productID = productID
-				self.groupLevel = groupLevel
-				self.subscriptionPeriod = subscriptionPeriod
+			public init(name: String, productID: String, isFamilySharable: Bool? = nil, subscriptionPeriod: SubscriptionPeriod? = nil, reviewNote: String? = nil, groupLevel: Int? = nil) {
 				self.name = name
+				self.productID = productID
+				self.isFamilySharable = isFamilySharable
+				self.subscriptionPeriod = subscriptionPeriod
+				self.reviewNote = reviewNote
+				self.groupLevel = groupLevel
 			}
 
 			public init(from decoder: Decoder) throws {
 				let values = try decoder.container(keyedBy: StringCodingKey.self)
-				self.reviewNote = try values.decodeIfPresent(String.self, forKey: "reviewNote")
-				self.isFamilySharable = try values.decodeIfPresent(Bool.self, forKey: "familySharable")
-				self.productID = try values.decode(String.self, forKey: "productId")
-				self.groupLevel = try values.decodeIfPresent(Int.self, forKey: "groupLevel")
-				self.subscriptionPeriod = try values.decodeIfPresent(SubscriptionPeriod.self, forKey: "subscriptionPeriod")
 				self.name = try values.decode(String.self, forKey: "name")
+				self.productID = try values.decode(String.self, forKey: "productId")
+				self.isFamilySharable = try values.decodeIfPresent(Bool.self, forKey: "familySharable")
+				self.subscriptionPeriod = try values.decodeIfPresent(SubscriptionPeriod.self, forKey: "subscriptionPeriod")
+				self.reviewNote = try values.decodeIfPresent(String.self, forKey: "reviewNote")
+				self.groupLevel = try values.decodeIfPresent(Int.self, forKey: "groupLevel")
 			}
 
 			public func encode(to encoder: Encoder) throws {
 				var values = encoder.container(keyedBy: StringCodingKey.self)
-				try values.encodeIfPresent(reviewNote, forKey: "reviewNote")
-				try values.encodeIfPresent(isFamilySharable, forKey: "familySharable")
-				try values.encode(productID, forKey: "productId")
-				try values.encodeIfPresent(groupLevel, forKey: "groupLevel")
-				try values.encodeIfPresent(subscriptionPeriod, forKey: "subscriptionPeriod")
 				try values.encode(name, forKey: "name")
+				try values.encode(productID, forKey: "productId")
+				try values.encodeIfPresent(isFamilySharable, forKey: "familySharable")
+				try values.encodeIfPresent(subscriptionPeriod, forKey: "subscriptionPeriod")
+				try values.encodeIfPresent(reviewNote, forKey: "reviewNote")
+				try values.encodeIfPresent(groupLevel, forKey: "groupLevel")
 			}
-		}
-
-		public enum `Type`: String, Codable, CaseIterable {
-			case subscriptions
 		}
 
 		public struct Relationships: Codable {
@@ -69,28 +69,28 @@ public struct SubscriptionCreateRequest: Codable {
 				public var data: Data
 
 				public struct Data: Codable, Identifiable {
-					public var id: String
 					public var type: `Type`
+					public var id: String
 
 					public enum `Type`: String, Codable, CaseIterable {
 						case subscriptionGroups
 					}
 
-					public init(id: String, type: `Type`) {
-						self.id = id
+					public init(type: `Type`, id: String) {
 						self.type = type
+						self.id = id
 					}
 
 					public init(from decoder: Decoder) throws {
 						let values = try decoder.container(keyedBy: StringCodingKey.self)
-						self.id = try values.decode(String.self, forKey: "id")
 						self.type = try values.decode(`Type`.self, forKey: "type")
+						self.id = try values.decode(String.self, forKey: "id")
 					}
 
 					public func encode(to encoder: Encoder) throws {
 						var values = encoder.container(keyedBy: StringCodingKey.self)
-						try values.encode(id, forKey: "id")
 						try values.encode(type, forKey: "type")
+						try values.encode(id, forKey: "id")
 					}
 				}
 
@@ -124,23 +124,23 @@ public struct SubscriptionCreateRequest: Codable {
 			}
 		}
 
-		public init(attributes: Attributes, type: `Type`, relationships: Relationships) {
-			self.attributes = attributes
+		public init(type: `Type`, attributes: Attributes, relationships: Relationships) {
 			self.type = type
+			self.attributes = attributes
 			self.relationships = relationships
 		}
 
 		public init(from decoder: Decoder) throws {
 			let values = try decoder.container(keyedBy: StringCodingKey.self)
-			self.attributes = try values.decode(Attributes.self, forKey: "attributes")
 			self.type = try values.decode(`Type`.self, forKey: "type")
+			self.attributes = try values.decode(Attributes.self, forKey: "attributes")
 			self.relationships = try values.decode(Relationships.self, forKey: "relationships")
 		}
 
 		public func encode(to encoder: Encoder) throws {
 			var values = encoder.container(keyedBy: StringCodingKey.self)
-			try values.encode(attributes, forKey: "attributes")
 			try values.encode(type, forKey: "type")
+			try values.encode(attributes, forKey: "attributes")
 			try values.encode(relationships, forKey: "relationships")
 		}
 	}

@@ -4,107 +4,107 @@
 import Foundation
 
 public struct CiTestResult: Codable, Identifiable {
-	public var id: String
-	public var links: ResourceLinks?
-	public var attributes: Attributes?
 	public var type: `Type`
-
-	public struct Attributes: Codable {
-		public var fileSource: FileLocation?
-		public var name: String?
-		public var destinationTestResults: [DestinationTestResult]?
-		public var message: String?
-		public var className: String?
-		public var status: CiTestStatus?
-
-		public struct DestinationTestResult: Codable {
-			public var uuid: String?
-			public var duration: Double?
-			public var status: CiTestStatus?
-			public var osVersion: String?
-			public var deviceName: String?
-
-			public init(uuid: String? = nil, duration: Double? = nil, status: CiTestStatus? = nil, osVersion: String? = nil, deviceName: String? = nil) {
-				self.uuid = uuid
-				self.duration = duration
-				self.status = status
-				self.osVersion = osVersion
-				self.deviceName = deviceName
-			}
-
-			public init(from decoder: Decoder) throws {
-				let values = try decoder.container(keyedBy: StringCodingKey.self)
-				self.uuid = try values.decodeIfPresent(String.self, forKey: "uuid")
-				self.duration = try values.decodeIfPresent(Double.self, forKey: "duration")
-				self.status = try values.decodeIfPresent(CiTestStatus.self, forKey: "status")
-				self.osVersion = try values.decodeIfPresent(String.self, forKey: "osVersion")
-				self.deviceName = try values.decodeIfPresent(String.self, forKey: "deviceName")
-			}
-
-			public func encode(to encoder: Encoder) throws {
-				var values = encoder.container(keyedBy: StringCodingKey.self)
-				try values.encodeIfPresent(uuid, forKey: "uuid")
-				try values.encodeIfPresent(duration, forKey: "duration")
-				try values.encodeIfPresent(status, forKey: "status")
-				try values.encodeIfPresent(osVersion, forKey: "osVersion")
-				try values.encodeIfPresent(deviceName, forKey: "deviceName")
-			}
-		}
-
-		public init(fileSource: FileLocation? = nil, name: String? = nil, destinationTestResults: [DestinationTestResult]? = nil, message: String? = nil, className: String? = nil, status: CiTestStatus? = nil) {
-			self.fileSource = fileSource
-			self.name = name
-			self.destinationTestResults = destinationTestResults
-			self.message = message
-			self.className = className
-			self.status = status
-		}
-
-		public init(from decoder: Decoder) throws {
-			let values = try decoder.container(keyedBy: StringCodingKey.self)
-			self.fileSource = try values.decodeIfPresent(FileLocation.self, forKey: "fileSource")
-			self.name = try values.decodeIfPresent(String.self, forKey: "name")
-			self.destinationTestResults = try values.decodeIfPresent([DestinationTestResult].self, forKey: "destinationTestResults")
-			self.message = try values.decodeIfPresent(String.self, forKey: "message")
-			self.className = try values.decodeIfPresent(String.self, forKey: "className")
-			self.status = try values.decodeIfPresent(CiTestStatus.self, forKey: "status")
-		}
-
-		public func encode(to encoder: Encoder) throws {
-			var values = encoder.container(keyedBy: StringCodingKey.self)
-			try values.encodeIfPresent(fileSource, forKey: "fileSource")
-			try values.encodeIfPresent(name, forKey: "name")
-			try values.encodeIfPresent(destinationTestResults, forKey: "destinationTestResults")
-			try values.encodeIfPresent(message, forKey: "message")
-			try values.encodeIfPresent(className, forKey: "className")
-			try values.encodeIfPresent(status, forKey: "status")
-		}
-	}
+	public var id: String
+	public var attributes: Attributes?
+	public var links: ResourceLinks?
 
 	public enum `Type`: String, Codable, CaseIterable {
 		case ciTestResults
 	}
 
-	public init(id: String, links: ResourceLinks? = nil, attributes: Attributes? = nil, type: `Type`) {
-		self.id = id
-		self.links = links
-		self.attributes = attributes
+	public struct Attributes: Codable {
+		public var className: String?
+		public var name: String?
+		public var status: CiTestStatus?
+		public var fileSource: FileLocation?
+		public var message: String?
+		public var destinationTestResults: [DestinationTestResult]?
+
+		public struct DestinationTestResult: Codable {
+			public var uuid: String?
+			public var deviceName: String?
+			public var osVersion: String?
+			public var status: CiTestStatus?
+			public var duration: Double?
+
+			public init(uuid: String? = nil, deviceName: String? = nil, osVersion: String? = nil, status: CiTestStatus? = nil, duration: Double? = nil) {
+				self.uuid = uuid
+				self.deviceName = deviceName
+				self.osVersion = osVersion
+				self.status = status
+				self.duration = duration
+			}
+
+			public init(from decoder: Decoder) throws {
+				let values = try decoder.container(keyedBy: StringCodingKey.self)
+				self.uuid = try values.decodeIfPresent(String.self, forKey: "uuid")
+				self.deviceName = try values.decodeIfPresent(String.self, forKey: "deviceName")
+				self.osVersion = try values.decodeIfPresent(String.self, forKey: "osVersion")
+				self.status = try values.decodeIfPresent(CiTestStatus.self, forKey: "status")
+				self.duration = try values.decodeIfPresent(Double.self, forKey: "duration")
+			}
+
+			public func encode(to encoder: Encoder) throws {
+				var values = encoder.container(keyedBy: StringCodingKey.self)
+				try values.encodeIfPresent(uuid, forKey: "uuid")
+				try values.encodeIfPresent(deviceName, forKey: "deviceName")
+				try values.encodeIfPresent(osVersion, forKey: "osVersion")
+				try values.encodeIfPresent(status, forKey: "status")
+				try values.encodeIfPresent(duration, forKey: "duration")
+			}
+		}
+
+		public init(className: String? = nil, name: String? = nil, status: CiTestStatus? = nil, fileSource: FileLocation? = nil, message: String? = nil, destinationTestResults: [DestinationTestResult]? = nil) {
+			self.className = className
+			self.name = name
+			self.status = status
+			self.fileSource = fileSource
+			self.message = message
+			self.destinationTestResults = destinationTestResults
+		}
+
+		public init(from decoder: Decoder) throws {
+			let values = try decoder.container(keyedBy: StringCodingKey.self)
+			self.className = try values.decodeIfPresent(String.self, forKey: "className")
+			self.name = try values.decodeIfPresent(String.self, forKey: "name")
+			self.status = try values.decodeIfPresent(CiTestStatus.self, forKey: "status")
+			self.fileSource = try values.decodeIfPresent(FileLocation.self, forKey: "fileSource")
+			self.message = try values.decodeIfPresent(String.self, forKey: "message")
+			self.destinationTestResults = try values.decodeIfPresent([DestinationTestResult].self, forKey: "destinationTestResults")
+		}
+
+		public func encode(to encoder: Encoder) throws {
+			var values = encoder.container(keyedBy: StringCodingKey.self)
+			try values.encodeIfPresent(className, forKey: "className")
+			try values.encodeIfPresent(name, forKey: "name")
+			try values.encodeIfPresent(status, forKey: "status")
+			try values.encodeIfPresent(fileSource, forKey: "fileSource")
+			try values.encodeIfPresent(message, forKey: "message")
+			try values.encodeIfPresent(destinationTestResults, forKey: "destinationTestResults")
+		}
+	}
+
+	public init(type: `Type`, id: String, attributes: Attributes? = nil, links: ResourceLinks? = nil) {
 		self.type = type
+		self.id = id
+		self.attributes = attributes
+		self.links = links
 	}
 
 	public init(from decoder: Decoder) throws {
 		let values = try decoder.container(keyedBy: StringCodingKey.self)
-		self.id = try values.decode(String.self, forKey: "id")
-		self.links = try values.decodeIfPresent(ResourceLinks.self, forKey: "links")
-		self.attributes = try values.decodeIfPresent(Attributes.self, forKey: "attributes")
 		self.type = try values.decode(`Type`.self, forKey: "type")
+		self.id = try values.decode(String.self, forKey: "id")
+		self.attributes = try values.decodeIfPresent(Attributes.self, forKey: "attributes")
+		self.links = try values.decodeIfPresent(ResourceLinks.self, forKey: "links")
 	}
 
 	public func encode(to encoder: Encoder) throws {
 		var values = encoder.container(keyedBy: StringCodingKey.self)
-		try values.encode(id, forKey: "id")
-		try values.encodeIfPresent(links, forKey: "links")
-		try values.encodeIfPresent(attributes, forKey: "attributes")
 		try values.encode(type, forKey: "type")
+		try values.encode(id, forKey: "id")
+		try values.encodeIfPresent(attributes, forKey: "attributes")
+		try values.encodeIfPresent(links, forKey: "links")
 	}
 }
