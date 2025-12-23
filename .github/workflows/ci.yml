@@ -30,7 +30,7 @@ jobs:
           - "platform=macOS"
           - "platform=macOS,variant=Mac Catalyst"
           - "platform=iOS Simulator,name=iPhone 17 Pro,OS=26.1"
-          - "platform=tvOS Simulator,name=Apple TV 4K (3rd generation) (at 1080p),OS=26.0"
+          - "platform=tvOS Simulator"
           - "platform=watchOS Simulator,name=Apple Watch Ultra 3 (49mm),OS=26.0"
           - "platform=visionOS Simulator,name=Apple Vision Pro,OS=26.0"
     steps:
