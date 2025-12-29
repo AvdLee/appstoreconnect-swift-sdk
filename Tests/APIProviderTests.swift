@@ -159,4 +159,136 @@ final class APIProviderTests: XCTestCase {
 
         }
     }
+
+    // MARK: - Date Decoding Tests
+
+    private struct DateWrapper: Codable {
+        let date: Date
+    }
+
+    /// Test date format: yyyy-MM-dd'T'HH:mm:ss.SSSXXXXX (with milliseconds and timezone offset)
+    func testDateDecodingWithMillisecondsAndTimezoneOffset() throws {
+        let json = #"{"date": "2024-01-01T23:59:59.123+00:00"}"#
+        let data = json.data(using: .utf8)!
+        let decoded = try APIProvider.jsonDecoder.decode(DateWrapper.self, from: data)
+        XCTAssertNotNil(decoded.date)
+
+        // Verify the date components
+        var calendar = Calendar(identifier: .gregorian)
+        calendar.timeZone = TimeZone(secondsFromGMT: 0)!
+        let components = calendar.dateComponents([.year, .month, .day, .hour, .minute, .second], from: decoded.date)
+        XCTAssertEqual(components.year, 2024)
+        XCTAssertEqual(components.month, 1)
+        XCTAssertEqual(components.day, 1)
+        XCTAssertEqual(components.hour, 23)
+        XCTAssertEqual(components.minute, 59)
+        XCTAssertEqual(components.second, 59)
+    }
+
+    /// Test date format: yyyy-MM-dd'T'HH:mm:ssXXXXX (without milliseconds, with timezone offset)
+    func testDateDecodingWithoutMillisecondsAndTimezoneOffset() throws {
+        let json = #"{"date": "2025-10-01T19:37:15-07:00"}"#
+        let data = json.data(using: .utf8)!
+        let decoded = try APIProvider.jsonDecoder.decode(DateWrapper.self, from: data)
+        XCTAssertNotNil(decoded.date)
+
+        // Verify the date components (converted to UTC: 19:37:15 - (-07:00) = 02:37:15 next day)
+        var calendar = Calendar(identifier: .gregorian)
+        calendar.timeZone = TimeZone(secondsFromGMT: 0)!
+        let components = calendar.dateComponents([.year, .month, .day, .hour, .minute, .second], from: decoded.date)
+        XCTAssertEqual(components.year, 2025)
+        XCTAssertEqual(components.month, 10)
+        XCTAssertEqual(components.day, 2)
+        XCTAssertEqual(components.hour, 2)
+        XCTAssertEqual(components.minute, 37)
+        XCTAssertEqual(components.second, 15)
+    }
+
+    /// Test date format with Z timezone (UTC)
+    func testDateDecodingWithZTimezone() throws {
+        let json = #"{"date": "2025-12-28T23:57:15Z"}"#
+        let data = json.data(using: .utf8)!
+        let decoded = try APIProvider.jsonDecoder.decode(DateWrapper.self, from: data)
+        XCTAssertNotNil(decoded.date)
+
+        var calendar = Calendar(identifier: .gregorian)
+        calendar.timeZone = TimeZone(secondsFromGMT: 0)!
+        let components = calendar.dateComponents([.year, .month, .day, .hour, .minute, .second], from: decoded.date)
+        XCTAssertEqual(components.year, 2025)
+        XCTAssertEqual(components.month, 12)
+        XCTAssertEqual(components.day, 28)
+        XCTAssertEqual(components.hour, 23)
+        XCTAssertEqual(components.minute, 57)
+        XCTAssertEqual(components.second, 15)
+    }
+
+    /// Test date format from customer reviews API: 2025-11-06T06:40:31-08:00
+    func testDateDecodingFromCustomerReviewsAPI() throws {
+        let json = #"{"date": "2025-11-06T06:40:31-08:00"}"#
+        let data = json.data(using: .utf8)!
+        let decoded = try APIProvider.jsonDecoder.decode(DateWrapper.self, from: data)
+        XCTAssertNotNil(decoded.date)
+
+        // Verify the date components (converted to UTC: 06:40:31 + 08:00 = 14:40:31)
+        var calendar = Calendar(identifier: .gregorian)
+        calendar.timeZone = TimeZone(secondsFromGMT: 0)!
+        let components = calendar.dateComponents([.year, .month, .day, .hour, .minute, .second], from: decoded.date)
+        XCTAssertEqual(components.year, 2025)
+        XCTAssertEqual(components.month, 11)
+        XCTAssertEqual(components.day, 6)
+        XCTAssertEqual(components.hour, 14)
+        XCTAssertEqual(components.minute, 40)
+        XCTAssertEqual(components.second, 31)
+    }
+
+    /// Test date format with milliseconds and Z timezone
+    func testDateDecodingWithMillisecondsAndZTimezone() throws {
+        let json = #"{"date": "2024-01-01T12:30:45.678Z"}"#
+        let data = json.data(using: .utf8)!
+        let decoded = try APIProvider.jsonDecoder.decode(DateWrapper.self, from: data)
+        XCTAssertNotNil(decoded.date)
+
+        var calendar = Calendar(identifier: .gregorian)
+        calendar.timeZone = TimeZone(secondsFromGMT: 0)!
+        let components = calendar.dateComponents([.year, .month, .day, .hour, .minute, .second], from: decoded.date)
+        XCTAssertEqual(components.year, 2024)
+        XCTAssertEqual(components.month, 1)
+        XCTAssertEqual(components.day, 1)
+        XCTAssertEqual(components.hour, 12)
+        XCTAssertEqual(components.minute, 30)
+        XCTAssertEqual(components.second, 45)
+    }
+
+    /// Test that invalid date format throws an error
+    func testDateDecodingWithInvalidFormat() {
+        let json = #"{"date": "invalid-date-format"}"#
+        let data = json.data(using: .utf8)!
+
+        XCTAssertThrowsError(try APIProvider.jsonDecoder.decode(DateWrapper.self, from: data)) { error in
+            // Verify it's a decoding error
+            guard case APIProvider.Error.dateDecodingError("invalid-date-format") = error else {
+                XCTFail()
+                return
+            }
+        }
+    }
+
+    /// Test date format with positive timezone offset
+    func testDateDecodingWithPositiveTimezoneOffset() throws {
+        let json = #"{"date": "2025-06-15T10:30:00+05:30"}"#
+        let data = json.data(using: .utf8)!
+        let decoded = try APIProvider.jsonDecoder.decode(DateWrapper.self, from: data)
+        XCTAssertNotNil(decoded.date)
+
+        // Verify the date components (converted to UTC: 10:30:00 - 05:30 = 05:00:00)
+        var calendar = Calendar(identifier: .gregorian)
+        calendar.timeZone = TimeZone(secondsFromGMT: 0)!
+        let components = calendar.dateComponents([.year, .month, .day, .hour, .minute, .second], from: decoded.date)
+        XCTAssertEqual(components.year, 2025)
+        XCTAssertEqual(components.month, 6)
+        XCTAssertEqual(components.day, 15)
+        XCTAssertEqual(components.hour, 5)
+        XCTAssertEqual(components.minute, 0)
+        XCTAssertEqual(components.second, 0)
+    }
 }
