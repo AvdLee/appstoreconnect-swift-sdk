@@ -24,6 +24,7 @@ extension APIEndpoint.V1.AlternativeDistributionPackages {
 			public var limitVersions: Int?
 
 			public enum FieldsAlternativeDistributionPackages: String, Codable, CaseIterable {
+				case sourceFileChecksum
 				case versions
 			}
 

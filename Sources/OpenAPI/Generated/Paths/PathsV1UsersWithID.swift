@@ -48,6 +48,7 @@ extension APIEndpoint.V1.Users {
 				case streamlinedPurchasingEnabled
 				case accessibilityDeclarations
 				case appEncryptionDeclarations
+				case appStoreIcon
 				case ciProduct
 				case betaTesters
 				case betaGroups
@@ -87,6 +88,7 @@ extension APIEndpoint.V1.Users {
 				case betaFeedbackCrashSubmissions
 				case searchKeywords
 				case webhooks
+				case androidToIosAppMappingDetails
 			}
 
 			public enum Include: String, Codable, CaseIterable {

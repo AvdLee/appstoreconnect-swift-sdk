@@ -81,7 +81,7 @@ public struct NominationUpdateRequest: Codable {
 				try values.encodeIfPresent(isSubmitted, forKey: "submitted")
 				try values.encodeIfPresent(isArchived, forKey: "archived")
 				try values.encodeIfPresent(publishStartDate, forKey: "publishStartDate")
-				try values.encodeIfPresent(publishEndDate, forKey: "publishEndDate")
+				try values.encode(publishEndDate, forKey: "publishEndDate")
 				try values.encodeIfPresent(deviceFamilies, forKey: "deviceFamilies")
 				try values.encodeIfPresent(locales, forKey: "locales")
 				try values.encodeIfPresent(supplementalMaterialsUris, forKey: "supplementalMaterialsUris")

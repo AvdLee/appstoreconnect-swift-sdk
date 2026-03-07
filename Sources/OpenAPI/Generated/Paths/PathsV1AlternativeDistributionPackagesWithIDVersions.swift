@@ -59,6 +59,7 @@ extension APIEndpoint.V1.AlternativeDistributionPackages.WithID {
 			}
 
 			public enum FieldsAlternativeDistributionPackages: String, Codable, CaseIterable {
+				case sourceFileChecksum
 				case versions
 			}
 

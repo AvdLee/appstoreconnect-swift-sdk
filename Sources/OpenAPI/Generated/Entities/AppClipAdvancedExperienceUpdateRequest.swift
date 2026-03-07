@@ -190,6 +190,7 @@ public struct AppClipAdvancedExperienceUpdateRequest: Codable {
 					case retailStoreShop = "RETAIL_STORE_SHOP"
 					case services = "SERVICES"
 					case support = "SUPPORT"
+					case payToPark = "PAY_TO_PARK"
 				}
 
 				public enum Relationship: String, Codable, CaseIterable {

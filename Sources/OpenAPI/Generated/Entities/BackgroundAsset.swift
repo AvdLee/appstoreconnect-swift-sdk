@@ -15,22 +15,26 @@ public struct BackgroundAsset: Codable, Identifiable {
 	}
 
 	public struct Attributes: Codable {
+		public var isArchived: Bool?
 		public var assetPackIdentifier: String?
 		public var createdDate: Date?
 
-		public init(assetPackIdentifier: String? = nil, createdDate: Date? = nil) {
+		public init(isArchived: Bool? = nil, assetPackIdentifier: String? = nil, createdDate: Date? = nil) {
+			self.isArchived = isArchived
 			self.assetPackIdentifier = assetPackIdentifier
 			self.createdDate = createdDate
 		}
 
 		public init(from decoder: Decoder) throws {
 			let values = try decoder.container(keyedBy: StringCodingKey.self)
+			self.isArchived = try values.decodeIfPresent(Bool.self, forKey: "archived")
 			self.assetPackIdentifier = try values.decodeIfPresent(String.self, forKey: "assetPackIdentifier")
 			self.createdDate = try values.decodeIfPresent(Date.self, forKey: "createdDate")
 		}
 
 		public func encode(to encoder: Encoder) throws {
 			var values = encoder.container(keyedBy: StringCodingKey.self)
+			try values.encodeIfPresent(isArchived, forKey: "archived")
 			try values.encodeIfPresent(assetPackIdentifier, forKey: "assetPackIdentifier")
 			try values.encodeIfPresent(createdDate, forKey: "createdDate")
 		}

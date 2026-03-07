@@ -35,8 +35,11 @@ public struct GameCenterGroup: Codable, Identifiable {
 	public struct Relationships: Codable {
 		public var gameCenterDetails: GameCenterDetails?
 		public var gameCenterLeaderboards: GameCenterLeaderboards?
+		public var gameCenterLeaderboardsV2: GameCenterLeaderboardsV2?
 		public var gameCenterLeaderboardSets: GameCenterLeaderboardSets?
+		public var gameCenterLeaderboardSetsV2: GameCenterLeaderboardSetsV2?
 		public var gameCenterAchievements: GameCenterAchievements?
+		public var gameCenterAchievementsV2: GameCenterAchievementsV2?
 		public var gameCenterActivities: GameCenterActivities?
 		public var gameCenterChallenges: GameCenterChallenges?
 
@@ -144,6 +147,58 @@ public struct GameCenterGroup: Codable, Identifiable {
 			}
 		}
 
+		public struct GameCenterLeaderboardsV2: Codable {
+			public var links: RelationshipLinks?
+			public var meta: PagingInformation?
+			public var data: [Datum]?
+
+			public struct Datum: Codable, Identifiable {
+				public var type: `Type`
+				public var id: String
+
+				public enum `Type`: String, Codable, CaseIterable {
+					case gameCenterLeaderboards
+				}
+
+				public init(type: `Type`, id: String) {
+					self.type = type
+					self.id = id
+				}
+
+				public init(from decoder: Decoder) throws {
+					let values = try decoder.container(keyedBy: StringCodingKey.self)
+					self.type = try values.decode(`Type`.self, forKey: "type")
+					self.id = try values.decode(String.self, forKey: "id")
+				}
+
+				public func encode(to encoder: Encoder) throws {
+					var values = encoder.container(keyedBy: StringCodingKey.self)
+					try values.encode(type, forKey: "type")
+					try values.encode(id, forKey: "id")
+				}
+			}
+
+			public init(links: RelationshipLinks? = nil, meta: PagingInformation? = nil, data: [Datum]? = nil) {
+				self.links = links
+				self.meta = meta
+				self.data = data
+			}
+
+			public init(from decoder: Decoder) throws {
+				let values = try decoder.container(keyedBy: StringCodingKey.self)
+				self.links = try values.decodeIfPresent(RelationshipLinks.self, forKey: "links")
+				self.meta = try values.decodeIfPresent(PagingInformation.self, forKey: "meta")
+				self.data = try values.decodeIfPresent([Datum].self, forKey: "data")
+			}
+
+			public func encode(to encoder: Encoder) throws {
+				var values = encoder.container(keyedBy: StringCodingKey.self)
+				try values.encodeIfPresent(links, forKey: "links")
+				try values.encodeIfPresent(meta, forKey: "meta")
+				try values.encodeIfPresent(data, forKey: "data")
+			}
+		}
+
 		public struct GameCenterLeaderboardSets: Codable {
 			public var links: RelationshipLinks?
 			public var meta: PagingInformation?
@@ -196,7 +251,111 @@ public struct GameCenterGroup: Codable, Identifiable {
 			}
 		}
 
+		public struct GameCenterLeaderboardSetsV2: Codable {
+			public var links: RelationshipLinks?
+			public var meta: PagingInformation?
+			public var data: [Datum]?
+
+			public struct Datum: Codable, Identifiable {
+				public var type: `Type`
+				public var id: String
+
+				public enum `Type`: String, Codable, CaseIterable {
+					case gameCenterLeaderboardSets
+				}
+
+				public init(type: `Type`, id: String) {
+					self.type = type
+					self.id = id
+				}
+
+				public init(from decoder: Decoder) throws {
+					let values = try decoder.container(keyedBy: StringCodingKey.self)
+					self.type = try values.decode(`Type`.self, forKey: "type")
+					self.id = try values.decode(String.self, forKey: "id")
+				}
+
+				public func encode(to encoder: Encoder) throws {
+					var values = encoder.container(keyedBy: StringCodingKey.self)
+					try values.encode(type, forKey: "type")
+					try values.encode(id, forKey: "id")
+				}
+			}
+
+			public init(links: RelationshipLinks? = nil, meta: PagingInformation? = nil, data: [Datum]? = nil) {
+				self.links = links
+				self.meta = meta
+				self.data = data
+			}
+
+			public init(from decoder: Decoder) throws {
+				let values = try decoder.container(keyedBy: StringCodingKey.self)
+				self.links = try values.decodeIfPresent(RelationshipLinks.self, forKey: "links")
+				self.meta = try values.decodeIfPresent(PagingInformation.self, forKey: "meta")
+				self.data = try values.decodeIfPresent([Datum].self, forKey: "data")
+			}
+
+			public func encode(to encoder: Encoder) throws {
+				var values = encoder.container(keyedBy: StringCodingKey.self)
+				try values.encodeIfPresent(links, forKey: "links")
+				try values.encodeIfPresent(meta, forKey: "meta")
+				try values.encodeIfPresent(data, forKey: "data")
+			}
+		}
+
 		public struct GameCenterAchievements: Codable {
+			public var links: RelationshipLinks?
+			public var meta: PagingInformation?
+			public var data: [Datum]?
+
+			public struct Datum: Codable, Identifiable {
+				public var type: `Type`
+				public var id: String
+
+				public enum `Type`: String, Codable, CaseIterable {
+					case gameCenterAchievements
+				}
+
+				public init(type: `Type`, id: String) {
+					self.type = type
+					self.id = id
+				}
+
+				public init(from decoder: Decoder) throws {
+					let values = try decoder.container(keyedBy: StringCodingKey.self)
+					self.type = try values.decode(`Type`.self, forKey: "type")
+					self.id = try values.decode(String.self, forKey: "id")
+				}
+
+				public func encode(to encoder: Encoder) throws {
+					var values = encoder.container(keyedBy: StringCodingKey.self)
+					try values.encode(type, forKey: "type")
+					try values.encode(id, forKey: "id")
+				}
+			}
+
+			public init(links: RelationshipLinks? = nil, meta: PagingInformation? = nil, data: [Datum]? = nil) {
+				self.links = links
+				self.meta = meta
+				self.data = data
+			}
+
+			public init(from decoder: Decoder) throws {
+				let values = try decoder.container(keyedBy: StringCodingKey.self)
+				self.links = try values.decodeIfPresent(RelationshipLinks.self, forKey: "links")
+				self.meta = try values.decodeIfPresent(PagingInformation.self, forKey: "meta")
+				self.data = try values.decodeIfPresent([Datum].self, forKey: "data")
+			}
+
+			public func encode(to encoder: Encoder) throws {
+				var values = encoder.container(keyedBy: StringCodingKey.self)
+				try values.encodeIfPresent(links, forKey: "links")
+				try values.encodeIfPresent(meta, forKey: "meta")
+				try values.encodeIfPresent(data, forKey: "data")
+			}
+		}
+
+		public struct GameCenterAchievementsV2: Codable {
 			public var links: RelationshipLinks?
 			public var meta: PagingInformation?
 			public var data: [Datum]?
@@ -352,11 +511,14 @@ public struct GameCenterGroup: Codable, Identifiable {
 			}
 		}
 
-		public init(gameCenterDetails: GameCenterDetails? = nil, gameCenterLeaderboards: GameCenterLeaderboards? = nil, gameCenterLeaderboardSets: GameCenterLeaderboardSets? = nil, gameCenterAchievements: GameCenterAchievements? = nil, gameCenterActivities: GameCenterActivities? = nil, gameCenterChallenges: GameCenterChallenges? = nil) {
+		public init(gameCenterDetails: GameCenterDetails? = nil, gameCenterLeaderboards: GameCenterLeaderboards? = nil, gameCenterLeaderboardsV2: GameCenterLeaderboardsV2? = nil, gameCenterLeaderboardSets: GameCenterLeaderboardSets? = nil, gameCenterLeaderboardSetsV2: GameCenterLeaderboardSetsV2? = nil, gameCenterAchievements: GameCenterAchievements? = nil, gameCenterAchievementsV2: GameCenterAchievementsV2? = nil, gameCenterActivities: GameCenterActivities? = nil, gameCenterChallenges: GameCenterChallenges? = nil) {
 			self.gameCenterDetails = gameCenterDetails
 			self.gameCenterLeaderboards = gameCenterLeaderboards
+			self.gameCenterLeaderboardsV2 = gameCenterLeaderboardsV2
 			self.gameCenterLeaderboardSets = gameCenterLeaderboardSets
+			self.gameCenterLeaderboardSetsV2 = gameCenterLeaderboardSetsV2
 			self.gameCenterAchievements = gameCenterAchievements
+			self.gameCenterAchievementsV2 = gameCenterAchievementsV2
 			self.gameCenterActivities = gameCenterActivities
 			self.gameCenterChallenges = gameCenterChallenges
 		}
@@ -365,8 +527,11 @@ public struct GameCenterGroup: Codable, Identifiable {
 			let values = try decoder.container(keyedBy: StringCodingKey.self)
 			self.gameCenterDetails = try values.decodeIfPresent(GameCenterDetails.self, forKey: "gameCenterDetails")
 			self.gameCenterLeaderboards = try values.decodeIfPresent(GameCenterLeaderboards.self, forKey: "gameCenterLeaderboards")
+			self.gameCenterLeaderboardsV2 = try values.decodeIfPresent(GameCenterLeaderboardsV2.self, forKey: "gameCenterLeaderboardsV2")
 			self.gameCenterLeaderboardSets = try values.decodeIfPresent(GameCenterLeaderboardSets.self, forKey: "gameCenterLeaderboardSets")
+			self.gameCenterLeaderboardSetsV2 = try values.decodeIfPresent(GameCenterLeaderboardSetsV2.self, forKey: "gameCenterLeaderboardSetsV2")
 			self.gameCenterAchievements = try values.decodeIfPresent(GameCenterAchievements.self, forKey: "gameCenterAchievements")
+			self.gameCenterAchievementsV2 = try values.decodeIfPresent(GameCenterAchievementsV2.self, forKey: "gameCenterAchievementsV2")
 			self.gameCenterActivities = try values.decodeIfPresent(GameCenterActivities.self, forKey: "gameCenterActivities")
 			self.gameCenterChallenges = try values.decodeIfPresent(GameCenterChallenges.self, forKey: "gameCenterChallenges")
 		}
@@ -375,8 +540,11 @@ public struct GameCenterGroup: Codable, Identifiable {
 			var values = encoder.container(keyedBy: StringCodingKey.self)
 			try values.encodeIfPresent(gameCenterDetails, forKey: "gameCenterDetails")
 			try values.encodeIfPresent(gameCenterLeaderboards, forKey: "gameCenterLeaderboards")
+			try values.encodeIfPresent(gameCenterLeaderboardsV2, forKey: "gameCenterLeaderboardsV2")
 			try values.encodeIfPresent(gameCenterLeaderboardSets, forKey: "gameCenterLeaderboardSets")
+			try values.encodeIfPresent(gameCenterLeaderboardSetsV2, forKey: "gameCenterLeaderboardSetsV2")
 			try values.encodeIfPresent(gameCenterAchievements, forKey: "gameCenterAchievements")
+			try values.encodeIfPresent(gameCenterAchievementsV2, forKey: "gameCenterAchievementsV2")
 			try values.encodeIfPresent(gameCenterActivities, forKey: "gameCenterActivities")
 			try values.encodeIfPresent(gameCenterChallenges, forKey: "gameCenterChallenges")
 		}

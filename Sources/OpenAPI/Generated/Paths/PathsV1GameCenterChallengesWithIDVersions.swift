@@ -47,6 +47,7 @@ extension APIEndpoint.V1.GameCenterChallenges.WithID {
 				case gameCenterGroup
 				case versions
 				case leaderboard
+				case leaderboardV2
 			}
 
 			public enum FieldsGameCenterChallengeLocalizations: String, Codable, CaseIterable {

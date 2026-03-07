@@ -15,6 +15,7 @@ public struct InAppPurchaseV2Response: Codable {
 		case inAppPurchaseContent(InAppPurchaseContent)
 		case inAppPurchaseImage(InAppPurchaseImage)
 		case inAppPurchaseLocalization(InAppPurchaseLocalization)
+		case inAppPurchaseOfferCode(InAppPurchaseOfferCode)
 		case inAppPurchasePricePoint(InAppPurchasePricePoint)
 		case inAppPurchasePriceSchedule(InAppPurchasePriceSchedule)
 		case promotedPurchase(PromotedPurchase)
@@ -34,6 +35,7 @@ public struct InAppPurchaseV2Response: Codable {
 			case "inAppPurchaseContents": self = .inAppPurchaseContent(try container.decode(InAppPurchaseContent.self))
 			case "inAppPurchaseImages": self = .inAppPurchaseImage(try container.decode(InAppPurchaseImage.self))
 			case "inAppPurchaseLocalizations": self = .inAppPurchaseLocalization(try container.decode(InAppPurchaseLocalization.self))
+			case "inAppPurchaseOfferCodes": self = .inAppPurchaseOfferCode(try container.decode(InAppPurchaseOfferCode.self))
 			case "inAppPurchasePricePoints": self = .inAppPurchasePricePoint(try container.decode(InAppPurchasePricePoint.self))
 			case "inAppPurchasePriceSchedules": self = .inAppPurchasePriceSchedule(try container.decode(InAppPurchasePriceSchedule.self))
 			case "promotedPurchases": self = .promotedPurchase(try container.decode(PromotedPurchase.self))
@@ -41,7 +43,7 @@ public struct InAppPurchaseV2Response: Codable {
 			default:
 				throw DecodingError.dataCorruptedError(
 					in: container,
-					debugDescription: "Discriminator value '\(discriminatorValue)' does not match any expected values (inAppPurchaseAppStoreReviewScreenshots, inAppPurchaseAvailabilities, inAppPurchaseContents, inAppPurchaseImages, inAppPurchaseLocalizations, inAppPurchasePricePoints, inAppPurchasePriceSchedules, promotedPurchases)."
+					debugDescription: "Discriminator value '\(discriminatorValue)' does not match any expected values (inAppPurchaseAppStoreReviewScreenshots, inAppPurchaseAvailabilities, inAppPurchaseContents, inAppPurchaseImages, inAppPurchaseLocalizations, inAppPurchaseOfferCodes, inAppPurchasePricePoints, inAppPurchasePriceSchedules, promotedPurchases)."
 				)
 			}
 		}
@@ -54,6 +56,7 @@ public struct InAppPurchaseV2Response: Codable {
 			case .inAppPurchaseContent(let value): try container.encode(value)
 			case .inAppPurchaseImage(let value): try container.encode(value)
 			case .inAppPurchaseLocalization(let value): try container.encode(value)
+			case .inAppPurchaseOfferCode(let value): try container.encode(value)
 			case .inAppPurchasePricePoint(let value): try container.encode(value)
 			case .inAppPurchasePriceSchedule(let value): try container.encode(value)
 			case .promotedPurchase(let value): try container.encode(value)

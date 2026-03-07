@@ -18,6 +18,7 @@ extension APIEndpoint.V1.Apps.WithID {
 		}
 
 		public struct GetParameters {
+			public var filterArchived: [String]?
 			public var filterAssetPackIdentifier: [String]?
 			public var fieldsBackgroundAssets: [FieldsBackgroundAssets]?
 			public var fieldsApps: [FieldsApps]?
@@ -26,6 +27,7 @@ extension APIEndpoint.V1.Apps.WithID {
 			public var include: [Include]?
 
 			public enum FieldsBackgroundAssets: String, Codable, CaseIterable {
+				case archived
 				case assetPackIdentifier
 				case createdDate
 				case app
@@ -50,6 +52,7 @@ extension APIEndpoint.V1.Apps.WithID {
 				case streamlinedPurchasingEnabled
 				case accessibilityDeclarations
 				case appEncryptionDeclarations
+				case appStoreIcon
 				case ciProduct
 				case betaTesters
 				case betaGroups
@@ -89,12 +92,14 @@ extension APIEndpoint.V1.Apps.WithID {
 				case betaFeedbackCrashSubmissions
 				case searchKeywords
 				case webhooks
+				case androidToIosAppMappingDetails
 			}
 
 			public enum FieldsBackgroundAssetVersions: String, Codable, CaseIterable {
 				case createdDate
 				case platforms
 				case state
+				case stateDetails
 				case version
 				case backgroundAsset
 				case internalBetaRelease
@@ -112,7 +117,8 @@ extension APIEndpoint.V1.Apps.WithID {
 				case externalBetaVersion
 			}
 
-			public init(filterAssetPackIdentifier: [String]? = nil, fieldsBackgroundAssets: [FieldsBackgroundAssets]? = nil, fieldsApps: [FieldsApps]? = nil, fieldsBackgroundAssetVersions: [FieldsBackgroundAssetVersions]? = nil, limit: Int? = nil, include: [Include]? = nil) {
+			public init(filterArchived: [String]? = nil, filterAssetPackIdentifier: [String]? = nil, fieldsBackgroundAssets: [FieldsBackgroundAssets]? = nil, fieldsApps: [FieldsApps]? = nil, fieldsBackgroundAssetVersions: [FieldsBackgroundAssetVersions]? = nil, limit: Int? = nil, include: [Include]? = nil) {
+				self.filterArchived = filterArchived
 				self.filterAssetPackIdentifier = filterAssetPackIdentifier
 				self.fieldsBackgroundAssets = fieldsBackgroundAssets
 				self.fieldsApps = fieldsApps
@@ -123,6 +129,7 @@ extension APIEndpoint.V1.Apps.WithID {
 
 			public var asQuery: [(String, String?)] {
 				let encoder = URLQueryEncoder(explode: false)
+				encoder.encode(filterArchived, forKey: "filter[archived]")
 				encoder.encode(filterAssetPackIdentifier, forKey: "filter[assetPackIdentifier]")
 				encoder.encode(fieldsBackgroundAssets, forKey: "fields[backgroundAssets]")
 				encoder.encode(fieldsApps, forKey: "fields[apps]")

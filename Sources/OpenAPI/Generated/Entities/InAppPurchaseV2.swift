@@ -65,6 +65,7 @@ public struct InAppPurchaseV2: Codable, Identifiable {
 		public var iapPriceSchedule: IapPriceSchedule?
 		public var inAppPurchaseAvailability: InAppPurchaseAvailability?
 		public var images: Images?
+		public var offerCodes: OfferCodes?
 
 		public struct InAppPurchaseLocalizations: Codable {
 			public var links: RelationshipLinks?
@@ -462,7 +463,59 @@ public struct InAppPurchaseV2: Codable, Identifiable {
 			}
 		}
 
-		public init(inAppPurchaseLocalizations: InAppPurchaseLocalizations? = nil, pricePoints: PricePoints? = nil, content: Content? = nil, appStoreReviewScreenshot: AppStoreReviewScreenshot? = nil, promotedPurchase: PromotedPurchase? = nil, iapPriceSchedule: IapPriceSchedule? = nil, inAppPurchaseAvailability: InAppPurchaseAvailability? = nil, images: Images? = nil) {
+		public struct OfferCodes: Codable {
+			public var links: RelationshipLinks?
+			public var meta: PagingInformation?
+			public var data: [Datum]?
+
+			public struct Datum: Codable, Identifiable {
+				public var type: `Type`
+				public var id: String
+
+				public enum `Type`: String, Codable, CaseIterable {
+					case inAppPurchaseOfferCodes
+				}
+
+				public init(type: `Type`, id: String) {
+					self.type = type
+					self.id = id
+				}
+
+				public init(from decoder: Decoder) throws {
+					let values = try decoder.container(keyedBy: StringCodingKey.self)
+					self.type = try values.decode(`Type`.self, forKey: "type")
+					self.id = try values.decode(String.self, forKey: "id")
+				}
+
+				public func encode(to encoder: Encoder) throws {
+					var values = encoder.container(keyedBy: StringCodingKey.self)
+					try values.encode(type, forKey: "type")
+					try values.encode(id, forKey: "id")
+				}
+			}
+
+			public init(links: RelationshipLinks? = nil, meta: PagingInformation? = nil, data: [Datum]? = nil) {
+				self.links = links
+				self.meta = meta
+				self.data = data
+			}
+
+			public init(from decoder: Decoder) throws {
+				let values = try decoder.container(keyedBy: StringCodingKey.self)
+				self.links = try values.decodeIfPresent(RelationshipLinks.self, forKey: "links")
+				self.meta = try values.decodeIfPresent(PagingInformation.self, forKey: "meta")
+				self.data = try values.decodeIfPresent([Datum].self, forKey: "data")
+			}
+
+			public func encode(to encoder: Encoder) throws {
+				var values = encoder.container(keyedBy: StringCodingKey.self)
+				try values.encodeIfPresent(links, forKey: "links")
+				try values.encodeIfPresent(meta, forKey: "meta")
+				try values.encodeIfPresent(data, forKey: "data")
+			}
+		}
+
+		public init(inAppPurchaseLocalizations: InAppPurchaseLocalizations? = nil, pricePoints: PricePoints? = nil, content: Content? = nil, appStoreReviewScreenshot: AppStoreReviewScreenshot? = nil, promotedPurchase: PromotedPurchase? = nil, iapPriceSchedule: IapPriceSchedule? = nil, inAppPurchaseAvailability: InAppPurchaseAvailability? = nil, images: Images? = nil, offerCodes: OfferCodes? = nil) {
 			self.inAppPurchaseLocalizations = inAppPurchaseLocalizations
 			self.pricePoints = pricePoints
 			self.content = content
@@ -471,6 +524,7 @@ public struct InAppPurchaseV2: Codable, Identifiable {
 			self.iapPriceSchedule = iapPriceSchedule
 			self.inAppPurchaseAvailability = inAppPurchaseAvailability
 			self.images = images
+			self.offerCodes = offerCodes
 		}
 
 		public init(from decoder: Decoder) throws {
@@ -483,6 +537,7 @@ public struct InAppPurchaseV2: Codable, Identifiable {
 			self.iapPriceSchedule = try values.decodeIfPresent(IapPriceSchedule.self, forKey: "iapPriceSchedule")
 			self.inAppPurchaseAvailability = try values.decodeIfPresent(InAppPurchaseAvailability.self, forKey: "inAppPurchaseAvailability")
 			self.images = try values.decodeIfPresent(Images.self, forKey: "images")
+			self.offerCodes = try values.decodeIfPresent(OfferCodes.self, forKey: "offerCodes")
 		}
 
 		public func encode(to encoder: Encoder) throws {
@@ -495,6 +550,7 @@ public struct InAppPurchaseV2: Codable, Identifiable {
 			try values.encodeIfPresent(iapPriceSchedule, forKey: "iapPriceSchedule")
 			try values.encodeIfPresent(inAppPurchaseAvailability, forKey: "inAppPurchaseAvailability")
 			try values.encodeIfPresent(images, forKey: "images")
+			try values.encodeIfPresent(offerCodes, forKey: "offerCodes")
 		}
 	}
 

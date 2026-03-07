@@ -77,6 +77,7 @@ extension APIEndpoint.V1.Builds {
 				case email
 				case inviteType
 				case state
+				case appDevices
 				case apps
 				case betaGroups
 				case builds
@@ -129,6 +130,7 @@ extension APIEndpoint.V1.Builds {
 				case streamlinedPurchasingEnabled
 				case accessibilityDeclarations
 				case appEncryptionDeclarations
+				case appStoreIcon
 				case ciProduct
 				case betaTesters
 				case betaGroups
@@ -168,6 +170,7 @@ extension APIEndpoint.V1.Builds {
 				case betaFeedbackCrashSubmissions
 				case searchKeywords
 				case webhooks
+				case androidToIosAppMappingDetails
 			}
 
 			public enum FieldsBuildBetaDetails: String, Codable, CaseIterable {

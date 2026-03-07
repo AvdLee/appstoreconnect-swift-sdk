@@ -25,6 +25,7 @@ extension APIEndpoint.V1.BackgroundAssets {
 		}
 
 		public enum FieldsBackgroundAssets: String, Codable, CaseIterable {
+			case archived
 			case assetPackIdentifier
 			case createdDate
 			case app
@@ -39,6 +40,10 @@ extension APIEndpoint.V1.BackgroundAssets {
 			case appStoreVersion
 			case internalBetaVersion
 			case externalBetaVersion
+		}
+
+		public func patch(_ body: AppStoreConnect_Swift_SDK.BackgroundAssetUpdateRequest) -> Request<AppStoreConnect_Swift_SDK.BackgroundAssetResponse> {
+			Request(path: path, method: "PATCH", body: body, id: "backgroundAssets_updateInstance")
 		}
 	}
 }

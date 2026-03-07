@@ -59,6 +59,7 @@ extension APIEndpoint.V1.AppEncryptionDeclarations {
 				case streamlinedPurchasingEnabled
 				case accessibilityDeclarations
 				case appEncryptionDeclarations
+				case appStoreIcon
 				case ciProduct
 				case betaTesters
 				case betaGroups
@@ -98,6 +99,7 @@ extension APIEndpoint.V1.AppEncryptionDeclarations {
 				case betaFeedbackCrashSubmissions
 				case searchKeywords
 				case webhooks
+				case androidToIosAppMappingDetails
 			}
 
 			public enum FieldsAppEncryptionDeclarationDocuments: String, Codable, CaseIterable {

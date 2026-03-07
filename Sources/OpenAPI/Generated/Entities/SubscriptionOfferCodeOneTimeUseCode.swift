@@ -19,12 +19,14 @@ public struct SubscriptionOfferCodeOneTimeUseCode: Codable, Identifiable {
 		public var createdDate: Date?
 		public var expirationDate: String?
 		public var isActive: Bool?
+		public var environment: OfferCodeEnvironment?
 
-		public init(numberOfCodes: Int? = nil, createdDate: Date? = nil, expirationDate: String? = nil, isActive: Bool? = nil) {
+		public init(numberOfCodes: Int? = nil, createdDate: Date? = nil, expirationDate: String? = nil, isActive: Bool? = nil, environment: OfferCodeEnvironment? = nil) {
 			self.numberOfCodes = numberOfCodes
 			self.createdDate = createdDate
 			self.expirationDate = expirationDate
 			self.isActive = isActive
+			self.environment = environment
 		}
 
 		public init(from decoder: Decoder) throws {
@@ -33,6 +35,7 @@ public struct SubscriptionOfferCodeOneTimeUseCode: Codable, Identifiable {
 			self.createdDate = try values.decodeIfPresent(Date.self, forKey: "createdDate")
 			self.expirationDate = try values.decodeIfPresent(String.self, forKey: "expirationDate")
 			self.isActive = try values.decodeIfPresent(Bool.self, forKey: "active")
+			self.environment = try values.decodeIfPresent(OfferCodeEnvironment.self, forKey: "environment")
 		}
 
 		public func encode(to encoder: Encoder) throws {
@@ -41,6 +44,7 @@ public struct SubscriptionOfferCodeOneTimeUseCode: Codable, Identifiable {
 			try values.encodeIfPresent(createdDate, forKey: "createdDate")
 			try values.encodeIfPresent(expirationDate, forKey: "expirationDate")
 			try values.encodeIfPresent(isActive, forKey: "active")
+			try values.encodeIfPresent(environment, forKey: "environment")
 		}
 	}
 

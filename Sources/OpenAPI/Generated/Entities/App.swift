@@ -84,6 +84,7 @@ public struct App: Codable, Identifiable {
 	public struct Relationships: Codable {
 		public var accessibilityDeclarations: AccessibilityDeclarations?
 		public var appEncryptionDeclarations: AppEncryptionDeclarations?
+		public var appStoreIcon: AppStoreIcon?
 		public var ciProduct: CiProduct?
 		public var betaTesters: BetaTesters?
 		public var betaGroups: BetaGroups?
@@ -124,6 +125,7 @@ public struct App: Codable, Identifiable {
 		public var betaFeedbackCrashSubmissions: BetaFeedbackCrashSubmissions?
 		public var searchKeywords: SearchKeywords?
 		public var webhooks: Webhooks?
+		public var androidToIosAppMappingDetails: AndroidToIosAppMappingDetails?
 
 		public struct AccessibilityDeclarations: Codable {
 			public var links: RelationshipLinks?
@@ -191,6 +193,50 @@ public struct App: Codable, Identifiable {
 				var values = encoder.container(keyedBy: StringCodingKey.self)
 				try values.encodeIfPresent(links, forKey: "links")
 				try values.encodeIfPresent(meta, forKey: "meta")
+				try values.encodeIfPresent(data, forKey: "data")
+			}
+		}
+
+		public struct AppStoreIcon: Codable {
+			public var data: Data?
+
+			public struct Data: Codable, Identifiable {
+				public var type: `Type`
+				public var id: String
+
+				public enum `Type`: String, Codable, CaseIterable {
+					case buildIcons
+				}
+
+				public init(type: `Type`, id: String) {
+					self.type = type
+					self.id = id
+				}
+
+				public init(from decoder: Decoder) throws {
+					let values = try decoder.container(keyedBy: StringCodingKey.self)
+					self.type = try values.decode(`Type`.self, forKey: "type")
+					self.id = try values.decode(String.self, forKey: "id")
+				}
+
+				public func encode(to encoder: Encoder) throws {
+					var values = encoder.container(keyedBy: StringCodingKey.self)
+					try values.encode(type, forKey: "type")
+					try values.encode(id, forKey: "id")
+				}
+			}
+
+			public init(data: Data? = nil) {
+				self.data = data
+			}
+
+			public init(from decoder: Decoder) throws {
+				let values = try decoder.container(keyedBy: StringCodingKey.self)
+				self.data = try values.decodeIfPresent(Data.self, forKey: "data")
+			}
+
+			public func encode(to encoder: Encoder) throws {
+				var values = encoder.container(keyedBy: StringCodingKey.self)
 				try values.encodeIfPresent(data, forKey: "data")
 			}
 		}
@@ -1622,9 +1668,62 @@ public struct App: Codable, Identifiable {
 			}
 		}
 
-		public init(accessibilityDeclarations: AccessibilityDeclarations? = nil, appEncryptionDeclarations: AppEncryptionDeclarations? = nil, ciProduct: CiProduct? = nil, betaTesters: BetaTesters? = nil, betaGroups: BetaGroups? = nil, appStoreVersions: AppStoreVersions? = nil, appTags: AppTags? = nil, preReleaseVersions: PreReleaseVersions? = nil, betaAppLocalizations: BetaAppLocalizations? = nil, builds: Builds? = nil, betaLicenseAgreement: BetaLicenseAgreement? = nil, betaAppReviewDetail: BetaAppReviewDetail? = nil, appInfos: AppInfos? = nil, appClips: AppClips? = nil, appPricePoints: AppPricePoints? = nil, endUserLicenseAgreement: EndUserLicenseAgreement? = nil, appPriceSchedule: AppPriceSchedule? = nil, appAvailabilityV2: AppAvailabilityV2? = nil, inAppPurchases: InAppPurchases? = nil, subscriptionGroups: SubscriptionGroups? = nil, gameCenterEnabledVersions: GameCenterEnabledVersions? = nil, perfPowerMetrics: PerfPowerMetrics? = nil, appCustomProductPages: AppCustomProductPages? = nil, inAppPurchasesV2: InAppPurchasesV2? = nil, promotedPurchases: PromotedPurchases? = nil, appEvents: AppEvents? = nil, reviewSubmissions: ReviewSubmissions? = nil, subscriptionGracePeriod: SubscriptionGracePeriod? = nil, customerReviews: CustomerReviews? = nil, customerReviewSummarizations: CustomerReviewSummarizations? = nil, gameCenterDetail: GameCenterDetail? = nil, appStoreVersionExperimentsV2: AppStoreVersionExperimentsV2? = nil, alternativeDistributionKey: AlternativeDistributionKey? = nil, analyticsReportRequests: AnalyticsReportRequests? = nil, marketplaceSearchDetail: MarketplaceSearchDetail? = nil, buildUploads: BuildUploads? = nil, backgroundAssets: BackgroundAssets? = nil, betaFeedbackScreenshotSubmissions: BetaFeedbackScreenshotSubmissions? = nil, betaFeedbackCrashSubmissions: BetaFeedbackCrashSubmissions? = nil, searchKeywords: SearchKeywords? = nil, webhooks: Webhooks? = nil) {
+		public struct AndroidToIosAppMappingDetails: Codable {
+			public var links: RelationshipLinks?
+			public var meta: PagingInformation?
+			public var data: [Datum]?
+
+			public struct Datum: Codable, Identifiable {
+				public var type: `Type`
+				public var id: String
+
+				public enum `Type`: String, Codable, CaseIterable {
+					case androidToIosAppMappingDetails
+				}
+
+				public init(type: `Type`, id: String) {
+					self.type = type
+					self.id = id
+				}
+
+				public init(from decoder: Decoder) throws {
+					let values = try decoder.container(keyedBy: StringCodingKey.self)
+					self.type = try values.decode(`Type`.self, forKey: "type")
+					self.id = try values.decode(String.self, forKey: "id")
+				}
+
+				public func encode(to encoder: Encoder) throws {
+					var values = encoder.container(keyedBy: StringCodingKey.self)
+					try values.encode(type, forKey: "type")
+					try values.encode(id, forKey: "id")
+				}
+			}
+
+			public init(links: RelationshipLinks? = nil, meta: PagingInformation? = nil, data: [Datum]? = nil) {
+				self.links = links
+				self.meta = meta
+				self.data = data
+			}
+
+			public init(from decoder: Decoder) throws {
+				let values = try decoder.container(keyedBy: StringCodingKey.self)
+				self.links = try values.decodeIfPresent(RelationshipLinks.self, forKey: "links")
+				self.meta = try values.decodeIfPresent(PagingInformation.self, forKey: "meta")
+				self.data = try values.decodeIfPresent([Datum].self, forKey: "data")
+			}
+
+			public func encode(to encoder: Encoder) throws {
+				var values = encoder.container(keyedBy: StringCodingKey.self)
+				try values.encodeIfPresent(links, forKey: "links")
+				try values.encodeIfPresent(meta, forKey: "meta")
+				try values.encodeIfPresent(data, forKey: "data")
+			}
+		}
+
+		public init(accessibilityDeclarations: AccessibilityDeclarations? = nil, appEncryptionDeclarations: AppEncryptionDeclarations? = nil, appStoreIcon: AppStoreIcon? = nil, ciProduct: CiProduct? = nil, betaTesters: BetaTesters? = nil, betaGroups: BetaGroups? = nil, appStoreVersions: AppStoreVersions? = nil, appTags: AppTags? = nil, preReleaseVersions: PreReleaseVersions? = nil, betaAppLocalizations: BetaAppLocalizations? = nil, builds: Builds? = nil, betaLicenseAgreement: BetaLicenseAgreement? = nil, betaAppReviewDetail: BetaAppReviewDetail? = nil, appInfos: AppInfos? = nil, appClips: AppClips? = nil, appPricePoints: AppPricePoints? = nil, endUserLicenseAgreement: EndUserLicenseAgreement? = nil, appPriceSchedule: AppPriceSchedule? = nil, appAvailabilityV2: AppAvailabilityV2? = nil, inAppPurchases: InAppPurchases? = nil, subscriptionGroups: SubscriptionGroups? = nil, gameCenterEnabledVersions: GameCenterEnabledVersions? = nil, perfPowerMetrics: PerfPowerMetrics? = nil, appCustomProductPages: AppCustomProductPages? = nil, inAppPurchasesV2: InAppPurchasesV2? = nil, promotedPurchases: PromotedPurchases? = nil, appEvents: AppEvents? = nil, reviewSubmissions: ReviewSubmissions? = nil, subscriptionGracePeriod: SubscriptionGracePeriod? = nil, customerReviews: CustomerReviews? = nil, customerReviewSummarizations: CustomerReviewSummarizations? = nil, gameCenterDetail: GameCenterDetail? = nil, appStoreVersionExperimentsV2: AppStoreVersionExperimentsV2? = nil, alternativeDistributionKey: AlternativeDistributionKey? = nil, analyticsReportRequests: AnalyticsReportRequests? = nil, marketplaceSearchDetail: MarketplaceSearchDetail? = nil, buildUploads: BuildUploads? = nil, backgroundAssets: BackgroundAssets? = nil, betaFeedbackScreenshotSubmissions: BetaFeedbackScreenshotSubmissions? = nil, betaFeedbackCrashSubmissions: BetaFeedbackCrashSubmissions? = nil, searchKeywords: SearchKeywords? = nil, webhooks: Webhooks? = nil, androidToIosAppMappingDetails: AndroidToIosAppMappingDetails? = nil) {
 			self.accessibilityDeclarations = accessibilityDeclarations
 			self.appEncryptionDeclarations = appEncryptionDeclarations
+			self.appStoreIcon = appStoreIcon
 			self.ciProduct = ciProduct
 			self.betaTesters = betaTesters
 			self.betaGroups = betaGroups
@@ -1664,12 +1763,14 @@ public struct App: Codable, Identifiable {
 			self.betaFeedbackCrashSubmissions = betaFeedbackCrashSubmissions
 			self.searchKeywords = searchKeywords
 			self.webhooks = webhooks
+			self.androidToIosAppMappingDetails = androidToIosAppMappingDetails
 		}
 
 		public init(from decoder: Decoder) throws {
 			let values = try decoder.container(keyedBy: StringCodingKey.self)
 			self.accessibilityDeclarations = try values.decodeIfPresent(AccessibilityDeclarations.self, forKey: "accessibilityDeclarations")
 			self.appEncryptionDeclarations = try values.decodeIfPresent(AppEncryptionDeclarations.self, forKey: "appEncryptionDeclarations")
+			self.appStoreIcon = try values.decodeIfPresent(AppStoreIcon.self, forKey: "appStoreIcon")
 			self.ciProduct = try values.decodeIfPresent(CiProduct.self, forKey: "ciProduct")
 			self.betaTesters = try values.decodeIfPresent(BetaTesters.self, forKey: "betaTesters")
 			self.betaGroups = try values.decodeIfPresent(BetaGroups.self, forKey: "betaGroups")
@@ -1709,12 +1810,14 @@ public struct App: Codable, Identifiable {
 			self.betaFeedbackCrashSubmissions = try values.decodeIfPresent(BetaFeedbackCrashSubmissions.self, forKey: "betaFeedbackCrashSubmissions")
 			self.searchKeywords = try values.decodeIfPresent(SearchKeywords.self, forKey: "searchKeywords")
 			self.webhooks = try values.decodeIfPresent(Webhooks.self, forKey: "webhooks")
+			self.androidToIosAppMappingDetails = try values.decodeIfPresent(AndroidToIosAppMappingDetails.self, forKey: "androidToIosAppMappingDetails")
 		}
 
 		public func encode(to encoder: Encoder) throws {
 			var values = encoder.container(keyedBy: StringCodingKey.self)
 			try values.encodeIfPresent(accessibilityDeclarations, forKey: "accessibilityDeclarations")
 			try values.encodeIfPresent(appEncryptionDeclarations, forKey: "appEncryptionDeclarations")
+			try values.encodeIfPresent(appStoreIcon, forKey: "appStoreIcon")
 			try values.encodeIfPresent(ciProduct, forKey: "ciProduct")
 			try values.encodeIfPresent(betaTesters, forKey: "betaTesters")
 			try values.encodeIfPresent(betaGroups, forKey: "betaGroups")
@@ -1754,6 +1857,7 @@ public struct App: Codable, Identifiable {
 			try values.encodeIfPresent(betaFeedbackCrashSubmissions, forKey: "betaFeedbackCrashSubmissions")
 			try values.encodeIfPresent(searchKeywords, forKey: "searchKeywords")
 			try values.encodeIfPresent(webhooks, forKey: "webhooks")
+			try values.encodeIfPresent(androidToIosAppMappingDetails, forKey: "androidToIosAppMappingDetails")
 		}
 	}
 

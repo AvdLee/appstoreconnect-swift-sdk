@@ -28,8 +28,11 @@ extension APIEndpoint.V1.GameCenterDetails.WithID {
 			public var include: [Include]?
 			public var limitGameCenterDetails: Int?
 			public var limitGameCenterLeaderboards: Int?
+			public var limitGameCenterLeaderboardsV2: Int?
 			public var limitGameCenterLeaderboardSets: Int?
+			public var limitGameCenterLeaderboardSetsV2: Int?
 			public var limitGameCenterAchievements: Int?
+			public var limitGameCenterAchievementsV2: Int?
 			public var limitGameCenterActivities: Int?
 			public var limitGameCenterChallenges: Int?
 
@@ -37,8 +40,11 @@ extension APIEndpoint.V1.GameCenterDetails.WithID {
 				case referenceName
 				case gameCenterDetails
 				case gameCenterLeaderboards
+				case gameCenterLeaderboardsV2
 				case gameCenterLeaderboardSets
+				case gameCenterLeaderboardSetsV2
 				case gameCenterAchievements
+				case gameCenterAchievementsV2
 				case gameCenterActivities
 				case gameCenterChallenges
 			}
@@ -50,12 +56,17 @@ extension APIEndpoint.V1.GameCenterDetails.WithID {
 				case gameCenterAppVersions
 				case gameCenterGroup
 				case gameCenterLeaderboards
+				case gameCenterLeaderboardsV2
 				case gameCenterLeaderboardSets
+				case gameCenterLeaderboardSetsV2
 				case gameCenterAchievements
+				case gameCenterAchievementsV2
 				case gameCenterActivities
 				case gameCenterChallenges
 				case defaultLeaderboard
+				case defaultLeaderboardV2
 				case defaultGroupLeaderboard
+				case defaultGroupLeaderboardV2
 				case achievementReleases
 				case activityReleases
 				case challengeReleases
@@ -86,6 +97,7 @@ extension APIEndpoint.V1.GameCenterDetails.WithID {
 				case releases
 				case activity
 				case challenge
+				case versions
 			}
 
 			public enum FieldsGameCenterLeaderboardSets: String, Codable, CaseIterable {
@@ -97,6 +109,7 @@ extension APIEndpoint.V1.GameCenterDetails.WithID {
 				case localizations
 				case gameCenterLeaderboards
 				case releases
+				case versions
 			}
 
 			public enum FieldsGameCenterAchievements: String, Codable, CaseIterable {
@@ -113,6 +126,7 @@ extension APIEndpoint.V1.GameCenterDetails.WithID {
 				case localizations
 				case releases
 				case activity
+				case versions
 			}
 
 			public enum FieldsGameCenterActivities: String, Codable, CaseIterable {
@@ -127,7 +141,9 @@ extension APIEndpoint.V1.GameCenterDetails.WithID {
 				case gameCenterDetail
 				case gameCenterGroup
 				case achievements
+				case achievementsV2
 				case leaderboards
+				case leaderboardsV2
 				case versions
 			}
 
@@ -141,18 +157,22 @@ extension APIEndpoint.V1.GameCenterDetails.WithID {
 				case gameCenterGroup
 				case versions
 				case leaderboard
+				case leaderboardV2
 			}
 
 			public enum Include: String, Codable, CaseIterable {
 				case gameCenterDetails
 				case gameCenterLeaderboards
+				case gameCenterLeaderboardsV2
 				case gameCenterLeaderboardSets
+				case gameCenterLeaderboardSetsV2
 				case gameCenterAchievements
+				case gameCenterAchievementsV2
 				case gameCenterActivities
 				case gameCenterChallenges
 			}
 
-			public init(fieldsGameCenterGroups: [FieldsGameCenterGroups]? = nil, fieldsGameCenterDetails: [FieldsGameCenterDetails]? = nil, fieldsGameCenterLeaderboards: [FieldsGameCenterLeaderboards]? = nil, fieldsGameCenterLeaderboardSets: [FieldsGameCenterLeaderboardSets]? = nil, fieldsGameCenterAchievements: [FieldsGameCenterAchievements]? = nil, fieldsGameCenterActivities: [FieldsGameCenterActivities]? = nil, fieldsGameCenterChallenges: [FieldsGameCenterChallenges]? = nil, include: [Include]? = nil, limitGameCenterDetails: Int? = nil, limitGameCenterLeaderboards: Int? = nil, limitGameCenterLeaderboardSets: Int? = nil, limitGameCenterAchievements: Int? = nil, limitGameCenterActivities: Int? = nil, limitGameCenterChallenges: Int? = nil) {
+			public init(fieldsGameCenterGroups: [FieldsGameCenterGroups]? = nil, fieldsGameCenterDetails: [FieldsGameCenterDetails]? = nil, fieldsGameCenterLeaderboards: [FieldsGameCenterLeaderboards]? = nil, fieldsGameCenterLeaderboardSets: [FieldsGameCenterLeaderboardSets]? = nil, fieldsGameCenterAchievements: [FieldsGameCenterAchievements]? = nil, fieldsGameCenterActivities: [FieldsGameCenterActivities]? = nil, fieldsGameCenterChallenges: [FieldsGameCenterChallenges]? = nil, include: [Include]? = nil, limitGameCenterDetails: Int? = nil, limitGameCenterLeaderboards: Int? = nil, limitGameCenterLeaderboardsV2: Int? = nil, limitGameCenterLeaderboardSets: Int? = nil, limitGameCenterLeaderboardSetsV2: Int? = nil, limitGameCenterAchievements: Int? = nil, limitGameCenterAchievementsV2: Int? = nil, limitGameCenterActivities: Int? = nil, limitGameCenterChallenges: Int? = nil) {
 				self.fieldsGameCenterGroups = fieldsGameCenterGroups
 				self.fieldsGameCenterDetails = fieldsGameCenterDetails
 				self.fieldsGameCenterLeaderboards = fieldsGameCenterLeaderboards
@@ -163,8 +183,11 @@ extension APIEndpoint.V1.GameCenterDetails.WithID {
 				self.include = include
 				self.limitGameCenterDetails = limitGameCenterDetails
 				self.limitGameCenterLeaderboards = limitGameCenterLeaderboards
+				self.limitGameCenterLeaderboardsV2 = limitGameCenterLeaderboardsV2
 				self.limitGameCenterLeaderboardSets = limitGameCenterLeaderboardSets
+				self.limitGameCenterLeaderboardSetsV2 = limitGameCenterLeaderboardSetsV2
 				self.limitGameCenterAchievements = limitGameCenterAchievements
+				self.limitGameCenterAchievementsV2 = limitGameCenterAchievementsV2
 				self.limitGameCenterActivities = limitGameCenterActivities
 				self.limitGameCenterChallenges = limitGameCenterChallenges
 			}
@@ -181,8 +204,11 @@ extension APIEndpoint.V1.GameCenterDetails.WithID {
 				encoder.encode(include, forKey: "include")
 				encoder.encode(limitGameCenterDetails, forKey: "limit[gameCenterDetails]")
 				encoder.encode(limitGameCenterLeaderboards, forKey: "limit[gameCenterLeaderboards]")
+				encoder.encode(limitGameCenterLeaderboardsV2, forKey: "limit[gameCenterLeaderboardsV2]")
 				encoder.encode(limitGameCenterLeaderboardSets, forKey: "limit[gameCenterLeaderboardSets]")
+				encoder.encode(limitGameCenterLeaderboardSetsV2, forKey: "limit[gameCenterLeaderboardSetsV2]")
 				encoder.encode(limitGameCenterAchievements, forKey: "limit[gameCenterAchievements]")
+				encoder.encode(limitGameCenterAchievementsV2, forKey: "limit[gameCenterAchievementsV2]")
 				encoder.encode(limitGameCenterActivities, forKey: "limit[gameCenterActivities]")
 				encoder.encode(limitGameCenterChallenges, forKey: "limit[gameCenterChallenges]")
 				return encoder.items

@@ -72,6 +72,7 @@ extension APIEndpoint.V1.Apps.WithID {
 				case streamlinedPurchasingEnabled
 				case accessibilityDeclarations
 				case appEncryptionDeclarations
+				case appStoreIcon
 				case ciProduct
 				case betaTesters
 				case betaGroups
@@ -111,6 +112,7 @@ extension APIEndpoint.V1.Apps.WithID {
 				case betaFeedbackCrashSubmissions
 				case searchKeywords
 				case webhooks
+				case androidToIosAppMappingDetails
 			}
 
 			public enum FieldsReviewSubmissionItems: String, Codable, CaseIterable {
@@ -121,6 +123,11 @@ extension APIEndpoint.V1.Apps.WithID {
 				case appStoreVersionExperimentV2
 				case appEvent
 				case backgroundAssetVersion
+				case gameCenterAchievementVersion
+				case gameCenterActivityVersion
+				case gameCenterChallengeVersion
+				case gameCenterLeaderboardSetVersion
+				case gameCenterLeaderboardVersion
 			}
 
 			public enum FieldsAppStoreVersions: String, Codable, CaseIterable {

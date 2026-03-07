@@ -56,7 +56,7 @@ final class APIProviderTests: XCTestCase {
 
     func testRequestExecutionWithVoidResponse() {
         let response = Response<Data>(requestURL: nil, statusCode: 200, rateLimit: nil, data: nil)
-        let mockRequestExecutor = MockRequestExecutor(expectedResponse: Result.success(response))
+        let mockRequestExecutor = MockRequestExecutor<Data>(expectedResponse: .success(response))
         let apiProvider = APIProvider(configuration: configuration, requestExecutor: mockRequestExecutor)
 
         let sampleEndpoint = APIEndpoint.v1.betaGroups.id("mockID").delete
@@ -69,7 +69,7 @@ final class APIProviderTests: XCTestCase {
     func testRequestExecutionErrorResponse() throws {
         let expectedURL = URL(string: "https://api.appstoreconnect.apple.com")!
         let errorResponse = ErrorResponse(errors: [
-            .init(
+            ResponseError(
                 id: UUID().uuidString,
                 status: "404",
                 code: "NOT_FOUND",
@@ -79,7 +79,7 @@ final class APIProviderTests: XCTestCase {
         ])
         let responseData = try JSONEncoder().encode(errorResponse)
         let response = Response<Data>(requestURL: expectedURL, statusCode: 404, rateLimit: nil, data: responseData)
-        let mockRequestExecutor = MockRequestExecutor(expectedResponse: Result.success(response))
+        let mockRequestExecutor = MockRequestExecutor<Data>(expectedResponse: .success(response))
         let apiProvider = APIProvider(configuration: configuration, requestExecutor: mockRequestExecutor)
 
         let sampleEndpoint = APIEndpoint.v1.betaGroups.id("mockID").delete
@@ -107,7 +107,7 @@ final class APIProviderTests: XCTestCase {
 
     func testDownloadRequestWithResultSuccess() {
         let response = Response(requestURL: nil, statusCode: 200, rateLimit: nil, data: URL(fileURLWithPath: "randompath"))
-        let mockRequestExecutor = MockRequestExecutor(expectedResponse: Result.success(response))
+        let mockRequestExecutor = MockRequestExecutor<URL>(expectedResponse: .success(response))
 
         let apiProvider = APIProvider(configuration: configuration, requestExecutor: mockRequestExecutor)
 
@@ -124,7 +124,7 @@ final class APIProviderTests: XCTestCase {
 
     func testDownloadRequestWithProblemOnFileCreation() {
         let response = Response<URL>(requestURL: nil, statusCode: 200, rateLimit: nil, data: nil)
-        let mockRequestExecutor = MockRequestExecutor(expectedResponse: Result.success(response))
+        let mockRequestExecutor = MockRequestExecutor<URL>(expectedResponse: .success(response))
 
         let apiProvider = APIProvider(configuration: configuration, requestExecutor: mockRequestExecutor)
         let reportEndpoint = APIEndpoint.v1.salesReports.get(parameters: .init(filterVendorNumber: [],
@@ -146,7 +146,7 @@ final class APIProviderTests: XCTestCase {
 
     func testDownloadRequestWithFailure() {
         let response = Response<URL>(requestURL: nil, statusCode: 500, rateLimit: nil, data: nil)
-        let mockRequestExecutor = MockRequestExecutor(expectedResponse: Result.success(response))
+        let mockRequestExecutor = MockRequestExecutor<URL>(expectedResponse: .success(response))
 
         let apiProvider = APIProvider(configuration: configuration, requestExecutor: mockRequestExecutor)
         let reportEndpoint = APIEndpoint.v1.salesReports.get(parameters: .init(filterVendorNumber: [],

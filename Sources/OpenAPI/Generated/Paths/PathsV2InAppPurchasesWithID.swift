@@ -27,9 +27,11 @@ extension APIEndpoint.V2.InAppPurchases {
 			public var fieldsInAppPurchasePriceSchedules: [FieldsInAppPurchasePriceSchedules]?
 			public var fieldsInAppPurchaseAvailabilities: [FieldsInAppPurchaseAvailabilities]?
 			public var fieldsInAppPurchaseImages: [FieldsInAppPurchaseImages]?
+			public var fieldsInAppPurchaseOfferCodes: [FieldsInAppPurchaseOfferCodes]?
 			public var include: [Include]?
 			public var limitImages: Int?
 			public var limitInAppPurchaseLocalizations: Int?
+			public var limitOfferCodes: Int?
 			public var limitPricePoints: Int?
 
 			public enum FieldsInAppPurchases: String, Codable, CaseIterable {
@@ -48,6 +50,7 @@ extension APIEndpoint.V2.InAppPurchases {
 				case iapPriceSchedule
 				case inAppPurchaseAvailability
 				case images
+				case offerCodes
 			}
 
 			public enum FieldsInAppPurchaseLocalizations: String, Codable, CaseIterable {
@@ -115,6 +118,17 @@ extension APIEndpoint.V2.InAppPurchases {
 				case inAppPurchase
 			}
 
+			public enum FieldsInAppPurchaseOfferCodes: String, Codable, CaseIterable {
+				case name
+				case customerEligibilities
+				case productionCodeCount
+				case sandboxCodeCount
+				case active
+				case oneTimeUseCodes
+				case customCodes
+				case prices
+			}
+
 			public enum Include: String, Codable, CaseIterable {
 				case inAppPurchaseLocalizations
 				case pricePoints
@@ -124,9 +138,10 @@ extension APIEndpoint.V2.InAppPurchases {
 				case iapPriceSchedule
 				case inAppPurchaseAvailability
 				case images
+				case offerCodes
 			}
 
-			public init(fieldsInAppPurchases: [FieldsInAppPurchases]? = nil, fieldsInAppPurchaseLocalizations: [FieldsInAppPurchaseLocalizations]? = nil, fieldsInAppPurchasePricePoints: [FieldsInAppPurchasePricePoints]? = nil, fieldsInAppPurchaseContents: [FieldsInAppPurchaseContents]? = nil, fieldsInAppPurchaseAppStoreReviewScreenshots: [FieldsInAppPurchaseAppStoreReviewScreenshots]? = nil, fieldsPromotedPurchases: [FieldsPromotedPurchases]? = nil, fieldsInAppPurchasePriceSchedules: [FieldsInAppPurchasePriceSchedules]? = nil, fieldsInAppPurchaseAvailabilities: [FieldsInAppPurchaseAvailabilities]? = nil, fieldsInAppPurchaseImages: [FieldsInAppPurchaseImages]? = nil, include: [Include]? = nil, limitImages: Int? = nil, limitInAppPurchaseLocalizations: Int? = nil, limitPricePoints: Int? = nil) {
+			public init(fieldsInAppPurchases: [FieldsInAppPurchases]? = nil, fieldsInAppPurchaseLocalizations: [FieldsInAppPurchaseLocalizations]? = nil, fieldsInAppPurchasePricePoints: [FieldsInAppPurchasePricePoints]? = nil, fieldsInAppPurchaseContents: [FieldsInAppPurchaseContents]? = nil, fieldsInAppPurchaseAppStoreReviewScreenshots: [FieldsInAppPurchaseAppStoreReviewScreenshots]? = nil, fieldsPromotedPurchases: [FieldsPromotedPurchases]? = nil, fieldsInAppPurchasePriceSchedules: [FieldsInAppPurchasePriceSchedules]? = nil, fieldsInAppPurchaseAvailabilities: [FieldsInAppPurchaseAvailabilities]? = nil, fieldsInAppPurchaseImages: [FieldsInAppPurchaseImages]? = nil, fieldsInAppPurchaseOfferCodes: [FieldsInAppPurchaseOfferCodes]? = nil, include: [Include]? = nil, limitImages: Int? = nil, limitInAppPurchaseLocalizations: Int? = nil, limitOfferCodes: Int? = nil, limitPricePoints: Int? = nil) {
 				self.fieldsInAppPurchases = fieldsInAppPurchases
 				self.fieldsInAppPurchaseLocalizations = fieldsInAppPurchaseLocalizations
 				self.fieldsInAppPurchasePricePoints = fieldsInAppPurchasePricePoints
@@ -136,9 +151,11 @@ extension APIEndpoint.V2.InAppPurchases {
 				self.fieldsInAppPurchasePriceSchedules = fieldsInAppPurchasePriceSchedules
 				self.fieldsInAppPurchaseAvailabilities = fieldsInAppPurchaseAvailabilities
 				self.fieldsInAppPurchaseImages = fieldsInAppPurchaseImages
+				self.fieldsInAppPurchaseOfferCodes = fieldsInAppPurchaseOfferCodes
 				self.include = include
 				self.limitImages = limitImages
 				self.limitInAppPurchaseLocalizations = limitInAppPurchaseLocalizations
+				self.limitOfferCodes = limitOfferCodes
 				self.limitPricePoints = limitPricePoints
 			}
 
@@ -153,9 +170,11 @@ extension APIEndpoint.V2.InAppPurchases {
 				encoder.encode(fieldsInAppPurchasePriceSchedules, forKey: "fields[inAppPurchasePriceSchedules]")
 				encoder.encode(fieldsInAppPurchaseAvailabilities, forKey: "fields[inAppPurchaseAvailabilities]")
 				encoder.encode(fieldsInAppPurchaseImages, forKey: "fields[inAppPurchaseImages]")
+				encoder.encode(fieldsInAppPurchaseOfferCodes, forKey: "fields[inAppPurchaseOfferCodes]")
 				encoder.encode(include, forKey: "include")
 				encoder.encode(limitImages, forKey: "limit[images]")
 				encoder.encode(limitInAppPurchaseLocalizations, forKey: "limit[inAppPurchaseLocalizations]")
+				encoder.encode(limitOfferCodes, forKey: "limit[offerCodes]")
 				encoder.encode(limitPricePoints, forKey: "limit[pricePoints]")
 				return encoder.items
 			}

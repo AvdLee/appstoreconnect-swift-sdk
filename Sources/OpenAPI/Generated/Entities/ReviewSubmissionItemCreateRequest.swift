@@ -22,6 +22,11 @@ public struct ReviewSubmissionItemCreateRequest: Codable {
 			public var appStoreVersionExperimentV2: AppStoreVersionExperimentV2?
 			public var appEvent: AppEvent?
 			public var backgroundAssetVersion: BackgroundAssetVersion?
+			public var gameCenterAchievementVersion: GameCenterAchievementVersion?
+			public var gameCenterActivityVersion: GameCenterActivityVersion?
+			public var gameCenterChallengeVersion: GameCenterChallengeVersion?
+			public var gameCenterLeaderboardSetVersion: GameCenterLeaderboardSetVersion?
+			public var gameCenterLeaderboardVersion: GameCenterLeaderboardVersion?
 
 			public struct ReviewSubmission: Codable {
 				public var data: Data
@@ -331,7 +336,227 @@ public struct ReviewSubmissionItemCreateRequest: Codable {
 				}
 			}
 
-			public init(reviewSubmission: ReviewSubmission, appStoreVersion: AppStoreVersion? = nil, appCustomProductPageVersion: AppCustomProductPageVersion? = nil, appStoreVersionExperiment: AppStoreVersionExperiment? = nil, appStoreVersionExperimentV2: AppStoreVersionExperimentV2? = nil, appEvent: AppEvent? = nil, backgroundAssetVersion: BackgroundAssetVersion? = nil) {
+			public struct GameCenterAchievementVersion: Codable {
+				public var data: Data?
+
+				public struct Data: Codable, Identifiable {
+					public var type: `Type`
+					public var id: String
+
+					public enum `Type`: String, Codable, CaseIterable {
+						case gameCenterAchievementVersions
+					}
+
+					public init(type: `Type`, id: String) {
+						self.type = type
+						self.id = id
+					}
+
+					public init(from decoder: Decoder) throws {
+						let values = try decoder.container(keyedBy: StringCodingKey.self)
+						self.type = try values.decode(`Type`.self, forKey: "type")
+						self.id = try values.decode(String.self, forKey: "id")
+					}
+
+					public func encode(to encoder: Encoder) throws {
+						var values = encoder.container(keyedBy: StringCodingKey.self)
+						try values.encode(type, forKey: "type")
+						try values.encode(id, forKey: "id")
+					}
+				}
+
+				public init(data: Data? = nil) {
+					self.data = data
+				}
+
+				public init(from decoder: Decoder) throws {
+					let values = try decoder.container(keyedBy: StringCodingKey.self)
+					self.data = try values.decodeIfPresent(Data.self, forKey: "data")
+				}
+
+				public func encode(to encoder: Encoder) throws {
+					var values = encoder.container(keyedBy: StringCodingKey.self)
+					try values.encodeIfPresent(data, forKey: "data")
+				}
+			}
+
+			public struct GameCenterActivityVersion: Codable {
+				public var data: Data?
+
+				public struct Data: Codable, Identifiable {
+					public var type: `Type`
+					public var id: String
+
+					public enum `Type`: String, Codable, CaseIterable {
+						case gameCenterActivityVersions
+					}
+
+					public init(type: `Type`, id: String) {
+						self.type = type
+						self.id = id
+					}
+
+					public init(from decoder: Decoder) throws {
+						let values = try decoder.container(keyedBy: StringCodingKey.self)
+						self.type = try values.decode(`Type`.self, forKey: "type")
+						self.id = try values.decode(String.self, forKey: "id")
+					}
+
+					public func encode(to encoder: Encoder) throws {
+						var values = encoder.container(keyedBy: StringCodingKey.self)
+						try values.encode(type, forKey: "type")
+						try values.encode(id, forKey: "id")
+					}
+				}
+
+				public init(data: Data? = nil) {
+					self.data = data
+				}
+
+				public init(from decoder: Decoder) throws {
+					let values = try decoder.container(keyedBy: StringCodingKey.self)
+					self.data = try values.decodeIfPresent(Data.self, forKey: "data")
+				}
+
+				public func encode(to encoder: Encoder) throws {
+					var values = encoder.container(keyedBy: StringCodingKey.self)
+					try values.encodeIfPresent(data, forKey: "data")
+				}
+			}
+
+			public struct GameCenterChallengeVersion: Codable {
+				public var data: Data?
+
+				public struct Data: Codable, Identifiable {
+					public var type: `Type`
+					public var id: String
+
+					public enum `Type`: String, Codable, CaseIterable {
+						case gameCenterChallengeVersions
+					}
+
+					public init(type: `Type`, id: String) {
+						self.type = type
+						self.id = id
+					}
+
+					public init(from decoder: Decoder) throws {
+						let values = try decoder.container(keyedBy: StringCodingKey.self)
+						self.type = try values.decode(`Type`.self, forKey: "type")
+						self.id = try values.decode(String.self, forKey: "id")
+					}
+
+					public func encode(to encoder: Encoder) throws {
+						var values = encoder.container(keyedBy: StringCodingKey.self)
+						try values.encode(type, forKey: "type")
+						try values.encode(id, forKey: "id")
+					}
+				}
+
+				public init(data: Data? = nil) {
+					self.data = data
+				}
+
+				public init(from decoder: Decoder) throws {
+					let values = try decoder.container(keyedBy: StringCodingKey.self)
+					self.data = try values.decodeIfPresent(Data.self, forKey: "data")
+				}
+
+				public func encode(to encoder: Encoder) throws {
+					var values = encoder.container(keyedBy: StringCodingKey.self)
+					try values.encodeIfPresent(data, forKey: "data")
+				}
+			}
+
+			public struct GameCenterLeaderboardSetVersion: Codable {
+				public var data: Data?
+
+				public struct Data: Codable, Identifiable {
+					public var type: `Type`
+					public var id: String
+
+					public enum `Type`: String, Codable, CaseIterable {
+						case gameCenterLeaderboardSetVersions
+					}
+
+					public init(type: `Type`, id: String) {
+						self.type = type
+						self.id = id
+					}
+
+					public init(from decoder: Decoder) throws {
+						let values = try decoder.container(keyedBy: StringCodingKey.self)
+						self.type = try values.decode(`Type`.self, forKey: "type")
+						self.id = try values.decode(String.self, forKey: "id")
+					}
+
+					public func encode(to encoder: Encoder) throws {
+						var values = encoder.container(keyedBy: StringCodingKey.self)
+						try values.encode(type, forKey: "type")
+						try values.encode(id, forKey: "id")
+					}
+				}
+
+				public init(data: Data? = nil) {
+					self.data = data
+				}
+
+				public init(from decoder: Decoder) throws {
+					let values = try decoder.container(keyedBy: StringCodingKey.self)
+					self.data = try values.decodeIfPresent(Data.self, forKey: "data")
+				}
+
+				public func encode(to encoder: Encoder) throws {
+					var values = encoder.container(keyedBy: StringCodingKey.self)
+					try values.encodeIfPresent(data, forKey: "data")
+				}
+			}
+
+			public struct GameCenterLeaderboardVersion: Codable {
+				public var data: Data?
+
+				public struct Data: Codable, Identifiable {
+					public var type: `Type`
+					public var id: String
+
+					public enum `Type`: String, Codable, CaseIterable {
+						case gameCenterLeaderboardVersions
+					}
+
+					public init(type: `Type`, id: String) {
+						self.type = type
+						self.id = id
+					}
+
+					public init(from decoder: Decoder) throws {
+						let values = try decoder.container(keyedBy: StringCodingKey.self)
+						self.type = try values.decode(`Type`.self, forKey: "type")
+						self.id = try values.decode(String.self, forKey: "id")
+					}
+
+					public func encode(to encoder: Encoder) throws {
+						var values = encoder.container(keyedBy: StringCodingKey.self)
+						try values.encode(type, forKey: "type")
+						try values.encode(id, forKey: "id")
+					}
+				}
+
+				public init(data: Data? = nil) {
+					self.data = data
+				}
+
+				public init(from decoder: Decoder) throws {
+					let values = try decoder.container(keyedBy: StringCodingKey.self)
+					self.data = try values.decodeIfPresent(Data.self, forKey: "data")
+				}
+
+				public func encode(to encoder: Encoder) throws {
+					var values = encoder.container(keyedBy: StringCodingKey.self)
+					try values.encodeIfPresent(data, forKey: "data")
+				}
+			}
+
+			public init(reviewSubmission: ReviewSubmission, appStoreVersion: AppStoreVersion? = nil, appCustomProductPageVersion: AppCustomProductPageVersion? = nil, appStoreVersionExperiment: AppStoreVersionExperiment? = nil, appStoreVersionExperimentV2: AppStoreVersionExperimentV2? = nil, appEvent: AppEvent? = nil, backgroundAssetVersion: BackgroundAssetVersion? = nil, gameCenterAchievementVersion: GameCenterAchievementVersion? = nil, gameCenterActivityVersion: GameCenterActivityVersion? = nil, gameCenterChallengeVersion: GameCenterChallengeVersion? = nil, gameCenterLeaderboardSetVersion: GameCenterLeaderboardSetVersion? = nil, gameCenterLeaderboardVersion: GameCenterLeaderboardVersion? = nil) {
 				self.reviewSubmission = reviewSubmission
 				self.appStoreVersion = appStoreVersion
 				self.appCustomProductPageVersion = appCustomProductPageVersion
@@ -339,6 +564,11 @@ public struct ReviewSubmissionItemCreateRequest: Codable {
 				self.appStoreVersionExperimentV2 = appStoreVersionExperimentV2
 				self.appEvent = appEvent
 				self.backgroundAssetVersion = backgroundAssetVersion
+				self.gameCenterAchievementVersion = gameCenterAchievementVersion
+				self.gameCenterActivityVersion = gameCenterActivityVersion
+				self.gameCenterChallengeVersion = gameCenterChallengeVersion
+				self.gameCenterLeaderboardSetVersion = gameCenterLeaderboardSetVersion
+				self.gameCenterLeaderboardVersion = gameCenterLeaderboardVersion
 			}
 
 			public init(from decoder: Decoder) throws {
@@ -350,6 +580,11 @@ public struct ReviewSubmissionItemCreateRequest: Codable {
 				self.appStoreVersionExperimentV2 = try values.decodeIfPresent(AppStoreVersionExperimentV2.self, forKey: "appStoreVersionExperimentV2")
 				self.appEvent = try values.decodeIfPresent(AppEvent.self, forKey: "appEvent")
 				self.backgroundAssetVersion = try values.decodeIfPresent(BackgroundAssetVersion.self, forKey: "backgroundAssetVersion")
+				self.gameCenterAchievementVersion = try values.decodeIfPresent(GameCenterAchievementVersion.self, forKey: "gameCenterAchievementVersion")
+				self.gameCenterActivityVersion = try values.decodeIfPresent(GameCenterActivityVersion.self, forKey: "gameCenterActivityVersion")
+				self.gameCenterChallengeVersion = try values.decodeIfPresent(GameCenterChallengeVersion.self, forKey: "gameCenterChallengeVersion")
+				self.gameCenterLeaderboardSetVersion = try values.decodeIfPresent(GameCenterLeaderboardSetVersion.self, forKey: "gameCenterLeaderboardSetVersion")
+				self.gameCenterLeaderboardVersion = try values.decodeIfPresent(GameCenterLeaderboardVersion.self, forKey: "gameCenterLeaderboardVersion")
 			}
 
 			public func encode(to encoder: Encoder) throws {
@@ -361,6 +596,11 @@ public struct ReviewSubmissionItemCreateRequest: Codable {
 				try values.encodeIfPresent(appStoreVersionExperimentV2, forKey: "appStoreVersionExperimentV2")
 				try values.encodeIfPresent(appEvent, forKey: "appEvent")
 				try values.encodeIfPresent(backgroundAssetVersion, forKey: "backgroundAssetVersion")
+				try values.encodeIfPresent(gameCenterAchievementVersion, forKey: "gameCenterAchievementVersion")
+				try values.encodeIfPresent(gameCenterActivityVersion, forKey: "gameCenterActivityVersion")
+				try values.encodeIfPresent(gameCenterChallengeVersion, forKey: "gameCenterChallengeVersion")
+				try values.encodeIfPresent(gameCenterLeaderboardSetVersion, forKey: "gameCenterLeaderboardSetVersion")
+				try values.encodeIfPresent(gameCenterLeaderboardVersion, forKey: "gameCenterLeaderboardVersion")
 			}
 		}
 

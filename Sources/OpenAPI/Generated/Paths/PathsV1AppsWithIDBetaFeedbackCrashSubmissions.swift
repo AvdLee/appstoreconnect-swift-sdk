@@ -112,6 +112,7 @@ extension APIEndpoint.V1.Apps.WithID {
 				case email
 				case inviteType
 				case state
+				case appDevices
 				case apps
 				case betaGroups
 				case builds

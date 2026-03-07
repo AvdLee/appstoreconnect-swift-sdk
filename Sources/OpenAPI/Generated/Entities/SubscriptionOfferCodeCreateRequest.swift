@@ -23,14 +23,16 @@ public struct SubscriptionOfferCodeCreateRequest: Codable {
 			public var duration: SubscriptionOfferDuration
 			public var offerMode: SubscriptionOfferMode
 			public var numberOfPeriods: Int
+			public var isAutoRenewEnabled: Bool?
 
-			public init(name: String, customerEligibilities: [SubscriptionCustomerEligibility], offerEligibility: SubscriptionOfferEligibility, duration: SubscriptionOfferDuration, offerMode: SubscriptionOfferMode, numberOfPeriods: Int) {
+			public init(name: String, customerEligibilities: [SubscriptionCustomerEligibility], offerEligibility: SubscriptionOfferEligibility, duration: SubscriptionOfferDuration, offerMode: SubscriptionOfferMode, numberOfPeriods: Int, isAutoRenewEnabled: Bool? = nil) {
 				self.name = name
 				self.customerEligibilities = customerEligibilities
 				self.offerEligibility = offerEligibility
 				self.duration = duration
 				self.offerMode = offerMode
 				self.numberOfPeriods = numberOfPeriods
+				self.isAutoRenewEnabled = isAutoRenewEnabled
 			}
 
 			public init(from decoder: Decoder) throws {
@@ -41,6 +43,7 @@ public struct SubscriptionOfferCodeCreateRequest: Codable {
 				self.duration = try values.decode(SubscriptionOfferDuration.self, forKey: "duration")
 				self.offerMode = try values.decode(SubscriptionOfferMode.self, forKey: "offerMode")
 				self.numberOfPeriods = try values.decode(Int.self, forKey: "numberOfPeriods")
+				self.isAutoRenewEnabled = try values.decodeIfPresent(Bool.self, forKey: "autoRenewEnabled")
 			}
 
 			public func encode(to encoder: Encoder) throws {
@@ -51,6 +54,7 @@ public struct SubscriptionOfferCodeCreateRequest: Codable {
 				try values.encode(duration, forKey: "duration")
 				try values.encode(offerMode, forKey: "offerMode")
 				try values.encode(numberOfPeriods, forKey: "numberOfPeriods")
+				try values.encodeIfPresent(isAutoRenewEnabled, forKey: "autoRenewEnabled")
 			}
 		}
 

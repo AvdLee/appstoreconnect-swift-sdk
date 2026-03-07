@@ -50,7 +50,9 @@ extension APIEndpoint.V1.GameCenterActivities.WithID {
 				case gameCenterDetail
 				case gameCenterGroup
 				case achievements
+				case achievementsV2
 				case leaderboards
+				case leaderboardsV2
 				case versions
 			}
 

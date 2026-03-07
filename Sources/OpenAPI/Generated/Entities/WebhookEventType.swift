@@ -4,6 +4,9 @@
 import Foundation
 
 public enum WebhookEventType: String, Codable, CaseIterable {
+	case alternativeDistributionPackageAvailableUpdated = "ALTERNATIVE_DISTRIBUTION_PACKAGE_AVAILABLE_UPDATED"
+	case alternativeDistributionPackageVersionCreated = "ALTERNATIVE_DISTRIBUTION_PACKAGE_VERSION_CREATED"
+	case alternativeDistributionTerritoryAvailabilityUpdated = "ALTERNATIVE_DISTRIBUTION_TERRITORY_AVAILABILITY_UPDATED"
 	case appStoreVersionAppVersionStateUpdated = "APP_STORE_VERSION_APP_VERSION_STATE_UPDATED"
 	case backgroundAssetVersionAppStoreReleaseStateUpdated = "BACKGROUND_ASSET_VERSION_APP_STORE_RELEASE_STATE_UPDATED"
 	case backgroundAssetVersionExternalBetaReleaseStateUpdated = "BACKGROUND_ASSET_VERSION_EXTERNAL_BETA_RELEASE_STATE_UPDATED"

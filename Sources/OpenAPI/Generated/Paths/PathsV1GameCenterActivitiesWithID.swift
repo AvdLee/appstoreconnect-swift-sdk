@@ -22,7 +22,9 @@ extension APIEndpoint.V1.GameCenterActivities {
 			public var fieldsGameCenterActivityVersions: [FieldsGameCenterActivityVersions]?
 			public var include: [Include]?
 			public var limitAchievements: Int?
+			public var limitAchievementsV2: Int?
 			public var limitLeaderboards: Int?
+			public var limitLeaderboardsV2: Int?
 			public var limitVersions: Int?
 
 			public enum FieldsGameCenterActivities: String, Codable, CaseIterable {
@@ -37,7 +39,9 @@ extension APIEndpoint.V1.GameCenterActivities {
 				case gameCenterDetail
 				case gameCenterGroup
 				case achievements
+				case achievementsV2
 				case leaderboards
+				case leaderboardsV2
 				case versions
 			}
 
@@ -55,16 +59,20 @@ extension APIEndpoint.V1.GameCenterActivities {
 				case gameCenterDetail
 				case gameCenterGroup
 				case achievements
+				case achievementsV2
 				case leaderboards
+				case leaderboardsV2
 				case versions
 			}
 
-			public init(fieldsGameCenterActivities: [FieldsGameCenterActivities]? = nil, fieldsGameCenterActivityVersions: [FieldsGameCenterActivityVersions]? = nil, include: [Include]? = nil, limitAchievements: Int? = nil, limitLeaderboards: Int? = nil, limitVersions: Int? = nil) {
+			public init(fieldsGameCenterActivities: [FieldsGameCenterActivities]? = nil, fieldsGameCenterActivityVersions: [FieldsGameCenterActivityVersions]? = nil, include: [Include]? = nil, limitAchievements: Int? = nil, limitAchievementsV2: Int? = nil, limitLeaderboards: Int? = nil, limitLeaderboardsV2: Int? = nil, limitVersions: Int? = nil) {
 				self.fieldsGameCenterActivities = fieldsGameCenterActivities
 				self.fieldsGameCenterActivityVersions = fieldsGameCenterActivityVersions
 				self.include = include
 				self.limitAchievements = limitAchievements
+				self.limitAchievementsV2 = limitAchievementsV2
 				self.limitLeaderboards = limitLeaderboards
+				self.limitLeaderboardsV2 = limitLeaderboardsV2
 				self.limitVersions = limitVersions
 			}
 
@@ -74,7 +82,9 @@ extension APIEndpoint.V1.GameCenterActivities {
 				encoder.encode(fieldsGameCenterActivityVersions, forKey: "fields[gameCenterActivityVersions]")
 				encoder.encode(include, forKey: "include")
 				encoder.encode(limitAchievements, forKey: "limit[achievements]")
+				encoder.encode(limitAchievementsV2, forKey: "limit[achievementsV2]")
 				encoder.encode(limitLeaderboards, forKey: "limit[leaderboards]")
+				encoder.encode(limitLeaderboardsV2, forKey: "limit[leaderboardsV2]")
 				encoder.encode(limitVersions, forKey: "limit[versions]")
 				return encoder.items
 			}
