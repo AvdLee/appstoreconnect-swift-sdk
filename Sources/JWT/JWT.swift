@@ -6,7 +6,7 @@
 //
 
 import Foundation
-import Crypto
+import CryptoKit
 
 /// The JWT Header contains information specific to the App Store Connect API Keys, such as algorithm and keys.
 private struct Header: Codable {
