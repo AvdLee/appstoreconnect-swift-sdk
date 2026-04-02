@@ -25,39 +25,45 @@ struct AnyEncodable: Encodable {
 /// Credits to the https://github.com/kean/Get repository for this class.
 /// We've copied this over since it works nicely together with the CreateAPI OpenAPI generator.
 public struct Request<Response> {
+    /// The default App Store Connect API base URL.
+    public static var defaultBaseURL: URL {
+        guard let url = URL(string: "https://api.appstoreconnect.apple.com") else {
+            fatalError("Invalid App Store Connect API base URL")
+        }
+        return url
+    }
+
     public var method: String
     public var path: String
     public var query: [(String, String?)]?
     var body: AnyEncodable?
     public var headers: [String: String]?
     public var id: String?
+    public var baseURL: URL
 
-    public init(path: String, method: String, query: [(String, String?)]? = nil, headers: [String: String]? = nil, id: String) {
+    public init(path: String, method: String, query: [(String, String?)]? = nil, headers: [String: String]? = nil, id: String, baseURL: URL = Self.defaultBaseURL) {
         self.method = method
         self.path = path
         self.query = query
         self.headers = headers
         self.id = id
+        self.baseURL = baseURL
     }
 
-    public init<U: Encodable>(path: String, method: String, query: [(String, String?)]? = nil, body: U?, headers: [String: String]? = nil, id: String) {
+    public init<U: Encodable>(path: String, method: String, query: [(String, String?)]? = nil, body: U?, headers: [String: String]? = nil, id: String, baseURL: URL = Self.defaultBaseURL) {
         self.method = method
         self.path = path
         self.query = query
         self.body = body.map(AnyEncodable.init)
         self.headers = headers
         self.id = id
+        self.baseURL = baseURL
     }
 }
 
 // MARK: - URLRequestConvertible
 
 extension Request {
-
-    internal var baseURL: URL {
-        // swiftlint:disable:next force_unwrapping
-        return URL(string: "https://api.appstoreconnect.apple.com")!
-    }
 
     private func makeURL(path: String, query: [(String, String?)]?) throws -> URL {
         let url = baseURL.appendingPathComponent(path)

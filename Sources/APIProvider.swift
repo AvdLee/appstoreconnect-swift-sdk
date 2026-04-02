@@ -32,6 +32,9 @@ public struct APIConfiguration {
     /// The token's expiration duration in seconds. Tokens that expire more than 20 minutes in the future are not valid, so set it to a max of 20 minutes.
     let expirationDuration: TimeInterval
 
+    /// Optional JWT scope claim for APIs that require restricted access (e.g. `["/notary/v2"]` for the Notary API).
+    let scope: [String]?
+
     /// The range of values allowed for the expiration duration of the token.
     private let allowedExpirationDurationRange: ClosedRange<TimeInterval> = 0...1200
 
@@ -42,9 +45,11 @@ public struct APIConfiguration {
     ///   - privateKeyID: Your private key ID from App Store Connect (Ex: 2X9R4HXF34)
     ///   - privateKey: Your private key stripped out of the -----BEGIN PRIVATE KEY----- and -----END PRIVATE KEY----- lines.
     ///   - expirationDuration: The token's expiration duration in seconds. Tokens that expire more than 20 minutes in the future are not valid, so set it to a max of 20 minutes. Defaults to 20 minutes.
-    public init(issuerID: String, privateKeyID: String, privateKey: String, expirationDuration: TimeInterval = 60 * 20) throws {
+    ///   - scope: Optional JWT scope claim for APIs that require restricted access (e.g. `["/notary/v2"]` for the Notary API).
+    public init(issuerID: String, privateKeyID: String, privateKey: String, expirationDuration: TimeInterval = 60 * 20, scope: [String]? = nil) throws {
         self.privateKeyID = privateKeyID
         self.issuerID = issuerID
+        self.scope = scope
         guard let base64Key = Data(base64Encoded: privateKey) else {
             throw JWT.Error.invalidBase64EncodedPrivateKey
         }
@@ -65,9 +70,11 @@ public struct APIConfiguration {
     ///   - individualPrivateKeyID: Your private key ID from App Store Connect (Ex: 2X9R4HXF34)
     ///   - individualPrivateKey: The contents of the individual private key from App Store Connect
     ///   - expirationDuration: The token's expiration duration in seconds. Tokens that expire more than 20 minutes in the future are not valid, so set it to a max of 20 minutes. Defaults to 20 minutes.
-    public init(individualPrivateKeyID: String, individualPrivateKey: String, expirationDuration: TimeInterval = 60 * 20) throws {
+    ///   - scope: Optional JWT scope claim for APIs that require restricted access.
+    public init(individualPrivateKeyID: String, individualPrivateKey: String, expirationDuration: TimeInterval = 60 * 20, scope: [String]? = nil) throws {
         self.privateKeyID = individualPrivateKeyID
         self.issuerID = nil
+        self.scope = scope
 
         guard let base64Key = Data(base64Encoded: individualPrivateKey) else {
             throw JWT.Error.invalidBase64EncodedPrivateKey
@@ -90,8 +97,10 @@ public struct APIConfiguration {
     ///   - privateKeyID: Your private key ID from App Store Connect (Ex: 2X9R4HXF34). Will be inferred from `privateKeyURL` if nil.
     ///   - privateKeyURL: A file URL that references the path to your private key file.
     ///   - expirationDuration: The token's expiration duration in seconds. Tokens that expire more than 20 minutes in the future are not valid, so set it to a max of 20 minutes. Defaults to 20 minutes.
-    public init(issuerID: String, privateKeyID: String? = nil, privateKeyURL: URL, expirationDuration: TimeInterval = 60 * 20) throws {
+    ///   - scope: Optional JWT scope claim for APIs that require restricted access.
+    public init(issuerID: String, privateKeyID: String? = nil, privateKeyURL: URL, expirationDuration: TimeInterval = 60 * 20, scope: [String]? = nil) throws {
         self.issuerID = issuerID
+        self.scope = scope
         if let privateKeyID = privateKeyID {
             self.privateKeyID = privateKeyID
         } else {
@@ -116,8 +125,10 @@ public struct APIConfiguration {
     ///   - individualPrivateKeyID: Your private key ID from App Store Connect (Ex: 2X9R4HXF34). Will be inferred from `privateKeyURL` if nil.
     ///   - individualPrivateKeyURL: A file URL that references the path to your private key file.
     ///   - expirationDuration: The token's expiration duration in seconds. Tokens that expire more than 20 minutes in the future are not valid, so set it to a max of 20 minutes. Defaults to 20 minutes.
-    public init(individualPrivateKeyID: String? = nil, privateKeyURL: URL, expirationDuration: TimeInterval = 60 * 20) throws {
+    ///   - scope: Optional JWT scope claim for APIs that require restricted access.
+    public init(individualPrivateKeyID: String? = nil, privateKeyURL: URL, expirationDuration: TimeInterval = 60 * 20, scope: [String]? = nil) throws {
         self.issuerID = nil
+        self.scope = scope
         if let individualPrivateKeyID {
             self.privateKeyID = individualPrivateKeyID
         } else {

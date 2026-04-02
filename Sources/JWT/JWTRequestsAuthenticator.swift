@@ -22,7 +22,7 @@ final class JWTRequestsAuthenticator {
 
     init(apiConfiguration: APIConfiguration) {
         self.apiConfiguration = apiConfiguration
-        self.jwtCreator = JWT(keyIdentifier: apiConfiguration.privateKeyID, issuerIdentifier: apiConfiguration.issuerID, expireDuration: apiConfiguration.expirationDuration)
+        self.jwtCreator = JWT(keyIdentifier: apiConfiguration.privateKeyID, issuerIdentifier: apiConfiguration.issuerID, expireDuration: apiConfiguration.expirationDuration, scope: apiConfiguration.scope)
     }
 
     /// Generates a new JWT Token, but only if the in memory cached one is not expired.
