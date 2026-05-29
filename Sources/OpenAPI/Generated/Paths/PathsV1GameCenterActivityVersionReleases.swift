@@ -13,6 +13,7 @@ extension APIEndpoint.V1 {
 		/// Path: `/v1/gameCenterActivityVersionReleases`
 		public let path: String
 
+		@available(*, deprecated, message: "Deprecated")
 		public func post(_ body: AppStoreConnect_Swift_SDK.GameCenterActivityVersionReleaseCreateRequest) -> Request<AppStoreConnect_Swift_SDK.GameCenterActivityVersionReleaseResponse> {
 			Request(path: path, method: "POST", body: body, id: "gameCenterActivityVersionReleases_createInstance")
 		}

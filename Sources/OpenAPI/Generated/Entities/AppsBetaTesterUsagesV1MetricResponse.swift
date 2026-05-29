@@ -10,10 +10,10 @@ public struct AppsBetaTesterUsagesV1MetricResponse: Codable {
 	public var included: [BetaTester]?
 
 	public struct Datum: Codable {
-		public var dataPoints: DataPoints?
+		public var dataPoints: [DataPoint]?
 		public var dimensions: Dimensions?
 
-		public struct DataPoints: Codable {
+		public struct DataPoint: Codable {
 			public var start: Date?
 			public var end: Date?
 			public var values: Values?
@@ -127,14 +127,14 @@ public struct AppsBetaTesterUsagesV1MetricResponse: Codable {
 			}
 		}
 
-		public init(dataPoints: DataPoints? = nil, dimensions: Dimensions? = nil) {
+		public init(dataPoints: [DataPoint]? = nil, dimensions: Dimensions? = nil) {
 			self.dataPoints = dataPoints
 			self.dimensions = dimensions
 		}
 
 		public init(from decoder: Decoder) throws {
 			let values = try decoder.container(keyedBy: StringCodingKey.self)
-			self.dataPoints = try values.decodeIfPresent(DataPoints.self, forKey: "dataPoints")
+			self.dataPoints = try values.decodeIfPresent([DataPoint].self, forKey: "dataPoints")
 			self.dimensions = try values.decodeIfPresent(Dimensions.self, forKey: "dimensions")
 		}
 

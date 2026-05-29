@@ -13,6 +13,7 @@ extension APIEndpoint.V1.GameCenterLeaderboardSetLocalizations {
 		/// Path: `/v1/gameCenterLeaderboardSetLocalizations/{id}`
 		public let path: String
 
+		@available(*, deprecated, message: "Deprecated")
 		public func get(parameters: GetParameters? = nil) -> Request<AppStoreConnect_Swift_SDK.GameCenterLeaderboardSetLocalizationResponse> {
 			Request(path: path, method: "GET", query: parameters?.asQuery, id: "gameCenterLeaderboardSetLocalizations_getInstance")
 		}
@@ -58,10 +59,12 @@ extension APIEndpoint.V1.GameCenterLeaderboardSetLocalizations {
 			}
 		}
 
+		@available(*, deprecated, message: "Deprecated")
 		public func patch(_ body: AppStoreConnect_Swift_SDK.GameCenterLeaderboardSetLocalizationUpdateRequest) -> Request<AppStoreConnect_Swift_SDK.GameCenterLeaderboardSetLocalizationResponse> {
 			Request(path: path, method: "PATCH", body: body, id: "gameCenterLeaderboardSetLocalizations_updateInstance")
 		}
 
+		@available(*, deprecated, message: "Deprecated")
 		public var delete: Request<Void> {
 			Request(path: path, method: "DELETE", id: "gameCenterLeaderboardSetLocalizations_deleteInstance")
 		}

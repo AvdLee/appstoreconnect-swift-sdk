@@ -13,6 +13,7 @@ extension APIEndpoint.V1.GameCenterLeaderboardImages {
 		/// Path: `/v1/gameCenterLeaderboardImages/{id}`
 		public let path: String
 
+		@available(*, deprecated, message: "Deprecated")
 		public func get(fieldsGameCenterLeaderboardImages: [FieldsGameCenterLeaderboardImages]? = nil, include: [Include]? = nil) -> Request<AppStoreConnect_Swift_SDK.GameCenterLeaderboardImageResponse> {
 			Request(path: path, method: "GET", query: makeGetQuery(fieldsGameCenterLeaderboardImages, include), id: "gameCenterLeaderboardImages_getInstance")
 		}
@@ -37,10 +38,12 @@ extension APIEndpoint.V1.GameCenterLeaderboardImages {
 			case gameCenterLeaderboardLocalization
 		}
 
+		@available(*, deprecated, message: "Deprecated")
 		public func patch(_ body: AppStoreConnect_Swift_SDK.GameCenterLeaderboardImageUpdateRequest) -> Request<AppStoreConnect_Swift_SDK.GameCenterLeaderboardImageResponse> {
 			Request(path: path, method: "PATCH", body: body, id: "gameCenterLeaderboardImages_updateInstance")
 		}
 
+		@available(*, deprecated, message: "Deprecated")
 		public var delete: Request<Void> {
 			Request(path: path, method: "DELETE", id: "gameCenterLeaderboardImages_deleteInstance")
 		}

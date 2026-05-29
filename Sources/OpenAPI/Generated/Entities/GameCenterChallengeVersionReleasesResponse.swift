@@ -3,6 +3,7 @@
 
 import Foundation
 
+@available(*, deprecated, message: "Deprecated")
 public struct GameCenterChallengeVersionReleasesResponse: Codable {
 	public var data: [GameCenterChallengeVersionRelease]
 	public var included: [GameCenterChallengeVersion]?

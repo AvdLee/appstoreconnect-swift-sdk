@@ -18,6 +18,7 @@ extension APIEndpoint.V1.BackgroundAssets.WithID {
 		}
 
 		public struct GetParameters {
+			public var filterPlatforms: [FilterPlatforms]?
 			public var filterState: [FilterState]?
 			public var filterVersion: [String]?
 			public var filterInternalBetaReleaseState: [FilterInternalBetaReleaseState]?
@@ -32,6 +33,13 @@ extension APIEndpoint.V1.BackgroundAssets.WithID {
 			public var fieldsBackgroundAssetUploadFiles: [FieldsBackgroundAssetUploadFiles]?
 			public var limit: Int?
 			public var include: [Include]?
+
+			public enum FilterPlatforms: String, Codable, CaseIterable {
+				case ios = "IOS"
+				case macOs = "MAC_OS"
+				case tvOs = "TV_OS"
+				case visionOs = "VISION_OS"
+			}
 
 			public enum FilterState: String, Codable, CaseIterable {
 				case awaitingUpload = "AWAITING_UPLOAD"
@@ -91,6 +99,7 @@ extension APIEndpoint.V1.BackgroundAssets.WithID {
 				case archived
 				case assetPackIdentifier
 				case createdDate
+				case usedBytes
 				case app
 				case versions
 				case appStoreVersion
@@ -133,7 +142,8 @@ extension APIEndpoint.V1.BackgroundAssets.WithID {
 				case manifestFile
 			}
 
-			public init(filterState: [FilterState]? = nil, filterVersion: [String]? = nil, filterInternalBetaReleaseState: [FilterInternalBetaReleaseState]? = nil, filterExternalBetaReleaseState: [FilterExternalBetaReleaseState]? = nil, filterAppStoreReleaseState: [FilterAppStoreReleaseState]? = nil, sort: [Sort]? = nil, fieldsBackgroundAssetVersions: [FieldsBackgroundAssetVersions]? = nil, fieldsBackgroundAssets: [FieldsBackgroundAssets]? = nil, fieldsBackgroundAssetVersionInternalBetaReleases: [FieldsBackgroundAssetVersionInternalBetaReleases]? = nil, fieldsBackgroundAssetVersionExternalBetaReleases: [FieldsBackgroundAssetVersionExternalBetaReleases]? = nil, fieldsBackgroundAssetVersionAppStoreReleases: [FieldsBackgroundAssetVersionAppStoreReleases]? = nil, fieldsBackgroundAssetUploadFiles: [FieldsBackgroundAssetUploadFiles]? = nil, limit: Int? = nil, include: [Include]? = nil) {
+			public init(filterPlatforms: [FilterPlatforms]? = nil, filterState: [FilterState]? = nil, filterVersion: [String]? = nil, filterInternalBetaReleaseState: [FilterInternalBetaReleaseState]? = nil, filterExternalBetaReleaseState: [FilterExternalBetaReleaseState]? = nil, filterAppStoreReleaseState: [FilterAppStoreReleaseState]? = nil, sort: [Sort]? = nil, fieldsBackgroundAssetVersions: [FieldsBackgroundAssetVersions]? = nil, fieldsBackgroundAssets: [FieldsBackgroundAssets]? = nil, fieldsBackgroundAssetVersionInternalBetaReleases: [FieldsBackgroundAssetVersionInternalBetaReleases]? = nil, fieldsBackgroundAssetVersionExternalBetaReleases: [FieldsBackgroundAssetVersionExternalBetaReleases]? = nil, fieldsBackgroundAssetVersionAppStoreReleases: [FieldsBackgroundAssetVersionAppStoreReleases]? = nil, fieldsBackgroundAssetUploadFiles: [FieldsBackgroundAssetUploadFiles]? = nil, limit: Int? = nil, include: [Include]? = nil) {
+				self.filterPlatforms = filterPlatforms
 				self.filterState = filterState
 				self.filterVersion = filterVersion
 				self.filterInternalBetaReleaseState = filterInternalBetaReleaseState
@@ -152,6 +162,7 @@ extension APIEndpoint.V1.BackgroundAssets.WithID {
 
 			public var asQuery: [(String, String?)] {
 				let encoder = URLQueryEncoder(explode: false)
+				encoder.encode(filterPlatforms, forKey: "filter[platforms]")
 				encoder.encode(filterState, forKey: "filter[state]")
 				encoder.encode(filterVersion, forKey: "filter[version]")
 				encoder.encode(filterInternalBetaReleaseState, forKey: "filter[internalBetaRelease.state]")

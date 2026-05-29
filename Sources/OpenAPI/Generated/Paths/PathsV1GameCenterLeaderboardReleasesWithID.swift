@@ -13,6 +13,7 @@ extension APIEndpoint.V1.GameCenterLeaderboardReleases {
 		/// Path: `/v1/gameCenterLeaderboardReleases/{id}`
 		public let path: String
 
+		@available(*, deprecated, message: "Deprecated")
 		public func get(fieldsGameCenterLeaderboardReleases: [FieldsGameCenterLeaderboardReleases]? = nil, include: [Include]? = nil) -> Request<AppStoreConnect_Swift_SDK.GameCenterLeaderboardReleaseResponse> {
 			Request(path: path, method: "GET", query: makeGetQuery(fieldsGameCenterLeaderboardReleases, include), id: "gameCenterLeaderboardReleases_getInstance")
 		}
@@ -35,6 +36,7 @@ extension APIEndpoint.V1.GameCenterLeaderboardReleases {
 			case gameCenterLeaderboard
 		}
 
+		@available(*, deprecated, message: "Deprecated")
 		public var delete: Request<Void> {
 			Request(path: path, method: "DELETE", id: "gameCenterLeaderboardReleases_deleteInstance")
 		}

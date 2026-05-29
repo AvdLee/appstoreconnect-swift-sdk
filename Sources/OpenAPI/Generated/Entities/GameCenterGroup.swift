@@ -34,10 +34,13 @@ public struct GameCenterGroup: Codable, Identifiable {
 
 	public struct Relationships: Codable {
 		public var gameCenterDetails: GameCenterDetails?
+		/// - warning: Deprecated.
 		public var gameCenterLeaderboards: GameCenterLeaderboards?
 		public var gameCenterLeaderboardsV2: GameCenterLeaderboardsV2?
+		/// - warning: Deprecated.
 		public var gameCenterLeaderboardSets: GameCenterLeaderboardSets?
 		public var gameCenterLeaderboardSetsV2: GameCenterLeaderboardSetsV2?
+		/// - warning: Deprecated.
 		public var gameCenterAchievements: GameCenterAchievements?
 		public var gameCenterAchievementsV2: GameCenterAchievementsV2?
 		public var gameCenterActivities: GameCenterActivities?
@@ -95,6 +98,7 @@ public struct GameCenterGroup: Codable, Identifiable {
 			}
 		}
 
+		@available(*, deprecated, message: "Deprecated")
 		public struct GameCenterLeaderboards: Codable {
 			public var links: RelationshipLinks?
 			public var meta: PagingInformation?
@@ -199,6 +203,7 @@ public struct GameCenterGroup: Codable, Identifiable {
 			}
 		}
 
+		@available(*, deprecated, message: "Deprecated")
 		public struct GameCenterLeaderboardSets: Codable {
 			public var links: RelationshipLinks?
 			public var meta: PagingInformation?
@@ -303,6 +308,7 @@ public struct GameCenterGroup: Codable, Identifiable {
 			}
 		}
 
+		@available(*, deprecated, message: "Deprecated")
 		public struct GameCenterAchievements: Codable {
 			public var links: RelationshipLinks?
 			public var meta: PagingInformation?

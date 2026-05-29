@@ -3,8 +3,11 @@
 
 import Foundation
 
+@available(*, deprecated, message: "Deprecated")
 public struct GameCenterLeaderboardSetReleaseResponse: Codable {
 	/// GameCenterLeaderboardSetRelease
+	///
+	/// - warning: Deprecated.
 	public var data: GameCenterLeaderboardSetRelease
 	public var included: [IncludedItem]?
 	public var links: DocumentLinks

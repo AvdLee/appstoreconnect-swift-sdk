@@ -3,6 +3,7 @@
 
 import Foundation
 
+@available(*, deprecated, message: "Deprecated")
 public struct GameCenterAchievementReleaseCreateRequest: Codable {
 	public var data: Data
 

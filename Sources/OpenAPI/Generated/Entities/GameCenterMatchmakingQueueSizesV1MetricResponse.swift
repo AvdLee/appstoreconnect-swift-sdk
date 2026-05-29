@@ -9,10 +9,10 @@ public struct GameCenterMatchmakingQueueSizesV1MetricResponse: Codable {
 	public var meta: PagingInformation?
 
 	public struct Datum: Codable {
-		public var dataPoints: DataPoints?
+		public var dataPoints: [DataPoint]?
 		public var granularity: Granularity?
 
-		public struct DataPoints: Codable {
+		public struct DataPoint: Codable {
 			public var start: Date?
 			public var end: Date?
 			public var values: Values?
@@ -74,14 +74,14 @@ public struct GameCenterMatchmakingQueueSizesV1MetricResponse: Codable {
 			case pt15m = "PT15M"
 		}
 
-		public init(dataPoints: DataPoints? = nil, granularity: Granularity? = nil) {
+		public init(dataPoints: [DataPoint]? = nil, granularity: Granularity? = nil) {
 			self.dataPoints = dataPoints
 			self.granularity = granularity
 		}
 
 		public init(from decoder: Decoder) throws {
 			let values = try decoder.container(keyedBy: StringCodingKey.self)
-			self.dataPoints = try values.decodeIfPresent(DataPoints.self, forKey: "dataPoints")
+			self.dataPoints = try values.decodeIfPresent([DataPoint].self, forKey: "dataPoints")
 			self.granularity = try values.decodeIfPresent(Granularity.self, forKey: "granularity")
 		}
 

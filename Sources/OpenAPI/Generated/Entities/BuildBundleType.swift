@@ -6,4 +6,5 @@ import Foundation
 public enum BuildBundleType: String, Codable, CaseIterable {
 	case app = "APP"
 	case appClip = "APP_CLIP"
+	case watchApp = "WATCH_APP"
 }

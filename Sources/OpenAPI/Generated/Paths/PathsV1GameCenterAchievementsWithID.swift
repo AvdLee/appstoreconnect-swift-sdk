@@ -13,6 +13,7 @@ extension APIEndpoint.V1.GameCenterAchievements {
 		/// Path: `/v1/gameCenterAchievements/{id}`
 		public let path: String
 
+		@available(*, deprecated, message: "Deprecated")
 		public func get(parameters: GetParameters? = nil) -> Request<AppStoreConnect_Swift_SDK.GameCenterAchievementResponse> {
 			Request(path: path, method: "GET", query: parameters?.asQuery, id: "gameCenterAchievements_getInstance")
 		}
@@ -86,10 +87,12 @@ extension APIEndpoint.V1.GameCenterAchievements {
 			}
 		}
 
+		@available(*, deprecated, message: "Deprecated")
 		public func patch(_ body: AppStoreConnect_Swift_SDK.GameCenterAchievementUpdateRequest) -> Request<AppStoreConnect_Swift_SDK.GameCenterAchievementResponse> {
 			Request(path: path, method: "PATCH", body: body, id: "gameCenterAchievements_updateInstance")
 		}
 
+		@available(*, deprecated, message: "Deprecated")
 		public var delete: Request<Void> {
 			Request(path: path, method: "DELETE", id: "gameCenterAchievements_deleteInstance")
 		}

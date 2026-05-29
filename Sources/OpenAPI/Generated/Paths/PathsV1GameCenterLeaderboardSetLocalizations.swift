@@ -13,6 +13,7 @@ extension APIEndpoint.V1 {
 		/// Path: `/v1/gameCenterLeaderboardSetLocalizations`
 		public let path: String
 
+		@available(*, deprecated, message: "Deprecated")
 		public func post(_ body: AppStoreConnect_Swift_SDK.GameCenterLeaderboardSetLocalizationCreateRequest) -> Request<AppStoreConnect_Swift_SDK.GameCenterLeaderboardSetLocalizationResponse> {
 			Request(path: path, method: "POST", body: body, id: "gameCenterLeaderboardSetLocalizations_createInstance")
 		}

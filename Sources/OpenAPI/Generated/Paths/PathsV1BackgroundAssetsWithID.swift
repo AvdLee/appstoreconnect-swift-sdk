@@ -28,6 +28,7 @@ extension APIEndpoint.V1.BackgroundAssets {
 			case archived
 			case assetPackIdentifier
 			case createdDate
+			case usedBytes
 			case app
 			case versions
 			case appStoreVersion

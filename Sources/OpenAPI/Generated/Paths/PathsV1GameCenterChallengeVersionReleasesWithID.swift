@@ -13,6 +13,7 @@ extension APIEndpoint.V1.GameCenterChallengeVersionReleases {
 		/// Path: `/v1/gameCenterChallengeVersionReleases/{id}`
 		public let path: String
 
+		@available(*, deprecated, message: "Deprecated")
 		public func get(fieldsGameCenterChallengeVersionReleases: [FieldsGameCenterChallengeVersionReleases]? = nil, include: [Include]? = nil) -> Request<AppStoreConnect_Swift_SDK.GameCenterChallengeVersionReleaseResponse> {
 			Request(path: path, method: "GET", query: makeGetQuery(fieldsGameCenterChallengeVersionReleases, include), id: "gameCenterChallengeVersionReleases_getInstance")
 		}
@@ -32,6 +33,7 @@ extension APIEndpoint.V1.GameCenterChallengeVersionReleases {
 			case version
 		}
 
+		@available(*, deprecated, message: "Deprecated")
 		public var delete: Request<Void> {
 			Request(path: path, method: "DELETE", id: "gameCenterChallengeVersionReleases_deleteInstance")
 		}

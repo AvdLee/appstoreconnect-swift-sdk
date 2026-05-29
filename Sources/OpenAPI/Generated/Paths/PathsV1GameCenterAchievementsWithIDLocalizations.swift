@@ -13,6 +13,7 @@ extension APIEndpoint.V1.GameCenterAchievements.WithID {
 		/// Path: `/v1/gameCenterAchievements/{id}/localizations`
 		public let path: String
 
+		@available(*, deprecated, message: "Deprecated")
 		public func get(parameters: GetParameters? = nil) -> Request<AppStoreConnect_Swift_SDK.GameCenterAchievementLocalizationsResponse> {
 			Request(path: path, method: "GET", query: parameters?.asQuery, id: "gameCenterAchievements_localizations_getToManyRelated")
 		}

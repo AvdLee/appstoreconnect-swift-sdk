@@ -21,14 +21,16 @@ public struct GameCenterPlayerAchievementSubmissionCreateRequest: Codable {
 			public var scopedPlayerID: String
 			public var submittedDate: Date?
 			public var vendorIdentifier: String
+			public var isPreReleased: Bool?
 
-			public init(bundleID: String, challengeIDs: [String]? = nil, percentageAchieved: Int, scopedPlayerID: String, submittedDate: Date? = nil, vendorIdentifier: String) {
+			public init(bundleID: String, challengeIDs: [String]? = nil, percentageAchieved: Int, scopedPlayerID: String, submittedDate: Date? = nil, vendorIdentifier: String, isPreReleased: Bool? = nil) {
 				self.bundleID = bundleID
 				self.challengeIDs = challengeIDs
 				self.percentageAchieved = percentageAchieved
 				self.scopedPlayerID = scopedPlayerID
 				self.submittedDate = submittedDate
 				self.vendorIdentifier = vendorIdentifier
+				self.isPreReleased = isPreReleased
 			}
 
 			public init(from decoder: Decoder) throws {
@@ -39,6 +41,7 @@ public struct GameCenterPlayerAchievementSubmissionCreateRequest: Codable {
 				self.scopedPlayerID = try values.decode(String.self, forKey: "scopedPlayerId")
 				self.submittedDate = try values.decodeIfPresent(Date.self, forKey: "submittedDate")
 				self.vendorIdentifier = try values.decode(String.self, forKey: "vendorIdentifier")
+				self.isPreReleased = try values.decodeIfPresent(Bool.self, forKey: "preReleased")
 			}
 
 			public func encode(to encoder: Encoder) throws {
@@ -49,6 +52,7 @@ public struct GameCenterPlayerAchievementSubmissionCreateRequest: Codable {
 				try values.encode(scopedPlayerID, forKey: "scopedPlayerId")
 				try values.encodeIfPresent(submittedDate, forKey: "submittedDate")
 				try values.encode(vendorIdentifier, forKey: "vendorIdentifier")
+				try values.encodeIfPresent(isPreReleased, forKey: "preReleased")
 			}
 		}
 

@@ -25,7 +25,6 @@ extension APIEndpoint.V1.Apps.WithID {
 			public var filterID: [String]?
 			public var fieldsAppStoreVersions: [FieldsAppStoreVersions]?
 			public var fieldsApps: [FieldsApps]?
-			public var fieldsAgeRatingDeclarations: [FieldsAgeRatingDeclarations]?
 			public var fieldsAppStoreVersionLocalizations: [FieldsAppStoreVersionLocalizations]?
 			public var fieldsBuilds: [FieldsBuilds]?
 			public var fieldsAppStoreVersionPhasedReleases: [FieldsAppStoreVersionPhasedReleases]?
@@ -103,7 +102,6 @@ extension APIEndpoint.V1.Apps.WithID {
 				case downloadable
 				case createdDate
 				case app
-				case ageRatingDeclaration
 				case appStoreVersionLocalizations
 				case build
 				case appStoreVersionPhasedRelease
@@ -174,36 +172,6 @@ extension APIEndpoint.V1.Apps.WithID {
 				case searchKeywords
 				case webhooks
 				case androidToIosAppMappingDetails
-			}
-
-			public enum FieldsAgeRatingDeclarations: String, Codable, CaseIterable {
-				case advertising
-				case alcoholTobaccoOrDrugUseOrReferences
-				case contests
-				case gambling
-				case gamblingSimulated
-				case gunsOrOtherWeapons
-				case healthOrWellnessTopics
-				case kidsAgeBand
-				case lootBox
-				case medicalOrTreatmentInformation
-				case messagingAndChat
-				case parentalControls
-				case profanityOrCrudeHumor
-				case ageAssurance
-				case sexualContentGraphicAndNudity
-				case sexualContentOrNudity
-				case horrorOrFearThemes
-				case matureOrSuggestiveThemes
-				case unrestrictedWebAccess
-				case userGeneratedContent
-				case violenceCartoonOrFantasy
-				case violenceRealisticProlongedGraphicOrSadistic
-				case violenceRealistic
-				case ageRatingOverride
-				case ageRatingOverrideV2
-				case koreaAgeRatingOverride
-				case developerAgeRatingInfoURL = "developerAgeRatingInfoUrl"
 			}
 
 			public enum FieldsAppStoreVersionLocalizations: String, Codable, CaseIterable {
@@ -318,7 +286,6 @@ extension APIEndpoint.V1.Apps.WithID {
 
 			public enum Include: String, Codable, CaseIterable {
 				case app
-				case ageRatingDeclaration
 				case appStoreVersionLocalizations
 				case build
 				case appStoreVersionPhasedRelease
@@ -332,7 +299,7 @@ extension APIEndpoint.V1.Apps.WithID {
 				case alternativeDistributionPackage
 			}
 
-			public init(filterPlatform: [FilterPlatform]? = nil, filterVersionString: [String]? = nil, filterAppStoreState: [FilterAppStoreState]? = nil, filterAppVersionState: [FilterAppVersionState]? = nil, filterID: [String]? = nil, fieldsAppStoreVersions: [FieldsAppStoreVersions]? = nil, fieldsApps: [FieldsApps]? = nil, fieldsAgeRatingDeclarations: [FieldsAgeRatingDeclarations]? = nil, fieldsAppStoreVersionLocalizations: [FieldsAppStoreVersionLocalizations]? = nil, fieldsBuilds: [FieldsBuilds]? = nil, fieldsAppStoreVersionPhasedReleases: [FieldsAppStoreVersionPhasedReleases]? = nil, fieldsGameCenterAppVersions: [FieldsGameCenterAppVersions]? = nil, fieldsRoutingAppCoverages: [FieldsRoutingAppCoverages]? = nil, fieldsAppStoreReviewDetails: [FieldsAppStoreReviewDetails]? = nil, fieldsAppStoreVersionSubmissions: [FieldsAppStoreVersionSubmissions]? = nil, fieldsAppClipDefaultExperiences: [FieldsAppClipDefaultExperiences]? = nil, fieldsAppStoreVersionExperiments: [FieldsAppStoreVersionExperiments]? = nil, fieldsAlternativeDistributionPackages: [FieldsAlternativeDistributionPackages]? = nil, limit: Int? = nil, include: [Include]? = nil, limitAppStoreVersionLocalizations: Int? = nil, limitAppStoreVersionExperiments: Int? = nil, limitAppStoreVersionExperimentsV2: Int? = nil) {
+			public init(filterPlatform: [FilterPlatform]? = nil, filterVersionString: [String]? = nil, filterAppStoreState: [FilterAppStoreState]? = nil, filterAppVersionState: [FilterAppVersionState]? = nil, filterID: [String]? = nil, fieldsAppStoreVersions: [FieldsAppStoreVersions]? = nil, fieldsApps: [FieldsApps]? = nil, fieldsAppStoreVersionLocalizations: [FieldsAppStoreVersionLocalizations]? = nil, fieldsBuilds: [FieldsBuilds]? = nil, fieldsAppStoreVersionPhasedReleases: [FieldsAppStoreVersionPhasedReleases]? = nil, fieldsGameCenterAppVersions: [FieldsGameCenterAppVersions]? = nil, fieldsRoutingAppCoverages: [FieldsRoutingAppCoverages]? = nil, fieldsAppStoreReviewDetails: [FieldsAppStoreReviewDetails]? = nil, fieldsAppStoreVersionSubmissions: [FieldsAppStoreVersionSubmissions]? = nil, fieldsAppClipDefaultExperiences: [FieldsAppClipDefaultExperiences]? = nil, fieldsAppStoreVersionExperiments: [FieldsAppStoreVersionExperiments]? = nil, fieldsAlternativeDistributionPackages: [FieldsAlternativeDistributionPackages]? = nil, limit: Int? = nil, include: [Include]? = nil, limitAppStoreVersionLocalizations: Int? = nil, limitAppStoreVersionExperiments: Int? = nil, limitAppStoreVersionExperimentsV2: Int? = nil) {
 				self.filterPlatform = filterPlatform
 				self.filterVersionString = filterVersionString
 				self.filterAppStoreState = filterAppStoreState
@@ -340,7 +307,6 @@ extension APIEndpoint.V1.Apps.WithID {
 				self.filterID = filterID
 				self.fieldsAppStoreVersions = fieldsAppStoreVersions
 				self.fieldsApps = fieldsApps
-				self.fieldsAgeRatingDeclarations = fieldsAgeRatingDeclarations
 				self.fieldsAppStoreVersionLocalizations = fieldsAppStoreVersionLocalizations
 				self.fieldsBuilds = fieldsBuilds
 				self.fieldsAppStoreVersionPhasedReleases = fieldsAppStoreVersionPhasedReleases
@@ -367,7 +333,6 @@ extension APIEndpoint.V1.Apps.WithID {
 				encoder.encode(filterID, forKey: "filter[id]")
 				encoder.encode(fieldsAppStoreVersions, forKey: "fields[appStoreVersions]")
 				encoder.encode(fieldsApps, forKey: "fields[apps]")
-				encoder.encode(fieldsAgeRatingDeclarations, forKey: "fields[ageRatingDeclarations]")
 				encoder.encode(fieldsAppStoreVersionLocalizations, forKey: "fields[appStoreVersionLocalizations]")
 				encoder.encode(fieldsBuilds, forKey: "fields[builds]")
 				encoder.encode(fieldsAppStoreVersionPhasedReleases, forKey: "fields[appStoreVersionPhasedReleases]")

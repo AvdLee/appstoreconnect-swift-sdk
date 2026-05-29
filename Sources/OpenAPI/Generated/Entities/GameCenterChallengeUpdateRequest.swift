@@ -43,9 +43,11 @@ public struct GameCenterChallengeUpdateRequest: Codable {
 		}
 
 		public struct Relationships: Codable {
+			/// - warning: Deprecated.
 			public var leaderboard: Leaderboard?
 			public var leaderboardV2: LeaderboardV2?
 
+			@available(*, deprecated, message: "Deprecated")
 			public struct Leaderboard: Codable {
 				public var data: Data?
 

@@ -216,7 +216,6 @@ extension APIEndpoint.V1.BuildBetaDetails.WithID {
 				case downloadable
 				case createdDate
 				case app
-				case ageRatingDeclaration
 				case appStoreVersionLocalizations
 				case build
 				case appStoreVersionPhasedRelease
@@ -258,6 +257,7 @@ extension APIEndpoint.V1.BuildBetaDetails.WithID {
 				case entitlements
 				case baDownloadAllowance
 				case baMaxInstallSize
+				case minimumOsVersion
 				case appClipDomainCacheStatus
 				case appClipDomainDebugStatus
 				case betaAppClipInvocations

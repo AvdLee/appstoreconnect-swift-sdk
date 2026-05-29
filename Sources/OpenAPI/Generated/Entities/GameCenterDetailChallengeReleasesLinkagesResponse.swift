@@ -3,6 +3,7 @@
 
 import Foundation
 
+@available(*, deprecated, message: "Deprecated")
 public struct GameCenterDetailChallengeReleasesLinkagesResponse: Codable {
 	public var data: [Datum]
 	public var links: PagedDocumentLinks

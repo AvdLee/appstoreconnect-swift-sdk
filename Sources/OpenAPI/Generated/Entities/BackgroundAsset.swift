@@ -18,11 +18,13 @@ public struct BackgroundAsset: Codable, Identifiable {
 		public var isArchived: Bool?
 		public var assetPackIdentifier: String?
 		public var createdDate: Date?
+		public var usedBytes: Int64?
 
-		public init(isArchived: Bool? = nil, assetPackIdentifier: String? = nil, createdDate: Date? = nil) {
+		public init(isArchived: Bool? = nil, assetPackIdentifier: String? = nil, createdDate: Date? = nil, usedBytes: Int64? = nil) {
 			self.isArchived = isArchived
 			self.assetPackIdentifier = assetPackIdentifier
 			self.createdDate = createdDate
+			self.usedBytes = usedBytes
 		}
 
 		public init(from decoder: Decoder) throws {
@@ -30,6 +32,7 @@ public struct BackgroundAsset: Codable, Identifiable {
 			self.isArchived = try values.decodeIfPresent(Bool.self, forKey: "archived")
 			self.assetPackIdentifier = try values.decodeIfPresent(String.self, forKey: "assetPackIdentifier")
 			self.createdDate = try values.decodeIfPresent(Date.self, forKey: "createdDate")
+			self.usedBytes = try values.decodeIfPresent(Int64.self, forKey: "usedBytes")
 		}
 
 		public func encode(to encoder: Encoder) throws {
@@ -37,6 +40,7 @@ public struct BackgroundAsset: Codable, Identifiable {
 			try values.encodeIfPresent(isArchived, forKey: "archived")
 			try values.encodeIfPresent(assetPackIdentifier, forKey: "assetPackIdentifier")
 			try values.encodeIfPresent(createdDate, forKey: "createdDate")
+			try values.encodeIfPresent(usedBytes, forKey: "usedBytes")
 		}
 	}
 

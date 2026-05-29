@@ -19,7 +19,6 @@ extension APIEndpoint.V1.AppStoreVersions {
 
 		public struct GetParameters {
 			public var fieldsAppStoreVersions: [FieldsAppStoreVersions]?
-			public var fieldsAgeRatingDeclarations: [FieldsAgeRatingDeclarations]?
 			public var fieldsAppStoreVersionLocalizations: [FieldsAppStoreVersionLocalizations]?
 			public var fieldsBuilds: [FieldsBuilds]?
 			public var fieldsAppStoreVersionPhasedReleases: [FieldsAppStoreVersionPhasedReleases]?
@@ -48,7 +47,6 @@ extension APIEndpoint.V1.AppStoreVersions {
 				case downloadable
 				case createdDate
 				case app
-				case ageRatingDeclaration
 				case appStoreVersionLocalizations
 				case build
 				case appStoreVersionPhasedRelease
@@ -61,36 +59,6 @@ extension APIEndpoint.V1.AppStoreVersions {
 				case appStoreVersionExperimentsV2
 				case customerReviews
 				case alternativeDistributionPackage
-			}
-
-			public enum FieldsAgeRatingDeclarations: String, Codable, CaseIterable {
-				case advertising
-				case alcoholTobaccoOrDrugUseOrReferences
-				case contests
-				case gambling
-				case gamblingSimulated
-				case gunsOrOtherWeapons
-				case healthOrWellnessTopics
-				case kidsAgeBand
-				case lootBox
-				case medicalOrTreatmentInformation
-				case messagingAndChat
-				case parentalControls
-				case profanityOrCrudeHumor
-				case ageAssurance
-				case sexualContentGraphicAndNudity
-				case sexualContentOrNudity
-				case horrorOrFearThemes
-				case matureOrSuggestiveThemes
-				case unrestrictedWebAccess
-				case userGeneratedContent
-				case violenceCartoonOrFantasy
-				case violenceRealisticProlongedGraphicOrSadistic
-				case violenceRealistic
-				case ageRatingOverride
-				case ageRatingOverrideV2
-				case koreaAgeRatingOverride
-				case developerAgeRatingInfoURL = "developerAgeRatingInfoUrl"
 			}
 
 			public enum FieldsAppStoreVersionLocalizations: String, Codable, CaseIterable {
@@ -205,7 +173,6 @@ extension APIEndpoint.V1.AppStoreVersions {
 
 			public enum Include: String, Codable, CaseIterable {
 				case app
-				case ageRatingDeclaration
 				case appStoreVersionLocalizations
 				case build
 				case appStoreVersionPhasedRelease
@@ -219,9 +186,8 @@ extension APIEndpoint.V1.AppStoreVersions {
 				case alternativeDistributionPackage
 			}
 
-			public init(fieldsAppStoreVersions: [FieldsAppStoreVersions]? = nil, fieldsAgeRatingDeclarations: [FieldsAgeRatingDeclarations]? = nil, fieldsAppStoreVersionLocalizations: [FieldsAppStoreVersionLocalizations]? = nil, fieldsBuilds: [FieldsBuilds]? = nil, fieldsAppStoreVersionPhasedReleases: [FieldsAppStoreVersionPhasedReleases]? = nil, fieldsGameCenterAppVersions: [FieldsGameCenterAppVersions]? = nil, fieldsRoutingAppCoverages: [FieldsRoutingAppCoverages]? = nil, fieldsAppStoreReviewDetails: [FieldsAppStoreReviewDetails]? = nil, fieldsAppStoreVersionSubmissions: [FieldsAppStoreVersionSubmissions]? = nil, fieldsAppClipDefaultExperiences: [FieldsAppClipDefaultExperiences]? = nil, fieldsAppStoreVersionExperiments: [FieldsAppStoreVersionExperiments]? = nil, fieldsAlternativeDistributionPackages: [FieldsAlternativeDistributionPackages]? = nil, include: [Include]? = nil, limitAppStoreVersionExperiments: Int? = nil, limitAppStoreVersionExperimentsV2: Int? = nil, limitAppStoreVersionLocalizations: Int? = nil) {
+			public init(fieldsAppStoreVersions: [FieldsAppStoreVersions]? = nil, fieldsAppStoreVersionLocalizations: [FieldsAppStoreVersionLocalizations]? = nil, fieldsBuilds: [FieldsBuilds]? = nil, fieldsAppStoreVersionPhasedReleases: [FieldsAppStoreVersionPhasedReleases]? = nil, fieldsGameCenterAppVersions: [FieldsGameCenterAppVersions]? = nil, fieldsRoutingAppCoverages: [FieldsRoutingAppCoverages]? = nil, fieldsAppStoreReviewDetails: [FieldsAppStoreReviewDetails]? = nil, fieldsAppStoreVersionSubmissions: [FieldsAppStoreVersionSubmissions]? = nil, fieldsAppClipDefaultExperiences: [FieldsAppClipDefaultExperiences]? = nil, fieldsAppStoreVersionExperiments: [FieldsAppStoreVersionExperiments]? = nil, fieldsAlternativeDistributionPackages: [FieldsAlternativeDistributionPackages]? = nil, include: [Include]? = nil, limitAppStoreVersionExperiments: Int? = nil, limitAppStoreVersionExperimentsV2: Int? = nil, limitAppStoreVersionLocalizations: Int? = nil) {
 				self.fieldsAppStoreVersions = fieldsAppStoreVersions
-				self.fieldsAgeRatingDeclarations = fieldsAgeRatingDeclarations
 				self.fieldsAppStoreVersionLocalizations = fieldsAppStoreVersionLocalizations
 				self.fieldsBuilds = fieldsBuilds
 				self.fieldsAppStoreVersionPhasedReleases = fieldsAppStoreVersionPhasedReleases
@@ -241,7 +207,6 @@ extension APIEndpoint.V1.AppStoreVersions {
 			public var asQuery: [(String, String?)] {
 				let encoder = URLQueryEncoder(explode: false)
 				encoder.encode(fieldsAppStoreVersions, forKey: "fields[appStoreVersions]")
-				encoder.encode(fieldsAgeRatingDeclarations, forKey: "fields[ageRatingDeclarations]")
 				encoder.encode(fieldsAppStoreVersionLocalizations, forKey: "fields[appStoreVersionLocalizations]")
 				encoder.encode(fieldsBuilds, forKey: "fields[builds]")
 				encoder.encode(fieldsAppStoreVersionPhasedReleases, forKey: "fields[appStoreVersionPhasedReleases]")

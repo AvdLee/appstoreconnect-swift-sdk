@@ -34,8 +34,9 @@ public struct BuildBundle: Codable, Identifiable {
 		public var entitlements: [String: [String: String]]?
 		public var baDownloadAllowance: Int?
 		public var baMaxInstallSize: Int?
+		public var minimumOsVersion: String?
 
-		public init(bundleID: String? = nil, bundleType: BuildBundleType? = nil, sdkBuild: String? = nil, platformBuild: String? = nil, fileName: String? = nil, hasSirikit: Bool? = nil, hasOnDemandResources: Bool? = nil, hasPrerenderedIcon: Bool? = nil, usesLocationServices: Bool? = nil, isIosBuildMacAppStoreCompatible: Bool? = nil, isIncludesSymbols: Bool? = nil, dSYMURL: URL? = nil, supportedArchitectures: [String]? = nil, requiredCapabilities: [String]? = nil, deviceProtocols: [String]? = nil, locales: [String]? = nil, entitlements: [String: [String: String]]? = nil, baDownloadAllowance: Int? = nil, baMaxInstallSize: Int? = nil) {
+		public init(bundleID: String? = nil, bundleType: BuildBundleType? = nil, sdkBuild: String? = nil, platformBuild: String? = nil, fileName: String? = nil, hasSirikit: Bool? = nil, hasOnDemandResources: Bool? = nil, hasPrerenderedIcon: Bool? = nil, usesLocationServices: Bool? = nil, isIosBuildMacAppStoreCompatible: Bool? = nil, isIncludesSymbols: Bool? = nil, dSYMURL: URL? = nil, supportedArchitectures: [String]? = nil, requiredCapabilities: [String]? = nil, deviceProtocols: [String]? = nil, locales: [String]? = nil, entitlements: [String: [String: String]]? = nil, baDownloadAllowance: Int? = nil, baMaxInstallSize: Int? = nil, minimumOsVersion: String? = nil) {
 			self.bundleID = bundleID
 			self.bundleType = bundleType
 			self.sdkBuild = sdkBuild
@@ -55,6 +56,7 @@ public struct BuildBundle: Codable, Identifiable {
 			self.entitlements = entitlements
 			self.baDownloadAllowance = baDownloadAllowance
 			self.baMaxInstallSize = baMaxInstallSize
+			self.minimumOsVersion = minimumOsVersion
 		}
 
 		public init(from decoder: Decoder) throws {
@@ -78,6 +80,7 @@ public struct BuildBundle: Codable, Identifiable {
 			self.entitlements = try values.decodeIfPresent([String: [String: String]].self, forKey: "entitlements")
 			self.baDownloadAllowance = try values.decodeIfPresent(Int.self, forKey: "baDownloadAllowance")
 			self.baMaxInstallSize = try values.decodeIfPresent(Int.self, forKey: "baMaxInstallSize")
+			self.minimumOsVersion = try values.decodeIfPresent(String.self, forKey: "minimumOsVersion")
 		}
 
 		public func encode(to encoder: Encoder) throws {
@@ -101,6 +104,7 @@ public struct BuildBundle: Codable, Identifiable {
 			try values.encodeIfPresent(entitlements, forKey: "entitlements")
 			try values.encodeIfPresent(baDownloadAllowance, forKey: "baDownloadAllowance")
 			try values.encodeIfPresent(baMaxInstallSize, forKey: "baMaxInstallSize")
+			try values.encodeIfPresent(minimumOsVersion, forKey: "minimumOsVersion")
 		}
 	}
 

@@ -20,16 +20,33 @@ extension APIEndpoint.V1.Apps.WithID {
 		public struct GetParameters {
 			public var filterArchived: [String]?
 			public var filterAssetPackIdentifier: [String]?
+			public var filterVersionsPlatforms: [FilterVersionsPlatforms]?
+			public var sort: [Sort]?
 			public var fieldsBackgroundAssets: [FieldsBackgroundAssets]?
 			public var fieldsApps: [FieldsApps]?
 			public var fieldsBackgroundAssetVersions: [FieldsBackgroundAssetVersions]?
 			public var limit: Int?
 			public var include: [Include]?
 
+			public enum FilterVersionsPlatforms: String, Codable, CaseIterable {
+				case ios = "IOS"
+				case macOs = "MAC_OS"
+				case tvOs = "TV_OS"
+				case visionOs = "VISION_OS"
+			}
+
+			public enum Sort: String, Codable, CaseIterable {
+				case assetPackIdentifier
+				case minusassetPackIdentifier = "-assetPackIdentifier"
+				case createdDate
+				case minuscreatedDate = "-createdDate"
+			}
+
 			public enum FieldsBackgroundAssets: String, Codable, CaseIterable {
 				case archived
 				case assetPackIdentifier
 				case createdDate
+				case usedBytes
 				case app
 				case versions
 				case appStoreVersion
@@ -117,9 +134,11 @@ extension APIEndpoint.V1.Apps.WithID {
 				case externalBetaVersion
 			}
 
-			public init(filterArchived: [String]? = nil, filterAssetPackIdentifier: [String]? = nil, fieldsBackgroundAssets: [FieldsBackgroundAssets]? = nil, fieldsApps: [FieldsApps]? = nil, fieldsBackgroundAssetVersions: [FieldsBackgroundAssetVersions]? = nil, limit: Int? = nil, include: [Include]? = nil) {
+			public init(filterArchived: [String]? = nil, filterAssetPackIdentifier: [String]? = nil, filterVersionsPlatforms: [FilterVersionsPlatforms]? = nil, sort: [Sort]? = nil, fieldsBackgroundAssets: [FieldsBackgroundAssets]? = nil, fieldsApps: [FieldsApps]? = nil, fieldsBackgroundAssetVersions: [FieldsBackgroundAssetVersions]? = nil, limit: Int? = nil, include: [Include]? = nil) {
 				self.filterArchived = filterArchived
 				self.filterAssetPackIdentifier = filterAssetPackIdentifier
+				self.filterVersionsPlatforms = filterVersionsPlatforms
+				self.sort = sort
 				self.fieldsBackgroundAssets = fieldsBackgroundAssets
 				self.fieldsApps = fieldsApps
 				self.fieldsBackgroundAssetVersions = fieldsBackgroundAssetVersions
@@ -131,6 +150,8 @@ extension APIEndpoint.V1.Apps.WithID {
 				let encoder = URLQueryEncoder(explode: false)
 				encoder.encode(filterArchived, forKey: "filter[archived]")
 				encoder.encode(filterAssetPackIdentifier, forKey: "filter[assetPackIdentifier]")
+				encoder.encode(filterVersionsPlatforms, forKey: "filter[versions.platforms]")
+				encoder.encode(sort, forKey: "sort")
 				encoder.encode(fieldsBackgroundAssets, forKey: "fields[backgroundAssets]")
 				encoder.encode(fieldsApps, forKey: "fields[apps]")
 				encoder.encode(fieldsBackgroundAssetVersions, forKey: "fields[backgroundAssetVersions]")

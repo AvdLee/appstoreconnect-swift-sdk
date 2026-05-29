@@ -13,6 +13,7 @@ extension APIEndpoint.V1.GameCenterLeaderboardSets {
 		/// Path: `/v1/gameCenterLeaderboardSets/{id}`
 		public let path: String
 
+		@available(*, deprecated, message: "Deprecated")
 		public func get(parameters: GetParameters? = nil) -> Request<AppStoreConnect_Swift_SDK.GameCenterLeaderboardSetResponse> {
 			Request(path: path, method: "GET", query: parameters?.asQuery, id: "gameCenterLeaderboardSets_getInstance")
 		}
@@ -109,10 +110,12 @@ extension APIEndpoint.V1.GameCenterLeaderboardSets {
 			}
 		}
 
+		@available(*, deprecated, message: "Deprecated")
 		public func patch(_ body: AppStoreConnect_Swift_SDK.GameCenterLeaderboardSetUpdateRequest) -> Request<AppStoreConnect_Swift_SDK.GameCenterLeaderboardSetResponse> {
 			Request(path: path, method: "PATCH", body: body, id: "gameCenterLeaderboardSets_updateInstance")
 		}
 
+		@available(*, deprecated, message: "Deprecated")
 		public var delete: Request<Void> {
 			Request(path: path, method: "DELETE", id: "gameCenterLeaderboardSets_deleteInstance")
 		}

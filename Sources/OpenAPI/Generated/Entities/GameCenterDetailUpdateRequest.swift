@@ -37,8 +37,10 @@ public struct GameCenterDetailUpdateRequest: Codable {
 
 		public struct Relationships: Codable {
 			public var gameCenterGroup: GameCenterGroup?
+			/// - warning: Deprecated.
 			public var defaultLeaderboard: DefaultLeaderboard?
 			public var defaultLeaderboardV2: DefaultLeaderboardV2?
+			/// - warning: Deprecated.
 			public var defaultGroupLeaderboard: DefaultGroupLeaderboard?
 			public var defaultGroupLeaderboardV2: DefaultGroupLeaderboardV2?
 
@@ -86,6 +88,7 @@ public struct GameCenterDetailUpdateRequest: Codable {
 				}
 			}
 
+			@available(*, deprecated, message: "Deprecated")
 			public struct DefaultLeaderboard: Codable {
 				public var data: Data?
 
@@ -174,6 +177,7 @@ public struct GameCenterDetailUpdateRequest: Codable {
 				}
 			}
 
+			@available(*, deprecated, message: "Deprecated")
 			public struct DefaultGroupLeaderboard: Codable {
 				public var data: Data?
 

@@ -9,11 +9,11 @@ public struct GameCenterMatchmakingRuleErrorsV1MetricResponse: Codable {
 	public var meta: PagingInformation?
 
 	public struct Datum: Codable {
-		public var dataPoints: DataPoints?
+		public var dataPoints: [DataPoint]?
 		public var dimensions: Dimensions?
 		public var granularity: Granularity?
 
-		public struct DataPoints: Codable {
+		public struct DataPoint: Codable {
 			public var start: Date?
 			public var end: Date?
 			public var values: Values?
@@ -125,7 +125,7 @@ public struct GameCenterMatchmakingRuleErrorsV1MetricResponse: Codable {
 			case pt15m = "PT15M"
 		}
 
-		public init(dataPoints: DataPoints? = nil, dimensions: Dimensions? = nil, granularity: Granularity? = nil) {
+		public init(dataPoints: [DataPoint]? = nil, dimensions: Dimensions? = nil, granularity: Granularity? = nil) {
 			self.dataPoints = dataPoints
 			self.dimensions = dimensions
 			self.granularity = granularity
@@ -133,7 +133,7 @@ public struct GameCenterMatchmakingRuleErrorsV1MetricResponse: Codable {
 
 		public init(from decoder: Decoder) throws {
 			let values = try decoder.container(keyedBy: StringCodingKey.self)
-			self.dataPoints = try values.decodeIfPresent(DataPoints.self, forKey: "dataPoints")
+			self.dataPoints = try values.decodeIfPresent([DataPoint].self, forKey: "dataPoints")
 			self.dimensions = try values.decodeIfPresent(Dimensions.self, forKey: "dimensions")
 			self.granularity = try values.decodeIfPresent(Granularity.self, forKey: "granularity")
 		}

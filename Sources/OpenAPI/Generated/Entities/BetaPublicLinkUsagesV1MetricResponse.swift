@@ -9,9 +9,9 @@ public struct BetaPublicLinkUsagesV1MetricResponse: Codable {
 	public var meta: PagingInformation?
 
 	public struct Datum: Codable {
-		public var dataPoints: DataPoints?
+		public var dataPoints: [DataPoint]?
 
-		public struct DataPoints: Codable {
+		public struct DataPoint: Codable {
 			public var start: Date?
 			public var end: Date?
 			public var values: Values?
@@ -79,13 +79,13 @@ public struct BetaPublicLinkUsagesV1MetricResponse: Codable {
 			}
 		}
 
-		public init(dataPoints: DataPoints? = nil) {
+		public init(dataPoints: [DataPoint]? = nil) {
 			self.dataPoints = dataPoints
 		}
 
 		public init(from decoder: Decoder) throws {
 			let values = try decoder.container(keyedBy: StringCodingKey.self)
-			self.dataPoints = try values.decodeIfPresent(DataPoints.self, forKey: "dataPoints")
+			self.dataPoints = try values.decodeIfPresent([DataPoint].self, forKey: "dataPoints")
 		}
 
 		public func encode(to encoder: Encoder) throws {

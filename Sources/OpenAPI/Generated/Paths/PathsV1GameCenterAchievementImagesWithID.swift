@@ -13,6 +13,7 @@ extension APIEndpoint.V1.GameCenterAchievementImages {
 		/// Path: `/v1/gameCenterAchievementImages/{id}`
 		public let path: String
 
+		@available(*, deprecated, message: "Deprecated")
 		public func get(fieldsGameCenterAchievementImages: [FieldsGameCenterAchievementImages]? = nil, include: [Include]? = nil) -> Request<AppStoreConnect_Swift_SDK.GameCenterAchievementImageResponse> {
 			Request(path: path, method: "GET", query: makeGetQuery(fieldsGameCenterAchievementImages, include), id: "gameCenterAchievementImages_getInstance")
 		}
@@ -37,10 +38,12 @@ extension APIEndpoint.V1.GameCenterAchievementImages {
 			case gameCenterAchievementLocalization
 		}
 
+		@available(*, deprecated, message: "Deprecated")
 		public func patch(_ body: AppStoreConnect_Swift_SDK.GameCenterAchievementImageUpdateRequest) -> Request<AppStoreConnect_Swift_SDK.GameCenterAchievementImageResponse> {
 			Request(path: path, method: "PATCH", body: body, id: "gameCenterAchievementImages_updateInstance")
 		}
 
+		@available(*, deprecated, message: "Deprecated")
 		public var delete: Request<Void> {
 			Request(path: path, method: "DELETE", id: "gameCenterAchievementImages_deleteInstance")
 		}

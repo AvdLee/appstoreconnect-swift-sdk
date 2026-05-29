@@ -46,7 +46,6 @@ extension APIEndpoint.V1.AppClipDefaultExperiences {
 				case downloadable
 				case createdDate
 				case app
-				case ageRatingDeclaration
 				case appStoreVersionLocalizations
 				case build
 				case appStoreVersionPhasedRelease

@@ -13,6 +13,7 @@ extension APIEndpoint.V1 {
 		/// Path: `/v1/gameCenterAchievementImages`
 		public let path: String
 
+		@available(*, deprecated, message: "Deprecated")
 		public func post(_ body: AppStoreConnect_Swift_SDK.GameCenterAchievementImageCreateRequest) -> Request<AppStoreConnect_Swift_SDK.GameCenterAchievementImageResponse> {
 			Request(path: path, method: "POST", body: body, id: "gameCenterAchievementImages_createInstance")
 		}

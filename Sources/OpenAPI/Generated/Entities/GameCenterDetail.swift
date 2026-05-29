@@ -41,22 +41,32 @@ public struct GameCenterDetail: Codable, Identifiable {
 		public var app: App?
 		public var gameCenterAppVersions: GameCenterAppVersions?
 		public var gameCenterGroup: GameCenterGroup?
+		/// - warning: Deprecated.
 		public var gameCenterLeaderboards: GameCenterLeaderboards?
 		public var gameCenterLeaderboardsV2: GameCenterLeaderboardsV2?
+		/// - warning: Deprecated.
 		public var gameCenterLeaderboardSets: GameCenterLeaderboardSets?
 		public var gameCenterLeaderboardSetsV2: GameCenterLeaderboardSetsV2?
+		/// - warning: Deprecated.
 		public var gameCenterAchievements: GameCenterAchievements?
 		public var gameCenterAchievementsV2: GameCenterAchievementsV2?
 		public var gameCenterActivities: GameCenterActivities?
 		public var gameCenterChallenges: GameCenterChallenges?
+		/// - warning: Deprecated.
 		public var defaultLeaderboard: DefaultLeaderboard?
 		public var defaultLeaderboardV2: DefaultLeaderboardV2?
+		/// - warning: Deprecated.
 		public var defaultGroupLeaderboard: DefaultGroupLeaderboard?
 		public var defaultGroupLeaderboardV2: DefaultGroupLeaderboardV2?
+		/// - warning: Deprecated.
 		public var achievementReleases: AchievementReleases?
+		/// - warning: Deprecated.
 		public var activityReleases: ActivityReleases?
+		/// - warning: Deprecated.
 		public var challengeReleases: ChallengeReleases?
+		/// - warning: Deprecated.
 		public var leaderboardReleases: LeaderboardReleases?
+		/// - warning: Deprecated.
 		public var leaderboardSetReleases: LeaderboardSetReleases?
 		public var challengesMinimumPlatformVersions: ChallengesMinimumPlatformVersions?
 
@@ -204,6 +214,7 @@ public struct GameCenterDetail: Codable, Identifiable {
 			}
 		}
 
+		@available(*, deprecated, message: "Deprecated")
 		public struct GameCenterLeaderboards: Codable {
 			public var links: RelationshipLinks?
 			public var meta: PagingInformation?
@@ -308,6 +319,7 @@ public struct GameCenterDetail: Codable, Identifiable {
 			}
 		}
 
+		@available(*, deprecated, message: "Deprecated")
 		public struct GameCenterLeaderboardSets: Codable {
 			public var links: RelationshipLinks?
 			public var meta: PagingInformation?
@@ -412,6 +424,7 @@ public struct GameCenterDetail: Codable, Identifiable {
 			}
 		}
 
+		@available(*, deprecated, message: "Deprecated")
 		public struct GameCenterAchievements: Codable {
 			public var links: RelationshipLinks?
 			public var meta: PagingInformation?
@@ -620,6 +633,7 @@ public struct GameCenterDetail: Codable, Identifiable {
 			}
 		}
 
+		@available(*, deprecated, message: "Deprecated")
 		public struct DefaultLeaderboard: Codable {
 			public var data: Data?
 
@@ -708,6 +722,7 @@ public struct GameCenterDetail: Codable, Identifiable {
 			}
 		}
 
+		@available(*, deprecated, message: "Deprecated")
 		public struct DefaultGroupLeaderboard: Codable {
 			public var data: Data?
 
@@ -796,6 +811,7 @@ public struct GameCenterDetail: Codable, Identifiable {
 			}
 		}
 
+		@available(*, deprecated, message: "Deprecated")
 		public struct AchievementReleases: Codable {
 			public var links: RelationshipLinks?
 			public var meta: PagingInformation?
@@ -848,6 +864,7 @@ public struct GameCenterDetail: Codable, Identifiable {
 			}
 		}
 
+		@available(*, deprecated, message: "Deprecated")
 		public struct ActivityReleases: Codable {
 			public var links: RelationshipLinks?
 			public var meta: PagingInformation?
@@ -900,6 +917,7 @@ public struct GameCenterDetail: Codable, Identifiable {
 			}
 		}
 
+		@available(*, deprecated, message: "Deprecated")
 		public struct ChallengeReleases: Codable {
 			public var links: RelationshipLinks?
 			public var meta: PagingInformation?
@@ -952,6 +970,7 @@ public struct GameCenterDetail: Codable, Identifiable {
 			}
 		}
 
+		@available(*, deprecated, message: "Deprecated")
 		public struct LeaderboardReleases: Codable {
 			public var links: RelationshipLinks?
 			public var meta: PagingInformation?
@@ -1004,6 +1023,7 @@ public struct GameCenterDetail: Codable, Identifiable {
 			}
 		}
 
+		@available(*, deprecated, message: "Deprecated")
 		public struct LeaderboardSetReleases: Codable {
 			public var links: RelationshipLinks?
 			public var meta: PagingInformation?

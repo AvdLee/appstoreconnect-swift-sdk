@@ -3,8 +3,11 @@
 
 import Foundation
 
+@available(*, deprecated, message: "Deprecated")
 public struct GameCenterAchievementReleaseResponse: Codable {
 	/// GameCenterAchievementRelease
+	///
+	/// - warning: Deprecated.
 	public var data: GameCenterAchievementRelease
 	public var included: [IncludedItem]?
 	public var links: DocumentLinks

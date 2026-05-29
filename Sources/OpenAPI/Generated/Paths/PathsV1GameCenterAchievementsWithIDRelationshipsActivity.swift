@@ -13,6 +13,7 @@ extension APIEndpoint.V1.GameCenterAchievements.WithID.Relationships {
 		/// Path: `/v1/gameCenterAchievements/{id}/relationships/activity`
 		public let path: String
 
+		@available(*, deprecated, message: "Deprecated")
 		public func patch(_ body: AppStoreConnect_Swift_SDK.GameCenterAchievementActivityLinkageRequest) -> Request<Void> {
 			Request(path: path, method: "PATCH", body: body, id: "gameCenterAchievements_activity_updateToOneRelationship")
 		}

@@ -3,6 +3,7 @@
 
 import Foundation
 
+@available(*, deprecated, message: "Deprecated")
 public struct GameCenterLeaderboardSetsResponse: Codable {
 	public var data: [GameCenterLeaderboardSet]
 	public var included: [IncludedItem]?

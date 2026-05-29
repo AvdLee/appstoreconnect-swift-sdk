@@ -20,7 +20,9 @@ extension APIEndpoint.V1 {
 		public struct GetParameters {
 			public var filterType: [FilterType]?
 			public var filterState: [FilterState]
+			public var filterHasInAppEvents: [String]?
 			public var filterRelatedApps: [String]?
+			public var isExistsInAppEvents: Bool?
 			public var sort: [Sort]?
 			public var fieldsNominations: [FieldsNominations]?
 			public var limit: Int?
@@ -88,10 +90,12 @@ extension APIEndpoint.V1 {
 				case supportedTerritories
 			}
 
-			public init(filterType: [FilterType]? = nil, filterState: [FilterState], filterRelatedApps: [String]? = nil, sort: [Sort]? = nil, fieldsNominations: [FieldsNominations]? = nil, limit: Int? = nil, include: [Include]? = nil, limitInAppEvents: Int? = nil, limitRelatedApps: Int? = nil, limitSupportedTerritories: Int? = nil) {
+			public init(filterType: [FilterType]? = nil, filterState: [FilterState], filterHasInAppEvents: [String]? = nil, filterRelatedApps: [String]? = nil, isExistsInAppEvents: Bool? = nil, sort: [Sort]? = nil, fieldsNominations: [FieldsNominations]? = nil, limit: Int? = nil, include: [Include]? = nil, limitInAppEvents: Int? = nil, limitRelatedApps: Int? = nil, limitSupportedTerritories: Int? = nil) {
 				self.filterType = filterType
 				self.filterState = filterState
+				self.filterHasInAppEvents = filterHasInAppEvents
 				self.filterRelatedApps = filterRelatedApps
+				self.isExistsInAppEvents = isExistsInAppEvents
 				self.sort = sort
 				self.fieldsNominations = fieldsNominations
 				self.limit = limit
@@ -105,7 +109,9 @@ extension APIEndpoint.V1 {
 				let encoder = URLQueryEncoder(explode: false)
 				encoder.encode(filterType, forKey: "filter[type]")
 				encoder.encode(filterState, forKey: "filter[state]")
+				encoder.encode(filterHasInAppEvents, forKey: "filter[hasInAppEvents]")
 				encoder.encode(filterRelatedApps, forKey: "filter[relatedApps]")
+				encoder.encode(isExistsInAppEvents, forKey: "exists[inAppEvents]")
 				encoder.encode(sort, forKey: "sort")
 				encoder.encode(fieldsNominations, forKey: "fields[nominations]")
 				encoder.encode(limit, forKey: "limit")

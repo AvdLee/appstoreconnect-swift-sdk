@@ -13,6 +13,7 @@ extension APIEndpoint.V1.GameCenterAchievementReleases {
 		/// Path: `/v1/gameCenterAchievementReleases/{id}`
 		public let path: String
 
+		@available(*, deprecated, message: "Deprecated")
 		public func get(fieldsGameCenterAchievementReleases: [FieldsGameCenterAchievementReleases]? = nil, include: [Include]? = nil) -> Request<AppStoreConnect_Swift_SDK.GameCenterAchievementReleaseResponse> {
 			Request(path: path, method: "GET", query: makeGetQuery(fieldsGameCenterAchievementReleases, include), id: "gameCenterAchievementReleases_getInstance")
 		}
@@ -35,6 +36,7 @@ extension APIEndpoint.V1.GameCenterAchievementReleases {
 			case gameCenterAchievement
 		}
 
+		@available(*, deprecated, message: "Deprecated")
 		public var delete: Request<Void> {
 			Request(path: path, method: "DELETE", id: "gameCenterAchievementReleases_deleteInstance")
 		}

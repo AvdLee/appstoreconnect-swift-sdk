@@ -13,6 +13,7 @@ extension APIEndpoint.V1.GameCenterLeaderboardSetLocalizations.WithID {
 		/// Path: `/v1/gameCenterLeaderboardSetLocalizations/{id}/gameCenterLeaderboardSetImage`
 		public let path: String
 
+		@available(*, deprecated, message: "Deprecated")
 		public func get(parameters: GetParameters? = nil) -> Request<AppStoreConnect_Swift_SDK.GameCenterLeaderboardSetImageResponse> {
 			Request(path: path, method: "GET", query: parameters?.asQuery, id: "gameCenterLeaderboardSetLocalizations_gameCenterLeaderboardSetImage_getToOneRelated")
 		}

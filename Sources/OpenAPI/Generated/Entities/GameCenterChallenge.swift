@@ -56,6 +56,7 @@ public struct GameCenterChallenge: Codable, Identifiable {
 		public var gameCenterDetail: GameCenterDetail?
 		public var gameCenterGroup: GameCenterGroup?
 		public var versions: Versions?
+		/// - warning: Deprecated.
 		public var leaderboard: Leaderboard?
 		public var leaderboardV2: LeaderboardV2?
 
@@ -199,6 +200,7 @@ public struct GameCenterChallenge: Codable, Identifiable {
 			}
 		}
 
+		@available(*, deprecated, message: "Deprecated")
 		public struct Leaderboard: Codable {
 			public var links: RelationshipLinks?
 			public var data: Data?

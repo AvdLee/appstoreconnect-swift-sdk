@@ -3,56 +3,38 @@
 
 import Foundation
 
-@available(*, deprecated, message: "Deprecated")
-public struct GameCenterLeaderboardSetImage: Codable, Identifiable {
+public struct GameCenterActivityVersionInlineCreate: Codable, Identifiable {
 	public var type: `Type`
-	public var id: String
+	public var id: String?
 	public var attributes: Attributes?
 	public var relationships: Relationships?
-	public var links: ResourceLinks?
 
 	public enum `Type`: String, Codable, CaseIterable {
-		case gameCenterLeaderboardSetImages
+		case gameCenterActivityVersions
 	}
 
 	public struct Attributes: Codable {
-		public var fileSize: Int?
-		public var fileName: String?
-		public var imageAsset: ImageAsset?
-		public var uploadOperations: [UploadOperation]?
-		public var assetDeliveryState: AppMediaAssetState?
+		public var fallbackURL: String?
 
-		public init(fileSize: Int? = nil, fileName: String? = nil, imageAsset: ImageAsset? = nil, uploadOperations: [UploadOperation]? = nil, assetDeliveryState: AppMediaAssetState? = nil) {
-			self.fileSize = fileSize
-			self.fileName = fileName
-			self.imageAsset = imageAsset
-			self.uploadOperations = uploadOperations
-			self.assetDeliveryState = assetDeliveryState
+		public init(fallbackURL: String? = nil) {
+			self.fallbackURL = fallbackURL
 		}
 
 		public init(from decoder: Decoder) throws {
 			let values = try decoder.container(keyedBy: StringCodingKey.self)
-			self.fileSize = try values.decodeIfPresent(Int.self, forKey: "fileSize")
-			self.fileName = try values.decodeIfPresent(String.self, forKey: "fileName")
-			self.imageAsset = try values.decodeIfPresent(ImageAsset.self, forKey: "imageAsset")
-			self.uploadOperations = try values.decodeIfPresent([UploadOperation].self, forKey: "uploadOperations")
-			self.assetDeliveryState = try values.decodeIfPresent(AppMediaAssetState.self, forKey: "assetDeliveryState")
+			self.fallbackURL = try values.decodeIfPresent(String.self, forKey: "fallbackUrl")
 		}
 
 		public func encode(to encoder: Encoder) throws {
 			var values = encoder.container(keyedBy: StringCodingKey.self)
-			try values.encodeIfPresent(fileSize, forKey: "fileSize")
-			try values.encodeIfPresent(fileName, forKey: "fileName")
-			try values.encodeIfPresent(imageAsset, forKey: "imageAsset")
-			try values.encodeIfPresent(uploadOperations, forKey: "uploadOperations")
-			try values.encodeIfPresent(assetDeliveryState, forKey: "assetDeliveryState")
+			try values.encodeIfPresent(fallbackURL, forKey: "fallbackUrl")
 		}
 	}
 
 	public struct Relationships: Codable {
-		public var gameCenterLeaderboardSetLocalization: GameCenterLeaderboardSetLocalization?
+		public var activity: Activity?
 
-		public struct GameCenterLeaderboardSetLocalization: Codable {
+		public struct Activity: Codable {
 			public var data: Data?
 
 			public struct Data: Codable, Identifiable {
@@ -60,7 +42,7 @@ public struct GameCenterLeaderboardSetImage: Codable, Identifiable {
 				public var id: String
 
 				public enum `Type`: String, Codable, CaseIterable {
-					case gameCenterLeaderboardSetLocalizations
+					case gameCenterActivities
 				}
 
 				public init(type: `Type`, id: String) {
@@ -96,44 +78,41 @@ public struct GameCenterLeaderboardSetImage: Codable, Identifiable {
 			}
 		}
 
-		public init(gameCenterLeaderboardSetLocalization: GameCenterLeaderboardSetLocalization? = nil) {
-			self.gameCenterLeaderboardSetLocalization = gameCenterLeaderboardSetLocalization
+		public init(activity: Activity? = nil) {
+			self.activity = activity
 		}
 
 		public init(from decoder: Decoder) throws {
 			let values = try decoder.container(keyedBy: StringCodingKey.self)
-			self.gameCenterLeaderboardSetLocalization = try values.decodeIfPresent(GameCenterLeaderboardSetLocalization.self, forKey: "gameCenterLeaderboardSetLocalization")
+			self.activity = try values.decodeIfPresent(Activity.self, forKey: "activity")
 		}
 
 		public func encode(to encoder: Encoder) throws {
 			var values = encoder.container(keyedBy: StringCodingKey.self)
-			try values.encodeIfPresent(gameCenterLeaderboardSetLocalization, forKey: "gameCenterLeaderboardSetLocalization")
+			try values.encodeIfPresent(activity, forKey: "activity")
 		}
 	}
 
-	public init(type: `Type`, id: String, attributes: Attributes? = nil, relationships: Relationships? = nil, links: ResourceLinks? = nil) {
+	public init(type: `Type`, id: String? = nil, attributes: Attributes? = nil, relationships: Relationships? = nil) {
 		self.type = type
 		self.id = id
 		self.attributes = attributes
 		self.relationships = relationships
-		self.links = links
 	}
 
 	public init(from decoder: Decoder) throws {
 		let values = try decoder.container(keyedBy: StringCodingKey.self)
 		self.type = try values.decode(`Type`.self, forKey: "type")
-		self.id = try values.decode(String.self, forKey: "id")
+		self.id = try values.decodeIfPresent(String.self, forKey: "id")
 		self.attributes = try values.decodeIfPresent(Attributes.self, forKey: "attributes")
 		self.relationships = try values.decodeIfPresent(Relationships.self, forKey: "relationships")
-		self.links = try values.decodeIfPresent(ResourceLinks.self, forKey: "links")
 	}
 
 	public func encode(to encoder: Encoder) throws {
 		var values = encoder.container(keyedBy: StringCodingKey.self)
 		try values.encode(type, forKey: "type")
-		try values.encode(id, forKey: "id")
+		try values.encodeIfPresent(id, forKey: "id")
 		try values.encodeIfPresent(attributes, forKey: "attributes")
 		try values.encodeIfPresent(relationships, forKey: "relationships")
-		try values.encodeIfPresent(links, forKey: "links")
 	}
 }

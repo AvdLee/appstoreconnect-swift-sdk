@@ -3,6 +3,7 @@
 
 import Foundation
 
+@available(*, deprecated, message: "Deprecated")
 public struct GameCenterDetailGameCenterLeaderboardSetsLinkagesRequest: Codable {
 	public var data: [Datum]
 

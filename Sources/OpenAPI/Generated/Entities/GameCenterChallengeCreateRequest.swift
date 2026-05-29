@@ -5,6 +5,7 @@ import Foundation
 
 public struct GameCenterChallengeCreateRequest: Codable {
 	public var data: Data
+	public var included: [GameCenterChallengeVersionInlineCreate]?
 
 	public struct Data: Codable {
 		public var type: `Type`
@@ -52,6 +53,8 @@ public struct GameCenterChallengeCreateRequest: Codable {
 		public struct Relationships: Codable {
 			public var gameCenterDetail: GameCenterDetail?
 			public var gameCenterGroup: GameCenterGroup?
+			public var versions: Versions?
+			/// - warning: Deprecated.
 			public var leaderboard: Leaderboard?
 			public var leaderboardV2: LeaderboardV2?
 
@@ -143,6 +146,51 @@ public struct GameCenterChallengeCreateRequest: Codable {
 				}
 			}
 
+			public struct Versions: Codable {
+				public var data: [Datum]?
+
+				public struct Datum: Codable, Identifiable {
+					public var type: `Type`
+					public var id: String
+
+					public enum `Type`: String, Codable, CaseIterable {
+						case gameCenterChallengeVersions
+					}
+
+					public init(type: `Type`, id: String) {
+						self.type = type
+						self.id = id
+					}
+
+					public init(from decoder: Decoder) throws {
+						let values = try decoder.container(keyedBy: StringCodingKey.self)
+						self.type = try values.decode(`Type`.self, forKey: "type")
+						self.id = try values.decode(String.self, forKey: "id")
+					}
+
+					public func encode(to encoder: Encoder) throws {
+						var values = encoder.container(keyedBy: StringCodingKey.self)
+						try values.encode(type, forKey: "type")
+						try values.encode(id, forKey: "id")
+					}
+				}
+
+				public init(data: [Datum]? = nil) {
+					self.data = data
+				}
+
+				public init(from decoder: Decoder) throws {
+					let values = try decoder.container(keyedBy: StringCodingKey.self)
+					self.data = try values.decodeIfPresent([Datum].self, forKey: "data")
+				}
+
+				public func encode(to encoder: Encoder) throws {
+					var values = encoder.container(keyedBy: StringCodingKey.self)
+					try values.encodeIfPresent(data, forKey: "data")
+				}
+			}
+
+			@available(*, deprecated, message: "Deprecated")
 			public struct Leaderboard: Codable {
 				public var data: Data?
 
@@ -231,9 +279,10 @@ public struct GameCenterChallengeCreateRequest: Codable {
 				}
 			}
 
-			public init(gameCenterDetail: GameCenterDetail? = nil, gameCenterGroup: GameCenterGroup? = nil, leaderboard: Leaderboard? = nil, leaderboardV2: LeaderboardV2? = nil) {
+			public init(gameCenterDetail: GameCenterDetail? = nil, gameCenterGroup: GameCenterGroup? = nil, versions: Versions? = nil, leaderboard: Leaderboard? = nil, leaderboardV2: LeaderboardV2? = nil) {
 				self.gameCenterDetail = gameCenterDetail
 				self.gameCenterGroup = gameCenterGroup
+				self.versions = versions
 				self.leaderboard = leaderboard
 				self.leaderboardV2 = leaderboardV2
 			}
@@ -242,6 +291,7 @@ public struct GameCenterChallengeCreateRequest: Codable {
 				let values = try decoder.container(keyedBy: StringCodingKey.self)
 				self.gameCenterDetail = try values.decodeIfPresent(GameCenterDetail.self, forKey: "gameCenterDetail")
 				self.gameCenterGroup = try values.decodeIfPresent(GameCenterGroup.self, forKey: "gameCenterGroup")
+				self.versions = try values.decodeIfPresent(Versions.self, forKey: "versions")
 				self.leaderboard = try values.decodeIfPresent(Leaderboard.self, forKey: "leaderboard")
 				self.leaderboardV2 = try values.decodeIfPresent(LeaderboardV2.self, forKey: "leaderboardV2")
 			}
@@ -250,6 +300,7 @@ public struct GameCenterChallengeCreateRequest: Codable {
 				var values = encoder.container(keyedBy: StringCodingKey.self)
 				try values.encodeIfPresent(gameCenterDetail, forKey: "gameCenterDetail")
 				try values.encodeIfPresent(gameCenterGroup, forKey: "gameCenterGroup")
+				try values.encodeIfPresent(versions, forKey: "versions")
 				try values.encodeIfPresent(leaderboard, forKey: "leaderboard")
 				try values.encodeIfPresent(leaderboardV2, forKey: "leaderboardV2")
 			}
@@ -276,17 +327,20 @@ public struct GameCenterChallengeCreateRequest: Codable {
 		}
 	}
 
-	public init(data: Data) {
+	public init(data: Data, included: [GameCenterChallengeVersionInlineCreate]? = nil) {
 		self.data = data
+		self.included = included
 	}
 
 	public init(from decoder: Decoder) throws {
 		let values = try decoder.container(keyedBy: StringCodingKey.self)
 		self.data = try values.decode(Data.self, forKey: "data")
+		self.included = try values.decodeIfPresent([GameCenterChallengeVersionInlineCreate].self, forKey: "included")
 	}
 
 	public func encode(to encoder: Encoder) throws {
 		var values = encoder.container(keyedBy: StringCodingKey.self)
 		try values.encode(data, forKey: "data")
+		try values.encodeIfPresent(included, forKey: "included")
 	}
 }

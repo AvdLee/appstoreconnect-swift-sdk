@@ -13,6 +13,7 @@ extension APIEndpoint.V1.GameCenterLeaderboards.WithID {
 		/// Path: `/v1/gameCenterLeaderboards/{id}/releases`
 		public let path: String
 
+		@available(*, deprecated, message: "Deprecated")
 		public func get(parameters: GetParameters? = nil) -> Request<AppStoreConnect_Swift_SDK.GameCenterLeaderboardReleasesResponse> {
 			Request(path: path, method: "GET", query: parameters?.asQuery, id: "gameCenterLeaderboards_releases_getToManyRelated")
 		}

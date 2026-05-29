@@ -10,7 +10,6 @@ public struct AppStoreVersionResponse: Codable {
 	public var links: DocumentLinks
 
 	public enum IncludedItem: Codable {
-		case ageRatingDeclaration(AgeRatingDeclaration)
 		case alternativeDistributionPackage(AlternativeDistributionPackage)
 		case appClipDefaultExperience(AppClipDefaultExperience)
 		case appStoreReviewDetail(AppStoreReviewDetail)
@@ -33,7 +32,6 @@ public struct AppStoreVersionResponse: Codable {
 			let discriminatorValue = try container.decode(Discriminator.self).type
 
 			switch discriminatorValue {
-			case "ageRatingDeclarations": self = .ageRatingDeclaration(try container.decode(AgeRatingDeclaration.self))
 			case "alternativeDistributionPackages": self = .alternativeDistributionPackage(try container.decode(AlternativeDistributionPackage.self))
 			case "appClipDefaultExperiences": self = .appClipDefaultExperience(try container.decode(AppClipDefaultExperience.self))
 			case "appStoreReviewDetails": self = .appStoreReviewDetail(try container.decode(AppStoreReviewDetail.self))
@@ -49,7 +47,7 @@ public struct AppStoreVersionResponse: Codable {
 			default:
 				throw DecodingError.dataCorruptedError(
 					in: container,
-					debugDescription: "Discriminator value '\(discriminatorValue)' does not match any expected values (ageRatingDeclarations, alternativeDistributionPackages, appClipDefaultExperiences, appStoreReviewDetails, appStoreVersionExperiments, appStoreVersionLocalizations, appStoreVersionPhasedReleases, appStoreVersionSubmissions, apps, builds, gameCenterAppVersions, routingAppCoverages)."
+					debugDescription: "Discriminator value '\(discriminatorValue)' does not match any expected values (alternativeDistributionPackages, appClipDefaultExperiences, appStoreReviewDetails, appStoreVersionExperiments, appStoreVersionLocalizations, appStoreVersionPhasedReleases, appStoreVersionSubmissions, apps, builds, gameCenterAppVersions, routingAppCoverages)."
 				)
 			}
 		}
@@ -57,7 +55,6 @@ public struct AppStoreVersionResponse: Codable {
 		public func encode(to encoder: Encoder) throws {
 			var container = encoder.singleValueContainer()
 			switch self {
-			case .ageRatingDeclaration(let value): try container.encode(value)
 			case .alternativeDistributionPackage(let value): try container.encode(value)
 			case .appClipDefaultExperience(let value): try container.encode(value)
 			case .appStoreReviewDetail(let value): try container.encode(value)

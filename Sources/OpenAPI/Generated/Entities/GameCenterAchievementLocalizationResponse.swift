@@ -3,8 +3,11 @@
 
 import Foundation
 
+@available(*, deprecated, message: "Deprecated")
 public struct GameCenterAchievementLocalizationResponse: Codable {
 	/// GameCenterAchievementLocalization
+	///
+	/// - warning: Deprecated.
 	public var data: GameCenterAchievementLocalization
 	public var included: [IncludedItem]?
 	public var links: DocumentLinks

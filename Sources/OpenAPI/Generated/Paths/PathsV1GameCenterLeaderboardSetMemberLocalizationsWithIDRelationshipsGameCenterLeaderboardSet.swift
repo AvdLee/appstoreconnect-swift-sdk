@@ -13,6 +13,7 @@ extension APIEndpoint.V1.GameCenterLeaderboardSetMemberLocalizations.WithID.Rela
 		/// Path: `/v1/gameCenterLeaderboardSetMemberLocalizations/{id}/relationships/gameCenterLeaderboardSet`
 		public let path: String
 
+		@available(*, deprecated, message: "Deprecated")
 		public var get: Request<AppStoreConnect_Swift_SDK.GameCenterLeaderboardSetMemberLocalizationGameCenterLeaderboardSetLinkageResponse> {
 			Request(path: path, method: "GET", id: "gameCenterLeaderboardSetMemberLocalizations_gameCenterLeaderboardSet_getToOneRelationship")
 		}

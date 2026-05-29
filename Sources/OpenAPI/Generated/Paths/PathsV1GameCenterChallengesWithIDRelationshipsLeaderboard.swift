@@ -13,6 +13,7 @@ extension APIEndpoint.V1.GameCenterChallenges.WithID.Relationships {
 		/// Path: `/v1/gameCenterChallenges/{id}/relationships/leaderboard`
 		public let path: String
 
+		@available(*, deprecated, message: "Deprecated")
 		public func patch(_ body: AppStoreConnect_Swift_SDK.GameCenterChallengeLeaderboardLinkageRequest) -> Request<Void> {
 			Request(path: path, method: "PATCH", body: body, id: "gameCenterChallenges_leaderboard_updateToOneRelationship")
 		}
