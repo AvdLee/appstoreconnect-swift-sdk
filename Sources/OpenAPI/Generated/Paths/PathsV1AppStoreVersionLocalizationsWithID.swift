@@ -19,6 +19,7 @@ extension APIEndpoint.V1.AppStoreVersionLocalizations {
 
 		public struct GetParameters {
 			public var fieldsAppStoreVersionLocalizations: [FieldsAppStoreVersionLocalizations]?
+			public var fieldsAppStoreVersions: [FieldsAppStoreVersions]?
 			public var fieldsAppScreenshotSets: [FieldsAppScreenshotSets]?
 			public var fieldsAppPreviewSets: [FieldsAppPreviewSets]?
 			public var include: [Include]?
@@ -38,6 +39,33 @@ extension APIEndpoint.V1.AppStoreVersionLocalizations {
 				case appScreenshotSets
 				case appPreviewSets
 				case searchKeywords
+			}
+
+			public enum FieldsAppStoreVersions: String, Codable, CaseIterable {
+				case platform
+				case versionString
+				case appStoreState
+				case appVersionState
+				case copyright
+				case reviewType
+				case releaseType
+				case earliestReleaseDate
+				case usesIdfa
+				case downloadable
+				case createdDate
+				case app
+				case appStoreVersionLocalizations
+				case build
+				case appStoreVersionPhasedRelease
+				case gameCenterAppVersion
+				case routingAppCoverage
+				case appStoreReviewDetail
+				case appStoreVersionSubmission
+				case appClipDefaultExperience
+				case appStoreVersionExperiments
+				case appStoreVersionExperimentsV2
+				case customerReviews
+				case alternativeDistributionPackage
 			}
 
 			public enum FieldsAppScreenshotSets: String, Codable, CaseIterable {
@@ -63,8 +91,9 @@ extension APIEndpoint.V1.AppStoreVersionLocalizations {
 				case searchKeywords
 			}
 
-			public init(fieldsAppStoreVersionLocalizations: [FieldsAppStoreVersionLocalizations]? = nil, fieldsAppScreenshotSets: [FieldsAppScreenshotSets]? = nil, fieldsAppPreviewSets: [FieldsAppPreviewSets]? = nil, include: [Include]? = nil, limitAppPreviewSets: Int? = nil, limitAppScreenshotSets: Int? = nil, limitSearchKeywords: Int? = nil) {
+			public init(fieldsAppStoreVersionLocalizations: [FieldsAppStoreVersionLocalizations]? = nil, fieldsAppStoreVersions: [FieldsAppStoreVersions]? = nil, fieldsAppScreenshotSets: [FieldsAppScreenshotSets]? = nil, fieldsAppPreviewSets: [FieldsAppPreviewSets]? = nil, include: [Include]? = nil, limitAppPreviewSets: Int? = nil, limitAppScreenshotSets: Int? = nil, limitSearchKeywords: Int? = nil) {
 				self.fieldsAppStoreVersionLocalizations = fieldsAppStoreVersionLocalizations
+				self.fieldsAppStoreVersions = fieldsAppStoreVersions
 				self.fieldsAppScreenshotSets = fieldsAppScreenshotSets
 				self.fieldsAppPreviewSets = fieldsAppPreviewSets
 				self.include = include
@@ -76,6 +105,7 @@ extension APIEndpoint.V1.AppStoreVersionLocalizations {
 			public var asQuery: [(String, String?)] {
 				let encoder = URLQueryEncoder(explode: false)
 				encoder.encode(fieldsAppStoreVersionLocalizations, forKey: "fields[appStoreVersionLocalizations]")
+				encoder.encode(fieldsAppStoreVersions, forKey: "fields[appStoreVersions]")
 				encoder.encode(fieldsAppScreenshotSets, forKey: "fields[appScreenshotSets]")
 				encoder.encode(fieldsAppPreviewSets, forKey: "fields[appPreviewSets]")
 				encoder.encode(include, forKey: "include")

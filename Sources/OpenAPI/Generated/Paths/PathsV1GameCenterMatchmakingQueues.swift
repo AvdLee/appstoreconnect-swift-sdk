@@ -19,6 +19,7 @@ extension APIEndpoint.V1 {
 
 		public struct GetParameters {
 			public var fieldsGameCenterMatchmakingQueues: [FieldsGameCenterMatchmakingQueues]?
+			public var fieldsGameCenterMatchmakingRuleSets: [FieldsGameCenterMatchmakingRuleSets]?
 			public var limit: Int?
 			public var include: [Include]?
 
@@ -29,13 +30,24 @@ extension APIEndpoint.V1 {
 				case experimentRuleSet
 			}
 
+			public enum FieldsGameCenterMatchmakingRuleSets: String, Codable, CaseIterable {
+				case referenceName
+				case ruleLanguageVersion
+				case minPlayers
+				case maxPlayers
+				case teams
+				case rules
+				case matchmakingQueues
+			}
+
 			public enum Include: String, Codable, CaseIterable {
 				case ruleSet
 				case experimentRuleSet
 			}
 
-			public init(fieldsGameCenterMatchmakingQueues: [FieldsGameCenterMatchmakingQueues]? = nil, limit: Int? = nil, include: [Include]? = nil) {
+			public init(fieldsGameCenterMatchmakingQueues: [FieldsGameCenterMatchmakingQueues]? = nil, fieldsGameCenterMatchmakingRuleSets: [FieldsGameCenterMatchmakingRuleSets]? = nil, limit: Int? = nil, include: [Include]? = nil) {
 				self.fieldsGameCenterMatchmakingQueues = fieldsGameCenterMatchmakingQueues
+				self.fieldsGameCenterMatchmakingRuleSets = fieldsGameCenterMatchmakingRuleSets
 				self.limit = limit
 				self.include = include
 			}
@@ -43,6 +55,7 @@ extension APIEndpoint.V1 {
 			public var asQuery: [(String, String?)] {
 				let encoder = URLQueryEncoder(explode: false)
 				encoder.encode(fieldsGameCenterMatchmakingQueues, forKey: "fields[gameCenterMatchmakingQueues]")
+				encoder.encode(fieldsGameCenterMatchmakingRuleSets, forKey: "fields[gameCenterMatchmakingRuleSets]")
 				encoder.encode(limit, forKey: "limit")
 				encoder.encode(include, forKey: "include")
 				return encoder.items

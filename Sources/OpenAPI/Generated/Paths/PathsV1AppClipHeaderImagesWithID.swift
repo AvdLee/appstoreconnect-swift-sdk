@@ -13,29 +13,49 @@ extension APIEndpoint.V1.AppClipHeaderImages {
 		/// Path: `/v1/appClipHeaderImages/{id}`
 		public let path: String
 
-		public func get(fieldsAppClipHeaderImages: [FieldsAppClipHeaderImages]? = nil, include: [Include]? = nil) -> Request<AppStoreConnect_Swift_SDK.AppClipHeaderImageResponse> {
-			Request(path: path, method: "GET", query: makeGetQuery(fieldsAppClipHeaderImages, include), id: "appClipHeaderImages_getInstance")
+		public func get(parameters: GetParameters? = nil) -> Request<AppStoreConnect_Swift_SDK.AppClipHeaderImageResponse> {
+			Request(path: path, method: "GET", query: parameters?.asQuery, id: "appClipHeaderImages_getInstance")
 		}
 
-		private func makeGetQuery(_ fieldsAppClipHeaderImages: [FieldsAppClipHeaderImages]?, _ include: [Include]?) -> [(String, String?)] {
-			let encoder = URLQueryEncoder(explode: false)
-			encoder.encode(fieldsAppClipHeaderImages, forKey: "fields[appClipHeaderImages]")
-			encoder.encode(include, forKey: "include")
-			return encoder.items
-		}
+		public struct GetParameters {
+			public var fieldsAppClipHeaderImages: [FieldsAppClipHeaderImages]?
+			public var fieldsAppClipDefaultExperienceLocalizations: [FieldsAppClipDefaultExperienceLocalizations]?
+			public var include: [Include]?
 
-		public enum FieldsAppClipHeaderImages: String, Codable, CaseIterable {
-			case fileSize
-			case fileName
-			case sourceFileChecksum
-			case imageAsset
-			case uploadOperations
-			case assetDeliveryState
-			case appClipDefaultExperienceLocalization
-		}
+			public enum FieldsAppClipHeaderImages: String, Codable, CaseIterable {
+				case fileSize
+				case fileName
+				case sourceFileChecksum
+				case imageAsset
+				case uploadOperations
+				case assetDeliveryState
+				case appClipDefaultExperienceLocalization
+			}
 
-		public enum Include: String, Codable, CaseIterable {
-			case appClipDefaultExperienceLocalization
+			public enum FieldsAppClipDefaultExperienceLocalizations: String, Codable, CaseIterable {
+				case locale
+				case subtitle
+				case appClipDefaultExperience
+				case appClipHeaderImage
+			}
+
+			public enum Include: String, Codable, CaseIterable {
+				case appClipDefaultExperienceLocalization
+			}
+
+			public init(fieldsAppClipHeaderImages: [FieldsAppClipHeaderImages]? = nil, fieldsAppClipDefaultExperienceLocalizations: [FieldsAppClipDefaultExperienceLocalizations]? = nil, include: [Include]? = nil) {
+				self.fieldsAppClipHeaderImages = fieldsAppClipHeaderImages
+				self.fieldsAppClipDefaultExperienceLocalizations = fieldsAppClipDefaultExperienceLocalizations
+				self.include = include
+			}
+
+			public var asQuery: [(String, String?)] {
+				let encoder = URLQueryEncoder(explode: false)
+				encoder.encode(fieldsAppClipHeaderImages, forKey: "fields[appClipHeaderImages]")
+				encoder.encode(fieldsAppClipDefaultExperienceLocalizations, forKey: "fields[appClipDefaultExperienceLocalizations]")
+				encoder.encode(include, forKey: "include")
+				return encoder.items
+			}
 		}
 
 		public func patch(_ body: AppStoreConnect_Swift_SDK.AppClipHeaderImageUpdateRequest) -> Request<AppStoreConnect_Swift_SDK.AppClipHeaderImageResponse> {

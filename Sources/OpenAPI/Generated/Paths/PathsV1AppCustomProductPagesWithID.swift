@@ -19,6 +19,7 @@ extension APIEndpoint.V1.AppCustomProductPages {
 
 		public struct GetParameters {
 			public var fieldsAppCustomProductPages: [FieldsAppCustomProductPages]?
+			public var fieldsApps: [FieldsApps]?
 			public var fieldsAppCustomProductPageVersions: [FieldsAppCustomProductPageVersions]?
 			public var include: [Include]?
 			public var limitAppCustomProductPageVersions: Int?
@@ -29,6 +30,64 @@ extension APIEndpoint.V1.AppCustomProductPages {
 				case visible
 				case app
 				case appCustomProductPageVersions
+			}
+
+			public enum FieldsApps: String, Codable, CaseIterable {
+				case accessibilityURL = "accessibilityUrl"
+				case name
+				case bundleID = "bundleId"
+				case sku
+				case primaryLocale
+				case isOrEverWasMadeForKids
+				case subscriptionStatusURL = "subscriptionStatusUrl"
+				case subscriptionStatusURLVersion = "subscriptionStatusUrlVersion"
+				case subscriptionStatusURLForSandbox = "subscriptionStatusUrlForSandbox"
+				case subscriptionStatusURLVersionForSandbox = "subscriptionStatusUrlVersionForSandbox"
+				case contentRightsDeclaration
+				case streamlinedPurchasingEnabled
+				case accessibilityDeclarations
+				case appEncryptionDeclarations
+				case appStoreIcon
+				case ciProduct
+				case betaTesters
+				case betaGroups
+				case appStoreVersions
+				case appTags
+				case preReleaseVersions
+				case betaAppLocalizations
+				case builds
+				case betaLicenseAgreement
+				case betaAppReviewDetail
+				case appInfos
+				case appClips
+				case appPricePoints
+				case endUserLicenseAgreement
+				case appPriceSchedule
+				case appAvailabilityV2
+				case inAppPurchases
+				case subscriptionGroups
+				case gameCenterEnabledVersions
+				case perfPowerMetrics
+				case appCustomProductPages
+				case inAppPurchasesV2
+				case promotedPurchases
+				case appEvents
+				case reviewSubmissions
+				case subscriptionGracePeriod
+				case customerReviews
+				case customerReviewSummarizations
+				case gameCenterDetail
+				case appStoreVersionExperimentsV2
+				case alternativeDistributionKey
+				case analyticsReportRequests
+				case marketplaceSearchDetail
+				case buildUploads
+				case backgroundAssets
+				case betaFeedbackScreenshotSubmissions
+				case betaFeedbackCrashSubmissions
+				case searchKeywords
+				case webhooks
+				case androidToIosAppMappingDetails
 			}
 
 			public enum FieldsAppCustomProductPageVersions: String, Codable, CaseIterable {
@@ -44,8 +103,9 @@ extension APIEndpoint.V1.AppCustomProductPages {
 				case appCustomProductPageVersions
 			}
 
-			public init(fieldsAppCustomProductPages: [FieldsAppCustomProductPages]? = nil, fieldsAppCustomProductPageVersions: [FieldsAppCustomProductPageVersions]? = nil, include: [Include]? = nil, limitAppCustomProductPageVersions: Int? = nil) {
+			public init(fieldsAppCustomProductPages: [FieldsAppCustomProductPages]? = nil, fieldsApps: [FieldsApps]? = nil, fieldsAppCustomProductPageVersions: [FieldsAppCustomProductPageVersions]? = nil, include: [Include]? = nil, limitAppCustomProductPageVersions: Int? = nil) {
 				self.fieldsAppCustomProductPages = fieldsAppCustomProductPages
+				self.fieldsApps = fieldsApps
 				self.fieldsAppCustomProductPageVersions = fieldsAppCustomProductPageVersions
 				self.include = include
 				self.limitAppCustomProductPageVersions = limitAppCustomProductPageVersions
@@ -54,6 +114,7 @@ extension APIEndpoint.V1.AppCustomProductPages {
 			public var asQuery: [(String, String?)] {
 				let encoder = URLQueryEncoder(explode: false)
 				encoder.encode(fieldsAppCustomProductPages, forKey: "fields[appCustomProductPages]")
+				encoder.encode(fieldsApps, forKey: "fields[apps]")
 				encoder.encode(fieldsAppCustomProductPageVersions, forKey: "fields[appCustomProductPageVersions]")
 				encoder.encode(include, forKey: "include")
 				encoder.encode(limitAppCustomProductPageVersions, forKey: "limit[appCustomProductPageVersions]")

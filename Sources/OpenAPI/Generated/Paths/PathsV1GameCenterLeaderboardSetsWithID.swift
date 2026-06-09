@@ -20,6 +20,8 @@ extension APIEndpoint.V1.GameCenterLeaderboardSets {
 
 		public struct GetParameters {
 			public var fieldsGameCenterLeaderboardSets: [FieldsGameCenterLeaderboardSets]?
+			public var fieldsGameCenterDetails: [FieldsGameCenterDetails]?
+			public var fieldsGameCenterGroups: [FieldsGameCenterGroups]?
 			public var fieldsGameCenterLeaderboardSetLocalizations: [FieldsGameCenterLeaderboardSetLocalizations]?
 			public var fieldsGameCenterLeaderboards: [FieldsGameCenterLeaderboards]?
 			public var fieldsGameCenterLeaderboardSetReleases: [FieldsGameCenterLeaderboardSetReleases]?
@@ -37,6 +39,45 @@ extension APIEndpoint.V1.GameCenterLeaderboardSets {
 				case localizations
 				case gameCenterLeaderboards
 				case releases
+			}
+
+			public enum FieldsGameCenterDetails: String, Codable, CaseIterable {
+				case arcadeEnabled
+				case challengeEnabled
+				case app
+				case gameCenterAppVersions
+				case gameCenterGroup
+				case gameCenterLeaderboards
+				case gameCenterLeaderboardsV2
+				case gameCenterLeaderboardSets
+				case gameCenterLeaderboardSetsV2
+				case gameCenterAchievements
+				case gameCenterAchievementsV2
+				case gameCenterActivities
+				case gameCenterChallenges
+				case defaultLeaderboard
+				case defaultLeaderboardV2
+				case defaultGroupLeaderboard
+				case defaultGroupLeaderboardV2
+				case achievementReleases
+				case activityReleases
+				case challengeReleases
+				case leaderboardReleases
+				case leaderboardSetReleases
+				case challengesMinimumPlatformVersions
+			}
+
+			public enum FieldsGameCenterGroups: String, Codable, CaseIterable {
+				case referenceName
+				case gameCenterDetails
+				case gameCenterLeaderboards
+				case gameCenterLeaderboardsV2
+				case gameCenterLeaderboardSets
+				case gameCenterLeaderboardSetsV2
+				case gameCenterAchievements
+				case gameCenterAchievementsV2
+				case gameCenterActivities
+				case gameCenterChallenges
 			}
 
 			public enum FieldsGameCenterLeaderboardSetLocalizations: String, Codable, CaseIterable {
@@ -85,8 +126,10 @@ extension APIEndpoint.V1.GameCenterLeaderboardSets {
 				case releases
 			}
 
-			public init(fieldsGameCenterLeaderboardSets: [FieldsGameCenterLeaderboardSets]? = nil, fieldsGameCenterLeaderboardSetLocalizations: [FieldsGameCenterLeaderboardSetLocalizations]? = nil, fieldsGameCenterLeaderboards: [FieldsGameCenterLeaderboards]? = nil, fieldsGameCenterLeaderboardSetReleases: [FieldsGameCenterLeaderboardSetReleases]? = nil, include: [Include]? = nil, limitGameCenterLeaderboards: Int? = nil, limitLocalizations: Int? = nil, limitReleases: Int? = nil) {
+			public init(fieldsGameCenterLeaderboardSets: [FieldsGameCenterLeaderboardSets]? = nil, fieldsGameCenterDetails: [FieldsGameCenterDetails]? = nil, fieldsGameCenterGroups: [FieldsGameCenterGroups]? = nil, fieldsGameCenterLeaderboardSetLocalizations: [FieldsGameCenterLeaderboardSetLocalizations]? = nil, fieldsGameCenterLeaderboards: [FieldsGameCenterLeaderboards]? = nil, fieldsGameCenterLeaderboardSetReleases: [FieldsGameCenterLeaderboardSetReleases]? = nil, include: [Include]? = nil, limitGameCenterLeaderboards: Int? = nil, limitLocalizations: Int? = nil, limitReleases: Int? = nil) {
 				self.fieldsGameCenterLeaderboardSets = fieldsGameCenterLeaderboardSets
+				self.fieldsGameCenterDetails = fieldsGameCenterDetails
+				self.fieldsGameCenterGroups = fieldsGameCenterGroups
 				self.fieldsGameCenterLeaderboardSetLocalizations = fieldsGameCenterLeaderboardSetLocalizations
 				self.fieldsGameCenterLeaderboards = fieldsGameCenterLeaderboards
 				self.fieldsGameCenterLeaderboardSetReleases = fieldsGameCenterLeaderboardSetReleases
@@ -99,6 +142,8 @@ extension APIEndpoint.V1.GameCenterLeaderboardSets {
 			public var asQuery: [(String, String?)] {
 				let encoder = URLQueryEncoder(explode: false)
 				encoder.encode(fieldsGameCenterLeaderboardSets, forKey: "fields[gameCenterLeaderboardSets]")
+				encoder.encode(fieldsGameCenterDetails, forKey: "fields[gameCenterDetails]")
+				encoder.encode(fieldsGameCenterGroups, forKey: "fields[gameCenterGroups]")
 				encoder.encode(fieldsGameCenterLeaderboardSetLocalizations, forKey: "fields[gameCenterLeaderboardSetLocalizations]")
 				encoder.encode(fieldsGameCenterLeaderboards, forKey: "fields[gameCenterLeaderboards]")
 				encoder.encode(fieldsGameCenterLeaderboardSetReleases, forKey: "fields[gameCenterLeaderboardSetReleases]")

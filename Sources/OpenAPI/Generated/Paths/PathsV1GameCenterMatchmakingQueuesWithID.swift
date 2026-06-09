@@ -13,27 +13,50 @@ extension APIEndpoint.V1.GameCenterMatchmakingQueues {
 		/// Path: `/v1/gameCenterMatchmakingQueues/{id}`
 		public let path: String
 
-		public func get(fieldsGameCenterMatchmakingQueues: [FieldsGameCenterMatchmakingQueues]? = nil, include: [Include]? = nil) -> Request<AppStoreConnect_Swift_SDK.GameCenterMatchmakingQueueResponse> {
-			Request(path: path, method: "GET", query: makeGetQuery(fieldsGameCenterMatchmakingQueues, include), id: "gameCenterMatchmakingQueues_getInstance")
+		public func get(parameters: GetParameters? = nil) -> Request<AppStoreConnect_Swift_SDK.GameCenterMatchmakingQueueResponse> {
+			Request(path: path, method: "GET", query: parameters?.asQuery, id: "gameCenterMatchmakingQueues_getInstance")
 		}
 
-		private func makeGetQuery(_ fieldsGameCenterMatchmakingQueues: [FieldsGameCenterMatchmakingQueues]?, _ include: [Include]?) -> [(String, String?)] {
-			let encoder = URLQueryEncoder(explode: false)
-			encoder.encode(fieldsGameCenterMatchmakingQueues, forKey: "fields[gameCenterMatchmakingQueues]")
-			encoder.encode(include, forKey: "include")
-			return encoder.items
-		}
+		public struct GetParameters {
+			public var fieldsGameCenterMatchmakingQueues: [FieldsGameCenterMatchmakingQueues]?
+			public var fieldsGameCenterMatchmakingRuleSets: [FieldsGameCenterMatchmakingRuleSets]?
+			public var include: [Include]?
 
-		public enum FieldsGameCenterMatchmakingQueues: String, Codable, CaseIterable {
-			case referenceName
-			case classicMatchmakingBundleIDs = "classicMatchmakingBundleIds"
-			case ruleSet
-			case experimentRuleSet
-		}
+			public enum FieldsGameCenterMatchmakingQueues: String, Codable, CaseIterable {
+				case referenceName
+				case classicMatchmakingBundleIDs = "classicMatchmakingBundleIds"
+				case ruleSet
+				case experimentRuleSet
+			}
 
-		public enum Include: String, Codable, CaseIterable {
-			case ruleSet
-			case experimentRuleSet
+			public enum FieldsGameCenterMatchmakingRuleSets: String, Codable, CaseIterable {
+				case referenceName
+				case ruleLanguageVersion
+				case minPlayers
+				case maxPlayers
+				case teams
+				case rules
+				case matchmakingQueues
+			}
+
+			public enum Include: String, Codable, CaseIterable {
+				case ruleSet
+				case experimentRuleSet
+			}
+
+			public init(fieldsGameCenterMatchmakingQueues: [FieldsGameCenterMatchmakingQueues]? = nil, fieldsGameCenterMatchmakingRuleSets: [FieldsGameCenterMatchmakingRuleSets]? = nil, include: [Include]? = nil) {
+				self.fieldsGameCenterMatchmakingQueues = fieldsGameCenterMatchmakingQueues
+				self.fieldsGameCenterMatchmakingRuleSets = fieldsGameCenterMatchmakingRuleSets
+				self.include = include
+			}
+
+			public var asQuery: [(String, String?)] {
+				let encoder = URLQueryEncoder(explode: false)
+				encoder.encode(fieldsGameCenterMatchmakingQueues, forKey: "fields[gameCenterMatchmakingQueues]")
+				encoder.encode(fieldsGameCenterMatchmakingRuleSets, forKey: "fields[gameCenterMatchmakingRuleSets]")
+				encoder.encode(include, forKey: "include")
+				return encoder.items
+			}
 		}
 
 		public func patch(_ body: AppStoreConnect_Swift_SDK.GameCenterMatchmakingQueueUpdateRequest) -> Request<AppStoreConnect_Swift_SDK.GameCenterMatchmakingQueueResponse> {

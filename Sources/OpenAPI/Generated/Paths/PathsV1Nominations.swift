@@ -22,9 +22,12 @@ extension APIEndpoint.V1 {
 			public var filterState: [FilterState]
 			public var filterHasInAppEvents: [String]?
 			public var filterRelatedApps: [String]?
-			public var isExistsInAppEvents: Bool?
 			public var sort: [Sort]?
 			public var fieldsNominations: [FieldsNominations]?
+			public var fieldsApps: [FieldsApps]?
+			public var fieldsActors: [FieldsActors]?
+			public var fieldsAppEvents: [FieldsAppEvents]?
+			public var fieldsTerritories: [FieldsTerritories]?
 			public var limit: Int?
 			public var include: [Include]?
 			public var limitInAppEvents: Int?
@@ -81,6 +84,90 @@ extension APIEndpoint.V1 {
 				case supportedTerritories
 			}
 
+			public enum FieldsApps: String, Codable, CaseIterable {
+				case accessibilityURL = "accessibilityUrl"
+				case name
+				case bundleID = "bundleId"
+				case sku
+				case primaryLocale
+				case isOrEverWasMadeForKids
+				case subscriptionStatusURL = "subscriptionStatusUrl"
+				case subscriptionStatusURLVersion = "subscriptionStatusUrlVersion"
+				case subscriptionStatusURLForSandbox = "subscriptionStatusUrlForSandbox"
+				case subscriptionStatusURLVersionForSandbox = "subscriptionStatusUrlVersionForSandbox"
+				case contentRightsDeclaration
+				case streamlinedPurchasingEnabled
+				case accessibilityDeclarations
+				case appEncryptionDeclarations
+				case appStoreIcon
+				case ciProduct
+				case betaTesters
+				case betaGroups
+				case appStoreVersions
+				case appTags
+				case preReleaseVersions
+				case betaAppLocalizations
+				case builds
+				case betaLicenseAgreement
+				case betaAppReviewDetail
+				case appInfos
+				case appClips
+				case appPricePoints
+				case endUserLicenseAgreement
+				case appPriceSchedule
+				case appAvailabilityV2
+				case inAppPurchases
+				case subscriptionGroups
+				case gameCenterEnabledVersions
+				case perfPowerMetrics
+				case appCustomProductPages
+				case inAppPurchasesV2
+				case promotedPurchases
+				case appEvents
+				case reviewSubmissions
+				case subscriptionGracePeriod
+				case customerReviews
+				case customerReviewSummarizations
+				case gameCenterDetail
+				case appStoreVersionExperimentsV2
+				case alternativeDistributionKey
+				case analyticsReportRequests
+				case marketplaceSearchDetail
+				case buildUploads
+				case backgroundAssets
+				case betaFeedbackScreenshotSubmissions
+				case betaFeedbackCrashSubmissions
+				case searchKeywords
+				case webhooks
+				case androidToIosAppMappingDetails
+			}
+
+			public enum FieldsActors: String, Codable, CaseIterable {
+				case actorType
+				case userFirstName
+				case userLastName
+				case userEmail
+				case apiKeyID = "apiKeyId"
+			}
+
+			public enum FieldsAppEvents: String, Codable, CaseIterable {
+				case referenceName
+				case badge
+				case eventState
+				case deepLink
+				case purchaseRequirement
+				case primaryLocale
+				case priority
+				case purpose
+				case territorySchedules
+				case archivedTerritorySchedules
+				case localizations
+			}
+
+			public enum FieldsTerritories: String, Codable, CaseIterable {
+				case currency
+			}
+
 			public enum Include: String, Codable, CaseIterable {
 				case relatedApps
 				case createdByActor
@@ -90,14 +177,17 @@ extension APIEndpoint.V1 {
 				case supportedTerritories
 			}
 
-			public init(filterType: [FilterType]? = nil, filterState: [FilterState], filterHasInAppEvents: [String]? = nil, filterRelatedApps: [String]? = nil, isExistsInAppEvents: Bool? = nil, sort: [Sort]? = nil, fieldsNominations: [FieldsNominations]? = nil, limit: Int? = nil, include: [Include]? = nil, limitInAppEvents: Int? = nil, limitRelatedApps: Int? = nil, limitSupportedTerritories: Int? = nil) {
+			public init(filterType: [FilterType]? = nil, filterState: [FilterState], filterHasInAppEvents: [String]? = nil, filterRelatedApps: [String]? = nil, sort: [Sort]? = nil, fieldsNominations: [FieldsNominations]? = nil, fieldsApps: [FieldsApps]? = nil, fieldsActors: [FieldsActors]? = nil, fieldsAppEvents: [FieldsAppEvents]? = nil, fieldsTerritories: [FieldsTerritories]? = nil, limit: Int? = nil, include: [Include]? = nil, limitInAppEvents: Int? = nil, limitRelatedApps: Int? = nil, limitSupportedTerritories: Int? = nil) {
 				self.filterType = filterType
 				self.filterState = filterState
 				self.filterHasInAppEvents = filterHasInAppEvents
 				self.filterRelatedApps = filterRelatedApps
-				self.isExistsInAppEvents = isExistsInAppEvents
 				self.sort = sort
 				self.fieldsNominations = fieldsNominations
+				self.fieldsApps = fieldsApps
+				self.fieldsActors = fieldsActors
+				self.fieldsAppEvents = fieldsAppEvents
+				self.fieldsTerritories = fieldsTerritories
 				self.limit = limit
 				self.include = include
 				self.limitInAppEvents = limitInAppEvents
@@ -111,9 +201,12 @@ extension APIEndpoint.V1 {
 				encoder.encode(filterState, forKey: "filter[state]")
 				encoder.encode(filterHasInAppEvents, forKey: "filter[hasInAppEvents]")
 				encoder.encode(filterRelatedApps, forKey: "filter[relatedApps]")
-				encoder.encode(isExistsInAppEvents, forKey: "exists[inAppEvents]")
 				encoder.encode(sort, forKey: "sort")
 				encoder.encode(fieldsNominations, forKey: "fields[nominations]")
+				encoder.encode(fieldsApps, forKey: "fields[apps]")
+				encoder.encode(fieldsActors, forKey: "fields[actors]")
+				encoder.encode(fieldsAppEvents, forKey: "fields[appEvents]")
+				encoder.encode(fieldsTerritories, forKey: "fields[territories]")
 				encoder.encode(limit, forKey: "limit")
 				encoder.encode(include, forKey: "include")
 				encoder.encode(limitInAppEvents, forKey: "limit[inAppEvents]")

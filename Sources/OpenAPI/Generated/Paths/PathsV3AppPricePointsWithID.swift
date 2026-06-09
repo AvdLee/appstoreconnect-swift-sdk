@@ -13,28 +13,106 @@ extension APIEndpoint.V3.AppPricePoints {
 		/// Path: `/v3/appPricePoints/{id}`
 		public let path: String
 
-		public func get(fieldsAppPricePoints: [FieldsAppPricePoints]? = nil, include: [Include]? = nil) -> Request<AppStoreConnect_Swift_SDK.AppPricePointV3Response> {
-			Request(path: path, method: "GET", query: makeGetQuery(fieldsAppPricePoints, include), id: "appPricePointsV3_getInstance")
+		public func get(parameters: GetParameters? = nil) -> Request<AppStoreConnect_Swift_SDK.AppPricePointV3Response> {
+			Request(path: path, method: "GET", query: parameters?.asQuery, id: "appPricePointsV3_getInstance")
 		}
 
-		private func makeGetQuery(_ fieldsAppPricePoints: [FieldsAppPricePoints]?, _ include: [Include]?) -> [(String, String?)] {
-			let encoder = URLQueryEncoder(explode: false)
-			encoder.encode(fieldsAppPricePoints, forKey: "fields[appPricePoints]")
-			encoder.encode(include, forKey: "include")
-			return encoder.items
-		}
+		public struct GetParameters {
+			public var fieldsAppPricePoints: [FieldsAppPricePoints]?
+			public var fieldsApps: [FieldsApps]?
+			public var fieldsTerritories: [FieldsTerritories]?
+			public var include: [Include]?
 
-		public enum FieldsAppPricePoints: String, Codable, CaseIterable {
-			case customerPrice
-			case proceeds
-			case app
-			case equalizations
-			case territory
-		}
+			public enum FieldsAppPricePoints: String, Codable, CaseIterable {
+				case customerPrice
+				case proceeds
+				case app
+				case equalizations
+				case territory
+			}
 
-		public enum Include: String, Codable, CaseIterable {
-			case app
-			case territory
+			public enum FieldsApps: String, Codable, CaseIterable {
+				case accessibilityURL = "accessibilityUrl"
+				case name
+				case bundleID = "bundleId"
+				case sku
+				case primaryLocale
+				case isOrEverWasMadeForKids
+				case subscriptionStatusURL = "subscriptionStatusUrl"
+				case subscriptionStatusURLVersion = "subscriptionStatusUrlVersion"
+				case subscriptionStatusURLForSandbox = "subscriptionStatusUrlForSandbox"
+				case subscriptionStatusURLVersionForSandbox = "subscriptionStatusUrlVersionForSandbox"
+				case contentRightsDeclaration
+				case streamlinedPurchasingEnabled
+				case accessibilityDeclarations
+				case appEncryptionDeclarations
+				case appStoreIcon
+				case ciProduct
+				case betaTesters
+				case betaGroups
+				case appStoreVersions
+				case appTags
+				case preReleaseVersions
+				case betaAppLocalizations
+				case builds
+				case betaLicenseAgreement
+				case betaAppReviewDetail
+				case appInfos
+				case appClips
+				case appPricePoints
+				case endUserLicenseAgreement
+				case appPriceSchedule
+				case appAvailabilityV2
+				case inAppPurchases
+				case subscriptionGroups
+				case gameCenterEnabledVersions
+				case perfPowerMetrics
+				case appCustomProductPages
+				case inAppPurchasesV2
+				case promotedPurchases
+				case appEvents
+				case reviewSubmissions
+				case subscriptionGracePeriod
+				case customerReviews
+				case customerReviewSummarizations
+				case gameCenterDetail
+				case appStoreVersionExperimentsV2
+				case alternativeDistributionKey
+				case analyticsReportRequests
+				case marketplaceSearchDetail
+				case buildUploads
+				case backgroundAssets
+				case betaFeedbackScreenshotSubmissions
+				case betaFeedbackCrashSubmissions
+				case searchKeywords
+				case webhooks
+				case androidToIosAppMappingDetails
+			}
+
+			public enum FieldsTerritories: String, Codable, CaseIterable {
+				case currency
+			}
+
+			public enum Include: String, Codable, CaseIterable {
+				case app
+				case territory
+			}
+
+			public init(fieldsAppPricePoints: [FieldsAppPricePoints]? = nil, fieldsApps: [FieldsApps]? = nil, fieldsTerritories: [FieldsTerritories]? = nil, include: [Include]? = nil) {
+				self.fieldsAppPricePoints = fieldsAppPricePoints
+				self.fieldsApps = fieldsApps
+				self.fieldsTerritories = fieldsTerritories
+				self.include = include
+			}
+
+			public var asQuery: [(String, String?)] {
+				let encoder = URLQueryEncoder(explode: false)
+				encoder.encode(fieldsAppPricePoints, forKey: "fields[appPricePoints]")
+				encoder.encode(fieldsApps, forKey: "fields[apps]")
+				encoder.encode(fieldsTerritories, forKey: "fields[territories]")
+				encoder.encode(include, forKey: "include")
+				return encoder.items
+			}
 		}
 	}
 }

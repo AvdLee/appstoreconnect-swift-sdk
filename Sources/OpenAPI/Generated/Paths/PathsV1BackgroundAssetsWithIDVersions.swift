@@ -18,6 +18,7 @@ extension APIEndpoint.V1.BackgroundAssets.WithID {
 		}
 
 		public struct GetParameters {
+			public var filterLocale: [String]?
 			public var filterPlatforms: [FilterPlatforms]?
 			public var filterState: [FilterState]?
 			public var filterVersion: [String]?
@@ -86,6 +87,7 @@ extension APIEndpoint.V1.BackgroundAssets.WithID {
 				case state
 				case stateDetails
 				case version
+				case locale
 				case backgroundAsset
 				case internalBetaRelease
 				case externalBetaRelease
@@ -142,7 +144,8 @@ extension APIEndpoint.V1.BackgroundAssets.WithID {
 				case manifestFile
 			}
 
-			public init(filterPlatforms: [FilterPlatforms]? = nil, filterState: [FilterState]? = nil, filterVersion: [String]? = nil, filterInternalBetaReleaseState: [FilterInternalBetaReleaseState]? = nil, filterExternalBetaReleaseState: [FilterExternalBetaReleaseState]? = nil, filterAppStoreReleaseState: [FilterAppStoreReleaseState]? = nil, sort: [Sort]? = nil, fieldsBackgroundAssetVersions: [FieldsBackgroundAssetVersions]? = nil, fieldsBackgroundAssets: [FieldsBackgroundAssets]? = nil, fieldsBackgroundAssetVersionInternalBetaReleases: [FieldsBackgroundAssetVersionInternalBetaReleases]? = nil, fieldsBackgroundAssetVersionExternalBetaReleases: [FieldsBackgroundAssetVersionExternalBetaReleases]? = nil, fieldsBackgroundAssetVersionAppStoreReleases: [FieldsBackgroundAssetVersionAppStoreReleases]? = nil, fieldsBackgroundAssetUploadFiles: [FieldsBackgroundAssetUploadFiles]? = nil, limit: Int? = nil, include: [Include]? = nil) {
+			public init(filterLocale: [String]? = nil, filterPlatforms: [FilterPlatforms]? = nil, filterState: [FilterState]? = nil, filterVersion: [String]? = nil, filterInternalBetaReleaseState: [FilterInternalBetaReleaseState]? = nil, filterExternalBetaReleaseState: [FilterExternalBetaReleaseState]? = nil, filterAppStoreReleaseState: [FilterAppStoreReleaseState]? = nil, sort: [Sort]? = nil, fieldsBackgroundAssetVersions: [FieldsBackgroundAssetVersions]? = nil, fieldsBackgroundAssets: [FieldsBackgroundAssets]? = nil, fieldsBackgroundAssetVersionInternalBetaReleases: [FieldsBackgroundAssetVersionInternalBetaReleases]? = nil, fieldsBackgroundAssetVersionExternalBetaReleases: [FieldsBackgroundAssetVersionExternalBetaReleases]? = nil, fieldsBackgroundAssetVersionAppStoreReleases: [FieldsBackgroundAssetVersionAppStoreReleases]? = nil, fieldsBackgroundAssetUploadFiles: [FieldsBackgroundAssetUploadFiles]? = nil, limit: Int? = nil, include: [Include]? = nil) {
+				self.filterLocale = filterLocale
 				self.filterPlatforms = filterPlatforms
 				self.filterState = filterState
 				self.filterVersion = filterVersion
@@ -162,6 +165,7 @@ extension APIEndpoint.V1.BackgroundAssets.WithID {
 
 			public var asQuery: [(String, String?)] {
 				let encoder = URLQueryEncoder(explode: false)
+				encoder.encode(filterLocale, forKey: "filter[locale]")
 				encoder.encode(filterPlatforms, forKey: "filter[platforms]")
 				encoder.encode(filterState, forKey: "filter[state]")
 				encoder.encode(filterVersion, forKey: "filter[version]")

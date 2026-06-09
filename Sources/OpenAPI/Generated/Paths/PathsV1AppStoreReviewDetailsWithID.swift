@@ -19,6 +19,7 @@ extension APIEndpoint.V1.AppStoreReviewDetails {
 
 		public struct GetParameters {
 			public var fieldsAppStoreReviewDetails: [FieldsAppStoreReviewDetails]?
+			public var fieldsAppStoreVersions: [FieldsAppStoreVersions]?
 			public var fieldsAppStoreReviewAttachments: [FieldsAppStoreReviewAttachments]?
 			public var include: [Include]?
 			public var limitAppStoreReviewAttachments: Int?
@@ -36,6 +37,33 @@ extension APIEndpoint.V1.AppStoreReviewDetails {
 				case appStoreReviewAttachments
 			}
 
+			public enum FieldsAppStoreVersions: String, Codable, CaseIterable {
+				case platform
+				case versionString
+				case appStoreState
+				case appVersionState
+				case copyright
+				case reviewType
+				case releaseType
+				case earliestReleaseDate
+				case usesIdfa
+				case downloadable
+				case createdDate
+				case app
+				case appStoreVersionLocalizations
+				case build
+				case appStoreVersionPhasedRelease
+				case gameCenterAppVersion
+				case routingAppCoverage
+				case appStoreReviewDetail
+				case appStoreVersionSubmission
+				case appClipDefaultExperience
+				case appStoreVersionExperiments
+				case appStoreVersionExperimentsV2
+				case customerReviews
+				case alternativeDistributionPackage
+			}
+
 			public enum FieldsAppStoreReviewAttachments: String, Codable, CaseIterable {
 				case fileSize
 				case fileName
@@ -50,8 +78,9 @@ extension APIEndpoint.V1.AppStoreReviewDetails {
 				case appStoreReviewAttachments
 			}
 
-			public init(fieldsAppStoreReviewDetails: [FieldsAppStoreReviewDetails]? = nil, fieldsAppStoreReviewAttachments: [FieldsAppStoreReviewAttachments]? = nil, include: [Include]? = nil, limitAppStoreReviewAttachments: Int? = nil) {
+			public init(fieldsAppStoreReviewDetails: [FieldsAppStoreReviewDetails]? = nil, fieldsAppStoreVersions: [FieldsAppStoreVersions]? = nil, fieldsAppStoreReviewAttachments: [FieldsAppStoreReviewAttachments]? = nil, include: [Include]? = nil, limitAppStoreReviewAttachments: Int? = nil) {
 				self.fieldsAppStoreReviewDetails = fieldsAppStoreReviewDetails
+				self.fieldsAppStoreVersions = fieldsAppStoreVersions
 				self.fieldsAppStoreReviewAttachments = fieldsAppStoreReviewAttachments
 				self.include = include
 				self.limitAppStoreReviewAttachments = limitAppStoreReviewAttachments
@@ -60,6 +89,7 @@ extension APIEndpoint.V1.AppStoreReviewDetails {
 			public var asQuery: [(String, String?)] {
 				let encoder = URLQueryEncoder(explode: false)
 				encoder.encode(fieldsAppStoreReviewDetails, forKey: "fields[appStoreReviewDetails]")
+				encoder.encode(fieldsAppStoreVersions, forKey: "fields[appStoreVersions]")
 				encoder.encode(fieldsAppStoreReviewAttachments, forKey: "fields[appStoreReviewAttachments]")
 				encoder.encode(include, forKey: "include")
 				encoder.encode(limitAppStoreReviewAttachments, forKey: "limit[appStoreReviewAttachments]")

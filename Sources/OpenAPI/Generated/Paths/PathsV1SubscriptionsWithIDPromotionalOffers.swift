@@ -32,6 +32,7 @@ extension APIEndpoint.V1.Subscriptions.WithID {
 				case numberOfPeriods
 				case offerCode
 				case offerMode
+				case targetSubscriptionPlanType
 				case subscription
 				case prices
 			}
@@ -56,6 +57,7 @@ extension APIEndpoint.V1.Subscriptions.WithID {
 				case subscriptionAvailability
 				case winBackOffers
 				case images
+				case planAvailabilities
 			}
 
 			public enum FieldsSubscriptionPromotionalOfferPrices: String, Codable, CaseIterable {

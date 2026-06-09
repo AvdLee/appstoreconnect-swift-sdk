@@ -20,6 +20,7 @@ extension APIEndpoint.V1.AppStoreVersionExperiments {
 
 		public struct GetParameters {
 			public var fieldsAppStoreVersionExperiments: [FieldsAppStoreVersionExperiments]?
+			public var fieldsAppStoreVersions: [FieldsAppStoreVersions]?
 			public var fieldsAppStoreVersionExperimentTreatments: [FieldsAppStoreVersionExperimentTreatments]?
 			public var include: [Include]?
 			public var limitAppStoreVersionExperimentTreatments: Int?
@@ -33,6 +34,33 @@ extension APIEndpoint.V1.AppStoreVersionExperiments {
 				case endDate
 				case appStoreVersion
 				case appStoreVersionExperimentTreatments
+			}
+
+			public enum FieldsAppStoreVersions: String, Codable, CaseIterable {
+				case platform
+				case versionString
+				case appStoreState
+				case appVersionState
+				case copyright
+				case reviewType
+				case releaseType
+				case earliestReleaseDate
+				case usesIdfa
+				case downloadable
+				case createdDate
+				case app
+				case appStoreVersionLocalizations
+				case build
+				case appStoreVersionPhasedRelease
+				case gameCenterAppVersion
+				case routingAppCoverage
+				case appStoreReviewDetail
+				case appStoreVersionSubmission
+				case appClipDefaultExperience
+				case appStoreVersionExperiments
+				case appStoreVersionExperimentsV2
+				case customerReviews
+				case alternativeDistributionPackage
 			}
 
 			public enum FieldsAppStoreVersionExperimentTreatments: String, Codable, CaseIterable {
@@ -50,8 +78,9 @@ extension APIEndpoint.V1.AppStoreVersionExperiments {
 				case appStoreVersionExperimentTreatments
 			}
 
-			public init(fieldsAppStoreVersionExperiments: [FieldsAppStoreVersionExperiments]? = nil, fieldsAppStoreVersionExperimentTreatments: [FieldsAppStoreVersionExperimentTreatments]? = nil, include: [Include]? = nil, limitAppStoreVersionExperimentTreatments: Int? = nil) {
+			public init(fieldsAppStoreVersionExperiments: [FieldsAppStoreVersionExperiments]? = nil, fieldsAppStoreVersions: [FieldsAppStoreVersions]? = nil, fieldsAppStoreVersionExperimentTreatments: [FieldsAppStoreVersionExperimentTreatments]? = nil, include: [Include]? = nil, limitAppStoreVersionExperimentTreatments: Int? = nil) {
 				self.fieldsAppStoreVersionExperiments = fieldsAppStoreVersionExperiments
+				self.fieldsAppStoreVersions = fieldsAppStoreVersions
 				self.fieldsAppStoreVersionExperimentTreatments = fieldsAppStoreVersionExperimentTreatments
 				self.include = include
 				self.limitAppStoreVersionExperimentTreatments = limitAppStoreVersionExperimentTreatments
@@ -60,6 +89,7 @@ extension APIEndpoint.V1.AppStoreVersionExperiments {
 			public var asQuery: [(String, String?)] {
 				let encoder = URLQueryEncoder(explode: false)
 				encoder.encode(fieldsAppStoreVersionExperiments, forKey: "fields[appStoreVersionExperiments]")
+				encoder.encode(fieldsAppStoreVersions, forKey: "fields[appStoreVersions]")
 				encoder.encode(fieldsAppStoreVersionExperimentTreatments, forKey: "fields[appStoreVersionExperimentTreatments]")
 				encoder.encode(include, forKey: "include")
 				encoder.encode(limitAppStoreVersionExperimentTreatments, forKey: "limit[appStoreVersionExperimentTreatments]")

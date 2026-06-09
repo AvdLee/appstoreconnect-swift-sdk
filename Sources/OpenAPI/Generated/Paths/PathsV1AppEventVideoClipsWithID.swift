@@ -13,39 +13,65 @@ extension APIEndpoint.V1.AppEventVideoClips {
 		/// Path: `/v1/appEventVideoClips/{id}`
 		public let path: String
 
-		public func get(fieldsAppEventVideoClips: [FieldsAppEventVideoClips]? = nil, include: [Include]? = nil) -> Request<AppStoreConnect_Swift_SDK.AppEventVideoClipResponse> {
-			Request(path: path, method: "GET", query: makeGetQuery(fieldsAppEventVideoClips, include), id: "appEventVideoClips_getInstance")
+		@available(*, deprecated, message: "Deprecated")
+		public func get(parameters: GetParameters? = nil) -> Request<AppStoreConnect_Swift_SDK.AppEventVideoClipResponse> {
+			Request(path: path, method: "GET", query: parameters?.asQuery, id: "appEventVideoClips_getInstance")
 		}
 
-		private func makeGetQuery(_ fieldsAppEventVideoClips: [FieldsAppEventVideoClips]?, _ include: [Include]?) -> [(String, String?)] {
-			let encoder = URLQueryEncoder(explode: false)
-			encoder.encode(fieldsAppEventVideoClips, forKey: "fields[appEventVideoClips]")
-			encoder.encode(include, forKey: "include")
-			return encoder.items
+		public struct GetParameters {
+			public var fieldsAppEventVideoClips: [FieldsAppEventVideoClips]?
+			public var fieldsAppEventLocalizations: [FieldsAppEventLocalizations]?
+			public var include: [Include]?
+
+			public enum FieldsAppEventVideoClips: String, Codable, CaseIterable {
+				case fileSize
+				case fileName
+				case previewFrameTimeCode
+				case videoURL = "videoUrl"
+				case previewFrameImage
+				case previewImage
+				case uploadOperations
+				case assetDeliveryState
+				case videoDeliveryState
+				case appEventAssetType
+				case appEventLocalization
+			}
+
+			public enum FieldsAppEventLocalizations: String, Codable, CaseIterable {
+				case locale
+				case name
+				case shortDescription
+				case longDescription
+				case appEvent
+				case appEventScreenshots
+				case appEventVideoClips
+			}
+
+			public enum Include: String, Codable, CaseIterable {
+				case appEventLocalization
+			}
+
+			public init(fieldsAppEventVideoClips: [FieldsAppEventVideoClips]? = nil, fieldsAppEventLocalizations: [FieldsAppEventLocalizations]? = nil, include: [Include]? = nil) {
+				self.fieldsAppEventVideoClips = fieldsAppEventVideoClips
+				self.fieldsAppEventLocalizations = fieldsAppEventLocalizations
+				self.include = include
+			}
+
+			public var asQuery: [(String, String?)] {
+				let encoder = URLQueryEncoder(explode: false)
+				encoder.encode(fieldsAppEventVideoClips, forKey: "fields[appEventVideoClips]")
+				encoder.encode(fieldsAppEventLocalizations, forKey: "fields[appEventLocalizations]")
+				encoder.encode(include, forKey: "include")
+				return encoder.items
+			}
 		}
 
-		public enum FieldsAppEventVideoClips: String, Codable, CaseIterable {
-			case fileSize
-			case fileName
-			case previewFrameTimeCode
-			case videoURL = "videoUrl"
-			case previewFrameImage
-			case previewImage
-			case uploadOperations
-			case assetDeliveryState
-			case videoDeliveryState
-			case appEventAssetType
-			case appEventLocalization
-		}
-
-		public enum Include: String, Codable, CaseIterable {
-			case appEventLocalization
-		}
-
+		@available(*, deprecated, message: "Deprecated")
 		public func patch(_ body: AppStoreConnect_Swift_SDK.AppEventVideoClipUpdateRequest) -> Request<AppStoreConnect_Swift_SDK.AppEventVideoClipResponse> {
 			Request(path: path, method: "PATCH", body: body, id: "appEventVideoClips_updateInstance")
 		}
 
+		@available(*, deprecated, message: "Deprecated")
 		public var delete: Request<Void> {
 			Request(path: path, method: "DELETE", id: "appEventVideoClips_deleteInstance")
 		}

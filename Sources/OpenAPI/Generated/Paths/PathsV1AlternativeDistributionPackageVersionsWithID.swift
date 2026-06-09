@@ -21,6 +21,7 @@ extension APIEndpoint.V1.AlternativeDistributionPackageVersions {
 			public var fieldsAlternativeDistributionPackageVersions: [FieldsAlternativeDistributionPackageVersions]?
 			public var fieldsAlternativeDistributionPackageVariants: [FieldsAlternativeDistributionPackageVariants]?
 			public var fieldsAlternativeDistributionPackageDeltas: [FieldsAlternativeDistributionPackageDeltas]?
+			public var fieldsAlternativeDistributionPackages: [FieldsAlternativeDistributionPackages]?
 			public var include: [Include]?
 			public var limitDeltas: Int?
 			public var limitVariants: Int?
@@ -50,16 +51,22 @@ extension APIEndpoint.V1.AlternativeDistributionPackageVersions {
 				case fileChecksum
 			}
 
+			public enum FieldsAlternativeDistributionPackages: String, Codable, CaseIterable {
+				case sourceFileChecksum
+				case versions
+			}
+
 			public enum Include: String, Codable, CaseIterable {
 				case variants
 				case deltas
 				case alternativeDistributionPackage
 			}
 
-			public init(fieldsAlternativeDistributionPackageVersions: [FieldsAlternativeDistributionPackageVersions]? = nil, fieldsAlternativeDistributionPackageVariants: [FieldsAlternativeDistributionPackageVariants]? = nil, fieldsAlternativeDistributionPackageDeltas: [FieldsAlternativeDistributionPackageDeltas]? = nil, include: [Include]? = nil, limitDeltas: Int? = nil, limitVariants: Int? = nil) {
+			public init(fieldsAlternativeDistributionPackageVersions: [FieldsAlternativeDistributionPackageVersions]? = nil, fieldsAlternativeDistributionPackageVariants: [FieldsAlternativeDistributionPackageVariants]? = nil, fieldsAlternativeDistributionPackageDeltas: [FieldsAlternativeDistributionPackageDeltas]? = nil, fieldsAlternativeDistributionPackages: [FieldsAlternativeDistributionPackages]? = nil, include: [Include]? = nil, limitDeltas: Int? = nil, limitVariants: Int? = nil) {
 				self.fieldsAlternativeDistributionPackageVersions = fieldsAlternativeDistributionPackageVersions
 				self.fieldsAlternativeDistributionPackageVariants = fieldsAlternativeDistributionPackageVariants
 				self.fieldsAlternativeDistributionPackageDeltas = fieldsAlternativeDistributionPackageDeltas
+				self.fieldsAlternativeDistributionPackages = fieldsAlternativeDistributionPackages
 				self.include = include
 				self.limitDeltas = limitDeltas
 				self.limitVariants = limitVariants
@@ -70,6 +77,7 @@ extension APIEndpoint.V1.AlternativeDistributionPackageVersions {
 				encoder.encode(fieldsAlternativeDistributionPackageVersions, forKey: "fields[alternativeDistributionPackageVersions]")
 				encoder.encode(fieldsAlternativeDistributionPackageVariants, forKey: "fields[alternativeDistributionPackageVariants]")
 				encoder.encode(fieldsAlternativeDistributionPackageDeltas, forKey: "fields[alternativeDistributionPackageDeltas]")
+				encoder.encode(fieldsAlternativeDistributionPackages, forKey: "fields[alternativeDistributionPackages]")
 				encoder.encode(include, forKey: "include")
 				encoder.encode(limitDeltas, forKey: "limit[deltas]")
 				encoder.encode(limitVariants, forKey: "limit[variants]")

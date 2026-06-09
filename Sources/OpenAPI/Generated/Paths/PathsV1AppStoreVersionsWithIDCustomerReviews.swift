@@ -20,10 +20,12 @@ extension APIEndpoint.V1.AppStoreVersions.WithID {
 		public struct GetParameters {
 			public var filterTerritory: [FilterTerritory]?
 			public var filterRating: [String]?
+			public var filterReviewTerritory: [String]?
 			public var isExistsPublishedResponse: Bool?
 			public var sort: [Sort]?
 			public var fieldsCustomerReviews: [FieldsCustomerReviews]?
 			public var fieldsCustomerReviewResponses: [FieldsCustomerReviewResponses]?
+			public var fieldsTerritories: [FieldsTerritories]?
 			public var limit: Int?
 			public var include: [Include]?
 
@@ -278,6 +280,7 @@ extension APIEndpoint.V1.AppStoreVersions.WithID {
 				case createdDate
 				case territory
 				case response
+				case reviewTerritory
 			}
 
 			public enum FieldsCustomerReviewResponses: String, Codable, CaseIterable {
@@ -287,17 +290,24 @@ extension APIEndpoint.V1.AppStoreVersions.WithID {
 				case review
 			}
 
-			public enum Include: String, Codable, CaseIterable {
-				case response
+			public enum FieldsTerritories: String, Codable, CaseIterable {
+				case currency
 			}
 
-			public init(filterTerritory: [FilterTerritory]? = nil, filterRating: [String]? = nil, isExistsPublishedResponse: Bool? = nil, sort: [Sort]? = nil, fieldsCustomerReviews: [FieldsCustomerReviews]? = nil, fieldsCustomerReviewResponses: [FieldsCustomerReviewResponses]? = nil, limit: Int? = nil, include: [Include]? = nil) {
+			public enum Include: String, Codable, CaseIterable {
+				case response
+				case reviewTerritory
+			}
+
+			public init(filterTerritory: [FilterTerritory]? = nil, filterRating: [String]? = nil, filterReviewTerritory: [String]? = nil, isExistsPublishedResponse: Bool? = nil, sort: [Sort]? = nil, fieldsCustomerReviews: [FieldsCustomerReviews]? = nil, fieldsCustomerReviewResponses: [FieldsCustomerReviewResponses]? = nil, fieldsTerritories: [FieldsTerritories]? = nil, limit: Int? = nil, include: [Include]? = nil) {
 				self.filterTerritory = filterTerritory
 				self.filterRating = filterRating
+				self.filterReviewTerritory = filterReviewTerritory
 				self.isExistsPublishedResponse = isExistsPublishedResponse
 				self.sort = sort
 				self.fieldsCustomerReviews = fieldsCustomerReviews
 				self.fieldsCustomerReviewResponses = fieldsCustomerReviewResponses
+				self.fieldsTerritories = fieldsTerritories
 				self.limit = limit
 				self.include = include
 			}
@@ -306,10 +316,12 @@ extension APIEndpoint.V1.AppStoreVersions.WithID {
 				let encoder = URLQueryEncoder(explode: false)
 				encoder.encode(filterTerritory, forKey: "filter[territory]")
 				encoder.encode(filterRating, forKey: "filter[rating]")
+				encoder.encode(filterReviewTerritory, forKey: "filter[reviewTerritory]")
 				encoder.encode(isExistsPublishedResponse, forKey: "exists[publishedResponse]")
 				encoder.encode(sort, forKey: "sort")
 				encoder.encode(fieldsCustomerReviews, forKey: "fields[customerReviews]")
 				encoder.encode(fieldsCustomerReviewResponses, forKey: "fields[customerReviewResponses]")
+				encoder.encode(fieldsTerritories, forKey: "fields[territories]")
 				encoder.encode(limit, forKey: "limit")
 				encoder.encode(include, forKey: "include")
 				return encoder.items

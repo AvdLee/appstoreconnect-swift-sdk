@@ -3,8 +3,11 @@
 
 import Foundation
 
+@available(*, deprecated, message: "Deprecated")
 public struct AppEventVideoClipResponse: Codable {
 	/// AppEventVideoClip
+	///
+	/// - warning: Deprecated.
 	public var data: AppEventVideoClip
 	public var included: [AppEventLocalization]?
 	public var links: DocumentLinks

@@ -19,6 +19,7 @@ extension APIEndpoint.V1.AppClipDefaultExperienceLocalizations {
 
 		public struct GetParameters {
 			public var fieldsAppClipDefaultExperienceLocalizations: [FieldsAppClipDefaultExperienceLocalizations]?
+			public var fieldsAppClipDefaultExperiences: [FieldsAppClipDefaultExperiences]?
 			public var fieldsAppClipHeaderImages: [FieldsAppClipHeaderImages]?
 			public var include: [Include]?
 
@@ -27,6 +28,14 @@ extension APIEndpoint.V1.AppClipDefaultExperienceLocalizations {
 				case subtitle
 				case appClipDefaultExperience
 				case appClipHeaderImage
+			}
+
+			public enum FieldsAppClipDefaultExperiences: String, Codable, CaseIterable {
+				case action
+				case appClip
+				case releaseWithAppStoreVersion
+				case appClipDefaultExperienceLocalizations
+				case appClipAppStoreReviewDetail
 			}
 
 			public enum FieldsAppClipHeaderImages: String, Codable, CaseIterable {
@@ -44,8 +53,9 @@ extension APIEndpoint.V1.AppClipDefaultExperienceLocalizations {
 				case appClipHeaderImage
 			}
 
-			public init(fieldsAppClipDefaultExperienceLocalizations: [FieldsAppClipDefaultExperienceLocalizations]? = nil, fieldsAppClipHeaderImages: [FieldsAppClipHeaderImages]? = nil, include: [Include]? = nil) {
+			public init(fieldsAppClipDefaultExperienceLocalizations: [FieldsAppClipDefaultExperienceLocalizations]? = nil, fieldsAppClipDefaultExperiences: [FieldsAppClipDefaultExperiences]? = nil, fieldsAppClipHeaderImages: [FieldsAppClipHeaderImages]? = nil, include: [Include]? = nil) {
 				self.fieldsAppClipDefaultExperienceLocalizations = fieldsAppClipDefaultExperienceLocalizations
+				self.fieldsAppClipDefaultExperiences = fieldsAppClipDefaultExperiences
 				self.fieldsAppClipHeaderImages = fieldsAppClipHeaderImages
 				self.include = include
 			}
@@ -53,6 +63,7 @@ extension APIEndpoint.V1.AppClipDefaultExperienceLocalizations {
 			public var asQuery: [(String, String?)] {
 				let encoder = URLQueryEncoder(explode: false)
 				encoder.encode(fieldsAppClipDefaultExperienceLocalizations, forKey: "fields[appClipDefaultExperienceLocalizations]")
+				encoder.encode(fieldsAppClipDefaultExperiences, forKey: "fields[appClipDefaultExperiences]")
 				encoder.encode(fieldsAppClipHeaderImages, forKey: "fields[appClipHeaderImages]")
 				encoder.encode(include, forKey: "include")
 				return encoder.items

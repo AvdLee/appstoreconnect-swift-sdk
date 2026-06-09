@@ -73,6 +73,7 @@ extension APIEndpoint.V1.Apps.WithID {
 				case subscriptionAvailability
 				case winBackOffers
 				case images
+				case planAvailabilities
 			}
 
 			public enum FieldsSubscriptionGroupLocalizations: String, Codable, CaseIterable {

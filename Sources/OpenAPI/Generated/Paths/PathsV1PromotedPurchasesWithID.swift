@@ -13,28 +13,86 @@ extension APIEndpoint.V1.PromotedPurchases {
 		/// Path: `/v1/promotedPurchases/{id}`
 		public let path: String
 
-		public func get(fieldsPromotedPurchases: [FieldsPromotedPurchases]? = nil, include: [Include]? = nil) -> Request<AppStoreConnect_Swift_SDK.PromotedPurchaseResponse> {
-			Request(path: path, method: "GET", query: makeGetQuery(fieldsPromotedPurchases, include), id: "promotedPurchases_getInstance")
+		public func get(parameters: GetParameters? = nil) -> Request<AppStoreConnect_Swift_SDK.PromotedPurchaseResponse> {
+			Request(path: path, method: "GET", query: parameters?.asQuery, id: "promotedPurchases_getInstance")
 		}
 
-		private func makeGetQuery(_ fieldsPromotedPurchases: [FieldsPromotedPurchases]?, _ include: [Include]?) -> [(String, String?)] {
-			let encoder = URLQueryEncoder(explode: false)
-			encoder.encode(fieldsPromotedPurchases, forKey: "fields[promotedPurchases]")
-			encoder.encode(include, forKey: "include")
-			return encoder.items
-		}
+		public struct GetParameters {
+			public var fieldsPromotedPurchases: [FieldsPromotedPurchases]?
+			public var fieldsInAppPurchases: [FieldsInAppPurchases]?
+			public var fieldsSubscriptions: [FieldsSubscriptions]?
+			public var include: [Include]?
 
-		public enum FieldsPromotedPurchases: String, Codable, CaseIterable {
-			case visibleForAllUsers
-			case enabled
-			case state
-			case inAppPurchaseV2
-			case subscription
-		}
+			public enum FieldsPromotedPurchases: String, Codable, CaseIterable {
+				case visibleForAllUsers
+				case enabled
+				case state
+				case inAppPurchaseV2
+				case subscription
+			}
 
-		public enum Include: String, Codable, CaseIterable {
-			case inAppPurchaseV2
-			case subscription
+			public enum FieldsInAppPurchases: String, Codable, CaseIterable {
+				case name
+				case productID = "productId"
+				case inAppPurchaseType
+				case state
+				case reviewNote
+				case familySharable
+				case contentHosting
+				case inAppPurchaseLocalizations
+				case pricePoints
+				case content
+				case appStoreReviewScreenshot
+				case promotedPurchase
+				case iapPriceSchedule
+				case inAppPurchaseAvailability
+				case images
+				case offerCodes
+			}
+
+			public enum FieldsSubscriptions: String, Codable, CaseIterable {
+				case name
+				case productID = "productId"
+				case familySharable
+				case state
+				case subscriptionPeriod
+				case reviewNote
+				case groupLevel
+				case subscriptionLocalizations
+				case appStoreReviewScreenshot
+				case group
+				case introductoryOffers
+				case promotionalOffers
+				case offerCodes
+				case prices
+				case pricePoints
+				case promotedPurchase
+				case subscriptionAvailability
+				case winBackOffers
+				case images
+				case planAvailabilities
+			}
+
+			public enum Include: String, Codable, CaseIterable {
+				case inAppPurchaseV2
+				case subscription
+			}
+
+			public init(fieldsPromotedPurchases: [FieldsPromotedPurchases]? = nil, fieldsInAppPurchases: [FieldsInAppPurchases]? = nil, fieldsSubscriptions: [FieldsSubscriptions]? = nil, include: [Include]? = nil) {
+				self.fieldsPromotedPurchases = fieldsPromotedPurchases
+				self.fieldsInAppPurchases = fieldsInAppPurchases
+				self.fieldsSubscriptions = fieldsSubscriptions
+				self.include = include
+			}
+
+			public var asQuery: [(String, String?)] {
+				let encoder = URLQueryEncoder(explode: false)
+				encoder.encode(fieldsPromotedPurchases, forKey: "fields[promotedPurchases]")
+				encoder.encode(fieldsInAppPurchases, forKey: "fields[inAppPurchases]")
+				encoder.encode(fieldsSubscriptions, forKey: "fields[subscriptions]")
+				encoder.encode(include, forKey: "include")
+				return encoder.items
+			}
 		}
 
 		public func patch(_ body: AppStoreConnect_Swift_SDK.PromotedPurchaseUpdateRequest) -> Request<AppStoreConnect_Swift_SDK.PromotedPurchaseResponse> {

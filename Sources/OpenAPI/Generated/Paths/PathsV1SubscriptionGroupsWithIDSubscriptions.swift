@@ -34,6 +34,7 @@ extension APIEndpoint.V1.SubscriptionGroups.WithID {
 			public var fieldsSubscriptionAvailabilities: [FieldsSubscriptionAvailabilities]?
 			public var fieldsWinBackOffers: [FieldsWinBackOffers]?
 			public var fieldsSubscriptionImages: [FieldsSubscriptionImages]?
+			public var fieldsSubscriptionPlanAvailabilities: [FieldsSubscriptionPlanAvailabilities]?
 			public var limit: Int?
 			public var include: [Include]?
 			public var limitSubscriptionLocalizations: Int?
@@ -43,6 +44,7 @@ extension APIEndpoint.V1.SubscriptionGroups.WithID {
 			public var limitPrices: Int?
 			public var limitWinBackOffers: Int?
 			public var limitImages: Int?
+			public var limitPlanAvailabilities: Int?
 
 			public enum FilterState: String, Codable, CaseIterable {
 				case missingMetadata = "MISSING_METADATA"
@@ -82,6 +84,7 @@ extension APIEndpoint.V1.SubscriptionGroups.WithID {
 				case subscriptionAvailability
 				case winBackOffers
 				case images
+				case planAvailabilities
 			}
 
 			public enum FieldsSubscriptionLocalizations: String, Codable, CaseIterable {
@@ -116,6 +119,7 @@ extension APIEndpoint.V1.SubscriptionGroups.WithID {
 				case duration
 				case offerMode
 				case numberOfPeriods
+				case targetSubscriptionPlanType
 				case subscription
 				case territory
 				case subscriptionPricePoint
@@ -127,6 +131,7 @@ extension APIEndpoint.V1.SubscriptionGroups.WithID {
 				case numberOfPeriods
 				case offerCode
 				case offerMode
+				case targetSubscriptionPlanType
 				case subscription
 				case prices
 			}
@@ -143,6 +148,7 @@ extension APIEndpoint.V1.SubscriptionGroups.WithID {
 				case sandboxCodeCount
 				case active
 				case autoRenewEnabled
+				case targetSubscriptionPlanType
 				case subscription
 				case oneTimeUseCodes
 				case customCodes
@@ -152,6 +158,7 @@ extension APIEndpoint.V1.SubscriptionGroups.WithID {
 			public enum FieldsSubscriptionPrices: String, Codable, CaseIterable {
 				case startDate
 				case preserved
+				case planType
 				case territory
 				case subscriptionPricePoint
 			}
@@ -182,6 +189,7 @@ extension APIEndpoint.V1.SubscriptionGroups.WithID {
 				case endDate
 				case priority
 				case promotionIntent
+				case targetSubscriptionPlanType
 				case prices
 			}
 
@@ -196,6 +204,12 @@ extension APIEndpoint.V1.SubscriptionGroups.WithID {
 				case subscription
 			}
 
+			public enum FieldsSubscriptionPlanAvailabilities: String, Codable, CaseIterable {
+				case availableInNewTerritories
+				case planType
+				case availableTerritories
+			}
+
 			public enum Include: String, Codable, CaseIterable {
 				case subscriptionLocalizations
 				case appStoreReviewScreenshot
@@ -208,9 +222,10 @@ extension APIEndpoint.V1.SubscriptionGroups.WithID {
 				case subscriptionAvailability
 				case winBackOffers
 				case images
+				case planAvailabilities
 			}
 
-			public init(filterProductID: [String]? = nil, filterName: [String]? = nil, filterState: [FilterState]? = nil, sort: [Sort]? = nil, fieldsSubscriptions: [FieldsSubscriptions]? = nil, fieldsSubscriptionLocalizations: [FieldsSubscriptionLocalizations]? = nil, fieldsSubscriptionAppStoreReviewScreenshots: [FieldsSubscriptionAppStoreReviewScreenshots]? = nil, fieldsSubscriptionGroups: [FieldsSubscriptionGroups]? = nil, fieldsSubscriptionIntroductoryOffers: [FieldsSubscriptionIntroductoryOffers]? = nil, fieldsSubscriptionPromotionalOffers: [FieldsSubscriptionPromotionalOffers]? = nil, fieldsSubscriptionOfferCodes: [FieldsSubscriptionOfferCodes]? = nil, fieldsSubscriptionPrices: [FieldsSubscriptionPrices]? = nil, fieldsPromotedPurchases: [FieldsPromotedPurchases]? = nil, fieldsSubscriptionAvailabilities: [FieldsSubscriptionAvailabilities]? = nil, fieldsWinBackOffers: [FieldsWinBackOffers]? = nil, fieldsSubscriptionImages: [FieldsSubscriptionImages]? = nil, limit: Int? = nil, include: [Include]? = nil, limitSubscriptionLocalizations: Int? = nil, limitIntroductoryOffers: Int? = nil, limitPromotionalOffers: Int? = nil, limitOfferCodes: Int? = nil, limitPrices: Int? = nil, limitWinBackOffers: Int? = nil, limitImages: Int? = nil) {
+			public init(filterProductID: [String]? = nil, filterName: [String]? = nil, filterState: [FilterState]? = nil, sort: [Sort]? = nil, fieldsSubscriptions: [FieldsSubscriptions]? = nil, fieldsSubscriptionLocalizations: [FieldsSubscriptionLocalizations]? = nil, fieldsSubscriptionAppStoreReviewScreenshots: [FieldsSubscriptionAppStoreReviewScreenshots]? = nil, fieldsSubscriptionGroups: [FieldsSubscriptionGroups]? = nil, fieldsSubscriptionIntroductoryOffers: [FieldsSubscriptionIntroductoryOffers]? = nil, fieldsSubscriptionPromotionalOffers: [FieldsSubscriptionPromotionalOffers]? = nil, fieldsSubscriptionOfferCodes: [FieldsSubscriptionOfferCodes]? = nil, fieldsSubscriptionPrices: [FieldsSubscriptionPrices]? = nil, fieldsPromotedPurchases: [FieldsPromotedPurchases]? = nil, fieldsSubscriptionAvailabilities: [FieldsSubscriptionAvailabilities]? = nil, fieldsWinBackOffers: [FieldsWinBackOffers]? = nil, fieldsSubscriptionImages: [FieldsSubscriptionImages]? = nil, fieldsSubscriptionPlanAvailabilities: [FieldsSubscriptionPlanAvailabilities]? = nil, limit: Int? = nil, include: [Include]? = nil, limitSubscriptionLocalizations: Int? = nil, limitIntroductoryOffers: Int? = nil, limitPromotionalOffers: Int? = nil, limitOfferCodes: Int? = nil, limitPrices: Int? = nil, limitWinBackOffers: Int? = nil, limitImages: Int? = nil, limitPlanAvailabilities: Int? = nil) {
 				self.filterProductID = filterProductID
 				self.filterName = filterName
 				self.filterState = filterState
@@ -227,6 +242,7 @@ extension APIEndpoint.V1.SubscriptionGroups.WithID {
 				self.fieldsSubscriptionAvailabilities = fieldsSubscriptionAvailabilities
 				self.fieldsWinBackOffers = fieldsWinBackOffers
 				self.fieldsSubscriptionImages = fieldsSubscriptionImages
+				self.fieldsSubscriptionPlanAvailabilities = fieldsSubscriptionPlanAvailabilities
 				self.limit = limit
 				self.include = include
 				self.limitSubscriptionLocalizations = limitSubscriptionLocalizations
@@ -236,6 +252,7 @@ extension APIEndpoint.V1.SubscriptionGroups.WithID {
 				self.limitPrices = limitPrices
 				self.limitWinBackOffers = limitWinBackOffers
 				self.limitImages = limitImages
+				self.limitPlanAvailabilities = limitPlanAvailabilities
 			}
 
 			public var asQuery: [(String, String?)] {
@@ -256,6 +273,7 @@ extension APIEndpoint.V1.SubscriptionGroups.WithID {
 				encoder.encode(fieldsSubscriptionAvailabilities, forKey: "fields[subscriptionAvailabilities]")
 				encoder.encode(fieldsWinBackOffers, forKey: "fields[winBackOffers]")
 				encoder.encode(fieldsSubscriptionImages, forKey: "fields[subscriptionImages]")
+				encoder.encode(fieldsSubscriptionPlanAvailabilities, forKey: "fields[subscriptionPlanAvailabilities]")
 				encoder.encode(limit, forKey: "limit")
 				encoder.encode(include, forKey: "include")
 				encoder.encode(limitSubscriptionLocalizations, forKey: "limit[subscriptionLocalizations]")
@@ -265,6 +283,7 @@ extension APIEndpoint.V1.SubscriptionGroups.WithID {
 				encoder.encode(limitPrices, forKey: "limit[prices]")
 				encoder.encode(limitWinBackOffers, forKey: "limit[winBackOffers]")
 				encoder.encode(limitImages, forKey: "limit[images]")
+				encoder.encode(limitPlanAvailabilities, forKey: "limit[planAvailabilities]")
 				return encoder.items
 			}
 		}

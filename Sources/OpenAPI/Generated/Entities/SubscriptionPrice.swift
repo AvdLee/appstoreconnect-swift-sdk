@@ -17,22 +17,26 @@ public struct SubscriptionPrice: Codable, Identifiable {
 	public struct Attributes: Codable {
 		public var startDate: String?
 		public var isPreserved: Bool?
+		public var planType: SubscriptionPlanType?
 
-		public init(startDate: String? = nil, isPreserved: Bool? = nil) {
+		public init(startDate: String? = nil, isPreserved: Bool? = nil, planType: SubscriptionPlanType? = nil) {
 			self.startDate = startDate
 			self.isPreserved = isPreserved
+			self.planType = planType
 		}
 
 		public init(from decoder: Decoder) throws {
 			let values = try decoder.container(keyedBy: StringCodingKey.self)
 			self.startDate = try values.decodeIfPresent(String.self, forKey: "startDate")
 			self.isPreserved = try values.decodeIfPresent(Bool.self, forKey: "preserved")
+			self.planType = try values.decodeIfPresent(SubscriptionPlanType.self, forKey: "planType")
 		}
 
 		public func encode(to encoder: Encoder) throws {
 			var values = encoder.container(keyedBy: StringCodingKey.self)
 			try values.encodeIfPresent(startDate, forKey: "startDate")
 			try values.encodeIfPresent(isPreserved, forKey: "preserved")
+			try values.encodeIfPresent(planType, forKey: "planType")
 		}
 	}
 

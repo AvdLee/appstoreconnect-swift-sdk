@@ -14,26 +14,84 @@ extension APIEndpoint.V1.GameCenterAchievementReleases {
 		public let path: String
 
 		@available(*, deprecated, message: "Deprecated")
-		public func get(fieldsGameCenterAchievementReleases: [FieldsGameCenterAchievementReleases]? = nil, include: [Include]? = nil) -> Request<AppStoreConnect_Swift_SDK.GameCenterAchievementReleaseResponse> {
-			Request(path: path, method: "GET", query: makeGetQuery(fieldsGameCenterAchievementReleases, include), id: "gameCenterAchievementReleases_getInstance")
+		public func get(parameters: GetParameters? = nil) -> Request<AppStoreConnect_Swift_SDK.GameCenterAchievementReleaseResponse> {
+			Request(path: path, method: "GET", query: parameters?.asQuery, id: "gameCenterAchievementReleases_getInstance")
 		}
 
-		private func makeGetQuery(_ fieldsGameCenterAchievementReleases: [FieldsGameCenterAchievementReleases]?, _ include: [Include]?) -> [(String, String?)] {
-			let encoder = URLQueryEncoder(explode: false)
-			encoder.encode(fieldsGameCenterAchievementReleases, forKey: "fields[gameCenterAchievementReleases]")
-			encoder.encode(include, forKey: "include")
-			return encoder.items
-		}
+		public struct GetParameters {
+			public var fieldsGameCenterAchievementReleases: [FieldsGameCenterAchievementReleases]?
+			public var fieldsGameCenterDetails: [FieldsGameCenterDetails]?
+			public var fieldsGameCenterAchievements: [FieldsGameCenterAchievements]?
+			public var include: [Include]?
 
-		public enum FieldsGameCenterAchievementReleases: String, Codable, CaseIterable {
-			case live
-			case gameCenterDetail
-			case gameCenterAchievement
-		}
+			public enum FieldsGameCenterAchievementReleases: String, Codable, CaseIterable {
+				case live
+				case gameCenterDetail
+				case gameCenterAchievement
+			}
 
-		public enum Include: String, Codable, CaseIterable {
-			case gameCenterDetail
-			case gameCenterAchievement
+			public enum FieldsGameCenterDetails: String, Codable, CaseIterable {
+				case arcadeEnabled
+				case challengeEnabled
+				case app
+				case gameCenterAppVersions
+				case gameCenterGroup
+				case gameCenterLeaderboards
+				case gameCenterLeaderboardsV2
+				case gameCenterLeaderboardSets
+				case gameCenterLeaderboardSetsV2
+				case gameCenterAchievements
+				case gameCenterAchievementsV2
+				case gameCenterActivities
+				case gameCenterChallenges
+				case defaultLeaderboard
+				case defaultLeaderboardV2
+				case defaultGroupLeaderboard
+				case defaultGroupLeaderboardV2
+				case achievementReleases
+				case activityReleases
+				case challengeReleases
+				case leaderboardReleases
+				case leaderboardSetReleases
+				case challengesMinimumPlatformVersions
+			}
+
+			public enum FieldsGameCenterAchievements: String, Codable, CaseIterable {
+				case referenceName
+				case vendorIdentifier
+				case points
+				case showBeforeEarned
+				case repeatable
+				case archived
+				case activityProperties
+				case gameCenterDetail
+				case gameCenterGroup
+				case groupAchievement
+				case localizations
+				case releases
+				case activity
+			}
+
+			public enum Include: String, Codable, CaseIterable {
+				case gameCenterDetail
+				case gameCenterAchievement
+			}
+
+			public init(fieldsGameCenterAchievementReleases: [FieldsGameCenterAchievementReleases]? = nil, fieldsGameCenterDetails: [FieldsGameCenterDetails]? = nil, fieldsGameCenterAchievements: [FieldsGameCenterAchievements]? = nil, include: [Include]? = nil) {
+				self.fieldsGameCenterAchievementReleases = fieldsGameCenterAchievementReleases
+				self.fieldsGameCenterDetails = fieldsGameCenterDetails
+				self.fieldsGameCenterAchievements = fieldsGameCenterAchievements
+				self.include = include
+			}
+
+			public var asQuery: [(String, String?)] {
+				let encoder = URLQueryEncoder(explode: false)
+				encoder.encode(fieldsGameCenterAchievementReleases, forKey: "fields[gameCenterAchievementReleases]")
+				encoder.encode(fieldsGameCenterDetails, forKey: "fields[gameCenterDetails]")
+				encoder.encode(fieldsGameCenterAchievements, forKey: "fields[gameCenterAchievements]")
+				encoder.encode(include, forKey: "include")
+				return encoder.items
+			}
 		}
 
 		@available(*, deprecated, message: "Deprecated")

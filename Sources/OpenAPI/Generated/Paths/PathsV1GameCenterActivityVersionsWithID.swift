@@ -19,8 +19,10 @@ extension APIEndpoint.V1.GameCenterActivityVersions {
 
 		public struct GetParameters {
 			public var fieldsGameCenterActivityVersions: [FieldsGameCenterActivityVersions]?
+			public var fieldsGameCenterActivities: [FieldsGameCenterActivities]?
 			public var fieldsGameCenterActivityLocalizations: [FieldsGameCenterActivityLocalizations]?
 			public var fieldsGameCenterActivityImages: [FieldsGameCenterActivityImages]?
+			public var fieldsGameCenterActivityVersionReleases: [FieldsGameCenterActivityVersionReleases]?
 			public var include: [Include]?
 			public var limitLocalizations: Int?
 			public var limitReleases: Int?
@@ -33,6 +35,24 @@ extension APIEndpoint.V1.GameCenterActivityVersions {
 				case localizations
 				case defaultImage
 				case releases
+			}
+
+			public enum FieldsGameCenterActivities: String, Codable, CaseIterable {
+				case referenceName
+				case vendorIdentifier
+				case playStyle
+				case minimumPlayersCount
+				case maximumPlayersCount
+				case supportsPartyCode
+				case archived
+				case properties
+				case gameCenterDetail
+				case gameCenterGroup
+				case achievements
+				case achievementsV2
+				case leaderboards
+				case leaderboardsV2
+				case versions
 			}
 
 			public enum FieldsGameCenterActivityLocalizations: String, Codable, CaseIterable {
@@ -51,6 +71,10 @@ extension APIEndpoint.V1.GameCenterActivityVersions {
 				case assetDeliveryState
 			}
 
+			public enum FieldsGameCenterActivityVersionReleases: String, Codable, CaseIterable {
+				case version
+			}
+
 			public enum Include: String, Codable, CaseIterable {
 				case activity
 				case localizations
@@ -58,10 +82,12 @@ extension APIEndpoint.V1.GameCenterActivityVersions {
 				case releases
 			}
 
-			public init(fieldsGameCenterActivityVersions: [FieldsGameCenterActivityVersions]? = nil, fieldsGameCenterActivityLocalizations: [FieldsGameCenterActivityLocalizations]? = nil, fieldsGameCenterActivityImages: [FieldsGameCenterActivityImages]? = nil, include: [Include]? = nil, limitLocalizations: Int? = nil, limitReleases: Int? = nil) {
+			public init(fieldsGameCenterActivityVersions: [FieldsGameCenterActivityVersions]? = nil, fieldsGameCenterActivities: [FieldsGameCenterActivities]? = nil, fieldsGameCenterActivityLocalizations: [FieldsGameCenterActivityLocalizations]? = nil, fieldsGameCenterActivityImages: [FieldsGameCenterActivityImages]? = nil, fieldsGameCenterActivityVersionReleases: [FieldsGameCenterActivityVersionReleases]? = nil, include: [Include]? = nil, limitLocalizations: Int? = nil, limitReleases: Int? = nil) {
 				self.fieldsGameCenterActivityVersions = fieldsGameCenterActivityVersions
+				self.fieldsGameCenterActivities = fieldsGameCenterActivities
 				self.fieldsGameCenterActivityLocalizations = fieldsGameCenterActivityLocalizations
 				self.fieldsGameCenterActivityImages = fieldsGameCenterActivityImages
+				self.fieldsGameCenterActivityVersionReleases = fieldsGameCenterActivityVersionReleases
 				self.include = include
 				self.limitLocalizations = limitLocalizations
 				self.limitReleases = limitReleases
@@ -70,8 +96,10 @@ extension APIEndpoint.V1.GameCenterActivityVersions {
 			public var asQuery: [(String, String?)] {
 				let encoder = URLQueryEncoder(explode: false)
 				encoder.encode(fieldsGameCenterActivityVersions, forKey: "fields[gameCenterActivityVersions]")
+				encoder.encode(fieldsGameCenterActivities, forKey: "fields[gameCenterActivities]")
 				encoder.encode(fieldsGameCenterActivityLocalizations, forKey: "fields[gameCenterActivityLocalizations]")
 				encoder.encode(fieldsGameCenterActivityImages, forKey: "fields[gameCenterActivityImages]")
+				encoder.encode(fieldsGameCenterActivityVersionReleases, forKey: "fields[gameCenterActivityVersionReleases]")
 				encoder.encode(include, forKey: "include")
 				encoder.encode(limitLocalizations, forKey: "limit[localizations]")
 				encoder.encode(limitReleases, forKey: "limit[releases]")

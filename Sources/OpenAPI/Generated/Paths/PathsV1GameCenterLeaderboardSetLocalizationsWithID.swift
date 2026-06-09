@@ -20,6 +20,7 @@ extension APIEndpoint.V1.GameCenterLeaderboardSetLocalizations {
 
 		public struct GetParameters {
 			public var fieldsGameCenterLeaderboardSetLocalizations: [FieldsGameCenterLeaderboardSetLocalizations]?
+			public var fieldsGameCenterLeaderboardSets: [FieldsGameCenterLeaderboardSets]?
 			public var fieldsGameCenterLeaderboardSetImages: [FieldsGameCenterLeaderboardSetImages]?
 			public var include: [Include]?
 
@@ -28,6 +29,17 @@ extension APIEndpoint.V1.GameCenterLeaderboardSetLocalizations {
 				case name
 				case gameCenterLeaderboardSet
 				case gameCenterLeaderboardSetImage
+			}
+
+			public enum FieldsGameCenterLeaderboardSets: String, Codable, CaseIterable {
+				case referenceName
+				case vendorIdentifier
+				case gameCenterDetail
+				case gameCenterGroup
+				case groupLeaderboardSet
+				case localizations
+				case gameCenterLeaderboards
+				case releases
 			}
 
 			public enum FieldsGameCenterLeaderboardSetImages: String, Codable, CaseIterable {
@@ -44,8 +56,9 @@ extension APIEndpoint.V1.GameCenterLeaderboardSetLocalizations {
 				case gameCenterLeaderboardSetImage
 			}
 
-			public init(fieldsGameCenterLeaderboardSetLocalizations: [FieldsGameCenterLeaderboardSetLocalizations]? = nil, fieldsGameCenterLeaderboardSetImages: [FieldsGameCenterLeaderboardSetImages]? = nil, include: [Include]? = nil) {
+			public init(fieldsGameCenterLeaderboardSetLocalizations: [FieldsGameCenterLeaderboardSetLocalizations]? = nil, fieldsGameCenterLeaderboardSets: [FieldsGameCenterLeaderboardSets]? = nil, fieldsGameCenterLeaderboardSetImages: [FieldsGameCenterLeaderboardSetImages]? = nil, include: [Include]? = nil) {
 				self.fieldsGameCenterLeaderboardSetLocalizations = fieldsGameCenterLeaderboardSetLocalizations
+				self.fieldsGameCenterLeaderboardSets = fieldsGameCenterLeaderboardSets
 				self.fieldsGameCenterLeaderboardSetImages = fieldsGameCenterLeaderboardSetImages
 				self.include = include
 			}
@@ -53,6 +66,7 @@ extension APIEndpoint.V1.GameCenterLeaderboardSetLocalizations {
 			public var asQuery: [(String, String?)] {
 				let encoder = URLQueryEncoder(explode: false)
 				encoder.encode(fieldsGameCenterLeaderboardSetLocalizations, forKey: "fields[gameCenterLeaderboardSetLocalizations]")
+				encoder.encode(fieldsGameCenterLeaderboardSets, forKey: "fields[gameCenterLeaderboardSets]")
 				encoder.encode(fieldsGameCenterLeaderboardSetImages, forKey: "fields[gameCenterLeaderboardSetImages]")
 				encoder.encode(include, forKey: "include")
 				return encoder.items

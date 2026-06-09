@@ -36,6 +36,7 @@ extension APIEndpoint.V1 {
 			public var fieldsBuilds: [FieldsBuilds]?
 			public var fieldsPreReleaseVersions: [FieldsPreReleaseVersions]?
 			public var fieldsBetaTesters: [FieldsBetaTesters]?
+			public var fieldsBetaGroups: [FieldsBetaGroups]?
 			public var fieldsBetaBuildLocalizations: [FieldsBetaBuildLocalizations]?
 			public var fieldsAppEncryptionDeclarations: [FieldsAppEncryptionDeclarations]?
 			public var fieldsBetaAppReviewSubmissions: [FieldsBetaAppReviewSubmissions]?
@@ -43,6 +44,8 @@ extension APIEndpoint.V1 {
 			public var fieldsBuildBetaDetails: [FieldsBuildBetaDetails]?
 			public var fieldsAppStoreVersions: [FieldsAppStoreVersions]?
 			public var fieldsBuildIcons: [FieldsBuildIcons]?
+			public var fieldsBuildBundles: [FieldsBuildBundles]?
+			public var fieldsBuildUploads: [FieldsBuildUploads]?
 			public var limit: Int?
 			public var include: [Include]?
 			public var limitBetaBuildLocalizations: Int?
@@ -132,6 +135,26 @@ extension APIEndpoint.V1 {
 				case apps
 				case betaGroups
 				case builds
+			}
+
+			public enum FieldsBetaGroups: String, Codable, CaseIterable {
+				case name
+				case createdDate
+				case isInternalGroup
+				case hasAccessToAllBuilds
+				case publicLinkEnabled
+				case publicLinkID = "publicLinkId"
+				case publicLinkLimitEnabled
+				case publicLinkLimit
+				case publicLink
+				case feedbackEnabled
+				case iosBuildsAvailableForAppleSiliconMac
+				case iosBuildsAvailableForAppleVision
+				case app
+				case builds
+				case betaTesters
+				case betaRecruitmentCriteria
+				case betaRecruitmentCriterionCompatibleBuildCheck
 			}
 
 			public enum FieldsBetaBuildLocalizations: String, Codable, CaseIterable {
@@ -265,6 +288,47 @@ extension APIEndpoint.V1 {
 				case name
 			}
 
+			public enum FieldsBuildBundles: String, Codable, CaseIterable {
+				case bundleID = "bundleId"
+				case bundleType
+				case sdkBuild
+				case platformBuild
+				case fileName
+				case hasSirikit
+				case hasOnDemandResources
+				case hasPrerenderedIcon
+				case usesLocationServices
+				case isIosBuildMacAppStoreCompatible
+				case includesSymbols
+				case dSYMURL = "dSYMUrl"
+				case supportedArchitectures
+				case requiredCapabilities
+				case deviceProtocols
+				case locales
+				case entitlements
+				case baDownloadAllowance
+				case baMaxInstallSize
+				case minimumOsVersion
+				case appClipDomainCacheStatus
+				case appClipDomainDebugStatus
+				case betaAppClipInvocations
+				case buildBundleFileSizes
+			}
+
+			public enum FieldsBuildUploads: String, Codable, CaseIterable {
+				case cfBundleShortVersionString
+				case cfBundleVersion
+				case createdDate
+				case state
+				case platform
+				case uploadedDate
+				case build
+				case assetFile
+				case assetDescriptionFile
+				case assetSpiFile
+				case buildUploadFiles
+			}
+
 			public enum Include: String, Codable, CaseIterable {
 				case preReleaseVersion
 				case individualTesters
@@ -280,7 +344,7 @@ extension APIEndpoint.V1 {
 				case buildUpload
 			}
 
-			public init(filterVersion: [String]? = nil, filterExpired: [String]? = nil, filterProcessingState: [FilterProcessingState]? = nil, filterBetaAppReviewSubmissionBetaReviewState: [FilterBetaAppReviewSubmissionBetaReviewState]? = nil, filterUsesNonExemptEncryption: [String]? = nil, filterPreReleaseVersionVersion: [String]? = nil, filterPreReleaseVersionPlatform: [FilterPreReleaseVersionPlatform]? = nil, filterBuildAudienceType: [FilterBuildAudienceType]? = nil, filterPreReleaseVersion: [String]? = nil, filterApp: [String]? = nil, filterBetaGroups: [String]? = nil, filterAppStoreVersion: [String]? = nil, filterID: [String]? = nil, existsUsesNonExemptEncryption: Bool? = nil, sort: [Sort]? = nil, fieldsBuilds: [FieldsBuilds]? = nil, fieldsPreReleaseVersions: [FieldsPreReleaseVersions]? = nil, fieldsBetaTesters: [FieldsBetaTesters]? = nil, fieldsBetaBuildLocalizations: [FieldsBetaBuildLocalizations]? = nil, fieldsAppEncryptionDeclarations: [FieldsAppEncryptionDeclarations]? = nil, fieldsBetaAppReviewSubmissions: [FieldsBetaAppReviewSubmissions]? = nil, fieldsApps: [FieldsApps]? = nil, fieldsBuildBetaDetails: [FieldsBuildBetaDetails]? = nil, fieldsAppStoreVersions: [FieldsAppStoreVersions]? = nil, fieldsBuildIcons: [FieldsBuildIcons]? = nil, limit: Int? = nil, include: [Include]? = nil, limitBetaBuildLocalizations: Int? = nil, limitBetaGroups: Int? = nil, limitBuildBundles: Int? = nil, limitIcons: Int? = nil, limitIndividualTesters: Int? = nil) {
+			public init(filterVersion: [String]? = nil, filterExpired: [String]? = nil, filterProcessingState: [FilterProcessingState]? = nil, filterBetaAppReviewSubmissionBetaReviewState: [FilterBetaAppReviewSubmissionBetaReviewState]? = nil, filterUsesNonExemptEncryption: [String]? = nil, filterPreReleaseVersionVersion: [String]? = nil, filterPreReleaseVersionPlatform: [FilterPreReleaseVersionPlatform]? = nil, filterBuildAudienceType: [FilterBuildAudienceType]? = nil, filterPreReleaseVersion: [String]? = nil, filterApp: [String]? = nil, filterBetaGroups: [String]? = nil, filterAppStoreVersion: [String]? = nil, filterID: [String]? = nil, existsUsesNonExemptEncryption: Bool? = nil, sort: [Sort]? = nil, fieldsBuilds: [FieldsBuilds]? = nil, fieldsPreReleaseVersions: [FieldsPreReleaseVersions]? = nil, fieldsBetaTesters: [FieldsBetaTesters]? = nil, fieldsBetaGroups: [FieldsBetaGroups]? = nil, fieldsBetaBuildLocalizations: [FieldsBetaBuildLocalizations]? = nil, fieldsAppEncryptionDeclarations: [FieldsAppEncryptionDeclarations]? = nil, fieldsBetaAppReviewSubmissions: [FieldsBetaAppReviewSubmissions]? = nil, fieldsApps: [FieldsApps]? = nil, fieldsBuildBetaDetails: [FieldsBuildBetaDetails]? = nil, fieldsAppStoreVersions: [FieldsAppStoreVersions]? = nil, fieldsBuildIcons: [FieldsBuildIcons]? = nil, fieldsBuildBundles: [FieldsBuildBundles]? = nil, fieldsBuildUploads: [FieldsBuildUploads]? = nil, limit: Int? = nil, include: [Include]? = nil, limitBetaBuildLocalizations: Int? = nil, limitBetaGroups: Int? = nil, limitBuildBundles: Int? = nil, limitIcons: Int? = nil, limitIndividualTesters: Int? = nil) {
 				self.filterVersion = filterVersion
 				self.filterExpired = filterExpired
 				self.filterProcessingState = filterProcessingState
@@ -299,6 +363,7 @@ extension APIEndpoint.V1 {
 				self.fieldsBuilds = fieldsBuilds
 				self.fieldsPreReleaseVersions = fieldsPreReleaseVersions
 				self.fieldsBetaTesters = fieldsBetaTesters
+				self.fieldsBetaGroups = fieldsBetaGroups
 				self.fieldsBetaBuildLocalizations = fieldsBetaBuildLocalizations
 				self.fieldsAppEncryptionDeclarations = fieldsAppEncryptionDeclarations
 				self.fieldsBetaAppReviewSubmissions = fieldsBetaAppReviewSubmissions
@@ -306,6 +371,8 @@ extension APIEndpoint.V1 {
 				self.fieldsBuildBetaDetails = fieldsBuildBetaDetails
 				self.fieldsAppStoreVersions = fieldsAppStoreVersions
 				self.fieldsBuildIcons = fieldsBuildIcons
+				self.fieldsBuildBundles = fieldsBuildBundles
+				self.fieldsBuildUploads = fieldsBuildUploads
 				self.limit = limit
 				self.include = include
 				self.limitBetaBuildLocalizations = limitBetaBuildLocalizations
@@ -335,6 +402,7 @@ extension APIEndpoint.V1 {
 				encoder.encode(fieldsBuilds, forKey: "fields[builds]")
 				encoder.encode(fieldsPreReleaseVersions, forKey: "fields[preReleaseVersions]")
 				encoder.encode(fieldsBetaTesters, forKey: "fields[betaTesters]")
+				encoder.encode(fieldsBetaGroups, forKey: "fields[betaGroups]")
 				encoder.encode(fieldsBetaBuildLocalizations, forKey: "fields[betaBuildLocalizations]")
 				encoder.encode(fieldsAppEncryptionDeclarations, forKey: "fields[appEncryptionDeclarations]")
 				encoder.encode(fieldsBetaAppReviewSubmissions, forKey: "fields[betaAppReviewSubmissions]")
@@ -342,6 +410,8 @@ extension APIEndpoint.V1 {
 				encoder.encode(fieldsBuildBetaDetails, forKey: "fields[buildBetaDetails]")
 				encoder.encode(fieldsAppStoreVersions, forKey: "fields[appStoreVersions]")
 				encoder.encode(fieldsBuildIcons, forKey: "fields[buildIcons]")
+				encoder.encode(fieldsBuildBundles, forKey: "fields[buildBundles]")
+				encoder.encode(fieldsBuildUploads, forKey: "fields[buildUploads]")
 				encoder.encode(limit, forKey: "limit")
 				encoder.encode(include, forKey: "include")
 				encoder.encode(limitBetaBuildLocalizations, forKey: "limit[betaBuildLocalizations]")

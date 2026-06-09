@@ -23,6 +23,7 @@ extension APIEndpoint.V1 {
 			public var filterBuilds: [String]?
 			public var fieldsAppEncryptionDeclarations: [FieldsAppEncryptionDeclarations]?
 			public var fieldsApps: [FieldsApps]?
+			public var fieldsBuilds: [FieldsBuilds]?
 			public var fieldsAppEncryptionDeclarationDocuments: [FieldsAppEncryptionDeclarationDocuments]?
 			public var limit: Int?
 			public var include: [Include]?
@@ -113,6 +114,35 @@ extension APIEndpoint.V1 {
 				case androidToIosAppMappingDetails
 			}
 
+			public enum FieldsBuilds: String, Codable, CaseIterable {
+				case version
+				case uploadedDate
+				case expirationDate
+				case expired
+				case minOsVersion
+				case lsMinimumSystemVersion
+				case computedMinMacOsVersion
+				case computedMinVisionOsVersion
+				case iconAssetToken
+				case processingState
+				case buildAudienceType
+				case usesNonExemptEncryption
+				case preReleaseVersion
+				case individualTesters
+				case betaGroups
+				case betaBuildLocalizations
+				case appEncryptionDeclaration
+				case betaAppReviewSubmission
+				case app
+				case buildBetaDetail
+				case appStoreVersion
+				case icons
+				case buildBundles
+				case buildUpload
+				case perfPowerMetrics
+				case diagnosticSignatures
+			}
+
 			public enum FieldsAppEncryptionDeclarationDocuments: String, Codable, CaseIterable {
 				case fileSize
 				case fileName
@@ -129,12 +159,13 @@ extension APIEndpoint.V1 {
 				case appEncryptionDeclarationDocument
 			}
 
-			public init(filterPlatform: [FilterPlatform]? = nil, filterApp: [String]? = nil, filterBuilds: [String]? = nil, fieldsAppEncryptionDeclarations: [FieldsAppEncryptionDeclarations]? = nil, fieldsApps: [FieldsApps]? = nil, fieldsAppEncryptionDeclarationDocuments: [FieldsAppEncryptionDeclarationDocuments]? = nil, limit: Int? = nil, include: [Include]? = nil, limitBuilds: Int? = nil) {
+			public init(filterPlatform: [FilterPlatform]? = nil, filterApp: [String]? = nil, filterBuilds: [String]? = nil, fieldsAppEncryptionDeclarations: [FieldsAppEncryptionDeclarations]? = nil, fieldsApps: [FieldsApps]? = nil, fieldsBuilds: [FieldsBuilds]? = nil, fieldsAppEncryptionDeclarationDocuments: [FieldsAppEncryptionDeclarationDocuments]? = nil, limit: Int? = nil, include: [Include]? = nil, limitBuilds: Int? = nil) {
 				self.filterPlatform = filterPlatform
 				self.filterApp = filterApp
 				self.filterBuilds = filterBuilds
 				self.fieldsAppEncryptionDeclarations = fieldsAppEncryptionDeclarations
 				self.fieldsApps = fieldsApps
+				self.fieldsBuilds = fieldsBuilds
 				self.fieldsAppEncryptionDeclarationDocuments = fieldsAppEncryptionDeclarationDocuments
 				self.limit = limit
 				self.include = include
@@ -148,6 +179,7 @@ extension APIEndpoint.V1 {
 				encoder.encode(filterBuilds, forKey: "filter[builds]")
 				encoder.encode(fieldsAppEncryptionDeclarations, forKey: "fields[appEncryptionDeclarations]")
 				encoder.encode(fieldsApps, forKey: "fields[apps]")
+				encoder.encode(fieldsBuilds, forKey: "fields[builds]")
 				encoder.encode(fieldsAppEncryptionDeclarationDocuments, forKey: "fields[appEncryptionDeclarationDocuments]")
 				encoder.encode(limit, forKey: "limit")
 				encoder.encode(include, forKey: "include")

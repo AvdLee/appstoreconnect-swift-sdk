@@ -13,28 +13,52 @@ extension APIEndpoint.V2.GameCenterLeaderboardImages {
 		/// Path: `/v2/gameCenterLeaderboardImages/{id}`
 		public let path: String
 
-		public func get(fieldsGameCenterLeaderboardImages: [FieldsGameCenterLeaderboardImages]? = nil, include: [Include]? = nil) -> Request<AppStoreConnect_Swift_SDK.GameCenterLeaderboardImageV2Response> {
-			Request(path: path, method: "GET", query: makeGetQuery(fieldsGameCenterLeaderboardImages, include), id: "gameCenterLeaderboardImagesV2_getInstance")
+		public func get(parameters: GetParameters? = nil) -> Request<AppStoreConnect_Swift_SDK.GameCenterLeaderboardImageV2Response> {
+			Request(path: path, method: "GET", query: parameters?.asQuery, id: "gameCenterLeaderboardImagesV2_getInstance")
 		}
 
-		private func makeGetQuery(_ fieldsGameCenterLeaderboardImages: [FieldsGameCenterLeaderboardImages]?, _ include: [Include]?) -> [(String, String?)] {
-			let encoder = URLQueryEncoder(explode: false)
-			encoder.encode(fieldsGameCenterLeaderboardImages, forKey: "fields[gameCenterLeaderboardImages]")
-			encoder.encode(include, forKey: "include")
-			return encoder.items
-		}
+		public struct GetParameters {
+			public var fieldsGameCenterLeaderboardImages: [FieldsGameCenterLeaderboardImages]?
+			public var fieldsGameCenterLeaderboardLocalizations: [FieldsGameCenterLeaderboardLocalizations]?
+			public var include: [Include]?
 
-		public enum FieldsGameCenterLeaderboardImages: String, Codable, CaseIterable {
-			case fileSize
-			case fileName
-			case imageAsset
-			case uploadOperations
-			case assetDeliveryState
-			case localization
-		}
+			public enum FieldsGameCenterLeaderboardImages: String, Codable, CaseIterable {
+				case fileSize
+				case fileName
+				case imageAsset
+				case uploadOperations
+				case assetDeliveryState
+				case localization
+			}
 
-		public enum Include: String, Codable, CaseIterable {
-			case localization
+			public enum FieldsGameCenterLeaderboardLocalizations: String, Codable, CaseIterable {
+				case locale
+				case name
+				case formatterOverride
+				case formatterSuffix
+				case formatterSuffixSingular
+				case description
+				case version
+				case image
+			}
+
+			public enum Include: String, Codable, CaseIterable {
+				case localization
+			}
+
+			public init(fieldsGameCenterLeaderboardImages: [FieldsGameCenterLeaderboardImages]? = nil, fieldsGameCenterLeaderboardLocalizations: [FieldsGameCenterLeaderboardLocalizations]? = nil, include: [Include]? = nil) {
+				self.fieldsGameCenterLeaderboardImages = fieldsGameCenterLeaderboardImages
+				self.fieldsGameCenterLeaderboardLocalizations = fieldsGameCenterLeaderboardLocalizations
+				self.include = include
+			}
+
+			public var asQuery: [(String, String?)] {
+				let encoder = URLQueryEncoder(explode: false)
+				encoder.encode(fieldsGameCenterLeaderboardImages, forKey: "fields[gameCenterLeaderboardImages]")
+				encoder.encode(fieldsGameCenterLeaderboardLocalizations, forKey: "fields[gameCenterLeaderboardLocalizations]")
+				encoder.encode(include, forKey: "include")
+				return encoder.items
+			}
 		}
 
 		public func patch(_ body: AppStoreConnect_Swift_SDK.GameCenterLeaderboardImageV2UpdateRequest) -> Request<AppStoreConnect_Swift_SDK.GameCenterLeaderboardImageV2Response> {

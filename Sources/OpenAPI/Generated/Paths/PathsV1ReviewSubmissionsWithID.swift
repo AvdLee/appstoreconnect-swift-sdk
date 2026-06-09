@@ -19,7 +19,10 @@ extension APIEndpoint.V1.ReviewSubmissions {
 
 		public struct GetParameters {
 			public var fieldsReviewSubmissions: [FieldsReviewSubmissions]?
+			public var fieldsApps: [FieldsApps]?
 			public var fieldsReviewSubmissionItems: [FieldsReviewSubmissionItems]?
+			public var fieldsAppStoreVersions: [FieldsAppStoreVersions]?
+			public var fieldsActors: [FieldsActors]?
 			public var include: [Include]?
 			public var limitItems: Int?
 
@@ -32,6 +35,64 @@ extension APIEndpoint.V1.ReviewSubmissions {
 				case appStoreVersionForReview
 				case submittedByActor
 				case lastUpdatedByActor
+			}
+
+			public enum FieldsApps: String, Codable, CaseIterable {
+				case accessibilityURL = "accessibilityUrl"
+				case name
+				case bundleID = "bundleId"
+				case sku
+				case primaryLocale
+				case isOrEverWasMadeForKids
+				case subscriptionStatusURL = "subscriptionStatusUrl"
+				case subscriptionStatusURLVersion = "subscriptionStatusUrlVersion"
+				case subscriptionStatusURLForSandbox = "subscriptionStatusUrlForSandbox"
+				case subscriptionStatusURLVersionForSandbox = "subscriptionStatusUrlVersionForSandbox"
+				case contentRightsDeclaration
+				case streamlinedPurchasingEnabled
+				case accessibilityDeclarations
+				case appEncryptionDeclarations
+				case appStoreIcon
+				case ciProduct
+				case betaTesters
+				case betaGroups
+				case appStoreVersions
+				case appTags
+				case preReleaseVersions
+				case betaAppLocalizations
+				case builds
+				case betaLicenseAgreement
+				case betaAppReviewDetail
+				case appInfos
+				case appClips
+				case appPricePoints
+				case endUserLicenseAgreement
+				case appPriceSchedule
+				case appAvailabilityV2
+				case inAppPurchases
+				case subscriptionGroups
+				case gameCenterEnabledVersions
+				case perfPowerMetrics
+				case appCustomProductPages
+				case inAppPurchasesV2
+				case promotedPurchases
+				case appEvents
+				case reviewSubmissions
+				case subscriptionGracePeriod
+				case customerReviews
+				case customerReviewSummarizations
+				case gameCenterDetail
+				case appStoreVersionExperimentsV2
+				case alternativeDistributionKey
+				case analyticsReportRequests
+				case marketplaceSearchDetail
+				case buildUploads
+				case backgroundAssets
+				case betaFeedbackScreenshotSubmissions
+				case betaFeedbackCrashSubmissions
+				case searchKeywords
+				case webhooks
+				case androidToIosAppMappingDetails
 			}
 
 			public enum FieldsReviewSubmissionItems: String, Codable, CaseIterable {
@@ -49,6 +110,41 @@ extension APIEndpoint.V1.ReviewSubmissions {
 				case gameCenterLeaderboardVersion
 			}
 
+			public enum FieldsAppStoreVersions: String, Codable, CaseIterable {
+				case platform
+				case versionString
+				case appStoreState
+				case appVersionState
+				case copyright
+				case reviewType
+				case releaseType
+				case earliestReleaseDate
+				case usesIdfa
+				case downloadable
+				case createdDate
+				case app
+				case appStoreVersionLocalizations
+				case build
+				case appStoreVersionPhasedRelease
+				case gameCenterAppVersion
+				case routingAppCoverage
+				case appStoreReviewDetail
+				case appStoreVersionSubmission
+				case appClipDefaultExperience
+				case appStoreVersionExperiments
+				case appStoreVersionExperimentsV2
+				case customerReviews
+				case alternativeDistributionPackage
+			}
+
+			public enum FieldsActors: String, Codable, CaseIterable {
+				case actorType
+				case userFirstName
+				case userLastName
+				case userEmail
+				case apiKeyID = "apiKeyId"
+			}
+
 			public enum Include: String, Codable, CaseIterable {
 				case app
 				case items
@@ -57,9 +153,12 @@ extension APIEndpoint.V1.ReviewSubmissions {
 				case lastUpdatedByActor
 			}
 
-			public init(fieldsReviewSubmissions: [FieldsReviewSubmissions]? = nil, fieldsReviewSubmissionItems: [FieldsReviewSubmissionItems]? = nil, include: [Include]? = nil, limitItems: Int? = nil) {
+			public init(fieldsReviewSubmissions: [FieldsReviewSubmissions]? = nil, fieldsApps: [FieldsApps]? = nil, fieldsReviewSubmissionItems: [FieldsReviewSubmissionItems]? = nil, fieldsAppStoreVersions: [FieldsAppStoreVersions]? = nil, fieldsActors: [FieldsActors]? = nil, include: [Include]? = nil, limitItems: Int? = nil) {
 				self.fieldsReviewSubmissions = fieldsReviewSubmissions
+				self.fieldsApps = fieldsApps
 				self.fieldsReviewSubmissionItems = fieldsReviewSubmissionItems
+				self.fieldsAppStoreVersions = fieldsAppStoreVersions
+				self.fieldsActors = fieldsActors
 				self.include = include
 				self.limitItems = limitItems
 			}
@@ -67,7 +166,10 @@ extension APIEndpoint.V1.ReviewSubmissions {
 			public var asQuery: [(String, String?)] {
 				let encoder = URLQueryEncoder(explode: false)
 				encoder.encode(fieldsReviewSubmissions, forKey: "fields[reviewSubmissions]")
+				encoder.encode(fieldsApps, forKey: "fields[apps]")
 				encoder.encode(fieldsReviewSubmissionItems, forKey: "fields[reviewSubmissionItems]")
+				encoder.encode(fieldsAppStoreVersions, forKey: "fields[appStoreVersions]")
+				encoder.encode(fieldsActors, forKey: "fields[actors]")
 				encoder.encode(include, forKey: "include")
 				encoder.encode(limitItems, forKey: "limit[items]")
 				return encoder.items

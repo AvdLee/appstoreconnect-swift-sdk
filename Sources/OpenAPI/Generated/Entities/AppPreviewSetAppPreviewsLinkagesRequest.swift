@@ -3,6 +3,7 @@
 
 import Foundation
 
+@available(*, deprecated, message: "Deprecated")
 public struct AppPreviewSetAppPreviewsLinkagesRequest: Codable {
 	public var data: [Datum]
 

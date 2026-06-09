@@ -19,6 +19,7 @@ extension APIEndpoint.V1.AppEventLocalizations {
 
 		public struct GetParameters {
 			public var fieldsAppEventLocalizations: [FieldsAppEventLocalizations]?
+			public var fieldsAppEvents: [FieldsAppEvents]?
 			public var fieldsAppEventScreenshots: [FieldsAppEventScreenshots]?
 			public var fieldsAppEventVideoClips: [FieldsAppEventVideoClips]?
 			public var include: [Include]?
@@ -33,6 +34,20 @@ extension APIEndpoint.V1.AppEventLocalizations {
 				case appEvent
 				case appEventScreenshots
 				case appEventVideoClips
+			}
+
+			public enum FieldsAppEvents: String, Codable, CaseIterable {
+				case referenceName
+				case badge
+				case eventState
+				case deepLink
+				case purchaseRequirement
+				case primaryLocale
+				case priority
+				case purpose
+				case territorySchedules
+				case archivedTerritorySchedules
+				case localizations
 			}
 
 			public enum FieldsAppEventScreenshots: String, Codable, CaseIterable {
@@ -66,8 +81,9 @@ extension APIEndpoint.V1.AppEventLocalizations {
 				case appEventVideoClips
 			}
 
-			public init(fieldsAppEventLocalizations: [FieldsAppEventLocalizations]? = nil, fieldsAppEventScreenshots: [FieldsAppEventScreenshots]? = nil, fieldsAppEventVideoClips: [FieldsAppEventVideoClips]? = nil, include: [Include]? = nil, limitAppEventScreenshots: Int? = nil, limitAppEventVideoClips: Int? = nil) {
+			public init(fieldsAppEventLocalizations: [FieldsAppEventLocalizations]? = nil, fieldsAppEvents: [FieldsAppEvents]? = nil, fieldsAppEventScreenshots: [FieldsAppEventScreenshots]? = nil, fieldsAppEventVideoClips: [FieldsAppEventVideoClips]? = nil, include: [Include]? = nil, limitAppEventScreenshots: Int? = nil, limitAppEventVideoClips: Int? = nil) {
 				self.fieldsAppEventLocalizations = fieldsAppEventLocalizations
+				self.fieldsAppEvents = fieldsAppEvents
 				self.fieldsAppEventScreenshots = fieldsAppEventScreenshots
 				self.fieldsAppEventVideoClips = fieldsAppEventVideoClips
 				self.include = include
@@ -78,6 +94,7 @@ extension APIEndpoint.V1.AppEventLocalizations {
 			public var asQuery: [(String, String?)] {
 				let encoder = URLQueryEncoder(explode: false)
 				encoder.encode(fieldsAppEventLocalizations, forKey: "fields[appEventLocalizations]")
+				encoder.encode(fieldsAppEvents, forKey: "fields[appEvents]")
 				encoder.encode(fieldsAppEventScreenshots, forKey: "fields[appEventScreenshots]")
 				encoder.encode(fieldsAppEventVideoClips, forKey: "fields[appEventVideoClips]")
 				encoder.encode(include, forKey: "include")

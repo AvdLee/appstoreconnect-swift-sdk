@@ -24,8 +24,9 @@ public struct SubscriptionOfferCodeCreateRequest: Codable {
 			public var offerMode: SubscriptionOfferMode
 			public var numberOfPeriods: Int
 			public var isAutoRenewEnabled: Bool?
+			public var targetSubscriptionPlanType: SubscriptionPlanType?
 
-			public init(name: String, customerEligibilities: [SubscriptionCustomerEligibility], offerEligibility: SubscriptionOfferEligibility, duration: SubscriptionOfferDuration, offerMode: SubscriptionOfferMode, numberOfPeriods: Int, isAutoRenewEnabled: Bool? = nil) {
+			public init(name: String, customerEligibilities: [SubscriptionCustomerEligibility], offerEligibility: SubscriptionOfferEligibility, duration: SubscriptionOfferDuration, offerMode: SubscriptionOfferMode, numberOfPeriods: Int, isAutoRenewEnabled: Bool? = nil, targetSubscriptionPlanType: SubscriptionPlanType? = nil) {
 				self.name = name
 				self.customerEligibilities = customerEligibilities
 				self.offerEligibility = offerEligibility
@@ -33,6 +34,7 @@ public struct SubscriptionOfferCodeCreateRequest: Codable {
 				self.offerMode = offerMode
 				self.numberOfPeriods = numberOfPeriods
 				self.isAutoRenewEnabled = isAutoRenewEnabled
+				self.targetSubscriptionPlanType = targetSubscriptionPlanType
 			}
 
 			public init(from decoder: Decoder) throws {
@@ -44,6 +46,7 @@ public struct SubscriptionOfferCodeCreateRequest: Codable {
 				self.offerMode = try values.decode(SubscriptionOfferMode.self, forKey: "offerMode")
 				self.numberOfPeriods = try values.decode(Int.self, forKey: "numberOfPeriods")
 				self.isAutoRenewEnabled = try values.decodeIfPresent(Bool.self, forKey: "autoRenewEnabled")
+				self.targetSubscriptionPlanType = try values.decodeIfPresent(SubscriptionPlanType.self, forKey: "targetSubscriptionPlanType")
 			}
 
 			public func encode(to encoder: Encoder) throws {
@@ -55,6 +58,7 @@ public struct SubscriptionOfferCodeCreateRequest: Codable {
 				try values.encode(offerMode, forKey: "offerMode")
 				try values.encode(numberOfPeriods, forKey: "numberOfPeriods")
 				try values.encodeIfPresent(isAutoRenewEnabled, forKey: "autoRenewEnabled")
+				try values.encodeIfPresent(targetSubscriptionPlanType, forKey: "targetSubscriptionPlanType")
 			}
 		}
 

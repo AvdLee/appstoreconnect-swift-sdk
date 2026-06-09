@@ -20,6 +20,7 @@ extension APIEndpoint.V1.CiProducts {
 		public struct GetParameters {
 			public var fieldsCiProducts: [FieldsCiProducts]?
 			public var fieldsApps: [FieldsApps]?
+			public var fieldsBundleIDs: [FieldsBundleIDs]?
 			public var fieldsScmRepositories: [FieldsScmRepositories]?
 			public var include: [Include]?
 			public var limitPrimaryRepositories: Int?
@@ -94,6 +95,16 @@ extension APIEndpoint.V1.CiProducts {
 				case androidToIosAppMappingDetails
 			}
 
+			public enum FieldsBundleIDs: String, Codable, CaseIterable {
+				case name
+				case platform
+				case identifier
+				case seedID = "seedId"
+				case profiles
+				case bundleIDCapabilities = "bundleIdCapabilities"
+				case app
+			}
+
 			public enum FieldsScmRepositories: String, Codable, CaseIterable {
 				case lastAccessedDate
 				case httpCloneURL = "httpCloneUrl"
@@ -112,9 +123,10 @@ extension APIEndpoint.V1.CiProducts {
 				case primaryRepositories
 			}
 
-			public init(fieldsCiProducts: [FieldsCiProducts]? = nil, fieldsApps: [FieldsApps]? = nil, fieldsScmRepositories: [FieldsScmRepositories]? = nil, include: [Include]? = nil, limitPrimaryRepositories: Int? = nil) {
+			public init(fieldsCiProducts: [FieldsCiProducts]? = nil, fieldsApps: [FieldsApps]? = nil, fieldsBundleIDs: [FieldsBundleIDs]? = nil, fieldsScmRepositories: [FieldsScmRepositories]? = nil, include: [Include]? = nil, limitPrimaryRepositories: Int? = nil) {
 				self.fieldsCiProducts = fieldsCiProducts
 				self.fieldsApps = fieldsApps
+				self.fieldsBundleIDs = fieldsBundleIDs
 				self.fieldsScmRepositories = fieldsScmRepositories
 				self.include = include
 				self.limitPrimaryRepositories = limitPrimaryRepositories
@@ -124,6 +136,7 @@ extension APIEndpoint.V1.CiProducts {
 				let encoder = URLQueryEncoder(explode: false)
 				encoder.encode(fieldsCiProducts, forKey: "fields[ciProducts]")
 				encoder.encode(fieldsApps, forKey: "fields[apps]")
+				encoder.encode(fieldsBundleIDs, forKey: "fields[bundleIds]")
 				encoder.encode(fieldsScmRepositories, forKey: "fields[scmRepositories]")
 				encoder.encode(include, forKey: "include")
 				encoder.encode(limitPrimaryRepositories, forKey: "limit[primaryRepositories]")

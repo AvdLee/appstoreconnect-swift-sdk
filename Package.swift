@@ -47,7 +47,6 @@ let package = Package(
             exclude: [
                 "OpenAPI/app_store_connect_api.json",
                 "OpenAPI/app_store_connect_api.json.orig",
-                "OpenAPI/app_store_connect_api.json.rej",
                 "OpenAPI/create-api.yml",
             ]
         ),

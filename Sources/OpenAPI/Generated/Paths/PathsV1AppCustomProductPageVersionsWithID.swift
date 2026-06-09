@@ -19,6 +19,7 @@ extension APIEndpoint.V1.AppCustomProductPageVersions {
 
 		public struct GetParameters {
 			public var fieldsAppCustomProductPageVersions: [FieldsAppCustomProductPageVersions]?
+			public var fieldsAppCustomProductPages: [FieldsAppCustomProductPages]?
 			public var fieldsAppCustomProductPageLocalizations: [FieldsAppCustomProductPageLocalizations]?
 			public var include: [Include]?
 			public var limitAppCustomProductPageLocalizations: Int?
@@ -29,6 +30,14 @@ extension APIEndpoint.V1.AppCustomProductPageVersions {
 				case deepLink
 				case appCustomProductPage
 				case appCustomProductPageLocalizations
+			}
+
+			public enum FieldsAppCustomProductPages: String, Codable, CaseIterable {
+				case name
+				case url
+				case visible
+				case app
+				case appCustomProductPageVersions
 			}
 
 			public enum FieldsAppCustomProductPageLocalizations: String, Codable, CaseIterable {
@@ -45,8 +54,9 @@ extension APIEndpoint.V1.AppCustomProductPageVersions {
 				case appCustomProductPageLocalizations
 			}
 
-			public init(fieldsAppCustomProductPageVersions: [FieldsAppCustomProductPageVersions]? = nil, fieldsAppCustomProductPageLocalizations: [FieldsAppCustomProductPageLocalizations]? = nil, include: [Include]? = nil, limitAppCustomProductPageLocalizations: Int? = nil) {
+			public init(fieldsAppCustomProductPageVersions: [FieldsAppCustomProductPageVersions]? = nil, fieldsAppCustomProductPages: [FieldsAppCustomProductPages]? = nil, fieldsAppCustomProductPageLocalizations: [FieldsAppCustomProductPageLocalizations]? = nil, include: [Include]? = nil, limitAppCustomProductPageLocalizations: Int? = nil) {
 				self.fieldsAppCustomProductPageVersions = fieldsAppCustomProductPageVersions
+				self.fieldsAppCustomProductPages = fieldsAppCustomProductPages
 				self.fieldsAppCustomProductPageLocalizations = fieldsAppCustomProductPageLocalizations
 				self.include = include
 				self.limitAppCustomProductPageLocalizations = limitAppCustomProductPageLocalizations
@@ -55,6 +65,7 @@ extension APIEndpoint.V1.AppCustomProductPageVersions {
 			public var asQuery: [(String, String?)] {
 				let encoder = URLQueryEncoder(explode: false)
 				encoder.encode(fieldsAppCustomProductPageVersions, forKey: "fields[appCustomProductPageVersions]")
+				encoder.encode(fieldsAppCustomProductPages, forKey: "fields[appCustomProductPages]")
 				encoder.encode(fieldsAppCustomProductPageLocalizations, forKey: "fields[appCustomProductPageLocalizations]")
 				encoder.encode(include, forKey: "include")
 				encoder.encode(limitAppCustomProductPageLocalizations, forKey: "limit[appCustomProductPageLocalizations]")

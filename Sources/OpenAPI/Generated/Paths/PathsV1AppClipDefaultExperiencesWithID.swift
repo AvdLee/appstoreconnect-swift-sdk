@@ -19,6 +19,7 @@ extension APIEndpoint.V1.AppClipDefaultExperiences {
 
 		public struct GetParameters {
 			public var fieldsAppClipDefaultExperiences: [FieldsAppClipDefaultExperiences]?
+			public var fieldsAppClips: [FieldsAppClips]?
 			public var fieldsAppStoreVersions: [FieldsAppStoreVersions]?
 			public var fieldsAppClipDefaultExperienceLocalizations: [FieldsAppClipDefaultExperienceLocalizations]?
 			public var fieldsAppClipAppStoreReviewDetails: [FieldsAppClipAppStoreReviewDetails]?
@@ -31,6 +32,13 @@ extension APIEndpoint.V1.AppClipDefaultExperiences {
 				case releaseWithAppStoreVersion
 				case appClipDefaultExperienceLocalizations
 				case appClipAppStoreReviewDetail
+			}
+
+			public enum FieldsAppClips: String, Codable, CaseIterable {
+				case bundleID = "bundleId"
+				case app
+				case appClipDefaultExperiences
+				case appClipAdvancedExperiences
 			}
 
 			public enum FieldsAppStoreVersions: String, Codable, CaseIterable {
@@ -79,8 +87,9 @@ extension APIEndpoint.V1.AppClipDefaultExperiences {
 				case appClipAppStoreReviewDetail
 			}
 
-			public init(fieldsAppClipDefaultExperiences: [FieldsAppClipDefaultExperiences]? = nil, fieldsAppStoreVersions: [FieldsAppStoreVersions]? = nil, fieldsAppClipDefaultExperienceLocalizations: [FieldsAppClipDefaultExperienceLocalizations]? = nil, fieldsAppClipAppStoreReviewDetails: [FieldsAppClipAppStoreReviewDetails]? = nil, include: [Include]? = nil, limitAppClipDefaultExperienceLocalizations: Int? = nil) {
+			public init(fieldsAppClipDefaultExperiences: [FieldsAppClipDefaultExperiences]? = nil, fieldsAppClips: [FieldsAppClips]? = nil, fieldsAppStoreVersions: [FieldsAppStoreVersions]? = nil, fieldsAppClipDefaultExperienceLocalizations: [FieldsAppClipDefaultExperienceLocalizations]? = nil, fieldsAppClipAppStoreReviewDetails: [FieldsAppClipAppStoreReviewDetails]? = nil, include: [Include]? = nil, limitAppClipDefaultExperienceLocalizations: Int? = nil) {
 				self.fieldsAppClipDefaultExperiences = fieldsAppClipDefaultExperiences
+				self.fieldsAppClips = fieldsAppClips
 				self.fieldsAppStoreVersions = fieldsAppStoreVersions
 				self.fieldsAppClipDefaultExperienceLocalizations = fieldsAppClipDefaultExperienceLocalizations
 				self.fieldsAppClipAppStoreReviewDetails = fieldsAppClipAppStoreReviewDetails
@@ -91,6 +100,7 @@ extension APIEndpoint.V1.AppClipDefaultExperiences {
 			public var asQuery: [(String, String?)] {
 				let encoder = URLQueryEncoder(explode: false)
 				encoder.encode(fieldsAppClipDefaultExperiences, forKey: "fields[appClipDefaultExperiences]")
+				encoder.encode(fieldsAppClips, forKey: "fields[appClips]")
 				encoder.encode(fieldsAppStoreVersions, forKey: "fields[appStoreVersions]")
 				encoder.encode(fieldsAppClipDefaultExperienceLocalizations, forKey: "fields[appClipDefaultExperienceLocalizations]")
 				encoder.encode(fieldsAppClipAppStoreReviewDetails, forKey: "fields[appClipAppStoreReviewDetails]")

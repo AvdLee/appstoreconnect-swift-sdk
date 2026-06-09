@@ -6,35 +6,35 @@ import Foundation
 public struct GameCenterMatchmakingTestPlayerPropertyInlineCreate: Codable, Identifiable {
 	public var type: `Type`
 	public var id: String?
-	public var attributes: Attributes
+	public var attributes: Attributes?
 
 	public enum `Type`: String, Codable, CaseIterable {
 		case gameCenterMatchmakingTestPlayerProperties
 	}
 
 	public struct Attributes: Codable {
-		public var playerID: String
+		public var playerID: String?
 		public var properties: [Property]?
 
-		public init(playerID: String, properties: [Property]? = nil) {
+		public init(playerID: String? = nil, properties: [Property]? = nil) {
 			self.playerID = playerID
 			self.properties = properties
 		}
 
 		public init(from decoder: Decoder) throws {
 			let values = try decoder.container(keyedBy: StringCodingKey.self)
-			self.playerID = try values.decode(String.self, forKey: "playerId")
+			self.playerID = try values.decodeIfPresent(String.self, forKey: "playerId")
 			self.properties = try values.decodeIfPresent([Property].self, forKey: "properties")
 		}
 
 		public func encode(to encoder: Encoder) throws {
 			var values = encoder.container(keyedBy: StringCodingKey.self)
-			try values.encode(playerID, forKey: "playerId")
+			try values.encodeIfPresent(playerID, forKey: "playerId")
 			try values.encodeIfPresent(properties, forKey: "properties")
 		}
 	}
 
-	public init(type: `Type`, id: String? = nil, attributes: Attributes) {
+	public init(type: `Type`, id: String? = nil, attributes: Attributes? = nil) {
 		self.type = type
 		self.id = id
 		self.attributes = attributes
@@ -44,13 +44,13 @@ public struct GameCenterMatchmakingTestPlayerPropertyInlineCreate: Codable, Iden
 		let values = try decoder.container(keyedBy: StringCodingKey.self)
 		self.type = try values.decode(`Type`.self, forKey: "type")
 		self.id = try values.decodeIfPresent(String.self, forKey: "id")
-		self.attributes = try values.decode(Attributes.self, forKey: "attributes")
+		self.attributes = try values.decodeIfPresent(Attributes.self, forKey: "attributes")
 	}
 
 	public func encode(to encoder: Encoder) throws {
 		var values = encoder.container(keyedBy: StringCodingKey.self)
 		try values.encode(type, forKey: "type")
 		try values.encodeIfPresent(id, forKey: "id")
-		try values.encode(attributes, forKey: "attributes")
+		try values.encodeIfPresent(attributes, forKey: "attributes")
 	}
 }

@@ -19,6 +19,7 @@ extension APIEndpoint.V1.AppCustomProductPageLocalizations {
 
 		public struct GetParameters {
 			public var fieldsAppCustomProductPageLocalizations: [FieldsAppCustomProductPageLocalizations]?
+			public var fieldsAppCustomProductPageVersions: [FieldsAppCustomProductPageVersions]?
 			public var fieldsAppScreenshotSets: [FieldsAppScreenshotSets]?
 			public var fieldsAppPreviewSets: [FieldsAppPreviewSets]?
 			public var include: [Include]?
@@ -33,6 +34,14 @@ extension APIEndpoint.V1.AppCustomProductPageLocalizations {
 				case appScreenshotSets
 				case appPreviewSets
 				case searchKeywords
+			}
+
+			public enum FieldsAppCustomProductPageVersions: String, Codable, CaseIterable {
+				case version
+				case state
+				case deepLink
+				case appCustomProductPage
+				case appCustomProductPageLocalizations
 			}
 
 			public enum FieldsAppScreenshotSets: String, Codable, CaseIterable {
@@ -58,8 +67,9 @@ extension APIEndpoint.V1.AppCustomProductPageLocalizations {
 				case searchKeywords
 			}
 
-			public init(fieldsAppCustomProductPageLocalizations: [FieldsAppCustomProductPageLocalizations]? = nil, fieldsAppScreenshotSets: [FieldsAppScreenshotSets]? = nil, fieldsAppPreviewSets: [FieldsAppPreviewSets]? = nil, include: [Include]? = nil, limitAppPreviewSets: Int? = nil, limitAppScreenshotSets: Int? = nil, limitSearchKeywords: Int? = nil) {
+			public init(fieldsAppCustomProductPageLocalizations: [FieldsAppCustomProductPageLocalizations]? = nil, fieldsAppCustomProductPageVersions: [FieldsAppCustomProductPageVersions]? = nil, fieldsAppScreenshotSets: [FieldsAppScreenshotSets]? = nil, fieldsAppPreviewSets: [FieldsAppPreviewSets]? = nil, include: [Include]? = nil, limitAppPreviewSets: Int? = nil, limitAppScreenshotSets: Int? = nil, limitSearchKeywords: Int? = nil) {
 				self.fieldsAppCustomProductPageLocalizations = fieldsAppCustomProductPageLocalizations
+				self.fieldsAppCustomProductPageVersions = fieldsAppCustomProductPageVersions
 				self.fieldsAppScreenshotSets = fieldsAppScreenshotSets
 				self.fieldsAppPreviewSets = fieldsAppPreviewSets
 				self.include = include
@@ -71,6 +81,7 @@ extension APIEndpoint.V1.AppCustomProductPageLocalizations {
 			public var asQuery: [(String, String?)] {
 				let encoder = URLQueryEncoder(explode: false)
 				encoder.encode(fieldsAppCustomProductPageLocalizations, forKey: "fields[appCustomProductPageLocalizations]")
+				encoder.encode(fieldsAppCustomProductPageVersions, forKey: "fields[appCustomProductPageVersions]")
 				encoder.encode(fieldsAppScreenshotSets, forKey: "fields[appScreenshotSets]")
 				encoder.encode(fieldsAppPreviewSets, forKey: "fields[appPreviewSets]")
 				encoder.encode(include, forKey: "include")

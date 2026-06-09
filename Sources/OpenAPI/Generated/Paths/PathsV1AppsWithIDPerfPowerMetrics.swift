@@ -34,6 +34,7 @@ extension APIEndpoint.V1.Apps.WithID {
 				case memory = "MEMORY"
 				case animation = "ANIMATION"
 				case termination = "TERMINATION"
+				case storage = "STORAGE"
 			}
 
 			public init(filterPlatform: [FilterPlatform]? = nil, filterMetricType: [FilterMetricType]? = nil, filterDeviceType: [String]? = nil) {

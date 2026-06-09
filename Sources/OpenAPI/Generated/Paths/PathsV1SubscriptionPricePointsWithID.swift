@@ -13,27 +13,44 @@ extension APIEndpoint.V1.SubscriptionPricePoints {
 		/// Path: `/v1/subscriptionPricePoints/{id}`
 		public let path: String
 
-		public func get(fieldsSubscriptionPricePoints: [FieldsSubscriptionPricePoints]? = nil, include: [Include]? = nil) -> Request<AppStoreConnect_Swift_SDK.SubscriptionPricePointResponse> {
-			Request(path: path, method: "GET", query: makeGetQuery(fieldsSubscriptionPricePoints, include), id: "subscriptionPricePoints_getInstance")
+		public func get(parameters: GetParameters? = nil) -> Request<AppStoreConnect_Swift_SDK.SubscriptionPricePointResponse> {
+			Request(path: path, method: "GET", query: parameters?.asQuery, id: "subscriptionPricePoints_getInstance")
 		}
 
-		private func makeGetQuery(_ fieldsSubscriptionPricePoints: [FieldsSubscriptionPricePoints]?, _ include: [Include]?) -> [(String, String?)] {
-			let encoder = URLQueryEncoder(explode: false)
-			encoder.encode(fieldsSubscriptionPricePoints, forKey: "fields[subscriptionPricePoints]")
-			encoder.encode(include, forKey: "include")
-			return encoder.items
-		}
+		public struct GetParameters {
+			public var fieldsSubscriptionPricePoints: [FieldsSubscriptionPricePoints]?
+			public var fieldsTerritories: [FieldsTerritories]?
+			public var include: [Include]?
 
-		public enum FieldsSubscriptionPricePoints: String, Codable, CaseIterable {
-			case customerPrice
-			case proceeds
-			case proceedsYear2
-			case territory
-			case equalizations
-		}
+			public enum FieldsSubscriptionPricePoints: String, Codable, CaseIterable {
+				case customerPrice
+				case proceeds
+				case proceedsYear2
+				case territory
+				case equalizations
+			}
 
-		public enum Include: String, Codable, CaseIterable {
-			case territory
+			public enum FieldsTerritories: String, Codable, CaseIterable {
+				case currency
+			}
+
+			public enum Include: String, Codable, CaseIterable {
+				case territory
+			}
+
+			public init(fieldsSubscriptionPricePoints: [FieldsSubscriptionPricePoints]? = nil, fieldsTerritories: [FieldsTerritories]? = nil, include: [Include]? = nil) {
+				self.fieldsSubscriptionPricePoints = fieldsSubscriptionPricePoints
+				self.fieldsTerritories = fieldsTerritories
+				self.include = include
+			}
+
+			public var asQuery: [(String, String?)] {
+				let encoder = URLQueryEncoder(explode: false)
+				encoder.encode(fieldsSubscriptionPricePoints, forKey: "fields[subscriptionPricePoints]")
+				encoder.encode(fieldsTerritories, forKey: "fields[territories]")
+				encoder.encode(include, forKey: "include")
+				return encoder.items
+			}
 		}
 	}
 }

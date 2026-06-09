@@ -13,27 +13,52 @@ extension APIEndpoint.V1.ScmGitReferences {
 		/// Path: `/v1/scmGitReferences/{id}`
 		public let path: String
 
-		public func get(fieldsScmGitReferences: [FieldsScmGitReferences]? = nil, include: [Include]? = nil) -> Request<AppStoreConnect_Swift_SDK.ScmGitReferenceResponse> {
-			Request(path: path, method: "GET", query: makeGetQuery(fieldsScmGitReferences, include), id: "scmGitReferences_getInstance")
+		public func get(parameters: GetParameters? = nil) -> Request<AppStoreConnect_Swift_SDK.ScmGitReferenceResponse> {
+			Request(path: path, method: "GET", query: parameters?.asQuery, id: "scmGitReferences_getInstance")
 		}
 
-		private func makeGetQuery(_ fieldsScmGitReferences: [FieldsScmGitReferences]?, _ include: [Include]?) -> [(String, String?)] {
-			let encoder = URLQueryEncoder(explode: false)
-			encoder.encode(fieldsScmGitReferences, forKey: "fields[scmGitReferences]")
-			encoder.encode(include, forKey: "include")
-			return encoder.items
-		}
+		public struct GetParameters {
+			public var fieldsScmGitReferences: [FieldsScmGitReferences]?
+			public var fieldsScmRepositories: [FieldsScmRepositories]?
+			public var include: [Include]?
 
-		public enum FieldsScmGitReferences: String, Codable, CaseIterable {
-			case name
-			case canonicalName
-			case isDeleted
-			case kind
-			case repository
-		}
+			public enum FieldsScmGitReferences: String, Codable, CaseIterable {
+				case name
+				case canonicalName
+				case isDeleted
+				case kind
+				case repository
+			}
 
-		public enum Include: String, Codable, CaseIterable {
-			case repository
+			public enum FieldsScmRepositories: String, Codable, CaseIterable {
+				case lastAccessedDate
+				case httpCloneURL = "httpCloneUrl"
+				case sshCloneURL = "sshCloneUrl"
+				case ownerName
+				case repositoryName
+				case scmProvider
+				case defaultBranch
+				case gitReferences
+				case pullRequests
+			}
+
+			public enum Include: String, Codable, CaseIterable {
+				case repository
+			}
+
+			public init(fieldsScmGitReferences: [FieldsScmGitReferences]? = nil, fieldsScmRepositories: [FieldsScmRepositories]? = nil, include: [Include]? = nil) {
+				self.fieldsScmGitReferences = fieldsScmGitReferences
+				self.fieldsScmRepositories = fieldsScmRepositories
+				self.include = include
+			}
+
+			public var asQuery: [(String, String?)] {
+				let encoder = URLQueryEncoder(explode: false)
+				encoder.encode(fieldsScmGitReferences, forKey: "fields[scmGitReferences]")
+				encoder.encode(fieldsScmRepositories, forKey: "fields[scmRepositories]")
+				encoder.encode(include, forKey: "include")
+				return encoder.items
+			}
 		}
 	}
 }

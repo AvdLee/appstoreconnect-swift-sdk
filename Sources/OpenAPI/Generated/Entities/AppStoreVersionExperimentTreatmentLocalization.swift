@@ -34,7 +34,9 @@ public struct AppStoreVersionExperimentTreatmentLocalization: Codable, Identifia
 
 	public struct Relationships: Codable {
 		public var appStoreVersionExperimentTreatment: AppStoreVersionExperimentTreatment?
+		/// - warning: Deprecated.
 		public var appScreenshotSets: AppScreenshotSets?
+		/// - warning: Deprecated.
 		public var appPreviewSets: AppPreviewSets?
 
 		public struct AppStoreVersionExperimentTreatment: Codable {
@@ -81,6 +83,7 @@ public struct AppStoreVersionExperimentTreatmentLocalization: Codable, Identifia
 			}
 		}
 
+		@available(*, deprecated, message: "Deprecated")
 		public struct AppScreenshotSets: Codable {
 			public var links: RelationshipLinks?
 			public var meta: PagingInformation?
@@ -133,6 +136,7 @@ public struct AppStoreVersionExperimentTreatmentLocalization: Codable, Identifia
 			}
 		}
 
+		@available(*, deprecated, message: "Deprecated")
 		public struct AppPreviewSets: Codable {
 			public var links: RelationshipLinks?
 			public var meta: PagingInformation?

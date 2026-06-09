@@ -13,26 +13,50 @@ extension APIEndpoint.V1.CustomerReviewResponses {
 		/// Path: `/v1/customerReviewResponses/{id}`
 		public let path: String
 
-		public func get(fieldsCustomerReviewResponses: [FieldsCustomerReviewResponses]? = nil, include: [Include]? = nil) -> Request<AppStoreConnect_Swift_SDK.CustomerReviewResponseV1Response> {
-			Request(path: path, method: "GET", query: makeGetQuery(fieldsCustomerReviewResponses, include), id: "customerReviewResponses_getInstance")
+		public func get(parameters: GetParameters? = nil) -> Request<AppStoreConnect_Swift_SDK.CustomerReviewResponseV1Response> {
+			Request(path: path, method: "GET", query: parameters?.asQuery, id: "customerReviewResponses_getInstance")
 		}
 
-		private func makeGetQuery(_ fieldsCustomerReviewResponses: [FieldsCustomerReviewResponses]?, _ include: [Include]?) -> [(String, String?)] {
-			let encoder = URLQueryEncoder(explode: false)
-			encoder.encode(fieldsCustomerReviewResponses, forKey: "fields[customerReviewResponses]")
-			encoder.encode(include, forKey: "include")
-			return encoder.items
-		}
+		public struct GetParameters {
+			public var fieldsCustomerReviewResponses: [FieldsCustomerReviewResponses]?
+			public var fieldsCustomerReviews: [FieldsCustomerReviews]?
+			public var include: [Include]?
 
-		public enum FieldsCustomerReviewResponses: String, Codable, CaseIterable {
-			case responseBody
-			case lastModifiedDate
-			case state
-			case review
-		}
+			public enum FieldsCustomerReviewResponses: String, Codable, CaseIterable {
+				case responseBody
+				case lastModifiedDate
+				case state
+				case review
+			}
 
-		public enum Include: String, Codable, CaseIterable {
-			case review
+			public enum FieldsCustomerReviews: String, Codable, CaseIterable {
+				case rating
+				case title
+				case body
+				case reviewerNickname
+				case createdDate
+				case territory
+				case response
+				case reviewTerritory
+			}
+
+			public enum Include: String, Codable, CaseIterable {
+				case review
+			}
+
+			public init(fieldsCustomerReviewResponses: [FieldsCustomerReviewResponses]? = nil, fieldsCustomerReviews: [FieldsCustomerReviews]? = nil, include: [Include]? = nil) {
+				self.fieldsCustomerReviewResponses = fieldsCustomerReviewResponses
+				self.fieldsCustomerReviews = fieldsCustomerReviews
+				self.include = include
+			}
+
+			public var asQuery: [(String, String?)] {
+				let encoder = URLQueryEncoder(explode: false)
+				encoder.encode(fieldsCustomerReviewResponses, forKey: "fields[customerReviewResponses]")
+				encoder.encode(fieldsCustomerReviews, forKey: "fields[customerReviews]")
+				encoder.encode(include, forKey: "include")
+				return encoder.items
+			}
 		}
 
 		public var delete: Request<Void> {

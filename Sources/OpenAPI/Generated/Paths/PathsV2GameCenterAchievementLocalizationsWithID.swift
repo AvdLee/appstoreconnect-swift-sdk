@@ -19,6 +19,7 @@ extension APIEndpoint.V2.GameCenterAchievementLocalizations {
 
 		public struct GetParameters {
 			public var fieldsGameCenterAchievementLocalizations: [FieldsGameCenterAchievementLocalizations]?
+			public var fieldsGameCenterAchievementVersions: [FieldsGameCenterAchievementVersions]?
 			public var fieldsGameCenterAchievementImages: [FieldsGameCenterAchievementImages]?
 			public var include: [Include]?
 
@@ -29,6 +30,13 @@ extension APIEndpoint.V2.GameCenterAchievementLocalizations {
 				case afterEarnedDescription
 				case version
 				case image
+			}
+
+			public enum FieldsGameCenterAchievementVersions: String, Codable, CaseIterable {
+				case version
+				case state
+				case achievement
+				case localizations
 			}
 
 			public enum FieldsGameCenterAchievementImages: String, Codable, CaseIterable {
@@ -45,8 +53,9 @@ extension APIEndpoint.V2.GameCenterAchievementLocalizations {
 				case image
 			}
 
-			public init(fieldsGameCenterAchievementLocalizations: [FieldsGameCenterAchievementLocalizations]? = nil, fieldsGameCenterAchievementImages: [FieldsGameCenterAchievementImages]? = nil, include: [Include]? = nil) {
+			public init(fieldsGameCenterAchievementLocalizations: [FieldsGameCenterAchievementLocalizations]? = nil, fieldsGameCenterAchievementVersions: [FieldsGameCenterAchievementVersions]? = nil, fieldsGameCenterAchievementImages: [FieldsGameCenterAchievementImages]? = nil, include: [Include]? = nil) {
 				self.fieldsGameCenterAchievementLocalizations = fieldsGameCenterAchievementLocalizations
+				self.fieldsGameCenterAchievementVersions = fieldsGameCenterAchievementVersions
 				self.fieldsGameCenterAchievementImages = fieldsGameCenterAchievementImages
 				self.include = include
 			}
@@ -54,6 +63,7 @@ extension APIEndpoint.V2.GameCenterAchievementLocalizations {
 			public var asQuery: [(String, String?)] {
 				let encoder = URLQueryEncoder(explode: false)
 				encoder.encode(fieldsGameCenterAchievementLocalizations, forKey: "fields[gameCenterAchievementLocalizations]")
+				encoder.encode(fieldsGameCenterAchievementVersions, forKey: "fields[gameCenterAchievementVersions]")
 				encoder.encode(fieldsGameCenterAchievementImages, forKey: "fields[gameCenterAchievementImages]")
 				encoder.encode(include, forKey: "include")
 				return encoder.items

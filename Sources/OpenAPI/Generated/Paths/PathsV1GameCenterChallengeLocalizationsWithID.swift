@@ -19,6 +19,7 @@ extension APIEndpoint.V1.GameCenterChallengeLocalizations {
 
 		public struct GetParameters {
 			public var fieldsGameCenterChallengeLocalizations: [FieldsGameCenterChallengeLocalizations]?
+			public var fieldsGameCenterChallengeVersions: [FieldsGameCenterChallengeVersions]?
 			public var fieldsGameCenterChallengeImages: [FieldsGameCenterChallengeImages]?
 			public var include: [Include]?
 
@@ -28,6 +29,15 @@ extension APIEndpoint.V1.GameCenterChallengeLocalizations {
 				case description
 				case version
 				case image
+			}
+
+			public enum FieldsGameCenterChallengeVersions: String, Codable, CaseIterable {
+				case version
+				case state
+				case challenge
+				case localizations
+				case releases
+				case defaultImage
 			}
 
 			public enum FieldsGameCenterChallengeImages: String, Codable, CaseIterable {
@@ -43,8 +53,9 @@ extension APIEndpoint.V1.GameCenterChallengeLocalizations {
 				case image
 			}
 
-			public init(fieldsGameCenterChallengeLocalizations: [FieldsGameCenterChallengeLocalizations]? = nil, fieldsGameCenterChallengeImages: [FieldsGameCenterChallengeImages]? = nil, include: [Include]? = nil) {
+			public init(fieldsGameCenterChallengeLocalizations: [FieldsGameCenterChallengeLocalizations]? = nil, fieldsGameCenterChallengeVersions: [FieldsGameCenterChallengeVersions]? = nil, fieldsGameCenterChallengeImages: [FieldsGameCenterChallengeImages]? = nil, include: [Include]? = nil) {
 				self.fieldsGameCenterChallengeLocalizations = fieldsGameCenterChallengeLocalizations
+				self.fieldsGameCenterChallengeVersions = fieldsGameCenterChallengeVersions
 				self.fieldsGameCenterChallengeImages = fieldsGameCenterChallengeImages
 				self.include = include
 			}
@@ -52,6 +63,7 @@ extension APIEndpoint.V1.GameCenterChallengeLocalizations {
 			public var asQuery: [(String, String?)] {
 				let encoder = URLQueryEncoder(explode: false)
 				encoder.encode(fieldsGameCenterChallengeLocalizations, forKey: "fields[gameCenterChallengeLocalizations]")
+				encoder.encode(fieldsGameCenterChallengeVersions, forKey: "fields[gameCenterChallengeVersions]")
 				encoder.encode(fieldsGameCenterChallengeImages, forKey: "fields[gameCenterChallengeImages]")
 				encoder.encode(include, forKey: "include")
 				return encoder.items

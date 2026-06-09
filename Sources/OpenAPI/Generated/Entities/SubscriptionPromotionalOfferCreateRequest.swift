@@ -22,13 +22,15 @@ public struct SubscriptionPromotionalOfferCreateRequest: Codable {
 			public var numberOfPeriods: Int
 			public var offerCode: String
 			public var offerMode: SubscriptionOfferMode
+			public var targetSubscriptionPlanType: SubscriptionPlanType?
 
-			public init(duration: SubscriptionOfferDuration, name: String, numberOfPeriods: Int, offerCode: String, offerMode: SubscriptionOfferMode) {
+			public init(duration: SubscriptionOfferDuration, name: String, numberOfPeriods: Int, offerCode: String, offerMode: SubscriptionOfferMode, targetSubscriptionPlanType: SubscriptionPlanType? = nil) {
 				self.duration = duration
 				self.name = name
 				self.numberOfPeriods = numberOfPeriods
 				self.offerCode = offerCode
 				self.offerMode = offerMode
+				self.targetSubscriptionPlanType = targetSubscriptionPlanType
 			}
 
 			public init(from decoder: Decoder) throws {
@@ -38,6 +40,7 @@ public struct SubscriptionPromotionalOfferCreateRequest: Codable {
 				self.numberOfPeriods = try values.decode(Int.self, forKey: "numberOfPeriods")
 				self.offerCode = try values.decode(String.self, forKey: "offerCode")
 				self.offerMode = try values.decode(SubscriptionOfferMode.self, forKey: "offerMode")
+				self.targetSubscriptionPlanType = try values.decodeIfPresent(SubscriptionPlanType.self, forKey: "targetSubscriptionPlanType")
 			}
 
 			public func encode(to encoder: Encoder) throws {
@@ -47,6 +50,7 @@ public struct SubscriptionPromotionalOfferCreateRequest: Codable {
 				try values.encode(numberOfPeriods, forKey: "numberOfPeriods")
 				try values.encode(offerCode, forKey: "offerCode")
 				try values.encode(offerMode, forKey: "offerMode")
+				try values.encodeIfPresent(targetSubscriptionPlanType, forKey: "targetSubscriptionPlanType")
 			}
 		}
 

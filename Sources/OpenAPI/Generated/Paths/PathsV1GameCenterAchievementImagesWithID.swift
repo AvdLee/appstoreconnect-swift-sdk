@@ -14,28 +14,50 @@ extension APIEndpoint.V1.GameCenterAchievementImages {
 		public let path: String
 
 		@available(*, deprecated, message: "Deprecated")
-		public func get(fieldsGameCenterAchievementImages: [FieldsGameCenterAchievementImages]? = nil, include: [Include]? = nil) -> Request<AppStoreConnect_Swift_SDK.GameCenterAchievementImageResponse> {
-			Request(path: path, method: "GET", query: makeGetQuery(fieldsGameCenterAchievementImages, include), id: "gameCenterAchievementImages_getInstance")
+		public func get(parameters: GetParameters? = nil) -> Request<AppStoreConnect_Swift_SDK.GameCenterAchievementImageResponse> {
+			Request(path: path, method: "GET", query: parameters?.asQuery, id: "gameCenterAchievementImages_getInstance")
 		}
 
-		private func makeGetQuery(_ fieldsGameCenterAchievementImages: [FieldsGameCenterAchievementImages]?, _ include: [Include]?) -> [(String, String?)] {
-			let encoder = URLQueryEncoder(explode: false)
-			encoder.encode(fieldsGameCenterAchievementImages, forKey: "fields[gameCenterAchievementImages]")
-			encoder.encode(include, forKey: "include")
-			return encoder.items
-		}
+		public struct GetParameters {
+			public var fieldsGameCenterAchievementImages: [FieldsGameCenterAchievementImages]?
+			public var fieldsGameCenterAchievementLocalizations: [FieldsGameCenterAchievementLocalizations]?
+			public var include: [Include]?
 
-		public enum FieldsGameCenterAchievementImages: String, Codable, CaseIterable {
-			case fileSize
-			case fileName
-			case imageAsset
-			case uploadOperations
-			case assetDeliveryState
-			case gameCenterAchievementLocalization
-		}
+			public enum FieldsGameCenterAchievementImages: String, Codable, CaseIterable {
+				case fileSize
+				case fileName
+				case imageAsset
+				case uploadOperations
+				case assetDeliveryState
+				case gameCenterAchievementLocalization
+			}
 
-		public enum Include: String, Codable, CaseIterable {
-			case gameCenterAchievementLocalization
+			public enum FieldsGameCenterAchievementLocalizations: String, Codable, CaseIterable {
+				case locale
+				case name
+				case beforeEarnedDescription
+				case afterEarnedDescription
+				case gameCenterAchievement
+				case gameCenterAchievementImage
+			}
+
+			public enum Include: String, Codable, CaseIterable {
+				case gameCenterAchievementLocalization
+			}
+
+			public init(fieldsGameCenterAchievementImages: [FieldsGameCenterAchievementImages]? = nil, fieldsGameCenterAchievementLocalizations: [FieldsGameCenterAchievementLocalizations]? = nil, include: [Include]? = nil) {
+				self.fieldsGameCenterAchievementImages = fieldsGameCenterAchievementImages
+				self.fieldsGameCenterAchievementLocalizations = fieldsGameCenterAchievementLocalizations
+				self.include = include
+			}
+
+			public var asQuery: [(String, String?)] {
+				let encoder = URLQueryEncoder(explode: false)
+				encoder.encode(fieldsGameCenterAchievementImages, forKey: "fields[gameCenterAchievementImages]")
+				encoder.encode(fieldsGameCenterAchievementLocalizations, forKey: "fields[gameCenterAchievementLocalizations]")
+				encoder.encode(include, forKey: "include")
+				return encoder.items
+			}
 		}
 
 		@available(*, deprecated, message: "Deprecated")

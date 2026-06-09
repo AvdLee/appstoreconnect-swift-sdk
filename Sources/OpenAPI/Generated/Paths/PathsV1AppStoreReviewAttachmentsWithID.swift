@@ -13,28 +13,54 @@ extension APIEndpoint.V1.AppStoreReviewAttachments {
 		/// Path: `/v1/appStoreReviewAttachments/{id}`
 		public let path: String
 
-		public func get(fieldsAppStoreReviewAttachments: [FieldsAppStoreReviewAttachments]? = nil, include: [Include]? = nil) -> Request<AppStoreConnect_Swift_SDK.AppStoreReviewAttachmentResponse> {
-			Request(path: path, method: "GET", query: makeGetQuery(fieldsAppStoreReviewAttachments, include), id: "appStoreReviewAttachments_getInstance")
+		public func get(parameters: GetParameters? = nil) -> Request<AppStoreConnect_Swift_SDK.AppStoreReviewAttachmentResponse> {
+			Request(path: path, method: "GET", query: parameters?.asQuery, id: "appStoreReviewAttachments_getInstance")
 		}
 
-		private func makeGetQuery(_ fieldsAppStoreReviewAttachments: [FieldsAppStoreReviewAttachments]?, _ include: [Include]?) -> [(String, String?)] {
-			let encoder = URLQueryEncoder(explode: false)
-			encoder.encode(fieldsAppStoreReviewAttachments, forKey: "fields[appStoreReviewAttachments]")
-			encoder.encode(include, forKey: "include")
-			return encoder.items
-		}
+		public struct GetParameters {
+			public var fieldsAppStoreReviewAttachments: [FieldsAppStoreReviewAttachments]?
+			public var fieldsAppStoreReviewDetails: [FieldsAppStoreReviewDetails]?
+			public var include: [Include]?
 
-		public enum FieldsAppStoreReviewAttachments: String, Codable, CaseIterable {
-			case fileSize
-			case fileName
-			case sourceFileChecksum
-			case uploadOperations
-			case assetDeliveryState
-			case appStoreReviewDetail
-		}
+			public enum FieldsAppStoreReviewAttachments: String, Codable, CaseIterable {
+				case fileSize
+				case fileName
+				case sourceFileChecksum
+				case uploadOperations
+				case assetDeliveryState
+				case appStoreReviewDetail
+			}
 
-		public enum Include: String, Codable, CaseIterable {
-			case appStoreReviewDetail
+			public enum FieldsAppStoreReviewDetails: String, Codable, CaseIterable {
+				case contactFirstName
+				case contactLastName
+				case contactPhone
+				case contactEmail
+				case demoAccountName
+				case demoAccountPassword
+				case demoAccountRequired
+				case notes
+				case appStoreVersion
+				case appStoreReviewAttachments
+			}
+
+			public enum Include: String, Codable, CaseIterable {
+				case appStoreReviewDetail
+			}
+
+			public init(fieldsAppStoreReviewAttachments: [FieldsAppStoreReviewAttachments]? = nil, fieldsAppStoreReviewDetails: [FieldsAppStoreReviewDetails]? = nil, include: [Include]? = nil) {
+				self.fieldsAppStoreReviewAttachments = fieldsAppStoreReviewAttachments
+				self.fieldsAppStoreReviewDetails = fieldsAppStoreReviewDetails
+				self.include = include
+			}
+
+			public var asQuery: [(String, String?)] {
+				let encoder = URLQueryEncoder(explode: false)
+				encoder.encode(fieldsAppStoreReviewAttachments, forKey: "fields[appStoreReviewAttachments]")
+				encoder.encode(fieldsAppStoreReviewDetails, forKey: "fields[appStoreReviewDetails]")
+				encoder.encode(include, forKey: "include")
+				return encoder.items
+			}
 		}
 
 		public func patch(_ body: AppStoreConnect_Swift_SDK.AppStoreReviewAttachmentUpdateRequest) -> Request<AppStoreConnect_Swift_SDK.AppStoreReviewAttachmentResponse> {

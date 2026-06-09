@@ -13,6 +13,7 @@ extension APIEndpoint.V1.AppCustomProductPageLocalizations.WithID.Relationships 
 		/// Path: `/v1/appCustomProductPageLocalizations/{id}/relationships/appPreviewSets`
 		public let path: String
 
+		@available(*, deprecated, message: "Deprecated")
 		public func get(limit: Int? = nil) -> Request<AppStoreConnect_Swift_SDK.AppCustomProductPageLocalizationAppPreviewSetsLinkagesResponse> {
 			Request(path: path, method: "GET", query: makeGetQuery(limit), id: "appCustomProductPageLocalizations_appPreviewSets_getToManyRelationship")
 		}

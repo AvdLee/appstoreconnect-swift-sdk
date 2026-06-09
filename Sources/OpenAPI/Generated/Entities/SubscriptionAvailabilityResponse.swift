@@ -3,8 +3,11 @@
 
 import Foundation
 
+@available(*, deprecated, message: "Deprecated")
 public struct SubscriptionAvailabilityResponse: Codable {
 	/// SubscriptionAvailability
+	///
+	/// - warning: Deprecated.
 	public var data: SubscriptionAvailability
 	public var included: [Territory]?
 	public var links: DocumentLinks
