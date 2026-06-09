@@ -20,6 +20,7 @@ extension APIEndpoint.V1.AppEncryptionDeclarations {
 		public struct GetParameters {
 			public var fieldsAppEncryptionDeclarations: [FieldsAppEncryptionDeclarations]?
 			public var fieldsApps: [FieldsApps]?
+			public var fieldsBuilds: [FieldsBuilds]?
 			public var fieldsAppEncryptionDeclarationDocuments: [FieldsAppEncryptionDeclarationDocuments]?
 			public var include: [Include]?
 			public var limitBuilds: Int?
@@ -102,6 +103,35 @@ extension APIEndpoint.V1.AppEncryptionDeclarations {
 				case androidToIosAppMappingDetails
 			}
 
+			public enum FieldsBuilds: String, Codable, CaseIterable {
+				case version
+				case uploadedDate
+				case expirationDate
+				case expired
+				case minOsVersion
+				case lsMinimumSystemVersion
+				case computedMinMacOsVersion
+				case computedMinVisionOsVersion
+				case iconAssetToken
+				case processingState
+				case buildAudienceType
+				case usesNonExemptEncryption
+				case preReleaseVersion
+				case individualTesters
+				case betaGroups
+				case betaBuildLocalizations
+				case appEncryptionDeclaration
+				case betaAppReviewSubmission
+				case app
+				case buildBetaDetail
+				case appStoreVersion
+				case icons
+				case buildBundles
+				case buildUpload
+				case perfPowerMetrics
+				case diagnosticSignatures
+			}
+
 			public enum FieldsAppEncryptionDeclarationDocuments: String, Codable, CaseIterable {
 				case fileSize
 				case fileName
@@ -118,9 +148,10 @@ extension APIEndpoint.V1.AppEncryptionDeclarations {
 				case appEncryptionDeclarationDocument
 			}
 
-			public init(fieldsAppEncryptionDeclarations: [FieldsAppEncryptionDeclarations]? = nil, fieldsApps: [FieldsApps]? = nil, fieldsAppEncryptionDeclarationDocuments: [FieldsAppEncryptionDeclarationDocuments]? = nil, include: [Include]? = nil, limitBuilds: Int? = nil) {
+			public init(fieldsAppEncryptionDeclarations: [FieldsAppEncryptionDeclarations]? = nil, fieldsApps: [FieldsApps]? = nil, fieldsBuilds: [FieldsBuilds]? = nil, fieldsAppEncryptionDeclarationDocuments: [FieldsAppEncryptionDeclarationDocuments]? = nil, include: [Include]? = nil, limitBuilds: Int? = nil) {
 				self.fieldsAppEncryptionDeclarations = fieldsAppEncryptionDeclarations
 				self.fieldsApps = fieldsApps
+				self.fieldsBuilds = fieldsBuilds
 				self.fieldsAppEncryptionDeclarationDocuments = fieldsAppEncryptionDeclarationDocuments
 				self.include = include
 				self.limitBuilds = limitBuilds
@@ -130,6 +161,7 @@ extension APIEndpoint.V1.AppEncryptionDeclarations {
 				let encoder = URLQueryEncoder(explode: false)
 				encoder.encode(fieldsAppEncryptionDeclarations, forKey: "fields[appEncryptionDeclarations]")
 				encoder.encode(fieldsApps, forKey: "fields[apps]")
+				encoder.encode(fieldsBuilds, forKey: "fields[builds]")
 				encoder.encode(fieldsAppEncryptionDeclarationDocuments, forKey: "fields[appEncryptionDeclarationDocuments]")
 				encoder.encode(include, forKey: "include")
 				encoder.encode(limitBuilds, forKey: "limit[builds]")

@@ -19,6 +19,7 @@ extension APIEndpoint.V1.SubscriptionOfferCodes {
 
 		public struct GetParameters {
 			public var fieldsSubscriptionOfferCodes: [FieldsSubscriptionOfferCodes]?
+			public var fieldsSubscriptions: [FieldsSubscriptions]?
 			public var fieldsSubscriptionOfferCodeOneTimeUseCodes: [FieldsSubscriptionOfferCodeOneTimeUseCodes]?
 			public var fieldsSubscriptionOfferCodeCustomCodes: [FieldsSubscriptionOfferCodeCustomCodes]?
 			public var fieldsSubscriptionOfferCodePrices: [FieldsSubscriptionOfferCodePrices]?
@@ -39,10 +40,34 @@ extension APIEndpoint.V1.SubscriptionOfferCodes {
 				case sandboxCodeCount
 				case active
 				case autoRenewEnabled
+				case targetSubscriptionPlanType
 				case subscription
 				case oneTimeUseCodes
 				case customCodes
 				case prices
+			}
+
+			public enum FieldsSubscriptions: String, Codable, CaseIterable {
+				case name
+				case productID = "productId"
+				case familySharable
+				case state
+				case subscriptionPeriod
+				case reviewNote
+				case groupLevel
+				case subscriptionLocalizations
+				case appStoreReviewScreenshot
+				case group
+				case introductoryOffers
+				case promotionalOffers
+				case offerCodes
+				case prices
+				case pricePoints
+				case promotedPurchase
+				case subscriptionAvailability
+				case winBackOffers
+				case images
+				case planAvailabilities
 			}
 
 			public enum FieldsSubscriptionOfferCodeOneTimeUseCodes: String, Codable, CaseIterable {
@@ -76,8 +101,9 @@ extension APIEndpoint.V1.SubscriptionOfferCodes {
 				case prices
 			}
 
-			public init(fieldsSubscriptionOfferCodes: [FieldsSubscriptionOfferCodes]? = nil, fieldsSubscriptionOfferCodeOneTimeUseCodes: [FieldsSubscriptionOfferCodeOneTimeUseCodes]? = nil, fieldsSubscriptionOfferCodeCustomCodes: [FieldsSubscriptionOfferCodeCustomCodes]? = nil, fieldsSubscriptionOfferCodePrices: [FieldsSubscriptionOfferCodePrices]? = nil, include: [Include]? = nil, limitCustomCodes: Int? = nil, limitOneTimeUseCodes: Int? = nil, limitPrices: Int? = nil) {
+			public init(fieldsSubscriptionOfferCodes: [FieldsSubscriptionOfferCodes]? = nil, fieldsSubscriptions: [FieldsSubscriptions]? = nil, fieldsSubscriptionOfferCodeOneTimeUseCodes: [FieldsSubscriptionOfferCodeOneTimeUseCodes]? = nil, fieldsSubscriptionOfferCodeCustomCodes: [FieldsSubscriptionOfferCodeCustomCodes]? = nil, fieldsSubscriptionOfferCodePrices: [FieldsSubscriptionOfferCodePrices]? = nil, include: [Include]? = nil, limitCustomCodes: Int? = nil, limitOneTimeUseCodes: Int? = nil, limitPrices: Int? = nil) {
 				self.fieldsSubscriptionOfferCodes = fieldsSubscriptionOfferCodes
+				self.fieldsSubscriptions = fieldsSubscriptions
 				self.fieldsSubscriptionOfferCodeOneTimeUseCodes = fieldsSubscriptionOfferCodeOneTimeUseCodes
 				self.fieldsSubscriptionOfferCodeCustomCodes = fieldsSubscriptionOfferCodeCustomCodes
 				self.fieldsSubscriptionOfferCodePrices = fieldsSubscriptionOfferCodePrices
@@ -90,6 +116,7 @@ extension APIEndpoint.V1.SubscriptionOfferCodes {
 			public var asQuery: [(String, String?)] {
 				let encoder = URLQueryEncoder(explode: false)
 				encoder.encode(fieldsSubscriptionOfferCodes, forKey: "fields[subscriptionOfferCodes]")
+				encoder.encode(fieldsSubscriptions, forKey: "fields[subscriptions]")
 				encoder.encode(fieldsSubscriptionOfferCodeOneTimeUseCodes, forKey: "fields[subscriptionOfferCodeOneTimeUseCodes]")
 				encoder.encode(fieldsSubscriptionOfferCodeCustomCodes, forKey: "fields[subscriptionOfferCodeCustomCodes]")
 				encoder.encode(fieldsSubscriptionOfferCodePrices, forKey: "fields[subscriptionOfferCodePrices]")

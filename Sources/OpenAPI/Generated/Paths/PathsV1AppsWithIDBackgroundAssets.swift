@@ -20,6 +20,7 @@ extension APIEndpoint.V1.Apps.WithID {
 		public struct GetParameters {
 			public var filterArchived: [String]?
 			public var filterAssetPackIdentifier: [String]?
+			public var filterVersionsLocale: [String]?
 			public var filterVersionsPlatforms: [FilterVersionsPlatforms]?
 			public var sort: [Sort]?
 			public var fieldsBackgroundAssets: [FieldsBackgroundAssets]?
@@ -118,6 +119,7 @@ extension APIEndpoint.V1.Apps.WithID {
 				case state
 				case stateDetails
 				case version
+				case locale
 				case backgroundAsset
 				case internalBetaRelease
 				case externalBetaRelease
@@ -134,9 +136,10 @@ extension APIEndpoint.V1.Apps.WithID {
 				case externalBetaVersion
 			}
 
-			public init(filterArchived: [String]? = nil, filterAssetPackIdentifier: [String]? = nil, filterVersionsPlatforms: [FilterVersionsPlatforms]? = nil, sort: [Sort]? = nil, fieldsBackgroundAssets: [FieldsBackgroundAssets]? = nil, fieldsApps: [FieldsApps]? = nil, fieldsBackgroundAssetVersions: [FieldsBackgroundAssetVersions]? = nil, limit: Int? = nil, include: [Include]? = nil) {
+			public init(filterArchived: [String]? = nil, filterAssetPackIdentifier: [String]? = nil, filterVersionsLocale: [String]? = nil, filterVersionsPlatforms: [FilterVersionsPlatforms]? = nil, sort: [Sort]? = nil, fieldsBackgroundAssets: [FieldsBackgroundAssets]? = nil, fieldsApps: [FieldsApps]? = nil, fieldsBackgroundAssetVersions: [FieldsBackgroundAssetVersions]? = nil, limit: Int? = nil, include: [Include]? = nil) {
 				self.filterArchived = filterArchived
 				self.filterAssetPackIdentifier = filterAssetPackIdentifier
+				self.filterVersionsLocale = filterVersionsLocale
 				self.filterVersionsPlatforms = filterVersionsPlatforms
 				self.sort = sort
 				self.fieldsBackgroundAssets = fieldsBackgroundAssets
@@ -150,6 +153,7 @@ extension APIEndpoint.V1.Apps.WithID {
 				let encoder = URLQueryEncoder(explode: false)
 				encoder.encode(filterArchived, forKey: "filter[archived]")
 				encoder.encode(filterAssetPackIdentifier, forKey: "filter[assetPackIdentifier]")
+				encoder.encode(filterVersionsLocale, forKey: "filter[versions.locale]")
 				encoder.encode(filterVersionsPlatforms, forKey: "filter[versions.platforms]")
 				encoder.encode(sort, forKey: "sort")
 				encoder.encode(fieldsBackgroundAssets, forKey: "fields[backgroundAssets]")

@@ -13,28 +13,99 @@ extension APIEndpoint.V1.Webhooks {
 		/// Path: `/v1/webhooks/{id}`
 		public let path: String
 
-		public func get(fieldsWebhooks: [FieldsWebhooks]? = nil, include: [Include]? = nil) -> Request<AppStoreConnect_Swift_SDK.WebhookResponse> {
-			Request(path: path, method: "GET", query: makeGetQuery(fieldsWebhooks, include), id: "webhooks_getInstance")
+		public func get(parameters: GetParameters? = nil) -> Request<AppStoreConnect_Swift_SDK.WebhookResponse> {
+			Request(path: path, method: "GET", query: parameters?.asQuery, id: "webhooks_getInstance")
 		}
 
-		private func makeGetQuery(_ fieldsWebhooks: [FieldsWebhooks]?, _ include: [Include]?) -> [(String, String?)] {
-			let encoder = URLQueryEncoder(explode: false)
-			encoder.encode(fieldsWebhooks, forKey: "fields[webhooks]")
-			encoder.encode(include, forKey: "include")
-			return encoder.items
-		}
+		public struct GetParameters {
+			public var fieldsWebhooks: [FieldsWebhooks]?
+			public var fieldsApps: [FieldsApps]?
+			public var include: [Include]?
 
-		public enum FieldsWebhooks: String, Codable, CaseIterable {
-			case enabled
-			case eventTypes
-			case name
-			case url
-			case app
-			case deliveries
-		}
+			public enum FieldsWebhooks: String, Codable, CaseIterable {
+				case enabled
+				case eventTypes
+				case name
+				case url
+				case app
+				case deliveries
+			}
 
-		public enum Include: String, Codable, CaseIterable {
-			case app
+			public enum FieldsApps: String, Codable, CaseIterable {
+				case accessibilityURL = "accessibilityUrl"
+				case name
+				case bundleID = "bundleId"
+				case sku
+				case primaryLocale
+				case isOrEverWasMadeForKids
+				case subscriptionStatusURL = "subscriptionStatusUrl"
+				case subscriptionStatusURLVersion = "subscriptionStatusUrlVersion"
+				case subscriptionStatusURLForSandbox = "subscriptionStatusUrlForSandbox"
+				case subscriptionStatusURLVersionForSandbox = "subscriptionStatusUrlVersionForSandbox"
+				case contentRightsDeclaration
+				case streamlinedPurchasingEnabled
+				case accessibilityDeclarations
+				case appEncryptionDeclarations
+				case appStoreIcon
+				case ciProduct
+				case betaTesters
+				case betaGroups
+				case appStoreVersions
+				case appTags
+				case preReleaseVersions
+				case betaAppLocalizations
+				case builds
+				case betaLicenseAgreement
+				case betaAppReviewDetail
+				case appInfos
+				case appClips
+				case appPricePoints
+				case endUserLicenseAgreement
+				case appPriceSchedule
+				case appAvailabilityV2
+				case inAppPurchases
+				case subscriptionGroups
+				case gameCenterEnabledVersions
+				case perfPowerMetrics
+				case appCustomProductPages
+				case inAppPurchasesV2
+				case promotedPurchases
+				case appEvents
+				case reviewSubmissions
+				case subscriptionGracePeriod
+				case customerReviews
+				case customerReviewSummarizations
+				case gameCenterDetail
+				case appStoreVersionExperimentsV2
+				case alternativeDistributionKey
+				case analyticsReportRequests
+				case marketplaceSearchDetail
+				case buildUploads
+				case backgroundAssets
+				case betaFeedbackScreenshotSubmissions
+				case betaFeedbackCrashSubmissions
+				case searchKeywords
+				case webhooks
+				case androidToIosAppMappingDetails
+			}
+
+			public enum Include: String, Codable, CaseIterable {
+				case app
+			}
+
+			public init(fieldsWebhooks: [FieldsWebhooks]? = nil, fieldsApps: [FieldsApps]? = nil, include: [Include]? = nil) {
+				self.fieldsWebhooks = fieldsWebhooks
+				self.fieldsApps = fieldsApps
+				self.include = include
+			}
+
+			public var asQuery: [(String, String?)] {
+				let encoder = URLQueryEncoder(explode: false)
+				encoder.encode(fieldsWebhooks, forKey: "fields[webhooks]")
+				encoder.encode(fieldsApps, forKey: "fields[apps]")
+				encoder.encode(include, forKey: "include")
+				return encoder.items
+			}
 		}
 
 		public func patch(_ body: AppStoreConnect_Swift_SDK.WebhookUpdateRequest) -> Request<AppStoreConnect_Swift_SDK.WebhookResponse> {

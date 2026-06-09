@@ -13,31 +13,67 @@ extension APIEndpoint.V1.SubscriptionAppStoreReviewScreenshots {
 		/// Path: `/v1/subscriptionAppStoreReviewScreenshots/{id}`
 		public let path: String
 
-		public func get(fieldsSubscriptionAppStoreReviewScreenshots: [FieldsSubscriptionAppStoreReviewScreenshots]? = nil, include: [Include]? = nil) -> Request<AppStoreConnect_Swift_SDK.SubscriptionAppStoreReviewScreenshotResponse> {
-			Request(path: path, method: "GET", query: makeGetQuery(fieldsSubscriptionAppStoreReviewScreenshots, include), id: "subscriptionAppStoreReviewScreenshots_getInstance")
+		public func get(parameters: GetParameters? = nil) -> Request<AppStoreConnect_Swift_SDK.SubscriptionAppStoreReviewScreenshotResponse> {
+			Request(path: path, method: "GET", query: parameters?.asQuery, id: "subscriptionAppStoreReviewScreenshots_getInstance")
 		}
 
-		private func makeGetQuery(_ fieldsSubscriptionAppStoreReviewScreenshots: [FieldsSubscriptionAppStoreReviewScreenshots]?, _ include: [Include]?) -> [(String, String?)] {
-			let encoder = URLQueryEncoder(explode: false)
-			encoder.encode(fieldsSubscriptionAppStoreReviewScreenshots, forKey: "fields[subscriptionAppStoreReviewScreenshots]")
-			encoder.encode(include, forKey: "include")
-			return encoder.items
-		}
+		public struct GetParameters {
+			public var fieldsSubscriptionAppStoreReviewScreenshots: [FieldsSubscriptionAppStoreReviewScreenshots]?
+			public var fieldsSubscriptions: [FieldsSubscriptions]?
+			public var include: [Include]?
 
-		public enum FieldsSubscriptionAppStoreReviewScreenshots: String, Codable, CaseIterable {
-			case fileSize
-			case fileName
-			case sourceFileChecksum
-			case imageAsset
-			case assetToken
-			case assetType
-			case uploadOperations
-			case assetDeliveryState
-			case subscription
-		}
+			public enum FieldsSubscriptionAppStoreReviewScreenshots: String, Codable, CaseIterable {
+				case fileSize
+				case fileName
+				case sourceFileChecksum
+				case imageAsset
+				case assetToken
+				case assetType
+				case uploadOperations
+				case assetDeliveryState
+				case subscription
+			}
 
-		public enum Include: String, Codable, CaseIterable {
-			case subscription
+			public enum FieldsSubscriptions: String, Codable, CaseIterable {
+				case name
+				case productID = "productId"
+				case familySharable
+				case state
+				case subscriptionPeriod
+				case reviewNote
+				case groupLevel
+				case subscriptionLocalizations
+				case appStoreReviewScreenshot
+				case group
+				case introductoryOffers
+				case promotionalOffers
+				case offerCodes
+				case prices
+				case pricePoints
+				case promotedPurchase
+				case subscriptionAvailability
+				case winBackOffers
+				case images
+				case planAvailabilities
+			}
+
+			public enum Include: String, Codable, CaseIterable {
+				case subscription
+			}
+
+			public init(fieldsSubscriptionAppStoreReviewScreenshots: [FieldsSubscriptionAppStoreReviewScreenshots]? = nil, fieldsSubscriptions: [FieldsSubscriptions]? = nil, include: [Include]? = nil) {
+				self.fieldsSubscriptionAppStoreReviewScreenshots = fieldsSubscriptionAppStoreReviewScreenshots
+				self.fieldsSubscriptions = fieldsSubscriptions
+				self.include = include
+			}
+
+			public var asQuery: [(String, String?)] {
+				let encoder = URLQueryEncoder(explode: false)
+				encoder.encode(fieldsSubscriptionAppStoreReviewScreenshots, forKey: "fields[subscriptionAppStoreReviewScreenshots]")
+				encoder.encode(fieldsSubscriptions, forKey: "fields[subscriptions]")
+				encoder.encode(include, forKey: "include")
+				return encoder.items
+			}
 		}
 
 		public func patch(_ body: AppStoreConnect_Swift_SDK.SubscriptionAppStoreReviewScreenshotUpdateRequest) -> Request<AppStoreConnect_Swift_SDK.SubscriptionAppStoreReviewScreenshotResponse> {

@@ -19,6 +19,9 @@ extension APIEndpoint.V1.AppClipAdvancedExperiences {
 
 		public struct GetParameters {
 			public var fieldsAppClipAdvancedExperiences: [FieldsAppClipAdvancedExperiences]?
+			public var fieldsAppClips: [FieldsAppClips]?
+			public var fieldsAppClipAdvancedExperienceImages: [FieldsAppClipAdvancedExperienceImages]?
+			public var fieldsAppClipAdvancedExperienceLocalizations: [FieldsAppClipAdvancedExperienceLocalizations]?
 			public var include: [Include]?
 			public var limitLocalizations: Int?
 
@@ -37,14 +40,39 @@ extension APIEndpoint.V1.AppClipAdvancedExperiences {
 				case localizations
 			}
 
+			public enum FieldsAppClips: String, Codable, CaseIterable {
+				case bundleID = "bundleId"
+				case app
+				case appClipDefaultExperiences
+				case appClipAdvancedExperiences
+			}
+
+			public enum FieldsAppClipAdvancedExperienceImages: String, Codable, CaseIterable {
+				case fileSize
+				case fileName
+				case sourceFileChecksum
+				case imageAsset
+				case uploadOperations
+				case assetDeliveryState
+			}
+
+			public enum FieldsAppClipAdvancedExperienceLocalizations: String, Codable, CaseIterable {
+				case language
+				case title
+				case subtitle
+			}
+
 			public enum Include: String, Codable, CaseIterable {
 				case appClip
 				case headerImage
 				case localizations
 			}
 
-			public init(fieldsAppClipAdvancedExperiences: [FieldsAppClipAdvancedExperiences]? = nil, include: [Include]? = nil, limitLocalizations: Int? = nil) {
+			public init(fieldsAppClipAdvancedExperiences: [FieldsAppClipAdvancedExperiences]? = nil, fieldsAppClips: [FieldsAppClips]? = nil, fieldsAppClipAdvancedExperienceImages: [FieldsAppClipAdvancedExperienceImages]? = nil, fieldsAppClipAdvancedExperienceLocalizations: [FieldsAppClipAdvancedExperienceLocalizations]? = nil, include: [Include]? = nil, limitLocalizations: Int? = nil) {
 				self.fieldsAppClipAdvancedExperiences = fieldsAppClipAdvancedExperiences
+				self.fieldsAppClips = fieldsAppClips
+				self.fieldsAppClipAdvancedExperienceImages = fieldsAppClipAdvancedExperienceImages
+				self.fieldsAppClipAdvancedExperienceLocalizations = fieldsAppClipAdvancedExperienceLocalizations
 				self.include = include
 				self.limitLocalizations = limitLocalizations
 			}
@@ -52,6 +80,9 @@ extension APIEndpoint.V1.AppClipAdvancedExperiences {
 			public var asQuery: [(String, String?)] {
 				let encoder = URLQueryEncoder(explode: false)
 				encoder.encode(fieldsAppClipAdvancedExperiences, forKey: "fields[appClipAdvancedExperiences]")
+				encoder.encode(fieldsAppClips, forKey: "fields[appClips]")
+				encoder.encode(fieldsAppClipAdvancedExperienceImages, forKey: "fields[appClipAdvancedExperienceImages]")
+				encoder.encode(fieldsAppClipAdvancedExperienceLocalizations, forKey: "fields[appClipAdvancedExperienceLocalizations]")
 				encoder.encode(include, forKey: "include")
 				encoder.encode(limitLocalizations, forKey: "limit[localizations]")
 				return encoder.items

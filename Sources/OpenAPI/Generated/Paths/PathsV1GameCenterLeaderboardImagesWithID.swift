@@ -14,28 +14,52 @@ extension APIEndpoint.V1.GameCenterLeaderboardImages {
 		public let path: String
 
 		@available(*, deprecated, message: "Deprecated")
-		public func get(fieldsGameCenterLeaderboardImages: [FieldsGameCenterLeaderboardImages]? = nil, include: [Include]? = nil) -> Request<AppStoreConnect_Swift_SDK.GameCenterLeaderboardImageResponse> {
-			Request(path: path, method: "GET", query: makeGetQuery(fieldsGameCenterLeaderboardImages, include), id: "gameCenterLeaderboardImages_getInstance")
+		public func get(parameters: GetParameters? = nil) -> Request<AppStoreConnect_Swift_SDK.GameCenterLeaderboardImageResponse> {
+			Request(path: path, method: "GET", query: parameters?.asQuery, id: "gameCenterLeaderboardImages_getInstance")
 		}
 
-		private func makeGetQuery(_ fieldsGameCenterLeaderboardImages: [FieldsGameCenterLeaderboardImages]?, _ include: [Include]?) -> [(String, String?)] {
-			let encoder = URLQueryEncoder(explode: false)
-			encoder.encode(fieldsGameCenterLeaderboardImages, forKey: "fields[gameCenterLeaderboardImages]")
-			encoder.encode(include, forKey: "include")
-			return encoder.items
-		}
+		public struct GetParameters {
+			public var fieldsGameCenterLeaderboardImages: [FieldsGameCenterLeaderboardImages]?
+			public var fieldsGameCenterLeaderboardLocalizations: [FieldsGameCenterLeaderboardLocalizations]?
+			public var include: [Include]?
 
-		public enum FieldsGameCenterLeaderboardImages: String, Codable, CaseIterable {
-			case fileSize
-			case fileName
-			case imageAsset
-			case uploadOperations
-			case assetDeliveryState
-			case gameCenterLeaderboardLocalization
-		}
+			public enum FieldsGameCenterLeaderboardImages: String, Codable, CaseIterable {
+				case fileSize
+				case fileName
+				case imageAsset
+				case uploadOperations
+				case assetDeliveryState
+				case gameCenterLeaderboardLocalization
+			}
 
-		public enum Include: String, Codable, CaseIterable {
-			case gameCenterLeaderboardLocalization
+			public enum FieldsGameCenterLeaderboardLocalizations: String, Codable, CaseIterable {
+				case locale
+				case name
+				case formatterOverride
+				case formatterSuffix
+				case formatterSuffixSingular
+				case description
+				case gameCenterLeaderboard
+				case gameCenterLeaderboardImage
+			}
+
+			public enum Include: String, Codable, CaseIterable {
+				case gameCenterLeaderboardLocalization
+			}
+
+			public init(fieldsGameCenterLeaderboardImages: [FieldsGameCenterLeaderboardImages]? = nil, fieldsGameCenterLeaderboardLocalizations: [FieldsGameCenterLeaderboardLocalizations]? = nil, include: [Include]? = nil) {
+				self.fieldsGameCenterLeaderboardImages = fieldsGameCenterLeaderboardImages
+				self.fieldsGameCenterLeaderboardLocalizations = fieldsGameCenterLeaderboardLocalizations
+				self.include = include
+			}
+
+			public var asQuery: [(String, String?)] {
+				let encoder = URLQueryEncoder(explode: false)
+				encoder.encode(fieldsGameCenterLeaderboardImages, forKey: "fields[gameCenterLeaderboardImages]")
+				encoder.encode(fieldsGameCenterLeaderboardLocalizations, forKey: "fields[gameCenterLeaderboardLocalizations]")
+				encoder.encode(include, forKey: "include")
+				return encoder.items
+			}
 		}
 
 		@available(*, deprecated, message: "Deprecated")

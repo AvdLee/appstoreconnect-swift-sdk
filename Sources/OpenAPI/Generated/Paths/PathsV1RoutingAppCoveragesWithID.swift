@@ -13,28 +13,68 @@ extension APIEndpoint.V1.RoutingAppCoverages {
 		/// Path: `/v1/routingAppCoverages/{id}`
 		public let path: String
 
-		public func get(fieldsRoutingAppCoverages: [FieldsRoutingAppCoverages]? = nil, include: [Include]? = nil) -> Request<AppStoreConnect_Swift_SDK.RoutingAppCoverageResponse> {
-			Request(path: path, method: "GET", query: makeGetQuery(fieldsRoutingAppCoverages, include), id: "routingAppCoverages_getInstance")
+		public func get(parameters: GetParameters? = nil) -> Request<AppStoreConnect_Swift_SDK.RoutingAppCoverageResponse> {
+			Request(path: path, method: "GET", query: parameters?.asQuery, id: "routingAppCoverages_getInstance")
 		}
 
-		private func makeGetQuery(_ fieldsRoutingAppCoverages: [FieldsRoutingAppCoverages]?, _ include: [Include]?) -> [(String, String?)] {
-			let encoder = URLQueryEncoder(explode: false)
-			encoder.encode(fieldsRoutingAppCoverages, forKey: "fields[routingAppCoverages]")
-			encoder.encode(include, forKey: "include")
-			return encoder.items
-		}
+		public struct GetParameters {
+			public var fieldsRoutingAppCoverages: [FieldsRoutingAppCoverages]?
+			public var fieldsAppStoreVersions: [FieldsAppStoreVersions]?
+			public var include: [Include]?
 
-		public enum FieldsRoutingAppCoverages: String, Codable, CaseIterable {
-			case fileSize
-			case fileName
-			case sourceFileChecksum
-			case uploadOperations
-			case assetDeliveryState
-			case appStoreVersion
-		}
+			public enum FieldsRoutingAppCoverages: String, Codable, CaseIterable {
+				case fileSize
+				case fileName
+				case sourceFileChecksum
+				case uploadOperations
+				case assetDeliveryState
+				case appStoreVersion
+			}
 
-		public enum Include: String, Codable, CaseIterable {
-			case appStoreVersion
+			public enum FieldsAppStoreVersions: String, Codable, CaseIterable {
+				case platform
+				case versionString
+				case appStoreState
+				case appVersionState
+				case copyright
+				case reviewType
+				case releaseType
+				case earliestReleaseDate
+				case usesIdfa
+				case downloadable
+				case createdDate
+				case app
+				case appStoreVersionLocalizations
+				case build
+				case appStoreVersionPhasedRelease
+				case gameCenterAppVersion
+				case routingAppCoverage
+				case appStoreReviewDetail
+				case appStoreVersionSubmission
+				case appClipDefaultExperience
+				case appStoreVersionExperiments
+				case appStoreVersionExperimentsV2
+				case customerReviews
+				case alternativeDistributionPackage
+			}
+
+			public enum Include: String, Codable, CaseIterable {
+				case appStoreVersion
+			}
+
+			public init(fieldsRoutingAppCoverages: [FieldsRoutingAppCoverages]? = nil, fieldsAppStoreVersions: [FieldsAppStoreVersions]? = nil, include: [Include]? = nil) {
+				self.fieldsRoutingAppCoverages = fieldsRoutingAppCoverages
+				self.fieldsAppStoreVersions = fieldsAppStoreVersions
+				self.include = include
+			}
+
+			public var asQuery: [(String, String?)] {
+				let encoder = URLQueryEncoder(explode: false)
+				encoder.encode(fieldsRoutingAppCoverages, forKey: "fields[routingAppCoverages]")
+				encoder.encode(fieldsAppStoreVersions, forKey: "fields[appStoreVersions]")
+				encoder.encode(include, forKey: "include")
+				return encoder.items
+			}
 		}
 
 		public func patch(_ body: AppStoreConnect_Swift_SDK.RoutingAppCoverageUpdateRequest) -> Request<AppStoreConnect_Swift_SDK.RoutingAppCoverageResponse> {

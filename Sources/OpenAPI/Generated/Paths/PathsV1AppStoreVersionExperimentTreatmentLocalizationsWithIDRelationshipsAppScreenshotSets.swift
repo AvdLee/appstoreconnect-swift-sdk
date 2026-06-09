@@ -13,6 +13,7 @@ extension APIEndpoint.V1.AppStoreVersionExperimentTreatmentLocalizations.WithID.
 		/// Path: `/v1/appStoreVersionExperimentTreatmentLocalizations/{id}/relationships/appScreenshotSets`
 		public let path: String
 
+		@available(*, deprecated, message: "Deprecated")
 		public func get(limit: Int? = nil) -> Request<AppStoreConnect_Swift_SDK.AppStoreVersionExperimentTreatmentLocalizationAppScreenshotSetsLinkagesResponse> {
 			Request(path: path, method: "GET", query: makeGetQuery(limit), id: "appStoreVersionExperimentTreatmentLocalizations_appScreenshotSets_getToManyRelationship")
 		}

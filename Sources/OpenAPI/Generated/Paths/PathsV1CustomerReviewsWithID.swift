@@ -20,6 +20,7 @@ extension APIEndpoint.V1.CustomerReviews {
 		public struct GetParameters {
 			public var fieldsCustomerReviews: [FieldsCustomerReviews]?
 			public var fieldsCustomerReviewResponses: [FieldsCustomerReviewResponses]?
+			public var fieldsTerritories: [FieldsTerritories]?
 			public var include: [Include]?
 
 			public enum FieldsCustomerReviews: String, Codable, CaseIterable {
@@ -30,6 +31,7 @@ extension APIEndpoint.V1.CustomerReviews {
 				case createdDate
 				case territory
 				case response
+				case reviewTerritory
 			}
 
 			public enum FieldsCustomerReviewResponses: String, Codable, CaseIterable {
@@ -39,13 +41,19 @@ extension APIEndpoint.V1.CustomerReviews {
 				case review
 			}
 
-			public enum Include: String, Codable, CaseIterable {
-				case response
+			public enum FieldsTerritories: String, Codable, CaseIterable {
+				case currency
 			}
 
-			public init(fieldsCustomerReviews: [FieldsCustomerReviews]? = nil, fieldsCustomerReviewResponses: [FieldsCustomerReviewResponses]? = nil, include: [Include]? = nil) {
+			public enum Include: String, Codable, CaseIterable {
+				case response
+				case reviewTerritory
+			}
+
+			public init(fieldsCustomerReviews: [FieldsCustomerReviews]? = nil, fieldsCustomerReviewResponses: [FieldsCustomerReviewResponses]? = nil, fieldsTerritories: [FieldsTerritories]? = nil, include: [Include]? = nil) {
 				self.fieldsCustomerReviews = fieldsCustomerReviews
 				self.fieldsCustomerReviewResponses = fieldsCustomerReviewResponses
+				self.fieldsTerritories = fieldsTerritories
 				self.include = include
 			}
 
@@ -53,6 +61,7 @@ extension APIEndpoint.V1.CustomerReviews {
 				let encoder = URLQueryEncoder(explode: false)
 				encoder.encode(fieldsCustomerReviews, forKey: "fields[customerReviews]")
 				encoder.encode(fieldsCustomerReviewResponses, forKey: "fields[customerReviewResponses]")
+				encoder.encode(fieldsTerritories, forKey: "fields[territories]")
 				encoder.encode(include, forKey: "include")
 				return encoder.items
 			}

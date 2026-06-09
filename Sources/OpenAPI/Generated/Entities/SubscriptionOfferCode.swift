@@ -26,8 +26,9 @@ public struct SubscriptionOfferCode: Codable, Identifiable {
 		public var sandboxCodeCount: Int?
 		public var isActive: Bool?
 		public var isAutoRenewEnabled: Bool?
+		public var targetSubscriptionPlanType: SubscriptionPlanType?
 
-		public init(name: String? = nil, customerEligibilities: [SubscriptionCustomerEligibility]? = nil, offerEligibility: SubscriptionOfferEligibility? = nil, duration: SubscriptionOfferDuration? = nil, offerMode: SubscriptionOfferMode? = nil, numberOfPeriods: Int? = nil, totalNumberOfCodes: Int? = nil, productionCodeCount: Int? = nil, sandboxCodeCount: Int? = nil, isActive: Bool? = nil, isAutoRenewEnabled: Bool? = nil) {
+		public init(name: String? = nil, customerEligibilities: [SubscriptionCustomerEligibility]? = nil, offerEligibility: SubscriptionOfferEligibility? = nil, duration: SubscriptionOfferDuration? = nil, offerMode: SubscriptionOfferMode? = nil, numberOfPeriods: Int? = nil, totalNumberOfCodes: Int? = nil, productionCodeCount: Int? = nil, sandboxCodeCount: Int? = nil, isActive: Bool? = nil, isAutoRenewEnabled: Bool? = nil, targetSubscriptionPlanType: SubscriptionPlanType? = nil) {
 			self.name = name
 			self.customerEligibilities = customerEligibilities
 			self.offerEligibility = offerEligibility
@@ -39,6 +40,7 @@ public struct SubscriptionOfferCode: Codable, Identifiable {
 			self.sandboxCodeCount = sandboxCodeCount
 			self.isActive = isActive
 			self.isAutoRenewEnabled = isAutoRenewEnabled
+			self.targetSubscriptionPlanType = targetSubscriptionPlanType
 		}
 
 		public init(from decoder: Decoder) throws {
@@ -54,6 +56,7 @@ public struct SubscriptionOfferCode: Codable, Identifiable {
 			self.sandboxCodeCount = try values.decodeIfPresent(Int.self, forKey: "sandboxCodeCount")
 			self.isActive = try values.decodeIfPresent(Bool.self, forKey: "active")
 			self.isAutoRenewEnabled = try values.decodeIfPresent(Bool.self, forKey: "autoRenewEnabled")
+			self.targetSubscriptionPlanType = try values.decodeIfPresent(SubscriptionPlanType.self, forKey: "targetSubscriptionPlanType")
 		}
 
 		public func encode(to encoder: Encoder) throws {
@@ -69,6 +72,7 @@ public struct SubscriptionOfferCode: Codable, Identifiable {
 			try values.encodeIfPresent(sandboxCodeCount, forKey: "sandboxCodeCount")
 			try values.encodeIfPresent(isActive, forKey: "active")
 			try values.encodeIfPresent(isAutoRenewEnabled, forKey: "autoRenewEnabled")
+			try values.encodeIfPresent(targetSubscriptionPlanType, forKey: "targetSubscriptionPlanType")
 		}
 	}
 

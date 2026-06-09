@@ -19,6 +19,7 @@ extension APIEndpoint.V1.BetaAppClipInvocations {
 
 		public struct GetParameters {
 			public var fieldsBetaAppClipInvocations: [FieldsBetaAppClipInvocations]?
+			public var fieldsBetaAppClipInvocationLocalizations: [FieldsBetaAppClipInvocationLocalizations]?
 			public var include: [Include]?
 			public var limitBetaAppClipInvocationLocalizations: Int?
 
@@ -27,12 +28,18 @@ extension APIEndpoint.V1.BetaAppClipInvocations {
 				case betaAppClipInvocationLocalizations
 			}
 
+			public enum FieldsBetaAppClipInvocationLocalizations: String, Codable, CaseIterable {
+				case title
+				case locale
+			}
+
 			public enum Include: String, Codable, CaseIterable {
 				case betaAppClipInvocationLocalizations
 			}
 
-			public init(fieldsBetaAppClipInvocations: [FieldsBetaAppClipInvocations]? = nil, include: [Include]? = nil, limitBetaAppClipInvocationLocalizations: Int? = nil) {
+			public init(fieldsBetaAppClipInvocations: [FieldsBetaAppClipInvocations]? = nil, fieldsBetaAppClipInvocationLocalizations: [FieldsBetaAppClipInvocationLocalizations]? = nil, include: [Include]? = nil, limitBetaAppClipInvocationLocalizations: Int? = nil) {
 				self.fieldsBetaAppClipInvocations = fieldsBetaAppClipInvocations
+				self.fieldsBetaAppClipInvocationLocalizations = fieldsBetaAppClipInvocationLocalizations
 				self.include = include
 				self.limitBetaAppClipInvocationLocalizations = limitBetaAppClipInvocationLocalizations
 			}
@@ -40,6 +47,7 @@ extension APIEndpoint.V1.BetaAppClipInvocations {
 			public var asQuery: [(String, String?)] {
 				let encoder = URLQueryEncoder(explode: false)
 				encoder.encode(fieldsBetaAppClipInvocations, forKey: "fields[betaAppClipInvocations]")
+				encoder.encode(fieldsBetaAppClipInvocationLocalizations, forKey: "fields[betaAppClipInvocationLocalizations]")
 				encoder.encode(include, forKey: "include")
 				encoder.encode(limitBetaAppClipInvocationLocalizations, forKey: "limit[betaAppClipInvocationLocalizations]")
 				return encoder.items

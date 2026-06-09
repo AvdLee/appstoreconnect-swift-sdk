@@ -3,6 +3,7 @@
 
 import Foundation
 
+@available(*, deprecated, message: "Deprecated")
 public struct AppEventScreenshotUpdateRequest: Codable {
 	public var data: Data
 

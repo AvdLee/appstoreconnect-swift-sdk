@@ -13,34 +13,124 @@ extension APIEndpoint.V1.BackgroundAssets {
 		/// Path: `/v1/backgroundAssets/{id}`
 		public let path: String
 
-		public func get(fieldsBackgroundAssets: [FieldsBackgroundAssets]? = nil, include: [Include]? = nil) -> Request<AppStoreConnect_Swift_SDK.BackgroundAssetResponse> {
-			Request(path: path, method: "GET", query: makeGetQuery(fieldsBackgroundAssets, include), id: "backgroundAssets_getInstance")
+		public func get(parameters: GetParameters? = nil) -> Request<AppStoreConnect_Swift_SDK.BackgroundAssetResponse> {
+			Request(path: path, method: "GET", query: parameters?.asQuery, id: "backgroundAssets_getInstance")
 		}
 
-		private func makeGetQuery(_ fieldsBackgroundAssets: [FieldsBackgroundAssets]?, _ include: [Include]?) -> [(String, String?)] {
-			let encoder = URLQueryEncoder(explode: false)
-			encoder.encode(fieldsBackgroundAssets, forKey: "fields[backgroundAssets]")
-			encoder.encode(include, forKey: "include")
-			return encoder.items
-		}
+		public struct GetParameters {
+			public var fieldsBackgroundAssets: [FieldsBackgroundAssets]?
+			public var fieldsApps: [FieldsApps]?
+			public var fieldsBackgroundAssetVersions: [FieldsBackgroundAssetVersions]?
+			public var include: [Include]?
 
-		public enum FieldsBackgroundAssets: String, Codable, CaseIterable {
-			case archived
-			case assetPackIdentifier
-			case createdDate
-			case usedBytes
-			case app
-			case versions
-			case appStoreVersion
-			case internalBetaVersion
-			case externalBetaVersion
-		}
+			public enum FieldsBackgroundAssets: String, Codable, CaseIterable {
+				case archived
+				case assetPackIdentifier
+				case createdDate
+				case usedBytes
+				case app
+				case versions
+				case appStoreVersion
+				case internalBetaVersion
+				case externalBetaVersion
+			}
 
-		public enum Include: String, Codable, CaseIterable {
-			case app
-			case appStoreVersion
-			case internalBetaVersion
-			case externalBetaVersion
+			public enum FieldsApps: String, Codable, CaseIterable {
+				case accessibilityURL = "accessibilityUrl"
+				case name
+				case bundleID = "bundleId"
+				case sku
+				case primaryLocale
+				case isOrEverWasMadeForKids
+				case subscriptionStatusURL = "subscriptionStatusUrl"
+				case subscriptionStatusURLVersion = "subscriptionStatusUrlVersion"
+				case subscriptionStatusURLForSandbox = "subscriptionStatusUrlForSandbox"
+				case subscriptionStatusURLVersionForSandbox = "subscriptionStatusUrlVersionForSandbox"
+				case contentRightsDeclaration
+				case streamlinedPurchasingEnabled
+				case accessibilityDeclarations
+				case appEncryptionDeclarations
+				case appStoreIcon
+				case ciProduct
+				case betaTesters
+				case betaGroups
+				case appStoreVersions
+				case appTags
+				case preReleaseVersions
+				case betaAppLocalizations
+				case builds
+				case betaLicenseAgreement
+				case betaAppReviewDetail
+				case appInfos
+				case appClips
+				case appPricePoints
+				case endUserLicenseAgreement
+				case appPriceSchedule
+				case appAvailabilityV2
+				case inAppPurchases
+				case subscriptionGroups
+				case gameCenterEnabledVersions
+				case perfPowerMetrics
+				case appCustomProductPages
+				case inAppPurchasesV2
+				case promotedPurchases
+				case appEvents
+				case reviewSubmissions
+				case subscriptionGracePeriod
+				case customerReviews
+				case customerReviewSummarizations
+				case gameCenterDetail
+				case appStoreVersionExperimentsV2
+				case alternativeDistributionKey
+				case analyticsReportRequests
+				case marketplaceSearchDetail
+				case buildUploads
+				case backgroundAssets
+				case betaFeedbackScreenshotSubmissions
+				case betaFeedbackCrashSubmissions
+				case searchKeywords
+				case webhooks
+				case androidToIosAppMappingDetails
+			}
+
+			public enum FieldsBackgroundAssetVersions: String, Codable, CaseIterable {
+				case createdDate
+				case platforms
+				case state
+				case stateDetails
+				case version
+				case locale
+				case backgroundAsset
+				case internalBetaRelease
+				case externalBetaRelease
+				case appStoreRelease
+				case assetFile
+				case manifestFile
+				case backgroundAssetUploadFiles
+			}
+
+			public enum Include: String, Codable, CaseIterable {
+				case app
+				case appStoreVersion
+				case internalBetaVersion
+				case externalBetaVersion
+			}
+
+			public init(fieldsBackgroundAssets: [FieldsBackgroundAssets]? = nil, fieldsApps: [FieldsApps]? = nil, fieldsBackgroundAssetVersions: [FieldsBackgroundAssetVersions]? = nil, include: [Include]? = nil) {
+				self.fieldsBackgroundAssets = fieldsBackgroundAssets
+				self.fieldsApps = fieldsApps
+				self.fieldsBackgroundAssetVersions = fieldsBackgroundAssetVersions
+				self.include = include
+			}
+
+			public var asQuery: [(String, String?)] {
+				let encoder = URLQueryEncoder(explode: false)
+				encoder.encode(fieldsBackgroundAssets, forKey: "fields[backgroundAssets]")
+				encoder.encode(fieldsApps, forKey: "fields[apps]")
+				encoder.encode(fieldsBackgroundAssetVersions, forKey: "fields[backgroundAssetVersions]")
+				encoder.encode(include, forKey: "include")
+				return encoder.items
+			}
 		}
 
 		public func patch(_ body: AppStoreConnect_Swift_SDK.BackgroundAssetUpdateRequest) -> Request<AppStoreConnect_Swift_SDK.BackgroundAssetResponse> {

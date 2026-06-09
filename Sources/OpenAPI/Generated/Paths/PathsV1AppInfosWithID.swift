@@ -19,6 +19,7 @@ extension APIEndpoint.V1.AppInfos {
 
 		public struct GetParameters {
 			public var fieldsAppInfos: [FieldsAppInfos]?
+			public var fieldsApps: [FieldsApps]?
 			public var fieldsAgeRatingDeclarations: [FieldsAgeRatingDeclarations]?
 			public var fieldsAppInfoLocalizations: [FieldsAppInfoLocalizations]?
 			public var fieldsAppCategories: [FieldsAppCategories]?
@@ -34,7 +35,6 @@ extension APIEndpoint.V1.AppInfos {
 				case brazilAgeRatingV2
 				case franceAgeRating
 				case koreaAgeRating
-				case kidsAgeBand
 				case app
 				case ageRatingDeclaration
 				case appInfoLocalizations
@@ -45,6 +45,64 @@ extension APIEndpoint.V1.AppInfos {
 				case secondarySubcategoryOne
 				case secondarySubcategoryTwo
 				case territoryAgeRatings
+			}
+
+			public enum FieldsApps: String, Codable, CaseIterable {
+				case accessibilityURL = "accessibilityUrl"
+				case name
+				case bundleID = "bundleId"
+				case sku
+				case primaryLocale
+				case isOrEverWasMadeForKids
+				case subscriptionStatusURL = "subscriptionStatusUrl"
+				case subscriptionStatusURLVersion = "subscriptionStatusUrlVersion"
+				case subscriptionStatusURLForSandbox = "subscriptionStatusUrlForSandbox"
+				case subscriptionStatusURLVersionForSandbox = "subscriptionStatusUrlVersionForSandbox"
+				case contentRightsDeclaration
+				case streamlinedPurchasingEnabled
+				case accessibilityDeclarations
+				case appEncryptionDeclarations
+				case appStoreIcon
+				case ciProduct
+				case betaTesters
+				case betaGroups
+				case appStoreVersions
+				case appTags
+				case preReleaseVersions
+				case betaAppLocalizations
+				case builds
+				case betaLicenseAgreement
+				case betaAppReviewDetail
+				case appInfos
+				case appClips
+				case appPricePoints
+				case endUserLicenseAgreement
+				case appPriceSchedule
+				case appAvailabilityV2
+				case inAppPurchases
+				case subscriptionGroups
+				case gameCenterEnabledVersions
+				case perfPowerMetrics
+				case appCustomProductPages
+				case inAppPurchasesV2
+				case promotedPurchases
+				case appEvents
+				case reviewSubmissions
+				case subscriptionGracePeriod
+				case customerReviews
+				case customerReviewSummarizations
+				case gameCenterDetail
+				case appStoreVersionExperimentsV2
+				case alternativeDistributionKey
+				case analyticsReportRequests
+				case marketplaceSearchDetail
+				case buildUploads
+				case backgroundAssets
+				case betaFeedbackScreenshotSubmissions
+				case betaFeedbackCrashSubmissions
+				case searchKeywords
+				case webhooks
+				case androidToIosAppMappingDetails
 			}
 
 			public enum FieldsAgeRatingDeclarations: String, Codable, CaseIterable {
@@ -105,8 +163,9 @@ extension APIEndpoint.V1.AppInfos {
 				case secondarySubcategoryTwo
 			}
 
-			public init(fieldsAppInfos: [FieldsAppInfos]? = nil, fieldsAgeRatingDeclarations: [FieldsAgeRatingDeclarations]? = nil, fieldsAppInfoLocalizations: [FieldsAppInfoLocalizations]? = nil, fieldsAppCategories: [FieldsAppCategories]? = nil, include: [Include]? = nil, limitAppInfoLocalizations: Int? = nil) {
+			public init(fieldsAppInfos: [FieldsAppInfos]? = nil, fieldsApps: [FieldsApps]? = nil, fieldsAgeRatingDeclarations: [FieldsAgeRatingDeclarations]? = nil, fieldsAppInfoLocalizations: [FieldsAppInfoLocalizations]? = nil, fieldsAppCategories: [FieldsAppCategories]? = nil, include: [Include]? = nil, limitAppInfoLocalizations: Int? = nil) {
 				self.fieldsAppInfos = fieldsAppInfos
+				self.fieldsApps = fieldsApps
 				self.fieldsAgeRatingDeclarations = fieldsAgeRatingDeclarations
 				self.fieldsAppInfoLocalizations = fieldsAppInfoLocalizations
 				self.fieldsAppCategories = fieldsAppCategories
@@ -117,6 +176,7 @@ extension APIEndpoint.V1.AppInfos {
 			public var asQuery: [(String, String?)] {
 				let encoder = URLQueryEncoder(explode: false)
 				encoder.encode(fieldsAppInfos, forKey: "fields[appInfos]")
+				encoder.encode(fieldsApps, forKey: "fields[apps]")
 				encoder.encode(fieldsAgeRatingDeclarations, forKey: "fields[ageRatingDeclarations]")
 				encoder.encode(fieldsAppInfoLocalizations, forKey: "fields[appInfoLocalizations]")
 				encoder.encode(fieldsAppCategories, forKey: "fields[appCategories]")

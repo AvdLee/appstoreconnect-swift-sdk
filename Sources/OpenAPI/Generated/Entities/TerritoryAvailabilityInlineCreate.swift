@@ -14,36 +14,36 @@ public struct TerritoryAvailabilityInlineCreate: Codable, Identifiable {
 	}
 
 	public struct Attributes: Codable {
-		public var isAvailable: Bool
-		public var isPreOrderEnabled: Bool?
+		public var isAvailable: Bool?
 		public var releaseDate: String?
+		public var isPreOrderEnabled: Bool?
 
-		public init(isAvailable: Bool, isPreOrderEnabled: Bool? = nil, releaseDate: String? = nil) {
+		public init(isAvailable: Bool? = nil, releaseDate: String? = nil, isPreOrderEnabled: Bool? = nil) {
 			self.isAvailable = isAvailable
-			self.isPreOrderEnabled = isPreOrderEnabled
 			self.releaseDate = releaseDate
+			self.isPreOrderEnabled = isPreOrderEnabled
 		}
 
 		public init(from decoder: Decoder) throws {
 			let values = try decoder.container(keyedBy: StringCodingKey.self)
-			self.isAvailable = try values.decode(Bool.self, forKey: "available")
-			self.isPreOrderEnabled = try values.decodeIfPresent(Bool.self, forKey: "preOrderEnabled")
+			self.isAvailable = try values.decodeIfPresent(Bool.self, forKey: "available")
 			self.releaseDate = try values.decodeIfPresent(String.self, forKey: "releaseDate")
+			self.isPreOrderEnabled = try values.decodeIfPresent(Bool.self, forKey: "preOrderEnabled")
 		}
 
 		public func encode(to encoder: Encoder) throws {
 			var values = encoder.container(keyedBy: StringCodingKey.self)
-			try values.encode(isAvailable, forKey: "available")
-			try values.encodeIfPresent(isPreOrderEnabled, forKey: "preOrderEnabled")
+			try values.encodeIfPresent(isAvailable, forKey: "available")
 			try values.encodeIfPresent(releaseDate, forKey: "releaseDate")
+			try values.encodeIfPresent(isPreOrderEnabled, forKey: "preOrderEnabled")
 		}
 	}
 
 	public struct Relationships: Codable {
-		public var territory: Territory
+		public var territory: Territory?
 
 		public struct Territory: Codable {
-			public var data: Data
+			public var data: Data?
 
 			public struct Data: Codable, Identifiable {
 				public var type: `Type`
@@ -71,33 +71,33 @@ public struct TerritoryAvailabilityInlineCreate: Codable, Identifiable {
 				}
 			}
 
-			public init(data: Data) {
+			public init(data: Data? = nil) {
 				self.data = data
 			}
 
 			public init(from decoder: Decoder) throws {
 				let values = try decoder.container(keyedBy: StringCodingKey.self)
-				self.data = try values.decode(Data.self, forKey: "data")
+				self.data = try values.decodeIfPresent(Data.self, forKey: "data")
 			}
 
 			public func encode(to encoder: Encoder) throws {
 				var values = encoder.container(keyedBy: StringCodingKey.self)
-				try values.encode(data, forKey: "data")
+				try values.encodeIfPresent(data, forKey: "data")
 			}
 		}
 
-		public init(territory: Territory) {
+		public init(territory: Territory? = nil) {
 			self.territory = territory
 		}
 
 		public init(from decoder: Decoder) throws {
 			let values = try decoder.container(keyedBy: StringCodingKey.self)
-			self.territory = try values.decode(Territory.self, forKey: "territory")
+			self.territory = try values.decodeIfPresent(Territory.self, forKey: "territory")
 		}
 
 		public func encode(to encoder: Encoder) throws {
 			var values = encoder.container(keyedBy: StringCodingKey.self)
-			try values.encode(territory, forKey: "territory")
+			try values.encodeIfPresent(territory, forKey: "territory")
 		}
 	}
 

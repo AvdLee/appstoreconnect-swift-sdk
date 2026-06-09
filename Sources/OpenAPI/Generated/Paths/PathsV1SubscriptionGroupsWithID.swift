@@ -51,6 +51,7 @@ extension APIEndpoint.V1.SubscriptionGroups {
 				case subscriptionAvailability
 				case winBackOffers
 				case images
+				case planAvailabilities
 			}
 
 			public enum FieldsSubscriptionGroupLocalizations: String, Codable, CaseIterable {

@@ -13,30 +13,66 @@ extension APIEndpoint.V1.SubscriptionImages {
 		/// Path: `/v1/subscriptionImages/{id}`
 		public let path: String
 
-		public func get(fieldsSubscriptionImages: [FieldsSubscriptionImages]? = nil, include: [Include]? = nil) -> Request<AppStoreConnect_Swift_SDK.SubscriptionImageResponse> {
-			Request(path: path, method: "GET", query: makeGetQuery(fieldsSubscriptionImages, include), id: "subscriptionImages_getInstance")
+		public func get(parameters: GetParameters? = nil) -> Request<AppStoreConnect_Swift_SDK.SubscriptionImageResponse> {
+			Request(path: path, method: "GET", query: parameters?.asQuery, id: "subscriptionImages_getInstance")
 		}
 
-		private func makeGetQuery(_ fieldsSubscriptionImages: [FieldsSubscriptionImages]?, _ include: [Include]?) -> [(String, String?)] {
-			let encoder = URLQueryEncoder(explode: false)
-			encoder.encode(fieldsSubscriptionImages, forKey: "fields[subscriptionImages]")
-			encoder.encode(include, forKey: "include")
-			return encoder.items
-		}
+		public struct GetParameters {
+			public var fieldsSubscriptionImages: [FieldsSubscriptionImages]?
+			public var fieldsSubscriptions: [FieldsSubscriptions]?
+			public var include: [Include]?
 
-		public enum FieldsSubscriptionImages: String, Codable, CaseIterable {
-			case fileSize
-			case fileName
-			case sourceFileChecksum
-			case assetToken
-			case imageAsset
-			case uploadOperations
-			case state
-			case subscription
-		}
+			public enum FieldsSubscriptionImages: String, Codable, CaseIterable {
+				case fileSize
+				case fileName
+				case sourceFileChecksum
+				case assetToken
+				case imageAsset
+				case uploadOperations
+				case state
+				case subscription
+			}
 
-		public enum Include: String, Codable, CaseIterable {
-			case subscription
+			public enum FieldsSubscriptions: String, Codable, CaseIterable {
+				case name
+				case productID = "productId"
+				case familySharable
+				case state
+				case subscriptionPeriod
+				case reviewNote
+				case groupLevel
+				case subscriptionLocalizations
+				case appStoreReviewScreenshot
+				case group
+				case introductoryOffers
+				case promotionalOffers
+				case offerCodes
+				case prices
+				case pricePoints
+				case promotedPurchase
+				case subscriptionAvailability
+				case winBackOffers
+				case images
+				case planAvailabilities
+			}
+
+			public enum Include: String, Codable, CaseIterable {
+				case subscription
+			}
+
+			public init(fieldsSubscriptionImages: [FieldsSubscriptionImages]? = nil, fieldsSubscriptions: [FieldsSubscriptions]? = nil, include: [Include]? = nil) {
+				self.fieldsSubscriptionImages = fieldsSubscriptionImages
+				self.fieldsSubscriptions = fieldsSubscriptions
+				self.include = include
+			}
+
+			public var asQuery: [(String, String?)] {
+				let encoder = URLQueryEncoder(explode: false)
+				encoder.encode(fieldsSubscriptionImages, forKey: "fields[subscriptionImages]")
+				encoder.encode(fieldsSubscriptions, forKey: "fields[subscriptions]")
+				encoder.encode(include, forKey: "include")
+				return encoder.items
+			}
 		}
 
 		public func patch(_ body: AppStoreConnect_Swift_SDK.SubscriptionImageUpdateRequest) -> Request<AppStoreConnect_Swift_SDK.SubscriptionImageResponse> {

@@ -13,12 +13,16 @@ extension APIEndpoint.V1.AppScreenshotSets {
 		/// Path: `/v1/appScreenshotSets/{id}`
 		public let path: String
 
+		@available(*, deprecated, message: "Deprecated")
 		public func get(parameters: GetParameters? = nil) -> Request<AppStoreConnect_Swift_SDK.AppScreenshotSetResponse> {
 			Request(path: path, method: "GET", query: parameters?.asQuery, id: "appScreenshotSets_getInstance")
 		}
 
 		public struct GetParameters {
 			public var fieldsAppScreenshotSets: [FieldsAppScreenshotSets]?
+			public var fieldsAppStoreVersionLocalizations: [FieldsAppStoreVersionLocalizations]?
+			public var fieldsAppCustomProductPageLocalizations: [FieldsAppCustomProductPageLocalizations]?
+			public var fieldsAppStoreVersionExperimentTreatmentLocalizations: [FieldsAppStoreVersionExperimentTreatmentLocalizations]?
 			public var fieldsAppScreenshots: [FieldsAppScreenshots]?
 			public var include: [Include]?
 			public var limitAppScreenshots: Int?
@@ -29,6 +33,36 @@ extension APIEndpoint.V1.AppScreenshotSets {
 				case appCustomProductPageLocalization
 				case appStoreVersionExperimentTreatmentLocalization
 				case appScreenshots
+			}
+
+			public enum FieldsAppStoreVersionLocalizations: String, Codable, CaseIterable {
+				case description
+				case locale
+				case keywords
+				case marketingURL = "marketingUrl"
+				case promotionalText
+				case supportURL = "supportUrl"
+				case whatsNew
+				case appStoreVersion
+				case appScreenshotSets
+				case appPreviewSets
+				case searchKeywords
+			}
+
+			public enum FieldsAppCustomProductPageLocalizations: String, Codable, CaseIterable {
+				case locale
+				case promotionalText
+				case appCustomProductPageVersion
+				case appScreenshotSets
+				case appPreviewSets
+				case searchKeywords
+			}
+
+			public enum FieldsAppStoreVersionExperimentTreatmentLocalizations: String, Codable, CaseIterable {
+				case locale
+				case appStoreVersionExperimentTreatment
+				case appScreenshotSets
+				case appPreviewSets
 			}
 
 			public enum FieldsAppScreenshots: String, Codable, CaseIterable {
@@ -50,8 +84,11 @@ extension APIEndpoint.V1.AppScreenshotSets {
 				case appScreenshots
 			}
 
-			public init(fieldsAppScreenshotSets: [FieldsAppScreenshotSets]? = nil, fieldsAppScreenshots: [FieldsAppScreenshots]? = nil, include: [Include]? = nil, limitAppScreenshots: Int? = nil) {
+			public init(fieldsAppScreenshotSets: [FieldsAppScreenshotSets]? = nil, fieldsAppStoreVersionLocalizations: [FieldsAppStoreVersionLocalizations]? = nil, fieldsAppCustomProductPageLocalizations: [FieldsAppCustomProductPageLocalizations]? = nil, fieldsAppStoreVersionExperimentTreatmentLocalizations: [FieldsAppStoreVersionExperimentTreatmentLocalizations]? = nil, fieldsAppScreenshots: [FieldsAppScreenshots]? = nil, include: [Include]? = nil, limitAppScreenshots: Int? = nil) {
 				self.fieldsAppScreenshotSets = fieldsAppScreenshotSets
+				self.fieldsAppStoreVersionLocalizations = fieldsAppStoreVersionLocalizations
+				self.fieldsAppCustomProductPageLocalizations = fieldsAppCustomProductPageLocalizations
+				self.fieldsAppStoreVersionExperimentTreatmentLocalizations = fieldsAppStoreVersionExperimentTreatmentLocalizations
 				self.fieldsAppScreenshots = fieldsAppScreenshots
 				self.include = include
 				self.limitAppScreenshots = limitAppScreenshots
@@ -60,6 +97,9 @@ extension APIEndpoint.V1.AppScreenshotSets {
 			public var asQuery: [(String, String?)] {
 				let encoder = URLQueryEncoder(explode: false)
 				encoder.encode(fieldsAppScreenshotSets, forKey: "fields[appScreenshotSets]")
+				encoder.encode(fieldsAppStoreVersionLocalizations, forKey: "fields[appStoreVersionLocalizations]")
+				encoder.encode(fieldsAppCustomProductPageLocalizations, forKey: "fields[appCustomProductPageLocalizations]")
+				encoder.encode(fieldsAppStoreVersionExperimentTreatmentLocalizations, forKey: "fields[appStoreVersionExperimentTreatmentLocalizations]")
 				encoder.encode(fieldsAppScreenshots, forKey: "fields[appScreenshots]")
 				encoder.encode(include, forKey: "include")
 				encoder.encode(limitAppScreenshots, forKey: "limit[appScreenshots]")
@@ -67,6 +107,7 @@ extension APIEndpoint.V1.AppScreenshotSets {
 			}
 		}
 
+		@available(*, deprecated, message: "Deprecated")
 		public var delete: Request<Void> {
 			Request(path: path, method: "DELETE", id: "appScreenshotSets_deleteInstance")
 		}

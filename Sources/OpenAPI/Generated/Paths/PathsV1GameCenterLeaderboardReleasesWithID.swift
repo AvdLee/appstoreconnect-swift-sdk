@@ -14,26 +14,92 @@ extension APIEndpoint.V1.GameCenterLeaderboardReleases {
 		public let path: String
 
 		@available(*, deprecated, message: "Deprecated")
-		public func get(fieldsGameCenterLeaderboardReleases: [FieldsGameCenterLeaderboardReleases]? = nil, include: [Include]? = nil) -> Request<AppStoreConnect_Swift_SDK.GameCenterLeaderboardReleaseResponse> {
-			Request(path: path, method: "GET", query: makeGetQuery(fieldsGameCenterLeaderboardReleases, include), id: "gameCenterLeaderboardReleases_getInstance")
+		public func get(parameters: GetParameters? = nil) -> Request<AppStoreConnect_Swift_SDK.GameCenterLeaderboardReleaseResponse> {
+			Request(path: path, method: "GET", query: parameters?.asQuery, id: "gameCenterLeaderboardReleases_getInstance")
 		}
 
-		private func makeGetQuery(_ fieldsGameCenterLeaderboardReleases: [FieldsGameCenterLeaderboardReleases]?, _ include: [Include]?) -> [(String, String?)] {
-			let encoder = URLQueryEncoder(explode: false)
-			encoder.encode(fieldsGameCenterLeaderboardReleases, forKey: "fields[gameCenterLeaderboardReleases]")
-			encoder.encode(include, forKey: "include")
-			return encoder.items
-		}
+		public struct GetParameters {
+			public var fieldsGameCenterLeaderboardReleases: [FieldsGameCenterLeaderboardReleases]?
+			public var fieldsGameCenterDetails: [FieldsGameCenterDetails]?
+			public var fieldsGameCenterLeaderboards: [FieldsGameCenterLeaderboards]?
+			public var include: [Include]?
 
-		public enum FieldsGameCenterLeaderboardReleases: String, Codable, CaseIterable {
-			case live
-			case gameCenterDetail
-			case gameCenterLeaderboard
-		}
+			public enum FieldsGameCenterLeaderboardReleases: String, Codable, CaseIterable {
+				case live
+				case gameCenterDetail
+				case gameCenterLeaderboard
+			}
 
-		public enum Include: String, Codable, CaseIterable {
-			case gameCenterDetail
-			case gameCenterLeaderboard
+			public enum FieldsGameCenterDetails: String, Codable, CaseIterable {
+				case arcadeEnabled
+				case challengeEnabled
+				case app
+				case gameCenterAppVersions
+				case gameCenterGroup
+				case gameCenterLeaderboards
+				case gameCenterLeaderboardsV2
+				case gameCenterLeaderboardSets
+				case gameCenterLeaderboardSetsV2
+				case gameCenterAchievements
+				case gameCenterAchievementsV2
+				case gameCenterActivities
+				case gameCenterChallenges
+				case defaultLeaderboard
+				case defaultLeaderboardV2
+				case defaultGroupLeaderboard
+				case defaultGroupLeaderboardV2
+				case achievementReleases
+				case activityReleases
+				case challengeReleases
+				case leaderboardReleases
+				case leaderboardSetReleases
+				case challengesMinimumPlatformVersions
+			}
+
+			public enum FieldsGameCenterLeaderboards: String, Codable, CaseIterable {
+				case defaultFormatter
+				case referenceName
+				case vendorIdentifier
+				case submissionType
+				case scoreSortType
+				case scoreRangeStart
+				case scoreRangeEnd
+				case recurrenceStartDate
+				case recurrenceDuration
+				case recurrenceRule
+				case archived
+				case activityProperties
+				case visibility
+				case gameCenterDetail
+				case gameCenterGroup
+				case groupLeaderboard
+				case gameCenterLeaderboardSets
+				case localizations
+				case releases
+				case activity
+				case challenge
+			}
+
+			public enum Include: String, Codable, CaseIterable {
+				case gameCenterDetail
+				case gameCenterLeaderboard
+			}
+
+			public init(fieldsGameCenterLeaderboardReleases: [FieldsGameCenterLeaderboardReleases]? = nil, fieldsGameCenterDetails: [FieldsGameCenterDetails]? = nil, fieldsGameCenterLeaderboards: [FieldsGameCenterLeaderboards]? = nil, include: [Include]? = nil) {
+				self.fieldsGameCenterLeaderboardReleases = fieldsGameCenterLeaderboardReleases
+				self.fieldsGameCenterDetails = fieldsGameCenterDetails
+				self.fieldsGameCenterLeaderboards = fieldsGameCenterLeaderboards
+				self.include = include
+			}
+
+			public var asQuery: [(String, String?)] {
+				let encoder = URLQueryEncoder(explode: false)
+				encoder.encode(fieldsGameCenterLeaderboardReleases, forKey: "fields[gameCenterLeaderboardReleases]")
+				encoder.encode(fieldsGameCenterDetails, forKey: "fields[gameCenterDetails]")
+				encoder.encode(fieldsGameCenterLeaderboards, forKey: "fields[gameCenterLeaderboards]")
+				encoder.encode(include, forKey: "include")
+				return encoder.items
+			}
 		}
 
 		@available(*, deprecated, message: "Deprecated")

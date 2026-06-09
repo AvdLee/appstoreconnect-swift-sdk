@@ -19,6 +19,7 @@ extension APIEndpoint.V1.EndUserLicenseAgreements {
 
 		public struct GetParameters {
 			public var fieldsEndUserLicenseAgreements: [FieldsEndUserLicenseAgreements]?
+			public var fieldsApps: [FieldsApps]?
 			public var fieldsTerritories: [FieldsTerritories]?
 			public var include: [Include]?
 			public var limitTerritories: Int?
@@ -27,6 +28,64 @@ extension APIEndpoint.V1.EndUserLicenseAgreements {
 				case agreementText
 				case app
 				case territories
+			}
+
+			public enum FieldsApps: String, Codable, CaseIterable {
+				case accessibilityURL = "accessibilityUrl"
+				case name
+				case bundleID = "bundleId"
+				case sku
+				case primaryLocale
+				case isOrEverWasMadeForKids
+				case subscriptionStatusURL = "subscriptionStatusUrl"
+				case subscriptionStatusURLVersion = "subscriptionStatusUrlVersion"
+				case subscriptionStatusURLForSandbox = "subscriptionStatusUrlForSandbox"
+				case subscriptionStatusURLVersionForSandbox = "subscriptionStatusUrlVersionForSandbox"
+				case contentRightsDeclaration
+				case streamlinedPurchasingEnabled
+				case accessibilityDeclarations
+				case appEncryptionDeclarations
+				case appStoreIcon
+				case ciProduct
+				case betaTesters
+				case betaGroups
+				case appStoreVersions
+				case appTags
+				case preReleaseVersions
+				case betaAppLocalizations
+				case builds
+				case betaLicenseAgreement
+				case betaAppReviewDetail
+				case appInfos
+				case appClips
+				case appPricePoints
+				case endUserLicenseAgreement
+				case appPriceSchedule
+				case appAvailabilityV2
+				case inAppPurchases
+				case subscriptionGroups
+				case gameCenterEnabledVersions
+				case perfPowerMetrics
+				case appCustomProductPages
+				case inAppPurchasesV2
+				case promotedPurchases
+				case appEvents
+				case reviewSubmissions
+				case subscriptionGracePeriod
+				case customerReviews
+				case customerReviewSummarizations
+				case gameCenterDetail
+				case appStoreVersionExperimentsV2
+				case alternativeDistributionKey
+				case analyticsReportRequests
+				case marketplaceSearchDetail
+				case buildUploads
+				case backgroundAssets
+				case betaFeedbackScreenshotSubmissions
+				case betaFeedbackCrashSubmissions
+				case searchKeywords
+				case webhooks
+				case androidToIosAppMappingDetails
 			}
 
 			public enum FieldsTerritories: String, Codable, CaseIterable {
@@ -38,8 +97,9 @@ extension APIEndpoint.V1.EndUserLicenseAgreements {
 				case territories
 			}
 
-			public init(fieldsEndUserLicenseAgreements: [FieldsEndUserLicenseAgreements]? = nil, fieldsTerritories: [FieldsTerritories]? = nil, include: [Include]? = nil, limitTerritories: Int? = nil) {
+			public init(fieldsEndUserLicenseAgreements: [FieldsEndUserLicenseAgreements]? = nil, fieldsApps: [FieldsApps]? = nil, fieldsTerritories: [FieldsTerritories]? = nil, include: [Include]? = nil, limitTerritories: Int? = nil) {
 				self.fieldsEndUserLicenseAgreements = fieldsEndUserLicenseAgreements
+				self.fieldsApps = fieldsApps
 				self.fieldsTerritories = fieldsTerritories
 				self.include = include
 				self.limitTerritories = limitTerritories
@@ -48,6 +108,7 @@ extension APIEndpoint.V1.EndUserLicenseAgreements {
 			public var asQuery: [(String, String?)] {
 				let encoder = URLQueryEncoder(explode: false)
 				encoder.encode(fieldsEndUserLicenseAgreements, forKey: "fields[endUserLicenseAgreements]")
+				encoder.encode(fieldsApps, forKey: "fields[apps]")
 				encoder.encode(fieldsTerritories, forKey: "fields[territories]")
 				encoder.encode(include, forKey: "include")
 				encoder.encode(limitTerritories, forKey: "limit[territories]")

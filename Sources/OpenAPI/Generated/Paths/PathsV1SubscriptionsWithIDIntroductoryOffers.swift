@@ -32,6 +32,7 @@ extension APIEndpoint.V1.Subscriptions.WithID {
 				case duration
 				case offerMode
 				case numberOfPeriods
+				case targetSubscriptionPlanType
 				case subscription
 				case territory
 				case subscriptionPricePoint
@@ -57,6 +58,7 @@ extension APIEndpoint.V1.Subscriptions.WithID {
 				case subscriptionAvailability
 				case winBackOffers
 				case images
+				case planAvailabilities
 			}
 
 			public enum FieldsTerritories: String, Codable, CaseIterable {

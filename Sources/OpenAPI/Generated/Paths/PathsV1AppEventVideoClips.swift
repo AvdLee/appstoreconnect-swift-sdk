@@ -13,6 +13,7 @@ extension APIEndpoint.V1 {
 		/// Path: `/v1/appEventVideoClips`
 		public let path: String
 
+		@available(*, deprecated, message: "Deprecated")
 		public func post(_ body: AppStoreConnect_Swift_SDK.AppEventVideoClipCreateRequest) -> Request<AppStoreConnect_Swift_SDK.AppEventVideoClipResponse> {
 			Request(path: path, method: "POST", body: body, id: "appEventVideoClips_createInstance")
 		}

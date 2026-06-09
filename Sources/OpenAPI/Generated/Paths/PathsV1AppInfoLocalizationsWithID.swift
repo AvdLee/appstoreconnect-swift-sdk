@@ -13,29 +13,63 @@ extension APIEndpoint.V1.AppInfoLocalizations {
 		/// Path: `/v1/appInfoLocalizations/{id}`
 		public let path: String
 
-		public func get(fieldsAppInfoLocalizations: [FieldsAppInfoLocalizations]? = nil, include: [Include]? = nil) -> Request<AppStoreConnect_Swift_SDK.AppInfoLocalizationResponse> {
-			Request(path: path, method: "GET", query: makeGetQuery(fieldsAppInfoLocalizations, include), id: "appInfoLocalizations_getInstance")
+		public func get(parameters: GetParameters? = nil) -> Request<AppStoreConnect_Swift_SDK.AppInfoLocalizationResponse> {
+			Request(path: path, method: "GET", query: parameters?.asQuery, id: "appInfoLocalizations_getInstance")
 		}
 
-		private func makeGetQuery(_ fieldsAppInfoLocalizations: [FieldsAppInfoLocalizations]?, _ include: [Include]?) -> [(String, String?)] {
-			let encoder = URLQueryEncoder(explode: false)
-			encoder.encode(fieldsAppInfoLocalizations, forKey: "fields[appInfoLocalizations]")
-			encoder.encode(include, forKey: "include")
-			return encoder.items
-		}
+		public struct GetParameters {
+			public var fieldsAppInfoLocalizations: [FieldsAppInfoLocalizations]?
+			public var fieldsAppInfos: [FieldsAppInfos]?
+			public var include: [Include]?
 
-		public enum FieldsAppInfoLocalizations: String, Codable, CaseIterable {
-			case locale
-			case name
-			case subtitle
-			case privacyPolicyURL = "privacyPolicyUrl"
-			case privacyChoicesURL = "privacyChoicesUrl"
-			case privacyPolicyText
-			case appInfo
-		}
+			public enum FieldsAppInfoLocalizations: String, Codable, CaseIterable {
+				case locale
+				case name
+				case subtitle
+				case privacyPolicyURL = "privacyPolicyUrl"
+				case privacyChoicesURL = "privacyChoicesUrl"
+				case privacyPolicyText
+				case appInfo
+			}
 
-		public enum Include: String, Codable, CaseIterable {
-			case appInfo
+			public enum FieldsAppInfos: String, Codable, CaseIterable {
+				case appStoreState
+				case state
+				case appStoreAgeRating
+				case australiaAgeRating
+				case brazilAgeRating
+				case brazilAgeRatingV2
+				case franceAgeRating
+				case koreaAgeRating
+				case app
+				case ageRatingDeclaration
+				case appInfoLocalizations
+				case primaryCategory
+				case primarySubcategoryOne
+				case primarySubcategoryTwo
+				case secondaryCategory
+				case secondarySubcategoryOne
+				case secondarySubcategoryTwo
+				case territoryAgeRatings
+			}
+
+			public enum Include: String, Codable, CaseIterable {
+				case appInfo
+			}
+
+			public init(fieldsAppInfoLocalizations: [FieldsAppInfoLocalizations]? = nil, fieldsAppInfos: [FieldsAppInfos]? = nil, include: [Include]? = nil) {
+				self.fieldsAppInfoLocalizations = fieldsAppInfoLocalizations
+				self.fieldsAppInfos = fieldsAppInfos
+				self.include = include
+			}
+
+			public var asQuery: [(String, String?)] {
+				let encoder = URLQueryEncoder(explode: false)
+				encoder.encode(fieldsAppInfoLocalizations, forKey: "fields[appInfoLocalizations]")
+				encoder.encode(fieldsAppInfos, forKey: "fields[appInfos]")
+				encoder.encode(include, forKey: "include")
+				return encoder.items
+			}
 		}
 
 		public func patch(_ body: AppStoreConnect_Swift_SDK.AppInfoLocalizationUpdateRequest) -> Request<AppStoreConnect_Swift_SDK.AppInfoLocalizationResponse> {

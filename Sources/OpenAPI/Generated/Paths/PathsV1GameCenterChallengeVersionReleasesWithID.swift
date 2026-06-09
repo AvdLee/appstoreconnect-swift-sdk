@@ -14,23 +14,45 @@ extension APIEndpoint.V1.GameCenterChallengeVersionReleases {
 		public let path: String
 
 		@available(*, deprecated, message: "Deprecated")
-		public func get(fieldsGameCenterChallengeVersionReleases: [FieldsGameCenterChallengeVersionReleases]? = nil, include: [Include]? = nil) -> Request<AppStoreConnect_Swift_SDK.GameCenterChallengeVersionReleaseResponse> {
-			Request(path: path, method: "GET", query: makeGetQuery(fieldsGameCenterChallengeVersionReleases, include), id: "gameCenterChallengeVersionReleases_getInstance")
+		public func get(parameters: GetParameters? = nil) -> Request<AppStoreConnect_Swift_SDK.GameCenterChallengeVersionReleaseResponse> {
+			Request(path: path, method: "GET", query: parameters?.asQuery, id: "gameCenterChallengeVersionReleases_getInstance")
 		}
 
-		private func makeGetQuery(_ fieldsGameCenterChallengeVersionReleases: [FieldsGameCenterChallengeVersionReleases]?, _ include: [Include]?) -> [(String, String?)] {
-			let encoder = URLQueryEncoder(explode: false)
-			encoder.encode(fieldsGameCenterChallengeVersionReleases, forKey: "fields[gameCenterChallengeVersionReleases]")
-			encoder.encode(include, forKey: "include")
-			return encoder.items
-		}
+		public struct GetParameters {
+			public var fieldsGameCenterChallengeVersionReleases: [FieldsGameCenterChallengeVersionReleases]?
+			public var fieldsGameCenterChallengeVersions: [FieldsGameCenterChallengeVersions]?
+			public var include: [Include]?
 
-		public enum FieldsGameCenterChallengeVersionReleases: String, Codable, CaseIterable {
-			case version
-		}
+			public enum FieldsGameCenterChallengeVersionReleases: String, Codable, CaseIterable {
+				case version
+			}
 
-		public enum Include: String, Codable, CaseIterable {
-			case version
+			public enum FieldsGameCenterChallengeVersions: String, Codable, CaseIterable {
+				case version
+				case state
+				case challenge
+				case localizations
+				case releases
+				case defaultImage
+			}
+
+			public enum Include: String, Codable, CaseIterable {
+				case version
+			}
+
+			public init(fieldsGameCenterChallengeVersionReleases: [FieldsGameCenterChallengeVersionReleases]? = nil, fieldsGameCenterChallengeVersions: [FieldsGameCenterChallengeVersions]? = nil, include: [Include]? = nil) {
+				self.fieldsGameCenterChallengeVersionReleases = fieldsGameCenterChallengeVersionReleases
+				self.fieldsGameCenterChallengeVersions = fieldsGameCenterChallengeVersions
+				self.include = include
+			}
+
+			public var asQuery: [(String, String?)] {
+				let encoder = URLQueryEncoder(explode: false)
+				encoder.encode(fieldsGameCenterChallengeVersionReleases, forKey: "fields[gameCenterChallengeVersionReleases]")
+				encoder.encode(fieldsGameCenterChallengeVersions, forKey: "fields[gameCenterChallengeVersions]")
+				encoder.encode(include, forKey: "include")
+				return encoder.items
+			}
 		}
 
 		@available(*, deprecated, message: "Deprecated")

@@ -30,6 +30,7 @@ public struct PerfPowerMetric: Codable, Identifiable {
 			case memory = "MEMORY"
 			case animation = "ANIMATION"
 			case termination = "TERMINATION"
+			case storage = "STORAGE"
 		}
 
 		public init(platform: Platform? = nil, metricType: MetricType? = nil, deviceType: String? = nil) {

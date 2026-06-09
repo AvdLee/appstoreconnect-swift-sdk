@@ -19,6 +19,7 @@ extension APIEndpoint.V1.GameCenterActivityLocalizations {
 
 		public struct GetParameters {
 			public var fieldsGameCenterActivityLocalizations: [FieldsGameCenterActivityLocalizations]?
+			public var fieldsGameCenterActivityVersions: [FieldsGameCenterActivityVersions]?
 			public var fieldsGameCenterActivityImages: [FieldsGameCenterActivityImages]?
 			public var include: [Include]?
 
@@ -28,6 +29,16 @@ extension APIEndpoint.V1.GameCenterActivityLocalizations {
 				case description
 				case version
 				case image
+			}
+
+			public enum FieldsGameCenterActivityVersions: String, Codable, CaseIterable {
+				case version
+				case state
+				case fallbackURL = "fallbackUrl"
+				case activity
+				case localizations
+				case defaultImage
+				case releases
 			}
 
 			public enum FieldsGameCenterActivityImages: String, Codable, CaseIterable {
@@ -43,8 +54,9 @@ extension APIEndpoint.V1.GameCenterActivityLocalizations {
 				case image
 			}
 
-			public init(fieldsGameCenterActivityLocalizations: [FieldsGameCenterActivityLocalizations]? = nil, fieldsGameCenterActivityImages: [FieldsGameCenterActivityImages]? = nil, include: [Include]? = nil) {
+			public init(fieldsGameCenterActivityLocalizations: [FieldsGameCenterActivityLocalizations]? = nil, fieldsGameCenterActivityVersions: [FieldsGameCenterActivityVersions]? = nil, fieldsGameCenterActivityImages: [FieldsGameCenterActivityImages]? = nil, include: [Include]? = nil) {
 				self.fieldsGameCenterActivityLocalizations = fieldsGameCenterActivityLocalizations
+				self.fieldsGameCenterActivityVersions = fieldsGameCenterActivityVersions
 				self.fieldsGameCenterActivityImages = fieldsGameCenterActivityImages
 				self.include = include
 			}
@@ -52,6 +64,7 @@ extension APIEndpoint.V1.GameCenterActivityLocalizations {
 			public var asQuery: [(String, String?)] {
 				let encoder = URLQueryEncoder(explode: false)
 				encoder.encode(fieldsGameCenterActivityLocalizations, forKey: "fields[gameCenterActivityLocalizations]")
+				encoder.encode(fieldsGameCenterActivityVersions, forKey: "fields[gameCenterActivityVersions]")
 				encoder.encode(fieldsGameCenterActivityImages, forKey: "fields[gameCenterActivityImages]")
 				encoder.encode(include, forKey: "include")
 				return encoder.items

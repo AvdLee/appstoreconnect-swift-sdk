@@ -13,6 +13,7 @@ extension APIEndpoint.V1 {
 		/// Path: `/v1/appPreviews`
 		public let path: String
 
+		@available(*, deprecated, message: "Deprecated")
 		public func post(_ body: AppStoreConnect_Swift_SDK.AppPreviewCreateRequest) -> Request<AppStoreConnect_Swift_SDK.AppPreviewResponse> {
 			Request(path: path, method: "POST", body: body, id: "appPreviews_createInstance")
 		}

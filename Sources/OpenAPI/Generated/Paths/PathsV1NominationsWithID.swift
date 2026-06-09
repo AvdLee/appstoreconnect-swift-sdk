@@ -19,6 +19,10 @@ extension APIEndpoint.V1.Nominations {
 
 		public struct GetParameters {
 			public var fieldsNominations: [FieldsNominations]?
+			public var fieldsApps: [FieldsApps]?
+			public var fieldsActors: [FieldsActors]?
+			public var fieldsAppEvents: [FieldsAppEvents]?
+			public var fieldsTerritories: [FieldsTerritories]?
 			public var include: [Include]?
 			public var limitInAppEvents: Int?
 			public var limitRelatedApps: Int?
@@ -49,6 +53,90 @@ extension APIEndpoint.V1.Nominations {
 				case supportedTerritories
 			}
 
+			public enum FieldsApps: String, Codable, CaseIterable {
+				case accessibilityURL = "accessibilityUrl"
+				case name
+				case bundleID = "bundleId"
+				case sku
+				case primaryLocale
+				case isOrEverWasMadeForKids
+				case subscriptionStatusURL = "subscriptionStatusUrl"
+				case subscriptionStatusURLVersion = "subscriptionStatusUrlVersion"
+				case subscriptionStatusURLForSandbox = "subscriptionStatusUrlForSandbox"
+				case subscriptionStatusURLVersionForSandbox = "subscriptionStatusUrlVersionForSandbox"
+				case contentRightsDeclaration
+				case streamlinedPurchasingEnabled
+				case accessibilityDeclarations
+				case appEncryptionDeclarations
+				case appStoreIcon
+				case ciProduct
+				case betaTesters
+				case betaGroups
+				case appStoreVersions
+				case appTags
+				case preReleaseVersions
+				case betaAppLocalizations
+				case builds
+				case betaLicenseAgreement
+				case betaAppReviewDetail
+				case appInfos
+				case appClips
+				case appPricePoints
+				case endUserLicenseAgreement
+				case appPriceSchedule
+				case appAvailabilityV2
+				case inAppPurchases
+				case subscriptionGroups
+				case gameCenterEnabledVersions
+				case perfPowerMetrics
+				case appCustomProductPages
+				case inAppPurchasesV2
+				case promotedPurchases
+				case appEvents
+				case reviewSubmissions
+				case subscriptionGracePeriod
+				case customerReviews
+				case customerReviewSummarizations
+				case gameCenterDetail
+				case appStoreVersionExperimentsV2
+				case alternativeDistributionKey
+				case analyticsReportRequests
+				case marketplaceSearchDetail
+				case buildUploads
+				case backgroundAssets
+				case betaFeedbackScreenshotSubmissions
+				case betaFeedbackCrashSubmissions
+				case searchKeywords
+				case webhooks
+				case androidToIosAppMappingDetails
+			}
+
+			public enum FieldsActors: String, Codable, CaseIterable {
+				case actorType
+				case userFirstName
+				case userLastName
+				case userEmail
+				case apiKeyID = "apiKeyId"
+			}
+
+			public enum FieldsAppEvents: String, Codable, CaseIterable {
+				case referenceName
+				case badge
+				case eventState
+				case deepLink
+				case purchaseRequirement
+				case primaryLocale
+				case priority
+				case purpose
+				case territorySchedules
+				case archivedTerritorySchedules
+				case localizations
+			}
+
+			public enum FieldsTerritories: String, Codable, CaseIterable {
+				case currency
+			}
+
 			public enum Include: String, Codable, CaseIterable {
 				case relatedApps
 				case createdByActor
@@ -58,8 +146,12 @@ extension APIEndpoint.V1.Nominations {
 				case supportedTerritories
 			}
 
-			public init(fieldsNominations: [FieldsNominations]? = nil, include: [Include]? = nil, limitInAppEvents: Int? = nil, limitRelatedApps: Int? = nil, limitSupportedTerritories: Int? = nil) {
+			public init(fieldsNominations: [FieldsNominations]? = nil, fieldsApps: [FieldsApps]? = nil, fieldsActors: [FieldsActors]? = nil, fieldsAppEvents: [FieldsAppEvents]? = nil, fieldsTerritories: [FieldsTerritories]? = nil, include: [Include]? = nil, limitInAppEvents: Int? = nil, limitRelatedApps: Int? = nil, limitSupportedTerritories: Int? = nil) {
 				self.fieldsNominations = fieldsNominations
+				self.fieldsApps = fieldsApps
+				self.fieldsActors = fieldsActors
+				self.fieldsAppEvents = fieldsAppEvents
+				self.fieldsTerritories = fieldsTerritories
 				self.include = include
 				self.limitInAppEvents = limitInAppEvents
 				self.limitRelatedApps = limitRelatedApps
@@ -69,6 +161,10 @@ extension APIEndpoint.V1.Nominations {
 			public var asQuery: [(String, String?)] {
 				let encoder = URLQueryEncoder(explode: false)
 				encoder.encode(fieldsNominations, forKey: "fields[nominations]")
+				encoder.encode(fieldsApps, forKey: "fields[apps]")
+				encoder.encode(fieldsActors, forKey: "fields[actors]")
+				encoder.encode(fieldsAppEvents, forKey: "fields[appEvents]")
+				encoder.encode(fieldsTerritories, forKey: "fields[territories]")
 				encoder.encode(include, forKey: "include")
 				encoder.encode(limitInAppEvents, forKey: "limit[inAppEvents]")
 				encoder.encode(limitRelatedApps, forKey: "limit[relatedApps]")

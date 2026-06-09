@@ -19,13 +19,15 @@ public struct SubscriptionIntroductoryOfferInlineCreate: Codable, Identifiable {
 		public var duration: SubscriptionOfferDuration
 		public var offerMode: SubscriptionOfferMode
 		public var numberOfPeriods: Int
+		public var targetSubscriptionPlanType: SubscriptionPlanType?
 
-		public init(startDate: String? = nil, endDate: String? = nil, duration: SubscriptionOfferDuration, offerMode: SubscriptionOfferMode, numberOfPeriods: Int) {
+		public init(startDate: String? = nil, endDate: String? = nil, duration: SubscriptionOfferDuration, offerMode: SubscriptionOfferMode, numberOfPeriods: Int, targetSubscriptionPlanType: SubscriptionPlanType? = nil) {
 			self.startDate = startDate
 			self.endDate = endDate
 			self.duration = duration
 			self.offerMode = offerMode
 			self.numberOfPeriods = numberOfPeriods
+			self.targetSubscriptionPlanType = targetSubscriptionPlanType
 		}
 
 		public init(from decoder: Decoder) throws {
@@ -35,6 +37,7 @@ public struct SubscriptionIntroductoryOfferInlineCreate: Codable, Identifiable {
 			self.duration = try values.decode(SubscriptionOfferDuration.self, forKey: "duration")
 			self.offerMode = try values.decode(SubscriptionOfferMode.self, forKey: "offerMode")
 			self.numberOfPeriods = try values.decode(Int.self, forKey: "numberOfPeriods")
+			self.targetSubscriptionPlanType = try values.decodeIfPresent(SubscriptionPlanType.self, forKey: "targetSubscriptionPlanType")
 		}
 
 		public func encode(to encoder: Encoder) throws {
@@ -44,6 +47,7 @@ public struct SubscriptionIntroductoryOfferInlineCreate: Codable, Identifiable {
 			try values.encode(duration, forKey: "duration")
 			try values.encode(offerMode, forKey: "offerMode")
 			try values.encode(numberOfPeriods, forKey: "numberOfPeriods")
+			try values.encodeIfPresent(targetSubscriptionPlanType, forKey: "targetSubscriptionPlanType")
 		}
 	}
 

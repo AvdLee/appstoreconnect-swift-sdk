@@ -19,6 +19,7 @@ extension APIEndpoint.V2.GameCenterLeaderboardVersions {
 
 		public struct GetParameters {
 			public var fieldsGameCenterLeaderboardVersions: [FieldsGameCenterLeaderboardVersions]?
+			public var fieldsGameCenterLeaderboards: [FieldsGameCenterLeaderboards]?
 			public var fieldsGameCenterLeaderboardLocalizations: [FieldsGameCenterLeaderboardLocalizations]?
 			public var include: [Include]?
 			public var limitLocalizations: Int?
@@ -28,6 +29,28 @@ extension APIEndpoint.V2.GameCenterLeaderboardVersions {
 				case state
 				case leaderboard
 				case localizations
+			}
+
+			public enum FieldsGameCenterLeaderboards: String, Codable, CaseIterable {
+				case defaultFormatter
+				case referenceName
+				case vendorIdentifier
+				case submissionType
+				case scoreSortType
+				case scoreRangeStart
+				case scoreRangeEnd
+				case recurrenceStartDate
+				case recurrenceDuration
+				case recurrenceRule
+				case archived
+				case activityProperties
+				case visibility
+				case gameCenterDetail
+				case gameCenterGroup
+				case gameCenterLeaderboardSets
+				case activity
+				case challenge
+				case versions
 			}
 
 			public enum FieldsGameCenterLeaderboardLocalizations: String, Codable, CaseIterable {
@@ -46,8 +69,9 @@ extension APIEndpoint.V2.GameCenterLeaderboardVersions {
 				case localizations
 			}
 
-			public init(fieldsGameCenterLeaderboardVersions: [FieldsGameCenterLeaderboardVersions]? = nil, fieldsGameCenterLeaderboardLocalizations: [FieldsGameCenterLeaderboardLocalizations]? = nil, include: [Include]? = nil, limitLocalizations: Int? = nil) {
+			public init(fieldsGameCenterLeaderboardVersions: [FieldsGameCenterLeaderboardVersions]? = nil, fieldsGameCenterLeaderboards: [FieldsGameCenterLeaderboards]? = nil, fieldsGameCenterLeaderboardLocalizations: [FieldsGameCenterLeaderboardLocalizations]? = nil, include: [Include]? = nil, limitLocalizations: Int? = nil) {
 				self.fieldsGameCenterLeaderboardVersions = fieldsGameCenterLeaderboardVersions
+				self.fieldsGameCenterLeaderboards = fieldsGameCenterLeaderboards
 				self.fieldsGameCenterLeaderboardLocalizations = fieldsGameCenterLeaderboardLocalizations
 				self.include = include
 				self.limitLocalizations = limitLocalizations
@@ -56,6 +80,7 @@ extension APIEndpoint.V2.GameCenterLeaderboardVersions {
 			public var asQuery: [(String, String?)] {
 				let encoder = URLQueryEncoder(explode: false)
 				encoder.encode(fieldsGameCenterLeaderboardVersions, forKey: "fields[gameCenterLeaderboardVersions]")
+				encoder.encode(fieldsGameCenterLeaderboards, forKey: "fields[gameCenterLeaderboards]")
 				encoder.encode(fieldsGameCenterLeaderboardLocalizations, forKey: "fields[gameCenterLeaderboardLocalizations]")
 				encoder.encode(include, forKey: "include")
 				encoder.encode(limitLocalizations, forKey: "limit[localizations]")

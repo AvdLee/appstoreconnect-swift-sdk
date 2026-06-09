@@ -42,6 +42,7 @@ extension APIEndpoint.V1.Subscriptions.WithID {
 				case sandboxCodeCount
 				case active
 				case autoRenewEnabled
+				case targetSubscriptionPlanType
 				case subscription
 				case oneTimeUseCodes
 				case customCodes
@@ -68,6 +69,7 @@ extension APIEndpoint.V1.Subscriptions.WithID {
 				case subscriptionAvailability
 				case winBackOffers
 				case images
+				case planAvailabilities
 			}
 
 			public enum FieldsSubscriptionOfferCodeOneTimeUseCodes: String, Codable, CaseIterable {

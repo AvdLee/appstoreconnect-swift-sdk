@@ -13,27 +13,63 @@ extension APIEndpoint.V1.SubscriptionLocalizations {
 		/// Path: `/v1/subscriptionLocalizations/{id}`
 		public let path: String
 
-		public func get(fieldsSubscriptionLocalizations: [FieldsSubscriptionLocalizations]? = nil, include: [Include]? = nil) -> Request<AppStoreConnect_Swift_SDK.SubscriptionLocalizationResponse> {
-			Request(path: path, method: "GET", query: makeGetQuery(fieldsSubscriptionLocalizations, include), id: "subscriptionLocalizations_getInstance")
+		public func get(parameters: GetParameters? = nil) -> Request<AppStoreConnect_Swift_SDK.SubscriptionLocalizationResponse> {
+			Request(path: path, method: "GET", query: parameters?.asQuery, id: "subscriptionLocalizations_getInstance")
 		}
 
-		private func makeGetQuery(_ fieldsSubscriptionLocalizations: [FieldsSubscriptionLocalizations]?, _ include: [Include]?) -> [(String, String?)] {
-			let encoder = URLQueryEncoder(explode: false)
-			encoder.encode(fieldsSubscriptionLocalizations, forKey: "fields[subscriptionLocalizations]")
-			encoder.encode(include, forKey: "include")
-			return encoder.items
-		}
+		public struct GetParameters {
+			public var fieldsSubscriptionLocalizations: [FieldsSubscriptionLocalizations]?
+			public var fieldsSubscriptions: [FieldsSubscriptions]?
+			public var include: [Include]?
 
-		public enum FieldsSubscriptionLocalizations: String, Codable, CaseIterable {
-			case name
-			case locale
-			case description
-			case state
-			case subscription
-		}
+			public enum FieldsSubscriptionLocalizations: String, Codable, CaseIterable {
+				case name
+				case locale
+				case description
+				case state
+				case subscription
+			}
 
-		public enum Include: String, Codable, CaseIterable {
-			case subscription
+			public enum FieldsSubscriptions: String, Codable, CaseIterable {
+				case name
+				case productID = "productId"
+				case familySharable
+				case state
+				case subscriptionPeriod
+				case reviewNote
+				case groupLevel
+				case subscriptionLocalizations
+				case appStoreReviewScreenshot
+				case group
+				case introductoryOffers
+				case promotionalOffers
+				case offerCodes
+				case prices
+				case pricePoints
+				case promotedPurchase
+				case subscriptionAvailability
+				case winBackOffers
+				case images
+				case planAvailabilities
+			}
+
+			public enum Include: String, Codable, CaseIterable {
+				case subscription
+			}
+
+			public init(fieldsSubscriptionLocalizations: [FieldsSubscriptionLocalizations]? = nil, fieldsSubscriptions: [FieldsSubscriptions]? = nil, include: [Include]? = nil) {
+				self.fieldsSubscriptionLocalizations = fieldsSubscriptionLocalizations
+				self.fieldsSubscriptions = fieldsSubscriptions
+				self.include = include
+			}
+
+			public var asQuery: [(String, String?)] {
+				let encoder = URLQueryEncoder(explode: false)
+				encoder.encode(fieldsSubscriptionLocalizations, forKey: "fields[subscriptionLocalizations]")
+				encoder.encode(fieldsSubscriptions, forKey: "fields[subscriptions]")
+				encoder.encode(include, forKey: "include")
+				return encoder.items
+			}
 		}
 
 		public func patch(_ body: AppStoreConnect_Swift_SDK.SubscriptionLocalizationUpdateRequest) -> Request<AppStoreConnect_Swift_SDK.SubscriptionLocalizationResponse> {

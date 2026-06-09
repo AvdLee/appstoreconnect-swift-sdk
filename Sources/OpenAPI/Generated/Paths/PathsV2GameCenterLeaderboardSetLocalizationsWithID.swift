@@ -19,6 +19,7 @@ extension APIEndpoint.V2.GameCenterLeaderboardSetLocalizations {
 
 		public struct GetParameters {
 			public var fieldsGameCenterLeaderboardSetLocalizations: [FieldsGameCenterLeaderboardSetLocalizations]?
+			public var fieldsGameCenterLeaderboardSetVersions: [FieldsGameCenterLeaderboardSetVersions]?
 			public var fieldsGameCenterLeaderboardSetImages: [FieldsGameCenterLeaderboardSetImages]?
 			public var include: [Include]?
 
@@ -27,6 +28,13 @@ extension APIEndpoint.V2.GameCenterLeaderboardSetLocalizations {
 				case name
 				case version
 				case image
+			}
+
+			public enum FieldsGameCenterLeaderboardSetVersions: String, Codable, CaseIterable {
+				case version
+				case state
+				case leaderboardSet
+				case localizations
 			}
 
 			public enum FieldsGameCenterLeaderboardSetImages: String, Codable, CaseIterable {
@@ -43,8 +51,9 @@ extension APIEndpoint.V2.GameCenterLeaderboardSetLocalizations {
 				case image
 			}
 
-			public init(fieldsGameCenterLeaderboardSetLocalizations: [FieldsGameCenterLeaderboardSetLocalizations]? = nil, fieldsGameCenterLeaderboardSetImages: [FieldsGameCenterLeaderboardSetImages]? = nil, include: [Include]? = nil) {
+			public init(fieldsGameCenterLeaderboardSetLocalizations: [FieldsGameCenterLeaderboardSetLocalizations]? = nil, fieldsGameCenterLeaderboardSetVersions: [FieldsGameCenterLeaderboardSetVersions]? = nil, fieldsGameCenterLeaderboardSetImages: [FieldsGameCenterLeaderboardSetImages]? = nil, include: [Include]? = nil) {
 				self.fieldsGameCenterLeaderboardSetLocalizations = fieldsGameCenterLeaderboardSetLocalizations
+				self.fieldsGameCenterLeaderboardSetVersions = fieldsGameCenterLeaderboardSetVersions
 				self.fieldsGameCenterLeaderboardSetImages = fieldsGameCenterLeaderboardSetImages
 				self.include = include
 			}
@@ -52,6 +61,7 @@ extension APIEndpoint.V2.GameCenterLeaderboardSetLocalizations {
 			public var asQuery: [(String, String?)] {
 				let encoder = URLQueryEncoder(explode: false)
 				encoder.encode(fieldsGameCenterLeaderboardSetLocalizations, forKey: "fields[gameCenterLeaderboardSetLocalizations]")
+				encoder.encode(fieldsGameCenterLeaderboardSetVersions, forKey: "fields[gameCenterLeaderboardSetVersions]")
 				encoder.encode(fieldsGameCenterLeaderboardSetImages, forKey: "fields[gameCenterLeaderboardSetImages]")
 				encoder.encode(include, forKey: "include")
 				return encoder.items

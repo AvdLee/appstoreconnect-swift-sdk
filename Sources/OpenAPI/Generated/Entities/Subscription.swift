@@ -88,9 +88,11 @@ public struct Subscription: Codable, Identifiable {
 		public var prices: Prices?
 		public var pricePoints: PricePoints?
 		public var promotedPurchase: PromotedPurchase?
+		/// - warning: Deprecated.
 		public var subscriptionAvailability: SubscriptionAvailability?
 		public var winBackOffers: WinBackOffers?
 		public var images: Images?
+		public var planAvailabilities: PlanAvailabilities?
 
 		public struct SubscriptionLocalizations: Codable {
 			public var links: RelationshipLinks?
@@ -510,6 +512,7 @@ public struct Subscription: Codable, Identifiable {
 			}
 		}
 
+		@available(*, deprecated, message: "Deprecated")
 		public struct SubscriptionAvailability: Codable {
 			public var links: RelationshipLinks?
 			public var data: Data?
@@ -662,7 +665,59 @@ public struct Subscription: Codable, Identifiable {
 			}
 		}
 
-		public init(subscriptionLocalizations: SubscriptionLocalizations? = nil, appStoreReviewScreenshot: AppStoreReviewScreenshot? = nil, group: Group? = nil, introductoryOffers: IntroductoryOffers? = nil, promotionalOffers: PromotionalOffers? = nil, offerCodes: OfferCodes? = nil, prices: Prices? = nil, pricePoints: PricePoints? = nil, promotedPurchase: PromotedPurchase? = nil, subscriptionAvailability: SubscriptionAvailability? = nil, winBackOffers: WinBackOffers? = nil, images: Images? = nil) {
+		public struct PlanAvailabilities: Codable {
+			public var links: RelationshipLinks?
+			public var meta: PagingInformation?
+			public var data: [Datum]?
+
+			public struct Datum: Codable, Identifiable {
+				public var type: `Type`
+				public var id: String
+
+				public enum `Type`: String, Codable, CaseIterable {
+					case subscriptionPlanAvailabilities
+				}
+
+				public init(type: `Type`, id: String) {
+					self.type = type
+					self.id = id
+				}
+
+				public init(from decoder: Decoder) throws {
+					let values = try decoder.container(keyedBy: StringCodingKey.self)
+					self.type = try values.decode(`Type`.self, forKey: "type")
+					self.id = try values.decode(String.self, forKey: "id")
+				}
+
+				public func encode(to encoder: Encoder) throws {
+					var values = encoder.container(keyedBy: StringCodingKey.self)
+					try values.encode(type, forKey: "type")
+					try values.encode(id, forKey: "id")
+				}
+			}
+
+			public init(links: RelationshipLinks? = nil, meta: PagingInformation? = nil, data: [Datum]? = nil) {
+				self.links = links
+				self.meta = meta
+				self.data = data
+			}
+
+			public init(from decoder: Decoder) throws {
+				let values = try decoder.container(keyedBy: StringCodingKey.self)
+				self.links = try values.decodeIfPresent(RelationshipLinks.self, forKey: "links")
+				self.meta = try values.decodeIfPresent(PagingInformation.self, forKey: "meta")
+				self.data = try values.decodeIfPresent([Datum].self, forKey: "data")
+			}
+
+			public func encode(to encoder: Encoder) throws {
+				var values = encoder.container(keyedBy: StringCodingKey.self)
+				try values.encodeIfPresent(links, forKey: "links")
+				try values.encodeIfPresent(meta, forKey: "meta")
+				try values.encodeIfPresent(data, forKey: "data")
+			}
+		}
+
+		public init(subscriptionLocalizations: SubscriptionLocalizations? = nil, appStoreReviewScreenshot: AppStoreReviewScreenshot? = nil, group: Group? = nil, introductoryOffers: IntroductoryOffers? = nil, promotionalOffers: PromotionalOffers? = nil, offerCodes: OfferCodes? = nil, prices: Prices? = nil, pricePoints: PricePoints? = nil, promotedPurchase: PromotedPurchase? = nil, subscriptionAvailability: SubscriptionAvailability? = nil, winBackOffers: WinBackOffers? = nil, images: Images? = nil, planAvailabilities: PlanAvailabilities? = nil) {
 			self.subscriptionLocalizations = subscriptionLocalizations
 			self.appStoreReviewScreenshot = appStoreReviewScreenshot
 			self.group = group
@@ -675,6 +730,7 @@ public struct Subscription: Codable, Identifiable {
 			self.subscriptionAvailability = subscriptionAvailability
 			self.winBackOffers = winBackOffers
 			self.images = images
+			self.planAvailabilities = planAvailabilities
 		}
 
 		public init(from decoder: Decoder) throws {
@@ -691,6 +747,7 @@ public struct Subscription: Codable, Identifiable {
 			self.subscriptionAvailability = try values.decodeIfPresent(SubscriptionAvailability.self, forKey: "subscriptionAvailability")
 			self.winBackOffers = try values.decodeIfPresent(WinBackOffers.self, forKey: "winBackOffers")
 			self.images = try values.decodeIfPresent(Images.self, forKey: "images")
+			self.planAvailabilities = try values.decodeIfPresent(PlanAvailabilities.self, forKey: "planAvailabilities")
 		}
 
 		public func encode(to encoder: Encoder) throws {
@@ -707,6 +764,7 @@ public struct Subscription: Codable, Identifiable {
 			try values.encodeIfPresent(subscriptionAvailability, forKey: "subscriptionAvailability")
 			try values.encodeIfPresent(winBackOffers, forKey: "winBackOffers")
 			try values.encodeIfPresent(images, forKey: "images")
+			try values.encodeIfPresent(planAvailabilities, forKey: "planAvailabilities")
 		}
 	}
 

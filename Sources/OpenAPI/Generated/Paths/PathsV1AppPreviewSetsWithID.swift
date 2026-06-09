@@ -13,12 +13,16 @@ extension APIEndpoint.V1.AppPreviewSets {
 		/// Path: `/v1/appPreviewSets/{id}`
 		public let path: String
 
+		@available(*, deprecated, message: "Deprecated")
 		public func get(parameters: GetParameters? = nil) -> Request<AppStoreConnect_Swift_SDK.AppPreviewSetResponse> {
 			Request(path: path, method: "GET", query: parameters?.asQuery, id: "appPreviewSets_getInstance")
 		}
 
 		public struct GetParameters {
 			public var fieldsAppPreviewSets: [FieldsAppPreviewSets]?
+			public var fieldsAppStoreVersionLocalizations: [FieldsAppStoreVersionLocalizations]?
+			public var fieldsAppCustomProductPageLocalizations: [FieldsAppCustomProductPageLocalizations]?
+			public var fieldsAppStoreVersionExperimentTreatmentLocalizations: [FieldsAppStoreVersionExperimentTreatmentLocalizations]?
 			public var fieldsAppPreviews: [FieldsAppPreviews]?
 			public var include: [Include]?
 			public var limitAppPreviews: Int?
@@ -29,6 +33,36 @@ extension APIEndpoint.V1.AppPreviewSets {
 				case appCustomProductPageLocalization
 				case appStoreVersionExperimentTreatmentLocalization
 				case appPreviews
+			}
+
+			public enum FieldsAppStoreVersionLocalizations: String, Codable, CaseIterable {
+				case description
+				case locale
+				case keywords
+				case marketingURL = "marketingUrl"
+				case promotionalText
+				case supportURL = "supportUrl"
+				case whatsNew
+				case appStoreVersion
+				case appScreenshotSets
+				case appPreviewSets
+				case searchKeywords
+			}
+
+			public enum FieldsAppCustomProductPageLocalizations: String, Codable, CaseIterable {
+				case locale
+				case promotionalText
+				case appCustomProductPageVersion
+				case appScreenshotSets
+				case appPreviewSets
+				case searchKeywords
+			}
+
+			public enum FieldsAppStoreVersionExperimentTreatmentLocalizations: String, Codable, CaseIterable {
+				case locale
+				case appStoreVersionExperimentTreatment
+				case appScreenshotSets
+				case appPreviewSets
 			}
 
 			public enum FieldsAppPreviews: String, Codable, CaseIterable {
@@ -53,8 +87,11 @@ extension APIEndpoint.V1.AppPreviewSets {
 				case appPreviews
 			}
 
-			public init(fieldsAppPreviewSets: [FieldsAppPreviewSets]? = nil, fieldsAppPreviews: [FieldsAppPreviews]? = nil, include: [Include]? = nil, limitAppPreviews: Int? = nil) {
+			public init(fieldsAppPreviewSets: [FieldsAppPreviewSets]? = nil, fieldsAppStoreVersionLocalizations: [FieldsAppStoreVersionLocalizations]? = nil, fieldsAppCustomProductPageLocalizations: [FieldsAppCustomProductPageLocalizations]? = nil, fieldsAppStoreVersionExperimentTreatmentLocalizations: [FieldsAppStoreVersionExperimentTreatmentLocalizations]? = nil, fieldsAppPreviews: [FieldsAppPreviews]? = nil, include: [Include]? = nil, limitAppPreviews: Int? = nil) {
 				self.fieldsAppPreviewSets = fieldsAppPreviewSets
+				self.fieldsAppStoreVersionLocalizations = fieldsAppStoreVersionLocalizations
+				self.fieldsAppCustomProductPageLocalizations = fieldsAppCustomProductPageLocalizations
+				self.fieldsAppStoreVersionExperimentTreatmentLocalizations = fieldsAppStoreVersionExperimentTreatmentLocalizations
 				self.fieldsAppPreviews = fieldsAppPreviews
 				self.include = include
 				self.limitAppPreviews = limitAppPreviews
@@ -63,6 +100,9 @@ extension APIEndpoint.V1.AppPreviewSets {
 			public var asQuery: [(String, String?)] {
 				let encoder = URLQueryEncoder(explode: false)
 				encoder.encode(fieldsAppPreviewSets, forKey: "fields[appPreviewSets]")
+				encoder.encode(fieldsAppStoreVersionLocalizations, forKey: "fields[appStoreVersionLocalizations]")
+				encoder.encode(fieldsAppCustomProductPageLocalizations, forKey: "fields[appCustomProductPageLocalizations]")
+				encoder.encode(fieldsAppStoreVersionExperimentTreatmentLocalizations, forKey: "fields[appStoreVersionExperimentTreatmentLocalizations]")
 				encoder.encode(fieldsAppPreviews, forKey: "fields[appPreviews]")
 				encoder.encode(include, forKey: "include")
 				encoder.encode(limitAppPreviews, forKey: "limit[appPreviews]")
@@ -70,6 +110,7 @@ extension APIEndpoint.V1.AppPreviewSets {
 			}
 		}
 
+		@available(*, deprecated, message: "Deprecated")
 		public var delete: Request<Void> {
 			Request(path: path, method: "DELETE", id: "appPreviewSets_deleteInstance")
 		}

@@ -13,31 +13,52 @@ extension APIEndpoint.V1.InAppPurchaseOfferCodeOneTimeUseCodes {
 		/// Path: `/v1/inAppPurchaseOfferCodeOneTimeUseCodes/{id}`
 		public let path: String
 
-		public func get(fieldsInAppPurchaseOfferCodeOneTimeUseCodes: [FieldsInAppPurchaseOfferCodeOneTimeUseCodes]? = nil, include: [Include]? = nil) -> Request<AppStoreConnect_Swift_SDK.InAppPurchaseOfferCodeOneTimeUseCodeResponse> {
-			Request(path: path, method: "GET", query: makeGetQuery(fieldsInAppPurchaseOfferCodeOneTimeUseCodes, include), id: "inAppPurchaseOfferCodeOneTimeUseCodes_getInstance")
+		public func get(parameters: GetParameters? = nil) -> Request<AppStoreConnect_Swift_SDK.InAppPurchaseOfferCodeOneTimeUseCodeResponse> {
+			Request(path: path, method: "GET", query: parameters?.asQuery, id: "inAppPurchaseOfferCodeOneTimeUseCodes_getInstance")
 		}
 
-		private func makeGetQuery(_ fieldsInAppPurchaseOfferCodeOneTimeUseCodes: [FieldsInAppPurchaseOfferCodeOneTimeUseCodes]?, _ include: [Include]?) -> [(String, String?)] {
-			let encoder = URLQueryEncoder(explode: false)
-			encoder.encode(fieldsInAppPurchaseOfferCodeOneTimeUseCodes, forKey: "fields[inAppPurchaseOfferCodeOneTimeUseCodes]")
-			encoder.encode(include, forKey: "include")
-			return encoder.items
-		}
+		public struct GetParameters {
+			public var fieldsInAppPurchaseOfferCodeOneTimeUseCodes: [FieldsInAppPurchaseOfferCodeOneTimeUseCodes]?
+			public var fieldsActors: [FieldsActors]?
+			public var include: [Include]?
 
-		public enum FieldsInAppPurchaseOfferCodeOneTimeUseCodes: String, Codable, CaseIterable {
-			case numberOfCodes
-			case createdDate
-			case expirationDate
-			case active
-			case environment
-			case values
-			case createdByActor
-			case deactivatedByActor
-		}
+			public enum FieldsInAppPurchaseOfferCodeOneTimeUseCodes: String, Codable, CaseIterable {
+				case numberOfCodes
+				case createdDate
+				case expirationDate
+				case active
+				case environment
+				case values
+				case createdByActor
+				case deactivatedByActor
+			}
 
-		public enum Include: String, Codable, CaseIterable {
-			case createdByActor
-			case deactivatedByActor
+			public enum FieldsActors: String, Codable, CaseIterable {
+				case actorType
+				case userFirstName
+				case userLastName
+				case userEmail
+				case apiKeyID = "apiKeyId"
+			}
+
+			public enum Include: String, Codable, CaseIterable {
+				case createdByActor
+				case deactivatedByActor
+			}
+
+			public init(fieldsInAppPurchaseOfferCodeOneTimeUseCodes: [FieldsInAppPurchaseOfferCodeOneTimeUseCodes]? = nil, fieldsActors: [FieldsActors]? = nil, include: [Include]? = nil) {
+				self.fieldsInAppPurchaseOfferCodeOneTimeUseCodes = fieldsInAppPurchaseOfferCodeOneTimeUseCodes
+				self.fieldsActors = fieldsActors
+				self.include = include
+			}
+
+			public var asQuery: [(String, String?)] {
+				let encoder = URLQueryEncoder(explode: false)
+				encoder.encode(fieldsInAppPurchaseOfferCodeOneTimeUseCodes, forKey: "fields[inAppPurchaseOfferCodeOneTimeUseCodes]")
+				encoder.encode(fieldsActors, forKey: "fields[actors]")
+				encoder.encode(include, forKey: "include")
+				return encoder.items
+			}
 		}
 
 		public func patch(_ body: AppStoreConnect_Swift_SDK.InAppPurchaseOfferCodeOneTimeUseCodeUpdateRequest) -> Request<AppStoreConnect_Swift_SDK.InAppPurchaseOfferCodeOneTimeUseCodeResponse> {

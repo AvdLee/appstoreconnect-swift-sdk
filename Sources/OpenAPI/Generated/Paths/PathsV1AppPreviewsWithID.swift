@@ -13,40 +13,64 @@ extension APIEndpoint.V1.AppPreviews {
 		/// Path: `/v1/appPreviews/{id}`
 		public let path: String
 
-		public func get(fieldsAppPreviews: [FieldsAppPreviews]? = nil, include: [Include]? = nil) -> Request<AppStoreConnect_Swift_SDK.AppPreviewResponse> {
-			Request(path: path, method: "GET", query: makeGetQuery(fieldsAppPreviews, include), id: "appPreviews_getInstance")
+		@available(*, deprecated, message: "Deprecated")
+		public func get(parameters: GetParameters? = nil) -> Request<AppStoreConnect_Swift_SDK.AppPreviewResponse> {
+			Request(path: path, method: "GET", query: parameters?.asQuery, id: "appPreviews_getInstance")
 		}
 
-		private func makeGetQuery(_ fieldsAppPreviews: [FieldsAppPreviews]?, _ include: [Include]?) -> [(String, String?)] {
-			let encoder = URLQueryEncoder(explode: false)
-			encoder.encode(fieldsAppPreviews, forKey: "fields[appPreviews]")
-			encoder.encode(include, forKey: "include")
-			return encoder.items
+		public struct GetParameters {
+			public var fieldsAppPreviews: [FieldsAppPreviews]?
+			public var fieldsAppPreviewSets: [FieldsAppPreviewSets]?
+			public var include: [Include]?
+
+			public enum FieldsAppPreviews: String, Codable, CaseIterable {
+				case fileSize
+				case fileName
+				case sourceFileChecksum
+				case previewFrameTimeCode
+				case mimeType
+				case videoURL = "videoUrl"
+				case previewFrameImage
+				case previewImage
+				case uploadOperations
+				case assetDeliveryState
+				case videoDeliveryState
+				case appPreviewSet
+			}
+
+			public enum FieldsAppPreviewSets: String, Codable, CaseIterable {
+				case previewType
+				case appStoreVersionLocalization
+				case appCustomProductPageLocalization
+				case appStoreVersionExperimentTreatmentLocalization
+				case appPreviews
+			}
+
+			public enum Include: String, Codable, CaseIterable {
+				case appPreviewSet
+			}
+
+			public init(fieldsAppPreviews: [FieldsAppPreviews]? = nil, fieldsAppPreviewSets: [FieldsAppPreviewSets]? = nil, include: [Include]? = nil) {
+				self.fieldsAppPreviews = fieldsAppPreviews
+				self.fieldsAppPreviewSets = fieldsAppPreviewSets
+				self.include = include
+			}
+
+			public var asQuery: [(String, String?)] {
+				let encoder = URLQueryEncoder(explode: false)
+				encoder.encode(fieldsAppPreviews, forKey: "fields[appPreviews]")
+				encoder.encode(fieldsAppPreviewSets, forKey: "fields[appPreviewSets]")
+				encoder.encode(include, forKey: "include")
+				return encoder.items
+			}
 		}
 
-		public enum FieldsAppPreviews: String, Codable, CaseIterable {
-			case fileSize
-			case fileName
-			case sourceFileChecksum
-			case previewFrameTimeCode
-			case mimeType
-			case videoURL = "videoUrl"
-			case previewFrameImage
-			case previewImage
-			case uploadOperations
-			case assetDeliveryState
-			case videoDeliveryState
-			case appPreviewSet
-		}
-
-		public enum Include: String, Codable, CaseIterable {
-			case appPreviewSet
-		}
-
+		@available(*, deprecated, message: "Deprecated")
 		public func patch(_ body: AppStoreConnect_Swift_SDK.AppPreviewUpdateRequest) -> Request<AppStoreConnect_Swift_SDK.AppPreviewResponse> {
 			Request(path: path, method: "PATCH", body: body, id: "appPreviews_updateInstance")
 		}
 
+		@available(*, deprecated, message: "Deprecated")
 		public var delete: Request<Void> {
 			Request(path: path, method: "DELETE", id: "appPreviews_deleteInstance")
 		}

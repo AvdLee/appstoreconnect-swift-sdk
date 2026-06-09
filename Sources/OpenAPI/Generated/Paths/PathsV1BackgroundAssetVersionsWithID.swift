@@ -13,39 +13,103 @@ extension APIEndpoint.V1.BackgroundAssetVersions {
 		/// Path: `/v1/backgroundAssetVersions/{id}`
 		public let path: String
 
-		public func get(fieldsBackgroundAssetVersions: [FieldsBackgroundAssetVersions]? = nil, include: [Include]? = nil) -> Request<AppStoreConnect_Swift_SDK.BackgroundAssetVersionResponse> {
-			Request(path: path, method: "GET", query: makeGetQuery(fieldsBackgroundAssetVersions, include), id: "backgroundAssetVersions_getInstance")
+		public func get(parameters: GetParameters? = nil) -> Request<AppStoreConnect_Swift_SDK.BackgroundAssetVersionResponse> {
+			Request(path: path, method: "GET", query: parameters?.asQuery, id: "backgroundAssetVersions_getInstance")
 		}
 
-		private func makeGetQuery(_ fieldsBackgroundAssetVersions: [FieldsBackgroundAssetVersions]?, _ include: [Include]?) -> [(String, String?)] {
-			let encoder = URLQueryEncoder(explode: false)
-			encoder.encode(fieldsBackgroundAssetVersions, forKey: "fields[backgroundAssetVersions]")
-			encoder.encode(include, forKey: "include")
-			return encoder.items
-		}
+		public struct GetParameters {
+			public var fieldsBackgroundAssetVersions: [FieldsBackgroundAssetVersions]?
+			public var fieldsBackgroundAssets: [FieldsBackgroundAssets]?
+			public var fieldsBackgroundAssetVersionInternalBetaReleases: [FieldsBackgroundAssetVersionInternalBetaReleases]?
+			public var fieldsBackgroundAssetVersionExternalBetaReleases: [FieldsBackgroundAssetVersionExternalBetaReleases]?
+			public var fieldsBackgroundAssetVersionAppStoreReleases: [FieldsBackgroundAssetVersionAppStoreReleases]?
+			public var fieldsBackgroundAssetUploadFiles: [FieldsBackgroundAssetUploadFiles]?
+			public var include: [Include]?
 
-		public enum FieldsBackgroundAssetVersions: String, Codable, CaseIterable {
-			case createdDate
-			case platforms
-			case state
-			case stateDetails
-			case version
-			case backgroundAsset
-			case internalBetaRelease
-			case externalBetaRelease
-			case appStoreRelease
-			case assetFile
-			case manifestFile
-			case backgroundAssetUploadFiles
-		}
+			public enum FieldsBackgroundAssetVersions: String, Codable, CaseIterable {
+				case createdDate
+				case platforms
+				case state
+				case stateDetails
+				case version
+				case locale
+				case backgroundAsset
+				case internalBetaRelease
+				case externalBetaRelease
+				case appStoreRelease
+				case assetFile
+				case manifestFile
+				case backgroundAssetUploadFiles
+			}
 
-		public enum Include: String, Codable, CaseIterable {
-			case backgroundAsset
-			case internalBetaRelease
-			case externalBetaRelease
-			case appStoreRelease
-			case assetFile
-			case manifestFile
+			public enum FieldsBackgroundAssets: String, Codable, CaseIterable {
+				case archived
+				case assetPackIdentifier
+				case createdDate
+				case usedBytes
+				case app
+				case versions
+				case appStoreVersion
+				case internalBetaVersion
+				case externalBetaVersion
+			}
+
+			public enum FieldsBackgroundAssetVersionInternalBetaReleases: String, Codable, CaseIterable {
+				case state
+				case backgroundAssetVersion
+			}
+
+			public enum FieldsBackgroundAssetVersionExternalBetaReleases: String, Codable, CaseIterable {
+				case state
+				case backgroundAssetVersion
+			}
+
+			public enum FieldsBackgroundAssetVersionAppStoreReleases: String, Codable, CaseIterable {
+				case state
+				case backgroundAssetVersion
+			}
+
+			public enum FieldsBackgroundAssetUploadFiles: String, Codable, CaseIterable {
+				case assetDeliveryState
+				case assetToken
+				case assetType
+				case fileName
+				case fileSize
+				case sourceFileChecksum
+				case sourceFileChecksums
+				case uploadOperations
+			}
+
+			public enum Include: String, Codable, CaseIterable {
+				case backgroundAsset
+				case internalBetaRelease
+				case externalBetaRelease
+				case appStoreRelease
+				case assetFile
+				case manifestFile
+			}
+
+			public init(fieldsBackgroundAssetVersions: [FieldsBackgroundAssetVersions]? = nil, fieldsBackgroundAssets: [FieldsBackgroundAssets]? = nil, fieldsBackgroundAssetVersionInternalBetaReleases: [FieldsBackgroundAssetVersionInternalBetaReleases]? = nil, fieldsBackgroundAssetVersionExternalBetaReleases: [FieldsBackgroundAssetVersionExternalBetaReleases]? = nil, fieldsBackgroundAssetVersionAppStoreReleases: [FieldsBackgroundAssetVersionAppStoreReleases]? = nil, fieldsBackgroundAssetUploadFiles: [FieldsBackgroundAssetUploadFiles]? = nil, include: [Include]? = nil) {
+				self.fieldsBackgroundAssetVersions = fieldsBackgroundAssetVersions
+				self.fieldsBackgroundAssets = fieldsBackgroundAssets
+				self.fieldsBackgroundAssetVersionInternalBetaReleases = fieldsBackgroundAssetVersionInternalBetaReleases
+				self.fieldsBackgroundAssetVersionExternalBetaReleases = fieldsBackgroundAssetVersionExternalBetaReleases
+				self.fieldsBackgroundAssetVersionAppStoreReleases = fieldsBackgroundAssetVersionAppStoreReleases
+				self.fieldsBackgroundAssetUploadFiles = fieldsBackgroundAssetUploadFiles
+				self.include = include
+			}
+
+			public var asQuery: [(String, String?)] {
+				let encoder = URLQueryEncoder(explode: false)
+				encoder.encode(fieldsBackgroundAssetVersions, forKey: "fields[backgroundAssetVersions]")
+				encoder.encode(fieldsBackgroundAssets, forKey: "fields[backgroundAssets]")
+				encoder.encode(fieldsBackgroundAssetVersionInternalBetaReleases, forKey: "fields[backgroundAssetVersionInternalBetaReleases]")
+				encoder.encode(fieldsBackgroundAssetVersionExternalBetaReleases, forKey: "fields[backgroundAssetVersionExternalBetaReleases]")
+				encoder.encode(fieldsBackgroundAssetVersionAppStoreReleases, forKey: "fields[backgroundAssetVersionAppStoreReleases]")
+				encoder.encode(fieldsBackgroundAssetUploadFiles, forKey: "fields[backgroundAssetUploadFiles]")
+				encoder.encode(include, forKey: "include")
+				return encoder.items
+			}
 		}
 	}
 }

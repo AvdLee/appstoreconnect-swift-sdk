@@ -22,6 +22,7 @@ extension APIEndpoint.V1 {
 			public var filterApp: [String]?
 			public var fieldsCiProducts: [FieldsCiProducts]?
 			public var fieldsApps: [FieldsApps]?
+			public var fieldsBundleIDs: [FieldsBundleIDs]?
 			public var fieldsScmRepositories: [FieldsScmRepositories]?
 			public var limit: Int?
 			public var include: [Include]?
@@ -102,6 +103,16 @@ extension APIEndpoint.V1 {
 				case androidToIosAppMappingDetails
 			}
 
+			public enum FieldsBundleIDs: String, Codable, CaseIterable {
+				case name
+				case platform
+				case identifier
+				case seedID = "seedId"
+				case profiles
+				case bundleIDCapabilities = "bundleIdCapabilities"
+				case app
+			}
+
 			public enum FieldsScmRepositories: String, Codable, CaseIterable {
 				case lastAccessedDate
 				case httpCloneURL = "httpCloneUrl"
@@ -120,11 +131,12 @@ extension APIEndpoint.V1 {
 				case primaryRepositories
 			}
 
-			public init(filterProductType: [FilterProductType]? = nil, filterApp: [String]? = nil, fieldsCiProducts: [FieldsCiProducts]? = nil, fieldsApps: [FieldsApps]? = nil, fieldsScmRepositories: [FieldsScmRepositories]? = nil, limit: Int? = nil, include: [Include]? = nil, limitPrimaryRepositories: Int? = nil) {
+			public init(filterProductType: [FilterProductType]? = nil, filterApp: [String]? = nil, fieldsCiProducts: [FieldsCiProducts]? = nil, fieldsApps: [FieldsApps]? = nil, fieldsBundleIDs: [FieldsBundleIDs]? = nil, fieldsScmRepositories: [FieldsScmRepositories]? = nil, limit: Int? = nil, include: [Include]? = nil, limitPrimaryRepositories: Int? = nil) {
 				self.filterProductType = filterProductType
 				self.filterApp = filterApp
 				self.fieldsCiProducts = fieldsCiProducts
 				self.fieldsApps = fieldsApps
+				self.fieldsBundleIDs = fieldsBundleIDs
 				self.fieldsScmRepositories = fieldsScmRepositories
 				self.limit = limit
 				self.include = include
@@ -137,6 +149,7 @@ extension APIEndpoint.V1 {
 				encoder.encode(filterApp, forKey: "filter[app]")
 				encoder.encode(fieldsCiProducts, forKey: "fields[ciProducts]")
 				encoder.encode(fieldsApps, forKey: "fields[apps]")
+				encoder.encode(fieldsBundleIDs, forKey: "fields[bundleIds]")
 				encoder.encode(fieldsScmRepositories, forKey: "fields[scmRepositories]")
 				encoder.encode(limit, forKey: "limit")
 				encoder.encode(include, forKey: "include")

@@ -19,7 +19,10 @@ extension APIEndpoint.V1.CiWorkflows {
 
 		public struct GetParameters {
 			public var fieldsCiWorkflows: [FieldsCiWorkflows]?
+			public var fieldsCiProducts: [FieldsCiProducts]?
 			public var fieldsScmRepositories: [FieldsScmRepositories]?
+			public var fieldsCiXcodeVersions: [FieldsCiXcodeVersions]?
+			public var fieldsCiMacOsVersions: [FieldsCiMacOsVersions]?
 			public var include: [Include]?
 
 			public enum FieldsCiWorkflows: String, Codable, CaseIterable {
@@ -45,6 +48,18 @@ extension APIEndpoint.V1.CiWorkflows {
 				case buildRuns
 			}
 
+			public enum FieldsCiProducts: String, Codable, CaseIterable {
+				case name
+				case createdDate
+				case productType
+				case app
+				case bundleID = "bundleId"
+				case workflows
+				case primaryRepositories
+				case additionalRepositories
+				case buildRuns
+			}
+
 			public enum FieldsScmRepositories: String, Codable, CaseIterable {
 				case lastAccessedDate
 				case httpCloneURL = "httpCloneUrl"
@@ -57,6 +72,19 @@ extension APIEndpoint.V1.CiWorkflows {
 				case pullRequests
 			}
 
+			public enum FieldsCiXcodeVersions: String, Codable, CaseIterable {
+				case version
+				case name
+				case testDestinations
+				case macOsVersions
+			}
+
+			public enum FieldsCiMacOsVersions: String, Codable, CaseIterable {
+				case version
+				case name
+				case xcodeVersions
+			}
+
 			public enum Include: String, Codable, CaseIterable {
 				case product
 				case repository
@@ -64,16 +92,22 @@ extension APIEndpoint.V1.CiWorkflows {
 				case macOsVersion
 			}
 
-			public init(fieldsCiWorkflows: [FieldsCiWorkflows]? = nil, fieldsScmRepositories: [FieldsScmRepositories]? = nil, include: [Include]? = nil) {
+			public init(fieldsCiWorkflows: [FieldsCiWorkflows]? = nil, fieldsCiProducts: [FieldsCiProducts]? = nil, fieldsScmRepositories: [FieldsScmRepositories]? = nil, fieldsCiXcodeVersions: [FieldsCiXcodeVersions]? = nil, fieldsCiMacOsVersions: [FieldsCiMacOsVersions]? = nil, include: [Include]? = nil) {
 				self.fieldsCiWorkflows = fieldsCiWorkflows
+				self.fieldsCiProducts = fieldsCiProducts
 				self.fieldsScmRepositories = fieldsScmRepositories
+				self.fieldsCiXcodeVersions = fieldsCiXcodeVersions
+				self.fieldsCiMacOsVersions = fieldsCiMacOsVersions
 				self.include = include
 			}
 
 			public var asQuery: [(String, String?)] {
 				let encoder = URLQueryEncoder(explode: false)
 				encoder.encode(fieldsCiWorkflows, forKey: "fields[ciWorkflows]")
+				encoder.encode(fieldsCiProducts, forKey: "fields[ciProducts]")
 				encoder.encode(fieldsScmRepositories, forKey: "fields[scmRepositories]")
+				encoder.encode(fieldsCiXcodeVersions, forKey: "fields[ciXcodeVersions]")
+				encoder.encode(fieldsCiMacOsVersions, forKey: "fields[ciMacOsVersions]")
 				encoder.encode(include, forKey: "include")
 				return encoder.items
 			}

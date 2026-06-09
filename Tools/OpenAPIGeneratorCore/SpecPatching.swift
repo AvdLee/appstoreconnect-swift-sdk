@@ -24,8 +24,6 @@ public enum SpecPatcher {
         case appEventDeepLinkFormat = "appevent-deeplink-format"
         case purchaseRequirementEnum = "purchase-requirement-enum"
         case responseErrorSchema = "response-error-schema"
-        case appPriceV2InlineCreateFields = "apppricev2inlinecreate-fields"
-        case territoryAvailabilityInlineCreateFields = "territoryavailabilityinlinecreate-fields"
         case winBackOfferPriceInlineCreateFields = "winbackofferpriceinlinecreate-fields"
     }
 
@@ -97,20 +95,6 @@ public enum SpecPatcher {
         if re.didChange {
             didChange = true
             changes.append("Ensured ResponseError schema and referenced it from ErrorResponse")
-        }
-
-        let appPrice = ensureAppPriceV2InlineCreateFields(&rootObject)
-        rules.append(.init(id: .appPriceV2InlineCreateFields, didChange: appPrice.didChange, matchCount: appPrice.matchCount))
-        if appPrice.didChange {
-            didChange = true
-            changes.append("Added attributes and relationships to AppPriceV2InlineCreate")
-        }
-
-        let territoryAvailability = ensureTerritoryAvailabilityInlineCreateFields(&rootObject)
-        rules.append(.init(id: .territoryAvailabilityInlineCreateFields, didChange: territoryAvailability.didChange, matchCount: territoryAvailability.matchCount))
-        if territoryAvailability.didChange {
-            didChange = true
-            changes.append("Added attributes and relationships to TerritoryAvailabilityInlineCreate")
         }
 
         let winBackOfferPrice = ensureWinBackOfferPriceInlineCreateFields(&rootObject)
@@ -288,132 +272,6 @@ private func ensurePurchaseRequirementEnum(_ root: inout OrderedDictionary<Strin
     return .init(didChange: didChange, matchCount: matchCount)
 }
 
-// FB22160685
-private func ensureAppPriceV2InlineCreateFields(_ root: inout OrderedDictionary<String, JSONValue>) -> PatchOutcome {
-    guard
-        var components = root["components"]?.objectValue,
-        var schemas = components["schemas"]?.objectValue,
-        var schema = schemas["AppPriceV2InlineCreate"]?.objectValue,
-        var properties = schema["properties"]?.objectValue
-    else {
-        return .init(didChange: false, matchCount: 0)
-    }
-
-    var didChange = false
-
-    func obj(_ pairs: [(String, JSONValue)]) -> JSONValue {
-        .object(OrderedDictionary(uniqueKeysWithValues: pairs))
-    }
-
-    if properties["attributes"] == nil {
-        properties["attributes"] = obj([
-            ("type", .string("object")),
-            ("properties", obj([
-                ("startDate", obj([("type", .string("string")), ("nullable", .bool(true))])),
-                ("endDate", obj([("type", .string("string")), ("nullable", .bool(true))])),
-            ])),
-        ])
-        didChange = true
-    }
-
-    if properties["relationships"] == nil {
-        properties["relationships"] = obj([
-            ("type", .string("object")),
-            ("required", .array([.string("appPricePoint")])),
-            ("properties", obj([
-                ("appPricePoint", obj([
-                    ("type", .string("object")),
-                    ("required", .array([.string("data")])),
-                    ("properties", obj([
-                        ("data", obj([
-                            ("type", .string("object")),
-                            ("required", .array([.string("type"), .string("id")])),
-                            ("properties", obj([
-                                ("type", obj([("type", .string("string")), ("enum", .array([.string("appPricePoints")]))])),
-                                ("id", obj([("type", .string("string"))])),
-                            ])),
-                        ])),
-                    ])),
-                ])),
-            ])),
-        ])
-        didChange = true
-    }
-
-    if didChange {
-        schema["properties"] = .object(properties)
-        schemas["AppPriceV2InlineCreate"] = .object(schema)
-        components["schemas"] = .object(schemas)
-        root["components"] = .object(components)
-    }
-
-    return .init(didChange: didChange, matchCount: 1)
-}
-
-// FB22160701
-private func ensureTerritoryAvailabilityInlineCreateFields(_ root: inout OrderedDictionary<String, JSONValue>) -> PatchOutcome {
-    guard
-        var components = root["components"]?.objectValue,
-        var schemas = components["schemas"]?.objectValue,
-        var schema = schemas["TerritoryAvailabilityInlineCreate"]?.objectValue,
-        var properties = schema["properties"]?.objectValue
-    else {
-        return .init(didChange: false, matchCount: 0)
-    }
-
-    var didChange = false
-
-    func obj(_ pairs: [(String, JSONValue)]) -> JSONValue {
-        .object(OrderedDictionary(uniqueKeysWithValues: pairs))
-    }
-
-    if properties["attributes"] == nil {
-        properties["attributes"] = obj([
-            ("type", .string("object")),
-            ("required", .array([.string("available")])),
-            ("properties", obj([
-                ("available", obj([("type", .string("boolean"))])),
-                ("preOrderEnabled", obj([("type", .string("boolean")), ("nullable", .bool(true))])),
-                ("releaseDate", obj([("type", .string("string")), ("nullable", .bool(true))])),
-            ])),
-        ])
-        didChange = true
-    }
-
-    if properties["relationships"] == nil {
-        properties["relationships"] = obj([
-            ("type", .string("object")),
-            ("required", .array([.string("territory")])),
-            ("properties", obj([
-                ("territory", obj([
-                    ("type", .string("object")),
-                    ("required", .array([.string("data")])),
-                    ("properties", obj([
-                        ("data", obj([
-                            ("type", .string("object")),
-                            ("required", .array([.string("type"), .string("id")])),
-                            ("properties", obj([
-                                ("type", obj([("type", .string("string")), ("enum", .array([.string("territories")]))])),
-                                ("id", obj([("type", .string("string"))])),
-                            ])),
-                        ])),
-                    ])),
-                ])),
-            ])),
-        ])
-        didChange = true
-    }
-
-    if didChange {
-        schema["properties"] = .object(properties)
-        schemas["TerritoryAvailabilityInlineCreate"] = .object(schema)
-        components["schemas"] = .object(schemas)
-        root["components"] = .object(components)
-    }
-
-    return .init(didChange: didChange, matchCount: 1)
-}
-
 private func ensureWinBackOfferPriceInlineCreateFields(_ root: inout OrderedDictionary<String, JSONValue>) -> PatchOutcome {
     guard
         var components = root["components"]?.objectValue,
@@ -556,5 +414,4 @@ private func ensureResponseErrorSchemaAndRef(_ root: inout OrderedDictionary<Str
 
     return .init(didChange: didChange, matchCount: matchCount)
 }
-
 

@@ -19,7 +19,9 @@ extension APIEndpoint.V1.GameCenterChallengeVersions {
 
 		public struct GetParameters {
 			public var fieldsGameCenterChallengeVersions: [FieldsGameCenterChallengeVersions]?
+			public var fieldsGameCenterChallenges: [FieldsGameCenterChallenges]?
 			public var fieldsGameCenterChallengeLocalizations: [FieldsGameCenterChallengeLocalizations]?
+			public var fieldsGameCenterChallengeVersionReleases: [FieldsGameCenterChallengeVersionReleases]?
 			public var fieldsGameCenterChallengeImages: [FieldsGameCenterChallengeImages]?
 			public var include: [Include]?
 			public var limitLocalizations: Int?
@@ -34,12 +36,29 @@ extension APIEndpoint.V1.GameCenterChallengeVersions {
 				case defaultImage
 			}
 
+			public enum FieldsGameCenterChallenges: String, Codable, CaseIterable {
+				case referenceName
+				case vendorIdentifier
+				case archived
+				case challengeType
+				case repeatable
+				case gameCenterDetail
+				case gameCenterGroup
+				case versions
+				case leaderboard
+				case leaderboardV2
+			}
+
 			public enum FieldsGameCenterChallengeLocalizations: String, Codable, CaseIterable {
 				case locale
 				case name
 				case description
 				case version
 				case image
+			}
+
+			public enum FieldsGameCenterChallengeVersionReleases: String, Codable, CaseIterable {
+				case version
 			}
 
 			public enum FieldsGameCenterChallengeImages: String, Codable, CaseIterable {
@@ -57,9 +76,11 @@ extension APIEndpoint.V1.GameCenterChallengeVersions {
 				case defaultImage
 			}
 
-			public init(fieldsGameCenterChallengeVersions: [FieldsGameCenterChallengeVersions]? = nil, fieldsGameCenterChallengeLocalizations: [FieldsGameCenterChallengeLocalizations]? = nil, fieldsGameCenterChallengeImages: [FieldsGameCenterChallengeImages]? = nil, include: [Include]? = nil, limitLocalizations: Int? = nil, limitReleases: Int? = nil) {
+			public init(fieldsGameCenterChallengeVersions: [FieldsGameCenterChallengeVersions]? = nil, fieldsGameCenterChallenges: [FieldsGameCenterChallenges]? = nil, fieldsGameCenterChallengeLocalizations: [FieldsGameCenterChallengeLocalizations]? = nil, fieldsGameCenterChallengeVersionReleases: [FieldsGameCenterChallengeVersionReleases]? = nil, fieldsGameCenterChallengeImages: [FieldsGameCenterChallengeImages]? = nil, include: [Include]? = nil, limitLocalizations: Int? = nil, limitReleases: Int? = nil) {
 				self.fieldsGameCenterChallengeVersions = fieldsGameCenterChallengeVersions
+				self.fieldsGameCenterChallenges = fieldsGameCenterChallenges
 				self.fieldsGameCenterChallengeLocalizations = fieldsGameCenterChallengeLocalizations
+				self.fieldsGameCenterChallengeVersionReleases = fieldsGameCenterChallengeVersionReleases
 				self.fieldsGameCenterChallengeImages = fieldsGameCenterChallengeImages
 				self.include = include
 				self.limitLocalizations = limitLocalizations
@@ -69,7 +90,9 @@ extension APIEndpoint.V1.GameCenterChallengeVersions {
 			public var asQuery: [(String, String?)] {
 				let encoder = URLQueryEncoder(explode: false)
 				encoder.encode(fieldsGameCenterChallengeVersions, forKey: "fields[gameCenterChallengeVersions]")
+				encoder.encode(fieldsGameCenterChallenges, forKey: "fields[gameCenterChallenges]")
 				encoder.encode(fieldsGameCenterChallengeLocalizations, forKey: "fields[gameCenterChallengeLocalizations]")
+				encoder.encode(fieldsGameCenterChallengeVersionReleases, forKey: "fields[gameCenterChallengeVersionReleases]")
 				encoder.encode(fieldsGameCenterChallengeImages, forKey: "fields[gameCenterChallengeImages]")
 				encoder.encode(include, forKey: "include")
 				encoder.encode(limitLocalizations, forKey: "limit[localizations]")

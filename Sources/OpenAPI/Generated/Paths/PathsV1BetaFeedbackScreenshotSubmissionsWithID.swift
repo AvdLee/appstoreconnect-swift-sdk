@@ -13,46 +13,103 @@ extension APIEndpoint.V1.BetaFeedbackScreenshotSubmissions {
 		/// Path: `/v1/betaFeedbackScreenshotSubmissions/{id}`
 		public let path: String
 
-		public func get(fieldsBetaFeedbackScreenshotSubmissions: [FieldsBetaFeedbackScreenshotSubmissions]? = nil, include: [Include]? = nil) -> Request<AppStoreConnect_Swift_SDK.BetaFeedbackScreenshotSubmissionResponse> {
-			Request(path: path, method: "GET", query: makeGetQuery(fieldsBetaFeedbackScreenshotSubmissions, include), id: "betaFeedbackScreenshotSubmissions_getInstance")
+		public func get(parameters: GetParameters? = nil) -> Request<AppStoreConnect_Swift_SDK.BetaFeedbackScreenshotSubmissionResponse> {
+			Request(path: path, method: "GET", query: parameters?.asQuery, id: "betaFeedbackScreenshotSubmissions_getInstance")
 		}
 
-		private func makeGetQuery(_ fieldsBetaFeedbackScreenshotSubmissions: [FieldsBetaFeedbackScreenshotSubmissions]?, _ include: [Include]?) -> [(String, String?)] {
-			let encoder = URLQueryEncoder(explode: false)
-			encoder.encode(fieldsBetaFeedbackScreenshotSubmissions, forKey: "fields[betaFeedbackScreenshotSubmissions]")
-			encoder.encode(include, forKey: "include")
-			return encoder.items
-		}
+		public struct GetParameters {
+			public var fieldsBetaFeedbackScreenshotSubmissions: [FieldsBetaFeedbackScreenshotSubmissions]?
+			public var fieldsBuilds: [FieldsBuilds]?
+			public var fieldsBetaTesters: [FieldsBetaTesters]?
+			public var include: [Include]?
 
-		public enum FieldsBetaFeedbackScreenshotSubmissions: String, Codable, CaseIterable {
-			case createdDate
-			case comment
-			case email
-			case deviceModel
-			case osVersion
-			case locale
-			case timeZone
-			case architecture
-			case connectionType
-			case pairedAppleWatch
-			case appUptimeInMilliseconds
-			case diskBytesAvailable
-			case diskBytesTotal
-			case batteryPercentage
-			case screenWidthInPoints
-			case screenHeightInPoints
-			case appPlatform
-			case devicePlatform
-			case deviceFamily
-			case buildBundleID = "buildBundleId"
-			case screenshots
-			case build
-			case tester
-		}
+			public enum FieldsBetaFeedbackScreenshotSubmissions: String, Codable, CaseIterable {
+				case createdDate
+				case comment
+				case email
+				case deviceModel
+				case osVersion
+				case locale
+				case timeZone
+				case architecture
+				case connectionType
+				case pairedAppleWatch
+				case appUptimeInMilliseconds
+				case diskBytesAvailable
+				case diskBytesTotal
+				case batteryPercentage
+				case screenWidthInPoints
+				case screenHeightInPoints
+				case appPlatform
+				case devicePlatform
+				case deviceFamily
+				case buildBundleID = "buildBundleId"
+				case screenshots
+				case build
+				case tester
+			}
 
-		public enum Include: String, Codable, CaseIterable {
-			case build
-			case tester
+			public enum FieldsBuilds: String, Codable, CaseIterable {
+				case version
+				case uploadedDate
+				case expirationDate
+				case expired
+				case minOsVersion
+				case lsMinimumSystemVersion
+				case computedMinMacOsVersion
+				case computedMinVisionOsVersion
+				case iconAssetToken
+				case processingState
+				case buildAudienceType
+				case usesNonExemptEncryption
+				case preReleaseVersion
+				case individualTesters
+				case betaGroups
+				case betaBuildLocalizations
+				case appEncryptionDeclaration
+				case betaAppReviewSubmission
+				case app
+				case buildBetaDetail
+				case appStoreVersion
+				case icons
+				case buildBundles
+				case buildUpload
+				case perfPowerMetrics
+				case diagnosticSignatures
+			}
+
+			public enum FieldsBetaTesters: String, Codable, CaseIterable {
+				case firstName
+				case lastName
+				case email
+				case inviteType
+				case state
+				case appDevices
+				case apps
+				case betaGroups
+				case builds
+			}
+
+			public enum Include: String, Codable, CaseIterable {
+				case build
+				case tester
+			}
+
+			public init(fieldsBetaFeedbackScreenshotSubmissions: [FieldsBetaFeedbackScreenshotSubmissions]? = nil, fieldsBuilds: [FieldsBuilds]? = nil, fieldsBetaTesters: [FieldsBetaTesters]? = nil, include: [Include]? = nil) {
+				self.fieldsBetaFeedbackScreenshotSubmissions = fieldsBetaFeedbackScreenshotSubmissions
+				self.fieldsBuilds = fieldsBuilds
+				self.fieldsBetaTesters = fieldsBetaTesters
+				self.include = include
+			}
+
+			public var asQuery: [(String, String?)] {
+				let encoder = URLQueryEncoder(explode: false)
+				encoder.encode(fieldsBetaFeedbackScreenshotSubmissions, forKey: "fields[betaFeedbackScreenshotSubmissions]")
+				encoder.encode(fieldsBuilds, forKey: "fields[builds]")
+				encoder.encode(fieldsBetaTesters, forKey: "fields[betaTesters]")
+				encoder.encode(include, forKey: "include")
+				return encoder.items
+			}
 		}
 
 		public var delete: Request<Void> {

@@ -13,36 +13,62 @@ extension APIEndpoint.V1.AppEventScreenshots {
 		/// Path: `/v1/appEventScreenshots/{id}`
 		public let path: String
 
-		public func get(fieldsAppEventScreenshots: [FieldsAppEventScreenshots]? = nil, include: [Include]? = nil) -> Request<AppStoreConnect_Swift_SDK.AppEventScreenshotResponse> {
-			Request(path: path, method: "GET", query: makeGetQuery(fieldsAppEventScreenshots, include), id: "appEventScreenshots_getInstance")
+		@available(*, deprecated, message: "Deprecated")
+		public func get(parameters: GetParameters? = nil) -> Request<AppStoreConnect_Swift_SDK.AppEventScreenshotResponse> {
+			Request(path: path, method: "GET", query: parameters?.asQuery, id: "appEventScreenshots_getInstance")
 		}
 
-		private func makeGetQuery(_ fieldsAppEventScreenshots: [FieldsAppEventScreenshots]?, _ include: [Include]?) -> [(String, String?)] {
-			let encoder = URLQueryEncoder(explode: false)
-			encoder.encode(fieldsAppEventScreenshots, forKey: "fields[appEventScreenshots]")
-			encoder.encode(include, forKey: "include")
-			return encoder.items
+		public struct GetParameters {
+			public var fieldsAppEventScreenshots: [FieldsAppEventScreenshots]?
+			public var fieldsAppEventLocalizations: [FieldsAppEventLocalizations]?
+			public var include: [Include]?
+
+			public enum FieldsAppEventScreenshots: String, Codable, CaseIterable {
+				case fileSize
+				case fileName
+				case imageAsset
+				case assetToken
+				case uploadOperations
+				case assetDeliveryState
+				case appEventAssetType
+				case appEventLocalization
+			}
+
+			public enum FieldsAppEventLocalizations: String, Codable, CaseIterable {
+				case locale
+				case name
+				case shortDescription
+				case longDescription
+				case appEvent
+				case appEventScreenshots
+				case appEventVideoClips
+			}
+
+			public enum Include: String, Codable, CaseIterable {
+				case appEventLocalization
+			}
+
+			public init(fieldsAppEventScreenshots: [FieldsAppEventScreenshots]? = nil, fieldsAppEventLocalizations: [FieldsAppEventLocalizations]? = nil, include: [Include]? = nil) {
+				self.fieldsAppEventScreenshots = fieldsAppEventScreenshots
+				self.fieldsAppEventLocalizations = fieldsAppEventLocalizations
+				self.include = include
+			}
+
+			public var asQuery: [(String, String?)] {
+				let encoder = URLQueryEncoder(explode: false)
+				encoder.encode(fieldsAppEventScreenshots, forKey: "fields[appEventScreenshots]")
+				encoder.encode(fieldsAppEventLocalizations, forKey: "fields[appEventLocalizations]")
+				encoder.encode(include, forKey: "include")
+				return encoder.items
+			}
 		}
 
-		public enum FieldsAppEventScreenshots: String, Codable, CaseIterable {
-			case fileSize
-			case fileName
-			case imageAsset
-			case assetToken
-			case uploadOperations
-			case assetDeliveryState
-			case appEventAssetType
-			case appEventLocalization
-		}
-
-		public enum Include: String, Codable, CaseIterable {
-			case appEventLocalization
-		}
-
+		@available(*, deprecated, message: "Deprecated")
 		public func patch(_ body: AppStoreConnect_Swift_SDK.AppEventScreenshotUpdateRequest) -> Request<AppStoreConnect_Swift_SDK.AppEventScreenshotResponse> {
 			Request(path: path, method: "PATCH", body: body, id: "appEventScreenshots_updateInstance")
 		}
 
+		@available(*, deprecated, message: "Deprecated")
 		public var delete: Request<Void> {
 			Request(path: path, method: "DELETE", id: "appEventScreenshots_deleteInstance")
 		}

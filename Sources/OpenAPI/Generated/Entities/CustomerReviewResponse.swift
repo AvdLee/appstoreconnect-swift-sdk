@@ -6,10 +6,44 @@ import Foundation
 public struct CustomerReviewResponse: Codable {
 	/// CustomerReview
 	public var data: CustomerReview
-	public var included: [CustomerReviewResponseV1]?
+	public var included: [IncludedItem]?
 	public var links: DocumentLinks
 
-	public init(data: CustomerReview, included: [CustomerReviewResponseV1]? = nil, links: DocumentLinks) {
+	public enum IncludedItem: Codable {
+		case customerReviewResponseV1(CustomerReviewResponseV1)
+		case territory(Territory)
+
+		public init(from decoder: Decoder) throws {
+
+			struct Discriminator: Decodable {
+				let type: String
+			}
+
+			let container = try decoder.singleValueContainer()
+			let discriminatorValue = try container.decode(Discriminator.self).type
+
+			switch discriminatorValue {
+			case "customerReviewResponses": self = .customerReviewResponseV1(try container.decode(CustomerReviewResponseV1.self))
+			case "territories": self = .territory(try container.decode(Territory.self))
+
+			default:
+				throw DecodingError.dataCorruptedError(
+					in: container,
+					debugDescription: "Discriminator value '\(discriminatorValue)' does not match any expected values (customerReviewResponses, territories)."
+				)
+			}
+		}
+
+		public func encode(to encoder: Encoder) throws {
+			var container = encoder.singleValueContainer()
+			switch self {
+			case .customerReviewResponseV1(let value): try container.encode(value)
+			case .territory(let value): try container.encode(value)
+			}
+		}
+	}
+
+	public init(data: CustomerReview, included: [IncludedItem]? = nil, links: DocumentLinks) {
 		self.data = data
 		self.included = included
 		self.links = links
@@ -18,7 +52,7 @@ public struct CustomerReviewResponse: Codable {
 	public init(from decoder: Decoder) throws {
 		let values = try decoder.container(keyedBy: StringCodingKey.self)
 		self.data = try values.decode(CustomerReview.self, forKey: "data")
-		self.included = try values.decodeIfPresent([CustomerReviewResponseV1].self, forKey: "included")
+		self.included = try values.decodeIfPresent([IncludedItem].self, forKey: "included")
 		self.links = try values.decode(DocumentLinks.self, forKey: "links")
 	}
 

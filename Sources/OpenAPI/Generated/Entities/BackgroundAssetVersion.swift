@@ -20,6 +20,7 @@ public struct BackgroundAssetVersion: Codable, Identifiable {
 		public var state: BackgroundAssetVersionState?
 		public var stateDetails: StateDetails?
 		public var version: String?
+		public var locale: String?
 
 		public struct StateDetails: Codable {
 			public var errors: [StateDetail]?
@@ -47,12 +48,13 @@ public struct BackgroundAssetVersion: Codable, Identifiable {
 			}
 		}
 
-		public init(createdDate: Date? = nil, platforms: [Platform]? = nil, state: BackgroundAssetVersionState? = nil, stateDetails: StateDetails? = nil, version: String? = nil) {
+		public init(createdDate: Date? = nil, platforms: [Platform]? = nil, state: BackgroundAssetVersionState? = nil, stateDetails: StateDetails? = nil, version: String? = nil, locale: String? = nil) {
 			self.createdDate = createdDate
 			self.platforms = platforms
 			self.state = state
 			self.stateDetails = stateDetails
 			self.version = version
+			self.locale = locale
 		}
 
 		public init(from decoder: Decoder) throws {
@@ -62,6 +64,7 @@ public struct BackgroundAssetVersion: Codable, Identifiable {
 			self.state = try values.decodeIfPresent(BackgroundAssetVersionState.self, forKey: "state")
 			self.stateDetails = try values.decodeIfPresent(StateDetails.self, forKey: "stateDetails")
 			self.version = try values.decodeIfPresent(String.self, forKey: "version")
+			self.locale = try values.decodeIfPresent(String.self, forKey: "locale")
 		}
 
 		public func encode(to encoder: Encoder) throws {
@@ -71,6 +74,7 @@ public struct BackgroundAssetVersion: Codable, Identifiable {
 			try values.encodeIfPresent(state, forKey: "state")
 			try values.encodeIfPresent(stateDetails, forKey: "stateDetails")
 			try values.encodeIfPresent(version, forKey: "version")
+			try values.encodeIfPresent(locale, forKey: "locale")
 		}
 	}
 

@@ -54,6 +54,7 @@ extension APIEndpoint.V1.Subscriptions.WithID {
 				case subscriptionAvailability
 				case winBackOffers
 				case images
+				case planAvailabilities
 			}
 
 			public enum Include: String, Codable, CaseIterable {

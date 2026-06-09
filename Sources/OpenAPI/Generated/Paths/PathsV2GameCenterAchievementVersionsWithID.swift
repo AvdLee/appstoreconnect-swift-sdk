@@ -19,6 +19,7 @@ extension APIEndpoint.V2.GameCenterAchievementVersions {
 
 		public struct GetParameters {
 			public var fieldsGameCenterAchievementVersions: [FieldsGameCenterAchievementVersions]?
+			public var fieldsGameCenterAchievements: [FieldsGameCenterAchievements]?
 			public var fieldsGameCenterAchievementLocalizations: [FieldsGameCenterAchievementLocalizations]?
 			public var include: [Include]?
 			public var limitLocalizations: Int?
@@ -28,6 +29,20 @@ extension APIEndpoint.V2.GameCenterAchievementVersions {
 				case state
 				case achievement
 				case localizations
+			}
+
+			public enum FieldsGameCenterAchievements: String, Codable, CaseIterable {
+				case referenceName
+				case vendorIdentifier
+				case points
+				case showBeforeEarned
+				case repeatable
+				case archived
+				case activityProperties
+				case gameCenterDetail
+				case gameCenterGroup
+				case activity
+				case versions
 			}
 
 			public enum FieldsGameCenterAchievementLocalizations: String, Codable, CaseIterable {
@@ -44,8 +59,9 @@ extension APIEndpoint.V2.GameCenterAchievementVersions {
 				case localizations
 			}
 
-			public init(fieldsGameCenterAchievementVersions: [FieldsGameCenterAchievementVersions]? = nil, fieldsGameCenterAchievementLocalizations: [FieldsGameCenterAchievementLocalizations]? = nil, include: [Include]? = nil, limitLocalizations: Int? = nil) {
+			public init(fieldsGameCenterAchievementVersions: [FieldsGameCenterAchievementVersions]? = nil, fieldsGameCenterAchievements: [FieldsGameCenterAchievements]? = nil, fieldsGameCenterAchievementLocalizations: [FieldsGameCenterAchievementLocalizations]? = nil, include: [Include]? = nil, limitLocalizations: Int? = nil) {
 				self.fieldsGameCenterAchievementVersions = fieldsGameCenterAchievementVersions
+				self.fieldsGameCenterAchievements = fieldsGameCenterAchievements
 				self.fieldsGameCenterAchievementLocalizations = fieldsGameCenterAchievementLocalizations
 				self.include = include
 				self.limitLocalizations = limitLocalizations
@@ -54,6 +70,7 @@ extension APIEndpoint.V2.GameCenterAchievementVersions {
 			public var asQuery: [(String, String?)] {
 				let encoder = URLQueryEncoder(explode: false)
 				encoder.encode(fieldsGameCenterAchievementVersions, forKey: "fields[gameCenterAchievementVersions]")
+				encoder.encode(fieldsGameCenterAchievements, forKey: "fields[gameCenterAchievements]")
 				encoder.encode(fieldsGameCenterAchievementLocalizations, forKey: "fields[gameCenterAchievementLocalizations]")
 				encoder.encode(include, forKey: "include")
 				encoder.encode(limitLocalizations, forKey: "limit[localizations]")

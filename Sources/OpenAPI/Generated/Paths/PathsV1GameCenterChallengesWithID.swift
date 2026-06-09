@@ -19,7 +19,10 @@ extension APIEndpoint.V1.GameCenterChallenges {
 
 		public struct GetParameters {
 			public var fieldsGameCenterChallenges: [FieldsGameCenterChallenges]?
+			public var fieldsGameCenterDetails: [FieldsGameCenterDetails]?
+			public var fieldsGameCenterGroups: [FieldsGameCenterGroups]?
 			public var fieldsGameCenterChallengeVersions: [FieldsGameCenterChallengeVersions]?
+			public var fieldsGameCenterLeaderboards: [FieldsGameCenterLeaderboards]?
 			public var include: [Include]?
 			public var limitVersions: Int?
 
@@ -36,6 +39,45 @@ extension APIEndpoint.V1.GameCenterChallenges {
 				case leaderboardV2
 			}
 
+			public enum FieldsGameCenterDetails: String, Codable, CaseIterable {
+				case arcadeEnabled
+				case challengeEnabled
+				case app
+				case gameCenterAppVersions
+				case gameCenterGroup
+				case gameCenterLeaderboards
+				case gameCenterLeaderboardsV2
+				case gameCenterLeaderboardSets
+				case gameCenterLeaderboardSetsV2
+				case gameCenterAchievements
+				case gameCenterAchievementsV2
+				case gameCenterActivities
+				case gameCenterChallenges
+				case defaultLeaderboard
+				case defaultLeaderboardV2
+				case defaultGroupLeaderboard
+				case defaultGroupLeaderboardV2
+				case achievementReleases
+				case activityReleases
+				case challengeReleases
+				case leaderboardReleases
+				case leaderboardSetReleases
+				case challengesMinimumPlatformVersions
+			}
+
+			public enum FieldsGameCenterGroups: String, Codable, CaseIterable {
+				case referenceName
+				case gameCenterDetails
+				case gameCenterLeaderboards
+				case gameCenterLeaderboardsV2
+				case gameCenterLeaderboardSets
+				case gameCenterLeaderboardSetsV2
+				case gameCenterAchievements
+				case gameCenterAchievementsV2
+				case gameCenterActivities
+				case gameCenterChallenges
+			}
+
 			public enum FieldsGameCenterChallengeVersions: String, Codable, CaseIterable {
 				case version
 				case state
@@ -43,6 +85,31 @@ extension APIEndpoint.V1.GameCenterChallenges {
 				case localizations
 				case releases
 				case defaultImage
+			}
+
+			public enum FieldsGameCenterLeaderboards: String, Codable, CaseIterable {
+				case defaultFormatter
+				case referenceName
+				case vendorIdentifier
+				case submissionType
+				case scoreSortType
+				case scoreRangeStart
+				case scoreRangeEnd
+				case recurrenceStartDate
+				case recurrenceDuration
+				case recurrenceRule
+				case archived
+				case activityProperties
+				case visibility
+				case gameCenterDetail
+				case gameCenterGroup
+				case groupLeaderboard
+				case gameCenterLeaderboardSets
+				case localizations
+				case releases
+				case activity
+				case challenge
+				case versions
 			}
 
 			public enum Include: String, Codable, CaseIterable {
@@ -53,9 +120,12 @@ extension APIEndpoint.V1.GameCenterChallenges {
 				case leaderboardV2
 			}
 
-			public init(fieldsGameCenterChallenges: [FieldsGameCenterChallenges]? = nil, fieldsGameCenterChallengeVersions: [FieldsGameCenterChallengeVersions]? = nil, include: [Include]? = nil, limitVersions: Int? = nil) {
+			public init(fieldsGameCenterChallenges: [FieldsGameCenterChallenges]? = nil, fieldsGameCenterDetails: [FieldsGameCenterDetails]? = nil, fieldsGameCenterGroups: [FieldsGameCenterGroups]? = nil, fieldsGameCenterChallengeVersions: [FieldsGameCenterChallengeVersions]? = nil, fieldsGameCenterLeaderboards: [FieldsGameCenterLeaderboards]? = nil, include: [Include]? = nil, limitVersions: Int? = nil) {
 				self.fieldsGameCenterChallenges = fieldsGameCenterChallenges
+				self.fieldsGameCenterDetails = fieldsGameCenterDetails
+				self.fieldsGameCenterGroups = fieldsGameCenterGroups
 				self.fieldsGameCenterChallengeVersions = fieldsGameCenterChallengeVersions
+				self.fieldsGameCenterLeaderboards = fieldsGameCenterLeaderboards
 				self.include = include
 				self.limitVersions = limitVersions
 			}
@@ -63,7 +133,10 @@ extension APIEndpoint.V1.GameCenterChallenges {
 			public var asQuery: [(String, String?)] {
 				let encoder = URLQueryEncoder(explode: false)
 				encoder.encode(fieldsGameCenterChallenges, forKey: "fields[gameCenterChallenges]")
+				encoder.encode(fieldsGameCenterDetails, forKey: "fields[gameCenterDetails]")
+				encoder.encode(fieldsGameCenterGroups, forKey: "fields[gameCenterGroups]")
 				encoder.encode(fieldsGameCenterChallengeVersions, forKey: "fields[gameCenterChallengeVersions]")
+				encoder.encode(fieldsGameCenterLeaderboards, forKey: "fields[gameCenterLeaderboards]")
 				encoder.encode(include, forKey: "include")
 				encoder.encode(limitVersions, forKey: "limit[versions]")
 				return encoder.items

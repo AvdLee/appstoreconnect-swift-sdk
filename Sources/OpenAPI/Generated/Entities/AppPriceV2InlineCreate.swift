@@ -36,10 +36,10 @@ public struct AppPriceV2InlineCreate: Codable, Identifiable {
 	}
 
 	public struct Relationships: Codable {
-		public var appPricePoint: AppPricePoint
+		public var appPricePoint: AppPricePoint?
 
 		public struct AppPricePoint: Codable {
-			public var data: Data
+			public var data: Data?
 
 			public struct Data: Codable, Identifiable {
 				public var type: `Type`
@@ -67,33 +67,33 @@ public struct AppPriceV2InlineCreate: Codable, Identifiable {
 				}
 			}
 
-			public init(data: Data) {
+			public init(data: Data? = nil) {
 				self.data = data
 			}
 
 			public init(from decoder: Decoder) throws {
 				let values = try decoder.container(keyedBy: StringCodingKey.self)
-				self.data = try values.decode(Data.self, forKey: "data")
+				self.data = try values.decodeIfPresent(Data.self, forKey: "data")
 			}
 
 			public func encode(to encoder: Encoder) throws {
 				var values = encoder.container(keyedBy: StringCodingKey.self)
-				try values.encode(data, forKey: "data")
+				try values.encodeIfPresent(data, forKey: "data")
 			}
 		}
 
-		public init(appPricePoint: AppPricePoint) {
+		public init(appPricePoint: AppPricePoint? = nil) {
 			self.appPricePoint = appPricePoint
 		}
 
 		public init(from decoder: Decoder) throws {
 			let values = try decoder.container(keyedBy: StringCodingKey.self)
-			self.appPricePoint = try values.decode(AppPricePoint.self, forKey: "appPricePoint")
+			self.appPricePoint = try values.decodeIfPresent(AppPricePoint.self, forKey: "appPricePoint")
 		}
 
 		public func encode(to encoder: Encoder) throws {
 			var values = encoder.container(keyedBy: StringCodingKey.self)
-			try values.encode(appPricePoint, forKey: "appPricePoint")
+			try values.encodeIfPresent(appPricePoint, forKey: "appPricePoint")
 		}
 	}
 

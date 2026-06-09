@@ -19,6 +19,7 @@ extension APIEndpoint.V1.SubscriptionPromotionalOffers {
 
 		public struct GetParameters {
 			public var fieldsSubscriptionPromotionalOffers: [FieldsSubscriptionPromotionalOffers]?
+			public var fieldsSubscriptions: [FieldsSubscriptions]?
 			public var fieldsSubscriptionPromotionalOfferPrices: [FieldsSubscriptionPromotionalOfferPrices]?
 			public var include: [Include]?
 			public var limitPrices: Int?
@@ -29,8 +30,32 @@ extension APIEndpoint.V1.SubscriptionPromotionalOffers {
 				case numberOfPeriods
 				case offerCode
 				case offerMode
+				case targetSubscriptionPlanType
 				case subscription
 				case prices
+			}
+
+			public enum FieldsSubscriptions: String, Codable, CaseIterable {
+				case name
+				case productID = "productId"
+				case familySharable
+				case state
+				case subscriptionPeriod
+				case reviewNote
+				case groupLevel
+				case subscriptionLocalizations
+				case appStoreReviewScreenshot
+				case group
+				case introductoryOffers
+				case promotionalOffers
+				case offerCodes
+				case prices
+				case pricePoints
+				case promotedPurchase
+				case subscriptionAvailability
+				case winBackOffers
+				case images
+				case planAvailabilities
 			}
 
 			public enum FieldsSubscriptionPromotionalOfferPrices: String, Codable, CaseIterable {
@@ -43,8 +68,9 @@ extension APIEndpoint.V1.SubscriptionPromotionalOffers {
 				case prices
 			}
 
-			public init(fieldsSubscriptionPromotionalOffers: [FieldsSubscriptionPromotionalOffers]? = nil, fieldsSubscriptionPromotionalOfferPrices: [FieldsSubscriptionPromotionalOfferPrices]? = nil, include: [Include]? = nil, limitPrices: Int? = nil) {
+			public init(fieldsSubscriptionPromotionalOffers: [FieldsSubscriptionPromotionalOffers]? = nil, fieldsSubscriptions: [FieldsSubscriptions]? = nil, fieldsSubscriptionPromotionalOfferPrices: [FieldsSubscriptionPromotionalOfferPrices]? = nil, include: [Include]? = nil, limitPrices: Int? = nil) {
 				self.fieldsSubscriptionPromotionalOffers = fieldsSubscriptionPromotionalOffers
+				self.fieldsSubscriptions = fieldsSubscriptions
 				self.fieldsSubscriptionPromotionalOfferPrices = fieldsSubscriptionPromotionalOfferPrices
 				self.include = include
 				self.limitPrices = limitPrices
@@ -53,6 +79,7 @@ extension APIEndpoint.V1.SubscriptionPromotionalOffers {
 			public var asQuery: [(String, String?)] {
 				let encoder = URLQueryEncoder(explode: false)
 				encoder.encode(fieldsSubscriptionPromotionalOffers, forKey: "fields[subscriptionPromotionalOffers]")
+				encoder.encode(fieldsSubscriptions, forKey: "fields[subscriptions]")
 				encoder.encode(fieldsSubscriptionPromotionalOfferPrices, forKey: "fields[subscriptionPromotionalOfferPrices]")
 				encoder.encode(include, forKey: "include")
 				encoder.encode(limitPrices, forKey: "limit[prices]")

@@ -14,23 +14,46 @@ extension APIEndpoint.V1.GameCenterActivityVersionReleases {
 		public let path: String
 
 		@available(*, deprecated, message: "Deprecated")
-		public func get(fieldsGameCenterActivityVersionReleases: [FieldsGameCenterActivityVersionReleases]? = nil, include: [Include]? = nil) -> Request<AppStoreConnect_Swift_SDK.GameCenterActivityVersionReleaseResponse> {
-			Request(path: path, method: "GET", query: makeGetQuery(fieldsGameCenterActivityVersionReleases, include), id: "gameCenterActivityVersionReleases_getInstance")
+		public func get(parameters: GetParameters? = nil) -> Request<AppStoreConnect_Swift_SDK.GameCenterActivityVersionReleaseResponse> {
+			Request(path: path, method: "GET", query: parameters?.asQuery, id: "gameCenterActivityVersionReleases_getInstance")
 		}
 
-		private func makeGetQuery(_ fieldsGameCenterActivityVersionReleases: [FieldsGameCenterActivityVersionReleases]?, _ include: [Include]?) -> [(String, String?)] {
-			let encoder = URLQueryEncoder(explode: false)
-			encoder.encode(fieldsGameCenterActivityVersionReleases, forKey: "fields[gameCenterActivityVersionReleases]")
-			encoder.encode(include, forKey: "include")
-			return encoder.items
-		}
+		public struct GetParameters {
+			public var fieldsGameCenterActivityVersionReleases: [FieldsGameCenterActivityVersionReleases]?
+			public var fieldsGameCenterActivityVersions: [FieldsGameCenterActivityVersions]?
+			public var include: [Include]?
 
-		public enum FieldsGameCenterActivityVersionReleases: String, Codable, CaseIterable {
-			case version
-		}
+			public enum FieldsGameCenterActivityVersionReleases: String, Codable, CaseIterable {
+				case version
+			}
 
-		public enum Include: String, Codable, CaseIterable {
-			case version
+			public enum FieldsGameCenterActivityVersions: String, Codable, CaseIterable {
+				case version
+				case state
+				case fallbackURL = "fallbackUrl"
+				case activity
+				case localizations
+				case defaultImage
+				case releases
+			}
+
+			public enum Include: String, Codable, CaseIterable {
+				case version
+			}
+
+			public init(fieldsGameCenterActivityVersionReleases: [FieldsGameCenterActivityVersionReleases]? = nil, fieldsGameCenterActivityVersions: [FieldsGameCenterActivityVersions]? = nil, include: [Include]? = nil) {
+				self.fieldsGameCenterActivityVersionReleases = fieldsGameCenterActivityVersionReleases
+				self.fieldsGameCenterActivityVersions = fieldsGameCenterActivityVersions
+				self.include = include
+			}
+
+			public var asQuery: [(String, String?)] {
+				let encoder = URLQueryEncoder(explode: false)
+				encoder.encode(fieldsGameCenterActivityVersionReleases, forKey: "fields[gameCenterActivityVersionReleases]")
+				encoder.encode(fieldsGameCenterActivityVersions, forKey: "fields[gameCenterActivityVersions]")
+				encoder.encode(include, forKey: "include")
+				return encoder.items
+			}
 		}
 
 		@available(*, deprecated, message: "Deprecated")

@@ -37,6 +37,7 @@ extension APIEndpoint.V1.Subscriptions.WithID {
 				case endDate
 				case priority
 				case promotionIntent
+				case targetSubscriptionPlanType
 				case prices
 			}
 

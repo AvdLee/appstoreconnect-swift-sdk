@@ -3,8 +3,11 @@
 
 import Foundation
 
+@available(*, deprecated, message: "Deprecated")
 public struct AppPreviewResponse: Codable {
 	/// AppPreview
+	///
+	/// - warning: Deprecated.
 	public var data: AppPreview
 	public var included: [AppPreviewSet]?
 	public var links: DocumentLinks
