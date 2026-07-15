@@ -13,7 +13,6 @@ extension APIEndpoint.V1.AppEventLocalizations.WithID.Relationships {
 		/// Path: `/v1/appEventLocalizations/{id}/relationships/appEventVideoClips`
 		public let path: String
 
-		@available(*, deprecated, message: "Deprecated")
 		public func get(limit: Int? = nil) -> Request<AppStoreConnect_Swift_SDK.AppEventLocalizationAppEventVideoClipsLinkagesResponse> {
 			Request(path: path, method: "GET", query: makeGetQuery(limit), id: "appEventLocalizations_appEventVideoClips_getToManyRelationship")
 		}

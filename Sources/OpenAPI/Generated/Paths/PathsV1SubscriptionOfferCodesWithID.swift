@@ -68,6 +68,7 @@ extension APIEndpoint.V1.SubscriptionOfferCodes {
 				case winBackOffers
 				case images
 				case planAvailabilities
+				case versions
 			}
 
 			public enum FieldsSubscriptionOfferCodeOneTimeUseCodes: String, Codable, CaseIterable {

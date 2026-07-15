@@ -49,6 +49,7 @@ extension APIEndpoint.V1.Apps.WithID {
 				case inAppPurchaseAvailability
 				case images
 				case offerCodes
+				case versions
 			}
 
 			public enum FieldsSubscriptions: String, Codable, CaseIterable {
@@ -72,6 +73,7 @@ extension APIEndpoint.V1.Apps.WithID {
 				case winBackOffers
 				case images
 				case planAvailabilities
+				case versions
 			}
 
 			public enum Include: String, Codable, CaseIterable {

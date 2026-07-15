@@ -43,6 +43,7 @@ public struct SubscriptionPricePoint: Codable, Identifiable {
 	public struct Relationships: Codable {
 		public var territory: Territory?
 		public var equalizations: Equalizations?
+		public var adjustedEqualizations: AdjustedEqualizations?
 
 		public struct Territory: Codable {
 			public var data: Data?
@@ -106,21 +107,42 @@ public struct SubscriptionPricePoint: Codable, Identifiable {
 			}
 		}
 
-		public init(territory: Territory? = nil, equalizations: Equalizations? = nil) {
+		public struct AdjustedEqualizations: Codable {
+			public var links: RelationshipLinks?
+
+			public init(links: RelationshipLinks? = nil) {
+				self.links = links
+			}
+
+			public init(from decoder: Decoder) throws {
+				let values = try decoder.container(keyedBy: StringCodingKey.self)
+				self.links = try values.decodeIfPresent(RelationshipLinks.self, forKey: "links")
+			}
+
+			public func encode(to encoder: Encoder) throws {
+				var values = encoder.container(keyedBy: StringCodingKey.self)
+				try values.encodeIfPresent(links, forKey: "links")
+			}
+		}
+
+		public init(territory: Territory? = nil, equalizations: Equalizations? = nil, adjustedEqualizations: AdjustedEqualizations? = nil) {
 			self.territory = territory
 			self.equalizations = equalizations
+			self.adjustedEqualizations = adjustedEqualizations
 		}
 
 		public init(from decoder: Decoder) throws {
 			let values = try decoder.container(keyedBy: StringCodingKey.self)
 			self.territory = try values.decodeIfPresent(Territory.self, forKey: "territory")
 			self.equalizations = try values.decodeIfPresent(Equalizations.self, forKey: "equalizations")
+			self.adjustedEqualizations = try values.decodeIfPresent(AdjustedEqualizations.self, forKey: "adjustedEqualizations")
 		}
 
 		public func encode(to encoder: Encoder) throws {
 			var values = encoder.container(keyedBy: StringCodingKey.self)
 			try values.encodeIfPresent(territory, forKey: "territory")
 			try values.encodeIfPresent(equalizations, forKey: "equalizations")
+			try values.encodeIfPresent(adjustedEqualizations, forKey: "adjustedEqualizations")
 		}
 	}
 

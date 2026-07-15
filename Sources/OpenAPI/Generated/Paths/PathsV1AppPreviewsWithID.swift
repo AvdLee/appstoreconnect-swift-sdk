@@ -13,7 +13,6 @@ extension APIEndpoint.V1.AppPreviews {
 		/// Path: `/v1/appPreviews/{id}`
 		public let path: String
 
-		@available(*, deprecated, message: "Deprecated")
 		public func get(parameters: GetParameters? = nil) -> Request<AppStoreConnect_Swift_SDK.AppPreviewResponse> {
 			Request(path: path, method: "GET", query: parameters?.asQuery, id: "appPreviews_getInstance")
 		}
@@ -65,12 +64,10 @@ extension APIEndpoint.V1.AppPreviews {
 			}
 		}
 
-		@available(*, deprecated, message: "Deprecated")
 		public func patch(_ body: AppStoreConnect_Swift_SDK.AppPreviewUpdateRequest) -> Request<AppStoreConnect_Swift_SDK.AppPreviewResponse> {
 			Request(path: path, method: "PATCH", body: body, id: "appPreviews_updateInstance")
 		}
 
-		@available(*, deprecated, message: "Deprecated")
 		public var delete: Request<Void> {
 			Request(path: path, method: "DELETE", id: "appPreviews_deleteInstance")
 		}

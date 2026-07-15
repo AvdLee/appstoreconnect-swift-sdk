@@ -24,10 +24,12 @@ extension APIEndpoint.V1.Apps.WithID {
 			public var fieldsSubscriptionGroups: [FieldsSubscriptionGroups]?
 			public var fieldsSubscriptions: [FieldsSubscriptions]?
 			public var fieldsSubscriptionGroupLocalizations: [FieldsSubscriptionGroupLocalizations]?
+			public var fieldsSubscriptionGroupVersions: [FieldsSubscriptionGroupVersions]?
 			public var limit: Int?
 			public var include: [Include]?
 			public var limitSubscriptions: Int?
 			public var limitSubscriptionGroupLocalizations: Int?
+			public var limitVersions: Int?
 
 			public enum FilterSubscriptionsState: String, Codable, CaseIterable {
 				case missingMetadata = "MISSING_METADATA"
@@ -51,6 +53,7 @@ extension APIEndpoint.V1.Apps.WithID {
 				case referenceName
 				case subscriptions
 				case subscriptionGroupLocalizations
+				case versions
 			}
 
 			public enum FieldsSubscriptions: String, Codable, CaseIterable {
@@ -74,6 +77,7 @@ extension APIEndpoint.V1.Apps.WithID {
 				case winBackOffers
 				case images
 				case planAvailabilities
+				case versions
 			}
 
 			public enum FieldsSubscriptionGroupLocalizations: String, Codable, CaseIterable {
@@ -84,22 +88,32 @@ extension APIEndpoint.V1.Apps.WithID {
 				case subscriptionGroup
 			}
 
+			public enum FieldsSubscriptionGroupVersions: String, Codable, CaseIterable {
+				case version
+				case state
+				case subscriptionGroup
+				case localizations
+			}
+
 			public enum Include: String, Codable, CaseIterable {
 				case subscriptions
 				case subscriptionGroupLocalizations
+				case versions
 			}
 
-			public init(filterReferenceName: [String]? = nil, filterSubscriptionsState: [FilterSubscriptionsState]? = nil, sort: [Sort]? = nil, fieldsSubscriptionGroups: [FieldsSubscriptionGroups]? = nil, fieldsSubscriptions: [FieldsSubscriptions]? = nil, fieldsSubscriptionGroupLocalizations: [FieldsSubscriptionGroupLocalizations]? = nil, limit: Int? = nil, include: [Include]? = nil, limitSubscriptions: Int? = nil, limitSubscriptionGroupLocalizations: Int? = nil) {
+			public init(filterReferenceName: [String]? = nil, filterSubscriptionsState: [FilterSubscriptionsState]? = nil, sort: [Sort]? = nil, fieldsSubscriptionGroups: [FieldsSubscriptionGroups]? = nil, fieldsSubscriptions: [FieldsSubscriptions]? = nil, fieldsSubscriptionGroupLocalizations: [FieldsSubscriptionGroupLocalizations]? = nil, fieldsSubscriptionGroupVersions: [FieldsSubscriptionGroupVersions]? = nil, limit: Int? = nil, include: [Include]? = nil, limitSubscriptions: Int? = nil, limitSubscriptionGroupLocalizations: Int? = nil, limitVersions: Int? = nil) {
 				self.filterReferenceName = filterReferenceName
 				self.filterSubscriptionsState = filterSubscriptionsState
 				self.sort = sort
 				self.fieldsSubscriptionGroups = fieldsSubscriptionGroups
 				self.fieldsSubscriptions = fieldsSubscriptions
 				self.fieldsSubscriptionGroupLocalizations = fieldsSubscriptionGroupLocalizations
+				self.fieldsSubscriptionGroupVersions = fieldsSubscriptionGroupVersions
 				self.limit = limit
 				self.include = include
 				self.limitSubscriptions = limitSubscriptions
 				self.limitSubscriptionGroupLocalizations = limitSubscriptionGroupLocalizations
+				self.limitVersions = limitVersions
 			}
 
 			public var asQuery: [(String, String?)] {
@@ -110,10 +124,12 @@ extension APIEndpoint.V1.Apps.WithID {
 				encoder.encode(fieldsSubscriptionGroups, forKey: "fields[subscriptionGroups]")
 				encoder.encode(fieldsSubscriptions, forKey: "fields[subscriptions]")
 				encoder.encode(fieldsSubscriptionGroupLocalizations, forKey: "fields[subscriptionGroupLocalizations]")
+				encoder.encode(fieldsSubscriptionGroupVersions, forKey: "fields[subscriptionGroupVersions]")
 				encoder.encode(limit, forKey: "limit")
 				encoder.encode(include, forKey: "include")
 				encoder.encode(limitSubscriptions, forKey: "limit[subscriptions]")
 				encoder.encode(limitSubscriptionGroupLocalizations, forKey: "limit[subscriptionGroupLocalizations]")
+				encoder.encode(limitVersions, forKey: "limit[versions]")
 				return encoder.items
 			}
 		}

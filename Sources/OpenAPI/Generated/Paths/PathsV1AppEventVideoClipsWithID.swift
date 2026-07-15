@@ -13,7 +13,6 @@ extension APIEndpoint.V1.AppEventVideoClips {
 		/// Path: `/v1/appEventVideoClips/{id}`
 		public let path: String
 
-		@available(*, deprecated, message: "Deprecated")
 		public func get(parameters: GetParameters? = nil) -> Request<AppStoreConnect_Swift_SDK.AppEventVideoClipResponse> {
 			Request(path: path, method: "GET", query: parameters?.asQuery, id: "appEventVideoClips_getInstance")
 		}
@@ -66,12 +65,10 @@ extension APIEndpoint.V1.AppEventVideoClips {
 			}
 		}
 
-		@available(*, deprecated, message: "Deprecated")
 		public func patch(_ body: AppStoreConnect_Swift_SDK.AppEventVideoClipUpdateRequest) -> Request<AppStoreConnect_Swift_SDK.AppEventVideoClipResponse> {
 			Request(path: path, method: "PATCH", body: body, id: "appEventVideoClips_updateInstance")
 		}
 
-		@available(*, deprecated, message: "Deprecated")
 		public var delete: Request<Void> {
 			Request(path: path, method: "DELETE", id: "appEventVideoClips_deleteInstance")
 		}

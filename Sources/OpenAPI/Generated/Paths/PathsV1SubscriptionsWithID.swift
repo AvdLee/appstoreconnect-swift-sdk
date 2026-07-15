@@ -31,6 +31,7 @@ extension APIEndpoint.V1.Subscriptions {
 			public var fieldsWinBackOffers: [FieldsWinBackOffers]?
 			public var fieldsSubscriptionImages: [FieldsSubscriptionImages]?
 			public var fieldsSubscriptionPlanAvailabilities: [FieldsSubscriptionPlanAvailabilities]?
+			public var fieldsSubscriptionVersions: [FieldsSubscriptionVersions]?
 			public var include: [Include]?
 			public var limitImages: Int?
 			public var limitIntroductoryOffers: Int?
@@ -39,6 +40,7 @@ extension APIEndpoint.V1.Subscriptions {
 			public var limitPrices: Int?
 			public var limitPromotionalOffers: Int?
 			public var limitSubscriptionLocalizations: Int?
+			public var limitVersions: Int?
 			public var limitWinBackOffers: Int?
 
 			public enum FieldsSubscriptions: String, Codable, CaseIterable {
@@ -62,6 +64,7 @@ extension APIEndpoint.V1.Subscriptions {
 				case winBackOffers
 				case images
 				case planAvailabilities
+				case versions
 			}
 
 			public enum FieldsSubscriptionLocalizations: String, Codable, CaseIterable {
@@ -88,6 +91,7 @@ extension APIEndpoint.V1.Subscriptions {
 				case referenceName
 				case subscriptions
 				case subscriptionGroupLocalizations
+				case versions
 			}
 
 			public enum FieldsSubscriptionIntroductoryOffers: String, Codable, CaseIterable {
@@ -187,6 +191,15 @@ extension APIEndpoint.V1.Subscriptions {
 				case availableTerritories
 			}
 
+			public enum FieldsSubscriptionVersions: String, Codable, CaseIterable {
+				case version
+				case state
+				case subscription
+				case image
+				case images
+				case localizations
+			}
+
 			public enum Include: String, Codable, CaseIterable {
 				case subscriptionLocalizations
 				case appStoreReviewScreenshot
@@ -200,9 +213,10 @@ extension APIEndpoint.V1.Subscriptions {
 				case winBackOffers
 				case images
 				case planAvailabilities
+				case versions
 			}
 
-			public init(fieldsSubscriptions: [FieldsSubscriptions]? = nil, fieldsSubscriptionLocalizations: [FieldsSubscriptionLocalizations]? = nil, fieldsSubscriptionAppStoreReviewScreenshots: [FieldsSubscriptionAppStoreReviewScreenshots]? = nil, fieldsSubscriptionGroups: [FieldsSubscriptionGroups]? = nil, fieldsSubscriptionIntroductoryOffers: [FieldsSubscriptionIntroductoryOffers]? = nil, fieldsSubscriptionPromotionalOffers: [FieldsSubscriptionPromotionalOffers]? = nil, fieldsSubscriptionOfferCodes: [FieldsSubscriptionOfferCodes]? = nil, fieldsSubscriptionPrices: [FieldsSubscriptionPrices]? = nil, fieldsPromotedPurchases: [FieldsPromotedPurchases]? = nil, fieldsSubscriptionAvailabilities: [FieldsSubscriptionAvailabilities]? = nil, fieldsWinBackOffers: [FieldsWinBackOffers]? = nil, fieldsSubscriptionImages: [FieldsSubscriptionImages]? = nil, fieldsSubscriptionPlanAvailabilities: [FieldsSubscriptionPlanAvailabilities]? = nil, include: [Include]? = nil, limitImages: Int? = nil, limitIntroductoryOffers: Int? = nil, limitOfferCodes: Int? = nil, limitPlanAvailabilities: Int? = nil, limitPrices: Int? = nil, limitPromotionalOffers: Int? = nil, limitSubscriptionLocalizations: Int? = nil, limitWinBackOffers: Int? = nil) {
+			public init(fieldsSubscriptions: [FieldsSubscriptions]? = nil, fieldsSubscriptionLocalizations: [FieldsSubscriptionLocalizations]? = nil, fieldsSubscriptionAppStoreReviewScreenshots: [FieldsSubscriptionAppStoreReviewScreenshots]? = nil, fieldsSubscriptionGroups: [FieldsSubscriptionGroups]? = nil, fieldsSubscriptionIntroductoryOffers: [FieldsSubscriptionIntroductoryOffers]? = nil, fieldsSubscriptionPromotionalOffers: [FieldsSubscriptionPromotionalOffers]? = nil, fieldsSubscriptionOfferCodes: [FieldsSubscriptionOfferCodes]? = nil, fieldsSubscriptionPrices: [FieldsSubscriptionPrices]? = nil, fieldsPromotedPurchases: [FieldsPromotedPurchases]? = nil, fieldsSubscriptionAvailabilities: [FieldsSubscriptionAvailabilities]? = nil, fieldsWinBackOffers: [FieldsWinBackOffers]? = nil, fieldsSubscriptionImages: [FieldsSubscriptionImages]? = nil, fieldsSubscriptionPlanAvailabilities: [FieldsSubscriptionPlanAvailabilities]? = nil, fieldsSubscriptionVersions: [FieldsSubscriptionVersions]? = nil, include: [Include]? = nil, limitImages: Int? = nil, limitIntroductoryOffers: Int? = nil, limitOfferCodes: Int? = nil, limitPlanAvailabilities: Int? = nil, limitPrices: Int? = nil, limitPromotionalOffers: Int? = nil, limitSubscriptionLocalizations: Int? = nil, limitVersions: Int? = nil, limitWinBackOffers: Int? = nil) {
 				self.fieldsSubscriptions = fieldsSubscriptions
 				self.fieldsSubscriptionLocalizations = fieldsSubscriptionLocalizations
 				self.fieldsSubscriptionAppStoreReviewScreenshots = fieldsSubscriptionAppStoreReviewScreenshots
@@ -216,6 +230,7 @@ extension APIEndpoint.V1.Subscriptions {
 				self.fieldsWinBackOffers = fieldsWinBackOffers
 				self.fieldsSubscriptionImages = fieldsSubscriptionImages
 				self.fieldsSubscriptionPlanAvailabilities = fieldsSubscriptionPlanAvailabilities
+				self.fieldsSubscriptionVersions = fieldsSubscriptionVersions
 				self.include = include
 				self.limitImages = limitImages
 				self.limitIntroductoryOffers = limitIntroductoryOffers
@@ -224,6 +239,7 @@ extension APIEndpoint.V1.Subscriptions {
 				self.limitPrices = limitPrices
 				self.limitPromotionalOffers = limitPromotionalOffers
 				self.limitSubscriptionLocalizations = limitSubscriptionLocalizations
+				self.limitVersions = limitVersions
 				self.limitWinBackOffers = limitWinBackOffers
 			}
 
@@ -242,6 +258,7 @@ extension APIEndpoint.V1.Subscriptions {
 				encoder.encode(fieldsWinBackOffers, forKey: "fields[winBackOffers]")
 				encoder.encode(fieldsSubscriptionImages, forKey: "fields[subscriptionImages]")
 				encoder.encode(fieldsSubscriptionPlanAvailabilities, forKey: "fields[subscriptionPlanAvailabilities]")
+				encoder.encode(fieldsSubscriptionVersions, forKey: "fields[subscriptionVersions]")
 				encoder.encode(include, forKey: "include")
 				encoder.encode(limitImages, forKey: "limit[images]")
 				encoder.encode(limitIntroductoryOffers, forKey: "limit[introductoryOffers]")
@@ -250,6 +267,7 @@ extension APIEndpoint.V1.Subscriptions {
 				encoder.encode(limitPrices, forKey: "limit[prices]")
 				encoder.encode(limitPromotionalOffers, forKey: "limit[promotionalOffers]")
 				encoder.encode(limitSubscriptionLocalizations, forKey: "limit[subscriptionLocalizations]")
+				encoder.encode(limitVersions, forKey: "limit[versions]")
 				encoder.encode(limitWinBackOffers, forKey: "limit[winBackOffers]")
 				return encoder.items
 			}

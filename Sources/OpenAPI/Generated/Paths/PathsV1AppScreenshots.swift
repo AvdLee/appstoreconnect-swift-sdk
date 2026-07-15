@@ -13,7 +13,6 @@ extension APIEndpoint.V1 {
 		/// Path: `/v1/appScreenshots`
 		public let path: String
 
-		@available(*, deprecated, message: "Deprecated")
 		public func post(_ body: AppStoreConnect_Swift_SDK.AppScreenshotCreateRequest) -> Request<AppStoreConnect_Swift_SDK.AppScreenshotResponse> {
 			Request(path: path, method: "POST", body: body, id: "appScreenshots_createInstance")
 		}

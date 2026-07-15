@@ -29,6 +29,9 @@ extension APIEndpoint.V1.ReviewSubmissions.WithID {
 			public var fieldsGameCenterChallengeVersions: [FieldsGameCenterChallengeVersions]?
 			public var fieldsGameCenterLeaderboardSetVersions: [FieldsGameCenterLeaderboardSetVersions]?
 			public var fieldsGameCenterLeaderboardVersions: [FieldsGameCenterLeaderboardVersions]?
+			public var fieldsInAppPurchaseVersions: [FieldsInAppPurchaseVersions]?
+			public var fieldsSubscriptionVersions: [FieldsSubscriptionVersions]?
+			public var fieldsSubscriptionGroupVersions: [FieldsSubscriptionGroupVersions]?
 			public var limit: Int?
 			public var include: [Include]?
 
@@ -45,6 +48,9 @@ extension APIEndpoint.V1.ReviewSubmissions.WithID {
 				case gameCenterChallengeVersion
 				case gameCenterLeaderboardSetVersion
 				case gameCenterLeaderboardVersion
+				case inAppPurchaseVersion
+				case subscriptionVersion
+				case subscriptionGroupVersion
 			}
 
 			public enum FieldsAppStoreVersions: String, Codable, CaseIterable {
@@ -167,6 +173,31 @@ extension APIEndpoint.V1.ReviewSubmissions.WithID {
 				case localizations
 			}
 
+			public enum FieldsInAppPurchaseVersions: String, Codable, CaseIterable {
+				case version
+				case state
+				case inAppPurchase
+				case image
+				case images
+				case localizations
+			}
+
+			public enum FieldsSubscriptionVersions: String, Codable, CaseIterable {
+				case version
+				case state
+				case subscription
+				case image
+				case images
+				case localizations
+			}
+
+			public enum FieldsSubscriptionGroupVersions: String, Codable, CaseIterable {
+				case version
+				case state
+				case subscriptionGroup
+				case localizations
+			}
+
 			public enum Include: String, Codable, CaseIterable {
 				case appStoreVersion
 				case appCustomProductPageVersion
@@ -179,9 +210,12 @@ extension APIEndpoint.V1.ReviewSubmissions.WithID {
 				case gameCenterChallengeVersion
 				case gameCenterLeaderboardSetVersion
 				case gameCenterLeaderboardVersion
+				case inAppPurchaseVersion
+				case subscriptionVersion
+				case subscriptionGroupVersion
 			}
 
-			public init(fieldsReviewSubmissionItems: [FieldsReviewSubmissionItems]? = nil, fieldsAppStoreVersions: [FieldsAppStoreVersions]? = nil, fieldsAppCustomProductPageVersions: [FieldsAppCustomProductPageVersions]? = nil, fieldsAppStoreVersionExperiments: [FieldsAppStoreVersionExperiments]? = nil, fieldsAppEvents: [FieldsAppEvents]? = nil, fieldsBackgroundAssetVersions: [FieldsBackgroundAssetVersions]? = nil, fieldsGameCenterAchievementVersions: [FieldsGameCenterAchievementVersions]? = nil, fieldsGameCenterActivityVersions: [FieldsGameCenterActivityVersions]? = nil, fieldsGameCenterChallengeVersions: [FieldsGameCenterChallengeVersions]? = nil, fieldsGameCenterLeaderboardSetVersions: [FieldsGameCenterLeaderboardSetVersions]? = nil, fieldsGameCenterLeaderboardVersions: [FieldsGameCenterLeaderboardVersions]? = nil, limit: Int? = nil, include: [Include]? = nil) {
+			public init(fieldsReviewSubmissionItems: [FieldsReviewSubmissionItems]? = nil, fieldsAppStoreVersions: [FieldsAppStoreVersions]? = nil, fieldsAppCustomProductPageVersions: [FieldsAppCustomProductPageVersions]? = nil, fieldsAppStoreVersionExperiments: [FieldsAppStoreVersionExperiments]? = nil, fieldsAppEvents: [FieldsAppEvents]? = nil, fieldsBackgroundAssetVersions: [FieldsBackgroundAssetVersions]? = nil, fieldsGameCenterAchievementVersions: [FieldsGameCenterAchievementVersions]? = nil, fieldsGameCenterActivityVersions: [FieldsGameCenterActivityVersions]? = nil, fieldsGameCenterChallengeVersions: [FieldsGameCenterChallengeVersions]? = nil, fieldsGameCenterLeaderboardSetVersions: [FieldsGameCenterLeaderboardSetVersions]? = nil, fieldsGameCenterLeaderboardVersions: [FieldsGameCenterLeaderboardVersions]? = nil, fieldsInAppPurchaseVersions: [FieldsInAppPurchaseVersions]? = nil, fieldsSubscriptionVersions: [FieldsSubscriptionVersions]? = nil, fieldsSubscriptionGroupVersions: [FieldsSubscriptionGroupVersions]? = nil, limit: Int? = nil, include: [Include]? = nil) {
 				self.fieldsReviewSubmissionItems = fieldsReviewSubmissionItems
 				self.fieldsAppStoreVersions = fieldsAppStoreVersions
 				self.fieldsAppCustomProductPageVersions = fieldsAppCustomProductPageVersions
@@ -193,6 +227,9 @@ extension APIEndpoint.V1.ReviewSubmissions.WithID {
 				self.fieldsGameCenterChallengeVersions = fieldsGameCenterChallengeVersions
 				self.fieldsGameCenterLeaderboardSetVersions = fieldsGameCenterLeaderboardSetVersions
 				self.fieldsGameCenterLeaderboardVersions = fieldsGameCenterLeaderboardVersions
+				self.fieldsInAppPurchaseVersions = fieldsInAppPurchaseVersions
+				self.fieldsSubscriptionVersions = fieldsSubscriptionVersions
+				self.fieldsSubscriptionGroupVersions = fieldsSubscriptionGroupVersions
 				self.limit = limit
 				self.include = include
 			}
@@ -210,6 +247,9 @@ extension APIEndpoint.V1.ReviewSubmissions.WithID {
 				encoder.encode(fieldsGameCenterChallengeVersions, forKey: "fields[gameCenterChallengeVersions]")
 				encoder.encode(fieldsGameCenterLeaderboardSetVersions, forKey: "fields[gameCenterLeaderboardSetVersions]")
 				encoder.encode(fieldsGameCenterLeaderboardVersions, forKey: "fields[gameCenterLeaderboardVersions]")
+				encoder.encode(fieldsInAppPurchaseVersions, forKey: "fields[inAppPurchaseVersions]")
+				encoder.encode(fieldsSubscriptionVersions, forKey: "fields[subscriptionVersions]")
+				encoder.encode(fieldsSubscriptionGroupVersions, forKey: "fields[subscriptionGroupVersions]")
 				encoder.encode(limit, forKey: "limit")
 				encoder.encode(include, forKey: "include")
 				return encoder.items

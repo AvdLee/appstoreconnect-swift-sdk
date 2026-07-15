@@ -21,14 +21,17 @@ extension APIEndpoint.V1.SubscriptionGroups {
 			public var fieldsSubscriptionGroups: [FieldsSubscriptionGroups]?
 			public var fieldsSubscriptions: [FieldsSubscriptions]?
 			public var fieldsSubscriptionGroupLocalizations: [FieldsSubscriptionGroupLocalizations]?
+			public var fieldsSubscriptionGroupVersions: [FieldsSubscriptionGroupVersions]?
 			public var include: [Include]?
 			public var limitSubscriptionGroupLocalizations: Int?
 			public var limitSubscriptions: Int?
+			public var limitVersions: Int?
 
 			public enum FieldsSubscriptionGroups: String, Codable, CaseIterable {
 				case referenceName
 				case subscriptions
 				case subscriptionGroupLocalizations
+				case versions
 			}
 
 			public enum FieldsSubscriptions: String, Codable, CaseIterable {
@@ -52,6 +55,7 @@ extension APIEndpoint.V1.SubscriptionGroups {
 				case winBackOffers
 				case images
 				case planAvailabilities
+				case versions
 			}
 
 			public enum FieldsSubscriptionGroupLocalizations: String, Codable, CaseIterable {
@@ -62,18 +66,28 @@ extension APIEndpoint.V1.SubscriptionGroups {
 				case subscriptionGroup
 			}
 
+			public enum FieldsSubscriptionGroupVersions: String, Codable, CaseIterable {
+				case version
+				case state
+				case subscriptionGroup
+				case localizations
+			}
+
 			public enum Include: String, Codable, CaseIterable {
 				case subscriptions
 				case subscriptionGroupLocalizations
+				case versions
 			}
 
-			public init(fieldsSubscriptionGroups: [FieldsSubscriptionGroups]? = nil, fieldsSubscriptions: [FieldsSubscriptions]? = nil, fieldsSubscriptionGroupLocalizations: [FieldsSubscriptionGroupLocalizations]? = nil, include: [Include]? = nil, limitSubscriptionGroupLocalizations: Int? = nil, limitSubscriptions: Int? = nil) {
+			public init(fieldsSubscriptionGroups: [FieldsSubscriptionGroups]? = nil, fieldsSubscriptions: [FieldsSubscriptions]? = nil, fieldsSubscriptionGroupLocalizations: [FieldsSubscriptionGroupLocalizations]? = nil, fieldsSubscriptionGroupVersions: [FieldsSubscriptionGroupVersions]? = nil, include: [Include]? = nil, limitSubscriptionGroupLocalizations: Int? = nil, limitSubscriptions: Int? = nil, limitVersions: Int? = nil) {
 				self.fieldsSubscriptionGroups = fieldsSubscriptionGroups
 				self.fieldsSubscriptions = fieldsSubscriptions
 				self.fieldsSubscriptionGroupLocalizations = fieldsSubscriptionGroupLocalizations
+				self.fieldsSubscriptionGroupVersions = fieldsSubscriptionGroupVersions
 				self.include = include
 				self.limitSubscriptionGroupLocalizations = limitSubscriptionGroupLocalizations
 				self.limitSubscriptions = limitSubscriptions
+				self.limitVersions = limitVersions
 			}
 
 			public var asQuery: [(String, String?)] {
@@ -81,9 +95,11 @@ extension APIEndpoint.V1.SubscriptionGroups {
 				encoder.encode(fieldsSubscriptionGroups, forKey: "fields[subscriptionGroups]")
 				encoder.encode(fieldsSubscriptions, forKey: "fields[subscriptions]")
 				encoder.encode(fieldsSubscriptionGroupLocalizations, forKey: "fields[subscriptionGroupLocalizations]")
+				encoder.encode(fieldsSubscriptionGroupVersions, forKey: "fields[subscriptionGroupVersions]")
 				encoder.encode(include, forKey: "include")
 				encoder.encode(limitSubscriptionGroupLocalizations, forKey: "limit[subscriptionGroupLocalizations]")
 				encoder.encode(limitSubscriptions, forKey: "limit[subscriptions]")
+				encoder.encode(limitVersions, forKey: "limit[versions]")
 				return encoder.items
 			}
 		}

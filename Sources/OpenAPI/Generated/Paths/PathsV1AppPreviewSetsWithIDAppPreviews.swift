@@ -13,7 +13,6 @@ extension APIEndpoint.V1.AppPreviewSets.WithID {
 		/// Path: `/v1/appPreviewSets/{id}/appPreviews`
 		public let path: String
 
-		@available(*, deprecated, message: "Deprecated")
 		public func get(parameters: GetParameters? = nil) -> Request<AppStoreConnect_Swift_SDK.AppPreviewsResponse> {
 			Request(path: path, method: "GET", query: parameters?.asQuery, id: "appPreviewSets_appPreviews_getToManyRelated")
 		}

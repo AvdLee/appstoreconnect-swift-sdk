@@ -3,7 +3,6 @@
 
 import Foundation
 
-@available(*, deprecated, message: "Deprecated")
 public struct AppScreenshot: Codable, Identifiable {
 	public var type: `Type`
 	public var id: String

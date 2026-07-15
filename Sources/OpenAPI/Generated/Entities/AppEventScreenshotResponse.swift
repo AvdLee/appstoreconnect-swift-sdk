@@ -3,11 +3,8 @@
 
 import Foundation
 
-@available(*, deprecated, message: "Deprecated")
 public struct AppEventScreenshotResponse: Codable {
 	/// AppEventScreenshot
-	///
-	/// - warning: Deprecated.
 	public var data: AppEventScreenshot
 	public var included: [AppEventLocalization]?
 	public var links: DocumentLinks

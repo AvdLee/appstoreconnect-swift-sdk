@@ -3,7 +3,6 @@
 
 import Foundation
 
-@available(*, deprecated, message: "Deprecated")
 public struct AppScreenshotSetAppScreenshotsLinkagesResponse: Codable {
 	public var data: [Datum]
 	public var links: PagedDocumentLinks
