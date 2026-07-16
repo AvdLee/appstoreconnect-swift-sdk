@@ -46,9 +46,7 @@ public struct AppEventLocalization: Codable, Identifiable {
 
 	public struct Relationships: Codable {
 		public var appEvent: AppEvent?
-		/// - warning: Deprecated.
 		public var appEventScreenshots: AppEventScreenshots?
-		/// - warning: Deprecated.
 		public var appEventVideoClips: AppEventVideoClips?
 
 		public struct AppEvent: Codable {
@@ -95,7 +93,6 @@ public struct AppEventLocalization: Codable, Identifiable {
 			}
 		}
 
-		@available(*, deprecated, message: "Deprecated")
 		public struct AppEventScreenshots: Codable {
 			public var links: RelationshipLinks?
 			public var meta: PagingInformation?
@@ -148,7 +145,6 @@ public struct AppEventLocalization: Codable, Identifiable {
 			}
 		}
 
-		@available(*, deprecated, message: "Deprecated")
 		public struct AppEventVideoClips: Codable {
 			public var links: RelationshipLinks?
 			public var meta: PagingInformation?

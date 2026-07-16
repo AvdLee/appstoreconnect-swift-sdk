@@ -47,6 +47,7 @@ extension APIEndpoint.V2.InAppPurchases.WithID {
 				case inAppPurchaseAvailability
 				case images
 				case offerCodes
+				case versions
 			}
 
 			public enum Include: String, Codable, CaseIterable {

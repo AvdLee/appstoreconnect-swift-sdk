@@ -48,6 +48,7 @@ extension APIEndpoint.V1.PromotedPurchases {
 				case inAppPurchaseAvailability
 				case images
 				case offerCodes
+				case versions
 			}
 
 			public enum FieldsSubscriptions: String, Codable, CaseIterable {
@@ -71,6 +72,7 @@ extension APIEndpoint.V1.PromotedPurchases {
 				case winBackOffers
 				case images
 				case planAvailabilities
+				case versions
 			}
 
 			public enum Include: String, Codable, CaseIterable {

@@ -3,7 +3,6 @@
 
 import Foundation
 
-@available(*, deprecated, message: "Deprecated")
 public struct AppScreenshotSetsResponse: Codable {
 	public var data: [AppScreenshotSet]
 	public var included: [IncludedItem]?

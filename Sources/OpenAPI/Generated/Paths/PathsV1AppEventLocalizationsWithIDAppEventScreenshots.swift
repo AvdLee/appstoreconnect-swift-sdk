@@ -13,7 +13,6 @@ extension APIEndpoint.V1.AppEventLocalizations.WithID {
 		/// Path: `/v1/appEventLocalizations/{id}/appEventScreenshots`
 		public let path: String
 
-		@available(*, deprecated, message: "Deprecated")
 		public func get(parameters: GetParameters? = nil) -> Request<AppStoreConnect_Swift_SDK.AppEventScreenshotsResponse> {
 			Request(path: path, method: "GET", query: parameters?.asQuery, id: "appEventLocalizations_appEventScreenshots_getToManyRelated")
 		}

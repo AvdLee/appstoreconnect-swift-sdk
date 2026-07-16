@@ -20,6 +20,8 @@ extension APIEndpoint.V1.SubscriptionPricePoints.WithID {
 		public struct GetParameters {
 			public var filterTerritory: [String]?
 			public var filterSubscription: [String]?
+			public var filterUpfrontPricePointID: [String]?
+			public var filterPlanType: [String]?
 			public var fieldsSubscriptionPricePoints: [FieldsSubscriptionPricePoints]?
 			public var fieldsTerritories: [FieldsTerritories]?
 			public var limit: Int?
@@ -31,6 +33,7 @@ extension APIEndpoint.V1.SubscriptionPricePoints.WithID {
 				case proceedsYear2
 				case territory
 				case equalizations
+				case adjustedEqualizations
 			}
 
 			public enum FieldsTerritories: String, Codable, CaseIterable {
@@ -41,9 +44,11 @@ extension APIEndpoint.V1.SubscriptionPricePoints.WithID {
 				case territory
 			}
 
-			public init(filterTerritory: [String]? = nil, filterSubscription: [String]? = nil, fieldsSubscriptionPricePoints: [FieldsSubscriptionPricePoints]? = nil, fieldsTerritories: [FieldsTerritories]? = nil, limit: Int? = nil, include: [Include]? = nil) {
+			public init(filterTerritory: [String]? = nil, filterSubscription: [String]? = nil, filterUpfrontPricePointID: [String]? = nil, filterPlanType: [String]? = nil, fieldsSubscriptionPricePoints: [FieldsSubscriptionPricePoints]? = nil, fieldsTerritories: [FieldsTerritories]? = nil, limit: Int? = nil, include: [Include]? = nil) {
 				self.filterTerritory = filterTerritory
 				self.filterSubscription = filterSubscription
+				self.filterUpfrontPricePointID = filterUpfrontPricePointID
+				self.filterPlanType = filterPlanType
 				self.fieldsSubscriptionPricePoints = fieldsSubscriptionPricePoints
 				self.fieldsTerritories = fieldsTerritories
 				self.limit = limit
@@ -54,6 +59,8 @@ extension APIEndpoint.V1.SubscriptionPricePoints.WithID {
 				let encoder = URLQueryEncoder(explode: false)
 				encoder.encode(filterTerritory, forKey: "filter[territory]")
 				encoder.encode(filterSubscription, forKey: "filter[subscription]")
+				encoder.encode(filterUpfrontPricePointID, forKey: "filter[upfrontPricePointId]")
+				encoder.encode(filterPlanType, forKey: "filter[planType]")
 				encoder.encode(fieldsSubscriptionPricePoints, forKey: "fields[subscriptionPricePoints]")
 				encoder.encode(fieldsTerritories, forKey: "fields[territories]")
 				encoder.encode(limit, forKey: "limit")

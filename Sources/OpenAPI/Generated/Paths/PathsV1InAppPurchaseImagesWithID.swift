@@ -50,6 +50,7 @@ extension APIEndpoint.V1.InAppPurchaseImages {
 				case inAppPurchaseAvailability
 				case images
 				case offerCodes
+				case versions
 			}
 
 			public enum Include: String, Codable, CaseIterable {

@@ -27,6 +27,7 @@ public struct AppInfo: Codable, Identifiable {
 		public var franceAgeRating: FranceAgeRating?
 		/// - warning: Deprecated.
 		public var koreaAgeRating: KoreaAgeRating?
+		public var kidsAgeBand: KidsAgeBand?
 
 		public enum State: String, Codable, CaseIterable {
 			case accepted = "ACCEPTED"
@@ -77,7 +78,7 @@ public struct AppInfo: Codable, Identifiable {
 			case notApplicable = "NOT_APPLICABLE"
 		}
 
-		public init(appStoreState: AppStoreVersionState? = nil, state: State? = nil, appStoreAgeRating: AppStoreAgeRating? = nil, australiaAgeRating: AustraliaAgeRating? = nil, brazilAgeRating: BrazilAgeRating? = nil, brazilAgeRatingV2: BrazilAgeRatingV2? = nil, franceAgeRating: FranceAgeRating? = nil, koreaAgeRating: KoreaAgeRating? = nil) {
+		public init(appStoreState: AppStoreVersionState? = nil, state: State? = nil, appStoreAgeRating: AppStoreAgeRating? = nil, australiaAgeRating: AustraliaAgeRating? = nil, brazilAgeRating: BrazilAgeRating? = nil, brazilAgeRatingV2: BrazilAgeRatingV2? = nil, franceAgeRating: FranceAgeRating? = nil, koreaAgeRating: KoreaAgeRating? = nil, kidsAgeBand: KidsAgeBand? = nil) {
 			self.appStoreState = appStoreState
 			self.state = state
 			self.appStoreAgeRating = appStoreAgeRating
@@ -86,6 +87,7 @@ public struct AppInfo: Codable, Identifiable {
 			self.brazilAgeRatingV2 = brazilAgeRatingV2
 			self.franceAgeRating = franceAgeRating
 			self.koreaAgeRating = koreaAgeRating
+			self.kidsAgeBand = kidsAgeBand
 		}
 
 		public init(from decoder: Decoder) throws {
@@ -98,6 +100,7 @@ public struct AppInfo: Codable, Identifiable {
 			self.brazilAgeRatingV2 = try values.decodeIfPresent(BrazilAgeRatingV2.self, forKey: "brazilAgeRatingV2")
 			self.franceAgeRating = try values.decodeIfPresent(FranceAgeRating.self, forKey: "franceAgeRating")
 			self.koreaAgeRating = try values.decodeIfPresent(KoreaAgeRating.self, forKey: "koreaAgeRating")
+			self.kidsAgeBand = try values.decodeIfPresent(KidsAgeBand.self, forKey: "kidsAgeBand")
 		}
 
 		public func encode(to encoder: Encoder) throws {
@@ -110,6 +113,7 @@ public struct AppInfo: Codable, Identifiable {
 			try values.encodeIfPresent(brazilAgeRatingV2, forKey: "brazilAgeRatingV2")
 			try values.encodeIfPresent(franceAgeRating, forKey: "franceAgeRating")
 			try values.encodeIfPresent(koreaAgeRating, forKey: "koreaAgeRating")
+			try values.encodeIfPresent(kidsAgeBand, forKey: "kidsAgeBand")
 		}
 	}
 

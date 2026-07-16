@@ -35,6 +35,7 @@ extension APIEndpoint.V1.AppInfos {
 				case brazilAgeRatingV2
 				case franceAgeRating
 				case koreaAgeRating
+				case kidsAgeBand
 				case app
 				case ageRatingDeclaration
 				case appInfoLocalizations
@@ -122,6 +123,8 @@ extension APIEndpoint.V1.AppInfos {
 				case ageAssurance
 				case sexualContentGraphicAndNudity
 				case sexualContentOrNudity
+				case socialMedia
+				case socialMediaAgeRestricted
 				case horrorOrFearThemes
 				case matureOrSuggestiveThemes
 				case unrestrictedWebAccess

@@ -55,6 +55,7 @@ extension APIEndpoint.V1.SubscriptionAppStoreReviewScreenshots {
 				case winBackOffers
 				case images
 				case planAvailabilities
+				case versions
 			}
 
 			public enum Include: String, Codable, CaseIterable {

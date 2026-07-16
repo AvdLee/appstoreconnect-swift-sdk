@@ -32,6 +32,8 @@ public struct AgeRatingDeclarationUpdateRequest: Codable {
 			public var isAgeAssurance: Bool?
 			public var sexualContentGraphicAndNudity: SexualContentGraphicAndNudity?
 			public var sexualContentOrNudity: SexualContentOrNudity?
+			public var isSocialMedia: Bool?
+			public var isSocialMediaAgeRestricted: Bool?
 			public var horrorOrFearThemes: HorrorOrFearThemes?
 			public var matureOrSuggestiveThemes: MatureOrSuggestiveThemes?
 			public var isUnrestrictedWebAccess: Bool?
@@ -174,7 +176,7 @@ public struct AgeRatingDeclarationUpdateRequest: Codable {
 				case nineteenPlus = "NINETEEN_PLUS"
 			}
 
-			public init(isAdvertising: Bool? = nil, alcoholTobaccoOrDrugUseOrReferences: AlcoholTobaccoOrDrugUseOrReferences? = nil, contests: Contests? = nil, isGambling: Bool? = nil, gamblingSimulated: GamblingSimulated? = nil, gunsOrOtherWeapons: GunsOrOtherWeapons? = nil, isHealthOrWellnessTopics: Bool? = nil, kidsAgeBand: KidsAgeBand? = nil, isLootBox: Bool? = nil, medicalOrTreatmentInformation: MedicalOrTreatmentInformation? = nil, isMessagingAndChat: Bool? = nil, isParentalControls: Bool? = nil, profanityOrCrudeHumor: ProfanityOrCrudeHumor? = nil, isAgeAssurance: Bool? = nil, sexualContentGraphicAndNudity: SexualContentGraphicAndNudity? = nil, sexualContentOrNudity: SexualContentOrNudity? = nil, horrorOrFearThemes: HorrorOrFearThemes? = nil, matureOrSuggestiveThemes: MatureOrSuggestiveThemes? = nil, isUnrestrictedWebAccess: Bool? = nil, isUserGeneratedContent: Bool? = nil, violenceCartoonOrFantasy: ViolenceCartoonOrFantasy? = nil, violenceRealisticProlongedGraphicOrSadistic: ViolenceRealisticProlongedGraphicOrSadistic? = nil, violenceRealistic: ViolenceRealistic? = nil, ageRatingOverride: AgeRatingOverride? = nil, ageRatingOverrideV2: AgeRatingOverrideV2? = nil, koreaAgeRatingOverride: KoreaAgeRatingOverride? = nil, developerAgeRatingInfoURL: URL? = nil) {
+			public init(isAdvertising: Bool? = nil, alcoholTobaccoOrDrugUseOrReferences: AlcoholTobaccoOrDrugUseOrReferences? = nil, contests: Contests? = nil, isGambling: Bool? = nil, gamblingSimulated: GamblingSimulated? = nil, gunsOrOtherWeapons: GunsOrOtherWeapons? = nil, isHealthOrWellnessTopics: Bool? = nil, kidsAgeBand: KidsAgeBand? = nil, isLootBox: Bool? = nil, medicalOrTreatmentInformation: MedicalOrTreatmentInformation? = nil, isMessagingAndChat: Bool? = nil, isParentalControls: Bool? = nil, profanityOrCrudeHumor: ProfanityOrCrudeHumor? = nil, isAgeAssurance: Bool? = nil, sexualContentGraphicAndNudity: SexualContentGraphicAndNudity? = nil, sexualContentOrNudity: SexualContentOrNudity? = nil, isSocialMedia: Bool? = nil, isSocialMediaAgeRestricted: Bool? = nil, horrorOrFearThemes: HorrorOrFearThemes? = nil, matureOrSuggestiveThemes: MatureOrSuggestiveThemes? = nil, isUnrestrictedWebAccess: Bool? = nil, isUserGeneratedContent: Bool? = nil, violenceCartoonOrFantasy: ViolenceCartoonOrFantasy? = nil, violenceRealisticProlongedGraphicOrSadistic: ViolenceRealisticProlongedGraphicOrSadistic? = nil, violenceRealistic: ViolenceRealistic? = nil, ageRatingOverride: AgeRatingOverride? = nil, ageRatingOverrideV2: AgeRatingOverrideV2? = nil, koreaAgeRatingOverride: KoreaAgeRatingOverride? = nil, developerAgeRatingInfoURL: URL? = nil) {
 				self.isAdvertising = isAdvertising
 				self.alcoholTobaccoOrDrugUseOrReferences = alcoholTobaccoOrDrugUseOrReferences
 				self.contests = contests
@@ -191,6 +193,8 @@ public struct AgeRatingDeclarationUpdateRequest: Codable {
 				self.isAgeAssurance = isAgeAssurance
 				self.sexualContentGraphicAndNudity = sexualContentGraphicAndNudity
 				self.sexualContentOrNudity = sexualContentOrNudity
+				self.isSocialMedia = isSocialMedia
+				self.isSocialMediaAgeRestricted = isSocialMediaAgeRestricted
 				self.horrorOrFearThemes = horrorOrFearThemes
 				self.matureOrSuggestiveThemes = matureOrSuggestiveThemes
 				self.isUnrestrictedWebAccess = isUnrestrictedWebAccess
@@ -222,6 +226,8 @@ public struct AgeRatingDeclarationUpdateRequest: Codable {
 				self.isAgeAssurance = try values.decodeIfPresent(Bool.self, forKey: "ageAssurance")
 				self.sexualContentGraphicAndNudity = try values.decodeIfPresent(SexualContentGraphicAndNudity.self, forKey: "sexualContentGraphicAndNudity")
 				self.sexualContentOrNudity = try values.decodeIfPresent(SexualContentOrNudity.self, forKey: "sexualContentOrNudity")
+				self.isSocialMedia = try values.decodeIfPresent(Bool.self, forKey: "socialMedia")
+				self.isSocialMediaAgeRestricted = try values.decodeIfPresent(Bool.self, forKey: "socialMediaAgeRestricted")
 				self.horrorOrFearThemes = try values.decodeIfPresent(HorrorOrFearThemes.self, forKey: "horrorOrFearThemes")
 				self.matureOrSuggestiveThemes = try values.decodeIfPresent(MatureOrSuggestiveThemes.self, forKey: "matureOrSuggestiveThemes")
 				self.isUnrestrictedWebAccess = try values.decodeIfPresent(Bool.self, forKey: "unrestrictedWebAccess")
@@ -253,6 +259,8 @@ public struct AgeRatingDeclarationUpdateRequest: Codable {
 				try values.encodeIfPresent(isAgeAssurance, forKey: "ageAssurance")
 				try values.encodeIfPresent(sexualContentGraphicAndNudity, forKey: "sexualContentGraphicAndNudity")
 				try values.encodeIfPresent(sexualContentOrNudity, forKey: "sexualContentOrNudity")
+				try values.encodeIfPresent(isSocialMedia, forKey: "socialMedia")
+				try values.encodeIfPresent(isSocialMediaAgeRestricted, forKey: "socialMediaAgeRestricted")
 				try values.encodeIfPresent(horrorOrFearThemes, forKey: "horrorOrFearThemes")
 				try values.encodeIfPresent(matureOrSuggestiveThemes, forKey: "matureOrSuggestiveThemes")
 				try values.encodeIfPresent(isUnrestrictedWebAccess, forKey: "unrestrictedWebAccess")

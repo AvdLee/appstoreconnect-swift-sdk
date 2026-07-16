@@ -13,7 +13,6 @@ extension APIEndpoint.V1.AppStoreVersionExperimentTreatmentLocalizations.WithID 
 		/// Path: `/v1/appStoreVersionExperimentTreatmentLocalizations/{id}/appPreviewSets`
 		public let path: String
 
-		@available(*, deprecated, message: "Deprecated")
 		public func get(parameters: GetParameters? = nil) -> Request<AppStoreConnect_Swift_SDK.AppPreviewSetsResponse> {
 			Request(path: path, method: "GET", query: parameters?.asQuery, id: "appStoreVersionExperimentTreatmentLocalizations_appPreviewSets_getToManyRelated")
 		}

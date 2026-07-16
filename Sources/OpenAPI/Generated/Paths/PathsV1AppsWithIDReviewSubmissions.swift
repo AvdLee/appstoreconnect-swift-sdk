@@ -128,6 +128,9 @@ extension APIEndpoint.V1.Apps.WithID {
 				case gameCenterChallengeVersion
 				case gameCenterLeaderboardSetVersion
 				case gameCenterLeaderboardVersion
+				case inAppPurchaseVersion
+				case subscriptionVersion
+				case subscriptionGroupVersion
 			}
 
 			public enum FieldsAppStoreVersions: String, Codable, CaseIterable {

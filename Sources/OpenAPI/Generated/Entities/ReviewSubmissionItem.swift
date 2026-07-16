@@ -52,6 +52,9 @@ public struct ReviewSubmissionItem: Codable, Identifiable {
 		public var gameCenterChallengeVersion: GameCenterChallengeVersion?
 		public var gameCenterLeaderboardSetVersion: GameCenterLeaderboardSetVersion?
 		public var gameCenterLeaderboardVersion: GameCenterLeaderboardVersion?
+		public var inAppPurchaseVersion: InAppPurchaseVersion?
+		public var subscriptionVersion: SubscriptionVersion?
+		public var subscriptionGroupVersion: SubscriptionGroupVersion?
 
 		public struct AppStoreVersion: Codable {
 			public var data: Data?
@@ -537,7 +540,139 @@ public struct ReviewSubmissionItem: Codable, Identifiable {
 			}
 		}
 
-		public init(appStoreVersion: AppStoreVersion? = nil, appCustomProductPageVersion: AppCustomProductPageVersion? = nil, appStoreVersionExperiment: AppStoreVersionExperiment? = nil, appStoreVersionExperimentV2: AppStoreVersionExperimentV2? = nil, appEvent: AppEvent? = nil, backgroundAssetVersion: BackgroundAssetVersion? = nil, gameCenterAchievementVersion: GameCenterAchievementVersion? = nil, gameCenterActivityVersion: GameCenterActivityVersion? = nil, gameCenterChallengeVersion: GameCenterChallengeVersion? = nil, gameCenterLeaderboardSetVersion: GameCenterLeaderboardSetVersion? = nil, gameCenterLeaderboardVersion: GameCenterLeaderboardVersion? = nil) {
+		public struct InAppPurchaseVersion: Codable {
+			public var data: Data?
+
+			public struct Data: Codable, Identifiable {
+				public var type: `Type`
+				public var id: String
+
+				public enum `Type`: String, Codable, CaseIterable {
+					case inAppPurchaseVersions
+				}
+
+				public init(type: `Type`, id: String) {
+					self.type = type
+					self.id = id
+				}
+
+				public init(from decoder: Decoder) throws {
+					let values = try decoder.container(keyedBy: StringCodingKey.self)
+					self.type = try values.decode(`Type`.self, forKey: "type")
+					self.id = try values.decode(String.self, forKey: "id")
+				}
+
+				public func encode(to encoder: Encoder) throws {
+					var values = encoder.container(keyedBy: StringCodingKey.self)
+					try values.encode(type, forKey: "type")
+					try values.encode(id, forKey: "id")
+				}
+			}
+
+			public init(data: Data? = nil) {
+				self.data = data
+			}
+
+			public init(from decoder: Decoder) throws {
+				let values = try decoder.container(keyedBy: StringCodingKey.self)
+				self.data = try values.decodeIfPresent(Data.self, forKey: "data")
+			}
+
+			public func encode(to encoder: Encoder) throws {
+				var values = encoder.container(keyedBy: StringCodingKey.self)
+				try values.encodeIfPresent(data, forKey: "data")
+			}
+		}
+
+		public struct SubscriptionVersion: Codable {
+			public var data: Data?
+
+			public struct Data: Codable, Identifiable {
+				public var type: `Type`
+				public var id: String
+
+				public enum `Type`: String, Codable, CaseIterable {
+					case subscriptionVersions
+				}
+
+				public init(type: `Type`, id: String) {
+					self.type = type
+					self.id = id
+				}
+
+				public init(from decoder: Decoder) throws {
+					let values = try decoder.container(keyedBy: StringCodingKey.self)
+					self.type = try values.decode(`Type`.self, forKey: "type")
+					self.id = try values.decode(String.self, forKey: "id")
+				}
+
+				public func encode(to encoder: Encoder) throws {
+					var values = encoder.container(keyedBy: StringCodingKey.self)
+					try values.encode(type, forKey: "type")
+					try values.encode(id, forKey: "id")
+				}
+			}
+
+			public init(data: Data? = nil) {
+				self.data = data
+			}
+
+			public init(from decoder: Decoder) throws {
+				let values = try decoder.container(keyedBy: StringCodingKey.self)
+				self.data = try values.decodeIfPresent(Data.self, forKey: "data")
+			}
+
+			public func encode(to encoder: Encoder) throws {
+				var values = encoder.container(keyedBy: StringCodingKey.self)
+				try values.encodeIfPresent(data, forKey: "data")
+			}
+		}
+
+		public struct SubscriptionGroupVersion: Codable {
+			public var data: Data?
+
+			public struct Data: Codable, Identifiable {
+				public var type: `Type`
+				public var id: String
+
+				public enum `Type`: String, Codable, CaseIterable {
+					case subscriptionGroupVersions
+				}
+
+				public init(type: `Type`, id: String) {
+					self.type = type
+					self.id = id
+				}
+
+				public init(from decoder: Decoder) throws {
+					let values = try decoder.container(keyedBy: StringCodingKey.self)
+					self.type = try values.decode(`Type`.self, forKey: "type")
+					self.id = try values.decode(String.self, forKey: "id")
+				}
+
+				public func encode(to encoder: Encoder) throws {
+					var values = encoder.container(keyedBy: StringCodingKey.self)
+					try values.encode(type, forKey: "type")
+					try values.encode(id, forKey: "id")
+				}
+			}
+
+			public init(data: Data? = nil) {
+				self.data = data
+			}
+
+			public init(from decoder: Decoder) throws {
+				let values = try decoder.container(keyedBy: StringCodingKey.self)
+				self.data = try values.decodeIfPresent(Data.self, forKey: "data")
+			}
+
+			public func encode(to encoder: Encoder) throws {
+				var values = encoder.container(keyedBy: StringCodingKey.self)
+				try values.encodeIfPresent(data, forKey: "data")
+			}
+		}
+
+		public init(appStoreVersion: AppStoreVersion? = nil, appCustomProductPageVersion: AppCustomProductPageVersion? = nil, appStoreVersionExperiment: AppStoreVersionExperiment? = nil, appStoreVersionExperimentV2: AppStoreVersionExperimentV2? = nil, appEvent: AppEvent? = nil, backgroundAssetVersion: BackgroundAssetVersion? = nil, gameCenterAchievementVersion: GameCenterAchievementVersion? = nil, gameCenterActivityVersion: GameCenterActivityVersion? = nil, gameCenterChallengeVersion: GameCenterChallengeVersion? = nil, gameCenterLeaderboardSetVersion: GameCenterLeaderboardSetVersion? = nil, gameCenterLeaderboardVersion: GameCenterLeaderboardVersion? = nil, inAppPurchaseVersion: InAppPurchaseVersion? = nil, subscriptionVersion: SubscriptionVersion? = nil, subscriptionGroupVersion: SubscriptionGroupVersion? = nil) {
 			self.appStoreVersion = appStoreVersion
 			self.appCustomProductPageVersion = appCustomProductPageVersion
 			self.appStoreVersionExperiment = appStoreVersionExperiment
@@ -549,6 +684,9 @@ public struct ReviewSubmissionItem: Codable, Identifiable {
 			self.gameCenterChallengeVersion = gameCenterChallengeVersion
 			self.gameCenterLeaderboardSetVersion = gameCenterLeaderboardSetVersion
 			self.gameCenterLeaderboardVersion = gameCenterLeaderboardVersion
+			self.inAppPurchaseVersion = inAppPurchaseVersion
+			self.subscriptionVersion = subscriptionVersion
+			self.subscriptionGroupVersion = subscriptionGroupVersion
 		}
 
 		public init(from decoder: Decoder) throws {
@@ -564,6 +702,9 @@ public struct ReviewSubmissionItem: Codable, Identifiable {
 			self.gameCenterChallengeVersion = try values.decodeIfPresent(GameCenterChallengeVersion.self, forKey: "gameCenterChallengeVersion")
 			self.gameCenterLeaderboardSetVersion = try values.decodeIfPresent(GameCenterLeaderboardSetVersion.self, forKey: "gameCenterLeaderboardSetVersion")
 			self.gameCenterLeaderboardVersion = try values.decodeIfPresent(GameCenterLeaderboardVersion.self, forKey: "gameCenterLeaderboardVersion")
+			self.inAppPurchaseVersion = try values.decodeIfPresent(InAppPurchaseVersion.self, forKey: "inAppPurchaseVersion")
+			self.subscriptionVersion = try values.decodeIfPresent(SubscriptionVersion.self, forKey: "subscriptionVersion")
+			self.subscriptionGroupVersion = try values.decodeIfPresent(SubscriptionGroupVersion.self, forKey: "subscriptionGroupVersion")
 		}
 
 		public func encode(to encoder: Encoder) throws {
@@ -579,6 +720,9 @@ public struct ReviewSubmissionItem: Codable, Identifiable {
 			try values.encodeIfPresent(gameCenterChallengeVersion, forKey: "gameCenterChallengeVersion")
 			try values.encodeIfPresent(gameCenterLeaderboardSetVersion, forKey: "gameCenterLeaderboardSetVersion")
 			try values.encodeIfPresent(gameCenterLeaderboardVersion, forKey: "gameCenterLeaderboardVersion")
+			try values.encodeIfPresent(inAppPurchaseVersion, forKey: "inAppPurchaseVersion")
+			try values.encodeIfPresent(subscriptionVersion, forKey: "subscriptionVersion")
+			try values.encodeIfPresent(subscriptionGroupVersion, forKey: "subscriptionGroupVersion")
 		}
 	}
 

@@ -34,6 +34,7 @@ extension APIEndpoint.V1.SubscriptionGroupLocalizations {
 				case referenceName
 				case subscriptions
 				case subscriptionGroupLocalizations
+				case versions
 			}
 
 			public enum Include: String, Codable, CaseIterable {

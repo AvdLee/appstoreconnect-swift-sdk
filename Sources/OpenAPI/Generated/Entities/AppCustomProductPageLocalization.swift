@@ -38,9 +38,7 @@ public struct AppCustomProductPageLocalization: Codable, Identifiable {
 
 	public struct Relationships: Codable {
 		public var appCustomProductPageVersion: AppCustomProductPageVersion?
-		/// - warning: Deprecated.
 		public var appScreenshotSets: AppScreenshotSets?
-		/// - warning: Deprecated.
 		public var appPreviewSets: AppPreviewSets?
 		public var searchKeywords: SearchKeywords?
 
@@ -88,7 +86,6 @@ public struct AppCustomProductPageLocalization: Codable, Identifiable {
 			}
 		}
 
-		@available(*, deprecated, message: "Deprecated")
 		public struct AppScreenshotSets: Codable {
 			public var links: RelationshipLinks?
 			public var meta: PagingInformation?
@@ -141,7 +138,6 @@ public struct AppCustomProductPageLocalization: Codable, Identifiable {
 			}
 		}
 
-		@available(*, deprecated, message: "Deprecated")
 		public struct AppPreviewSets: Codable {
 			public var links: RelationshipLinks?
 			public var meta: PagingInformation?

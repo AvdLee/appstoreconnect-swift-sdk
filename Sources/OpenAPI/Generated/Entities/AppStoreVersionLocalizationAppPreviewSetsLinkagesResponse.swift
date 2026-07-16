@@ -3,7 +3,6 @@
 
 import Foundation
 
-@available(*, deprecated, message: "Deprecated")
 public struct AppStoreVersionLocalizationAppPreviewSetsLinkagesResponse: Codable {
 	public var data: [Datum]
 	public var links: PagedDocumentLinks

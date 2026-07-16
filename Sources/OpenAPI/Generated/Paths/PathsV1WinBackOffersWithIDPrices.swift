@@ -40,6 +40,7 @@ extension APIEndpoint.V1.WinBackOffers.WithID {
 				case proceedsYear2
 				case territory
 				case equalizations
+				case adjustedEqualizations
 			}
 
 			public enum Include: String, Codable, CaseIterable {

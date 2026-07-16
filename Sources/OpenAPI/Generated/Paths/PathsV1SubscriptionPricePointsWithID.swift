@@ -28,6 +28,7 @@ extension APIEndpoint.V1.SubscriptionPricePoints {
 				case proceedsYear2
 				case territory
 				case equalizations
+				case adjustedEqualizations
 			}
 
 			public enum FieldsTerritories: String, Codable, CaseIterable {
