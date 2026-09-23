@@ -217,6 +217,9 @@ The downloaded OpenAPI spec and generated sources are post-processed by `OpenAPI
 - [Five Stars: Reviews & Ratings](https://apps.apple.com/app/id1634650919) developed by [Mathias Emil Mortensen](https://github.com/mathiasemil).
   Five Stars helps app developers read and reply to App Store reviews from their users. Translate reviews, reply with customizable templates and AI-powered quick replies, filter by region, and view global app ratings from any app. Five Stars is available for iPhone and iPad, with a Mac version coming in Spring 2024.
 
+- [asc-cli: App Store Connect from your terminal & agents](https://github.com/tddworks/asc-cli) developed by [tddworks](https://github.com/tddworks).
+  asc-cli is an open-source Swift command-line tool for App Store Connect. Automate builds, releases, TestFlight, in-app purchases, subscriptions, and screenshots from your terminal or CI pipeline. Every command outputs structured JSON with ready-to-run next-step commands, so AI agents can drive the full release workflow. It also ships a local REST server exposing the same features over HTTP. Install with `brew install asccli`. [Learn more about asc-cli](https://asccli.app).
+
 ## License
 
 **App Store Connect Swift SDK** is available under the MIT license, and uses source code from open source projects. See the [LICENSE](https://github.com/AvdLee/appstoreconnect-swift-sdk/blob/master/LICENSE) file for more info.
