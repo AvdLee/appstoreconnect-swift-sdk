@@ -62,6 +62,7 @@ extension APIEndpoint.V1.GameCenterChallenges {
 				case challengeReleases
 				case leaderboardReleases
 				case leaderboardSetReleases
+				case blockedPlayers
 				case challengesMinimumPlatformVersions
 			}
 
@@ -109,6 +110,7 @@ extension APIEndpoint.V1.GameCenterChallenges {
 				case releases
 				case activity
 				case challenge
+				case gameCenterScoreModerations
 				case versions
 			}
 

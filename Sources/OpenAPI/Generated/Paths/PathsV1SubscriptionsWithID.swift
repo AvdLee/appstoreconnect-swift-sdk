@@ -51,6 +51,8 @@ extension APIEndpoint.V1.Subscriptions {
 				case subscriptionPeriod
 				case reviewNote
 				case groupLevel
+				case multiSeatStatus
+				case marketSettings
 				case subscriptionLocalizations
 				case appStoreReviewScreenshot
 				case group

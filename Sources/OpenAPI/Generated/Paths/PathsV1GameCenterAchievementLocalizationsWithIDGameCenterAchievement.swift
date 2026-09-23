@@ -68,6 +68,7 @@ extension APIEndpoint.V1.GameCenterAchievementLocalizations.WithID {
 				case challengeReleases
 				case leaderboardReleases
 				case leaderboardSetReleases
+				case blockedPlayers
 				case challengesMinimumPlatformVersions
 			}
 

@@ -23,6 +23,8 @@ public struct SubscriptionUpdateRequest: Codable {
 			public var subscriptionPeriod: SubscriptionPeriod?
 			public var reviewNote: String?
 			public var groupLevel: Int?
+			public var multiSeatStatus: MultiSeatStatus?
+			public var marketSettings: [MarketSetting]?
 
 			public enum SubscriptionPeriod: String, Codable, CaseIterable {
 				case oneWeek = "ONE_WEEK"
@@ -33,12 +35,25 @@ public struct SubscriptionUpdateRequest: Codable {
 				case oneYear = "ONE_YEAR"
 			}
 
-			public init(name: String? = nil, isFamilySharable: Bool? = nil, subscriptionPeriod: SubscriptionPeriod? = nil, reviewNote: String? = nil, groupLevel: Int? = nil) {
+			public enum MultiSeatStatus: String, Codable, CaseIterable {
+				case enabled = "ENABLED"
+				case disabled = "DISABLED"
+			}
+
+			public enum MarketSetting: String, Codable, CaseIterable {
+				case appleSchool = "APPLE_SCHOOL"
+				case appStore = "APP_STORE"
+				case appleBusiness = "APPLE_BUSINESS"
+			}
+
+			public init(name: String? = nil, isFamilySharable: Bool? = nil, subscriptionPeriod: SubscriptionPeriod? = nil, reviewNote: String? = nil, groupLevel: Int? = nil, multiSeatStatus: MultiSeatStatus? = nil, marketSettings: [MarketSetting]? = nil) {
 				self.name = name
 				self.isFamilySharable = isFamilySharable
 				self.subscriptionPeriod = subscriptionPeriod
 				self.reviewNote = reviewNote
 				self.groupLevel = groupLevel
+				self.multiSeatStatus = multiSeatStatus
+				self.marketSettings = marketSettings
 			}
 
 			public init(from decoder: Decoder) throws {
@@ -48,6 +63,8 @@ public struct SubscriptionUpdateRequest: Codable {
 				self.subscriptionPeriod = try values.decodeIfPresent(SubscriptionPeriod.self, forKey: "subscriptionPeriod")
 				self.reviewNote = try values.decodeIfPresent(String.self, forKey: "reviewNote")
 				self.groupLevel = try values.decodeIfPresent(Int.self, forKey: "groupLevel")
+				self.multiSeatStatus = try values.decodeIfPresent(MultiSeatStatus.self, forKey: "multiSeatStatus")
+				self.marketSettings = try values.decodeIfPresent([MarketSetting].self, forKey: "marketSettings")
 			}
 
 			public func encode(to encoder: Encoder) throws {
@@ -57,6 +74,8 @@ public struct SubscriptionUpdateRequest: Codable {
 				try values.encodeIfPresent(subscriptionPeriod, forKey: "subscriptionPeriod")
 				try values.encodeIfPresent(reviewNote, forKey: "reviewNote")
 				try values.encodeIfPresent(groupLevel, forKey: "groupLevel")
+				try values.encodeIfPresent(multiSeatStatus, forKey: "multiSeatStatus")
+				try values.encodeIfPresent(marketSettings, forKey: "marketSettings")
 			}
 		}
 

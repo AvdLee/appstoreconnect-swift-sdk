@@ -129,6 +129,7 @@ extension APIEndpoint.V1 {
 				case inAppPurchases
 				case subscriptionGroups
 				case gameCenterEnabledVersions
+				case performanceOverviews
 				case perfPowerMetrics
 				case appCustomProductPages
 				case inAppPurchasesV2

@@ -97,6 +97,7 @@ extension APIEndpoint.V1.AppClipDefaultExperiences.WithID {
 				case inAppPurchases
 				case subscriptionGroups
 				case gameCenterEnabledVersions
+				case performanceOverviews
 				case perfPowerMetrics
 				case appCustomProductPages
 				case inAppPurchasesV2

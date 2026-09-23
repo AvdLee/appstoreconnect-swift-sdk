@@ -13,15 +13,15 @@ extension APIEndpoint.V1.SubscriptionPricePoints.WithID {
 		/// Path: `/v1/subscriptionPricePoints/{id}/adjustedEqualizations`
 		public let path: String
 
-		public func get(parameters: GetParameters? = nil) -> Request<AppStoreConnect_Swift_SDK.SubscriptionPricePointsResponse> {
-			Request(path: path, method: "GET", query: parameters?.asQuery, id: "subscriptionPricePoints_adjustedEqualizations_getToManyRelated")
+		public func get(parameters: GetParameters) -> Request<AppStoreConnect_Swift_SDK.SubscriptionPricePointsResponse> {
+			Request(path: path, method: "GET", query: parameters.asQuery, id: "subscriptionPricePoints_adjustedEqualizations_getToManyRelated")
 		}
 
 		public struct GetParameters {
 			public var filterTerritory: [String]?
 			public var filterSubscription: [String]?
 			public var filterUpfrontPricePointID: [String]?
-			public var filterPlanType: [String]?
+			public var filterPlanType: [String]
 			public var fieldsSubscriptionPricePoints: [FieldsSubscriptionPricePoints]?
 			public var fieldsTerritories: [FieldsTerritories]?
 			public var limit: Int?
@@ -44,7 +44,7 @@ extension APIEndpoint.V1.SubscriptionPricePoints.WithID {
 				case territory
 			}
 
-			public init(filterTerritory: [String]? = nil, filterSubscription: [String]? = nil, filterUpfrontPricePointID: [String]? = nil, filterPlanType: [String]? = nil, fieldsSubscriptionPricePoints: [FieldsSubscriptionPricePoints]? = nil, fieldsTerritories: [FieldsTerritories]? = nil, limit: Int? = nil, include: [Include]? = nil) {
+			public init(filterTerritory: [String]? = nil, filterSubscription: [String]? = nil, filterUpfrontPricePointID: [String]? = nil, filterPlanType: [String], fieldsSubscriptionPricePoints: [FieldsSubscriptionPricePoints]? = nil, fieldsTerritories: [FieldsTerritories]? = nil, limit: Int? = nil, include: [Include]? = nil) {
 				self.filterTerritory = filterTerritory
 				self.filterSubscription = filterSubscription
 				self.filterUpfrontPricePointID = filterUpfrontPricePointID

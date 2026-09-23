@@ -72,6 +72,7 @@ extension APIEndpoint.V1.GameCenterGroups.WithID {
 				case challengeReleases
 				case leaderboardReleases
 				case leaderboardSetReleases
+				case blockedPlayers
 				case challengesMinimumPlatformVersions
 			}
 
