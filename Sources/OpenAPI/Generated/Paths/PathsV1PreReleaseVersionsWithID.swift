@@ -95,6 +95,7 @@ extension APIEndpoint.V1.PreReleaseVersions {
 				case inAppPurchases
 				case subscriptionGroups
 				case gameCenterEnabledVersions
+				case performanceOverviews
 				case perfPowerMetrics
 				case appCustomProductPages
 				case inAppPurchasesV2

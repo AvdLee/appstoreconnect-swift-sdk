@@ -99,6 +99,7 @@ public struct GameCenterLeaderboardV2: Codable, Identifiable {
 		public var gameCenterDetail: GameCenterDetail?
 		public var gameCenterGroup: GameCenterGroup?
 		public var gameCenterLeaderboardSets: GameCenterLeaderboardSets?
+		public var gameCenterScoreModerations: GameCenterScoreModerations?
 		public var activity: Activity?
 		public var challenge: Challenge?
 		public var versions: Versions?
@@ -236,6 +237,24 @@ public struct GameCenterLeaderboardV2: Codable, Identifiable {
 				var values = encoder.container(keyedBy: StringCodingKey.self)
 				try values.encodeIfPresent(meta, forKey: "meta")
 				try values.encodeIfPresent(data, forKey: "data")
+			}
+		}
+
+		public struct GameCenterScoreModerations: Codable {
+			public var links: RelationshipLinks?
+
+			public init(links: RelationshipLinks? = nil) {
+				self.links = links
+			}
+
+			public init(from decoder: Decoder) throws {
+				let values = try decoder.container(keyedBy: StringCodingKey.self)
+				self.links = try values.decodeIfPresent(RelationshipLinks.self, forKey: "links")
+			}
+
+			public func encode(to encoder: Encoder) throws {
+				var values = encoder.container(keyedBy: StringCodingKey.self)
+				try values.encodeIfPresent(links, forKey: "links")
 			}
 		}
 
@@ -387,10 +406,11 @@ public struct GameCenterLeaderboardV2: Codable, Identifiable {
 			}
 		}
 
-		public init(gameCenterDetail: GameCenterDetail? = nil, gameCenterGroup: GameCenterGroup? = nil, gameCenterLeaderboardSets: GameCenterLeaderboardSets? = nil, activity: Activity? = nil, challenge: Challenge? = nil, versions: Versions? = nil) {
+		public init(gameCenterDetail: GameCenterDetail? = nil, gameCenterGroup: GameCenterGroup? = nil, gameCenterLeaderboardSets: GameCenterLeaderboardSets? = nil, gameCenterScoreModerations: GameCenterScoreModerations? = nil, activity: Activity? = nil, challenge: Challenge? = nil, versions: Versions? = nil) {
 			self.gameCenterDetail = gameCenterDetail
 			self.gameCenterGroup = gameCenterGroup
 			self.gameCenterLeaderboardSets = gameCenterLeaderboardSets
+			self.gameCenterScoreModerations = gameCenterScoreModerations
 			self.activity = activity
 			self.challenge = challenge
 			self.versions = versions
@@ -401,6 +421,7 @@ public struct GameCenterLeaderboardV2: Codable, Identifiable {
 			self.gameCenterDetail = try values.decodeIfPresent(GameCenterDetail.self, forKey: "gameCenterDetail")
 			self.gameCenterGroup = try values.decodeIfPresent(GameCenterGroup.self, forKey: "gameCenterGroup")
 			self.gameCenterLeaderboardSets = try values.decodeIfPresent(GameCenterLeaderboardSets.self, forKey: "gameCenterLeaderboardSets")
+			self.gameCenterScoreModerations = try values.decodeIfPresent(GameCenterScoreModerations.self, forKey: "gameCenterScoreModerations")
 			self.activity = try values.decodeIfPresent(Activity.self, forKey: "activity")
 			self.challenge = try values.decodeIfPresent(Challenge.self, forKey: "challenge")
 			self.versions = try values.decodeIfPresent(Versions.self, forKey: "versions")
@@ -411,6 +432,7 @@ public struct GameCenterLeaderboardV2: Codable, Identifiable {
 			try values.encodeIfPresent(gameCenterDetail, forKey: "gameCenterDetail")
 			try values.encodeIfPresent(gameCenterGroup, forKey: "gameCenterGroup")
 			try values.encodeIfPresent(gameCenterLeaderboardSets, forKey: "gameCenterLeaderboardSets")
+			try values.encodeIfPresent(gameCenterScoreModerations, forKey: "gameCenterScoreModerations")
 			try values.encodeIfPresent(activity, forKey: "activity")
 			try values.encodeIfPresent(challenge, forKey: "challenge")
 			try values.encodeIfPresent(versions, forKey: "versions")

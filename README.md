@@ -191,6 +191,8 @@ swift run OpenAPIGenerator generate
 
 The downloaded OpenAPI spec and generated sources are post-processed by `OpenAPIGenerator` (logic in `OpenAPIGeneratorCore`) to apply small, **structure-aware** fixes without relying on line-based patch files. This makes updates resilient when upstream JSON shifts between releases.
 
+The scheduled update workflow includes a patch review report in each new-version PR. Spec rules marked `needs patch` still change Apple's downloaded spec; `already satisfied` can indicate an upstream fix, while `unknown (no matches)` needs investigation. Generated-source fixes list applied replacements, already-present replacements, and missing target files. Review candidates against the unpatched Apple spec or freshly generated code and the live API before removing a rule—no-op status alone does not prove the behavior is fixed. To inspect spec rules manually, run `swift run OpenAPIGenerator download --verbose` (this rewrites the local spec).
+
 ## Communication
 
 - If you **found a bug**, open an [issue](https://github.com/AvdLee/appstoreconnect-swift-sdk/issues).

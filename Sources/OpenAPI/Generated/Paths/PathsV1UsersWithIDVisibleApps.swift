@@ -59,6 +59,7 @@ extension APIEndpoint.V1.Users.WithID {
 			case inAppPurchases
 			case subscriptionGroups
 			case gameCenterEnabledVersions
+			case performanceOverviews
 			case perfPowerMetrics
 			case appCustomProductPages
 			case inAppPurchasesV2

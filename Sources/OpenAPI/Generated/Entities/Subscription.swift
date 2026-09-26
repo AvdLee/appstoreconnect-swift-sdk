@@ -22,6 +22,8 @@ public struct Subscription: Codable, Identifiable {
 		public var subscriptionPeriod: SubscriptionPeriod?
 		public var reviewNote: String?
 		public var groupLevel: Int?
+		public var multiSeatStatus: MultiSeatStatus?
+		public var marketSettings: [MarketSetting]?
 
 		public enum State: String, Codable, CaseIterable {
 			case missingMetadata = "MISSING_METADATA"
@@ -45,7 +47,18 @@ public struct Subscription: Codable, Identifiable {
 			case oneYear = "ONE_YEAR"
 		}
 
-		public init(name: String? = nil, productID: String? = nil, isFamilySharable: Bool? = nil, state: State? = nil, subscriptionPeriod: SubscriptionPeriod? = nil, reviewNote: String? = nil, groupLevel: Int? = nil) {
+		public enum MultiSeatStatus: String, Codable, CaseIterable {
+			case enabled = "ENABLED"
+			case disabled = "DISABLED"
+		}
+
+		public enum MarketSetting: String, Codable, CaseIterable {
+			case appleSchool = "APPLE_SCHOOL"
+			case appStore = "APP_STORE"
+			case appleBusiness = "APPLE_BUSINESS"
+		}
+
+		public init(name: String? = nil, productID: String? = nil, isFamilySharable: Bool? = nil, state: State? = nil, subscriptionPeriod: SubscriptionPeriod? = nil, reviewNote: String? = nil, groupLevel: Int? = nil, multiSeatStatus: MultiSeatStatus? = nil, marketSettings: [MarketSetting]? = nil) {
 			self.name = name
 			self.productID = productID
 			self.isFamilySharable = isFamilySharable
@@ -53,6 +66,8 @@ public struct Subscription: Codable, Identifiable {
 			self.subscriptionPeriod = subscriptionPeriod
 			self.reviewNote = reviewNote
 			self.groupLevel = groupLevel
+			self.multiSeatStatus = multiSeatStatus
+			self.marketSettings = marketSettings
 		}
 
 		public init(from decoder: Decoder) throws {
@@ -64,6 +79,8 @@ public struct Subscription: Codable, Identifiable {
 			self.subscriptionPeriod = try values.decodeIfPresent(SubscriptionPeriod.self, forKey: "subscriptionPeriod")
 			self.reviewNote = try values.decodeIfPresent(String.self, forKey: "reviewNote")
 			self.groupLevel = try values.decodeIfPresent(Int.self, forKey: "groupLevel")
+			self.multiSeatStatus = try values.decodeIfPresent(MultiSeatStatus.self, forKey: "multiSeatStatus")
+			self.marketSettings = try values.decodeIfPresent([MarketSetting].self, forKey: "marketSettings")
 		}
 
 		public func encode(to encoder: Encoder) throws {
@@ -75,6 +92,8 @@ public struct Subscription: Codable, Identifiable {
 			try values.encodeIfPresent(subscriptionPeriod, forKey: "subscriptionPeriod")
 			try values.encodeIfPresent(reviewNote, forKey: "reviewNote")
 			try values.encodeIfPresent(groupLevel, forKey: "groupLevel")
+			try values.encodeIfPresent(multiSeatStatus, forKey: "multiSeatStatus")
+			try values.encodeIfPresent(marketSettings, forKey: "marketSettings")
 		}
 	}
 

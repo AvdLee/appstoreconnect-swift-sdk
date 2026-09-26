@@ -53,6 +53,7 @@ extension APIEndpoint.V1.GameCenterLeaderboardReleases {
 				case challengeReleases
 				case leaderboardReleases
 				case leaderboardSetReleases
+				case blockedPlayers
 				case challengesMinimumPlatformVersions
 			}
 

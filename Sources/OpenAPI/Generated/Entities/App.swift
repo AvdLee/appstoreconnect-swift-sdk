@@ -105,6 +105,7 @@ public struct App: Codable, Identifiable {
 		public var inAppPurchases: InAppPurchases?
 		public var subscriptionGroups: SubscriptionGroups?
 		public var gameCenterEnabledVersions: GameCenterEnabledVersions?
+		public var performanceOverviews: PerformanceOverviews?
 		public var perfPowerMetrics: PerfPowerMetrics?
 		public var appCustomProductPages: AppCustomProductPages?
 		public var inAppPurchasesV2: InAppPurchasesV2?
@@ -1044,6 +1045,24 @@ public struct App: Codable, Identifiable {
 			}
 		}
 
+		public struct PerformanceOverviews: Codable {
+			public var links: RelationshipLinks?
+
+			public init(links: RelationshipLinks? = nil) {
+				self.links = links
+			}
+
+			public init(from decoder: Decoder) throws {
+				let values = try decoder.container(keyedBy: StringCodingKey.self)
+				self.links = try values.decodeIfPresent(RelationshipLinks.self, forKey: "links")
+			}
+
+			public func encode(to encoder: Encoder) throws {
+				var values = encoder.container(keyedBy: StringCodingKey.self)
+				try values.encodeIfPresent(links, forKey: "links")
+			}
+		}
+
 		public struct PerfPowerMetrics: Codable {
 			public var links: RelationshipLinks?
 
@@ -1720,7 +1739,7 @@ public struct App: Codable, Identifiable {
 			}
 		}
 
-		public init(accessibilityDeclarations: AccessibilityDeclarations? = nil, appEncryptionDeclarations: AppEncryptionDeclarations? = nil, appStoreIcon: AppStoreIcon? = nil, ciProduct: CiProduct? = nil, betaTesters: BetaTesters? = nil, betaGroups: BetaGroups? = nil, appStoreVersions: AppStoreVersions? = nil, appTags: AppTags? = nil, preReleaseVersions: PreReleaseVersions? = nil, betaAppLocalizations: BetaAppLocalizations? = nil, builds: Builds? = nil, betaLicenseAgreement: BetaLicenseAgreement? = nil, betaAppReviewDetail: BetaAppReviewDetail? = nil, appInfos: AppInfos? = nil, appClips: AppClips? = nil, appPricePoints: AppPricePoints? = nil, endUserLicenseAgreement: EndUserLicenseAgreement? = nil, appPriceSchedule: AppPriceSchedule? = nil, appAvailabilityV2: AppAvailabilityV2? = nil, inAppPurchases: InAppPurchases? = nil, subscriptionGroups: SubscriptionGroups? = nil, gameCenterEnabledVersions: GameCenterEnabledVersions? = nil, perfPowerMetrics: PerfPowerMetrics? = nil, appCustomProductPages: AppCustomProductPages? = nil, inAppPurchasesV2: InAppPurchasesV2? = nil, promotedPurchases: PromotedPurchases? = nil, appEvents: AppEvents? = nil, reviewSubmissions: ReviewSubmissions? = nil, subscriptionGracePeriod: SubscriptionGracePeriod? = nil, customerReviews: CustomerReviews? = nil, customerReviewSummarizations: CustomerReviewSummarizations? = nil, gameCenterDetail: GameCenterDetail? = nil, appStoreVersionExperimentsV2: AppStoreVersionExperimentsV2? = nil, alternativeDistributionKey: AlternativeDistributionKey? = nil, analyticsReportRequests: AnalyticsReportRequests? = nil, marketplaceSearchDetail: MarketplaceSearchDetail? = nil, buildUploads: BuildUploads? = nil, backgroundAssets: BackgroundAssets? = nil, betaFeedbackScreenshotSubmissions: BetaFeedbackScreenshotSubmissions? = nil, betaFeedbackCrashSubmissions: BetaFeedbackCrashSubmissions? = nil, searchKeywords: SearchKeywords? = nil, webhooks: Webhooks? = nil, androidToIosAppMappingDetails: AndroidToIosAppMappingDetails? = nil) {
+		public init(accessibilityDeclarations: AccessibilityDeclarations? = nil, appEncryptionDeclarations: AppEncryptionDeclarations? = nil, appStoreIcon: AppStoreIcon? = nil, ciProduct: CiProduct? = nil, betaTesters: BetaTesters? = nil, betaGroups: BetaGroups? = nil, appStoreVersions: AppStoreVersions? = nil, appTags: AppTags? = nil, preReleaseVersions: PreReleaseVersions? = nil, betaAppLocalizations: BetaAppLocalizations? = nil, builds: Builds? = nil, betaLicenseAgreement: BetaLicenseAgreement? = nil, betaAppReviewDetail: BetaAppReviewDetail? = nil, appInfos: AppInfos? = nil, appClips: AppClips? = nil, appPricePoints: AppPricePoints? = nil, endUserLicenseAgreement: EndUserLicenseAgreement? = nil, appPriceSchedule: AppPriceSchedule? = nil, appAvailabilityV2: AppAvailabilityV2? = nil, inAppPurchases: InAppPurchases? = nil, subscriptionGroups: SubscriptionGroups? = nil, gameCenterEnabledVersions: GameCenterEnabledVersions? = nil, performanceOverviews: PerformanceOverviews? = nil, perfPowerMetrics: PerfPowerMetrics? = nil, appCustomProductPages: AppCustomProductPages? = nil, inAppPurchasesV2: InAppPurchasesV2? = nil, promotedPurchases: PromotedPurchases? = nil, appEvents: AppEvents? = nil, reviewSubmissions: ReviewSubmissions? = nil, subscriptionGracePeriod: SubscriptionGracePeriod? = nil, customerReviews: CustomerReviews? = nil, customerReviewSummarizations: CustomerReviewSummarizations? = nil, gameCenterDetail: GameCenterDetail? = nil, appStoreVersionExperimentsV2: AppStoreVersionExperimentsV2? = nil, alternativeDistributionKey: AlternativeDistributionKey? = nil, analyticsReportRequests: AnalyticsReportRequests? = nil, marketplaceSearchDetail: MarketplaceSearchDetail? = nil, buildUploads: BuildUploads? = nil, backgroundAssets: BackgroundAssets? = nil, betaFeedbackScreenshotSubmissions: BetaFeedbackScreenshotSubmissions? = nil, betaFeedbackCrashSubmissions: BetaFeedbackCrashSubmissions? = nil, searchKeywords: SearchKeywords? = nil, webhooks: Webhooks? = nil, androidToIosAppMappingDetails: AndroidToIosAppMappingDetails? = nil) {
 			self.accessibilityDeclarations = accessibilityDeclarations
 			self.appEncryptionDeclarations = appEncryptionDeclarations
 			self.appStoreIcon = appStoreIcon
@@ -1743,6 +1762,7 @@ public struct App: Codable, Identifiable {
 			self.inAppPurchases = inAppPurchases
 			self.subscriptionGroups = subscriptionGroups
 			self.gameCenterEnabledVersions = gameCenterEnabledVersions
+			self.performanceOverviews = performanceOverviews
 			self.perfPowerMetrics = perfPowerMetrics
 			self.appCustomProductPages = appCustomProductPages
 			self.inAppPurchasesV2 = inAppPurchasesV2
@@ -1790,6 +1810,7 @@ public struct App: Codable, Identifiable {
 			self.inAppPurchases = try values.decodeIfPresent(InAppPurchases.self, forKey: "inAppPurchases")
 			self.subscriptionGroups = try values.decodeIfPresent(SubscriptionGroups.self, forKey: "subscriptionGroups")
 			self.gameCenterEnabledVersions = try values.decodeIfPresent(GameCenterEnabledVersions.self, forKey: "gameCenterEnabledVersions")
+			self.performanceOverviews = try values.decodeIfPresent(PerformanceOverviews.self, forKey: "performanceOverviews")
 			self.perfPowerMetrics = try values.decodeIfPresent(PerfPowerMetrics.self, forKey: "perfPowerMetrics")
 			self.appCustomProductPages = try values.decodeIfPresent(AppCustomProductPages.self, forKey: "appCustomProductPages")
 			self.inAppPurchasesV2 = try values.decodeIfPresent(InAppPurchasesV2.self, forKey: "inAppPurchasesV2")
@@ -1837,6 +1858,7 @@ public struct App: Codable, Identifiable {
 			try values.encodeIfPresent(inAppPurchases, forKey: "inAppPurchases")
 			try values.encodeIfPresent(subscriptionGroups, forKey: "subscriptionGroups")
 			try values.encodeIfPresent(gameCenterEnabledVersions, forKey: "gameCenterEnabledVersions")
+			try values.encodeIfPresent(performanceOverviews, forKey: "performanceOverviews")
 			try values.encodeIfPresent(perfPowerMetrics, forKey: "perfPowerMetrics")
 			try values.encodeIfPresent(appCustomProductPages, forKey: "appCustomProductPages")
 			try values.encodeIfPresent(inAppPurchasesV2, forKey: "inAppPurchasesV2")

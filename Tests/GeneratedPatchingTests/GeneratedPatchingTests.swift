@@ -41,9 +41,13 @@ final class GeneratedPatchingTests: XCTestCase {
         XCTAssertTrue(out.contains("public var avatarURL: String?"))
         XCTAssertTrue(out.contains("avatarURL: String? = nil"))
         XCTAssertTrue(out.contains(#"decodeIfPresent(String.self, forKey: "avatarUrl")"#))
+
+        let secondReport = try GeneratedPatcher.patchGeneratedSources(atRoot: tmp, dryRun: false)
+        XCTAssertTrue(secondReport.changedFiles.isEmpty)
+        XCTAssertEqual(secondReport.alreadyPresent.count, 3)
+        XCTAssertTrue(secondReport.missingFiles.contains("CiBuildRun.swift"))
     }
 }
 #endif
-
 
 

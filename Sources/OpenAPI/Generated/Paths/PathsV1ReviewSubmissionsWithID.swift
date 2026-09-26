@@ -72,6 +72,7 @@ extension APIEndpoint.V1.ReviewSubmissions {
 				case inAppPurchases
 				case subscriptionGroups
 				case gameCenterEnabledVersions
+				case performanceOverviews
 				case perfPowerMetrics
 				case appCustomProductPages
 				case inAppPurchasesV2

@@ -83,6 +83,7 @@ extension APIEndpoint.V1.Apps.WithID {
 				case inAppPurchases
 				case subscriptionGroups
 				case gameCenterEnabledVersions
+				case performanceOverviews
 				case perfPowerMetrics
 				case appCustomProductPages
 				case inAppPurchasesV2
@@ -135,6 +136,7 @@ extension APIEndpoint.V1.Apps.WithID {
 				case ageRatingOverride
 				case ageRatingOverrideV2
 				case koreaAgeRatingOverride
+				case gracRatingClassificationNumber
 				case developerAgeRatingInfoURL = "developerAgeRatingInfoUrl"
 			}
 

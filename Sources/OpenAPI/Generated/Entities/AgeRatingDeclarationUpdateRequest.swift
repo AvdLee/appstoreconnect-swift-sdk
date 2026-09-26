@@ -45,6 +45,7 @@ public struct AgeRatingDeclarationUpdateRequest: Codable {
 			public var ageRatingOverride: AgeRatingOverride?
 			public var ageRatingOverrideV2: AgeRatingOverrideV2?
 			public var koreaAgeRatingOverride: KoreaAgeRatingOverride?
+			public var gracRatingClassificationNumber: String?
 			public var developerAgeRatingInfoURL: URL?
 
 			public enum AlcoholTobaccoOrDrugUseOrReferences: String, Codable, CaseIterable {
@@ -172,11 +173,13 @@ public struct AgeRatingDeclarationUpdateRequest: Codable {
 
 			public enum KoreaAgeRatingOverride: String, Codable, CaseIterable {
 				case `none` = "NONE"
+				case all = "ALL"
+				case twelvePlus = "TWELVE_PLUS"
 				case fifteenPlus = "FIFTEEN_PLUS"
 				case nineteenPlus = "NINETEEN_PLUS"
 			}
 
-			public init(isAdvertising: Bool? = nil, alcoholTobaccoOrDrugUseOrReferences: AlcoholTobaccoOrDrugUseOrReferences? = nil, contests: Contests? = nil, isGambling: Bool? = nil, gamblingSimulated: GamblingSimulated? = nil, gunsOrOtherWeapons: GunsOrOtherWeapons? = nil, isHealthOrWellnessTopics: Bool? = nil, kidsAgeBand: KidsAgeBand? = nil, isLootBox: Bool? = nil, medicalOrTreatmentInformation: MedicalOrTreatmentInformation? = nil, isMessagingAndChat: Bool? = nil, isParentalControls: Bool? = nil, profanityOrCrudeHumor: ProfanityOrCrudeHumor? = nil, isAgeAssurance: Bool? = nil, sexualContentGraphicAndNudity: SexualContentGraphicAndNudity? = nil, sexualContentOrNudity: SexualContentOrNudity? = nil, isSocialMedia: Bool? = nil, isSocialMediaAgeRestricted: Bool? = nil, horrorOrFearThemes: HorrorOrFearThemes? = nil, matureOrSuggestiveThemes: MatureOrSuggestiveThemes? = nil, isUnrestrictedWebAccess: Bool? = nil, isUserGeneratedContent: Bool? = nil, violenceCartoonOrFantasy: ViolenceCartoonOrFantasy? = nil, violenceRealisticProlongedGraphicOrSadistic: ViolenceRealisticProlongedGraphicOrSadistic? = nil, violenceRealistic: ViolenceRealistic? = nil, ageRatingOverride: AgeRatingOverride? = nil, ageRatingOverrideV2: AgeRatingOverrideV2? = nil, koreaAgeRatingOverride: KoreaAgeRatingOverride? = nil, developerAgeRatingInfoURL: URL? = nil) {
+			public init(isAdvertising: Bool? = nil, alcoholTobaccoOrDrugUseOrReferences: AlcoholTobaccoOrDrugUseOrReferences? = nil, contests: Contests? = nil, isGambling: Bool? = nil, gamblingSimulated: GamblingSimulated? = nil, gunsOrOtherWeapons: GunsOrOtherWeapons? = nil, isHealthOrWellnessTopics: Bool? = nil, kidsAgeBand: KidsAgeBand? = nil, isLootBox: Bool? = nil, medicalOrTreatmentInformation: MedicalOrTreatmentInformation? = nil, isMessagingAndChat: Bool? = nil, isParentalControls: Bool? = nil, profanityOrCrudeHumor: ProfanityOrCrudeHumor? = nil, isAgeAssurance: Bool? = nil, sexualContentGraphicAndNudity: SexualContentGraphicAndNudity? = nil, sexualContentOrNudity: SexualContentOrNudity? = nil, isSocialMedia: Bool? = nil, isSocialMediaAgeRestricted: Bool? = nil, horrorOrFearThemes: HorrorOrFearThemes? = nil, matureOrSuggestiveThemes: MatureOrSuggestiveThemes? = nil, isUnrestrictedWebAccess: Bool? = nil, isUserGeneratedContent: Bool? = nil, violenceCartoonOrFantasy: ViolenceCartoonOrFantasy? = nil, violenceRealisticProlongedGraphicOrSadistic: ViolenceRealisticProlongedGraphicOrSadistic? = nil, violenceRealistic: ViolenceRealistic? = nil, ageRatingOverride: AgeRatingOverride? = nil, ageRatingOverrideV2: AgeRatingOverrideV2? = nil, koreaAgeRatingOverride: KoreaAgeRatingOverride? = nil, gracRatingClassificationNumber: String? = nil, developerAgeRatingInfoURL: URL? = nil) {
 				self.isAdvertising = isAdvertising
 				self.alcoholTobaccoOrDrugUseOrReferences = alcoholTobaccoOrDrugUseOrReferences
 				self.contests = contests
@@ -205,6 +208,7 @@ public struct AgeRatingDeclarationUpdateRequest: Codable {
 				self.ageRatingOverride = ageRatingOverride
 				self.ageRatingOverrideV2 = ageRatingOverrideV2
 				self.koreaAgeRatingOverride = koreaAgeRatingOverride
+				self.gracRatingClassificationNumber = gracRatingClassificationNumber
 				self.developerAgeRatingInfoURL = developerAgeRatingInfoURL
 			}
 
@@ -238,6 +242,7 @@ public struct AgeRatingDeclarationUpdateRequest: Codable {
 				self.ageRatingOverride = try values.decodeIfPresent(AgeRatingOverride.self, forKey: "ageRatingOverride")
 				self.ageRatingOverrideV2 = try values.decodeIfPresent(AgeRatingOverrideV2.self, forKey: "ageRatingOverrideV2")
 				self.koreaAgeRatingOverride = try values.decodeIfPresent(KoreaAgeRatingOverride.self, forKey: "koreaAgeRatingOverride")
+				self.gracRatingClassificationNumber = try values.decodeIfPresent(String.self, forKey: "gracRatingClassificationNumber")
 				self.developerAgeRatingInfoURL = try values.decodeIfPresent(URL.self, forKey: "developerAgeRatingInfoUrl")
 			}
 
@@ -271,6 +276,7 @@ public struct AgeRatingDeclarationUpdateRequest: Codable {
 				try values.encodeIfPresent(ageRatingOverride, forKey: "ageRatingOverride")
 				try values.encodeIfPresent(ageRatingOverrideV2, forKey: "ageRatingOverrideV2")
 				try values.encodeIfPresent(koreaAgeRatingOverride, forKey: "koreaAgeRatingOverride")
+				try values.encodeIfPresent(gracRatingClassificationNumber, forKey: "gracRatingClassificationNumber")
 				try values.encode(developerAgeRatingInfoURL, forKey: "developerAgeRatingInfoUrl")
 			}
 		}

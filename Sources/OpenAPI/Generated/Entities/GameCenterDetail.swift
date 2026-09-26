@@ -68,6 +68,7 @@ public struct GameCenterDetail: Codable, Identifiable {
 		public var leaderboardReleases: LeaderboardReleases?
 		/// - warning: Deprecated.
 		public var leaderboardSetReleases: LeaderboardSetReleases?
+		public var blockedPlayers: BlockedPlayers?
 		public var challengesMinimumPlatformVersions: ChallengesMinimumPlatformVersions?
 
 		public struct App: Codable {
@@ -1076,6 +1077,24 @@ public struct GameCenterDetail: Codable, Identifiable {
 			}
 		}
 
+		public struct BlockedPlayers: Codable {
+			public var links: RelationshipLinks?
+
+			public init(links: RelationshipLinks? = nil) {
+				self.links = links
+			}
+
+			public init(from decoder: Decoder) throws {
+				let values = try decoder.container(keyedBy: StringCodingKey.self)
+				self.links = try values.decodeIfPresent(RelationshipLinks.self, forKey: "links")
+			}
+
+			public func encode(to encoder: Encoder) throws {
+				var values = encoder.container(keyedBy: StringCodingKey.self)
+				try values.encodeIfPresent(links, forKey: "links")
+			}
+		}
+
 		public struct ChallengesMinimumPlatformVersions: Codable {
 			public var links: RelationshipLinks?
 			public var meta: PagingInformation?
@@ -1128,7 +1147,7 @@ public struct GameCenterDetail: Codable, Identifiable {
 			}
 		}
 
-		public init(app: App? = nil, gameCenterAppVersions: GameCenterAppVersions? = nil, gameCenterGroup: GameCenterGroup? = nil, gameCenterLeaderboards: GameCenterLeaderboards? = nil, gameCenterLeaderboardsV2: GameCenterLeaderboardsV2? = nil, gameCenterLeaderboardSets: GameCenterLeaderboardSets? = nil, gameCenterLeaderboardSetsV2: GameCenterLeaderboardSetsV2? = nil, gameCenterAchievements: GameCenterAchievements? = nil, gameCenterAchievementsV2: GameCenterAchievementsV2? = nil, gameCenterActivities: GameCenterActivities? = nil, gameCenterChallenges: GameCenterChallenges? = nil, defaultLeaderboard: DefaultLeaderboard? = nil, defaultLeaderboardV2: DefaultLeaderboardV2? = nil, defaultGroupLeaderboard: DefaultGroupLeaderboard? = nil, defaultGroupLeaderboardV2: DefaultGroupLeaderboardV2? = nil, achievementReleases: AchievementReleases? = nil, activityReleases: ActivityReleases? = nil, challengeReleases: ChallengeReleases? = nil, leaderboardReleases: LeaderboardReleases? = nil, leaderboardSetReleases: LeaderboardSetReleases? = nil, challengesMinimumPlatformVersions: ChallengesMinimumPlatformVersions? = nil) {
+		public init(app: App? = nil, gameCenterAppVersions: GameCenterAppVersions? = nil, gameCenterGroup: GameCenterGroup? = nil, gameCenterLeaderboards: GameCenterLeaderboards? = nil, gameCenterLeaderboardsV2: GameCenterLeaderboardsV2? = nil, gameCenterLeaderboardSets: GameCenterLeaderboardSets? = nil, gameCenterLeaderboardSetsV2: GameCenterLeaderboardSetsV2? = nil, gameCenterAchievements: GameCenterAchievements? = nil, gameCenterAchievementsV2: GameCenterAchievementsV2? = nil, gameCenterActivities: GameCenterActivities? = nil, gameCenterChallenges: GameCenterChallenges? = nil, defaultLeaderboard: DefaultLeaderboard? = nil, defaultLeaderboardV2: DefaultLeaderboardV2? = nil, defaultGroupLeaderboard: DefaultGroupLeaderboard? = nil, defaultGroupLeaderboardV2: DefaultGroupLeaderboardV2? = nil, achievementReleases: AchievementReleases? = nil, activityReleases: ActivityReleases? = nil, challengeReleases: ChallengeReleases? = nil, leaderboardReleases: LeaderboardReleases? = nil, leaderboardSetReleases: LeaderboardSetReleases? = nil, blockedPlayers: BlockedPlayers? = nil, challengesMinimumPlatformVersions: ChallengesMinimumPlatformVersions? = nil) {
 			self.app = app
 			self.gameCenterAppVersions = gameCenterAppVersions
 			self.gameCenterGroup = gameCenterGroup
@@ -1149,6 +1168,7 @@ public struct GameCenterDetail: Codable, Identifiable {
 			self.challengeReleases = challengeReleases
 			self.leaderboardReleases = leaderboardReleases
 			self.leaderboardSetReleases = leaderboardSetReleases
+			self.blockedPlayers = blockedPlayers
 			self.challengesMinimumPlatformVersions = challengesMinimumPlatformVersions
 		}
 
@@ -1174,6 +1194,7 @@ public struct GameCenterDetail: Codable, Identifiable {
 			self.challengeReleases = try values.decodeIfPresent(ChallengeReleases.self, forKey: "challengeReleases")
 			self.leaderboardReleases = try values.decodeIfPresent(LeaderboardReleases.self, forKey: "leaderboardReleases")
 			self.leaderboardSetReleases = try values.decodeIfPresent(LeaderboardSetReleases.self, forKey: "leaderboardSetReleases")
+			self.blockedPlayers = try values.decodeIfPresent(BlockedPlayers.self, forKey: "blockedPlayers")
 			self.challengesMinimumPlatformVersions = try values.decodeIfPresent(ChallengesMinimumPlatformVersions.self, forKey: "challengesMinimumPlatformVersions")
 		}
 
@@ -1199,6 +1220,7 @@ public struct GameCenterDetail: Codable, Identifiable {
 			try values.encodeIfPresent(challengeReleases, forKey: "challengeReleases")
 			try values.encodeIfPresent(leaderboardReleases, forKey: "leaderboardReleases")
 			try values.encodeIfPresent(leaderboardSetReleases, forKey: "leaderboardSetReleases")
+			try values.encodeIfPresent(blockedPlayers, forKey: "blockedPlayers")
 			try values.encodeIfPresent(challengesMinimumPlatformVersions, forKey: "challengesMinimumPlatformVersions")
 		}
 	}

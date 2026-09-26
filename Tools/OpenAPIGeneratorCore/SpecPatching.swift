@@ -25,7 +25,6 @@ public enum SpecPatcher {
         case purchaseRequirementEnum = "purchase-requirement-enum"
         case responseErrorSchema = "response-error-schema"
         case winBackOfferPriceInlineCreateFields = "winbackofferpriceinlinecreate-fields"
-        case removeAppInfoKidsAgeBandField = "remove-appinfo-kidsageband-field"
         case nominationRelationshipDataArrays = "nomination-relationship-data-arrays"
     }
 
@@ -111,22 +110,6 @@ public enum SpecPatcher {
         if nominationRelationshipData.didChange {
             didChange = true
             changes.append("Ensured Nomination relationship data arrays are required")
-        }
-
-        // Apple still lists kidsAgeBand in fields[appInfos], but the live API rejects that
-        // fieldset value. Leave the deprecated AppInfo attribute and AgeRatingDeclaration alone.
-        let appInfoKidsAgeBandField = removeKidsAgeBandFromAppInfosFields(&rootObject)
-        rules.append(
-            .init(
-                id: .removeAppInfoKidsAgeBandField,
-                didChange: appInfoKidsAgeBandField.didChange,
-                matchCount: appInfoKidsAgeBandField.matchCount,
-                zeroMatchesIsOK: true
-            )
-        )
-        if appInfoKidsAgeBandField.didChange {
-            didChange = true
-            changes.append("Removed kidsAgeBand from fields[appInfos]")
         }
 
         root = .object(rootObject)
@@ -501,73 +484,6 @@ private func ensureResponseErrorSchemaAndRef(_ root: inout OrderedDictionary<Str
     if didChange {
         components["schemas"] = .object(schemas)
         root["components"] = .object(components)
-    }
-
-    return .init(didChange: didChange, matchCount: matchCount)
-}
-
-/// Apple's OpenAPI still includes `kidsAgeBand` in `fields[appInfos]`, but the live API
-/// rejects that fieldset value with "'kidsAgeBand' is not a valid field name".
-/// The deprecated AppInfo attribute and `fields[ageRatingDeclarations]` stay untouched.
-private func removeKidsAgeBandFromAppInfosFields(_ root: inout OrderedDictionary<String, JSONValue>) -> PatchOutcome {
-    var didChange = false
-    var matchCount = 0
-
-    guard var paths = root["paths"]?.objectValue else {
-        return .init(didChange: false, matchCount: 0)
-    }
-
-    var pathsChanged = false
-    for pathKey in Array(paths.keys) {
-        guard var pathItem = paths[pathKey]?.objectValue else { continue }
-        var pathItemChanged = false
-
-        for methodKey in Array(pathItem.keys) {
-            guard var operation = pathItem[methodKey]?.objectValue,
-                  var parameters = operation["parameters"]?.arrayValue
-            else {
-                continue
-            }
-
-            var parametersChanged = false
-            for parameterIndex in parameters.indices {
-                guard var parameter = parameters[parameterIndex].objectValue,
-                      parameter["name"]?.stringValue == "fields[appInfos]",
-                      var schema = parameter["schema"]?.objectValue,
-                      var items = schema["items"]?.objectValue,
-                      var values = items["enum"]?.arrayValue
-                else {
-                    continue
-                }
-
-                let filtered = values.filter { $0.stringValue != "kidsAgeBand" }
-                guard filtered.count != values.count else { continue }
-
-                values = filtered
-                items["enum"] = .array(values)
-                schema["items"] = .object(items)
-                parameter["schema"] = .object(schema)
-                parameters[parameterIndex] = .object(parameter)
-                parametersChanged = true
-                matchCount += 1
-                didChange = true
-            }
-
-            if parametersChanged {
-                operation["parameters"] = .array(parameters)
-                pathItem[methodKey] = .object(operation)
-                pathItemChanged = true
-            }
-        }
-
-        if pathItemChanged {
-            paths[pathKey] = .object(pathItem)
-            pathsChanged = true
-        }
-    }
-
-    if pathsChanged {
-        root["paths"] = .object(paths)
     }
 
     return .init(didChange: didChange, matchCount: matchCount)

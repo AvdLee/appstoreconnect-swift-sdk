@@ -59,6 +59,8 @@ extension APIEndpoint.V1.PromotedPurchases {
 				case subscriptionPeriod
 				case reviewNote
 				case groupLevel
+				case multiSeatStatus
+				case marketSettings
 				case subscriptionLocalizations
 				case appStoreReviewScreenshot
 				case group

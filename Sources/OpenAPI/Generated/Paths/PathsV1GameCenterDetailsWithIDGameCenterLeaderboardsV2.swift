@@ -50,6 +50,7 @@ extension APIEndpoint.V1.GameCenterDetails.WithID {
 				case gameCenterDetail
 				case gameCenterGroup
 				case gameCenterLeaderboardSets
+				case gameCenterScoreModerations
 				case activity
 				case challenge
 				case versions
@@ -78,6 +79,7 @@ extension APIEndpoint.V1.GameCenterDetails.WithID {
 				case challengeReleases
 				case leaderboardReleases
 				case leaderboardSetReleases
+				case blockedPlayers
 				case challengesMinimumPlatformVersions
 			}
 

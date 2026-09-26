@@ -66,6 +66,7 @@ extension APIEndpoint.V3.AppPricePoints {
 				case inAppPurchases
 				case subscriptionGroups
 				case gameCenterEnabledVersions
+				case performanceOverviews
 				case perfPowerMetrics
 				case appCustomProductPages
 				case inAppPurchasesV2
