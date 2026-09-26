@@ -81,6 +81,12 @@ struct OpenAPIGenerator: AsyncParsableCommand {
                 print("Patched generated code (\(report.changedFiles.count) files, \(report.changes.count) changes):")
                 for c in report.changes { print("- \(c)") }
             }
+            for change in report.alreadyPresent {
+                print("[generated] already present; review patch: \(change)")
+            }
+            for file in report.missingFiles {
+                print("[generated] target file missing; review patch: \(file)")
+            }
         }
     }
 
@@ -117,8 +123,13 @@ struct OpenAPIGenerator: AsyncParsableCommand {
                 print("Patched generated code (\(report.changedFiles.count) files, \(report.changes.count) changes):")
                 for c in report.changes { print("- \(c)") }
             }
+            for change in report.alreadyPresent {
+                print("[generated] already present; review patch: \(change)")
+            }
+            for file in report.missingFiles {
+                print("[generated] target file missing; review patch: \(file)")
+            }
         }
     }
 }
-
 

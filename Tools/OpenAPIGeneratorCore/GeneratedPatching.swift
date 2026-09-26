@@ -20,10 +20,14 @@ public enum GeneratedPatchingError: Error, CustomStringConvertible {
 public struct GeneratedPatchReport {
     public var changedFiles: [String]
     public var changes: [String]
+    public var alreadyPresent: [String]
+    public var missingFiles: [String]
 
-    public init(changedFiles: [String] = [], changes: [String] = []) {
+    public init(changedFiles: [String] = [], changes: [String] = [], alreadyPresent: [String] = [], missingFiles: [String] = []) {
         self.changedFiles = changedFiles
         self.changes = changes
+        self.alreadyPresent = alreadyPresent
+        self.missingFiles = missingFiles
     }
 }
 
@@ -149,6 +153,7 @@ private func patchFile(_ url: URL, dryRun: Bool, replacements: [Replacement], re
     let fm = FileManager.default
     var isDir: ObjCBool = false
     guard fm.fileExists(atPath: url.path, isDirectory: &isDir), !isDir.boolValue else {
+        report.missingFiles.append(url.lastPathComponent)
         return
     }
 
@@ -168,6 +173,7 @@ private func patchFile(_ url: URL, dryRun: Bool, replacements: [Replacement], re
             fileChanged = true
             report.changes.append("\(url.lastPathComponent): \(r.description)")
         } else if updated.contains(r.to) {
+            report.alreadyPresent.append("\(url.lastPathComponent): \(r.description)")
             continue
         } else if r.required {
             throw GeneratedPatchingError.expectedSubstringNotFound(file: url.path, needle: r.from)
@@ -185,6 +191,5 @@ private func patchFile(_ url: URL, dryRun: Bool, replacements: [Replacement], re
         }
     }
 }
-
 
 
