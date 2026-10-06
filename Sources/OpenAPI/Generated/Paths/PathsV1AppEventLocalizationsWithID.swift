@@ -22,9 +22,11 @@ extension APIEndpoint.V1.AppEventLocalizations {
 			public var fieldsAppEvents: [FieldsAppEvents]?
 			public var fieldsAppEventScreenshots: [FieldsAppEventScreenshots]?
 			public var fieldsAppEventVideoClips: [FieldsAppEventVideoClips]?
+			public var fieldsAppAssetLibraryPlacements: [FieldsAppAssetLibraryPlacements]?
 			public var include: [Include]?
 			public var limitAppEventScreenshots: Int?
 			public var limitAppEventVideoClips: Int?
+			public var limitPlacements: Int?
 
 			public enum FieldsAppEventLocalizations: String, Codable, CaseIterable {
 				case locale
@@ -34,6 +36,7 @@ extension APIEndpoint.V1.AppEventLocalizations {
 				case appEvent
 				case appEventScreenshots
 				case appEventVideoClips
+				case placements
 			}
 
 			public enum FieldsAppEvents: String, Codable, CaseIterable {
@@ -75,20 +78,39 @@ extension APIEndpoint.V1.AppEventLocalizations {
 				case appEventLocalization
 			}
 
+			public enum FieldsAppAssetLibraryPlacements: String, Codable, CaseIterable {
+				case mediaType
+				case placementType
+				case placementGroup
+				case createdDate
+				case lastModifiedDate
+				case state
+				case stateDetails
+				case image
+				case video
+				case appEventLocalization
+				case appStoreVersionLocalization
+				case appCustomProductPageLocalization
+				case appStoreVersionExperimentTreatmentLocalization
+			}
+
 			public enum Include: String, Codable, CaseIterable {
 				case appEvent
 				case appEventScreenshots
 				case appEventVideoClips
+				case placements
 			}
 
-			public init(fieldsAppEventLocalizations: [FieldsAppEventLocalizations]? = nil, fieldsAppEvents: [FieldsAppEvents]? = nil, fieldsAppEventScreenshots: [FieldsAppEventScreenshots]? = nil, fieldsAppEventVideoClips: [FieldsAppEventVideoClips]? = nil, include: [Include]? = nil, limitAppEventScreenshots: Int? = nil, limitAppEventVideoClips: Int? = nil) {
+			public init(fieldsAppEventLocalizations: [FieldsAppEventLocalizations]? = nil, fieldsAppEvents: [FieldsAppEvents]? = nil, fieldsAppEventScreenshots: [FieldsAppEventScreenshots]? = nil, fieldsAppEventVideoClips: [FieldsAppEventVideoClips]? = nil, fieldsAppAssetLibraryPlacements: [FieldsAppAssetLibraryPlacements]? = nil, include: [Include]? = nil, limitAppEventScreenshots: Int? = nil, limitAppEventVideoClips: Int? = nil, limitPlacements: Int? = nil) {
 				self.fieldsAppEventLocalizations = fieldsAppEventLocalizations
 				self.fieldsAppEvents = fieldsAppEvents
 				self.fieldsAppEventScreenshots = fieldsAppEventScreenshots
 				self.fieldsAppEventVideoClips = fieldsAppEventVideoClips
+				self.fieldsAppAssetLibraryPlacements = fieldsAppAssetLibraryPlacements
 				self.include = include
 				self.limitAppEventScreenshots = limitAppEventScreenshots
 				self.limitAppEventVideoClips = limitAppEventVideoClips
+				self.limitPlacements = limitPlacements
 			}
 
 			public var asQuery: [(String, String?)] {
@@ -97,9 +119,11 @@ extension APIEndpoint.V1.AppEventLocalizations {
 				encoder.encode(fieldsAppEvents, forKey: "fields[appEvents]")
 				encoder.encode(fieldsAppEventScreenshots, forKey: "fields[appEventScreenshots]")
 				encoder.encode(fieldsAppEventVideoClips, forKey: "fields[appEventVideoClips]")
+				encoder.encode(fieldsAppAssetLibraryPlacements, forKey: "fields[appAssetLibraryPlacements]")
 				encoder.encode(include, forKey: "include")
 				encoder.encode(limitAppEventScreenshots, forKey: "limit[appEventScreenshots]")
 				encoder.encode(limitAppEventVideoClips, forKey: "limit[appEventVideoClips]")
+				encoder.encode(limitPlacements, forKey: "limit[placements]")
 				return encoder.items
 			}
 		}

@@ -114,6 +114,7 @@ extension APIEndpoint.V1.GameCenterAppVersions.WithID {
 				case marketplaceSearchDetail
 				case buildUploads
 				case backgroundAssets
+				case assetLibrary
 				case betaFeedbackScreenshotSubmissions
 				case betaFeedbackCrashSubmissions
 				case searchKeywords
@@ -133,6 +134,7 @@ extension APIEndpoint.V1.GameCenterAppVersions.WithID {
 				case appScreenshotSets
 				case appPreviewSets
 				case searchKeywords
+				case placements
 			}
 
 			public enum FieldsBuilds: String, Codable, CaseIterable {

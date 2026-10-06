@@ -122,6 +122,7 @@ public struct App: Codable, Identifiable {
 		public var marketplaceSearchDetail: MarketplaceSearchDetail?
 		public var buildUploads: BuildUploads?
 		public var backgroundAssets: BackgroundAssets?
+		public var assetLibrary: AssetLibrary?
 		public var betaFeedbackScreenshotSubmissions: BetaFeedbackScreenshotSubmissions?
 		public var betaFeedbackCrashSubmissions: BetaFeedbackCrashSubmissions?
 		public var searchKeywords: SearchKeywords?
@@ -1615,6 +1616,24 @@ public struct App: Codable, Identifiable {
 			}
 		}
 
+		public struct AssetLibrary: Codable {
+			public var links: RelationshipLinks?
+
+			public init(links: RelationshipLinks? = nil) {
+				self.links = links
+			}
+
+			public init(from decoder: Decoder) throws {
+				let values = try decoder.container(keyedBy: StringCodingKey.self)
+				self.links = try values.decodeIfPresent(RelationshipLinks.self, forKey: "links")
+			}
+
+			public func encode(to encoder: Encoder) throws {
+				var values = encoder.container(keyedBy: StringCodingKey.self)
+				try values.encodeIfPresent(links, forKey: "links")
+			}
+		}
+
 		public struct BetaFeedbackScreenshotSubmissions: Codable {
 			public var links: RelationshipLinks?
 
@@ -1739,7 +1758,7 @@ public struct App: Codable, Identifiable {
 			}
 		}
 
-		public init(accessibilityDeclarations: AccessibilityDeclarations? = nil, appEncryptionDeclarations: AppEncryptionDeclarations? = nil, appStoreIcon: AppStoreIcon? = nil, ciProduct: CiProduct? = nil, betaTesters: BetaTesters? = nil, betaGroups: BetaGroups? = nil, appStoreVersions: AppStoreVersions? = nil, appTags: AppTags? = nil, preReleaseVersions: PreReleaseVersions? = nil, betaAppLocalizations: BetaAppLocalizations? = nil, builds: Builds? = nil, betaLicenseAgreement: BetaLicenseAgreement? = nil, betaAppReviewDetail: BetaAppReviewDetail? = nil, appInfos: AppInfos? = nil, appClips: AppClips? = nil, appPricePoints: AppPricePoints? = nil, endUserLicenseAgreement: EndUserLicenseAgreement? = nil, appPriceSchedule: AppPriceSchedule? = nil, appAvailabilityV2: AppAvailabilityV2? = nil, inAppPurchases: InAppPurchases? = nil, subscriptionGroups: SubscriptionGroups? = nil, gameCenterEnabledVersions: GameCenterEnabledVersions? = nil, performanceOverviews: PerformanceOverviews? = nil, perfPowerMetrics: PerfPowerMetrics? = nil, appCustomProductPages: AppCustomProductPages? = nil, inAppPurchasesV2: InAppPurchasesV2? = nil, promotedPurchases: PromotedPurchases? = nil, appEvents: AppEvents? = nil, reviewSubmissions: ReviewSubmissions? = nil, subscriptionGracePeriod: SubscriptionGracePeriod? = nil, customerReviews: CustomerReviews? = nil, customerReviewSummarizations: CustomerReviewSummarizations? = nil, gameCenterDetail: GameCenterDetail? = nil, appStoreVersionExperimentsV2: AppStoreVersionExperimentsV2? = nil, alternativeDistributionKey: AlternativeDistributionKey? = nil, analyticsReportRequests: AnalyticsReportRequests? = nil, marketplaceSearchDetail: MarketplaceSearchDetail? = nil, buildUploads: BuildUploads? = nil, backgroundAssets: BackgroundAssets? = nil, betaFeedbackScreenshotSubmissions: BetaFeedbackScreenshotSubmissions? = nil, betaFeedbackCrashSubmissions: BetaFeedbackCrashSubmissions? = nil, searchKeywords: SearchKeywords? = nil, webhooks: Webhooks? = nil, androidToIosAppMappingDetails: AndroidToIosAppMappingDetails? = nil) {
+		public init(accessibilityDeclarations: AccessibilityDeclarations? = nil, appEncryptionDeclarations: AppEncryptionDeclarations? = nil, appStoreIcon: AppStoreIcon? = nil, ciProduct: CiProduct? = nil, betaTesters: BetaTesters? = nil, betaGroups: BetaGroups? = nil, appStoreVersions: AppStoreVersions? = nil, appTags: AppTags? = nil, preReleaseVersions: PreReleaseVersions? = nil, betaAppLocalizations: BetaAppLocalizations? = nil, builds: Builds? = nil, betaLicenseAgreement: BetaLicenseAgreement? = nil, betaAppReviewDetail: BetaAppReviewDetail? = nil, appInfos: AppInfos? = nil, appClips: AppClips? = nil, appPricePoints: AppPricePoints? = nil, endUserLicenseAgreement: EndUserLicenseAgreement? = nil, appPriceSchedule: AppPriceSchedule? = nil, appAvailabilityV2: AppAvailabilityV2? = nil, inAppPurchases: InAppPurchases? = nil, subscriptionGroups: SubscriptionGroups? = nil, gameCenterEnabledVersions: GameCenterEnabledVersions? = nil, performanceOverviews: PerformanceOverviews? = nil, perfPowerMetrics: PerfPowerMetrics? = nil, appCustomProductPages: AppCustomProductPages? = nil, inAppPurchasesV2: InAppPurchasesV2? = nil, promotedPurchases: PromotedPurchases? = nil, appEvents: AppEvents? = nil, reviewSubmissions: ReviewSubmissions? = nil, subscriptionGracePeriod: SubscriptionGracePeriod? = nil, customerReviews: CustomerReviews? = nil, customerReviewSummarizations: CustomerReviewSummarizations? = nil, gameCenterDetail: GameCenterDetail? = nil, appStoreVersionExperimentsV2: AppStoreVersionExperimentsV2? = nil, alternativeDistributionKey: AlternativeDistributionKey? = nil, analyticsReportRequests: AnalyticsReportRequests? = nil, marketplaceSearchDetail: MarketplaceSearchDetail? = nil, buildUploads: BuildUploads? = nil, backgroundAssets: BackgroundAssets? = nil, assetLibrary: AssetLibrary? = nil, betaFeedbackScreenshotSubmissions: BetaFeedbackScreenshotSubmissions? = nil, betaFeedbackCrashSubmissions: BetaFeedbackCrashSubmissions? = nil, searchKeywords: SearchKeywords? = nil, webhooks: Webhooks? = nil, androidToIosAppMappingDetails: AndroidToIosAppMappingDetails? = nil) {
 			self.accessibilityDeclarations = accessibilityDeclarations
 			self.appEncryptionDeclarations = appEncryptionDeclarations
 			self.appStoreIcon = appStoreIcon
@@ -1779,6 +1798,7 @@ public struct App: Codable, Identifiable {
 			self.marketplaceSearchDetail = marketplaceSearchDetail
 			self.buildUploads = buildUploads
 			self.backgroundAssets = backgroundAssets
+			self.assetLibrary = assetLibrary
 			self.betaFeedbackScreenshotSubmissions = betaFeedbackScreenshotSubmissions
 			self.betaFeedbackCrashSubmissions = betaFeedbackCrashSubmissions
 			self.searchKeywords = searchKeywords
@@ -1827,6 +1847,7 @@ public struct App: Codable, Identifiable {
 			self.marketplaceSearchDetail = try values.decodeIfPresent(MarketplaceSearchDetail.self, forKey: "marketplaceSearchDetail")
 			self.buildUploads = try values.decodeIfPresent(BuildUploads.self, forKey: "buildUploads")
 			self.backgroundAssets = try values.decodeIfPresent(BackgroundAssets.self, forKey: "backgroundAssets")
+			self.assetLibrary = try values.decodeIfPresent(AssetLibrary.self, forKey: "assetLibrary")
 			self.betaFeedbackScreenshotSubmissions = try values.decodeIfPresent(BetaFeedbackScreenshotSubmissions.self, forKey: "betaFeedbackScreenshotSubmissions")
 			self.betaFeedbackCrashSubmissions = try values.decodeIfPresent(BetaFeedbackCrashSubmissions.self, forKey: "betaFeedbackCrashSubmissions")
 			self.searchKeywords = try values.decodeIfPresent(SearchKeywords.self, forKey: "searchKeywords")
@@ -1875,6 +1896,7 @@ public struct App: Codable, Identifiable {
 			try values.encodeIfPresent(marketplaceSearchDetail, forKey: "marketplaceSearchDetail")
 			try values.encodeIfPresent(buildUploads, forKey: "buildUploads")
 			try values.encodeIfPresent(backgroundAssets, forKey: "backgroundAssets")
+			try values.encodeIfPresent(assetLibrary, forKey: "assetLibrary")
 			try values.encodeIfPresent(betaFeedbackScreenshotSubmissions, forKey: "betaFeedbackScreenshotSubmissions")
 			try values.encodeIfPresent(betaFeedbackCrashSubmissions, forKey: "betaFeedbackCrashSubmissions")
 			try values.encodeIfPresent(searchKeywords, forKey: "searchKeywords")

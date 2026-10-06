@@ -106,6 +106,7 @@ extension APIEndpoint.V1.AppStoreVersions.WithID {
 				case marketplaceSearchDetail
 				case buildUploads
 				case backgroundAssets
+				case assetLibrary
 				case betaFeedbackScreenshotSubmissions
 				case betaFeedbackCrashSubmissions
 				case searchKeywords

@@ -42,6 +42,7 @@ extension APIEndpoint.V1.AppEventLocalizations.WithID {
 				case appEvent
 				case appEventScreenshots
 				case appEventVideoClips
+				case placements
 			}
 
 			public enum Include: String, Codable, CaseIterable {

@@ -69,6 +69,7 @@ extension APIEndpoint.V1.AppStoreVersionExperimentTreatmentLocalizations.WithID 
 				case appScreenshotSets
 				case appPreviewSets
 				case searchKeywords
+				case placements
 			}
 
 			public enum FieldsAppCustomProductPageLocalizations: String, Codable, CaseIterable {
@@ -78,6 +79,7 @@ extension APIEndpoint.V1.AppStoreVersionExperimentTreatmentLocalizations.WithID 
 				case appScreenshotSets
 				case appPreviewSets
 				case searchKeywords
+				case placements
 			}
 
 			public enum FieldsAppStoreVersionExperimentTreatmentLocalizations: String, Codable, CaseIterable {
@@ -85,6 +87,7 @@ extension APIEndpoint.V1.AppStoreVersionExperimentTreatmentLocalizations.WithID 
 				case appStoreVersionExperimentTreatment
 				case appScreenshotSets
 				case appPreviewSets
+				case placements
 			}
 
 			public enum FieldsAppPreviews: String, Codable, CaseIterable {

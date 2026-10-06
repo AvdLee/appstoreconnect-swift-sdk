@@ -56,6 +56,7 @@ extension APIEndpoint.V1.AppStoreVersionExperiments.WithID {
 				case appStoreVersionExperimentTreatment
 				case appScreenshotSets
 				case appPreviewSets
+				case placements
 			}
 
 			public enum Include: String, Codable, CaseIterable {

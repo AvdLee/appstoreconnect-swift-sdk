@@ -37,6 +37,7 @@ public struct AppCustomProductPageLocalizationInlineCreate: Codable, Identifiabl
 
 	public struct Relationships: Codable {
 		public var appCustomProductPageVersion: AppCustomProductPageVersion?
+		public var placements: Placements?
 
 		public struct AppCustomProductPageVersion: Codable {
 			public var data: Data?
@@ -82,18 +83,65 @@ public struct AppCustomProductPageLocalizationInlineCreate: Codable, Identifiabl
 			}
 		}
 
-		public init(appCustomProductPageVersion: AppCustomProductPageVersion? = nil) {
+		public struct Placements: Codable {
+			public var data: [Datum]?
+
+			public struct Datum: Codable, Identifiable {
+				public var type: `Type`
+				public var id: String
+
+				public enum `Type`: String, Codable, CaseIterable {
+					case appAssetLibraryPlacements
+				}
+
+				public init(type: `Type`, id: String) {
+					self.type = type
+					self.id = id
+				}
+
+				public init(from decoder: Decoder) throws {
+					let values = try decoder.container(keyedBy: StringCodingKey.self)
+					self.type = try values.decode(`Type`.self, forKey: "type")
+					self.id = try values.decode(String.self, forKey: "id")
+				}
+
+				public func encode(to encoder: Encoder) throws {
+					var values = encoder.container(keyedBy: StringCodingKey.self)
+					try values.encode(type, forKey: "type")
+					try values.encode(id, forKey: "id")
+				}
+			}
+
+			public init(data: [Datum]? = nil) {
+				self.data = data
+			}
+
+			public init(from decoder: Decoder) throws {
+				let values = try decoder.container(keyedBy: StringCodingKey.self)
+				self.data = try values.decodeIfPresent([Datum].self, forKey: "data")
+			}
+
+			public func encode(to encoder: Encoder) throws {
+				var values = encoder.container(keyedBy: StringCodingKey.self)
+				try values.encodeIfPresent(data, forKey: "data")
+			}
+		}
+
+		public init(appCustomProductPageVersion: AppCustomProductPageVersion? = nil, placements: Placements? = nil) {
 			self.appCustomProductPageVersion = appCustomProductPageVersion
+			self.placements = placements
 		}
 
 		public init(from decoder: Decoder) throws {
 			let values = try decoder.container(keyedBy: StringCodingKey.self)
 			self.appCustomProductPageVersion = try values.decodeIfPresent(AppCustomProductPageVersion.self, forKey: "appCustomProductPageVersion")
+			self.placements = try values.decodeIfPresent(Placements.self, forKey: "placements")
 		}
 
 		public func encode(to encoder: Encoder) throws {
 			var values = encoder.container(keyedBy: StringCodingKey.self)
 			try values.encodeIfPresent(appCustomProductPageVersion, forKey: "appCustomProductPageVersion")
+			try values.encodeIfPresent(placements, forKey: "placements")
 		}
 	}
 

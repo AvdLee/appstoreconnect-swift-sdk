@@ -61,6 +61,7 @@ extension APIEndpoint.V1.Apps.WithID {
 				case appEvent
 				case appEventScreenshots
 				case appEventVideoClips
+				case placements
 			}
 
 			public enum Include: String, Codable, CaseIterable {

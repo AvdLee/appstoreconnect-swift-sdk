@@ -190,6 +190,7 @@ extension APIEndpoint.V1.BuildBetaDetails.WithID {
 				case marketplaceSearchDetail
 				case buildUploads
 				case backgroundAssets
+				case assetLibrary
 				case betaFeedbackScreenshotSubmissions
 				case betaFeedbackCrashSubmissions
 				case searchKeywords

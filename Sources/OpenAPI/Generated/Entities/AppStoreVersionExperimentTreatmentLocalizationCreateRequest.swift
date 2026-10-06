@@ -35,6 +35,7 @@ public struct AppStoreVersionExperimentTreatmentLocalizationCreateRequest: Codab
 
 		public struct Relationships: Codable {
 			public var appStoreVersionExperimentTreatment: AppStoreVersionExperimentTreatment
+			public var placements: Placements?
 
 			public struct AppStoreVersionExperimentTreatment: Codable {
 				public var data: Data
@@ -80,18 +81,65 @@ public struct AppStoreVersionExperimentTreatmentLocalizationCreateRequest: Codab
 				}
 			}
 
-			public init(appStoreVersionExperimentTreatment: AppStoreVersionExperimentTreatment) {
+			public struct Placements: Codable {
+				public var data: [Datum]?
+
+				public struct Datum: Codable, Identifiable {
+					public var type: `Type`
+					public var id: String
+
+					public enum `Type`: String, Codable, CaseIterable {
+						case appAssetLibraryPlacements
+					}
+
+					public init(type: `Type`, id: String) {
+						self.type = type
+						self.id = id
+					}
+
+					public init(from decoder: Decoder) throws {
+						let values = try decoder.container(keyedBy: StringCodingKey.self)
+						self.type = try values.decode(`Type`.self, forKey: "type")
+						self.id = try values.decode(String.self, forKey: "id")
+					}
+
+					public func encode(to encoder: Encoder) throws {
+						var values = encoder.container(keyedBy: StringCodingKey.self)
+						try values.encode(type, forKey: "type")
+						try values.encode(id, forKey: "id")
+					}
+				}
+
+				public init(data: [Datum]? = nil) {
+					self.data = data
+				}
+
+				public init(from decoder: Decoder) throws {
+					let values = try decoder.container(keyedBy: StringCodingKey.self)
+					self.data = try values.decodeIfPresent([Datum].self, forKey: "data")
+				}
+
+				public func encode(to encoder: Encoder) throws {
+					var values = encoder.container(keyedBy: StringCodingKey.self)
+					try values.encodeIfPresent(data, forKey: "data")
+				}
+			}
+
+			public init(appStoreVersionExperimentTreatment: AppStoreVersionExperimentTreatment, placements: Placements? = nil) {
 				self.appStoreVersionExperimentTreatment = appStoreVersionExperimentTreatment
+				self.placements = placements
 			}
 
 			public init(from decoder: Decoder) throws {
 				let values = try decoder.container(keyedBy: StringCodingKey.self)
 				self.appStoreVersionExperimentTreatment = try values.decode(AppStoreVersionExperimentTreatment.self, forKey: "appStoreVersionExperimentTreatment")
+				self.placements = try values.decodeIfPresent(Placements.self, forKey: "placements")
 			}
 
 			public func encode(to encoder: Encoder) throws {
 				var values = encoder.container(keyedBy: StringCodingKey.self)
 				try values.encode(appStoreVersionExperimentTreatment, forKey: "appStoreVersionExperimentTreatment")
+				try values.encodeIfPresent(placements, forKey: "placements")
 			}
 		}
 

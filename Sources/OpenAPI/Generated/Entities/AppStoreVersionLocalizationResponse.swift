@@ -10,6 +10,7 @@ public struct AppStoreVersionLocalizationResponse: Codable {
 	public var links: DocumentLinks
 
 	public enum IncludedItem: Codable {
+		case appAssetLibraryPlacement(AppAssetLibraryPlacement)
 		case appKeyword(AppKeyword)
 		case appPreviewSet(AppPreviewSet)
 		case appScreenshotSet(AppScreenshotSet)
@@ -25,6 +26,7 @@ public struct AppStoreVersionLocalizationResponse: Codable {
 			let discriminatorValue = try container.decode(Discriminator.self).type
 
 			switch discriminatorValue {
+			case "appAssetLibraryPlacements": self = .appAssetLibraryPlacement(try container.decode(AppAssetLibraryPlacement.self))
 			case "appKeywords": self = .appKeyword(try container.decode(AppKeyword.self))
 			case "appPreviewSets": self = .appPreviewSet(try container.decode(AppPreviewSet.self))
 			case "appScreenshotSets": self = .appScreenshotSet(try container.decode(AppScreenshotSet.self))
@@ -33,7 +35,7 @@ public struct AppStoreVersionLocalizationResponse: Codable {
 			default:
 				throw DecodingError.dataCorruptedError(
 					in: container,
-					debugDescription: "Discriminator value '\(discriminatorValue)' does not match any expected values (appKeywords, appPreviewSets, appScreenshotSets, appStoreVersions)."
+					debugDescription: "Discriminator value '\(discriminatorValue)' does not match any expected values (appAssetLibraryPlacements, appKeywords, appPreviewSets, appScreenshotSets, appStoreVersions)."
 				)
 			}
 		}
@@ -41,6 +43,7 @@ public struct AppStoreVersionLocalizationResponse: Codable {
 		public func encode(to encoder: Encoder) throws {
 			var container = encoder.singleValueContainer()
 			switch self {
+			case .appAssetLibraryPlacement(let value): try container.encode(value)
 			case .appKeyword(let value): try container.encode(value)
 			case .appPreviewSet(let value): try container.encode(value)
 			case .appScreenshotSet(let value): try container.encode(value)

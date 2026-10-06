@@ -24,11 +24,13 @@ extension APIEndpoint.V1.AppCustomProductPageVersions.WithID {
 			public var fieldsAppScreenshotSets: [FieldsAppScreenshotSets]?
 			public var fieldsAppPreviewSets: [FieldsAppPreviewSets]?
 			public var fieldsAppKeywords: [String]?
+			public var fieldsAppAssetLibraryPlacements: [FieldsAppAssetLibraryPlacements]?
 			public var limit: Int?
 			public var include: [Include]?
 			public var limitAppScreenshotSets: Int?
 			public var limitAppPreviewSets: Int?
 			public var limitSearchKeywords: Int?
+			public var limitPlacements: Int?
 
 			public enum FieldsAppCustomProductPageLocalizations: String, Codable, CaseIterable {
 				case locale
@@ -37,6 +39,7 @@ extension APIEndpoint.V1.AppCustomProductPageVersions.WithID {
 				case appScreenshotSets
 				case appPreviewSets
 				case searchKeywords
+				case placements
 			}
 
 			public enum FieldsAppCustomProductPageVersions: String, Codable, CaseIterable {
@@ -63,25 +66,44 @@ extension APIEndpoint.V1.AppCustomProductPageVersions.WithID {
 				case appPreviews
 			}
 
+			public enum FieldsAppAssetLibraryPlacements: String, Codable, CaseIterable {
+				case mediaType
+				case placementType
+				case placementGroup
+				case createdDate
+				case lastModifiedDate
+				case state
+				case stateDetails
+				case image
+				case video
+				case appEventLocalization
+				case appStoreVersionLocalization
+				case appCustomProductPageLocalization
+				case appStoreVersionExperimentTreatmentLocalization
+			}
+
 			public enum Include: String, Codable, CaseIterable {
 				case appCustomProductPageVersion
 				case appScreenshotSets
 				case appPreviewSets
 				case searchKeywords
+				case placements
 			}
 
-			public init(filterLocale: [String]? = nil, fieldsAppCustomProductPageLocalizations: [FieldsAppCustomProductPageLocalizations]? = nil, fieldsAppCustomProductPageVersions: [FieldsAppCustomProductPageVersions]? = nil, fieldsAppScreenshotSets: [FieldsAppScreenshotSets]? = nil, fieldsAppPreviewSets: [FieldsAppPreviewSets]? = nil, fieldsAppKeywords: [String]? = nil, limit: Int? = nil, include: [Include]? = nil, limitAppScreenshotSets: Int? = nil, limitAppPreviewSets: Int? = nil, limitSearchKeywords: Int? = nil) {
+			public init(filterLocale: [String]? = nil, fieldsAppCustomProductPageLocalizations: [FieldsAppCustomProductPageLocalizations]? = nil, fieldsAppCustomProductPageVersions: [FieldsAppCustomProductPageVersions]? = nil, fieldsAppScreenshotSets: [FieldsAppScreenshotSets]? = nil, fieldsAppPreviewSets: [FieldsAppPreviewSets]? = nil, fieldsAppKeywords: [String]? = nil, fieldsAppAssetLibraryPlacements: [FieldsAppAssetLibraryPlacements]? = nil, limit: Int? = nil, include: [Include]? = nil, limitAppScreenshotSets: Int? = nil, limitAppPreviewSets: Int? = nil, limitSearchKeywords: Int? = nil, limitPlacements: Int? = nil) {
 				self.filterLocale = filterLocale
 				self.fieldsAppCustomProductPageLocalizations = fieldsAppCustomProductPageLocalizations
 				self.fieldsAppCustomProductPageVersions = fieldsAppCustomProductPageVersions
 				self.fieldsAppScreenshotSets = fieldsAppScreenshotSets
 				self.fieldsAppPreviewSets = fieldsAppPreviewSets
 				self.fieldsAppKeywords = fieldsAppKeywords
+				self.fieldsAppAssetLibraryPlacements = fieldsAppAssetLibraryPlacements
 				self.limit = limit
 				self.include = include
 				self.limitAppScreenshotSets = limitAppScreenshotSets
 				self.limitAppPreviewSets = limitAppPreviewSets
 				self.limitSearchKeywords = limitSearchKeywords
+				self.limitPlacements = limitPlacements
 			}
 
 			public var asQuery: [(String, String?)] {
@@ -92,11 +114,13 @@ extension APIEndpoint.V1.AppCustomProductPageVersions.WithID {
 				encoder.encode(fieldsAppScreenshotSets, forKey: "fields[appScreenshotSets]")
 				encoder.encode(fieldsAppPreviewSets, forKey: "fields[appPreviewSets]")
 				encoder.encode(fieldsAppKeywords, forKey: "fields[appKeywords]")
+				encoder.encode(fieldsAppAssetLibraryPlacements, forKey: "fields[appAssetLibraryPlacements]")
 				encoder.encode(limit, forKey: "limit")
 				encoder.encode(include, forKey: "include")
 				encoder.encode(limitAppScreenshotSets, forKey: "limit[appScreenshotSets]")
 				encoder.encode(limitAppPreviewSets, forKey: "limit[appPreviewSets]")
 				encoder.encode(limitSearchKeywords, forKey: "limit[searchKeywords]")
+				encoder.encode(limitPlacements, forKey: "limit[placements]")
 				return encoder.items
 			}
 		}

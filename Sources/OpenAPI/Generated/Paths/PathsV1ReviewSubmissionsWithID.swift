@@ -89,6 +89,7 @@ extension APIEndpoint.V1.ReviewSubmissions {
 				case marketplaceSearchDetail
 				case buildUploads
 				case backgroundAssets
+				case assetLibrary
 				case betaFeedbackScreenshotSubmissions
 				case betaFeedbackCrashSubmissions
 				case searchKeywords
@@ -103,6 +104,8 @@ extension APIEndpoint.V1.ReviewSubmissions {
 				case appStoreVersionExperiment
 				case appStoreVersionExperimentV2
 				case appEvent
+				case appAssetLibraryImage
+				case appAssetLibraryVideo
 				case backgroundAssetVersion
 				case gameCenterAchievementVersion
 				case gameCenterActivityVersion

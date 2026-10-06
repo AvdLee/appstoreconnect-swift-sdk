@@ -41,6 +41,7 @@ extension APIEndpoint.V1.AppEventScreenshots {
 				case appEvent
 				case appEventScreenshots
 				case appEventVideoClips
+				case placements
 			}
 
 			public enum Include: String, Codable, CaseIterable {
