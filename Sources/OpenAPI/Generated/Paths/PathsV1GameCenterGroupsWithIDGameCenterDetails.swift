@@ -131,6 +131,7 @@ extension APIEndpoint.V1.GameCenterGroups.WithID {
 				case marketplaceSearchDetail
 				case buildUploads
 				case backgroundAssets
+				case assetLibrary
 				case betaFeedbackScreenshotSubmissions
 				case betaFeedbackCrashSubmissions
 				case searchKeywords

@@ -22,9 +22,11 @@ extension APIEndpoint.V1.AppCustomProductPageLocalizations {
 			public var fieldsAppCustomProductPageVersions: [FieldsAppCustomProductPageVersions]?
 			public var fieldsAppScreenshotSets: [FieldsAppScreenshotSets]?
 			public var fieldsAppPreviewSets: [FieldsAppPreviewSets]?
+			public var fieldsAppAssetLibraryPlacements: [FieldsAppAssetLibraryPlacements]?
 			public var include: [Include]?
 			public var limitAppPreviewSets: Int?
 			public var limitAppScreenshotSets: Int?
+			public var limitPlacements: Int?
 			public var limitSearchKeywords: Int?
 
 			public enum FieldsAppCustomProductPageLocalizations: String, Codable, CaseIterable {
@@ -34,6 +36,7 @@ extension APIEndpoint.V1.AppCustomProductPageLocalizations {
 				case appScreenshotSets
 				case appPreviewSets
 				case searchKeywords
+				case placements
 			}
 
 			public enum FieldsAppCustomProductPageVersions: String, Codable, CaseIterable {
@@ -60,21 +63,40 @@ extension APIEndpoint.V1.AppCustomProductPageLocalizations {
 				case appPreviews
 			}
 
+			public enum FieldsAppAssetLibraryPlacements: String, Codable, CaseIterable {
+				case mediaType
+				case placementType
+				case placementGroup
+				case createdDate
+				case lastModifiedDate
+				case state
+				case stateDetails
+				case image
+				case video
+				case appEventLocalization
+				case appStoreVersionLocalization
+				case appCustomProductPageLocalization
+				case appStoreVersionExperimentTreatmentLocalization
+			}
+
 			public enum Include: String, Codable, CaseIterable {
 				case appCustomProductPageVersion
 				case appScreenshotSets
 				case appPreviewSets
 				case searchKeywords
+				case placements
 			}
 
-			public init(fieldsAppCustomProductPageLocalizations: [FieldsAppCustomProductPageLocalizations]? = nil, fieldsAppCustomProductPageVersions: [FieldsAppCustomProductPageVersions]? = nil, fieldsAppScreenshotSets: [FieldsAppScreenshotSets]? = nil, fieldsAppPreviewSets: [FieldsAppPreviewSets]? = nil, include: [Include]? = nil, limitAppPreviewSets: Int? = nil, limitAppScreenshotSets: Int? = nil, limitSearchKeywords: Int? = nil) {
+			public init(fieldsAppCustomProductPageLocalizations: [FieldsAppCustomProductPageLocalizations]? = nil, fieldsAppCustomProductPageVersions: [FieldsAppCustomProductPageVersions]? = nil, fieldsAppScreenshotSets: [FieldsAppScreenshotSets]? = nil, fieldsAppPreviewSets: [FieldsAppPreviewSets]? = nil, fieldsAppAssetLibraryPlacements: [FieldsAppAssetLibraryPlacements]? = nil, include: [Include]? = nil, limitAppPreviewSets: Int? = nil, limitAppScreenshotSets: Int? = nil, limitPlacements: Int? = nil, limitSearchKeywords: Int? = nil) {
 				self.fieldsAppCustomProductPageLocalizations = fieldsAppCustomProductPageLocalizations
 				self.fieldsAppCustomProductPageVersions = fieldsAppCustomProductPageVersions
 				self.fieldsAppScreenshotSets = fieldsAppScreenshotSets
 				self.fieldsAppPreviewSets = fieldsAppPreviewSets
+				self.fieldsAppAssetLibraryPlacements = fieldsAppAssetLibraryPlacements
 				self.include = include
 				self.limitAppPreviewSets = limitAppPreviewSets
 				self.limitAppScreenshotSets = limitAppScreenshotSets
+				self.limitPlacements = limitPlacements
 				self.limitSearchKeywords = limitSearchKeywords
 			}
 
@@ -84,9 +106,11 @@ extension APIEndpoint.V1.AppCustomProductPageLocalizations {
 				encoder.encode(fieldsAppCustomProductPageVersions, forKey: "fields[appCustomProductPageVersions]")
 				encoder.encode(fieldsAppScreenshotSets, forKey: "fields[appScreenshotSets]")
 				encoder.encode(fieldsAppPreviewSets, forKey: "fields[appPreviewSets]")
+				encoder.encode(fieldsAppAssetLibraryPlacements, forKey: "fields[appAssetLibraryPlacements]")
 				encoder.encode(include, forKey: "include")
 				encoder.encode(limitAppPreviewSets, forKey: "limit[appPreviewSets]")
 				encoder.encode(limitAppScreenshotSets, forKey: "limit[appScreenshotSets]")
+				encoder.encode(limitPlacements, forKey: "limit[placements]")
 				encoder.encode(limitSearchKeywords, forKey: "limit[searchKeywords]")
 				return encoder.items
 			}

@@ -99,6 +99,7 @@ extension APIEndpoint.V1.AppInfos {
 				case marketplaceSearchDetail
 				case buildUploads
 				case backgroundAssets
+				case assetLibrary
 				case betaFeedbackScreenshotSubmissions
 				case betaFeedbackCrashSubmissions
 				case searchKeywords

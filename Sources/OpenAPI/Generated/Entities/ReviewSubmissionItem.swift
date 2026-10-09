@@ -46,6 +46,8 @@ public struct ReviewSubmissionItem: Codable, Identifiable {
 		public var appStoreVersionExperiment: AppStoreVersionExperiment?
 		public var appStoreVersionExperimentV2: AppStoreVersionExperimentV2?
 		public var appEvent: AppEvent?
+		public var appAssetLibraryImage: AppAssetLibraryImage?
+		public var appAssetLibraryVideo: AppAssetLibraryVideo?
 		public var backgroundAssetVersion: BackgroundAssetVersion?
 		public var gameCenterAchievementVersion: GameCenterAchievementVersion?
 		public var gameCenterActivityVersion: GameCenterActivityVersion?
@@ -241,6 +243,94 @@ public struct ReviewSubmissionItem: Codable, Identifiable {
 
 				public enum `Type`: String, Codable, CaseIterable {
 					case appEvents
+				}
+
+				public init(type: `Type`, id: String) {
+					self.type = type
+					self.id = id
+				}
+
+				public init(from decoder: Decoder) throws {
+					let values = try decoder.container(keyedBy: StringCodingKey.self)
+					self.type = try values.decode(`Type`.self, forKey: "type")
+					self.id = try values.decode(String.self, forKey: "id")
+				}
+
+				public func encode(to encoder: Encoder) throws {
+					var values = encoder.container(keyedBy: StringCodingKey.self)
+					try values.encode(type, forKey: "type")
+					try values.encode(id, forKey: "id")
+				}
+			}
+
+			public init(data: Data? = nil) {
+				self.data = data
+			}
+
+			public init(from decoder: Decoder) throws {
+				let values = try decoder.container(keyedBy: StringCodingKey.self)
+				self.data = try values.decodeIfPresent(Data.self, forKey: "data")
+			}
+
+			public func encode(to encoder: Encoder) throws {
+				var values = encoder.container(keyedBy: StringCodingKey.self)
+				try values.encodeIfPresent(data, forKey: "data")
+			}
+		}
+
+		public struct AppAssetLibraryImage: Codable {
+			public var data: Data?
+
+			public struct Data: Codable, Identifiable {
+				public var type: `Type`
+				public var id: String
+
+				public enum `Type`: String, Codable, CaseIterable {
+					case appAssetLibraryImages
+				}
+
+				public init(type: `Type`, id: String) {
+					self.type = type
+					self.id = id
+				}
+
+				public init(from decoder: Decoder) throws {
+					let values = try decoder.container(keyedBy: StringCodingKey.self)
+					self.type = try values.decode(`Type`.self, forKey: "type")
+					self.id = try values.decode(String.self, forKey: "id")
+				}
+
+				public func encode(to encoder: Encoder) throws {
+					var values = encoder.container(keyedBy: StringCodingKey.self)
+					try values.encode(type, forKey: "type")
+					try values.encode(id, forKey: "id")
+				}
+			}
+
+			public init(data: Data? = nil) {
+				self.data = data
+			}
+
+			public init(from decoder: Decoder) throws {
+				let values = try decoder.container(keyedBy: StringCodingKey.self)
+				self.data = try values.decodeIfPresent(Data.self, forKey: "data")
+			}
+
+			public func encode(to encoder: Encoder) throws {
+				var values = encoder.container(keyedBy: StringCodingKey.self)
+				try values.encodeIfPresent(data, forKey: "data")
+			}
+		}
+
+		public struct AppAssetLibraryVideo: Codable {
+			public var data: Data?
+
+			public struct Data: Codable, Identifiable {
+				public var type: `Type`
+				public var id: String
+
+				public enum `Type`: String, Codable, CaseIterable {
+					case appAssetLibraryVideos
 				}
 
 				public init(type: `Type`, id: String) {
@@ -672,12 +762,14 @@ public struct ReviewSubmissionItem: Codable, Identifiable {
 			}
 		}
 
-		public init(appStoreVersion: AppStoreVersion? = nil, appCustomProductPageVersion: AppCustomProductPageVersion? = nil, appStoreVersionExperiment: AppStoreVersionExperiment? = nil, appStoreVersionExperimentV2: AppStoreVersionExperimentV2? = nil, appEvent: AppEvent? = nil, backgroundAssetVersion: BackgroundAssetVersion? = nil, gameCenterAchievementVersion: GameCenterAchievementVersion? = nil, gameCenterActivityVersion: GameCenterActivityVersion? = nil, gameCenterChallengeVersion: GameCenterChallengeVersion? = nil, gameCenterLeaderboardSetVersion: GameCenterLeaderboardSetVersion? = nil, gameCenterLeaderboardVersion: GameCenterLeaderboardVersion? = nil, inAppPurchaseVersion: InAppPurchaseVersion? = nil, subscriptionVersion: SubscriptionVersion? = nil, subscriptionGroupVersion: SubscriptionGroupVersion? = nil) {
+		public init(appStoreVersion: AppStoreVersion? = nil, appCustomProductPageVersion: AppCustomProductPageVersion? = nil, appStoreVersionExperiment: AppStoreVersionExperiment? = nil, appStoreVersionExperimentV2: AppStoreVersionExperimentV2? = nil, appEvent: AppEvent? = nil, appAssetLibraryImage: AppAssetLibraryImage? = nil, appAssetLibraryVideo: AppAssetLibraryVideo? = nil, backgroundAssetVersion: BackgroundAssetVersion? = nil, gameCenterAchievementVersion: GameCenterAchievementVersion? = nil, gameCenterActivityVersion: GameCenterActivityVersion? = nil, gameCenterChallengeVersion: GameCenterChallengeVersion? = nil, gameCenterLeaderboardSetVersion: GameCenterLeaderboardSetVersion? = nil, gameCenterLeaderboardVersion: GameCenterLeaderboardVersion? = nil, inAppPurchaseVersion: InAppPurchaseVersion? = nil, subscriptionVersion: SubscriptionVersion? = nil, subscriptionGroupVersion: SubscriptionGroupVersion? = nil) {
 			self.appStoreVersion = appStoreVersion
 			self.appCustomProductPageVersion = appCustomProductPageVersion
 			self.appStoreVersionExperiment = appStoreVersionExperiment
 			self.appStoreVersionExperimentV2 = appStoreVersionExperimentV2
 			self.appEvent = appEvent
+			self.appAssetLibraryImage = appAssetLibraryImage
+			self.appAssetLibraryVideo = appAssetLibraryVideo
 			self.backgroundAssetVersion = backgroundAssetVersion
 			self.gameCenterAchievementVersion = gameCenterAchievementVersion
 			self.gameCenterActivityVersion = gameCenterActivityVersion
@@ -696,6 +788,8 @@ public struct ReviewSubmissionItem: Codable, Identifiable {
 			self.appStoreVersionExperiment = try values.decodeIfPresent(AppStoreVersionExperiment.self, forKey: "appStoreVersionExperiment")
 			self.appStoreVersionExperimentV2 = try values.decodeIfPresent(AppStoreVersionExperimentV2.self, forKey: "appStoreVersionExperimentV2")
 			self.appEvent = try values.decodeIfPresent(AppEvent.self, forKey: "appEvent")
+			self.appAssetLibraryImage = try values.decodeIfPresent(AppAssetLibraryImage.self, forKey: "appAssetLibraryImage")
+			self.appAssetLibraryVideo = try values.decodeIfPresent(AppAssetLibraryVideo.self, forKey: "appAssetLibraryVideo")
 			self.backgroundAssetVersion = try values.decodeIfPresent(BackgroundAssetVersion.self, forKey: "backgroundAssetVersion")
 			self.gameCenterAchievementVersion = try values.decodeIfPresent(GameCenterAchievementVersion.self, forKey: "gameCenterAchievementVersion")
 			self.gameCenterActivityVersion = try values.decodeIfPresent(GameCenterActivityVersion.self, forKey: "gameCenterActivityVersion")
@@ -714,6 +808,8 @@ public struct ReviewSubmissionItem: Codable, Identifiable {
 			try values.encodeIfPresent(appStoreVersionExperiment, forKey: "appStoreVersionExperiment")
 			try values.encodeIfPresent(appStoreVersionExperimentV2, forKey: "appStoreVersionExperimentV2")
 			try values.encodeIfPresent(appEvent, forKey: "appEvent")
+			try values.encodeIfPresent(appAssetLibraryImage, forKey: "appAssetLibraryImage")
+			try values.encodeIfPresent(appAssetLibraryVideo, forKey: "appAssetLibraryVideo")
 			try values.encodeIfPresent(backgroundAssetVersion, forKey: "backgroundAssetVersion")
 			try values.encodeIfPresent(gameCenterAchievementVersion, forKey: "gameCenterAchievementVersion")
 			try values.encodeIfPresent(gameCenterActivityVersion, forKey: "gameCenterActivityVersion")

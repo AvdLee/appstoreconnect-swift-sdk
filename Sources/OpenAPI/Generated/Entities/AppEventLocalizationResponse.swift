@@ -10,6 +10,7 @@ public struct AppEventLocalizationResponse: Codable {
 	public var links: DocumentLinks
 
 	public enum IncludedItem: Codable {
+		case appAssetLibraryPlacement(AppAssetLibraryPlacement)
 		case appEventScreenshot(AppEventScreenshot)
 		case appEventVideoClip(AppEventVideoClip)
 		case appEvent(AppEvent)
@@ -24,6 +25,7 @@ public struct AppEventLocalizationResponse: Codable {
 			let discriminatorValue = try container.decode(Discriminator.self).type
 
 			switch discriminatorValue {
+			case "appAssetLibraryPlacements": self = .appAssetLibraryPlacement(try container.decode(AppAssetLibraryPlacement.self))
 			case "appEventScreenshots": self = .appEventScreenshot(try container.decode(AppEventScreenshot.self))
 			case "appEventVideoClips": self = .appEventVideoClip(try container.decode(AppEventVideoClip.self))
 			case "appEvents": self = .appEvent(try container.decode(AppEvent.self))
@@ -31,7 +33,7 @@ public struct AppEventLocalizationResponse: Codable {
 			default:
 				throw DecodingError.dataCorruptedError(
 					in: container,
-					debugDescription: "Discriminator value '\(discriminatorValue)' does not match any expected values (appEventScreenshots, appEventVideoClips, appEvents)."
+					debugDescription: "Discriminator value '\(discriminatorValue)' does not match any expected values (appAssetLibraryPlacements, appEventScreenshots, appEventVideoClips, appEvents)."
 				)
 			}
 		}
@@ -39,6 +41,7 @@ public struct AppEventLocalizationResponse: Codable {
 		public func encode(to encoder: Encoder) throws {
 			var container = encoder.singleValueContainer()
 			switch self {
+			case .appAssetLibraryPlacement(let value): try container.encode(value)
 			case .appEventScreenshot(let value): try container.encode(value)
 			case .appEventVideoClip(let value): try container.encode(value)
 			case .appEvent(let value): try container.encode(value)

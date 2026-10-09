@@ -84,6 +84,7 @@ extension APIEndpoint.V1.BetaAppLocalizations {
 				case marketplaceSearchDetail
 				case buildUploads
 				case backgroundAssets
+				case assetLibrary
 				case betaFeedbackScreenshotSubmissions
 				case betaFeedbackCrashSubmissions
 				case searchKeywords

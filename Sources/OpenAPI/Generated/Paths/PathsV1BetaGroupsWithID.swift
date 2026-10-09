@@ -99,6 +99,7 @@ extension APIEndpoint.V1.BetaGroups {
 				case marketplaceSearchDetail
 				case buildUploads
 				case backgroundAssets
+				case assetLibrary
 				case betaFeedbackScreenshotSubmissions
 				case betaFeedbackCrashSubmissions
 				case searchKeywords

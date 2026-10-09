@@ -10,6 +10,8 @@ public struct ReviewSubmissionItemsResponse: Codable {
 	public var meta: PagingInformation?
 
 	public enum IncludedItem: Codable {
+		case appAssetLibraryImage(AppAssetLibraryImage)
+		case appAssetLibraryVideo(AppAssetLibraryVideo)
 		case appCustomProductPageVersion(AppCustomProductPageVersion)
 		case appEvent(AppEvent)
 		case appStoreVersionExperiment(AppStoreVersionExperiment)
@@ -34,6 +36,8 @@ public struct ReviewSubmissionItemsResponse: Codable {
 			let discriminatorValue = try container.decode(Discriminator.self).type
 
 			switch discriminatorValue {
+			case "appAssetLibraryImages": self = .appAssetLibraryImage(try container.decode(AppAssetLibraryImage.self))
+			case "appAssetLibraryVideos": self = .appAssetLibraryVideo(try container.decode(AppAssetLibraryVideo.self))
 			case "appCustomProductPageVersions": self = .appCustomProductPageVersion(try container.decode(AppCustomProductPageVersion.self))
 			case "appEvents": self = .appEvent(try container.decode(AppEvent.self))
 			case "appStoreVersionExperiments": self = .appStoreVersionExperiment(try container.decode(AppStoreVersionExperiment.self))
@@ -51,7 +55,7 @@ public struct ReviewSubmissionItemsResponse: Codable {
 			default:
 				throw DecodingError.dataCorruptedError(
 					in: container,
-					debugDescription: "Discriminator value '\(discriminatorValue)' does not match any expected values (appCustomProductPageVersions, appEvents, appStoreVersionExperiments, appStoreVersions, backgroundAssetVersions, gameCenterAchievementVersions, gameCenterActivityVersions, gameCenterChallengeVersions, gameCenterLeaderboardSetVersions, gameCenterLeaderboardVersions, inAppPurchaseVersions, subscriptionGroupVersions, subscriptionVersions)."
+					debugDescription: "Discriminator value '\(discriminatorValue)' does not match any expected values (appAssetLibraryImages, appAssetLibraryVideos, appCustomProductPageVersions, appEvents, appStoreVersionExperiments, appStoreVersions, backgroundAssetVersions, gameCenterAchievementVersions, gameCenterActivityVersions, gameCenterChallengeVersions, gameCenterLeaderboardSetVersions, gameCenterLeaderboardVersions, inAppPurchaseVersions, subscriptionGroupVersions, subscriptionVersions)."
 				)
 			}
 		}
@@ -59,6 +63,8 @@ public struct ReviewSubmissionItemsResponse: Codable {
 		public func encode(to encoder: Encoder) throws {
 			var container = encoder.singleValueContainer()
 			switch self {
+			case .appAssetLibraryImage(let value): try container.encode(value)
+			case .appAssetLibraryVideo(let value): try container.encode(value)
 			case .appCustomProductPageVersion(let value): try container.encode(value)
 			case .appEvent(let value): try container.encode(value)
 			case .appStoreVersionExperiment(let value): try container.encode(value)

@@ -86,6 +86,7 @@ extension APIEndpoint.V1.UserInvitations {
 				case marketplaceSearchDetail
 				case buildUploads
 				case backgroundAssets
+				case assetLibrary
 				case betaFeedbackScreenshotSubmissions
 				case betaFeedbackCrashSubmissions
 				case searchKeywords

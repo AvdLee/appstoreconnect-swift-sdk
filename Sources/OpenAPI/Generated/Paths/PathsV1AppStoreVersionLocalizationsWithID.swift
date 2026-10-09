@@ -22,9 +22,11 @@ extension APIEndpoint.V1.AppStoreVersionLocalizations {
 			public var fieldsAppStoreVersions: [FieldsAppStoreVersions]?
 			public var fieldsAppScreenshotSets: [FieldsAppScreenshotSets]?
 			public var fieldsAppPreviewSets: [FieldsAppPreviewSets]?
+			public var fieldsAppAssetLibraryPlacements: [FieldsAppAssetLibraryPlacements]?
 			public var include: [Include]?
 			public var limitAppPreviewSets: Int?
 			public var limitAppScreenshotSets: Int?
+			public var limitPlacements: Int?
 			public var limitSearchKeywords: Int?
 
 			public enum FieldsAppStoreVersionLocalizations: String, Codable, CaseIterable {
@@ -39,6 +41,7 @@ extension APIEndpoint.V1.AppStoreVersionLocalizations {
 				case appScreenshotSets
 				case appPreviewSets
 				case searchKeywords
+				case placements
 			}
 
 			public enum FieldsAppStoreVersions: String, Codable, CaseIterable {
@@ -84,21 +87,40 @@ extension APIEndpoint.V1.AppStoreVersionLocalizations {
 				case appPreviews
 			}
 
+			public enum FieldsAppAssetLibraryPlacements: String, Codable, CaseIterable {
+				case mediaType
+				case placementType
+				case placementGroup
+				case createdDate
+				case lastModifiedDate
+				case state
+				case stateDetails
+				case image
+				case video
+				case appEventLocalization
+				case appStoreVersionLocalization
+				case appCustomProductPageLocalization
+				case appStoreVersionExperimentTreatmentLocalization
+			}
+
 			public enum Include: String, Codable, CaseIterable {
 				case appStoreVersion
 				case appScreenshotSets
 				case appPreviewSets
 				case searchKeywords
+				case placements
 			}
 
-			public init(fieldsAppStoreVersionLocalizations: [FieldsAppStoreVersionLocalizations]? = nil, fieldsAppStoreVersions: [FieldsAppStoreVersions]? = nil, fieldsAppScreenshotSets: [FieldsAppScreenshotSets]? = nil, fieldsAppPreviewSets: [FieldsAppPreviewSets]? = nil, include: [Include]? = nil, limitAppPreviewSets: Int? = nil, limitAppScreenshotSets: Int? = nil, limitSearchKeywords: Int? = nil) {
+			public init(fieldsAppStoreVersionLocalizations: [FieldsAppStoreVersionLocalizations]? = nil, fieldsAppStoreVersions: [FieldsAppStoreVersions]? = nil, fieldsAppScreenshotSets: [FieldsAppScreenshotSets]? = nil, fieldsAppPreviewSets: [FieldsAppPreviewSets]? = nil, fieldsAppAssetLibraryPlacements: [FieldsAppAssetLibraryPlacements]? = nil, include: [Include]? = nil, limitAppPreviewSets: Int? = nil, limitAppScreenshotSets: Int? = nil, limitPlacements: Int? = nil, limitSearchKeywords: Int? = nil) {
 				self.fieldsAppStoreVersionLocalizations = fieldsAppStoreVersionLocalizations
 				self.fieldsAppStoreVersions = fieldsAppStoreVersions
 				self.fieldsAppScreenshotSets = fieldsAppScreenshotSets
 				self.fieldsAppPreviewSets = fieldsAppPreviewSets
+				self.fieldsAppAssetLibraryPlacements = fieldsAppAssetLibraryPlacements
 				self.include = include
 				self.limitAppPreviewSets = limitAppPreviewSets
 				self.limitAppScreenshotSets = limitAppScreenshotSets
+				self.limitPlacements = limitPlacements
 				self.limitSearchKeywords = limitSearchKeywords
 			}
 
@@ -108,9 +130,11 @@ extension APIEndpoint.V1.AppStoreVersionLocalizations {
 				encoder.encode(fieldsAppStoreVersions, forKey: "fields[appStoreVersions]")
 				encoder.encode(fieldsAppScreenshotSets, forKey: "fields[appScreenshotSets]")
 				encoder.encode(fieldsAppPreviewSets, forKey: "fields[appPreviewSets]")
+				encoder.encode(fieldsAppAssetLibraryPlacements, forKey: "fields[appAssetLibraryPlacements]")
 				encoder.encode(include, forKey: "include")
 				encoder.encode(limitAppPreviewSets, forKey: "limit[appPreviewSets]")
 				encoder.encode(limitAppScreenshotSets, forKey: "limit[appScreenshotSets]")
+				encoder.encode(limitPlacements, forKey: "limit[placements]")
 				encoder.encode(limitSearchKeywords, forKey: "limit[searchKeywords]")
 				return encoder.items
 			}

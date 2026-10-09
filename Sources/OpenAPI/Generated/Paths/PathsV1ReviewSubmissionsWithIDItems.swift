@@ -23,6 +23,8 @@ extension APIEndpoint.V1.ReviewSubmissions.WithID {
 			public var fieldsAppCustomProductPageVersions: [FieldsAppCustomProductPageVersions]?
 			public var fieldsAppStoreVersionExperiments: [FieldsAppStoreVersionExperiments]?
 			public var fieldsAppEvents: [FieldsAppEvents]?
+			public var fieldsAppAssetLibraryImages: [FieldsAppAssetLibraryImages]?
+			public var fieldsAppAssetLibraryVideos: [FieldsAppAssetLibraryVideos]?
 			public var fieldsBackgroundAssetVersions: [FieldsBackgroundAssetVersions]?
 			public var fieldsGameCenterAchievementVersions: [FieldsGameCenterAchievementVersions]?
 			public var fieldsGameCenterActivityVersions: [FieldsGameCenterActivityVersions]?
@@ -42,6 +44,8 @@ extension APIEndpoint.V1.ReviewSubmissions.WithID {
 				case appStoreVersionExperiment
 				case appStoreVersionExperimentV2
 				case appEvent
+				case appAssetLibraryImage
+				case appAssetLibraryVideo
 				case backgroundAssetVersion
 				case gameCenterAchievementVersion
 				case gameCenterActivityVersion
@@ -115,6 +119,38 @@ extension APIEndpoint.V1.ReviewSubmissions.WithID {
 				case territorySchedules
 				case archivedTerritorySchedules
 				case localizations
+			}
+
+			public enum FieldsAppAssetLibraryImages: String, Codable, CaseIterable {
+				case category
+				case createdDate
+				case lastModifiedDate
+				case fileName
+				case fileSize
+				case imageAsset
+				case referenceName
+				case specID = "specId"
+				case state
+				case stateDetails
+				case uploadOperations
+				case placements
+			}
+
+			public enum FieldsAppAssetLibraryVideos: String, Codable, CaseIterable {
+				case category
+				case createdDate
+				case lastModifiedDate
+				case fileName
+				case fileSize
+				case previewFrameImage
+				case previewFrameTimeCode
+				case referenceName
+				case specID = "specId"
+				case state
+				case stateDetails
+				case uploadOperations
+				case videoAsset
+				case placements
 			}
 
 			public enum FieldsBackgroundAssetVersions: String, Codable, CaseIterable {
@@ -204,6 +240,8 @@ extension APIEndpoint.V1.ReviewSubmissions.WithID {
 				case appStoreVersionExperiment
 				case appStoreVersionExperimentV2
 				case appEvent
+				case appAssetLibraryImage
+				case appAssetLibraryVideo
 				case backgroundAssetVersion
 				case gameCenterAchievementVersion
 				case gameCenterActivityVersion
@@ -215,12 +253,14 @@ extension APIEndpoint.V1.ReviewSubmissions.WithID {
 				case subscriptionGroupVersion
 			}
 
-			public init(fieldsReviewSubmissionItems: [FieldsReviewSubmissionItems]? = nil, fieldsAppStoreVersions: [FieldsAppStoreVersions]? = nil, fieldsAppCustomProductPageVersions: [FieldsAppCustomProductPageVersions]? = nil, fieldsAppStoreVersionExperiments: [FieldsAppStoreVersionExperiments]? = nil, fieldsAppEvents: [FieldsAppEvents]? = nil, fieldsBackgroundAssetVersions: [FieldsBackgroundAssetVersions]? = nil, fieldsGameCenterAchievementVersions: [FieldsGameCenterAchievementVersions]? = nil, fieldsGameCenterActivityVersions: [FieldsGameCenterActivityVersions]? = nil, fieldsGameCenterChallengeVersions: [FieldsGameCenterChallengeVersions]? = nil, fieldsGameCenterLeaderboardSetVersions: [FieldsGameCenterLeaderboardSetVersions]? = nil, fieldsGameCenterLeaderboardVersions: [FieldsGameCenterLeaderboardVersions]? = nil, fieldsInAppPurchaseVersions: [FieldsInAppPurchaseVersions]? = nil, fieldsSubscriptionVersions: [FieldsSubscriptionVersions]? = nil, fieldsSubscriptionGroupVersions: [FieldsSubscriptionGroupVersions]? = nil, limit: Int? = nil, include: [Include]? = nil) {
+			public init(fieldsReviewSubmissionItems: [FieldsReviewSubmissionItems]? = nil, fieldsAppStoreVersions: [FieldsAppStoreVersions]? = nil, fieldsAppCustomProductPageVersions: [FieldsAppCustomProductPageVersions]? = nil, fieldsAppStoreVersionExperiments: [FieldsAppStoreVersionExperiments]? = nil, fieldsAppEvents: [FieldsAppEvents]? = nil, fieldsAppAssetLibraryImages: [FieldsAppAssetLibraryImages]? = nil, fieldsAppAssetLibraryVideos: [FieldsAppAssetLibraryVideos]? = nil, fieldsBackgroundAssetVersions: [FieldsBackgroundAssetVersions]? = nil, fieldsGameCenterAchievementVersions: [FieldsGameCenterAchievementVersions]? = nil, fieldsGameCenterActivityVersions: [FieldsGameCenterActivityVersions]? = nil, fieldsGameCenterChallengeVersions: [FieldsGameCenterChallengeVersions]? = nil, fieldsGameCenterLeaderboardSetVersions: [FieldsGameCenterLeaderboardSetVersions]? = nil, fieldsGameCenterLeaderboardVersions: [FieldsGameCenterLeaderboardVersions]? = nil, fieldsInAppPurchaseVersions: [FieldsInAppPurchaseVersions]? = nil, fieldsSubscriptionVersions: [FieldsSubscriptionVersions]? = nil, fieldsSubscriptionGroupVersions: [FieldsSubscriptionGroupVersions]? = nil, limit: Int? = nil, include: [Include]? = nil) {
 				self.fieldsReviewSubmissionItems = fieldsReviewSubmissionItems
 				self.fieldsAppStoreVersions = fieldsAppStoreVersions
 				self.fieldsAppCustomProductPageVersions = fieldsAppCustomProductPageVersions
 				self.fieldsAppStoreVersionExperiments = fieldsAppStoreVersionExperiments
 				self.fieldsAppEvents = fieldsAppEvents
+				self.fieldsAppAssetLibraryImages = fieldsAppAssetLibraryImages
+				self.fieldsAppAssetLibraryVideos = fieldsAppAssetLibraryVideos
 				self.fieldsBackgroundAssetVersions = fieldsBackgroundAssetVersions
 				self.fieldsGameCenterAchievementVersions = fieldsGameCenterAchievementVersions
 				self.fieldsGameCenterActivityVersions = fieldsGameCenterActivityVersions
@@ -241,6 +281,8 @@ extension APIEndpoint.V1.ReviewSubmissions.WithID {
 				encoder.encode(fieldsAppCustomProductPageVersions, forKey: "fields[appCustomProductPageVersions]")
 				encoder.encode(fieldsAppStoreVersionExperiments, forKey: "fields[appStoreVersionExperiments]")
 				encoder.encode(fieldsAppEvents, forKey: "fields[appEvents]")
+				encoder.encode(fieldsAppAssetLibraryImages, forKey: "fields[appAssetLibraryImages]")
+				encoder.encode(fieldsAppAssetLibraryVideos, forKey: "fields[appAssetLibraryVideos]")
 				encoder.encode(fieldsBackgroundAssetVersions, forKey: "fields[backgroundAssetVersions]")
 				encoder.encode(fieldsGameCenterAchievementVersions, forKey: "fields[gameCenterAchievementVersions]")
 				encoder.encode(fieldsGameCenterActivityVersions, forKey: "fields[gameCenterActivityVersions]")

@@ -10,6 +10,7 @@ public struct AppStoreVersionExperimentTreatmentLocalizationResponse: Codable {
 	public var links: DocumentLinks
 
 	public enum IncludedItem: Codable {
+		case appAssetLibraryPlacement(AppAssetLibraryPlacement)
 		case appPreviewSet(AppPreviewSet)
 		case appScreenshotSet(AppScreenshotSet)
 		case appStoreVersionExperimentTreatment(AppStoreVersionExperimentTreatment)
@@ -24,6 +25,7 @@ public struct AppStoreVersionExperimentTreatmentLocalizationResponse: Codable {
 			let discriminatorValue = try container.decode(Discriminator.self).type
 
 			switch discriminatorValue {
+			case "appAssetLibraryPlacements": self = .appAssetLibraryPlacement(try container.decode(AppAssetLibraryPlacement.self))
 			case "appPreviewSets": self = .appPreviewSet(try container.decode(AppPreviewSet.self))
 			case "appScreenshotSets": self = .appScreenshotSet(try container.decode(AppScreenshotSet.self))
 			case "appStoreVersionExperimentTreatments": self = .appStoreVersionExperimentTreatment(try container.decode(AppStoreVersionExperimentTreatment.self))
@@ -31,7 +33,7 @@ public struct AppStoreVersionExperimentTreatmentLocalizationResponse: Codable {
 			default:
 				throw DecodingError.dataCorruptedError(
 					in: container,
-					debugDescription: "Discriminator value '\(discriminatorValue)' does not match any expected values (appPreviewSets, appScreenshotSets, appStoreVersionExperimentTreatments)."
+					debugDescription: "Discriminator value '\(discriminatorValue)' does not match any expected values (appAssetLibraryPlacements, appPreviewSets, appScreenshotSets, appStoreVersionExperimentTreatments)."
 				)
 			}
 		}
@@ -39,6 +41,7 @@ public struct AppStoreVersionExperimentTreatmentLocalizationResponse: Codable {
 		public func encode(to encoder: Encoder) throws {
 			var container = encoder.singleValueContainer()
 			switch self {
+			case .appAssetLibraryPlacement(let value): try container.encode(value)
 			case .appPreviewSet(let value): try container.encode(value)
 			case .appScreenshotSet(let value): try container.encode(value)
 			case .appStoreVersionExperimentTreatment(let value): try container.encode(value)
