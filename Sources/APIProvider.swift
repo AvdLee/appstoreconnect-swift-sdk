@@ -213,6 +213,11 @@ public final class APIProvider {
             if let date = isoDateFormatter.date(from: dateStr) {
                 return date
             }
+            // Metric data points use calendar dates in Apple's published responses.
+            formatter.dateFormat = "yyyy-MM-dd"
+            if let date = formatter.date(from: dateStr) {
+                return date
+            }
             throw APIProvider.Error.dateDecodingError(dateStr)
         })
         return decoder
