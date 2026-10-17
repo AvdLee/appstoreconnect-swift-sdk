@@ -7,544 +7,356 @@ public struct AppAssetLibraryPlacementCreateRequest: Codable {
 	public var data: Data
 
 	public struct Data: Codable {
-		public var a: A?
-		public var b: B?
-		public var c: C?
-		public var d: D?
-		public var e: E?
-		public var f: F?
-		public var g: G?
-		public var h: H?
+		public var type: `Type`
+		public var attributes: Attributes
+		public var relationships: Relationships
 
-		public struct A: Codable {
-			public var attributes: Attributes
-			public var relationships: Relationships
+		public enum `Type`: String, Codable, CaseIterable {
+			case appAssetLibraryPlacements
+		}
 
-			public struct Attributes: Codable {
-				public var placementType: AnyJSON
+		public struct Attributes: Codable {
+			public var placementType: AppAssetLibraryPlacementType?
+			public var placementGroup: String?
 
-				public init(placementType: AnyJSON) {
-					self.placementType = placementType
-				}
-
-				public init(from decoder: Decoder) throws {
-					let values = try decoder.container(keyedBy: StringCodingKey.self)
-					self.placementType = try values.decode(AnyJSON.self, forKey: "placementType")
-				}
-
-				public func encode(to encoder: Encoder) throws {
-					var values = encoder.container(keyedBy: StringCodingKey.self)
-					try values.encode(placementType, forKey: "placementType")
-				}
-			}
-
-			public struct Relationships: Codable {
-				public var image: AnyJSON
-				public var appEventLocalization: AnyJSON
-
-				public init(image: AnyJSON, appEventLocalization: AnyJSON) {
-					self.image = image
-					self.appEventLocalization = appEventLocalization
-				}
-
-				public init(from decoder: Decoder) throws {
-					let values = try decoder.container(keyedBy: StringCodingKey.self)
-					self.image = try values.decode(AnyJSON.self, forKey: "image")
-					self.appEventLocalization = try values.decode(AnyJSON.self, forKey: "appEventLocalization")
-				}
-
-				public func encode(to encoder: Encoder) throws {
-					var values = encoder.container(keyedBy: StringCodingKey.self)
-					try values.encode(image, forKey: "image")
-					try values.encode(appEventLocalization, forKey: "appEventLocalization")
-				}
-			}
-
-			public init(attributes: Attributes, relationships: Relationships) {
-				self.attributes = attributes
-				self.relationships = relationships
+			public init(placementType: AppAssetLibraryPlacementType? = nil, placementGroup: String? = nil) {
+				self.placementType = placementType
+				self.placementGroup = placementGroup
 			}
 
 			public init(from decoder: Decoder) throws {
 				let values = try decoder.container(keyedBy: StringCodingKey.self)
-				self.attributes = try values.decode(Attributes.self, forKey: "attributes")
-				self.relationships = try values.decode(Relationships.self, forKey: "relationships")
+				self.placementType = try values.decodeIfPresent(AppAssetLibraryPlacementType.self, forKey: "placementType")
+				self.placementGroup = try values.decodeIfPresent(String.self, forKey: "placementGroup")
 			}
 
 			public func encode(to encoder: Encoder) throws {
 				var values = encoder.container(keyedBy: StringCodingKey.self)
-				try values.encode(attributes, forKey: "attributes")
-				try values.encode(relationships, forKey: "relationships")
+				try values.encodeIfPresent(placementType, forKey: "placementType")
+				try values.encodeIfPresent(placementGroup, forKey: "placementGroup")
 			}
 		}
 
-		public struct B: Codable {
-			public var attributes: Attributes
-			public var relationships: Relationships
+		public struct Relationships: Codable {
+			public var image: Image?
+			public var video: Video?
+			public var appEventLocalization: AppEventLocalization?
+			public var appStoreVersionLocalization: AppStoreVersionLocalization?
+			public var appCustomProductPageLocalization: AppCustomProductPageLocalization?
+			public var appStoreVersionExperimentTreatmentLocalization: AppStoreVersionExperimentTreatmentLocalization?
 
-			public struct Attributes: Codable {
-				public var placementType: AnyJSON
+			public struct Image: Codable {
+				public var data: Data?
 
-				public init(placementType: AnyJSON) {
-					self.placementType = placementType
+				public struct Data: Codable, Identifiable {
+					public var type: `Type`
+					public var id: String
+
+					public enum `Type`: String, Codable, CaseIterable {
+						case appAssetLibraryImages
+					}
+
+					public init(type: `Type`, id: String) {
+						self.type = type
+						self.id = id
+					}
+
+					public init(from decoder: Decoder) throws {
+						let values = try decoder.container(keyedBy: StringCodingKey.self)
+						self.type = try values.decode(`Type`.self, forKey: "type")
+						self.id = try values.decode(String.self, forKey: "id")
+					}
+
+					public func encode(to encoder: Encoder) throws {
+						var values = encoder.container(keyedBy: StringCodingKey.self)
+						try values.encode(type, forKey: "type")
+						try values.encode(id, forKey: "id")
+					}
+				}
+
+				public init(data: Data? = nil) {
+					self.data = data
 				}
 
 				public init(from decoder: Decoder) throws {
 					let values = try decoder.container(keyedBy: StringCodingKey.self)
-					self.placementType = try values.decode(AnyJSON.self, forKey: "placementType")
+					self.data = try values.decodeIfPresent(Data.self, forKey: "data")
 				}
 
 				public func encode(to encoder: Encoder) throws {
 					var values = encoder.container(keyedBy: StringCodingKey.self)
-					try values.encode(placementType, forKey: "placementType")
+					try values.encodeIfPresent(data, forKey: "data")
 				}
 			}
 
-			public struct Relationships: Codable {
-				public var image: AnyJSON
-				public var appStoreVersionLocalization: AnyJSON
+			public struct Video: Codable {
+				public var data: Data?
 
-				public init(image: AnyJSON, appStoreVersionLocalization: AnyJSON) {
-					self.image = image
-					self.appStoreVersionLocalization = appStoreVersionLocalization
+				public struct Data: Codable, Identifiable {
+					public var type: `Type`
+					public var id: String
+
+					public enum `Type`: String, Codable, CaseIterable {
+						case appAssetLibraryVideos
+					}
+
+					public init(type: `Type`, id: String) {
+						self.type = type
+						self.id = id
+					}
+
+					public init(from decoder: Decoder) throws {
+						let values = try decoder.container(keyedBy: StringCodingKey.self)
+						self.type = try values.decode(`Type`.self, forKey: "type")
+						self.id = try values.decode(String.self, forKey: "id")
+					}
+
+					public func encode(to encoder: Encoder) throws {
+						var values = encoder.container(keyedBy: StringCodingKey.self)
+						try values.encode(type, forKey: "type")
+						try values.encode(id, forKey: "id")
+					}
+				}
+
+				public init(data: Data? = nil) {
+					self.data = data
 				}
 
 				public init(from decoder: Decoder) throws {
 					let values = try decoder.container(keyedBy: StringCodingKey.self)
-					self.image = try values.decode(AnyJSON.self, forKey: "image")
-					self.appStoreVersionLocalization = try values.decode(AnyJSON.self, forKey: "appStoreVersionLocalization")
+					self.data = try values.decodeIfPresent(Data.self, forKey: "data")
 				}
 
 				public func encode(to encoder: Encoder) throws {
 					var values = encoder.container(keyedBy: StringCodingKey.self)
-					try values.encode(image, forKey: "image")
-					try values.encode(appStoreVersionLocalization, forKey: "appStoreVersionLocalization")
+					try values.encodeIfPresent(data, forKey: "data")
 				}
 			}
 
-			public init(attributes: Attributes, relationships: Relationships) {
-				self.attributes = attributes
-				self.relationships = relationships
+			public struct AppEventLocalization: Codable {
+				public var data: Data?
+
+				public struct Data: Codable, Identifiable {
+					public var type: `Type`
+					public var id: String
+
+					public enum `Type`: String, Codable, CaseIterable {
+						case appEventLocalizations
+					}
+
+					public init(type: `Type`, id: String) {
+						self.type = type
+						self.id = id
+					}
+
+					public init(from decoder: Decoder) throws {
+						let values = try decoder.container(keyedBy: StringCodingKey.self)
+						self.type = try values.decode(`Type`.self, forKey: "type")
+						self.id = try values.decode(String.self, forKey: "id")
+					}
+
+					public func encode(to encoder: Encoder) throws {
+						var values = encoder.container(keyedBy: StringCodingKey.self)
+						try values.encode(type, forKey: "type")
+						try values.encode(id, forKey: "id")
+					}
+				}
+
+				public init(data: Data? = nil) {
+					self.data = data
+				}
+
+				public init(from decoder: Decoder) throws {
+					let values = try decoder.container(keyedBy: StringCodingKey.self)
+					self.data = try values.decodeIfPresent(Data.self, forKey: "data")
+				}
+
+				public func encode(to encoder: Encoder) throws {
+					var values = encoder.container(keyedBy: StringCodingKey.self)
+					try values.encodeIfPresent(data, forKey: "data")
+				}
+			}
+
+			public struct AppStoreVersionLocalization: Codable {
+				public var data: Data?
+
+				public struct Data: Codable, Identifiable {
+					public var type: `Type`
+					public var id: String
+
+					public enum `Type`: String, Codable, CaseIterable {
+						case appStoreVersionLocalizations
+					}
+
+					public init(type: `Type`, id: String) {
+						self.type = type
+						self.id = id
+					}
+
+					public init(from decoder: Decoder) throws {
+						let values = try decoder.container(keyedBy: StringCodingKey.self)
+						self.type = try values.decode(`Type`.self, forKey: "type")
+						self.id = try values.decode(String.self, forKey: "id")
+					}
+
+					public func encode(to encoder: Encoder) throws {
+						var values = encoder.container(keyedBy: StringCodingKey.self)
+						try values.encode(type, forKey: "type")
+						try values.encode(id, forKey: "id")
+					}
+				}
+
+				public init(data: Data? = nil) {
+					self.data = data
+				}
+
+				public init(from decoder: Decoder) throws {
+					let values = try decoder.container(keyedBy: StringCodingKey.self)
+					self.data = try values.decodeIfPresent(Data.self, forKey: "data")
+				}
+
+				public func encode(to encoder: Encoder) throws {
+					var values = encoder.container(keyedBy: StringCodingKey.self)
+					try values.encodeIfPresent(data, forKey: "data")
+				}
+			}
+
+			public struct AppCustomProductPageLocalization: Codable {
+				public var data: Data?
+
+				public struct Data: Codable, Identifiable {
+					public var type: `Type`
+					public var id: String
+
+					public enum `Type`: String, Codable, CaseIterable {
+						case appCustomProductPageLocalizations
+					}
+
+					public init(type: `Type`, id: String) {
+						self.type = type
+						self.id = id
+					}
+
+					public init(from decoder: Decoder) throws {
+						let values = try decoder.container(keyedBy: StringCodingKey.self)
+						self.type = try values.decode(`Type`.self, forKey: "type")
+						self.id = try values.decode(String.self, forKey: "id")
+					}
+
+					public func encode(to encoder: Encoder) throws {
+						var values = encoder.container(keyedBy: StringCodingKey.self)
+						try values.encode(type, forKey: "type")
+						try values.encode(id, forKey: "id")
+					}
+				}
+
+				public init(data: Data? = nil) {
+					self.data = data
+				}
+
+				public init(from decoder: Decoder) throws {
+					let values = try decoder.container(keyedBy: StringCodingKey.self)
+					self.data = try values.decodeIfPresent(Data.self, forKey: "data")
+				}
+
+				public func encode(to encoder: Encoder) throws {
+					var values = encoder.container(keyedBy: StringCodingKey.self)
+					try values.encodeIfPresent(data, forKey: "data")
+				}
+			}
+
+			public struct AppStoreVersionExperimentTreatmentLocalization: Codable {
+				public var data: Data?
+
+				public struct Data: Codable, Identifiable {
+					public var type: `Type`
+					public var id: String
+
+					public enum `Type`: String, Codable, CaseIterable {
+						case appStoreVersionExperimentTreatmentLocalizations
+					}
+
+					public init(type: `Type`, id: String) {
+						self.type = type
+						self.id = id
+					}
+
+					public init(from decoder: Decoder) throws {
+						let values = try decoder.container(keyedBy: StringCodingKey.self)
+						self.type = try values.decode(`Type`.self, forKey: "type")
+						self.id = try values.decode(String.self, forKey: "id")
+					}
+
+					public func encode(to encoder: Encoder) throws {
+						var values = encoder.container(keyedBy: StringCodingKey.self)
+						try values.encode(type, forKey: "type")
+						try values.encode(id, forKey: "id")
+					}
+				}
+
+				public init(data: Data? = nil) {
+					self.data = data
+				}
+
+				public init(from decoder: Decoder) throws {
+					let values = try decoder.container(keyedBy: StringCodingKey.self)
+					self.data = try values.decodeIfPresent(Data.self, forKey: "data")
+				}
+
+				public func encode(to encoder: Encoder) throws {
+					var values = encoder.container(keyedBy: StringCodingKey.self)
+					try values.encodeIfPresent(data, forKey: "data")
+				}
+			}
+
+			public init(image: Image? = nil, video: Video? = nil, appEventLocalization: AppEventLocalization? = nil, appStoreVersionLocalization: AppStoreVersionLocalization? = nil, appCustomProductPageLocalization: AppCustomProductPageLocalization? = nil, appStoreVersionExperimentTreatmentLocalization: AppStoreVersionExperimentTreatmentLocalization? = nil) {
+				self.image = image
+				self.video = video
+				self.appEventLocalization = appEventLocalization
+				self.appStoreVersionLocalization = appStoreVersionLocalization
+				self.appCustomProductPageLocalization = appCustomProductPageLocalization
+				self.appStoreVersionExperimentTreatmentLocalization = appStoreVersionExperimentTreatmentLocalization
 			}
 
 			public init(from decoder: Decoder) throws {
 				let values = try decoder.container(keyedBy: StringCodingKey.self)
-				self.attributes = try values.decode(Attributes.self, forKey: "attributes")
-				self.relationships = try values.decode(Relationships.self, forKey: "relationships")
+				self.image = try values.decodeIfPresent(Image.self, forKey: "image")
+				self.video = try values.decodeIfPresent(Video.self, forKey: "video")
+				self.appEventLocalization = try values.decodeIfPresent(AppEventLocalization.self, forKey: "appEventLocalization")
+				self.appStoreVersionLocalization = try values.decodeIfPresent(AppStoreVersionLocalization.self, forKey: "appStoreVersionLocalization")
+				self.appCustomProductPageLocalization = try values.decodeIfPresent(AppCustomProductPageLocalization.self, forKey: "appCustomProductPageLocalization")
+				self.appStoreVersionExperimentTreatmentLocalization = try values.decodeIfPresent(AppStoreVersionExperimentTreatmentLocalization.self, forKey: "appStoreVersionExperimentTreatmentLocalization")
 			}
 
 			public func encode(to encoder: Encoder) throws {
 				var values = encoder.container(keyedBy: StringCodingKey.self)
-				try values.encode(attributes, forKey: "attributes")
-				try values.encode(relationships, forKey: "relationships")
+				try values.encodeIfPresent(image, forKey: "image")
+				try values.encodeIfPresent(video, forKey: "video")
+				try values.encodeIfPresent(appEventLocalization, forKey: "appEventLocalization")
+				try values.encodeIfPresent(appStoreVersionLocalization, forKey: "appStoreVersionLocalization")
+				try values.encodeIfPresent(appCustomProductPageLocalization, forKey: "appCustomProductPageLocalization")
+				try values.encodeIfPresent(appStoreVersionExperimentTreatmentLocalization, forKey: "appStoreVersionExperimentTreatmentLocalization")
 			}
 		}
 
-		public struct C: Codable {
-			public var attributes: Attributes
-			public var relationships: Relationships
-
-			public struct Attributes: Codable {
-				public var placementType: AnyJSON
-
-				public init(placementType: AnyJSON) {
-					self.placementType = placementType
-				}
-
-				public init(from decoder: Decoder) throws {
-					let values = try decoder.container(keyedBy: StringCodingKey.self)
-					self.placementType = try values.decode(AnyJSON.self, forKey: "placementType")
-				}
-
-				public func encode(to encoder: Encoder) throws {
-					var values = encoder.container(keyedBy: StringCodingKey.self)
-					try values.encode(placementType, forKey: "placementType")
-				}
-			}
-
-			public struct Relationships: Codable {
-				public var image: AnyJSON
-				public var appCustomProductPageLocalization: AnyJSON
-
-				public init(image: AnyJSON, appCustomProductPageLocalization: AnyJSON) {
-					self.image = image
-					self.appCustomProductPageLocalization = appCustomProductPageLocalization
-				}
-
-				public init(from decoder: Decoder) throws {
-					let values = try decoder.container(keyedBy: StringCodingKey.self)
-					self.image = try values.decode(AnyJSON.self, forKey: "image")
-					self.appCustomProductPageLocalization = try values.decode(AnyJSON.self, forKey: "appCustomProductPageLocalization")
-				}
-
-				public func encode(to encoder: Encoder) throws {
-					var values = encoder.container(keyedBy: StringCodingKey.self)
-					try values.encode(image, forKey: "image")
-					try values.encode(appCustomProductPageLocalization, forKey: "appCustomProductPageLocalization")
-				}
-			}
-
-			public init(attributes: Attributes, relationships: Relationships) {
-				self.attributes = attributes
-				self.relationships = relationships
-			}
-
-			public init(from decoder: Decoder) throws {
-				let values = try decoder.container(keyedBy: StringCodingKey.self)
-				self.attributes = try values.decode(Attributes.self, forKey: "attributes")
-				self.relationships = try values.decode(Relationships.self, forKey: "relationships")
-			}
-
-			public func encode(to encoder: Encoder) throws {
-				var values = encoder.container(keyedBy: StringCodingKey.self)
-				try values.encode(attributes, forKey: "attributes")
-				try values.encode(relationships, forKey: "relationships")
-			}
-		}
-
-		public struct D: Codable {
-			public var attributes: Attributes
-			public var relationships: Relationships
-
-			public struct Attributes: Codable {
-				public var placementType: AnyJSON
-
-				public init(placementType: AnyJSON) {
-					self.placementType = placementType
-				}
-
-				public init(from decoder: Decoder) throws {
-					let values = try decoder.container(keyedBy: StringCodingKey.self)
-					self.placementType = try values.decode(AnyJSON.self, forKey: "placementType")
-				}
-
-				public func encode(to encoder: Encoder) throws {
-					var values = encoder.container(keyedBy: StringCodingKey.self)
-					try values.encode(placementType, forKey: "placementType")
-				}
-			}
-
-			public struct Relationships: Codable {
-				public var image: AnyJSON
-				public var appStoreVersionExperimentTreatmentLocalization: AnyJSON
-
-				public init(image: AnyJSON, appStoreVersionExperimentTreatmentLocalization: AnyJSON) {
-					self.image = image
-					self.appStoreVersionExperimentTreatmentLocalization = appStoreVersionExperimentTreatmentLocalization
-				}
-
-				public init(from decoder: Decoder) throws {
-					let values = try decoder.container(keyedBy: StringCodingKey.self)
-					self.image = try values.decode(AnyJSON.self, forKey: "image")
-					self.appStoreVersionExperimentTreatmentLocalization = try values.decode(AnyJSON.self, forKey: "appStoreVersionExperimentTreatmentLocalization")
-				}
-
-				public func encode(to encoder: Encoder) throws {
-					var values = encoder.container(keyedBy: StringCodingKey.self)
-					try values.encode(image, forKey: "image")
-					try values.encode(appStoreVersionExperimentTreatmentLocalization, forKey: "appStoreVersionExperimentTreatmentLocalization")
-				}
-			}
-
-			public init(attributes: Attributes, relationships: Relationships) {
-				self.attributes = attributes
-				self.relationships = relationships
-			}
-
-			public init(from decoder: Decoder) throws {
-				let values = try decoder.container(keyedBy: StringCodingKey.self)
-				self.attributes = try values.decode(Attributes.self, forKey: "attributes")
-				self.relationships = try values.decode(Relationships.self, forKey: "relationships")
-			}
-
-			public func encode(to encoder: Encoder) throws {
-				var values = encoder.container(keyedBy: StringCodingKey.self)
-				try values.encode(attributes, forKey: "attributes")
-				try values.encode(relationships, forKey: "relationships")
-			}
-		}
-
-		public struct E: Codable {
-			public var attributes: Attributes
-			public var relationships: Relationships
-
-			public struct Attributes: Codable {
-				public var placementType: AnyJSON
-
-				public init(placementType: AnyJSON) {
-					self.placementType = placementType
-				}
-
-				public init(from decoder: Decoder) throws {
-					let values = try decoder.container(keyedBy: StringCodingKey.self)
-					self.placementType = try values.decode(AnyJSON.self, forKey: "placementType")
-				}
-
-				public func encode(to encoder: Encoder) throws {
-					var values = encoder.container(keyedBy: StringCodingKey.self)
-					try values.encode(placementType, forKey: "placementType")
-				}
-			}
-
-			public struct Relationships: Codable {
-				public var appEventLocalization: AnyJSON
-				public var video: AnyJSON
-
-				public init(appEventLocalization: AnyJSON, video: AnyJSON) {
-					self.appEventLocalization = appEventLocalization
-					self.video = video
-				}
-
-				public init(from decoder: Decoder) throws {
-					let values = try decoder.container(keyedBy: StringCodingKey.self)
-					self.appEventLocalization = try values.decode(AnyJSON.self, forKey: "appEventLocalization")
-					self.video = try values.decode(AnyJSON.self, forKey: "video")
-				}
-
-				public func encode(to encoder: Encoder) throws {
-					var values = encoder.container(keyedBy: StringCodingKey.self)
-					try values.encode(appEventLocalization, forKey: "appEventLocalization")
-					try values.encode(video, forKey: "video")
-				}
-			}
-
-			public init(attributes: Attributes, relationships: Relationships) {
-				self.attributes = attributes
-				self.relationships = relationships
-			}
-
-			public init(from decoder: Decoder) throws {
-				let values = try decoder.container(keyedBy: StringCodingKey.self)
-				self.attributes = try values.decode(Attributes.self, forKey: "attributes")
-				self.relationships = try values.decode(Relationships.self, forKey: "relationships")
-			}
-
-			public func encode(to encoder: Encoder) throws {
-				var values = encoder.container(keyedBy: StringCodingKey.self)
-				try values.encode(attributes, forKey: "attributes")
-				try values.encode(relationships, forKey: "relationships")
-			}
-		}
-
-		public struct F: Codable {
-			public var attributes: Attributes
-			public var relationships: Relationships
-
-			public struct Attributes: Codable {
-				public var placementType: AnyJSON
-
-				public init(placementType: AnyJSON) {
-					self.placementType = placementType
-				}
-
-				public init(from decoder: Decoder) throws {
-					let values = try decoder.container(keyedBy: StringCodingKey.self)
-					self.placementType = try values.decode(AnyJSON.self, forKey: "placementType")
-				}
-
-				public func encode(to encoder: Encoder) throws {
-					var values = encoder.container(keyedBy: StringCodingKey.self)
-					try values.encode(placementType, forKey: "placementType")
-				}
-			}
-
-			public struct Relationships: Codable {
-				public var video: AnyJSON
-				public var appStoreVersionLocalization: AnyJSON
-
-				public init(video: AnyJSON, appStoreVersionLocalization: AnyJSON) {
-					self.video = video
-					self.appStoreVersionLocalization = appStoreVersionLocalization
-				}
-
-				public init(from decoder: Decoder) throws {
-					let values = try decoder.container(keyedBy: StringCodingKey.self)
-					self.video = try values.decode(AnyJSON.self, forKey: "video")
-					self.appStoreVersionLocalization = try values.decode(AnyJSON.self, forKey: "appStoreVersionLocalization")
-				}
-
-				public func encode(to encoder: Encoder) throws {
-					var values = encoder.container(keyedBy: StringCodingKey.self)
-					try values.encode(video, forKey: "video")
-					try values.encode(appStoreVersionLocalization, forKey: "appStoreVersionLocalization")
-				}
-			}
-
-			public init(attributes: Attributes, relationships: Relationships) {
-				self.attributes = attributes
-				self.relationships = relationships
-			}
-
-			public init(from decoder: Decoder) throws {
-				let values = try decoder.container(keyedBy: StringCodingKey.self)
-				self.attributes = try values.decode(Attributes.self, forKey: "attributes")
-				self.relationships = try values.decode(Relationships.self, forKey: "relationships")
-			}
-
-			public func encode(to encoder: Encoder) throws {
-				var values = encoder.container(keyedBy: StringCodingKey.self)
-				try values.encode(attributes, forKey: "attributes")
-				try values.encode(relationships, forKey: "relationships")
-			}
-		}
-
-		public struct G: Codable {
-			public var attributes: Attributes
-			public var relationships: Relationships
-
-			public struct Attributes: Codable {
-				public var placementType: AnyJSON
-
-				public init(placementType: AnyJSON) {
-					self.placementType = placementType
-				}
-
-				public init(from decoder: Decoder) throws {
-					let values = try decoder.container(keyedBy: StringCodingKey.self)
-					self.placementType = try values.decode(AnyJSON.self, forKey: "placementType")
-				}
-
-				public func encode(to encoder: Encoder) throws {
-					var values = encoder.container(keyedBy: StringCodingKey.self)
-					try values.encode(placementType, forKey: "placementType")
-				}
-			}
-
-			public struct Relationships: Codable {
-				public var appCustomProductPageLocalization: AnyJSON
-				public var video: AnyJSON
-
-				public init(appCustomProductPageLocalization: AnyJSON, video: AnyJSON) {
-					self.appCustomProductPageLocalization = appCustomProductPageLocalization
-					self.video = video
-				}
-
-				public init(from decoder: Decoder) throws {
-					let values = try decoder.container(keyedBy: StringCodingKey.self)
-					self.appCustomProductPageLocalization = try values.decode(AnyJSON.self, forKey: "appCustomProductPageLocalization")
-					self.video = try values.decode(AnyJSON.self, forKey: "video")
-				}
-
-				public func encode(to encoder: Encoder) throws {
-					var values = encoder.container(keyedBy: StringCodingKey.self)
-					try values.encode(appCustomProductPageLocalization, forKey: "appCustomProductPageLocalization")
-					try values.encode(video, forKey: "video")
-				}
-			}
-
-			public init(attributes: Attributes, relationships: Relationships) {
-				self.attributes = attributes
-				self.relationships = relationships
-			}
-
-			public init(from decoder: Decoder) throws {
-				let values = try decoder.container(keyedBy: StringCodingKey.self)
-				self.attributes = try values.decode(Attributes.self, forKey: "attributes")
-				self.relationships = try values.decode(Relationships.self, forKey: "relationships")
-			}
-
-			public func encode(to encoder: Encoder) throws {
-				var values = encoder.container(keyedBy: StringCodingKey.self)
-				try values.encode(attributes, forKey: "attributes")
-				try values.encode(relationships, forKey: "relationships")
-			}
-		}
-
-		public struct H: Codable {
-			public var attributes: Attributes
-			public var relationships: Relationships
-
-			public struct Attributes: Codable {
-				public var placementType: AnyJSON
-
-				public init(placementType: AnyJSON) {
-					self.placementType = placementType
-				}
-
-				public init(from decoder: Decoder) throws {
-					let values = try decoder.container(keyedBy: StringCodingKey.self)
-					self.placementType = try values.decode(AnyJSON.self, forKey: "placementType")
-				}
-
-				public func encode(to encoder: Encoder) throws {
-					var values = encoder.container(keyedBy: StringCodingKey.self)
-					try values.encode(placementType, forKey: "placementType")
-				}
-			}
-
-			public struct Relationships: Codable {
-				public var appStoreVersionExperimentTreatmentLocalization: AnyJSON
-				public var video: AnyJSON
-
-				public init(appStoreVersionExperimentTreatmentLocalization: AnyJSON, video: AnyJSON) {
-					self.appStoreVersionExperimentTreatmentLocalization = appStoreVersionExperimentTreatmentLocalization
-					self.video = video
-				}
-
-				public init(from decoder: Decoder) throws {
-					let values = try decoder.container(keyedBy: StringCodingKey.self)
-					self.appStoreVersionExperimentTreatmentLocalization = try values.decode(AnyJSON.self, forKey: "appStoreVersionExperimentTreatmentLocalization")
-					self.video = try values.decode(AnyJSON.self, forKey: "video")
-				}
-
-				public func encode(to encoder: Encoder) throws {
-					var values = encoder.container(keyedBy: StringCodingKey.self)
-					try values.encode(appStoreVersionExperimentTreatmentLocalization, forKey: "appStoreVersionExperimentTreatmentLocalization")
-					try values.encode(video, forKey: "video")
-				}
-			}
-
-			public init(attributes: Attributes, relationships: Relationships) {
-				self.attributes = attributes
-				self.relationships = relationships
-			}
-
-			public init(from decoder: Decoder) throws {
-				let values = try decoder.container(keyedBy: StringCodingKey.self)
-				self.attributes = try values.decode(Attributes.self, forKey: "attributes")
-				self.relationships = try values.decode(Relationships.self, forKey: "relationships")
-			}
-
-			public func encode(to encoder: Encoder) throws {
-				var values = encoder.container(keyedBy: StringCodingKey.self)
-				try values.encode(attributes, forKey: "attributes")
-				try values.encode(relationships, forKey: "relationships")
-			}
-		}
-
-		public init(a: A? = nil, b: B? = nil, c: C? = nil, d: D? = nil, e: E? = nil, f: F? = nil, g: G? = nil, h: H? = nil) {
-			self.a = a
-			self.b = b
-			self.c = c
-			self.d = d
-			self.e = e
-			self.f = f
-			self.g = g
-			self.h = h
+		public init(type: `Type`, attributes: Attributes, relationships: Relationships) {
+			self.type = type
+			self.attributes = attributes
+			self.relationships = relationships
 		}
 
 		public init(from decoder: Decoder) throws {
-			let container = try decoder.singleValueContainer()
-			self.a = try? container.decode(A.self)
-			self.b = try? container.decode(B.self)
-			self.c = try? container.decode(C.self)
-			self.d = try? container.decode(D.self)
-			self.e = try? container.decode(E.self)
-			self.f = try? container.decode(F.self)
-			self.g = try? container.decode(G.self)
-			self.h = try? container.decode(H.self)
+			let values = try decoder.container(keyedBy: StringCodingKey.self)
+			self.type = try values.decode(`Type`.self, forKey: "type")
+			self.attributes = try values.decode(Attributes.self, forKey: "attributes")
+			self.relationships = try values.decode(Relationships.self, forKey: "relationships")
 		}
 
 		public func encode(to encoder: Encoder) throws {
-			var container = encoder.singleValueContainer()
-			if let value = a { try container.encode(value) }
-			if let value = b { try container.encode(value) }
-			if let value = c { try container.encode(value) }
-			if let value = d { try container.encode(value) }
-			if let value = e { try container.encode(value) }
-			if let value = f { try container.encode(value) }
-			if let value = g { try container.encode(value) }
-			if let value = h { try container.encode(value) }
+			var values = encoder.container(keyedBy: StringCodingKey.self)
+			try values.encode(type, forKey: "type")
+			try values.encode(attributes, forKey: "attributes")
+			try values.encode(relationships, forKey: "relationships")
 		}
 	}
 

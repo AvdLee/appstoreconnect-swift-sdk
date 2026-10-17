@@ -26,6 +26,7 @@ public enum SpecPatcher {
         case responseErrorSchema = "response-error-schema"
         case winBackOfferPriceInlineCreateFields = "winbackofferpriceinlinecreate-fields"
         case nominationRelationshipDataArrays = "nomination-relationship-data-arrays"
+        case assetLibraryPlacementRequestUnions = "asset-library-placement-request-unions"
     }
 
     public struct RuleResult {
@@ -112,6 +113,13 @@ public enum SpecPatcher {
             changes.append("Ensured Nomination relationship data arrays are required")
         }
 
+        let placementRequests = simplifyAssetLibraryPlacementRequestUnions(&rootObject)
+        rules.append(.init(id: .assetLibraryPlacementRequestUnions, didChange: placementRequests.didChange, matchCount: placementRequests.matchCount))
+        if placementRequests.didChange {
+            didChange = true
+            changes.append("Preserved common placement request fields during code generation")
+        }
+
         root = .object(rootObject)
         return .init(didChange: didChange, changes: changes, rules: rules)
     }
@@ -122,6 +130,43 @@ public enum SpecPatcher {
 private struct PatchOutcome {
     var didChange: Bool
     var matchCount: Int
+}
+
+private func simplifyAssetLibraryPlacementRequestUnions(_ root: inout OrderedDictionary<String, JSONValue>) -> PatchOutcome {
+    guard var components = root["components"]?.objectValue,
+          var schemas = components["schemas"]?.objectValue else {
+        return .init(didChange: false, matchCount: 0)
+    }
+
+    var didChange = false
+    var matchCount = 0
+    for name in ["AppAssetLibraryPlacementCreateRequest", "AppAssetLibraryPlacementOrderingRequestCreateRequest"] {
+        guard var schema = schemas[name]?.objectValue,
+              var properties = schema["properties"]?.objectValue,
+              var data = properties["data"]?.objectValue else { continue }
+        matchCount += 1
+
+        // CreateAPI generates each anyOf branch without the shared data.type field.
+        // The placement-create branches also lose the shared placementGroup field.
+        // Keep the common object schema so the SDK can encode the complete request.
+        if data.removeValue(forKey: "anyOf") != nil {
+            didChange = true
+        }
+        let required: JSONValue = .array([.string("type"), .string("attributes"), .string("relationships")])
+        if data["required"] != required {
+            data["required"] = required
+            didChange = true
+        }
+        properties["data"] = .object(data)
+        schema["properties"] = .object(properties)
+        schemas[name] = .object(schema)
+    }
+
+    if didChange {
+        components["schemas"] = .object(schemas)
+        root["components"] = .object(components)
+    }
+    return .init(didChange: didChange, matchCount: matchCount)
 }
 
 private func ensureBundleIdPlatformEnum(_ root: inout OrderedDictionary<String, JSONValue>) -> PatchOutcome {
