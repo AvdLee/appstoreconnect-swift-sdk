@@ -51,6 +51,20 @@ final class ResponseDecodingTests: XCTestCase {
         XCTAssertEqual(video.video?.data?.id, "video-1")
     }
 
+    // Captured in a live App Store Connect placement response: the unused
+    // relationship is present as an object whose data is null.
+    func test_assetLibraryPlacements_selectPopulatedRelationshipWhenBothKeysExist() throws {
+        let json = #"{"data":[{"type":"appAssetLibraryPlacements","id":"image-placement","relationships":{"image":{"data":{"type":"appAssetLibraryImages","id":"image-1"}},"video":{"data":null}}},{"type":"appAssetLibraryPlacements","id":"video-placement","relationships":{"image":{"data":null},"video":{"data":{"type":"appAssetLibraryVideos","id":"video-1"}}}}],"links":{"self":"https://example.com/placements"}}"#
+        let response = try JSONDecoder().decode(AppAssetLibraryPlacementsResponse.self, from: Data(json.utf8))
+
+        guard case .appAssetLibraryPlacementImageRelationships(let image) = response.data[0].relationships,
+              case .appAssetLibraryPlacementVideoRelationships(let video) = response.data[1].relationships else {
+            return XCTFail("Expected the relationship with populated data")
+        }
+        XCTAssertEqual(image.image?.data?.id, "image-1")
+        XCTAssertEqual(video.video?.data?.id, "video-1")
+    }
+
     // Based on Helm's placement fixture; confirm ACTIVE against a captured API response before upstreaming.
     func test_assetLibraryOrderingResponse_decodesIncludedActivePlacement() throws {
         let json = #"{"data":{"type":"appAssetLibraryPlacementOrderingRequests","id":"order-1"},"included":[{"type":"appAssetLibraryPlacements","id":"placement-1","attributes":{"state":"ACTIVE"}}],"links":{"self":"https://example.com/order-1"}}"#
