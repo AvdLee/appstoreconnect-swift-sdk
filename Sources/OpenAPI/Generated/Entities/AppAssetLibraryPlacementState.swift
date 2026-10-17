@@ -4,6 +4,7 @@
 import Foundation
 
 public enum AppAssetLibraryPlacementState: String, Codable, CaseIterable {
+	case active = "ACTIVE"
 	case assetProcessing = "ASSET_PROCESSING"
 	case failed = "FAILED"
 	case parentPrepareForSubmission = "PARENT_PREPARE_FOR_SUBMISSION"

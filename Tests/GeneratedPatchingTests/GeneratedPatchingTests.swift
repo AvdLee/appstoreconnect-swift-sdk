@@ -4,6 +4,80 @@ import XCTest
 @testable import OpenAPIGeneratorCore
 
 final class GeneratedPatchingTests: XCTestCase {
+    func testCheckedInGeneratedSourcesHaveAllPatches() throws {
+        let packageRoot = URL(fileURLWithPath: #filePath)
+            .deletingLastPathComponent()
+            .deletingLastPathComponent()
+            .deletingLastPathComponent()
+        let generatedRoot = packageRoot.appendingPathComponent("Sources/OpenAPI/Generated")
+
+        let report = try GeneratedPatcher.patchGeneratedSources(atRoot: generatedRoot, dryRun: true)
+        XCTAssertTrue(report.changedFiles.isEmpty, "Generated sources still need patches: \(report.changes)")
+        XCTAssertTrue(report.missingFiles.isEmpty, "Missing generated files: \(report.missingFiles)")
+    }
+
+    func testPatchesFreshlyGeneratedMetricAndPlacementSources() throws {
+        let root = FileManager.default.temporaryDirectory.appendingPathComponent(UUID().uuidString)
+        let entities = root.appendingPathComponent("Entities")
+        try FileManager.default.createDirectory(at: entities, withIntermediateDirectories: true)
+        defer { try? FileManager.default.removeItem(at: root) }
+
+        let metricSource = """
+        public var links: PagedDocumentLinks
+        public var meta: PagingInformation?
+        public var data: String?
+        public init(links: Links? = nil, data: String? = nil)
+        self.data = try values.decodeIfPresent(String.self, forKey: "data")
+        """
+        try metricSource.write(
+            to: entities.appendingPathComponent("BetaTesterUsagesV1MetricResponse.swift"),
+            atomically: true, encoding: .utf8
+        )
+        try metricSource.write(
+            to: entities.appendingPathComponent("AppsBetaTesterUsagesV1MetricResponse.swift"),
+            atomically: true, encoding: .utf8
+        )
+        try "public enum AppAssetLibraryPlacementState: String, Codable, CaseIterable {\n\tcase assetProcessing = \"ASSET_PROCESSING\""
+            .write(to: entities.appendingPathComponent("AppAssetLibraryPlacementState.swift"), atomically: true, encoding: .utf8)
+
+        let placementSource = """
+
+\t\t\tstruct Discriminator: Decodable {
+\t\t\t\tlet mediaType: String
+\t\t\t}
+
+\t\t\tlet container = try decoder.singleValueContainer()
+\t\t\tlet discriminatorValue = try container.decode(Discriminator.self).mediaType
+
+\t\t\tswitch discriminatorValue {
+\t\t\tcase "IMAGE": self = .appAssetLibraryPlacementImageRelationships(try container.decode(AppAssetLibraryPlacementImageRelationships.self))
+\t\t\tcase "VIDEO": self = .appAssetLibraryPlacementVideoRelationships(try container.decode(AppAssetLibraryPlacementVideoRelationships.self))
+
+\t\t\tdefault:
+\t\t\t\tthrow DecodingError.dataCorruptedError(
+\t\t\t\t\tin: container,
+\t\t\t\t\tdebugDescription: "Discriminator value '\\(discriminatorValue)' does not match any expected values (IMAGE, VIDEO)."
+\t\t\t\t)
+\t\t\t}
+"""
+        try placementSource.write(
+            to: entities.appendingPathComponent("AppAssetLibraryPlacement.swift"),
+            atomically: true, encoding: .utf8
+        )
+
+        let first = try GeneratedPatcher.patchGeneratedSources(atRoot: root)
+        XCTAssertEqual(first.changedFiles.count, 4)
+        let patchedMetric = try String(
+            contentsOf: entities.appendingPathComponent("AppsBetaTesterUsagesV1MetricResponse.swift"),
+            encoding: .utf8
+        )
+        XCTAssertTrue(patchedMetric.contains("public var data: MetricDimensionData?"))
+        XCTAssertTrue(patchedMetric.contains("public var links: PagedDocumentLinks"))
+        XCTAssertTrue(patchedMetric.contains("public var meta: PagingInformation?"))
+        let second = try GeneratedPatcher.patchGeneratedSources(atRoot: root)
+        XCTAssertTrue(second.changedFiles.isEmpty)
+    }
+
     func testPatchesCiGitUserAvatarURLToString() throws {
         let tmp = FileManager.default.temporaryDirectory
             .appendingPathComponent(UUID().uuidString, isDirectory: true)

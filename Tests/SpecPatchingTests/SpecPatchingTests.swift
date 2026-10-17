@@ -4,6 +4,28 @@ import OrderedCollections
 @testable import OpenAPIGeneratorCore
 
 final class SpecPatchingTests: XCTestCase {
+    func testPlacementRequestSchemasRetainCommonFieldsForGeneration() throws {
+        let input = """
+        {"components":{"schemas":{"AppAssetLibraryPlacementCreateRequest":{"properties":{"data":{"properties":{"type":{"type":"string"},"attributes":{"type":"object","properties":{"placementGroup":{"type":"string"}}},"relationships":{"type":"object"}},"anyOf":[{"required":["attributes","relationships"]}],"required":["type"]}}},"AppAssetLibraryPlacementOrderingRequestCreateRequest":{"properties":{"data":{"properties":{"type":{"type":"string"},"attributes":{"type":"object"},"relationships":{"type":"object"}},"anyOf":[{"required":["attributes","relationships"]}],"required":["type"]}}}}}}
+        """
+        var parser = JSONParser(bytes: Array(input.utf8))
+        var root = JSONValue.object(try parser.parseObject())
+
+        let result = try SpecPatcher.patch(&root)
+
+        XCTAssertTrue(result.didChange)
+        let schemas = root.objectValue?["components"]?.objectValue?["schemas"]?.objectValue
+        for name in ["AppAssetLibraryPlacementCreateRequest", "AppAssetLibraryPlacementOrderingRequestCreateRequest"] {
+            let data = schemas?[name]?.objectValue?["properties"]?.objectValue?["data"]?.objectValue
+            XCTAssertNil(data?["anyOf"])
+            XCTAssertEqual(data?["required"]?.arrayValue?.compactMap(\.stringValue), ["type", "attributes", "relationships"])
+            XCTAssertNotNil(data?["properties"]?.objectValue?["type"])
+        }
+        let createAttributes = schemas?["AppAssetLibraryPlacementCreateRequest"]?.objectValue?["properties"]?
+            .objectValue?["data"]?.objectValue?["properties"]?.objectValue?["attributes"]?.objectValue?["properties"]?.objectValue
+        XCTAssertNotNil(createAttributes?["placementGroup"])
+    }
+
     func testOrderPreservedWhenParsingAndWritingJSON() throws {
         // This test guards against losing upstream key ordering via JSONDecoder/JSONEncoder.
         let input = """

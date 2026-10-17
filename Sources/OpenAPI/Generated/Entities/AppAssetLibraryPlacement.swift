@@ -61,23 +61,19 @@ public struct AppAssetLibraryPlacement: Codable, Identifiable {
 		case appAssetLibraryPlacementVideoRelationships(AppAssetLibraryPlacementVideoRelationships)
 
 		public init(from decoder: Decoder) throws {
-
-			struct Discriminator: Decodable {
-				let mediaType: String
+			// The media type is in the placement attributes, not its relationships.
+			// Select the relationship variant from populated asset data. Responses can
+			// include both keys with a null data value for the unused media type.
+			enum AssetKey: String, CodingKey { case image, video }
+			struct AssetLink: Decodable {
+				struct Resource: Decodable { let id: String }
+				let data: Resource?
 			}
-
-			let container = try decoder.singleValueContainer()
-			let discriminatorValue = try container.decode(Discriminator.self).mediaType
-
-			switch discriminatorValue {
-			case "IMAGE": self = .appAssetLibraryPlacementImageRelationships(try container.decode(AppAssetLibraryPlacementImageRelationships.self))
-			case "VIDEO": self = .appAssetLibraryPlacementVideoRelationships(try container.decode(AppAssetLibraryPlacementVideoRelationships.self))
-
-			default:
-				throw DecodingError.dataCorruptedError(
-					in: container,
-					debugDescription: "Discriminator value '\(discriminatorValue)' does not match any expected values (IMAGE, VIDEO)."
-				)
+			let keys = try decoder.container(keyedBy: AssetKey.self)
+			if try keys.decodeIfPresent(AssetLink.self, forKey: .video)?.data != nil {
+				self = .appAssetLibraryPlacementVideoRelationships(try AppAssetLibraryPlacementVideoRelationships(from: decoder))
+			} else {
+				self = .appAssetLibraryPlacementImageRelationships(try AppAssetLibraryPlacementImageRelationships(from: decoder))
 			}
 		}
 

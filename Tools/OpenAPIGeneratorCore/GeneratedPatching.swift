@@ -136,6 +136,102 @@ public enum GeneratedPatcher {
             report: &report
         )
 
+        try patchFile(
+            rootDir.appendingPathComponent("Entities/AppsBetaTesterUsagesV1MetricResponse.swift"),
+            dryRun: dryRun,
+            replacements: [
+                .init(description: "Decode grouped beta tester dimension as an ID or resource",
+                      from: "public var data: String?",
+                      to: "public var data: MetricDimensionData?", required: true),
+                .init(description: "Initialize grouped beta tester dimension",
+                      from: "public init(links: Links? = nil, data: String? = nil)",
+                      to: "public init(links: Links? = nil, data: MetricDimensionData? = nil)", required: true),
+                .init(description: "Decode grouped beta tester dimension data",
+                      from: #"self.data = try values.decodeIfPresent(String.self, forKey: "data")"#,
+                      to: #"self.data = try values.decodeIfPresent(MetricDimensionData.self, forKey: "data")"#,
+                      required: true),
+            ],
+            report: &report
+        )
+
+        try patchFile(
+            rootDir.appendingPathComponent("Entities/BetaTesterUsagesV1MetricResponse.swift"),
+            dryRun: dryRun,
+            replacements: [
+                .init(description: "Decode app metric dimension as an ID or resource",
+                      from: "public var data: String?",
+                      to: "public var data: MetricDimensionData?", required: true),
+                .init(description: "Initialize app metric dimension",
+                      from: "public init(links: Links? = nil, data: String? = nil)",
+                      to: "public init(links: Links? = nil, data: MetricDimensionData? = nil)", required: true),
+                .init(description: "Decode app metric dimension data",
+                      from: #"self.data = try values.decodeIfPresent(String.self, forKey: "data")"#,
+                      to: #"self.data = try values.decodeIfPresent(MetricDimensionData.self, forKey: "data")"#,
+                      required: true),
+            ],
+            report: &report
+        )
+
+        try patchFile(
+            rootDir.appendingPathComponent("Entities/AppAssetLibraryPlacementState.swift"),
+            dryRun: dryRun,
+            replacements: [
+                .init(description: "Recognize active asset library placements",
+                      from: "public enum AppAssetLibraryPlacementState: String, Codable, CaseIterable {\n\tcase assetProcessing = \"ASSET_PROCESSING\"",
+                      to: "public enum AppAssetLibraryPlacementState: String, Codable, CaseIterable {\n\tcase active = \"ACTIVE\"\n\tcase assetProcessing = \"ASSET_PROCESSING\"",
+                      required: true),
+            ],
+            report: &report
+        )
+
+        try patchFile(
+            rootDir.appendingPathComponent("Entities/AppAssetLibraryPlacement.swift"),
+            dryRun: dryRun,
+            replacements: [
+                .init(
+                    description: "Select placement relationships by populated image or video data",
+                    from: """
+
+			struct Discriminator: Decodable {
+				let mediaType: String
+			}
+
+			let container = try decoder.singleValueContainer()
+			let discriminatorValue = try container.decode(Discriminator.self).mediaType
+
+			switch discriminatorValue {
+			case "IMAGE": self = .appAssetLibraryPlacementImageRelationships(try container.decode(AppAssetLibraryPlacementImageRelationships.self))
+			case "VIDEO": self = .appAssetLibraryPlacementVideoRelationships(try container.decode(AppAssetLibraryPlacementVideoRelationships.self))
+
+			default:
+				throw DecodingError.dataCorruptedError(
+					in: container,
+					debugDescription: "Discriminator value '\\(discriminatorValue)' does not match any expected values (IMAGE, VIDEO)."
+				)
+			}
+""",
+                    to: """
+			// The media type is in the placement attributes, not its relationships.
+			// Select the relationship variant from populated asset data. Responses can
+			// include both keys with a null data value for the unused media type.
+			enum AssetKey: String, CodingKey { case image, video }
+			struct AssetLink: Decodable {
+				struct Resource: Decodable { let id: String }
+				let data: Resource?
+			}
+			let keys = try decoder.container(keyedBy: AssetKey.self)
+			if try keys.decodeIfPresent(AssetLink.self, forKey: .video)?.data != nil {
+				self = .appAssetLibraryPlacementVideoRelationships(try AppAssetLibraryPlacementVideoRelationships(from: decoder))
+			} else {
+				self = .appAssetLibraryPlacementImageRelationships(try AppAssetLibraryPlacementImageRelationships(from: decoder))
+			}
+""",
+                    required: true
+                ),
+            ],
+            report: &report
+        )
+
         return report
     }
 }
