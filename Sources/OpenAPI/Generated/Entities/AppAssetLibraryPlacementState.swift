@@ -12,4 +12,5 @@ public enum AppAssetLibraryPlacementState: String, Codable, CaseIterable {
 	case parentWaitingForReview = "PARENT_WAITING_FOR_REVIEW"
 	case parentInReview = "PARENT_IN_REVIEW"
 	case parentApproved = "PARENT_APPROVED"
+	case inactive = "INACTIVE"
 }

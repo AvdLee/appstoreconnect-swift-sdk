@@ -180,6 +180,10 @@ public enum GeneratedPatcher {
                       from: "public enum AppAssetLibraryPlacementState: String, Codable, CaseIterable {\n\tcase assetProcessing = \"ASSET_PROCESSING\"",
                       to: "public enum AppAssetLibraryPlacementState: String, Codable, CaseIterable {\n\tcase active = \"ACTIVE\"\n\tcase assetProcessing = \"ASSET_PROCESSING\"",
                       required: true),
+                .init(description: "Recognize inactive asset library placements",
+                      from: "\tcase parentApproved = \"PARENT_APPROVED\"\n}",
+                      to: "\tcase parentApproved = \"PARENT_APPROVED\"\n\tcase inactive = \"INACTIVE\"\n}",
+                      required: true),
             ],
             report: &report
         )
