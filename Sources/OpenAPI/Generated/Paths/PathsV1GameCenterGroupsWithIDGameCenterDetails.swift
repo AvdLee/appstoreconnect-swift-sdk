@@ -113,6 +113,7 @@ extension APIEndpoint.V1.GameCenterGroups.WithID {
 				case appAvailabilityV2
 				case inAppPurchases
 				case subscriptionGroups
+				case retentionMessages
 				case gameCenterEnabledVersions
 				case performanceOverviews
 				case perfPowerMetrics

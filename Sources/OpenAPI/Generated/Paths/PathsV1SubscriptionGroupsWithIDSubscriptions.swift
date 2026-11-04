@@ -36,6 +36,8 @@ extension APIEndpoint.V1.SubscriptionGroups.WithID {
 			public var fieldsSubscriptionImages: [FieldsSubscriptionImages]?
 			public var fieldsSubscriptionPlanAvailabilities: [FieldsSubscriptionPlanAvailabilities]?
 			public var fieldsSubscriptionVersions: [FieldsSubscriptionVersions]?
+			public var fieldsRetentionOffers: [FieldsRetentionOffers]?
+			public var fieldsRetentionMessages: [FieldsRetentionMessages]?
 			public var limit: Int?
 			public var include: [Include]?
 			public var limitSubscriptionLocalizations: Int?
@@ -47,6 +49,8 @@ extension APIEndpoint.V1.SubscriptionGroups.WithID {
 			public var limitImages: Int?
 			public var limitPlanAvailabilities: Int?
 			public var limitVersions: Int?
+			public var limitRetentionOffers: Int?
+			public var limitRetentionMessageOffers: Int?
 
 			public enum FilterState: String, Codable, CaseIterable {
 				case missingMetadata = "MISSING_METADATA"
@@ -90,6 +94,9 @@ extension APIEndpoint.V1.SubscriptionGroups.WithID {
 				case images
 				case planAvailabilities
 				case versions
+				case retentionOffers
+				case retentionMessage
+				case retentionMessageOffers
 			}
 
 			public enum FieldsSubscriptionLocalizations: String, Codable, CaseIterable {
@@ -225,6 +232,25 @@ extension APIEndpoint.V1.SubscriptionGroups.WithID {
 				case localizations
 			}
 
+			public enum FieldsRetentionOffers: String, Codable, CaseIterable {
+				case referenceName
+				case offerID = "offerId"
+				case duration
+				case offerMode
+				case periodCount
+				case customerEligibilityPaidSubscriptionDurationInMonths
+				case customerEligibilityWaitBetweenOffersInMonths
+				case targetSubscriptionPlanType
+				case subscription
+				case prices
+			}
+
+			public enum FieldsRetentionMessages: String, Codable, CaseIterable {
+				case referenceName
+				case versions
+				case subscriptions
+			}
+
 			public enum Include: String, Codable, CaseIterable {
 				case subscriptionLocalizations
 				case appStoreReviewScreenshot
@@ -239,9 +265,12 @@ extension APIEndpoint.V1.SubscriptionGroups.WithID {
 				case images
 				case planAvailabilities
 				case versions
+				case retentionOffers
+				case retentionMessage
+				case retentionMessageOffers
 			}
 
-			public init(filterProductID: [String]? = nil, filterName: [String]? = nil, filterState: [FilterState]? = nil, sort: [Sort]? = nil, fieldsSubscriptions: [FieldsSubscriptions]? = nil, fieldsSubscriptionLocalizations: [FieldsSubscriptionLocalizations]? = nil, fieldsSubscriptionAppStoreReviewScreenshots: [FieldsSubscriptionAppStoreReviewScreenshots]? = nil, fieldsSubscriptionGroups: [FieldsSubscriptionGroups]? = nil, fieldsSubscriptionIntroductoryOffers: [FieldsSubscriptionIntroductoryOffers]? = nil, fieldsSubscriptionPromotionalOffers: [FieldsSubscriptionPromotionalOffers]? = nil, fieldsSubscriptionOfferCodes: [FieldsSubscriptionOfferCodes]? = nil, fieldsSubscriptionPrices: [FieldsSubscriptionPrices]? = nil, fieldsPromotedPurchases: [FieldsPromotedPurchases]? = nil, fieldsSubscriptionAvailabilities: [FieldsSubscriptionAvailabilities]? = nil, fieldsWinBackOffers: [FieldsWinBackOffers]? = nil, fieldsSubscriptionImages: [FieldsSubscriptionImages]? = nil, fieldsSubscriptionPlanAvailabilities: [FieldsSubscriptionPlanAvailabilities]? = nil, fieldsSubscriptionVersions: [FieldsSubscriptionVersions]? = nil, limit: Int? = nil, include: [Include]? = nil, limitSubscriptionLocalizations: Int? = nil, limitIntroductoryOffers: Int? = nil, limitPromotionalOffers: Int? = nil, limitOfferCodes: Int? = nil, limitPrices: Int? = nil, limitWinBackOffers: Int? = nil, limitImages: Int? = nil, limitPlanAvailabilities: Int? = nil, limitVersions: Int? = nil) {
+			public init(filterProductID: [String]? = nil, filterName: [String]? = nil, filterState: [FilterState]? = nil, sort: [Sort]? = nil, fieldsSubscriptions: [FieldsSubscriptions]? = nil, fieldsSubscriptionLocalizations: [FieldsSubscriptionLocalizations]? = nil, fieldsSubscriptionAppStoreReviewScreenshots: [FieldsSubscriptionAppStoreReviewScreenshots]? = nil, fieldsSubscriptionGroups: [FieldsSubscriptionGroups]? = nil, fieldsSubscriptionIntroductoryOffers: [FieldsSubscriptionIntroductoryOffers]? = nil, fieldsSubscriptionPromotionalOffers: [FieldsSubscriptionPromotionalOffers]? = nil, fieldsSubscriptionOfferCodes: [FieldsSubscriptionOfferCodes]? = nil, fieldsSubscriptionPrices: [FieldsSubscriptionPrices]? = nil, fieldsPromotedPurchases: [FieldsPromotedPurchases]? = nil, fieldsSubscriptionAvailabilities: [FieldsSubscriptionAvailabilities]? = nil, fieldsWinBackOffers: [FieldsWinBackOffers]? = nil, fieldsSubscriptionImages: [FieldsSubscriptionImages]? = nil, fieldsSubscriptionPlanAvailabilities: [FieldsSubscriptionPlanAvailabilities]? = nil, fieldsSubscriptionVersions: [FieldsSubscriptionVersions]? = nil, fieldsRetentionOffers: [FieldsRetentionOffers]? = nil, fieldsRetentionMessages: [FieldsRetentionMessages]? = nil, limit: Int? = nil, include: [Include]? = nil, limitSubscriptionLocalizations: Int? = nil, limitIntroductoryOffers: Int? = nil, limitPromotionalOffers: Int? = nil, limitOfferCodes: Int? = nil, limitPrices: Int? = nil, limitWinBackOffers: Int? = nil, limitImages: Int? = nil, limitPlanAvailabilities: Int? = nil, limitVersions: Int? = nil, limitRetentionOffers: Int? = nil, limitRetentionMessageOffers: Int? = nil) {
 				self.filterProductID = filterProductID
 				self.filterName = filterName
 				self.filterState = filterState
@@ -260,6 +289,8 @@ extension APIEndpoint.V1.SubscriptionGroups.WithID {
 				self.fieldsSubscriptionImages = fieldsSubscriptionImages
 				self.fieldsSubscriptionPlanAvailabilities = fieldsSubscriptionPlanAvailabilities
 				self.fieldsSubscriptionVersions = fieldsSubscriptionVersions
+				self.fieldsRetentionOffers = fieldsRetentionOffers
+				self.fieldsRetentionMessages = fieldsRetentionMessages
 				self.limit = limit
 				self.include = include
 				self.limitSubscriptionLocalizations = limitSubscriptionLocalizations
@@ -271,6 +302,8 @@ extension APIEndpoint.V1.SubscriptionGroups.WithID {
 				self.limitImages = limitImages
 				self.limitPlanAvailabilities = limitPlanAvailabilities
 				self.limitVersions = limitVersions
+				self.limitRetentionOffers = limitRetentionOffers
+				self.limitRetentionMessageOffers = limitRetentionMessageOffers
 			}
 
 			public var asQuery: [(String, String?)] {
@@ -293,6 +326,8 @@ extension APIEndpoint.V1.SubscriptionGroups.WithID {
 				encoder.encode(fieldsSubscriptionImages, forKey: "fields[subscriptionImages]")
 				encoder.encode(fieldsSubscriptionPlanAvailabilities, forKey: "fields[subscriptionPlanAvailabilities]")
 				encoder.encode(fieldsSubscriptionVersions, forKey: "fields[subscriptionVersions]")
+				encoder.encode(fieldsRetentionOffers, forKey: "fields[retentionOffers]")
+				encoder.encode(fieldsRetentionMessages, forKey: "fields[retentionMessages]")
 				encoder.encode(limit, forKey: "limit")
 				encoder.encode(include, forKey: "include")
 				encoder.encode(limitSubscriptionLocalizations, forKey: "limit[subscriptionLocalizations]")
@@ -304,6 +339,8 @@ extension APIEndpoint.V1.SubscriptionGroups.WithID {
 				encoder.encode(limitImages, forKey: "limit[images]")
 				encoder.encode(limitPlanAvailabilities, forKey: "limit[planAvailabilities]")
 				encoder.encode(limitVersions, forKey: "limit[versions]")
+				encoder.encode(limitRetentionOffers, forKey: "limit[retentionOffers]")
+				encoder.encode(limitRetentionMessageOffers, forKey: "limit[retentionMessageOffers]")
 				return encoder.items
 			}
 		}

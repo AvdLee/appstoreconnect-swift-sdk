@@ -34,6 +34,7 @@ extension APIEndpoint.V1.CiProducts.WithID {
 			public var fieldsEndUserLicenseAgreements: [FieldsEndUserLicenseAgreements]?
 			public var fieldsInAppPurchases: [FieldsInAppPurchases]?
 			public var fieldsSubscriptionGroups: [FieldsSubscriptionGroups]?
+			public var fieldsRetentionMessages: [FieldsRetentionMessages]?
 			public var fieldsGameCenterEnabledVersions: [FieldsGameCenterEnabledVersions]?
 			public var fieldsAppCustomProductPages: [FieldsAppCustomProductPages]?
 			public var fieldsPromotedPurchases: [FieldsPromotedPurchases]?
@@ -54,6 +55,7 @@ extension APIEndpoint.V1.CiProducts.WithID {
 			public var limitAppClips: Int?
 			public var limitInAppPurchases: Int?
 			public var limitSubscriptionGroups: Int?
+			public var limitRetentionMessages: Int?
 			public var limitGameCenterEnabledVersions: Int?
 			public var limitAppCustomProductPages: Int?
 			public var limitInAppPurchasesV2: Int?
@@ -97,6 +99,7 @@ extension APIEndpoint.V1.CiProducts.WithID {
 				case appAvailabilityV2
 				case inAppPurchases
 				case subscriptionGroups
+				case retentionMessages
 				case gameCenterEnabledVersions
 				case performanceOverviews
 				case perfPowerMetrics
@@ -335,6 +338,12 @@ extension APIEndpoint.V1.CiProducts.WithID {
 				case versions
 			}
 
+			public enum FieldsRetentionMessages: String, Codable, CaseIterable {
+				case referenceName
+				case versions
+				case subscriptions
+			}
+
 			public enum FieldsGameCenterEnabledVersions: String, Codable, CaseIterable {
 				case platform
 				case versionString
@@ -453,6 +462,7 @@ extension APIEndpoint.V1.CiProducts.WithID {
 				case endUserLicenseAgreement
 				case inAppPurchases
 				case subscriptionGroups
+				case retentionMessages
 				case gameCenterEnabledVersions
 				case appCustomProductPages
 				case inAppPurchasesV2
@@ -465,7 +475,7 @@ extension APIEndpoint.V1.CiProducts.WithID {
 				case androidToIosAppMappingDetails
 			}
 
-			public init(fieldsApps: [FieldsApps]? = nil, fieldsAppEncryptionDeclarations: [FieldsAppEncryptionDeclarations]? = nil, fieldsBuildIcons: [FieldsBuildIcons]? = nil, fieldsCiProducts: [FieldsCiProducts]? = nil, fieldsBetaGroups: [FieldsBetaGroups]? = nil, fieldsAppStoreVersions: [FieldsAppStoreVersions]? = nil, fieldsPreReleaseVersions: [FieldsPreReleaseVersions]? = nil, fieldsBetaAppLocalizations: [FieldsBetaAppLocalizations]? = nil, fieldsBuilds: [FieldsBuilds]? = nil, fieldsBetaLicenseAgreements: [FieldsBetaLicenseAgreements]? = nil, fieldsBetaAppReviewDetails: [FieldsBetaAppReviewDetails]? = nil, fieldsAppInfos: [FieldsAppInfos]? = nil, fieldsAppClips: [FieldsAppClips]? = nil, fieldsEndUserLicenseAgreements: [FieldsEndUserLicenseAgreements]? = nil, fieldsInAppPurchases: [FieldsInAppPurchases]? = nil, fieldsSubscriptionGroups: [FieldsSubscriptionGroups]? = nil, fieldsGameCenterEnabledVersions: [FieldsGameCenterEnabledVersions]? = nil, fieldsAppCustomProductPages: [FieldsAppCustomProductPages]? = nil, fieldsPromotedPurchases: [FieldsPromotedPurchases]? = nil, fieldsAppEvents: [FieldsAppEvents]? = nil, fieldsReviewSubmissions: [FieldsReviewSubmissions]? = nil, fieldsSubscriptionGracePeriods: [FieldsSubscriptionGracePeriods]? = nil, fieldsGameCenterDetails: [FieldsGameCenterDetails]? = nil, fieldsAppStoreVersionExperiments: [FieldsAppStoreVersionExperiments]? = nil, fieldsAndroidToIosAppMappingDetails: [FieldsAndroidToIosAppMappingDetails]? = nil, include: [Include]? = nil, limitAppEncryptionDeclarations: Int? = nil, limitBetaGroups: Int? = nil, limitAppStoreVersions: Int? = nil, limitPreReleaseVersions: Int? = nil, limitBetaAppLocalizations: Int? = nil, limitBuilds: Int? = nil, limitAppInfos: Int? = nil, limitAppClips: Int? = nil, limitInAppPurchases: Int? = nil, limitSubscriptionGroups: Int? = nil, limitGameCenterEnabledVersions: Int? = nil, limitAppCustomProductPages: Int? = nil, limitInAppPurchasesV2: Int? = nil, limitPromotedPurchases: Int? = nil, limitAppEvents: Int? = nil, limitReviewSubmissions: Int? = nil, limitAppStoreVersionExperimentsV2: Int? = nil, limitAndroidToIosAppMappingDetails: Int? = nil) {
+			public init(fieldsApps: [FieldsApps]? = nil, fieldsAppEncryptionDeclarations: [FieldsAppEncryptionDeclarations]? = nil, fieldsBuildIcons: [FieldsBuildIcons]? = nil, fieldsCiProducts: [FieldsCiProducts]? = nil, fieldsBetaGroups: [FieldsBetaGroups]? = nil, fieldsAppStoreVersions: [FieldsAppStoreVersions]? = nil, fieldsPreReleaseVersions: [FieldsPreReleaseVersions]? = nil, fieldsBetaAppLocalizations: [FieldsBetaAppLocalizations]? = nil, fieldsBuilds: [FieldsBuilds]? = nil, fieldsBetaLicenseAgreements: [FieldsBetaLicenseAgreements]? = nil, fieldsBetaAppReviewDetails: [FieldsBetaAppReviewDetails]? = nil, fieldsAppInfos: [FieldsAppInfos]? = nil, fieldsAppClips: [FieldsAppClips]? = nil, fieldsEndUserLicenseAgreements: [FieldsEndUserLicenseAgreements]? = nil, fieldsInAppPurchases: [FieldsInAppPurchases]? = nil, fieldsSubscriptionGroups: [FieldsSubscriptionGroups]? = nil, fieldsRetentionMessages: [FieldsRetentionMessages]? = nil, fieldsGameCenterEnabledVersions: [FieldsGameCenterEnabledVersions]? = nil, fieldsAppCustomProductPages: [FieldsAppCustomProductPages]? = nil, fieldsPromotedPurchases: [FieldsPromotedPurchases]? = nil, fieldsAppEvents: [FieldsAppEvents]? = nil, fieldsReviewSubmissions: [FieldsReviewSubmissions]? = nil, fieldsSubscriptionGracePeriods: [FieldsSubscriptionGracePeriods]? = nil, fieldsGameCenterDetails: [FieldsGameCenterDetails]? = nil, fieldsAppStoreVersionExperiments: [FieldsAppStoreVersionExperiments]? = nil, fieldsAndroidToIosAppMappingDetails: [FieldsAndroidToIosAppMappingDetails]? = nil, include: [Include]? = nil, limitAppEncryptionDeclarations: Int? = nil, limitBetaGroups: Int? = nil, limitAppStoreVersions: Int? = nil, limitPreReleaseVersions: Int? = nil, limitBetaAppLocalizations: Int? = nil, limitBuilds: Int? = nil, limitAppInfos: Int? = nil, limitAppClips: Int? = nil, limitInAppPurchases: Int? = nil, limitSubscriptionGroups: Int? = nil, limitRetentionMessages: Int? = nil, limitGameCenterEnabledVersions: Int? = nil, limitAppCustomProductPages: Int? = nil, limitInAppPurchasesV2: Int? = nil, limitPromotedPurchases: Int? = nil, limitAppEvents: Int? = nil, limitReviewSubmissions: Int? = nil, limitAppStoreVersionExperimentsV2: Int? = nil, limitAndroidToIosAppMappingDetails: Int? = nil) {
 				self.fieldsApps = fieldsApps
 				self.fieldsAppEncryptionDeclarations = fieldsAppEncryptionDeclarations
 				self.fieldsBuildIcons = fieldsBuildIcons
@@ -482,6 +492,7 @@ extension APIEndpoint.V1.CiProducts.WithID {
 				self.fieldsEndUserLicenseAgreements = fieldsEndUserLicenseAgreements
 				self.fieldsInAppPurchases = fieldsInAppPurchases
 				self.fieldsSubscriptionGroups = fieldsSubscriptionGroups
+				self.fieldsRetentionMessages = fieldsRetentionMessages
 				self.fieldsGameCenterEnabledVersions = fieldsGameCenterEnabledVersions
 				self.fieldsAppCustomProductPages = fieldsAppCustomProductPages
 				self.fieldsPromotedPurchases = fieldsPromotedPurchases
@@ -502,6 +513,7 @@ extension APIEndpoint.V1.CiProducts.WithID {
 				self.limitAppClips = limitAppClips
 				self.limitInAppPurchases = limitInAppPurchases
 				self.limitSubscriptionGroups = limitSubscriptionGroups
+				self.limitRetentionMessages = limitRetentionMessages
 				self.limitGameCenterEnabledVersions = limitGameCenterEnabledVersions
 				self.limitAppCustomProductPages = limitAppCustomProductPages
 				self.limitInAppPurchasesV2 = limitInAppPurchasesV2
@@ -530,6 +542,7 @@ extension APIEndpoint.V1.CiProducts.WithID {
 				encoder.encode(fieldsEndUserLicenseAgreements, forKey: "fields[endUserLicenseAgreements]")
 				encoder.encode(fieldsInAppPurchases, forKey: "fields[inAppPurchases]")
 				encoder.encode(fieldsSubscriptionGroups, forKey: "fields[subscriptionGroups]")
+				encoder.encode(fieldsRetentionMessages, forKey: "fields[retentionMessages]")
 				encoder.encode(fieldsGameCenterEnabledVersions, forKey: "fields[gameCenterEnabledVersions]")
 				encoder.encode(fieldsAppCustomProductPages, forKey: "fields[appCustomProductPages]")
 				encoder.encode(fieldsPromotedPurchases, forKey: "fields[promotedPurchases]")
@@ -550,6 +563,7 @@ extension APIEndpoint.V1.CiProducts.WithID {
 				encoder.encode(limitAppClips, forKey: "limit[appClips]")
 				encoder.encode(limitInAppPurchases, forKey: "limit[inAppPurchases]")
 				encoder.encode(limitSubscriptionGroups, forKey: "limit[subscriptionGroups]")
+				encoder.encode(limitRetentionMessages, forKey: "limit[retentionMessages]")
 				encoder.encode(limitGameCenterEnabledVersions, forKey: "limit[gameCenterEnabledVersions]")
 				encoder.encode(limitAppCustomProductPages, forKey: "limit[appCustomProductPages]")
 				encoder.encode(limitInAppPurchasesV2, forKey: "limit[inAppPurchasesV2]")

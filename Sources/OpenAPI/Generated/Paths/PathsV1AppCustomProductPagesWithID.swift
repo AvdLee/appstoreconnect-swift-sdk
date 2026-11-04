@@ -66,6 +66,7 @@ extension APIEndpoint.V1.AppCustomProductPages {
 				case appAvailabilityV2
 				case inAppPurchases
 				case subscriptionGroups
+				case retentionMessages
 				case gameCenterEnabledVersions
 				case performanceOverviews
 				case perfPowerMetrics

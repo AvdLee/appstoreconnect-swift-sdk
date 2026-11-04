@@ -73,6 +73,7 @@ extension APIEndpoint.V1.BetaTesters {
 				case appAvailabilityV2
 				case inAppPurchases
 				case subscriptionGroups
+				case retentionMessages
 				case gameCenterEnabledVersions
 				case performanceOverviews
 				case perfPowerMetrics

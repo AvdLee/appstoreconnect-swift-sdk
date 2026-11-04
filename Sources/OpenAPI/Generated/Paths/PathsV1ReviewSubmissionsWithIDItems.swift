@@ -34,6 +34,7 @@ extension APIEndpoint.V1.ReviewSubmissions.WithID {
 			public var fieldsInAppPurchaseVersions: [FieldsInAppPurchaseVersions]?
 			public var fieldsSubscriptionVersions: [FieldsSubscriptionVersions]?
 			public var fieldsSubscriptionGroupVersions: [FieldsSubscriptionGroupVersions]?
+			public var fieldsRetentionMessageVersions: [FieldsRetentionMessageVersions]?
 			public var limit: Int?
 			public var include: [Include]?
 
@@ -55,6 +56,7 @@ extension APIEndpoint.V1.ReviewSubmissions.WithID {
 				case inAppPurchaseVersion
 				case subscriptionVersion
 				case subscriptionGroupVersion
+				case retentionMessageVersion
 			}
 
 			public enum FieldsAppStoreVersions: String, Codable, CaseIterable {
@@ -234,6 +236,13 @@ extension APIEndpoint.V1.ReviewSubmissions.WithID {
 				case localizations
 			}
 
+			public enum FieldsRetentionMessageVersions: String, Codable, CaseIterable {
+				case state
+				case retentionMessage
+				case localizations
+				case placement
+			}
+
 			public enum Include: String, Codable, CaseIterable {
 				case appStoreVersion
 				case appCustomProductPageVersion
@@ -251,9 +260,10 @@ extension APIEndpoint.V1.ReviewSubmissions.WithID {
 				case inAppPurchaseVersion
 				case subscriptionVersion
 				case subscriptionGroupVersion
+				case retentionMessageVersion
 			}
 
-			public init(fieldsReviewSubmissionItems: [FieldsReviewSubmissionItems]? = nil, fieldsAppStoreVersions: [FieldsAppStoreVersions]? = nil, fieldsAppCustomProductPageVersions: [FieldsAppCustomProductPageVersions]? = nil, fieldsAppStoreVersionExperiments: [FieldsAppStoreVersionExperiments]? = nil, fieldsAppEvents: [FieldsAppEvents]? = nil, fieldsAppAssetLibraryImages: [FieldsAppAssetLibraryImages]? = nil, fieldsAppAssetLibraryVideos: [FieldsAppAssetLibraryVideos]? = nil, fieldsBackgroundAssetVersions: [FieldsBackgroundAssetVersions]? = nil, fieldsGameCenterAchievementVersions: [FieldsGameCenterAchievementVersions]? = nil, fieldsGameCenterActivityVersions: [FieldsGameCenterActivityVersions]? = nil, fieldsGameCenterChallengeVersions: [FieldsGameCenterChallengeVersions]? = nil, fieldsGameCenterLeaderboardSetVersions: [FieldsGameCenterLeaderboardSetVersions]? = nil, fieldsGameCenterLeaderboardVersions: [FieldsGameCenterLeaderboardVersions]? = nil, fieldsInAppPurchaseVersions: [FieldsInAppPurchaseVersions]? = nil, fieldsSubscriptionVersions: [FieldsSubscriptionVersions]? = nil, fieldsSubscriptionGroupVersions: [FieldsSubscriptionGroupVersions]? = nil, limit: Int? = nil, include: [Include]? = nil) {
+			public init(fieldsReviewSubmissionItems: [FieldsReviewSubmissionItems]? = nil, fieldsAppStoreVersions: [FieldsAppStoreVersions]? = nil, fieldsAppCustomProductPageVersions: [FieldsAppCustomProductPageVersions]? = nil, fieldsAppStoreVersionExperiments: [FieldsAppStoreVersionExperiments]? = nil, fieldsAppEvents: [FieldsAppEvents]? = nil, fieldsAppAssetLibraryImages: [FieldsAppAssetLibraryImages]? = nil, fieldsAppAssetLibraryVideos: [FieldsAppAssetLibraryVideos]? = nil, fieldsBackgroundAssetVersions: [FieldsBackgroundAssetVersions]? = nil, fieldsGameCenterAchievementVersions: [FieldsGameCenterAchievementVersions]? = nil, fieldsGameCenterActivityVersions: [FieldsGameCenterActivityVersions]? = nil, fieldsGameCenterChallengeVersions: [FieldsGameCenterChallengeVersions]? = nil, fieldsGameCenterLeaderboardSetVersions: [FieldsGameCenterLeaderboardSetVersions]? = nil, fieldsGameCenterLeaderboardVersions: [FieldsGameCenterLeaderboardVersions]? = nil, fieldsInAppPurchaseVersions: [FieldsInAppPurchaseVersions]? = nil, fieldsSubscriptionVersions: [FieldsSubscriptionVersions]? = nil, fieldsSubscriptionGroupVersions: [FieldsSubscriptionGroupVersions]? = nil, fieldsRetentionMessageVersions: [FieldsRetentionMessageVersions]? = nil, limit: Int? = nil, include: [Include]? = nil) {
 				self.fieldsReviewSubmissionItems = fieldsReviewSubmissionItems
 				self.fieldsAppStoreVersions = fieldsAppStoreVersions
 				self.fieldsAppCustomProductPageVersions = fieldsAppCustomProductPageVersions
@@ -270,6 +280,7 @@ extension APIEndpoint.V1.ReviewSubmissions.WithID {
 				self.fieldsInAppPurchaseVersions = fieldsInAppPurchaseVersions
 				self.fieldsSubscriptionVersions = fieldsSubscriptionVersions
 				self.fieldsSubscriptionGroupVersions = fieldsSubscriptionGroupVersions
+				self.fieldsRetentionMessageVersions = fieldsRetentionMessageVersions
 				self.limit = limit
 				self.include = include
 			}
@@ -292,6 +303,7 @@ extension APIEndpoint.V1.ReviewSubmissions.WithID {
 				encoder.encode(fieldsInAppPurchaseVersions, forKey: "fields[inAppPurchaseVersions]")
 				encoder.encode(fieldsSubscriptionVersions, forKey: "fields[subscriptionVersions]")
 				encoder.encode(fieldsSubscriptionGroupVersions, forKey: "fields[subscriptionGroupVersions]")
+				encoder.encode(fieldsRetentionMessageVersions, forKey: "fields[retentionMessageVersions]")
 				encoder.encode(limit, forKey: "limit")
 				encoder.encode(include, forKey: "include")
 				return encoder.items

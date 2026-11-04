@@ -34,6 +34,7 @@ extension APIEndpoint.V1.Apps {
 			public var fieldsEndUserLicenseAgreements: [FieldsEndUserLicenseAgreements]?
 			public var fieldsInAppPurchases: [FieldsInAppPurchases]?
 			public var fieldsSubscriptionGroups: [FieldsSubscriptionGroups]?
+			public var fieldsRetentionMessages: [FieldsRetentionMessages]?
 			public var fieldsGameCenterEnabledVersions: [FieldsGameCenterEnabledVersions]?
 			public var fieldsAppCustomProductPages: [FieldsAppCustomProductPages]?
 			public var fieldsPromotedPurchases: [FieldsPromotedPurchases]?
@@ -60,6 +61,7 @@ extension APIEndpoint.V1.Apps {
 			public var limitInAppPurchasesV2: Int?
 			public var limitPreReleaseVersions: Int?
 			public var limitPromotedPurchases: Int?
+			public var limitRetentionMessages: Int?
 			public var limitReviewSubmissions: Int?
 			public var limitSubscriptionGroups: Int?
 
@@ -97,6 +99,7 @@ extension APIEndpoint.V1.Apps {
 				case appAvailabilityV2
 				case inAppPurchases
 				case subscriptionGroups
+				case retentionMessages
 				case gameCenterEnabledVersions
 				case performanceOverviews
 				case perfPowerMetrics
@@ -335,6 +338,12 @@ extension APIEndpoint.V1.Apps {
 				case versions
 			}
 
+			public enum FieldsRetentionMessages: String, Codable, CaseIterable {
+				case referenceName
+				case versions
+				case subscriptions
+			}
+
 			public enum FieldsGameCenterEnabledVersions: String, Codable, CaseIterable {
 				case platform
 				case versionString
@@ -453,6 +462,7 @@ extension APIEndpoint.V1.Apps {
 				case endUserLicenseAgreement
 				case inAppPurchases
 				case subscriptionGroups
+				case retentionMessages
 				case gameCenterEnabledVersions
 				case appCustomProductPages
 				case inAppPurchasesV2
@@ -465,7 +475,7 @@ extension APIEndpoint.V1.Apps {
 				case androidToIosAppMappingDetails
 			}
 
-			public init(fieldsApps: [FieldsApps]? = nil, fieldsAppEncryptionDeclarations: [FieldsAppEncryptionDeclarations]? = nil, fieldsBuildIcons: [FieldsBuildIcons]? = nil, fieldsCiProducts: [FieldsCiProducts]? = nil, fieldsBetaGroups: [FieldsBetaGroups]? = nil, fieldsAppStoreVersions: [FieldsAppStoreVersions]? = nil, fieldsPreReleaseVersions: [FieldsPreReleaseVersions]? = nil, fieldsBetaAppLocalizations: [FieldsBetaAppLocalizations]? = nil, fieldsBuilds: [FieldsBuilds]? = nil, fieldsBetaLicenseAgreements: [FieldsBetaLicenseAgreements]? = nil, fieldsBetaAppReviewDetails: [FieldsBetaAppReviewDetails]? = nil, fieldsAppInfos: [FieldsAppInfos]? = nil, fieldsAppClips: [FieldsAppClips]? = nil, fieldsEndUserLicenseAgreements: [FieldsEndUserLicenseAgreements]? = nil, fieldsInAppPurchases: [FieldsInAppPurchases]? = nil, fieldsSubscriptionGroups: [FieldsSubscriptionGroups]? = nil, fieldsGameCenterEnabledVersions: [FieldsGameCenterEnabledVersions]? = nil, fieldsAppCustomProductPages: [FieldsAppCustomProductPages]? = nil, fieldsPromotedPurchases: [FieldsPromotedPurchases]? = nil, fieldsAppEvents: [FieldsAppEvents]? = nil, fieldsReviewSubmissions: [FieldsReviewSubmissions]? = nil, fieldsSubscriptionGracePeriods: [FieldsSubscriptionGracePeriods]? = nil, fieldsGameCenterDetails: [FieldsGameCenterDetails]? = nil, fieldsAppStoreVersionExperiments: [FieldsAppStoreVersionExperiments]? = nil, fieldsAndroidToIosAppMappingDetails: [FieldsAndroidToIosAppMappingDetails]? = nil, include: [Include]? = nil, limitAndroidToIosAppMappingDetails: Int? = nil, limitAppClips: Int? = nil, limitAppCustomProductPages: Int? = nil, limitAppEncryptionDeclarations: Int? = nil, limitAppEvents: Int? = nil, limitAppInfos: Int? = nil, limitAppStoreVersionExperimentsV2: Int? = nil, limitAppStoreVersions: Int? = nil, limitBetaAppLocalizations: Int? = nil, limitBetaGroups: Int? = nil, limitBuilds: Int? = nil, limitGameCenterEnabledVersions: Int? = nil, limitInAppPurchases: Int? = nil, limitInAppPurchasesV2: Int? = nil, limitPreReleaseVersions: Int? = nil, limitPromotedPurchases: Int? = nil, limitReviewSubmissions: Int? = nil, limitSubscriptionGroups: Int? = nil) {
+			public init(fieldsApps: [FieldsApps]? = nil, fieldsAppEncryptionDeclarations: [FieldsAppEncryptionDeclarations]? = nil, fieldsBuildIcons: [FieldsBuildIcons]? = nil, fieldsCiProducts: [FieldsCiProducts]? = nil, fieldsBetaGroups: [FieldsBetaGroups]? = nil, fieldsAppStoreVersions: [FieldsAppStoreVersions]? = nil, fieldsPreReleaseVersions: [FieldsPreReleaseVersions]? = nil, fieldsBetaAppLocalizations: [FieldsBetaAppLocalizations]? = nil, fieldsBuilds: [FieldsBuilds]? = nil, fieldsBetaLicenseAgreements: [FieldsBetaLicenseAgreements]? = nil, fieldsBetaAppReviewDetails: [FieldsBetaAppReviewDetails]? = nil, fieldsAppInfos: [FieldsAppInfos]? = nil, fieldsAppClips: [FieldsAppClips]? = nil, fieldsEndUserLicenseAgreements: [FieldsEndUserLicenseAgreements]? = nil, fieldsInAppPurchases: [FieldsInAppPurchases]? = nil, fieldsSubscriptionGroups: [FieldsSubscriptionGroups]? = nil, fieldsRetentionMessages: [FieldsRetentionMessages]? = nil, fieldsGameCenterEnabledVersions: [FieldsGameCenterEnabledVersions]? = nil, fieldsAppCustomProductPages: [FieldsAppCustomProductPages]? = nil, fieldsPromotedPurchases: [FieldsPromotedPurchases]? = nil, fieldsAppEvents: [FieldsAppEvents]? = nil, fieldsReviewSubmissions: [FieldsReviewSubmissions]? = nil, fieldsSubscriptionGracePeriods: [FieldsSubscriptionGracePeriods]? = nil, fieldsGameCenterDetails: [FieldsGameCenterDetails]? = nil, fieldsAppStoreVersionExperiments: [FieldsAppStoreVersionExperiments]? = nil, fieldsAndroidToIosAppMappingDetails: [FieldsAndroidToIosAppMappingDetails]? = nil, include: [Include]? = nil, limitAndroidToIosAppMappingDetails: Int? = nil, limitAppClips: Int? = nil, limitAppCustomProductPages: Int? = nil, limitAppEncryptionDeclarations: Int? = nil, limitAppEvents: Int? = nil, limitAppInfos: Int? = nil, limitAppStoreVersionExperimentsV2: Int? = nil, limitAppStoreVersions: Int? = nil, limitBetaAppLocalizations: Int? = nil, limitBetaGroups: Int? = nil, limitBuilds: Int? = nil, limitGameCenterEnabledVersions: Int? = nil, limitInAppPurchases: Int? = nil, limitInAppPurchasesV2: Int? = nil, limitPreReleaseVersions: Int? = nil, limitPromotedPurchases: Int? = nil, limitRetentionMessages: Int? = nil, limitReviewSubmissions: Int? = nil, limitSubscriptionGroups: Int? = nil) {
 				self.fieldsApps = fieldsApps
 				self.fieldsAppEncryptionDeclarations = fieldsAppEncryptionDeclarations
 				self.fieldsBuildIcons = fieldsBuildIcons
@@ -482,6 +492,7 @@ extension APIEndpoint.V1.Apps {
 				self.fieldsEndUserLicenseAgreements = fieldsEndUserLicenseAgreements
 				self.fieldsInAppPurchases = fieldsInAppPurchases
 				self.fieldsSubscriptionGroups = fieldsSubscriptionGroups
+				self.fieldsRetentionMessages = fieldsRetentionMessages
 				self.fieldsGameCenterEnabledVersions = fieldsGameCenterEnabledVersions
 				self.fieldsAppCustomProductPages = fieldsAppCustomProductPages
 				self.fieldsPromotedPurchases = fieldsPromotedPurchases
@@ -508,6 +519,7 @@ extension APIEndpoint.V1.Apps {
 				self.limitInAppPurchasesV2 = limitInAppPurchasesV2
 				self.limitPreReleaseVersions = limitPreReleaseVersions
 				self.limitPromotedPurchases = limitPromotedPurchases
+				self.limitRetentionMessages = limitRetentionMessages
 				self.limitReviewSubmissions = limitReviewSubmissions
 				self.limitSubscriptionGroups = limitSubscriptionGroups
 			}
@@ -530,6 +542,7 @@ extension APIEndpoint.V1.Apps {
 				encoder.encode(fieldsEndUserLicenseAgreements, forKey: "fields[endUserLicenseAgreements]")
 				encoder.encode(fieldsInAppPurchases, forKey: "fields[inAppPurchases]")
 				encoder.encode(fieldsSubscriptionGroups, forKey: "fields[subscriptionGroups]")
+				encoder.encode(fieldsRetentionMessages, forKey: "fields[retentionMessages]")
 				encoder.encode(fieldsGameCenterEnabledVersions, forKey: "fields[gameCenterEnabledVersions]")
 				encoder.encode(fieldsAppCustomProductPages, forKey: "fields[appCustomProductPages]")
 				encoder.encode(fieldsPromotedPurchases, forKey: "fields[promotedPurchases]")
@@ -556,6 +569,7 @@ extension APIEndpoint.V1.Apps {
 				encoder.encode(limitInAppPurchasesV2, forKey: "limit[inAppPurchasesV2]")
 				encoder.encode(limitPreReleaseVersions, forKey: "limit[preReleaseVersions]")
 				encoder.encode(limitPromotedPurchases, forKey: "limit[promotedPurchases]")
+				encoder.encode(limitRetentionMessages, forKey: "limit[retentionMessages]")
 				encoder.encode(limitReviewSubmissions, forKey: "limit[reviewSubmissions]")
 				encoder.encode(limitSubscriptionGroups, forKey: "limit[subscriptionGroups]")
 				return encoder.items

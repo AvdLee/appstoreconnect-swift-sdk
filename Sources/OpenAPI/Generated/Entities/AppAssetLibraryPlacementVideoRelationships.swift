@@ -8,6 +8,7 @@ public struct AppAssetLibraryPlacementVideoRelationships: Codable {
 	public var appStoreVersionLocalization: AppStoreVersionLocalization?
 	public var appCustomProductPageLocalization: AppCustomProductPageLocalization?
 	public var appStoreVersionExperimentTreatmentLocalization: AppStoreVersionExperimentTreatmentLocalization?
+	public var retentionMessageVersion: RetentionMessageVersion?
 	public var video: Video?
 
 	public struct AppEventLocalization: Codable {
@@ -186,6 +187,50 @@ public struct AppAssetLibraryPlacementVideoRelationships: Codable {
 		}
 	}
 
+	public struct RetentionMessageVersion: Codable {
+		public var data: Data?
+
+		public struct Data: Codable, Identifiable {
+			public var type: `Type`
+			public var id: String
+
+			public enum `Type`: String, Codable, CaseIterable {
+				case retentionMessageVersions
+			}
+
+			public init(type: `Type`, id: String) {
+				self.type = type
+				self.id = id
+			}
+
+			public init(from decoder: Decoder) throws {
+				let values = try decoder.container(keyedBy: StringCodingKey.self)
+				self.type = try values.decode(`Type`.self, forKey: "type")
+				self.id = try values.decode(String.self, forKey: "id")
+			}
+
+			public func encode(to encoder: Encoder) throws {
+				var values = encoder.container(keyedBy: StringCodingKey.self)
+				try values.encode(type, forKey: "type")
+				try values.encode(id, forKey: "id")
+			}
+		}
+
+		public init(data: Data? = nil) {
+			self.data = data
+		}
+
+		public init(from decoder: Decoder) throws {
+			let values = try decoder.container(keyedBy: StringCodingKey.self)
+			self.data = try values.decodeIfPresent(Data.self, forKey: "data")
+		}
+
+		public func encode(to encoder: Encoder) throws {
+			var values = encoder.container(keyedBy: StringCodingKey.self)
+			try values.encodeIfPresent(data, forKey: "data")
+		}
+	}
+
 	public struct Video: Codable {
 		public var data: Data?
 
@@ -230,11 +275,12 @@ public struct AppAssetLibraryPlacementVideoRelationships: Codable {
 		}
 	}
 
-	public init(appEventLocalization: AppEventLocalization? = nil, appStoreVersionLocalization: AppStoreVersionLocalization? = nil, appCustomProductPageLocalization: AppCustomProductPageLocalization? = nil, appStoreVersionExperimentTreatmentLocalization: AppStoreVersionExperimentTreatmentLocalization? = nil, video: Video? = nil) {
+	public init(appEventLocalization: AppEventLocalization? = nil, appStoreVersionLocalization: AppStoreVersionLocalization? = nil, appCustomProductPageLocalization: AppCustomProductPageLocalization? = nil, appStoreVersionExperimentTreatmentLocalization: AppStoreVersionExperimentTreatmentLocalization? = nil, retentionMessageVersion: RetentionMessageVersion? = nil, video: Video? = nil) {
 		self.appEventLocalization = appEventLocalization
 		self.appStoreVersionLocalization = appStoreVersionLocalization
 		self.appCustomProductPageLocalization = appCustomProductPageLocalization
 		self.appStoreVersionExperimentTreatmentLocalization = appStoreVersionExperimentTreatmentLocalization
+		self.retentionMessageVersion = retentionMessageVersion
 		self.video = video
 	}
 
@@ -244,6 +290,7 @@ public struct AppAssetLibraryPlacementVideoRelationships: Codable {
 		self.appStoreVersionLocalization = try values.decodeIfPresent(AppStoreVersionLocalization.self, forKey: "appStoreVersionLocalization")
 		self.appCustomProductPageLocalization = try values.decodeIfPresent(AppCustomProductPageLocalization.self, forKey: "appCustomProductPageLocalization")
 		self.appStoreVersionExperimentTreatmentLocalization = try values.decodeIfPresent(AppStoreVersionExperimentTreatmentLocalization.self, forKey: "appStoreVersionExperimentTreatmentLocalization")
+		self.retentionMessageVersion = try values.decodeIfPresent(RetentionMessageVersion.self, forKey: "retentionMessageVersion")
 		self.video = try values.decodeIfPresent(Video.self, forKey: "video")
 	}
 
@@ -253,6 +300,7 @@ public struct AppAssetLibraryPlacementVideoRelationships: Codable {
 		try values.encodeIfPresent(appStoreVersionLocalization, forKey: "appStoreVersionLocalization")
 		try values.encodeIfPresent(appCustomProductPageLocalization, forKey: "appCustomProductPageLocalization")
 		try values.encodeIfPresent(appStoreVersionExperimentTreatmentLocalization, forKey: "appStoreVersionExperimentTreatmentLocalization")
+		try values.encodeIfPresent(retentionMessageVersion, forKey: "retentionMessageVersion")
 		try values.encodeIfPresent(video, forKey: "video")
 	}
 }
