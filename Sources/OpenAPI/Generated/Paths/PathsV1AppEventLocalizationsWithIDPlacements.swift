@@ -35,6 +35,7 @@ extension APIEndpoint.V1.AppEventLocalizations.WithID {
 			public var fieldsAppStoreVersionLocalizations: [FieldsAppStoreVersionLocalizations]?
 			public var fieldsAppCustomProductPageLocalizations: [FieldsAppCustomProductPageLocalizations]?
 			public var fieldsAppStoreVersionExperimentTreatmentLocalizations: [FieldsAppStoreVersionExperimentTreatmentLocalizations]?
+			public var fieldsRetentionMessageVersions: [FieldsRetentionMessageVersions]?
 			public var limit: Int?
 			public var include: [Include]?
 
@@ -84,6 +85,7 @@ extension APIEndpoint.V1.AppEventLocalizations.WithID {
 				case appStoreVersionLocalization
 				case appCustomProductPageLocalization
 				case appStoreVersionExperimentTreatmentLocalization
+				case retentionMessageVersion
 			}
 
 			public enum FieldsAppAssetLibraryImages: String, Codable, CaseIterable {
@@ -162,6 +164,13 @@ extension APIEndpoint.V1.AppEventLocalizations.WithID {
 				case placements
 			}
 
+			public enum FieldsRetentionMessageVersions: String, Codable, CaseIterable {
+				case state
+				case retentionMessage
+				case localizations
+				case placement
+			}
+
 			public enum Include: String, Codable, CaseIterable {
 				case image
 				case video
@@ -169,9 +178,10 @@ extension APIEndpoint.V1.AppEventLocalizations.WithID {
 				case appStoreVersionLocalization
 				case appCustomProductPageLocalization
 				case appStoreVersionExperimentTreatmentLocalization
+				case retentionMessageVersion
 			}
 
-			public init(filterPlacementType: [FilterPlacementType]? = nil, filterPlacementGroup: [String]? = nil, filterState: [FilterState]? = nil, filterImage: [String]? = nil, filterVideo: [String]? = nil, filterAppStoreVersionLocalization: [String]? = nil, filterAppCustomProductPageLocalization: [String]? = nil, filterAppStoreVersionExperimentTreatmentLocalization: [String]? = nil, filterID: [String]? = nil, sort: [Sort]? = nil, fieldsAppAssetLibraryPlacements: [FieldsAppAssetLibraryPlacements]? = nil, fieldsAppAssetLibraryImages: [FieldsAppAssetLibraryImages]? = nil, fieldsAppAssetLibraryVideos: [FieldsAppAssetLibraryVideos]? = nil, fieldsAppEventLocalizations: [FieldsAppEventLocalizations]? = nil, fieldsAppStoreVersionLocalizations: [FieldsAppStoreVersionLocalizations]? = nil, fieldsAppCustomProductPageLocalizations: [FieldsAppCustomProductPageLocalizations]? = nil, fieldsAppStoreVersionExperimentTreatmentLocalizations: [FieldsAppStoreVersionExperimentTreatmentLocalizations]? = nil, limit: Int? = nil, include: [Include]? = nil) {
+			public init(filterPlacementType: [FilterPlacementType]? = nil, filterPlacementGroup: [String]? = nil, filterState: [FilterState]? = nil, filterImage: [String]? = nil, filterVideo: [String]? = nil, filterAppStoreVersionLocalization: [String]? = nil, filterAppCustomProductPageLocalization: [String]? = nil, filterAppStoreVersionExperimentTreatmentLocalization: [String]? = nil, filterID: [String]? = nil, sort: [Sort]? = nil, fieldsAppAssetLibraryPlacements: [FieldsAppAssetLibraryPlacements]? = nil, fieldsAppAssetLibraryImages: [FieldsAppAssetLibraryImages]? = nil, fieldsAppAssetLibraryVideos: [FieldsAppAssetLibraryVideos]? = nil, fieldsAppEventLocalizations: [FieldsAppEventLocalizations]? = nil, fieldsAppStoreVersionLocalizations: [FieldsAppStoreVersionLocalizations]? = nil, fieldsAppCustomProductPageLocalizations: [FieldsAppCustomProductPageLocalizations]? = nil, fieldsAppStoreVersionExperimentTreatmentLocalizations: [FieldsAppStoreVersionExperimentTreatmentLocalizations]? = nil, fieldsRetentionMessageVersions: [FieldsRetentionMessageVersions]? = nil, limit: Int? = nil, include: [Include]? = nil) {
 				self.filterPlacementType = filterPlacementType
 				self.filterPlacementGroup = filterPlacementGroup
 				self.filterState = filterState
@@ -189,6 +199,7 @@ extension APIEndpoint.V1.AppEventLocalizations.WithID {
 				self.fieldsAppStoreVersionLocalizations = fieldsAppStoreVersionLocalizations
 				self.fieldsAppCustomProductPageLocalizations = fieldsAppCustomProductPageLocalizations
 				self.fieldsAppStoreVersionExperimentTreatmentLocalizations = fieldsAppStoreVersionExperimentTreatmentLocalizations
+				self.fieldsRetentionMessageVersions = fieldsRetentionMessageVersions
 				self.limit = limit
 				self.include = include
 			}
@@ -212,6 +223,7 @@ extension APIEndpoint.V1.AppEventLocalizations.WithID {
 				encoder.encode(fieldsAppStoreVersionLocalizations, forKey: "fields[appStoreVersionLocalizations]")
 				encoder.encode(fieldsAppCustomProductPageLocalizations, forKey: "fields[appCustomProductPageLocalizations]")
 				encoder.encode(fieldsAppStoreVersionExperimentTreatmentLocalizations, forKey: "fields[appStoreVersionExperimentTreatmentLocalizations]")
+				encoder.encode(fieldsRetentionMessageVersions, forKey: "fields[retentionMessageVersions]")
 				encoder.encode(limit, forKey: "limit")
 				encoder.encode(include, forKey: "include")
 				return encoder.items

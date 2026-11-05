@@ -25,6 +25,7 @@ extension APIEndpoint.V1.AppAssetLibraryPlacements {
 			public var fieldsAppStoreVersionLocalizations: [FieldsAppStoreVersionLocalizations]?
 			public var fieldsAppCustomProductPageLocalizations: [FieldsAppCustomProductPageLocalizations]?
 			public var fieldsAppStoreVersionExperimentTreatmentLocalizations: [FieldsAppStoreVersionExperimentTreatmentLocalizations]?
+			public var fieldsRetentionMessageVersions: [FieldsRetentionMessageVersions]?
 			public var include: [Include]?
 
 			public enum FieldsAppAssetLibraryPlacements: String, Codable, CaseIterable {
@@ -41,6 +42,7 @@ extension APIEndpoint.V1.AppAssetLibraryPlacements {
 				case appStoreVersionLocalization
 				case appCustomProductPageLocalization
 				case appStoreVersionExperimentTreatmentLocalization
+				case retentionMessageVersion
 			}
 
 			public enum FieldsAppAssetLibraryImages: String, Codable, CaseIterable {
@@ -119,6 +121,13 @@ extension APIEndpoint.V1.AppAssetLibraryPlacements {
 				case placements
 			}
 
+			public enum FieldsRetentionMessageVersions: String, Codable, CaseIterable {
+				case state
+				case retentionMessage
+				case localizations
+				case placement
+			}
+
 			public enum Include: String, Codable, CaseIterable {
 				case image
 				case video
@@ -126,9 +135,10 @@ extension APIEndpoint.V1.AppAssetLibraryPlacements {
 				case appStoreVersionLocalization
 				case appCustomProductPageLocalization
 				case appStoreVersionExperimentTreatmentLocalization
+				case retentionMessageVersion
 			}
 
-			public init(fieldsAppAssetLibraryPlacements: [FieldsAppAssetLibraryPlacements]? = nil, fieldsAppAssetLibraryImages: [FieldsAppAssetLibraryImages]? = nil, fieldsAppAssetLibraryVideos: [FieldsAppAssetLibraryVideos]? = nil, fieldsAppEventLocalizations: [FieldsAppEventLocalizations]? = nil, fieldsAppStoreVersionLocalizations: [FieldsAppStoreVersionLocalizations]? = nil, fieldsAppCustomProductPageLocalizations: [FieldsAppCustomProductPageLocalizations]? = nil, fieldsAppStoreVersionExperimentTreatmentLocalizations: [FieldsAppStoreVersionExperimentTreatmentLocalizations]? = nil, include: [Include]? = nil) {
+			public init(fieldsAppAssetLibraryPlacements: [FieldsAppAssetLibraryPlacements]? = nil, fieldsAppAssetLibraryImages: [FieldsAppAssetLibraryImages]? = nil, fieldsAppAssetLibraryVideos: [FieldsAppAssetLibraryVideos]? = nil, fieldsAppEventLocalizations: [FieldsAppEventLocalizations]? = nil, fieldsAppStoreVersionLocalizations: [FieldsAppStoreVersionLocalizations]? = nil, fieldsAppCustomProductPageLocalizations: [FieldsAppCustomProductPageLocalizations]? = nil, fieldsAppStoreVersionExperimentTreatmentLocalizations: [FieldsAppStoreVersionExperimentTreatmentLocalizations]? = nil, fieldsRetentionMessageVersions: [FieldsRetentionMessageVersions]? = nil, include: [Include]? = nil) {
 				self.fieldsAppAssetLibraryPlacements = fieldsAppAssetLibraryPlacements
 				self.fieldsAppAssetLibraryImages = fieldsAppAssetLibraryImages
 				self.fieldsAppAssetLibraryVideos = fieldsAppAssetLibraryVideos
@@ -136,6 +146,7 @@ extension APIEndpoint.V1.AppAssetLibraryPlacements {
 				self.fieldsAppStoreVersionLocalizations = fieldsAppStoreVersionLocalizations
 				self.fieldsAppCustomProductPageLocalizations = fieldsAppCustomProductPageLocalizations
 				self.fieldsAppStoreVersionExperimentTreatmentLocalizations = fieldsAppStoreVersionExperimentTreatmentLocalizations
+				self.fieldsRetentionMessageVersions = fieldsRetentionMessageVersions
 				self.include = include
 			}
 
@@ -148,6 +159,7 @@ extension APIEndpoint.V1.AppAssetLibraryPlacements {
 				encoder.encode(fieldsAppStoreVersionLocalizations, forKey: "fields[appStoreVersionLocalizations]")
 				encoder.encode(fieldsAppCustomProductPageLocalizations, forKey: "fields[appCustomProductPageLocalizations]")
 				encoder.encode(fieldsAppStoreVersionExperimentTreatmentLocalizations, forKey: "fields[appStoreVersionExperimentTreatmentLocalizations]")
+				encoder.encode(fieldsRetentionMessageVersions, forKey: "fields[retentionMessageVersions]")
 				encoder.encode(include, forKey: "include")
 				return encoder.items
 			}

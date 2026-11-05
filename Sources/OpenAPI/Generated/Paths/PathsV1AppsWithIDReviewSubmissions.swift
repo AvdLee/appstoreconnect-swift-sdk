@@ -91,6 +91,7 @@ extension APIEndpoint.V1.Apps.WithID {
 				case appAvailabilityV2
 				case inAppPurchases
 				case subscriptionGroups
+				case retentionMessages
 				case gameCenterEnabledVersions
 				case performanceOverviews
 				case perfPowerMetrics
@@ -135,6 +136,7 @@ extension APIEndpoint.V1.Apps.WithID {
 				case inAppPurchaseVersion
 				case subscriptionVersion
 				case subscriptionGroupVersion
+				case retentionMessageVersion
 			}
 
 			public enum FieldsAppStoreVersions: String, Codable, CaseIterable {

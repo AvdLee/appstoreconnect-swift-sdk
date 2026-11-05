@@ -93,6 +93,7 @@ extension APIEndpoint.V1.AppEvents.WithID {
 				case appStoreVersionLocalization
 				case appCustomProductPageLocalization
 				case appStoreVersionExperimentTreatmentLocalization
+				case retentionMessageVersion
 			}
 
 			public enum Include: String, Codable, CaseIterable {

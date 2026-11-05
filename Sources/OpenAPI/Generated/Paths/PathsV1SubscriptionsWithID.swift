@@ -32,6 +32,8 @@ extension APIEndpoint.V1.Subscriptions {
 			public var fieldsSubscriptionImages: [FieldsSubscriptionImages]?
 			public var fieldsSubscriptionPlanAvailabilities: [FieldsSubscriptionPlanAvailabilities]?
 			public var fieldsSubscriptionVersions: [FieldsSubscriptionVersions]?
+			public var fieldsRetentionOffers: [FieldsRetentionOffers]?
+			public var fieldsRetentionMessages: [FieldsRetentionMessages]?
 			public var include: [Include]?
 			public var limitImages: Int?
 			public var limitIntroductoryOffers: Int?
@@ -39,6 +41,8 @@ extension APIEndpoint.V1.Subscriptions {
 			public var limitPlanAvailabilities: Int?
 			public var limitPrices: Int?
 			public var limitPromotionalOffers: Int?
+			public var limitRetentionMessageOffers: Int?
+			public var limitRetentionOffers: Int?
 			public var limitSubscriptionLocalizations: Int?
 			public var limitVersions: Int?
 			public var limitWinBackOffers: Int?
@@ -67,6 +71,9 @@ extension APIEndpoint.V1.Subscriptions {
 				case images
 				case planAvailabilities
 				case versions
+				case retentionOffers
+				case retentionMessage
+				case retentionMessageOffers
 			}
 
 			public enum FieldsSubscriptionLocalizations: String, Codable, CaseIterable {
@@ -202,6 +209,25 @@ extension APIEndpoint.V1.Subscriptions {
 				case localizations
 			}
 
+			public enum FieldsRetentionOffers: String, Codable, CaseIterable {
+				case referenceName
+				case offerID = "offerId"
+				case duration
+				case offerMode
+				case periodCount
+				case customerEligibilityPaidSubscriptionDurationInMonths
+				case customerEligibilityWaitBetweenOffersInMonths
+				case targetSubscriptionPlanType
+				case subscription
+				case prices
+			}
+
+			public enum FieldsRetentionMessages: String, Codable, CaseIterable {
+				case referenceName
+				case versions
+				case subscriptions
+			}
+
 			public enum Include: String, Codable, CaseIterable {
 				case subscriptionLocalizations
 				case appStoreReviewScreenshot
@@ -216,9 +242,12 @@ extension APIEndpoint.V1.Subscriptions {
 				case images
 				case planAvailabilities
 				case versions
+				case retentionOffers
+				case retentionMessage
+				case retentionMessageOffers
 			}
 
-			public init(fieldsSubscriptions: [FieldsSubscriptions]? = nil, fieldsSubscriptionLocalizations: [FieldsSubscriptionLocalizations]? = nil, fieldsSubscriptionAppStoreReviewScreenshots: [FieldsSubscriptionAppStoreReviewScreenshots]? = nil, fieldsSubscriptionGroups: [FieldsSubscriptionGroups]? = nil, fieldsSubscriptionIntroductoryOffers: [FieldsSubscriptionIntroductoryOffers]? = nil, fieldsSubscriptionPromotionalOffers: [FieldsSubscriptionPromotionalOffers]? = nil, fieldsSubscriptionOfferCodes: [FieldsSubscriptionOfferCodes]? = nil, fieldsSubscriptionPrices: [FieldsSubscriptionPrices]? = nil, fieldsPromotedPurchases: [FieldsPromotedPurchases]? = nil, fieldsSubscriptionAvailabilities: [FieldsSubscriptionAvailabilities]? = nil, fieldsWinBackOffers: [FieldsWinBackOffers]? = nil, fieldsSubscriptionImages: [FieldsSubscriptionImages]? = nil, fieldsSubscriptionPlanAvailabilities: [FieldsSubscriptionPlanAvailabilities]? = nil, fieldsSubscriptionVersions: [FieldsSubscriptionVersions]? = nil, include: [Include]? = nil, limitImages: Int? = nil, limitIntroductoryOffers: Int? = nil, limitOfferCodes: Int? = nil, limitPlanAvailabilities: Int? = nil, limitPrices: Int? = nil, limitPromotionalOffers: Int? = nil, limitSubscriptionLocalizations: Int? = nil, limitVersions: Int? = nil, limitWinBackOffers: Int? = nil) {
+			public init(fieldsSubscriptions: [FieldsSubscriptions]? = nil, fieldsSubscriptionLocalizations: [FieldsSubscriptionLocalizations]? = nil, fieldsSubscriptionAppStoreReviewScreenshots: [FieldsSubscriptionAppStoreReviewScreenshots]? = nil, fieldsSubscriptionGroups: [FieldsSubscriptionGroups]? = nil, fieldsSubscriptionIntroductoryOffers: [FieldsSubscriptionIntroductoryOffers]? = nil, fieldsSubscriptionPromotionalOffers: [FieldsSubscriptionPromotionalOffers]? = nil, fieldsSubscriptionOfferCodes: [FieldsSubscriptionOfferCodes]? = nil, fieldsSubscriptionPrices: [FieldsSubscriptionPrices]? = nil, fieldsPromotedPurchases: [FieldsPromotedPurchases]? = nil, fieldsSubscriptionAvailabilities: [FieldsSubscriptionAvailabilities]? = nil, fieldsWinBackOffers: [FieldsWinBackOffers]? = nil, fieldsSubscriptionImages: [FieldsSubscriptionImages]? = nil, fieldsSubscriptionPlanAvailabilities: [FieldsSubscriptionPlanAvailabilities]? = nil, fieldsSubscriptionVersions: [FieldsSubscriptionVersions]? = nil, fieldsRetentionOffers: [FieldsRetentionOffers]? = nil, fieldsRetentionMessages: [FieldsRetentionMessages]? = nil, include: [Include]? = nil, limitImages: Int? = nil, limitIntroductoryOffers: Int? = nil, limitOfferCodes: Int? = nil, limitPlanAvailabilities: Int? = nil, limitPrices: Int? = nil, limitPromotionalOffers: Int? = nil, limitRetentionMessageOffers: Int? = nil, limitRetentionOffers: Int? = nil, limitSubscriptionLocalizations: Int? = nil, limitVersions: Int? = nil, limitWinBackOffers: Int? = nil) {
 				self.fieldsSubscriptions = fieldsSubscriptions
 				self.fieldsSubscriptionLocalizations = fieldsSubscriptionLocalizations
 				self.fieldsSubscriptionAppStoreReviewScreenshots = fieldsSubscriptionAppStoreReviewScreenshots
@@ -233,6 +262,8 @@ extension APIEndpoint.V1.Subscriptions {
 				self.fieldsSubscriptionImages = fieldsSubscriptionImages
 				self.fieldsSubscriptionPlanAvailabilities = fieldsSubscriptionPlanAvailabilities
 				self.fieldsSubscriptionVersions = fieldsSubscriptionVersions
+				self.fieldsRetentionOffers = fieldsRetentionOffers
+				self.fieldsRetentionMessages = fieldsRetentionMessages
 				self.include = include
 				self.limitImages = limitImages
 				self.limitIntroductoryOffers = limitIntroductoryOffers
@@ -240,6 +271,8 @@ extension APIEndpoint.V1.Subscriptions {
 				self.limitPlanAvailabilities = limitPlanAvailabilities
 				self.limitPrices = limitPrices
 				self.limitPromotionalOffers = limitPromotionalOffers
+				self.limitRetentionMessageOffers = limitRetentionMessageOffers
+				self.limitRetentionOffers = limitRetentionOffers
 				self.limitSubscriptionLocalizations = limitSubscriptionLocalizations
 				self.limitVersions = limitVersions
 				self.limitWinBackOffers = limitWinBackOffers
@@ -261,6 +294,8 @@ extension APIEndpoint.V1.Subscriptions {
 				encoder.encode(fieldsSubscriptionImages, forKey: "fields[subscriptionImages]")
 				encoder.encode(fieldsSubscriptionPlanAvailabilities, forKey: "fields[subscriptionPlanAvailabilities]")
 				encoder.encode(fieldsSubscriptionVersions, forKey: "fields[subscriptionVersions]")
+				encoder.encode(fieldsRetentionOffers, forKey: "fields[retentionOffers]")
+				encoder.encode(fieldsRetentionMessages, forKey: "fields[retentionMessages]")
 				encoder.encode(include, forKey: "include")
 				encoder.encode(limitImages, forKey: "limit[images]")
 				encoder.encode(limitIntroductoryOffers, forKey: "limit[introductoryOffers]")
@@ -268,6 +303,8 @@ extension APIEndpoint.V1.Subscriptions {
 				encoder.encode(limitPlanAvailabilities, forKey: "limit[planAvailabilities]")
 				encoder.encode(limitPrices, forKey: "limit[prices]")
 				encoder.encode(limitPromotionalOffers, forKey: "limit[promotionalOffers]")
+				encoder.encode(limitRetentionMessageOffers, forKey: "limit[retentionMessageOffers]")
+				encoder.encode(limitRetentionOffers, forKey: "limit[retentionOffers]")
 				encoder.encode(limitSubscriptionLocalizations, forKey: "limit[subscriptionLocalizations]")
 				encoder.encode(limitVersions, forKey: "limit[versions]")
 				encoder.encode(limitWinBackOffers, forKey: "limit[winBackOffers]")

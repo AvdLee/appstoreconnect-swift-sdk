@@ -57,6 +57,7 @@ public struct ReviewSubmissionItem: Codable, Identifiable {
 		public var inAppPurchaseVersion: InAppPurchaseVersion?
 		public var subscriptionVersion: SubscriptionVersion?
 		public var subscriptionGroupVersion: SubscriptionGroupVersion?
+		public var retentionMessageVersion: RetentionMessageVersion?
 
 		public struct AppStoreVersion: Codable {
 			public var data: Data?
@@ -762,7 +763,51 @@ public struct ReviewSubmissionItem: Codable, Identifiable {
 			}
 		}
 
-		public init(appStoreVersion: AppStoreVersion? = nil, appCustomProductPageVersion: AppCustomProductPageVersion? = nil, appStoreVersionExperiment: AppStoreVersionExperiment? = nil, appStoreVersionExperimentV2: AppStoreVersionExperimentV2? = nil, appEvent: AppEvent? = nil, appAssetLibraryImage: AppAssetLibraryImage? = nil, appAssetLibraryVideo: AppAssetLibraryVideo? = nil, backgroundAssetVersion: BackgroundAssetVersion? = nil, gameCenterAchievementVersion: GameCenterAchievementVersion? = nil, gameCenterActivityVersion: GameCenterActivityVersion? = nil, gameCenterChallengeVersion: GameCenterChallengeVersion? = nil, gameCenterLeaderboardSetVersion: GameCenterLeaderboardSetVersion? = nil, gameCenterLeaderboardVersion: GameCenterLeaderboardVersion? = nil, inAppPurchaseVersion: InAppPurchaseVersion? = nil, subscriptionVersion: SubscriptionVersion? = nil, subscriptionGroupVersion: SubscriptionGroupVersion? = nil) {
+		public struct RetentionMessageVersion: Codable {
+			public var data: Data?
+
+			public struct Data: Codable, Identifiable {
+				public var type: `Type`
+				public var id: String
+
+				public enum `Type`: String, Codable, CaseIterable {
+					case retentionMessageVersions
+				}
+
+				public init(type: `Type`, id: String) {
+					self.type = type
+					self.id = id
+				}
+
+				public init(from decoder: Decoder) throws {
+					let values = try decoder.container(keyedBy: StringCodingKey.self)
+					self.type = try values.decode(`Type`.self, forKey: "type")
+					self.id = try values.decode(String.self, forKey: "id")
+				}
+
+				public func encode(to encoder: Encoder) throws {
+					var values = encoder.container(keyedBy: StringCodingKey.self)
+					try values.encode(type, forKey: "type")
+					try values.encode(id, forKey: "id")
+				}
+			}
+
+			public init(data: Data? = nil) {
+				self.data = data
+			}
+
+			public init(from decoder: Decoder) throws {
+				let values = try decoder.container(keyedBy: StringCodingKey.self)
+				self.data = try values.decodeIfPresent(Data.self, forKey: "data")
+			}
+
+			public func encode(to encoder: Encoder) throws {
+				var values = encoder.container(keyedBy: StringCodingKey.self)
+				try values.encodeIfPresent(data, forKey: "data")
+			}
+		}
+
+		public init(appStoreVersion: AppStoreVersion? = nil, appCustomProductPageVersion: AppCustomProductPageVersion? = nil, appStoreVersionExperiment: AppStoreVersionExperiment? = nil, appStoreVersionExperimentV2: AppStoreVersionExperimentV2? = nil, appEvent: AppEvent? = nil, appAssetLibraryImage: AppAssetLibraryImage? = nil, appAssetLibraryVideo: AppAssetLibraryVideo? = nil, backgroundAssetVersion: BackgroundAssetVersion? = nil, gameCenterAchievementVersion: GameCenterAchievementVersion? = nil, gameCenterActivityVersion: GameCenterActivityVersion? = nil, gameCenterChallengeVersion: GameCenterChallengeVersion? = nil, gameCenterLeaderboardSetVersion: GameCenterLeaderboardSetVersion? = nil, gameCenterLeaderboardVersion: GameCenterLeaderboardVersion? = nil, inAppPurchaseVersion: InAppPurchaseVersion? = nil, subscriptionVersion: SubscriptionVersion? = nil, subscriptionGroupVersion: SubscriptionGroupVersion? = nil, retentionMessageVersion: RetentionMessageVersion? = nil) {
 			self.appStoreVersion = appStoreVersion
 			self.appCustomProductPageVersion = appCustomProductPageVersion
 			self.appStoreVersionExperiment = appStoreVersionExperiment
@@ -779,6 +824,7 @@ public struct ReviewSubmissionItem: Codable, Identifiable {
 			self.inAppPurchaseVersion = inAppPurchaseVersion
 			self.subscriptionVersion = subscriptionVersion
 			self.subscriptionGroupVersion = subscriptionGroupVersion
+			self.retentionMessageVersion = retentionMessageVersion
 		}
 
 		public init(from decoder: Decoder) throws {
@@ -799,6 +845,7 @@ public struct ReviewSubmissionItem: Codable, Identifiable {
 			self.inAppPurchaseVersion = try values.decodeIfPresent(InAppPurchaseVersion.self, forKey: "inAppPurchaseVersion")
 			self.subscriptionVersion = try values.decodeIfPresent(SubscriptionVersion.self, forKey: "subscriptionVersion")
 			self.subscriptionGroupVersion = try values.decodeIfPresent(SubscriptionGroupVersion.self, forKey: "subscriptionGroupVersion")
+			self.retentionMessageVersion = try values.decodeIfPresent(RetentionMessageVersion.self, forKey: "retentionMessageVersion")
 		}
 
 		public func encode(to encoder: Encoder) throws {
@@ -819,6 +866,7 @@ public struct ReviewSubmissionItem: Codable, Identifiable {
 			try values.encodeIfPresent(inAppPurchaseVersion, forKey: "inAppPurchaseVersion")
 			try values.encodeIfPresent(subscriptionVersion, forKey: "subscriptionVersion")
 			try values.encodeIfPresent(subscriptionGroupVersion, forKey: "subscriptionGroupVersion")
+			try values.encodeIfPresent(retentionMessageVersion, forKey: "retentionMessageVersion")
 		}
 	}
 

@@ -80,6 +80,7 @@ extension APIEndpoint.V1.AppCustomProductPageVersions.WithID {
 				case appStoreVersionLocalization
 				case appCustomProductPageLocalization
 				case appStoreVersionExperimentTreatmentLocalization
+				case retentionMessageVersion
 			}
 
 			public enum Include: String, Codable, CaseIterable {

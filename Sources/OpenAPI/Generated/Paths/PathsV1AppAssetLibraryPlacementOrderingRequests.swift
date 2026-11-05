@@ -37,6 +37,7 @@ extension APIEndpoint.V1 {
 				case appStoreVersionLocalization
 				case appCustomProductPageLocalization
 				case appStoreVersionExperimentTreatmentLocalization
+				case retentionMessageVersion
 			}
 
 			public enum Include: String, Codable, CaseIterable {

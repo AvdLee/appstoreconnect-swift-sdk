@@ -58,6 +58,9 @@ extension APIEndpoint.V1.Subscriptions.WithID {
 				case images
 				case planAvailabilities
 				case versions
+				case retentionOffers
+				case retentionMessage
+				case retentionMessageOffers
 			}
 
 			public enum Include: String, Codable, CaseIterable {
