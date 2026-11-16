@@ -13,6 +13,7 @@ extension APIEndpoint.V1 {
 		/// Path: `/v1/subscriptionGroupSubmissions`
 		public let path: String
 
+		@available(*, deprecated, message: "Deprecated")
 		public func post(_ body: AppStoreConnect_Swift_SDK.SubscriptionGroupSubmissionCreateRequest) -> Request<AppStoreConnect_Swift_SDK.SubscriptionGroupSubmissionResponse> {
 			Request(path: path, method: "POST", body: body, id: "subscriptionGroupSubmissions_createInstance")
 		}
