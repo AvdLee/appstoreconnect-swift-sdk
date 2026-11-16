@@ -37,6 +37,26 @@ public enum GeneratedPatcher {
         var report = GeneratedPatchReport()
 
         try patchFile(
+            rootDir.appendingPathComponent("Entities/RoutingAppCoverageResponse.swift"),
+            dryRun: dryRun,
+            replacements: [
+                .init(
+                    description: "Require the nullable routing app coverage data key",
+                    from: #"decodeIfPresent(RoutingAppCoverage.self, forKey: "data")"#,
+                    to: #"decode(RoutingAppCoverage?.self, forKey: "data")"#,
+                    required: true
+                ),
+                .init(
+                    description: "Encode absent routing app coverage as explicit null",
+                    from: #"encodeIfPresent(data, forKey: "data")"#,
+                    to: #"encode(data, forKey: "data")"#,
+                    required: true
+                ),
+            ],
+            report: &report
+        )
+
+        try patchFile(
             rootDir.appendingPathComponent("Entities/AgeRatingDeclarationUpdateRequest.swift"),
             dryRun: dryRun,
             replacements: [

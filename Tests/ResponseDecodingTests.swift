@@ -3,6 +3,64 @@ import XCTest
 @testable import AppStoreConnect_Swift_SDK
 
 final class ResponseDecodingTests: XCTestCase {
+    // Captured from a version without a routing app coverage file. The related
+    // resource endpoint returns HTTP 200 with data:null rather than a 404.
+    func test_routingAppCoverageRelatedResource_decodesNullData() throws {
+        let request = APIEndpoint.v1.appStoreVersions.id("version-1").routingAppCoverage.get()
+        let response = try decodeResponse(
+            for: request,
+            json: #"{"data":null,"links":{"self":"https://example.com/v1/appStoreVersions/version-1/routingAppCoverage"}}"#
+        )
+
+        XCTAssertNil(response.data)
+        XCTAssertEqual(response.links.this, "https://example.com/v1/appStoreVersions/version-1/routingAppCoverage")
+    }
+
+    func test_routingAppCoverageRelatedResource_decodesPopulatedData() throws {
+        let request = APIEndpoint.v1.appStoreVersions.id("version-1").routingAppCoverage.get()
+        let response = try decodeResponse(
+            for: request,
+            json: #"{"data":{"type":"routingAppCoverages","id":"coverage-1","attributes":{"fileName":"coverage.geojson","fileSize":100}},"links":{"self":"https://example.com/coverage"}}"#
+        )
+
+        XCTAssertEqual(response.data?.id, "coverage-1")
+        XCTAssertEqual(response.data?.attributes?.fileName, "coverage.geojson")
+    }
+
+    func test_routingAppCoverageRelatedResource_encodesNullData() throws {
+        let response = RoutingAppCoverageResponse(data: nil, links: .init(this: "https://example.com/coverage"))
+        let encoded = try JSONEncoder().encode(response)
+        let object = try XCTUnwrap(JSONSerialization.jsonObject(with: encoded) as? [String: Any])
+
+        XCTAssertTrue(object["data"] is NSNull)
+        XCTAssertNil(try APIProvider.jsonDecoder.decode(RoutingAppCoverageResponse.self, from: encoded).data)
+    }
+
+    func test_routingAppCoverageRelatedResource_rejectsMissingOrMalformedData() throws {
+        let request = APIEndpoint.v1.appStoreVersions.id("version-1").routingAppCoverage.get()
+        let missing = #"{"links":{"self":"https://example.com/coverage"}}"#
+        let malformed = #"{"data":{},"links":{"self":"https://example.com/coverage"}}"#
+
+        XCTAssertThrowsError(try decodeResponse(for: request, json: missing)) { error in
+            guard case DecodingError.keyNotFound(let key, _) = error else {
+                return XCTFail("Expected a missing data key, got \(error)")
+            }
+            XCTAssertEqual(key.stringValue, "data")
+        }
+        XCTAssertThrowsError(try decodeResponse(for: request, json: malformed))
+    }
+
+    func test_routingAppCoverageResourceResponse_decodesNullData() throws {
+        let request: Request<RoutingAppCoverageResponse> = APIEndpoint.v1.routingAppCoverages.id("coverage-1").get()
+        let json = #"{"data":null,"links":{"self":"https://example.com/coverage"}}"#
+
+        XCTAssertNil(try decodeResponse(for: request, json: json).data)
+    }
+
+    private func decodeResponse<Response: Decodable>(for request: Request<Response>, json: String) throws -> Response {
+        try APIProvider.jsonDecoder.decode(Response.self, from: Data(json.utf8))
+    }
+
     // Apple shows object dimensions and calendar-date data points in both metric examples:
     // https://developer.apple.com/documentation/appstoreconnectapi/get-v1-apps-_id_-metrics-betatesterusages
     // https://developer.apple.com/documentation/appstoreconnectapi/get-v1-betatesters-_id_-metrics-betatesterusages

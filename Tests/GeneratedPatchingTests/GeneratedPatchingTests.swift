@@ -4,6 +4,34 @@ import XCTest
 @testable import OpenAPIGeneratorCore
 
 final class GeneratedPatchingTests: XCTestCase {
+    func testRequiredNullableRoutingCoverageDataSurvivesPostProcessing() throws {
+        let root = FileManager.default.temporaryDirectory.appendingPathComponent(UUID().uuidString)
+        defer { try? FileManager.default.removeItem(at: root) }
+        let entities = root.appendingPathComponent("Entities")
+        try FileManager.default.createDirectory(at: entities, withIntermediateDirectories: true)
+        let file = entities.appendingPathComponent("RoutingAppCoverageResponse.swift")
+        // CreateAPI's output for a required, nullable property in the patched spec.
+        let source = #"""
+        public var data: RoutingAppCoverage?
+        self.data = try values.decodeIfPresent(RoutingAppCoverage.self, forKey: "data")
+        try values.encodeIfPresent(data, forKey: "data")
+        """#
+        try source.write(to: file, atomically: true, encoding: .utf8)
+
+        let preview = try GeneratedPatcher.patchGeneratedSources(atRoot: root, dryRun: true)
+        XCTAssertEqual(preview.changedFiles.count, 1)
+        XCTAssertEqual(try String(contentsOf: file, encoding: .utf8), source)
+
+        let first = try GeneratedPatcher.patchGeneratedSources(atRoot: root)
+        XCTAssertEqual(first.changedFiles.count, 1)
+        let response = try String(contentsOf: file, encoding: .utf8)
+        XCTAssertTrue(response.contains(#"decode(RoutingAppCoverage?.self, forKey: "data")"#))
+        XCTAssertTrue(response.contains(#"encode(data, forKey: "data")"#))
+
+        let second = try GeneratedPatcher.patchGeneratedSources(atRoot: root)
+        XCTAssertTrue(second.changedFiles.isEmpty)
+    }
+
     func testCheckedInGeneratedSourcesHaveAllPatches() throws {
         let packageRoot = URL(fileURLWithPath: #filePath)
             .deletingLastPathComponent()

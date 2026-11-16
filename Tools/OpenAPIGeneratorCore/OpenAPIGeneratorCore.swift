@@ -87,6 +87,9 @@ public enum OpenAPIGeneratorCore {
         packageRoot: URL,
         generatedRoot: URL
     ) throws -> GeneratedPatchReport {
+        // Apply schema corrections even when regenerating an existing local spec
+        // without downloading it again first.
+        _ = try patchSpec(at: OpenAPIGeneratorPaths(packageRoot: packageRoot).specJSON)
         // Run the SwiftPM plugin (same as the Makefile).
         _ = try runProcess(
             executable: "/usr/bin/env",

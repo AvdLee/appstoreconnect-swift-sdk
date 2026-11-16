@@ -27,6 +27,7 @@ public enum SpecPatcher {
         case winBackOfferPriceInlineCreateFields = "winbackofferpriceinlinecreate-fields"
         case nominationRelationshipDataArrays = "nomination-relationship-data-arrays"
         case assetLibraryPlacementRequestUnions = "asset-library-placement-request-unions"
+        case nullableRoutingAppCoverageResponse = "nullable-routing-app-coverage-response"
     }
 
     public struct RuleResult {
@@ -120,6 +121,13 @@ public enum SpecPatcher {
             changes.append("Preserved common placement request fields during code generation")
         }
 
+        let routingCoverage = ensureNullableRoutingAppCoverageResponse(&rootObject)
+        rules.append(.init(id: .nullableRoutingAppCoverageResponse, didChange: routingCoverage.didChange, matchCount: routingCoverage.matchCount))
+        if routingCoverage.didChange {
+            didChange = true
+            changes.append("Made RoutingAppCoverageResponse.data nullable")
+        }
+
         root = .object(rootObject)
         return .init(didChange: didChange, changes: changes, rules: rules)
     }
@@ -130,6 +138,34 @@ public enum SpecPatcher {
 private struct PatchOutcome {
     var didChange: Bool
     var matchCount: Int
+}
+
+private func ensureNullableRoutingAppCoverageResponse(_ root: inout OrderedDictionary<String, JSONValue>) -> PatchOutcome {
+    guard var components = root["components"]?.objectValue,
+          var schemas = components["schemas"]?.objectValue,
+          var response = schemas["RoutingAppCoverageResponse"]?.objectValue,
+          var properties = response["properties"]?.objectValue,
+          let data = properties["data"]?.objectValue,
+          let resourceRef = data["$ref"]?.stringValue
+            ?? data["allOf"]?.arrayValue?.first?.objectValue?["$ref"]?.stringValue,
+          resourceRef == "#/components/schemas/RoutingAppCoverage" else {
+        return .init(didChange: false, matchCount: 0)
+    }
+    let nullableData: JSONValue = .object([
+        "type": .string("object"),
+        "nullable": .bool(true),
+        "allOf": .array([.object(["$ref": .string(resourceRef)])]),
+    ])
+    guard properties["data"] != nullableData else {
+        return .init(didChange: false, matchCount: 1)
+    }
+    properties["data"] = nullableData
+    response["properties"] = .object(properties)
+    // Preserve required: the key must be present even when its value is null.
+    schemas["RoutingAppCoverageResponse"] = .object(response)
+    components["schemas"] = .object(schemas)
+    root["components"] = .object(components)
+    return .init(didChange: true, matchCount: 1)
 }
 
 private func simplifyAssetLibraryPlacementRequestUnions(_ root: inout OrderedDictionary<String, JSONValue>) -> PatchOutcome {
