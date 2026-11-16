@@ -4,12 +4,11 @@
 import Foundation
 
 public struct AppStoreVersionRoutingAppCoverageResponse: Codable {
-	/// RoutingAppCoverage
 	public var data: RoutingAppCoverage?
 	public var included: [AppStoreVersion]?
 	public var links: DocumentLinks
 
-	public init(data: RoutingAppCoverage?, included: [AppStoreVersion]? = nil, links: DocumentLinks) {
+	public init(data: RoutingAppCoverage? = nil, included: [AppStoreVersion]? = nil, links: DocumentLinks) {
 		self.data = data
 		self.included = included
 		self.links = links

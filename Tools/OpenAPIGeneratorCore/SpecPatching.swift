@@ -27,6 +27,7 @@ public enum SpecPatcher {
         case winBackOfferPriceInlineCreateFields = "winbackofferpriceinlinecreate-fields"
         case nominationRelationshipDataArrays = "nomination-relationship-data-arrays"
         case assetLibraryPlacementRequestUnions = "asset-library-placement-request-unions"
+        case nullableRoutingAppCoverageRelatedResponse = "nullable-routing-app-coverage-related-response"
     }
 
     public struct RuleResult {
@@ -120,6 +121,13 @@ public enum SpecPatcher {
             changes.append("Preserved common placement request fields during code generation")
         }
 
+        let routingCoverage = ensureNullableRoutingAppCoverageRelatedResponse(&rootObject)
+        rules.append(.init(id: .nullableRoutingAppCoverageRelatedResponse, didChange: routingCoverage.didChange, matchCount: routingCoverage.matchCount))
+        if routingCoverage.didChange {
+            didChange = true
+            changes.append("Made the routing app coverage related-resource response nullable")
+        }
+
         root = .object(rootObject)
         return .init(didChange: didChange, changes: changes, rules: rules)
     }
@@ -130,6 +138,54 @@ public enum SpecPatcher {
 private struct PatchOutcome {
     var didChange: Bool
     var matchCount: Int
+}
+
+private func ensureNullableRoutingAppCoverageRelatedResponse(_ root: inout OrderedDictionary<String, JSONValue>) -> PatchOutcome {
+    let path = "/v1/appStoreVersions/{id}/routingAppCoverage"
+    let responseName = "AppStoreVersionRoutingAppCoverageResponse"
+    let originalRef = "#/components/schemas/RoutingAppCoverageResponse"
+    let relatedRef = "#/components/schemas/\(responseName)"
+    guard var components = root["components"]?.objectValue,
+          var schemas = components["schemas"]?.objectValue,
+          var response = schemas["RoutingAppCoverageResponse"]?.objectValue,
+          var properties = response["properties"]?.objectValue,
+          let resourceRef = properties["data"]?.objectValue?["$ref"]?.stringValue,
+          var paths = root["paths"]?.objectValue,
+          var endpoint = paths[path]?.objectValue,
+          var operation = endpoint["get"]?.objectValue,
+          var responses = operation["responses"]?.objectValue,
+          var success = responses["200"]?.objectValue,
+          var content = success["content"]?.objectValue,
+          var json = content["application/json"]?.objectValue,
+          let currentRef = json["schema"]?.objectValue?["$ref"]?.stringValue,
+          currentRef == originalRef || currentRef == relatedRef else {
+        return .init(didChange: false, matchCount: 0)
+    }
+
+    response["title"] = .string(responseName)
+    properties["data"] = .object([
+        "type": .string("object"),
+        "nullable": .bool(true),
+        "allOf": .array([.object(["$ref": .string(resourceRef)])]),
+    ])
+    response["properties"] = .object(properties)
+    // Keep data in required: an empty relationship is explicit null, not a
+    // missing field. Direct resource read/create/update schemas stay strict.
+    let changed = schemas[responseName] != .object(response) || currentRef != relatedRef
+    guard changed else { return .init(didChange: false, matchCount: 1) }
+    schemas[responseName] = .object(response)
+    components["schemas"] = .object(schemas)
+    root["components"] = .object(components)
+
+    json["schema"] = .object(["$ref": .string(relatedRef)])
+    content["application/json"] = .object(json)
+    success["content"] = .object(content)
+    responses["200"] = .object(success)
+    operation["responses"] = .object(responses)
+    endpoint["get"] = .object(operation)
+    paths[path] = .object(endpoint)
+    root["paths"] = .object(paths)
+    return .init(didChange: true, matchCount: 1)
 }
 
 private func simplifyAssetLibraryPlacementRequestUnions(_ root: inout OrderedDictionary<String, JSONValue>) -> PatchOutcome {

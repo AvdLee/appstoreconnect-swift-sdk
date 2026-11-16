@@ -36,16 +36,20 @@ public enum GeneratedPatcher {
     public static func patchGeneratedSources(atRoot rootDir: URL, dryRun: Bool = false) throws -> GeneratedPatchReport {
         var report = GeneratedPatchReport()
 
-        try patchRoutingAppCoverageRelatedResponse(atRoot: rootDir, dryRun: dryRun, report: &report)
-
         try patchFile(
-            rootDir.appendingPathComponent("Paths/PathsV1AppStoreVersionsWithIDRoutingAppCoverage.swift"),
+            rootDir.appendingPathComponent("Entities/AppStoreVersionRoutingAppCoverageResponse.swift"),
             dryRun: dryRun,
             replacements: [
                 .init(
-                    description: "Allow null data when a version has no routing app coverage",
-                    from: "Request<AppStoreConnect_Swift_SDK.RoutingAppCoverageResponse>",
-                    to: "Request<AppStoreConnect_Swift_SDK.AppStoreVersionRoutingAppCoverageResponse>",
+                    description: "Require the nullable routing app coverage data key",
+                    from: #"decodeIfPresent(RoutingAppCoverage.self, forKey: "data")"#,
+                    to: #"decode(RoutingAppCoverage?.self, forKey: "data")"#,
+                    required: true
+                ),
+                .init(
+                    description: "Encode absent routing app coverage as explicit null",
+                    from: #"encodeIfPresent(data, forKey: "data")"#,
+                    to: #"encode(data, forKey: "data")"#,
                     required: true
                 ),
             ],
@@ -257,38 +261,6 @@ public enum GeneratedPatcher {
 }
 
 // MARK: - Internals
-
-/// Apple reuses a required-resource schema for the optional related-resource
-/// endpoint. Derive its nullable response after generation, keeping the resource
-/// read/create/update response strict and requiring the data key in both cases.
-private func patchRoutingAppCoverageRelatedResponse(
-    atRoot rootDir: URL,
-    dryRun: Bool,
-    report: inout GeneratedPatchReport
-) throws {
-    let sourceURL = rootDir.appendingPathComponent("Entities/RoutingAppCoverageResponse.swift")
-    let destinationURL = rootDir.appendingPathComponent("Entities/AppStoreVersionRoutingAppCoverageResponse.swift")
-    guard FileManager.default.fileExists(atPath: sourceURL.path) else {
-        report.missingFiles.append(sourceURL.lastPathComponent)
-        return
-    }
-    let source = try String(contentsOf: sourceURL, encoding: .utf8)
-    let response = source
-        .replacingOccurrences(of: "RoutingAppCoverageResponse", with: "AppStoreVersionRoutingAppCoverageResponse")
-        .replacingOccurrences(of: "public var data: RoutingAppCoverage\n", with: "public var data: RoutingAppCoverage?\n")
-        .replacingOccurrences(of: "init(data: RoutingAppCoverage,", with: "init(data: RoutingAppCoverage?,")
-        .replacingOccurrences(of: "decode(RoutingAppCoverage.self,", with: "decode(RoutingAppCoverage?.self,")
-    let description = "Allow a null routing app coverage related resource while requiring its data key"
-    if (try? String(contentsOf: destinationURL, encoding: .utf8)) == response {
-        report.alreadyPresent.append("\(destinationURL.lastPathComponent): \(description)")
-        return
-    }
-    report.changedFiles.append(destinationURL.path)
-    report.changes.append("\(destinationURL.lastPathComponent): \(description)")
-    if !dryRun {
-        try response.write(to: destinationURL, atomically: true, encoding: .utf8)
-    }
-}
 
 private struct Replacement {
     var description: String
