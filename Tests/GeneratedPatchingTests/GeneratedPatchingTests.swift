@@ -4,6 +4,46 @@ import XCTest
 @testable import OpenAPIGeneratorCore
 
 final class GeneratedPatchingTests: XCTestCase {
+    func testRoutingAppCoverageRelatedResponseSurvivesRegeneration() throws {
+        let packageRoot = URL(fileURLWithPath: #filePath)
+            .deletingLastPathComponent()
+            .deletingLastPathComponent()
+            .deletingLastPathComponent()
+        let generatedRoot = packageRoot.appendingPathComponent("Sources/OpenAPI/Generated")
+        let root = FileManager.default.temporaryDirectory.appendingPathComponent(UUID().uuidString)
+        defer { try? FileManager.default.removeItem(at: root) }
+        let entities = root.appendingPathComponent("Entities")
+        let paths = root.appendingPathComponent("Paths")
+        try FileManager.default.createDirectory(at: entities, withIntermediateDirectories: true)
+        try FileManager.default.createDirectory(at: paths, withIntermediateDirectories: true)
+        let resourceResponse = generatedRoot.appendingPathComponent("Entities/RoutingAppCoverageResponse.swift")
+        try FileManager.default.copyItem(at: resourceResponse, to: entities.appendingPathComponent(resourceResponse.lastPathComponent))
+        let endpointName = "PathsV1AppStoreVersionsWithIDRoutingAppCoverage.swift"
+        let endpoint = paths.appendingPathComponent(endpointName)
+        let unpatchedEndpoint = try String(contentsOf: generatedRoot.appendingPathComponent("Paths/\(endpointName)"), encoding: .utf8)
+            .replacingOccurrences(of: "AppStoreVersionRoutingAppCoverageResponse", with: "RoutingAppCoverageResponse")
+        try unpatchedEndpoint.write(to: endpoint, atomically: true, encoding: .utf8)
+        let relatedResponse = entities.appendingPathComponent("AppStoreVersionRoutingAppCoverageResponse.swift")
+
+        let preview = try GeneratedPatcher.patchGeneratedSources(atRoot: root, dryRun: true)
+        XCTAssertEqual(preview.changedFiles.count, 2)
+        XCTAssertFalse(FileManager.default.fileExists(atPath: relatedResponse.path))
+        XCTAssertEqual(try String(contentsOf: endpoint, encoding: .utf8), unpatchedEndpoint)
+
+        let first = try GeneratedPatcher.patchGeneratedSources(atRoot: root)
+        XCTAssertEqual(first.changedFiles.count, 2)
+        let response = try String(contentsOf: relatedResponse, encoding: .utf8)
+        XCTAssertTrue(response.contains("public var data: RoutingAppCoverage?"))
+        XCTAssertTrue(response.contains(#"decode(RoutingAppCoverage?.self, forKey: "data")"#))
+        XCTAssertTrue(response.contains(#"encode(data, forKey: "data")"#))
+        XCTAssertTrue(try String(contentsOf: endpoint, encoding: .utf8).contains("Request<AppStoreConnect_Swift_SDK.AppStoreVersionRoutingAppCoverageResponse>"))
+        XCTAssertEqual(try String(contentsOf: entities.appendingPathComponent(resourceResponse.lastPathComponent), encoding: .utf8),
+                       try String(contentsOf: resourceResponse, encoding: .utf8))
+
+        let second = try GeneratedPatcher.patchGeneratedSources(atRoot: root)
+        XCTAssertTrue(second.changedFiles.isEmpty)
+    }
+
     func testCheckedInGeneratedSourcesHaveAllPatches() throws {
         let packageRoot = URL(fileURLWithPath: #filePath)
             .deletingLastPathComponent()

@@ -13,7 +13,7 @@ extension APIEndpoint.V1.AppStoreVersions.WithID {
 		/// Path: `/v1/appStoreVersions/{id}/routingAppCoverage`
 		public let path: String
 
-		public func get(parameters: GetParameters? = nil) -> Request<AppStoreConnect_Swift_SDK.RoutingAppCoverageResponse> {
+		public func get(parameters: GetParameters? = nil) -> Request<AppStoreConnect_Swift_SDK.AppStoreVersionRoutingAppCoverageResponse> {
 			Request(path: path, method: "GET", query: parameters?.asQuery, id: "appStoreVersions_routingAppCoverage_getToOneRelated")
 		}
 
