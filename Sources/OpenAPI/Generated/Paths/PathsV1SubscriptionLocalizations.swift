@@ -13,6 +13,7 @@ extension APIEndpoint.V1 {
 		/// Path: `/v1/subscriptionLocalizations`
 		public let path: String
 
+		@available(*, deprecated, message: "Deprecated")
 		public func post(_ body: AppStoreConnect_Swift_SDK.SubscriptionLocalizationCreateRequest) -> Request<AppStoreConnect_Swift_SDK.SubscriptionLocalizationResponse> {
 			Request(path: path, method: "POST", body: body, id: "subscriptionLocalizations_createInstance")
 		}

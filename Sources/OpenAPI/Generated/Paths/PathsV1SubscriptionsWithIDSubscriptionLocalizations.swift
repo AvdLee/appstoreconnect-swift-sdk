@@ -13,6 +13,7 @@ extension APIEndpoint.V1.Subscriptions.WithID {
 		/// Path: `/v1/subscriptions/{id}/subscriptionLocalizations`
 		public let path: String
 
+		@available(*, deprecated, message: "Deprecated")
 		public func get(parameters: GetParameters? = nil) -> Request<AppStoreConnect_Swift_SDK.SubscriptionLocalizationsResponse> {
 			Request(path: path, method: "GET", query: parameters?.asQuery, id: "subscriptions_subscriptionLocalizations_getToManyRelated")
 		}

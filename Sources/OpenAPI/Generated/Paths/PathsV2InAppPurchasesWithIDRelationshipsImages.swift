@@ -13,6 +13,7 @@ extension APIEndpoint.V2.InAppPurchases.WithID.Relationships {
 		/// Path: `/v2/inAppPurchases/{id}/relationships/images`
 		public let path: String
 
+		@available(*, deprecated, message: "Deprecated")
 		public func get(limit: Int? = nil) -> Request<AppStoreConnect_Swift_SDK.InAppPurchaseV2ImagesLinkagesResponse> {
 			Request(path: path, method: "GET", query: makeGetQuery(limit), id: "inAppPurchasesV2_images_getToManyRelationship")
 		}

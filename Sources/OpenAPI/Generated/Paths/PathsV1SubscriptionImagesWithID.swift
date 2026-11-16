@@ -13,6 +13,7 @@ extension APIEndpoint.V1.SubscriptionImages {
 		/// Path: `/v1/subscriptionImages/{id}`
 		public let path: String
 
+		@available(*, deprecated, message: "Deprecated")
 		public func get(parameters: GetParameters? = nil) -> Request<AppStoreConnect_Swift_SDK.SubscriptionImageResponse> {
 			Request(path: path, method: "GET", query: parameters?.asQuery, id: "subscriptionImages_getInstance")
 		}
@@ -81,10 +82,12 @@ extension APIEndpoint.V1.SubscriptionImages {
 			}
 		}
 
+		@available(*, deprecated, message: "Deprecated")
 		public func patch(_ body: AppStoreConnect_Swift_SDK.SubscriptionImageUpdateRequest) -> Request<AppStoreConnect_Swift_SDK.SubscriptionImageResponse> {
 			Request(path: path, method: "PATCH", body: body, id: "subscriptionImages_updateInstance")
 		}
 
+		@available(*, deprecated, message: "Deprecated")
 		public var delete: Request<Void> {
 			Request(path: path, method: "DELETE", id: "subscriptionImages_deleteInstance")
 		}

@@ -13,6 +13,7 @@ extension APIEndpoint.V1 {
 		/// Path: `/v1/subscriptionImages`
 		public let path: String
 
+		@available(*, deprecated, message: "Deprecated")
 		public func post(_ body: AppStoreConnect_Swift_SDK.SubscriptionImageCreateRequest) -> Request<AppStoreConnect_Swift_SDK.SubscriptionImageResponse> {
 			Request(path: path, method: "POST", body: body, id: "subscriptionImages_createInstance")
 		}
