@@ -13,6 +13,7 @@ extension APIEndpoint.V1 {
 		/// Path: `/v1/inAppPurchaseLocalizations`
 		public let path: String
 
+		@available(*, deprecated, message: "Deprecated")
 		public func post(_ body: AppStoreConnect_Swift_SDK.InAppPurchaseLocalizationCreateRequest) -> Request<AppStoreConnect_Swift_SDK.InAppPurchaseLocalizationResponse> {
 			Request(path: path, method: "POST", body: body, id: "inAppPurchaseLocalizations_createInstance")
 		}

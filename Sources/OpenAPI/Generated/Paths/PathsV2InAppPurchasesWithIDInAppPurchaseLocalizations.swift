@@ -13,6 +13,7 @@ extension APIEndpoint.V2.InAppPurchases.WithID {
 		/// Path: `/v2/inAppPurchases/{id}/inAppPurchaseLocalizations`
 		public let path: String
 
+		@available(*, deprecated, message: "Deprecated")
 		public func get(parameters: GetParameters? = nil) -> Request<AppStoreConnect_Swift_SDK.InAppPurchaseLocalizationsResponse> {
 			Request(path: path, method: "GET", query: parameters?.asQuery, id: "inAppPurchasesV2_inAppPurchaseLocalizations_getToManyRelated")
 		}

@@ -13,6 +13,7 @@ extension APIEndpoint.V1 {
 		/// Path: `/v1/inAppPurchaseImages`
 		public let path: String
 
+		@available(*, deprecated, message: "Deprecated")
 		public func post(_ body: AppStoreConnect_Swift_SDK.InAppPurchaseImageCreateRequest) -> Request<AppStoreConnect_Swift_SDK.InAppPurchaseImageResponse> {
 			Request(path: path, method: "POST", body: body, id: "inAppPurchaseImages_createInstance")
 		}

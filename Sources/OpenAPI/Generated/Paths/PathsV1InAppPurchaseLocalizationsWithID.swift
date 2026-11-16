@@ -13,6 +13,7 @@ extension APIEndpoint.V1.InAppPurchaseLocalizations {
 		/// Path: `/v1/inAppPurchaseLocalizations/{id}`
 		public let path: String
 
+		@available(*, deprecated, message: "Deprecated")
 		public func get(parameters: GetParameters? = nil) -> Request<AppStoreConnect_Swift_SDK.InAppPurchaseLocalizationResponse> {
 			Request(path: path, method: "GET", query: parameters?.asQuery, id: "inAppPurchaseLocalizations_getInstance")
 		}
@@ -69,10 +70,12 @@ extension APIEndpoint.V1.InAppPurchaseLocalizations {
 			}
 		}
 
+		@available(*, deprecated, message: "Deprecated")
 		public func patch(_ body: AppStoreConnect_Swift_SDK.InAppPurchaseLocalizationUpdateRequest) -> Request<AppStoreConnect_Swift_SDK.InAppPurchaseLocalizationResponse> {
 			Request(path: path, method: "PATCH", body: body, id: "inAppPurchaseLocalizations_updateInstance")
 		}
 
+		@available(*, deprecated, message: "Deprecated")
 		public var delete: Request<Void> {
 			Request(path: path, method: "DELETE", id: "inAppPurchaseLocalizations_deleteInstance")
 		}
