@@ -37,7 +37,7 @@ public enum GeneratedPatcher {
         var report = GeneratedPatchReport()
 
         try patchFile(
-            rootDir.appendingPathComponent("Entities/AppStoreVersionRoutingAppCoverageResponse.swift"),
+            rootDir.appendingPathComponent("Entities/RoutingAppCoverageResponse.swift"),
             dryRun: dryRun,
             replacements: [
                 .init(

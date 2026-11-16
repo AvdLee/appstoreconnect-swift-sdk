@@ -4,52 +4,34 @@ import OrderedCollections
 @testable import OpenAPIGeneratorCore
 
 final class SpecPatchingTests: XCTestCase {
-    func testRoutingCoverageRelatedResponseIsRequiredAndNullableWithoutChangingResourceResponses() throws {
+    func testRoutingCoverageResponseDataIsRequiredAndNullable() throws {
         let input = #"""
-        {
-          "paths": {
-            "/v1/appStoreVersions/{id}/routingAppCoverage": {
-              "get": {"responses": {"200": {"content": {"application/json": {
-                "schema": {"$ref": "#/components/schemas/RoutingAppCoverageResponse"}
-              }}}}}
+        {"components":{"schemas":{
+          "RoutingAppCoverageResponse":{
+            "type":"object",
+            "properties":{
+              "data":{"$ref":"#/components/schemas/RoutingAppCoverage"},
+              "links":{"$ref":"#/components/schemas/DocumentLinks"}
             },
-            "/v1/routingAppCoverages/{id}": {
-              "get": {"responses": {"200": {"content": {"application/json": {
-                "schema": {"$ref": "#/components/schemas/RoutingAppCoverageResponse"}
-              }}}}}
-            }
+            "required":["data","links"]
           },
-          "components": {"schemas": {
-            "RoutingAppCoverageResponse": {
-              "title": "RoutingAppCoverageResponse", "type": "object",
-              "properties": {
-                "data": {"$ref": "#/components/schemas/RoutingAppCoverage"},
-                "links": {"$ref": "#/components/schemas/DocumentLinks"}
-              },
-              "required": ["data", "links"]
-            }
-          }}
-        }
+          "OtherResponse":{"properties":{"data":{"$ref":"#/components/schemas/OtherResource"}},"required":["data"]}
+        }}}
         """#
         var parser = JSONParser(bytes: Array(input.utf8))
         var root = try parser.parse()
-        let original = root.objectValue?["components"]?.objectValue?["schemas"]?.objectValue?["RoutingAppCoverageResponse"]
-        let directEndpoint = root.objectValue?["paths"]?.objectValue?["/v1/routingAppCoverages/{id}"]
+        let other = root.objectValue?["components"]?.objectValue?["schemas"]?.objectValue?["OtherResponse"]
 
         let first = try SpecPatcher.patch(&root)
         XCTAssertTrue(first.didChange)
         let schemas = root.objectValue?["components"]?.objectValue?["schemas"]?.objectValue
-        let related = schemas?["AppStoreVersionRoutingAppCoverageResponse"]?.objectValue
-        let data = related?["properties"]?.objectValue?["data"]?.objectValue
+        let response = schemas?["RoutingAppCoverageResponse"]?.objectValue
+        let data = response?["properties"]?.objectValue?["data"]?.objectValue
         XCTAssertEqual(data?["nullable"]?.boolValue, true)
         XCTAssertEqual(data?["allOf"]?.arrayValue?.first?.objectValue?["$ref"]?.stringValue, "#/components/schemas/RoutingAppCoverage")
-        XCTAssertEqual(related?["required"]?.arrayValue?.compactMap(\.stringValue), ["data", "links"])
-        XCTAssertEqual(schemas?["RoutingAppCoverageResponse"], original)
-        let paths = root.objectValue?["paths"]?.objectValue
-        XCTAssertEqual(paths?["/v1/routingAppCoverages/{id}"], directEndpoint)
-        let ref = paths?["/v1/appStoreVersions/{id}/routingAppCoverage"]?.objectValue?["get"]?.objectValue?["responses"]?
-            .objectValue?["200"]?.objectValue?["content"]?.objectValue?["application/json"]?.objectValue?["schema"]?.objectValue?["$ref"]?.stringValue
-        XCTAssertEqual(ref, "#/components/schemas/AppStoreVersionRoutingAppCoverageResponse")
+        XCTAssertEqual(response?["required"]?.arrayValue?.compactMap(\.stringValue), ["data", "links"])
+        XCTAssertEqual(schemas?["OtherResponse"], other)
+        XCTAssertEqual(schemas?.count, 2)
 
         let once = root
         let second = try SpecPatcher.patch(&root)

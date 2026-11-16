@@ -28,12 +28,12 @@ final class ResponseDecodingTests: XCTestCase {
     }
 
     func test_routingAppCoverageRelatedResource_encodesNullData() throws {
-        let response = AppStoreVersionRoutingAppCoverageResponse(data: nil, links: .init(this: "https://example.com/coverage"))
+        let response = RoutingAppCoverageResponse(data: nil, links: .init(this: "https://example.com/coverage"))
         let encoded = try JSONEncoder().encode(response)
         let object = try XCTUnwrap(JSONSerialization.jsonObject(with: encoded) as? [String: Any])
 
         XCTAssertTrue(object["data"] is NSNull)
-        XCTAssertNil(try APIProvider.jsonDecoder.decode(AppStoreVersionRoutingAppCoverageResponse.self, from: encoded).data)
+        XCTAssertNil(try APIProvider.jsonDecoder.decode(RoutingAppCoverageResponse.self, from: encoded).data)
     }
 
     func test_routingAppCoverageRelatedResource_rejectsMissingOrMalformedData() throws {
@@ -50,11 +50,11 @@ final class ResponseDecodingTests: XCTestCase {
         XCTAssertThrowsError(try decodeResponse(for: request, json: malformed))
     }
 
-    func test_routingAppCoverageResourceResponse_stillRequiresData() throws {
+    func test_routingAppCoverageResourceResponse_decodesNullData() throws {
         let request: Request<RoutingAppCoverageResponse> = APIEndpoint.v1.routingAppCoverages.id("coverage-1").get()
         let json = #"{"data":null,"links":{"self":"https://example.com/coverage"}}"#
 
-        XCTAssertThrowsError(try decodeResponse(for: request, json: json))
+        XCTAssertNil(try decodeResponse(for: request, json: json).data)
     }
 
     private func decodeResponse<Response: Decodable>(for request: Request<Response>, json: String) throws -> Response {

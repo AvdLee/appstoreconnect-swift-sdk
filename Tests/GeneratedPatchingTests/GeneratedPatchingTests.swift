@@ -9,7 +9,7 @@ final class GeneratedPatchingTests: XCTestCase {
         defer { try? FileManager.default.removeItem(at: root) }
         let entities = root.appendingPathComponent("Entities")
         try FileManager.default.createDirectory(at: entities, withIntermediateDirectories: true)
-        let file = entities.appendingPathComponent("AppStoreVersionRoutingAppCoverageResponse.swift")
+        let file = entities.appendingPathComponent("RoutingAppCoverageResponse.swift")
         // CreateAPI's output for a required, nullable property in the patched spec.
         let source = #"""
         public var data: RoutingAppCoverage?

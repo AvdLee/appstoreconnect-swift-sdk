@@ -4,12 +4,11 @@
 import Foundation
 
 public struct RoutingAppCoverageResponse: Codable {
-	/// RoutingAppCoverage
-	public var data: RoutingAppCoverage
+	public var data: RoutingAppCoverage?
 	public var included: [AppStoreVersion]?
 	public var links: DocumentLinks
 
-	public init(data: RoutingAppCoverage, included: [AppStoreVersion]? = nil, links: DocumentLinks) {
+	public init(data: RoutingAppCoverage? = nil, included: [AppStoreVersion]? = nil, links: DocumentLinks) {
 		self.data = data
 		self.included = included
 		self.links = links
@@ -17,7 +16,7 @@ public struct RoutingAppCoverageResponse: Codable {
 
 	public init(from decoder: Decoder) throws {
 		let values = try decoder.container(keyedBy: StringCodingKey.self)
-		self.data = try values.decode(RoutingAppCoverage.self, forKey: "data")
+		self.data = try values.decode(RoutingAppCoverage?.self, forKey: "data")
 		self.included = try values.decodeIfPresent([AppStoreVersion].self, forKey: "included")
 		self.links = try values.decode(DocumentLinks.self, forKey: "links")
 	}
