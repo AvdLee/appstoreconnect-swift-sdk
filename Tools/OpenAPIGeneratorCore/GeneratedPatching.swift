@@ -37,7 +37,7 @@ public enum GeneratedPatcher {
         var report = GeneratedPatchReport()
 
         try patchFile(
-            rootDir.appendingPathComponent("Entities/RoutingAppCoverageResponse.swift"),
+            locateGeneratedFile(in: rootDir, "Entities/RoutingAppCoverageResponse.swift"),
             dryRun: dryRun,
             replacements: [
                 .init(
@@ -57,7 +57,7 @@ public enum GeneratedPatcher {
         )
 
         try patchFile(
-            rootDir.appendingPathComponent("Entities/AgeRatingDeclarationUpdateRequest.swift"),
+            locateGeneratedFile(in: rootDir, "Entities/AgeRatingDeclarationUpdateRequest.swift"),
             dryRun: dryRun,
             replacements: [
                 .init(
@@ -77,7 +77,7 @@ public enum GeneratedPatcher {
         )
 
         try patchFile(
-            rootDir.appendingPathComponent("Entities/NominationUpdateRequest.swift"),
+            locateGeneratedFile(in: rootDir, "Entities/NominationUpdateRequest.swift"),
             dryRun: dryRun,
             replacements: [
                 .init(
@@ -91,7 +91,7 @@ public enum GeneratedPatcher {
         )
 
         try patchFile(
-            rootDir.appendingPathComponent("Entities/AppStoreVersionUpdateRequest.swift"),
+            locateGeneratedFile(in: rootDir, "Entities/AppStoreVersionUpdateRequest.swift"),
             dryRun: dryRun,
             replacements: [
                 .init(
@@ -105,7 +105,7 @@ public enum GeneratedPatcher {
         )
 
         try patchFile(
-            rootDir.appendingPathComponent("Entities/CiGitUser.swift"),
+            locateGeneratedFile(in: rootDir, "Entities/CiGitUser.swift"),
             dryRun: dryRun,
             replacements: [
                 .init(
@@ -131,7 +131,7 @@ public enum GeneratedPatcher {
         )
 
         try patchFile(
-            rootDir.appendingPathComponent("Entities/CiBuildRun.swift"),
+            locateGeneratedFile(in: rootDir, "Entities/CiBuildRun.swift"),
             dryRun: dryRun,
             replacements: [
                 .init(
@@ -157,7 +157,7 @@ public enum GeneratedPatcher {
         )
 
         try patchFile(
-            rootDir.appendingPathComponent("Entities/AppsBetaTesterUsagesV1MetricResponse.swift"),
+            locateGeneratedFile(in: rootDir, "Entities/AppsBetaTesterUsagesV1MetricResponse.swift"),
             dryRun: dryRun,
             replacements: [
                 .init(description: "Decode grouped beta tester dimension as an ID or resource",
@@ -175,7 +175,7 @@ public enum GeneratedPatcher {
         )
 
         try patchFile(
-            rootDir.appendingPathComponent("Entities/BetaTesterUsagesV1MetricResponse.swift"),
+            locateGeneratedFile(in: rootDir, "Entities/BetaTesterUsagesV1MetricResponse.swift"),
             dryRun: dryRun,
             replacements: [
                 .init(description: "Decode app metric dimension as an ID or resource",
@@ -193,7 +193,7 @@ public enum GeneratedPatcher {
         )
 
         try patchFile(
-            rootDir.appendingPathComponent("Entities/AppAssetLibraryPlacementState.swift"),
+            locateGeneratedFile(in: rootDir, "Entities/AppAssetLibraryPlacementState.swift"),
             dryRun: dryRun,
             replacements: [
                 .init(description: "Recognize active asset library placements",
@@ -209,7 +209,7 @@ public enum GeneratedPatcher {
         )
 
         try patchFile(
-            rootDir.appendingPathComponent("Entities/AppAssetLibraryPlacement.swift"),
+            locateGeneratedFile(in: rootDir, "Entities/AppAssetLibraryPlacement.swift"),
             dryRun: dryRun,
             replacements: [
                 .init(
@@ -260,6 +260,24 @@ public enum GeneratedPatcher {
 
         return report
     }
+}
+
+// MARK: - Locating files
+
+/// Generated files live at `Entities/X.swift` right after CreateAPI runs, and at `<Module>/Entities/X.swift` once the
+/// sources are split into modules. Patches name the first form; this finds either.
+private func locateGeneratedFile(in rootDir: URL, _ relativePath: String) -> URL {
+    let flat = rootDir.appendingPathComponent(relativePath)
+    let fileManager = FileManager.default
+    guard !fileManager.fileExists(atPath: flat.path) else { return flat }
+    let modules = ((try? fileManager.contentsOfDirectory(atPath: rootDir.path)) ?? []).sorted()
+    for module in modules {
+        let candidate = rootDir.appendingPathComponent(module).appendingPathComponent(relativePath)
+        if fileManager.fileExists(atPath: candidate.path) {
+            return candidate
+        }
+    }
+    return flat
 }
 
 // MARK: - Sendable

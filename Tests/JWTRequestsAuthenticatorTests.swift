@@ -8,7 +8,13 @@
 
 import XCTest
 import Crypto
+#if canImport(AppStoreConnectCore)
+// Swift 6.4+: split modules. Internal API lives in Core; the umbrella re-exports the generated areas.
+@testable import AppStoreConnectCore
+import AppStoreConnect_Swift_SDK
+#else
 @testable import AppStoreConnect_Swift_SDK
+#endif
 import Foundation
 #if canImport(FoundationNetworking)
 import FoundationNetworking
