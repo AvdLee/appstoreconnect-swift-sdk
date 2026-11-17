@@ -9,7 +9,7 @@ extension APIEndpoint.V1.AppAssetLibraries.WithID {
 		Videos(path: path + "/videos")
 	}
 
-	public struct Videos {
+	public struct Videos: Sendable {
 		/// Path: `/v1/appAssetLibraries/{id}/videos`
 		public let path: String
 
@@ -17,7 +17,7 @@ extension APIEndpoint.V1.AppAssetLibraries.WithID {
 			Request(path: path, method: "GET", query: parameters?.asQuery, id: "appAssetLibraries_videos_getToManyRelated")
 		}
 
-		public struct GetParameters {
+		public struct GetParameters: Sendable {
 			public var filterCategory: [FilterCategory]?
 			public var filterState: [FilterState]?
 			public var filterReferenceName: [String]?
@@ -30,12 +30,12 @@ extension APIEndpoint.V1.AppAssetLibraries.WithID {
 			public var include: [Include]?
 			public var limitPlacements: Int?
 
-			public enum FilterCategory: String, Codable, CaseIterable {
+			public enum FilterCategory: String, Codable, CaseIterable, Sendable {
 				case creativeAssets = "CREATIVE_ASSETS"
 				case appScreenshotsAndPreviews = "APP_SCREENSHOTS_AND_PREVIEWS"
 			}
 
-			public enum FilterState: String, Codable, CaseIterable {
+			public enum FilterState: String, Codable, CaseIterable, Sendable {
 				case awaitingUpload = "AWAITING_UPLOAD"
 				case uploadComplete = "UPLOAD_COMPLETE"
 				case failed = "FAILED"
@@ -50,7 +50,7 @@ extension APIEndpoint.V1.AppAssetLibraries.WithID {
 				case archived = "ARCHIVED"
 			}
 
-			public enum Sort: String, Codable, CaseIterable {
+			public enum Sort: String, Codable, CaseIterable, Sendable {
 				case createdDate
 				case minuscreatedDate = "-createdDate"
 				case lastModifiedDate
@@ -59,7 +59,7 @@ extension APIEndpoint.V1.AppAssetLibraries.WithID {
 				case minusreferenceName = "-referenceName"
 			}
 
-			public enum FieldsAppAssetLibraryVideos: String, Codable, CaseIterable {
+			public enum FieldsAppAssetLibraryVideos: String, Codable, CaseIterable, Sendable {
 				case category
 				case createdDate
 				case lastModifiedDate
@@ -76,7 +76,7 @@ extension APIEndpoint.V1.AppAssetLibraries.WithID {
 				case placements
 			}
 
-			public enum FieldsAppAssetLibraryPlacements: String, Codable, CaseIterable {
+			public enum FieldsAppAssetLibraryPlacements: String, Codable, CaseIterable, Sendable {
 				case mediaType
 				case placementType
 				case placementGroup
@@ -93,7 +93,7 @@ extension APIEndpoint.V1.AppAssetLibraries.WithID {
 				case retentionMessageVersion
 			}
 
-			public enum Include: String, Codable, CaseIterable {
+			public enum Include: String, Codable, CaseIterable, Sendable {
 				case placements
 			}
 

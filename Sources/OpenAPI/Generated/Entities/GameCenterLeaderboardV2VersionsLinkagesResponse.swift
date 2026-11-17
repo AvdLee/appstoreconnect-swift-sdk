@@ -3,16 +3,16 @@
 
 import Foundation
 
-public struct GameCenterLeaderboardV2VersionsLinkagesResponse: Codable {
+public struct GameCenterLeaderboardV2VersionsLinkagesResponse: Codable, Sendable {
 	public var data: [Datum]
 	public var links: PagedDocumentLinks
 	public var meta: PagingInformation?
 
-	public struct Datum: Codable, Identifiable {
+	public struct Datum: Codable, Identifiable, Sendable {
 		public var type: `Type`
 		public var id: String
 
-		public enum `Type`: String, Codable, CaseIterable {
+		public enum `Type`: String, Codable, CaseIterable, Sendable {
 			case gameCenterLeaderboardVersions
 		}
 

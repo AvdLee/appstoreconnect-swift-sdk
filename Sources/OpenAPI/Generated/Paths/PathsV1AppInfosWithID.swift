@@ -9,7 +9,7 @@ extension APIEndpoint.V1.AppInfos {
 		WithID(path: "\(path)/\(id)")
 	}
 
-	public struct WithID {
+	public struct WithID: Sendable {
 		/// Path: `/v1/appInfos/{id}`
 		public let path: String
 
@@ -17,7 +17,7 @@ extension APIEndpoint.V1.AppInfos {
 			Request(path: path, method: "GET", query: parameters?.asQuery, id: "appInfos_getInstance")
 		}
 
-		public struct GetParameters {
+		public struct GetParameters: Sendable {
 			public var fieldsAppInfos: [FieldsAppInfos]?
 			public var fieldsApps: [FieldsApps]?
 			public var fieldsAgeRatingDeclarations: [FieldsAgeRatingDeclarations]?
@@ -26,7 +26,7 @@ extension APIEndpoint.V1.AppInfos {
 			public var include: [Include]?
 			public var limitAppInfoLocalizations: Int?
 
-			public enum FieldsAppInfos: String, Codable, CaseIterable {
+			public enum FieldsAppInfos: String, Codable, CaseIterable, Sendable {
 				case appStoreState
 				case state
 				case appStoreAgeRating
@@ -47,7 +47,7 @@ extension APIEndpoint.V1.AppInfos {
 				case territoryAgeRatings
 			}
 
-			public enum FieldsApps: String, Codable, CaseIterable {
+			public enum FieldsApps: String, Codable, CaseIterable, Sendable {
 				case accessibilityURL = "accessibilityUrl"
 				case name
 				case bundleID = "bundleId"
@@ -108,7 +108,7 @@ extension APIEndpoint.V1.AppInfos {
 				case androidToIosAppMappingDetails
 			}
 
-			public enum FieldsAgeRatingDeclarations: String, Codable, CaseIterable {
+			public enum FieldsAgeRatingDeclarations: String, Codable, CaseIterable, Sendable {
 				case advertising
 				case alcoholTobaccoOrDrugUseOrReferences
 				case contests
@@ -141,7 +141,7 @@ extension APIEndpoint.V1.AppInfos {
 				case developerAgeRatingInfoURL = "developerAgeRatingInfoUrl"
 			}
 
-			public enum FieldsAppInfoLocalizations: String, Codable, CaseIterable {
+			public enum FieldsAppInfoLocalizations: String, Codable, CaseIterable, Sendable {
 				case locale
 				case name
 				case subtitle
@@ -151,13 +151,13 @@ extension APIEndpoint.V1.AppInfos {
 				case appInfo
 			}
 
-			public enum FieldsAppCategories: String, Codable, CaseIterable {
+			public enum FieldsAppCategories: String, Codable, CaseIterable, Sendable {
 				case platforms
 				case subcategories
 				case parent
 			}
 
-			public enum Include: String, Codable, CaseIterable {
+			public enum Include: String, Codable, CaseIterable, Sendable {
 				case app
 				case ageRatingDeclaration
 				case appInfoLocalizations

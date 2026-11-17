@@ -9,7 +9,7 @@ extension APIEndpoint.V1.BundleIDs.WithID {
 		App(path: path + "/app")
 	}
 
-	public struct App {
+	public struct App: Sendable {
 		/// Path: `/v1/bundleIds/{id}/app`
 		public let path: String
 
@@ -23,7 +23,7 @@ extension APIEndpoint.V1.BundleIDs.WithID {
 			return encoder.items
 		}
 
-		public enum FieldsApps: String, Codable, CaseIterable {
+		public enum FieldsApps: String, Codable, CaseIterable, Sendable {
 			case accessibilityURL = "accessibilityUrl"
 			case name
 			case bundleID = "bundleId"

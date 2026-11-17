@@ -3,19 +3,19 @@
 
 import Foundation
 
-public struct NominationCreateRequest: Codable {
+public struct NominationCreateRequest: Codable, Sendable {
 	public var data: Data
 
-	public struct Data: Codable {
+	public struct Data: Codable, Sendable {
 		public var type: `Type`
 		public var attributes: Attributes
 		public var relationships: Relationships
 
-		public enum `Type`: String, Codable, CaseIterable {
+		public enum `Type`: String, Codable, CaseIterable, Sendable {
 			case nominations
 		}
 
-		public struct Attributes: Codable {
+		public struct Attributes: Codable, Sendable {
 			public var name: String
 			public var type: `Type`
 			public var description: String
@@ -30,7 +30,7 @@ public struct NominationCreateRequest: Codable {
 			public var notes: String?
 			public var isPreOrderEnabled: Bool?
 
-			public enum `Type`: String, Codable, CaseIterable {
+			public enum `Type`: String, Codable, CaseIterable, Sendable {
 				case appLaunch = "APP_LAUNCH"
 				case appEnhancements = "APP_ENHANCEMENTS"
 				case newContent = "NEW_CONTENT"
@@ -87,19 +87,19 @@ public struct NominationCreateRequest: Codable {
 			}
 		}
 
-		public struct Relationships: Codable {
+		public struct Relationships: Codable, Sendable {
 			public var relatedApps: RelatedApps
 			public var inAppEvents: InAppEvents?
 			public var supportedTerritories: SupportedTerritories?
 
-			public struct RelatedApps: Codable {
+			public struct RelatedApps: Codable, Sendable {
 				public var data: [Datum]
 
-				public struct Datum: Codable, Identifiable {
+				public struct Datum: Codable, Identifiable, Sendable {
 					public var type: `Type`
 					public var id: String
 
-					public enum `Type`: String, Codable, CaseIterable {
+					public enum `Type`: String, Codable, CaseIterable, Sendable {
 						case apps
 					}
 
@@ -136,14 +136,14 @@ public struct NominationCreateRequest: Codable {
 				}
 			}
 
-			public struct InAppEvents: Codable {
+			public struct InAppEvents: Codable, Sendable {
 				public var data: [Datum]
 
-				public struct Datum: Codable, Identifiable {
+				public struct Datum: Codable, Identifiable, Sendable {
 					public var type: `Type`
 					public var id: String
 
-					public enum `Type`: String, Codable, CaseIterable {
+					public enum `Type`: String, Codable, CaseIterable, Sendable {
 						case appEvents
 					}
 
@@ -180,14 +180,14 @@ public struct NominationCreateRequest: Codable {
 				}
 			}
 
-			public struct SupportedTerritories: Codable {
+			public struct SupportedTerritories: Codable, Sendable {
 				public var data: [Datum]
 
-				public struct Datum: Codable, Identifiable {
+				public struct Datum: Codable, Identifiable, Sendable {
 					public var type: `Type`
 					public var id: String
 
-					public enum `Type`: String, Codable, CaseIterable {
+					public enum `Type`: String, Codable, CaseIterable, Sendable {
 						case territories
 					}
 

@@ -3,7 +3,7 @@
 
 import Foundation
 
-public enum MetricCategory: String, Codable, CaseIterable {
+public enum MetricCategory: String, Codable, CaseIterable, Sendable {
 	case hang = "HANG"
 	case launch = "LAUNCH"
 	case memory = "MEMORY"

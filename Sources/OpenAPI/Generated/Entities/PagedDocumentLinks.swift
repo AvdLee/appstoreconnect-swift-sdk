@@ -3,7 +3,7 @@
 
 import Foundation
 
-public struct PagedDocumentLinks: Codable {
+public struct PagedDocumentLinks: Codable, Sendable {
 	public var this: String
 	public var first: String?
 	public var next: String?

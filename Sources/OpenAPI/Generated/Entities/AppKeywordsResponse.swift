@@ -3,7 +3,7 @@
 
 import Foundation
 
-public struct AppKeywordsResponse: Codable {
+public struct AppKeywordsResponse: Codable, Sendable {
 	public var data: [AppKeyword]
 	public var links: PagedDocumentLinks
 	public var meta: PagingInformation?

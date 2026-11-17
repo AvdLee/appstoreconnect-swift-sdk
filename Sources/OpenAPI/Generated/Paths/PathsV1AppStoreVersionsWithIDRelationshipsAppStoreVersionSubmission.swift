@@ -9,7 +9,7 @@ extension APIEndpoint.V1.AppStoreVersions.WithID.Relationships {
 		AppStoreVersionSubmission(path: path + "/appStoreVersionSubmission")
 	}
 
-	public struct AppStoreVersionSubmission {
+	public struct AppStoreVersionSubmission: Sendable {
 		/// Path: `/v1/appStoreVersions/{id}/relationships/appStoreVersionSubmission`
 		public let path: String
 

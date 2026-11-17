@@ -9,7 +9,7 @@ extension APIEndpoint.V1.AnalyticsReportRequests.WithID {
 		Reports(path: path + "/reports")
 	}
 
-	public struct Reports {
+	public struct Reports: Sendable {
 		/// Path: `/v1/analyticsReportRequests/{id}/reports`
 		public let path: String
 
@@ -17,13 +17,13 @@ extension APIEndpoint.V1.AnalyticsReportRequests.WithID {
 			Request(path: path, method: "GET", query: parameters?.asQuery, id: "analyticsReportRequests_reports_getToManyRelated")
 		}
 
-		public struct GetParameters {
+		public struct GetParameters: Sendable {
 			public var filterName: [String]?
 			public var filterCategory: [FilterCategory]?
 			public var fieldsAnalyticsReports: [FieldsAnalyticsReports]?
 			public var limit: Int?
 
-			public enum FilterCategory: String, Codable, CaseIterable {
+			public enum FilterCategory: String, Codable, CaseIterable, Sendable {
 				case appUsage = "APP_USAGE"
 				case appStoreEngagement = "APP_STORE_ENGAGEMENT"
 				case commerce = "COMMERCE"
@@ -31,7 +31,7 @@ extension APIEndpoint.V1.AnalyticsReportRequests.WithID {
 				case performance = "PERFORMANCE"
 			}
 
-			public enum FieldsAnalyticsReports: String, Codable, CaseIterable {
+			public enum FieldsAnalyticsReports: String, Codable, CaseIterable, Sendable {
 				case name
 				case category
 				case instances

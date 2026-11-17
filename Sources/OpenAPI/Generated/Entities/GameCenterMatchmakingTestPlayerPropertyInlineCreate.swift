@@ -3,16 +3,16 @@
 
 import Foundation
 
-public struct GameCenterMatchmakingTestPlayerPropertyInlineCreate: Codable, Identifiable {
+public struct GameCenterMatchmakingTestPlayerPropertyInlineCreate: Codable, Identifiable, Sendable {
 	public var type: `Type`
 	public var id: String?
 	public var attributes: Attributes?
 
-	public enum `Type`: String, Codable, CaseIterable {
+	public enum `Type`: String, Codable, CaseIterable, Sendable {
 		case gameCenterMatchmakingTestPlayerProperties
 	}
 
-	public struct Attributes: Codable {
+	public struct Attributes: Codable, Sendable {
 		public var playerID: String?
 		public var properties: [Property]?
 

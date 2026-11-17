@@ -3,7 +3,7 @@
 
 import Foundation
 
-public enum CapabilityType: String, Codable, CaseIterable {
+public enum CapabilityType: String, Codable, CaseIterable, Sendable {
 	case icloud = "ICLOUD"
 	case inAppPurchase = "IN_APP_PURCHASE"
 	case gameCenter = "GAME_CENTER"

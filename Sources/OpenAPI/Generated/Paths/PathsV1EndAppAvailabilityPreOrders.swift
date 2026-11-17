@@ -9,7 +9,7 @@ extension APIEndpoint.V1 {
 		EndAppAvailabilityPreOrders(path: path + "/endAppAvailabilityPreOrders")
 	}
 
-	public struct EndAppAvailabilityPreOrders {
+	public struct EndAppAvailabilityPreOrders: Sendable {
 		/// Path: `/v1/endAppAvailabilityPreOrders`
 		public let path: String
 

@@ -4,19 +4,19 @@
 import Foundation
 
 @available(*, deprecated, message: "Deprecated")
-public struct SubscriptionAvailabilityCreateRequest: Codable {
+public struct SubscriptionAvailabilityCreateRequest: Codable, Sendable {
 	public var data: Data
 
-	public struct Data: Codable {
+	public struct Data: Codable, Sendable {
 		public var type: `Type`
 		public var attributes: Attributes
 		public var relationships: Relationships
 
-		public enum `Type`: String, Codable, CaseIterable {
+		public enum `Type`: String, Codable, CaseIterable, Sendable {
 			case subscriptionAvailabilities
 		}
 
-		public struct Attributes: Codable {
+		public struct Attributes: Codable, Sendable {
 			public var isAvailableInNewTerritories: Bool
 
 			public init(isAvailableInNewTerritories: Bool) {
@@ -34,18 +34,18 @@ public struct SubscriptionAvailabilityCreateRequest: Codable {
 			}
 		}
 
-		public struct Relationships: Codable {
+		public struct Relationships: Codable, Sendable {
 			public var subscription: Subscription
 			public var availableTerritories: AvailableTerritories
 
-			public struct Subscription: Codable {
+			public struct Subscription: Codable, Sendable {
 				public var data: Data
 
-				public struct Data: Codable, Identifiable {
+				public struct Data: Codable, Identifiable, Sendable {
 					public var type: `Type`
 					public var id: String
 
-					public enum `Type`: String, Codable, CaseIterable {
+					public enum `Type`: String, Codable, CaseIterable, Sendable {
 						case subscriptions
 					}
 
@@ -82,14 +82,14 @@ public struct SubscriptionAvailabilityCreateRequest: Codable {
 				}
 			}
 
-			public struct AvailableTerritories: Codable {
+			public struct AvailableTerritories: Codable, Sendable {
 				public var data: [Datum]
 
-				public struct Datum: Codable, Identifiable {
+				public struct Datum: Codable, Identifiable, Sendable {
 					public var type: `Type`
 					public var id: String
 
-					public enum `Type`: String, Codable, CaseIterable {
+					public enum `Type`: String, Codable, CaseIterable, Sendable {
 						case territories
 					}
 

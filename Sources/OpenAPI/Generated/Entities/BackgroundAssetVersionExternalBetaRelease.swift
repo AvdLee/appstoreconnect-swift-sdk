@@ -3,18 +3,18 @@
 
 import Foundation
 
-public struct BackgroundAssetVersionExternalBetaRelease: Codable, Identifiable {
+public struct BackgroundAssetVersionExternalBetaRelease: Codable, Identifiable, Sendable {
 	public var type: `Type`
 	public var id: String
 	public var attributes: Attributes?
 	public var relationships: Relationships?
 	public var links: ResourceLinks?
 
-	public enum `Type`: String, Codable, CaseIterable {
+	public enum `Type`: String, Codable, CaseIterable, Sendable {
 		case backgroundAssetVersionExternalBetaReleases
 	}
 
-	public struct Attributes: Codable {
+	public struct Attributes: Codable, Sendable {
 		public var state: BackgroundAssetVersionExternalBetaReleaseState?
 
 		public init(state: BackgroundAssetVersionExternalBetaReleaseState? = nil) {
@@ -32,17 +32,17 @@ public struct BackgroundAssetVersionExternalBetaRelease: Codable, Identifiable {
 		}
 	}
 
-	public struct Relationships: Codable {
+	public struct Relationships: Codable, Sendable {
 		public var backgroundAssetVersion: BackgroundAssetVersion?
 
-		public struct BackgroundAssetVersion: Codable {
+		public struct BackgroundAssetVersion: Codable, Sendable {
 			public var data: Data?
 
-			public struct Data: Codable, Identifiable {
+			public struct Data: Codable, Identifiable, Sendable {
 				public var type: `Type`
 				public var id: String
 
-				public enum `Type`: String, Codable, CaseIterable {
+				public enum `Type`: String, Codable, CaseIterable, Sendable {
 					case backgroundAssetVersions
 				}
 

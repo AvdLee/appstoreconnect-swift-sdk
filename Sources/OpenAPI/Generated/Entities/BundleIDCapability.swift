@@ -3,17 +3,17 @@
 
 import Foundation
 
-public struct BundleIDCapability: Codable, Identifiable {
+public struct BundleIDCapability: Codable, Identifiable, Sendable {
 	public var type: `Type`
 	public var id: String
 	public var attributes: Attributes?
 	public var links: ResourceLinks?
 
-	public enum `Type`: String, Codable, CaseIterable {
+	public enum `Type`: String, Codable, CaseIterable, Sendable {
 		case bundleIDCapabilities = "bundleIdCapabilities"
 	}
 
-	public struct Attributes: Codable {
+	public struct Attributes: Codable, Sendable {
 		public var capabilityType: CapabilityType?
 		public var settings: [CapabilitySetting]?
 

@@ -9,7 +9,7 @@ extension APIEndpoint.V1.CiArtifacts {
 		WithID(path: "\(path)/\(id)")
 	}
 
-	public struct WithID {
+	public struct WithID: Sendable {
 		/// Path: `/v1/ciArtifacts/{id}`
 		public let path: String
 
@@ -23,7 +23,7 @@ extension APIEndpoint.V1.CiArtifacts {
 			return encoder.items
 		}
 
-		public enum FieldsCiArtifacts: String, Codable, CaseIterable {
+		public enum FieldsCiArtifacts: String, Codable, CaseIterable, Sendable {
 			case fileType
 			case fileName
 			case fileSize

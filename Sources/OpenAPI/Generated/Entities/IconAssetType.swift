@@ -3,7 +3,7 @@
 
 import Foundation
 
-public enum IconAssetType: String, Codable, CaseIterable {
+public enum IconAssetType: String, Codable, CaseIterable, Sendable {
 	case appStore = "APP_STORE"
 	case messagesAppStore = "MESSAGES_APP_STORE"
 	case watchAppStore = "WATCH_APP_STORE"

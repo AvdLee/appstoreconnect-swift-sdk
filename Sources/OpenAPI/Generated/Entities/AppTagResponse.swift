@@ -3,7 +3,7 @@
 
 import Foundation
 
-public struct AppTagResponse: Codable {
+public struct AppTagResponse: Codable, Sendable {
 	/// AppTag
 	public var data: AppTag
 	public var included: [Territory]?

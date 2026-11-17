@@ -9,7 +9,7 @@ extension APIEndpoint.V1.Apps.WithID {
 		AppStoreVersions(path: path + "/appStoreVersions")
 	}
 
-	public struct AppStoreVersions {
+	public struct AppStoreVersions: Sendable {
 		/// Path: `/v1/apps/{id}/appStoreVersions`
 		public let path: String
 
@@ -17,7 +17,7 @@ extension APIEndpoint.V1.Apps.WithID {
 			Request(path: path, method: "GET", query: parameters?.asQuery, id: "apps_appStoreVersions_getToManyRelated")
 		}
 
-		public struct GetParameters {
+		public struct GetParameters: Sendable {
 			public var filterPlatform: [FilterPlatform]?
 			public var filterVersionString: [String]?
 			public var filterAppStoreState: [FilterAppStoreState]?
@@ -41,14 +41,14 @@ extension APIEndpoint.V1.Apps.WithID {
 			public var limitAppStoreVersionExperiments: Int?
 			public var limitAppStoreVersionExperimentsV2: Int?
 
-			public enum FilterPlatform: String, Codable, CaseIterable {
+			public enum FilterPlatform: String, Codable, CaseIterable, Sendable {
 				case ios = "IOS"
 				case macOs = "MAC_OS"
 				case tvOs = "TV_OS"
 				case visionOs = "VISION_OS"
 			}
 
-			public enum FilterAppStoreState: String, Codable, CaseIterable {
+			public enum FilterAppStoreState: String, Codable, CaseIterable, Sendable {
 				case accepted = "ACCEPTED"
 				case developerRemovedFromSale = "DEVELOPER_REMOVED_FROM_SALE"
 				case developerRejected = "DEVELOPER_REJECTED"
@@ -71,7 +71,7 @@ extension APIEndpoint.V1.Apps.WithID {
 				case notApplicable = "NOT_APPLICABLE"
 			}
 
-			public enum FilterAppVersionState: String, Codable, CaseIterable {
+			public enum FilterAppVersionState: String, Codable, CaseIterable, Sendable {
 				case accepted = "ACCEPTED"
 				case developerRejected = "DEVELOPER_REJECTED"
 				case inReview = "IN_REVIEW"
@@ -89,7 +89,7 @@ extension APIEndpoint.V1.Apps.WithID {
 				case waitingForReview = "WAITING_FOR_REVIEW"
 			}
 
-			public enum FieldsAppStoreVersions: String, Codable, CaseIterable {
+			public enum FieldsAppStoreVersions: String, Codable, CaseIterable, Sendable {
 				case platform
 				case versionString
 				case appStoreState
@@ -116,7 +116,7 @@ extension APIEndpoint.V1.Apps.WithID {
 				case alternativeDistributionPackage
 			}
 
-			public enum FieldsApps: String, Codable, CaseIterable {
+			public enum FieldsApps: String, Codable, CaseIterable, Sendable {
 				case accessibilityURL = "accessibilityUrl"
 				case name
 				case bundleID = "bundleId"
@@ -177,7 +177,7 @@ extension APIEndpoint.V1.Apps.WithID {
 				case androidToIosAppMappingDetails
 			}
 
-			public enum FieldsAppStoreVersionLocalizations: String, Codable, CaseIterable {
+			public enum FieldsAppStoreVersionLocalizations: String, Codable, CaseIterable, Sendable {
 				case description
 				case locale
 				case keywords
@@ -192,7 +192,7 @@ extension APIEndpoint.V1.Apps.WithID {
 				case placements
 			}
 
-			public enum FieldsBuilds: String, Codable, CaseIterable {
+			public enum FieldsBuilds: String, Codable, CaseIterable, Sendable {
 				case version
 				case uploadedDate
 				case expirationDate
@@ -221,20 +221,20 @@ extension APIEndpoint.V1.Apps.WithID {
 				case diagnosticSignatures
 			}
 
-			public enum FieldsAppStoreVersionPhasedReleases: String, Codable, CaseIterable {
+			public enum FieldsAppStoreVersionPhasedReleases: String, Codable, CaseIterable, Sendable {
 				case phasedReleaseState
 				case startDate
 				case totalPauseDuration
 				case currentDayNumber
 			}
 
-			public enum FieldsGameCenterAppVersions: String, Codable, CaseIterable {
+			public enum FieldsGameCenterAppVersions: String, Codable, CaseIterable, Sendable {
 				case enabled
 				case compatibilityVersions
 				case appStoreVersion
 			}
 
-			public enum FieldsRoutingAppCoverages: String, Codable, CaseIterable {
+			public enum FieldsRoutingAppCoverages: String, Codable, CaseIterable, Sendable {
 				case fileSize
 				case fileName
 				case sourceFileChecksum
@@ -243,7 +243,7 @@ extension APIEndpoint.V1.Apps.WithID {
 				case appStoreVersion
 			}
 
-			public enum FieldsAppStoreReviewDetails: String, Codable, CaseIterable {
+			public enum FieldsAppStoreReviewDetails: String, Codable, CaseIterable, Sendable {
 				case contactFirstName
 				case contactLastName
 				case contactPhone
@@ -256,11 +256,11 @@ extension APIEndpoint.V1.Apps.WithID {
 				case appStoreReviewAttachments
 			}
 
-			public enum FieldsAppStoreVersionSubmissions: String, Codable, CaseIterable {
+			public enum FieldsAppStoreVersionSubmissions: String, Codable, CaseIterable, Sendable {
 				case appStoreVersion
 			}
 
-			public enum FieldsAppClipDefaultExperiences: String, Codable, CaseIterable {
+			public enum FieldsAppClipDefaultExperiences: String, Codable, CaseIterable, Sendable {
 				case action
 				case appClip
 				case releaseWithAppStoreVersion
@@ -268,7 +268,7 @@ extension APIEndpoint.V1.Apps.WithID {
 				case appClipAppStoreReviewDetail
 			}
 
-			public enum FieldsAppStoreVersionExperiments: String, Codable, CaseIterable {
+			public enum FieldsAppStoreVersionExperiments: String, Codable, CaseIterable, Sendable {
 				case name
 				case trafficProportion
 				case state
@@ -283,12 +283,12 @@ extension APIEndpoint.V1.Apps.WithID {
 				case controlVersions
 			}
 
-			public enum FieldsAlternativeDistributionPackages: String, Codable, CaseIterable {
+			public enum FieldsAlternativeDistributionPackages: String, Codable, CaseIterable, Sendable {
 				case sourceFileChecksum
 				case versions
 			}
 
-			public enum Include: String, Codable, CaseIterable {
+			public enum Include: String, Codable, CaseIterable, Sendable {
 				case app
 				case appStoreVersionLocalizations
 				case build

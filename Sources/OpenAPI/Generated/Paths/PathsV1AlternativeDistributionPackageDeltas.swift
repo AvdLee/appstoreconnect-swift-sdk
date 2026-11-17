@@ -9,7 +9,7 @@ extension APIEndpoint.V1 {
 		AlternativeDistributionPackageDeltas(path: path + "/alternativeDistributionPackageDeltas")
 	}
 
-	public struct AlternativeDistributionPackageDeltas {
+	public struct AlternativeDistributionPackageDeltas: Sendable {
 		/// Path: `/v1/alternativeDistributionPackageDeltas`
 		public let path: String
 	}

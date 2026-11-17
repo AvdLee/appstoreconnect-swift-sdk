@@ -9,7 +9,7 @@ extension APIEndpoint.V1.GameCenterEnabledVersions.WithID {
 		CompatibleVersions(path: path + "/compatibleVersions")
 	}
 
-	public struct CompatibleVersions {
+	public struct CompatibleVersions: Sendable {
 		/// Path: `/v1/gameCenterEnabledVersions/{id}/compatibleVersions`
 		public let path: String
 
@@ -18,7 +18,7 @@ extension APIEndpoint.V1.GameCenterEnabledVersions.WithID {
 			Request(path: path, method: "GET", query: parameters?.asQuery, id: "gameCenterEnabledVersions_compatibleVersions_getToManyRelated")
 		}
 
-		public struct GetParameters {
+		public struct GetParameters: Sendable {
 			public var filterPlatform: [FilterPlatform]?
 			public var filterVersionString: [String]?
 			public var filterApp: [String]?
@@ -30,19 +30,19 @@ extension APIEndpoint.V1.GameCenterEnabledVersions.WithID {
 			public var include: [Include]?
 			public var limitCompatibleVersions: Int?
 
-			public enum FilterPlatform: String, Codable, CaseIterable {
+			public enum FilterPlatform: String, Codable, CaseIterable, Sendable {
 				case ios = "IOS"
 				case macOs = "MAC_OS"
 				case tvOs = "TV_OS"
 				case visionOs = "VISION_OS"
 			}
 
-			public enum Sort: String, Codable, CaseIterable {
+			public enum Sort: String, Codable, CaseIterable, Sendable {
 				case versionString
 				case minusversionString = "-versionString"
 			}
 
-			public enum FieldsGameCenterEnabledVersions: String, Codable, CaseIterable {
+			public enum FieldsGameCenterEnabledVersions: String, Codable, CaseIterable, Sendable {
 				case platform
 				case versionString
 				case iconAsset
@@ -50,7 +50,7 @@ extension APIEndpoint.V1.GameCenterEnabledVersions.WithID {
 				case app
 			}
 
-			public enum FieldsApps: String, Codable, CaseIterable {
+			public enum FieldsApps: String, Codable, CaseIterable, Sendable {
 				case accessibilityURL = "accessibilityUrl"
 				case name
 				case bundleID = "bundleId"
@@ -111,7 +111,7 @@ extension APIEndpoint.V1.GameCenterEnabledVersions.WithID {
 				case androidToIosAppMappingDetails
 			}
 
-			public enum Include: String, Codable, CaseIterable {
+			public enum Include: String, Codable, CaseIterable, Sendable {
 				case compatibleVersions
 				case app
 			}

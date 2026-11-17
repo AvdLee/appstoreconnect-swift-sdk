@@ -3,20 +3,20 @@
 
 import Foundation
 
-public struct AppClipDefaultExperienceUpdateRequest: Codable {
+public struct AppClipDefaultExperienceUpdateRequest: Codable, Sendable {
 	public var data: Data
 
-	public struct Data: Codable, Identifiable {
+	public struct Data: Codable, Identifiable, Sendable {
 		public var type: `Type`
 		public var id: String
 		public var attributes: Attributes?
 		public var relationships: Relationships?
 
-		public enum `Type`: String, Codable, CaseIterable {
+		public enum `Type`: String, Codable, CaseIterable, Sendable {
 			case appClipDefaultExperiences
 		}
 
-		public struct Attributes: Codable {
+		public struct Attributes: Codable, Sendable {
 			public var action: AppClipAction?
 
 			public init(action: AppClipAction? = nil) {
@@ -34,17 +34,17 @@ public struct AppClipDefaultExperienceUpdateRequest: Codable {
 			}
 		}
 
-		public struct Relationships: Codable {
+		public struct Relationships: Codable, Sendable {
 			public var releaseWithAppStoreVersion: ReleaseWithAppStoreVersion?
 
-			public struct ReleaseWithAppStoreVersion: Codable {
+			public struct ReleaseWithAppStoreVersion: Codable, Sendable {
 				public var data: Data?
 
-				public struct Data: Codable, Identifiable {
+				public struct Data: Codable, Identifiable, Sendable {
 					public var type: `Type`
 					public var id: String
 
-					public enum `Type`: String, Codable, CaseIterable {
+					public enum `Type`: String, Codable, CaseIterable, Sendable {
 						case appStoreVersions
 					}
 

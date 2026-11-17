@@ -9,7 +9,7 @@ extension APIEndpoint.V1.AppEventVideoClips {
 		WithID(path: "\(path)/\(id)")
 	}
 
-	public struct WithID {
+	public struct WithID: Sendable {
 		/// Path: `/v1/appEventVideoClips/{id}`
 		public let path: String
 
@@ -17,12 +17,12 @@ extension APIEndpoint.V1.AppEventVideoClips {
 			Request(path: path, method: "GET", query: parameters?.asQuery, id: "appEventVideoClips_getInstance")
 		}
 
-		public struct GetParameters {
+		public struct GetParameters: Sendable {
 			public var fieldsAppEventVideoClips: [FieldsAppEventVideoClips]?
 			public var fieldsAppEventLocalizations: [FieldsAppEventLocalizations]?
 			public var include: [Include]?
 
-			public enum FieldsAppEventVideoClips: String, Codable, CaseIterable {
+			public enum FieldsAppEventVideoClips: String, Codable, CaseIterable, Sendable {
 				case fileSize
 				case fileName
 				case previewFrameTimeCode
@@ -36,7 +36,7 @@ extension APIEndpoint.V1.AppEventVideoClips {
 				case appEventLocalization
 			}
 
-			public enum FieldsAppEventLocalizations: String, Codable, CaseIterable {
+			public enum FieldsAppEventLocalizations: String, Codable, CaseIterable, Sendable {
 				case locale
 				case name
 				case shortDescription
@@ -47,7 +47,7 @@ extension APIEndpoint.V1.AppEventVideoClips {
 				case placements
 			}
 
-			public enum Include: String, Codable, CaseIterable {
+			public enum Include: String, Codable, CaseIterable, Sendable {
 				case appEventLocalization
 			}
 

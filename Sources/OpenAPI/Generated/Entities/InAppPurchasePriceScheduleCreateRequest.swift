@@ -3,31 +3,31 @@
 
 import Foundation
 
-public struct InAppPurchasePriceScheduleCreateRequest: Codable {
+public struct InAppPurchasePriceScheduleCreateRequest: Codable, Sendable {
 	public var data: Data
 	public var included: [IncludedItem]?
 
-	public struct Data: Codable {
+	public struct Data: Codable, Sendable {
 		public var type: `Type`
 		public var relationships: Relationships
 
-		public enum `Type`: String, Codable, CaseIterable {
+		public enum `Type`: String, Codable, CaseIterable, Sendable {
 			case inAppPurchasePriceSchedules
 		}
 
-		public struct Relationships: Codable {
+		public struct Relationships: Codable, Sendable {
 			public var inAppPurchase: InAppPurchase
 			public var baseTerritory: BaseTerritory
 			public var manualPrices: ManualPrices
 
-			public struct InAppPurchase: Codable {
+			public struct InAppPurchase: Codable, Sendable {
 				public var data: Data
 
-				public struct Data: Codable, Identifiable {
+				public struct Data: Codable, Identifiable, Sendable {
 					public var type: `Type`
 					public var id: String
 
-					public enum `Type`: String, Codable, CaseIterable {
+					public enum `Type`: String, Codable, CaseIterable, Sendable {
 						case inAppPurchases
 					}
 
@@ -64,14 +64,14 @@ public struct InAppPurchasePriceScheduleCreateRequest: Codable {
 				}
 			}
 
-			public struct BaseTerritory: Codable {
+			public struct BaseTerritory: Codable, Sendable {
 				public var data: Data
 
-				public struct Data: Codable, Identifiable {
+				public struct Data: Codable, Identifiable, Sendable {
 					public var type: `Type`
 					public var id: String
 
-					public enum `Type`: String, Codable, CaseIterable {
+					public enum `Type`: String, Codable, CaseIterable, Sendable {
 						case territories
 					}
 
@@ -108,14 +108,14 @@ public struct InAppPurchasePriceScheduleCreateRequest: Codable {
 				}
 			}
 
-			public struct ManualPrices: Codable {
+			public struct ManualPrices: Codable, Sendable {
 				public var data: [Datum]
 
-				public struct Datum: Codable, Identifiable {
+				public struct Datum: Codable, Identifiable, Sendable {
 					public var type: `Type`
 					public var id: String
 
-					public enum `Type`: String, Codable, CaseIterable {
+					public enum `Type`: String, Codable, CaseIterable, Sendable {
 						case inAppPurchasePrices
 					}
 
@@ -191,7 +191,7 @@ public struct InAppPurchasePriceScheduleCreateRequest: Codable {
 		}
 	}
 
-	public enum IncludedItem: Codable {
+	public enum IncludedItem: Codable, Sendable {
 		case inAppPurchasePriceInlineCreate(InAppPurchasePriceInlineCreate)
 		case territoryInlineCreate(TerritoryInlineCreate)
 

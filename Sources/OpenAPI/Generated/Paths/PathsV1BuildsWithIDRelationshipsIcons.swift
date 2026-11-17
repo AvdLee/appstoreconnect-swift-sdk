@@ -9,7 +9,7 @@ extension APIEndpoint.V1.Builds.WithID.Relationships {
 		Icons(path: path + "/icons")
 	}
 
-	public struct Icons {
+	public struct Icons: Sendable {
 		/// Path: `/v1/builds/{id}/relationships/icons`
 		public let path: String
 

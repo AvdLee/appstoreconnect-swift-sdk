@@ -9,7 +9,7 @@ extension APIEndpoint.V1.AppEvents.WithID.Relationships {
 		Localizations(path: path + "/localizations")
 	}
 
-	public struct Localizations {
+	public struct Localizations: Sendable {
 		/// Path: `/v1/appEvents/{id}/relationships/localizations`
 		public let path: String
 

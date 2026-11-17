@@ -3,7 +3,7 @@
 
 import Foundation
 
-public enum BrazilAgeRating: String, Codable, CaseIterable {
+public enum BrazilAgeRating: String, Codable, CaseIterable, Sendable {
 	case l = "L"
 	case ten = "TEN"
 	case twelve = "TWELVE"

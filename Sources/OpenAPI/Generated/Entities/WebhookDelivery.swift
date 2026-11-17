@@ -3,18 +3,18 @@
 
 import Foundation
 
-public struct WebhookDelivery: Codable, Identifiable {
+public struct WebhookDelivery: Codable, Identifiable, Sendable {
 	public var type: `Type`
 	public var id: String
 	public var attributes: Attributes?
 	public var relationships: Relationships?
 	public var links: ResourceLinks?
 
-	public enum `Type`: String, Codable, CaseIterable {
+	public enum `Type`: String, Codable, CaseIterable, Sendable {
 		case webhookDeliveries
 	}
 
-	public struct Attributes: Codable {
+	public struct Attributes: Codable, Sendable {
 		public var createdDate: Date?
 		public var deliveryState: DeliveryState?
 		public var errorMessage: String?
@@ -23,13 +23,13 @@ public struct WebhookDelivery: Codable, Identifiable {
 		public var request: Request?
 		public var response: Response?
 
-		public enum DeliveryState: String, Codable, CaseIterable {
+		public enum DeliveryState: String, Codable, CaseIterable, Sendable {
 			case succeeded = "SUCCEEDED"
 			case failed = "FAILED"
 			case pending = "PENDING"
 		}
 
-		public struct Request: Codable {
+		public struct Request: Codable, Sendable {
 			public var url: URL?
 
 			public init(url: URL? = nil) {
@@ -47,7 +47,7 @@ public struct WebhookDelivery: Codable, Identifiable {
 			}
 		}
 
-		public struct Response: Codable {
+		public struct Response: Codable, Sendable {
 			public var httpstatusCode: Int?
 			public var body: String?
 
@@ -102,17 +102,17 @@ public struct WebhookDelivery: Codable, Identifiable {
 		}
 	}
 
-	public struct Relationships: Codable {
+	public struct Relationships: Codable, Sendable {
 		public var event: Event?
 
-		public struct Event: Codable {
+		public struct Event: Codable, Sendable {
 			public var data: Data?
 
-			public struct Data: Codable, Identifiable {
+			public struct Data: Codable, Identifiable, Sendable {
 				public var type: `Type`
 				public var id: String
 
-				public enum `Type`: String, Codable, CaseIterable {
+				public enum `Type`: String, Codable, CaseIterable, Sendable {
 					case webhookEvents
 				}
 

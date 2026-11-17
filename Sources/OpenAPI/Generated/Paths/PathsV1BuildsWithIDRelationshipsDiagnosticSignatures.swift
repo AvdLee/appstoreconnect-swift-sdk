@@ -9,7 +9,7 @@ extension APIEndpoint.V1.Builds.WithID.Relationships {
 		DiagnosticSignatures(path: path + "/diagnosticSignatures")
 	}
 
-	public struct DiagnosticSignatures {
+	public struct DiagnosticSignatures: Sendable {
 		/// Path: `/v1/builds/{id}/relationships/diagnosticSignatures`
 		public let path: String
 

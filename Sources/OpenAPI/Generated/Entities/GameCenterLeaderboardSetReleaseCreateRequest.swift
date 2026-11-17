@@ -4,29 +4,29 @@
 import Foundation
 
 @available(*, deprecated, message: "Deprecated")
-public struct GameCenterLeaderboardSetReleaseCreateRequest: Codable {
+public struct GameCenterLeaderboardSetReleaseCreateRequest: Codable, Sendable {
 	public var data: Data
 
-	public struct Data: Codable {
+	public struct Data: Codable, Sendable {
 		public var type: `Type`
 		public var relationships: Relationships
 
-		public enum `Type`: String, Codable, CaseIterable {
+		public enum `Type`: String, Codable, CaseIterable, Sendable {
 			case gameCenterLeaderboardSetReleases
 		}
 
-		public struct Relationships: Codable {
+		public struct Relationships: Codable, Sendable {
 			public var gameCenterDetail: GameCenterDetail
 			public var gameCenterLeaderboardSet: GameCenterLeaderboardSet
 
-			public struct GameCenterDetail: Codable {
+			public struct GameCenterDetail: Codable, Sendable {
 				public var data: Data
 
-				public struct Data: Codable, Identifiable {
+				public struct Data: Codable, Identifiable, Sendable {
 					public var type: `Type`
 					public var id: String
 
-					public enum `Type`: String, Codable, CaseIterable {
+					public enum `Type`: String, Codable, CaseIterable, Sendable {
 						case gameCenterDetails
 					}
 
@@ -63,14 +63,14 @@ public struct GameCenterLeaderboardSetReleaseCreateRequest: Codable {
 				}
 			}
 
-			public struct GameCenterLeaderboardSet: Codable {
+			public struct GameCenterLeaderboardSet: Codable, Sendable {
 				public var data: Data
 
-				public struct Data: Codable, Identifiable {
+				public struct Data: Codable, Identifiable, Sendable {
 					public var type: `Type`
 					public var id: String
 
-					public enum `Type`: String, Codable, CaseIterable {
+					public enum `Type`: String, Codable, CaseIterable, Sendable {
 						case gameCenterLeaderboardSets
 					}
 

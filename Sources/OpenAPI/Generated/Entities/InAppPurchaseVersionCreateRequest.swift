@@ -3,28 +3,28 @@
 
 import Foundation
 
-public struct InAppPurchaseVersionCreateRequest: Codable {
+public struct InAppPurchaseVersionCreateRequest: Codable, Sendable {
 	public var data: Data
 
-	public struct Data: Codable {
+	public struct Data: Codable, Sendable {
 		public var type: `Type`
 		public var relationships: Relationships
 
-		public enum `Type`: String, Codable, CaseIterable {
+		public enum `Type`: String, Codable, CaseIterable, Sendable {
 			case inAppPurchaseVersions
 		}
 
-		public struct Relationships: Codable {
+		public struct Relationships: Codable, Sendable {
 			public var inAppPurchase: InAppPurchase
 
-			public struct InAppPurchase: Codable {
+			public struct InAppPurchase: Codable, Sendable {
 				public var data: Data
 
-				public struct Data: Codable, Identifiable {
+				public struct Data: Codable, Identifiable, Sendable {
 					public var type: `Type`
 					public var id: String
 
-					public enum `Type`: String, Codable, CaseIterable {
+					public enum `Type`: String, Codable, CaseIterable, Sendable {
 						case inAppPurchases
 					}
 

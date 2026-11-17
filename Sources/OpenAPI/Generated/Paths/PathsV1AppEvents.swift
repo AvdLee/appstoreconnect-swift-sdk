@@ -9,7 +9,7 @@ extension APIEndpoint.V1 {
 		AppEvents(path: path + "/appEvents")
 	}
 
-	public struct AppEvents {
+	public struct AppEvents: Sendable {
 		/// Path: `/v1/appEvents`
 		public let path: String
 

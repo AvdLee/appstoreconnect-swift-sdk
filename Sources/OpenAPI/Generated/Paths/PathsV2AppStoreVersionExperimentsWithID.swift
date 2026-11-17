@@ -9,7 +9,7 @@ extension APIEndpoint.V2.AppStoreVersionExperiments {
 		WithID(path: "\(path)/\(id)")
 	}
 
-	public struct WithID {
+	public struct WithID: Sendable {
 		/// Path: `/v2/appStoreVersionExperiments/{id}`
 		public let path: String
 
@@ -17,7 +17,7 @@ extension APIEndpoint.V2.AppStoreVersionExperiments {
 			Request(path: path, method: "GET", query: parameters?.asQuery, id: "appStoreVersionExperimentsV2_getInstance")
 		}
 
-		public struct GetParameters {
+		public struct GetParameters: Sendable {
 			public var fieldsAppStoreVersionExperiments: [FieldsAppStoreVersionExperiments]?
 			public var fieldsApps: [FieldsApps]?
 			public var fieldsAppStoreVersions: [FieldsAppStoreVersions]?
@@ -26,7 +26,7 @@ extension APIEndpoint.V2.AppStoreVersionExperiments {
 			public var limitAppStoreVersionExperimentTreatments: Int?
 			public var limitControlVersions: Int?
 
-			public enum FieldsAppStoreVersionExperiments: String, Codable, CaseIterable {
+			public enum FieldsAppStoreVersionExperiments: String, Codable, CaseIterable, Sendable {
 				case name
 				case platform
 				case trafficProportion
@@ -40,7 +40,7 @@ extension APIEndpoint.V2.AppStoreVersionExperiments {
 				case appStoreVersionExperimentTreatments
 			}
 
-			public enum FieldsApps: String, Codable, CaseIterable {
+			public enum FieldsApps: String, Codable, CaseIterable, Sendable {
 				case accessibilityURL = "accessibilityUrl"
 				case name
 				case bundleID = "bundleId"
@@ -101,7 +101,7 @@ extension APIEndpoint.V2.AppStoreVersionExperiments {
 				case androidToIosAppMappingDetails
 			}
 
-			public enum FieldsAppStoreVersions: String, Codable, CaseIterable {
+			public enum FieldsAppStoreVersions: String, Codable, CaseIterable, Sendable {
 				case platform
 				case versionString
 				case appStoreState
@@ -128,7 +128,7 @@ extension APIEndpoint.V2.AppStoreVersionExperiments {
 				case alternativeDistributionPackage
 			}
 
-			public enum FieldsAppStoreVersionExperimentTreatments: String, Codable, CaseIterable {
+			public enum FieldsAppStoreVersionExperimentTreatments: String, Codable, CaseIterable, Sendable {
 				case name
 				case appIcon
 				case appIconName
@@ -138,7 +138,7 @@ extension APIEndpoint.V2.AppStoreVersionExperiments {
 				case appStoreVersionExperimentTreatmentLocalizations
 			}
 
-			public enum Include: String, Codable, CaseIterable {
+			public enum Include: String, Codable, CaseIterable, Sendable {
 				case app
 				case latestControlVersion
 				case controlVersions

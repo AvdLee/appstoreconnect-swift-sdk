@@ -9,7 +9,7 @@ extension APIEndpoint.V1.AppEventLocalizations.WithID.Relationships {
 		AppEventVideoClips(path: path + "/appEventVideoClips")
 	}
 
-	public struct AppEventVideoClips {
+	public struct AppEventVideoClips: Sendable {
 		/// Path: `/v1/appEventLocalizations/{id}/relationships/appEventVideoClips`
 		public let path: String
 

@@ -9,7 +9,7 @@ extension APIEndpoint.V1.Apps.WithID {
 		AnalyticsReportRequests(path: path + "/analyticsReportRequests")
 	}
 
-	public struct AnalyticsReportRequests {
+	public struct AnalyticsReportRequests: Sendable {
 		/// Path: `/v1/apps/{id}/analyticsReportRequests`
 		public let path: String
 
@@ -17,7 +17,7 @@ extension APIEndpoint.V1.Apps.WithID {
 			Request(path: path, method: "GET", query: parameters?.asQuery, id: "apps_analyticsReportRequests_getToManyRelated")
 		}
 
-		public struct GetParameters {
+		public struct GetParameters: Sendable {
 			public var filterAccessType: [FilterAccessType]?
 			public var fieldsAnalyticsReportRequests: [FieldsAnalyticsReportRequests]?
 			public var fieldsAnalyticsReports: [FieldsAnalyticsReports]?
@@ -25,24 +25,24 @@ extension APIEndpoint.V1.Apps.WithID {
 			public var include: [Include]?
 			public var limitReports: Int?
 
-			public enum FilterAccessType: String, Codable, CaseIterable {
+			public enum FilterAccessType: String, Codable, CaseIterable, Sendable {
 				case oneTimeSnapshot = "ONE_TIME_SNAPSHOT"
 				case ongoing = "ONGOING"
 			}
 
-			public enum FieldsAnalyticsReportRequests: String, Codable, CaseIterable {
+			public enum FieldsAnalyticsReportRequests: String, Codable, CaseIterable, Sendable {
 				case accessType
 				case stoppedDueToInactivity
 				case reports
 			}
 
-			public enum FieldsAnalyticsReports: String, Codable, CaseIterable {
+			public enum FieldsAnalyticsReports: String, Codable, CaseIterable, Sendable {
 				case name
 				case category
 				case instances
 			}
 
-			public enum Include: String, Codable, CaseIterable {
+			public enum Include: String, Codable, CaseIterable, Sendable {
 				case reports
 			}
 

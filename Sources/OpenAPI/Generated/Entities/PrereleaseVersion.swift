@@ -3,18 +3,18 @@
 
 import Foundation
 
-public struct PrereleaseVersion: Codable, Identifiable {
+public struct PrereleaseVersion: Codable, Identifiable, Sendable {
 	public var type: `Type`
 	public var id: String
 	public var attributes: Attributes?
 	public var relationships: Relationships?
 	public var links: ResourceLinks?
 
-	public enum `Type`: String, Codable, CaseIterable {
+	public enum `Type`: String, Codable, CaseIterable, Sendable {
 		case preReleaseVersions
 	}
 
-	public struct Attributes: Codable {
+	public struct Attributes: Codable, Sendable {
 		public var version: String?
 		public var platform: Platform?
 
@@ -36,20 +36,20 @@ public struct PrereleaseVersion: Codable, Identifiable {
 		}
 	}
 
-	public struct Relationships: Codable {
+	public struct Relationships: Codable, Sendable {
 		public var builds: Builds?
 		public var app: App?
 
-		public struct Builds: Codable {
+		public struct Builds: Codable, Sendable {
 			public var links: RelationshipLinks?
 			public var meta: PagingInformation?
 			public var data: [Datum]?
 
-			public struct Datum: Codable, Identifiable {
+			public struct Datum: Codable, Identifiable, Sendable {
 				public var type: `Type`
 				public var id: String
 
-				public enum `Type`: String, Codable, CaseIterable {
+				public enum `Type`: String, Codable, CaseIterable, Sendable {
 					case builds
 				}
 
@@ -92,15 +92,15 @@ public struct PrereleaseVersion: Codable, Identifiable {
 			}
 		}
 
-		public struct App: Codable {
+		public struct App: Codable, Sendable {
 			public var links: RelationshipLinks?
 			public var data: Data?
 
-			public struct Data: Codable, Identifiable {
+			public struct Data: Codable, Identifiable, Sendable {
 				public var type: `Type`
 				public var id: String
 
-				public enum `Type`: String, Codable, CaseIterable {
+				public enum `Type`: String, Codable, CaseIterable, Sendable {
 					case apps
 				}
 

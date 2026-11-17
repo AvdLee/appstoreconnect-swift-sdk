@@ -3,23 +3,23 @@
 
 import Foundation
 
-public struct PromotedPurchase: Codable, Identifiable {
+public struct PromotedPurchase: Codable, Identifiable, Sendable {
 	public var type: `Type`
 	public var id: String
 	public var attributes: Attributes?
 	public var relationships: Relationships?
 	public var links: ResourceLinks?
 
-	public enum `Type`: String, Codable, CaseIterable {
+	public enum `Type`: String, Codable, CaseIterable, Sendable {
 		case promotedPurchases
 	}
 
-	public struct Attributes: Codable {
+	public struct Attributes: Codable, Sendable {
 		public var isVisibleForAllUsers: Bool?
 		public var isEnabled: Bool?
 		public var state: State?
 
-		public enum State: String, Codable, CaseIterable {
+		public enum State: String, Codable, CaseIterable, Sendable {
 			case approved = "APPROVED"
 			case inReview = "IN_REVIEW"
 			case prepareForSubmission = "PREPARE_FOR_SUBMISSION"
@@ -47,18 +47,18 @@ public struct PromotedPurchase: Codable, Identifiable {
 		}
 	}
 
-	public struct Relationships: Codable {
+	public struct Relationships: Codable, Sendable {
 		public var inAppPurchaseV2: InAppPurchaseV2?
 		public var subscription: Subscription?
 
-		public struct InAppPurchaseV2: Codable {
+		public struct InAppPurchaseV2: Codable, Sendable {
 			public var data: Data?
 
-			public struct Data: Codable, Identifiable {
+			public struct Data: Codable, Identifiable, Sendable {
 				public var type: `Type`
 				public var id: String
 
-				public enum `Type`: String, Codable, CaseIterable {
+				public enum `Type`: String, Codable, CaseIterable, Sendable {
 					case inAppPurchases
 				}
 
@@ -95,14 +95,14 @@ public struct PromotedPurchase: Codable, Identifiable {
 			}
 		}
 
-		public struct Subscription: Codable {
+		public struct Subscription: Codable, Sendable {
 			public var data: Data?
 
-			public struct Data: Codable, Identifiable {
+			public struct Data: Codable, Identifiable, Sendable {
 				public var type: `Type`
 				public var id: String
 
-				public enum `Type`: String, Codable, CaseIterable {
+				public enum `Type`: String, Codable, CaseIterable, Sendable {
 					case subscriptions
 				}
 

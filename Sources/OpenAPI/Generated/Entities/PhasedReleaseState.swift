@@ -3,7 +3,7 @@
 
 import Foundation
 
-public enum PhasedReleaseState: String, Codable, CaseIterable {
+public enum PhasedReleaseState: String, Codable, CaseIterable, Sendable {
 	case inactive = "INACTIVE"
 	case active = "ACTIVE"
 	case paused = "PAUSED"

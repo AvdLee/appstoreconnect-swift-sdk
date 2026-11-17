@@ -3,24 +3,24 @@
 
 import Foundation
 
-public struct CiScheduledStartCondition: Codable {
+public struct CiScheduledStartCondition: Codable, Sendable {
 	public var source: CiBranchPatterns?
 	public var schedule: Schedule?
 
-	public struct Schedule: Codable {
+	public struct Schedule: Codable, Sendable {
 		public var frequency: Frequency?
 		public var days: [Day]?
 		public var hour: Int?
 		public var minute: Int?
 		public var timezone: String?
 
-		public enum Frequency: String, Codable, CaseIterable {
+		public enum Frequency: String, Codable, CaseIterable, Sendable {
 			case weekly = "WEEKLY"
 			case daily = "DAILY"
 			case hourly = "HOURLY"
 		}
 
-		public enum Day: String, Codable, CaseIterable {
+		public enum Day: String, Codable, CaseIterable, Sendable {
 			case sunday = "SUNDAY"
 			case monday = "MONDAY"
 			case tuesday = "TUESDAY"

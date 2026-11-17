@@ -9,7 +9,7 @@ extension APIEndpoint.V1.BetaTesters.WithID {
 		Apps(path: path + "/apps")
 	}
 
-	public struct Apps {
+	public struct Apps: Sendable {
 		/// Path: `/v1/betaTesters/{id}/apps`
 		public let path: String
 
@@ -24,7 +24,7 @@ extension APIEndpoint.V1.BetaTesters.WithID {
 			return encoder.items
 		}
 
-		public enum FieldsApps: String, Codable, CaseIterable {
+		public enum FieldsApps: String, Codable, CaseIterable, Sendable {
 			case accessibilityURL = "accessibilityUrl"
 			case name
 			case bundleID = "bundleId"

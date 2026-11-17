@@ -9,7 +9,7 @@ extension APIEndpoint.V1.AppClips.WithID {
 		AppClipAdvancedExperiences(path: path + "/appClipAdvancedExperiences")
 	}
 
-	public struct AppClipAdvancedExperiences {
+	public struct AppClipAdvancedExperiences: Sendable {
 		/// Path: `/v1/appClips/{id}/appClipAdvancedExperiences`
 		public let path: String
 
@@ -17,7 +17,7 @@ extension APIEndpoint.V1.AppClips.WithID {
 			Request(path: path, method: "GET", query: parameters?.asQuery, id: "appClips_appClipAdvancedExperiences_getToManyRelated")
 		}
 
-		public struct GetParameters {
+		public struct GetParameters: Sendable {
 			public var filterStatus: [FilterStatus]?
 			public var filterPlaceStatus: [FilterPlaceStatus]?
 			public var filterAction: [FilterAction]?
@@ -29,25 +29,25 @@ extension APIEndpoint.V1.AppClips.WithID {
 			public var include: [Include]?
 			public var limitLocalizations: Int?
 
-			public enum FilterStatus: String, Codable, CaseIterable {
+			public enum FilterStatus: String, Codable, CaseIterable, Sendable {
 				case received = "RECEIVED"
 				case deactivated = "DEACTIVATED"
 				case appTransferInProgress = "APP_TRANSFER_IN_PROGRESS"
 			}
 
-			public enum FilterPlaceStatus: String, Codable, CaseIterable {
+			public enum FilterPlaceStatus: String, Codable, CaseIterable, Sendable {
 				case pending = "PENDING"
 				case matched = "MATCHED"
 				case noMatch = "NO_MATCH"
 			}
 
-			public enum FilterAction: String, Codable, CaseIterable {
+			public enum FilterAction: String, Codable, CaseIterable, Sendable {
 				case `open` = "OPEN"
 				case view = "VIEW"
 				case play = "PLAY"
 			}
 
-			public enum FieldsAppClipAdvancedExperiences: String, Codable, CaseIterable {
+			public enum FieldsAppClipAdvancedExperiences: String, Codable, CaseIterable, Sendable {
 				case link
 				case version
 				case status
@@ -62,14 +62,14 @@ extension APIEndpoint.V1.AppClips.WithID {
 				case localizations
 			}
 
-			public enum FieldsAppClips: String, Codable, CaseIterable {
+			public enum FieldsAppClips: String, Codable, CaseIterable, Sendable {
 				case bundleID = "bundleId"
 				case app
 				case appClipDefaultExperiences
 				case appClipAdvancedExperiences
 			}
 
-			public enum FieldsAppClipAdvancedExperienceImages: String, Codable, CaseIterable {
+			public enum FieldsAppClipAdvancedExperienceImages: String, Codable, CaseIterable, Sendable {
 				case fileSize
 				case fileName
 				case sourceFileChecksum
@@ -78,13 +78,13 @@ extension APIEndpoint.V1.AppClips.WithID {
 				case assetDeliveryState
 			}
 
-			public enum FieldsAppClipAdvancedExperienceLocalizations: String, Codable, CaseIterable {
+			public enum FieldsAppClipAdvancedExperienceLocalizations: String, Codable, CaseIterable, Sendable {
 				case language
 				case title
 				case subtitle
 			}
 
-			public enum Include: String, Codable, CaseIterable {
+			public enum Include: String, Codable, CaseIterable, Sendable {
 				case appClip
 				case headerImage
 				case localizations

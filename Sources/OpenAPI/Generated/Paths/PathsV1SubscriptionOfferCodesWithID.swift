@@ -9,7 +9,7 @@ extension APIEndpoint.V1.SubscriptionOfferCodes {
 		WithID(path: "\(path)/\(id)")
 	}
 
-	public struct WithID {
+	public struct WithID: Sendable {
 		/// Path: `/v1/subscriptionOfferCodes/{id}`
 		public let path: String
 
@@ -17,7 +17,7 @@ extension APIEndpoint.V1.SubscriptionOfferCodes {
 			Request(path: path, method: "GET", query: parameters?.asQuery, id: "subscriptionOfferCodes_getInstance")
 		}
 
-		public struct GetParameters {
+		public struct GetParameters: Sendable {
 			public var fieldsSubscriptionOfferCodes: [FieldsSubscriptionOfferCodes]?
 			public var fieldsSubscriptions: [FieldsSubscriptions]?
 			public var fieldsSubscriptionOfferCodeOneTimeUseCodes: [FieldsSubscriptionOfferCodeOneTimeUseCodes]?
@@ -28,7 +28,7 @@ extension APIEndpoint.V1.SubscriptionOfferCodes {
 			public var limitOneTimeUseCodes: Int?
 			public var limitPrices: Int?
 
-			public enum FieldsSubscriptionOfferCodes: String, Codable, CaseIterable {
+			public enum FieldsSubscriptionOfferCodes: String, Codable, CaseIterable, Sendable {
 				case name
 				case customerEligibilities
 				case offerEligibility
@@ -47,7 +47,7 @@ extension APIEndpoint.V1.SubscriptionOfferCodes {
 				case prices
 			}
 
-			public enum FieldsSubscriptions: String, Codable, CaseIterable {
+			public enum FieldsSubscriptions: String, Codable, CaseIterable, Sendable {
 				case name
 				case productID = "productId"
 				case familySharable
@@ -76,7 +76,7 @@ extension APIEndpoint.V1.SubscriptionOfferCodes {
 				case retentionMessageOffers
 			}
 
-			public enum FieldsSubscriptionOfferCodeOneTimeUseCodes: String, Codable, CaseIterable {
+			public enum FieldsSubscriptionOfferCodeOneTimeUseCodes: String, Codable, CaseIterable, Sendable {
 				case numberOfCodes
 				case createdDate
 				case expirationDate
@@ -86,7 +86,7 @@ extension APIEndpoint.V1.SubscriptionOfferCodes {
 				case values
 			}
 
-			public enum FieldsSubscriptionOfferCodeCustomCodes: String, Codable, CaseIterable {
+			public enum FieldsSubscriptionOfferCodeCustomCodes: String, Codable, CaseIterable, Sendable {
 				case customCode
 				case numberOfCodes
 				case createdDate
@@ -95,12 +95,12 @@ extension APIEndpoint.V1.SubscriptionOfferCodes {
 				case offerCode
 			}
 
-			public enum FieldsSubscriptionOfferCodePrices: String, Codable, CaseIterable {
+			public enum FieldsSubscriptionOfferCodePrices: String, Codable, CaseIterable, Sendable {
 				case territory
 				case subscriptionPricePoint
 			}
 
-			public enum Include: String, Codable, CaseIterable {
+			public enum Include: String, Codable, CaseIterable, Sendable {
 				case subscription
 				case oneTimeUseCodes
 				case customCodes

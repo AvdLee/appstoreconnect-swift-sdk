@@ -9,7 +9,7 @@ extension APIEndpoint.V1.MarketplaceWebhooks {
 		WithID(path: "\(path)/\(id)")
 	}
 
-	public struct WithID {
+	public struct WithID: Sendable {
 		/// Path: `/v1/marketplaceWebhooks/{id}`
 		public let path: String
 

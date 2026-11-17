@@ -9,7 +9,7 @@ extension APIEndpoint.V1 {
 		MarketplaceWebhooks(path: path + "/marketplaceWebhooks")
 	}
 
-	public struct MarketplaceWebhooks {
+	public struct MarketplaceWebhooks: Sendable {
 		/// Path: `/v1/marketplaceWebhooks`
 		public let path: String
 
@@ -25,7 +25,7 @@ extension APIEndpoint.V1 {
 			return encoder.items
 		}
 
-		public enum FieldsMarketplaceWebhooks: String, Codable, CaseIterable {
+		public enum FieldsMarketplaceWebhooks: String, Codable, CaseIterable, Sendable {
 			case endpointURL = "endpointUrl"
 		}
 

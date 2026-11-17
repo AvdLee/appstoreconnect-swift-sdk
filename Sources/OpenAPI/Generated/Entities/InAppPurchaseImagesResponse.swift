@@ -3,7 +3,7 @@
 
 import Foundation
 
-public struct InAppPurchaseImagesResponse: Codable {
+public struct InAppPurchaseImagesResponse: Codable, Sendable {
 	public var data: [InAppPurchaseImage]
 	public var included: [InAppPurchaseV2]?
 	public var links: PagedDocumentLinks

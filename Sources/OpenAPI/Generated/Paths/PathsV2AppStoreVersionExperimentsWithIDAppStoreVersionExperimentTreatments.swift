@@ -9,7 +9,7 @@ extension APIEndpoint.V2.AppStoreVersionExperiments.WithID {
 		AppStoreVersionExperimentTreatments(path: path + "/appStoreVersionExperimentTreatments")
 	}
 
-	public struct AppStoreVersionExperimentTreatments {
+	public struct AppStoreVersionExperimentTreatments: Sendable {
 		/// Path: `/v2/appStoreVersionExperiments/{id}/appStoreVersionExperimentTreatments`
 		public let path: String
 
@@ -17,7 +17,7 @@ extension APIEndpoint.V2.AppStoreVersionExperiments.WithID {
 			Request(path: path, method: "GET", query: parameters?.asQuery, id: "appStoreVersionExperimentsV2_appStoreVersionExperimentTreatments_getToManyRelated")
 		}
 
-		public struct GetParameters {
+		public struct GetParameters: Sendable {
 			public var fieldsAppStoreVersionExperimentTreatments: [FieldsAppStoreVersionExperimentTreatments]?
 			public var fieldsAppStoreVersionExperiments: [FieldsAppStoreVersionExperiments]?
 			public var fieldsAppStoreVersionExperimentTreatmentLocalizations: [FieldsAppStoreVersionExperimentTreatmentLocalizations]?
@@ -25,7 +25,7 @@ extension APIEndpoint.V2.AppStoreVersionExperiments.WithID {
 			public var include: [Include]?
 			public var limitAppStoreVersionExperimentTreatmentLocalizations: Int?
 
-			public enum FieldsAppStoreVersionExperimentTreatments: String, Codable, CaseIterable {
+			public enum FieldsAppStoreVersionExperimentTreatments: String, Codable, CaseIterable, Sendable {
 				case name
 				case appIcon
 				case appIconName
@@ -35,7 +35,7 @@ extension APIEndpoint.V2.AppStoreVersionExperiments.WithID {
 				case appStoreVersionExperimentTreatmentLocalizations
 			}
 
-			public enum FieldsAppStoreVersionExperiments: String, Codable, CaseIterable {
+			public enum FieldsAppStoreVersionExperiments: String, Codable, CaseIterable, Sendable {
 				case name
 				case trafficProportion
 				case state
@@ -50,7 +50,7 @@ extension APIEndpoint.V2.AppStoreVersionExperiments.WithID {
 				case controlVersions
 			}
 
-			public enum FieldsAppStoreVersionExperimentTreatmentLocalizations: String, Codable, CaseIterable {
+			public enum FieldsAppStoreVersionExperimentTreatmentLocalizations: String, Codable, CaseIterable, Sendable {
 				case locale
 				case appStoreVersionExperimentTreatment
 				case appScreenshotSets
@@ -58,7 +58,7 @@ extension APIEndpoint.V2.AppStoreVersionExperiments.WithID {
 				case placements
 			}
 
-			public enum Include: String, Codable, CaseIterable {
+			public enum Include: String, Codable, CaseIterable, Sendable {
 				case appStoreVersionExperiment
 				case appStoreVersionExperimentV2
 				case appStoreVersionExperimentTreatmentLocalizations

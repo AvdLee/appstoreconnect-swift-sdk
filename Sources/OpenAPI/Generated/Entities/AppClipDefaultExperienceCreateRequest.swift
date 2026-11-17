@@ -3,19 +3,19 @@
 
 import Foundation
 
-public struct AppClipDefaultExperienceCreateRequest: Codable {
+public struct AppClipDefaultExperienceCreateRequest: Codable, Sendable {
 	public var data: Data
 
-	public struct Data: Codable {
+	public struct Data: Codable, Sendable {
 		public var type: `Type`
 		public var attributes: Attributes?
 		public var relationships: Relationships
 
-		public enum `Type`: String, Codable, CaseIterable {
+		public enum `Type`: String, Codable, CaseIterable, Sendable {
 			case appClipDefaultExperiences
 		}
 
-		public struct Attributes: Codable {
+		public struct Attributes: Codable, Sendable {
 			public var action: AppClipAction?
 
 			public init(action: AppClipAction? = nil) {
@@ -33,19 +33,19 @@ public struct AppClipDefaultExperienceCreateRequest: Codable {
 			}
 		}
 
-		public struct Relationships: Codable {
+		public struct Relationships: Codable, Sendable {
 			public var appClip: AppClip
 			public var releaseWithAppStoreVersion: ReleaseWithAppStoreVersion?
 			public var appClipDefaultExperienceTemplate: AppClipDefaultExperienceTemplate?
 
-			public struct AppClip: Codable {
+			public struct AppClip: Codable, Sendable {
 				public var data: Data
 
-				public struct Data: Codable, Identifiable {
+				public struct Data: Codable, Identifiable, Sendable {
 					public var type: `Type`
 					public var id: String
 
-					public enum `Type`: String, Codable, CaseIterable {
+					public enum `Type`: String, Codable, CaseIterable, Sendable {
 						case appClips
 					}
 
@@ -82,14 +82,14 @@ public struct AppClipDefaultExperienceCreateRequest: Codable {
 				}
 			}
 
-			public struct ReleaseWithAppStoreVersion: Codable {
+			public struct ReleaseWithAppStoreVersion: Codable, Sendable {
 				public var data: Data?
 
-				public struct Data: Codable, Identifiable {
+				public struct Data: Codable, Identifiable, Sendable {
 					public var type: `Type`
 					public var id: String
 
-					public enum `Type`: String, Codable, CaseIterable {
+					public enum `Type`: String, Codable, CaseIterable, Sendable {
 						case appStoreVersions
 					}
 
@@ -126,14 +126,14 @@ public struct AppClipDefaultExperienceCreateRequest: Codable {
 				}
 			}
 
-			public struct AppClipDefaultExperienceTemplate: Codable {
+			public struct AppClipDefaultExperienceTemplate: Codable, Sendable {
 				public var data: Data?
 
-				public struct Data: Codable, Identifiable {
+				public struct Data: Codable, Identifiable, Sendable {
 					public var type: `Type`
 					public var id: String
 
-					public enum `Type`: String, Codable, CaseIterable {
+					public enum `Type`: String, Codable, CaseIterable, Sendable {
 						case appClipDefaultExperiences
 					}
 

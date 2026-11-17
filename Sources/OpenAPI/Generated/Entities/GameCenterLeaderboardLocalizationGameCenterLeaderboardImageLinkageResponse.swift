@@ -4,15 +4,15 @@
 import Foundation
 
 @available(*, deprecated, message: "Deprecated")
-public struct GameCenterLeaderboardLocalizationGameCenterLeaderboardImageLinkageResponse: Codable {
+public struct GameCenterLeaderboardLocalizationGameCenterLeaderboardImageLinkageResponse: Codable, Sendable {
 	public var data: Data
 	public var links: DocumentLinks
 
-	public struct Data: Codable, Identifiable {
+	public struct Data: Codable, Identifiable, Sendable {
 		public var type: `Type`
 		public var id: String
 
-		public enum `Type`: String, Codable, CaseIterable {
+		public enum `Type`: String, Codable, CaseIterable, Sendable {
 			case gameCenterLeaderboardImages
 		}
 

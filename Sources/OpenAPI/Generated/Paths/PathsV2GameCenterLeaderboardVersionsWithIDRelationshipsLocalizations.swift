@@ -9,7 +9,7 @@ extension APIEndpoint.V2.GameCenterLeaderboardVersions.WithID.Relationships {
 		Localizations(path: path + "/localizations")
 	}
 
-	public struct Localizations {
+	public struct Localizations: Sendable {
 		/// Path: `/v2/gameCenterLeaderboardVersions/{id}/relationships/localizations`
 		public let path: String
 

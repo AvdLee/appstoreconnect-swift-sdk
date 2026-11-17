@@ -9,7 +9,7 @@ extension APIEndpoint.V1.Apps.WithID {
 		PerfPowerMetrics(path: path + "/perfPowerMetrics")
 	}
 
-	public struct PerfPowerMetrics {
+	public struct PerfPowerMetrics: Sendable {
 		/// Path: `/v1/apps/{id}/perfPowerMetrics`
 		public let path: String
 
@@ -17,16 +17,16 @@ extension APIEndpoint.V1.Apps.WithID {
 			Request(path: path, method: "GET", query: parameters?.asQuery, id: "apps_perfPowerMetrics_getToManyRelated")
 		}
 
-		public struct GetParameters {
+		public struct GetParameters: Sendable {
 			public var filterPlatform: [FilterPlatform]?
 			public var filterMetricType: [FilterMetricType]?
 			public var filterDeviceType: [String]?
 
-			public enum FilterPlatform: String, Codable, CaseIterable {
+			public enum FilterPlatform: String, Codable, CaseIterable, Sendable {
 				case ios = "IOS"
 			}
 
-			public enum FilterMetricType: String, Codable, CaseIterable {
+			public enum FilterMetricType: String, Codable, CaseIterable, Sendable {
 				case disk = "DISK"
 				case hang = "HANG"
 				case battery = "BATTERY"

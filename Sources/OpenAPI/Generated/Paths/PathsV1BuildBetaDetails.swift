@@ -9,7 +9,7 @@ extension APIEndpoint.V1 {
 		BuildBetaDetails(path: path + "/buildBetaDetails")
 	}
 
-	public struct BuildBetaDetails {
+	public struct BuildBetaDetails: Sendable {
 		/// Path: `/v1/buildBetaDetails`
 		public let path: String
 
@@ -17,7 +17,7 @@ extension APIEndpoint.V1 {
 			Request(path: path, method: "GET", query: parameters?.asQuery, id: "buildBetaDetails_getCollection")
 		}
 
-		public struct GetParameters {
+		public struct GetParameters: Sendable {
 			public var filterBuild: [String]?
 			public var filterID: [String]?
 			public var fieldsBuildBetaDetails: [FieldsBuildBetaDetails]?
@@ -25,14 +25,14 @@ extension APIEndpoint.V1 {
 			public var limit: Int?
 			public var include: [Include]?
 
-			public enum FieldsBuildBetaDetails: String, Codable, CaseIterable {
+			public enum FieldsBuildBetaDetails: String, Codable, CaseIterable, Sendable {
 				case autoNotifyEnabled
 				case internalBuildState
 				case externalBuildState
 				case build
 			}
 
-			public enum FieldsBuilds: String, Codable, CaseIterable {
+			public enum FieldsBuilds: String, Codable, CaseIterable, Sendable {
 				case version
 				case uploadedDate
 				case expirationDate
@@ -61,7 +61,7 @@ extension APIEndpoint.V1 {
 				case diagnosticSignatures
 			}
 
-			public enum Include: String, Codable, CaseIterable {
+			public enum Include: String, Codable, CaseIterable, Sendable {
 				case build
 			}
 

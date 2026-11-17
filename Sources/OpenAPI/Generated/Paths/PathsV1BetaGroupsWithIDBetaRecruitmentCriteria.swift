@@ -9,7 +9,7 @@ extension APIEndpoint.V1.BetaGroups.WithID {
 		BetaRecruitmentCriteria(path: path + "/betaRecruitmentCriteria")
 	}
 
-	public struct BetaRecruitmentCriteria {
+	public struct BetaRecruitmentCriteria: Sendable {
 		/// Path: `/v1/betaGroups/{id}/betaRecruitmentCriteria`
 		public let path: String
 
@@ -23,7 +23,7 @@ extension APIEndpoint.V1.BetaGroups.WithID {
 			return encoder.items
 		}
 
-		public enum FieldsBetaRecruitmentCriteria: String, Codable, CaseIterable {
+		public enum FieldsBetaRecruitmentCriteria: String, Codable, CaseIterable, Sendable {
 			case lastModifiedDate
 			case deviceFamilyOsVersionFilters
 		}

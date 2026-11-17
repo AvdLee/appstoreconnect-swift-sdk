@@ -3,19 +3,19 @@
 
 import Foundation
 
-public struct GameCenterChallengeImageCreateRequest: Codable {
+public struct GameCenterChallengeImageCreateRequest: Codable, Sendable {
 	public var data: Data
 
-	public struct Data: Codable {
+	public struct Data: Codable, Sendable {
 		public var type: `Type`
 		public var attributes: Attributes
 		public var relationships: Relationships?
 
-		public enum `Type`: String, Codable, CaseIterable {
+		public enum `Type`: String, Codable, CaseIterable, Sendable {
 			case gameCenterChallengeImages
 		}
 
-		public struct Attributes: Codable {
+		public struct Attributes: Codable, Sendable {
 			public var fileSize: Int
 			public var fileName: String
 
@@ -37,18 +37,18 @@ public struct GameCenterChallengeImageCreateRequest: Codable {
 			}
 		}
 
-		public struct Relationships: Codable {
+		public struct Relationships: Codable, Sendable {
 			public var localization: Localization?
 			public var version: Version?
 
-			public struct Localization: Codable {
+			public struct Localization: Codable, Sendable {
 				public var data: Data?
 
-				public struct Data: Codable, Identifiable {
+				public struct Data: Codable, Identifiable, Sendable {
 					public var type: `Type`
 					public var id: String
 
-					public enum `Type`: String, Codable, CaseIterable {
+					public enum `Type`: String, Codable, CaseIterable, Sendable {
 						case gameCenterChallengeLocalizations
 					}
 
@@ -85,14 +85,14 @@ public struct GameCenterChallengeImageCreateRequest: Codable {
 				}
 			}
 
-			public struct Version: Codable {
+			public struct Version: Codable, Sendable {
 				public var data: Data?
 
-				public struct Data: Codable, Identifiable {
+				public struct Data: Codable, Identifiable, Sendable {
 					public var type: `Type`
 					public var id: String
 
-					public enum `Type`: String, Codable, CaseIterable {
+					public enum `Type`: String, Codable, CaseIterable, Sendable {
 						case gameCenterChallengeVersions
 					}
 

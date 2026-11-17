@@ -9,7 +9,7 @@ extension APIEndpoint.V1.Apps.WithID.Relationships {
 		SubscriptionGracePeriod(path: path + "/subscriptionGracePeriod")
 	}
 
-	public struct SubscriptionGracePeriod {
+	public struct SubscriptionGracePeriod: Sendable {
 		/// Path: `/v1/apps/{id}/relationships/subscriptionGracePeriod`
 		public let path: String
 

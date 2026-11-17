@@ -3,19 +3,19 @@
 
 import Foundation
 
-public struct SubscriptionLocalizationCreateRequest: Codable {
+public struct SubscriptionLocalizationCreateRequest: Codable, Sendable {
 	public var data: Data
 
-	public struct Data: Codable {
+	public struct Data: Codable, Sendable {
 		public var type: `Type`
 		public var attributes: Attributes
 		public var relationships: Relationships
 
-		public enum `Type`: String, Codable, CaseIterable {
+		public enum `Type`: String, Codable, CaseIterable, Sendable {
 			case subscriptionLocalizations
 		}
 
-		public struct Attributes: Codable {
+		public struct Attributes: Codable, Sendable {
 			public var name: String
 			public var locale: String
 			public var description: String?
@@ -41,17 +41,17 @@ public struct SubscriptionLocalizationCreateRequest: Codable {
 			}
 		}
 
-		public struct Relationships: Codable {
+		public struct Relationships: Codable, Sendable {
 			public var subscription: Subscription
 
-			public struct Subscription: Codable {
+			public struct Subscription: Codable, Sendable {
 				public var data: Data
 
-				public struct Data: Codable, Identifiable {
+				public struct Data: Codable, Identifiable, Sendable {
 					public var type: `Type`
 					public var id: String
 
-					public enum `Type`: String, Codable, CaseIterable {
+					public enum `Type`: String, Codable, CaseIterable, Sendable {
 						case subscriptions
 					}
 

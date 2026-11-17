@@ -9,7 +9,7 @@ extension APIEndpoint.V1 {
 		AppAssetLibraryVideos(path: path + "/appAssetLibraryVideos")
 	}
 
-	public struct AppAssetLibraryVideos {
+	public struct AppAssetLibraryVideos: Sendable {
 		/// Path: `/v1/appAssetLibraryVideos`
 		public let path: String
 

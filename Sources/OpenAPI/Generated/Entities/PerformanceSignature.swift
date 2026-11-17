@@ -3,7 +3,7 @@
 
 import Foundation
 
-public struct PerformanceSignature: Codable {
+public struct PerformanceSignature: Codable, Sendable {
 	public var signatureID: String?
 	public var signature: String?
 	public var count: Int?
@@ -13,10 +13,10 @@ public struct PerformanceSignature: Codable {
 	public var trendInfo: DiagnosticInsightDirection?
 	public var metricsSummary: MetricsSummary?
 
-	public struct MetricsSummary: Codable {
+	public struct MetricsSummary: Codable, Sendable {
 		public var referenceVersions: [ReferenceVersion]?
 
-		public struct ReferenceVersion: Codable {
+		public struct ReferenceVersion: Codable, Sendable {
 			public var version: String?
 			public var value: Double?
 

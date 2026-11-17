@@ -3,18 +3,18 @@
 
 import Foundation
 
-public struct AppClipHeaderImage: Codable, Identifiable {
+public struct AppClipHeaderImage: Codable, Identifiable, Sendable {
 	public var type: `Type`
 	public var id: String
 	public var attributes: Attributes?
 	public var relationships: Relationships?
 	public var links: ResourceLinks?
 
-	public enum `Type`: String, Codable, CaseIterable {
+	public enum `Type`: String, Codable, CaseIterable, Sendable {
 		case appClipHeaderImages
 	}
 
-	public struct Attributes: Codable {
+	public struct Attributes: Codable, Sendable {
 		public var fileSize: Int?
 		public var fileName: String?
 		public var sourceFileChecksum: String?
@@ -52,17 +52,17 @@ public struct AppClipHeaderImage: Codable, Identifiable {
 		}
 	}
 
-	public struct Relationships: Codable {
+	public struct Relationships: Codable, Sendable {
 		public var appClipDefaultExperienceLocalization: AppClipDefaultExperienceLocalization?
 
-		public struct AppClipDefaultExperienceLocalization: Codable {
+		public struct AppClipDefaultExperienceLocalization: Codable, Sendable {
 			public var data: Data?
 
-			public struct Data: Codable, Identifiable {
+			public struct Data: Codable, Identifiable, Sendable {
 				public var type: `Type`
 				public var id: String
 
-				public enum `Type`: String, Codable, CaseIterable {
+				public enum `Type`: String, Codable, CaseIterable, Sendable {
 					case appClipDefaultExperienceLocalizations
 				}
 

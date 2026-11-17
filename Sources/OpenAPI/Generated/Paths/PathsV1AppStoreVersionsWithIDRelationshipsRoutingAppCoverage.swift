@@ -9,7 +9,7 @@ extension APIEndpoint.V1.AppStoreVersions.WithID.Relationships {
 		RoutingAppCoverage(path: path + "/routingAppCoverage")
 	}
 
-	public struct RoutingAppCoverage {
+	public struct RoutingAppCoverage: Sendable {
 		/// Path: `/v1/appStoreVersions/{id}/relationships/routingAppCoverage`
 		public let path: String
 

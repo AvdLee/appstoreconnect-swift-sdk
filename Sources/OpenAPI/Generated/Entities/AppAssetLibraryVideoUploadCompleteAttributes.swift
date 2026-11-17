@@ -3,7 +3,7 @@
 
 import Foundation
 
-public struct AppAssetLibraryVideoUploadCompleteAttributes: Codable {
+public struct AppAssetLibraryVideoUploadCompleteAttributes: Codable, Sendable {
 	public var category: AppAssetLibraryAssetCategory?
 	public var createdDate: Date?
 	public var lastModifiedDate: Date?

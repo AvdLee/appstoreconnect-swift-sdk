@@ -3,7 +3,7 @@
 
 import Foundation
 
-public struct GameCenterMatchmakingRuleResponse: Codable {
+public struct GameCenterMatchmakingRuleResponse: Codable, Sendable {
 	/// GameCenterMatchmakingRule
 	public var data: GameCenterMatchmakingRule
 	public var links: DocumentLinks

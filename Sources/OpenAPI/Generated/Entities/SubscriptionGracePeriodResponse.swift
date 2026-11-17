@@ -3,7 +3,7 @@
 
 import Foundation
 
-public struct SubscriptionGracePeriodResponse: Codable {
+public struct SubscriptionGracePeriodResponse: Codable, Sendable {
 	/// SubscriptionGracePeriod
 	public var data: SubscriptionGracePeriod
 	public var links: DocumentLinks

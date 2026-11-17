@@ -9,7 +9,7 @@ extension APIEndpoint.V1 {
 		ScmProviders(path: path + "/scmProviders")
 	}
 
-	public struct ScmProviders {
+	public struct ScmProviders: Sendable {
 		/// Path: `/v1/scmProviders`
 		public let path: String
 
@@ -24,7 +24,7 @@ extension APIEndpoint.V1 {
 			return encoder.items
 		}
 
-		public enum FieldsScmProviders: String, Codable, CaseIterable {
+		public enum FieldsScmProviders: String, Codable, CaseIterable, Sendable {
 			case scmProviderType
 			case url
 			case repositories

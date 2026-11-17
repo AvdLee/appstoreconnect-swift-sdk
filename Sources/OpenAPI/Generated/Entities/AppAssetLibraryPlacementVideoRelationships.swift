@@ -3,7 +3,7 @@
 
 import Foundation
 
-public struct AppAssetLibraryPlacementVideoRelationships: Codable {
+public struct AppAssetLibraryPlacementVideoRelationships: Codable, Sendable {
 	public var appEventLocalization: AppEventLocalization?
 	public var appStoreVersionLocalization: AppStoreVersionLocalization?
 	public var appCustomProductPageLocalization: AppCustomProductPageLocalization?
@@ -11,14 +11,14 @@ public struct AppAssetLibraryPlacementVideoRelationships: Codable {
 	public var retentionMessageVersion: RetentionMessageVersion?
 	public var video: Video?
 
-	public struct AppEventLocalization: Codable {
+	public struct AppEventLocalization: Codable, Sendable {
 		public var data: Data?
 
-		public struct Data: Codable, Identifiable {
+		public struct Data: Codable, Identifiable, Sendable {
 			public var type: `Type`
 			public var id: String
 
-			public enum `Type`: String, Codable, CaseIterable {
+			public enum `Type`: String, Codable, CaseIterable, Sendable {
 				case appEventLocalizations
 			}
 
@@ -55,14 +55,14 @@ public struct AppAssetLibraryPlacementVideoRelationships: Codable {
 		}
 	}
 
-	public struct AppStoreVersionLocalization: Codable {
+	public struct AppStoreVersionLocalization: Codable, Sendable {
 		public var data: Data?
 
-		public struct Data: Codable, Identifiable {
+		public struct Data: Codable, Identifiable, Sendable {
 			public var type: `Type`
 			public var id: String
 
-			public enum `Type`: String, Codable, CaseIterable {
+			public enum `Type`: String, Codable, CaseIterable, Sendable {
 				case appStoreVersionLocalizations
 			}
 
@@ -99,14 +99,14 @@ public struct AppAssetLibraryPlacementVideoRelationships: Codable {
 		}
 	}
 
-	public struct AppCustomProductPageLocalization: Codable {
+	public struct AppCustomProductPageLocalization: Codable, Sendable {
 		public var data: Data?
 
-		public struct Data: Codable, Identifiable {
+		public struct Data: Codable, Identifiable, Sendable {
 			public var type: `Type`
 			public var id: String
 
-			public enum `Type`: String, Codable, CaseIterable {
+			public enum `Type`: String, Codable, CaseIterable, Sendable {
 				case appCustomProductPageLocalizations
 			}
 
@@ -143,14 +143,14 @@ public struct AppAssetLibraryPlacementVideoRelationships: Codable {
 		}
 	}
 
-	public struct AppStoreVersionExperimentTreatmentLocalization: Codable {
+	public struct AppStoreVersionExperimentTreatmentLocalization: Codable, Sendable {
 		public var data: Data?
 
-		public struct Data: Codable, Identifiable {
+		public struct Data: Codable, Identifiable, Sendable {
 			public var type: `Type`
 			public var id: String
 
-			public enum `Type`: String, Codable, CaseIterable {
+			public enum `Type`: String, Codable, CaseIterable, Sendable {
 				case appStoreVersionExperimentTreatmentLocalizations
 			}
 
@@ -187,14 +187,14 @@ public struct AppAssetLibraryPlacementVideoRelationships: Codable {
 		}
 	}
 
-	public struct RetentionMessageVersion: Codable {
+	public struct RetentionMessageVersion: Codable, Sendable {
 		public var data: Data?
 
-		public struct Data: Codable, Identifiable {
+		public struct Data: Codable, Identifiable, Sendable {
 			public var type: `Type`
 			public var id: String
 
-			public enum `Type`: String, Codable, CaseIterable {
+			public enum `Type`: String, Codable, CaseIterable, Sendable {
 				case retentionMessageVersions
 			}
 
@@ -231,14 +231,14 @@ public struct AppAssetLibraryPlacementVideoRelationships: Codable {
 		}
 	}
 
-	public struct Video: Codable {
+	public struct Video: Codable, Sendable {
 		public var data: Data?
 
-		public struct Data: Codable, Identifiable {
+		public struct Data: Codable, Identifiable, Sendable {
 			public var type: `Type`
 			public var id: String
 
-			public enum `Type`: String, Codable, CaseIterable {
+			public enum `Type`: String, Codable, CaseIterable, Sendable {
 				case appAssetLibraryVideos
 			}
 

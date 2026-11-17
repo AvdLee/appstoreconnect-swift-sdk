@@ -3,31 +3,31 @@
 
 import Foundation
 
-public struct BuildUploadFileCreateRequest: Codable {
+public struct BuildUploadFileCreateRequest: Codable, Sendable {
 	public var data: Data
 
-	public struct Data: Codable {
+	public struct Data: Codable, Sendable {
 		public var type: `Type`
 		public var attributes: Attributes
 		public var relationships: Relationships
 
-		public enum `Type`: String, Codable, CaseIterable {
+		public enum `Type`: String, Codable, CaseIterable, Sendable {
 			case buildUploadFiles
 		}
 
-		public struct Attributes: Codable {
+		public struct Attributes: Codable, Sendable {
 			public var assetType: AssetType
 			public var fileName: String
 			public var fileSize: Int64
 			public var uti: Uti
 
-			public enum AssetType: String, Codable, CaseIterable {
+			public enum AssetType: String, Codable, CaseIterable, Sendable {
 				case asset = "ASSET"
 				case assetDescription = "ASSET_DESCRIPTION"
 				case assetSpi = "ASSET_SPI"
 			}
 
-			public enum Uti: String, Codable, CaseIterable {
+			public enum Uti: String, Codable, CaseIterable, Sendable {
 				case comAppleBinaryPropertyList = "com.apple.binary-property-list"
 				case comAppleIpa = "com.apple.ipa"
 				case comApplePkg = "com.apple.pkg"
@@ -59,17 +59,17 @@ public struct BuildUploadFileCreateRequest: Codable {
 			}
 		}
 
-		public struct Relationships: Codable {
+		public struct Relationships: Codable, Sendable {
 			public var buildUpload: BuildUpload
 
-			public struct BuildUpload: Codable {
+			public struct BuildUpload: Codable, Sendable {
 				public var data: Data
 
-				public struct Data: Codable, Identifiable {
+				public struct Data: Codable, Identifiable, Sendable {
 					public var type: `Type`
 					public var id: String
 
-					public enum `Type`: String, Codable, CaseIterable {
+					public enum `Type`: String, Codable, CaseIterable, Sendable {
 						case buildUploads
 					}
 

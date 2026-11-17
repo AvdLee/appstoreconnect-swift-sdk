@@ -3,7 +3,7 @@
 
 import Foundation
 
-public struct WebhookDeliveriesResponse: Codable {
+public struct WebhookDeliveriesResponse: Codable, Sendable {
 	public var data: [WebhookDelivery]
 	public var included: [WebhookEvent]?
 	public var links: PagedDocumentLinks

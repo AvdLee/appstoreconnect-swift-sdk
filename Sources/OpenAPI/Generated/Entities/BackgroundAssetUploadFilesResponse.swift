@@ -3,7 +3,7 @@
 
 import Foundation
 
-public struct BackgroundAssetUploadFilesResponse: Codable {
+public struct BackgroundAssetUploadFilesResponse: Codable, Sendable {
 	public var data: [BackgroundAssetUploadFile]
 	public var links: PagedDocumentLinks
 	public var meta: PagingInformation?

@@ -3,19 +3,19 @@
 
 import Foundation
 
-public struct AppEventUpdateRequest: Codable {
+public struct AppEventUpdateRequest: Codable, Sendable {
 	public var data: Data
 
-	public struct Data: Codable, Identifiable {
+	public struct Data: Codable, Identifiable, Sendable {
 		public var type: `Type`
 		public var id: String
 		public var attributes: Attributes?
 
-		public enum `Type`: String, Codable, CaseIterable {
+		public enum `Type`: String, Codable, CaseIterable, Sendable {
 			case appEvents
 		}
 
-		public struct Attributes: Codable {
+		public struct Attributes: Codable, Sendable {
 			public var referenceName: String?
 			public var badge: Badge?
 			public var deepLink: URL?
@@ -25,7 +25,7 @@ public struct AppEventUpdateRequest: Codable {
 			public var purpose: Purpose?
 			public var territorySchedules: [TerritorySchedule]?
 
-			public enum Badge: String, Codable, CaseIterable {
+			public enum Badge: String, Codable, CaseIterable, Sendable {
 				case liveEvent = "LIVE_EVENT"
 				case premiere = "PREMIERE"
 				case challenge = "CHALLENGE"
@@ -35,24 +35,24 @@ public struct AppEventUpdateRequest: Codable {
 				case specialEvent = "SPECIAL_EVENT"
 			}
 
-			public enum PurchaseRequirement: String, Codable, CaseIterable {
+			public enum PurchaseRequirement: String, Codable, CaseIterable, Sendable {
 				case noCostAssociated = "NO_COST_ASSOCIATED"
 				case inAppPurchase = "IN_APP_PURCHASE"
 			}
 
-			public enum Priority: String, Codable, CaseIterable {
+			public enum Priority: String, Codable, CaseIterable, Sendable {
 				case high = "HIGH"
 				case normal = "NORMAL"
 			}
 
-			public enum Purpose: String, Codable, CaseIterable {
+			public enum Purpose: String, Codable, CaseIterable, Sendable {
 				case appropriateForAllUsers = "APPROPRIATE_FOR_ALL_USERS"
 				case attractNewUsers = "ATTRACT_NEW_USERS"
 				case keepActiveUsersInformed = "KEEP_ACTIVE_USERS_INFORMED"
 				case bringBackLapsedUsers = "BRING_BACK_LAPSED_USERS"
 			}
 
-			public struct TerritorySchedule: Codable {
+			public struct TerritorySchedule: Codable, Sendable {
 				public var territories: [String]?
 				public var publishStart: Date?
 				public var eventStart: Date?

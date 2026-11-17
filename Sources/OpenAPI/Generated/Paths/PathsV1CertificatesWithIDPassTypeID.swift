@@ -9,7 +9,7 @@ extension APIEndpoint.V1.Certificates.WithID {
 		PassTypeID(path: path + "/passTypeId")
 	}
 
-	public struct PassTypeID {
+	public struct PassTypeID: Sendable {
 		/// Path: `/v1/certificates/{id}/passTypeId`
 		public let path: String
 
@@ -17,19 +17,19 @@ extension APIEndpoint.V1.Certificates.WithID {
 			Request(path: path, method: "GET", query: parameters?.asQuery, id: "certificates_passTypeId_getToOneRelated")
 		}
 
-		public struct GetParameters {
+		public struct GetParameters: Sendable {
 			public var fieldsPassTypeIDs: [FieldsPassTypeIDs]?
 			public var fieldsCertificates: [FieldsCertificates]?
 			public var include: [Include]?
 			public var limitCertificates: Int?
 
-			public enum FieldsPassTypeIDs: String, Codable, CaseIterable {
+			public enum FieldsPassTypeIDs: String, Codable, CaseIterable, Sendable {
 				case name
 				case identifier
 				case certificates
 			}
 
-			public enum FieldsCertificates: String, Codable, CaseIterable {
+			public enum FieldsCertificates: String, Codable, CaseIterable, Sendable {
 				case name
 				case certificateType
 				case displayName
@@ -41,7 +41,7 @@ extension APIEndpoint.V1.Certificates.WithID {
 				case passTypeID = "passTypeId"
 			}
 
-			public enum Include: String, Codable, CaseIterable {
+			public enum Include: String, Codable, CaseIterable, Sendable {
 				case certificates
 			}
 

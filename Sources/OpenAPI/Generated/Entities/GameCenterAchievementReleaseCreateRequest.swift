@@ -4,29 +4,29 @@
 import Foundation
 
 @available(*, deprecated, message: "Deprecated")
-public struct GameCenterAchievementReleaseCreateRequest: Codable {
+public struct GameCenterAchievementReleaseCreateRequest: Codable, Sendable {
 	public var data: Data
 
-	public struct Data: Codable {
+	public struct Data: Codable, Sendable {
 		public var type: `Type`
 		public var relationships: Relationships
 
-		public enum `Type`: String, Codable, CaseIterable {
+		public enum `Type`: String, Codable, CaseIterable, Sendable {
 			case gameCenterAchievementReleases
 		}
 
-		public struct Relationships: Codable {
+		public struct Relationships: Codable, Sendable {
 			public var gameCenterDetail: GameCenterDetail
 			public var gameCenterAchievement: GameCenterAchievement
 
-			public struct GameCenterDetail: Codable {
+			public struct GameCenterDetail: Codable, Sendable {
 				public var data: Data
 
-				public struct Data: Codable, Identifiable {
+				public struct Data: Codable, Identifiable, Sendable {
 					public var type: `Type`
 					public var id: String
 
-					public enum `Type`: String, Codable, CaseIterable {
+					public enum `Type`: String, Codable, CaseIterable, Sendable {
 						case gameCenterDetails
 					}
 
@@ -63,14 +63,14 @@ public struct GameCenterAchievementReleaseCreateRequest: Codable {
 				}
 			}
 
-			public struct GameCenterAchievement: Codable {
+			public struct GameCenterAchievement: Codable, Sendable {
 				public var data: Data
 
-				public struct Data: Codable, Identifiable {
+				public struct Data: Codable, Identifiable, Sendable {
 					public var type: `Type`
 					public var id: String
 
-					public enum `Type`: String, Codable, CaseIterable {
+					public enum `Type`: String, Codable, CaseIterable, Sendable {
 						case gameCenterAchievements
 					}
 

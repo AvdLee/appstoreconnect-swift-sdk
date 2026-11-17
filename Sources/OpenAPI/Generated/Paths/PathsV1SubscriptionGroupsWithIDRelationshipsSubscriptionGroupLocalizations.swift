@@ -9,7 +9,7 @@ extension APIEndpoint.V1.SubscriptionGroups.WithID.Relationships {
 		SubscriptionGroupLocalizations(path: path + "/subscriptionGroupLocalizations")
 	}
 
-	public struct SubscriptionGroupLocalizations {
+	public struct SubscriptionGroupLocalizations: Sendable {
 		/// Path: `/v1/subscriptionGroups/{id}/relationships/subscriptionGroupLocalizations`
 		public let path: String
 

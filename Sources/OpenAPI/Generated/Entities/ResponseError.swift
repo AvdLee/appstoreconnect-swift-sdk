@@ -3,7 +3,7 @@
 
 import Foundation
 
-public struct ResponseError: Codable, Identifiable {
+public struct ResponseError: Codable, Identifiable, Sendable {
 	public var id: String?
 	public var status: String
 	public var code: String
@@ -13,7 +13,7 @@ public struct ResponseError: Codable, Identifiable {
 	public var links: ErrorLinks?
 	public var meta: Meta?
 
-	public enum Source: Codable {
+	public enum Source: Codable, Sendable {
 		case errorSourcePointer(ErrorSourcePointer)
 		case errorSourceParameter(ErrorSourceParameter)
 
@@ -40,7 +40,7 @@ public struct ResponseError: Codable, Identifiable {
 		}
 	}
 
-	public struct Meta: Codable {
+	public struct Meta: Codable, Sendable {
 		public var associatedErrors: [String: [ResponseError]]?
 
 		public init(associatedErrors: [String: [ResponseError]]? = nil) {

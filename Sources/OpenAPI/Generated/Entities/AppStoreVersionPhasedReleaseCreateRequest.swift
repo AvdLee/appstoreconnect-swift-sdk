@@ -3,19 +3,19 @@
 
 import Foundation
 
-public struct AppStoreVersionPhasedReleaseCreateRequest: Codable {
+public struct AppStoreVersionPhasedReleaseCreateRequest: Codable, Sendable {
 	public var data: Data
 
-	public struct Data: Codable {
+	public struct Data: Codable, Sendable {
 		public var type: `Type`
 		public var attributes: Attributes?
 		public var relationships: Relationships
 
-		public enum `Type`: String, Codable, CaseIterable {
+		public enum `Type`: String, Codable, CaseIterable, Sendable {
 			case appStoreVersionPhasedReleases
 		}
 
-		public struct Attributes: Codable {
+		public struct Attributes: Codable, Sendable {
 			public var phasedReleaseState: PhasedReleaseState?
 
 			public init(phasedReleaseState: PhasedReleaseState? = nil) {
@@ -33,17 +33,17 @@ public struct AppStoreVersionPhasedReleaseCreateRequest: Codable {
 			}
 		}
 
-		public struct Relationships: Codable {
+		public struct Relationships: Codable, Sendable {
 			public var appStoreVersion: AppStoreVersion
 
-			public struct AppStoreVersion: Codable {
+			public struct AppStoreVersion: Codable, Sendable {
 				public var data: Data
 
-				public struct Data: Codable, Identifiable {
+				public struct Data: Codable, Identifiable, Sendable {
 					public var type: `Type`
 					public var id: String
 
-					public enum `Type`: String, Codable, CaseIterable {
+					public enum `Type`: String, Codable, CaseIterable, Sendable {
 						case appStoreVersions
 					}
 

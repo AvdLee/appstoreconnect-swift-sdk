@@ -9,7 +9,7 @@ extension APIEndpoint.V1.Apps.WithID {
 		Builds(path: path + "/builds")
 	}
 
-	public struct Builds {
+	public struct Builds: Sendable {
 		/// Path: `/v1/apps/{id}/builds`
 		public let path: String
 
@@ -24,7 +24,7 @@ extension APIEndpoint.V1.Apps.WithID {
 			return encoder.items
 		}
 
-		public enum FieldsBuilds: String, Codable, CaseIterable {
+		public enum FieldsBuilds: String, Codable, CaseIterable, Sendable {
 			case version
 			case uploadedDate
 			case expirationDate

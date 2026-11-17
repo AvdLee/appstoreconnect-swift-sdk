@@ -39,15 +39,20 @@ jobs:
         run: set -o pipefail && xcodebuild -scheme AppStoreConnect-Swift-SDK -destination "${{ matrix.destination }}" test | xcbeautify
 
   linux_test:
-    name: Test Linux
+    name: Test Linux (Swift ${{ matrix.swift }})
     runs-on: ubuntu-latest
     timeout-minutes: 30
+    strategy:
+      matrix:
+        # 6.2 builds Package@swift-5.7.swift (one module, Swift 5 mode);
+        # 6.4 builds Package.swift (Swift 6 language mode).
+        swift: ["6.2", "6.4"]
     steps:
       - name: Checkout
         uses: actions/checkout@v4
       - name: Swiftly
         uses: vapor/swiftly-action@v0.2.1
         with:
-          toolchain: latest
+          toolchain: ${{ matrix.swift }}
       - name: Test
         run: swift test

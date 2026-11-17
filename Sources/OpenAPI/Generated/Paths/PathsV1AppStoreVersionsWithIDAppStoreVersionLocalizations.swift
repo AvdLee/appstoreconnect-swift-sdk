@@ -9,7 +9,7 @@ extension APIEndpoint.V1.AppStoreVersions.WithID {
 		AppStoreVersionLocalizations(path: path + "/appStoreVersionLocalizations")
 	}
 
-	public struct AppStoreVersionLocalizations {
+	public struct AppStoreVersionLocalizations: Sendable {
 		/// Path: `/v1/appStoreVersions/{id}/appStoreVersionLocalizations`
 		public let path: String
 
@@ -17,7 +17,7 @@ extension APIEndpoint.V1.AppStoreVersions.WithID {
 			Request(path: path, method: "GET", query: parameters?.asQuery, id: "appStoreVersions_appStoreVersionLocalizations_getToManyRelated")
 		}
 
-		public struct GetParameters {
+		public struct GetParameters: Sendable {
 			public var filterLocale: [String]?
 			public var fieldsAppStoreVersionLocalizations: [FieldsAppStoreVersionLocalizations]?
 			public var fieldsAppStoreVersions: [FieldsAppStoreVersions]?
@@ -32,7 +32,7 @@ extension APIEndpoint.V1.AppStoreVersions.WithID {
 			public var limitSearchKeywords: Int?
 			public var limitPlacements: Int?
 
-			public enum FieldsAppStoreVersionLocalizations: String, Codable, CaseIterable {
+			public enum FieldsAppStoreVersionLocalizations: String, Codable, CaseIterable, Sendable {
 				case description
 				case locale
 				case keywords
@@ -47,7 +47,7 @@ extension APIEndpoint.V1.AppStoreVersions.WithID {
 				case placements
 			}
 
-			public enum FieldsAppStoreVersions: String, Codable, CaseIterable {
+			public enum FieldsAppStoreVersions: String, Codable, CaseIterable, Sendable {
 				case platform
 				case versionString
 				case appStoreState
@@ -74,7 +74,7 @@ extension APIEndpoint.V1.AppStoreVersions.WithID {
 				case alternativeDistributionPackage
 			}
 
-			public enum FieldsAppScreenshotSets: String, Codable, CaseIterable {
+			public enum FieldsAppScreenshotSets: String, Codable, CaseIterable, Sendable {
 				case screenshotDisplayType
 				case appStoreVersionLocalization
 				case appCustomProductPageLocalization
@@ -82,7 +82,7 @@ extension APIEndpoint.V1.AppStoreVersions.WithID {
 				case appScreenshots
 			}
 
-			public enum FieldsAppPreviewSets: String, Codable, CaseIterable {
+			public enum FieldsAppPreviewSets: String, Codable, CaseIterable, Sendable {
 				case previewType
 				case appStoreVersionLocalization
 				case appCustomProductPageLocalization
@@ -90,7 +90,7 @@ extension APIEndpoint.V1.AppStoreVersions.WithID {
 				case appPreviews
 			}
 
-			public enum FieldsAppAssetLibraryPlacements: String, Codable, CaseIterable {
+			public enum FieldsAppAssetLibraryPlacements: String, Codable, CaseIterable, Sendable {
 				case mediaType
 				case placementType
 				case placementGroup
@@ -107,7 +107,7 @@ extension APIEndpoint.V1.AppStoreVersions.WithID {
 				case retentionMessageVersion
 			}
 
-			public enum Include: String, Codable, CaseIterable {
+			public enum Include: String, Codable, CaseIterable, Sendable {
 				case appStoreVersion
 				case appScreenshotSets
 				case appPreviewSets

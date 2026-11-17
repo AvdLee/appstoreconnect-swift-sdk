@@ -9,7 +9,7 @@ extension APIEndpoint.V1.Apps.WithID {
 		MarketplaceSearchDetail(path: path + "/marketplaceSearchDetail")
 	}
 
-	public struct MarketplaceSearchDetail {
+	public struct MarketplaceSearchDetail: Sendable {
 		/// Path: `/v1/apps/{id}/marketplaceSearchDetail`
 		public let path: String
 
@@ -23,7 +23,7 @@ extension APIEndpoint.V1.Apps.WithID {
 			return encoder.items
 		}
 
-		public enum FieldsMarketplaceSearchDetails: String, Codable, CaseIterable {
+		public enum FieldsMarketplaceSearchDetails: String, Codable, CaseIterable, Sendable {
 			case catalogURL = "catalogUrl"
 		}
 	}

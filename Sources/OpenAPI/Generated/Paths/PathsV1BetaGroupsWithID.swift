@@ -9,7 +9,7 @@ extension APIEndpoint.V1.BetaGroups {
 		WithID(path: "\(path)/\(id)")
 	}
 
-	public struct WithID {
+	public struct WithID: Sendable {
 		/// Path: `/v1/betaGroups/{id}`
 		public let path: String
 
@@ -17,7 +17,7 @@ extension APIEndpoint.V1.BetaGroups {
 			Request(path: path, method: "GET", query: parameters?.asQuery, id: "betaGroups_getInstance")
 		}
 
-		public struct GetParameters {
+		public struct GetParameters: Sendable {
 			public var fieldsBetaGroups: [FieldsBetaGroups]?
 			public var fieldsApps: [FieldsApps]?
 			public var fieldsBuilds: [FieldsBuilds]?
@@ -27,7 +27,7 @@ extension APIEndpoint.V1.BetaGroups {
 			public var limitBetaTesters: Int?
 			public var limitBuilds: Int?
 
-			public enum FieldsBetaGroups: String, Codable, CaseIterable {
+			public enum FieldsBetaGroups: String, Codable, CaseIterable, Sendable {
 				case name
 				case createdDate
 				case isInternalGroup
@@ -47,7 +47,7 @@ extension APIEndpoint.V1.BetaGroups {
 				case betaRecruitmentCriterionCompatibleBuildCheck
 			}
 
-			public enum FieldsApps: String, Codable, CaseIterable {
+			public enum FieldsApps: String, Codable, CaseIterable, Sendable {
 				case accessibilityURL = "accessibilityUrl"
 				case name
 				case bundleID = "bundleId"
@@ -108,7 +108,7 @@ extension APIEndpoint.V1.BetaGroups {
 				case androidToIosAppMappingDetails
 			}
 
-			public enum FieldsBuilds: String, Codable, CaseIterable {
+			public enum FieldsBuilds: String, Codable, CaseIterable, Sendable {
 				case version
 				case uploadedDate
 				case expirationDate
@@ -137,7 +137,7 @@ extension APIEndpoint.V1.BetaGroups {
 				case diagnosticSignatures
 			}
 
-			public enum FieldsBetaTesters: String, Codable, CaseIterable {
+			public enum FieldsBetaTesters: String, Codable, CaseIterable, Sendable {
 				case firstName
 				case lastName
 				case email
@@ -149,12 +149,12 @@ extension APIEndpoint.V1.BetaGroups {
 				case builds
 			}
 
-			public enum FieldsBetaRecruitmentCriteria: String, Codable, CaseIterable {
+			public enum FieldsBetaRecruitmentCriteria: String, Codable, CaseIterable, Sendable {
 				case lastModifiedDate
 				case deviceFamilyOsVersionFilters
 			}
 
-			public enum Include: String, Codable, CaseIterable {
+			public enum Include: String, Codable, CaseIterable, Sendable {
 				case app
 				case builds
 				case betaTesters

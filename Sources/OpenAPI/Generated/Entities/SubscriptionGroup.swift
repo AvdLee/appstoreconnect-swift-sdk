@@ -3,18 +3,18 @@
 
 import Foundation
 
-public struct SubscriptionGroup: Codable, Identifiable {
+public struct SubscriptionGroup: Codable, Identifiable, Sendable {
 	public var type: `Type`
 	public var id: String
 	public var attributes: Attributes?
 	public var relationships: Relationships?
 	public var links: ResourceLinks?
 
-	public enum `Type`: String, Codable, CaseIterable {
+	public enum `Type`: String, Codable, CaseIterable, Sendable {
 		case subscriptionGroups
 	}
 
-	public struct Attributes: Codable {
+	public struct Attributes: Codable, Sendable {
 		public var referenceName: String?
 
 		public init(referenceName: String? = nil) {
@@ -32,21 +32,21 @@ public struct SubscriptionGroup: Codable, Identifiable {
 		}
 	}
 
-	public struct Relationships: Codable {
+	public struct Relationships: Codable, Sendable {
 		public var subscriptions: Subscriptions?
 		public var subscriptionGroupLocalizations: SubscriptionGroupLocalizations?
 		public var versions: Versions?
 
-		public struct Subscriptions: Codable {
+		public struct Subscriptions: Codable, Sendable {
 			public var links: RelationshipLinks?
 			public var meta: PagingInformation?
 			public var data: [Datum]?
 
-			public struct Datum: Codable, Identifiable {
+			public struct Datum: Codable, Identifiable, Sendable {
 				public var type: `Type`
 				public var id: String
 
-				public enum `Type`: String, Codable, CaseIterable {
+				public enum `Type`: String, Codable, CaseIterable, Sendable {
 					case subscriptions
 				}
 
@@ -89,16 +89,16 @@ public struct SubscriptionGroup: Codable, Identifiable {
 			}
 		}
 
-		public struct SubscriptionGroupLocalizations: Codable {
+		public struct SubscriptionGroupLocalizations: Codable, Sendable {
 			public var links: RelationshipLinks?
 			public var meta: PagingInformation?
 			public var data: [Datum]?
 
-			public struct Datum: Codable, Identifiable {
+			public struct Datum: Codable, Identifiable, Sendable {
 				public var type: `Type`
 				public var id: String
 
-				public enum `Type`: String, Codable, CaseIterable {
+				public enum `Type`: String, Codable, CaseIterable, Sendable {
 					case subscriptionGroupLocalizations
 				}
 
@@ -141,16 +141,16 @@ public struct SubscriptionGroup: Codable, Identifiable {
 			}
 		}
 
-		public struct Versions: Codable {
+		public struct Versions: Codable, Sendable {
 			public var links: RelationshipLinks?
 			public var meta: PagingInformation?
 			public var data: [Datum]?
 
-			public struct Datum: Codable, Identifiable {
+			public struct Datum: Codable, Identifiable, Sendable {
 				public var type: `Type`
 				public var id: String
 
-				public enum `Type`: String, Codable, CaseIterable {
+				public enum `Type`: String, Codable, CaseIterable, Sendable {
 					case subscriptionGroupVersions
 				}
 

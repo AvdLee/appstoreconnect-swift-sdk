@@ -9,7 +9,7 @@ extension APIEndpoint.V1.GameCenterMatchmakingRuleSets.WithID.Relationships {
 		Teams(path: path + "/teams")
 	}
 
-	public struct Teams {
+	public struct Teams: Sendable {
 		/// Path: `/v1/gameCenterMatchmakingRuleSets/{id}/relationships/teams`
 		public let path: String
 

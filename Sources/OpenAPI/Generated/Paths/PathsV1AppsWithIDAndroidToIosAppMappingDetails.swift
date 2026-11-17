@@ -9,7 +9,7 @@ extension APIEndpoint.V1.Apps.WithID {
 		AndroidToIosAppMappingDetails(path: path + "/androidToIosAppMappingDetails")
 	}
 
-	public struct AndroidToIosAppMappingDetails {
+	public struct AndroidToIosAppMappingDetails: Sendable {
 		/// Path: `/v1/apps/{id}/androidToIosAppMappingDetails`
 		public let path: String
 
@@ -24,7 +24,7 @@ extension APIEndpoint.V1.Apps.WithID {
 			return encoder.items
 		}
 
-		public enum FieldsAndroidToIosAppMappingDetails: String, Codable, CaseIterable {
+		public enum FieldsAndroidToIosAppMappingDetails: String, Codable, CaseIterable, Sendable {
 			case packageName
 			case appSigningKeyPublicCertificateSha256Fingerprints
 		}

@@ -9,7 +9,7 @@ extension APIEndpoint.V1.Builds.WithID {
 		Icons(path: path + "/icons")
 	}
 
-	public struct Icons {
+	public struct Icons: Sendable {
 		/// Path: `/v1/builds/{id}/icons`
 		public let path: String
 
@@ -24,7 +24,7 @@ extension APIEndpoint.V1.Builds.WithID {
 			return encoder.items
 		}
 
-		public enum FieldsBuildIcons: String, Codable, CaseIterable {
+		public enum FieldsBuildIcons: String, Codable, CaseIterable, Sendable {
 			case iconAsset
 			case iconType
 			case masked

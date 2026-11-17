@@ -3,12 +3,12 @@
 
 import Foundation
 
-public struct WebhookPing: Codable, Identifiable {
+public struct WebhookPing: Codable, Identifiable, Sendable {
 	public var type: `Type`
 	public var id: String
 	public var links: ResourceLinks?
 
-	public enum `Type`: String, Codable, CaseIterable {
+	public enum `Type`: String, Codable, CaseIterable, Sendable {
 		case webhookPings
 	}
 

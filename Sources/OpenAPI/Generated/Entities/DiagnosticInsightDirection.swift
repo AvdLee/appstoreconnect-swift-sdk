@@ -3,7 +3,7 @@
 
 import Foundation
 
-public enum DiagnosticInsightDirection: String, Codable, CaseIterable {
+public enum DiagnosticInsightDirection: String, Codable, CaseIterable, Sendable {
 	case up = "UP"
 	case down = "DOWN"
 	case undefined = "UNDEFINED"

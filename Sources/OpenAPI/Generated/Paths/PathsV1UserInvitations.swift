@@ -9,7 +9,7 @@ extension APIEndpoint.V1 {
 		UserInvitations(path: path + "/userInvitations")
 	}
 
-	public struct UserInvitations {
+	public struct UserInvitations: Sendable {
 		/// Path: `/v1/userInvitations`
 		public let path: String
 
@@ -17,7 +17,7 @@ extension APIEndpoint.V1 {
 			Request(path: path, method: "GET", query: parameters?.asQuery, id: "userInvitations_getCollection")
 		}
 
-		public struct GetParameters {
+		public struct GetParameters: Sendable {
 			public var filterEmail: [String]?
 			public var filterRoles: [FilterRoles]?
 			public var filterVisibleApps: [String]?
@@ -28,7 +28,7 @@ extension APIEndpoint.V1 {
 			public var include: [Include]?
 			public var limitVisibleApps: Int?
 
-			public enum FilterRoles: String, Codable, CaseIterable {
+			public enum FilterRoles: String, Codable, CaseIterable, Sendable {
 				case admin = "ADMIN"
 				case finance = "FINANCE"
 				case accountHolder = "ACCOUNT_HOLDER"
@@ -44,14 +44,14 @@ extension APIEndpoint.V1 {
 				case generateIndividualKeys = "GENERATE_INDIVIDUAL_KEYS"
 			}
 
-			public enum Sort: String, Codable, CaseIterable {
+			public enum Sort: String, Codable, CaseIterable, Sendable {
 				case email
 				case minusemail = "-email"
 				case lastName
 				case minuslastName = "-lastName"
 			}
 
-			public enum FieldsUserInvitations: String, Codable, CaseIterable {
+			public enum FieldsUserInvitations: String, Codable, CaseIterable, Sendable {
 				case email
 				case firstName
 				case lastName
@@ -62,7 +62,7 @@ extension APIEndpoint.V1 {
 				case visibleApps
 			}
 
-			public enum FieldsApps: String, Codable, CaseIterable {
+			public enum FieldsApps: String, Codable, CaseIterable, Sendable {
 				case accessibilityURL = "accessibilityUrl"
 				case name
 				case bundleID = "bundleId"
@@ -123,7 +123,7 @@ extension APIEndpoint.V1 {
 				case androidToIosAppMappingDetails
 			}
 
-			public enum Include: String, Codable, CaseIterable {
+			public enum Include: String, Codable, CaseIterable, Sendable {
 				case visibleApps
 			}
 

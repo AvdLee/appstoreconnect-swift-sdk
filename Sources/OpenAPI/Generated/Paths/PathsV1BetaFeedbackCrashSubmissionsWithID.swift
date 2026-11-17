@@ -9,7 +9,7 @@ extension APIEndpoint.V1.BetaFeedbackCrashSubmissions {
 		WithID(path: "\(path)/\(id)")
 	}
 
-	public struct WithID {
+	public struct WithID: Sendable {
 		/// Path: `/v1/betaFeedbackCrashSubmissions/{id}`
 		public let path: String
 
@@ -17,13 +17,13 @@ extension APIEndpoint.V1.BetaFeedbackCrashSubmissions {
 			Request(path: path, method: "GET", query: parameters?.asQuery, id: "betaFeedbackCrashSubmissions_getInstance")
 		}
 
-		public struct GetParameters {
+		public struct GetParameters: Sendable {
 			public var fieldsBetaFeedbackCrashSubmissions: [FieldsBetaFeedbackCrashSubmissions]?
 			public var fieldsBuilds: [FieldsBuilds]?
 			public var fieldsBetaTesters: [FieldsBetaTesters]?
 			public var include: [Include]?
 
-			public enum FieldsBetaFeedbackCrashSubmissions: String, Codable, CaseIterable {
+			public enum FieldsBetaFeedbackCrashSubmissions: String, Codable, CaseIterable, Sendable {
 				case createdDate
 				case comment
 				case email
@@ -49,7 +49,7 @@ extension APIEndpoint.V1.BetaFeedbackCrashSubmissions {
 				case tester
 			}
 
-			public enum FieldsBuilds: String, Codable, CaseIterable {
+			public enum FieldsBuilds: String, Codable, CaseIterable, Sendable {
 				case version
 				case uploadedDate
 				case expirationDate
@@ -78,7 +78,7 @@ extension APIEndpoint.V1.BetaFeedbackCrashSubmissions {
 				case diagnosticSignatures
 			}
 
-			public enum FieldsBetaTesters: String, Codable, CaseIterable {
+			public enum FieldsBetaTesters: String, Codable, CaseIterable, Sendable {
 				case firstName
 				case lastName
 				case email
@@ -90,7 +90,7 @@ extension APIEndpoint.V1.BetaFeedbackCrashSubmissions {
 				case builds
 			}
 
-			public enum Include: String, Codable, CaseIterable {
+			public enum Include: String, Codable, CaseIterable, Sendable {
 				case build
 				case tester
 			}

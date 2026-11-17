@@ -3,7 +3,7 @@
 
 import Foundation
 
-public struct AppMediaStateError: Codable {
+public struct AppMediaStateError: Codable, Sendable {
 	public var code: String?
 	public var description: String?
 

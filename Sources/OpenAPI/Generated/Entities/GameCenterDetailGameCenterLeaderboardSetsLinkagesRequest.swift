@@ -4,14 +4,14 @@
 import Foundation
 
 @available(*, deprecated, message: "Deprecated")
-public struct GameCenterDetailGameCenterLeaderboardSetsLinkagesRequest: Codable {
+public struct GameCenterDetailGameCenterLeaderboardSetsLinkagesRequest: Codable, Sendable {
 	public var data: [Datum]
 
-	public struct Datum: Codable, Identifiable {
+	public struct Datum: Codable, Identifiable, Sendable {
 		public var type: `Type`
 		public var id: String
 
-		public enum `Type`: String, Codable, CaseIterable {
+		public enum `Type`: String, Codable, CaseIterable, Sendable {
 			case gameCenterLeaderboardSets
 		}
 

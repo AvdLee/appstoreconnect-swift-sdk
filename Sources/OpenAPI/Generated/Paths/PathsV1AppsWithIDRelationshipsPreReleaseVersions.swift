@@ -9,7 +9,7 @@ extension APIEndpoint.V1.Apps.WithID.Relationships {
 		PreReleaseVersions(path: path + "/preReleaseVersions")
 	}
 
-	public struct PreReleaseVersions {
+	public struct PreReleaseVersions: Sendable {
 		/// Path: `/v1/apps/{id}/relationships/preReleaseVersions`
 		public let path: String
 

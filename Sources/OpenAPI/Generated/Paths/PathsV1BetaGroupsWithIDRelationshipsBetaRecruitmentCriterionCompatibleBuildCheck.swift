@@ -9,7 +9,7 @@ extension APIEndpoint.V1.BetaGroups.WithID.Relationships {
 		BetaRecruitmentCriterionCompatibleBuildCheck(path: path + "/betaRecruitmentCriterionCompatibleBuildCheck")
 	}
 
-	public struct BetaRecruitmentCriterionCompatibleBuildCheck {
+	public struct BetaRecruitmentCriterionCompatibleBuildCheck: Sendable {
 		/// Path: `/v1/betaGroups/{id}/relationships/betaRecruitmentCriterionCompatibleBuildCheck`
 		public let path: String
 

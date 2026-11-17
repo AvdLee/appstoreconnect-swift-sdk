@@ -9,7 +9,7 @@ extension APIEndpoint.V1 {
 		DiagnosticSignatures(path: path + "/diagnosticSignatures")
 	}
 
-	public struct DiagnosticSignatures {
+	public struct DiagnosticSignatures: Sendable {
 		/// Path: `/v1/diagnosticSignatures`
 		public let path: String
 	}

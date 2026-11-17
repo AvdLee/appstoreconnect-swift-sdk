@@ -3,7 +3,7 @@
 
 import Foundation
 
-public enum InAppPurchaseState: String, Codable, CaseIterable {
+public enum InAppPurchaseState: String, Codable, CaseIterable, Sendable {
 	case missingMetadata = "MISSING_METADATA"
 	case waitingForUpload = "WAITING_FOR_UPLOAD"
 	case processingContent = "PROCESSING_CONTENT"

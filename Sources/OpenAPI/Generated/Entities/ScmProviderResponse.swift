@@ -3,7 +3,7 @@
 
 import Foundation
 
-public struct ScmProviderResponse: Codable {
+public struct ScmProviderResponse: Codable, Sendable {
 	/// ScmProvider
 	public var data: ScmProvider
 	public var links: DocumentLinks

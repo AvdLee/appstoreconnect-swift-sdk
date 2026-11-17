@@ -3,7 +3,7 @@
 
 import Foundation
 
-public struct BetaLicenseAgreementsResponse: Codable {
+public struct BetaLicenseAgreementsResponse: Codable, Sendable {
 	public var data: [BetaLicenseAgreement]
 	public var included: [App]?
 	public var links: PagedDocumentLinks

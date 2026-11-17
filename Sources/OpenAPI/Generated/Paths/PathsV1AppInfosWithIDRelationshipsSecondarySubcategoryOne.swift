@@ -9,7 +9,7 @@ extension APIEndpoint.V1.AppInfos.WithID.Relationships {
 		SecondarySubcategoryOne(path: path + "/secondarySubcategoryOne")
 	}
 
-	public struct SecondarySubcategoryOne {
+	public struct SecondarySubcategoryOne: Sendable {
 		/// Path: `/v1/appInfos/{id}/relationships/secondarySubcategoryOne`
 		public let path: String
 

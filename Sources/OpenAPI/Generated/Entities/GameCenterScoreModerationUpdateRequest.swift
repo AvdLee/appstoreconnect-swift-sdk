@@ -3,19 +3,19 @@
 
 import Foundation
 
-public struct GameCenterScoreModerationUpdateRequest: Codable {
+public struct GameCenterScoreModerationUpdateRequest: Codable, Sendable {
 	public var data: Data
 
-	public struct Data: Codable, Identifiable {
+	public struct Data: Codable, Identifiable, Sendable {
 		public var type: `Type`
 		public var id: String
 		public var attributes: Attributes?
 
-		public enum `Type`: String, Codable, CaseIterable {
+		public enum `Type`: String, Codable, CaseIterable, Sendable {
 			case gameCenterScoreModerations
 		}
 
-		public struct Attributes: Codable {
+		public struct Attributes: Codable, Sendable {
 			public var isBlocked: Bool?
 
 			public init(isBlocked: Bool? = nil) {

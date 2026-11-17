@@ -3,7 +3,7 @@
 
 import Foundation
 
-public struct AppAssetLibraryPlacementOrderingRequestResponse: Codable {
+public struct AppAssetLibraryPlacementOrderingRequestResponse: Codable, Sendable {
 	/// AppAssetLibraryPlacementOrderingRequest
 	public var data: AppAssetLibraryPlacementOrderingRequest
 	public var included: [AppAssetLibraryPlacement]?

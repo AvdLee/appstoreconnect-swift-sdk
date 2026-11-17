@@ -9,7 +9,7 @@ extension APIEndpoint.V1 {
 		GameCenterMatchmakingQueues(path: path + "/gameCenterMatchmakingQueues")
 	}
 
-	public struct GameCenterMatchmakingQueues {
+	public struct GameCenterMatchmakingQueues: Sendable {
 		/// Path: `/v1/gameCenterMatchmakingQueues`
 		public let path: String
 
@@ -17,20 +17,20 @@ extension APIEndpoint.V1 {
 			Request(path: path, method: "GET", query: parameters?.asQuery, id: "gameCenterMatchmakingQueues_getCollection")
 		}
 
-		public struct GetParameters {
+		public struct GetParameters: Sendable {
 			public var fieldsGameCenterMatchmakingQueues: [FieldsGameCenterMatchmakingQueues]?
 			public var fieldsGameCenterMatchmakingRuleSets: [FieldsGameCenterMatchmakingRuleSets]?
 			public var limit: Int?
 			public var include: [Include]?
 
-			public enum FieldsGameCenterMatchmakingQueues: String, Codable, CaseIterable {
+			public enum FieldsGameCenterMatchmakingQueues: String, Codable, CaseIterable, Sendable {
 				case referenceName
 				case classicMatchmakingBundleIDs = "classicMatchmakingBundleIds"
 				case ruleSet
 				case experimentRuleSet
 			}
 
-			public enum FieldsGameCenterMatchmakingRuleSets: String, Codable, CaseIterable {
+			public enum FieldsGameCenterMatchmakingRuleSets: String, Codable, CaseIterable, Sendable {
 				case referenceName
 				case ruleLanguageVersion
 				case minPlayers
@@ -40,7 +40,7 @@ extension APIEndpoint.V1 {
 				case matchmakingQueues
 			}
 
-			public enum Include: String, Codable, CaseIterable {
+			public enum Include: String, Codable, CaseIterable, Sendable {
 				case ruleSet
 				case experimentRuleSet
 			}

@@ -3,7 +3,7 @@
 
 import Foundation
 
-public struct CiXcodeVersionsResponse: Codable {
+public struct CiXcodeVersionsResponse: Codable, Sendable {
 	public var data: [CiXcodeVersion]
 	public var included: [CiMacOsVersion]?
 	public var links: PagedDocumentLinks

@@ -9,7 +9,7 @@ extension APIEndpoint.V1.BundleIDs {
 		WithID(path: "\(path)/\(id)")
 	}
 
-	public struct WithID {
+	public struct WithID: Sendable {
 		/// Path: `/v1/bundleIds/{id}`
 		public let path: String
 
@@ -17,7 +17,7 @@ extension APIEndpoint.V1.BundleIDs {
 			Request(path: path, method: "GET", query: parameters?.asQuery, id: "bundleIds_getInstance")
 		}
 
-		public struct GetParameters {
+		public struct GetParameters: Sendable {
 			public var fieldsBundleIDs: [FieldsBundleIDs]?
 			public var fieldsProfiles: [FieldsProfiles]?
 			public var fieldsBundleIDCapabilities: [FieldsBundleIDCapabilities]?
@@ -26,7 +26,7 @@ extension APIEndpoint.V1.BundleIDs {
 			public var limitBundleIDCapabilities: Int?
 			public var limitProfiles: Int?
 
-			public enum FieldsBundleIDs: String, Codable, CaseIterable {
+			public enum FieldsBundleIDs: String, Codable, CaseIterable, Sendable {
 				case name
 				case platform
 				case identifier
@@ -36,7 +36,7 @@ extension APIEndpoint.V1.BundleIDs {
 				case app
 			}
 
-			public enum FieldsProfiles: String, Codable, CaseIterable {
+			public enum FieldsProfiles: String, Codable, CaseIterable, Sendable {
 				case name
 				case platform
 				case profileType
@@ -50,12 +50,12 @@ extension APIEndpoint.V1.BundleIDs {
 				case certificates
 			}
 
-			public enum FieldsBundleIDCapabilities: String, Codable, CaseIterable {
+			public enum FieldsBundleIDCapabilities: String, Codable, CaseIterable, Sendable {
 				case capabilityType
 				case settings
 			}
 
-			public enum FieldsApps: String, Codable, CaseIterable {
+			public enum FieldsApps: String, Codable, CaseIterable, Sendable {
 				case accessibilityURL = "accessibilityUrl"
 				case name
 				case bundleID = "bundleId"
@@ -116,7 +116,7 @@ extension APIEndpoint.V1.BundleIDs {
 				case androidToIosAppMappingDetails
 			}
 
-			public enum Include: String, Codable, CaseIterable {
+			public enum Include: String, Codable, CaseIterable, Sendable {
 				case profiles
 				case bundleIDCapabilities = "bundleIdCapabilities"
 				case app

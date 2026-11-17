@@ -9,7 +9,7 @@ extension APIEndpoint.V1.WinBackOffers {
 		WithID(path: "\(path)/\(id)")
 	}
 
-	public struct WithID {
+	public struct WithID: Sendable {
 		/// Path: `/v1/winBackOffers/{id}`
 		public let path: String
 
@@ -17,13 +17,13 @@ extension APIEndpoint.V1.WinBackOffers {
 			Request(path: path, method: "GET", query: parameters?.asQuery, id: "winBackOffers_getInstance")
 		}
 
-		public struct GetParameters {
+		public struct GetParameters: Sendable {
 			public var fieldsWinBackOffers: [FieldsWinBackOffers]?
 			public var fieldsWinBackOfferPrices: [FieldsWinBackOfferPrices]?
 			public var include: [Include]?
 			public var limitPrices: Int?
 
-			public enum FieldsWinBackOffers: String, Codable, CaseIterable {
+			public enum FieldsWinBackOffers: String, Codable, CaseIterable, Sendable {
 				case referenceName
 				case offerID = "offerId"
 				case duration
@@ -40,12 +40,12 @@ extension APIEndpoint.V1.WinBackOffers {
 				case prices
 			}
 
-			public enum FieldsWinBackOfferPrices: String, Codable, CaseIterable {
+			public enum FieldsWinBackOfferPrices: String, Codable, CaseIterable, Sendable {
 				case territory
 				case subscriptionPricePoint
 			}
 
-			public enum Include: String, Codable, CaseIterable {
+			public enum Include: String, Codable, CaseIterable, Sendable {
 				case prices
 			}
 

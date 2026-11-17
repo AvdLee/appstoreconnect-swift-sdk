@@ -9,7 +9,7 @@ extension APIEndpoint.V1.AlternativeDistributionPackageVersions.WithID {
 		Deltas(path: path + "/deltas")
 	}
 
-	public struct Deltas {
+	public struct Deltas: Sendable {
 		/// Path: `/v1/alternativeDistributionPackageVersions/{id}/deltas`
 		public let path: String
 
@@ -24,7 +24,7 @@ extension APIEndpoint.V1.AlternativeDistributionPackageVersions.WithID {
 			return encoder.items
 		}
 
-		public enum FieldsAlternativeDistributionPackageDeltas: String, Codable, CaseIterable {
+		public enum FieldsAlternativeDistributionPackageDeltas: String, Codable, CaseIterable, Sendable {
 			case url
 			case urlExpirationDate
 			case alternativeDistributionKeyBlob

@@ -3,7 +3,7 @@
 
 import Foundation
 
-public enum CiActionType: String, Codable, CaseIterable {
+public enum CiActionType: String, Codable, CaseIterable, Sendable {
 	case build = "BUILD"
 	case analyze = "ANALYZE"
 	case test = "TEST"

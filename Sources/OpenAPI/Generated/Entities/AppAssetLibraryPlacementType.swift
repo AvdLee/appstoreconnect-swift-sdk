@@ -3,7 +3,7 @@
 
 import Foundation
 
-public enum AppAssetLibraryPlacementType: String, Codable, CaseIterable {
+public enum AppAssetLibraryPlacementType: String, Codable, CaseIterable, Sendable {
 	case appScreenshot = "APP_SCREENSHOT"
 	case imessageAppScreenshot = "IMESSAGE_APP_SCREENSHOT"
 	case appPreview = "APP_PREVIEW"

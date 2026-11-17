@@ -9,7 +9,7 @@ extension APIEndpoint.V1.GameCenterLeaderboards.WithID {
 		Localizations(path: path + "/localizations")
 	}
 
-	public struct Localizations {
+	public struct Localizations: Sendable {
 		/// Path: `/v1/gameCenterLeaderboards/{id}/localizations`
 		public let path: String
 
@@ -18,14 +18,14 @@ extension APIEndpoint.V1.GameCenterLeaderboards.WithID {
 			Request(path: path, method: "GET", query: parameters?.asQuery, id: "gameCenterLeaderboards_localizations_getToManyRelated")
 		}
 
-		public struct GetParameters {
+		public struct GetParameters: Sendable {
 			public var fieldsGameCenterLeaderboardLocalizations: [FieldsGameCenterLeaderboardLocalizations]?
 			public var fieldsGameCenterLeaderboards: [FieldsGameCenterLeaderboards]?
 			public var fieldsGameCenterLeaderboardImages: [FieldsGameCenterLeaderboardImages]?
 			public var limit: Int?
 			public var include: [Include]?
 
-			public enum FieldsGameCenterLeaderboardLocalizations: String, Codable, CaseIterable {
+			public enum FieldsGameCenterLeaderboardLocalizations: String, Codable, CaseIterable, Sendable {
 				case locale
 				case name
 				case formatterOverride
@@ -36,7 +36,7 @@ extension APIEndpoint.V1.GameCenterLeaderboards.WithID {
 				case gameCenterLeaderboardImage
 			}
 
-			public enum FieldsGameCenterLeaderboards: String, Codable, CaseIterable {
+			public enum FieldsGameCenterLeaderboards: String, Codable, CaseIterable, Sendable {
 				case defaultFormatter
 				case referenceName
 				case vendorIdentifier
@@ -60,7 +60,7 @@ extension APIEndpoint.V1.GameCenterLeaderboards.WithID {
 				case challenge
 			}
 
-			public enum FieldsGameCenterLeaderboardImages: String, Codable, CaseIterable {
+			public enum FieldsGameCenterLeaderboardImages: String, Codable, CaseIterable, Sendable {
 				case fileSize
 				case fileName
 				case imageAsset
@@ -69,7 +69,7 @@ extension APIEndpoint.V1.GameCenterLeaderboards.WithID {
 				case gameCenterLeaderboardLocalization
 			}
 
-			public enum Include: String, Codable, CaseIterable {
+			public enum Include: String, Codable, CaseIterable, Sendable {
 				case gameCenterLeaderboard
 				case gameCenterLeaderboardImage
 			}

@@ -3,19 +3,19 @@
 
 import Foundation
 
-public struct InAppPurchaseLocalizationCreateRequest: Codable {
+public struct InAppPurchaseLocalizationCreateRequest: Codable, Sendable {
 	public var data: Data
 
-	public struct Data: Codable {
+	public struct Data: Codable, Sendable {
 		public var type: `Type`
 		public var attributes: Attributes
 		public var relationships: Relationships
 
-		public enum `Type`: String, Codable, CaseIterable {
+		public enum `Type`: String, Codable, CaseIterable, Sendable {
 			case inAppPurchaseLocalizations
 		}
 
-		public struct Attributes: Codable {
+		public struct Attributes: Codable, Sendable {
 			public var name: String
 			public var locale: String
 			public var description: String?
@@ -41,17 +41,17 @@ public struct InAppPurchaseLocalizationCreateRequest: Codable {
 			}
 		}
 
-		public struct Relationships: Codable {
+		public struct Relationships: Codable, Sendable {
 			public var inAppPurchaseV2: InAppPurchaseV2
 
-			public struct InAppPurchaseV2: Codable {
+			public struct InAppPurchaseV2: Codable, Sendable {
 				public var data: Data
 
-				public struct Data: Codable, Identifiable {
+				public struct Data: Codable, Identifiable, Sendable {
 					public var type: `Type`
 					public var id: String
 
-					public enum `Type`: String, Codable, CaseIterable {
+					public enum `Type`: String, Codable, CaseIterable, Sendable {
 						case inAppPurchases
 					}
 

@@ -9,7 +9,7 @@ extension APIEndpoint.V1 {
 		EndUserLicenseAgreements(path: path + "/endUserLicenseAgreements")
 	}
 
-	public struct EndUserLicenseAgreements {
+	public struct EndUserLicenseAgreements: Sendable {
 		/// Path: `/v1/endUserLicenseAgreements`
 		public let path: String
 

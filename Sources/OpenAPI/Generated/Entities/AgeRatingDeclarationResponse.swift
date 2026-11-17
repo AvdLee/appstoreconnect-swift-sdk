@@ -3,7 +3,7 @@
 
 import Foundation
 
-public struct AgeRatingDeclarationResponse: Codable {
+public struct AgeRatingDeclarationResponse: Codable, Sendable {
 	/// AgeRatingDeclaration
 	public var data: AgeRatingDeclaration
 	public var links: DocumentLinks

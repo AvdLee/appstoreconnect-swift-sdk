@@ -9,7 +9,7 @@ extension APIEndpoint.V1 {
 		Actors(path: path + "/actors")
 	}
 
-	public struct Actors {
+	public struct Actors: Sendable {
 		/// Path: `/v1/actors`
 		public let path: String
 
@@ -17,12 +17,12 @@ extension APIEndpoint.V1 {
 			Request(path: path, method: "GET", query: parameters.asQuery, id: "actors_getCollection")
 		}
 
-		public struct GetParameters {
+		public struct GetParameters: Sendable {
 			public var filterID: [String]
 			public var fieldsActors: [FieldsActors]?
 			public var limit: Int?
 
-			public enum FieldsActors: String, Codable, CaseIterable {
+			public enum FieldsActors: String, Codable, CaseIterable, Sendable {
 				case actorType
 				case userFirstName
 				case userLastName

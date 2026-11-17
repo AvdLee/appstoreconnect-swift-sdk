@@ -9,7 +9,7 @@ extension APIEndpoint.V1 {
 		AppStoreReviewAttachments(path: path + "/appStoreReviewAttachments")
 	}
 
-	public struct AppStoreReviewAttachments {
+	public struct AppStoreReviewAttachments: Sendable {
 		/// Path: `/v1/appStoreReviewAttachments`
 		public let path: String
 

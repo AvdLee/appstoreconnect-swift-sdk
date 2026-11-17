@@ -9,7 +9,7 @@ extension APIEndpoint.V1.GameCenterAppVersions.WithID.Relationships {
 		CompatibilityVersions(path: path + "/compatibilityVersions")
 	}
 
-	public struct CompatibilityVersions {
+	public struct CompatibilityVersions: Sendable {
 		/// Path: `/v1/gameCenterAppVersions/{id}/relationships/compatibilityVersions`
 		public let path: String
 

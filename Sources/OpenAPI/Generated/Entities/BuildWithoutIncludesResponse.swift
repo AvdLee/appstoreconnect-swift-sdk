@@ -3,7 +3,7 @@
 
 import Foundation
 
-public struct BuildWithoutIncludesResponse: Codable {
+public struct BuildWithoutIncludesResponse: Codable, Sendable {
 	/// Build
 	public var data: Build
 	public var links: DocumentLinks

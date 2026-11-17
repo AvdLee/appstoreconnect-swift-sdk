@@ -3,7 +3,7 @@
 
 import Foundation
 
-public struct ResourceLinks: Codable {
+public struct ResourceLinks: Codable, Sendable {
 	public var this: String?
 
 	public init(this: String? = nil) {

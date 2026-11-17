@@ -3,11 +3,11 @@
 
 import Foundation
 
-public struct CiFilesAndFoldersRule: Codable {
+public struct CiFilesAndFoldersRule: Codable, Sendable {
 	public var mode: Mode?
 	public var matchers: [CiStartConditionFileMatcher]?
 
-	public enum Mode: String, Codable, CaseIterable {
+	public enum Mode: String, Codable, CaseIterable, Sendable {
 		case startIfAnyFileMatches = "START_IF_ANY_FILE_MATCHES"
 		case doNotStartIfAllFilesMatch = "DO_NOT_START_IF_ALL_FILES_MATCH"
 	}

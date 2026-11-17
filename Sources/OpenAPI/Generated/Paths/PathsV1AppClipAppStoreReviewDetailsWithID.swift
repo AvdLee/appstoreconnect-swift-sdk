@@ -9,7 +9,7 @@ extension APIEndpoint.V1.AppClipAppStoreReviewDetails {
 		WithID(path: "\(path)/\(id)")
 	}
 
-	public struct WithID {
+	public struct WithID: Sendable {
 		/// Path: `/v1/appClipAppStoreReviewDetails/{id}`
 		public let path: String
 
@@ -17,17 +17,17 @@ extension APIEndpoint.V1.AppClipAppStoreReviewDetails {
 			Request(path: path, method: "GET", query: parameters?.asQuery, id: "appClipAppStoreReviewDetails_getInstance")
 		}
 
-		public struct GetParameters {
+		public struct GetParameters: Sendable {
 			public var fieldsAppClipAppStoreReviewDetails: [FieldsAppClipAppStoreReviewDetails]?
 			public var fieldsAppClipDefaultExperiences: [FieldsAppClipDefaultExperiences]?
 			public var include: [Include]?
 
-			public enum FieldsAppClipAppStoreReviewDetails: String, Codable, CaseIterable {
+			public enum FieldsAppClipAppStoreReviewDetails: String, Codable, CaseIterable, Sendable {
 				case invocationURLs = "invocationUrls"
 				case appClipDefaultExperience
 			}
 
-			public enum FieldsAppClipDefaultExperiences: String, Codable, CaseIterable {
+			public enum FieldsAppClipDefaultExperiences: String, Codable, CaseIterable, Sendable {
 				case action
 				case appClip
 				case releaseWithAppStoreVersion
@@ -35,7 +35,7 @@ extension APIEndpoint.V1.AppClipAppStoreReviewDetails {
 				case appClipAppStoreReviewDetail
 			}
 
-			public enum Include: String, Codable, CaseIterable {
+			public enum Include: String, Codable, CaseIterable, Sendable {
 				case appClipDefaultExperience
 			}
 

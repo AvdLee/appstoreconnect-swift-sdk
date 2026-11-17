@@ -3,7 +3,7 @@
 
 import Foundation
 
-public struct ScmPullRequestResponse: Codable {
+public struct ScmPullRequestResponse: Codable, Sendable {
 	/// ScmPullRequest
 	public var data: ScmPullRequest
 	public var included: [ScmRepository]?

@@ -3,7 +3,7 @@
 
 import Foundation
 
-public struct AppClipAppStoreReviewDetailResponse: Codable {
+public struct AppClipAppStoreReviewDetailResponse: Codable, Sendable {
 	/// AppClipAppStoreReviewDetail
 	public var data: AppClipAppStoreReviewDetail
 	public var included: [AppClipDefaultExperience]?

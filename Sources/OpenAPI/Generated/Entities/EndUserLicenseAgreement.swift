@@ -3,18 +3,18 @@
 
 import Foundation
 
-public struct EndUserLicenseAgreement: Codable, Identifiable {
+public struct EndUserLicenseAgreement: Codable, Identifiable, Sendable {
 	public var type: `Type`
 	public var id: String
 	public var attributes: Attributes?
 	public var relationships: Relationships?
 	public var links: ResourceLinks?
 
-	public enum `Type`: String, Codable, CaseIterable {
+	public enum `Type`: String, Codable, CaseIterable, Sendable {
 		case endUserLicenseAgreements
 	}
 
-	public struct Attributes: Codable {
+	public struct Attributes: Codable, Sendable {
 		public var agreementText: String?
 
 		public init(agreementText: String? = nil) {
@@ -32,18 +32,18 @@ public struct EndUserLicenseAgreement: Codable, Identifiable {
 		}
 	}
 
-	public struct Relationships: Codable {
+	public struct Relationships: Codable, Sendable {
 		public var app: App?
 		public var territories: Territories?
 
-		public struct App: Codable {
+		public struct App: Codable, Sendable {
 			public var data: Data?
 
-			public struct Data: Codable, Identifiable {
+			public struct Data: Codable, Identifiable, Sendable {
 				public var type: `Type`
 				public var id: String
 
-				public enum `Type`: String, Codable, CaseIterable {
+				public enum `Type`: String, Codable, CaseIterable, Sendable {
 					case apps
 				}
 
@@ -80,16 +80,16 @@ public struct EndUserLicenseAgreement: Codable, Identifiable {
 			}
 		}
 
-		public struct Territories: Codable {
+		public struct Territories: Codable, Sendable {
 			public var links: RelationshipLinks?
 			public var meta: PagingInformation?
 			public var data: [Datum]?
 
-			public struct Datum: Codable, Identifiable {
+			public struct Datum: Codable, Identifiable, Sendable {
 				public var type: `Type`
 				public var id: String
 
-				public enum `Type`: String, Codable, CaseIterable {
+				public enum `Type`: String, Codable, CaseIterable, Sendable {
 					case territories
 				}
 

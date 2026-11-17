@@ -9,7 +9,7 @@ extension APIEndpoint.V1.Builds.WithID {
 		AppEncryptionDeclaration(path: path + "/appEncryptionDeclaration")
 	}
 
-	public struct AppEncryptionDeclaration {
+	public struct AppEncryptionDeclaration: Sendable {
 		/// Path: `/v1/builds/{id}/appEncryptionDeclaration`
 		public let path: String
 
@@ -23,7 +23,7 @@ extension APIEndpoint.V1.Builds.WithID {
 			return encoder.items
 		}
 
-		public enum FieldsAppEncryptionDeclarations: String, Codable, CaseIterable {
+		public enum FieldsAppEncryptionDeclarations: String, Codable, CaseIterable, Sendable {
 			case appDescription
 			case createdDate
 			case usesEncryption

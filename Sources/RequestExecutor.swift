@@ -11,7 +11,7 @@ import FoundationNetworking
 #endif
 
 /// The result type delivered from a successful URLRequest
-public struct Response<T:Codable>: Codable{
+public struct Response<T: Codable>: Codable {
     public typealias StatusCode = Int
 
     public let requestURL: URL?
@@ -35,12 +35,14 @@ public struct Response<T:Codable>: Codable{
 }
 
 /// Protocol abstraction which contains all necessary methods for URLRequest execution
-public protocol RequestExecutor {
+public protocol RequestExecutor: Sendable {
 
     /// Performs a URLRequest and returns a result
-    func execute(_ urlRequest: URLRequest, completion: @escaping (Result<Response<Data>, Swift.Error>) -> Void)
+    func execute(_ urlRequest: URLRequest, completion: @escaping @Sendable (Result<Response<Data>, Swift.Error>) -> Void)
 
     /// Download report as file a given URL
-    func download(_ urlRequest: URLRequest, completion: @escaping (Result<Response<URL>, Swift.Error>) -> Void)
+    func download(_ urlRequest: URLRequest, completion: @escaping @Sendable (Result<Response<URL>, Swift.Error>) -> Void)
 
 }
+
+extension Response: Sendable where T: Sendable {}

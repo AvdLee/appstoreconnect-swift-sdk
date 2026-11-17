@@ -9,7 +9,7 @@ extension APIEndpoint.V1.CiBuildActions.WithID {
 		Issues(path: path + "/issues")
 	}
 
-	public struct Issues {
+	public struct Issues: Sendable {
 		/// Path: `/v1/ciBuildActions/{id}/issues`
 		public let path: String
 
@@ -24,7 +24,7 @@ extension APIEndpoint.V1.CiBuildActions.WithID {
 			return encoder.items
 		}
 
-		public enum FieldsCiIssues: String, Codable, CaseIterable {
+		public enum FieldsCiIssues: String, Codable, CaseIterable, Sendable {
 			case issueType
 			case message
 			case fileSource

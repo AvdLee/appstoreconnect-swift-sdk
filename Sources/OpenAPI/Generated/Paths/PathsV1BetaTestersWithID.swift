@@ -9,7 +9,7 @@ extension APIEndpoint.V1.BetaTesters {
 		WithID(path: "\(path)/\(id)")
 	}
 
-	public struct WithID {
+	public struct WithID: Sendable {
 		/// Path: `/v1/betaTesters/{id}`
 		public let path: String
 
@@ -17,7 +17,7 @@ extension APIEndpoint.V1.BetaTesters {
 			Request(path: path, method: "GET", query: parameters?.asQuery, id: "betaTesters_getInstance")
 		}
 
-		public struct GetParameters {
+		public struct GetParameters: Sendable {
 			public var fieldsBetaTesters: [FieldsBetaTesters]?
 			public var fieldsApps: [FieldsApps]?
 			public var fieldsBetaGroups: [FieldsBetaGroups]?
@@ -27,7 +27,7 @@ extension APIEndpoint.V1.BetaTesters {
 			public var limitBetaGroups: Int?
 			public var limitBuilds: Int?
 
-			public enum FieldsBetaTesters: String, Codable, CaseIterable {
+			public enum FieldsBetaTesters: String, Codable, CaseIterable, Sendable {
 				case firstName
 				case lastName
 				case email
@@ -39,7 +39,7 @@ extension APIEndpoint.V1.BetaTesters {
 				case builds
 			}
 
-			public enum FieldsApps: String, Codable, CaseIterable {
+			public enum FieldsApps: String, Codable, CaseIterable, Sendable {
 				case accessibilityURL = "accessibilityUrl"
 				case name
 				case bundleID = "bundleId"
@@ -100,7 +100,7 @@ extension APIEndpoint.V1.BetaTesters {
 				case androidToIosAppMappingDetails
 			}
 
-			public enum FieldsBetaGroups: String, Codable, CaseIterable {
+			public enum FieldsBetaGroups: String, Codable, CaseIterable, Sendable {
 				case name
 				case createdDate
 				case isInternalGroup
@@ -120,7 +120,7 @@ extension APIEndpoint.V1.BetaTesters {
 				case betaRecruitmentCriterionCompatibleBuildCheck
 			}
 
-			public enum FieldsBuilds: String, Codable, CaseIterable {
+			public enum FieldsBuilds: String, Codable, CaseIterable, Sendable {
 				case version
 				case uploadedDate
 				case expirationDate
@@ -149,7 +149,7 @@ extension APIEndpoint.V1.BetaTesters {
 				case diagnosticSignatures
 			}
 
-			public enum Include: String, Codable, CaseIterable {
+			public enum Include: String, Codable, CaseIterable, Sendable {
 				case apps
 				case betaGroups
 				case builds

@@ -9,7 +9,7 @@ extension APIEndpoint.V1.CiXcodeVersions.WithID.Relationships {
 		MacOsVersions(path: path + "/macOsVersions")
 	}
 
-	public struct MacOsVersions {
+	public struct MacOsVersions: Sendable {
 		/// Path: `/v1/ciXcodeVersions/{id}/relationships/macOsVersions`
 		public let path: String
 

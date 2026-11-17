@@ -9,7 +9,7 @@ extension APIEndpoint.V1.GameCenterAchievements.WithID {
 		Releases(path: path + "/releases")
 	}
 
-	public struct Releases {
+	public struct Releases: Sendable {
 		/// Path: `/v1/gameCenterAchievements/{id}/releases`
 		public let path: String
 
@@ -18,7 +18,7 @@ extension APIEndpoint.V1.GameCenterAchievements.WithID {
 			Request(path: path, method: "GET", query: parameters?.asQuery, id: "gameCenterAchievements_releases_getToManyRelated")
 		}
 
-		public struct GetParameters {
+		public struct GetParameters: Sendable {
 			public var filterLive: [String]?
 			public var filterGameCenterDetail: [String]?
 			public var fieldsGameCenterAchievementReleases: [FieldsGameCenterAchievementReleases]?
@@ -27,13 +27,13 @@ extension APIEndpoint.V1.GameCenterAchievements.WithID {
 			public var limit: Int?
 			public var include: [Include]?
 
-			public enum FieldsGameCenterAchievementReleases: String, Codable, CaseIterable {
+			public enum FieldsGameCenterAchievementReleases: String, Codable, CaseIterable, Sendable {
 				case live
 				case gameCenterDetail
 				case gameCenterAchievement
 			}
 
-			public enum FieldsGameCenterDetails: String, Codable, CaseIterable {
+			public enum FieldsGameCenterDetails: String, Codable, CaseIterable, Sendable {
 				case arcadeEnabled
 				case challengeEnabled
 				case app
@@ -60,7 +60,7 @@ extension APIEndpoint.V1.GameCenterAchievements.WithID {
 				case challengesMinimumPlatformVersions
 			}
 
-			public enum FieldsGameCenterAchievements: String, Codable, CaseIterable {
+			public enum FieldsGameCenterAchievements: String, Codable, CaseIterable, Sendable {
 				case referenceName
 				case vendorIdentifier
 				case points
@@ -76,7 +76,7 @@ extension APIEndpoint.V1.GameCenterAchievements.WithID {
 				case activity
 			}
 
-			public enum Include: String, Codable, CaseIterable {
+			public enum Include: String, Codable, CaseIterable, Sendable {
 				case gameCenterDetail
 				case gameCenterAchievement
 			}

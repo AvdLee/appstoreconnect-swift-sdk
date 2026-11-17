@@ -3,7 +3,7 @@
 
 import Foundation
 
-public struct UsersResponse: Codable {
+public struct UsersResponse: Codable, Sendable {
 	public var data: [User]
 	public var included: [App]?
 	public var links: PagedDocumentLinks

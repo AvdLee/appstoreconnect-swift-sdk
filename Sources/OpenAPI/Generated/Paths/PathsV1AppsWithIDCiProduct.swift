@@ -9,7 +9,7 @@ extension APIEndpoint.V1.Apps.WithID {
 		CiProduct(path: path + "/ciProduct")
 	}
 
-	public struct CiProduct {
+	public struct CiProduct: Sendable {
 		/// Path: `/v1/apps/{id}/ciProduct`
 		public let path: String
 
@@ -17,7 +17,7 @@ extension APIEndpoint.V1.Apps.WithID {
 			Request(path: path, method: "GET", query: parameters?.asQuery, id: "apps_ciProduct_getToOneRelated")
 		}
 
-		public struct GetParameters {
+		public struct GetParameters: Sendable {
 			public var fieldsCiProducts: [FieldsCiProducts]?
 			public var fieldsApps: [FieldsApps]?
 			public var fieldsBundleIDs: [FieldsBundleIDs]?
@@ -25,7 +25,7 @@ extension APIEndpoint.V1.Apps.WithID {
 			public var include: [Include]?
 			public var limitPrimaryRepositories: Int?
 
-			public enum FieldsCiProducts: String, Codable, CaseIterable {
+			public enum FieldsCiProducts: String, Codable, CaseIterable, Sendable {
 				case name
 				case createdDate
 				case productType
@@ -37,7 +37,7 @@ extension APIEndpoint.V1.Apps.WithID {
 				case buildRuns
 			}
 
-			public enum FieldsApps: String, Codable, CaseIterable {
+			public enum FieldsApps: String, Codable, CaseIterable, Sendable {
 				case accessibilityURL = "accessibilityUrl"
 				case name
 				case bundleID = "bundleId"
@@ -98,7 +98,7 @@ extension APIEndpoint.V1.Apps.WithID {
 				case androidToIosAppMappingDetails
 			}
 
-			public enum FieldsBundleIDs: String, Codable, CaseIterable {
+			public enum FieldsBundleIDs: String, Codable, CaseIterable, Sendable {
 				case name
 				case platform
 				case identifier
@@ -108,7 +108,7 @@ extension APIEndpoint.V1.Apps.WithID {
 				case app
 			}
 
-			public enum FieldsScmRepositories: String, Codable, CaseIterable {
+			public enum FieldsScmRepositories: String, Codable, CaseIterable, Sendable {
 				case lastAccessedDate
 				case httpCloneURL = "httpCloneUrl"
 				case sshCloneURL = "sshCloneUrl"
@@ -120,7 +120,7 @@ extension APIEndpoint.V1.Apps.WithID {
 				case pullRequests
 			}
 
-			public enum Include: String, Codable, CaseIterable {
+			public enum Include: String, Codable, CaseIterable, Sendable {
 				case app
 				case bundleID = "bundleId"
 				case primaryRepositories

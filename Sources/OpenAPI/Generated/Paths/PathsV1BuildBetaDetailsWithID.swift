@@ -9,7 +9,7 @@ extension APIEndpoint.V1.BuildBetaDetails {
 		WithID(path: "\(path)/\(id)")
 	}
 
-	public struct WithID {
+	public struct WithID: Sendable {
 		/// Path: `/v1/buildBetaDetails/{id}`
 		public let path: String
 
@@ -17,19 +17,19 @@ extension APIEndpoint.V1.BuildBetaDetails {
 			Request(path: path, method: "GET", query: parameters?.asQuery, id: "buildBetaDetails_getInstance")
 		}
 
-		public struct GetParameters {
+		public struct GetParameters: Sendable {
 			public var fieldsBuildBetaDetails: [FieldsBuildBetaDetails]?
 			public var fieldsBuilds: [FieldsBuilds]?
 			public var include: [Include]?
 
-			public enum FieldsBuildBetaDetails: String, Codable, CaseIterable {
+			public enum FieldsBuildBetaDetails: String, Codable, CaseIterable, Sendable {
 				case autoNotifyEnabled
 				case internalBuildState
 				case externalBuildState
 				case build
 			}
 
-			public enum FieldsBuilds: String, Codable, CaseIterable {
+			public enum FieldsBuilds: String, Codable, CaseIterable, Sendable {
 				case version
 				case uploadedDate
 				case expirationDate
@@ -58,7 +58,7 @@ extension APIEndpoint.V1.BuildBetaDetails {
 				case diagnosticSignatures
 			}
 
-			public enum Include: String, Codable, CaseIterable {
+			public enum Include: String, Codable, CaseIterable, Sendable {
 				case build
 			}
 

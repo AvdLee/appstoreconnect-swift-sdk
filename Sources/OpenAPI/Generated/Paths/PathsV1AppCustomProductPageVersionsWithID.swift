@@ -9,7 +9,7 @@ extension APIEndpoint.V1.AppCustomProductPageVersions {
 		WithID(path: "\(path)/\(id)")
 	}
 
-	public struct WithID {
+	public struct WithID: Sendable {
 		/// Path: `/v1/appCustomProductPageVersions/{id}`
 		public let path: String
 
@@ -17,14 +17,14 @@ extension APIEndpoint.V1.AppCustomProductPageVersions {
 			Request(path: path, method: "GET", query: parameters?.asQuery, id: "appCustomProductPageVersions_getInstance")
 		}
 
-		public struct GetParameters {
+		public struct GetParameters: Sendable {
 			public var fieldsAppCustomProductPageVersions: [FieldsAppCustomProductPageVersions]?
 			public var fieldsAppCustomProductPages: [FieldsAppCustomProductPages]?
 			public var fieldsAppCustomProductPageLocalizations: [FieldsAppCustomProductPageLocalizations]?
 			public var include: [Include]?
 			public var limitAppCustomProductPageLocalizations: Int?
 
-			public enum FieldsAppCustomProductPageVersions: String, Codable, CaseIterable {
+			public enum FieldsAppCustomProductPageVersions: String, Codable, CaseIterable, Sendable {
 				case version
 				case state
 				case deepLink
@@ -32,7 +32,7 @@ extension APIEndpoint.V1.AppCustomProductPageVersions {
 				case appCustomProductPageLocalizations
 			}
 
-			public enum FieldsAppCustomProductPages: String, Codable, CaseIterable {
+			public enum FieldsAppCustomProductPages: String, Codable, CaseIterable, Sendable {
 				case name
 				case url
 				case visible
@@ -40,7 +40,7 @@ extension APIEndpoint.V1.AppCustomProductPageVersions {
 				case appCustomProductPageVersions
 			}
 
-			public enum FieldsAppCustomProductPageLocalizations: String, Codable, CaseIterable {
+			public enum FieldsAppCustomProductPageLocalizations: String, Codable, CaseIterable, Sendable {
 				case locale
 				case promotionalText
 				case appCustomProductPageVersion
@@ -50,7 +50,7 @@ extension APIEndpoint.V1.AppCustomProductPageVersions {
 				case placements
 			}
 
-			public enum Include: String, Codable, CaseIterable {
+			public enum Include: String, Codable, CaseIterable, Sendable {
 				case appCustomProductPage
 				case appCustomProductPageLocalizations
 			}

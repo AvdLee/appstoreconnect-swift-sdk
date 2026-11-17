@@ -9,7 +9,7 @@ extension APIEndpoint.V1 {
 		ScmPullRequests(path: path + "/scmPullRequests")
 	}
 
-	public struct ScmPullRequests {
+	public struct ScmPullRequests: Sendable {
 		/// Path: `/v1/scmPullRequests`
 		public let path: String
 	}

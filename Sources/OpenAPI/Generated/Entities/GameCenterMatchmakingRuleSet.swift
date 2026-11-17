@@ -3,18 +3,18 @@
 
 import Foundation
 
-public struct GameCenterMatchmakingRuleSet: Codable, Identifiable {
+public struct GameCenterMatchmakingRuleSet: Codable, Identifiable, Sendable {
 	public var type: `Type`
 	public var id: String
 	public var attributes: Attributes?
 	public var relationships: Relationships?
 	public var links: ResourceLinks?
 
-	public enum `Type`: String, Codable, CaseIterable {
+	public enum `Type`: String, Codable, CaseIterable, Sendable {
 		case gameCenterMatchmakingRuleSets
 	}
 
-	public struct Attributes: Codable {
+	public struct Attributes: Codable, Sendable {
 		public var referenceName: String?
 		public var ruleLanguageVersion: Int?
 		public var minPlayers: Int?
@@ -44,21 +44,21 @@ public struct GameCenterMatchmakingRuleSet: Codable, Identifiable {
 		}
 	}
 
-	public struct Relationships: Codable {
+	public struct Relationships: Codable, Sendable {
 		public var teams: Teams?
 		public var rules: Rules?
 		public var matchmakingQueues: MatchmakingQueues?
 
-		public struct Teams: Codable {
+		public struct Teams: Codable, Sendable {
 			public var links: RelationshipLinks?
 			public var meta: PagingInformation?
 			public var data: [Datum]?
 
-			public struct Datum: Codable, Identifiable {
+			public struct Datum: Codable, Identifiable, Sendable {
 				public var type: `Type`
 				public var id: String
 
-				public enum `Type`: String, Codable, CaseIterable {
+				public enum `Type`: String, Codable, CaseIterable, Sendable {
 					case gameCenterMatchmakingTeams
 				}
 
@@ -101,16 +101,16 @@ public struct GameCenterMatchmakingRuleSet: Codable, Identifiable {
 			}
 		}
 
-		public struct Rules: Codable {
+		public struct Rules: Codable, Sendable {
 			public var links: RelationshipLinks?
 			public var meta: PagingInformation?
 			public var data: [Datum]?
 
-			public struct Datum: Codable, Identifiable {
+			public struct Datum: Codable, Identifiable, Sendable {
 				public var type: `Type`
 				public var id: String
 
-				public enum `Type`: String, Codable, CaseIterable {
+				public enum `Type`: String, Codable, CaseIterable, Sendable {
 					case gameCenterMatchmakingRules
 				}
 
@@ -153,16 +153,16 @@ public struct GameCenterMatchmakingRuleSet: Codable, Identifiable {
 			}
 		}
 
-		public struct MatchmakingQueues: Codable {
+		public struct MatchmakingQueues: Codable, Sendable {
 			public var links: RelationshipLinks?
 			public var meta: PagingInformation?
 			public var data: [Datum]?
 
-			public struct Datum: Codable, Identifiable {
+			public struct Datum: Codable, Identifiable, Sendable {
 				public var type: `Type`
 				public var id: String
 
-				public enum `Type`: String, Codable, CaseIterable {
+				public enum `Type`: String, Codable, CaseIterable, Sendable {
 					case gameCenterMatchmakingQueues
 				}
 

@@ -1,4 +1,4 @@
-// swift-tools-version:5.7
+// swift-tools-version:6.4
 import PackageDescription
 
 var dependencies: [Package.Dependency] = [
@@ -87,5 +87,6 @@ let package = Package(
                 .target(name: "create-api")
             ]
         )
-    ]
+    ],
+    swiftLanguageModes: [.v6]
 )

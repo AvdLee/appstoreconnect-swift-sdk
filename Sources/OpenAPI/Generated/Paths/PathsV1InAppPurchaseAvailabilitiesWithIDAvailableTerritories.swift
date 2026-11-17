@@ -9,7 +9,7 @@ extension APIEndpoint.V1.InAppPurchaseAvailabilities.WithID {
 		AvailableTerritories(path: path + "/availableTerritories")
 	}
 
-	public struct AvailableTerritories {
+	public struct AvailableTerritories: Sendable {
 		/// Path: `/v1/inAppPurchaseAvailabilities/{id}/availableTerritories`
 		public let path: String
 
@@ -24,7 +24,7 @@ extension APIEndpoint.V1.InAppPurchaseAvailabilities.WithID {
 			return encoder.items
 		}
 
-		public enum FieldsTerritories: String, Codable, CaseIterable {
+		public enum FieldsTerritories: String, Codable, CaseIterable, Sendable {
 			case currency
 		}
 	}

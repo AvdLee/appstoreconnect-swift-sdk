@@ -3,7 +3,7 @@
 
 import Foundation
 
-public struct WebhookPingResponse: Codable {
+public struct WebhookPingResponse: Codable, Sendable {
 	/// WebhookPing
 	public var data: WebhookPing
 	public var links: DocumentLinks

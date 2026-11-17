@@ -9,7 +9,7 @@ extension APIEndpoint.V1.Apps.WithID.Relationships {
 		EndUserLicenseAgreement(path: path + "/endUserLicenseAgreement")
 	}
 
-	public struct EndUserLicenseAgreement {
+	public struct EndUserLicenseAgreement: Sendable {
 		/// Path: `/v1/apps/{id}/relationships/endUserLicenseAgreement`
 		public let path: String
 

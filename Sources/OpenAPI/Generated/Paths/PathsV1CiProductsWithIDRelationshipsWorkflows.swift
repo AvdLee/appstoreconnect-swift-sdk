@@ -9,7 +9,7 @@ extension APIEndpoint.V1.CiProducts.WithID.Relationships {
 		Workflows(path: path + "/workflows")
 	}
 
-	public struct Workflows {
+	public struct Workflows: Sendable {
 		/// Path: `/v1/ciProducts/{id}/relationships/workflows`
 		public let path: String
 

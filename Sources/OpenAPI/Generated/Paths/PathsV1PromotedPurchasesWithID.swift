@@ -9,7 +9,7 @@ extension APIEndpoint.V1.PromotedPurchases {
 		WithID(path: "\(path)/\(id)")
 	}
 
-	public struct WithID {
+	public struct WithID: Sendable {
 		/// Path: `/v1/promotedPurchases/{id}`
 		public let path: String
 
@@ -17,13 +17,13 @@ extension APIEndpoint.V1.PromotedPurchases {
 			Request(path: path, method: "GET", query: parameters?.asQuery, id: "promotedPurchases_getInstance")
 		}
 
-		public struct GetParameters {
+		public struct GetParameters: Sendable {
 			public var fieldsPromotedPurchases: [FieldsPromotedPurchases]?
 			public var fieldsInAppPurchases: [FieldsInAppPurchases]?
 			public var fieldsSubscriptions: [FieldsSubscriptions]?
 			public var include: [Include]?
 
-			public enum FieldsPromotedPurchases: String, Codable, CaseIterable {
+			public enum FieldsPromotedPurchases: String, Codable, CaseIterable, Sendable {
 				case visibleForAllUsers
 				case enabled
 				case state
@@ -31,7 +31,7 @@ extension APIEndpoint.V1.PromotedPurchases {
 				case subscription
 			}
 
-			public enum FieldsInAppPurchases: String, Codable, CaseIterable {
+			public enum FieldsInAppPurchases: String, Codable, CaseIterable, Sendable {
 				case name
 				case productID = "productId"
 				case inAppPurchaseType
@@ -51,7 +51,7 @@ extension APIEndpoint.V1.PromotedPurchases {
 				case versions
 			}
 
-			public enum FieldsSubscriptions: String, Codable, CaseIterable {
+			public enum FieldsSubscriptions: String, Codable, CaseIterable, Sendable {
 				case name
 				case productID = "productId"
 				case familySharable
@@ -80,7 +80,7 @@ extension APIEndpoint.V1.PromotedPurchases {
 				case retentionMessageOffers
 			}
 
-			public enum Include: String, Codable, CaseIterable {
+			public enum Include: String, Codable, CaseIterable, Sendable {
 				case inAppPurchaseV2
 				case subscription
 			}

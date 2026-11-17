@@ -3,19 +3,19 @@
 
 import Foundation
 
-public struct CiBuildRunCreateRequest: Codable {
+public struct CiBuildRunCreateRequest: Codable, Sendable {
 	public var data: Data
 
-	public struct Data: Codable {
+	public struct Data: Codable, Sendable {
 		public var type: `Type`
 		public var attributes: Attributes?
 		public var relationships: Relationships?
 
-		public enum `Type`: String, Codable, CaseIterable {
+		public enum `Type`: String, Codable, CaseIterable, Sendable {
 			case ciBuildRuns
 		}
 
-		public struct Attributes: Codable {
+		public struct Attributes: Codable, Sendable {
 			public var isClean: Bool?
 
 			public init(isClean: Bool? = nil) {
@@ -33,20 +33,20 @@ public struct CiBuildRunCreateRequest: Codable {
 			}
 		}
 
-		public struct Relationships: Codable {
+		public struct Relationships: Codable, Sendable {
 			public var buildRun: BuildRun?
 			public var workflow: Workflow?
 			public var sourceBranchOrTag: SourceBranchOrTag?
 			public var pullRequest: PullRequest?
 
-			public struct BuildRun: Codable {
+			public struct BuildRun: Codable, Sendable {
 				public var data: Data?
 
-				public struct Data: Codable, Identifiable {
+				public struct Data: Codable, Identifiable, Sendable {
 					public var type: `Type`
 					public var id: String
 
-					public enum `Type`: String, Codable, CaseIterable {
+					public enum `Type`: String, Codable, CaseIterable, Sendable {
 						case ciBuildRuns
 					}
 
@@ -83,14 +83,14 @@ public struct CiBuildRunCreateRequest: Codable {
 				}
 			}
 
-			public struct Workflow: Codable {
+			public struct Workflow: Codable, Sendable {
 				public var data: Data?
 
-				public struct Data: Codable, Identifiable {
+				public struct Data: Codable, Identifiable, Sendable {
 					public var type: `Type`
 					public var id: String
 
-					public enum `Type`: String, Codable, CaseIterable {
+					public enum `Type`: String, Codable, CaseIterable, Sendable {
 						case ciWorkflows
 					}
 
@@ -127,14 +127,14 @@ public struct CiBuildRunCreateRequest: Codable {
 				}
 			}
 
-			public struct SourceBranchOrTag: Codable {
+			public struct SourceBranchOrTag: Codable, Sendable {
 				public var data: Data?
 
-				public struct Data: Codable, Identifiable {
+				public struct Data: Codable, Identifiable, Sendable {
 					public var type: `Type`
 					public var id: String
 
-					public enum `Type`: String, Codable, CaseIterable {
+					public enum `Type`: String, Codable, CaseIterable, Sendable {
 						case scmGitReferences
 					}
 
@@ -171,14 +171,14 @@ public struct CiBuildRunCreateRequest: Codable {
 				}
 			}
 
-			public struct PullRequest: Codable {
+			public struct PullRequest: Codable, Sendable {
 				public var data: Data?
 
-				public struct Data: Codable, Identifiable {
+				public struct Data: Codable, Identifiable, Sendable {
 					public var type: `Type`
 					public var id: String
 
-					public enum `Type`: String, Codable, CaseIterable {
+					public enum `Type`: String, Codable, CaseIterable, Sendable {
 						case scmPullRequests
 					}
 

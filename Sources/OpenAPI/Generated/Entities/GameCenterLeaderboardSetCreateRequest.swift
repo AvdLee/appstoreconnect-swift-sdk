@@ -4,19 +4,19 @@
 import Foundation
 
 @available(*, deprecated, message: "Deprecated")
-public struct GameCenterLeaderboardSetCreateRequest: Codable {
+public struct GameCenterLeaderboardSetCreateRequest: Codable, Sendable {
 	public var data: Data
 
-	public struct Data: Codable {
+	public struct Data: Codable, Sendable {
 		public var type: `Type`
 		public var attributes: Attributes
 		public var relationships: Relationships?
 
-		public enum `Type`: String, Codable, CaseIterable {
+		public enum `Type`: String, Codable, CaseIterable, Sendable {
 			case gameCenterLeaderboardSets
 		}
 
-		public struct Attributes: Codable {
+		public struct Attributes: Codable, Sendable {
 			public var referenceName: String
 			public var vendorIdentifier: String
 
@@ -38,19 +38,19 @@ public struct GameCenterLeaderboardSetCreateRequest: Codable {
 			}
 		}
 
-		public struct Relationships: Codable {
+		public struct Relationships: Codable, Sendable {
 			public var gameCenterDetail: GameCenterDetail?
 			public var gameCenterGroup: GameCenterGroup?
 			public var gameCenterLeaderboards: GameCenterLeaderboards?
 
-			public struct GameCenterDetail: Codable {
+			public struct GameCenterDetail: Codable, Sendable {
 				public var data: Data?
 
-				public struct Data: Codable, Identifiable {
+				public struct Data: Codable, Identifiable, Sendable {
 					public var type: `Type`
 					public var id: String
 
-					public enum `Type`: String, Codable, CaseIterable {
+					public enum `Type`: String, Codable, CaseIterable, Sendable {
 						case gameCenterDetails
 					}
 
@@ -87,14 +87,14 @@ public struct GameCenterLeaderboardSetCreateRequest: Codable {
 				}
 			}
 
-			public struct GameCenterGroup: Codable {
+			public struct GameCenterGroup: Codable, Sendable {
 				public var data: Data?
 
-				public struct Data: Codable, Identifiable {
+				public struct Data: Codable, Identifiable, Sendable {
 					public var type: `Type`
 					public var id: String
 
-					public enum `Type`: String, Codable, CaseIterable {
+					public enum `Type`: String, Codable, CaseIterable, Sendable {
 						case gameCenterGroups
 					}
 
@@ -131,14 +131,14 @@ public struct GameCenterLeaderboardSetCreateRequest: Codable {
 				}
 			}
 
-			public struct GameCenterLeaderboards: Codable {
+			public struct GameCenterLeaderboards: Codable, Sendable {
 				public var data: [Datum]?
 
-				public struct Datum: Codable, Identifiable {
+				public struct Datum: Codable, Identifiable, Sendable {
 					public var type: `Type`
 					public var id: String
 
-					public enum `Type`: String, Codable, CaseIterable {
+					public enum `Type`: String, Codable, CaseIterable, Sendable {
 						case gameCenterLeaderboards
 					}
 

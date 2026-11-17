@@ -9,7 +9,7 @@ extension APIEndpoint.V1 {
 		Territories(path: path + "/territories")
 	}
 
-	public struct Territories {
+	public struct Territories: Sendable {
 		/// Path: `/v1/territories`
 		public let path: String
 
@@ -24,7 +24,7 @@ extension APIEndpoint.V1 {
 			return encoder.items
 		}
 
-		public enum FieldsTerritories: String, Codable, CaseIterable {
+		public enum FieldsTerritories: String, Codable, CaseIterable, Sendable {
 			case currency
 		}
 	}

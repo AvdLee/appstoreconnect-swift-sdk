@@ -3,19 +3,19 @@
 
 import Foundation
 
-public struct AppScreenshotSetCreateRequest: Codable {
+public struct AppScreenshotSetCreateRequest: Codable, Sendable {
 	public var data: Data
 
-	public struct Data: Codable {
+	public struct Data: Codable, Sendable {
 		public var type: `Type`
 		public var attributes: Attributes
 		public var relationships: Relationships?
 
-		public enum `Type`: String, Codable, CaseIterable {
+		public enum `Type`: String, Codable, CaseIterable, Sendable {
 			case appScreenshotSets
 		}
 
-		public struct Attributes: Codable {
+		public struct Attributes: Codable, Sendable {
 			public var screenshotDisplayType: ScreenshotDisplayType
 
 			public init(screenshotDisplayType: ScreenshotDisplayType) {
@@ -33,19 +33,19 @@ public struct AppScreenshotSetCreateRequest: Codable {
 			}
 		}
 
-		public struct Relationships: Codable {
+		public struct Relationships: Codable, Sendable {
 			public var appStoreVersionLocalization: AppStoreVersionLocalization?
 			public var appCustomProductPageLocalization: AppCustomProductPageLocalization?
 			public var appStoreVersionExperimentTreatmentLocalization: AppStoreVersionExperimentTreatmentLocalization?
 
-			public struct AppStoreVersionLocalization: Codable {
+			public struct AppStoreVersionLocalization: Codable, Sendable {
 				public var data: Data?
 
-				public struct Data: Codable, Identifiable {
+				public struct Data: Codable, Identifiable, Sendable {
 					public var type: `Type`
 					public var id: String
 
-					public enum `Type`: String, Codable, CaseIterable {
+					public enum `Type`: String, Codable, CaseIterable, Sendable {
 						case appStoreVersionLocalizations
 					}
 
@@ -82,14 +82,14 @@ public struct AppScreenshotSetCreateRequest: Codable {
 				}
 			}
 
-			public struct AppCustomProductPageLocalization: Codable {
+			public struct AppCustomProductPageLocalization: Codable, Sendable {
 				public var data: Data?
 
-				public struct Data: Codable, Identifiable {
+				public struct Data: Codable, Identifiable, Sendable {
 					public var type: `Type`
 					public var id: String
 
-					public enum `Type`: String, Codable, CaseIterable {
+					public enum `Type`: String, Codable, CaseIterable, Sendable {
 						case appCustomProductPageLocalizations
 					}
 
@@ -126,14 +126,14 @@ public struct AppScreenshotSetCreateRequest: Codable {
 				}
 			}
 
-			public struct AppStoreVersionExperimentTreatmentLocalization: Codable {
+			public struct AppStoreVersionExperimentTreatmentLocalization: Codable, Sendable {
 				public var data: Data?
 
-				public struct Data: Codable, Identifiable {
+				public struct Data: Codable, Identifiable, Sendable {
 					public var type: `Type`
 					public var id: String
 
-					public enum `Type`: String, Codable, CaseIterable {
+					public enum `Type`: String, Codable, CaseIterable, Sendable {
 						case appStoreVersionExperimentTreatmentLocalizations
 					}
 

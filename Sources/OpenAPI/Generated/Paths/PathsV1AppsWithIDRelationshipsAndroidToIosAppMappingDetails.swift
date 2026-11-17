@@ -9,7 +9,7 @@ extension APIEndpoint.V1.Apps.WithID.Relationships {
 		AndroidToIosAppMappingDetails(path: path + "/androidToIosAppMappingDetails")
 	}
 
-	public struct AndroidToIosAppMappingDetails {
+	public struct AndroidToIosAppMappingDetails: Sendable {
 		/// Path: `/v1/apps/{id}/relationships/androidToIosAppMappingDetails`
 		public let path: String
 

@@ -9,7 +9,7 @@ extension APIEndpoint.V1.ScmPullRequests {
 		WithID(path: "\(path)/\(id)")
 	}
 
-	public struct WithID {
+	public struct WithID: Sendable {
 		/// Path: `/v1/scmPullRequests/{id}`
 		public let path: String
 
@@ -17,12 +17,12 @@ extension APIEndpoint.V1.ScmPullRequests {
 			Request(path: path, method: "GET", query: parameters?.asQuery, id: "scmPullRequests_getInstance")
 		}
 
-		public struct GetParameters {
+		public struct GetParameters: Sendable {
 			public var fieldsScmPullRequests: [FieldsScmPullRequests]?
 			public var fieldsScmRepositories: [FieldsScmRepositories]?
 			public var include: [Include]?
 
-			public enum FieldsScmPullRequests: String, Codable, CaseIterable {
+			public enum FieldsScmPullRequests: String, Codable, CaseIterable, Sendable {
 				case title
 				case number
 				case webURL = "webUrl"
@@ -37,7 +37,7 @@ extension APIEndpoint.V1.ScmPullRequests {
 				case repository
 			}
 
-			public enum FieldsScmRepositories: String, Codable, CaseIterable {
+			public enum FieldsScmRepositories: String, Codable, CaseIterable, Sendable {
 				case lastAccessedDate
 				case httpCloneURL = "httpCloneUrl"
 				case sshCloneURL = "sshCloneUrl"
@@ -49,7 +49,7 @@ extension APIEndpoint.V1.ScmPullRequests {
 				case pullRequests
 			}
 
-			public enum Include: String, Codable, CaseIterable {
+			public enum Include: String, Codable, CaseIterable, Sendable {
 				case repository
 			}
 

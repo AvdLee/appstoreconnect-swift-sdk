@@ -3,11 +3,11 @@
 
 import Foundation
 
-public struct Checksums: Codable {
+public struct Checksums: Codable, Sendable {
 	public var file: File?
 	public var composite: Composite?
 
-	public struct File: Codable {
+	public struct File: Codable, Sendable {
 		public var hash: String?
 		public var algorithm: ChecksumAlgorithm?
 
@@ -29,11 +29,11 @@ public struct Checksums: Codable {
 		}
 	}
 
-	public struct Composite: Codable {
+	public struct Composite: Codable, Sendable {
 		public var hash: String?
 		public var algorithm: Algorithm?
 
-		public enum Algorithm: String, Codable, CaseIterable {
+		public enum Algorithm: String, Codable, CaseIterable, Sendable {
 			case md5 = "MD5"
 		}
 

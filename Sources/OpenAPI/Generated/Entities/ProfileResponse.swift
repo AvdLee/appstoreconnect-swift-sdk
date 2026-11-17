@@ -3,13 +3,13 @@
 
 import Foundation
 
-public struct ProfileResponse: Codable {
+public struct ProfileResponse: Codable, Sendable {
 	/// Profile
 	public var data: Profile
 	public var included: [IncludedItem]?
 	public var links: DocumentLinks
 
-	public enum IncludedItem: Codable {
+	public enum IncludedItem: Codable, Sendable {
 		case bundleID(BundleID)
 		case certificate(Certificate)
 		case device(Device)

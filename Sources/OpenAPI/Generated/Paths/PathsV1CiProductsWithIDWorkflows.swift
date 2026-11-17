@@ -9,7 +9,7 @@ extension APIEndpoint.V1.CiProducts.WithID {
 		Workflows(path: path + "/workflows")
 	}
 
-	public struct Workflows {
+	public struct Workflows: Sendable {
 		/// Path: `/v1/ciProducts/{id}/workflows`
 		public let path: String
 
@@ -17,7 +17,7 @@ extension APIEndpoint.V1.CiProducts.WithID {
 			Request(path: path, method: "GET", query: parameters?.asQuery, id: "ciProducts_workflows_getToManyRelated")
 		}
 
-		public struct GetParameters {
+		public struct GetParameters: Sendable {
 			public var fieldsCiWorkflows: [FieldsCiWorkflows]?
 			public var fieldsCiProducts: [FieldsCiProducts]?
 			public var fieldsScmRepositories: [FieldsScmRepositories]?
@@ -26,7 +26,7 @@ extension APIEndpoint.V1.CiProducts.WithID {
 			public var limit: Int?
 			public var include: [Include]?
 
-			public enum FieldsCiWorkflows: String, Codable, CaseIterable {
+			public enum FieldsCiWorkflows: String, Codable, CaseIterable, Sendable {
 				case name
 				case description
 				case branchStartCondition
@@ -49,7 +49,7 @@ extension APIEndpoint.V1.CiProducts.WithID {
 				case buildRuns
 			}
 
-			public enum FieldsCiProducts: String, Codable, CaseIterable {
+			public enum FieldsCiProducts: String, Codable, CaseIterable, Sendable {
 				case name
 				case createdDate
 				case productType
@@ -61,7 +61,7 @@ extension APIEndpoint.V1.CiProducts.WithID {
 				case buildRuns
 			}
 
-			public enum FieldsScmRepositories: String, Codable, CaseIterable {
+			public enum FieldsScmRepositories: String, Codable, CaseIterable, Sendable {
 				case lastAccessedDate
 				case httpCloneURL = "httpCloneUrl"
 				case sshCloneURL = "sshCloneUrl"
@@ -73,20 +73,20 @@ extension APIEndpoint.V1.CiProducts.WithID {
 				case pullRequests
 			}
 
-			public enum FieldsCiXcodeVersions: String, Codable, CaseIterable {
+			public enum FieldsCiXcodeVersions: String, Codable, CaseIterable, Sendable {
 				case version
 				case name
 				case testDestinations
 				case macOsVersions
 			}
 
-			public enum FieldsCiMacOsVersions: String, Codable, CaseIterable {
+			public enum FieldsCiMacOsVersions: String, Codable, CaseIterable, Sendable {
 				case version
 				case name
 				case xcodeVersions
 			}
 
-			public enum Include: String, Codable, CaseIterable {
+			public enum Include: String, Codable, CaseIterable, Sendable {
 				case product
 				case repository
 				case xcodeVersion

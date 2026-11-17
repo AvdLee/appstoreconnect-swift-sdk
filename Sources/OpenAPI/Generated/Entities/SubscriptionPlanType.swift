@@ -3,7 +3,7 @@
 
 import Foundation
 
-public enum SubscriptionPlanType: String, Codable, CaseIterable {
+public enum SubscriptionPlanType: String, Codable, CaseIterable, Sendable {
 	case monthly = "MONTHLY"
 	case upfront = "UPFRONT"
 }

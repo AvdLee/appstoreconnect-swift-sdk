@@ -3,30 +3,30 @@
 
 import Foundation
 
-public struct GameCenterMatchmakingRuleSetTestCreateRequest: Codable {
+public struct GameCenterMatchmakingRuleSetTestCreateRequest: Codable, Sendable {
 	public var data: Data
 	public var included: [IncludedItem]?
 
-	public struct Data: Codable {
+	public struct Data: Codable, Sendable {
 		public var type: `Type`
 		public var relationships: Relationships
 
-		public enum `Type`: String, Codable, CaseIterable {
+		public enum `Type`: String, Codable, CaseIterable, Sendable {
 			case gameCenterMatchmakingRuleSetTests
 		}
 
-		public struct Relationships: Codable {
+		public struct Relationships: Codable, Sendable {
 			public var matchmakingRuleSet: MatchmakingRuleSet
 			public var matchmakingRequests: MatchmakingRequests
 
-			public struct MatchmakingRuleSet: Codable {
+			public struct MatchmakingRuleSet: Codable, Sendable {
 				public var data: Data
 
-				public struct Data: Codable, Identifiable {
+				public struct Data: Codable, Identifiable, Sendable {
 					public var type: `Type`
 					public var id: String
 
-					public enum `Type`: String, Codable, CaseIterable {
+					public enum `Type`: String, Codable, CaseIterable, Sendable {
 						case gameCenterMatchmakingRuleSets
 					}
 
@@ -63,14 +63,14 @@ public struct GameCenterMatchmakingRuleSetTestCreateRequest: Codable {
 				}
 			}
 
-			public struct MatchmakingRequests: Codable {
+			public struct MatchmakingRequests: Codable, Sendable {
 				public var data: [Datum]
 
-				public struct Datum: Codable, Identifiable {
+				public struct Datum: Codable, Identifiable, Sendable {
 					public var type: `Type`
 					public var id: String
 
-					public enum `Type`: String, Codable, CaseIterable {
+					public enum `Type`: String, Codable, CaseIterable, Sendable {
 						case gameCenterMatchmakingTestRequests
 					}
 
@@ -143,7 +143,7 @@ public struct GameCenterMatchmakingRuleSetTestCreateRequest: Codable {
 		}
 	}
 
-	public enum IncludedItem: Codable {
+	public enum IncludedItem: Codable, Sendable {
 		case gameCenterMatchmakingTestPlayerPropertyInlineCreate(GameCenterMatchmakingTestPlayerPropertyInlineCreate)
 		case gameCenterMatchmakingTestRequestInlineCreate(GameCenterMatchmakingTestRequestInlineCreate)
 

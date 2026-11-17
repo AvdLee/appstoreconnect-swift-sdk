@@ -3,19 +3,19 @@
 
 import Foundation
 
-public struct CertificateCreateRequest: Codable {
+public struct CertificateCreateRequest: Codable, Sendable {
 	public var data: Data
 
-	public struct Data: Codable {
+	public struct Data: Codable, Sendable {
 		public var type: `Type`
 		public var attributes: Attributes
 		public var relationships: Relationships?
 
-		public enum `Type`: String, Codable, CaseIterable {
+		public enum `Type`: String, Codable, CaseIterable, Sendable {
 			case certificates
 		}
 
-		public struct Attributes: Codable {
+		public struct Attributes: Codable, Sendable {
 			public var csrContent: String
 			public var certificateType: CertificateType
 
@@ -37,18 +37,18 @@ public struct CertificateCreateRequest: Codable {
 			}
 		}
 
-		public struct Relationships: Codable {
+		public struct Relationships: Codable, Sendable {
 			public var merchantID: MerchantID?
 			public var passTypeID: PassTypeID?
 
-			public struct MerchantID: Codable {
+			public struct MerchantID: Codable, Sendable {
 				public var data: Data?
 
-				public struct Data: Codable, Identifiable {
+				public struct Data: Codable, Identifiable, Sendable {
 					public var type: `Type`
 					public var id: String
 
-					public enum `Type`: String, Codable, CaseIterable {
+					public enum `Type`: String, Codable, CaseIterable, Sendable {
 						case merchantIDs = "merchantIds"
 					}
 
@@ -85,14 +85,14 @@ public struct CertificateCreateRequest: Codable {
 				}
 			}
 
-			public struct PassTypeID: Codable {
+			public struct PassTypeID: Codable, Sendable {
 				public var data: Data?
 
-				public struct Data: Codable, Identifiable {
+				public struct Data: Codable, Identifiable, Sendable {
 					public var type: `Type`
 					public var id: String
 
-					public enum `Type`: String, Codable, CaseIterable {
+					public enum `Type`: String, Codable, CaseIterable, Sendable {
 						case passTypeIDs = "passTypeIds"
 					}
 

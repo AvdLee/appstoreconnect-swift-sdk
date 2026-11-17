@@ -9,7 +9,7 @@ extension APIEndpoint.V1.BetaAppReviewSubmissions {
 		WithID(path: "\(path)/\(id)")
 	}
 
-	public struct WithID {
+	public struct WithID: Sendable {
 		/// Path: `/v1/betaAppReviewSubmissions/{id}`
 		public let path: String
 
@@ -17,18 +17,18 @@ extension APIEndpoint.V1.BetaAppReviewSubmissions {
 			Request(path: path, method: "GET", query: parameters?.asQuery, id: "betaAppReviewSubmissions_getInstance")
 		}
 
-		public struct GetParameters {
+		public struct GetParameters: Sendable {
 			public var fieldsBetaAppReviewSubmissions: [FieldsBetaAppReviewSubmissions]?
 			public var fieldsBuilds: [FieldsBuilds]?
 			public var include: [Include]?
 
-			public enum FieldsBetaAppReviewSubmissions: String, Codable, CaseIterable {
+			public enum FieldsBetaAppReviewSubmissions: String, Codable, CaseIterable, Sendable {
 				case betaReviewState
 				case submittedDate
 				case build
 			}
 
-			public enum FieldsBuilds: String, Codable, CaseIterable {
+			public enum FieldsBuilds: String, Codable, CaseIterable, Sendable {
 				case version
 				case uploadedDate
 				case expirationDate
@@ -57,7 +57,7 @@ extension APIEndpoint.V1.BetaAppReviewSubmissions {
 				case diagnosticSignatures
 			}
 
-			public enum Include: String, Codable, CaseIterable {
+			public enum Include: String, Codable, CaseIterable, Sendable {
 				case build
 			}
 

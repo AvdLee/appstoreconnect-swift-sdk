@@ -3,7 +3,7 @@
 
 import Foundation
 
-public struct BundleIDWithoutIncludesResponse: Codable {
+public struct BundleIDWithoutIncludesResponse: Codable, Sendable {
 	/// BundleId
 	public var data: BundleID
 	public var links: DocumentLinks

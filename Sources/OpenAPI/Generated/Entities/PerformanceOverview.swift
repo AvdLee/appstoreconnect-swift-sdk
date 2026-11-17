@@ -3,17 +3,17 @@
 
 import Foundation
 
-public struct PerformanceOverview: Codable, Identifiable {
+public struct PerformanceOverview: Codable, Identifiable, Sendable {
 	public var type: `Type`
 	public var id: String
 	public var attributes: Attributes?
 	public var links: ResourceLinks?
 
-	public enum `Type`: String, Codable, CaseIterable {
+	public enum `Type`: String, Codable, CaseIterable, Sendable {
 		case performanceOverviews
 	}
 
-	public struct Attributes: Codable {
+	public struct Attributes: Codable, Sendable {
 		public var deviceType: String?
 
 		public init(deviceType: String? = nil) {

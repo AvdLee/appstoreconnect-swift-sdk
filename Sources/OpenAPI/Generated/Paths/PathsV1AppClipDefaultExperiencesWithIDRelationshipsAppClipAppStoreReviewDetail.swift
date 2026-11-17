@@ -9,7 +9,7 @@ extension APIEndpoint.V1.AppClipDefaultExperiences.WithID.Relationships {
 		AppClipAppStoreReviewDetail(path: path + "/appClipAppStoreReviewDetail")
 	}
 
-	public struct AppClipAppStoreReviewDetail {
+	public struct AppClipAppStoreReviewDetail: Sendable {
 		/// Path: `/v1/appClipDefaultExperiences/{id}/relationships/appClipAppStoreReviewDetail`
 		public let path: String
 

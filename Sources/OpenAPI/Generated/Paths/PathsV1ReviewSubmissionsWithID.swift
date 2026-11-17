@@ -9,7 +9,7 @@ extension APIEndpoint.V1.ReviewSubmissions {
 		WithID(path: "\(path)/\(id)")
 	}
 
-	public struct WithID {
+	public struct WithID: Sendable {
 		/// Path: `/v1/reviewSubmissions/{id}`
 		public let path: String
 
@@ -17,7 +17,7 @@ extension APIEndpoint.V1.ReviewSubmissions {
 			Request(path: path, method: "GET", query: parameters?.asQuery, id: "reviewSubmissions_getInstance")
 		}
 
-		public struct GetParameters {
+		public struct GetParameters: Sendable {
 			public var fieldsReviewSubmissions: [FieldsReviewSubmissions]?
 			public var fieldsApps: [FieldsApps]?
 			public var fieldsReviewSubmissionItems: [FieldsReviewSubmissionItems]?
@@ -26,7 +26,7 @@ extension APIEndpoint.V1.ReviewSubmissions {
 			public var include: [Include]?
 			public var limitItems: Int?
 
-			public enum FieldsReviewSubmissions: String, Codable, CaseIterable {
+			public enum FieldsReviewSubmissions: String, Codable, CaseIterable, Sendable {
 				case platform
 				case submittedDate
 				case state
@@ -37,7 +37,7 @@ extension APIEndpoint.V1.ReviewSubmissions {
 				case lastUpdatedByActor
 			}
 
-			public enum FieldsApps: String, Codable, CaseIterable {
+			public enum FieldsApps: String, Codable, CaseIterable, Sendable {
 				case accessibilityURL = "accessibilityUrl"
 				case name
 				case bundleID = "bundleId"
@@ -98,7 +98,7 @@ extension APIEndpoint.V1.ReviewSubmissions {
 				case androidToIosAppMappingDetails
 			}
 
-			public enum FieldsReviewSubmissionItems: String, Codable, CaseIterable {
+			public enum FieldsReviewSubmissionItems: String, Codable, CaseIterable, Sendable {
 				case state
 				case appStoreVersion
 				case appCustomProductPageVersion
@@ -119,7 +119,7 @@ extension APIEndpoint.V1.ReviewSubmissions {
 				case retentionMessageVersion
 			}
 
-			public enum FieldsAppStoreVersions: String, Codable, CaseIterable {
+			public enum FieldsAppStoreVersions: String, Codable, CaseIterable, Sendable {
 				case platform
 				case versionString
 				case appStoreState
@@ -146,7 +146,7 @@ extension APIEndpoint.V1.ReviewSubmissions {
 				case alternativeDistributionPackage
 			}
 
-			public enum FieldsActors: String, Codable, CaseIterable {
+			public enum FieldsActors: String, Codable, CaseIterable, Sendable {
 				case actorType
 				case userFirstName
 				case userLastName
@@ -154,7 +154,7 @@ extension APIEndpoint.V1.ReviewSubmissions {
 				case apiKeyID = "apiKeyId"
 			}
 
-			public enum Include: String, Codable, CaseIterable {
+			public enum Include: String, Codable, CaseIterable, Sendable {
 				case app
 				case items
 				case appStoreVersionForReview

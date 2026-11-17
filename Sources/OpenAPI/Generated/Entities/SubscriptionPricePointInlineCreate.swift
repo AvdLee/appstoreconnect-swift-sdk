@@ -3,11 +3,11 @@
 
 import Foundation
 
-public struct SubscriptionPricePointInlineCreate: Codable, Identifiable {
+public struct SubscriptionPricePointInlineCreate: Codable, Identifiable, Sendable {
 	public var type: `Type`
 	public var id: String?
 
-	public enum `Type`: String, Codable, CaseIterable {
+	public enum `Type`: String, Codable, CaseIterable, Sendable {
 		case subscriptionPricePoints
 	}
 

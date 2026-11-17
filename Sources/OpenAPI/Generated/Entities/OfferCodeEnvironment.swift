@@ -3,7 +3,7 @@
 
 import Foundation
 
-public enum OfferCodeEnvironment: String, Codable, CaseIterable {
+public enum OfferCodeEnvironment: String, Codable, CaseIterable, Sendable {
 	case production = "PRODUCTION"
 	case sandbox = "SANDBOX"
 }

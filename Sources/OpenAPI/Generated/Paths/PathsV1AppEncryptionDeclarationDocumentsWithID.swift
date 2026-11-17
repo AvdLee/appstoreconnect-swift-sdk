@@ -9,7 +9,7 @@ extension APIEndpoint.V1.AppEncryptionDeclarationDocuments {
 		WithID(path: "\(path)/\(id)")
 	}
 
-	public struct WithID {
+	public struct WithID: Sendable {
 		/// Path: `/v1/appEncryptionDeclarationDocuments/{id}`
 		public let path: String
 
@@ -23,7 +23,7 @@ extension APIEndpoint.V1.AppEncryptionDeclarationDocuments {
 			return encoder.items
 		}
 
-		public enum FieldsAppEncryptionDeclarationDocuments: String, Codable, CaseIterable {
+		public enum FieldsAppEncryptionDeclarationDocuments: String, Codable, CaseIterable, Sendable {
 			case fileSize
 			case fileName
 			case assetToken

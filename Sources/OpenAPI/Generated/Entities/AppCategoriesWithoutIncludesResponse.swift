@@ -3,7 +3,7 @@
 
 import Foundation
 
-public struct AppCategoriesWithoutIncludesResponse: Codable {
+public struct AppCategoriesWithoutIncludesResponse: Codable, Sendable {
 	public var data: [AppCategory]
 	public var links: PagedDocumentLinks
 	public var meta: PagingInformation?

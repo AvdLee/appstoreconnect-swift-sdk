@@ -9,7 +9,7 @@ extension APIEndpoint.V1 {
 		WinBackOffers(path: path + "/winBackOffers")
 	}
 
-	public struct WinBackOffers {
+	public struct WinBackOffers: Sendable {
 		/// Path: `/v1/winBackOffers`
 		public let path: String
 

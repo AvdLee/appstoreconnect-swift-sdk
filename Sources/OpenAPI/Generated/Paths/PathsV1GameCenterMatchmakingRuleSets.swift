@@ -9,7 +9,7 @@ extension APIEndpoint.V1 {
 		GameCenterMatchmakingRuleSets(path: path + "/gameCenterMatchmakingRuleSets")
 	}
 
-	public struct GameCenterMatchmakingRuleSets {
+	public struct GameCenterMatchmakingRuleSets: Sendable {
 		/// Path: `/v1/gameCenterMatchmakingRuleSets`
 		public let path: String
 
@@ -17,7 +17,7 @@ extension APIEndpoint.V1 {
 			Request(path: path, method: "GET", query: parameters?.asQuery, id: "gameCenterMatchmakingRuleSets_getCollection")
 		}
 
-		public struct GetParameters {
+		public struct GetParameters: Sendable {
 			public var fieldsGameCenterMatchmakingRuleSets: [FieldsGameCenterMatchmakingRuleSets]?
 			public var fieldsGameCenterMatchmakingTeams: [FieldsGameCenterMatchmakingTeams]?
 			public var fieldsGameCenterMatchmakingRules: [FieldsGameCenterMatchmakingRules]?
@@ -28,7 +28,7 @@ extension APIEndpoint.V1 {
 			public var limitRules: Int?
 			public var limitTeams: Int?
 
-			public enum FieldsGameCenterMatchmakingRuleSets: String, Codable, CaseIterable {
+			public enum FieldsGameCenterMatchmakingRuleSets: String, Codable, CaseIterable, Sendable {
 				case referenceName
 				case ruleLanguageVersion
 				case minPlayers
@@ -38,13 +38,13 @@ extension APIEndpoint.V1 {
 				case matchmakingQueues
 			}
 
-			public enum FieldsGameCenterMatchmakingTeams: String, Codable, CaseIterable {
+			public enum FieldsGameCenterMatchmakingTeams: String, Codable, CaseIterable, Sendable {
 				case referenceName
 				case minPlayers
 				case maxPlayers
 			}
 
-			public enum FieldsGameCenterMatchmakingRules: String, Codable, CaseIterable {
+			public enum FieldsGameCenterMatchmakingRules: String, Codable, CaseIterable, Sendable {
 				case referenceName
 				case description
 				case type
@@ -52,14 +52,14 @@ extension APIEndpoint.V1 {
 				case weight
 			}
 
-			public enum FieldsGameCenterMatchmakingQueues: String, Codable, CaseIterable {
+			public enum FieldsGameCenterMatchmakingQueues: String, Codable, CaseIterable, Sendable {
 				case referenceName
 				case classicMatchmakingBundleIDs = "classicMatchmakingBundleIds"
 				case ruleSet
 				case experimentRuleSet
 			}
 
-			public enum Include: String, Codable, CaseIterable {
+			public enum Include: String, Codable, CaseIterable, Sendable {
 				case teams
 				case rules
 				case matchmakingQueues

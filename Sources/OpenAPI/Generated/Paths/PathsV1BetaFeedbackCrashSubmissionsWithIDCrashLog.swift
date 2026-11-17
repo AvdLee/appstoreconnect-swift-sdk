@@ -9,7 +9,7 @@ extension APIEndpoint.V1.BetaFeedbackCrashSubmissions.WithID {
 		CrashLog(path: path + "/crashLog")
 	}
 
-	public struct CrashLog {
+	public struct CrashLog: Sendable {
 		/// Path: `/v1/betaFeedbackCrashSubmissions/{id}/crashLog`
 		public let path: String
 
@@ -23,7 +23,7 @@ extension APIEndpoint.V1.BetaFeedbackCrashSubmissions.WithID {
 			return encoder.items
 		}
 
-		public enum FieldsBetaCrashLogs: String, Codable, CaseIterable {
+		public enum FieldsBetaCrashLogs: String, Codable, CaseIterable, Sendable {
 			case logText
 		}
 	}

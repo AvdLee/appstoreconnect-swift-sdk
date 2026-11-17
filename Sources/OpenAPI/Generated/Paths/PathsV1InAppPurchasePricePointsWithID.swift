@@ -9,7 +9,7 @@ extension APIEndpoint.V1.InAppPurchasePricePoints {
 		WithID(path: "\(path)/\(id)")
 	}
 
-	public struct WithID {
+	public struct WithID: Sendable {
 		/// Path: `/v1/inAppPurchasePricePoints/{id}`
 		public let path: String
 	}

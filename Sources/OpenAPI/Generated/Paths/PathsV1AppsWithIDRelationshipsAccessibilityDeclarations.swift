@@ -9,7 +9,7 @@ extension APIEndpoint.V1.Apps.WithID.Relationships {
 		AccessibilityDeclarations(path: path + "/accessibilityDeclarations")
 	}
 
-	public struct AccessibilityDeclarations {
+	public struct AccessibilityDeclarations: Sendable {
 		/// Path: `/v1/apps/{id}/relationships/accessibilityDeclarations`
 		public let path: String
 

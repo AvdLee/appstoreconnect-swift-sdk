@@ -9,7 +9,7 @@ extension APIEndpoint.V1.BuildBundles.WithID {
 		BuildBundleFileSizes(path: path + "/buildBundleFileSizes")
 	}
 
-	public struct BuildBundleFileSizes {
+	public struct BuildBundleFileSizes: Sendable {
 		/// Path: `/v1/buildBundles/{id}/buildBundleFileSizes`
 		public let path: String
 
@@ -24,7 +24,7 @@ extension APIEndpoint.V1.BuildBundles.WithID {
 			return encoder.items
 		}
 
-		public enum FieldsBuildBundleFileSizes: String, Codable, CaseIterable {
+		public enum FieldsBuildBundleFileSizes: String, Codable, CaseIterable, Sendable {
 			case deviceModel
 			case osVersion
 			case downloadBytes

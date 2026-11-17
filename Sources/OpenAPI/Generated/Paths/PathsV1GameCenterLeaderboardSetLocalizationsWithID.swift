@@ -9,7 +9,7 @@ extension APIEndpoint.V1.GameCenterLeaderboardSetLocalizations {
 		WithID(path: "\(path)/\(id)")
 	}
 
-	public struct WithID {
+	public struct WithID: Sendable {
 		/// Path: `/v1/gameCenterLeaderboardSetLocalizations/{id}`
 		public let path: String
 
@@ -18,20 +18,20 @@ extension APIEndpoint.V1.GameCenterLeaderboardSetLocalizations {
 			Request(path: path, method: "GET", query: parameters?.asQuery, id: "gameCenterLeaderboardSetLocalizations_getInstance")
 		}
 
-		public struct GetParameters {
+		public struct GetParameters: Sendable {
 			public var fieldsGameCenterLeaderboardSetLocalizations: [FieldsGameCenterLeaderboardSetLocalizations]?
 			public var fieldsGameCenterLeaderboardSets: [FieldsGameCenterLeaderboardSets]?
 			public var fieldsGameCenterLeaderboardSetImages: [FieldsGameCenterLeaderboardSetImages]?
 			public var include: [Include]?
 
-			public enum FieldsGameCenterLeaderboardSetLocalizations: String, Codable, CaseIterable {
+			public enum FieldsGameCenterLeaderboardSetLocalizations: String, Codable, CaseIterable, Sendable {
 				case locale
 				case name
 				case gameCenterLeaderboardSet
 				case gameCenterLeaderboardSetImage
 			}
 
-			public enum FieldsGameCenterLeaderboardSets: String, Codable, CaseIterable {
+			public enum FieldsGameCenterLeaderboardSets: String, Codable, CaseIterable, Sendable {
 				case referenceName
 				case vendorIdentifier
 				case gameCenterDetail
@@ -42,7 +42,7 @@ extension APIEndpoint.V1.GameCenterLeaderboardSetLocalizations {
 				case releases
 			}
 
-			public enum FieldsGameCenterLeaderboardSetImages: String, Codable, CaseIterable {
+			public enum FieldsGameCenterLeaderboardSetImages: String, Codable, CaseIterable, Sendable {
 				case fileSize
 				case fileName
 				case imageAsset
@@ -51,7 +51,7 @@ extension APIEndpoint.V1.GameCenterLeaderboardSetLocalizations {
 				case gameCenterLeaderboardSetLocalization
 			}
 
-			public enum Include: String, Codable, CaseIterable {
+			public enum Include: String, Codable, CaseIterable, Sendable {
 				case gameCenterLeaderboardSet
 				case gameCenterLeaderboardSetImage
 			}

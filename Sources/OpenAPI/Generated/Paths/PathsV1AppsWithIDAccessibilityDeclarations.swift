@@ -9,7 +9,7 @@ extension APIEndpoint.V1.Apps.WithID {
 		AccessibilityDeclarations(path: path + "/accessibilityDeclarations")
 	}
 
-	public struct AccessibilityDeclarations {
+	public struct AccessibilityDeclarations: Sendable {
 		/// Path: `/v1/apps/{id}/accessibilityDeclarations`
 		public let path: String
 
@@ -17,13 +17,13 @@ extension APIEndpoint.V1.Apps.WithID {
 			Request(path: path, method: "GET", query: parameters?.asQuery, id: "apps_accessibilityDeclarations_getToManyRelated")
 		}
 
-		public struct GetParameters {
+		public struct GetParameters: Sendable {
 			public var filterDeviceFamily: [FilterDeviceFamily]?
 			public var filterState: [FilterState]?
 			public var fieldsAccessibilityDeclarations: [FieldsAccessibilityDeclarations]?
 			public var limit: Int?
 
-			public enum FilterDeviceFamily: String, Codable, CaseIterable {
+			public enum FilterDeviceFamily: String, Codable, CaseIterable, Sendable {
 				case iphone = "IPHONE"
 				case ipad = "IPAD"
 				case appleTv = "APPLE_TV"
@@ -32,13 +32,13 @@ extension APIEndpoint.V1.Apps.WithID {
 				case vision = "VISION"
 			}
 
-			public enum FilterState: String, Codable, CaseIterable {
+			public enum FilterState: String, Codable, CaseIterable, Sendable {
 				case draft = "DRAFT"
 				case published = "PUBLISHED"
 				case replaced = "REPLACED"
 			}
 
-			public enum FieldsAccessibilityDeclarations: String, Codable, CaseIterable {
+			public enum FieldsAccessibilityDeclarations: String, Codable, CaseIterable, Sendable {
 				case deviceFamily
 				case state
 				case supportsAudioDescriptions

@@ -9,7 +9,7 @@ extension APIEndpoint.V1.Apps.WithID {
 		BetaAppLocalizations(path: path + "/betaAppLocalizations")
 	}
 
-	public struct BetaAppLocalizations {
+	public struct BetaAppLocalizations: Sendable {
 		/// Path: `/v1/apps/{id}/betaAppLocalizations`
 		public let path: String
 
@@ -24,7 +24,7 @@ extension APIEndpoint.V1.Apps.WithID {
 			return encoder.items
 		}
 
-		public enum FieldsBetaAppLocalizations: String, Codable, CaseIterable {
+		public enum FieldsBetaAppLocalizations: String, Codable, CaseIterable, Sendable {
 			case feedbackEmail
 			case marketingURL = "marketingUrl"
 			case privacyPolicyURL = "privacyPolicyUrl"

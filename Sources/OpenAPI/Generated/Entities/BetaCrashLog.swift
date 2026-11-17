@@ -3,17 +3,17 @@
 
 import Foundation
 
-public struct BetaCrashLog: Codable, Identifiable {
+public struct BetaCrashLog: Codable, Identifiable, Sendable {
 	public var type: `Type`
 	public var id: String
 	public var attributes: Attributes?
 	public var links: ResourceLinks?
 
-	public enum `Type`: String, Codable, CaseIterable {
+	public enum `Type`: String, Codable, CaseIterable, Sendable {
 		case betaCrashLogs
 	}
 
-	public struct Attributes: Codable {
+	public struct Attributes: Codable, Sendable {
 		public var logText: String?
 
 		public init(logText: String? = nil) {

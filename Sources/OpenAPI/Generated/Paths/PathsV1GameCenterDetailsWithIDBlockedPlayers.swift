@@ -9,7 +9,7 @@ extension APIEndpoint.V1.GameCenterDetails.WithID {
 		BlockedPlayers(path: path + "/blockedPlayers")
 	}
 
-	public struct BlockedPlayers {
+	public struct BlockedPlayers: Sendable {
 		/// Path: `/v1/gameCenterDetails/{id}/blockedPlayers`
 		public let path: String
 
@@ -24,7 +24,7 @@ extension APIEndpoint.V1.GameCenterDetails.WithID {
 			return encoder.items
 		}
 
-		public enum FieldsGameCenterDetailPlayers: String, Codable, CaseIterable {
+		public enum FieldsGameCenterDetailPlayers: String, Codable, CaseIterable, Sendable {
 			case nickname
 			case blocked
 			case bundleID = "bundleId"

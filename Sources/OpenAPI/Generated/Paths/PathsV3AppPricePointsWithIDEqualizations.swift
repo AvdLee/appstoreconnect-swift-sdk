@@ -9,7 +9,7 @@ extension APIEndpoint.V3.AppPricePoints.WithID {
 		Equalizations(path: path + "/equalizations")
 	}
 
-	public struct Equalizations {
+	public struct Equalizations: Sendable {
 		/// Path: `/v3/appPricePoints/{id}/equalizations`
 		public let path: String
 
@@ -17,7 +17,7 @@ extension APIEndpoint.V3.AppPricePoints.WithID {
 			Request(path: path, method: "GET", query: parameters?.asQuery, id: "appPricePointsV3_equalizations_getToManyRelated")
 		}
 
-		public struct GetParameters {
+		public struct GetParameters: Sendable {
 			public var filterTerritory: [String]?
 			public var fieldsAppPricePoints: [FieldsAppPricePoints]?
 			public var fieldsApps: [FieldsApps]?
@@ -25,7 +25,7 @@ extension APIEndpoint.V3.AppPricePoints.WithID {
 			public var limit: Int?
 			public var include: [Include]?
 
-			public enum FieldsAppPricePoints: String, Codable, CaseIterable {
+			public enum FieldsAppPricePoints: String, Codable, CaseIterable, Sendable {
 				case customerPrice
 				case proceeds
 				case app
@@ -33,7 +33,7 @@ extension APIEndpoint.V3.AppPricePoints.WithID {
 				case territory
 			}
 
-			public enum FieldsApps: String, Codable, CaseIterable {
+			public enum FieldsApps: String, Codable, CaseIterable, Sendable {
 				case accessibilityURL = "accessibilityUrl"
 				case name
 				case bundleID = "bundleId"
@@ -94,11 +94,11 @@ extension APIEndpoint.V3.AppPricePoints.WithID {
 				case androidToIosAppMappingDetails
 			}
 
-			public enum FieldsTerritories: String, Codable, CaseIterable {
+			public enum FieldsTerritories: String, Codable, CaseIterable, Sendable {
 				case currency
 			}
 
-			public enum Include: String, Codable, CaseIterable {
+			public enum Include: String, Codable, CaseIterable, Sendable {
 				case app
 				case territory
 			}

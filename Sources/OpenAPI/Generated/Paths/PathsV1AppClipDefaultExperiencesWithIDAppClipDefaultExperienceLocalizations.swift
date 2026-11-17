@@ -9,7 +9,7 @@ extension APIEndpoint.V1.AppClipDefaultExperiences.WithID {
 		AppClipDefaultExperienceLocalizations(path: path + "/appClipDefaultExperienceLocalizations")
 	}
 
-	public struct AppClipDefaultExperienceLocalizations {
+	public struct AppClipDefaultExperienceLocalizations: Sendable {
 		/// Path: `/v1/appClipDefaultExperiences/{id}/appClipDefaultExperienceLocalizations`
 		public let path: String
 
@@ -17,7 +17,7 @@ extension APIEndpoint.V1.AppClipDefaultExperiences.WithID {
 			Request(path: path, method: "GET", query: parameters?.asQuery, id: "appClipDefaultExperiences_appClipDefaultExperienceLocalizations_getToManyRelated")
 		}
 
-		public struct GetParameters {
+		public struct GetParameters: Sendable {
 			public var filterLocale: [String]?
 			public var fieldsAppClipDefaultExperienceLocalizations: [FieldsAppClipDefaultExperienceLocalizations]?
 			public var fieldsAppClipDefaultExperiences: [FieldsAppClipDefaultExperiences]?
@@ -25,14 +25,14 @@ extension APIEndpoint.V1.AppClipDefaultExperiences.WithID {
 			public var limit: Int?
 			public var include: [Include]?
 
-			public enum FieldsAppClipDefaultExperienceLocalizations: String, Codable, CaseIterable {
+			public enum FieldsAppClipDefaultExperienceLocalizations: String, Codable, CaseIterable, Sendable {
 				case locale
 				case subtitle
 				case appClipDefaultExperience
 				case appClipHeaderImage
 			}
 
-			public enum FieldsAppClipDefaultExperiences: String, Codable, CaseIterable {
+			public enum FieldsAppClipDefaultExperiences: String, Codable, CaseIterable, Sendable {
 				case action
 				case appClip
 				case releaseWithAppStoreVersion
@@ -40,7 +40,7 @@ extension APIEndpoint.V1.AppClipDefaultExperiences.WithID {
 				case appClipAppStoreReviewDetail
 			}
 
-			public enum FieldsAppClipHeaderImages: String, Codable, CaseIterable {
+			public enum FieldsAppClipHeaderImages: String, Codable, CaseIterable, Sendable {
 				case fileSize
 				case fileName
 				case sourceFileChecksum
@@ -50,7 +50,7 @@ extension APIEndpoint.V1.AppClipDefaultExperiences.WithID {
 				case appClipDefaultExperienceLocalization
 			}
 
-			public enum Include: String, Codable, CaseIterable {
+			public enum Include: String, Codable, CaseIterable, Sendable {
 				case appClipDefaultExperience
 				case appClipHeaderImage
 			}

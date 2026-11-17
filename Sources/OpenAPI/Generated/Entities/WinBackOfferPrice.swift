@@ -3,28 +3,28 @@
 
 import Foundation
 
-public struct WinBackOfferPrice: Codable, Identifiable {
+public struct WinBackOfferPrice: Codable, Identifiable, Sendable {
 	public var type: `Type`
 	public var id: String
 	public var relationships: Relationships?
 	public var links: ResourceLinks?
 
-	public enum `Type`: String, Codable, CaseIterable {
+	public enum `Type`: String, Codable, CaseIterable, Sendable {
 		case winBackOfferPrices
 	}
 
-	public struct Relationships: Codable {
+	public struct Relationships: Codable, Sendable {
 		public var territory: Territory?
 		public var subscriptionPricePoint: SubscriptionPricePoint?
 
-		public struct Territory: Codable {
+		public struct Territory: Codable, Sendable {
 			public var data: Data?
 
-			public struct Data: Codable, Identifiable {
+			public struct Data: Codable, Identifiable, Sendable {
 				public var type: `Type`
 				public var id: String
 
-				public enum `Type`: String, Codable, CaseIterable {
+				public enum `Type`: String, Codable, CaseIterable, Sendable {
 					case territories
 				}
 
@@ -61,14 +61,14 @@ public struct WinBackOfferPrice: Codable, Identifiable {
 			}
 		}
 
-		public struct SubscriptionPricePoint: Codable {
+		public struct SubscriptionPricePoint: Codable, Sendable {
 			public var data: Data?
 
-			public struct Data: Codable, Identifiable {
+			public struct Data: Codable, Identifiable, Sendable {
 				public var type: `Type`
 				public var id: String
 
-				public enum `Type`: String, Codable, CaseIterable {
+				public enum `Type`: String, Codable, CaseIterable, Sendable {
 					case subscriptionPricePoints
 				}
 

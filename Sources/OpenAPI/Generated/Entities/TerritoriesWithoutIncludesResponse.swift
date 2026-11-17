@@ -3,7 +3,7 @@
 
 import Foundation
 
-public struct TerritoriesWithoutIncludesResponse: Codable {
+public struct TerritoriesWithoutIncludesResponse: Codable, Sendable {
 	public var data: [Territory]
 	public var links: PagedDocumentLinks
 	public var meta: PagingInformation?

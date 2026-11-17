@@ -9,7 +9,7 @@ extension APIEndpoint.V1 {
 		BackgroundAssets(path: path + "/backgroundAssets")
 	}
 
-	public struct BackgroundAssets {
+	public struct BackgroundAssets: Sendable {
 		/// Path: `/v1/backgroundAssets`
 		public let path: String
 

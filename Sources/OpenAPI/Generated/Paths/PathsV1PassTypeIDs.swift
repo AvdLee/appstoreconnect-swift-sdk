@@ -9,7 +9,7 @@ extension APIEndpoint.V1 {
 		PassTypeIDs(path: path + "/passTypeIds")
 	}
 
-	public struct PassTypeIDs {
+	public struct PassTypeIDs: Sendable {
 		/// Path: `/v1/passTypeIds`
 		public let path: String
 
@@ -17,7 +17,7 @@ extension APIEndpoint.V1 {
 			Request(path: path, method: "GET", query: parameters?.asQuery, id: "passTypeIds_getCollection")
 		}
 
-		public struct GetParameters {
+		public struct GetParameters: Sendable {
 			public var filterName: [String]?
 			public var filterIdentifier: [String]?
 			public var filterID: [String]?
@@ -28,7 +28,7 @@ extension APIEndpoint.V1 {
 			public var include: [Include]?
 			public var limitCertificates: Int?
 
-			public enum Sort: String, Codable, CaseIterable {
+			public enum Sort: String, Codable, CaseIterable, Sendable {
 				case name
 				case minusname = "-name"
 				case identifier
@@ -37,13 +37,13 @@ extension APIEndpoint.V1 {
 				case minusid = "-id"
 			}
 
-			public enum FieldsPassTypeIDs: String, Codable, CaseIterable {
+			public enum FieldsPassTypeIDs: String, Codable, CaseIterable, Sendable {
 				case name
 				case identifier
 				case certificates
 			}
 
-			public enum FieldsCertificates: String, Codable, CaseIterable {
+			public enum FieldsCertificates: String, Codable, CaseIterable, Sendable {
 				case name
 				case certificateType
 				case displayName
@@ -55,7 +55,7 @@ extension APIEndpoint.V1 {
 				case passTypeID = "passTypeId"
 			}
 
-			public enum Include: String, Codable, CaseIterable {
+			public enum Include: String, Codable, CaseIterable, Sendable {
 				case certificates
 			}
 

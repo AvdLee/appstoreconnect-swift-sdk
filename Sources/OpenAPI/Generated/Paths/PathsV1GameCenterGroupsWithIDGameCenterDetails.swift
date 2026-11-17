@@ -9,7 +9,7 @@ extension APIEndpoint.V1.GameCenterGroups.WithID {
 		GameCenterDetails(path: path + "/gameCenterDetails")
 	}
 
-	public struct GameCenterDetails {
+	public struct GameCenterDetails: Sendable {
 		/// Path: `/v1/gameCenterGroups/{id}/gameCenterDetails`
 		public let path: String
 
@@ -17,7 +17,7 @@ extension APIEndpoint.V1.GameCenterGroups.WithID {
 			Request(path: path, method: "GET", query: parameters?.asQuery, id: "gameCenterGroups_gameCenterDetails_getToManyRelated")
 		}
 
-		public struct GetParameters {
+		public struct GetParameters: Sendable {
 			public var filterGameCenterAppVersionsEnabled: [String]?
 			public var fieldsGameCenterDetails: [FieldsGameCenterDetails]?
 			public var fieldsApps: [FieldsApps]?
@@ -52,7 +52,7 @@ extension APIEndpoint.V1.GameCenterGroups.WithID {
 			public var limitLeaderboardSetReleases: Int?
 			public var limitChallengesMinimumPlatformVersions: Int?
 
-			public enum FieldsGameCenterDetails: String, Codable, CaseIterable {
+			public enum FieldsGameCenterDetails: String, Codable, CaseIterable, Sendable {
 				case arcadeEnabled
 				case challengeEnabled
 				case app
@@ -79,7 +79,7 @@ extension APIEndpoint.V1.GameCenterGroups.WithID {
 				case challengesMinimumPlatformVersions
 			}
 
-			public enum FieldsApps: String, Codable, CaseIterable {
+			public enum FieldsApps: String, Codable, CaseIterable, Sendable {
 				case accessibilityURL = "accessibilityUrl"
 				case name
 				case bundleID = "bundleId"
@@ -140,13 +140,13 @@ extension APIEndpoint.V1.GameCenterGroups.WithID {
 				case androidToIosAppMappingDetails
 			}
 
-			public enum FieldsGameCenterAppVersions: String, Codable, CaseIterable {
+			public enum FieldsGameCenterAppVersions: String, Codable, CaseIterable, Sendable {
 				case enabled
 				case compatibilityVersions
 				case appStoreVersion
 			}
 
-			public enum FieldsGameCenterGroups: String, Codable, CaseIterable {
+			public enum FieldsGameCenterGroups: String, Codable, CaseIterable, Sendable {
 				case referenceName
 				case gameCenterDetails
 				case gameCenterLeaderboards
@@ -159,7 +159,7 @@ extension APIEndpoint.V1.GameCenterGroups.WithID {
 				case gameCenterChallenges
 			}
 
-			public enum FieldsGameCenterLeaderboards: String, Codable, CaseIterable {
+			public enum FieldsGameCenterLeaderboards: String, Codable, CaseIterable, Sendable {
 				case defaultFormatter
 				case referenceName
 				case vendorIdentifier
@@ -185,7 +185,7 @@ extension APIEndpoint.V1.GameCenterGroups.WithID {
 				case versions
 			}
 
-			public enum FieldsGameCenterLeaderboardSets: String, Codable, CaseIterable {
+			public enum FieldsGameCenterLeaderboardSets: String, Codable, CaseIterable, Sendable {
 				case referenceName
 				case vendorIdentifier
 				case gameCenterDetail
@@ -197,7 +197,7 @@ extension APIEndpoint.V1.GameCenterGroups.WithID {
 				case versions
 			}
 
-			public enum FieldsGameCenterAchievements: String, Codable, CaseIterable {
+			public enum FieldsGameCenterAchievements: String, Codable, CaseIterable, Sendable {
 				case referenceName
 				case vendorIdentifier
 				case points
@@ -214,7 +214,7 @@ extension APIEndpoint.V1.GameCenterGroups.WithID {
 				case versions
 			}
 
-			public enum FieldsGameCenterActivities: String, Codable, CaseIterable {
+			public enum FieldsGameCenterActivities: String, Codable, CaseIterable, Sendable {
 				case referenceName
 				case vendorIdentifier
 				case playStyle
@@ -232,7 +232,7 @@ extension APIEndpoint.V1.GameCenterGroups.WithID {
 				case versions
 			}
 
-			public enum FieldsGameCenterChallenges: String, Codable, CaseIterable {
+			public enum FieldsGameCenterChallenges: String, Codable, CaseIterable, Sendable {
 				case referenceName
 				case vendorIdentifier
 				case archived
@@ -245,33 +245,33 @@ extension APIEndpoint.V1.GameCenterGroups.WithID {
 				case leaderboardV2
 			}
 
-			public enum FieldsGameCenterAchievementReleases: String, Codable, CaseIterable {
+			public enum FieldsGameCenterAchievementReleases: String, Codable, CaseIterable, Sendable {
 				case live
 				case gameCenterDetail
 				case gameCenterAchievement
 			}
 
-			public enum FieldsGameCenterActivityVersionReleases: String, Codable, CaseIterable {
+			public enum FieldsGameCenterActivityVersionReleases: String, Codable, CaseIterable, Sendable {
 				case version
 			}
 
-			public enum FieldsGameCenterChallengeVersionReleases: String, Codable, CaseIterable {
+			public enum FieldsGameCenterChallengeVersionReleases: String, Codable, CaseIterable, Sendable {
 				case version
 			}
 
-			public enum FieldsGameCenterLeaderboardReleases: String, Codable, CaseIterable {
+			public enum FieldsGameCenterLeaderboardReleases: String, Codable, CaseIterable, Sendable {
 				case live
 				case gameCenterDetail
 				case gameCenterLeaderboard
 			}
 
-			public enum FieldsGameCenterLeaderboardSetReleases: String, Codable, CaseIterable {
+			public enum FieldsGameCenterLeaderboardSetReleases: String, Codable, CaseIterable, Sendable {
 				case live
 				case gameCenterDetail
 				case gameCenterLeaderboardSet
 			}
 
-			public enum FieldsAppStoreVersions: String, Codable, CaseIterable {
+			public enum FieldsAppStoreVersions: String, Codable, CaseIterable, Sendable {
 				case platform
 				case versionString
 				case appStoreState
@@ -298,7 +298,7 @@ extension APIEndpoint.V1.GameCenterGroups.WithID {
 				case alternativeDistributionPackage
 			}
 
-			public enum Include: String, Codable, CaseIterable {
+			public enum Include: String, Codable, CaseIterable, Sendable {
 				case app
 				case gameCenterAppVersions
 				case gameCenterGroup

@@ -3,18 +3,18 @@
 
 import Foundation
 
-public struct AppAssetLibraryPlacement: Codable, Identifiable {
+public struct AppAssetLibraryPlacement: Codable, Identifiable, Sendable {
 	public var type: `Type`
 	public var id: String
 	public var attributes: Attributes?
 	public var relationships: Relationships?
 	public var links: ResourceLinks?
 
-	public enum `Type`: String, Codable, CaseIterable {
+	public enum `Type`: String, Codable, CaseIterable, Sendable {
 		case appAssetLibraryPlacements
 	}
 
-	public struct Attributes: Codable {
+	public struct Attributes: Codable, Sendable {
 		public var mediaType: AppAssetLibraryMediaType?
 		public var placementType: AppAssetLibraryPlacementType?
 		public var placementGroup: String?
@@ -56,7 +56,7 @@ public struct AppAssetLibraryPlacement: Codable, Identifiable {
 		}
 	}
 
-	public enum Relationships: Codable {
+	public enum Relationships: Codable, Sendable {
 		case appAssetLibraryPlacementImageRelationships(AppAssetLibraryPlacementImageRelationships)
 		case appAssetLibraryPlacementVideoRelationships(AppAssetLibraryPlacementVideoRelationships)
 

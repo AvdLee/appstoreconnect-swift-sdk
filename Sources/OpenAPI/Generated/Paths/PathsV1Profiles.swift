@@ -9,7 +9,7 @@ extension APIEndpoint.V1 {
 		Profiles(path: path + "/profiles")
 	}
 
-	public struct Profiles {
+	public struct Profiles: Sendable {
 		/// Path: `/v1/profiles`
 		public let path: String
 
@@ -17,7 +17,7 @@ extension APIEndpoint.V1 {
 			Request(path: path, method: "GET", query: parameters?.asQuery, id: "profiles_getCollection")
 		}
 
-		public struct GetParameters {
+		public struct GetParameters: Sendable {
 			public var filterName: [String]?
 			public var filterProfileType: [FilterProfileType]?
 			public var filterProfileState: [FilterProfileState]?
@@ -32,7 +32,7 @@ extension APIEndpoint.V1 {
 			public var limitCertificates: Int?
 			public var limitDevices: Int?
 
-			public enum FilterProfileType: String, Codable, CaseIterable {
+			public enum FilterProfileType: String, Codable, CaseIterable, Sendable {
 				case iosAppDevelopment = "IOS_APP_DEVELOPMENT"
 				case iosAppStore = "IOS_APP_STORE"
 				case iosAppAdhoc = "IOS_APP_ADHOC"
@@ -49,12 +49,12 @@ extension APIEndpoint.V1 {
 				case macCatalystAppDirect = "MAC_CATALYST_APP_DIRECT"
 			}
 
-			public enum FilterProfileState: String, Codable, CaseIterable {
+			public enum FilterProfileState: String, Codable, CaseIterable, Sendable {
 				case active = "ACTIVE"
 				case invalid = "INVALID"
 			}
 
-			public enum Sort: String, Codable, CaseIterable {
+			public enum Sort: String, Codable, CaseIterable, Sendable {
 				case name
 				case minusname = "-name"
 				case profileType
@@ -65,7 +65,7 @@ extension APIEndpoint.V1 {
 				case minusid = "-id"
 			}
 
-			public enum FieldsProfiles: String, Codable, CaseIterable {
+			public enum FieldsProfiles: String, Codable, CaseIterable, Sendable {
 				case name
 				case platform
 				case profileType
@@ -79,7 +79,7 @@ extension APIEndpoint.V1 {
 				case certificates
 			}
 
-			public enum FieldsBundleIDs: String, Codable, CaseIterable {
+			public enum FieldsBundleIDs: String, Codable, CaseIterable, Sendable {
 				case name
 				case platform
 				case identifier
@@ -89,7 +89,7 @@ extension APIEndpoint.V1 {
 				case app
 			}
 
-			public enum FieldsDevices: String, Codable, CaseIterable {
+			public enum FieldsDevices: String, Codable, CaseIterable, Sendable {
 				case name
 				case platform
 				case udid
@@ -99,7 +99,7 @@ extension APIEndpoint.V1 {
 				case addedDate
 			}
 
-			public enum FieldsCertificates: String, Codable, CaseIterable {
+			public enum FieldsCertificates: String, Codable, CaseIterable, Sendable {
 				case name
 				case certificateType
 				case displayName
@@ -111,7 +111,7 @@ extension APIEndpoint.V1 {
 				case passTypeID = "passTypeId"
 			}
 
-			public enum Include: String, Codable, CaseIterable {
+			public enum Include: String, Codable, CaseIterable, Sendable {
 				case bundleID = "bundleId"
 				case devices
 				case certificates

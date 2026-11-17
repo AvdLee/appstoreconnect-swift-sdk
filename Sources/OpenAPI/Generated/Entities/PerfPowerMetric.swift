@@ -3,26 +3,26 @@
 
 import Foundation
 
-public struct PerfPowerMetric: Codable, Identifiable {
+public struct PerfPowerMetric: Codable, Identifiable, Sendable {
 	public var type: `Type`
 	public var id: String
 	public var attributes: Attributes?
 	public var links: ResourceLinks?
 
-	public enum `Type`: String, Codable, CaseIterable {
+	public enum `Type`: String, Codable, CaseIterable, Sendable {
 		case perfPowerMetrics
 	}
 
-	public struct Attributes: Codable {
+	public struct Attributes: Codable, Sendable {
 		public var platform: Platform?
 		public var metricType: MetricType?
 		public var deviceType: String?
 
-		public enum Platform: String, Codable, CaseIterable {
+		public enum Platform: String, Codable, CaseIterable, Sendable {
 			case ios = "IOS"
 		}
 
-		public enum MetricType: String, Codable, CaseIterable {
+		public enum MetricType: String, Codable, CaseIterable, Sendable {
 			case disk = "DISK"
 			case hang = "HANG"
 			case battery = "BATTERY"

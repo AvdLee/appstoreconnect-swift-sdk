@@ -3,7 +3,7 @@
 
 import Foundation
 
-public struct EndAppAvailabilityPreOrderResponse: Codable {
+public struct EndAppAvailabilityPreOrderResponse: Codable, Sendable {
 	/// EndAppAvailabilityPreOrder
 	public var data: EndAppAvailabilityPreOrder
 	public var links: DocumentLinks

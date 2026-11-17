@@ -3,22 +3,22 @@
 
 import Foundation
 
-public struct AnalyticsReportRequestCreateRequest: Codable {
+public struct AnalyticsReportRequestCreateRequest: Codable, Sendable {
 	public var data: Data
 
-	public struct Data: Codable {
+	public struct Data: Codable, Sendable {
 		public var type: `Type`
 		public var attributes: Attributes
 		public var relationships: Relationships
 
-		public enum `Type`: String, Codable, CaseIterable {
+		public enum `Type`: String, Codable, CaseIterable, Sendable {
 			case analyticsReportRequests
 		}
 
-		public struct Attributes: Codable {
+		public struct Attributes: Codable, Sendable {
 			public var accessType: AccessType
 
-			public enum AccessType: String, Codable, CaseIterable {
+			public enum AccessType: String, Codable, CaseIterable, Sendable {
 				case oneTimeSnapshot = "ONE_TIME_SNAPSHOT"
 				case ongoing = "ONGOING"
 			}
@@ -38,17 +38,17 @@ public struct AnalyticsReportRequestCreateRequest: Codable {
 			}
 		}
 
-		public struct Relationships: Codable {
+		public struct Relationships: Codable, Sendable {
 			public var app: App
 
-			public struct App: Codable {
+			public struct App: Codable, Sendable {
 				public var data: Data
 
-				public struct Data: Codable, Identifiable {
+				public struct Data: Codable, Identifiable, Sendable {
 					public var type: `Type`
 					public var id: String
 
-					public enum `Type`: String, Codable, CaseIterable {
+					public enum `Type`: String, Codable, CaseIterable, Sendable {
 						case apps
 					}
 

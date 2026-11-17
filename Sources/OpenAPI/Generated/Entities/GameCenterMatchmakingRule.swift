@@ -3,24 +3,24 @@
 
 import Foundation
 
-public struct GameCenterMatchmakingRule: Codable, Identifiable {
+public struct GameCenterMatchmakingRule: Codable, Identifiable, Sendable {
 	public var type: `Type`
 	public var id: String
 	public var attributes: Attributes?
 	public var links: ResourceLinks?
 
-	public enum `Type`: String, Codable, CaseIterable {
+	public enum `Type`: String, Codable, CaseIterable, Sendable {
 		case gameCenterMatchmakingRules
 	}
 
-	public struct Attributes: Codable {
+	public struct Attributes: Codable, Sendable {
 		public var referenceName: String?
 		public var description: String?
 		public var type: `Type`?
 		public var expression: String?
 		public var weight: Double?
 
-		public enum `Type`: String, Codable, CaseIterable {
+		public enum `Type`: String, Codable, CaseIterable, Sendable {
 			case compatible = "COMPATIBLE"
 			case distance = "DISTANCE"
 			case match = "MATCH"

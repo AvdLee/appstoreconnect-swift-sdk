@@ -9,7 +9,7 @@ extension APIEndpoint.V1.EndUserLicenseAgreements.WithID.Relationships {
 		Territories(path: path + "/territories")
 	}
 
-	public struct Territories {
+	public struct Territories: Sendable {
 		/// Path: `/v1/endUserLicenseAgreements/{id}/relationships/territories`
 		public let path: String
 

@@ -9,7 +9,7 @@ extension APIEndpoint.V1.AppInfos.WithID {
 		TerritoryAgeRatings(path: path + "/territoryAgeRatings")
 	}
 
-	public struct TerritoryAgeRatings {
+	public struct TerritoryAgeRatings: Sendable {
 		/// Path: `/v1/appInfos/{id}/territoryAgeRatings`
 		public let path: String
 
@@ -17,22 +17,22 @@ extension APIEndpoint.V1.AppInfos.WithID {
 			Request(path: path, method: "GET", query: parameters?.asQuery, id: "appInfos_territoryAgeRatings_getToManyRelated")
 		}
 
-		public struct GetParameters {
+		public struct GetParameters: Sendable {
 			public var fieldsTerritoryAgeRatings: [FieldsTerritoryAgeRatings]?
 			public var fieldsTerritories: [FieldsTerritories]?
 			public var limit: Int?
 			public var include: [Include]?
 
-			public enum FieldsTerritoryAgeRatings: String, Codable, CaseIterable {
+			public enum FieldsTerritoryAgeRatings: String, Codable, CaseIterable, Sendable {
 				case appStoreAgeRating
 				case territory
 			}
 
-			public enum FieldsTerritories: String, Codable, CaseIterable {
+			public enum FieldsTerritories: String, Codable, CaseIterable, Sendable {
 				case currency
 			}
 
-			public enum Include: String, Codable, CaseIterable {
+			public enum Include: String, Codable, CaseIterable, Sendable {
 				case territory
 			}
 

@@ -3,17 +3,17 @@
 
 import Foundation
 
-public struct CiTestResult: Codable, Identifiable {
+public struct CiTestResult: Codable, Identifiable, Sendable {
 	public var type: `Type`
 	public var id: String
 	public var attributes: Attributes?
 	public var links: ResourceLinks?
 
-	public enum `Type`: String, Codable, CaseIterable {
+	public enum `Type`: String, Codable, CaseIterable, Sendable {
 		case ciTestResults
 	}
 
-	public struct Attributes: Codable {
+	public struct Attributes: Codable, Sendable {
 		public var className: String?
 		public var name: String?
 		public var status: CiTestStatus?
@@ -21,7 +21,7 @@ public struct CiTestResult: Codable, Identifiable {
 		public var message: String?
 		public var destinationTestResults: [DestinationTestResult]?
 
-		public struct DestinationTestResult: Codable {
+		public struct DestinationTestResult: Codable, Sendable {
 			public var uuid: String?
 			public var deviceName: String?
 			public var osVersion: String?

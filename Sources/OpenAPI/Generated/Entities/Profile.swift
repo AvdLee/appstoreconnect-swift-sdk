@@ -3,18 +3,18 @@
 
 import Foundation
 
-public struct Profile: Codable, Identifiable {
+public struct Profile: Codable, Identifiable, Sendable {
 	public var type: `Type`
 	public var id: String
 	public var attributes: Attributes?
 	public var relationships: Relationships?
 	public var links: ResourceLinks?
 
-	public enum `Type`: String, Codable, CaseIterable {
+	public enum `Type`: String, Codable, CaseIterable, Sendable {
 		case profiles
 	}
 
-	public struct Attributes: Codable {
+	public struct Attributes: Codable, Sendable {
 		public var name: String?
 		public var platform: BundleIDPlatform?
 		public var profileType: ProfileType?
@@ -24,7 +24,7 @@ public struct Profile: Codable, Identifiable {
 		public var createdDate: Date?
 		public var expirationDate: Date?
 
-		public enum ProfileType: String, Codable, CaseIterable {
+		public enum ProfileType: String, Codable, CaseIterable, Sendable {
 			case iosAppDevelopment = "IOS_APP_DEVELOPMENT"
 			case iosAppStore = "IOS_APP_STORE"
 			case iosAppAdhoc = "IOS_APP_ADHOC"
@@ -41,7 +41,7 @@ public struct Profile: Codable, Identifiable {
 			case macCatalystAppDirect = "MAC_CATALYST_APP_DIRECT"
 		}
 
-		public enum ProfileState: String, Codable, CaseIterable {
+		public enum ProfileState: String, Codable, CaseIterable, Sendable {
 			case active = "ACTIVE"
 			case invalid = "INVALID"
 		}
@@ -82,20 +82,20 @@ public struct Profile: Codable, Identifiable {
 		}
 	}
 
-	public struct Relationships: Codable {
+	public struct Relationships: Codable, Sendable {
 		public var bundleID: BundleID?
 		public var devices: Devices?
 		public var certificates: Certificates?
 
-		public struct BundleID: Codable {
+		public struct BundleID: Codable, Sendable {
 			public var links: RelationshipLinks?
 			public var data: Data?
 
-			public struct Data: Codable, Identifiable {
+			public struct Data: Codable, Identifiable, Sendable {
 				public var type: `Type`
 				public var id: String
 
-				public enum `Type`: String, Codable, CaseIterable {
+				public enum `Type`: String, Codable, CaseIterable, Sendable {
 					case bundleIDs = "bundleIds"
 				}
 
@@ -135,16 +135,16 @@ public struct Profile: Codable, Identifiable {
 			}
 		}
 
-		public struct Devices: Codable {
+		public struct Devices: Codable, Sendable {
 			public var links: RelationshipLinks?
 			public var meta: PagingInformation?
 			public var data: [Datum]?
 
-			public struct Datum: Codable, Identifiable {
+			public struct Datum: Codable, Identifiable, Sendable {
 				public var type: `Type`
 				public var id: String
 
-				public enum `Type`: String, Codable, CaseIterable {
+				public enum `Type`: String, Codable, CaseIterable, Sendable {
 					case devices
 				}
 
@@ -187,16 +187,16 @@ public struct Profile: Codable, Identifiable {
 			}
 		}
 
-		public struct Certificates: Codable {
+		public struct Certificates: Codable, Sendable {
 			public var links: RelationshipLinks?
 			public var meta: PagingInformation?
 			public var data: [Datum]?
 
-			public struct Datum: Codable, Identifiable {
+			public struct Datum: Codable, Identifiable, Sendable {
 				public var type: `Type`
 				public var id: String
 
-				public enum `Type`: String, Codable, CaseIterable {
+				public enum `Type`: String, Codable, CaseIterable, Sendable {
 					case certificates
 				}
 

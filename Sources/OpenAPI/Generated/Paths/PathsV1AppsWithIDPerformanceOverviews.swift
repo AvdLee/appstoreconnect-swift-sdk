@@ -9,7 +9,7 @@ extension APIEndpoint.V1.Apps.WithID {
 		PerformanceOverviews(path: path + "/performanceOverviews")
 	}
 
-	public struct PerformanceOverviews {
+	public struct PerformanceOverviews: Sendable {
 		/// Path: `/v1/apps/{id}/performanceOverviews`
 		public let path: String
 

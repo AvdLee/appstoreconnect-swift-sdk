@@ -3,20 +3,20 @@
 
 import Foundation
 
-public struct BetaBuildUsagesV1MetricResponse: Codable {
+public struct BetaBuildUsagesV1MetricResponse: Codable, Sendable {
 	public var data: [Datum]
 	public var links: PagedDocumentLinks
 	public var meta: PagingInformation?
 
-	public struct Datum: Codable {
+	public struct Datum: Codable, Sendable {
 		public var dataPoints: [DataPoint]?
 
-		public struct DataPoint: Codable {
+		public struct DataPoint: Codable, Sendable {
 			public var start: Date?
 			public var end: Date?
 			public var values: Values?
 
-			public struct Values: Codable {
+			public struct Values: Codable, Sendable {
 				public var crashCount: Int?
 				public var installCount: Int?
 				public var sessionCount: Int?

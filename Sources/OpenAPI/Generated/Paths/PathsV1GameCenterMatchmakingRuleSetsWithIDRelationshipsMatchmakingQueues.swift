@@ -9,7 +9,7 @@ extension APIEndpoint.V1.GameCenterMatchmakingRuleSets.WithID.Relationships {
 		MatchmakingQueues(path: path + "/matchmakingQueues")
 	}
 
-	public struct MatchmakingQueues {
+	public struct MatchmakingQueues: Sendable {
 		/// Path: `/v1/gameCenterMatchmakingRuleSets/{id}/relationships/matchmakingQueues`
 		public let path: String
 

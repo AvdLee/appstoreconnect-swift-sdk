@@ -9,7 +9,7 @@ extension APIEndpoint.V1.Apps.WithID {
 		SubscriptionGroups(path: path + "/subscriptionGroups")
 	}
 
-	public struct SubscriptionGroups {
+	public struct SubscriptionGroups: Sendable {
 		/// Path: `/v1/apps/{id}/subscriptionGroups`
 		public let path: String
 
@@ -17,7 +17,7 @@ extension APIEndpoint.V1.Apps.WithID {
 			Request(path: path, method: "GET", query: parameters?.asQuery, id: "apps_subscriptionGroups_getToManyRelated")
 		}
 
-		public struct GetParameters {
+		public struct GetParameters: Sendable {
 			public var filterReferenceName: [String]?
 			public var filterSubscriptionsState: [FilterSubscriptionsState]?
 			public var sort: [Sort]?
@@ -31,7 +31,7 @@ extension APIEndpoint.V1.Apps.WithID {
 			public var limitSubscriptionGroupLocalizations: Int?
 			public var limitVersions: Int?
 
-			public enum FilterSubscriptionsState: String, Codable, CaseIterable {
+			public enum FilterSubscriptionsState: String, Codable, CaseIterable, Sendable {
 				case missingMetadata = "MISSING_METADATA"
 				case readyToSubmit = "READY_TO_SUBMIT"
 				case waitingForReview = "WAITING_FOR_REVIEW"
@@ -44,19 +44,19 @@ extension APIEndpoint.V1.Apps.WithID {
 				case rejected = "REJECTED"
 			}
 
-			public enum Sort: String, Codable, CaseIterable {
+			public enum Sort: String, Codable, CaseIterable, Sendable {
 				case referenceName
 				case minusreferenceName = "-referenceName"
 			}
 
-			public enum FieldsSubscriptionGroups: String, Codable, CaseIterable {
+			public enum FieldsSubscriptionGroups: String, Codable, CaseIterable, Sendable {
 				case referenceName
 				case subscriptions
 				case subscriptionGroupLocalizations
 				case versions
 			}
 
-			public enum FieldsSubscriptions: String, Codable, CaseIterable {
+			public enum FieldsSubscriptions: String, Codable, CaseIterable, Sendable {
 				case name
 				case productID = "productId"
 				case familySharable
@@ -85,7 +85,7 @@ extension APIEndpoint.V1.Apps.WithID {
 				case retentionMessageOffers
 			}
 
-			public enum FieldsSubscriptionGroupLocalizations: String, Codable, CaseIterable {
+			public enum FieldsSubscriptionGroupLocalizations: String, Codable, CaseIterable, Sendable {
 				case name
 				case customAppName
 				case locale
@@ -93,14 +93,14 @@ extension APIEndpoint.V1.Apps.WithID {
 				case subscriptionGroup
 			}
 
-			public enum FieldsSubscriptionGroupVersions: String, Codable, CaseIterable {
+			public enum FieldsSubscriptionGroupVersions: String, Codable, CaseIterable, Sendable {
 				case version
 				case state
 				case subscriptionGroup
 				case localizations
 			}
 
-			public enum Include: String, Codable, CaseIterable {
+			public enum Include: String, Codable, CaseIterable, Sendable {
 				case subscriptions
 				case subscriptionGroupLocalizations
 				case versions

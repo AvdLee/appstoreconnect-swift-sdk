@@ -9,7 +9,7 @@ extension APIEndpoint.V1.GameCenterChallenges.WithID {
 		Versions(path: path + "/versions")
 	}
 
-	public struct Versions {
+	public struct Versions: Sendable {
 		/// Path: `/v1/gameCenterChallenges/{id}/versions`
 		public let path: String
 
@@ -17,7 +17,7 @@ extension APIEndpoint.V1.GameCenterChallenges.WithID {
 			Request(path: path, method: "GET", query: parameters?.asQuery, id: "gameCenterChallenges_versions_getToManyRelated")
 		}
 
-		public struct GetParameters {
+		public struct GetParameters: Sendable {
 			public var fieldsGameCenterChallengeVersions: [FieldsGameCenterChallengeVersions]?
 			public var fieldsGameCenterChallenges: [FieldsGameCenterChallenges]?
 			public var fieldsGameCenterChallengeLocalizations: [FieldsGameCenterChallengeLocalizations]?
@@ -28,7 +28,7 @@ extension APIEndpoint.V1.GameCenterChallenges.WithID {
 			public var limitLocalizations: Int?
 			public var limitReleases: Int?
 
-			public enum FieldsGameCenterChallengeVersions: String, Codable, CaseIterable {
+			public enum FieldsGameCenterChallengeVersions: String, Codable, CaseIterable, Sendable {
 				case version
 				case state
 				case challenge
@@ -37,7 +37,7 @@ extension APIEndpoint.V1.GameCenterChallenges.WithID {
 				case defaultImage
 			}
 
-			public enum FieldsGameCenterChallenges: String, Codable, CaseIterable {
+			public enum FieldsGameCenterChallenges: String, Codable, CaseIterable, Sendable {
 				case referenceName
 				case vendorIdentifier
 				case archived
@@ -50,7 +50,7 @@ extension APIEndpoint.V1.GameCenterChallenges.WithID {
 				case leaderboardV2
 			}
 
-			public enum FieldsGameCenterChallengeLocalizations: String, Codable, CaseIterable {
+			public enum FieldsGameCenterChallengeLocalizations: String, Codable, CaseIterable, Sendable {
 				case locale
 				case name
 				case description
@@ -58,11 +58,11 @@ extension APIEndpoint.V1.GameCenterChallenges.WithID {
 				case image
 			}
 
-			public enum FieldsGameCenterChallengeVersionReleases: String, Codable, CaseIterable {
+			public enum FieldsGameCenterChallengeVersionReleases: String, Codable, CaseIterable, Sendable {
 				case version
 			}
 
-			public enum FieldsGameCenterChallengeImages: String, Codable, CaseIterable {
+			public enum FieldsGameCenterChallengeImages: String, Codable, CaseIterable, Sendable {
 				case fileSize
 				case fileName
 				case imageAsset
@@ -70,7 +70,7 @@ extension APIEndpoint.V1.GameCenterChallenges.WithID {
 				case assetDeliveryState
 			}
 
-			public enum Include: String, Codable, CaseIterable {
+			public enum Include: String, Codable, CaseIterable, Sendable {
 				case challenge
 				case localizations
 				case releases

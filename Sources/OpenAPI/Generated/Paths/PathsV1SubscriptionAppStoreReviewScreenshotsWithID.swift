@@ -9,7 +9,7 @@ extension APIEndpoint.V1.SubscriptionAppStoreReviewScreenshots {
 		WithID(path: "\(path)/\(id)")
 	}
 
-	public struct WithID {
+	public struct WithID: Sendable {
 		/// Path: `/v1/subscriptionAppStoreReviewScreenshots/{id}`
 		public let path: String
 
@@ -17,12 +17,12 @@ extension APIEndpoint.V1.SubscriptionAppStoreReviewScreenshots {
 			Request(path: path, method: "GET", query: parameters?.asQuery, id: "subscriptionAppStoreReviewScreenshots_getInstance")
 		}
 
-		public struct GetParameters {
+		public struct GetParameters: Sendable {
 			public var fieldsSubscriptionAppStoreReviewScreenshots: [FieldsSubscriptionAppStoreReviewScreenshots]?
 			public var fieldsSubscriptions: [FieldsSubscriptions]?
 			public var include: [Include]?
 
-			public enum FieldsSubscriptionAppStoreReviewScreenshots: String, Codable, CaseIterable {
+			public enum FieldsSubscriptionAppStoreReviewScreenshots: String, Codable, CaseIterable, Sendable {
 				case fileSize
 				case fileName
 				case sourceFileChecksum
@@ -34,7 +34,7 @@ extension APIEndpoint.V1.SubscriptionAppStoreReviewScreenshots {
 				case subscription
 			}
 
-			public enum FieldsSubscriptions: String, Codable, CaseIterable {
+			public enum FieldsSubscriptions: String, Codable, CaseIterable, Sendable {
 				case name
 				case productID = "productId"
 				case familySharable
@@ -63,7 +63,7 @@ extension APIEndpoint.V1.SubscriptionAppStoreReviewScreenshots {
 				case retentionMessageOffers
 			}
 
-			public enum Include: String, Codable, CaseIterable {
+			public enum Include: String, Codable, CaseIterable, Sendable {
 				case subscription
 			}
 

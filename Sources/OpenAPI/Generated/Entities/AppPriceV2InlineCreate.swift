@@ -3,17 +3,17 @@
 
 import Foundation
 
-public struct AppPriceV2InlineCreate: Codable, Identifiable {
+public struct AppPriceV2InlineCreate: Codable, Identifiable, Sendable {
 	public var type: `Type`
 	public var id: String?
 	public var attributes: Attributes?
 	public var relationships: Relationships?
 
-	public enum `Type`: String, Codable, CaseIterable {
+	public enum `Type`: String, Codable, CaseIterable, Sendable {
 		case appPrices
 	}
 
-	public struct Attributes: Codable {
+	public struct Attributes: Codable, Sendable {
 		public var startDate: String?
 		public var endDate: String?
 
@@ -35,17 +35,17 @@ public struct AppPriceV2InlineCreate: Codable, Identifiable {
 		}
 	}
 
-	public struct Relationships: Codable {
+	public struct Relationships: Codable, Sendable {
 		public var appPricePoint: AppPricePoint?
 
-		public struct AppPricePoint: Codable {
+		public struct AppPricePoint: Codable, Sendable {
 			public var data: Data?
 
-			public struct Data: Codable, Identifiable {
+			public struct Data: Codable, Identifiable, Sendable {
 				public var type: `Type`
 				public var id: String
 
-				public enum `Type`: String, Codable, CaseIterable {
+				public enum `Type`: String, Codable, CaseIterable, Sendable {
 					case appPricePoints
 				}
 

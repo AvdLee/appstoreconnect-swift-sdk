@@ -9,7 +9,7 @@ extension APIEndpoint.V1.GameCenterLeaderboardLocalizations.WithID.Relationships
 		GameCenterLeaderboardImage(path: path + "/gameCenterLeaderboardImage")
 	}
 
-	public struct GameCenterLeaderboardImage {
+	public struct GameCenterLeaderboardImage: Sendable {
 		/// Path: `/v1/gameCenterLeaderboardLocalizations/{id}/relationships/gameCenterLeaderboardImage`
 		public let path: String
 

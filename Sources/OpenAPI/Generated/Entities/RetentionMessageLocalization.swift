@@ -3,18 +3,18 @@
 
 import Foundation
 
-public struct RetentionMessageLocalization: Codable, Identifiable {
+public struct RetentionMessageLocalization: Codable, Identifiable, Sendable {
 	public var type: `Type`
 	public var id: String
 	public var attributes: Attributes?
 	public var relationships: Relationships?
 	public var links: ResourceLinks?
 
-	public enum `Type`: String, Codable, CaseIterable {
+	public enum `Type`: String, Codable, CaseIterable, Sendable {
 		case retentionMessageLocalizations
 	}
 
-	public struct Attributes: Codable {
+	public struct Attributes: Codable, Sendable {
 		public var locale: String?
 		public var header: String?
 		public var body: String?
@@ -40,17 +40,17 @@ public struct RetentionMessageLocalization: Codable, Identifiable {
 		}
 	}
 
-	public struct Relationships: Codable {
+	public struct Relationships: Codable, Sendable {
 		public var retentionMessageVersion: RetentionMessageVersion?
 
-		public struct RetentionMessageVersion: Codable {
+		public struct RetentionMessageVersion: Codable, Sendable {
 			public var data: Data?
 
-			public struct Data: Codable, Identifiable {
+			public struct Data: Codable, Identifiable, Sendable {
 				public var type: `Type`
 				public var id: String
 
-				public enum `Type`: String, Codable, CaseIterable {
+				public enum `Type`: String, Codable, CaseIterable, Sendable {
 					case retentionMessageVersions
 				}
 

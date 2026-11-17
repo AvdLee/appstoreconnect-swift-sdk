@@ -9,7 +9,7 @@ extension APIEndpoint.V1.AppScreenshotSets.WithID.Relationships {
 		AppScreenshots(path: path + "/appScreenshots")
 	}
 
-	public struct AppScreenshots {
+	public struct AppScreenshots: Sendable {
 		/// Path: `/v1/appScreenshotSets/{id}/relationships/appScreenshots`
 		public let path: String
 

@@ -3,17 +3,17 @@
 
 import Foundation
 
-public struct AppStoreVersionPhasedRelease: Codable, Identifiable {
+public struct AppStoreVersionPhasedRelease: Codable, Identifiable, Sendable {
 	public var type: `Type`
 	public var id: String
 	public var attributes: Attributes?
 	public var links: ResourceLinks?
 
-	public enum `Type`: String, Codable, CaseIterable {
+	public enum `Type`: String, Codable, CaseIterable, Sendable {
 		case appStoreVersionPhasedReleases
 	}
 
-	public struct Attributes: Codable {
+	public struct Attributes: Codable, Sendable {
 		public var phasedReleaseState: PhasedReleaseState?
 		public var startDate: Date?
 		public var totalPauseDuration: Int?

@@ -3,7 +3,7 @@
 
 import Foundation
 
-public struct AndroidToIosAppMappingDetailsResponse: Codable {
+public struct AndroidToIosAppMappingDetailsResponse: Codable, Sendable {
 	public var data: [AndroidToIosAppMappingDetail]
 	public var links: PagedDocumentLinks
 	public var meta: PagingInformation?

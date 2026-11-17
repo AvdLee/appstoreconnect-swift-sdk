@@ -9,7 +9,7 @@ extension APIEndpoint.V1.Builds.WithID.Relationships {
 		BuildBetaDetail(path: path + "/buildBetaDetail")
 	}
 
-	public struct BuildBetaDetail {
+	public struct BuildBetaDetail: Sendable {
 		/// Path: `/v1/builds/{id}/relationships/buildBetaDetail`
 		public let path: String
 

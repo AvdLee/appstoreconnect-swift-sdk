@@ -9,7 +9,7 @@ extension APIEndpoint.V1.InAppPurchaseOfferCodes.WithID {
 		CustomCodes(path: path + "/customCodes")
 	}
 
-	public struct CustomCodes {
+	public struct CustomCodes: Sendable {
 		/// Path: `/v1/inAppPurchaseOfferCodes/{id}/customCodes`
 		public let path: String
 
@@ -17,13 +17,13 @@ extension APIEndpoint.V1.InAppPurchaseOfferCodes.WithID {
 			Request(path: path, method: "GET", query: parameters?.asQuery, id: "inAppPurchaseOfferCodes_customCodes_getToManyRelated")
 		}
 
-		public struct GetParameters {
+		public struct GetParameters: Sendable {
 			public var fieldsInAppPurchaseOfferCodeCustomCodes: [FieldsInAppPurchaseOfferCodeCustomCodes]?
 			public var fieldsActors: [FieldsActors]?
 			public var limit: Int?
 			public var include: [Include]?
 
-			public enum FieldsInAppPurchaseOfferCodeCustomCodes: String, Codable, CaseIterable {
+			public enum FieldsInAppPurchaseOfferCodeCustomCodes: String, Codable, CaseIterable, Sendable {
 				case customCode
 				case numberOfCodes
 				case createdDate
@@ -33,7 +33,7 @@ extension APIEndpoint.V1.InAppPurchaseOfferCodes.WithID {
 				case deactivatedByActor
 			}
 
-			public enum FieldsActors: String, Codable, CaseIterable {
+			public enum FieldsActors: String, Codable, CaseIterable, Sendable {
 				case actorType
 				case userFirstName
 				case userLastName
@@ -41,7 +41,7 @@ extension APIEndpoint.V1.InAppPurchaseOfferCodes.WithID {
 				case apiKeyID = "apiKeyId"
 			}
 
-			public enum Include: String, Codable, CaseIterable {
+			public enum Include: String, Codable, CaseIterable, Sendable {
 				case createdByActor
 				case deactivatedByActor
 			}

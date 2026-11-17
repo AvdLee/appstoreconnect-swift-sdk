@@ -9,7 +9,7 @@ extension APIEndpoint.V1.AppStoreVersionExperimentTreatments.WithID {
 		AppStoreVersionExperimentTreatmentLocalizations(path: path + "/appStoreVersionExperimentTreatmentLocalizations")
 	}
 
-	public struct AppStoreVersionExperimentTreatmentLocalizations {
+	public struct AppStoreVersionExperimentTreatmentLocalizations: Sendable {
 		/// Path: `/v1/appStoreVersionExperimentTreatments/{id}/appStoreVersionExperimentTreatmentLocalizations`
 		public let path: String
 
@@ -17,7 +17,7 @@ extension APIEndpoint.V1.AppStoreVersionExperimentTreatments.WithID {
 			Request(path: path, method: "GET", query: parameters?.asQuery, id: "appStoreVersionExperimentTreatments_appStoreVersionExperimentTreatmentLocalizations_getToManyRelated")
 		}
 
-		public struct GetParameters {
+		public struct GetParameters: Sendable {
 			public var filterLocale: [String]?
 			public var fieldsAppStoreVersionExperimentTreatmentLocalizations: [FieldsAppStoreVersionExperimentTreatmentLocalizations]?
 			public var fieldsAppStoreVersionExperimentTreatments: [FieldsAppStoreVersionExperimentTreatments]?
@@ -30,7 +30,7 @@ extension APIEndpoint.V1.AppStoreVersionExperimentTreatments.WithID {
 			public var limitAppPreviewSets: Int?
 			public var limitPlacements: Int?
 
-			public enum FieldsAppStoreVersionExperimentTreatmentLocalizations: String, Codable, CaseIterable {
+			public enum FieldsAppStoreVersionExperimentTreatmentLocalizations: String, Codable, CaseIterable, Sendable {
 				case locale
 				case appStoreVersionExperimentTreatment
 				case appScreenshotSets
@@ -38,7 +38,7 @@ extension APIEndpoint.V1.AppStoreVersionExperimentTreatments.WithID {
 				case placements
 			}
 
-			public enum FieldsAppStoreVersionExperimentTreatments: String, Codable, CaseIterable {
+			public enum FieldsAppStoreVersionExperimentTreatments: String, Codable, CaseIterable, Sendable {
 				case name
 				case appIcon
 				case appIconName
@@ -48,7 +48,7 @@ extension APIEndpoint.V1.AppStoreVersionExperimentTreatments.WithID {
 				case appStoreVersionExperimentTreatmentLocalizations
 			}
 
-			public enum FieldsAppScreenshotSets: String, Codable, CaseIterable {
+			public enum FieldsAppScreenshotSets: String, Codable, CaseIterable, Sendable {
 				case screenshotDisplayType
 				case appStoreVersionLocalization
 				case appCustomProductPageLocalization
@@ -56,7 +56,7 @@ extension APIEndpoint.V1.AppStoreVersionExperimentTreatments.WithID {
 				case appScreenshots
 			}
 
-			public enum FieldsAppPreviewSets: String, Codable, CaseIterable {
+			public enum FieldsAppPreviewSets: String, Codable, CaseIterable, Sendable {
 				case previewType
 				case appStoreVersionLocalization
 				case appCustomProductPageLocalization
@@ -64,7 +64,7 @@ extension APIEndpoint.V1.AppStoreVersionExperimentTreatments.WithID {
 				case appPreviews
 			}
 
-			public enum FieldsAppAssetLibraryPlacements: String, Codable, CaseIterable {
+			public enum FieldsAppAssetLibraryPlacements: String, Codable, CaseIterable, Sendable {
 				case mediaType
 				case placementType
 				case placementGroup
@@ -81,7 +81,7 @@ extension APIEndpoint.V1.AppStoreVersionExperimentTreatments.WithID {
 				case retentionMessageVersion
 			}
 
-			public enum Include: String, Codable, CaseIterable {
+			public enum Include: String, Codable, CaseIterable, Sendable {
 				case appStoreVersionExperimentTreatment
 				case appScreenshotSets
 				case appPreviewSets

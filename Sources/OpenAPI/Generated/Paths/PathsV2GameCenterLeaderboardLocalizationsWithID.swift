@@ -9,7 +9,7 @@ extension APIEndpoint.V2.GameCenterLeaderboardLocalizations {
 		WithID(path: "\(path)/\(id)")
 	}
 
-	public struct WithID {
+	public struct WithID: Sendable {
 		/// Path: `/v2/gameCenterLeaderboardLocalizations/{id}`
 		public let path: String
 
@@ -17,13 +17,13 @@ extension APIEndpoint.V2.GameCenterLeaderboardLocalizations {
 			Request(path: path, method: "GET", query: parameters?.asQuery, id: "gameCenterLeaderboardLocalizationsV2_getInstance")
 		}
 
-		public struct GetParameters {
+		public struct GetParameters: Sendable {
 			public var fieldsGameCenterLeaderboardLocalizations: [FieldsGameCenterLeaderboardLocalizations]?
 			public var fieldsGameCenterLeaderboardVersions: [FieldsGameCenterLeaderboardVersions]?
 			public var fieldsGameCenterLeaderboardImages: [FieldsGameCenterLeaderboardImages]?
 			public var include: [Include]?
 
-			public enum FieldsGameCenterLeaderboardLocalizations: String, Codable, CaseIterable {
+			public enum FieldsGameCenterLeaderboardLocalizations: String, Codable, CaseIterable, Sendable {
 				case locale
 				case name
 				case formatterOverride
@@ -34,14 +34,14 @@ extension APIEndpoint.V2.GameCenterLeaderboardLocalizations {
 				case image
 			}
 
-			public enum FieldsGameCenterLeaderboardVersions: String, Codable, CaseIterable {
+			public enum FieldsGameCenterLeaderboardVersions: String, Codable, CaseIterable, Sendable {
 				case version
 				case state
 				case leaderboard
 				case localizations
 			}
 
-			public enum FieldsGameCenterLeaderboardImages: String, Codable, CaseIterable {
+			public enum FieldsGameCenterLeaderboardImages: String, Codable, CaseIterable, Sendable {
 				case fileSize
 				case fileName
 				case imageAsset
@@ -50,7 +50,7 @@ extension APIEndpoint.V2.GameCenterLeaderboardLocalizations {
 				case localization
 			}
 
-			public enum Include: String, Codable, CaseIterable {
+			public enum Include: String, Codable, CaseIterable, Sendable {
 				case version
 				case image
 			}

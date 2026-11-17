@@ -9,7 +9,7 @@ extension APIEndpoint.V1.AppStoreVersionLocalizations.WithID {
 		Relationships(path: path + "/relationships")
 	}
 
-	public struct Relationships {
+	public struct Relationships: Sendable {
 		/// Path: `/v1/appStoreVersionLocalizations/{id}/relationships`
 		public let path: String
 	}

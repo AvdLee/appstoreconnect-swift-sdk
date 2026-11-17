@@ -9,7 +9,7 @@ extension APIEndpoint.V1.AlternativeDistributionPackages {
 		WithID(path: "\(path)/\(id)")
 	}
 
-	public struct WithID {
+	public struct WithID: Sendable {
 		/// Path: `/v1/alternativeDistributionPackages/{id}`
 		public let path: String
 
@@ -17,18 +17,18 @@ extension APIEndpoint.V1.AlternativeDistributionPackages {
 			Request(path: path, method: "GET", query: parameters?.asQuery, id: "alternativeDistributionPackages_getInstance")
 		}
 
-		public struct GetParameters {
+		public struct GetParameters: Sendable {
 			public var fieldsAlternativeDistributionPackages: [FieldsAlternativeDistributionPackages]?
 			public var fieldsAlternativeDistributionPackageVersions: [FieldsAlternativeDistributionPackageVersions]?
 			public var include: [Include]?
 			public var limitVersions: Int?
 
-			public enum FieldsAlternativeDistributionPackages: String, Codable, CaseIterable {
+			public enum FieldsAlternativeDistributionPackages: String, Codable, CaseIterable, Sendable {
 				case sourceFileChecksum
 				case versions
 			}
 
-			public enum FieldsAlternativeDistributionPackageVersions: String, Codable, CaseIterable {
+			public enum FieldsAlternativeDistributionPackageVersions: String, Codable, CaseIterable, Sendable {
 				case url
 				case urlExpirationDate
 				case version
@@ -39,7 +39,7 @@ extension APIEndpoint.V1.AlternativeDistributionPackages {
 				case alternativeDistributionPackage
 			}
 
-			public enum Include: String, Codable, CaseIterable {
+			public enum Include: String, Codable, CaseIterable, Sendable {
 				case versions
 			}
 

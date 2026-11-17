@@ -9,7 +9,7 @@ extension APIEndpoint.V1 {
 		AppCustomProductPages(path: path + "/appCustomProductPages")
 	}
 
-	public struct AppCustomProductPages {
+	public struct AppCustomProductPages: Sendable {
 		/// Path: `/v1/appCustomProductPages`
 		public let path: String
 

@@ -3,18 +3,18 @@
 
 import Foundation
 
-public struct InAppPurchaseImage: Codable, Identifiable {
+public struct InAppPurchaseImage: Codable, Identifiable, Sendable {
 	public var type: `Type`
 	public var id: String
 	public var attributes: Attributes?
 	public var relationships: Relationships?
 	public var links: ResourceLinks?
 
-	public enum `Type`: String, Codable, CaseIterable {
+	public enum `Type`: String, Codable, CaseIterable, Sendable {
 		case inAppPurchaseImages
 	}
 
-	public struct Attributes: Codable {
+	public struct Attributes: Codable, Sendable {
 		public var fileSize: Int?
 		public var fileName: String?
 		public var sourceFileChecksum: String?
@@ -23,7 +23,7 @@ public struct InAppPurchaseImage: Codable, Identifiable {
 		public var uploadOperations: [UploadOperation]?
 		public var state: State?
 
-		public enum State: String, Codable, CaseIterable {
+		public enum State: String, Codable, CaseIterable, Sendable {
 			case awaitingUpload = "AWAITING_UPLOAD"
 			case uploadComplete = "UPLOAD_COMPLETE"
 			case failed = "FAILED"
@@ -66,17 +66,17 @@ public struct InAppPurchaseImage: Codable, Identifiable {
 		}
 	}
 
-	public struct Relationships: Codable {
+	public struct Relationships: Codable, Sendable {
 		public var inAppPurchase: InAppPurchase?
 
-		public struct InAppPurchase: Codable {
+		public struct InAppPurchase: Codable, Sendable {
 			public var data: Data?
 
-			public struct Data: Codable, Identifiable {
+			public struct Data: Codable, Identifiable, Sendable {
 				public var type: `Type`
 				public var id: String
 
-				public enum `Type`: String, Codable, CaseIterable {
+				public enum `Type`: String, Codable, CaseIterable, Sendable {
 					case inAppPurchases
 				}
 

@@ -9,7 +9,7 @@ extension APIEndpoint.V1.BuildBundles.WithID {
 		AppClipDomainDebugStatus(path: path + "/appClipDomainDebugStatus")
 	}
 
-	public struct AppClipDomainDebugStatus {
+	public struct AppClipDomainDebugStatus: Sendable {
 		/// Path: `/v1/buildBundles/{id}/appClipDomainDebugStatus`
 		public let path: String
 
@@ -23,7 +23,7 @@ extension APIEndpoint.V1.BuildBundles.WithID {
 			return encoder.items
 		}
 
-		public enum FieldsAppClipDomainStatuses: String, Codable, CaseIterable {
+		public enum FieldsAppClipDomainStatuses: String, Codable, CaseIterable, Sendable {
 			case domains
 			case lastUpdatedDate
 		}

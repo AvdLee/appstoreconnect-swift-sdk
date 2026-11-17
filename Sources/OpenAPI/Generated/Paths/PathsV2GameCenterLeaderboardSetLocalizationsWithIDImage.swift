@@ -9,7 +9,7 @@ extension APIEndpoint.V2.GameCenterLeaderboardSetLocalizations.WithID {
 		Image(path: path + "/image")
 	}
 
-	public struct Image {
+	public struct Image: Sendable {
 		/// Path: `/v2/gameCenterLeaderboardSetLocalizations/{id}/image`
 		public let path: String
 
@@ -17,12 +17,12 @@ extension APIEndpoint.V2.GameCenterLeaderboardSetLocalizations.WithID {
 			Request(path: path, method: "GET", query: parameters?.asQuery, id: "gameCenterLeaderboardSetLocalizationsV2_image_getToOneRelated")
 		}
 
-		public struct GetParameters {
+		public struct GetParameters: Sendable {
 			public var fieldsGameCenterLeaderboardSetImages: [FieldsGameCenterLeaderboardSetImages]?
 			public var fieldsGameCenterLeaderboardSetLocalizations: [FieldsGameCenterLeaderboardSetLocalizations]?
 			public var include: [Include]?
 
-			public enum FieldsGameCenterLeaderboardSetImages: String, Codable, CaseIterable {
+			public enum FieldsGameCenterLeaderboardSetImages: String, Codable, CaseIterable, Sendable {
 				case fileSize
 				case fileName
 				case imageAsset
@@ -31,14 +31,14 @@ extension APIEndpoint.V2.GameCenterLeaderboardSetLocalizations.WithID {
 				case localization
 			}
 
-			public enum FieldsGameCenterLeaderboardSetLocalizations: String, Codable, CaseIterable {
+			public enum FieldsGameCenterLeaderboardSetLocalizations: String, Codable, CaseIterable, Sendable {
 				case locale
 				case name
 				case version
 				case image
 			}
 
-			public enum Include: String, Codable, CaseIterable {
+			public enum Include: String, Codable, CaseIterable, Sendable {
 				case localization
 			}
 

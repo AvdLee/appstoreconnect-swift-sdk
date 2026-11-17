@@ -3,19 +3,19 @@
 
 import Foundation
 
-public struct AndroidToIosAppMappingDetailUpdateRequest: Codable {
+public struct AndroidToIosAppMappingDetailUpdateRequest: Codable, Sendable {
 	public var data: Data
 
-	public struct Data: Codable, Identifiable {
+	public struct Data: Codable, Identifiable, Sendable {
 		public var type: `Type`
 		public var id: String
 		public var attributes: Attributes?
 
-		public enum `Type`: String, Codable, CaseIterable {
+		public enum `Type`: String, Codable, CaseIterable, Sendable {
 			case androidToIosAppMappingDetails
 		}
 
-		public struct Attributes: Codable {
+		public struct Attributes: Codable, Sendable {
 			public var packageName: String?
 			public var appSigningKeyPublicCertificateSha256Fingerprints: [String]?
 

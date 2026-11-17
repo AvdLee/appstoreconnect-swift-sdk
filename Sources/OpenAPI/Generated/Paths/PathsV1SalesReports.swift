@@ -9,7 +9,7 @@ extension APIEndpoint.V1 {
 		SalesReports(path: path + "/salesReports")
 	}
 
-	public struct SalesReports {
+	public struct SalesReports: Sendable {
 		/// Path: `/v1/salesReports`
 		public let path: String
 
@@ -17,7 +17,7 @@ extension APIEndpoint.V1 {
 			Request(path: path, method: "GET", query: parameters.asQuery, id: "salesReports_getCollection")
 		}
 
-		public struct GetParameters {
+		public struct GetParameters: Sendable {
 			public var filterVendorNumber: [String]
 			public var filterReportType: [FilterReportType]
 			public var filterReportSubType: [FilterReportSubType]
@@ -25,7 +25,7 @@ extension APIEndpoint.V1 {
 			public var filterReportDate: [String]?
 			public var filterVersion: [String]?
 
-			public enum FilterReportType: String, Codable, CaseIterable {
+			public enum FilterReportType: String, Codable, CaseIterable, Sendable {
 				case sales = "SALES"
 				case preOrder = "PRE_ORDER"
 				case newsstand = "NEWSSTAND"
@@ -38,7 +38,7 @@ extension APIEndpoint.V1 {
 				case winBackEligibility = "WIN_BACK_ELIGIBILITY"
 			}
 
-			public enum FilterReportSubType: String, Codable, CaseIterable {
+			public enum FilterReportSubType: String, Codable, CaseIterable, Sendable {
 				case summary = "SUMMARY"
 				case detailed = "DETAILED"
 				case summaryInstallType = "SUMMARY_INSTALL_TYPE"
@@ -46,7 +46,7 @@ extension APIEndpoint.V1 {
 				case summaryChannel = "SUMMARY_CHANNEL"
 			}
 
-			public enum FilterFrequency: String, Codable, CaseIterable {
+			public enum FilterFrequency: String, Codable, CaseIterable, Sendable {
 				case daily = "DAILY"
 				case weekly = "WEEKLY"
 				case monthly = "MONTHLY"

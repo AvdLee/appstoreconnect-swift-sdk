@@ -3,23 +3,23 @@
 
 import Foundation
 
-public struct ProfileCreateRequest: Codable {
+public struct ProfileCreateRequest: Codable, Sendable {
 	public var data: Data
 
-	public struct Data: Codable {
+	public struct Data: Codable, Sendable {
 		public var type: `Type`
 		public var attributes: Attributes
 		public var relationships: Relationships
 
-		public enum `Type`: String, Codable, CaseIterable {
+		public enum `Type`: String, Codable, CaseIterable, Sendable {
 			case profiles
 		}
 
-		public struct Attributes: Codable {
+		public struct Attributes: Codable, Sendable {
 			public var name: String
 			public var profileType: ProfileType
 
-			public enum ProfileType: String, Codable, CaseIterable {
+			public enum ProfileType: String, Codable, CaseIterable, Sendable {
 				case iosAppDevelopment = "IOS_APP_DEVELOPMENT"
 				case iosAppStore = "IOS_APP_STORE"
 				case iosAppAdhoc = "IOS_APP_ADHOC"
@@ -54,19 +54,19 @@ public struct ProfileCreateRequest: Codable {
 			}
 		}
 
-		public struct Relationships: Codable {
+		public struct Relationships: Codable, Sendable {
 			public var bundleID: BundleID
 			public var devices: Devices?
 			public var certificates: Certificates
 
-			public struct BundleID: Codable {
+			public struct BundleID: Codable, Sendable {
 				public var data: Data
 
-				public struct Data: Codable, Identifiable {
+				public struct Data: Codable, Identifiable, Sendable {
 					public var type: `Type`
 					public var id: String
 
-					public enum `Type`: String, Codable, CaseIterable {
+					public enum `Type`: String, Codable, CaseIterable, Sendable {
 						case bundleIDs = "bundleIds"
 					}
 
@@ -103,14 +103,14 @@ public struct ProfileCreateRequest: Codable {
 				}
 			}
 
-			public struct Devices: Codable {
+			public struct Devices: Codable, Sendable {
 				public var data: [Datum]?
 
-				public struct Datum: Codable, Identifiable {
+				public struct Datum: Codable, Identifiable, Sendable {
 					public var type: `Type`
 					public var id: String
 
-					public enum `Type`: String, Codable, CaseIterable {
+					public enum `Type`: String, Codable, CaseIterable, Sendable {
 						case devices
 					}
 
@@ -147,14 +147,14 @@ public struct ProfileCreateRequest: Codable {
 				}
 			}
 
-			public struct Certificates: Codable {
+			public struct Certificates: Codable, Sendable {
 				public var data: [Datum]
 
-				public struct Datum: Codable, Identifiable {
+				public struct Datum: Codable, Identifiable, Sendable {
 					public var type: `Type`
 					public var id: String
 
-					public enum `Type`: String, Codable, CaseIterable {
+					public enum `Type`: String, Codable, CaseIterable, Sendable {
 						case certificates
 					}
 

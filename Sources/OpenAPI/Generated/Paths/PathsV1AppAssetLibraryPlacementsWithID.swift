@@ -9,7 +9,7 @@ extension APIEndpoint.V1.AppAssetLibraryPlacements {
 		WithID(path: "\(path)/\(id)")
 	}
 
-	public struct WithID {
+	public struct WithID: Sendable {
 		/// Path: `/v1/appAssetLibraryPlacements/{id}`
 		public let path: String
 
@@ -17,7 +17,7 @@ extension APIEndpoint.V1.AppAssetLibraryPlacements {
 			Request(path: path, method: "GET", query: parameters?.asQuery, id: "appAssetLibraryPlacements_getInstance")
 		}
 
-		public struct GetParameters {
+		public struct GetParameters: Sendable {
 			public var fieldsAppAssetLibraryPlacements: [FieldsAppAssetLibraryPlacements]?
 			public var fieldsAppAssetLibraryImages: [FieldsAppAssetLibraryImages]?
 			public var fieldsAppAssetLibraryVideos: [FieldsAppAssetLibraryVideos]?
@@ -28,7 +28,7 @@ extension APIEndpoint.V1.AppAssetLibraryPlacements {
 			public var fieldsRetentionMessageVersions: [FieldsRetentionMessageVersions]?
 			public var include: [Include]?
 
-			public enum FieldsAppAssetLibraryPlacements: String, Codable, CaseIterable {
+			public enum FieldsAppAssetLibraryPlacements: String, Codable, CaseIterable, Sendable {
 				case mediaType
 				case placementType
 				case placementGroup
@@ -45,7 +45,7 @@ extension APIEndpoint.V1.AppAssetLibraryPlacements {
 				case retentionMessageVersion
 			}
 
-			public enum FieldsAppAssetLibraryImages: String, Codable, CaseIterable {
+			public enum FieldsAppAssetLibraryImages: String, Codable, CaseIterable, Sendable {
 				case category
 				case createdDate
 				case lastModifiedDate
@@ -60,7 +60,7 @@ extension APIEndpoint.V1.AppAssetLibraryPlacements {
 				case placements
 			}
 
-			public enum FieldsAppAssetLibraryVideos: String, Codable, CaseIterable {
+			public enum FieldsAppAssetLibraryVideos: String, Codable, CaseIterable, Sendable {
 				case category
 				case createdDate
 				case lastModifiedDate
@@ -77,7 +77,7 @@ extension APIEndpoint.V1.AppAssetLibraryPlacements {
 				case placements
 			}
 
-			public enum FieldsAppEventLocalizations: String, Codable, CaseIterable {
+			public enum FieldsAppEventLocalizations: String, Codable, CaseIterable, Sendable {
 				case locale
 				case name
 				case shortDescription
@@ -88,7 +88,7 @@ extension APIEndpoint.V1.AppAssetLibraryPlacements {
 				case placements
 			}
 
-			public enum FieldsAppStoreVersionLocalizations: String, Codable, CaseIterable {
+			public enum FieldsAppStoreVersionLocalizations: String, Codable, CaseIterable, Sendable {
 				case description
 				case locale
 				case keywords
@@ -103,7 +103,7 @@ extension APIEndpoint.V1.AppAssetLibraryPlacements {
 				case placements
 			}
 
-			public enum FieldsAppCustomProductPageLocalizations: String, Codable, CaseIterable {
+			public enum FieldsAppCustomProductPageLocalizations: String, Codable, CaseIterable, Sendable {
 				case locale
 				case promotionalText
 				case appCustomProductPageVersion
@@ -113,7 +113,7 @@ extension APIEndpoint.V1.AppAssetLibraryPlacements {
 				case placements
 			}
 
-			public enum FieldsAppStoreVersionExperimentTreatmentLocalizations: String, Codable, CaseIterable {
+			public enum FieldsAppStoreVersionExperimentTreatmentLocalizations: String, Codable, CaseIterable, Sendable {
 				case locale
 				case appStoreVersionExperimentTreatment
 				case appScreenshotSets
@@ -121,14 +121,14 @@ extension APIEndpoint.V1.AppAssetLibraryPlacements {
 				case placements
 			}
 
-			public enum FieldsRetentionMessageVersions: String, Codable, CaseIterable {
+			public enum FieldsRetentionMessageVersions: String, Codable, CaseIterable, Sendable {
 				case state
 				case retentionMessage
 				case localizations
 				case placement
 			}
 
-			public enum Include: String, Codable, CaseIterable {
+			public enum Include: String, Codable, CaseIterable, Sendable {
 				case image
 				case video
 				case appEventLocalization

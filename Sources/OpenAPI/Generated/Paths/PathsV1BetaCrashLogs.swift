@@ -9,7 +9,7 @@ extension APIEndpoint.V1 {
 		BetaCrashLogs(path: path + "/betaCrashLogs")
 	}
 
-	public struct BetaCrashLogs {
+	public struct BetaCrashLogs: Sendable {
 		/// Path: `/v1/betaCrashLogs`
 		public let path: String
 	}

@@ -3,7 +3,7 @@
 
 import Foundation
 
-public struct AlternativeDistributionPackageVariantsResponse: Codable {
+public struct AlternativeDistributionPackageVariantsResponse: Codable, Sendable {
 	public var data: [AlternativeDistributionPackageVariant]
 	public var links: PagedDocumentLinks
 	public var meta: PagingInformation?

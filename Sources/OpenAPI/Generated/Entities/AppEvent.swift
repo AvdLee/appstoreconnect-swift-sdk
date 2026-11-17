@@ -3,18 +3,18 @@
 
 import Foundation
 
-public struct AppEvent: Codable, Identifiable {
+public struct AppEvent: Codable, Identifiable, Sendable {
 	public var type: `Type`
 	public var id: String
 	public var attributes: Attributes?
 	public var relationships: Relationships?
 	public var links: ResourceLinks?
 
-	public enum `Type`: String, Codable, CaseIterable {
+	public enum `Type`: String, Codable, CaseIterable, Sendable {
 		case appEvents
 	}
 
-	public struct Attributes: Codable {
+	public struct Attributes: Codable, Sendable {
 		public var referenceName: String?
 		public var badge: Badge?
 		public var eventState: EventState?
@@ -26,7 +26,7 @@ public struct AppEvent: Codable, Identifiable {
 		public var territorySchedules: [TerritorySchedule]?
 		public var archivedTerritorySchedules: [ArchivedTerritorySchedule]?
 
-		public enum Badge: String, Codable, CaseIterable {
+		public enum Badge: String, Codable, CaseIterable, Sendable {
 			case liveEvent = "LIVE_EVENT"
 			case premiere = "PREMIERE"
 			case challenge = "CHALLENGE"
@@ -36,7 +36,7 @@ public struct AppEvent: Codable, Identifiable {
 			case specialEvent = "SPECIAL_EVENT"
 		}
 
-		public enum EventState: String, Codable, CaseIterable {
+		public enum EventState: String, Codable, CaseIterable, Sendable {
 			case draft = "DRAFT"
 			case readyForReview = "READY_FOR_REVIEW"
 			case waitingForReview = "WAITING_FOR_REVIEW"
@@ -49,24 +49,24 @@ public struct AppEvent: Codable, Identifiable {
 			case archived = "ARCHIVED"
 		}
 
-		public enum PurchaseRequirement: String, Codable, CaseIterable {
+		public enum PurchaseRequirement: String, Codable, CaseIterable, Sendable {
 			case noCostAssociated = "NO_COST_ASSOCIATED"
 			case inAppPurchase = "IN_APP_PURCHASE"
 		}
 
-		public enum Priority: String, Codable, CaseIterable {
+		public enum Priority: String, Codable, CaseIterable, Sendable {
 			case high = "HIGH"
 			case normal = "NORMAL"
 		}
 
-		public enum Purpose: String, Codable, CaseIterable {
+		public enum Purpose: String, Codable, CaseIterable, Sendable {
 			case appropriateForAllUsers = "APPROPRIATE_FOR_ALL_USERS"
 			case attractNewUsers = "ATTRACT_NEW_USERS"
 			case keepActiveUsersInformed = "KEEP_ACTIVE_USERS_INFORMED"
 			case bringBackLapsedUsers = "BRING_BACK_LAPSED_USERS"
 		}
 
-		public struct TerritorySchedule: Codable {
+		public struct TerritorySchedule: Codable, Sendable {
 			public var territories: [String]?
 			public var publishStart: Date?
 			public var eventStart: Date?
@@ -96,7 +96,7 @@ public struct AppEvent: Codable, Identifiable {
 			}
 		}
 
-		public struct ArchivedTerritorySchedule: Codable {
+		public struct ArchivedTerritorySchedule: Codable, Sendable {
 			public var territories: [String]?
 			public var publishStart: Date?
 			public var eventStart: Date?
@@ -168,19 +168,19 @@ public struct AppEvent: Codable, Identifiable {
 		}
 	}
 
-	public struct Relationships: Codable {
+	public struct Relationships: Codable, Sendable {
 		public var localizations: Localizations?
 
-		public struct Localizations: Codable {
+		public struct Localizations: Codable, Sendable {
 			public var links: RelationshipLinks?
 			public var meta: PagingInformation?
 			public var data: [Datum]?
 
-			public struct Datum: Codable, Identifiable {
+			public struct Datum: Codable, Identifiable, Sendable {
 				public var type: `Type`
 				public var id: String
 
-				public enum `Type`: String, Codable, CaseIterable {
+				public enum `Type`: String, Codable, CaseIterable, Sendable {
 					case appEventLocalizations
 				}
 

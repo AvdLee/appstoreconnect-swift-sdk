@@ -3,18 +3,18 @@
 
 import Foundation
 
-public struct AppStoreReviewDetail: Codable, Identifiable {
+public struct AppStoreReviewDetail: Codable, Identifiable, Sendable {
 	public var type: `Type`
 	public var id: String
 	public var attributes: Attributes?
 	public var relationships: Relationships?
 	public var links: ResourceLinks?
 
-	public enum `Type`: String, Codable, CaseIterable {
+	public enum `Type`: String, Codable, CaseIterable, Sendable {
 		case appStoreReviewDetails
 	}
 
-	public struct Attributes: Codable {
+	public struct Attributes: Codable, Sendable {
 		public var contactFirstName: String?
 		public var contactLastName: String?
 		public var contactPhone: String?
@@ -60,18 +60,18 @@ public struct AppStoreReviewDetail: Codable, Identifiable {
 		}
 	}
 
-	public struct Relationships: Codable {
+	public struct Relationships: Codable, Sendable {
 		public var appStoreVersion: AppStoreVersion?
 		public var appStoreReviewAttachments: AppStoreReviewAttachments?
 
-		public struct AppStoreVersion: Codable {
+		public struct AppStoreVersion: Codable, Sendable {
 			public var data: Data?
 
-			public struct Data: Codable, Identifiable {
+			public struct Data: Codable, Identifiable, Sendable {
 				public var type: `Type`
 				public var id: String
 
-				public enum `Type`: String, Codable, CaseIterable {
+				public enum `Type`: String, Codable, CaseIterable, Sendable {
 					case appStoreVersions
 				}
 
@@ -108,16 +108,16 @@ public struct AppStoreReviewDetail: Codable, Identifiable {
 			}
 		}
 
-		public struct AppStoreReviewAttachments: Codable {
+		public struct AppStoreReviewAttachments: Codable, Sendable {
 			public var links: RelationshipLinks?
 			public var meta: PagingInformation?
 			public var data: [Datum]?
 
-			public struct Datum: Codable, Identifiable {
+			public struct Datum: Codable, Identifiable, Sendable {
 				public var type: `Type`
 				public var id: String
 
-				public enum `Type`: String, Codable, CaseIterable {
+				public enum `Type`: String, Codable, CaseIterable, Sendable {
 					case appStoreReviewAttachments
 				}
 

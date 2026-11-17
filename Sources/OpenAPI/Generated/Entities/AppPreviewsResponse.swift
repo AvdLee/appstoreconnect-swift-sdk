@@ -3,7 +3,7 @@
 
 import Foundation
 
-public struct AppPreviewsResponse: Codable {
+public struct AppPreviewsResponse: Codable, Sendable {
 	public var data: [AppPreview]
 	public var included: [AppPreviewSet]?
 	public var links: PagedDocumentLinks

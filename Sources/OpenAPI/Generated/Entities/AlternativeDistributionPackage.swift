@@ -3,18 +3,18 @@
 
 import Foundation
 
-public struct AlternativeDistributionPackage: Codable, Identifiable {
+public struct AlternativeDistributionPackage: Codable, Identifiable, Sendable {
 	public var type: `Type`
 	public var id: String
 	public var attributes: Attributes?
 	public var relationships: Relationships?
 	public var links: ResourceLinks?
 
-	public enum `Type`: String, Codable, CaseIterable {
+	public enum `Type`: String, Codable, CaseIterable, Sendable {
 		case alternativeDistributionPackages
 	}
 
-	public struct Attributes: Codable {
+	public struct Attributes: Codable, Sendable {
 		public var sourceFileChecksum: Checksums?
 
 		public init(sourceFileChecksum: Checksums? = nil) {
@@ -32,19 +32,19 @@ public struct AlternativeDistributionPackage: Codable, Identifiable {
 		}
 	}
 
-	public struct Relationships: Codable {
+	public struct Relationships: Codable, Sendable {
 		public var versions: Versions?
 
-		public struct Versions: Codable {
+		public struct Versions: Codable, Sendable {
 			public var links: RelationshipLinks?
 			public var meta: PagingInformation?
 			public var data: [Datum]?
 
-			public struct Datum: Codable, Identifiable {
+			public struct Datum: Codable, Identifiable, Sendable {
 				public var type: `Type`
 				public var id: String
 
-				public enum `Type`: String, Codable, CaseIterable {
+				public enum `Type`: String, Codable, CaseIterable, Sendable {
 					case alternativeDistributionPackageVersions
 				}
 

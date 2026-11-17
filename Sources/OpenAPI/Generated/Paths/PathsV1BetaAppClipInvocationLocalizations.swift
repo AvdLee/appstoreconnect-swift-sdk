@@ -9,7 +9,7 @@ extension APIEndpoint.V1 {
 		BetaAppClipInvocationLocalizations(path: path + "/betaAppClipInvocationLocalizations")
 	}
 
-	public struct BetaAppClipInvocationLocalizations {
+	public struct BetaAppClipInvocationLocalizations: Sendable {
 		/// Path: `/v1/betaAppClipInvocationLocalizations`
 		public let path: String
 

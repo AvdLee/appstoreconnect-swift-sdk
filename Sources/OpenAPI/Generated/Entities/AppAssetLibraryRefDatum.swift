@@ -3,17 +3,17 @@
 
 import Foundation
 
-public struct AppAssetLibraryRefDatum: Codable, Identifiable {
+public struct AppAssetLibraryRefDatum: Codable, Identifiable, Sendable {
 	public var type: `Type`
 	public var id: String
 	public var attributes: Attributes?
 	public var links: ResourceLinks?
 
-	public enum `Type`: String, Codable, CaseIterable {
+	public enum `Type`: String, Codable, CaseIterable, Sendable {
 		case appAssetLibraryRefData
 	}
 
-	public struct Attributes: Codable {
+	public struct Attributes: Codable, Sendable {
 		public var features: [Feature]?
 		public var placementProfileGroups: [PlacementProfileGroup]?
 		public var imageSpecs: [ImageSpec]?
@@ -21,15 +21,15 @@ public struct AppAssetLibraryRefDatum: Codable, Identifiable {
 		public var placementTypes: [PlacementType]?
 		public var displayClasses: [DisplayClass]?
 
-		public struct Feature: Codable {
+		public struct Feature: Codable, Sendable {
 			public var featureID: AppAssetLibraryFeature?
 			public var placementPolicies: [PlacementPolicy]?
 
-			public struct PlacementPolicy: Codable {
+			public struct PlacementPolicy: Codable, Sendable {
 				public var placementType: AppAssetLibraryPlacementType?
 				public var groupLimits: [GroupLimit]?
 
-				public struct GroupLimit: Codable {
+				public struct GroupLimit: Codable, Sendable {
 					public var groupIDs: [String]?
 					public var maxCount: Int?
 
@@ -87,7 +87,7 @@ public struct AppAssetLibraryRefDatum: Codable, Identifiable {
 			}
 		}
 
-		public struct PlacementProfileGroup: Codable {
+		public struct PlacementProfileGroup: Codable, Sendable {
 			public var placementProfileGroupID: String?
 			public var platform: AppAssetLibraryPlacementPlatform?
 			public var displayClassID: AppAssetLibraryDisplayClass?
@@ -113,7 +113,7 @@ public struct AppAssetLibraryRefDatum: Codable, Identifiable {
 			}
 		}
 
-		public struct ImageSpec: Codable {
+		public struct ImageSpec: Codable, Sendable {
 			public var specID: String?
 			public var shortName: String?
 			public var dimensions: Dimensions?
@@ -125,7 +125,7 @@ public struct AppAssetLibraryRefDatum: Codable, Identifiable {
 			public var mimeTypes: [String]?
 			public var isUniversalAsset: Bool?
 
-			public struct Dimensions: Codable {
+			public struct Dimensions: Codable, Sendable {
 				public var minWidth: Int?
 				public var maxWidth: Int?
 				public var minHeight: Int?
@@ -197,7 +197,7 @@ public struct AppAssetLibraryRefDatum: Codable, Identifiable {
 			}
 		}
 
-		public struct VideoSpec: Codable {
+		public struct VideoSpec: Codable, Sendable {
 			public var specID: String?
 			public var shortName: String?
 			public var dimensions: Dimensions?
@@ -211,7 +211,7 @@ public struct AppAssetLibraryRefDatum: Codable, Identifiable {
 			public var mimeTypes: [String]?
 			public var isUniversalAsset: Bool?
 
-			public struct Dimensions: Codable {
+			public struct Dimensions: Codable, Sendable {
 				public var minWidth: Int?
 				public var maxWidth: Int?
 				public var minHeight: Int?
@@ -241,7 +241,7 @@ public struct AppAssetLibraryRefDatum: Codable, Identifiable {
 				}
 			}
 
-			public struct FrameRate: Codable {
+			public struct FrameRate: Codable, Sendable {
 				public var minFps: Int?
 				public var maxFps: Int?
 
@@ -263,7 +263,7 @@ public struct AppAssetLibraryRefDatum: Codable, Identifiable {
 				}
 			}
 
-			public struct Duration: Codable {
+			public struct Duration: Codable, Sendable {
 				public var min: String?
 				public var max: String?
 
@@ -333,12 +333,12 @@ public struct AppAssetLibraryRefDatum: Codable, Identifiable {
 			}
 		}
 
-		public struct PlacementType: Codable {
+		public struct PlacementType: Codable, Sendable {
 			public var placementTypeID: AppAssetLibraryPlacementType?
 			public var acceptsAssetCategories: [AppAssetLibraryAssetCategory]?
 			public var specMappings: [SpecMapping]?
 
-			public struct SpecMapping: Codable {
+			public struct SpecMapping: Codable, Sendable {
 				public var placementGroupID: String?
 				public var specs: [String]?
 
@@ -381,7 +381,7 @@ public struct AppAssetLibraryRefDatum: Codable, Identifiable {
 			}
 		}
 
-		public struct DisplayClass: Codable {
+		public struct DisplayClass: Codable, Sendable {
 			public var displayClassID: AppAssetLibraryDisplayClass?
 			public var deviceFamily: DeviceFamily?
 			public var screenDimensions: [String]?

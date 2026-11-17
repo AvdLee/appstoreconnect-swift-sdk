@@ -9,7 +9,7 @@ extension APIEndpoint.V1.BuildUploadFiles {
 		WithID(path: "\(path)/\(id)")
 	}
 
-	public struct WithID {
+	public struct WithID: Sendable {
 		/// Path: `/v1/buildUploadFiles/{id}`
 		public let path: String
 
@@ -23,7 +23,7 @@ extension APIEndpoint.V1.BuildUploadFiles {
 			return encoder.items
 		}
 
-		public enum FieldsBuildUploadFiles: String, Codable, CaseIterable {
+		public enum FieldsBuildUploadFiles: String, Codable, CaseIterable, Sendable {
 			case assetDeliveryState
 			case assetToken
 			case assetType

@@ -9,7 +9,7 @@ extension APIEndpoint.V1.CiBuildRuns.WithID {
 		Actions(path: path + "/actions")
 	}
 
-	public struct Actions {
+	public struct Actions: Sendable {
 		/// Path: `/v1/ciBuildRuns/{id}/actions`
 		public let path: String
 
@@ -17,13 +17,13 @@ extension APIEndpoint.V1.CiBuildRuns.WithID {
 			Request(path: path, method: "GET", query: parameters?.asQuery, id: "ciBuildRuns_actions_getToManyRelated")
 		}
 
-		public struct GetParameters {
+		public struct GetParameters: Sendable {
 			public var fieldsCiBuildActions: [FieldsCiBuildActions]?
 			public var fieldsCiBuildRuns: [FieldsCiBuildRuns]?
 			public var limit: Int?
 			public var include: [Include]?
 
-			public enum FieldsCiBuildActions: String, Codable, CaseIterable {
+			public enum FieldsCiBuildActions: String, Codable, CaseIterable, Sendable {
 				case name
 				case actionType
 				case startedDate
@@ -38,7 +38,7 @@ extension APIEndpoint.V1.CiBuildRuns.WithID {
 				case testResults
 			}
 
-			public enum FieldsCiBuildRuns: String, Codable, CaseIterable {
+			public enum FieldsCiBuildRuns: String, Codable, CaseIterable, Sendable {
 				case number
 				case createdDate
 				case startedDate
@@ -60,7 +60,7 @@ extension APIEndpoint.V1.CiBuildRuns.WithID {
 				case pullRequest
 			}
 
-			public enum Include: String, Codable, CaseIterable {
+			public enum Include: String, Codable, CaseIterable, Sendable {
 				case buildRun
 			}
 

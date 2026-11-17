@@ -3,7 +3,7 @@
 
 import Foundation
 
-public struct AppAssetLibraryRefDataResponse: Codable {
+public struct AppAssetLibraryRefDataResponse: Codable, Sendable {
 	public var data: [AppAssetLibraryRefDatum]
 	public var links: PagedDocumentLinks
 	public var meta: PagingInformation?

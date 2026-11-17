@@ -3,7 +3,7 @@
 
 import Foundation
 
-public struct AppClipDomainStatusResponse: Codable {
+public struct AppClipDomainStatusResponse: Codable, Sendable {
 	/// AppClipDomainStatus
 	public var data: AppClipDomainStatus
 	public var links: DocumentLinks

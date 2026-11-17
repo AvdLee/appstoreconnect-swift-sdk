@@ -3,7 +3,7 @@
 
 import Foundation
 
-public struct BackgroundAssetVersionAppStoreReleaseResponse: Codable {
+public struct BackgroundAssetVersionAppStoreReleaseResponse: Codable, Sendable {
 	/// BackgroundAssetVersionAppStoreRelease
 	public var data: BackgroundAssetVersionAppStoreRelease
 	public var included: [BackgroundAssetVersion]?

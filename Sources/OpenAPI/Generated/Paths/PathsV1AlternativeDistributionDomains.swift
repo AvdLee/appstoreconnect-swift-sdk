@@ -9,7 +9,7 @@ extension APIEndpoint.V1 {
 		AlternativeDistributionDomains(path: path + "/alternativeDistributionDomains")
 	}
 
-	public struct AlternativeDistributionDomains {
+	public struct AlternativeDistributionDomains: Sendable {
 		/// Path: `/v1/alternativeDistributionDomains`
 		public let path: String
 
@@ -24,7 +24,7 @@ extension APIEndpoint.V1 {
 			return encoder.items
 		}
 
-		public enum FieldsAlternativeDistributionDomains: String, Codable, CaseIterable {
+		public enum FieldsAlternativeDistributionDomains: String, Codable, CaseIterable, Sendable {
 			case domain
 			case referenceName
 			case createdDate

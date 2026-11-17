@@ -9,7 +9,7 @@ extension APIEndpoint.V1.RetentionMessages.WithID {
 		Subscriptions(path: path + "/subscriptions")
 	}
 
-	public struct Subscriptions {
+	public struct Subscriptions: Sendable {
 		/// Path: `/v1/retentionMessages/{id}/subscriptions`
 		public let path: String
 
@@ -17,7 +17,7 @@ extension APIEndpoint.V1.RetentionMessages.WithID {
 			Request(path: path, method: "GET", query: parameters?.asQuery, id: "retentionMessages_subscriptions_getToManyRelated")
 		}
 
-		public struct GetParameters {
+		public struct GetParameters: Sendable {
 			public var filterProductID: [String]?
 			public var filterName: [String]?
 			public var filterState: [FilterState]?
@@ -52,7 +52,7 @@ extension APIEndpoint.V1.RetentionMessages.WithID {
 			public var limitRetentionOffers: Int?
 			public var limitRetentionMessageOffers: Int?
 
-			public enum FilterState: String, Codable, CaseIterable {
+			public enum FilterState: String, Codable, CaseIterable, Sendable {
 				case missingMetadata = "MISSING_METADATA"
 				case readyToSubmit = "READY_TO_SUBMIT"
 				case waitingForReview = "WAITING_FOR_REVIEW"
@@ -65,12 +65,12 @@ extension APIEndpoint.V1.RetentionMessages.WithID {
 				case rejected = "REJECTED"
 			}
 
-			public enum Sort: String, Codable, CaseIterable {
+			public enum Sort: String, Codable, CaseIterable, Sendable {
 				case name
 				case minusname = "-name"
 			}
 
-			public enum FieldsSubscriptions: String, Codable, CaseIterable {
+			public enum FieldsSubscriptions: String, Codable, CaseIterable, Sendable {
 				case name
 				case productID = "productId"
 				case familySharable
@@ -99,7 +99,7 @@ extension APIEndpoint.V1.RetentionMessages.WithID {
 				case retentionMessageOffers
 			}
 
-			public enum FieldsSubscriptionLocalizations: String, Codable, CaseIterable {
+			public enum FieldsSubscriptionLocalizations: String, Codable, CaseIterable, Sendable {
 				case name
 				case locale
 				case description
@@ -107,7 +107,7 @@ extension APIEndpoint.V1.RetentionMessages.WithID {
 				case subscription
 			}
 
-			public enum FieldsSubscriptionAppStoreReviewScreenshots: String, Codable, CaseIterable {
+			public enum FieldsSubscriptionAppStoreReviewScreenshots: String, Codable, CaseIterable, Sendable {
 				case fileSize
 				case fileName
 				case sourceFileChecksum
@@ -119,14 +119,14 @@ extension APIEndpoint.V1.RetentionMessages.WithID {
 				case subscription
 			}
 
-			public enum FieldsSubscriptionGroups: String, Codable, CaseIterable {
+			public enum FieldsSubscriptionGroups: String, Codable, CaseIterable, Sendable {
 				case referenceName
 				case subscriptions
 				case subscriptionGroupLocalizations
 				case versions
 			}
 
-			public enum FieldsSubscriptionIntroductoryOffers: String, Codable, CaseIterable {
+			public enum FieldsSubscriptionIntroductoryOffers: String, Codable, CaseIterable, Sendable {
 				case startDate
 				case endDate
 				case duration
@@ -138,7 +138,7 @@ extension APIEndpoint.V1.RetentionMessages.WithID {
 				case subscriptionPricePoint
 			}
 
-			public enum FieldsSubscriptionPromotionalOffers: String, Codable, CaseIterable {
+			public enum FieldsSubscriptionPromotionalOffers: String, Codable, CaseIterable, Sendable {
 				case duration
 				case name
 				case numberOfPeriods
@@ -149,7 +149,7 @@ extension APIEndpoint.V1.RetentionMessages.WithID {
 				case prices
 			}
 
-			public enum FieldsSubscriptionOfferCodes: String, Codable, CaseIterable {
+			public enum FieldsSubscriptionOfferCodes: String, Codable, CaseIterable, Sendable {
 				case name
 				case customerEligibilities
 				case offerEligibility
@@ -168,7 +168,7 @@ extension APIEndpoint.V1.RetentionMessages.WithID {
 				case prices
 			}
 
-			public enum FieldsSubscriptionPrices: String, Codable, CaseIterable {
+			public enum FieldsSubscriptionPrices: String, Codable, CaseIterable, Sendable {
 				case startDate
 				case preserved
 				case planType
@@ -176,7 +176,7 @@ extension APIEndpoint.V1.RetentionMessages.WithID {
 				case subscriptionPricePoint
 			}
 
-			public enum FieldsPromotedPurchases: String, Codable, CaseIterable {
+			public enum FieldsPromotedPurchases: String, Codable, CaseIterable, Sendable {
 				case visibleForAllUsers
 				case enabled
 				case state
@@ -184,12 +184,12 @@ extension APIEndpoint.V1.RetentionMessages.WithID {
 				case subscription
 			}
 
-			public enum FieldsSubscriptionAvailabilities: String, Codable, CaseIterable {
+			public enum FieldsSubscriptionAvailabilities: String, Codable, CaseIterable, Sendable {
 				case availableInNewTerritories
 				case availableTerritories
 			}
 
-			public enum FieldsWinBackOffers: String, Codable, CaseIterable {
+			public enum FieldsWinBackOffers: String, Codable, CaseIterable, Sendable {
 				case referenceName
 				case offerID = "offerId"
 				case duration
@@ -206,7 +206,7 @@ extension APIEndpoint.V1.RetentionMessages.WithID {
 				case prices
 			}
 
-			public enum FieldsSubscriptionImages: String, Codable, CaseIterable {
+			public enum FieldsSubscriptionImages: String, Codable, CaseIterable, Sendable {
 				case fileSize
 				case fileName
 				case sourceFileChecksum
@@ -217,13 +217,13 @@ extension APIEndpoint.V1.RetentionMessages.WithID {
 				case subscription
 			}
 
-			public enum FieldsSubscriptionPlanAvailabilities: String, Codable, CaseIterable {
+			public enum FieldsSubscriptionPlanAvailabilities: String, Codable, CaseIterable, Sendable {
 				case availableInNewTerritories
 				case planType
 				case availableTerritories
 			}
 
-			public enum FieldsSubscriptionVersions: String, Codable, CaseIterable {
+			public enum FieldsSubscriptionVersions: String, Codable, CaseIterable, Sendable {
 				case version
 				case state
 				case subscription
@@ -232,7 +232,7 @@ extension APIEndpoint.V1.RetentionMessages.WithID {
 				case localizations
 			}
 
-			public enum FieldsRetentionOffers: String, Codable, CaseIterable {
+			public enum FieldsRetentionOffers: String, Codable, CaseIterable, Sendable {
 				case referenceName
 				case offerID = "offerId"
 				case duration
@@ -245,13 +245,13 @@ extension APIEndpoint.V1.RetentionMessages.WithID {
 				case prices
 			}
 
-			public enum FieldsRetentionMessages: String, Codable, CaseIterable {
+			public enum FieldsRetentionMessages: String, Codable, CaseIterable, Sendable {
 				case referenceName
 				case versions
 				case subscriptions
 			}
 
-			public enum Include: String, Codable, CaseIterable {
+			public enum Include: String, Codable, CaseIterable, Sendable {
 				case subscriptionLocalizations
 				case appStoreReviewScreenshot
 				case group

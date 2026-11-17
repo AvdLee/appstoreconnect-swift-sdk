@@ -3,19 +3,19 @@
 
 import Foundation
 
-public struct ReviewSubmissionUpdateRequest: Codable {
+public struct ReviewSubmissionUpdateRequest: Codable, Sendable {
 	public var data: Data
 
-	public struct Data: Codable, Identifiable {
+	public struct Data: Codable, Identifiable, Sendable {
 		public var type: `Type`
 		public var id: String
 		public var attributes: Attributes?
 
-		public enum `Type`: String, Codable, CaseIterable {
+		public enum `Type`: String, Codable, CaseIterable, Sendable {
 			case reviewSubmissions
 		}
 
-		public struct Attributes: Codable {
+		public struct Attributes: Codable, Sendable {
 			public var platform: Platform?
 			public var isSubmitted: Bool?
 			public var isCanceled: Bool?

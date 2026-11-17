@@ -3,7 +3,7 @@
 
 import Foundation
 
-public struct RoutingAppCoverageResponse: Codable {
+public struct RoutingAppCoverageResponse: Codable, Sendable {
 	public var data: RoutingAppCoverage?
 	public var included: [AppStoreVersion]?
 	public var links: DocumentLinks

@@ -3,23 +3,23 @@
 
 import Foundation
 
-public struct SubscriptionGracePeriod: Codable, Identifiable {
+public struct SubscriptionGracePeriod: Codable, Identifiable, Sendable {
 	public var type: `Type`
 	public var id: String
 	public var attributes: Attributes?
 	public var links: ResourceLinks?
 
-	public enum `Type`: String, Codable, CaseIterable {
+	public enum `Type`: String, Codable, CaseIterable, Sendable {
 		case subscriptionGracePeriods
 	}
 
-	public struct Attributes: Codable {
+	public struct Attributes: Codable, Sendable {
 		public var isOptIn: Bool?
 		public var isSandboxOptIn: Bool?
 		public var duration: SubscriptionGracePeriodDuration?
 		public var renewalType: RenewalType?
 
-		public enum RenewalType: String, Codable, CaseIterable {
+		public enum RenewalType: String, Codable, CaseIterable, Sendable {
 			case allRenewals = "ALL_RENEWALS"
 			case paidToPaidOnly = "PAID_TO_PAID_ONLY"
 		}

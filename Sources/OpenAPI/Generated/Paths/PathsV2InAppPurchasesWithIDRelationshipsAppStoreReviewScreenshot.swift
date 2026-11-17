@@ -9,7 +9,7 @@ extension APIEndpoint.V2.InAppPurchases.WithID.Relationships {
 		AppStoreReviewScreenshot(path: path + "/appStoreReviewScreenshot")
 	}
 
-	public struct AppStoreReviewScreenshot {
+	public struct AppStoreReviewScreenshot: Sendable {
 		/// Path: `/v2/inAppPurchases/{id}/relationships/appStoreReviewScreenshot`
 		public let path: String
 

@@ -3,18 +3,18 @@
 
 import Foundation
 
-public struct RetentionMessage: Codable, Identifiable {
+public struct RetentionMessage: Codable, Identifiable, Sendable {
 	public var type: `Type`
 	public var id: String
 	public var attributes: Attributes?
 	public var relationships: Relationships?
 	public var links: ResourceLinks?
 
-	public enum `Type`: String, Codable, CaseIterable {
+	public enum `Type`: String, Codable, CaseIterable, Sendable {
 		case retentionMessages
 	}
 
-	public struct Attributes: Codable {
+	public struct Attributes: Codable, Sendable {
 		public var referenceName: String?
 
 		public init(referenceName: String? = nil) {
@@ -32,20 +32,20 @@ public struct RetentionMessage: Codable, Identifiable {
 		}
 	}
 
-	public struct Relationships: Codable {
+	public struct Relationships: Codable, Sendable {
 		public var versions: Versions?
 		public var subscriptions: Subscriptions?
 
-		public struct Versions: Codable {
+		public struct Versions: Codable, Sendable {
 			public var links: RelationshipLinks?
 			public var meta: PagingInformation?
 			public var data: [Datum]?
 
-			public struct Datum: Codable, Identifiable {
+			public struct Datum: Codable, Identifiable, Sendable {
 				public var type: `Type`
 				public var id: String
 
-				public enum `Type`: String, Codable, CaseIterable {
+				public enum `Type`: String, Codable, CaseIterable, Sendable {
 					case retentionMessageVersions
 				}
 
@@ -88,16 +88,16 @@ public struct RetentionMessage: Codable, Identifiable {
 			}
 		}
 
-		public struct Subscriptions: Codable {
+		public struct Subscriptions: Codable, Sendable {
 			public var links: RelationshipLinks?
 			public var meta: PagingInformation?
 			public var data: [Datum]?
 
-			public struct Datum: Codable, Identifiable {
+			public struct Datum: Codable, Identifiable, Sendable {
 				public var type: `Type`
 				public var id: String
 
-				public enum `Type`: String, Codable, CaseIterable {
+				public enum `Type`: String, Codable, CaseIterable, Sendable {
 					case subscriptions
 				}
 

@@ -9,7 +9,7 @@ extension APIEndpoint.V1.BetaGroups.WithID.Metrics {
 		BetaTesterUsages(path: path + "/betaTesterUsages")
 	}
 
-	public struct BetaTesterUsages {
+	public struct BetaTesterUsages: Sendable {
 		/// Path: `/v1/betaGroups/{id}/metrics/betaTesterUsages`
 		public let path: String
 
@@ -17,20 +17,20 @@ extension APIEndpoint.V1.BetaGroups.WithID.Metrics {
 			Request(path: path, method: "GET", query: parameters?.asQuery, id: "betaGroups_betaTesterUsages_getMetrics")
 		}
 
-		public struct GetParameters {
+		public struct GetParameters: Sendable {
 			public var period: Period?
 			public var groupBy: [GroupBy]?
 			public var filterBetaTesters: String?
 			public var limit: Int?
 
-			public enum Period: String, Codable, CaseIterable {
+			public enum Period: String, Codable, CaseIterable, Sendable {
 				case p7d = "P7D"
 				case p30d = "P30D"
 				case p90d = "P90D"
 				case p365d = "P365D"
 			}
 
-			public enum GroupBy: String, Codable, CaseIterable {
+			public enum GroupBy: String, Codable, CaseIterable, Sendable {
 				case betaTesters
 			}
 

@@ -9,7 +9,7 @@ extension APIEndpoint.V1.Apps.WithID.Relationships {
 		Webhooks(path: path + "/webhooks")
 	}
 
-	public struct Webhooks {
+	public struct Webhooks: Sendable {
 		/// Path: `/v1/apps/{id}/relationships/webhooks`
 		public let path: String
 

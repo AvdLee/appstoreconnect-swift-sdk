@@ -3,19 +3,19 @@
 
 import Foundation
 
-public struct RetentionMessageLocalizationUpdateRequest: Codable {
+public struct RetentionMessageLocalizationUpdateRequest: Codable, Sendable {
 	public var data: Data
 
-	public struct Data: Codable, Identifiable {
+	public struct Data: Codable, Identifiable, Sendable {
 		public var type: `Type`
 		public var id: String
 		public var attributes: Attributes?
 
-		public enum `Type`: String, Codable, CaseIterable {
+		public enum `Type`: String, Codable, CaseIterable, Sendable {
 			case retentionMessageLocalizations
 		}
 
-		public struct Attributes: Codable {
+		public struct Attributes: Codable, Sendable {
 			public var header: String?
 			public var body: String?
 

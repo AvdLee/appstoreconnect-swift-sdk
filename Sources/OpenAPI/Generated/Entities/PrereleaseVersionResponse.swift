@@ -3,13 +3,13 @@
 
 import Foundation
 
-public struct PrereleaseVersionResponse: Codable {
+public struct PrereleaseVersionResponse: Codable, Sendable {
 	/// PrereleaseVersion
 	public var data: PrereleaseVersion
 	public var included: [IncludedItem]?
 	public var links: DocumentLinks
 
-	public enum IncludedItem: Codable {
+	public enum IncludedItem: Codable, Sendable {
 		case app(App)
 		case build(Build)
 

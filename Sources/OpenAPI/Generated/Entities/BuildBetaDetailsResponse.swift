@@ -3,7 +3,7 @@
 
 import Foundation
 
-public struct BuildBetaDetailsResponse: Codable {
+public struct BuildBetaDetailsResponse: Codable, Sendable {
 	public var data: [BuildBetaDetail]
 	public var included: [Build]?
 	public var links: PagedDocumentLinks

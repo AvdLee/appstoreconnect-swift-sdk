@@ -9,7 +9,7 @@ extension APIEndpoint.V1.GameCenterActivityVersions.WithID.Relationships {
 		DefaultImage(path: path + "/defaultImage")
 	}
 
-	public struct DefaultImage {
+	public struct DefaultImage: Sendable {
 		/// Path: `/v1/gameCenterActivityVersions/{id}/relationships/defaultImage`
 		public let path: String
 

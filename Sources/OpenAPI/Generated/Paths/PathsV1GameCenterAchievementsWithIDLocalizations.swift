@@ -9,7 +9,7 @@ extension APIEndpoint.V1.GameCenterAchievements.WithID {
 		Localizations(path: path + "/localizations")
 	}
 
-	public struct Localizations {
+	public struct Localizations: Sendable {
 		/// Path: `/v1/gameCenterAchievements/{id}/localizations`
 		public let path: String
 
@@ -18,14 +18,14 @@ extension APIEndpoint.V1.GameCenterAchievements.WithID {
 			Request(path: path, method: "GET", query: parameters?.asQuery, id: "gameCenterAchievements_localizations_getToManyRelated")
 		}
 
-		public struct GetParameters {
+		public struct GetParameters: Sendable {
 			public var fieldsGameCenterAchievementLocalizations: [FieldsGameCenterAchievementLocalizations]?
 			public var fieldsGameCenterAchievements: [FieldsGameCenterAchievements]?
 			public var fieldsGameCenterAchievementImages: [FieldsGameCenterAchievementImages]?
 			public var limit: Int?
 			public var include: [Include]?
 
-			public enum FieldsGameCenterAchievementLocalizations: String, Codable, CaseIterable {
+			public enum FieldsGameCenterAchievementLocalizations: String, Codable, CaseIterable, Sendable {
 				case locale
 				case name
 				case beforeEarnedDescription
@@ -34,7 +34,7 @@ extension APIEndpoint.V1.GameCenterAchievements.WithID {
 				case gameCenterAchievementImage
 			}
 
-			public enum FieldsGameCenterAchievements: String, Codable, CaseIterable {
+			public enum FieldsGameCenterAchievements: String, Codable, CaseIterable, Sendable {
 				case referenceName
 				case vendorIdentifier
 				case points
@@ -50,7 +50,7 @@ extension APIEndpoint.V1.GameCenterAchievements.WithID {
 				case activity
 			}
 
-			public enum FieldsGameCenterAchievementImages: String, Codable, CaseIterable {
+			public enum FieldsGameCenterAchievementImages: String, Codable, CaseIterable, Sendable {
 				case fileSize
 				case fileName
 				case imageAsset
@@ -59,7 +59,7 @@ extension APIEndpoint.V1.GameCenterAchievements.WithID {
 				case gameCenterAchievementLocalization
 			}
 
-			public enum Include: String, Codable, CaseIterable {
+			public enum Include: String, Codable, CaseIterable, Sendable {
 				case gameCenterAchievement
 				case gameCenterAchievementImage
 			}

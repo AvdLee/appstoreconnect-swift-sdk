@@ -4,7 +4,7 @@
 import Foundation
 
 @available(*, deprecated, message: "Deprecated")
-public struct InAppPurchasesResponse: Codable {
+public struct InAppPurchasesResponse: Codable, Sendable {
 	public var data: [InAppPurchase]
 	public var included: [App]?
 	public var links: PagedDocumentLinks

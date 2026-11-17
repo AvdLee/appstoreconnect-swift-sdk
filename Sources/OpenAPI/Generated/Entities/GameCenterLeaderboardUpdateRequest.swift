@@ -4,19 +4,19 @@
 import Foundation
 
 @available(*, deprecated, message: "Deprecated")
-public struct GameCenterLeaderboardUpdateRequest: Codable {
+public struct GameCenterLeaderboardUpdateRequest: Codable, Sendable {
 	public var data: Data
 
-	public struct Data: Codable, Identifiable {
+	public struct Data: Codable, Identifiable, Sendable {
 		public var type: `Type`
 		public var id: String
 		public var attributes: Attributes?
 
-		public enum `Type`: String, Codable, CaseIterable {
+		public enum `Type`: String, Codable, CaseIterable, Sendable {
 			case gameCenterLeaderboards
 		}
 
-		public struct Attributes: Codable {
+		public struct Attributes: Codable, Sendable {
 			public var defaultFormatter: GameCenterLeaderboardFormatter?
 			public var referenceName: String?
 			public var submissionType: SubmissionType?
@@ -30,17 +30,17 @@ public struct GameCenterLeaderboardUpdateRequest: Codable {
 			public var activityProperties: [String: String]?
 			public var visibility: Visibility?
 
-			public enum SubmissionType: String, Codable, CaseIterable {
+			public enum SubmissionType: String, Codable, CaseIterable, Sendable {
 				case bestScore = "BEST_SCORE"
 				case mostRecentScore = "MOST_RECENT_SCORE"
 			}
 
-			public enum ScoreSortType: String, Codable, CaseIterable {
+			public enum ScoreSortType: String, Codable, CaseIterable, Sendable {
 				case asc = "ASC"
 				case desc = "DESC"
 			}
 
-			public enum Visibility: String, Codable, CaseIterable {
+			public enum Visibility: String, Codable, CaseIterable, Sendable {
 				case showForAll = "SHOW_FOR_ALL"
 				case hideForAll = "HIDE_FOR_ALL"
 			}

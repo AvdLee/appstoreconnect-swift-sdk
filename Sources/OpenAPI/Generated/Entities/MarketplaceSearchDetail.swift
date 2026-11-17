@@ -3,17 +3,17 @@
 
 import Foundation
 
-public struct MarketplaceSearchDetail: Codable, Identifiable {
+public struct MarketplaceSearchDetail: Codable, Identifiable, Sendable {
 	public var type: `Type`
 	public var id: String
 	public var attributes: Attributes?
 	public var links: ResourceLinks?
 
-	public enum `Type`: String, Codable, CaseIterable {
+	public enum `Type`: String, Codable, CaseIterable, Sendable {
 		case marketplaceSearchDetails
 	}
 
-	public struct Attributes: Codable {
+	public struct Attributes: Codable, Sendable {
 		public var catalogURL: URL?
 
 		public init(catalogURL: URL? = nil) {

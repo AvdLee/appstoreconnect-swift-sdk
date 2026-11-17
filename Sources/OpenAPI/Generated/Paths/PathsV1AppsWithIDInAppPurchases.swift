@@ -9,7 +9,7 @@ extension APIEndpoint.V1.Apps.WithID {
 		InAppPurchases(path: path + "/inAppPurchases")
 	}
 
-	public struct InAppPurchases {
+	public struct InAppPurchases: Sendable {
 		/// Path: `/v1/apps/{id}/inAppPurchases`
 		public let path: String
 
@@ -18,7 +18,7 @@ extension APIEndpoint.V1.Apps.WithID {
 			Request(path: path, method: "GET", query: parameters?.asQuery, id: "apps_inAppPurchases_getToManyRelated")
 		}
 
-		public struct GetParameters {
+		public struct GetParameters: Sendable {
 			public var filterInAppPurchaseType: [FilterInAppPurchaseType]?
 			public var filterCanBeSubmitted: [String]?
 			public var sort: [Sort]?
@@ -28,7 +28,7 @@ extension APIEndpoint.V1.Apps.WithID {
 			public var include: [Include]?
 			public var limitApps: Int?
 
-			public enum FilterInAppPurchaseType: String, Codable, CaseIterable {
+			public enum FilterInAppPurchaseType: String, Codable, CaseIterable, Sendable {
 				case automaticallyRenewableSubscription = "AUTOMATICALLY_RENEWABLE_SUBSCRIPTION"
 				case nonConsumable = "NON_CONSUMABLE"
 				case consumable = "CONSUMABLE"
@@ -36,7 +36,7 @@ extension APIEndpoint.V1.Apps.WithID {
 				case freeSubscription = "FREE_SUBSCRIPTION"
 			}
 
-			public enum Sort: String, Codable, CaseIterable {
+			public enum Sort: String, Codable, CaseIterable, Sendable {
 				case referenceName
 				case minusreferenceName = "-referenceName"
 				case productID = "productId"
@@ -45,7 +45,7 @@ extension APIEndpoint.V1.Apps.WithID {
 				case minusinAppPurchaseType = "-inAppPurchaseType"
 			}
 
-			public enum FieldsInAppPurchases: String, Codable, CaseIterable {
+			public enum FieldsInAppPurchases: String, Codable, CaseIterable, Sendable {
 				case referenceName
 				case productID = "productId"
 				case inAppPurchaseType
@@ -53,7 +53,7 @@ extension APIEndpoint.V1.Apps.WithID {
 				case apps
 			}
 
-			public enum FieldsApps: String, Codable, CaseIterable {
+			public enum FieldsApps: String, Codable, CaseIterable, Sendable {
 				case accessibilityURL = "accessibilityUrl"
 				case name
 				case bundleID = "bundleId"
@@ -114,7 +114,7 @@ extension APIEndpoint.V1.Apps.WithID {
 				case androidToIosAppMappingDetails
 			}
 
-			public enum Include: String, Codable, CaseIterable {
+			public enum Include: String, Codable, CaseIterable, Sendable {
 				case apps
 			}
 

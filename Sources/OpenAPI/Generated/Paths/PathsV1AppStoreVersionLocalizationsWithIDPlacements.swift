@@ -9,7 +9,7 @@ extension APIEndpoint.V1.AppStoreVersionLocalizations.WithID {
 		Placements(path: path + "/placements")
 	}
 
-	public struct Placements {
+	public struct Placements: Sendable {
 		/// Path: `/v1/appStoreVersionLocalizations/{id}/placements`
 		public let path: String
 
@@ -17,7 +17,7 @@ extension APIEndpoint.V1.AppStoreVersionLocalizations.WithID {
 			Request(path: path, method: "GET", query: parameters?.asQuery, id: "appStoreVersionLocalizations_placements_getToManyRelated")
 		}
 
-		public struct GetParameters {
+		public struct GetParameters: Sendable {
 			public var filterPlacementType: [FilterPlacementType]?
 			public var filterPlacementGroup: [String]?
 			public var filterState: [FilterState]?
@@ -39,7 +39,7 @@ extension APIEndpoint.V1.AppStoreVersionLocalizations.WithID {
 			public var limit: Int?
 			public var include: [Include]?
 
-			public enum FilterPlacementType: String, Codable, CaseIterable {
+			public enum FilterPlacementType: String, Codable, CaseIterable, Sendable {
 				case appScreenshot = "APP_SCREENSHOT"
 				case imessageAppScreenshot = "IMESSAGE_APP_SCREENSHOT"
 				case appPreview = "APP_PREVIEW"
@@ -52,7 +52,7 @@ extension APIEndpoint.V1.AppStoreVersionLocalizations.WithID {
 				case retentionMessageAsset = "RETENTION_MESSAGE_ASSET"
 			}
 
-			public enum FilterState: String, Codable, CaseIterable {
+			public enum FilterState: String, Codable, CaseIterable, Sendable {
 				case assetProcessing = "ASSET_PROCESSING"
 				case failed = "FAILED"
 				case parentPrepareForSubmission = "PARENT_PREPARE_FOR_SUBMISSION"
@@ -62,7 +62,7 @@ extension APIEndpoint.V1.AppStoreVersionLocalizations.WithID {
 				case parentApproved = "PARENT_APPROVED"
 			}
 
-			public enum Sort: String, Codable, CaseIterable {
+			public enum Sort: String, Codable, CaseIterable, Sendable {
 				case createdDate
 				case minuscreatedDate = "-createdDate"
 				case lastModifiedDate
@@ -71,7 +71,7 @@ extension APIEndpoint.V1.AppStoreVersionLocalizations.WithID {
 				case minusplacementGroupPosition = "-placementGroupPosition"
 			}
 
-			public enum FieldsAppAssetLibraryPlacements: String, Codable, CaseIterable {
+			public enum FieldsAppAssetLibraryPlacements: String, Codable, CaseIterable, Sendable {
 				case mediaType
 				case placementType
 				case placementGroup
@@ -88,7 +88,7 @@ extension APIEndpoint.V1.AppStoreVersionLocalizations.WithID {
 				case retentionMessageVersion
 			}
 
-			public enum FieldsAppAssetLibraryImages: String, Codable, CaseIterable {
+			public enum FieldsAppAssetLibraryImages: String, Codable, CaseIterable, Sendable {
 				case category
 				case createdDate
 				case lastModifiedDate
@@ -103,7 +103,7 @@ extension APIEndpoint.V1.AppStoreVersionLocalizations.WithID {
 				case placements
 			}
 
-			public enum FieldsAppAssetLibraryVideos: String, Codable, CaseIterable {
+			public enum FieldsAppAssetLibraryVideos: String, Codable, CaseIterable, Sendable {
 				case category
 				case createdDate
 				case lastModifiedDate
@@ -120,7 +120,7 @@ extension APIEndpoint.V1.AppStoreVersionLocalizations.WithID {
 				case placements
 			}
 
-			public enum FieldsAppEventLocalizations: String, Codable, CaseIterable {
+			public enum FieldsAppEventLocalizations: String, Codable, CaseIterable, Sendable {
 				case locale
 				case name
 				case shortDescription
@@ -131,7 +131,7 @@ extension APIEndpoint.V1.AppStoreVersionLocalizations.WithID {
 				case placements
 			}
 
-			public enum FieldsAppStoreVersionLocalizations: String, Codable, CaseIterable {
+			public enum FieldsAppStoreVersionLocalizations: String, Codable, CaseIterable, Sendable {
 				case description
 				case locale
 				case keywords
@@ -146,7 +146,7 @@ extension APIEndpoint.V1.AppStoreVersionLocalizations.WithID {
 				case placements
 			}
 
-			public enum FieldsAppCustomProductPageLocalizations: String, Codable, CaseIterable {
+			public enum FieldsAppCustomProductPageLocalizations: String, Codable, CaseIterable, Sendable {
 				case locale
 				case promotionalText
 				case appCustomProductPageVersion
@@ -156,7 +156,7 @@ extension APIEndpoint.V1.AppStoreVersionLocalizations.WithID {
 				case placements
 			}
 
-			public enum FieldsAppStoreVersionExperimentTreatmentLocalizations: String, Codable, CaseIterable {
+			public enum FieldsAppStoreVersionExperimentTreatmentLocalizations: String, Codable, CaseIterable, Sendable {
 				case locale
 				case appStoreVersionExperimentTreatment
 				case appScreenshotSets
@@ -164,14 +164,14 @@ extension APIEndpoint.V1.AppStoreVersionLocalizations.WithID {
 				case placements
 			}
 
-			public enum FieldsRetentionMessageVersions: String, Codable, CaseIterable {
+			public enum FieldsRetentionMessageVersions: String, Codable, CaseIterable, Sendable {
 				case state
 				case retentionMessage
 				case localizations
 				case placement
 			}
 
-			public enum Include: String, Codable, CaseIterable {
+			public enum Include: String, Codable, CaseIterable, Sendable {
 				case image
 				case video
 				case appEventLocalization

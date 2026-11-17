@@ -9,7 +9,7 @@ extension APIEndpoint.V1.GameCenterActivityLocalizations {
 		WithID(path: "\(path)/\(id)")
 	}
 
-	public struct WithID {
+	public struct WithID: Sendable {
 		/// Path: `/v1/gameCenterActivityLocalizations/{id}`
 		public let path: String
 
@@ -17,13 +17,13 @@ extension APIEndpoint.V1.GameCenterActivityLocalizations {
 			Request(path: path, method: "GET", query: parameters?.asQuery, id: "gameCenterActivityLocalizations_getInstance")
 		}
 
-		public struct GetParameters {
+		public struct GetParameters: Sendable {
 			public var fieldsGameCenterActivityLocalizations: [FieldsGameCenterActivityLocalizations]?
 			public var fieldsGameCenterActivityVersions: [FieldsGameCenterActivityVersions]?
 			public var fieldsGameCenterActivityImages: [FieldsGameCenterActivityImages]?
 			public var include: [Include]?
 
-			public enum FieldsGameCenterActivityLocalizations: String, Codable, CaseIterable {
+			public enum FieldsGameCenterActivityLocalizations: String, Codable, CaseIterable, Sendable {
 				case locale
 				case name
 				case description
@@ -31,7 +31,7 @@ extension APIEndpoint.V1.GameCenterActivityLocalizations {
 				case image
 			}
 
-			public enum FieldsGameCenterActivityVersions: String, Codable, CaseIterable {
+			public enum FieldsGameCenterActivityVersions: String, Codable, CaseIterable, Sendable {
 				case version
 				case state
 				case fallbackURL = "fallbackUrl"
@@ -41,7 +41,7 @@ extension APIEndpoint.V1.GameCenterActivityLocalizations {
 				case releases
 			}
 
-			public enum FieldsGameCenterActivityImages: String, Codable, CaseIterable {
+			public enum FieldsGameCenterActivityImages: String, Codable, CaseIterable, Sendable {
 				case fileSize
 				case fileName
 				case imageAsset
@@ -49,7 +49,7 @@ extension APIEndpoint.V1.GameCenterActivityLocalizations {
 				case assetDeliveryState
 			}
 
-			public enum Include: String, Codable, CaseIterable {
+			public enum Include: String, Codable, CaseIterable, Sendable {
 				case version
 				case image
 			}

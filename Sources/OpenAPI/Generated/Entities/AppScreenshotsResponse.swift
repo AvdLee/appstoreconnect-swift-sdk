@@ -3,7 +3,7 @@
 
 import Foundation
 
-public struct AppScreenshotsResponse: Codable {
+public struct AppScreenshotsResponse: Codable, Sendable {
 	public var data: [AppScreenshot]
 	public var included: [AppScreenshotSet]?
 	public var links: PagedDocumentLinks

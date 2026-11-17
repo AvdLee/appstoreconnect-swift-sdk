@@ -9,7 +9,7 @@ extension APIEndpoint.V2.AppAvailabilities.WithID {
 		TerritoryAvailabilities(path: path + "/territoryAvailabilities")
 	}
 
-	public struct TerritoryAvailabilities {
+	public struct TerritoryAvailabilities: Sendable {
 		/// Path: `/v2/appAvailabilities/{id}/territoryAvailabilities`
 		public let path: String
 
@@ -17,13 +17,13 @@ extension APIEndpoint.V2.AppAvailabilities.WithID {
 			Request(path: path, method: "GET", query: parameters?.asQuery, id: "appAvailabilitiesV2_territoryAvailabilities_getToManyRelated")
 		}
 
-		public struct GetParameters {
+		public struct GetParameters: Sendable {
 			public var fieldsTerritoryAvailabilities: [FieldsTerritoryAvailabilities]?
 			public var fieldsTerritories: [FieldsTerritories]?
 			public var limit: Int?
 			public var include: [Include]?
 
-			public enum FieldsTerritoryAvailabilities: String, Codable, CaseIterable {
+			public enum FieldsTerritoryAvailabilities: String, Codable, CaseIterable, Sendable {
 				case available
 				case releaseDate
 				case preOrderEnabled
@@ -32,11 +32,11 @@ extension APIEndpoint.V2.AppAvailabilities.WithID {
 				case territory
 			}
 
-			public enum FieldsTerritories: String, Codable, CaseIterable {
+			public enum FieldsTerritories: String, Codable, CaseIterable, Sendable {
 				case currency
 			}
 
-			public enum Include: String, Codable, CaseIterable {
+			public enum Include: String, Codable, CaseIterable, Sendable {
 				case territory
 			}
 

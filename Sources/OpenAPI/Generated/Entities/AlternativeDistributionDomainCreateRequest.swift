@@ -3,18 +3,18 @@
 
 import Foundation
 
-public struct AlternativeDistributionDomainCreateRequest: Codable {
+public struct AlternativeDistributionDomainCreateRequest: Codable, Sendable {
 	public var data: Data
 
-	public struct Data: Codable {
+	public struct Data: Codable, Sendable {
 		public var type: `Type`
 		public var attributes: Attributes
 
-		public enum `Type`: String, Codable, CaseIterable {
+		public enum `Type`: String, Codable, CaseIterable, Sendable {
 			case alternativeDistributionDomains
 		}
 
-		public struct Attributes: Codable {
+		public struct Attributes: Codable, Sendable {
 			public var domain: String
 			public var referenceName: String
 

@@ -3,13 +3,13 @@
 
 import Foundation
 
-public struct CustomerReviewsResponse: Codable {
+public struct CustomerReviewsResponse: Codable, Sendable {
 	public var data: [CustomerReview]
 	public var included: [IncludedItem]?
 	public var links: PagedDocumentLinks
 	public var meta: PagingInformation?
 
-	public enum IncludedItem: Codable {
+	public enum IncludedItem: Codable, Sendable {
 		case customerReviewResponseV1(CustomerReviewResponseV1)
 		case territory(Territory)
 

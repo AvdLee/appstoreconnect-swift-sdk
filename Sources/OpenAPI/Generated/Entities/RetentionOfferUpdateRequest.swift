@@ -3,19 +3,19 @@
 
 import Foundation
 
-public struct RetentionOfferUpdateRequest: Codable {
+public struct RetentionOfferUpdateRequest: Codable, Sendable {
 	public var data: Data
 
-	public struct Data: Codable, Identifiable {
+	public struct Data: Codable, Identifiable, Sendable {
 		public var type: `Type`
 		public var id: String
 		public var attributes: Attributes?
 
-		public enum `Type`: String, Codable, CaseIterable {
+		public enum `Type`: String, Codable, CaseIterable, Sendable {
 			case retentionOffers
 		}
 
-		public struct Attributes: Codable {
+		public struct Attributes: Codable, Sendable {
 			public var customerEligibilityPaidSubscriptionDurationInMonths: Int?
 			public var customerEligibilityWaitBetweenOffersInMonths: Int?
 

@@ -3,19 +3,19 @@
 
 import Foundation
 
-public struct GameCenterLeaderboardSetMemberLocalizationCreateRequest: Codable {
+public struct GameCenterLeaderboardSetMemberLocalizationCreateRequest: Codable, Sendable {
 	public var data: Data
 
-	public struct Data: Codable {
+	public struct Data: Codable, Sendable {
 		public var type: `Type`
 		public var attributes: Attributes?
 		public var relationships: Relationships
 
-		public enum `Type`: String, Codable, CaseIterable {
+		public enum `Type`: String, Codable, CaseIterable, Sendable {
 			case gameCenterLeaderboardSetMemberLocalizations
 		}
 
-		public struct Attributes: Codable {
+		public struct Attributes: Codable, Sendable {
 			public var name: String?
 			public var locale: String?
 
@@ -37,18 +37,18 @@ public struct GameCenterLeaderboardSetMemberLocalizationCreateRequest: Codable {
 			}
 		}
 
-		public struct Relationships: Codable {
+		public struct Relationships: Codable, Sendable {
 			public var gameCenterLeaderboardSet: GameCenterLeaderboardSet
 			public var gameCenterLeaderboard: GameCenterLeaderboard
 
-			public struct GameCenterLeaderboardSet: Codable {
+			public struct GameCenterLeaderboardSet: Codable, Sendable {
 				public var data: Data
 
-				public struct Data: Codable, Identifiable {
+				public struct Data: Codable, Identifiable, Sendable {
 					public var type: `Type`
 					public var id: String
 
-					public enum `Type`: String, Codable, CaseIterable {
+					public enum `Type`: String, Codable, CaseIterable, Sendable {
 						case gameCenterLeaderboardSets
 					}
 
@@ -85,14 +85,14 @@ public struct GameCenterLeaderboardSetMemberLocalizationCreateRequest: Codable {
 				}
 			}
 
-			public struct GameCenterLeaderboard: Codable {
+			public struct GameCenterLeaderboard: Codable, Sendable {
 				public var data: Data
 
-				public struct Data: Codable, Identifiable {
+				public struct Data: Codable, Identifiable, Sendable {
 					public var type: `Type`
 					public var id: String
 
-					public enum `Type`: String, Codable, CaseIterable {
+					public enum `Type`: String, Codable, CaseIterable, Sendable {
 						case gameCenterLeaderboards
 					}
 

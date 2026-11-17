@@ -9,7 +9,7 @@ extension APIEndpoint.V1.AppStoreVersions.WithID.Relationships {
 		AlternativeDistributionPackage(path: path + "/alternativeDistributionPackage")
 	}
 
-	public struct AlternativeDistributionPackage {
+	public struct AlternativeDistributionPackage: Sendable {
 		/// Path: `/v1/appStoreVersions/{id}/relationships/alternativeDistributionPackage`
 		public let path: String
 

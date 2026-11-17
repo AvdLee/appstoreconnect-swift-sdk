@@ -3,17 +3,17 @@
 
 import Foundation
 
-public struct BackgroundAssetUploadFile: Codable, Identifiable {
+public struct BackgroundAssetUploadFile: Codable, Identifiable, Sendable {
 	public var type: `Type`
 	public var id: String
 	public var attributes: Attributes?
 	public var links: ResourceLinks?
 
-	public enum `Type`: String, Codable, CaseIterable {
+	public enum `Type`: String, Codable, CaseIterable, Sendable {
 		case backgroundAssetUploadFiles
 	}
 
-	public struct Attributes: Codable {
+	public struct Attributes: Codable, Sendable {
 		public var assetDeliveryState: AppMediaAssetState?
 		public var assetToken: String?
 		public var assetType: AssetType?
@@ -24,7 +24,7 @@ public struct BackgroundAssetUploadFile: Codable, Identifiable {
 		public var sourceFileChecksums: Checksums?
 		public var uploadOperations: [DeliveryFileUploadOperation]?
 
-		public enum AssetType: String, Codable, CaseIterable {
+		public enum AssetType: String, Codable, CaseIterable, Sendable {
 			case asset = "ASSET"
 			case manifest = "MANIFEST"
 		}

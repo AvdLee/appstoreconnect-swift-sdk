@@ -10,7 +10,7 @@ import Foundation
 /// An AsyncSequence of responses to requests from an API endpoint
 ///
 /// If the endpoint generates more than a single page of responses the sequence will emit each response page in turn until all have been received.
-public struct PagedRequest<T>: AsyncSequence, AsyncIteratorProtocol where T: Decodable {
+public struct PagedRequest<T>: AsyncSequence, AsyncIteratorProtocol where T: Decodable & Sendable {
     public typealias Element = T
     
     let request: Request<T>

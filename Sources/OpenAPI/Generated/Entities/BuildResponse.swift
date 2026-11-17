@@ -3,13 +3,13 @@
 
 import Foundation
 
-public struct BuildResponse: Codable {
+public struct BuildResponse: Codable, Sendable {
 	/// Build
 	public var data: Build
 	public var included: [IncludedItem]?
 	public var links: DocumentLinks
 
-	public enum IncludedItem: Codable {
+	public enum IncludedItem: Codable, Sendable {
 		case appEncryptionDeclaration(AppEncryptionDeclaration)
 		case appStoreVersion(AppStoreVersion)
 		case app(App)

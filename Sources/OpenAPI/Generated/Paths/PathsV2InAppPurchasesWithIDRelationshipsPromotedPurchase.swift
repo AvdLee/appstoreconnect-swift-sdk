@@ -9,7 +9,7 @@ extension APIEndpoint.V2.InAppPurchases.WithID.Relationships {
 		PromotedPurchase(path: path + "/promotedPurchase")
 	}
 
-	public struct PromotedPurchase {
+	public struct PromotedPurchase: Sendable {
 		/// Path: `/v2/inAppPurchases/{id}/relationships/promotedPurchase`
 		public let path: String
 

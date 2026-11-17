@@ -3,13 +3,13 @@
 
 import Foundation
 
-public struct CiProductsResponse: Codable {
+public struct CiProductsResponse: Codable, Sendable {
 	public var data: [CiProduct]
 	public var included: [IncludedItem]?
 	public var links: PagedDocumentLinks
 	public var meta: PagingInformation?
 
-	public enum IncludedItem: Codable {
+	public enum IncludedItem: Codable, Sendable {
 		case app(App)
 		case bundleID(BundleID)
 		case scmRepository(ScmRepository)

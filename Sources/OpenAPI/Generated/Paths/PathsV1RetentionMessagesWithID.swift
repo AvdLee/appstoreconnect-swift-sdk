@@ -9,7 +9,7 @@ extension APIEndpoint.V1.RetentionMessages {
 		WithID(path: "\(path)/\(id)")
 	}
 
-	public struct WithID {
+	public struct WithID: Sendable {
 		/// Path: `/v1/retentionMessages/{id}`
 		public let path: String
 
@@ -17,7 +17,7 @@ extension APIEndpoint.V1.RetentionMessages {
 			Request(path: path, method: "GET", query: parameters?.asQuery, id: "retentionMessages_getInstance")
 		}
 
-		public struct GetParameters {
+		public struct GetParameters: Sendable {
 			public var fieldsRetentionMessages: [FieldsRetentionMessages]?
 			public var fieldsRetentionMessageVersions: [FieldsRetentionMessageVersions]?
 			public var fieldsSubscriptions: [FieldsSubscriptions]?
@@ -25,20 +25,20 @@ extension APIEndpoint.V1.RetentionMessages {
 			public var limitSubscriptions: Int?
 			public var limitVersions: Int?
 
-			public enum FieldsRetentionMessages: String, Codable, CaseIterable {
+			public enum FieldsRetentionMessages: String, Codable, CaseIterable, Sendable {
 				case referenceName
 				case versions
 				case subscriptions
 			}
 
-			public enum FieldsRetentionMessageVersions: String, Codable, CaseIterable {
+			public enum FieldsRetentionMessageVersions: String, Codable, CaseIterable, Sendable {
 				case state
 				case retentionMessage
 				case localizations
 				case placement
 			}
 
-			public enum FieldsSubscriptions: String, Codable, CaseIterable {
+			public enum FieldsSubscriptions: String, Codable, CaseIterable, Sendable {
 				case name
 				case productID = "productId"
 				case familySharable
@@ -67,7 +67,7 @@ extension APIEndpoint.V1.RetentionMessages {
 				case retentionMessageOffers
 			}
 
-			public enum Include: String, Codable, CaseIterable {
+			public enum Include: String, Codable, CaseIterable, Sendable {
 				case versions
 				case subscriptions
 			}

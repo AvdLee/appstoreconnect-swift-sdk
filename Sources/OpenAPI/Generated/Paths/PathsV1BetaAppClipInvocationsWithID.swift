@@ -9,7 +9,7 @@ extension APIEndpoint.V1.BetaAppClipInvocations {
 		WithID(path: "\(path)/\(id)")
 	}
 
-	public struct WithID {
+	public struct WithID: Sendable {
 		/// Path: `/v1/betaAppClipInvocations/{id}`
 		public let path: String
 
@@ -17,23 +17,23 @@ extension APIEndpoint.V1.BetaAppClipInvocations {
 			Request(path: path, method: "GET", query: parameters?.asQuery, id: "betaAppClipInvocations_getInstance")
 		}
 
-		public struct GetParameters {
+		public struct GetParameters: Sendable {
 			public var fieldsBetaAppClipInvocations: [FieldsBetaAppClipInvocations]?
 			public var fieldsBetaAppClipInvocationLocalizations: [FieldsBetaAppClipInvocationLocalizations]?
 			public var include: [Include]?
 			public var limitBetaAppClipInvocationLocalizations: Int?
 
-			public enum FieldsBetaAppClipInvocations: String, Codable, CaseIterable {
+			public enum FieldsBetaAppClipInvocations: String, Codable, CaseIterable, Sendable {
 				case url
 				case betaAppClipInvocationLocalizations
 			}
 
-			public enum FieldsBetaAppClipInvocationLocalizations: String, Codable, CaseIterable {
+			public enum FieldsBetaAppClipInvocationLocalizations: String, Codable, CaseIterable, Sendable {
 				case title
 				case locale
 			}
 
-			public enum Include: String, Codable, CaseIterable {
+			public enum Include: String, Codable, CaseIterable, Sendable {
 				case betaAppClipInvocationLocalizations
 			}
 

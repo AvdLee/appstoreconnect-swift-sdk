@@ -3,7 +3,7 @@
 
 import Foundation
 
-public struct SandboxTestersV2Response: Codable {
+public struct SandboxTestersV2Response: Codable, Sendable {
 	public var data: [SandboxTesterV2]
 	public var links: PagedDocumentLinks
 	public var meta: PagingInformation?

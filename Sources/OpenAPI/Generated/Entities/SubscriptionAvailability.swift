@@ -4,18 +4,18 @@
 import Foundation
 
 @available(*, deprecated, message: "Deprecated")
-public struct SubscriptionAvailability: Codable, Identifiable {
+public struct SubscriptionAvailability: Codable, Identifiable, Sendable {
 	public var type: `Type`
 	public var id: String
 	public var attributes: Attributes?
 	public var relationships: Relationships?
 	public var links: ResourceLinks?
 
-	public enum `Type`: String, Codable, CaseIterable {
+	public enum `Type`: String, Codable, CaseIterable, Sendable {
 		case subscriptionAvailabilities
 	}
 
-	public struct Attributes: Codable {
+	public struct Attributes: Codable, Sendable {
 		public var isAvailableInNewTerritories: Bool?
 
 		public init(isAvailableInNewTerritories: Bool? = nil) {
@@ -33,19 +33,19 @@ public struct SubscriptionAvailability: Codable, Identifiable {
 		}
 	}
 
-	public struct Relationships: Codable {
+	public struct Relationships: Codable, Sendable {
 		public var availableTerritories: AvailableTerritories?
 
-		public struct AvailableTerritories: Codable {
+		public struct AvailableTerritories: Codable, Sendable {
 			public var links: RelationshipLinks?
 			public var meta: PagingInformation?
 			public var data: [Datum]?
 
-			public struct Datum: Codable, Identifiable {
+			public struct Datum: Codable, Identifiable, Sendable {
 				public var type: `Type`
 				public var id: String
 
-				public enum `Type`: String, Codable, CaseIterable {
+				public enum `Type`: String, Codable, CaseIterable, Sendable {
 					case territories
 				}
 

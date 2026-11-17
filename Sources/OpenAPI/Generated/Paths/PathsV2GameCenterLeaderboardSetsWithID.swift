@@ -9,7 +9,7 @@ extension APIEndpoint.V2.GameCenterLeaderboardSets {
 		WithID(path: "\(path)/\(id)")
 	}
 
-	public struct WithID {
+	public struct WithID: Sendable {
 		/// Path: `/v2/gameCenterLeaderboardSets/{id}`
 		public let path: String
 
@@ -17,7 +17,7 @@ extension APIEndpoint.V2.GameCenterLeaderboardSets {
 			Request(path: path, method: "GET", query: parameters?.asQuery, id: "gameCenterLeaderboardSetsV2_getInstance")
 		}
 
-		public struct GetParameters {
+		public struct GetParameters: Sendable {
 			public var fieldsGameCenterLeaderboardSets: [FieldsGameCenterLeaderboardSets]?
 			public var fieldsGameCenterDetails: [FieldsGameCenterDetails]?
 			public var fieldsGameCenterGroups: [FieldsGameCenterGroups]?
@@ -27,7 +27,7 @@ extension APIEndpoint.V2.GameCenterLeaderboardSets {
 			public var limitGameCenterLeaderboards: Int?
 			public var limitVersions: Int?
 
-			public enum FieldsGameCenterLeaderboardSets: String, Codable, CaseIterable {
+			public enum FieldsGameCenterLeaderboardSets: String, Codable, CaseIterable, Sendable {
 				case referenceName
 				case vendorIdentifier
 				case gameCenterDetail
@@ -36,7 +36,7 @@ extension APIEndpoint.V2.GameCenterLeaderboardSets {
 				case versions
 			}
 
-			public enum FieldsGameCenterDetails: String, Codable, CaseIterable {
+			public enum FieldsGameCenterDetails: String, Codable, CaseIterable, Sendable {
 				case arcadeEnabled
 				case challengeEnabled
 				case app
@@ -63,7 +63,7 @@ extension APIEndpoint.V2.GameCenterLeaderboardSets {
 				case challengesMinimumPlatformVersions
 			}
 
-			public enum FieldsGameCenterGroups: String, Codable, CaseIterable {
+			public enum FieldsGameCenterGroups: String, Codable, CaseIterable, Sendable {
 				case referenceName
 				case gameCenterDetails
 				case gameCenterLeaderboards
@@ -76,7 +76,7 @@ extension APIEndpoint.V2.GameCenterLeaderboardSets {
 				case gameCenterChallenges
 			}
 
-			public enum FieldsGameCenterLeaderboards: String, Codable, CaseIterable {
+			public enum FieldsGameCenterLeaderboards: String, Codable, CaseIterable, Sendable {
 				case defaultFormatter
 				case referenceName
 				case vendorIdentifier
@@ -99,14 +99,14 @@ extension APIEndpoint.V2.GameCenterLeaderboardSets {
 				case versions
 			}
 
-			public enum FieldsGameCenterLeaderboardSetVersions: String, Codable, CaseIterable {
+			public enum FieldsGameCenterLeaderboardSetVersions: String, Codable, CaseIterable, Sendable {
 				case version
 				case state
 				case leaderboardSet
 				case localizations
 			}
 
-			public enum Include: String, Codable, CaseIterable {
+			public enum Include: String, Codable, CaseIterable, Sendable {
 				case gameCenterDetail
 				case gameCenterGroup
 				case gameCenterLeaderboards

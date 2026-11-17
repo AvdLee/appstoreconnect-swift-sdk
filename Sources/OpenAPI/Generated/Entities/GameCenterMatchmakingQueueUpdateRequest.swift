@@ -3,20 +3,20 @@
 
 import Foundation
 
-public struct GameCenterMatchmakingQueueUpdateRequest: Codable {
+public struct GameCenterMatchmakingQueueUpdateRequest: Codable, Sendable {
 	public var data: Data
 
-	public struct Data: Codable, Identifiable {
+	public struct Data: Codable, Identifiable, Sendable {
 		public var type: `Type`
 		public var id: String
 		public var attributes: Attributes?
 		public var relationships: Relationships?
 
-		public enum `Type`: String, Codable, CaseIterable {
+		public enum `Type`: String, Codable, CaseIterable, Sendable {
 			case gameCenterMatchmakingQueues
 		}
 
-		public struct Attributes: Codable {
+		public struct Attributes: Codable, Sendable {
 			public var classicMatchmakingBundleIDs: [String]?
 
 			public init(classicMatchmakingBundleIDs: [String]? = nil) {
@@ -34,18 +34,18 @@ public struct GameCenterMatchmakingQueueUpdateRequest: Codable {
 			}
 		}
 
-		public struct Relationships: Codable {
+		public struct Relationships: Codable, Sendable {
 			public var ruleSet: RuleSet?
 			public var experimentRuleSet: ExperimentRuleSet?
 
-			public struct RuleSet: Codable {
+			public struct RuleSet: Codable, Sendable {
 				public var data: Data?
 
-				public struct Data: Codable, Identifiable {
+				public struct Data: Codable, Identifiable, Sendable {
 					public var type: `Type`
 					public var id: String
 
-					public enum `Type`: String, Codable, CaseIterable {
+					public enum `Type`: String, Codable, CaseIterable, Sendable {
 						case gameCenterMatchmakingRuleSets
 					}
 
@@ -82,14 +82,14 @@ public struct GameCenterMatchmakingQueueUpdateRequest: Codable {
 				}
 			}
 
-			public struct ExperimentRuleSet: Codable {
+			public struct ExperimentRuleSet: Codable, Sendable {
 				public var data: Data?
 
-				public struct Data: Codable, Identifiable {
+				public struct Data: Codable, Identifiable, Sendable {
 					public var type: `Type`
 					public var id: String
 
-					public enum `Type`: String, Codable, CaseIterable {
+					public enum `Type`: String, Codable, CaseIterable, Sendable {
 						case gameCenterMatchmakingRuleSets
 					}
 

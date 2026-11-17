@@ -9,7 +9,7 @@ extension APIEndpoint.V1.PassTypeIDs.WithID.Relationships {
 		Certificates(path: path + "/certificates")
 	}
 
-	public struct Certificates {
+	public struct Certificates: Sendable {
 		/// Path: `/v1/passTypeIds/{id}/relationships/certificates`
 		public let path: String
 

@@ -9,7 +9,7 @@ extension APIEndpoint.V1 {
 		CiMacOsVersions(path: path + "/ciMacOsVersions")
 	}
 
-	public struct CiMacOsVersions {
+	public struct CiMacOsVersions: Sendable {
 		/// Path: `/v1/ciMacOsVersions`
 		public let path: String
 
@@ -17,27 +17,27 @@ extension APIEndpoint.V1 {
 			Request(path: path, method: "GET", query: parameters?.asQuery, id: "ciMacOsVersions_getCollection")
 		}
 
-		public struct GetParameters {
+		public struct GetParameters: Sendable {
 			public var fieldsCiMacOsVersions: [FieldsCiMacOsVersions]?
 			public var fieldsCiXcodeVersions: [FieldsCiXcodeVersions]?
 			public var limit: Int?
 			public var include: [Include]?
 			public var limitXcodeVersions: Int?
 
-			public enum FieldsCiMacOsVersions: String, Codable, CaseIterable {
+			public enum FieldsCiMacOsVersions: String, Codable, CaseIterable, Sendable {
 				case version
 				case name
 				case xcodeVersions
 			}
 
-			public enum FieldsCiXcodeVersions: String, Codable, CaseIterable {
+			public enum FieldsCiXcodeVersions: String, Codable, CaseIterable, Sendable {
 				case version
 				case name
 				case testDestinations
 				case macOsVersions
 			}
 
-			public enum Include: String, Codable, CaseIterable {
+			public enum Include: String, Codable, CaseIterable, Sendable {
 				case xcodeVersions
 			}
 

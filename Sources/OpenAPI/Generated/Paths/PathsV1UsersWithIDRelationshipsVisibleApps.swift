@@ -9,7 +9,7 @@ extension APIEndpoint.V1.Users.WithID.Relationships {
 		VisibleApps(path: path + "/visibleApps")
 	}
 
-	public struct VisibleApps {
+	public struct VisibleApps: Sendable {
 		/// Path: `/v1/users/{id}/relationships/visibleApps`
 		public let path: String
 

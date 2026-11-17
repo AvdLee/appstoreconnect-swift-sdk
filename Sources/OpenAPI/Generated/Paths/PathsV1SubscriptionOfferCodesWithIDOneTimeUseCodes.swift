@@ -9,7 +9,7 @@ extension APIEndpoint.V1.SubscriptionOfferCodes.WithID {
 		OneTimeUseCodes(path: path + "/oneTimeUseCodes")
 	}
 
-	public struct OneTimeUseCodes {
+	public struct OneTimeUseCodes: Sendable {
 		/// Path: `/v1/subscriptionOfferCodes/{id}/oneTimeUseCodes`
 		public let path: String
 
@@ -17,13 +17,13 @@ extension APIEndpoint.V1.SubscriptionOfferCodes.WithID {
 			Request(path: path, method: "GET", query: parameters?.asQuery, id: "subscriptionOfferCodes_oneTimeUseCodes_getToManyRelated")
 		}
 
-		public struct GetParameters {
+		public struct GetParameters: Sendable {
 			public var fieldsSubscriptionOfferCodeOneTimeUseCodes: [FieldsSubscriptionOfferCodeOneTimeUseCodes]?
 			public var fieldsSubscriptionOfferCodes: [FieldsSubscriptionOfferCodes]?
 			public var limit: Int?
 			public var include: [Include]?
 
-			public enum FieldsSubscriptionOfferCodeOneTimeUseCodes: String, Codable, CaseIterable {
+			public enum FieldsSubscriptionOfferCodeOneTimeUseCodes: String, Codable, CaseIterable, Sendable {
 				case numberOfCodes
 				case createdDate
 				case expirationDate
@@ -33,7 +33,7 @@ extension APIEndpoint.V1.SubscriptionOfferCodes.WithID {
 				case values
 			}
 
-			public enum FieldsSubscriptionOfferCodes: String, Codable, CaseIterable {
+			public enum FieldsSubscriptionOfferCodes: String, Codable, CaseIterable, Sendable {
 				case name
 				case customerEligibilities
 				case offerEligibility
@@ -52,7 +52,7 @@ extension APIEndpoint.V1.SubscriptionOfferCodes.WithID {
 				case prices
 			}
 
-			public enum Include: String, Codable, CaseIterable {
+			public enum Include: String, Codable, CaseIterable, Sendable {
 				case offerCode
 			}
 

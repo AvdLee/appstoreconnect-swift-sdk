@@ -9,7 +9,7 @@ extension APIEndpoint.V1.RetentionOffers.WithID {
 		Prices(path: path + "/prices")
 	}
 
-	public struct Prices {
+	public struct Prices: Sendable {
 		/// Path: `/v1/retentionOffers/{id}/prices`
 		public let path: String
 
@@ -17,7 +17,7 @@ extension APIEndpoint.V1.RetentionOffers.WithID {
 			Request(path: path, method: "GET", query: parameters?.asQuery, id: "retentionOffers_prices_getToManyRelated")
 		}
 
-		public struct GetParameters {
+		public struct GetParameters: Sendable {
 			public var filterTerritory: [String]?
 			public var fieldsRetentionOfferPrices: [FieldsRetentionOfferPrices]?
 			public var fieldsTerritories: [FieldsTerritories]?
@@ -25,16 +25,16 @@ extension APIEndpoint.V1.RetentionOffers.WithID {
 			public var limit: Int?
 			public var include: [Include]?
 
-			public enum FieldsRetentionOfferPrices: String, Codable, CaseIterable {
+			public enum FieldsRetentionOfferPrices: String, Codable, CaseIterable, Sendable {
 				case territory
 				case subscriptionPricePoint
 			}
 
-			public enum FieldsTerritories: String, Codable, CaseIterable {
+			public enum FieldsTerritories: String, Codable, CaseIterable, Sendable {
 				case currency
 			}
 
-			public enum FieldsSubscriptionPricePoints: String, Codable, CaseIterable {
+			public enum FieldsSubscriptionPricePoints: String, Codable, CaseIterable, Sendable {
 				case customerPrice
 				case proceeds
 				case proceedsYear2
@@ -43,7 +43,7 @@ extension APIEndpoint.V1.RetentionOffers.WithID {
 				case adjustedEqualizations
 			}
 
-			public enum Include: String, Codable, CaseIterable {
+			public enum Include: String, Codable, CaseIterable, Sendable {
 				case territory
 				case subscriptionPricePoint
 			}

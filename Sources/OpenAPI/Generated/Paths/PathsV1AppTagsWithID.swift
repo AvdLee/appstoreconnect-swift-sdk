@@ -9,7 +9,7 @@ extension APIEndpoint.V1.AppTags {
 		WithID(path: "\(path)/\(id)")
 	}
 
-	public struct WithID {
+	public struct WithID: Sendable {
 		/// Path: `/v1/appTags/{id}`
 		public let path: String
 

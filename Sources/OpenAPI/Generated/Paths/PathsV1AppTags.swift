@@ -9,7 +9,7 @@ extension APIEndpoint.V1 {
 		AppTags(path: path + "/appTags")
 	}
 
-	public struct AppTags {
+	public struct AppTags: Sendable {
 		/// Path: `/v1/appTags`
 		public let path: String
 	}

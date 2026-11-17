@@ -3,12 +3,12 @@
 
 import Foundation
 
-public struct EndAppAvailabilityPreOrder: Codable, Identifiable {
+public struct EndAppAvailabilityPreOrder: Codable, Identifiable, Sendable {
 	public var type: `Type`
 	public var id: String
 	public var links: ResourceLinks?
 
-	public enum `Type`: String, Codable, CaseIterable {
+	public enum `Type`: String, Codable, CaseIterable, Sendable {
 		case endAppAvailabilityPreOrders
 	}
 

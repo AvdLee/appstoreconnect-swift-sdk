@@ -9,7 +9,7 @@ extension APIEndpoint.V2.SandboxTesters {
 		WithID(path: "\(path)/\(id)")
 	}
 
-	public struct WithID {
+	public struct WithID: Sendable {
 		/// Path: `/v2/sandboxTesters/{id}`
 		public let path: String
 

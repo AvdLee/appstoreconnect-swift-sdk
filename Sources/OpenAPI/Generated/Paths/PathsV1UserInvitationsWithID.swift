@@ -9,7 +9,7 @@ extension APIEndpoint.V1.UserInvitations {
 		WithID(path: "\(path)/\(id)")
 	}
 
-	public struct WithID {
+	public struct WithID: Sendable {
 		/// Path: `/v1/userInvitations/{id}`
 		public let path: String
 
@@ -17,13 +17,13 @@ extension APIEndpoint.V1.UserInvitations {
 			Request(path: path, method: "GET", query: parameters?.asQuery, id: "userInvitations_getInstance")
 		}
 
-		public struct GetParameters {
+		public struct GetParameters: Sendable {
 			public var fieldsUserInvitations: [FieldsUserInvitations]?
 			public var fieldsApps: [FieldsApps]?
 			public var include: [Include]?
 			public var limitVisibleApps: Int?
 
-			public enum FieldsUserInvitations: String, Codable, CaseIterable {
+			public enum FieldsUserInvitations: String, Codable, CaseIterable, Sendable {
 				case email
 				case firstName
 				case lastName
@@ -34,7 +34,7 @@ extension APIEndpoint.V1.UserInvitations {
 				case visibleApps
 			}
 
-			public enum FieldsApps: String, Codable, CaseIterable {
+			public enum FieldsApps: String, Codable, CaseIterable, Sendable {
 				case accessibilityURL = "accessibilityUrl"
 				case name
 				case bundleID = "bundleId"
@@ -95,7 +95,7 @@ extension APIEndpoint.V1.UserInvitations {
 				case androidToIosAppMappingDetails
 			}
 
-			public enum Include: String, Codable, CaseIterable {
+			public enum Include: String, Codable, CaseIterable, Sendable {
 				case visibleApps
 			}
 

@@ -9,7 +9,7 @@ extension APIEndpoint.V1.GameCenterActivities.WithID {
 		Versions(path: path + "/versions")
 	}
 
-	public struct Versions {
+	public struct Versions: Sendable {
 		/// Path: `/v1/gameCenterActivities/{id}/versions`
 		public let path: String
 
@@ -17,7 +17,7 @@ extension APIEndpoint.V1.GameCenterActivities.WithID {
 			Request(path: path, method: "GET", query: parameters?.asQuery, id: "gameCenterActivities_versions_getToManyRelated")
 		}
 
-		public struct GetParameters {
+		public struct GetParameters: Sendable {
 			public var fieldsGameCenterActivityVersions: [FieldsGameCenterActivityVersions]?
 			public var fieldsGameCenterActivities: [FieldsGameCenterActivities]?
 			public var fieldsGameCenterActivityLocalizations: [FieldsGameCenterActivityLocalizations]?
@@ -28,7 +28,7 @@ extension APIEndpoint.V1.GameCenterActivities.WithID {
 			public var limitLocalizations: Int?
 			public var limitReleases: Int?
 
-			public enum FieldsGameCenterActivityVersions: String, Codable, CaseIterable {
+			public enum FieldsGameCenterActivityVersions: String, Codable, CaseIterable, Sendable {
 				case version
 				case state
 				case fallbackURL = "fallbackUrl"
@@ -38,7 +38,7 @@ extension APIEndpoint.V1.GameCenterActivities.WithID {
 				case releases
 			}
 
-			public enum FieldsGameCenterActivities: String, Codable, CaseIterable {
+			public enum FieldsGameCenterActivities: String, Codable, CaseIterable, Sendable {
 				case referenceName
 				case vendorIdentifier
 				case playStyle
@@ -56,7 +56,7 @@ extension APIEndpoint.V1.GameCenterActivities.WithID {
 				case versions
 			}
 
-			public enum FieldsGameCenterActivityLocalizations: String, Codable, CaseIterable {
+			public enum FieldsGameCenterActivityLocalizations: String, Codable, CaseIterable, Sendable {
 				case locale
 				case name
 				case description
@@ -64,7 +64,7 @@ extension APIEndpoint.V1.GameCenterActivities.WithID {
 				case image
 			}
 
-			public enum FieldsGameCenterActivityImages: String, Codable, CaseIterable {
+			public enum FieldsGameCenterActivityImages: String, Codable, CaseIterable, Sendable {
 				case fileSize
 				case fileName
 				case imageAsset
@@ -72,11 +72,11 @@ extension APIEndpoint.V1.GameCenterActivities.WithID {
 				case assetDeliveryState
 			}
 
-			public enum FieldsGameCenterActivityVersionReleases: String, Codable, CaseIterable {
+			public enum FieldsGameCenterActivityVersionReleases: String, Codable, CaseIterable, Sendable {
 				case version
 			}
 
-			public enum Include: String, Codable, CaseIterable {
+			public enum Include: String, Codable, CaseIterable, Sendable {
 				case activity
 				case localizations
 				case defaultImage

@@ -9,7 +9,7 @@ extension APIEndpoint.V1.Profiles.WithID {
 		BundleID(path: path + "/bundleId")
 	}
 
-	public struct BundleID {
+	public struct BundleID: Sendable {
 		/// Path: `/v1/profiles/{id}/bundleId`
 		public let path: String
 
@@ -23,7 +23,7 @@ extension APIEndpoint.V1.Profiles.WithID {
 			return encoder.items
 		}
 
-		public enum FieldsBundleIDs: String, Codable, CaseIterable {
+		public enum FieldsBundleIDs: String, Codable, CaseIterable, Sendable {
 			case name
 			case platform
 			case identifier

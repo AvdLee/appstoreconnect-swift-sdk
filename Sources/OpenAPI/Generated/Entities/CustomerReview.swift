@@ -3,18 +3,18 @@
 
 import Foundation
 
-public struct CustomerReview: Codable, Identifiable {
+public struct CustomerReview: Codable, Identifiable, Sendable {
 	public var type: `Type`
 	public var id: String
 	public var attributes: Attributes?
 	public var relationships: Relationships?
 	public var links: ResourceLinks?
 
-	public enum `Type`: String, Codable, CaseIterable {
+	public enum `Type`: String, Codable, CaseIterable, Sendable {
 		case customerReviews
 	}
 
-	public struct Attributes: Codable {
+	public struct Attributes: Codable, Sendable {
 		public var rating: Int?
 		public var title: String?
 		public var body: String?
@@ -52,19 +52,19 @@ public struct CustomerReview: Codable, Identifiable {
 		}
 	}
 
-	public struct Relationships: Codable {
+	public struct Relationships: Codable, Sendable {
 		public var response: Response?
 		public var reviewTerritory: ReviewTerritory?
 
-		public struct Response: Codable {
+		public struct Response: Codable, Sendable {
 			public var links: RelationshipLinks?
 			public var data: Data?
 
-			public struct Data: Codable, Identifiable {
+			public struct Data: Codable, Identifiable, Sendable {
 				public var type: `Type`
 				public var id: String
 
-				public enum `Type`: String, Codable, CaseIterable {
+				public enum `Type`: String, Codable, CaseIterable, Sendable {
 					case customerReviewResponses
 				}
 
@@ -104,14 +104,14 @@ public struct CustomerReview: Codable, Identifiable {
 			}
 		}
 
-		public struct ReviewTerritory: Codable {
+		public struct ReviewTerritory: Codable, Sendable {
 			public var data: Data?
 
-			public struct Data: Codable, Identifiable {
+			public struct Data: Codable, Identifiable, Sendable {
 				public var type: `Type`
 				public var id: String
 
-				public enum `Type`: String, Codable, CaseIterable {
+				public enum `Type`: String, Codable, CaseIterable, Sendable {
 					case territories
 				}
 

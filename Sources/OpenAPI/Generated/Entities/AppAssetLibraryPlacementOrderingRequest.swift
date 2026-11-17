@@ -3,28 +3,28 @@
 
 import Foundation
 
-public struct AppAssetLibraryPlacementOrderingRequest: Codable, Identifiable {
+public struct AppAssetLibraryPlacementOrderingRequest: Codable, Identifiable, Sendable {
 	public var type: `Type`
 	public var id: String
 	public var relationships: Relationships?
 	public var links: ResourceLinks?
 
-	public enum `Type`: String, Codable, CaseIterable {
+	public enum `Type`: String, Codable, CaseIterable, Sendable {
 		case appAssetLibraryPlacementOrderingRequests
 	}
 
-	public struct Relationships: Codable {
+	public struct Relationships: Codable, Sendable {
 		public var orderedPlacements: OrderedPlacements?
 
-		public struct OrderedPlacements: Codable {
+		public struct OrderedPlacements: Codable, Sendable {
 			public var meta: PagingInformation?
 			public var data: [Datum]?
 
-			public struct Datum: Codable, Identifiable {
+			public struct Datum: Codable, Identifiable, Sendable {
 				public var type: `Type`
 				public var id: String
 
-				public enum `Type`: String, Codable, CaseIterable {
+				public enum `Type`: String, Codable, CaseIterable, Sendable {
 					case appAssetLibraryPlacements
 				}
 

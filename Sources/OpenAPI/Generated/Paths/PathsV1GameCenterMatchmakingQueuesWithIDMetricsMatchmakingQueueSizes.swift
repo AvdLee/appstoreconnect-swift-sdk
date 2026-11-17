@@ -9,7 +9,7 @@ extension APIEndpoint.V1.GameCenterMatchmakingQueues.WithID.Metrics {
 		MatchmakingQueueSizes(path: path + "/matchmakingQueueSizes")
 	}
 
-	public struct MatchmakingQueueSizes {
+	public struct MatchmakingQueueSizes: Sendable {
 		/// Path: `/v1/gameCenterMatchmakingQueues/{id}/metrics/matchmakingQueueSizes`
 		public let path: String
 
@@ -17,18 +17,18 @@ extension APIEndpoint.V1.GameCenterMatchmakingQueues.WithID.Metrics {
 			Request(path: path, method: "GET", query: parameters.asQuery, id: "gameCenterMatchmakingQueues_matchmakingQueueSizes_getMetrics")
 		}
 
-		public struct GetParameters {
+		public struct GetParameters: Sendable {
 			public var granularity: Granularity
 			public var sort: [Sort]?
 			public var limit: Int?
 
-			public enum Granularity: String, Codable, CaseIterable {
+			public enum Granularity: String, Codable, CaseIterable, Sendable {
 				case p1d = "P1D"
 				case pt1h = "PT1H"
 				case pt15m = "PT15M"
 			}
 
-			public enum Sort: String, Codable, CaseIterable {
+			public enum Sort: String, Codable, CaseIterable, Sendable {
 				case count
 				case minuscount = "-count"
 				case averageNumberOfRequests

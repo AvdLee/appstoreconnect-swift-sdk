@@ -9,7 +9,7 @@ extension APIEndpoint.V1 {
 		AlternativeDistributionPackageVariants(path: path + "/alternativeDistributionPackageVariants")
 	}
 
-	public struct AlternativeDistributionPackageVariants {
+	public struct AlternativeDistributionPackageVariants: Sendable {
 		/// Path: `/v1/alternativeDistributionPackageVariants`
 		public let path: String
 	}

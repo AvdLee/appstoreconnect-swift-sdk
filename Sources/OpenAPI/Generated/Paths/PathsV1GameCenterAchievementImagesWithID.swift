@@ -9,7 +9,7 @@ extension APIEndpoint.V1.GameCenterAchievementImages {
 		WithID(path: "\(path)/\(id)")
 	}
 
-	public struct WithID {
+	public struct WithID: Sendable {
 		/// Path: `/v1/gameCenterAchievementImages/{id}`
 		public let path: String
 
@@ -18,12 +18,12 @@ extension APIEndpoint.V1.GameCenterAchievementImages {
 			Request(path: path, method: "GET", query: parameters?.asQuery, id: "gameCenterAchievementImages_getInstance")
 		}
 
-		public struct GetParameters {
+		public struct GetParameters: Sendable {
 			public var fieldsGameCenterAchievementImages: [FieldsGameCenterAchievementImages]?
 			public var fieldsGameCenterAchievementLocalizations: [FieldsGameCenterAchievementLocalizations]?
 			public var include: [Include]?
 
-			public enum FieldsGameCenterAchievementImages: String, Codable, CaseIterable {
+			public enum FieldsGameCenterAchievementImages: String, Codable, CaseIterable, Sendable {
 				case fileSize
 				case fileName
 				case imageAsset
@@ -32,7 +32,7 @@ extension APIEndpoint.V1.GameCenterAchievementImages {
 				case gameCenterAchievementLocalization
 			}
 
-			public enum FieldsGameCenterAchievementLocalizations: String, Codable, CaseIterable {
+			public enum FieldsGameCenterAchievementLocalizations: String, Codable, CaseIterable, Sendable {
 				case locale
 				case name
 				case beforeEarnedDescription
@@ -41,7 +41,7 @@ extension APIEndpoint.V1.GameCenterAchievementImages {
 				case gameCenterAchievementImage
 			}
 
-			public enum Include: String, Codable, CaseIterable {
+			public enum Include: String, Codable, CaseIterable, Sendable {
 				case gameCenterAchievementLocalization
 			}
 

@@ -9,7 +9,7 @@ extension APIEndpoint.V1.Builds.WithID {
 		AppStoreVersion(path: path + "/appStoreVersion")
 	}
 
-	public struct AppStoreVersion {
+	public struct AppStoreVersion: Sendable {
 		/// Path: `/v1/builds/{id}/appStoreVersion`
 		public let path: String
 
@@ -17,7 +17,7 @@ extension APIEndpoint.V1.Builds.WithID {
 			Request(path: path, method: "GET", query: parameters?.asQuery, id: "builds_appStoreVersion_getToOneRelated")
 		}
 
-		public struct GetParameters {
+		public struct GetParameters: Sendable {
 			public var fieldsAppStoreVersions: [FieldsAppStoreVersions]?
 			public var fieldsApps: [FieldsApps]?
 			public var fieldsAppStoreVersionLocalizations: [FieldsAppStoreVersionLocalizations]?
@@ -35,7 +35,7 @@ extension APIEndpoint.V1.Builds.WithID {
 			public var limitAppStoreVersionExperiments: Int?
 			public var limitAppStoreVersionExperimentsV2: Int?
 
-			public enum FieldsAppStoreVersions: String, Codable, CaseIterable {
+			public enum FieldsAppStoreVersions: String, Codable, CaseIterable, Sendable {
 				case platform
 				case versionString
 				case appStoreState
@@ -62,7 +62,7 @@ extension APIEndpoint.V1.Builds.WithID {
 				case alternativeDistributionPackage
 			}
 
-			public enum FieldsApps: String, Codable, CaseIterable {
+			public enum FieldsApps: String, Codable, CaseIterable, Sendable {
 				case accessibilityURL = "accessibilityUrl"
 				case name
 				case bundleID = "bundleId"
@@ -123,7 +123,7 @@ extension APIEndpoint.V1.Builds.WithID {
 				case androidToIosAppMappingDetails
 			}
 
-			public enum FieldsAppStoreVersionLocalizations: String, Codable, CaseIterable {
+			public enum FieldsAppStoreVersionLocalizations: String, Codable, CaseIterable, Sendable {
 				case description
 				case locale
 				case keywords
@@ -138,7 +138,7 @@ extension APIEndpoint.V1.Builds.WithID {
 				case placements
 			}
 
-			public enum FieldsBuilds: String, Codable, CaseIterable {
+			public enum FieldsBuilds: String, Codable, CaseIterable, Sendable {
 				case version
 				case uploadedDate
 				case expirationDate
@@ -167,20 +167,20 @@ extension APIEndpoint.V1.Builds.WithID {
 				case diagnosticSignatures
 			}
 
-			public enum FieldsAppStoreVersionPhasedReleases: String, Codable, CaseIterable {
+			public enum FieldsAppStoreVersionPhasedReleases: String, Codable, CaseIterable, Sendable {
 				case phasedReleaseState
 				case startDate
 				case totalPauseDuration
 				case currentDayNumber
 			}
 
-			public enum FieldsGameCenterAppVersions: String, Codable, CaseIterable {
+			public enum FieldsGameCenterAppVersions: String, Codable, CaseIterable, Sendable {
 				case enabled
 				case compatibilityVersions
 				case appStoreVersion
 			}
 
-			public enum FieldsRoutingAppCoverages: String, Codable, CaseIterable {
+			public enum FieldsRoutingAppCoverages: String, Codable, CaseIterable, Sendable {
 				case fileSize
 				case fileName
 				case sourceFileChecksum
@@ -189,7 +189,7 @@ extension APIEndpoint.V1.Builds.WithID {
 				case appStoreVersion
 			}
 
-			public enum FieldsAppStoreReviewDetails: String, Codable, CaseIterable {
+			public enum FieldsAppStoreReviewDetails: String, Codable, CaseIterable, Sendable {
 				case contactFirstName
 				case contactLastName
 				case contactPhone
@@ -202,11 +202,11 @@ extension APIEndpoint.V1.Builds.WithID {
 				case appStoreReviewAttachments
 			}
 
-			public enum FieldsAppStoreVersionSubmissions: String, Codable, CaseIterable {
+			public enum FieldsAppStoreVersionSubmissions: String, Codable, CaseIterable, Sendable {
 				case appStoreVersion
 			}
 
-			public enum FieldsAppClipDefaultExperiences: String, Codable, CaseIterable {
+			public enum FieldsAppClipDefaultExperiences: String, Codable, CaseIterable, Sendable {
 				case action
 				case appClip
 				case releaseWithAppStoreVersion
@@ -214,7 +214,7 @@ extension APIEndpoint.V1.Builds.WithID {
 				case appClipAppStoreReviewDetail
 			}
 
-			public enum FieldsAppStoreVersionExperiments: String, Codable, CaseIterable {
+			public enum FieldsAppStoreVersionExperiments: String, Codable, CaseIterable, Sendable {
 				case name
 				case trafficProportion
 				case state
@@ -229,12 +229,12 @@ extension APIEndpoint.V1.Builds.WithID {
 				case controlVersions
 			}
 
-			public enum FieldsAlternativeDistributionPackages: String, Codable, CaseIterable {
+			public enum FieldsAlternativeDistributionPackages: String, Codable, CaseIterable, Sendable {
 				case sourceFileChecksum
 				case versions
 			}
 
-			public enum Include: String, Codable, CaseIterable {
+			public enum Include: String, Codable, CaseIterable, Sendable {
 				case app
 				case appStoreVersionLocalizations
 				case build

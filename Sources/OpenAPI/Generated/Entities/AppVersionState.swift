@@ -3,7 +3,7 @@
 
 import Foundation
 
-public enum AppVersionState: String, Codable, CaseIterable {
+public enum AppVersionState: String, Codable, CaseIterable, Sendable {
 	case accepted = "ACCEPTED"
 	case developerRejected = "DEVELOPER_REJECTED"
 	case inReview = "IN_REVIEW"

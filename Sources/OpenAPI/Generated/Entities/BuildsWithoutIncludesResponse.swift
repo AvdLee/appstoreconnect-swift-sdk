@@ -3,7 +3,7 @@
 
 import Foundation
 
-public struct BuildsWithoutIncludesResponse: Codable {
+public struct BuildsWithoutIncludesResponse: Codable, Sendable {
 	public var data: [Build]
 	public var links: PagedDocumentLinks
 	public var meta: PagingInformation?

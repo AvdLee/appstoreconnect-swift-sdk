@@ -3,7 +3,7 @@
 
 import Foundation
 
-public struct AppAssetLibraryVideoResponse: Codable {
+public struct AppAssetLibraryVideoResponse: Codable, Sendable {
 	/// AppAssetLibraryVideo
 	public var data: AppAssetLibraryVideo
 	public var included: [AppAssetLibraryPlacement]?

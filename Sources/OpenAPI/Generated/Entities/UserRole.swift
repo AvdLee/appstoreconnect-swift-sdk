@@ -3,7 +3,7 @@
 
 import Foundation
 
-public enum UserRole: String, Codable, CaseIterable {
+public enum UserRole: String, Codable, CaseIterable, Sendable {
 	case admin = "ADMIN"
 	case finance = "FINANCE"
 	case accountHolder = "ACCOUNT_HOLDER"

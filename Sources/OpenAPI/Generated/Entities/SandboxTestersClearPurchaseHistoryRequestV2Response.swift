@@ -3,7 +3,7 @@
 
 import Foundation
 
-public struct SandboxTestersClearPurchaseHistoryRequestV2Response: Codable {
+public struct SandboxTestersClearPurchaseHistoryRequestV2Response: Codable, Sendable {
 	/// SandboxTestersClearPurchaseHistoryRequestV2
 	public var data: SandboxTestersClearPurchaseHistoryRequestV2
 	public var links: DocumentLinks

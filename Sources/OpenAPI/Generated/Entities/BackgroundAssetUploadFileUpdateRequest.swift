@@ -3,19 +3,19 @@
 
 import Foundation
 
-public struct BackgroundAssetUploadFileUpdateRequest: Codable {
+public struct BackgroundAssetUploadFileUpdateRequest: Codable, Sendable {
 	public var data: Data
 
-	public struct Data: Codable, Identifiable {
+	public struct Data: Codable, Identifiable, Sendable {
 		public var type: `Type`
 		public var id: String
 		public var attributes: Attributes?
 
-		public enum `Type`: String, Codable, CaseIterable {
+		public enum `Type`: String, Codable, CaseIterable, Sendable {
 			case backgroundAssetUploadFiles
 		}
 
-		public struct Attributes: Codable {
+		public struct Attributes: Codable, Sendable {
 			/// - warning: Deprecated.
 			public var sourceFileChecksum: String?
 			public var sourceFileChecksums: Checksums?

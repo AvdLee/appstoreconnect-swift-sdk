@@ -3,23 +3,23 @@
 
 import Foundation
 
-public struct AppCustomProductPageVersion: Codable, Identifiable {
+public struct AppCustomProductPageVersion: Codable, Identifiable, Sendable {
 	public var type: `Type`
 	public var id: String
 	public var attributes: Attributes?
 	public var relationships: Relationships?
 	public var links: ResourceLinks?
 
-	public enum `Type`: String, Codable, CaseIterable {
+	public enum `Type`: String, Codable, CaseIterable, Sendable {
 		case appCustomProductPageVersions
 	}
 
-	public struct Attributes: Codable {
+	public struct Attributes: Codable, Sendable {
 		public var version: String?
 		public var state: State?
 		public var deepLink: URL?
 
-		public enum State: String, Codable, CaseIterable {
+		public enum State: String, Codable, CaseIterable, Sendable {
 			case prepareForSubmission = "PREPARE_FOR_SUBMISSION"
 			case readyForReview = "READY_FOR_REVIEW"
 			case waitingForReview = "WAITING_FOR_REVIEW"
@@ -51,18 +51,18 @@ public struct AppCustomProductPageVersion: Codable, Identifiable {
 		}
 	}
 
-	public struct Relationships: Codable {
+	public struct Relationships: Codable, Sendable {
 		public var appCustomProductPage: AppCustomProductPage?
 		public var appCustomProductPageLocalizations: AppCustomProductPageLocalizations?
 
-		public struct AppCustomProductPage: Codable {
+		public struct AppCustomProductPage: Codable, Sendable {
 			public var data: Data?
 
-			public struct Data: Codable, Identifiable {
+			public struct Data: Codable, Identifiable, Sendable {
 				public var type: `Type`
 				public var id: String
 
-				public enum `Type`: String, Codable, CaseIterable {
+				public enum `Type`: String, Codable, CaseIterable, Sendable {
 					case appCustomProductPages
 				}
 
@@ -99,16 +99,16 @@ public struct AppCustomProductPageVersion: Codable, Identifiable {
 			}
 		}
 
-		public struct AppCustomProductPageLocalizations: Codable {
+		public struct AppCustomProductPageLocalizations: Codable, Sendable {
 			public var links: RelationshipLinks?
 			public var meta: PagingInformation?
 			public var data: [Datum]?
 
-			public struct Datum: Codable, Identifiable {
+			public struct Datum: Codable, Identifiable, Sendable {
 				public var type: `Type`
 				public var id: String
 
-				public enum `Type`: String, Codable, CaseIterable {
+				public enum `Type`: String, Codable, CaseIterable, Sendable {
 					case appCustomProductPageLocalizations
 				}
 

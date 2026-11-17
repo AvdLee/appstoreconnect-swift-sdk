@@ -9,7 +9,7 @@ extension APIEndpoint.V1.Builds.WithID.Relationships {
 		BetaAppReviewSubmission(path: path + "/betaAppReviewSubmission")
 	}
 
-	public struct BetaAppReviewSubmission {
+	public struct BetaAppReviewSubmission: Sendable {
 		/// Path: `/v1/builds/{id}/relationships/betaAppReviewSubmission`
 		public let path: String
 

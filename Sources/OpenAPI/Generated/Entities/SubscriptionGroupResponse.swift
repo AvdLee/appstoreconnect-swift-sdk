@@ -3,13 +3,13 @@
 
 import Foundation
 
-public struct SubscriptionGroupResponse: Codable {
+public struct SubscriptionGroupResponse: Codable, Sendable {
 	/// SubscriptionGroup
 	public var data: SubscriptionGroup
 	public var included: [IncludedItem]?
 	public var links: DocumentLinks
 
-	public enum IncludedItem: Codable {
+	public enum IncludedItem: Codable, Sendable {
 		case subscriptionGroupLocalization(SubscriptionGroupLocalization)
 		case subscriptionGroupVersion(SubscriptionGroupVersion)
 		case subscription(Subscription)

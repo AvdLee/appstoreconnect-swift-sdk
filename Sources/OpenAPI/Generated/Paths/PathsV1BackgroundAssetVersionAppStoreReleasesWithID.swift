@@ -9,7 +9,7 @@ extension APIEndpoint.V1.BackgroundAssetVersionAppStoreReleases {
 		WithID(path: "\(path)/\(id)")
 	}
 
-	public struct WithID {
+	public struct WithID: Sendable {
 		/// Path: `/v1/backgroundAssetVersionAppStoreReleases/{id}`
 		public let path: String
 
@@ -17,17 +17,17 @@ extension APIEndpoint.V1.BackgroundAssetVersionAppStoreReleases {
 			Request(path: path, method: "GET", query: parameters?.asQuery, id: "backgroundAssetVersionAppStoreReleases_getInstance")
 		}
 
-		public struct GetParameters {
+		public struct GetParameters: Sendable {
 			public var fieldsBackgroundAssetVersionAppStoreReleases: [FieldsBackgroundAssetVersionAppStoreReleases]?
 			public var fieldsBackgroundAssetVersions: [FieldsBackgroundAssetVersions]?
 			public var include: [Include]?
 
-			public enum FieldsBackgroundAssetVersionAppStoreReleases: String, Codable, CaseIterable {
+			public enum FieldsBackgroundAssetVersionAppStoreReleases: String, Codable, CaseIterable, Sendable {
 				case state
 				case backgroundAssetVersion
 			}
 
-			public enum FieldsBackgroundAssetVersions: String, Codable, CaseIterable {
+			public enum FieldsBackgroundAssetVersions: String, Codable, CaseIterable, Sendable {
 				case createdDate
 				case platforms
 				case state
@@ -43,7 +43,7 @@ extension APIEndpoint.V1.BackgroundAssetVersionAppStoreReleases {
 				case backgroundAssetUploadFiles
 			}
 
-			public enum Include: String, Codable, CaseIterable {
+			public enum Include: String, Codable, CaseIterable, Sendable {
 				case backgroundAssetVersion
 			}
 

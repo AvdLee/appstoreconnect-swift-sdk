@@ -3,21 +3,21 @@
 
 import Foundation
 
-public struct GameCenterMatchmakingQueueSizesV1MetricResponse: Codable {
+public struct GameCenterMatchmakingQueueSizesV1MetricResponse: Codable, Sendable {
 	public var data: [Datum]
 	public var links: PagedDocumentLinks
 	public var meta: PagingInformation?
 
-	public struct Datum: Codable {
+	public struct Datum: Codable, Sendable {
 		public var dataPoints: [DataPoint]?
 		public var granularity: Granularity?
 
-		public struct DataPoint: Codable {
+		public struct DataPoint: Codable, Sendable {
 			public var start: Date?
 			public var end: Date?
 			public var values: Values?
 
-			public struct Values: Codable {
+			public struct Values: Codable, Sendable {
 				public var count: Int?
 				public var averageNumberOfRequests: Double?
 				public var p50NumberOfRequests: Double?
@@ -68,7 +68,7 @@ public struct GameCenterMatchmakingQueueSizesV1MetricResponse: Codable {
 			}
 		}
 
-		public enum Granularity: String, Codable, CaseIterable {
+		public enum Granularity: String, Codable, CaseIterable, Sendable {
 			case p1d = "P1D"
 			case pt1h = "PT1H"
 			case pt15m = "PT15M"

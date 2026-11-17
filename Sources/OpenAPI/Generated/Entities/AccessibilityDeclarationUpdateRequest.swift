@@ -3,19 +3,19 @@
 
 import Foundation
 
-public struct AccessibilityDeclarationUpdateRequest: Codable {
+public struct AccessibilityDeclarationUpdateRequest: Codable, Sendable {
 	public var data: Data
 
-	public struct Data: Codable, Identifiable {
+	public struct Data: Codable, Identifiable, Sendable {
 		public var type: `Type`
 		public var id: String
 		public var attributes: Attributes?
 
-		public enum `Type`: String, Codable, CaseIterable {
+		public enum `Type`: String, Codable, CaseIterable, Sendable {
 			case accessibilityDeclarations
 		}
 
-		public struct Attributes: Codable {
+		public struct Attributes: Codable, Sendable {
 			public var isPublish: Bool?
 			public var isSupportsAudioDescriptions: Bool?
 			public var isSupportsCaptions: Bool?

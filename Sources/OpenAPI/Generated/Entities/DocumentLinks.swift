@@ -3,7 +3,7 @@
 
 import Foundation
 
-public struct DocumentLinks: Codable {
+public struct DocumentLinks: Codable, Sendable {
 	public var this: String
 
 	public init(this: String) {

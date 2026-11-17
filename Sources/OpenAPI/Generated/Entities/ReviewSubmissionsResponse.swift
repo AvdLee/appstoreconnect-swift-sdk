@@ -3,13 +3,13 @@
 
 import Foundation
 
-public struct ReviewSubmissionsResponse: Codable {
+public struct ReviewSubmissionsResponse: Codable, Sendable {
 	public var data: [ReviewSubmission]
 	public var included: [IncludedItem]?
 	public var links: PagedDocumentLinks
 	public var meta: PagingInformation?
 
-	public enum IncludedItem: Codable {
+	public enum IncludedItem: Codable, Sendable {
 		case actor(Actor)
 		case appStoreVersion(AppStoreVersion)
 		case app(App)

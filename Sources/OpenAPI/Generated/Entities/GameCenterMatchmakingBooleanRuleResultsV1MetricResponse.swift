@@ -3,22 +3,22 @@
 
 import Foundation
 
-public struct GameCenterMatchmakingBooleanRuleResultsV1MetricResponse: Codable {
+public struct GameCenterMatchmakingBooleanRuleResultsV1MetricResponse: Codable, Sendable {
 	public var data: [Datum]
 	public var links: PagedDocumentLinks
 	public var meta: PagingInformation?
 
-	public struct Datum: Codable {
+	public struct Datum: Codable, Sendable {
 		public var dataPoints: [DataPoint]?
 		public var dimensions: Dimensions?
 		public var granularity: Granularity?
 
-		public struct DataPoint: Codable {
+		public struct DataPoint: Codable, Sendable {
 			public var start: Date?
 			public var end: Date?
 			public var values: Values?
 
-			public struct Values: Codable {
+			public struct Values: Codable, Sendable {
 				public var count: Int?
 
 				public init(count: Int? = nil) {
@@ -57,15 +57,15 @@ public struct GameCenterMatchmakingBooleanRuleResultsV1MetricResponse: Codable {
 			}
 		}
 
-		public struct Dimensions: Codable {
+		public struct Dimensions: Codable, Sendable {
 			public var result: Result?
 			public var gameCenterMatchmakingQueue: GameCenterMatchmakingQueue?
 
-			public struct Result: Codable {
+			public struct Result: Codable, Sendable {
 				public var links: Links?
 				public var data: String?
 
-				public struct Links: Codable {
+				public struct Links: Codable, Sendable {
 					public var groupBy: String?
 
 					public init(groupBy: String? = nil) {
@@ -101,11 +101,11 @@ public struct GameCenterMatchmakingBooleanRuleResultsV1MetricResponse: Codable {
 				}
 			}
 
-			public struct GameCenterMatchmakingQueue: Codable {
+			public struct GameCenterMatchmakingQueue: Codable, Sendable {
 				public var links: Links?
 				public var data: String?
 
-				public struct Links: Codable {
+				public struct Links: Codable, Sendable {
 					public var groupBy: String?
 					public var related: String?
 
@@ -163,7 +163,7 @@ public struct GameCenterMatchmakingBooleanRuleResultsV1MetricResponse: Codable {
 			}
 		}
 
-		public enum Granularity: String, Codable, CaseIterable {
+		public enum Granularity: String, Codable, CaseIterable, Sendable {
 			case p1d = "P1D"
 			case pt1h = "PT1H"
 			case pt15m = "PT15M"

@@ -3,23 +3,23 @@
 
 import Foundation
 
-public struct CustomerReviewResponseV1: Codable, Identifiable {
+public struct CustomerReviewResponseV1: Codable, Identifiable, Sendable {
 	public var type: `Type`
 	public var id: String
 	public var attributes: Attributes?
 	public var relationships: Relationships?
 	public var links: ResourceLinks?
 
-	public enum `Type`: String, Codable, CaseIterable {
+	public enum `Type`: String, Codable, CaseIterable, Sendable {
 		case customerReviewResponses
 	}
 
-	public struct Attributes: Codable {
+	public struct Attributes: Codable, Sendable {
 		public var responseBody: String?
 		public var lastModifiedDate: Date?
 		public var state: State?
 
-		public enum State: String, Codable, CaseIterable {
+		public enum State: String, Codable, CaseIterable, Sendable {
 			case published = "PUBLISHED"
 			case pendingPublish = "PENDING_PUBLISH"
 		}
@@ -45,17 +45,17 @@ public struct CustomerReviewResponseV1: Codable, Identifiable {
 		}
 	}
 
-	public struct Relationships: Codable {
+	public struct Relationships: Codable, Sendable {
 		public var review: Review?
 
-		public struct Review: Codable {
+		public struct Review: Codable, Sendable {
 			public var data: Data?
 
-			public struct Data: Codable, Identifiable {
+			public struct Data: Codable, Identifiable, Sendable {
 				public var type: `Type`
 				public var id: String
 
-				public enum `Type`: String, Codable, CaseIterable {
+				public enum `Type`: String, Codable, CaseIterable, Sendable {
 					case customerReviews
 				}
 

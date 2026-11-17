@@ -4,17 +4,17 @@
 import Foundation
 
 @available(*, deprecated, message: "Deprecated")
-public struct MarketplaceWebhook: Codable, Identifiable {
+public struct MarketplaceWebhook: Codable, Identifiable, Sendable {
 	public var type: `Type`
 	public var id: String
 	public var attributes: Attributes?
 	public var links: ResourceLinks?
 
-	public enum `Type`: String, Codable, CaseIterable {
+	public enum `Type`: String, Codable, CaseIterable, Sendable {
 		case marketplaceWebhooks
 	}
 
-	public struct Attributes: Codable {
+	public struct Attributes: Codable, Sendable {
 		public var endpointURL: URL?
 
 		public init(endpointURL: URL? = nil) {

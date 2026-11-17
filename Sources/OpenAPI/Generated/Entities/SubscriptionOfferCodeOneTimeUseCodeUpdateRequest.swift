@@ -3,19 +3,19 @@
 
 import Foundation
 
-public struct SubscriptionOfferCodeOneTimeUseCodeUpdateRequest: Codable {
+public struct SubscriptionOfferCodeOneTimeUseCodeUpdateRequest: Codable, Sendable {
 	public var data: Data
 
-	public struct Data: Codable, Identifiable {
+	public struct Data: Codable, Identifiable, Sendable {
 		public var type: `Type`
 		public var id: String
 		public var attributes: Attributes?
 
-		public enum `Type`: String, Codable, CaseIterable {
+		public enum `Type`: String, Codable, CaseIterable, Sendable {
 			case subscriptionOfferCodeOneTimeUseCodes
 		}
 
-		public struct Attributes: Codable {
+		public struct Attributes: Codable, Sendable {
 			public var isActive: Bool?
 
 			public init(isActive: Bool? = nil) {

@@ -4,18 +4,18 @@
 import Foundation
 
 @available(*, deprecated, message: "Deprecated")
-public struct GameCenterAchievementLocalization: Codable, Identifiable {
+public struct GameCenterAchievementLocalization: Codable, Identifiable, Sendable {
 	public var type: `Type`
 	public var id: String
 	public var attributes: Attributes?
 	public var relationships: Relationships?
 	public var links: ResourceLinks?
 
-	public enum `Type`: String, Codable, CaseIterable {
+	public enum `Type`: String, Codable, CaseIterable, Sendable {
 		case gameCenterAchievementLocalizations
 	}
 
-	public struct Attributes: Codable {
+	public struct Attributes: Codable, Sendable {
 		public var locale: String?
 		public var name: String?
 		public var beforeEarnedDescription: String?
@@ -45,19 +45,19 @@ public struct GameCenterAchievementLocalization: Codable, Identifiable {
 		}
 	}
 
-	public struct Relationships: Codable {
+	public struct Relationships: Codable, Sendable {
 		public var gameCenterAchievement: GameCenterAchievement?
 		public var gameCenterAchievementImage: GameCenterAchievementImage?
 
-		public struct GameCenterAchievement: Codable {
+		public struct GameCenterAchievement: Codable, Sendable {
 			public var links: RelationshipLinks?
 			public var data: Data?
 
-			public struct Data: Codable, Identifiable {
+			public struct Data: Codable, Identifiable, Sendable {
 				public var type: `Type`
 				public var id: String
 
-				public enum `Type`: String, Codable, CaseIterable {
+				public enum `Type`: String, Codable, CaseIterable, Sendable {
 					case gameCenterAchievements
 				}
 
@@ -97,15 +97,15 @@ public struct GameCenterAchievementLocalization: Codable, Identifiable {
 			}
 		}
 
-		public struct GameCenterAchievementImage: Codable {
+		public struct GameCenterAchievementImage: Codable, Sendable {
 			public var links: RelationshipLinks?
 			public var data: Data?
 
-			public struct Data: Codable, Identifiable {
+			public struct Data: Codable, Identifiable, Sendable {
 				public var type: `Type`
 				public var id: String
 
-				public enum `Type`: String, Codable, CaseIterable {
+				public enum `Type`: String, Codable, CaseIterable, Sendable {
 					case gameCenterAchievementImages
 				}
 

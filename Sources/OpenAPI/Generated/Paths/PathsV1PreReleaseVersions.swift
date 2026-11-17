@@ -9,7 +9,7 @@ extension APIEndpoint.V1 {
 		PreReleaseVersions(path: path + "/preReleaseVersions")
 	}
 
-	public struct PreReleaseVersions {
+	public struct PreReleaseVersions: Sendable {
 		/// Path: `/v1/preReleaseVersions`
 		public let path: String
 
@@ -17,7 +17,7 @@ extension APIEndpoint.V1 {
 			Request(path: path, method: "GET", query: parameters?.asQuery, id: "preReleaseVersions_getCollection")
 		}
 
-		public struct GetParameters {
+		public struct GetParameters: Sendable {
 			public var filterBuildsBuildAudienceType: [FilterBuildsBuildAudienceType]?
 			public var filterBuildsExpired: [String]?
 			public var filterBuildsProcessingState: [FilterBuildsProcessingState]?
@@ -34,38 +34,38 @@ extension APIEndpoint.V1 {
 			public var include: [Include]?
 			public var limitBuilds: Int?
 
-			public enum FilterBuildsBuildAudienceType: String, Codable, CaseIterable {
+			public enum FilterBuildsBuildAudienceType: String, Codable, CaseIterable, Sendable {
 				case internalOnly = "INTERNAL_ONLY"
 				case appStoreEligible = "APP_STORE_ELIGIBLE"
 			}
 
-			public enum FilterBuildsProcessingState: String, Codable, CaseIterable {
+			public enum FilterBuildsProcessingState: String, Codable, CaseIterable, Sendable {
 				case processing = "PROCESSING"
 				case failed = "FAILED"
 				case invalid = "INVALID"
 				case valid = "VALID"
 			}
 
-			public enum FilterPlatform: String, Codable, CaseIterable {
+			public enum FilterPlatform: String, Codable, CaseIterable, Sendable {
 				case ios = "IOS"
 				case macOs = "MAC_OS"
 				case tvOs = "TV_OS"
 				case visionOs = "VISION_OS"
 			}
 
-			public enum Sort: String, Codable, CaseIterable {
+			public enum Sort: String, Codable, CaseIterable, Sendable {
 				case version
 				case minusversion = "-version"
 			}
 
-			public enum FieldsPreReleaseVersions: String, Codable, CaseIterable {
+			public enum FieldsPreReleaseVersions: String, Codable, CaseIterable, Sendable {
 				case version
 				case platform
 				case builds
 				case app
 			}
 
-			public enum FieldsBuilds: String, Codable, CaseIterable {
+			public enum FieldsBuilds: String, Codable, CaseIterable, Sendable {
 				case version
 				case uploadedDate
 				case expirationDate
@@ -94,7 +94,7 @@ extension APIEndpoint.V1 {
 				case diagnosticSignatures
 			}
 
-			public enum FieldsApps: String, Codable, CaseIterable {
+			public enum FieldsApps: String, Codable, CaseIterable, Sendable {
 				case accessibilityURL = "accessibilityUrl"
 				case name
 				case bundleID = "bundleId"
@@ -155,7 +155,7 @@ extension APIEndpoint.V1 {
 				case androidToIosAppMappingDetails
 			}
 
-			public enum Include: String, Codable, CaseIterable {
+			public enum Include: String, Codable, CaseIterable, Sendable {
 				case builds
 				case app
 			}

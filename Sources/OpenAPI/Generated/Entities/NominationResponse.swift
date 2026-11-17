@@ -3,13 +3,13 @@
 
 import Foundation
 
-public struct NominationResponse: Codable {
+public struct NominationResponse: Codable, Sendable {
 	/// Nomination
 	public var data: Nomination
 	public var included: [IncludedItem]?
 	public var links: DocumentLinks
 
-	public enum IncludedItem: Codable {
+	public enum IncludedItem: Codable, Sendable {
 		case actor(Actor)
 		case appEvent(AppEvent)
 		case app(App)

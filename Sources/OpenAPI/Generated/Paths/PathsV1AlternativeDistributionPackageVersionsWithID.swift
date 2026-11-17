@@ -9,7 +9,7 @@ extension APIEndpoint.V1.AlternativeDistributionPackageVersions {
 		WithID(path: "\(path)/\(id)")
 	}
 
-	public struct WithID {
+	public struct WithID: Sendable {
 		/// Path: `/v1/alternativeDistributionPackageVersions/{id}`
 		public let path: String
 
@@ -17,7 +17,7 @@ extension APIEndpoint.V1.AlternativeDistributionPackageVersions {
 			Request(path: path, method: "GET", query: parameters?.asQuery, id: "alternativeDistributionPackageVersions_getInstance")
 		}
 
-		public struct GetParameters {
+		public struct GetParameters: Sendable {
 			public var fieldsAlternativeDistributionPackageVersions: [FieldsAlternativeDistributionPackageVersions]?
 			public var fieldsAlternativeDistributionPackageVariants: [FieldsAlternativeDistributionPackageVariants]?
 			public var fieldsAlternativeDistributionPackageDeltas: [FieldsAlternativeDistributionPackageDeltas]?
@@ -26,7 +26,7 @@ extension APIEndpoint.V1.AlternativeDistributionPackageVersions {
 			public var limitDeltas: Int?
 			public var limitVariants: Int?
 
-			public enum FieldsAlternativeDistributionPackageVersions: String, Codable, CaseIterable {
+			public enum FieldsAlternativeDistributionPackageVersions: String, Codable, CaseIterable, Sendable {
 				case url
 				case urlExpirationDate
 				case version
@@ -37,26 +37,26 @@ extension APIEndpoint.V1.AlternativeDistributionPackageVersions {
 				case alternativeDistributionPackage
 			}
 
-			public enum FieldsAlternativeDistributionPackageVariants: String, Codable, CaseIterable {
+			public enum FieldsAlternativeDistributionPackageVariants: String, Codable, CaseIterable, Sendable {
 				case url
 				case urlExpirationDate
 				case alternativeDistributionKeyBlob
 				case fileChecksum
 			}
 
-			public enum FieldsAlternativeDistributionPackageDeltas: String, Codable, CaseIterable {
+			public enum FieldsAlternativeDistributionPackageDeltas: String, Codable, CaseIterable, Sendable {
 				case url
 				case urlExpirationDate
 				case alternativeDistributionKeyBlob
 				case fileChecksum
 			}
 
-			public enum FieldsAlternativeDistributionPackages: String, Codable, CaseIterable {
+			public enum FieldsAlternativeDistributionPackages: String, Codable, CaseIterable, Sendable {
 				case sourceFileChecksum
 				case versions
 			}
 
-			public enum Include: String, Codable, CaseIterable {
+			public enum Include: String, Codable, CaseIterable, Sendable {
 				case variants
 				case deltas
 				case alternativeDistributionPackage

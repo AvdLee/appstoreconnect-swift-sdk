@@ -3,7 +3,7 @@
 
 import Foundation
 
-public struct GameCenterDetailPlayersResponse: Codable {
+public struct GameCenterDetailPlayersResponse: Codable, Sendable {
 	public var data: [GameCenterDetailPlayer]
 	public var links: PagedDocumentLinks
 	public var meta: PagingInformation?

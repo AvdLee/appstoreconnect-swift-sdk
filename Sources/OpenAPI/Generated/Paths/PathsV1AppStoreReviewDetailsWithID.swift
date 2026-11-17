@@ -9,7 +9,7 @@ extension APIEndpoint.V1.AppStoreReviewDetails {
 		WithID(path: "\(path)/\(id)")
 	}
 
-	public struct WithID {
+	public struct WithID: Sendable {
 		/// Path: `/v1/appStoreReviewDetails/{id}`
 		public let path: String
 
@@ -17,14 +17,14 @@ extension APIEndpoint.V1.AppStoreReviewDetails {
 			Request(path: path, method: "GET", query: parameters?.asQuery, id: "appStoreReviewDetails_getInstance")
 		}
 
-		public struct GetParameters {
+		public struct GetParameters: Sendable {
 			public var fieldsAppStoreReviewDetails: [FieldsAppStoreReviewDetails]?
 			public var fieldsAppStoreVersions: [FieldsAppStoreVersions]?
 			public var fieldsAppStoreReviewAttachments: [FieldsAppStoreReviewAttachments]?
 			public var include: [Include]?
 			public var limitAppStoreReviewAttachments: Int?
 
-			public enum FieldsAppStoreReviewDetails: String, Codable, CaseIterable {
+			public enum FieldsAppStoreReviewDetails: String, Codable, CaseIterable, Sendable {
 				case contactFirstName
 				case contactLastName
 				case contactPhone
@@ -37,7 +37,7 @@ extension APIEndpoint.V1.AppStoreReviewDetails {
 				case appStoreReviewAttachments
 			}
 
-			public enum FieldsAppStoreVersions: String, Codable, CaseIterable {
+			public enum FieldsAppStoreVersions: String, Codable, CaseIterable, Sendable {
 				case platform
 				case versionString
 				case appStoreState
@@ -64,7 +64,7 @@ extension APIEndpoint.V1.AppStoreReviewDetails {
 				case alternativeDistributionPackage
 			}
 
-			public enum FieldsAppStoreReviewAttachments: String, Codable, CaseIterable {
+			public enum FieldsAppStoreReviewAttachments: String, Codable, CaseIterable, Sendable {
 				case fileSize
 				case fileName
 				case sourceFileChecksum
@@ -73,7 +73,7 @@ extension APIEndpoint.V1.AppStoreReviewDetails {
 				case appStoreReviewDetail
 			}
 
-			public enum Include: String, Codable, CaseIterable {
+			public enum Include: String, Codable, CaseIterable, Sendable {
 				case appStoreVersion
 				case appStoreReviewAttachments
 			}

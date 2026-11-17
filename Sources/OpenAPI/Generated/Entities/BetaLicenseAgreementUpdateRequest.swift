@@ -3,19 +3,19 @@
 
 import Foundation
 
-public struct BetaLicenseAgreementUpdateRequest: Codable {
+public struct BetaLicenseAgreementUpdateRequest: Codable, Sendable {
 	public var data: Data
 
-	public struct Data: Codable, Identifiable {
+	public struct Data: Codable, Identifiable, Sendable {
 		public var type: `Type`
 		public var id: String
 		public var attributes: Attributes?
 
-		public enum `Type`: String, Codable, CaseIterable {
+		public enum `Type`: String, Codable, CaseIterable, Sendable {
 			case betaLicenseAgreements
 		}
 
-		public struct Attributes: Codable {
+		public struct Attributes: Codable, Sendable {
 			public var agreementText: String?
 
 			public init(agreementText: String? = nil) {

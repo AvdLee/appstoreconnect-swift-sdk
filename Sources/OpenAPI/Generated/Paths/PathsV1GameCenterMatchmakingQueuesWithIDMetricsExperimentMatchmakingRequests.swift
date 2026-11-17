@@ -9,7 +9,7 @@ extension APIEndpoint.V1.GameCenterMatchmakingQueues.WithID.Metrics {
 		ExperimentMatchmakingRequests(path: path + "/experimentMatchmakingRequests")
 	}
 
-	public struct ExperimentMatchmakingRequests {
+	public struct ExperimentMatchmakingRequests: Sendable {
 		/// Path: `/v1/gameCenterMatchmakingQueues/{id}/metrics/experimentMatchmakingRequests`
 		public let path: String
 
@@ -17,7 +17,7 @@ extension APIEndpoint.V1.GameCenterMatchmakingQueues.WithID.Metrics {
 			Request(path: path, method: "GET", query: parameters.asQuery, id: "gameCenterMatchmakingQueues_experimentMatchmakingRequests_getMetrics")
 		}
 
-		public struct GetParameters {
+		public struct GetParameters: Sendable {
 			public var granularity: Granularity
 			public var groupBy: [GroupBy]?
 			public var filterResult: FilterResult?
@@ -25,24 +25,24 @@ extension APIEndpoint.V1.GameCenterMatchmakingQueues.WithID.Metrics {
 			public var sort: [Sort]?
 			public var limit: Int?
 
-			public enum Granularity: String, Codable, CaseIterable {
+			public enum Granularity: String, Codable, CaseIterable, Sendable {
 				case p1d = "P1D"
 				case pt1h = "PT1H"
 				case pt15m = "PT15M"
 			}
 
-			public enum GroupBy: String, Codable, CaseIterable {
+			public enum GroupBy: String, Codable, CaseIterable, Sendable {
 				case result
 				case gameCenterDetail
 			}
 
-			public enum FilterResult: String, Codable, CaseIterable {
+			public enum FilterResult: String, Codable, CaseIterable, Sendable {
 				case matched = "MATCHED"
 				case canceled = "CANCELED"
 				case expired = "EXPIRED"
 			}
 
-			public enum Sort: String, Codable, CaseIterable {
+			public enum Sort: String, Codable, CaseIterable, Sendable {
 				case count
 				case minuscount = "-count"
 				case averageSecondsInQueue

@@ -3,19 +3,19 @@
 
 import Foundation
 
-public struct AppStoreVersionCreateRequest: Codable {
+public struct AppStoreVersionCreateRequest: Codable, Sendable {
 	public var data: Data
 
-	public struct Data: Codable {
+	public struct Data: Codable, Sendable {
 		public var type: `Type`
 		public var attributes: Attributes
 		public var relationships: Relationships
 
-		public enum `Type`: String, Codable, CaseIterable {
+		public enum `Type`: String, Codable, CaseIterable, Sendable {
 			case appStoreVersions
 		}
 
-		public struct Attributes: Codable {
+		public struct Attributes: Codable, Sendable {
 			public var platform: Platform
 			public var versionString: String
 			public var copyright: String?
@@ -25,12 +25,12 @@ public struct AppStoreVersionCreateRequest: Codable {
 			/// - warning: Deprecated.
 			public var usesIdfa: Bool?
 
-			public enum ReviewType: String, Codable, CaseIterable {
+			public enum ReviewType: String, Codable, CaseIterable, Sendable {
 				case appStore = "APP_STORE"
 				case notarization = "NOTARIZATION"
 			}
 
-			public enum ReleaseType: String, Codable, CaseIterable {
+			public enum ReleaseType: String, Codable, CaseIterable, Sendable {
 				case manual = "MANUAL"
 				case afterApproval = "AFTER_APPROVAL"
 				case scheduled = "SCHEDULED"
@@ -69,19 +69,19 @@ public struct AppStoreVersionCreateRequest: Codable {
 			}
 		}
 
-		public struct Relationships: Codable {
+		public struct Relationships: Codable, Sendable {
 			public var app: App
 			public var appStoreVersionLocalizations: AppStoreVersionLocalizations?
 			public var build: Build?
 
-			public struct App: Codable {
+			public struct App: Codable, Sendable {
 				public var data: Data
 
-				public struct Data: Codable, Identifiable {
+				public struct Data: Codable, Identifiable, Sendable {
 					public var type: `Type`
 					public var id: String
 
-					public enum `Type`: String, Codable, CaseIterable {
+					public enum `Type`: String, Codable, CaseIterable, Sendable {
 						case apps
 					}
 
@@ -118,14 +118,14 @@ public struct AppStoreVersionCreateRequest: Codable {
 				}
 			}
 
-			public struct AppStoreVersionLocalizations: Codable {
+			public struct AppStoreVersionLocalizations: Codable, Sendable {
 				public var data: [Datum]?
 
-				public struct Datum: Codable, Identifiable {
+				public struct Datum: Codable, Identifiable, Sendable {
 					public var type: `Type`
 					public var id: String
 
-					public enum `Type`: String, Codable, CaseIterable {
+					public enum `Type`: String, Codable, CaseIterable, Sendable {
 						case appStoreVersionLocalizations
 					}
 
@@ -162,14 +162,14 @@ public struct AppStoreVersionCreateRequest: Codable {
 				}
 			}
 
-			public struct Build: Codable {
+			public struct Build: Codable, Sendable {
 				public var data: Data?
 
-				public struct Data: Codable, Identifiable {
+				public struct Data: Codable, Identifiable, Sendable {
 					public var type: `Type`
 					public var id: String
 
-					public enum `Type`: String, Codable, CaseIterable {
+					public enum `Type`: String, Codable, CaseIterable, Sendable {
 						case builds
 					}
 

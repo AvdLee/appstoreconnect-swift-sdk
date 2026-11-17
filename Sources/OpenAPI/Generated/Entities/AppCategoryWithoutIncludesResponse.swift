@@ -3,7 +3,7 @@
 
 import Foundation
 
-public struct AppCategoryWithoutIncludesResponse: Codable {
+public struct AppCategoryWithoutIncludesResponse: Codable, Sendable {
 	/// AppCategory
 	public var data: AppCategory
 	public var links: DocumentLinks

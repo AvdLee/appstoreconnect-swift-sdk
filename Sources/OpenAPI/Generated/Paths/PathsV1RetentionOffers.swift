@@ -9,7 +9,7 @@ extension APIEndpoint.V1 {
 		RetentionOffers(path: path + "/retentionOffers")
 	}
 
-	public struct RetentionOffers {
+	public struct RetentionOffers: Sendable {
 		/// Path: `/v1/retentionOffers`
 		public let path: String
 

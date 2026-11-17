@@ -9,7 +9,7 @@ extension APIEndpoint.V1 {
 		BuildBetaNotifications(path: path + "/buildBetaNotifications")
 	}
 
-	public struct BuildBetaNotifications {
+	public struct BuildBetaNotifications: Sendable {
 		/// Path: `/v1/buildBetaNotifications`
 		public let path: String
 

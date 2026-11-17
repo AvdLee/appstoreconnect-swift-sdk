@@ -3,7 +3,7 @@
 
 import Foundation
 
-public struct AppClipHeaderImageResponse: Codable {
+public struct AppClipHeaderImageResponse: Codable, Sendable {
 	/// AppClipHeaderImage
 	public var data: AppClipHeaderImage
 	public var included: [AppClipDefaultExperienceLocalization]?

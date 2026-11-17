@@ -9,7 +9,7 @@ extension APIEndpoint.V1 {
 		AnalyticsReportInstances(path: path + "/analyticsReportInstances")
 	}
 
-	public struct AnalyticsReportInstances {
+	public struct AnalyticsReportInstances: Sendable {
 		/// Path: `/v1/analyticsReportInstances`
 		public let path: String
 	}

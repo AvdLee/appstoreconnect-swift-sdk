@@ -9,7 +9,7 @@ extension APIEndpoint.V1.Profiles.WithID.Relationships {
 		Devices(path: path + "/devices")
 	}
 
-	public struct Devices {
+	public struct Devices: Sendable {
 		/// Path: `/v1/profiles/{id}/relationships/devices`
 		public let path: String
 

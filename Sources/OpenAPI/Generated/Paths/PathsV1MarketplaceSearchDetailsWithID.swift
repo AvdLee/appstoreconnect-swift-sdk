@@ -9,7 +9,7 @@ extension APIEndpoint.V1.MarketplaceSearchDetails {
 		WithID(path: "\(path)/\(id)")
 	}
 
-	public struct WithID {
+	public struct WithID: Sendable {
 		/// Path: `/v1/marketplaceSearchDetails/{id}`
 		public let path: String
 

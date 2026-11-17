@@ -9,7 +9,7 @@ extension APIEndpoint.V1 {
 		BetaAppReviewSubmissions(path: path + "/betaAppReviewSubmissions")
 	}
 
-	public struct BetaAppReviewSubmissions {
+	public struct BetaAppReviewSubmissions: Sendable {
 		/// Path: `/v1/betaAppReviewSubmissions`
 		public let path: String
 
@@ -17,7 +17,7 @@ extension APIEndpoint.V1 {
 			Request(path: path, method: "GET", query: parameters.asQuery, id: "betaAppReviewSubmissions_getCollection")
 		}
 
-		public struct GetParameters {
+		public struct GetParameters: Sendable {
 			public var filterBetaReviewState: [FilterBetaReviewState]?
 			public var filterBuild: [String]
 			public var fieldsBetaAppReviewSubmissions: [FieldsBetaAppReviewSubmissions]?
@@ -25,20 +25,20 @@ extension APIEndpoint.V1 {
 			public var limit: Int?
 			public var include: [Include]?
 
-			public enum FilterBetaReviewState: String, Codable, CaseIterable {
+			public enum FilterBetaReviewState: String, Codable, CaseIterable, Sendable {
 				case waitingForReview = "WAITING_FOR_REVIEW"
 				case inReview = "IN_REVIEW"
 				case rejected = "REJECTED"
 				case approved = "APPROVED"
 			}
 
-			public enum FieldsBetaAppReviewSubmissions: String, Codable, CaseIterable {
+			public enum FieldsBetaAppReviewSubmissions: String, Codable, CaseIterable, Sendable {
 				case betaReviewState
 				case submittedDate
 				case build
 			}
 
-			public enum FieldsBuilds: String, Codable, CaseIterable {
+			public enum FieldsBuilds: String, Codable, CaseIterable, Sendable {
 				case version
 				case uploadedDate
 				case expirationDate
@@ -67,7 +67,7 @@ extension APIEndpoint.V1 {
 				case diagnosticSignatures
 			}
 
-			public enum Include: String, Codable, CaseIterable {
+			public enum Include: String, Codable, CaseIterable, Sendable {
 				case build
 			}
 

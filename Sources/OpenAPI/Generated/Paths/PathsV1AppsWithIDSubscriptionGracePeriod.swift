@@ -9,7 +9,7 @@ extension APIEndpoint.V1.Apps.WithID {
 		SubscriptionGracePeriod(path: path + "/subscriptionGracePeriod")
 	}
 
-	public struct SubscriptionGracePeriod {
+	public struct SubscriptionGracePeriod: Sendable {
 		/// Path: `/v1/apps/{id}/subscriptionGracePeriod`
 		public let path: String
 
@@ -23,7 +23,7 @@ extension APIEndpoint.V1.Apps.WithID {
 			return encoder.items
 		}
 
-		public enum FieldsSubscriptionGracePeriods: String, Codable, CaseIterable {
+		public enum FieldsSubscriptionGracePeriods: String, Codable, CaseIterable, Sendable {
 			case optIn
 			case sandboxOptIn
 			case duration

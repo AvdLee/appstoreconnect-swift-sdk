@@ -3,7 +3,7 @@
 
 import Foundation
 
-public struct ErrorResponse: Codable {
+public struct ErrorResponse: Codable, Sendable {
 	public var errors: [ResponseError]?
 
 	public init(errors: [ResponseError]? = nil) {

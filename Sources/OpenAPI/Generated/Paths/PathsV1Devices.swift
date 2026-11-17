@@ -9,7 +9,7 @@ extension APIEndpoint.V1 {
 		Devices(path: path + "/devices")
 	}
 
-	public struct Devices {
+	public struct Devices: Sendable {
 		/// Path: `/v1/devices`
 		public let path: String
 
@@ -17,7 +17,7 @@ extension APIEndpoint.V1 {
 			Request(path: path, method: "GET", query: parameters?.asQuery, id: "devices_getCollection")
 		}
 
-		public struct GetParameters {
+		public struct GetParameters: Sendable {
 			public var filterName: [String]?
 			public var filterPlatform: [FilterPlatform]?
 			public var filterUdid: [String]?
@@ -27,18 +27,18 @@ extension APIEndpoint.V1 {
 			public var fieldsDevices: [FieldsDevices]?
 			public var limit: Int?
 
-			public enum FilterPlatform: String, Codable, CaseIterable {
+			public enum FilterPlatform: String, Codable, CaseIterable, Sendable {
 				case ios = "IOS"
 				case macOs = "MAC_OS"
 				case universal = "UNIVERSAL"
 			}
 
-			public enum FilterStatus: String, Codable, CaseIterable {
+			public enum FilterStatus: String, Codable, CaseIterable, Sendable {
 				case enabled = "ENABLED"
 				case disabled = "DISABLED"
 			}
 
-			public enum Sort: String, Codable, CaseIterable {
+			public enum Sort: String, Codable, CaseIterable, Sendable {
 				case name
 				case minusname = "-name"
 				case platform
@@ -51,7 +51,7 @@ extension APIEndpoint.V1 {
 				case minusid = "-id"
 			}
 
-			public enum FieldsDevices: String, Codable, CaseIterable {
+			public enum FieldsDevices: String, Codable, CaseIterable, Sendable {
 				case name
 				case platform
 				case udid

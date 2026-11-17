@@ -3,7 +3,7 @@
 
 import Foundation
 
-public struct ActorResponse: Codable {
+public struct ActorResponse: Codable, Sendable {
 	/// Actor
 	public var data: Actor
 	public var links: DocumentLinks

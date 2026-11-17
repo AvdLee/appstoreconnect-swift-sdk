@@ -9,7 +9,7 @@ extension APIEndpoint.V1.Builds.WithID {
 		BetaBuildLocalizations(path: path + "/betaBuildLocalizations")
 	}
 
-	public struct BetaBuildLocalizations {
+	public struct BetaBuildLocalizations: Sendable {
 		/// Path: `/v1/builds/{id}/betaBuildLocalizations`
 		public let path: String
 
@@ -24,7 +24,7 @@ extension APIEndpoint.V1.Builds.WithID {
 			return encoder.items
 		}
 
-		public enum FieldsBetaBuildLocalizations: String, Codable, CaseIterable {
+		public enum FieldsBetaBuildLocalizations: String, Codable, CaseIterable, Sendable {
 			case whatsNew
 			case locale
 			case build

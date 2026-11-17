@@ -3,19 +3,19 @@
 
 import Foundation
 
-public struct BundleIDCapabilityCreateRequest: Codable {
+public struct BundleIDCapabilityCreateRequest: Codable, Sendable {
 	public var data: Data
 
-	public struct Data: Codable {
+	public struct Data: Codable, Sendable {
 		public var type: `Type`
 		public var attributes: Attributes
 		public var relationships: Relationships
 
-		public enum `Type`: String, Codable, CaseIterable {
+		public enum `Type`: String, Codable, CaseIterable, Sendable {
 			case bundleIDCapabilities = "bundleIdCapabilities"
 		}
 
-		public struct Attributes: Codable {
+		public struct Attributes: Codable, Sendable {
 			public var capabilityType: CapabilityType
 			public var settings: [CapabilitySetting]?
 
@@ -37,17 +37,17 @@ public struct BundleIDCapabilityCreateRequest: Codable {
 			}
 		}
 
-		public struct Relationships: Codable {
+		public struct Relationships: Codable, Sendable {
 			public var bundleID: BundleID
 
-			public struct BundleID: Codable {
+			public struct BundleID: Codable, Sendable {
 				public var data: Data
 
-				public struct Data: Codable, Identifiable {
+				public struct Data: Codable, Identifiable, Sendable {
 					public var type: `Type`
 					public var id: String
 
-					public enum `Type`: String, Codable, CaseIterable {
+					public enum `Type`: String, Codable, CaseIterable, Sendable {
 						case bundleIDs = "bundleIds"
 					}
 

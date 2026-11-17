@@ -3,7 +3,7 @@
 
 import Foundation
 
-public struct PreviewFrameImage: Codable {
+public struct PreviewFrameImage: Codable, Sendable {
 	public var image: ImageAsset?
 	public var state: AppMediaPreviewFrameImageState?
 

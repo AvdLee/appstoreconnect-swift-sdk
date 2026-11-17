@@ -3,26 +3,26 @@
 
 import Foundation
 
-public struct GameCenterLeaderboardSetVersionV2InlineCreate: Codable, Identifiable {
+public struct GameCenterLeaderboardSetVersionV2InlineCreate: Codable, Identifiable, Sendable {
 	public var type: `Type`
 	public var id: String?
 	public var relationships: Relationships?
 
-	public enum `Type`: String, Codable, CaseIterable {
+	public enum `Type`: String, Codable, CaseIterable, Sendable {
 		case gameCenterLeaderboardSetVersions
 	}
 
-	public struct Relationships: Codable {
+	public struct Relationships: Codable, Sendable {
 		public var leaderboardSet: LeaderboardSet?
 
-		public struct LeaderboardSet: Codable {
+		public struct LeaderboardSet: Codable, Sendable {
 			public var data: Data?
 
-			public struct Data: Codable, Identifiable {
+			public struct Data: Codable, Identifiable, Sendable {
 				public var type: `Type`
 				public var id: String
 
-				public enum `Type`: String, Codable, CaseIterable {
+				public enum `Type`: String, Codable, CaseIterable, Sendable {
 					case gameCenterLeaderboardSets
 				}
 

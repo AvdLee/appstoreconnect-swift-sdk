@@ -9,7 +9,7 @@ extension APIEndpoint.V1.AppEvents {
 		WithID(path: "\(path)/\(id)")
 	}
 
-	public struct WithID {
+	public struct WithID: Sendable {
 		/// Path: `/v1/appEvents/{id}`
 		public let path: String
 
@@ -17,13 +17,13 @@ extension APIEndpoint.V1.AppEvents {
 			Request(path: path, method: "GET", query: parameters?.asQuery, id: "appEvents_getInstance")
 		}
 
-		public struct GetParameters {
+		public struct GetParameters: Sendable {
 			public var fieldsAppEvents: [FieldsAppEvents]?
 			public var fieldsAppEventLocalizations: [FieldsAppEventLocalizations]?
 			public var include: [Include]?
 			public var limitLocalizations: Int?
 
-			public enum FieldsAppEvents: String, Codable, CaseIterable {
+			public enum FieldsAppEvents: String, Codable, CaseIterable, Sendable {
 				case referenceName
 				case badge
 				case eventState
@@ -37,7 +37,7 @@ extension APIEndpoint.V1.AppEvents {
 				case localizations
 			}
 
-			public enum FieldsAppEventLocalizations: String, Codable, CaseIterable {
+			public enum FieldsAppEventLocalizations: String, Codable, CaseIterable, Sendable {
 				case locale
 				case name
 				case shortDescription
@@ -48,7 +48,7 @@ extension APIEndpoint.V1.AppEvents {
 				case placements
 			}
 
-			public enum Include: String, Codable, CaseIterable {
+			public enum Include: String, Codable, CaseIterable, Sendable {
 				case localizations
 			}
 

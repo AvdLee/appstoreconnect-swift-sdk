@@ -9,7 +9,7 @@ extension APIEndpoint.V1.CustomerReviewResponses {
 		WithID(path: "\(path)/\(id)")
 	}
 
-	public struct WithID {
+	public struct WithID: Sendable {
 		/// Path: `/v1/customerReviewResponses/{id}`
 		public let path: String
 
@@ -17,19 +17,19 @@ extension APIEndpoint.V1.CustomerReviewResponses {
 			Request(path: path, method: "GET", query: parameters?.asQuery, id: "customerReviewResponses_getInstance")
 		}
 
-		public struct GetParameters {
+		public struct GetParameters: Sendable {
 			public var fieldsCustomerReviewResponses: [FieldsCustomerReviewResponses]?
 			public var fieldsCustomerReviews: [FieldsCustomerReviews]?
 			public var include: [Include]?
 
-			public enum FieldsCustomerReviewResponses: String, Codable, CaseIterable {
+			public enum FieldsCustomerReviewResponses: String, Codable, CaseIterable, Sendable {
 				case responseBody
 				case lastModifiedDate
 				case state
 				case review
 			}
 
-			public enum FieldsCustomerReviews: String, Codable, CaseIterable {
+			public enum FieldsCustomerReviews: String, Codable, CaseIterable, Sendable {
 				case rating
 				case title
 				case body
@@ -40,7 +40,7 @@ extension APIEndpoint.V1.CustomerReviewResponses {
 				case reviewTerritory
 			}
 
-			public enum Include: String, Codable, CaseIterable {
+			public enum Include: String, Codable, CaseIterable, Sendable {
 				case review
 			}
 

@@ -3,19 +3,19 @@
 
 import Foundation
 
-public struct AppEventLocalizationCreateRequest: Codable {
+public struct AppEventLocalizationCreateRequest: Codable, Sendable {
 	public var data: Data
 
-	public struct Data: Codable {
+	public struct Data: Codable, Sendable {
 		public var type: `Type`
 		public var attributes: Attributes
 		public var relationships: Relationships
 
-		public enum `Type`: String, Codable, CaseIterable {
+		public enum `Type`: String, Codable, CaseIterable, Sendable {
 			case appEventLocalizations
 		}
 
-		public struct Attributes: Codable {
+		public struct Attributes: Codable, Sendable {
 			public var locale: String
 			public var name: String?
 			public var shortDescription: String?
@@ -45,18 +45,18 @@ public struct AppEventLocalizationCreateRequest: Codable {
 			}
 		}
 
-		public struct Relationships: Codable {
+		public struct Relationships: Codable, Sendable {
 			public var appEvent: AppEvent
 			public var placements: Placements?
 
-			public struct AppEvent: Codable {
+			public struct AppEvent: Codable, Sendable {
 				public var data: Data
 
-				public struct Data: Codable, Identifiable {
+				public struct Data: Codable, Identifiable, Sendable {
 					public var type: `Type`
 					public var id: String
 
-					public enum `Type`: String, Codable, CaseIterable {
+					public enum `Type`: String, Codable, CaseIterable, Sendable {
 						case appEvents
 					}
 
@@ -93,14 +93,14 @@ public struct AppEventLocalizationCreateRequest: Codable {
 				}
 			}
 
-			public struct Placements: Codable {
+			public struct Placements: Codable, Sendable {
 				public var data: [Datum]?
 
-				public struct Datum: Codable, Identifiable {
+				public struct Datum: Codable, Identifiable, Sendable {
 					public var type: `Type`
 					public var id: String
 
-					public enum `Type`: String, Codable, CaseIterable {
+					public enum `Type`: String, Codable, CaseIterable, Sendable {
 						case appAssetLibraryPlacements
 					}
 

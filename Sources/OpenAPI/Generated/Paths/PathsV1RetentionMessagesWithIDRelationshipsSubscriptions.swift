@@ -9,7 +9,7 @@ extension APIEndpoint.V1.RetentionMessages.WithID.Relationships {
 		Subscriptions(path: path + "/subscriptions")
 	}
 
-	public struct Subscriptions {
+	public struct Subscriptions: Sendable {
 		/// Path: `/v1/retentionMessages/{id}/relationships/subscriptions`
 		public let path: String
 

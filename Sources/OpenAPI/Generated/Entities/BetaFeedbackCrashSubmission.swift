@@ -3,18 +3,18 @@
 
 import Foundation
 
-public struct BetaFeedbackCrashSubmission: Codable, Identifiable {
+public struct BetaFeedbackCrashSubmission: Codable, Identifiable, Sendable {
 	public var type: `Type`
 	public var id: String
 	public var attributes: Attributes?
 	public var relationships: Relationships?
 	public var links: ResourceLinks?
 
-	public enum `Type`: String, Codable, CaseIterable {
+	public enum `Type`: String, Codable, CaseIterable, Sendable {
 		case betaFeedbackCrashSubmissions
 	}
 
-	public struct Attributes: Codable {
+	public struct Attributes: Codable, Sendable {
 		public var createdDate: Date?
 		public var comment: String?
 		public var email: String?
@@ -108,12 +108,12 @@ public struct BetaFeedbackCrashSubmission: Codable, Identifiable {
 		}
 	}
 
-	public struct Relationships: Codable {
+	public struct Relationships: Codable, Sendable {
 		public var crashLog: CrashLog?
 		public var build: Build?
 		public var tester: Tester?
 
-		public struct CrashLog: Codable {
+		public struct CrashLog: Codable, Sendable {
 			public var links: RelationshipLinks?
 
 			public init(links: RelationshipLinks? = nil) {
@@ -131,14 +131,14 @@ public struct BetaFeedbackCrashSubmission: Codable, Identifiable {
 			}
 		}
 
-		public struct Build: Codable {
+		public struct Build: Codable, Sendable {
 			public var data: Data?
 
-			public struct Data: Codable, Identifiable {
+			public struct Data: Codable, Identifiable, Sendable {
 				public var type: `Type`
 				public var id: String
 
-				public enum `Type`: String, Codable, CaseIterable {
+				public enum `Type`: String, Codable, CaseIterable, Sendable {
 					case builds
 				}
 
@@ -175,14 +175,14 @@ public struct BetaFeedbackCrashSubmission: Codable, Identifiable {
 			}
 		}
 
-		public struct Tester: Codable {
+		public struct Tester: Codable, Sendable {
 			public var data: Data?
 
-			public struct Data: Codable, Identifiable {
+			public struct Data: Codable, Identifiable, Sendable {
 				public var type: `Type`
 				public var id: String
 
-				public enum `Type`: String, Codable, CaseIterable {
+				public enum `Type`: String, Codable, CaseIterable, Sendable {
 					case betaTesters
 				}
 

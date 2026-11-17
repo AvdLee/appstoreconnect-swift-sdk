@@ -3,7 +3,7 @@
 
 import Foundation
 
-public struct BackgroundAssetUploadFileResponse: Codable {
+public struct BackgroundAssetUploadFileResponse: Codable, Sendable {
 	/// BackgroundAssetUploadFile
 	public var data: BackgroundAssetUploadFile
 	public var links: DocumentLinks

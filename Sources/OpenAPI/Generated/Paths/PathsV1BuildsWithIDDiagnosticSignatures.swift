@@ -9,7 +9,7 @@ extension APIEndpoint.V1.Builds.WithID {
 		DiagnosticSignatures(path: path + "/diagnosticSignatures")
 	}
 
-	public struct DiagnosticSignatures {
+	public struct DiagnosticSignatures: Sendable {
 		/// Path: `/v1/builds/{id}/diagnosticSignatures`
 		public let path: String
 
@@ -17,18 +17,18 @@ extension APIEndpoint.V1.Builds.WithID {
 			Request(path: path, method: "GET", query: parameters?.asQuery, id: "builds_diagnosticSignatures_getToManyRelated")
 		}
 
-		public struct GetParameters {
+		public struct GetParameters: Sendable {
 			public var filterDiagnosticType: [FilterDiagnosticType]?
 			public var fieldsDiagnosticSignatures: [FieldsDiagnosticSignatures]?
 			public var limit: Int?
 
-			public enum FilterDiagnosticType: String, Codable, CaseIterable {
+			public enum FilterDiagnosticType: String, Codable, CaseIterable, Sendable {
 				case diskWrites = "DISK_WRITES"
 				case hangs = "HANGS"
 				case launches = "LAUNCHES"
 			}
 
-			public enum FieldsDiagnosticSignatures: String, Codable, CaseIterable {
+			public enum FieldsDiagnosticSignatures: String, Codable, CaseIterable, Sendable {
 				case diagnosticType
 				case signature
 				case weight

@@ -9,7 +9,7 @@ extension APIEndpoint.V2.GameCenterLeaderboardSets.WithID {
 		Versions(path: path + "/versions")
 	}
 
-	public struct Versions {
+	public struct Versions: Sendable {
 		/// Path: `/v2/gameCenterLeaderboardSets/{id}/versions`
 		public let path: String
 
@@ -17,7 +17,7 @@ extension APIEndpoint.V2.GameCenterLeaderboardSets.WithID {
 			Request(path: path, method: "GET", query: parameters?.asQuery, id: "gameCenterLeaderboardSetsV2_versions_getToManyRelated")
 		}
 
-		public struct GetParameters {
+		public struct GetParameters: Sendable {
 			public var fieldsGameCenterLeaderboardSetVersions: [FieldsGameCenterLeaderboardSetVersions]?
 			public var fieldsGameCenterLeaderboardSets: [FieldsGameCenterLeaderboardSets]?
 			public var fieldsGameCenterLeaderboardSetLocalizations: [FieldsGameCenterLeaderboardSetLocalizations]?
@@ -25,14 +25,14 @@ extension APIEndpoint.V2.GameCenterLeaderboardSets.WithID {
 			public var include: [Include]?
 			public var limitLocalizations: Int?
 
-			public enum FieldsGameCenterLeaderboardSetVersions: String, Codable, CaseIterable {
+			public enum FieldsGameCenterLeaderboardSetVersions: String, Codable, CaseIterable, Sendable {
 				case version
 				case state
 				case leaderboardSet
 				case localizations
 			}
 
-			public enum FieldsGameCenterLeaderboardSets: String, Codable, CaseIterable {
+			public enum FieldsGameCenterLeaderboardSets: String, Codable, CaseIterable, Sendable {
 				case referenceName
 				case vendorIdentifier
 				case gameCenterDetail
@@ -41,14 +41,14 @@ extension APIEndpoint.V2.GameCenterLeaderboardSets.WithID {
 				case versions
 			}
 
-			public enum FieldsGameCenterLeaderboardSetLocalizations: String, Codable, CaseIterable {
+			public enum FieldsGameCenterLeaderboardSetLocalizations: String, Codable, CaseIterable, Sendable {
 				case locale
 				case name
 				case version
 				case image
 			}
 
-			public enum Include: String, Codable, CaseIterable {
+			public enum Include: String, Codable, CaseIterable, Sendable {
 				case leaderboardSet
 				case localizations
 			}

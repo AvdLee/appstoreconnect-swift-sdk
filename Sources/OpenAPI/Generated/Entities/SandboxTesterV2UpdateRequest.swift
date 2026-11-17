@@ -3,24 +3,24 @@
 
 import Foundation
 
-public struct SandboxTesterV2UpdateRequest: Codable {
+public struct SandboxTesterV2UpdateRequest: Codable, Sendable {
 	public var data: Data
 
-	public struct Data: Codable, Identifiable {
+	public struct Data: Codable, Identifiable, Sendable {
 		public var type: `Type`
 		public var id: String
 		public var attributes: Attributes?
 
-		public enum `Type`: String, Codable, CaseIterable {
+		public enum `Type`: String, Codable, CaseIterable, Sendable {
 			case sandboxTesters
 		}
 
-		public struct Attributes: Codable {
+		public struct Attributes: Codable, Sendable {
 			public var territory: TerritoryCode?
 			public var isInterruptPurchases: Bool?
 			public var subscriptionRenewalRate: SubscriptionRenewalRate?
 
-			public enum SubscriptionRenewalRate: String, Codable, CaseIterable {
+			public enum SubscriptionRenewalRate: String, Codable, CaseIterable, Sendable {
 				case monthlyRenewalEveryOneHour = "MONTHLY_RENEWAL_EVERY_ONE_HOUR"
 				case monthlyRenewalEveryThirtyMinutes = "MONTHLY_RENEWAL_EVERY_THIRTY_MINUTES"
 				case monthlyRenewalEveryFifteenMinutes = "MONTHLY_RENEWAL_EVERY_FIFTEEN_MINUTES"

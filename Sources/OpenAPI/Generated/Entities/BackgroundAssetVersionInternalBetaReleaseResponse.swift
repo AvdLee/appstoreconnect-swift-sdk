@@ -3,7 +3,7 @@
 
 import Foundation
 
-public struct BackgroundAssetVersionInternalBetaReleaseResponse: Codable {
+public struct BackgroundAssetVersionInternalBetaReleaseResponse: Codable, Sendable {
 	/// BackgroundAssetVersionInternalBetaRelease
 	public var data: BackgroundAssetVersionInternalBetaRelease
 	public var included: [BackgroundAssetVersion]?

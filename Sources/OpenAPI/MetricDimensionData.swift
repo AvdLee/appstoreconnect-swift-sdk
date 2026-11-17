@@ -1,7 +1,7 @@
 import Foundation
 
 /// An App Store Connect metric dimension may identify its resource by ID or by a resource object.
-public struct MetricDimensionData: Codable, Equatable {
+public struct MetricDimensionData: Codable, Equatable, Sendable {
     public let id: String
     public let type: String?
     private let isString: Bool

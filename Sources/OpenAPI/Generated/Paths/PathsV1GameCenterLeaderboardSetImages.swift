@@ -9,7 +9,7 @@ extension APIEndpoint.V1 {
 		GameCenterLeaderboardSetImages(path: path + "/gameCenterLeaderboardSetImages")
 	}
 
-	public struct GameCenterLeaderboardSetImages {
+	public struct GameCenterLeaderboardSetImages: Sendable {
 		/// Path: `/v1/gameCenterLeaderboardSetImages`
 		public let path: String
 

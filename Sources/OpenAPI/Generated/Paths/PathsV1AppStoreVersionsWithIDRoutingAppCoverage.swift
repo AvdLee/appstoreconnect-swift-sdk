@@ -9,7 +9,7 @@ extension APIEndpoint.V1.AppStoreVersions.WithID {
 		RoutingAppCoverage(path: path + "/routingAppCoverage")
 	}
 
-	public struct RoutingAppCoverage {
+	public struct RoutingAppCoverage: Sendable {
 		/// Path: `/v1/appStoreVersions/{id}/routingAppCoverage`
 		public let path: String
 
@@ -17,12 +17,12 @@ extension APIEndpoint.V1.AppStoreVersions.WithID {
 			Request(path: path, method: "GET", query: parameters?.asQuery, id: "appStoreVersions_routingAppCoverage_getToOneRelated")
 		}
 
-		public struct GetParameters {
+		public struct GetParameters: Sendable {
 			public var fieldsRoutingAppCoverages: [FieldsRoutingAppCoverages]?
 			public var fieldsAppStoreVersions: [FieldsAppStoreVersions]?
 			public var include: [Include]?
 
-			public enum FieldsRoutingAppCoverages: String, Codable, CaseIterable {
+			public enum FieldsRoutingAppCoverages: String, Codable, CaseIterable, Sendable {
 				case fileSize
 				case fileName
 				case sourceFileChecksum
@@ -31,7 +31,7 @@ extension APIEndpoint.V1.AppStoreVersions.WithID {
 				case appStoreVersion
 			}
 
-			public enum FieldsAppStoreVersions: String, Codable, CaseIterable {
+			public enum FieldsAppStoreVersions: String, Codable, CaseIterable, Sendable {
 				case platform
 				case versionString
 				case appStoreState
@@ -58,7 +58,7 @@ extension APIEndpoint.V1.AppStoreVersions.WithID {
 				case alternativeDistributionPackage
 			}
 
-			public enum Include: String, Codable, CaseIterable {
+			public enum Include: String, Codable, CaseIterable, Sendable {
 				case appStoreVersion
 			}
 

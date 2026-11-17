@@ -9,7 +9,7 @@ extension APIEndpoint.V1.BetaTesters.WithID {
 		Metrics(path: path + "/metrics")
 	}
 
-	public struct Metrics {
+	public struct Metrics: Sendable {
 		/// Path: `/v1/betaTesters/{id}/metrics`
 		public let path: String
 	}

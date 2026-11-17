@@ -4,7 +4,7 @@
 import Foundation
 
 @available(*, deprecated, message: "Deprecated")
-public struct GameCenterActivityVersionReleasesResponse: Codable {
+public struct GameCenterActivityVersionReleasesResponse: Codable, Sendable {
 	public var data: [GameCenterActivityVersionRelease]
 	public var included: [GameCenterActivityVersion]?
 	public var links: PagedDocumentLinks

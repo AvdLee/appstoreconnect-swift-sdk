@@ -9,7 +9,7 @@ extension APIEndpoint.V1.Subscriptions {
 		WithID(path: "\(path)/\(id)")
 	}
 
-	public struct WithID {
+	public struct WithID: Sendable {
 		/// Path: `/v1/subscriptions/{id}`
 		public let path: String
 
@@ -17,7 +17,7 @@ extension APIEndpoint.V1.Subscriptions {
 			Request(path: path, method: "GET", query: parameters?.asQuery, id: "subscriptions_getInstance")
 		}
 
-		public struct GetParameters {
+		public struct GetParameters: Sendable {
 			public var fieldsSubscriptions: [FieldsSubscriptions]?
 			public var fieldsSubscriptionLocalizations: [FieldsSubscriptionLocalizations]?
 			public var fieldsSubscriptionAppStoreReviewScreenshots: [FieldsSubscriptionAppStoreReviewScreenshots]?
@@ -47,7 +47,7 @@ extension APIEndpoint.V1.Subscriptions {
 			public var limitVersions: Int?
 			public var limitWinBackOffers: Int?
 
-			public enum FieldsSubscriptions: String, Codable, CaseIterable {
+			public enum FieldsSubscriptions: String, Codable, CaseIterable, Sendable {
 				case name
 				case productID = "productId"
 				case familySharable
@@ -76,7 +76,7 @@ extension APIEndpoint.V1.Subscriptions {
 				case retentionMessageOffers
 			}
 
-			public enum FieldsSubscriptionLocalizations: String, Codable, CaseIterable {
+			public enum FieldsSubscriptionLocalizations: String, Codable, CaseIterable, Sendable {
 				case name
 				case locale
 				case description
@@ -84,7 +84,7 @@ extension APIEndpoint.V1.Subscriptions {
 				case subscription
 			}
 
-			public enum FieldsSubscriptionAppStoreReviewScreenshots: String, Codable, CaseIterable {
+			public enum FieldsSubscriptionAppStoreReviewScreenshots: String, Codable, CaseIterable, Sendable {
 				case fileSize
 				case fileName
 				case sourceFileChecksum
@@ -96,14 +96,14 @@ extension APIEndpoint.V1.Subscriptions {
 				case subscription
 			}
 
-			public enum FieldsSubscriptionGroups: String, Codable, CaseIterable {
+			public enum FieldsSubscriptionGroups: String, Codable, CaseIterable, Sendable {
 				case referenceName
 				case subscriptions
 				case subscriptionGroupLocalizations
 				case versions
 			}
 
-			public enum FieldsSubscriptionIntroductoryOffers: String, Codable, CaseIterable {
+			public enum FieldsSubscriptionIntroductoryOffers: String, Codable, CaseIterable, Sendable {
 				case startDate
 				case endDate
 				case duration
@@ -115,7 +115,7 @@ extension APIEndpoint.V1.Subscriptions {
 				case subscriptionPricePoint
 			}
 
-			public enum FieldsSubscriptionPromotionalOffers: String, Codable, CaseIterable {
+			public enum FieldsSubscriptionPromotionalOffers: String, Codable, CaseIterable, Sendable {
 				case duration
 				case name
 				case numberOfPeriods
@@ -126,7 +126,7 @@ extension APIEndpoint.V1.Subscriptions {
 				case prices
 			}
 
-			public enum FieldsSubscriptionOfferCodes: String, Codable, CaseIterable {
+			public enum FieldsSubscriptionOfferCodes: String, Codable, CaseIterable, Sendable {
 				case name
 				case customerEligibilities
 				case offerEligibility
@@ -145,7 +145,7 @@ extension APIEndpoint.V1.Subscriptions {
 				case prices
 			}
 
-			public enum FieldsSubscriptionPrices: String, Codable, CaseIterable {
+			public enum FieldsSubscriptionPrices: String, Codable, CaseIterable, Sendable {
 				case startDate
 				case preserved
 				case planType
@@ -153,7 +153,7 @@ extension APIEndpoint.V1.Subscriptions {
 				case subscriptionPricePoint
 			}
 
-			public enum FieldsPromotedPurchases: String, Codable, CaseIterable {
+			public enum FieldsPromotedPurchases: String, Codable, CaseIterable, Sendable {
 				case visibleForAllUsers
 				case enabled
 				case state
@@ -161,12 +161,12 @@ extension APIEndpoint.V1.Subscriptions {
 				case subscription
 			}
 
-			public enum FieldsSubscriptionAvailabilities: String, Codable, CaseIterable {
+			public enum FieldsSubscriptionAvailabilities: String, Codable, CaseIterable, Sendable {
 				case availableInNewTerritories
 				case availableTerritories
 			}
 
-			public enum FieldsWinBackOffers: String, Codable, CaseIterable {
+			public enum FieldsWinBackOffers: String, Codable, CaseIterable, Sendable {
 				case referenceName
 				case offerID = "offerId"
 				case duration
@@ -183,7 +183,7 @@ extension APIEndpoint.V1.Subscriptions {
 				case prices
 			}
 
-			public enum FieldsSubscriptionImages: String, Codable, CaseIterable {
+			public enum FieldsSubscriptionImages: String, Codable, CaseIterable, Sendable {
 				case fileSize
 				case fileName
 				case sourceFileChecksum
@@ -194,13 +194,13 @@ extension APIEndpoint.V1.Subscriptions {
 				case subscription
 			}
 
-			public enum FieldsSubscriptionPlanAvailabilities: String, Codable, CaseIterable {
+			public enum FieldsSubscriptionPlanAvailabilities: String, Codable, CaseIterable, Sendable {
 				case availableInNewTerritories
 				case planType
 				case availableTerritories
 			}
 
-			public enum FieldsSubscriptionVersions: String, Codable, CaseIterable {
+			public enum FieldsSubscriptionVersions: String, Codable, CaseIterable, Sendable {
 				case version
 				case state
 				case subscription
@@ -209,7 +209,7 @@ extension APIEndpoint.V1.Subscriptions {
 				case localizations
 			}
 
-			public enum FieldsRetentionOffers: String, Codable, CaseIterable {
+			public enum FieldsRetentionOffers: String, Codable, CaseIterable, Sendable {
 				case referenceName
 				case offerID = "offerId"
 				case duration
@@ -222,13 +222,13 @@ extension APIEndpoint.V1.Subscriptions {
 				case prices
 			}
 
-			public enum FieldsRetentionMessages: String, Codable, CaseIterable {
+			public enum FieldsRetentionMessages: String, Codable, CaseIterable, Sendable {
 				case referenceName
 				case versions
 				case subscriptions
 			}
 
-			public enum Include: String, Codable, CaseIterable {
+			public enum Include: String, Codable, CaseIterable, Sendable {
 				case subscriptionLocalizations
 				case appStoreReviewScreenshot
 				case group

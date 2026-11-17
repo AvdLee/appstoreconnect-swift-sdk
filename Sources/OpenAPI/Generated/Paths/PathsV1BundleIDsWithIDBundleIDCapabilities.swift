@@ -9,7 +9,7 @@ extension APIEndpoint.V1.BundleIDs.WithID {
 		BundleIDCapabilities(path: path + "/bundleIdCapabilities")
 	}
 
-	public struct BundleIDCapabilities {
+	public struct BundleIDCapabilities: Sendable {
 		/// Path: `/v1/bundleIds/{id}/bundleIdCapabilities`
 		public let path: String
 
@@ -24,7 +24,7 @@ extension APIEndpoint.V1.BundleIDs.WithID {
 			return encoder.items
 		}
 
-		public enum FieldsBundleIDCapabilities: String, Codable, CaseIterable {
+		public enum FieldsBundleIDCapabilities: String, Codable, CaseIterable, Sendable {
 			case capabilityType
 			case settings
 		}

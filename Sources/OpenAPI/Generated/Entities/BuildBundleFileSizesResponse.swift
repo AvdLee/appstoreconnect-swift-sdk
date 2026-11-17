@@ -3,7 +3,7 @@
 
 import Foundation
 
-public struct BuildBundleFileSizesResponse: Codable {
+public struct BuildBundleFileSizesResponse: Codable, Sendable {
 	public var data: [BuildBundleFileSize]
 	public var links: PagedDocumentLinks
 	public var meta: PagingInformation?

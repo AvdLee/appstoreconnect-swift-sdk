@@ -9,7 +9,7 @@ extension APIEndpoint.V1.BackgroundAssetVersions {
 		WithID(path: "\(path)/\(id)")
 	}
 
-	public struct WithID {
+	public struct WithID: Sendable {
 		/// Path: `/v1/backgroundAssetVersions/{id}`
 		public let path: String
 
@@ -17,7 +17,7 @@ extension APIEndpoint.V1.BackgroundAssetVersions {
 			Request(path: path, method: "GET", query: parameters?.asQuery, id: "backgroundAssetVersions_getInstance")
 		}
 
-		public struct GetParameters {
+		public struct GetParameters: Sendable {
 			public var fieldsBackgroundAssetVersions: [FieldsBackgroundAssetVersions]?
 			public var fieldsBackgroundAssets: [FieldsBackgroundAssets]?
 			public var fieldsBackgroundAssetVersionInternalBetaReleases: [FieldsBackgroundAssetVersionInternalBetaReleases]?
@@ -26,7 +26,7 @@ extension APIEndpoint.V1.BackgroundAssetVersions {
 			public var fieldsBackgroundAssetUploadFiles: [FieldsBackgroundAssetUploadFiles]?
 			public var include: [Include]?
 
-			public enum FieldsBackgroundAssetVersions: String, Codable, CaseIterable {
+			public enum FieldsBackgroundAssetVersions: String, Codable, CaseIterable, Sendable {
 				case createdDate
 				case platforms
 				case state
@@ -42,7 +42,7 @@ extension APIEndpoint.V1.BackgroundAssetVersions {
 				case backgroundAssetUploadFiles
 			}
 
-			public enum FieldsBackgroundAssets: String, Codable, CaseIterable {
+			public enum FieldsBackgroundAssets: String, Codable, CaseIterable, Sendable {
 				case archived
 				case assetPackIdentifier
 				case createdDate
@@ -54,22 +54,22 @@ extension APIEndpoint.V1.BackgroundAssetVersions {
 				case externalBetaVersion
 			}
 
-			public enum FieldsBackgroundAssetVersionInternalBetaReleases: String, Codable, CaseIterable {
+			public enum FieldsBackgroundAssetVersionInternalBetaReleases: String, Codable, CaseIterable, Sendable {
 				case state
 				case backgroundAssetVersion
 			}
 
-			public enum FieldsBackgroundAssetVersionExternalBetaReleases: String, Codable, CaseIterable {
+			public enum FieldsBackgroundAssetVersionExternalBetaReleases: String, Codable, CaseIterable, Sendable {
 				case state
 				case backgroundAssetVersion
 			}
 
-			public enum FieldsBackgroundAssetVersionAppStoreReleases: String, Codable, CaseIterable {
+			public enum FieldsBackgroundAssetVersionAppStoreReleases: String, Codable, CaseIterable, Sendable {
 				case state
 				case backgroundAssetVersion
 			}
 
-			public enum FieldsBackgroundAssetUploadFiles: String, Codable, CaseIterable {
+			public enum FieldsBackgroundAssetUploadFiles: String, Codable, CaseIterable, Sendable {
 				case assetDeliveryState
 				case assetToken
 				case assetType
@@ -80,7 +80,7 @@ extension APIEndpoint.V1.BackgroundAssetVersions {
 				case uploadOperations
 			}
 
-			public enum Include: String, Codable, CaseIterable {
+			public enum Include: String, Codable, CaseIterable, Sendable {
 				case backgroundAsset
 				case internalBetaRelease
 				case externalBetaRelease

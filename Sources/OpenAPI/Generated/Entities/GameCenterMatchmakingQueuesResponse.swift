@@ -3,7 +3,7 @@
 
 import Foundation
 
-public struct GameCenterMatchmakingQueuesResponse: Codable {
+public struct GameCenterMatchmakingQueuesResponse: Codable, Sendable {
 	public var data: [GameCenterMatchmakingQueue]
 	public var included: [GameCenterMatchmakingRuleSet]?
 	public var links: PagedDocumentLinks

@@ -9,7 +9,7 @@ extension APIEndpoint.V1.AppEventLocalizations.WithID.Relationships {
 		AppEventScreenshots(path: path + "/appEventScreenshots")
 	}
 
-	public struct AppEventScreenshots {
+	public struct AppEventScreenshots: Sendable {
 		/// Path: `/v1/appEventLocalizations/{id}/relationships/appEventScreenshots`
 		public let path: String
 

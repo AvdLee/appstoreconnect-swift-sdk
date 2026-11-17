@@ -9,7 +9,7 @@ extension APIEndpoint.V1.BuildBundles.WithID.Relationships {
 		AppClipDomainCacheStatus(path: path + "/appClipDomainCacheStatus")
 	}
 
-	public struct AppClipDomainCacheStatus {
+	public struct AppClipDomainCacheStatus: Sendable {
 		/// Path: `/v1/buildBundles/{id}/relationships/appClipDomainCacheStatus`
 		public let path: String
 

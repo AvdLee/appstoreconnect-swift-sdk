@@ -9,7 +9,7 @@ extension APIEndpoint.V1.AppScreenshotSets {
 		WithID(path: "\(path)/\(id)")
 	}
 
-	public struct WithID {
+	public struct WithID: Sendable {
 		/// Path: `/v1/appScreenshotSets/{id}`
 		public let path: String
 
@@ -17,7 +17,7 @@ extension APIEndpoint.V1.AppScreenshotSets {
 			Request(path: path, method: "GET", query: parameters?.asQuery, id: "appScreenshotSets_getInstance")
 		}
 
-		public struct GetParameters {
+		public struct GetParameters: Sendable {
 			public var fieldsAppScreenshotSets: [FieldsAppScreenshotSets]?
 			public var fieldsAppStoreVersionLocalizations: [FieldsAppStoreVersionLocalizations]?
 			public var fieldsAppCustomProductPageLocalizations: [FieldsAppCustomProductPageLocalizations]?
@@ -26,7 +26,7 @@ extension APIEndpoint.V1.AppScreenshotSets {
 			public var include: [Include]?
 			public var limitAppScreenshots: Int?
 
-			public enum FieldsAppScreenshotSets: String, Codable, CaseIterable {
+			public enum FieldsAppScreenshotSets: String, Codable, CaseIterable, Sendable {
 				case screenshotDisplayType
 				case appStoreVersionLocalization
 				case appCustomProductPageLocalization
@@ -34,7 +34,7 @@ extension APIEndpoint.V1.AppScreenshotSets {
 				case appScreenshots
 			}
 
-			public enum FieldsAppStoreVersionLocalizations: String, Codable, CaseIterable {
+			public enum FieldsAppStoreVersionLocalizations: String, Codable, CaseIterable, Sendable {
 				case description
 				case locale
 				case keywords
@@ -49,7 +49,7 @@ extension APIEndpoint.V1.AppScreenshotSets {
 				case placements
 			}
 
-			public enum FieldsAppCustomProductPageLocalizations: String, Codable, CaseIterable {
+			public enum FieldsAppCustomProductPageLocalizations: String, Codable, CaseIterable, Sendable {
 				case locale
 				case promotionalText
 				case appCustomProductPageVersion
@@ -59,7 +59,7 @@ extension APIEndpoint.V1.AppScreenshotSets {
 				case placements
 			}
 
-			public enum FieldsAppStoreVersionExperimentTreatmentLocalizations: String, Codable, CaseIterable {
+			public enum FieldsAppStoreVersionExperimentTreatmentLocalizations: String, Codable, CaseIterable, Sendable {
 				case locale
 				case appStoreVersionExperimentTreatment
 				case appScreenshotSets
@@ -67,7 +67,7 @@ extension APIEndpoint.V1.AppScreenshotSets {
 				case placements
 			}
 
-			public enum FieldsAppScreenshots: String, Codable, CaseIterable {
+			public enum FieldsAppScreenshots: String, Codable, CaseIterable, Sendable {
 				case fileSize
 				case fileName
 				case sourceFileChecksum
@@ -79,7 +79,7 @@ extension APIEndpoint.V1.AppScreenshotSets {
 				case appScreenshotSet
 			}
 
-			public enum Include: String, Codable, CaseIterable {
+			public enum Include: String, Codable, CaseIterable, Sendable {
 				case appStoreVersionLocalization
 				case appCustomProductPageLocalization
 				case appStoreVersionExperimentTreatmentLocalization

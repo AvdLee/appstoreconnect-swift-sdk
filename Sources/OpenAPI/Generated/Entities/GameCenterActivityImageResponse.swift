@@ -3,7 +3,7 @@
 
 import Foundation
 
-public struct GameCenterActivityImageResponse: Codable {
+public struct GameCenterActivityImageResponse: Codable, Sendable {
 	/// GameCenterActivityImage
 	public var data: GameCenterActivityImage
 	public var links: DocumentLinks

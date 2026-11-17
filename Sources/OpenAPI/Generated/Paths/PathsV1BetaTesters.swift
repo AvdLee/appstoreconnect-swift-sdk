@@ -9,7 +9,7 @@ extension APIEndpoint.V1 {
 		BetaTesters(path: path + "/betaTesters")
 	}
 
-	public struct BetaTesters {
+	public struct BetaTesters: Sendable {
 		/// Path: `/v1/betaTesters`
 		public let path: String
 
@@ -17,7 +17,7 @@ extension APIEndpoint.V1 {
 			Request(path: path, method: "GET", query: parameters?.asQuery, id: "betaTesters_getCollection")
 		}
 
-		public struct GetParameters {
+		public struct GetParameters: Sendable {
 			public var filterFirstName: [String]?
 			public var filterLastName: [String]?
 			public var filterEmail: [String]?
@@ -37,12 +37,12 @@ extension APIEndpoint.V1 {
 			public var limitBetaGroups: Int?
 			public var limitBuilds: Int?
 
-			public enum FilterInviteType: String, Codable, CaseIterable {
+			public enum FilterInviteType: String, Codable, CaseIterable, Sendable {
 				case email = "EMAIL"
 				case publicLink = "PUBLIC_LINK"
 			}
 
-			public enum Sort: String, Codable, CaseIterable {
+			public enum Sort: String, Codable, CaseIterable, Sendable {
 				case firstName
 				case minusfirstName = "-firstName"
 				case lastName
@@ -55,7 +55,7 @@ extension APIEndpoint.V1 {
 				case minusstate = "-state"
 			}
 
-			public enum FieldsBetaTesters: String, Codable, CaseIterable {
+			public enum FieldsBetaTesters: String, Codable, CaseIterable, Sendable {
 				case firstName
 				case lastName
 				case email
@@ -67,7 +67,7 @@ extension APIEndpoint.V1 {
 				case builds
 			}
 
-			public enum FieldsApps: String, Codable, CaseIterable {
+			public enum FieldsApps: String, Codable, CaseIterable, Sendable {
 				case accessibilityURL = "accessibilityUrl"
 				case name
 				case bundleID = "bundleId"
@@ -128,7 +128,7 @@ extension APIEndpoint.V1 {
 				case androidToIosAppMappingDetails
 			}
 
-			public enum FieldsBetaGroups: String, Codable, CaseIterable {
+			public enum FieldsBetaGroups: String, Codable, CaseIterable, Sendable {
 				case name
 				case createdDate
 				case isInternalGroup
@@ -148,7 +148,7 @@ extension APIEndpoint.V1 {
 				case betaRecruitmentCriterionCompatibleBuildCheck
 			}
 
-			public enum FieldsBuilds: String, Codable, CaseIterable {
+			public enum FieldsBuilds: String, Codable, CaseIterable, Sendable {
 				case version
 				case uploadedDate
 				case expirationDate
@@ -177,7 +177,7 @@ extension APIEndpoint.V1 {
 				case diagnosticSignatures
 			}
 
-			public enum Include: String, Codable, CaseIterable {
+			public enum Include: String, Codable, CaseIterable, Sendable {
 				case apps
 				case betaGroups
 				case builds

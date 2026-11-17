@@ -3,29 +3,29 @@
 
 import Foundation
 
-public struct AppStoreVersionPromotionCreateRequest: Codable {
+public struct AppStoreVersionPromotionCreateRequest: Codable, Sendable {
 	public var data: Data
 
-	public struct Data: Codable {
+	public struct Data: Codable, Sendable {
 		public var type: `Type`
 		public var relationships: Relationships
 
-		public enum `Type`: String, Codable, CaseIterable {
+		public enum `Type`: String, Codable, CaseIterable, Sendable {
 			case appStoreVersionPromotions
 		}
 
-		public struct Relationships: Codable {
+		public struct Relationships: Codable, Sendable {
 			public var appStoreVersion: AppStoreVersion
 			public var appStoreVersionExperimentTreatment: AppStoreVersionExperimentTreatment
 
-			public struct AppStoreVersion: Codable {
+			public struct AppStoreVersion: Codable, Sendable {
 				public var data: Data
 
-				public struct Data: Codable, Identifiable {
+				public struct Data: Codable, Identifiable, Sendable {
 					public var type: `Type`
 					public var id: String
 
-					public enum `Type`: String, Codable, CaseIterable {
+					public enum `Type`: String, Codable, CaseIterable, Sendable {
 						case appStoreVersions
 					}
 
@@ -62,14 +62,14 @@ public struct AppStoreVersionPromotionCreateRequest: Codable {
 				}
 			}
 
-			public struct AppStoreVersionExperimentTreatment: Codable {
+			public struct AppStoreVersionExperimentTreatment: Codable, Sendable {
 				public var data: Data
 
-				public struct Data: Codable, Identifiable {
+				public struct Data: Codable, Identifiable, Sendable {
 					public var type: `Type`
 					public var id: String
 
-					public enum `Type`: String, Codable, CaseIterable {
+					public enum `Type`: String, Codable, CaseIterable, Sendable {
 						case appStoreVersionExperimentTreatments
 					}
 

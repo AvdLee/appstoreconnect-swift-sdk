@@ -9,7 +9,7 @@ extension APIEndpoint.V1.InAppPurchaseVersions {
 		WithID(path: "\(path)/\(id)")
 	}
 
-	public struct WithID {
+	public struct WithID: Sendable {
 		/// Path: `/v1/inAppPurchaseVersions/{id}`
 		public let path: String
 
@@ -17,7 +17,7 @@ extension APIEndpoint.V1.InAppPurchaseVersions {
 			Request(path: path, method: "GET", query: parameters?.asQuery, id: "inAppPurchaseVersions_getInstance")
 		}
 
-		public struct GetParameters {
+		public struct GetParameters: Sendable {
 			public var fieldsInAppPurchaseVersions: [FieldsInAppPurchaseVersions]?
 			public var fieldsInAppPurchases: [FieldsInAppPurchases]?
 			public var fieldsInAppPurchaseImages: [FieldsInAppPurchaseImages]?
@@ -26,7 +26,7 @@ extension APIEndpoint.V1.InAppPurchaseVersions {
 			public var limitImages: Int?
 			public var limitLocalizations: Int?
 
-			public enum FieldsInAppPurchaseVersions: String, Codable, CaseIterable {
+			public enum FieldsInAppPurchaseVersions: String, Codable, CaseIterable, Sendable {
 				case version
 				case state
 				case inAppPurchase
@@ -35,7 +35,7 @@ extension APIEndpoint.V1.InAppPurchaseVersions {
 				case localizations
 			}
 
-			public enum FieldsInAppPurchases: String, Codable, CaseIterable {
+			public enum FieldsInAppPurchases: String, Codable, CaseIterable, Sendable {
 				case name
 				case productID = "productId"
 				case inAppPurchaseType
@@ -55,7 +55,7 @@ extension APIEndpoint.V1.InAppPurchaseVersions {
 				case versions
 			}
 
-			public enum FieldsInAppPurchaseImages: String, Codable, CaseIterable {
+			public enum FieldsInAppPurchaseImages: String, Codable, CaseIterable, Sendable {
 				case fileSize
 				case fileName
 				case assetToken
@@ -64,14 +64,14 @@ extension APIEndpoint.V1.InAppPurchaseVersions {
 				case assetDeliveryState
 			}
 
-			public enum FieldsInAppPurchaseLocalizations: String, Codable, CaseIterable {
+			public enum FieldsInAppPurchaseLocalizations: String, Codable, CaseIterable, Sendable {
 				case name
 				case locale
 				case description
 				case version
 			}
 
-			public enum Include: String, Codable, CaseIterable {
+			public enum Include: String, Codable, CaseIterable, Sendable {
 				case inAppPurchase
 				case image
 				case images

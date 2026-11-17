@@ -9,7 +9,7 @@ extension APIEndpoint.V1.WinBackOffers.WithID.Relationships {
 		Prices(path: path + "/prices")
 	}
 
-	public struct Prices {
+	public struct Prices: Sendable {
 		/// Path: `/v1/winBackOffers/{id}/relationships/prices`
 		public let path: String
 

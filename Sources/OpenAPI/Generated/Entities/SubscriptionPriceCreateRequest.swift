@@ -3,19 +3,19 @@
 
 import Foundation
 
-public struct SubscriptionPriceCreateRequest: Codable {
+public struct SubscriptionPriceCreateRequest: Codable, Sendable {
 	public var data: Data
 
-	public struct Data: Codable {
+	public struct Data: Codable, Sendable {
 		public var type: `Type`
 		public var attributes: Attributes?
 		public var relationships: Relationships
 
-		public enum `Type`: String, Codable, CaseIterable {
+		public enum `Type`: String, Codable, CaseIterable, Sendable {
 			case subscriptionPrices
 		}
 
-		public struct Attributes: Codable {
+		public struct Attributes: Codable, Sendable {
 			public var startDate: String?
 			public var isPreserveCurrentPrice: Bool?
 			public var planType: SubscriptionPlanType?
@@ -41,19 +41,19 @@ public struct SubscriptionPriceCreateRequest: Codable {
 			}
 		}
 
-		public struct Relationships: Codable {
+		public struct Relationships: Codable, Sendable {
 			public var subscription: Subscription
 			public var territory: Territory?
 			public var subscriptionPricePoint: SubscriptionPricePoint
 
-			public struct Subscription: Codable {
+			public struct Subscription: Codable, Sendable {
 				public var data: Data
 
-				public struct Data: Codable, Identifiable {
+				public struct Data: Codable, Identifiable, Sendable {
 					public var type: `Type`
 					public var id: String
 
-					public enum `Type`: String, Codable, CaseIterable {
+					public enum `Type`: String, Codable, CaseIterable, Sendable {
 						case subscriptions
 					}
 
@@ -90,14 +90,14 @@ public struct SubscriptionPriceCreateRequest: Codable {
 				}
 			}
 
-			public struct Territory: Codable {
+			public struct Territory: Codable, Sendable {
 				public var data: Data?
 
-				public struct Data: Codable, Identifiable {
+				public struct Data: Codable, Identifiable, Sendable {
 					public var type: `Type`
 					public var id: String
 
-					public enum `Type`: String, Codable, CaseIterable {
+					public enum `Type`: String, Codable, CaseIterable, Sendable {
 						case territories
 					}
 
@@ -134,14 +134,14 @@ public struct SubscriptionPriceCreateRequest: Codable {
 				}
 			}
 
-			public struct SubscriptionPricePoint: Codable {
+			public struct SubscriptionPricePoint: Codable, Sendable {
 				public var data: Data
 
-				public struct Data: Codable, Identifiable {
+				public struct Data: Codable, Identifiable, Sendable {
 					public var type: `Type`
 					public var id: String
 
-					public enum `Type`: String, Codable, CaseIterable {
+					public enum `Type`: String, Codable, CaseIterable, Sendable {
 						case subscriptionPricePoints
 					}
 

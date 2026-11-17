@@ -9,7 +9,7 @@ extension APIEndpoint.V1.Apps.WithID {
 		SearchKeywords(path: path + "/searchKeywords")
 	}
 
-	public struct SearchKeywords {
+	public struct SearchKeywords: Sendable {
 		/// Path: `/v1/apps/{id}/searchKeywords`
 		public let path: String
 
@@ -17,7 +17,7 @@ extension APIEndpoint.V1.Apps.WithID {
 			Request(path: path, method: "GET", query: parameters?.asQuery, id: "apps_searchKeywords_getToManyRelated")
 		}
 
-		public struct GetParameters {
+		public struct GetParameters: Sendable {
 			public var filterPlatform: [String]?
 			public var filterLocale: [String]?
 			public var fieldsAppKeywords: [String]?

@@ -3,18 +3,18 @@
 
 import Foundation
 
-public struct AppCustomProductPageLocalization: Codable, Identifiable {
+public struct AppCustomProductPageLocalization: Codable, Identifiable, Sendable {
 	public var type: `Type`
 	public var id: String
 	public var attributes: Attributes?
 	public var relationships: Relationships?
 	public var links: ResourceLinks?
 
-	public enum `Type`: String, Codable, CaseIterable {
+	public enum `Type`: String, Codable, CaseIterable, Sendable {
 		case appCustomProductPageLocalizations
 	}
 
-	public struct Attributes: Codable {
+	public struct Attributes: Codable, Sendable {
 		public var locale: String?
 		public var promotionalText: String?
 
@@ -36,21 +36,21 @@ public struct AppCustomProductPageLocalization: Codable, Identifiable {
 		}
 	}
 
-	public struct Relationships: Codable {
+	public struct Relationships: Codable, Sendable {
 		public var appCustomProductPageVersion: AppCustomProductPageVersion?
 		public var appScreenshotSets: AppScreenshotSets?
 		public var appPreviewSets: AppPreviewSets?
 		public var searchKeywords: SearchKeywords?
 		public var placements: Placements?
 
-		public struct AppCustomProductPageVersion: Codable {
+		public struct AppCustomProductPageVersion: Codable, Sendable {
 			public var data: Data?
 
-			public struct Data: Codable, Identifiable {
+			public struct Data: Codable, Identifiable, Sendable {
 				public var type: `Type`
 				public var id: String
 
-				public enum `Type`: String, Codable, CaseIterable {
+				public enum `Type`: String, Codable, CaseIterable, Sendable {
 					case appCustomProductPageVersions
 				}
 
@@ -87,16 +87,16 @@ public struct AppCustomProductPageLocalization: Codable, Identifiable {
 			}
 		}
 
-		public struct AppScreenshotSets: Codable {
+		public struct AppScreenshotSets: Codable, Sendable {
 			public var links: RelationshipLinks?
 			public var meta: PagingInformation?
 			public var data: [Datum]?
 
-			public struct Datum: Codable, Identifiable {
+			public struct Datum: Codable, Identifiable, Sendable {
 				public var type: `Type`
 				public var id: String
 
-				public enum `Type`: String, Codable, CaseIterable {
+				public enum `Type`: String, Codable, CaseIterable, Sendable {
 					case appScreenshotSets
 				}
 
@@ -139,16 +139,16 @@ public struct AppCustomProductPageLocalization: Codable, Identifiable {
 			}
 		}
 
-		public struct AppPreviewSets: Codable {
+		public struct AppPreviewSets: Codable, Sendable {
 			public var links: RelationshipLinks?
 			public var meta: PagingInformation?
 			public var data: [Datum]?
 
-			public struct Datum: Codable, Identifiable {
+			public struct Datum: Codable, Identifiable, Sendable {
 				public var type: `Type`
 				public var id: String
 
-				public enum `Type`: String, Codable, CaseIterable {
+				public enum `Type`: String, Codable, CaseIterable, Sendable {
 					case appPreviewSets
 				}
 
@@ -191,16 +191,16 @@ public struct AppCustomProductPageLocalization: Codable, Identifiable {
 			}
 		}
 
-		public struct SearchKeywords: Codable {
+		public struct SearchKeywords: Codable, Sendable {
 			public var links: RelationshipLinks?
 			public var meta: PagingInformation?
 			public var data: [Datum]?
 
-			public struct Datum: Codable, Identifiable {
+			public struct Datum: Codable, Identifiable, Sendable {
 				public var type: `Type`
 				public var id: String
 
-				public enum `Type`: String, Codable, CaseIterable {
+				public enum `Type`: String, Codable, CaseIterable, Sendable {
 					case appKeywords
 				}
 
@@ -243,16 +243,16 @@ public struct AppCustomProductPageLocalization: Codable, Identifiable {
 			}
 		}
 
-		public struct Placements: Codable {
+		public struct Placements: Codable, Sendable {
 			public var links: RelationshipLinks?
 			public var meta: PagingInformation?
 			public var data: [Datum]?
 
-			public struct Datum: Codable, Identifiable {
+			public struct Datum: Codable, Identifiable, Sendable {
 				public var type: `Type`
 				public var id: String
 
-				public enum `Type`: String, Codable, CaseIterable {
+				public enum `Type`: String, Codable, CaseIterable, Sendable {
 					case appAssetLibraryPlacements
 				}
 

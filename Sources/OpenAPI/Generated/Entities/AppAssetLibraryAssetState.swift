@@ -3,7 +3,7 @@
 
 import Foundation
 
-public enum AppAssetLibraryAssetState: String, Codable, CaseIterable {
+public enum AppAssetLibraryAssetState: String, Codable, CaseIterable, Sendable {
 	case awaitingUpload = "AWAITING_UPLOAD"
 	case uploadComplete = "UPLOAD_COMPLETE"
 	case failed = "FAILED"

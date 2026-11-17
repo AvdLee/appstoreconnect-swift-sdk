@@ -9,7 +9,7 @@ extension APIEndpoint.V1.Builds.WithID.Relationships {
 		AppEncryptionDeclaration(path: path + "/appEncryptionDeclaration")
 	}
 
-	public struct AppEncryptionDeclaration {
+	public struct AppEncryptionDeclaration: Sendable {
 		/// Path: `/v1/builds/{id}/relationships/appEncryptionDeclaration`
 		public let path: String
 

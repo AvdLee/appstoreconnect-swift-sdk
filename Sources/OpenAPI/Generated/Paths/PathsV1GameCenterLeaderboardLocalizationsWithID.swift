@@ -9,7 +9,7 @@ extension APIEndpoint.V1.GameCenterLeaderboardLocalizations {
 		WithID(path: "\(path)/\(id)")
 	}
 
-	public struct WithID {
+	public struct WithID: Sendable {
 		/// Path: `/v1/gameCenterLeaderboardLocalizations/{id}`
 		public let path: String
 
@@ -18,13 +18,13 @@ extension APIEndpoint.V1.GameCenterLeaderboardLocalizations {
 			Request(path: path, method: "GET", query: parameters?.asQuery, id: "gameCenterLeaderboardLocalizations_getInstance")
 		}
 
-		public struct GetParameters {
+		public struct GetParameters: Sendable {
 			public var fieldsGameCenterLeaderboardLocalizations: [FieldsGameCenterLeaderboardLocalizations]?
 			public var fieldsGameCenterLeaderboards: [FieldsGameCenterLeaderboards]?
 			public var fieldsGameCenterLeaderboardImages: [FieldsGameCenterLeaderboardImages]?
 			public var include: [Include]?
 
-			public enum FieldsGameCenterLeaderboardLocalizations: String, Codable, CaseIterable {
+			public enum FieldsGameCenterLeaderboardLocalizations: String, Codable, CaseIterable, Sendable {
 				case locale
 				case name
 				case formatterOverride
@@ -35,7 +35,7 @@ extension APIEndpoint.V1.GameCenterLeaderboardLocalizations {
 				case gameCenterLeaderboardImage
 			}
 
-			public enum FieldsGameCenterLeaderboards: String, Codable, CaseIterable {
+			public enum FieldsGameCenterLeaderboards: String, Codable, CaseIterable, Sendable {
 				case defaultFormatter
 				case referenceName
 				case vendorIdentifier
@@ -59,7 +59,7 @@ extension APIEndpoint.V1.GameCenterLeaderboardLocalizations {
 				case challenge
 			}
 
-			public enum FieldsGameCenterLeaderboardImages: String, Codable, CaseIterable {
+			public enum FieldsGameCenterLeaderboardImages: String, Codable, CaseIterable, Sendable {
 				case fileSize
 				case fileName
 				case imageAsset
@@ -68,7 +68,7 @@ extension APIEndpoint.V1.GameCenterLeaderboardLocalizations {
 				case gameCenterLeaderboardLocalization
 			}
 
-			public enum Include: String, Codable, CaseIterable {
+			public enum Include: String, Codable, CaseIterable, Sendable {
 				case gameCenterLeaderboard
 				case gameCenterLeaderboardImage
 			}

@@ -3,13 +3,13 @@
 
 import Foundation
 
-public struct AppStoreVersionExperimentV2Response: Codable {
+public struct AppStoreVersionExperimentV2Response: Codable, Sendable {
 	/// AppStoreVersionExperimentV2
 	public var data: AppStoreVersionExperimentV2
 	public var included: [IncludedItem]?
 	public var links: DocumentLinks
 
-	public enum IncludedItem: Codable {
+	public enum IncludedItem: Codable, Sendable {
 		case appStoreVersionExperimentTreatment(AppStoreVersionExperimentTreatment)
 		case appStoreVersion(AppStoreVersion)
 		case app(App)

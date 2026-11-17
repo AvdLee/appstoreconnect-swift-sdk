@@ -3,7 +3,7 @@
 
 import Foundation
 
-public struct Location: Codable {
+public struct Location: Codable, Sendable {
 	public var latitude: Double?
 	public var longitude: Double?
 

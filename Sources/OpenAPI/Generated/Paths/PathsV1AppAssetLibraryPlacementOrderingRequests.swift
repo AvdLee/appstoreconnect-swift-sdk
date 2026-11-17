@@ -9,7 +9,7 @@ extension APIEndpoint.V1 {
 		AppAssetLibraryPlacementOrderingRequests(path: path + "/appAssetLibraryPlacementOrderingRequests")
 	}
 
-	public struct AppAssetLibraryPlacementOrderingRequests {
+	public struct AppAssetLibraryPlacementOrderingRequests: Sendable {
 		/// Path: `/v1/appAssetLibraryPlacementOrderingRequests`
 		public let path: String
 
@@ -17,13 +17,13 @@ extension APIEndpoint.V1 {
 			Request(path: path, method: "POST", query: parameters?.asQuery, body: body, id: "appAssetLibraryPlacementOrderingRequests_createInstance")
 		}
 
-		public struct PostParameters {
+		public struct PostParameters: Sendable {
 			public var fieldsAppAssetLibraryPlacements: [FieldsAppAssetLibraryPlacements]?
 			public var include: [Include]?
 			public var limitOrderedPlacements: Int?
 			public var fieldsAppAssetLibraryPlacementOrderingRequests: [FieldsAppAssetLibraryPlacementOrderingRequests]?
 
-			public enum FieldsAppAssetLibraryPlacements: String, Codable, CaseIterable {
+			public enum FieldsAppAssetLibraryPlacements: String, Codable, CaseIterable, Sendable {
 				case mediaType
 				case placementType
 				case placementGroup
@@ -40,11 +40,11 @@ extension APIEndpoint.V1 {
 				case retentionMessageVersion
 			}
 
-			public enum Include: String, Codable, CaseIterable {
+			public enum Include: String, Codable, CaseIterable, Sendable {
 				case orderedPlacements
 			}
 
-			public enum FieldsAppAssetLibraryPlacementOrderingRequests: String, Codable, CaseIterable {
+			public enum FieldsAppAssetLibraryPlacementOrderingRequests: String, Codable, CaseIterable, Sendable {
 				case orderedPlacements
 			}
 

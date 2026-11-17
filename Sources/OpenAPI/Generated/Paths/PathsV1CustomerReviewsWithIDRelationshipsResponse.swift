@@ -9,7 +9,7 @@ extension APIEndpoint.V1.CustomerReviews.WithID.Relationships {
 		Response(path: path + "/response")
 	}
 
-	public struct Response {
+	public struct Response: Sendable {
 		/// Path: `/v1/customerReviews/{id}/relationships/response`
 		public let path: String
 

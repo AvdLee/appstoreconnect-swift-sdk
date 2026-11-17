@@ -3,7 +3,7 @@
 
 import Foundation
 
-public struct UserInvitationsResponse: Codable {
+public struct UserInvitationsResponse: Codable, Sendable {
 	public var data: [UserInvitation]
 	public var included: [App]?
 	public var links: PagedDocumentLinks

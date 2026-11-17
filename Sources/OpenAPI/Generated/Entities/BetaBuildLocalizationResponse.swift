@@ -3,7 +3,7 @@
 
 import Foundation
 
-public struct BetaBuildLocalizationResponse: Codable {
+public struct BetaBuildLocalizationResponse: Codable, Sendable {
 	/// BetaBuildLocalization
 	public var data: BetaBuildLocalization
 	public var included: [Build]?

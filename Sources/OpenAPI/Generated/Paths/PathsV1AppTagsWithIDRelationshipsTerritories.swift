@@ -9,7 +9,7 @@ extension APIEndpoint.V1.AppTags.WithID.Relationships {
 		Territories(path: path + "/territories")
 	}
 
-	public struct Territories {
+	public struct Territories: Sendable {
 		/// Path: `/v1/appTags/{id}/relationships/territories`
 		public let path: String
 

@@ -9,7 +9,7 @@ extension APIEndpoint.V1.BetaGroups.WithID.Metrics {
 		PublicLinkUsages(path: path + "/publicLinkUsages")
 	}
 
-	public struct PublicLinkUsages {
+	public struct PublicLinkUsages: Sendable {
 		/// Path: `/v1/betaGroups/{id}/metrics/publicLinkUsages`
 		public let path: String
 

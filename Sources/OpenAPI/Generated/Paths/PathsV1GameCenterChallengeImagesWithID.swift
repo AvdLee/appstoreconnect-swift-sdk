@@ -9,7 +9,7 @@ extension APIEndpoint.V1.GameCenterChallengeImages {
 		WithID(path: "\(path)/\(id)")
 	}
 
-	public struct WithID {
+	public struct WithID: Sendable {
 		/// Path: `/v1/gameCenterChallengeImages/{id}`
 		public let path: String
 
@@ -23,7 +23,7 @@ extension APIEndpoint.V1.GameCenterChallengeImages {
 			return encoder.items
 		}
 
-		public enum FieldsGameCenterChallengeImages: String, Codable, CaseIterable {
+		public enum FieldsGameCenterChallengeImages: String, Codable, CaseIterable, Sendable {
 			case fileSize
 			case fileName
 			case imageAsset

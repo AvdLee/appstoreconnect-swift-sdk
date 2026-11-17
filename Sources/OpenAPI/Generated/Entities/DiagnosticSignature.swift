@@ -3,24 +3,24 @@
 
 import Foundation
 
-public struct DiagnosticSignature: Codable, Identifiable {
+public struct DiagnosticSignature: Codable, Identifiable, Sendable {
 	public var type: `Type`
 	public var id: String
 	public var attributes: Attributes?
 	public var relationships: Relationships?
 	public var links: ResourceLinks?
 
-	public enum `Type`: String, Codable, CaseIterable {
+	public enum `Type`: String, Codable, CaseIterable, Sendable {
 		case diagnosticSignatures
 	}
 
-	public struct Attributes: Codable {
+	public struct Attributes: Codable, Sendable {
 		public var diagnosticType: DiagnosticType?
 		public var signature: String?
 		public var weight: Double?
 		public var insight: DiagnosticInsight?
 
-		public enum DiagnosticType: String, Codable, CaseIterable {
+		public enum DiagnosticType: String, Codable, CaseIterable, Sendable {
 			case diskWrites = "DISK_WRITES"
 			case hangs = "HANGS"
 			case launches = "LAUNCHES"
@@ -50,10 +50,10 @@ public struct DiagnosticSignature: Codable, Identifiable {
 		}
 	}
 
-	public struct Relationships: Codable {
+	public struct Relationships: Codable, Sendable {
 		public var logs: Logs?
 
-		public struct Logs: Codable {
+		public struct Logs: Codable, Sendable {
 			public var links: RelationshipLinks?
 
 			public init(links: RelationshipLinks? = nil) {

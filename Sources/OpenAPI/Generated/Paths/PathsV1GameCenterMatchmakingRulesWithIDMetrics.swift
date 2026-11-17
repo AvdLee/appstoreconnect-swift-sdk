@@ -9,7 +9,7 @@ extension APIEndpoint.V1.GameCenterMatchmakingRules.WithID {
 		Metrics(path: path + "/metrics")
 	}
 
-	public struct Metrics {
+	public struct Metrics: Sendable {
 		/// Path: `/v1/gameCenterMatchmakingRules/{id}/metrics`
 		public let path: String
 	}

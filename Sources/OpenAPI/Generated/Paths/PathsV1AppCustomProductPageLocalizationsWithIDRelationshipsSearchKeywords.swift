@@ -9,7 +9,7 @@ extension APIEndpoint.V1.AppCustomProductPageLocalizations.WithID.Relationships 
 		SearchKeywords(path: path + "/searchKeywords")
 	}
 
-	public struct SearchKeywords {
+	public struct SearchKeywords: Sendable {
 		/// Path: `/v1/appCustomProductPageLocalizations/{id}/relationships/searchKeywords`
 		public let path: String
 

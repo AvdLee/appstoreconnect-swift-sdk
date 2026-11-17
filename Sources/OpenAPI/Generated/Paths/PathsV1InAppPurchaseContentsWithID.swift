@@ -9,7 +9,7 @@ extension APIEndpoint.V1.InAppPurchaseContents {
 		WithID(path: "\(path)/\(id)")
 	}
 
-	public struct WithID {
+	public struct WithID: Sendable {
 		/// Path: `/v1/inAppPurchaseContents/{id}`
 		public let path: String
 
@@ -17,12 +17,12 @@ extension APIEndpoint.V1.InAppPurchaseContents {
 			Request(path: path, method: "GET", query: parameters?.asQuery, id: "inAppPurchaseContents_getInstance")
 		}
 
-		public struct GetParameters {
+		public struct GetParameters: Sendable {
 			public var fieldsInAppPurchaseContents: [FieldsInAppPurchaseContents]?
 			public var fieldsInAppPurchases: [FieldsInAppPurchases]?
 			public var include: [Include]?
 
-			public enum FieldsInAppPurchaseContents: String, Codable, CaseIterable {
+			public enum FieldsInAppPurchaseContents: String, Codable, CaseIterable, Sendable {
 				case fileName
 				case fileSize
 				case url
@@ -30,7 +30,7 @@ extension APIEndpoint.V1.InAppPurchaseContents {
 				case inAppPurchaseV2
 			}
 
-			public enum FieldsInAppPurchases: String, Codable, CaseIterable {
+			public enum FieldsInAppPurchases: String, Codable, CaseIterable, Sendable {
 				case name
 				case productID = "productId"
 				case inAppPurchaseType
@@ -50,7 +50,7 @@ extension APIEndpoint.V1.InAppPurchaseContents {
 				case versions
 			}
 
-			public enum Include: String, Codable, CaseIterable {
+			public enum Include: String, Codable, CaseIterable, Sendable {
 				case inAppPurchaseV2
 			}
 

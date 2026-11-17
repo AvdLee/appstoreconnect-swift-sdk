@@ -3,17 +3,17 @@
 
 import Foundation
 
-public struct GameCenterLeaderboardEntrySubmission: Codable, Identifiable {
+public struct GameCenterLeaderboardEntrySubmission: Codable, Identifiable, Sendable {
 	public var type: `Type`
 	public var id: String
 	public var attributes: Attributes?
 	public var links: ResourceLinks?
 
-	public enum `Type`: String, Codable, CaseIterable {
+	public enum `Type`: String, Codable, CaseIterable, Sendable {
 		case gameCenterLeaderboardEntrySubmissions
 	}
 
-	public struct Attributes: Codable {
+	public struct Attributes: Codable, Sendable {
 		public var bundleID: String?
 		public var challengeIDs: [String]?
 		public var context: String?

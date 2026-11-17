@@ -3,21 +3,21 @@
 
 import Foundation
 
-public struct BackgroundAssetVersionInternalBetaRelease: Codable, Identifiable {
+public struct BackgroundAssetVersionInternalBetaRelease: Codable, Identifiable, Sendable {
 	public var type: `Type`
 	public var id: String
 	public var attributes: Attributes?
 	public var relationships: Relationships?
 	public var links: ResourceLinks?
 
-	public enum `Type`: String, Codable, CaseIterable {
+	public enum `Type`: String, Codable, CaseIterable, Sendable {
 		case backgroundAssetVersionInternalBetaReleases
 	}
 
-	public struct Attributes: Codable {
+	public struct Attributes: Codable, Sendable {
 		public var state: State?
 
-		public enum State: String, Codable, CaseIterable {
+		public enum State: String, Codable, CaseIterable, Sendable {
 			case readyForTesting = "READY_FOR_TESTING"
 			case superseded = "SUPERSEDED"
 		}
@@ -37,17 +37,17 @@ public struct BackgroundAssetVersionInternalBetaRelease: Codable, Identifiable {
 		}
 	}
 
-	public struct Relationships: Codable {
+	public struct Relationships: Codable, Sendable {
 		public var backgroundAssetVersion: BackgroundAssetVersion?
 
-		public struct BackgroundAssetVersion: Codable {
+		public struct BackgroundAssetVersion: Codable, Sendable {
 			public var data: Data?
 
-			public struct Data: Codable, Identifiable {
+			public struct Data: Codable, Identifiable, Sendable {
 				public var type: `Type`
 				public var id: String
 
-				public enum `Type`: String, Codable, CaseIterable {
+				public enum `Type`: String, Codable, CaseIterable, Sendable {
 					case backgroundAssetVersions
 				}
 

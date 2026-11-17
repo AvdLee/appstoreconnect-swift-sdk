@@ -3,7 +3,7 @@
 
 import Foundation
 
-public struct AppAssetLibraryImagesResponse: Codable {
+public struct AppAssetLibraryImagesResponse: Codable, Sendable {
 	public var data: [AppAssetLibraryImage]
 	public var included: [AppAssetLibraryPlacement]?
 	public var links: PagedDocumentLinks

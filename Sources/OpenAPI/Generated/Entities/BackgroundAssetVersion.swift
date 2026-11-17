@@ -3,18 +3,18 @@
 
 import Foundation
 
-public struct BackgroundAssetVersion: Codable, Identifiable {
+public struct BackgroundAssetVersion: Codable, Identifiable, Sendable {
 	public var type: `Type`
 	public var id: String
 	public var attributes: Attributes?
 	public var relationships: Relationships?
 	public var links: ResourceLinks?
 
-	public enum `Type`: String, Codable, CaseIterable {
+	public enum `Type`: String, Codable, CaseIterable, Sendable {
 		case backgroundAssetVersions
 	}
 
-	public struct Attributes: Codable {
+	public struct Attributes: Codable, Sendable {
 		public var createdDate: Date?
 		public var platforms: [Platform]?
 		public var state: BackgroundAssetVersionState?
@@ -22,7 +22,7 @@ public struct BackgroundAssetVersion: Codable, Identifiable {
 		public var version: String?
 		public var locale: String?
 
-		public struct StateDetails: Codable {
+		public struct StateDetails: Codable, Sendable {
 			public var errors: [StateDetail]?
 			public var warnings: [StateDetail]?
 			public var infos: [StateDetail]?
@@ -78,7 +78,7 @@ public struct BackgroundAssetVersion: Codable, Identifiable {
 		}
 	}
 
-	public struct Relationships: Codable {
+	public struct Relationships: Codable, Sendable {
 		public var backgroundAsset: BackgroundAsset?
 		public var internalBetaRelease: InternalBetaRelease?
 		public var externalBetaRelease: ExternalBetaRelease?
@@ -87,14 +87,14 @@ public struct BackgroundAssetVersion: Codable, Identifiable {
 		public var manifestFile: ManifestFile?
 		public var backgroundAssetUploadFiles: BackgroundAssetUploadFiles?
 
-		public struct BackgroundAsset: Codable {
+		public struct BackgroundAsset: Codable, Sendable {
 			public var data: Data?
 
-			public struct Data: Codable, Identifiable {
+			public struct Data: Codable, Identifiable, Sendable {
 				public var type: `Type`
 				public var id: String
 
-				public enum `Type`: String, Codable, CaseIterable {
+				public enum `Type`: String, Codable, CaseIterable, Sendable {
 					case backgroundAssets
 				}
 
@@ -131,14 +131,14 @@ public struct BackgroundAssetVersion: Codable, Identifiable {
 			}
 		}
 
-		public struct InternalBetaRelease: Codable {
+		public struct InternalBetaRelease: Codable, Sendable {
 			public var data: Data?
 
-			public struct Data: Codable, Identifiable {
+			public struct Data: Codable, Identifiable, Sendable {
 				public var type: `Type`
 				public var id: String
 
-				public enum `Type`: String, Codable, CaseIterable {
+				public enum `Type`: String, Codable, CaseIterable, Sendable {
 					case backgroundAssetVersionInternalBetaReleases
 				}
 
@@ -175,14 +175,14 @@ public struct BackgroundAssetVersion: Codable, Identifiable {
 			}
 		}
 
-		public struct ExternalBetaRelease: Codable {
+		public struct ExternalBetaRelease: Codable, Sendable {
 			public var data: Data?
 
-			public struct Data: Codable, Identifiable {
+			public struct Data: Codable, Identifiable, Sendable {
 				public var type: `Type`
 				public var id: String
 
-				public enum `Type`: String, Codable, CaseIterable {
+				public enum `Type`: String, Codable, CaseIterable, Sendable {
 					case backgroundAssetVersionExternalBetaReleases
 				}
 
@@ -219,14 +219,14 @@ public struct BackgroundAssetVersion: Codable, Identifiable {
 			}
 		}
 
-		public struct AppStoreRelease: Codable {
+		public struct AppStoreRelease: Codable, Sendable {
 			public var data: Data?
 
-			public struct Data: Codable, Identifiable {
+			public struct Data: Codable, Identifiable, Sendable {
 				public var type: `Type`
 				public var id: String
 
-				public enum `Type`: String, Codable, CaseIterable {
+				public enum `Type`: String, Codable, CaseIterable, Sendable {
 					case backgroundAssetVersionAppStoreReleases
 				}
 
@@ -263,14 +263,14 @@ public struct BackgroundAssetVersion: Codable, Identifiable {
 			}
 		}
 
-		public struct AssetFile: Codable {
+		public struct AssetFile: Codable, Sendable {
 			public var data: Data?
 
-			public struct Data: Codable, Identifiable {
+			public struct Data: Codable, Identifiable, Sendable {
 				public var type: `Type`
 				public var id: String
 
-				public enum `Type`: String, Codable, CaseIterable {
+				public enum `Type`: String, Codable, CaseIterable, Sendable {
 					case backgroundAssetUploadFiles
 				}
 
@@ -307,14 +307,14 @@ public struct BackgroundAssetVersion: Codable, Identifiable {
 			}
 		}
 
-		public struct ManifestFile: Codable {
+		public struct ManifestFile: Codable, Sendable {
 			public var data: Data?
 
-			public struct Data: Codable, Identifiable {
+			public struct Data: Codable, Identifiable, Sendable {
 				public var type: `Type`
 				public var id: String
 
-				public enum `Type`: String, Codable, CaseIterable {
+				public enum `Type`: String, Codable, CaseIterable, Sendable {
 					case backgroundAssetUploadFiles
 				}
 
@@ -351,7 +351,7 @@ public struct BackgroundAssetVersion: Codable, Identifiable {
 			}
 		}
 
-		public struct BackgroundAssetUploadFiles: Codable {
+		public struct BackgroundAssetUploadFiles: Codable, Sendable {
 			public var links: RelationshipLinks?
 
 			public init(links: RelationshipLinks? = nil) {

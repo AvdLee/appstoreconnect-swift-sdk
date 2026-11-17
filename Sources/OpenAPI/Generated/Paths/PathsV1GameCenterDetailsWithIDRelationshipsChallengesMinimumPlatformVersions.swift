@@ -9,7 +9,7 @@ extension APIEndpoint.V1.GameCenterDetails.WithID.Relationships {
 		ChallengesMinimumPlatformVersions(path: path + "/challengesMinimumPlatformVersions")
 	}
 
-	public struct ChallengesMinimumPlatformVersions {
+	public struct ChallengesMinimumPlatformVersions: Sendable {
 		/// Path: `/v1/gameCenterDetails/{id}/relationships/challengesMinimumPlatformVersions`
 		public let path: String
 

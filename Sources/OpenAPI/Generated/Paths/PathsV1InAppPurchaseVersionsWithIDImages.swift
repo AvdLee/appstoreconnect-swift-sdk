@@ -9,7 +9,7 @@ extension APIEndpoint.V1.InAppPurchaseVersions.WithID {
 		Images(path: path + "/images")
 	}
 
-	public struct Images {
+	public struct Images: Sendable {
 		/// Path: `/v1/inAppPurchaseVersions/{id}/images`
 		public let path: String
 
@@ -24,7 +24,7 @@ extension APIEndpoint.V1.InAppPurchaseVersions.WithID {
 			return encoder.items
 		}
 
-		public enum FieldsInAppPurchaseImages: String, Codable, CaseIterable {
+		public enum FieldsInAppPurchaseImages: String, Codable, CaseIterable, Sendable {
 			case fileSize
 			case fileName
 			case assetToken

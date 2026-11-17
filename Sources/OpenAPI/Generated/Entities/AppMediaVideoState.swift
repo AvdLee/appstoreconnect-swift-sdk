@@ -3,12 +3,12 @@
 
 import Foundation
 
-public struct AppMediaVideoState: Codable {
+public struct AppMediaVideoState: Codable, Sendable {
 	public var errors: [AppMediaStateError]?
 	public var warnings: [AppMediaStateError]?
 	public var state: State?
 
-	public enum State: String, Codable, CaseIterable {
+	public enum State: String, Codable, CaseIterable, Sendable {
 		case awaitingUpload = "AWAITING_UPLOAD"
 		case uploadComplete = "UPLOAD_COMPLETE"
 		case processing = "PROCESSING"

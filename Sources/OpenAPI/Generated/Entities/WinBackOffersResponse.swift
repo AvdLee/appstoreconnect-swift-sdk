@@ -3,7 +3,7 @@
 
 import Foundation
 
-public struct WinBackOffersResponse: Codable {
+public struct WinBackOffersResponse: Codable, Sendable {
 	public var data: [WinBackOffer]
 	public var included: [WinBackOfferPrice]?
 	public var links: PagedDocumentLinks

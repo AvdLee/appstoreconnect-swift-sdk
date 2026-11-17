@@ -9,7 +9,7 @@ extension APIEndpoint.V1.Apps.WithID {
 		AppEvents(path: path + "/appEvents")
 	}
 
-	public struct AppEvents {
+	public struct AppEvents: Sendable {
 		/// Path: `/v1/apps/{id}/appEvents`
 		public let path: String
 
@@ -17,7 +17,7 @@ extension APIEndpoint.V1.Apps.WithID {
 			Request(path: path, method: "GET", query: parameters?.asQuery, id: "apps_appEvents_getToManyRelated")
 		}
 
-		public struct GetParameters {
+		public struct GetParameters: Sendable {
 			public var filterEventState: [FilterEventState]?
 			public var filterID: [String]?
 			public var fieldsAppEvents: [FieldsAppEvents]?
@@ -26,7 +26,7 @@ extension APIEndpoint.V1.Apps.WithID {
 			public var include: [Include]?
 			public var limitLocalizations: Int?
 
-			public enum FilterEventState: String, Codable, CaseIterable {
+			public enum FilterEventState: String, Codable, CaseIterable, Sendable {
 				case draft = "DRAFT"
 				case readyForReview = "READY_FOR_REVIEW"
 				case waitingForReview = "WAITING_FOR_REVIEW"
@@ -39,7 +39,7 @@ extension APIEndpoint.V1.Apps.WithID {
 				case archived = "ARCHIVED"
 			}
 
-			public enum FieldsAppEvents: String, Codable, CaseIterable {
+			public enum FieldsAppEvents: String, Codable, CaseIterable, Sendable {
 				case referenceName
 				case badge
 				case eventState
@@ -53,7 +53,7 @@ extension APIEndpoint.V1.Apps.WithID {
 				case localizations
 			}
 
-			public enum FieldsAppEventLocalizations: String, Codable, CaseIterable {
+			public enum FieldsAppEventLocalizations: String, Codable, CaseIterable, Sendable {
 				case locale
 				case name
 				case shortDescription
@@ -64,7 +64,7 @@ extension APIEndpoint.V1.Apps.WithID {
 				case placements
 			}
 
-			public enum Include: String, Codable, CaseIterable {
+			public enum Include: String, Codable, CaseIterable, Sendable {
 				case localizations
 			}
 

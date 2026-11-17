@@ -3,18 +3,18 @@
 
 import Foundation
 
-public struct ReviewSubmissionItemCreateRequest: Codable {
+public struct ReviewSubmissionItemCreateRequest: Codable, Sendable {
 	public var data: Data
 
-	public struct Data: Codable {
+	public struct Data: Codable, Sendable {
 		public var type: `Type`
 		public var relationships: Relationships
 
-		public enum `Type`: String, Codable, CaseIterable {
+		public enum `Type`: String, Codable, CaseIterable, Sendable {
 			case reviewSubmissionItems
 		}
 
-		public struct Relationships: Codable {
+		public struct Relationships: Codable, Sendable {
 			public var reviewSubmission: ReviewSubmission
 			public var appStoreVersion: AppStoreVersion?
 			public var appCustomProductPageVersion: AppCustomProductPageVersion?
@@ -34,14 +34,14 @@ public struct ReviewSubmissionItemCreateRequest: Codable {
 			public var subscriptionGroupVersion: SubscriptionGroupVersion?
 			public var retentionMessageVersion: RetentionMessageVersion?
 
-			public struct ReviewSubmission: Codable {
+			public struct ReviewSubmission: Codable, Sendable {
 				public var data: Data
 
-				public struct Data: Codable, Identifiable {
+				public struct Data: Codable, Identifiable, Sendable {
 					public var type: `Type`
 					public var id: String
 
-					public enum `Type`: String, Codable, CaseIterable {
+					public enum `Type`: String, Codable, CaseIterable, Sendable {
 						case reviewSubmissions
 					}
 
@@ -78,14 +78,14 @@ public struct ReviewSubmissionItemCreateRequest: Codable {
 				}
 			}
 
-			public struct AppStoreVersion: Codable {
+			public struct AppStoreVersion: Codable, Sendable {
 				public var data: Data?
 
-				public struct Data: Codable, Identifiable {
+				public struct Data: Codable, Identifiable, Sendable {
 					public var type: `Type`
 					public var id: String
 
-					public enum `Type`: String, Codable, CaseIterable {
+					public enum `Type`: String, Codable, CaseIterable, Sendable {
 						case appStoreVersions
 					}
 
@@ -122,14 +122,14 @@ public struct ReviewSubmissionItemCreateRequest: Codable {
 				}
 			}
 
-			public struct AppCustomProductPageVersion: Codable {
+			public struct AppCustomProductPageVersion: Codable, Sendable {
 				public var data: Data?
 
-				public struct Data: Codable, Identifiable {
+				public struct Data: Codable, Identifiable, Sendable {
 					public var type: `Type`
 					public var id: String
 
-					public enum `Type`: String, Codable, CaseIterable {
+					public enum `Type`: String, Codable, CaseIterable, Sendable {
 						case appCustomProductPageVersions
 					}
 
@@ -166,14 +166,14 @@ public struct ReviewSubmissionItemCreateRequest: Codable {
 				}
 			}
 
-			public struct AppStoreVersionExperiment: Codable {
+			public struct AppStoreVersionExperiment: Codable, Sendable {
 				public var data: Data?
 
-				public struct Data: Codable, Identifiable {
+				public struct Data: Codable, Identifiable, Sendable {
 					public var type: `Type`
 					public var id: String
 
-					public enum `Type`: String, Codable, CaseIterable {
+					public enum `Type`: String, Codable, CaseIterable, Sendable {
 						case appStoreVersionExperiments
 					}
 
@@ -210,14 +210,14 @@ public struct ReviewSubmissionItemCreateRequest: Codable {
 				}
 			}
 
-			public struct AppStoreVersionExperimentV2: Codable {
+			public struct AppStoreVersionExperimentV2: Codable, Sendable {
 				public var data: Data?
 
-				public struct Data: Codable, Identifiable {
+				public struct Data: Codable, Identifiable, Sendable {
 					public var type: `Type`
 					public var id: String
 
-					public enum `Type`: String, Codable, CaseIterable {
+					public enum `Type`: String, Codable, CaseIterable, Sendable {
 						case appStoreVersionExperiments
 					}
 
@@ -254,14 +254,14 @@ public struct ReviewSubmissionItemCreateRequest: Codable {
 				}
 			}
 
-			public struct AppEvent: Codable {
+			public struct AppEvent: Codable, Sendable {
 				public var data: Data?
 
-				public struct Data: Codable, Identifiable {
+				public struct Data: Codable, Identifiable, Sendable {
 					public var type: `Type`
 					public var id: String
 
-					public enum `Type`: String, Codable, CaseIterable {
+					public enum `Type`: String, Codable, CaseIterable, Sendable {
 						case appEvents
 					}
 
@@ -298,14 +298,14 @@ public struct ReviewSubmissionItemCreateRequest: Codable {
 				}
 			}
 
-			public struct AppAssetLibraryImage: Codable {
+			public struct AppAssetLibraryImage: Codable, Sendable {
 				public var data: Data?
 
-				public struct Data: Codable, Identifiable {
+				public struct Data: Codable, Identifiable, Sendable {
 					public var type: `Type`
 					public var id: String
 
-					public enum `Type`: String, Codable, CaseIterable {
+					public enum `Type`: String, Codable, CaseIterable, Sendable {
 						case appAssetLibraryImages
 					}
 
@@ -342,14 +342,14 @@ public struct ReviewSubmissionItemCreateRequest: Codable {
 				}
 			}
 
-			public struct AppAssetLibraryVideo: Codable {
+			public struct AppAssetLibraryVideo: Codable, Sendable {
 				public var data: Data?
 
-				public struct Data: Codable, Identifiable {
+				public struct Data: Codable, Identifiable, Sendable {
 					public var type: `Type`
 					public var id: String
 
-					public enum `Type`: String, Codable, CaseIterable {
+					public enum `Type`: String, Codable, CaseIterable, Sendable {
 						case appAssetLibraryVideos
 					}
 
@@ -386,14 +386,14 @@ public struct ReviewSubmissionItemCreateRequest: Codable {
 				}
 			}
 
-			public struct BackgroundAssetVersion: Codable {
+			public struct BackgroundAssetVersion: Codable, Sendable {
 				public var data: Data?
 
-				public struct Data: Codable, Identifiable {
+				public struct Data: Codable, Identifiable, Sendable {
 					public var type: `Type`
 					public var id: String
 
-					public enum `Type`: String, Codable, CaseIterable {
+					public enum `Type`: String, Codable, CaseIterable, Sendable {
 						case backgroundAssetVersions
 					}
 
@@ -430,14 +430,14 @@ public struct ReviewSubmissionItemCreateRequest: Codable {
 				}
 			}
 
-			public struct GameCenterAchievementVersion: Codable {
+			public struct GameCenterAchievementVersion: Codable, Sendable {
 				public var data: Data?
 
-				public struct Data: Codable, Identifiable {
+				public struct Data: Codable, Identifiable, Sendable {
 					public var type: `Type`
 					public var id: String
 
-					public enum `Type`: String, Codable, CaseIterable {
+					public enum `Type`: String, Codable, CaseIterable, Sendable {
 						case gameCenterAchievementVersions
 					}
 
@@ -474,14 +474,14 @@ public struct ReviewSubmissionItemCreateRequest: Codable {
 				}
 			}
 
-			public struct GameCenterActivityVersion: Codable {
+			public struct GameCenterActivityVersion: Codable, Sendable {
 				public var data: Data?
 
-				public struct Data: Codable, Identifiable {
+				public struct Data: Codable, Identifiable, Sendable {
 					public var type: `Type`
 					public var id: String
 
-					public enum `Type`: String, Codable, CaseIterable {
+					public enum `Type`: String, Codable, CaseIterable, Sendable {
 						case gameCenterActivityVersions
 					}
 
@@ -518,14 +518,14 @@ public struct ReviewSubmissionItemCreateRequest: Codable {
 				}
 			}
 
-			public struct GameCenterChallengeVersion: Codable {
+			public struct GameCenterChallengeVersion: Codable, Sendable {
 				public var data: Data?
 
-				public struct Data: Codable, Identifiable {
+				public struct Data: Codable, Identifiable, Sendable {
 					public var type: `Type`
 					public var id: String
 
-					public enum `Type`: String, Codable, CaseIterable {
+					public enum `Type`: String, Codable, CaseIterable, Sendable {
 						case gameCenterChallengeVersions
 					}
 
@@ -562,14 +562,14 @@ public struct ReviewSubmissionItemCreateRequest: Codable {
 				}
 			}
 
-			public struct GameCenterLeaderboardSetVersion: Codable {
+			public struct GameCenterLeaderboardSetVersion: Codable, Sendable {
 				public var data: Data?
 
-				public struct Data: Codable, Identifiable {
+				public struct Data: Codable, Identifiable, Sendable {
 					public var type: `Type`
 					public var id: String
 
-					public enum `Type`: String, Codable, CaseIterable {
+					public enum `Type`: String, Codable, CaseIterable, Sendable {
 						case gameCenterLeaderboardSetVersions
 					}
 
@@ -606,14 +606,14 @@ public struct ReviewSubmissionItemCreateRequest: Codable {
 				}
 			}
 
-			public struct GameCenterLeaderboardVersion: Codable {
+			public struct GameCenterLeaderboardVersion: Codable, Sendable {
 				public var data: Data?
 
-				public struct Data: Codable, Identifiable {
+				public struct Data: Codable, Identifiable, Sendable {
 					public var type: `Type`
 					public var id: String
 
-					public enum `Type`: String, Codable, CaseIterable {
+					public enum `Type`: String, Codable, CaseIterable, Sendable {
 						case gameCenterLeaderboardVersions
 					}
 
@@ -650,14 +650,14 @@ public struct ReviewSubmissionItemCreateRequest: Codable {
 				}
 			}
 
-			public struct InAppPurchaseVersion: Codable {
+			public struct InAppPurchaseVersion: Codable, Sendable {
 				public var data: Data?
 
-				public struct Data: Codable, Identifiable {
+				public struct Data: Codable, Identifiable, Sendable {
 					public var type: `Type`
 					public var id: String
 
-					public enum `Type`: String, Codable, CaseIterable {
+					public enum `Type`: String, Codable, CaseIterable, Sendable {
 						case inAppPurchaseVersions
 					}
 
@@ -694,14 +694,14 @@ public struct ReviewSubmissionItemCreateRequest: Codable {
 				}
 			}
 
-			public struct SubscriptionVersion: Codable {
+			public struct SubscriptionVersion: Codable, Sendable {
 				public var data: Data?
 
-				public struct Data: Codable, Identifiable {
+				public struct Data: Codable, Identifiable, Sendable {
 					public var type: `Type`
 					public var id: String
 
-					public enum `Type`: String, Codable, CaseIterable {
+					public enum `Type`: String, Codable, CaseIterable, Sendable {
 						case subscriptionVersions
 					}
 
@@ -738,14 +738,14 @@ public struct ReviewSubmissionItemCreateRequest: Codable {
 				}
 			}
 
-			public struct SubscriptionGroupVersion: Codable {
+			public struct SubscriptionGroupVersion: Codable, Sendable {
 				public var data: Data?
 
-				public struct Data: Codable, Identifiable {
+				public struct Data: Codable, Identifiable, Sendable {
 					public var type: `Type`
 					public var id: String
 
-					public enum `Type`: String, Codable, CaseIterable {
+					public enum `Type`: String, Codable, CaseIterable, Sendable {
 						case subscriptionGroupVersions
 					}
 
@@ -782,14 +782,14 @@ public struct ReviewSubmissionItemCreateRequest: Codable {
 				}
 			}
 
-			public struct RetentionMessageVersion: Codable {
+			public struct RetentionMessageVersion: Codable, Sendable {
 				public var data: Data?
 
-				public struct Data: Codable, Identifiable {
+				public struct Data: Codable, Identifiable, Sendable {
 					public var type: `Type`
 					public var id: String
 
-					public enum `Type`: String, Codable, CaseIterable {
+					public enum `Type`: String, Codable, CaseIterable, Sendable {
 						case retentionMessageVersions
 					}
 

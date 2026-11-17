@@ -9,7 +9,7 @@ extension APIEndpoint.V1 {
 		Nominations(path: path + "/nominations")
 	}
 
-	public struct Nominations {
+	public struct Nominations: Sendable {
 		/// Path: `/v1/nominations`
 		public let path: String
 
@@ -17,7 +17,7 @@ extension APIEndpoint.V1 {
 			Request(path: path, method: "GET", query: parameters.asQuery, id: "nominations_getCollection")
 		}
 
-		public struct GetParameters {
+		public struct GetParameters: Sendable {
 			public var filterType: [FilterType]?
 			public var filterState: [FilterState]
 			public var filterHasInAppEvents: [String]?
@@ -34,19 +34,19 @@ extension APIEndpoint.V1 {
 			public var limitRelatedApps: Int?
 			public var limitSupportedTerritories: Int?
 
-			public enum FilterType: String, Codable, CaseIterable {
+			public enum FilterType: String, Codable, CaseIterable, Sendable {
 				case appLaunch = "APP_LAUNCH"
 				case appEnhancements = "APP_ENHANCEMENTS"
 				case newContent = "NEW_CONTENT"
 			}
 
-			public enum FilterState: String, Codable, CaseIterable {
+			public enum FilterState: String, Codable, CaseIterable, Sendable {
 				case draft = "DRAFT"
 				case submitted = "SUBMITTED"
 				case archived = "ARCHIVED"
 			}
 
-			public enum Sort: String, Codable, CaseIterable {
+			public enum Sort: String, Codable, CaseIterable, Sendable {
 				case lastModifiedDate
 				case minuslastModifiedDate = "-lastModifiedDate"
 				case publishStartDate
@@ -59,7 +59,7 @@ extension APIEndpoint.V1 {
 				case minustype = "-type"
 			}
 
-			public enum FieldsNominations: String, Codable, CaseIterable {
+			public enum FieldsNominations: String, Codable, CaseIterable, Sendable {
 				case name
 				case type
 				case description
@@ -84,7 +84,7 @@ extension APIEndpoint.V1 {
 				case supportedTerritories
 			}
 
-			public enum FieldsApps: String, Codable, CaseIterable {
+			public enum FieldsApps: String, Codable, CaseIterable, Sendable {
 				case accessibilityURL = "accessibilityUrl"
 				case name
 				case bundleID = "bundleId"
@@ -145,7 +145,7 @@ extension APIEndpoint.V1 {
 				case androidToIosAppMappingDetails
 			}
 
-			public enum FieldsActors: String, Codable, CaseIterable {
+			public enum FieldsActors: String, Codable, CaseIterable, Sendable {
 				case actorType
 				case userFirstName
 				case userLastName
@@ -153,7 +153,7 @@ extension APIEndpoint.V1 {
 				case apiKeyID = "apiKeyId"
 			}
 
-			public enum FieldsAppEvents: String, Codable, CaseIterable {
+			public enum FieldsAppEvents: String, Codable, CaseIterable, Sendable {
 				case referenceName
 				case badge
 				case eventState
@@ -167,11 +167,11 @@ extension APIEndpoint.V1 {
 				case localizations
 			}
 
-			public enum FieldsTerritories: String, Codable, CaseIterable {
+			public enum FieldsTerritories: String, Codable, CaseIterable, Sendable {
 				case currency
 			}
 
-			public enum Include: String, Codable, CaseIterable {
+			public enum Include: String, Codable, CaseIterable, Sendable {
 				case relatedApps
 				case createdByActor
 				case lastModifiedByActor

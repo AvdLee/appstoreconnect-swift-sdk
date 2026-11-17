@@ -3,7 +3,7 @@
 
 import Foundation
 
-public struct CiBranchStartCondition: Codable {
+public struct CiBranchStartCondition: Codable, Sendable {
 	public var source: CiBranchPatterns?
 	public var filesAndFoldersRule: CiFilesAndFoldersRule?
 	public var isAutoCancel: Bool?

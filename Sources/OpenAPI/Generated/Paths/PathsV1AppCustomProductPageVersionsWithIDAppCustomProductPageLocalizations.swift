@@ -9,7 +9,7 @@ extension APIEndpoint.V1.AppCustomProductPageVersions.WithID {
 		AppCustomProductPageLocalizations(path: path + "/appCustomProductPageLocalizations")
 	}
 
-	public struct AppCustomProductPageLocalizations {
+	public struct AppCustomProductPageLocalizations: Sendable {
 		/// Path: `/v1/appCustomProductPageVersions/{id}/appCustomProductPageLocalizations`
 		public let path: String
 
@@ -17,7 +17,7 @@ extension APIEndpoint.V1.AppCustomProductPageVersions.WithID {
 			Request(path: path, method: "GET", query: parameters?.asQuery, id: "appCustomProductPageVersions_appCustomProductPageLocalizations_getToManyRelated")
 		}
 
-		public struct GetParameters {
+		public struct GetParameters: Sendable {
 			public var filterLocale: [String]?
 			public var fieldsAppCustomProductPageLocalizations: [FieldsAppCustomProductPageLocalizations]?
 			public var fieldsAppCustomProductPageVersions: [FieldsAppCustomProductPageVersions]?
@@ -32,7 +32,7 @@ extension APIEndpoint.V1.AppCustomProductPageVersions.WithID {
 			public var limitSearchKeywords: Int?
 			public var limitPlacements: Int?
 
-			public enum FieldsAppCustomProductPageLocalizations: String, Codable, CaseIterable {
+			public enum FieldsAppCustomProductPageLocalizations: String, Codable, CaseIterable, Sendable {
 				case locale
 				case promotionalText
 				case appCustomProductPageVersion
@@ -42,7 +42,7 @@ extension APIEndpoint.V1.AppCustomProductPageVersions.WithID {
 				case placements
 			}
 
-			public enum FieldsAppCustomProductPageVersions: String, Codable, CaseIterable {
+			public enum FieldsAppCustomProductPageVersions: String, Codable, CaseIterable, Sendable {
 				case version
 				case state
 				case deepLink
@@ -50,7 +50,7 @@ extension APIEndpoint.V1.AppCustomProductPageVersions.WithID {
 				case appCustomProductPageLocalizations
 			}
 
-			public enum FieldsAppScreenshotSets: String, Codable, CaseIterable {
+			public enum FieldsAppScreenshotSets: String, Codable, CaseIterable, Sendable {
 				case screenshotDisplayType
 				case appStoreVersionLocalization
 				case appCustomProductPageLocalization
@@ -58,7 +58,7 @@ extension APIEndpoint.V1.AppCustomProductPageVersions.WithID {
 				case appScreenshots
 			}
 
-			public enum FieldsAppPreviewSets: String, Codable, CaseIterable {
+			public enum FieldsAppPreviewSets: String, Codable, CaseIterable, Sendable {
 				case previewType
 				case appStoreVersionLocalization
 				case appCustomProductPageLocalization
@@ -66,7 +66,7 @@ extension APIEndpoint.V1.AppCustomProductPageVersions.WithID {
 				case appPreviews
 			}
 
-			public enum FieldsAppAssetLibraryPlacements: String, Codable, CaseIterable {
+			public enum FieldsAppAssetLibraryPlacements: String, Codable, CaseIterable, Sendable {
 				case mediaType
 				case placementType
 				case placementGroup
@@ -83,7 +83,7 @@ extension APIEndpoint.V1.AppCustomProductPageVersions.WithID {
 				case retentionMessageVersion
 			}
 
-			public enum Include: String, Codable, CaseIterable {
+			public enum Include: String, Codable, CaseIterable, Sendable {
 				case appCustomProductPageVersion
 				case appScreenshotSets
 				case appPreviewSets

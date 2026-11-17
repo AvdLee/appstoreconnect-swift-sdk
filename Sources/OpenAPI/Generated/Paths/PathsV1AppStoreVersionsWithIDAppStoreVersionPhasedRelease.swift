@@ -9,7 +9,7 @@ extension APIEndpoint.V1.AppStoreVersions.WithID {
 		AppStoreVersionPhasedRelease(path: path + "/appStoreVersionPhasedRelease")
 	}
 
-	public struct AppStoreVersionPhasedRelease {
+	public struct AppStoreVersionPhasedRelease: Sendable {
 		/// Path: `/v1/appStoreVersions/{id}/appStoreVersionPhasedRelease`
 		public let path: String
 
@@ -23,7 +23,7 @@ extension APIEndpoint.V1.AppStoreVersions.WithID {
 			return encoder.items
 		}
 
-		public enum FieldsAppStoreVersionPhasedReleases: String, Codable, CaseIterable {
+		public enum FieldsAppStoreVersionPhasedReleases: String, Codable, CaseIterable, Sendable {
 			case phasedReleaseState
 			case startDate
 			case totalPauseDuration

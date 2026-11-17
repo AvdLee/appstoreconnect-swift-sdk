@@ -3,7 +3,7 @@
 
 import Foundation
 
-public enum InAppPurchaseType: String, Codable, CaseIterable {
+public enum InAppPurchaseType: String, Codable, CaseIterable, Sendable {
 	case consumable = "CONSUMABLE"
 	case nonConsumable = "NON_CONSUMABLE"
 	case nonRenewingSubscription = "NON_RENEWING_SUBSCRIPTION"

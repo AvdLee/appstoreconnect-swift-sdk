@@ -3,7 +3,7 @@
 
 import Foundation
 
-public struct DiagnosticLogCallStackNode: Codable {
+public struct DiagnosticLogCallStackNode: Codable, Sendable {
 	public var sampleCount: Int?
 	public var isBlameFrame: Bool?
 	public var symbolName: String?

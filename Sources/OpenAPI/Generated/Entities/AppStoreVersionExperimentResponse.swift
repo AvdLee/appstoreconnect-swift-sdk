@@ -4,7 +4,7 @@
 import Foundation
 
 @available(*, deprecated, message: "Deprecated")
-public struct AppStoreVersionExperimentResponse: Codable {
+public struct AppStoreVersionExperimentResponse: Codable, Sendable {
 	/// AppStoreVersionExperiment
 	///
 	/// - warning: Deprecated.
@@ -12,7 +12,7 @@ public struct AppStoreVersionExperimentResponse: Codable {
 	public var included: [IncludedItem]?
 	public var links: DocumentLinks
 
-	public enum IncludedItem: Codable {
+	public enum IncludedItem: Codable, Sendable {
 		case appStoreVersionExperimentTreatment(AppStoreVersionExperimentTreatment)
 		case appStoreVersion(AppStoreVersion)
 

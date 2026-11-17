@@ -9,7 +9,7 @@ extension APIEndpoint.V1 {
 		AppEventVideoClips(path: path + "/appEventVideoClips")
 	}
 
-	public struct AppEventVideoClips {
+	public struct AppEventVideoClips: Sendable {
 		/// Path: `/v1/appEventVideoClips`
 		public let path: String
 

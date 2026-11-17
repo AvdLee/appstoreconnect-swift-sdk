@@ -3,7 +3,7 @@
 
 import Foundation
 
-public enum BuildBundleType: String, Codable, CaseIterable {
+public enum BuildBundleType: String, Codable, CaseIterable, Sendable {
 	case app = "APP"
 	case appClip = "APP_CLIP"
 	case watchApp = "WATCH_APP"

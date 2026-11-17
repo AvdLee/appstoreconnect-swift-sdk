@@ -3,18 +3,18 @@
 
 import Foundation
 
-public struct AppClipAppStoreReviewDetail: Codable, Identifiable {
+public struct AppClipAppStoreReviewDetail: Codable, Identifiable, Sendable {
 	public var type: `Type`
 	public var id: String
 	public var attributes: Attributes?
 	public var relationships: Relationships?
 	public var links: ResourceLinks?
 
-	public enum `Type`: String, Codable, CaseIterable {
+	public enum `Type`: String, Codable, CaseIterable, Sendable {
 		case appClipAppStoreReviewDetails
 	}
 
-	public struct Attributes: Codable {
+	public struct Attributes: Codable, Sendable {
 		public var invocationURLs: [URL]?
 
 		public init(invocationURLs: [URL]? = nil) {
@@ -32,17 +32,17 @@ public struct AppClipAppStoreReviewDetail: Codable, Identifiable {
 		}
 	}
 
-	public struct Relationships: Codable {
+	public struct Relationships: Codable, Sendable {
 		public var appClipDefaultExperience: AppClipDefaultExperience?
 
-		public struct AppClipDefaultExperience: Codable {
+		public struct AppClipDefaultExperience: Codable, Sendable {
 			public var data: Data?
 
-			public struct Data: Codable, Identifiable {
+			public struct Data: Codable, Identifiable, Sendable {
 				public var type: `Type`
 				public var id: String
 
-				public enum `Type`: String, Codable, CaseIterable {
+				public enum `Type`: String, Codable, CaseIterable, Sendable {
 					case appClipDefaultExperiences
 				}
 

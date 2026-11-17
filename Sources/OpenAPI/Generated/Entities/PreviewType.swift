@@ -3,7 +3,7 @@
 
 import Foundation
 
-public enum PreviewType: String, Codable, CaseIterable {
+public enum PreviewType: String, Codable, CaseIterable, Sendable {
 	case iphone67 = "IPHONE_67"
 	case iphone61 = "IPHONE_61"
 	case iphone65 = "IPHONE_65"

@@ -3,19 +3,19 @@
 
 import Foundation
 
-public struct BetaAppClipInvocationUpdateRequest: Codable {
+public struct BetaAppClipInvocationUpdateRequest: Codable, Sendable {
 	public var data: Data
 
-	public struct Data: Codable, Identifiable {
+	public struct Data: Codable, Identifiable, Sendable {
 		public var type: `Type`
 		public var id: String
 		public var attributes: Attributes?
 
-		public enum `Type`: String, Codable, CaseIterable {
+		public enum `Type`: String, Codable, CaseIterable, Sendable {
 			case betaAppClipInvocations
 		}
 
-		public struct Attributes: Codable {
+		public struct Attributes: Codable, Sendable {
 			public var url: URL?
 
 			public init(url: URL? = nil) {

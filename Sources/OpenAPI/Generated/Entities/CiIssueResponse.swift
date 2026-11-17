@@ -3,7 +3,7 @@
 
 import Foundation
 
-public struct CiIssueResponse: Codable {
+public struct CiIssueResponse: Codable, Sendable {
 	/// CiIssue
 	public var data: CiIssue
 	public var links: DocumentLinks

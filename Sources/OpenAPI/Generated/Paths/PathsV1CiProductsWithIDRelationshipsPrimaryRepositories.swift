@@ -9,7 +9,7 @@ extension APIEndpoint.V1.CiProducts.WithID.Relationships {
 		PrimaryRepositories(path: path + "/primaryRepositories")
 	}
 
-	public struct PrimaryRepositories {
+	public struct PrimaryRepositories: Sendable {
 		/// Path: `/v1/ciProducts/{id}/relationships/primaryRepositories`
 		public let path: String
 

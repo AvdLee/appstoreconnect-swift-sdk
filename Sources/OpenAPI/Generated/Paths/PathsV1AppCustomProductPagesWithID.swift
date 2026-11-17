@@ -9,7 +9,7 @@ extension APIEndpoint.V1.AppCustomProductPages {
 		WithID(path: "\(path)/\(id)")
 	}
 
-	public struct WithID {
+	public struct WithID: Sendable {
 		/// Path: `/v1/appCustomProductPages/{id}`
 		public let path: String
 
@@ -17,14 +17,14 @@ extension APIEndpoint.V1.AppCustomProductPages {
 			Request(path: path, method: "GET", query: parameters?.asQuery, id: "appCustomProductPages_getInstance")
 		}
 
-		public struct GetParameters {
+		public struct GetParameters: Sendable {
 			public var fieldsAppCustomProductPages: [FieldsAppCustomProductPages]?
 			public var fieldsApps: [FieldsApps]?
 			public var fieldsAppCustomProductPageVersions: [FieldsAppCustomProductPageVersions]?
 			public var include: [Include]?
 			public var limitAppCustomProductPageVersions: Int?
 
-			public enum FieldsAppCustomProductPages: String, Codable, CaseIterable {
+			public enum FieldsAppCustomProductPages: String, Codable, CaseIterable, Sendable {
 				case name
 				case url
 				case visible
@@ -32,7 +32,7 @@ extension APIEndpoint.V1.AppCustomProductPages {
 				case appCustomProductPageVersions
 			}
 
-			public enum FieldsApps: String, Codable, CaseIterable {
+			public enum FieldsApps: String, Codable, CaseIterable, Sendable {
 				case accessibilityURL = "accessibilityUrl"
 				case name
 				case bundleID = "bundleId"
@@ -93,7 +93,7 @@ extension APIEndpoint.V1.AppCustomProductPages {
 				case androidToIosAppMappingDetails
 			}
 
-			public enum FieldsAppCustomProductPageVersions: String, Codable, CaseIterable {
+			public enum FieldsAppCustomProductPageVersions: String, Codable, CaseIterable, Sendable {
 				case version
 				case state
 				case deepLink
@@ -101,7 +101,7 @@ extension APIEndpoint.V1.AppCustomProductPages {
 				case appCustomProductPageLocalizations
 			}
 
-			public enum Include: String, Codable, CaseIterable {
+			public enum Include: String, Codable, CaseIterable, Sendable {
 				case app
 				case appCustomProductPageVersions
 			}

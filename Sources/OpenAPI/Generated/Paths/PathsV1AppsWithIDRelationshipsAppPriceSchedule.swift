@@ -9,7 +9,7 @@ extension APIEndpoint.V1.Apps.WithID.Relationships {
 		AppPriceSchedule(path: path + "/appPriceSchedule")
 	}
 
-	public struct AppPriceSchedule {
+	public struct AppPriceSchedule: Sendable {
 		/// Path: `/v1/apps/{id}/relationships/appPriceSchedule`
 		public let path: String
 

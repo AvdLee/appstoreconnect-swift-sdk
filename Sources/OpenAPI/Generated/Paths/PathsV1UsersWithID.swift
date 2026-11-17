@@ -9,7 +9,7 @@ extension APIEndpoint.V1.Users {
 		WithID(path: "\(path)/\(id)")
 	}
 
-	public struct WithID {
+	public struct WithID: Sendable {
 		/// Path: `/v1/users/{id}`
 		public let path: String
 
@@ -17,13 +17,13 @@ extension APIEndpoint.V1.Users {
 			Request(path: path, method: "GET", query: parameters?.asQuery, id: "users_getInstance")
 		}
 
-		public struct GetParameters {
+		public struct GetParameters: Sendable {
 			public var fieldsUsers: [FieldsUsers]?
 			public var fieldsApps: [FieldsApps]?
 			public var include: [Include]?
 			public var limitVisibleApps: Int?
 
-			public enum FieldsUsers: String, Codable, CaseIterable {
+			public enum FieldsUsers: String, Codable, CaseIterable, Sendable {
 				case username
 				case firstName
 				case lastName
@@ -33,7 +33,7 @@ extension APIEndpoint.V1.Users {
 				case visibleApps
 			}
 
-			public enum FieldsApps: String, Codable, CaseIterable {
+			public enum FieldsApps: String, Codable, CaseIterable, Sendable {
 				case accessibilityURL = "accessibilityUrl"
 				case name
 				case bundleID = "bundleId"
@@ -94,7 +94,7 @@ extension APIEndpoint.V1.Users {
 				case androidToIosAppMappingDetails
 			}
 
-			public enum Include: String, Codable, CaseIterable {
+			public enum Include: String, Codable, CaseIterable, Sendable {
 				case visibleApps
 			}
 

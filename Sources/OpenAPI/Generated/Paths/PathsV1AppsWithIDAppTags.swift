@@ -9,7 +9,7 @@ extension APIEndpoint.V1.Apps.WithID {
 		AppTags(path: path + "/appTags")
 	}
 
-	public struct AppTags {
+	public struct AppTags: Sendable {
 		/// Path: `/v1/apps/{id}/appTags`
 		public let path: String
 
@@ -17,7 +17,7 @@ extension APIEndpoint.V1.Apps.WithID {
 			Request(path: path, method: "GET", query: parameters?.asQuery, id: "apps_appTags_getToManyRelated")
 		}
 
-		public struct GetParameters {
+		public struct GetParameters: Sendable {
 			public var filterVisibleInAppStore: [String]?
 			public var sort: [Sort]?
 			public var fieldsAppTags: [FieldsAppTags]?
@@ -26,22 +26,22 @@ extension APIEndpoint.V1.Apps.WithID {
 			public var include: [Include]?
 			public var limitTerritories: Int?
 
-			public enum Sort: String, Codable, CaseIterable {
+			public enum Sort: String, Codable, CaseIterable, Sendable {
 				case name
 				case minusname = "-name"
 			}
 
-			public enum FieldsAppTags: String, Codable, CaseIterable {
+			public enum FieldsAppTags: String, Codable, CaseIterable, Sendable {
 				case name
 				case visibleInAppStore
 				case territories
 			}
 
-			public enum FieldsTerritories: String, Codable, CaseIterable {
+			public enum FieldsTerritories: String, Codable, CaseIterable, Sendable {
 				case currency
 			}
 
-			public enum Include: String, Codable, CaseIterable {
+			public enum Include: String, Codable, CaseIterable, Sendable {
 				case territories
 			}
 

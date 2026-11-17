@@ -9,7 +9,7 @@ extension APIEndpoint.V2.InAppPurchases.WithID.Relationships {
 		Versions(path: path + "/versions")
 	}
 
-	public struct Versions {
+	public struct Versions: Sendable {
 		/// Path: `/v2/inAppPurchases/{id}/relationships/versions`
 		public let path: String
 

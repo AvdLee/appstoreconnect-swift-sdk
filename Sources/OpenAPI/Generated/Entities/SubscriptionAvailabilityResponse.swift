@@ -4,7 +4,7 @@
 import Foundation
 
 @available(*, deprecated, message: "Deprecated")
-public struct SubscriptionAvailabilityResponse: Codable {
+public struct SubscriptionAvailabilityResponse: Codable, Sendable {
 	/// SubscriptionAvailability
 	///
 	/// - warning: Deprecated.

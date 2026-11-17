@@ -9,7 +9,7 @@ extension APIEndpoint.V1.BuildBundles.WithID.Relationships {
 		BetaAppClipInvocations(path: path + "/betaAppClipInvocations")
 	}
 
-	public struct BetaAppClipInvocations {
+	public struct BetaAppClipInvocations: Sendable {
 		/// Path: `/v1/buildBundles/{id}/relationships/betaAppClipInvocations`
 		public let path: String
 

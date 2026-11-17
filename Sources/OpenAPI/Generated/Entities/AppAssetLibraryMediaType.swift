@@ -3,7 +3,7 @@
 
 import Foundation
 
-public enum AppAssetLibraryMediaType: String, Codable, CaseIterable {
+public enum AppAssetLibraryMediaType: String, Codable, CaseIterable, Sendable {
 	case image = "IMAGE"
 	case video = "VIDEO"
 }

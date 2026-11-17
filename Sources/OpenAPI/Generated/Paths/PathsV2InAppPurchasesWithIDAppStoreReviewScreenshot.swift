@@ -9,7 +9,7 @@ extension APIEndpoint.V2.InAppPurchases.WithID {
 		AppStoreReviewScreenshot(path: path + "/appStoreReviewScreenshot")
 	}
 
-	public struct AppStoreReviewScreenshot {
+	public struct AppStoreReviewScreenshot: Sendable {
 		/// Path: `/v2/inAppPurchases/{id}/appStoreReviewScreenshot`
 		public let path: String
 
@@ -17,12 +17,12 @@ extension APIEndpoint.V2.InAppPurchases.WithID {
 			Request(path: path, method: "GET", query: parameters?.asQuery, id: "inAppPurchasesV2_appStoreReviewScreenshot_getToOneRelated")
 		}
 
-		public struct GetParameters {
+		public struct GetParameters: Sendable {
 			public var fieldsInAppPurchaseAppStoreReviewScreenshots: [FieldsInAppPurchaseAppStoreReviewScreenshots]?
 			public var fieldsInAppPurchases: [FieldsInAppPurchases]?
 			public var include: [Include]?
 
-			public enum FieldsInAppPurchaseAppStoreReviewScreenshots: String, Codable, CaseIterable {
+			public enum FieldsInAppPurchaseAppStoreReviewScreenshots: String, Codable, CaseIterable, Sendable {
 				case fileSize
 				case fileName
 				case sourceFileChecksum
@@ -34,7 +34,7 @@ extension APIEndpoint.V2.InAppPurchases.WithID {
 				case inAppPurchaseV2
 			}
 
-			public enum FieldsInAppPurchases: String, Codable, CaseIterable {
+			public enum FieldsInAppPurchases: String, Codable, CaseIterable, Sendable {
 				case name
 				case productID = "productId"
 				case inAppPurchaseType
@@ -54,7 +54,7 @@ extension APIEndpoint.V2.InAppPurchases.WithID {
 				case versions
 			}
 
-			public enum Include: String, Codable, CaseIterable {
+			public enum Include: String, Codable, CaseIterable, Sendable {
 				case inAppPurchaseV2
 			}
 

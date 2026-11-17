@@ -9,7 +9,7 @@ extension APIEndpoint.V1.AppEventScreenshots {
 		WithID(path: "\(path)/\(id)")
 	}
 
-	public struct WithID {
+	public struct WithID: Sendable {
 		/// Path: `/v1/appEventScreenshots/{id}`
 		public let path: String
 
@@ -17,12 +17,12 @@ extension APIEndpoint.V1.AppEventScreenshots {
 			Request(path: path, method: "GET", query: parameters?.asQuery, id: "appEventScreenshots_getInstance")
 		}
 
-		public struct GetParameters {
+		public struct GetParameters: Sendable {
 			public var fieldsAppEventScreenshots: [FieldsAppEventScreenshots]?
 			public var fieldsAppEventLocalizations: [FieldsAppEventLocalizations]?
 			public var include: [Include]?
 
-			public enum FieldsAppEventScreenshots: String, Codable, CaseIterable {
+			public enum FieldsAppEventScreenshots: String, Codable, CaseIterable, Sendable {
 				case fileSize
 				case fileName
 				case imageAsset
@@ -33,7 +33,7 @@ extension APIEndpoint.V1.AppEventScreenshots {
 				case appEventLocalization
 			}
 
-			public enum FieldsAppEventLocalizations: String, Codable, CaseIterable {
+			public enum FieldsAppEventLocalizations: String, Codable, CaseIterable, Sendable {
 				case locale
 				case name
 				case shortDescription
@@ -44,7 +44,7 @@ extension APIEndpoint.V1.AppEventScreenshots {
 				case placements
 			}
 
-			public enum Include: String, Codable, CaseIterable {
+			public enum Include: String, Codable, CaseIterable, Sendable {
 				case appEventLocalization
 			}
 

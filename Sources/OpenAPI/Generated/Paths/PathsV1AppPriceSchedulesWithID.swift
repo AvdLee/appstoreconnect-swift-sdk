@@ -9,7 +9,7 @@ extension APIEndpoint.V1.AppPriceSchedules {
 		WithID(path: "\(path)/\(id)")
 	}
 
-	public struct WithID {
+	public struct WithID: Sendable {
 		/// Path: `/v1/appPriceSchedules/{id}`
 		public let path: String
 
@@ -17,7 +17,7 @@ extension APIEndpoint.V1.AppPriceSchedules {
 			Request(path: path, method: "GET", query: parameters?.asQuery, id: "appPriceSchedules_getInstance")
 		}
 
-		public struct GetParameters {
+		public struct GetParameters: Sendable {
 			public var fieldsAppPriceSchedules: [FieldsAppPriceSchedules]?
 			public var fieldsApps: [FieldsApps]?
 			public var fieldsTerritories: [FieldsTerritories]?
@@ -26,14 +26,14 @@ extension APIEndpoint.V1.AppPriceSchedules {
 			public var limitAutomaticPrices: Int?
 			public var limitManualPrices: Int?
 
-			public enum FieldsAppPriceSchedules: String, Codable, CaseIterable {
+			public enum FieldsAppPriceSchedules: String, Codable, CaseIterable, Sendable {
 				case app
 				case baseTerritory
 				case manualPrices
 				case automaticPrices
 			}
 
-			public enum FieldsApps: String, Codable, CaseIterable {
+			public enum FieldsApps: String, Codable, CaseIterable, Sendable {
 				case accessibilityURL = "accessibilityUrl"
 				case name
 				case bundleID = "bundleId"
@@ -94,11 +94,11 @@ extension APIEndpoint.V1.AppPriceSchedules {
 				case androidToIosAppMappingDetails
 			}
 
-			public enum FieldsTerritories: String, Codable, CaseIterable {
+			public enum FieldsTerritories: String, Codable, CaseIterable, Sendable {
 				case currency
 			}
 
-			public enum FieldsAppPrices: String, Codable, CaseIterable {
+			public enum FieldsAppPrices: String, Codable, CaseIterable, Sendable {
 				case manual
 				case startDate
 				case endDate
@@ -106,7 +106,7 @@ extension APIEndpoint.V1.AppPriceSchedules {
 				case territory
 			}
 
-			public enum Include: String, Codable, CaseIterable {
+			public enum Include: String, Codable, CaseIterable, Sendable {
 				case app
 				case baseTerritory
 				case manualPrices

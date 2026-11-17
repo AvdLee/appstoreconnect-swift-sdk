@@ -3,28 +3,28 @@
 
 import Foundation
 
-public struct SandboxTestersClearPurchaseHistoryRequestV2CreateRequest: Codable {
+public struct SandboxTestersClearPurchaseHistoryRequestV2CreateRequest: Codable, Sendable {
 	public var data: Data
 
-	public struct Data: Codable {
+	public struct Data: Codable, Sendable {
 		public var type: `Type`
 		public var relationships: Relationships
 
-		public enum `Type`: String, Codable, CaseIterable {
+		public enum `Type`: String, Codable, CaseIterable, Sendable {
 			case sandboxTestersClearPurchaseHistoryRequest
 		}
 
-		public struct Relationships: Codable {
+		public struct Relationships: Codable, Sendable {
 			public var sandboxTesters: SandboxTesters
 
-			public struct SandboxTesters: Codable {
+			public struct SandboxTesters: Codable, Sendable {
 				public var data: [Datum]
 
-				public struct Datum: Codable, Identifiable {
+				public struct Datum: Codable, Identifiable, Sendable {
 					public var type: `Type`
 					public var id: String
 
-					public enum `Type`: String, Codable, CaseIterable {
+					public enum `Type`: String, Codable, CaseIterable, Sendable {
 						case sandboxTesters
 					}
 

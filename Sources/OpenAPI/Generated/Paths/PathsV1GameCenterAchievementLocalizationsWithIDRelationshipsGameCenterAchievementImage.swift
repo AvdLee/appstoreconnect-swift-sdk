@@ -9,7 +9,7 @@ extension APIEndpoint.V1.GameCenterAchievementLocalizations.WithID.Relationships
 		GameCenterAchievementImage(path: path + "/gameCenterAchievementImage")
 	}
 
-	public struct GameCenterAchievementImage {
+	public struct GameCenterAchievementImage: Sendable {
 		/// Path: `/v1/gameCenterAchievementLocalizations/{id}/relationships/gameCenterAchievementImage`
 		public let path: String
 

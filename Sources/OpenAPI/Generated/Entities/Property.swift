@@ -3,7 +3,7 @@
 
 import Foundation
 
-public struct Property: Codable {
+public struct Property: Codable, Sendable {
 	public var key: String?
 	public var value: String?
 

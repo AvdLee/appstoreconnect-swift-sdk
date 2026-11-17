@@ -3,7 +3,7 @@
 
 import Foundation
 
-public struct DeviceFamilyOsVersionFilter: Codable {
+public struct DeviceFamilyOsVersionFilter: Codable, Sendable {
 	public var deviceFamily: DeviceFamily?
 	public var minimumOsInclusive: String?
 	public var maximumOsInclusive: String?

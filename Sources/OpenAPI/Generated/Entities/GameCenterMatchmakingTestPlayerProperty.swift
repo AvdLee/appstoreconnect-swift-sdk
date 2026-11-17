@@ -3,12 +3,12 @@
 
 import Foundation
 
-public struct GameCenterMatchmakingTestPlayerProperty: Codable, Identifiable {
+public struct GameCenterMatchmakingTestPlayerProperty: Codable, Identifiable, Sendable {
 	public var type: `Type`
 	public var id: String
 	public var links: ResourceLinks?
 
-	public enum `Type`: String, Codable, CaseIterable {
+	public enum `Type`: String, Codable, CaseIterable, Sendable {
 		case gameCenterMatchmakingTestPlayerProperties
 	}
 

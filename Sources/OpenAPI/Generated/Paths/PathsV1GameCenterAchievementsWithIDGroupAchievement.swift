@@ -9,7 +9,7 @@ extension APIEndpoint.V1.GameCenterAchievements.WithID {
 		GroupAchievement(path: path + "/groupAchievement")
 	}
 
-	public struct GroupAchievement {
+	public struct GroupAchievement: Sendable {
 		/// Path: `/v1/gameCenterAchievements/{id}/groupAchievement`
 		public let path: String
 
@@ -18,7 +18,7 @@ extension APIEndpoint.V1.GameCenterAchievements.WithID {
 			Request(path: path, method: "GET", query: parameters?.asQuery, id: "gameCenterAchievements_groupAchievement_getToOneRelated")
 		}
 
-		public struct GetParameters {
+		public struct GetParameters: Sendable {
 			public var fieldsGameCenterAchievements: [FieldsGameCenterAchievements]?
 			public var fieldsGameCenterDetails: [FieldsGameCenterDetails]?
 			public var fieldsGameCenterGroups: [FieldsGameCenterGroups]?
@@ -29,7 +29,7 @@ extension APIEndpoint.V1.GameCenterAchievements.WithID {
 			public var limitLocalizations: Int?
 			public var limitReleases: Int?
 
-			public enum FieldsGameCenterAchievements: String, Codable, CaseIterable {
+			public enum FieldsGameCenterAchievements: String, Codable, CaseIterable, Sendable {
 				case referenceName
 				case vendorIdentifier
 				case points
@@ -45,7 +45,7 @@ extension APIEndpoint.V1.GameCenterAchievements.WithID {
 				case activity
 			}
 
-			public enum FieldsGameCenterDetails: String, Codable, CaseIterable {
+			public enum FieldsGameCenterDetails: String, Codable, CaseIterable, Sendable {
 				case arcadeEnabled
 				case challengeEnabled
 				case app
@@ -72,7 +72,7 @@ extension APIEndpoint.V1.GameCenterAchievements.WithID {
 				case challengesMinimumPlatformVersions
 			}
 
-			public enum FieldsGameCenterGroups: String, Codable, CaseIterable {
+			public enum FieldsGameCenterGroups: String, Codable, CaseIterable, Sendable {
 				case referenceName
 				case gameCenterDetails
 				case gameCenterLeaderboards
@@ -85,7 +85,7 @@ extension APIEndpoint.V1.GameCenterAchievements.WithID {
 				case gameCenterChallenges
 			}
 
-			public enum FieldsGameCenterAchievementLocalizations: String, Codable, CaseIterable {
+			public enum FieldsGameCenterAchievementLocalizations: String, Codable, CaseIterable, Sendable {
 				case locale
 				case name
 				case beforeEarnedDescription
@@ -94,13 +94,13 @@ extension APIEndpoint.V1.GameCenterAchievements.WithID {
 				case gameCenterAchievementImage
 			}
 
-			public enum FieldsGameCenterAchievementReleases: String, Codable, CaseIterable {
+			public enum FieldsGameCenterAchievementReleases: String, Codable, CaseIterable, Sendable {
 				case live
 				case gameCenterDetail
 				case gameCenterAchievement
 			}
 
-			public enum FieldsGameCenterActivities: String, Codable, CaseIterable {
+			public enum FieldsGameCenterActivities: String, Codable, CaseIterable, Sendable {
 				case referenceName
 				case vendorIdentifier
 				case playStyle
@@ -118,7 +118,7 @@ extension APIEndpoint.V1.GameCenterAchievements.WithID {
 				case versions
 			}
 
-			public enum Include: String, Codable, CaseIterable {
+			public enum Include: String, Codable, CaseIterable, Sendable {
 				case gameCenterDetail
 				case gameCenterGroup
 				case groupAchievement

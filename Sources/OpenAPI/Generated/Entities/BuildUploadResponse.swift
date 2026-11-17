@@ -3,13 +3,13 @@
 
 import Foundation
 
-public struct BuildUploadResponse: Codable {
+public struct BuildUploadResponse: Codable, Sendable {
 	/// BuildUpload
 	public var data: BuildUpload
 	public var included: [IncludedItem]?
 	public var links: DocumentLinks
 
-	public enum IncludedItem: Codable {
+	public enum IncludedItem: Codable, Sendable {
 		case buildUploadFile(BuildUploadFile)
 		case build(Build)
 

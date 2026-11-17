@@ -3,7 +3,7 @@
 
 import Foundation
 
-public struct ScmGitReferenceResponse: Codable {
+public struct ScmGitReferenceResponse: Codable, Sendable {
 	/// ScmGitReference
 	public var data: ScmGitReference
 	public var included: [ScmRepository]?

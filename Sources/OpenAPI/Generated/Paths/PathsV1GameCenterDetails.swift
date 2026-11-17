@@ -9,7 +9,7 @@ extension APIEndpoint.V1 {
 		GameCenterDetails(path: path + "/gameCenterDetails")
 	}
 
-	public struct GameCenterDetails {
+	public struct GameCenterDetails: Sendable {
 		/// Path: `/v1/gameCenterDetails`
 		public let path: String
 

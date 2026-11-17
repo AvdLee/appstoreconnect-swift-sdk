@@ -9,7 +9,7 @@ extension APIEndpoint.V1.SubscriptionVersions.WithID {
 		Images(path: path + "/images")
 	}
 
-	public struct Images {
+	public struct Images: Sendable {
 		/// Path: `/v1/subscriptionVersions/{id}/images`
 		public let path: String
 
@@ -24,7 +24,7 @@ extension APIEndpoint.V1.SubscriptionVersions.WithID {
 			return encoder.items
 		}
 
-		public enum FieldsSubscriptionImages: String, Codable, CaseIterable {
+		public enum FieldsSubscriptionImages: String, Codable, CaseIterable, Sendable {
 			case fileSize
 			case fileName
 			case assetToken

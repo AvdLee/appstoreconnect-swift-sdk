@@ -9,7 +9,7 @@ extension APIEndpoint.V1.Builds.WithID.Relationships {
 		IndividualTesters(path: path + "/individualTesters")
 	}
 
-	public struct IndividualTesters {
+	public struct IndividualTesters: Sendable {
 		/// Path: `/v1/builds/{id}/relationships/individualTesters`
 		public let path: String
 

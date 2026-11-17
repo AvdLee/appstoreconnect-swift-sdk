@@ -9,7 +9,7 @@ extension APIEndpoint.V1 {
 		FinanceReports(path: path + "/financeReports")
 	}
 
-	public struct FinanceReports {
+	public struct FinanceReports: Sendable {
 		/// Path: `/v1/financeReports`
 		public let path: String
 
@@ -17,13 +17,13 @@ extension APIEndpoint.V1 {
 			Request(path: path, method: "GET", query: parameters.asQuery, id: "financeReports_getCollection")
 		}
 
-		public struct GetParameters {
+		public struct GetParameters: Sendable {
 			public var filterVendorNumber: [String]
 			public var filterReportType: [FilterReportType]
 			public var filterRegionCode: [String]
 			public var filterReportDate: [String]
 
-			public enum FilterReportType: String, Codable, CaseIterable {
+			public enum FilterReportType: String, Codable, CaseIterable, Sendable {
 				case financial = "FINANCIAL"
 				case financeDetail = "FINANCE_DETAIL"
 			}

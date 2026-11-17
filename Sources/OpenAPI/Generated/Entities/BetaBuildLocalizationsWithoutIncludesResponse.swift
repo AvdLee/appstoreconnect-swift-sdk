@@ -3,7 +3,7 @@
 
 import Foundation
 
-public struct BetaBuildLocalizationsWithoutIncludesResponse: Codable {
+public struct BetaBuildLocalizationsWithoutIncludesResponse: Codable, Sendable {
 	public var data: [BetaBuildLocalization]
 	public var links: PagedDocumentLinks
 	public var meta: PagingInformation?

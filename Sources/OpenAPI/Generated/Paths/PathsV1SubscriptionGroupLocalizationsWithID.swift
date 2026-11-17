@@ -9,7 +9,7 @@ extension APIEndpoint.V1.SubscriptionGroupLocalizations {
 		WithID(path: "\(path)/\(id)")
 	}
 
-	public struct WithID {
+	public struct WithID: Sendable {
 		/// Path: `/v1/subscriptionGroupLocalizations/{id}`
 		public let path: String
 
@@ -17,12 +17,12 @@ extension APIEndpoint.V1.SubscriptionGroupLocalizations {
 			Request(path: path, method: "GET", query: parameters?.asQuery, id: "subscriptionGroupLocalizations_getInstance")
 		}
 
-		public struct GetParameters {
+		public struct GetParameters: Sendable {
 			public var fieldsSubscriptionGroupLocalizations: [FieldsSubscriptionGroupLocalizations]?
 			public var fieldsSubscriptionGroups: [FieldsSubscriptionGroups]?
 			public var include: [Include]?
 
-			public enum FieldsSubscriptionGroupLocalizations: String, Codable, CaseIterable {
+			public enum FieldsSubscriptionGroupLocalizations: String, Codable, CaseIterable, Sendable {
 				case name
 				case customAppName
 				case locale
@@ -30,14 +30,14 @@ extension APIEndpoint.V1.SubscriptionGroupLocalizations {
 				case subscriptionGroup
 			}
 
-			public enum FieldsSubscriptionGroups: String, Codable, CaseIterable {
+			public enum FieldsSubscriptionGroups: String, Codable, CaseIterable, Sendable {
 				case referenceName
 				case subscriptions
 				case subscriptionGroupLocalizations
 				case versions
 			}
 
-			public enum Include: String, Codable, CaseIterable {
+			public enum Include: String, Codable, CaseIterable, Sendable {
 				case subscriptionGroup
 			}
 

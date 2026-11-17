@@ -9,7 +9,7 @@ extension APIEndpoint.V1 {
 		AgeRatingDeclarations(path: path + "/ageRatingDeclarations")
 	}
 
-	public struct AgeRatingDeclarations {
+	public struct AgeRatingDeclarations: Sendable {
 		/// Path: `/v1/ageRatingDeclarations`
 		public let path: String
 	}

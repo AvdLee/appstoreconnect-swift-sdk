@@ -9,7 +9,7 @@ extension APIEndpoint.V1.AppCustomProductPageLocalizations.WithID {
 		SearchKeywords(path: path + "/searchKeywords")
 	}
 
-	public struct SearchKeywords {
+	public struct SearchKeywords: Sendable {
 		/// Path: `/v1/appCustomProductPageLocalizations/{id}/searchKeywords`
 		public let path: String
 
@@ -17,7 +17,7 @@ extension APIEndpoint.V1.AppCustomProductPageLocalizations.WithID {
 			Request(path: path, method: "GET", query: parameters?.asQuery, id: "appCustomProductPageLocalizations_searchKeywords_getToManyRelated")
 		}
 
-		public struct GetParameters {
+		public struct GetParameters: Sendable {
 			public var filterPlatform: [String]?
 			public var filterLocale: [String]?
 			public var fieldsAppKeywords: [String]?

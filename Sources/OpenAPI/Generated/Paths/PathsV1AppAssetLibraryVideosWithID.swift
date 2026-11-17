@@ -9,7 +9,7 @@ extension APIEndpoint.V1.AppAssetLibraryVideos {
 		WithID(path: "\(path)/\(id)")
 	}
 
-	public struct WithID {
+	public struct WithID: Sendable {
 		/// Path: `/v1/appAssetLibraryVideos/{id}`
 		public let path: String
 
@@ -17,13 +17,13 @@ extension APIEndpoint.V1.AppAssetLibraryVideos {
 			Request(path: path, method: "GET", query: parameters?.asQuery, id: "appAssetLibraryVideos_getInstance")
 		}
 
-		public struct GetParameters {
+		public struct GetParameters: Sendable {
 			public var fieldsAppAssetLibraryVideos: [FieldsAppAssetLibraryVideos]?
 			public var fieldsAppAssetLibraryPlacements: [FieldsAppAssetLibraryPlacements]?
 			public var include: [Include]?
 			public var limitPlacements: Int?
 
-			public enum FieldsAppAssetLibraryVideos: String, Codable, CaseIterable {
+			public enum FieldsAppAssetLibraryVideos: String, Codable, CaseIterable, Sendable {
 				case category
 				case createdDate
 				case lastModifiedDate
@@ -40,7 +40,7 @@ extension APIEndpoint.V1.AppAssetLibraryVideos {
 				case placements
 			}
 
-			public enum FieldsAppAssetLibraryPlacements: String, Codable, CaseIterable {
+			public enum FieldsAppAssetLibraryPlacements: String, Codable, CaseIterable, Sendable {
 				case mediaType
 				case placementType
 				case placementGroup
@@ -57,7 +57,7 @@ extension APIEndpoint.V1.AppAssetLibraryVideos {
 				case retentionMessageVersion
 			}
 
-			public enum Include: String, Codable, CaseIterable {
+			public enum Include: String, Codable, CaseIterable, Sendable {
 				case placements
 			}
 

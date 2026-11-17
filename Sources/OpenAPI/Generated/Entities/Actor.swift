@@ -3,24 +3,24 @@
 
 import Foundation
 
-public struct Actor: Codable, Identifiable {
+public struct Actor: Codable, Identifiable, Sendable {
 	public var type: `Type`
 	public var id: String
 	public var attributes: Attributes?
 	public var links: ResourceLinks?
 
-	public enum `Type`: String, Codable, CaseIterable {
+	public enum `Type`: String, Codable, CaseIterable, Sendable {
 		case actors
 	}
 
-	public struct Attributes: Codable {
+	public struct Attributes: Codable, Sendable {
 		public var actorType: ActorType?
 		public var userFirstName: String?
 		public var userLastName: String?
 		public var userEmail: String?
 		public var apiKeyID: String?
 
-		public enum ActorType: String, Codable, CaseIterable {
+		public enum ActorType: String, Codable, CaseIterable, Sendable {
 			case user = "USER"
 			case apiKey = "API_KEY"
 			case xcodeCloud = "XCODE_CLOUD"

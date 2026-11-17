@@ -9,7 +9,7 @@ extension APIEndpoint.V1.BundleIDCapabilities {
 		WithID(path: "\(path)/\(id)")
 	}
 
-	public struct WithID {
+	public struct WithID: Sendable {
 		/// Path: `/v1/bundleIdCapabilities/{id}`
 		public let path: String
 

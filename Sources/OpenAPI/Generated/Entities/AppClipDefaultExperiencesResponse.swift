@@ -3,13 +3,13 @@
 
 import Foundation
 
-public struct AppClipDefaultExperiencesResponse: Codable {
+public struct AppClipDefaultExperiencesResponse: Codable, Sendable {
 	public var data: [AppClipDefaultExperience]
 	public var included: [IncludedItem]?
 	public var links: PagedDocumentLinks
 	public var meta: PagingInformation?
 
-	public enum IncludedItem: Codable {
+	public enum IncludedItem: Codable, Sendable {
 		case appClipAppStoreReviewDetail(AppClipAppStoreReviewDetail)
 		case appClipDefaultExperienceLocalization(AppClipDefaultExperienceLocalization)
 		case appClip(AppClip)

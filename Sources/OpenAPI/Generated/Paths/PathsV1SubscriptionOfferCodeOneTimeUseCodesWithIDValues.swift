@@ -9,7 +9,7 @@ extension APIEndpoint.V1.SubscriptionOfferCodeOneTimeUseCodes.WithID {
 		Values(path: path + "/values")
 	}
 
-	public struct Values {
+	public struct Values: Sendable {
 		/// Path: `/v1/subscriptionOfferCodeOneTimeUseCodes/{id}/values`
 		public let path: String
 

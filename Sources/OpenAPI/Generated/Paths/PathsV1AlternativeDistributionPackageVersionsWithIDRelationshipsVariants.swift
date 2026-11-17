@@ -9,7 +9,7 @@ extension APIEndpoint.V1.AlternativeDistributionPackageVersions.WithID.Relations
 		Variants(path: path + "/variants")
 	}
 
-	public struct Variants {
+	public struct Variants: Sendable {
 		/// Path: `/v1/alternativeDistributionPackageVersions/{id}/relationships/variants`
 		public let path: String
 

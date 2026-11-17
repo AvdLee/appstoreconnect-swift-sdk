@@ -3,14 +3,14 @@
 
 import Foundation
 
-public struct GameCenterChallengeLeaderboardV2LinkageRequest: Codable {
+public struct GameCenterChallengeLeaderboardV2LinkageRequest: Codable, Sendable {
 	public var data: Data
 
-	public struct Data: Codable, Identifiable {
+	public struct Data: Codable, Identifiable, Sendable {
 		public var type: `Type`
 		public var id: String
 
-		public enum `Type`: String, Codable, CaseIterable {
+		public enum `Type`: String, Codable, CaseIterable, Sendable {
 			case gameCenterLeaderboards
 		}
 

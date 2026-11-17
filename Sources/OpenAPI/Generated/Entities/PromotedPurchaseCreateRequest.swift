@@ -3,19 +3,19 @@
 
 import Foundation
 
-public struct PromotedPurchaseCreateRequest: Codable {
+public struct PromotedPurchaseCreateRequest: Codable, Sendable {
 	public var data: Data
 
-	public struct Data: Codable {
+	public struct Data: Codable, Sendable {
 		public var type: `Type`
 		public var attributes: Attributes
 		public var relationships: Relationships
 
-		public enum `Type`: String, Codable, CaseIterable {
+		public enum `Type`: String, Codable, CaseIterable, Sendable {
 			case promotedPurchases
 		}
 
-		public struct Attributes: Codable {
+		public struct Attributes: Codable, Sendable {
 			public var isVisibleForAllUsers: Bool
 			public var isEnabled: Bool?
 
@@ -37,19 +37,19 @@ public struct PromotedPurchaseCreateRequest: Codable {
 			}
 		}
 
-		public struct Relationships: Codable {
+		public struct Relationships: Codable, Sendable {
 			public var app: App
 			public var inAppPurchaseV2: InAppPurchaseV2?
 			public var subscription: Subscription?
 
-			public struct App: Codable {
+			public struct App: Codable, Sendable {
 				public var data: Data
 
-				public struct Data: Codable, Identifiable {
+				public struct Data: Codable, Identifiable, Sendable {
 					public var type: `Type`
 					public var id: String
 
-					public enum `Type`: String, Codable, CaseIterable {
+					public enum `Type`: String, Codable, CaseIterable, Sendable {
 						case apps
 					}
 
@@ -86,14 +86,14 @@ public struct PromotedPurchaseCreateRequest: Codable {
 				}
 			}
 
-			public struct InAppPurchaseV2: Codable {
+			public struct InAppPurchaseV2: Codable, Sendable {
 				public var data: Data?
 
-				public struct Data: Codable, Identifiable {
+				public struct Data: Codable, Identifiable, Sendable {
 					public var type: `Type`
 					public var id: String
 
-					public enum `Type`: String, Codable, CaseIterable {
+					public enum `Type`: String, Codable, CaseIterable, Sendable {
 						case inAppPurchases
 					}
 
@@ -130,14 +130,14 @@ public struct PromotedPurchaseCreateRequest: Codable {
 				}
 			}
 
-			public struct Subscription: Codable {
+			public struct Subscription: Codable, Sendable {
 				public var data: Data?
 
-				public struct Data: Codable, Identifiable {
+				public struct Data: Codable, Identifiable, Sendable {
 					public var type: `Type`
 					public var id: String
 
-					public enum `Type`: String, Codable, CaseIterable {
+					public enum `Type`: String, Codable, CaseIterable, Sendable {
 						case subscriptions
 					}
 

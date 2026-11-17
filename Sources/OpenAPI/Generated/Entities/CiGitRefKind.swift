@@ -3,7 +3,7 @@
 
 import Foundation
 
-public enum CiGitRefKind: String, Codable, CaseIterable {
+public enum CiGitRefKind: String, Codable, CaseIterable, Sendable {
 	case branch = "BRANCH"
 	case tag = "TAG"
 }

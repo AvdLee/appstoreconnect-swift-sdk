@@ -3,7 +3,7 @@
 
 import Foundation
 
-public struct AppCategoriesResponse: Codable {
+public struct AppCategoriesResponse: Codable, Sendable {
 	public var data: [AppCategory]
 	public var included: [AppCategory]?
 	public var links: PagedDocumentLinks

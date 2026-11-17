@@ -9,7 +9,7 @@ extension APIEndpoint.V1.AnalyticsReportInstances.WithID {
 		Segments(path: path + "/segments")
 	}
 
-	public struct Segments {
+	public struct Segments: Sendable {
 		/// Path: `/v1/analyticsReportInstances/{id}/segments`
 		public let path: String
 
@@ -24,7 +24,7 @@ extension APIEndpoint.V1.AnalyticsReportInstances.WithID {
 			return encoder.items
 		}
 
-		public enum FieldsAnalyticsReportSegments: String, Codable, CaseIterable {
+		public enum FieldsAnalyticsReportSegments: String, Codable, CaseIterable, Sendable {
 			case checksum
 			case sizeInBytes
 			case url

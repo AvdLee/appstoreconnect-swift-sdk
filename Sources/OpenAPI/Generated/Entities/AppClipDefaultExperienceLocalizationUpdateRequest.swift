@@ -3,19 +3,19 @@
 
 import Foundation
 
-public struct AppClipDefaultExperienceLocalizationUpdateRequest: Codable {
+public struct AppClipDefaultExperienceLocalizationUpdateRequest: Codable, Sendable {
 	public var data: Data
 
-	public struct Data: Codable, Identifiable {
+	public struct Data: Codable, Identifiable, Sendable {
 		public var type: `Type`
 		public var id: String
 		public var attributes: Attributes?
 
-		public enum `Type`: String, Codable, CaseIterable {
+		public enum `Type`: String, Codable, CaseIterable, Sendable {
 			case appClipDefaultExperienceLocalizations
 		}
 
-		public struct Attributes: Codable {
+		public struct Attributes: Codable, Sendable {
 			public var subtitle: String?
 
 			public init(subtitle: String? = nil) {

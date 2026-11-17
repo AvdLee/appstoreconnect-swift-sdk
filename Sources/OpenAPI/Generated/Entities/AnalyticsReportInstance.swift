@@ -3,22 +3,22 @@
 
 import Foundation
 
-public struct AnalyticsReportInstance: Codable, Identifiable {
+public struct AnalyticsReportInstance: Codable, Identifiable, Sendable {
 	public var type: `Type`
 	public var id: String
 	public var attributes: Attributes?
 	public var relationships: Relationships?
 	public var links: ResourceLinks?
 
-	public enum `Type`: String, Codable, CaseIterable {
+	public enum `Type`: String, Codable, CaseIterable, Sendable {
 		case analyticsReportInstances
 	}
 
-	public struct Attributes: Codable {
+	public struct Attributes: Codable, Sendable {
 		public var granularity: Granularity?
 		public var processingDate: String?
 
-		public enum Granularity: String, Codable, CaseIterable {
+		public enum Granularity: String, Codable, CaseIterable, Sendable {
 			case daily = "DAILY"
 			case weekly = "WEEKLY"
 			case monthly = "MONTHLY"
@@ -42,10 +42,10 @@ public struct AnalyticsReportInstance: Codable, Identifiable {
 		}
 	}
 
-	public struct Relationships: Codable {
+	public struct Relationships: Codable, Sendable {
 		public var segments: Segments?
 
-		public struct Segments: Codable {
+		public struct Segments: Codable, Sendable {
 			public var links: RelationshipLinks?
 
 			public init(links: RelationshipLinks? = nil) {

@@ -3,13 +3,13 @@
 
 import Foundation
 
-public struct InAppPurchasePriceScheduleResponse: Codable {
+public struct InAppPurchasePriceScheduleResponse: Codable, Sendable {
 	/// InAppPurchasePriceSchedule
 	public var data: InAppPurchasePriceSchedule
 	public var included: [IncludedItem]?
 	public var links: DocumentLinks
 
-	public enum IncludedItem: Codable {
+	public enum IncludedItem: Codable, Sendable {
 		case inAppPurchasePrice(InAppPurchasePrice)
 		case territory(Territory)
 

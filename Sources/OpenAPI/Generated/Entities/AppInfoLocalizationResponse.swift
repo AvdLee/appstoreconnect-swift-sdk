@@ -3,7 +3,7 @@
 
 import Foundation
 
-public struct AppInfoLocalizationResponse: Codable {
+public struct AppInfoLocalizationResponse: Codable, Sendable {
 	/// AppInfoLocalization
 	public var data: AppInfoLocalization
 	public var included: [AppInfo]?

@@ -3,7 +3,7 @@
 
 import Foundation
 
-public struct MetricsInsight: Codable {
+public struct MetricsInsight: Codable, Sendable {
 	public var metricCategory: MetricCategory?
 	public var latestVersion: String?
 	public var metric: String?
@@ -14,7 +14,7 @@ public struct MetricsInsight: Codable {
 	public var isHighImpact: Bool?
 	public var populations: [Population]?
 
-	public struct Population: Codable {
+	public struct Population: Codable, Sendable {
 		public var deltaPercentage: Double?
 		public var percentile: String?
 		public var summaryString: String?

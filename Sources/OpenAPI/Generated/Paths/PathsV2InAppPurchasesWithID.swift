@@ -9,7 +9,7 @@ extension APIEndpoint.V2.InAppPurchases {
 		WithID(path: "\(path)/\(id)")
 	}
 
-	public struct WithID {
+	public struct WithID: Sendable {
 		/// Path: `/v2/inAppPurchases/{id}`
 		public let path: String
 
@@ -17,7 +17,7 @@ extension APIEndpoint.V2.InAppPurchases {
 			Request(path: path, method: "GET", query: parameters?.asQuery, id: "inAppPurchasesV2_getInstance")
 		}
 
-		public struct GetParameters {
+		public struct GetParameters: Sendable {
 			public var fieldsInAppPurchases: [FieldsInAppPurchases]?
 			public var fieldsInAppPurchaseLocalizations: [FieldsInAppPurchaseLocalizations]?
 			public var fieldsInAppPurchasePricePoints: [FieldsInAppPurchasePricePoints]?
@@ -36,7 +36,7 @@ extension APIEndpoint.V2.InAppPurchases {
 			public var limitPricePoints: Int?
 			public var limitVersions: Int?
 
-			public enum FieldsInAppPurchases: String, Codable, CaseIterable {
+			public enum FieldsInAppPurchases: String, Codable, CaseIterable, Sendable {
 				case name
 				case productID = "productId"
 				case inAppPurchaseType
@@ -56,7 +56,7 @@ extension APIEndpoint.V2.InAppPurchases {
 				case versions
 			}
 
-			public enum FieldsInAppPurchaseLocalizations: String, Codable, CaseIterable {
+			public enum FieldsInAppPurchaseLocalizations: String, Codable, CaseIterable, Sendable {
 				case name
 				case locale
 				case description
@@ -64,14 +64,14 @@ extension APIEndpoint.V2.InAppPurchases {
 				case inAppPurchaseV2
 			}
 
-			public enum FieldsInAppPurchasePricePoints: String, Codable, CaseIterable {
+			public enum FieldsInAppPurchasePricePoints: String, Codable, CaseIterable, Sendable {
 				case customerPrice
 				case proceeds
 				case territory
 				case equalizations
 			}
 
-			public enum FieldsInAppPurchaseContents: String, Codable, CaseIterable {
+			public enum FieldsInAppPurchaseContents: String, Codable, CaseIterable, Sendable {
 				case fileName
 				case fileSize
 				case url
@@ -79,7 +79,7 @@ extension APIEndpoint.V2.InAppPurchases {
 				case inAppPurchaseV2
 			}
 
-			public enum FieldsInAppPurchaseAppStoreReviewScreenshots: String, Codable, CaseIterable {
+			public enum FieldsInAppPurchaseAppStoreReviewScreenshots: String, Codable, CaseIterable, Sendable {
 				case fileSize
 				case fileName
 				case sourceFileChecksum
@@ -91,7 +91,7 @@ extension APIEndpoint.V2.InAppPurchases {
 				case inAppPurchaseV2
 			}
 
-			public enum FieldsPromotedPurchases: String, Codable, CaseIterable {
+			public enum FieldsPromotedPurchases: String, Codable, CaseIterable, Sendable {
 				case visibleForAllUsers
 				case enabled
 				case state
@@ -99,18 +99,18 @@ extension APIEndpoint.V2.InAppPurchases {
 				case subscription
 			}
 
-			public enum FieldsInAppPurchasePriceSchedules: String, Codable, CaseIterable {
+			public enum FieldsInAppPurchasePriceSchedules: String, Codable, CaseIterable, Sendable {
 				case baseTerritory
 				case manualPrices
 				case automaticPrices
 			}
 
-			public enum FieldsInAppPurchaseAvailabilities: String, Codable, CaseIterable {
+			public enum FieldsInAppPurchaseAvailabilities: String, Codable, CaseIterable, Sendable {
 				case availableInNewTerritories
 				case availableTerritories
 			}
 
-			public enum FieldsInAppPurchaseImages: String, Codable, CaseIterable {
+			public enum FieldsInAppPurchaseImages: String, Codable, CaseIterable, Sendable {
 				case fileSize
 				case fileName
 				case sourceFileChecksum
@@ -121,7 +121,7 @@ extension APIEndpoint.V2.InAppPurchases {
 				case inAppPurchase
 			}
 
-			public enum FieldsInAppPurchaseOfferCodes: String, Codable, CaseIterable {
+			public enum FieldsInAppPurchaseOfferCodes: String, Codable, CaseIterable, Sendable {
 				case name
 				case customerEligibilities
 				case productionCodeCount
@@ -132,7 +132,7 @@ extension APIEndpoint.V2.InAppPurchases {
 				case prices
 			}
 
-			public enum FieldsInAppPurchaseVersions: String, Codable, CaseIterable {
+			public enum FieldsInAppPurchaseVersions: String, Codable, CaseIterable, Sendable {
 				case version
 				case state
 				case inAppPurchase
@@ -141,7 +141,7 @@ extension APIEndpoint.V2.InAppPurchases {
 				case localizations
 			}
 
-			public enum Include: String, Codable, CaseIterable {
+			public enum Include: String, Codable, CaseIterable, Sendable {
 				case inAppPurchaseLocalizations
 				case pricePoints
 				case content

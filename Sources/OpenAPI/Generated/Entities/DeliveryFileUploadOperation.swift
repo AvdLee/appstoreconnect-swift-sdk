@@ -3,7 +3,7 @@
 
 import Foundation
 
-public struct DeliveryFileUploadOperation: Codable {
+public struct DeliveryFileUploadOperation: Codable, Sendable {
 	public var method: String?
 	public var url: String?
 	public var length: Int64?

@@ -9,7 +9,7 @@ extension APIEndpoint.V1.AppStoreVersions.WithID {
 		AppStoreVersionSubmission(path: path + "/appStoreVersionSubmission")
 	}
 
-	public struct AppStoreVersionSubmission {
+	public struct AppStoreVersionSubmission: Sendable {
 		/// Path: `/v1/appStoreVersions/{id}/appStoreVersionSubmission`
 		public let path: String
 
@@ -18,16 +18,16 @@ extension APIEndpoint.V1.AppStoreVersions.WithID {
 			Request(path: path, method: "GET", query: parameters?.asQuery, id: "appStoreVersions_appStoreVersionSubmission_getToOneRelated")
 		}
 
-		public struct GetParameters {
+		public struct GetParameters: Sendable {
 			public var fieldsAppStoreVersionSubmissions: [FieldsAppStoreVersionSubmissions]?
 			public var fieldsAppStoreVersions: [FieldsAppStoreVersions]?
 			public var include: [Include]?
 
-			public enum FieldsAppStoreVersionSubmissions: String, Codable, CaseIterable {
+			public enum FieldsAppStoreVersionSubmissions: String, Codable, CaseIterable, Sendable {
 				case appStoreVersion
 			}
 
-			public enum FieldsAppStoreVersions: String, Codable, CaseIterable {
+			public enum FieldsAppStoreVersions: String, Codable, CaseIterable, Sendable {
 				case platform
 				case versionString
 				case appStoreState
@@ -54,7 +54,7 @@ extension APIEndpoint.V1.AppStoreVersions.WithID {
 				case alternativeDistributionPackage
 			}
 
-			public enum Include: String, Codable, CaseIterable {
+			public enum Include: String, Codable, CaseIterable, Sendable {
 				case appStoreVersion
 			}
 

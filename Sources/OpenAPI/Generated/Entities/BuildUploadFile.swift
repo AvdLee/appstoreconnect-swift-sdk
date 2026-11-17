@@ -3,17 +3,17 @@
 
 import Foundation
 
-public struct BuildUploadFile: Codable, Identifiable {
+public struct BuildUploadFile: Codable, Identifiable, Sendable {
 	public var type: `Type`
 	public var id: String
 	public var attributes: Attributes?
 	public var links: ResourceLinks?
 
-	public enum `Type`: String, Codable, CaseIterable {
+	public enum `Type`: String, Codable, CaseIterable, Sendable {
 		case buildUploadFiles
 	}
 
-	public struct Attributes: Codable {
+	public struct Attributes: Codable, Sendable {
 		public var assetDeliveryState: AppMediaAssetState?
 		public var assetToken: String?
 		public var assetType: AssetType?
@@ -23,13 +23,13 @@ public struct BuildUploadFile: Codable, Identifiable {
 		public var uploadOperations: [DeliveryFileUploadOperation]?
 		public var uti: Uti?
 
-		public enum AssetType: String, Codable, CaseIterable {
+		public enum AssetType: String, Codable, CaseIterable, Sendable {
 			case asset = "ASSET"
 			case assetDescription = "ASSET_DESCRIPTION"
 			case assetSpi = "ASSET_SPI"
 		}
 
-		public enum Uti: String, Codable, CaseIterable {
+		public enum Uti: String, Codable, CaseIterable, Sendable {
 			case comAppleBinaryPropertyList = "com.apple.binary-property-list"
 			case comAppleIpa = "com.apple.ipa"
 			case comApplePkg = "com.apple.pkg"

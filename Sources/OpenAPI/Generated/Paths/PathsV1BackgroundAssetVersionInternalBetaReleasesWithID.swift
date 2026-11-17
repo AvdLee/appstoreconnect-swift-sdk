@@ -9,7 +9,7 @@ extension APIEndpoint.V1.BackgroundAssetVersionInternalBetaReleases {
 		WithID(path: "\(path)/\(id)")
 	}
 
-	public struct WithID {
+	public struct WithID: Sendable {
 		/// Path: `/v1/backgroundAssetVersionInternalBetaReleases/{id}`
 		public let path: String
 
@@ -17,17 +17,17 @@ extension APIEndpoint.V1.BackgroundAssetVersionInternalBetaReleases {
 			Request(path: path, method: "GET", query: parameters?.asQuery, id: "backgroundAssetVersionInternalBetaReleases_getInstance")
 		}
 
-		public struct GetParameters {
+		public struct GetParameters: Sendable {
 			public var fieldsBackgroundAssetVersionInternalBetaReleases: [FieldsBackgroundAssetVersionInternalBetaReleases]?
 			public var fieldsBackgroundAssetVersions: [FieldsBackgroundAssetVersions]?
 			public var include: [Include]?
 
-			public enum FieldsBackgroundAssetVersionInternalBetaReleases: String, Codable, CaseIterable {
+			public enum FieldsBackgroundAssetVersionInternalBetaReleases: String, Codable, CaseIterable, Sendable {
 				case state
 				case backgroundAssetVersion
 			}
 
-			public enum FieldsBackgroundAssetVersions: String, Codable, CaseIterable {
+			public enum FieldsBackgroundAssetVersions: String, Codable, CaseIterable, Sendable {
 				case createdDate
 				case platforms
 				case state
@@ -43,7 +43,7 @@ extension APIEndpoint.V1.BackgroundAssetVersionInternalBetaReleases {
 				case backgroundAssetUploadFiles
 			}
 
-			public enum Include: String, Codable, CaseIterable {
+			public enum Include: String, Codable, CaseIterable, Sendable {
 				case backgroundAssetVersion
 			}
 

@@ -3,7 +3,7 @@
 
 import Foundation
 
-public struct ScmProvidersResponse: Codable {
+public struct ScmProvidersResponse: Codable, Sendable {
 	public var data: [ScmProvider]
 	public var links: PagedDocumentLinks
 	public var meta: PagingInformation?

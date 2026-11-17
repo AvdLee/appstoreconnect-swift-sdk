@@ -9,7 +9,7 @@ extension APIEndpoint.V1.BuildUploads {
 		WithID(path: "\(path)/\(id)")
 	}
 
-	public struct WithID {
+	public struct WithID: Sendable {
 		/// Path: `/v1/buildUploads/{id}`
 		public let path: String
 
@@ -17,13 +17,13 @@ extension APIEndpoint.V1.BuildUploads {
 			Request(path: path, method: "GET", query: parameters?.asQuery, id: "buildUploads_getInstance")
 		}
 
-		public struct GetParameters {
+		public struct GetParameters: Sendable {
 			public var fieldsBuildUploads: [FieldsBuildUploads]?
 			public var fieldsBuilds: [FieldsBuilds]?
 			public var fieldsBuildUploadFiles: [FieldsBuildUploadFiles]?
 			public var include: [Include]?
 
-			public enum FieldsBuildUploads: String, Codable, CaseIterable {
+			public enum FieldsBuildUploads: String, Codable, CaseIterable, Sendable {
 				case cfBundleShortVersionString
 				case cfBundleVersion
 				case createdDate
@@ -37,7 +37,7 @@ extension APIEndpoint.V1.BuildUploads {
 				case buildUploadFiles
 			}
 
-			public enum FieldsBuilds: String, Codable, CaseIterable {
+			public enum FieldsBuilds: String, Codable, CaseIterable, Sendable {
 				case version
 				case uploadedDate
 				case expirationDate
@@ -66,7 +66,7 @@ extension APIEndpoint.V1.BuildUploads {
 				case diagnosticSignatures
 			}
 
-			public enum FieldsBuildUploadFiles: String, Codable, CaseIterable {
+			public enum FieldsBuildUploadFiles: String, Codable, CaseIterable, Sendable {
 				case assetDeliveryState
 				case assetToken
 				case assetType
@@ -77,7 +77,7 @@ extension APIEndpoint.V1.BuildUploads {
 				case uti
 			}
 
-			public enum Include: String, Codable, CaseIterable {
+			public enum Include: String, Codable, CaseIterable, Sendable {
 				case build
 				case assetFile
 				case assetDescriptionFile

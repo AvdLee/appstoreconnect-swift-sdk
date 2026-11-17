@@ -9,7 +9,7 @@ extension APIEndpoint.V1 {
 		BundleIDs(path: path + "/bundleIds")
 	}
 
-	public struct BundleIDs {
+	public struct BundleIDs: Sendable {
 		/// Path: `/v1/bundleIds`
 		public let path: String
 
@@ -17,7 +17,7 @@ extension APIEndpoint.V1 {
 			Request(path: path, method: "GET", query: parameters?.asQuery, id: "bundleIds_getCollection")
 		}
 
-		public struct GetParameters {
+		public struct GetParameters: Sendable {
 			public var filterName: [String]?
 			public var filterPlatform: [FilterPlatform]?
 			public var filterIdentifier: [String]?
@@ -33,13 +33,13 @@ extension APIEndpoint.V1 {
 			public var limitBundleIDCapabilities: Int?
 			public var limitProfiles: Int?
 
-			public enum FilterPlatform: String, Codable, CaseIterable {
+			public enum FilterPlatform: String, Codable, CaseIterable, Sendable {
 				case ios = "IOS"
 				case macOs = "MAC_OS"
 				case universal = "UNIVERSAL"
 			}
 
-			public enum Sort: String, Codable, CaseIterable {
+			public enum Sort: String, Codable, CaseIterable, Sendable {
 				case name
 				case minusname = "-name"
 				case platform
@@ -52,7 +52,7 @@ extension APIEndpoint.V1 {
 				case minusid = "-id"
 			}
 
-			public enum FieldsBundleIDs: String, Codable, CaseIterable {
+			public enum FieldsBundleIDs: String, Codable, CaseIterable, Sendable {
 				case name
 				case platform
 				case identifier
@@ -62,7 +62,7 @@ extension APIEndpoint.V1 {
 				case app
 			}
 
-			public enum FieldsProfiles: String, Codable, CaseIterable {
+			public enum FieldsProfiles: String, Codable, CaseIterable, Sendable {
 				case name
 				case platform
 				case profileType
@@ -76,12 +76,12 @@ extension APIEndpoint.V1 {
 				case certificates
 			}
 
-			public enum FieldsBundleIDCapabilities: String, Codable, CaseIterable {
+			public enum FieldsBundleIDCapabilities: String, Codable, CaseIterable, Sendable {
 				case capabilityType
 				case settings
 			}
 
-			public enum FieldsApps: String, Codable, CaseIterable {
+			public enum FieldsApps: String, Codable, CaseIterable, Sendable {
 				case accessibilityURL = "accessibilityUrl"
 				case name
 				case bundleID = "bundleId"
@@ -142,7 +142,7 @@ extension APIEndpoint.V1 {
 				case androidToIosAppMappingDetails
 			}
 
-			public enum Include: String, Codable, CaseIterable {
+			public enum Include: String, Codable, CaseIterable, Sendable {
 				case profiles
 				case bundleIDCapabilities = "bundleIdCapabilities"
 				case app

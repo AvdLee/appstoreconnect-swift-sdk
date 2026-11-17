@@ -3,13 +3,13 @@
 
 import Foundation
 
-public struct AppAssetLibraryPlacementsResponse: Codable {
+public struct AppAssetLibraryPlacementsResponse: Codable, Sendable {
 	public var data: [AppAssetLibraryPlacement]
 	public var included: [IncludedItem]?
 	public var links: PagedDocumentLinks
 	public var meta: PagingInformation?
 
-	public enum IncludedItem: Codable {
+	public enum IncludedItem: Codable, Sendable {
 		case appAssetLibraryImage(AppAssetLibraryImage)
 		case appAssetLibraryVideo(AppAssetLibraryVideo)
 		case appCustomProductPageLocalization(AppCustomProductPageLocalization)

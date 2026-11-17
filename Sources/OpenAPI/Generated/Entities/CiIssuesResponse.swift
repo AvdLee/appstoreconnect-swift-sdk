@@ -3,7 +3,7 @@
 
 import Foundation
 
-public struct CiIssuesResponse: Codable {
+public struct CiIssuesResponse: Codable, Sendable {
 	public var data: [CiIssue]
 	public var links: PagedDocumentLinks
 	public var meta: PagingInformation?

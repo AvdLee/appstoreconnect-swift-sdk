@@ -9,7 +9,7 @@ extension APIEndpoint.V1 {
 		CiBuildRuns(path: path + "/ciBuildRuns")
 	}
 
-	public struct CiBuildRuns {
+	public struct CiBuildRuns: Sendable {
 		/// Path: `/v1/ciBuildRuns`
 		public let path: String
 

@@ -3,7 +3,7 @@
 
 import Foundation
 
-public struct InAppPurchaseLocalizationsV2Response: Codable {
+public struct InAppPurchaseLocalizationsV2Response: Codable, Sendable {
 	public var data: [InAppPurchaseLocalizationV2]
 	public var included: [InAppPurchaseVersion]?
 	public var links: PagedDocumentLinks

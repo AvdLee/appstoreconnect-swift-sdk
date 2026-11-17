@@ -9,7 +9,7 @@ extension APIEndpoint.V1.ScmRepositories.WithID.Relationships {
 		GitReferences(path: path + "/gitReferences")
 	}
 
-	public struct GitReferences {
+	public struct GitReferences: Sendable {
 		/// Path: `/v1/scmRepositories/{id}/relationships/gitReferences`
 		public let path: String
 

@@ -3,19 +3,19 @@
 
 import Foundation
 
-public struct AppPreviewUpdateRequest: Codable {
+public struct AppPreviewUpdateRequest: Codable, Sendable {
 	public var data: Data
 
-	public struct Data: Codable, Identifiable {
+	public struct Data: Codable, Identifiable, Sendable {
 		public var type: `Type`
 		public var id: String
 		public var attributes: Attributes?
 
-		public enum `Type`: String, Codable, CaseIterable {
+		public enum `Type`: String, Codable, CaseIterable, Sendable {
 			case appPreviews
 		}
 
-		public struct Attributes: Codable {
+		public struct Attributes: Codable, Sendable {
 			public var sourceFileChecksum: String?
 			public var previewFrameTimeCode: String?
 			public var isUploaded: Bool?

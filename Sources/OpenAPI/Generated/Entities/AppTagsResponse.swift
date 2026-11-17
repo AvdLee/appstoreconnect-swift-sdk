@@ -3,7 +3,7 @@
 
 import Foundation
 
-public struct AppTagsResponse: Codable {
+public struct AppTagsResponse: Codable, Sendable {
 	public var data: [AppTag]
 	public var included: [Territory]?
 	public var links: PagedDocumentLinks

@@ -3,7 +3,7 @@
 
 import Foundation
 
-public enum CiExecutionProgress: String, Codable, CaseIterable {
+public enum CiExecutionProgress: String, Codable, CaseIterable, Sendable {
 	case pending = "PENDING"
 	case running = "RUNNING"
 	case complete = "COMPLETE"

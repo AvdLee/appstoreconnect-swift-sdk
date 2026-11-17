@@ -9,7 +9,7 @@ extension APIEndpoint.V1.Builds.WithID {
 		PreReleaseVersion(path: path + "/preReleaseVersion")
 	}
 
-	public struct PreReleaseVersion {
+	public struct PreReleaseVersion: Sendable {
 		/// Path: `/v1/builds/{id}/preReleaseVersion`
 		public let path: String
 
@@ -23,7 +23,7 @@ extension APIEndpoint.V1.Builds.WithID {
 			return encoder.items
 		}
 
-		public enum FieldsPreReleaseVersions: String, Codable, CaseIterable {
+		public enum FieldsPreReleaseVersions: String, Codable, CaseIterable, Sendable {
 			case version
 			case platform
 			case builds

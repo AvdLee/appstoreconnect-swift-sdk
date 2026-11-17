@@ -9,7 +9,7 @@ extension APIEndpoint.V1.AppCustomProductPageLocalizations.WithID {
 		AppScreenshotSets(path: path + "/appScreenshotSets")
 	}
 
-	public struct AppScreenshotSets {
+	public struct AppScreenshotSets: Sendable {
 		/// Path: `/v1/appCustomProductPageLocalizations/{id}/appScreenshotSets`
 		public let path: String
 
@@ -17,7 +17,7 @@ extension APIEndpoint.V1.AppCustomProductPageLocalizations.WithID {
 			Request(path: path, method: "GET", query: parameters?.asQuery, id: "appCustomProductPageLocalizations_appScreenshotSets_getToManyRelated")
 		}
 
-		public struct GetParameters {
+		public struct GetParameters: Sendable {
 			public var filterScreenshotDisplayType: [FilterScreenshotDisplayType]?
 			public var filterAppStoreVersionLocalization: [String]?
 			public var filterAppStoreVersionExperimentTreatmentLocalization: [String]?
@@ -30,7 +30,7 @@ extension APIEndpoint.V1.AppCustomProductPageLocalizations.WithID {
 			public var include: [Include]?
 			public var limitAppScreenshots: Int?
 
-			public enum FilterScreenshotDisplayType: String, Codable, CaseIterable {
+			public enum FilterScreenshotDisplayType: String, Codable, CaseIterable, Sendable {
 				case appIphone67 = "APP_IPHONE_67"
 				case appIphone61 = "APP_IPHONE_61"
 				case appIphone65 = "APP_IPHONE_65"
@@ -66,7 +66,7 @@ extension APIEndpoint.V1.AppCustomProductPageLocalizations.WithID {
 				case imessageAppIpad97 = "IMESSAGE_APP_IPAD_97"
 			}
 
-			public enum FieldsAppScreenshotSets: String, Codable, CaseIterable {
+			public enum FieldsAppScreenshotSets: String, Codable, CaseIterable, Sendable {
 				case screenshotDisplayType
 				case appStoreVersionLocalization
 				case appCustomProductPageLocalization
@@ -74,7 +74,7 @@ extension APIEndpoint.V1.AppCustomProductPageLocalizations.WithID {
 				case appScreenshots
 			}
 
-			public enum FieldsAppStoreVersionLocalizations: String, Codable, CaseIterable {
+			public enum FieldsAppStoreVersionLocalizations: String, Codable, CaseIterable, Sendable {
 				case description
 				case locale
 				case keywords
@@ -89,7 +89,7 @@ extension APIEndpoint.V1.AppCustomProductPageLocalizations.WithID {
 				case placements
 			}
 
-			public enum FieldsAppCustomProductPageLocalizations: String, Codable, CaseIterable {
+			public enum FieldsAppCustomProductPageLocalizations: String, Codable, CaseIterable, Sendable {
 				case locale
 				case promotionalText
 				case appCustomProductPageVersion
@@ -99,7 +99,7 @@ extension APIEndpoint.V1.AppCustomProductPageLocalizations.WithID {
 				case placements
 			}
 
-			public enum FieldsAppStoreVersionExperimentTreatmentLocalizations: String, Codable, CaseIterable {
+			public enum FieldsAppStoreVersionExperimentTreatmentLocalizations: String, Codable, CaseIterable, Sendable {
 				case locale
 				case appStoreVersionExperimentTreatment
 				case appScreenshotSets
@@ -107,7 +107,7 @@ extension APIEndpoint.V1.AppCustomProductPageLocalizations.WithID {
 				case placements
 			}
 
-			public enum FieldsAppScreenshots: String, Codable, CaseIterable {
+			public enum FieldsAppScreenshots: String, Codable, CaseIterable, Sendable {
 				case fileSize
 				case fileName
 				case sourceFileChecksum
@@ -119,7 +119,7 @@ extension APIEndpoint.V1.AppCustomProductPageLocalizations.WithID {
 				case appScreenshotSet
 			}
 
-			public enum Include: String, Codable, CaseIterable {
+			public enum Include: String, Codable, CaseIterable, Sendable {
 				case appStoreVersionLocalization
 				case appCustomProductPageLocalization
 				case appStoreVersionExperimentTreatmentLocalization

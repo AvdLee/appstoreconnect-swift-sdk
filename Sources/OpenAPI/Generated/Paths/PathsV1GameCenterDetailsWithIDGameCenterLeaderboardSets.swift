@@ -9,7 +9,7 @@ extension APIEndpoint.V1.GameCenterDetails.WithID {
 		GameCenterLeaderboardSets(path: path + "/gameCenterLeaderboardSets")
 	}
 
-	public struct GameCenterLeaderboardSets {
+	public struct GameCenterLeaderboardSets: Sendable {
 		/// Path: `/v1/gameCenterDetails/{id}/gameCenterLeaderboardSets`
 		public let path: String
 
@@ -18,7 +18,7 @@ extension APIEndpoint.V1.GameCenterDetails.WithID {
 			Request(path: path, method: "GET", query: parameters?.asQuery, id: "gameCenterDetails_gameCenterLeaderboardSets_getToManyRelated")
 		}
 
-		public struct GetParameters {
+		public struct GetParameters: Sendable {
 			public var filterReferenceName: [String]?
 			public var filterID: [String]?
 			public var fieldsGameCenterLeaderboardSets: [FieldsGameCenterLeaderboardSets]?
@@ -33,7 +33,7 @@ extension APIEndpoint.V1.GameCenterDetails.WithID {
 			public var limitGameCenterLeaderboards: Int?
 			public var limitReleases: Int?
 
-			public enum FieldsGameCenterLeaderboardSets: String, Codable, CaseIterable {
+			public enum FieldsGameCenterLeaderboardSets: String, Codable, CaseIterable, Sendable {
 				case referenceName
 				case vendorIdentifier
 				case gameCenterDetail
@@ -44,7 +44,7 @@ extension APIEndpoint.V1.GameCenterDetails.WithID {
 				case releases
 			}
 
-			public enum FieldsGameCenterDetails: String, Codable, CaseIterable {
+			public enum FieldsGameCenterDetails: String, Codable, CaseIterable, Sendable {
 				case arcadeEnabled
 				case challengeEnabled
 				case app
@@ -71,7 +71,7 @@ extension APIEndpoint.V1.GameCenterDetails.WithID {
 				case challengesMinimumPlatformVersions
 			}
 
-			public enum FieldsGameCenterGroups: String, Codable, CaseIterable {
+			public enum FieldsGameCenterGroups: String, Codable, CaseIterable, Sendable {
 				case referenceName
 				case gameCenterDetails
 				case gameCenterLeaderboards
@@ -84,14 +84,14 @@ extension APIEndpoint.V1.GameCenterDetails.WithID {
 				case gameCenterChallenges
 			}
 
-			public enum FieldsGameCenterLeaderboardSetLocalizations: String, Codable, CaseIterable {
+			public enum FieldsGameCenterLeaderboardSetLocalizations: String, Codable, CaseIterable, Sendable {
 				case locale
 				case name
 				case gameCenterLeaderboardSet
 				case gameCenterLeaderboardSetImage
 			}
 
-			public enum FieldsGameCenterLeaderboards: String, Codable, CaseIterable {
+			public enum FieldsGameCenterLeaderboards: String, Codable, CaseIterable, Sendable {
 				case defaultFormatter
 				case referenceName
 				case vendorIdentifier
@@ -115,13 +115,13 @@ extension APIEndpoint.V1.GameCenterDetails.WithID {
 				case challenge
 			}
 
-			public enum FieldsGameCenterLeaderboardSetReleases: String, Codable, CaseIterable {
+			public enum FieldsGameCenterLeaderboardSetReleases: String, Codable, CaseIterable, Sendable {
 				case live
 				case gameCenterDetail
 				case gameCenterLeaderboardSet
 			}
 
-			public enum Include: String, Codable, CaseIterable {
+			public enum Include: String, Codable, CaseIterable, Sendable {
 				case gameCenterDetail
 				case gameCenterGroup
 				case groupLeaderboardSet

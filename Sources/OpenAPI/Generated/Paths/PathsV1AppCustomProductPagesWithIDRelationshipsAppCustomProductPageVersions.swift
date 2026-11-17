@@ -9,7 +9,7 @@ extension APIEndpoint.V1.AppCustomProductPages.WithID.Relationships {
 		AppCustomProductPageVersions(path: path + "/appCustomProductPageVersions")
 	}
 
-	public struct AppCustomProductPageVersions {
+	public struct AppCustomProductPageVersions: Sendable {
 		/// Path: `/v1/appCustomProductPages/{id}/relationships/appCustomProductPageVersions`
 		public let path: String
 

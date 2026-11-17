@@ -9,7 +9,7 @@ extension APIEndpoint.V1.AppStoreReviewDetails.WithID {
 		AppStoreReviewAttachments(path: path + "/appStoreReviewAttachments")
 	}
 
-	public struct AppStoreReviewAttachments {
+	public struct AppStoreReviewAttachments: Sendable {
 		/// Path: `/v1/appStoreReviewDetails/{id}/appStoreReviewAttachments`
 		public let path: String
 
@@ -17,13 +17,13 @@ extension APIEndpoint.V1.AppStoreReviewDetails.WithID {
 			Request(path: path, method: "GET", query: parameters?.asQuery, id: "appStoreReviewDetails_appStoreReviewAttachments_getToManyRelated")
 		}
 
-		public struct GetParameters {
+		public struct GetParameters: Sendable {
 			public var fieldsAppStoreReviewAttachments: [FieldsAppStoreReviewAttachments]?
 			public var fieldsAppStoreReviewDetails: [FieldsAppStoreReviewDetails]?
 			public var limit: Int?
 			public var include: [Include]?
 
-			public enum FieldsAppStoreReviewAttachments: String, Codable, CaseIterable {
+			public enum FieldsAppStoreReviewAttachments: String, Codable, CaseIterable, Sendable {
 				case fileSize
 				case fileName
 				case sourceFileChecksum
@@ -32,7 +32,7 @@ extension APIEndpoint.V1.AppStoreReviewDetails.WithID {
 				case appStoreReviewDetail
 			}
 
-			public enum FieldsAppStoreReviewDetails: String, Codable, CaseIterable {
+			public enum FieldsAppStoreReviewDetails: String, Codable, CaseIterable, Sendable {
 				case contactFirstName
 				case contactLastName
 				case contactPhone
@@ -45,7 +45,7 @@ extension APIEndpoint.V1.AppStoreReviewDetails.WithID {
 				case appStoreReviewAttachments
 			}
 
-			public enum Include: String, Codable, CaseIterable {
+			public enum Include: String, Codable, CaseIterable, Sendable {
 				case appStoreReviewDetail
 			}
 

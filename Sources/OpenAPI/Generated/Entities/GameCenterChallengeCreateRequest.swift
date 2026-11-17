@@ -3,26 +3,26 @@
 
 import Foundation
 
-public struct GameCenterChallengeCreateRequest: Codable {
+public struct GameCenterChallengeCreateRequest: Codable, Sendable {
 	public var data: Data
 	public var included: [GameCenterChallengeVersionInlineCreate]?
 
-	public struct Data: Codable {
+	public struct Data: Codable, Sendable {
 		public var type: `Type`
 		public var attributes: Attributes
 		public var relationships: Relationships?
 
-		public enum `Type`: String, Codable, CaseIterable {
+		public enum `Type`: String, Codable, CaseIterable, Sendable {
 			case gameCenterChallenges
 		}
 
-		public struct Attributes: Codable {
+		public struct Attributes: Codable, Sendable {
 			public var referenceName: String
 			public var vendorIdentifier: String
 			public var challengeType: ChallengeType
 			public var isRepeatable: Bool?
 
-			public enum ChallengeType: String, Codable, CaseIterable {
+			public enum ChallengeType: String, Codable, CaseIterable, Sendable {
 				case leaderboard = "LEADERBOARD"
 			}
 
@@ -50,7 +50,7 @@ public struct GameCenterChallengeCreateRequest: Codable {
 			}
 		}
 
-		public struct Relationships: Codable {
+		public struct Relationships: Codable, Sendable {
 			public var gameCenterDetail: GameCenterDetail?
 			public var gameCenterGroup: GameCenterGroup?
 			public var versions: Versions?
@@ -58,14 +58,14 @@ public struct GameCenterChallengeCreateRequest: Codable {
 			public var leaderboard: Leaderboard?
 			public var leaderboardV2: LeaderboardV2?
 
-			public struct GameCenterDetail: Codable {
+			public struct GameCenterDetail: Codable, Sendable {
 				public var data: Data?
 
-				public struct Data: Codable, Identifiable {
+				public struct Data: Codable, Identifiable, Sendable {
 					public var type: `Type`
 					public var id: String
 
-					public enum `Type`: String, Codable, CaseIterable {
+					public enum `Type`: String, Codable, CaseIterable, Sendable {
 						case gameCenterDetails
 					}
 
@@ -102,14 +102,14 @@ public struct GameCenterChallengeCreateRequest: Codable {
 				}
 			}
 
-			public struct GameCenterGroup: Codable {
+			public struct GameCenterGroup: Codable, Sendable {
 				public var data: Data?
 
-				public struct Data: Codable, Identifiable {
+				public struct Data: Codable, Identifiable, Sendable {
 					public var type: `Type`
 					public var id: String
 
-					public enum `Type`: String, Codable, CaseIterable {
+					public enum `Type`: String, Codable, CaseIterable, Sendable {
 						case gameCenterGroups
 					}
 
@@ -146,14 +146,14 @@ public struct GameCenterChallengeCreateRequest: Codable {
 				}
 			}
 
-			public struct Versions: Codable {
+			public struct Versions: Codable, Sendable {
 				public var data: [Datum]?
 
-				public struct Datum: Codable, Identifiable {
+				public struct Datum: Codable, Identifiable, Sendable {
 					public var type: `Type`
 					public var id: String
 
-					public enum `Type`: String, Codable, CaseIterable {
+					public enum `Type`: String, Codable, CaseIterable, Sendable {
 						case gameCenterChallengeVersions
 					}
 
@@ -191,14 +191,14 @@ public struct GameCenterChallengeCreateRequest: Codable {
 			}
 
 			@available(*, deprecated, message: "Deprecated")
-			public struct Leaderboard: Codable {
+			public struct Leaderboard: Codable, Sendable {
 				public var data: Data?
 
-				public struct Data: Codable, Identifiable {
+				public struct Data: Codable, Identifiable, Sendable {
 					public var type: `Type`
 					public var id: String
 
-					public enum `Type`: String, Codable, CaseIterable {
+					public enum `Type`: String, Codable, CaseIterable, Sendable {
 						case gameCenterLeaderboards
 					}
 
@@ -235,14 +235,14 @@ public struct GameCenterChallengeCreateRequest: Codable {
 				}
 			}
 
-			public struct LeaderboardV2: Codable {
+			public struct LeaderboardV2: Codable, Sendable {
 				public var data: Data?
 
-				public struct Data: Codable, Identifiable {
+				public struct Data: Codable, Identifiable, Sendable {
 					public var type: `Type`
 					public var id: String
 
-					public enum `Type`: String, Codable, CaseIterable {
+					public enum `Type`: String, Codable, CaseIterable, Sendable {
 						case gameCenterLeaderboards
 					}
 

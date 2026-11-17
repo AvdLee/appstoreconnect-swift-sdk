@@ -3,12 +3,12 @@
 
 import Foundation
 
-public struct AppMediaPreviewFrameImageState: Codable {
+public struct AppMediaPreviewFrameImageState: Codable, Sendable {
 	public var errors: [AppMediaStateError]?
 	public var warnings: [AppMediaStateError]?
 	public var state: State?
 
-	public enum State: String, Codable, CaseIterable {
+	public enum State: String, Codable, CaseIterable, Sendable {
 		case processing = "PROCESSING"
 		case complete = "COMPLETE"
 		case failed = "FAILED"

@@ -3,20 +3,20 @@
 
 import Foundation
 
-public struct GameCenterMatchmakingRuleSetTest: Codable, Identifiable {
+public struct GameCenterMatchmakingRuleSetTest: Codable, Identifiable, Sendable {
 	public var type: `Type`
 	public var id: String
 	public var attributes: Attributes?
 	public var links: ResourceLinks?
 
-	public enum `Type`: String, Codable, CaseIterable {
+	public enum `Type`: String, Codable, CaseIterable, Sendable {
 		case gameCenterMatchmakingRuleSetTests
 	}
 
-	public struct Attributes: Codable {
+	public struct Attributes: Codable, Sendable {
 		public var matchmakingResults: [[MatchmakingResultItem]]?
 
-		public struct MatchmakingResultItem: Codable {
+		public struct MatchmakingResultItem: Codable, Sendable {
 			public var requestName: String?
 			public var teamAssignments: [GameCenterMatchmakingTeamAssignment]?
 

@@ -9,7 +9,7 @@ extension APIEndpoint.V1.BetaTesters.WithID {
 		BetaGroups(path: path + "/betaGroups")
 	}
 
-	public struct BetaGroups {
+	public struct BetaGroups: Sendable {
 		/// Path: `/v1/betaTesters/{id}/betaGroups`
 		public let path: String
 
@@ -24,7 +24,7 @@ extension APIEndpoint.V1.BetaTesters.WithID {
 			return encoder.items
 		}
 
-		public enum FieldsBetaGroups: String, Codable, CaseIterable {
+		public enum FieldsBetaGroups: String, Codable, CaseIterable, Sendable {
 			case name
 			case createdDate
 			case isInternalGroup

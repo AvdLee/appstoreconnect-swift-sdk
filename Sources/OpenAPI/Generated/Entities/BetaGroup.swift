@@ -3,18 +3,18 @@
 
 import Foundation
 
-public struct BetaGroup: Codable, Identifiable {
+public struct BetaGroup: Codable, Identifiable, Sendable {
 	public var type: `Type`
 	public var id: String
 	public var attributes: Attributes?
 	public var relationships: Relationships?
 	public var links: ResourceLinks?
 
-	public enum `Type`: String, Codable, CaseIterable {
+	public enum `Type`: String, Codable, CaseIterable, Sendable {
 		case betaGroups
 	}
 
-	public struct Attributes: Codable {
+	public struct Attributes: Codable, Sendable {
 		public var name: String?
 		public var createdDate: Date?
 		public var isInternalGroup: Bool?
@@ -76,22 +76,22 @@ public struct BetaGroup: Codable, Identifiable {
 		}
 	}
 
-	public struct Relationships: Codable {
+	public struct Relationships: Codable, Sendable {
 		public var app: App?
 		public var builds: Builds?
 		public var betaTesters: BetaTesters?
 		public var betaRecruitmentCriteria: BetaRecruitmentCriteria?
 		public var betaRecruitmentCriterionCompatibleBuildCheck: BetaRecruitmentCriterionCompatibleBuildCheck?
 
-		public struct App: Codable {
+		public struct App: Codable, Sendable {
 			public var links: RelationshipLinks?
 			public var data: Data?
 
-			public struct Data: Codable, Identifiable {
+			public struct Data: Codable, Identifiable, Sendable {
 				public var type: `Type`
 				public var id: String
 
-				public enum `Type`: String, Codable, CaseIterable {
+				public enum `Type`: String, Codable, CaseIterable, Sendable {
 					case apps
 				}
 
@@ -131,16 +131,16 @@ public struct BetaGroup: Codable, Identifiable {
 			}
 		}
 
-		public struct Builds: Codable {
+		public struct Builds: Codable, Sendable {
 			public var links: RelationshipLinks?
 			public var meta: PagingInformation?
 			public var data: [Datum]?
 
-			public struct Datum: Codable, Identifiable {
+			public struct Datum: Codable, Identifiable, Sendable {
 				public var type: `Type`
 				public var id: String
 
-				public enum `Type`: String, Codable, CaseIterable {
+				public enum `Type`: String, Codable, CaseIterable, Sendable {
 					case builds
 				}
 
@@ -183,16 +183,16 @@ public struct BetaGroup: Codable, Identifiable {
 			}
 		}
 
-		public struct BetaTesters: Codable {
+		public struct BetaTesters: Codable, Sendable {
 			public var links: RelationshipLinks?
 			public var meta: PagingInformation?
 			public var data: [Datum]?
 
-			public struct Datum: Codable, Identifiable {
+			public struct Datum: Codable, Identifiable, Sendable {
 				public var type: `Type`
 				public var id: String
 
-				public enum `Type`: String, Codable, CaseIterable {
+				public enum `Type`: String, Codable, CaseIterable, Sendable {
 					case betaTesters
 				}
 
@@ -235,15 +235,15 @@ public struct BetaGroup: Codable, Identifiable {
 			}
 		}
 
-		public struct BetaRecruitmentCriteria: Codable {
+		public struct BetaRecruitmentCriteria: Codable, Sendable {
 			public var links: RelationshipLinks?
 			public var data: Data?
 
-			public struct Data: Codable, Identifiable {
+			public struct Data: Codable, Identifiable, Sendable {
 				public var type: `Type`
 				public var id: String
 
-				public enum `Type`: String, Codable, CaseIterable {
+				public enum `Type`: String, Codable, CaseIterable, Sendable {
 					case betaRecruitmentCriteria
 				}
 
@@ -283,7 +283,7 @@ public struct BetaGroup: Codable, Identifiable {
 			}
 		}
 
-		public struct BetaRecruitmentCriterionCompatibleBuildCheck: Codable {
+		public struct BetaRecruitmentCriterionCompatibleBuildCheck: Codable, Sendable {
 			public var links: RelationshipLinks?
 
 			public init(links: RelationshipLinks? = nil) {

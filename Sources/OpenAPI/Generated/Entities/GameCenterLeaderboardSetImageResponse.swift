@@ -4,7 +4,7 @@
 import Foundation
 
 @available(*, deprecated, message: "Deprecated")
-public struct GameCenterLeaderboardSetImageResponse: Codable {
+public struct GameCenterLeaderboardSetImageResponse: Codable, Sendable {
 	/// GameCenterLeaderboardSetImage
 	///
 	/// - warning: Deprecated.

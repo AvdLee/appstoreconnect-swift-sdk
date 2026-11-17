@@ -3,7 +3,7 @@
 
 import Foundation
 
-public struct SubscriptionGroupLocalizationV2Response: Codable {
+public struct SubscriptionGroupLocalizationV2Response: Codable, Sendable {
 	/// SubscriptionGroupLocalizationV2
 	public var data: SubscriptionGroupLocalizationV2
 	public var included: [SubscriptionGroupVersion]?

@@ -9,7 +9,7 @@ extension APIEndpoint.V1.Profiles.WithID {
 		Certificates(path: path + "/certificates")
 	}
 
-	public struct Certificates {
+	public struct Certificates: Sendable {
 		/// Path: `/v1/profiles/{id}/certificates`
 		public let path: String
 
@@ -24,7 +24,7 @@ extension APIEndpoint.V1.Profiles.WithID {
 			return encoder.items
 		}
 
-		public enum FieldsCertificates: String, Codable, CaseIterable {
+		public enum FieldsCertificates: String, Codable, CaseIterable, Sendable {
 			case name
 			case certificateType
 			case displayName

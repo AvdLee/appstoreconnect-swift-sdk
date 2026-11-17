@@ -3,19 +3,19 @@
 
 import Foundation
 
-public struct CiWorkflowCreateRequest: Codable {
+public struct CiWorkflowCreateRequest: Codable, Sendable {
 	public var data: Data
 
-	public struct Data: Codable {
+	public struct Data: Codable, Sendable {
 		public var type: `Type`
 		public var attributes: Attributes
 		public var relationships: Relationships
 
-		public enum `Type`: String, Codable, CaseIterable {
+		public enum `Type`: String, Codable, CaseIterable, Sendable {
 			case ciWorkflows
 		}
 
-		public struct Attributes: Codable {
+		public struct Attributes: Codable, Sendable {
 			public var name: String
 			public var description: String
 			public var branchStartCondition: CiBranchStartCondition?
@@ -85,20 +85,20 @@ public struct CiWorkflowCreateRequest: Codable {
 			}
 		}
 
-		public struct Relationships: Codable {
+		public struct Relationships: Codable, Sendable {
 			public var product: Product
 			public var repository: Repository
 			public var xcodeVersion: XcodeVersion
 			public var macOsVersion: MacOsVersion
 
-			public struct Product: Codable {
+			public struct Product: Codable, Sendable {
 				public var data: Data
 
-				public struct Data: Codable, Identifiable {
+				public struct Data: Codable, Identifiable, Sendable {
 					public var type: `Type`
 					public var id: String
 
-					public enum `Type`: String, Codable, CaseIterable {
+					public enum `Type`: String, Codable, CaseIterable, Sendable {
 						case ciProducts
 					}
 
@@ -135,14 +135,14 @@ public struct CiWorkflowCreateRequest: Codable {
 				}
 			}
 
-			public struct Repository: Codable {
+			public struct Repository: Codable, Sendable {
 				public var data: Data
 
-				public struct Data: Codable, Identifiable {
+				public struct Data: Codable, Identifiable, Sendable {
 					public var type: `Type`
 					public var id: String
 
-					public enum `Type`: String, Codable, CaseIterable {
+					public enum `Type`: String, Codable, CaseIterable, Sendable {
 						case scmRepositories
 					}
 
@@ -179,14 +179,14 @@ public struct CiWorkflowCreateRequest: Codable {
 				}
 			}
 
-			public struct XcodeVersion: Codable {
+			public struct XcodeVersion: Codable, Sendable {
 				public var data: Data
 
-				public struct Data: Codable, Identifiable {
+				public struct Data: Codable, Identifiable, Sendable {
 					public var type: `Type`
 					public var id: String
 
-					public enum `Type`: String, Codable, CaseIterable {
+					public enum `Type`: String, Codable, CaseIterable, Sendable {
 						case ciXcodeVersions
 					}
 
@@ -223,14 +223,14 @@ public struct CiWorkflowCreateRequest: Codable {
 				}
 			}
 
-			public struct MacOsVersion: Codable {
+			public struct MacOsVersion: Codable, Sendable {
 				public var data: Data
 
-				public struct Data: Codable, Identifiable {
+				public struct Data: Codable, Identifiable, Sendable {
 					public var type: `Type`
 					public var id: String
 
-					public enum `Type`: String, Codable, CaseIterable {
+					public enum `Type`: String, Codable, CaseIterable, Sendable {
 						case ciMacOsVersions
 					}
 

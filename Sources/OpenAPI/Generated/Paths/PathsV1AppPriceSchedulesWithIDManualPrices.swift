@@ -9,7 +9,7 @@ extension APIEndpoint.V1.AppPriceSchedules.WithID {
 		ManualPrices(path: path + "/manualPrices")
 	}
 
-	public struct ManualPrices {
+	public struct ManualPrices: Sendable {
 		/// Path: `/v1/appPriceSchedules/{id}/manualPrices`
 		public let path: String
 
@@ -17,7 +17,7 @@ extension APIEndpoint.V1.AppPriceSchedules.WithID {
 			Request(path: path, method: "GET", query: parameters?.asQuery, id: "appPriceSchedules_manualPrices_getToManyRelated")
 		}
 
-		public struct GetParameters {
+		public struct GetParameters: Sendable {
 			public var filterStartDate: [String]?
 			public var filterEndDate: [String]?
 			public var filterTerritory: [String]?
@@ -27,7 +27,7 @@ extension APIEndpoint.V1.AppPriceSchedules.WithID {
 			public var limit: Int?
 			public var include: [Include]?
 
-			public enum FieldsAppPrices: String, Codable, CaseIterable {
+			public enum FieldsAppPrices: String, Codable, CaseIterable, Sendable {
 				case manual
 				case startDate
 				case endDate
@@ -35,7 +35,7 @@ extension APIEndpoint.V1.AppPriceSchedules.WithID {
 				case territory
 			}
 
-			public enum FieldsAppPricePoints: String, Codable, CaseIterable {
+			public enum FieldsAppPricePoints: String, Codable, CaseIterable, Sendable {
 				case customerPrice
 				case proceeds
 				case app
@@ -43,11 +43,11 @@ extension APIEndpoint.V1.AppPriceSchedules.WithID {
 				case territory
 			}
 
-			public enum FieldsTerritories: String, Codable, CaseIterable {
+			public enum FieldsTerritories: String, Codable, CaseIterable, Sendable {
 				case currency
 			}
 
-			public enum Include: String, Codable, CaseIterable {
+			public enum Include: String, Codable, CaseIterable, Sendable {
 				case appPricePoint
 				case territory
 			}

@@ -9,7 +9,7 @@ extension APIEndpoint.V2.InAppPurchases.WithID {
 		OfferCodes(path: path + "/offerCodes")
 	}
 
-	public struct OfferCodes {
+	public struct OfferCodes: Sendable {
 		/// Path: `/v2/inAppPurchases/{id}/offerCodes`
 		public let path: String
 
@@ -17,7 +17,7 @@ extension APIEndpoint.V2.InAppPurchases.WithID {
 			Request(path: path, method: "GET", query: parameters?.asQuery, id: "inAppPurchasesV2_offerCodes_getToManyRelated")
 		}
 
-		public struct GetParameters {
+		public struct GetParameters: Sendable {
 			public var filterTerritory: [String]?
 			public var fieldsInAppPurchaseOfferCodes: [FieldsInAppPurchaseOfferCodes]?
 			public var fieldsInAppPurchaseOfferCodeOneTimeUseCodes: [FieldsInAppPurchaseOfferCodeOneTimeUseCodes]?
@@ -29,7 +29,7 @@ extension APIEndpoint.V2.InAppPurchases.WithID {
 			public var limitCustomCodes: Int?
 			public var limitPrices: Int?
 
-			public enum FieldsInAppPurchaseOfferCodes: String, Codable, CaseIterable {
+			public enum FieldsInAppPurchaseOfferCodes: String, Codable, CaseIterable, Sendable {
 				case name
 				case customerEligibilities
 				case productionCodeCount
@@ -40,7 +40,7 @@ extension APIEndpoint.V2.InAppPurchases.WithID {
 				case prices
 			}
 
-			public enum FieldsInAppPurchaseOfferCodeOneTimeUseCodes: String, Codable, CaseIterable {
+			public enum FieldsInAppPurchaseOfferCodeOneTimeUseCodes: String, Codable, CaseIterable, Sendable {
 				case numberOfCodes
 				case createdDate
 				case expirationDate
@@ -51,7 +51,7 @@ extension APIEndpoint.V2.InAppPurchases.WithID {
 				case deactivatedByActor
 			}
 
-			public enum FieldsInAppPurchaseOfferCodeCustomCodes: String, Codable, CaseIterable {
+			public enum FieldsInAppPurchaseOfferCodeCustomCodes: String, Codable, CaseIterable, Sendable {
 				case customCode
 				case numberOfCodes
 				case createdDate
@@ -61,12 +61,12 @@ extension APIEndpoint.V2.InAppPurchases.WithID {
 				case deactivatedByActor
 			}
 
-			public enum FieldsInAppPurchaseOfferPrices: String, Codable, CaseIterable {
+			public enum FieldsInAppPurchaseOfferPrices: String, Codable, CaseIterable, Sendable {
 				case territory
 				case pricePoint
 			}
 
-			public enum Include: String, Codable, CaseIterable {
+			public enum Include: String, Codable, CaseIterable, Sendable {
 				case oneTimeUseCodes
 				case customCodes
 				case prices

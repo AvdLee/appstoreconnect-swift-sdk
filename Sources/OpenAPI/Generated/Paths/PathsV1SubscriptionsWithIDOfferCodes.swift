@@ -9,7 +9,7 @@ extension APIEndpoint.V1.Subscriptions.WithID {
 		OfferCodes(path: path + "/offerCodes")
 	}
 
-	public struct OfferCodes {
+	public struct OfferCodes: Sendable {
 		/// Path: `/v1/subscriptions/{id}/offerCodes`
 		public let path: String
 
@@ -17,7 +17,7 @@ extension APIEndpoint.V1.Subscriptions.WithID {
 			Request(path: path, method: "GET", query: parameters?.asQuery, id: "subscriptions_offerCodes_getToManyRelated")
 		}
 
-		public struct GetParameters {
+		public struct GetParameters: Sendable {
 			public var filterTerritory: [String]?
 			public var fieldsSubscriptionOfferCodes: [FieldsSubscriptionOfferCodes]?
 			public var fieldsSubscriptions: [FieldsSubscriptions]?
@@ -30,7 +30,7 @@ extension APIEndpoint.V1.Subscriptions.WithID {
 			public var limitCustomCodes: Int?
 			public var limitPrices: Int?
 
-			public enum FieldsSubscriptionOfferCodes: String, Codable, CaseIterable {
+			public enum FieldsSubscriptionOfferCodes: String, Codable, CaseIterable, Sendable {
 				case name
 				case customerEligibilities
 				case offerEligibility
@@ -49,7 +49,7 @@ extension APIEndpoint.V1.Subscriptions.WithID {
 				case prices
 			}
 
-			public enum FieldsSubscriptions: String, Codable, CaseIterable {
+			public enum FieldsSubscriptions: String, Codable, CaseIterable, Sendable {
 				case name
 				case productID = "productId"
 				case familySharable
@@ -78,7 +78,7 @@ extension APIEndpoint.V1.Subscriptions.WithID {
 				case retentionMessageOffers
 			}
 
-			public enum FieldsSubscriptionOfferCodeOneTimeUseCodes: String, Codable, CaseIterable {
+			public enum FieldsSubscriptionOfferCodeOneTimeUseCodes: String, Codable, CaseIterable, Sendable {
 				case numberOfCodes
 				case createdDate
 				case expirationDate
@@ -88,7 +88,7 @@ extension APIEndpoint.V1.Subscriptions.WithID {
 				case values
 			}
 
-			public enum FieldsSubscriptionOfferCodeCustomCodes: String, Codable, CaseIterable {
+			public enum FieldsSubscriptionOfferCodeCustomCodes: String, Codable, CaseIterable, Sendable {
 				case customCode
 				case numberOfCodes
 				case createdDate
@@ -97,12 +97,12 @@ extension APIEndpoint.V1.Subscriptions.WithID {
 				case offerCode
 			}
 
-			public enum FieldsSubscriptionOfferCodePrices: String, Codable, CaseIterable {
+			public enum FieldsSubscriptionOfferCodePrices: String, Codable, CaseIterable, Sendable {
 				case territory
 				case subscriptionPricePoint
 			}
 
-			public enum Include: String, Codable, CaseIterable {
+			public enum Include: String, Codable, CaseIterable, Sendable {
 				case subscription
 				case oneTimeUseCodes
 				case customCodes

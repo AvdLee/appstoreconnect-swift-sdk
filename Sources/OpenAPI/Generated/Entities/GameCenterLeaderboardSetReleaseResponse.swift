@@ -4,7 +4,7 @@
 import Foundation
 
 @available(*, deprecated, message: "Deprecated")
-public struct GameCenterLeaderboardSetReleaseResponse: Codable {
+public struct GameCenterLeaderboardSetReleaseResponse: Codable, Sendable {
 	/// GameCenterLeaderboardSetRelease
 	///
 	/// - warning: Deprecated.
@@ -12,7 +12,7 @@ public struct GameCenterLeaderboardSetReleaseResponse: Codable {
 	public var included: [IncludedItem]?
 	public var links: DocumentLinks
 
-	public enum IncludedItem: Codable {
+	public enum IncludedItem: Codable, Sendable {
 		case gameCenterDetail(GameCenterDetail)
 		case gameCenterLeaderboardSet(GameCenterLeaderboardSet)
 

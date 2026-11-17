@@ -3,24 +3,24 @@
 
 import Foundation
 
-public struct SubscriptionGroupLocalization: Codable, Identifiable {
+public struct SubscriptionGroupLocalization: Codable, Identifiable, Sendable {
 	public var type: `Type`
 	public var id: String
 	public var attributes: Attributes?
 	public var relationships: Relationships?
 	public var links: ResourceLinks?
 
-	public enum `Type`: String, Codable, CaseIterable {
+	public enum `Type`: String, Codable, CaseIterable, Sendable {
 		case subscriptionGroupLocalizations
 	}
 
-	public struct Attributes: Codable {
+	public struct Attributes: Codable, Sendable {
 		public var name: String?
 		public var customAppName: String?
 		public var locale: String?
 		public var state: State?
 
-		public enum State: String, Codable, CaseIterable {
+		public enum State: String, Codable, CaseIterable, Sendable {
 			case prepareForSubmission = "PREPARE_FOR_SUBMISSION"
 			case waitingForReview = "WAITING_FOR_REVIEW"
 			case approved = "APPROVED"
@@ -51,17 +51,17 @@ public struct SubscriptionGroupLocalization: Codable, Identifiable {
 		}
 	}
 
-	public struct Relationships: Codable {
+	public struct Relationships: Codable, Sendable {
 		public var subscriptionGroup: SubscriptionGroup?
 
-		public struct SubscriptionGroup: Codable {
+		public struct SubscriptionGroup: Codable, Sendable {
 			public var data: Data?
 
-			public struct Data: Codable, Identifiable {
+			public struct Data: Codable, Identifiable, Sendable {
 				public var type: `Type`
 				public var id: String
 
-				public enum `Type`: String, Codable, CaseIterable {
+				public enum `Type`: String, Codable, CaseIterable, Sendable {
 					case subscriptionGroups
 				}
 

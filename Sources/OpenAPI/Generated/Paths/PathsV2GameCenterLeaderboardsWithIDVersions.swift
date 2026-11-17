@@ -9,7 +9,7 @@ extension APIEndpoint.V2.GameCenterLeaderboards.WithID {
 		Versions(path: path + "/versions")
 	}
 
-	public struct Versions {
+	public struct Versions: Sendable {
 		/// Path: `/v2/gameCenterLeaderboards/{id}/versions`
 		public let path: String
 
@@ -17,7 +17,7 @@ extension APIEndpoint.V2.GameCenterLeaderboards.WithID {
 			Request(path: path, method: "GET", query: parameters?.asQuery, id: "gameCenterLeaderboardsV2_versions_getToManyRelated")
 		}
 
-		public struct GetParameters {
+		public struct GetParameters: Sendable {
 			public var fieldsGameCenterLeaderboardVersions: [FieldsGameCenterLeaderboardVersions]?
 			public var fieldsGameCenterLeaderboards: [FieldsGameCenterLeaderboards]?
 			public var fieldsGameCenterLeaderboardLocalizations: [FieldsGameCenterLeaderboardLocalizations]?
@@ -25,14 +25,14 @@ extension APIEndpoint.V2.GameCenterLeaderboards.WithID {
 			public var include: [Include]?
 			public var limitLocalizations: Int?
 
-			public enum FieldsGameCenterLeaderboardVersions: String, Codable, CaseIterable {
+			public enum FieldsGameCenterLeaderboardVersions: String, Codable, CaseIterable, Sendable {
 				case version
 				case state
 				case leaderboard
 				case localizations
 			}
 
-			public enum FieldsGameCenterLeaderboards: String, Codable, CaseIterable {
+			public enum FieldsGameCenterLeaderboards: String, Codable, CaseIterable, Sendable {
 				case defaultFormatter
 				case referenceName
 				case vendorIdentifier
@@ -55,7 +55,7 @@ extension APIEndpoint.V2.GameCenterLeaderboards.WithID {
 				case versions
 			}
 
-			public enum FieldsGameCenterLeaderboardLocalizations: String, Codable, CaseIterable {
+			public enum FieldsGameCenterLeaderboardLocalizations: String, Codable, CaseIterable, Sendable {
 				case locale
 				case name
 				case formatterOverride
@@ -66,7 +66,7 @@ extension APIEndpoint.V2.GameCenterLeaderboards.WithID {
 				case image
 			}
 
-			public enum Include: String, Codable, CaseIterable {
+			public enum Include: String, Codable, CaseIterable, Sendable {
 				case leaderboard
 				case localizations
 			}

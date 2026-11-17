@@ -3,19 +3,19 @@
 
 import Foundation
 
-public struct CustomerReviewResponseV1CreateRequest: Codable {
+public struct CustomerReviewResponseV1CreateRequest: Codable, Sendable {
 	public var data: Data
 
-	public struct Data: Codable {
+	public struct Data: Codable, Sendable {
 		public var type: `Type`
 		public var attributes: Attributes
 		public var relationships: Relationships
 
-		public enum `Type`: String, Codable, CaseIterable {
+		public enum `Type`: String, Codable, CaseIterable, Sendable {
 			case customerReviewResponses
 		}
 
-		public struct Attributes: Codable {
+		public struct Attributes: Codable, Sendable {
 			public var responseBody: String
 
 			public init(responseBody: String) {
@@ -33,17 +33,17 @@ public struct CustomerReviewResponseV1CreateRequest: Codable {
 			}
 		}
 
-		public struct Relationships: Codable {
+		public struct Relationships: Codable, Sendable {
 			public var review: Review
 
-			public struct Review: Codable {
+			public struct Review: Codable, Sendable {
 				public var data: Data
 
-				public struct Data: Codable, Identifiable {
+				public struct Data: Codable, Identifiable, Sendable {
 					public var type: `Type`
 					public var id: String
 
-					public enum `Type`: String, Codable, CaseIterable {
+					public enum `Type`: String, Codable, CaseIterable, Sendable {
 						case customerReviews
 					}
 

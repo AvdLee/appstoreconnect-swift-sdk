@@ -9,7 +9,7 @@ extension APIEndpoint.V1 {
 		ScmGitReferences(path: path + "/scmGitReferences")
 	}
 
-	public struct ScmGitReferences {
+	public struct ScmGitReferences: Sendable {
 		/// Path: `/v1/scmGitReferences`
 		public let path: String
 	}

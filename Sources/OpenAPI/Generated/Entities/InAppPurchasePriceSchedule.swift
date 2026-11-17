@@ -3,30 +3,30 @@
 
 import Foundation
 
-public struct InAppPurchasePriceSchedule: Codable, Identifiable {
+public struct InAppPurchasePriceSchedule: Codable, Identifiable, Sendable {
 	public var type: `Type`
 	public var id: String
 	public var relationships: Relationships?
 	public var links: ResourceLinks?
 
-	public enum `Type`: String, Codable, CaseIterable {
+	public enum `Type`: String, Codable, CaseIterable, Sendable {
 		case inAppPurchasePriceSchedules
 	}
 
-	public struct Relationships: Codable {
+	public struct Relationships: Codable, Sendable {
 		public var baseTerritory: BaseTerritory?
 		public var manualPrices: ManualPrices?
 		public var automaticPrices: AutomaticPrices?
 
-		public struct BaseTerritory: Codable {
+		public struct BaseTerritory: Codable, Sendable {
 			public var links: RelationshipLinks?
 			public var data: Data?
 
-			public struct Data: Codable, Identifiable {
+			public struct Data: Codable, Identifiable, Sendable {
 				public var type: `Type`
 				public var id: String
 
-				public enum `Type`: String, Codable, CaseIterable {
+				public enum `Type`: String, Codable, CaseIterable, Sendable {
 					case territories
 				}
 
@@ -66,16 +66,16 @@ public struct InAppPurchasePriceSchedule: Codable, Identifiable {
 			}
 		}
 
-		public struct ManualPrices: Codable {
+		public struct ManualPrices: Codable, Sendable {
 			public var links: RelationshipLinks?
 			public var meta: PagingInformation?
 			public var data: [Datum]?
 
-			public struct Datum: Codable, Identifiable {
+			public struct Datum: Codable, Identifiable, Sendable {
 				public var type: `Type`
 				public var id: String
 
-				public enum `Type`: String, Codable, CaseIterable {
+				public enum `Type`: String, Codable, CaseIterable, Sendable {
 					case inAppPurchasePrices
 				}
 
@@ -118,16 +118,16 @@ public struct InAppPurchasePriceSchedule: Codable, Identifiable {
 			}
 		}
 
-		public struct AutomaticPrices: Codable {
+		public struct AutomaticPrices: Codable, Sendable {
 			public var links: RelationshipLinks?
 			public var meta: PagingInformation?
 			public var data: [Datum]?
 
-			public struct Datum: Codable, Identifiable {
+			public struct Datum: Codable, Identifiable, Sendable {
 				public var type: `Type`
 				public var id: String
 
-				public enum `Type`: String, Codable, CaseIterable {
+				public enum `Type`: String, Codable, CaseIterable, Sendable {
 					case inAppPurchasePrices
 				}
 

@@ -3,25 +3,25 @@
 
 import Foundation
 
-public struct TerritoryAvailability: Codable, Identifiable {
+public struct TerritoryAvailability: Codable, Identifiable, Sendable {
 	public var type: `Type`
 	public var id: String
 	public var attributes: Attributes?
 	public var relationships: Relationships?
 	public var links: ResourceLinks?
 
-	public enum `Type`: String, Codable, CaseIterable {
+	public enum `Type`: String, Codable, CaseIterable, Sendable {
 		case territoryAvailabilities
 	}
 
-	public struct Attributes: Codable {
+	public struct Attributes: Codable, Sendable {
 		public var isAvailable: Bool?
 		public var releaseDate: String?
 		public var isPreOrderEnabled: Bool?
 		public var preOrderPublishDate: String?
 		public var contentStatuses: [ContentStatus]?
 
-		public enum ContentStatus: String, Codable, CaseIterable {
+		public enum ContentStatus: String, Codable, CaseIterable, Sendable {
 			case available = "AVAILABLE"
 			case availableForPreorderOnDate = "AVAILABLE_FOR_PREORDER_ON_DATE"
 			case processingToNotAvailable = "PROCESSING_TO_NOT_AVAILABLE"
@@ -99,17 +99,17 @@ public struct TerritoryAvailability: Codable, Identifiable {
 		}
 	}
 
-	public struct Relationships: Codable {
+	public struct Relationships: Codable, Sendable {
 		public var territory: Territory?
 
-		public struct Territory: Codable {
+		public struct Territory: Codable, Sendable {
 			public var data: Data?
 
-			public struct Data: Codable, Identifiable {
+			public struct Data: Codable, Identifiable, Sendable {
 				public var type: `Type`
 				public var id: String
 
-				public enum `Type`: String, Codable, CaseIterable {
+				public enum `Type`: String, Codable, CaseIterable, Sendable {
 					case territories
 				}
 

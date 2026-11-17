@@ -9,7 +9,7 @@ extension APIEndpoint.V1.RetentionMessageVersions.WithID.Relationships {
 		Placement(path: path + "/placement")
 	}
 
-	public struct Placement {
+	public struct Placement: Sendable {
 		/// Path: `/v1/retentionMessageVersions/{id}/relationships/placement`
 		public let path: String
 

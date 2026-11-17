@@ -9,7 +9,7 @@ extension APIEndpoint.V1 {
 		CiWorkflows(path: path + "/ciWorkflows")
 	}
 
-	public struct CiWorkflows {
+	public struct CiWorkflows: Sendable {
 		/// Path: `/v1/ciWorkflows`
 		public let path: String
 

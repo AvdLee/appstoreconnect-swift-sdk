@@ -3,7 +3,7 @@
 
 import Foundation
 
-public enum DeviceConnectionType: String, Codable, CaseIterable {
+public enum DeviceConnectionType: String, Codable, CaseIterable, Sendable {
 	case wifi = "WIFI"
 	case mobileData = "MOBILE_DATA"
 	case wire = "WIRE"

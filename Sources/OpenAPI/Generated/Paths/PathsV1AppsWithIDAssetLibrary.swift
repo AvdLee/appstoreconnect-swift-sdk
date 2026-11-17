@@ -9,7 +9,7 @@ extension APIEndpoint.V1.Apps.WithID {
 		AssetLibrary(path: path + "/assetLibrary")
 	}
 
-	public struct AssetLibrary {
+	public struct AssetLibrary: Sendable {
 		/// Path: `/v1/apps/{id}/assetLibrary`
 		public let path: String
 
@@ -23,7 +23,7 @@ extension APIEndpoint.V1.Apps.WithID {
 			return encoder.items
 		}
 
-		public enum FieldsAppAssetLibraries: String, Codable, CaseIterable {
+		public enum FieldsAppAssetLibraries: String, Codable, CaseIterable, Sendable {
 			case images
 			case videos
 		}

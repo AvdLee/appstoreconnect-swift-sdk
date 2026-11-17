@@ -9,7 +9,7 @@ extension APIEndpoint.V1.BuildBundles.WithID.Relationships {
 		AppClipDomainDebugStatus(path: path + "/appClipDomainDebugStatus")
 	}
 
-	public struct AppClipDomainDebugStatus {
+	public struct AppClipDomainDebugStatus: Sendable {
 		/// Path: `/v1/buildBundles/{id}/relationships/appClipDomainDebugStatus`
 		public let path: String
 

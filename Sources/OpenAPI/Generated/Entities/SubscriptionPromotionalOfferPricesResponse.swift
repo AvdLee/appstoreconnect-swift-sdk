@@ -3,13 +3,13 @@
 
 import Foundation
 
-public struct SubscriptionPromotionalOfferPricesResponse: Codable {
+public struct SubscriptionPromotionalOfferPricesResponse: Codable, Sendable {
 	public var data: [SubscriptionPromotionalOfferPrice]
 	public var included: [IncludedItem]?
 	public var links: PagedDocumentLinks
 	public var meta: PagingInformation?
 
-	public enum IncludedItem: Codable {
+	public enum IncludedItem: Codable, Sendable {
 		case subscriptionPricePoint(SubscriptionPricePoint)
 		case territory(Territory)
 

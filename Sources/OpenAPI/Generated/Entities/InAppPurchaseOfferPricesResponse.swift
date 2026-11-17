@@ -3,13 +3,13 @@
 
 import Foundation
 
-public struct InAppPurchaseOfferPricesResponse: Codable {
+public struct InAppPurchaseOfferPricesResponse: Codable, Sendable {
 	public var data: [InAppPurchaseOfferPrice]
 	public var included: [IncludedItem]?
 	public var links: PagedDocumentLinks
 	public var meta: PagingInformation?
 
-	public enum IncludedItem: Codable {
+	public enum IncludedItem: Codable, Sendable {
 		case inAppPurchasePricePoint(InAppPurchasePricePoint)
 		case territory(Territory)
 

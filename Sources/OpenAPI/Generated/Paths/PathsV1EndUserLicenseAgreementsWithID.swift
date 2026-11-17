@@ -9,7 +9,7 @@ extension APIEndpoint.V1.EndUserLicenseAgreements {
 		WithID(path: "\(path)/\(id)")
 	}
 
-	public struct WithID {
+	public struct WithID: Sendable {
 		/// Path: `/v1/endUserLicenseAgreements/{id}`
 		public let path: String
 
@@ -17,20 +17,20 @@ extension APIEndpoint.V1.EndUserLicenseAgreements {
 			Request(path: path, method: "GET", query: parameters?.asQuery, id: "endUserLicenseAgreements_getInstance")
 		}
 
-		public struct GetParameters {
+		public struct GetParameters: Sendable {
 			public var fieldsEndUserLicenseAgreements: [FieldsEndUserLicenseAgreements]?
 			public var fieldsApps: [FieldsApps]?
 			public var fieldsTerritories: [FieldsTerritories]?
 			public var include: [Include]?
 			public var limitTerritories: Int?
 
-			public enum FieldsEndUserLicenseAgreements: String, Codable, CaseIterable {
+			public enum FieldsEndUserLicenseAgreements: String, Codable, CaseIterable, Sendable {
 				case agreementText
 				case app
 				case territories
 			}
 
-			public enum FieldsApps: String, Codable, CaseIterable {
+			public enum FieldsApps: String, Codable, CaseIterable, Sendable {
 				case accessibilityURL = "accessibilityUrl"
 				case name
 				case bundleID = "bundleId"
@@ -91,11 +91,11 @@ extension APIEndpoint.V1.EndUserLicenseAgreements {
 				case androidToIosAppMappingDetails
 			}
 
-			public enum FieldsTerritories: String, Codable, CaseIterable {
+			public enum FieldsTerritories: String, Codable, CaseIterable, Sendable {
 				case currency
 			}
 
-			public enum Include: String, Codable, CaseIterable {
+			public enum Include: String, Codable, CaseIterable, Sendable {
 				case app
 				case territories
 			}

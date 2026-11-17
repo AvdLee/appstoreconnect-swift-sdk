@@ -3,7 +3,7 @@
 
 import Foundation
 
-public struct DeviceResponse: Codable {
+public struct DeviceResponse: Codable, Sendable {
 	/// Device
 	public var data: Device
 	public var links: DocumentLinks

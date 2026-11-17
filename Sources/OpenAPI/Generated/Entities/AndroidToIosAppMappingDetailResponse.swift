@@ -3,7 +3,7 @@
 
 import Foundation
 
-public struct AndroidToIosAppMappingDetailResponse: Codable {
+public struct AndroidToIosAppMappingDetailResponse: Codable, Sendable {
 	/// AndroidToIosAppMappingDetail
 	public var data: AndroidToIosAppMappingDetail
 	public var links: DocumentLinks

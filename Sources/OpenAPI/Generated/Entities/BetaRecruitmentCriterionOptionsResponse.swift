@@ -3,7 +3,7 @@
 
 import Foundation
 
-public struct BetaRecruitmentCriterionOptionsResponse: Codable {
+public struct BetaRecruitmentCriterionOptionsResponse: Codable, Sendable {
 	public var data: [BetaRecruitmentCriterionOption]
 	public var links: PagedDocumentLinks
 	public var meta: PagingInformation?

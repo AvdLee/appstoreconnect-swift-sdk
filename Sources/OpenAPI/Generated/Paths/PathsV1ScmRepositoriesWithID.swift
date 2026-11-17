@@ -9,7 +9,7 @@ extension APIEndpoint.V1.ScmRepositories {
 		WithID(path: "\(path)/\(id)")
 	}
 
-	public struct WithID {
+	public struct WithID: Sendable {
 		/// Path: `/v1/scmRepositories/{id}`
 		public let path: String
 
@@ -17,13 +17,13 @@ extension APIEndpoint.V1.ScmRepositories {
 			Request(path: path, method: "GET", query: parameters?.asQuery, id: "scmRepositories_getInstance")
 		}
 
-		public struct GetParameters {
+		public struct GetParameters: Sendable {
 			public var fieldsScmRepositories: [FieldsScmRepositories]?
 			public var fieldsScmProviders: [FieldsScmProviders]?
 			public var fieldsScmGitReferences: [FieldsScmGitReferences]?
 			public var include: [Include]?
 
-			public enum FieldsScmRepositories: String, Codable, CaseIterable {
+			public enum FieldsScmRepositories: String, Codable, CaseIterable, Sendable {
 				case lastAccessedDate
 				case httpCloneURL = "httpCloneUrl"
 				case sshCloneURL = "sshCloneUrl"
@@ -35,13 +35,13 @@ extension APIEndpoint.V1.ScmRepositories {
 				case pullRequests
 			}
 
-			public enum FieldsScmProviders: String, Codable, CaseIterable {
+			public enum FieldsScmProviders: String, Codable, CaseIterable, Sendable {
 				case scmProviderType
 				case url
 				case repositories
 			}
 
-			public enum FieldsScmGitReferences: String, Codable, CaseIterable {
+			public enum FieldsScmGitReferences: String, Codable, CaseIterable, Sendable {
 				case name
 				case canonicalName
 				case isDeleted
@@ -49,7 +49,7 @@ extension APIEndpoint.V1.ScmRepositories {
 				case repository
 			}
 
-			public enum Include: String, Codable, CaseIterable {
+			public enum Include: String, Codable, CaseIterable, Sendable {
 				case scmProvider
 				case defaultBranch
 			}

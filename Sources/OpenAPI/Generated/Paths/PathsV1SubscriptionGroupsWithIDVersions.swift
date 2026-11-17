@@ -9,7 +9,7 @@ extension APIEndpoint.V1.SubscriptionGroups.WithID {
 		Versions(path: path + "/versions")
 	}
 
-	public struct Versions {
+	public struct Versions: Sendable {
 		/// Path: `/v1/subscriptionGroups/{id}/versions`
 		public let path: String
 
@@ -17,7 +17,7 @@ extension APIEndpoint.V1.SubscriptionGroups.WithID {
 			Request(path: path, method: "GET", query: parameters?.asQuery, id: "subscriptionGroups_versions_getToManyRelated")
 		}
 
-		public struct GetParameters {
+		public struct GetParameters: Sendable {
 			public var filterState: [FilterState]?
 			public var fieldsSubscriptionGroupVersions: [FieldsSubscriptionGroupVersions]?
 			public var fieldsSubscriptionGroups: [FieldsSubscriptionGroups]?
@@ -26,7 +26,7 @@ extension APIEndpoint.V1.SubscriptionGroups.WithID {
 			public var include: [Include]?
 			public var limitLocalizations: Int?
 
-			public enum FilterState: String, Codable, CaseIterable {
+			public enum FilterState: String, Codable, CaseIterable, Sendable {
 				case prepareForSubmission = "PREPARE_FOR_SUBMISSION"
 				case readyForReview = "READY_FOR_REVIEW"
 				case waitingForReview = "WAITING_FOR_REVIEW"
@@ -38,28 +38,28 @@ extension APIEndpoint.V1.SubscriptionGroups.WithID {
 				case developerRejected = "DEVELOPER_REJECTED"
 			}
 
-			public enum FieldsSubscriptionGroupVersions: String, Codable, CaseIterable {
+			public enum FieldsSubscriptionGroupVersions: String, Codable, CaseIterable, Sendable {
 				case version
 				case state
 				case subscriptionGroup
 				case localizations
 			}
 
-			public enum FieldsSubscriptionGroups: String, Codable, CaseIterable {
+			public enum FieldsSubscriptionGroups: String, Codable, CaseIterable, Sendable {
 				case referenceName
 				case subscriptions
 				case subscriptionGroupLocalizations
 				case versions
 			}
 
-			public enum FieldsSubscriptionGroupLocalizations: String, Codable, CaseIterable {
+			public enum FieldsSubscriptionGroupLocalizations: String, Codable, CaseIterable, Sendable {
 				case name
 				case customAppName
 				case locale
 				case version
 			}
 
-			public enum Include: String, Codable, CaseIterable {
+			public enum Include: String, Codable, CaseIterable, Sendable {
 				case subscriptionGroup
 				case localizations
 			}

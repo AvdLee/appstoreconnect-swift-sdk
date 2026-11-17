@@ -3,19 +3,19 @@
 
 import Foundation
 
-public struct AppEventScreenshotUpdateRequest: Codable {
+public struct AppEventScreenshotUpdateRequest: Codable, Sendable {
 	public var data: Data
 
-	public struct Data: Codable, Identifiable {
+	public struct Data: Codable, Identifiable, Sendable {
 		public var type: `Type`
 		public var id: String
 		public var attributes: Attributes?
 
-		public enum `Type`: String, Codable, CaseIterable {
+		public enum `Type`: String, Codable, CaseIterable, Sendable {
 			case appEventScreenshots
 		}
 
-		public struct Attributes: Codable {
+		public struct Attributes: Codable, Sendable {
 			public var isUploaded: Bool?
 
 			public init(isUploaded: Bool? = nil) {

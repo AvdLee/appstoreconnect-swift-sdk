@@ -4,7 +4,7 @@
 import Foundation
 
 @available(*, deprecated, message: "Deprecated")
-public struct InAppPurchaseResponse: Codable {
+public struct InAppPurchaseResponse: Codable, Sendable {
 	/// InAppPurchase
 	///
 	/// - warning: Deprecated.

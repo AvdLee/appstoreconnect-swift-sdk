@@ -9,7 +9,7 @@ extension APIEndpoint.V1 {
 		BetaBuildLocalizations(path: path + "/betaBuildLocalizations")
 	}
 
-	public struct BetaBuildLocalizations {
+	public struct BetaBuildLocalizations: Sendable {
 		/// Path: `/v1/betaBuildLocalizations`
 		public let path: String
 
@@ -17,7 +17,7 @@ extension APIEndpoint.V1 {
 			Request(path: path, method: "GET", query: parameters?.asQuery, id: "betaBuildLocalizations_getCollection")
 		}
 
-		public struct GetParameters {
+		public struct GetParameters: Sendable {
 			public var filterLocale: [String]?
 			public var filterBuild: [String]?
 			public var fieldsBetaBuildLocalizations: [FieldsBetaBuildLocalizations]?
@@ -25,13 +25,13 @@ extension APIEndpoint.V1 {
 			public var limit: Int?
 			public var include: [Include]?
 
-			public enum FieldsBetaBuildLocalizations: String, Codable, CaseIterable {
+			public enum FieldsBetaBuildLocalizations: String, Codable, CaseIterable, Sendable {
 				case whatsNew
 				case locale
 				case build
 			}
 
-			public enum FieldsBuilds: String, Codable, CaseIterable {
+			public enum FieldsBuilds: String, Codable, CaseIterable, Sendable {
 				case version
 				case uploadedDate
 				case expirationDate
@@ -60,7 +60,7 @@ extension APIEndpoint.V1 {
 				case diagnosticSignatures
 			}
 
-			public enum Include: String, Codable, CaseIterable {
+			public enum Include: String, Codable, CaseIterable, Sendable {
 				case build
 			}
 

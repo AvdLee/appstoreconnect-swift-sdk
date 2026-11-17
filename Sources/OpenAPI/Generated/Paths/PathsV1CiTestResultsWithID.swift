@@ -9,7 +9,7 @@ extension APIEndpoint.V1.CiTestResults {
 		WithID(path: "\(path)/\(id)")
 	}
 
-	public struct WithID {
+	public struct WithID: Sendable {
 		/// Path: `/v1/ciTestResults/{id}`
 		public let path: String
 
@@ -23,7 +23,7 @@ extension APIEndpoint.V1.CiTestResults {
 			return encoder.items
 		}
 
-		public enum FieldsCiTestResults: String, Codable, CaseIterable {
+		public enum FieldsCiTestResults: String, Codable, CaseIterable, Sendable {
 			case className
 			case name
 			case status

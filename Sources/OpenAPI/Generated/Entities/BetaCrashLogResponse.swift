@@ -3,7 +3,7 @@
 
 import Foundation
 
-public struct BetaCrashLogResponse: Codable {
+public struct BetaCrashLogResponse: Codable, Sendable {
 	/// BetaCrashLog
 	public var data: BetaCrashLog
 	public var links: DocumentLinks

@@ -3,18 +3,18 @@
 
 import Foundation
 
-public struct InAppPurchaseOfferCodeOneTimeUseCode: Codable, Identifiable {
+public struct InAppPurchaseOfferCodeOneTimeUseCode: Codable, Identifiable, Sendable {
 	public var type: `Type`
 	public var id: String
 	public var attributes: Attributes?
 	public var relationships: Relationships?
 	public var links: ResourceLinks?
 
-	public enum `Type`: String, Codable, CaseIterable {
+	public enum `Type`: String, Codable, CaseIterable, Sendable {
 		case inAppPurchaseOfferCodeOneTimeUseCodes
 	}
 
-	public struct Attributes: Codable {
+	public struct Attributes: Codable, Sendable {
 		public var numberOfCodes: Int?
 		public var createdDate: Date?
 		public var expirationDate: String?
@@ -48,12 +48,12 @@ public struct InAppPurchaseOfferCodeOneTimeUseCode: Codable, Identifiable {
 		}
 	}
 
-	public struct Relationships: Codable {
+	public struct Relationships: Codable, Sendable {
 		public var values: Values?
 		public var createdByActor: CreatedByActor?
 		public var deactivatedByActor: DeactivatedByActor?
 
-		public struct Values: Codable {
+		public struct Values: Codable, Sendable {
 			public var links: RelationshipLinks?
 
 			public init(links: RelationshipLinks? = nil) {
@@ -71,14 +71,14 @@ public struct InAppPurchaseOfferCodeOneTimeUseCode: Codable, Identifiable {
 			}
 		}
 
-		public struct CreatedByActor: Codable {
+		public struct CreatedByActor: Codable, Sendable {
 			public var data: Data?
 
-			public struct Data: Codable, Identifiable {
+			public struct Data: Codable, Identifiable, Sendable {
 				public var type: `Type`
 				public var id: String
 
-				public enum `Type`: String, Codable, CaseIterable {
+				public enum `Type`: String, Codable, CaseIterable, Sendable {
 					case actors
 				}
 
@@ -115,14 +115,14 @@ public struct InAppPurchaseOfferCodeOneTimeUseCode: Codable, Identifiable {
 			}
 		}
 
-		public struct DeactivatedByActor: Codable {
+		public struct DeactivatedByActor: Codable, Sendable {
 			public var data: Data?
 
-			public struct Data: Codable, Identifiable {
+			public struct Data: Codable, Identifiable, Sendable {
 				public var type: `Type`
 				public var id: String
 
-				public enum `Type`: String, Codable, CaseIterable {
+				public enum `Type`: String, Codable, CaseIterable, Sendable {
 					case actors
 				}
 

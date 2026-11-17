@@ -3,14 +3,14 @@
 
 import Foundation
 
-public struct BetaTesterBuildsLinkagesRequest: Codable {
+public struct BetaTesterBuildsLinkagesRequest: Codable, Sendable {
 	public var data: [Datum]
 
-	public struct Datum: Codable, Identifiable {
+	public struct Datum: Codable, Identifiable, Sendable {
 		public var type: `Type`
 		public var id: String
 
-		public enum `Type`: String, Codable, CaseIterable {
+		public enum `Type`: String, Codable, CaseIterable, Sendable {
 			case builds
 		}
 

@@ -9,7 +9,7 @@ extension APIEndpoint.V1.PreReleaseVersions {
 		WithID(path: "\(path)/\(id)")
 	}
 
-	public struct WithID {
+	public struct WithID: Sendable {
 		/// Path: `/v1/preReleaseVersions/{id}`
 		public let path: String
 
@@ -17,21 +17,21 @@ extension APIEndpoint.V1.PreReleaseVersions {
 			Request(path: path, method: "GET", query: parameters?.asQuery, id: "preReleaseVersions_getInstance")
 		}
 
-		public struct GetParameters {
+		public struct GetParameters: Sendable {
 			public var fieldsPreReleaseVersions: [FieldsPreReleaseVersions]?
 			public var fieldsBuilds: [FieldsBuilds]?
 			public var fieldsApps: [FieldsApps]?
 			public var include: [Include]?
 			public var limitBuilds: Int?
 
-			public enum FieldsPreReleaseVersions: String, Codable, CaseIterable {
+			public enum FieldsPreReleaseVersions: String, Codable, CaseIterable, Sendable {
 				case version
 				case platform
 				case builds
 				case app
 			}
 
-			public enum FieldsBuilds: String, Codable, CaseIterable {
+			public enum FieldsBuilds: String, Codable, CaseIterable, Sendable {
 				case version
 				case uploadedDate
 				case expirationDate
@@ -60,7 +60,7 @@ extension APIEndpoint.V1.PreReleaseVersions {
 				case diagnosticSignatures
 			}
 
-			public enum FieldsApps: String, Codable, CaseIterable {
+			public enum FieldsApps: String, Codable, CaseIterable, Sendable {
 				case accessibilityURL = "accessibilityUrl"
 				case name
 				case bundleID = "bundleId"
@@ -121,7 +121,7 @@ extension APIEndpoint.V1.PreReleaseVersions {
 				case androidToIosAppMappingDetails
 			}
 
-			public enum Include: String, Codable, CaseIterable {
+			public enum Include: String, Codable, CaseIterable, Sendable {
 				case builds
 				case app
 			}

@@ -4,7 +4,7 @@
 import Foundation
 
 @available(*, deprecated, message: "Deprecated")
-public struct MarketplaceWebhooksResponse: Codable {
+public struct MarketplaceWebhooksResponse: Codable, Sendable {
 	public var data: [MarketplaceWebhook]
 	public var links: PagedDocumentLinks
 	public var meta: PagingInformation?

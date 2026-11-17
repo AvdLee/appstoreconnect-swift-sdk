@@ -9,7 +9,7 @@ extension APIEndpoint.V1.BuildBundles.WithID.Relationships {
 		BuildBundleFileSizes(path: path + "/buildBundleFileSizes")
 	}
 
-	public struct BuildBundleFileSizes {
+	public struct BuildBundleFileSizes: Sendable {
 		/// Path: `/v1/buildBundles/{id}/relationships/buildBundleFileSizes`
 		public let path: String
 

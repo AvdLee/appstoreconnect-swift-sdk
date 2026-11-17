@@ -3,18 +3,18 @@
 
 import Foundation
 
-public struct BuildUpload: Codable, Identifiable {
+public struct BuildUpload: Codable, Identifiable, Sendable {
 	public var type: `Type`
 	public var id: String
 	public var attributes: Attributes?
 	public var relationships: Relationships?
 	public var links: ResourceLinks?
 
-	public enum `Type`: String, Codable, CaseIterable {
+	public enum `Type`: String, Codable, CaseIterable, Sendable {
 		case buildUploads
 	}
 
-	public struct Attributes: Codable {
+	public struct Attributes: Codable, Sendable {
 		public var cfBundleShortVersionString: String?
 		public var cfBundleVersion: String?
 		public var createdDate: Date?
@@ -22,7 +22,7 @@ public struct BuildUpload: Codable, Identifiable {
 		public var platform: Platform?
 		public var uploadedDate: Date?
 
-		public struct State: Codable {
+		public struct State: Codable, Sendable {
 			public var errors: [StateDetail]?
 			public var warnings: [StateDetail]?
 			public var infos: [StateDetail]?
@@ -82,21 +82,21 @@ public struct BuildUpload: Codable, Identifiable {
 		}
 	}
 
-	public struct Relationships: Codable {
+	public struct Relationships: Codable, Sendable {
 		public var build: Build?
 		public var assetFile: AssetFile?
 		public var assetDescriptionFile: AssetDescriptionFile?
 		public var assetSpiFile: AssetSpiFile?
 		public var buildUploadFiles: BuildUploadFiles?
 
-		public struct Build: Codable {
+		public struct Build: Codable, Sendable {
 			public var data: Data?
 
-			public struct Data: Codable, Identifiable {
+			public struct Data: Codable, Identifiable, Sendable {
 				public var type: `Type`
 				public var id: String
 
-				public enum `Type`: String, Codable, CaseIterable {
+				public enum `Type`: String, Codable, CaseIterable, Sendable {
 					case builds
 				}
 
@@ -133,14 +133,14 @@ public struct BuildUpload: Codable, Identifiable {
 			}
 		}
 
-		public struct AssetFile: Codable {
+		public struct AssetFile: Codable, Sendable {
 			public var data: Data?
 
-			public struct Data: Codable, Identifiable {
+			public struct Data: Codable, Identifiable, Sendable {
 				public var type: `Type`
 				public var id: String
 
-				public enum `Type`: String, Codable, CaseIterable {
+				public enum `Type`: String, Codable, CaseIterable, Sendable {
 					case buildUploadFiles
 				}
 
@@ -177,14 +177,14 @@ public struct BuildUpload: Codable, Identifiable {
 			}
 		}
 
-		public struct AssetDescriptionFile: Codable {
+		public struct AssetDescriptionFile: Codable, Sendable {
 			public var data: Data?
 
-			public struct Data: Codable, Identifiable {
+			public struct Data: Codable, Identifiable, Sendable {
 				public var type: `Type`
 				public var id: String
 
-				public enum `Type`: String, Codable, CaseIterable {
+				public enum `Type`: String, Codable, CaseIterable, Sendable {
 					case buildUploadFiles
 				}
 
@@ -221,14 +221,14 @@ public struct BuildUpload: Codable, Identifiable {
 			}
 		}
 
-		public struct AssetSpiFile: Codable {
+		public struct AssetSpiFile: Codable, Sendable {
 			public var data: Data?
 
-			public struct Data: Codable, Identifiable {
+			public struct Data: Codable, Identifiable, Sendable {
 				public var type: `Type`
 				public var id: String
 
-				public enum `Type`: String, Codable, CaseIterable {
+				public enum `Type`: String, Codable, CaseIterable, Sendable {
 					case buildUploadFiles
 				}
 
@@ -265,7 +265,7 @@ public struct BuildUpload: Codable, Identifiable {
 			}
 		}
 
-		public struct BuildUploadFiles: Codable {
+		public struct BuildUploadFiles: Codable, Sendable {
 			public var links: RelationshipLinks?
 
 			public init(links: RelationshipLinks? = nil) {

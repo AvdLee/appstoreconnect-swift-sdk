@@ -3,7 +3,7 @@
 
 import Foundation
 
-public struct CiBuildActionResponse: Codable {
+public struct CiBuildActionResponse: Codable, Sendable {
 	/// CiBuildAction
 	public var data: CiBuildAction
 	public var included: [CiBuildRun]?

@@ -9,7 +9,7 @@ extension APIEndpoint.V1.GameCenterLeaderboardSets.WithID {
 		Releases(path: path + "/releases")
 	}
 
-	public struct Releases {
+	public struct Releases: Sendable {
 		/// Path: `/v1/gameCenterLeaderboardSets/{id}/releases`
 		public let path: String
 
@@ -18,7 +18,7 @@ extension APIEndpoint.V1.GameCenterLeaderboardSets.WithID {
 			Request(path: path, method: "GET", query: parameters?.asQuery, id: "gameCenterLeaderboardSets_releases_getToManyRelated")
 		}
 
-		public struct GetParameters {
+		public struct GetParameters: Sendable {
 			public var filterLive: [String]?
 			public var filterGameCenterDetail: [String]?
 			public var fieldsGameCenterLeaderboardSetReleases: [FieldsGameCenterLeaderboardSetReleases]?
@@ -27,13 +27,13 @@ extension APIEndpoint.V1.GameCenterLeaderboardSets.WithID {
 			public var limit: Int?
 			public var include: [Include]?
 
-			public enum FieldsGameCenterLeaderboardSetReleases: String, Codable, CaseIterable {
+			public enum FieldsGameCenterLeaderboardSetReleases: String, Codable, CaseIterable, Sendable {
 				case live
 				case gameCenterDetail
 				case gameCenterLeaderboardSet
 			}
 
-			public enum FieldsGameCenterDetails: String, Codable, CaseIterable {
+			public enum FieldsGameCenterDetails: String, Codable, CaseIterable, Sendable {
 				case arcadeEnabled
 				case challengeEnabled
 				case app
@@ -60,7 +60,7 @@ extension APIEndpoint.V1.GameCenterLeaderboardSets.WithID {
 				case challengesMinimumPlatformVersions
 			}
 
-			public enum FieldsGameCenterLeaderboardSets: String, Codable, CaseIterable {
+			public enum FieldsGameCenterLeaderboardSets: String, Codable, CaseIterable, Sendable {
 				case referenceName
 				case vendorIdentifier
 				case gameCenterDetail
@@ -71,7 +71,7 @@ extension APIEndpoint.V1.GameCenterLeaderboardSets.WithID {
 				case releases
 			}
 
-			public enum Include: String, Codable, CaseIterable {
+			public enum Include: String, Codable, CaseIterable, Sendable {
 				case gameCenterDetail
 				case gameCenterLeaderboardSet
 			}

@@ -9,7 +9,7 @@ extension APIEndpoint.V1.GameCenterActivities.WithID.Relationships {
 		AchievementsV2(path: path + "/achievementsV2")
 	}
 
-	public struct AchievementsV2 {
+	public struct AchievementsV2: Sendable {
 		/// Path: `/v1/gameCenterActivities/{id}/relationships/achievementsV2`
 		public let path: String
 

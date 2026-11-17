@@ -9,7 +9,7 @@ extension APIEndpoint.V1.InAppPurchasePriceSchedules.WithID.Relationships {
 		BaseTerritory(path: path + "/baseTerritory")
 	}
 
-	public struct BaseTerritory {
+	public struct BaseTerritory: Sendable {
 		/// Path: `/v1/inAppPurchasePriceSchedules/{id}/relationships/baseTerritory`
 		public let path: String
 

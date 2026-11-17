@@ -3,19 +3,19 @@
 
 import Foundation
 
-public struct PromotedPurchaseUpdateRequest: Codable {
+public struct PromotedPurchaseUpdateRequest: Codable, Sendable {
 	public var data: Data
 
-	public struct Data: Codable, Identifiable {
+	public struct Data: Codable, Identifiable, Sendable {
 		public var type: `Type`
 		public var id: String
 		public var attributes: Attributes?
 
-		public enum `Type`: String, Codable, CaseIterable {
+		public enum `Type`: String, Codable, CaseIterable, Sendable {
 			case promotedPurchases
 		}
 
-		public struct Attributes: Codable {
+		public struct Attributes: Codable, Sendable {
 			public var isVisibleForAllUsers: Bool?
 			public var isEnabled: Bool?
 

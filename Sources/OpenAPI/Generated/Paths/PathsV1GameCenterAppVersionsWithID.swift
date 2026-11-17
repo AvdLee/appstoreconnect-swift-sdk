@@ -9,7 +9,7 @@ extension APIEndpoint.V1.GameCenterAppVersions {
 		WithID(path: "\(path)/\(id)")
 	}
 
-	public struct WithID {
+	public struct WithID: Sendable {
 		/// Path: `/v1/gameCenterAppVersions/{id}`
 		public let path: String
 
@@ -17,19 +17,19 @@ extension APIEndpoint.V1.GameCenterAppVersions {
 			Request(path: path, method: "GET", query: parameters?.asQuery, id: "gameCenterAppVersions_getInstance")
 		}
 
-		public struct GetParameters {
+		public struct GetParameters: Sendable {
 			public var fieldsGameCenterAppVersions: [FieldsGameCenterAppVersions]?
 			public var fieldsAppStoreVersions: [FieldsAppStoreVersions]?
 			public var include: [Include]?
 			public var limitCompatibilityVersions: Int?
 
-			public enum FieldsGameCenterAppVersions: String, Codable, CaseIterable {
+			public enum FieldsGameCenterAppVersions: String, Codable, CaseIterable, Sendable {
 				case enabled
 				case compatibilityVersions
 				case appStoreVersion
 			}
 
-			public enum FieldsAppStoreVersions: String, Codable, CaseIterable {
+			public enum FieldsAppStoreVersions: String, Codable, CaseIterable, Sendable {
 				case platform
 				case versionString
 				case appStoreState
@@ -56,7 +56,7 @@ extension APIEndpoint.V1.GameCenterAppVersions {
 				case alternativeDistributionPackage
 			}
 
-			public enum Include: String, Codable, CaseIterable {
+			public enum Include: String, Codable, CaseIterable, Sendable {
 				case compatibilityVersions
 				case appStoreVersion
 			}

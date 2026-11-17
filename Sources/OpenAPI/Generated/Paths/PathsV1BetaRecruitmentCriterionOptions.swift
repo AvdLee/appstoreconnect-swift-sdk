@@ -9,7 +9,7 @@ extension APIEndpoint.V1 {
 		BetaRecruitmentCriterionOptions(path: path + "/betaRecruitmentCriterionOptions")
 	}
 
-	public struct BetaRecruitmentCriterionOptions {
+	public struct BetaRecruitmentCriterionOptions: Sendable {
 		/// Path: `/v1/betaRecruitmentCriterionOptions`
 		public let path: String
 
@@ -24,7 +24,7 @@ extension APIEndpoint.V1 {
 			return encoder.items
 		}
 
-		public enum FieldsBetaRecruitmentCriterionOptions: String, Codable, CaseIterable {
+		public enum FieldsBetaRecruitmentCriterionOptions: String, Codable, CaseIterable, Sendable {
 			case deviceFamilyOsVersions
 		}
 	}

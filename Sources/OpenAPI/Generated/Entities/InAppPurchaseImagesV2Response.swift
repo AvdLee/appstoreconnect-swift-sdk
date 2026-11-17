@@ -3,7 +3,7 @@
 
 import Foundation
 
-public struct InAppPurchaseImagesV2Response: Codable {
+public struct InAppPurchaseImagesV2Response: Codable, Sendable {
 	public var data: [InAppPurchaseImageV2]
 	public var links: PagedDocumentLinks
 	public var meta: PagingInformation?

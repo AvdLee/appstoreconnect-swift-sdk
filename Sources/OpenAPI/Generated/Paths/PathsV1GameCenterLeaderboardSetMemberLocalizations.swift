@@ -9,7 +9,7 @@ extension APIEndpoint.V1 {
 		GameCenterLeaderboardSetMemberLocalizations(path: path + "/gameCenterLeaderboardSetMemberLocalizations")
 	}
 
-	public struct GameCenterLeaderboardSetMemberLocalizations {
+	public struct GameCenterLeaderboardSetMemberLocalizations: Sendable {
 		/// Path: `/v1/gameCenterLeaderboardSetMemberLocalizations`
 		public let path: String
 
@@ -17,7 +17,7 @@ extension APIEndpoint.V1 {
 			Request(path: path, method: "GET", query: parameters.asQuery, id: "gameCenterLeaderboardSetMemberLocalizations_getCollection")
 		}
 
-		public struct GetParameters {
+		public struct GetParameters: Sendable {
 			public var filterGameCenterLeaderboardSet: [String]
 			public var filterGameCenterLeaderboard: [String]
 			public var fieldsGameCenterLeaderboardSetMemberLocalizations: [FieldsGameCenterLeaderboardSetMemberLocalizations]?
@@ -26,14 +26,14 @@ extension APIEndpoint.V1 {
 			public var limit: Int?
 			public var include: [Include]?
 
-			public enum FieldsGameCenterLeaderboardSetMemberLocalizations: String, Codable, CaseIterable {
+			public enum FieldsGameCenterLeaderboardSetMemberLocalizations: String, Codable, CaseIterable, Sendable {
 				case name
 				case locale
 				case gameCenterLeaderboardSet
 				case gameCenterLeaderboard
 			}
 
-			public enum FieldsGameCenterLeaderboardSets: String, Codable, CaseIterable {
+			public enum FieldsGameCenterLeaderboardSets: String, Codable, CaseIterable, Sendable {
 				case referenceName
 				case vendorIdentifier
 				case gameCenterDetail
@@ -44,7 +44,7 @@ extension APIEndpoint.V1 {
 				case releases
 			}
 
-			public enum FieldsGameCenterLeaderboards: String, Codable, CaseIterable {
+			public enum FieldsGameCenterLeaderboards: String, Codable, CaseIterable, Sendable {
 				case defaultFormatter
 				case referenceName
 				case vendorIdentifier
@@ -68,7 +68,7 @@ extension APIEndpoint.V1 {
 				case challenge
 			}
 
-			public enum Include: String, Codable, CaseIterable {
+			public enum Include: String, Codable, CaseIterable, Sendable {
 				case gameCenterLeaderboardSet
 				case gameCenterLeaderboard
 			}

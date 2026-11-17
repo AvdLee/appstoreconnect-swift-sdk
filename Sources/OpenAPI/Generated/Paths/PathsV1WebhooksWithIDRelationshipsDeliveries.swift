@@ -9,7 +9,7 @@ extension APIEndpoint.V1.Webhooks.WithID.Relationships {
 		Deliveries(path: path + "/deliveries")
 	}
 
-	public struct Deliveries {
+	public struct Deliveries: Sendable {
 		/// Path: `/v1/webhooks/{id}/relationships/deliveries`
 		public let path: String
 

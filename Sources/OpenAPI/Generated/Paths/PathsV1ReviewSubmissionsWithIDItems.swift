@@ -9,7 +9,7 @@ extension APIEndpoint.V1.ReviewSubmissions.WithID {
 		Items(path: path + "/items")
 	}
 
-	public struct Items {
+	public struct Items: Sendable {
 		/// Path: `/v1/reviewSubmissions/{id}/items`
 		public let path: String
 
@@ -17,7 +17,7 @@ extension APIEndpoint.V1.ReviewSubmissions.WithID {
 			Request(path: path, method: "GET", query: parameters?.asQuery, id: "reviewSubmissions_items_getToManyRelated")
 		}
 
-		public struct GetParameters {
+		public struct GetParameters: Sendable {
 			public var fieldsReviewSubmissionItems: [FieldsReviewSubmissionItems]?
 			public var fieldsAppStoreVersions: [FieldsAppStoreVersions]?
 			public var fieldsAppCustomProductPageVersions: [FieldsAppCustomProductPageVersions]?
@@ -38,7 +38,7 @@ extension APIEndpoint.V1.ReviewSubmissions.WithID {
 			public var limit: Int?
 			public var include: [Include]?
 
-			public enum FieldsReviewSubmissionItems: String, Codable, CaseIterable {
+			public enum FieldsReviewSubmissionItems: String, Codable, CaseIterable, Sendable {
 				case state
 				case appStoreVersion
 				case appCustomProductPageVersion
@@ -59,7 +59,7 @@ extension APIEndpoint.V1.ReviewSubmissions.WithID {
 				case retentionMessageVersion
 			}
 
-			public enum FieldsAppStoreVersions: String, Codable, CaseIterable {
+			public enum FieldsAppStoreVersions: String, Codable, CaseIterable, Sendable {
 				case platform
 				case versionString
 				case appStoreState
@@ -86,7 +86,7 @@ extension APIEndpoint.V1.ReviewSubmissions.WithID {
 				case alternativeDistributionPackage
 			}
 
-			public enum FieldsAppCustomProductPageVersions: String, Codable, CaseIterable {
+			public enum FieldsAppCustomProductPageVersions: String, Codable, CaseIterable, Sendable {
 				case version
 				case state
 				case deepLink
@@ -94,7 +94,7 @@ extension APIEndpoint.V1.ReviewSubmissions.WithID {
 				case appCustomProductPageLocalizations
 			}
 
-			public enum FieldsAppStoreVersionExperiments: String, Codable, CaseIterable {
+			public enum FieldsAppStoreVersionExperiments: String, Codable, CaseIterable, Sendable {
 				case name
 				case trafficProportion
 				case state
@@ -109,7 +109,7 @@ extension APIEndpoint.V1.ReviewSubmissions.WithID {
 				case controlVersions
 			}
 
-			public enum FieldsAppEvents: String, Codable, CaseIterable {
+			public enum FieldsAppEvents: String, Codable, CaseIterable, Sendable {
 				case referenceName
 				case badge
 				case eventState
@@ -123,7 +123,7 @@ extension APIEndpoint.V1.ReviewSubmissions.WithID {
 				case localizations
 			}
 
-			public enum FieldsAppAssetLibraryImages: String, Codable, CaseIterable {
+			public enum FieldsAppAssetLibraryImages: String, Codable, CaseIterable, Sendable {
 				case category
 				case createdDate
 				case lastModifiedDate
@@ -138,7 +138,7 @@ extension APIEndpoint.V1.ReviewSubmissions.WithID {
 				case placements
 			}
 
-			public enum FieldsAppAssetLibraryVideos: String, Codable, CaseIterable {
+			public enum FieldsAppAssetLibraryVideos: String, Codable, CaseIterable, Sendable {
 				case category
 				case createdDate
 				case lastModifiedDate
@@ -155,7 +155,7 @@ extension APIEndpoint.V1.ReviewSubmissions.WithID {
 				case placements
 			}
 
-			public enum FieldsBackgroundAssetVersions: String, Codable, CaseIterable {
+			public enum FieldsBackgroundAssetVersions: String, Codable, CaseIterable, Sendable {
 				case createdDate
 				case platforms
 				case state
@@ -171,14 +171,14 @@ extension APIEndpoint.V1.ReviewSubmissions.WithID {
 				case backgroundAssetUploadFiles
 			}
 
-			public enum FieldsGameCenterAchievementVersions: String, Codable, CaseIterable {
+			public enum FieldsGameCenterAchievementVersions: String, Codable, CaseIterable, Sendable {
 				case version
 				case state
 				case achievement
 				case localizations
 			}
 
-			public enum FieldsGameCenterActivityVersions: String, Codable, CaseIterable {
+			public enum FieldsGameCenterActivityVersions: String, Codable, CaseIterable, Sendable {
 				case version
 				case state
 				case fallbackURL = "fallbackUrl"
@@ -188,7 +188,7 @@ extension APIEndpoint.V1.ReviewSubmissions.WithID {
 				case releases
 			}
 
-			public enum FieldsGameCenterChallengeVersions: String, Codable, CaseIterable {
+			public enum FieldsGameCenterChallengeVersions: String, Codable, CaseIterable, Sendable {
 				case version
 				case state
 				case challenge
@@ -197,21 +197,21 @@ extension APIEndpoint.V1.ReviewSubmissions.WithID {
 				case defaultImage
 			}
 
-			public enum FieldsGameCenterLeaderboardSetVersions: String, Codable, CaseIterable {
+			public enum FieldsGameCenterLeaderboardSetVersions: String, Codable, CaseIterable, Sendable {
 				case version
 				case state
 				case leaderboardSet
 				case localizations
 			}
 
-			public enum FieldsGameCenterLeaderboardVersions: String, Codable, CaseIterable {
+			public enum FieldsGameCenterLeaderboardVersions: String, Codable, CaseIterable, Sendable {
 				case version
 				case state
 				case leaderboard
 				case localizations
 			}
 
-			public enum FieldsInAppPurchaseVersions: String, Codable, CaseIterable {
+			public enum FieldsInAppPurchaseVersions: String, Codable, CaseIterable, Sendable {
 				case version
 				case state
 				case inAppPurchase
@@ -220,7 +220,7 @@ extension APIEndpoint.V1.ReviewSubmissions.WithID {
 				case localizations
 			}
 
-			public enum FieldsSubscriptionVersions: String, Codable, CaseIterable {
+			public enum FieldsSubscriptionVersions: String, Codable, CaseIterable, Sendable {
 				case version
 				case state
 				case subscription
@@ -229,21 +229,21 @@ extension APIEndpoint.V1.ReviewSubmissions.WithID {
 				case localizations
 			}
 
-			public enum FieldsSubscriptionGroupVersions: String, Codable, CaseIterable {
+			public enum FieldsSubscriptionGroupVersions: String, Codable, CaseIterable, Sendable {
 				case version
 				case state
 				case subscriptionGroup
 				case localizations
 			}
 
-			public enum FieldsRetentionMessageVersions: String, Codable, CaseIterable {
+			public enum FieldsRetentionMessageVersions: String, Codable, CaseIterable, Sendable {
 				case state
 				case retentionMessage
 				case localizations
 				case placement
 			}
 
-			public enum Include: String, Codable, CaseIterable {
+			public enum Include: String, Codable, CaseIterable, Sendable {
 				case appStoreVersion
 				case appCustomProductPageVersion
 				case appStoreVersionExperiment

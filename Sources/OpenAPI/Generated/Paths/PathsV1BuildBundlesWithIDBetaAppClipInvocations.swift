@@ -9,7 +9,7 @@ extension APIEndpoint.V1.BuildBundles.WithID {
 		BetaAppClipInvocations(path: path + "/betaAppClipInvocations")
 	}
 
-	public struct BetaAppClipInvocations {
+	public struct BetaAppClipInvocations: Sendable {
 		/// Path: `/v1/buildBundles/{id}/betaAppClipInvocations`
 		public let path: String
 
@@ -17,24 +17,24 @@ extension APIEndpoint.V1.BuildBundles.WithID {
 			Request(path: path, method: "GET", query: parameters?.asQuery, id: "buildBundles_betaAppClipInvocations_getToManyRelated")
 		}
 
-		public struct GetParameters {
+		public struct GetParameters: Sendable {
 			public var fieldsBetaAppClipInvocations: [FieldsBetaAppClipInvocations]?
 			public var fieldsBetaAppClipInvocationLocalizations: [FieldsBetaAppClipInvocationLocalizations]?
 			public var limit: Int?
 			public var include: [Include]?
 			public var limitBetaAppClipInvocationLocalizations: Int?
 
-			public enum FieldsBetaAppClipInvocations: String, Codable, CaseIterable {
+			public enum FieldsBetaAppClipInvocations: String, Codable, CaseIterable, Sendable {
 				case url
 				case betaAppClipInvocationLocalizations
 			}
 
-			public enum FieldsBetaAppClipInvocationLocalizations: String, Codable, CaseIterable {
+			public enum FieldsBetaAppClipInvocationLocalizations: String, Codable, CaseIterable, Sendable {
 				case title
 				case locale
 			}
 
-			public enum Include: String, Codable, CaseIterable {
+			public enum Include: String, Codable, CaseIterable, Sendable {
 				case betaAppClipInvocationLocalizations
 			}
 

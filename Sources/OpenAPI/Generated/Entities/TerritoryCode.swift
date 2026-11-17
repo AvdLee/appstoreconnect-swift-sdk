@@ -3,7 +3,7 @@
 
 import Foundation
 
-public enum TerritoryCode: String, Codable, CaseIterable {
+public enum TerritoryCode: String, Codable, CaseIterable, Sendable {
 	case abw = "ABW"
 	case afg = "AFG"
 	case ago = "AGO"

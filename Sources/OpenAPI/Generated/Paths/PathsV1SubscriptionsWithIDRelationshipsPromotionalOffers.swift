@@ -9,7 +9,7 @@ extension APIEndpoint.V1.Subscriptions.WithID.Relationships {
 		PromotionalOffers(path: path + "/promotionalOffers")
 	}
 
-	public struct PromotionalOffers {
+	public struct PromotionalOffers: Sendable {
 		/// Path: `/v1/subscriptions/{id}/relationships/promotionalOffers`
 		public let path: String
 

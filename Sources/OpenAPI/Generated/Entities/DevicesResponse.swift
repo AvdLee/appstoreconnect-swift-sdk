@@ -3,7 +3,7 @@
 
 import Foundation
 
-public struct DevicesResponse: Codable {
+public struct DevicesResponse: Codable, Sendable {
 	public var data: [Device]
 	public var links: PagedDocumentLinks
 	public var meta: PagingInformation?

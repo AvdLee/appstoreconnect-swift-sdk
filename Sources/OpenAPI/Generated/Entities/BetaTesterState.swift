@@ -3,7 +3,7 @@
 
 import Foundation
 
-public enum BetaTesterState: String, Codable, CaseIterable {
+public enum BetaTesterState: String, Codable, CaseIterable, Sendable {
 	case notInvited = "NOT_INVITED"
 	case invited = "INVITED"
 	case accepted = "ACCEPTED"

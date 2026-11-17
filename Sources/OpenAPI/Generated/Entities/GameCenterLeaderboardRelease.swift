@@ -4,18 +4,18 @@
 import Foundation
 
 @available(*, deprecated, message: "Deprecated")
-public struct GameCenterLeaderboardRelease: Codable, Identifiable {
+public struct GameCenterLeaderboardRelease: Codable, Identifiable, Sendable {
 	public var type: `Type`
 	public var id: String
 	public var attributes: Attributes?
 	public var relationships: Relationships?
 	public var links: ResourceLinks?
 
-	public enum `Type`: String, Codable, CaseIterable {
+	public enum `Type`: String, Codable, CaseIterable, Sendable {
 		case gameCenterLeaderboardReleases
 	}
 
-	public struct Attributes: Codable {
+	public struct Attributes: Codable, Sendable {
 		public var isLive: Bool?
 
 		public init(isLive: Bool? = nil) {
@@ -33,18 +33,18 @@ public struct GameCenterLeaderboardRelease: Codable, Identifiable {
 		}
 	}
 
-	public struct Relationships: Codable {
+	public struct Relationships: Codable, Sendable {
 		public var gameCenterDetail: GameCenterDetail?
 		public var gameCenterLeaderboard: GameCenterLeaderboard?
 
-		public struct GameCenterDetail: Codable {
+		public struct GameCenterDetail: Codable, Sendable {
 			public var data: Data?
 
-			public struct Data: Codable, Identifiable {
+			public struct Data: Codable, Identifiable, Sendable {
 				public var type: `Type`
 				public var id: String
 
-				public enum `Type`: String, Codable, CaseIterable {
+				public enum `Type`: String, Codable, CaseIterable, Sendable {
 					case gameCenterDetails
 				}
 
@@ -81,14 +81,14 @@ public struct GameCenterLeaderboardRelease: Codable, Identifiable {
 			}
 		}
 
-		public struct GameCenterLeaderboard: Codable {
+		public struct GameCenterLeaderboard: Codable, Sendable {
 			public var data: Data?
 
-			public struct Data: Codable, Identifiable {
+			public struct Data: Codable, Identifiable, Sendable {
 				public var type: `Type`
 				public var id: String
 
-				public enum `Type`: String, Codable, CaseIterable {
+				public enum `Type`: String, Codable, CaseIterable, Sendable {
 					case gameCenterLeaderboards
 				}
 

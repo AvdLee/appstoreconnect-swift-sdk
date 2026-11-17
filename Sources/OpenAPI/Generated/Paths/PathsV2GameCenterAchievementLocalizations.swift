@@ -9,7 +9,7 @@ extension APIEndpoint.V2 {
 		GameCenterAchievementLocalizations(path: path + "/gameCenterAchievementLocalizations")
 	}
 
-	public struct GameCenterAchievementLocalizations {
+	public struct GameCenterAchievementLocalizations: Sendable {
 		/// Path: `/v2/gameCenterAchievementLocalizations`
 		public let path: String
 

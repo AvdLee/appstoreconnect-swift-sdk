@@ -9,7 +9,7 @@ extension APIEndpoint.V1.Actors {
 		WithID(path: "\(path)/\(id)")
 	}
 
-	public struct WithID {
+	public struct WithID: Sendable {
 		/// Path: `/v1/actors/{id}`
 		public let path: String
 
@@ -23,7 +23,7 @@ extension APIEndpoint.V1.Actors {
 			return encoder.items
 		}
 
-		public enum FieldsActors: String, Codable, CaseIterable {
+		public enum FieldsActors: String, Codable, CaseIterable, Sendable {
 			case actorType
 			case userFirstName
 			case userLastName

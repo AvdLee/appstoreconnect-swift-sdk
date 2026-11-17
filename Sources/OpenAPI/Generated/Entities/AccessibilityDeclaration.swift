@@ -3,17 +3,17 @@
 
 import Foundation
 
-public struct AccessibilityDeclaration: Codable, Identifiable {
+public struct AccessibilityDeclaration: Codable, Identifiable, Sendable {
 	public var type: `Type`
 	public var id: String
 	public var attributes: Attributes?
 	public var links: ResourceLinks?
 
-	public enum `Type`: String, Codable, CaseIterable {
+	public enum `Type`: String, Codable, CaseIterable, Sendable {
 		case accessibilityDeclarations
 	}
 
-	public struct Attributes: Codable {
+	public struct Attributes: Codable, Sendable {
 		public var deviceFamily: DeviceFamily?
 		public var state: State?
 		public var isSupportsAudioDescriptions: Bool?
@@ -26,7 +26,7 @@ public struct AccessibilityDeclaration: Codable, Identifiable {
 		public var isSupportsVoiceControl: Bool?
 		public var isSupportsVoiceover: Bool?
 
-		public enum State: String, Codable, CaseIterable {
+		public enum State: String, Codable, CaseIterable, Sendable {
 			case draft = "DRAFT"
 			case published = "PUBLISHED"
 			case replaced = "REPLACED"

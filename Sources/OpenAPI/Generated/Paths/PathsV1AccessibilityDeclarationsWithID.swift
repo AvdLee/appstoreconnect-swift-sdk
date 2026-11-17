@@ -9,7 +9,7 @@ extension APIEndpoint.V1.AccessibilityDeclarations {
 		WithID(path: "\(path)/\(id)")
 	}
 
-	public struct WithID {
+	public struct WithID: Sendable {
 		/// Path: `/v1/accessibilityDeclarations/{id}`
 		public let path: String
 
@@ -23,7 +23,7 @@ extension APIEndpoint.V1.AccessibilityDeclarations {
 			return encoder.items
 		}
 
-		public enum FieldsAccessibilityDeclarations: String, Codable, CaseIterable {
+		public enum FieldsAccessibilityDeclarations: String, Codable, CaseIterable, Sendable {
 			case deviceFamily
 			case state
 			case supportsAudioDescriptions

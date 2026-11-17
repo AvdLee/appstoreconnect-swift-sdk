@@ -3,19 +3,19 @@
 
 import Foundation
 
-public struct ErrorLinks: Codable {
+public struct ErrorLinks: Codable, Sendable {
 	public var about: String?
 	public var associated: Associated?
 
-	public enum Associated: Codable {
+	public enum Associated: Codable, Sendable {
 		case string(String)
 		case object(Object)
 
-		public struct Object: Codable {
+		public struct Object: Codable, Sendable {
 			public var href: String?
 			public var meta: Meta?
 
-			public struct Meta: Codable {
+			public struct Meta: Codable, Sendable {
 				public var source: String?
 
 				public init(source: String? = nil) {

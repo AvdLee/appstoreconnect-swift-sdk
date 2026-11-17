@@ -9,7 +9,7 @@ extension APIEndpoint.V1.AppStoreVersionExperiments {
 		WithID(path: "\(path)/\(id)")
 	}
 
-	public struct WithID {
+	public struct WithID: Sendable {
 		/// Path: `/v1/appStoreVersionExperiments/{id}`
 		public let path: String
 
@@ -18,14 +18,14 @@ extension APIEndpoint.V1.AppStoreVersionExperiments {
 			Request(path: path, method: "GET", query: parameters?.asQuery, id: "appStoreVersionExperiments_getInstance")
 		}
 
-		public struct GetParameters {
+		public struct GetParameters: Sendable {
 			public var fieldsAppStoreVersionExperiments: [FieldsAppStoreVersionExperiments]?
 			public var fieldsAppStoreVersions: [FieldsAppStoreVersions]?
 			public var fieldsAppStoreVersionExperimentTreatments: [FieldsAppStoreVersionExperimentTreatments]?
 			public var include: [Include]?
 			public var limitAppStoreVersionExperimentTreatments: Int?
 
-			public enum FieldsAppStoreVersionExperiments: String, Codable, CaseIterable {
+			public enum FieldsAppStoreVersionExperiments: String, Codable, CaseIterable, Sendable {
 				case name
 				case trafficProportion
 				case state
@@ -36,7 +36,7 @@ extension APIEndpoint.V1.AppStoreVersionExperiments {
 				case appStoreVersionExperimentTreatments
 			}
 
-			public enum FieldsAppStoreVersions: String, Codable, CaseIterable {
+			public enum FieldsAppStoreVersions: String, Codable, CaseIterable, Sendable {
 				case platform
 				case versionString
 				case appStoreState
@@ -63,7 +63,7 @@ extension APIEndpoint.V1.AppStoreVersionExperiments {
 				case alternativeDistributionPackage
 			}
 
-			public enum FieldsAppStoreVersionExperimentTreatments: String, Codable, CaseIterable {
+			public enum FieldsAppStoreVersionExperimentTreatments: String, Codable, CaseIterable, Sendable {
 				case name
 				case appIcon
 				case appIconName
@@ -73,7 +73,7 @@ extension APIEndpoint.V1.AppStoreVersionExperiments {
 				case appStoreVersionExperimentTreatmentLocalizations
 			}
 
-			public enum Include: String, Codable, CaseIterable {
+			public enum Include: String, Codable, CaseIterable, Sendable {
 				case appStoreVersion
 				case appStoreVersionExperimentTreatments
 			}

@@ -3,18 +3,18 @@
 
 import Foundation
 
-public struct GameCenterAppVersion: Codable, Identifiable {
+public struct GameCenterAppVersion: Codable, Identifiable, Sendable {
 	public var type: `Type`
 	public var id: String
 	public var attributes: Attributes?
 	public var relationships: Relationships?
 	public var links: ResourceLinks?
 
-	public enum `Type`: String, Codable, CaseIterable {
+	public enum `Type`: String, Codable, CaseIterable, Sendable {
 		case gameCenterAppVersions
 	}
 
-	public struct Attributes: Codable {
+	public struct Attributes: Codable, Sendable {
 		public var isEnabled: Bool?
 
 		public init(isEnabled: Bool? = nil) {
@@ -32,20 +32,20 @@ public struct GameCenterAppVersion: Codable, Identifiable {
 		}
 	}
 
-	public struct Relationships: Codable {
+	public struct Relationships: Codable, Sendable {
 		public var compatibilityVersions: CompatibilityVersions?
 		public var appStoreVersion: AppStoreVersion?
 
-		public struct CompatibilityVersions: Codable {
+		public struct CompatibilityVersions: Codable, Sendable {
 			public var links: RelationshipLinks?
 			public var meta: PagingInformation?
 			public var data: [Datum]?
 
-			public struct Datum: Codable, Identifiable {
+			public struct Datum: Codable, Identifiable, Sendable {
 				public var type: `Type`
 				public var id: String
 
-				public enum `Type`: String, Codable, CaseIterable {
+				public enum `Type`: String, Codable, CaseIterable, Sendable {
 					case gameCenterAppVersions
 				}
 
@@ -88,15 +88,15 @@ public struct GameCenterAppVersion: Codable, Identifiable {
 			}
 		}
 
-		public struct AppStoreVersion: Codable {
+		public struct AppStoreVersion: Codable, Sendable {
 			public var links: RelationshipLinks?
 			public var data: Data?
 
-			public struct Data: Codable, Identifiable {
+			public struct Data: Codable, Identifiable, Sendable {
 				public var type: `Type`
 				public var id: String
 
-				public enum `Type`: String, Codable, CaseIterable {
+				public enum `Type`: String, Codable, CaseIterable, Sendable {
 					case appStoreVersions
 				}
 

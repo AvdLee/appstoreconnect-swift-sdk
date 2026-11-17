@@ -9,7 +9,7 @@ extension APIEndpoint.V1.BetaGroups.WithID {
 		BetaRecruitmentCriterionCompatibleBuildCheck(path: path + "/betaRecruitmentCriterionCompatibleBuildCheck")
 	}
 
-	public struct BetaRecruitmentCriterionCompatibleBuildCheck {
+	public struct BetaRecruitmentCriterionCompatibleBuildCheck: Sendable {
 		/// Path: `/v1/betaGroups/{id}/betaRecruitmentCriterionCompatibleBuildCheck`
 		public let path: String
 
@@ -23,7 +23,7 @@ extension APIEndpoint.V1.BetaGroups.WithID {
 			return encoder.items
 		}
 
-		public enum FieldsBetaRecruitmentCriterionCompatibleBuildChecks: String, Codable, CaseIterable {
+		public enum FieldsBetaRecruitmentCriterionCompatibleBuildChecks: String, Codable, CaseIterable, Sendable {
 			case hasCompatibleBuild
 		}
 	}

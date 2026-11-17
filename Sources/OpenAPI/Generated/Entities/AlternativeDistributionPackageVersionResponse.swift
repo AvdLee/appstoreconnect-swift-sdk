@@ -3,13 +3,13 @@
 
 import Foundation
 
-public struct AlternativeDistributionPackageVersionResponse: Codable {
+public struct AlternativeDistributionPackageVersionResponse: Codable, Sendable {
 	/// AlternativeDistributionPackageVersion
 	public var data: AlternativeDistributionPackageVersion
 	public var included: [IncludedItem]?
 	public var links: DocumentLinks
 
-	public enum IncludedItem: Codable {
+	public enum IncludedItem: Codable, Sendable {
 		case alternativeDistributionPackageDelta(AlternativeDistributionPackageDelta)
 		case alternativeDistributionPackageVariant(AlternativeDistributionPackageVariant)
 		case alternativeDistributionPackage(AlternativeDistributionPackage)

@@ -3,18 +3,18 @@
 
 import Foundation
 
-public struct SubscriptionGroupLocalizationV2: Codable, Identifiable {
+public struct SubscriptionGroupLocalizationV2: Codable, Identifiable, Sendable {
 	public var type: `Type`
 	public var id: String
 	public var attributes: Attributes?
 	public var relationships: Relationships?
 	public var links: ResourceLinks?
 
-	public enum `Type`: String, Codable, CaseIterable {
+	public enum `Type`: String, Codable, CaseIterable, Sendable {
 		case subscriptionGroupLocalizations
 	}
 
-	public struct Attributes: Codable {
+	public struct Attributes: Codable, Sendable {
 		public var name: String?
 		public var customAppName: String?
 		public var locale: String?
@@ -40,17 +40,17 @@ public struct SubscriptionGroupLocalizationV2: Codable, Identifiable {
 		}
 	}
 
-	public struct Relationships: Codable {
+	public struct Relationships: Codable, Sendable {
 		public var version: Version?
 
-		public struct Version: Codable {
+		public struct Version: Codable, Sendable {
 			public var data: Data?
 
-			public struct Data: Codable, Identifiable {
+			public struct Data: Codable, Identifiable, Sendable {
 				public var type: `Type`
 				public var id: String
 
-				public enum `Type`: String, Codable, CaseIterable {
+				public enum `Type`: String, Codable, CaseIterable, Sendable {
 					case subscriptionGroupVersions
 				}
 

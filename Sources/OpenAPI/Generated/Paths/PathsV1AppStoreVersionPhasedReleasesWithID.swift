@@ -9,7 +9,7 @@ extension APIEndpoint.V1.AppStoreVersionPhasedReleases {
 		WithID(path: "\(path)/\(id)")
 	}
 
-	public struct WithID {
+	public struct WithID: Sendable {
 		/// Path: `/v1/appStoreVersionPhasedReleases/{id}`
 		public let path: String
 

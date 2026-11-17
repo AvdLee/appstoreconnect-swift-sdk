@@ -9,7 +9,7 @@ extension APIEndpoint.V1.AppClipAdvancedExperiences {
 		WithID(path: "\(path)/\(id)")
 	}
 
-	public struct WithID {
+	public struct WithID: Sendable {
 		/// Path: `/v1/appClipAdvancedExperiences/{id}`
 		public let path: String
 
@@ -17,7 +17,7 @@ extension APIEndpoint.V1.AppClipAdvancedExperiences {
 			Request(path: path, method: "GET", query: parameters?.asQuery, id: "appClipAdvancedExperiences_getInstance")
 		}
 
-		public struct GetParameters {
+		public struct GetParameters: Sendable {
 			public var fieldsAppClipAdvancedExperiences: [FieldsAppClipAdvancedExperiences]?
 			public var fieldsAppClips: [FieldsAppClips]?
 			public var fieldsAppClipAdvancedExperienceImages: [FieldsAppClipAdvancedExperienceImages]?
@@ -25,7 +25,7 @@ extension APIEndpoint.V1.AppClipAdvancedExperiences {
 			public var include: [Include]?
 			public var limitLocalizations: Int?
 
-			public enum FieldsAppClipAdvancedExperiences: String, Codable, CaseIterable {
+			public enum FieldsAppClipAdvancedExperiences: String, Codable, CaseIterable, Sendable {
 				case link
 				case version
 				case status
@@ -40,14 +40,14 @@ extension APIEndpoint.V1.AppClipAdvancedExperiences {
 				case localizations
 			}
 
-			public enum FieldsAppClips: String, Codable, CaseIterable {
+			public enum FieldsAppClips: String, Codable, CaseIterable, Sendable {
 				case bundleID = "bundleId"
 				case app
 				case appClipDefaultExperiences
 				case appClipAdvancedExperiences
 			}
 
-			public enum FieldsAppClipAdvancedExperienceImages: String, Codable, CaseIterable {
+			public enum FieldsAppClipAdvancedExperienceImages: String, Codable, CaseIterable, Sendable {
 				case fileSize
 				case fileName
 				case sourceFileChecksum
@@ -56,13 +56,13 @@ extension APIEndpoint.V1.AppClipAdvancedExperiences {
 				case assetDeliveryState
 			}
 
-			public enum FieldsAppClipAdvancedExperienceLocalizations: String, Codable, CaseIterable {
+			public enum FieldsAppClipAdvancedExperienceLocalizations: String, Codable, CaseIterable, Sendable {
 				case language
 				case title
 				case subtitle
 			}
 
-			public enum Include: String, Codable, CaseIterable {
+			public enum Include: String, Codable, CaseIterable, Sendable {
 				case appClip
 				case headerImage
 				case localizations

@@ -9,7 +9,7 @@ extension APIEndpoint.V1.RetentionMessageLocalizations {
 		WithID(path: "\(path)/\(id)")
 	}
 
-	public struct WithID {
+	public struct WithID: Sendable {
 		/// Path: `/v1/retentionMessageLocalizations/{id}`
 		public let path: String
 
@@ -17,26 +17,26 @@ extension APIEndpoint.V1.RetentionMessageLocalizations {
 			Request(path: path, method: "GET", query: parameters?.asQuery, id: "retentionMessageLocalizations_getInstance")
 		}
 
-		public struct GetParameters {
+		public struct GetParameters: Sendable {
 			public var fieldsRetentionMessageLocalizations: [FieldsRetentionMessageLocalizations]?
 			public var fieldsRetentionMessageVersions: [FieldsRetentionMessageVersions]?
 			public var include: [Include]?
 
-			public enum FieldsRetentionMessageLocalizations: String, Codable, CaseIterable {
+			public enum FieldsRetentionMessageLocalizations: String, Codable, CaseIterable, Sendable {
 				case locale
 				case header
 				case body
 				case retentionMessageVersion
 			}
 
-			public enum FieldsRetentionMessageVersions: String, Codable, CaseIterable {
+			public enum FieldsRetentionMessageVersions: String, Codable, CaseIterable, Sendable {
 				case state
 				case retentionMessage
 				case localizations
 				case placement
 			}
 
-			public enum Include: String, Codable, CaseIterable {
+			public enum Include: String, Codable, CaseIterable, Sendable {
 				case retentionMessageVersion
 			}
 

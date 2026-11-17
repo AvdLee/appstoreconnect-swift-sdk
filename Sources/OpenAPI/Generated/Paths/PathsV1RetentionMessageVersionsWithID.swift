@@ -9,7 +9,7 @@ extension APIEndpoint.V1.RetentionMessageVersions {
 		WithID(path: "\(path)/\(id)")
 	}
 
-	public struct WithID {
+	public struct WithID: Sendable {
 		/// Path: `/v1/retentionMessageVersions/{id}`
 		public let path: String
 
@@ -17,7 +17,7 @@ extension APIEndpoint.V1.RetentionMessageVersions {
 			Request(path: path, method: "GET", query: parameters?.asQuery, id: "retentionMessageVersions_getInstance")
 		}
 
-		public struct GetParameters {
+		public struct GetParameters: Sendable {
 			public var fieldsRetentionMessageVersions: [FieldsRetentionMessageVersions]?
 			public var fieldsRetentionMessages: [FieldsRetentionMessages]?
 			public var fieldsRetentionMessageLocalizations: [FieldsRetentionMessageLocalizations]?
@@ -25,27 +25,27 @@ extension APIEndpoint.V1.RetentionMessageVersions {
 			public var include: [Include]?
 			public var limitLocalizations: Int?
 
-			public enum FieldsRetentionMessageVersions: String, Codable, CaseIterable {
+			public enum FieldsRetentionMessageVersions: String, Codable, CaseIterable, Sendable {
 				case state
 				case retentionMessage
 				case localizations
 				case placement
 			}
 
-			public enum FieldsRetentionMessages: String, Codable, CaseIterable {
+			public enum FieldsRetentionMessages: String, Codable, CaseIterable, Sendable {
 				case referenceName
 				case versions
 				case subscriptions
 			}
 
-			public enum FieldsRetentionMessageLocalizations: String, Codable, CaseIterable {
+			public enum FieldsRetentionMessageLocalizations: String, Codable, CaseIterable, Sendable {
 				case locale
 				case header
 				case body
 				case retentionMessageVersion
 			}
 
-			public enum FieldsAppAssetLibraryPlacements: String, Codable, CaseIterable {
+			public enum FieldsAppAssetLibraryPlacements: String, Codable, CaseIterable, Sendable {
 				case mediaType
 				case placementType
 				case placementGroup
@@ -62,7 +62,7 @@ extension APIEndpoint.V1.RetentionMessageVersions {
 				case retentionMessageVersion
 			}
 
-			public enum Include: String, Codable, CaseIterable {
+			public enum Include: String, Codable, CaseIterable, Sendable {
 				case retentionMessage
 				case localizations
 				case placement

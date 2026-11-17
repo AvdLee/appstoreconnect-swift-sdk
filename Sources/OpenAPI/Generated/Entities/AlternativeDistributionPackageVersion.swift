@@ -3,25 +3,25 @@
 
 import Foundation
 
-public struct AlternativeDistributionPackageVersion: Codable, Identifiable {
+public struct AlternativeDistributionPackageVersion: Codable, Identifiable, Sendable {
 	public var type: `Type`
 	public var id: String
 	public var attributes: Attributes?
 	public var relationships: Relationships?
 	public var links: ResourceLinks?
 
-	public enum `Type`: String, Codable, CaseIterable {
+	public enum `Type`: String, Codable, CaseIterable, Sendable {
 		case alternativeDistributionPackageVersions
 	}
 
-	public struct Attributes: Codable {
+	public struct Attributes: Codable, Sendable {
 		public var url: URL?
 		public var urlExpirationDate: Date?
 		public var version: String?
 		public var fileChecksum: String?
 		public var state: State?
 
-		public enum State: String, Codable, CaseIterable {
+		public enum State: String, Codable, CaseIterable, Sendable {
 			case completed = "COMPLETED"
 			case replaced = "REPLACED"
 		}
@@ -53,21 +53,21 @@ public struct AlternativeDistributionPackageVersion: Codable, Identifiable {
 		}
 	}
 
-	public struct Relationships: Codable {
+	public struct Relationships: Codable, Sendable {
 		public var variants: Variants?
 		public var deltas: Deltas?
 		public var alternativeDistributionPackage: AlternativeDistributionPackage?
 
-		public struct Variants: Codable {
+		public struct Variants: Codable, Sendable {
 			public var links: RelationshipLinks?
 			public var meta: PagingInformation?
 			public var data: [Datum]?
 
-			public struct Datum: Codable, Identifiable {
+			public struct Datum: Codable, Identifiable, Sendable {
 				public var type: `Type`
 				public var id: String
 
-				public enum `Type`: String, Codable, CaseIterable {
+				public enum `Type`: String, Codable, CaseIterable, Sendable {
 					case alternativeDistributionPackageVariants
 				}
 
@@ -110,16 +110,16 @@ public struct AlternativeDistributionPackageVersion: Codable, Identifiable {
 			}
 		}
 
-		public struct Deltas: Codable {
+		public struct Deltas: Codable, Sendable {
 			public var links: RelationshipLinks?
 			public var meta: PagingInformation?
 			public var data: [Datum]?
 
-			public struct Datum: Codable, Identifiable {
+			public struct Datum: Codable, Identifiable, Sendable {
 				public var type: `Type`
 				public var id: String
 
-				public enum `Type`: String, Codable, CaseIterable {
+				public enum `Type`: String, Codable, CaseIterable, Sendable {
 					case alternativeDistributionPackageDeltas
 				}
 
@@ -162,14 +162,14 @@ public struct AlternativeDistributionPackageVersion: Codable, Identifiable {
 			}
 		}
 
-		public struct AlternativeDistributionPackage: Codable {
+		public struct AlternativeDistributionPackage: Codable, Sendable {
 			public var data: Data?
 
-			public struct Data: Codable, Identifiable {
+			public struct Data: Codable, Identifiable, Sendable {
 				public var type: `Type`
 				public var id: String
 
-				public enum `Type`: String, Codable, CaseIterable {
+				public enum `Type`: String, Codable, CaseIterable, Sendable {
 					case alternativeDistributionPackages
 				}
 

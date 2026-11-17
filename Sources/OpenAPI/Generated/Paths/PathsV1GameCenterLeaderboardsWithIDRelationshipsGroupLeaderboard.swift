@@ -9,7 +9,7 @@ extension APIEndpoint.V1.GameCenterLeaderboards.WithID.Relationships {
 		GroupLeaderboard(path: path + "/groupLeaderboard")
 	}
 
-	public struct GroupLeaderboard {
+	public struct GroupLeaderboard: Sendable {
 		/// Path: `/v1/gameCenterLeaderboards/{id}/relationships/groupLeaderboard`
 		public let path: String
 

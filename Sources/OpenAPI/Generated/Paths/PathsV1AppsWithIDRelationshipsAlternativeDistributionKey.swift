@@ -9,7 +9,7 @@ extension APIEndpoint.V1.Apps.WithID.Relationships {
 		AlternativeDistributionKey(path: path + "/alternativeDistributionKey")
 	}
 
-	public struct AlternativeDistributionKey {
+	public struct AlternativeDistributionKey: Sendable {
 		/// Path: `/v1/apps/{id}/relationships/alternativeDistributionKey`
 		public let path: String
 

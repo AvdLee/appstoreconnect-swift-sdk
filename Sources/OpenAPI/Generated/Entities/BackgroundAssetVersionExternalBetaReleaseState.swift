@@ -3,7 +3,7 @@
 
 import Foundation
 
-public enum BackgroundAssetVersionExternalBetaReleaseState: String, Codable, CaseIterable {
+public enum BackgroundAssetVersionExternalBetaReleaseState: String, Codable, CaseIterable, Sendable {
 	case readyForBetaSubmission = "READY_FOR_BETA_SUBMISSION"
 	case waitingForReview = "WAITING_FOR_REVIEW"
 	case inReview = "IN_REVIEW"

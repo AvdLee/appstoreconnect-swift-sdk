@@ -3,7 +3,7 @@
 
 import Foundation
 
-public struct CiTestResultResponse: Codable {
+public struct CiTestResultResponse: Codable, Sendable {
 	/// CiTestResult
 	public var data: CiTestResult
 	public var links: DocumentLinks

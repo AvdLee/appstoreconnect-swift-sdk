@@ -3,18 +3,18 @@
 
 import Foundation
 
-public struct CiBuildAction: Codable, Identifiable {
+public struct CiBuildAction: Codable, Identifiable, Sendable {
 	public var type: `Type`
 	public var id: String
 	public var attributes: Attributes?
 	public var relationships: Relationships?
 	public var links: ResourceLinks?
 
-	public enum `Type`: String, Codable, CaseIterable {
+	public enum `Type`: String, Codable, CaseIterable, Sendable {
 		case ciBuildActions
 	}
 
-	public struct Attributes: Codable {
+	public struct Attributes: Codable, Sendable {
 		public var name: String?
 		public var actionType: CiActionType?
 		public var startedDate: Date?
@@ -60,21 +60,21 @@ public struct CiBuildAction: Codable, Identifiable {
 		}
 	}
 
-	public struct Relationships: Codable {
+	public struct Relationships: Codable, Sendable {
 		public var buildRun: BuildRun?
 		public var artifacts: Artifacts?
 		public var issues: Issues?
 		public var testResults: TestResults?
 
-		public struct BuildRun: Codable {
+		public struct BuildRun: Codable, Sendable {
 			public var links: RelationshipLinks?
 			public var data: Data?
 
-			public struct Data: Codable, Identifiable {
+			public struct Data: Codable, Identifiable, Sendable {
 				public var type: `Type`
 				public var id: String
 
-				public enum `Type`: String, Codable, CaseIterable {
+				public enum `Type`: String, Codable, CaseIterable, Sendable {
 					case ciBuildRuns
 				}
 
@@ -114,7 +114,7 @@ public struct CiBuildAction: Codable, Identifiable {
 			}
 		}
 
-		public struct Artifacts: Codable {
+		public struct Artifacts: Codable, Sendable {
 			public var links: RelationshipLinks?
 
 			public init(links: RelationshipLinks? = nil) {
@@ -132,7 +132,7 @@ public struct CiBuildAction: Codable, Identifiable {
 			}
 		}
 
-		public struct Issues: Codable {
+		public struct Issues: Codable, Sendable {
 			public var links: RelationshipLinks?
 
 			public init(links: RelationshipLinks? = nil) {
@@ -150,7 +150,7 @@ public struct CiBuildAction: Codable, Identifiable {
 			}
 		}
 
-		public struct TestResults: Codable {
+		public struct TestResults: Codable, Sendable {
 			public var links: RelationshipLinks?
 
 			public init(links: RelationshipLinks? = nil) {

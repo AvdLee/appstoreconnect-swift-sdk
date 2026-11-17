@@ -9,7 +9,7 @@ extension APIEndpoint.V1 {
 		InAppPurchaseAppStoreReviewScreenshots(path: path + "/inAppPurchaseAppStoreReviewScreenshots")
 	}
 
-	public struct InAppPurchaseAppStoreReviewScreenshots {
+	public struct InAppPurchaseAppStoreReviewScreenshots: Sendable {
 		/// Path: `/v1/inAppPurchaseAppStoreReviewScreenshots`
 		public let path: String
 

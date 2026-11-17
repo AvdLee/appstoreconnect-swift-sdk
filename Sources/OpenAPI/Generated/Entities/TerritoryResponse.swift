@@ -3,7 +3,7 @@
 
 import Foundation
 
-public struct TerritoryResponse: Codable {
+public struct TerritoryResponse: Codable, Sendable {
 	/// Territory
 	public var data: Territory
 	public var links: DocumentLinks

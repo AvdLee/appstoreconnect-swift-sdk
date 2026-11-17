@@ -3,7 +3,7 @@
 
 import Foundation
 
-public enum DeviceFamily: String, Codable, CaseIterable {
+public enum DeviceFamily: String, Codable, CaseIterable, Sendable {
 	case iphone = "IPHONE"
 	case ipad = "IPAD"
 	case appleTv = "APPLE_TV"

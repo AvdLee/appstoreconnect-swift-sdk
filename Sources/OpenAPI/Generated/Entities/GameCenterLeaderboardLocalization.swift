@@ -4,18 +4,18 @@
 import Foundation
 
 @available(*, deprecated, message: "Deprecated")
-public struct GameCenterLeaderboardLocalization: Codable, Identifiable {
+public struct GameCenterLeaderboardLocalization: Codable, Identifiable, Sendable {
 	public var type: `Type`
 	public var id: String
 	public var attributes: Attributes?
 	public var relationships: Relationships?
 	public var links: ResourceLinks?
 
-	public enum `Type`: String, Codable, CaseIterable {
+	public enum `Type`: String, Codable, CaseIterable, Sendable {
 		case gameCenterLeaderboardLocalizations
 	}
 
-	public struct Attributes: Codable {
+	public struct Attributes: Codable, Sendable {
 		public var locale: String?
 		public var name: String?
 		public var formatterOverride: GameCenterLeaderboardFormatter?
@@ -53,18 +53,18 @@ public struct GameCenterLeaderboardLocalization: Codable, Identifiable {
 		}
 	}
 
-	public struct Relationships: Codable {
+	public struct Relationships: Codable, Sendable {
 		public var gameCenterLeaderboard: GameCenterLeaderboard?
 		public var gameCenterLeaderboardImage: GameCenterLeaderboardImage?
 
-		public struct GameCenterLeaderboard: Codable {
+		public struct GameCenterLeaderboard: Codable, Sendable {
 			public var data: Data?
 
-			public struct Data: Codable, Identifiable {
+			public struct Data: Codable, Identifiable, Sendable {
 				public var type: `Type`
 				public var id: String
 
-				public enum `Type`: String, Codable, CaseIterable {
+				public enum `Type`: String, Codable, CaseIterable, Sendable {
 					case gameCenterLeaderboards
 				}
 
@@ -101,15 +101,15 @@ public struct GameCenterLeaderboardLocalization: Codable, Identifiable {
 			}
 		}
 
-		public struct GameCenterLeaderboardImage: Codable {
+		public struct GameCenterLeaderboardImage: Codable, Sendable {
 			public var links: RelationshipLinks?
 			public var data: Data?
 
-			public struct Data: Codable, Identifiable {
+			public struct Data: Codable, Identifiable, Sendable {
 				public var type: `Type`
 				public var id: String
 
-				public enum `Type`: String, Codable, CaseIterable {
+				public enum `Type`: String, Codable, CaseIterable, Sendable {
 					case gameCenterLeaderboardImages
 				}
 

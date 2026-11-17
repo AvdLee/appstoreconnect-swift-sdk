@@ -3,18 +3,18 @@
 
 import Foundation
 
-public struct AppStoreVersionExperimentV2: Codable, Identifiable {
+public struct AppStoreVersionExperimentV2: Codable, Identifiable, Sendable {
 	public var type: `Type`
 	public var id: String
 	public var attributes: Attributes?
 	public var relationships: Relationships?
 	public var links: ResourceLinks?
 
-	public enum `Type`: String, Codable, CaseIterable {
+	public enum `Type`: String, Codable, CaseIterable, Sendable {
 		case appStoreVersionExperiments
 	}
 
-	public struct Attributes: Codable {
+	public struct Attributes: Codable, Sendable {
 		public var name: String?
 		public var platform: Platform?
 		public var trafficProportion: Int?
@@ -23,7 +23,7 @@ public struct AppStoreVersionExperimentV2: Codable, Identifiable {
 		public var startDate: Date?
 		public var endDate: Date?
 
-		public enum State: String, Codable, CaseIterable {
+		public enum State: String, Codable, CaseIterable, Sendable {
 			case prepareForSubmission = "PREPARE_FOR_SUBMISSION"
 			case readyForReview = "READY_FOR_REVIEW"
 			case waitingForReview = "WAITING_FOR_REVIEW"
@@ -68,20 +68,20 @@ public struct AppStoreVersionExperimentV2: Codable, Identifiable {
 		}
 	}
 
-	public struct Relationships: Codable {
+	public struct Relationships: Codable, Sendable {
 		public var app: App?
 		public var latestControlVersion: LatestControlVersion?
 		public var controlVersions: ControlVersions?
 		public var appStoreVersionExperimentTreatments: AppStoreVersionExperimentTreatments?
 
-		public struct App: Codable {
+		public struct App: Codable, Sendable {
 			public var data: Data?
 
-			public struct Data: Codable, Identifiable {
+			public struct Data: Codable, Identifiable, Sendable {
 				public var type: `Type`
 				public var id: String
 
-				public enum `Type`: String, Codable, CaseIterable {
+				public enum `Type`: String, Codable, CaseIterable, Sendable {
 					case apps
 				}
 
@@ -118,14 +118,14 @@ public struct AppStoreVersionExperimentV2: Codable, Identifiable {
 			}
 		}
 
-		public struct LatestControlVersion: Codable {
+		public struct LatestControlVersion: Codable, Sendable {
 			public var data: Data?
 
-			public struct Data: Codable, Identifiable {
+			public struct Data: Codable, Identifiable, Sendable {
 				public var type: `Type`
 				public var id: String
 
-				public enum `Type`: String, Codable, CaseIterable {
+				public enum `Type`: String, Codable, CaseIterable, Sendable {
 					case appStoreVersions
 				}
 
@@ -162,15 +162,15 @@ public struct AppStoreVersionExperimentV2: Codable, Identifiable {
 			}
 		}
 
-		public struct ControlVersions: Codable {
+		public struct ControlVersions: Codable, Sendable {
 			public var meta: PagingInformation?
 			public var data: [Datum]?
 
-			public struct Datum: Codable, Identifiable {
+			public struct Datum: Codable, Identifiable, Sendable {
 				public var type: `Type`
 				public var id: String
 
-				public enum `Type`: String, Codable, CaseIterable {
+				public enum `Type`: String, Codable, CaseIterable, Sendable {
 					case appStoreVersions
 				}
 
@@ -210,16 +210,16 @@ public struct AppStoreVersionExperimentV2: Codable, Identifiable {
 			}
 		}
 
-		public struct AppStoreVersionExperimentTreatments: Codable {
+		public struct AppStoreVersionExperimentTreatments: Codable, Sendable {
 			public var links: RelationshipLinks?
 			public var meta: PagingInformation?
 			public var data: [Datum]?
 
-			public struct Datum: Codable, Identifiable {
+			public struct Datum: Codable, Identifiable, Sendable {
 				public var type: `Type`
 				public var id: String
 
-				public enum `Type`: String, Codable, CaseIterable {
+				public enum `Type`: String, Codable, CaseIterable, Sendable {
 					case appStoreVersionExperimentTreatments
 				}
 

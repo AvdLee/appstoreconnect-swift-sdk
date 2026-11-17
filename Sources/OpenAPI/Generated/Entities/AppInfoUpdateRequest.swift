@@ -3,19 +3,19 @@
 
 import Foundation
 
-public struct AppInfoUpdateRequest: Codable {
+public struct AppInfoUpdateRequest: Codable, Sendable {
 	public var data: Data
 
-	public struct Data: Codable, Identifiable {
+	public struct Data: Codable, Identifiable, Sendable {
 		public var type: `Type`
 		public var id: String
 		public var relationships: Relationships?
 
-		public enum `Type`: String, Codable, CaseIterable {
+		public enum `Type`: String, Codable, CaseIterable, Sendable {
 			case appInfos
 		}
 
-		public struct Relationships: Codable {
+		public struct Relationships: Codable, Sendable {
 			public var primaryCategory: PrimaryCategory?
 			public var primarySubcategoryOne: PrimarySubcategoryOne?
 			public var primarySubcategoryTwo: PrimarySubcategoryTwo?
@@ -23,14 +23,14 @@ public struct AppInfoUpdateRequest: Codable {
 			public var secondarySubcategoryOne: SecondarySubcategoryOne?
 			public var secondarySubcategoryTwo: SecondarySubcategoryTwo?
 
-			public struct PrimaryCategory: Codable {
+			public struct PrimaryCategory: Codable, Sendable {
 				public var data: Data?
 
-				public struct Data: Codable, Identifiable {
+				public struct Data: Codable, Identifiable, Sendable {
 					public var type: `Type`
 					public var id: String
 
-					public enum `Type`: String, Codable, CaseIterable {
+					public enum `Type`: String, Codable, CaseIterable, Sendable {
 						case appCategories
 					}
 
@@ -67,14 +67,14 @@ public struct AppInfoUpdateRequest: Codable {
 				}
 			}
 
-			public struct PrimarySubcategoryOne: Codable {
+			public struct PrimarySubcategoryOne: Codable, Sendable {
 				public var data: Data?
 
-				public struct Data: Codable, Identifiable {
+				public struct Data: Codable, Identifiable, Sendable {
 					public var type: `Type`
 					public var id: String
 
-					public enum `Type`: String, Codable, CaseIterable {
+					public enum `Type`: String, Codable, CaseIterable, Sendable {
 						case appCategories
 					}
 
@@ -111,14 +111,14 @@ public struct AppInfoUpdateRequest: Codable {
 				}
 			}
 
-			public struct PrimarySubcategoryTwo: Codable {
+			public struct PrimarySubcategoryTwo: Codable, Sendable {
 				public var data: Data?
 
-				public struct Data: Codable, Identifiable {
+				public struct Data: Codable, Identifiable, Sendable {
 					public var type: `Type`
 					public var id: String
 
-					public enum `Type`: String, Codable, CaseIterable {
+					public enum `Type`: String, Codable, CaseIterable, Sendable {
 						case appCategories
 					}
 
@@ -155,14 +155,14 @@ public struct AppInfoUpdateRequest: Codable {
 				}
 			}
 
-			public struct SecondaryCategory: Codable {
+			public struct SecondaryCategory: Codable, Sendable {
 				public var data: Data?
 
-				public struct Data: Codable, Identifiable {
+				public struct Data: Codable, Identifiable, Sendable {
 					public var type: `Type`
 					public var id: String
 
-					public enum `Type`: String, Codable, CaseIterable {
+					public enum `Type`: String, Codable, CaseIterable, Sendable {
 						case appCategories
 					}
 
@@ -199,14 +199,14 @@ public struct AppInfoUpdateRequest: Codable {
 				}
 			}
 
-			public struct SecondarySubcategoryOne: Codable {
+			public struct SecondarySubcategoryOne: Codable, Sendable {
 				public var data: Data?
 
-				public struct Data: Codable, Identifiable {
+				public struct Data: Codable, Identifiable, Sendable {
 					public var type: `Type`
 					public var id: String
 
-					public enum `Type`: String, Codable, CaseIterable {
+					public enum `Type`: String, Codable, CaseIterable, Sendable {
 						case appCategories
 					}
 
@@ -243,14 +243,14 @@ public struct AppInfoUpdateRequest: Codable {
 				}
 			}
 
-			public struct SecondarySubcategoryTwo: Codable {
+			public struct SecondarySubcategoryTwo: Codable, Sendable {
 				public var data: Data?
 
-				public struct Data: Codable, Identifiable {
+				public struct Data: Codable, Identifiable, Sendable {
 					public var type: `Type`
 					public var id: String
 
-					public enum `Type`: String, Codable, CaseIterable {
+					public enum `Type`: String, Codable, CaseIterable, Sendable {
 						case appCategories
 					}
 

@@ -3,7 +3,7 @@
 
 import Foundation
 
-public struct IntegerRange: Codable {
+public struct IntegerRange: Codable, Sendable {
 	public var minimum: Int?
 	public var maximum: Int?
 

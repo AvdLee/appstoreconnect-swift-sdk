@@ -9,7 +9,7 @@ extension APIEndpoint.V1.AppPreviews {
 		WithID(path: "\(path)/\(id)")
 	}
 
-	public struct WithID {
+	public struct WithID: Sendable {
 		/// Path: `/v1/appPreviews/{id}`
 		public let path: String
 
@@ -17,12 +17,12 @@ extension APIEndpoint.V1.AppPreviews {
 			Request(path: path, method: "GET", query: parameters?.asQuery, id: "appPreviews_getInstance")
 		}
 
-		public struct GetParameters {
+		public struct GetParameters: Sendable {
 			public var fieldsAppPreviews: [FieldsAppPreviews]?
 			public var fieldsAppPreviewSets: [FieldsAppPreviewSets]?
 			public var include: [Include]?
 
-			public enum FieldsAppPreviews: String, Codable, CaseIterable {
+			public enum FieldsAppPreviews: String, Codable, CaseIterable, Sendable {
 				case fileSize
 				case fileName
 				case sourceFileChecksum
@@ -37,7 +37,7 @@ extension APIEndpoint.V1.AppPreviews {
 				case appPreviewSet
 			}
 
-			public enum FieldsAppPreviewSets: String, Codable, CaseIterable {
+			public enum FieldsAppPreviewSets: String, Codable, CaseIterable, Sendable {
 				case previewType
 				case appStoreVersionLocalization
 				case appCustomProductPageLocalization
@@ -45,7 +45,7 @@ extension APIEndpoint.V1.AppPreviews {
 				case appPreviews
 			}
 
-			public enum Include: String, Codable, CaseIterable {
+			public enum Include: String, Codable, CaseIterable, Sendable {
 				case appPreviewSet
 			}
 

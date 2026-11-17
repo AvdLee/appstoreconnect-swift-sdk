@@ -9,7 +9,7 @@ extension APIEndpoint.V1.AppInfos.WithID.Relationships {
 		TerritoryAgeRatings(path: path + "/territoryAgeRatings")
 	}
 
-	public struct TerritoryAgeRatings {
+	public struct TerritoryAgeRatings: Sendable {
 		/// Path: `/v1/appInfos/{id}/relationships/territoryAgeRatings`
 		public let path: String
 

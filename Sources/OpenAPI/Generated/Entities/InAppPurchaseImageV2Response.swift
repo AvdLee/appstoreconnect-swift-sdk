@@ -3,7 +3,7 @@
 
 import Foundation
 
-public struct InAppPurchaseImageV2Response: Codable {
+public struct InAppPurchaseImageV2Response: Codable, Sendable {
 	/// InAppPurchaseImageV2
 	public var data: InAppPurchaseImageV2
 	public var links: DocumentLinks

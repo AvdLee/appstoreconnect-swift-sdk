@@ -3,17 +3,17 @@
 
 import Foundation
 
-public struct AndroidToIosAppMappingDetail: Codable, Identifiable {
+public struct AndroidToIosAppMappingDetail: Codable, Identifiable, Sendable {
 	public var type: `Type`
 	public var id: String
 	public var attributes: Attributes?
 	public var links: ResourceLinks?
 
-	public enum `Type`: String, Codable, CaseIterable {
+	public enum `Type`: String, Codable, CaseIterable, Sendable {
 		case androidToIosAppMappingDetails
 	}
 
-	public struct Attributes: Codable {
+	public struct Attributes: Codable, Sendable {
 		public var packageName: String?
 		public var appSigningKeyPublicCertificateSha256Fingerprints: [String]?
 

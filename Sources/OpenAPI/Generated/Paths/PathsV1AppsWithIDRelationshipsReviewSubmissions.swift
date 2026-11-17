@@ -9,7 +9,7 @@ extension APIEndpoint.V1.Apps.WithID.Relationships {
 		ReviewSubmissions(path: path + "/reviewSubmissions")
 	}
 
-	public struct ReviewSubmissions {
+	public struct ReviewSubmissions: Sendable {
 		/// Path: `/v1/apps/{id}/relationships/reviewSubmissions`
 		public let path: String
 

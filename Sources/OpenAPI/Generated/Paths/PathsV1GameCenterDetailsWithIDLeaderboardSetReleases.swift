@@ -9,7 +9,7 @@ extension APIEndpoint.V1.GameCenterDetails.WithID {
 		LeaderboardSetReleases(path: path + "/leaderboardSetReleases")
 	}
 
-	public struct LeaderboardSetReleases {
+	public struct LeaderboardSetReleases: Sendable {
 		/// Path: `/v1/gameCenterDetails/{id}/leaderboardSetReleases`
 		public let path: String
 
@@ -18,7 +18,7 @@ extension APIEndpoint.V1.GameCenterDetails.WithID {
 			Request(path: path, method: "GET", query: parameters?.asQuery, id: "gameCenterDetails_leaderboardSetReleases_getToManyRelated")
 		}
 
-		public struct GetParameters {
+		public struct GetParameters: Sendable {
 			public var filterLive: [String]?
 			public var filterGameCenterLeaderboardSet: [String]?
 			public var fieldsGameCenterLeaderboardSetReleases: [FieldsGameCenterLeaderboardSetReleases]?
@@ -27,13 +27,13 @@ extension APIEndpoint.V1.GameCenterDetails.WithID {
 			public var limit: Int?
 			public var include: [Include]?
 
-			public enum FieldsGameCenterLeaderboardSetReleases: String, Codable, CaseIterable {
+			public enum FieldsGameCenterLeaderboardSetReleases: String, Codable, CaseIterable, Sendable {
 				case live
 				case gameCenterDetail
 				case gameCenterLeaderboardSet
 			}
 
-			public enum FieldsGameCenterDetails: String, Codable, CaseIterable {
+			public enum FieldsGameCenterDetails: String, Codable, CaseIterable, Sendable {
 				case arcadeEnabled
 				case challengeEnabled
 				case app
@@ -60,7 +60,7 @@ extension APIEndpoint.V1.GameCenterDetails.WithID {
 				case challengesMinimumPlatformVersions
 			}
 
-			public enum FieldsGameCenterLeaderboardSets: String, Codable, CaseIterable {
+			public enum FieldsGameCenterLeaderboardSets: String, Codable, CaseIterable, Sendable {
 				case referenceName
 				case vendorIdentifier
 				case gameCenterDetail
@@ -71,7 +71,7 @@ extension APIEndpoint.V1.GameCenterDetails.WithID {
 				case releases
 			}
 
-			public enum Include: String, Codable, CaseIterable {
+			public enum Include: String, Codable, CaseIterable, Sendable {
 				case gameCenterDetail
 				case gameCenterLeaderboardSet
 			}

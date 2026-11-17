@@ -4,18 +4,18 @@
 import Foundation
 
 @available(*, deprecated, message: "Deprecated")
-public struct GameCenterLeaderboard: Codable, Identifiable {
+public struct GameCenterLeaderboard: Codable, Identifiable, Sendable {
 	public var type: `Type`
 	public var id: String
 	public var attributes: Attributes?
 	public var relationships: Relationships?
 	public var links: ResourceLinks?
 
-	public enum `Type`: String, Codable, CaseIterable {
+	public enum `Type`: String, Codable, CaseIterable, Sendable {
 		case gameCenterLeaderboards
 	}
 
-	public struct Attributes: Codable {
+	public struct Attributes: Codable, Sendable {
 		public var defaultFormatter: GameCenterLeaderboardFormatter?
 		public var referenceName: String?
 		public var vendorIdentifier: String?
@@ -30,17 +30,17 @@ public struct GameCenterLeaderboard: Codable, Identifiable {
 		public var activityProperties: [String: String]?
 		public var visibility: Visibility?
 
-		public enum SubmissionType: String, Codable, CaseIterable {
+		public enum SubmissionType: String, Codable, CaseIterable, Sendable {
 			case bestScore = "BEST_SCORE"
 			case mostRecentScore = "MOST_RECENT_SCORE"
 		}
 
-		public enum ScoreSortType: String, Codable, CaseIterable {
+		public enum ScoreSortType: String, Codable, CaseIterable, Sendable {
 			case asc = "ASC"
 			case desc = "DESC"
 		}
 
-		public enum Visibility: String, Codable, CaseIterable {
+		public enum Visibility: String, Codable, CaseIterable, Sendable {
 			case showForAll = "SHOW_FOR_ALL"
 			case hideForAll = "HIDE_FOR_ALL"
 		}
@@ -96,7 +96,7 @@ public struct GameCenterLeaderboard: Codable, Identifiable {
 		}
 	}
 
-	public struct Relationships: Codable {
+	public struct Relationships: Codable, Sendable {
 		public var gameCenterDetail: GameCenterDetail?
 		public var gameCenterGroup: GameCenterGroup?
 		/// - warning: Deprecated.
@@ -107,14 +107,14 @@ public struct GameCenterLeaderboard: Codable, Identifiable {
 		public var activity: Activity?
 		public var challenge: Challenge?
 
-		public struct GameCenterDetail: Codable {
+		public struct GameCenterDetail: Codable, Sendable {
 			public var data: Data?
 
-			public struct Data: Codable, Identifiable {
+			public struct Data: Codable, Identifiable, Sendable {
 				public var type: `Type`
 				public var id: String
 
-				public enum `Type`: String, Codable, CaseIterable {
+				public enum `Type`: String, Codable, CaseIterable, Sendable {
 					case gameCenterDetails
 				}
 
@@ -151,14 +151,14 @@ public struct GameCenterLeaderboard: Codable, Identifiable {
 			}
 		}
 
-		public struct GameCenterGroup: Codable {
+		public struct GameCenterGroup: Codable, Sendable {
 			public var data: Data?
 
-			public struct Data: Codable, Identifiable {
+			public struct Data: Codable, Identifiable, Sendable {
 				public var type: `Type`
 				public var id: String
 
-				public enum `Type`: String, Codable, CaseIterable {
+				public enum `Type`: String, Codable, CaseIterable, Sendable {
 					case gameCenterGroups
 				}
 
@@ -196,15 +196,15 @@ public struct GameCenterLeaderboard: Codable, Identifiable {
 		}
 
 		@available(*, deprecated, message: "Deprecated")
-		public struct GroupLeaderboard: Codable {
+		public struct GroupLeaderboard: Codable, Sendable {
 			public var links: RelationshipLinks?
 			public var data: Data?
 
-			public struct Data: Codable, Identifiable {
+			public struct Data: Codable, Identifiable, Sendable {
 				public var type: `Type`
 				public var id: String
 
-				public enum `Type`: String, Codable, CaseIterable {
+				public enum `Type`: String, Codable, CaseIterable, Sendable {
 					case gameCenterLeaderboards
 				}
 
@@ -244,15 +244,15 @@ public struct GameCenterLeaderboard: Codable, Identifiable {
 			}
 		}
 
-		public struct GameCenterLeaderboardSets: Codable {
+		public struct GameCenterLeaderboardSets: Codable, Sendable {
 			public var meta: PagingInformation?
 			public var data: [Datum]?
 
-			public struct Datum: Codable, Identifiable {
+			public struct Datum: Codable, Identifiable, Sendable {
 				public var type: `Type`
 				public var id: String
 
-				public enum `Type`: String, Codable, CaseIterable {
+				public enum `Type`: String, Codable, CaseIterable, Sendable {
 					case gameCenterLeaderboardSets
 				}
 
@@ -292,16 +292,16 @@ public struct GameCenterLeaderboard: Codable, Identifiable {
 			}
 		}
 
-		public struct Localizations: Codable {
+		public struct Localizations: Codable, Sendable {
 			public var links: RelationshipLinks?
 			public var meta: PagingInformation?
 			public var data: [Datum]?
 
-			public struct Datum: Codable, Identifiable {
+			public struct Datum: Codable, Identifiable, Sendable {
 				public var type: `Type`
 				public var id: String
 
-				public enum `Type`: String, Codable, CaseIterable {
+				public enum `Type`: String, Codable, CaseIterable, Sendable {
 					case gameCenterLeaderboardLocalizations
 				}
 
@@ -344,16 +344,16 @@ public struct GameCenterLeaderboard: Codable, Identifiable {
 			}
 		}
 
-		public struct Releases: Codable {
+		public struct Releases: Codable, Sendable {
 			public var links: RelationshipLinks?
 			public var meta: PagingInformation?
 			public var data: [Datum]?
 
-			public struct Datum: Codable, Identifiable {
+			public struct Datum: Codable, Identifiable, Sendable {
 				public var type: `Type`
 				public var id: String
 
-				public enum `Type`: String, Codable, CaseIterable {
+				public enum `Type`: String, Codable, CaseIterable, Sendable {
 					case gameCenterLeaderboardReleases
 				}
 
@@ -396,15 +396,15 @@ public struct GameCenterLeaderboard: Codable, Identifiable {
 			}
 		}
 
-		public struct Activity: Codable {
+		public struct Activity: Codable, Sendable {
 			public var links: RelationshipLinks?
 			public var data: Data?
 
-			public struct Data: Codable, Identifiable {
+			public struct Data: Codable, Identifiable, Sendable {
 				public var type: `Type`
 				public var id: String
 
-				public enum `Type`: String, Codable, CaseIterable {
+				public enum `Type`: String, Codable, CaseIterable, Sendable {
 					case gameCenterActivities
 				}
 
@@ -444,15 +444,15 @@ public struct GameCenterLeaderboard: Codable, Identifiable {
 			}
 		}
 
-		public struct Challenge: Codable {
+		public struct Challenge: Codable, Sendable {
 			public var links: RelationshipLinks?
 			public var data: Data?
 
-			public struct Data: Codable, Identifiable {
+			public struct Data: Codable, Identifiable, Sendable {
 				public var type: `Type`
 				public var id: String
 
-				public enum `Type`: String, Codable, CaseIterable {
+				public enum `Type`: String, Codable, CaseIterable, Sendable {
 					case gameCenterChallenges
 				}
 

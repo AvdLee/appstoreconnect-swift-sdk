@@ -3,7 +3,7 @@
 
 import Foundation
 
-public struct AppEventsResponse: Codable {
+public struct AppEventsResponse: Codable, Sendable {
 	public var data: [AppEvent]
 	public var included: [AppEventLocalization]?
 	public var links: PagedDocumentLinks

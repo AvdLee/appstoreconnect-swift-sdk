@@ -3,19 +3,19 @@
 
 import Foundation
 
-public struct AppStoreVersionLocalizationUpdateRequest: Codable {
+public struct AppStoreVersionLocalizationUpdateRequest: Codable, Sendable {
 	public var data: Data
 
-	public struct Data: Codable, Identifiable {
+	public struct Data: Codable, Identifiable, Sendable {
 		public var type: `Type`
 		public var id: String
 		public var attributes: Attributes?
 
-		public enum `Type`: String, Codable, CaseIterable {
+		public enum `Type`: String, Codable, CaseIterable, Sendable {
 			case appStoreVersionLocalizations
 		}
 
-		public struct Attributes: Codable {
+		public struct Attributes: Codable, Sendable {
 			public var description: String?
 			public var keywords: String?
 			public var marketingURL: URL?

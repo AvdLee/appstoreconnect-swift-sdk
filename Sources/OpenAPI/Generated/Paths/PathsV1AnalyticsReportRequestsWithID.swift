@@ -9,7 +9,7 @@ extension APIEndpoint.V1.AnalyticsReportRequests {
 		WithID(path: "\(path)/\(id)")
 	}
 
-	public struct WithID {
+	public struct WithID: Sendable {
 		/// Path: `/v1/analyticsReportRequests/{id}`
 		public let path: String
 
@@ -17,25 +17,25 @@ extension APIEndpoint.V1.AnalyticsReportRequests {
 			Request(path: path, method: "GET", query: parameters?.asQuery, id: "analyticsReportRequests_getInstance")
 		}
 
-		public struct GetParameters {
+		public struct GetParameters: Sendable {
 			public var fieldsAnalyticsReportRequests: [FieldsAnalyticsReportRequests]?
 			public var fieldsAnalyticsReports: [FieldsAnalyticsReports]?
 			public var include: [Include]?
 			public var limitReports: Int?
 
-			public enum FieldsAnalyticsReportRequests: String, Codable, CaseIterable {
+			public enum FieldsAnalyticsReportRequests: String, Codable, CaseIterable, Sendable {
 				case accessType
 				case stoppedDueToInactivity
 				case reports
 			}
 
-			public enum FieldsAnalyticsReports: String, Codable, CaseIterable {
+			public enum FieldsAnalyticsReports: String, Codable, CaseIterable, Sendable {
 				case name
 				case category
 				case instances
 			}
 
-			public enum Include: String, Codable, CaseIterable {
+			public enum Include: String, Codable, CaseIterable, Sendable {
 				case reports
 			}
 

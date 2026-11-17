@@ -9,7 +9,7 @@ extension APIEndpoint.V2 {
 		SubscriptionLocalizations(path: path + "/subscriptionLocalizations")
 	}
 
-	public struct SubscriptionLocalizations {
+	public struct SubscriptionLocalizations: Sendable {
 		/// Path: `/v2/subscriptionLocalizations`
 		public let path: String
 

@@ -3,7 +3,7 @@
 
 import Foundation
 
-public enum AnyJSON: Equatable, Codable {
+public enum AnyJSON: Equatable, Codable, Sendable {
 	case string(String)
 	case number(Double)
 	case object([String: AnyJSON])

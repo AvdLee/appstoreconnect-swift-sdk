@@ -9,7 +9,7 @@ extension APIEndpoint.V1.GameCenterLeaderboardSets.WithID {
 		Localizations(path: path + "/localizations")
 	}
 
-	public struct Localizations {
+	public struct Localizations: Sendable {
 		/// Path: `/v1/gameCenterLeaderboardSets/{id}/localizations`
 		public let path: String
 
@@ -18,21 +18,21 @@ extension APIEndpoint.V1.GameCenterLeaderboardSets.WithID {
 			Request(path: path, method: "GET", query: parameters?.asQuery, id: "gameCenterLeaderboardSets_localizations_getToManyRelated")
 		}
 
-		public struct GetParameters {
+		public struct GetParameters: Sendable {
 			public var fieldsGameCenterLeaderboardSetLocalizations: [FieldsGameCenterLeaderboardSetLocalizations]?
 			public var fieldsGameCenterLeaderboardSets: [FieldsGameCenterLeaderboardSets]?
 			public var fieldsGameCenterLeaderboardSetImages: [FieldsGameCenterLeaderboardSetImages]?
 			public var limit: Int?
 			public var include: [Include]?
 
-			public enum FieldsGameCenterLeaderboardSetLocalizations: String, Codable, CaseIterable {
+			public enum FieldsGameCenterLeaderboardSetLocalizations: String, Codable, CaseIterable, Sendable {
 				case locale
 				case name
 				case gameCenterLeaderboardSet
 				case gameCenterLeaderboardSetImage
 			}
 
-			public enum FieldsGameCenterLeaderboardSets: String, Codable, CaseIterable {
+			public enum FieldsGameCenterLeaderboardSets: String, Codable, CaseIterable, Sendable {
 				case referenceName
 				case vendorIdentifier
 				case gameCenterDetail
@@ -43,7 +43,7 @@ extension APIEndpoint.V1.GameCenterLeaderboardSets.WithID {
 				case releases
 			}
 
-			public enum FieldsGameCenterLeaderboardSetImages: String, Codable, CaseIterable {
+			public enum FieldsGameCenterLeaderboardSetImages: String, Codable, CaseIterable, Sendable {
 				case fileSize
 				case fileName
 				case imageAsset
@@ -52,7 +52,7 @@ extension APIEndpoint.V1.GameCenterLeaderboardSets.WithID {
 				case gameCenterLeaderboardSetLocalization
 			}
 
-			public enum Include: String, Codable, CaseIterable {
+			public enum Include: String, Codable, CaseIterable, Sendable {
 				case gameCenterLeaderboardSet
 				case gameCenterLeaderboardSetImage
 			}

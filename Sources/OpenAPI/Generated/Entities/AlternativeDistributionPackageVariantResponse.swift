@@ -3,7 +3,7 @@
 
 import Foundation
 
-public struct AlternativeDistributionPackageVariantResponse: Codable {
+public struct AlternativeDistributionPackageVariantResponse: Codable, Sendable {
 	/// AlternativeDistributionPackageVariant
 	public var data: AlternativeDistributionPackageVariant
 	public var links: DocumentLinks

@@ -3,17 +3,17 @@
 
 import Foundation
 
-public struct AgeRatingDeclaration: Codable, Identifiable {
+public struct AgeRatingDeclaration: Codable, Identifiable, Sendable {
 	public var type: `Type`
 	public var id: String
 	public var attributes: Attributes?
 	public var links: ResourceLinks?
 
-	public enum `Type`: String, Codable, CaseIterable {
+	public enum `Type`: String, Codable, CaseIterable, Sendable {
 		case ageRatingDeclarations
 	}
 
-	public struct Attributes: Codable {
+	public struct Attributes: Codable, Sendable {
 		public var isAdvertising: Bool?
 		public var alcoholTobaccoOrDrugUseOrReferences: AlcoholTobaccoOrDrugUseOrReferences?
 		public var contests: Contests?
@@ -46,7 +46,7 @@ public struct AgeRatingDeclaration: Codable, Identifiable {
 		public var gracRatingClassificationNumber: String?
 		public var developerAgeRatingInfoURL: URL?
 
-		public enum AlcoholTobaccoOrDrugUseOrReferences: String, Codable, CaseIterable {
+		public enum AlcoholTobaccoOrDrugUseOrReferences: String, Codable, CaseIterable, Sendable {
 			case `none` = "NONE"
 			case infrequentOrMild = "INFREQUENT_OR_MILD"
 			case frequentOrIntense = "FREQUENT_OR_INTENSE"
@@ -54,7 +54,7 @@ public struct AgeRatingDeclaration: Codable, Identifiable {
 			case frequent = "FREQUENT"
 		}
 
-		public enum Contests: String, Codable, CaseIterable {
+		public enum Contests: String, Codable, CaseIterable, Sendable {
 			case `none` = "NONE"
 			case infrequentOrMild = "INFREQUENT_OR_MILD"
 			case frequentOrIntense = "FREQUENT_OR_INTENSE"
@@ -62,7 +62,7 @@ public struct AgeRatingDeclaration: Codable, Identifiable {
 			case frequent = "FREQUENT"
 		}
 
-		public enum GamblingSimulated: String, Codable, CaseIterable {
+		public enum GamblingSimulated: String, Codable, CaseIterable, Sendable {
 			case `none` = "NONE"
 			case infrequentOrMild = "INFREQUENT_OR_MILD"
 			case frequentOrIntense = "FREQUENT_OR_INTENSE"
@@ -70,7 +70,7 @@ public struct AgeRatingDeclaration: Codable, Identifiable {
 			case frequent = "FREQUENT"
 		}
 
-		public enum GunsOrOtherWeapons: String, Codable, CaseIterable {
+		public enum GunsOrOtherWeapons: String, Codable, CaseIterable, Sendable {
 			case `none` = "NONE"
 			case infrequentOrMild = "INFREQUENT_OR_MILD"
 			case frequentOrIntense = "FREQUENT_OR_INTENSE"
@@ -78,7 +78,7 @@ public struct AgeRatingDeclaration: Codable, Identifiable {
 			case frequent = "FREQUENT"
 		}
 
-		public enum MedicalOrTreatmentInformation: String, Codable, CaseIterable {
+		public enum MedicalOrTreatmentInformation: String, Codable, CaseIterable, Sendable {
 			case `none` = "NONE"
 			case infrequentOrMild = "INFREQUENT_OR_MILD"
 			case frequentOrIntense = "FREQUENT_OR_INTENSE"
@@ -86,7 +86,7 @@ public struct AgeRatingDeclaration: Codable, Identifiable {
 			case frequent = "FREQUENT"
 		}
 
-		public enum ProfanityOrCrudeHumor: String, Codable, CaseIterable {
+		public enum ProfanityOrCrudeHumor: String, Codable, CaseIterable, Sendable {
 			case `none` = "NONE"
 			case infrequentOrMild = "INFREQUENT_OR_MILD"
 			case frequentOrIntense = "FREQUENT_OR_INTENSE"
@@ -94,7 +94,7 @@ public struct AgeRatingDeclaration: Codable, Identifiable {
 			case frequent = "FREQUENT"
 		}
 
-		public enum SexualContentGraphicAndNudity: String, Codable, CaseIterable {
+		public enum SexualContentGraphicAndNudity: String, Codable, CaseIterable, Sendable {
 			case `none` = "NONE"
 			case infrequentOrMild = "INFREQUENT_OR_MILD"
 			case frequentOrIntense = "FREQUENT_OR_INTENSE"
@@ -102,7 +102,7 @@ public struct AgeRatingDeclaration: Codable, Identifiable {
 			case frequent = "FREQUENT"
 		}
 
-		public enum SexualContentOrNudity: String, Codable, CaseIterable {
+		public enum SexualContentOrNudity: String, Codable, CaseIterable, Sendable {
 			case `none` = "NONE"
 			case infrequentOrMild = "INFREQUENT_OR_MILD"
 			case frequentOrIntense = "FREQUENT_OR_INTENSE"
@@ -110,7 +110,7 @@ public struct AgeRatingDeclaration: Codable, Identifiable {
 			case frequent = "FREQUENT"
 		}
 
-		public enum HorrorOrFearThemes: String, Codable, CaseIterable {
+		public enum HorrorOrFearThemes: String, Codable, CaseIterable, Sendable {
 			case `none` = "NONE"
 			case infrequentOrMild = "INFREQUENT_OR_MILD"
 			case frequentOrIntense = "FREQUENT_OR_INTENSE"
@@ -118,7 +118,7 @@ public struct AgeRatingDeclaration: Codable, Identifiable {
 			case frequent = "FREQUENT"
 		}
 
-		public enum MatureOrSuggestiveThemes: String, Codable, CaseIterable {
+		public enum MatureOrSuggestiveThemes: String, Codable, CaseIterable, Sendable {
 			case `none` = "NONE"
 			case infrequentOrMild = "INFREQUENT_OR_MILD"
 			case frequentOrIntense = "FREQUENT_OR_INTENSE"
@@ -126,7 +126,7 @@ public struct AgeRatingDeclaration: Codable, Identifiable {
 			case frequent = "FREQUENT"
 		}
 
-		public enum ViolenceCartoonOrFantasy: String, Codable, CaseIterable {
+		public enum ViolenceCartoonOrFantasy: String, Codable, CaseIterable, Sendable {
 			case `none` = "NONE"
 			case infrequentOrMild = "INFREQUENT_OR_MILD"
 			case frequentOrIntense = "FREQUENT_OR_INTENSE"
@@ -134,7 +134,7 @@ public struct AgeRatingDeclaration: Codable, Identifiable {
 			case frequent = "FREQUENT"
 		}
 
-		public enum ViolenceRealisticProlongedGraphicOrSadistic: String, Codable, CaseIterable {
+		public enum ViolenceRealisticProlongedGraphicOrSadistic: String, Codable, CaseIterable, Sendable {
 			case `none` = "NONE"
 			case infrequentOrMild = "INFREQUENT_OR_MILD"
 			case frequentOrIntense = "FREQUENT_OR_INTENSE"
@@ -142,7 +142,7 @@ public struct AgeRatingDeclaration: Codable, Identifiable {
 			case frequent = "FREQUENT"
 		}
 
-		public enum ViolenceRealistic: String, Codable, CaseIterable {
+		public enum ViolenceRealistic: String, Codable, CaseIterable, Sendable {
 			case `none` = "NONE"
 			case infrequentOrMild = "INFREQUENT_OR_MILD"
 			case frequentOrIntense = "FREQUENT_OR_INTENSE"
@@ -151,7 +151,7 @@ public struct AgeRatingDeclaration: Codable, Identifiable {
 		}
 
 		@available(*, deprecated, message: "Deprecated")
-		public enum AgeRatingOverride: String, Codable, CaseIterable {
+		public enum AgeRatingOverride: String, Codable, CaseIterable, Sendable {
 			case `none` = "NONE"
 			case ninePlus = "NINE_PLUS"
 			case thirteenPlus = "THIRTEEN_PLUS"
@@ -160,7 +160,7 @@ public struct AgeRatingDeclaration: Codable, Identifiable {
 			case unrated = "UNRATED"
 		}
 
-		public enum AgeRatingOverrideV2: String, Codable, CaseIterable {
+		public enum AgeRatingOverrideV2: String, Codable, CaseIterable, Sendable {
 			case `none` = "NONE"
 			case ninePlus = "NINE_PLUS"
 			case thirteenPlus = "THIRTEEN_PLUS"
@@ -169,7 +169,7 @@ public struct AgeRatingDeclaration: Codable, Identifiable {
 			case unrated = "UNRATED"
 		}
 
-		public enum KoreaAgeRatingOverride: String, Codable, CaseIterable {
+		public enum KoreaAgeRatingOverride: String, Codable, CaseIterable, Sendable {
 			case `none` = "NONE"
 			case all = "ALL"
 			case twelvePlus = "TWELVE_PLUS"

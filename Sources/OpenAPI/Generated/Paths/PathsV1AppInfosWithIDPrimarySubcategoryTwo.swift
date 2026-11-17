@@ -9,7 +9,7 @@ extension APIEndpoint.V1.AppInfos.WithID {
 		PrimarySubcategoryTwo(path: path + "/primarySubcategoryTwo")
 	}
 
-	public struct PrimarySubcategoryTwo {
+	public struct PrimarySubcategoryTwo: Sendable {
 		/// Path: `/v1/appInfos/{id}/primarySubcategoryTwo`
 		public let path: String
 
@@ -17,18 +17,18 @@ extension APIEndpoint.V1.AppInfos.WithID {
 			Request(path: path, method: "GET", query: parameters?.asQuery, id: "appInfos_primarySubcategoryTwo_getToOneRelated")
 		}
 
-		public struct GetParameters {
+		public struct GetParameters: Sendable {
 			public var fieldsAppCategories: [FieldsAppCategories]?
 			public var include: [Include]?
 			public var limitSubcategories: Int?
 
-			public enum FieldsAppCategories: String, Codable, CaseIterable {
+			public enum FieldsAppCategories: String, Codable, CaseIterable, Sendable {
 				case platforms
 				case subcategories
 				case parent
 			}
 
-			public enum Include: String, Codable, CaseIterable {
+			public enum Include: String, Codable, CaseIterable, Sendable {
 				case subcategories
 				case parent
 			}

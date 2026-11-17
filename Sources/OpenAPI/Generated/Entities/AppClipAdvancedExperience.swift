@@ -3,18 +3,18 @@
 
 import Foundation
 
-public struct AppClipAdvancedExperience: Codable, Identifiable {
+public struct AppClipAdvancedExperience: Codable, Identifiable, Sendable {
 	public var type: `Type`
 	public var id: String
 	public var attributes: Attributes?
 	public var relationships: Relationships?
 	public var links: ResourceLinks?
 
-	public enum `Type`: String, Codable, CaseIterable {
+	public enum `Type`: String, Codable, CaseIterable, Sendable {
 		case appClipAdvancedExperiences
 	}
 
-	public struct Attributes: Codable {
+	public struct Attributes: Codable, Sendable {
 		public var link: URL?
 		public var version: Int?
 		public var status: Status?
@@ -25,13 +25,13 @@ public struct AppClipAdvancedExperience: Codable, Identifiable {
 		public var businessCategory: BusinessCategory?
 		public var defaultLanguage: AppClipAdvancedExperienceLanguage?
 
-		public enum Status: String, Codable, CaseIterable {
+		public enum Status: String, Codable, CaseIterable, Sendable {
 			case received = "RECEIVED"
 			case deactivated = "DEACTIVATED"
 			case appTransferInProgress = "APP_TRANSFER_IN_PROGRESS"
 		}
 
-		public struct Place: Codable {
+		public struct Place: Codable, Sendable {
 			public var placeID: String?
 			public var names: [String]?
 			public var mainAddress: MainAddress?
@@ -42,11 +42,11 @@ public struct AppClipAdvancedExperience: Codable, Identifiable {
 			public var homePage: String?
 			public var categories: [String]?
 
-			public struct MainAddress: Codable {
+			public struct MainAddress: Codable, Sendable {
 				public var fullAddress: String?
 				public var structuredAddress: StructuredAddress?
 
-				public struct StructuredAddress: Codable {
+				public struct StructuredAddress: Codable, Sendable {
 					public var streetAddress: [String]?
 					public var floor: String?
 					public var neighborhood: String?
@@ -106,11 +106,11 @@ public struct AppClipAdvancedExperience: Codable, Identifiable {
 				}
 			}
 
-			public struct DisplayPoint: Codable {
+			public struct DisplayPoint: Codable, Sendable {
 				public var coordinates: Coordinates?
 				public var source: Source?
 
-				public struct Coordinates: Codable {
+				public struct Coordinates: Codable, Sendable {
 					public var latitude: Double?
 					public var longitude: Double?
 
@@ -132,7 +132,7 @@ public struct AppClipAdvancedExperience: Codable, Identifiable {
 					}
 				}
 
-				public enum Source: String, Codable, CaseIterable {
+				public enum Source: String, Codable, CaseIterable, Sendable {
 					case calculated = "CALCULATED"
 					case manuallyPlaced = "MANUALLY_PLACED"
 				}
@@ -155,7 +155,7 @@ public struct AppClipAdvancedExperience: Codable, Identifiable {
 				}
 			}
 
-			public enum MapAction: String, Codable, CaseIterable {
+			public enum MapAction: String, Codable, CaseIterable, Sendable {
 				case buyTickets = "BUY_TICKETS"
 				case viewAvailability = "VIEW_AVAILABILITY"
 				case viewPricing = "VIEW_PRICING"
@@ -199,18 +199,18 @@ public struct AppClipAdvancedExperience: Codable, Identifiable {
 				case payToPark = "PAY_TO_PARK"
 			}
 
-			public enum Relationship: String, Codable, CaseIterable {
+			public enum Relationship: String, Codable, CaseIterable, Sendable {
 				case owner = "OWNER"
 				case authorized = "AUTHORIZED"
 				case other = "OTHER"
 			}
 
-			public struct PhoneNumber: Codable {
+			public struct PhoneNumber: Codable, Sendable {
 				public var number: String?
 				public var type: `Type`?
 				public var intent: String?
 
-				public enum `Type`: String, Codable, CaseIterable {
+				public enum `Type`: String, Codable, CaseIterable, Sendable {
 					case fax = "FAX"
 					case landline = "LANDLINE"
 					case mobile = "MOBILE"
@@ -277,13 +277,13 @@ public struct AppClipAdvancedExperience: Codable, Identifiable {
 			}
 		}
 
-		public enum PlaceStatus: String, Codable, CaseIterable {
+		public enum PlaceStatus: String, Codable, CaseIterable, Sendable {
 			case pending = "PENDING"
 			case matched = "MATCHED"
 			case noMatch = "NO_MATCH"
 		}
 
-		public enum BusinessCategory: String, Codable, CaseIterable {
+		public enum BusinessCategory: String, Codable, CaseIterable, Sendable {
 			case automotive = "AUTOMOTIVE"
 			case beauty = "BEAUTY"
 			case bikes = "BIKES"
@@ -352,19 +352,19 @@ public struct AppClipAdvancedExperience: Codable, Identifiable {
 		}
 	}
 
-	public struct Relationships: Codable {
+	public struct Relationships: Codable, Sendable {
 		public var appClip: AppClip?
 		public var headerImage: HeaderImage?
 		public var localizations: Localizations?
 
-		public struct AppClip: Codable {
+		public struct AppClip: Codable, Sendable {
 			public var data: Data?
 
-			public struct Data: Codable, Identifiable {
+			public struct Data: Codable, Identifiable, Sendable {
 				public var type: `Type`
 				public var id: String
 
-				public enum `Type`: String, Codable, CaseIterable {
+				public enum `Type`: String, Codable, CaseIterable, Sendable {
 					case appClips
 				}
 
@@ -401,14 +401,14 @@ public struct AppClipAdvancedExperience: Codable, Identifiable {
 			}
 		}
 
-		public struct HeaderImage: Codable {
+		public struct HeaderImage: Codable, Sendable {
 			public var data: Data?
 
-			public struct Data: Codable, Identifiable {
+			public struct Data: Codable, Identifiable, Sendable {
 				public var type: `Type`
 				public var id: String
 
-				public enum `Type`: String, Codable, CaseIterable {
+				public enum `Type`: String, Codable, CaseIterable, Sendable {
 					case appClipAdvancedExperienceImages
 				}
 
@@ -445,15 +445,15 @@ public struct AppClipAdvancedExperience: Codable, Identifiable {
 			}
 		}
 
-		public struct Localizations: Codable {
+		public struct Localizations: Codable, Sendable {
 			public var meta: PagingInformation?
 			public var data: [Datum]?
 
-			public struct Datum: Codable, Identifiable {
+			public struct Datum: Codable, Identifiable, Sendable {
 				public var type: `Type`
 				public var id: String
 
-				public enum `Type`: String, Codable, CaseIterable {
+				public enum `Type`: String, Codable, CaseIterable, Sendable {
 					case appClipAdvancedExperienceLocalizations
 				}
 

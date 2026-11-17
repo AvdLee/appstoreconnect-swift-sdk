@@ -9,7 +9,7 @@ extension APIEndpoint.V1 {
 		BuildBundles(path: path + "/buildBundles")
 	}
 
-	public struct BuildBundles {
+	public struct BuildBundles: Sendable {
 		/// Path: `/v1/buildBundles`
 		public let path: String
 	}

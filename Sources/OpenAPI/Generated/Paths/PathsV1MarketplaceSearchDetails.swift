@@ -9,7 +9,7 @@ extension APIEndpoint.V1 {
 		MarketplaceSearchDetails(path: path + "/marketplaceSearchDetails")
 	}
 
-	public struct MarketplaceSearchDetails {
+	public struct MarketplaceSearchDetails: Sendable {
 		/// Path: `/v1/marketplaceSearchDetails`
 		public let path: String
 

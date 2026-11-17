@@ -3,20 +3,20 @@
 
 import Foundation
 
-public struct GameCenterDetailUpdateRequest: Codable {
+public struct GameCenterDetailUpdateRequest: Codable, Sendable {
 	public var data: Data
 
-	public struct Data: Codable, Identifiable {
+	public struct Data: Codable, Identifiable, Sendable {
 		public var type: `Type`
 		public var id: String
 		public var attributes: Attributes?
 		public var relationships: Relationships?
 
-		public enum `Type`: String, Codable, CaseIterable {
+		public enum `Type`: String, Codable, CaseIterable, Sendable {
 			case gameCenterDetails
 		}
 
-		public struct Attributes: Codable {
+		public struct Attributes: Codable, Sendable {
 			/// - warning: Deprecated.
 			public var isChallengeEnabled: Bool?
 
@@ -35,7 +35,7 @@ public struct GameCenterDetailUpdateRequest: Codable {
 			}
 		}
 
-		public struct Relationships: Codable {
+		public struct Relationships: Codable, Sendable {
 			public var gameCenterGroup: GameCenterGroup?
 			/// - warning: Deprecated.
 			public var defaultLeaderboard: DefaultLeaderboard?
@@ -44,14 +44,14 @@ public struct GameCenterDetailUpdateRequest: Codable {
 			public var defaultGroupLeaderboard: DefaultGroupLeaderboard?
 			public var defaultGroupLeaderboardV2: DefaultGroupLeaderboardV2?
 
-			public struct GameCenterGroup: Codable {
+			public struct GameCenterGroup: Codable, Sendable {
 				public var data: Data?
 
-				public struct Data: Codable, Identifiable {
+				public struct Data: Codable, Identifiable, Sendable {
 					public var type: `Type`
 					public var id: String
 
-					public enum `Type`: String, Codable, CaseIterable {
+					public enum `Type`: String, Codable, CaseIterable, Sendable {
 						case gameCenterGroups
 					}
 
@@ -89,14 +89,14 @@ public struct GameCenterDetailUpdateRequest: Codable {
 			}
 
 			@available(*, deprecated, message: "Deprecated")
-			public struct DefaultLeaderboard: Codable {
+			public struct DefaultLeaderboard: Codable, Sendable {
 				public var data: Data?
 
-				public struct Data: Codable, Identifiable {
+				public struct Data: Codable, Identifiable, Sendable {
 					public var type: `Type`
 					public var id: String
 
-					public enum `Type`: String, Codable, CaseIterable {
+					public enum `Type`: String, Codable, CaseIterable, Sendable {
 						case gameCenterLeaderboards
 					}
 
@@ -133,14 +133,14 @@ public struct GameCenterDetailUpdateRequest: Codable {
 				}
 			}
 
-			public struct DefaultLeaderboardV2: Codable {
+			public struct DefaultLeaderboardV2: Codable, Sendable {
 				public var data: Data?
 
-				public struct Data: Codable, Identifiable {
+				public struct Data: Codable, Identifiable, Sendable {
 					public var type: `Type`
 					public var id: String
 
-					public enum `Type`: String, Codable, CaseIterable {
+					public enum `Type`: String, Codable, CaseIterable, Sendable {
 						case gameCenterLeaderboards
 					}
 
@@ -178,14 +178,14 @@ public struct GameCenterDetailUpdateRequest: Codable {
 			}
 
 			@available(*, deprecated, message: "Deprecated")
-			public struct DefaultGroupLeaderboard: Codable {
+			public struct DefaultGroupLeaderboard: Codable, Sendable {
 				public var data: Data?
 
-				public struct Data: Codable, Identifiable {
+				public struct Data: Codable, Identifiable, Sendable {
 					public var type: `Type`
 					public var id: String
 
-					public enum `Type`: String, Codable, CaseIterable {
+					public enum `Type`: String, Codable, CaseIterable, Sendable {
 						case gameCenterLeaderboards
 					}
 
@@ -222,14 +222,14 @@ public struct GameCenterDetailUpdateRequest: Codable {
 				}
 			}
 
-			public struct DefaultGroupLeaderboardV2: Codable {
+			public struct DefaultGroupLeaderboardV2: Codable, Sendable {
 				public var data: Data?
 
-				public struct Data: Codable, Identifiable {
+				public struct Data: Codable, Identifiable, Sendable {
 					public var type: `Type`
 					public var id: String
 
-					public enum `Type`: String, Codable, CaseIterable {
+					public enum `Type`: String, Codable, CaseIterable, Sendable {
 						case gameCenterLeaderboards
 					}
 

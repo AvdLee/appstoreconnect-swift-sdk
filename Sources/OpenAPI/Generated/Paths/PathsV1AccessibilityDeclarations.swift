@@ -9,7 +9,7 @@ extension APIEndpoint.V1 {
 		AccessibilityDeclarations(path: path + "/accessibilityDeclarations")
 	}
 
-	public struct AccessibilityDeclarations {
+	public struct AccessibilityDeclarations: Sendable {
 		/// Path: `/v1/accessibilityDeclarations`
 		public let path: String
 

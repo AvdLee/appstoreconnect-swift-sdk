@@ -3,7 +3,7 @@
 
 import Foundation
 
-public struct CiPullRequestStartCondition: Codable {
+public struct CiPullRequestStartCondition: Codable, Sendable {
 	public var source: CiBranchPatterns?
 	public var destination: CiBranchPatterns?
 	public var filesAndFoldersRule: CiFilesAndFoldersRule?

@@ -9,7 +9,7 @@ extension APIEndpoint.V1.AppCustomProductPageLocalizations.WithID {
 		AppPreviewSets(path: path + "/appPreviewSets")
 	}
 
-	public struct AppPreviewSets {
+	public struct AppPreviewSets: Sendable {
 		/// Path: `/v1/appCustomProductPageLocalizations/{id}/appPreviewSets`
 		public let path: String
 
@@ -17,7 +17,7 @@ extension APIEndpoint.V1.AppCustomProductPageLocalizations.WithID {
 			Request(path: path, method: "GET", query: parameters?.asQuery, id: "appCustomProductPageLocalizations_appPreviewSets_getToManyRelated")
 		}
 
-		public struct GetParameters {
+		public struct GetParameters: Sendable {
 			public var filterPreviewType: [FilterPreviewType]?
 			public var filterAppStoreVersionLocalization: [String]?
 			public var filterAppStoreVersionExperimentTreatmentLocalization: [String]?
@@ -30,7 +30,7 @@ extension APIEndpoint.V1.AppCustomProductPageLocalizations.WithID {
 			public var include: [Include]?
 			public var limitAppPreviews: Int?
 
-			public enum FilterPreviewType: String, Codable, CaseIterable {
+			public enum FilterPreviewType: String, Codable, CaseIterable, Sendable {
 				case iphone67 = "IPHONE_67"
 				case iphone61 = "IPHONE_61"
 				case iphone65 = "IPHONE_65"
@@ -49,7 +49,7 @@ extension APIEndpoint.V1.AppCustomProductPageLocalizations.WithID {
 				case appleVisionPro = "APPLE_VISION_PRO"
 			}
 
-			public enum FieldsAppPreviewSets: String, Codable, CaseIterable {
+			public enum FieldsAppPreviewSets: String, Codable, CaseIterable, Sendable {
 				case previewType
 				case appStoreVersionLocalization
 				case appCustomProductPageLocalization
@@ -57,7 +57,7 @@ extension APIEndpoint.V1.AppCustomProductPageLocalizations.WithID {
 				case appPreviews
 			}
 
-			public enum FieldsAppStoreVersionLocalizations: String, Codable, CaseIterable {
+			public enum FieldsAppStoreVersionLocalizations: String, Codable, CaseIterable, Sendable {
 				case description
 				case locale
 				case keywords
@@ -72,7 +72,7 @@ extension APIEndpoint.V1.AppCustomProductPageLocalizations.WithID {
 				case placements
 			}
 
-			public enum FieldsAppCustomProductPageLocalizations: String, Codable, CaseIterable {
+			public enum FieldsAppCustomProductPageLocalizations: String, Codable, CaseIterable, Sendable {
 				case locale
 				case promotionalText
 				case appCustomProductPageVersion
@@ -82,7 +82,7 @@ extension APIEndpoint.V1.AppCustomProductPageLocalizations.WithID {
 				case placements
 			}
 
-			public enum FieldsAppStoreVersionExperimentTreatmentLocalizations: String, Codable, CaseIterable {
+			public enum FieldsAppStoreVersionExperimentTreatmentLocalizations: String, Codable, CaseIterable, Sendable {
 				case locale
 				case appStoreVersionExperimentTreatment
 				case appScreenshotSets
@@ -90,7 +90,7 @@ extension APIEndpoint.V1.AppCustomProductPageLocalizations.WithID {
 				case placements
 			}
 
-			public enum FieldsAppPreviews: String, Codable, CaseIterable {
+			public enum FieldsAppPreviews: String, Codable, CaseIterable, Sendable {
 				case fileSize
 				case fileName
 				case sourceFileChecksum
@@ -105,7 +105,7 @@ extension APIEndpoint.V1.AppCustomProductPageLocalizations.WithID {
 				case appPreviewSet
 			}
 
-			public enum Include: String, Codable, CaseIterable {
+			public enum Include: String, Codable, CaseIterable, Sendable {
 				case appStoreVersionLocalization
 				case appCustomProductPageLocalization
 				case appStoreVersionExperimentTreatmentLocalization

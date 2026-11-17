@@ -3,19 +3,19 @@
 
 import Foundation
 
-public struct GameCenterActivityUpdateRequest: Codable {
+public struct GameCenterActivityUpdateRequest: Codable, Sendable {
 	public var data: Data
 
-	public struct Data: Codable, Identifiable {
+	public struct Data: Codable, Identifiable, Sendable {
 		public var type: `Type`
 		public var id: String
 		public var attributes: Attributes?
 
-		public enum `Type`: String, Codable, CaseIterable {
+		public enum `Type`: String, Codable, CaseIterable, Sendable {
 			case gameCenterActivities
 		}
 
-		public struct Attributes: Codable {
+		public struct Attributes: Codable, Sendable {
 			public var referenceName: String?
 			public var playStyle: PlayStyle?
 			public var minimumPlayersCount: Int?
@@ -24,7 +24,7 @@ public struct GameCenterActivityUpdateRequest: Codable {
 			public var isArchived: Bool?
 			public var properties: [String: String]?
 
-			public enum PlayStyle: String, Codable, CaseIterable {
+			public enum PlayStyle: String, Codable, CaseIterable, Sendable {
 				case asynchronous = "ASYNCHRONOUS"
 				case synchronous = "SYNCHRONOUS"
 			}

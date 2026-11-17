@@ -3,18 +3,18 @@
 
 import Foundation
 
-public struct GameCenterScoreModeration: Codable, Identifiable {
+public struct GameCenterScoreModeration: Codable, Identifiable, Sendable {
 	public var type: `Type`
 	public var id: String
 	public var attributes: Attributes?
 	public var relationships: Relationships?
 	public var links: ResourceLinks?
 
-	public enum `Type`: String, Codable, CaseIterable {
+	public enum `Type`: String, Codable, CaseIterable, Sendable {
 		case gameCenterScoreModerations
 	}
 
-	public struct Attributes: Codable {
+	public struct Attributes: Codable, Sendable {
 		public var rank: String?
 		public var score: String?
 		public var submittedDate: Date?
@@ -56,17 +56,17 @@ public struct GameCenterScoreModeration: Codable, Identifiable {
 		}
 	}
 
-	public struct Relationships: Codable {
+	public struct Relationships: Codable, Sendable {
 		public var player: Player?
 
-		public struct Player: Codable {
+		public struct Player: Codable, Sendable {
 			public var data: Data?
 
-			public struct Data: Codable, Identifiable {
+			public struct Data: Codable, Identifiable, Sendable {
 				public var type: `Type`
 				public var id: String
 
-				public enum `Type`: String, Codable, CaseIterable {
+				public enum `Type`: String, Codable, CaseIterable, Sendable {
 					case gameCenterDetailPlayers
 				}
 

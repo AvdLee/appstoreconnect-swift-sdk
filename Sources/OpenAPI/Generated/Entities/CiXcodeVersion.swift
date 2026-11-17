@@ -3,29 +3,29 @@
 
 import Foundation
 
-public struct CiXcodeVersion: Codable, Identifiable {
+public struct CiXcodeVersion: Codable, Identifiable, Sendable {
 	public var type: `Type`
 	public var id: String
 	public var attributes: Attributes?
 	public var relationships: Relationships?
 	public var links: ResourceLinks?
 
-	public enum `Type`: String, Codable, CaseIterable {
+	public enum `Type`: String, Codable, CaseIterable, Sendable {
 		case ciXcodeVersions
 	}
 
-	public struct Attributes: Codable {
+	public struct Attributes: Codable, Sendable {
 		public var version: String?
 		public var name: String?
 		public var testDestinations: [TestDestination]?
 
-		public struct TestDestination: Codable {
+		public struct TestDestination: Codable, Sendable {
 			public var deviceTypeName: String?
 			public var deviceTypeIdentifier: String?
 			public var availableRuntimes: [AvailableRuntime]?
 			public var kind: CiTestDestinationKind?
 
-			public struct AvailableRuntime: Codable {
+			public struct AvailableRuntime: Codable, Sendable {
 				public var runtimeName: String?
 				public var runtimeIdentifier: String?
 
@@ -92,19 +92,19 @@ public struct CiXcodeVersion: Codable, Identifiable {
 		}
 	}
 
-	public struct Relationships: Codable {
+	public struct Relationships: Codable, Sendable {
 		public var macOsVersions: MacOsVersions?
 
-		public struct MacOsVersions: Codable {
+		public struct MacOsVersions: Codable, Sendable {
 			public var links: RelationshipLinks?
 			public var meta: PagingInformation?
 			public var data: [Datum]?
 
-			public struct Datum: Codable, Identifiable {
+			public struct Datum: Codable, Identifiable, Sendable {
 				public var type: `Type`
 				public var id: String
 
-				public enum `Type`: String, Codable, CaseIterable {
+				public enum `Type`: String, Codable, CaseIterable, Sendable {
 					case ciMacOsVersions
 				}
 

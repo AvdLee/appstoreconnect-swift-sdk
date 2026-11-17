@@ -9,7 +9,7 @@ extension APIEndpoint.V1.GameCenterMatchmakingRuleSets.WithID {
 		Teams(path: path + "/teams")
 	}
 
-	public struct Teams {
+	public struct Teams: Sendable {
 		/// Path: `/v1/gameCenterMatchmakingRuleSets/{id}/teams`
 		public let path: String
 
@@ -24,7 +24,7 @@ extension APIEndpoint.V1.GameCenterMatchmakingRuleSets.WithID {
 			return encoder.items
 		}
 
-		public enum FieldsGameCenterMatchmakingTeams: String, Codable, CaseIterable {
+		public enum FieldsGameCenterMatchmakingTeams: String, Codable, CaseIterable, Sendable {
 			case referenceName
 			case minPlayers
 			case maxPlayers

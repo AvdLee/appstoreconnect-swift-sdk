@@ -3,7 +3,7 @@
 
 import Foundation
 
-public struct GameCenterScoreModerationResponse: Codable {
+public struct GameCenterScoreModerationResponse: Codable, Sendable {
 	/// GameCenterScoreModeration
 	public var data: GameCenterScoreModeration
 	public var included: [GameCenterDetailPlayer]?

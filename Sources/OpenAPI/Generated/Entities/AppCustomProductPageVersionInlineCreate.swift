@@ -3,17 +3,17 @@
 
 import Foundation
 
-public struct AppCustomProductPageVersionInlineCreate: Codable, Identifiable {
+public struct AppCustomProductPageVersionInlineCreate: Codable, Identifiable, Sendable {
 	public var type: `Type`
 	public var id: String?
 	public var attributes: Attributes?
 	public var relationships: Relationships?
 
-	public enum `Type`: String, Codable, CaseIterable {
+	public enum `Type`: String, Codable, CaseIterable, Sendable {
 		case appCustomProductPageVersions
 	}
 
-	public struct Attributes: Codable {
+	public struct Attributes: Codable, Sendable {
 		public var deepLink: URL?
 
 		public init(deepLink: URL? = nil) {
@@ -31,18 +31,18 @@ public struct AppCustomProductPageVersionInlineCreate: Codable, Identifiable {
 		}
 	}
 
-	public struct Relationships: Codable {
+	public struct Relationships: Codable, Sendable {
 		public var appCustomProductPage: AppCustomProductPage?
 		public var appCustomProductPageLocalizations: AppCustomProductPageLocalizations?
 
-		public struct AppCustomProductPage: Codable {
+		public struct AppCustomProductPage: Codable, Sendable {
 			public var data: Data?
 
-			public struct Data: Codable, Identifiable {
+			public struct Data: Codable, Identifiable, Sendable {
 				public var type: `Type`
 				public var id: String
 
-				public enum `Type`: String, Codable, CaseIterable {
+				public enum `Type`: String, Codable, CaseIterable, Sendable {
 					case appCustomProductPages
 				}
 
@@ -79,14 +79,14 @@ public struct AppCustomProductPageVersionInlineCreate: Codable, Identifiable {
 			}
 		}
 
-		public struct AppCustomProductPageLocalizations: Codable {
+		public struct AppCustomProductPageLocalizations: Codable, Sendable {
 			public var data: [Datum]?
 
-			public struct Datum: Codable, Identifiable {
+			public struct Datum: Codable, Identifiable, Sendable {
 				public var type: `Type`
 				public var id: String
 
-				public enum `Type`: String, Codable, CaseIterable {
+				public enum `Type`: String, Codable, CaseIterable, Sendable {
 					case appCustomProductPageLocalizations
 				}
 

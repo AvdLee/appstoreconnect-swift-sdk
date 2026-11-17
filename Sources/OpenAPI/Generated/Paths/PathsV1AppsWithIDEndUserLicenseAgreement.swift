@@ -9,7 +9,7 @@ extension APIEndpoint.V1.Apps.WithID {
 		EndUserLicenseAgreement(path: path + "/endUserLicenseAgreement")
 	}
 
-	public struct EndUserLicenseAgreement {
+	public struct EndUserLicenseAgreement: Sendable {
 		/// Path: `/v1/apps/{id}/endUserLicenseAgreement`
 		public let path: String
 
@@ -23,7 +23,7 @@ extension APIEndpoint.V1.Apps.WithID {
 			return encoder.items
 		}
 
-		public enum FieldsEndUserLicenseAgreements: String, Codable, CaseIterable {
+		public enum FieldsEndUserLicenseAgreements: String, Codable, CaseIterable, Sendable {
 			case agreementText
 			case app
 			case territories

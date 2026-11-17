@@ -62,6 +62,49 @@ final class JWTRequestsAuthenticatorTests: XCTestCase {
         let request = try! authenticator.adapt(urlRequest)
         XCTAssertEqual(request.allHTTPHeaderFields!["Authorization"], "Bearer \(secondJWTCreator.token)")
     }
+
+    /// Requests made at the same time must share one token instead of each signing their own.
+    func testConcurrentRequestsShareOneToken() {
+        let authenticator = JWTRequestsAuthenticator(apiConfiguration: self.configuration)
+        let creator = CountingJWTCreator(
+            jwt: JWT(keyIdentifier: self.configuration.privateKeyID, issuerIdentifier: self.configuration.issuerID, expireDuration: 60)
+        )
+        authenticator.jwtCreator = creator
+        let request = self.urlRequest
+
+        DispatchQueue.concurrentPerform(iterations: 200) { _ in
+            do {
+                _ = try authenticator.adapt(request)
+            } catch {
+                XCTFail("Adapting failed: \(error)")
+            }
+        }
+
+        XCTAssertEqual(creator.signCount, 1)
+    }
+}
+
+private final class CountingJWTCreator: JWTCreatable, @unchecked Sendable {
+    private let jwt: JWT
+    private let lock = NSLock()
+    private var count = 0
+
+    init(jwt: JWT) {
+        self.jwt = jwt
+    }
+
+    var signCount: Int {
+        self.lock.lock()
+        defer { self.lock.unlock() }
+        return self.count
+    }
+
+    func signedToken(using privateKey: JWT.PrivateKey) throws -> JWT.Token {
+        self.lock.lock()
+        self.count += 1
+        self.lock.unlock()
+        return try self.jwt.signedToken(using: privateKey)
+    }
 }
 
 private struct MockJWTCreator: JWTCreatable {

@@ -9,7 +9,7 @@ extension APIEndpoint.V1 {
 		Apps(path: path + "/apps")
 	}
 
-	public struct Apps {
+	public struct Apps: Sendable {
 		/// Path: `/v1/apps`
 		public let path: String
 
@@ -17,7 +17,7 @@ extension APIEndpoint.V1 {
 			Request(path: path, method: "GET", query: parameters?.asQuery, id: "apps_getCollection")
 		}
 
-		public struct GetParameters {
+		public struct GetParameters: Sendable {
 			public var filterName: [String]?
 			public var filterBundleID: [String]?
 			public var filterSku: [String]?
@@ -78,7 +78,7 @@ extension APIEndpoint.V1 {
 			public var limitReviewSubmissions: Int?
 			public var limitSubscriptionGroups: Int?
 
-			public enum FilterAppStoreVersionsAppStoreState: String, Codable, CaseIterable {
+			public enum FilterAppStoreVersionsAppStoreState: String, Codable, CaseIterable, Sendable {
 				case accepted = "ACCEPTED"
 				case developerRemovedFromSale = "DEVELOPER_REMOVED_FROM_SALE"
 				case developerRejected = "DEVELOPER_REJECTED"
@@ -101,14 +101,14 @@ extension APIEndpoint.V1 {
 				case notApplicable = "NOT_APPLICABLE"
 			}
 
-			public enum FilterAppStoreVersionsPlatform: String, Codable, CaseIterable {
+			public enum FilterAppStoreVersionsPlatform: String, Codable, CaseIterable, Sendable {
 				case ios = "IOS"
 				case macOs = "MAC_OS"
 				case tvOs = "TV_OS"
 				case visionOs = "VISION_OS"
 			}
 
-			public enum FilterAppStoreVersionsAppVersionState: String, Codable, CaseIterable {
+			public enum FilterAppStoreVersionsAppVersionState: String, Codable, CaseIterable, Sendable {
 				case accepted = "ACCEPTED"
 				case developerRejected = "DEVELOPER_REJECTED"
 				case inReview = "IN_REVIEW"
@@ -126,7 +126,7 @@ extension APIEndpoint.V1 {
 				case waitingForReview = "WAITING_FOR_REVIEW"
 			}
 
-			public enum FilterReviewSubmissionsState: String, Codable, CaseIterable {
+			public enum FilterReviewSubmissionsState: String, Codable, CaseIterable, Sendable {
 				case readyForReview = "READY_FOR_REVIEW"
 				case waitingForReview = "WAITING_FOR_REVIEW"
 				case inReview = "IN_REVIEW"
@@ -136,14 +136,14 @@ extension APIEndpoint.V1 {
 				case complete = "COMPLETE"
 			}
 
-			public enum FilterReviewSubmissionsPlatform: String, Codable, CaseIterable {
+			public enum FilterReviewSubmissionsPlatform: String, Codable, CaseIterable, Sendable {
 				case ios = "IOS"
 				case macOs = "MAC_OS"
 				case tvOs = "TV_OS"
 				case visionOs = "VISION_OS"
 			}
 
-			public enum Sort: String, Codable, CaseIterable {
+			public enum Sort: String, Codable, CaseIterable, Sendable {
 				case name
 				case minusname = "-name"
 				case bundleID = "bundleId"
@@ -152,7 +152,7 @@ extension APIEndpoint.V1 {
 				case minussku = "-sku"
 			}
 
-			public enum FieldsApps: String, Codable, CaseIterable {
+			public enum FieldsApps: String, Codable, CaseIterable, Sendable {
 				case accessibilityURL = "accessibilityUrl"
 				case name
 				case bundleID = "bundleId"
@@ -213,7 +213,7 @@ extension APIEndpoint.V1 {
 				case androidToIosAppMappingDetails
 			}
 
-			public enum FieldsAppEncryptionDeclarations: String, Codable, CaseIterable {
+			public enum FieldsAppEncryptionDeclarations: String, Codable, CaseIterable, Sendable {
 				case appDescription
 				case createdDate
 				case usesEncryption
@@ -233,14 +233,14 @@ extension APIEndpoint.V1 {
 				case appEncryptionDeclarationDocument
 			}
 
-			public enum FieldsBuildIcons: String, Codable, CaseIterable {
+			public enum FieldsBuildIcons: String, Codable, CaseIterable, Sendable {
 				case iconAsset
 				case iconType
 				case masked
 				case name
 			}
 
-			public enum FieldsCiProducts: String, Codable, CaseIterable {
+			public enum FieldsCiProducts: String, Codable, CaseIterable, Sendable {
 				case name
 				case createdDate
 				case productType
@@ -252,7 +252,7 @@ extension APIEndpoint.V1 {
 				case buildRuns
 			}
 
-			public enum FieldsBetaGroups: String, Codable, CaseIterable {
+			public enum FieldsBetaGroups: String, Codable, CaseIterable, Sendable {
 				case name
 				case createdDate
 				case isInternalGroup
@@ -272,7 +272,7 @@ extension APIEndpoint.V1 {
 				case betaRecruitmentCriterionCompatibleBuildCheck
 			}
 
-			public enum FieldsAppStoreVersions: String, Codable, CaseIterable {
+			public enum FieldsAppStoreVersions: String, Codable, CaseIterable, Sendable {
 				case platform
 				case versionString
 				case appStoreState
@@ -299,14 +299,14 @@ extension APIEndpoint.V1 {
 				case alternativeDistributionPackage
 			}
 
-			public enum FieldsPreReleaseVersions: String, Codable, CaseIterable {
+			public enum FieldsPreReleaseVersions: String, Codable, CaseIterable, Sendable {
 				case version
 				case platform
 				case builds
 				case app
 			}
 
-			public enum FieldsBetaAppLocalizations: String, Codable, CaseIterable {
+			public enum FieldsBetaAppLocalizations: String, Codable, CaseIterable, Sendable {
 				case feedbackEmail
 				case marketingURL = "marketingUrl"
 				case privacyPolicyURL = "privacyPolicyUrl"
@@ -316,7 +316,7 @@ extension APIEndpoint.V1 {
 				case app
 			}
 
-			public enum FieldsBuilds: String, Codable, CaseIterable {
+			public enum FieldsBuilds: String, Codable, CaseIterable, Sendable {
 				case version
 				case uploadedDate
 				case expirationDate
@@ -345,12 +345,12 @@ extension APIEndpoint.V1 {
 				case diagnosticSignatures
 			}
 
-			public enum FieldsBetaLicenseAgreements: String, Codable, CaseIterable {
+			public enum FieldsBetaLicenseAgreements: String, Codable, CaseIterable, Sendable {
 				case agreementText
 				case app
 			}
 
-			public enum FieldsBetaAppReviewDetails: String, Codable, CaseIterable {
+			public enum FieldsBetaAppReviewDetails: String, Codable, CaseIterable, Sendable {
 				case contactFirstName
 				case contactLastName
 				case contactPhone
@@ -362,7 +362,7 @@ extension APIEndpoint.V1 {
 				case app
 			}
 
-			public enum FieldsAppInfos: String, Codable, CaseIterable {
+			public enum FieldsAppInfos: String, Codable, CaseIterable, Sendable {
 				case appStoreState
 				case state
 				case appStoreAgeRating
@@ -383,20 +383,20 @@ extension APIEndpoint.V1 {
 				case territoryAgeRatings
 			}
 
-			public enum FieldsAppClips: String, Codable, CaseIterable {
+			public enum FieldsAppClips: String, Codable, CaseIterable, Sendable {
 				case bundleID = "bundleId"
 				case app
 				case appClipDefaultExperiences
 				case appClipAdvancedExperiences
 			}
 
-			public enum FieldsEndUserLicenseAgreements: String, Codable, CaseIterable {
+			public enum FieldsEndUserLicenseAgreements: String, Codable, CaseIterable, Sendable {
 				case agreementText
 				case app
 				case territories
 			}
 
-			public enum FieldsInAppPurchases: String, Codable, CaseIterable {
+			public enum FieldsInAppPurchases: String, Codable, CaseIterable, Sendable {
 				case referenceName
 				case productID = "productId"
 				case inAppPurchaseType
@@ -418,20 +418,20 @@ extension APIEndpoint.V1 {
 				case versions
 			}
 
-			public enum FieldsSubscriptionGroups: String, Codable, CaseIterable {
+			public enum FieldsSubscriptionGroups: String, Codable, CaseIterable, Sendable {
 				case referenceName
 				case subscriptions
 				case subscriptionGroupLocalizations
 				case versions
 			}
 
-			public enum FieldsRetentionMessages: String, Codable, CaseIterable {
+			public enum FieldsRetentionMessages: String, Codable, CaseIterable, Sendable {
 				case referenceName
 				case versions
 				case subscriptions
 			}
 
-			public enum FieldsGameCenterEnabledVersions: String, Codable, CaseIterable {
+			public enum FieldsGameCenterEnabledVersions: String, Codable, CaseIterable, Sendable {
 				case platform
 				case versionString
 				case iconAsset
@@ -439,7 +439,7 @@ extension APIEndpoint.V1 {
 				case app
 			}
 
-			public enum FieldsAppCustomProductPages: String, Codable, CaseIterable {
+			public enum FieldsAppCustomProductPages: String, Codable, CaseIterable, Sendable {
 				case name
 				case url
 				case visible
@@ -447,7 +447,7 @@ extension APIEndpoint.V1 {
 				case appCustomProductPageVersions
 			}
 
-			public enum FieldsPromotedPurchases: String, Codable, CaseIterable {
+			public enum FieldsPromotedPurchases: String, Codable, CaseIterable, Sendable {
 				case visibleForAllUsers
 				case enabled
 				case state
@@ -455,7 +455,7 @@ extension APIEndpoint.V1 {
 				case subscription
 			}
 
-			public enum FieldsAppEvents: String, Codable, CaseIterable {
+			public enum FieldsAppEvents: String, Codable, CaseIterable, Sendable {
 				case referenceName
 				case badge
 				case eventState
@@ -469,7 +469,7 @@ extension APIEndpoint.V1 {
 				case localizations
 			}
 
-			public enum FieldsReviewSubmissions: String, Codable, CaseIterable {
+			public enum FieldsReviewSubmissions: String, Codable, CaseIterable, Sendable {
 				case platform
 				case submittedDate
 				case state
@@ -480,14 +480,14 @@ extension APIEndpoint.V1 {
 				case lastUpdatedByActor
 			}
 
-			public enum FieldsSubscriptionGracePeriods: String, Codable, CaseIterable {
+			public enum FieldsSubscriptionGracePeriods: String, Codable, CaseIterable, Sendable {
 				case optIn
 				case sandboxOptIn
 				case duration
 				case renewalType
 			}
 
-			public enum FieldsGameCenterDetails: String, Codable, CaseIterable {
+			public enum FieldsGameCenterDetails: String, Codable, CaseIterable, Sendable {
 				case arcadeEnabled
 				case challengeEnabled
 				case app
@@ -514,7 +514,7 @@ extension APIEndpoint.V1 {
 				case challengesMinimumPlatformVersions
 			}
 
-			public enum FieldsAppStoreVersionExperiments: String, Codable, CaseIterable {
+			public enum FieldsAppStoreVersionExperiments: String, Codable, CaseIterable, Sendable {
 				case name
 				case platform
 				case trafficProportion
@@ -528,12 +528,12 @@ extension APIEndpoint.V1 {
 				case appStoreVersionExperimentTreatments
 			}
 
-			public enum FieldsAndroidToIosAppMappingDetails: String, Codable, CaseIterable {
+			public enum FieldsAndroidToIosAppMappingDetails: String, Codable, CaseIterable, Sendable {
 				case packageName
 				case appSigningKeyPublicCertificateSha256Fingerprints
 			}
 
-			public enum Include: String, Codable, CaseIterable {
+			public enum Include: String, Codable, CaseIterable, Sendable {
 				case appEncryptionDeclarations
 				case appStoreIcon
 				case ciProduct

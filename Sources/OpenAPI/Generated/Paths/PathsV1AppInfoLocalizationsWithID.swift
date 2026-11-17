@@ -9,7 +9,7 @@ extension APIEndpoint.V1.AppInfoLocalizations {
 		WithID(path: "\(path)/\(id)")
 	}
 
-	public struct WithID {
+	public struct WithID: Sendable {
 		/// Path: `/v1/appInfoLocalizations/{id}`
 		public let path: String
 
@@ -17,12 +17,12 @@ extension APIEndpoint.V1.AppInfoLocalizations {
 			Request(path: path, method: "GET", query: parameters?.asQuery, id: "appInfoLocalizations_getInstance")
 		}
 
-		public struct GetParameters {
+		public struct GetParameters: Sendable {
 			public var fieldsAppInfoLocalizations: [FieldsAppInfoLocalizations]?
 			public var fieldsAppInfos: [FieldsAppInfos]?
 			public var include: [Include]?
 
-			public enum FieldsAppInfoLocalizations: String, Codable, CaseIterable {
+			public enum FieldsAppInfoLocalizations: String, Codable, CaseIterable, Sendable {
 				case locale
 				case name
 				case subtitle
@@ -32,7 +32,7 @@ extension APIEndpoint.V1.AppInfoLocalizations {
 				case appInfo
 			}
 
-			public enum FieldsAppInfos: String, Codable, CaseIterable {
+			public enum FieldsAppInfos: String, Codable, CaseIterable, Sendable {
 				case appStoreState
 				case state
 				case appStoreAgeRating
@@ -53,7 +53,7 @@ extension APIEndpoint.V1.AppInfoLocalizations {
 				case territoryAgeRatings
 			}
 
-			public enum Include: String, Codable, CaseIterable {
+			public enum Include: String, Codable, CaseIterable, Sendable {
 				case appInfo
 			}
 

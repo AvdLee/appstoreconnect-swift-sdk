@@ -3,7 +3,7 @@
 
 import Foundation
 
-public enum AppAssetLibraryDisplayClass: String, Codable, CaseIterable {
+public enum AppAssetLibraryDisplayClass: String, Codable, CaseIterable, Sendable {
 	case `default` = "DEFAULT"
 	case watchUltra = "WATCH_ULTRA"
 	case watchSeries10 = "WATCH_SERIES_10"

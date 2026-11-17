@@ -3,7 +3,7 @@
 
 import Foundation
 
-public struct CertificatesWithoutIncludesResponse: Codable {
+public struct CertificatesWithoutIncludesResponse: Codable, Sendable {
 	public var data: [Certificate]
 	public var links: PagedDocumentLinks
 	public var meta: PagingInformation?

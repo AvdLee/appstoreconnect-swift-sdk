@@ -3,7 +3,7 @@
 
 import Foundation
 
-public struct CustomerReviewSummarizationsResponse: Codable {
+public struct CustomerReviewSummarizationsResponse: Codable, Sendable {
 	public var data: [CustomerReviewSummarization]
 	public var included: [Territory]?
 	public var links: PagedDocumentLinks

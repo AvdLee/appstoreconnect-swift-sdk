@@ -9,7 +9,7 @@ extension APIEndpoint.V1 {
 		CiProducts(path: path + "/ciProducts")
 	}
 
-	public struct CiProducts {
+	public struct CiProducts: Sendable {
 		/// Path: `/v1/ciProducts`
 		public let path: String
 
@@ -17,7 +17,7 @@ extension APIEndpoint.V1 {
 			Request(path: path, method: "GET", query: parameters?.asQuery, id: "ciProducts_getCollection")
 		}
 
-		public struct GetParameters {
+		public struct GetParameters: Sendable {
 			public var filterProductType: [FilterProductType]?
 			public var filterApp: [String]?
 			public var fieldsCiProducts: [FieldsCiProducts]?
@@ -28,12 +28,12 @@ extension APIEndpoint.V1 {
 			public var include: [Include]?
 			public var limitPrimaryRepositories: Int?
 
-			public enum FilterProductType: String, Codable, CaseIterable {
+			public enum FilterProductType: String, Codable, CaseIterable, Sendable {
 				case app = "APP"
 				case framework = "FRAMEWORK"
 			}
 
-			public enum FieldsCiProducts: String, Codable, CaseIterable {
+			public enum FieldsCiProducts: String, Codable, CaseIterable, Sendable {
 				case name
 				case createdDate
 				case productType
@@ -45,7 +45,7 @@ extension APIEndpoint.V1 {
 				case buildRuns
 			}
 
-			public enum FieldsApps: String, Codable, CaseIterable {
+			public enum FieldsApps: String, Codable, CaseIterable, Sendable {
 				case accessibilityURL = "accessibilityUrl"
 				case name
 				case bundleID = "bundleId"
@@ -106,7 +106,7 @@ extension APIEndpoint.V1 {
 				case androidToIosAppMappingDetails
 			}
 
-			public enum FieldsBundleIDs: String, Codable, CaseIterable {
+			public enum FieldsBundleIDs: String, Codable, CaseIterable, Sendable {
 				case name
 				case platform
 				case identifier
@@ -116,7 +116,7 @@ extension APIEndpoint.V1 {
 				case app
 			}
 
-			public enum FieldsScmRepositories: String, Codable, CaseIterable {
+			public enum FieldsScmRepositories: String, Codable, CaseIterable, Sendable {
 				case lastAccessedDate
 				case httpCloneURL = "httpCloneUrl"
 				case sshCloneURL = "sshCloneUrl"
@@ -128,7 +128,7 @@ extension APIEndpoint.V1 {
 				case pullRequests
 			}
 
-			public enum Include: String, Codable, CaseIterable {
+			public enum Include: String, Codable, CaseIterable, Sendable {
 				case app
 				case bundleID = "bundleId"
 				case primaryRepositories

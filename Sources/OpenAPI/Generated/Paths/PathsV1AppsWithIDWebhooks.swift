@@ -9,7 +9,7 @@ extension APIEndpoint.V1.Apps.WithID {
 		Webhooks(path: path + "/webhooks")
 	}
 
-	public struct Webhooks {
+	public struct Webhooks: Sendable {
 		/// Path: `/v1/apps/{id}/webhooks`
 		public let path: String
 
@@ -17,13 +17,13 @@ extension APIEndpoint.V1.Apps.WithID {
 			Request(path: path, method: "GET", query: parameters?.asQuery, id: "apps_webhooks_getToManyRelated")
 		}
 
-		public struct GetParameters {
+		public struct GetParameters: Sendable {
 			public var fieldsWebhooks: [FieldsWebhooks]?
 			public var fieldsApps: [FieldsApps]?
 			public var limit: Int?
 			public var include: [Include]?
 
-			public enum FieldsWebhooks: String, Codable, CaseIterable {
+			public enum FieldsWebhooks: String, Codable, CaseIterable, Sendable {
 				case enabled
 				case eventTypes
 				case name
@@ -32,7 +32,7 @@ extension APIEndpoint.V1.Apps.WithID {
 				case deliveries
 			}
 
-			public enum FieldsApps: String, Codable, CaseIterable {
+			public enum FieldsApps: String, Codable, CaseIterable, Sendable {
 				case accessibilityURL = "accessibilityUrl"
 				case name
 				case bundleID = "bundleId"
@@ -93,7 +93,7 @@ extension APIEndpoint.V1.Apps.WithID {
 				case androidToIosAppMappingDetails
 			}
 
-			public enum Include: String, Codable, CaseIterable {
+			public enum Include: String, Codable, CaseIterable, Sendable {
 				case app
 			}
 

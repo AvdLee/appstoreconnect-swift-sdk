@@ -3,19 +3,19 @@
 
 import Foundation
 
-public struct AppTagUpdateRequest: Codable {
+public struct AppTagUpdateRequest: Codable, Sendable {
 	public var data: Data
 
-	public struct Data: Codable, Identifiable {
+	public struct Data: Codable, Identifiable, Sendable {
 		public var type: `Type`
 		public var id: String
 		public var attributes: Attributes?
 
-		public enum `Type`: String, Codable, CaseIterable {
+		public enum `Type`: String, Codable, CaseIterable, Sendable {
 			case appTags
 		}
 
-		public struct Attributes: Codable {
+		public struct Attributes: Codable, Sendable {
 			public var isVisibleInAppStore: Bool?
 
 			public init(isVisibleInAppStore: Bool? = nil) {

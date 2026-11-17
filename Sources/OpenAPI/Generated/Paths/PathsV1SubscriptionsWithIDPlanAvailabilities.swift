@@ -9,7 +9,7 @@ extension APIEndpoint.V1.Subscriptions.WithID {
 		PlanAvailabilities(path: path + "/planAvailabilities")
 	}
 
-	public struct PlanAvailabilities {
+	public struct PlanAvailabilities: Sendable {
 		/// Path: `/v1/subscriptions/{id}/planAvailabilities`
 		public let path: String
 
@@ -17,24 +17,24 @@ extension APIEndpoint.V1.Subscriptions.WithID {
 			Request(path: path, method: "GET", query: parameters?.asQuery, id: "subscriptions_planAvailabilities_getToManyRelated")
 		}
 
-		public struct GetParameters {
+		public struct GetParameters: Sendable {
 			public var fieldsSubscriptionPlanAvailabilities: [FieldsSubscriptionPlanAvailabilities]?
 			public var fieldsTerritories: [FieldsTerritories]?
 			public var limit: Int?
 			public var include: [Include]?
 			public var limitAvailableTerritories: Int?
 
-			public enum FieldsSubscriptionPlanAvailabilities: String, Codable, CaseIterable {
+			public enum FieldsSubscriptionPlanAvailabilities: String, Codable, CaseIterable, Sendable {
 				case availableInNewTerritories
 				case planType
 				case availableTerritories
 			}
 
-			public enum FieldsTerritories: String, Codable, CaseIterable {
+			public enum FieldsTerritories: String, Codable, CaseIterable, Sendable {
 				case currency
 			}
 
-			public enum Include: String, Codable, CaseIterable {
+			public enum Include: String, Codable, CaseIterable, Sendable {
 				case availableTerritories
 			}
 

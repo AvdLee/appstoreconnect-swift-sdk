@@ -3,7 +3,7 @@
 
 import Foundation
 
-public enum GameCenterVersionState: String, Codable, CaseIterable {
+public enum GameCenterVersionState: String, Codable, CaseIterable, Sendable {
 	case prepareForSubmission = "PREPARE_FOR_SUBMISSION"
 	case readyForReview = "READY_FOR_REVIEW"
 	case waitingForReview = "WAITING_FOR_REVIEW"

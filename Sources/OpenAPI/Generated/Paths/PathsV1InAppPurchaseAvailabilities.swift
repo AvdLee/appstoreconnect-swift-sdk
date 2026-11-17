@@ -9,7 +9,7 @@ extension APIEndpoint.V1 {
 		InAppPurchaseAvailabilities(path: path + "/inAppPurchaseAvailabilities")
 	}
 
-	public struct InAppPurchaseAvailabilities {
+	public struct InAppPurchaseAvailabilities: Sendable {
 		/// Path: `/v1/inAppPurchaseAvailabilities`
 		public let path: String
 

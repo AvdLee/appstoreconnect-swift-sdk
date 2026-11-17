@@ -9,7 +9,7 @@ extension APIEndpoint.V1.GameCenterActivityVersions.WithID {
 		Localizations(path: path + "/localizations")
 	}
 
-	public struct Localizations {
+	public struct Localizations: Sendable {
 		/// Path: `/v1/gameCenterActivityVersions/{id}/localizations`
 		public let path: String
 
@@ -17,14 +17,14 @@ extension APIEndpoint.V1.GameCenterActivityVersions.WithID {
 			Request(path: path, method: "GET", query: parameters?.asQuery, id: "gameCenterActivityVersions_localizations_getToManyRelated")
 		}
 
-		public struct GetParameters {
+		public struct GetParameters: Sendable {
 			public var fieldsGameCenterActivityLocalizations: [FieldsGameCenterActivityLocalizations]?
 			public var fieldsGameCenterActivityVersions: [FieldsGameCenterActivityVersions]?
 			public var fieldsGameCenterActivityImages: [FieldsGameCenterActivityImages]?
 			public var limit: Int?
 			public var include: [Include]?
 
-			public enum FieldsGameCenterActivityLocalizations: String, Codable, CaseIterable {
+			public enum FieldsGameCenterActivityLocalizations: String, Codable, CaseIterable, Sendable {
 				case locale
 				case name
 				case description
@@ -32,7 +32,7 @@ extension APIEndpoint.V1.GameCenterActivityVersions.WithID {
 				case image
 			}
 
-			public enum FieldsGameCenterActivityVersions: String, Codable, CaseIterable {
+			public enum FieldsGameCenterActivityVersions: String, Codable, CaseIterable, Sendable {
 				case version
 				case state
 				case fallbackURL = "fallbackUrl"
@@ -42,7 +42,7 @@ extension APIEndpoint.V1.GameCenterActivityVersions.WithID {
 				case releases
 			}
 
-			public enum FieldsGameCenterActivityImages: String, Codable, CaseIterable {
+			public enum FieldsGameCenterActivityImages: String, Codable, CaseIterable, Sendable {
 				case fileSize
 				case fileName
 				case imageAsset
@@ -50,7 +50,7 @@ extension APIEndpoint.V1.GameCenterActivityVersions.WithID {
 				case assetDeliveryState
 			}
 
-			public enum Include: String, Codable, CaseIterable {
+			public enum Include: String, Codable, CaseIterable, Sendable {
 				case version
 				case image
 			}

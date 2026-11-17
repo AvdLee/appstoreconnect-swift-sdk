@@ -9,7 +9,7 @@ extension APIEndpoint.V1.AppClipAdvancedExperienceImages {
 		WithID(path: "\(path)/\(id)")
 	}
 
-	public struct WithID {
+	public struct WithID: Sendable {
 		/// Path: `/v1/appClipAdvancedExperienceImages/{id}`
 		public let path: String
 
@@ -23,7 +23,7 @@ extension APIEndpoint.V1.AppClipAdvancedExperienceImages {
 			return encoder.items
 		}
 
-		public enum FieldsAppClipAdvancedExperienceImages: String, Codable, CaseIterable {
+		public enum FieldsAppClipAdvancedExperienceImages: String, Codable, CaseIterable, Sendable {
 			case fileSize
 			case fileName
 			case sourceFileChecksum

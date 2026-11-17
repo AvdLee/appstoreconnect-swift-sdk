@@ -9,7 +9,7 @@ extension APIEndpoint.V1.Apps.WithID {
 		BetaFeedbackScreenshotSubmissions(path: path + "/betaFeedbackScreenshotSubmissions")
 	}
 
-	public struct BetaFeedbackScreenshotSubmissions {
+	public struct BetaFeedbackScreenshotSubmissions: Sendable {
 		/// Path: `/v1/apps/{id}/betaFeedbackScreenshotSubmissions`
 		public let path: String
 
@@ -17,7 +17,7 @@ extension APIEndpoint.V1.Apps.WithID {
 			Request(path: path, method: "GET", query: parameters?.asQuery, id: "apps_betaFeedbackScreenshotSubmissions_getToManyRelated")
 		}
 
-		public struct GetParameters {
+		public struct GetParameters: Sendable {
 			public var filterDeviceModel: [String]?
 			public var filterOsVersion: [String]?
 			public var filterAppPlatform: [FilterAppPlatform]?
@@ -32,26 +32,26 @@ extension APIEndpoint.V1.Apps.WithID {
 			public var limit: Int?
 			public var include: [Include]?
 
-			public enum FilterAppPlatform: String, Codable, CaseIterable {
+			public enum FilterAppPlatform: String, Codable, CaseIterable, Sendable {
 				case ios = "IOS"
 				case macOs = "MAC_OS"
 				case tvOs = "TV_OS"
 				case visionOs = "VISION_OS"
 			}
 
-			public enum FilterDevicePlatform: String, Codable, CaseIterable {
+			public enum FilterDevicePlatform: String, Codable, CaseIterable, Sendable {
 				case ios = "IOS"
 				case macOs = "MAC_OS"
 				case tvOs = "TV_OS"
 				case visionOs = "VISION_OS"
 			}
 
-			public enum Sort: String, Codable, CaseIterable {
+			public enum Sort: String, Codable, CaseIterable, Sendable {
 				case createdDate
 				case minuscreatedDate = "-createdDate"
 			}
 
-			public enum FieldsBetaFeedbackScreenshotSubmissions: String, Codable, CaseIterable {
+			public enum FieldsBetaFeedbackScreenshotSubmissions: String, Codable, CaseIterable, Sendable {
 				case createdDate
 				case comment
 				case email
@@ -77,7 +77,7 @@ extension APIEndpoint.V1.Apps.WithID {
 				case tester
 			}
 
-			public enum FieldsBuilds: String, Codable, CaseIterable {
+			public enum FieldsBuilds: String, Codable, CaseIterable, Sendable {
 				case version
 				case uploadedDate
 				case expirationDate
@@ -106,7 +106,7 @@ extension APIEndpoint.V1.Apps.WithID {
 				case diagnosticSignatures
 			}
 
-			public enum FieldsBetaTesters: String, Codable, CaseIterable {
+			public enum FieldsBetaTesters: String, Codable, CaseIterable, Sendable {
 				case firstName
 				case lastName
 				case email
@@ -118,7 +118,7 @@ extension APIEndpoint.V1.Apps.WithID {
 				case builds
 			}
 
-			public enum Include: String, Codable, CaseIterable {
+			public enum Include: String, Codable, CaseIterable, Sendable {
 				case build
 				case tester
 			}

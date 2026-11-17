@@ -3,7 +3,7 @@
 
 import Foundation
 
-public struct BuildUploadFileResponse: Codable {
+public struct BuildUploadFileResponse: Codable, Sendable {
 	/// BuildUploadFile
 	public var data: BuildUploadFile
 	public var links: DocumentLinks

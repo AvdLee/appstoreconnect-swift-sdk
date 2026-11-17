@@ -3,17 +3,17 @@
 
 import Foundation
 
-public struct AlternativeDistributionKey: Codable, Identifiable {
+public struct AlternativeDistributionKey: Codable, Identifiable, Sendable {
 	public var type: `Type`
 	public var id: String
 	public var attributes: Attributes?
 	public var links: ResourceLinks?
 
-	public enum `Type`: String, Codable, CaseIterable {
+	public enum `Type`: String, Codable, CaseIterable, Sendable {
 		case alternativeDistributionKeys
 	}
 
-	public struct Attributes: Codable {
+	public struct Attributes: Codable, Sendable {
 		public var publicKey: String?
 
 		public init(publicKey: String? = nil) {

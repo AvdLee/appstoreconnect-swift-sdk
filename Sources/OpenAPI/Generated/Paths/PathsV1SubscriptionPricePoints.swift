@@ -9,7 +9,7 @@ extension APIEndpoint.V1 {
 		SubscriptionPricePoints(path: path + "/subscriptionPricePoints")
 	}
 
-	public struct SubscriptionPricePoints {
+	public struct SubscriptionPricePoints: Sendable {
 		/// Path: `/v1/subscriptionPricePoints`
 		public let path: String
 	}

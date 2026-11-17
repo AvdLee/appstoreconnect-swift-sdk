@@ -9,7 +9,7 @@ extension APIEndpoint.V1 {
 		WebhookDeliveries(path: path + "/webhookDeliveries")
 	}
 
-	public struct WebhookDeliveries {
+	public struct WebhookDeliveries: Sendable {
 		/// Path: `/v1/webhookDeliveries`
 		public let path: String
 

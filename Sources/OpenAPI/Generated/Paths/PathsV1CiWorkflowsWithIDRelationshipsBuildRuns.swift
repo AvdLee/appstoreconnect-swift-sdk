@@ -9,7 +9,7 @@ extension APIEndpoint.V1.CiWorkflows.WithID.Relationships {
 		BuildRuns(path: path + "/buildRuns")
 	}
 
-	public struct BuildRuns {
+	public struct BuildRuns: Sendable {
 		/// Path: `/v1/ciWorkflows/{id}/relationships/buildRuns`
 		public let path: String
 

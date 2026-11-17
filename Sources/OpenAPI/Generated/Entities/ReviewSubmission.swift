@@ -3,23 +3,23 @@
 
 import Foundation
 
-public struct ReviewSubmission: Codable, Identifiable {
+public struct ReviewSubmission: Codable, Identifiable, Sendable {
 	public var type: `Type`
 	public var id: String
 	public var attributes: Attributes?
 	public var relationships: Relationships?
 	public var links: ResourceLinks?
 
-	public enum `Type`: String, Codable, CaseIterable {
+	public enum `Type`: String, Codable, CaseIterable, Sendable {
 		case reviewSubmissions
 	}
 
-	public struct Attributes: Codable {
+	public struct Attributes: Codable, Sendable {
 		public var platform: Platform?
 		public var submittedDate: Date?
 		public var state: State?
 
-		public enum State: String, Codable, CaseIterable {
+		public enum State: String, Codable, CaseIterable, Sendable {
 			case readyForReview = "READY_FOR_REVIEW"
 			case waitingForReview = "WAITING_FOR_REVIEW"
 			case inReview = "IN_REVIEW"
@@ -50,21 +50,21 @@ public struct ReviewSubmission: Codable, Identifiable {
 		}
 	}
 
-	public struct Relationships: Codable {
+	public struct Relationships: Codable, Sendable {
 		public var app: App?
 		public var items: Items?
 		public var appStoreVersionForReview: AppStoreVersionForReview?
 		public var submittedByActor: SubmittedByActor?
 		public var lastUpdatedByActor: LastUpdatedByActor?
 
-		public struct App: Codable {
+		public struct App: Codable, Sendable {
 			public var data: Data?
 
-			public struct Data: Codable, Identifiable {
+			public struct Data: Codable, Identifiable, Sendable {
 				public var type: `Type`
 				public var id: String
 
-				public enum `Type`: String, Codable, CaseIterable {
+				public enum `Type`: String, Codable, CaseIterable, Sendable {
 					case apps
 				}
 
@@ -101,16 +101,16 @@ public struct ReviewSubmission: Codable, Identifiable {
 			}
 		}
 
-		public struct Items: Codable {
+		public struct Items: Codable, Sendable {
 			public var links: RelationshipLinks?
 			public var meta: PagingInformation?
 			public var data: [Datum]?
 
-			public struct Datum: Codable, Identifiable {
+			public struct Datum: Codable, Identifiable, Sendable {
 				public var type: `Type`
 				public var id: String
 
-				public enum `Type`: String, Codable, CaseIterable {
+				public enum `Type`: String, Codable, CaseIterable, Sendable {
 					case reviewSubmissionItems
 				}
 
@@ -153,14 +153,14 @@ public struct ReviewSubmission: Codable, Identifiable {
 			}
 		}
 
-		public struct AppStoreVersionForReview: Codable {
+		public struct AppStoreVersionForReview: Codable, Sendable {
 			public var data: Data?
 
-			public struct Data: Codable, Identifiable {
+			public struct Data: Codable, Identifiable, Sendable {
 				public var type: `Type`
 				public var id: String
 
-				public enum `Type`: String, Codable, CaseIterable {
+				public enum `Type`: String, Codable, CaseIterable, Sendable {
 					case appStoreVersions
 				}
 
@@ -197,14 +197,14 @@ public struct ReviewSubmission: Codable, Identifiable {
 			}
 		}
 
-		public struct SubmittedByActor: Codable {
+		public struct SubmittedByActor: Codable, Sendable {
 			public var data: Data?
 
-			public struct Data: Codable, Identifiable {
+			public struct Data: Codable, Identifiable, Sendable {
 				public var type: `Type`
 				public var id: String
 
-				public enum `Type`: String, Codable, CaseIterable {
+				public enum `Type`: String, Codable, CaseIterable, Sendable {
 					case actors
 				}
 
@@ -241,14 +241,14 @@ public struct ReviewSubmission: Codable, Identifiable {
 			}
 		}
 
-		public struct LastUpdatedByActor: Codable {
+		public struct LastUpdatedByActor: Codable, Sendable {
 			public var data: Data?
 
-			public struct Data: Codable, Identifiable {
+			public struct Data: Codable, Identifiable, Sendable {
 				public var type: `Type`
 				public var id: String
 
-				public enum `Type`: String, Codable, CaseIterable {
+				public enum `Type`: String, Codable, CaseIterable, Sendable {
 					case actors
 				}
 

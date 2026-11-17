@@ -3,7 +3,7 @@
 
 import Foundation
 
-public struct CapabilitySetting: Codable {
+public struct CapabilitySetting: Codable, Sendable {
 	public var key: Key?
 	public var name: String?
 	public var description: String?
@@ -13,13 +13,13 @@ public struct CapabilitySetting: Codable {
 	public var minInstances: Int?
 	public var options: [CapabilityOption]?
 
-	public enum Key: String, Codable, CaseIterable {
+	public enum Key: String, Codable, CaseIterable, Sendable {
 		case icloudVersion = "ICLOUD_VERSION"
 		case dataProtectionPermissionLevel = "DATA_PROTECTION_PERMISSION_LEVEL"
 		case appleIDAuthAppConsent = "APPLE_ID_AUTH_APP_CONSENT"
 	}
 
-	public enum AllowedInstances: String, Codable, CaseIterable {
+	public enum AllowedInstances: String, Codable, CaseIterable, Sendable {
 		case entry = "ENTRY"
 		case single = "SINGLE"
 		case multiple = "MULTIPLE"

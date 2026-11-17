@@ -3,18 +3,18 @@
 
 import Foundation
 
-public struct PassTypeIDCreateRequest: Codable {
+public struct PassTypeIDCreateRequest: Codable, Sendable {
 	public var data: Data
 
-	public struct Data: Codable {
+	public struct Data: Codable, Sendable {
 		public var type: `Type`
 		public var attributes: Attributes
 
-		public enum `Type`: String, Codable, CaseIterable {
+		public enum `Type`: String, Codable, CaseIterable, Sendable {
 			case passTypeIDs = "passTypeIds"
 		}
 
-		public struct Attributes: Codable {
+		public struct Attributes: Codable, Sendable {
 			public var name: String
 			public var identifier: String
 

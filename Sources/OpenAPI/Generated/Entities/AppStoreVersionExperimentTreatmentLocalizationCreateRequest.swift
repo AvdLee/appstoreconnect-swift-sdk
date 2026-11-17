@@ -3,19 +3,19 @@
 
 import Foundation
 
-public struct AppStoreVersionExperimentTreatmentLocalizationCreateRequest: Codable {
+public struct AppStoreVersionExperimentTreatmentLocalizationCreateRequest: Codable, Sendable {
 	public var data: Data
 
-	public struct Data: Codable {
+	public struct Data: Codable, Sendable {
 		public var type: `Type`
 		public var attributes: Attributes
 		public var relationships: Relationships
 
-		public enum `Type`: String, Codable, CaseIterable {
+		public enum `Type`: String, Codable, CaseIterable, Sendable {
 			case appStoreVersionExperimentTreatmentLocalizations
 		}
 
-		public struct Attributes: Codable {
+		public struct Attributes: Codable, Sendable {
 			public var locale: String
 
 			public init(locale: String) {
@@ -33,18 +33,18 @@ public struct AppStoreVersionExperimentTreatmentLocalizationCreateRequest: Codab
 			}
 		}
 
-		public struct Relationships: Codable {
+		public struct Relationships: Codable, Sendable {
 			public var appStoreVersionExperimentTreatment: AppStoreVersionExperimentTreatment
 			public var placements: Placements?
 
-			public struct AppStoreVersionExperimentTreatment: Codable {
+			public struct AppStoreVersionExperimentTreatment: Codable, Sendable {
 				public var data: Data
 
-				public struct Data: Codable, Identifiable {
+				public struct Data: Codable, Identifiable, Sendable {
 					public var type: `Type`
 					public var id: String
 
-					public enum `Type`: String, Codable, CaseIterable {
+					public enum `Type`: String, Codable, CaseIterable, Sendable {
 						case appStoreVersionExperimentTreatments
 					}
 
@@ -81,14 +81,14 @@ public struct AppStoreVersionExperimentTreatmentLocalizationCreateRequest: Codab
 				}
 			}
 
-			public struct Placements: Codable {
+			public struct Placements: Codable, Sendable {
 				public var data: [Datum]?
 
-				public struct Datum: Codable, Identifiable {
+				public struct Datum: Codable, Identifiable, Sendable {
 					public var type: `Type`
 					public var id: String
 
-					public enum `Type`: String, Codable, CaseIterable {
+					public enum `Type`: String, Codable, CaseIterable, Sendable {
 						case appAssetLibraryPlacements
 					}
 

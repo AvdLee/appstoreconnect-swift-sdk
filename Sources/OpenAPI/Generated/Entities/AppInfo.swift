@@ -3,18 +3,18 @@
 
 import Foundation
 
-public struct AppInfo: Codable, Identifiable {
+public struct AppInfo: Codable, Identifiable, Sendable {
 	public var type: `Type`
 	public var id: String
 	public var attributes: Attributes?
 	public var relationships: Relationships?
 	public var links: ResourceLinks?
 
-	public enum `Type`: String, Codable, CaseIterable {
+	public enum `Type`: String, Codable, CaseIterable, Sendable {
 		case appInfos
 	}
 
-	public struct Attributes: Codable {
+	public struct Attributes: Codable, Sendable {
 		public var appStoreState: AppStoreVersionState?
 		public var state: State?
 		public var appStoreAgeRating: AppStoreAgeRating?
@@ -28,7 +28,7 @@ public struct AppInfo: Codable, Identifiable {
 		/// - warning: Deprecated.
 		public var koreaAgeRating: KoreaAgeRating?
 
-		public enum State: String, Codable, CaseIterable {
+		public enum State: String, Codable, CaseIterable, Sendable {
 			case accepted = "ACCEPTED"
 			case developerRejected = "DEVELOPER_REJECTED"
 			case inReview = "IN_REVIEW"
@@ -42,13 +42,13 @@ public struct AppInfo: Codable, Identifiable {
 		}
 
 		@available(*, deprecated, message: "Deprecated")
-		public enum AustraliaAgeRating: String, Codable, CaseIterable {
+		public enum AustraliaAgeRating: String, Codable, CaseIterable, Sendable {
 			case fifteen = "FIFTEEN"
 			case eighteen = "EIGHTEEN"
 		}
 
 		@available(*, deprecated, message: "Deprecated")
-		public enum BrazilAgeRatingV2: String, Codable, CaseIterable {
+		public enum BrazilAgeRatingV2: String, Codable, CaseIterable, Sendable {
 			case selfRatedL = "SELF_RATED_L"
 			case selfRatedTen = "SELF_RATED_TEN"
 			case selfRatedTwelve = "SELF_RATED_TWELVE"
@@ -64,12 +64,12 @@ public struct AppInfo: Codable, Identifiable {
 		}
 
 		@available(*, deprecated, message: "Deprecated")
-		public enum FranceAgeRating: String, Codable, CaseIterable {
+		public enum FranceAgeRating: String, Codable, CaseIterable, Sendable {
 			case eighteen = "EIGHTEEN"
 		}
 
 		@available(*, deprecated, message: "Deprecated")
-		public enum KoreaAgeRating: String, Codable, CaseIterable {
+		public enum KoreaAgeRating: String, Codable, CaseIterable, Sendable {
 			case all = "ALL"
 			case twelve = "TWELVE"
 			case fifteen = "FIFTEEN"
@@ -113,7 +113,7 @@ public struct AppInfo: Codable, Identifiable {
 		}
 	}
 
-	public struct Relationships: Codable {
+	public struct Relationships: Codable, Sendable {
 		public var app: App?
 		public var ageRatingDeclaration: AgeRatingDeclaration?
 		public var appInfoLocalizations: AppInfoLocalizations?
@@ -125,14 +125,14 @@ public struct AppInfo: Codable, Identifiable {
 		public var secondarySubcategoryTwo: SecondarySubcategoryTwo?
 		public var territoryAgeRatings: TerritoryAgeRatings?
 
-		public struct App: Codable {
+		public struct App: Codable, Sendable {
 			public var data: Data?
 
-			public struct Data: Codable, Identifiable {
+			public struct Data: Codable, Identifiable, Sendable {
 				public var type: `Type`
 				public var id: String
 
-				public enum `Type`: String, Codable, CaseIterable {
+				public enum `Type`: String, Codable, CaseIterable, Sendable {
 					case apps
 				}
 
@@ -169,15 +169,15 @@ public struct AppInfo: Codable, Identifiable {
 			}
 		}
 
-		public struct AgeRatingDeclaration: Codable {
+		public struct AgeRatingDeclaration: Codable, Sendable {
 			public var links: RelationshipLinks?
 			public var data: Data?
 
-			public struct Data: Codable, Identifiable {
+			public struct Data: Codable, Identifiable, Sendable {
 				public var type: `Type`
 				public var id: String
 
-				public enum `Type`: String, Codable, CaseIterable {
+				public enum `Type`: String, Codable, CaseIterable, Sendable {
 					case ageRatingDeclarations
 				}
 
@@ -217,16 +217,16 @@ public struct AppInfo: Codable, Identifiable {
 			}
 		}
 
-		public struct AppInfoLocalizations: Codable {
+		public struct AppInfoLocalizations: Codable, Sendable {
 			public var links: RelationshipLinks?
 			public var meta: PagingInformation?
 			public var data: [Datum]?
 
-			public struct Datum: Codable, Identifiable {
+			public struct Datum: Codable, Identifiable, Sendable {
 				public var type: `Type`
 				public var id: String
 
-				public enum `Type`: String, Codable, CaseIterable {
+				public enum `Type`: String, Codable, CaseIterable, Sendable {
 					case appInfoLocalizations
 				}
 
@@ -269,15 +269,15 @@ public struct AppInfo: Codable, Identifiable {
 			}
 		}
 
-		public struct PrimaryCategory: Codable {
+		public struct PrimaryCategory: Codable, Sendable {
 			public var links: RelationshipLinks?
 			public var data: Data?
 
-			public struct Data: Codable, Identifiable {
+			public struct Data: Codable, Identifiable, Sendable {
 				public var type: `Type`
 				public var id: String
 
-				public enum `Type`: String, Codable, CaseIterable {
+				public enum `Type`: String, Codable, CaseIterable, Sendable {
 					case appCategories
 				}
 
@@ -317,15 +317,15 @@ public struct AppInfo: Codable, Identifiable {
 			}
 		}
 
-		public struct PrimarySubcategoryOne: Codable {
+		public struct PrimarySubcategoryOne: Codable, Sendable {
 			public var links: RelationshipLinks?
 			public var data: Data?
 
-			public struct Data: Codable, Identifiable {
+			public struct Data: Codable, Identifiable, Sendable {
 				public var type: `Type`
 				public var id: String
 
-				public enum `Type`: String, Codable, CaseIterable {
+				public enum `Type`: String, Codable, CaseIterable, Sendable {
 					case appCategories
 				}
 
@@ -365,15 +365,15 @@ public struct AppInfo: Codable, Identifiable {
 			}
 		}
 
-		public struct PrimarySubcategoryTwo: Codable {
+		public struct PrimarySubcategoryTwo: Codable, Sendable {
 			public var links: RelationshipLinks?
 			public var data: Data?
 
-			public struct Data: Codable, Identifiable {
+			public struct Data: Codable, Identifiable, Sendable {
 				public var type: `Type`
 				public var id: String
 
-				public enum `Type`: String, Codable, CaseIterable {
+				public enum `Type`: String, Codable, CaseIterable, Sendable {
 					case appCategories
 				}
 
@@ -413,15 +413,15 @@ public struct AppInfo: Codable, Identifiable {
 			}
 		}
 
-		public struct SecondaryCategory: Codable {
+		public struct SecondaryCategory: Codable, Sendable {
 			public var links: RelationshipLinks?
 			public var data: Data?
 
-			public struct Data: Codable, Identifiable {
+			public struct Data: Codable, Identifiable, Sendable {
 				public var type: `Type`
 				public var id: String
 
-				public enum `Type`: String, Codable, CaseIterable {
+				public enum `Type`: String, Codable, CaseIterable, Sendable {
 					case appCategories
 				}
 
@@ -461,15 +461,15 @@ public struct AppInfo: Codable, Identifiable {
 			}
 		}
 
-		public struct SecondarySubcategoryOne: Codable {
+		public struct SecondarySubcategoryOne: Codable, Sendable {
 			public var links: RelationshipLinks?
 			public var data: Data?
 
-			public struct Data: Codable, Identifiable {
+			public struct Data: Codable, Identifiable, Sendable {
 				public var type: `Type`
 				public var id: String
 
-				public enum `Type`: String, Codable, CaseIterable {
+				public enum `Type`: String, Codable, CaseIterable, Sendable {
 					case appCategories
 				}
 
@@ -509,15 +509,15 @@ public struct AppInfo: Codable, Identifiable {
 			}
 		}
 
-		public struct SecondarySubcategoryTwo: Codable {
+		public struct SecondarySubcategoryTwo: Codable, Sendable {
 			public var links: RelationshipLinks?
 			public var data: Data?
 
-			public struct Data: Codable, Identifiable {
+			public struct Data: Codable, Identifiable, Sendable {
 				public var type: `Type`
 				public var id: String
 
-				public enum `Type`: String, Codable, CaseIterable {
+				public enum `Type`: String, Codable, CaseIterable, Sendable {
 					case appCategories
 				}
 
@@ -557,7 +557,7 @@ public struct AppInfo: Codable, Identifiable {
 			}
 		}
 
-		public struct TerritoryAgeRatings: Codable {
+		public struct TerritoryAgeRatings: Codable, Sendable {
 			public var links: RelationshipLinks?
 
 			public init(links: RelationshipLinks? = nil) {

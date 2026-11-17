@@ -9,7 +9,7 @@ extension APIEndpoint.V1.SubscriptionVersions {
 		WithID(path: "\(path)/\(id)")
 	}
 
-	public struct WithID {
+	public struct WithID: Sendable {
 		/// Path: `/v1/subscriptionVersions/{id}`
 		public let path: String
 
@@ -17,7 +17,7 @@ extension APIEndpoint.V1.SubscriptionVersions {
 			Request(path: path, method: "GET", query: parameters?.asQuery, id: "subscriptionVersions_getInstance")
 		}
 
-		public struct GetParameters {
+		public struct GetParameters: Sendable {
 			public var fieldsSubscriptionVersions: [FieldsSubscriptionVersions]?
 			public var fieldsSubscriptions: [FieldsSubscriptions]?
 			public var fieldsSubscriptionImages: [FieldsSubscriptionImages]?
@@ -26,7 +26,7 @@ extension APIEndpoint.V1.SubscriptionVersions {
 			public var limitImages: Int?
 			public var limitLocalizations: Int?
 
-			public enum FieldsSubscriptionVersions: String, Codable, CaseIterable {
+			public enum FieldsSubscriptionVersions: String, Codable, CaseIterable, Sendable {
 				case version
 				case state
 				case subscription
@@ -35,7 +35,7 @@ extension APIEndpoint.V1.SubscriptionVersions {
 				case localizations
 			}
 
-			public enum FieldsSubscriptions: String, Codable, CaseIterable {
+			public enum FieldsSubscriptions: String, Codable, CaseIterable, Sendable {
 				case name
 				case productID = "productId"
 				case familySharable
@@ -64,7 +64,7 @@ extension APIEndpoint.V1.SubscriptionVersions {
 				case retentionMessageOffers
 			}
 
-			public enum FieldsSubscriptionImages: String, Codable, CaseIterable {
+			public enum FieldsSubscriptionImages: String, Codable, CaseIterable, Sendable {
 				case fileSize
 				case fileName
 				case assetToken
@@ -73,14 +73,14 @@ extension APIEndpoint.V1.SubscriptionVersions {
 				case assetDeliveryState
 			}
 
-			public enum FieldsSubscriptionLocalizations: String, Codable, CaseIterable {
+			public enum FieldsSubscriptionLocalizations: String, Codable, CaseIterable, Sendable {
 				case name
 				case locale
 				case description
 				case version
 			}
 
-			public enum Include: String, Codable, CaseIterable {
+			public enum Include: String, Codable, CaseIterable, Sendable {
 				case subscription
 				case image
 				case images

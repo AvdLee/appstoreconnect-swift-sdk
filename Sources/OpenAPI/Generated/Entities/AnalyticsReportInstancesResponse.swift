@@ -3,7 +3,7 @@
 
 import Foundation
 
-public struct AnalyticsReportInstancesResponse: Codable {
+public struct AnalyticsReportInstancesResponse: Codable, Sendable {
 	public var data: [AnalyticsReportInstance]
 	public var links: PagedDocumentLinks
 	public var meta: PagingInformation?

@@ -9,7 +9,7 @@ extension APIEndpoint.V2.InAppPurchases.WithID {
 		Versions(path: path + "/versions")
 	}
 
-	public struct Versions {
+	public struct Versions: Sendable {
 		/// Path: `/v2/inAppPurchases/{id}/versions`
 		public let path: String
 
@@ -17,7 +17,7 @@ extension APIEndpoint.V2.InAppPurchases.WithID {
 			Request(path: path, method: "GET", query: parameters?.asQuery, id: "inAppPurchasesV2_versions_getToManyRelated")
 		}
 
-		public struct GetParameters {
+		public struct GetParameters: Sendable {
 			public var filterState: [FilterState]?
 			public var fieldsInAppPurchaseVersions: [FieldsInAppPurchaseVersions]?
 			public var fieldsInAppPurchases: [FieldsInAppPurchases]?
@@ -28,7 +28,7 @@ extension APIEndpoint.V2.InAppPurchases.WithID {
 			public var limitImages: Int?
 			public var limitLocalizations: Int?
 
-			public enum FilterState: String, Codable, CaseIterable {
+			public enum FilterState: String, Codable, CaseIterable, Sendable {
 				case prepareForSubmission = "PREPARE_FOR_SUBMISSION"
 				case readyForReview = "READY_FOR_REVIEW"
 				case waitingForReview = "WAITING_FOR_REVIEW"
@@ -40,7 +40,7 @@ extension APIEndpoint.V2.InAppPurchases.WithID {
 				case developerRejected = "DEVELOPER_REJECTED"
 			}
 
-			public enum FieldsInAppPurchaseVersions: String, Codable, CaseIterable {
+			public enum FieldsInAppPurchaseVersions: String, Codable, CaseIterable, Sendable {
 				case version
 				case state
 				case inAppPurchase
@@ -49,7 +49,7 @@ extension APIEndpoint.V2.InAppPurchases.WithID {
 				case localizations
 			}
 
-			public enum FieldsInAppPurchases: String, Codable, CaseIterable {
+			public enum FieldsInAppPurchases: String, Codable, CaseIterable, Sendable {
 				case name
 				case productID = "productId"
 				case inAppPurchaseType
@@ -69,7 +69,7 @@ extension APIEndpoint.V2.InAppPurchases.WithID {
 				case versions
 			}
 
-			public enum FieldsInAppPurchaseImages: String, Codable, CaseIterable {
+			public enum FieldsInAppPurchaseImages: String, Codable, CaseIterable, Sendable {
 				case fileSize
 				case fileName
 				case assetToken
@@ -78,14 +78,14 @@ extension APIEndpoint.V2.InAppPurchases.WithID {
 				case assetDeliveryState
 			}
 
-			public enum FieldsInAppPurchaseLocalizations: String, Codable, CaseIterable {
+			public enum FieldsInAppPurchaseLocalizations: String, Codable, CaseIterable, Sendable {
 				case name
 				case locale
 				case description
 				case version
 			}
 
-			public enum Include: String, Codable, CaseIterable {
+			public enum Include: String, Codable, CaseIterable, Sendable {
 				case inAppPurchase
 				case image
 				case images

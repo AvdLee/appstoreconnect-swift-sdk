@@ -3,7 +3,7 @@
 
 import Foundation
 
-public enum BuildUploadState: String, Codable, CaseIterable {
+public enum BuildUploadState: String, Codable, CaseIterable, Sendable {
 	case awaitingUpload = "AWAITING_UPLOAD"
 	case processing = "PROCESSING"
 	case failed = "FAILED"

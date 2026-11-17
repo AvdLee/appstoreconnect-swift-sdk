@@ -9,7 +9,7 @@ extension APIEndpoint.V1 {
 		RoutingAppCoverages(path: path + "/routingAppCoverages")
 	}
 
-	public struct RoutingAppCoverages {
+	public struct RoutingAppCoverages: Sendable {
 		/// Path: `/v1/routingAppCoverages`
 		public let path: String
 

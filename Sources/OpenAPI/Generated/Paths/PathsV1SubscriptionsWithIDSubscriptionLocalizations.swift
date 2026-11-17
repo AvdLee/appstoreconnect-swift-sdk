@@ -9,7 +9,7 @@ extension APIEndpoint.V1.Subscriptions.WithID {
 		SubscriptionLocalizations(path: path + "/subscriptionLocalizations")
 	}
 
-	public struct SubscriptionLocalizations {
+	public struct SubscriptionLocalizations: Sendable {
 		/// Path: `/v1/subscriptions/{id}/subscriptionLocalizations`
 		public let path: String
 
@@ -17,13 +17,13 @@ extension APIEndpoint.V1.Subscriptions.WithID {
 			Request(path: path, method: "GET", query: parameters?.asQuery, id: "subscriptions_subscriptionLocalizations_getToManyRelated")
 		}
 
-		public struct GetParameters {
+		public struct GetParameters: Sendable {
 			public var fieldsSubscriptionLocalizations: [FieldsSubscriptionLocalizations]?
 			public var fieldsSubscriptions: [FieldsSubscriptions]?
 			public var limit: Int?
 			public var include: [Include]?
 
-			public enum FieldsSubscriptionLocalizations: String, Codable, CaseIterable {
+			public enum FieldsSubscriptionLocalizations: String, Codable, CaseIterable, Sendable {
 				case name
 				case locale
 				case description
@@ -31,7 +31,7 @@ extension APIEndpoint.V1.Subscriptions.WithID {
 				case subscription
 			}
 
-			public enum FieldsSubscriptions: String, Codable, CaseIterable {
+			public enum FieldsSubscriptions: String, Codable, CaseIterable, Sendable {
 				case name
 				case productID = "productId"
 				case familySharable
@@ -60,7 +60,7 @@ extension APIEndpoint.V1.Subscriptions.WithID {
 				case retentionMessageOffers
 			}
 
-			public enum Include: String, Codable, CaseIterable {
+			public enum Include: String, Codable, CaseIterable, Sendable {
 				case subscription
 			}
 

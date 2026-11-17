@@ -3,12 +3,12 @@
 
 import Foundation
 
-public struct ScmProviderType: Codable {
+public struct ScmProviderType: Codable, Sendable {
 	public var kind: Kind?
 	public var displayName: String?
 	public var isOnPremise: Bool?
 
-	public enum Kind: String, Codable, CaseIterable {
+	public enum Kind: String, Codable, CaseIterable, Sendable {
 		case bitbucketCloud = "BITBUCKET_CLOUD"
 		case bitbucketServer = "BITBUCKET_SERVER"
 		case githubCloud = "GITHUB_CLOUD"

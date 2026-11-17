@@ -9,7 +9,7 @@ extension APIEndpoint.V1.Webhooks.WithID {
 		Deliveries(path: path + "/deliveries")
 	}
 
-	public struct Deliveries {
+	public struct Deliveries: Sendable {
 		/// Path: `/v1/webhooks/{id}/deliveries`
 		public let path: String
 
@@ -17,7 +17,7 @@ extension APIEndpoint.V1.Webhooks.WithID {
 			Request(path: path, method: "GET", query: parameters?.asQuery, id: "webhooks_deliveries_getToManyRelated")
 		}
 
-		public struct GetParameters {
+		public struct GetParameters: Sendable {
 			public var filterDeliveryState: [FilterDeliveryState]?
 			public var filterCreatedDateGreaterThanOrEqualTo: [String]?
 			public var filterCreatedDateLessThan: [String]?
@@ -26,13 +26,13 @@ extension APIEndpoint.V1.Webhooks.WithID {
 			public var limit: Int?
 			public var include: [Include]?
 
-			public enum FilterDeliveryState: String, Codable, CaseIterable {
+			public enum FilterDeliveryState: String, Codable, CaseIterable, Sendable {
 				case succeeded = "SUCCEEDED"
 				case failed = "FAILED"
 				case pending = "PENDING"
 			}
 
-			public enum FieldsWebhookDeliveries: String, Codable, CaseIterable {
+			public enum FieldsWebhookDeliveries: String, Codable, CaseIterable, Sendable {
 				case createdDate
 				case deliveryState
 				case errorMessage
@@ -43,14 +43,14 @@ extension APIEndpoint.V1.Webhooks.WithID {
 				case event
 			}
 
-			public enum FieldsWebhookEvents: String, Codable, CaseIterable {
+			public enum FieldsWebhookEvents: String, Codable, CaseIterable, Sendable {
 				case eventType
 				case payload
 				case ping
 				case createdDate
 			}
 
-			public enum Include: String, Codable, CaseIterable {
+			public enum Include: String, Codable, CaseIterable, Sendable {
 				case event
 			}
 

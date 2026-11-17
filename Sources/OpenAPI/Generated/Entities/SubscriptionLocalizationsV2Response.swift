@@ -3,7 +3,7 @@
 
 import Foundation
 
-public struct SubscriptionLocalizationsV2Response: Codable {
+public struct SubscriptionLocalizationsV2Response: Codable, Sendable {
 	public var data: [SubscriptionLocalizationV2]
 	public var included: [SubscriptionVersion]?
 	public var links: PagedDocumentLinks

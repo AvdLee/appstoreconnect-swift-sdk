@@ -9,7 +9,7 @@ extension APIEndpoint.V1.UserInvitations.WithID {
 		VisibleApps(path: path + "/visibleApps")
 	}
 
-	public struct VisibleApps {
+	public struct VisibleApps: Sendable {
 		/// Path: `/v1/userInvitations/{id}/visibleApps`
 		public let path: String
 
@@ -24,7 +24,7 @@ extension APIEndpoint.V1.UserInvitations.WithID {
 			return encoder.items
 		}
 
-		public enum FieldsApps: String, Codable, CaseIterable {
+		public enum FieldsApps: String, Codable, CaseIterable, Sendable {
 			case accessibilityURL = "accessibilityUrl"
 			case name
 			case bundleID = "bundleId"

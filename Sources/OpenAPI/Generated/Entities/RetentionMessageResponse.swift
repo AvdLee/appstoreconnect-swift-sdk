@@ -3,13 +3,13 @@
 
 import Foundation
 
-public struct RetentionMessageResponse: Codable {
+public struct RetentionMessageResponse: Codable, Sendable {
 	/// RetentionMessage
 	public var data: RetentionMessage
 	public var included: [IncludedItem]?
 	public var links: DocumentLinks
 
-	public enum IncludedItem: Codable {
+	public enum IncludedItem: Codable, Sendable {
 		case retentionMessageVersion(RetentionMessageVersion)
 		case subscription(Subscription)
 

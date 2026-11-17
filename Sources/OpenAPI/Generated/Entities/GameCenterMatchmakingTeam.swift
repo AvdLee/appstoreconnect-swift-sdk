@@ -3,17 +3,17 @@
 
 import Foundation
 
-public struct GameCenterMatchmakingTeam: Codable, Identifiable {
+public struct GameCenterMatchmakingTeam: Codable, Identifiable, Sendable {
 	public var type: `Type`
 	public var id: String
 	public var attributes: Attributes?
 	public var links: ResourceLinks?
 
-	public enum `Type`: String, Codable, CaseIterable {
+	public enum `Type`: String, Codable, CaseIterable, Sendable {
 		case gameCenterMatchmakingTeams
 	}
 
-	public struct Attributes: Codable {
+	public struct Attributes: Codable, Sendable {
 		public var referenceName: String?
 		public var minPlayers: Int?
 		public var maxPlayers: Int?

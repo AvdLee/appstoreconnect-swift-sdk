@@ -9,7 +9,7 @@ extension APIEndpoint.V1.GameCenterLeaderboards.WithID {
 		Releases(path: path + "/releases")
 	}
 
-	public struct Releases {
+	public struct Releases: Sendable {
 		/// Path: `/v1/gameCenterLeaderboards/{id}/releases`
 		public let path: String
 
@@ -18,7 +18,7 @@ extension APIEndpoint.V1.GameCenterLeaderboards.WithID {
 			Request(path: path, method: "GET", query: parameters?.asQuery, id: "gameCenterLeaderboards_releases_getToManyRelated")
 		}
 
-		public struct GetParameters {
+		public struct GetParameters: Sendable {
 			public var filterLive: [String]?
 			public var filterGameCenterDetail: [String]?
 			public var fieldsGameCenterLeaderboardReleases: [FieldsGameCenterLeaderboardReleases]?
@@ -27,13 +27,13 @@ extension APIEndpoint.V1.GameCenterLeaderboards.WithID {
 			public var limit: Int?
 			public var include: [Include]?
 
-			public enum FieldsGameCenterLeaderboardReleases: String, Codable, CaseIterable {
+			public enum FieldsGameCenterLeaderboardReleases: String, Codable, CaseIterable, Sendable {
 				case live
 				case gameCenterDetail
 				case gameCenterLeaderboard
 			}
 
-			public enum FieldsGameCenterDetails: String, Codable, CaseIterable {
+			public enum FieldsGameCenterDetails: String, Codable, CaseIterable, Sendable {
 				case arcadeEnabled
 				case challengeEnabled
 				case app
@@ -60,7 +60,7 @@ extension APIEndpoint.V1.GameCenterLeaderboards.WithID {
 				case challengesMinimumPlatformVersions
 			}
 
-			public enum FieldsGameCenterLeaderboards: String, Codable, CaseIterable {
+			public enum FieldsGameCenterLeaderboards: String, Codable, CaseIterable, Sendable {
 				case defaultFormatter
 				case referenceName
 				case vendorIdentifier
@@ -84,7 +84,7 @@ extension APIEndpoint.V1.GameCenterLeaderboards.WithID {
 				case challenge
 			}
 
-			public enum Include: String, Codable, CaseIterable {
+			public enum Include: String, Codable, CaseIterable, Sendable {
 				case gameCenterDetail
 				case gameCenterLeaderboard
 			}

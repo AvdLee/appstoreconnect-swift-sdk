@@ -9,7 +9,7 @@ extension APIEndpoint.V1.AppStoreVersions.WithID {
 		AlternativeDistributionPackage(path: path + "/alternativeDistributionPackage")
 	}
 
-	public struct AlternativeDistributionPackage {
+	public struct AlternativeDistributionPackage: Sendable {
 		/// Path: `/v1/appStoreVersions/{id}/alternativeDistributionPackage`
 		public let path: String
 
@@ -17,18 +17,18 @@ extension APIEndpoint.V1.AppStoreVersions.WithID {
 			Request(path: path, method: "GET", query: parameters?.asQuery, id: "appStoreVersions_alternativeDistributionPackage_getToOneRelated")
 		}
 
-		public struct GetParameters {
+		public struct GetParameters: Sendable {
 			public var fieldsAlternativeDistributionPackages: [FieldsAlternativeDistributionPackages]?
 			public var fieldsAlternativeDistributionPackageVersions: [FieldsAlternativeDistributionPackageVersions]?
 			public var include: [Include]?
 			public var limitVersions: Int?
 
-			public enum FieldsAlternativeDistributionPackages: String, Codable, CaseIterable {
+			public enum FieldsAlternativeDistributionPackages: String, Codable, CaseIterable, Sendable {
 				case sourceFileChecksum
 				case versions
 			}
 
-			public enum FieldsAlternativeDistributionPackageVersions: String, Codable, CaseIterable {
+			public enum FieldsAlternativeDistributionPackageVersions: String, Codable, CaseIterable, Sendable {
 				case url
 				case urlExpirationDate
 				case version
@@ -39,7 +39,7 @@ extension APIEndpoint.V1.AppStoreVersions.WithID {
 				case alternativeDistributionPackage
 			}
 
-			public enum Include: String, Codable, CaseIterable {
+			public enum Include: String, Codable, CaseIterable, Sendable {
 				case versions
 			}
 

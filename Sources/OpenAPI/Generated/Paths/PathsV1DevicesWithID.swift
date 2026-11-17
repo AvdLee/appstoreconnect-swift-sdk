@@ -9,7 +9,7 @@ extension APIEndpoint.V1.Devices {
 		WithID(path: "\(path)/\(id)")
 	}
 
-	public struct WithID {
+	public struct WithID: Sendable {
 		/// Path: `/v1/devices/{id}`
 		public let path: String
 
@@ -23,7 +23,7 @@ extension APIEndpoint.V1.Devices {
 			return encoder.items
 		}
 
-		public enum FieldsDevices: String, Codable, CaseIterable {
+		public enum FieldsDevices: String, Codable, CaseIterable, Sendable {
 			case name
 			case platform
 			case udid

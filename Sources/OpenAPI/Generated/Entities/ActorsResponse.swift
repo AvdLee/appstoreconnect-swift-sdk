@@ -3,7 +3,7 @@
 
 import Foundation
 
-public struct ActorsResponse: Codable {
+public struct ActorsResponse: Codable, Sendable {
 	public var data: [Actor]
 	public var links: PagedDocumentLinks
 	public var meta: PagingInformation?

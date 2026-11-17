@@ -9,7 +9,7 @@ extension APIEndpoint.V2 {
 		SandboxTestersClearPurchaseHistoryRequest(path: path + "/sandboxTestersClearPurchaseHistoryRequest")
 	}
 
-	public struct SandboxTestersClearPurchaseHistoryRequest {
+	public struct SandboxTestersClearPurchaseHistoryRequest: Sendable {
 		/// Path: `/v2/sandboxTestersClearPurchaseHistoryRequest`
 		public let path: String
 

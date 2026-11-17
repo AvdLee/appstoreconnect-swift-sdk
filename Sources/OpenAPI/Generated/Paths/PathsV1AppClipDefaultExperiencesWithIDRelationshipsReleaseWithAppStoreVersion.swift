@@ -9,7 +9,7 @@ extension APIEndpoint.V1.AppClipDefaultExperiences.WithID.Relationships {
 		ReleaseWithAppStoreVersion(path: path + "/releaseWithAppStoreVersion")
 	}
 
-	public struct ReleaseWithAppStoreVersion {
+	public struct ReleaseWithAppStoreVersion: Sendable {
 		/// Path: `/v1/appClipDefaultExperiences/{id}/relationships/releaseWithAppStoreVersion`
 		public let path: String
 

@@ -9,7 +9,7 @@ extension APIEndpoint.V1.GameCenterMatchmakingTeams {
 		WithID(path: "\(path)/\(id)")
 	}
 
-	public struct WithID {
+	public struct WithID: Sendable {
 		/// Path: `/v1/gameCenterMatchmakingTeams/{id}`
 		public let path: String
 

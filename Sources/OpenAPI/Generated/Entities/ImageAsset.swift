@@ -3,7 +3,7 @@
 
 import Foundation
 
-public struct ImageAsset: Codable {
+public struct ImageAsset: Codable, Sendable {
 	public var templateURL: String?
 	public var width: Int?
 	public var height: Int?

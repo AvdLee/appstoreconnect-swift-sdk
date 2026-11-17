@@ -9,7 +9,7 @@ extension APIEndpoint.V1.ScmGitReferences {
 		WithID(path: "\(path)/\(id)")
 	}
 
-	public struct WithID {
+	public struct WithID: Sendable {
 		/// Path: `/v1/scmGitReferences/{id}`
 		public let path: String
 
@@ -17,12 +17,12 @@ extension APIEndpoint.V1.ScmGitReferences {
 			Request(path: path, method: "GET", query: parameters?.asQuery, id: "scmGitReferences_getInstance")
 		}
 
-		public struct GetParameters {
+		public struct GetParameters: Sendable {
 			public var fieldsScmGitReferences: [FieldsScmGitReferences]?
 			public var fieldsScmRepositories: [FieldsScmRepositories]?
 			public var include: [Include]?
 
-			public enum FieldsScmGitReferences: String, Codable, CaseIterable {
+			public enum FieldsScmGitReferences: String, Codable, CaseIterable, Sendable {
 				case name
 				case canonicalName
 				case isDeleted
@@ -30,7 +30,7 @@ extension APIEndpoint.V1.ScmGitReferences {
 				case repository
 			}
 
-			public enum FieldsScmRepositories: String, Codable, CaseIterable {
+			public enum FieldsScmRepositories: String, Codable, CaseIterable, Sendable {
 				case lastAccessedDate
 				case httpCloneURL = "httpCloneUrl"
 				case sshCloneURL = "sshCloneUrl"
@@ -42,7 +42,7 @@ extension APIEndpoint.V1.ScmGitReferences {
 				case pullRequests
 			}
 
-			public enum Include: String, Codable, CaseIterable {
+			public enum Include: String, Codable, CaseIterable, Sendable {
 				case repository
 			}
 

@@ -3,7 +3,7 @@
 
 import Foundation
 
-public struct InAppPurchaseOfferCodeCustomCodeResponse: Codable {
+public struct InAppPurchaseOfferCodeCustomCodeResponse: Codable, Sendable {
 	/// InAppPurchaseOfferCodeCustomCode
 	public var data: InAppPurchaseOfferCodeCustomCode
 	public var included: [Actor]?

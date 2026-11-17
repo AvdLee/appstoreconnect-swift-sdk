@@ -3,7 +3,7 @@
 
 import Foundation
 
-public struct SubscriptionOfferCodeCustomCodesResponse: Codable {
+public struct SubscriptionOfferCodeCustomCodesResponse: Codable, Sendable {
 	public var data: [SubscriptionOfferCodeCustomCode]
 	public var included: [SubscriptionOfferCode]?
 	public var links: PagedDocumentLinks

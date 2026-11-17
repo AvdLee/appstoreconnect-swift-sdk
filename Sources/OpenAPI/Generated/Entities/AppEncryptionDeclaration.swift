@@ -3,18 +3,18 @@
 
 import Foundation
 
-public struct AppEncryptionDeclaration: Codable, Identifiable {
+public struct AppEncryptionDeclaration: Codable, Identifiable, Sendable {
 	public var type: `Type`
 	public var id: String
 	public var attributes: Attributes?
 	public var relationships: Relationships?
 	public var links: ResourceLinks?
 
-	public enum `Type`: String, Codable, CaseIterable {
+	public enum `Type`: String, Codable, CaseIterable, Sendable {
 		case appEncryptionDeclarations
 	}
 
-	public struct Attributes: Codable {
+	public struct Attributes: Codable, Sendable {
 		public var appDescription: String?
 		public var createdDate: Date?
 		/// - warning: Deprecated.
@@ -89,7 +89,7 @@ public struct AppEncryptionDeclaration: Codable, Identifiable {
 		}
 	}
 
-	public struct Relationships: Codable {
+	public struct Relationships: Codable, Sendable {
 		/// - warning: Deprecated.
 		public var app: App?
 		/// - warning: Deprecated.
@@ -97,15 +97,15 @@ public struct AppEncryptionDeclaration: Codable, Identifiable {
 		public var appEncryptionDeclarationDocument: AppEncryptionDeclarationDocument?
 
 		@available(*, deprecated, message: "Deprecated")
-		public struct App: Codable {
+		public struct App: Codable, Sendable {
 			public var links: RelationshipLinks?
 			public var data: Data?
 
-			public struct Data: Codable, Identifiable {
+			public struct Data: Codable, Identifiable, Sendable {
 				public var type: `Type`
 				public var id: String
 
-				public enum `Type`: String, Codable, CaseIterable {
+				public enum `Type`: String, Codable, CaseIterable, Sendable {
 					case apps
 				}
 
@@ -146,16 +146,16 @@ public struct AppEncryptionDeclaration: Codable, Identifiable {
 		}
 
 		@available(*, deprecated, message: "Deprecated")
-		public struct Builds: Codable {
+		public struct Builds: Codable, Sendable {
 			public var links: RelationshipLinks?
 			public var meta: PagingInformation?
 			public var data: [Datum]?
 
-			public struct Datum: Codable, Identifiable {
+			public struct Datum: Codable, Identifiable, Sendable {
 				public var type: `Type`
 				public var id: String
 
-				public enum `Type`: String, Codable, CaseIterable {
+				public enum `Type`: String, Codable, CaseIterable, Sendable {
 					case builds
 				}
 
@@ -198,15 +198,15 @@ public struct AppEncryptionDeclaration: Codable, Identifiable {
 			}
 		}
 
-		public struct AppEncryptionDeclarationDocument: Codable {
+		public struct AppEncryptionDeclarationDocument: Codable, Sendable {
 			public var links: RelationshipLinks?
 			public var data: Data?
 
-			public struct Data: Codable, Identifiable {
+			public struct Data: Codable, Identifiable, Sendable {
 				public var type: `Type`
 				public var id: String
 
-				public enum `Type`: String, Codable, CaseIterable {
+				public enum `Type`: String, Codable, CaseIterable, Sendable {
 					case appEncryptionDeclarationDocuments
 				}
 

@@ -9,7 +9,7 @@ extension APIEndpoint.V1 {
 		AlternativeDistributionKeys(path: path + "/alternativeDistributionKeys")
 	}
 
-	public struct AlternativeDistributionKeys {
+	public struct AlternativeDistributionKeys: Sendable {
 		/// Path: `/v1/alternativeDistributionKeys`
 		public let path: String
 
@@ -17,12 +17,12 @@ extension APIEndpoint.V1 {
 			Request(path: path, method: "GET", query: parameters?.asQuery, id: "alternativeDistributionKeys_getCollection")
 		}
 
-		public struct GetParameters {
+		public struct GetParameters: Sendable {
 			public var isExistsApp: Bool?
 			public var fieldsAlternativeDistributionKeys: [FieldsAlternativeDistributionKeys]?
 			public var limit: Int?
 
-			public enum FieldsAlternativeDistributionKeys: String, Codable, CaseIterable {
+			public enum FieldsAlternativeDistributionKeys: String, Codable, CaseIterable, Sendable {
 				case publicKey
 			}
 

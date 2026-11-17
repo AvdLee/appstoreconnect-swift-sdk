@@ -3,20 +3,20 @@
 
 import Foundation
 
-public struct AppStoreVersionUpdateRequest: Codable {
+public struct AppStoreVersionUpdateRequest: Codable, Sendable {
 	public var data: Data
 
-	public struct Data: Codable, Identifiable {
+	public struct Data: Codable, Identifiable, Sendable {
 		public var type: `Type`
 		public var id: String
 		public var attributes: Attributes?
 		public var relationships: Relationships?
 
-		public enum `Type`: String, Codable, CaseIterable {
+		public enum `Type`: String, Codable, CaseIterable, Sendable {
 			case appStoreVersions
 		}
 
-		public struct Attributes: Codable {
+		public struct Attributes: Codable, Sendable {
 			public var versionString: String?
 			public var copyright: String?
 			public var reviewType: ReviewType?
@@ -26,12 +26,12 @@ public struct AppStoreVersionUpdateRequest: Codable {
 			public var usesIdfa: Bool?
 			public var isDownloadable: Bool?
 
-			public enum ReviewType: String, Codable, CaseIterable {
+			public enum ReviewType: String, Codable, CaseIterable, Sendable {
 				case appStore = "APP_STORE"
 				case notarization = "NOTARIZATION"
 			}
 
-			public enum ReleaseType: String, Codable, CaseIterable {
+			public enum ReleaseType: String, Codable, CaseIterable, Sendable {
 				case manual = "MANUAL"
 				case afterApproval = "AFTER_APPROVAL"
 				case scheduled = "SCHEDULED"
@@ -70,18 +70,18 @@ public struct AppStoreVersionUpdateRequest: Codable {
 			}
 		}
 
-		public struct Relationships: Codable {
+		public struct Relationships: Codable, Sendable {
 			public var build: Build?
 			public var appClipDefaultExperience: AppClipDefaultExperience?
 
-			public struct Build: Codable {
+			public struct Build: Codable, Sendable {
 				public var data: Data?
 
-				public struct Data: Codable, Identifiable {
+				public struct Data: Codable, Identifiable, Sendable {
 					public var type: `Type`
 					public var id: String
 
-					public enum `Type`: String, Codable, CaseIterable {
+					public enum `Type`: String, Codable, CaseIterable, Sendable {
 						case builds
 					}
 
@@ -118,14 +118,14 @@ public struct AppStoreVersionUpdateRequest: Codable {
 				}
 			}
 
-			public struct AppClipDefaultExperience: Codable {
+			public struct AppClipDefaultExperience: Codable, Sendable {
 				public var data: Data?
 
-				public struct Data: Codable, Identifiable {
+				public struct Data: Codable, Identifiable, Sendable {
 					public var type: `Type`
 					public var id: String
 
-					public enum `Type`: String, Codable, CaseIterable {
+					public enum `Type`: String, Codable, CaseIterable, Sendable {
 						case appClipDefaultExperiences
 					}
 

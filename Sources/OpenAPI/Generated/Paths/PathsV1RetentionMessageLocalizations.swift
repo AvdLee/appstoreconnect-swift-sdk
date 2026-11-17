@@ -9,7 +9,7 @@ extension APIEndpoint.V1 {
 		RetentionMessageLocalizations(path: path + "/retentionMessageLocalizations")
 	}
 
-	public struct RetentionMessageLocalizations {
+	public struct RetentionMessageLocalizations: Sendable {
 		/// Path: `/v1/retentionMessageLocalizations`
 		public let path: String
 

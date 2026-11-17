@@ -9,7 +9,7 @@ extension APIEndpoint.V1.GameCenterLeaderboardSetReleases {
 		WithID(path: "\(path)/\(id)")
 	}
 
-	public struct WithID {
+	public struct WithID: Sendable {
 		/// Path: `/v1/gameCenterLeaderboardSetReleases/{id}`
 		public let path: String
 
@@ -18,19 +18,19 @@ extension APIEndpoint.V1.GameCenterLeaderboardSetReleases {
 			Request(path: path, method: "GET", query: parameters?.asQuery, id: "gameCenterLeaderboardSetReleases_getInstance")
 		}
 
-		public struct GetParameters {
+		public struct GetParameters: Sendable {
 			public var fieldsGameCenterLeaderboardSetReleases: [FieldsGameCenterLeaderboardSetReleases]?
 			public var fieldsGameCenterDetails: [FieldsGameCenterDetails]?
 			public var fieldsGameCenterLeaderboardSets: [FieldsGameCenterLeaderboardSets]?
 			public var include: [Include]?
 
-			public enum FieldsGameCenterLeaderboardSetReleases: String, Codable, CaseIterable {
+			public enum FieldsGameCenterLeaderboardSetReleases: String, Codable, CaseIterable, Sendable {
 				case live
 				case gameCenterDetail
 				case gameCenterLeaderboardSet
 			}
 
-			public enum FieldsGameCenterDetails: String, Codable, CaseIterable {
+			public enum FieldsGameCenterDetails: String, Codable, CaseIterable, Sendable {
 				case arcadeEnabled
 				case challengeEnabled
 				case app
@@ -57,7 +57,7 @@ extension APIEndpoint.V1.GameCenterLeaderboardSetReleases {
 				case challengesMinimumPlatformVersions
 			}
 
-			public enum FieldsGameCenterLeaderboardSets: String, Codable, CaseIterable {
+			public enum FieldsGameCenterLeaderboardSets: String, Codable, CaseIterable, Sendable {
 				case referenceName
 				case vendorIdentifier
 				case gameCenterDetail
@@ -68,7 +68,7 @@ extension APIEndpoint.V1.GameCenterLeaderboardSetReleases {
 				case releases
 			}
 
-			public enum Include: String, Codable, CaseIterable {
+			public enum Include: String, Codable, CaseIterable, Sendable {
 				case gameCenterDetail
 				case gameCenterLeaderboardSet
 			}

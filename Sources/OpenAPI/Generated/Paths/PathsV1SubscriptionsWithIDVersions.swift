@@ -9,7 +9,7 @@ extension APIEndpoint.V1.Subscriptions.WithID {
 		Versions(path: path + "/versions")
 	}
 
-	public struct Versions {
+	public struct Versions: Sendable {
 		/// Path: `/v1/subscriptions/{id}/versions`
 		public let path: String
 
@@ -17,7 +17,7 @@ extension APIEndpoint.V1.Subscriptions.WithID {
 			Request(path: path, method: "GET", query: parameters?.asQuery, id: "subscriptions_versions_getToManyRelated")
 		}
 
-		public struct GetParameters {
+		public struct GetParameters: Sendable {
 			public var filterState: [FilterState]?
 			public var fieldsSubscriptionVersions: [FieldsSubscriptionVersions]?
 			public var fieldsSubscriptions: [FieldsSubscriptions]?
@@ -28,7 +28,7 @@ extension APIEndpoint.V1.Subscriptions.WithID {
 			public var limitImages: Int?
 			public var limitLocalizations: Int?
 
-			public enum FilterState: String, Codable, CaseIterable {
+			public enum FilterState: String, Codable, CaseIterable, Sendable {
 				case prepareForSubmission = "PREPARE_FOR_SUBMISSION"
 				case readyForReview = "READY_FOR_REVIEW"
 				case waitingForReview = "WAITING_FOR_REVIEW"
@@ -40,7 +40,7 @@ extension APIEndpoint.V1.Subscriptions.WithID {
 				case developerRejected = "DEVELOPER_REJECTED"
 			}
 
-			public enum FieldsSubscriptionVersions: String, Codable, CaseIterable {
+			public enum FieldsSubscriptionVersions: String, Codable, CaseIterable, Sendable {
 				case version
 				case state
 				case subscription
@@ -49,7 +49,7 @@ extension APIEndpoint.V1.Subscriptions.WithID {
 				case localizations
 			}
 
-			public enum FieldsSubscriptions: String, Codable, CaseIterable {
+			public enum FieldsSubscriptions: String, Codable, CaseIterable, Sendable {
 				case name
 				case productID = "productId"
 				case familySharable
@@ -78,7 +78,7 @@ extension APIEndpoint.V1.Subscriptions.WithID {
 				case retentionMessageOffers
 			}
 
-			public enum FieldsSubscriptionImages: String, Codable, CaseIterable {
+			public enum FieldsSubscriptionImages: String, Codable, CaseIterable, Sendable {
 				case fileSize
 				case fileName
 				case assetToken
@@ -87,14 +87,14 @@ extension APIEndpoint.V1.Subscriptions.WithID {
 				case assetDeliveryState
 			}
 
-			public enum FieldsSubscriptionLocalizations: String, Codable, CaseIterable {
+			public enum FieldsSubscriptionLocalizations: String, Codable, CaseIterable, Sendable {
 				case name
 				case locale
 				case description
 				case version
 			}
 
-			public enum Include: String, Codable, CaseIterable {
+			public enum Include: String, Codable, CaseIterable, Sendable {
 				case subscription
 				case image
 				case images

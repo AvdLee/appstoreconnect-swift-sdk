@@ -4,4 +4,4 @@
 import Foundation
 import URLQueryEncoder
 
-public enum APIEndpoint {}
+public enum APIEndpoint: Sendable {}

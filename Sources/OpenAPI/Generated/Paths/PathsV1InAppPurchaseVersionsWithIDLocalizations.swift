@@ -9,7 +9,7 @@ extension APIEndpoint.V1.InAppPurchaseVersions.WithID {
 		Localizations(path: path + "/localizations")
 	}
 
-	public struct Localizations {
+	public struct Localizations: Sendable {
 		/// Path: `/v1/inAppPurchaseVersions/{id}/localizations`
 		public let path: String
 
@@ -17,20 +17,20 @@ extension APIEndpoint.V1.InAppPurchaseVersions.WithID {
 			Request(path: path, method: "GET", query: parameters?.asQuery, id: "inAppPurchaseVersions_localizations_getToManyRelated")
 		}
 
-		public struct GetParameters {
+		public struct GetParameters: Sendable {
 			public var fieldsInAppPurchaseLocalizations: [FieldsInAppPurchaseLocalizations]?
 			public var fieldsInAppPurchaseVersions: [FieldsInAppPurchaseVersions]?
 			public var limit: Int?
 			public var include: [Include]?
 
-			public enum FieldsInAppPurchaseLocalizations: String, Codable, CaseIterable {
+			public enum FieldsInAppPurchaseLocalizations: String, Codable, CaseIterable, Sendable {
 				case name
 				case locale
 				case description
 				case version
 			}
 
-			public enum FieldsInAppPurchaseVersions: String, Codable, CaseIterable {
+			public enum FieldsInAppPurchaseVersions: String, Codable, CaseIterable, Sendable {
 				case version
 				case state
 				case inAppPurchase
@@ -39,7 +39,7 @@ extension APIEndpoint.V1.InAppPurchaseVersions.WithID {
 				case localizations
 			}
 
-			public enum Include: String, Codable, CaseIterable {
+			public enum Include: String, Codable, CaseIterable, Sendable {
 				case version
 			}
 

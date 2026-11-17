@@ -9,7 +9,7 @@ extension APIEndpoint.V1 {
 		AppEncryptionDeclarations(path: path + "/appEncryptionDeclarations")
 	}
 
-	public struct AppEncryptionDeclarations {
+	public struct AppEncryptionDeclarations: Sendable {
 		/// Path: `/v1/appEncryptionDeclarations`
 		public let path: String
 
@@ -17,7 +17,7 @@ extension APIEndpoint.V1 {
 			Request(path: path, method: "GET", query: parameters?.asQuery, id: "appEncryptionDeclarations_getCollection")
 		}
 
-		public struct GetParameters {
+		public struct GetParameters: Sendable {
 			public var filterPlatform: [FilterPlatform]?
 			public var filterApp: [String]?
 			public var filterBuilds: [String]?
@@ -29,14 +29,14 @@ extension APIEndpoint.V1 {
 			public var include: [Include]?
 			public var limitBuilds: Int?
 
-			public enum FilterPlatform: String, Codable, CaseIterable {
+			public enum FilterPlatform: String, Codable, CaseIterable, Sendable {
 				case ios = "IOS"
 				case macOs = "MAC_OS"
 				case tvOs = "TV_OS"
 				case visionOs = "VISION_OS"
 			}
 
-			public enum FieldsAppEncryptionDeclarations: String, Codable, CaseIterable {
+			public enum FieldsAppEncryptionDeclarations: String, Codable, CaseIterable, Sendable {
 				case appDescription
 				case createdDate
 				case usesEncryption
@@ -56,7 +56,7 @@ extension APIEndpoint.V1 {
 				case appEncryptionDeclarationDocument
 			}
 
-			public enum FieldsApps: String, Codable, CaseIterable {
+			public enum FieldsApps: String, Codable, CaseIterable, Sendable {
 				case accessibilityURL = "accessibilityUrl"
 				case name
 				case bundleID = "bundleId"
@@ -117,7 +117,7 @@ extension APIEndpoint.V1 {
 				case androidToIosAppMappingDetails
 			}
 
-			public enum FieldsBuilds: String, Codable, CaseIterable {
+			public enum FieldsBuilds: String, Codable, CaseIterable, Sendable {
 				case version
 				case uploadedDate
 				case expirationDate
@@ -146,7 +146,7 @@ extension APIEndpoint.V1 {
 				case diagnosticSignatures
 			}
 
-			public enum FieldsAppEncryptionDeclarationDocuments: String, Codable, CaseIterable {
+			public enum FieldsAppEncryptionDeclarationDocuments: String, Codable, CaseIterable, Sendable {
 				case fileSize
 				case fileName
 				case assetToken
@@ -156,7 +156,7 @@ extension APIEndpoint.V1 {
 				case assetDeliveryState
 			}
 
-			public enum Include: String, Codable, CaseIterable {
+			public enum Include: String, Codable, CaseIterable, Sendable {
 				case app
 				case builds
 				case appEncryptionDeclarationDocument

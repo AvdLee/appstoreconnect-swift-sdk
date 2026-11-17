@@ -9,7 +9,7 @@ extension APIEndpoint.V1 {
 		AppClipAdvancedExperienceImages(path: path + "/appClipAdvancedExperienceImages")
 	}
 
-	public struct AppClipAdvancedExperienceImages {
+	public struct AppClipAdvancedExperienceImages: Sendable {
 		/// Path: `/v1/appClipAdvancedExperienceImages`
 		public let path: String
 

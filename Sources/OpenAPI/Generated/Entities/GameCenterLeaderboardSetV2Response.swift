@@ -3,13 +3,13 @@
 
 import Foundation
 
-public struct GameCenterLeaderboardSetV2Response: Codable {
+public struct GameCenterLeaderboardSetV2Response: Codable, Sendable {
 	/// GameCenterLeaderboardSetV2
 	public var data: GameCenterLeaderboardSetV2
 	public var included: [IncludedItem]?
 	public var links: DocumentLinks
 
-	public enum IncludedItem: Codable {
+	public enum IncludedItem: Codable, Sendable {
 		case gameCenterDetail(GameCenterDetail)
 		case gameCenterGroup(GameCenterGroup)
 		case gameCenterLeaderboardSetVersionV2(GameCenterLeaderboardSetVersionV2)

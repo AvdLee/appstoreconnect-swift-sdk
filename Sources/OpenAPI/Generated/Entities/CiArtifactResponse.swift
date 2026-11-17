@@ -3,7 +3,7 @@
 
 import Foundation
 
-public struct CiArtifactResponse: Codable {
+public struct CiArtifactResponse: Codable, Sendable {
 	/// CiArtifact
 	public var data: CiArtifact
 	public var links: DocumentLinks

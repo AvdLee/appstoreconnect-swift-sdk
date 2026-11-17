@@ -9,7 +9,7 @@ extension APIEndpoint.V1.Apps.WithID.Relationships {
 		AssetLibrary(path: path + "/assetLibrary")
 	}
 
-	public struct AssetLibrary {
+	public struct AssetLibrary: Sendable {
 		/// Path: `/v1/apps/{id}/relationships/assetLibrary`
 		public let path: String
 

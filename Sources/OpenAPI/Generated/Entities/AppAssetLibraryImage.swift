@@ -3,18 +3,18 @@
 
 import Foundation
 
-public struct AppAssetLibraryImage: Codable, Identifiable {
+public struct AppAssetLibraryImage: Codable, Identifiable, Sendable {
 	public var type: `Type`
 	public var id: String
 	public var attributes: Attributes?
 	public var relationships: Relationships?
 	public var links: ResourceLinks?
 
-	public enum `Type`: String, Codable, CaseIterable {
+	public enum `Type`: String, Codable, CaseIterable, Sendable {
 		case appAssetLibraryImages
 	}
 
-	public enum Attributes: Codable {
+	public enum Attributes: Codable, Sendable {
 		case appAssetLibraryImageAwaitingUploadAttributes(AppAssetLibraryImageAwaitingUploadAttributes)
 		case appAssetLibraryImageUploadCompleteAttributes(AppAssetLibraryImageUploadCompleteAttributes)
 		case appAssetLibraryImageFailedAttributes(AppAssetLibraryImageFailedAttributes)
@@ -76,19 +76,19 @@ public struct AppAssetLibraryImage: Codable, Identifiable {
 		}
 	}
 
-	public struct Relationships: Codable {
+	public struct Relationships: Codable, Sendable {
 		public var placements: Placements?
 
-		public struct Placements: Codable {
+		public struct Placements: Codable, Sendable {
 			public var links: RelationshipLinks?
 			public var meta: PagingInformation?
 			public var data: [Datum]?
 
-			public struct Datum: Codable, Identifiable {
+			public struct Datum: Codable, Identifiable, Sendable {
 				public var type: `Type`
 				public var id: String
 
-				public enum `Type`: String, Codable, CaseIterable {
+				public enum `Type`: String, Codable, CaseIterable, Sendable {
 					case appAssetLibraryPlacements
 				}
 

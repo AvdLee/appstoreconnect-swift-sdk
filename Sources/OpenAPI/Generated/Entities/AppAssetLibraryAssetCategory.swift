@@ -3,7 +3,7 @@
 
 import Foundation
 
-public enum AppAssetLibraryAssetCategory: String, Codable, CaseIterable {
+public enum AppAssetLibraryAssetCategory: String, Codable, CaseIterable, Sendable {
 	case creativeAssets = "CREATIVE_ASSETS"
 	case appScreenshotsAndPreviews = "APP_SCREENSHOTS_AND_PREVIEWS"
 }

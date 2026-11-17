@@ -3,11 +3,11 @@
 
 import Foundation
 
-public struct CiTagPatterns: Codable {
+public struct CiTagPatterns: Codable, Sendable {
 	public var isAllMatch: Bool?
 	public var patterns: [Pattern]?
 
-	public struct Pattern: Codable {
+	public struct Pattern: Codable, Sendable {
 		public var pattern: String?
 		public var isPrefix: Bool?
 

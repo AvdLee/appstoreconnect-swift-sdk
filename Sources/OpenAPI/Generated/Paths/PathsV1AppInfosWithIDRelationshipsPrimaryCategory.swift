@@ -9,7 +9,7 @@ extension APIEndpoint.V1.AppInfos.WithID.Relationships {
 		PrimaryCategory(path: path + "/primaryCategory")
 	}
 
-	public struct PrimaryCategory {
+	public struct PrimaryCategory: Sendable {
 		/// Path: `/v1/appInfos/{id}/relationships/primaryCategory`
 		public let path: String
 

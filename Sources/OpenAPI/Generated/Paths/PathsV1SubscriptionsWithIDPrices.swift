@@ -9,7 +9,7 @@ extension APIEndpoint.V1.Subscriptions.WithID {
 		Prices(path: path + "/prices")
 	}
 
-	public struct Prices {
+	public struct Prices: Sendable {
 		/// Path: `/v1/subscriptions/{id}/prices`
 		public let path: String
 
@@ -17,7 +17,7 @@ extension APIEndpoint.V1.Subscriptions.WithID {
 			Request(path: path, method: "GET", query: parameters?.asQuery, id: "subscriptions_prices_getToManyRelated")
 		}
 
-		public struct GetParameters {
+		public struct GetParameters: Sendable {
 			public var filterPlanType: [FilterPlanType]?
 			public var filterSubscriptionPricePoint: [String]?
 			public var filterTerritory: [String]?
@@ -27,12 +27,12 @@ extension APIEndpoint.V1.Subscriptions.WithID {
 			public var limit: Int?
 			public var include: [Include]?
 
-			public enum FilterPlanType: String, Codable, CaseIterable {
+			public enum FilterPlanType: String, Codable, CaseIterable, Sendable {
 				case monthly = "MONTHLY"
 				case upfront = "UPFRONT"
 			}
 
-			public enum FieldsSubscriptionPrices: String, Codable, CaseIterable {
+			public enum FieldsSubscriptionPrices: String, Codable, CaseIterable, Sendable {
 				case startDate
 				case preserved
 				case planType
@@ -40,11 +40,11 @@ extension APIEndpoint.V1.Subscriptions.WithID {
 				case subscriptionPricePoint
 			}
 
-			public enum FieldsTerritories: String, Codable, CaseIterable {
+			public enum FieldsTerritories: String, Codable, CaseIterable, Sendable {
 				case currency
 			}
 
-			public enum FieldsSubscriptionPricePoints: String, Codable, CaseIterable {
+			public enum FieldsSubscriptionPricePoints: String, Codable, CaseIterable, Sendable {
 				case customerPrice
 				case proceeds
 				case proceedsYear2
@@ -53,7 +53,7 @@ extension APIEndpoint.V1.Subscriptions.WithID {
 				case adjustedEqualizations
 			}
 
-			public enum Include: String, Codable, CaseIterable {
+			public enum Include: String, Codable, CaseIterable, Sendable {
 				case territory
 				case subscriptionPricePoint
 			}

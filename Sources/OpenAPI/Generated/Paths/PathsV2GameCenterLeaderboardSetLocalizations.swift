@@ -9,7 +9,7 @@ extension APIEndpoint.V2 {
 		GameCenterLeaderboardSetLocalizations(path: path + "/gameCenterLeaderboardSetLocalizations")
 	}
 
-	public struct GameCenterLeaderboardSetLocalizations {
+	public struct GameCenterLeaderboardSetLocalizations: Sendable {
 		/// Path: `/v2/gameCenterLeaderboardSetLocalizations`
 		public let path: String
 

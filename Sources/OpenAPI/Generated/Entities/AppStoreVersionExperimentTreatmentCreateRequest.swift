@@ -3,19 +3,19 @@
 
 import Foundation
 
-public struct AppStoreVersionExperimentTreatmentCreateRequest: Codable {
+public struct AppStoreVersionExperimentTreatmentCreateRequest: Codable, Sendable {
 	public var data: Data
 
-	public struct Data: Codable {
+	public struct Data: Codable, Sendable {
 		public var type: `Type`
 		public var attributes: Attributes
 		public var relationships: Relationships?
 
-		public enum `Type`: String, Codable, CaseIterable {
+		public enum `Type`: String, Codable, CaseIterable, Sendable {
 			case appStoreVersionExperimentTreatments
 		}
 
-		public struct Attributes: Codable {
+		public struct Attributes: Codable, Sendable {
 			public var name: String
 			public var appIconName: String?
 
@@ -37,18 +37,18 @@ public struct AppStoreVersionExperimentTreatmentCreateRequest: Codable {
 			}
 		}
 
-		public struct Relationships: Codable {
+		public struct Relationships: Codable, Sendable {
 			public var appStoreVersionExperiment: AppStoreVersionExperiment?
 			public var appStoreVersionExperimentV2: AppStoreVersionExperimentV2?
 
-			public struct AppStoreVersionExperiment: Codable {
+			public struct AppStoreVersionExperiment: Codable, Sendable {
 				public var data: Data?
 
-				public struct Data: Codable, Identifiable {
+				public struct Data: Codable, Identifiable, Sendable {
 					public var type: `Type`
 					public var id: String
 
-					public enum `Type`: String, Codable, CaseIterable {
+					public enum `Type`: String, Codable, CaseIterable, Sendable {
 						case appStoreVersionExperiments
 					}
 
@@ -85,14 +85,14 @@ public struct AppStoreVersionExperimentTreatmentCreateRequest: Codable {
 				}
 			}
 
-			public struct AppStoreVersionExperimentV2: Codable {
+			public struct AppStoreVersionExperimentV2: Codable, Sendable {
 				public var data: Data?
 
-				public struct Data: Codable, Identifiable {
+				public struct Data: Codable, Identifiable, Sendable {
 					public var type: `Type`
 					public var id: String
 
-					public enum `Type`: String, Codable, CaseIterable {
+					public enum `Type`: String, Codable, CaseIterable, Sendable {
 						case appStoreVersionExperiments
 					}
 

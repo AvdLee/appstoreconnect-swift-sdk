@@ -9,7 +9,7 @@ extension APIEndpoint.V1.GameCenterDetails.WithID {
 		ActivityReleases(path: path + "/activityReleases")
 	}
 
-	public struct ActivityReleases {
+	public struct ActivityReleases: Sendable {
 		/// Path: `/v1/gameCenterDetails/{id}/activityReleases`
 		public let path: String
 
@@ -18,17 +18,17 @@ extension APIEndpoint.V1.GameCenterDetails.WithID {
 			Request(path: path, method: "GET", query: parameters?.asQuery, id: "gameCenterDetails_activityReleases_getToManyRelated")
 		}
 
-		public struct GetParameters {
+		public struct GetParameters: Sendable {
 			public var fieldsGameCenterActivityVersionReleases: [FieldsGameCenterActivityVersionReleases]?
 			public var fieldsGameCenterActivityVersions: [FieldsGameCenterActivityVersions]?
 			public var limit: Int?
 			public var include: [Include]?
 
-			public enum FieldsGameCenterActivityVersionReleases: String, Codable, CaseIterable {
+			public enum FieldsGameCenterActivityVersionReleases: String, Codable, CaseIterable, Sendable {
 				case version
 			}
 
-			public enum FieldsGameCenterActivityVersions: String, Codable, CaseIterable {
+			public enum FieldsGameCenterActivityVersions: String, Codable, CaseIterable, Sendable {
 				case version
 				case state
 				case fallbackURL = "fallbackUrl"
@@ -38,7 +38,7 @@ extension APIEndpoint.V1.GameCenterDetails.WithID {
 				case releases
 			}
 
-			public enum Include: String, Codable, CaseIterable {
+			public enum Include: String, Codable, CaseIterable, Sendable {
 				case version
 			}
 

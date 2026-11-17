@@ -9,7 +9,7 @@ extension APIEndpoint.V1.Apps.WithID {
 		BetaLicenseAgreement(path: path + "/betaLicenseAgreement")
 	}
 
-	public struct BetaLicenseAgreement {
+	public struct BetaLicenseAgreement: Sendable {
 		/// Path: `/v1/apps/{id}/betaLicenseAgreement`
 		public let path: String
 
@@ -23,7 +23,7 @@ extension APIEndpoint.V1.Apps.WithID {
 			return encoder.items
 		}
 
-		public enum FieldsBetaLicenseAgreements: String, Codable, CaseIterable {
+		public enum FieldsBetaLicenseAgreements: String, Codable, CaseIterable, Sendable {
 			case agreementText
 			case app
 		}

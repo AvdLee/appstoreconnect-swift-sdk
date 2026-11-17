@@ -3,21 +3,21 @@
 
 import Foundation
 
-public struct AppAssetLibrary: Codable, Identifiable {
+public struct AppAssetLibrary: Codable, Identifiable, Sendable {
 	public var type: `Type`
 	public var id: String
 	public var relationships: Relationships?
 	public var links: ResourceLinks?
 
-	public enum `Type`: String, Codable, CaseIterable {
+	public enum `Type`: String, Codable, CaseIterable, Sendable {
 		case appAssetLibraries
 	}
 
-	public struct Relationships: Codable {
+	public struct Relationships: Codable, Sendable {
 		public var images: Images?
 		public var videos: Videos?
 
-		public struct Images: Codable {
+		public struct Images: Codable, Sendable {
 			public var links: RelationshipLinks?
 
 			public init(links: RelationshipLinks? = nil) {
@@ -35,7 +35,7 @@ public struct AppAssetLibrary: Codable, Identifiable {
 			}
 		}
 
-		public struct Videos: Codable {
+		public struct Videos: Codable, Sendable {
 			public var links: RelationshipLinks?
 
 			public init(links: RelationshipLinks? = nil) {

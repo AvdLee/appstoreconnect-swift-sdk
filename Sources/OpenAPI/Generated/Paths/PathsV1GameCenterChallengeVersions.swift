@@ -9,7 +9,7 @@ extension APIEndpoint.V1 {
 		GameCenterChallengeVersions(path: path + "/gameCenterChallengeVersions")
 	}
 
-	public struct GameCenterChallengeVersions {
+	public struct GameCenterChallengeVersions: Sendable {
 		/// Path: `/v1/gameCenterChallengeVersions`
 		public let path: String
 

@@ -3,7 +3,7 @@
 
 import Foundation
 
-public struct AppAssetLibraryPlacementCommonAttributes: Codable {
+public struct AppAssetLibraryPlacementCommonAttributes: Codable, Sendable {
 	public var mediaType: AppAssetLibraryMediaType?
 	public var placementType: AppAssetLibraryPlacementType?
 	public var placementGroup: String?

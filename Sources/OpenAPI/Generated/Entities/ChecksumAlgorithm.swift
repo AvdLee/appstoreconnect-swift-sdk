@@ -3,7 +3,7 @@
 
 import Foundation
 
-public enum ChecksumAlgorithm: String, Codable, CaseIterable {
+public enum ChecksumAlgorithm: String, Codable, CaseIterable, Sendable {
 	case md5 = "MD5"
 	case sha256 = "SHA_256"
 }

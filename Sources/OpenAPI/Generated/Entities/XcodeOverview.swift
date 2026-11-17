@@ -3,7 +3,7 @@
 
 import Foundation
 
-public struct XcodeOverview: Codable {
+public struct XcodeOverview: Codable, Sendable {
 	public var version: String?
 	public var appMetadata: AppMetadata?
 	public var insights: Insights?
@@ -11,7 +11,7 @@ public struct XcodeOverview: Codable {
 	public var signatures: Signatures?
 	public var telemetryIdentifier: String?
 
-	public struct AppMetadata: Codable {
+	public struct AppMetadata: Codable, Sendable {
 		public var bundleID: String?
 		public var appID: String?
 		public var latestVersion: String?
@@ -41,7 +41,7 @@ public struct XcodeOverview: Codable {
 		}
 	}
 
-	public struct Insights: Codable {
+	public struct Insights: Codable, Sendable {
 		public var regressions: [MetricsInsight]?
 		public var trendingUp: [MetricsInsight]?
 
@@ -63,12 +63,12 @@ public struct XcodeOverview: Codable {
 		}
 	}
 
-	public struct Category: Codable {
+	public struct Category: Codable, Sendable {
 		public var identifier: String?
 		public var displayName: String?
 		public var sections: [Section]?
 
-		public struct Section: Codable {
+		public struct Section: Codable, Sendable {
 			public var identifier: String?
 			public var displayName: String?
 			public var relevanceScore: Double?
@@ -76,7 +76,7 @@ public struct XcodeOverview: Codable {
 			public var unit: Unit?
 			public var datasets: [Dataset]?
 
-			public struct Unit: Codable {
+			public struct Unit: Codable, Sendable {
 				public var identifier: String?
 				public var displayName: String?
 
@@ -98,12 +98,12 @@ public struct XcodeOverview: Codable {
 				}
 			}
 
-			public struct Dataset: Codable {
+			public struct Dataset: Codable, Sendable {
 				public var filterCriteria: FilterCriteria?
 				public var points: [Point]?
 				public var recommendedMetricGoal: RecommendedMetricGoal?
 
-				public struct FilterCriteria: Codable {
+				public struct FilterCriteria: Codable, Sendable {
 					public var percentile: String?
 					public var device: String?
 					public var deviceMarketingName: String?
@@ -129,13 +129,13 @@ public struct XcodeOverview: Codable {
 					}
 				}
 
-				public struct Point: Codable {
+				public struct Point: Codable, Sendable {
 					public var version: String?
 					public var value: Double?
 					public var errorMargin: Double?
 					public var percentageBreakdown: PercentageBreakdown?
 
-					public struct PercentageBreakdown: Codable {
+					public struct PercentageBreakdown: Codable, Sendable {
 						public var value: Double?
 						public var subSystemLabel: String?
 
@@ -181,7 +181,7 @@ public struct XcodeOverview: Codable {
 					}
 				}
 
-				public struct RecommendedMetricGoal: Codable {
+				public struct RecommendedMetricGoal: Codable, Sendable {
 					public var value: Double?
 					public var detail: String?
 
@@ -275,7 +275,7 @@ public struct XcodeOverview: Codable {
 		}
 	}
 
-	public struct Signatures: Codable {
+	public struct Signatures: Codable, Sendable {
 		public var topHangPoint: [PerformanceSignature]?
 		public var topLaunchPoint: [PerformanceSignature]?
 		public var topDiskWritePoint: [PerformanceSignature]?

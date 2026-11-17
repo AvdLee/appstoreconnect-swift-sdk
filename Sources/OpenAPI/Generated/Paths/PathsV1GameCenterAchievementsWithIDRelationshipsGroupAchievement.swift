@@ -9,7 +9,7 @@ extension APIEndpoint.V1.GameCenterAchievements.WithID.Relationships {
 		GroupAchievement(path: path + "/groupAchievement")
 	}
 
-	public struct GroupAchievement {
+	public struct GroupAchievement: Sendable {
 		/// Path: `/v1/gameCenterAchievements/{id}/relationships/groupAchievement`
 		public let path: String
 

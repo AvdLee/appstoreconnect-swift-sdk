@@ -9,7 +9,7 @@ extension APIEndpoint.V1.Apps.WithID {
 		ReviewSubmissions(path: path + "/reviewSubmissions")
 	}
 
-	public struct ReviewSubmissions {
+	public struct ReviewSubmissions: Sendable {
 		/// Path: `/v1/apps/{id}/reviewSubmissions`
 		public let path: String
 
@@ -17,7 +17,7 @@ extension APIEndpoint.V1.Apps.WithID {
 			Request(path: path, method: "GET", query: parameters?.asQuery, id: "apps_reviewSubmissions_getToManyRelated")
 		}
 
-		public struct GetParameters {
+		public struct GetParameters: Sendable {
 			public var filterPlatform: [FilterPlatform]?
 			public var filterState: [FilterState]?
 			public var fieldsReviewSubmissions: [FieldsReviewSubmissions]?
@@ -29,14 +29,14 @@ extension APIEndpoint.V1.Apps.WithID {
 			public var include: [Include]?
 			public var limitItems: Int?
 
-			public enum FilterPlatform: String, Codable, CaseIterable {
+			public enum FilterPlatform: String, Codable, CaseIterable, Sendable {
 				case ios = "IOS"
 				case macOs = "MAC_OS"
 				case tvOs = "TV_OS"
 				case visionOs = "VISION_OS"
 			}
 
-			public enum FilterState: String, Codable, CaseIterable {
+			public enum FilterState: String, Codable, CaseIterable, Sendable {
 				case readyForReview = "READY_FOR_REVIEW"
 				case waitingForReview = "WAITING_FOR_REVIEW"
 				case inReview = "IN_REVIEW"
@@ -46,7 +46,7 @@ extension APIEndpoint.V1.Apps.WithID {
 				case complete = "COMPLETE"
 			}
 
-			public enum FieldsReviewSubmissions: String, Codable, CaseIterable {
+			public enum FieldsReviewSubmissions: String, Codable, CaseIterable, Sendable {
 				case platform
 				case submittedDate
 				case state
@@ -57,7 +57,7 @@ extension APIEndpoint.V1.Apps.WithID {
 				case lastUpdatedByActor
 			}
 
-			public enum FieldsApps: String, Codable, CaseIterable {
+			public enum FieldsApps: String, Codable, CaseIterable, Sendable {
 				case accessibilityURL = "accessibilityUrl"
 				case name
 				case bundleID = "bundleId"
@@ -118,7 +118,7 @@ extension APIEndpoint.V1.Apps.WithID {
 				case androidToIosAppMappingDetails
 			}
 
-			public enum FieldsReviewSubmissionItems: String, Codable, CaseIterable {
+			public enum FieldsReviewSubmissionItems: String, Codable, CaseIterable, Sendable {
 				case state
 				case appStoreVersion
 				case appCustomProductPageVersion
@@ -139,7 +139,7 @@ extension APIEndpoint.V1.Apps.WithID {
 				case retentionMessageVersion
 			}
 
-			public enum FieldsAppStoreVersions: String, Codable, CaseIterable {
+			public enum FieldsAppStoreVersions: String, Codable, CaseIterable, Sendable {
 				case platform
 				case versionString
 				case appStoreState
@@ -166,7 +166,7 @@ extension APIEndpoint.V1.Apps.WithID {
 				case alternativeDistributionPackage
 			}
 
-			public enum FieldsActors: String, Codable, CaseIterable {
+			public enum FieldsActors: String, Codable, CaseIterable, Sendable {
 				case actorType
 				case userFirstName
 				case userLastName
@@ -174,7 +174,7 @@ extension APIEndpoint.V1.Apps.WithID {
 				case apiKeyID = "apiKeyId"
 			}
 
-			public enum Include: String, Codable, CaseIterable {
+			public enum Include: String, Codable, CaseIterable, Sendable {
 				case app
 				case items
 				case appStoreVersionForReview

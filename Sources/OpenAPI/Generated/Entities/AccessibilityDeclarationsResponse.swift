@@ -3,7 +3,7 @@
 
 import Foundation
 
-public struct AccessibilityDeclarationsResponse: Codable {
+public struct AccessibilityDeclarationsResponse: Codable, Sendable {
 	public var data: [AccessibilityDeclaration]
 	public var links: PagedDocumentLinks
 	public var meta: PagingInformation?

@@ -3,18 +3,18 @@
 
 import Foundation
 
-public struct BackgroundAssetVersionAppStoreRelease: Codable, Identifiable {
+public struct BackgroundAssetVersionAppStoreRelease: Codable, Identifiable, Sendable {
 	public var type: `Type`
 	public var id: String
 	public var attributes: Attributes?
 	public var relationships: Relationships?
 	public var links: ResourceLinks?
 
-	public enum `Type`: String, Codable, CaseIterable {
+	public enum `Type`: String, Codable, CaseIterable, Sendable {
 		case backgroundAssetVersionAppStoreReleases
 	}
 
-	public struct Attributes: Codable {
+	public struct Attributes: Codable, Sendable {
 		public var state: BackgroundAssetVersionAppStoreReleaseState?
 
 		public init(state: BackgroundAssetVersionAppStoreReleaseState? = nil) {
@@ -32,17 +32,17 @@ public struct BackgroundAssetVersionAppStoreRelease: Codable, Identifiable {
 		}
 	}
 
-	public struct Relationships: Codable {
+	public struct Relationships: Codable, Sendable {
 		public var backgroundAssetVersion: BackgroundAssetVersion?
 
-		public struct BackgroundAssetVersion: Codable {
+		public struct BackgroundAssetVersion: Codable, Sendable {
 			public var data: Data?
 
-			public struct Data: Codable, Identifiable {
+			public struct Data: Codable, Identifiable, Sendable {
 				public var type: `Type`
 				public var id: String
 
-				public enum `Type`: String, Codable, CaseIterable {
+				public enum `Type`: String, Codable, CaseIterable, Sendable {
 					case backgroundAssetVersions
 				}
 

@@ -9,7 +9,7 @@ extension APIEndpoint.V1.AppInfos.WithID {
 		AgeRatingDeclaration(path: path + "/ageRatingDeclaration")
 	}
 
-	public struct AgeRatingDeclaration {
+	public struct AgeRatingDeclaration: Sendable {
 		/// Path: `/v1/appInfos/{id}/ageRatingDeclaration`
 		public let path: String
 
@@ -23,7 +23,7 @@ extension APIEndpoint.V1.AppInfos.WithID {
 			return encoder.items
 		}
 
-		public enum FieldsAgeRatingDeclarations: String, Codable, CaseIterable {
+		public enum FieldsAgeRatingDeclarations: String, Codable, CaseIterable, Sendable {
 			case advertising
 			case alcoholTobaccoOrDrugUseOrReferences
 			case contests

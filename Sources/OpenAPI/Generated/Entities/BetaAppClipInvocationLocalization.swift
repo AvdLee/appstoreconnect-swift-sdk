@@ -3,17 +3,17 @@
 
 import Foundation
 
-public struct BetaAppClipInvocationLocalization: Codable, Identifiable {
+public struct BetaAppClipInvocationLocalization: Codable, Identifiable, Sendable {
 	public var type: `Type`
 	public var id: String
 	public var attributes: Attributes?
 	public var links: ResourceLinks?
 
-	public enum `Type`: String, Codable, CaseIterable {
+	public enum `Type`: String, Codable, CaseIterable, Sendable {
 		case betaAppClipInvocationLocalizations
 	}
 
-	public struct Attributes: Codable {
+	public struct Attributes: Codable, Sendable {
 		public var title: String?
 		public var locale: String?
 

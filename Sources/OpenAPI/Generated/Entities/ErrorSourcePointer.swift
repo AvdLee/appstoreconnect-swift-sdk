@@ -4,7 +4,7 @@
 import Foundation
 
 /// JsonPointer
-public struct ErrorSourcePointer: Codable {
+public struct ErrorSourcePointer: Codable, Sendable {
 	public var pointer: String
 
 	public init(pointer: String) {

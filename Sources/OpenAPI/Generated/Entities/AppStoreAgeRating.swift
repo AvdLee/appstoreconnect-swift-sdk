@@ -3,7 +3,7 @@
 
 import Foundation
 
-public enum AppStoreAgeRating: String, Codable, CaseIterable {
+public enum AppStoreAgeRating: String, Codable, CaseIterable, Sendable {
 	case l = "L"
 	case all = "ALL"
 	case zeroZero = "ZERO_ZERO"

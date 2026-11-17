@@ -3,7 +3,7 @@
 
 import Foundation
 
-public struct BetaBuildLocalizationsResponse: Codable {
+public struct BetaBuildLocalizationsResponse: Codable, Sendable {
 	public var data: [BetaBuildLocalization]
 	public var included: [Build]?
 	public var links: PagedDocumentLinks

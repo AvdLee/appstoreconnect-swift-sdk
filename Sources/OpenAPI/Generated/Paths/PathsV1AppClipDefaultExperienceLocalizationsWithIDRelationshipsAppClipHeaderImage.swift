@@ -9,7 +9,7 @@ extension APIEndpoint.V1.AppClipDefaultExperienceLocalizations.WithID.Relationsh
 		AppClipHeaderImage(path: path + "/appClipHeaderImage")
 	}
 
-	public struct AppClipHeaderImage {
+	public struct AppClipHeaderImage: Sendable {
 		/// Path: `/v1/appClipDefaultExperienceLocalizations/{id}/relationships/appClipHeaderImage`
 		public let path: String
 

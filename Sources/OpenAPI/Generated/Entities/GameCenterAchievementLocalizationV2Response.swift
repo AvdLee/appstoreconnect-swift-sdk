@@ -3,13 +3,13 @@
 
 import Foundation
 
-public struct GameCenterAchievementLocalizationV2Response: Codable {
+public struct GameCenterAchievementLocalizationV2Response: Codable, Sendable {
 	/// GameCenterAchievementLocalizationV2
 	public var data: GameCenterAchievementLocalizationV2
 	public var included: [IncludedItem]?
 	public var links: DocumentLinks
 
-	public enum IncludedItem: Codable {
+	public enum IncludedItem: Codable, Sendable {
 		case gameCenterAchievementImageV2(GameCenterAchievementImageV2)
 		case gameCenterAchievementVersionV2(GameCenterAchievementVersionV2)
 

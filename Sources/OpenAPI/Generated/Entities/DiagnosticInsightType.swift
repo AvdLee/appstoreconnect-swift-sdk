@@ -3,6 +3,6 @@
 
 import Foundation
 
-public enum DiagnosticInsightType: String, Codable, CaseIterable {
+public enum DiagnosticInsightType: String, Codable, CaseIterable, Sendable {
 	case trend = "TREND"
 }

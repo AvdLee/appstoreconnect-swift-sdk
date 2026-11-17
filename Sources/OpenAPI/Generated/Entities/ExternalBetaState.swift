@@ -3,7 +3,7 @@
 
 import Foundation
 
-public enum ExternalBetaState: String, Codable, CaseIterable {
+public enum ExternalBetaState: String, Codable, CaseIterable, Sendable {
 	case processing = "PROCESSING"
 	case processingException = "PROCESSING_EXCEPTION"
 	case missingExportCompliance = "MISSING_EXPORT_COMPLIANCE"

@@ -9,7 +9,7 @@ extension APIEndpoint.V1.AlternativeDistributionPackageVersions.WithID {
 		Variants(path: path + "/variants")
 	}
 
-	public struct Variants {
+	public struct Variants: Sendable {
 		/// Path: `/v1/alternativeDistributionPackageVersions/{id}/variants`
 		public let path: String
 
@@ -24,7 +24,7 @@ extension APIEndpoint.V1.AlternativeDistributionPackageVersions.WithID {
 			return encoder.items
 		}
 
-		public enum FieldsAlternativeDistributionPackageVariants: String, Codable, CaseIterable {
+		public enum FieldsAlternativeDistributionPackageVariants: String, Codable, CaseIterable, Sendable {
 			case url
 			case urlExpirationDate
 			case alternativeDistributionKeyBlob

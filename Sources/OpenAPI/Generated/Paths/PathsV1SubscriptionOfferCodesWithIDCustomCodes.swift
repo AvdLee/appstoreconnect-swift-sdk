@@ -9,7 +9,7 @@ extension APIEndpoint.V1.SubscriptionOfferCodes.WithID {
 		CustomCodes(path: path + "/customCodes")
 	}
 
-	public struct CustomCodes {
+	public struct CustomCodes: Sendable {
 		/// Path: `/v1/subscriptionOfferCodes/{id}/customCodes`
 		public let path: String
 
@@ -17,13 +17,13 @@ extension APIEndpoint.V1.SubscriptionOfferCodes.WithID {
 			Request(path: path, method: "GET", query: parameters?.asQuery, id: "subscriptionOfferCodes_customCodes_getToManyRelated")
 		}
 
-		public struct GetParameters {
+		public struct GetParameters: Sendable {
 			public var fieldsSubscriptionOfferCodeCustomCodes: [FieldsSubscriptionOfferCodeCustomCodes]?
 			public var fieldsSubscriptionOfferCodes: [FieldsSubscriptionOfferCodes]?
 			public var limit: Int?
 			public var include: [Include]?
 
-			public enum FieldsSubscriptionOfferCodeCustomCodes: String, Codable, CaseIterable {
+			public enum FieldsSubscriptionOfferCodeCustomCodes: String, Codable, CaseIterable, Sendable {
 				case customCode
 				case numberOfCodes
 				case createdDate
@@ -32,7 +32,7 @@ extension APIEndpoint.V1.SubscriptionOfferCodes.WithID {
 				case offerCode
 			}
 
-			public enum FieldsSubscriptionOfferCodes: String, Codable, CaseIterable {
+			public enum FieldsSubscriptionOfferCodes: String, Codable, CaseIterable, Sendable {
 				case name
 				case customerEligibilities
 				case offerEligibility
@@ -51,7 +51,7 @@ extension APIEndpoint.V1.SubscriptionOfferCodes.WithID {
 				case prices
 			}
 
-			public enum Include: String, Codable, CaseIterable {
+			public enum Include: String, Codable, CaseIterable, Sendable {
 				case offerCode
 			}
 

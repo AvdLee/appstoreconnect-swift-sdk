@@ -9,7 +9,7 @@ extension APIEndpoint.V1.AppStoreVersions.WithID.Relationships {
 		CustomerReviews(path: path + "/customerReviews")
 	}
 
-	public struct CustomerReviews {
+	public struct CustomerReviews: Sendable {
 		/// Path: `/v1/appStoreVersions/{id}/relationships/customerReviews`
 		public let path: String
 

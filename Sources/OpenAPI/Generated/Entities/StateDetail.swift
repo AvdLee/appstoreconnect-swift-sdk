@@ -3,7 +3,7 @@
 
 import Foundation
 
-public struct StateDetail: Codable {
+public struct StateDetail: Codable, Sendable {
 	public var code: String?
 	public var description: String?
 

@@ -3,19 +3,19 @@
 
 import Foundation
 
-public struct AppUpdateRequest: Codable {
+public struct AppUpdateRequest: Codable, Sendable {
 	public var data: Data
 
-	public struct Data: Codable, Identifiable {
+	public struct Data: Codable, Identifiable, Sendable {
 		public var type: `Type`
 		public var id: String
 		public var attributes: Attributes?
 
-		public enum `Type`: String, Codable, CaseIterable {
+		public enum `Type`: String, Codable, CaseIterable, Sendable {
 			case apps
 		}
 
-		public struct Attributes: Codable {
+		public struct Attributes: Codable, Sendable {
 			public var accessibilityURL: URL?
 			public var bundleID: String?
 			public var primaryLocale: String?
@@ -26,7 +26,7 @@ public struct AppUpdateRequest: Codable {
 			public var contentRightsDeclaration: ContentRightsDeclaration?
 			public var isStreamlinedPurchasingEnabled: Bool?
 
-			public enum ContentRightsDeclaration: String, Codable, CaseIterable {
+			public enum ContentRightsDeclaration: String, Codable, CaseIterable, Sendable {
 				case doesNotUseThirdPartyContent = "DOES_NOT_USE_THIRD_PARTY_CONTENT"
 				case usesThirdPartyContent = "USES_THIRD_PARTY_CONTENT"
 			}

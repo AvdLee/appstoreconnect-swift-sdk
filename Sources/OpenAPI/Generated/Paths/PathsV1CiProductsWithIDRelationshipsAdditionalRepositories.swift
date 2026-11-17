@@ -9,7 +9,7 @@ extension APIEndpoint.V1.CiProducts.WithID.Relationships {
 		AdditionalRepositories(path: path + "/additionalRepositories")
 	}
 
-	public struct AdditionalRepositories {
+	public struct AdditionalRepositories: Sendable {
 		/// Path: `/v1/ciProducts/{id}/relationships/additionalRepositories`
 		public let path: String
 

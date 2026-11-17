@@ -9,7 +9,7 @@ extension APIEndpoint.V1.ScmProviders.WithID {
 		Relationships(path: path + "/relationships")
 	}
 
-	public struct Relationships {
+	public struct Relationships: Sendable {
 		/// Path: `/v1/scmProviders/{id}/relationships`
 		public let path: String
 	}

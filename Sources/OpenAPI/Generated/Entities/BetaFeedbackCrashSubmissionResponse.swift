@@ -3,13 +3,13 @@
 
 import Foundation
 
-public struct BetaFeedbackCrashSubmissionResponse: Codable {
+public struct BetaFeedbackCrashSubmissionResponse: Codable, Sendable {
 	/// BetaFeedbackCrashSubmission
 	public var data: BetaFeedbackCrashSubmission
 	public var included: [IncludedItem]?
 	public var links: DocumentLinks
 
-	public enum IncludedItem: Codable {
+	public enum IncludedItem: Codable, Sendable {
 		case betaTester(BetaTester)
 		case build(Build)
 

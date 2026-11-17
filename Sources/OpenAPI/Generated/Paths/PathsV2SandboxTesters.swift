@@ -9,7 +9,7 @@ extension APIEndpoint.V2 {
 		SandboxTesters(path: path + "/sandboxTesters")
 	}
 
-	public struct SandboxTesters {
+	public struct SandboxTesters: Sendable {
 		/// Path: `/v2/sandboxTesters`
 		public let path: String
 
@@ -24,7 +24,7 @@ extension APIEndpoint.V2 {
 			return encoder.items
 		}
 
-		public enum FieldsSandboxTesters: String, Codable, CaseIterable {
+		public enum FieldsSandboxTesters: String, Codable, CaseIterable, Sendable {
 			case firstName
 			case lastName
 			case acAccountName

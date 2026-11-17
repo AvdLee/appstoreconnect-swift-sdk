@@ -4,13 +4,13 @@
 import Foundation
 
 @available(*, deprecated, message: "Deprecated")
-public struct GameCenterAchievementsResponse: Codable {
+public struct GameCenterAchievementsResponse: Codable, Sendable {
 	public var data: [GameCenterAchievement]
 	public var included: [IncludedItem]?
 	public var links: PagedDocumentLinks
 	public var meta: PagingInformation?
 
-	public enum IncludedItem: Codable {
+	public enum IncludedItem: Codable, Sendable {
 		case gameCenterAchievementLocalization(GameCenterAchievementLocalization)
 		case gameCenterAchievementRelease(GameCenterAchievementRelease)
 		case gameCenterAchievement(GameCenterAchievement)

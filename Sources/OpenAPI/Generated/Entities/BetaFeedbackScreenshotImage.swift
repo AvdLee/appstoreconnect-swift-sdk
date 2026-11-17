@@ -3,7 +3,7 @@
 
 import Foundation
 
-public struct BetaFeedbackScreenshotImage: Codable {
+public struct BetaFeedbackScreenshotImage: Codable, Sendable {
 	public var url: String?
 	public var width: Int?
 	public var height: Int?

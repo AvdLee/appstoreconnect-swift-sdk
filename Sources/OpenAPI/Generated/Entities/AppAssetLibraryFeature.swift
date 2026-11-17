@@ -3,7 +3,7 @@
 
 import Foundation
 
-public enum AppAssetLibraryFeature: String, Codable, CaseIterable {
+public enum AppAssetLibraryFeature: String, Codable, CaseIterable, Sendable {
 	case appStoreVersions = "APP_STORE_VERSIONS"
 	case customProductPages = "CUSTOM_PRODUCT_PAGES"
 	case productPageOptimizations = "PRODUCT_PAGE_OPTIMIZATIONS"

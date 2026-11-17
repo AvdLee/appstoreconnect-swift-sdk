@@ -9,7 +9,7 @@ extension APIEndpoint.V1.AppClips.WithID {
 		AppClipDefaultExperiences(path: path + "/appClipDefaultExperiences")
 	}
 
-	public struct AppClipDefaultExperiences {
+	public struct AppClipDefaultExperiences: Sendable {
 		/// Path: `/v1/appClips/{id}/appClipDefaultExperiences`
 		public let path: String
 
@@ -17,7 +17,7 @@ extension APIEndpoint.V1.AppClips.WithID {
 			Request(path: path, method: "GET", query: parameters?.asQuery, id: "appClips_appClipDefaultExperiences_getToManyRelated")
 		}
 
-		public struct GetParameters {
+		public struct GetParameters: Sendable {
 			public var isExistsReleaseWithAppStoreVersion: Bool?
 			public var fieldsAppClipDefaultExperiences: [FieldsAppClipDefaultExperiences]?
 			public var fieldsAppClips: [FieldsAppClips]?
@@ -28,7 +28,7 @@ extension APIEndpoint.V1.AppClips.WithID {
 			public var include: [Include]?
 			public var limitAppClipDefaultExperienceLocalizations: Int?
 
-			public enum FieldsAppClipDefaultExperiences: String, Codable, CaseIterable {
+			public enum FieldsAppClipDefaultExperiences: String, Codable, CaseIterable, Sendable {
 				case action
 				case appClip
 				case releaseWithAppStoreVersion
@@ -36,14 +36,14 @@ extension APIEndpoint.V1.AppClips.WithID {
 				case appClipAppStoreReviewDetail
 			}
 
-			public enum FieldsAppClips: String, Codable, CaseIterable {
+			public enum FieldsAppClips: String, Codable, CaseIterable, Sendable {
 				case bundleID = "bundleId"
 				case app
 				case appClipDefaultExperiences
 				case appClipAdvancedExperiences
 			}
 
-			public enum FieldsAppStoreVersions: String, Codable, CaseIterable {
+			public enum FieldsAppStoreVersions: String, Codable, CaseIterable, Sendable {
 				case platform
 				case versionString
 				case appStoreState
@@ -70,19 +70,19 @@ extension APIEndpoint.V1.AppClips.WithID {
 				case alternativeDistributionPackage
 			}
 
-			public enum FieldsAppClipDefaultExperienceLocalizations: String, Codable, CaseIterable {
+			public enum FieldsAppClipDefaultExperienceLocalizations: String, Codable, CaseIterable, Sendable {
 				case locale
 				case subtitle
 				case appClipDefaultExperience
 				case appClipHeaderImage
 			}
 
-			public enum FieldsAppClipAppStoreReviewDetails: String, Codable, CaseIterable {
+			public enum FieldsAppClipAppStoreReviewDetails: String, Codable, CaseIterable, Sendable {
 				case invocationURLs = "invocationUrls"
 				case appClipDefaultExperience
 			}
 
-			public enum Include: String, Codable, CaseIterable {
+			public enum Include: String, Codable, CaseIterable, Sendable {
 				case appClip
 				case releaseWithAppStoreVersion
 				case appClipDefaultExperienceLocalizations

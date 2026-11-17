@@ -9,7 +9,7 @@ extension APIEndpoint.V1.AppScreenshots {
 		WithID(path: "\(path)/\(id)")
 	}
 
-	public struct WithID {
+	public struct WithID: Sendable {
 		/// Path: `/v1/appScreenshots/{id}`
 		public let path: String
 
@@ -17,12 +17,12 @@ extension APIEndpoint.V1.AppScreenshots {
 			Request(path: path, method: "GET", query: parameters?.asQuery, id: "appScreenshots_getInstance")
 		}
 
-		public struct GetParameters {
+		public struct GetParameters: Sendable {
 			public var fieldsAppScreenshots: [FieldsAppScreenshots]?
 			public var fieldsAppScreenshotSets: [FieldsAppScreenshotSets]?
 			public var include: [Include]?
 
-			public enum FieldsAppScreenshots: String, Codable, CaseIterable {
+			public enum FieldsAppScreenshots: String, Codable, CaseIterable, Sendable {
 				case fileSize
 				case fileName
 				case sourceFileChecksum
@@ -34,7 +34,7 @@ extension APIEndpoint.V1.AppScreenshots {
 				case appScreenshotSet
 			}
 
-			public enum FieldsAppScreenshotSets: String, Codable, CaseIterable {
+			public enum FieldsAppScreenshotSets: String, Codable, CaseIterable, Sendable {
 				case screenshotDisplayType
 				case appStoreVersionLocalization
 				case appCustomProductPageLocalization
@@ -42,7 +42,7 @@ extension APIEndpoint.V1.AppScreenshots {
 				case appScreenshots
 			}
 
-			public enum Include: String, Codable, CaseIterable {
+			public enum Include: String, Codable, CaseIterable, Sendable {
 				case appScreenshotSet
 			}
 

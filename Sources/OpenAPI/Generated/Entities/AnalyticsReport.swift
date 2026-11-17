@@ -3,22 +3,22 @@
 
 import Foundation
 
-public struct AnalyticsReport: Codable, Identifiable {
+public struct AnalyticsReport: Codable, Identifiable, Sendable {
 	public var type: `Type`
 	public var id: String
 	public var attributes: Attributes?
 	public var relationships: Relationships?
 	public var links: ResourceLinks?
 
-	public enum `Type`: String, Codable, CaseIterable {
+	public enum `Type`: String, Codable, CaseIterable, Sendable {
 		case analyticsReports
 	}
 
-	public struct Attributes: Codable {
+	public struct Attributes: Codable, Sendable {
 		public var name: String?
 		public var category: Category?
 
-		public enum Category: String, Codable, CaseIterable {
+		public enum Category: String, Codable, CaseIterable, Sendable {
 			case appUsage = "APP_USAGE"
 			case appStoreEngagement = "APP_STORE_ENGAGEMENT"
 			case commerce = "COMMERCE"
@@ -44,10 +44,10 @@ public struct AnalyticsReport: Codable, Identifiable {
 		}
 	}
 
-	public struct Relationships: Codable {
+	public struct Relationships: Codable, Sendable {
 		public var instances: Instances?
 
-		public struct Instances: Codable {
+		public struct Instances: Codable, Sendable {
 			public var links: RelationshipLinks?
 
 			public init(links: RelationshipLinks? = nil) {

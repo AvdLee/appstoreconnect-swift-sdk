@@ -3,15 +3,15 @@
 
 import Foundation
 
-public struct BuildBetaDetailBuildLinkageResponse: Codable {
+public struct BuildBetaDetailBuildLinkageResponse: Codable, Sendable {
 	public var data: Data
 	public var links: DocumentLinks
 
-	public struct Data: Codable, Identifiable {
+	public struct Data: Codable, Identifiable, Sendable {
 		public var type: `Type`
 		public var id: String
 
-		public enum `Type`: String, Codable, CaseIterable {
+		public enum `Type`: String, Codable, CaseIterable, Sendable {
 			case builds
 		}
 

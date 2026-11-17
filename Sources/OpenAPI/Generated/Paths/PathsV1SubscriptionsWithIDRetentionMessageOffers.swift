@@ -9,7 +9,7 @@ extension APIEndpoint.V1.Subscriptions.WithID {
 		RetentionMessageOffers(path: path + "/retentionMessageOffers")
 	}
 
-	public struct RetentionMessageOffers {
+	public struct RetentionMessageOffers: Sendable {
 		/// Path: `/v1/subscriptions/{id}/retentionMessageOffers`
 		public let path: String
 
@@ -17,7 +17,7 @@ extension APIEndpoint.V1.Subscriptions.WithID {
 			Request(path: path, method: "GET", query: parameters?.asQuery, id: "subscriptions_retentionMessageOffers_getToManyRelated")
 		}
 
-		public struct GetParameters {
+		public struct GetParameters: Sendable {
 			public var fieldsRetentionOffers: [FieldsRetentionOffers]?
 			public var fieldsSubscriptions: [FieldsSubscriptions]?
 			public var fieldsRetentionOfferPrices: [FieldsRetentionOfferPrices]?
@@ -25,7 +25,7 @@ extension APIEndpoint.V1.Subscriptions.WithID {
 			public var include: [Include]?
 			public var limitPrices: Int?
 
-			public enum FieldsRetentionOffers: String, Codable, CaseIterable {
+			public enum FieldsRetentionOffers: String, Codable, CaseIterable, Sendable {
 				case referenceName
 				case offerID = "offerId"
 				case duration
@@ -38,7 +38,7 @@ extension APIEndpoint.V1.Subscriptions.WithID {
 				case prices
 			}
 
-			public enum FieldsSubscriptions: String, Codable, CaseIterable {
+			public enum FieldsSubscriptions: String, Codable, CaseIterable, Sendable {
 				case name
 				case productID = "productId"
 				case familySharable
@@ -67,12 +67,12 @@ extension APIEndpoint.V1.Subscriptions.WithID {
 				case retentionMessageOffers
 			}
 
-			public enum FieldsRetentionOfferPrices: String, Codable, CaseIterable {
+			public enum FieldsRetentionOfferPrices: String, Codable, CaseIterable, Sendable {
 				case territory
 				case subscriptionPricePoint
 			}
 
-			public enum Include: String, Codable, CaseIterable {
+			public enum Include: String, Codable, CaseIterable, Sendable {
 				case subscription
 				case prices
 			}

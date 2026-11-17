@@ -3,21 +3,21 @@
 
 import Foundation
 
-public struct SubscriptionUpdateRequest: Codable {
+public struct SubscriptionUpdateRequest: Codable, Sendable {
 	public var data: Data
 	public var included: [IncludedItem]?
 
-	public struct Data: Codable, Identifiable {
+	public struct Data: Codable, Identifiable, Sendable {
 		public var type: `Type`
 		public var id: String
 		public var attributes: Attributes?
 		public var relationships: Relationships?
 
-		public enum `Type`: String, Codable, CaseIterable {
+		public enum `Type`: String, Codable, CaseIterable, Sendable {
 			case subscriptions
 		}
 
-		public struct Attributes: Codable {
+		public struct Attributes: Codable, Sendable {
 			public var name: String?
 			public var isFamilySharable: Bool?
 			public var subscriptionPeriod: SubscriptionPeriod?
@@ -26,7 +26,7 @@ public struct SubscriptionUpdateRequest: Codable {
 			public var multiSeatStatus: MultiSeatStatus?
 			public var marketSettings: [MarketSetting]?
 
-			public enum SubscriptionPeriod: String, Codable, CaseIterable {
+			public enum SubscriptionPeriod: String, Codable, CaseIterable, Sendable {
 				case oneWeek = "ONE_WEEK"
 				case oneMonth = "ONE_MONTH"
 				case twoMonths = "TWO_MONTHS"
@@ -35,12 +35,12 @@ public struct SubscriptionUpdateRequest: Codable {
 				case oneYear = "ONE_YEAR"
 			}
 
-			public enum MultiSeatStatus: String, Codable, CaseIterable {
+			public enum MultiSeatStatus: String, Codable, CaseIterable, Sendable {
 				case enabled = "ENABLED"
 				case disabled = "DISABLED"
 			}
 
-			public enum MarketSetting: String, Codable, CaseIterable {
+			public enum MarketSetting: String, Codable, CaseIterable, Sendable {
 				case appleSchool = "APPLE_SCHOOL"
 				case appStore = "APP_STORE"
 				case appleBusiness = "APPLE_BUSINESS"
@@ -79,21 +79,21 @@ public struct SubscriptionUpdateRequest: Codable {
 			}
 		}
 
-		public struct Relationships: Codable {
+		public struct Relationships: Codable, Sendable {
 			public var introductoryOffers: IntroductoryOffers?
 			public var promotionalOffers: PromotionalOffers?
 			public var prices: Prices?
 			public var retentionMessage: RetentionMessage?
 			public var retentionMessageOffers: RetentionMessageOffers?
 
-			public struct IntroductoryOffers: Codable {
+			public struct IntroductoryOffers: Codable, Sendable {
 				public var data: [Datum]?
 
-				public struct Datum: Codable, Identifiable {
+				public struct Datum: Codable, Identifiable, Sendable {
 					public var type: `Type`
 					public var id: String
 
-					public enum `Type`: String, Codable, CaseIterable {
+					public enum `Type`: String, Codable, CaseIterable, Sendable {
 						case subscriptionIntroductoryOffers
 					}
 
@@ -130,14 +130,14 @@ public struct SubscriptionUpdateRequest: Codable {
 				}
 			}
 
-			public struct PromotionalOffers: Codable {
+			public struct PromotionalOffers: Codable, Sendable {
 				public var data: [Datum]?
 
-				public struct Datum: Codable, Identifiable {
+				public struct Datum: Codable, Identifiable, Sendable {
 					public var type: `Type`
 					public var id: String
 
-					public enum `Type`: String, Codable, CaseIterable {
+					public enum `Type`: String, Codable, CaseIterable, Sendable {
 						case subscriptionPromotionalOffers
 					}
 
@@ -174,14 +174,14 @@ public struct SubscriptionUpdateRequest: Codable {
 				}
 			}
 
-			public struct Prices: Codable {
+			public struct Prices: Codable, Sendable {
 				public var data: [Datum]?
 
-				public struct Datum: Codable, Identifiable {
+				public struct Datum: Codable, Identifiable, Sendable {
 					public var type: `Type`
 					public var id: String
 
-					public enum `Type`: String, Codable, CaseIterable {
+					public enum `Type`: String, Codable, CaseIterable, Sendable {
 						case subscriptionPrices
 					}
 
@@ -218,14 +218,14 @@ public struct SubscriptionUpdateRequest: Codable {
 				}
 			}
 
-			public struct RetentionMessage: Codable {
+			public struct RetentionMessage: Codable, Sendable {
 				public var data: Data?
 
-				public struct Data: Codable, Identifiable {
+				public struct Data: Codable, Identifiable, Sendable {
 					public var type: `Type`
 					public var id: String
 
-					public enum `Type`: String, Codable, CaseIterable {
+					public enum `Type`: String, Codable, CaseIterable, Sendable {
 						case retentionMessages
 					}
 
@@ -262,14 +262,14 @@ public struct SubscriptionUpdateRequest: Codable {
 				}
 			}
 
-			public struct RetentionMessageOffers: Codable {
+			public struct RetentionMessageOffers: Codable, Sendable {
 				public var data: [Datum]?
 
-				public struct Datum: Codable, Identifiable {
+				public struct Datum: Codable, Identifiable, Sendable {
 					public var type: `Type`
 					public var id: String
 
-					public enum `Type`: String, Codable, CaseIterable {
+					public enum `Type`: String, Codable, CaseIterable, Sendable {
 						case retentionOffers
 					}
 
@@ -357,7 +357,7 @@ public struct SubscriptionUpdateRequest: Codable {
 		}
 	}
 
-	public enum IncludedItem: Codable {
+	public enum IncludedItem: Codable, Sendable {
 		case subscriptionPromotionalOfferInlineCreate(SubscriptionPromotionalOfferInlineCreate)
 		case subscriptionPriceInlineCreate(SubscriptionPriceInlineCreate)
 		case subscriptionIntroductoryOfferInlineCreate(SubscriptionIntroductoryOfferInlineCreate)

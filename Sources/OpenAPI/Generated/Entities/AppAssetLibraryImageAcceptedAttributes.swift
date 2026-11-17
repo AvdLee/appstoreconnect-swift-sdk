@@ -3,7 +3,7 @@
 
 import Foundation
 
-public struct AppAssetLibraryImageAcceptedAttributes: Codable {
+public struct AppAssetLibraryImageAcceptedAttributes: Codable, Sendable {
 	public var category: AppAssetLibraryAssetCategory?
 	public var createdDate: Date?
 	public var lastModifiedDate: Date?

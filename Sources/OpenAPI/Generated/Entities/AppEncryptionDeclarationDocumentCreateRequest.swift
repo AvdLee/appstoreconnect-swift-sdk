@@ -3,19 +3,19 @@
 
 import Foundation
 
-public struct AppEncryptionDeclarationDocumentCreateRequest: Codable {
+public struct AppEncryptionDeclarationDocumentCreateRequest: Codable, Sendable {
 	public var data: Data
 
-	public struct Data: Codable {
+	public struct Data: Codable, Sendable {
 		public var type: `Type`
 		public var attributes: Attributes
 		public var relationships: Relationships
 
-		public enum `Type`: String, Codable, CaseIterable {
+		public enum `Type`: String, Codable, CaseIterable, Sendable {
 			case appEncryptionDeclarationDocuments
 		}
 
-		public struct Attributes: Codable {
+		public struct Attributes: Codable, Sendable {
 			public var fileSize: Int
 			public var fileName: String
 
@@ -37,17 +37,17 @@ public struct AppEncryptionDeclarationDocumentCreateRequest: Codable {
 			}
 		}
 
-		public struct Relationships: Codable {
+		public struct Relationships: Codable, Sendable {
 			public var appEncryptionDeclaration: AppEncryptionDeclaration
 
-			public struct AppEncryptionDeclaration: Codable {
+			public struct AppEncryptionDeclaration: Codable, Sendable {
 				public var data: Data
 
-				public struct Data: Codable, Identifiable {
+				public struct Data: Codable, Identifiable, Sendable {
 					public var type: `Type`
 					public var id: String
 
-					public enum `Type`: String, Codable, CaseIterable {
+					public enum `Type`: String, Codable, CaseIterable, Sendable {
 						case appEncryptionDeclarations
 					}
 

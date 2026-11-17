@@ -9,7 +9,7 @@ extension APIEndpoint.V1 {
 		BetaRecruitmentCriteria(path: path + "/betaRecruitmentCriteria")
 	}
 
-	public struct BetaRecruitmentCriteria {
+	public struct BetaRecruitmentCriteria: Sendable {
 		/// Path: `/v1/betaRecruitmentCriteria`
 		public let path: String
 

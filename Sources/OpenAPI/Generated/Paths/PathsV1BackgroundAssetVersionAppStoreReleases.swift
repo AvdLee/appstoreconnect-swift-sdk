@@ -9,7 +9,7 @@ extension APIEndpoint.V1 {
 		BackgroundAssetVersionAppStoreReleases(path: path + "/backgroundAssetVersionAppStoreReleases")
 	}
 
-	public struct BackgroundAssetVersionAppStoreReleases {
+	public struct BackgroundAssetVersionAppStoreReleases: Sendable {
 		/// Path: `/v1/backgroundAssetVersionAppStoreReleases`
 		public let path: String
 	}

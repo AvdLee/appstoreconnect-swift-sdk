@@ -3,21 +3,21 @@
 
 import Foundation
 
-public struct BetaTesterUsagesV1MetricResponse: Codable {
+public struct BetaTesterUsagesV1MetricResponse: Codable, Sendable {
 	public var data: [Datum]
 	public var links: PagedDocumentLinks
 	public var meta: PagingInformation?
 
-	public struct Datum: Codable {
+	public struct Datum: Codable, Sendable {
 		public var dataPoints: [DataPoint]?
 		public var dimensions: Dimensions?
 
-		public struct DataPoint: Codable {
+		public struct DataPoint: Codable, Sendable {
 			public var start: Date?
 			public var end: Date?
 			public var values: Values?
 
-			public struct Values: Codable {
+			public struct Values: Codable, Sendable {
 				public var crashCount: Int?
 				public var sessionCount: Int?
 				public var feedbackCount: Int?
@@ -64,14 +64,14 @@ public struct BetaTesterUsagesV1MetricResponse: Codable {
 			}
 		}
 
-		public struct Dimensions: Codable {
+		public struct Dimensions: Codable, Sendable {
 			public var apps: Apps?
 
-			public struct Apps: Codable {
+			public struct Apps: Codable, Sendable {
 				public var links: Links?
 				public var data: MetricDimensionData?
 
-				public struct Links: Codable {
+				public struct Links: Codable, Sendable {
 					public var groupBy: String?
 					public var related: String?
 

@@ -9,7 +9,7 @@ extension APIEndpoint.V1.CiBuildActions.WithID {
 		BuildRun(path: path + "/buildRun")
 	}
 
-	public struct BuildRun {
+	public struct BuildRun: Sendable {
 		/// Path: `/v1/ciBuildActions/{id}/buildRun`
 		public let path: String
 
@@ -17,7 +17,7 @@ extension APIEndpoint.V1.CiBuildActions.WithID {
 			Request(path: path, method: "GET", query: parameters?.asQuery, id: "ciBuildActions_buildRun_getToOneRelated")
 		}
 
-		public struct GetParameters {
+		public struct GetParameters: Sendable {
 			public var fieldsCiBuildRuns: [FieldsCiBuildRuns]?
 			public var fieldsBuilds: [FieldsBuilds]?
 			public var fieldsCiWorkflows: [FieldsCiWorkflows]?
@@ -27,7 +27,7 @@ extension APIEndpoint.V1.CiBuildActions.WithID {
 			public var include: [Include]?
 			public var limitBuilds: Int?
 
-			public enum FieldsCiBuildRuns: String, Codable, CaseIterable {
+			public enum FieldsCiBuildRuns: String, Codable, CaseIterable, Sendable {
 				case number
 				case createdDate
 				case startedDate
@@ -49,7 +49,7 @@ extension APIEndpoint.V1.CiBuildActions.WithID {
 				case pullRequest
 			}
 
-			public enum FieldsBuilds: String, Codable, CaseIterable {
+			public enum FieldsBuilds: String, Codable, CaseIterable, Sendable {
 				case version
 				case uploadedDate
 				case expirationDate
@@ -78,7 +78,7 @@ extension APIEndpoint.V1.CiBuildActions.WithID {
 				case diagnosticSignatures
 			}
 
-			public enum FieldsCiWorkflows: String, Codable, CaseIterable {
+			public enum FieldsCiWorkflows: String, Codable, CaseIterable, Sendable {
 				case name
 				case description
 				case branchStartCondition
@@ -101,7 +101,7 @@ extension APIEndpoint.V1.CiBuildActions.WithID {
 				case buildRuns
 			}
 
-			public enum FieldsCiProducts: String, Codable, CaseIterable {
+			public enum FieldsCiProducts: String, Codable, CaseIterable, Sendable {
 				case name
 				case createdDate
 				case productType
@@ -113,7 +113,7 @@ extension APIEndpoint.V1.CiBuildActions.WithID {
 				case buildRuns
 			}
 
-			public enum FieldsScmGitReferences: String, Codable, CaseIterable {
+			public enum FieldsScmGitReferences: String, Codable, CaseIterable, Sendable {
 				case name
 				case canonicalName
 				case isDeleted
@@ -121,7 +121,7 @@ extension APIEndpoint.V1.CiBuildActions.WithID {
 				case repository
 			}
 
-			public enum FieldsScmPullRequests: String, Codable, CaseIterable {
+			public enum FieldsScmPullRequests: String, Codable, CaseIterable, Sendable {
 				case title
 				case number
 				case webURL = "webUrl"
@@ -136,7 +136,7 @@ extension APIEndpoint.V1.CiBuildActions.WithID {
 				case repository
 			}
 
-			public enum Include: String, Codable, CaseIterable {
+			public enum Include: String, Codable, CaseIterable, Sendable {
 				case builds
 				case workflow
 				case product

@@ -9,7 +9,7 @@ extension APIEndpoint.V1.Apps.WithID {
 		AppClips(path: path + "/appClips")
 	}
 
-	public struct AppClips {
+	public struct AppClips: Sendable {
 		/// Path: `/v1/apps/{id}/appClips`
 		public let path: String
 
@@ -17,7 +17,7 @@ extension APIEndpoint.V1.Apps.WithID {
 			Request(path: path, method: "GET", query: parameters?.asQuery, id: "apps_appClips_getToManyRelated")
 		}
 
-		public struct GetParameters {
+		public struct GetParameters: Sendable {
 			public var filterBundleID: [String]?
 			public var fieldsAppClips: [FieldsAppClips]?
 			public var fieldsApps: [FieldsApps]?
@@ -26,14 +26,14 @@ extension APIEndpoint.V1.Apps.WithID {
 			public var include: [Include]?
 			public var limitAppClipDefaultExperiences: Int?
 
-			public enum FieldsAppClips: String, Codable, CaseIterable {
+			public enum FieldsAppClips: String, Codable, CaseIterable, Sendable {
 				case bundleID = "bundleId"
 				case app
 				case appClipDefaultExperiences
 				case appClipAdvancedExperiences
 			}
 
-			public enum FieldsApps: String, Codable, CaseIterable {
+			public enum FieldsApps: String, Codable, CaseIterable, Sendable {
 				case accessibilityURL = "accessibilityUrl"
 				case name
 				case bundleID = "bundleId"
@@ -94,7 +94,7 @@ extension APIEndpoint.V1.Apps.WithID {
 				case androidToIosAppMappingDetails
 			}
 
-			public enum FieldsAppClipDefaultExperiences: String, Codable, CaseIterable {
+			public enum FieldsAppClipDefaultExperiences: String, Codable, CaseIterable, Sendable {
 				case action
 				case appClip
 				case releaseWithAppStoreVersion
@@ -102,7 +102,7 @@ extension APIEndpoint.V1.Apps.WithID {
 				case appClipAppStoreReviewDetail
 			}
 
-			public enum Include: String, Codable, CaseIterable {
+			public enum Include: String, Codable, CaseIterable, Sendable {
 				case app
 				case appClipDefaultExperiences
 			}

@@ -3,7 +3,7 @@
 
 import Foundation
 
-public struct RetentionMessageLocalizationsResponse: Codable {
+public struct RetentionMessageLocalizationsResponse: Codable, Sendable {
 	public var data: [RetentionMessageLocalization]
 	public var included: [RetentionMessageVersion]?
 	public var links: PagedDocumentLinks

@@ -3,21 +3,21 @@
 
 import Foundation
 
-public struct AppAssetLibraryPlacementCommonRelationships: Codable {
+public struct AppAssetLibraryPlacementCommonRelationships: Codable, Sendable {
 	public var appEventLocalization: AppEventLocalization?
 	public var appStoreVersionLocalization: AppStoreVersionLocalization?
 	public var appCustomProductPageLocalization: AppCustomProductPageLocalization?
 	public var appStoreVersionExperimentTreatmentLocalization: AppStoreVersionExperimentTreatmentLocalization?
 	public var retentionMessageVersion: RetentionMessageVersion?
 
-	public struct AppEventLocalization: Codable {
+	public struct AppEventLocalization: Codable, Sendable {
 		public var data: Data?
 
-		public struct Data: Codable, Identifiable {
+		public struct Data: Codable, Identifiable, Sendable {
 			public var type: `Type`
 			public var id: String
 
-			public enum `Type`: String, Codable, CaseIterable {
+			public enum `Type`: String, Codable, CaseIterable, Sendable {
 				case appEventLocalizations
 			}
 
@@ -54,14 +54,14 @@ public struct AppAssetLibraryPlacementCommonRelationships: Codable {
 		}
 	}
 
-	public struct AppStoreVersionLocalization: Codable {
+	public struct AppStoreVersionLocalization: Codable, Sendable {
 		public var data: Data?
 
-		public struct Data: Codable, Identifiable {
+		public struct Data: Codable, Identifiable, Sendable {
 			public var type: `Type`
 			public var id: String
 
-			public enum `Type`: String, Codable, CaseIterable {
+			public enum `Type`: String, Codable, CaseIterable, Sendable {
 				case appStoreVersionLocalizations
 			}
 
@@ -98,14 +98,14 @@ public struct AppAssetLibraryPlacementCommonRelationships: Codable {
 		}
 	}
 
-	public struct AppCustomProductPageLocalization: Codable {
+	public struct AppCustomProductPageLocalization: Codable, Sendable {
 		public var data: Data?
 
-		public struct Data: Codable, Identifiable {
+		public struct Data: Codable, Identifiable, Sendable {
 			public var type: `Type`
 			public var id: String
 
-			public enum `Type`: String, Codable, CaseIterable {
+			public enum `Type`: String, Codable, CaseIterable, Sendable {
 				case appCustomProductPageLocalizations
 			}
 
@@ -142,14 +142,14 @@ public struct AppAssetLibraryPlacementCommonRelationships: Codable {
 		}
 	}
 
-	public struct AppStoreVersionExperimentTreatmentLocalization: Codable {
+	public struct AppStoreVersionExperimentTreatmentLocalization: Codable, Sendable {
 		public var data: Data?
 
-		public struct Data: Codable, Identifiable {
+		public struct Data: Codable, Identifiable, Sendable {
 			public var type: `Type`
 			public var id: String
 
-			public enum `Type`: String, Codable, CaseIterable {
+			public enum `Type`: String, Codable, CaseIterable, Sendable {
 				case appStoreVersionExperimentTreatmentLocalizations
 			}
 
@@ -186,14 +186,14 @@ public struct AppAssetLibraryPlacementCommonRelationships: Codable {
 		}
 	}
 
-	public struct RetentionMessageVersion: Codable {
+	public struct RetentionMessageVersion: Codable, Sendable {
 		public var data: Data?
 
-		public struct Data: Codable, Identifiable {
+		public struct Data: Codable, Identifiable, Sendable {
 			public var type: `Type`
 			public var id: String
 
-			public enum `Type`: String, Codable, CaseIterable {
+			public enum `Type`: String, Codable, CaseIterable, Sendable {
 				case retentionMessageVersions
 			}
 

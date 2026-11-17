@@ -9,7 +9,7 @@ extension APIEndpoint.V2.GameCenterAchievements {
 		WithID(path: "\(path)/\(id)")
 	}
 
-	public struct WithID {
+	public struct WithID: Sendable {
 		/// Path: `/v2/gameCenterAchievements/{id}`
 		public let path: String
 
@@ -17,7 +17,7 @@ extension APIEndpoint.V2.GameCenterAchievements {
 			Request(path: path, method: "GET", query: parameters?.asQuery, id: "gameCenterAchievementsV2_getInstance")
 		}
 
-		public struct GetParameters {
+		public struct GetParameters: Sendable {
 			public var fieldsGameCenterAchievements: [FieldsGameCenterAchievements]?
 			public var fieldsGameCenterDetails: [FieldsGameCenterDetails]?
 			public var fieldsGameCenterGroups: [FieldsGameCenterGroups]?
@@ -26,7 +26,7 @@ extension APIEndpoint.V2.GameCenterAchievements {
 			public var include: [Include]?
 			public var limitVersions: Int?
 
-			public enum FieldsGameCenterAchievements: String, Codable, CaseIterable {
+			public enum FieldsGameCenterAchievements: String, Codable, CaseIterable, Sendable {
 				case referenceName
 				case vendorIdentifier
 				case points
@@ -40,7 +40,7 @@ extension APIEndpoint.V2.GameCenterAchievements {
 				case versions
 			}
 
-			public enum FieldsGameCenterDetails: String, Codable, CaseIterable {
+			public enum FieldsGameCenterDetails: String, Codable, CaseIterable, Sendable {
 				case arcadeEnabled
 				case challengeEnabled
 				case app
@@ -67,7 +67,7 @@ extension APIEndpoint.V2.GameCenterAchievements {
 				case challengesMinimumPlatformVersions
 			}
 
-			public enum FieldsGameCenterGroups: String, Codable, CaseIterable {
+			public enum FieldsGameCenterGroups: String, Codable, CaseIterable, Sendable {
 				case referenceName
 				case gameCenterDetails
 				case gameCenterLeaderboards
@@ -80,7 +80,7 @@ extension APIEndpoint.V2.GameCenterAchievements {
 				case gameCenterChallenges
 			}
 
-			public enum FieldsGameCenterActivities: String, Codable, CaseIterable {
+			public enum FieldsGameCenterActivities: String, Codable, CaseIterable, Sendable {
 				case referenceName
 				case vendorIdentifier
 				case playStyle
@@ -98,14 +98,14 @@ extension APIEndpoint.V2.GameCenterAchievements {
 				case versions
 			}
 
-			public enum FieldsGameCenterAchievementVersions: String, Codable, CaseIterable {
+			public enum FieldsGameCenterAchievementVersions: String, Codable, CaseIterable, Sendable {
 				case version
 				case state
 				case achievement
 				case localizations
 			}
 
-			public enum Include: String, Codable, CaseIterable {
+			public enum Include: String, Codable, CaseIterable, Sendable {
 				case gameCenterDetail
 				case gameCenterGroup
 				case activity

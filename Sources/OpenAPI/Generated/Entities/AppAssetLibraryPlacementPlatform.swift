@@ -3,7 +3,7 @@
 
 import Foundation
 
-public enum AppAssetLibraryPlacementPlatform: String, Codable, CaseIterable {
+public enum AppAssetLibraryPlacementPlatform: String, Codable, CaseIterable, Sendable {
 	case iphoneAppStore = "IPHONE_APP_STORE"
 	case ipadAppStore = "IPAD_APP_STORE"
 	case watchAppStore = "WATCH_APP_STORE"

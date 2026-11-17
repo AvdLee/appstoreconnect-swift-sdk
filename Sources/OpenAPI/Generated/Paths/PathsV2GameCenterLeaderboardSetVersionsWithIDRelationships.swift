@@ -9,7 +9,7 @@ extension APIEndpoint.V2.GameCenterLeaderboardSetVersions.WithID {
 		Relationships(path: path + "/relationships")
 	}
 
-	public struct Relationships {
+	public struct Relationships: Sendable {
 		/// Path: `/v2/gameCenterLeaderboardSetVersions/{id}/relationships`
 		public let path: String
 	}

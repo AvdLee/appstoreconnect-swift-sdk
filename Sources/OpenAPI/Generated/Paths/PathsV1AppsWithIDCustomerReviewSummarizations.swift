@@ -9,7 +9,7 @@ extension APIEndpoint.V1.Apps.WithID {
 		CustomerReviewSummarizations(path: path + "/customerReviewSummarizations")
 	}
 
-	public struct CustomerReviewSummarizations {
+	public struct CustomerReviewSummarizations: Sendable {
 		/// Path: `/v1/apps/{id}/customerReviewSummarizations`
 		public let path: String
 
@@ -17,7 +17,7 @@ extension APIEndpoint.V1.Apps.WithID {
 			Request(path: path, method: "GET", query: parameters.asQuery, id: "apps_customerReviewSummarizations_getToManyRelated")
 		}
 
-		public struct GetParameters {
+		public struct GetParameters: Sendable {
 			public var filterPlatform: [FilterPlatform]
 			public var filterTerritory: [String]?
 			public var fieldsCustomerReviewSummarizations: [FieldsCustomerReviewSummarizations]?
@@ -25,14 +25,14 @@ extension APIEndpoint.V1.Apps.WithID {
 			public var limit: Int?
 			public var include: [Include]?
 
-			public enum FilterPlatform: String, Codable, CaseIterable {
+			public enum FilterPlatform: String, Codable, CaseIterable, Sendable {
 				case ios = "IOS"
 				case macOs = "MAC_OS"
 				case tvOs = "TV_OS"
 				case visionOs = "VISION_OS"
 			}
 
-			public enum FieldsCustomerReviewSummarizations: String, Codable, CaseIterable {
+			public enum FieldsCustomerReviewSummarizations: String, Codable, CaseIterable, Sendable {
 				case createdDate
 				case locale
 				case platform
@@ -40,11 +40,11 @@ extension APIEndpoint.V1.Apps.WithID {
 				case territory
 			}
 
-			public enum FieldsTerritories: String, Codable, CaseIterable {
+			public enum FieldsTerritories: String, Codable, CaseIterable, Sendable {
 				case currency
 			}
 
-			public enum Include: String, Codable, CaseIterable {
+			public enum Include: String, Codable, CaseIterable, Sendable {
 				case territory
 			}
 

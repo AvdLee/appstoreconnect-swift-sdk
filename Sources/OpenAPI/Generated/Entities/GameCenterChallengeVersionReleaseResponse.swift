@@ -4,7 +4,7 @@
 import Foundation
 
 @available(*, deprecated, message: "Deprecated")
-public struct GameCenterChallengeVersionReleaseResponse: Codable {
+public struct GameCenterChallengeVersionReleaseResponse: Codable, Sendable {
 	/// GameCenterChallengeVersionRelease
 	///
 	/// - warning: Deprecated.

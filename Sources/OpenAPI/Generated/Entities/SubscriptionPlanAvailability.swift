@@ -3,18 +3,18 @@
 
 import Foundation
 
-public struct SubscriptionPlanAvailability: Codable, Identifiable {
+public struct SubscriptionPlanAvailability: Codable, Identifiable, Sendable {
 	public var type: `Type`
 	public var id: String
 	public var attributes: Attributes?
 	public var relationships: Relationships?
 	public var links: ResourceLinks?
 
-	public enum `Type`: String, Codable, CaseIterable {
+	public enum `Type`: String, Codable, CaseIterable, Sendable {
 		case subscriptionPlanAvailabilities
 	}
 
-	public struct Attributes: Codable {
+	public struct Attributes: Codable, Sendable {
 		public var isAvailableInNewTerritories: Bool?
 		public var planType: SubscriptionPlanType?
 
@@ -36,19 +36,19 @@ public struct SubscriptionPlanAvailability: Codable, Identifiable {
 		}
 	}
 
-	public struct Relationships: Codable {
+	public struct Relationships: Codable, Sendable {
 		public var availableTerritories: AvailableTerritories?
 
-		public struct AvailableTerritories: Codable {
+		public struct AvailableTerritories: Codable, Sendable {
 			public var links: RelationshipLinks?
 			public var meta: PagingInformation?
 			public var data: [Datum]?
 
-			public struct Datum: Codable, Identifiable {
+			public struct Datum: Codable, Identifiable, Sendable {
 				public var type: `Type`
 				public var id: String
 
-				public enum `Type`: String, Codable, CaseIterable {
+				public enum `Type`: String, Codable, CaseIterable, Sendable {
 					case territories
 				}
 

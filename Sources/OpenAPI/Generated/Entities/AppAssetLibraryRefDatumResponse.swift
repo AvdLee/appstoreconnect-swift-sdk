@@ -3,7 +3,7 @@
 
 import Foundation
 
-public struct AppAssetLibraryRefDatumResponse: Codable {
+public struct AppAssetLibraryRefDatumResponse: Codable, Sendable {
 	/// AppAssetLibraryRefDatum
 	public var data: AppAssetLibraryRefDatum
 	public var links: DocumentLinks

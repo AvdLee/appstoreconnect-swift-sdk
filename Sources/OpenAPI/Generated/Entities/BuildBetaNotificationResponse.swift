@@ -3,7 +3,7 @@
 
 import Foundation
 
-public struct BuildBetaNotificationResponse: Codable {
+public struct BuildBetaNotificationResponse: Codable, Sendable {
 	/// BuildBetaNotification
 	public var data: BuildBetaNotification
 	public var links: DocumentLinks

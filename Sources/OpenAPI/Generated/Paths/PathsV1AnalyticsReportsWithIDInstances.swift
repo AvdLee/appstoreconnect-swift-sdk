@@ -9,7 +9,7 @@ extension APIEndpoint.V1.AnalyticsReports.WithID {
 		Instances(path: path + "/instances")
 	}
 
-	public struct Instances {
+	public struct Instances: Sendable {
 		/// Path: `/v1/analyticsReports/{id}/instances`
 		public let path: String
 
@@ -17,19 +17,19 @@ extension APIEndpoint.V1.AnalyticsReports.WithID {
 			Request(path: path, method: "GET", query: parameters?.asQuery, id: "analyticsReports_instances_getToManyRelated")
 		}
 
-		public struct GetParameters {
+		public struct GetParameters: Sendable {
 			public var filterGranularity: [FilterGranularity]?
 			public var filterProcessingDate: [String]?
 			public var fieldsAnalyticsReportInstances: [FieldsAnalyticsReportInstances]?
 			public var limit: Int?
 
-			public enum FilterGranularity: String, Codable, CaseIterable {
+			public enum FilterGranularity: String, Codable, CaseIterable, Sendable {
 				case daily = "DAILY"
 				case weekly = "WEEKLY"
 				case monthly = "MONTHLY"
 			}
 
-			public enum FieldsAnalyticsReportInstances: String, Codable, CaseIterable {
+			public enum FieldsAnalyticsReportInstances: String, Codable, CaseIterable, Sendable {
 				case granularity
 				case processingDate
 				case segments

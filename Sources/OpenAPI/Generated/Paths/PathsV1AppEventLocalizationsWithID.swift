@@ -9,7 +9,7 @@ extension APIEndpoint.V1.AppEventLocalizations {
 		WithID(path: "\(path)/\(id)")
 	}
 
-	public struct WithID {
+	public struct WithID: Sendable {
 		/// Path: `/v1/appEventLocalizations/{id}`
 		public let path: String
 
@@ -17,7 +17,7 @@ extension APIEndpoint.V1.AppEventLocalizations {
 			Request(path: path, method: "GET", query: parameters?.asQuery, id: "appEventLocalizations_getInstance")
 		}
 
-		public struct GetParameters {
+		public struct GetParameters: Sendable {
 			public var fieldsAppEventLocalizations: [FieldsAppEventLocalizations]?
 			public var fieldsAppEvents: [FieldsAppEvents]?
 			public var fieldsAppEventScreenshots: [FieldsAppEventScreenshots]?
@@ -28,7 +28,7 @@ extension APIEndpoint.V1.AppEventLocalizations {
 			public var limitAppEventVideoClips: Int?
 			public var limitPlacements: Int?
 
-			public enum FieldsAppEventLocalizations: String, Codable, CaseIterable {
+			public enum FieldsAppEventLocalizations: String, Codable, CaseIterable, Sendable {
 				case locale
 				case name
 				case shortDescription
@@ -39,7 +39,7 @@ extension APIEndpoint.V1.AppEventLocalizations {
 				case placements
 			}
 
-			public enum FieldsAppEvents: String, Codable, CaseIterable {
+			public enum FieldsAppEvents: String, Codable, CaseIterable, Sendable {
 				case referenceName
 				case badge
 				case eventState
@@ -53,7 +53,7 @@ extension APIEndpoint.V1.AppEventLocalizations {
 				case localizations
 			}
 
-			public enum FieldsAppEventScreenshots: String, Codable, CaseIterable {
+			public enum FieldsAppEventScreenshots: String, Codable, CaseIterable, Sendable {
 				case fileSize
 				case fileName
 				case imageAsset
@@ -64,7 +64,7 @@ extension APIEndpoint.V1.AppEventLocalizations {
 				case appEventLocalization
 			}
 
-			public enum FieldsAppEventVideoClips: String, Codable, CaseIterable {
+			public enum FieldsAppEventVideoClips: String, Codable, CaseIterable, Sendable {
 				case fileSize
 				case fileName
 				case previewFrameTimeCode
@@ -78,7 +78,7 @@ extension APIEndpoint.V1.AppEventLocalizations {
 				case appEventLocalization
 			}
 
-			public enum FieldsAppAssetLibraryPlacements: String, Codable, CaseIterable {
+			public enum FieldsAppAssetLibraryPlacements: String, Codable, CaseIterable, Sendable {
 				case mediaType
 				case placementType
 				case placementGroup
@@ -95,7 +95,7 @@ extension APIEndpoint.V1.AppEventLocalizations {
 				case retentionMessageVersion
 			}
 
-			public enum Include: String, Codable, CaseIterable {
+			public enum Include: String, Codable, CaseIterable, Sendable {
 				case appEvent
 				case appEventScreenshots
 				case appEventVideoClips

@@ -9,7 +9,7 @@ extension APIEndpoint.V1.Apps.WithID.Relationships {
 		CiProduct(path: path + "/ciProduct")
 	}
 
-	public struct CiProduct {
+	public struct CiProduct: Sendable {
 		/// Path: `/v1/apps/{id}/relationships/ciProduct`
 		public let path: String
 

@@ -3,19 +3,19 @@
 
 import Foundation
 
-public struct SubscriptionOfferCodeCustomCodeCreateRequest: Codable {
+public struct SubscriptionOfferCodeCustomCodeCreateRequest: Codable, Sendable {
 	public var data: Data
 
-	public struct Data: Codable {
+	public struct Data: Codable, Sendable {
 		public var type: `Type`
 		public var attributes: Attributes
 		public var relationships: Relationships
 
-		public enum `Type`: String, Codable, CaseIterable {
+		public enum `Type`: String, Codable, CaseIterable, Sendable {
 			case subscriptionOfferCodeCustomCodes
 		}
 
-		public struct Attributes: Codable {
+		public struct Attributes: Codable, Sendable {
 			public var customCode: String
 			public var numberOfCodes: Int
 			public var expirationDate: String?
@@ -41,17 +41,17 @@ public struct SubscriptionOfferCodeCustomCodeCreateRequest: Codable {
 			}
 		}
 
-		public struct Relationships: Codable {
+		public struct Relationships: Codable, Sendable {
 			public var offerCode: OfferCode
 
-			public struct OfferCode: Codable {
+			public struct OfferCode: Codable, Sendable {
 				public var data: Data
 
-				public struct Data: Codable, Identifiable {
+				public struct Data: Codable, Identifiable, Sendable {
 					public var type: `Type`
 					public var id: String
 
-					public enum `Type`: String, Codable, CaseIterable {
+					public enum `Type`: String, Codable, CaseIterable, Sendable {
 						case subscriptionOfferCodes
 					}
 

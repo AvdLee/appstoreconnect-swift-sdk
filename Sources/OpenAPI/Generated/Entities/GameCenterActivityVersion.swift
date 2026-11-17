@@ -3,18 +3,18 @@
 
 import Foundation
 
-public struct GameCenterActivityVersion: Codable, Identifiable {
+public struct GameCenterActivityVersion: Codable, Identifiable, Sendable {
 	public var type: `Type`
 	public var id: String
 	public var attributes: Attributes?
 	public var relationships: Relationships?
 	public var links: ResourceLinks?
 
-	public enum `Type`: String, Codable, CaseIterable {
+	public enum `Type`: String, Codable, CaseIterable, Sendable {
 		case gameCenterActivityVersions
 	}
 
-	public struct Attributes: Codable {
+	public struct Attributes: Codable, Sendable {
 		public var version: Int?
 		public var state: GameCenterVersionState?
 		public var fallbackURL: String?
@@ -40,20 +40,20 @@ public struct GameCenterActivityVersion: Codable, Identifiable {
 		}
 	}
 
-	public struct Relationships: Codable {
+	public struct Relationships: Codable, Sendable {
 		public var activity: Activity?
 		public var localizations: Localizations?
 		public var defaultImage: DefaultImage?
 		public var releases: Releases?
 
-		public struct Activity: Codable {
+		public struct Activity: Codable, Sendable {
 			public var data: Data?
 
-			public struct Data: Codable, Identifiable {
+			public struct Data: Codable, Identifiable, Sendable {
 				public var type: `Type`
 				public var id: String
 
-				public enum `Type`: String, Codable, CaseIterable {
+				public enum `Type`: String, Codable, CaseIterable, Sendable {
 					case gameCenterActivities
 				}
 
@@ -90,16 +90,16 @@ public struct GameCenterActivityVersion: Codable, Identifiable {
 			}
 		}
 
-		public struct Localizations: Codable {
+		public struct Localizations: Codable, Sendable {
 			public var links: RelationshipLinks?
 			public var meta: PagingInformation?
 			public var data: [Datum]?
 
-			public struct Datum: Codable, Identifiable {
+			public struct Datum: Codable, Identifiable, Sendable {
 				public var type: `Type`
 				public var id: String
 
-				public enum `Type`: String, Codable, CaseIterable {
+				public enum `Type`: String, Codable, CaseIterable, Sendable {
 					case gameCenterActivityLocalizations
 				}
 
@@ -142,15 +142,15 @@ public struct GameCenterActivityVersion: Codable, Identifiable {
 			}
 		}
 
-		public struct DefaultImage: Codable {
+		public struct DefaultImage: Codable, Sendable {
 			public var links: RelationshipLinks?
 			public var data: Data?
 
-			public struct Data: Codable, Identifiable {
+			public struct Data: Codable, Identifiable, Sendable {
 				public var type: `Type`
 				public var id: String
 
-				public enum `Type`: String, Codable, CaseIterable {
+				public enum `Type`: String, Codable, CaseIterable, Sendable {
 					case gameCenterActivityImages
 				}
 
@@ -190,15 +190,15 @@ public struct GameCenterActivityVersion: Codable, Identifiable {
 			}
 		}
 
-		public struct Releases: Codable {
+		public struct Releases: Codable, Sendable {
 			public var meta: PagingInformation?
 			public var data: [Datum]?
 
-			public struct Datum: Codable, Identifiable {
+			public struct Datum: Codable, Identifiable, Sendable {
 				public var type: `Type`
 				public var id: String
 
-				public enum `Type`: String, Codable, CaseIterable {
+				public enum `Type`: String, Codable, CaseIterable, Sendable {
 					case gameCenterActivityVersionReleases
 				}
 

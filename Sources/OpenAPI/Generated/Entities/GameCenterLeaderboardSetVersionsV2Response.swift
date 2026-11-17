@@ -3,13 +3,13 @@
 
 import Foundation
 
-public struct GameCenterLeaderboardSetVersionsV2Response: Codable {
+public struct GameCenterLeaderboardSetVersionsV2Response: Codable, Sendable {
 	public var data: [GameCenterLeaderboardSetVersionV2]
 	public var included: [IncludedItem]?
 	public var links: PagedDocumentLinks
 	public var meta: PagingInformation?
 
-	public enum IncludedItem: Codable {
+	public enum IncludedItem: Codable, Sendable {
 		case gameCenterLeaderboardSetLocalizationV2(GameCenterLeaderboardSetLocalizationV2)
 		case gameCenterLeaderboardSetV2(GameCenterLeaderboardSetV2)
 

@@ -4,7 +4,7 @@
 import Foundation
 
 @available(*, deprecated, message: "Deprecated")
-public struct GameCenterAchievementReleaseResponse: Codable {
+public struct GameCenterAchievementReleaseResponse: Codable, Sendable {
 	/// GameCenterAchievementRelease
 	///
 	/// - warning: Deprecated.
@@ -12,7 +12,7 @@ public struct GameCenterAchievementReleaseResponse: Codable {
 	public var included: [IncludedItem]?
 	public var links: DocumentLinks
 
-	public enum IncludedItem: Codable {
+	public enum IncludedItem: Codable, Sendable {
 		case gameCenterAchievement(GameCenterAchievement)
 		case gameCenterDetail(GameCenterDetail)
 

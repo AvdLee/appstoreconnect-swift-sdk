@@ -9,7 +9,7 @@ extension APIEndpoint.V1.AppCategories.WithID {
 		Subcategories(path: path + "/subcategories")
 	}
 
-	public struct Subcategories {
+	public struct Subcategories: Sendable {
 		/// Path: `/v1/appCategories/{id}/subcategories`
 		public let path: String
 
@@ -24,7 +24,7 @@ extension APIEndpoint.V1.AppCategories.WithID {
 			return encoder.items
 		}
 
-		public enum FieldsAppCategories: String, Codable, CaseIterable {
+		public enum FieldsAppCategories: String, Codable, CaseIterable, Sendable {
 			case platforms
 			case subcategories
 			case parent

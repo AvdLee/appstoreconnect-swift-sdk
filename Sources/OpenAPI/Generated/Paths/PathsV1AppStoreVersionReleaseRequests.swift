@@ -9,7 +9,7 @@ extension APIEndpoint.V1 {
 		AppStoreVersionReleaseRequests(path: path + "/appStoreVersionReleaseRequests")
 	}
 
-	public struct AppStoreVersionReleaseRequests {
+	public struct AppStoreVersionReleaseRequests: Sendable {
 		/// Path: `/v1/appStoreVersionReleaseRequests`
 		public let path: String
 

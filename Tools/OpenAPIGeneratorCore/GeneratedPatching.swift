@@ -197,8 +197,8 @@ public enum GeneratedPatcher {
             dryRun: dryRun,
             replacements: [
                 .init(description: "Recognize active asset library placements",
-                      from: "public enum AppAssetLibraryPlacementState: String, Codable, CaseIterable {\n\tcase assetProcessing = \"ASSET_PROCESSING\"",
-                      to: "public enum AppAssetLibraryPlacementState: String, Codable, CaseIterable {\n\tcase active = \"ACTIVE\"\n\tcase assetProcessing = \"ASSET_PROCESSING\"",
+                      from: " {\n\tcase assetProcessing = \"ASSET_PROCESSING\"",
+                      to: " {\n\tcase active = \"ACTIVE\"\n\tcase assetProcessing = \"ASSET_PROCESSING\"",
                       required: true),
                 .init(description: "Recognize inactive asset library placements",
                       from: "\tcase parentApproved = \"PARENT_APPROVED\"\n}",
@@ -256,7 +256,74 @@ public enum GeneratedPatcher {
             report: &report
         )
 
+        try conformPublicTypesToSendable(atRoot: rootDir, dryRun: dryRun, report: &report)
+
         return report
+    }
+}
+
+// MARK: - Sendable
+
+/// Matches a public type declaration line: indentation, declaration up to the name, optional conformance list.
+private let publicTypeDeclaration = try! NSRegularExpression(
+    pattern: #"^(\t*public (?:indirect )?(?:final )?(?:struct|enum|class) `?\w+`?)\s*(?::\s*([^{]*?))?\s*\{"#,
+    options: [.anchorsMatchLines]
+)
+
+/// CreateAPI doesn't emit `Sendable`, and public types aren't implicitly `Sendable` outside their module.
+/// Every generated type is a value type (or a final class with `let` properties) of Sendable members,
+/// so the compiler verifies each conformance.
+private func conformPublicTypesToSendable(atRoot rootDir: URL, dryRun: Bool, report: inout GeneratedPatchReport) throws {
+    // Build URLs from `rootDir` (not the enumerator's resolved paths) so they match the other patches' report entries.
+    let files = (try? FileManager.default.subpathsOfDirectory(atPath: rootDir.path))?
+        .filter { $0.hasSuffix(".swift") }
+        .sorted()
+        .map { rootDir.appendingPathComponent($0) } ?? []
+
+    var typeCount = 0
+    var fileCount = 0
+    for url in files {
+        let original: String
+        do {
+            original = try String(contentsOf: url, encoding: .utf8)
+        } catch {
+            throw GeneratedPatchingError.cannotRead(url, error)
+        }
+
+        let ns = original as NSString
+        var updated = ""
+        var cursor = 0
+        var changedHere = 0
+        for match in publicTypeDeclaration.matches(in: original, range: NSRange(location: 0, length: ns.length)) {
+            let conformances = match.range(at: 2).location == NSNotFound ? "" : ns.substring(with: match.range(at: 2))
+            let names = conformances.split(separator: ",").map { $0.trimmingCharacters(in: .whitespaces) }
+            guard !names.contains("Sendable") else { continue }
+
+            let head = ns.substring(with: match.range(at: 1))
+            let list = names.filter { !$0.isEmpty } + ["Sendable"]
+            updated += ns.substring(with: NSRange(location: cursor, length: match.range.location - cursor))
+            updated += "\(head): \(list.joined(separator: ", ")) {"
+            cursor = match.range.location + match.range.length
+            changedHere += 1
+        }
+        guard changedHere > 0 else { continue }
+        updated += ns.substring(from: cursor)
+
+        typeCount += changedHere
+        fileCount += 1
+        if !report.changedFiles.contains(url.path) {
+            report.changedFiles.append(url.path)
+        }
+        if !dryRun {
+            do {
+                try updated.write(to: url, atomically: true, encoding: .utf8)
+            } catch {
+                throw GeneratedPatchingError.cannotWrite(url, error)
+            }
+        }
+    }
+    if typeCount > 0 {
+        report.changes.append("Conformed \(typeCount) public types to Sendable in \(fileCount) files")
     }
 }
 
@@ -300,8 +367,10 @@ private func patchFile(_ url: URL, dryRun: Bool, replacements: [Replacement], re
         }
     }
 
-    if fileChanged {
+    if fileChanged, !report.changedFiles.contains(url.path) {
         report.changedFiles.append(url.path)
+    }
+    if fileChanged {
         if !dryRun {
             do {
                 try updated.write(to: url, atomically: true, encoding: .utf8)

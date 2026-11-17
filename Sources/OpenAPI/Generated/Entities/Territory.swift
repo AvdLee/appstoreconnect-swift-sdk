@@ -3,17 +3,17 @@
 
 import Foundation
 
-public struct Territory: Codable, Identifiable {
+public struct Territory: Codable, Identifiable, Sendable {
 	public var type: `Type`
 	public var id: String
 	public var attributes: Attributes?
 	public var links: ResourceLinks?
 
-	public enum `Type`: String, Codable, CaseIterable {
+	public enum `Type`: String, Codable, CaseIterable, Sendable {
 		case territories
 	}
 
-	public struct Attributes: Codable {
+	public struct Attributes: Codable, Sendable {
 		public var currency: String?
 
 		public init(currency: String? = nil) {

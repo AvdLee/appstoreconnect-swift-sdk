@@ -4,24 +4,24 @@
 import Foundation
 
 @available(*, deprecated, message: "Deprecated")
-public struct InAppPurchase: Codable, Identifiable {
+public struct InAppPurchase: Codable, Identifiable, Sendable {
 	public var type: `Type`
 	public var id: String
 	public var attributes: Attributes?
 	public var relationships: Relationships?
 	public var links: ResourceLinks?
 
-	public enum `Type`: String, Codable, CaseIterable {
+	public enum `Type`: String, Codable, CaseIterable, Sendable {
 		case inAppPurchases
 	}
 
-	public struct Attributes: Codable {
+	public struct Attributes: Codable, Sendable {
 		public var referenceName: String?
 		public var productID: String?
 		public var inAppPurchaseType: InAppPurchaseType?
 		public var state: State?
 
-		public enum InAppPurchaseType: String, Codable, CaseIterable {
+		public enum InAppPurchaseType: String, Codable, CaseIterable, Sendable {
 			case automaticallyRenewableSubscription = "AUTOMATICALLY_RENEWABLE_SUBSCRIPTION"
 			case nonConsumable = "NON_CONSUMABLE"
 			case consumable = "CONSUMABLE"
@@ -29,7 +29,7 @@ public struct InAppPurchase: Codable, Identifiable {
 			case freeSubscription = "FREE_SUBSCRIPTION"
 		}
 
-		public enum State: String, Codable, CaseIterable {
+		public enum State: String, Codable, CaseIterable, Sendable {
 			case created = "CREATED"
 			case developerSignedOff = "DEVELOPER_SIGNED_OFF"
 			case developerActionNeeded = "DEVELOPER_ACTION_NEEDED"
@@ -75,18 +75,18 @@ public struct InAppPurchase: Codable, Identifiable {
 		}
 	}
 
-	public struct Relationships: Codable {
+	public struct Relationships: Codable, Sendable {
 		public var apps: Apps?
 
-		public struct Apps: Codable {
+		public struct Apps: Codable, Sendable {
 			public var meta: PagingInformation?
 			public var data: [Datum]?
 
-			public struct Datum: Codable, Identifiable {
+			public struct Datum: Codable, Identifiable, Sendable {
 				public var type: `Type`
 				public var id: String
 
-				public enum `Type`: String, Codable, CaseIterable {
+				public enum `Type`: String, Codable, CaseIterable, Sendable {
 					case apps
 				}
 

@@ -3,7 +3,7 @@
 
 import Foundation
 
-public struct MerchantIDResponse: Codable {
+public struct MerchantIDResponse: Codable, Sendable {
 	/// MerchantId
 	public var data: MerchantID
 	public var included: [Certificate]?

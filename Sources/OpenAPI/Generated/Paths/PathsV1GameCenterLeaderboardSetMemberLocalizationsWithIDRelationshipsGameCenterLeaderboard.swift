@@ -9,7 +9,7 @@ extension APIEndpoint.V1.GameCenterLeaderboardSetMemberLocalizations.WithID.Rela
 		GameCenterLeaderboard(path: path + "/gameCenterLeaderboard")
 	}
 
-	public struct GameCenterLeaderboard {
+	public struct GameCenterLeaderboard: Sendable {
 		/// Path: `/v1/gameCenterLeaderboardSetMemberLocalizations/{id}/relationships/gameCenterLeaderboard`
 		public let path: String
 

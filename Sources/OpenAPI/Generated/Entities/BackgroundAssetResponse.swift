@@ -3,13 +3,13 @@
 
 import Foundation
 
-public struct BackgroundAssetResponse: Codable {
+public struct BackgroundAssetResponse: Codable, Sendable {
 	/// BackgroundAsset
 	public var data: BackgroundAsset
 	public var included: [IncludedItem]?
 	public var links: DocumentLinks
 
-	public enum IncludedItem: Codable {
+	public enum IncludedItem: Codable, Sendable {
 		case app(App)
 		case backgroundAssetVersion(BackgroundAssetVersion)
 

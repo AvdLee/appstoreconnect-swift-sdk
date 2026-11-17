@@ -9,7 +9,7 @@ extension APIEndpoint.V1.Subscriptions.WithID {
 		IntroductoryOffers(path: path + "/introductoryOffers")
 	}
 
-	public struct IntroductoryOffers {
+	public struct IntroductoryOffers: Sendable {
 		/// Path: `/v1/subscriptions/{id}/introductoryOffers`
 		public let path: String
 
@@ -17,7 +17,7 @@ extension APIEndpoint.V1.Subscriptions.WithID {
 			Request(path: path, method: "GET", query: parameters?.asQuery, id: "subscriptions_introductoryOffers_getToManyRelated")
 		}
 
-		public struct GetParameters {
+		public struct GetParameters: Sendable {
 			public var filterTerritory: [String]?
 			public var fieldsSubscriptionIntroductoryOffers: [FieldsSubscriptionIntroductoryOffers]?
 			public var fieldsSubscriptions: [FieldsSubscriptions]?
@@ -26,7 +26,7 @@ extension APIEndpoint.V1.Subscriptions.WithID {
 			public var limit: Int?
 			public var include: [Include]?
 
-			public enum FieldsSubscriptionIntroductoryOffers: String, Codable, CaseIterable {
+			public enum FieldsSubscriptionIntroductoryOffers: String, Codable, CaseIterable, Sendable {
 				case startDate
 				case endDate
 				case duration
@@ -38,7 +38,7 @@ extension APIEndpoint.V1.Subscriptions.WithID {
 				case subscriptionPricePoint
 			}
 
-			public enum FieldsSubscriptions: String, Codable, CaseIterable {
+			public enum FieldsSubscriptions: String, Codable, CaseIterable, Sendable {
 				case name
 				case productID = "productId"
 				case familySharable
@@ -67,11 +67,11 @@ extension APIEndpoint.V1.Subscriptions.WithID {
 				case retentionMessageOffers
 			}
 
-			public enum FieldsTerritories: String, Codable, CaseIterable {
+			public enum FieldsTerritories: String, Codable, CaseIterable, Sendable {
 				case currency
 			}
 
-			public enum FieldsSubscriptionPricePoints: String, Codable, CaseIterable {
+			public enum FieldsSubscriptionPricePoints: String, Codable, CaseIterable, Sendable {
 				case customerPrice
 				case proceeds
 				case proceedsYear2
@@ -80,7 +80,7 @@ extension APIEndpoint.V1.Subscriptions.WithID {
 				case adjustedEqualizations
 			}
 
-			public enum Include: String, Codable, CaseIterable {
+			public enum Include: String, Codable, CaseIterable, Sendable {
 				case subscription
 				case territory
 				case subscriptionPricePoint

@@ -3,7 +3,7 @@
 
 import Foundation
 
-public enum BackgroundAssetVersionState: String, Codable, CaseIterable {
+public enum BackgroundAssetVersionState: String, Codable, CaseIterable, Sendable {
 	case awaitingUpload = "AWAITING_UPLOAD"
 	case processing = "PROCESSING"
 	case failed = "FAILED"

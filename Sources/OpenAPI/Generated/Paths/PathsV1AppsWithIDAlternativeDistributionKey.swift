@@ -9,7 +9,7 @@ extension APIEndpoint.V1.Apps.WithID {
 		AlternativeDistributionKey(path: path + "/alternativeDistributionKey")
 	}
 
-	public struct AlternativeDistributionKey {
+	public struct AlternativeDistributionKey: Sendable {
 		/// Path: `/v1/apps/{id}/alternativeDistributionKey`
 		public let path: String
 
@@ -23,7 +23,7 @@ extension APIEndpoint.V1.Apps.WithID {
 			return encoder.items
 		}
 
-		public enum FieldsAlternativeDistributionKeys: String, Codable, CaseIterable {
+		public enum FieldsAlternativeDistributionKeys: String, Codable, CaseIterable, Sendable {
 			case publicKey
 		}
 	}

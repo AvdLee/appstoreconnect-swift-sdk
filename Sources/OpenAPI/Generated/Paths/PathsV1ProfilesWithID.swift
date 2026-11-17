@@ -9,7 +9,7 @@ extension APIEndpoint.V1.Profiles {
 		WithID(path: "\(path)/\(id)")
 	}
 
-	public struct WithID {
+	public struct WithID: Sendable {
 		/// Path: `/v1/profiles/{id}`
 		public let path: String
 
@@ -17,7 +17,7 @@ extension APIEndpoint.V1.Profiles {
 			Request(path: path, method: "GET", query: parameters?.asQuery, id: "profiles_getInstance")
 		}
 
-		public struct GetParameters {
+		public struct GetParameters: Sendable {
 			public var fieldsProfiles: [FieldsProfiles]?
 			public var fieldsBundleIDs: [FieldsBundleIDs]?
 			public var fieldsDevices: [FieldsDevices]?
@@ -26,7 +26,7 @@ extension APIEndpoint.V1.Profiles {
 			public var limitCertificates: Int?
 			public var limitDevices: Int?
 
-			public enum FieldsProfiles: String, Codable, CaseIterable {
+			public enum FieldsProfiles: String, Codable, CaseIterable, Sendable {
 				case name
 				case platform
 				case profileType
@@ -40,7 +40,7 @@ extension APIEndpoint.V1.Profiles {
 				case certificates
 			}
 
-			public enum FieldsBundleIDs: String, Codable, CaseIterable {
+			public enum FieldsBundleIDs: String, Codable, CaseIterable, Sendable {
 				case name
 				case platform
 				case identifier
@@ -50,7 +50,7 @@ extension APIEndpoint.V1.Profiles {
 				case app
 			}
 
-			public enum FieldsDevices: String, Codable, CaseIterable {
+			public enum FieldsDevices: String, Codable, CaseIterable, Sendable {
 				case name
 				case platform
 				case udid
@@ -60,7 +60,7 @@ extension APIEndpoint.V1.Profiles {
 				case addedDate
 			}
 
-			public enum FieldsCertificates: String, Codable, CaseIterable {
+			public enum FieldsCertificates: String, Codable, CaseIterable, Sendable {
 				case name
 				case certificateType
 				case displayName
@@ -72,7 +72,7 @@ extension APIEndpoint.V1.Profiles {
 				case passTypeID = "passTypeId"
 			}
 
-			public enum Include: String, Codable, CaseIterable {
+			public enum Include: String, Codable, CaseIterable, Sendable {
 				case bundleID = "bundleId"
 				case devices
 				case certificates

@@ -4,13 +4,13 @@
 import Foundation
 
 @available(*, deprecated, message: "Deprecated")
-public struct AppStoreVersionExperimentsResponse: Codable {
+public struct AppStoreVersionExperimentsResponse: Codable, Sendable {
 	public var data: [AppStoreVersionExperiment]
 	public var included: [IncludedItem]?
 	public var links: PagedDocumentLinks
 	public var meta: PagingInformation?
 
-	public enum IncludedItem: Codable {
+	public enum IncludedItem: Codable, Sendable {
 		case appStoreVersionExperimentTreatment(AppStoreVersionExperimentTreatment)
 		case appStoreVersion(AppStoreVersion)
 

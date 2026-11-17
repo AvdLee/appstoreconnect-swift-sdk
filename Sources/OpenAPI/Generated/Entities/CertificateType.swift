@@ -3,7 +3,7 @@
 
 import Foundation
 
-public enum CertificateType: String, Codable, CaseIterable {
+public enum CertificateType: String, Codable, CaseIterable, Sendable {
 	case applePay = "APPLE_PAY"
 	case applePayMerchantIdentity = "APPLE_PAY_MERCHANT_IDENTITY"
 	case applePayPspIdentity = "APPLE_PAY_PSP_IDENTITY"

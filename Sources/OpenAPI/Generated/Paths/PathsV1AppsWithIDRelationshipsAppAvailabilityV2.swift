@@ -9,7 +9,7 @@ extension APIEndpoint.V1.Apps.WithID.Relationships {
 		AppAvailabilityV2(path: path + "/appAvailabilityV2")
 	}
 
-	public struct AppAvailabilityV2 {
+	public struct AppAvailabilityV2: Sendable {
 		/// Path: `/v1/apps/{id}/relationships/appAvailabilityV2`
 		public let path: String
 

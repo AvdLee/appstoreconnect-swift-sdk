@@ -3,31 +3,31 @@
 
 import Foundation
 
-public struct AppPriceScheduleCreateRequest: Codable {
+public struct AppPriceScheduleCreateRequest: Codable, Sendable {
 	public var data: Data
 	public var included: [IncludedItem]?
 
-	public struct Data: Codable {
+	public struct Data: Codable, Sendable {
 		public var type: `Type`
 		public var relationships: Relationships
 
-		public enum `Type`: String, Codable, CaseIterable {
+		public enum `Type`: String, Codable, CaseIterable, Sendable {
 			case appPriceSchedules
 		}
 
-		public struct Relationships: Codable {
+		public struct Relationships: Codable, Sendable {
 			public var app: App
 			public var baseTerritory: BaseTerritory
 			public var manualPrices: ManualPrices
 
-			public struct App: Codable {
+			public struct App: Codable, Sendable {
 				public var data: Data
 
-				public struct Data: Codable, Identifiable {
+				public struct Data: Codable, Identifiable, Sendable {
 					public var type: `Type`
 					public var id: String
 
-					public enum `Type`: String, Codable, CaseIterable {
+					public enum `Type`: String, Codable, CaseIterable, Sendable {
 						case apps
 					}
 
@@ -64,14 +64,14 @@ public struct AppPriceScheduleCreateRequest: Codable {
 				}
 			}
 
-			public struct BaseTerritory: Codable {
+			public struct BaseTerritory: Codable, Sendable {
 				public var data: Data
 
-				public struct Data: Codable, Identifiable {
+				public struct Data: Codable, Identifiable, Sendable {
 					public var type: `Type`
 					public var id: String
 
-					public enum `Type`: String, Codable, CaseIterable {
+					public enum `Type`: String, Codable, CaseIterable, Sendable {
 						case territories
 					}
 
@@ -108,14 +108,14 @@ public struct AppPriceScheduleCreateRequest: Codable {
 				}
 			}
 
-			public struct ManualPrices: Codable {
+			public struct ManualPrices: Codable, Sendable {
 				public var data: [Datum]
 
-				public struct Datum: Codable, Identifiable {
+				public struct Datum: Codable, Identifiable, Sendable {
 					public var type: `Type`
 					public var id: String
 
-					public enum `Type`: String, Codable, CaseIterable {
+					public enum `Type`: String, Codable, CaseIterable, Sendable {
 						case appPrices
 					}
 
@@ -191,7 +191,7 @@ public struct AppPriceScheduleCreateRequest: Codable {
 		}
 	}
 
-	public enum IncludedItem: Codable {
+	public enum IncludedItem: Codable, Sendable {
 		case appPriceV2InlineCreate(AppPriceV2InlineCreate)
 		case territoryInlineCreate(TerritoryInlineCreate)
 

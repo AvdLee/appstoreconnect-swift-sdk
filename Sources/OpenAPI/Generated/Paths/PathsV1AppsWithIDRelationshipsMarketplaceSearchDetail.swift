@@ -9,7 +9,7 @@ extension APIEndpoint.V1.Apps.WithID.Relationships {
 		MarketplaceSearchDetail(path: path + "/marketplaceSearchDetail")
 	}
 
-	public struct MarketplaceSearchDetail {
+	public struct MarketplaceSearchDetail: Sendable {
 		/// Path: `/v1/apps/{id}/relationships/marketplaceSearchDetail`
 		public let path: String
 

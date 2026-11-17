@@ -4,7 +4,7 @@
 import Foundation
 
 @available(*, deprecated, message: "Deprecated")
-public struct AppStoreVersionSubmissionResponse: Codable {
+public struct AppStoreVersionSubmissionResponse: Codable, Sendable {
 	/// AppStoreVersionSubmission
 	///
 	/// - warning: Deprecated.

@@ -9,7 +9,7 @@ extension APIEndpoint.V1 {
 		AppStoreVersionPhasedReleases(path: path + "/appStoreVersionPhasedReleases")
 	}
 
-	public struct AppStoreVersionPhasedReleases {
+	public struct AppStoreVersionPhasedReleases: Sendable {
 		/// Path: `/v1/appStoreVersionPhasedReleases`
 		public let path: String
 

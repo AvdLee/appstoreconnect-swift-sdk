@@ -3,7 +3,7 @@
 
 import Foundation
 
-public struct CiTestDestination: Codable {
+public struct CiTestDestination: Codable, Sendable {
 	public var deviceTypeName: String?
 	public var deviceTypeIdentifier: String?
 	public var runtimeName: String?

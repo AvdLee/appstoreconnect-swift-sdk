@@ -3,17 +3,17 @@
 
 import Foundation
 
-public struct BetaRecruitmentCriterion: Codable, Identifiable {
+public struct BetaRecruitmentCriterion: Codable, Identifiable, Sendable {
 	public var type: `Type`
 	public var id: String
 	public var attributes: Attributes?
 	public var links: ResourceLinks?
 
-	public enum `Type`: String, Codable, CaseIterable {
+	public enum `Type`: String, Codable, CaseIterable, Sendable {
 		case betaRecruitmentCriteria
 	}
 
-	public struct Attributes: Codable {
+	public struct Attributes: Codable, Sendable {
 		public var lastModifiedDate: Date?
 		public var deviceFamilyOsVersionFilters: [DeviceFamilyOsVersionFilter]?
 

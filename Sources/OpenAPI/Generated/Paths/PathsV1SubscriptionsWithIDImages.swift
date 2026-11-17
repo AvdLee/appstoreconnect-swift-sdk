@@ -9,7 +9,7 @@ extension APIEndpoint.V1.Subscriptions.WithID {
 		Images(path: path + "/images")
 	}
 
-	public struct Images {
+	public struct Images: Sendable {
 		/// Path: `/v1/subscriptions/{id}/images`
 		public let path: String
 
@@ -17,13 +17,13 @@ extension APIEndpoint.V1.Subscriptions.WithID {
 			Request(path: path, method: "GET", query: parameters?.asQuery, id: "subscriptions_images_getToManyRelated")
 		}
 
-		public struct GetParameters {
+		public struct GetParameters: Sendable {
 			public var fieldsSubscriptionImages: [FieldsSubscriptionImages]?
 			public var fieldsSubscriptions: [FieldsSubscriptions]?
 			public var limit: Int?
 			public var include: [Include]?
 
-			public enum FieldsSubscriptionImages: String, Codable, CaseIterable {
+			public enum FieldsSubscriptionImages: String, Codable, CaseIterable, Sendable {
 				case fileSize
 				case fileName
 				case sourceFileChecksum
@@ -34,7 +34,7 @@ extension APIEndpoint.V1.Subscriptions.WithID {
 				case subscription
 			}
 
-			public enum FieldsSubscriptions: String, Codable, CaseIterable {
+			public enum FieldsSubscriptions: String, Codable, CaseIterable, Sendable {
 				case name
 				case productID = "productId"
 				case familySharable
@@ -63,7 +63,7 @@ extension APIEndpoint.V1.Subscriptions.WithID {
 				case retentionMessageOffers
 			}
 
-			public enum Include: String, Codable, CaseIterable {
+			public enum Include: String, Codable, CaseIterable, Sendable {
 				case subscription
 			}
 

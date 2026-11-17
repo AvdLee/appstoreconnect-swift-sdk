@@ -9,7 +9,7 @@ extension APIEndpoint.V1.Apps.WithID {
 		BuildUploads(path: path + "/buildUploads")
 	}
 
-	public struct BuildUploads {
+	public struct BuildUploads: Sendable {
 		/// Path: `/v1/apps/{id}/buildUploads`
 		public let path: String
 
@@ -17,7 +17,7 @@ extension APIEndpoint.V1.Apps.WithID {
 			Request(path: path, method: "GET", query: parameters?.asQuery, id: "apps_buildUploads_getToManyRelated")
 		}
 
-		public struct GetParameters {
+		public struct GetParameters: Sendable {
 			public var filterCfBundleShortVersionString: [String]?
 			public var filterCfBundleVersion: [String]?
 			public var filterPlatform: [FilterPlatform]?
@@ -29,21 +29,21 @@ extension APIEndpoint.V1.Apps.WithID {
 			public var limit: Int?
 			public var include: [Include]?
 
-			public enum FilterPlatform: String, Codable, CaseIterable {
+			public enum FilterPlatform: String, Codable, CaseIterable, Sendable {
 				case ios = "IOS"
 				case macOs = "MAC_OS"
 				case tvOs = "TV_OS"
 				case visionOs = "VISION_OS"
 			}
 
-			public enum Sort: String, Codable, CaseIterable {
+			public enum Sort: String, Codable, CaseIterable, Sendable {
 				case cfBundleVersion
 				case minuscfBundleVersion = "-cfBundleVersion"
 				case uploadedDate
 				case minusuploadedDate = "-uploadedDate"
 			}
 
-			public enum FieldsBuildUploads: String, Codable, CaseIterable {
+			public enum FieldsBuildUploads: String, Codable, CaseIterable, Sendable {
 				case cfBundleShortVersionString
 				case cfBundleVersion
 				case createdDate
@@ -57,7 +57,7 @@ extension APIEndpoint.V1.Apps.WithID {
 				case buildUploadFiles
 			}
 
-			public enum FieldsBuilds: String, Codable, CaseIterable {
+			public enum FieldsBuilds: String, Codable, CaseIterable, Sendable {
 				case version
 				case uploadedDate
 				case expirationDate
@@ -86,7 +86,7 @@ extension APIEndpoint.V1.Apps.WithID {
 				case diagnosticSignatures
 			}
 
-			public enum FieldsBuildUploadFiles: String, Codable, CaseIterable {
+			public enum FieldsBuildUploadFiles: String, Codable, CaseIterable, Sendable {
 				case assetDeliveryState
 				case assetToken
 				case assetType
@@ -97,7 +97,7 @@ extension APIEndpoint.V1.Apps.WithID {
 				case uti
 			}
 
-			public enum Include: String, Codable, CaseIterable {
+			public enum Include: String, Codable, CaseIterable, Sendable {
 				case build
 				case assetFile
 				case assetDescriptionFile

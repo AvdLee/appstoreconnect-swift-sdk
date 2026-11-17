@@ -3,7 +3,7 @@
 
 import Foundation
 
-public struct CertificatesResponse: Codable {
+public struct CertificatesResponse: Codable, Sendable {
 	public var data: [Certificate]
 	public var included: [PassTypeID]?
 	public var links: PagedDocumentLinks

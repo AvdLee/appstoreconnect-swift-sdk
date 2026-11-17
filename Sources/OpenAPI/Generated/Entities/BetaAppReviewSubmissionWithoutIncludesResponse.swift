@@ -3,7 +3,7 @@
 
 import Foundation
 
-public struct BetaAppReviewSubmissionWithoutIncludesResponse: Codable {
+public struct BetaAppReviewSubmissionWithoutIncludesResponse: Codable, Sendable {
 	/// BetaAppReviewSubmission
 	public var data: BetaAppReviewSubmission
 	public var links: DocumentLinks

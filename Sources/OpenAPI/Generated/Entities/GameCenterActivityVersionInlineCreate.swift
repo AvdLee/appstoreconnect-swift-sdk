@@ -3,17 +3,17 @@
 
 import Foundation
 
-public struct GameCenterActivityVersionInlineCreate: Codable, Identifiable {
+public struct GameCenterActivityVersionInlineCreate: Codable, Identifiable, Sendable {
 	public var type: `Type`
 	public var id: String?
 	public var attributes: Attributes?
 	public var relationships: Relationships?
 
-	public enum `Type`: String, Codable, CaseIterable {
+	public enum `Type`: String, Codable, CaseIterable, Sendable {
 		case gameCenterActivityVersions
 	}
 
-	public struct Attributes: Codable {
+	public struct Attributes: Codable, Sendable {
 		public var fallbackURL: String?
 
 		public init(fallbackURL: String? = nil) {
@@ -31,17 +31,17 @@ public struct GameCenterActivityVersionInlineCreate: Codable, Identifiable {
 		}
 	}
 
-	public struct Relationships: Codable {
+	public struct Relationships: Codable, Sendable {
 		public var activity: Activity?
 
-		public struct Activity: Codable {
+		public struct Activity: Codable, Sendable {
 			public var data: Data?
 
-			public struct Data: Codable, Identifiable {
+			public struct Data: Codable, Identifiable, Sendable {
 				public var type: `Type`
 				public var id: String
 
-				public enum `Type`: String, Codable, CaseIterable {
+				public enum `Type`: String, Codable, CaseIterable, Sendable {
 					case gameCenterActivities
 				}
 

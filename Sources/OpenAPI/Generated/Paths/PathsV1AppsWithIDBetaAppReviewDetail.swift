@@ -9,7 +9,7 @@ extension APIEndpoint.V1.Apps.WithID {
 		BetaAppReviewDetail(path: path + "/betaAppReviewDetail")
 	}
 
-	public struct BetaAppReviewDetail {
+	public struct BetaAppReviewDetail: Sendable {
 		/// Path: `/v1/apps/{id}/betaAppReviewDetail`
 		public let path: String
 
@@ -23,7 +23,7 @@ extension APIEndpoint.V1.Apps.WithID {
 			return encoder.items
 		}
 
-		public enum FieldsBetaAppReviewDetails: String, Codable, CaseIterable {
+		public enum FieldsBetaAppReviewDetails: String, Codable, CaseIterable, Sendable {
 			case contactFirstName
 			case contactLastName
 			case contactPhone

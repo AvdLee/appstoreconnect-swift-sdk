@@ -3,17 +3,17 @@
 
 import Foundation
 
-public struct InAppPurchasePriceInlineCreate: Codable, Identifiable {
+public struct InAppPurchasePriceInlineCreate: Codable, Identifiable, Sendable {
 	public var type: `Type`
 	public var id: String?
 	public var attributes: Attributes?
 	public var relationships: Relationships?
 
-	public enum `Type`: String, Codable, CaseIterable {
+	public enum `Type`: String, Codable, CaseIterable, Sendable {
 		case inAppPurchasePrices
 	}
 
-	public struct Attributes: Codable {
+	public struct Attributes: Codable, Sendable {
 		public var startDate: String?
 		public var endDate: String?
 
@@ -35,18 +35,18 @@ public struct InAppPurchasePriceInlineCreate: Codable, Identifiable {
 		}
 	}
 
-	public struct Relationships: Codable {
+	public struct Relationships: Codable, Sendable {
 		public var inAppPurchaseV2: InAppPurchaseV2?
 		public var inAppPurchasePricePoint: InAppPurchasePricePoint?
 
-		public struct InAppPurchaseV2: Codable {
+		public struct InAppPurchaseV2: Codable, Sendable {
 			public var data: Data?
 
-			public struct Data: Codable, Identifiable {
+			public struct Data: Codable, Identifiable, Sendable {
 				public var type: `Type`
 				public var id: String
 
-				public enum `Type`: String, Codable, CaseIterable {
+				public enum `Type`: String, Codable, CaseIterable, Sendable {
 					case inAppPurchases
 				}
 
@@ -83,14 +83,14 @@ public struct InAppPurchasePriceInlineCreate: Codable, Identifiable {
 			}
 		}
 
-		public struct InAppPurchasePricePoint: Codable {
+		public struct InAppPurchasePricePoint: Codable, Sendable {
 			public var data: Data?
 
-			public struct Data: Codable, Identifiable {
+			public struct Data: Codable, Identifiable, Sendable {
 				public var type: `Type`
 				public var id: String
 
-				public enum `Type`: String, Codable, CaseIterable {
+				public enum `Type`: String, Codable, CaseIterable, Sendable {
 					case inAppPurchasePricePoints
 				}
 

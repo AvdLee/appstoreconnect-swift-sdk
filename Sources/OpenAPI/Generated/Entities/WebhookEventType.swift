@@ -3,7 +3,7 @@
 
 import Foundation
 
-public enum WebhookEventType: String, Codable, CaseIterable {
+public enum WebhookEventType: String, Codable, CaseIterable, Sendable {
 	case alternativeDistributionPackageAvailableUpdated = "ALTERNATIVE_DISTRIBUTION_PACKAGE_AVAILABLE_UPDATED"
 	case alternativeDistributionPackageVersionCreated = "ALTERNATIVE_DISTRIBUTION_PACKAGE_VERSION_CREATED"
 	case alternativeDistributionTerritoryAvailabilityUpdated = "ALTERNATIVE_DISTRIBUTION_TERRITORY_AVAILABILITY_UPDATED"

@@ -9,7 +9,7 @@ extension APIEndpoint.V1.AppClipDefaultExperiences.WithID.Relationships {
 		AppClipDefaultExperienceLocalizations(path: path + "/appClipDefaultExperienceLocalizations")
 	}
 
-	public struct AppClipDefaultExperienceLocalizations {
+	public struct AppClipDefaultExperienceLocalizations: Sendable {
 		/// Path: `/v1/appClipDefaultExperiences/{id}/relationships/appClipDefaultExperienceLocalizations`
 		public let path: String
 

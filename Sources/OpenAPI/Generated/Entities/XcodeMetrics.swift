@@ -3,12 +3,12 @@
 
 import Foundation
 
-public struct XcodeMetrics: Codable {
+public struct XcodeMetrics: Codable, Sendable {
 	public var version: String?
 	public var insights: Insights?
 	public var productData: [ProductDatum]?
 
-	public struct Insights: Codable {
+	public struct Insights: Codable, Sendable {
 		public var trendingUp: [MetricsInsight]?
 		public var regressions: [MetricsInsight]?
 
@@ -30,21 +30,21 @@ public struct XcodeMetrics: Codable {
 		}
 	}
 
-	public struct ProductDatum: Codable {
+	public struct ProductDatum: Codable, Sendable {
 		public var platform: String?
 		public var metricCategories: [MetricCategory]?
 
-		public final class MetricCategory: Codable {
+		public final class MetricCategory: Codable, Sendable {
 			public let identifier: AppStoreConnect_Swift_SDK.MetricCategory?
 			public let metrics: [Metric]?
 
-			public struct Metric: Codable {
+			public struct Metric: Codable, Sendable {
 				public var identifier: String?
 				public var goalKeys: [GoalKey]?
 				public var unit: Unit?
 				public var datasets: [Dataset]?
 
-				public struct GoalKey: Codable {
+				public struct GoalKey: Codable, Sendable {
 					public var goalKey: String?
 					public var lowerBound: Int?
 					public var upperBound: Int?
@@ -70,7 +70,7 @@ public struct XcodeMetrics: Codable {
 					}
 				}
 
-				public struct Unit: Codable {
+				public struct Unit: Codable, Sendable {
 					public var identifier: String?
 					public var displayName: String?
 
@@ -92,12 +92,12 @@ public struct XcodeMetrics: Codable {
 					}
 				}
 
-				public struct Dataset: Codable {
+				public struct Dataset: Codable, Sendable {
 					public var filterCriteria: FilterCriteria?
 					public var points: [Point]?
 					public var recommendedMetricGoal: RecommendedMetricGoal?
 
-					public struct FilterCriteria: Codable {
+					public struct FilterCriteria: Codable, Sendable {
 						public var percentile: String?
 						public var device: String?
 						public var deviceMarketingName: String?
@@ -123,14 +123,14 @@ public struct XcodeMetrics: Codable {
 						}
 					}
 
-					public struct Point: Codable {
+					public struct Point: Codable, Sendable {
 						public var version: String?
 						public var value: Double?
 						public var errorMargin: Double?
 						public var percentageBreakdown: PercentageBreakdown?
 						public var goal: String?
 
-						public struct PercentageBreakdown: Codable {
+						public struct PercentageBreakdown: Codable, Sendable {
 							public var value: Double?
 							public var subSystemLabel: String?
 
@@ -179,7 +179,7 @@ public struct XcodeMetrics: Codable {
 						}
 					}
 
-					public struct RecommendedMetricGoal: Codable {
+					public struct RecommendedMetricGoal: Codable, Sendable {
 						public var value: Double?
 						public var detail: String?
 

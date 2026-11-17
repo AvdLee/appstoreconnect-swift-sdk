@@ -9,7 +9,7 @@ extension APIEndpoint.V1.GameCenterDetails.WithID {
 		ChallengeReleases(path: path + "/challengeReleases")
 	}
 
-	public struct ChallengeReleases {
+	public struct ChallengeReleases: Sendable {
 		/// Path: `/v1/gameCenterDetails/{id}/challengeReleases`
 		public let path: String
 
@@ -18,17 +18,17 @@ extension APIEndpoint.V1.GameCenterDetails.WithID {
 			Request(path: path, method: "GET", query: parameters?.asQuery, id: "gameCenterDetails_challengeReleases_getToManyRelated")
 		}
 
-		public struct GetParameters {
+		public struct GetParameters: Sendable {
 			public var fieldsGameCenterChallengeVersionReleases: [FieldsGameCenterChallengeVersionReleases]?
 			public var fieldsGameCenterChallengeVersions: [FieldsGameCenterChallengeVersions]?
 			public var limit: Int?
 			public var include: [Include]?
 
-			public enum FieldsGameCenterChallengeVersionReleases: String, Codable, CaseIterable {
+			public enum FieldsGameCenterChallengeVersionReleases: String, Codable, CaseIterable, Sendable {
 				case version
 			}
 
-			public enum FieldsGameCenterChallengeVersions: String, Codable, CaseIterable {
+			public enum FieldsGameCenterChallengeVersions: String, Codable, CaseIterable, Sendable {
 				case version
 				case state
 				case challenge
@@ -37,7 +37,7 @@ extension APIEndpoint.V1.GameCenterDetails.WithID {
 				case defaultImage
 			}
 
-			public enum Include: String, Codable, CaseIterable {
+			public enum Include: String, Codable, CaseIterable, Sendable {
 				case version
 			}
 

@@ -3,17 +3,17 @@
 
 import Foundation
 
-public struct BetaRecruitmentCriterionCompatibleBuildCheck: Codable, Identifiable {
+public struct BetaRecruitmentCriterionCompatibleBuildCheck: Codable, Identifiable, Sendable {
 	public var type: `Type`
 	public var id: String
 	public var attributes: Attributes?
 	public var links: ResourceLinks?
 
-	public enum `Type`: String, Codable, CaseIterable {
+	public enum `Type`: String, Codable, CaseIterable, Sendable {
 		case betaRecruitmentCriterionCompatibleBuildChecks
 	}
 
-	public struct Attributes: Codable {
+	public struct Attributes: Codable, Sendable {
 		public var hasCompatibleBuild: Bool?
 
 		public init(hasCompatibleBuild: Bool? = nil) {

@@ -9,7 +9,7 @@ extension APIEndpoint.V1.Nominations {
 		WithID(path: "\(path)/\(id)")
 	}
 
-	public struct WithID {
+	public struct WithID: Sendable {
 		/// Path: `/v1/nominations/{id}`
 		public let path: String
 
@@ -17,7 +17,7 @@ extension APIEndpoint.V1.Nominations {
 			Request(path: path, method: "GET", query: parameters?.asQuery, id: "nominations_getInstance")
 		}
 
-		public struct GetParameters {
+		public struct GetParameters: Sendable {
 			public var fieldsNominations: [FieldsNominations]?
 			public var fieldsApps: [FieldsApps]?
 			public var fieldsActors: [FieldsActors]?
@@ -28,7 +28,7 @@ extension APIEndpoint.V1.Nominations {
 			public var limitRelatedApps: Int?
 			public var limitSupportedTerritories: Int?
 
-			public enum FieldsNominations: String, Codable, CaseIterable {
+			public enum FieldsNominations: String, Codable, CaseIterable, Sendable {
 				case name
 				case type
 				case description
@@ -53,7 +53,7 @@ extension APIEndpoint.V1.Nominations {
 				case supportedTerritories
 			}
 
-			public enum FieldsApps: String, Codable, CaseIterable {
+			public enum FieldsApps: String, Codable, CaseIterable, Sendable {
 				case accessibilityURL = "accessibilityUrl"
 				case name
 				case bundleID = "bundleId"
@@ -114,7 +114,7 @@ extension APIEndpoint.V1.Nominations {
 				case androidToIosAppMappingDetails
 			}
 
-			public enum FieldsActors: String, Codable, CaseIterable {
+			public enum FieldsActors: String, Codable, CaseIterable, Sendable {
 				case actorType
 				case userFirstName
 				case userLastName
@@ -122,7 +122,7 @@ extension APIEndpoint.V1.Nominations {
 				case apiKeyID = "apiKeyId"
 			}
 
-			public enum FieldsAppEvents: String, Codable, CaseIterable {
+			public enum FieldsAppEvents: String, Codable, CaseIterable, Sendable {
 				case referenceName
 				case badge
 				case eventState
@@ -136,11 +136,11 @@ extension APIEndpoint.V1.Nominations {
 				case localizations
 			}
 
-			public enum FieldsTerritories: String, Codable, CaseIterable {
+			public enum FieldsTerritories: String, Codable, CaseIterable, Sendable {
 				case currency
 			}
 
-			public enum Include: String, Codable, CaseIterable {
+			public enum Include: String, Codable, CaseIterable, Sendable {
 				case relatedApps
 				case createdByActor
 				case lastModifiedByActor

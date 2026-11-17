@@ -9,7 +9,7 @@ extension APIEndpoint.V1.SubscriptionPricePoints.WithID.Relationships {
 		Equalizations(path: path + "/equalizations")
 	}
 
-	public struct Equalizations {
+	public struct Equalizations: Sendable {
 		/// Path: `/v1/subscriptionPricePoints/{id}/relationships/equalizations`
 		public let path: String
 

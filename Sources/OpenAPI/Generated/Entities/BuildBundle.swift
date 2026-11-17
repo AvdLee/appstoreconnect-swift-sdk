@@ -3,18 +3,18 @@
 
 import Foundation
 
-public struct BuildBundle: Codable, Identifiable {
+public struct BuildBundle: Codable, Identifiable, Sendable {
 	public var type: `Type`
 	public var id: String
 	public var attributes: Attributes?
 	public var relationships: Relationships?
 	public var links: ResourceLinks?
 
-	public enum `Type`: String, Codable, CaseIterable {
+	public enum `Type`: String, Codable, CaseIterable, Sendable {
 		case buildBundles
 	}
 
-	public struct Attributes: Codable {
+	public struct Attributes: Codable, Sendable {
 		public var bundleID: String?
 		public var bundleType: BuildBundleType?
 		public var sdkBuild: String?
@@ -108,21 +108,21 @@ public struct BuildBundle: Codable, Identifiable {
 		}
 	}
 
-	public struct Relationships: Codable {
+	public struct Relationships: Codable, Sendable {
 		public var appClipDomainCacheStatus: AppClipDomainCacheStatus?
 		public var appClipDomainDebugStatus: AppClipDomainDebugStatus?
 		public var betaAppClipInvocations: BetaAppClipInvocations?
 		public var buildBundleFileSizes: BuildBundleFileSizes?
 
-		public struct AppClipDomainCacheStatus: Codable {
+		public struct AppClipDomainCacheStatus: Codable, Sendable {
 			public var links: RelationshipLinks?
 			public var data: Data?
 
-			public struct Data: Codable, Identifiable {
+			public struct Data: Codable, Identifiable, Sendable {
 				public var type: `Type`
 				public var id: String
 
-				public enum `Type`: String, Codable, CaseIterable {
+				public enum `Type`: String, Codable, CaseIterable, Sendable {
 					case appClipDomainStatuses
 				}
 
@@ -162,15 +162,15 @@ public struct BuildBundle: Codable, Identifiable {
 			}
 		}
 
-		public struct AppClipDomainDebugStatus: Codable {
+		public struct AppClipDomainDebugStatus: Codable, Sendable {
 			public var links: RelationshipLinks?
 			public var data: Data?
 
-			public struct Data: Codable, Identifiable {
+			public struct Data: Codable, Identifiable, Sendable {
 				public var type: `Type`
 				public var id: String
 
-				public enum `Type`: String, Codable, CaseIterable {
+				public enum `Type`: String, Codable, CaseIterable, Sendable {
 					case appClipDomainStatuses
 				}
 
@@ -210,16 +210,16 @@ public struct BuildBundle: Codable, Identifiable {
 			}
 		}
 
-		public struct BetaAppClipInvocations: Codable {
+		public struct BetaAppClipInvocations: Codable, Sendable {
 			public var links: RelationshipLinks?
 			public var meta: PagingInformation?
 			public var data: [Datum]?
 
-			public struct Datum: Codable, Identifiable {
+			public struct Datum: Codable, Identifiable, Sendable {
 				public var type: `Type`
 				public var id: String
 
-				public enum `Type`: String, Codable, CaseIterable {
+				public enum `Type`: String, Codable, CaseIterable, Sendable {
 					case betaAppClipInvocations
 				}
 
@@ -262,16 +262,16 @@ public struct BuildBundle: Codable, Identifiable {
 			}
 		}
 
-		public struct BuildBundleFileSizes: Codable {
+		public struct BuildBundleFileSizes: Codable, Sendable {
 			public var links: RelationshipLinks?
 			public var meta: PagingInformation?
 			public var data: [Datum]?
 
-			public struct Datum: Codable, Identifiable {
+			public struct Datum: Codable, Identifiable, Sendable {
 				public var type: `Type`
 				public var id: String
 
-				public enum `Type`: String, Codable, CaseIterable {
+				public enum `Type`: String, Codable, CaseIterable, Sendable {
 					case buildBundleFileSizes
 				}
 

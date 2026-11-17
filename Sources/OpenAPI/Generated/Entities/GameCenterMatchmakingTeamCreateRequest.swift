@@ -3,19 +3,19 @@
 
 import Foundation
 
-public struct GameCenterMatchmakingTeamCreateRequest: Codable {
+public struct GameCenterMatchmakingTeamCreateRequest: Codable, Sendable {
 	public var data: Data
 
-	public struct Data: Codable {
+	public struct Data: Codable, Sendable {
 		public var type: `Type`
 		public var attributes: Attributes
 		public var relationships: Relationships
 
-		public enum `Type`: String, Codable, CaseIterable {
+		public enum `Type`: String, Codable, CaseIterable, Sendable {
 			case gameCenterMatchmakingTeams
 		}
 
-		public struct Attributes: Codable {
+		public struct Attributes: Codable, Sendable {
 			public var referenceName: String
 			public var minPlayers: Int
 			public var maxPlayers: Int
@@ -41,17 +41,17 @@ public struct GameCenterMatchmakingTeamCreateRequest: Codable {
 			}
 		}
 
-		public struct Relationships: Codable {
+		public struct Relationships: Codable, Sendable {
 			public var ruleSet: RuleSet
 
-			public struct RuleSet: Codable {
+			public struct RuleSet: Codable, Sendable {
 				public var data: Data
 
-				public struct Data: Codable, Identifiable {
+				public struct Data: Codable, Identifiable, Sendable {
 					public var type: `Type`
 					public var id: String
 
-					public enum `Type`: String, Codable, CaseIterable {
+					public enum `Type`: String, Codable, CaseIterable, Sendable {
 						case gameCenterMatchmakingRuleSets
 					}
 

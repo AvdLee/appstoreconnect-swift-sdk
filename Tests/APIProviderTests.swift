@@ -14,7 +14,7 @@ import FoundationNetworking
 
 final class APIProviderTests: XCTestCase {
 
-    private struct MockRequestExecutor<T:Codable>: RequestExecutor {
+    private struct MockRequestExecutor<T: Codable & Sendable>: RequestExecutor {
 
         let expectedResponse: Result<Response<T>, Swift.Error>
 
@@ -22,7 +22,7 @@ final class APIProviderTests: XCTestCase {
             self.expectedResponse = expectedResponse
         }
 
-        func execute(_ urlRequest: URLRequest, completion: @escaping (Result<Response<Data>, Swift.Error>) -> Void) {
+        func execute(_ urlRequest: URLRequest, completion: @escaping @Sendable (Result<Response<Data>, Swift.Error>) -> Void) {
             if let response = expectedResponse as? Result<Response<Data>, Swift.Error> {
                 completion(response)
             }
@@ -34,7 +34,7 @@ final class APIProviderTests: XCTestCase {
             }
         }
 
-        func download(_ urlRequest: URLRequest, completion: @escaping (Result<Response<URL>, Error>) -> Void) {
+        func download(_ urlRequest: URLRequest, completion: @escaping @Sendable (Result<Response<URL>, Error>) -> Void) {
             if let response = expectedResponse as? Result<Response<URL>, Swift.Error> {
                 completion(response)
             }
@@ -53,6 +53,33 @@ final class APIProviderTests: XCTestCase {
     }
 
     // MARK: - Tests
+
+    /// The shared decoder is used from many requests at once; every supported date format must still decode.
+    func testConcurrentDecodingParsesEveryDateFormat() {
+        struct Probe: Decodable {
+            let date: Date
+        }
+        let samples: [(json: String, expected: TimeInterval)] = [
+            ("2024-01-01T23:59:59.123+00:00", 1_704_153_599.123),
+            ("2024-01-01T23:59:59+00:00", 1_704_153_599),
+            ("2024-01-01T23:59:59+02:00", 1_704_146_399),
+            ("2024-01-01", 1_704_067_200),
+        ]
+        let failures = LockedFailures()
+
+        DispatchQueue.concurrentPerform(iterations: 4_000) { index in
+            let sample = samples[index % samples.count]
+            let data = Data(#"{"date": "\#(sample.json)"}"#.utf8)
+            let decoded = try? APIProvider.jsonDecoder.decode(Probe.self, from: data)
+            guard let decoded, abs(decoded.date.timeIntervalSince1970 - sample.expected) < 0.001 else {
+                failures.append("\(sample.json) → \(decoded.map { "\($0.date.timeIntervalSince1970)" } ?? "error")")
+                return
+            }
+        }
+
+        let wrong = failures.values
+        XCTAssertTrue(wrong.isEmpty, "\(wrong.count) wrong decodes, e.g. \(wrong.prefix(3))")
+    }
 
     func testRequestExecutionWithVoidResponse() {
         let response = Response<Data>(requestURL: nil, statusCode: 200, rateLimit: nil, data: nil)
@@ -158,5 +185,22 @@ final class APIProviderTests: XCTestCase {
             XCTAssertTrue(result.isFailure)
 
         }
+    }
+}
+
+private final class LockedFailures: @unchecked Sendable {
+    private let lock = NSLock()
+    private var storage: [String] = []
+
+    var values: [String] {
+        self.lock.lock()
+        defer { self.lock.unlock() }
+        return self.storage
+    }
+
+    func append(_ failure: String) {
+        self.lock.lock()
+        self.storage.append(failure)
+        self.lock.unlock()
     }
 }

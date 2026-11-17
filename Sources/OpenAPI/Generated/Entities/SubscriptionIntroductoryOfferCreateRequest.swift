@@ -3,20 +3,20 @@
 
 import Foundation
 
-public struct SubscriptionIntroductoryOfferCreateRequest: Codable {
+public struct SubscriptionIntroductoryOfferCreateRequest: Codable, Sendable {
 	public var data: Data
 	public var included: [SubscriptionPricePointInlineCreate]?
 
-	public struct Data: Codable {
+	public struct Data: Codable, Sendable {
 		public var type: `Type`
 		public var attributes: Attributes
 		public var relationships: Relationships
 
-		public enum `Type`: String, Codable, CaseIterable {
+		public enum `Type`: String, Codable, CaseIterable, Sendable {
 			case subscriptionIntroductoryOffers
 		}
 
-		public struct Attributes: Codable {
+		public struct Attributes: Codable, Sendable {
 			public var startDate: String?
 			public var endDate: String?
 			public var duration: SubscriptionOfferDuration
@@ -54,19 +54,19 @@ public struct SubscriptionIntroductoryOfferCreateRequest: Codable {
 			}
 		}
 
-		public struct Relationships: Codable {
+		public struct Relationships: Codable, Sendable {
 			public var subscription: Subscription
 			public var territory: Territory?
 			public var subscriptionPricePoint: SubscriptionPricePoint?
 
-			public struct Subscription: Codable {
+			public struct Subscription: Codable, Sendable {
 				public var data: Data
 
-				public struct Data: Codable, Identifiable {
+				public struct Data: Codable, Identifiable, Sendable {
 					public var type: `Type`
 					public var id: String
 
-					public enum `Type`: String, Codable, CaseIterable {
+					public enum `Type`: String, Codable, CaseIterable, Sendable {
 						case subscriptions
 					}
 
@@ -103,14 +103,14 @@ public struct SubscriptionIntroductoryOfferCreateRequest: Codable {
 				}
 			}
 
-			public struct Territory: Codable {
+			public struct Territory: Codable, Sendable {
 				public var data: Data?
 
-				public struct Data: Codable, Identifiable {
+				public struct Data: Codable, Identifiable, Sendable {
 					public var type: `Type`
 					public var id: String
 
-					public enum `Type`: String, Codable, CaseIterable {
+					public enum `Type`: String, Codable, CaseIterable, Sendable {
 						case territories
 					}
 
@@ -147,14 +147,14 @@ public struct SubscriptionIntroductoryOfferCreateRequest: Codable {
 				}
 			}
 
-			public struct SubscriptionPricePoint: Codable {
+			public struct SubscriptionPricePoint: Codable, Sendable {
 				public var data: Data?
 
-				public struct Data: Codable, Identifiable {
+				public struct Data: Codable, Identifiable, Sendable {
 					public var type: `Type`
 					public var id: String
 
-					public enum `Type`: String, Codable, CaseIterable {
+					public enum `Type`: String, Codable, CaseIterable, Sendable {
 						case subscriptionPricePoints
 					}
 

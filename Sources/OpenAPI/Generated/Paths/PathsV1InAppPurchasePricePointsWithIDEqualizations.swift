@@ -9,7 +9,7 @@ extension APIEndpoint.V1.InAppPurchasePricePoints.WithID {
 		Equalizations(path: path + "/equalizations")
 	}
 
-	public struct Equalizations {
+	public struct Equalizations: Sendable {
 		/// Path: `/v1/inAppPurchasePricePoints/{id}/equalizations`
 		public let path: String
 
@@ -17,7 +17,7 @@ extension APIEndpoint.V1.InAppPurchasePricePoints.WithID {
 			Request(path: path, method: "GET", query: parameters?.asQuery, id: "inAppPurchasePricePoints_equalizations_getToManyRelated")
 		}
 
-		public struct GetParameters {
+		public struct GetParameters: Sendable {
 			public var filterTerritory: [String]?
 			public var filterInAppPurchaseV2: [String]?
 			public var fieldsInAppPurchasePricePoints: [FieldsInAppPurchasePricePoints]?
@@ -25,18 +25,18 @@ extension APIEndpoint.V1.InAppPurchasePricePoints.WithID {
 			public var limit: Int?
 			public var include: [Include]?
 
-			public enum FieldsInAppPurchasePricePoints: String, Codable, CaseIterable {
+			public enum FieldsInAppPurchasePricePoints: String, Codable, CaseIterable, Sendable {
 				case customerPrice
 				case proceeds
 				case territory
 				case equalizations
 			}
 
-			public enum FieldsTerritories: String, Codable, CaseIterable {
+			public enum FieldsTerritories: String, Codable, CaseIterable, Sendable {
 				case currency
 			}
 
-			public enum Include: String, Codable, CaseIterable {
+			public enum Include: String, Codable, CaseIterable, Sendable {
 				case territory
 			}
 

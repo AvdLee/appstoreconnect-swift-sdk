@@ -9,7 +9,7 @@ extension APIEndpoint.V1.GameCenterMatchmakingRules.WithID.Metrics {
 		MatchmakingBooleanRuleResults(path: path + "/matchmakingBooleanRuleResults")
 	}
 
-	public struct MatchmakingBooleanRuleResults {
+	public struct MatchmakingBooleanRuleResults: Sendable {
 		/// Path: `/v1/gameCenterMatchmakingRules/{id}/metrics/matchmakingBooleanRuleResults`
 		public let path: String
 
@@ -17,7 +17,7 @@ extension APIEndpoint.V1.GameCenterMatchmakingRules.WithID.Metrics {
 			Request(path: path, method: "GET", query: parameters.asQuery, id: "gameCenterMatchmakingRules_matchmakingBooleanRuleResults_getMetrics")
 		}
 
-		public struct GetParameters {
+		public struct GetParameters: Sendable {
 			public var granularity: Granularity
 			public var groupBy: [GroupBy]?
 			public var filterResult: String?
@@ -25,18 +25,18 @@ extension APIEndpoint.V1.GameCenterMatchmakingRules.WithID.Metrics {
 			public var sort: [Sort]?
 			public var limit: Int?
 
-			public enum Granularity: String, Codable, CaseIterable {
+			public enum Granularity: String, Codable, CaseIterable, Sendable {
 				case p1d = "P1D"
 				case pt1h = "PT1H"
 				case pt15m = "PT15M"
 			}
 
-			public enum GroupBy: String, Codable, CaseIterable {
+			public enum GroupBy: String, Codable, CaseIterable, Sendable {
 				case result
 				case gameCenterMatchmakingQueue
 			}
 
-			public enum Sort: String, Codable, CaseIterable {
+			public enum Sort: String, Codable, CaseIterable, Sendable {
 				case count
 				case minuscount = "-count"
 			}

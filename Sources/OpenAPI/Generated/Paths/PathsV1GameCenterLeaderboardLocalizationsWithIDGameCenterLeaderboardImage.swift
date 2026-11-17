@@ -9,7 +9,7 @@ extension APIEndpoint.V1.GameCenterLeaderboardLocalizations.WithID {
 		GameCenterLeaderboardImage(path: path + "/gameCenterLeaderboardImage")
 	}
 
-	public struct GameCenterLeaderboardImage {
+	public struct GameCenterLeaderboardImage: Sendable {
 		/// Path: `/v1/gameCenterLeaderboardLocalizations/{id}/gameCenterLeaderboardImage`
 		public let path: String
 
@@ -18,12 +18,12 @@ extension APIEndpoint.V1.GameCenterLeaderboardLocalizations.WithID {
 			Request(path: path, method: "GET", query: parameters?.asQuery, id: "gameCenterLeaderboardLocalizations_gameCenterLeaderboardImage_getToOneRelated")
 		}
 
-		public struct GetParameters {
+		public struct GetParameters: Sendable {
 			public var fieldsGameCenterLeaderboardImages: [FieldsGameCenterLeaderboardImages]?
 			public var fieldsGameCenterLeaderboardLocalizations: [FieldsGameCenterLeaderboardLocalizations]?
 			public var include: [Include]?
 
-			public enum FieldsGameCenterLeaderboardImages: String, Codable, CaseIterable {
+			public enum FieldsGameCenterLeaderboardImages: String, Codable, CaseIterable, Sendable {
 				case fileSize
 				case fileName
 				case imageAsset
@@ -32,7 +32,7 @@ extension APIEndpoint.V1.GameCenterLeaderboardLocalizations.WithID {
 				case gameCenterLeaderboardLocalization
 			}
 
-			public enum FieldsGameCenterLeaderboardLocalizations: String, Codable, CaseIterable {
+			public enum FieldsGameCenterLeaderboardLocalizations: String, Codable, CaseIterable, Sendable {
 				case locale
 				case name
 				case formatterOverride
@@ -43,7 +43,7 @@ extension APIEndpoint.V1.GameCenterLeaderboardLocalizations.WithID {
 				case gameCenterLeaderboardImage
 			}
 
-			public enum Include: String, Codable, CaseIterable {
+			public enum Include: String, Codable, CaseIterable, Sendable {
 				case gameCenterLeaderboardLocalization
 			}
 

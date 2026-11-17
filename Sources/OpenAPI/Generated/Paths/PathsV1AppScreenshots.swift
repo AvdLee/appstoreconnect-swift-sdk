@@ -9,7 +9,7 @@ extension APIEndpoint.V1 {
 		AppScreenshots(path: path + "/appScreenshots")
 	}
 
-	public struct AppScreenshots {
+	public struct AppScreenshots: Sendable {
 		/// Path: `/v1/appScreenshots`
 		public let path: String
 

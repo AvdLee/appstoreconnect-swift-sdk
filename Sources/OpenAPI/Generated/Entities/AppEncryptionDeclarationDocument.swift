@@ -3,17 +3,17 @@
 
 import Foundation
 
-public struct AppEncryptionDeclarationDocument: Codable, Identifiable {
+public struct AppEncryptionDeclarationDocument: Codable, Identifiable, Sendable {
 	public var type: `Type`
 	public var id: String
 	public var attributes: Attributes?
 	public var links: ResourceLinks?
 
-	public enum `Type`: String, Codable, CaseIterable {
+	public enum `Type`: String, Codable, CaseIterable, Sendable {
 		case appEncryptionDeclarationDocuments
 	}
 
-	public struct Attributes: Codable {
+	public struct Attributes: Codable, Sendable {
 		public var fileSize: Int?
 		public var fileName: String?
 		public var assetToken: String?

@@ -9,7 +9,7 @@ extension APIEndpoint.V1 {
 		AppCategories(path: path + "/appCategories")
 	}
 
-	public struct AppCategories {
+	public struct AppCategories: Sendable {
 		/// Path: `/v1/appCategories`
 		public let path: String
 
@@ -17,7 +17,7 @@ extension APIEndpoint.V1 {
 			Request(path: path, method: "GET", query: parameters?.asQuery, id: "appCategories_getCollection")
 		}
 
-		public struct GetParameters {
+		public struct GetParameters: Sendable {
 			public var filterPlatforms: [FilterPlatforms]?
 			public var isExistsParent: Bool?
 			public var fieldsAppCategories: [FieldsAppCategories]?
@@ -25,20 +25,20 @@ extension APIEndpoint.V1 {
 			public var include: [Include]?
 			public var limitSubcategories: Int?
 
-			public enum FilterPlatforms: String, Codable, CaseIterable {
+			public enum FilterPlatforms: String, Codable, CaseIterable, Sendable {
 				case ios = "IOS"
 				case macOs = "MAC_OS"
 				case tvOs = "TV_OS"
 				case visionOs = "VISION_OS"
 			}
 
-			public enum FieldsAppCategories: String, Codable, CaseIterable {
+			public enum FieldsAppCategories: String, Codable, CaseIterable, Sendable {
 				case platforms
 				case subcategories
 				case parent
 			}
 
-			public enum Include: String, Codable, CaseIterable {
+			public enum Include: String, Codable, CaseIterable, Sendable {
 				case subcategories
 				case parent
 			}

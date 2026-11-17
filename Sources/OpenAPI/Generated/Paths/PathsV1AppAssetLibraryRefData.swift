@@ -9,7 +9,7 @@ extension APIEndpoint.V1 {
 		AppAssetLibraryRefData(path: path + "/appAssetLibraryRefData")
 	}
 
-	public struct AppAssetLibraryRefData {
+	public struct AppAssetLibraryRefData: Sendable {
 		/// Path: `/v1/appAssetLibraryRefData`
 		public let path: String
 
@@ -17,14 +17,14 @@ extension APIEndpoint.V1 {
 			Request(path: path, method: "GET", query: parameters?.asQuery, id: "appAssetLibraryRefData_getCollection")
 		}
 
-		public struct GetParameters {
+		public struct GetParameters: Sendable {
 			public var filterPlacementTypes: [String]?
 			public var filterPlacementProfileGroups: [String]?
 			public var filterFeatures: [String]?
 			public var filterSpecs: [String]?
 			public var fieldsAppAssetLibraryRefData: [FieldsAppAssetLibraryRefData]?
 
-			public enum FieldsAppAssetLibraryRefData: String, Codable, CaseIterable {
+			public enum FieldsAppAssetLibraryRefData: String, Codable, CaseIterable, Sendable {
 				case features
 				case placementProfileGroups
 				case imageSpecs

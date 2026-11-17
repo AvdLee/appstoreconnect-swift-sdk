@@ -9,7 +9,7 @@ extension APIEndpoint.V1.PassTypeIDs.WithID {
 		Certificates(path: path + "/certificates")
 	}
 
-	public struct Certificates {
+	public struct Certificates: Sendable {
 		/// Path: `/v1/passTypeIds/{id}/certificates`
 		public let path: String
 
@@ -17,7 +17,7 @@ extension APIEndpoint.V1.PassTypeIDs.WithID {
 			Request(path: path, method: "GET", query: parameters?.asQuery, id: "passTypeIds_certificates_getToManyRelated")
 		}
 
-		public struct GetParameters {
+		public struct GetParameters: Sendable {
 			public var filterDisplayName: [String]?
 			public var filterCertificateType: [FilterCertificateType]?
 			public var filterSerialNumber: [String]?
@@ -28,7 +28,7 @@ extension APIEndpoint.V1.PassTypeIDs.WithID {
 			public var limit: Int?
 			public var include: [Include]?
 
-			public enum FilterCertificateType: String, Codable, CaseIterable {
+			public enum FilterCertificateType: String, Codable, CaseIterable, Sendable {
 				case applePay = "APPLE_PAY"
 				case applePayMerchantIdentity = "APPLE_PAY_MERCHANT_IDENTITY"
 				case applePayPspIdentity = "APPLE_PAY_PSP_IDENTITY"
@@ -49,7 +49,7 @@ extension APIEndpoint.V1.PassTypeIDs.WithID {
 				case passTypeIDWithNfc = "PASS_TYPE_ID_WITH_NFC"
 			}
 
-			public enum Sort: String, Codable, CaseIterable {
+			public enum Sort: String, Codable, CaseIterable, Sendable {
 				case displayName
 				case minusdisplayName = "-displayName"
 				case certificateType
@@ -60,7 +60,7 @@ extension APIEndpoint.V1.PassTypeIDs.WithID {
 				case minusid = "-id"
 			}
 
-			public enum FieldsCertificates: String, Codable, CaseIterable {
+			public enum FieldsCertificates: String, Codable, CaseIterable, Sendable {
 				case name
 				case certificateType
 				case displayName
@@ -72,13 +72,13 @@ extension APIEndpoint.V1.PassTypeIDs.WithID {
 				case passTypeID = "passTypeId"
 			}
 
-			public enum FieldsPassTypeIDs: String, Codable, CaseIterable {
+			public enum FieldsPassTypeIDs: String, Codable, CaseIterable, Sendable {
 				case name
 				case identifier
 				case certificates
 			}
 
-			public enum Include: String, Codable, CaseIterable {
+			public enum Include: String, Codable, CaseIterable, Sendable {
 				case passTypeID = "passTypeId"
 			}
 

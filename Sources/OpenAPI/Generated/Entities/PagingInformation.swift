@@ -3,10 +3,10 @@
 
 import Foundation
 
-public struct PagingInformation: Codable {
+public struct PagingInformation: Codable, Sendable {
 	public var paging: Paging
 
-	public struct Paging: Codable {
+	public struct Paging: Codable, Sendable {
 		public var total: Int?
 		public var limit: Int
 		public var nextCursor: String?

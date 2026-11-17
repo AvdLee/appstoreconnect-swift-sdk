@@ -3,7 +3,7 @@
 
 import Foundation
 
-public struct PreReleaseVersionsWithoutIncludesResponse: Codable {
+public struct PreReleaseVersionsWithoutIncludesResponse: Codable, Sendable {
 	public var data: [PrereleaseVersion]
 	public var links: PagedDocumentLinks
 	public var meta: PagingInformation?

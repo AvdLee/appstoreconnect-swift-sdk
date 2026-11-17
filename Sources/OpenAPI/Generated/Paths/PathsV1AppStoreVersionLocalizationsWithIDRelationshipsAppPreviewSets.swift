@@ -9,7 +9,7 @@ extension APIEndpoint.V1.AppStoreVersionLocalizations.WithID.Relationships {
 		AppPreviewSets(path: path + "/appPreviewSets")
 	}
 
-	public struct AppPreviewSets {
+	public struct AppPreviewSets: Sendable {
 		/// Path: `/v1/appStoreVersionLocalizations/{id}/relationships/appPreviewSets`
 		public let path: String
 

@@ -3,17 +3,17 @@
 
 import Foundation
 
-public struct SandboxTesterV2: Codable, Identifiable {
+public struct SandboxTesterV2: Codable, Identifiable, Sendable {
 	public var type: `Type`
 	public var id: String
 	public var attributes: Attributes?
 	public var links: ResourceLinks?
 
-	public enum `Type`: String, Codable, CaseIterable {
+	public enum `Type`: String, Codable, CaseIterable, Sendable {
 		case sandboxTesters
 	}
 
-	public struct Attributes: Codable {
+	public struct Attributes: Codable, Sendable {
 		public var firstName: String?
 		public var lastName: String?
 		public var acAccountName: String?
@@ -22,7 +22,7 @@ public struct SandboxTesterV2: Codable, Identifiable {
 		public var isInterruptPurchases: Bool?
 		public var subscriptionRenewalRate: SubscriptionRenewalRate?
 
-		public enum SubscriptionRenewalRate: String, Codable, CaseIterable {
+		public enum SubscriptionRenewalRate: String, Codable, CaseIterable, Sendable {
 			case monthlyRenewalEveryOneHour = "MONTHLY_RENEWAL_EVERY_ONE_HOUR"
 			case monthlyRenewalEveryThirtyMinutes = "MONTHLY_RENEWAL_EVERY_THIRTY_MINUTES"
 			case monthlyRenewalEveryFifteenMinutes = "MONTHLY_RENEWAL_EVERY_FIFTEEN_MINUTES"

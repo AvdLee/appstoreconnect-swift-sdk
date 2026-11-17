@@ -9,7 +9,7 @@ extension APIEndpoint.V1.BetaAppLocalizations {
 		WithID(path: "\(path)/\(id)")
 	}
 
-	public struct WithID {
+	public struct WithID: Sendable {
 		/// Path: `/v1/betaAppLocalizations/{id}`
 		public let path: String
 
@@ -17,12 +17,12 @@ extension APIEndpoint.V1.BetaAppLocalizations {
 			Request(path: path, method: "GET", query: parameters?.asQuery, id: "betaAppLocalizations_getInstance")
 		}
 
-		public struct GetParameters {
+		public struct GetParameters: Sendable {
 			public var fieldsBetaAppLocalizations: [FieldsBetaAppLocalizations]?
 			public var fieldsApps: [FieldsApps]?
 			public var include: [Include]?
 
-			public enum FieldsBetaAppLocalizations: String, Codable, CaseIterable {
+			public enum FieldsBetaAppLocalizations: String, Codable, CaseIterable, Sendable {
 				case feedbackEmail
 				case marketingURL = "marketingUrl"
 				case privacyPolicyURL = "privacyPolicyUrl"
@@ -32,7 +32,7 @@ extension APIEndpoint.V1.BetaAppLocalizations {
 				case app
 			}
 
-			public enum FieldsApps: String, Codable, CaseIterable {
+			public enum FieldsApps: String, Codable, CaseIterable, Sendable {
 				case accessibilityURL = "accessibilityUrl"
 				case name
 				case bundleID = "bundleId"
@@ -93,7 +93,7 @@ extension APIEndpoint.V1.BetaAppLocalizations {
 				case androidToIosAppMappingDetails
 			}
 
-			public enum Include: String, Codable, CaseIterable {
+			public enum Include: String, Codable, CaseIterable, Sendable {
 				case app
 			}
 

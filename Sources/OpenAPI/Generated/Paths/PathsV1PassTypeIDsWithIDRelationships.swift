@@ -9,7 +9,7 @@ extension APIEndpoint.V1.PassTypeIDs.WithID {
 		Relationships(path: path + "/relationships")
 	}
 
-	public struct Relationships {
+	public struct Relationships: Sendable {
 		/// Path: `/v1/passTypeIds/{id}/relationships`
 		public let path: String
 	}

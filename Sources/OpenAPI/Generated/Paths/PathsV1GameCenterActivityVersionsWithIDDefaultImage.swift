@@ -9,7 +9,7 @@ extension APIEndpoint.V1.GameCenterActivityVersions.WithID {
 		DefaultImage(path: path + "/defaultImage")
 	}
 
-	public struct DefaultImage {
+	public struct DefaultImage: Sendable {
 		/// Path: `/v1/gameCenterActivityVersions/{id}/defaultImage`
 		public let path: String
 
@@ -23,7 +23,7 @@ extension APIEndpoint.V1.GameCenterActivityVersions.WithID {
 			return encoder.items
 		}
 
-		public enum FieldsGameCenterActivityImages: String, Codable, CaseIterable {
+		public enum FieldsGameCenterActivityImages: String, Codable, CaseIterable, Sendable {
 			case fileSize
 			case fileName
 			case imageAsset

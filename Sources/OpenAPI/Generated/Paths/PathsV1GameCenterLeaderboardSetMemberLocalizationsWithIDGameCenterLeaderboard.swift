@@ -9,7 +9,7 @@ extension APIEndpoint.V1.GameCenterLeaderboardSetMemberLocalizations.WithID {
 		GameCenterLeaderboard(path: path + "/gameCenterLeaderboard")
 	}
 
-	public struct GameCenterLeaderboard {
+	public struct GameCenterLeaderboard: Sendable {
 		/// Path: `/v1/gameCenterLeaderboardSetMemberLocalizations/{id}/gameCenterLeaderboard`
 		public let path: String
 
@@ -18,7 +18,7 @@ extension APIEndpoint.V1.GameCenterLeaderboardSetMemberLocalizations.WithID {
 			Request(path: path, method: "GET", query: parameters?.asQuery, id: "gameCenterLeaderboardSetMemberLocalizations_gameCenterLeaderboard_getToOneRelated")
 		}
 
-		public struct GetParameters {
+		public struct GetParameters: Sendable {
 			public var fieldsGameCenterLeaderboards: [FieldsGameCenterLeaderboards]?
 			public var fieldsGameCenterDetails: [FieldsGameCenterDetails]?
 			public var fieldsGameCenterGroups: [FieldsGameCenterGroups]?
@@ -32,7 +32,7 @@ extension APIEndpoint.V1.GameCenterLeaderboardSetMemberLocalizations.WithID {
 			public var limitLocalizations: Int?
 			public var limitReleases: Int?
 
-			public enum FieldsGameCenterLeaderboards: String, Codable, CaseIterable {
+			public enum FieldsGameCenterLeaderboards: String, Codable, CaseIterable, Sendable {
 				case defaultFormatter
 				case referenceName
 				case vendorIdentifier
@@ -56,7 +56,7 @@ extension APIEndpoint.V1.GameCenterLeaderboardSetMemberLocalizations.WithID {
 				case challenge
 			}
 
-			public enum FieldsGameCenterDetails: String, Codable, CaseIterable {
+			public enum FieldsGameCenterDetails: String, Codable, CaseIterable, Sendable {
 				case arcadeEnabled
 				case challengeEnabled
 				case app
@@ -83,7 +83,7 @@ extension APIEndpoint.V1.GameCenterLeaderboardSetMemberLocalizations.WithID {
 				case challengesMinimumPlatformVersions
 			}
 
-			public enum FieldsGameCenterGroups: String, Codable, CaseIterable {
+			public enum FieldsGameCenterGroups: String, Codable, CaseIterable, Sendable {
 				case referenceName
 				case gameCenterDetails
 				case gameCenterLeaderboards
@@ -96,7 +96,7 @@ extension APIEndpoint.V1.GameCenterLeaderboardSetMemberLocalizations.WithID {
 				case gameCenterChallenges
 			}
 
-			public enum FieldsGameCenterLeaderboardSets: String, Codable, CaseIterable {
+			public enum FieldsGameCenterLeaderboardSets: String, Codable, CaseIterable, Sendable {
 				case referenceName
 				case vendorIdentifier
 				case gameCenterDetail
@@ -107,7 +107,7 @@ extension APIEndpoint.V1.GameCenterLeaderboardSetMemberLocalizations.WithID {
 				case releases
 			}
 
-			public enum FieldsGameCenterLeaderboardLocalizations: String, Codable, CaseIterable {
+			public enum FieldsGameCenterLeaderboardLocalizations: String, Codable, CaseIterable, Sendable {
 				case locale
 				case name
 				case formatterOverride
@@ -118,13 +118,13 @@ extension APIEndpoint.V1.GameCenterLeaderboardSetMemberLocalizations.WithID {
 				case gameCenterLeaderboardImage
 			}
 
-			public enum FieldsGameCenterLeaderboardReleases: String, Codable, CaseIterable {
+			public enum FieldsGameCenterLeaderboardReleases: String, Codable, CaseIterable, Sendable {
 				case live
 				case gameCenterDetail
 				case gameCenterLeaderboard
 			}
 
-			public enum FieldsGameCenterActivities: String, Codable, CaseIterable {
+			public enum FieldsGameCenterActivities: String, Codable, CaseIterable, Sendable {
 				case referenceName
 				case vendorIdentifier
 				case playStyle
@@ -142,7 +142,7 @@ extension APIEndpoint.V1.GameCenterLeaderboardSetMemberLocalizations.WithID {
 				case versions
 			}
 
-			public enum FieldsGameCenterChallenges: String, Codable, CaseIterable {
+			public enum FieldsGameCenterChallenges: String, Codable, CaseIterable, Sendable {
 				case referenceName
 				case vendorIdentifier
 				case archived
@@ -155,7 +155,7 @@ extension APIEndpoint.V1.GameCenterLeaderboardSetMemberLocalizations.WithID {
 				case leaderboardV2
 			}
 
-			public enum Include: String, Codable, CaseIterable {
+			public enum Include: String, Codable, CaseIterable, Sendable {
 				case gameCenterDetail
 				case gameCenterGroup
 				case groupLeaderboard

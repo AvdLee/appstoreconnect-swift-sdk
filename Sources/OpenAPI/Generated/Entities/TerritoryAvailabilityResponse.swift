@@ -3,7 +3,7 @@
 
 import Foundation
 
-public struct TerritoryAvailabilityResponse: Codable {
+public struct TerritoryAvailabilityResponse: Codable, Sendable {
 	/// TerritoryAvailability
 	public var data: TerritoryAvailability
 	public var included: [Territory]?

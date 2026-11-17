@@ -3,12 +3,12 @@
 
 import Foundation
 
-public struct SandboxTestersClearPurchaseHistoryRequestV2: Codable, Identifiable {
+public struct SandboxTestersClearPurchaseHistoryRequestV2: Codable, Identifiable, Sendable {
 	public var type: `Type`
 	public var id: String
 	public var links: ResourceLinks?
 
-	public enum `Type`: String, Codable, CaseIterable {
+	public enum `Type`: String, Codable, CaseIterable, Sendable {
 		case sandboxTestersClearPurchaseHistoryRequest
 	}
 

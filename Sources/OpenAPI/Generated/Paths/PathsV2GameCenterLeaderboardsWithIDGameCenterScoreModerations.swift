@@ -9,7 +9,7 @@ extension APIEndpoint.V2.GameCenterLeaderboards.WithID {
 		GameCenterScoreModerations(path: path + "/gameCenterScoreModerations")
 	}
 
-	public struct GameCenterScoreModerations {
+	public struct GameCenterScoreModerations: Sendable {
 		/// Path: `/v2/gameCenterLeaderboards/{id}/gameCenterScoreModerations`
 		public let path: String
 
@@ -17,14 +17,14 @@ extension APIEndpoint.V2.GameCenterLeaderboards.WithID {
 			Request(path: path, method: "GET", query: parameters?.asQuery, id: "gameCenterLeaderboardsV2_gameCenterScoreModerations_getToManyRelated")
 		}
 
-		public struct GetParameters {
+		public struct GetParameters: Sendable {
 			public var isExistsBlocked: Bool?
 			public var fieldsGameCenterScoreModerations: [FieldsGameCenterScoreModerations]?
 			public var fieldsGameCenterDetailPlayers: [FieldsGameCenterDetailPlayers]?
 			public var limit: Int?
 			public var include: [Include]?
 
-			public enum FieldsGameCenterScoreModerations: String, Codable, CaseIterable {
+			public enum FieldsGameCenterScoreModerations: String, Codable, CaseIterable, Sendable {
 				case rank
 				case score
 				case submittedDate
@@ -35,13 +35,13 @@ extension APIEndpoint.V2.GameCenterLeaderboards.WithID {
 				case player
 			}
 
-			public enum FieldsGameCenterDetailPlayers: String, Codable, CaseIterable {
+			public enum FieldsGameCenterDetailPlayers: String, Codable, CaseIterable, Sendable {
 				case nickname
 				case blocked
 				case bundleID = "bundleId"
 			}
 
-			public enum Include: String, Codable, CaseIterable {
+			public enum Include: String, Codable, CaseIterable, Sendable {
 				case player
 			}
 

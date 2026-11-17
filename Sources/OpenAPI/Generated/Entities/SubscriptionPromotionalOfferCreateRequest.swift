@@ -3,20 +3,20 @@
 
 import Foundation
 
-public struct SubscriptionPromotionalOfferCreateRequest: Codable {
+public struct SubscriptionPromotionalOfferCreateRequest: Codable, Sendable {
 	public var data: Data
 	public var included: [SubscriptionPromotionalOfferPriceInlineCreate]?
 
-	public struct Data: Codable {
+	public struct Data: Codable, Sendable {
 		public var type: `Type`
 		public var attributes: Attributes
 		public var relationships: Relationships
 
-		public enum `Type`: String, Codable, CaseIterable {
+		public enum `Type`: String, Codable, CaseIterable, Sendable {
 			case subscriptionPromotionalOffers
 		}
 
-		public struct Attributes: Codable {
+		public struct Attributes: Codable, Sendable {
 			public var duration: SubscriptionOfferDuration
 			public var name: String
 			public var numberOfPeriods: Int
@@ -54,18 +54,18 @@ public struct SubscriptionPromotionalOfferCreateRequest: Codable {
 			}
 		}
 
-		public struct Relationships: Codable {
+		public struct Relationships: Codable, Sendable {
 			public var subscription: Subscription
 			public var prices: Prices
 
-			public struct Subscription: Codable {
+			public struct Subscription: Codable, Sendable {
 				public var data: Data
 
-				public struct Data: Codable, Identifiable {
+				public struct Data: Codable, Identifiable, Sendable {
 					public var type: `Type`
 					public var id: String
 
-					public enum `Type`: String, Codable, CaseIterable {
+					public enum `Type`: String, Codable, CaseIterable, Sendable {
 						case subscriptions
 					}
 
@@ -102,14 +102,14 @@ public struct SubscriptionPromotionalOfferCreateRequest: Codable {
 				}
 			}
 
-			public struct Prices: Codable {
+			public struct Prices: Codable, Sendable {
 				public var data: [Datum]
 
-				public struct Datum: Codable, Identifiable {
+				public struct Datum: Codable, Identifiable, Sendable {
 					public var type: `Type`
 					public var id: String
 
-					public enum `Type`: String, Codable, CaseIterable {
+					public enum `Type`: String, Codable, CaseIterable, Sendable {
 						case subscriptionPromotionalOfferPrices
 					}
 

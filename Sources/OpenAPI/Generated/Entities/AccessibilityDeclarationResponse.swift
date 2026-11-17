@@ -3,7 +3,7 @@
 
 import Foundation
 
-public struct AccessibilityDeclarationResponse: Codable {
+public struct AccessibilityDeclarationResponse: Codable, Sendable {
 	/// AccessibilityDeclaration
 	public var data: AccessibilityDeclaration
 	public var links: DocumentLinks

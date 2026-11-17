@@ -9,7 +9,7 @@ extension APIEndpoint.V1.BackgroundAssetVersions.WithID.Relationships {
 		BackgroundAssetUploadFiles(path: path + "/backgroundAssetUploadFiles")
 	}
 
-	public struct BackgroundAssetUploadFiles {
+	public struct BackgroundAssetUploadFiles: Sendable {
 		/// Path: `/v1/backgroundAssetVersions/{id}/relationships/backgroundAssetUploadFiles`
 		public let path: String
 

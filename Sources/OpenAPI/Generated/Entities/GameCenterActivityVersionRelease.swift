@@ -4,27 +4,27 @@
 import Foundation
 
 @available(*, deprecated, message: "Deprecated")
-public struct GameCenterActivityVersionRelease: Codable, Identifiable {
+public struct GameCenterActivityVersionRelease: Codable, Identifiable, Sendable {
 	public var type: `Type`
 	public var id: String
 	public var relationships: Relationships?
 	public var links: ResourceLinks?
 
-	public enum `Type`: String, Codable, CaseIterable {
+	public enum `Type`: String, Codable, CaseIterable, Sendable {
 		case gameCenterActivityVersionReleases
 	}
 
-	public struct Relationships: Codable {
+	public struct Relationships: Codable, Sendable {
 		public var version: Version?
 
-		public struct Version: Codable {
+		public struct Version: Codable, Sendable {
 			public var data: Data?
 
-			public struct Data: Codable, Identifiable {
+			public struct Data: Codable, Identifiable, Sendable {
 				public var type: `Type`
 				public var id: String
 
-				public enum `Type`: String, Codable, CaseIterable {
+				public enum `Type`: String, Codable, CaseIterable, Sendable {
 					case gameCenterActivityVersions
 				}
 

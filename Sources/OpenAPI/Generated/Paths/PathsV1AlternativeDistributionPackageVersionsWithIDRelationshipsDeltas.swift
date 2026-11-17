@@ -9,7 +9,7 @@ extension APIEndpoint.V1.AlternativeDistributionPackageVersions.WithID.Relations
 		Deltas(path: path + "/deltas")
 	}
 
-	public struct Deltas {
+	public struct Deltas: Sendable {
 		/// Path: `/v1/alternativeDistributionPackageVersions/{id}/relationships/deltas`
 		public let path: String
 

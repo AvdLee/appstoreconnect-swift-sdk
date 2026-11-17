@@ -3,17 +3,17 @@
 
 import Foundation
 
-public struct BuildBundleFileSize: Codable, Identifiable {
+public struct BuildBundleFileSize: Codable, Identifiable, Sendable {
 	public var type: `Type`
 	public var id: String
 	public var attributes: Attributes?
 	public var links: ResourceLinks?
 
-	public enum `Type`: String, Codable, CaseIterable {
+	public enum `Type`: String, Codable, CaseIterable, Sendable {
 		case buildBundleFileSizes
 	}
 
-	public struct Attributes: Codable {
+	public struct Attributes: Codable, Sendable {
 		public var deviceModel: String?
 		public var osVersion: String?
 		public var downloadBytes: Int?

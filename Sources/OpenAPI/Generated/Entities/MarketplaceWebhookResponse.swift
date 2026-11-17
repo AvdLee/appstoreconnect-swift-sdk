@@ -4,7 +4,7 @@
 import Foundation
 
 @available(*, deprecated, message: "Deprecated")
-public struct MarketplaceWebhookResponse: Codable {
+public struct MarketplaceWebhookResponse: Codable, Sendable {
 	/// MarketplaceWebhook
 	///
 	/// - warning: Deprecated.

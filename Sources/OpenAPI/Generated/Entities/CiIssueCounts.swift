@@ -3,7 +3,7 @@
 
 import Foundation
 
-public struct CiIssueCounts: Codable {
+public struct CiIssueCounts: Codable, Sendable {
 	public var analyzerWarnings: Int?
 	public var errors: Int?
 	public var testFailures: Int?
