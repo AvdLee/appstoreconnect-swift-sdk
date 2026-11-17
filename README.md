@@ -157,6 +157,31 @@ dependencies: [
 ]
 ```
 
+### Depending on only the areas you use
+
+With Swift 6.4 or later, the SDK is split into one module per area of the API, plus `AppStoreConnectCore`, which holds the provider, authentication and the types shared between areas. Depend on the areas you call and your build compiles only those:
+
+```swift
+.target(
+    name: "ReleaseTool",
+    dependencies: [
+        .product(name: "AppStoreConnectCore", package: "appstoreconnect-swift-sdk"),
+        .product(name: "AppStoreConnectAppStore", package: "appstoreconnect-swift-sdk"),
+        .product(name: "AppStoreConnectTestFlight", package: "appstoreconnect-swift-sdk"),
+    ]
+)
+```
+
+```swift
+import AppStoreConnectCore
+import AppStoreConnectAppStore
+import AppStoreConnectTestFlight
+```
+
+Areas: `AlternativeDistribution`, `AppClips`, `AppStore`, `AssetLibrary`, `BackgroundAssets`, `CustomerReviews`, `GameCenter`, `InAppEvents`, `InAppPurchases`, `PricingAndAvailability`, `ProductPages`, `Provisioning`, `Reports`, `StoreMedia`, `Subscriptions`, `TestFlight`, `UsersAndAccess`, `Webhooks`, `XcodeCloud`. To find the modules a set of endpoints needs, run `swift run OpenAPIGenerator split-report --path /v1/builds --path /v1/appStoreVersions`.
+
+The `AppStoreConnect-Swift-SDK` product still contains everything, and `import AppStoreConnect_Swift_SDK` works as before. Toolchains older than Swift 6.4 always get the single module.
+
 ## Development
 
 To help with the development of this repository you need to follow the next steps:
@@ -186,6 +211,16 @@ Alternatively, you can run:
 swift run OpenAPIGenerator download
 swift run OpenAPIGenerator generate
 ```
+
+#### Modules
+
+`generate` sorts the generated sources into one folder per module under `Sources/OpenAPI/Generated`, using `Sources/OpenAPI/modules.json`, which maps every tag of Apple's spec to an area:
+
+- Endpoints go to the area of the resource they return (`/v1/apps/{id}/betaGroups` goes to TestFlight).
+- Types used by one area go to that area. Types used by several areas, or by the hand-written code in `Sources/`, go to `Core`.
+- When an endpoint in one area extends a path from another area, the path's declaration goes to `Core/Namespaces`.
+
+When Apple adds a tag, `generate` stops and names it. Add it to an area in `modules.json`. A new area also needs an entry in `areaModules` in `Package.swift`; a test checks both lists match. `swift run OpenAPIGenerator split-report` prints the size of each module.
 
 #### Spec patching
 

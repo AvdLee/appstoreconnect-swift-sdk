@@ -5,7 +5,13 @@
 //  Created by Mathias Emil Mortensen on 05/04/2023.
 //
 
+#if canImport(AppStoreConnectCore)
+// Swift 6.4+: split modules. Internal API lives in Core; the umbrella re-exports the generated areas.
+@testable import AppStoreConnectCore
+import AppStoreConnect_Swift_SDK
+#else
 @testable import AppStoreConnect_Swift_SDK
+#endif
 import XCTest
 import Foundation
 #if canImport(FoundationNetworking)

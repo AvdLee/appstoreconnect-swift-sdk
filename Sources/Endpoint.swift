@@ -10,10 +10,10 @@ import Foundation
 import FoundationNetworking
 #endif
 
-struct AnyEncodable: Encodable {
-    private let value: Encodable
+struct AnyEncodable: Encodable, Sendable {
+    private let value: any Encodable & Sendable
 
-    init(_ value: Encodable) {
+    init(_ value: any Encodable & Sendable) {
         self.value = value
     }
 
@@ -24,7 +24,7 @@ struct AnyEncodable: Encodable {
 
 /// Credits to the https://github.com/kean/Get repository for this class.
 /// We've copied this over since it works nicely together with the CreateAPI OpenAPI generator.
-public struct Request<Response> {
+public struct Request<Response>: Sendable {
     public var method: String
     public var path: String
     public var query: [(String, String?)]?
@@ -40,7 +40,7 @@ public struct Request<Response> {
         self.id = id
     }
 
-    public init<U: Encodable>(path: String, method: String, query: [(String, String?)]? = nil, body: U?, headers: [String: String]? = nil, id: String) {
+    public init<U: Encodable & Sendable>(path: String, method: String, query: [(String, String?)]? = nil, body: U?, headers: [String: String]? = nil, id: String) {
         self.method = method
         self.path = path
         self.query = query

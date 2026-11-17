@@ -39,15 +39,49 @@ jobs:
         run: set -o pipefail && xcodebuild -scheme AppStoreConnect-Swift-SDK -destination "${{ matrix.destination }}" test | xcbeautify
 
   linux_test:
-    name: Test Linux
+    name: Test Linux (Swift ${{ matrix.swift }})
     runs-on: ubuntu-latest
     timeout-minutes: 30
+    strategy:
+      matrix:
+        # 6.2 builds Package@swift-5.7.swift (one module, Swift 5 mode);
+        # 6.4 builds Package.swift (Swift 6 language mode).
+        swift: ["6.2", "6.4"]
     steps:
       - name: Checkout
         uses: actions/checkout@v4
       - name: Swiftly
         uses: vapor/swiftly-action@v0.2.1
         with:
-          toolchain: latest
+          toolchain: ${{ matrix.swift }}
       - name: Test
         run: swift test
+
+  consumer:
+    name: Consumer of three modules (Linux, Swift 6.4)
+    runs-on: ubuntu-latest
+    timeout-minutes: 45
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+      - name: Swiftly
+        uses: vapor/swiftly-action@v0.2.1
+        with:
+          toolchain: "6.4"
+      - name: Test the release-submission client (Core + AppStore + TestFlight only)
+        run: swift test --package-path IntegrationTests/ReleaseSubmissionClient
+      - name: Measure release builds (consumer vs. whole SDK)
+        run: |
+          mkdir -p build-report
+          /usr/bin/time -v swift build -c release --package-path IntegrationTests/ReleaseSubmissionClient --target ReleaseSubmission \
+            2> build-report/consumer-three-modules.txt
+          /usr/bin/time -v swift build -c release --product AppStoreConnect-Swift-SDK \
+            2> build-report/whole-sdk.txt
+          for f in build-report/*.txt; do
+            echo "$f: $(grep -E 'Elapsed \(wall clock\)|Maximum resident set size' "$f" | sed 's/^[[:space:]]*//' | tr '\n' ' ')"
+          done | tee build-report/summary.txt
+      - name: Upload build report
+        uses: actions/upload-artifact@v4
+        with:
+          name: module-split-build-report
+          path: build-report

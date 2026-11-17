@@ -29,7 +29,7 @@ public final class DefaultRequestExecutor: RequestExecutor {
     /// - Parameters:
     ///   - urlRequest: The URLRequest to execute
     ///   - completion: A result type containing eiter the response or an error
-    public func execute(_ urlRequest: URLRequest, completion: @escaping (Result<Response<Data>, Swift.Error>) -> Void) {
+    public func execute(_ urlRequest: URLRequest, completion: @escaping @Sendable (Result<Response<Data>, Swift.Error>) -> Void) {
         urlSession.dataTask(with: urlRequest) { data, response, error in
             completion(mapResponse(data: data, urlResponse: response, error: error))
         }.resume()
@@ -40,7 +40,7 @@ public final class DefaultRequestExecutor: RequestExecutor {
     /// - Parameters:
     ///   - urlRequest: The URLRequest to execute
     ///   - completion: A result type containing eiter the response or an error
-    public func download(_ urlRequest: URLRequest, completion: @escaping (Result<Response<URL>, Swift.Error>) -> Void) {
+    public func download(_ urlRequest: URLRequest, completion: @escaping @Sendable (Result<Response<URL>, Swift.Error>) -> Void) {
         urlSession.downloadTask(with: urlRequest) { fileUrl, response, error in
             completion(mapResponse(fileUrl: fileUrl, urlResponse: response, error: error))
         }.resume()

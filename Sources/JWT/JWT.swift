@@ -72,7 +72,7 @@ private struct IndividualPayload: Codable {
     let audience: String = "appstoreconnect-v1"
 }
 
-protocol JWTCreatable {
+protocol JWTCreatable: Sendable {
     func signedToken(using privateKey: JWT.PrivateKey) throws -> JWT.Token
 }
 
@@ -102,7 +102,7 @@ public struct JWT: Codable, JWTCreatable {
     public typealias Token = String
     public typealias PrivateKey = P256.Signing.PrivateKey
 
-    typealias DateProvider = () -> Date
+    typealias DateProvider = @Sendable () -> Date
     static let defaultDateProvider: DateProvider = {
         Date()
     }

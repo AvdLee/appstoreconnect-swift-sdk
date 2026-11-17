@@ -30,11 +30,13 @@ public struct OpenAPIGeneratorPaths {
     public var packageRoot: URL
     public var specJSON: URL
     public var generatedRoot: URL
+    public var modulesConfig: URL
 
     public init(packageRoot: URL) {
         self.packageRoot = packageRoot
         self.specJSON = packageRoot.appendingPathComponent("Sources/OpenAPI/app_store_connect_api.json")
         self.generatedRoot = packageRoot.appendingPathComponent("Sources/OpenAPI/Generated")
+        self.modulesConfig = packageRoot.appendingPathComponent("Sources/OpenAPI/modules.json")
     }
 }
 
@@ -97,7 +99,67 @@ public enum OpenAPIGeneratorCore {
             currentDirectory: packageRoot
         )
 
-        return try GeneratedPatcher.patchGeneratedSources(atRoot: generatedRoot, dryRun: false)
+        var report = try GeneratedPatcher.patchGeneratedSources(atRoot: generatedRoot, dryRun: false)
+        var paths = OpenAPIGeneratorPaths(packageRoot: packageRoot)
+        paths.generatedRoot = generatedRoot
+        report.changes += try self.splitGeneratedSources(paths: paths)
+        return report
+    }
+
+    /// Works out which module every generated file belongs to, without changing any file.
+    /// Reads the flat tree CreateAPI writes, or the split tree if the sources were already split.
+    public static func planModuleSplit(paths: OpenAPIGeneratorPaths) throws -> ModuleSplit {
+        let config = try ModuleSplitConfig.load(from: paths.modulesConfig)
+        let routing = try SpecRouting(specJSON: Data(contentsOf: paths.specJSON))
+        let sources = try self.readGeneratedSources(paths: paths, config: config)
+        return try ModuleSplitter.split(sources: sources, coreSources: self.readHandWrittenSources(paths: paths), routing: routing, config: config)
+    }
+
+    /// Moves the flat generated tree into one folder per module (see `ModuleSplitter.render`).
+    /// Does nothing when the tree is already split.
+    public static func splitGeneratedSources(paths: OpenAPIGeneratorPaths) throws -> [String] {
+        let fileManager = FileManager.default
+        guard fileManager.fileExists(atPath: paths.generatedRoot.appendingPathComponent("Entities").path) else {
+            return ["Generated sources are already split into modules."]
+        }
+        let config = try ModuleSplitConfig.load(from: paths.modulesConfig)
+        let routing = try SpecRouting(specJSON: Data(contentsOf: paths.specJSON))
+        let sources = try self.readSwiftFiles(in: paths.generatedRoot)
+        let split = try ModuleSplitter.split(sources: sources, coreSources: self.readHandWrittenSources(paths: paths), routing: routing, config: config)
+        let rendered = try ModuleSplitter.render(sources: sources, split: split, config: config)
+
+        for item in try fileManager.contentsOfDirectory(atPath: paths.generatedRoot.path) {
+            try fileManager.removeItem(at: paths.generatedRoot.appendingPathComponent(item))
+        }
+        for file in rendered {
+            let url = paths.generatedRoot.appendingPathComponent(file.path)
+            try fileManager.createDirectory(at: url.deletingLastPathComponent(), withIntermediateDirectories: true)
+            try file.contents.write(to: url, atomically: true, encoding: .utf8)
+        }
+
+        let report = split.report()
+        return ["Split generated sources into \(report.modules.count) modules; \(report.core) holds \(report.modules.first { $0.name == report.core }?.files ?? 0) of \(sources.count) files."]
+    }
+
+    private static func readGeneratedSources(paths: OpenAPIGeneratorPaths, config: ModuleSplitConfig) throws -> [GeneratedSource] {
+        let sources = try self.readSwiftFiles(in: paths.generatedRoot)
+        let isFlat = FileManager.default.fileExists(atPath: paths.generatedRoot.appendingPathComponent("Entities").path)
+        return isFlat ? sources : ModuleSplitter.unrender(sources, config: config)
+    }
+
+    /// Hand-written Core sources: everything under `Sources/` that the generator doesn't write.
+    private static func readHandWrittenSources(paths: OpenAPIGeneratorPaths) throws -> [GeneratedSource] {
+        let sourcesRoot = paths.packageRoot.appendingPathComponent("Sources")
+        let generatedPrefix = paths.generatedRoot.path.replacingOccurrences(of: sourcesRoot.path + "/", with: "") + "/"
+        return try self.readSwiftFiles(in: sourcesRoot).filter { !$0.path.hasPrefix(generatedPrefix) }
+    }
+
+    /// Every `.swift` file below `root`, with paths relative to it, sorted.
+    private static func readSwiftFiles(in root: URL) throws -> [GeneratedSource] {
+        let relativePaths = (try FileManager.default.subpathsOfDirectory(atPath: root.path)).filter { $0.hasSuffix(".swift") }.sorted()
+        return try relativePaths.map { relativePath in
+            GeneratedSource(path: relativePath, contents: try String(contentsOf: root.appendingPathComponent(relativePath), encoding: .utf8))
+        }
     }
 
     // MARK: - Internals

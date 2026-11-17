@@ -15,10 +15,10 @@ import Combine
 import FoundationNetworking
 #endif
 
-public typealias RequestCompletionHandler<T> = (Result<T, Swift.Error>) -> Void
+public typealias RequestCompletionHandler<T> = @Sendable (Result<T, Swift.Error>) -> Void
 
 /// The configuration needed to set up the API Provider including all needed information for performing API requests.
-public struct APIConfiguration {
+public struct APIConfiguration: Sendable {
 
     /// Your private key ID from App Store Connect (Ex: 2X9R4HXF34)
     let privateKeyID: String
@@ -138,7 +138,10 @@ public struct APIConfiguration {
 }
 
 /// Provides access to all API Methods. Can be used to perform API requests.
-public final class APIProvider {
+///
+/// Safe to share between tasks and threads: every stored property is set once in `init`, the encoder is only read,
+/// Combine subjects are thread-safe, and the authenticator serializes its token cache.
+public final class APIProvider: @unchecked Sendable {
 
     public enum Error: Swift.Error, CustomDebugStringConvertible, LocalizedError {
         case requestGeneration
@@ -185,40 +188,13 @@ public final class APIProvider {
     /// Contains a JSON Decoder which can be reused.
     static let jsonDecoder: JSONDecoder = {
         let decoder = JSONDecoder()
-
-        let formatter = DateFormatter()
-        formatter.locale = Locale(identifier: "en_US_POSIX")
-        formatter.timeZone = TimeZone(secondsFromGMT: 0)
-        formatter.calendar = Calendar(identifier: .iso8601)
-
         decoder.dateDecodingStrategy = .custom({ (decoder) -> Date in
             let container = try decoder.singleValueContainer()
             let dateStr = try container.decode(String.self)
-
-            formatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss.SSSXXXXX"
-            if let date = formatter.date(from: dateStr) {
-                return date
+            guard let date = APIDateFormats.shared.date(from: dateStr) else {
+                throw APIProvider.Error.dateDecodingError(dateStr)
             }
-            formatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ssXXXXX"
-            if let date = formatter.date(from: dateStr) {
-                return date
-            }
-            formatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ssZZZZZ"
-            if let date = formatter.date(from: dateStr) {
-                return date
-            }
-            // Example: 2024-01-01T23:59:59.000+00:00
-            let isoDateFormatter = ISO8601DateFormatter()
-            isoDateFormatter.formatOptions = [.withInternetDateTime, .withFractionalSeconds]
-            if let date = isoDateFormatter.date(from: dateStr) {
-                return date
-            }
-            // Metric data points use calendar dates in Apple's published responses.
-            formatter.dateFormat = "yyyy-MM-dd"
-            if let date = formatter.date(from: dateStr) {
-                return date
-            }
-            throw APIProvider.Error.dateDecodingError(dateStr)
+            return date
         })
         return decoder
     }()
@@ -270,7 +246,7 @@ public final class APIProvider {
     /// - Parameters:
     ///   - endpoint: The API endpoint to request.
     ///   - completion: The completion callback which will be called on completion containing the result.
-    public func request<T: Decodable>(_ request: Request<T>, completion: @escaping RequestCompletionHandler<T>) {
+    public func request<T: Decodable & Sendable>(_ request: Request<T>, completion: @escaping RequestCompletionHandler<T>) {
         guard let request = try? requestsAuthenticator.adapt(request.asURLRequest(encoder: encoder)) else {
             completion(.failure(Error.requestGeneration))
             return
@@ -302,7 +278,7 @@ extension APIProvider {
     ///   - endpoint: The API endpoint to request.
     public func request(_ endpoint: Request<Void>) async throws {
         try await withCheckedThrowingContinuation { continuation in
-            request(endpoint, completion: continuation.resume(with:))
+            self.request(endpoint) { continuation.resume(with: $0) }
         }
     }
 
@@ -310,9 +286,9 @@ extension APIProvider {
     ///
     /// - Parameters:
     ///   - endpoint: The API endpoint to request.
-    public func request<T>(_ endpoint: Request<T>) async throws -> T where T: Decodable {
+    public func request<T>(_ endpoint: Request<T>) async throws -> T where T: Decodable & Sendable {
         try await withCheckedThrowingContinuation { continuation in
-            request(endpoint, completion: continuation.resume(with:))
+            self.request(endpoint) { continuation.resume(with: $0) }
         }
     }
 
@@ -322,7 +298,7 @@ extension APIProvider {
     ///   - endpoint: The API endpoint to request.
     public func download<T>(_ endpoint: Request<T>) async throws -> URL where T: Decodable {
         try await withCheckedThrowingContinuation { continuation in
-            download(endpoint, completion: continuation.resume(with:))
+            self.download(endpoint) { continuation.resume(with: $0) }
         }
     }
 }
@@ -415,7 +391,7 @@ extension APIProvider {
     ///
     /// - Parameter endpoint: The API endpoint to request.
     /// - Returns: An AsyncSequence of the responses from the endpoint
-    public func paged<T>(_ endpoint: Request<T>) -> PagedRequest<T> {
+    public func paged<T>(_ endpoint: Request<T>) -> PagedRequest<T> where T: Decodable & Sendable {
         PagedRequest(request: endpoint, provider: self)
     }
     
@@ -427,9 +403,9 @@ extension APIProvider {
     ///   - endpoint: endpoint: The API endpoint to request.
     ///   - pageAfter: the current response
     /// - Returns: the endpoint's next response page or nil when there is no further response
-    public func request<T>(_ endpoint: Request<T>, pageAfter currentPage: T) async throws -> T? where T: Decodable {
+    public func request<T>(_ endpoint: Request<T>, pageAfter currentPage: T) async throws -> T? where T: Decodable & Sendable {
         try await withCheckedThrowingContinuation { continuation in
-            request(endpoint, pageAfter: currentPage) { result in
+            self.request(endpoint, pageAfter: currentPage) { result in
                 continuation.resume(with: result)
             }
         }
@@ -467,7 +443,7 @@ extension APIProvider {
     ///   - request: endpoint: The API endpoint to request.
     ///   - pageAfter: the current response
     ///   - completion: The completion callback which will be called on completion containing the result.
-    public func request<T: Decodable>(_ request: Request<T>, pageAfter currentPage: T, completion: @escaping RequestCompletionHandler<T?>) {
+    public func request<T: Decodable & Sendable>(_ request: Request<T>, pageAfter currentPage: T, completion: @escaping RequestCompletionHandler<T?>) {
                         
         guard
             let nextPage = pagedDocumentLinks(currentPage)?.next,
@@ -484,5 +460,48 @@ extension APIProvider {
         } catch {
             completion(.failure(error))
         }
+    }
+}
+
+/// The date formats App Store Connect responses use, tried in order.
+///
+/// Each formatter is configured once and never mutated afterwards, which makes concurrent `date(from:)` calls safe.
+/// Changing `dateFormat` on a shared formatter while other requests decode would race.
+private final class APIDateFormats: @unchecked Sendable {
+    static let shared = APIDateFormats()
+
+    private let formatters: [DateFormatter]
+    // Example: 2024-01-01T23:59:59.000+00:00
+    private let fractionalSecondsFormatter: ISO8601DateFormatter
+    private let calendarDateFormatter: DateFormatter
+
+    private init() {
+        self.formatters = [
+            "yyyy-MM-dd'T'HH:mm:ss.SSSXXXXX",
+            "yyyy-MM-dd'T'HH:mm:ssXXXXX",
+            "yyyy-MM-dd'T'HH:mm:ssZZZZZ",
+        ].map(APIDateFormats.formatter(dateFormat:))
+        self.fractionalSecondsFormatter = ISO8601DateFormatter()
+        self.fractionalSecondsFormatter.formatOptions = [.withInternetDateTime, .withFractionalSeconds]
+        // Metric data points use calendar dates in Apple's published responses.
+        self.calendarDateFormatter = APIDateFormats.formatter(dateFormat: "yyyy-MM-dd")
+    }
+
+    func date(from string: String) -> Date? {
+        for formatter in self.formatters {
+            if let date = formatter.date(from: string) {
+                return date
+            }
+        }
+        return self.fractionalSecondsFormatter.date(from: string) ?? self.calendarDateFormatter.date(from: string)
+    }
+
+    private static func formatter(dateFormat: String) -> DateFormatter {
+        let formatter = DateFormatter()
+        formatter.locale = Locale(identifier: "en_US_POSIX")
+        formatter.timeZone = TimeZone(secondsFromGMT: 0)
+        formatter.calendar = Calendar(identifier: .iso8601)
+        formatter.dateFormat = dateFormat
+        return formatter
     }
 }

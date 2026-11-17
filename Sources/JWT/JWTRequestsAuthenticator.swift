@@ -11,7 +11,9 @@ import FoundationNetworking
 #endif
 
 /// An Authenticator for URL Requests which makes use of the RequestAdapter from Alamofire.
-final class JWTRequestsAuthenticator {
+///
+/// The token cache is only read and written on `dispatchQueue`, so concurrent requests share one token.
+final class JWTRequestsAuthenticator: @unchecked Sendable {
 
     private let dispatchQueue = DispatchQueue(label: "JWTRequestsAuthenticator")
     private var cachedToken: JWT.Token?

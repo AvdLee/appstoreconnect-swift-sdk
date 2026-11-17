@@ -176,6 +176,118 @@ final class GeneratedPatchingTests: XCTestCase {
         XCTAssertEqual(secondReport.alreadyPresent.count, 3)
         XCTAssertTrue(secondReport.missingFiles.contains("CiBuildRun.swift"))
     }
+
+    // MARK: - Sendable
+
+    func testEveryPublicGeneratedTypeBecomesSendable() throws {
+        let root = try self.makeGeneratedRoot()
+        defer { try? FileManager.default.removeItem(at: root) }
+        let entity = root.appendingPathComponent("Entities/XcodeMetrics.swift")
+        try """
+        public struct XcodeMetrics: Codable {
+        \tpublic var productData: [ProductDatum]?
+
+        \tpublic struct ProductDatum: Codable, Identifiable {
+        \t\tpublic var id: String
+        \t\tpublic final class MetricCategory: Codable {
+        \t\t\tpublic let unit: Unit?
+
+        \t\t\tpublic enum Unit: String, Codable, CaseIterable {
+        \t\t\t\tcase bytes = "BYTES"
+        \t\t\t}
+        \t\t\tpublic enum `Type`: String, Codable, CaseIterable {
+        \t\t\t\tcase metrics
+        \t\t\t}
+        \t\t}
+        \t}
+
+        \tpublic init(from decoder: Decoder) throws {
+        \t\tstruct Discriminator: Decodable {
+        \t\t\tlet type: String
+        \t\t}
+        \t}
+        }
+        """.write(to: entity, atomically: true, encoding: .utf8)
+        let path = root.appendingPathComponent("Paths/PathsV1Apps.swift")
+        try """
+        extension APIEndpoint.V1 {
+        \tpublic struct Apps{
+        \t\t/// Path: `/v1/apps`
+        \t\tpublic let path: String
+        \t}
+        }
+        """.write(to: path, atomically: true, encoding: .utf8)
+        let extensionFile = root.appendingPathComponent("Extensions/AnyJSON.swift")
+        try "public enum AnyJSON: Equatable, Codable {\n\tcase string(String)\n}\n".write(to: extensionFile, atomically: true, encoding: .utf8)
+
+        let report = try GeneratedPatcher.patchGeneratedSources(atRoot: root)
+
+        let patchedEntity = try String(contentsOf: entity, encoding: .utf8)
+        XCTAssertTrue(patchedEntity.contains("public struct XcodeMetrics: Codable, Sendable {"))
+        XCTAssertTrue(patchedEntity.contains("\tpublic struct ProductDatum: Codable, Identifiable, Sendable {"))
+        XCTAssertTrue(patchedEntity.contains("\t\tpublic final class MetricCategory: Codable, Sendable {"))
+        XCTAssertTrue(patchedEntity.contains("\t\t\tpublic enum Unit: String, Codable, CaseIterable, Sendable {"))
+        XCTAssertTrue(patchedEntity.contains("\t\t\tpublic enum `Type`: String, Codable, CaseIterable, Sendable {"))
+        // Local helpers are not API; they stay as generated.
+        XCTAssertTrue(patchedEntity.contains("\t\tstruct Discriminator: Decodable {"))
+        XCTAssertTrue(try String(contentsOf: path, encoding: .utf8).contains("\tpublic struct Apps: Sendable {"))
+        XCTAssertTrue(try String(contentsOf: extensionFile, encoding: .utf8).contains("public enum AnyJSON: Equatable, Codable, Sendable {"))
+        XCTAssertEqual(Set(report.changedFiles).count, report.changedFiles.count, "Each file is reported once")
+        XCTAssertEqual(report.changedFiles.count, 3)
+        XCTAssertTrue(report.changes.contains("Conformed 7 public types to Sendable in 3 files"), "\(report.changes)")
+    }
+
+    func testSendableIsNotAddedTwice() throws {
+        let root = try self.makeGeneratedRoot()
+        defer { try? FileManager.default.removeItem(at: root) }
+        let file = root.appendingPathComponent("Entities/App.swift")
+        let source = "public struct App: Codable, Sendable {\n\tpublic struct Attributes: Sendable, Codable {}\n}\n"
+        try source.write(to: file, atomically: true, encoding: .utf8)
+
+        let report = try GeneratedPatcher.patchGeneratedSources(atRoot: root)
+
+        XCTAssertTrue(report.changedFiles.isEmpty)
+        XCTAssertEqual(try String(contentsOf: file, encoding: .utf8), source)
+    }
+
+    func testDryRunReportsSendableWithoutWriting() throws {
+        let root = try self.makeGeneratedRoot()
+        defer { try? FileManager.default.removeItem(at: root) }
+        let file = root.appendingPathComponent("Entities/App.swift")
+        let source = "public struct App: Codable {}\n"
+        try source.write(to: file, atomically: true, encoding: .utf8)
+
+        let report = try GeneratedPatcher.patchGeneratedSources(atRoot: root, dryRun: true)
+
+        XCTAssertEqual(report.changedFiles.count, 1)
+        XCTAssertEqual(try String(contentsOf: file, encoding: .utf8), source)
+    }
+
+    /// The placement-state patch must keep working on its own already-Sendable output, or the next spec sync
+    /// fails with "expected substring not found".
+    func testPlacementStatePatchStillAppliesAfterSendableWasAdded() throws {
+        let root = try self.makeGeneratedRoot()
+        defer { try? FileManager.default.removeItem(at: root) }
+        let file = root.appendingPathComponent("Entities/AppAssetLibraryPlacementState.swift")
+        try "public enum AppAssetLibraryPlacementState: String, Codable, CaseIterable {\n\tcase assetProcessing = \"ASSET_PROCESSING\"\n\tcase parentApproved = \"PARENT_APPROVED\"\n}\n"
+            .write(to: file, atomically: true, encoding: .utf8)
+
+        _ = try GeneratedPatcher.patchGeneratedSources(atRoot: root)
+        let second = try GeneratedPatcher.patchGeneratedSources(atRoot: root)
+
+        XCTAssertTrue(second.changedFiles.isEmpty)
+        let patched = try String(contentsOf: file, encoding: .utf8)
+        XCTAssertTrue(patched.hasPrefix("public enum AppAssetLibraryPlacementState: String, Codable, CaseIterable, Sendable {\n\tcase active = \"ACTIVE\""))
+        XCTAssertTrue(patched.contains(#"case inactive = "INACTIVE""#))
+    }
+
+    private func makeGeneratedRoot() throws -> URL {
+        let root = FileManager.default.temporaryDirectory.appendingPathComponent(UUID().uuidString)
+        for folder in ["Entities", "Paths", "Extensions"] {
+            try FileManager.default.createDirectory(at: root.appendingPathComponent(folder), withIntermediateDirectories: true)
+        }
+        return root
+    }
 }
 #endif
 
