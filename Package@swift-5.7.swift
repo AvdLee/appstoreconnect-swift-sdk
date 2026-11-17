@@ -85,7 +85,8 @@ let package = Package(
             ),
             dependencies: [
                 .target(name: "create-api")
-            ]
+            ],
+            path: "Plugins/CreateAPILegacy"
         )
     ]
 )

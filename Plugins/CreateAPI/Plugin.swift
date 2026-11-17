@@ -5,11 +5,11 @@ import PackagePlugin
 struct Plugin: CommandPlugin {
     func performCommand(context: PluginContext, arguments: [String]) async throws {
         let createAPI = try context.tool(named: "create-api")
-        let openAPIDirectory = context.package.directory.appending("Sources", "OpenAPI")
 
         let process = Process()
-        process.currentDirectoryURL = URL(fileURLWithPath: openAPIDirectory.string)
-        process.executableURL = URL(fileURLWithPath: createAPI.path.string)
+        // Package@swift-5.7.swift uses Plugins/CreateAPILegacy, which keeps the `Path` API of older tools versions.
+        process.currentDirectoryURL = context.package.directoryURL.appending(components: "Sources", "OpenAPI")
+        process.executableURL = createAPI.url
         process.arguments = [
             "generate",
             "app_store_connect_api.json",
