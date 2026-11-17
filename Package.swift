@@ -48,6 +48,7 @@ let package = Package(
                 "OpenAPI/app_store_connect_api.json",
                 "OpenAPI/app_store_connect_api.json.orig",
                 "OpenAPI/create-api.yml",
+                "OpenAPI/modules.json",
             ]
         ),
         .target(

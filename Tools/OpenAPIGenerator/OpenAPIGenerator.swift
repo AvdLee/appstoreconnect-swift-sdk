@@ -6,7 +6,7 @@ import OpenAPIGeneratorCore
 struct OpenAPIGenerator: AsyncParsableCommand {
     static let configuration = CommandConfiguration(
         abstract: "Downloads, patches, generates, and post-processes the App Store Connect OpenAPI SDK sources.",
-        subcommands: [Download.self, Generate.self, Update.self]
+        subcommands: [Download.self, Generate.self, Update.self, SplitReport.self]
     )
 
     struct Download: AsyncParsableCommand {
@@ -86,6 +86,44 @@ struct OpenAPIGenerator: AsyncParsableCommand {
             }
             for file in report.missingFiles {
                 print("[generated] target file missing; review patch: \(file)")
+            }
+        }
+    }
+
+    struct SplitReport: ParsableCommand {
+        static let configuration = CommandConfiguration(
+            commandName: "split-report",
+            abstract: "Report how the generated sources would split into modules (from Sources/OpenAPI/modules.json). Changes no files."
+        )
+
+        @Option(help: "Directory to write split-report.md and split-report.json to.")
+        var outputDir: String?
+
+        @Option(name: .customLong("path"), help: "API path a consumer calls, e.g. /v1/builds. Repeat to list the modules a set of endpoints needs.")
+        var apiPaths: [String] = []
+
+        mutating func run() throws {
+            let root = try OpenAPIGeneratorCore.findPackageRoot()
+            let split = try OpenAPIGeneratorCore.planModuleSplit(paths: OpenAPIGeneratorPaths(packageRoot: root))
+            let report = split.report()
+
+            var markdown = report.markdown
+            if !self.apiPaths.isEmpty {
+                let unknown = self.apiPaths.filter { split.fileByAPIPath[$0] == nil }
+                guard unknown.isEmpty else {
+                    throw ValidationError("Unknown API paths: \(unknown.joined(separator: ", "))")
+                }
+                markdown += "\nModules needed for \(self.apiPaths.joined(separator: ", ")): \(split.modules(requiredForPaths: self.apiPaths).joined(separator: ", "))\n"
+            }
+            print(markdown)
+
+            if let outputDir = self.outputDir {
+                let directory = URL(fileURLWithPath: outputDir)
+                try FileManager.default.createDirectory(at: directory, withIntermediateDirectories: true)
+                try markdown.write(to: directory.appendingPathComponent("split-report.md"), atomically: true, encoding: .utf8)
+                let encoder = JSONEncoder()
+                encoder.outputFormatting = [.prettyPrinted, .sortedKeys]
+                try encoder.encode(report).write(to: directory.appendingPathComponent("split-report.json"))
             }
         }
     }

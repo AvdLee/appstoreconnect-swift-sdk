@@ -30,11 +30,13 @@ public struct OpenAPIGeneratorPaths {
     public var packageRoot: URL
     public var specJSON: URL
     public var generatedRoot: URL
+    public var modulesConfig: URL
 
     public init(packageRoot: URL) {
         self.packageRoot = packageRoot
         self.specJSON = packageRoot.appendingPathComponent("Sources/OpenAPI/app_store_connect_api.json")
         self.generatedRoot = packageRoot.appendingPathComponent("Sources/OpenAPI/Generated")
+        self.modulesConfig = packageRoot.appendingPathComponent("Sources/OpenAPI/modules.json")
     }
 }
 
@@ -98,6 +100,22 @@ public enum OpenAPIGeneratorCore {
         )
 
         return try GeneratedPatcher.patchGeneratedSources(atRoot: generatedRoot, dryRun: false)
+    }
+
+    /// Works out which module every generated file would belong to, without changing any file.
+    public static func planModuleSplit(paths: OpenAPIGeneratorPaths) throws -> ModuleSplit {
+        let config = try ModuleSplitConfig.load(from: paths.modulesConfig)
+        let routing = try SpecRouting(specJSON: Data(contentsOf: paths.specJSON))
+        var sources: [GeneratedSource] = []
+        for folder in ["Entities", "Paths", "Extensions"] {
+            let directory = paths.generatedRoot.appendingPathComponent(folder)
+            let files = try FileManager.default.contentsOfDirectory(atPath: directory.path).filter { $0.hasSuffix(".swift") }
+            for file in files.sorted() {
+                let contents = try String(contentsOf: directory.appendingPathComponent(file), encoding: .utf8)
+                sources.append(GeneratedSource(path: "\(folder)/\(file)", contents: contents))
+            }
+        }
+        return try ModuleSplitter.split(sources: sources, routing: routing, config: config)
     }
 
     // MARK: - Internals
