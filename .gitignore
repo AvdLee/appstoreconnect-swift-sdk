@@ -78,3 +78,5 @@ fastlane/screenshots/**/*.png
 fastlane/test_output
 
 Secrets
+.envrc
+*.profraw
