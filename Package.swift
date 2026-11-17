@@ -27,7 +27,7 @@ let areaModules = [
 
 var dependencies: [Package.Dependency] = [
     .package(url: "https://github.com/CreateAPI/URLQueryEncoder.git", from: "0.2.0"),
-    .package(url: "https://github.com/apple/swift-crypto.git", from: "3.12.3"),
+    .package(url: "https://github.com/apple/swift-crypto.git", from: "4.0.0"),
     .package(url: "https://github.com/apple/swift-argument-parser", from: "1.7.0"),
     .package(url: "https://github.com/weichsel/ZIPFoundation", from: "0.9.20"),
     .package(url: "https://github.com/apple/swift-collections.git", .upToNextMinor(from: "1.1.0"))
