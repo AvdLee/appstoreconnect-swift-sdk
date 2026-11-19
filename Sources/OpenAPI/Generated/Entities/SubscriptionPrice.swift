@@ -43,6 +43,7 @@ public struct SubscriptionPrice: Codable, Identifiable {
 	public struct Relationships: Codable {
 		public var territory: Territory?
 		public var subscriptionPricePoint: SubscriptionPricePoint?
+		public var additionalPriceTiers: AdditionalPriceTiers?
 
 		public struct Territory: Codable {
 			public var data: Data?
@@ -132,21 +133,76 @@ public struct SubscriptionPrice: Codable, Identifiable {
 			}
 		}
 
-		public init(territory: Territory? = nil, subscriptionPricePoint: SubscriptionPricePoint? = nil) {
+		public struct AdditionalPriceTiers: Codable {
+			public var links: RelationshipLinks?
+			public var meta: PagingInformation?
+			public var data: [Datum]?
+
+			public struct Datum: Codable, Identifiable {
+				public var type: `Type`
+				public var id: String
+
+				public enum `Type`: String, Codable, CaseIterable {
+					case subscriptionPriceTiers
+				}
+
+				public init(type: `Type`, id: String) {
+					self.type = type
+					self.id = id
+				}
+
+				public init(from decoder: Decoder) throws {
+					let values = try decoder.container(keyedBy: StringCodingKey.self)
+					self.type = try values.decode(`Type`.self, forKey: "type")
+					self.id = try values.decode(String.self, forKey: "id")
+				}
+
+				public func encode(to encoder: Encoder) throws {
+					var values = encoder.container(keyedBy: StringCodingKey.self)
+					try values.encode(type, forKey: "type")
+					try values.encode(id, forKey: "id")
+				}
+			}
+
+			public init(links: RelationshipLinks? = nil, meta: PagingInformation? = nil, data: [Datum]? = nil) {
+				self.links = links
+				self.meta = meta
+				self.data = data
+			}
+
+			public init(from decoder: Decoder) throws {
+				let values = try decoder.container(keyedBy: StringCodingKey.self)
+				self.links = try values.decodeIfPresent(RelationshipLinks.self, forKey: "links")
+				self.meta = try values.decodeIfPresent(PagingInformation.self, forKey: "meta")
+				self.data = try values.decodeIfPresent([Datum].self, forKey: "data")
+			}
+
+			public func encode(to encoder: Encoder) throws {
+				var values = encoder.container(keyedBy: StringCodingKey.self)
+				try values.encodeIfPresent(links, forKey: "links")
+				try values.encodeIfPresent(meta, forKey: "meta")
+				try values.encodeIfPresent(data, forKey: "data")
+			}
+		}
+
+		public init(territory: Territory? = nil, subscriptionPricePoint: SubscriptionPricePoint? = nil, additionalPriceTiers: AdditionalPriceTiers? = nil) {
 			self.territory = territory
 			self.subscriptionPricePoint = subscriptionPricePoint
+			self.additionalPriceTiers = additionalPriceTiers
 		}
 
 		public init(from decoder: Decoder) throws {
 			let values = try decoder.container(keyedBy: StringCodingKey.self)
 			self.territory = try values.decodeIfPresent(Territory.self, forKey: "territory")
 			self.subscriptionPricePoint = try values.decodeIfPresent(SubscriptionPricePoint.self, forKey: "subscriptionPricePoint")
+			self.additionalPriceTiers = try values.decodeIfPresent(AdditionalPriceTiers.self, forKey: "additionalPriceTiers")
 		}
 
 		public func encode(to encoder: Encoder) throws {
 			var values = encoder.container(keyedBy: StringCodingKey.self)
 			try values.encodeIfPresent(territory, forKey: "territory")
 			try values.encodeIfPresent(subscriptionPricePoint, forKey: "subscriptionPricePoint")
+			try values.encodeIfPresent(additionalPriceTiers, forKey: "additionalPriceTiers")
 		}
 	}
 

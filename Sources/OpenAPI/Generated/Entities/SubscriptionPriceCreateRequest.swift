@@ -5,6 +5,7 @@ import Foundation
 
 public struct SubscriptionPriceCreateRequest: Codable {
 	public var data: Data
+	public var included: [SubscriptionPriceTierInlineCreate]?
 
 	public struct Data: Codable {
 		public var type: `Type`
@@ -45,6 +46,7 @@ public struct SubscriptionPriceCreateRequest: Codable {
 			public var subscription: Subscription
 			public var territory: Territory?
 			public var subscriptionPricePoint: SubscriptionPricePoint
+			public var additionalPriceTiers: AdditionalPriceTiers?
 
 			public struct Subscription: Codable {
 				public var data: Data
@@ -178,10 +180,55 @@ public struct SubscriptionPriceCreateRequest: Codable {
 				}
 			}
 
-			public init(subscription: Subscription, territory: Territory? = nil, subscriptionPricePoint: SubscriptionPricePoint) {
+			public struct AdditionalPriceTiers: Codable {
+				public var data: [Datum]?
+
+				public struct Datum: Codable, Identifiable {
+					public var type: `Type`
+					public var id: String
+
+					public enum `Type`: String, Codable, CaseIterable {
+						case subscriptionPriceTiers
+					}
+
+					public init(type: `Type`, id: String) {
+						self.type = type
+						self.id = id
+					}
+
+					public init(from decoder: Decoder) throws {
+						let values = try decoder.container(keyedBy: StringCodingKey.self)
+						self.type = try values.decode(`Type`.self, forKey: "type")
+						self.id = try values.decode(String.self, forKey: "id")
+					}
+
+					public func encode(to encoder: Encoder) throws {
+						var values = encoder.container(keyedBy: StringCodingKey.self)
+						try values.encode(type, forKey: "type")
+						try values.encode(id, forKey: "id")
+					}
+				}
+
+				public init(data: [Datum]? = nil) {
+					self.data = data
+				}
+
+				public init(from decoder: Decoder) throws {
+					let values = try decoder.container(keyedBy: StringCodingKey.self)
+					self.data = try values.decodeIfPresent([Datum].self, forKey: "data")
+				}
+
+				public func encode(to encoder: Encoder) throws {
+					var values = encoder.container(keyedBy: StringCodingKey.self)
+					try values.encodeIfPresent(data, forKey: "data")
+				}
+			}
+
+			public init(subscription: Subscription, territory: Territory? = nil, subscriptionPricePoint: SubscriptionPricePoint, additionalPriceTiers: AdditionalPriceTiers? = nil) {
 				self.subscription = subscription
 				self.territory = territory
 				self.subscriptionPricePoint = subscriptionPricePoint
+				self.additionalPriceTiers = additionalPriceTiers
 			}
 
 			public init(from decoder: Decoder) throws {
@@ -189,6 +236,7 @@ public struct SubscriptionPriceCreateRequest: Codable {
 				self.subscription = try values.decode(Subscription.self, forKey: "subscription")
 				self.territory = try values.decodeIfPresent(Territory.self, forKey: "territory")
 				self.subscriptionPricePoint = try values.decode(SubscriptionPricePoint.self, forKey: "subscriptionPricePoint")
+				self.additionalPriceTiers = try values.decodeIfPresent(AdditionalPriceTiers.self, forKey: "additionalPriceTiers")
 			}
 
 			public func encode(to encoder: Encoder) throws {
@@ -196,6 +244,7 @@ public struct SubscriptionPriceCreateRequest: Codable {
 				try values.encode(subscription, forKey: "subscription")
 				try values.encodeIfPresent(territory, forKey: "territory")
 				try values.encode(subscriptionPricePoint, forKey: "subscriptionPricePoint")
+				try values.encodeIfPresent(additionalPriceTiers, forKey: "additionalPriceTiers")
 			}
 		}
 
@@ -220,17 +269,20 @@ public struct SubscriptionPriceCreateRequest: Codable {
 		}
 	}
 
-	public init(data: Data) {
+	public init(data: Data, included: [SubscriptionPriceTierInlineCreate]? = nil) {
 		self.data = data
+		self.included = included
 	}
 
 	public init(from decoder: Decoder) throws {
 		let values = try decoder.container(keyedBy: StringCodingKey.self)
 		self.data = try values.decode(Data.self, forKey: "data")
+		self.included = try values.decodeIfPresent([SubscriptionPriceTierInlineCreate].self, forKey: "included")
 	}
 
 	public func encode(to encoder: Encoder) throws {
 		var values = encoder.container(keyedBy: StringCodingKey.self)
 		try values.encode(data, forKey: "data")
+		try values.encodeIfPresent(included, forKey: "included")
 	}
 }

@@ -21,6 +21,7 @@ public struct SubscriptionResponse: Codable {
 		case subscriptionLocalization(SubscriptionLocalization)
 		case subscriptionOfferCode(SubscriptionOfferCode)
 		case subscriptionPlanAvailability(SubscriptionPlanAvailability)
+		case subscriptionPriceTier(SubscriptionPriceTier)
 		case subscriptionPrice(SubscriptionPrice)
 		case subscriptionPromotionalOffer(SubscriptionPromotionalOffer)
 		case subscriptionVersion(SubscriptionVersion)
@@ -47,6 +48,7 @@ public struct SubscriptionResponse: Codable {
 			case "subscriptionLocalizations": self = .subscriptionLocalization(try container.decode(SubscriptionLocalization.self))
 			case "subscriptionOfferCodes": self = .subscriptionOfferCode(try container.decode(SubscriptionOfferCode.self))
 			case "subscriptionPlanAvailabilities": self = .subscriptionPlanAvailability(try container.decode(SubscriptionPlanAvailability.self))
+			case "subscriptionPriceTiers": self = .subscriptionPriceTier(try container.decode(SubscriptionPriceTier.self))
 			case "subscriptionPrices": self = .subscriptionPrice(try container.decode(SubscriptionPrice.self))
 			case "subscriptionPromotionalOffers": self = .subscriptionPromotionalOffer(try container.decode(SubscriptionPromotionalOffer.self))
 			case "subscriptionVersions": self = .subscriptionVersion(try container.decode(SubscriptionVersion.self))
@@ -55,7 +57,7 @@ public struct SubscriptionResponse: Codable {
 			default:
 				throw DecodingError.dataCorruptedError(
 					in: container,
-					debugDescription: "Discriminator value '\(discriminatorValue)' does not match any expected values (promotedPurchases, retentionMessages, retentionOffers, subscriptionAppStoreReviewScreenshots, subscriptionAvailabilities, subscriptionGroups, subscriptionImages, subscriptionIntroductoryOffers, subscriptionLocalizations, subscriptionOfferCodes, subscriptionPlanAvailabilities, subscriptionPrices, subscriptionPromotionalOffers, subscriptionVersions, winBackOffers)."
+					debugDescription: "Discriminator value '\(discriminatorValue)' does not match any expected values (promotedPurchases, retentionMessages, retentionOffers, subscriptionAppStoreReviewScreenshots, subscriptionAvailabilities, subscriptionGroups, subscriptionImages, subscriptionIntroductoryOffers, subscriptionLocalizations, subscriptionOfferCodes, subscriptionPlanAvailabilities, subscriptionPriceTiers, subscriptionPrices, subscriptionPromotionalOffers, subscriptionVersions, winBackOffers)."
 				)
 			}
 		}
@@ -74,6 +76,7 @@ public struct SubscriptionResponse: Codable {
 			case .subscriptionLocalization(let value): try container.encode(value)
 			case .subscriptionOfferCode(let value): try container.encode(value)
 			case .subscriptionPlanAvailability(let value): try container.encode(value)
+			case .subscriptionPriceTier(let value): try container.encode(value)
 			case .subscriptionPrice(let value): try container.encode(value)
 			case .subscriptionPromotionalOffer(let value): try container.encode(value)
 			case .subscriptionVersion(let value): try container.encode(value)

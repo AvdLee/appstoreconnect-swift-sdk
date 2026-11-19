@@ -73,6 +73,7 @@ extension APIEndpoint.V1.PreReleaseVersions {
 				case subscriptionStatusURLVersionForSandbox = "subscriptionStatusUrlVersionForSandbox"
 				case contentRightsDeclaration
 				case streamlinedPurchasingEnabled
+				case groupPurchaseInvitationMode
 				case accessibilityDeclarations
 				case appEncryptionDeclarations
 				case appStoreIcon
