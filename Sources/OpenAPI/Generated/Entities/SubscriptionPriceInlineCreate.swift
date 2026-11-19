@@ -43,6 +43,7 @@ public struct SubscriptionPriceInlineCreate: Codable, Identifiable {
 		public var subscription: Subscription?
 		public var territory: Territory?
 		public var subscriptionPricePoint: SubscriptionPricePoint?
+		public var additionalPriceTiers: AdditionalPriceTiers?
 
 		public struct Subscription: Codable {
 			public var data: Data?
@@ -176,10 +177,55 @@ public struct SubscriptionPriceInlineCreate: Codable, Identifiable {
 			}
 		}
 
-		public init(subscription: Subscription? = nil, territory: Territory? = nil, subscriptionPricePoint: SubscriptionPricePoint? = nil) {
+		public struct AdditionalPriceTiers: Codable {
+			public var data: [Datum]?
+
+			public struct Datum: Codable, Identifiable {
+				public var type: `Type`
+				public var id: String
+
+				public enum `Type`: String, Codable, CaseIterable {
+					case subscriptionPriceTiers
+				}
+
+				public init(type: `Type`, id: String) {
+					self.type = type
+					self.id = id
+				}
+
+				public init(from decoder: Decoder) throws {
+					let values = try decoder.container(keyedBy: StringCodingKey.self)
+					self.type = try values.decode(`Type`.self, forKey: "type")
+					self.id = try values.decode(String.self, forKey: "id")
+				}
+
+				public func encode(to encoder: Encoder) throws {
+					var values = encoder.container(keyedBy: StringCodingKey.self)
+					try values.encode(type, forKey: "type")
+					try values.encode(id, forKey: "id")
+				}
+			}
+
+			public init(data: [Datum]? = nil) {
+				self.data = data
+			}
+
+			public init(from decoder: Decoder) throws {
+				let values = try decoder.container(keyedBy: StringCodingKey.self)
+				self.data = try values.decodeIfPresent([Datum].self, forKey: "data")
+			}
+
+			public func encode(to encoder: Encoder) throws {
+				var values = encoder.container(keyedBy: StringCodingKey.self)
+				try values.encodeIfPresent(data, forKey: "data")
+			}
+		}
+
+		public init(subscription: Subscription? = nil, territory: Territory? = nil, subscriptionPricePoint: SubscriptionPricePoint? = nil, additionalPriceTiers: AdditionalPriceTiers? = nil) {
 			self.subscription = subscription
 			self.territory = territory
 			self.subscriptionPricePoint = subscriptionPricePoint
+			self.additionalPriceTiers = additionalPriceTiers
 		}
 
 		public init(from decoder: Decoder) throws {
@@ -187,6 +233,7 @@ public struct SubscriptionPriceInlineCreate: Codable, Identifiable {
 			self.subscription = try values.decodeIfPresent(Subscription.self, forKey: "subscription")
 			self.territory = try values.decodeIfPresent(Territory.self, forKey: "territory")
 			self.subscriptionPricePoint = try values.decodeIfPresent(SubscriptionPricePoint.self, forKey: "subscriptionPricePoint")
+			self.additionalPriceTiers = try values.decodeIfPresent(AdditionalPriceTiers.self, forKey: "additionalPriceTiers")
 		}
 
 		public func encode(to encoder: Encoder) throws {
@@ -194,6 +241,7 @@ public struct SubscriptionPriceInlineCreate: Codable, Identifiable {
 			try values.encodeIfPresent(subscription, forKey: "subscription")
 			try values.encodeIfPresent(territory, forKey: "territory")
 			try values.encodeIfPresent(subscriptionPricePoint, forKey: "subscriptionPricePoint")
+			try values.encodeIfPresent(additionalPriceTiers, forKey: "additionalPriceTiers")
 		}
 	}
 

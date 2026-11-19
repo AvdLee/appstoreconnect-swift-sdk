@@ -151,6 +151,7 @@ extension APIEndpoint.V1.Subscriptions {
 				case planType
 				case territory
 				case subscriptionPricePoint
+				case additionalPriceTiers
 			}
 
 			public enum FieldsPromotedPurchases: String, Codable, CaseIterable {

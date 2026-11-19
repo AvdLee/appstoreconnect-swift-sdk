@@ -24,8 +24,10 @@ extension APIEndpoint.V1.Subscriptions.WithID {
 			public var fieldsSubscriptionPrices: [FieldsSubscriptionPrices]?
 			public var fieldsTerritories: [FieldsTerritories]?
 			public var fieldsSubscriptionPricePoints: [FieldsSubscriptionPricePoints]?
+			public var fieldsSubscriptionPriceTiers: [FieldsSubscriptionPriceTiers]?
 			public var limit: Int?
 			public var include: [Include]?
+			public var limitAdditionalPriceTiers: Int?
 
 			public enum FilterPlanType: String, Codable, CaseIterable {
 				case monthly = "MONTHLY"
@@ -38,6 +40,7 @@ extension APIEndpoint.V1.Subscriptions.WithID {
 				case planType
 				case territory
 				case subscriptionPricePoint
+				case additionalPriceTiers
 			}
 
 			public enum FieldsTerritories: String, Codable, CaseIterable {
@@ -53,20 +56,28 @@ extension APIEndpoint.V1.Subscriptions.WithID {
 				case adjustedEqualizations
 			}
 
-			public enum Include: String, Codable, CaseIterable {
-				case territory
+			public enum FieldsSubscriptionPriceTiers: String, Codable, CaseIterable {
+				case minQuantity
 				case subscriptionPricePoint
 			}
 
-			public init(filterPlanType: [FilterPlanType]? = nil, filterSubscriptionPricePoint: [String]? = nil, filterTerritory: [String]? = nil, fieldsSubscriptionPrices: [FieldsSubscriptionPrices]? = nil, fieldsTerritories: [FieldsTerritories]? = nil, fieldsSubscriptionPricePoints: [FieldsSubscriptionPricePoints]? = nil, limit: Int? = nil, include: [Include]? = nil) {
+			public enum Include: String, Codable, CaseIterable {
+				case territory
+				case subscriptionPricePoint
+				case additionalPriceTiers
+			}
+
+			public init(filterPlanType: [FilterPlanType]? = nil, filterSubscriptionPricePoint: [String]? = nil, filterTerritory: [String]? = nil, fieldsSubscriptionPrices: [FieldsSubscriptionPrices]? = nil, fieldsTerritories: [FieldsTerritories]? = nil, fieldsSubscriptionPricePoints: [FieldsSubscriptionPricePoints]? = nil, fieldsSubscriptionPriceTiers: [FieldsSubscriptionPriceTiers]? = nil, limit: Int? = nil, include: [Include]? = nil, limitAdditionalPriceTiers: Int? = nil) {
 				self.filterPlanType = filterPlanType
 				self.filterSubscriptionPricePoint = filterSubscriptionPricePoint
 				self.filterTerritory = filterTerritory
 				self.fieldsSubscriptionPrices = fieldsSubscriptionPrices
 				self.fieldsTerritories = fieldsTerritories
 				self.fieldsSubscriptionPricePoints = fieldsSubscriptionPricePoints
+				self.fieldsSubscriptionPriceTiers = fieldsSubscriptionPriceTiers
 				self.limit = limit
 				self.include = include
+				self.limitAdditionalPriceTiers = limitAdditionalPriceTiers
 			}
 
 			public var asQuery: [(String, String?)] {
@@ -77,8 +88,10 @@ extension APIEndpoint.V1.Subscriptions.WithID {
 				encoder.encode(fieldsSubscriptionPrices, forKey: "fields[subscriptionPrices]")
 				encoder.encode(fieldsTerritories, forKey: "fields[territories]")
 				encoder.encode(fieldsSubscriptionPricePoints, forKey: "fields[subscriptionPricePoints]")
+				encoder.encode(fieldsSubscriptionPriceTiers, forKey: "fields[subscriptionPriceTiers]")
 				encoder.encode(limit, forKey: "limit")
 				encoder.encode(include, forKey: "include")
+				encoder.encode(limitAdditionalPriceTiers, forKey: "limit[additionalPriceTiers]")
 				return encoder.items
 			}
 		}
