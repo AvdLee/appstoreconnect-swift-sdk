@@ -3,6 +3,52 @@ import XCTest
 @testable import AppStoreConnect_Swift_SDK
 
 final class ResponseDecodingTests: XCTestCase {
+    func test_buildResponse_decodesEncryptionDeclarationPlatformInEitherCase() throws {
+        let request = APIEndpoint.v1.builds.id("build-1").get()
+        for platform in ["ios", "IOS"] {
+            let json = """
+            {
+                "data": {"type": "builds", "id": "build-1"},
+                "included": [
+                    {
+                        "type": "preReleaseVersions",
+                        "id": "version-1",
+                        "attributes": {"platform": "IOS"}
+                    },
+                    {
+                        "type": "appEncryptionDeclarations",
+                        "id": "declaration-1",
+                        "attributes": {"platform": "\(platform)"}
+                    }
+                ],
+                "links": {"self": "https://example.com/v1/builds/build-1"}
+            }
+            """
+            let response = try decodeResponse(for: request, json: json)
+            let included = try XCTUnwrap(response.included)
+            guard included.count == 2,
+                  case .appEncryptionDeclaration(let declaration) = included[1] else {
+                return XCTFail("Expected the included encryption declaration")
+            }
+            XCTAssertEqual(declaration.id, "declaration-1")
+            let attributes = try XCTUnwrap(declaration.attributes)
+            XCTAssertEqual(attributes.platform, .ios)
+            let encoded = try JSONEncoder().encode(attributes)
+            let object = try XCTUnwrap(JSONSerialization.jsonObject(with: encoded) as? [String: Any])
+            XCTAssertEqual(object["platform"] as? String, "IOS")
+        }
+    }
+
+    func test_encryptionDeclarationPlatform_rejectsUnknownValues() throws {
+        let json = #"{"platform":"unknown"}"#
+        XCTAssertThrowsError(try JSONDecoder().decode(AppEncryptionDeclaration.Attributes.self, from: Data(json.utf8))) { error in
+            guard case DecodingError.dataCorrupted(let context) = error else {
+                return XCTFail("Expected an invalid platform, got \(error)")
+            }
+            XCTAssertEqual(context.codingPath.last?.stringValue, "platform")
+        }
+    }
+
     // Captured from a version without a routing app coverage file. The related
     // resource endpoint returns HTTP 200 with data:null rather than a 404.
     func test_routingAppCoverageRelatedResource_decodesNullData() throws {

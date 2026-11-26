@@ -37,6 +37,27 @@ public enum GeneratedPatcher {
         var report = GeneratedPatchReport()
 
         try patchFile(
+            rootDir.appendingPathComponent("Entities/AppEncryptionDeclaration.swift"),
+            dryRun: dryRun,
+            replacements: [
+                .init(
+                    description: "Decode case variants of platform in app encryption declarations",
+                    from: #"self.platform = try values.decodeIfPresent(Platform.self, forKey: "platform")"#,
+                    to: #"""
+self.platform = try values.decodeIfPresent(String.self, forKey: "platform").map { rawPlatform in
+				guard let platform = Platform(rawValue: rawPlatform.uppercased()) else {
+					throw DecodingError.dataCorruptedError(forKey: "platform", in: values, debugDescription: "Cannot initialize Platform from invalid String value \(rawPlatform)")
+				}
+				return platform
+			}
+"""#,
+                    required: true
+                ),
+            ],
+            report: &report
+        )
+
+        try patchFile(
             rootDir.appendingPathComponent("Entities/RoutingAppCoverageResponse.swift"),
             dryRun: dryRun,
             replacements: [
