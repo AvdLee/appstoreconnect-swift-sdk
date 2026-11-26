@@ -174,6 +174,7 @@ extension APIEndpoint.V1.RetentionMessages.WithID {
 				case planType
 				case territory
 				case subscriptionPricePoint
+				case additionalPriceTiers
 			}
 
 			public enum FieldsPromotedPurchases: String, Codable, CaseIterable {

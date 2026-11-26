@@ -61,6 +61,7 @@ extension APIEndpoint.V1.Apps.WithID {
 				case subscriptionStatusURLVersionForSandbox = "subscriptionStatusUrlVersionForSandbox"
 				case contentRightsDeclaration
 				case streamlinedPurchasingEnabled
+				case groupPurchaseInvitationMode
 				case accessibilityDeclarations
 				case appEncryptionDeclarations
 				case appStoreIcon
@@ -113,6 +114,7 @@ extension APIEndpoint.V1.Apps.WithID {
 				case advertising
 				case alcoholTobaccoOrDrugUseOrReferences
 				case contests
+				case datingAndRelationships
 				case gambling
 				case gamblingSimulated
 				case gunsOrOtherWeapons
@@ -126,6 +128,7 @@ extension APIEndpoint.V1.Apps.WithID {
 				case ageAssurance
 				case sexualContentGraphicAndNudity
 				case sexualContentOrNudity
+				case sharedLocation
 				case socialMedia
 				case socialMediaAgeRestricted
 				case horrorOrFearThemes

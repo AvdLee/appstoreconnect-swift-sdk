@@ -25,13 +25,19 @@ public struct AppUpdateRequest: Codable {
 			public var subscriptionStatusURLVersionForSandbox: SubscriptionStatusURLVersion?
 			public var contentRightsDeclaration: ContentRightsDeclaration?
 			public var isStreamlinedPurchasingEnabled: Bool?
+			public var groupPurchaseInvitationMode: GroupPurchaseInvitationMode?
 
 			public enum ContentRightsDeclaration: String, Codable, CaseIterable {
 				case doesNotUseThirdPartyContent = "DOES_NOT_USE_THIRD_PARTY_CONTENT"
 				case usesThirdPartyContent = "USES_THIRD_PARTY_CONTENT"
 			}
 
-			public init(accessibilityURL: URL? = nil, bundleID: String? = nil, primaryLocale: String? = nil, subscriptionStatusURL: URL? = nil, subscriptionStatusURLVersion: SubscriptionStatusURLVersion? = nil, subscriptionStatusURLForSandbox: URL? = nil, subscriptionStatusURLVersionForSandbox: SubscriptionStatusURLVersion? = nil, contentRightsDeclaration: ContentRightsDeclaration? = nil, isStreamlinedPurchasingEnabled: Bool? = nil) {
+			public enum GroupPurchaseInvitationMode: String, Codable, CaseIterable {
+				case appleHosted = "APPLE_HOSTED"
+				case developerHosted = "DEVELOPER_HOSTED"
+			}
+
+			public init(accessibilityURL: URL? = nil, bundleID: String? = nil, primaryLocale: String? = nil, subscriptionStatusURL: URL? = nil, subscriptionStatusURLVersion: SubscriptionStatusURLVersion? = nil, subscriptionStatusURLForSandbox: URL? = nil, subscriptionStatusURLVersionForSandbox: SubscriptionStatusURLVersion? = nil, contentRightsDeclaration: ContentRightsDeclaration? = nil, isStreamlinedPurchasingEnabled: Bool? = nil, groupPurchaseInvitationMode: GroupPurchaseInvitationMode? = nil) {
 				self.accessibilityURL = accessibilityURL
 				self.bundleID = bundleID
 				self.primaryLocale = primaryLocale
@@ -41,6 +47,7 @@ public struct AppUpdateRequest: Codable {
 				self.subscriptionStatusURLVersionForSandbox = subscriptionStatusURLVersionForSandbox
 				self.contentRightsDeclaration = contentRightsDeclaration
 				self.isStreamlinedPurchasingEnabled = isStreamlinedPurchasingEnabled
+				self.groupPurchaseInvitationMode = groupPurchaseInvitationMode
 			}
 
 			public init(from decoder: Decoder) throws {
@@ -54,6 +61,7 @@ public struct AppUpdateRequest: Codable {
 				self.subscriptionStatusURLVersionForSandbox = try values.decodeIfPresent(SubscriptionStatusURLVersion.self, forKey: "subscriptionStatusUrlVersionForSandbox")
 				self.contentRightsDeclaration = try values.decodeIfPresent(ContentRightsDeclaration.self, forKey: "contentRightsDeclaration")
 				self.isStreamlinedPurchasingEnabled = try values.decodeIfPresent(Bool.self, forKey: "streamlinedPurchasingEnabled")
+				self.groupPurchaseInvitationMode = try values.decodeIfPresent(GroupPurchaseInvitationMode.self, forKey: "groupPurchaseInvitationMode")
 			}
 
 			public func encode(to encoder: Encoder) throws {
@@ -67,6 +75,7 @@ public struct AppUpdateRequest: Codable {
 				try values.encodeIfPresent(subscriptionStatusURLVersionForSandbox, forKey: "subscriptionStatusUrlVersionForSandbox")
 				try values.encodeIfPresent(contentRightsDeclaration, forKey: "contentRightsDeclaration")
 				try values.encodeIfPresent(isStreamlinedPurchasingEnabled, forKey: "streamlinedPurchasingEnabled")
+				try values.encodeIfPresent(groupPurchaseInvitationMode, forKey: "groupPurchaseInvitationMode")
 			}
 		}
 
