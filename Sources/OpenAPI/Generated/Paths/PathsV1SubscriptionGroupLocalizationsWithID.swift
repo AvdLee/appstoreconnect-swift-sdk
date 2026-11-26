@@ -13,6 +13,7 @@ extension APIEndpoint.V1.SubscriptionGroupLocalizations {
 		/// Path: `/v1/subscriptionGroupLocalizations/{id}`
 		public let path: String
 
+		@available(*, deprecated, message: "Deprecated")
 		public func get(parameters: GetParameters? = nil) -> Request<AppStoreConnect_Swift_SDK.SubscriptionGroupLocalizationResponse> {
 			Request(path: path, method: "GET", query: parameters?.asQuery, id: "subscriptionGroupLocalizations_getInstance")
 		}
@@ -56,10 +57,12 @@ extension APIEndpoint.V1.SubscriptionGroupLocalizations {
 			}
 		}
 
+		@available(*, deprecated, message: "Deprecated")
 		public func patch(_ body: AppStoreConnect_Swift_SDK.SubscriptionGroupLocalizationUpdateRequest) -> Request<AppStoreConnect_Swift_SDK.SubscriptionGroupLocalizationResponse> {
 			Request(path: path, method: "PATCH", body: body, id: "subscriptionGroupLocalizations_updateInstance")
 		}
 
+		@available(*, deprecated, message: "Deprecated")
 		public var delete: Request<Void> {
 			Request(path: path, method: "DELETE", id: "subscriptionGroupLocalizations_deleteInstance")
 		}

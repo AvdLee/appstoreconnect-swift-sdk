@@ -13,6 +13,7 @@ extension APIEndpoint.V1.InAppPurchaseImages {
 		/// Path: `/v1/inAppPurchaseImages/{id}`
 		public let path: String
 
+		@available(*, deprecated, message: "Deprecated")
 		public func get(parameters: GetParameters? = nil) -> Request<AppStoreConnect_Swift_SDK.InAppPurchaseImageResponse> {
 			Request(path: path, method: "GET", query: parameters?.asQuery, id: "inAppPurchaseImages_getInstance")
 		}
@@ -72,10 +73,12 @@ extension APIEndpoint.V1.InAppPurchaseImages {
 			}
 		}
 
+		@available(*, deprecated, message: "Deprecated")
 		public func patch(_ body: AppStoreConnect_Swift_SDK.InAppPurchaseImageUpdateRequest) -> Request<AppStoreConnect_Swift_SDK.InAppPurchaseImageResponse> {
 			Request(path: path, method: "PATCH", body: body, id: "inAppPurchaseImages_updateInstance")
 		}
 
+		@available(*, deprecated, message: "Deprecated")
 		public var delete: Request<Void> {
 			Request(path: path, method: "DELETE", id: "inAppPurchaseImages_deleteInstance")
 		}
