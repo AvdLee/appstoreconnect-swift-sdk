@@ -61,7 +61,12 @@ public struct AppEncryptionDeclaration: Codable, Identifiable {
 			self.containsProprietaryCryptography = try values.decodeIfPresent(Bool.self, forKey: "containsProprietaryCryptography")
 			self.containsThirdPartyCryptography = try values.decodeIfPresent(Bool.self, forKey: "containsThirdPartyCryptography")
 			self.isAvailableOnFrenchStore = try values.decodeIfPresent(Bool.self, forKey: "availableOnFrenchStore")
-			self.platform = try values.decodeIfPresent(Platform.self, forKey: "platform")
+			self.platform = try values.decodeIfPresent(String.self, forKey: "platform").map { rawPlatform in
+				guard let platform = Platform(rawValue: rawPlatform.uppercased()) else {
+					throw DecodingError.dataCorruptedError(forKey: "platform", in: values, debugDescription: "Cannot initialize Platform from invalid String value \(rawPlatform)")
+				}
+				return platform
+			}
 			self.uploadedDate = try values.decodeIfPresent(Date.self, forKey: "uploadedDate")
 			self.documentURL = try values.decodeIfPresent(String.self, forKey: "documentUrl")
 			self.documentName = try values.decodeIfPresent(String.self, forKey: "documentName")
